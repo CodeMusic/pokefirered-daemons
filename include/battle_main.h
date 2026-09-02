@@ -23,7 +23,15 @@ struct MultiBattlePokemonTx
     /*0x1D*/ u8 language;
 };
 
-#define TYPE_NAME_LENGTH 6
+// Vanilla is 6, which is why it ships FIGHT, ELECTR and PSYCHC. Ours needs 8:
+// EMERGENT is eight characters and CONTENT, CONTEXT, CORRUPT, STRATUM and
+// ENTROPY are seven. Abbreviating CONTENT and CONTEXT -- the two edition names,
+// and the thesis -- was not an option.
+//
+// This is only the array's stride. B_WIN_MOVE_TYPE is eight tiles wide and the
+// font is proportional, so there is room; the 6 was a data decision, not a
+// rendering one.
+#define TYPE_NAME_LENGTH 8
 #define ABILITY_NAME_LENGTH 12
 
 // defines for the u8 array gTypeEffectiveness

@@ -427,23 +427,37 @@ const u8 gTypeEffectiveness[336] =
 
 const u8 gTypeNames[NUMBER_OF_MON_TYPES][TYPE_NAME_LENGTH + 1] =
 {
-    [TYPE_NORMAL] = _("NORMAL"),
-    [TYPE_FIGHTING] = _("FIGHT"),
-    [TYPE_FLYING] = _("FLYING"),
-    [TYPE_POISON] = _("POISON"),
-    [TYPE_GROUND] = _("GROUND"),
-    [TYPE_ROCK] = _("ROCK"),
-    [TYPE_BUG] = _("BUG"),
-    [TYPE_GHOST] = _("GHOST"),
-    [TYPE_STEEL] = _("STEEL"),
+    // The chart is the argument (invariant 3), and these are its vocabulary.
+    // Ported from the Game Boy build's data/types/names.asm, unchanged: the
+    // fifteen names were chosen as a complete set and the port does not get to
+    // renegotiate them.
+    [TYPE_NORMAL] = _("CONTENT"),
+    [TYPE_FIGHTING] = _("LOGIC"),
+    [TYPE_FLYING] = _("VECTOR"),
+    [TYPE_POISON] = _("CORRUPT"),
+    [TYPE_GROUND] = _("STRATUM"),
+    [TYPE_ROCK] = _("LEGACY"),
+    [TYPE_BUG] = _("SWARM"),
+    [TYPE_GHOST] = _("LATENT"),
+    [TYPE_FIRE] = _("ENTROPY"),
+    [TYPE_WATER] = _("FLOW"),
+    [TYPE_GRASS] = _("GROWTH"),
+    [TYPE_ELECTRIC] = _("SIGNAL"),
+    [TYPE_PSYCHIC] = _("CONTEXT"),
+    [TYPE_ICE] = _("FROZEN"),
+    [TYPE_DRAGON] = _("EMERGENT"),
+
     [TYPE_MYSTERY] = _("???"),
-    [TYPE_FIRE] = _("FIRE"),
-    [TYPE_WATER] = _("WATER"),
-    [TYPE_GRASS] = _("GRASS"),
-    [TYPE_ELECTRIC] = _("ELECTR"),
-    [TYPE_PSYCHIC] = _("PSYCHC"),
-    [TYPE_ICE] = _("ICE"),
-    [TYPE_DRAGON] = _("DRAGON"),
+
+    // UNNAMED. Gen 3 adds two types the Game Boy chart never had, and
+    // vision.md 9.3 flags them as a decision that must be made in the bible
+    // before it is made in a header: 2 calls the fifteen "exactly at the
+    // limit" of a complete argument, and invariant 3 says the chart IS the
+    // argument. Two filler types is a worse chart than fifteen good ones.
+    //
+    // Left vanilla ON PURPOSE so a build that reaches them is obviously
+    // unfinished rather than quietly wrong.
+    [TYPE_STEEL] = _("STEEL"),
     [TYPE_DARK] = _("DARK"),
 };
 
