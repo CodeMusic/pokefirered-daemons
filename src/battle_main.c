@@ -449,16 +449,19 @@ const u8 gTypeNames[NUMBER_OF_MON_TYPES][TYPE_NAME_LENGTH + 1] =
 
     [TYPE_MYSTERY] = _("???"),
 
-    // UNNAMED. Gen 3 adds two types the Game Boy chart never had, and
-    // vision.md 9.3 flags them as a decision that must be made in the bible
-    // before it is made in a header: 2 calls the fifteen "exactly at the
-    // limit" of a complete argument, and invariant 3 says the chart IS the
-    // argument. Two filler types is a worse chart than fifteen good ones.
+    // The two Gen 3 adds. Both were named by reading the vanilla chart rather
+    // than by inventing a concept and hoping the numbers agreed.
     //
-    // Left vanilla ON PURPOSE so a build that reaches them is obviously
-    // unfinished rather than quietly wrong.
-    [TYPE_STEEL] = _("STEEL"),
-    [TYPE_DARK] = _("DARK"),
+    // DARK is immune to PSYCHIC, strong against PSYCHIC and GHOST, and cracked
+    // by FIGHTING and BUG. In our vocabulary that is: a black box is immune to
+    // perspective-taking, beats perspective-taking and the unconscious, and is
+    // opened by reasoning and by collectives. The chart already said it.
+    //
+    // STEEL resists nearly everything and falls to FIRE, FIGHTING and GROUND --
+    // ours: to randomness, to reasoning, and to whoever owns the ground. Which
+    // is what happens to safety hardening.
+    [TYPE_STEEL] = _("HARDENED"),
+    [TYPE_DARK] = _("OPAQUE"),
 };
 
 // This is a factor in how much money you get for beating a trainer.

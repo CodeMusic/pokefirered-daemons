@@ -17,12 +17,12 @@
       "secondaryId": 0
     },
     {
-      "english": "MASTER BALL",
+      "english": "ROOTBOX",
       "itemId": "ITEM_MASTER_BALL",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "The best BALL with the ultimate\\nperformance. It will catch any wild\\nPOKéMON without fail.",
+      "description_english": "A host with unrestricted rights.\\nNo daemon can decline to run on\\nit. Nothing is refused root.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_POKE_BALLS",
@@ -33,12 +33,12 @@
       "secondaryId": 0
     },
     {
-      "english": "ULTRA BALL",
+      "english": "SUPERBOX",
       "itemId": "ITEM_ULTRA_BALL",
       "price": 1200,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A very high-grade BALL that offers\\na higher POKéMON catch rate than\\na GREAT BALL.",
+      "description_english": "A host with elevated rights.\\nMost daemons will run on it,\\nincluding reluctant ones.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_POKE_BALLS",
@@ -49,12 +49,12 @@
       "secondaryId": 1
     },
     {
-      "english": "GREAT BALL",
+      "english": "ADMINBOX",
       "itemId": "ITEM_GREAT_BALL",
       "price": 600,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A good, quality BALL that offers\\na higher POKéMON catch rate than\\na standard POKé BALL.",
+      "description_english": "A host with wider rights than a\\nUSERBOX. More daemons will agree\\nto run on it.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_POKE_BALLS",
@@ -65,12 +65,12 @@
       "secondaryId": 2
     },
     {
-      "english": "POK\u00e9 BALL",
+      "english": "USERBOX",
       "itemId": "ITEM_POKE_BALL",
       "price": 200,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A BALL thrown to catch a wild\\nPOKéMON. It is designed in a\\ncapsule style.",
+      "description_english": "A host offered at user level.\\nA steady daemon will run on it.\\nA stubborn one will not.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_POKE_BALLS",
@@ -81,12 +81,12 @@
       "secondaryId": 3
     },
     {
-      "english": "SAFARI BALL",
+      "english": "GUESTBOX",
       "itemId": "ITEM_SAFARI_BALL",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A special BALL that is used only in\\nthe SAFARI ZONE. It is finished in\\na camouflage pattern.",
+      "description_english": "A temporary host, issued at the\\ngate and expiring at the gate.\\nIts rights are minimal.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_POKE_BALLS",
@@ -1521,12 +1521,12 @@
       "secondaryId": 0
     },
     {
-      "english": "FIRE STONE",
+      "english": "AXIOM",
       "itemId": "ITEM_FIRE_STONE",
       "price": 2100,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A peculiar stone that makes certain\\nspecies of POKéMON evolve.\\nIt is colored orange.",
+      "description_english": "Something for a mind to reason\\nfrom. Some daemons take a new\\nform when given one.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -1537,12 +1537,12 @@
       "secondaryId": 0
     },
     {
-      "english": "THUNDERSTONE",
+      "english": "EMBEDDING",
       "itemId": "ITEM_THUNDER_STONE",
       "price": 2100,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A peculiar stone that makes certain\\nspecies of POKéMON evolve.\\nIt has a thunderbolt pattern.",
+      "description_english": "A representation a mind can\\nsearch through. Some daemons\\ntake a new form when given one.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -1553,12 +1553,12 @@
       "secondaryId": 0
     },
     {
-      "english": "WATER STONE",
+      "english": "AFFECT",
       "itemId": "ITEM_WATER_STONE",
       "price": 2100,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A peculiar stone that makes certain\\nspecies of POKéMON evolve.\\nIt is a clear light blue.",
+      "description_english": "Something for a mind to feel\\nwith. Some daemons take a new\\nform when given one.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -1569,12 +1569,12 @@
       "secondaryId": 0
     },
     {
-      "english": "LEAF STONE",
+      "english": "REWARD",
       "itemId": "ITEM_LEAF_STONE",
       "price": 2100,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A peculiar stone that makes certain\\nspecies of POKéMON evolve.\\nIt has a leaf pattern.",
+      "description_english": "A signal a mind can learn from.\\nSome daemons take a new form\\nwhen given one.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -5643,12 +5643,12 @@
       "secondaryId": 0
     },
     {
-      "english": "OAK'S PARCEL",
+      "english": "CC-7",
       "itemId": "ITEM_OAKS_PARCEL",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A parcel to be delivered to PROF.\\nOAK from VIRIDIAN CITY's POKéMON\\nMART.",
+      "description_english": "A CLARIFIER MODULE, requisitioned\\nand sealed. It is addressed to\\nCRYSTAL, not to you.",
       "importance": 2,
       "registrability": 0,
       "pocket": "POCKET_KEY_ITEMS",
@@ -5659,12 +5659,12 @@
       "secondaryId": 0
     },
     {
-      "english": "POK\u00e9 FLUTE",
+      "english": "INTERRUPT",
       "itemId": "ITEM_POKE_FLUTE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A flute that is said to instantly\\nawaken any POKéMON. It has a\\nlovely tone.",
+      "description_english": "Sends an interrupt. A daemon\\nthat has stopped responding\\nwill wake.",
       "importance": 1,
       "registrability": 0,
       "pocket": "POCKET_KEY_ITEMS",
@@ -5803,12 +5803,12 @@
       "secondaryId": 0
     },
     {
-      "english": "SILPH SCOPE",
+      "english": "RESOLVER",
       "itemId": "ITEM_SILPH_SCOPE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A scope that makes unseeable\\nPOKéMON visible.\\nIt is made by SILPH CO.",
+      "description_english": "Resolves a name that will not\\nresolve on its own. Some things\\ncannot be identified without it.",
       "importance": 1,
       "registrability": 0,
       "pocket": "POCKET_KEY_ITEMS",
