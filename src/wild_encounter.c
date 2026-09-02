@@ -756,6 +756,15 @@ static bool8 HandleWildEncounterCooldown(u32 currMetatileAttrs)
 
 bool8 TryStandardWildEncounter(u32 currMetatileAttrs)
 {
+#if DAEMONS_DEBUG
+    // Hold B to walk through grass unmolested -- the same gesture the Game Boy
+    // debug build uses, so the muscle memory carries between the two engines.
+    if (JOY_HELD(B_BUTTON))
+    {
+        sWildEncounterData.prevMetatileBehavior = ExtractMetatileAttribute(currMetatileAttrs, METATILE_ATTRIBUTE_BEHAVIOR);
+        return FALSE;
+    }
+#endif
     if (!HandleWildEncounterCooldown(currMetatileAttrs))
     {
         sWildEncounterData.prevMetatileBehavior = ExtractMetatileAttribute(currMetatileAttrs, METATILE_ATTRIBUTE_BEHAVIOR);

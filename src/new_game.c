@@ -23,6 +23,12 @@
 #include "easy_chat.h"
 #include "union_room_chat.h"
 #include "mystery_gift.h"
+#if DAEMONS_DEBUG
+#include "constants/items.h"
+#include "constants/species.h"
+#include "constants/pokemon.h"
+#include "constants/flags.h"
+#endif
 #include "renewable_hidden_items.h"
 #include "trainer_tower.h"
 #include "script.h"
@@ -104,6 +110,53 @@ void ResetMenuAndMonGlobals(void)
     ResetSpecialVars();
 }
 
+#if DAEMONS_DEBUG
+// The testing kit. pokefirered ships no debug build at all -- unlike pokeemerald
+// it has no menu to port -- so this is the smallest thing that answers the
+// question 9.3 actually asked: does the GBA give this design room it did not
+// have?
+//
+// So the party is picked for ABILITIES rather than for power (Levitate,
+// Intimidate, Static, Thick Fat, Synchronize, Flash Fire), and the bag holds one
+// of each KIND of item rather than a pile of one kind -- a ball, a medicine, a
+// berry, a held item, a TM -- because the thing being evaluated is the
+// description window, which Gen 1 does not have at all.
+static void DaemonsDebug_GrantTestKit(void)
+{
+    static const u16 sParty[] = {
+        SPECIES_GENGAR,     // Levitate
+        SPECIES_ARCANINE,   // Intimidate / Flash Fire
+        SPECIES_ALAKAZAM,   // Synchronize / Inner Focus
+        SPECIES_SNORLAX,    // Immunity / Thick Fat
+        SPECIES_GYARADOS,   // Intimidate
+        SPECIES_PIKACHU,    // Static
+    };
+    static const u16 sBag[][2] = {
+        { ITEM_ULTRA_BALL,   20 },
+        { ITEM_HYPER_POTION, 20 },
+        { ITEM_RARE_CANDY,   30 },
+        { ITEM_ORAN_BERRY,   10 },
+        { ITEM_LEFTOVERS,     1 },
+        { ITEM_TM01,          1 },
+    };
+    struct Pokemon mon;
+    u32 i;
+
+    for (i = 0; i < ARRAY_COUNT(sParty); i++)
+    {
+        CreateMon(&mon, sParty[i], 50, 31, FALSE, 0, OT_ID_PLAYER_ID, 0);
+        GiveMonToPlayer(&mon);
+    }
+    for (i = 0; i < ARRAY_COUNT(sBag); i++)
+        AddBagItem(sBag[i][0], sBag[i][1]);
+
+    for (i = FLAG_BADGE01_GET; i <= FLAG_BADGE08_GET; i++)
+        FlagSet(i);
+
+    SetMoney(&gSaveBlock1Ptr->money, 999999);
+}
+#endif
+
 void NewGameInitData(void)
 {
     u8 rivalName[PLAYER_NAME_LENGTH + 1];
@@ -149,6 +202,9 @@ void NewGameInitData(void)
     RunScriptImmediately(EventScript_ResetAllMapFlags);
     StringCopy(gSaveBlock1Ptr->rivalName, rivalName);
     ResetTrainerTowerResults();
+#if DAEMONS_DEBUG
+    DaemonsDebug_GrantTestKit();
+#endif
 }
 
 static void ResetMiniGamesResults(void)
