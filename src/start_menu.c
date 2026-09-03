@@ -693,7 +693,12 @@ static bool8 DbgSongCallback(void)
 {
     if (++sDbgSong > MUS_BRAZEN)
         sDbgSong = 1;
-    PlayNewMapMusic(sDbgSong);
+    // PlayBGM, not PlayNewMapMusic. The latter only sets sCurrentMapMusic and
+    // arms the map-music state machine, which next runs on a map transition --
+    // so from inside a menu it changes nothing you can hear. PlayBGM starts the
+    // track now, and leaves the map's own music state untouched, which is what
+    // lets BACK simply play it again.
+    PlayBGM(sDbgSong);
     return DbgRedraw();
 }
 
@@ -709,7 +714,7 @@ static bool8 DbgBackCallback(void)
 {
     sInDebugSubmenu = FALSE;
     sStartMenuCursorPos = 0;
-    PlayNewMapMusic(GetCurrentMapMusic());
+    PlayBGM(GetCurrentMapMusic());
     return DbgRedraw();
 }
 #endif

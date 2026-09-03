@@ -291,7 +291,9 @@ static bool8 DaemonsDebug_FieldHotkeys(void)
         // the far end and stepping past the rest is how you reach them.
         if (++song > MUS_BRAZEN)
             song = 1;
-        PlayNewMapMusic(song);
+        // PlayBGM starts it now; PlayNewMapMusic only arms the map-music
+        // state machine, which does not run again until a map transition.
+        PlayBGM(song);
         p = StringCopy(msg, sDebugTextSong);
         ConvertIntToDecimalStringN(p, song, STR_CONV_MODE_LEFT_ALIGN, 3);
         ShowFieldMessage(msg);
@@ -300,7 +302,7 @@ static bool8 DaemonsDebug_FieldHotkeys(void)
     }
     if (JOY_NEW(DPAD_DOWN))
     {
-        PlayNewMapMusic(GetCurrentMapMusic());
+        PlayBGM(GetCurrentMapMusic());
         ShowFieldMessage(sDebugTextMapSong);
         showing = TRUE;
         return TRUE;
