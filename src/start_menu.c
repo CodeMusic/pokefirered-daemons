@@ -474,8 +474,17 @@ static bool8 StartCB_HandleInput(void)
 
 static void StartMenu_FadeScreenIfLeavingOverworld(void)
 {
+    // Everything in this menu normally LEAVES the overworld -- the bag, the
+    // Index, the party -- so the default is to fade out and let the new screen
+    // fade in. SAVE, EXIT and RETIRE are the exceptions because they stay.
+    //
+    // DEBUG stays too, and being absent from this list is what blacked out the
+    // screen: it faded to black and there was no new screen to come back from.
     if (sStartMenuCallback != StartMenuSaveCallback
      && sStartMenuCallback != StartMenuExitCallback
+#if DAEMONS_DEBUG
+     && sStartMenuCallback != StartMenuDaemonsDebugCallback
+#endif
      && sStartMenuCallback != StartMenuSafariZoneRetireCallback)
     {
         StopPokemonLeagueLightingEffectTask();
