@@ -159,6 +159,14 @@ static void DaemonsDebug_GrantTestKit(void)
     for (i = FLAG_BADGE01_GET; i <= FLAG_BADGE08_GET; i++)
         FlagSet(i);
 
+    // Without these the party is in memory and unreachable: start_menu.c only
+    // draws the POKeMON entry when FLAG_SYS_POKEMON_GET is set, and the DEX
+    // entry when FLAG_SYS_POKEDEX_GET is. Handing someone six daemons and no
+    // way to open the menu is worse than handing them none, because it looks
+    // like the kit did not run.
+    FlagSet(FLAG_SYS_POKEMON_GET);
+    FlagSet(FLAG_SYS_POKEDEX_GET);
+
     SetMoney(&gSaveBlock1Ptr->money, 999999);
 }
 #endif
