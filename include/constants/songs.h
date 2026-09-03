@@ -353,6 +353,10 @@
 #define MUS_SLOW_PALLET           345 // MUS_SLOWMASARA
 #define MUS_TEACHY_TV_MENU        346 // MUS_TVNOIZE
 
+// Appended, not inserted. The song table is positional -- mus_title is row
+// 278 and MUS_TITLE is 278 -- so a row added at the END shifts nothing.
+#define MUS_BRAZEN                347
+
 #define MUS_NONE                    0xFFFF
 
 #endif  // GUARD_CONSTANTS_SONGS_H
