@@ -209,10 +209,18 @@ static void QuestLogOverrideJoyVars(struct FieldInput *input, u16 *newKeys, u16 
 // tilemap -- a day of UI for tools that exist to save time. These are combos in
 // the one function every overworld frame already calls.
 //
-//   L + R        heal the party where you stand -- a POKeCENTER on demand
-//   L + SELECT   restock: balls, medicine, the four inputs, and money
-//   L + A        next song, and play it
-//   L + B        put the map's own song back
+//   SELECT + A   heal the party where you stand -- a POKeCENTER on demand
+//   SELECT + B   restock: balls, medicine, the four inputs, and money
+//   SELECT + UP  next song, and play it
+//   SELECT + DN  put the map's own song back
+//
+// SELECT is the modifier because L IS NOT AVAILABLE: FireRed opens its Help
+// System on L or R, so every combo built on L fought the game and lost. SELECT
+// uses the registered key item, and nothing is registered in a fresh save.
+//
+// The message stays up while SELECT is held and goes when it is released --
+// which is also how it gets dismissed. ShowFieldMessage opens a box and there
+// is no script running to close it again, so something has to.
 //
 // EVERY ONE ANSWERS. A tool that changes hidden state and says nothing is
 // indistinguishable from a tool that did not run -- which is exactly how the
@@ -243,31 +251,41 @@ static bool8 DaemonsDebug_FieldHotkeys(void)
     // and zero means "not started yet".
     static u16 song;
     static u8 msg[32];
+    static bool8 showing;
     u8 *p;
     u32 i;
 
-    if (!JOY_HELD(L_BUTTON))
+    if (!JOY_HELD(SELECT_BUTTON))
+    {
+        if (showing)
+        {
+            HideFieldMessageBox();
+            showing = FALSE;
+        }
         return FALSE;
+    }
     if (song == 0)
         song = MUS_BRAZEN;
 
-    if (JOY_NEW(R_BUTTON))
+    if (JOY_NEW(A_BUTTON))
     {
         HealPlayerParty();
         PlayFanfare(MUS_HEAL);
         ShowFieldMessage(sDebugTextHealed);
+        showing = TRUE;
         return TRUE;
     }
-    if (JOY_NEW(SELECT_BUTTON))
+    if (JOY_NEW(B_BUTTON))
     {
         for (i = 0; i < ARRAY_COUNT(sDebugRestock); i++)
             AddBagItem(sDebugRestock[i][0], sDebugRestock[i][1]);
         SetMoney(&gSaveBlock1Ptr->money, 999999);
         PlayFanfare(MUS_OBTAIN_ITEM);
         ShowFieldMessage(sDebugTextRestocked);
+        showing = TRUE;
         return TRUE;
     }
-    if (JOY_NEW(A_BUTTON))
+    if (JOY_NEW(DPAD_UP))
     {
         // Walks the whole table, sound effects included, because ours sit at
         // the far end and stepping past the rest is how you reach them.
@@ -277,12 +295,14 @@ static bool8 DaemonsDebug_FieldHotkeys(void)
         p = StringCopy(msg, sDebugTextSong);
         ConvertIntToDecimalStringN(p, song, STR_CONV_MODE_LEFT_ALIGN, 3);
         ShowFieldMessage(msg);
+        showing = TRUE;
         return TRUE;
     }
-    if (JOY_NEW(B_BUTTON))
+    if (JOY_NEW(DPAD_DOWN))
     {
         PlayNewMapMusic(GetCurrentMapMusic());
         ShowFieldMessage(sDebugTextMapSong);
+        showing = TRUE;
         return TRUE;
     }
     return FALSE;

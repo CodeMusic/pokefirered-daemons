@@ -28,6 +28,8 @@
 #include "constants/species.h"
 #include "constants/pokemon.h"
 #include "constants/flags.h"
+#include "constants/moves.h"
+#include "pokedex.h"
 #endif
 #include "renewable_hidden_items.h"
 #include "trainer_tower.h"
@@ -148,10 +150,34 @@ static void DaemonsDebug_GrantTestKit(void)
     struct Pokemon mon;
     u32 i;
 
+    // The last two carry the HMs between them. The Game Boy debug build had a
+    // party member who could move you around the map, and losing that on the
+    // port made testing much slower: four move slots each, eight field moves,
+    // so it takes two daemons and there is no room for anything else on them.
+    static const u16 sFieldMoves[] = {
+        MOVE_CUT, MOVE_FLY, MOVE_SURF, MOVE_STRENGTH,
+        MOVE_ROCK_SMASH, MOVE_WATERFALL, MOVE_FLASH, MOVE_DIVE,
+    };
+    u32 m;
+
     for (i = 0; i < ARRAY_COUNT(sParty); i++)
     {
         CreateMon(&mon, sParty[i], 50, 31, FALSE, 0, OT_ID_PLAYER_ID, 0);
+        if (i >= ARRAY_COUNT(sParty) - 2)
+        {
+            u32 base = (i == ARRAY_COUNT(sParty) - 2) ? 0 : 4;
+            for (m = 0; m < 4; m++)
+                SetMonMoveSlot(&mon, sFieldMoves[base + m], m);
+        }
         GiveMonToPlayer(&mon);
+    }
+
+    // The Index is the thing most worth testing, and it opens empty without
+    // these. Every entry marked seen and caught, so every one can be read.
+    for (i = 1; i <= NATIONAL_DEX_COUNT; i++)
+    {
+        GetSetPokedexFlag(i, FLAG_SET_SEEN);
+        GetSetPokedexFlag(i, FLAG_SET_CAUGHT);
     }
     for (i = 0; i < ARRAY_COUNT(sBag); i++)
         AddBagItem(sBag[i][0], sBag[i][1]);

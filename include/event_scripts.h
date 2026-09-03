@@ -688,6 +688,14 @@ extern const u8 gFameCheckerFlavorTextOriginObjectName_Giovanni4[];
 extern const u8 gFameCheckerFlavorTextOriginObjectName_Giovanni5[];
 
 extern const u8 gOtherText_NewName[];
+extern const u8 gNameChoice_Pip[];
+extern const u8 gNameChoice_Content[];
+extern const u8 gNameChoice_Context[];
+extern const u8 gNameChoice_Code[];
+extern const u8 gNameChoice_Sharp[];
+extern const u8 gNameChoice_Al[];
+extern const u8 gNameChoice_Lucid[];
+extern const u8 gNameChoice_Candid[];
 extern const u8 gNameChoice_Green[];
 extern const u8 gNameChoice_Red[];
 extern const u8 gNameChoice_Fire[];

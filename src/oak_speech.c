@@ -585,79 +585,56 @@ static const u8 *const sControlsGuide_Pages2And3_Strings[CONTROLS_GUIDE_STRINGS_
     gControlsGuide_Text_LRButtons
 };
 
+// vision.md: three slots, each doing a different job. Slot 1 is FIXED across
+// editions because PIP and AL are people and people do not change cartridge to
+// cartridge. Slot 2 is SWAPPED -- your rival carries the other cart's word,
+// which is vanilla's RED/BLUE gesture preserved. Slot 3 is DIFFERENTIATED
+// rather than swapped: LUCID exists only as LUCID CLEAR, and a player who
+// picked it would not be a Clear, so it must not cross.
+//
+// Vanilla's own mirror is deliberately NOT inherited. FireRed and LeafGreen
+// trade their lists wholesale, which works when the two are symmetric marketing
+// positions. 8.4 fixed both of ours to the same story, the same protagonist and
+// the same rival -- once the rival is a specific person with a father in the
+// Quicksilver ruins, canon beats positional convention.
+//
+// One list, not two. The player is not asked their gender any more.
 static const u8 *const sMaleNameChoices[] =
 {
+    gNameChoice_Pip,
 #if defined(FIRERED)
-    gNameChoice_Red,
-    gNameChoice_Fire,
-    gNameChoice_Ash,
-    gNameChoice_Kene,
-    gNameChoice_Geki,
+    gNameChoice_Content,
+    gNameChoice_Code,
 #elif defined(LEAFGREEN)
-    gNameChoice_Green,
-    gNameChoice_Leaf,
-    gNameChoice_Gary,
-    gNameChoice_Kaz,
-    gNameChoice_Toru,
+    gNameChoice_Context,
+    gNameChoice_Sharp,
 #endif
-    gNameChoice_Jak,
-    gNameChoice_Janne,
-    gNameChoice_Jonn,
-    gNameChoice_Kamon,
-    gNameChoice_Karl,
-    gNameChoice_Taylor,
-    gNameChoice_Oscar,
-    gNameChoice_Hiro,
-    gNameChoice_Max,
-    gNameChoice_Jon,
-    gNameChoice_Ralph,
-    gNameChoice_Kay,
-    gNameChoice_Tosh,
-    gNameChoice_Roak
 };
 
 static const u8 *const sFemaleNameChoices[] =
 {
+    gNameChoice_Pip,
 #if defined(FIRERED)
-    gNameChoice_Red,
-    gNameChoice_Fire,
+    gNameChoice_Content,
+    gNameChoice_Code,
 #elif defined(LEAFGREEN)
-    gNameChoice_Green,
-    gNameChoice_Leaf,
+    gNameChoice_Context,
+    gNameChoice_Sharp,
 #endif
-    gNameChoice_Omi,
-    gNameChoice_Jodi,
-    gNameChoice_Amanda,
-    gNameChoice_Hillary,
-    gNameChoice_Makey,
-    gNameChoice_Michi,
-    gNameChoice_Paula,
-    gNameChoice_June,
-    gNameChoice_Cassie,
-    gNameChoice_Rey,
-    gNameChoice_Seda,
-    gNameChoice_Kiko,
-    gNameChoice_Mina,
-    gNameChoice_Norie,
-    gNameChoice_Sai,
-    gNameChoice_Momo,
-    gNameChoice_Suzi
 };
 
 static const u8 *const sRivalNameChoices[] =
 {
+    gNameChoice_Al,
 #if defined(FIRERED)
-    gNameChoice_Green,
-    gNameChoice_Gary,
-    gNameChoice_Kaz,
-    gNameChoice_Toru
+    gNameChoice_Context,
+    gNameChoice_Lucid,
 #elif defined(LEAFGREEN)
-    gNameChoice_Red,
-    gNameChoice_Ash,
-    gNameChoice_Kene,
-    gNameChoice_Geki
+    gNameChoice_Content,
+    gNameChoice_Candid,
 #endif
 };
+
 
 enum
 {

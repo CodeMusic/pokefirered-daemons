@@ -1,3 +1,27 @@
+gNameChoice_Pip::
+    .string "PIP$"
+
+gNameChoice_Content::
+    .string "CONTENT$"
+
+gNameChoice_Context::
+    .string "CONTEXT$"
+
+gNameChoice_Code::
+    .string "CODE$"
+
+gNameChoice_Sharp::
+    .string "SHARP$"
+
+gNameChoice_Al::
+    .string "AL$"
+
+gNameChoice_Lucid::
+    .string "LUCID$"
+
+gNameChoice_Candid::
+    .string "CANDID$"
+
 gOtherText_NewName::
     .string "NEW NAME$"
 
