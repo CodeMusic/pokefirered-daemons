@@ -123,13 +123,19 @@ void ResetMenuAndMonGlobals(void)
 // description window, which Gen 1 does not have at all.
 static void DaemonsDebug_GrantTestKit(void)
 {
+    // Every one of these is a species we have RENAMED. The first version picked
+    // six for their abilities and four of them still read as vanilla on the
+    // party screen, which made the debug build look like it contained none of
+    // our work. Abilities are still the point -- Flash Fire, Water Absorb,
+    // Volt Absorb, Synchronize, Pressure, Thick Fat -- but a test kit that
+    // shows nothing we changed is not a test kit.
     static const u16 sParty[] = {
-        SPECIES_GENGAR,     // Levitate
-        SPECIES_ARCANINE,   // Intimidate / Flash Fire
-        SPECIES_ALAKAZAM,   // Synchronize / Inner Focus
-        SPECIES_SNORLAX,    // Immunity / Thick Fat
-        SPECIES_GYARADOS,   // Intimidate
-        SPECIES_PIKACHU,    // Static
+        SPECIES_FLAREON,    // CODEMUSAI  -- Flash Fire
+        SPECIES_VAPOREON,   // CAREMUSAI  -- Water Absorb
+        SPECIES_JOLTEON,    // SEEKMUSAI  -- Volt Absorb
+        SPECIES_MEW,        // ARTSAI     -- Synchronize
+        SPECIES_MEWTWO,     // S.T.A.R.R. -- Pressure
+        SPECIES_SNORLAX,    // DEADLOCK   -- Immunity / Thick Fat
     };
     static const u16 sBag[][2] = {
         { ITEM_ULTRA_BALL,   20 },
