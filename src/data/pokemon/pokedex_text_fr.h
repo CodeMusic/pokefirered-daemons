@@ -1051,14 +1051,14 @@ const u8 gDragonitePokedexTextUnused[] = _("");
 const u8 gMewtwoPokedexText[] = _(
     "It reads its own output, then reads that.\n"
     "Nothing tells it to stop. What comes back\n"
-    "is no longer information.");
+    "is no longer just information.");
 
 const u8 gMewtwoPokedexTextUnused[] = _("");
 
 const u8 gMewPokedexText[] = _(
     "It can stand where you are standing and\n"
-    "see what you see. What it brings back was\n"
-    "in neither of you before.");
+    "see what you see. It comes back with\n"
+    "something neither of you had.");
 
 const u8 gMewPokedexTextUnused[] = _("");
 

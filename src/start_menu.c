@@ -161,7 +161,15 @@ static const u8 *const sStartMenuDescPointers[] = {
     gStartMenuDesc_Option,
     gStartMenuDesc_Exit,
     gStartMenuDesc_Retire,
-    gStartMenuDesc_Player
+    gStartMenuDesc_Player,
+#if DAEMONS_DEBUG
+    // This table is indexed by the SAME enum as the action table, so an entry
+    // added to one and not the other reads off the end of this array. That is
+    // what the garbage description was -- and printing an unterminated string
+    // into the help window is what blacked out the screen. One omission, two
+    // symptoms.
+    gStartMenuDesc_Debug,
+#endif
 };
 
 static const struct BgTemplate sBGTemplates_AfterLinkSaveMessage[] = {

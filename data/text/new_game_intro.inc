@@ -245,7 +245,7 @@ gOakSpeech_Text_WhatWasHisName::
     .string "This is my grandchild.\p"
     .string "They have been your rival since you\n"
     .string "were both small.\p"
-    .string "…Erm, what was their name now?$"
+    .string "…Erm, what was their name again?$"
 
 gOakSpeech_Text_YourRivalsNameWhatWasIt::
     .string "Your rival's name, what was it now?$"

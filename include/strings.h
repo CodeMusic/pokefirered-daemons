@@ -637,6 +637,7 @@ extern const u8 gStartMenuDesc_Pokemon[];
 extern const u8 gStartMenuDesc_Bag[];
 extern const u8 gStartMenuDesc_Save[];
 extern const u8 gStartMenuDesc_Option[];
+extern const u8 gStartMenuDesc_Debug[];
 extern const u8 gStartMenuDesc_Exit[];
 extern const u8 gStartMenuDesc_Retire[];
 extern const u8 gStartMenuDesc_Player[];
