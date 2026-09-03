@@ -20,6 +20,7 @@
 #include "sound.h"
 #include "constants/items.h"
 #include "constants/songs.h"
+#include "string_util.h"
 #endif
 #include "menu.h"
 #include "load_save.h"
@@ -59,6 +60,11 @@ enum StartMenuOption
     STARTMENU_PLAYER2,
 #if DAEMONS_DEBUG
     STARTMENU_DEBUG,
+    STARTMENU_DBG_HEAL,
+    STARTMENU_DBG_MART,
+    STARTMENU_DBG_SONG,
+    STARTMENU_DBG_SFX,
+    STARTMENU_DBG_BACK,
 #endif
     MAX_STARTMENU_ITEMS
 };
@@ -101,6 +107,14 @@ static bool8 StartMenuSafariZoneRetireCallback(void);
 static bool8 StartMenuLinkPlayerCallback(void);
 #if DAEMONS_DEBUG
 static bool8 StartMenuDaemonsDebugCallback(void);
+static bool8 DbgHealCallback(void);
+static bool8 DbgMartCallback(void);
+static bool8 DbgSongCallback(void);
+static bool8 DbgSfxCallback(void);
+static bool8 DbgBackCallback(void);
+static bool8 IsDaemonsDebugCallback(void);
+static bool8 DbgRedraw(void);
+static void AppendToStartMenuItems(u8 newEntry);
 #endif
 static bool8 StartCB_Save1(void);
 static bool8 StartCB_Save2(void);
@@ -138,7 +152,15 @@ static const struct MenuAction sStartMenuActionTable[] = {
     [STARTMENU_RETIRE]  = { gText_MenuRetire,  {.u8_void = StartMenuSafariZoneRetireCallback} },
     [STARTMENU_PLAYER2] = { gText_MenuPlayer,  {.u8_void = StartMenuLinkPlayerCallback} },
 #if DAEMONS_DEBUG
-    [STARTMENU_DEBUG]   = { gText_MenuDebug,   {.u8_void = StartMenuDaemonsDebugCallback} }
+    [STARTMENU_DEBUG]    = { gText_MenuDebug,   {.u8_void = StartMenuDaemonsDebugCallback} },
+    [STARTMENU_DBG_HEAL] = { gText_DbgMenuHeal, {.u8_void = DbgHealCallback} },
+    [STARTMENU_DBG_MART] = { gText_DbgMenuMart, {.u8_void = DbgMartCallback} },
+    // These two labels carry {STR_VAR_1} and {STR_VAR_2}. PrintStartMenuItems
+    // runs every entry through StringExpandPlaceholders, so the current song
+    // and sound effect can live in the menu itself -- no second window.
+    [STARTMENU_DBG_SONG] = { gText_DbgMenuSong, {.u8_void = DbgSongCallback} },
+    [STARTMENU_DBG_SFX]  = { gText_DbgMenuSfx,  {.u8_void = DbgSfxCallback} },
+    [STARTMENU_DBG_BACK] = { gText_DbgMenuBack, {.u8_void = DbgBackCallback} }
 #endif
 };
 
@@ -169,6 +191,11 @@ static const u8 *const sStartMenuDescPointers[] = {
     // into the help window is what blacked out the screen. One omission, two
     // symptoms.
     gStartMenuDesc_Debug,
+    gStartMenuDesc_DbgHeal,
+    gStartMenuDesc_DbgMart,
+    gStartMenuDesc_DbgSong,
+    gStartMenuDesc_DbgSfx,
+    gStartMenuDesc_DbgBack,
 #endif
 };
 
@@ -217,9 +244,29 @@ static void SetHasPokedexAndPokemon(void)
     FlagSet(FLAG_SYS_POKEMON_GET);
 }
 
+#if DAEMONS_DEBUG
+static EWRAM_DATA bool8 sInDebugSubmenu = FALSE;
+static EWRAM_DATA u16 sDbgSong = 0;
+static EWRAM_DATA u16 sDbgSfx = 0;
+#endif
+
 static void SetUpStartMenu(void)
 {
     sNumStartMenuItems = 0;
+#if DAEMONS_DEBUG
+    // DoDrawStartMenu calls this on every redraw, so the submenu is a flag
+    // rather than a saved list -- which means every existing redraw path keeps
+    // working untouched.
+    if (sInDebugSubmenu)
+    {
+        AppendToStartMenuItems(STARTMENU_DBG_HEAL);
+        AppendToStartMenuItems(STARTMENU_DBG_MART);
+        AppendToStartMenuItems(STARTMENU_DBG_SONG);
+        AppendToStartMenuItems(STARTMENU_DBG_SFX);
+        AppendToStartMenuItems(STARTMENU_DBG_BACK);
+        return;
+    }
+#endif
     if (IsUpdateLinkStateCBActive() == TRUE)
         SetUpStartMenu_Link();
     else if (InUnionRoom() == TRUE)
@@ -483,7 +530,7 @@ static void StartMenu_FadeScreenIfLeavingOverworld(void)
     if (sStartMenuCallback != StartMenuSaveCallback
      && sStartMenuCallback != StartMenuExitCallback
 #if DAEMONS_DEBUG
-     && sStartMenuCallback != StartMenuDaemonsDebugCallback
+     && !IsDaemonsDebugCallback()
 #endif
      && sStartMenuCallback != StartMenuSafariZoneRetireCallback)
     {
@@ -573,36 +620,97 @@ static bool8 StartMenuOptionCallback(void)
 }
 
 #if DAEMONS_DEBUG
-// One entry, one action, no submenu.
+// A submenu, built out of the start menu rather than beside it.
 //
-// A nested DEBUG menu -- HEAL, MART, MUSIC by name, SFX -- is the right shape
-// and it is a real piece of UI: another window template, another task, another
-// input loop, and a list of three hundred and forty-eight songs to page
-// through. That is worth building WITH someone testing it, not pushed
-// unattended into the one menu the player opens most.
+// The obvious way is a second window, a second task and a second input loop.
+// The cheap way is to notice that DoDrawStartMenu calls SetUpStartMenu on every
+// redraw -- so swapping which items that function appends, and redrawing, gives
+// a submenu with the cursor, the input handling, the descriptions and the frame
+// all already written and already working.
 //
-// So this is the half that carries no risk: full restore and a full bag, from
-// somewhere you can find without being told. The song and SFX browsers stay on
-// the SELECT hotkeys until the menu is built properly.
+// Every entry hands control back to StartCB_HandleInput and returns FALSE,
+// which is exactly how the save flow returns to the menu after a cancel.
+static const u16 sDebugRestock[][2] = {
+    { ITEM_ULTRA_BALL,   20 }, { ITEM_HYPER_POTION, 20 },
+    { ITEM_FULL_RESTORE, 10 }, { ITEM_REVIVE,       10 },
+    { ITEM_FIRE_STONE,    5 }, { ITEM_THUNDER_STONE, 5 },
+    { ITEM_WATER_STONE,   5 }, { ITEM_LEAF_STONE,    5 },
+};
+
+static bool8 IsDaemonsDebugCallback(void)
+{
+    return sStartMenuCallback == StartMenuDaemonsDebugCallback
+        || sStartMenuCallback == DbgHealCallback
+        || sStartMenuCallback == DbgMartCallback
+        || sStartMenuCallback == DbgSongCallback
+        || sStartMenuCallback == DbgSfxCallback
+        || sStartMenuCallback == DbgBackCallback;
+}
+
+static bool8 DbgRedraw(void)
+{
+    ConvertIntToDecimalStringN(gStringVar1, sDbgSong, STR_CONV_MODE_LEFT_ALIGN, 3);
+    ConvertIntToDecimalStringN(gStringVar2, sDbgSfx, STR_CONV_MODE_LEFT_ALIGN, 3);
+    ClearStdWindowAndFrame(GetStartMenuWindowId(), FALSE);
+    RemoveStartMenuWindow();
+    DrawStartMenuInOneGo();
+    sStartMenuCallback = StartCB_HandleInput;
+    return FALSE;
+}
+
 static bool8 StartMenuDaemonsDebugCallback(void)
 {
-    static const u16 kit[][2] = {
-        { ITEM_ULTRA_BALL,   20 }, { ITEM_HYPER_POTION, 20 },
-        { ITEM_FULL_RESTORE, 10 }, { ITEM_REVIVE,       10 },
-        { ITEM_FIRE_STONE,    5 }, { ITEM_THUNDER_STONE, 5 },
-        { ITEM_WATER_STONE,   5 }, { ITEM_LEAF_STONE,    5 },
-    };
+    if (sDbgSong == 0)
+        sDbgSong = MUS_BRAZEN;
+    if (sDbgSfx == 0)
+        sDbgSfx = 1;
+    sInDebugSubmenu = TRUE;
+    sStartMenuCursorPos = 0;
+    return DbgRedraw();
+}
+
+static bool8 DbgHealCallback(void)
+{
+    HealPlayerParty();
+    PlayFanfare(MUS_HEAL);
+    return DbgRedraw();
+}
+
+static bool8 DbgMartCallback(void)
+{
     u32 i;
 
-    HealPlayerParty();
-    for (i = 0; i < ARRAY_COUNT(kit); i++)
-        AddBagItem(kit[i][0], kit[i][1]);
+    for (i = 0; i < ARRAY_COUNT(sDebugRestock); i++)
+        AddBagItem(sDebugRestock[i][0], sDebugRestock[i][1]);
     SetMoney(&gSaveBlock1Ptr->money, 999999);
-    PlayFanfare(MUS_HEAL);
-    DestroySafariZoneStatsWindow();
-    DestroyHelpMessageWindow_();
-    CloseStartMenu();
-    return TRUE;
+    PlayFanfare(MUS_OBTAIN_ITEM);
+    return DbgRedraw();
+}
+
+// Walks the whole table, sound effects included, because ours sit at the far
+// end and stepping past the rest is how you reach them. MUS_BRAZEN is last.
+static bool8 DbgSongCallback(void)
+{
+    if (++sDbgSong > MUS_BRAZEN)
+        sDbgSong = 1;
+    PlayNewMapMusic(sDbgSong);
+    return DbgRedraw();
+}
+
+static bool8 DbgSfxCallback(void)
+{
+    if (++sDbgSfx >= MUS_HEAL)
+        sDbgSfx = 1;
+    PlaySE(sDbgSfx);
+    return DbgRedraw();
+}
+
+static bool8 DbgBackCallback(void)
+{
+    sInDebugSubmenu = FALSE;
+    sStartMenuCursorPos = 0;
+    PlayNewMapMusic(GetCurrentMapMusic());
+    return DbgRedraw();
 }
 #endif
 

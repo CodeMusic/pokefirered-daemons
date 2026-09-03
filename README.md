@@ -57,7 +57,7 @@ build flag.
 ```sh
 make firered           # build CONTENT
 make leafgreen         # build CONTEXT
-shasum -c firered.sha1 # prove the toolchain against the retail ROM
+# shasum -c firered.sha1 -- only meaningful on a pristine checkout; see below
 ```
 
 From the DAEMONS repo, `./bindDaemons.sh` builds and launches either edition;
@@ -134,7 +134,13 @@ It is scaffolding for the question above rather than a general debug menu.
 `DAEMONS_DEBUG=1` suffixes `BUILD_NAME`, so it is a **separate ROM with its own
 save** and a debug run never touches a real playthrough. It is deliberately not
 part of `make all`, and **with `DAEMONS_DEBUG=0` both retail builds still match
-their `.sha1` byte for byte** — the scaffolding is inert when it is off.
+their `.sha1` byte for byte** — that was the proof the scaffolding is inert when
+it is off, and it was taken on 2026-09-02 while this fork was still vanilla.
+
+**It no longer holds, and it should not:** the ROM now carries the type chart,
+the names, the Index, the sprites and the music, so `shasum -c firered.sha1`
+fails by design. It is a check for a *pristine* checkout — run it after cloning
+`pret/pokefirered` to prove the toolchain, not against this fork.
 
 ## What is ported so far
 
