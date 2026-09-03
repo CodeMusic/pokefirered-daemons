@@ -116,7 +116,7 @@ their `.sha1` byte for byte** — the scaffolding is inert when it is off.
 | 33 daemon names | every rename carried across |
 | 12 item names | the box ladder, the four inputs, `INTERRUPT`, `RESOLVER`, `CC-7` |
 | 12 item descriptions | **new writing** — Gen 1 had nowhere to put them |
-| 30 Index categories and entries | reflowed from six short lines to three long ones |
+| 30 Index categories and entries | reflowed from six short lines to three long ones, then expanded into the room |
 | 14 town names | Blanche, Slate, Doldrum, Halftone, Ardor, Verdigris… |
 | 66 sprites | front and back, **coloured by type** |
 | 4 music tracks | re-emitted as MIDI, because nothing can be copied |
