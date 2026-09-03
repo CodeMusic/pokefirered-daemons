@@ -151,6 +151,7 @@ their `.sha1` byte for byte** — the scaffolding is inert when it is off.
 | 4 music tracks | re-emitted as MIDI, because nothing can be copied |
 | The copyright screen | three lines, in the Game Boy screen's own font |
 | The eight MARKS | as badge names, which is where Gen 3 keeps them |
+| The 17 type badges | pixel art, six characters each, vowels dropped as vanilla does |
 | Player and rival names | PIP / CONTENT / CODE against AL / CONTEXT / LUCID |
 | The intro, and Crystal's speech | including the question that used to ask your gender |
 | The ID number | derived from the choices you made, not rolled |
