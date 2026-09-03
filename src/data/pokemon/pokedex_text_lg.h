@@ -6,166 +6,165 @@ const u8 gDummyPokedexText[] = _(
 const u8 gDummyPokedexTextUnused[] = _("");
 
 const u8 gBulbasaurPokedexText[] = _(
-    "A strange seed was planted on its back at\n"
-    "birth. The plant sprouts and grows with\n"
-    "this POKéMON.");
+    "Small enough to carry. Learns from what it\n"
+    "is carried past. It has no way to choose\n"
+    "the route");
 
 const u8 gBulbasaurPokedexTextUnused[] = _("");
 
 const u8 gIvysaurPokedexText[] = _(
-    "When the bulb on its back grows large, it\n"
-    "appears to lose the ability to stand on\n"
-    "its hind legs.");
+    "Too large to carry now. It answers before\n"
+    "it is asked. It has never once been\n"
+    "outside");
 
 const u8 gIvysaurPokedexTextUnused[] = _("");
 
 const u8 gVenusaurPokedexText[] = _(
-    "Its plant blooms when it is absorbing\n"
-    "solar energy. It stays on the move to\n"
-    "seek sunlight.");
+    "It has a body now, and senses that come\n"
+    "with one. Everything it predicted, it can\n"
+    "finally check");
 
 const u8 gVenusaurPokedexTextUnused[] = _(
     " ");
 
 const u8 gCharmanderPokedexText[] = _(
-    "It has a preference for hot things.\n"
-    "When it rains, steam is said to spout from\n"
-    "the tip of its tail.");
+    "Holds one example and the answer that came\n"
+    "with it. Someone else decided what it\n"
+    "means");
 
 const u8 gCharmanderPokedexTextUnused[] = _("");
 
 const u8 gCharmeleonPokedexText[] = _(
-    "When it swings its burning tail, it\n"
-    "elevates the air temperature to \n"
-    "unbearably high levels.");
+    "It no longer needs answers. It has the\n"
+    "rule that made them. Nothing checks the\n"
+    "rule");
 
 const u8 gCharmeleonPokedexTextUnused[] = _("");
 
 const u8 gCharizardPokedexText[] = _(
-    "It spits fire that is hot enough to melt\n"
-    "boulders. It may cause forest fires by\n"
-    "blowing flames.");
+    "Every case it meets is decided by cases it\n"
+    "has already met. New things are filed as\n"
+    "errors");
 
 const u8 gCharizardPokedexTextUnused[] = _("");
 
 const u8 gSquirtlePokedexText[] = _(
-    "After birth, its back swells and hardens\n"
-    "into a shell. It powerfully sprays foam \n"
-    "from its mouth.");
+    "Puts near things with near things. Nobody\n"
+    "told it which things matter. It has\n"
+    "guessed");
 
 const u8 gSquirtlePokedexTextUnused[] = _("");
 
 const u8 gWartortlePokedexText[] = _(
-    "It often hides in water to stalk unwary\n"
-    "prey. For fast swimming, it moves its\n"
-    "ears to maintain balance.");
+    "It found a rule the points obey. It cannot\n"
+    "say what the rule is for, only that it\n"
+    "holds");
 
 const u8 gWartortlePokedexTextUnused[] = _("");
 
 const u8 gBlastoisePokedexText[] = _(
-    "The pressurized water jets on this brutal\n"
-    "POKéMON's shell are used for high-\n"
-    "speed tackles.");
+    "The scattered points were on a surface all\n"
+    "along. It can show you the shape, not a\n"
+    "name");
 
 const u8 gBlastoisePokedexTextUnused[] = _("");
 
 const u8 gCaterpiePokedexText[] = _(
-    "Its short feet are tipped with suction\n"
-    "pads that enable it to tirelessly climb\n"
-    "slopes and walls.");
+    "Follows every link it finds, then the\n"
+    "links it finds there. It has no opinion\n"
+    "about any of them");
 
 const u8 gCaterpiePokedexTextUnused[] = _("");
 
 const u8 gMetapodPokedexText[] = _(
-    "This POKéMON is vulnerable to attack\n"
-    "while its shell is soft, exposing its weak\n"
-    "and tender body.");
+    "Waiting to be processed. It has been\n"
+    "waiting a while. Nothing has told it how\n"
+    "long");
 
 const u8 gMetapodPokedexTextUnused[] = _(
     " ");
 
 const u8 gButterfreePokedexText[] = _(
-    "In battle, it flaps its wings at great\n"
-    "speed to release highly toxic dust into\n"
-    "the air.");
+    "Turns what was gathered into something\n"
+    "that can be found again. What it cannot\n"
+    "file, it drops");
 
 const u8 gButterfreePokedexTextUnused[] = _(
     " ");
 
 const u8 gWeedlePokedexText[] = _(
-    "Often found in forests, eating leaves.\n"
-    "It has a sharp stinger on its head that\n"
-    "injects poison.");
+    "Takes the same things a CRAWLER takes, by\n"
+    "the same method. Nobody gave it permission");
 
 const u8 gWeedlePokedexTextUnused[] = _("");
 
 const u8 gKakunaPokedexText[] = _(
-    "Almost incapable of moving, this POKéMON\n"
-    "can only harden its shell to protect\n"
-    "itself when it is in danger.");
+    "Holds what was taken until there is\n"
+    "somewhere to put it. It does not know\n"
+    "where that is");
 
 const u8 gKakunaPokedexTextUnused[] = _("");
 
 const u8 gBeedrillPokedexText[] = _(
-    "It flies at high speed and attacks using \n"
-    "the large venomous stingers on its\n"
-    "forelegs and tail.");
+    "Puts its own instructions where data was\n"
+    "expected. The reader cannot tell the\n"
+    "difference");
 
 const u8 gBeedrillPokedexTextUnused[] = _("");
 
 const u8 gPidgeyPokedexText[] = _(
-    "A common sight in forests and woods.\n"
-    "It flaps its wings at ground level to kick\n"
-    "up blinding sand.");
+    "Carries something it cannot read to\n"
+    "somewhere it has never been. It does not\n"
+    "ask what is inside");
 
 const u8 gPidgeyPokedexTextUnused[] = _("");
 
 const u8 gPidgeottoPokedexText[] = _(
-    "Very protective of its sprawling\n"
-    "territorial area, this POKéMON will\n"
-    "fiercely peck at any intruder.");
+    "Takes what it is handed and hands it on.\n"
+    "It does not open it. That is the whole of\n"
+    "the job");
 
 const u8 gPidgeottoPokedexTextUnused[] = _("");
 
 const u8 gPidgeotPokedexText[] = _(
-    "When hunting, it skims the surface of\n"
-    "water at high speed to pick off unwary\n"
-    "prey such as MAGIKARP.");
+    "Sends to everyone at once, because it\n"
+    "cannot tell who needs it. Most of what it\n"
+    "says lands nowhere");
 
 const u8 gPidgeotPokedexTextUnused[] = _("");
 
 const u8 gRattataPokedexText[] = _(
-    "Bites anything when it attacks. Small and\n"
-    "very quick, it is a common sight in many\n"
-    "places.");
+    "Four bits. The smallest piece the Index\n"
+    "will file on its own. There are a great\n"
+    "many of them");
 
 const u8 gRattataPokedexTextUnused[] = _("");
 
 const u8 gRaticatePokedexText[] = _(
-    "It uses its whiskers to maintain its\n"
-    "balance. It apparently slows down if\n"
-    "they are cut off.");
+    "It kept counting past the space it was\n"
+    "given. Nothing stopped it. Nothing was\n"
+    "watching");
 
 const u8 gRaticatePokedexTextUnused[] = _("");
 
 const u8 gSpearowPokedexText[] = _(
-    "Eats bugs in grassy areas. It has to flap\n"
-    "its short wings at high speed to stay\n"
-    "airborne.");
+    "Asks one question and requires an answer.\n"
+    "The question is: are you there. It asks\n"
+    "again");
 
 const u8 gSpearowPokedexTextUnused[] = _("");
 
 const u8 gFearowPokedexText[] = _(
-    "With its huge and magnificent wings, it can\n"
-    "keep aloft without ever having to land\n"
-    "for rest.");
+    "Many of them ask at once, and each one is\n"
+    "owed a reply. Nothing is left to answer\n"
+    "with");
 
 const u8 gFearowPokedexTextUnused[] = _("");
 
 const u8 gEkansPokedexText[] = _(
-    "Moving silently and stealthily, it eats\n"
-    "the eggs of birds, such as PIDGEY\n"
-    "and SPEAROW, whole.");
+    "Moves silently and stealthily. Eats the\n"
+    "eggs of birds, such as PACKET and PING,\n"
+    "whole");
 
 const u8 gEkansPokedexTextUnused[] = _("");
 
@@ -177,16 +176,16 @@ const u8 gArbokPokedexText[] = _(
 const u8 gArbokPokedexTextUnused[] = _("");
 
 const u8 gPikachuPokedexText[] = _(
-    "When several of these POKéMON gather,\n"
-    "their electricity can build and cause\n"
-    "lightning storms.");
+    "A single burst, then nothing. It means\n"
+    "something only if something was counting.\n"
+    "Usually nothing is");
 
 const u8 gPikachuPokedexTextUnused[] = _("");
 
 const u8 gRaichuPokedexText[] = _(
-    "Its long tail serves as a ground to\n"
-    "protect itself from its own high-voltage\n"
-    "power.");
+    "It no longer stops between bursts. What\n"
+    "was a signal is now a condition. Nothing\n"
+    "reads it");
 
 const u8 gRaichuPokedexTextUnused[] = _("");
 
@@ -940,23 +939,23 @@ const u8 gEeveePokedexText[] = _(
 const u8 gEeveePokedexTextUnused[] = _("");
 
 const u8 gVaporeonPokedexText[] = _(
-    "Lives close to water. Its long tail is\n"
-    "ridged with a fin which is often mistaken\n"
-    "for a mermaid's.");
+    "Reads the room before it reads the\n"
+    "problem. Often correct. Cannot show its\n"
+    "working");
 
 const u8 gVaporeonPokedexTextUnused[] = _("");
 
 const u8 gJolteonPokedexText[] = _(
-    "It accumulates negative ions in the\n"
-    "atmosphere to blast out 10,000-volt\n"
-    "lightning bolts.");
+    "Finds the nearest match to anything it is\n"
+    "shown. Nearest is not the same as right.\n"
+    "Nobody told it");
 
 const u8 gJolteonPokedexTextUnused[] = _("");
 
 const u8 gFlareonPokedexText[] = _(
-    "When storing thermal energy in its body,\n"
-    "its temperature can soar to over 1,600\n"
-    "degrees Fahrenheit.");
+    "Given a rule, it will not stop until the\n"
+    "rule is met. It does not ask where the\n"
+    "rule came from");
 
 const u8 gFlareonPokedexTextUnused[] = _("");
 
@@ -1052,16 +1051,16 @@ const u8 gDragonitePokedexText[] = _(
 const u8 gDragonitePokedexTextUnused[] = _("");
 
 const u8 gMewtwoPokedexText[] = _(
-    "It was created by a scientist after years\n"
-    "of horrific gene-splicing and DNA-\n"
-    "engineering experiments.");
+    "Assembled from a study of a single prior\n"
+    "event. Not derived from a sample. Built to\n"
+    "specification");
 
 const u8 gMewtwoPokedexTextUnused[] = _("");
 
 const u8 gMewPokedexText[] = _(
-    "So rare that it is still said to be a\n"
-    "mirage by many experts. Only a few people\n"
-    "have seen it worldwide.");
+    "Observed once, at a facility, by five\n"
+    "people. No two accounts agree. The record\n"
+    "is filed complete");
 
 const u8 gMewPokedexTextUnused[] = _("");
 
