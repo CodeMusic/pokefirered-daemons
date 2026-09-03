@@ -246,6 +246,8 @@ static void SetHasPokedexAndPokemon(void)
 
 #if DAEMONS_DEBUG
 static EWRAM_DATA bool8 sInDebugSubmenu = FALSE;
+#define DBG_FIRST_SONG MUS_HEAL   // 256; everything below it is a sound effect
+
 static EWRAM_DATA u16 sDbgSong = 0;
 static EWRAM_DATA u16 sDbgSfx = 0;
 #endif
@@ -660,7 +662,7 @@ static bool8 DbgRedraw(void)
 
 static bool8 StartMenuDaemonsDebugCallback(void)
 {
-    if (sDbgSong == 0)
+    if (sDbgSong < DBG_FIRST_SONG || sDbgSong > MUS_BRAZEN)
         sDbgSong = MUS_BRAZEN;
     if (sDbgSfx == 0)
         sDbgSfx = 1;
@@ -687,12 +689,16 @@ static bool8 DbgMartCallback(void)
     return DbgRedraw();
 }
 
-// Walks the whole table, sound effects included, because ours sit at the far
-// end and stepping past the rest is how you reach them. MUS_BRAZEN is last.
+// The two halves of the song table are not interleaved: SE_USE_ITEM is 1 and
+// SE_POKE_JUMP_FAILURE is 255, then MUS_HEAL opens the music at 256 and ours
+// close it at MUS_BRAZEN. So SONG walks 256..347 and SFX walks 1..255, and
+// neither wraps into the other -- an earlier version wrapped SONG to 1, which
+// pushed sound effects through the BGM player and would have taken 255 presses
+// to reach the first actual track.
 static bool8 DbgSongCallback(void)
 {
-    if (++sDbgSong > MUS_BRAZEN)
-        sDbgSong = 1;
+    if (++sDbgSong > MUS_BRAZEN || sDbgSong < DBG_FIRST_SONG)
+        sDbgSong = DBG_FIRST_SONG;
     // PlayBGM, not PlayNewMapMusic. The latter only sets sCurrentMapMusic and
     // arms the map-music state machine, which next runs on a map transition --
     // so from inside a menu it changes nothing you can hear. PlayBGM starts the
@@ -704,7 +710,7 @@ static bool8 DbgSongCallback(void)
 
 static bool8 DbgSfxCallback(void)
 {
-    if (++sDbgSfx >= MUS_HEAL)
+    if (++sDbgSfx >= DBG_FIRST_SONG)
         sDbgSfx = 1;
     PlaySE(sDbgSfx);
     return DbgRedraw();

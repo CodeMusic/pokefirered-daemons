@@ -179,7 +179,7 @@ gControlsGuide_Text_LRButtons::
     .string "press the L or R Button.$"
 
 gOakSpeech_Text_AskPlayerGender::
-    .string "When the two disagree, which of them\n"
+    .string "When these disagree, which of them\n"
     .string "do you follow?$"
 
 gPikachuIntro_Text_Page1::

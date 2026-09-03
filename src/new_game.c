@@ -193,6 +193,15 @@ static void DaemonsDebug_GrantTestKit(void)
     FlagSet(FLAG_SYS_POKEMON_GET);
     FlagSet(FLAG_SYS_POKEDEX_GET);
 
+    // Fly opens the map but every destination is dead until it has been
+    // visited: region_map.c returns MAPSECTYPE_NOT_VISITED for any mapsec whose
+    // FLAG_WORLD_MAP_* is clear, and the cursor will not settle on one of
+    // those. The block is contiguous, PALLET_TOWN through BIRTH_ISLAND, so mark
+    // the whole world seen -- a debug build that can reach one town is not a
+    // debug build.
+    for (i = FLAG_WORLD_MAP_PALLET_TOWN; i <= FLAG_WORLD_MAP_BIRTH_ISLAND_EXTERIOR; i++)
+        FlagSet(i);
+
     SetMoney(&gSaveBlock1Ptr->money, 999999);
 }
 #endif
