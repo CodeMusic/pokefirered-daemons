@@ -93,9 +93,18 @@ Four field hotkeys, held with **L**:
 
 | GBA | mGBA default keys | |
 |---|---|---|
-| **L + R** | hold `A`, press `S` | heal the party where you stand — a POKéCENTER on demand |
-| **L + SELECT** | hold `A`, press `Backspace` | restock: balls, medicine, the four inputs, and money |
-| **L + UP / DOWN** | hold `A`, press `↑` / `↓` | walk the song table and play it — ours are at the far end |
+| **L + R** | hold `A`, press `S` | heal the party — the POKéCENTER jingle, and a message |
+| **L + SELECT** | hold `A`, press `Backspace` | restock items and money — the item fanfare, and a message |
+| **L + A** | hold `A`, press `X` | next song, and its number on screen |
+| **L + B** | hold `A`, press `Z` | put the map's own song back |
+
+Every one of them answers: the fanfare the game already uses for that idea, and
+a message box. A tool that changes hidden state and says nothing is
+indistinguishable from a tool that did not run.
+
+The buttons are the ones that **do not move the player**. `UP`/`DOWN` were the
+obvious pick for a song list and they are wrong — holding L does not stop the
+avatar walking, so browsing the soundtrack would march you into a wall.
 
 mGBA's stock keyboard map is worth writing down, because **`L` is the keyboard
 `A`, which is not the GBA A button**:
@@ -133,6 +142,7 @@ their `.sha1` byte for byte** — the scaffolding is inert when it is off.
 | 14 town names | Blanche, Slate, Doldrum, Halftone, Ardor, Verdigris… |
 | 66 sprites | front and back, **coloured by type** |
 | 4 music tracks | re-emitted as MIDI, because nothing can be copied |
+| The copyright screen | three lines, in the Game Boy screen's own font |
 | The eight MARKS | as badge names, which is where Gen 3 keeps them |
 
 **Colour is by type**, which makes it information rather than decoration — a

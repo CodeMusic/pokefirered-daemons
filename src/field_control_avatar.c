@@ -15,6 +15,9 @@
 #include "sound.h"
 #include "constants/items.h"
 #include "constants/songs.h"
+#include "string_util.h"
+#include "field_message_box.h"
+#include "overworld.h"
 #endif
 #include "field_fadetransition.h"
 #include "field_player_avatar.h"
@@ -203,18 +206,28 @@ static void QuestLogOverrideJoyVars(struct FieldInput *input, u16 *newKeys, u16 
 //
 // pokefirered ships no debug build at all, so there was nothing to extend.
 // Building a proper submenu means window templates, a task, a callback and a
-// tilemap -- a day of UI for tools that exist to save time. These are four
-// combos in the one function every overworld frame already calls, and they
-// cover what testing actually needs: get healthy, get equipped, hear a track.
+// tilemap -- a day of UI for tools that exist to save time. These are combos in
+// the one function every overworld frame already calls.
 //
 //   L + R        heal the party where you stand -- a POKeCENTER on demand
 //   L + SELECT   restock: balls, medicine, the four inputs, and money
-//   L + UP       next song, and play it
-//   L + DOWN     previous song
+//   L + A        next song, and play it
+//   L + B        put the map's own song back
 //
-// The song walk is deliberately dumb: it steps through every ID in the table,
-// including the sound effects, because the point is to reach ours quickly and
-// they sit at the far end. MUS_BRAZEN is the last entry, at 347.
+// EVERY ONE ANSWERS. A tool that changes hidden state and says nothing is
+// indistinguishable from a tool that did not run -- which is exactly how the
+// first version looked when it granted a party the menu would not show. So
+// each plays the fanfare the game already uses for that idea and puts a message
+// on screen.
+//
+// The buttons are the ones that do not move the player. UP and DOWN were the
+// obvious pick for a song list and they are wrong: holding L does not stop the
+// avatar walking, so browsing the soundtrack would march you into a wall.
+static const u8 sDebugTextHealed[] = _("Party restored.");
+static const u8 sDebugTextRestocked[] = _("Bag restocked.");
+static const u8 sDebugTextSong[] = _("SONG ");
+static const u8 sDebugTextMapSong[] = _("Map song restored.");
+
 static const u16 sDebugRestock[][2] = {
     { ITEM_ULTRA_BALL,   20 }, { ITEM_HYPER_POTION, 20 },
     { ITEM_FULL_RESTORE, 10 }, { ITEM_REVIVE,       10 },
@@ -222,41 +235,57 @@ static const u16 sDebugRestock[][2] = {
     { ITEM_WATER_STONE,   5 }, { ITEM_LEAF_STONE,    5 },
 };
 
-static void DaemonsDebug_FieldHotkeys(void)
+static bool8 DaemonsDebug_FieldHotkeys(void)
 {
     // Zero-initialised on purpose. An initialised mutable static lands in
     // .data, and ld_script.ld does not take a .data section from this object --
-    // it fails to link as "defined in discarded section", which is a strange
-    // error to get from a debug convenience. Zero goes to .bss, and zero means
-    // "not started yet".
+    // it fails to link as "defined in discarded section". Zero goes to .bss,
+    // and zero means "not started yet".
     static u16 song;
+    static u8 msg[32];
+    u8 *p;
     u32 i;
 
+    if (!JOY_HELD(L_BUTTON))
+        return FALSE;
     if (song == 0)
         song = MUS_BRAZEN;
-
-    if (!JOY_HELD(L_BUTTON))
-        return;
 
     if (JOY_NEW(R_BUTTON))
     {
         HealPlayerParty();
-        PlaySE(SE_SUCCESS);
+        PlayFanfare(MUS_HEAL);
+        ShowFieldMessage(sDebugTextHealed);
+        return TRUE;
     }
-    else if (JOY_NEW(SELECT_BUTTON))
+    if (JOY_NEW(SELECT_BUTTON))
     {
         for (i = 0; i < ARRAY_COUNT(sDebugRestock); i++)
             AddBagItem(sDebugRestock[i][0], sDebugRestock[i][1]);
         SetMoney(&gSaveBlock1Ptr->money, 999999);
-        PlaySE(SE_DING_DONG);
+        PlayFanfare(MUS_OBTAIN_ITEM);
+        ShowFieldMessage(sDebugTextRestocked);
+        return TRUE;
     }
-    else if (JOY_NEW(DPAD_UP) || JOY_NEW(DPAD_DOWN))
+    if (JOY_NEW(A_BUTTON))
     {
-        song += JOY_NEW(DPAD_UP) ? 1 : -1;
-        if (song > MUS_BRAZEN)
-            song = JOY_NEW(DPAD_UP) ? 1 : MUS_BRAZEN;
+        // Walks the whole table, sound effects included, because ours sit at
+        // the far end and stepping past the rest is how you reach them.
+        if (++song > MUS_BRAZEN)
+            song = 1;
         PlayNewMapMusic(song);
+        p = StringCopy(msg, sDebugTextSong);
+        ConvertIntToDecimalStringN(p, song, STR_CONV_MODE_LEFT_ALIGN, 3);
+        ShowFieldMessage(msg);
+        return TRUE;
     }
+    if (JOY_NEW(B_BUTTON))
+    {
+        PlayNewMapMusic(GetCurrentMapMusic());
+        ShowFieldMessage(sDebugTextMapSong);
+        return TRUE;
+    }
+    return FALSE;
 }
 #endif
 
@@ -277,7 +306,10 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     gFieldInputRecord.dpadDirection = input->dpadDirection;
 
 #if DAEMONS_DEBUG
-    DaemonsDebug_FieldHotkeys();
+    // Returning here also swallows the button, so L + A does not read the sign
+    // you happen to be standing in front of.
+    if (DaemonsDebug_FieldHotkeys() == TRUE)
+        return TRUE;
 #endif
 
     if (CheckForTrainersWantingBattle() == TRUE)
