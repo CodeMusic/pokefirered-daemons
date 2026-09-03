@@ -309,7 +309,7 @@ static const s8 sPlayerThrowXTranslation[] = { -32, -16, -16, -32, -32, 0, 0, 0 
 // 10 is ×1.0 TYPE_MUL_NORMAL
 // 05 is ×0.5 TYPE_MUL_NOT_EFFECTIVE
 // 00 is ×0.0 TYPE_MUL_NO_EFFECT
-const u8 gTypeEffectiveness[336] =
+const u8 gTypeEffectiveness[339] =
 {
     TYPE_NORMAL, TYPE_ROCK, TYPE_MUL_NOT_EFFECTIVE,
     TYPE_NORMAL, TYPE_STEEL, TYPE_MUL_NOT_EFFECTIVE,
@@ -422,6 +422,18 @@ const u8 gTypeEffectiveness[336] =
     TYPE_FORESIGHT, TYPE_FORESIGHT, TYPE_MUL_NO_EFFECT,
     TYPE_NORMAL, TYPE_GHOST, TYPE_MUL_NO_EFFECT,
     TYPE_FIGHTING, TYPE_GHOST, TYPE_MUL_NO_EFFECT,
+    // vision.md 2: the design's only change to the chart. Framing is how you
+    // reach what runs below the surface, and what runs below the surface
+    // destabilises framing -- mutual 2x, which is unusual and correct here:
+    // these two interpenetrate and neither has a safe angle on the other.
+    //
+    // On the Game Boy it cost three edits, because Gen 1 shipped GHOST doing
+    // NOTHING to PSYCHIC and the design had to delete that bug before adding
+    // the pair. Gen 3 fixed the bug itself, and already has GHOST -> PSYCHIC at
+    // 2x, so the whole change is this one line. It had never been built on
+    // either engine until now.
+    TYPE_PSYCHIC, TYPE_GHOST, TYPE_MUL_SUPER_EFFECTIVE,
+
     TYPE_ENDTABLE, TYPE_ENDTABLE, TYPE_MUL_NO_EFFECT
 };
 
