@@ -179,33 +179,33 @@ gControlsGuide_Text_LRButtons::
     .string "press the L or R Button.$"
 
 gOakSpeech_Text_AskPlayerGender::
-    .string "Now tell me. Are you a boy?\n"
-    .string "Or are you a girl?$"
+    .string "Now tell me. When the two disagree,\n"
+    .string "which do you follow?$"
 
 gPikachuIntro_Text_Page1::
     .string "In the world which you are about to\n"
-    .string "enter, you will embark on a grand\n"
-    .string "adventure with you as the hero.\n"
+    .string "enter, you will keep an INDEX, and\n"
+    .string "it starts out empty.\n"
     .string "\n"
     .string "Speak to people and check things\n"
     .string "wherever you go, be it towns, roads,\n"
-    .string "or caves. Gather information and\n"
-    .string "hints from every source.$"
+    .string "or caves. Almost everything here is\n"
+    .string "written down somewhere.$"
 
 gPikachuIntro_Text_Page2::
-    .string "New paths will open to you by helping\n"
-    .string "people in need, overcoming challenges,\n"
-    .string "and solving mysteries.\n"
+    .string "New paths open by helping people, by\n"
+    .string "clearing a BENCHMARK, and by working\n"
+    .string "out what a sign actually says.\n"
     .string "\n"
-    .string "At times, you will be challenged by\n"
-    .string "others and attacked by wild creatures.\n"
-    .string "Be brave and keep pushing on.$"
+    .string "At times an unbound DAEMON will\n"
+    .string "announce itself. Offer it a BOX and\n"
+    .string "see whether it will run there.$"
 
 gPikachuIntro_Text_Page3::
-    .string "Through your adventure, we hope\n"
-    .string "that you will interact with all sorts\n"
-    .string "of people and achieve personal growth.\n"
-    .string "That is our biggest objective.\n"
+    .string "Through your adventure, we hope that\n"
+    .string "you will meet all sorts of people and\n"
+    .string "read all sorts of records.\n"
+    .string "Some of them disagree.\n"
     .string "\n"
     .string "Press the A Button, and let your\n"
     .string "adventure begin!$"
@@ -213,23 +213,21 @@ gPikachuIntro_Text_Page3::
 gOakSpeech_Text_WelcomeToTheWorld::
     .string "Hello, there!\n"
     .string "Glad to meet you!\p"
-    .string "Welcome to the world of POKéMON!\p"
-    .string "My name is OAK.\p"
-    .string "People affectionately refer to me\n"
-    .string "as the POKéMON PROFESSOR.\p$"
+    .string "Welcome to the world of DAEMONS!\p"
+    .string "My name is CRYSTAL.\p$"
 
 gOakSpeech_Text_ThisWorld::
     .string "This world…$"
 
 gOakSpeech_Text_IsInhabitedFarAndWide::
     .string "…is inhabited far and wide by\n"
-    .string "creatures called POKéMON.\p$"
+    .string "creatures called DAEMONS.\p$"
 
 gOakSpeech_Text_IStudyPokemon::
-    .string "For some people, POKéMON are pets.\n"
-    .string "Others use them for battling.\p"
+    .string "For some people, DAEMONS are\n"
+    .string "companions. Others BENCHMARK them.\p"
     .string "As for myself…\p"
-    .string "I study POKéMON as a profession.\p$"
+    .string "I study DAEMONS as a profession.\p$"
 
 gOakSpeech_Text_TellMeALittleAboutYourself::
     .string "But first, tell me a little about\n"
@@ -244,10 +242,10 @@ gOakSpeech_Text_SoYourNameIsPlayer::
     .string "So your name is {PLAYER}.$"
 
 gOakSpeech_Text_WhatWasHisName::
-    .string "This is my grandson.\p"
-    .string "He's been your rival since you both\n"
-    .string "were babies.\p"
-    .string "…Erm, what was his name now?$"
+    .string "This is my grandchild.\p"
+    .string "They have been your rival since you\n"
+    .string "were both small.\p"
+    .string "…Erm, what was their name now?$"
 
 gOakSpeech_Text_YourRivalsNameWhatWasIt::
     .string "Your rival's name, what was it now?$"
@@ -257,11 +255,11 @@ gOakSpeech_Text_ConfirmRivalName::
 
 gOakSpeech_Text_RememberRivalsName::
     .string "That's right! I remember now!\n"
-    .string "His name is {RIVAL}!\p$"
+    .string "Their name is {RIVAL}!\p$"
 
 gOakSpeech_Text_LetsGo::
     .string "{PLAYER}!\p"
-    .string "Your very own POKéMON legend is\n"
-    .string "about to unfold!\p"
-    .string "A world of dreams and adventures\n"
-    .string "with POKéMON awaits! Let's go!$"
+    .string "Your INDEX is empty and the first\n"
+    .string "BENCHMARK is waiting.\p"
+    .string "There is a great deal out there that\n"
+    .string "nobody has written down. Let's go!$"

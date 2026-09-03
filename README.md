@@ -8,18 +8,21 @@ older sense underneath it. The type chart is not a balance table; it is an
 argument about how a mind resolves what it is given. Everything else follows
 from that.
 
-**This repository is an engine, and it is not yet the engine.** The design lives
-next door in [**CodeMusic/DAEMONS**][daemons] — a design bible, a changelog, the
-lineage of the ideas. The Game Boy build is [**CodeMusic/pokered-daemons**][gb],
-and that is where the vertical slice actually is.
+**This repository is the engine.** The design lives next door in
+[**CodeMusic/DAEMONS**][daemons] — a design bible, a changelog, the lineage of
+the ideas. The Game Boy build, [**CodeMusic/pokered-daemons**][gb], is where the
+vertical slice was built; it is kept as a reference and is not updated further.
 
 ## Why this fork exists
 
-It is a **spike, not a decision.** It was forked on 2026-09-02 to answer one
-question, recorded in the bible as §9.3:
+It began as a **spike** on 2026-09-02, to answer one question recorded in the
+bible as §9.3:
 
 > Are abilities, item descriptions and a real scripting language worth
 > rebuilding 334 files for?
+
+**The answer came back yes within a day, and the project pivoted here on
+2026-09-03.**
 
 Colour is not the argument. Three things are:
 
@@ -36,8 +39,8 @@ player saw grey because that is what the hardware *was* — and on GBA greyscale
 is a preference. And **the chart goes from 15 types to 17**, in a design whose
 §2 calls the fifteen names a complete set.
 
-Until that question is answered, **neither engine is deleted** and work is not
-ported back out of this one.
+**Neither engine is deleted.** The Game Boy build still compiles and still runs
+the slice; it is a reference, not a casualty.
 
 ## It builds two ROMs
 
@@ -144,6 +147,9 @@ their `.sha1` byte for byte** — the scaffolding is inert when it is off.
 | 4 music tracks | re-emitted as MIDI, because nothing can be copied |
 | The copyright screen | three lines, in the Game Boy screen's own font |
 | The eight MARKS | as badge names, which is where Gen 3 keeps them |
+| Player and rival names | PIP / CONTENT / CODE against AL / CONTEXT / LUCID |
+| The intro, and Crystal's speech | including the question that used to ask your gender |
+| The ID number | derived from the choices you made, not rolled |
 
 **Colour is by type**, which makes it information rather than decoration — a
 daemon is coloured by what it *is*, so the palette is another way of reading the

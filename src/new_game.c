@@ -197,6 +197,45 @@ static void DaemonsDebug_GrantTestKit(void)
 }
 #endif
 
+// The ID number is a record of what you chose.
+//
+// Vanilla rolls 32 random bits and shows you the low sixteen, which is a number
+// that means nothing. Ours derives the visible half from the choices actually
+// made at the front of the game -- your name, your rival's name, which edition
+// this is, and whether it is a testing build -- and leaves the last five bits
+// to chance.
+//
+// So two players who chose the same things land within 32 of each other and
+// everyone else lands somewhere else entirely: the number tells you what was
+// chosen, and the last two digits do not. Nobody is told this, and nothing in
+// the game remarks on it.
+//
+// The high sixteen bits stay random. They are never displayed, and they are
+// half of what decides whether a daemon is shiny -- deriving those from a name
+// would quietly make shininess a function of what you typed.
+static void DaemonsDeriveTrainerId(void)
+{
+    u32 sig = 2166136261u;                 // FNV-1a, for no reason but that it is short
+    const u8 *p;
+    u32 i;
+
+    for (p = gSaveBlock2Ptr->playerName, i = 0; i < PLAYER_NAME_LENGTH && p[i] != EOS; i++)
+        sig = (sig ^ p[i]) * 16777619u;
+    for (p = gSaveBlock1Ptr->rivalName, i = 0; i < PLAYER_NAME_LENGTH && p[i] != EOS; i++)
+        sig = (sig ^ p[i]) * 16777619u;
+#if defined(FIRERED)
+    sig = (sig ^ 'C') * 16777619u;         // CONTENT
+#else
+    sig = (sig ^ 'X') * 16777619u;         // CONTEXT
+#endif
+#if DAEMONS_DEBUG
+    sig = (sig ^ 'D') * 16777619u;
+#endif
+
+    SetTrainerId(((Random() << 16) | (((sig & 0x7FF) << 5) | (Random() & 0x1F))),
+                 gSaveBlock2Ptr->playerTrainerId);
+}
+
 void NewGameInitData(void)
 {
     u8 rivalName[PLAYER_NAME_LENGTH + 1];
@@ -242,6 +281,7 @@ void NewGameInitData(void)
     RunScriptImmediately(EventScript_ResetAllMapFlags);
     StringCopy(gSaveBlock1Ptr->rivalName, rivalName);
     ResetTrainerTowerResults();
+    DaemonsDeriveTrainerId();
 #if DAEMONS_DEBUG
     DaemonsDebug_GrantTestKit();
 #endif
