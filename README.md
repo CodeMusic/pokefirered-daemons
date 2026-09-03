@@ -92,22 +92,26 @@ A new game starts with six daemons chosen for their **abilities**, one of each
 **kind** of item so the description window can be read, all eight badges, and
 999999. **Hold B** to walk through grass unmolested.
 
-Four field hotkeys, held with **L**:
+**START → DEBUG** does the two things you want most: **full restore and a full
+bag**, from somewhere you can find without being told.
+
+The rest are field hotkeys, held with **SELECT**:
 
 | GBA | mGBA default keys | |
 |---|---|---|
-| **L + R** | hold `A`, press `S` | heal the party — the POKéCENTER jingle, and a message |
-| **L + SELECT** | hold `A`, press `Backspace` | restock items and money — the item fanfare, and a message |
-| **L + A** | hold `A`, press `X` | next song, and its number on screen |
-| **L + B** | hold `A`, press `Z` | put the map's own song back |
+| **SELECT + A** | hold `Backspace`, press `X` | heal the party — the POKéCENTER jingle, and a message |
+| **SELECT + B** | hold `Backspace`, press `Z` | restock items and money — the item fanfare, and a message |
+| **SELECT + UP** | hold `Backspace`, press `↑` | next song, and its number on screen |
+| **SELECT + DOWN** | hold `Backspace`, press `↓` | put the map's own song back |
 
-Every one of them answers: the fanfare the game already uses for that idea, and
-a message box. A tool that changes hidden state and says nothing is
-indistinguishable from a tool that did not run.
+The message stays while SELECT is held and goes when it is released — which is
+also how it is dismissed. `ShowFieldMessage` opens a box and there is no script
+running to close it again, so something has to.
 
-The buttons are the ones that **do not move the player**. `UP`/`DOWN` were the
-obvious pick for a song list and they are wrong — holding L does not stop the
-avatar walking, so browsing the soundtrack would march you into a wall.
+**SELECT is the modifier because L and R are not available:** FireRed opens its
+Help System on either of them, so every combo built on L fought the game and
+lost. SELECT uses the registered key item, and nothing is registered in a fresh
+save.
 
 mGBA's stock keyboard map is worth writing down, because **`L` is the keyboard
 `A`, which is not the GBA A button**:
@@ -119,12 +123,12 @@ mGBA's stock keyboard map is worth writing down, because **`L` is the keyboard
 | Start | `Enter` | | Select | `Backspace` |
 | D-pad | arrow keys | | | |
 
-Rebind under **Settings → Controls**. If you ever turn on FireRed's
-`BUTTON MODE: L=A` option, L stops being free and these hotkeys will fight it.
+Rebind under **Settings → Controls**.
 
-They are hotkeys rather than a menu on purpose. A proper submenu means window
-templates, a task, a callback and a tilemap — a day of UI for tools that exist
-to save time.
+A nested DEBUG menu — HEAL, MART, MUSIC by name, SFX — is the right shape and is
+not built yet. It needs another window template, another task, another input
+loop and a 348-song list to page through, and it goes into the menu the player
+opens most.
 
 It is scaffolding for the question above rather than a general debug menu.
 `DAEMONS_DEBUG=1` suffixes `BUILD_NAME`, so it is a **separate ROM with its own
