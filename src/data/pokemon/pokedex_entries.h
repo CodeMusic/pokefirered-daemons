@@ -1731,7 +1731,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_EEVEE] =
     {
-        .categoryName = _("GENERAL"),
+        .categoryName = _("UNSET"),
         .height = 3,
         .weight = 65,
         .description = gEeveePokedexText,
@@ -1861,7 +1861,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SNORLAX] =
     {
-        .categoryName = _("SLEEPING"),
+        .categoryName = _("BLOCKED"),
         .height = 21,
         .weight = 4600,
         .description = gSnorlaxPokedexText,

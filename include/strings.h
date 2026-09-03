@@ -628,6 +628,7 @@ extern const u8 gText_MenuBag[];
 extern const u8 gText_MenuPlayer[];
 extern const u8 gText_MenuSave[];
 extern const u8 gText_MenuOption[];
+extern const u8 gText_MenuDebug[];
 extern const u8 gText_MenuExit[];
 extern const u8 gText_MenuRetire[];
 extern const u8 gText_MenuSafariStats[];

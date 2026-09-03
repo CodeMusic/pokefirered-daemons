@@ -13,6 +13,14 @@
 #include "fieldmap.h"
 #include "safari_zone.h"
 #include "start_menu.h"
+#if DAEMONS_DEBUG
+#include "item.h"
+#include "money.h"
+#include "script_pokemon_util.h"
+#include "sound.h"
+#include "constants/items.h"
+#include "constants/songs.h"
+#endif
 #include "menu.h"
 #include "load_save.h"
 #include "strings.h"
@@ -49,6 +57,9 @@ enum StartMenuOption
     STARTMENU_EXIT,
     STARTMENU_RETIRE,
     STARTMENU_PLAYER2,
+#if DAEMONS_DEBUG
+    STARTMENU_DEBUG,
+#endif
     MAX_STARTMENU_ITEMS
 };
 
@@ -88,6 +99,9 @@ static bool8 StartMenuOptionCallback(void);
 static bool8 StartMenuExitCallback(void);
 static bool8 StartMenuSafariZoneRetireCallback(void);
 static bool8 StartMenuLinkPlayerCallback(void);
+#if DAEMONS_DEBUG
+static bool8 StartMenuDaemonsDebugCallback(void);
+#endif
 static bool8 StartCB_Save1(void);
 static bool8 StartCB_Save2(void);
 static void StartMenu_PrepareForSave(void);
@@ -122,7 +136,10 @@ static const struct MenuAction sStartMenuActionTable[] = {
     [STARTMENU_OPTION]  = { gText_MenuOption,  {.u8_void = StartMenuOptionCallback} },
     [STARTMENU_EXIT]    = { gText_MenuExit,    {.u8_void = StartMenuExitCallback} },
     [STARTMENU_RETIRE]  = { gText_MenuRetire,  {.u8_void = StartMenuSafariZoneRetireCallback} },
-    [STARTMENU_PLAYER2] = { gText_MenuPlayer,  {.u8_void = StartMenuLinkPlayerCallback} }
+    [STARTMENU_PLAYER2] = { gText_MenuPlayer,  {.u8_void = StartMenuLinkPlayerCallback} },
+#if DAEMONS_DEBUG
+    [STARTMENU_DEBUG]   = { gText_MenuDebug,   {.u8_void = StartMenuDaemonsDebugCallback} }
+#endif
 };
 
 static const struct WindowTemplate sSafariZoneStatsWindowTemplate = {
@@ -220,6 +237,9 @@ static void SetUpStartMenu_NormalField(void)
     AppendToStartMenuItems(STARTMENU_PLAYER);
     AppendToStartMenuItems(STARTMENU_SAVE);
     AppendToStartMenuItems(STARTMENU_OPTION);
+#if DAEMONS_DEBUG
+    AppendToStartMenuItems(STARTMENU_DEBUG);
+#endif
     AppendToStartMenuItems(STARTMENU_EXIT);
 }
 
@@ -534,6 +554,40 @@ static bool8 StartMenuOptionCallback(void)
     }
     return FALSE;
 }
+
+#if DAEMONS_DEBUG
+// One entry, one action, no submenu.
+//
+// A nested DEBUG menu -- HEAL, MART, MUSIC by name, SFX -- is the right shape
+// and it is a real piece of UI: another window template, another task, another
+// input loop, and a list of three hundred and forty-eight songs to page
+// through. That is worth building WITH someone testing it, not pushed
+// unattended into the one menu the player opens most.
+//
+// So this is the half that carries no risk: full restore and a full bag, from
+// somewhere you can find without being told. The song and SFX browsers stay on
+// the SELECT hotkeys until the menu is built properly.
+static bool8 StartMenuDaemonsDebugCallback(void)
+{
+    static const u16 kit[][2] = {
+        { ITEM_ULTRA_BALL,   20 }, { ITEM_HYPER_POTION, 20 },
+        { ITEM_FULL_RESTORE, 10 }, { ITEM_REVIVE,       10 },
+        { ITEM_FIRE_STONE,    5 }, { ITEM_THUNDER_STONE, 5 },
+        { ITEM_WATER_STONE,   5 }, { ITEM_LEAF_STONE,    5 },
+    };
+    u32 i;
+
+    HealPlayerParty();
+    for (i = 0; i < ARRAY_COUNT(kit); i++)
+        AddBagItem(kit[i][0], kit[i][1]);
+    SetMoney(&gSaveBlock1Ptr->money, 999999);
+    PlayFanfare(MUS_HEAL);
+    DestroySafariZoneStatsWindow();
+    DestroyHelpMessageWindow_();
+    CloseStartMenu();
+    return TRUE;
+}
+#endif
 
 static bool8 StartMenuExitCallback(void)
 {

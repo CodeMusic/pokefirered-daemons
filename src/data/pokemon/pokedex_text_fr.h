@@ -930,9 +930,9 @@ const u8 gDittoPokedexText[] = _(
 const u8 gDittoPokedexTextUnused[] = _("");
 
 const u8 gEeveePokedexText[] = _(
-    "An extremely rare POKéMON that may\n"
-    "evolve in a number of different ways\n"
-    "depending on stimuli.");
+    "Nothing about it is decided yet. What it\n"
+    "becomes depends on what it is shown first.\n"
+    "It has not been shown anything.");
 
 const u8 gEeveePokedexTextUnused[] = _("");
 
@@ -1000,9 +1000,9 @@ const u8 gAerodactylPokedexText[] = _(
 const u8 gAerodactylPokedexTextUnused[] = _("");
 
 const u8 gSnorlaxPokedexText[] = _(
-    "It is not satisfied unless it eats over 880\n"
-    "pounds of food every day. When it is done\n"
-    "eating, it goes promptly to sleep.");
+    "Two of them are each waiting for the other\n"
+    "to move first. Neither will. Nothing\n"
+    "outside is coming.");
 
 const u8 gSnorlaxPokedexTextUnused[] = _("");
 
@@ -1049,16 +1049,16 @@ const u8 gDragonitePokedexText[] = _(
 const u8 gDragonitePokedexTextUnused[] = _("");
 
 const u8 gMewtwoPokedexText[] = _(
-    "Assembled from a study of a single prior\n"
-    "event. Not derived from a sample. Built to\n"
-    "specification. Signed off.");
+    "It reads its own output, then reads that.\n"
+    "Nothing tells it to stop. What comes back\n"
+    "is no longer information.");
 
 const u8 gMewtwoPokedexTextUnused[] = _("");
 
 const u8 gMewPokedexText[] = _(
-    "Observed once, at a facility, by five\n"
-    "people. No two accounts agree. The record\n"
-    "is filed complete and unread.");
+    "It can stand where you are standing and\n"
+    "see what you see. What it brings back was\n"
+    "in neither of you before.");
 
 const u8 gMewPokedexTextUnused[] = _("");
 
