@@ -8,6 +8,14 @@
 #include "event_scripts.h"
 #include "fieldmap.h"
 #include "field_control_avatar.h"
+#if DAEMONS_DEBUG
+#include "script_pokemon_util.h"
+#include "item.h"
+#include "money.h"
+#include "sound.h"
+#include "constants/items.h"
+#include "constants/songs.h"
+#endif
 #include "field_fadetransition.h"
 #include "field_player_avatar.h"
 #include "field_poison.h"
@@ -190,6 +198,68 @@ static void QuestLogOverrideJoyVars(struct FieldInput *input, u16 *newKeys, u16 
     ClearQuestLogInput();
 }
 
+#if DAEMONS_DEBUG
+// Field hotkeys, not a menu.
+//
+// pokefirered ships no debug build at all, so there was nothing to extend.
+// Building a proper submenu means window templates, a task, a callback and a
+// tilemap -- a day of UI for tools that exist to save time. These are four
+// combos in the one function every overworld frame already calls, and they
+// cover what testing actually needs: get healthy, get equipped, hear a track.
+//
+//   L + R        heal the party where you stand -- a POKeCENTER on demand
+//   L + SELECT   restock: balls, medicine, the four inputs, and money
+//   L + UP       next song, and play it
+//   L + DOWN     previous song
+//
+// The song walk is deliberately dumb: it steps through every ID in the table,
+// including the sound effects, because the point is to reach ours quickly and
+// they sit at the far end. MUS_BRAZEN is the last entry, at 347.
+static const u16 sDebugRestock[][2] = {
+    { ITEM_ULTRA_BALL,   20 }, { ITEM_HYPER_POTION, 20 },
+    { ITEM_FULL_RESTORE, 10 }, { ITEM_REVIVE,       10 },
+    { ITEM_FIRE_STONE,    5 }, { ITEM_THUNDER_STONE, 5 },
+    { ITEM_WATER_STONE,   5 }, { ITEM_LEAF_STONE,    5 },
+};
+
+static void DaemonsDebug_FieldHotkeys(void)
+{
+    // Zero-initialised on purpose. An initialised mutable static lands in
+    // .data, and ld_script.ld does not take a .data section from this object --
+    // it fails to link as "defined in discarded section", which is a strange
+    // error to get from a debug convenience. Zero goes to .bss, and zero means
+    // "not started yet".
+    static u16 song;
+    u32 i;
+
+    if (song == 0)
+        song = MUS_BRAZEN;
+
+    if (!JOY_HELD(L_BUTTON))
+        return;
+
+    if (JOY_NEW(R_BUTTON))
+    {
+        HealPlayerParty();
+        PlaySE(SE_SUCCESS);
+    }
+    else if (JOY_NEW(SELECT_BUTTON))
+    {
+        for (i = 0; i < ARRAY_COUNT(sDebugRestock); i++)
+            AddBagItem(sDebugRestock[i][0], sDebugRestock[i][1]);
+        SetMoney(&gSaveBlock1Ptr->money, 999999);
+        PlaySE(SE_DING_DONG);
+    }
+    else if (JOY_NEW(DPAD_UP) || JOY_NEW(DPAD_DOWN))
+    {
+        song += JOY_NEW(DPAD_UP) ? 1 : -1;
+        if (song > MUS_BRAZEN)
+            song = JOY_NEW(DPAD_UP) ? 1 : MUS_BRAZEN;
+        PlayNewMapMusic(song);
+    }
+}
+#endif
+
 int ProcessPlayerFieldInput(struct FieldInput *input)
 {
     struct MapPosition position;
@@ -205,6 +275,10 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
 
     FieldClearPlayerInput(&gFieldInputRecord);
     gFieldInputRecord.dpadDirection = input->dpadDirection;
+
+#if DAEMONS_DEBUG
+    DaemonsDebug_FieldHotkeys();
+#endif
 
     if (CheckForTrainersWantingBattle() == TRUE)
         return TRUE;

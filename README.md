@@ -89,6 +89,18 @@ A new game starts with six daemons chosen for their **abilities**, one of each
 **kind** of item so the description window can be read, all eight badges, and
 999999. **Hold B** to walk through grass unmolested.
 
+Four field hotkeys, held with **L**:
+
+| | |
+|---|---|
+| **L + R** | heal the party where you stand — a POKéCENTER on demand |
+| **L + SELECT** | restock: balls, medicine, the four inputs, and money |
+| **L + UP / DOWN** | walk the song table and play it — ours are at the far end |
+
+They are hotkeys rather than a menu on purpose. A proper submenu means window
+templates, a task, a callback and a tilemap — a day of UI for tools that exist
+to save time.
+
 It is scaffolding for the question above rather than a general debug menu.
 `DAEMONS_DEBUG=1` suffixes `BUILD_NAME`, so it is a **separate ROM with its own
 save** and a debug run never touches a real playthrough. It is deliberately not
@@ -107,7 +119,8 @@ their `.sha1` byte for byte** — the scaffolding is inert when it is off.
 | 30 Index categories and entries | reflowed from six short lines to three long ones |
 | 14 town names | Blanche, Slate, Doldrum, Halftone, Ardor, Verdigris… |
 | 66 sprites | front and back, **coloured by type** |
-| 3 music tracks | re-emitted as MIDI, because nothing can be copied |
+| 4 music tracks | re-emitted as MIDI, because nothing can be copied |
+| The eight MARKS | as badge names, which is where Gen 3 keeps them |
 
 **Colour is by type**, which makes it information rather than decoration — a
 daemon is coloured by what it *is*, so the palette is another way of reading the
@@ -120,14 +133,18 @@ trainers — is untouched upstream. **The tools that did the porting live in
 
 ## What is not ported, and why
 
-- **The eight MARKS.** Badges are not items in Gen 3 — `items.h` contains the
-  string `BADGE` zero times — so there is no slot to rename and no description
-  surface. They are flags plus a Trainer Card display.
-- **`CONSENSUS`.** §2.5 added it as a move on the Game Boy. Here it is an
-  addition rather than a rename, and needs its own slot.
-- **`brazen`**, the Saffron theme. FireRed ships no `mus_saffron`; that city
-  shares a theme, so a slot means either taking one from a city we also renamed
-  or moving every song index. A decision, not a lookup.
+- **`CONSENSUS`.** §2.5 added it as a move on the Game Boy, where it had to be
+  *inserted* before STRUGGLE because the AI treats any ID above STRUGGLE as
+  "not a move". Gen 3 has 355 moves to Gen 1's 166 and no such assert, so here
+  it is an append — but it still needs a slot, a name, an animation and a
+  battle script, and none of that is a rename.
+- **Item descriptions for anything we did not rename.** Twelve are written. The
+  rest are still upstream's.
+
+The MARKS *are* ported now. An earlier version of this file said they were not:
+badges have no bag slot and no description in Gen 3, which is true, but they do
+have **names**, as individual symbols in `src/strings.c`. "Not an item" is not
+the same as "has no name".
 
 ## Branches
 
