@@ -91,11 +91,24 @@ A new game starts with six daemons chosen for their **abilities**, one of each
 
 Four field hotkeys, held with **L**:
 
-| | |
-|---|---|
-| **L + R** | heal the party where you stand — a POKéCENTER on demand |
-| **L + SELECT** | restock: balls, medicine, the four inputs, and money |
-| **L + UP / DOWN** | walk the song table and play it — ours are at the far end |
+| GBA | mGBA default keys | |
+|---|---|---|
+| **L + R** | hold `A`, press `S` | heal the party where you stand — a POKéCENTER on demand |
+| **L + SELECT** | hold `A`, press `Backspace` | restock: balls, medicine, the four inputs, and money |
+| **L + UP / DOWN** | hold `A`, press `↑` / `↓` | walk the song table and play it — ours are at the far end |
+
+mGBA's stock keyboard map is worth writing down, because **`L` is the keyboard
+`A`, which is not the GBA A button**:
+
+| GBA | key | | GBA | key |
+|---|---|---|---|---|
+| A | `X` | | L | `A` |
+| B | `Z` | | R | `S` |
+| Start | `Enter` | | Select | `Backspace` |
+| D-pad | arrow keys | | | |
+
+Rebind under **Settings → Controls**. If you ever turn on FireRed's
+`BUTTON MODE: L=A` option, L stops being free and these hotkeys will fight it.
 
 They are hotkeys rather than a menu on purpose. A proper submenu means window
 templates, a task, a callback and a tilemap — a day of UI for tools that exist
