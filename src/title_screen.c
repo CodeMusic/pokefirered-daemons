@@ -1017,8 +1017,12 @@ static void CreateFaceOff(void)
     left  = CreateSprite(&sSpriteTemplate_FaceOffCare,  FACEOFF_LEFT_X,  FACEOFF_Y, 1);
     right = CreateSprite(&sSpriteTemplate_FaceOffCode,  FACEOFF_RIGHT_X, FACEOFF_Y, 1);
 #endif
+    // Sprite.hFlip is copied into the OAM by the ANIMATION system, and these
+    // two have no animation -- gDummySpriteAnimTable never runs, so the field
+    // was set and never read. For a non-affine sprite the flip lives in
+    // oam.matrixNum, so put it there.
     if (right != MAX_SPRITES)
-        gSprites[right].hFlip = TRUE;
+        gSprites[right].oam.matrixNum = ST_OAM_HFLIP;
     (void)left;
 }
 
