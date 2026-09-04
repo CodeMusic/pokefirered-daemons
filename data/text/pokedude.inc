@@ -11,7 +11,7 @@ Pokedude_Text_BattlersTakeTurnsAttacking::
 	.string "and reducing each other's HP.$"
 
 Pokedude_Text_MyRattataWonGetsEXP::
-	.string "My NIBBLE reduced the remote's HP\n"
+	.string "My NIBBLE reduced the foe's HP\n"
 	.string "to zero, so it wins!\p"
 	.string "The DAEMON that took part in the\n"
 	.string "battle get EXP. Points.\p"
