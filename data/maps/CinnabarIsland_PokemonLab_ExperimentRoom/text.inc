@@ -52,9 +52,9 @@ CinnabarIsland_PokemonLab_ExperimentRoom_Text_NoRoomForPokemon::
     .string "ポケモン　いっぱいで　もてないね！$"
 
 CinnabarIsland_PokemonLab_ExperimentRoom_Text_ThatFossilIsOfMonMakeItLiveAgain::
-    .string "Oh! That is {STR_VAR_2}, it is!\p"
-    .string "It is fossil of {STR_VAR_1}, a DAEMON\n"
-    .string "that is already extinct!\p"
+    .string "Oh! That is !\p"
+    .string "It is fossil of , a DAEMON that is\n"
+    .string "already extinct!\p"
     .string "My Resurrection Machine will make\n"
     .string "that DAEMONS live again!$"
 

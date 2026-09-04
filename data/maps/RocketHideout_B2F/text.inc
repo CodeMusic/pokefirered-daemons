@@ -1,12 +1,11 @@
 RocketHideout_B2F_Text_GruntIntro::
-    .string "BOSS said you can see ghosts with\n"
-    .string "the SILPH SCOPE.$"
+    .string "BOSS said you can see GHOSTs with\n"
+    .string "the RESOLVER!$"
 
 RocketHideout_B2F_Text_GruntDefeat::
     .string "I surrender!$"
 
 RocketHideout_B2F_Text_GruntPostBattle::
-    .string "The TEAM CORPUS HQ has four\n"
-    .string "underground floors.\p"
-    .string "Think you can reach the BOSS?$"
+    .string "The TEAM CORPUS HQ has 4 basement\n"
+    .string "floors. Can you reach the BOSS?$"
 

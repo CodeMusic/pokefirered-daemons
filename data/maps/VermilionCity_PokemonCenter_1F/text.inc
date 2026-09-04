@@ -1,13 +1,13 @@
 VermilionCity_PokemonCenter_1F_Text_TrainerMonsStrongerThanWild::
     .string "Even if they are the same level,\n"
     .string "DAEMON can have very different\l"
-    .string "stats and abilities.\p"
+    .string "abilities.\p"
     .string "A DAEMON raised by a USER is\n"
     .string "stronger than one in the wild.$"
 
 VermilionCity_PokemonCenter_1F_Text_PoisonedMonFaintedWhileWalking::
-    .string "My DAEMONS was poisoned! It\n"
-    .string "HALTED while we were walking!$"
+    .string "My DAEMON was poisoned! It HALTED\n"
+    .string "while we were walking!$"
 
 VermilionCity_PokemonCenter_1F_Text_AllMonWeakToSpecificTypes::
     .string "It is true that a higher-level\n"

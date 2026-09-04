@@ -1,25 +1,21 @@
 CeladonCity_Gym_Text_ErikaIntro::
-    .string "Hello… Lovely weather, isn't it? It's\n"
-    .string "so pleasant…\p"
-    .string "…Oh, dear… I must have dozed off.\n"
-    .string "Welcome.\p"
+    .string "Hello. Lovely weather isn't it? It's\n"
+    .string "so pleasant.\p"
+    .string "...Oh dear... I must have dozed\n"
+    .string "off. Welcome.\p"
     .string "My name is ERIKA. I am the LEADER\n"
     .string "of VERDIGRIS GYM.\p"
-    .string "I am a student of the art of\n"
-    .string "flower arranging.\p"
-    .string "My DAEMONS are solely of the\n"
-    .string "GRASS type.\p"
-    .string "…Oh, I'm sorry, I had no idea that\n"
+    .string "I teach the art of flower\n"
+    .string "arranging. My DAEMONS are of the\l"
+    .string "grass-type.\p"
+    .string "Oh, I'm sorry, I had no idea that\n"
     .string "you wished to challenge me.\p"
-    .string "Very well, but I shall not\n"
-    .string "lose.{PLAY_BGM MUS_ENCOUNTER_GYM_LEADER}$"
+    .string "Very well, but I shall not lose.$"
 
 CeladonCity_Gym_Text_ErikaDefeat::
-    .string "Oh!\n"
-    .string "I concede defeat.\l"
+    .string "Oh! I concede defeat.\p"
     .string "You are remarkably strong.\p"
-    .string "I must confer on you the\n"
-    .string "RAINBOWBADGE.$"
+    .string "I must confer you the FIT MARK.$"
 
 CeladonCity_Gym_Text_ErikaPostBattle::
     .string "You are cataloging DAEMON? I must\n"
@@ -28,8 +24,8 @@ CeladonCity_Gym_Text_ErikaPostBattle::
     .string "they were unattractive.$"
 
 CeladonCity_Gym_Text_ExplainRainbowBadgeTakeThis::
-    .string "The RAINBOWBADGE will make DAEMON\n"
-    .string "up to Lv. 50 obey.\p"
+    .string "The FIT MARK will make DAEMON up\n"
+    .string "to L50 obey.\p"
     .string "It also allows DAEMON to use\n"
     .string "STRENGTH in and out of battle.\p"
     .string "Please also take this with you.$"
@@ -68,10 +64,10 @@ CeladonCity_Gym_Text_BridgetDefeat::
     .string "My makeup!$"
 
 CeladonCity_Gym_Text_BridgetPostBattle::
-    .string "GRASS-type DAEMONS are tough\n"
-    .string "against the WATER type.\p"
-    .string "They also have an edge on ROCK-\n"
-    .string "and GROUND-type DAEMON.$"
+    .string "Grass-type DAEMONS are tough\n"
+    .string "against the water-type!\p"
+    .string "They also have an edge on rock\n"
+    .string "and ground DAEMON!$"
 
 CeladonCity_Gym_Text_TinaIntro::
     .string "…Weren't you peeking in here\n"
@@ -126,8 +122,8 @@ CeladonCity_Gym_Text_LoriPostBattle::
 
 CeladonCity_Gym_Text_MaryIntro::
     .string "Welcome to VERDIGRIS GYM!\p"
-    .string "You'd better not underestimate the\n"
-    .string "nice ladies here.$"
+    .string "You better not underestimate girl\n"
+    .string "power!$"
 
 CeladonCity_Gym_Text_MaryDefeat::
     .string "Oh!\n"

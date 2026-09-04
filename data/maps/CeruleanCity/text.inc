@@ -15,15 +15,15 @@ CeruleanCity_Text_RivalDefeat::
 CeruleanCity_Text_RivalPostBattle::
     .string "{RIVAL}: Hey, guess what?\p"
     .string "I went to HOLT's and got him to\n"
-    .string "show me his rare DAEMON.\p"
+    .string "show me his rare DAEMON!\p"
     .string "That added a lot of pages to my\n"
     .string "INDEX!\p"
-    .string "After all, HOLT's world famous as a\n"
-    .string "POKéMANIAC.\p"
-    .string "He invented the DAEMON Storage\n"
-    .string "System on PC, too.\p"
-    .string "Since you're using his system, you\n"
-    .string "should go thank him.\p"
+    .string "After all, HOLT's world famous as\n"
+    .string "an ARCHIVIST!\p"
+    .string "He invented the storage system we\n"
+    .string "all use!\p"
+    .string "Since you're using his system, go\n"
+    .string "thank him!\p"
     .string "Well, I better get rolling! Smell\n"
     .string "ya later!$"
 
@@ -76,9 +76,8 @@ CeruleanCity_Text_MakeRoomForThisCantRun::
     .string "I can't run until I give it to you!$"
 
 CeruleanCity_Text_TrainerLifeIsToughIsntIt::
-    .string "You're a USER, too?\p"
-    .string "Collecting, battling… It's a tough\n"
-    .string "life, isn't it?$"
+    .string "You're a USER too? Collecting,\n"
+    .string "fighting, it's a tough life.$"
 
 CeruleanCity_Text_YouCanCutDownSmallTrees::
     .string "Did you know that you can CUT down\n"
@@ -104,8 +103,8 @@ CeruleanCity_Text_PeopleHereWereRobbed::
     .string "The people here were robbed.\p"
     .string "It's obvious that TEAM CORPUS is\n"
     .string "behind this most heinous crime!\p"
-    .string "Even our POLICE FORCE has trouble\n"
-    .string "with the CORPUS!$"
+    .string "Even our POLICE force has trouble\n"
+    .string "with CORPUS!$"
 
 CeruleanCity_Text_SlowbroUseSonicboom::
     .string "Okay! SLOWBRO!\n"
@@ -125,10 +124,11 @@ CeruleanCity_Text_SlowbroWithdraw::
     .string "SLOWBRO, WITHDRAW!$"
 
 CeruleanCity_Text_HardToControlMonsObedience::
-    .string "No! That's wrong! It's so hard to\n"
-    .string "control DAEMON!\p"
+    .string "SLOWBRO, WITHDRAW! No! That's\n"
+    .string "wrong!\p"
+    .string "It's so hard to control DAEMON!\p"
     .string "Your DAEMON's obedience depends on\n"
-    .string "your abilities as a USER.$"
+    .string "your abilities as a USER!$"
 
 CeruleanCity_Text_SlowbroTookSnooze::
     .string "SLOWBRO took a snooze…$"
@@ -143,9 +143,12 @@ CeruleanCity_Text_SlowbroIgnoredOrders::
     .string "SLOWBRO ignored orders…$"
 
 CeruleanCity_Text_WantBrightRedBicycle::
-    .string "I want a bright red bicycle.\p"
-    .string "I'll keep it at home, so it won't\n"
-    .string "get dirty.$"
+    .string "Everyone has the date wrong. Three\n"
+    .string "days before that.\p"
+    .string "Nobody in the room at all. It was\n"
+    .string "a scheduled test.\p"
+    .string "Against the outer wall. I am sure\n"
+    .string "of that much.$"
 
 CeruleanCity_Text_ThisIsCeruleanCave::
     .string "This is DOLDRUM CAVE.\p"
@@ -160,8 +163,10 @@ CeruleanCity_Text_ThisIsCeruleanCave::
     .string "a great achievement.$"
 
 CeruleanCity_Text_CitySign::
-    .string "DOLDRUM CITY A Mysterious, Blue\n"
-    .string "Aura Surrounds It$"
+    .string "DOLDRUM CITY\n"
+    .string "A Mysterious,\l"
+    .string "Blue Aura\l"
+    .string "Surrounds It$"
 
 CeruleanCity_Text_TrainerTipsHeldItems::
     .string "USER TIPS\p"
@@ -175,6 +180,9 @@ CeruleanCity_Text_BikeShopSign::
     .string "BIKE SHOP$"
 
 CeruleanCity_Text_GymSign::
-    .string "DOLDRUM CITY DAEMON GYM LEADER:\n"
-    .string "MISTY The Tomboyish Mermaid!$"
+    .string "DOLDRUM CITY\n"
+    .string "DAEMON GYM\l"
+    .string "LEADER: MISTY\p"
+    .string "The Tomboyish\n"
+    .string "Mermaid!$"
 

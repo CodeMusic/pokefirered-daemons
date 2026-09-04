@@ -24,8 +24,7 @@ RockTunnel_B1F_Text_DudleyPostBattle::
     .string "thinking.$"
 
 RockTunnel_B1F_Text_CooperIntro::
-    .string "You have a INDEX? I want one,\n"
-    .string "too.$"
+    .string "You have a INDEX? I want one too!$"
 
 RockTunnel_B1F_Text_CooperDefeat::
     .string "Shoot!\n"
@@ -79,7 +78,7 @@ RockTunnel_B1F_Text_EricDefeat::
 
 RockTunnel_B1F_Text_EricPostBattle::
     .string "I'll raise my DAEMONS to beat\n"
-    .string "yours, kid.$"
+    .string "yours, kid!$"
 
 RockTunnel_B1F_Text_WinstonIntro::
     .string "I draw illustrations of DAEMON when\n"

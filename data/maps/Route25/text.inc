@@ -1,24 +1,23 @@
 Route25_Text_JoeyIntro::
-    .string "Local USERS come here to practice.$"
+    .string "Local USERS come here to\n"
+    .string "practice!$"
 
 Route25_Text_JoeyDefeat::
     .string "You're decent.$"
 
 Route25_Text_JoeyPostBattle::
-    .string "All DAEMONS have weaknesses. Even\n"
-    .string "the strongest ones.\p"
-    .string "That's why it's best to raise\n"
-    .string "DAEMONS of different types.$"
+    .string "All DAEMONS have weaknesses. It's\n"
+    .string "best to raise different kinds.$"
 
 Route25_Text_DanIntro::
     .string "Dad took me to a great party on\n"
-    .string "the S.S. ANNE at ARDOR CITY.$"
+    .string "S.S.ANNE at ARDOR CITY!$"
 
 Route25_Text_DanDefeat::
     .string "I'm not mad!$"
 
 Route25_Text_DanPostBattle::
-    .string "On the S.S. ANNE, I saw USERS from\n"
+    .string "On S.S.ANNE, I saw USERS from\n"
     .string "around the world.$"
 
 Route25_Text_FlintIntro::
@@ -92,8 +91,8 @@ Route25_Text_NobPostBattle::
     .string "species of DAEMON.$"
 
 Route25_Text_WayneIntro::
-    .string "You're going to see HOLT? First, we\n"
-    .string "battle!$"
+    .string "You're going to see HOLT? First,\n"
+    .string "let's fight!$"
 
 Route25_Text_WayneDefeat::
     .string "You're something.$"
@@ -103,7 +102,8 @@ Route25_Text_WaynePostBattle::
     .string "DOLDRUM CITY.$"
 
 Route25_Text_SeaCottageSign::
-    .string "SEA COTTAGE HOLT lives here!$"
+    .string "SEA COTTAGE\n"
+    .string "HOLT lives here!$"
 
 Route25_Text_MistyHighHopesAboutThisPlace::
     .string "This cape is a famous date spot.\p"

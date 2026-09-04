@@ -1,32 +1,32 @@
 FuchsiaCity_Text_DidYouTrySafariGame::
-    .string "Did you try the SAFARI GAME?\p"
-    .string "There are some rare DAEMON that\n"
-    .string "can only be bound there.$"
+    .string "Did you try the SAFARI GAME? Some\n"
+    .string "DAEMONS can only be bound there.$"
 
 FuchsiaCity_Text_SafariZoneZooInFront::
-    .string "The SAFARI ZONE has a zoo in front\n"
-    .string "of the entrance.\p"
+    .string "SAFARI ZONE has a zoo in front of\n"
+    .string "the entrance.\p"
     .string "Out back is the SAFARI GAME for\n"
-    .string "binding DAEMONS.$"
+    .string "binding DAEMON.$"
 
 FuchsiaCity_Text_WheresSara::
     .string "ERIK: Where's SARA?\n"
     .string "I said I'd meet her here.$"
 
 FuchsiaCity_Text_ItemBallInThere::
-    .string "That item ball in there… Were you\n"
-    .string "wanting that?\p"
-    .string "Me, too! …Huh? That's a DAEMON?$"
+    .string "That item box in there is really a\n"
+    .string "DAEMON.$"
 
 FuchsiaCity_Text_CitySign::
-    .string "LURID CITY Behold! It's Passion\n"
-    .string "Pink!$"
+    .string "LURID CITY\n"
+    .string "Behold! It's\l"
+    .string "Passion Pink!$"
 
 FuchsiaCity_Text_SafariZoneSign::
     .string "DAEMON PARADISE SAFARI ZONE$"
 
 FuchsiaCity_Text_SafariGameSign::
-    .string "SAFARI GAME DAEMON-U-CATCH!$"
+    .string "SAFARI GAME\n"
+    .string "DAEMON-U-BIND!$"
 
 FuchsiaCity_Text_WardensHomeSign::
     .string "SAFARI ZONE\n"
@@ -37,16 +37,21 @@ FuchsiaCity_Text_SafariZoneOfficeSign::
     .string "SAFARI ZONE! SAFARI ZONE OFFICE$"
 
 FuchsiaCity_Text_GymSign::
-    .string "LURID CITY DAEMON GYM LEADER:\n"
-    .string "KOGA The Poisonous Ninja Master$"
+    .string "LURID CITY\n"
+    .string "DAEMON GYM\l"
+    .string "LEADER: KOGA\p"
+    .string "The Poisonous\n"
+    .string "Ninja Master$"
 
 FuchsiaCity_Text_ChanseySign::
-    .string "Name: CHANSEY\n"
-    .string "Catching one is all up to chance.$"
+    .string "Name: CHANSEY\p"
+    .string "Binding one is\n"
+    .string "all up to chance.$"
 
 FuchsiaCity_Text_VoltorbSign::
-    .string "Name: VOLTORB\n"
-    .string "The very image of a POKé BALL.$"
+    .string "Name: VOLTORB\p"
+    .string "The very image of\n"
+    .string "a USERBOX.$"
 
 FuchsiaCity_Text_KangaskhanSign::
     .string "Name: KANGASKHAN\p"

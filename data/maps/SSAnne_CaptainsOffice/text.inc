@@ -10,16 +10,13 @@ SSAnne_CaptainsOffice_Text_RubbedCaptainsBack::
     .string "Rub-rub…$"
 
 SSAnne_CaptainsOffice_Text_ThankYouHaveHMForCut::
-    .string "CAPTAIN: Whew! Thank you! I'm\n"
-    .string "feeling much better now.\p"
-    .string "You want to see my hidden CUT\n"
-    .string "technique?\p"
-    .string "I could show you my prized CUT\n"
-    .string "technique if I weren't so ill…\p"
-    .string "I know! You can have this! This\n"
-    .string "HIDDEN MACHINE!\p"
-    .string "Teach CUT to your DAEMON, and you\n"
-    .string "can see it CUT anytime!$"
+    .string "CAPTAIN: Whew! Thank you! I feel\n"
+    .string "much better!\p"
+    .string "You want to see my CUT technique?\p"
+    .string "I could show you if I wasn't ill...\p"
+    .string "I know! You can have this!\p"
+    .string "Teach it to your DAEMONS and you\n"
+    .string "can see it CUT any time!$"
 
 SSAnne_CaptainsOffice_Text_ObtainedHM01FromCaptain::
     .string "{PLAYER} obtained HM01\n"

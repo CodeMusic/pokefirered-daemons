@@ -13,12 +13,9 @@ SaffronCity_CopycatsHouse_2F_Text_MimickingFavoriteHobbyFemale::
     .string "that's my favorite hobby!$"
 
 Text_MimicTeach::
-    .string "Oh wow!\n"
-    .string "A POKé DOLL!\p"
-    .string "For me?\n"
-    .string "Thank you!\p"
-    .string "You know what?\n"
-    .string "I can teach the move MIMIC.$"
+    .string "Oh wow! A POKé DOLL!\p"
+    .string "For me? Thank you!\p"
+    .string "You can have this, then!$"
 
 Text_MimicDeclined::
     .string "Don't you like MIMIC?$"

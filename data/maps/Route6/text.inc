@@ -30,7 +30,7 @@ Route6_Text_KeigoDefeat::
 
 Route6_Text_KeigoPostBattle::
     .string "I like bugs, so I'm going back to\n"
-    .string "CALLOW FOREST.$"
+    .string "THE UNDERTONE.$"
 
 Route6_Text_JeffIntro::
     .string "Huh?\n"
@@ -64,9 +64,10 @@ Route6_Text_ElijahDefeat::
 
 Route6_Text_ElijahPostBattle::
     .string "Are my DAEMONS weak? Or, am I\n"
-    .string "just bad? Which do you think?$"
+    .string "just bad?$"
 
 Route6_Text_UndergroundPathSign::
-    .string "UNDERGROUND PATH DOLDRUM CITY -\n"
+    .string "UNDERGROUND PATH\n"
+    .string "DOLDRUM CITY -\l"
     .string "ARDOR CITY$"
 

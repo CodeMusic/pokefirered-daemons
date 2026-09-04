@@ -114,8 +114,11 @@ Route19_Text_ConniePostBattle::
     .string "keep me dry on water.$"
 
 Route19_Text_RouteSign::
-    .string "SEA ROUTE 19 LURID CITY -\n"
-    .string "SEAFOAM ISLANDS$"
+    .string "SEA ROUTE 19\n"
+    .string "LURID CITY -\l"
+    .string "SEAFOAM ISLANDS\p"
+    .string "Painted beneath:\n"
+    .string "SEAFADE$"
 
 Route19_Text_LiaIntro::
     .string "LIA: I'm looking after my brother.\n"

@@ -7,26 +7,26 @@ SilphCo_3F_Text_YouAndYourMonsSavedUs::
     .string "saved us!$"
 
 SilphCo_3F_Text_GruntIntro::
-    .string "Quit messing with us, kid!$"
+    .string "You are disrupting the rollout.$"
 
 SilphCo_3F_Text_GruntDefeat::
-    .string "I give up!$"
+    .string "Withdrawing.$"
 
 SilphCo_3F_Text_GruntPostBattle::
-    .string "A hint? You can open doors with\n"
-    .string "a CARD KEY!$"
+    .string "Doors need a CARD KEY.\p"
+    .string "Ask your manager for one!$"
 
 SilphCo_3F_Text_JoseIntro::
     .string "I support TEAM CORPUS more than I\n"
-    .string "support SILPH CO.!$"
+    .string "support SILPH!$"
 
 SilphCo_3F_Text_JoseDefeat::
     .string "You really got me!$"
 
 SilphCo_3F_Text_JosePostBattle::
-    .string "Humph…\p"
+    .string "Humph...\p"
     .string "TEAM CORPUS said that if I helped\n"
-    .string "them, they'd let me study DAEMONS.$"
+    .string "them, they'd let me study DAEMON!$"
 
 SilphCo_3F_Text_FloorSign::
     .string "SILPH CO. HEAD OFFICE\n"

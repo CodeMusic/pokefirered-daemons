@@ -5,7 +5,6 @@ PewterCity_Mart_Text_BoughtWeirdFishFromShadyGuy::
 
 PewterCity_Mart_Text_GoodThingsIfRaiseMonsDiligently::
     .string "Good things can happen if you raise\n"
-    .string "DAEMONS diligently.\p"
-    .string "Even the weak ones can surprise\n"
-    .string "you if you don't give up on them.$"
+    .string "DAEMONS diligently, even the weak\l"
+    .string "ones!$"
 

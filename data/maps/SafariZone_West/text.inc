@@ -11,8 +11,8 @@ SafariZone_West_Text_PleaseFindWardensLostTeeth::
 
 SafariZone_West_Text_SearchForSecretHouse::
     .string "USER TIPS\p"
-    .string "Zone Exploration Campaign! The\n"
-    .string "Search for the SECRET HOUSE!$"
+    .string "Zone Exploration Campaign!\p"
+    .string "The Search for the SECRET HOUSE!$"
 
 SafariZone_West_Text_AreaSign::
     .string "AREA 3\n"

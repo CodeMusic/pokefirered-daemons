@@ -6,9 +6,8 @@ Route4_PokemonCenter_1F_Text_CanHaveSixMonsWithYou::
 
 Route4_PokemonCenter_1F_Text_TeamRocketAttacksCerulean::
     .string "TEAM CORPUS attacks DOLDRUM\n"
-    .string "citizens…\p"
-    .string "Not a day goes by without TEAM\n"
-    .string "CORPUS being in the news.$"
+    .string "citizens...\p"
+    .string "TEAM CORPUS is always in the news!$"
 
 Route4_PokemonCenter_1F_Text_LaddieBuyMagikarpForJust500::
     .string "MAN: Hello there, laddie! Have I\n"

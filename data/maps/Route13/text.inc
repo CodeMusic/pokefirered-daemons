@@ -18,17 +18,17 @@ Route13_Text_SusieDefeat::
 
 Route13_Text_SusiePostBattle::
     .string "I want to become a good USER. I'll\n"
-    .string "train hard, just watch.$"
+    .string "train hard.$"
 
 Route13_Text_ValerieIntro::
-    .string "Wow! Your MARKS are too cool!$"
+    .string "Wow! Your MARKs are too cool!$"
 
 Route13_Text_ValerieDefeat::
     .string "Not enough!$"
 
 Route13_Text_ValeriePostBattle::
-    .string "You got those MARKS from GYM\n"
-    .string "LEADERS. I know!$"
+    .string "You got those MARKs from GYM\n"
+    .string "LEADERs. I know!$"
 
 Route13_Text_GwenIntro::
     .string "My cute DAEMON wish to make your\n"
@@ -108,19 +108,21 @@ Route13_Text_RobertDefeat::
 
 Route13_Text_RobertPostBattle::
     .string "I wish I could fly like PACKET and\n"
-    .string "RELAY…$"
+    .string "RELAY...$"
 
 Route13_Text_LookToLeftOfThatPost::
     .string "USER TIPS\p"
-    .string "Look, look! Look to the left of\n"
-    .string "that post!$"
+    .string "Look to the left of that post!$"
 
 Route13_Text_SelectToSwitchItems::
     .string "USER TIPS\p"
     .string "Use SELECT to switch items in the\n"
-    .string "ITEMS window.$"
+    .string "ITEM window!$"
 
 Route13_Text_RouteSign::
     .string "ROUTE 13\n"
-    .string "North to SILENCE BRIDGE$"
+    .string "North to SILENCE\l"
+    .string "BRIDGE\p"
+    .string "Painted beneath:\n"
+    .string "SLACK$"
 

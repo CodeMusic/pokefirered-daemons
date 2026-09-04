@@ -11,8 +11,8 @@ VictoryRoad_2F_Text_DawsonPostBattle::
     .string "knowledge about DAEMON!$"
 
 VictoryRoad_2F_Text_DaisukeIntro::
-    .string "This here is VICTORY ROAD. It's the\n"
-    .string "final test for USERS!$"
+    .string "UMBRAL ASCENT is the final test for\n"
+    .string "USERS!$"
 
 VictoryRoad_2F_Text_DaisukeDefeat::
     .string "Atcho!$"
@@ -40,17 +40,17 @@ VictoryRoad_2F_Text_VincentDefeat::
 
 VictoryRoad_2F_Text_VincentPostBattle::
     .string "You earned the right to be on\n"
-    .string "VICTORY ROAD…$"
+    .string "UMBRAL ASCENT!$"
 
 VictoryRoad_2F_Text_GregoryIntro::
-    .string "Is VICTORY ROAD too tough?$"
+    .string "Is UMBRAL ASCENT too tough?$"
 
 VictoryRoad_2F_Text_GregoryDefeat::
     .string "Well done!$"
 
 VictoryRoad_2F_Text_GregoryPostBattle::
-    .string "Many USERS give up their challenge\n"
-    .string "here and go home.$"
+    .string "Many USERS give up the challenge\n"
+    .string "here.$"
 
 @ Unused, old text for Moltres
 VictoryRoad_2F_Text_Gyaoo::

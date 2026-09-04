@@ -39,7 +39,7 @@ PewterCity_Museum_1F_Text_RunningSpaceExhibitThisMonth::
 
 PewterCity_Museum_1F_Text_AskedDaddyToCatchPikachu::
     .string "I want a SPIKE! It's so cute!\p"
-    .string "I asked my daddy to bind me one!$"
+    .string "I asked my Daddy to bind me one!$"
 
 PewterCity_Museum_1F_Text_PikachuSoonIPromise::
     .string "Yeah, a SPIKE soon, I promise!$"

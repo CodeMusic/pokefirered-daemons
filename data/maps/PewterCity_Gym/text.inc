@@ -1,17 +1,13 @@
 PewterCity_Gym_Text_BrockIntro::
-    .string "So, you're here. I'm BROCK. I'm\n"
-    .string "PEWTER's GYM LEADER.\p"
-    .string "My rock-hard willpower is evident\n"
-    .string "even in my DAEMONS.\p"
-    .string "My DAEMONS are all rock hard, and\n"
-    .string "have true-grit determination.\p"
-    .string "That's right - my DAEMONS are all\n"
-    .string "the ROCK type!\p"
-    .string "Fuhaha! You're going to challenge\n"
-    .string "me knowing that you'll lose?\p"
-    .string "That's the TRAINER's honor that\n"
-    .string "compels you to challenge me.\p"
-    .string "Fine, then! Show me your best!{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
+    .string "I'm CAIRN. BENCHMARK 1.\p"
+    .string "Everything you know is sitting in\n"
+    .string "something.\p"
+    .string "Stone. Bone. Tape. Silicon.\p"
+    .string "If it is not written down, it did\n"
+    .string "not happen.\p"
+    .string "My daemons are LEGACY. Old\n"
+    .string "formats, still readable.\p"
+    .string "Show me what you have encoded.$"
 
 @ NOTE: This defeat text actually causes a buffer overflow. It's too long for the gDisplayedStringBattle
 @ buffer that it's put into, and it stomps all over the gBattleTextBuffs after, as well as the otherwise
@@ -52,37 +48,35 @@ PewterCity_Gym_Text_ExplainTM39::
     .string "lowers its SPEED.$"
 
 PewterCity_Gym_Text_BrockPostBattle::
-    .string "There are all kinds of USERS in\n"
-    .string "this huge world of ours.\p"
-    .string "You appear to be very gifted as a\n"
-    .string "DAEMON USER.\p"
-    .string "So let me make a suggestion.\p"
-    .string "Go to the GYM in DOLDRUM and test\n"
-    .string "your abilities.$"
+    .string "You encoded something I could not\n"
+    .string "read.\p"
+    .string "That is not a defeat. It is a\n"
+    .string "format I do not have.\p"
+    .string "DOLDRUM is next. BENCHMARK 2.$"
 
 PewterCity_Gym_Text_DontHaveRoomForThis::
     .string "You don't have room for this.$"
 
 PewterCity_Gym_Text_LiamIntro::
-    .string "Stop right there, kid!\p"
-    .string "You're ten thousand light-years \n"
-    .string "from facing BROCK!$"
+    .string "Stop there.\p"
+    .string "You have not written down enough\n"
+    .string "yet.$"
 
 PewterCity_Gym_Text_LiamDefeat::
-    .string "Darn!\p"
-    .string "Light-years isn't time…\n"
-    .string "It measures distance!$"
+    .string "Noted.\p"
+    .string "It will be in the record by\n"
+    .string "tonight.$"
 
 PewterCity_Gym_Text_LiamPostBattle::
-    .string "You're pretty hot.\n"
-    .string "…But not as hot as BROCK!$"
+    .string "CAIRN keeps a record of every\n"
+    .string "match in here.\p"
+    .string "Every one.$"
 
 PewterCity_Gym_Text_LetMeTakeYouToTheTop::
-    .string "Hiya! Do you want to dream big?\p"
-    .string "Do you dare to dream of becoming\n"
-    .string "the DAEMON champ?\p"
-    .string "I'm no USER, but I can advise you\n"
-    .string "on how to win.\p"
+    .string "Hiya! I can tell you have what it\n"
+    .string "takes.\p"
+    .string "I'm no USER, but I can tell you\n"
+    .string "how to win!\p"
     .string "Let me take you to the top!$"
 
 PewterCity_Gym_Text_LetsGetHappening::
@@ -90,20 +84,18 @@ PewterCity_Gym_Text_LetsGetHappening::
     .string "Let's get happening!$"
 
 PewterCity_Gym_Text_TryDifferentPartyOrders::
-    .string "The first DAEMON out in a match is\n"
-    .string "at the left of the DAEMON LIST.\p"
-    .string "By changing the order of DAEMON,\n"
-    .string "you may gain an advantage.\p"
-    .string "Try different orders to suit your\n"
-    .string "opponent's party.$"
+    .string "The 1st daemon out in a match is\n"
+    .string "at the top of your list.\p"
+    .string "Change the order and the match\n"
+    .string "changes with it.$"
 
 PewterCity_Gym_Text_ItsFreeLetsGetHappening::
     .string "It's a free service!\n"
     .string "Let's get happening!$"
 
 PewterCity_Gym_Text_YoureChampMaterial::
-    .string "Just as I thought! You're DAEMON\n"
-    .string "champ material!$"
+    .string "Just as I thought! You're champ\n"
+    .string "material!$"
 
 PewterCity_Gym_Text_GymStatue::
     .string "SLATE DAEMON GYM LEADER: BROCK\p"

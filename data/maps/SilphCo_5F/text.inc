@@ -1,34 +1,34 @@
 SilphCo_5F_Text_RocketsInUproarAboutIntruder::
     .string "TEAM CORPUS is in an uproar over\n"
-    .string "some intruder.\p"
-    .string "That's you, right?$"
+    .string "some intruder. That's you right?$"
 
 SilphCo_5F_Text_YoureOurHeroThankYou::
     .string "TEAM CORPUS took off! You're our\n"
     .string "hero! Thank you!$"
 
 SilphCo_5F_Text_Grunt1Intro::
-    .string "I heard a kid was wandering\n"
-    .string "around.$"
+    .string "Reception logged an unbadged\n"
+    .string "visitor.$"
 
 SilphCo_5F_Text_Grunt1Defeat::
-    .string "Boom!$"
+    .string "Noted.$"
 
 SilphCo_5F_Text_Grunt1PostBattle::
-    .string "It's not smart to pick a fight with\n"
-    .string "TEAM CORPUS!$"
+    .string "Disputes with CORPUS go to\n"
+    .string "arbitration.\p"
+    .string "We draft the terms!$"
 
 SilphCo_5F_Text_BeauIntro::
-    .string "We study POKé BALL technology on\n"
-    .string "this floor.$"
+    .string "We study BOX technology on this\n"
+    .string "floor!$"
 
 SilphCo_5F_Text_BeauDefeat::
     .string "Dang!\n"
     .string "Blast it!$"
 
 SilphCo_5F_Text_BeauPostBattle::
-    .string "We worked on the ultimate POKé\n"
-    .string "BALL which would bind anything.$"
+    .string "We worked on the ultimate BOX\n"
+    .string "which would bind anything!$"
 
 SilphCo_5F_Text_DaltonIntro::
     .string "Whaaat?\p"
@@ -43,15 +43,16 @@ SilphCo_5F_Text_DaltonPostBattle::
     .string "It's a long way to my BOSS!$"
 
 SilphCo_5F_Text_Grunt2Intro::
-    .string "Show TEAM CORPUS a little respect!$"
+    .string "Please observe CORPUS values on\n"
+    .string "this floor.$"
 
 SilphCo_5F_Text_Grunt2Defeat::
-    .string "Cough…\n"
-    .string "Cough…$"
+    .string "Taking a moment.$"
 
 SilphCo_5F_Text_Grunt2PostBattle::
-    .string "Which reminds me.\p"
-    .string "KOFFING evolves into WEEZING!$"
+    .string "Unrelated:\p"
+    .string "KOFFING evolves into WEEZING.\p"
+    .string "Sharing is caring!$"
 
 SilphCo_5F_Text_PorygonFirstVRMon::
     .string "It's a DAEMON REPORT!\p"
@@ -60,7 +61,7 @@ SilphCo_5F_Text_PorygonFirstVRMon::
 
 SilphCo_5F_Text_Over350TechniquesConfirmed::
     .string "It's a DAEMON REPORT!\p"
-    .string "Over 350 DAEMON techniques have\n"
+    .string "Over 160 DAEMONS techniques have\n"
     .string "been confirmed.$"
 
 SilphCo_5F_Text_SomeMonsEvolveWhenTraded::

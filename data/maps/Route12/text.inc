@@ -38,7 +38,7 @@ Route12_Text_ChipDefeat::
 
 Route12_Text_ChipPostBattle::
     .string "With a better ROD, I could bind\n"
-    .string "better DAEMON…$"
+    .string "better DAEMON!$"
 
 Route12_Text_JustinIntro::
     .string "I'm searching for a MOON STONE.\n"
@@ -49,8 +49,7 @@ Route12_Text_JustinDefeat::
 
 Route12_Text_JustinPostBattle::
     .string "I could have made my DAEMONS\n"
-    .string "evolve with a MOON STONE.\p"
-    .string "I would have won then, I bet.$"
+    .string "evolve with MOON STONE!$"
 
 Route12_Text_LucaIntro::
     .string "Electricity is my specialty.\p"
@@ -90,7 +89,6 @@ Route12_Text_ElliotPostBattle::
     .string "Losing doesn't bug me anymore.$"
 
 Route12_Text_AndrewIntro::
-    .string "What's binding?\p"
     .string "You never know what you could\n"
     .string "bind!$"
 
@@ -98,12 +96,14 @@ Route12_Text_AndrewDefeat::
     .string "Lost it!$"
 
 Route12_Text_AndrewPostBattle::
-    .string "What, MAGIKARP?\p"
-    .string "I bind them all the time, sure.\n"
-    .string "But, boy are they wimpy.$"
+    .string "I bind MAGIKARP all the time, but\n"
+    .string "they're so weak!$"
 
 Route12_Text_RouteSign::
-    .string "ROUTE 12 North to HALFTONE$"
+    .string "ROUTE 12\n"
+    .string "North to HALFTONE\p"
+    .string "Painted beneath:\n"
+    .string "THE DRIFT$"
 
 Route12_Text_SportfishingArea::
     .string "SPORTFISHING AREA$"

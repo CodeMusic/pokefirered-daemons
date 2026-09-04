@@ -5,8 +5,9 @@ CeladonCity_GameCorner_Text_CanExchangeCoinsNextDoor::
 
 CeladonCity_GameCorner_Text_WelcomeBuySomeCoins::
     .string "Welcome to CORPUS GAME CORNER!\p"
-    .string "Do you need some game COINS?\n"
-    .string "Would you like to buy some?$"
+    .string "Do you need some game coins?\p"
+    .string "It's ¥1000 for 50 coins. Would you\n"
+    .string "like some?$"
 
 CeladonCity_GameCorner_Text_ComePlaySometime::
     .string "No?\n"
@@ -57,14 +58,11 @@ CeladonCity_GameCorner_Text_WinOrLoseItsOnlyLuck::
 CeladonCity_GameCorner_Text_GymGuyAdvice::
     .string "Hey!\p"
     .string "You have better things to do,\n"
-    .string "champ in the making!\p"
-    .string "VERDIGRIS GYM's LEADER is ERIKA.\p"
-    .string "She is a user of GRASS-type\n"
-    .string "DAEMON, and at one with nature.\p"
-    .string "She might appear docile because of\n"
-    .string "her flower arranging…\p"
-    .string "But she's not one to be taken\n"
-    .string "lightly!$"
+    .string "champ in making!\p"
+    .string "VERDIGRIS GYM's LEADER is ERIKA!\n"
+    .string "She uses grass- type DAEMON!\p"
+    .string "She might appear docile, but don't\n"
+    .string "be fooled!$"
 
 CeladonCity_GameCorner_Text_RareMonsForCoins::
     .string "They offer rare DAEMON that can be\n"

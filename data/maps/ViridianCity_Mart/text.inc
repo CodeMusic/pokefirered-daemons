@@ -3,8 +3,9 @@ ViridianCity_Mart_Text_YouCameFromPallet::
 
 ViridianCity_Mart_Text_TakeThisToProfOak::
     .string "You know CRYSTAL CLEAR, right?\p"
-    .string "Her order came in. Can I get you\n"
-    .string "to take it to her?$"
+    .string "Her order came in. A CC-7. Will\n"
+    .string "you run it out?\p"
+    .string "{PLAYER} got the CC-7!$"
 
 ViridianCity_Mart_Text_ReceivedOaksParcelFromClerk::
     .string "{PLAYER} received the COGNITIVE\n"
@@ -12,8 +13,7 @@ ViridianCity_Mart_Text_ReceivedOaksParcelFromClerk::
     .string "clerk.$"
 
 ViridianCity_Mart_Text_SayHiToOakForMe::
-    .string "Okay, thanks! Please say hi to\n"
-    .string "CRYSTAL CLEAR for me, too.$"
+    .string "Okay! Say hi to CRYSTAL for me!$"
 
 ViridianCity_Mart_Text_ShopDoesGoodBusinessInAntidotes::
     .string "This shop does good business in\n"

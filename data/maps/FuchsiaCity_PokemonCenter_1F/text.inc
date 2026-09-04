@@ -7,8 +7,8 @@ FuchsiaCity_PokemonCenter_1F_Text_CantBecomeGoodTrainerWithOneMon::
 FuchsiaCity_PokemonCenter_1F_Text_PokemonLeagueWestOfViridian::
     .string "There's a narrow trail west of\n"
     .string "CALLOW CITY.\p"
-    .string "It goes to the DAEMON LEAGUE HQ.\n"
-    .string "The HQ governs all USERS.$"
+    .string "It goes to DAEMON LEAGUE HQ. The\n"
+    .string "HQ governs all USERS.$"
 
 FuchsiaCity_PokemonCenter_1F_Text_VisitSafariZoneForPokedex::
     .string "If you're working on a INDEX, visit\n"

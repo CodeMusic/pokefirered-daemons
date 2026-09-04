@@ -1,4 +1,5 @@
 Route7_Text_UndergroundPathSign::
-    .string "UNDERGROUND PATH VERDIGRIS CITY\n"
-    .string "- HALFTONE TOWN$"
+    .string "UNDERGROUND PATH\n"
+    .string "VERDIGRIS CITY -\l"
+    .string "HALFTONE TOWN$"
 

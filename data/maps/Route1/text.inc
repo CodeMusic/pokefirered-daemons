@@ -1,14 +1,13 @@
 Route1_Text_WorkAtPokeMartTakeSample::
     .string "Hi! I work at a DAEMON MART.\p"
-    .string "It's part of a convenient chain\n"
-    .string "selling all sorts of items.\p"
-    .string "Please, visit us in CALLOW CITY.\p"
-    .string "I know, I'll give you a sample.\n"
+    .string "It's a convenient shop, so please\n"
+    .string "visit us in CALLOW CITY.\p"
+    .string "I know, I'll give you a sample!\n"
     .string "Here you go!$"
 
 Route1_Text_ComeSeeUsIfYouNeedPokeBalls::
-    .string "Please come see us if you need\n"
-    .string "POKé BALLS for binding DAEMONS.$"
+    .string "We also carry USERBOXes for\n"
+    .string "binding DAEMON!$"
 
 Route1_Text_PutPotionAway::
     .string "{PLAYER} put the POTION away in\n"
@@ -22,6 +21,9 @@ Route1_Text_CanJumpFromLedges::
     .string "quicker that way.$"
 
 Route1_Text_RouteSign::
-    .string "ROUTE 1 BLANCHE TOWN - CALLOW\n"
-    .string "CITY$"
+    .string "ROUTE 1\n"
+    .string "BLANCHE TOWN -\l"
+    .string "CALLOW CITY\p"
+    .string "Painted beneath:\n"
+    .string "THE BLEED$"
 

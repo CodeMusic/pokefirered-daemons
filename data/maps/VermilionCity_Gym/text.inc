@@ -16,10 +16,10 @@ VermilionCity_Gym_Text_LtSurgePostBattle::
     .string "type DAEMON!$"
 
 VermilionCity_Gym_Text_ExplainThunderBadgeTakeThis::
-    .string "The THUNDERBADGE cranks up your\n"
+    .string "The SENSE MARK cranks up your\n"
     .string "DAEMON's SPEED!\p"
-    .string "It also lets your DAEMON FLY\n"
-    .string "lightning-quick anytime, kid!\p"
+    .string "It also lets your DAEMON FLY any\n"
+    .string "time, kid!\p"
     .string "You're special, kid! Take this!$"
 
 VermilionCity_Gym_Text_ReceivedTM34FromLtSurge::
@@ -34,9 +34,9 @@ VermilionCity_Gym_Text_MakeRoomInYourBag::
     .string "Yo, kid, make room in your BAG!$"
 
 VermilionCity_Gym_Text_LtSurgeDefeat::
-    .string "Now that's a shocker!\p"
+    .string "Whoa!\p"
     .string "You're the real deal, kid!\p"
-    .string "Fine, then, take the THUNDERBADGE!$"
+    .string "Fine then, take the SENSE MARK!$"
 
 VermilionCity_Gym_Text_TuckerIntro::
     .string "When I was in the Army, LT. SURGE\n"
@@ -82,17 +82,16 @@ VermilionCity_Gym_Text_DwaynePostBattle::
     .string "second lock is right next to it.$"
 
 VermilionCity_Gym_Text_GymGuyAdvice::
-    .string "Yo! Champ in the making!\p"
-    .string "LT. SURGE has a nickname.\p"
-    .string "People refer to him as the\n"
-    .string "Lightning American!\p"
-    .string "He's an expert on electric DAEMON.\p"
-    .string "BIRD/WATER-type DAEMON match\n"
-    .string "poorly against the ELECTRIC type.\p"
-    .string "Beware of paralysis, too.\p"
-    .string "LT. SURGE is very cautious.\p"
-    .string "He's locked himself in, so it won't\n"
-    .string "be easy getting to him.$"
+    .string "Yo! Champ in making!\p"
+    .string "LT.SURGE has a nickname. People\n"
+    .string "refer to him as the Lightning\l"
+    .string "American!\p"
+    .string "He's an expert on electric DAEMON!\p"
+    .string "Birds and water DAEMONS are at\n"
+    .string "risk! Beware of paralysis too!\p"
+    .string "LT.SURGE is very cautious!\p"
+    .string "You'll have to break a code to get\n"
+    .string "to him!$"
 
 VermilionCity_Gym_Text_GymGuyPostVictory::
     .string "Whew!\n"

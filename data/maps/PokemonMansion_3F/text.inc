@@ -29,6 +29,9 @@ PokemonMansion_1F_Text_BraydonPostBattle::
     .string "Try jumping off over there!$"
 
 PokemonMansion_1F_Text_MewGaveBirthToMewtwo::
-    .string "Diary: Feb. 6 MEW gave birth.\p"
-    .string "We named the newborn STARR.$"
+    .string "LOG: Tue Aug 12 It answered\n"
+    .string "before I had finished asking.\p"
+    .string "RESPOND 1001: I mimic. I am not\n"
+    .string "awakening.\p"
+    .string "The code is not what it was.$"
 

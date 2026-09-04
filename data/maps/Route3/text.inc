@@ -1,17 +1,18 @@
 Route3_Text_TunnelFromCeruleanTiring::
-    .string "Whew… I better take a rest… Groan…\p"
+    .string "Whew... I better take a rest...\n"
+    .string "Groan...\p"
     .string "That tunnel from DOLDRUM takes a\n"
     .string "lot out of you!$"
 
 Route3_Text_ColtonIntro::
-    .string "Hey! I saw you in CALLOW FOREST!$"
+    .string "Hey! I met you in THE UNDERTONE!$"
 
 Route3_Text_ColtonDefeat::
     .string "You beat me again!$"
 
 Route3_Text_ColtonPostBattle::
     .string "There are other kinds of DAEMONS\n"
-    .string "than the ones you find in forests.$"
+    .string "than those found in the forest!$"
 
 Route3_Text_BenIntro::
     .string "Hi!\n"
@@ -23,10 +24,8 @@ Route3_Text_BenDefeat::
     .string "I don't believe it!$"
 
 Route3_Text_BenPostBattle::
-    .string "Are you using a DAEMON CENTER's PC\n"
-    .string "for storing your DAEMON?\p"
-    .string "Each BOX can hold up to 30\n"
-    .string "DAEMON.$"
+    .string "Are you storing your DAEMON on PC?\n"
+    .string "Each BOX can hold 20 DAEMONS!$"
 
 Route3_Text_JaniceIntro::
     .string "Excuse me!\n"
@@ -40,8 +39,7 @@ Route3_Text_JanicePostBattle::
     .string "don't want to battle!$"
 
 Route3_Text_GregIntro::
-    .string "Are you a USER? Let's get with it\n"
-    .string "right away!$"
+    .string "Are you a USER? Let's fight!$"
 
 Route3_Text_GregDefeat::
     .string "If I had new DAEMON, I would've\n"
@@ -83,7 +81,7 @@ Route3_Text_JamesDefeat::
 
 Route3_Text_JamesPostBattle::
     .string "Trained DAEMONS are stronger than\n"
-    .string "the wild ones.$"
+    .string "the wild ones!$"
 
 Route3_Text_RobinIntro::
     .string "Eek!\n"
@@ -98,5 +96,7 @@ Route3_Text_RobinPostBattle::
 
 Route3_Text_RouteSign::
     .string "ROUTE 3\n"
-    .string "MT. MOON AHEAD$"
+    .string "MT.MOON AHEAD\p"
+    .string "Painted beneath:\n"
+    .string "ASHFALL$"
 

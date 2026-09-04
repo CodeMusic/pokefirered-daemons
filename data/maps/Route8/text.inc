@@ -50,8 +50,6 @@ Route8_Text_LeslieDefeat::
     .string "I should stick with school.$"
 
 Route8_Text_LesliePostBattle::
-    .string "I was planning on getting some\n"
-    .string "fresh air for a change, but…\p"
     .string "We're stuck here because of the\n"
     .string "gates at BRAZEN.$"
 
@@ -63,8 +61,8 @@ Route8_Text_AndreaDefeat::
     .string "Meeeeyow!$"
 
 Route8_Text_AndreaPostBattle::
-    .string "I think PACKET and NIBBLE are\n"
-    .string "cute, too!$"
+    .string "I think PACKET and NIBBLE are cute\n"
+    .string "too!$"
 
 Route8_Text_MeganIntro::
     .string "We must look silly standing here\n"
@@ -75,10 +73,8 @@ Route8_Text_MeganDefeat::
     .string "DAEMON!$"
 
 Route8_Text_MeganPostBattle::
-    .string "SAFFRON's gatekeeper won't let us\n"
-    .string "go through.\p"
-    .string "I know he's doing his job, but I\n"
-    .string "think he's mean.$"
+    .string "BRAZEN's gate keeper won't let us\n"
+    .string "through. He's so mean!$"
 
 Route8_Text_RichIntro::
     .string "I'm a rambling, gaming dude!$"
@@ -87,8 +83,8 @@ Route8_Text_RichDefeat::
     .string "Missed the big chance!$"
 
 Route8_Text_RichPostBattle::
-    .string "Playing games and DAEMONS are like\n"
-    .string "eating peanuts! I just can't stop!$"
+    .string "Gambling and DAEMONS are like\n"
+    .string "eating peanuts! Just can't stop!$"
 
 Route8_Text_JuliaIntro::
     .string "What's a cute, round, and fluffy\n"
@@ -105,8 +101,9 @@ Route8_Text_JuliaPostBattle::
     .string "I wonder if it's true?$"
 
 Route8_Text_UndergroundPathSign::
-    .string "UNDERGROUND PATH VERDIGRIS CITY\n"
-    .string "- HALFTONE TOWN$"
+    .string "UNDERGROUND PATH\n"
+    .string "VERDIGRIS CITY -\l"
+    .string "HALFTONE TOWN$"
 
 Route8_Text_EliIntro::
     .string "ELI: Twin power is fantastic.\n"

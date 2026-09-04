@@ -1,8 +1,8 @@
 ViridianCity_Text_CanCarryMonsAnywhere::
-    .string "Those POKé BALLS at your waist!\n"
-    .string "You have DAEMON, don't you?\p"
+    .string "Those USERBOXes at your waist! You\n"
+    .string "have DAEMON!\p"
     .string "It's great that you can carry and\n"
-    .string "use DAEMON anytime, anywhere.$"
+    .string "use DAEMON any time, anywhere!$"
 
 ViridianCity_Text_GymClosedWonderWhoLeaderIs::
     .string "This DAEMON GYM is always closed.\p"
@@ -21,8 +21,7 @@ ViridianCity_Text_OhOkayThen::
 ViridianCity_Text_ExplainCaterpieWeedle::
     .string "CRAWLER has no poison, but SCRAPER\n"
     .string "does.\p"
-    .string "Watch that your DAEMONS aren't\n"
-    .string "stabbed by WEEDLE's POISON STING.$"
+    .string "Watch out for its POISON STING!$"
 
 ViridianCity_Text_GrandpaHasntHadCoffeeYet::
     .string "Oh, Grandpa!\n"
@@ -31,10 +30,9 @@ ViridianCity_Text_GrandpaHasntHadCoffeeYet::
     .string "He hasn't had his coffee yet.$"
 
 ViridianCity_Text_GoShoppingInPewterOccasionally::
-    .string "I go shopping in SLATE CITY\n"
-    .string "occasionally.\p"
-    .string "I have to take the winding trail in\n"
-    .string "CALLOW FOREST when I go.$"
+    .string "When I go shop in SLATE CITY, I\n"
+    .string "have to take the winding trail in\l"
+    .string "THE UNDERTONE.$"
 
 ViridianCity_Text_ThisIsPrivateProperty::
     .string "I absolutely forbid you from\n"
@@ -100,25 +98,27 @@ ViridianCity_Text_TooBusyForTeachyTV::
     .string "be ill spent…$"
 
 ViridianCity_Text_CitySign::
-    .string "CALLOW CITY The Eternally Green\n"
-    .string "Paradise$"
+    .string "CALLOW CITY\n"
+    .string "The Eternally\l"
+    .string "Green Paradise$"
 
 ViridianCity_Text_CatchMonsForEasierBattles::
     .string "USER TIPS\p"
-    .string "Bind DAEMON and expand your\n"
-    .string "collection.\p"
+    .string "Bind DAEMONS and expand your\n"
+    .string "collection!\p"
     .string "The more you have, the easier it\n"
-    .string "is to battle.$"
+    .string "is to fight!$"
 
 ViridianCity_Text_MovesLimitedByPP::
     .string "USER TIPS\p"
     .string "The battle moves of DAEMONS are\n"
-    .string "limited by their POWER POINTS, PP.\p"
+    .string "limited by their POWER POINTs, PP.\p"
     .string "To replenish PP, rest your tired\n"
-    .string "DAEMON at a DAEMON CENTER.$"
+    .string "DAEMON at a DAEMON CENTER!$"
 
 ViridianCity_Text_GymSign::
-    .string "CALLOW CITY DAEMON GYM$"
+    .string "CALLOW CITY\n"
+    .string "DAEMON GYM$"
 
 ViridianCity_Text_GymDoorsAreLocked::
     .string "CALLOW GYM's doors are locked…$"

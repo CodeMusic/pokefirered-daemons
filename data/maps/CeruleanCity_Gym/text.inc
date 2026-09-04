@@ -1,26 +1,25 @@
 CeruleanCity_Gym_Text_MistyIntro::
     .string "Hi, you're a new face!\p"
-    .string "Only those USERS who have a\n"
-    .string "policy about DAEMON can turn pro.\p"
+    .string "USERS who want to turn pro have to\n"
+    .string "have a policy about DAEMON!\p"
     .string "What is your approach when you\n"
-    .string "bind and train DAEMONS?\p"
+    .string "bind DAEMONS?\p"
     .string "My policy is an all-out offensive\n"
-    .string "with WATER-type DAEMON!{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
+    .string "with water-type DAEMON!$"
 
 CeruleanCity_Gym_Text_ExplainTM03::
     .string "TM03 teaches WATER PULSE.\p"
     .string "Use it on an aquatic DAEMON!$"
 
 CeruleanCity_Gym_Text_ExplainCascadeBadge::
-    .string "The CASCADEBADGE makes all\n"
-    .string "DAEMONS up to Lv. 30 obey.\p"
-    .string "That includes even outsiders you\n"
-    .string "got in trades.\p"
-    .string "There's more. You can now use CUT\n"
-    .string "anytime, even out of battle.\p"
-    .string "You can CUT down small trees to\n"
-    .string "open new pathways.\p"
-    .string "You can also have my favorite TM.$"
+    .string "The SLOPE MARK makes all DAEMONS\n"
+    .string "up to L30 obey!\p"
+    .string "That includes even outsiders!\p"
+    .string "There's more, you can now use CUT\n"
+    .string "any time!\p"
+    .string "You can CUT down small bushes to\n"
+    .string "open new paths!\p"
+    .string "You can also have my favorite TM!$"
 
 CeruleanCity_Gym_Text_ReceivedTM03FromMisty::
     .string "{PLAYER} received TM03\n"
@@ -30,11 +29,10 @@ CeruleanCity_Gym_Text_BetterMakeRoomForThis::
     .string "You better make room for this!$"
 
 CeruleanCity_Gym_Text_MistyDefeat::
-    .string "Wow!\n"
-    .string "You're too much!\p"
+    .string "Wow! You're too much!\p"
     .string "All right!\p"
-    .string "You can have the CASCADEBADGE to\n"
-    .string "show you beat me.$"
+    .string "You can have the SLOPE MARK to\n"
+    .string "show you beat me!$"
 
 CeruleanCity_Gym_Text_DianaIntro::
     .string "What? You?\n"
@@ -46,7 +44,7 @@ CeruleanCity_Gym_Text_DianaDefeat::
 
 CeruleanCity_Gym_Text_DianaPostBattle::
     .string "You have to face other USERS to\n"
-    .string "see how good you really are.$"
+    .string "find out how good you really are.$"
 
 CeruleanCity_Gym_Text_LuisIntro::
     .string "Splash!\p"

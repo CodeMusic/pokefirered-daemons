@@ -8,8 +8,10 @@ CeladonCity_DepartmentStore_2F_Text_BuyReviveForLongOutings::
     .string "REVIVE.$"
 
 CeladonCity_DepartmentStore_2F_Text_FloorSign::
-    .string "Top-Grade Items for USERS!\p"
-    .string "2F: TRAINER'S MARKET$"
+    .string "Top Grade Items\n"
+    .string "for USERS!\p"
+    .string "2F: USER'S\n"
+    .string "MARKET$"
 
 CeladonCity_DepartmentStore_2F_Text_LanceComesToBuyCapes::
     .string "We have a customer, LANCE, who\n"

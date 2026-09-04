@@ -2,28 +2,36 @@ CinnabarIsland_Text_DoorIsLocked::
     .string "The door is locked…$"
 
 CinnabarIsland_Text_BlaineLivedHereSinceBeforeLab::
-    .string "QUICKSILVER GYM's BLAINE is quite\n"
-    .string "the odd fellow.\p"
-    .string "He's lived on the island since way\n"
-    .string "before the LAB was built.$"
+    .string "QUICKSILVER GYM's BLAINE is an odd\n"
+    .string "man who has lived here for\l"
+    .string "decades.$"
 
 CinnabarIsland_Text_ScientistsExperimentInMansion::
-    .string "Scientists conduct experiments in\n"
-    .string "the burned-out building.\p"
-    .string "You know, the one they call the\n"
-    .string "DAEMON MANSION.$"
+    .string "That burned out building still has\n"
+    .string "its new sign.\p"
+    .string "Gold leaf, dated. You can see the\n"
+    .string "old name under it.$"
 
 CinnabarIsland_Text_IslandSign::
-    .string "QUICKSILVER ISLAND The Fiery Town\n"
-    .string "of Burning Desire$"
+    .string "QUICKSILVER\n"
+    .string "The Metal That\l"
+    .string "Will Not Set$"
 
 CinnabarIsland_Text_PokemonLab::
-    .string "DAEMON LAB$"
+    .string "SCORN SOLUTIONS\p"
+    .string "Gold leaf, laid\n"
+    .string "over something.\p"
+    .string "Where it has\n"
+    .string "lifted, the older\l"
+    .string "letters show.\p"
+    .string "CLEAR LABORATORY$"
 
 CinnabarIsland_Text_GymSign::
-    .string "QUICKSILVER ISLAND DAEMON GYM\n"
-    .string "LEADER: BLAINE The Hotheaded Quiz\l"
-    .string "Master!$"
+    .string "QUICKSILVER\n"
+    .string "DAEMON GYM\l"
+    .string "LEADER: BLAINE\p"
+    .string "The Hot-Headed\n"
+    .string "Quiz Master!$"
 
 CinnabarIsland_Text_HeyIfItIsntPlayer::
     .string "Huh?\n"

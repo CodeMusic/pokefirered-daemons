@@ -1,8 +1,8 @@
 Route2_ViridianForest_NorthEntrance_Text_ManyMonsOnlyInForests::
     .string "Many DAEMONS live only in forests\n"
     .string "and caves.\p"
-    .string "You need to be persistent and look\n"
-    .string "everywhere to get different kinds.$"
+    .string "You need to look everywhere to get\n"
+    .string "different kinds!$"
 
 Route2_ViridianForest_NorthEntrance_Text_CanCutSkinnyTrees::
     .string "Have you noticed the skinny trees\n"

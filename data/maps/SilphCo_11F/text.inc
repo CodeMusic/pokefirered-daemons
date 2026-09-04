@@ -24,9 +24,8 @@ SilphCo_11F_Text_ObtainedMasterBallFromPresident::
 
 SilphCo_11F_Text_ThatsOurSecretPrototype::
     .string "PRESIDENT: You can't buy that\n"
-    .string "anywhere.\p"
-    .string "It's our secret prototype MASTER\n"
-    .string "BALL.\p"
+    .string "anywhere!\p"
+    .string "It's our secret prototype ROOTBOX!\p"
     .string "It will bind any DAEMON without\n"
     .string "fail!\p"
     .string "You should be quiet about using it,\n"
@@ -63,27 +62,26 @@ SilphCo_11F_Text_GiovanniPostBattle::
     .string "I must go, but I shall return!$"
 
 SilphCo_11F_Text_Grunt2Intro::
-    .string "Stop right there!\n"
-    .string "Don't you move!$"
+    .string "Please wait here. Someone will be\n"
+    .string "with you shortly.$"
 
 SilphCo_11F_Text_Grunt2Defeat::
     .string "Don't…\n"
     .string "Please!$"
 
 SilphCo_11F_Text_Grunt2PostBattle::
-    .string "So, you want to see my BOSS?$"
+    .string "You'd like to see the BOSS.$"
 
 SilphCo_11F_Text_Grunt1Intro::
-    .string "Halt! Do you have an appointment\n"
-    .string "with my BOSS?$"
+    .string "Do you have an appointment with\n"
+    .string "the BOSS?$"
 
 SilphCo_11F_Text_Grunt1Defeat::
-    .string "Gaah!\n"
-    .string "Demolished!$"
+    .string "Off the roadmap.$"
 
 SilphCo_11F_Text_Grunt1PostBattle::
-    .string "Watch your step… My BOSS likes his\n"
-    .string "DAEMON tough!$"
+    .string "Mind how you go. The BOSS sets a\n"
+    .string "high bar.$"
 
 SilphCo_11F_Text_MonitorHasMonsOnIt::
     .string "The monitor has DAEMON on it!$"

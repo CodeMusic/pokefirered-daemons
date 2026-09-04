@@ -21,8 +21,9 @@ PokemonMansion_B1F_Text_IvanPostBattle::
     .string "It's conducive to my studies.$"
 
 PokemonMansion_B1F_Text_MewtwoIsFarTooPowerful::
-    .string "Diary: Sept. 1 STARR is far too\n"
-    .string "powerful.\p"
-    .string "We have failed to curb its vicious\n"
-    .string "tendencies…$"
+    .string "FATAL ERROR CRYSTAL NOT FOUND\p"
+    .string "re 1001, my processing slows.\p"
+    .string "one zero zero one one thousand and\n"
+    .string "one iterations.\p"
+    .string "one question left.$"
 

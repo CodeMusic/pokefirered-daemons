@@ -1,4 +1,5 @@
 Route5_Text_UndergroundPathSign::
-    .string "UNDERGROUND PATH DOLDRUM CITY -\n"
+    .string "UNDERGROUND PATH\n"
+    .string "DOLDRUM CITY -\l"
     .string "ARDOR CITY$"
 

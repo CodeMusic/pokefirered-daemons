@@ -5,9 +5,8 @@ CeladonCity_House1_Text_SlotsReelInTheDough::
 
 CeladonCity_House1_Text_ShippedMonsAsSlotPrizes::
     .string "CHIEF!\p"
-    .string "We just shipped two thousand more\n"
-    .string "DAEMONS as slot prizes again\l"
-    .string "today!$"
+    .string "We just shipped 2000 DAEMONS as\n"
+    .string "slot prizes!$"
 
 CeladonCity_House1_Text_DontTouchGameCornerPoster::
     .string "Don't touch the poster at the GAME\n"

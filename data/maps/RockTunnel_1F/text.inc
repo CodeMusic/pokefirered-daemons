@@ -76,6 +76,7 @@ RockTunnel_1F_Text_ArianaPostBattle::
     .string "I'm all sweaty now.$"
 
 RockTunnel_1F_Text_RouteSign::
-    .string "ROCK TUNNEL DOLDRUM CITY -\n"
+    .string "THE BLACKOUT\n"
+    .string "DOLDRUM CITY -\l"
     .string "HALFTONE TOWN$"
 

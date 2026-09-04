@@ -1,6 +1,5 @@
 Route10_Text_MarkIntro::
-    .string "Wow, you came all the way here?\n"
-    .string "Maybe you're a POKéMANIAC, too?\l"
+    .string "Wow, are you an ARCHIVIST too?\n"
     .string "Want to see my collection?$"
 
 Route10_Text_MarkDefeat::
@@ -24,10 +23,10 @@ Route10_Text_ClarkPostBattle::
     .string "Snort! Snivel!$"
 
 Route10_Text_HermanIntro::
-    .string "Hi, kid! Want to see my DAEMONS?$"
+    .string "Hi kid, want to see my DAEMONS?$"
 
 Route10_Text_HermanDefeat::
-    .string "Oh, no! My DAEMONS!$"
+    .string "Oh no! My DAEMONS!$"
 
 Route10_Text_HermanPostBattle::
     .string "I don't like you.\n"
@@ -43,10 +42,8 @@ Route10_Text_HeidiDefeat::
     .string "After all my training!$"
 
 Route10_Text_HeidiPostBattle::
-    .string "I noticed some POKéMANIACS\n"
-    .string "prowling around.\p"
-    .string "Can you imagine? Them?\n"
-    .string "Up here in the mountains?$"
+    .string "I noticed some ARCHIVISTS prowling\n"
+    .string "around.$"
 
 Route10_Text_TrentIntro::
     .string "Ah!\n"
@@ -77,7 +74,7 @@ Route10_Text_RockTunnelDetourToLavender::
     .string "TOWN$"
 
 Route10_Text_RockTunnel::
-    .string "ROCK TUNNEL$"
+    .string "THE BLACKOUT$"
 
 Route10_Text_PowerPlant::
     .string "POWER PLANT$"

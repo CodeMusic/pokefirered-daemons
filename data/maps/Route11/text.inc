@@ -42,8 +42,8 @@ Route11_Text_BraxtonPostBattle::
     .string "Spread the word to save energy!$"
 
 Route11_Text_DillonIntro::
-    .string "I just became a USER. But, I think\n"
-    .string "I can win.$"
+    .string "I just became a USER! But, I think\n"
+    .string "I can win!$"
 
 Route11_Text_DillonDefeat::
     .string "My DAEMONS couldn't win… Haven't\n"
@@ -77,7 +77,7 @@ Route11_Text_YasuIntro::
     .string "I train every morning.$"
 
 Route11_Text_YasuDefeat::
-    .string "Darn! My DAEMONS need to be\n"
+    .string "Darn! I need to make my DAEMONS\n"
     .string "stronger!$"
 
 Route11_Text_YasuPostBattle::
@@ -97,8 +97,8 @@ Route11_Text_BerniePostBattle::
     .string "Well, better get back to work.$"
 
 Route11_Text_DaveIntro::
-    .string "I raised my DAEMONS carefully.\n"
-    .string "They should be ready by now!$"
+    .string "My DAEMONS should be ready by\n"
+    .string "now!$"
 
 Route11_Text_DaveDefeat::
     .string "Bye-bye!\n"

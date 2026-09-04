@@ -1,7 +1,9 @@
 CeladonCity_Text_GotMyKoffingInCinnabar::
-    .string "I got my KOFFING in QUICKSILVER.\p"
-    .string "It's usually nice, but it breathes\n"
-    .string "poison when it's angry.$"
+    .string "Winter, that was. Four of them.\p"
+    .string "An outside firm did the wiring.\p"
+    .string "My uncle saw it. He says it\n"
+    .string "changed while he was looking.\p"
+    .string "The room with no window.$"
 
 CeladonCity_Text_GymIsGreatFullOfWomen::
     .string "Heheh! This GYM is great!\n"
@@ -32,47 +34,52 @@ CeladonCity_Text_GetLostOrIllPunchYou::
     .string "Get lost, or I'll punch you.$"
 
 CeladonCity_Text_KeepOutOfTeamRocketsWay::
-    .string "Keep out of TEAM ROCKET's way!$"
+    .string "Keep out of TEAM CORPUS's way!$"
 
 CeladonCity_Text_ExplainXAccuracyDireHit::
     .string "USER TIPS\p"
     .string "X ACCURACY boosts the accuracy of\n"
-    .string "techniques.\p"
+    .string "techniques!\p"
     .string "DIRE HIT jacks up the likelihood\n"
-    .string "of critical hits.\p"
-    .string "Get your items at the VERDIGRIS\n"
-    .string "DEPT. STORE!$"
+    .string "of critical hits!\p"
+    .string "Get your items at VERDIGRIS DEPT.\n"
+    .string "STORE!$"
 
 CeladonCity_Text_CitySign::
-    .string "VERDIGRIS CITY The City of\n"
+    .string "VERDIGRIS CITY\n"
+    .string "The City of\l"
     .string "Rainbow Dreams$"
 
 CeladonCity_Text_GymSign::
-    .string "VERDIGRIS CITY DAEMON GYM\n"
-    .string "LEADER: ERIKA The Nature-Loving\l"
+    .string "VERDIGRIS CITY\n"
+    .string "DAEMON GYM\l"
+    .string "LEADER: ERIKA\p"
+    .string "The Nature Loving\n"
     .string "Princess!$"
 
 CeladonCity_Text_MansionSign::
     .string "VERDIGRIS MANSION$"
 
 CeladonCity_Text_DeptStoreSign::
-    .string "Find what you need at the\n"
-    .string "VERDIGRIS DEPT. STORE!$"
+    .string "Find what you\n"
+    .string "need at VERDIGRIS\l"
+    .string "DEPT. STORE!$"
 
 CeladonCity_Text_GuardSpecProtectsFromStatus::
     .string "USER TIPS\p"
-    .string "GUARD SPEC. protects DAEMON from\n"
-    .string "status-reduction moves during\l"
-    .string "battle.\p"
-    .string "Get your items at the VERDIGRIS\n"
-    .string "DEPT. STORE!$"
+    .string "GUARD SPEC. protects DAEMON\n"
+    .string "against SPECIAL attacks such as\l"
+    .string "fire and water!\p"
+    .string "Get your items at VERDIGRIS DEPT.\n"
+    .string "STORE!$"
 
 CeladonCity_Text_PrizeExchangeSign::
     .string "COINS exchanged for prizes!\n"
     .string "PRIZE EXCHANGE$"
 
 CeladonCity_Text_GameCornerSign::
-    .string "CORPUS GAME CORNER The playground\n"
+    .string "CORPUS GAME CORNER\n"
+    .string "The playground\l"
     .string "for grown-ups!$"
 
 CeladonCity_Text_ScaldedTongueOnTea::

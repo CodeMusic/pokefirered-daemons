@@ -5,7 +5,7 @@ CeladonCity_Restaurant_Text_TakingBreakRightNow::
 
 CeladonCity_Restaurant_Text_OftenGoToDrugstore::
     .string "My DAEMONS are weak, so I often\n"
-    .string "have to go to the DRUGSTORE.$"
+    .string "have to go to the DRUG STORE.$"
 
 CeladonCity_Restaurant_Text_PsstBasementUnderGameCorner::
     .string "Psst! There's a basement under the\n"

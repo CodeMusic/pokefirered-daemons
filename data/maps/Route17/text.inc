@@ -52,15 +52,14 @@ Route17_Text_NikolasPostBattle::
     .string "POWER PLANT.$"
 
 Route17_Text_ZeekIntro::
-    .string "I leveled up my DAEMONS, but it\n"
-    .string "won't evolve. Why?$"
+    .string "My DAEMONS won't evolve! Why?$"
 
 Route17_Text_ZeekDefeat::
     .string "Why, you!$"
 
 Route17_Text_ZeekPostBattle::
     .string "Maybe some DAEMONS need element\n"
-    .string "STONES to evolve.$"
+    .string "STONEs to evolve.$"
 
 Route17_Text_JamalIntro::
     .string "I need a little exercise!$"
@@ -99,7 +98,7 @@ Route17_Text_WilliamDefeat::
     .string "Are you satisfied?$"
 
 Route17_Text_WilliamPostBattle::
-    .string "I need to bind a few z's!$"
+    .string "I need to bind a few Zs!$"
 
 Route17_Text_WatchOutForDiscardedItems::
     .string "It's a notice.\p"
@@ -108,22 +107,26 @@ Route17_Text_WatchOutForDiscardedItems::
 Route17_Text_SameSpeciesGrowDifferentRates::
     .string "USER TIPS\p"
     .string "All DAEMONS are unique.\p"
-    .string "Even DAEMON of the same species\n"
-    .string "and level grow at different rates.$"
+    .string "Even DAEMON of the same type and\n"
+    .string "level grow at different rates.$"
 
 Route17_Text_PressBToStayInPlace::
     .string "USER TIPS\p"
-    .string "Press the B Button to stay in place\n"
-    .string "while on a slope.$"
+    .string "Press the A or B Button to stay in\n"
+    .string "place while on a slope.$"
 
 Route17_Text_RouteSign::
-    .string "ROUTE 17 VERDIGRIS CITY - LURID\n"
-    .string "CITY$"
+    .string "ROUTE 17\n"
+    .string "VERDIGRIS CITY -\l"
+    .string "LURID CITY\p"
+    .string "Painted beneath:\n"
+    .string "THE STREAK$"
 
 Route17_Text_DontThrowGameThrowBalls::
     .string "It's a notice!\p"
-    .string "Don't throw the game, throw POKé\n"
-    .string "BALLS instead!$"
+    .string "Don't throw the\n"
+    .string "game, throw\l"
+    .string "USERBOXes instead!$"
 
 Route17_Text_CyclingRoadSign::
     .string "CYCLING ROAD\n"

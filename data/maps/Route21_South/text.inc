@@ -1,12 +1,12 @@
 Route21_South_Text_JackIntro::
-	.string "I bound my DAEMONS at sea.$"
+    .string "I bound all my DAEMONS at sea!$"
 
 Route21_South_Text_JackDefeat::
 	.string "Diver!!\n"
 	.string "Down!!$"
 
 Route21_South_Text_JackPostBattle::
-	.string "Where'd you bind your DAEMON?$"
+    .string "Where'd you bind your DAEMON?$"
 
 Route21_South_Text_JeromeIntro::
 	.string "Right now, I'm in a triathlon meet.$"
@@ -34,8 +34,8 @@ Route21_South_Text_ClaudeIntro::
 	.string "Hey, don't scare away the fish!$"
 
 Route21_South_Text_ClaudeDefeat::
-	.string "Sorry! I'm just so frustrated from\n"
-	.string "not binding anything.$"
+    .string "I was just angry that I couldn't\n"
+    .string "bind anything.$"
 
 Route21_South_Text_ClaudePostBattle::
 	.string "Sheesh, I haven't bound a thing.\n"

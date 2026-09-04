@@ -1,8 +1,7 @@
 Route10_PokemonCenter_1F_Text_EveryTypeStrongerThanOthers::
-    .string "The types of DAEMONS match up\n"
-    .string "differently with each other.\p"
-    .string "Every type is stronger than some\n"
-    .string "types and weaker than others.$"
+    .string "The element types of DAEMONS make\n"
+    .string "them stronger than some types and\l"
+    .string "weaker than others!$"
 
 Route10_PokemonCenter_1F_Text_NuggetUselessSoldFor5000::
     .string "A NUGGET is totally useless.\n"

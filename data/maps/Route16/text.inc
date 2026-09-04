@@ -75,8 +75,11 @@ Route16_Text_CyclingRoadSign::
     .string "CYCLING ROAD$"
 
 Route16_Text_RouteSign::
-    .string "ROUTE 16 VERDIGRIS CITY - LURID\n"
-    .string "CITY$"
+    .string "ROUTE 16\n"
+    .string "VERDIGRIS CITY -\l"
+    .string "LURID CITY\p"
+    .string "Painted beneath:\n"
+    .string "THE STREAK$"
 
 Route16_Text_JedIntro::
     .string "JED: Our love knows no bounds.\n"

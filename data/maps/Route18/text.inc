@@ -31,8 +31,11 @@ Route18_Text_JacobPostBattle::
     .string "DAEMONS.$"
 
 Route18_Text_RouteSign::
-    .string "ROUTE 18 VERDIGRIS CITY - LURID\n"
-    .string "CITY$"
+    .string "ROUTE 18\n"
+    .string "VERDIGRIS CITY -\l"
+    .string "LURID CITY\p"
+    .string "Painted beneath:\n"
+    .string "THE STREAK$"
 
 Route18_Text_CyclingRoadSign::
     .string "CYCLING ROAD\n"

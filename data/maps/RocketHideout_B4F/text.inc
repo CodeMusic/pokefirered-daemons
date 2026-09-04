@@ -10,16 +10,15 @@ RocketHideout_B4F_Text_GiovanniIntro::
     .string "world of pain!$"
 
 RocketHideout_B4F_Text_GiovanniDefeat::
-    .string "WHAT!\n"
-    .string "This can't be!$"
+    .string "Well measured.$"
 
 RocketHideout_B4F_Text_GiovanniPostBattle::
-    .string "I see that you raise DAEMONS with\n"
-    .string "utmost care.\p"
-    .string "A child like you would never\n"
-    .string "understand what I hope to achieve.\p"
-    .string "I shall step aside this time!\p"
-    .string "I hope we meet again…$"
+    .string "Take this. We used it for\n"
+    .string "inventory.\p"
+    .string "There's a tag on it. Some old asset\n"
+    .string "number.\p"
+    .string "QS-LAB, I think. Before my time.\p"
+    .string "Good luck at the tower.$"
 
 RocketHideout_B4F_Text_Grunt2Intro::
     .string "I know you!\n"

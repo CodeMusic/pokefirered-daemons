@@ -7,7 +7,7 @@ SafariZone_West_Text_KogaPatrolsSafariEverySoOften::
     .string "knowing that we're safe.$"
 
 SafariZone_West_Text_RocksMakeMonRunButEasierCatch::
-    .string "Tossing ROCKS at DAEMON might make\n"
+    .string "Tossing ROCKs at DAEMON might make\n"
     .string "them run, but they'll be easier to\l"
     .string "bind.$"
 

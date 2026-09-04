@@ -4,7 +4,7 @@ SafariZone_East_Text_RestHouse::
 SafariZone_East_Text_TimeDeclinesOnlyWhileYouWalk::
     .string "USER TIPS\p"
     .string "The remaining time declines only\n"
-    .string "while you walk.$"
+    .string "while you walk!$"
 
 SafariZone_East_Text_AreaSign::
     .string "AREA 1\n"

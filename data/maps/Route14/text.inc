@@ -21,10 +21,8 @@ Route14_Text_MitchPostBattle::
     .string "better moves.$"
 
 Route14_Text_BeckIntro::
-    .string "They have TMs on sale at the\n"
-    .string "VERDIGRIS DEPT. STORE.\p"
-    .string "TMs aren't really rare, but not many\n"
-    .string "people have HMs.$"
+    .string "TMs are on sale in VERDIGRIS! But,\n"
+    .string "only a few people have HMs!$"
 
 Route14_Text_BeckDefeat::
     .string "Aww, bummer!$"
@@ -119,7 +117,11 @@ Route14_Text_MalikPostBattle::
     .string "one-on-one!$"
 
 Route14_Text_RouteSign::
-    .string "ROUTE 14 West to LURID CITY$"
+    .string "ROUTE 14\n"
+    .string "West to LURID\l"
+    .string "CITY\p"
+    .string "Painted beneath:\n"
+    .string "BRACKISH$"
 
 Route14_Text_KiriIntro::
     .string "KIRI: JAN, let's try really,\n"

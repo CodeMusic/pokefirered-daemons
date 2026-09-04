@@ -1,8 +1,8 @@
 PewterCity_House2_Text_MonsLearnTechniquesAsTheyGrow::
     .string "DAEMON learn new techniques as\n"
-    .string "they grow.\p"
-    .string "But some moves must be taught to\n"
-    .string "them by people.$"
+    .string "they grow!\p"
+    .string "But, some moves must be taught by\n"
+    .string "the USER!$"
 
 PewterCity_House2_Text_MonsEasierCatchIfStatused::
     .string "A DAEMON becomes easier to bind if\n"

@@ -8,12 +8,10 @@ SaffronCity_Gym_Text_SabrinaIntro::
     .string "I will show you my powers!{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
 
 SaffronCity_Gym_Text_SabrinaDefeat::
-    .string "This loss shocks me!\n"
-    .string "But, a loss is a loss.\p"
-    .string "I admit, I didn't work hard enough\n"
-    .string "to win.\p"
-    .string "Your victory has earned you the\n"
-    .string "MARSHBADGE.$"
+    .string "I'm shocked! But, a loss is a loss.\p"
+    .string "I admit I didn't work hard enough\n"
+    .string "to win!\p"
+    .string "You earned the FRAME MARK!$"
 
 SaffronCity_Gym_Text_SabrinaPostBattle::
     .string "Psychic power isn't something that\n"
@@ -22,13 +20,13 @@ SaffronCity_Gym_Text_SabrinaPostBattle::
     .string "People just don't realize it.$"
 
 SaffronCity_Gym_Text_ExplainMarshBadgeTakeThis::
-    .string "The MARSHBADGE makes DAEMON up to\n"
-    .string "Lv. 70 obey you.\p"
+    .string "The FRAME MARK makes DAEMON up to\n"
+    .string "L70 obey you!\p"
     .string "Stronger DAEMON will become wild,\n"
-    .string "ignoring your orders in battle.\p"
+    .string "ignoring your orders in battle!\p"
     .string "Just don't raise your DAEMON too\n"
-    .string "much to avoid that problem.\p"
-    .string "Wait, please take this TM with you.$"
+    .string "much!\p"
+    .string "Wait, please take this TM with you!$"
 
 SaffronCity_Gym_Text_ReceivedTM04FromSabrina::
     .string "{PLAYER} received TM04 from\n"
@@ -111,18 +109,17 @@ SaffronCity_Gym_Text_CameronDefeat::
     .string "Down and out!$"
 
 SaffronCity_Gym_Text_CameronPostBattle::
-    .string "There used to be two DAEMONS GYMS\n"
-    .string "in BRAZEN.\p"
+    .string "There used to be 2 DAEMON GYMs in\n"
+    .string "BRAZEN.\p"
     .string "The FIGHTING DOJO next door lost\n"
-    .string "its GYM status, though.\p"
-    .string "We simply creamed them when we\n"
-    .string "decided to have just one GYM.$"
+    .string "its GYM status when we went and\l"
+    .string "creamed them!$"
 
 SaffronCity_Gym_Text_PrestonIntro::
     .string "BRAZEN DAEMON GYM is famous for\n"
-    .string "training psychics.\p"
-    .string "You want to see SABRINA, don't\n"
-    .string "you? I can tell!$"
+    .string "its psychics!\p"
+    .string "You want to see SABRINA! I can\n"
+    .string "tell!$"
 
 SaffronCity_Gym_Text_PrestonDefeat::
     .string "Arrrgh!$"
@@ -132,13 +129,13 @@ SaffronCity_Gym_Text_PrestonPostBattle::
     .string "read your mind!$"
 
 SaffronCity_Gym_Text_GymGuyAdvice::
-    .string "Yo! Champ in the making!\p"
+    .string "Yo! Champ in making!\p"
     .string "SABRINA's DAEMON use psychic power\n"
-    .string "instead of force.\p"
-    .string "FIGHTING DAEMONS are especially\n"
-    .string "weak against PSYCHIC DAEMON.\p"
-    .string "They'll get destroyed before they\n"
-    .string "can even aim a punch!$"
+    .string "instead of force!\p"
+    .string "Fighting DAEMONS are weak against\n"
+    .string "psychic DAEMON!\p"
+    .string "They get creamed before they can\n"
+    .string "even aim a punch!$"
 
 SaffronCity_Gym_Text_GymGuyPostVictory::
     .string "Psychic power, huh?\p"

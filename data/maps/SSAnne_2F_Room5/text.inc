@@ -1,8 +1,8 @@
 SSAnne_2F_Room5_Text_HaveYouGoneToSafariZone::
     .string "Have you gone to the SAFARI ZONE\n"
     .string "in LURID CITY?\p"
-    .string "There are many kinds of rare\n"
-    .string "DAEMON.$"
+    .string "It had many rare kinds of\n"
+    .string "DAEMONS!!$"
 
 SSAnne_2F_Room5_Text_WeThinkSafariZoneIsAwesome::
     .string "Me and my daddy think the SAFARI\n"

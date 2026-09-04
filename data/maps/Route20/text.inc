@@ -6,8 +6,7 @@ Route20_Text_BarryDefeat::
     .string "Splash!$"
 
 Route20_Text_BarryPostBattle::
-    .string "I wish I could ride my DAEMONS. I\n"
-    .string "bet you're not tired.$"
+    .string "I wish I could ride my DAEMONS.$"
 
 Route20_Text_ShirleyIntro::
     .string "SEAFOAM is a quiet getaway.\n"
@@ -84,22 +83,18 @@ Route20_Text_NoraPostBattle::
     .string "CLOYSTER?$"
 
 Route20_Text_MissyIntro::
-    .string "I swam here from QUICKSILVER\n"
-    .string "ISLAND. It wasn't easy, I tell you.$"
+    .string "I swam here from QUICKSILVER!$"
 
 Route20_Text_MissyDefeat::
     .string "I'm so disappointed!$"
 
 Route20_Text_MissyPostBattle::
     .string "DAEMONS have taken over an\n"
-    .string "abandoned mansion on QUICKSILVER.\p"
-    .string "They call it the DAEMON MANSION\n"
-    .string "now.$"
+    .string "abandoned mansion on QUICKSILVER!$"
 
 Route20_Text_MelissaIntro::
     .string "QUICKSILVER, in the west, has a\n"
-    .string "LAB for DAEMON.\p"
-    .string "My daddy works there.$"
+    .string "LAB for DAEMON.$"
 
 Route20_Text_MelissaDefeat::
     .string "Wait!\n"

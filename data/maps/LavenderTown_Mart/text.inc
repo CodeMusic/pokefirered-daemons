@@ -8,8 +8,8 @@ LavenderTown_Mart_Text_SearchingForStatRaiseItems::
     .string "Do you know where I can get them?$"
 
 LavenderTown_Mart_Text_DidYouBuyRevives::
-    .string "Did you buy some REVIVES? They\n"
-    .string "revive any HALTED DAEMON!$"
+    .string "You know REVIVE? It revives any\n"
+    .string "HALTED DAEMON!$"
 
 LavenderTown_Mart_Text_TrainerDuosCanChallengeYou::
     .string "Sometimes, a USER duo will\n"

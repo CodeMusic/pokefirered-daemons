@@ -1,13 +1,13 @@
 SilphCo_10F_Text_GruntIntro::
-    .string "Welcome to 10F!\n"
-    .string "So good of you to join me!$"
+    .string "Welcome to 10F! So glad you could\n"
+    .string "make it!$"
 
 SilphCo_10F_Text_GruntDefeat::
-    .string "I'm stunned!$"
+    .string "Unexpected.$"
 
 SilphCo_10F_Text_GruntPostBattle::
-    .string "Nice try, but the boardroom is up\n"
-    .string "one more floor.$"
+    .string "The boardroom is one floor up.\p"
+    .string "Do go through!$"
 
 SilphCo_10F_Text_TravisIntro::
     .string "Enough of your silly games!$"

@@ -1,13 +1,11 @@
 CeruleanCity_PokemonCenter_1F_Text_BillDoesWhateverForRareMons::
     .string "That HOLT!\p"
     .string "I heard that he'll do whatever it\n"
-    .string "takes to get rare DAEMON.\p"
-    .string "He's not above doing all sorts of\n"
-    .string "things, I've heard.$"
+    .string "takes to get rare DAEMON!$"
 
 CeruleanCity_PokemonCenter_1F_Text_EveryoneCallsBillPokemaniac::
     .string "Have you heard about HOLT?\p"
-    .string "Everyone calls him a POKéMANIAC!\p"
+    .string "Everyone calls him an ARCHIVIST!\p"
     .string "I think people are just jealous of\n"
     .string "HOLT, though.\p"
     .string "Who wouldn't want to boast about\n"

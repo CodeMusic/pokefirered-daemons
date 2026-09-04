@@ -1,7 +1,8 @@
 PewterCity_PokemonCenter_1F_Text_TeamRocketMtMoonImOnPhone::
     .string "What!?\p"
-    .string "TEAM CORPUS is at MT. MOON? Huh?\p"
-    .string "I'm on the phone! Scram!$"
+    .string "TEAM CORPUS is at MT.MOON? Huh?\n"
+    .string "I'm on the phone!\p"
+    .string "Scram!$"
 
 PewterCity_PokemonCenter_1F_Text_Jigglypuff::
     .string "SUSPEND: Puu pupuu!$"

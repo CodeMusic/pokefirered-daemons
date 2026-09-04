@@ -1,5 +1,5 @@
 SilphCo_6F_Text_RocketsTookOverBuilding::
-    .string "The CORPUS came and took over the\n"
+    .string "CORPUS came and took over the\n"
     .string "building!$"
 
 SilphCo_6F_Text_BetterGetBackToWork::
@@ -22,12 +22,11 @@ SilphCo_6F_Text_NeedsMeToLookAfterHim::
     .string "someone like me to look after him.$"
 
 SilphCo_6F_Text_RocketsTryingToConquerWorld::
-    .string "TEAM CORPUS is trying to conquer\n"
-    .string "the world with DAEMON.$"
+    .string "CORPUS wants every DAEMON on their\n"
+    .string "books!$"
 
 SilphCo_6F_Text_RocketsRanAwayBecauseOfYou::
-    .string "TEAM CORPUS ran away, and it's all\n"
-    .string "because of you!$"
+    .string "TEAM CORPUS ran because of you!$"
 
 SilphCo_6F_Text_TargetedSilphForOurMonProducts::
     .string "They must have targeted SILPH for\n"
@@ -38,15 +37,14 @@ SilphCo_6F_Text_ComeWorkForSilphWhenYoureOlder::
     .string "get older.$"
 
 SilphCo_6F_Text_Grunt1Intro::
-    .string "I am one of the four CORPUS\n"
-    .string "BROTHERS!$"
+    .string "I'm one of four on this account!$"
 
 SilphCo_6F_Text_Grunt1Defeat::
-    .string "Flame out!$"
+    .string "Deprioritised.$"
 
 SilphCo_6F_Text_Grunt1PostBattle::
-    .string "No matter!\n"
-    .string "My brothers will avenge me!$"
+    .string "No matter. My colleagues will\n"
+    .string "follow up.$"
 
 SilphCo_6F_Text_TaylorIntro::
     .string "That rotten PRESIDENT!\p"
@@ -63,14 +61,15 @@ SilphCo_6F_Text_TaylorPostBattle::
     .string "It's in Russian no-man's-land!$"
 
 SilphCo_6F_Text_Grunt2Intro::
-    .string "You dare betray TEAM CORPUS?$"
+    .string "Are you aligned with CORPUS?$"
 
 SilphCo_6F_Text_Grunt2Defeat::
-    .string "You traitor!$"
+    .string "Not aligned.$"
 
 SilphCo_6F_Text_Grunt2PostBattle::
-    .string "If you stand for justice, you\n"
-    .string "betray us bad guys!$"
+    .string "Standing for one thing means\n"
+    .string "leaving another.\p"
+    .string "That's synergy!$"
 
 SilphCo_6F_Text_FloorSign::
     .string "SILPH CO. HEAD OFFICE\n"

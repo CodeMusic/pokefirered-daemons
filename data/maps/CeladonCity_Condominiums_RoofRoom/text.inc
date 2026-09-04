@@ -1,10 +1,8 @@
 CeladonCity_Condominiums_RoofRoom_Text_TheresNothingIDontKnow::
-    .string "There is nothing that I don't know,\n"
-    .string "like I wrote on the blackboard.\p"
-    .string "I know about the world of DAEMON\n"
-    .string "in your GAME BOY ADVANCE!\p"
+    .string "I know everything about the world\n"
+    .string "of DAEMON in your GAME BOY!\p"
     .string "Get together with your friends and\n"
-    .string "enjoy trading DAEMONS!$"
+    .string "trade DAEMONS!$"
 
 CeladonCity_Condominiums_RoofRoom_Text_ObtainedAnEevee::
     .string "{PLAYER} obtained an MUSAI!$"

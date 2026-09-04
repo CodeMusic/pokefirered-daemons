@@ -1,15 +1,14 @@
 RocketHideout_B3F_Text_Grunt1Intro::
-    .string "Stop meddling in TEAM ROCKET's\n"
-    .string "affairs or else!$"
+    .string "Stop meddling in TEAM CORPUS's\n"
+    .string "affairs!$"
 
 RocketHideout_B3F_Text_Grunt1Defeat::
     .string "Oof!\n"
     .string "Taken down!$"
 
 RocketHideout_B3F_Text_Grunt1PostBattle::
-    .string "SILPH SCOPE?\n"
-    .string "Oh, that machine the BOSS stole.\p"
-    .string "It's here somewhere.$"
+    .string "RESOLVER? The machine the BOSS\n"
+    .string "stole. It's here somewhere.$"
 
 RocketHideout_B3F_Text_Grunt2Intro::
     .string "We got word from upstairs that you\n"

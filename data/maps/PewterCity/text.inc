@@ -20,18 +20,19 @@ Text_DreamEaterTaught::
     .string "I…can't eat…anymore…$"
 
 PewterCity_Text_ClefairyCameFromMoon::
-    .string "CLEFAIRY came from the moon.\n"
-    .string "That's what the rumor is.\p"
-    .string "They appeared after MOON STONES\n"
-    .string "fell on MT. MOON.$"
+    .string "Morning, it happened. Six people\n"
+    .string "signed in.\p"
+    .string "Coolant failure, I was told.\p"
+    .string "Purple thing. All flat faces, like\n"
+    .string "cut glass.\p"
+    .string "West side of the building.$"
 
 PewterCity_Text_BrockOnlySeriousTrainerHere::
     .string "There aren't many serious DAEMON\n"
-    .string "USERS here.\p"
-    .string "They're all like BUG CATCHERS, you\n"
-    .string "know, just hobbyists.\p"
-    .string "But SLATE GYM's BROCK isn't like\n"
-    .string "that, not one bit.$"
+    .string "USERS here!\p"
+    .string "They're all like BUG CATCHERs, but\n"
+    .string "SLATE GYM's BROCK is totally into\l"
+    .string "it!$"
 
 PewterCity_Text_DidYouCheckOutMuseum::
     .string "Did you check out the MUSEUM?$"
@@ -62,9 +63,8 @@ PewterCity_Text_SprayingRepelToKeepWildMonsOut::
     .string "DAEMON out of my garden!$"
 
 PewterCity_Text_BrocksLookingForChallengersFollowMe::
-    .string "You're a USER, right?\p"
-    .string "BROCK's looking for new challengers.\n"
-    .string "Follow me!$"
+    .string "You're a USER right? BROCK's looking\n"
+    .string "for new challengers! Follow me!$"
 
 PewterCity_Text_GoTakeOnBrock::
     .string "If you have the right stuff,\n"
@@ -72,25 +72,33 @@ PewterCity_Text_GoTakeOnBrock::
 
 PewterCity_Text_TrainerTipsEarningEXP::
     .string "USER TIPS\p"
-    .string "All DAEMON that appear in battle,\n"
-    .string "however briefly, earn EXP Points.$"
+    .string "Any DAEMON that takes part in\n"
+    .string "battle, however short, earns EXP!$"
 
 PewterCity_Text_CallPoliceIfInfoOnThieves::
     .string "NOTICE!\p"
-    .string "Thieves have been stealing DAEMON\n"
-    .string "fossils from MT. MOON.\p"
-    .string "Please call the SLATE POLICE if\n"
-    .string "you have any information.$"
+    .string "Thieves have been\n"
+    .string "stealing DAEMON\l"
+    .string "fossils at MT.\l"
+    .string "MOON! Please call\l"
+    .string "SLATE POLICE\l"
+    .string "with any info!$"
 
 PewterCity_Text_MuseumOfScience::
-    .string "SLATE MUSEUM OF SCIENCE$"
+    .string "SLATE MUSEUM\n"
+    .string "OF SCIENCE$"
 
 PewterCity_Text_GymSign::
-    .string "SLATE CITY DAEMON GYM LEADER:\n"
-    .string "BROCK The Rock-Solid DAEMON USER!$"
+    .string "SLATE CITY\n"
+    .string "DAEMON GYM\l"
+    .string "LEADER: BROCK\p"
+    .string "The Rock Solid\n"
+    .string "DAEMON USER!$"
 
 PewterCity_Text_CitySign::
-    .string "SLATE CITY A Stone Gray City$"
+    .string "SLATE CITY\n"
+    .string "A Stone Gray\l"
+    .string "City$"
 
 @ The below 3 JP texts are unused. Possibly a cut NPC meant to give the player the Berry Pouch
 PewterCity_Text_DefeatedBrockYouCanHaveTreasure::

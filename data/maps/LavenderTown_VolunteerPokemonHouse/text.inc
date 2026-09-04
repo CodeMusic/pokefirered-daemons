@@ -19,7 +19,7 @@ LavenderTown_VolunteerPokemonHouse_Text_MrFujiLooksAfterOrphanedMons::
 
 LavenderTown_VolunteerPokemonHouse_Text_MonsNiceToHug::
     .string "It's so warm! DAEMONS are so nice\n"
-    .string "to hug.$"
+    .string "to hug!$"
 
 LavenderTown_VolunteerPokemonHouse_Text_Nidorino::
     .string "NIDORINO: Gaoo!$"
@@ -41,10 +41,9 @@ LavenderTown_VolunteerPokemonHouse_Text_ReceivedPokeFluteFromMrFuji::
     .string "from MR. FUJI.$"
 
 LavenderTown_VolunteerPokemonHouse_Text_ExplainPokeFlute::
-    .string "Upon hearing the POKé FLUTE,\n"
-    .string "sleeping DAEMON will spring awake.\p"
-    .string "Try using it on DAEMON that are\n"
-    .string "sleeping obstacles.$"
+    .string "Upon hearing POKé FLUTE, sleeping\n"
+    .string "DAEMON will spring awake.\p"
+    .string "It works on all sleeping DAEMON.$"
 
 LavenderTown_VolunteerPokemonHouse_Text_MustMakeRoomForThis::
     .string "You must make room for this!$"

@@ -20,7 +20,7 @@ SSAnne_Deck_Text_EdmondDefeat::
 
 SSAnne_Deck_Text_EdmondPostBattle::
     .string "How many kinds of DAEMONS do you\n"
-    .string "think there are in this big world?$"
+    .string "think there are?$"
 
 SSAnne_Deck_Text_TrevorIntro::
     .string "Ahoy, there!\n"
@@ -30,6 +30,6 @@ SSAnne_Deck_Text_TrevorDefeat::
     .string "I was just careless!$"
 
 SSAnne_Deck_Text_TrevorPostBattle::
-    .string "My pa said there are 100 kinds of\n"
+    .string "My Pa said there are 100 kinds of\n"
     .string "DAEMONS. I think there are more.$"
 

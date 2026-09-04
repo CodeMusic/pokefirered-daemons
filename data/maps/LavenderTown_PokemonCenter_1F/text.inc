@@ -1,13 +1,10 @@
 LavenderTown_PokemonCenter_1F_Text_RocketsDoAnythingForMoney::
     .string "TEAM CORPUS will do anything for\n"
-    .string "the sake of money!\p"
-    .string "There is no job too dirty, no deed\n"
-    .string "too heinous, no crime too wicked!$"
+    .string "the sake of gold!$"
 
 LavenderTown_PokemonCenter_1F_Text_CubonesMotherKilledByRockets::
-    .string "I saw CUBONE's mother trying to\n"
-    .string "escape from TEAM CORPUS.\p"
-    .string "She was killed trying to get away…$"
+    .string "I saw CUBONE's mother die trying to\n"
+    .string "escape from TEAM CORPUS!$"
 
 LavenderTown_PokemonCenter_1F_Text_PeoplePayForCuboneSkulls::
     .string "You know how the CUBONE species\n"

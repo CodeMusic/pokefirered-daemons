@@ -19,18 +19,18 @@ PokemonTower_2F_Text_RivalVictory::
     .string "もっと　ちゃんと　そだてて　やれよ$"
 
 PokemonTower_2F_Text_RivalPostBattle::
-    .string "How's your INDEX coming? I just\n"
-    .string "bound a CUBONE!\p"
-    .string "I can't find the bigger MAROWAK.\n"
-    .string "Where could they be?\p"
-    .string "I bet there aren't any left!\p"
-    .string "Well, I better get going. I've got\n"
-    .string "a lot to accomplish, unlike you.\p"
+    .string "How's your INDEX coming, pal? I\n"
+    .string "just bound a CUBONE!\p"
+    .string "I can't find the grown-up MAROWAK\n"
+    .string "yet!\p"
+    .string "I doubt there are any left! Well,\n"
+    .string "I better get going! I've got a lot\l"
+    .string "to accomplish, pal!\p"
     .string "Smell ya later!$"
 
 PokemonTower_2F_Text_SilphScopeCouldUnmaskGhosts::
     .string "Even we could not identify the\n"
-    .string "wayward ghosts.\p"
-    .string "A SILPH SCOPE might be able to\n"
-    .string "unmask them.$"
+    .string "wayward GHOSTs!\p"
+    .string "A RESOLVER might be able to unmask\n"
+    .string "them.$"
 

@@ -9,7 +9,7 @@ ViridianForest_Text_RickIntro::
     .string "Let's battle 'em!$"
 
 ViridianForest_Text_RickDefeat::
-    .string "No! CRAWLER can't hack it!$"
+    .string "No! CRAWLER can't cut it!$"
 
 ViridianForest_Text_RickPostBattle::
     .string "Ssh! You'll scare the bugs away.\n"
@@ -23,8 +23,8 @@ ViridianForest_Text_DougDefeat::
     .string "Huh? I ran out of DAEMON!$"
 
 ViridianForest_Text_DougPostBattle::
-    .string "That totally stinks! I'm going to\n"
-    .string "bind some stronger ones!$"
+    .string "Darn! I'm going to bind some\n"
+    .string "stronger ones!$"
 
 ViridianForest_Text_SammyIntro::
     .string "Hey, wait up!\n"
@@ -70,9 +70,8 @@ ViridianForest_Text_RanOutOfPokeBalls::
 
 ViridianForest_Text_AvoidGrassyAreasWhenWeak::
     .string "USER TIPS\p"
-    .string "If your DAEMONS are weak and you\n"
-    .string "want to avoid battles, stay away\l"
-    .string "from grassy areas!$"
+    .string "If you want to avoid battles, stay\n"
+    .string "away from grassy areas!$"
 
 ViridianForest_Text_UseAntidoteForPoison::
     .string "For poison, use ANTIDOTE! Get it\n"
@@ -80,8 +79,8 @@ ViridianForest_Text_UseAntidoteForPoison::
 
 ViridianForest_Text_ContactOakViaPCToRatePokedex::
     .string "USER TIPS\p"
-    .string "Contact CRYSTAL CLEAR via a PC to\n"
-    .string "get your INDEX evaluated!$"
+    .string "Contact CRYSTAL via PC to get your\n"
+    .string "INDEX evaluated!$"
 
 ViridianForest_Text_CantCatchOwnedMons::
     .string "USER TIPS\p"
@@ -97,6 +96,7 @@ ViridianForest_Text_WeakenMonsBeforeCapture::
     .string "When healthy, they may escape!$"
 
 ViridianForest_Text_LeavingViridianForest::
-    .string "LEAVING CALLOW FOREST SLATE CITY\n"
-    .string "AHEAD$"
+    .string "LEAVING\n"
+    .string "THE UNDERTONE\l"
+    .string "SLATE CITY AHEAD$"
 

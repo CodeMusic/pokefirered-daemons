@@ -28,12 +28,11 @@ VictoryRoad_3F_Text_GeorgeDefeat::
     .string "The rumors were true!$"
 
 VictoryRoad_3F_Text_GeorgePostBattle::
-    .string "So, it was you who beat GIOVANNI\n"
-    .string "of TEAM CORPUS?$"
+    .string "You beat GIOVANNI of TEAM CORPUS?$"
 
 VictoryRoad_3F_Text_AlexaIntro::
     .string "USERS live to seek stronger\n"
-    .string "opponents.$"
+    .string "opponents!$"
 
 VictoryRoad_3F_Text_AlexaDefeat::
     .string "Oh!\n"
@@ -62,8 +61,7 @@ VictoryRoad_3F_Text_ColbyDefeat::
 
 VictoryRoad_3F_Text_ColbyPostBattle::
     .string "All USERS here are headed to the\n"
-    .string "DAEMON LEAGUE.\p"
-    .string "Don't let down your guard.$"
+    .string "DAEMON LEAGUE! Be careful!$"
 
 VictoryRoad_3F_Text_RayIntro::
     .string "RAY: Together, the two of us are\n"

@@ -1,6 +1,6 @@
 VermilionCity_House3_Text_PidgeyFlyLetterToSaffron::
     .string "I'm getting my PACKET to fly a\n"
-    .string "letter to BRAZEN in the north.$"
+    .string "letter to BRAZEN in the north!$"
 
 VermilionCity_House3_Text_Pidgey::
     .string "PACKET: Kurukkoo!$"

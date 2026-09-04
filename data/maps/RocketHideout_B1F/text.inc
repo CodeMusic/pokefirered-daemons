@@ -7,8 +7,7 @@ RocketHideout_B1F_Text_Grunt1Defeat::
     .string "Beaten!$"
 
 RocketHideout_B1F_Text_Grunt1PostBattle::
-    .string "Blast it… You're dissing TEAM\n"
-    .string "CORPUS, aren't you?$"
+    .string "Are you dissing TEAM CORPUS?$"
 
 RocketHideout_B1F_Text_Grunt2Intro::
     .string "You broke into TEAM ROCKET's\n"
@@ -28,8 +27,7 @@ RocketHideout_B1F_Text_Grunt3Defeat::
     .string "I can't do it!$"
 
 RocketHideout_B1F_Text_Grunt3PostBattle::
-    .string "SILPH SCOPE? Humph!\n"
-    .string "I don't know where it is.$"
+    .string "RESOLVER? I don't know where it is!$"
 
 RocketHideout_B1F_Text_Grunt4Intro::
     .string "Why did you come here?$"

@@ -1,17 +1,14 @@
 PokemonLeague_AgathasRoom_Text_Intro::
-    .string "I am AGATHA of the ELITE FOUR.\p"
-    .string "I hear CRYSTAL CLEAR's taken a lot\n"
-    .string "of interest in you, child.\p"
-    .string "That old duff was once tough and\n"
-    .string "striking.\p"
-    .string "But that was decades ago. She's a\n"
-    .string "shadow of her former self.\p"
+    .string "I am AGATHA of the ELITE FOUR!\p"
+    .string "CRYSTAL's taken a lot of interest in\n"
+    .string "you, child!\p"
+    .string "That old crank was once tough and\n"
+    .string "handsome! That was decades ago!\p"
     .string "Now she just wants to fiddle with\n"
-    .string "her INDEX.\p"
-    .string "She's wrong. DAEMONS are for\n"
-    .string "battling!\p"
+    .string "her INDEX! She's wrong! DAEMONS\l"
+    .string "are for fighting!\p"
     .string "{PLAYER}! I'll show you how a real\n"
-    .string "USER battles!{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
+    .string "USER fights!$"
 
 PokemonLeague_AgathasRoom_Text_RematchIntro::
     .string "I am AGATHA of the ELITE FOUR.\p"
@@ -34,9 +31,8 @@ PokemonLeague_AgathasRoom_Text_Defeat::
     .string "You're something special, child!$"
 
 PokemonLeague_AgathasRoom_Text_PostBattle::
-    .string "You win!\p"
-    .string "I see what the old duff sees in\n"
-    .string "you now.\p"
-    .string "I have nothing else to say.\n"
-    .string "Run along now, child!$"
+    .string "You win! I see what the old crank\n"
+    .string "sees in you now!\p"
+    .string "I have nothing else to say! Run\n"
+    .string "along now, child!$"
 

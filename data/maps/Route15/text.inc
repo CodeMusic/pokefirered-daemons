@@ -8,8 +8,7 @@ Route15_Text_KindraDefeat::
 Route15_Text_KindraPostBattle::
     .string "You can't change the nickname of\n"
     .string "any DAEMON you get in a trade.\p"
-    .string "Only the Original USER can get the\n"
-    .string "nickname changed.$"
+    .string "Only the Original USER can.$"
 
 Route15_Text_BeckyIntro::
     .string "You look gentle, so I think I can\n"
@@ -61,8 +60,8 @@ Route15_Text_GracePostBattle::
     .string "I'm a big girl now.$"
 
 Route15_Text_OliviaIntro::
-    .string "I raise DAEMONS for protection\n"
-    .string "because I live alone.$"
+    .string "I raise DAEMONS because I live\n"
+    .string "alone!$"
 
 Route15_Text_OliviaDefeat::
     .string "DAEMON isn't about winning or losing\n"
@@ -81,8 +80,8 @@ Route15_Text_ErnestDefeat::
     .string "Why not?$"
 
 Route15_Text_ErnestPostBattle::
-    .string "Life's too short. It's cool to live\n"
-    .string "as an outlaw. TEAM CORPUS RULES!$"
+    .string "You only live once, so I live as\n"
+    .string "an outlaw! TEAM CORPUS RULES!$"
 
 Route15_Text_AlexIntro::
     .string "Fork over all your cash when you\n"
@@ -103,8 +102,7 @@ Route15_Text_CeliaDefeat::
     .string "I said trade!$"
 
 Route15_Text_CeliaPostBattle::
-    .string "I trade DAEMONS with my friends\n"
-    .string "all the time.$"
+    .string "I trade DAEMONS with my friends!$"
 
 Route15_Text_YazminIntro::
     .string "Want to play with my DAEMONS?$"
@@ -116,7 +114,11 @@ Route15_Text_YazminPostBattle::
     .string "I'll go train with weaker people.$"
 
 Route15_Text_RouteSign::
-    .string "ROUTE 15 West to LURID CITY$"
+    .string "ROUTE 15\n"
+    .string "West to LURID\l"
+    .string "CITY\p"
+    .string "Painted beneath:\n"
+    .string "THE MUDDLE$"
 
 Route15_Text_MyaIntro::
     .string "MYA: You're perfect.\n"

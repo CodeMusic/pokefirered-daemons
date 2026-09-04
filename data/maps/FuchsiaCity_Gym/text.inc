@@ -12,10 +12,9 @@ FuchsiaCity_Gym_Text_KogaIntro::
     .string "POISON-type DAEMON!{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
 
 FuchsiaCity_Gym_Text_KogaDefeat::
-    .string "Humph!\n"
-    .string "You have proven your worth!\p"
-    .string "Here!\n"
-    .string "Take the SOULBADGE!$"
+    .string "Humph! You have proven your\n"
+    .string "worth!\p"
+    .string "Here! Take the SKEW MARK!$"
 
 FuchsiaCity_Gym_Text_KogaPostBattle::
     .string "When afflicted by TOXIC, a DAEMON\n"
@@ -25,11 +24,12 @@ FuchsiaCity_Gym_Text_KogaPostBattle::
     .string "It will surely terrorize foes!$"
 
 FuchsiaCity_Gym_Text_KogaExplainSoulBadge::
-    .string "Now that you have the SOULBADGE,\n"
-    .string "the DEFENSE of your DAEMON rises.\p"
+    .string "Now that you have the SKEW MARK,\n"
+    .string "the DEFENSE of your DAEMON\l"
+    .string "increases!\p"
     .string "It also lets you SURF outside of\n"
-    .string "battle.\p"
-    .string "Ah! Take this, too!$"
+    .string "battle!\p"
+    .string "Ah! Take this too!$"
 
 FuchsiaCity_Gym_Text_ReceivedTM06FromKoga::
     .string "{PLAYER} received TM06\n"
@@ -127,13 +127,13 @@ FuchsiaCity_Gym_Text_ShawnPostBattle::
     .string "Which do you choose?$"
 
 FuchsiaCity_Gym_Text_GymGuyAdvice::
-    .string "Yo! Champ in the making!\p"
-    .string "LURID GYM is a tricked-up place.\n"
-    .string "It's riddled with invisible walls!\p"
+    .string "Yo! Champ in making!\p"
+    .string "LURID GYM is riddled with invisible\n"
+    .string "walls!\p"
     .string "KOGA might appear close, but he's\n"
-    .string "blocked off.\p"
+    .string "blocked off!\p"
     .string "You have to find gaps in the walls\n"
-    .string "to reach him.$"
+    .string "to reach him!$"
 
 FuchsiaCity_Gym_Text_GymGuyPostVictory::
     .string "It's amazing how ninja can terrify,\n"

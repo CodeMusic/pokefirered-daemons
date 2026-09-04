@@ -70,16 +70,15 @@ MtMoon_1F_Text_KentPostBattle::
     .string "TEAM CORPUS!$"
 
 MtMoon_1F_Text_RobbyIntro::
-    .string "You need to go through this cave\n"
-    .string "to get to DOLDRUM CITY.$"
+    .string "Go through this cave to get to\n"
+    .string "DOLDRUM CITY!$"
 
 MtMoon_1F_Text_RobbyDefeat::
     .string "I lost.$"
 
 MtMoon_1F_Text_RobbyPostBattle::
-    .string "ZUBAT is tough! But if you can\n"
-    .string "bind one, you'll be able to count\l"
-    .string "on it.$"
+    .string "ZUBAT is tough! But, it can be\n"
+    .string "useful if you bind one.$"
 
 MtMoon_1F_Text_ZubatIsABloodsucker::
     .string "Beware!\n"

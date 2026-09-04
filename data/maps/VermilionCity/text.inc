@@ -1,7 +1,10 @@
 VermilionCity_Text_GrimerMultipliesInSludge::
-    .string "We're careful about pollution here.\p"
-    .string "We've heard GRIMER multiplies in\n"
-    .string "toxic sludge.$"
+    .string "Afternoon. One man, on his own.\p"
+    .string "Left a door open. That is all it\n"
+    .string "was.\p"
+    .string "A white rabbit sat there after.\n"
+    .string "Just sat.\p"
+    .string "Below where the roof went in.$"
 
 VermilionCity_Text_DidYouSeeSSAnneInHarbor::
     .string "Did you see the S.S. ANNE moored\n"
@@ -25,29 +28,36 @@ VermilionCity_Text_MachopStompingLandFlat::
     .string "A MACHOP is stomping the land flat.$"
 
 VermilionCity_Text_SSAnneVisitsOnceAYear::
-    .string "The S.S. ANNE is a famous luxury\n"
-    .string "cruise ship.\p"
-    .string "It visits ARDOR once a year.$"
+    .string "S.S.ANNE is a famous luxury cruise\n"
+    .string "ship.\p"
+    .string "We visit ARDOR once a year.$"
 
 VermilionCity_Text_CitySign::
-    .string "ARDOR CITY The Port of Exquisite\n"
-    .string "Sunsets$"
+    .string "ARDOR CITY\n"
+    .string "The Port of\l"
+    .string "Exquisite Sunsets$"
 
 VermilionCity_Text_SnorlaxBlockingRoute12::
     .string "NOTICE!\p"
-    .string "ROUTE 12 may be blocked off by a\n"
+    .string "ROUTE 12 may be\n"
+    .string "blocked off by a\l"
     .string "sleeping DAEMON.\p"
-    .string "Detour through ROCK TUNNEL to\n"
+    .string "Detour through\n"
+    .string "THE BLACKOUT to\l"
     .string "HALFTONE TOWN.\p"
     .string "ARDOR POLICE$"
 
 VermilionCity_Text_PokemonFanClubSign::
-    .string "DAEMON FAN CLUB All DAEMONS fans\n"
+    .string "DAEMON FAN CLUB\n"
+    .string "All DAEMONS fans\l"
     .string "welcome!$"
 
 VermilionCity_Text_GymSign::
-    .string "ARDOR CITY DAEMON GYM LEADER: LT.\n"
-    .string "SURGE The Lightning American!$"
+    .string "ARDOR CITY\n"
+    .string "DAEMON GYM\l"
+    .string "LEADER: LT.SURGE\p"
+    .string "The Lightning\n"
+    .string "American!$"
 
 VermilionCity_Text_VermilionHarbor::
     .string "ARDOR HARBOR$"

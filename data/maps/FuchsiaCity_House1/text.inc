@@ -6,11 +6,11 @@ FuchsiaCity_House1_Text_WardenIsOldHasFalseTeeth::
 FuchsiaCity_House1_Text_BillIsMyGrandson::
     .string "Hmm? You've met HOLT?\p"
     .string "He's my grandson!\p"
-    .string "He always liked collecting things,\n"
+    .string "He always liked collecting things\n"
     .string "even as a child!$"
 
 FuchsiaCity_House1_Text_BillFilesHisOwnMonData::
     .string "HOLT files his own DAEMON data on\n"
-    .string "his PC.\p"
+    .string "his PC!\p"
     .string "Did he show you?$"
 

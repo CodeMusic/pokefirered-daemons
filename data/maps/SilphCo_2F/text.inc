@@ -3,11 +3,11 @@ SilphCo_2F_Text_ConnorIntro::
     .string "I'm a SILPH employee.$"
 
 SilphCo_2F_Text_ConnorDefeat::
-    .string "How did you know I was a CORPUS?$"
+    .string "How did you know I was CORPUS?$"
 
 SilphCo_2F_Text_ConnorPostBattle::
     .string "I work for both SILPH and TEAM\n"
-    .string "CORPUS.$"
+    .string "CORPUS!$"
 
 SilphCo_2F_Text_JerryIntro::
     .string "It's off-limits here!\n"
@@ -21,34 +21,34 @@ SilphCo_2F_Text_JerryPostBattle::
     .string "It's not easy, I tell you!$"
 
 SilphCo_2F_Text_Grunt1Intro::
-    .string "No kids are allowed in here!$"
+    .string "This floor is badged access.\p"
+    .string "Do you have a MARK?$"
 
 SilphCo_2F_Text_Grunt1Defeat::
-    .string "Tough!$"
+    .string "Escalated.$"
 
 SilphCo_2F_Text_Grunt1PostBattle::
-    .string "Diamond-shaped tiles are teleport\n"
-    .string "blocks.\p"
-    .string "They're transporters for this\n"
-    .string "high-tech building.$"
+    .string "Diamond tiles are transport pads.\p"
+    .string "Facilities put them in. Very\n"
+    .string "efficient!$"
 
 SilphCo_2F_Text_Grunt2Intro::
-    .string "Hey, kid!\n"
-    .string "What are you wandering here for?$"
+    .string "Do you have a meeting on this\n"
+    .string "floor?$"
 
 SilphCo_2F_Text_Grunt2Defeat::
-    .string "I goofed!$"
+    .string "My error.$"
 
 SilphCo_2F_Text_Grunt2PostBattle::
-    .string "SILPH CO. will be associated with\n"
-    .string "TEAM CORPUS!$"
+    .string "SILPH CO. is joining the CORPUS\n"
+    .string "family!\p"
+    .string "Exciting times!$"
 
 Text_ThunderWaveTeach::
     .string "Eeek! No! Stop! Help!\p"
-    .string "Oh, you're not with TEAM CORPUS. I'm\n"
-    .string "sorry, I thought…\p"
-    .string "Will you forgive me if I teach you\n"
-    .string "the THUNDER WAVE technique?$"
+    .string "Oh, you're not with TEAM CORPUS. I\n"
+    .string "thought... I'm sorry. Here, please\l"
+    .string "take this!$"
 
 Text_ThunderWaveDeclined::
     .string "Oh…\n"

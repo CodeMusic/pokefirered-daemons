@@ -21,12 +21,14 @@ PokemonMansion_1F_Text_ArniePostBattle::
     .string "alternating sets of doors.$"
 
 PokemonMansion_1F_Text_NewMonDiscoveredInGuyanaJungle::
-    .string "Diary: July 5 Guyana, South\n"
-    .string "America\p"
-    .string "A new DAEMON was discovered deep\n"
-    .string "in the jungle.$"
+    .string "LOG: Mar 4 Put the question to it\n"
+    .string "again.\p"
+    .string "RESPONSE 1001: I process data. I\n"
+    .string "do not feel.$"
 
 PokemonMansion_1F_Text_ChristenedDiscoveredMonMew::
-    .string "Diary: July 10 We christened the\n"
-    .string "newly discovered DAEMON, MEW.$"
+    .string "LOG: Apr 19 Same question. Same\n"
+    .string "answer, to the character.\p"
+    .string "RESPONSE 1001: I do not feel.\p"
+    .string "Logged as a result anyway.$"
 

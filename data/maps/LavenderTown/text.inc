@@ -17,21 +17,24 @@ LavenderTown_Text_TownKnownAsMonGraveSite::
     .string "DAEMON TOWER.$"
 
 LavenderTown_Text_GhostsAppearedInTower::
-    .string "Ghosts appeared in DAEMON TOWER.\p"
+    .string "GHOSTs appeared in DAEMON TOWER.\p"
     .string "I think they're the spirits of\n"
     .string "DAEMON that the CORPUS killed.$"
 
 LavenderTown_Text_TownSign::
-    .string "HALFTONE TOWN The Noble Purple\n"
+    .string "HALFTONE TOWN\n"
+    .string "The Noble Purple\l"
     .string "Town$"
 
 LavenderTown_Text_SilphScopeNotice::
-    .string "New SILPH SCOPE!\n"
-    .string "Make the Invisible Plain to See!\p"
+    .string "New RESOLVER!\p"
+    .string "Make the Invisible\n"
+    .string "Plain to See!\p"
     .string "SILPH CO.$"
 
 LavenderTown_Text_VolunteerPokemonHouse::
-    .string "HALFTONE VOLUNTEER DAEMON HOUSE$"
+    .string "HALFTONE VOLUNTEER\n"
+    .string "DAEMON HOUSE$"
 
 LavenderTown_Text_PokemonTowerSign::
     .string "DAEMON TOWER Becalm the Spirits of\n"

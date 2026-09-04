@@ -2,16 +2,19 @@ PalletTown_Text_OakDontGoOut::
     .string "CRYSTAL: Hey! Wait! Don't go out!$"
 
 PalletTown_Text_OakGrassUnsafeNeedMon::
-    .string "CRYSTAL: It's unsafe! Wild DAEMONS\n"
-    .string "live in tall grass!\p"
+    .string "CRYSTAL: It's unsafe! UNBOUND\n"
+    .string "DAEMONS run loose out here!\p"
     .string "You need your own DAEMON for your\n"
-    .string "protection.\p"
-    .string "I know! Here, come with me!$"
+    .string "protection. I know!\p"
+    .string "Here, come with me!$"
 
 PalletTown_Text_RaisingMonsToo::
-    .string "I'm raising DAEMONS, too.\p"
-    .string "When they get strong, they can\n"
-    .string "protect me.$"
+    .string "The QUICKSILVER thing? Night, it\n"
+    .string "was. Two of them in the room.\p"
+    .string "A surge, they said.\p"
+    .string "White, I heard. Like an ordinary\n"
+    .string "hare.\p"
+    .string "Far room. The one past the stairs.$"
 
 PalletTown_Text_CanStoreItemsAndMonsInPC::
     .string "Technology is incredible!\p"
@@ -19,8 +22,8 @@ PalletTown_Text_CanStoreItemsAndMonsInPC::
     .string "and DAEMON as data via PC.$"
 
 PalletTown_Text_OakPokemonResearchLab::
-    .string "CRYSTAL CLEAR DAEMON RESEARCH\n"
-    .string "LAB$"
+    .string "CRYSTAL DAEMON\n"
+    .string "RESEARCH LAB$"
 
 PalletTown_Text_PlayersHouse::
     .string "{PLAYER}'s house$"
@@ -29,7 +32,8 @@ PalletTown_Text_RivalsHouse::
     .string "{RIVAL}'s house$"
 
 PalletTown_Text_TownSign::
-    .string "BLANCHE TOWN Shades of your\n"
+    .string "BLANCHE TOWN\n"
+    .string "Shades of your\l"
     .string "journey await!$"
 
 PalletTown_Text_OakLetMeSeePokedex::

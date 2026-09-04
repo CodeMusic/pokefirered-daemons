@@ -1,16 +1,14 @@
 CinnabarIsland_Gym_Text_BlaineIntro::
     .string "Hah!\p"
-    .string "I am BLAINE, the red-hot LEADER\n"
-    .string "of QUICKSILVER GYM!\p"
-    .string "My fiery DAEMONS are all rough and\n"
-    .string "ready with intense heat!\p"
-    .string "They incinerate all challengers!\p"
-    .string "Hah! You better have BURN HEAL!{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
+    .string "I am BLAINE! I am the LEADER of\n"
+    .string "QUICKSILVER GYM!\p"
+    .string "My fiery DAEMON will incinerate all\n"
+    .string "challengers!\p"
+    .string "Hah! You better have BURN HEAL!$"
 
 CinnabarIsland_Gym_Text_BlaineDefeat::
-    .string "I have burned down to nothing!\n"
-    .string "Not even ashes remain!\p"
-    .string "You have earned the VOLCANOBADGE.$"
+    .string "I have burnt out!\p"
+    .string "You have earned the HEAT MARK!$"
 
 CinnabarIsland_Gym_Text_FireBlastIsUltimateFireMove::
     .string "FIRE BLAST is the ultimate fire\n"
@@ -19,9 +17,9 @@ CinnabarIsland_Gym_Text_FireBlastIsUltimateFireMove::
 
 CinnabarIsland_Gym_Text_ExplainVolcanoBadge::
     .string "Hah!\p"
-    .string "The VOLCANOBADGE heightens the\n"
-    .string "SPECIAL stats of your DAEMON.\p"
-    .string "Here, you can have this, too!$"
+    .string "The HEAT MARK heightens the\n"
+    .string "SPECIAL abilities of your DAEMON!\p"
+    .string "Here, you can have this too!$"
 
 CinnabarIsland_Gym_Text_ReceivedTM38FromBlaine::
     .string "{PLAYER} received TM38\n"
@@ -51,8 +49,8 @@ CinnabarIsland_Gym_Text_ErikPostBattle::
     .string "Blah, blah, blah, blah…$"
 
 CinnabarIsland_Gym_Text_QuinnIntro::
-    .string "I was a thief, but I went straight\n"
-    .string "as a USER.$"
+    .string "I was a thief, but I became\n"
+    .string "straight as a USER!$"
 
 CinnabarIsland_Gym_Text_QuinnDefeat::
     .string "I surrender!$"
@@ -85,7 +83,7 @@ CinnabarIsland_Gym_Text_RamonPostBattle::
     .string "I'd use that!$"
 
 CinnabarIsland_Gym_Text_DerekIntro::
-    .string "I know why BLAINE became a USER.$"
+    .string "I know why BLAINE became a USER!$"
 
 CinnabarIsland_Gym_Text_DerekDefeat::
     .string "Ow!$"

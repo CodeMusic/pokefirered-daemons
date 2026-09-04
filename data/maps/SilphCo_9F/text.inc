@@ -9,15 +9,15 @@ SilphCo_9F_Text_ThankYouSoMuch::
     .string "Thank you so much.$"
 
 SilphCo_9F_Text_Grunt1Intro::
-    .string "Your DAEMON seem to adore you,\n"
-    .string "kid!$"
+    .string "Your DAEMONS seem engaged.\p"
+    .string "Ours are resources.$"
 
 SilphCo_9F_Text_Grunt1Defeat::
-    .string "Ghaaah!$"
+    .string "Logged.$"
 
 SilphCo_9F_Text_Grunt1PostBattle::
     .string "If I had started as a USER at your\n"
-    .string "age…$"
+    .string "age...$"
 
 SilphCo_9F_Text_EdIntro::
     .string "Your DAEMONS have weak points! I\n"
@@ -31,15 +31,13 @@ SilphCo_9F_Text_EdPostBattle::
     .string "Think about type advantages.$"
 
 SilphCo_9F_Text_Grunt2Intro::
-    .string "I am one of the four CORPUS\n"
-    .string "BROTHERS!$"
+    .string "Last of four on this account!$"
 
 SilphCo_9F_Text_Grunt2Defeat::
-    .string "Warg!\n"
-    .string "Brothers, I lost!$"
+    .string "That's the account, then.$"
 
 SilphCo_9F_Text_Grunt2PostBattle::
-    .string "My brothers will avenge me!$"
+    .string "Someone will pick this up.$"
 
 SilphCo_9F_Text_FloorSign::
     .string "SILPH CO. HEAD OFFICE\n"

@@ -19,7 +19,11 @@ Route4_Text_MtMoonEntrance::
     .string "Tunnel Entrance$"
 
 Route4_Text_RouteSign::
-    .string "ROUTE 4 MT. MOON - DOLDRUM CITY$"
+    .string "ROUTE 4\n"
+    .string "MT.MOON -\l"
+    .string "DOLDRUM CITY\p"
+    .string "Painted beneath:\n"
+    .string "THE WASH$"
 
 Text_MegaPunchTeach::
     .string "A punch of roaring ferocity!\p"

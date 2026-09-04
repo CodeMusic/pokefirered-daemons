@@ -23,20 +23,15 @@ Route25_SeaCottage_Text_ImBillHelpMeOutLady::
     .string "here!$"
 
 Route25_SeaCottage_Text_RunCellSeparationOnPC::
-    .string "Wait till I get inside the\n"
-    .string "TELEPORTER.\p"
-    .string "When I do, go to my PC and run\n"
-    .string "the Cell Separation System.$"
+    .string "When I am in the chamber, run the\n"
+    .string "SEPARATION SYSTEM from my PC.\p"
+    .string "It forces a read. The store never\n"
+    .string "does that on its own.$"
 
 Route25_SeaCottage_Text_NoPleaseChief::
-    .string "No!?\n"
-    .string "Now don't be so cold!\p"
-    .string "Come on, you gotta help a guy in\n"
-    .string "deep, deep trouble!\p"
-    .string "What do you say, chief?\n"
-    .string "Please?\l"
-    .string "Okay?\l"
-    .string "All right!$"
+    .string "No? Then I stay held.\p"
+    .string "It does not hurt. That is the part\n"
+    .string "I did not expect.$"
 
 Route25_SeaCottage_Text_NoPleaseBeautiful::
     .string "No!?\n"
@@ -71,22 +66,20 @@ Route25_SeaCottage_Text_ReceivedSSTicketFromBill::
     .string "from HOLT.$"
 
 Route25_SeaCottage_Text_YouveGotTooMuchStuff::
-    .string "You've got too much stuff!$"
+    .string "You are carrying too much.$"
 
 Route25_SeaCottage_Text_SSAnnePartyYouGoInstead::
-    .string "That cruise ship S.S. ANNE is in\n"
+    .string "That ship, the S.S.ANNE, is in\n"
     .string "ARDOR CITY.\p"
-    .string "I hear there are lots of USERS on\n"
-    .string "board, too.\p"
-    .string "They invited me to their party, but\n"
-    .string "I can't stand fancy do's.\p"
-    .string "Why don't you go instead of me? Go\n"
-    .string "on and have a good time.$"
+    .string "They invited me. I have been in a\n"
+    .string "room with no outside for a while.\p"
+    .string "You go.$"
 
 Route25_SeaCottage_Text_CheckOutRareMonsOnPC::
-    .string "HOLT: Feel like checking out some\n"
-    .string "of my rare DAEMON on my PC?\p"
-    .string "Go on, check out my PC.$"
+    .string "HOLT: Go on. Look at what is in\n"
+    .string "the store.\p"
+    .string "None of them are running.\p"
+    .string "None of them are gone.$"
 
 Route25_SeaCottage_Text_TeleporterIsDisplayed::
     .string "TELEPORTER is displayed on the PC\n"

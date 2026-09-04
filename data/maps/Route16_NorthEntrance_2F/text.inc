@@ -7,8 +7,7 @@ Route16_NorthEntrance_2F_Text_RidingTogetherOnNewBikes::
     .string "new bikes.$"
 
 Route16_NorthEntrance_2F_Text_ItsCeladonDeptStore::
-    .string "Let's see what the binoculars have\n"
-    .string "to show…\p"
+    .string "Looked into the binoculars.\p"
     .string "It's the VERDIGRIS DEPT. STORE!$"
 
 Route16_NorthEntrance_2F_Text_LongPathOverWater::

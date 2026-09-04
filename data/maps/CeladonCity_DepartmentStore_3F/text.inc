@@ -1,8 +1,7 @@
 CeladonCity_DepartmentStore_3F_Text_OTStandsForOriginalTrainer::
     .string "Captured DAEMONS are registered\n"
-    .string "with an ID No. and the OT.\p"
-    .string "OT stands for “Original USER” - the\n"
-    .string "USER that bound it first.$"
+    .string "with an ID No. and OT, the name of\l"
+    .string "the Original USER that bound it!$"
 
 CeladonCity_DepartmentStore_3F_Text_BuddyTradingKangaskhanForHaunter::
     .string "All right!\p"

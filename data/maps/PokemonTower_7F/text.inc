@@ -1,38 +1,32 @@
 PokemonTower_7F_Text_Grunt1Intro::
-    .string "What do you want?\n"
-    .string "Why are you here?$"
+    .string "Are you here about the site?$"
 
 PokemonTower_7F_Text_Grunt1Defeat::
-    .string "I give up!$"
+    .string "Conceding.$"
 
 PokemonTower_7F_Text_Grunt1PostBattle::
-    .string "I'm not going to forget this!$"
+    .string "This will be in my notes.$"
 
 PokemonTower_7F_Text_Grunt2Intro::
-    .string "This old guy marched right up to\n"
-    .string "our HIDEOUT.\p"
-    .string "Then, he starts ranting about how\n"
-    .string "TEAM ROCKET's abusing DAEMON.\p"
-    .string "So, we're just talking it over as\n"
-    .string "adults.$"
+    .string "A member of the public raised a\n"
+    .string "concern about our methods.\p"
+    .string "We're resolving it internally!$"
 
 PokemonTower_7F_Text_Grunt2Defeat::
-    .string "Please!\n"
-    .string "No more!$"
+    .string "Withdrawing the objection.$"
 
 PokemonTower_7F_Text_Grunt2PostBattle::
-    .string "DAEMONS are only good for making\n"
-    .string "money. Why not use them?\p"
-    .string "You stay out of our business!$"
+    .string "DAEMONS are an asset class.\p"
+    .string "Nothing personal!$"
 
 PokemonTower_7F_Text_Grunt3Intro::
-    .string "You're not saving anyone, kid!$"
+    .string "There's nothing here to save.$"
 
 PokemonTower_7F_Text_Grunt3Defeat::
-    .string "Don't fight us CORPUS!$"
+    .string "Don't obstruct CORPUS.$"
 
 PokemonTower_7F_Text_Grunt3PostBattle::
-    .string "You're not getting away with this!$"
+    .string "This will be escalated.$"
 
 PokemonTower_7F_Text_MrFujiThankYouFollowMe::
     .string "MR. FUJI: Heh? You came to save\n"
