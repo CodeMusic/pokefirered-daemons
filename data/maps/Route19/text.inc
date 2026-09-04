@@ -135,7 +135,7 @@ Route19_Text_LiaPostBattle::
     .string "sorts of things.$"
 
 Route19_Text_LiaNotEnoughMons::
-    .string "LIA: I want to battle together\n"
+    .string "LIA: I want to engage together\n"
     .string "with my little brother.\p"
     .string "Don't you have two DAEMONS?$"
 

@@ -1,6 +1,6 @@
 OneIsland_KindleRoad_Text_MariaIntro::
-    .string "The weather's gorgeous!\n"
-    .string "Perfect for a battle!$"
+    .string "The weather's gorgeous! Perfect for\n"
+    .string "an engagement!$"
 
 OneIsland_KindleRoad_Text_MariaDefeat::
     .string "Aiyeeeeh!$"
@@ -132,7 +132,7 @@ OneIsland_KindleRoad_Text_KiaPostBattle::
     .string "better than my big brother?$"
 
 OneIsland_KindleRoad_Text_KiaNotEnoughMons::
-    .string "KIA: If you want to battle with\n"
+    .string "KIA: If you want to engage with\n"
     .string "us, you have to bring at least two\l"
     .string "DAEMONS with you.$"
 
@@ -149,7 +149,7 @@ OneIsland_KindleRoad_Text_MikPostBattle::
     .string "with KIA fail?$"
 
 OneIsland_KindleRoad_Text_MikNotEnoughMons::
-    .string "MIK: Hey, do you want to battle\n"
+    .string "MIK: Hey, do you want to engage\n"
     .string "with us two?\p"
     .string "Bring two or more DAEMONS with\n"
     .string "you, then.$"

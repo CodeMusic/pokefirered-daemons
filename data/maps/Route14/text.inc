@@ -151,5 +151,5 @@ Route14_Text_JanPostBattle::
     .string "We'll just try harder next time.$"
 
 Route14_Text_JanNotEnoughMons::
-    .string "JAN: You want to battle? You don't\n"
+    .string "JAN: You want to engage? You don't\n"
     .string "have enough DAEMON.$"

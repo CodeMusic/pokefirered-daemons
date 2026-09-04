@@ -218,7 +218,7 @@ const u8 *const gTexts_UR_AwaitingResponse[] = {
 ALIGNED(4) static const u8 sText_AwaitingResponseCancelBButton[] = _("あいての ていあんを まっています\nビーボタンで キャンセル");
 
 ALIGNED(4) const u8 gText_UR_ShowTrainerCard[] = _("The other USER showed you their\nUSER CARD.\pWould you like to show your USER\nCARD?");
-ALIGNED(4) const u8 gText_UR_BattleChallenge[] = _("The other USER challenges you to\nbattle.\pWill you accept the battle\nchallenge?");
+ALIGNED(4) const u8 gText_UR_BattleChallenge[] = _("The other USER challenges\nyou to battle.\pWill you accept the\nengagement challenge?");
 ALIGNED(4) const u8 gText_UR_ChatInvitation[] = _("The other USER invites you to\nchat.\pWill you accept the chat\ninvitation?");
 ALIGNED(4) const u8 gText_UR_OfferToTradeMon[] = _("There is an offer to trade your\nregistered Lv. {DYNAMIC 0} {DYNAMIC 1}\pin exchange for a\nLv. {DYNAMIC 2} {DYNAMIC 3}.\pWill you accept this trade\noffer?");
 ALIGNED(4) const u8 gText_UR_OfferToTradeEgg[] = _("There is an offer to trade your\nregistered EGG.\lWill you accept this trade offer?");
@@ -330,7 +330,7 @@ const u8 *const gTexts_UR_IfYouWantToDoSomething[GENDER_COUNT] = {
 };
 
 ALIGNED(4) const u8 gText_UR_TrainerBattleBusy[] = _("Whoops! Sorry, but I have to do\nsomething else.\lAnother time, okay?\p");
-ALIGNED(4) const u8 gText_UR_NeedTwoMonsOfLevel30OrLower1[] = _("If you want to battle, you need\ntwo DAEMONS that are below Lv.\l30.\p");
+ALIGNED(4) const u8 gText_UR_NeedTwoMonsOfLevel30OrLower1[] = _("If you want to engage,\nyou need two DAEMONS\lthat are below Lv. 30.\p");
 ALIGNED(4) const u8 gText_UR_NeedTwoMonsOfLevel30OrLower2[] = _("For a battle, you need two\nDAEMONS that are below Lv. 30.\p");
 
 ALIGNED(4) static const u8 sText_DeclineChatMale[] = _("Oh, all right.\nCome see me anytime, okay?\p");

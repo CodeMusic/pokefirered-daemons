@@ -35,8 +35,8 @@ Route3_Text_JaniceDefeat::
     .string "You're mean!$"
 
 Route3_Text_JanicePostBattle::
-    .string "You shouldn't be staring if you\n"
-    .string "don't want to battle!$"
+    .string "You shouldn't be staring if you don't\n"
+    .string "want to engage!$"
 
 Route3_Text_GregIntro::
     .string "Are you a USER? Let's fight!$"

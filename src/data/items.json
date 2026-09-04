@@ -5856,7 +5856,7 @@
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A device that indicates USERS\\nwho want to battle. The battery\\ncharges while traveling.",
+      "description_english": "A device that indicates USERS\\nwho want to engage. The battery\\ncharges while traveling.",
       "importance": 1,
       "registrability": 1,
       "pocket": "POCKET_KEY_ITEMS",

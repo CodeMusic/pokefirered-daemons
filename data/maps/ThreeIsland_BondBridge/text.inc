@@ -69,7 +69,7 @@ ThreeIsland_BondBridge_Text_JoyPostBattle::
     .string "I hope we can battle again!$"
 
 ThreeIsland_BondBridge_Text_JoyNotEnoughMons::
-    .string "JOY: I really want to battle with\n"
+    .string "JOY: I really want to engage with\n"
     .string "MEG.\p"
     .string "One DAEMON isn't enough.$"
 
@@ -85,7 +85,7 @@ ThreeIsland_BondBridge_Text_MegPostBattle::
     .string "MEG: JOY, wasn't that fun?$"
 
 ThreeIsland_BondBridge_Text_MegNotEnoughMons::
-    .string "MEG: I want to battle together\n"
+    .string "MEG: I want to engage together\n"
     .string "with JOY.\p"
     .string "One DAEMON isn't enough.$"
 

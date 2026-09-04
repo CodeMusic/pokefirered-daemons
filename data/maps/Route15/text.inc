@@ -149,6 +149,6 @@ Route15_Text_RonPostBattle::
     .string "I wish I had a nice sister…$"
 
 Route15_Text_RonNotEnoughMons::
-    .string "RON: Did you want to battle with\n"
+    .string "RON: Did you want to engage with\n"
     .string "my sister and me?\p"
     .string "You need two DAEMONS, then.$"

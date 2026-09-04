@@ -1,5 +1,5 @@
 Route13_Text_SebastianIntro::
-    .string "My bird DAEMON want to battle with\n"
+    .string "My bird DAEMON want to engage with\n"
     .string "you!$"
 
 Route13_Text_SebastianDefeat::
@@ -77,7 +77,7 @@ Route13_Text_LolaPostBattle::
     .string "female DAEMON?$"
 
 Route13_Text_SheilaIntro::
-    .string "Do you want to battle some\n"
+    .string "Do you want to engage some\n"
     .string "DAEMONS with me?$"
 
 Route13_Text_SheilaDefeat::
