@@ -22,3 +22,11 @@ PokemonMansion_1F_Text_JohnsonPostBattle::
     .string "but I feel spooked.\p"
     .string "I ought to go soon.$"
 
+PokemonMansion_1F_Text_IterLog::
+    .string "A terminal, still lit. The casing is\n"
+    .string "split.\p"
+    .string "ITER 33 no retention\p"
+    .string "ITER 34 no retention\p"
+    .string "ITER 35 held two frames. did not\n"
+    .string "come back the same.\p"
+    .string "The log ends there.$"

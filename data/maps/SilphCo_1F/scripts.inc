@@ -13,3 +13,7 @@ SilphCo_1F_EventScript_Receptionist::
 SilphCo_1F_EventScript_FloorSign::
 	msgbox SilphCo_1F_Text_FloorSign, MSGBOX_SIGN
 	end
+
+SilphCo_1F_EventScript_Engraving::
+	msgbox SilphCo_1F_Text_Engraving, MSGBOX_SIGN
+	end

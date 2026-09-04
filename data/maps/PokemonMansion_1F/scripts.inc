@@ -30,3 +30,7 @@ PokemonMansion_1F_EventScript_Johnson::
 	trainerbattle_single TRAINER_YOUNGSTER_JOHNSON, PokemonMansion_1F_Text_JohnsonIntro, PokemonMansion_1F_Text_JohnsonDefeat
 	msgbox PokemonMansion_1F_Text_JohnsonPostBattle, MSGBOX_AUTOCLOSE
 	end
+
+PokemonMansion_1F_EventScript_IterLog::
+	msgbox PokemonMansion_1F_Text_IterLog, MSGBOX_SIGN
+	end
