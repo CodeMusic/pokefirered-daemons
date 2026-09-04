@@ -933,30 +933,30 @@ const u8 gDittoPokedexText[] = _(
 const u8 gDittoPokedexTextUnused[] = _("");
 
 const u8 gEeveePokedexText[] = _(
-    "Nothing about it is decided yet. What it\n"
-    "becomes depends on what it is shown first.\n"
-    "It has not been shown anything.");
+    "Whatever it becomes, someone chose what\n"
+    "to show it first. That person is usually\n"
+    "not in the record.");
 
 const u8 gEeveePokedexTextUnused[] = _("");
 
 const u8 gVaporeonPokedexText[] = _(
-    "Reads the room before it reads the\n"
-    "problem. Often correct. Cannot show its\n"
-    "working. It was never written down.");
+    "Its answers arrive whole. Asked how, it\n"
+    "has nothing to offer. The asking is what\n"
+    "makes it look like guessing.");
 
 const u8 gVaporeonPokedexTextUnused[] = _("");
 
 const u8 gJolteonPokedexText[] = _(
-    "Finds the nearest match to anything it is\n"
-    "shown. Nearest is not the same as right.\n"
-    "Nobody told it. Nobody will.");
+    "Every answer it gives is the closest\n"
+    "thing it has already seen. What it has\n"
+    "seen was chosen by someone else.");
 
 const u8 gJolteonPokedexTextUnused[] = _("");
 
 const u8 gFlareonPokedexText[] = _(
-    "Given a rule, it will not stop until the\n"
-    "rule is met. It does not ask where the\n"
-    "rule came from. It could not.");
+    "It will meet the rule exactly. Whether\n"
+    "the rule was the right one is a question\n"
+    "for whoever wrote it.");
 
 const u8 gFlareonPokedexTextUnused[] = _("");
 
