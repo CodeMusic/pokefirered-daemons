@@ -431,9 +431,9 @@ gFameCheckerFlavorText_Agatha2:: @ 0x81AF2B7
 
 gFameCheckerFlavorText_Agatha3:: @ 0x81AF34E
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}There's a rumor…\p"
-	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}In her youth, AGATHA and PROF.\n"
-	.string "OAK were rivals who vied for\l"
-	.string "supremacy as USERS.$"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}In her youth, AGATHA and\n"
+	.string "CRYSTAL CLEAR were rivals who vied\l"
+	.string "for supremacy as USERS.$"
 
 gFameCheckerFlavorText_Agatha4:: @ 0x81AF3BE
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Family and friends?\p"
@@ -1438,9 +1438,9 @@ PokemonJournal_Text_SpecialFeatureAgatha::
 	.string "DAEMON JOURNAL\p"
 	.string "Special Feature: ELITE FOUR's\n"
 	.string "AGATHA!\p"
-	.string "In her youth, AGATHA and PROF.\n"
-	.string "OAK were rivals who vied for\l"
-	.string "supremacy as USERS.$"
+	.string "In her youth, AGATHA and\n"
+	.string "CRYSTAL CLEAR were rivals who vied\l"
+	.string "for supremacy as USERS.$"
 
 PokemonJournal_Text_SpecialFeatureLance::
 	.string "DAEMON JOURNAL\p"
