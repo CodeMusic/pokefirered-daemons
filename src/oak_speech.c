@@ -1898,7 +1898,13 @@ static void CreatePikachuOrPlatformSprites(u8 taskId, u8 spriteType)
         gSprites[spriteId].sBodySpriteId = gTasks[taskId].tPikachuPlatformSpriteId(PIKACHU_BODY_PLATFORM_LEFT);
         gSprites[spriteId].callback = SpriteCB_Pikachu;
         gTasks[taskId].tPikachuPlatformSpriteId(PIKACHU_EARS_PLATFORM_MIDDLE) = spriteId;
-        spriteId = CreateSprite(&sPikachuIntro_Pikachu_SpriteTemplates[PIKACHU_EYES_PLATFORM_RIGHT], 24, 13, 1);
+        // 24,13 is where PIKACHU's eyes were. SEEKMUSAI's faceplate sits
+        // lower, and solving the layout against the old box forced the
+        // creature down to sixteen pixels wide; four pixels of sprite
+        // position was cheaper than shrinking the character. The overlay
+        // only has to cover the SCAN-LINE -- the faceplate underneath it is
+        // part of the body and never changes.
+        spriteId = CreateSprite(&sPikachuIntro_Pikachu_SpriteTemplates[PIKACHU_EYES_PLATFORM_RIGHT], 24, 17, 1);
         gSprites[spriteId].oam.priority = 0;
         gSprites[spriteId].sBodySpriteId = gTasks[taskId].tPikachuPlatformSpriteId(PIKACHU_BODY_PLATFORM_LEFT);
         gSprites[spriteId].callback = SpriteCB_Pikachu;
