@@ -1,4 +1,5 @@
 #include "global.h"
+#include "trig.h"
 #include "gflib.h"
 #include "task.h"
 #include "new_menu_helpers.h"
@@ -41,6 +42,7 @@ static void VBlankCB(void);
 static void Task_TitleScreenTimer(u8 taskId);
 static void Task_TitleScreenMain(u8 taskId);
 static void CreateFaceOff(void);
+static void SpriteCallback_FaceOffIdle(struct Sprite *sprite);
 static bool32 CreateCrossingSprite(s32 x, s32 y, s32 xspeed, s32 yspeed, u8 anim);
 static void SetTitleScreenScene(s16 *data, u8 sceneNum);
 static void SetTitleScreenScene_Init(s16 *data);
@@ -1001,9 +1003,15 @@ static void LoadSpriteGfxAndPals(void)
 // it). Each creature is drawn once facing right; whichever stands on the right
 // is flipped so both face the gap between them, and the one that lunges is
 // still the one that lunges.
-#define FACEOFF_LEFT_X   76
-#define FACEOFF_RIGHT_X  164
+// Measured, not guessed -- tools/gbatitleview.py composites this screen offline
+// and reports every layer's ink box. The subtitle occupies x 100-153 and a
+// 64x64 sprite's art reaches about 31px either side of its centre, so anything
+// closer in than 50 and 190 puts a creature on top of the edition's own name.
+#define FACEOFF_LEFT_X   50
+#define FACEOFF_RIGHT_X  190
 #define FACEOFF_Y        104
+#define FACEOFF_BOB      3       // pixels, peak to centre
+#define FACEOFF_PHASE    64      // a quarter cycle between the two
 #define FACEOFF_MEET_X   120     // halfway, the only place worth meeting
 
 static void CreateFaceOff(void)
@@ -1023,7 +1031,27 @@ static void CreateFaceOff(void)
     // oam.matrixNum, so put it there.
     if (right != MAX_SPRITES)
         gSprites[right].oam.matrixNum = ST_OAM_HFLIP;
-    (void)left;
+
+    // They stood perfectly still through a reveal that takes several seconds,
+    // which reads as artwork rather than as two creatures about to do
+    // something. A slow breath fixes that, and the two are a quarter cycle
+    // apart -- bobbing in lockstep would read as one animation played twice.
+    if (left != MAX_SPRITES)
+    {
+        gSprites[left].callback = SpriteCallback_FaceOffIdle;
+        gSprites[left].data[1] = 0;
+    }
+    if (right != MAX_SPRITES)
+    {
+        gSprites[right].callback = SpriteCallback_FaceOffIdle;
+        gSprites[right].data[1] = FACEOFF_PHASE;
+    }
+}
+
+static void SpriteCallback_FaceOffIdle(struct Sprite *sprite)
+{
+    sprite->data[0] += 2;
+    sprite->y2 = Sin((sprite->data[0] + sprite->data[1]) & 0xFF, FACEOFF_BOB);
 }
 
 #if defined(FIRERED)

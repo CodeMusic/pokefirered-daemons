@@ -1300,6 +1300,13 @@ static void IntroCB_GF_RevealLogo(struct IntroSequenceData * this)
             // the boot sequence goes CODEMUSIC then straight to the door.
             //
             // One line to put back, and the assets are all still here.
+            //
+            // DEFERRED, NOT ABANDONED (2026-09-04). The sixteen-frame scene is
+            // wanted back -- as OUR sixteen frames, not vanilla's, which is
+            // what docs/intro-sequence.md is the sketch for. It is cut now
+            // because the title screen it hands over to was not finished, and
+            // an intro that leads into an unreadable screen is the wrong order
+            // to build in.
             SetIntroCB(this, IntroCB_ExitToTitleScreen);
         }
         break;
