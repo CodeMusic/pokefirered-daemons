@@ -459,7 +459,10 @@ const u8 gTypeNames[NUMBER_OF_MON_TYPES][TYPE_NAME_LENGTH + 1] =
     [TYPE_ICE] = _("FROZEN"),
     [TYPE_DRAGON] = _("EMERGENT"),
 
-    [TYPE_MYSTERY] = _("???"),
+    // Gen 1 calls this slot BIRD and Gen 3 calls it ???; both mean the unused
+    // sixteenth. In computing an ORACLE is a black box that returns correct
+    // answers without showing how, which is 4.6 stated as a data structure.
+    [TYPE_MYSTERY] = _("ORACLE"),
 
     // The two Gen 3 adds. Both were named by reading the vanilla chart rather
     // than by inventing a concept and hoping the numbers agreed.
