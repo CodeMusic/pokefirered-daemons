@@ -1,5 +1,5 @@
 SilphCo_11F_Text_ThanksForSavingMeDearBoy::
-    .string "PRESIDENT: Oh, dear boy!\n"
+    .string "PRESIDENT: Oh, dear friend!\n"
     .string "Thank you for saving SILPH.\p"
     .string "I will never forget you saved us in\n"
     .string "our moment of peril.\p"
@@ -9,7 +9,7 @@ SilphCo_11F_Text_ThanksForSavingMeDearBoy::
     .string "Here, maybe this will do.$"
 
 SilphCo_11F_Text_ThanksForSavingMeDearGirl::
-    .string "PRESIDENT: Oh, dear girl!\n"
+    .string "PRESIDENT: Oh, dear friend!\n"
     .string "Thank you for saving SILPH.\p"
     .string "I will never forget you saved us in\n"
     .string "our moment of peril.\p"

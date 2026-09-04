@@ -1,11 +1,11 @@
 PalletTown_PlayersHouse_1F_Text_AllBoysLeaveOakLookingForYou::
-    .string "MOM: Right. All boys leave home\n"
+    .string "MOM: Right. Everyone leaves home\n"
     .string "some day. It said so on TV.\p"
     .string "CRYSTAL CLEAR, next door, is\n"
     .string "looking for you.$"
 
 PalletTown_PlayersHouse_1F_Text_AllGirlsLeaveOakLookingForYou::
-    .string "MOM: …Right. All girls dream of\n"
+    .string "MOM: …Right. Everyone dreams of\n"
     .string "traveling. It said so on TV.\p"
     .string "Oh, yes. CRYSTAL CLEAR, next door,\n"
     .string "was looking for you.$"
