@@ -112,6 +112,6 @@ Route25_Text_MistyHighHopesAboutThisPlace::
 
 Route25_Text_AreYouHereAlone::
     .string "Hello, are you here alone?\p"
-    .string "If you're out at CERULEAN's cape…\n"
+    .string "If you're out at DOLDRUM's cape…\n"
     .string "Well, it should be as a couple.$"
 

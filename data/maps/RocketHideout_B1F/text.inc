@@ -10,7 +10,7 @@ RocketHideout_B1F_Text_Grunt1PostBattle::
     .string "Are you dissing TEAM CORPUS?$"
 
 RocketHideout_B1F_Text_Grunt2Intro::
-    .string "You broke into TEAM ROCKET's\n"
+    .string "You broke into TEAM CORPUS's\n"
     .string "operation? What nerve!$"
 
 RocketHideout_B1F_Text_Grunt2Defeat::

@@ -165,19 +165,19 @@ const u8 gTeachyTvText_TMsScript2[] = _(
         "Remember, USERS, a good deed a\n"
         "day brings happiness to stay!");
 const u8 gTeachyTvText_RegisterScript1[] = _(
-    "A TRAINER's BAG has a bunch of\n"
-    "nifty, convenient features!\p"
-    "Take stuff in the KEY ITEMS\n"
-    "POCKET, for instance.\p"
-    "You can use a key item without\n"
-    "opening the BAG every time.\p"
-    "For example, let's pretend I have\n"
-    "a TEACHY TV in my BAG.\p"
-    "I can register it for instant use,\n"
-    "and I'll show you how!\p"
-    "All righty, here goes!\p"
-    "Keep your eyes glued to the sorta\n"
-    "super POKé DUDE SHOW!");
+        "A USER's BAG has a bunch of nifty,\n"
+        "convenient features!\p"
+        "Take stuff in the KEY ITEMS\n"
+        "POCKET, for instance.\p"
+        "You can use a key item without\n"
+        "opening the BAG every time.\p"
+        "For example, let's pretend I have\n"
+        "a TEACHY TV in my BAG.\p"
+        "I can register it for instant use,\n"
+        "and I'll show you how!\p"
+        "All righty, here goes!\p"
+        "Keep your eyes glued to the sorta\n"
+        "super POKé DUDE SHOW!");
 const u8 gTeachyTvText_RegisterScript2[] = _(
         "And now, your TEACHY TV is\n"
         "registered.\p"

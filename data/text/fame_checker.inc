@@ -257,8 +257,8 @@ gFameCheckerFlavorText_Koga5:: @ 0x81AE51B
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
 	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}The SAFARI ZONE's huge, wouldn't\n"
 	.string "you say?\p"
-	.string "FUCHSIA's GYM LEADER, KOGA, \n"
-	.string "patrols the grounds every so often.\p"
+	.string "LURID's GYM LEADER, KOGA, patrols\n"
+	.string "the grounds every so often.\p"
 	.string "Thanks to him, we can play here\n"
 	.string "knowing that we're safe.$"
 
@@ -539,7 +539,7 @@ gFameCheckerFlavorText_MrFuji1:: @ 0x81AFB76
 	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}This old guy marched right up to\n"
 	.string "our HIDEOUT.\p"
 	.string "Then, he starts ranting about how\n"
-	.string "TEAM ROCKET's abusing DAEMON.\p"
+	.string "TEAM CORPUS's abusing DAEMON.\p"
 	.string "So, we're just talking it over as\n"
 	.string "adults.$"
 
@@ -587,7 +587,7 @@ gFameCheckerFlavorText_Giovanni1:: @ 0x81AFF23
 
 gFameCheckerFlavorText_Giovanni2:: @ 0x81AFFA8
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
-	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}TEAM ROCKET's BOSS is terribly\n"
+	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}TEAM CORPUS's BOSS is terribly\n"
 	.string "cruel!\p"
 	.string "To him, DAEMONS are just tools to\n"
 	.string "be used.$"

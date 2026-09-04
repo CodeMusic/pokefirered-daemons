@@ -7,8 +7,8 @@ FiveIsland_RocketWarehouse_Text_PenUnlockedMonsFled::
     .string "DAEMON appear to have fled.$"
 
 FiveIsland_RocketWarehouse_Text_Grunt2Intro::
-    .string "Did you come here knowing it's\n"
-    .string "TEAM ROCKET's WAREHOUSE?$"
+    .string "Did you come here knowing it's TEAM\n"
+    .string "CORPUS's WAREHOUSE?$"
 
 FiveIsland_RocketWarehouse_Text_Grunt2Defeat::
     .string "What do you think you're doing?!$"
