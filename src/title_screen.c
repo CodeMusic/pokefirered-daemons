@@ -40,6 +40,7 @@ static void CB2_TitleScreenRun(void);
 static void VBlankCB(void);
 static void Task_TitleScreenTimer(u8 taskId);
 static void Task_TitleScreenMain(u8 taskId);
+static void CreateFaceOff(void);
 static void SetTitleScreenScene(s16 *data, u8 sceneNum);
 static void SetTitleScreenScene_Init(s16 *data);
 static void SetTitleScreenScene_FlashSprite(s16 *data);
@@ -151,17 +152,59 @@ static const union AnimCmd *const sSpriteAnim_FlameOrLeaf[] = {
 };
 #endif
 
+// 9.14: the face-off. CODEMUSAI lunges and CAREMUSAI opens, in BOTH editions;
+// only the side changes, and the engine does that with a hardware flip. Both
+// are 64x64, which is the frame 9.4 refused to upscale into -- CODEMUSAI is 48
+// and CAREMUSAI is 56, and each sits inside it untouched.
+static const u32 sFaceOffCode_Gfx[] = INCBIN_U32("graphics/title_screen/faceoff/codemusai.4bpp.lz");
+static const u16 sFaceOffCode_Pal[] = INCBIN_U16("graphics/title_screen/faceoff/codemusai.gbapal");
+static const u32 sFaceOffCare_Gfx[] = INCBIN_U32("graphics/title_screen/faceoff/caremusai.4bpp.lz");
+static const u16 sFaceOffCare_Pal[] = INCBIN_U16("graphics/title_screen/faceoff/caremusai.gbapal");
+
 enum {
     TILE_TAG_FLAME_OR_LEAF,
     TILE_TAG_BLANK_OR_STREAK,
     TILE_TAG_BLANK,
     TILE_TAG_SLASH,
+    TILE_TAG_FACEOFF_CODE,
+    TILE_TAG_FACEOFF_CARE,
 };
 
 enum {
     PAL_TAG_DEFAULT,
     PAL_TAG_UNUSED,
     PAL_TAG_SLASH,
+    PAL_TAG_FACEOFF_CODE,
+    PAL_TAG_FACEOFF_CARE,
+};
+
+static const struct OamData sOamData_FaceOff = {
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .shape = ST_OAM_SQUARE,
+    .size = ST_OAM_SIZE_3,          // 64x64
+    .tileNum = 0,
+    .priority = 2,                  // in front of the background, behind nothing
+    .paletteNum = 0
+};
+
+static const struct SpriteTemplate sSpriteTemplate_FaceOffCode = {
+    .tileTag = TILE_TAG_FACEOFF_CODE,
+    .paletteTag = PAL_TAG_FACEOFF_CODE,
+    .oam = &sOamData_FaceOff,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
+};
+
+static const struct SpriteTemplate sSpriteTemplate_FaceOffCare = {
+    .tileTag = TILE_TAG_FACEOFF_CARE,
+    .paletteTag = PAL_TAG_FACEOFF_CARE,
+    .oam = &sOamData_FaceOff,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy
 };
 
 static const struct SpriteTemplate sSpriteTemplate_FlameOrLeaf = {
@@ -291,12 +334,16 @@ static const struct CompressedSpriteSheet sSpriteSheets[] = {
     {sFlames_Gfx,                    0x500, TILE_TAG_FLAME_OR_LEAF},
     {sBlankFlames_Gfx,               0x500, TILE_TAG_BLANK_OR_STREAK},
     {gTitleScreen_BlankSprite_Tiles, 0x400, TILE_TAG_BLANK},
-    {sSlash_Gfx,                     0x800, TILE_TAG_SLASH}
+    {sSlash_Gfx,                     0x800, TILE_TAG_SLASH},
+    {sFaceOffCode_Gfx,               0x800, TILE_TAG_FACEOFF_CODE},
+    {sFaceOffCare_Gfx,               0x800, TILE_TAG_FACEOFF_CARE}
 };
 
 static const struct SpritePalette sSpritePals[] = {
     {sFlames_Pal,            PAL_TAG_DEFAULT},
     {gTitleScreen_Slash_Pal, PAL_TAG_SLASH},
+    {sFaceOffCode_Pal,       PAL_TAG_FACEOFF_CODE},
+    {sFaceOffCare_Pal,       PAL_TAG_FACEOFF_CARE},
     {}
 };
 
@@ -309,12 +356,16 @@ static const struct CompressedSpriteSheet sSpriteSheets[] = {
     {sLeaves_Gfx,                    0x580, TILE_TAG_FLAME_OR_LEAF},
     {sStreak_Gfx,                    0x100, TILE_TAG_BLANK_OR_STREAK},
     {gTitleScreen_BlankSprite_Tiles, 0x400, TILE_TAG_BLANK},
-    {sSlash_Gfx,                     0x800, TILE_TAG_SLASH}
+    {sSlash_Gfx,                     0x800, TILE_TAG_SLASH},
+    {sFaceOffCode_Gfx,               0x800, TILE_TAG_FACEOFF_CODE},
+    {sFaceOffCare_Gfx,               0x800, TILE_TAG_FACEOFF_CARE}
 };
 
 static const struct SpritePalette sSpritePals[] = {
     {sLeaves_Pal,            PAL_TAG_DEFAULT},
     {gTitleScreen_Slash_Pal, PAL_TAG_SLASH},
+    {sFaceOffCode_Pal,       PAL_TAG_FACEOFF_CODE},
+    {sFaceOffCare_Pal,       PAL_TAG_FACEOFF_CARE},
     {}
 };
 
@@ -944,6 +995,31 @@ static void LoadSpriteGfxAndPals(void)
     for (i = 0; i < NELEMS(sSpriteSheets); i++)
         LoadCompressedSpriteSheet(&sSpriteSheets[i]);
     LoadSpritePalettes(sSpritePals);
+    CreateFaceOff();
+}
+
+// The sides swap between editions and THE POSES DO NOT (9.14, and 2.4 before
+// it). Each creature is drawn once facing right; whichever stands on the right
+// is flipped so both face the gap between them, and the one that lunges is
+// still the one that lunges.
+#define FACEOFF_LEFT_X   76
+#define FACEOFF_RIGHT_X  164
+#define FACEOFF_Y        104
+
+static void CreateFaceOff(void)
+{
+    u8 left, right;
+
+#if defined(FIRERED)
+    left  = CreateSprite(&sSpriteTemplate_FaceOffCode,  FACEOFF_LEFT_X,  FACEOFF_Y, 1);
+    right = CreateSprite(&sSpriteTemplate_FaceOffCare,  FACEOFF_RIGHT_X, FACEOFF_Y, 1);
+#else
+    left  = CreateSprite(&sSpriteTemplate_FaceOffCare,  FACEOFF_LEFT_X,  FACEOFF_Y, 1);
+    right = CreateSprite(&sSpriteTemplate_FaceOffCode,  FACEOFF_RIGHT_X, FACEOFF_Y, 1);
+#endif
+    if (right != MAX_SPRITES)
+        gSprites[right].hFlip = TRUE;
+    (void)left;
 }
 
 #if defined(FIRERED)
