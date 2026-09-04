@@ -1,11 +1,8 @@
 CeruleanCity_House2_Text_RocketsStoleTMForDig::
-    .string "Those miserable CORPUS!\p"
-    .string "Look what they've done to my\n"
-    .string "house!\p"
+    .string "CORPUS did this!\p"
+    .string "Look what they did here!\p"
     .string "They stole a TM for teaching\n"
     .string "DAEMON how to DIG holes!\p"
-    .string "I was going to use it on a MANKEY\n"
-    .string "or a SANDSHREW…\p"
     .string "That cost me a bundle, it did!$"
 
 CeruleanCity_House2_Text_TeachDiglettDigWithoutTM::

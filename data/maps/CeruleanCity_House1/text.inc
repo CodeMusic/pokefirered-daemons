@@ -1,23 +1,22 @@
 CeruleanCity_House1_Text_BadgesHaveAmazingSecrets::
-    .string "Only skilled USERS can collect\n"
-    .string "DAEMONS MARKS.\p"
+    .string "DAEMON MARKs are owned only by\n"
+    .string "skilled USERS.\p"
     .string "I see you have at least one.\p"
-    .string "Those MARKS have amazing secrets,\n"
-    .string "did you know?$"
+    .string "Those MARKs have amazing secrets!$"
 
 CeruleanCity_House1_Text_DescribeWhichBadge::
-    .string "Now then…\p"
-    .string "Which of the eight MARKS should I\n"
+    .string "Now then...\p"
+    .string "Which of the 8 MARKs should I\n"
     .string "describe?$"
 
 CeruleanCity_House1_Text_ComeVisitAnytime::
     .string "Come visit me anytime you wish.$"
 
 CeruleanCity_House1_Text_AttackStatFlash::
-    .string "The ATTACK stat of all your\n"
-    .string "DAEMON increases a little bit.\p"
-    .string "It also lets you use the move\n"
-    .string "FLASH outside of battle.$"
+    .string "The ATTACK of all DAEMONS\n"
+    .string "increases a little bit.\p"
+    .string "It also lets you use FLASH any\n"
+    .string "time you desire.$"
 
 CeruleanCity_House1_Text_ObeyLv30Cut::
     .string "DAEMON up to Lv. 30 will obey\n"
@@ -30,10 +29,10 @@ CeruleanCity_House1_Text_ObeyLv30Cut::
     .string "outside of battle.$"
 
 CeruleanCity_House1_Text_SpeedStatFly::
-    .string "The SPEED stat of all your DAEMON\n"
-    .string "increases a little bit.\p"
-    .string "It also lets you use the move FLY\n"
-    .string "outside of battle.$"
+    .string "The SPEED of all DAEMONS increases\n"
+    .string "a little bit.\p"
+    .string "It also lets you use FLY outside\n"
+    .string "of battle.$"
 
 CeruleanCity_House1_Text_ObeyLv50Strength::
     .string "DAEMON up to Lv. 50 will obey\n"
@@ -46,10 +45,10 @@ CeruleanCity_House1_Text_ObeyLv50Strength::
     .string "STRENGTH outside of battle.$"
 
 CeruleanCity_House1_Text_DefenseStatSurf::
-    .string "The DEFENSE stat of all your\n"
-    .string "DAEMON increases a little bit.\p"
-    .string "It also lets you use the move SURF\n"
-    .string "outside of battle.$"
+    .string "The DEFENSE of all DAEMONS\n"
+    .string "increases a little bit.\p"
+    .string "It also lets you use SURF outside\n"
+    .string "of battle.$"
 
 CeruleanCity_House1_Text_ObeyLv70RockSmash::
     .string "DAEMON up to Lv. 70 will obey\n"
