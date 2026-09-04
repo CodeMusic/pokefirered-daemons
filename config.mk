@@ -30,12 +30,12 @@ BUILD_DIR := build
 
 # Version
 ifeq ($(GAME_VERSION),FIRERED)
-  TITLE       := POKEMON FIRE
+  TITLE       := CONTENT
   GAME_CODE   := BPR
   BUILD_NAME  := firered
 else
 ifeq ($(GAME_VERSION),LEAFGREEN)
-  TITLE       := POKEMON LEAF
+  TITLE       := CONTEXT
   GAME_CODE   := BPG
   BUILD_NAME  := leafgreen
 else
@@ -59,6 +59,9 @@ endif
 
 ifeq ($(DAEMONS_DEBUG),1)
   BUILD_NAME := $(BUILD_NAME)_debug
+  # So two mGBA windows are telling apart. The header title is 12 bytes and
+  # "CONTENT DEBUG" is 13, so it abbreviates.
+  TITLE      := $(TITLE) DBG
 endif
 
 # Language
