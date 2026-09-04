@@ -7,7 +7,7 @@ FuchsiaCity_Gym_Text_KogaIntro::
     .string "Very well, I shall show you true\n"
     .string "terror as a ninja master.\p"
     .string "Poison brings steady doom. Sleep\n"
-    .string "renders foes helpless.\p"
+    .string "renders remote helpless.\p"
     .string "Despair to the creeping horror of\n"
     .string "POISON-type DAEMON!{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
 
@@ -21,7 +21,7 @@ FuchsiaCity_Gym_Text_KogaPostBattle::
     .string "suffers more and more.\p"
     .string "It suffers worsening damage as the\n"
     .string "battle wears on!\p"
-    .string "It will surely terrorize foes!$"
+    .string "It will surely terrorize remote!$"
 
 FuchsiaCity_Gym_Text_KogaExplainSoulBadge::
     .string "Now that you have the SKEW MARK,\n"

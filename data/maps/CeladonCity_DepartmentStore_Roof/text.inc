@@ -19,7 +19,7 @@ Text_ReceivedItemFromLittleGirl::
 CeladonCity_DepartmentStore_Roof_Text_ExplainTM16::
     .string "TM16 contains LIGHT SCREEN.\p"
     .string "It's a move that weakens the power\n"
-    .string "of special attacks by your foe.$"
+    .string "of special attacks by your remote.$"
 
 CeladonCity_DepartmentStore_Roof_Text_YaySodaPopHaveThis::
     .string "Yay!\p"
@@ -41,7 +41,8 @@ CeladonCity_DepartmentStore_Roof_Text_YayLemonadeHaveThis::
 CeladonCity_DepartmentStore_Roof_Text_ExplainTM33::
     .string "TM33 contains REFLECT.\p"
     .string "It's a move that weakens the power\n"
-    .string "of physical attacks by your foe.$"
+    .string "of physical attacks by your\l"
+    .string "remote.$"
 
 CeladonCity_DepartmentStore_Roof_Text_DontHaveSpaceForThis::
     .string "You don't have space for this!$"

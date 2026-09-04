@@ -146,7 +146,7 @@ Help_Text_WantToMakeMonStronger::
 	.string "I want to make my DAEMONS stronger.$"
 
 Help_Text_FoeMonsTooStrong::
-	.string "The foe DAEMONS are too strong!$"
+	.string "The remote DAEMONS are too strong!$"
 
 Help_Text_WhatDoIDoInCave::
 	.string "What do I do in a cave?$"
@@ -326,7 +326,7 @@ Help_Text_AnswerMyMonsAreHurt::
 Help_Text_AnswerWhatIsStatusProblem::
 	.string "A status problem refers to an ailment\n"
 	.string "that is inflicted on a DAEMON by its\l"
-	.string "foe's attack. These include burns,\l"
+	.string "remote's attack. These include burns,\l"
 	.string "paralysis, poisoning, sleep, and\l"
 	.string "freezing. These can be healed by\l"
 	.string "visiting a DAEMON CENTER or using the\l"
@@ -376,10 +376,10 @@ Help_Text_AnswerWhatsATrainer::
 Help_Text_AnswerHowDoIWinAgainstTrainer::
 	.string "To beat a USER in battle, use DAEMON\n"
 	.string "that have type advantages over the\l"
-	.string "foe's DAEMON. You may also use highly\l"
-	.string "trained DAEMON with overwhelming power.\l"
-	.string "Outnumbering the foe's DAEMON is another\l"
-	.string "obvious tactic.$"
+	.string "remote's DAEMON. You may also use\l"
+	.string "highly trained DAEMON with overwhelming\l"
+	.string "power. Outnumbering the remote's DAEMON\l"
+	.string "is another obvious tactic.$"
 
 Help_Text_AnswerWhereDoMonsAppear::
 	.string "Wild DAEMON will appear in tall grass,\n"
@@ -432,7 +432,7 @@ Help_Text_AnswerWantToMakeMonStronger::
 	.string "DAEMON often to level up your party.$"
 
 Help_Text_AnswerFoeMonsTooStrong::
-	.string "If your foes are too strong, try\n"
+	.string "If your remote are too strong, try\n"
 	.string "leveling up your DAEMON some more. Go\l"
 	.string "back the way you came and battle wild\l"
 	.string "DAEMON to level up your party. You\l"
@@ -1041,7 +1041,7 @@ Help_Text_HowToUseBait::
 	.string "It is DAEMON food rolled up into\n"
 	.string "a ball for easy eating. When BAIT is\n"
 	.string "thrown, the wild DAEMON may get\n"
-	.string "attracted by it, and may not flee!$"
+	.string "attracted by it, and may not DETACH!$"
 
 Help_Text_HowToUseRock::
 	.string "{CIRCLE_1} Select to throw a rock lying on\n"
@@ -1188,8 +1188,8 @@ Help_Text_DefineHP::
 	.string "HP indicates a DAEMON's vitality. If a\n"
 	.string "DAEMON's HP drops to zero, it HALTS and\l"
 	.string "is unable to battle. So, the key in\l"
-	.string "battle is to try to reduce the foe's HP\l"
-	.string "to zero. If your DAEMONS are hurt,\l"
+	.string "battle is to try to reduce the remote's\l"
+	.string "HP to zero. If your DAEMONS are hurt,\l"
 	.string "restore their HP at a DAEMON CENTER or\l"
 	.string "use items.$"
 
@@ -1223,7 +1223,7 @@ Help_Text_DefineDefense::
 	.string "DEFENSE indicates the resistance a\n"
 	.string "DAEMON has against physical attacks.\l"
 	.string "The higher this stat, the less damage\l"
-	.string "sustained from a foe's physical hit.$"
+	.string "sustained from a remote's physical hit.$"
 
 Help_Text_DefineSpAtk::
 	.string "SP. ATK (Special Attack) indicates the\n"
@@ -1238,14 +1238,14 @@ Help_Text_DefineSpDef::
 	.string "SP. DEF (Special Defense) indicates the\n"
 	.string "resistance a DAEMON has against special\l"
 	.string "attacks. The higher this stat, the less\l"
-	.string "damage sustained from a foe's special\l"
+	.string "damage sustained from a remote's special\l"
 	.string "attack.$"
 
 Help_Text_DefineSpeed::
 	.string "SPEED indicates the agility of a\n"
-	.string "DAEMON. If this stat exceeds the foe's\l"
-	.string "in battle, the DAEMON can make a move\l"
-	.string "before its slower opponent.$"
+	.string "DAEMON. If this stat exceeds the\l"
+	.string "remote's in battle, the DAEMON can make\l"
+	.string "a move before its slower opponent.$"
 
 Help_Text_DefineLevel::
 	.string "Lv. (Level) indicates the growth and\n"
@@ -1325,13 +1325,13 @@ Help_Text_DefinePower::
 	.string "POWER indicates the strength of an\n"
 	.string "attack. The higher this number, the\l"
 	.string "greater the damage that can be\l"
-	.string "inflicted on the foe!$"
+	.string "inflicted on the remote!$"
 
 Help_Text_DefineAccuracy::
 	.string "ACCURACY indicates the probability of\n"
-	.string "the move hitting the foe.\l"
-	.string "The higher this number, the more likely\l"
-	.string "the move will strike the target.$"
+	.string "the move hitting the remote. The higher\l"
+	.string "this number, the more likely the move\l"
+	.string "will strike the target.$"
 
 Help_Text_DefineFNT::
 	.string "FNT stands for “HALTED.” A DAEMON\n"
@@ -1391,9 +1391,10 @@ Help_Text_DefineBattleScene::
 Help_Text_DefineBattleStyle::
 	.string "You can choose whether or not a USER\n"
 	.string "can switch a DAEMON after it has made\l"
-	.string "its foe HALT. Set to “SHIFT” if you\l"
+	.string "its remote HALT. Set to “SHIFT” if you\l"
 	.string "would like the chance to switch a\l"
-	.string "DAEMON after it has made its foe HALT.$"
+	.string "DAEMON after it has made its remote\l"
+	.string "HALT.$"
 
 Help_Text_DefineSound::
 	.string "You can choose between MONO and\n"
@@ -1680,7 +1681,7 @@ Help_Text_TypeMatchupOwnMoveDark::
 	.string "   {TRIANGLE}: FIGHTING, DARK, STEEL$"
 
 Help_Text_TypeMatchupOwnPokemonDark::
-	.string "Effect of foe's move on own DAEMON:\p"
+	.string "Effect of remote's move on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: FIGHTING, BUG\p"
 	.string "   {TRIANGLE}: GHOST, DARK\p"
 	.string "   {BIG_MULT_X}: PSYCHIC$"
@@ -1691,7 +1692,7 @@ Help_Text_TypeMatchupOwnMoveRock::
 	.string "   {TRIANGLE}: FIGHTING, GROUND, STEEL$"
 
 Help_Text_TypeMatchupOwnPokemonRock::
-	.string "Effect of foe's move on own DAEMON:\p"
+	.string "Effect of remote's move on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: WATER, GRASS, FIGHTING,\n"
 	.string "       GROUND, STEEL\p"
 	.string "   {TRIANGLE}: NORMAL, FIRE, POISON, FLYING$"
@@ -1703,7 +1704,7 @@ Help_Text_TypeMatchupOwnMovePsychic::
 	.string "   {BIG_MULT_X}: DARK$"
 
 Help_Text_TypeMatchupOwnPokemonPsychic::
-	.string "Effect of foe's move on own DAEMON:\p"
+	.string "Effect of remote's move on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: BUG, GHOST, DARK\p"
 	.string "   {TRIANGLE}: FIGHTING, PSYCHIC$"
 
@@ -1714,7 +1715,7 @@ Help_Text_TypeMatchupOwnMoveFighting::
 	.string "   {BIG_MULT_X}: GHOST$"
 
 Help_Text_TypeMatchupOwnPokemonFighting::
-	.string "Effect of foe's move on own DAEMON:\p"
+	.string "Effect of remote's move on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: FLYING, PSYCHIC\p"
 	.string "   {TRIANGLE}: BUG, ROCK, DARK$"
 
@@ -1725,7 +1726,7 @@ Help_Text_TypeMatchupOwnMoveGrass::
 	.string "       BUG, DRAGON, STEEL$"
 
 Help_Text_TypeMatchupOwnPokemonGrass::
-	.string "Effect of foe's move on own DAEMON:\p"
+	.string "Effect of remote's move on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: FIRE, ICE, POISON, FLYING, BUG\p"
 	.string "   {TRIANGLE}: WATER, ELECTRIC, GRASS, GROUND$"
 
@@ -1736,7 +1737,7 @@ Help_Text_TypeMatchupOwnMoveGhost::
 	.string "   {BIG_MULT_X}: NORMAL$"
 
 Help_Text_TypeMatchupOwnPokemonGhost::
-	.string "Effect of foe's move on own DAEMON:\p"
+	.string "Effect of remote's move on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: GHOST, DARK\p"
 	.string "   {TRIANGLE}: POISON, BUG\p"
 	.string "   {BIG_MULT_X}: NORMAL, FIGHTING$"
@@ -1747,7 +1748,7 @@ Help_Text_TypeMatchupOwnMoveIce::
 	.string "   {TRIANGLE}: FIRE, WATER, ICE, STEEL$"
 
 Help_Text_TypeMatchupOwnPokemonIce::
-	.string "Effect of foe's move on own DAEMON:\p"
+	.string "Effect of remote's move on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: FIRE, FIGHTING, ROCK, STEEL\p"
 	.string "   {TRIANGLE}: ICE$"
 
@@ -1759,7 +1760,7 @@ Help_Text_TypeMatchupOwnMoveGround::
 	.string "   {BIG_MULT_X}: FLYING$"
 
 Help_Text_TypeMatchupOwnPokemonGround::
-	.string "Effect of foe's move on own DAEMON:\p"
+	.string "Effect of remote's move on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: WATER, GRASS, ICE\p"
 	.string "   {TRIANGLE}: POISON, ROCK\p"
 	.string "   {BIG_MULT_X}: ELECTRIC$"
@@ -1771,7 +1772,7 @@ Help_Text_TypeMatchupOwnMoveElectric::
 	.string "   {BIG_MULT_X}: GROUND$"
 
 Help_Text_TypeMatchupOwnPokemonElectric::
-	.string "Effect of foe's move on own DAEMON:\p"
+	.string "Effect of remote's move on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: GROUND\p"
 	.string "   {TRIANGLE}: ELECTRIC, FLYING, STEEL$"
 
@@ -1782,7 +1783,7 @@ Help_Text_TypeMatchupOwnMovePoison::
 	.string "   {BIG_MULT_X}: STEEL$"
 
 Help_Text_TypeMatchupOwnPokemonPoison::
-	.string "Effect of foe's move on own DAEMON:\p"
+	.string "Effect of remote's move on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: GROUND, PSYCHIC\p"
 	.string "   {TRIANGLE}: GRASS, FIGHTING, POISON, BUG$"
 
@@ -1792,7 +1793,7 @@ Help_Text_TypeMatchupOwnMoveDragon::
 	.string "   {TRIANGLE}: STEEL$"
 
 Help_Text_TypeMatchupOwnPokemonDragon::
-	.string "Effect of foe's move on own DAEMON:\p"
+	.string "Effect of remote's move on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: ICE, DRAGON\p"
 	.string "   {TRIANGLE}: FIRE, WATER, ELECTRIC, GRASS$"
 
@@ -1802,7 +1803,7 @@ Help_Text_TypeMatchupOwnMoveNormal::
 	.string "   {BIG_MULT_X}: GHOST$"
 
 Help_Text_TypeMatchupOwnPokemonNormal::
-	.string "Effect of foe's move on own DAEMON:\p"
+	.string "Effect of remote's move on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: FIGHTING\p"
 	.string "   {BIG_MULT_X}: GHOST$"
 
@@ -1812,7 +1813,7 @@ Help_Text_TypeMatchupOwnMoveSteel::
 	.string "   {TRIANGLE}: FIRE, WATER, ELECTRIC, STEEL$"
 
 Help_Text_TypeMatchupOwnPokemonSteel::
-	.string "Effect of foe's move on own DAEMON:\p"
+	.string "Effect of remote's move on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: FIRE, FIGHTING, GROUND\n"
 	.string "   {TRIANGLE}: NORMAL, GRASS, ICE, FLYING,\l"
 	.string "       PSYCHIC, BUG, ROCK, GHOST,\l"
@@ -1825,7 +1826,7 @@ Help_Text_TypeMatchupOwnMoveFlying::
 	.string "   {TRIANGLE}: ELECTRIC, ROCK, STEEL$"
 
 Help_Text_TypeMatchupOwnPokemonFlying::
-	.string "Effect of foe's move on own DAEMON:\p"
+	.string "Effect of remote's move on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: ELECTRIC, ICE, ROCK\p"
 	.string "   {TRIANGLE}: GRASS, FIGHTING, BUG\p"
 	.string "   {BIG_MULT_X}: GROUND$"
@@ -1836,7 +1837,7 @@ Help_Text_TypeMatchupOwnMoveFire::
 	.string "   {TRIANGLE}: FIRE, WATER, ROCK, DRAGON$"
 
 Help_Text_TypeMatchupOwnPokemonFire::
-	.string "Effect of foe's move on own DAEMON:\p"
+	.string "Effect of remote's move on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: WATER, GROUND, ROCK\p"
 	.string "   {TRIANGLE}: FIRE, GRASS, ICE, BUG, STEEL$"
 
@@ -1846,7 +1847,7 @@ Help_Text_TypeMatchupOwnMoveWater::
 	.string "   {TRIANGLE}: WATER, GRASS, DRAGON$"
 
 Help_Text_TypeMatchupOwnPokemonWater::
-	.string "Effect of foe's move on own DAEMON:\p"
+	.string "Effect of remote's move on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: ELECTRIC, GRASS\p"
 	.string "   {TRIANGLE}: FIRE, WATER, ICE, STEEL$"
 
@@ -1857,7 +1858,7 @@ Help_Text_TypeMatchupOwnMoveBug::
 	.string "       FLYING, GHOST, STEEL$"
 
 Help_Text_TypeMatchupOwnPokemonBug::
-	.string "Effect of foe's move on own DAEMON:\p"
+	.string "Effect of remote's move on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: FIRE, FLYING, ROCK\p"
 	.string "   {TRIANGLE}: GRASS, FIGHTING, GROUND$"
 

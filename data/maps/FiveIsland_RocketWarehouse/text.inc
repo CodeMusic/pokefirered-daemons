@@ -4,7 +4,7 @@ FiveIsland_RocketWarehouse_Text_ManyMonsLockedInPen::
 
 FiveIsland_RocketWarehouse_Text_PenUnlockedMonsFled::
     .string "The pen door is unlocked. The\n"
-    .string "DAEMON appear to have fled.$"
+    .string "DAEMON appear to have DETACHED.$"
 
 FiveIsland_RocketWarehouse_Text_Grunt2Intro::
     .string "Did you come here knowing it's TEAM\n"

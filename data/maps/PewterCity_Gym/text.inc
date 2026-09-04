@@ -44,8 +44,8 @@ PewterCity_Gym_Text_ExplainTM39::
     .string "So, when you use one, pick the\n"
     .string "DAEMON carefully.\p"
     .string "Anyways… TM39 contains ROCK TOMB.\p"
-    .string "It hurls boulders at the foe and\n"
-    .string "lowers its SPEED.$"
+    .string "It hurls boulders at the remote\n"
+    .string "and lowers its SPEED.$"
 
 PewterCity_Gym_Text_BrockPostBattle::
     .string "You encoded something I could not\n"
