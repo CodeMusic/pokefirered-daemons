@@ -1,8 +1,7 @@
 Text_OnlySkilledTrainersAllowedThrough::
-	.string "Only truly skilled TRAINERS are\n"
+	.string "Only truly skilled USERS are\n"
 	.string "allowed through.\p"
-	.string "You don't have the {STR_VAR_1}\n"
-	.string "yet!$"
+	.string "You don't have the {STR_VAR_1} yet!$"
 
 Text_CantLetYouPass::
 	.string "Rules are rules.\n"
@@ -15,10 +14,9 @@ Text_OhThatsBadgeGoRightAhead::
 Text_OnlyPassWithBadgeDontHaveYet::
 	.string "You can pass here only if you have\n"
 	.string "the {STR_VAR_1}.\p"
-	.string "You don't have the {STR_VAR_1}\n"
-	.string "yet.\p"
-	.string "You have to have it to get to\n"
-	.string "the POKéMON LEAGUE.$"
+	.string "You don't have the {STR_VAR_1} yet.\p"
+	.string "You have to have it to get to the\n"
+	.string "DAEMON LEAGUE.$"
 
 Text_OnlyPassWithBadgeOhGoAhead::
 	.string "You can pass here only if you have\n"

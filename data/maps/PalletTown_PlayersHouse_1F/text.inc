@@ -16,8 +16,8 @@ PalletTown_PlayersHouse_1F_Text_YouShouldTakeQuickRest::
 
 PalletTown_PlayersHouse_1F_Text_LookingGreatTakeCare::
     .string "MOM: Oh, good! You and your\n"
-    .string "POKéMON are looking great.\l"
-    .string "Take care now!$"
+    .string "DAEMONS are looking great. Take\l"
+    .string "care now!$"
 
 PalletTown_PlayersHouse_1F_Text_MovieOnTVFourBoysOnRailroad::
     .string "There's a movie on TV.\n"

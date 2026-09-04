@@ -10,8 +10,8 @@ Text_SwordsDanceDeclined::
     .string "Well, that's fine, too.$"
 
 Text_SwordsDanceWhichMon::
-    .string "All right, pick which POKéMON\n"
-    .string "I should teach it to.$"
+    .string "All right, pick which DAEMON I\n"
+    .string "should teach it to.$"
 
 Text_SwordsDanceTaught::
     .string "If only we could keep getting\n"

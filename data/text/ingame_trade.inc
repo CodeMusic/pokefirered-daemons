@@ -1,8 +1,6 @@
 Trade_Text_LookingForMonWannaTradeForMon::
-	.string "I'm looking for the POKéMON\n"
-	.string "{STR_VAR_1}!\p"
-	.string "Wanna trade one for my\n"
-	.string "{STR_VAR_2}?$"
+	.string "I'm looking for the DAEMON {STR_VAR_1}!\p"
+	.string "Wanna trade one for my {STR_VAR_2}?$"
 
 Trade_Text_AwwOhWell::
 	.string "Awww!\n"

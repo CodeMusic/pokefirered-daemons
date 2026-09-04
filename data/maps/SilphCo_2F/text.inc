@@ -3,12 +3,11 @@ SilphCo_2F_Text_ConnorIntro::
     .string "I'm a SILPH employee.$"
 
 SilphCo_2F_Text_ConnorDefeat::
-    .string "How did you know\n"
-    .string "I was a ROCKET?$"
+    .string "How did you know I was a CORPUS?$"
 
 SilphCo_2F_Text_ConnorPostBattle::
     .string "I work for both SILPH and TEAM\n"
-    .string "ROCKET.$"
+    .string "CORPUS.$"
 
 SilphCo_2F_Text_JerryIntro::
     .string "It's off-limits here!\n"
@@ -42,31 +41,30 @@ SilphCo_2F_Text_Grunt2Defeat::
 
 SilphCo_2F_Text_Grunt2PostBattle::
     .string "SILPH CO. will be associated with\n"
-    .string "TEAM ROCKET!$"
+    .string "TEAM CORPUS!$"
 
 Text_ThunderWaveTeach::
-    .string "Eeek!\n"
-    .string "No! Stop! Help!\p"
-    .string "Oh, you're not with TEAM ROCKET.\n"
-    .string "I'm sorry, I thought…\p"
-    .string "Will you forgive me if I teach\n"
-    .string "you the THUNDER WAVE technique?$"
+    .string "Eeek! No! Stop! Help!\p"
+    .string "Oh, you're not with TEAM CORPUS. I'm\n"
+    .string "sorry, I thought…\p"
+    .string "Will you forgive me if I teach you\n"
+    .string "the THUNDER WAVE technique?$"
 
 Text_ThunderWaveDeclined::
     .string "Oh…\n"
     .string "But THUNDER WAVE is convenient…$"
 
 Text_ThunderWaveWhichMon::
-    .string "Which POKéMON should I teach\n"
+    .string "Which DAEMON should I teach\n"
     .string "THUNDER WAVE?$"
 
 Text_ThunderWaveTaught::
     .string "THUNDER WAVE causes paralysis in\n"
-    .string "the target POKéMON.\p"
-    .string "A paralyzed POKéMON may be unable\n"
+    .string "the target DAEMON.\p"
+    .string "A paralyzed DAEMON may be unable\n"
     .string "to move in battle.\p"
     .string "It's an ELECTRIC-type move, so it\n"
-    .string "won't work on some POKéMON.$"
+    .string "won't work on some DAEMONS.$"
 
 SilphCo_2F_Text_FloorSign::
     .string "SILPH CO. HEAD OFFICE\n"

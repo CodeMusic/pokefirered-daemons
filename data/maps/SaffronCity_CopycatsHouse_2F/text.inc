@@ -1,22 +1,16 @@
 SaffronCity_CopycatsHouse_2F_Text_MimickingFavoriteHobbyMale::
-    .string "{PLAYER}: Hi!\n"
-    .string "Do you like POKéMON?\p"
+    .string "{PLAYER}: Hi! Do you like DAEMON?\p"
     .string "{PLAYER}: Uh, no, I just asked you.\p"
-    .string "{PLAYER}: Huh?\n"
-    .string "You're strange!\p"
-    .string "COPYCAT: Hmm? Quit mimicking?\n"
-    .string "But, that's my favorite hobby!$"
+    .string "{PLAYER}: Huh? You're strange!\p"
+    .string "COPYCAT: Hmm? Quit mimicking? But,\n"
+    .string "that's my favorite hobby!$"
 
 SaffronCity_CopycatsHouse_2F_Text_MimickingFavoriteHobbyFemale::
-    .string "{PLAYER}: Hi.\n"
-    .string "You must like POKéMON.\p"
-    .string "{PLAYER}: No, not me.\n"
-    .string "I asked you.\p"
-    .string "{PLAYER}: Pardon?\n"
-    .string "You're weird!\l"
-    .string " \l"
-    .string "COPYCAT: Hmm? Quit mimicking?\l"
-    .string "But that's my favorite hobby!$"
+    .string "{PLAYER}: Hi. You must like DAEMON.\p"
+    .string "{PLAYER}: No, not me. I asked you.\p"
+    .string "{PLAYER}: Pardon? You're weird!\n"
+    .string "COPYCAT: Hmm? Quit mimicking? But\l"
+    .string "that's my favorite hobby!$"
 
 Text_MimicTeach::
     .string "Oh wow!\n"
@@ -84,8 +78,8 @@ SaffronCity_CopycatsHouse_2F_Text_Doduo::
     .string "SEE HOW PRETTY I CAN BE?$"
 
 SaffronCity_CopycatsHouse_2F_Text_RareMonOnlyDoll::
-    .string "This is a rare POKéMON!\n"
-    .string "Huh? It's only a doll!$"
+    .string "This is a rare DAEMON! Huh? It's\n"
+    .string "only a doll!$"
 
 SaffronCity_CopycatsHouse_2F_Text_MarioWearingABucket::
     .string "A game with MARIO wearing a bucket\n"
@@ -94,9 +88,8 @@ SaffronCity_CopycatsHouse_2F_Text_MarioWearingABucket::
 SaffronCity_CopycatsHouse_2F_Text_MySecrets::
     .string "…\p"
     .string "My Secrets!\p"
-    .string "Skill: Mimicry!\n"
-    .string "Hobby: Collecting dolls!\l"
-    .string "Favorite POKéMON: CLEFAIRY!$"
+    .string "Skill: Mimicry! Hobby: Collecting\n"
+    .string "dolls! Favorite DAEMON: CLEFAIRY!$"
 
 SaffronCity_CopycatsHouse_2F_Text_HuhCantSee::
     .string "？　みえないぞ‥$"

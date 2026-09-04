@@ -1,6 +1,6 @@
 Route9_Text_AliciaIntro::
-    .string "You have POKéMON with you!\n"
-    .string "You're mine!$"
+    .string "You have DAEMON with you! You're\n"
+    .string "mine!$"
 
 Route9_Text_AliciaDefeat::
     .string "You deceived me…$"
@@ -13,7 +13,7 @@ Route9_Text_AliciaPostBattle::
 
 Route9_Text_ChrisIntro::
     .string "Who's that walking there with those\n"
-    .string "good-looking POKéMON?$"
+    .string "good-looking DAEMON?$"
 
 Route9_Text_ChrisDefeat::
     .string "Out like a light!$"
@@ -22,8 +22,8 @@ Route9_Text_ChrisPostBattle::
     .string "Keep walking!$"
 
 Route9_Text_DrewIntro::
-    .string "I'm taking the ROCK TUNNEL to\n"
-    .string "go to LAVENDER…$"
+    .string "I'm taking the ROCK TUNNEL to go to\n"
+    .string "HALFTONE…$"
 
 Route9_Text_DrewDefeat::
     .string "Can't measure up…$"
@@ -48,8 +48,7 @@ Route9_Text_JeremyIntro::
 
 Route9_Text_JeremyDefeat::
     .string "Keep it coming, eh!\p"
-    .string "Oh wait.\n"
-    .string "I'm out of POKéMON!$"
+    .string "Oh wait. I'm out of DAEMON!$"
 
 Route9_Text_JeremyPostBattle::
     .string "You sure had guts standing up to\n"
@@ -68,7 +67,7 @@ Route9_Text_BricePostBattle::
 
 Route9_Text_BrentIntro::
     .string "I got up early every day to raise\n"
-    .string "my POKéMON from cocoons!$"
+    .string "my DAEMONS from cocoons!$"
 
 Route9_Text_BrentDefeat::
     .string "WHAT?\p"
@@ -91,16 +90,16 @@ Route9_Text_AlanPostBattle::
     .string "Us hearty guys always laugh!$"
 
 Route9_Text_ConnerIntro::
-    .string "Go, my super BUG POKéMON!$"
+    .string "Go, my super BUG DAEMON!$"
 
 Route9_Text_ConnerDefeat::
     .string "My bugs…$"
 
 Route9_Text_ConnerPostBattle::
-    .string "If you don't like BUG POKéMON,\n"
-    .string "you bug me!$"
+    .string "If you don't like BUG DAEMON, you\n"
+    .string "bug me!$"
 
 Route9_Text_RouteSign::
-    .string "ROUTE 9\n"
-    .string "CERULEAN CITY - ROCK TUNNEL$"
+    .string "ROUTE 9 DOLDRUM CITY - ROCK\n"
+    .string "TUNNEL$"
 

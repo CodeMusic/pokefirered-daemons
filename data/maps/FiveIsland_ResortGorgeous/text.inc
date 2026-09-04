@@ -50,8 +50,8 @@ FiveIsland_ResortGorgeous_Text_JackiPostBattle::
     .string "battle in the gentle sea breeze.$"
 
 FiveIsland_ResortGorgeous_Text_GillianIntro::
-    .string "I'm thinking of having a pool\n"
-    .string "made specially for POKéMON.$"
+    .string "I'm thinking of having a pool made\n"
+    .string "specially for DAEMON.$"
 
 FiveIsland_ResortGorgeous_Text_GillianDefeat::
     .string "Oh, my goodness gracious!$"

@@ -10,9 +10,9 @@ SafariZone_West_Text_PleaseFindWardensLostTeeth::
     .string "Contact: WARDEN$"
 
 SafariZone_West_Text_SearchForSecretHouse::
-    .string "TRAINER TIPS\p"
-    .string "Zone Exploration Campaign!\n"
-    .string "The Search for the SECRET HOUSE!$"
+    .string "USER TIPS\p"
+    .string "Zone Exploration Campaign! The\n"
+    .string "Search for the SECRET HOUSE!$"
 
 SafariZone_West_Text_AreaSign::
     .string "AREA 3\n"

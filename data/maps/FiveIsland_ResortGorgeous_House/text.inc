@@ -6,8 +6,8 @@ FiveIsland_ResortGorgeous_House_Text_PleaseHearMyWish::
     .string "Please, hear my wish.$"
 
 FiveIsland_ResortGorgeous_House_Text_WishToSeeMonPlease::
-    .string "I wish to see a POKéMON.\n"
-    .string "A darling {STR_VAR_1}.\p"
+    .string "I wish to see a DAEMON. A darling\n"
+    .string "{STR_VAR_1}.\p"
     .string "I want to see one right away.\n"
     .string "Please, make my wish come true.$"
 
@@ -20,17 +20,17 @@ FiveIsland_ResortGorgeous_House_Text_OhImTiredOfWaiting::
 FiveIsland_ResortGorgeous_House_Text_MonYouCaughtForMeThankYou::
     .string "SELPHY: Oh, hello, there.\p"
     .string "Oh, my gracious. That must be the\n"
-    .string "{STR_VAR_1} you caught for me.\p"
-    .string "Giggle…\n"
-    .string "I see a resemblance to you.\p"
+    .string "{STR_VAR_1} you bound for me.\p"
+    .string "Giggle… I see a resemblance to\n"
+    .string "you.\p"
     .string "Thank you so kindly.\p"
-    .string "… …  … …  … …\n"
-    .string "Is something the matter?\p"
+    .string "… … … … … … Is something the\n"
+    .string "matter?\p"
     .string "You may leave.\p"
-    .string "… …  … …  … …\n"
-    .string "Oh, fine. I understand now.\p"
-    .string "SEBASTIAN!\n"
-    .string "I need you here this instant!$"
+    .string "… … … … … … Oh, fine. I understand\n"
+    .string "now.\p"
+    .string "SEBASTIAN! I need you here this\n"
+    .string "instant!$"
 
 FiveIsland_ResortGorgeous_House_Text_ButlerYesMyLady::
     .string "Butler: Yes, my lady.$"

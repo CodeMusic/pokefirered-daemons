@@ -1,6 +1,5 @@
 ViridianCity_Mart_Text_YouCameFromPallet::
-    .string "Hey!\n"
-    .string "You came from PALLET TOWN?$"
+    .string "Hey! You came from BLANCHE TOWN?$"
 
 ViridianCity_Mart_Text_TakeThisToProfOak::
     .string "You know CRYSTAL CLEAR, right?\p"
@@ -8,8 +7,9 @@ ViridianCity_Mart_Text_TakeThisToProfOak::
     .string "to take it to her?$"
 
 ViridianCity_Mart_Text_ReceivedOaksParcelFromClerk::
-    .string "{PLAYER} received the PACKAGE from\n"
-    .string "the POKéMON MART clerk.$"
+    .string "{PLAYER} received the COGNITIVE\n"
+    .string "CLARIFIER from the DAEMON MART\l"
+    .string "clerk.$"
 
 ViridianCity_Mart_Text_SayHiToOakForMe::
     .string "Okay, thanks! Please say hi to\n"
@@ -21,6 +21,6 @@ ViridianCity_Mart_Text_ShopDoesGoodBusinessInAntidotes::
 
 ViridianCity_Mart_Text_GotToBuySomePotions::
     .string "I've got to buy some POTIONS.\p"
-    .string "You never know when your POKéMON\n"
+    .string "You never know when your DAEMON\n"
     .string "will need quick healing.$"
 

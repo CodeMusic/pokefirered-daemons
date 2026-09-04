@@ -1,12 +1,12 @@
 Route21_South_Text_JackIntro::
-	.string "I caught my POKéMON at sea.$"
+	.string "I bound my DAEMONS at sea.$"
 
 Route21_South_Text_JackDefeat::
 	.string "Diver!!\n"
 	.string "Down!!$"
 
 Route21_South_Text_JackPostBattle::
-	.string "Where'd you catch your POKéMON?$"
+	.string "Where'd you bind your DAEMON?$"
 
 Route21_South_Text_JeromeIntro::
 	.string "Right now, I'm in a triathlon meet.$"
@@ -35,10 +35,10 @@ Route21_South_Text_ClaudeIntro::
 
 Route21_South_Text_ClaudeDefeat::
 	.string "Sorry! I'm just so frustrated from\n"
-	.string "not catching anything.$"
+	.string "not binding anything.$"
 
 Route21_South_Text_ClaudePostBattle::
-	.string "Sheesh, I haven't caught a thing.\n"
+	.string "Sheesh, I haven't bound a thing.\n"
 	.string "Could this place actually be a\l"
 	.string "giant pool or something?$"
 
@@ -65,9 +65,9 @@ Route21_North_Text_LilPostBattle::
 	.string "Can't we go home already?$"
 
 Route21_North_Text_LilNotEnoughMons::
-	.string "LIL: Huh? A battle?\n"
-	.string "I can't be bothered to do it alone.\l"
-	.string "Bring two POKéMON, won't you?$"
+	.string "LIL: Huh? A battle? I can't be\n"
+	.string "bothered to do it alone. Bring two\l"
+	.string "DAEMONS, won't you?$"
 
 Route21_North_Text_IanIntro::
 	.string "IAN: My sis doesn't get enough\n"
@@ -84,4 +84,4 @@ Route21_North_Text_IanPostBattle::
 
 Route21_North_Text_IanNotEnoughMons::
 	.string "IAN: We want a two-on-two battle.\n"
-	.string "So can you bring two POKéMON?$"
+	.string "So can you bring two DAEMONS?$"

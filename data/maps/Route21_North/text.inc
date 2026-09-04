@@ -6,8 +6,8 @@ Route21_North_Text_RonaldDefeat::
 	.string "Dang!$"
 
 Route21_North_Text_RonaldPostBattle::
-	.string "I can't catch anything good.\n"
-	.string "Not one good POKéMON to be had!$"
+	.string "I can't bind anything good. Not one\n"
+	.string "good DAEMON to be had!$"
 
 Route21_North_Text_WadeIntro::
 	.string "I got a big haul!\n"
@@ -18,7 +18,7 @@ Route21_North_Text_WadeDefeat::
 	.string "the grade, do they?$"
 
 Route21_North_Text_WadePostBattle::
-	.string "I seem to only catch MAGIKARP!$"
+	.string "I seem to only bind MAGIKARP!$"
 
 Route21_North_Text_SpencerIntro::
 	.string "The sea cleanses my body and soul!$"

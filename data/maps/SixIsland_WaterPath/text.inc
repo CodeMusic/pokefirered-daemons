@@ -9,7 +9,7 @@ SixIsland_WaterPath_Text_RoseDefeat::
 SixIsland_WaterPath_Text_RosePostBattle::
     .string "I want to go to the woods over\n"
     .string "there, but…\p"
-    .string "There are lots of BUG POKéMON.\n"
+    .string "There are lots of BUG DAEMONS.\n"
     .string "They scare me a little.$"
 
 SixIsland_WaterPath_Text_EdwardIntro::
@@ -44,7 +44,7 @@ SixIsland_WaterPath_Text_DeniseDefeat::
 
 SixIsland_WaterPath_Text_DenisePostBattle::
     .string "When I can't be with my boyfriend,\n"
-    .string "I spend time with the POKéMON he\l"
+    .string "I spend time with the DAEMON he\l"
     .string "gave me.$"
 
 SixIsland_WaterPath_Text_EarlIntro::
@@ -60,8 +60,8 @@ SixIsland_WaterPath_Text_EarlPostBattle::
     .string "these parts?$"
 
 SixIsland_WaterPath_Text_MiuIntro::
-    .string "MIU: Hello, POKéMON!\n"
-    .string "It's time to play!$"
+    .string "MIU: Hello, DAEMON! It's time to\n"
+    .string "play!$"
 
 SixIsland_WaterPath_Text_MiuDefeat::
     .string "MIU: Oh, no!\n"
@@ -76,20 +76,19 @@ SixIsland_WaterPath_Text_MiuNotEnoughMons::
     .string "We want to battle together.$"
 
 SixIsland_WaterPath_Text_MiaIntro::
-    .string "MIA: Hello, POKéMON!\n"
-    .string "It's time to battle!$"
+    .string "MIA: Hello, DAEMON! It's time to\n"
+    .string "battle!$"
 
 SixIsland_WaterPath_Text_MiaDefeat::
     .string "MIA: You're mean!\n"
     .string "You're bad for winning!$"
 
 SixIsland_WaterPath_Text_MiaPostBattle::
-    .string "MIA: Ohh…\n"
-    .string "I'm sorry, my POKéMON…$"
+    .string "MIA: Ohh… I'm sorry, my DAEMONS…$"
 
 SixIsland_WaterPath_Text_MiaNotEnoughMons::
     .string "MIA: Oh, you only have one\n"
-    .string "POKéMON?\p"
+    .string "DAEMON?\p"
     .string "Don't you feel lonesome?$"
 
 SixIsland_WaterPath_Text_WantedUltimateHorn::

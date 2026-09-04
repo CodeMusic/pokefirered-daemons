@@ -1,9 +1,9 @@
 SafariZone_East_Text_HowManyDidYouCatch::
-    .string "How many did you catch?\n"
-    .string "I'm bushed from the effort!$"
+    .string "How many did you bind? I'm bushed\n"
+    .string "from the effort!$"
 
 SafariZone_East_Text_CaughtChanseyAllWorthwhile::
-    .string "I caught a CHANSEY!\p"
+    .string "I bound a CHANSEY!\p"
     .string "That makes this all worthwhile.$"
 
 SafariZone_East_Text_TiredFromAllTheFun::

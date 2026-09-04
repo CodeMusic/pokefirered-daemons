@@ -16,29 +16,29 @@ MtMoon_B2F_Text_ThenThisFossilIsMine::
     .string "Then this fossil is mine!$"
 
 MtMoon_B2F_Text_LabOnCinnabarRegeneratesFossils::
-    .string "Far away, on CINNABAR ISLAND,\n"
-    .string "there's a POKéMON LAB.\p"
+    .string "Far away, on QUICKSILVER ISLAND,\n"
+    .string "there's a DAEMON LAB.\p"
     .string "They do research on regenerating\n"
     .string "fossils.$"
 
 MtMoon_B2F_Text_Grunt1Intro::
-    .string "We, TEAM ROCKET, shall find the\n"
+    .string "We, TEAM CORPUS, shall find the\n"
     .string "fossils!\p"
-    .string "Reviving POKéMON from them will\n"
-    .string "earn us huge riches!$"
+    .string "Reviving DAEMON from them will earn\n"
+    .string "us huge riches!$"
 
 MtMoon_B2F_Text_Grunt1Defeat::
     .string "Urgh!\n"
     .string "Now I'm mad!$"
 
 MtMoon_B2F_Text_Grunt1PostBattle::
-    .string "You made me mad!\n"
-    .string "TEAM ROCKET will blacklist you!$"
+    .string "You made me mad! TEAM CORPUS will\n"
+    .string "blacklist you!$"
 
 MtMoon_B2F_Text_Grunt2Intro::
-    .string "We, TEAM ROCKET, are POKéMON\n"
-    .string "gangsters!\l"
-    .string "We strike fear with our strength!$"
+    .string "We, TEAM CORPUS, are DAEMON\n"
+    .string "gangsters! We strike fear with our\l"
+    .string "strength!$"
 
 MtMoon_B2F_Text_Grunt2Defeat::
     .string "I blew it!$"
@@ -67,7 +67,7 @@ MtMoon_B2F_Text_Grunt4Defeat::
     .string "I'm steamed!$"
 
 MtMoon_B2F_Text_Grunt4PostBattle::
-    .string "POKéMON lived here long before\n"
+    .string "DAEMON lived here long before\n"
     .string "people came.$"
 
 MtMoon_B2F_Text_YouWantDomeFossil::

@@ -8,10 +8,10 @@ Text_AccessedSomeonesPC::
 	.string "Accessed Someone's PC.$"
 
 Text_OpenedPkmnStorage::
-	.string "POKéMON Storage System opened.$"
+	.string "DAEMON Storage System opened.$"
 
 Text_AccessedPlayersPC::
 	.string "Accessed {PLAYER}'s PC.$"
 
 Text_AccessedBillsPC::
-	.string "Accessed BILL's PC.$"
+	.string "Accessed HOLT's PC.$"

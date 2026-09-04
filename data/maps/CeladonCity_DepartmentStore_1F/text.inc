@@ -1,6 +1,6 @@
 CeladonCity_DepartmentStore_1F_Text_WelcomeToDeptStore::
-    .string "Hello!\n"
-    .string "Welcome to CELADON DEPT. STORE.\p"
+    .string "Hello! Welcome to VERDIGRIS DEPT.\n"
+    .string "STORE.\p"
     .string "The board on the right describes\n"
     .string "the store layout.$"
 

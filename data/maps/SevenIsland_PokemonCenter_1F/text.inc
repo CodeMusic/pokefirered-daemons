@@ -15,5 +15,5 @@ SevenIsland_PokemonCenter_1F_Text_DidYouRideSeagallopHere::
 
 SevenIsland_PokemonCenter_1F_Text_CheckOutTrainerTower::
     .string "If you're confident, you should\n"
-    .string "check out TRAINER TOWER.$"
+    .string "check out USER TOWER.$"
 

@@ -7,11 +7,11 @@ SevenIsland_SevaultCanyon_Text_CyndyDefeat::
 
 SevenIsland_SevaultCanyon_Text_CyndyPostBattle::
     .string "The way I am now, I may have to\n"
-    .string "hold off on TRAINER TOWER…$"
+    .string "hold off on USER TOWER…$"
 
 SevenIsland_SevaultCanyon_Text_EvanIntro::
     .string "It doesn't matter if you happen to\n"
-    .string "have the strongest POKéMON…\p"
+    .string "have the strongest DAEMON…\p"
     .string "It doesn't mean a thing if you don't\n"
     .string "know how to use them properly!$"
 
@@ -19,10 +19,10 @@ SevenIsland_SevaultCanyon_Text_EvanDefeat::
     .string "You're a master at this.$"
 
 SevenIsland_SevaultCanyon_Text_EvanPostBattle::
-    .string "You see them every so often,\n"
-    .string "TRAINERS with awesome POKéMON\l"
-    .string "who have no idea what to do.\p"
-    .string "Before training POKéMON, TRAINERS\n"
+    .string "You see them every so often, USERS\n"
+    .string "with awesome DAEMON who have no\l"
+    .string "idea what to do.\p"
+    .string "Before training DAEMON, USERS\n"
     .string "themselves need to grow up.$"
 
 SevenIsland_SevaultCanyon_Text_JacksonIntro::

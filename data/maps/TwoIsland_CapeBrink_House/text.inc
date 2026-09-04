@@ -12,10 +12,10 @@ Text_JustMistaken::
     .string "I was just mistaken.$"
 
 Text_AllowMeToTeachMonUltimateMove::
-    .string "Oh! This is the one!\n"
-    .string "This is the POKéMON!\p"
-    .string "This {STR_VAR_1} is worthy of\n"
-    .string "learning my ultimate move!\p"
+    .string "Oh! This is the one! This is the\n"
+    .string "DAEMON!\p"
+    .string "This {STR_VAR_1} is worthy of learning\n"
+    .string "my ultimate move!\p"
     .string "Will you allow it?\p"
     .string "Will you allow your {STR_VAR_1} to\n"
     .string "learn my {STR_VAR_2}?$"

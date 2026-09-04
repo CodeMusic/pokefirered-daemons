@@ -15,13 +15,13 @@ Route12_FishingHouse_Text_ReceivedSuperRod::
     .string "the FISHING GURU's brother.$"
 
 Route12_FishingHouse_Text_IfYouCatchBigMagikarpShowMe::
-    .string "Fishing is a way of life!\n"
-    .string "It is like the finest poetry.\p"
+    .string "Fishing is a way of life! It is like\n"
+    .string "the finest poetry.\p"
     .string "From the seas to rivers, go out\n"
     .string "and land the big one, my friend.\p"
     .string "Now, I have a request.\p"
-    .string "If you catch a big MAGIKARP \n"
-    .string "with that ROD, I want to see it.\p"
+    .string "If you bind a big MAGIKARP with\n"
+    .string "that ROD, I want to see it.\p"
     .string "As much as I love to fish, I also\n"
     .string "love seeing gigantic MAGIKARP.$"
 
@@ -30,11 +30,11 @@ Route12_FishingHouse_Text_OhThatsDisappointing::
     .string "That's so disappointing…$"
 
 Route12_FishingHouse_Text_TryFishingBringMeMagikarp::
-    .string "Hello there, {PLAYER}!\n"
-    .string "Have you been fishing?\p"
+    .string "Hello there, {PLAYER}! Have you\n"
+    .string "been fishing?\p"
     .string "Try fishing with the SUPER ROD in\n"
     .string "any body of water.\p"
-    .string "You'll find different POKéMON in\n"
+    .string "You'll find different DAEMONS in\n"
     .string "different places.\p"
     .string "Oh, and don't forget to bring me\n"
     .string "gigantic MAGIKARP.$"

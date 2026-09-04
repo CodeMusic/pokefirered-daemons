@@ -1,32 +1,31 @@
 Text_MetronomeTeach::
-    .string "Tch-tch-tch!\n"
-    .string "I'll teach you a nifty move.\p"
-    .string "Teach it to a POKéMON, and watch\n"
+    .string "Tch-tch-tch! I'll teach you a nifty\n"
+    .string "move.\p"
+    .string "Teach it to a DAEMON, and watch\n"
     .string "the fun unfold!\p"
-    .string "It's a move called METRONOME.\n"
-    .string "Does it strike your fancy?$"
+    .string "It's a move called METRONOME. Does\n"
+    .string "it strike your fancy?$"
 
 Text_MetronomeDeclined::
     .string "I tell you, it's a lot of fun!$"
 
 Text_MetronomeWhichMon::
-    .string "Okay!\n"
-    .string "Which POKéMON should I teach?$"
+    .string "Okay! Which DAEMON should I\n"
+    .string "teach?$"
 
 Text_MetronomeTaught::
-    .string "Tch-tch-tch!\n"
-    .string "That's the sound of a METRONOME.\p"
-    .string "It tweaks your POKéMON's brain into\n"
+    .string "Tch-tch-tch! That's the sound of a\n"
+    .string "METRONOME.\p"
+    .string "It tweaks your DAEMON's brain into\n"
     .string "using moves it doesn't even know.$"
 
 CinnabarIsland_PokemonLab_ExperimentRoom_Text_HaveYouAFossilForMe::
     .string "Hiya!\p"
-    .string "I am important doctor.\n"
-    .string "Yes, very much so, indeed.\p"
-    .string "Here, I study rare POKéMON fossils.\n"
+    .string "I am important doctor. Yes, very\n"
+    .string "much so, indeed.\p"
+    .string "Here, I study rare DAEMON fossils.\n"
     .string "All the time, I study.\p"
-    .string "You!\n"
-    .string "Have you a fossil for me?$"
+    .string "You! Have you a fossil for me?$"
 
 CinnabarIsland_PokemonLab_ExperimentRoom_Text_NoIsTooBad::
     .string "No!\n"
@@ -53,12 +52,11 @@ CinnabarIsland_PokemonLab_ExperimentRoom_Text_NoRoomForPokemon::
     .string "ポケモン　いっぱいで　もてないね！$"
 
 CinnabarIsland_PokemonLab_ExperimentRoom_Text_ThatFossilIsOfMonMakeItLiveAgain::
-    .string "Oh!\n"
-    .string "That is {STR_VAR_2}, it is!\p"
-    .string "It is fossil of {STR_VAR_1},\n"
-    .string "a POKéMON that is already extinct!\p"
+    .string "Oh! That is {STR_VAR_2}, it is!\p"
+    .string "It is fossil of {STR_VAR_1}, a DAEMON\n"
+    .string "that is already extinct!\p"
     .string "My Resurrection Machine will make\n"
-    .string "that POKéMON live again!$"
+    .string "that DAEMONS live again!$"
 
 @ TODO: Resolve text dump error below?
 CinnabarIsland_PokemonLab_ExperimentRoom_Text_HandedFossilToWeirdDoctor::

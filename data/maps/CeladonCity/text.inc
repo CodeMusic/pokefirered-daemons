@@ -1,5 +1,5 @@
 CeladonCity_Text_GotMyKoffingInCinnabar::
-    .string "I got my KOFFING in CINNABAR.\p"
+    .string "I got my KOFFING in QUICKSILVER.\p"
     .string "It's usually nice, but it breathes\n"
     .string "poison when it's angry.$"
 
@@ -8,8 +8,8 @@ CeladonCity_Text_GymIsGreatFullOfWomen::
     .string "It's full of women!$"
 
 CeladonCity_Text_GameCornerIsBadForCitysImage::
-    .string "CELADON takes pride in its efforts\n"
-    .string "to keep the city beautiful.\p"
+    .string "VERDIGRIS takes pride in its\n"
+    .string "efforts to keep the city beautiful.\p"
     .string "That's why the new GAME CORNER is\n"
     .string "bad for our city's image.$"
 
@@ -35,45 +35,45 @@ CeladonCity_Text_KeepOutOfTeamRocketsWay::
     .string "Keep out of TEAM ROCKET's way!$"
 
 CeladonCity_Text_ExplainXAccuracyDireHit::
-    .string "TRAINER TIPS\p"
+    .string "USER TIPS\p"
     .string "X ACCURACY boosts the accuracy of\n"
     .string "techniques.\p"
     .string "DIRE HIT jacks up the likelihood\n"
     .string "of critical hits.\p"
-    .string "Get your items at the CELADON\n"
+    .string "Get your items at the VERDIGRIS\n"
     .string "DEPT. STORE!$"
 
 CeladonCity_Text_CitySign::
-    .string "CELADON CITY\n"
-    .string "The City of Rainbow Dreams$"
+    .string "VERDIGRIS CITY The City of\n"
+    .string "Rainbow Dreams$"
 
 CeladonCity_Text_GymSign::
-    .string "CELADON CITY POKéMON GYM\n"
-    .string "LEADER: ERIKA\l"
-    .string "The Nature-Loving Princess!$"
+    .string "VERDIGRIS CITY DAEMON GYM\n"
+    .string "LEADER: ERIKA The Nature-Loving\l"
+    .string "Princess!$"
 
 CeladonCity_Text_MansionSign::
-    .string "CELADON MANSION$"
+    .string "VERDIGRIS MANSION$"
 
 CeladonCity_Text_DeptStoreSign::
     .string "Find what you need at the\n"
-    .string "CELADON DEPT. STORE!$"
+    .string "VERDIGRIS DEPT. STORE!$"
 
 CeladonCity_Text_GuardSpecProtectsFromStatus::
-    .string "TRAINER TIPS\p"
-    .string "GUARD SPEC. protects POKéMON\n"
-    .string "from status-reduction moves during\l"
+    .string "USER TIPS\p"
+    .string "GUARD SPEC. protects DAEMON from\n"
+    .string "status-reduction moves during\l"
     .string "battle.\p"
-    .string "Get your items at the\n"
-    .string "CELADON DEPT. STORE!$"
+    .string "Get your items at the VERDIGRIS\n"
+    .string "DEPT. STORE!$"
 
 CeladonCity_Text_PrizeExchangeSign::
     .string "COINS exchanged for prizes!\n"
     .string "PRIZE EXCHANGE$"
 
 CeladonCity_Text_GameCornerSign::
-    .string "ROCKET GAME CORNER\n"
-    .string "The playground for grown-ups!$"
+    .string "CORPUS GAME CORNER The playground\n"
+    .string "for grown-ups!$"
 
 CeladonCity_Text_ScaldedTongueOnTea::
     .string "Aaaagh, ow…\n"
@@ -98,8 +98,8 @@ Text_SoftboiledDeclined::
     .string "I hope we can chat again.$"
 
 Text_SoftboiledWhichMon::
-    .string "So, who's the POKéMON that gets\n"
-    .string "the chance to learn SOFTBOILED?$"
+    .string "So, who's the DAEMON that gets the\n"
+    .string "chance to learn SOFTBOILED?$"
 
 Text_SoftboiledTaught::
     .string "I wish you the best of luck!$"

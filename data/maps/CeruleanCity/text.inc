@@ -2,9 +2,9 @@ CeruleanCity_Text_RivalIntro::
     .string "{RIVAL}: Yo! {PLAYER}!\p"
     .string "You're still struggling along back\n"
     .string "here?\p"
-    .string "I'm doing great! I caught a bunch\n"
-    .string "of strong and smart POKéMON!\p"
-    .string "Here, let me see what you caught,\n"
+    .string "I'm doing great! I bound a bunch of\n"
+    .string "strong and smart DAEMON!\p"
+    .string "Here, let me see what you bound,\n"
     .string "{PLAYER}!$"
 
 CeruleanCity_Text_RivalDefeat::
@@ -14,18 +14,18 @@ CeruleanCity_Text_RivalDefeat::
 
 CeruleanCity_Text_RivalPostBattle::
     .string "{RIVAL}: Hey, guess what?\p"
-    .string "I went to BILL's and got him to\n"
-    .string "show me his rare POKéMON.\p"
+    .string "I went to HOLT's and got him to\n"
+    .string "show me his rare DAEMON.\p"
     .string "That added a lot of pages to my\n"
-    .string "POKéDEX!\p"
-    .string "After all, BILL's world famous as a\n"
+    .string "INDEX!\p"
+    .string "After all, HOLT's world famous as a\n"
     .string "POKéMANIAC.\p"
-    .string "He invented the POKéMON Storage\n"
+    .string "He invented the DAEMON Storage\n"
     .string "System on PC, too.\p"
-    .string "Since you're using his system,\n"
-    .string "you should go thank him.\p"
-    .string "Well, I better get rolling!\n"
-    .string "Smell ya later!$"
+    .string "Since you're using his system, you\n"
+    .string "should go thank him.\p"
+    .string "Well, I better get rolling! Smell\n"
+    .string "ya later!$"
 
 CeruleanCity_Text_OhRightLittlePresentAsFavor::
     .string "Oh, yeah, right.\p"
@@ -64,8 +64,8 @@ CeruleanCity_Text_OkayIllReturnStolenTM::
     .string "I'll return the TM I stole.$"
 
 CeruleanCity_Text_RecoveredTM28FromGrunt::
-    .string "{PLAYER} recovered TM28 from\n"
-    .string "the TEAM ROCKET GRUNT.$"
+    .string "{PLAYER} recovered TM28 from the\n"
+    .string "TEAM CORPUS GRUNT.$"
 
 CeruleanCity_Text_BetterGetMovingBye::
     .string "I better get moving!\n"
@@ -76,9 +76,9 @@ CeruleanCity_Text_MakeRoomForThisCantRun::
     .string "I can't run until I give it to you!$"
 
 CeruleanCity_Text_TrainerLifeIsToughIsntIt::
-    .string "You're a TRAINER, too?\p"
-    .string "Collecting, battling…\n"
-    .string "It's a tough life, isn't it?$"
+    .string "You're a USER, too?\p"
+    .string "Collecting, battling… It's a tough\n"
+    .string "life, isn't it?$"
 
 CeruleanCity_Text_YouCanCutDownSmallTrees::
     .string "Did you know that you can CUT down\n"
@@ -98,14 +98,14 @@ CeruleanCity_Text_IfSlowbroWasntThereCouldCutTree::
 
 CeruleanCity_Text_PokemonEncyclopediaAmusing::
     .string "You're making an encyclopedia on\n"
-    .string "POKéMON? That sounds amusing.$"
+    .string "DAEMON? That sounds amusing.$"
 
 CeruleanCity_Text_PeopleHereWereRobbed::
     .string "The people here were robbed.\p"
-    .string "It's obvious that TEAM ROCKET is\n"
+    .string "It's obvious that TEAM CORPUS is\n"
     .string "behind this most heinous crime!\p"
-    .string "Even our POLICE FORCE has\n"
-    .string "trouble with the ROCKETS!$"
+    .string "Even our POLICE FORCE has trouble\n"
+    .string "with the CORPUS!$"
 
 CeruleanCity_Text_SlowbroUseSonicboom::
     .string "Okay! SLOWBRO!\n"
@@ -125,10 +125,10 @@ CeruleanCity_Text_SlowbroWithdraw::
     .string "SLOWBRO, WITHDRAW!$"
 
 CeruleanCity_Text_HardToControlMonsObedience::
-    .string "No! That's wrong!\n"
-    .string "It's so hard to control POKéMON!\p"
-    .string "Your POKéMON's obedience depends\n"
-    .string "on your abilities as a TRAINER.$"
+    .string "No! That's wrong! It's so hard to\n"
+    .string "control DAEMON!\p"
+    .string "Your DAEMON's obedience depends on\n"
+    .string "your abilities as a USER.$"
 
 CeruleanCity_Text_SlowbroTookSnooze::
     .string "SLOWBRO took a snooze…$"
@@ -148,35 +148,33 @@ CeruleanCity_Text_WantBrightRedBicycle::
     .string "get dirty.$"
 
 CeruleanCity_Text_ThisIsCeruleanCave::
-    .string "This is CERULEAN CAVE.\p"
-    .string "Horribly strong POKéMON live inside\n"
+    .string "This is DOLDRUM CAVE.\p"
+    .string "Horribly strong DAEMONS live inside\n"
     .string "there.\p"
-    .string "It takes a very special TRAINER to\n"
-    .string "be allowed inside there.\p"
+    .string "It takes a very special USER to be\n"
+    .string "allowed inside there.\p"
     .string "You'd have to be strong enough to\n"
-    .string "become the POKéMON LEAGUE\l"
+    .string "become the DAEMON LEAGUE\l"
     .string "CHAMPION for starters.\p"
-    .string "And, you would have to have\n"
-    .string "made a great achievement.$"
+    .string "And, you would have to have made\n"
+    .string "a great achievement.$"
 
 CeruleanCity_Text_CitySign::
-    .string "CERULEAN CITY\n"
-    .string "A Mysterious, Blue Aura Surrounds\l"
-    .string "It$"
+    .string "DOLDRUM CITY A Mysterious, Blue\n"
+    .string "Aura Surrounds It$"
 
 CeruleanCity_Text_TrainerTipsHeldItems::
-    .string "TRAINER TIPS\p"
-    .string "A POKéMON can be made to hold\n"
-    .string "an item.\p"
-    .string "Some items can even be used by\n"
-    .string "the holding POKéMON in battle.$"
+    .string "USER TIPS\p"
+    .string "A DAEMON can be made to hold an\n"
+    .string "item.\p"
+    .string "Some items can even be used by the\n"
+    .string "holding DAEMON in battle.$"
 
 CeruleanCity_Text_BikeShopSign::
     .string "Grass and caves handled easily!\n"
     .string "BIKE SHOP$"
 
 CeruleanCity_Text_GymSign::
-    .string "CERULEAN CITY POKéMON GYM\n"
-    .string "LEADER: MISTY\l"
-    .string "The Tomboyish Mermaid!$"
+    .string "DOLDRUM CITY DAEMON GYM LEADER:\n"
+    .string "MISTY The Tomboyish Mermaid!$"
 

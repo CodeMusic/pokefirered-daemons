@@ -12,18 +12,18 @@ LavenderTown_Text_JustImaginingWhiteHand::
 
 LavenderTown_Text_TownKnownAsMonGraveSite::
     .string "This town is known as the grave\n"
-    .string "site of POKéMON.\p"
+    .string "site of DAEMON.\p"
     .string "Memorial services are held in\n"
-    .string "POKéMON TOWER.$"
+    .string "DAEMON TOWER.$"
 
 LavenderTown_Text_GhostsAppearedInTower::
-    .string "Ghosts appeared in POKéMON TOWER.\p"
+    .string "Ghosts appeared in DAEMON TOWER.\p"
     .string "I think they're the spirits of\n"
-    .string "POKéMON that the ROCKETS killed.$"
+    .string "DAEMON that the CORPUS killed.$"
 
 LavenderTown_Text_TownSign::
-    .string "LAVENDER TOWN\n"
-    .string "The Noble Purple Town$"
+    .string "HALFTONE TOWN The Noble Purple\n"
+    .string "Town$"
 
 LavenderTown_Text_SilphScopeNotice::
     .string "New SILPH SCOPE!\n"
@@ -31,10 +31,9 @@ LavenderTown_Text_SilphScopeNotice::
     .string "SILPH CO.$"
 
 LavenderTown_Text_VolunteerPokemonHouse::
-    .string "LAVENDER VOLUNTEER\n"
-    .string "POKéMON HOUSE$"
+    .string "HALFTONE VOLUNTEER DAEMON HOUSE$"
 
 LavenderTown_Text_PokemonTowerSign::
-    .string "POKéMON TOWER\n"
-    .string "Becalm the Spirits of POKéMON$"
+    .string "DAEMON TOWER Becalm the Spirits of\n"
+    .string "DAEMON$"
 

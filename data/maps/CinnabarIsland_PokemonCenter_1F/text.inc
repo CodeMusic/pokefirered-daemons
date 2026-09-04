@@ -1,6 +1,6 @@
 CinnabarIsland_PokemonCenter_1F_Text_CinnabarGymLocked::
-    .string "I came to visit the CINNABAR GYM,\n"
-    .string "but the door is locked tight.\p"
+    .string "I came to visit the QUICKSILVER\n"
+    .string "GYM, but the door is locked tight.\p"
     .string "There should be a key for it\n"
     .string "somewhere.\p"
     .string "Could it be in that burned-out\n"
@@ -20,13 +20,13 @@ CinnabarIsland_PokemonCenter_1F_Text_VisitUnionRoom::
     .string "to check the UNION ROOM.$"
 
 CinnabarIsland_PokemonCenter_1F_Text_EvolutionCanWaitForNewMoves::
-    .string "POKéMON can still learn techniques\n"
+    .string "DAEMON can still learn techniques\n"
     .string "after canceling evolution.\p"
     .string "Evolution can wait until new moves\n"
     .string "have been learned.$"
 
 CinnabarIsland_PokemonCenter_1F_Text_ReadyToSailToOneIsland::
-    .string "BILL: Hey, you kept me waiting!\n"
+    .string "HOLT: Hey, you kept me waiting!\n"
     .string "Ready to set sail to ONE ISLAND?$"
 
 CinnabarIsland_PokemonCenter_1F_Text_OhNotDoneYet::

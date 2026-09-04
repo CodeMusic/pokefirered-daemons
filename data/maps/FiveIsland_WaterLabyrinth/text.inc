@@ -1,18 +1,17 @@
 FiveIsland_WaterLabyrinth_Text_LetMeTakeLookAtMons::
     .string "You travel all over the place,\n"
     .string "don't you?\p"
-    .string "You're not driving your POKéMON\n"
-    .string "too harshly, are you?\p"
-    .string "Let me take a look.\n"
-    .string "… … …   … … …$"
+    .string "You're not driving your DAEMON too\n"
+    .string "harshly, are you?\p"
+    .string "Let me take a look. … … … … … …$"
 
 FiveIsland_WaterLabyrinth_Text_HmmISeeIsee::
     .string "Ah, hmm…\n"
     .string "I see, I see…$"
 
 FiveIsland_WaterLabyrinth_Text_TreatMonRightHaveThis::
-    .string "Oh, impressive.\n"
-    .string "You treat your POKéMON right.\p"
+    .string "Oh, impressive. You treat your\n"
+    .string "DAEMON right.\p"
     .string "I think you can be entrusted with\n"
     .string "this.\p"
     .string "Please, I'd like you to have this.$"
@@ -39,21 +38,20 @@ FiveIsland_WaterLabyrinth_Text_GladIMetSomeoneLikeYou::
     .string "I'm glad I met someone like you.$"
 
 FiveIsland_WaterLabyrinth_Text_CuteMonRemindsMeOfDaisy::
-    .string "Oh, hello.\n"
-    .string "That's a cute {STR_VAR_2}.\p"
-    .string "Seeing it reminds me of a sweet \n"
+    .string "Oh, hello. That's a cute {STR_VAR_2}.\p"
+    .string "Seeing it reminds me of a sweet\n"
     .string "little girl I met while traveling.\p"
-    .string "She was gently grooming POKéMON…\n"
+    .string "She was gently grooming DAEMON…\n"
     .string "She was a little angel.\p"
-    .string "That little girl's name…\n"
-    .string "I think it was DAISY.$"
+    .string "That little girl's name… I think it\n"
+    .string "was DAISY.$"
 
 FiveIsland_WaterLabyrinth_Text_AlizeIntro::
-    .string "This is an excellent environment\n"
-    .string "for raising POKéMON.$"
+    .string "This is an excellent environment for\n"
+    .string "raising DAEMONS.$"
 
 FiveIsland_WaterLabyrinth_Text_AlizeDefeat::
-    .string "Your POKéMON are growing up\n"
+    .string "Your DAEMONS are growing up\n"
     .string "admirably well!$"
 
 FiveIsland_WaterLabyrinth_Text_AlizePostBattle::

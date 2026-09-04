@@ -6,8 +6,8 @@ Route11_Text_HugoDefeat::
     .string "Didn't go my way!$"
 
 Route11_Text_HugoPostBattle::
-    .string "POKéMON is life!\n"
-    .string "And to live is to play games!$"
+    .string "DAEMON is life! And to live is to\n"
+    .string "play games!$"
 
 Route11_Text_JasperIntro::
     .string "Competition!\n"
@@ -18,7 +18,7 @@ Route11_Text_JasperDefeat::
 
 Route11_Text_JasperPostBattle::
     .string "You can't be a coward in the world\n"
-    .string "of POKéMON!$"
+    .string "of DAEMON!$"
 
 Route11_Text_EddieIntro::
     .string "Let's go, but don't cheat!$"
@@ -42,12 +42,12 @@ Route11_Text_BraxtonPostBattle::
     .string "Spread the word to save energy!$"
 
 Route11_Text_DillonIntro::
-    .string "I just became a TRAINER.\n"
-    .string "But, I think I can win.$"
+    .string "I just became a USER. But, I think\n"
+    .string "I can win.$"
 
 Route11_Text_DillonDefeat::
-    .string "My POKéMON couldn't win…\n"
-    .string "Haven't they grown enough?$"
+    .string "My DAEMONS couldn't win… Haven't\n"
+    .string "they grown enough?$"
 
 Route11_Text_DillonPostBattle::
     .string "What now?\n"
@@ -77,14 +77,14 @@ Route11_Text_YasuIntro::
     .string "I train every morning.$"
 
 Route11_Text_YasuDefeat::
-    .string "Darn!\n"
-    .string "My POKéMON need to be stronger!$"
+    .string "Darn! My DAEMONS need to be\n"
+    .string "stronger!$"
 
 Route11_Text_YasuPostBattle::
-    .string "There's a fat POKéMON that comes\n"
+    .string "There's a fat DAEMON that comes\n"
     .string "down from the mountains.\p"
-    .string "I bet it'd be strong if you can\n"
-    .string "catch it.$"
+    .string "I bet it'd be strong if you can bind\n"
+    .string "it.$"
 
 Route11_Text_BernieIntro::
     .string "Watch out for live wires!$"
@@ -97,7 +97,7 @@ Route11_Text_BerniePostBattle::
     .string "Well, better get back to work.$"
 
 Route11_Text_DaveIntro::
-    .string "I raised my POKéMON carefully.\n"
+    .string "I raised my DAEMONS carefully.\n"
     .string "They should be ready by now!$"
 
 Route11_Text_DaveDefeat::

@@ -37,8 +37,8 @@ Route16_Text_HideoDefeat::
 Route16_Text_HideoPostBattle::
     .string "We'll always be hanging around here\n"
     .string "even if you don't like it.\p"
-    .string "You can detour to VERMILION from\n"
-    .string "FUCHSIA going along the coast.$"
+    .string "You can detour to ARDOR from\n"
+    .string "LURID going along the coast.$"
 
 Route16_Text_CamronIntro::
     .string "I'm feeling hungry and mean!\n"
@@ -48,10 +48,10 @@ Route16_Text_CamronDefeat::
     .string "Bad, bad, bad!$"
 
 Route16_Text_CamronPostBattle::
-    .string "If I'm going to have POKéMON, they\n"
+    .string "If I'm going to have DAEMONS, they\n"
     .string "may as well be ferocious.\p"
-    .string "I'd use them to leave my enemies\n"
-    .string "in tatters.$"
+    .string "I'd use them to leave my enemies in\n"
+    .string "tatters.$"
 
 Route16_Text_RubenIntro::
     .string "Hey, there!\n"
@@ -62,21 +62,21 @@ Route16_Text_RubenDefeat::
 
 Route16_Text_RubenPostBattle::
     .string "I get my kicks by harassing people\n"
-    .string "with my stinking POKéMON.\p"
+    .string "with my stinking DAEMON.\p"
     .string "They're great for startling people.\n"
     .string "And, they bite, too.$"
 
 Route16_Text_MonSprawledOutInSlumber::
-    .string "A POKéMON is sprawled out in\n"
-    .string "a deep and comfortable slumber.$"
+    .string "A DAEMON is sprawled out in a deep\n"
+    .string "and comfortable slumber.$"
 
 Route16_Text_CyclingRoadSign::
     .string "Enjoy the slope!\n"
     .string "CYCLING ROAD$"
 
 Route16_Text_RouteSign::
-    .string "ROUTE 16\n"
-    .string "CELADON CITY - FUCHSIA CITY$"
+    .string "ROUTE 16 VERDIGRIS CITY - LURID\n"
+    .string "CITY$"
 
 Route16_Text_JedIntro::
     .string "JED: Our love knows no bounds.\n"
@@ -91,8 +91,8 @@ Route16_Text_JedPostBattle::
     .string "You need to focus less on me.$"
 
 Route16_Text_JedNotEnoughMons::
-    .string "JED: You have just one POKéMON?\n"
-    .string "Is there no love in your heart?$"
+    .string "JED: You have just one DAEMON? Is\n"
+    .string "there no love in your heart?$"
 
 Route16_Text_LeaIntro::
     .string "LEA: Sometimes, the intensity of\n"
@@ -108,6 +108,6 @@ Route16_Text_LeaPostBattle::
 
 Route16_Text_LeaNotEnoughMons::
     .string "LEA: Oh, you don't have two\n"
-    .string "POKéMON with you?\p"
+    .string "DAEMONS with you?\p"
     .string "Doesn't it feel lonely for you or\n"
-    .string "your POKéMON?$"
+    .string "your DAEMON?$"

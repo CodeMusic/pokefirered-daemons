@@ -39,8 +39,8 @@ Help_Text_DescAboutThisGame::
 	.string "about this game.$"
 
 Help_Text_DescTypeMatchupList::
-	.string "The matchups of  POKéMON types\n"
-	.string "and moves are listed.$"
+	.string "The matchups of DAEMON types and\n"
+	.string "moves are listed.$"
 
 Help_Text_DescExit::
 	.string "Select to exit the HELP System.$"
@@ -101,19 +101,19 @@ Help_Text_HowDoIPrepareForBattle::
 	.string "How do I prepare for battle?$"
 
 Help_Text_WhatIsAMonsVitality::
-	.string "What is a POKéMON's vitality?$"
+	.string "What is a DAEMON's vitality?$"
 
 Help_Text_MyMonsAreHurt::
-	.string "My POKéMON are hurt!$"
+	.string "My DAEMONS are hurt!$"
 
 Help_Text_WhatIsStatusProblem::
 	.string "What is a status problem?$"
 
 Help_Text_WhatHappensIfAllMyMonsFaint::
-	.string "What happens if all my POKéMON faint?$"
+	.string "What happens if all my DAEMONS HALT?$"
 
 Help_Text_CantCatchMons::
-	.string "I can't catch POKéMON!$"
+	.string "I can't bind DAEMONS!$"
 
 Help_Text_RanOutOfPotions::
 	.string "I ran out of POTIONS.$"
@@ -122,16 +122,16 @@ Help_Text_CanIBuyPokeBalls::
 	.string "Can I buy POKé BALLS?$"
 
 Help_Text_WhatsATrainer::
-	.string "What's a TRAINER?$"
+	.string "What's a USER?$"
 
 Help_Text_HowDoIWinAgainstTrainer::
-	.string "How do I win against a TRAINER?$"
+	.string "How do I win against a USER?$"
 
 Help_Text_WhereDoMonsAppear::
-	.string "Where do POKéMON appear?$"
+	.string "Where do DAEMON appear?$"
 
 Help_Text_WhatAreMoves::
-	.string "What are POKéMON moves?$"
+	.string "What are DAEMON moves?$"
 
 Help_Text_WhatAreHiddenMoves::
 	.string "What are HIDDEN moves?$"
@@ -143,10 +143,10 @@ Help_Text_WantToAddMoreMoves::
 	.string "I want to add more moves.$"
 
 Help_Text_WantToMakeMonStronger::
-	.string "I want to make my POKéMON stronger.$"
+	.string "I want to make my DAEMONS stronger.$"
 
 Help_Text_FoeMonsTooStrong::
-	.string "The foe POKéMON are too strong!$"
+	.string "The foe DAEMONS are too strong!$"
 
 Help_Text_WhatDoIDoInCave::
 	.string "What do I do in a cave?$"
@@ -155,16 +155,16 @@ Help_Text_NothingIWantToKnow::
 	.string "There's nothing that I want to know!$"
 
 Help_Text_WhatsPokemonCenter::
-	.string "What's a POKéMON CENTER?$"
+	.string "What's a DAEMON CENTER?$"
 
 Help_Text_WhatsPokemonMart::
-	.string "What's a POKéMON MART?$"
+	.string "What's a DAEMON MART?$"
 
 Help_Text_WantToEndGame::
 	.string "I want to end the game.$"
 
 Help_Text_WhatsAMon::
-	.string "What's a POKéMON?$"
+	.string "What's a DAEMON?$"
 
 Help_Text_WhatIsThatPersonLike::
 	.string "What is that person like?$"
@@ -186,11 +186,11 @@ Help_Text_WhatIsAGym::
 
 Help_Text_AnswerPlayingForFirstTime::
 	.string "You become the main character,\n"
-	.string "exploring the world of POKéMON.\l"
-	.string "By talking to people and solving\l"
-	.string "mysteries, new paths will open to you.\l"
-	.string "Strive for the goal together with your\l"
-	.string "wonderful POKéMON.$"
+	.string "exploring the world of DAEMON. By\l"
+	.string "talking to people and solving mysteries,\l"
+	.string "new paths will open to you. Strive for\l"
+	.string "the goal together with your wonderful\l"
+	.string "DAEMON.$"
 
 Help_Text_AnswerWhatShouldIBeDoing::
 	.string "When you come across another person,\n"
@@ -254,13 +254,12 @@ Help_Text_AnswerWhatHappenedToItemIGot::
 	.string "“How do I do this?” heading.$"
 
 Help_Text_AnswerWhatAreMyAdventureBasics::
-	.string "If POKéMON are hurt in battle,\n"
-	.string "take them to a POKéMON CENTER and\l"
-	.string "have them healed by the staff.\l"
-	.string "Get in the habit of saving your\l"
-	.string "game and recording your progress.\l"
-	.string "Stock up on healing items at\l"
-	.string "POKéMON MARTS before traveling far.$"
+	.string "If DAEMONS are hurt in battle, take\n"
+	.string "them to a DAEMON CENTER and have them\l"
+	.string "healed by the staff. Get in the habit\l"
+	.string "of saving your game and recording your\l"
+	.string "progress. Stock up on healing items at\l"
+	.string "DAEMON MARTS before traveling far.$"
 
 Help_Text_AnswerHowAreRoadsForestsDifferent::
 	.string "Forests are basically the same as\n"
@@ -270,20 +269,19 @@ Help_Text_AnswerHowAreRoadsForestsDifferent::
 
 Help_Text_AnswerHowAreCavesDifferent::
 	.string "Caves are dark and dangerous. Wild\n"
-	.string "POKéMON can appear anywhere in them.\l"
-	.string "If there is an emergency, rush to a\l"
-	.string "POKéMON CENTER or use items.\l"
-	.string "New towns await discovery beyond some\l"
-	.string "caves, so don't give up.$"
+	.string "DAEMON can appear anywhere in them. If\l"
+	.string "there is an emergency, rush to a\l"
+	.string "DAEMON CENTER or use items. New towns\l"
+	.string "await discovery beyond some caves, so\l"
+	.string "don't give up.$"
 
 Help_Text_AnswerHowDoIProgress::
 	.string "The object of the game is to train\n"
-	.string "your POKéMON and move forward.\l"
-	.string "You must collect info and solve\l"
-	.string "problems. For example, what do you\l"
-	.string "need to get around an obstacle?\l"
-	.string "What would get that impeding\l"
-	.string "person out of the way?$"
+	.string "your DAEMON and move forward. You must\l"
+	.string "collect info and solve problems. For\l"
+	.string "example, what do you need to get\l"
+	.string "around an obstacle? What would get\l"
+	.string "that impeding person out of the way?$"
 
 Help_Text_AnswerWhenCanIUseItem::
 	.string "There are several kinds of items.\n"
@@ -294,184 +292,180 @@ Help_Text_AnswerWhenCanIUseItem::
 	.string "you will be alerted.$"
 
 Help_Text_AnswerWhatsABattle::
-	.string "In a battle, POKéMON try to reduce\n"
-	.string "one another's vitality, expressed as\l"
-	.string "HP. If a POKéMON's HP falls to zero,\l"
-	.string "it faints, and the other POKéMON\l"
-	.string "wins. By winning a battle, POKéMON\l"
-	.string "earn EXP. Points, which help them\l"
-	.string "level up (grow stronger).$"
+	.string "In a battle, DAEMON try to reduce one\n"
+	.string "another's vitality, expressed as HP. If\l"
+	.string "a DAEMON's HP falls to zero, it HALTS,\l"
+	.string "and the other DAEMONS wins. By winning\l"
+	.string "a battle, DAEMON earn EXP. Points,\l"
+	.string "which help them level up (grow\l"
+	.string "stronger).$"
 
 Help_Text_AnswerHowDoIPrepareForBattle::
-	.string "First, fully heal the POKéMON in your\n"
-	.string "party (the POKéMON with you) at any\l"
-	.string "POKéMON CENTER.\l"
-	.string "You should also buy healing items for\l"
-	.string "emergencies at a POKéMON MART.$"
+	.string "First, fully heal the DAEMON in your\n"
+	.string "party (the DAEMON with you) at any\l"
+	.string "DAEMON CENTER. You should also buy\l"
+	.string "healing items for emergencies at a\l"
+	.string "DAEMON MART.$"
 
 Help_Text_AnswerWhatIsAMonsVitality::
-	.string "A POKéMON's vitality is expressed in HP.\n"
-	.string "If a POKéMON is hurt in battle, HP is\l"
+	.string "A DAEMON's vitality is expressed in HP.\n"
+	.string "If a DAEMON is hurt in battle, HP is\l"
 	.string "subtracted. If its HP drops to zero,\l"
-	.string "the POKéMON faints.\l"
-	.string "Heal hurt or fainted POKéMON at a\l"
-	.string "POKéMON CENTER or by using items.$"
+	.string "the DAEMON HALTS. Heal hurt or HALTED\l"
+	.string "DAEMON at a DAEMON CENTER or by using\l"
+	.string "items.$"
 
 Help_Text_AnswerMyMonsAreHurt::
-	.string "A POKéMON CENTER is like an inn for\n"
-	.string "POKéMON. It will fully heal POKéMON of\l"
+	.string "A DAEMON CENTER is like an inn for\n"
+	.string "DAEMON. It will fully heal DAEMON of\l"
 	.string "any status problems and fully restore\l"
-	.string "their HP using a special machine.\l"
-	.string "This service is free, so get in the\l"
-	.string "habit of healing your POKéMON often.$"
+	.string "their HP using a special machine. This\l"
+	.string "service is free, so get in the habit of\l"
+	.string "healing your DAEMON often.$"
 
 Help_Text_AnswerWhatIsStatusProblem::
 	.string "A status problem refers to an ailment\n"
-	.string "that is inflicted on a POKéMON by its\l"
+	.string "that is inflicted on a DAEMON by its\l"
 	.string "foe's attack. These include burns,\l"
 	.string "paralysis, poisoning, sleep, and\l"
 	.string "freezing. These can be healed by\l"
-	.string "visiting a POKéMON CENTER or using\l"
-	.string "the appropriate item.$"
+	.string "visiting a DAEMON CENTER or using the\l"
+	.string "appropriate item.$"
 
 Help_Text_AnswerWhatHappensIfAllMyMonsFaint::
-	.string "If all the POKéMON in your party\n"
-	.string "(all the POKéMON with you) faint, you\l"
-	.string "lose some MONEY, and you are\l"
-	.string "returned home or to a POKéMON\l"
-	.string "CENTER. To reduce that chance, visit\l"
-	.string "POKéMON CENTERS often. Also, get\l"
-	.string "in the habit of saving often.$"
+	.string "If all the DAEMON in your party (all\n"
+	.string "the DAEMON with you) HALT, you lose\l"
+	.string "some MONEY, and you are returned home\l"
+	.string "or to a DAEMON CENTER. To reduce that\l"
+	.string "chance, visit DAEMON CENTERS often.\l"
+	.string "Also, get in the habit of saving often.$"
 
 Help_Text_AnswerCantCatchMons::
-	.string "If a wild POKéMON escapes from a POKé\n"
-	.string "BALL, it's obviously still feisty.\l"
-	.string "Try reducing its HP some more, and\l"
-	.string "try to weaken it with paralysis or sleep\l"
-	.string "before trying to catch it.\l"
-	.string "If the POKé BALL rocks for a while,\l"
-	.string "the quarry is close to being caught!$"
+	.string "If a wild DAEMON escapes from a POKé\n"
+	.string "BALL, it's obviously still feisty. Try\l"
+	.string "reducing its HP some more, and try to\l"
+	.string "weaken it with paralysis or sleep\l"
+	.string "before trying to bind it. If the POKé\l"
+	.string "BALL rocks for a while, the quarry is\l"
+	.string "close to being bound!$"
 
 Help_Text_AnswerRanOutOfPotions::
-	.string "There are shops, known as POKéMON\n"
-	.string "MARTS, that sell items.\l"
-	.string "You will not find POKéMON MARTS on\l"
-	.string "roads, in forests, or in caves.\l"
-	.string "Stock up on needed items while you are\l"
-	.string "visiting a town with a POKéMON MART.$"
+	.string "There are shops, known as DAEMON\n"
+	.string "MARTS, that sell items. You will not\l"
+	.string "find DAEMON MARTS on roads, in forests,\l"
+	.string "or in caves. Stock up on needed items\l"
+	.string "while you are visiting a town with a\l"
+	.string "DAEMON MART.$"
 
 Help_Text_AnswerCanIBuyPokeBalls::
-	.string "You may buy POKé BALLS at any\n"
-	.string "POKéMON MART in any town.\l"
-	.string "You will not find POKéMON MARTS on\l"
-	.string "roads, in forests, or in caves.\l"
-	.string "Stock up on POKé BALLS while you are\l"
-	.string "visiting a town with a POKéMON MART.$"
+	.string "You may buy POKé BALLS at any DAEMON\n"
+	.string "MART in any town. You will not find\l"
+	.string "DAEMON MARTS on roads, in forests, or\l"
+	.string "in caves. Stock up on POKé BALLS while\l"
+	.string "you are visiting a town with a DAEMON\l"
+	.string "MART.$"
 
 Help_Text_AnswerWhatsATrainer::
-	.string "A TRAINER is a person who raises\n"
-	.string "POKéMON through battling.\l"
-	.string "TRAINERS will challenge you \l"
-	.string "wherever they are - it could be on\l"
-	.string "a road, in forests, caves, anywhere.\l"
-	.string "If your eyes meet, you have to accept\l"
+	.string "A USER is a person who raises DAEMON\n"
+	.string "through battling. USERS will challenge\l"
+	.string "you wherever they are - it could be on\l"
+	.string "a road, in forests, caves, anywhere. If\l"
+	.string "your eyes meet, you have to accept\l"
 	.string "their challenge. So be careful!$"
 
 Help_Text_AnswerHowDoIWinAgainstTrainer::
-	.string "To beat a TRAINER in battle, use\n"
-	.string "POKéMON that have type advantages\l"
-	.string "over the foe's POKéMON. You may also\l"
-	.string "use highly trained POKéMON with\l"
-	.string "overwhelming power. Outnumbering the\l"
-	.string "foe's POKéMON is another obvious\l"
-	.string "tactic.$"
+	.string "To beat a USER in battle, use DAEMON\n"
+	.string "that have type advantages over the\l"
+	.string "foe's DAEMON. You may also use highly\l"
+	.string "trained DAEMON with overwhelming power.\l"
+	.string "Outnumbering the foe's DAEMON is another\l"
+	.string "obvious tactic.$"
 
 Help_Text_AnswerWhereDoMonsAppear::
-	.string "Wild POKéMON will appear in tall grass,\n"
+	.string "Wild DAEMON will appear in tall grass,\n"
 	.string "on roads, and in forests. They will\l"
-	.string "appear anywhere in dark caves.\l"
-	.string "There are no wild POKéMON or TRAINERS\l"
-	.string "in towns, so they are safe places.$"
+	.string "appear anywhere in dark caves. There\l"
+	.string "are no wild DAEMON or USERS in towns,\l"
+	.string "so they are safe places.$"
 
 Help_Text_AnswerWhatAreMoves::
-	.string "POKéMON may learn up to four different\n"
+	.string "DAEMON may learn up to four different\n"
 	.string "techniques, or moves. There is a great\l"
 	.string "variety of moves including attacks and\l"
-	.string "those with special effects. The kinds\l"
-	.string "of moves that can be learned vary\l"
-	.string "for each POKéMON. Some moves\l"
-	.string "can be learned from machines.$"
+	.string "those with special effects. The kinds of\l"
+	.string "moves that can be learned vary for\l"
+	.string "each DAEMON. Some moves can be\l"
+	.string "learned from machines.$"
 
 Help_Text_AnswerWhatAreHiddenMoves::
 	.string "HIDDEN moves are those that are\n"
 	.string "especially important for your\l"
 	.string "adventure. To use such a move outside\l"
-	.string "of battle, open the “POKéMON” MENU\l"
-	.string "and make the POKéMON that knows the\l"
-	.string "move use it. A fainted POKéMON may use\l"
-	.string "a HIDDEN move outside of battle.$"
+	.string "of battle, open the “DAEMON” MENU and\l"
+	.string "make the DAEMON that knows the move\l"
+	.string "use it. A HALTED DAEMON may use a\l"
+	.string "HIDDEN move outside of battle.$"
 
 Help_Text_AnswerWhatMovesShouldIUse::
 	.string "Select “FIGHT,” and the MENU of moves\n"
 	.string "will appear. Consider the type\l"
 	.string "matchups, and use the most effective\l"
 	.string "moves. You can check the effects of\l"
-	.string "moves by opening “POKéMON,”\l"
-	.string "picking a POKéMON, opening “SUMMARY,”\l"
-	.string "then opening “POKéMON SKILLS.”$"
+	.string "moves by opening “DAEMON,” picking a\l"
+	.string "DAEMON, opening “SUMMARY,” then\l"
+	.string "opening “DAEMON SKILLS.”$"
 
 Help_Text_AnswerWantToAddMoreMoves::
-	.string "The most a POKéMON can learn is four\n"
-	.string "moves. They are learned as the\l"
-	.string "POKéMON levels up. It can also be\l"
-	.string "taught a move using a TM (Technical\l"
-	.string "Machine) or HM (Hidden Machine).\l"
-	.string "There are also people who teach moves.$"
+	.string "The most a DAEMON can learn is four\n"
+	.string "moves. They are learned as the DAEMON\l"
+	.string "levels up. It can also be taught a\l"
+	.string "move using a TM (Technical Machine) or\l"
+	.string "HM (Hidden Machine). There are also\l"
+	.string "people who teach moves.$"
 
 Help_Text_AnswerWantToMakeMonStronger::
-	.string "The key to making your POKéMON\n"
-	.string "strong is to battle and win often.\l"
-	.string "The EXP. (Experience) Points earned\l"
-	.string "by winning battles accumulate to\l"
-	.string "level up POKéMON that participated in\l"
-	.string "them. Battle wild POKéMON often to\l"
-	.string "level up your party.$"
+	.string "The key to making your DAEMON strong is\n"
+	.string "to battle and win often. The EXP.\l"
+	.string "(Experience) Points earned by winning\l"
+	.string "battles accumulate to level up DAEMON\l"
+	.string "that participated in them. Battle wild\l"
+	.string "DAEMON often to level up your party.$"
 
 Help_Text_AnswerFoeMonsTooStrong::
 	.string "If your foes are too strong, try\n"
-	.string "leveling up your POKéMON some more.\l"
-	.string "Go back the way you came and battle\l"
-	.string "wild POKéMON to level up your party.\l"
-	.string "You may also battle TRAINERS whom you\l"
-	.string "have not battled before.$"
+	.string "leveling up your DAEMON some more. Go\l"
+	.string "back the way you came and battle wild\l"
+	.string "DAEMON to level up your party. You\l"
+	.string "may also battle USERS whom you have\l"
+	.string "not battled before.$"
 
 Help_Text_AnswerWhatDoIDoInCave::
-	.string "Unlike roads and forests, wild POKéMON\n"
-	.string "can appear anywhere in caves.\l"
-	.string "If your POKéMON are hurt in a cave,\l"
-	.string "rush to a POKéMON CENTER or use items\l"
-	.string "to heal them right away. It is very\l"
-	.string "dangerous to force your luck in caves.$"
+	.string "Unlike roads and forests, wild DAEMON\n"
+	.string "can appear anywhere in caves. If your\l"
+	.string "DAEMONS are hurt in a cave, rush to a\l"
+	.string "DAEMON CENTER or use items to heal\l"
+	.string "them right away. It is very dangerous\l"
+	.string "to force your luck in caves.$"
 
 Help_Text_AnswerNothingIWantToKnow::
 	.string "Trust your own knowledge and power.\n"
 	.string "Believe in yourself and find your way!$"
 
 Help_Text_AnswerWhatsPokemonCenter::
-	.string "A POKéMON CENTER is identified by its\n"
+	.string "A DAEMON CENTER is identified by its\n"
 	.string "red roof and a “P.C” sign. Every\l"
-	.string "POKéMON CENTER offers such services as\l"
-	.string "fully healing POKéMON and free PC use,\l"
-	.string "making it essential for your travels.\l"
-	.string "On the upper floor are facilities for\l"
+	.string "DAEMON CENTER offers such services as\l"
+	.string "fully healing DAEMON and free PC use,\l"
+	.string "making it essential for your travels. On\l"
+	.string "the upper floor are facilities for\l"
 	.string "linking with friends and others.$"
 
 Help_Text_AnswerWhatsPokemonMart::
-	.string "A POKéMON MART is identified by its\n"
-	.string "blue roof and a “MART” sign.\l"
-	.string "Items can be bought and sold at any\l"
-	.string "POKéMON MART. Some MARTS carry items\l"
-	.string "that are available only in their towns.$"
+	.string "A DAEMON MART is identified by its blue\n"
+	.string "roof and a “MART” sign. Items can be\l"
+	.string "bought and sold at any DAEMON MART.\l"
+	.string "Some MARTS carry items that are\l"
+	.string "available only in their towns.$"
 
 Help_Text_AnswerWantToEndGame::
 	.string "You can safely end your game by\n"
@@ -482,11 +476,11 @@ Help_Text_AnswerWantToEndGame::
 	.string "where you last saved.$"
 
 Help_Text_AnswerWhatsAMon::
-	.string "POKéMON are living beings about which\n"
+	.string "DAEMONS are living beings about which\n"
 	.string "many mysteries still remain. You may\l"
 	.string "see them in grass, the sea, and caves.\l"
 	.string "They appear to obey the wishes of the\l"
-	.string "TRAINERS that caught them.$"
+	.string "USERS that bound them.$"
 
 Help_Text_AnswerWhatIsThatPersonLike::
 	.string "Use the FAME CHECKER among the\n"
@@ -494,18 +488,18 @@ Help_Text_AnswerWhatIsThatPersonLike::
 	.string "It may give you a hint, so try it out.$"
 
 Help_Text_AnswerWhatDoesHiddenMoveDo::
-	.string "A HIDDEN move is taught to a POKéMON\n"
-	.string "using an HM (Hidden Machine).\l"
-	.string "A HIDDEN move is important for helping\l"
-	.string "your adventure. For example, one is\l"
-	.string "used to light up dark caves. Another\l"
-	.string "cuts down small trees. There is one\l"
-	.string "for traveling on water, and so on.$"
+	.string "A HIDDEN move is taught to a DAEMON\n"
+	.string "using an HM (Hidden Machine). A HIDDEN\l"
+	.string "move is important for helping your\l"
+	.string "adventure. For example, one is used to\l"
+	.string "light up dark caves. Another cuts down\l"
+	.string "small trees. There is one for traveling\l"
+	.string "on water, and so on.$"
 
 Help_Text_AnswerWhatDoIDoInSafari::
-	.string "Try to catch wild POKéMON by throwing\n"
-	.string "the special SAFARI BALLS.\l"
-	.string "You may keep any item you find, too.$"
+	.string "Try to bind wild DAEMON by throwing the\n"
+	.string "special SAFARI BALLS. You may keep\l"
+	.string "any item you find, too.$"
 
 Help_Text_AnswerWhatAreSafariRules::
 	.string "Your SAFARI GAME ends once you have\n"
@@ -520,19 +514,19 @@ Help_Text_AnswerWantToEndSafari::
 	.string "“RETIRE” at the top of the list.$"
 
 Help_Text_AnswerWhatIsAGym::
-	.string "POKéMON GYMS are operated by the\n"
-	.string "POKéMON LEAGUE and are training\l"
-	.string "facilities for TRAINERS. They are all\l"
+	.string "DAEMON GYMS are operated by the\n"
+	.string "DAEMON LEAGUE and are training\l"
+	.string "facilities for USERS. They are all\l"
 	.string "across the land in cities and towns.\l"
-	.string "Each one is headed by a LEADER, who\l"
-	.string "is a very skilled TRAINER. Beat the\l"
-	.string "LEADER to collect a BADGE.$"
+	.string "Each one is headed by a LEADER, who is\l"
+	.string "a very skilled USER. Beat the LEADER\l"
+	.string "to collect a MARK.$"
 
 Help_Text_UsingPokedex::
-	.string " Using “POKéDEX”$"
+	.string " Using “INDEX”$"
 
 Help_Text_UsingPokemon::
-	.string " Using “POKéMON”$"
+	.string " Using “DAEMON”$"
 
 Help_Text_UsingSummary::
 	.string "  Using “SUMMARY”$"
@@ -625,7 +619,7 @@ Help_Text_UsingFight::
 	.string " Using “FIGHT”$"
 
 Help_Text_UsingPokemon2::
-	.string " Using “POKéMON”$"
+	.string " Using “DAEMON”$"
 
 Help_Text_UsingShift::
 	.string "  Using “SHIFT”$"
@@ -637,7 +631,7 @@ Help_Text_UsingBag2::
 	.string " Using “BAG”$"
 
 Help_Text_ReadingPokedex::
-	.string " Reading the “POKéDEX”$"
+	.string " Reading the “INDEX”$"
 
 Help_Text_UsingHomePC::
 	.string "Using the PC at home$"
@@ -673,17 +667,17 @@ Help_Text_UsingHallOfFame::
 	.string " Using “HALL OF FAME”$"
 
 Help_Text_HowToUsePokedex::
-	.string "{CIRCLE_1} Select “POKéDEX” on the MENU.\n"
-	.string "{CIRCLE_2} Choose POKéMON using commands such\n"
-	.string "   as “POKéMON LIST,”\n"
-	.string "   “HABITATS OF POKéMON,” and\n"
+	.string "{CIRCLE_1} Select “INDEX” on the MENU.\n"
+	.string "{CIRCLE_2} Choose DAEMON using commands such\n"
+	.string "   as “DAEMON LIST,”\n"
+	.string "   “HABITATS OF DAEMON,” and\n"
 	.string "   “SEARCH.”\n"
-	.string "{CIRCLE_3} Select a POKéMON to obtain detailed\n"
+	.string "{CIRCLE_3} Select a DAEMON to obtain detailed\n"
 	.string "   information.$"
 
 Help_Text_HowToUsePokemon::
-	.string "{CIRCLE_1} Select “POKéMON” on the MENU.\n"
-	.string "{CIRCLE_2} Choose a POKéMON in your party.\n"
+	.string "{CIRCLE_1} Select “DAEMON” on the MENU.\n"
+	.string "{CIRCLE_2} Choose a DAEMON in your party.\n"
 	.string "{CIRCLE_3} Select “SUMMARY,” “SWITCH,”\n"
 	.string "   or “ITEM.”$"
 
@@ -691,25 +685,25 @@ Help_Text_HowToUseSummary::
 	.string "{CIRCLE_1} Select “SUMMARY.”\n"
 	.string "{CIRCLE_2} Press left or right on the {PLUS} Control\n"
 	.string "   Pad to check the information:\n"
-	.string "   “POKéMON INFO”\n"
-	.string "   “POKéMON SKILLS”\n"
+	.string "   “DAEMON INFO”\n"
+	.string "   “DAEMON SKILLS”\n"
 	.string "   “KNOWN MOVES”$"
 
 Help_Text_HowToUseSwitch::
-	.string "{CIRCLE_1} Choose the POKéMON you want to\n"
+	.string "{CIRCLE_1} Choose the DAEMON you want to\n"
 	.string "   switch around.\n"
 	.string "{CIRCLE_2} Select “SWITCH.”\n"
-	.string "{CIRCLE_3} Select the POKéMON to switch with\n"
+	.string "{CIRCLE_3} Select the DAEMON to switch with\n"
 	.string "   the first one.\n"
-	.string "The POKéMON at the left of the screen\n"
+	.string "The DAEMON at the left of the screen\n"
 	.string "will be the first one out in a battle.$"
 
 Help_Text_HowToUseItem::
 	.string "{CIRCLE_1} Select “ITEM.”\n"
 	.string "{CIRCLE_2} Select whether you want to “GIVE”\n"
-	.string "   an item to the POKéMON to hold,\n"
+	.string "   an item to the DAEMON to hold,\n"
 	.string "   or “TAKE” an item it is holding.\n"
-	.string "A POKéMON can hold no more than one\n"
+	.string "A DAEMON can hold no more than one\n"
 	.string "item!$"
 
 Help_Text_HowToUseBag::
@@ -738,7 +732,7 @@ Help_Text_HowToUseKeyItem::
 	.string "   key item.$"
 
 Help_Text_HowToUsePokeBall::
-	.string "{CIRCLE_1} While battling a wild POKéMON,\n"
+	.string "{CIRCLE_1} While battling a wild DAEMON,\n"
 	.string "   select the BAG's “POKé BALLS”\n"
 	.string "   POCKET.\n"
 	.string "{CIRCLE_2} Press up or down on the {PLUS} Control\n"
@@ -748,7 +742,7 @@ Help_Text_HowToUsePokeBall::
 
 Help_Text_HowToUsePlayer::
 	.string "{CIRCLE_1} Select “{PLAYER}” on the MENU.\n"
-	.string "{CIRCLE_2} Your TRAINER CARD is displayed face\n"
+	.string "{CIRCLE_2} Your USER CARD is displayed face\n"
 	.string "   up with basic information. Press the\n"
 	.string "   A Button to turn the CARD over.\n"
 	.string "{CIRCLE_3} A variety of data can be found on\n"
@@ -778,7 +772,7 @@ Help_Text_HowToUsePotion::
 	.string "{CIRCLE_3} Select “POTION” in the “ITEMS”\n"
 	.string "   POCKET.\n"
 	.string "{CIRCLE_4} Select “USE.”\n"
-	.string "{CIRCLE_5} Select the POKéMON to be healed.$"
+	.string "{CIRCLE_5} Select the DAEMON to be healed.$"
 
 Help_Text_HowToUseTownMap::
 	.string "{CIRCLE_1} Open the MENU.\n"
@@ -795,7 +789,7 @@ Help_Text_HowToUseTM::
 	.string "   “BAG.”\n"
 	.string "{CIRCLE_3} “OPEN” the TM CASE.\n"
 	.string "{CIRCLE_4} Select and “USE” a TM.\n"
-	.string "{CIRCLE_5} Select a POKéMON that can learn the\n"
+	.string "{CIRCLE_5} Select a DAEMON that can learn the\n"
 	.string "   move in the TM.$"
 
 Help_Text_HowToUseHM::
@@ -804,13 +798,13 @@ Help_Text_HowToUseHM::
 	.string "   “BAG.”\n"
 	.string "{CIRCLE_3} “OPEN” the TM CASE.\n"
 	.string "{CIRCLE_4} Select and “USE” an HM.\n"
-	.string "{CIRCLE_5} Select a POKéMON that can learn it.\n"
+	.string "{CIRCLE_5} Select a DAEMON that can learn it.\n"
 	.string "HMs are hard to remove, so be careful!$"
 
 Help_Text_HowToUseMoveOutsideOfBattle::
 	.string "{CIRCLE_1} Open the MENU.\n"
-	.string "{CIRCLE_2} Select “POKéMON.”\n"
-	.string "{CIRCLE_3} Select a POKéMON that knows an\n"
+	.string "{CIRCLE_2} Select “DAEMON.”\n"
+	.string "{CIRCLE_3} Select a DAEMON that knows an\n"
 	.string "   HM move. The usable HM move(s)\n"
 	.string "   will be shown in blue. Select and\n"
 	.string "   use the desired move to destroy an\n"
@@ -835,52 +829,52 @@ Help_Text_HowToEnterName::
 	.string "{CIRCLE_4} Press the A Button on “OK.”$"
 
 Help_Text_HowToUsePC::
-	.string "{CIRCLE_1} Go to any POKéMON CENTER, go up\n"
+	.string "{CIRCLE_1} Go to any DAEMON CENTER, go up\n"
 	.string "   to the PC, then press the A Button.$"
 
 Help_Text_HowToUseBillsPC::
 	.string "{CIRCLE_1} Select “{STR_VAR_1}'S PC” on the PC.\n"
 	.string "{CIRCLE_2} Select from one of the top three\n"
-	.string "   MENU items to access the POKéMON\n"
+	.string "   MENU items to access the DAEMON\n"
 	.string "   Storage System.\n"
-	.string "If you catch a POKéMON when you have\n"
-	.string "six in your party, the POKéMON is sent\n"
+	.string "If you bind a DAEMON when you have\n"
+	.string "six in your party, the DAEMON is sent\n"
 	.string "automatically to a BOX in the System!$"
 
 Help_Text_HowToUseWithdraw::
-	.string "{CIRCLE_1} Select a POKéMON in the open BOX\n"
+	.string "{CIRCLE_1} Select a DAEMON in the open BOX\n"
 	.string "   with the {PLUS} Control Pad.\n"
 	.string "{CIRCLE_2} Select “WITHDRAW” to remove the\n"
-	.string "   POKéMON from the BOX and add it to\n"
+	.string "   DAEMON from the BOX and add it to\n"
 	.string "   your party.\n"
-	.string "You may not withdraw a POKéMON if you\n"
-	.string "already have six POKéMON with you!$"
+	.string "You may not withdraw a DAEMON if you\n"
+	.string "already have six DAEMONS with you!$"
 
 Help_Text_HowToUseDeposit::
-	.string "{CIRCLE_1} Select a POKéMON in your party with\n"
+	.string "{CIRCLE_1} Select a DAEMON in your party with\n"
 	.string "   the {PLUS} Control Pad.\n"
 	.string "{CIRCLE_2} Select “DEPOSIT.”\n"
 	.string "{CIRCLE_3} Select the BOX, then press the\n"
-	.string "   A Button to store the POKéMON.\n"
-	.string "If you have only one POKéMON with you,\n"
+	.string "   A Button to store the DAEMON.\n"
+	.string "If you have only one DAEMON with you,\n"
 	.string "it may not be stored!$"
 
 Help_Text_HowToUseMove::
-	.string "{CIRCLE_1} Select a POKéMON in the open BOX.\n"
-	.string "{CIRCLE_2} Pick up the POKéMON by selecting\n"
+	.string "{CIRCLE_1} Select a DAEMON in the open BOX.\n"
+	.string "{CIRCLE_2} Pick up the DAEMON by selecting\n"
 	.string "   “MOVE” and move it anywhere with\n"
 	.string "   the {PLUS} Control Pad.\n"
-	.string "{CIRCLE_3} Move the POKéMON to the BOX name\n"
+	.string "{CIRCLE_3} Move the DAEMON to the BOX name\n"
 	.string "   and press left or right to move it\n"
 	.string "   to another BOX.$"
 
 Help_Text_HowToMoveItems::
-	.string "{CIRCLE_1} Faintly shown POKéMON can be made\n"
+	.string "{CIRCLE_1} Faintly shown DAEMON can be made\n"
 	.string "   to hold an item by selecting it and\n"
 	.string "   pressing the A Button.\n"
-	.string "{CIRCLE_2} Clearly shown POKéMON can be made\n"
+	.string "{CIRCLE_2} Clearly shown DAEMON can be made\n"
 	.string "   to give the item they are holding to\n"
-	.string "   another POKéMON, or return the item\n"
+	.string "   another DAEMON, or return the item\n"
 	.string "   to the BAG with the A Button.$"
 
 Help_Text_HowToUsePlayersPC::
@@ -897,7 +891,7 @@ Help_Text_HowToUseWithdrawItem::
 	.string "{CIRCLE_3} The item can be withdrawn and\n"
 	.string "   placed in the BAG's ITEMS POCKET.\n"
 	.string "   It may also be directly given to a\n"
-	.string "   POKéMON to hold.$"
+	.string "   DAEMON to hold.$"
 
 Help_Text_HowToUseDepositItem::
 	.string "{CIRCLE_1} Select “DEPOSIT ITEM.”\n"
@@ -909,20 +903,20 @@ Help_Text_HowToUseDepositItem::
 	.string "   then press the A Button.$"
 
 Help_Text_HowToUseMailbox::
-	.string "When MAIL is taken from a POKéMON,\n"
+	.string "When MAIL is taken from a DAEMON,\n"
 	.string "it is moved to the MAILBOX. If it has\n"
 	.string "no MAIL, the MAILBOX can't be used.\n"
 	.string "{CIRCLE_1} Select “{PLAYER}'S PC” on the PC.\n"
 	.string "{CIRCLE_2} Select “MAILBOX” to read MAIL or\n"
-	.string "   make a POKéMON hold MAIL.$"
+	.string "   make a DAEMON hold MAIL.$"
 
 Help_Text_HowToUseProfOaksPC::
 	.string "{CIRCLE_1} Select “CRYSTAL CLEAR'S PC”\n"
 	.string "   on the PC.\n"
 	.string "{CIRCLE_2} CRYSTAL CLEAR will evaluate\n"
-	.string "   your POKéDEX.\n"
+	.string "   your INDEX.\n"
 	.string "Her evaluations should give you hints\n"
-	.string "for catching more POKéMON!$"
+	.string "for binding more DAEMONS!$"
 
 Help_Text_HowToOpenMenu::
 	.string "{CIRCLE_1} Press START.\n"
@@ -939,28 +933,28 @@ Help_Text_HowToUseFight::
 	.string "and that move will be used!$"
 
 Help_Text_HowToUsePokemon2::
-	.string "{CIRCLE_1} Select “POKéMON.”\n"
-	.string "{CIRCLE_2} Select the POKéMON in your party\n"
+	.string "{CIRCLE_1} Select “DAEMON.”\n"
+	.string "{CIRCLE_2} Select the DAEMON in your party\n"
 	.string "   that you want to use.\n"
-	.string "{CIRCLE_3} If you have two or more POKéMON\n"
+	.string "{CIRCLE_3} If you have two or more DAEMONS\n"
 	.string "   with you, they may be switched by\n"
-	.string "   selecting “SHIFT.” Check POKéMON\n"
+	.string "   selecting “SHIFT.” Check DAEMON\n"
 	.string "   data by selecting “SUMMARY.”$"
 
 Help_Text_HowToUseShift::
-	.string "This command switches the POKéMON in\n"
+	.string "This command switches the DAEMON in\n"
 	.string "battle with another one in your party.\n"
-	.string "{CIRCLE_1} Select the POKéMON to be sent out.\n"
+	.string "{CIRCLE_1} Select the DAEMON to be sent out.\n"
 	.string "{CIRCLE_2} Select “SHIFT.”\n"
-	.string "{CIRCLE_3} The selected POKéMON will switch\n"
-	.string "   places with the POKéMON in battle!$"
+	.string "{CIRCLE_3} The selected DAEMON will switch\n"
+	.string "   places with the DAEMON in battle!$"
 
 Help_Text_HowToUseSummary2::
 	.string "{CIRCLE_1} Select “SUMMARY.”\n"
 	.string "{CIRCLE_2} Press left or right on the {PLUS} Control\n"
 	.string "   Pad to check the information:\n"
-	.string "   “POKéMON INFO”\n"
-	.string "   “POKéMON SKILLS”\n"
+	.string "   “DAEMON INFO”\n"
+	.string "   “DAEMON SKILLS”\n"
 	.string "   “KNOWN MOVES”$"
 
 Help_Text_HowToUseBag2::
@@ -973,14 +967,14 @@ Help_Text_HowToUseBag2::
 	.string "   Press up or down to select an item.$"
 
 Help_Text_HowToReadPokedex::
-	.string "{CIRCLE_1} POKéMON that you have caught are\n"
+	.string "{CIRCLE_1} DAEMON that you have bound are\n"
 	.string "   identified by a POKé BALL mark on\n"
-	.string "   the POKéDEX list.\n"
-	.string "{CIRCLE_2} A caught POKéMON will provide a\n"
+	.string "   the INDEX list.\n"
+	.string "{CIRCLE_2} A bound DAEMON will provide a\n"
 	.string "   large amount of data.\n"
 	.if REVISION < 1
 	.string "{CIRCLE_3} Select “AREA” to display the TOWN\n"
-	.string "   MAP with the POKéMON's habitat(s).$"
+	.string "   MAP with the DAEMON's habitat(s).$"
 	.else
 	.string "{CIRCLE_3} Select “NEXT DATA” to display the\n"
 	.string "   TOWN MAP with its habitat(s).$"
@@ -1005,7 +999,7 @@ Help_Text_HowToUseWithdrawItem2::
 	.string "{CIRCLE_3} The item can be withdrawn and\n"
 	.string "   placed in the BAG's ITEMS POCKET.\n"
 	.string "   It may also be directly given to a\n"
-	.string "   POKéMON to hold.$"
+	.string "   DAEMON to hold.$"
 
 Help_Text_HowToUseDepositItem2::
 	.string "{CIRCLE_1} Select “DEPOSIT ITEM.”\n"
@@ -1015,18 +1009,18 @@ Help_Text_HowToUseDepositItem2::
 	.string "   command can't be used!$"
 
 Help_Text_HowToUseMailbox2::
-	.string "When MAIL is taken from a POKéMON,\n"
+	.string "When MAIL is taken from a DAEMON,\n"
 	.string "it is moved to the MAILBOX. If it has\n"
 	.string "no MAIL, the MAILBOX can't be used.\n"
 	.string "{CIRCLE_1} Select MAIL by name to read it or\n"
-	.string "   make a POKéMON hold it.$"
+	.string "   make a DAEMON hold it.$"
 
 Help_Text_HowToUseRun::
-	.string "You may not “RUN” from a TRAINER\n"
+	.string "You may not “RUN” from a USER\n"
 	.string "battle!\n"
-	.string "{CIRCLE_1} You may “RUN” from a wild POKéMON.\n"
+	.string "{CIRCLE_1} You may “RUN” from a wild DAEMON.\n"
 	.string "{CIRCLE_2} Your chance of escape is improved\n"
-	.string "   if your POKéMON in battle is fast.$"
+	.string "   if your DAEMON in battle is fast.$"
 
 Help_Text_HowToRegisterKeyItem::
 	.string "You may “REGISTER” a key item for\n"
@@ -1038,27 +1032,27 @@ Help_Text_HowToRegisterKeyItem::
 Help_Text_HowToUseBall::
 	.string "{CIRCLE_1} Select to throw the special POKé\n"
 	.string "   BALL used only in the SAFARI ZONE.\n"
-	.string "When wild POKéMON appear, throw lots\n"
-	.string "of SAFARI BALLS to catch them!$"
+	.string "When wild DAEMON appear, throw lots\n"
+	.string "of SAFARI BALLS to bind them!$"
 
 Help_Text_HowToUseBait::
 	.string "{CIRCLE_1} Select to throw the special food\n"
 	.string "   used only in the SAFARI ZONE.\n"
-	.string "It is POKéMON food rolled up into\n"
+	.string "It is DAEMON food rolled up into\n"
 	.string "a ball for easy eating. When BAIT is\n"
-	.string "thrown, the wild POKéMON may get\n"
+	.string "thrown, the wild DAEMON may get\n"
 	.string "attracted by it, and may not flee!$"
 
 Help_Text_HowToUseRock::
 	.string "{CIRCLE_1} Select to throw a rock lying on\n"
 	.string "   the ground in the SAFARI ZONE.\n"
-	.string "Throwing a rock at a POKéMON may \n"
+	.string "Throwing a rock at a DAEMON may \n"
 	.string "make it run away, but it becomes easier\n"
-	.string "to catch!$"
+	.string "to bind!$"
 
 Help_Text_HowToUseHallOfFame::
 	.string "{CIRCLE_1} Select “HALL OF FAME” on the PC.\n"
-	.string "{CIRCLE_2} The POKéMON that have entered the\n"
+	.string "{CIRCLE_2} The DAEMON that have entered the\n"
 	.string "   HALL OF FAME can be examined.$"
 
 Help_Text_HP::
@@ -1134,13 +1128,13 @@ Help_Text_PokeBalls::
 	.string "POKé BALLS$"
 
 Help_Text_Pokedex::
-	.string "POKéDEX$"
+	.string "INDEX$"
 
 Help_Text_PlayTime::
 	.string "PLAY TIME$"
 
 Help_Text_Badges::
-	.string "BADGES$"
+	.string "MARKS$"
 
 Help_Text_TextSpeed::
 	.string "TEXT SPEED$"
@@ -1179,7 +1173,7 @@ Help_Text_StatusProblem::
 	.string "STATUS PROBLEM$"
 
 Help_Text_Pokemon::
-	.string "POKéMON$"
+	.string "DAEMON$"
 
 Help_Text_IDNo2::
 	.string "ID No.$"
@@ -1188,34 +1182,33 @@ Help_Text_Money2::
 	.string "MONEY$"
 
 Help_Text_Badges2::
-	.string "BADGES$"
+	.string "MARKS$"
 
 Help_Text_DefineHP::
-	.string "HP indicates a POKéMON's vitality.\n"
-	.string "If a POKéMON's HP drops to zero, it\l"
-	.string "faints and is unable to battle.\l"
-	.string "So, the key in battle is to try to\l"
-	.string "reduce the foe's HP to zero.\l"
-	.string "If your POKéMON are hurt, restore their\l"
-	.string "HP at a POKéMON CENTER or use items.$"
+	.string "HP indicates a DAEMON's vitality. If a\n"
+	.string "DAEMON's HP drops to zero, it HALTS and\l"
+	.string "is unable to battle. So, the key in\l"
+	.string "battle is to try to reduce the foe's HP\l"
+	.string "to zero. If your DAEMONS are hurt,\l"
+	.string "restore their HP at a DAEMON CENTER or\l"
+	.string "use items.$"
 
 Help_Text_DefineEXP::
 	.string "EXP. Points stands for “Experience\n"
-	.string "Points.” POKéMON gain EXP. Points by\l"
-	.string "participating in winning battles.\l"
-	.string "When a POKéMON accumulates sufficient\l"
-	.string "EXP. Points, it levels up. The EXP. Bar\l"
-	.string "indicates accumulated EXP. Points.\l"
-	.string "It returns to zero upon leveling up.$"
+	.string "Points.” DAEMON gain EXP. Points by\l"
+	.string "participating in winning battles. When a\l"
+	.string "DAEMON accumulates sufficient EXP.\l"
+	.string "Points, it levels up. The EXP. Bar\l"
+	.string "indicates accumulated EXP. Points. It\l"
+	.string "returns to zero upon leveling up.$"
 
 Help_Text_DefineMoves::
-	.string "POKéMON may learn up to four different\n"
+	.string "DAEMON may learn up to four different\n"
 	.string "moves. There are many kinds of moves\l"
-	.string "including attacks and those with\l"
-	.string "special effects. The kinds of moves\l"
-	.string "that can be learned vary for each\l"
-	.string "POKéMON. Some moves can be learned\l"
-	.string "from items.$"
+	.string "including attacks and those with special\l"
+	.string "effects. The kinds of moves that can be\l"
+	.string "learned vary for each DAEMON. Some\l"
+	.string "moves can be learned from items.$"
 
 Help_Text_DefineAttack::
 	.string "ATTACK indicates the power of an\n"
@@ -1228,7 +1221,7 @@ Help_Text_DefineAttack::
 
 Help_Text_DefineDefense::
 	.string "DEFENSE indicates the resistance a\n"
-	.string "POKéMON has against physical attacks.\l"
+	.string "DAEMON has against physical attacks.\l"
 	.string "The higher this stat, the less damage\l"
 	.string "sustained from a foe's physical hit.$"
 
@@ -1242,53 +1235,51 @@ Help_Text_DefineSpAtk::
 	.string "ICE, PSYCHIC, DRAGON, and DARK.$"
 
 Help_Text_DefineSpDef::
-	.string "SP. DEF (Special Defense) indicates\n"
-	.string "the resistance a POKéMON has against\l"
-	.string "special attacks.\l"
-	.string "The higher this stat, the less damage\l"
-	.string "sustained from a foe's special attack.$"
+	.string "SP. DEF (Special Defense) indicates the\n"
+	.string "resistance a DAEMON has against special\l"
+	.string "attacks. The higher this stat, the less\l"
+	.string "damage sustained from a foe's special\l"
+	.string "attack.$"
 
 Help_Text_DefineSpeed::
 	.string "SPEED indicates the agility of a\n"
-	.string "POKéMON. If this stat exceeds the foe's\l"
-	.string "in battle, the POKéMON can make a move\l"
+	.string "DAEMON. If this stat exceeds the foe's\l"
+	.string "in battle, the DAEMON can make a move\l"
 	.string "before its slower opponent.$"
 
 Help_Text_DefineLevel::
 	.string "Lv. (Level) indicates the growth and\n"
-	.string "strength of a POKéMON.\l"
-	.string "In general, when a POKéMON levels up,\l"
-	.string "its stats such as HP, ATTACK, and\l"
-	.string "DEFENSE rise, making it stronger.\l"
-	.string "POKéMON may learn a new move upon\l"
-	.string "leveling up.$"
+	.string "strength of a DAEMON. In general, when\l"
+	.string "a DAEMON levels up, its stats such as\l"
+	.string "HP, ATTACK, and DEFENSE rise, making it\l"
+	.string "stronger. DAEMON may learn a new move\l"
+	.string "upon leveling up.$"
 
 Help_Text_DefineType::
-	.string "POKéMON and moves are classified by\n"
+	.string "DAEMON and moves are classified by\n"
 	.string "type. Every type has advantageous and\l"
-	.string "disadvantageous matchups against\l"
-	.string "other types. For example, like a rock-\l"
+	.string "disadvantageous matchups against other\l"
+	.string "types. For example, like a rock-\l"
 	.string "paper-scissors game, the WATER type is\l"
 	.string "strong against the FIRE type and weak\l"
 	.string "against the GRASS type.$"
 
 Help_Text_DefineOT::
-	.string "OT stands for “Original TRAINER,”\n"
-	.string "the first TRAINER to have caught the\l"
-	.string "selected POKéMON.\l"
-	.string "Even if the POKéMON is traded, the OT\l"
-	.string "name will remain unchanged.$"
+	.string "OT stands for “Original USER,” the first\n"
+	.string "USER to have bound the selected\l"
+	.string "DAEMON. Even if the DAEMON is traded,\l"
+	.string "the OT name will remain unchanged.$"
 
 Help_Text_DefineItem::
-	.string "All POKéMON can be made to hold one\n"
+	.string "All DAEMONS can be made to hold one\n"
 	.string "item each. Some items will be used by\l"
-	.string "the POKéMON automatically in certain\l"
-	.string "situations. To make a POKéMON hold an\l"
+	.string "the DAEMON automatically in certain\l"
+	.string "situations. To make a DAEMON hold an\l"
 	.string "item, select the item from the BAG and\l"
-	.string "“GIVE” it to the POKéMON.$"
+	.string "“GIVE” it to the DAEMON.$"
 
 Help_Text_DefineAbility::
-	.string "All POKéMON have a special ABILITY.\n"
+	.string "All DAEMONS have a special ABILITY.\n"
 	.string "There are many different kinds of these\l"
 	.string "abilities, some used in battle, some\l"
 	.string "elsewhere. The abilities differ from\l"
@@ -1297,41 +1288,38 @@ Help_Text_DefineAbility::
 
 Help_Text_DefineMoney::
 	.string "Whenever you win a battle against a\n"
-	.string "TRAINER, you are given prize money.\l"
-	.string "Save up your prize money so you can\l"
-	.string "enjoy shopping at POKéMON MARTS!$"
+	.string "USER, you are given prize money. Save\l"
+	.string "up your prize money so you can enjoy\l"
+	.string "shopping at DAEMON MARTS!$"
 
 Help_Text_DefineMoveType::
-	.string "Moves are also classified by types.\n"
-	.string "If a POKéMON of a certain type uses\l"
-	.string "a move of the same type, the move's\l"
-	.string "power is boosted. If the move's type\l"
-	.string "has a matchup advantage against the\l"
-	.string "target, its effectiveness is also\l"
-	.string "boosted.$"
+	.string "Moves are also classified by types. If\n"
+	.string "a DAEMON of a certain type uses a move\l"
+	.string "of the same type, the move's power is\l"
+	.string "boosted. If the move's type has a\l"
+	.string "matchup advantage against the target,\l"
+	.string "its effectiveness is also boosted.$"
 
 Help_Text_DefineNature::
-	.string "All POKéMON have a personality,\n"
-	.string "or “NATURE.” The POKéMON's\l"
-	.string "nature appears to affect how the\l"
-	.string "POKéMON will grow upon leveling up.$"
+	.string "All DAEMONS have a personality, or\n"
+	.string "“NATURE.” The DAEMON's nature appears\l"
+	.string "to affect how the DAEMON will grow\l"
+	.string "upon leveling up.$"
 
 Help_Text_DefineIDNo::
 	.string "The ID No. is a special number assigned\n"
-	.string "specifically to you as a TRAINER.\l"
+	.string "specifically to you as a USER.\l"
 	.string "Together with the OT name, the ID No.\l"
 	.string "is used to precisely identify the\l"
-	.string "Original TRAINER.\l"
-	.string "The ID No. does not change even if the\l"
-	.string "POKéMON is traded.$"
+	.string "Original USER. The ID No. does not\l"
+	.string "change even if the DAEMON is traded.$"
 
 Help_Text_DefinePP::
-	.string "PP stands for “Power Points.”\n"
-	.string "It indicates the number of times a\l"
-	.string "certain move can be used in battle.\l"
-	.string "Like HP, PP can be restored by visiting\l"
-	.string "a POKéMON CENTER or using certain\l"
-	.string "items.$"
+	.string "PP stands for “Power Points.” It\n"
+	.string "indicates the number of times a certain\l"
+	.string "move can be used in battle. Like HP,\l"
+	.string "PP can be restored by visiting a DAEMON\l"
+	.string "CENTER or using certain items.$"
 
 Help_Text_DefinePower::
 	.string "POWER indicates the strength of an\n"
@@ -1346,17 +1334,16 @@ Help_Text_DefineAccuracy::
 	.string "the move will strike the target.$"
 
 Help_Text_DefineFNT::
-	.string "FNT stands for “fainted.”\n"
-	.string "A POKéMON faints if its HP is reduced\l"
-	.string "to zero. It becomes incapable of taking\l"
-	.string "part in battle.\l"
-	.string "Restore a fainted POKéMON at a POKéMON\l"
-	.string "CENTER, or use an item.$"
+	.string "FNT stands for “HALTED.” A DAEMON\n"
+	.string "HALTS if its HP is reduced to zero. It\l"
+	.string "becomes incapable of taking part in\l"
+	.string "battle. Restore a HALTED DAEMON at a\l"
+	.string "DAEMON CENTER, or use an item.$"
 
 Help_Text_DefineItems::
-	.string "Ordinary items bought at any POKéMON\n"
+	.string "Ordinary items bought at any DAEMON\n"
 	.string "MART are placed in the ITEMS POCKET.\l"
-	.string "Items may be used, given to a POKéMON\l"
+	.string "Items may be used, given to a DAEMON\l"
 	.string "to hold, or tossed out as garbage.$"
 
 Help_Text_DefineKeyItems::
@@ -1369,30 +1356,28 @@ Help_Text_DefineKeyItems::
 	.string "without opening the MENU and BAG.$"
 
 Help_Text_DefinePokeBalls::
-	.string "POKé BALLS, which are used for\n"
-	.string "catching wild POKéMON, are placed in\l"
-	.string "the POKé BALLS POCKET.\l"
-	.string "POKé BALLS may be bought at POKéMON\l"
-	.string "MARTS. They may be used, given to a\l"
-	.string "POKéMON to hold, or tossed out as\l"
-	.string "garbage.$"
+	.string "POKé BALLS, which are used for binding\n"
+	.string "wild DAEMONS, are placed in the POKé\l"
+	.string "BALLS POCKET. POKé BALLS may be\l"
+	.string "bought at DAEMON MARTS. They may be\l"
+	.string "used, given to a DAEMON to hold, or\l"
+	.string "tossed out as garbage.$"
 
 Help_Text_DefinePokedex::
 	.string "This indicates the number of species of\n"
-	.string "POKéMON you have caught and/or\l"
-	.string "evolved to fill the POKéDEX.\l"
-	.string "Try hard to catch all sorts of\l"
-	.string "POKéMON!$"
+	.string "DAEMON you have bound and/or evolved\l"
+	.string "to fill the INDEX. Try hard to bind all\l"
+	.string "sorts of DAEMONS!$"
 
 Help_Text_DefinePlayTime::
 	.string "This is the total amount of time that\n"
 	.string "you have played this game.$"
 
 Help_Text_DefineBadges::
-	.string "The POKéMON LEAGUE BADGES that you\n"
-	.string "have won are registered and shown.\l"
-	.string "Earn BADGES by defeating GYM LEADERS\l"
-	.string "in various cities and towns.$"
+	.string "The DAEMON LEAGUE MARKS that you have\n"
+	.string "won are registered and shown. Earn\l"
+	.string "MARKS by defeating GYM LEADERS in\l"
+	.string "various cities and towns.$"
 
 Help_Text_DefineTextSpeed::
 	.string "You can adjust how quickly the text is\n"
@@ -1404,12 +1389,11 @@ Help_Text_DefineBattleScene::
 	.string "animation ON or OFF.$"
 
 Help_Text_DefineBattleStyle::
-	.string "You can choose whether or not a\n"
-	.string "TRAINER can switch a POKéMON after\l"
-	.string "it has made its foe faint.\l"
-	.string "Set to “SHIFT” if you would like the\l"
-	.string "chance to switch a POKéMON after it\l"
-	.string "has made its foe faint.$"
+	.string "You can choose whether or not a USER\n"
+	.string "can switch a DAEMON after it has made\l"
+	.string "its foe HALT. Set to “SHIFT” if you\l"
+	.string "would like the chance to switch a\l"
+	.string "DAEMON after it has made its foe HALT.$"
 
 Help_Text_DefineSound::
 	.string "You can choose between MONO and\n"
@@ -1417,12 +1401,12 @@ Help_Text_DefineSound::
 
 Help_Text_DefineButtonMode::
 	.string "Set to “HELP” to display help messages\n"
-	.string "by pressing the L or R Button.\l"
-	.string "Set to “LR” to enable the switching\l"
-	.string "of the POKéDEX pages and BAG POCKETS\l"
-	.string "using the L and R Buttons.\l"
-	.string "Set to “L=A” to make the L Button\l"
-	.string "work the same as the A Button.$"
+	.string "by pressing the L or R Button. Set to\l"
+	.string "“LR” to enable the switching of the\l"
+	.string "INDEX pages and BAG POCKETS using the\l"
+	.string "L and R Buttons. Set to “L=A” to make\l"
+	.string "the L Button work the same as the A\l"
+	.string "Button.$"
 
 Help_Text_DefineFrame::
 	.string "You may choose the design of the frame\n"
@@ -1436,38 +1420,38 @@ Help_Text_DefineCancel2::
 
 Help_Text_DefineTM::
 	.string "A TM (Technical Machine) is a device\n"
-	.string "used to teach a move to a POKéMON.\l"
-	.string "There are many different kinds.\l"
-	.string "Moves can be taught only to those\l"
-	.string "POKéMON capable of using them.\l"
-	.string "A TM breaks after a single use.$"
+	.string "used to teach a move to a DAEMON.\l"
+	.string "There are many different kinds. Moves\l"
+	.string "can be taught only to those DAEMONS\l"
+	.string "capable of using them. A TM breaks\l"
+	.string "after a single use.$"
 
 Help_Text_DefineHM::
 	.string "An HM (Hidden Machine) is a device used\n"
-	.string "to teach a HIDDEN move to a POKéMON.\l"
-	.string "A HIDDEN move can be taught only to\l"
-	.string "those POKéMON capable of using it.\l"
+	.string "to teach a HIDDEN move to a DAEMON. A\l"
+	.string "HIDDEN move can be taught only to\l"
+	.string "those DAEMONS capable of using it.\l"
 	.string "Unlike a TM, an HM can be used over\l"
 	.string "and over. A HIDDEN move can be tough\l"
-	.string "for a POKéMON to forget.$"
+	.string "for a DAEMON to forget.$"
 
 Help_Text_DefineHMMove::
 	.string "HIDDEN moves are those that are\n"
 	.string "especially important for your\l"
 	.string "adventure. To use such a move outside\l"
-	.string "of battle, open the “POKéMON” MENU\l"
-	.string "and make the POKéMON that knows the\l"
-	.string "move use it. A fainted POKéMON may use\l"
-	.string "a HIDDEN move outside of battle.$"
+	.string "of battle, open the “DAEMON” MENU and\l"
+	.string "make the DAEMON that knows the move\l"
+	.string "use it. A HALTED DAEMON may use a\l"
+	.string "HIDDEN move outside of battle.$"
 
 Help_Text_DefineEvolution::
-	.string "Among POKéMON, there are some that\n"
+	.string "Among DAEMON, there are some that\n"
 	.string "undergo major changes (evolution) upon\l"
 	.string "growing to certain levels. Evolution\l"
-	.string "causes a POKéMON to alter form, change\l"
+	.string "causes a DAEMON to alter form, change\l"
 	.string "its name, and perhaps change the moves\l"
-	.string "it may learn. Some POKéMON evolve\l"
-	.string "due to reasons other than leveling up.$"
+	.string "it may learn. Some DAEMONS evolve due\l"
+	.string "to reasons other than leveling up.$"
 
 Help_Text_DefineStatusProblem::
 	.string "Status problems include:\n"
@@ -1479,32 +1463,31 @@ Help_Text_DefineStatusProblem::
 	.string "These can be healed with items, etc.$"
 
 Help_Text_DefinePokemon::
-	.string "POKéMON is a name given to describe\n"
+	.string "DAEMON is a name given to describe\n"
 	.string "wondrous creatures that inhabit all\l"
-	.string "corners of this world.\l"
-	.string "People raise POKéMON to be their pets,\l"
-	.string "use them for battling, and so on.$"
+	.string "corners of this world. People raise\l"
+	.string "DAEMONS to be their pets, use them for\l"
+	.string "battling, and so on.$"
 
 Help_Text_DefineIDNo2::
 	.string "The ID No. is a special number assigned\n"
-	.string "specifically to you as a TRAINER.\l"
+	.string "specifically to you as a USER.\l"
 	.string "Together with the OT name, the ID No.\l"
 	.string "is used to precisely identify the\l"
-	.string "Original TRAINER.\l"
-	.string "The ID No. does not change even if the\l"
-	.string "POKéMON is traded.$"
+	.string "Original USER. The ID No. does not\l"
+	.string "change even if the DAEMON is traded.$"
 
 Help_Text_DefineMoney2::
 	.string "Whenever you win a battle against a\n"
-	.string "TRAINER, you are given prize money.\l"
-	.string "Save up your prize money so you can\l"
-	.string "enjoy shopping at POKéMON MARTS!$"
+	.string "USER, you are given prize money. Save\l"
+	.string "up your prize money so you can enjoy\l"
+	.string "shopping at DAEMON MARTS!$"
 
 Help_Text_DefineBadges2::
-	.string "This indicates the number of POKéMON\n"
-	.string "LEAGUE BADGES that you have won.\l"
-	.string "Earn BADGES by defeating GYM LEADERS\l"
-	.string "in various cities and towns.$"
+	.string "This indicates the number of DAEMONS\n"
+	.string "LEAGUE MARKS that you have won. Earn\l"
+	.string "MARKS by defeating GYM LEADERS in\l"
+	.string "various cities and towns.$"
 
 Help_Text_TheHelpSystem::
 	.string "The HELP System$"
@@ -1525,7 +1508,7 @@ Help_Text_GameFundamentals3::
 	.string "Game fundamentals 3$"
 
 Help_Text_WhatArePokemon::
-	.string "What are POKéMON?$"
+	.string "What are DAEMON?$"
 
 Help_Text_DescTheHelpSystem::
 	.string "The help messages change depending on\n"
@@ -1537,11 +1520,11 @@ Help_Text_DescTheHelpSystem::
 
 Help_Text_DescTheGame::
 	.string "You become the main character to\n"
-	.string "explore the world of POKéMON!\l"
-	.string "By talking to people and solving\l"
-	.string "mysteries, new paths will open to you.\l"
-	.string "Strive for the goal together with your\l"
-	.string "wonderful POKéMON!$"
+	.string "explore the world of DAEMON! By\l"
+	.string "talking to people and solving mysteries,\l"
+	.string "new paths will open to you. Strive for\l"
+	.string "the goal together with your wonderful\l"
+	.string "DAEMON!$"
 
 Help_Text_DescWirelessAdapter::
 	.string "This game communicates over a wireless\n"
@@ -1555,8 +1538,7 @@ Help_Text_DescGameFundamentals1::
 	.string "Visit every city and town, travel every\n"
 	.string "road, explore every cave, and face\l"
 	.string "every challenge as you strive to\l"
-	.string "become the greatest TRAINER of\l"
-	.string "POKéMON!$"
+	.string "become the greatest USER of DAEMON!$"
 
 Help_Text_DescGameFundamentals2::
 	.string "On your adventure, you will be faced\n"
@@ -1568,16 +1550,16 @@ Help_Text_DescGameFundamentals2::
 
 Help_Text_DescGameFundamentals3::
 	.string "Some of the obstacles in your way can\n"
-	.string "be removed once your POKéMON learn\l"
+	.string "be removed once your DAEMON learn\l"
 	.string "specific moves.$"
 
 Help_Text_DescWhatArePokemon::
-	.string "POKéMON are wondrous creatures that\n"
+	.string "DAEMONS are wondrous creatures that\n"
 	.string "are shrouded in mystery. You may meet\l"
-	.string "them all over the world…in tall\l"
-	.string "grass, caves, the sea, and more.\l"
-	.string "They appear to grow obedient to the\l"
-	.string "TRAINERS that caught them.$"
+	.string "them all over the world…in tall grass,\l"
+	.string "caves, the sea, and more. They appear\l"
+	.string "to grow obedient to the USERS that\l"
+	.string "bound them.$"
 
 Help_Text_UsingTypeMatchupList::
 	.string "Using the Type Matchup List$"
@@ -1586,252 +1568,251 @@ Help_Text_OwnMoveDark::
 	.string "Own move type: DARK$"
 
 Help_Text_OwnPokemonDark::
-	.string "Own POKéMON type: DARK$"
+	.string "Own DAEMON type: DARK$"
 
 Help_Text_OwnMoveRock::
 	.string "Own move type: ROCK$"
 
 Help_Text_OwnPokemonRock::
-	.string "Own POKéMON type: ROCK$"
+	.string "Own DAEMON type: ROCK$"
 
 Help_Text_OwnMovePsychic::
 	.string "Own move type: PSYCHIC$"
 
 Help_Text_OwnPokemonPsychic::
-	.string "Own POKéMON type: PSYCHIC$"
+	.string "Own DAEMON type: PSYCHIC$"
 
 Help_Text_OwnMoveFighting::
 	.string "Own move type: FIGHTING$"
 
 Help_Text_OwnPokemonFighting::
-	.string "Own POKéMON type: FIGHTING$"
+	.string "Own DAEMON type: FIGHTING$"
 
 Help_Text_OwnMoveGrass::
 	.string "Own move type: GRASS$"
 
 Help_Text_OwnPokemonGrass::
-	.string "Own POKéMON type: GRASS$"
+	.string "Own DAEMON type: GRASS$"
 
 Help_Text_OwnMoveGhost::
 	.string "Own move type: GHOST$"
 
 Help_Text_OwnPokemonGhost::
-	.string "Own POKéMON type: GHOST$"
+	.string "Own DAEMON type: GHOST$"
 
 Help_Text_OwnMoveIce::
 	.string "Own move type: ICE$"
 
 Help_Text_OwnPokemonIce::
-	.string "Own POKéMON type: ICE$"
+	.string "Own DAEMON type: ICE$"
 
 Help_Text_OwnMoveGround::
 	.string "Own move type: GROUND$"
 
 Help_Text_OwnPokemonGround::
-	.string "Own POKéMON type: GROUND$"
+	.string "Own DAEMON type: GROUND$"
 
 Help_Text_OwnMoveElectric::
 	.string "Own move type: ELECTRIC$"
 
 Help_Text_OwnPokemonElectric::
-	.string "Own POKéMON type: ELECTRIC$"
+	.string "Own DAEMON type: ELECTRIC$"
 
 Help_Text_OwnMovePoison::
 	.string "Own move type: POISON$"
 
 Help_Text_OwnPokemonPoison::
-	.string "Own POKéMON type: POISON$"
+	.string "Own DAEMON type: POISON$"
 
 Help_Text_OwnMoveDragon::
 	.string "Own move type: DRAGON$"
 
 Help_Text_OwnPokemonDragon::
-	.string "Own POKéMON type: DRAGON$"
+	.string "Own DAEMON type: DRAGON$"
 
 Help_Text_OwnMoveNormal::
 	.string "Own move type: NORMAL$"
 
 Help_Text_OwnPokemonNormal::
-	.string "Own POKéMON type: NORMAL$"
+	.string "Own DAEMON type: NORMAL$"
 
 Help_Text_OwnMoveSteel::
 	.string "Own move type: STEEL$"
 
 Help_Text_OwnPokemonSteel::
-	.string "Own POKéMON type: STEEL$"
+	.string "Own DAEMON type: STEEL$"
 
 Help_Text_OwnMoveFlying::
 	.string "Own move type: FLYING$"
 
 Help_Text_OwnPokemonFlying::
-	.string "Own POKéMON type: FLYING$"
+	.string "Own DAEMON type: FLYING$"
 
 Help_Text_OwnMoveFire::
 	.string "Own move type: FIRE$"
 
 Help_Text_OwnPokemonFire::
-	.string "Own POKéMON type: FIRE$"
+	.string "Own DAEMON type: FIRE$"
 
 Help_Text_OwnMoveWater::
 	.string "Own move type: WATER$"
 
 Help_Text_OwnPokemonWater::
-	.string "Own POKéMON type: WATER$"
+	.string "Own DAEMON type: WATER$"
 
 Help_Text_OwnMoveBug::
 	.string "Own move type: BUG$"
 
 Help_Text_OwnPokemonBug::
-	.string "Own POKéMON type: BUG$"
+	.string "Own DAEMON type: BUG$"
 
 Help_Text_HowToUseTypeMatchupList::
-	.string "Depending on the matchup of the\n"
-	.string "move type and the target POKéMON's\l"
-	.string "type, the move's effectiveness varies:\l"
-	.string "{CIRCLE_DOT}: Super effective!\l"
-	.string "{TRIANGLE}: Not very effective\l"
-	.string "{BIG_MULT_X}: Not effective at all\l"
-	.string "(No changes for other matchups.)$"
+	.string "Depending on the matchup of the move\n"
+	.string "type and the target DAEMON's type, the\l"
+	.string "move's effectiveness varies: {CIRCLE_DOT}: Super\l"
+	.string "effective! {TRIANGLE}: Not very effective {BIG_MULT_X}: Not\l"
+	.string "effective at all (No changes for other\l"
+	.string "matchups.)$"
 
 Help_Text_TypeMatchupOwnMoveDark::
-	.string "Effect on the opposing POKéMON:\p"
+	.string "Effect on the opposing DAEMON:\p"
 	.string "   {CIRCLE_DOT}: PSYCHIC, GHOST\p"
 	.string "   {TRIANGLE}: FIGHTING, DARK, STEEL$"
 
 Help_Text_TypeMatchupOwnPokemonDark::
-	.string "Effect of foe's move on own POKéMON:\p"
+	.string "Effect of foe's move on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: FIGHTING, BUG\p"
 	.string "   {TRIANGLE}: GHOST, DARK\p"
 	.string "   {BIG_MULT_X}: PSYCHIC$"
 
 Help_Text_TypeMatchupOwnMoveRock::
-	.string "Effect on the opposing POKéMON:\p"
+	.string "Effect on the opposing DAEMON:\p"
 	.string "   {CIRCLE_DOT}: FIRE, ICE, FLYING, BUG\p"
 	.string "   {TRIANGLE}: FIGHTING, GROUND, STEEL$"
 
 Help_Text_TypeMatchupOwnPokemonRock::
-	.string "Effect of foe's move on own POKéMON:\p"
+	.string "Effect of foe's move on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: WATER, GRASS, FIGHTING,\n"
 	.string "       GROUND, STEEL\p"
 	.string "   {TRIANGLE}: NORMAL, FIRE, POISON, FLYING$"
 
 Help_Text_TypeMatchupOwnMovePsychic::
-	.string "Effect on the opposing POKéMON:\p"
+	.string "Effect on the opposing DAEMON:\p"
 	.string "   {CIRCLE_DOT}: FIGHTING, POISON\p"
 	.string "   {TRIANGLE}: PSYCHIC, STEEL\p"
 	.string "   {BIG_MULT_X}: DARK$"
 
 Help_Text_TypeMatchupOwnPokemonPsychic::
-	.string "Effect of foe's move on own POKéMON:\p"
+	.string "Effect of foe's move on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: BUG, GHOST, DARK\p"
 	.string "   {TRIANGLE}: FIGHTING, PSYCHIC$"
 
 Help_Text_TypeMatchupOwnMoveFighting::
-	.string "Effect on the opposing POKéMON:\p"
+	.string "Effect on the opposing DAEMON:\p"
 	.string "   {CIRCLE_DOT}: NORMAL, ICE, ROCK, DARK, STEEL\p"
 	.string "   {TRIANGLE}: POISON, FLYING, PSYCHIC, BUG\p"
 	.string "   {BIG_MULT_X}: GHOST$"
 
 Help_Text_TypeMatchupOwnPokemonFighting::
-	.string "Effect of foe's move on own POKéMON:\p"
+	.string "Effect of foe's move on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: FLYING, PSYCHIC\p"
 	.string "   {TRIANGLE}: BUG, ROCK, DARK$"
 
 Help_Text_TypeMatchupOwnMoveGrass::
-	.string "Effect on the opposing POKéMON:\p"
+	.string "Effect on the opposing DAEMON:\p"
 	.string "   {CIRCLE_DOT}: WATER, GROUND, ROCK\p"
 	.string "   {TRIANGLE}: FIRE, GRASS, POISON, FLYING,\n"
 	.string "       BUG, DRAGON, STEEL$"
 
 Help_Text_TypeMatchupOwnPokemonGrass::
-	.string "Effect of foe's move on own POKéMON:\p"
+	.string "Effect of foe's move on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: FIRE, ICE, POISON, FLYING, BUG\p"
 	.string "   {TRIANGLE}: WATER, ELECTRIC, GRASS, GROUND$"
 
 Help_Text_TypeMatchupOwnMoveGhost::
-	.string "Effect on the opposing POKéMON:\p"
+	.string "Effect on the opposing DAEMON:\p"
 	.string "   {CIRCLE_DOT}: PSYCHIC, GHOST\p"
 	.string "   {TRIANGLE}: DARK, STEEL\p"
 	.string "   {BIG_MULT_X}: NORMAL$"
 
 Help_Text_TypeMatchupOwnPokemonGhost::
-	.string "Effect of foe's move on own POKéMON:\p"
+	.string "Effect of foe's move on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: GHOST, DARK\p"
 	.string "   {TRIANGLE}: POISON, BUG\p"
 	.string "   {BIG_MULT_X}: NORMAL, FIGHTING$"
 
 Help_Text_TypeMatchupOwnMoveIce::
-	.string "Effect on the opposing POKéMON:\p"
+	.string "Effect on the opposing DAEMON:\p"
 	.string "   {CIRCLE_DOT}: GRASS, GROUND, FLYING, DRAGON\p"
 	.string "   {TRIANGLE}: FIRE, WATER, ICE, STEEL$"
 
 Help_Text_TypeMatchupOwnPokemonIce::
-	.string "Effect of foe's move on own POKéMON:\p"
+	.string "Effect of foe's move on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: FIRE, FIGHTING, ROCK, STEEL\p"
 	.string "   {TRIANGLE}: ICE$"
 
 Help_Text_TypeMatchupOwnMoveGround::
-	.string "Effect on the opposing POKéMON:\p"
+	.string "Effect on the opposing DAEMON:\p"
 	.string "   {CIRCLE_DOT}: FIRE, ELECTRIC, POISON, ROCK,\n"
 	.string "       STEEL\p"
 	.string "   {TRIANGLE}: GRASS, BUG\n"
 	.string "   {BIG_MULT_X}: FLYING$"
 
 Help_Text_TypeMatchupOwnPokemonGround::
-	.string "Effect of foe's move on own POKéMON:\p"
+	.string "Effect of foe's move on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: WATER, GRASS, ICE\p"
 	.string "   {TRIANGLE}: POISON, ROCK\p"
 	.string "   {BIG_MULT_X}: ELECTRIC$"
 
 Help_Text_TypeMatchupOwnMoveElectric::
-	.string "Effect on the opposing POKéMON:\p"
+	.string "Effect on the opposing DAEMON:\p"
 	.string "   {CIRCLE_DOT}: WATER, FLYING\p"
 	.string "   {TRIANGLE}: ELECTRIC, GRASS, DRAGON\p"
 	.string "   {BIG_MULT_X}: GROUND$"
 
 Help_Text_TypeMatchupOwnPokemonElectric::
-	.string "Effect of foe's move on own POKéMON:\p"
+	.string "Effect of foe's move on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: GROUND\p"
 	.string "   {TRIANGLE}: ELECTRIC, FLYING, STEEL$"
 
 Help_Text_TypeMatchupOwnMovePoison::
-	.string "Effect on the opposing POKéMON:\p"
+	.string "Effect on the opposing DAEMON:\p"
 	.string "   {CIRCLE_DOT}: GRASS\p"
 	.string "   {TRIANGLE}: POISON, GROUND, ROCK, GHOST\p"
 	.string "   {BIG_MULT_X}: STEEL$"
 
 Help_Text_TypeMatchupOwnPokemonPoison::
-	.string "Effect of foe's move on own POKéMON:\p"
+	.string "Effect of foe's move on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: GROUND, PSYCHIC\p"
 	.string "   {TRIANGLE}: GRASS, FIGHTING, POISON, BUG$"
 
 Help_Text_TypeMatchupOwnMoveDragon::
-	.string "Effect on the opposing POKéMON:\p"
+	.string "Effect on the opposing DAEMON:\p"
 	.string "   {CIRCLE_DOT}: DRAGON\p"
 	.string "   {TRIANGLE}: STEEL$"
 
 Help_Text_TypeMatchupOwnPokemonDragon::
-	.string "Effect of foe's move on own POKéMON:\p"
+	.string "Effect of foe's move on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: ICE, DRAGON\p"
 	.string "   {TRIANGLE}: FIRE, WATER, ELECTRIC, GRASS$"
 
 Help_Text_TypeMatchupOwnMoveNormal::
-	.string "Effect on the opposing POKéMON:\p"
+	.string "Effect on the opposing DAEMON:\p"
 	.string "   {TRIANGLE}: ROCK, STEEL\p"
 	.string "   {BIG_MULT_X}: GHOST$"
 
 Help_Text_TypeMatchupOwnPokemonNormal::
-	.string "Effect of foe's move on own POKéMON:\p"
+	.string "Effect of foe's move on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: FIGHTING\p"
 	.string "   {BIG_MULT_X}: GHOST$"
 
 Help_Text_TypeMatchupOwnMoveSteel::
-	.string "Effect on the opposing POKéMON:\p"
+	.string "Effect on the opposing DAEMON:\p"
 	.string "   {CIRCLE_DOT}: ICE, ROCK\p"
 	.string "   {TRIANGLE}: FIRE, WATER, ELECTRIC, STEEL$"
 
 Help_Text_TypeMatchupOwnPokemonSteel::
-	.string "Effect of foe's move on own POKéMON:\p"
+	.string "Effect of foe's move on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: FIRE, FIGHTING, GROUND\n"
 	.string "   {TRIANGLE}: NORMAL, GRASS, ICE, FLYING,\l"
 	.string "       PSYCHIC, BUG, ROCK, GHOST,\l"
@@ -1839,44 +1820,44 @@ Help_Text_TypeMatchupOwnPokemonSteel::
 	.string "   {BIG_MULT_X}: POISON$"
 
 Help_Text_TypeMatchupOwnMoveFlying::
-	.string "Effect on the opposing POKéMON:\p"
+	.string "Effect on the opposing DAEMON:\p"
 	.string "   {CIRCLE_DOT}: GRASS, FIGHTING, BUG\p"
 	.string "   {TRIANGLE}: ELECTRIC, ROCK, STEEL$"
 
 Help_Text_TypeMatchupOwnPokemonFlying::
-	.string "Effect of foe's move on own POKéMON:\p"
+	.string "Effect of foe's move on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: ELECTRIC, ICE, ROCK\p"
 	.string "   {TRIANGLE}: GRASS, FIGHTING, BUG\p"
 	.string "   {BIG_MULT_X}: GROUND$"
 
 Help_Text_TypeMatchupOwnMoveFire::
-	.string "Effect on the opposing POKéMON:\p"
+	.string "Effect on the opposing DAEMON:\p"
 	.string "   {CIRCLE_DOT}: GRASS, ICE, BUG, STEEL\p"
 	.string "   {TRIANGLE}: FIRE, WATER, ROCK, DRAGON$"
 
 Help_Text_TypeMatchupOwnPokemonFire::
-	.string "Effect of foe's move on own POKéMON:\p"
+	.string "Effect of foe's move on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: WATER, GROUND, ROCK\p"
 	.string "   {TRIANGLE}: FIRE, GRASS, ICE, BUG, STEEL$"
 
 Help_Text_TypeMatchupOwnMoveWater::
-	.string "Effect on the opposing POKéMON:\p"
+	.string "Effect on the opposing DAEMON:\p"
 	.string "   {CIRCLE_DOT}: FIRE, GROUND, ROCK\p"
 	.string "   {TRIANGLE}: WATER, GRASS, DRAGON$"
 
 Help_Text_TypeMatchupOwnPokemonWater::
-	.string "Effect of foe's move on own POKéMON:\p"
+	.string "Effect of foe's move on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: ELECTRIC, GRASS\p"
 	.string "   {TRIANGLE}: FIRE, WATER, ICE, STEEL$"
 
 Help_Text_TypeMatchupOwnMoveBug::
-	.string "Effect on the opposing POKéMON:\p"
+	.string "Effect on the opposing DAEMON:\p"
 	.string "   {CIRCLE_DOT}: GRASS, PSYCHIC, DARK\p"
 	.string "   {TRIANGLE}: FIRE, FIGHTING, POISON,\n"
 	.string "       FLYING, GHOST, STEEL$"
 
 Help_Text_TypeMatchupOwnPokemonBug::
-	.string "Effect of foe's move on own POKéMON:\p"
+	.string "Effect of foe's move on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: FIRE, FLYING, ROCK\p"
 	.string "   {TRIANGLE}: GRASS, FIGHTING, GROUND$"
 

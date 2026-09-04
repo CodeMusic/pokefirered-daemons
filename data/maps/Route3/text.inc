@@ -1,18 +1,16 @@
 Route3_Text_TunnelFromCeruleanTiring::
-    .string "Whew… I better take a rest…\n"
-    .string "Groan…\p"
-    .string "That tunnel from CERULEAN takes a\n"
+    .string "Whew… I better take a rest… Groan…\p"
+    .string "That tunnel from DOLDRUM takes a\n"
     .string "lot out of you!$"
 
 Route3_Text_ColtonIntro::
-    .string "Hey!\n"
-    .string "I saw you in VIRIDIAN FOREST!$"
+    .string "Hey! I saw you in CALLOW FOREST!$"
 
 Route3_Text_ColtonDefeat::
     .string "You beat me again!$"
 
 Route3_Text_ColtonPostBattle::
-    .string "There are other kinds of POKéMON\n"
+    .string "There are other kinds of DAEMONS\n"
     .string "than the ones you find in forests.$"
 
 Route3_Text_BenIntro::
@@ -25,10 +23,10 @@ Route3_Text_BenDefeat::
     .string "I don't believe it!$"
 
 Route3_Text_BenPostBattle::
-    .string "Are you using a POKéMON CENTER's\n"
-    .string "PC for storing your POKéMON?\p"
-    .string "Each BOX can hold up to\n"
-    .string "30 POKéMON.$"
+    .string "Are you using a DAEMON CENTER's PC\n"
+    .string "for storing your DAEMON?\p"
+    .string "Each BOX can hold up to 30\n"
+    .string "DAEMON.$"
 
 Route3_Text_JaniceIntro::
     .string "Excuse me!\n"
@@ -42,15 +40,15 @@ Route3_Text_JanicePostBattle::
     .string "don't want to battle!$"
 
 Route3_Text_GregIntro::
-    .string "Are you a TRAINER?\n"
-    .string "Let's get with it right away!$"
+    .string "Are you a USER? Let's get with it\n"
+    .string "right away!$"
 
 Route3_Text_GregDefeat::
-    .string "If I had new POKéMON, I would've\n"
+    .string "If I had new DAEMON, I would've\n"
     .string "won!$"
 
 Route3_Text_GregPostBattle::
-    .string "If a POKéMON BOX on the PC gets\n"
+    .string "If a DAEMON BOX on the PC gets\n"
     .string "full, just switch to another BOX.$"
 
 Route3_Text_SallyIntro::
@@ -62,7 +60,7 @@ Route3_Text_SallyDefeat::
 
 Route3_Text_SallyPostBattle::
     .string "You can avoid battles by not\n"
-    .string "letting TRAINERS see you.$"
+    .string "letting USERS see you.$"
 
 Route3_Text_CalvinIntro::
     .string "Hey! You're not wearing shorts!\n"
@@ -77,14 +75,14 @@ Route3_Text_CalvinPostBattle::
     .string "winter. That's my policy.$"
 
 Route3_Text_JamesIntro::
-    .string "I'll battle you with the POKéMON\n"
-    .string "I just caught.$"
+    .string "I'll battle you with the DAEMON I\n"
+    .string "just bound.$"
 
 Route3_Text_JamesDefeat::
     .string "Done like dinner!$"
 
 Route3_Text_JamesPostBattle::
-    .string "Trained POKéMON are stronger than\n"
+    .string "Trained DAEMONS are stronger than\n"
     .string "the wild ones.$"
 
 Route3_Text_RobinIntro::

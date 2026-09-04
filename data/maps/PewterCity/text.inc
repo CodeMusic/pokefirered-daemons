@@ -1,20 +1,19 @@
 Text_DreamEaterTeach::
-    .string "Yawn!\n"
-    .string "I must have dozed off in the sun.\p"
-    .string "I had this weird dream about\n"
-    .string "a DROWZEE eating my dream.\p"
-    .string "And…\n"
-    .string "I learned how to eat dreams…\p"
+    .string "Yawn! I must have dozed off in the\n"
+    .string "sun.\p"
+    .string "I had this weird dream about a\n"
+    .string "DROWZEE eating my dream.\p"
+    .string "And… I learned how to eat dreams…\p"
     .string "Oogh, this is too spooky!\p"
-    .string "Let me teach it to a POKéMON so\n"
-    .string "I can forget about it!$"
+    .string "Let me teach it to a DAEMON so I\n"
+    .string "can forget about it!$"
 
 Text_DreamEaterDeclined::
     .string "…Snore…$"
 
 Text_DreamEaterWhichMon::
-    .string "Which POKéMON wants to learn\n"
-    .string "DREAM EATER?$"
+    .string "Which DAEMON wants to learn DREAM\n"
+    .string "EATER?$"
 
 Text_DreamEaterTaught::
     .string "…ZZZ…\n"
@@ -27,11 +26,11 @@ PewterCity_Text_ClefairyCameFromMoon::
     .string "fell on MT. MOON.$"
 
 PewterCity_Text_BrockOnlySeriousTrainerHere::
-    .string "There aren't many serious POKéMON\n"
-    .string "TRAINERS here.\p"
-    .string "They're all like BUG CATCHERS,\n"
-    .string "you know, just hobbyists.\p"
-    .string "But PEWTER GYM's BROCK isn't like\n"
+    .string "There aren't many serious DAEMON\n"
+    .string "USERS here.\p"
+    .string "They're all like BUG CATCHERS, you\n"
+    .string "know, just hobbyists.\p"
+    .string "But SLATE GYM's BROCK isn't like\n"
     .string "that, not one bit.$"
 
 PewterCity_Text_DidYouCheckOutMuseum::
@@ -60,40 +59,38 @@ PewterCity_Text_ThatsRightItsHardWork::
 
 PewterCity_Text_SprayingRepelToKeepWildMonsOut::
     .string "I'm spraying REPEL to keep wild\n"
-    .string "POKéMON out of my garden!$"
+    .string "DAEMON out of my garden!$"
 
 PewterCity_Text_BrocksLookingForChallengersFollowMe::
-    .string "You're a TRAINER, right?\p"
-    .string "BROCK's looking for new\n"
-    .string "challengers. Follow me!$"
+    .string "You're a USER, right?\p"
+    .string "BROCK's looking for new challengers.\n"
+    .string "Follow me!$"
 
 PewterCity_Text_GoTakeOnBrock::
     .string "If you have the right stuff,\n"
     .string "go take on BROCK!$"
 
 PewterCity_Text_TrainerTipsEarningEXP::
-    .string "TRAINER TIPS\p"
-    .string "All POKéMON that appear in battle,\n"
+    .string "USER TIPS\p"
+    .string "All DAEMON that appear in battle,\n"
     .string "however briefly, earn EXP Points.$"
 
 PewterCity_Text_CallPoliceIfInfoOnThieves::
     .string "NOTICE!\p"
-    .string "Thieves have been stealing POKéMON\n"
+    .string "Thieves have been stealing DAEMON\n"
     .string "fossils from MT. MOON.\p"
-    .string "Please call the PEWTER POLICE if\n"
+    .string "Please call the SLATE POLICE if\n"
     .string "you have any information.$"
 
 PewterCity_Text_MuseumOfScience::
-    .string "PEWTER MUSEUM OF SCIENCE$"
+    .string "SLATE MUSEUM OF SCIENCE$"
 
 PewterCity_Text_GymSign::
-    .string "PEWTER CITY POKéMON GYM\n"
-    .string "LEADER: BROCK\l"
-    .string "The Rock-Solid POKéMON TRAINER!$"
+    .string "SLATE CITY DAEMON GYM LEADER:\n"
+    .string "BROCK The Rock-Solid DAEMON USER!$"
 
 PewterCity_Text_CitySign::
-    .string "PEWTER CITY\n"
-    .string "A Stone Gray City$"
+    .string "SLATE CITY A Stone Gray City$"
 
 @ The below 3 JP texts are unused. Possibly a cut NPC meant to give the player the Berry Pouch
 PewterCity_Text_DefeatedBrockYouCanHaveTreasure::
@@ -121,7 +118,7 @@ PewterCity_Text_OhPlayer::
     .string "Oh, {PLAYER}{KUN}!$"
 
 PewterCity_Text_AskedToDeliverThis::
-    .string "I'm glad I caught up to you. I'm\n"
+    .string "I'm glad I bound up to you. I'm\n"
     .string "CRYSTAL CLEAR's AIDE.\p"
     .string "I've been asked to deliver this, so\n"
     .string "here you go.$"

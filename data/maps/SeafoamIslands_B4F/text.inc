@@ -12,8 +12,8 @@ Text_RockSlideDeclined::
     .string "Oh, so you are scared after all.$"
 
 Text_RockSlideWhichMon::
-    .string "Which POKéMON should I teach\n"
-    .string "ROCK SLIDE?$"
+    .string "Which DAEMON should I teach ROCK\n"
+    .string "SLIDE?$"
 
 Text_RockSlideTaught::
     .string "It might be scary to use it in this\n"

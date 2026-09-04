@@ -15,12 +15,12 @@ FuchsiaCity_House2_Text_ReceivedGoodRod::
     .string "the FISHING GURU's brother.$"
 
 FuchsiaCity_House2_Text_GoodRodCanCatchBetterMons::
-    .string "Fishing is a way of life!\n"
-    .string "It is like the finest poetry.\p"
-    .string "A crummy OLD ROD could only catch\n"
+    .string "Fishing is a way of life! It is like\n"
+    .string "the finest poetry.\p"
+    .string "A crummy OLD ROD could only bind\n"
     .string "MAGIKARP, yes?\p"
-    .string "But with a GOOD ROD, you can\n"
-    .string "catch much better POKéMON.$"
+    .string "But with a GOOD ROD, you can bind\n"
+    .string "much better DAEMON.$"
 
 FuchsiaCity_House2_Text_OhThatsDisappointing::
     .string "Oh…\n"

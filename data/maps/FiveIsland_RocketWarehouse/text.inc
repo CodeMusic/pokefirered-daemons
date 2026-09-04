@@ -1,10 +1,10 @@
 FiveIsland_RocketWarehouse_Text_ManyMonsLockedInPen::
-    .string "There are many POKéMON locked\n"
+    .string "There are many DAEMONS locked\n"
     .string "away in the pen…$"
 
 FiveIsland_RocketWarehouse_Text_PenUnlockedMonsFled::
-    .string "The pen door is unlocked.\n"
-    .string "The POKéMON appear to have fled.$"
+    .string "The pen door is unlocked. The\n"
+    .string "DAEMON appear to have fled.$"
 
 FiveIsland_RocketWarehouse_Text_Grunt2Intro::
     .string "Did you come here knowing it's\n"
@@ -14,14 +14,13 @@ FiveIsland_RocketWarehouse_Text_Grunt2Defeat::
     .string "What do you think you're doing?!$"
 
 FiveIsland_RocketWarehouse_Text_Grunt2PostBattle::
-    .string "TEAM ROCKET broke up?\n"
-    .string "What planet are you from?$"
+    .string "TEAM CORPUS broke up? What planet\n"
+    .string "are you from?$"
 
 FiveIsland_RocketWarehouse_Text_Grunt1Intro::
-    .string "Oh, now your POKéMON look strong.\n"
+    .string "Oh, now your DAEMON look strong.\n"
     .string "You're willing to sell them?\p"
-    .string "Oh?\n"
-    .string "You wanted to battle?$"
+    .string "Oh? You wanted to battle?$"
 
 FiveIsland_RocketWarehouse_Text_Grunt1Defeat::
     .string "Oh, but…\n"
@@ -29,7 +28,7 @@ FiveIsland_RocketWarehouse_Text_Grunt1Defeat::
 
 FiveIsland_RocketWarehouse_Text_Grunt1PostBattle::
     .string "We can give you a great price.\n"
-    .string "Sell us your POKéMON!$"
+    .string "Sell us your DAEMON!$"
 
 FiveIsland_RocketWarehouse_Text_Grunt3Intro::
     .string "I got word about you from the\n"
@@ -65,44 +64,41 @@ FiveIsland_RocketWarehouse_Text_MadeItSoYouCanComeBackThrough::
     .string "Why don't you go get rested and\n"
     .string "refreshed for what lies ahead?\p"
     .string "The ADMIN after me outranks me\n"
-    .string "thoroughly as a TRAINER.\p"
+    .string "thoroughly as a USER.\p"
     .string "You'd better steel yourself for one\n"
     .string "harsh challenge.$"
 
 FiveIsland_RocketWarehouse_Text_Admin2Intro::
-    .string "That's quite enough of you \n"
-    .string "playing the hero, kid.\p"
+    .string "That's quite enough of you playing\n"
+    .string "the hero, kid.\p"
     .string "Spreading lies about how TEAM\n"
-    .string "ROCKET has disbanded…\p"
+    .string "CORPUS has disbanded…\p"
     .string "It's such an obvious attempt to\n"
     .string "cause confusion in our ranks.\p"
     .string "Fortunately, we're not so ignorant\n"
     .string "to fall for the lies of a child!\p"
-    .string "And now, I'll show you how scary\n"
-    .string "an angry adult can be!$"
+    .string "And now, I'll show you how scary an\n"
+    .string "angry adult can be!$"
 
 FiveIsland_RocketWarehouse_Text_Admin2Defeat::
-    .string "Urgh…\n"
-    .string "You were too strong…\p"
-    .string "…\n"
-    .string "Th-that's GIOVANNI's BADGE!\p"
-    .string "So it's true?\n"
-    .string "TEAM ROCKET really has disbanded?$"
+    .string "Urgh… You were too strong…\p"
+    .string "… Th-that's GIOVANNI's MARK!\p"
+    .string "So it's true? TEAM CORPUS really\n"
+    .string "has disbanded?$"
 
 FiveIsland_RocketWarehouse_Text_Admin2PostBattle::
     .string "We will abandon this WAREHOUSE…\p"
-    .string "But don't think this is over.\n"
-    .string "I won't let this be the end.\p"
-    .string "I will find GIOVANNI.\n"
-    .string "And I will resurrect TEAM ROCKET!\l"
-    .string "I will…\p"
+    .string "But don't think this is over. I won't\n"
+    .string "let this be the end.\p"
+    .string "I will find GIOVANNI. And I will\n"
+    .string "resurrect TEAM CORPUS! I will…\p"
     .string "Until then, farewell!$"
 
 FiveIsland_RocketWarehouse_Text_ReportWithGraphsAndText::
     .string "A report with graphs and text is on\n"
     .string "the PC monitor.\p"
     .string "“The Influence of Magnetic Waves\n"
-    .string "on POKéMON Evolution”…\p"
+    .string "on DAEMON Evolution”…\p"
     .string "… … … … … …\p"
     .string "It's too difficult to understand…$"
 

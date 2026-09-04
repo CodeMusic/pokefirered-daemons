@@ -1,8 +1,8 @@
 CeladonCity_DepartmentStore_3F_Text_OTStandsForOriginalTrainer::
-    .string "Captured POKéMON are registered\n"
+    .string "Captured DAEMONS are registered\n"
     .string "with an ID No. and the OT.\p"
-    .string "OT stands for “Original TRAINER” -\n"
-    .string "the TRAINER that caught it first.$"
+    .string "OT stands for “Original USER” - the\n"
+    .string "USER that bound it first.$"
 
 CeladonCity_DepartmentStore_3F_Text_BuddyTradingKangaskhanForHaunter::
     .string "All right!\p"
@@ -11,15 +11,14 @@ CeladonCity_DepartmentStore_3F_Text_BuddyTradingKangaskhanForHaunter::
 
 CeladonCity_DepartmentStore_3F_Text_HaunterEvolvedOnTrade::
     .string "Come on, HAUNTER!\p"
-    .string "I love HAUNTER!\n"
-    .string "I collect them!\p"
+    .string "I love HAUNTER! I collect them!\p"
     .string "Huh?\p"
     .string "HAUNTER turned into a different\n"
-    .string "POKéMON while being traded!$"
+    .string "DAEMONS while being traded!$"
 
 CeladonCity_DepartmentStore_3F_Text_CanIdentifyTradeMonsByID::
-    .string "You can identify POKéMON you get\n"
-    .string "in trades by their ID Numbers.$"
+    .string "You can identify DAEMON you get in\n"
+    .string "trades by their ID Numbers.$"
 
 CeladonCity_DepartmentStore_3F_Text_ItsSuperNES::
     .string "It's a Super NES.$"
@@ -44,12 +43,10 @@ CeladonCity_DepartmentStore_3F_Text_TVGameShop::
     .string "3F: TV GAME SHOP$"
 
 CeladonCity_DepartmentStore_3F_Text_RedGreenBothArePokemon::
-    .string "Red and Green!\n"
-    .string "Both are POKéMON!$"
+    .string "Red and Green! Both are DAEMON!$"
 
 Text_CounterTeach::
-    .string "Oh, hi!\n"
-    .string "I finally finished POKéMON.\p"
+    .string "Oh, hi! I finally finished DAEMON.\p"
     .string "Not done yet? How about I teach\n"
     .string "you a good move?\p"
     .string "The move I have in mind is\n"
@@ -62,9 +59,9 @@ Text_CounterDeclined::
     .string "me if you change your mind.$"
 
 Text_CounterWhichMon::
-    .string "Which POKéMON should I teach\n"
+    .string "Which DAEMON should I teach\n"
     .string "COUNTER to?$"
 
 Text_CounterTaught::
-    .string "Are you using that COUNTER move\n"
-    .string "I taught your POKéMON?$"
+    .string "Are you using that COUNTER move I\n"
+    .string "taught your DAEMON?$"

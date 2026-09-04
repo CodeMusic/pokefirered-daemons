@@ -8,7 +8,7 @@ Route10_Text_MarkDefeat::
     .string "I'm not angry!$"
 
 Route10_Text_MarkPostBattle::
-    .string "I have more rare POKéMON at home!$"
+    .string "I have more rare DAEMON at home!$"
 
 Route10_Text_ClarkIntro::
     .string "Ha-hahah-ah-ha!$"
@@ -24,20 +24,18 @@ Route10_Text_ClarkPostBattle::
     .string "Snort! Snivel!$"
 
 Route10_Text_HermanIntro::
-    .string "Hi, kid!\n"
-    .string "Want to see my POKéMON?$"
+    .string "Hi, kid! Want to see my DAEMONS?$"
 
 Route10_Text_HermanDefeat::
-    .string "Oh, no!\n"
-    .string "My POKéMON!$"
+    .string "Oh, no! My DAEMONS!$"
 
 Route10_Text_HermanPostBattle::
     .string "I don't like you.\n"
     .string "I don't like anyone better than me!$"
 
 Route10_Text_HeidiIntro::
-    .string "I've been out at a POKéMON GYM\n"
-    .string "a few times.\p"
+    .string "I've been out at a DAEMON GYM a\n"
+    .string "few times.\p"
     .string "…But I always lose.$"
 
 Route10_Text_HeidiDefeat::
@@ -61,22 +59,22 @@ Route10_Text_TrentPostBattle::
     .string "I feel bloated on mountain air!$"
 
 Route10_Text_CarolIntro::
-    .string "I'm feeling a bit faint.\n"
-    .string "I haven't hiked in some time.$"
+    .string "I'm feeling a bit HALT. I haven't\n"
+    .string "hiked in some time.$"
 
 Route10_Text_CarolDefeat::
     .string "I'm too tired.\n"
     .string "I wasn't up for it.$"
 
 Route10_Text_CarolPostBattle::
-    .string "The POKéMON here in the mountains\n"
+    .string "The DAEMON here in the mountains\n"
     .string "are so chunky…\p"
-    .string "I wish there were pink POKéMON\n"
-    .string "with a floral pattern!$"
+    .string "I wish there were pink DAEMON with\n"
+    .string "a floral pattern!$"
 
 Route10_Text_RockTunnelDetourToLavender::
-    .string "ROCK TUNNEL\n"
-    .string "Detour to LAVENDER TOWN$"
+    .string "ROCK TUNNEL Detour to HALFTONE\n"
+    .string "TOWN$"
 
 Route10_Text_RockTunnel::
     .string "ROCK TUNNEL$"

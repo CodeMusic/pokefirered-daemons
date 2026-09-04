@@ -2,23 +2,23 @@
 
 TrainerTower_Lobby_Text_WelcomeToTrainerTower::
     .string "Hello!\p"
-    .string "Welcome to TRAINER TOWER where\n"
-    .string "TRAINERS gather from all over!$"
+    .string "Welcome to USER TOWER where USERS\n"
+    .string "gather from all over!$"
 
 TrainerTower_Lobby_Text_TrainersUpToFloorNum::
-    .string "TRAINERS from all over the world\n"
+    .string "USERS from all over the world\n"
     .string "gather here to battle.\p"
     .string "Let me see…\p"
-    .string "Right now, there are TRAINERS only\n"
-    .string "up to Floor {STR_VAR_1}.$"
+    .string "Right now, there are USERS only up\n"
+    .string "to Floor {STR_VAR_1}.$"
 
 TrainerTower_Lobby_Text_TrainersUpEighthFloor::
-    .string "TRAINERS are awaiting your\n"
-    .string "challenge up to the eighth floor.$"
+    .string "USERS are awaiting your challenge\n"
+    .string "up to the eighth floor.$"
 
 TrainerTower_Lobby_Text_LikeToChallengeTrainers::
     .string "Would you like to challenge the\n"
-    .string "waiting TRAINERS?$"
+    .string "waiting USERS?$"
 
 TrainerTower_Lobby_Text_StartClockGetSetGo::
     .string "Okay, I'll get the clock started,\n"
@@ -40,8 +40,8 @@ TrainerTower_Lobby_Text_GiveItYourBest::
     .string "I hope you give it your best.$"
 
 TrainerTower_Lobby_Text_MoveCounterHereWhenTrainersSwitch::
-    .string "When the TRAINERS switch places,\n"
-    .string "the movement can be hectic.\p"
+    .string "When the USERS switch places, the\n"
+    .string "movement can be hectic.\p"
     .string "To avoid the stampede, we moved\n"
     .string "the reception counter here.\p"
     .string "I'm sorry for the inconvenience.$"
@@ -88,10 +88,10 @@ TrainerTower_Lobby_Text_HereAreTheResults::
 TrainerTower_Lobby_Text_NeedTwoMonsForDouble::
     .string "This is a two-on-two battle.\p"
     .string "You may not battle unless you have\n"
-    .string "at least two POKéMON.$"
+    .string "at least two DAEMONS.$"
 
 TrainerTower_Lobby_Text_ExplainTrainerTower::
-    .string "Here at TRAINER TOWER, there is an\n"
+    .string "Here at USER TOWER, there is an\n"
     .string "event called TIME ATTACK.\p"
     .string "You will be timed on how quickly\n"
     .string "you can get from the reception\l"
@@ -101,15 +101,15 @@ TrainerTower_Lobby_Text_ExplainTrainerTower::
     .string "Try competing with friends to see\n"
     .string "who can beat it the fastest.\p"
     .string "You will not earn any EXP. Points\n"
-    .string "or money by beating TRAINERS here.$"
+    .string "or money by beating USERS here.$"
 
 TrainerTower_Lobby_Text_ThanksForCompeting::
     .string "Thank you for competing!$"
 
 TrainerTower_Lobby_Text_WonderWhatKindsOfTrainers::
     .string "I'm here to see how good I am.\p"
-    .string "I wonder what kinds of TRAINERS\n"
-    .string "are waiting for me?\p"
+    .string "I wonder what kinds of USERS are\n"
+    .string "waiting for me?\p"
     .string "It's nerve-racking!$"
 
 TrainerTower_Lobby_Text_StairsTougherThanAnyBattle::

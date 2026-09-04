@@ -1,12 +1,11 @@
 FuchsiaCity_House3_Text_WouldYouLikeToForgetMove::
-    .string "Uh…\n"
-    .string "Oh, yes, I'm the MOVE DELETER.\p"
-    .string "I can make POKéMON forget their\n"
+    .string "Uh… Oh, yes, I'm the MOVE DELETER.\p"
+    .string "I can make DAEMON forget their\n"
     .string "moves.\p"
     .string "Would you like me to do that?$"
 
 FuchsiaCity_House3_Text_WhichMonShouldForgetMove::
-    .string "Which POKéMON should forget a\n"
+    .string "Which DAEMON should forget a\n"
     .string "move?$"
 
 FuchsiaCity_House3_Text_WhichMoveShouldBeForgotten::

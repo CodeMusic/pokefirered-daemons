@@ -3,8 +3,8 @@ FiveIsland_PokemonCenter_1F_Text_OnMyWayToPrepareMeal::
     .string "for a certain high-society person.$"
 
 FiveIsland_PokemonCenter_1F_Text_YoureOnQuestToCatchEveryMon::
-    .string "You're on a quest to catch every\n"
-    .string "single kind of POKéMON?\p"
+    .string "You're on a quest to bind every\n"
+    .string "single kind of DAEMON?\p"
     .string "…How incredible. Please tell me if\n"
-    .string "you catch a strong one!$"
+    .string "you bind a strong one!$"
 

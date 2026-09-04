@@ -1,6 +1,6 @@
 OneIsland_Text_BillLetsGoSeeCelio::
-    .string "BILL: Here we are!\n"
-    .string "This is ONE ISLAND.\p"
+    .string "HOLT: Here we are! This is ONE\n"
+    .string "ISLAND.\p"
     .string "There are several islands around\n"
     .string "here, and this is one of them.\p"
     .string "My friend CELIO sent the boat to\n"
@@ -49,8 +49,8 @@ OneIsland_Text_IslandSign::
     .string "Friends Gather at Knot Island$"
 
 OneIsland_Text_PokemonNetCenterSign::
-    .string "Expanding the POKéMON World!\n"
-    .string "POKéMON NET CENTER$"
+    .string "Expanding the DAEMON World!\n"
+    .string "DAEMON NET CENTER$"
 
 @ Unused
 OneIsland_Text_ReturnToCinnabar::

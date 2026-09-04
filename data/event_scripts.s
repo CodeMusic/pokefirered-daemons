@@ -810,7 +810,7 @@ gStdScriptsEnd::
 @ Unused
 Text_WouldYouLikeToMixRecords::
 	.string "Would you like to mix records with\n"
-	.string "other TRAINERS?$"
+	.string "other USERS?$"
 
 @ Unused
 Text_WeHopeToSeeYouAgain2::
@@ -820,17 +820,17 @@ Text_WeHopeToSeeYouAgain2::
 
 @ Unused
 Text_WelcomeTradeCenter::
-	.string "Welcome to the POKéMON CABLE CLUB\n"
+	.string "Welcome to the DAEMON CABLE CLUB\n"
 	.string "TRADE CENTER.$"
 
 @ Unused
 Text_WelcomeColosseum::
-	.string "Welcome to the POKéMON CABLE CLUB\n"
+	.string "Welcome to the DAEMON CABLE CLUB\n"
 	.string "COLOSSEUM.$"
 
 @ Unused
 Text_WelcomeTimeCapsule::
-	.string "Welcome to the POKéMON CABLE CLUB\n"
+	.string "Welcome to the DAEMON CABLE CLUB\n"
 	.string "TIME CAPSULE.$"
 
 Text_PleaseComeAgain::
@@ -882,25 +882,25 @@ Text_GiveNicknameToReceivedMon::
 	.string "{STR_VAR_2} you received?$"
 
 gText_PkmnFainted3::
-	.string "{STR_VAR_1} fainted…\p"
+	.string "{STR_VAR_1} HALTED…\p"
 	.string "$"
 
 Text_WelcomeWantToHealPkmn::
-	.string "Welcome to our POKéMON CENTER!\p"
+	.string "Welcome to our DAEMON CENTER!\p"
 	.string "Would you like me to heal your\n"
-	.string "POKéMON back to perfect health?$"
+	.string "DAEMON back to perfect health?$"
 
 Text_TakeYourPkmnForFewSeconds::
-	.string "Okay, I'll take your POKéMON for a\n"
+	.string "Okay, I'll take your DAEMON for a\n"
 	.string "few seconds.$"
 
 Text_WeHopeToSeeYouAgain::
 	.string "We hope to see you again!$"
 
 Text_RestoredPkmnToFullHealth::
-	.string "Thank you for waiting.\n"
-	.string "We've restored your POKéMON to\l"
-	.string "full health.$"
+	.string "Thank you for waiting. We've\n"
+	.string "restored your DAEMON to full\l"
+	.string "health.$"
 
 	.include "data/text/surf.inc"
 
@@ -915,9 +915,9 @@ Text_BigHoleInTheWall::
 	.string "おおきな　あなが　あいている！$"
 
 Text_WirelessClubUndergoingAdjustments::
-	.string "I'm terribly sorry.\n"
-	.string "The POKéMON WIRELESS CLUB is\l"
-	.string "undergoing adjustments now.$"
+	.string "I'm terribly sorry. The DAEMON\n"
+	.string "WIRELESS CLUB is undergoing\l"
+	.string "adjustments now.$"
 
 Text_AppearsToBeUndergoingAdjustments::
 	.string "It appears to be undergoing\n"
@@ -946,12 +946,11 @@ Text_ItNeedsCardKey::
 
 Text_AccessedProfOaksPC::
 	.string "Accessed CRYSTAL CLEAR's PC…\p"
-	.string "Accessed the POKéDEX Rating\n"
-	.string "System…$"
+	.string "Accessed the INDEX Rating System…$"
 
 Text_HavePokedexRated::
-	.string "Would you like to have your\n"
-	.string "POKéDEX rated?$"
+	.string "Would you like to have your INDEX\n"
+	.string "rated?$"
 
 Text_ClosedLinkToProfOaksPC::
 	.string "Closed link to CRYSTAL CLEAR's PC.$"

@@ -30,7 +30,7 @@ Route6_Text_KeigoDefeat::
 
 Route6_Text_KeigoPostBattle::
     .string "I like bugs, so I'm going back to\n"
-    .string "VIRIDIAN FOREST.$"
+    .string "CALLOW FOREST.$"
 
 Route6_Text_JeffIntro::
     .string "Huh?\n"
@@ -41,7 +41,7 @@ Route6_Text_JeffDefeat::
     .string "I couldn't beat your challenge…$"
 
 Route6_Text_JeffPostBattle::
-    .string "I should bring more POKéMON with\n"
+    .string "I should bring more DAEMONS with\n"
     .string "me. I'll feel safer that way.$"
 
 Route6_Text_IsabelleIntro::
@@ -63,11 +63,10 @@ Route6_Text_ElijahDefeat::
     .string "You're too good!$"
 
 Route6_Text_ElijahPostBattle::
-    .string "Are my POKéMON weak?\n"
-    .string "Or, am I just bad?\l"
-    .string "Which do you think?$"
+    .string "Are my DAEMONS weak? Or, am I\n"
+    .string "just bad? Which do you think?$"
 
 Route6_Text_UndergroundPathSign::
-    .string "UNDERGROUND PATH\n"
-    .string "CERULEAN CITY - VERMILION CITY$"
+    .string "UNDERGROUND PATH DOLDRUM CITY -\n"
+    .string "ARDOR CITY$"
 

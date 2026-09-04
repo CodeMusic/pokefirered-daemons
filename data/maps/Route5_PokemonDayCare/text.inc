@@ -1,13 +1,13 @@
 Route5_PokemonDayCare_Text_WantMeToRaiseMon::
 	.string "I run the DAY-CARE service.\p"
 	.string "Would you like me to raise one of\n"
-	.string "your POKéMON?$"
+	.string "your DAEMON?$"
 
 Route5_PokemonDayCare_Text_ComeAgain::
 	.string "Come again.$"
 
 Route5_PokemonDayCare_Text_WhichMonShouldIRaise::
-	.string "Which POKéMON should I raise?$"
+	.string "Which DAEMON should I raise?$"
 
 Route5_PokemonDayCare_Text_ComeAnytimeYouLike::
 	.string "Fine.\n"
@@ -26,24 +26,23 @@ Route5_PokemonDayCare_Text_MonNeedsToSpendMoreTime::
 	.string "some more time with me.$"
 
 Route5_PokemonDayCare_Text_OweMeXForMonsReturn::
-	.string "You owe me ¥{STR_VAR_2} for the return\n"
-	.string "of this POKéMON.$"
+	.string "You owe me ¥{STR_VAR_2} for the\n"
+	.string "return of this DAEMON.$"
 
 Route5_PokemonDayCare_Text_ThankYouHeresMon::
-	.string "Thank you!\n"
-	.string "Here's your POKéMON.$"
+	.string "Thank you! Here's your DAEMON.$"
 
 Route5_PokemonDayCare_Text_PlayerGotMonBack::
 	.string "{PLAYER} got {STR_VAR_1} back\n"
 	.string "from the DAY-CARE MAN.$"
 
 Route5_PokemonDayCare_Text_OnlyHaveOneMonWithYou::
-	.string "Oh? You only have one POKéMON\n"
-	.string "with you.$"
+	.string "Oh? You only have one DAEMON with\n"
+	.string "you.$"
 
 Route5_PokemonDayCare_Text_WhatWillYouBattleWith::
-	.string "If you leave me that POKéMON,\n"
-	.string "what will you battle with?$"
+	.string "If you leave me that DAEMON, what\n"
+	.string "will you battle with?$"
 
 Route5_PokemonDayCare_Text_MonHasGrownByXLevels::
 	.string "Your {STR_VAR_1} has grown a lot.\n"
@@ -53,8 +52,8 @@ Route5_PokemonDayCare_Text_MonHasGrownByXLevels::
 	.string "Aren't I great?$"
 
 Route5_PokemonDayCare_Text_YouveGotNoRoomForIt::
-	.string "You can't take this POKéMON back\n"
-	.string "if you've got no room for it.$"
+	.string "You can't take this DAEMON back if\n"
+	.string "you've got no room for it.$"
 
 Route5_PokemonDayCare_Text_DontHaveEnoughMoney::
 	.string "You don't have enough money.$"

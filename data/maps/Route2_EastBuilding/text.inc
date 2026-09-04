@@ -1,20 +1,19 @@
 Route2_EastBuilding_Text_GiveHM05IfSeen10Mons::
     .string "Hi! Remember me? I'm one of\n"
     .string "CRYSTAL CLEAR's AIDES.\p"
-    .string "If your POKéDEX has complete data\n"
+    .string "If your INDEX has complete data\n"
     .string "on ten species, I'm supposed to\l"
     .string "give you a reward.\p"
     .string "CRYSTAL CLEAR entrusted me with\n"
     .string "HM05 for you.\p"
     .string "So, {PLAYER}, let me ask you.\p"
     .string "Have you gathered data on at least\n"
-    .string "ten kinds of POKéMON?$"
+    .string "ten kinds of DAEMONS?$"
 
 Route2_EastBuilding_Text_GreatHereYouGo::
-    .string "Great! You have caught or owned\n"
-    .string "{STR_VAR_3} kinds of POKéMON!\p"
-    .string "Congratulations!\n"
-    .string "Here you go!$"
+    .string "Great! You have bound or owned\n"
+    .string "{STR_VAR_3} kinds of DAEMONS!\p"
+    .string "Congratulations! Here you go!$"
 
 Route2_EastBuilding_Text_ReceivedHM05FromAide::
     .string "{PLAYER} received HM05\n"
@@ -27,6 +26,6 @@ Route2_EastBuilding_Text_ExplainHM05::
     .string "of caves and dungeons.$"
 
 Route2_EastBuilding_Text_CanGetThroughRockTunnel::
-    .string "Once a POKéMON learns FLASH, you\n"
+    .string "Once a DAEMON learns FLASH, you\n"
     .string "can get through ROCK TUNNEL.$"
 

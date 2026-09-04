@@ -11,6 +11,6 @@ FiveIsland_Text_WeirdBuildingInMeadow::
 FiveIsland_Text_BeenGettingBusierAroundHere::
     .string "It's been getting busier around\n"
     .string "these parts lately.\p"
-    .string "I haven't been catching many good\n"
+    .string "I haven't been binding many good\n"
     .string "fish lately, either.$"
 

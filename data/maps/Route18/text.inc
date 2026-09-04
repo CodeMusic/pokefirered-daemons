@@ -1,6 +1,6 @@
 Route18_Text_WiltonIntro::
     .string "I always check every grassy area\n"
-    .string "for new POKéMON.$"
+    .string "for new DAEMON.$"
 
 Route18_Text_WiltonDefeat::
     .string "Tch!$"
@@ -16,7 +16,7 @@ Route18_Text_RamiroDefeat::
     .string "I had to bug you!$"
 
 Route18_Text_RamiroPostBattle::
-    .string "I collect sea POKéMON on weekends\n"
+    .string "I collect sea DAEMON on weekends\n"
     .string "because the sea is so close.$"
 
 Route18_Text_JacobIntro::
@@ -27,12 +27,12 @@ Route18_Text_JacobDefeat::
     .string "Darn!$"
 
 Route18_Text_JacobPostBattle::
-    .string "This is my fave area for catching\n"
-    .string "POKéMON.$"
+    .string "This is my fave area for binding\n"
+    .string "DAEMONS.$"
 
 Route18_Text_RouteSign::
-    .string "ROUTE 18\n"
-    .string "CELADON CITY - FUCHSIA CITY$"
+    .string "ROUTE 18 VERDIGRIS CITY - LURID\n"
+    .string "CITY$"
 
 Route18_Text_CyclingRoadSign::
     .string "CYCLING ROAD\n"

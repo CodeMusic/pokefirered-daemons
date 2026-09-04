@@ -1,19 +1,19 @@
 CeruleanCity_Gym_Text_MistyIntro::
     .string "Hi, you're a new face!\p"
-    .string "Only those TRAINERS who have a\n"
-    .string "policy about POKéMON can turn pro.\p"
+    .string "Only those USERS who have a\n"
+    .string "policy about DAEMON can turn pro.\p"
     .string "What is your approach when you\n"
-    .string "catch and train POKéMON?\p"
+    .string "bind and train DAEMONS?\p"
     .string "My policy is an all-out offensive\n"
-    .string "with WATER-type POKéMON!{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
+    .string "with WATER-type DAEMON!{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
 
 CeruleanCity_Gym_Text_ExplainTM03::
     .string "TM03 teaches WATER PULSE.\p"
-    .string "Use it on an aquatic POKéMON!$"
+    .string "Use it on an aquatic DAEMON!$"
 
 CeruleanCity_Gym_Text_ExplainCascadeBadge::
     .string "The CASCADEBADGE makes all\n"
-    .string "POKéMON up to Lv. 30 obey.\p"
+    .string "DAEMONS up to Lv. 30 obey.\p"
     .string "That includes even outsiders you\n"
     .string "got in trades.\p"
     .string "There's more. You can now use CUT\n"
@@ -45,8 +45,8 @@ CeruleanCity_Gym_Text_DianaDefeat::
     .string "You overwhelmed me!$"
 
 CeruleanCity_Gym_Text_DianaPostBattle::
-    .string "You have to face other TRAINERS\n"
-    .string "to see how good you really are.$"
+    .string "You have to face other USERS to\n"
+    .string "see how good you really are.$"
 
 CeruleanCity_Gym_Text_LuisIntro::
     .string "Splash!\p"
@@ -57,20 +57,19 @@ CeruleanCity_Gym_Text_LuisDefeat::
     .string "That can't be!$"
 
 CeruleanCity_Gym_Text_LuisPostBattle::
-    .string "MISTY is a TRAINER who's going to\n"
-    .string "keep improving.\p"
+    .string "MISTY is a USER who's going to keep\n"
+    .string "improving.\p"
     .string "She won't lose to someone like you!$"
 
 CeruleanCity_Gym_Text_GymGuyAdvice::
-    .string "Yo!\n"
-    .string "Champ in the making!\p"
+    .string "Yo! Champ in the making!\p"
     .string "Let me give you some advice!\p"
     .string "The LEADER, MISTY, is a pro who\n"
-    .string "uses WATER-type POKéMON.\p"
+    .string "uses WATER-type DAEMON.\p"
     .string "You can drain all their water with\n"
-    .string "GRASS-type POKéMON.\p"
+    .string "GRASS-type DAEMON.\p"
     .string "Or, you might use ELECTRIC-type\n"
-    .string "POKéMON and zap them!$"
+    .string "DAEMON and zap them!$"
 
 CeruleanCity_Gym_Text_WeMakePrettyGoodTeam::
     .string "You beat MISTY!\n"
@@ -79,14 +78,10 @@ CeruleanCity_Gym_Text_WeMakePrettyGoodTeam::
     .string "darn-good team!$"
 
 CeruleanCity_Gym_Text_GymStatue::
-    .string "CERULEAN POKéMON GYM\n"
-    .string "LEADER: MISTY\p"
-    .string "WINNING TRAINERS:\n"
-    .string "{RIVAL}$"
+    .string "DOLDRUM DAEMON GYM LEADER: MISTY\p"
+    .string "WINNING USERS: {RIVAL}$"
 
 CeruleanCity_Gym_Text_GymStatuePlayerWon::
-    .string "CERULEAN POKéMON GYM\n"
-    .string "LEADER: MISTY\p"
-    .string "WINNING TRAINERS:\n"
-    .string "{RIVAL}, {PLAYER}$"
+    .string "DOLDRUM DAEMON GYM LEADER: MISTY\p"
+    .string "WINNING USERS: {RIVAL}, {PLAYER}$"
 

@@ -29,8 +29,8 @@ Route19_Text_MatthewDefeat::
     .string "Belly flop!$"
 
 Route19_Text_MatthewPostBattle::
-    .string "I can beat even marine POKéMON\n"
-    .string "at swimming.$"
+    .string "I can beat even marine DAEMON at\n"
+    .string "swimming.$"
 
 Route19_Text_DouglasIntro::
     .string "What's beyond the horizon?$"
@@ -43,7 +43,7 @@ Route19_Text_DouglasPostBattle::
     .string "yonder!$"
 
 Route19_Text_DavidIntro::
-    .string "I tried diving for POKéMON, but it\n"
+    .string "I tried diving for DAEMON, but it\n"
     .string "was a no-go.$"
 
 Route19_Text_DavidDefeat::
@@ -51,7 +51,7 @@ Route19_Text_DavidDefeat::
 
 Route19_Text_DavidPostBattle::
     .string "I guess you have to fish for sea\n"
-    .string "POKéMON.$"
+    .string "DAEMON.$"
 
 Route19_Text_TonyIntro::
     .string "I look at the sea to forget all\n"
@@ -75,7 +75,7 @@ Route19_Text_AnyaDefeat::
 Route19_Text_AnyaPostBattle::
     .string "It's still a long way to go to\n"
     .string "SEAFOAM ISLANDS…\p"
-    .string "I want to go back to FUCHSIA…$"
+    .string "I want to go back to LURID…$"
 
 Route19_Text_AliceIntro::
     .string "Swimming's great!\n"
@@ -108,18 +108,18 @@ Route19_Text_ConnieDefeat::
     .string "I'm exhausted…$"
 
 Route19_Text_ConniePostBattle::
-    .string "If I were to ride a POKéMON on\n"
-    .string "the sea, I'd like a LAPRAS.\p"
-    .string "LAPRAS is so big, I bet it\n"
-    .string "would keep me dry on water.$"
+    .string "If I were to ride a DAEMON on the\n"
+    .string "sea, I'd like a LAPRAS.\p"
+    .string "LAPRAS is so big, I bet it would\n"
+    .string "keep me dry on water.$"
 
 Route19_Text_RouteSign::
-    .string "SEA ROUTE 19\n"
-    .string "FUCHSIA CITY - SEAFOAM ISLANDS$"
+    .string "SEA ROUTE 19 LURID CITY -\n"
+    .string "SEAFOAM ISLANDS$"
 
 Route19_Text_LiaIntro::
     .string "LIA: I'm looking after my brother.\n"
-    .string "He just became a TRAINER.$"
+    .string "He just became a USER.$"
 
 Route19_Text_LiaDefeat::
     .string "LIA: That's no way to treat my\n"
@@ -134,11 +134,11 @@ Route19_Text_LiaPostBattle::
 Route19_Text_LiaNotEnoughMons::
     .string "LIA: I want to battle together\n"
     .string "with my little brother.\p"
-    .string "Don't you have two POKéMON?$"
+    .string "Don't you have two DAEMONS?$"
 
 Route19_Text_LucIntro::
-    .string "LUC: My big sis taught me how\n"
-    .string "to swim and train POKéMON.$"
+    .string "LUC: My big sis taught me how to\n"
+    .string "swim and train DAEMONS.$"
 
 Route19_Text_LucDefeat::
     .string "LUC: Oh, wow!\n"
@@ -151,4 +151,4 @@ Route19_Text_LucPostBattle::
 Route19_Text_LucNotEnoughMons::
     .string "LUC: I don't want to if I can't\n"
     .string "battle you with my big sis.\p"
-    .string "Don't you have two POKéMON?$"
+    .string "Don't you have two DAEMONS?$"

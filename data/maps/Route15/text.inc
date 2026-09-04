@@ -1,5 +1,5 @@
 Route15_Text_KindraIntro::
-    .string "I just got some POKéMON in trades.\n"
+    .string "I just got some DAEMONS in trades.\n"
     .string "Can I try them out on you?$"
 
 Route15_Text_KindraDefeat::
@@ -7,9 +7,9 @@ Route15_Text_KindraDefeat::
 
 Route15_Text_KindraPostBattle::
     .string "You can't change the nickname of\n"
-    .string "any POKéMON you get in a trade.\p"
-    .string "Only the Original TRAINER can get\n"
-    .string "the nickname changed.$"
+    .string "any DAEMON you get in a trade.\p"
+    .string "Only the Original USER can get the\n"
+    .string "nickname changed.$"
 
 Route15_Text_BeckyIntro::
     .string "You look gentle, so I think I can\n"
@@ -25,7 +25,7 @@ Route15_Text_BeckyPostBattle::
 
 Route15_Text_EdwinIntro::
     .string "When I whistle, I can summon bird\n"
-    .string "POKéMON.$"
+    .string "DAEMON.$"
 
 Route15_Text_EdwinDefeat::
     .string "Ow!\n"
@@ -46,11 +46,11 @@ Route15_Text_ChesterPostBattle::
     .string "This is so obvious, you should know\n"
     .string "this, but…\p"
     .string "Moves like EARTHQUAKE and FISSURE\n"
-    .string "have no effect on bird POKéMON.$"
+    .string "have no effect on bird DAEMON.$"
 
 Route15_Text_GraceIntro::
-    .string "Oh, you're a little cutie!\n"
-    .string "So like a darling POKéMON!$"
+    .string "Oh, you're a little cutie! So like a\n"
+    .string "darling DAEMON!$"
 
 Route15_Text_GraceDefeat::
     .string "You looked so cute, too!$"
@@ -61,15 +61,15 @@ Route15_Text_GracePostBattle::
     .string "I'm a big girl now.$"
 
 Route15_Text_OliviaIntro::
-    .string "I raise POKéMON for protection\n"
+    .string "I raise DAEMONS for protection\n"
     .string "because I live alone.$"
 
 Route15_Text_OliviaDefeat::
-    .string "POKéMON isn't about winning or\n"
-    .string "losing for me.$"
+    .string "DAEMON isn't about winning or losing\n"
+    .string "for me.$"
 
 Route15_Text_OliviaPostBattle::
-    .string "I love having my POKéMON greet me\n"
+    .string "I love having my DAEMONS greet me\n"
     .string "when I get home.\p"
     .string "It's so reassuring.$"
 
@@ -81,9 +81,8 @@ Route15_Text_ErnestDefeat::
     .string "Why not?$"
 
 Route15_Text_ErnestPostBattle::
-    .string "Life's too short.\n"
-    .string "It's cool to live as an outlaw.\l"
-    .string "TEAM ROCKET RULES!$"
+    .string "Life's too short. It's cool to live\n"
+    .string "as an outlaw. TEAM CORPUS RULES!$"
 
 Route15_Text_AlexIntro::
     .string "Fork over all your cash when you\n"
@@ -97,18 +96,18 @@ Route15_Text_AlexPostBattle::
     .string "Don't take me all serious.$"
 
 Route15_Text_CeliaIntro::
-    .string "What's cool and happening?\n"
-    .string "Trading POKéMON!$"
+    .string "What's cool and happening? Trading\n"
+    .string "DAEMONS!$"
 
 Route15_Text_CeliaDefeat::
     .string "I said trade!$"
 
 Route15_Text_CeliaPostBattle::
-    .string "I trade POKéMON with my friends\n"
+    .string "I trade DAEMONS with my friends\n"
     .string "all the time.$"
 
 Route15_Text_YazminIntro::
-    .string "Want to play with my POKéMON?$"
+    .string "Want to play with my DAEMONS?$"
 
 Route15_Text_YazminDefeat::
     .string "I was too impatient!$"
@@ -117,8 +116,7 @@ Route15_Text_YazminPostBattle::
     .string "I'll go train with weaker people.$"
 
 Route15_Text_RouteSign::
-    .string "ROUTE 15\n"
-    .string "West to FUCHSIA CITY$"
+    .string "ROUTE 15 West to LURID CITY$"
 
 Route15_Text_MyaIntro::
     .string "MYA: You're perfect.\n"
@@ -134,7 +132,7 @@ Route15_Text_MyaPostBattle::
 
 Route15_Text_MyaNotEnoughMons::
     .string "MYA: Do you want to challenge us?\n"
-    .string "You'll need two POKéMON, though.$"
+    .string "You'll need two DAEMONS, though.$"
 
 Route15_Text_RonIntro::
     .string "RON: My sister gets scary when we\n"
@@ -151,4 +149,4 @@ Route15_Text_RonPostBattle::
 Route15_Text_RonNotEnoughMons::
     .string "RON: Did you want to battle with\n"
     .string "my sister and me?\p"
-    .string "You need two POKéMON, then.$"
+    .string "You need two DAEMONS, then.$"

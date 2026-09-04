@@ -5,7 +5,7 @@ FuchsiaCity_SafariZone_Entrance_Text_PlaySafariGameFor500::
     .string "For just ¥500, you can play the\n"
     .string "SAFARI GAME.\p"
     .string "You can roam the wide-open safari\n"
-    .string "and catch what you like.\p"
+    .string "and bind what you like.\p"
     .string "Would you like to play?$"
 
 FuchsiaCity_SafariZone_Entrance_Text_ThatllBe500WeOnlyUseSpecialBalls::
@@ -43,28 +43,28 @@ FuchsiaCity_SafariZone_Entrance_Text_GoodLuck::
     .string "Good luck!$"
 
 FuchsiaCity_SafariZone_Entrance_Text_CatchFairShareComeAgain::
-    .string "Did you catch your fair share?\n"
-    .string "Come again!$"
+    .string "Did you bind your fair share? Come\n"
+    .string "again!$"
 
 FuchsiaCity_SafariZone_Entrance_Text_FirstTimeAtSafariZone::
     .string "Hi! Is it your first time here at\n"
     .string "the SAFARI ZONE?$"
 
 FuchsiaCity_SafariZone_Entrance_Text_ExplainSafariZone::
-    .string "The SAFARI ZONE actually has\n"
-    .string "four zones in it.\p"
+    .string "The SAFARI ZONE actually has four\n"
+    .string "zones in it.\p"
     .string "Each zone has different kinds of\n"
-    .string "POKéMON, even some rare ones.\p"
+    .string "DAEMONS, even some rare ones.\p"
     .string "Use the supplied SAFARI BALLS to\n"
-    .string "catch them.\p"
+    .string "bind them.\p"
     .string "You can also throw BAIT or ROCKS\n"
     .string "besides the SAFARI BALLS.\p"
-    .string "If you throw BAIT, the POKéMON\n"
+    .string "If you throw BAIT, the DAEMON\n"
     .string "becomes less likely to flee, but\l"
-    .string "harder to catch.\p"
-    .string "If you throw ROCKS, the POKéMON\n"
+    .string "harder to bind.\p"
+    .string "If you throw ROCKS, the DAEMON\n"
     .string "becomes more likely to flee, but\l"
-    .string "easier to catch.\p"
+    .string "easier to bind.\p"
     .string "When you run out of time or SAFARI\n"
     .string "BALLS, it's game over for you!$"
 

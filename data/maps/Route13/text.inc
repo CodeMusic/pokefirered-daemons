@@ -1,13 +1,12 @@
 Route13_Text_SebastianIntro::
-    .string "My bird POKéMON want to battle\n"
-    .string "with you!$"
+    .string "My bird DAEMON want to battle with\n"
+    .string "you!$"
 
 Route13_Text_SebastianDefeat::
-    .string "My PIDGEY and PIDGEOTTO combo\n"
-    .string "lost?$"
+    .string "My PACKET and RELAY combo lost?$"
 
 Route13_Text_SebastianPostBattle::
-    .string "My POKéMON look happy even though\n"
+    .string "My DAEMONS look happy even though\n"
     .string "they lost.$"
 
 Route13_Text_SusieIntro::
@@ -18,22 +17,21 @@ Route13_Text_SusieDefeat::
     .string "I lost!$"
 
 Route13_Text_SusiePostBattle::
-    .string "I want to become a good TRAINER.\n"
-    .string "I'll train hard, just watch.$"
+    .string "I want to become a good USER. I'll\n"
+    .string "train hard, just watch.$"
 
 Route13_Text_ValerieIntro::
-    .string "Wow!\n"
-    .string "Your BADGES are too cool!$"
+    .string "Wow! Your MARKS are too cool!$"
 
 Route13_Text_ValerieDefeat::
     .string "Not enough!$"
 
 Route13_Text_ValeriePostBattle::
-    .string "You got those BADGES from GYM\n"
+    .string "You got those MARKS from GYM\n"
     .string "LEADERS. I know!$"
 
 Route13_Text_GwenIntro::
-    .string "My cute POKéMON wish to make your\n"
+    .string "My cute DAEMON wish to make your\n"
     .string "acquaintance.$"
 
 Route13_Text_GwenDefeat::
@@ -41,8 +39,8 @@ Route13_Text_GwenDefeat::
     .string "You totally won!$"
 
 Route13_Text_GwenPostBattle::
-    .string "You have to make POKéMON battle\n"
-    .string "to toughen them up.$"
+    .string "You have to make DAEMON battle to\n"
+    .string "toughen them up.$"
 
 Route13_Text_AlmaIntro::
     .string "I found CARBOS in a cave once\n"
@@ -54,7 +52,7 @@ Route13_Text_AlmaDefeat::
 
 Route13_Text_AlmaPostBattle::
     .string "CARBOS boosted the SPEED of my\n"
-    .string "POKéMON.$"
+    .string "DAEMONS.$"
 
 Route13_Text_PerryIntro::
     .string "I'm not going to lose.\n"
@@ -76,20 +74,20 @@ Route13_Text_LolaDefeat::
 
 Route13_Text_LolaPostBattle::
     .string "I wonder which is stronger, male or\n"
-    .string "female POKéMON?$"
+    .string "female DAEMON?$"
 
 Route13_Text_SheilaIntro::
     .string "Do you want to battle some\n"
-    .string "POKéMON with me?$"
+    .string "DAEMONS with me?$"
 
 Route13_Text_SheilaDefeat::
     .string "It's over already?$"
 
 Route13_Text_SheilaPostBattle::
-    .string "I don't know anything about\n"
-    .string "POKéMON actually.\p"
-    .string "The ones I use… I picked them\n"
-    .string "for their looks!$"
+    .string "I don't know anything about DAEMON\n"
+    .string "actually.\p"
+    .string "The ones I use… I picked them for\n"
+    .string "their looks!$"
 
 Route13_Text_JaredIntro::
     .string "What're you lookin' at?$"
@@ -102,23 +100,23 @@ Route13_Text_JaredPostBattle::
     .string "Get lost!$"
 
 Route13_Text_RobertIntro::
-    .string "I always go with bird POKéMON.\n"
-    .string "I've dedicated myself to them.$"
+    .string "I always go with bird DAEMON. I've\n"
+    .string "dedicated myself to them.$"
 
 Route13_Text_RobertDefeat::
     .string "Out of power!$"
 
 Route13_Text_RobertPostBattle::
-    .string "I wish I could fly like PIDGEY and\n"
-    .string "PIDGEOTTO…$"
+    .string "I wish I could fly like PACKET and\n"
+    .string "RELAY…$"
 
 Route13_Text_LookToLeftOfThatPost::
-    .string "TRAINER TIPS\p"
-    .string "Look, look!\n"
-    .string "Look to the left of that post!$"
+    .string "USER TIPS\p"
+    .string "Look, look! Look to the left of\n"
+    .string "that post!$"
 
 Route13_Text_SelectToSwitchItems::
-    .string "TRAINER TIPS\p"
+    .string "USER TIPS\p"
     .string "Use SELECT to switch items in the\n"
     .string "ITEMS window.$"
 

@@ -9,14 +9,14 @@ VermilionCity_Text_DidYouSeeSSAnneInHarbor::
 
 VermilionCity_Text_SSAnneHasDepartedForYear::
     .string "So, the S.S. ANNE has departed?\p"
-    .string "She'll be back in VERMILION about\n"
-    .string "this time next year.$"
+    .string "She'll be back in ARDOR about this\n"
+    .string "time next year.$"
 
 VermilionCity_Text_BuildingOnThisLand::
     .string "I'm putting up a building on this\n"
     .string "plot of land. I own it all.\p"
-    .string "My POKéMON is tamping the land\n"
-    .string "to lay the foundation.$"
+    .string "My DAEMON is tamping the land to\n"
+    .string "lay the foundation.$"
 
 VermilionCity_Text_Machop::
     .string "MACHOP: Guoh! Gogogoh!$"
@@ -27,31 +27,30 @@ VermilionCity_Text_MachopStompingLandFlat::
 VermilionCity_Text_SSAnneVisitsOnceAYear::
     .string "The S.S. ANNE is a famous luxury\n"
     .string "cruise ship.\p"
-    .string "It visits VERMILION once a year.$"
+    .string "It visits ARDOR once a year.$"
 
 VermilionCity_Text_CitySign::
-    .string "VERMILION CITY\n"
-    .string "The Port of Exquisite Sunsets$"
+    .string "ARDOR CITY The Port of Exquisite\n"
+    .string "Sunsets$"
 
 VermilionCity_Text_SnorlaxBlockingRoute12::
     .string "NOTICE!\p"
     .string "ROUTE 12 may be blocked off by a\n"
-    .string "sleeping POKéMON.\p"
+    .string "sleeping DAEMON.\p"
     .string "Detour through ROCK TUNNEL to\n"
-    .string "LAVENDER TOWN.\p"
-    .string "VERMILION POLICE$"
+    .string "HALFTONE TOWN.\p"
+    .string "ARDOR POLICE$"
 
 VermilionCity_Text_PokemonFanClubSign::
-    .string "POKéMON FAN CLUB\n"
-    .string "All POKéMON fans welcome!$"
+    .string "DAEMON FAN CLUB All DAEMONS fans\n"
+    .string "welcome!$"
 
 VermilionCity_Text_GymSign::
-    .string "VERMILION CITY POKéMON GYM\n"
-    .string "LEADER: LT. SURGE\l"
-    .string "The Lightning American!$"
+    .string "ARDOR CITY DAEMON GYM LEADER: LT.\n"
+    .string "SURGE The Lightning American!$"
 
 VermilionCity_Text_VermilionHarbor::
-    .string "VERMILION HARBOR$"
+    .string "ARDOR HARBOR$"
 
 VermilionCity_Text_WelcomeToTheSSAnne::
     .string "Welcome to the S.S. ANNE!$"

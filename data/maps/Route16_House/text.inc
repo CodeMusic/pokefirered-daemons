@@ -17,5 +17,5 @@ Route16_House_Text_DontHaveAnyRoomForThis::
     .string "You don't have any room for this.$"
 
 Route16_House_Text_Fearow::
-    .string "FEAROW: Kyueen!$"
+    .string "FLOOD: Kyueen!$"
 

@@ -1,5 +1,5 @@
 CeladonCity_DepartmentStore_2F_Text_SuperRepelMorePowerfulRepel::
-    .string "SUPER REPEL keeps weak POKéMON at\n"
+    .string "SUPER REPEL keeps weak DAEMON at\n"
     .string "bay…\p"
     .string "Hmm, it's a more powerful REPEL.$"
 
@@ -8,7 +8,7 @@ CeladonCity_DepartmentStore_2F_Text_BuyReviveForLongOutings::
     .string "REVIVE.$"
 
 CeladonCity_DepartmentStore_2F_Text_FloorSign::
-    .string "Top-Grade Items for TRAINERS!\p"
+    .string "Top-Grade Items for USERS!\p"
     .string "2F: TRAINER'S MARKET$"
 
 CeladonCity_DepartmentStore_2F_Text_LanceComesToBuyCapes::

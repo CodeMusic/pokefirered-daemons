@@ -1,9 +1,9 @@
 VermilionCity_Gym_Text_LtSurgeIntro::
     .string "Hey, kid! What do you think you're\n"
     .string "doing here?\p"
-    .string "You won't live long in combat!\n"
-    .string "Not with your puny power!\p"
-    .string "I tell you, kid, electric POKéMON\n"
+    .string "You won't live long in combat! Not\n"
+    .string "with your puny power!\p"
+    .string "I tell you, kid, electric DAEMON\n"
     .string "saved me during the war!\p"
     .string "They zapped my enemies into\n"
     .string "paralysis!\p"
@@ -13,15 +13,14 @@ VermilionCity_Gym_Text_LtSurgePostBattle::
     .string "A little word of advice, kid!\p"
     .string "Electricity is sure powerful!\p"
     .string "But, it's useless against GROUND-\n"
-    .string "type POKéMON!$"
+    .string "type DAEMON!$"
 
 VermilionCity_Gym_Text_ExplainThunderBadgeTakeThis::
     .string "The THUNDERBADGE cranks up your\n"
-    .string "POKéMON's SPEED!\p"
-    .string "It also lets your POKéMON FLY\n"
+    .string "DAEMON's SPEED!\p"
+    .string "It also lets your DAEMON FLY\n"
     .string "lightning-quick anytime, kid!\p"
-    .string "You're special, kid!\n"
-    .string "Take this!$"
+    .string "You're special, kid! Take this!$"
 
 VermilionCity_Gym_Text_ReceivedTM34FromLtSurge::
     .string "{PLAYER} received TM34\n"
@@ -29,7 +28,7 @@ VermilionCity_Gym_Text_ReceivedTM34FromLtSurge::
 
 VermilionCity_Gym_Text_ExplainTM34::
     .string "TM34 contains SHOCK WAVE!\p"
-    .string "Teach it to an ELECTRIC POKéMON!$"
+    .string "Teach it to an ELECTRIC DAEMON!$"
 
 VermilionCity_Gym_Text_MakeRoomInYourBag::
     .string "Yo, kid, make room in your BAG!$"
@@ -83,14 +82,12 @@ VermilionCity_Gym_Text_DwaynePostBattle::
     .string "second lock is right next to it.$"
 
 VermilionCity_Gym_Text_GymGuyAdvice::
-    .string "Yo!\n"
-    .string "Champ in the making!\p"
+    .string "Yo! Champ in the making!\p"
     .string "LT. SURGE has a nickname.\p"
     .string "People refer to him as the\n"
     .string "Lightning American!\p"
-    .string "He's an expert on electric\n"
-    .string "POKéMON.\p"
-    .string "BIRD/WATER-type POKéMON match\n"
+    .string "He's an expert on electric DAEMON.\p"
+    .string "BIRD/WATER-type DAEMON match\n"
     .string "poorly against the ELECTRIC type.\p"
     .string "Beware of paralysis, too.\p"
     .string "LT. SURGE is very cautious.\p"
@@ -102,16 +99,14 @@ VermilionCity_Gym_Text_GymGuyPostVictory::
     .string "That match was electric!$"
 
 VermilionCity_Gym_Text_GymStatue::
-    .string "VERMILION POKéMON GYM\n"
-    .string "LEADER: LT. SURGE\p"
-    .string "WINNING TRAINERS:\n"
-    .string "{RIVAL}$"
+    .string "ARDOR DAEMON GYM LEADER: LT.\n"
+    .string "SURGE\p"
+    .string "WINNING USERS: {RIVAL}$"
 
 VermilionCity_Gym_Text_GymStatuePlayerWon::
-    .string "VERMILION POKéMON GYM\n"
-    .string "LEADER: LT. SURGE\p"
-    .string "WINNING TRAINERS:\n"
-    .string "{RIVAL}, {PLAYER}$"
+    .string "ARDOR DAEMON GYM LEADER: LT.\n"
+    .string "SURGE\p"
+    .string "WINNING USERS: {RIVAL}, {PLAYER}$"
 
 VermilionCity_Gym_Text_NopeOnlyTrashHere::
     .string "Nope!\n"

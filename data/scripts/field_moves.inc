@@ -113,7 +113,7 @@ Text_UseRockSmash::
 	.string "Would you like to use ROCK SMASH?$"
 
 Text_MonMaySmashRock::
-	.string "It's a rugged rock, but a POKéMON\n"
+	.string "It's a rugged rock, but a DAEMON\n"
 	.string "may be able to smash it.$"
 
 EventScript_StrengthBoulder::
@@ -158,7 +158,7 @@ EventScript_DontUseStrength::
 	end
 
 Text_UseStrength::
-	.string "It's a big boulder, but a POKéMON\n"
+	.string "It's a big boulder, but a DAEMON\n"
 	.string "may be able to push it aside.\p"
 	.string "Would you like to use STRENGTH?$"
 
@@ -168,7 +168,7 @@ Text_MonUsedStrengthCanMoveBoulders::
 	.string "possible to move boulders around!$"
 
 Text_MonMayPushBoulder::
-	.string "It's a big boulder, but a POKéMON\n"
+	.string "It's a big boulder, but a DAEMON\n"
 	.string "may be able to push it aside.$"
 
 Text_StrengthMadeMovingBouldersPossible::
@@ -255,7 +255,7 @@ EventScript_EndSurface:
 	end
 
 Text_MonMayGoUnderwater::
-	.string "The sea is deep here. A POKéMON\n"
+	.string "The sea is deep here. A DAEMON\n"
 	.string "may be able to go underwater.$"
 
 Text_SeaIsDeepUseDive::
@@ -267,7 +267,7 @@ Text_MonUsedDive::
 
 Text_MonMaySurface::
 	.string "Light is filtering down from above.\n"
-	.string "A POKéMON may be able to surface.$"
+	.string "A DAEMON may be able to surface.$"
 
 Text_LightFilteringUseDive::
 	.string "Light is filtering down from above.\n"

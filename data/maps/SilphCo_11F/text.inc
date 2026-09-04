@@ -27,7 +27,7 @@ SilphCo_11F_Text_ThatsOurSecretPrototype::
     .string "anywhere.\p"
     .string "It's our secret prototype MASTER\n"
     .string "BALL.\p"
-    .string "It will catch any POKéMON without\n"
+    .string "It will bind any DAEMON without\n"
     .string "fail!\p"
     .string "You should be quiet about using it,\n"
     .string "though.$"
@@ -55,11 +55,11 @@ SilphCo_11F_Text_GiovanniDefeat::
     .string "I lost again!?$"
 
 SilphCo_11F_Text_GiovanniPostBattle::
-    .string "Blast it all!\n"
-    .string "You ruined our plans for SILPH!\p"
-    .string "But, TEAM ROCKET will never fall!\p"
+    .string "Blast it all! You ruined our plans\n"
+    .string "for SILPH!\p"
+    .string "But, TEAM CORPUS will never fall!\p"
     .string "{PLAYER}! Never forget that all\n"
-    .string "POKéMON exist for TEAM ROCKET!\p"
+    .string "DAEMONS exist for TEAM CORPUS!\p"
     .string "I must go, but I shall return!$"
 
 SilphCo_11F_Text_Grunt2Intro::
@@ -82,11 +82,11 @@ SilphCo_11F_Text_Grunt1Defeat::
     .string "Demolished!$"
 
 SilphCo_11F_Text_Grunt1PostBattle::
-    .string "Watch your step…\n"
-    .string "My BOSS likes his POKéMON tough!$"
+    .string "Watch your step… My BOSS likes his\n"
+    .string "DAEMON tough!$"
 
 SilphCo_11F_Text_MonitorHasMonsOnIt::
-    .string "The monitor has POKéMON on it!$"
+    .string "The monitor has DAEMON on it!$"
 
 SilphCo_11F_Text_FloorSign::
     .string "SILPH CO. HEAD OFFICE\n"

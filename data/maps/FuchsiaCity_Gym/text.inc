@@ -2,14 +2,14 @@ FuchsiaCity_Gym_Text_KogaIntro::
     .string "KOGA: Fwahahaha!\p"
     .string "A mere child like you dares to\n"
     .string "challenge me?\p"
-    .string "The very idea makes me shiver\n"
-    .string "with mirth!\p"
+    .string "The very idea makes me shiver with\n"
+    .string "mirth!\p"
     .string "Very well, I shall show you true\n"
     .string "terror as a ninja master.\p"
-    .string "Poison brings steady doom.\n"
-    .string "Sleep renders foes helpless.\p"
+    .string "Poison brings steady doom. Sleep\n"
+    .string "renders foes helpless.\p"
     .string "Despair to the creeping horror of\n"
-    .string "POISON-type POKéMON!{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
+    .string "POISON-type DAEMON!{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
 
 FuchsiaCity_Gym_Text_KogaDefeat::
     .string "Humph!\n"
@@ -18,7 +18,7 @@ FuchsiaCity_Gym_Text_KogaDefeat::
     .string "Take the SOULBADGE!$"
 
 FuchsiaCity_Gym_Text_KogaPostBattle::
-    .string "When afflicted by TOXIC, a POKéMON\n"
+    .string "When afflicted by TOXIC, a DAEMON\n"
     .string "suffers more and more.\p"
     .string "It suffers worsening damage as the\n"
     .string "battle wears on!\p"
@@ -26,11 +26,10 @@ FuchsiaCity_Gym_Text_KogaPostBattle::
 
 FuchsiaCity_Gym_Text_KogaExplainSoulBadge::
     .string "Now that you have the SOULBADGE,\n"
-    .string "the DEFENSE of your POKéMON rises.\p"
+    .string "the DEFENSE of your DAEMON rises.\p"
     .string "It also lets you SURF outside of\n"
     .string "battle.\p"
-    .string "Ah!\n"
-    .string "Take this, too!$"
+    .string "Ah! Take this, too!$"
 
 FuchsiaCity_Gym_Text_ReceivedTM06FromKoga::
     .string "{PLAYER} received TM06\n"
@@ -46,11 +45,11 @@ FuchsiaCity_Gym_Text_MakeSpaceForThis::
     .string "Make space for this, child!$"
 
 FuchsiaCity_Gym_Text_KaydenIntro::
-    .string "Strength isn't the key for POKéMON.\n"
+    .string "Strength isn't the key for DAEMON.\n"
     .string "Do you understand this?\p"
-    .string "POKéMON is about strategy!\p"
-    .string "I'll show you how strategy can\n"
-    .string "beat brute strength.$"
+    .string "DAEMON is about strategy!\p"
+    .string "I'll show you how strategy can beat\n"
+    .string "brute strength.$"
 
 FuchsiaCity_Gym_Text_KaydenDefeat::
     .string "What?\n"
@@ -59,8 +58,7 @@ FuchsiaCity_Gym_Text_KaydenDefeat::
 FuchsiaCity_Gym_Text_KaydenPostBattle::
     .string "So, you mix brawn with brains?\n"
     .string "Good strategy!\p"
-    .string "That's remarkable for a child\n"
-    .string "TRAINER.$"
+    .string "That's remarkable for a child USER.$"
 
 FuchsiaCity_Gym_Text_KirkIntro::
     .string "I was a magician once upon a time.\p"
@@ -88,8 +86,8 @@ FuchsiaCity_Gym_Text_NatePostBattle::
 
 FuchsiaCity_Gym_Text_PhilIntro::
     .string "Stop right there!\p"
-    .string "The famed invisible walls of\n"
-    .string "FUCHSIA GYM have you frustrated?$"
+    .string "The famed invisible walls of LURID\n"
+    .string "GYM have you frustrated?$"
 
 FuchsiaCity_Gym_Text_PhilDefeat::
     .string "Whoa!\n"
@@ -129,9 +127,8 @@ FuchsiaCity_Gym_Text_ShawnPostBattle::
     .string "Which do you choose?$"
 
 FuchsiaCity_Gym_Text_GymGuyAdvice::
-    .string "Yo!\n"
-    .string "Champ in the making!\p"
-    .string "FUCHSIA GYM is a tricked-up place.\n"
+    .string "Yo! Champ in the making!\p"
+    .string "LURID GYM is a tricked-up place.\n"
     .string "It's riddled with invisible walls!\p"
     .string "KOGA might appear close, but he's\n"
     .string "blocked off.\p"
@@ -143,14 +140,10 @@ FuchsiaCity_Gym_Text_GymGuyPostVictory::
     .string "even now!$"
 
 FuchsiaCity_Gym_Text_GymStatue::
-    .string "FUCHSIA POKéMON GYM\n"
-    .string "LEADER: KOGA\p"
-    .string "WINNING TRAINERS:\n"
-    .string "{RIVAL}$"
+    .string "LURID DAEMON GYM LEADER: KOGA\p"
+    .string "WINNING USERS: {RIVAL}$"
 
 FuchsiaCity_Gym_Text_GymStatuePlayerWon::
-    .string "FUCHSIA POKéMON GYM\n"
-    .string "LEADER: KOGA\p"
-    .string "WINNING TRAINERS:\n"
-    .string "{RIVAL}, {PLAYER}$"
+    .string "LURID DAEMON GYM LEADER: KOGA\p"
+    .string "WINNING USERS: {RIVAL}, {PLAYER}$"
 

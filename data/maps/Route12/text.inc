@@ -1,15 +1,15 @@
 Route12_Text_MonSprawledOutInSlumber::
-    .string "A POKéMON is sprawled out in\n"
-    .string "a deep and comfortable slumber.$"
+    .string "A DAEMON is sprawled out in a deep\n"
+    .string "and comfortable slumber.$"
 
 Text_SnorlaxWokeUp::
-    .string "SNORLAX woke up!\p"
+    .string "DEADLOCK woke up!\p"
     .string "It attacked in a grumpy rage!$"
 
 Text_SnorlaxReturnedToMountains::
-    .string "SNORLAX calmed down.\n"
-    .string "It gave a huge yawn…\l"
-    .string "And returned to the mountains.$"
+    .string "DEADLOCK calmed down. It gave a\n"
+    .string "huge yawn… And returned to the\l"
+    .string "mountains.$"
 
 Text_WantToUsePokeFlute::
     .string "Want to use the POKé FLUTE?$"
@@ -37,8 +37,8 @@ Route12_Text_ChipDefeat::
     .string "That one got away!$"
 
 Route12_Text_ChipPostBattle::
-    .string "With a better ROD, I could catch\n"
-    .string "better POKéMON…$"
+    .string "With a better ROD, I could bind\n"
+    .string "better DAEMON…$"
 
 Route12_Text_JustinIntro::
     .string "I'm searching for a MOON STONE.\n"
@@ -48,13 +48,13 @@ Route12_Text_JustinDefeat::
     .string "Oww!$"
 
 Route12_Text_JustinPostBattle::
-    .string "I could have made my POKéMON\n"
+    .string "I could have made my DAEMONS\n"
     .string "evolve with a MOON STONE.\p"
     .string "I would have won then, I bet.$"
 
 Route12_Text_LucaIntro::
     .string "Electricity is my specialty.\p"
-    .string "I don't know a thing about POKéMON\n"
+    .string "I don't know a thing about DAEMON\n"
     .string "of the sea, though.$"
 
 Route12_Text_LucaDefeat::
@@ -62,10 +62,10 @@ Route12_Text_LucaDefeat::
 
 Route12_Text_LucaPostBattle::
     .string "Water conducts electricity, so you\n"
-    .string "should zap sea POKéMON.$"
+    .string "should zap sea DAEMON.$"
 
 Route12_Text_HankIntro::
-    .string "The FISHING FOOL versus POKéMON\n"
+    .string "The FISHING FOOL versus DAEMON\n"
     .string "KID!$"
 
 Route12_Text_HankDefeat::
@@ -74,8 +74,8 @@ Route12_Text_HankDefeat::
 Route12_Text_HankPostBattle::
     .string "I guess you get to be good at\n"
     .string "what you like.\p"
-    .string "Well, you beat me at POKéMON,\n"
-    .string "but you can't top me at fishing.$"
+    .string "Well, you beat me at DAEMON, but\n"
+    .string "you can't top me at fishing.$"
 
 Route12_Text_ElliotIntro::
     .string "I love fishing, don't get me wrong.\p"
@@ -90,21 +90,20 @@ Route12_Text_ElliotPostBattle::
     .string "Losing doesn't bug me anymore.$"
 
 Route12_Text_AndrewIntro::
-    .string "What's catching?\p"
+    .string "What's binding?\p"
     .string "You never know what you could\n"
-    .string "catch!$"
+    .string "bind!$"
 
 Route12_Text_AndrewDefeat::
     .string "Lost it!$"
 
 Route12_Text_AndrewPostBattle::
     .string "What, MAGIKARP?\p"
-    .string "I catch them all the time, sure.\n"
+    .string "I bind them all the time, sure.\n"
     .string "But, boy are they wimpy.$"
 
 Route12_Text_RouteSign::
-    .string "ROUTE 12 \n"
-    .string "North to LAVENDER$"
+    .string "ROUTE 12 North to HALFTONE$"
 
 Route12_Text_SportfishingArea::
     .string "SPORTFISHING AREA$"
@@ -122,10 +121,10 @@ Route12_Text_JesPostBattle::
     .string "my love!$"
 
 Route12_Text_JesNotEnoughMons::
-    .string "JES: GIA and I, we'll be\n"
-    .string "together forever.\p"
-    .string "We won't battle unless you have\n"
-    .string "two POKéMON of your own.$"
+    .string "JES: GIA and I, we'll be together\n"
+    .string "forever.\p"
+    .string "We won't battle unless you have two\n"
+    .string "DAEMONS of your own.$"
 
 Route12_Text_GiaIntro::
     .string "GIA: Hey, JES…\p"
@@ -139,6 +138,6 @@ Route12_Text_GiaPostBattle::
     .string "You ruined this!$"
 
 Route12_Text_GiaNotEnoughMons::
-    .string "GIA: I can't bear to battle\n"
-    .string "without my JES!\p"
-    .string "Don't you have one more POKéMON?$"
+    .string "GIA: I can't bear to battle without\n"
+    .string "my JES!\p"
+    .string "Don't you have one more DAEMONS?$"

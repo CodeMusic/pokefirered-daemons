@@ -1,16 +1,15 @@
 SSAnne_2F_Corridor_Text_ThisShipIsLuxuryLiner::
     .string "This ship, she is a luxury liner for\n"
-    .string "TRAINERS of the world!\p"
+    .string "USERS of the world!\p"
     .string "At every port, we hold parties with\n"
-    .string "invited TRAINERS.$"
+    .string "invited USERS.$"
 
 SSAnne_2F_Corridor_Text_RivalIntro::
-    .string "{RIVAL}: Bonjour!\n"
-    .string "{PLAYER}!\p"
-    .string "Imagine seeing you here!\n"
-    .string "{PLAYER}, were you really invited?\p"
-    .string "So how's your POKéDEX coming?\p"
-    .string "I already caught 40 kinds, pal.\n"
+    .string "{RIVAL}: Bonjour! {PLAYER}!\p"
+    .string "Imagine seeing you here! {PLAYER},\n"
+    .string "were you really invited?\p"
+    .string "So how's your INDEX coming?\p"
+    .string "I already bound 40 kinds, pal.\n"
     .string "Different kinds are everywhere.\p"
     .string "Crawl around in grassy areas, and\n"
     .string "look hard for them.$"
@@ -18,7 +17,7 @@ SSAnne_2F_Corridor_Text_RivalIntro::
 SSAnne_2F_Corridor_Text_RivalDefeat::
     .string "Humph!\p"
     .string "At least you're raising your\n"
-    .string "POKéMON!$"
+    .string "DAEMON!$"
 
 SSAnne_2F_Corridor_Text_RivalVictory::
     .string "{PLAYER}‥！\n"

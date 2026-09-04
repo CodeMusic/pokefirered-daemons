@@ -87,10 +87,10 @@ TwoIsland_JoyfulGameCorner_Text_HandedMeteoriteToLostellesDaddy::
     .string "to LOSTELLE's daddy.$"
 
 TwoIsland_JoyfulGameCorner_Text_OhThisIsFromBill::
-    .string "Oh, I see, this is from BILL!\n"
-    .string "You have to thank him for me!\p"
-    .string "You know, you've been fantastic.\n"
-    .string "I want you to have this.$"
+    .string "Oh, I see, this is from HOLT! You\n"
+    .string "have to thank him for me!\p"
+    .string "You know, you've been fantastic. I\n"
+    .string "want you to have this.$"
 
 TwoIsland_JoyfulGameCorner_Text_ReceivedMoonStoneFromLostellesDaddy::
     .string "{PLAYER} received a MOON STONE\n"

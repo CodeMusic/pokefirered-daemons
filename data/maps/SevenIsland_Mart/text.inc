@@ -1,8 +1,8 @@
 SevenIsland_Mart_Text_MonHavePersonalitiesOfTheirOwn::
-    .string "POKéMON have personalities of their\n"
+    .string "DAEMONS have personalities of their\n"
     .string "own, just like people.\p"
-    .string "My PIKACHU has a HASTY nature,\n"
-    .string "so it grew to be a speedy POKéMON.$"
+    .string "My SPIKE has a HASTY nature, so it\n"
+    .string "grew to be a speedy DAEMON.$"
 
 SevenIsland_Mart_Text_PreparationsCompleteForRuins::
     .string "Okay, preparations are complete\n"

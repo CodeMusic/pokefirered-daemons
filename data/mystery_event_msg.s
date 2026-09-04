@@ -100,15 +100,15 @@ SurfPichu_Slot5:
 sText_MysteryGiftEgg:
 	.string "Thank you for using the MYSTERY\n"
 	.string "GIFT System.\p"
-	.string "From the POKéMON CENTER we\n"
-	.string "have a gift - a POKéMON EGG!\p"
+	.string "From the DAEMON CENTER we have a\n"
+	.string "gift - a DAEMON EGG!\p"
 	.string "Please raise it with love and\n"
 	.string "kindness.$"
 
 sText_FullParty:
 	.string "Oh, your party appears to be full.\p"
-	.string "Please come see me after storing\n"
-	.string "a POKéMON on a PC.$"
+	.string "Please come see me after storing a\n"
+	.string "DAEMON on a PC.$"
 
 MysteryEventScript_VisitingTrainer::
 	setvaddress MysteryEventScript_VisitingTrainer
@@ -136,25 +136,24 @@ sText_MysteryGiftVisitingTrainer:
 	.string "GIFT System.\p"
 	.string "By holding this WONDER CARD, you\n"
 	.string "may take part in a survey at a\l"
-	.string "POKéMON MART.\p"
-	.string "Use these surveys to invite\n"
-	.string "TRAINERS to the SEVII ISLANDS.\p"
-	.string "…Let me give you a secret\n"
-	.string "password for a survey:\p"
-	.string "“GIVE ME\n"
-	.string "AWESOME TRAINER”\p"
+	.string "DAEMON MART.\p"
+	.string "Use these surveys to invite USERS\n"
+	.string "to the SEVII ISLANDS.\p"
+	.string "…Let me give you a secret password\n"
+	.string "for a survey:\p"
+	.string "“GIVE ME AWESOME USER”\p"
 	.string "Write that in on a survey and send\n"
-	.string "it to the WIRELESS\l"
-	.string "COMMUNICATION SYSTEM.$"
+	.string "it to the WIRELESS COMMUNICATION\l"
+	.string "SYSTEM.$"
 
 sText_MysteryGiftVisitingTrainer_2:
 	.string "Thank you for using the MYSTERY\n"
 	.string "GIFT System.\p"
-	.string "A TRAINER has arrived in the SEVII\n"
+	.string "A USER has arrived in the SEVII\n"
 	.string "ISLANDS looking for you.\p"
-	.string "We hope you will enjoy\n"
-	.string "battling the visiting TRAINER.\p"
-	.string "You may invite other TRAINERS by\n"
+	.string "We hope you will enjoy battling\n"
+	.string "the visiting USER.\p"
+	.string "You may invite other USERS by\n"
 	.string "entering other passwords.\p"
 	.string "Try looking for other passwords\n"
 	.string "that may work.$"
@@ -189,8 +188,8 @@ sText_MysteryGiftBattleCountCard:
 	.string "GIFT System.\p"
 	.string "Your BATTLE COUNT CARD keeps\n"
 	.string "track of your battle record against\l"
-	.string "TRAINERS with the same CARD.\p"
-	.string "Look for and battle TRAINERS who\n"
+	.string "USERS with the same CARD.\p"
+	.string "Look for and battle USERS who\n"
 	.string "have the same CARD as you.\p"
 	.string "You may check the overall rankings\n"
 	.string "by reading the NEWS.\p"
@@ -249,7 +248,7 @@ sText_AuroraTicket1:
 
 sText_AuroraTicket2:
 	.string "It appears to be for use at the\n"
-	.string "VERMILION CITY port.\p"
+	.string "ARDOR CITY port.\p"
 	.string "Why not give it a try and see what\n"
 	.string "it is about?$"
 
@@ -308,7 +307,7 @@ sText_MysticTicket2:
 
 sText_MysticTicket1:
 	.string "It appears to be for use at the\n"
-	.string "VERMILION CITY port.\p"
+	.string "ARDOR CITY port.\p"
 	.string "Why not give it a try and see what\n"
 	.string "it is about?$"
 
@@ -340,7 +339,7 @@ sText_MysteryGiftAlteringCave:
 	.string "Thank you for using the MYSTERY\n"
 	.string "GIFT System.\p"
 	.string "Recently, there have been rumors\n"
-	.string "of rare POKéMON appearances.\p"
+	.string "of rare DAEMON appearances.\p"
 	.string "The rumors are about ALTERING\n"
 	.string "CAVE on OUTCAST ISLAND.\p"
 	.string "Why not visit there and check if\n"

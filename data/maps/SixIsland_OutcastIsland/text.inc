@@ -1,15 +1,15 @@
 SixIsland_OutcastIsland_Text_RocketIntro::
-    .string "There're no rare POKéMON around\n"
+    .string "There're no rare DAEMON around\n"
     .string "these parts! Not a one!\p"
-    .string "That burns me up, man.\n"
-    .string "I'll take it out on you!$"
+    .string "That burns me up, man. I'll take it\n"
+    .string "out on you!$"
 
 SixIsland_OutcastIsland_Text_RocketDefeat::
     .string "…Huh?$"
 
 SixIsland_OutcastIsland_Text_RocketPostBattle::
-    .string "So listen, you haven't seen any\n"
-    .string "rare POKéMON, have you?$"
+    .string "So listen, you haven't seen any rare\n"
+    .string "DAEMONS, have you?$"
 
 SixIsland_OutcastIsland_Text_TylorIntro::
     .string "I'm having no luck at all.\n"
@@ -20,7 +20,7 @@ SixIsland_OutcastIsland_Text_TylorDefeat::
 
 SixIsland_OutcastIsland_Text_TylorPostBattle::
     .string "I can't very well go home without\n"
-    .string "catching something, though.$"
+    .string "binding something, though.$"
 
 SixIsland_OutcastIsland_Text_MymoIntro::
     .string "Gasp… Gasp…\p"
@@ -36,8 +36,8 @@ SixIsland_OutcastIsland_Text_MymoPostBattle::
     .string "I'm beat…$"
 
 SixIsland_OutcastIsland_Text_NicoleIntro::
-    .string "It's not so easy sending POKéMON\n"
-    .string "out while swimming, you know?$"
+    .string "It's not so easy sending DAEMON out\n"
+    .string "while swimming, you know?$"
 
 SixIsland_OutcastIsland_Text_NicoleDefeat::
     .string "I didn't lose to you at swimming.\n"
@@ -62,10 +62,10 @@ SixIsland_OutcastIsland_Text_AvaPostBattle::
     .string "sea over any pool.$"
 
 SixIsland_OutcastIsland_Text_AvaNotEnoughMons::
-    .string "AVA: You're challenging us to\n"
-    .string "a battle?\p"
-    .string "You'll need at least two POKéMON\n"
-    .string "if you want to do that.$"
+    .string "AVA: You're challenging us to a\n"
+    .string "battle?\p"
+    .string "You'll need at least two DAEMONS if\n"
+    .string "you want to do that.$"
 
 SixIsland_OutcastIsland_Text_GebIntro::
     .string "GEB: Big Sister, help!\n"
@@ -82,4 +82,4 @@ SixIsland_OutcastIsland_Text_GebPostBattle::
 SixIsland_OutcastIsland_Text_GebNotEnoughMons::
     .string "GEB: Please battle against me and\n"
     .string "my sister!\p"
-    .string "…Oh, you don't have two POKéMON?$"
+    .string "…Oh, you don't have two DAEMONS?$"

@@ -1,49 +1,44 @@
 FuchsiaCity_Text_DidYouTrySafariGame::
     .string "Did you try the SAFARI GAME?\p"
-    .string "There are some rare POKéMON that\n"
-    .string "can only be caught there.$"
+    .string "There are some rare DAEMON that\n"
+    .string "can only be bound there.$"
 
 FuchsiaCity_Text_SafariZoneZooInFront::
     .string "The SAFARI ZONE has a zoo in front\n"
     .string "of the entrance.\p"
     .string "Out back is the SAFARI GAME for\n"
-    .string "catching POKéMON.$"
+    .string "binding DAEMONS.$"
 
 FuchsiaCity_Text_WheresSara::
     .string "ERIK: Where's SARA?\n"
     .string "I said I'd meet her here.$"
 
 FuchsiaCity_Text_ItemBallInThere::
-    .string "That item ball in there…\n"
-    .string "Were you wanting that?\p"
-    .string "Me, too!\n"
-    .string "…Huh? That's a POKéMON?$"
+    .string "That item ball in there… Were you\n"
+    .string "wanting that?\p"
+    .string "Me, too! …Huh? That's a DAEMON?$"
 
 FuchsiaCity_Text_CitySign::
-    .string "FUCHSIA CITY\n"
-    .string "Behold! It's Passion Pink!$"
+    .string "LURID CITY Behold! It's Passion\n"
+    .string "Pink!$"
 
 FuchsiaCity_Text_SafariZoneSign::
-    .string "POKéMON PARADISE\n"
-    .string "SAFARI ZONE$"
+    .string "DAEMON PARADISE SAFARI ZONE$"
 
 FuchsiaCity_Text_SafariGameSign::
-    .string "SAFARI GAME\n"
-    .string "POKéMON-U-CATCH!$"
+    .string "SAFARI GAME DAEMON-U-CATCH!$"
 
 FuchsiaCity_Text_WardensHomeSign::
     .string "SAFARI ZONE\n"
     .string "WARDEN'S HOME$"
 
 FuchsiaCity_Text_SafariZoneOfficeSign::
-    .string "POKéMON PARADISE!\n"
-    .string "Welcome to the SAFARI ZONE!\l"
-    .string "SAFARI ZONE OFFICE$"
+    .string "DAEMON PARADISE! Welcome to the\n"
+    .string "SAFARI ZONE! SAFARI ZONE OFFICE$"
 
 FuchsiaCity_Text_GymSign::
-    .string "FUCHSIA CITY POKéMON GYM\n"
-    .string "LEADER: KOGA\l"
-    .string "The Poisonous Ninja Master$"
+    .string "LURID CITY DAEMON GYM LEADER:\n"
+    .string "KOGA The Poisonous Ninja Master$"
 
 FuchsiaCity_Text_ChanseySign::
     .string "Name: CHANSEY\n"
@@ -55,7 +50,7 @@ FuchsiaCity_Text_VoltorbSign::
 
 FuchsiaCity_Text_KangaskhanSign::
     .string "Name: KANGASKHAN\p"
-    .string "A maternal POKéMON that raises its\n"
+    .string "A maternal DAEMON that raises its\n"
     .string "young in a pouch on its belly.$"
 
 FuchsiaCity_Text_SlowpokeSign::
@@ -67,14 +62,14 @@ FuchsiaCity_Text_LaprasSign::
     .string "AKA the king of the seas.$"
 
 FuchsiaCity_Text_OmanyteSign::
-    .string "Name: OMANYTE\n"
-    .string "An extremely rare POKéMON that was\l"
-    .string "regenerated from a fossil.$"
+    .string "Name: OMANYTE An extremely rare\n"
+    .string "DAEMON that was regenerated from a\l"
+    .string "fossil.$"
 
 FuchsiaCity_Text_KabutoSign::
-    .string "Name: KABUTO\n"
-    .string "An extremely rare POKéMON that was\l"
-    .string "regenerated from a fossil.$"
+    .string "Name: KABUTO An extremely rare\n"
+    .string "DAEMON that was regenerated from a\l"
+    .string "fossil.$"
 
 @ Unused. May have been meant to be the placeholder text for the zoo mons, similar to RB's "!" text
 FuchsiaCity_Text_Ellipsis::
@@ -87,17 +82,17 @@ Text_SubstituteTeach::
     .string "baby…\p"
     .string "And snuggle in the mother\n"
     .string "KANGASKHAN's belly pouch.\p"
-    .string "But only POKéMON can use the\n"
+    .string "But only DAEMON can use the\n"
     .string "technique SUBSTITUTE…\p"
     .string "Want me to teach SUBSTITUTE to\n"
-    .string "one of your POKéMON?$"
+    .string "one of your DAEMON?$"
 
 Text_SubstituteDeclined::
     .string "Oh, really?\n"
     .string "SUBSTITUTE seems so fun…$"
 
 Text_SubstituteWhichMon::
-    .string "Which POKéMON wants to learn\n"
+    .string "Which DAEMON wants to learn\n"
     .string "SUBSTITUTE?$"
 
 Text_SubstituteTaught::
@@ -107,6 +102,6 @@ Text_SubstituteTaught::
 FuchsiaCity_Text_MyFatherIsGymLeader::
     .string "My father is the GYM LEADER of\n"
     .string "this town.\p"
-    .string "I'm training to use POISON POKéMON\n"
+    .string "I'm training to use POISON DAEMON\n"
     .string "as well as my father.$"
 

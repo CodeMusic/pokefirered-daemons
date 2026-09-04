@@ -1,19 +1,19 @@
 SixIsland_PatternBush_Text_BethanyIntro::
     .string "I'm curious, how do you raise your\n"
-    .string "POKéMON?$"
+    .string "DAEMON?$"
 
 SixIsland_PatternBush_Text_BethanyDefeat::
-    .string "You raise your POKéMON with a\n"
-    .string "whole lot of love!$"
+    .string "You raise your DAEMON with a whole\n"
+    .string "lot of love!$"
 
 SixIsland_PatternBush_Text_BethanyPostBattle::
     .string "In the same way your mother raised\n"
     .string "you full of love, you should raise\l"
-    .string "your POKéMON.$"
+    .string "your DAEMON.$"
 
 SixIsland_PatternBush_Text_AllisonIntro::
     .string "I'm working to preserve the natural\n"
-    .string "ecology of POKéMON here.$"
+    .string "ecology of DAEMON here.$"
 
 SixIsland_PatternBush_Text_AllisonDefeat::
     .string "Oh, for someone so young, you are\n"
@@ -21,29 +21,28 @@ SixIsland_PatternBush_Text_AllisonDefeat::
 
 SixIsland_PatternBush_Text_AllisonPostBattle::
     .string "I'm not saying that you shouldn't\n"
-    .string "catch POKéMON.\p"
+    .string "bind DAEMONS.\p"
     .string "I just want people to raise their\n"
-    .string "POKéMON responsibly.$"
+    .string "DAEMON responsibly.$"
 
 SixIsland_PatternBush_Text_GarretIntro::
-    .string "I caught a BUG POKéMON that lives\n"
+    .string "I bound a BUG DAEMON that lives\n"
     .string "only around here!$"
 
 SixIsland_PatternBush_Text_GarretDefeat::
-    .string "Heheh…\n"
-    .string "Isn't my POKéMON awesome?$"
+    .string "Heheh… Isn't my DAEMONS awesome?$"
 
 SixIsland_PatternBush_Text_GarretPostBattle::
     .string "There's a girl near the BUSH who\n"
-    .string "measures HERACROSS for TRAINERS.$"
+    .string "measures HERACROSS for USERS.$"
 
 SixIsland_PatternBush_Text_JonahIntro::
     .string "You know, it just doesn't feel right\n"
-    .string "if I don't use BUG POKéMON.$"
+    .string "if I don't use BUG DAEMON.$"
 
 SixIsland_PatternBush_Text_JonahDefeat::
     .string "It's okay, losing is a fun part of\n"
-    .string "POKéMON's appeal, too.$"
+    .string "DAEMON's appeal, too.$"
 
 SixIsland_PatternBush_Text_JonahPostBattle::
     .string "By the way, “appeal” is a weird\n"
@@ -52,8 +51,8 @@ SixIsland_PatternBush_Text_JonahPostBattle::
     .string "Or like a ringing bell?$"
 
 SixIsland_PatternBush_Text_VanceIntro::
-    .string "Yeah, yeah, yeah!\n"
-    .string "Look at all the BUG POKéMON!$"
+    .string "Yeah, yeah, yeah! Look at all the\n"
+    .string "BUG DAEMON!$"
 
 SixIsland_PatternBush_Text_VanceDefeat::
     .string "I got beat while I was still busy\n"
@@ -104,8 +103,8 @@ SixIsland_PatternBush_Text_DaliaPostBattle::
     .string "Isn't it refreshing?$"
 
 SixIsland_PatternBush_Text_JoanaIntro::
-    .string "I love BUG POKéMON.\n"
-    .string "That's why I'm here all the time.\p"
+    .string "I love BUG DAEMON. That's why I'm\n"
+    .string "here all the time.\p"
     .string "Am I the only girl like that?$"
 
 SixIsland_PatternBush_Text_JoanaDefeat::
@@ -113,8 +112,8 @@ SixIsland_PatternBush_Text_JoanaDefeat::
     .string "Am I the only girl like that?$"
 
 SixIsland_PatternBush_Text_JoanaPostBattle::
-    .string "I'm going to keep on collecting\n"
-    .string "BUG POKéMON.\p"
+    .string "I'm going to keep on collecting BUG\n"
+    .string "DAEMON.\p"
     .string "Am I the only girl like that?$"
 
 SixIsland_PatternBush_Text_RileyIntro::

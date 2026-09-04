@@ -1,8 +1,7 @@
 @ Flavor text for interacting with various background objects
 
 Text_Bookshelf::
-	.string "It's crammed full of POKéMON\n"
-	.string "books.$"
+	.string "It's crammed full of DAEMON books.$"
 
 Text_NothingButPokemonBooks::
 	.string "ほんだなに　ならんでいるのは\n"
@@ -12,8 +11,7 @@ Text_ATownMap::
 	.string "A TOWN MAP.$"
 
 Text_PokeMartShelf::
-	.string "Wow!\n"
-	.string "Tons of POKéMON stuff!$"
+	.string "Wow! Tons of DAEMON stuff!$"
 
 Text_DishesPlatesNeatlyLinedUp::
 	.string "Dishes and plates are neatly\n"
@@ -32,21 +30,20 @@ Text_Snacks::
 
 Text_PokemartSign::
 	.string "All your item needs fulfilled!\n"
-	.string "POKéMON MART$"
+	.string "DAEMON MART$"
 
 Text_PokecenterSign::
-	.string "Heal Your POKéMON!\n"
-	.string "POKéMON CENTER$"
+	.string "Heal Your DAEMON! DAEMON CENTER$"
 
 Text_Indigo_UltimateGoal::
-	.string "INDIGO PLATEAU\p"
-	.string "The ultimate goal of TRAINERS!\n"
-	.string "POKéMON LEAGUE HQ$"
+	.string "UMBRA PLATEAU\p"
+	.string "The ultimate goal of USERS!\n"
+	.string "DAEMON LEAGUE HQ$"
 
 Text_Indigo_HighestAuthority::
-	.string "INDIGO PLATEAU\p"
-	.string "The highest POKéMON authority!\n"
-	.string "POKéMON LEAGUE HQ$"
+	.string "UMBRA PLATEAU\p"
+	.string "The highest DAEMON authority!\n"
+	.string "DAEMON LEAGUE HQ$"
 
 Text_Food::
 	.string "It should be packed with all kinds\n"
@@ -57,7 +54,7 @@ Text_Blueprints::
 	.string "It's filled with diagrams and text.$"
 
 Text_Painting::
-	.string "It's a pretty picture of a POKéMON.\n"
+	.string "It's a pretty picture of a DAEMON.\n"
 	.string "It looks like it's feeling good.$"
 
 Text_PowerPlantMachine::
@@ -86,8 +83,8 @@ Text_TrashBin::
 	.string "There's nothing here!$"
 
 Text_Cup::
-	.string "It's a cup with a POKéMON mark\n"
-	.string "on it.$"
+	.string "It's a cup with a DAEMON mark on\n"
+	.string "it.$"
 
 Text_PolishedWindow::
 	.string "The window is very well polished.$"
@@ -118,5 +115,5 @@ Text_Burglary::
 	.string "here…$"
 
 Text_PlayerFacingTVScreen::
-	.string "There's a POKéMON on TV!\n"
-	.string "It looks like it's having fun.$"
+	.string "There's a DAEMON on TV! It looks\n"
+	.string "like it's having fun.$"
