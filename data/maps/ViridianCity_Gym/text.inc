@@ -132,7 +132,7 @@ ViridianCity_Gym_Text_SamuelDefeat::
 
 ViridianCity_Gym_Text_SamuelPostBattle::
     .string "You can go on to the DAEMON\n"
-    .string "LEAGUE only by defeating our GYM\l"
+    .string "LEAGUE only by outscoring our GYM\l"
     .string "LEADER!$"
 
 ViridianCity_Gym_Text_GymGuyAdvice::

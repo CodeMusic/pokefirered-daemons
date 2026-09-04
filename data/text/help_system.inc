@@ -1376,7 +1376,7 @@ Help_Text_DefinePlayTime::
 Help_Text_DefineBadges::
 	.string "The DAEMON LEAGUE MARKS that you have\n"
 	.string "won are registered and shown. Earn\l"
-	.string "MARKS by defeating GYM LEADERS in\l"
+	.string "MARKS by outscoring GYM LEADERS in\l"
 	.string "various cities and towns.$"
 
 Help_Text_DefineTextSpeed::
@@ -1487,7 +1487,7 @@ Help_Text_DefineMoney2::
 Help_Text_DefineBadges2::
 	.string "This indicates the number of DAEMONS\n"
 	.string "LEAGUE MARKS that you have won. Earn\l"
-	.string "MARKS by defeating GYM LEADERS in\l"
+	.string "MARKS by outscoring GYM LEADERS in\l"
 	.string "various cities and towns.$"
 
 Help_Text_TheHelpSystem::

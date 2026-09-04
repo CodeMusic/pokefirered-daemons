@@ -37,7 +37,7 @@ ViridianCity_School_Text_NotebookFourthPage::
     .string "Fourth page…\p"
     .string "The ultimate goal for all DAEMONS\n"
     .string "USERS is simple.\p"
-    .string "It is to defeat the top eight\n"
+    .string "It is to outscore the top eight\n"
     .string "DAEMONS GYM LEADERS.\p"
     .string "Do so to earn the right to face…\p"
     .string "The ELITE FOUR of the DAEMON\n"

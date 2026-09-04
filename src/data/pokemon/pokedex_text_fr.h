@@ -456,7 +456,7 @@ const u8 gKadabraPokedexTextUnused[] = _("");
 const u8 gAlakazamPokedexText[] = _(
         "It does not like physical attacks very\n"
         "much. Instead, it freely uses extra-\n"
-        "sensory powers to defeat foe.");
+        "sensory powers to outscore foe.");
 
 const u8 gAlakazamPokedexTextUnused[] = _("");
 

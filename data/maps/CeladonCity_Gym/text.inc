@@ -13,7 +13,7 @@ CeladonCity_Gym_Text_ErikaIntro::
     .string "Very well, but I shall not lose.$"
 
 CeladonCity_Gym_Text_ErikaDefeat::
-    .string "Oh! I concede defeat.\p"
+    .string "Oh! I concede the score.\p"
     .string "You are remarkably strong.\p"
     .string "I must confer you the FIT MARK.$"
 
