@@ -182,7 +182,7 @@ static const u8 sMoveTutorMenuWindowFrameDimensions[][4] =
 
 static const u8 sJPText_TatakauWaza[] = _("たたかうわざ");
 static const u8 sJPText_Taipu[] = _("タイプ/");
-static const u8 sJPText_PP[] = _("PP/");
+static const u8 sJPText_PP[] = _("MP/");
 static const u8 sJPText_Iryoku[] = _("いりょく/");
 static const u8 sJPText_Meichuu[] = _("めいちゅう/");
 

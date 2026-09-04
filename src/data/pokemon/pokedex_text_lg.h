@@ -6,9 +6,9 @@ const u8 gDummyPokedexText[] = _(
 const u8 gDummyPokedexTextUnused[] = _("");
 
 const u8 gBulbasaurPokedexText[] = _(
-    "Small enough to carry. Learns from what it\n"
-    "is carried past. It has no way to choose\n"
-    "the route. It remembers it.");
+        "Small enough to carry. Learns from\n"
+        "what it is carried past. It has no way\n"
+        "to choose the route. It remembers it.");
 
 const u8 gBulbasaurPokedexTextUnused[] = _("");
 
@@ -28,9 +28,9 @@ const u8 gVenusaurPokedexTextUnused[] = _(
     " ");
 
 const u8 gCharmanderPokedexText[] = _(
-    "Holds one example and the answer that came\n"
-    "with it. Someone else decided what it\n"
-    "means. It has never met them.");
+        "Holds one example and the answer that\n"
+        "came with it. Someone else decided\n"
+        "what it means. It has never met them.");
 
 const u8 gCharmanderPokedexTextUnused[] = _("");
 
@@ -42,9 +42,9 @@ const u8 gCharmeleonPokedexText[] = _(
 const u8 gCharmeleonPokedexTextUnused[] = _("");
 
 const u8 gCharizardPokedexText[] = _(
-    "Every case it meets is decided by cases it\n"
-    "has already met. New things are filed as\n"
-    "errors. The file is not read.");
+        "Every case it meets is decided by cases\n"
+        "it has already met. New things are\n"
+        "filed as errors. The file is not read.");
 
 const u8 gCharizardPokedexTextUnused[] = _("");
 
@@ -56,16 +56,16 @@ const u8 gSquirtlePokedexText[] = _(
 const u8 gSquirtlePokedexTextUnused[] = _("");
 
 const u8 gWartortlePokedexText[] = _(
-    "It found a rule the points obey. It cannot\n"
-    "say what the rule is for, only that it\n"
-    "holds. So far it has held.");
+        "It found a rule the points obey. It\n"
+        "cannot say what the rule is for, only\n"
+        "that it holds. So far it has held.");
 
 const u8 gWartortlePokedexTextUnused[] = _("");
 
 const u8 gBlastoisePokedexText[] = _(
-    "The scattered points were on a surface all\n"
-    "along. It can show you the shape, not a\n"
-    "name. Naming was another job.");
+        "The scattered points were on a surface\n"
+        "all along. It can show you the shape,\n"
+        "not a name. Naming was another job.");
 
 const u8 gBlastoisePokedexTextUnused[] = _("");
 
@@ -1003,9 +1003,9 @@ const u8 gAerodactylPokedexText[] = _(
 const u8 gAerodactylPokedexTextUnused[] = _("");
 
 const u8 gSnorlaxPokedexText[] = _(
-    "Two of them are each waiting for the other\n"
-    "to move first. Neither will. Nothing\n"
-    "outside is coming.");
+        "Two of them are each waiting for\n"
+        "the other to move first. Neither\n"
+        "will. Nothing outside is coming.");
 
 const u8 gSnorlaxPokedexTextUnused[] = _("");
 

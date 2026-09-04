@@ -99,8 +99,8 @@ ViridianCity_Text_CatchMonsForEasierBattles::
 ViridianCity_Text_MovesLimitedByPP::
     .string "USER TIPS\p"
     .string "The battle moves of DAEMONS are\n"
-    .string "limited by their POWER POINTs, PP.\p"
-    .string "To replenish PP, rest your tired\n"
+    .string "limited by their POWER POINTs, MP.\p"
+    .string "To replenish MP, rest your tired\n"
     .string "DAEMON at a DAEMON CENTER!$"
 
 ViridianCity_Text_GymSign::

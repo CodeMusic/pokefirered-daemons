@@ -1107,7 +1107,7 @@ Help_Text_IDNo::
 	.string "ID No.$"
 
 Help_Text_PP::
-	.string "PP$"
+	.string "MP$"
 
 Help_Text_Power::
 	.string "POWER$"
@@ -1315,10 +1315,10 @@ Help_Text_DefineIDNo::
 	.string "change even if the DAEMON is traded.$"
 
 Help_Text_DefinePP::
-	.string "PP stands for “Power Points.” It\n"
+	.string "MP stands for “Power Points.” It\n"
 	.string "indicates the number of times a certain\l"
 	.string "move can be used in battle. Like HP,\l"
-	.string "PP can be restored by visiting a DAEMON\l"
+	.string "MP can be restored by visiting a DAEMON\l"
 	.string "CENTER or using certain items.$"
 
 Help_Text_DefinePower::
