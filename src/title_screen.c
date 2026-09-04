@@ -41,6 +41,7 @@ static void VBlankCB(void);
 static void Task_TitleScreenTimer(u8 taskId);
 static void Task_TitleScreenMain(u8 taskId);
 static void CreateFaceOff(void);
+static bool32 CreateCrossingSprite(s32 x, s32 y, s32 xspeed, s32 yspeed, u8 anim);
 static void SetTitleScreenScene(s16 *data, u8 sceneNum);
 static void SetTitleScreenScene_Init(s16 *data);
 static void SetTitleScreenScene_FlashSprite(s16 *data);
@@ -103,54 +104,31 @@ static const struct OamData sOamData_FlameOrLeaf = {
     .paletteNum = 0
 };
 
-#if defined(FIRERED)
-static const union AnimCmd sSpriteAnim_Flame[] = {
-    ANIMCMD_FRAME(0, 3),
-    ANIMCMD_FRAME(4, 6),
-    ANIMCMD_FRAME(8, 6),
-    ANIMCMD_FRAME(12, 6),
-    ANIMCMD_FRAME(16, 6),
-    ANIMCMD_FRAME(20, 6),
-    ANIMCMD_FRAME(24, 6),
-    ANIMCMD_FRAME(28, 6),
-    ANIMCMD_FRAME(32, 6),
-    ANIMCMD_FRAME(36, 6),
-    ANIMCMD_END
-};
+// 9.14, and the same sentence the presents scene tells. A particle leaves ONE
+// of the two creatures and crosses toward the other; what it looks like on the
+// way says which sent it, and what happens where they meet is the point.
+//
+//   ANIM_CODE   0 and 1, cold, from the one that lunges
+//   ANIM_MUSIC  a note, warm, from the one that opens
+//   ANIM_BLOOM  played on ARRIVAL, not on a timer -- and it is the only one
+//               that ends, so the bloom is also the particle's death
+//
+// Both editions get all three: the argument does not change by cartridge.
+enum { ANIM_CODE, ANIM_MUSIC, ANIM_BLOOM };
 
-static const union AnimCmd sSpriteAnim_Flame_Unused[] = {
-    ANIMCMD_FRAME(24, 6),
-    ANIMCMD_FRAME(28, 6),
-    ANIMCMD_FRAME(32, 6),
-    ANIMCMD_FRAME(36, 6),
-    ANIMCMD_END
+static const union AnimCmd sSpriteAnim_Code[] = {
+    ANIMCMD_FRAME(0, 6), ANIMCMD_FRAME(4, 6), ANIMCMD_FRAME(8, 6), ANIMCMD_JUMP(0)
 };
-
+static const union AnimCmd sSpriteAnim_Music[] = {
+    ANIMCMD_FRAME(12, 6), ANIMCMD_FRAME(16, 6), ANIMCMD_FRAME(20, 6), ANIMCMD_JUMP(0)
+};
+static const union AnimCmd sSpriteAnim_Bloom[] = {
+    ANIMCMD_FRAME(24, 4), ANIMCMD_FRAME(28, 4),
+    ANIMCMD_FRAME(32, 5), ANIMCMD_FRAME(36, 6), ANIMCMD_END
+};
 static const union AnimCmd *const sSpriteAnim_FlameOrLeaf[] = {
-    sSpriteAnim_Flame,
-    sSpriteAnim_Flame_Unused,
+    sSpriteAnim_Code, sSpriteAnim_Music, sSpriteAnim_Bloom
 };
-
-#elif defined(LEAFGREEN)
-static const union AnimCmd sSpriteAnim_Leaf[] = {
-    ANIMCMD_FRAME(0, 8),
-    ANIMCMD_FRAME(4, 8),
-    ANIMCMD_FRAME(8, 8),
-    ANIMCMD_FRAME(12, 8),
-    ANIMCMD_FRAME(16, 8),
-    ANIMCMD_FRAME(20, 8),
-    ANIMCMD_FRAME(24, 8),
-    ANIMCMD_FRAME(28, 8),
-    ANIMCMD_FRAME(32, 8),
-    ANIMCMD_FRAME(36, 8),
-    ANIMCMD_FRAME(40, 8),
-    ANIMCMD_JUMP(0)
-};
-
-static const union AnimCmd *const sSpriteAnim_FlameOrLeaf[] = {
-    sSpriteAnim_Leaf
-};
-#endif
 
 // 9.14: the face-off. CODEMUSAI lunges and CAREMUSAI opens, in BOTH editions;
 // only the side changes, and the engine does that with a hardware flip. Both
@@ -988,6 +966,27 @@ static void CB2_FadeOutTransitionToBerryFix(void)
     }
 }
 
+static bool32 CreateCrossingSprite(s32 x, s32 y, s32 xspeed, s32 yspeed, u8 anim)
+{
+    u8 spriteId = CreateSprite(&sSpriteTemplate_FlameOrLeaf, x, y, 0);
+
+    if (spriteId == MAX_SPRITES)
+        return FALSE;
+    gSprites[spriteId].data[0] = x * 16;   // sPosX
+    gSprites[spriteId].data[1] = xspeed;   // sSpeedX
+    gSprites[spriteId].data[2] = y * 16;   // sPosY
+    gSprites[spriteId].data[3] = yspeed;   // sSpeedY
+    gSprites[spriteId].data[4] = 0;
+    gSprites[spriteId].data[6] = 0;
+#if defined(FIRERED)
+    gSprites[spriteId].callback = SpriteCallback_TitleScreenFlame;
+#else
+    gSprites[spriteId].callback = SpriteCallback_TitleScreenLeaf;
+#endif
+    StartSpriteAnim(&gSprites[spriteId], anim);
+    return TRUE;
+}
+
 static void LoadSpriteGfxAndPals(void)
 {
     s32 i;
@@ -1005,6 +1004,7 @@ static void LoadSpriteGfxAndPals(void)
 #define FACEOFF_LEFT_X   76
 #define FACEOFF_RIGHT_X  164
 #define FACEOFF_Y        104
+#define FACEOFF_MEET_X   120     // halfway, the only place worth meeting
 
 static void CreateFaceOff(void)
 {
@@ -1036,30 +1036,35 @@ static void CreateFaceOff(void)
 static void SpriteCallback_TitleScreenFlame(struct Sprite *sprite)
 {
     s16 *data = sprite->data;
-    sPosX -= sSpeedX;
-    sprite->x = sPosX >> 4;
-    if (sprite->x < -8)
-    {
-        DestroySprite(sprite);
-        return;
-    }
+    s32 dx;
+
+    // sSpeedX is SIGNED here rather than subtracted: the two sides travel in
+    // opposite directions and the old code only ever went one way.
+    sPosX += sSpeedX;
     sPosY += sSpeedY;
+    sprite->x = sPosX >> 4;
     sprite->y = sPosY >> 4;
-    if (sprite->y < 16 || sprite->y > 200)
+
+    if (data[6] == 0)
     {
-        DestroySprite(sprite);
-        return;
+        dx = sprite->x - FACEOFF_MEET_X;
+        if (dx < 0)
+            dx = -dx;
+        if (dx <= 3)
+        {
+            data[6] = 1;
+            sSpeedX = 0;
+            sSpeedY = 0;
+            StartSpriteAnim(sprite, ANIM_BLOOM);
+        }
+        else if (++data[4] > 240)
+        {
+            DestroySprite(sprite);      // never arrived; do not leak it
+            return;
+        }
     }
     if (sprite->animEnded)
-    {
         DestroySprite(sprite);
-        return;
-    }
-    if (data[7] != 0 && --data[7] == 0)
-    {
-        StartSpriteAnim(sprite, 0);
-        sprite->invisible = FALSE;
-    }
 }
 
 static bool32 CreateFlameSprite(s32 x, s32 y, s32 xspeed, s32 yspeed, bool32 createFlame)
@@ -1099,8 +1104,7 @@ static bool32 CreateFlameSprite(s32 x, s32 y, s32 xspeed, s32 yspeed, bool32 cre
 static void Task_FlameSpawner(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    s32 x, y, xspeed, yspeed;
-    s32 i;
+    s32 y, drift;
 
     switch (tState)
     {
@@ -1113,34 +1117,14 @@ static void Task_FlameSpawner(u8 taskId)
         if (tTimer >= tDelay)
         {
             tTimer = 0;
-            TitleScreen_rand(taskId, 3);
-            tDelay = 18;
-            xspeed = (TitleScreen_rand(taskId, 3) % 4) - 2;
-            yspeed = (TitleScreen_rand(taskId, 3) % 8) - 16;
-            y = (TitleScreen_rand(taskId, 3) % 3) + 116;
-            x = TitleScreen_rand(taskId, 3) % DISPLAY_WIDTH;
-            CreateFlameSprite(
-                x,
-                y,
-                xspeed,
-                yspeed,
-                (TitleScreen_rand(taskId, 3) % 16) < 8 ? FALSE : TRUE
-            );
-            for (i = 0; i < 15; i++)
-            {
-                CreateFlameSprite(
-                    tOffsetX + sFlameXPositions[i],
-                    y,
-                    xspeed,
-                    yspeed,
-                    TRUE
-                );
-                xspeed = (TitleScreen_rand(taskId, 3) % 4) - 2;
-                yspeed = (TitleScreen_rand(taskId, 3) % 8) - 16;
-            }
-            tOffsetX++;
-            if (tOffsetX > 3)
-                tOffsetX = 0;
+            tDelay = 10;
+            // One from each side, always. They are a pair or they are nothing:
+            // a bloom needs two arrivals.
+            y = FACEOFF_Y - 14 + (TitleScreen_rand(taskId, 3) % 28);
+            drift = (TitleScreen_rand(taskId, 3) % 5) - 2;
+            CreateCrossingSprite(FACEOFF_LEFT_X + 30, y, 10, drift, ANIM_CODE);
+            drift = (TitleScreen_rand(taskId, 3) % 5) - 2;
+            CreateCrossingSprite(FACEOFF_RIGHT_X - 30, y, -10, drift, ANIM_MUSIC);
         }
     }
 }
@@ -1161,32 +1145,35 @@ static void Task_FlameSpawner(u8 taskId)
 static void SpriteCallback_TitleScreenLeaf(struct Sprite *sprite)
 {
     s16 *data = sprite->data;
-    sprite->sPosX -= sSpeedX;
-    sprite->x = sprite->sPosX >> 4;
-    if (sprite->x < -8)
-    {
-        DestroySprite(sprite);
-        return;
-    }
+    s32 dx;
+
+    // sSpeedX is SIGNED here rather than subtracted: the two sides travel in
+    // opposite directions and the old code only ever went one way.
+    sPosX += sSpeedX;
     sPosY += sSpeedY;
+    sprite->x = sPosX >> 4;
     sprite->y = sPosY >> 4;
-    if (sprite->y < 16 || sprite->y > 200)
+
+    if (data[6] == 0)
     {
+        dx = sprite->x - FACEOFF_MEET_X;
+        if (dx < 0)
+            dx = -dx;
+        if (dx <= 3)
+        {
+            data[6] = 1;
+            sSpeedX = 0;
+            sSpeedY = 0;
+            StartSpriteAnim(sprite, ANIM_BLOOM);
+        }
+        else if (++data[4] > 240)
+        {
+            DestroySprite(sprite);      // never arrived; do not leak it
+            return;
+        }
+    }
+    if (sprite->animEnded)
         DestroySprite(sprite);
-        return;
-    }
-    if (!data[5])
-    { // meaningless, since data[5] and data[6] are never used outside this block
-        s32 r2;
-        s32 r1;
-        data[6]++;
-        r2 = sSpeedX * data[6];
-        r1 = sSpeedY * data[6];
-        r2 = (r2 * r2) >> 4;
-        r1 = (r1 * r1) >> 4;
-        if (r2 + r1 >= 81 << 4)
-            data[5] = TRUE;
-    }
 }
 
 static void CreateLeafSprite(s32 y, s32 xspeed, s32 yspeed)
@@ -1243,16 +1230,12 @@ static void CreateStreakSprites(void)
 static void Task_LeafSpawner(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    s32 rval;
-    s32 xspeed;
-    s32 yspeed;
-    s32 y;
+    s32 y, drift;
 
     switch (tState)
     {
     case 0:
-        CreateStreakSprites();
-        TitleScreen_srand(taskId, tOff_Seed, 30840);
+        TitleScreen_srand(taskId, 3, 30840);
         tState++;
         break;
     case 1:
@@ -1260,20 +1243,15 @@ static void Task_LeafSpawner(u8 taskId)
         if (tTimer >= tDelay)
         {
             tTimer = 0;
-            tDelay = (TitleScreen_rand(taskId, tOff_Seed) % 6) + 6;
-            rval = TitleScreen_rand(taskId, tOff_Seed) % 30;
-            xspeed = 16;
-            if (rval >= 6)
-            {
-                xspeed = 48;
-                if (rval < 12)
-                    xspeed = 24;
-            }
-            yspeed = (TitleScreen_rand(taskId, tOff_Seed) % 4) - 2;
-            y = (TitleScreen_rand(taskId, tOff_Seed) % 88) + 32;
-            CreateLeafSprite(y, xspeed, yspeed);
+            tDelay = 10;
+            // One from each side, always. They are a pair or they are nothing:
+            // a bloom needs two arrivals.
+            y = FACEOFF_Y - 14 + (TitleScreen_rand(taskId, 3) % 28);
+            drift = (TitleScreen_rand(taskId, 3) % 5) - 2;
+            CreateCrossingSprite(FACEOFF_LEFT_X + 30, y, 10, drift, ANIM_CODE);
+            drift = (TitleScreen_rand(taskId, 3) % 5) - 2;
+            CreateCrossingSprite(FACEOFF_RIGHT_X - 30, y, -10, drift, ANIM_MUSIC);
         }
-        break;
     }
 }
 
