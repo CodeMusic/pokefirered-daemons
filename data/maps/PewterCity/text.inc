@@ -31,7 +31,7 @@ PewterCity_Text_BrockOnlySeriousTrainerHere::
     .string "There aren't many serious DAEMON\n"
     .string "USERS here!\p"
     .string "They're all like BUG CATCHERs, but\n"
-    .string "SLATE GYM's BROCK is totally into\l"
+    .string "SLATE GYM's CAIRN is totally into\l"
     .string "it!$"
 
 PewterCity_Text_DidYouCheckOutMuseum::
@@ -63,12 +63,12 @@ PewterCity_Text_SprayingRepelToKeepWildMonsOut::
     .string "DAEMON out of my garden!$"
 
 PewterCity_Text_BrocksLookingForChallengersFollowMe::
-    .string "You're a USER right? BROCK's looking\n"
+    .string "You're a USER right? CAIRN's looking\n"
     .string "for new challengers! Follow me!$"
 
 PewterCity_Text_GoTakeOnBrock::
-    .string "If you have the right stuff,\n"
-    .string "go take on BROCK!$"
+    .string "If you have the right stuff, go\n"
+    .string "take on CAIRN!$"
 
 PewterCity_Text_TrainerTipsEarningEXP::
     .string "USER TIPS\p"
@@ -89,11 +89,9 @@ PewterCity_Text_MuseumOfScience::
     .string "OF SCIENCE$"
 
 PewterCity_Text_GymSign::
-    .string "SLATE CITY\n"
-    .string "DAEMON GYM\l"
-    .string "LEADER: BROCK\p"
-    .string "The Rock Solid\n"
-    .string "DAEMON USER!$"
+    .string "SLATE CITY DAEMON GYM LEADER:\n"
+    .string "CAIRN\p"
+    .string "The Rock Solid DAEMON USER!$"
 
 PewterCity_Text_CitySign::
     .string "SLATE CITY\n"

@@ -80,7 +80,7 @@ gFameCheckerFlavorText_Daisy5:: @ 0x81AD69F
 gFameCheckerFlavorText_Brock0:: @ 0x81AD705
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
 	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}SLATE CITY DAEMON GYM LEADER:\n"
-	.string "BROCK The Rock-Solid DAEMON USER!$"
+	.string "CAIRN The Rock-Solid DAEMON USER!$"
 
 gFameCheckerFlavorText_Brock1:: @ 0x81AD771
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of DAEMON?\p"
@@ -97,12 +97,12 @@ gFameCheckerFlavorText_Brock2:: @ 0x81AD840
 	.string "USERS here.\p"
 	.string "They're all like BUG CATCHERS, you\n"
 	.string "know, just hobbyists.\p"
-	.string "But SLATE GYM's BROCK isn't like\n"
+	.string "But SLATE GYM's CAIRN isn't like\n"
 	.string "that, not one bit.$"
 
 gFameCheckerFlavorText_Brock3:: @ 0x81AD908
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
-	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}BROCK is cool. He's not just tough.\n"
+	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}CAIRN is cool. He's not just tough.\n"
 	.string "People like and respect him.\p"
 	.string "I want to become a GYM LEADER\n"
 	.string "like him.$"
@@ -111,12 +111,12 @@ gFameCheckerFlavorText_Brock4:: @ 0x81AD99A
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
 	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}Hi, I'm excavating for fossils here\n"
 	.string "under MT. MOON.\p"
-	.string "Sometimes, BROCK of SLATE GYM\n"
+	.string "Sometimes, CAIRN of SLATE GYM\n"
 	.string "lends me a hand.$"
 
 gFameCheckerFlavorText_Brock5:: @ 0x81ADA27
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
-	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}BROCK rarely laughs, but is said to\n"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}CAIRN rarely laughs, but is said to\n"
 	.string "be unable to stop if he starts.$"
 
 gFameCheckerFlavorText_Misty0:: @ 0x81ADA91
@@ -636,10 +636,10 @@ gFameCheckerPersonQuote_Daisy:: @ 0x81B025D
 	.string "to my little brother.$"
 
 gFameCheckerPersonName_Brock:: @ 0x81B030F
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}BROCK$"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}CAIRN$"
 
 gFameCheckerPersonQuote_Brock:: @ 0x81B031B
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}From: BROCK To: {PLAYER}\p"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}From: CAIRN To: {PLAYER}\p"
 	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}In this big world of ours, there\n"
 	.string "must be many tough USERS.\p"
 	.string "Let's both keep training and making\n"
@@ -1114,7 +1114,7 @@ gFameCheckerFlavorTextOriginObjectName_Brock0::
 	.string "SIGN$"
 
 gFameCheckerFlavorTextOriginObjectName_Brock1::
-	.string "BROCK$"
+	.string "CAIRN$"
 
 gFameCheckerFlavorTextOriginObjectName_Brock2::
 	.string "YOUNG MAN$"
@@ -1365,8 +1365,8 @@ gFameCheckerFlavorTextOriginObjectName_Giovanni5::
 PokemonJournal_Text_SpecialFeatureBrock::
 	.string "DAEMON JOURNAL\p"
 	.string "Special Feature: SLATE GYM LEADER\n"
-	.string "BROCK!\p"
-	.string "BROCK rarely laughs, but is said to\n"
+	.string "CAIRN!\p"
+	.string "CAIRN rarely laughs, but is said to\n"
 	.string "be unable to stop if he starts.$"
 
 PokemonJournal_Text_SpecialFeatureMisty::

@@ -1,13 +1,10 @@
 RocketHideout_B4F_Text_GiovanniIntro::
-    .string "So! I must say, I am impressed you\n"
-    .string "got here.\p"
-    .string "TEAM CORPUS captures DAEMON from\n"
-    .string "around the world.\p"
-    .string "They're important tools for keeping\n"
-    .string "our criminal enterprise going.\p"
-    .string "I am the leader, GIOVANNI!\p"
-    .string "For your insolence, you will feel a\n"
-    .string "world of pain!$"
+    .string "You got down here. Good. Most\n"
+    .string "don't.\p"
+    .string "Richard Scorn. I run the numbers\n"
+    .string "upstairs.\p"
+    .string "Show me what you have. I like to\n"
+    .string "see it measured.$"
 
 RocketHideout_B4F_Text_GiovanniDefeat::
     .string "Well measured.$"

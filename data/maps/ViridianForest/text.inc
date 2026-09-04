@@ -63,10 +63,9 @@ ViridianForest_Text_CharliePostBattle::
     .string "They're a lot of fun!$"
 
 ViridianForest_Text_RanOutOfPokeBalls::
-    .string "I was throwing POKé BOXES to bind\n"
-    .string "DAEMONS, and I ran out.\p"
-    .string "That's why you can never have too\n"
-    .string "many POKé BOXES.$"
+    .string "I ran out of USERBOXes to bind\n"
+    .string "DAEMONS with!\p"
+    .string "You should carry extras!$"
 
 ViridianForest_Text_AvoidGrassyAreasWhenWeak::
     .string "USER TIPS\p"
@@ -83,11 +82,14 @@ ViridianForest_Text_ContactOakViaPCToRatePokedex::
     .string "INDEX evaluated!$"
 
 ViridianForest_Text_CantCatchOwnedMons::
-    .string "USER TIPS\p"
-    .string "You can't bind a DAEMON that\n"
-    .string "belongs to someone else.\p"
-    .string "Throw POKé BOXES only at wild\n"
-    .string "DAEMON to bind them!$"
+    .string "Cut stone, half under the moss.\p"
+    .string "A small figure carved above, hands\n"
+    .string "folded.\p"
+    .string "Symbols in rows, older than the\n"
+    .string "path.\p"
+    .string "Read across: each thing, and what\n"
+    .string "it does to each other thing.\p"
+    .string "Nobody signed it.$"
 
 ViridianForest_Text_WeakenMonsBeforeCapture::
     .string "USER TIPS\p"

@@ -15,16 +15,15 @@ PewterCity_Gym_Text_BrockIntro::
 PewterCity_Gym_Text_BrockDefeat::
     .string "I took you for granted, and so I\n"
     .string "lost.\p"
-    .string "As proof of your victory, I confer\n"
-    .string "on you this…the official DAEMON\l"
-    .string "LEAGUE BOULDERBADGE.\p"
-    .string "{FONT_NORMAL}{PLAYER} received the BOULDERBADGE\n"
-    .string "from BROCK!{PAUSE_MUSIC}{PLAY_BGM}{MUS_OBTAIN_BADGE}{PAUSE 0xFE}{PAUSE 0x56}{RESUME_MUSIC}\p"
-    .string "{FONT_MALE}Just having the BOULDERBADGE makes\n"
-    .string "your DAEMON more powerful.\p"
-    .string "It also enables the use of the\n"
-    .string "move FLASH outside of battle.\p"
-    .string "Of course, a DAEMON must know the\n"
+    .string "Proof, then. Something you can\n"
+    .string "hold.\p"
+    .string "{FONT_NORMAL}{PLAYER} received the SLATE MARK\n"
+    .string "from CAIRN!{PAUSE_MUSIC}{PLAY_BGM}{MUS_OBTAIN_BADGE}{PAUSE 0xFE}{PAUSE 0x56}{RESUME_MUSIC}\p"
+    .string "{FONT_MALE}An official mark from BENCHMARK 1.\p"
+    .string "Its bearer's daemons become more\n"
+    .string "powerful.\p"
+    .string "FLASH can now be used any time.\p"
+    .string "Of course, a daemon must know the\n"
     .string "move FLASH to use it.$"
 
 PewterCity_Gym_Text_TakeThisWithYou::
@@ -32,8 +31,7 @@ PewterCity_Gym_Text_TakeThisWithYou::
     .string "Take this with you.$"
 
 PewterCity_Gym_Text_ReceivedTM39FromBrock::
-    .string "{PLAYER} received TM39\n"
-    .string "from BROCK.$"
+    .string "{PLAYER} received TM39 from CAIRN.$"
 
 PewterCity_Gym_Text_ExplainTM39::
     .string "A TM, Technical Machine, contains a\n"
@@ -98,10 +96,10 @@ PewterCity_Gym_Text_YoureChampMaterial::
     .string "material!$"
 
 PewterCity_Gym_Text_GymStatue::
-    .string "SLATE DAEMON GYM LEADER: BROCK\p"
+    .string "SLATE DAEMON GYM LEADER: CAIRN\p"
     .string "WINNING USERS: {RIVAL}$"
 
 PewterCity_Gym_Text_GymStatuePlayerWon::
-    .string "SLATE DAEMON GYM LEADER: BROCK\p"
+    .string "SLATE DAEMON GYM LEADER: CAIRN\p"
     .string "WINNING USERS: {RIVAL}, {PLAYER}$"
 

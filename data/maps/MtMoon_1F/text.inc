@@ -87,5 +87,5 @@ MtMoon_1F_Text_ZubatIsABloodsucker::
 MtMoon_1F_Text_BrockHelpsExcavateFossils::
     .string "Hi, I'm excavating for fossils here\n"
     .string "under MT. MOON.\p"
-    .string "Sometimes, BROCK of SLATE GYM\n"
+    .string "Sometimes, CAIRN of SLATE GYM\n"
     .string "lends me a hand.$"

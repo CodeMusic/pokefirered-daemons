@@ -1,15 +1,13 @@
 PokemonLeague_BrunosRoom_Text_Intro::
     .string "I am BRUNO of the ELITE FOUR!\p"
     .string "Through rigorous training, people\n"
-    .string "and DAEMON can become stronger\l"
-    .string "without limit.\p"
-    .string "I've lived and trained with my\n"
-    .string "fighting DAEMON! And that will\l"
-    .string "never change!\p"
+    .string "and DAEMON can become stronger!\p"
+    .string "I've weight trained with my\n"
+    .string "DAEMONS!\p"
     .string "{PLAYER}!\p"
     .string "We will grind you down with our\n"
     .string "superior power!\p"
-    .string "Hoo hah!{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
+    .string "Hoo hah!$"
 
 PokemonLeague_BrunosRoom_Text_RematchIntro::
     .string "I am BRUNO of the ELITE FOUR!\p"

@@ -72,9 +72,9 @@ Text_MegaKickTaught::
     .string "only simple punching over there.$"
 
 Route4_Text_PeopleLikeAndRespectBrock::
-    .string "Oh, wow, that's the BOULDERBADGE!\n"
-    .string "You got it from BROCK, didn't you?\p"
-    .string "BROCK is cool. He's not just tough.\n"
+    .string "Oh, wow, that's the SLATE MARK!\n"
+    .string "You got it from CAIRN, didn't you?\p"
+    .string "CAIRN is cool. He's not just tough.\n"
     .string "People like and respect him.\p"
     .string "I want to become a GYM LEADER\n"
     .string "like him.$"

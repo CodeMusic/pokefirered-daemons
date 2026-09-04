@@ -32,5 +32,6 @@ CeladonCity_Condominiums_1F_Text_Nidoran::
     .string "NIDORAN♀: Kya kyaoo!$"
 
 CeladonCity_Condominiums_1F_Text_ManagersSuite::
-    .string "VERDIGRIS MANSION Manager's Suite$"
+    .string "VERDIGRIS MANSION\n"
+    .string "Manager's Suite$"
 

@@ -21,7 +21,7 @@ CeladonCity_Condominiums_3F_Text_ImGameDesignerShowMeFinishedPokedex::
 
 CeladonCity_Condominiums_3F_Text_CompletedPokedexCongratulations::
     .string "Wow! Excellent! You completed\n"
-    .string "your INDEX! Congratulations! …$"
+    .string "your INDEX! Congratulations! ...$"
 
 CeladonCity_Condominiums_3F_Text_ItsTheGameProgram::
     .string "It's the game program! Messing with\n"

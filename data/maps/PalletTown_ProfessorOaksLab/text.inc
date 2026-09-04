@@ -84,32 +84,23 @@ PalletTown_ProfessorOaksLab_Text_OakBePatientRival::
     .string "can have one too!$"
 
 PalletTown_ProfessorOaksLab_Text_OakWhichOneWillYouChoose::
-    .string "CRYSTAL: Now, {PLAYER}.\p"
-    .string "Inside those three POKé BOXES are\n"
-    .string "DAEMON.\p"
-    .string "Which one will you choose for\n"
-    .string "yourself?$"
+    .string "CRYSTAL: Now, {PLAYER}, which\n"
+    .string "DAEMON do you want?$"
 
 PalletTown_ProfessorOaksLab_Text_OakHeyDontGoAwayYet::
     .string "CRYSTAL: Hey! Don't go away yet!$"
 
 PalletTown_ProfessorOaksLab_Text_OakChoosingCharmander::
-    .string "Ah! LABL is your choice. You\n"
-    .string "should raise it patiently.\p"
-    .string "So, {PLAYER}, you're claiming the\n"
-    .string "FIRE DAEMON LABL?$"
+    .string "So! You want the CONTENT DAEMON,\n"
+    .string "LABL?$"
 
 PalletTown_ProfessorOaksLab_Text_OakChoosingSquirtle::
-    .string "Hm! CLUSTR is your choice. It's one\n"
-    .string "worth raising.\p"
-    .string "So, {PLAYER}, you've decided on the\n"
-    .string "WATER DAEMON CLUSTR?$"
+    .string "So! You want the VECTOR DAEMON,\n"
+    .string "CLUSTR?$"
 
 PalletTown_ProfessorOaksLab_Text_OakChoosingBulbasaur::
-    .string "I see! ROVERCUB is your choice.\n"
-    .string "It's very easy to raise.\p"
-    .string "So, {PLAYER}, you want to go with\n"
-    .string "the GRASS DAEMON ROVERCUB?$"
+    .string "So! You want the GROWTH DAEMON,\n"
+    .string "ROVERCUB?$"
 
 PalletTown_ProfessorOaksLab_Text_OakThisMonIsEnergetic::
     .string "This DAEMON is really quite\n"
@@ -214,9 +205,9 @@ PalletTown_ProfessorOaksLab_Text_OakAddedNothingToPokedex::
     .string "little harder.$"
 
 PalletTown_ProfessorOaksLab_Text_OakComeSeeMeSometime::
-    .string "CRYSTAL: Come see me sometimes.\p"
-    .string "I want to know how your INDEX is\n"
-    .string "coming along.$"
+    .string "CRYSTAL: Good to see you! How is\n"
+    .string "your INDEX coming? Here, let me\l"
+    .string "take a look!$"
 
 PalletTown_ProfessorOaksLab_Text_BlankEncyclopedia::
     .string "It's like an encyclopedia, but the\n"

@@ -59,14 +59,10 @@ ViridianCity_Text_WatchThatToLearnBasics::
     .string "of being a DAEMON USER.$"
 
 ViridianCity_Text_WeakenMonsFirstToCatch::
-    .string "Well, now, I've had my coffee, and\n"
-    .string "that's what I need to get going!\p"
-    .string "But I made it too strong. It gave\n"
-    .string "me a headache…\p"
-    .string "Incidentally, are you filling your\n"
-    .string "INDEX?\p"
-    .string "At first, focus on weakening the\n"
-    .string "DAEMON before trying to bind it.$"
+    .string "Watch. You weaken it, then you\n"
+    .string "offer it a box.\p"
+    .string "It goes in on its own, or it does\n"
+    .string "not go in.$"
 
 ViridianCity_Text_HowsTeachyTVHelping::
     .string "Well, now, I've had my coffee, and\n"

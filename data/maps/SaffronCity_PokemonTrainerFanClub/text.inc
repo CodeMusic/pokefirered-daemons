@@ -70,27 +70,26 @@ SaffronCity_PokemonTrainerFanClub_Text_CountingOnYou::
     .string "I believe in shorts!$"
 
 SaffronCity_PokemonTrainerFanClub_Text_BrocksMyHero::
-    .string "BROCK's my hero!\n"
-    .string "He's a man among men!\p"
+    .string "CAIRN's my hero! He's a man among\n"
+    .string "men!\p"
     .string "Heheh, I got my mom to do\n"
     .string "something for me.\p"
-    .string "I got her to embroider “BROCK”\n"
-    .string "on my shorts!$"
+    .string "I got her to embroider “CAIRN” on\n"
+    .string "my shorts!$"
 
 SaffronCity_PokemonTrainerFanClub_Text_BrocksFanToBitterEnd::
-    .string "…  …\p"
-    .string "…  …\n"
-    .string "I'm BROCK's fan!\p"
-    .string "Even if I were his only fan,\n"
-    .string "I swear it on my rock-hard will,\l"
-    .string "and on my shorts!\p"
+    .string "… …\p"
+    .string "… … I'm CAIRN's fan!\p"
+    .string "Even if I were his only fan, I\n"
+    .string "swear it on my rock-hard will, and\l"
+    .string "on my shorts!\p"
     .string "I'll be his fan to the bitter end!$"
 
 SaffronCity_PokemonTrainerFanClub_Text_BrocksLastWordOnCool::
-    .string "BROCK's the last word on cool,\n"
-    .string "end of story!\p"
-    .string "Now there's a guy who I want to\n"
-    .string "be like!$"
+    .string "CAIRN's the last word on cool, end\n"
+    .string "of story!\p"
+    .string "Now there's a guy who I want to be\n"
+    .string "like!$"
 
 SaffronCity_PokemonTrainerFanClub_Text_HadPleasureOfWatchingYouBattle::
     .string "{PLAYER}, I've had the pleasure of\n"
