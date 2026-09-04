@@ -3105,7 +3105,7 @@
       "secondaryId": 0
     },
     {
-      "english": "SMOKE BOX",
+      "english": "SMOKE BALL",
       "itemId": "ITEM_SMOKE_BALL",
       "price": 200,
       "holdEffect": "HOLD_EFFECT_CAN_ALWAYS_RUN",
@@ -3233,7 +3233,7 @@
       "secondaryId": 0
     },
     {
-      "english": "LIGHT BOX",
+      "english": "LIGHT BALL",
       "itemId": "ITEM_LIGHT_BALL",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_LIGHT_BALL",
