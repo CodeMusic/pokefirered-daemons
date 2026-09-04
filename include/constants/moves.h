@@ -357,7 +357,13 @@
 #define MOVE_DOOM_DESIRE 353
 #define MOVE_PSYCHO_BOOST 354
 
-#define MOVES_COUNT 355
+// 2.5: SWARM's reliable check on CONTEXT. Gen 1 had to INSERT it before
+// STRUGGLE, because engine/battle/core.asm asserts NUM_ATTACKS == STRUGGLE
+// and the AI reads anything above STRUGGLE as "not a move". Gen 3 makes no
+// such assertion, so here it simply appends and no existing ID moves.
+#define MOVE_CONSENSUS 355
+
+#define MOVES_COUNT 356
 
 // Used for checks for moves affected by Disable, Mimic, etc.
 #define MOVE_UNAVAILABLE 0xFFFF
