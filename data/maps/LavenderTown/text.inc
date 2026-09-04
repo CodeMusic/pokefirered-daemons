@@ -28,8 +28,7 @@ LavenderTown_Text_TownSign::
 
 LavenderTown_Text_SilphScopeNotice::
     .string "New RESOLVER!\p"
-    .string "Make the Invisible\n"
-    .string "Plain to See!\p"
+    .string "Make the Invisible Plain to See!\p"
     .string "SILPH CO.$"
 
 LavenderTown_Text_VolunteerPokemonHouse::

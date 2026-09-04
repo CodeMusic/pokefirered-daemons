@@ -39,11 +39,9 @@ VermilionCity_Text_CitySign::
 
 VermilionCity_Text_SnorlaxBlockingRoute12::
     .string "NOTICE!\p"
-    .string "ROUTE 12 may be\n"
-    .string "blocked off by a\l"
+    .string "ROUTE 12 may be blocked off by a\n"
     .string "sleeping DAEMON.\p"
-    .string "Detour through\n"
-    .string "THE BLACKOUT to\l"
+    .string "Detour through THE BLACKOUT to\n"
     .string "HALFTONE TOWN.\p"
     .string "ARDOR POLICE$"
 

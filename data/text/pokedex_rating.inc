@@ -4,7 +4,7 @@ PokedexRating_Text_HowIsPokedexComingAlong::
 	.string "Here, let me take a look.$"
 
 PokedexRating_Text_SeenXOwnedY::
-    .string "INDEX comp- letion is:\p"
+    .string "INDEX completion is:\p"
     .string "DAEMON seen DAEMON owned\p"
     .string "CRYSTAL CLEAR's Rating:$"
 

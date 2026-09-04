@@ -19,10 +19,8 @@ CinnabarIsland_Text_IslandSign::
 
 CinnabarIsland_Text_PokemonLab::
     .string "SCORN SOLUTIONS\p"
-    .string "Gold leaf, laid\n"
-    .string "over something.\p"
-    .string "Where it has\n"
-    .string "lifted, the older\l"
+    .string "Gold leaf, laid over something.\p"
+    .string "Where it has lifted, the older\n"
     .string "letters show.\p"
     .string "CLEAR LABORATORY$"
 

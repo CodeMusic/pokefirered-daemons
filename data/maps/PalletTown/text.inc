@@ -22,7 +22,7 @@ PalletTown_Text_CanStoreItemsAndMonsInPC::
     .string "and DAEMON as data via PC.$"
 
 PalletTown_Text_OakPokemonResearchLab::
-    .string "CRYSTAL DAEMON\n"
+    .string "CRYSTAL CLEAR\n"
     .string "RESEARCH LAB$"
 
 PalletTown_Text_PlayersHouse::

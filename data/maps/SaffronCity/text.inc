@@ -96,12 +96,9 @@ SaffronCity_Text_MrPsychicsHouse::
     .string "MR. PSYCHIC'S HOUSE$"
 
 SaffronCity_Text_SilphsLatestProduct::
-    .string "CORPUS NOTICE\n"
-    .string "REVIEW SCORES\p"
-    .string "Three at 30/100.\n"
-    .string "One at 94/100.\p"
-    .string "Congratulations\n"
-    .string "to our top\l"
+    .string "CORPUS NOTICE REVIEW SCORES\p"
+    .string "Three at 30/100. One at 94/100.\p"
+    .string "Congratulations to our top\n"
     .string "performer!$"
 
 SaffronCity_Text_TrainerFanClubSign::
