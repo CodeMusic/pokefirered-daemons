@@ -101,9 +101,7 @@ Route20_Text_MelissaDefeat::
     .string "You're supposed to wait!$"
 
 Route20_Text_MelissaPostBattle::
-    .string "QUICKSILVER is a volcanic island.\p"
-    .string "I heard it rose out of the sea\n"
-    .string "when a volcano erupted.$"
+    .string "QUICKSILVER is a volcanic island!$"
 
 Route20_Text_SeafoamIslands::
     .string "SEAFOAM ISLANDS$"

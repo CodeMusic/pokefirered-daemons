@@ -151,16 +151,10 @@ CeruleanCity_Text_WantBrightRedBicycle::
     .string "of that much.$"
 
 CeruleanCity_Text_ThisIsCeruleanCave::
-    .string "This is DOLDRUM CAVE.\p"
-    .string "Horribly strong DAEMONS live inside\n"
-    .string "there.\p"
-    .string "It takes a very special USER to be\n"
-    .string "allowed inside there.\p"
-    .string "You'd have to be strong enough to\n"
-    .string "become the DAEMON LEAGUE\l"
-    .string "CHAMPION for starters.\p"
-    .string "And, you would have to have made\n"
-    .string "a great achievement.$"
+    .string "This is DOLDRUM CAVE! Horribly\n"
+    .string "strong DAEMONS live in there!\p"
+    .string "The DAEMON LEAGUE champion is the\n"
+    .string "only person who is allowed in!$"
 
 CeruleanCity_Text_CitySign::
     .string "DOLDRUM CITY\n"

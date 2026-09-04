@@ -1,14 +1,13 @@
 Route25_SeaCottage_Text_ImBillHelpMeOutPal::
-    .string "Hiya! I'm a DAEMON… …No I'm not!\p"
-    .string "Call me HOLT! I'm a true-blue\n"
-    .string "POKéMANIAC!\p"
-    .string "Hey! What's with that skeptical\n"
-    .string "look?\p"
-    .string "I'm not joshing you, pal.\p"
-    .string "I screwed up an experiment and got\n"
-    .string "combined with a DAEMON!\p"
-    .string "So, how about it? Help me out\n"
-    .string "here!$"
+    .string "...Which one am I. Ask the machine.\p"
+    .string "It will not say. It was not built\n"
+    .string "to say.\p"
+    .string "I'm HOLT. I made the storage.\p"
+    .string "Two of us went in. It is holding\n"
+    .string "both.\p"
+    .string "It will hold both forever. That is\n"
+    .string "what it is for.\p"
+    .string "Help me make it choose.$"
 
 Route25_SeaCottage_Text_ImBillHelpMeOutLady::
     .string "Hiya! I'm a DAEMON… …No I'm not!\p"
@@ -44,13 +43,13 @@ Route25_SeaCottage_Text_NoPleaseBeautiful::
     .string "All right!$"
 
 Route25_SeaCottage_Text_ThanksBudTakeThis::
-    .string "HOLT: Yeehah! Thanks, bud! I owe\n"
-    .string "you one!\p"
-    .string "So, did you come to see my\n"
-    .string "DAEMONS collection?\p"
-    .string "You didn't? That's a bummer.\p"
-    .string "I've got to thank you… Oh, here,\n"
-    .string "maybe this'll do.$"
+    .string "HOLT: It chose.\p"
+    .string "I am not sure it chose correctly.\p"
+    .string "I am sure it chose.\p"
+    .string "Those are not the same thing, and\n"
+    .string "I built the machine that cannot\l"
+    .string "tell them apart.\p"
+    .string "Take this.$"
 
 Route25_SeaCottage_Text_ThanksLadyTakeThis::
     .string "HOLT: Yeehah! Thanks, lady! I owe\n"

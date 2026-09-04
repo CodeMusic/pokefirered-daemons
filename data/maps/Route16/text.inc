@@ -48,10 +48,8 @@ Route16_Text_CamronDefeat::
     .string "Bad, bad, bad!$"
 
 Route16_Text_CamronPostBattle::
-    .string "If I'm going to have DAEMONS, they\n"
-    .string "may as well be ferocious.\p"
-    .string "I'd use them to leave my enemies in\n"
-    .string "tatters.$"
+    .string "I like my DAEMONS ferocious! They\n"
+    .string "tear up enemies!$"
 
 Route16_Text_RubenIntro::
     .string "Hey, there!\n"

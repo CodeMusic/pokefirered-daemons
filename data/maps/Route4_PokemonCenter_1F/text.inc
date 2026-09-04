@@ -1,8 +1,6 @@
 Route4_PokemonCenter_1F_Text_CanHaveSixMonsWithYou::
-    .string "Okay, set six POKé BALLS in my\n"
-    .string "belt…\p"
-    .string "Yeah, that'll do it. At most, you\n"
-    .string "can have six DAEMONS with you.$"
+    .string "I've 6 USERBOXes set in my belt.\p"
+    .string "At most, you can carry 6 DAEMONS.$"
 
 Route4_PokemonCenter_1F_Text_TeamRocketAttacksCerulean::
     .string "TEAM CORPUS attacks DOLDRUM\n"

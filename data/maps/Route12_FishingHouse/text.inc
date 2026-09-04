@@ -30,14 +30,11 @@ Route12_FishingHouse_Text_OhThatsDisappointing::
     .string "That's so disappointing…$"
 
 Route12_FishingHouse_Text_TryFishingBringMeMagikarp::
-    .string "Hello there, {PLAYER}! Have you\n"
-    .string "been fishing?\p"
-    .string "Try fishing with the SUPER ROD in\n"
-    .string "any body of water.\p"
-    .string "You'll find different DAEMONS in\n"
-    .string "different places.\p"
-    .string "Oh, and don't forget to bring me\n"
-    .string "gigantic MAGIKARP.$"
+    .string "Hello there, {PLAYER}!\p"
+    .string "Use the SUPER ROD in any water!\n"
+    .string "You can bind different kinds of\l"
+    .string "DAEMONS.\p"
+    .string "Try fishing wherever you can!$"
 
 Route12_FishingHouse_Text_OhMagikarpAllowMeToSee::
     .string "Oh? {PLAYER}?\n"

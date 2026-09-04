@@ -40,21 +40,12 @@ ViridianCity_Text_ThisIsPrivateProperty::
     .string "This is private property!$"
 
 ViridianCity_Text_ShowYouHowToCatchMons::
-    .string "Well, now, I've had my coffee, and\n"
-    .string "that's what I need to get going!\p"
-    .string "Hm? What is that red box you\n"
-    .string "have?\p"
-    .string "Ah, so you're working on your\n"
-    .string "INDEX.\p"
-    .string "Then let me give you a word of\n"
-    .string "advice.\p"
-    .string "Whenever you bind a DAEMON, the\n"
-    .string "INDEX automatically updates its\l"
-    .string "data.\p"
-    .string "…You don't know how to bind a\n"
-    .string "DAEMON?\p"
-    .string "I suppose I had better show you\n"
-    .string "then!$"
+    .string "I see you're using a INDEX.\p"
+    .string "When you bind a DAEMON, INDEX is\n"
+    .string "automatically updated.\p"
+    .string "What? Don't you know how to bind\n"
+    .string "DAEMONS?\p"
+    .string "I'll show you how to then.$"
 
 ViridianCity_Text_ThatWasEducationalTakeThis::
     .string "There! Now tell me, that was\n"

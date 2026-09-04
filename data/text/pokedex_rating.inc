@@ -4,11 +4,9 @@ PokedexRating_Text_HowIsPokedexComingAlong::
 	.string "Here, let me take a look.$"
 
 PokedexRating_Text_SeenXOwnedY::
-	.string "The amount of progress you've made\n"
-	.string "on your INDEX is:\p"
-	.string "{STR_VAR_1} DAEMON seen and {STR_VAR_2}\n"
-	.string "DAEMON owned.\p"
-	.string "{FONT_NORMAL}CRYSTAL CLEAR's rating:$"
+    .string "INDEX comp- letion is:\p"
+    .string "DAEMON seen DAEMON owned\p"
+    .string "CRYSTAL CLEAR's Rating:$"
 
 PokedexRating_Text_LessThan10::
 	.string "You still have lots to do.\p"
@@ -22,10 +20,8 @@ PokedexRating_Text_LessThan20::
 	.string "HM. Make sure you go get it!$"
 
 PokedexRating_Text_LessThan30::
-	.string "Your INDEX could use a bit more\n"
-	.string "volume still!\p"
-	.string "Try to bind other species of\n"
-	.string "DAEMON!$"
+    .string "You still need more DAEMON! Try to\n"
+    .string "bind other species!$"
 
 PokedexRating_Text_LessThan40::
 	.string "Good, it's apparent that you're\n"
@@ -83,8 +79,8 @@ PokedexRating_Text_LessThan150::
 	.string "the DAEMON PROFESSOR now!$"
 
 PokedexRating_Text_Complete::
-	.string "Your INDEX is entirely complete!\n"
-	.string "Congratulations!!$"
+    .string "Your INDEX is entirely complete!\n"
+    .string "Congratulations!$"
 
 PokedexRating_Text_NationalDexSeenXOwnedY::
 	.string "And your NATIONAL INDEX is:\p"

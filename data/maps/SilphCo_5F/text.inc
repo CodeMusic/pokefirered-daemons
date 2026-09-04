@@ -66,8 +66,8 @@ SilphCo_5F_Text_Over350TechniquesConfirmed::
 
 SilphCo_5F_Text_SomeMonsEvolveWhenTraded::
     .string "It's a DAEMON REPORT!\p"
-    .string "Some DAEMONS have been confirmed\n"
-    .string "to evolve when they are traded.$"
+    .string "4 DAEMONS evolve only when traded\n"
+    .string "by link-cable.$"
 
 SilphCo_5F_Text_FloorSign::
     .string "SILPH CO. HEAD OFFICE\n"

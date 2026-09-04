@@ -3,7 +3,7 @@ Route12_NorthEntrance_2F_Text_TakeTMDontNeedAnymoreMale::
     .string "My DAEMONS's ashes are stored in\n"
     .string "DAEMON TOWER.\p"
     .string "You can have this TM. I don't need\n"
-    .string "it anymore…$"
+    .string "it any more...$"
 
 Route12_NorthEntrance_2F_Text_TakeTMDontNeedAnymoreFemale::
     .string "My DAEMONS's ashes are stored in\n"

@@ -85,10 +85,8 @@ Route25_Text_NobDefeat::
     .string "too!$"
 
 Route25_Text_NobPostBattle::
-    .string "The POKéMANIAC sure lives up to\n"
-    .string "his name.\p"
-    .string "His collection includes many rare\n"
-    .string "species of DAEMON.$"
+    .string "The collector has many rare kinds\n"
+    .string "of DAEMONS.$"
 
 Route25_Text_WayneIntro::
     .string "You're going to see HOLT? First,\n"
