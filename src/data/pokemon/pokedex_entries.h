@@ -1718,7 +1718,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_DITTO] =
     {
-        .categoryName = _("TRANSFORM"),
+        .categoryName = _("PERSPECTIVE"),
         .height = 3,
         .weight = 40,
         .description = gDittoPokedexText,

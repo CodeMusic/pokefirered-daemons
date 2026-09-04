@@ -266,7 +266,7 @@
     },
     {
       "id": "MAPSEC_PALLET_TOWN",
-      "name": "PALLET TOWN",
+      "name": "BLANCHE TOWN",
       "x": 4,
       "y": 11,
       "width": 1,
@@ -274,7 +274,7 @@
     },
     {
       "id": "MAPSEC_VIRIDIAN_CITY",
-      "name": "VIRIDIAN CITY",
+      "name": "CALLOW CITY",
       "x": 4,
       "y": 8,
       "width": 1,
@@ -282,7 +282,7 @@
     },
     {
       "id": "MAPSEC_PEWTER_CITY",
-      "name": "PEWTER CITY",
+      "name": "SLATE CITY",
       "x": 4,
       "y": 4,
       "width": 1,
@@ -290,7 +290,7 @@
     },
     {
       "id": "MAPSEC_CERULEAN_CITY",
-      "name": "CERULEAN CITY",
+      "name": "DOLDRUM CITY",
       "x": 14,
       "y": 3,
       "width": 1,
@@ -298,7 +298,7 @@
     },
     {
       "id": "MAPSEC_LAVENDER_TOWN",
-      "name": "LAVENDER TOWN",
+      "name": "HALFTONE TOWN",
       "x": 18,
       "y": 6,
       "width": 1,
@@ -306,7 +306,7 @@
     },
     {
       "id": "MAPSEC_VERMILION_CITY",
-      "name": "VERMILION CITY",
+      "name": "ARDOR CITY",
       "x": 14,
       "y": 9,
       "width": 1,
@@ -314,7 +314,7 @@
     },
     {
       "id": "MAPSEC_CELADON_CITY",
-      "name": "CELADON CITY",
+      "name": "VERDIGRIS CITY",
       "x": 11,
       "y": 6,
       "width": 1,
@@ -322,7 +322,7 @@
     },
     {
       "id": "MAPSEC_FUCHSIA_CITY",
-      "name": "FUCHSIA CITY",
+      "name": "LURID CITY",
       "x": 12,
       "y": 12,
       "width": 1,
@@ -330,7 +330,7 @@
     },
     {
       "id": "MAPSEC_CINNABAR_ISLAND",
-      "name": "CINNABAR ISLAND",
+      "name": "QUICKSILVER IS.",
       "x": 4,
       "y": 14,
       "width": 1,
@@ -338,7 +338,7 @@
     },
     {
       "id": "MAPSEC_INDIGO_PLATEAU",
-      "name": "INDIGO PLATEAU",
+      "name": "UMBRA PLATEAU",
       "x": 2,
       "y": 3,
       "width": 1,
@@ -346,7 +346,7 @@
     },
     {
       "id": "MAPSEC_SAFFRON_CITY",
-      "name": "SAFFRON CITY",
+      "name": "BRAZEN CITY",
       "x": 14,
       "y": 6,
       "width": 1,
@@ -572,7 +572,7 @@
     },
     {
       "id": "MAPSEC_VIRIDIAN_FOREST",
-      "name": "VIRIDIAN FOREST",
+      "name": "THE UNDERTONE",
       "x": 0,
       "y": 0,
       "width": 1,
@@ -621,7 +621,7 @@
     },
     {
       "id": "MAPSEC_KANTO_VICTORY_ROAD",
-      "name": "VICTORY ROAD",
+      "name": "UMBRAL ASCENT",
       "x": 0,
       "y": 0,
       "width": 1,
@@ -629,7 +629,7 @@
     },
     {
       "id": "MAPSEC_ROCKET_HIDEOUT",
-      "name": "ROCKET HIDEOUT",
+      "name": "CORPUS HIDEOUT",
       "x": 0,
       "y": 0,
       "width": 1,
@@ -645,7 +645,7 @@
     },
     {
       "id": "MAPSEC_POKEMON_MANSION",
-      "name": "POKéMON MANSION",
+      "name": "DAEMON MANSION",
       "x": 0,
       "y": 0,
       "width": 1,
@@ -661,7 +661,7 @@
     },
     {
       "id": "MAPSEC_POKEMON_LEAGUE",
-      "name": "POKéMON LEAGUE",
+      "name": "DAEMON LEAGUE",
       "x": 0,
       "y": 0,
       "width": 1,
@@ -669,7 +669,7 @@
     },
     {
       "id": "MAPSEC_ROCK_TUNNEL",
-      "name": "ROCK TUNNEL",
+      "name": "THE BLACKOUT",
       "x": 0,
       "y": 0,
       "width": 1,
@@ -685,7 +685,7 @@
     },
     {
       "id": "MAPSEC_POKEMON_TOWER",
-      "name": "POKéMON TOWER",
+      "name": "DAEMON TOWER",
       "x": 0,
       "y": 0,
       "width": 1,
@@ -693,7 +693,7 @@
     },
     {
       "id": "MAPSEC_CERULEAN_CAVE",
-      "name": "CERULEAN CAVE",
+      "name": "DOLDRUM CAVE",
       "x": 0,
       "y": 0,
       "width": 1,
@@ -901,7 +901,7 @@
     },
     {
       "id": "MAPSEC_TRAINER_TOWER",
-      "name": "TRAINER TOWER",
+      "name": "USER TOWER",
       "x": 5,
       "y": 6,
       "width": 1,
@@ -989,7 +989,7 @@
     },
     {
       "id": "MAPSEC_ROCKET_WAREHOUSE",
-      "name": "ROCKET WAREHOUSE",
+      "name": "CORPUS WAREHOUSE",
       "x": 0,
       "y": 0,
       "width": 1,
@@ -997,7 +997,7 @@
     },
     {
       "id": "MAPSEC_TRAINER_TOWER_2",
-      "name": "TRAINER TOWER",
+      "name": "USER TOWER",
       "name_clone": true,
       "x": 0,
       "y": 0,
@@ -1134,7 +1134,7 @@
     },
     {
       "id": "MAPSEC_SPECIAL_AREA",
-      "name": "CELADON DEPT.",
+      "name": "VERDIGRIS DEPT.",
       "x": 0,
       "y": 0,
       "width": 0,
