@@ -24,7 +24,7 @@ CeladonCity_Text_BlewItAllAtSlots::
 CeladonCity_Text_MyTrustedPalPoliwrath::
     .string "This is my trusted pal, POLIWRATH.\p"
     .string "It evolved from a POLIWHIRL when\n"
-    .string "I used a WATER STONE.$"
+    .string "I used a AFFECT.$"
 
 CeladonCity_Text_Poliwrath::
     .string "POLIWRATH: Ribi ribit!$"
@@ -113,9 +113,9 @@ Text_SoftboiledTaught::
 
 CeladonCity_Text_SomeoneStoleSilphScope::
     .string "Oh, what am I to do…\p"
-    .string "Someone stole our SILPH SCOPE.\p"
-    .string "The thief came running this way,\n"
-    .string "I'm sure of it.\p"
-    .string "But I lost sight of him!\n"
-    .string "Where'd he go?$"
+    .string "Someone stole our RESOLVER.\p"
+    .string "The thief came running this way, I'm\n"
+    .string "sure of it.\p"
+    .string "But I lost sight of him! Where'd he\n"
+    .string "go?$"
 

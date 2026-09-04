@@ -1302,7 +1302,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_VOLTORB] =
     {
-        .categoryName = _("BALL"),
+        .categoryName = _("BOX"),
         .height = 5,
         .weight = 104,
         .description = gVoltorbPokedexText,
@@ -1315,7 +1315,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_ELECTRODE] =
     {
-        .categoryName = _("BALL"),
+        .categoryName = _("BOX"),
         .height = 12,
         .weight = 666,
         .description = gElectrodePokedexText,
@@ -2277,7 +2277,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_TOGEPI] =
     {
-        .categoryName = _("SPIKE BALL"),
+        .categoryName = _("SPIKE BOX"),
         .height = 3,
         .weight = 15,
         .description = gTogepiPokedexText,
@@ -4162,7 +4162,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_WAILMER] =
     {
-        .categoryName = _("BALL WHALE"),
+        .categoryName = _("BOX WHALE"),
         .height = 20,
         .weight = 1300,
         .description = gWailmerPokedexText,
@@ -4734,7 +4734,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SEALEO] =
     {
-        .categoryName = _("BALL ROLL"),
+        .categoryName = _("BOX ROLL"),
         .height = 11,
         .weight = 876,
         .description = gSealeoPokedexText,
@@ -4864,7 +4864,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_BELDUM] =
     {
-        .categoryName = _("IRON BALL"),
+        .categoryName = _("IRON BOX"),
         .height = 6,
         .weight = 952,
         .description = gBeldumPokedexText,

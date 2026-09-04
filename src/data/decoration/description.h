@@ -3,9 +3,9 @@ const u8 DecorDesc_SMALL_DESK[] = _(
         "for one.");
 
 const u8 DecorDesc_POKEMON_DESK[] = _(
-    "A small desk built in\n"
+        "A small desk built in\n"
         "the shape of a POKé\n"
-        "BALL.");
+        "BOX.");
 
 const u8 DecorDesc_HEAVY_DESK[] = _(
     "A large desk made\n"
@@ -47,9 +47,9 @@ const u8 DecorDesc_SMALL_CHAIR[] = _(
         "for one.");
 
 const u8 DecorDesc_POKEMON_CHAIR[] = _(
-    "A small chair built\n"
+        "A small chair built\n"
         "in the shape of a\n"
-        "POKé BALL.");
+        "POKé BOX.");
 
 const u8 DecorDesc_HEAVY_CHAIR[] = _(
     "A small chair made\n"
@@ -172,7 +172,7 @@ const u8 DecorDesc_STAND[] = _(
         "with steps.");
 
 const u8 DecorDesc_MUD_BALL[] = _(
-    "A large ball of mud.\n"
+        "A large box of mud.\n"
         "Crumbles if stepped\n"
         "on.");
 
@@ -306,9 +306,9 @@ const u8 DecorDesc_SPIKES_MAT[] = _(
         "Put items on top.");
 
 const u8 DecorDesc_BALL_POSTER[] = _(
-    "A small poster\n"
+        "A small poster\n"
         "printed with POKé\n"
-        "BALLS.");
+        "BOXES.");
 
 const u8 DecorDesc_GREEN_POSTER[] = _(
     "A small poster with\n"
@@ -503,7 +503,7 @@ const u8 DecorDesc_DIAMOND_CUSHION[] = _(
         "or a desk.");
 
 const u8 DecorDesc_BALL_CUSHION[] = _(
-    "A BALL cushion.\n"
+        "A BOX cushion.\n"
         "Place it on a mat\n"
         "or a desk.");
 

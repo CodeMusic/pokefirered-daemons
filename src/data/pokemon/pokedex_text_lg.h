@@ -198,9 +198,9 @@ const u8 gSandshrewPokedexText[] = _(
 const u8 gSandshrewPokedexTextUnused[] = _("");
 
 const u8 gSandslashPokedexText[] = _(
-    "Curls up into a spiny ball when\n"
-    "threatened. It can roll while curled up\n"
-    "to attack or escape.");
+        "Curls up into a spiny box when\n"
+        "threatened. It can roll while curled up\n"
+        "to attack or escape.");
 
 const u8 gSandslashPokedexTextUnused[] = _("");
 
@@ -702,9 +702,9 @@ const u8 gKinglerPokedexText[] = _(
 const u8 gKinglerPokedexTextUnused[] = _("");
 
 const u8 gVoltorbPokedexText[] = _(
-    "Usually found in power plants. Easily\n"
-    "mistaken for a POKé BALL, it has\n"
-    "zapped many people.");
+        "Usually found in power plants. Easily\n"
+        "mistaken for a POKé BOX, it has\n"
+        "zapped many people.");
 
 const u8 gVoltorbPokedexTextUnused[] = _("");
 
@@ -1087,9 +1087,9 @@ const u8 gMeganiumPokedexText[] = _(
 const u8 gMeganiumPokedexTextUnused[] = _("");
 
 const u8 gCyndaquilPokedexText[] = _(
-    "It is timid and always curls itself up in\n"
-    "a ball. If attacked, it flares up its back\n"
-    "for protection.");
+        "It is timid and always curls itself up in\n"
+        "a box. If attacked, it flares up its back\n"
+        "for protection.");
 
 const u8 gCyndaquilPokedexTextUnused[] = _("");
 
@@ -2047,7 +2047,7 @@ const u8 gNinjaskPokedexTextUnused[] = _("");
 
 const u8 gShedinjaPokedexText[] = _(
         "A most peculiar DAEMON that somehow\n"
-        "appears in a POKé BALL when a NINCADA\n"
+        "appears in a POKé BOX when a NINCADA\n"
         "evolves.");
 
 const u8 gShedinjaPokedexTextUnused[] = _("");
@@ -2242,9 +2242,9 @@ const u8 gSharpedoPokedexText[] = _(
 const u8 gSharpedoPokedexTextUnused[] = _("");
 
 const u8 gWailmerPokedexText[] = _(
-    "When it sucks in a large volume of\n"
-    "seawater, it becomes like a big, bouncy\n"
-    "ball. It eats a ton of food daily.");
+        "When it sucks in a large volume of\n"
+        "seawater, it becomes like a big, bouncy\n"
+        "box. It eats a ton of food daily.");
 
 const u8 gWailmerPokedexTextUnused[] = _("");
 

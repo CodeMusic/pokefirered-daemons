@@ -19,8 +19,8 @@ SilphCo_11F_Text_ThanksForSavingMeDearGirl::
     .string "Here, maybe this will do.$"
 
 SilphCo_11F_Text_ObtainedMasterBallFromPresident::
-    .string "{PLAYER} obtained a MASTER BALL\n"
-    .string "from the PRESIDENT!$"
+    .string "{PLAYER} obtained a ROOTBOX from\n"
+    .string "the PRESIDENT!$"
 
 SilphCo_11F_Text_ThatsOurSecretPrototype::
     .string "PRESIDENT: You can't buy that\n"

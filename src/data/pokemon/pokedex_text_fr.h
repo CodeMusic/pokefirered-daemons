@@ -188,9 +188,9 @@ const u8 gRaichuPokedexText[] = _(
 const u8 gRaichuPokedexTextUnused[] = _("");
 
 const u8 gSandshrewPokedexText[] = _(
-    "It burrows and lives underground.\n"
-    "If threatened, it curls itself up into a\n"
-    "ball for protection.");
+        "It burrows and lives underground. If\n"
+        "threatened, it curls itself up into a\n"
+        "box for protection.");
 
 const u8 gSandshrewPokedexTextUnused[] = _("");
 
@@ -2056,7 +2056,7 @@ const u8 gNinjaskPokedexTextUnused[] = _("");
 
 const u8 gShedinjaPokedexText[] = _(
         "A most peculiar DAEMON that somehow\n"
-        "appears in a POKé BALL when a NINCADA\n"
+        "appears in a POKé BOX when a NINCADA\n"
         "evolves.");
 
 const u8 gShedinjaPokedexTextUnused[] = _("");
@@ -2251,9 +2251,9 @@ const u8 gSharpedoPokedexText[] = _(
 const u8 gSharpedoPokedexTextUnused[] = _("");
 
 const u8 gWailmerPokedexText[] = _(
-    "When it sucks in a large volume of\n"
-    "seawater, it becomes like a big, bouncy\n"
-    "ball. It eats a ton of food daily.");
+        "When it sucks in a large volume of\n"
+        "seawater, it becomes like a big, bouncy\n"
+        "box. It eats a ton of food daily.");
 
 const u8 gWailmerPokedexTextUnused[] = _("");
 

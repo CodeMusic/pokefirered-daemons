@@ -11,7 +11,7 @@ SafariZone_Text_TimesUp::
 
 SafariZone_Text_OutOfBalls::
 	.string "PA: Ding-dong!\p"
-	.string "You are out of SAFARI BALLS!\p"
+	.string "You are out of GUESTBOXES!\p"
 	.string "PA: Your SAFARI GAME is over!$"
 
 SafariZone_Text_WelcomeToSafariZone::

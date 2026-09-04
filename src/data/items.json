@@ -97,12 +97,12 @@
       "secondaryId": 4
     },
     {
-      "english": "NET BALL",
+      "english": "NET BOX",
       "itemId": "ITEM_NET_BALL",
       "price": 1000,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A somewhat different BALL that\\nworks especially well on WATER- and\\lBUG-type DAEMON.",
+      "description_english": "A somewhat different BOX that works\\nespecially well on WATER- and\\lBUG-type DAEMON.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_POKE_BALLS",
@@ -113,12 +113,12 @@
       "secondaryId": 5
     },
     {
-      "english": "DIVE BALL",
+      "english": "DIVE BOX",
       "itemId": "ITEM_DIVE_BALL",
       "price": 1000,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A somewhat different BALL that\\nworks especially well on DAEMON\\ldeep in the sea.",
+      "description_english": "A somewhat different BOX that\\nworks especially well on DAEMON\\ldeep in the sea.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_POKE_BALLS",
@@ -129,12 +129,12 @@
       "secondaryId": 6
     },
     {
-      "english": "NEST BALL",
+      "english": "NEST BOX",
       "itemId": "ITEM_NEST_BALL",
       "price": 1000,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A somewhat different BALL that\\nworks especially well on weaker\\lDAEMON.",
+      "description_english": "A somewhat different BOX that\\nworks especially well on weaker\\lDAEMON.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_POKE_BALLS",
@@ -145,12 +145,12 @@
       "secondaryId": 7
     },
     {
-      "english": "REPEAT BALL",
+      "english": "REPEAT BOX",
       "itemId": "ITEM_REPEAT_BALL",
       "price": 1000,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A somewhat different BALL that\\nworks especially well on DAEMON\\lbound before.",
+      "description_english": "A somewhat different BOX that\\nworks especially well on DAEMON\\lbound before.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_POKE_BALLS",
@@ -161,12 +161,12 @@
       "secondaryId": 8
     },
     {
-      "english": "TIMER BALL",
+      "english": "TIMER BOX",
       "itemId": "ITEM_TIMER_BALL",
       "price": 1000,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A somewhat different BALL that\\nbecomes progressively better the\\nmore turns there are in a battle.",
+      "description_english": "A somewhat different BOX that\\nbecomes progressively better the\\lmore turns there are in a battle.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_POKE_BALLS",
@@ -177,12 +177,12 @@
       "secondaryId": 9
     },
     {
-      "english": "LUXURY BALL",
+      "english": "LUXURY BOX",
       "itemId": "ITEM_LUXURY_BALL",
       "price": 1000,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A comfortable BALL that makes a\\ncaptured wild DAEMON quickly grow\\lfriendly.",
+      "description_english": "A comfortable BOX that makes a\\ncaptured wild DAEMON quickly grow\\lfriendly.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_POKE_BALLS",
@@ -193,12 +193,12 @@
       "secondaryId": 10
     },
     {
-      "english": "PREMIER BALL",
+      "english": "PREMIER BOX",
       "itemId": "ITEM_PREMIER_BALL",
       "price": 200,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A rare BALL that has been\\nspecially made to commemorate an\\nevent of some sort.",
+      "description_english": "A rare BOX that has been\\nspecially made to commemorate an\\levent of some sort.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_POKE_BALLS",
@@ -3105,7 +3105,7 @@
       "secondaryId": 0
     },
     {
-      "english": "SMOKE BALL",
+      "english": "SMOKE BOX",
       "itemId": "ITEM_SMOKE_BALL",
       "price": 200,
       "holdEffect": "HOLD_EFFECT_CAN_ALWAYS_RUN",
@@ -3233,7 +3233,7 @@
       "secondaryId": 0
     },
     {
-      "english": "LIGHT BALL",
+      "english": "LIGHT BOX",
       "itemId": "ITEM_LIGHT_BALL",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_LIGHT_BALL",

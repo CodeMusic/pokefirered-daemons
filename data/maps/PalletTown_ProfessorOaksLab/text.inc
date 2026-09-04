@@ -85,7 +85,7 @@ PalletTown_ProfessorOaksLab_Text_OakBePatientRival::
 
 PalletTown_ProfessorOaksLab_Text_OakWhichOneWillYouChoose::
     .string "CRYSTAL: Now, {PLAYER}.\p"
-    .string "Inside those three POKé BALLS are\n"
+    .string "Inside those three POKé BOXES are\n"
     .string "DAEMON.\p"
     .string "Which one will you choose for\n"
     .string "yourself?$"
@@ -174,7 +174,7 @@ PalletTown_ProfessorOaksLab_Text_OakCatchMonsForDataTakeThese::
     .string "{PLAYER} got 5 USERBOXes!$"
 
 PalletTown_ProfessorOaksLab_Text_ReceivedFivePokeBalls::
-    .string "{PLAYER} received five POKé BALLS.$"
+    .string "{PLAYER} received five POKé BOXES.$"
 
 PalletTown_ProfessorOaksLab_Text_OakExplainCatching::
     .string "When a wild DAEMON appears, it's\n"

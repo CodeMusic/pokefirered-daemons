@@ -119,7 +119,7 @@ Help_Text_RanOutOfPotions::
 	.string "I ran out of POTIONS.$"
 
 Help_Text_CanIBuyPokeBalls::
-	.string "Can I buy POKé BALLS?$"
+	.string "Can I buy POKé BOXES?$"
 
 Help_Text_WhatsATrainer::
 	.string "What's a USER?$"
@@ -342,11 +342,11 @@ Help_Text_AnswerWhatHappensIfAllMyMonsFaint::
 
 Help_Text_AnswerCantCatchMons::
 	.string "If a wild DAEMON escapes from a POKé\n"
-	.string "BALL, it's obviously still feisty. Try\l"
+	.string "BOX, it's obviously still feisty. Try\l"
 	.string "reducing its HP some more, and try to\l"
 	.string "weaken it with paralysis or sleep\l"
 	.string "before trying to bind it. If the POKé\l"
-	.string "BALL rocks for a while, the quarry is\l"
+	.string "BOX rocks for a while, the quarry is\l"
 	.string "close to being bound!$"
 
 Help_Text_AnswerRanOutOfPotions::
@@ -358,10 +358,10 @@ Help_Text_AnswerRanOutOfPotions::
 	.string "DAEMON MART.$"
 
 Help_Text_AnswerCanIBuyPokeBalls::
-	.string "You may buy POKé BALLS at any DAEMON\n"
+	.string "You may buy POKé BOXES at any DAEMON\n"
 	.string "MART in any town. You will not find\l"
 	.string "DAEMON MARTS on roads, in forests, or\l"
-	.string "in caves. Stock up on POKé BALLS while\l"
+	.string "in caves. Stock up on POKé BOXES while\l"
 	.string "you are visiting a town with a DAEMON\l"
 	.string "MART.$"
 
@@ -498,15 +498,15 @@ Help_Text_AnswerWhatDoesHiddenMoveDo::
 
 Help_Text_AnswerWhatDoIDoInSafari::
 	.string "Try to bind wild DAEMON by throwing the\n"
-	.string "special SAFARI BALLS. You may keep\l"
-	.string "any item you find, too.$"
+	.string "special GUESTBOXES. You may keep any\l"
+	.string "item you find, too.$"
 
 Help_Text_AnswerWhatAreSafariRules::
 	.string "Your SAFARI GAME ends once you have\n"
 	.string "traveled a certain distance or thrown\l"
-	.string "all your SAFARI BALLS.\l"
-	.string "Open the MENU to check the remaining\l"
-	.string "number of steps and SAFARI BALLS.$"
+	.string "all your GUESTBOXES. Open the MENU to\l"
+	.string "check the remaining number of steps and\l"
+	.string "GUESTBOXES.$"
 
 Help_Text_AnswerWantToEndSafari::
 	.string "If you would like to cut your SAFARI\n"
@@ -547,7 +547,7 @@ Help_Text_UsingKeyItem::
 	.string "  Using a key item$"
 
 Help_Text_UsingPokeBall::
-	.string "  Using a POKé BALL$"
+	.string "  Using a POKé BOX$"
 
 Help_Text_UsingPlayer::
 	.string " Using “{PLAYER}”$"
@@ -655,7 +655,7 @@ Help_Text_RegisterKeyItem::
 	.string "  “REGISTER” a key item$"
 
 Help_Text_UsingBall::
-	.string " Using “BALL”$"
+	.string " Using “BOX”$"
 
 Help_Text_UsingBait::
 	.string " Using “BAIT”$"
@@ -712,7 +712,7 @@ Help_Text_HowToUseBag::
 	.string "   Pad to check the data headings:\n"
 	.string "   “ITEMS”\n"
 	.string "   “KEY ITEMS”\n"
-	.string "   “POKé BALLS”\n"
+	.string "   “POKé BOXES”\n"
 	.string "   Press up or down to select an item.$"
 
 Help_Text_HowToUseAnItem::
@@ -733,12 +733,12 @@ Help_Text_HowToUseKeyItem::
 
 Help_Text_HowToUsePokeBall::
 	.string "{CIRCLE_1} While battling a wild DAEMON,\n"
-	.string "   select the BAG's “POKé BALLS”\n"
+	.string "   select the BAG's “POKé BOXES”\n"
 	.string "   POCKET.\n"
 	.string "{CIRCLE_2} Press up or down on the {PLUS} Control\n"
-	.string "   Pad to select a POKé BALL.\n"
+	.string "   Pad to select a POKé BOX.\n"
 	.string "{CIRCLE_3} Select “USE” to throw the selected\n"
-	.string "   POKé BALL.$"
+	.string "   POKé BOX.$"
 
 Help_Text_HowToUsePlayer::
 	.string "{CIRCLE_1} Select “{PLAYER}” on the MENU.\n"
@@ -963,12 +963,12 @@ Help_Text_HowToUseBag2::
 	.string "   Pad to check the data headings:\n"
 	.string "   “ITEMS”\n"
 	.string "   “KEY ITEMS”\n"
-	.string "   “POKé BALLS”\n"
+	.string "   “POKé BOXES”\n"
 	.string "   Press up or down to select an item.$"
 
 Help_Text_HowToReadPokedex::
 	.string "{CIRCLE_1} DAEMON that you have bound are\n"
-	.string "   identified by a POKé BALL mark on\n"
+	.string "   identified by a POKé BOX mark on\n"
 	.string "   the INDEX list.\n"
 	.string "{CIRCLE_2} A bound DAEMON will provide a\n"
 	.string "   large amount of data.\n"
@@ -1031,15 +1031,15 @@ Help_Text_HowToRegisterKeyItem::
 
 Help_Text_HowToUseBall::
 	.string "{CIRCLE_1} Select to throw the special POKé\n"
-	.string "   BALL used only in the SAFARI ZONE.\n"
+	.string "   BOX used only in the SAFARI ZONE.\n"
 	.string "When wild DAEMON appear, throw lots\n"
-	.string "of SAFARI BALLS to bind them!$"
+	.string "of GUESTBOXES to bind them!$"
 
 Help_Text_HowToUseBait::
 	.string "{CIRCLE_1} Select to throw the special food\n"
 	.string "   used only in the SAFARI ZONE.\n"
 	.string "It is DAEMON food rolled up into\n"
-	.string "a ball for easy eating. When BAIT is\n"
+	.string "a box for easy eating. When BAIT is\n"
 	.string "thrown, the wild DAEMON may get\n"
 	.string "attracted by it, and may not DETACH!$"
 
@@ -1125,7 +1125,7 @@ Help_Text_KeyItems::
 	.string "KEY ITEMS$"
 
 Help_Text_PokeBalls::
-	.string "POKé BALLS$"
+	.string "POKé BOXES$"
 
 Help_Text_Pokedex::
 	.string "INDEX$"
@@ -1356,9 +1356,9 @@ Help_Text_DefineKeyItems::
 	.string "without opening the MENU and BAG.$"
 
 Help_Text_DefinePokeBalls::
-	.string "POKé BALLS, which are used for binding\n"
+	.string "POKé BOXES, which are used for binding\n"
 	.string "wild DAEMONS, are placed in the POKé\l"
-	.string "BALLS POCKET. POKé BALLS may be\l"
+	.string "BOXES POCKET. POKé BOXES may be\l"
 	.string "bought at DAEMON MARTS. They may be\l"
 	.string "used, given to a DAEMON to hold, or\l"
 	.string "tossed out as garbage.$"

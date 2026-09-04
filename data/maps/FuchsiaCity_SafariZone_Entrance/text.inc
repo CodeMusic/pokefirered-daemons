@@ -10,16 +10,16 @@ FuchsiaCity_SafariZone_Entrance_Text_PlaySafariGameFor500::
 
 FuchsiaCity_SafariZone_Entrance_Text_ThatllBe500WeOnlyUseSpecialBalls::
     .string "That'll be ¥500, please!\p"
-    .string "We only use a special kind of \n"
-    .string "POKé BALLS here.$"
+    .string "We only use a special kind of POKé\n"
+    .string "BOXES here.$"
 
 FuchsiaCity_SafariZone_Entrance_Text_PlayerReceived30SafariBalls::
-    .string "{PLAYER} received 30 SAFARI BALLS\n"
+    .string "{PLAYER} received 30 GUESTBOXES\n"
     .string "from the attendant.$"
 
 FuchsiaCity_SafariZone_Entrance_Text_CallYouOnPAWhenYouRunOut::
     .string "We'll call you on the PA when you\n"
-    .string "run out of time or SAFARI BALLS.\p"
+    .string "run out of time or GUESTBOXES.\p"
     .string "Well, I'll wish you the best of\n"
     .string "luck!$"
 
@@ -36,8 +36,8 @@ FuchsiaCity_SafariZone_Entrance_Text_GoingToLeaveSafariZoneEarly::
     .string "SAFARI ZONE early?$"
 
 FuchsiaCity_SafariZone_Entrance_Text_PleaseReturnSafariBalls::
-    .string "Please return any SAFARI BALLS\n"
-    .string "you may have left.$"
+    .string "Please return any GUESTBOXES you\n"
+    .string "may have left.$"
 
 FuchsiaCity_SafariZone_Entrance_Text_GoodLuck::
     .string "Good luck!$"
@@ -55,18 +55,18 @@ FuchsiaCity_SafariZone_Entrance_Text_ExplainSafariZone::
     .string "zones in it.\p"
     .string "Each zone has different kinds of\n"
     .string "DAEMONS, even some rare ones.\p"
-    .string "Use the supplied SAFARI BALLS to\n"
+    .string "Use the supplied GUESTBOXES to\n"
     .string "bind them.\p"
     .string "You can also throw BAIT or ROCKS\n"
-    .string "besides the SAFARI BALLS.\p"
+    .string "besides the GUESTBOXES.\p"
     .string "If you throw BAIT, the DAEMON\n"
     .string "becomes less likely to DETACH, but\l"
     .string "harder to bind.\p"
     .string "If you throw ROCKS, the DAEMON\n"
     .string "becomes more likely to DETACH, but\l"
     .string "easier to bind.\p"
-    .string "When you run out of time or SAFARI\n"
-    .string "BALLS, it's game over for you!$"
+    .string "When you run out of time or\n"
+    .string "GUESTBOXES, it's game over for you!$"
 
 FuchsiaCity_SafariZone_Entrance_Text_SorryYoureARegularHere::
     .string "Sorry, you're a regular here!$"

@@ -352,7 +352,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_STAND
     }, {
         DECOR_MUD_BALL,
-        _("MUD BALL"),
+        _("MUD BOX"),
         DECORPERM_PASS_FLOOR,
         DECORSHAPE_1x1,
         DECORCAT_ORNAMENT,
@@ -595,7 +595,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_SPIKES_MAT
     }, {
         DECOR_BALL_POSTER,
-        _("BALL POSTER"),
+        _("BOX POSTER"),
         DECORPERM_NA_WALL,
         DECORSHAPE_1x1,
         DECORCAT_POSTER,
@@ -964,7 +964,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_DIAMOND_CUSHION
     }, {
         DECOR_BALL_CUSHION,
-        _("BALL CUSHION"),
+        _("BOX CUSHION"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x1,
         DECORCAT_CUSHION,

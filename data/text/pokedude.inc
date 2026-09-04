@@ -97,7 +97,7 @@ Pokedude_Text_YeahWeWon::
 Pokedude_Text_WeakenMonBeforeCatching::
 	.string "POKé DUDE: When you're trying to\n"
 	.string "bind a DAEMON, don't throw any POKé\l"
-	.string "BALLS right away.\p"
+	.string "BOXES right away.\p"
 	.string "First, you need to weaken it by\n"
 	.string "reducing its HP.$"
 
@@ -120,11 +120,10 @@ Pokedude_Text_CantDoubleUpOnStatus::
 	.string "status problems, okay?$"
 
 Pokedude_Text_LetMeThrowBall::
-	.string "Okay!\n"
-	.string "Let me throw my POKé BALL!$"
+	.string "Okay! Let me throw my POKé BOX!$"
 
 Pokedude_Text_PickBestKindOfBall::
-	.string "Before you throw a POKé BALL,\n"
+	.string "Before you throw a POKé BOX,\n"
 	.string "consider the condition and the type\l"
 	.string "of DAEMON, and pick the kind of\l"
-	.string "BALL that would work best.$"
+	.string "BOX that would work best.$"

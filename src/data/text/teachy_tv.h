@@ -118,9 +118,9 @@ const u8 gTeachyTvText_CatchingScript1[] = _(
         "Keep your eyes glued to the super\n"
         "POKé DUDE SHOW!");
 const u8 gTeachyTvText_CatchingScript2[] = _(
-        "If your first POKé BALL fails to\n"
+        "If your first POKé BOX fails to\n"
         "bind the DAEMON, don't give up!\p"
-        "Keep throwing POKé BALLS… It's\n"
+        "Keep throwing POKé BOXES… It's\n"
         "bound to work sometime!\p"
         "All righty, be seeing you!\p"
         "Remember, USERS, a good deed a\n"
