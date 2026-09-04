@@ -149,8 +149,8 @@ gNameChoice_Suzi::
     .string "SUZI$"
 
 gControlsGuide_Text_Intro::
-    .string "The various buttons will be explained in\n"
-    .string "the order of their importance.$"
+    .string "The buttons, in the order they matter.\n"
+    .string "Names, not places. Check your bindings.$"
 
 gControlsGuide_Text_DPad::
     .string "Moves the main character.\n"
