@@ -118,12 +118,13 @@ VermilionCity_Text_Seagallop12Departing::
     .string "departing immediately.$"
 
 VermilionCity_Text_Route2AideHasPackageForYou::
-    .string "Oh, hello, {PLAYER}!\n"
-    .string "How are you doing?\p"
-    .string "It's me, one of PROF. OAK's AIDES.\p"
+    .string "Oh, hello, {PLAYER}! How are you\n"
+    .string "doing?\p"
+    .string "It's me, one of CRYSTAL CLEAR's\n"
+    .string "AIDES.\p"
     .string "Did you meet the other AIDE?\p"
-    .string "He had a package from PROF. OAK\n"
-    .string "for you, {PLAYER}.\p"
+    .string "He had a package from\n"
+    .string "CRYSTAL CLEAR for you, {PLAYER}.\p"
     .string "He said he'd look for you around\n"
     .string "ROUTE 2, {PLAYER}.\p"
     .string "If you're in the ROUTE 2 area,\n"

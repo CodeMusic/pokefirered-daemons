@@ -1,16 +1,14 @@
 PalletTown_PlayersHouse_1F_Text_AllBoysLeaveOakLookingForYou::
-    .string "MOM: …Right.\n"
-    .string "All boys leave home someday.\l"
-    .string "It said so on TV.\p"
-    .string "Oh, yes. PROF. OAK, next door, was\n"
-    .string "looking for you.$"
+    .string "MOM: …Right. All boys leave home\n"
+    .string "someday. It said so on TV.\p"
+    .string "Oh, yes. CRYSTAL CLEAR, next door,\n"
+    .string "was looking for you.$"
 
 PalletTown_PlayersHouse_1F_Text_AllGirlsLeaveOakLookingForYou::
-    .string "MOM: …Right.\n"
-    .string "All girls dream of traveling.\l"
-    .string "It said so on TV.\p"
-    .string "Oh, yes. PROF. OAK, next door, was\n"
-    .string "looking for you.$"
+    .string "MOM: …Right. All girls dream of\n"
+    .string "traveling. It said so on TV.\p"
+    .string "Oh, yes. CRYSTAL CLEAR, next door,\n"
+    .string "was looking for you.$"
 
 PalletTown_PlayersHouse_1F_Text_YouShouldTakeQuickRest::
     .string "MOM: {PLAYER}!\n"

@@ -64,21 +64,21 @@ PokemonLeague_ChampionsRoom_Text_PostBattle::
     .string "Although I don't like to admit it…$"
 
 PokemonLeague_ChampionsRoom_Text_OakPlayer::
-    .string "OAK: {PLAYER}!$"
+    .string "CRYSTAL: {PLAYER}!$"
 
 PokemonLeague_ChampionsRoom_Text_OakCongratulations::
-    .string "OAK: So, you've won!\n"
-    .string "Sincerely, congratulations!\p"
+    .string "CRYSTAL: So, you've won! Sincerely,\n"
+    .string "congratulations!\p"
     .string "You're the new POKéMON LEAGUE\n"
     .string "CHAMPION!\p"
     .string "You've grown up so much since you\n"
-    .string "first left with {STR_VAR_1} to work\l"
-    .string "on the POKéDEX.\p"
+    .string "first left with {STR_VAR_1} to work on\l"
+    .string "the POKéDEX.\p"
     .string "{PLAYER}, you have come of age!$"
 
 PokemonLeague_ChampionsRoom_Text_OakImDisappointedRival::
-    .string "OAK: {RIVAL}…\n"
-    .string "I'm disappointed in you.\p"
+    .string "CRYSTAL: {RIVAL}… I'm disappointed\n"
+    .string "in you.\p"
     .string "I came when I heard you'd beaten\n"
     .string "the ELITE FOUR.\p"
     .string "But, when I got here, you had\n"
@@ -91,11 +91,10 @@ PokemonLeague_ChampionsRoom_Text_OakImDisappointedRival::
     .string "become a CHAMP again!$"
 
 PokemonLeague_ChampionsRoom_Text_OakPlayerComeWithMe::
-    .string "OAK: {PLAYER}.\p"
+    .string "CRYSTAL: {PLAYER}.\p"
     .string "You understand that your victory\n"
     .string "was not just your own doing.\p"
     .string "The bond you share with your\n"
     .string "POKéMON is marvelous.\p"
-    .string "{PLAYER}!\n"
-    .string "Come with me!$"
+    .string "{PLAYER}! Come with me!$"
 

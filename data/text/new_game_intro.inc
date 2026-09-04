@@ -214,7 +214,7 @@ gOakSpeech_Text_WelcomeToTheWorld::
     .string "Hello, there!\n"
     .string "Glad to meet you!\p"
     .string "Welcome to the world of DAEMONS!\p"
-    .string "My name is CRYSTAL.\p$"
+    .string "My name is CRYSTAL CLEAR.\p$"
 
 gOakSpeech_Text_ThisWorld::
     .string "This world…$"

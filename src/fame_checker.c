@@ -188,7 +188,7 @@ static const u8 sFameCheckerTrainerPicIdxs[] = {
 };
 
 static const u8 sFameCheckerTrainerGenders_Unused[] = {
-    [FAMECHECKER_OAK]      = MALE,
+    [FAMECHECKER_OAK]      = FEMALE,
     [FAMECHECKER_DAISY]    = FEMALE,
     [FAMECHECKER_BROCK]    = MALE,
     [FAMECHECKER_MISTY]    = FEMALE,

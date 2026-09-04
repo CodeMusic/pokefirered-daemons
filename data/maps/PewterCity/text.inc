@@ -121,10 +121,10 @@ PewterCity_Text_OhPlayer::
     .string "Oh, {PLAYER}{KUN}!$"
 
 PewterCity_Text_AskedToDeliverThis::
-    .string "I'm glad I caught up to you.\n"
-    .string "I'm PROF. OAK's AIDE.\p"
-    .string "I've been asked to deliver this,\n"
-    .string "so here you go.$"
+    .string "I'm glad I caught up to you. I'm\n"
+    .string "CRYSTAL CLEAR's AIDE.\p"
+    .string "I've been asked to deliver this, so\n"
+    .string "here you go.$"
 
 PewterCity_Text_ReceivedRunningShoesFromAide::
     .string "{PLAYER} received the\n"

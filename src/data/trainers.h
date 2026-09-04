@@ -5104,9 +5104,9 @@ const struct Trainer gTrainers[] = {
     },
     [TRAINER_PKMN_PROF_PROF_OAK] = {
         .trainerClass = TRAINER_CLASS_PKMN_PROF,
-        .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
+        .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_FEMALE,
         .trainerPic = TRAINER_PIC_PROFESSOR_OAK,
-        .trainerName = _("PROF. OAK"),
+        .trainerName = _("CRYSTAL"),
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
