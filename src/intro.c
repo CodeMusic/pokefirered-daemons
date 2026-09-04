@@ -1290,7 +1290,17 @@ static void IntroCB_GF_RevealLogo(struct IntroSequenceData * this)
         if (++this->timer > 20)
         {
             SetGpuReg(REG_OFFSET_BLDCNT, 0);
-            SetIntroCB(this, IntroCB_Scene1);
+            // Scenes 1 to 3 are the Gen 3 intro: a creature running through
+            // grass, then two of them facing off, then a fight. That is
+            // SIXTEEN drawings, twelve of them matched animation frames, and
+            // it is also the ONE PLACE LEFT that shows vanilla creatures.
+            //
+            // 2.4's face-off is our version of that scene and it is on the
+            // TITLE now, where it costs two drawings instead of sixteen. So
+            // the boot sequence goes CODEMUSIC then straight to the door.
+            //
+            // One line to put back, and the assets are all still here.
+            SetIntroCB(this, IntroCB_ExitToTitleScreen);
         }
         break;
     }
