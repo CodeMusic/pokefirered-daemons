@@ -44,7 +44,7 @@ RockTunnel_B1F_Text_SteveDefeat::
 RockTunnel_B1F_Text_StevePostBattle::
     .string "DAEMON cosplay is dressing up as\n"
     .string "DAEMON for fun.\p"
-    .string "CLEFAIRY is a favorite.$"
+    .string "ANOMALY is a favorite.$"
 
 RockTunnel_B1F_Text_AllenIntro::
     .string "My DAEMONS techniques will leave\n"

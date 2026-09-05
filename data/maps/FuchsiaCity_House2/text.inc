@@ -18,7 +18,7 @@ FuchsiaCity_House2_Text_GoodRodCanCatchBetterMons::
     .string "Fishing is a way of life! It is like\n"
     .string "the finest poetry.\p"
     .string "A crummy OLD ROD could only bind\n"
-    .string "MAGIKARP, yes?\p"
+    .string "STUB, yes?\p"
     .string "But with a GOOD ROD, you can bind\n"
     .string "much better DAEMON.$"
 

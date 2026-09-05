@@ -22,12 +22,12 @@ CeladonCity_Text_BlewItAllAtSlots::
     .string "COINS for prizes!$"
 
 CeladonCity_Text_MyTrustedPalPoliwrath::
-    .string "This is my trusted pal, POLIWRATH.\p"
-    .string "It evolved from a POLIWHIRL when\n"
-    .string "I used a AFFECT.$"
+    .string "This is my trusted pal, MUTEX.\p"
+    .string "It evolved from a SPINLOCK when I\n"
+    .string "used a AFFECT.$"
 
 CeladonCity_Text_Poliwrath::
-    .string "POLIWRATH: Ribi ribit!$"
+    .string "MUTEX: Ribi ribit!$"
 
 CeladonCity_Text_GetLostOrIllPunchYou::
     .string "What are you staring at?\n"

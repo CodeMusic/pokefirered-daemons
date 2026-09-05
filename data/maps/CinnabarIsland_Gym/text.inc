@@ -159,7 +159,7 @@ CinnabarIsland_Gym_Text_QuizQuestion2::
     .string "LEAGUE MARKS?$"
 
 CinnabarIsland_Gym_Text_QuizQuestion3::
-    .string "POLIWAG evolves three times?$"
+    .string "LOOP evolves three times?$"
 
 CinnabarIsland_Gym_Text_QuizQuestion4::
     .string "Are electric moves effective\n"

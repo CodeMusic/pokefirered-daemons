@@ -562,9 +562,9 @@ const u8 gSlowpokePokedexText[] = _(
 const u8 gSlowpokePokedexTextUnused[] = _("");
 
 const u8 gSlowbroPokedexText[] = _(
-    "The SHELLDER that latches onto\n"
-    "SLOWPOKE's tail is said to feed on the\n"
-    "host's leftover scraps.");
+        "The SHELLDER that latches onto\n"
+        "LATENCY's tail is said to feed\n"
+        "on the host's leftover scraps.");
 
 const u8 gSlowbroPokedexTextUnused[] = _("");
 
@@ -1304,9 +1304,9 @@ const u8 gSudowoodoPokedexText[] = _(
 const u8 gSudowoodoPokedexTextUnused[] = _("");
 
 const u8 gPolitoedPokedexText[] = _(
-    "If POLIWAG and POLIWHIRL hear its\n"
-    "echoing cry, they respond by gathering\n"
-    "from far and wide.");
+        "If LOOP and SPINLOCK hear its\n"
+        "echoing cry, they respond by\n"
+        "gathering from far and wide.");
 
 const u8 gPolitoedPokedexTextUnused[] = _("");
 

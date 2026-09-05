@@ -22,10 +22,10 @@ LavenderTown_VolunteerPokemonHouse_Text_MonsNiceToHug::
     .string "to hug!$"
 
 LavenderTown_VolunteerPokemonHouse_Text_Nidorino::
-    .string "NIDORINO: Gaoo!$"
+    .string "PREDICTOR: Gaoo!$"
 
 LavenderTown_VolunteerPokemonHouse_Text_Psyduck::
-    .string "PSYDUCK: Gwappa!$"
+    .string "FAULT: Gwappa!$"
 
 LavenderTown_VolunteerPokemonHouse_Text_IdLikeYouToHaveThis::
     .string "MR. FUJI: {PLAYER}…\p"

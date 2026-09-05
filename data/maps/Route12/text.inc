@@ -96,7 +96,7 @@ Route12_Text_AndrewDefeat::
     .string "Lost it!$"
 
 Route12_Text_AndrewPostBattle::
-    .string "I bind MAGIKARP all the time, but\n"
+    .string "I bind STUB all the time, but\n"
     .string "they're so weak!$"
 
 Route12_Text_RouteSign::

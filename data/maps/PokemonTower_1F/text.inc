@@ -14,9 +14,8 @@ PokemonTower_1F_Text_ComeToPayRespectsGirl::
 
 PokemonTower_1F_Text_CameToPrayForDepartedClefairy::
     .string "I came to pray for my dearly\n"
-    .string "departed CLEFAIRY.\p"
-    .string "Sniff!\n"
-    .string "I'm awash in tears…$"
+    .string "departed ANOMALY.\p"
+    .string "Sniff! I'm awash in tears…$"
 
 PokemonTower_1F_Text_GrowlitheWhyDidYouDie::
     .string "My GROWLITHE…\n"

@@ -766,7 +766,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_MEOWTH_DOLL
     }, {
         DECOR_CLEFAIRY_DOLL,
-        _("CLEFAIRY DOLL"),
+        _("ANOMALY DOLL"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x1,
         DECORCAT_DOLL,

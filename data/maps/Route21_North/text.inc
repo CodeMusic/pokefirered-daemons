@@ -13,11 +13,11 @@ Route21_North_Text_WadeIntro::
 	.string "Wanna go for it?$"
 
 Route21_North_Text_WadeDefeat::
-	.string "Heheh, MAGIKARP just don't make\n"
-	.string "the grade, do they?$"
+	.string "Heheh, STUB just don't make the\n"
+	.string "grade, do they?$"
 
 Route21_North_Text_WadePostBattle::
-    .string "I seem to only bind MAGIKARP!$"
+    .string "I seem to only bind STUB!$"
 
 Route21_North_Text_SpencerIntro::
 	.string "The sea cleanses my body and soul!$"

@@ -20,10 +20,10 @@ Route12_FishingHouse_Text_IfYouCatchBigMagikarpShowMe::
     .string "From the seas to rivers, go out\n"
     .string "and land the big one, my friend.\p"
     .string "Now, I have a request.\p"
-    .string "If you bind a big MAGIKARP with\n"
-    .string "that ROD, I want to see it.\p"
+    .string "If you bind a big STUB with that\n"
+    .string "ROD, I want to see it.\p"
     .string "As much as I love to fish, I also\n"
-    .string "love seeing gigantic MAGIKARP.$"
+    .string "love seeing gigantic STUB.$"
 
 Route12_FishingHouse_Text_OhThatsDisappointing::
     .string "Oh…\n"
@@ -37,8 +37,8 @@ Route12_FishingHouse_Text_TryFishingBringMeMagikarp::
     .string "Try fishing wherever you can!$"
 
 Route12_FishingHouse_Text_OhMagikarpAllowMeToSee::
-    .string "Oh? {PLAYER}?\n"
-    .string "Why, if it isn't a MAGIKARP!\p"
+    .string "Oh? {PLAYER}? Why, if it isn't a\n"
+    .string "STUB!\p"
     .string "Allow me to see it, quick!$"
 
 Route12_FishingHouse_Text_WhoaXInchesTakeThis::
@@ -66,8 +66,8 @@ Route12_FishingHouse_Text_HmmXInchesDoesntMeasureUp::
     .string "{STR_VAR_3}-inch one you brought before.$"
 
 Route12_FishingHouse_Text_DoesntLookLikeMagikarp::
-    .string "Uh… That doesn't look much like\n"
-    .string "a MAGIKARP.$"
+    .string "Uh… That doesn't look much like a\n"
+    .string "STUB.$"
 
 Route12_FishingHouse_Text_NoRoomForGift::
     .string "Oh, no!\p"
@@ -75,8 +75,8 @@ Route12_FishingHouse_Text_NoRoomForGift::
     .string "no room for it.$"
 
 Route12_FishingHouse_Text_MostGiganticMagikarpXInches::
-    .string "The most gigantic MAGIKARP\n"
-    .string "I have ever witnessed…\p"
+    .string "The most gigantic STUB I have ever\n"
+    .string "witnessed…\p"
     .string "{STR_VAR_3} inches!$"
 
 Route12_FishingHouse_Text_BlankChartOfSomeSort::

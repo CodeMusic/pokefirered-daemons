@@ -77,12 +77,11 @@ MtMoon_1F_Text_RobbyDefeat::
     .string "I lost.$"
 
 MtMoon_1F_Text_RobbyPostBattle::
-    .string "ZUBAT is tough! But, it can be\n"
+    .string "ECHO is tough! But, it can be\n"
     .string "useful if you bind one.$"
 
 MtMoon_1F_Text_ZubatIsABloodsucker::
-    .string "Beware!\n"
-    .string "ZUBAT is a bloodsucker!$"
+    .string "Beware! ECHO is a bloodsucker!$"
 
 MtMoon_1F_Text_BrockHelpsExcavateFossils::
     .string "Hi, I'm excavating for fossils here\n"

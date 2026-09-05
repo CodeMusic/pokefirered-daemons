@@ -41,7 +41,7 @@ RockTunnel_1F_Text_AshtonDefeat::
     .string "Game over!$"
 
 RockTunnel_1F_Text_AshtonPostBattle::
-    .string "Oh well, I'll get a ZUBAT as I go!$"
+    .string "Oh well, I'll get a ECHO as I go!$"
 
 RockTunnel_1F_Text_LeahIntro::
     .string "Eek!\p"

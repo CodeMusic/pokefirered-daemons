@@ -88,7 +88,7 @@ CeruleanCity_Text_YouCanCutDownSmallTrees::
     .string "though.$"
 
 CeruleanCity_Text_IfSlowbroWasntThereCouldCutTree::
-    .string "If that SLOWBRO wasn't there, you\n"
+    .string "If that SHELL wasn't there, you\n"
     .string "could CUT down the small tree.\p"
     .string "That way, you could get to the\n"
     .string "other side.\p"
@@ -107,40 +107,38 @@ CeruleanCity_Text_PeopleHereWereRobbed::
     .string "with CORPUS!$"
 
 CeruleanCity_Text_SlowbroUseSonicboom::
-    .string "Okay! SLOWBRO!\n"
-    .string "Use SONICBOOM!$"
+    .string "Okay! SHELL! Use SONICBOOM!$"
 
 CeruleanCity_Text_SlowbroPayAttention::
-    .string "Come on, SLOWBRO, pay attention!$"
+    .string "Come on, SHELL, pay attention!$"
 
 CeruleanCity_Text_SlowbroPunch::
-    .string "SLOWBRO, punch!$"
+    .string "SHELL, punch!$"
 
 CeruleanCity_Text_NoYouBlewItAgain::
     .string "No!\n"
     .string "You blew it again!$"
 
 CeruleanCity_Text_SlowbroWithdraw::
-    .string "SLOWBRO, WITHDRAW!$"
+    .string "SHELL, WITHDRAW!$"
 
 CeruleanCity_Text_HardToControlMonsObedience::
-    .string "SLOWBRO, WITHDRAW! No! That's\n"
-    .string "wrong!\p"
+    .string "SHELL, WITHDRAW! No! That's wrong!\p"
     .string "It's so hard to control DAEMON!\p"
     .string "Your DAEMON's obedience depends on\n"
     .string "your abilities as a USER!$"
 
 CeruleanCity_Text_SlowbroTookSnooze::
-    .string "SLOWBRO took a snooze…$"
+    .string "SHELL took a snooze…$"
 
 CeruleanCity_Text_SlowbroLoafingAround::
-    .string "SLOWBRO is loafing around…$"
+    .string "SHELL is loafing around…$"
 
 CeruleanCity_Text_SlowbroTurnedAway::
-    .string "SLOWBRO turned away…$"
+    .string "SHELL turned away…$"
 
 CeruleanCity_Text_SlowbroIgnoredOrders::
-    .string "SLOWBRO ignored orders…$"
+    .string "SHELL ignored orders…$"
 
 CeruleanCity_Text_WantBrightRedBicycle::
     .string "Everyone has the date wrong. Three\n"

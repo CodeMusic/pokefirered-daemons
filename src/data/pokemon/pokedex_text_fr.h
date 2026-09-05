@@ -524,9 +524,9 @@ const u8 gGeodudePokedexText[] = _(
 const u8 gGeodudePokedexTextUnused[] = _("");
 
 const u8 gGravelerPokedexText[] = _(
-    "Be careful while hiking on mountain trails.\n"
-    "GRAVELER may come rolling down the path\n"
-    "without slowing.");
+        "Be careful while hiking on mountain\n"
+        "trails. STACK may come rolling\n"
+        "down the path without slowing.");
 
 const u8 gGravelerPokedexTextUnused[] = _("");
 
@@ -559,9 +559,9 @@ const u8 gSlowpokePokedexText[] = _(
 const u8 gSlowpokePokedexTextUnused[] = _("");
 
 const u8 gSlowbroPokedexText[] = _(
-    "When a SLOWPOKE went hunting in the sea,\n"
-    "its tail was bitten by a SHELLDER. That\n"
-    "made it evolve into SLOWBRO.");
+        "When a LATENCY went hunting in the sea,\n"
+        "its tail was bitten by a SHELLDER. That\n"
+        "made it evolve into SHELL.");
 
 const u8 gSlowbroPokedexTextUnused[] = _("");
 
@@ -1215,9 +1215,9 @@ const u8 gPichuPokedexText[] = _(
 const u8 gPichuPokedexTextUnused[] = _("");
 
 const u8 gCleffaPokedexText[] = _(
-    "When numerous meteors illuminate the\n"
-    "night sky, sightings of CLEFFA strangely\n"
-    "increase.");
+        "When numerous meteors illuminate\n"
+        "the night sky, sightings of\n"
+        "NOISE strangely increase.");
 
 const u8 gCleffaPokedexTextUnused[] = _("");
 
@@ -1397,9 +1397,9 @@ const u8 gMurkrowPokedexText[] = _(
 const u8 gMurkrowPokedexTextUnused[] = _("");
 
 const u8 gSlowkingPokedexText[] = _(
-    "When its head was bitten, toxins entered\n"
-    "SLOWPOKE's head and unlocked an\n"
-    "extraordinary power.");
+        "When its head was bitten, toxins\n"
+        "entered LATENCY's head and\n"
+        "unlocked an extraordinary power.");
 
 const u8 gSlowkingPokedexTextUnused[] = _("");
 

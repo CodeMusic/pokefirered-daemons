@@ -62,8 +62,8 @@ Route25_Text_HaleyDefeat::
     .string "I'm not so jealous!$"
 
 Route25_Text_HaleyPostBattle::
-    .string "You came from MT. MOON?\n"
-    .string "May I have a CLEFAIRY?$"
+    .string "You came from MT. MOON? May I\n"
+    .string "have a ANOMALY?$"
 
 Route25_Text_FranklinIntro::
     .string "I just got down from MT. MOON,\n"
@@ -73,8 +73,8 @@ Route25_Text_FranklinDefeat::
     .string "You worked hard!$"
 
 Route25_Text_FranklinPostBattle::
-    .string "Drat!\n"
-    .string "A ZUBAT bit me back in that cave.$"
+    .string "Drat! A ECHO bit me back in that\n"
+    .string "cave.$"
 
 Route25_Text_NobIntro::
     .string "I'm off to see a POKéMANIAC's\n"

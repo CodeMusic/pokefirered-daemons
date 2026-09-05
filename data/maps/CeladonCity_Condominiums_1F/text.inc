@@ -26,7 +26,7 @@ CeladonCity_Condominiums_1F_Text_DaisyComesToBuyTea::
     .string "STORE to buy some TEA.$"
 
 CeladonCity_Condominiums_1F_Text_Clefairy::
-    .string "CLEFAIRY: Pi pippippi!$"
+    .string "ANOMALY: Pi pippippi!$"
 
 CeladonCity_Condominiums_1F_Text_Nidoran::
     .string "NIDORAN♀: Kya kyaoo!$"

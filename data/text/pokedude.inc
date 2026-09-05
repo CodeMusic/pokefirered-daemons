@@ -54,7 +54,7 @@ Pokedude_Text_GrassEffectiveAgainstWater::
 	.string "Uh-oh, this is not good!\p"
 	.string "The ABSORB attack you just saw is\n"
 	.string "a GRASS-type move.\p"
-	.string "POLIWAG is a WATER-type DAEMON.\p"
+	.string "LOOP is a WATER-type DAEMON.\p"
 	.string "So, ABSORB becomes super\n"
 	.string "effective, doubling the damage.$"
 

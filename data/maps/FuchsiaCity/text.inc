@@ -59,8 +59,8 @@ FuchsiaCity_Text_KangaskhanSign::
     .string "young in a pouch on its belly.$"
 
 FuchsiaCity_Text_SlowpokeSign::
-    .string "Name: SLOWPOKE\n"
-    .string "Friendly and very slow moving.$"
+    .string "Name: LATENCY Friendly and very\n"
+    .string "slow moving.$"
 
 FuchsiaCity_Text_LaprasSign::
     .string "Name: LAPRAS\n"

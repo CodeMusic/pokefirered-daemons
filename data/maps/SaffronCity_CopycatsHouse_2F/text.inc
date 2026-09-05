@@ -86,7 +86,7 @@ SaffronCity_CopycatsHouse_2F_Text_MySecrets::
     .string "…\p"
     .string "My Secrets!\p"
     .string "Skill: Mimicry! Hobby: Collecting\n"
-    .string "dolls! Favorite DAEMON: CLEFAIRY!$"
+    .string "dolls! Favorite DAEMON: ANOMALY!$"
 
 SaffronCity_CopycatsHouse_2F_Text_HuhCantSee::
     .string "？　みえないぞ‥$"
