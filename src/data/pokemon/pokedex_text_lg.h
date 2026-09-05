@@ -961,9 +961,9 @@ const u8 gFlareonPokedexText[] = _(
 const u8 gFlareonPokedexTextUnused[] = _("");
 
 const u8 gPorygonPokedexText[] = _(
-        "A DAEMON that consists entirely of\n"
-        "programming code. It is capable of moving\n"
-        "freely in cyberspace.");
+    "Everything it saw is on record. It is\n"
+    "not in the record. Nobody thought to\n"
+    "write down who was watching.");
 
 const u8 gPorygonPokedexTextUnused[] = _("");
 
@@ -1633,9 +1633,9 @@ const u8 gDonphanPokedexText[] = _(
 const u8 gDonphanPokedexTextUnused[] = _("");
 
 const u8 gPorygon2PokedexText[] = _(
-    "This upgraded version of PORYGON is\n"
-    "designed for space exploration. However,\n"
-    "it can't even fly.");
+        "This upgraded version of SENTINEL\n"
+        "is designed for space exploration.\n"
+        "However, it can't even fly.");
 
 const u8 gPorygon2PokedexTextUnused[] = _("");
 

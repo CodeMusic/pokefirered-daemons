@@ -245,7 +245,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Single_7 = {
 					.spDefenseIV = 10,
 					.abilityNum = 0,
 					.personality = 0x07, // GENDERLESS RELAXED
-					.nickname = _("PORYGON"),
+					.nickname = _("SENTINEL"),
 					.friendship = 255
 				},
 				{
@@ -7013,7 +7013,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Mixed_3 = {
 					.spDefenseIV = 10,
 					.abilityNum = 0,
 					.personality = 0x05, // GENDERLESS BOLD
-					.nickname = _("PORYGON"),
+					.nickname = _("SENTINEL"),
 					.friendship = 255
 				},
 			}
@@ -7697,7 +7697,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Double_7 = {
 					.spDefenseIV = 20,
 					.abilityNum = 0,
 					.personality = 0x11, // GENDERLESS QUIET
-					.nickname = _("PORYGON"),
+					.nickname = _("SENTINEL"),
 					.friendship = 255
 				},
 				{

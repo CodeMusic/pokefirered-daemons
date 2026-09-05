@@ -958,9 +958,9 @@ const u8 gFlareonPokedexText[] = _(
 const u8 gFlareonPokedexTextUnused[] = _("");
 
 const u8 gPorygonPokedexText[] = _(
-        "Using the most advanced technologies,\n"
-        "scientists finally succeeded in making the\n"
-        "first artificial DAEMON.");
+    "It has never attacked anything. It stays\n"
+    "where it can see, and it does not look\n"
+    "away. That is the whole of it.");
 
 const u8 gPorygonPokedexTextUnused[] = _("");
 

@@ -1783,7 +1783,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_PORYGON] =
     {
-        .categoryName = _("VIRTUAL"),
+        .categoryName = _("OBSERVER"),
         .height = 8,
         .weight = 365,
         .description = gPorygonPokedexText,

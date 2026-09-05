@@ -56,7 +56,7 @@ SilphCo_5F_Text_Grunt2PostBattle::
 
 SilphCo_5F_Text_PorygonFirstVRMon::
     .string "It's a DAEMON REPORT!\p"
-    .string "DAEMON LAB created PORYGON, the\n"
+    .string "DAEMON LAB created SENTINEL, the\n"
     .string "first virtual-reality DAEMON.$"
 
 SilphCo_5F_Text_Over350TechniquesConfirmed::
