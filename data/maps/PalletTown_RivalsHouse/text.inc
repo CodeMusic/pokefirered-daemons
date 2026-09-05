@@ -1,15 +1,17 @@
 PalletTown_RivalsHouse_Text_HiBrothersAtLab::
-    .string "Hi {PLAYER}! {RIVAL} is out at\n"
-    .string "Gran's lab.$"
+    .string "Hi, {PLAYER}. {RIVAL} is at Gran's\n"
+    .string "lab, being told things.$"
 
 PalletTown_RivalsHouse_Text_HeardYouBattledRival::
-    .string "DAISY: {PLAYER}, I heard you had\n"
-    .string "a battle against {RIVAL}.\p"
-    .string "I wish I'd seen that!$"
+    .string "DAISY: I heard you engaged\n"
+    .string "{RIVAL}.\p"
+    .string "He has not mentioned the result. So\n"
+    .string "I know the result.$"
 
 PalletTown_RivalsHouse_Text_ErrandForGrandpaThisWillHelp::
-    .string "Gran asked you to run an errand?\n"
-    .string "Here, this will help you!$"
+    .string "Gran has sent you somewhere?\p"
+    .string "Take this. She will not have told\n"
+    .string "you where it is.$"
 
 PalletTown_RivalsHouse_Text_ReceivedTownMapFromDaisy::
     .string "{PLAYER} received a TOWN MAP\n"
@@ -20,97 +22,93 @@ PalletTown_RivalsHouse_Text_DontHaveSpaceForThis::
     .string "your BAG.$"
 
 PalletTown_RivalsHouse_Text_ExplainTownMap::
-    .string "You can use the TOWN MAP to find\n"
-    .string "out where you are, or check the\l"
-    .string "names of places.$"
+    .string "The TOWN MAP shows where you are\n"
+    .string "and what the places are called.\p"
+    .string "The two do not always agree.$"
 
 PalletTown_RivalsHouse_Text_PleaseGiveMonsRest::
-    .string "DAEMONS are living things! If they\n"
-    .string "get tired, give them a rest!$"
+    .string "A daemon that has been running a\n"
+    .string "long time does worse work.\p"
+    .string "This surprises people.$"
 
 PalletTown_RivalsHouse_Text_ItsBigMapOfKanto::
-    .string "It's a big map of the KANTO region.\n"
-    .string "Now this would be useful!$"
+    .string "A large map of KANTO. That would\n"
+    .string "be useful.$"
 
 PalletTown_RivalsHouse_Text_ShelvesCrammedFullOfBooks::
-    .string "The shelves are crammed full of\n"
-    .string "books on DAEMON.$"
+    .string "Shelves of books about daemons.\n"
+    .string "None of them by Gran.$"
 
 PalletTown_RivalsHouse_Text_LikeMeToGroomMon::
-    .string "DAISY: Hi, {PLAYER}! Good timing.\p"
-    .string "I'm about to have some tea. Would\n"
-    .string "you like to join me?\p"
-    .string "Oh, but look. Your DAEMONS are a\n"
-    .string "little dirty.\p"
-    .string "Would you like me to groom one?$"
+    .string "DAISY: Hi, {PLAYER}. Good timing.\p"
+    .string "I was going to have tea.\p"
+    .string "Your daemon is running rough,\n"
+    .string "though. Shall I look at it?$"
 
 PalletTown_RivalsHouse_Text_DontNeedAnyGrooming::
-    .string "You don't need any grooming done?\n"
-    .string "Okay, we'll just have tea.$"
+    .string "No? Tea, then.$"
 
 PalletTown_RivalsHouse_Text_GroomWhichOne::
-    .string "Which one should I groom?$"
+    .string "Which one?$"
 
 PalletTown_RivalsHouse_Text_LookingNiceInNoTime::
-    .string "DAISY: Okay, I'll get it looking\n"
-    .string "nice in no time.$"
+    .string "DAISY: This will not take long.$"
 
 PalletTown_RivalsHouse_Text_ThereYouGoAllDone::
 #ifdef BUGFIX @ The localizers missed what should be a textcolor change in the localizations.
-    .string "{COLOR DARK_GRAY}{STR_VAR_1} looks dreamily content…\p"
-    .string "{COLOR RED}DAISY: There you go! All done.\n"
+    .string "{COLOR DARK_GRAY}{STR_VAR_1} settles.\p"
+    .string "{COLOR RED}DAISY: There. It was only\n"
 #else @ In the JP games, gender-based text used a different font instead of different colors.
-    .string "{FONT_NORMAL}{STR_VAR_1} looks dreamily content…\p"
-    .string "{FONT_FEMALE}DAISY: There you go! All done.\n"
+    .string "{FONT_NORMAL}{STR_VAR_1} settles.\p"
+    .string "{FONT_FEMALE}DAISY: There. It was only\n"
 #endif
-    .string "See? Doesn't it look nice?\p"
-    .string "Giggle… It's such a cute DAEMON.$"
+    .string "tired.\p"
+    .string "It is a good one, this.$"
 
 PalletTown_RivalsHouse_Text_CantGroomAnEgg::
-    .string "Oh, sorry. I honestly can't\n"
-    .string "groom an EGG.$"
+    .string "I cannot do anything with an EGG.\n"
+    .string "There is nothing running in it yet.$"
 
 PalletTown_RivalsHouse_Text_MayISeeFirstMon::
-    .string "DAISY: Your DAEMONS grow to love\n"
-    .string "you if you raise them with love.\p"
-    .string "For example, {PLAYER}, may I see\n"
-    .string "your first DAEMON?$"
+    .string "DAISY: Gran reads them with an\n"
+    .string "instrument.\p"
+    .string "I just look. May I see your first\n"
+    .string "one?$"
 
 PalletTown_RivalsHouse_Text_CouldntLoveYouMore::
-    .string "It couldn't possibly love you any\n"
-    .string "more than it does now.\p"
-    .string "Your DAEMON is happy beyond words.$"
+    .string "This one would not leave if you\n"
+    .string "opened the box.\p"
+    .string "I have not seen many like that.$"
 
 PalletTown_RivalsHouse_Text_ItLooksVeryHappy::
-    .string "It looks very happy.\p"
-    .string "I wish {RIVAL} could see this and\n"
-    .string "learn something from it.$"
+    .string "It is settled. It has stopped\n"
+    .string "watching the door.\p"
+    .string "I wish {RIVAL} would let one get\n"
+    .string "this far.$"
 
 PalletTown_RivalsHouse_Text_ItsQuiteFriendly::
-    .string "It's quite friendly with you.\n"
-    .string "Keep being good to it!$"
+    .string "It stays near you without being\n"
+    .string "told. That is most of it.$"
 
 PalletTown_RivalsHouse_Text_ItsWarmingUpToYou::
-    .string "It's warming up to you.\n"
-    .string "Trust must be growing between you.$"
+    .string "It is beginning to. It still checks\n"
+    .string "where you are.$"
 
 PalletTown_RivalsHouse_Text_NotFamiliarWithYouYet::
-    .string "It's not quite familiar with you\n"
-    .string "yet.\p"
-    .string "DAEMONS are all quite wary when\n"
-    .string "you first get them.$"
+    .string "Not yet. It does what you ask and\n"
+    .string "nothing more.\p"
+    .string "They all start there.$"
 
 PalletTown_RivalsHouse_Text_DontLikeWayItGlaresAtYou::
-    .string "{PLAYER}, I don't like the way it\n"
-    .string "glares at you.\p"
-    .string "Could you try being a little nicer\n"
-    .string "to it?$"
+    .string "{PLAYER}. It is watching you the\n"
+    .string "way you would watch a stranger.\p"
+    .string "Try asking it for less.$"
 
 PalletTown_RivalsHouse_Text_WhyWouldMonHateYouSoMuch::
-    .string "…Um, it's not easy for me to say\n"
-    .string "this, but…\p"
-    .string "Is there some reason why your\n"
-    .string "DAEMON would hate you so much?$"
+    .string "…I would rather not say this.\p"
+    .string "It would be anywhere else if it\n"
+    .string "could.\p"
+    .string "What have you been asking of it?$"
 
 PalletTown_RivalsHouse_Text_LovelyAndSweetClefairy::
     .string "“The lovely and sweet ANOMALY”$"
