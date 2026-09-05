@@ -680,7 +680,7 @@ static const struct DungeonMapInfo sDungeonInfo[] = {
         .desc = gText_RegionMap_AreaDesc_CeruleanCave
     }, {
         .id = MAPSEC_POWER_PLANT,
-        .name = sMapsecName_POWER_PLANT,
+        .name = sMapsecName_KEEPALIVE_PLANT,
         .desc = gText_RegionMap_AreaDesc_PowerPlant
     }, {
         .id = MAPSEC_MT_EMBER,

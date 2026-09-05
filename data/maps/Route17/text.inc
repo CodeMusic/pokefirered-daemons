@@ -49,7 +49,7 @@ Route17_Text_NikolasDefeat::
 
 Route17_Text_NikolasPostBattle::
     .string "I got my VOLTORB at the abandoned\n"
-    .string "POWER PLANT.$"
+    .string "KEEPALIVE PLANT.$"
 
 Route17_Text_ZeekIntro::
     .string "My DAEMONS won't evolve! Why?$"

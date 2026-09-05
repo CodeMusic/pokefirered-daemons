@@ -77,5 +77,5 @@ Route10_Text_RockTunnel::
     .string "THE BLACKOUT$"
 
 Route10_Text_PowerPlant::
-    .string "POWER PLANT$"
+    .string "KEEPALIVE PLANT$"
 
