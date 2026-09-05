@@ -1,17 +1,14 @@
 ViridianCity_Gym_Text_GiovanniIntro::
-    .string "Fwahahaha! This is my hideout!\p"
-    .string "I planned to resurrect TEAM CORPUS\n"
-    .string "here!\p"
-    .string "But, you have bound me again! So\n"
-    .string "be it! This time, I'm not holding\l"
-    .string "back!\p"
-    .string "Once more, you shall face\n"
-    .string "GIOVANNI, the greatest USER!$"
+    .string "So. You found this one too.\p"
+    .string "It was going to start again here.\p"
+    .string "I ran this GYM once, before any of\n"
+    .string "the rest of it. I am running it now.\p"
+    .string "Nothing held back.$"
 
 ViridianCity_Gym_Text_GiovanniDefeat::
-    .string "Ha! That was a truly intense fight!\n"
-    .string "You have won! As proof, here is\l"
-    .string "the TRUE MARK!$"
+    .string "Measured, then.\p"
+    .string "Take the TRUE MARK. It is\n"
+    .string "accurate.$"
 
 ViridianCity_Gym_Text_GiovanniPostBattle::
     .string "Well measured.\p"
@@ -23,112 +20,109 @@ ViridianCity_Gym_Text_GiovanniPostBattle::
     .string "It has never said otherwise.$"
 
 ViridianCity_Gym_Text_ExplainEarthBadgeTakeThis::
-    .string "The TRUE MARK makes DAEMON of any\n"
-    .string "level obey!\p"
-    .string "It is evidence of your mastery as\n"
-    .string "a DAEMON USER!\p"
-    .string "With it, you can enter the DAEMON\n"
-    .string "LEAGUE!\p"
-    .string "It is my gift for your DAEMON\n"
-    .string "LEAGUE challenge!$"
+    .string "The TRUE MARK is why a daemon of\n"
+    .string "any level will do what you ask.\p"
+    .string "It is not a reward. It is a record\n"
+    .string "that you were assessed.\p"
+    .string "It admits you to the DAEMON\n"
+    .string "LEAGUE. Take it and go.$"
 
 ViridianCity_Gym_Text_ReceivedTM26FromGiovanni::
     .string "{PLAYER} received TM26\n"
     .string "from GIOVANNI.$"
 
 ViridianCity_Gym_Text_ExplainTM26::
-    .string "TM26 contains EARTHQUAKE.\p"
-    .string "It is a powerful attack that causes\n"
-    .string "a massive tremor.\p"
-    .string "I made it when I ran the GYM here,\n"
-    .string "far too long ago… $"
+    .string "TM26 is EARTHQUAKE.\p"
+    .string "It moves the ground everything is\n"
+    .string "standing on.\p"
+    .string "I wrote it when I ran this GYM.\n"
+    .string "That was before the other thing.$"
 
 ViridianCity_Gym_Text_YouDoNotHaveSpace::
     .string "You do not have space for this!$"
 
 ViridianCity_Gym_Text_YujiIntro::
-    .string "Heh!\n"
-    .string "You must be running out of steam\l"
-    .string "by now!$"
+    .string "You have come a long way. Our\n"
+    .string "figures say you should be tired by\l"
+    .string "now.$"
 
 ViridianCity_Gym_Text_YujiDefeat::
-    .string "I ran out of gas!$"
+    .string "My figures were wrong.$"
 
 ViridianCity_Gym_Text_YujiPostBattle::
-    .string "You'll need power to keep up with\n"
-    .string "our GYM LEADER.$"
+    .string "You will need more than that for\n"
+    .string "the LEADER. He reviews everyone.$"
 
 ViridianCity_Gym_Text_AtsushiIntro::
-    .string "Rrrroar!\n"
-    .string "I'm working myself into a rage!$"
+    .string "I am getting myself into the right\n"
+    .string "state for this. One moment.$"
 
 ViridianCity_Gym_Text_AtsushiDefeat::
-    .string "Wargh!$"
+    .string "Oh.$"
 
 ViridianCity_Gym_Text_AtsushiPostBattle::
-    .string "I'm still not worthy!$"
+    .string "I will put myself down for more\n"
+    .string "training.$"
 
 ViridianCity_Gym_Text_JasonIntro::
-    .string "DAEMONS and I, we make wonderful\n"
-    .string "music together!$"
+    .string "My daemons and I are very aligned.\n"
+    .string "It is in my review.$"
 
 ViridianCity_Gym_Text_JasonDefeat::
-    .string "You are in perfect harmony!$"
+    .string "You are better aligned than we\n"
+    .string "are.$"
 
 ViridianCity_Gym_Text_JasonPostBattle::
-    .string "Do you know the identity of our\n"
-    .string "GYM LEADER?$"
+    .string "Do you know who runs this building?\n"
+    .string "Neither do most of us.$"
 
 ViridianCity_Gym_Text_KiyoIntro::
-    .string "Karate is the ultimate form of\n"
-    .string "martial arts!$"
+    .string "I was told to stand here and stop\n"
+    .string "people. I am good at it.$"
 
 ViridianCity_Gym_Text_KiyoDefeat::
-    .string "Aiyah!$"
+    .string "Ah.$"
 
 ViridianCity_Gym_Text_KiyoPostBattle::
-    .string "If my DAEMONS were as good at\n"
-    .string "Karate as I...$"
+    .string "If my daemons performed the way I\n"
+    .string "do in meetings…$"
 
 ViridianCity_Gym_Text_WarrenIntro::
-    .string "The truly talented win with style.$"
+    .string "There is a correct way to do this,\n"
+    .string "and I am doing it.$"
 
 ViridianCity_Gym_Text_WarrenDefeat::
-    .string "I lost my grip!$"
+    .string "That was not the correct way.$"
 
 ViridianCity_Gym_Text_WarrenPostBattle::
-    .string "The LEADER will scold me for\n"
-    .string "losing this way…$"
+    .string "This will be raised with me.$"
 
 ViridianCity_Gym_Text_TakashiIntro::
-    .string "I'm the KARATE KING!\n"
-    .string "Your fate rests with me!$"
+    .string "I am senior here. That ought to\n"
+    .string "concern you.$"
 
 ViridianCity_Gym_Text_TakashiDefeat::
-    .string "Ayah!$"
+    .string "It ought to have.$"
 
 ViridianCity_Gym_Text_TakashiPostBattle::
-    .string "The DAEMON LEAGUE? You? Don't get\n"
-    .string "cocky!$"
+    .string "The DAEMON LEAGUE. You. Hm.$"
 
 ViridianCity_Gym_Text_ColeIntro::
-    .string "Your DAEMON will cower at the\n"
-    .string "crack of my whip!$"
+    .string "Mine perform under pressure. That\n"
+    .string "is the whole method.$"
 
 ViridianCity_Gym_Text_ColeDefeat::
-    .string "Yowch!\n"
-    .string "Whiplash!$"
+    .string "They did not perform.$"
 
 ViridianCity_Gym_Text_ColePostBattle::
-    .string "Wait!\n"
-    .string "I was just careless!$"
+    .string "Conditions were not typical.$"
 
 ViridianCity_Gym_Text_SamuelIntro::
-    .string "CALLOW GYM was closed for a long\n"
-    .string "time, but now our LEADER is back!$"
+    .string "This GYM was shut for years. He\n"
+    .string "came back. Nobody announced it.$"
 
 ViridianCity_Gym_Text_SamuelDefeat::
-    .string "I was beaten?$"
+    .string "I was outscored?$"
 
 ViridianCity_Gym_Text_SamuelPostBattle::
     .string "You can go on to the DAEMON\n"
@@ -137,16 +131,16 @@ ViridianCity_Gym_Text_SamuelPostBattle::
 
 ViridianCity_Gym_Text_GymGuyAdvice::
     .string "Yo! Champ in making!\p"
-    .string "Even I don't know CALLOW LEADER's\n"
-    .string "identity!\p"
-    .string "This will be the toughest of all\n"
-    .string "the GYM LEADERs!\p"
-    .string "I heard that the USERS here like\n"
-    .string "ground-type DAEMON!$"
+    .string "Nobody will tell me who runs this\n"
+    .string "GYM.\p"
+    .string "I have asked. They smile.\p"
+    .string "They favour STRATUM here. That\n"
+    .string "much I got.$"
 
 ViridianCity_Gym_Text_GymGuyPostVictory::
-    .string "Blow me away! GIOVANNI was the\n"
-    .string "GYM LEADER of CALLOW?$"
+    .string "GIOVANNI. He was running the GYM\n"
+    .string "the whole time.\p"
+    .string "I asked so many people.$"
 
 ViridianCity_Gym_Text_GymStatue::
     .string "CALLOW DAEMON GYM LEADER: ?\p"
