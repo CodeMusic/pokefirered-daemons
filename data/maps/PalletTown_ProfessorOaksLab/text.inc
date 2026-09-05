@@ -169,9 +169,8 @@ PalletTown_ProfessorOaksLab_Text_OakExplainCatching::
     .string "itself, it is fair.\p"
     .string "Offer it a BOX and see whether it\n"
     .string "will run there.\p"
-    .string "Often it will not. A daemon with\n"
-    .string "MANA left has somewhere better to\l"
-    .string "be.$"
+    .string "Often it will not. One that is not\n"
+    .string "tired has somewhere better to be.$"
 
 PalletTown_ProfessorOaksLab_Text_OakCompleteMonGuideWasMyDream::
     .string "A complete record of every daemon\n"
