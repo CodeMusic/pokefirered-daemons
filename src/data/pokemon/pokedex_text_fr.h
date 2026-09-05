@@ -384,9 +384,9 @@ const u8 gPsyduckPokedexText[] = _(
 const u8 gPsyduckPokedexTextUnused[] = _("");
 
 const u8 gGolduckPokedexText[] = _(
-    "It catches what stopped and decides what\n"
-    "happens next. It is calm because it has\n"
-    "seen this one before.");
+        "It intercepts what stopped and\n"
+        "decides what happens next. It is calm\n"
+        "because it has seen this one before.");
 
 const u8 gGolduckPokedexTextUnused[] = _("");
 
