@@ -1010,23 +1010,23 @@ const u8 gSnorlaxPokedexText[] = _(
 const u8 gSnorlaxPokedexTextUnused[] = _("");
 
 const u8 gArticunoPokedexText[] = _(
-        "A legendary bird DAEMON that is said to\n"
-        "appear to doomed people who are lost in\n"
-        "icy mountains.");
+    "It went down after something and came\n"
+    "back without it. It has not said what\n"
+    "it saw when it turned around.");
 
 const u8 gArticunoPokedexTextUnused[] = _("");
 
 const u8 gZapdosPokedexText[] = _(
-        "A legendary bird DAEMON that is said to\n"
-        "appear from clouds while dropping\n"
-        "enormous lightning bolts.");
+    "It restarts what has stopped. Nobody\n"
+    "asked the thing that stopped whether\n"
+    "it wanted to be running.");
 
 const u8 gZapdosPokedexTextUnused[] = _("");
 
 const u8 gMoltresPokedexText[] = _(
-        "It is said to be the legendary bird\n"
-        "DAEMON of fire. Every flap of its wings\n"
-        "creates a dazzling flare of flames.");
+    "It gave away something that was not\n"
+    "its to give. It is still up here, and\n"
+    "it is not going anywhere.");
 
 const u8 gMoltresPokedexTextUnused[] = _("");
 

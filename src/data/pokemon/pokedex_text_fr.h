@@ -1007,23 +1007,23 @@ const u8 gSnorlaxPokedexText[] = _(
 const u8 gSnorlaxPokedexTextUnused[] = _("");
 
 const u8 gArticunoPokedexText[] = _(
-        "One of the legendary bird DAEMON.\n"
-        "With its long tail trailing behind, its\n"
-        "flying form is magnificent.");
+    "It sings, and things that had stopped\n"
+    "moving move. It lives four floors\n"
+    "down and does not come up.");
 
 const u8 gArticunoPokedexTextUnused[] = _("");
 
 const u8 gZapdosPokedexText[] = _(
-        "One of the legendary bird DAEMON. While\n"
-        "it is flying, it makes crackling and\n"
-        "snapping sounds.");
+    "It restarts what has stopped. Nothing\n"
+    "it has restarted has stopped again.\n"
+    "Nobody knows how.");
 
 const u8 gZapdosPokedexTextUnused[] = _("");
 
 const u8 gMoltresPokedexText[] = _(
-        "One of the legendary bird DAEMON.\n"
-        "Those seeing it are overwhelmed by its\n"
-        "orange wings that seem to be on fire.");
+    "It carries fire down from where fire\n"
+    "was kept and hands it to whoever is\n"
+    "standing there.");
 
 const u8 gMoltresPokedexTextUnused[] = _("");
 

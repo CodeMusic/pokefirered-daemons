@@ -1874,7 +1874,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_ARTICUNO] =
     {
-        .categoryName = _("FREEZE"),
+        .categoryName = _("LAMENT"),
         .height = 17,
         .weight = 554,
         .description = gArticunoPokedexText,
@@ -1887,7 +1887,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_ZAPDOS] =
     {
-        .categoryName = _("ELECTRIC"),
+        .categoryName = _("RECOVERY"),
         .height = 16,
         .weight = 526,
         .description = gZapdosPokedexText,
@@ -1900,7 +1900,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_MOLTRES] =
     {
-        .categoryName = _("FLAME"),
+        .categoryName = _("CRAFT"),
         .height = 20,
         .weight = 600,
         .description = gMoltresPokedexText,

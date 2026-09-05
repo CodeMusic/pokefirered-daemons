@@ -57,8 +57,8 @@ Route14_Text_DonaldDefeat::
 Route14_Text_DonaldPostBattle::
     .string "Well, the winged mirages are the\n"
     .string "legendary bird DAEMON.\p"
-    .string "There are three of them: ARTICUNO,\n"
-    .string "ZAPDOS, and MOLTRES.$"
+    .string "There are three of them: ORPHEUS,\n"
+    .string "ASCLEPIUS, and PROMETHEUS.$"
 
 Route14_Text_BennyIntro::
     .string "I'm not into it, but okay.\n"
