@@ -190,6 +190,17 @@ static void DaemonsDebug_GrantTestKit(void)
     for (i = FLAG_BADGE01_GET; i <= FLAG_BADGE08_GET; i++)
         FlagSet(i);
 
+    // THE ITEM IS NOT THE PERMISSION. Putting ITEM_SS_TICKET in the bag was not
+    // enough and could not be: the sailor at Ardor runs
+    //     goto_if_unset FLAG_GOT_SS_TICKET, ...DontHaveSSTicket
+    // so he checks a FLAG and never looks in the bag at all. A debug save with
+    // the ticket in hand was still turned away at the gangway.
+    //
+    // Both are set, deliberately. The flag is what opens the ship; the item is
+    // what the player can read a description of, which is what 9.3 is here to
+    // evaluate.
+    FlagSet(FLAG_GOT_SS_TICKET);
+
     // Without these the party is in memory and unreachable: start_menu.c only
     // draws the POKeMON entry when FLAG_SYS_POKEMON_GET is set, and the DEX
     // entry when FLAG_SYS_POKEDEX_GET is. Handing someone six daemons and no
