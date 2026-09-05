@@ -146,6 +146,11 @@ static void DaemonsDebug_GrantTestKit(void)
         { ITEM_ORAN_BERRY,   10 },
         { ITEM_LEFTOVERS,     1 },
         { ITEM_TM01,          1 },
+        // A KEY item, which is its own pocket and its own description pane --
+        // and it is the one thing whose absence actually blocked a test run:
+        // without it the ship at Ardor cannot be boarded, so a debug save
+        // could not reach HM01 or anything behind it.
+        { ITEM_SS_TICKET,     1 },
     };
     struct Pokemon mon;
     u32 i;

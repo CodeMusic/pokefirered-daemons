@@ -2,7 +2,7 @@ LavenderTown_Mart_MapScripts::
 	.byte 0
 
 LavenderTown_Mart_EventScript_BaldingMan::
-	msgbox LavenderTown_Mart_Text_SearchingForStatRaiseItems, MSGBOX_NPC
+	msgbox LavenderTown_Mart_Text_ArguedAboutThePrimaries, MSGBOX_NPC
 	end
 
 LavenderTown_Mart_EventScript_Rocker::

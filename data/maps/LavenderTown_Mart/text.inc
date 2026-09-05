@@ -1,11 +1,16 @@
-LavenderTown_Mart_Text_SearchingForStatRaiseItems::
-    .string "I'm searching for items that raise\n"
-    .string "the stats of DAEMON.\p"
-    .string "They're effective over the course\n"
-    .string "of a single battle.\p"
-    .string "X ATTACK, X DEFEND, X SPEED, and\n"
-    .string "X SPECIAL are what I'm after.\p"
-    .string "Do you know where I can get them?$"
+LavenderTown_Mart_Text_ArguedAboutThePrimaries::
+    .string "My brother and I did not speak for\n"
+    .string "a year over the primaries.\p"
+    .string "I said red, yellow, blue. He said\n"
+    .string "red, green, blue.\p"
+    .string "He works in light, so he adds. I\n"
+    .string "work in ink, so I take away. He\l"
+    .string "called me negative for a year.\p"
+    .string "Take everything from him and he is\n"
+    .string "sitting in the dark. Take everything\l"
+    .string "from me and I have a clean sheet.\p"
+    .string "We were both right. He still will\n"
+    .string "not have it.$"
 
 LavenderTown_Mart_Text_DidYouBuyRevives::
     .string "You know REVIVE? It revives any\n"
