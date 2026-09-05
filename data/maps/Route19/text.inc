@@ -74,7 +74,7 @@ Route19_Text_AnyaDefeat::
 
 Route19_Text_AnyaPostBattle::
     .string "It's still a long way to go to\n"
-    .string "SEAFOAM ISLANDS…\p"
+    .string "GLAUCOUS ISLES…\p"
     .string "I want to go back to LURID…$"
 
 Route19_Text_AliceIntro::
@@ -86,7 +86,7 @@ Route19_Text_AliceDefeat::
 
 Route19_Text_AlicePostBattle::
     .string "My boyfriend wanted to swim to\n"
-    .string "SEAFOAM ISLANDS.$"
+    .string "GLAUCOUS ISLES.$"
 
 Route19_Text_AxleIntro::
     .string "Ahoy, there!\n"
@@ -116,7 +116,7 @@ Route19_Text_ConniePostBattle::
 Route19_Text_RouteSign::
     .string "SEA ROUTE 19\n"
     .string "LURID CITY -\l"
-    .string "SEAFOAM ISLANDS\p"
+    .string "GLAUCOUS ISLES\p"
     .string "Painted beneath:\n"
     .string "SEAFADE$"
 

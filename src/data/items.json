@@ -3574,7 +3574,7 @@
       "price": 10,
       "holdEffect": "HOLD_EFFECT_METAL_POWDER",
       "holdEffectParam": 0,
-      "description_english": "A fine, hard powder to be held by\\na DITTO.\\nIt raises DITTO's DEFENSE stat.",
+      "description_english": "A fine, hard powder to be\\nheld by a MOCK. It raises\\nMOCK's DEFENSE stat.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",

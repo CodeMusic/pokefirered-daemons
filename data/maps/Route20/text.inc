@@ -9,8 +9,8 @@ Route20_Text_BarryPostBattle::
     .string "I wish I could ride my DAEMONS.$"
 
 Route20_Text_ShirleyIntro::
-    .string "SEAFOAM is a quiet getaway.\n"
-    .string "I'm vacationing here.$"
+    .string "GLAUCOUS is a quiet getaway. I'm\n"
+    .string "vacationing here.$"
 
 Route20_Text_ShirleyDefeat::
     .string "Quit it!$"
@@ -36,8 +36,8 @@ Route20_Text_IreneDefeat::
     .string "No mercy at all!$"
 
 Route20_Text_IrenePostBattle::
-    .string "SEAFOAM used to be a single island\n"
-    .string "in the distant past.$"
+    .string "GLAUCOUS used to be a single\n"
+    .string "island in the distant past.$"
 
 Route20_Text_DeanIntro::
     .string "Check out my buff physique!$"
@@ -104,7 +104,7 @@ Route20_Text_MelissaPostBattle::
     .string "QUICKSILVER is a volcanic island!$"
 
 Route20_Text_SeafoamIslands::
-    .string "SEAFOAM ISLANDS$"
+    .string "GLAUCOUS ISLES$"
 
 Route20_Text_MistyTrainsHere::
     .string "Strong USERS and WATER DAEMONS\n"

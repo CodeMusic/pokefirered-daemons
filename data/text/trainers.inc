@@ -563,7 +563,7 @@ Route20_Text_BarryRematchIntro::
 
 Route20_Text_ShirleyRematchIntro::
 	.string "Are you jealous that I'm\n"
-	.string "vacationing on SEAFOAM?$"
+	.string "vacationing on GLAUCOUS?$"
 
 Route20_Text_TiffanyRematchIntro::
 	.string "I love floating with the fishes\n"

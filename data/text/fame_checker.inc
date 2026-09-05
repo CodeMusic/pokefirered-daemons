@@ -850,7 +850,7 @@ gFameCheckerFlavorTextOriginLocation_Misty2::
 	.string "DOLDRUM GYM$"
 
 gFameCheckerFlavorTextOriginLocation_Misty3::
-	.string "SEAFOAM ISLANDS$"
+	.string "GLAUCOUS ISLES$"
 
 gFameCheckerFlavorTextOriginLocation_Misty4::
 	.string "DOLDRUM CAPE$"

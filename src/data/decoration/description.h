@@ -398,9 +398,9 @@ const u8 DecorDesc_CLEFAIRY_DOLL[] = _(
         "or a desk.");
 
 const u8 DecorDesc_DITTO_DOLL[] = _(
-    "A DITTO doll.\n"
-        "Place it on a mat\n"
-        "or a desk.");
+        "A MOCK doll.\n"
+        "Place it on a\n"
+        "mat or a desk.");
 
 const u8 DecorDesc_SMOOCHUM_DOLL[] = _(
     "A SMOOCHUM doll.\n"

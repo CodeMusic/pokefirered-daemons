@@ -8416,11 +8416,23 @@ SwallowBest:
 	call SwallowEffect
 	goto SwallowContinue
 
+@ PERSPECTIVE. 4.6: taking another's frame is TOTAL and it is LOSSY -- you get
+@ the other's frame by surrendering your own -- and 9.4 makes a daemon's palette
+@ its TYPE, so the swap already carries the meaning: the attacker leaves wearing
+@ the target's colour. What vanilla did not show is the cost.
+@
+@ So its own hue drains to grey BEFORE the swap and the new one arrives after.
+@ Grey is not a colour spent here; 8.6 makes grey the ground this game already
+@ stands on, so the surrender is drawn as a return to it.
 Move_TRANSFORM:
 	monbg ANIM_ATTACKER
 	playsewithpan SE_M_TELEPORT, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 14, RGB(13, 13, 13)
+	waitforvisualfinish
 	waitplaysewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER, 48
 	createvisualtask AnimTask_TransformMon, 2, 0
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 14, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	clearmonbg ANIM_ATTACKER
 	end

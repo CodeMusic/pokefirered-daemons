@@ -926,9 +926,9 @@ const u8 gLaprasPokedexText[] = _(
 const u8 gLaprasPokedexTextUnused[] = _("");
 
 const u8 gDittoPokedexText[] = _(
-    "Capable of copying an opponent's genetic\n"
-    "code to instantly transform itself into a\n"
-    "duplicate of the enemy.");
+    "It has been every daemon in this record\n"
+    "and appears in none of them under its\n"
+    "own name.");
 
 const u8 gDittoPokedexTextUnused[] = _("");
 

@@ -923,9 +923,9 @@ const u8 gLaprasPokedexText[] = _(
 const u8 gLaprasPokedexTextUnused[] = _("");
 
 const u8 gDittoPokedexText[] = _(
-    "It can freely recombine its own cellular\n"
-    "structure to transform into other life-\n"
-    "forms.");
+    "It becomes whatever it is looking at,\n"
+    "completely. While it is doing that there\n"
+    "is nothing of it left over.");
 
 const u8 gDittoPokedexTextUnused[] = _("");
 
