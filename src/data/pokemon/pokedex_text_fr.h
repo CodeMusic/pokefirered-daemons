@@ -566,16 +566,16 @@ const u8 gSlowbroPokedexText[] = _(
 const u8 gSlowbroPokedexTextUnused[] = _("");
 
 const u8 gMagnemitePokedexText[] = _(
-    "It moves while constantly hovering.\n"
-    "It discharges THUNDER WAVE and so on\n"
-    "from the units at its sides.");
+    "It has never attacked anything. It stays\n"
+    "where it can see, and it does not look\n"
+    "away. That is the whole of it.");
 
 const u8 gMagnemitePokedexTextUnused[] = _("");
 
 const u8 gMagnetonPokedexText[] = _(
-    "A linked cluster formed of several\n"
-    "MAGNEMITE. It discharges powerful\n"
-    "magnetic waves at high voltage.");
+    "Three of them, and they do not act\n"
+    "either. What one of them saw, three\n"
+    "of them saw.");
 
 const u8 gMagnetonPokedexTextUnused[] = _("");
 
@@ -958,9 +958,9 @@ const u8 gFlareonPokedexText[] = _(
 const u8 gFlareonPokedexTextUnused[] = _("");
 
 const u8 gPorygonPokedexText[] = _(
-    "It has never attacked anything. It stays\n"
-    "where it can see, and it does not look\n"
-    "away. That is the whole of it.");
+    "Every other daemon is a process. This\n"
+    "one has a mass, a temperature, and\n"
+    "somewhere that it is.");
 
 const u8 gPorygonPokedexTextUnused[] = _("");
 

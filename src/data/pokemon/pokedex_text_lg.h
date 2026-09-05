@@ -569,16 +569,16 @@ const u8 gSlowbroPokedexText[] = _(
 const u8 gSlowbroPokedexTextUnused[] = _("");
 
 const u8 gMagnemitePokedexText[] = _(
-    "Uses antigravity to stay suspended.\n"
-    "Appears without warning and uses THUNDER\n"
-    "WAVE and similar moves.");
+    "Everything it saw is on record. It is\n"
+    "not in the record. Nobody thought to\n"
+    "write down who was watching.");
 
 const u8 gMagnemitePokedexTextUnused[] = _("");
 
 const u8 gMagnetonPokedexText[] = _(
-    "Formed by several MAGNEMITE linked\n"
-    "together. They frequently appear when\n"
-    "sunspots flare up.");
+    "Three accounts of one thing. They\n"
+    "agree, which is not the same as being\n"
+    "right.");
 
 const u8 gMagnetonPokedexTextUnused[] = _("");
 
@@ -961,9 +961,9 @@ const u8 gFlareonPokedexText[] = _(
 const u8 gFlareonPokedexTextUnused[] = _("");
 
 const u8 gPorygonPokedexText[] = _(
-    "Everything it saw is on record. It is\n"
-    "not in the record. Nobody thought to\n"
-    "write down who was watching.");
+    "They call it the material one. Nobody\n"
+    "has shown that being material is\n"
+    "different from running.");
 
 const u8 gPorygonPokedexTextUnused[] = _("");
 

@@ -6903,7 +6903,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Mixed_3 = {
 					.spDefenseIV = 10,
 					.abilityNum = 1,
 					.personality = 0x0A, // GENDERLESS TIMID
-					.nickname = _("MAGNETON"),
+					.nickname = _("QUORUM"),
 					.friendship = 255
 				},
 				{
@@ -7675,7 +7675,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Double_7 = {
 					.spDefenseIV = 20,
 					.abilityNum = 1,
 					.personality = 0x0A, // GENDERLESS TIMID
-					.nickname = _("MAGNETON"),
+					.nickname = _("QUORUM"),
 					.friendship = 255
 				},
 				{
@@ -8170,7 +8170,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Knockout_6 = {
 					.spDefenseIV = 20,
 					.abilityNum = 1,
 					.personality = 0x14, // GENDERLESS CALM
-					.nickname = _("MAGNETON"),
+					.nickname = _("QUORUM"),
 					.friendship = 255
 				},
 				{

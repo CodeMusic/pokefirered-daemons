@@ -1055,7 +1055,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_MAGNEMITE] =
     {
-        .categoryName = _("MAGNET"),
+        .categoryName = _("OBSERVER"),
         .height = 3,
         .weight = 60,
         .description = gMagnemitePokedexText,
@@ -1068,7 +1068,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_MAGNETON] =
     {
-        .categoryName = _("MAGNET"),
+        .categoryName = _("THRESHOLD"),
         .height = 10,
         .weight = 600,
         .description = gMagnetonPokedexText,
@@ -1783,7 +1783,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_PORYGON] =
     {
-        .categoryName = _("OBSERVER"),
+        .categoryName = _("MATERIAL"),
         .height = 8,
         .weight = 365,
         .description = gPorygonPokedexText,

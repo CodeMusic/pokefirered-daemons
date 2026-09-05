@@ -1990,7 +1990,7 @@
       "price": 50,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A piece of MAIL featuring a cute\\nMAGNEMITE print. It is to be\\nheld by a DAEMON.",
+      "description_english": "A piece of MAIL featuring\\na cute SENTINEL print. It\\nis to be held by a DAEMON.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
