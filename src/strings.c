@@ -855,7 +855,11 @@ const u8 gText_PokeSum_Controls_PickDelete[] = _("{DPAD_UPDOWN}PICK {A_BUTTON}DE
 const u8 gText_PokeSum_HmMovesCantBeForgotten[] = _("HM moves can't be\nforgotten now.");
 const u8 gText_TrainerCardName[] = _("NAME: ");
 const u8 gText_TrainerCardIDNo[] = _("IDNo.");
-const u8 gText_TrainerCardMoney[] = _("MONEY");
+// 396: the word MONEY is never shown to the player -- except the GBA card
+// shows it, which the Game Boy one did not. CACHE carries three readings
+// at once: a hoard, a fast local memory, and cash, which it is pronounced
+// as. One more than the lexicon asks of any term, and it needs no beat.
+const u8 gText_TrainerCardMoney[] = _("CACHE");
 const u8 gText_TrainerCardYen[] = _("¥");
 const u8 gText_TrainerCardPokedex[] = _("INDEX");
 const u8 gText_TrainerCardNull[] = _("");
