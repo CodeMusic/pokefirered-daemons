@@ -95,7 +95,7 @@ gFameCheckerFlavorText_Brock2:: @ 0x81AD840
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
 	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}There aren't many serious DAEMON\n"
 	.string "USERS here.\p"
-	.string "They're all like BUG CATCHERS, you\n"
+	.string "They're all like FORAGERS, you\n"
 	.string "know, just hobbyists.\p"
 	.string "But SLATE GYM's CAIRN isn't like\n"
 	.string "that, not one bit.$"

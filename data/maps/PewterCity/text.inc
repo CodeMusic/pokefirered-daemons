@@ -30,7 +30,7 @@ PewterCity_Text_ClefairyCameFromMoon::
 PewterCity_Text_BrockOnlySeriousTrainerHere::
     .string "There aren't many serious DAEMON\n"
     .string "USERS here!\p"
-    .string "They're all like BUG CATCHERs, but\n"
+    .string "They're all like FORAGERs, but\n"
     .string "SLATE GYM's CAIRN is totally into\l"
     .string "it!$"
 
