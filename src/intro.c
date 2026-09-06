@@ -2117,7 +2117,16 @@ static void GFScene_Task_NameSparklesBig(u8 taskId)
 
 static struct Sprite *GFScene_CreateLogoSprite(void)
 {
-    u8 spriteId = CreateSprite(&sSpriteTemplate_GameFreakLogoArt, 120, 70, 4);
+    // 70 was vanilla's, and it worked because vanilla's mark is a tall narrow
+    // FLAME -- thin exactly where the wordmark crosses it, so GAME FREAK read
+    // over a stalk. Ours is a fat double ring, widest at that height, and the
+    // two collided into a smear.
+    //
+    // The window is at tilemapTop 4 and the text blits at y 40 inside it, so
+    // the wordmark occupies screen y 72..88. At 45 the mark's drawn rows land
+    // at 19..71 and stop one pixel above it: symbol over name, which is what
+    // a round mark wants and a flame did not need.
+    u8 spriteId = CreateSprite(&sSpriteTemplate_GameFreakLogoArt, 120, 45, 4);
     return &gSprites[spriteId];
 }
 
