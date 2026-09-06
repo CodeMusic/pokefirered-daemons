@@ -2,7 +2,7 @@ FourIsland_Mart_Text_LoreleiGrewUpOnThisIsland::
     .string "We've had a great and powerful\n"
     .string "USER grow up on this island.\p"
     .string "I bet even you'd know her. It's\n"
-    .string "LORELEI of the ELITE FOUR!\p"
+    .string "LORELEI of the REVIEW BOARD!\p"
     .string "When LORELEI was just a tyke, I\n"
     .string "taught her about DAEMON.$"
 

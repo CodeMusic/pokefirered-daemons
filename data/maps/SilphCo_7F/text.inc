@@ -120,7 +120,7 @@ SilphCo_7F_Text_RivalPostBattle::
     .string "to see what's strong and how they\l"
     .string "evolve!\p"
     .string "I'm going to the DAEMON LEAGUE to\n"
-    .string "boot out the ELITE FOUR!\p"
+    .string "boot out the REVIEW BOARD!\p"
     .string "I'll become the world's most\n"
     .string "powerful USER!\p"
     .string "{PLAYER}, well good luck to you!\n"

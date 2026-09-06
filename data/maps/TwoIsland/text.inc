@@ -57,7 +57,7 @@ TwoIsland_Text_BrunoCameToIslandWhileBack::
     .string "Listen, listen. Did you know?\p"
     .string "A famous USER came to the ISLAND\n"
     .string "a little while back.\p"
-    .string "He's one of the ELITE FOUR. His\n"
+    .string "He's one of the REVIEW BOARD. His\n"
     .string "name is BRUNO.\p"
     .string "He went away disappointed when he\n"
     .string "found out that they were all sold\l"

@@ -1,5 +1,5 @@
 PokemonLeague_BrunosRoom_Text_Intro::
-    .string "I am BRUNO of the ELITE FOUR!\p"
+    .string "I am BRUNO of the REVIEW BOARD!\p"
     .string "Through rigorous training, people\n"
     .string "and DAEMON can become stronger!\p"
     .string "I've weight trained with my\n"
@@ -10,7 +10,7 @@ PokemonLeague_BrunosRoom_Text_Intro::
     .string "Hoo hah!$"
 
 PokemonLeague_BrunosRoom_Text_RematchIntro::
-    .string "I am BRUNO of the ELITE FOUR!\p"
+    .string "I am BRUNO of the REVIEW BOARD!\p"
     .string "Through rigorous training, people\n"
     .string "and DAEMON can become stronger\l"
     .string "without limit.\p"

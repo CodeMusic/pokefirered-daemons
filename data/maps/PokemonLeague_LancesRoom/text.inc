@@ -1,6 +1,6 @@
 PokemonLeague_LancesRoom_Text_Intro::
     .string "Ah! I heard about you {PLAYER}!\p"
-    .string "I lead the ELITE FOUR! You can\n"
+    .string "I lead the REVIEW BOARD! You can\n"
     .string "call me LANCE the dragon USER!\p"
     .string "You know that dragons are mythical\n"
     .string "DAEMON!\p"
@@ -13,7 +13,7 @@ PokemonLeague_LancesRoom_Text_Intro::
 
 PokemonLeague_LancesRoom_Text_RematchIntro::
     .string "Ah! So, you've returned, {PLAYER}!\p"
-    .string "I lead the ELITE FOUR.\p"
+    .string "I lead the REVIEW BOARD.\p"
     .string "You can call me LANCE the dragon\n"
     .string "USER.\p"
     .string "You know that dragons are mythical\n"
@@ -41,7 +41,7 @@ PokemonLeague_LancesRoom_Text_PostBattle::
     .string "ahead.\p"
     .string "You have to face another USER! His\n"
     .string "name is...\p"
-    .string "{RIVAL}! He beat the ELITE FOUR\n"
+    .string "{RIVAL}! He beat the REVIEW BOARD\n"
     .string "before you!\p"
     .string "He is the real DAEMON LEAGUE\n"
     .string "champion!$"

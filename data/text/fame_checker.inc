@@ -151,7 +151,7 @@ gFameCheckerFlavorText_Misty4:: @ 0x81ADC72
 gFameCheckerFlavorText_Misty5:: @ 0x81ADCEB
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}There's a rumor…\p"
 	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}MISTY is said to worship LORELEI\n"
-	.string "of the ELITE FOUR.$"
+	.string "of the REVIEW BOARD.$"
 
 gFameCheckerFlavorText_LtSurge0:: @ 0x81ADD3C
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
@@ -341,7 +341,7 @@ gFameCheckerFlavorText_Blaine5:: @ 0x81AEB69
 
 gFameCheckerFlavorText_Lorelei0:: @ 0x81AEBDF
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
-	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}I am LORELEI of the ELITE FOUR.$"
+	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}I am LORELEI of the REVIEW BOARD.$"
 
 gFameCheckerFlavorText_Lorelei1:: @ 0x81AEC28
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of DAEMON?\p"
@@ -353,7 +353,7 @@ gFameCheckerFlavorText_Lorelei2:: @ 0x81AEC82
 	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}We've had a great and powerful\n"
 	.string "USER grow up on this island.\p"
 	.string "I bet even you'd know her. It's\n"
-	.string "LORELEI of the ELITE FOUR!$"
+	.string "LORELEI of the REVIEW BOARD!$"
 
 gFameCheckerFlavorText_Lorelei3:: @ 0x81AED27
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
@@ -379,7 +379,7 @@ gFameCheckerFlavorText_Lorelei5:: @ 0x81AEE51
 
 gFameCheckerFlavorText_Bruno0:: @ 0x81AEF25
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
-	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}I am BRUNO of the ELITE FOUR!$"
+	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}I am BRUNO of the REVIEW BOARD!$"
 
 gFameCheckerFlavorText_Bruno1:: @ 0x81AEF6C
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of DAEMON?\p"
@@ -401,8 +401,8 @@ gFameCheckerFlavorText_Bruno3:: @ 0x81AF04C
 
 gFameCheckerFlavorText_Bruno4:: @ 0x81AF0F0
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}There's a rumor…\p"
-	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}He's one of the ELITE FOUR.\n"
-	.string "His name is BRUNO.\p"
+	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}He's one of the REVIEW BOARD. His\n"
+	.string "name is BRUNO.\p"
 	.string "He went away disappointed when he\n"
 	.string "found out that they were all sold\l"
 	.string "out of Rage Candybars.$"
@@ -415,7 +415,7 @@ gFameCheckerFlavorText_Bruno5:: @ 0x81AF19A
 
 gFameCheckerFlavorText_Agatha0:: @ 0x81AF200
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
-	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}I am AGATHA of the ELITE FOUR.$"
+	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}I am AGATHA of the REVIEW BOARD.$"
 
 gFameCheckerFlavorText_Agatha1:: @ 0x81AF248
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of DAEMON?\p"
@@ -448,11 +448,11 @@ gFameCheckerFlavorText_Agatha5:: @ 0x81AF47C
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
 	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}Take AGATHA, for example.\p"
 	.string "She set a record for being the\n"
-	.string "oldest-ever ELITE FOUR member.$"
+	.string "oldest-ever REVIEW BOARD member.$"
 
 gFameCheckerFlavorText_Lance0:: @ 0x81AF4FD
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
-	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}I lead the ELITE FOUR.\p"
+	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}I lead the REVIEW BOARD.\p"
 	.string "You can call me LANCE the dragon\n"
 	.string "USER.$"
 
@@ -1374,7 +1374,7 @@ PokemonJournal_Text_SpecialFeatureMisty::
 	.string "Special Feature: DOLDRUM GYM\n"
 	.string "LEADER MISTY!\p"
 	.string "MISTY is said to worship LORELEI\n"
-	.string "of the ELITE FOUR.$"
+	.string "of the REVIEW BOARD.$"
 
 PokemonJournal_Text_SpecialFeatureLtSurge::
 	.string "DAEMON JOURNAL\p"
@@ -1420,7 +1420,7 @@ PokemonJournal_Text_SpecialFeatureBlaine::
 
 PokemonJournal_Text_SpecialFeatureLorelei::
 	.string "DAEMON JOURNAL\p"
-	.string "Special Feature: ELITE FOUR's\n"
+	.string "Special Feature: REVIEW BOARD's\n"
 	.string "LORELEI!\p"
 	.string "Known for her logical, calculated,\n"
 	.string "and cool battling style, LORELEI\l"
@@ -1428,23 +1428,23 @@ PokemonJournal_Text_SpecialFeatureLorelei::
 
 PokemonJournal_Text_SpecialFeatureBruno::
 	.string "DAEMON JOURNAL\p"
-	.string "Special Feature: ELITE FOUR's\n"
+	.string "Special Feature: REVIEW BOARD's\n"
 	.string "BRUNO!\p"
-	.string "BRUNO apparently joined the ELITE\n"
-	.string "FOUR out of his burning ambition to\l"
-	.string "battle the best USERS.$"
+	.string "BRUNO apparently joined the REVIEW\n"
+	.string "BOARD out of his burning ambition\l"
+	.string "to battle the best USERS.$"
 
 PokemonJournal_Text_SpecialFeatureAgatha::
 	.string "DAEMON JOURNAL\p"
-	.string "Special Feature: ELITE FOUR's\n"
+	.string "Special Feature: REVIEW BOARD's\n"
 	.string "AGATHA!\p"
-	.string "In her youth, AGATHA and\n"
-	.string "CRYSTAL CLEAR were rivals who vied\l"
-	.string "for supremacy as USERS.$"
+	.string "In her youth, AGATHA and CRYSTAL\n"
+	.string "CLEAR were rivals who vied for\l"
+	.string "supremacy as USERS.$"
 
 PokemonJournal_Text_SpecialFeatureLance::
 	.string "DAEMON JOURNAL\p"
-	.string "Special Feature: ELITE FOUR's\n"
+	.string "Special Feature: REVIEW BOARD's\n"
 	.string "LANCE!\p"
 	.string "LANCE's grandfather is thought to\n"
 	.string "be the elder of a famous clan of\l"

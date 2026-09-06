@@ -1,7 +1,8 @@
 IndigoPlateau_PokemonCenter_1F_Text_GymGuyAdvice::
     .string "Yo! Champ in the making!\p"
     .string "At the DAEMON LEAGUE, you will\n"
-    .string "face the ELITE FOUR all in a row.\p"
+    .string "face the REVIEW BOARD all in a\l"
+    .string "row.\p"
     .string "If you lose, you have to start all\n"
     .string "over again!\p"
     .string "This is it! Go for it!$"
@@ -15,7 +16,7 @@ IndigoPlateau_PokemonCenter_1F_Text_FaceEliteFourGoodLuck::
 IndigoPlateau_PokemonCenter_1F_Text_LoreleiIsAbsentClosedForTimeBeing::
     .string "I am so sorry, but you've wasted\n"
     .string "your time coming here.\p"
-    .string "LORELEI of the ELITE FOUR is\n"
+    .string "LORELEI of the REVIEW BOARD is\n"
     .string "absent, you see.\p"
     .string "As a result, the DAEMON LEAGUE is\n"
     .string "closed for the time being.$"
@@ -33,9 +34,9 @@ IndigoPlateau_PokemonCenter_1F_Text_AgathaWhuppedUs::
     .string "scary lady hollering.$"
 
 IndigoPlateau_PokemonCenter_1F_Text_LancesCousinGymLeaderFarAway::
-    .string "Maybe becoming an ELITE FOUR\n"
+    .string "Maybe becoming an REVIEW BOARD\n"
     .string "member is in the blood.\p"
-    .string "From what I've heard, LANCE has\n"
-    .string "a cousin who's a GYM LEADER\l"
+    .string "From what I've heard, LANCE has a\n"
+    .string "cousin who's a GYM LEADER\l"
     .string "somewhere far away.$"
 

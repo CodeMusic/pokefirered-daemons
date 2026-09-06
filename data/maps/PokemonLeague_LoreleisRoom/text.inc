@@ -1,6 +1,6 @@
 PokemonLeague_LoreleisRoom_Text_Intro::
     .string "Welcome to the DAEMON LEAGUE.\p"
-    .string "I am LORELEI of the ELITE FOUR.\p"
+    .string "I am LORELEI of the REVIEW BOARD.\p"
     .string "No one can best me when it comes\n"
     .string "to icy DAEMON.\p"
     .string "Freezing moves are powerful.\p"
@@ -10,7 +10,7 @@ PokemonLeague_LoreleisRoom_Text_Intro::
 
 PokemonLeague_LoreleisRoom_Text_RematchIntro::
     .string "Welcome to the DAEMON LEAGUE.\p"
-    .string "I, LORELEI of the ELITE FOUR,\n"
+    .string "I, LORELEI of the REVIEW BOARD,\n"
     .string "have returned!\p"
     .string "You know how it goes. No one can\n"
     .string "best me when it comes to icy\l"

@@ -76,7 +76,7 @@ PokemonLeague_ChampionsRoom_Text_OakCongratulations::
 PokemonLeague_ChampionsRoom_Text_OakImDisappointedRival::
     .string "CRYSTAL: {RIVAL}! I'm disappointed!\p"
     .string "I came when I heard you beat the\n"
-    .string "ELITE FOUR!\p"
+    .string "REVIEW BOARD!\p"
     .string "But, when I got here, you had\n"
     .string "already lost!\p"
     .string "{RIVAL}! Do you understand why\n"

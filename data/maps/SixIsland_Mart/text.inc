@@ -3,7 +3,7 @@ SixIsland_Mart_Text_AgathaOldestEverEliteFourMember::
     .string "long life!\p"
     .string "Take AGATHA, for example.\p"
     .string "She set a record for being the\n"
-    .string "oldest-ever ELITE FOUR member.\p"
+    .string "oldest-ever REVIEW BOARD member.\p"
     .string "She spurs me to do bigger things.$"
 
 SixIsland_Mart_Text_ShouldBuyMailAndWriteLetter::
