@@ -483,9 +483,9 @@ Help_Text_AnswerWhatsAMon::
 	.string "USERS that bound them.$"
 
 Help_Text_AnswerWhatIsThatPersonLike::
-	.string "Use the FAME CHECKER among the\n"
-	.string "KEY ITEMS in your BAG.\l"
-	.string "It may give you a hint, so try it out.$"
+	.string "Use the HEARSAY among the KEY ITEMS\n"
+	.string "in your BAG. It may give you a hint, so\l"
+	.string "try it out.$"
 
 Help_Text_AnswerWhatDoesHiddenMoveDo::
 	.string "A HIDDEN move is taught to a DAEMON\n"
