@@ -80,6 +80,6 @@ PewterCity_Museum_1F_Text_AerodactylFossil::
     .string "Deadstack. Contents unread.$"
 
 PewterCity_Museum_1F_Text_KabutopsFossil::
-    .string "DOME CORE. Recovered from\n"
+    .string "DRUM CORE. Recovered from\n"
     .string "Deadstack. Contents unread.$"
 

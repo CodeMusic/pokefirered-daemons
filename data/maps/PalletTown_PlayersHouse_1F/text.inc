@@ -1,36 +1,35 @@
 PalletTown_PlayersHouse_1F_Text_AllBoysLeaveOakLookingForYou::
-    .string "MOM: Right. Everyone leaves home\n"
-    .string "some day. It said so on TV.\p"
-    .string "CRYSTAL CLEAR, next door, is\n"
-    .string "looking for you.$"
+    .string "MOM: Right. Everyone goes, sooner\n"
+    .string "or later.\p"
+    .string "CRYSTAL CLEAR next door was\n"
+    .string "asking after you.$"
 
 PalletTown_PlayersHouse_1F_Text_AllGirlsLeaveOakLookingForYou::
-    .string "MOM: …Right. Everyone dreams of\n"
-    .string "traveling. It said so on TV.\p"
-    .string "Oh, yes. CRYSTAL CLEAR, next door,\n"
-    .string "was looking for you.$"
+    .string "MOM: …Right. You have been ready\n"
+    .string "for a while.\p"
+    .string "CRYSTAL CLEAR next door was\n"
+    .string "asking after you.$"
 
 PalletTown_PlayersHouse_1F_Text_YouShouldTakeQuickRest::
-    .string "MOM: {PLAYER}!\n"
-    .string "You should take a quick rest.$"
+    .string "MOM: {PLAYER}.\p"
+    .string "Sit down for a minute.$"
 
 PalletTown_PlayersHouse_1F_Text_LookingGreatTakeCare::
-    .string "MOM: Oh good! You and your\n"
-    .string "DAEMONS are looking great! Take\l"
-    .string "care now!$"
+    .string "MOM: You both look well.\p"
+    .string "Go on, then.$"
 
 PalletTown_PlayersHouse_1F_Text_MovieOnTVFourBoysOnRailroad::
-    .string "There's a movie on TV.\n"
-    .string "Four boys are walking on railroad\l"
-    .string "tracks.\p"
-    .string "…I better go, too.$"
+    .string "There is a film on.\p"
+    .string "Four kids are walking along a\n"
+    .string "railway line.\p"
+    .string "…I should go too.$"
 
 PalletTown_PlayersHouse_1F_Text_MovieOnTVGirlOnBrickRoad::
-    .string "There's a movie on TV.\n"
-    .string "A girl with her hair in pigtails is\l"
-    .string "walking up a brick road.\p"
-    .string "…I better go, too.$"
+    .string "There is a film on.\p"
+    .string "A girl is walking up a road made\n"
+    .string "of brick.\p"
+    .string "…I should go too.$"
 
 PalletTown_PlayersHouse_1F_Text_OopsWrongSide::
-    .string "Oops, wrong side…$"
+    .string "Wrong side.$"
 

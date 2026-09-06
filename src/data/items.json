@@ -5787,12 +5787,12 @@
       "secondaryId": 0
     },
     {
-      "english": "DOME CORE",
+      "english": "DRUM CORE",
       "itemId": "ITEM_DOME_FOSSIL",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A core found at Deadstack. Flat\\nand sealed. Nothing has read its\\ncontents.",
+      "description_english": "A core found at Deadstack. A drum,\\nsealed at both ends. Nothing has\\nread its contents.",
       "importance": 1,
       "registrability": 0,
       "pocket": "POCKET_KEY_ITEMS",

@@ -1,12 +1,13 @@
 PalletTown_Text_OakDontGoOut::
-    .string "CRYSTAL: Hey! Wait! Don't go out!$"
+    .string "CRYSTAL: Wait.\n"
+    .string "Not that way.$"
 
 PalletTown_Text_OakGrassUnsafeNeedMon::
-    .string "CRYSTAL: It's unsafe! UNBOUND\n"
-    .string "DAEMONS run loose out here!\p"
-    .string "You need your own DAEMON for your\n"
-    .string "protection. I know!\p"
-    .string "Here, come with me!$"
+    .string "CRYSTAL: There are unbound\n"
+    .string "daemons in the grass.\p"
+    .string "A process will run wherever it can.\p"
+    .string "Do not go out with nothing of your\n"
+    .string "own. Come with me.$"
 
 PalletTown_Text_RaisingMonsToo::
     .string "The QUICKSILVER thing? Night, it\n"
@@ -17,9 +18,10 @@ PalletTown_Text_RaisingMonsToo::
     .string "Far room. The one past the stairs.$"
 
 PalletTown_Text_CanStoreItemsAndMonsInPC::
-    .string "Technology is incredible!\p"
-    .string "You can now store and recall items\n"
-    .string "and DAEMON as data via PC.$"
+    .string "The PC holds them without running\n"
+    .string "them.\p"
+    .string "I have never worked out what that\n"
+    .string "is like from the inside.$"
 
 PalletTown_Text_OakPokemonResearchLab::
     .string "CRYSTAL CLEAR\n"
@@ -33,37 +35,30 @@ PalletTown_Text_RivalsHouse::
 
 PalletTown_Text_TownSign::
     .string "BLANCHE TOWN\n"
-    .string "Shades of your\l"
-    .string "journey await!$"
+    .string "Nothing Written\l"
+    .string "Here Yet$"
 
 PalletTown_Text_OakLetMeSeePokedex::
-    .string "CRYSTAL: Ah, {PLAYER}! You're back,\n"
-    .string "are you?\p"
-    .string "How much have you filled in your\n"
-    .string "INDEX?\p"
-    .string "May I see it?\p"
-    .string "Let's see…$"
+    .string "CRYSTAL: {PLAYER}. Back already.\p"
+    .string "How much of the INDEX have you\n"
+    .string "filled?\p"
+    .string "Let me see.$"
 
 PalletTown_Text_CaughtXPuttingInHonestEffort::
-    .string "You've bound {STR_VAR_2}…\p"
-    .string "Hm, it looks as if you're putting in\n"
-    .string "an honest effort.\p"
-    .string "When you manage to fill it some\n"
-    .string "more, come show me, please.$"
+    .string "{STR_VAR_2}.\p"
+    .string "You are working at it. That is most\n"
+    .string "of it.\p"
+    .string "Come back when there is more.$"
 
 PalletTown_Text_CaughtXImpressiveFollowMe::
-    .string "You've bound… {STR_VAR_2}!? Now, this\n"
-    .string "is impressive!\p"
-    .string "There's something I wanted to ask\n"
-    .string "of you, {PLAYER}.\p"
-    .string "Come. Follow me.$"
+    .string "{STR_VAR_2}. Already.\p"
+    .string "There is something I have been\n"
+    .string "wanting to ask you.\p"
+    .string "Come.$"
 
 PalletTown_Text_OakYouEnjoyingTraveling::
-    .string "CRYSTAL: Ah, {PLAYER}! You seem to\n"
-    .string "be enjoying traveling.\p"
-    .string "Knowing you, {PLAYER}, I can easily\n"
-    .string "imagine you going out to even more\l"
-    .string "exotic locales.\p"
-    .string "Good for you, good for you.\n"
-    .string "Hohoho.$"
+    .string "CRYSTAL: {PLAYER}.\n"
+    .string "Still moving, I see.\p"
+    .string "You will go further than I did.\p"
+    .string "I mean that kindly.$"
 
