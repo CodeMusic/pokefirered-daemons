@@ -20,7 +20,7 @@ gFameCheckerFlavorText_ProfOak2:: @ 0x81AD1BB
 gFameCheckerFlavorText_ProfOak3:: @ 0x81AD258
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Family and friends?\p"
 	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}CRYSTAL CLEAR reportedly lives\n"
-	.string "with her grandchildren, DAISY and\l"
+	.string "with her grandchildren, VERA and\l"
 	.string "{RIVAL}.$"
 
 gFameCheckerFlavorText_ProfOak4:: @ 0x81AD2B9
@@ -41,32 +41,32 @@ gFameCheckerFlavorText_ProfOak5:: @ 0x81AD377
 
 gFameCheckerFlavorText_Daisy0:: @ 0x81AD40C
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
-	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}If you show DAISY your DAEMON,\n"
-	.string "she can tell how much it likes you.\p"
+	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}If you show VERA your DAEMON, she\n"
+	.string "can tell how much it likes you.\p"
 	.string "Occasionally, she will even groom a\n"
 	.string "DAEMON for you.$"
 
 gFameCheckerFlavorText_Daisy1:: @ 0x81AD4AE
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
 	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}But the person who is most liked by\n"
-	.string "DAEMON is DAISY, I think.$"
+	.string "DAEMON is VERA, I think.$"
 
 gFameCheckerFlavorText_Daisy2:: @ 0x81AD516
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
 	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}She was gently grooming DAEMON…\n"
 	.string "She was a little angel.\p"
 	.string "That little girl's name… I think it\n"
-	.string "was DAISY.$"
+	.string "was VERA.$"
 
 gFameCheckerFlavorText_Daisy3:: @ 0x81AD5A7
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Family and friends?\p"
 	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}CRYSTAL CLEAR reportedly lives\n"
-	.string "with her grandchildren, DAISY and\l"
+	.string "with her grandchildren, VERA and\l"
 	.string "{RIVAL}.$"
 
 gFameCheckerFlavorText_Daisy4:: @ 0x81AD608
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
-	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}A girl from BLANCHE TOWN, DAISY,\n"
+	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}A girl from BLANCHE TOWN, VERA,\n"
 	.string "she enjoys TEA every day.\p"
 	.string "She visits the VERDIGRIS DEPT.\n"
 	.string "STORE to buy some TEA.$"
@@ -74,8 +74,8 @@ gFameCheckerFlavorText_Daisy4:: @ 0x81AD608
 gFameCheckerFlavorText_Daisy5:: @ 0x81AD69F
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}There's a rumor…\p"
 	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}The Spring DAEMON CONTEST's Grand\n"
-	.string "Champion is DAISY CRYSTAL CLEAR\l"
-	.string "of BLANCHE TOWN!$"
+	.string "Champion is VERA CRYSTAL CLEAR of\l"
+	.string "BLANCHE TOWN!$"
 
 gFameCheckerFlavorText_Brock0:: @ 0x81AD705
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
@@ -624,11 +624,10 @@ gFameCheckerPersonQuote_ProfOak:: @ 0x81B0198
 	.string "Never forget that.$"
 
 gFameCheckerPersonName_Daisy:: @ 0x81B0251
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}DAISY$"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}VERA$"
 
 gFameCheckerPersonQuote_Daisy:: @ 0x81B025D
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}From: DAISY\n"
-	.string "To: {PLAYER}\p"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}From: VERA To: {PLAYER}\p"
 	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}While I was comfortably enjoying\n"
 	.string "my tea breaks, you've grown very\l"
 	.string "skilled and powerful.\p"
@@ -1454,7 +1453,7 @@ PokemonJournal_Text_SpecialFeatureProfOak::
 	.string "Special Feature: CRYSTAL CLEAR,\n"
 	.string "the DAEMON Researcher!\p"
 	.string "CRYSTAL CLEAR reportedly lives\n"
-	.string "with her grandchildren DAISY and\l"
+	.string "with her grandchildren VERA and\l"
 	.string "{RIVAL}.$"
 
 PokemonJournal_Text_SpecialFeatureDaisyOak::
@@ -1462,8 +1461,8 @@ PokemonJournal_Text_SpecialFeatureDaisyOak::
 	.string "years ago…\p"
 	.string "DAEMON JOURNAL CONTEST Special!\p"
 	.string "The Spring DAEMON CONTEST's Grand\n"
-	.string "Champion is DAISY CRYSTAL CLEAR\l"
-	.string "of BLANCHE TOWN!$"
+	.string "Champion is VERA CRYSTAL CLEAR of\l"
+	.string "BLANCHE TOWN!$"
 
 PokemonJournal_Text_SpecialFeatureMrFuji::
 	.string "DAEMON JOURNAL\p"

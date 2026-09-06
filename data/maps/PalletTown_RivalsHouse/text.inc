@@ -3,7 +3,7 @@ PalletTown_RivalsHouse_Text_HiBrothersAtLab::
     .string "lab, being told things.$"
 
 PalletTown_RivalsHouse_Text_HeardYouBattledRival::
-    .string "DAISY: I heard you engaged\n"
+    .string "VERA: I heard you engaged\n"
     .string "{RIVAL}.\p"
     .string "He has not mentioned the result. So\n"
     .string "I know the result.$"
@@ -14,8 +14,8 @@ PalletTown_RivalsHouse_Text_ErrandForGrandpaThisWillHelp::
     .string "you where it is.$"
 
 PalletTown_RivalsHouse_Text_ReceivedTownMapFromDaisy::
-    .string "{PLAYER} received a TOWN MAP\n"
-    .string "from DAISY.$"
+    .string "{PLAYER} received a TOWN MAP from\n"
+    .string "VERA.$"
 
 PalletTown_RivalsHouse_Text_DontHaveSpaceForThis::
     .string "You don't have space for this in\n"
@@ -40,7 +40,7 @@ PalletTown_RivalsHouse_Text_ShelvesCrammedFullOfBooks::
     .string "None of them by Gran.$"
 
 PalletTown_RivalsHouse_Text_LikeMeToGroomMon::
-    .string "DAISY: Hi, {PLAYER}. Good timing.\p"
+    .string "VERA: Hi, {PLAYER}. Good timing.\p"
     .string "I was going to have tea.\p"
     .string "Your daemon is running rough,\n"
     .string "though. Shall I look at it?$"
@@ -52,15 +52,15 @@ PalletTown_RivalsHouse_Text_GroomWhichOne::
     .string "Which one?$"
 
 PalletTown_RivalsHouse_Text_LookingNiceInNoTime::
-    .string "DAISY: This will not take long.$"
+    .string "VERA: This will not take long.$"
 
 PalletTown_RivalsHouse_Text_ThereYouGoAllDone::
 #ifdef BUGFIX @ The localizers missed what should be a textcolor change in the localizations.
     .string "{COLOR DARK_GRAY}{STR_VAR_1} settles.\p"
-    .string "{COLOR RED}DAISY: There. It was only\n"
+    .string "{COLOR RED}VERA: There. It was only"
 #else @ In the JP games, gender-based text used a different font instead of different colors.
     .string "{FONT_NORMAL}{STR_VAR_1} settles.\p"
-    .string "{FONT_FEMALE}DAISY: There. It was only\n"
+    .string "{FONT_FEMALE}VERA: There. It was only"
 #endif
     .string "tired.\p"
     .string "It is a good one, this.$"
@@ -70,7 +70,7 @@ PalletTown_RivalsHouse_Text_CantGroomAnEgg::
     .string "There is nothing running in it yet.$"
 
 PalletTown_RivalsHouse_Text_MayISeeFirstMon::
-    .string "DAISY: Gran reads them with an\n"
+    .string "VERA: Gran reads them with an\n"
     .string "instrument.\p"
     .string "I just look. May I see your first\n"
     .string "one?$"

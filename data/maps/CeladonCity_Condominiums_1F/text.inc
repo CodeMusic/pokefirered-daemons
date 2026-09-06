@@ -20,7 +20,7 @@ CeladonCity_Condominiums_1F_Text_DaisyComesToBuyTea::
     .string "my TEA?\p"
     .string "By the way, dear. Are you, by any\n"
     .string "chance, from BLANCHE TOWN?\p"
-    .string "A girl from BLANCHE TOWN, DAISY,\n"
+    .string "A girl from BLANCHE TOWN, VERA,\n"
     .string "she enjoys TEA every day.\p"
     .string "She visits the VERDIGRIS DEPT.\n"
     .string "STORE to buy some TEA.$"

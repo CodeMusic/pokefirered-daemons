@@ -44,7 +44,7 @@ FiveIsland_WaterLabyrinth_Text_CuteMonRemindsMeOfDaisy::
     .string "She was gently grooming DAEMON…\n"
     .string "She was a little angel.\p"
     .string "That little girl's name… I think it\n"
-    .string "was DAISY.$"
+    .string "was VERA.$"
 
 FiveIsland_WaterLabyrinth_Text_AlizeIntro::
     .string "This is an excellent environment for\n"

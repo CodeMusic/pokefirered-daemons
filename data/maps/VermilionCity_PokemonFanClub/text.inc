@@ -89,4 +89,4 @@ VermilionCity_PokemonFanClub_Text_ChairmanReallyAdoresHisMons::
     .string "Our CHAIRMAN really does adore his\n"
     .string "DAEMON.\p"
     .string "But the person who is most liked by\n"
-    .string "DAEMON is DAISY, I think.$"
+    .string "DAEMON is VERA, I think.$"
