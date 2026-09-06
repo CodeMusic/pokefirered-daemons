@@ -437,7 +437,9 @@ static void FieldEffectScript_LoadTiles(const u8 **script)
 
 void ApplyGlobalFieldPaletteTint(u8 paletteIdx)
 {
-    switch (gGlobalFieldTintMode)
+    // Object palettes ask the same question the tilesets do, or the town greys
+    // and every person standing in it does not.
+    switch (DaemonsFieldTint())
     {
     case 0:
         return;

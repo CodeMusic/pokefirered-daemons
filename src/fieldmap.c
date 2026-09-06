@@ -5,6 +5,7 @@
 #include "new_menu_helpers.h"
 #include "quest_log.h"
 #include "fieldmap.h"
+#include "constants/region_map_sections.h"
 
 struct ConnectionFlags
 {
@@ -838,9 +839,26 @@ static void CopyTilesetToVramUsingHeap(struct Tileset const *tileset, u16 numTil
     }
 }
 
+// 8.6 as settled: COLOUR IS CONTEXT. Halftone is the one town that is
+// genuinely drained -- 3.1's premise is dots that only LOOK like grey, and a
+// second grey town halves it, so every other achromatic town on the ladder is
+// graded rather than desaturated and that is authored in its tileset palettes,
+// not here.
+//
+// The Quest Log owns gGlobalFieldTintMode while it is playing back, so this
+// only ever speaks when that global is silent. Never override the record.
+u8 DaemonsFieldTint(void)
+{
+    if (gGlobalFieldTintMode != QL_TINT_NONE)
+        return gGlobalFieldTintMode;
+    if (gMapHeader.regionMapSectionId == MAPSEC_LAVENDER_TOWN)
+        return QL_TINT_GRAYSCALE;
+    return QL_TINT_NONE;
+}
+
 static void ApplyGlobalTintToPaletteEntries(u16 offset, u16 size)
 {
-    switch (gGlobalFieldTintMode)
+    switch (DaemonsFieldTint())
     {
     case QL_TINT_NONE:
         return;
@@ -862,7 +880,7 @@ static void ApplyGlobalTintToPaletteEntries(u16 offset, u16 size)
 
 void ApplyGlobalTintToPaletteSlot(u8 slot, u8 count)
 {
-    switch (gGlobalFieldTintMode)
+    switch (DaemonsFieldTint())
     {
     case QL_TINT_NONE:
         return;

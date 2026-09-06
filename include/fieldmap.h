@@ -54,4 +54,6 @@ void CopySecondaryTilesetToVram(const struct MapLayout *mapLayout);
 void GetCameraFocusCoords(u16 *x, u16 *y);
 void SetCameraFocusCoords(u16 x, u16 y);
 
+u8 DaemonsFieldTint(void);
+
 #endif //GUARD_FIELDMAP_H
