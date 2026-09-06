@@ -50,8 +50,13 @@ ALIGNED(4) const u8 gText_ABUTTONNext_BBUTTONBack[] = _("{A_BUTTON}NEXT {B_BUTTO
 ALIGNED(4) const u8 gText_UPDOWNPick_ABUTTONNext_BBUTTONBack[] = _("{DPAD_UPDOWN}PICK {A_BUTTON}NEXT {B_BUTTON}CANCEL");
 ALIGNED(4) const u8 gText_UPDOWNPick_ABUTTONBBUTTONCancel[] = _("{DPAD_UPDOWN}PICK {A_BUTTON}{B_BUTTON}CANCEL");
 ALIGNED(4) const u8 gText_ABUTTONExit[] = _("{A_BUTTON}EXIT");
-const u8 gText_Boy[] = _("LOGIC");
-const u8 gText_Girl[] = _("INTUITION");
+// 9.10, amended 2026-09-06. LOGIC is the FIGHTING rename, and 2.3 makes
+// "LOGIC resisted by CONTEXT" the thesis -- so naming one option after a
+// column of the chart told the player they had picked the losing side,
+// which is exactly what "neither is the careful one" forbids. Neither of
+// these is a type.
+const u8 gText_Boy[] = _("REASON");
+const u8 gText_Girl[] = _("INSTINCT");
 const u8 gText_PokedexTableOfContents[] = _("INDEX   TABLE OF CONTENTS");
 const u8 gText_PickOK[] = _("{DPAD_UPDOWN}PICK {A_BUTTON}OK");
 const u8 gText_Seen[] = _("Seen:");
