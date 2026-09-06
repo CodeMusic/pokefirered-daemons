@@ -29,8 +29,7 @@ PokemonTower_7F_Text_Grunt3PostBattle::
     .string "This will be escalated.$"
 
 PokemonTower_7F_Text_MrFujiThankYouFollowMe::
-    .string "MR. FUJI: Heh? You came to save\n"
-    .string "me?\p"
+    .string "INIT: Heh? You came to save me?\p"
     .string "Thank you. But, I came here of my\n"
     .string "own free will.\p"
     .string "I came to calm the spirit of\n"

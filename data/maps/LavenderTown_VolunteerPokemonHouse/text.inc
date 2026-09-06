@@ -1,18 +1,18 @@
 LavenderTown_PokemonCenter_1F_Text_HearMrFujiNotFromAroundHere::
     .string "I recently moved to this town.\p"
-    .string "I hear that MR. FUJI's not from\n"
-    .string "these parts originally, either.$"
+    .string "I hear that INIT's not from these\n"
+    .string "parts originally, either.$"
 
 LavenderTown_VolunteerPokemonHouse_Text_WhereDidMrFujiGo::
-    .string "That's odd, MR. FUJI isn't here.\n"
-    .string "Where'd he go?$"
+    .string "That's odd, INIT isn't here. Where'd\n"
+    .string "he go?$"
 
 LavenderTown_VolunteerPokemonHouse_Text_MrFujiWasPrayingForCubonesMother::
-    .string "MR. FUJI had been praying alone\n"
-    .string "for CUBONE's mother.$"
+    .string "INIT had been praying alone for\n"
+    .string "CUBONE's mother.$"
 
 LavenderTown_VolunteerPokemonHouse_Text_MrFujiLooksAfterOrphanedMons::
-    .string "This is really MR. FUJI's house.\p"
+    .string "This is really INIT's house.\p"
     .string "He's really kind.\p"
     .string "He looks after abandoned and\n"
     .string "orphaned DAEMON.$"
@@ -28,7 +28,7 @@ LavenderTown_VolunteerPokemonHouse_Text_Psyduck::
     .string "FAULT: Gwappa!$"
 
 LavenderTown_VolunteerPokemonHouse_Text_IdLikeYouToHaveThis::
-    .string "MR. FUJI: {PLAYER}…\p"
+    .string "INIT: {PLAYER}…\p"
     .string "Your INDEX quest is one that\n"
     .string "requires strong dedication.\p"
     .string "Without deep love for DAEMON, your\n"
@@ -38,7 +38,7 @@ LavenderTown_VolunteerPokemonHouse_Text_IdLikeYouToHaveThis::
 
 LavenderTown_VolunteerPokemonHouse_Text_ReceivedPokeFluteFromMrFuji::
     .string "{PLAYER} received a POKé FLUTE\n"
-    .string "from MR. FUJI.$"
+    .string "from INIT.$"
 
 LavenderTown_VolunteerPokemonHouse_Text_ExplainPokeFlute::
     .string "Upon hearing POKé FLUTE, sleeping\n"
@@ -49,8 +49,8 @@ LavenderTown_VolunteerPokemonHouse_Text_MustMakeRoomForThis::
     .string "You must make room for this!$"
 
 LavenderTown_VolunteerPokemonHouse_Text_HasPokeFluteHelpedYou::
-    .string "MR. FUJI: Has my POKé FLUTE\n"
-    .string "helped you?$"
+    .string "INIT: Has my POKé FLUTE helped\n"
+    .string "you?$"
 
 LavenderTown_VolunteerPokemonHouse_Text_GrandPrizeDrawingClipped::
     .string "DAEMON FAN MAGAZINE Monthly Grand\n"

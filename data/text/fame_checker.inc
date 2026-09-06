@@ -319,8 +319,7 @@ gFameCheckerFlavorText_Blaine3:: @ 0x81AEA59
 
 gFameCheckerFlavorText_Blaine4:: @ 0x81AEAEE
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Family and friends?\p"
-	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}It's a photo of BLAINE and\n"
-	.string "MR. FUJI.\p"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}It's a photo of BLAINE and INIT.\p"
 	.string "They're standing shoulder to\n"
 	.string "shoulder with big grins.$"
 
@@ -543,20 +542,19 @@ gFameCheckerFlavorText_MrFuji2:: @ 0x81AFC38
 
 gFameCheckerFlavorText_MrFuji3:: @ 0x81AFCE9
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}There's a rumor…\p"
-	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}I hear that MR. FUJI's not from\n"
-	.string "these parts originally, either.$"
+	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}I hear that INIT's not from these\n"
+	.string "parts originally, either.$"
 
 gFameCheckerFlavorText_MrFuji4:: @ 0x81AFD49
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Family and friends?\p"
-	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}It's a photo of BLAINE and\n"
-	.string "MR. FUJI.\p"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}It's a photo of BLAINE and INIT.\p"
 	.string "They're standing shoulder to\n"
 	.string "shoulder with big grins.$"
 
 gFameCheckerFlavorText_MrFuji5:: @ 0x81AFDC4
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
-	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}Editor: The shy MR. FUJI turned\n"
-	.string "down our interview requests.\p"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}Editor: The shy INIT turned down\n"
+	.string "our interview requests.\p"
 	.string "He is a kindly man who is adored\n"
 	.string "and respected in HALFTONE TOWN.$"
 
@@ -755,10 +753,10 @@ gFameCheckerPersonQuote_Bill:: @ 0x81B0A50
 	.string "come show me, okay? Promise!$"
 
 gFameCheckerPersonName_MrFuji:: @ 0x81B0AFF
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}MR. FUJI$"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}INIT$"
 
 gFameCheckerPersonQuote_MrFuji:: @ 0x81B0B0E
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}From: MR. FUJI To: {PLAYER}\p"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}From: INIT To: {PLAYER}\p"
 	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}Instead of hoping for the happiness\n"
 	.string "of just your DAEMON…\p"
 	.string "…Can I get you to wish for the\n"
@@ -1456,9 +1454,9 @@ PokemonJournal_Text_SpecialFeatureDaisyOak::
 
 PokemonJournal_Text_SpecialFeatureMrFuji::
 	.string "DAEMON JOURNAL\p"
-	.string "Special Feature: MR. FUJI of\n"
-	.string "DAEMON HOUSE!\p"
-	.string "Editor: The shy MR. FUJI turned\n"
-	.string "down our interview requests.\p"
+	.string "Special Feature: INIT of DAEMON\n"
+	.string "HOUSE!\p"
+	.string "Editor: The shy INIT turned down\n"
+	.string "our interview requests.\p"
 	.string "He is a kindly man who is adored\n"
 	.string "and respected in HALFTONE TOWN.$"
