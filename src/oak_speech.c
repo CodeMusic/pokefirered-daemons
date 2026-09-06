@@ -1151,7 +1151,12 @@ static void Task_OakSpeech_ReleaseNidoranFFromPokeBall(u8 taskId)
         spriteId = gTasks[taskId].tNidoranFSpriteId;
         gSprites[spriteId].invisible = FALSE;
         gSprites[spriteId].tSpriteTimer = 0;
-        CreatePokeballSpriteToReleaseMon(spriteId, gSprites[spriteId].oam.paletteNum, 100, 66, 0, 0, 32, 0xFFFF1FFF);
+        // (100, 66) was OAK's palm. The portrait sits at tile (11, 2), so its
+        // pixel origin is (88, 16) -- and measured against that, vanilla's
+        // hand centres at about (101, 69) while CRYSTAL's centres at (98, 56).
+        // She reaches higher and slightly further in than he did, so the box
+        // was appearing below her hand and outside it.
+        CreatePokeballSpriteToReleaseMon(spriteId, gSprites[spriteId].oam.paletteNum, 98, 54, 0, 0, 32, 0xFFFF1FFF);
         gTasks[taskId].func = Task_OakSpeech_IsInhabitedFarAndWide;
         gTasks[taskId].tTimer = 0;
     }
@@ -1192,7 +1197,7 @@ static void Task_OakSpeech_ReturnNidoranFToPokeBall(u8 taskId)
     {
         ClearDialogWindowAndFrame(WIN_INTRO_TEXTBOX, TRUE);
         spriteId = gTasks[taskId].tNidoranFSpriteId;
-        gTasks[taskId].tPokeBallSpriteId = CreateTradePokeballSprite(spriteId, gSprites[spriteId].oam.paletteNum, 100, 66, 0, 0, 32, 0xFFFF1F3F);
+        gTasks[taskId].tPokeBallSpriteId = CreateTradePokeballSprite(spriteId, gSprites[spriteId].oam.paletteNum, 98, 54, 0, 0, 32, 0xFFFF1F3F);
         gTasks[taskId].tTimer = 48;
         gTasks[taskId].tSpriteTimer = 64;
         gTasks[taskId].func = Task_OakSpeech_TellMeALittleAboutYourself;
