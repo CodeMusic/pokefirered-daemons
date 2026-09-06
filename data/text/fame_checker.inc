@@ -1,43 +1,40 @@
 gFameCheckerFlavorText_ProfOak0:: @ 0x81AD106
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
-	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}CRYSTAL CLEAR DAEMON RESEARCH\n"
-	.string "LAB$"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}CRYSTAL CLEAR RESEARCH LAB\n"
+	.string "BLANCHE TOWN$"
 
 gFameCheckerFlavorText_ProfOak1:: @ 0x81AD145
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
-	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}To make a complete guide on all\n"
-	.string "the DAEMON in the world…\p"
-	.string "That was my dream!$"
+	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}I wanted one record that left\n"
+	.string "nothing out.\p"
+	.string "I have most of one.$"
 
 gFameCheckerFlavorText_ProfOak2:: @ 0x81AD1BB
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
-	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}CRYSTAL CLEAR may not look like\n"
-	.string "much, but she's the authority on\l"
-	.string "DAEMON.\p"
-	.string "Many DAEMON USERS hold her in high\n"
-	.string "regard.$"
+	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}She does not look like much.\p"
+	.string "That is the first thing anyone\n"
+	.string "says about her. Every time.$"
 
 gFameCheckerFlavorText_ProfOak3:: @ 0x81AD258
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Family and friends?\p"
-	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}CRYSTAL CLEAR reportedly lives\n"
-	.string "with her grandchildren, VERA and\l"
-	.string "{RIVAL}.$"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}She lives with her grandchildren,\n"
+	.string "VERA and {RIVAL}.\p"
+	.string "She had a son. Nobody brings him\n"
+	.string "up.$"
 
 gFameCheckerFlavorText_ProfOak4:: @ 0x81AD2B9
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Family and friends?\p"
-	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}I hear CRYSTAL CLEAR's taken a lot\n"
-	.string "of interest in you, child.\p"
-	.string "That old duff was once tough and\n"
-	.string "striking.\p"
-	.string "But that was decades ago. She's a\n"
-	.string "shadow of her former self.$"
+	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}She has taken an interest in you,\n"
+	.string "I hear.\p"
+	.string "She was formidable once.\p"
+	.string "People say that as if it were\n"
+	.string "kind.$"
 
 gFameCheckerFlavorText_ProfOak5:: @ 0x81AD377
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
-	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}CRYSTAL CLEAR is going to have her\n"
-	.string "own radio show soon.\p"
-	.string "The program will be called CRYSTAL\n"
-	.string "CLEAR'S DAEMON SEMINAR.$"
+	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}There was to be a lecture series.\p"
+	.string "It was announced twice.\p"
+	.string "Neither time did it happen.$"
 
 gFameCheckerFlavorText_Daisy0:: @ 0x81AD40C
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
@@ -80,44 +77,38 @@ gFameCheckerFlavorText_Daisy5:: @ 0x81AD69F
 gFameCheckerFlavorText_Brock0:: @ 0x81AD705
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
 	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}SLATE CITY DAEMON GYM LEADER:\n"
-	.string "CAIRN The Rock-Solid DAEMON USER!$"
+	.string "CAIRN. He writes it all down.$"
 
 gFameCheckerFlavorText_Brock1:: @ 0x81AD771
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of DAEMON?\p"
-	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}My rock-hard willpower is evident\n"
-	.string "in even my DAEMONS.\p"
-	.string "My DAEMONS are all rock hard and\n"
-	.string "have true-grit determination.\p"
-	.string "That's right - my DAEMONS are all\n"
-	.string "the ROCK type!$"
+	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}Old formats. Still readable.\p"
+	.string "People take that for a limitation.\p"
+	.string "It is the only thing that is not.$"
 
 gFameCheckerFlavorText_Brock2:: @ 0x81AD840
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
-	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}There aren't many serious DAEMON\n"
-	.string "USERS here.\p"
-	.string "They're all like FORAGERS, you\n"
-	.string "know, just hobbyists.\p"
-	.string "But SLATE GYM's CAIRN isn't like\n"
-	.string "that, not one bit.$"
+	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}Most USERS here are hobbyists.\p"
+	.string "CAIRN is not most USERS.\p"
+	.string "He has never once been casual\n"
+	.string "about anything.$"
 
 gFameCheckerFlavorText_Brock3:: @ 0x81AD908
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
-	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}CAIRN is cool. He's not just tough.\n"
-	.string "People like and respect him.\p"
-	.string "I want to become a GYM LEADER\n"
-	.string "like him.$"
+	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}He is not the strongest leader.\p"
+	.string "He is the one whose records you\n"
+	.string "can check.$"
 
 gFameCheckerFlavorText_Brock4:: @ 0x81AD99A
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
-	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}Hi, I'm excavating for fossils here\n"
-	.string "under DEADSTACK.\p"
-	.string "Sometimes, CAIRN of SLATE GYM\n"
-	.string "lends me a hand.$"
+	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}I dig CORES out of DEADSTACK.\p"
+	.string "CAIRN comes down some weekends.\p"
+	.string "He labels everything twice.$"
 
 gFameCheckerFlavorText_Brock5:: @ 0x81ADA27
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
-	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}CAIRN rarely laughs, but is said to\n"
-	.string "be unable to stop if he starts.$"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}He does not laugh often.\p"
+	.string "I have seen it twice. Both times\n"
+	.string "he had to sit down.$"
 
 gFameCheckerFlavorText_Misty0:: @ 0x81ADA91
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
@@ -493,40 +484,39 @@ gFameCheckerFlavorText_Lance5:: @ 0x81AF7CB
 
 gFameCheckerFlavorText_Bill0:: @ 0x81AF83E
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
-	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}After all, HOLT's world-famous as a\n"
-	.string "POKéMANIAC.\p"
-	.string "He invented the DAEMON Storage\n"
-	.string "System on PC, too.$"
+	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}He built the storage system.\p"
+	.string "Everything you have ever put away\n"
+	.string "is inside something he made.$"
 
 gFameCheckerFlavorText_Bill1:: @ 0x81AF8CA
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of DAEMON?\p"
-	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}HOLT has lots of DAEMONS! He\n"
-	.string "collects rare ones, too!$"
+	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}He does not keep many.\p"
+	.string "He says he knows what it is like\n"
+	.string "in there.$"
 
 gFameCheckerFlavorText_Bill2:: @ 0x81AF929
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
-	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}He's my grandson!\p"
-	.string "He always liked collecting things,\n"
-	.string "even as a child!$"
+	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}He took things apart as a boy.\p"
+	.string "He put most of them back.$"
 
 gFameCheckerFlavorText_Bill3:: @ 0x81AF998
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of DAEMON?\p"
-	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}HOLT is a POKéMANIAC, so he loves\n"
-	.string "every kind.\p"
-	.string "Apparently, the first one he bound\n"
-	.string "was an ABRA.$"
+	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}The first one he bound is still\n"
+	.string "in his party.\p"
+	.string "He has never said which.$"
 
 gFameCheckerFlavorText_Bill4:: @ 0x81AFA20
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Family and friends?\p"
-	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}HOLT's hometown is GOLDENROD CITY,\n"
-	.string "where his folks still live.\p"
-	.string "I've heard that it's quite the\n"
-	.string "festive, bustling city.$"
+	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}He works alone at DEADSTACK's far\n"
+	.string "end.\p"
+	.string "People visit. He is always glad.\p"
+	.string "Nobody stays long.$"
 
 gFameCheckerFlavorText_Bill5:: @ 0x81AFAB9
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}There's a rumor…\p"
-	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}Apparently, HOLT simply can't\n"
-	.string "stomach milk at all.$"
+	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}They say the machine could not\n"
+	.string "tell which one to send back.\p"
+	.string "He does not discuss it.$"
 
 gFameCheckerFlavorText_MrFuji0:: @ 0x81AFB0C
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
