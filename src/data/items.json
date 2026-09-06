@@ -1281,7 +1281,7 @@
       "secondaryId": 0
     },
     {
-      "english": "POK\u00e9 DOLL",
+      "english": "POKé DOLL",
       "itemId": "ITEM_POKE_DOLL",
       "price": 1000,
       "holdEffect": "HOLD_EFFECT_NONE",
@@ -5723,12 +5723,12 @@
       "secondaryId": 0
     },
     {
-      "english": "OLD AMBER",
+      "english": "OLD CORE",
       "itemId": "ITEM_OLD_AMBER",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A piece of amber that contains\\nthe genes of an ancient DAEMON.\\nIt is clear with a reddish tint.",
+      "description_english": "A core recovered whole. It holds a\\ndaemon that stopped a very long\\ntime ago.",
       "importance": 1,
       "registrability": 0,
       "pocket": "POCKET_KEY_ITEMS",
@@ -5771,12 +5771,12 @@
       "secondaryId": 0
     },
     {
-      "english": "HELIX FOSSIL",
+      "english": "HELIX CORE",
       "itemId": "ITEM_HELIX_FOSSIL",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A fossil of an ancient, seafloor-\\ndwelling DAEMON. It appears to be\\npart of a seashell.",
+      "description_english": "A core found at Deadstack. Wound\\nin a spiral. Nothing has read its\\ncontents.",
       "importance": 1,
       "registrability": 0,
       "pocket": "POCKET_KEY_ITEMS",
@@ -5787,12 +5787,12 @@
       "secondaryId": 0
     },
     {
-      "english": "DOME FOSSIL",
+      "english": "DOME CORE",
       "itemId": "ITEM_DOME_FOSSIL",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A fossil of an ancient, seafloor-\\ndwelling DAEMON. It appears to be\\npart of a shell.",
+      "description_english": "A core found at Deadstack. Flat\\nand sealed. Nothing has read its\\ncontents.",
       "importance": 1,
       "registrability": 0,
       "pocket": "POCKET_KEY_ITEMS",
