@@ -36,7 +36,7 @@ ViridianCity_Text_GoShoppingInPewterOccasionally::
 
 ViridianCity_Text_ThisIsPrivateProperty::
     .string "You are not going through here.\p"
-    .string "This is private property.$"
+    .string "I own the fence and the field.$"
 
 ViridianCity_Text_ShowYouHowToCatchMons::
     .string "You are carrying an INDEX.\p"
@@ -48,12 +48,12 @@ ViridianCity_Text_ShowYouHowToCatchMons::
 ViridianCity_Text_ThatWasEducationalTakeThis::
     .string "There.\p"
     .string "Instructive, was it not?\p"
-    .string "Take this as well.$"
+    .string "Take one of these as well.$"
 
 ViridianCity_Text_WatchThatToLearnBasics::
     .string "If something does not make sense,\n"
     .string "watch that.\p"
-    .string "It covers the basics.$"
+    .string "It is slow, but it is patient.$"
 
 ViridianCity_Text_WeakenMonsFirstToCatch::
     .string "Watch. You weaken it, then you\n"
@@ -69,9 +69,10 @@ ViridianCity_Text_HowsTeachyTVHelping::
     .string "you?$"
 
 ViridianCity_Text_MyGrandsonOnTheShow::
-    .string "That is my grandson on the show.\p"
-    .string "He does the teaching.\n"
-    .string "You will learn something.$"
+    .string "That is my grandson presenting.\p"
+    .string "He knows less than he sounds like\n"
+    .string "he does.\p"
+    .string "You will still learn something.$"
 
 ViridianCity_Text_TooBusyForTeachyTV::
     .string "Too busy for TEACHY TV.\p"
@@ -86,8 +87,8 @@ ViridianCity_Text_CitySign::
 ViridianCity_Text_CatchMonsForEasierBattles::
     .string "USER TIPS\p"
     .string "Bind more than you need.\p"
-    .string "The more you have, the more you\n"
-    .string "can answer with.$"
+    .string "Every one you hold is one more\n"
+    .string "answer available to you.$"
 
 ViridianCity_Text_MovesLimitedByPP::
     .string "USER TIPS\p"

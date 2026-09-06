@@ -44,8 +44,8 @@ PewterCity_Text_ReallyYouHaveToGo::
     .string "there forever.$"
 
 PewterCity_Text_ThisIsTheMuseum::
-    .string "This is it. The MUSEUM.\p"
-    .string "You pay to go in. It is worth it.\n"
+    .string "This is it.\p"
+    .string "They charge, and it is worth it.\p"
     .string "See you around.$"
 
 PewterCity_Text_DoYouKnowWhatImDoing::
@@ -57,13 +57,14 @@ PewterCity_Text_ThatsRightItsHardWork::
     .string "It is not easy.$"
 
 PewterCity_Text_SprayingRepelToKeepWildMonsOut::
-    .string "REPEL, to keep unbound daemons\n"
-    .string "out of my garden.\p"
-    .string "They come for the warmth.$"
+    .string "REPEL. Keeps the unbound out of\n"
+    .string "the garden.\p"
+    .string "They come for the warmth, I think.$"
 
 PewterCity_Text_BrocksLookingForChallengersFollowMe::
-    .string "You are a USER. CAIRN takes\n"
-    .string "challengers. Follow me.$"
+    .string "You are a USER.\p"
+    .string "CAIRN takes anyone who asks.\n"
+    .string "This way.$"
 
 PewterCity_Text_GoTakeOnBrock::
     .string "If you have anything worth\n"
@@ -71,8 +72,9 @@ PewterCity_Text_GoTakeOnBrock::
 
 PewterCity_Text_TrainerTipsEarningEXP::
     .string "USER TIPS\p"
-    .string "Any daemon that runs at all,\n"
-    .string "however briefly, earns EXP.$"
+    .string "A daemon that runs at all earns\n"
+    .string "EXP.\p"
+    .string "However short the run.$"
 
 PewterCity_Text_CallPoliceIfInfoOnThieves::
     .string "NOTICE\p"
@@ -132,11 +134,11 @@ PewterCity_Text_ReceivedRunningShoesFromAide::
     .string "RUNNING SHOES from the AIDE.$"
 
 PewterCity_Text_SwitchedShoesWithRunningShoes::
-    .string "{PLAYER} switched into the\n"
-    .string "RUNNING SHOES.$"
+    .string "{PLAYER} put the RUNNING SHOES\n"
+    .string "on.$"
 
 PewterCity_Text_ExplainRunningShoes::
-    .string "Hold B to run.\p"
+    .string "Hold B and you will move.\p"
     .string "Only where there is room.$"
 
 PewterCity_Text_MustBeGoingBackToLab::

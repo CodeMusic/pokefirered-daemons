@@ -1,14 +1,14 @@
 PalletTown_ProfessorOaksLab_Text_RivalGrampsIsntAround::
-    .string "{RIVAL}: Yo {PLAYER}! Gran isn't\n"
-    .string "around!$"
+    .string "{RIVAL}: Oh. It is you.\p"
+    .string "She is not here.$"
 
 PalletTown_ProfessorOaksLab_Text_RivalFedUpWithWaiting::
-    .string "{RIVAL}: Gran! I'm fed up with\n"
-    .string "waiting!$"
+    .string "{RIVAL}: Gran.\p"
+    .string "I have been standing here.$"
 
 PalletTown_ProfessorOaksLab_Text_RivalNoFairWhatAboutMe::
-    .string "{RIVAL}: Hey! Gran! What about\n"
-    .string "me?$"
+    .string "{RIVAL}: Gran.\p"
+    .string "And me.$"
 
 PalletTown_ProfessorOaksLab_Text_RivalGoChoosePlayer::
     .string "{RIVAL}: Go on, take one. I\n"
@@ -47,12 +47,12 @@ PalletTown_ProfessorOaksLab_Text_RivalGramps::
     .string "{RIVAL}: Gran!$"
 
 PalletTown_ProfessorOaksLab_Text_RivalWhatDidYouCallMeFor::
-    .string "{RIVAL}: I forgot already. What\n"
-    .string "did you want?$"
+    .string "{RIVAL}: I have forgotten.\p"
+    .string "What was it?$"
 
 PalletTown_ProfessorOaksLab_Text_RivalLeaveItToMeGramps::
-    .string "{RIVAL}: All right, Gran! Leave it\n"
-    .string "all to me!$"
+    .string "{RIVAL}: Fine.\n"
+    .string "I will do it.$"
 
 PalletTown_ProfessorOaksLab_Text_RivalTellSisNotToGiveYouMap::
     .string "{RIVAL}: All right, Gran! Leave it\n"
@@ -76,8 +76,9 @@ PalletTown_ProfessorOaksLab_Text_OakThreeMonsChooseOne::
     .string "Take one.$"
 
 PalletTown_ProfessorOaksLab_Text_OakBePatientRival::
-    .string "CRYSTAL: Wait, {RIVAL}. There is\n"
-    .string "one for you as well.$"
+    .string "CRYSTAL: There is one for you as\n"
+    .string "well, {RIVAL}.\p"
+    .string "I counted.$"
 
 PalletTown_ProfessorOaksLab_Text_OakWhichOneWillYouChoose::
     .string "CRYSTAL: Choose, {PLAYER}. Not\n"
@@ -146,8 +147,9 @@ PalletTown_ProfessorOaksLab_Text_OakPokedexOnDesk::
     .string "It is very good at what it records.$"
 
 PalletTown_ProfessorOaksLab_Text_OakTakeTheseWithYou::
-    .string "CRYSTAL: {PLAYER} and {RIVAL}.\n"
-    .string "Take one each.\p"
+    .string "CRYSTAL: One each.\p"
+    .string "You will want to write things\n"
+    .string "down.\p"
     .string "{PLAYER} got INDEX from CRYSTAL!$"
 
 PalletTown_ProfessorOaksLab_Text_ReceivedPokedexFromOak::
