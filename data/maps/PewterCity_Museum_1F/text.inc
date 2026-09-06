@@ -1,5 +1,5 @@
 PewterCity_Museum_1F_Text_Its50YForChildsTicket::
-    .string "Yes, yes. It is ¥50 for a child.\p"
+    .string "Yes, yes. ¥50 to go in.\p"
     .string "Nothing in here still runs, if that\n"
     .string "is what you were hoping.$"
 
