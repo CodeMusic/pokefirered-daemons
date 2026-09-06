@@ -110,7 +110,7 @@ gFameCheckerFlavorText_Brock3:: @ 0x81AD908
 gFameCheckerFlavorText_Brock4:: @ 0x81AD99A
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
 	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}Hi, I'm excavating for fossils here\n"
-	.string "under MT. MOON.\p"
+	.string "under DEADSTACK.\p"
 	.string "Sometimes, CAIRN of SLATE GYM\n"
 	.string "lends me a hand.$"
 
@@ -835,7 +835,7 @@ gFameCheckerFlavorTextOriginLocation_Brock3::
 	.string "ROUTE 4$"
 
 gFameCheckerFlavorTextOriginLocation_Brock4::
-	.string "MT. MOON$"
+	.string "DEADSTACK$"
 
 gFameCheckerFlavorTextOriginLocation_Brock5::
 	.string "SLATE MUSEUM$"

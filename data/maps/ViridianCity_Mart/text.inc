@@ -1,5 +1,5 @@
 ViridianCity_Mart_Text_YouCameFromPallet::
-    .string "Hey! You came from BLANCHE TOWN?$"
+    .string "Hey. You came up from BLANCHE?$"
 
 ViridianCity_Mart_Text_TakeThisToProfOak::
     .string "You know CRYSTAL CLEAR, right?\p"
@@ -13,14 +13,16 @@ ViridianCity_Mart_Text_ReceivedOaksParcelFromClerk::
     .string "clerk.$"
 
 ViridianCity_Mart_Text_SayHiToOakForMe::
-    .string "Okay! Say hi to CRYSTAL for me!$"
+    .string "Right. Tell CRYSTAL it came in.$"
 
 ViridianCity_Mart_Text_ShopDoesGoodBusinessInAntidotes::
-    .string "This shop does good business in\n"
-    .string "ANTIDOTES, I've heard.$"
+    .string "They shift a lot of ANTIDOTES\n"
+    .string "here.\p"
+    .string "Make of that what you like.$"
 
 ViridianCity_Mart_Text_GotToBuySomePotions::
-    .string "I've got to buy some POTIONS.\p"
-    .string "You never know when your DAEMON\n"
-    .string "will need quick healing.$"
+    .string "POTIONS. I always buy more than I\n"
+    .string "think I need.\p"
+    .string "You never find out you were wrong\n"
+    .string "until it matters.$"
 

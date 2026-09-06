@@ -1,15 +1,14 @@
 PewterCity_House1_Text_Nidoran::
-    .string "NIDORAN♂: Bowbow!$"
+    .string "BRANCH: Bowbow!$"
 
 PewterCity_House1_Text_NidoranSit::
-    .string "NIDORAN, sit!$"
+    .string "BRANCH, sit.$"
 
 PewterCity_House1_Text_TradeMonsAreFinicky::
-    .string "Our DAEMON's an outsider, so it's\n"
-    .string "hard to handle.\p"
-    .string "An outsider is a DAEMON that you\n"
-    .string "get in a trade.\p"
-    .string "It grows fast, but it may ignore an\n"
-    .string "unskilled USER in battle!\p"
-    .string "If only we had some MARKs...$"
+    .string "Ours came from a trade, so it does\n"
+    .string "not always listen.\p"
+    .string "A traded daemon was bound by\n"
+    .string "somebody else.\p"
+    .string "It runs. Just not at your level.\p"
+    .string "More MARKs would settle it.$"
 

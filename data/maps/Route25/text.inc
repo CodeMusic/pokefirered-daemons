@@ -62,11 +62,11 @@ Route25_Text_HaleyDefeat::
     .string "I'm not so jealous!$"
 
 Route25_Text_HaleyPostBattle::
-    .string "You came from MT. MOON? May I\n"
+    .string "You came from DEADSTACK? May I\n"
     .string "have a ANOMALY?$"
 
 Route25_Text_FranklinIntro::
-    .string "I just got down from MT. MOON,\n"
+    .string "I just got down from DEADSTACK,\n"
     .string "but I've still got gas in the tank!$"
 
 Route25_Text_FranklinDefeat::

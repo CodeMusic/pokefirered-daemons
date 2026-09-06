@@ -1,18 +1,17 @@
 ViridianCity_PokemonCenter_1F_Text_FeelFreeToUsePC::
-    .string "Please feel free to use that PC in\n"
-    .string "the corner.\p"
-    .string "The receptionist told me so.\n"
-    .string "It's so kind of her!$"
+    .string "Use the PC in the corner if you\n"
+    .string "like.\p"
+    .string "She told me to say so.\n"
+    .string "I have been saying so all morning.$"
 
 ViridianCity_PokemonCenter_1F_Text_PokeCenterInEveryTown::
-    .string "There's a DAEMON CENTER in every\n"
-    .string "town ahead.\p"
-    .string "They charge no money, so don't be\n"
-    .string "shy about healing DAEMON.$"
+    .string "There is a DAEMON CENTER in every\n"
+    .string "town from here on.\p"
+    .string "They do not charge. Nobody has\n"
+    .string "ever explained why.$"
 
 ViridianCity_PokemonCenter_1F_Text_PokeCentersHealMons::
-    .string "DAEMON CENTERS heal your tired,\n"
-    .string "hurt, or HALTED DAEMON.\p"
-    .string "They make all DAEMONS completely\n"
-    .string "healthy.$"
+    .string "A DAEMON CENTER restarts anything\n"
+    .string "that HALTED.\p"
+    .string "It comes back the way it went in.$"
 

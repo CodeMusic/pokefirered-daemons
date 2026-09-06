@@ -3,7 +3,7 @@ Route4_Text_TrippedOverGeodude::
     .string "DAEMON, HEAP!$"
 
 Route4_Text_CrissyIntro::
-    .string "I came to MT. MOON in search of\n"
+    .string "I came to DEADSTACK in search of\n"
     .string "mushroom DAEMON.$"
 
 Route4_Text_CrissyDefeat::
@@ -15,15 +15,11 @@ Route4_Text_CrissyPostBattle::
     .string "I think I got them all.$"
 
 Route4_Text_MtMoonEntrance::
-    .string "MT. MOON\n"
-    .string "Tunnel Entrance$"
+    .string "DEADSTACK Tunnel Entrance$"
 
 Route4_Text_RouteSign::
-    .string "ROUTE 4\n"
-    .string "MT.MOON -\l"
-    .string "DOLDRUM CITY\p"
-    .string "Painted beneath:\n"
-    .string "THE WASH$"
+    .string "ROUTE 4 DEADSTACK - DOLDRUM CITY\p"
+    .string "Painted beneath: THE WASH$"
 
 Text_MegaPunchTeach::
     .string "A punch of roaring ferocity!\p"

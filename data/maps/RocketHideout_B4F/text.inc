@@ -18,8 +18,8 @@ RocketHideout_B4F_Text_GiovanniPostBattle::
     .string "Good luck at the tower.$"
 
 RocketHideout_B4F_Text_Grunt2Intro::
-    .string "I know you!\n"
-    .string "You ruined our plans at MT. MOON!$"
+    .string "I know you! You ruined our plans\n"
+    .string "at DEADSTACK!$"
 
 RocketHideout_B4F_Text_Grunt2Defeat::
     .string "Burned again!$"

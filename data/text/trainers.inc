@@ -47,7 +47,7 @@ Route3_Text_RobinRematchIntro::
 
 Route4_Text_CrissyRematchIntro::
 	.string "I always bind mushroom DAEMON on\n"
-	.string "MT. MOON.$"
+	.string "DEADSTACK.$"
 
 Route6_Text_RickyRematchIntro::
 	.string "Oh! You're that nosy kid who\n"
@@ -667,7 +667,7 @@ Route25_Text_HaleyRematchIntro::
 	.string "so jealous!$"
 
 Route25_Text_FranklinRematchIntro::
-	.string "I just trained up on MT. MOON,\n"
+	.string "I just trained up on DEADSTACK,\n"
 	.string "but I've still got gas in the tank!$"
 
 Route25_Text_NobRematchIntro::
