@@ -13,7 +13,7 @@ FourIsland_IcefallCave_Back_Text_ShutItLadyLeaveUsBe::
 FourIsland_IcefallCave_Back_Text_LoreleiPlayerHelpMeKickPoachersOut::
     .string "LORELEI: {PLAYER}?! What are you\n"
     .string "doing here?\p"
-    .string "No, we can bind up later. Right\n"
+    .string "No, we can talk later. Right\n"
     .string "now, I need your help.\p"
     .string "Help me kick these poachers out\n"
     .string "before they do anything else.\p"

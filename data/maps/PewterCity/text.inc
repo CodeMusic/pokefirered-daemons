@@ -1,23 +1,20 @@
 Text_DreamEaterTeach::
-    .string "Yawn! I must have dozed off in the\n"
-    .string "sun.\p"
-    .string "I had this weird dream about a\n"
-    .string "DROWZEE eating my dream.\p"
-    .string "And… I learned how to eat dreams…\p"
-    .string "Oogh, this is too spooky!\p"
-    .string "Let me teach it to a DAEMON so I\n"
-    .string "can forget about it!$"
+    .string "I must have gone under in the sun.\p"
+    .string "I dreamt something was reading me\n"
+    .string "while I slept.\p"
+    .string "It took what it found.\p"
+    .string "Let me hand it to one of yours so\n"
+    .string "I can stop turning it over.$"
 
 Text_DreamEaterDeclined::
-    .string "…Snore…$"
+    .string "…gone under again…$"
 
 Text_DreamEaterWhichMon::
-    .string "Which DAEMON wants to learn DREAM\n"
-    .string "EATER?$"
+    .string "Which one takes it?$"
 
 Text_DreamEaterTaught::
-    .string "…ZZZ…\n"
-    .string "I…can't eat…anymore…$"
+    .string "…that is better.\n"
+    .string "Someone else can hold it.$"
 
 PewterCity_Text_ClefairyCameFromMoon::
     .string "Morning, it happened. Six people\n"
@@ -28,75 +25,77 @@ PewterCity_Text_ClefairyCameFromMoon::
     .string "West side of the building.$"
 
 PewterCity_Text_BrockOnlySeriousTrainerHere::
-    .string "There aren't many serious DAEMON\n"
-    .string "USERS here!\p"
-    .string "They're all like FORAGERs, but\n"
-    .string "SLATE GYM's CAIRN is totally into\l"
-    .string "it!$"
+    .string "Not many serious USERS here.\p"
+    .string "Mostly FORAGERs.\p"
+    .string "SLATE GYM's CAIRN is not mostly\n"
+    .string "anything.$"
 
 PewterCity_Text_DidYouCheckOutMuseum::
-    .string "Did you check out the MUSEUM?$"
+    .string "Have you been in the MUSEUM?$"
 
 PewterCity_Text_WerentThoseFossilsAmazing::
-    .string "Weren't those fossils from MT. MOON\n"
-    .string "amazing?$"
+    .string "The CORES they brought up from\n"
+    .string "Deadstack. Did you see them?\p"
+    .string "Nobody knows what is on them.$"
 
 PewterCity_Text_ReallyYouHaveToGo::
-    .string "Really?\n"
-    .string "You absolutely have to go!$"
+    .string "No?\p"
+    .string "Go. It is ¥50 and it will not be\n"
+    .string "there forever.$"
 
 PewterCity_Text_ThisIsTheMuseum::
-    .string "This is it, the MUSEUM.\p"
-    .string "You have to pay to get in, but it's\n"
-    .string "worth it. See you around!$"
+    .string "This is it. The MUSEUM.\p"
+    .string "You pay to go in. It is worth it.\n"
+    .string "See you around.$"
 
 PewterCity_Text_DoYouKnowWhatImDoing::
-    .string "Psssst!\n"
-    .string "Do you know what I'm doing?$"
+    .string "Psssst.\n"
+    .string "Do you know what I am doing?$"
 
 PewterCity_Text_ThatsRightItsHardWork::
-    .string "That's right!\n"
-    .string "It's hard work!$"
+    .string "That is right.\n"
+    .string "It is not easy.$"
 
 PewterCity_Text_SprayingRepelToKeepWildMonsOut::
-    .string "I'm spraying REPEL to keep wild\n"
-    .string "DAEMON out of my garden!$"
+    .string "REPEL, to keep unbound daemons\n"
+    .string "out of my garden.\p"
+    .string "They come for the warmth.$"
 
 PewterCity_Text_BrocksLookingForChallengersFollowMe::
-    .string "You're a USER right? CAIRN's looking\n"
-    .string "for new challengers! Follow me!$"
+    .string "You are a USER. CAIRN takes\n"
+    .string "challengers. Follow me.$"
 
 PewterCity_Text_GoTakeOnBrock::
-    .string "If you have the right stuff, go\n"
-    .string "take on CAIRN!$"
+    .string "If you have anything worth\n"
+    .string "showing, show CAIRN.$"
 
 PewterCity_Text_TrainerTipsEarningEXP::
     .string "USER TIPS\p"
-    .string "Any DAEMON that takes part in\n"
-    .string "battle, however short, earns EXP!$"
+    .string "Any daemon that runs at all,\n"
+    .string "however briefly, earns EXP.$"
 
 PewterCity_Text_CallPoliceIfInfoOnThieves::
-    .string "NOTICE!\p"
-    .string "Thieves have been\n"
-    .string "stealing DAEMON\l"
-    .string "fossils at MT.\l"
-    .string "MOON! Please call\l"
-    .string "SLATE POLICE\l"
-    .string "with any info!$"
+    .string "NOTICE\p"
+    .string "CORES ARE BEING\l"
+    .string "TAKEN FROM\l"
+    .string "DEADSTACK.\l"
+    .string "REPORT ANYTHING\l"
+    .string "TO SLATE POLICE.$"
 
 PewterCity_Text_MuseumOfScience::
     .string "SLATE MUSEUM\n"
-    .string "OF SCIENCE$"
+    .string "OF RECORD$"
 
 PewterCity_Text_GymSign::
-    .string "SLATE CITY DAEMON GYM LEADER:\n"
-    .string "CAIRN\p"
-    .string "The Rock Solid DAEMON USER!$"
+    .string "SLATE CITY DAEMON GYM\n"
+    .string "LEADER: CAIRN\p"
+    .string "He Stacks Stones So The\l"
+    .string "Next One Finds The Way$"
 
 PewterCity_Text_CitySign::
     .string "SLATE CITY\n"
-    .string "A Stone Gray\l"
-    .string "City$"
+    .string "A Surface That\l"
+    .string "Takes A Mark$"
 
 @ The below 3 JP texts are unused. Possibly a cut NPC meant to give the player the Berry Pouch
 PewterCity_Text_DefeatedBrockYouCanHaveTreasure::
@@ -121,37 +120,34 @@ PewterCity_Text_MonsWillUseHeldBerriesOnTheirOwn::
     .string "てがるで　べんり　だろ？$"
 
 PewterCity_Text_OhPlayer::
-    .string "Oh, {PLAYER}{KUN}!$"
+    .string "Oh, {PLAYER}!$"
 
 PewterCity_Text_AskedToDeliverThis::
-    .string "I'm glad I bound up to you. I'm\n"
-    .string "CRYSTAL CLEAR's AIDE.\p"
-    .string "I've been asked to deliver this, so\n"
-    .string "here you go.$"
+    .string "Glad I found you. I am CRYSTAL\n"
+    .string "CLEAR's AIDE.\p"
+    .string "She asked me to bring you this.$"
 
 PewterCity_Text_ReceivedRunningShoesFromAide::
     .string "{PLAYER} received the\n"
     .string "RUNNING SHOES from the AIDE.$"
 
 PewterCity_Text_SwitchedShoesWithRunningShoes::
-    .string "{PLAYER} switched shoes with the\n"
+    .string "{PLAYER} switched into the\n"
     .string "RUNNING SHOES.$"
 
 PewterCity_Text_ExplainRunningShoes::
-    .string "Press the B Button to run.\n"
-    .string "But only where there's room to run!$"
+    .string "Hold B to run.\p"
+    .string "Only where there is room.$"
 
 PewterCity_Text_MustBeGoingBackToLab::
-    .string "Well, I must be going back to\n"
-    .string "the LAB.\p"
-    .string "Bye-bye!$"
+    .string "I should get back to the LAB.\p"
+    .string "She will have noticed I am gone.$"
 
 PewterCity_Text_RunningShoesLetterFromMom::
-    .string "There's a letter attached…\p"
+    .string "There is a letter with them.\p"
     .string "Dear {PLAYER},\p"
-    .string "Here is a pair of RUNNING SHOES\n"
-    .string "for my beloved challenger.\p"
-    .string "Remember, I'll always cheer for\n"
-    .string "you! Don't ever give up!\p"
+    .string "You will want these. You never\n"
+    .string "could stand still.\p"
+    .string "I am on your side. I always was.\p"
     .string "From Mom$"
 

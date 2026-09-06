@@ -143,7 +143,7 @@ Route8_Text_RicardoDefeat::
     .string "I'm not into this.$"
 
 Route8_Text_RicardoPostBattle::
-    .string "I got grass bound up in my spokes,\n"
+    .string "I got grass tangled in my spokes,\n"
     .string "man.$"
 
 Route8_Text_JarenIntro::
