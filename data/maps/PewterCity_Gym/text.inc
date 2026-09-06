@@ -34,16 +34,13 @@ PewterCity_Gym_Text_ReceivedTM39FromBrock::
     .string "{PLAYER} received TM39 from CAIRN.$"
 
 PewterCity_Gym_Text_ExplainTM39::
-    .string "A TM, Technical Machine, contains a\n"
-    .string "technique for DAEMON.\p"
-    .string "Using a TM teaches the move it\n"
-    .string "contains to a DAEMON.\p"
-    .string "A TM is good for only one use.\p"
-    .string "So, when you use one, pick the\n"
-    .string "DAEMON carefully.\p"
-    .string "Anyways… TM39 contains ROCK TOMB.\p"
-    .string "It hurls boulders at the foe\n"
-    .string "and lowers its SPEED.$"
+    .string "A TM holds one technique.\p"
+    .string "Using it writes the move into a\n"
+    .string "daemon. Once.\p"
+    .string "The TM does not survive that, so\n"
+    .string "choose carefully.\p"
+    .string "TM39 is ROCK TOMB. It drops weight\n"
+    .string "on the target and slows it.$"
 
 PewterCity_Gym_Text_BrockPostBattle::
     .string "You encoded something I could not\n"
@@ -53,7 +50,7 @@ PewterCity_Gym_Text_BrockPostBattle::
     .string "DOLDRUM is next. BENCHMARK 2.$"
 
 PewterCity_Gym_Text_DontHaveRoomForThis::
-    .string "You don't have room for this.$"
+    .string "You have no room for this.$"
 
 PewterCity_Gym_Text_LiamIntro::
     .string "Stop there.\p"
@@ -71,29 +68,28 @@ PewterCity_Gym_Text_LiamPostBattle::
     .string "Every one.$"
 
 PewterCity_Gym_Text_LetMeTakeYouToTheTop::
-    .string "Hiya! I can tell you have what it\n"
-    .string "takes.\p"
-    .string "I'm no USER, but I can tell you\n"
-    .string "how to win!\p"
-    .string "Let me take you to the top!$"
+    .string "You look like you might get\n"
+    .string "through.\p"
+    .string "I do not battle. I watch.\p"
+    .string "I can tell you how it goes.$"
 
 PewterCity_Gym_Text_LetsGetHappening::
-    .string "All right!\n"
-    .string "Let's get happening!$"
+    .string "Right.\n"
+    .string "Come on.$"
 
 PewterCity_Gym_Text_TryDifferentPartyOrders::
-    .string "The 1st daemon out in a match is\n"
-    .string "at the top of your list.\p"
+    .string "The first daemon out is the one at\n"
+    .string "the top of your list.\p"
     .string "Change the order and the match\n"
     .string "changes with it.$"
 
 PewterCity_Gym_Text_ItsFreeLetsGetHappening::
-    .string "It's a free service!\n"
-    .string "Let's get happening!$"
+    .string "It costs nothing.\n"
+    .string "Come on.$"
 
 PewterCity_Gym_Text_YoureChampMaterial::
-    .string "Just as I thought! You're champ\n"
-    .string "material!$"
+    .string "I said so.\p"
+    .string "I am usually right about this.$"
 
 PewterCity_Gym_Text_GymStatue::
     .string "SLATE DAEMON GYM LEADER: CAIRN\p"

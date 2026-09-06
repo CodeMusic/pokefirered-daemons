@@ -1,24 +1,23 @@
 Route1_Text_WorkAtPokeMartTakeSample::
-    .string "Hi! I work at a DAEMON MART.\p"
-    .string "It's a convenient shop, so please\n"
-    .string "visit us in CALLOW CITY.\p"
-    .string "I know, I'll give you a sample!\n"
-    .string "Here you go!$"
+    .string "I work at the DAEMON MART in\n"
+    .string "CALLOW.\p"
+    .string "Take a sample.\n"
+    .string "Everyone does eventually.$"
 
 Route1_Text_ComeSeeUsIfYouNeedPokeBalls::
-    .string "We also carry USERBOXes for\n"
-    .string "binding DAEMON!$"
+    .string "We carry USERBOXes as well.\p"
+    .string "You will want more than one.$"
 
 Route1_Text_PutPotionAway::
-    .string "{PLAYER} put the POTION away in\n"
-    .string "the BAG's ITEMS POCKET.$"
+    .string "{PLAYER} put the POTION in the\n"
+    .string "ITEMS POCKET.$"
 
 Route1_Text_CanJumpFromLedges::
-    .string "See those ledges along the road?\p"
-    .string "It's a bit scary, but you can jump\n"
-    .string "from them.\p"
-    .string "You can get back to BLANCHE TOWN\n"
-    .string "quicker that way.$"
+    .string "The ledges along the road.\p"
+    .string "You can drop down them. You cannot\n"
+    .string "climb back up.\p"
+    .string "It is quicker going home than it is\n"
+    .string "coming out.$"
 
 Route1_Text_RouteSign::
     .string "ROUTE 1\n"

@@ -1,23 +1,20 @@
 Route22_Text_EarlyRivalIntro::
-    .string "{RIVAL}: Hey! {PLAYER}!\p"
-    .string "You're going to DAEMON LEAGUE?\p"
-    .string "Forget it! You probably don't have\n"
-    .string "any MARKs!\p"
-    .string "The guard won't let you through!\p"
-    .string "By the way, did your DAEMONS get\n"
-    .string "any stronger?$"
+    .string "{RIVAL}: {PLAYER}.\p"
+    .string "Going to the LEAGUE? With what\n"
+    .string "MARKs?\p"
+    .string "They will not even open the gate.\p"
+    .string "Well. Show me what you have.$"
 
 Route22_Text_EarlyRivalDefeat::
-	.string "Awww!\n"
-	.string "You just lucked out!$"
+    .string "That was luck.\p"
+    .string "It was.$"
 
 Route22_Text_EarlyRivalPostBattle::
-    .string "I heard DAEMON LEAGUE has many\n"
-    .string "tough USERS!\p"
-    .string "I have to figure out how to get\n"
-    .string "past them!\p"
-    .string "You should quit dawdling and get a\n"
-    .string "move on!$"
+    .string "They say the LEAGUE is full of\n"
+    .string "people who do not lose.\p"
+    .string "I will work out how to get past\n"
+    .string "them.\p"
+    .string "You should hurry up.$"
 
 @ Translated in RB as "{RIVAL}: What? Why do I have 2 POKéMON? You should catch some more too!"
 Route22_Text_RivalShouldCatchSomeMons::
@@ -28,25 +25,20 @@ Route22_Text_RivalShouldCatchSomeMons::
 	.string "つかまえれば　いい　じゃん！$"
 
 Route22_Text_LateRivalIntro::
-    .string "{RIVAL}: What? {PLAYER}! What a\n"
-    .string "surprise to see you here!\p"
-    .string "So you're going to DAEMON LEAGUE?\p"
-    .string "You collected all the MARKs too?\n"
-    .string "That's cool!\p"
-    .string "Then I'll whip you {PLAYER} as a\n"
-    .string "warm up for DAEMON LEAGUE!\p"
-    .string "Come on!$"
+    .string "{RIVAL}: {PLAYER}. Of course.\p"
+    .string "All eight MARKs. Same as me.\p"
+    .string "Then you can be the warm-up.\p"
+    .string "Come on.$"
 
 Route22_Text_LateRivalDefeat::
-	.string "What!?\p"
-	.string "I was just careless, you!$"
+    .string "No.\p"
+    .string "I was not paying attention.$"
 
 Route22_Text_LateRivalPostBattle::
-	.string "That loosened me up. I'm ready for\n"
-	.string "the DAEMON LEAGUE!\p"
-	.string "{PLAYER}, you need more practice.\p"
-	.string "But hey, you know that! I'm out of\n"
-	.string "here. Smell ya!$"
+    .string "Good. I am warm now.\p"
+    .string "{PLAYER}, you need more work.\p"
+    .string "You know that.\n"
+    .string "See you there.$"
 
 @ Translated in RB as "{RIVAL}: Hahaha! {PLAYER}! That's your best? You're nowhere near as good as me, pal! Go train some more! You loser!"
 Route22_Text_LateRivalVictory::
