@@ -759,6 +759,9 @@ bool8 TryStandardWildEncounter(u32 currMetatileAttrs)
 #if DAEMONS_DEBUG
     // Hold B to walk through grass unmolested -- the same gesture the Game Boy
     // debug build uses, so the muscle memory carries between the two engines.
+    // field_control_avatar.c holds the other half: trainers do not see you
+    // either, and it chirps on the press and the release so the state is
+    // audible rather than guessed at.
     if (JOY_HELD(B_BUTTON))
     {
         sWildEncounterData.prevMetatileBehavior = ExtractMetatileAttribute(currMetatileAttrs, METATILE_ATTRIBUTE_BEHAVIOR);

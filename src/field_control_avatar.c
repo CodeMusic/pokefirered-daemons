@@ -243,6 +243,29 @@ static const u16 sDebugRestock[][2] = {
     { ITEM_WATER_STONE,   5 }, { ITEM_LEAF_STONE,    5 },
 };
 
+// Hold B and nothing sees you.
+//
+// wild_encounter.c already skips the grass; this skips the trainers, so the
+// modifier means one thing rather than two. It is called every frame because
+// it is also what makes the state AUDIBLE -- a chirp going in and a lower one
+// coming out, so you always know whether you are holding it.
+//
+// B IS ALSO THE RUN BUTTON, so in a debug build running IS ghosting. That is
+// the intent: the modifier exists to cross a map without being stopped. The
+// cost is that you cannot start a trainer battle at a run, which is the right
+// way round -- walking into one is deliberate and running past one is not.
+static bool8 DaemonsDebug_Ghosting(void)
+{
+    // Zero-initialised on purpose, for the .bss reason noted below.
+    static bool8 wasHeld;
+    bool8 held = JOY_HELD(B_BUTTON);
+
+    if (held != wasHeld)
+        PlaySE(held ? SE_PC_LOGIN : SE_PC_OFF);
+    wasHeld = held;
+    return held;
+}
+
 static bool8 DaemonsDebug_FieldHotkeys(void)
 {
     // Zero-initialised on purpose. An initialised mutable static lands in
@@ -334,8 +357,15 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
         return TRUE;
 #endif
 
+#if DAEMONS_DEBUG
+    // Ghosting() is the left operand on purpose: it runs every frame either
+    // way, because it owns the press and release chirps.
+    if (DaemonsDebug_Ghosting() == FALSE && CheckForTrainersWantingBattle() == TRUE)
+        return TRUE;
+#else
     if (CheckForTrainersWantingBattle() == TRUE)
         return TRUE;
+#endif
 
     if (TryRunOnFrameMapScript() == TRUE)
         return TRUE;
