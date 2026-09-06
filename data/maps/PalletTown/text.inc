@@ -39,10 +39,8 @@ PalletTown_Text_TownSign::
     .string "Here Yet$"
 
 PalletTown_Text_OakLetMeSeePokedex::
-    .string "CRYSTAL: {PLAYER}. Back already.\p"
-    .string "How much of the INDEX have you\n"
-    .string "filled?\p"
-    .string "Let me see.$"
+    .string "CRYSTAL: You are back.\p"
+    .string "Show me the INDEX.$"
 
 PalletTown_Text_CaughtXPuttingInHonestEffort::
     .string "{STR_VAR_2}.\p"
@@ -52,9 +50,8 @@ PalletTown_Text_CaughtXPuttingInHonestEffort::
 
 PalletTown_Text_CaughtXImpressiveFollowMe::
     .string "{STR_VAR_2}. Already.\p"
-    .string "There is something I have been\n"
-    .string "wanting to ask you.\p"
-    .string "Come.$"
+    .string "Come through. I want to ask you\n"
+    .string "something.$"
 
 PalletTown_Text_OakYouEnjoyingTraveling::
     .string "CRYSTAL: {PLAYER}.\n"

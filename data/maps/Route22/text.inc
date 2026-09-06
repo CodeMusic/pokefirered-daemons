@@ -10,11 +10,9 @@ Route22_Text_EarlyRivalDefeat::
     .string "It was.$"
 
 Route22_Text_EarlyRivalPostBattle::
-    .string "They say the LEAGUE is full of\n"
-    .string "people who do not lose.\p"
-    .string "I will work out how to get past\n"
-    .string "them.\p"
-    .string "You should hurry up.$"
+    .string "Nobody at the LEAGUE loses.\p"
+    .string "That is the whole point of it.\p"
+    .string "Move.$"
 
 @ Translated in RB as "{RIVAL}: What? Why do I have 2 POKéMON? You should catch some more too!"
 Route22_Text_RivalShouldCatchSomeMons::
@@ -35,10 +33,9 @@ Route22_Text_LateRivalDefeat::
     .string "I was not paying attention.$"
 
 Route22_Text_LateRivalPostBattle::
-    .string "Good. I am warm now.\p"
-    .string "{PLAYER}, you need more work.\p"
-    .string "You know that.\n"
-    .string "See you there.$"
+    .string "Warm now.\p"
+    .string "{PLAYER}. More work.\p"
+    .string "You already know that.$"
 
 @ Translated in RB as "{RIVAL}: Hahaha! {PLAYER}! That's your best? You're nowhere near as good as me, pal! Go train some more! You loser!"
 Route22_Text_LateRivalVictory::

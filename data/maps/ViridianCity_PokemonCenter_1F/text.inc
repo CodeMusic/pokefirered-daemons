@@ -5,10 +5,9 @@ ViridianCity_PokemonCenter_1F_Text_FeelFreeToUsePC::
     .string "I have been saying so all morning.$"
 
 ViridianCity_PokemonCenter_1F_Text_PokeCenterInEveryTown::
-    .string "There is a DAEMON CENTER in every\n"
-    .string "town from here on.\p"
-    .string "They do not charge. Nobody has\n"
-    .string "ever explained why.$"
+    .string "Every town from here has one.\p"
+    .string "Free. Nobody has ever explained\n"
+    .string "that to me.$"
 
 ViridianCity_PokemonCenter_1F_Text_PokeCentersHealMons::
     .string "A DAEMON CENTER restarts anything\n"

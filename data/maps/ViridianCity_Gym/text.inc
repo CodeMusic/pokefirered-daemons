@@ -32,10 +32,9 @@ ViridianCity_Gym_Text_ReceivedTM26FromGiovanni::
 
 ViridianCity_Gym_Text_ExplainTM26::
     .string "TM26 is EARTHQUAKE.\p"
-    .string "It moves the ground everything is\n"
-    .string "standing on.\p"
-    .string "I wrote it when I ran this GYM.\n"
-    .string "That was before the other thing.$"
+    .string "It reaches the layer everything\n"
+    .string "else is standing on.\p"
+    .string "I had it made. Use it or do not.$"
 
 ViridianCity_Gym_Text_YouDoNotHaveSpace::
     .string "You do not have space for this!$"

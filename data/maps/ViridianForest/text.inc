@@ -71,9 +71,8 @@ ViridianForest_Text_AvoidGrassyAreasWhenWeak::
     .string "It is still there.$"
 
 ViridianForest_Text_UseAntidoteForPoison::
-    .string "USER TIPS\p"
-    .string "For poison, use an ANTIDOTE. The\n"
-    .string "MARTS carry them.$"
+    .string "Poisoned? ANTIDOTE.\p"
+    .string "Any MART carries them.$"
 
 ViridianForest_Text_ContactOakViaPCToRatePokedex::
     .string "USER TIPS\p"

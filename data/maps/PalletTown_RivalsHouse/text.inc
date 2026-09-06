@@ -1,6 +1,7 @@
 PalletTown_RivalsHouse_Text_HiBrothersAtLab::
-    .string "Hi, {PLAYER}. {RIVAL} is at Gran's\n"
-    .string "lab, being told things.$"
+    .string "VERA: {PLAYER}.\p"
+    .string "He is at Gran's LAB. He has been\n"
+    .string "there since six.$"
 
 PalletTown_RivalsHouse_Text_HeardYouBattledRival::
     .string "VERA: I heard you engaged\n"
@@ -32,8 +33,9 @@ PalletTown_RivalsHouse_Text_PleaseGiveMonsRest::
     .string "This surprises people.$"
 
 PalletTown_RivalsHouse_Text_ItsBigMapOfKanto::
-    .string "A large map of KANTO. That would\n"
-    .string "be useful.$"
+    .string "A map of the whole region.\p"
+    .string "Somebody drew every road on it by\n"
+    .string "hand.$"
 
 PalletTown_RivalsHouse_Text_ShelvesCrammedFullOfBooks::
     .string "Shelves of books about daemons.\n"
@@ -52,7 +54,9 @@ PalletTown_RivalsHouse_Text_GroomWhichOne::
     .string "Which one?$"
 
 PalletTown_RivalsHouse_Text_LookingNiceInNoTime::
-    .string "VERA: This will not take long.$"
+    .string "{FONT_NORMAL}{STR_VAR_1} settles.\p"
+    .string "{FONT_FEMALE}VERA: There.\p"
+    .string "It was not doing anything wrong.$"
 
 PalletTown_RivalsHouse_Text_ThereYouGoAllDone::
 #ifdef BUGFIX @ The localizers missed what should be a textcolor change in the localizations.
@@ -81,10 +85,9 @@ PalletTown_RivalsHouse_Text_CouldntLoveYouMore::
     .string "I have not seen many like that.$"
 
 PalletTown_RivalsHouse_Text_ItLooksVeryHappy::
-    .string "It is settled. It has stopped\n"
-    .string "watching the door.\p"
-    .string "I wish {RIVAL} would let one get\n"
-    .string "this far.$"
+    .string "It has stopped fidgeting.\p"
+    .string "{RIVAL} has never once sat still\n"
+    .string "long enough to see this.$"
 
 PalletTown_RivalsHouse_Text_ItsQuiteFriendly::
     .string "It stays near you without being\n"

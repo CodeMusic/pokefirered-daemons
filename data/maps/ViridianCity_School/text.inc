@@ -57,32 +57,32 @@ ViridianCity_School_Text_ReadWhichTopic::
     .string "Which one?$"
 
 ViridianCity_School_Text_ExplainSleep::
-    .string "A sleeping daemon does not act.\p"
-    .string "It stays asleep after the battle.\p"
-    .string "AWAKENING wakes one.$"
+    .string "Asleep, nothing runs.\p"
+    .string "The battle ending does not wake\n"
+    .string "it.\p"
+    .string "AWAKENING is the interrupt.$"
 
 ViridianCity_School_Text_ExplainBurn::
-    .string "A burn lowers ATTACK and takes HP\n"
-    .string "every turn.\p"
-    .string "It stays after the battle.\p"
-    .string "BURN HEAL clears it.$"
+    .string "Burned, it hits softer and loses\n"
+    .string "HP each turn.\p"
+    .string "Carried out of the battle with it.\p"
+    .string "BURN HEAL.$"
 
 ViridianCity_School_Text_ExplainPoison::
-    .string "Poison takes HP steadily and does\n"
-    .string "not stop on its own.\p"
-    .string "It stays after the battle.\p"
-    .string "An ANTIDOTE clears it.$"
+    .string "Poisoned, HP drains and does not\n"
+    .string "stop.\p"
+    .string "Carried out of the battle with it.\p"
+    .string "ANTIDOTE.$"
 
 ViridianCity_School_Text_ExplainFreeze::
-    .string "A frozen daemon cannot move at\n"
-    .string "all.\p"
-    .string "It has nothing left to try.\p"
-    .string "It stays frozen after the battle.\n"
-    .string "ICE HEAL thaws it.$"
+    .string "Frozen, it cannot act at all.\p"
+    .string "Nothing left to try.\p"
+    .string "Carried out of the battle with it.\p"
+    .string "ICE HEAL.$"
 
 ViridianCity_School_Text_ExplainParalysis::
-    .string "Paralysis lowers SPEED, and may\n"
-    .string "stop a daemon acting at all.\p"
-    .string "It stays after the battle.\p"
-    .string "PARLYZ HEAL clears it.$"
+    .string "Paralysed, it is slower and may\n"
+    .string "not act at all.\p"
+    .string "Carried out of the battle with it.\p"
+    .string "PARLYZ HEAL.$"
 

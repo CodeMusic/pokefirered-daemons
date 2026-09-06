@@ -51,9 +51,8 @@ ViridianCity_Text_ThatWasEducationalTakeThis::
     .string "Take one of these as well.$"
 
 ViridianCity_Text_WatchThatToLearnBasics::
-    .string "If something does not make sense,\n"
-    .string "watch that.\p"
-    .string "It is slow, but it is patient.$"
+    .string "Stuck? Watch that.\p"
+    .string "It repeats until you have it.$"
 
 ViridianCity_Text_WeakenMonsFirstToCatch::
     .string "Watch. You weaken it, then you\n"
@@ -81,8 +80,8 @@ ViridianCity_Text_TooBusyForTeachyTV::
 
 ViridianCity_Text_CitySign::
     .string "CALLOW CITY\n"
-    .string "Evergreen And\l"
-    .string "Unripe$"
+    .string "Green All Year.\l"
+    .string "Untried All Year.$"
 
 ViridianCity_Text_CatchMonsForEasierBattles::
     .string "USER TIPS\p"

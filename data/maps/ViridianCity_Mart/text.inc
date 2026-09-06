@@ -2,9 +2,9 @@ ViridianCity_Mart_Text_YouCameFromPallet::
     .string "Hey. You came up from BLANCHE?$"
 
 ViridianCity_Mart_Text_TakeThisToProfOak::
-    .string "You know CRYSTAL CLEAR, right?\p"
-    .string "Her order came in. A CC-7. Will\n"
-    .string "you run it out?\p"
+    .string "CRYSTAL CLEAR's order came in.\p"
+    .string "A CC-7. Will you run it out to\n"
+    .string "her?\p"
     .string "{PLAYER} got the CC-7!$"
 
 ViridianCity_Mart_Text_ReceivedOaksParcelFromClerk::

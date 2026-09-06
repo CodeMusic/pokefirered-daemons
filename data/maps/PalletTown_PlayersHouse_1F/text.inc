@@ -1,34 +1,32 @@
 PalletTown_PlayersHouse_1F_Text_AllBoysLeaveOakLookingForYou::
-    .string "MOM: Right. Everyone goes, sooner\n"
-    .string "or later.\p"
-    .string "CRYSTAL CLEAR next door was\n"
-    .string "asking after you.$"
+    .string "MOM: You have that look.\p"
+    .string "CRYSTAL CLEAR was here.\n"
+    .string "She waited a while.$"
 
 PalletTown_PlayersHouse_1F_Text_AllGirlsLeaveOakLookingForYou::
-    .string "MOM: …Right. You have been ready\n"
-    .string "for a while.\p"
-    .string "CRYSTAL CLEAR next door was\n"
-    .string "asking after you.$"
+    .string "MOM: …You have that look.\p"
+    .string "CRYSTAL CLEAR was here. She did\n"
+    .string "not wait long.$"
 
 PalletTown_PlayersHouse_1F_Text_YouShouldTakeQuickRest::
-    .string "MOM: {PLAYER}.\p"
-    .string "Sit down for a minute.$"
+    .string "MOM: Sit down a moment.\p"
+    .string "You are grey.$"
 
 PalletTown_PlayersHouse_1F_Text_LookingGreatTakeCare::
     .string "MOM: You both look well.\p"
     .string "Go on, then.$"
 
 PalletTown_PlayersHouse_1F_Text_MovieOnTVFourBoysOnRailroad::
-    .string "There is a film on.\p"
-    .string "Four kids are walking along a\n"
-    .string "railway line.\p"
-    .string "…I should go too.$"
+    .string "Something is on.\p"
+    .string "Four of them, following a line\n"
+    .string "because it goes somewhere.\p"
+    .string "…Right.$"
 
 PalletTown_PlayersHouse_1F_Text_MovieOnTVGirlOnBrickRoad::
-    .string "There is a film on.\p"
-    .string "A girl is walking up a road made\n"
-    .string "of brick.\p"
-    .string "…I should go too.$"
+    .string "Something is on.\p"
+    .string "One of them, following a road\n"
+    .string "because it is the only road.\p"
+    .string "…Right.$"
 
 PalletTown_PlayersHouse_1F_Text_OopsWrongSide::
     .string "Wrong side.$"

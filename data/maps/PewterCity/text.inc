@@ -44,9 +44,9 @@ PewterCity_Text_ReallyYouHaveToGo::
     .string "there forever.$"
 
 PewterCity_Text_ThisIsTheMuseum::
-    .string "This is it.\p"
-    .string "They charge, and it is worth it.\p"
-    .string "See you around.$"
+    .string "The MUSEUM.\p"
+    .string "Worth the money. Go before you\n"
+    .string "leave.$"
 
 PewterCity_Text_DoYouKnowWhatImDoing::
     .string "Psssst.\n"
@@ -125,9 +125,9 @@ PewterCity_Text_OhPlayer::
     .string "Oh, {PLAYER}!$"
 
 PewterCity_Text_AskedToDeliverThis::
-    .string "Glad I found you. I am CRYSTAL\n"
-    .string "CLEAR's AIDE.\p"
-    .string "She asked me to bring you this.$"
+    .string "Found you. I work for CRYSTAL\n"
+    .string "CLEAR.\p"
+    .string "She sent these up for you.$"
 
 PewterCity_Text_ReceivedRunningShoesFromAide::
     .string "{PLAYER} received the\n"
@@ -138,8 +138,8 @@ PewterCity_Text_SwitchedShoesWithRunningShoes::
     .string "on.$"
 
 PewterCity_Text_ExplainRunningShoes::
-    .string "Hold B and you will move.\p"
-    .string "Only where there is room.$"
+    .string "Hold B.\p"
+    .string "You will need the room.$"
 
 PewterCity_Text_MustBeGoingBackToLab::
     .string "I should get back to the LAB.\p"

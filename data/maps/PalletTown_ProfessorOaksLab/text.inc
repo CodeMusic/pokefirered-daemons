@@ -22,13 +22,14 @@ PalletTown_ProfessorOaksLab_Text_RivalReceivedMonFromOak::
     .string "CRYSTAL CLEAR!$"
 
 PalletTown_ProfessorOaksLab_Text_RivalMyMonLooksTougher::
-    .string "{RIVAL}: Mine is already running\n"
-    .string "better than yours.$"
+    .string "{RIVAL}: Mine is better.\p"
+    .string "You can tell by looking.$"
 
 PalletTown_ProfessorOaksLab_Text_RivalLetsCheckOutMons::
-    .string "{RIVAL}: Wait, {PLAYER}! Let's see\n"
-    .string "what they actually do.\p"
-    .string "Come on. Engage.$"
+    .string "{RIVAL}: {PLAYER}. Stop there.\p"
+    .string "Neither of us knows what these\n"
+    .string "actually do yet.\p"
+    .string "Engage.$"
 
 PalletTown_ProfessorOaksLab_Text_RivalDefeat::
     .string "{RIVAL}: What? No. I picked the\n"
@@ -39,16 +40,16 @@ Text_RivalVictory::
     .string "{RIVAL}: Yeah! Told you.$"
 
 PalletTown_ProfessorOaksLab_Text_RivalGoToughenMyMon::
-    .string "{RIVAL}: Fine. Mine only needs the\n"
-    .string "practice.\p"
-    .string "{PLAYER}! Gran! Smell you later!$"
+    .string "{RIVAL}: Then it needs the\n"
+    .string "practice, not me.\p"
+    .string "Gran. {PLAYER}. Later.$"
 
 PalletTown_ProfessorOaksLab_Text_RivalGramps::
     .string "{RIVAL}: Gran!$"
 
 PalletTown_ProfessorOaksLab_Text_RivalWhatDidYouCallMeFor::
-    .string "{RIVAL}: I have forgotten.\p"
-    .string "What was it?$"
+    .string "{RIVAL}: Gone.\p"
+    .string "Whatever it was.$"
 
 PalletTown_ProfessorOaksLab_Text_RivalLeaveItToMeGramps::
     .string "{RIVAL}: Fine.\n"
@@ -227,31 +228,25 @@ PalletTown_ProfessorOaksLab_Text_AllMonTypesHaveStrongAndWeakPoints::
     .string "explain itself.$"
 
 PalletTown_ProfessorOaksLab_Text_EmailMessage::
-    .string "There's an e-mail message here.\p"
+    .string "An unread message.\p"
     .string "…\p"
-    .string "Finally! The ultimate USERS of the\n"
-    .string "DAEMON LEAGUE are ready to take\l"
-    .string "on all comers!\p"
-    .string "Bring your best DAEMONS and see\n"
-    .string "how you rate as a USER!\p"
-    .string "DAEMON LEAGUE HQ UMBRA PLATEAU\p"
-    .string "CRYSTAL CLEAR, please visit us! …$"
+    .string "The REVIEW BOARD sits again this\n"
+    .string "season and will hear anyone\l"
+    .string "holding eight MARKs.\p"
+    .string "UMBRA PLATEAU.\p"
+    .string "CRYSTAL CLEAR: your attendance is\n"
+    .string "again requested. …$"
 
 PalletTown_ProfessorOaksLab_Text_StudyAsOaksAide::
     .string "I read daemons here. CRYSTAL signs\n"
     .string "the work.$"
 
 PalletTown_ProfessorOaksLab_Text_DaisyWillGroomMons::
-    .string "Hi, {PLAYER}. I bet you've become\n"
-    .string "good friends with your DAEMON.\p"
-    .string "By the way, did you know about\n"
-    .string "VERA?\p"
-    .string "If you show VERA your DAEMON, she\n"
-    .string "can tell how much it likes you.\p"
-    .string "Occasionally, she will even groom a\n"
-    .string "DAEMON for you.\p"
-    .string "This is a secret, so please don't\n"
-    .string "tell anyone.$"
+    .string "{PLAYER}. You have had them a\n"
+    .string "while now.\p"
+    .string "Take one to VERA sometime.\p"
+    .string "She will tell you things about it\n"
+    .string "you had not noticed.$"
 
 PalletTown_ProfessorOaksLab_Text_OakIsGoingToHaveRadioShow::
     .string "CRYSTAL CLEAR is getting a radio\n"
@@ -283,10 +278,9 @@ PalletTown_ProfessorOaksLab_Text_OakSightingsOfRareMons::
 
 PalletTown_ProfessorOaksLab_Text_RivalJustLetMeHandleEverything::
     .string "{RIVAL}: I heard that.\p"
-    .string "Gran, why is it always {PLAYER}?\p"
-    .string "I have bound more than he has,\n"
-    .string "and faster.\p"
-    .string "Just give the whole thing to me.$"
+    .string "Gran. It is always {PLAYER}.\p"
+    .string "I have bound more. I was faster.\p"
+    .string "Give me one job. One.$"
 
 PalletTown_ProfessorOaksLab_Text_OakNeedYourHelpTooNeedToSeePokedexes::
     .string "CRYSTAL: Yes. I need you as well,\n"
