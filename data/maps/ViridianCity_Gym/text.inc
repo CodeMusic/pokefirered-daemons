@@ -28,8 +28,7 @@ ViridianCity_Gym_Text_ExplainEarthBadgeTakeThis::
     .string "LEAGUE. Take it and go.$"
 
 ViridianCity_Gym_Text_ReceivedTM26FromGiovanni::
-    .string "{PLAYER} received TM26\n"
-    .string "from GIOVANNI.$"
+    .string "{PLAYER} received TM26 from SCORN.$"
 
 ViridianCity_Gym_Text_ExplainTM26::
     .string "TM26 is EARTHQUAKE.\p"
@@ -130,7 +129,7 @@ ViridianCity_Gym_Text_SamuelPostBattle::
     .string "LEADER!$"
 
 ViridianCity_Gym_Text_GymGuyAdvice::
-    .string "Yo! Champ in making!\p"
+    .string "You again.\p"
     .string "Nobody will tell me who runs this\n"
     .string "GYM.\p"
     .string "I have asked. They smile.\p"
@@ -138,8 +137,8 @@ ViridianCity_Gym_Text_GymGuyAdvice::
     .string "much I got.$"
 
 ViridianCity_Gym_Text_GymGuyPostVictory::
-    .string "GIOVANNI. He was running the GYM\n"
-    .string "the whole time.\p"
+    .string "SCORN. He was running the GYM the\n"
+    .string "whole time.\p"
     .string "I asked so many people.$"
 
 ViridianCity_Gym_Text_GymStatue::
@@ -147,7 +146,6 @@ ViridianCity_Gym_Text_GymStatue::
     .string "WINNING USERS: {RIVAL}$"
 
 ViridianCity_Gym_Text_GymStatuePlayerWon::
-    .string "CALLOW DAEMON GYM LEADER:\n"
-    .string "GIOVANNI\p"
+    .string "CALLOW DAEMON GYM LEADER: SCORN\p"
     .string "WINNING USERS: {RIVAL}, {PLAYER}$"
 

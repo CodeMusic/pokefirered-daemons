@@ -576,7 +576,7 @@ gFameCheckerFlavorText_Giovanni0:: @ 0x81AFE68
 	.string "around the world.\p"
 	.string "They're important tools for keeping\n"
 	.string "our criminal enterprise going.\p"
-	.string "I am the leader, GIOVANNI!$"
+	.string "I am the leader, SCORN!$"
 
 gFameCheckerFlavorText_Giovanni1:: @ 0x81AFF23
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of DAEMON?\p"
@@ -600,15 +600,15 @@ gFameCheckerFlavorText_Giovanni3:: @ 0x81B0022
 
 gFameCheckerFlavorText_Giovanni4:: @ 0x81B00A6
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
-	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}Blow me away! GIOVANNI was the\n"
-	.string "GYM LEADER of CALLOW?$"
+	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}Blow me away! SCORN was the GYM\n"
+	.string "LEADER of CALLOW?$"
 
 gFameCheckerFlavorText_Giovanni5:: @ 0x81B0106
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Family and friends?\p"
-	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}You… You're not GIOVANNI's kid,\n"
-	.string "are you?\p"
-	.string "No, that can't be right.\n"
-	.string "GIOVANNI's kid has red hair.$"
+	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}You… You're not SCORN's kid, are\n"
+	.string "you?\p"
+	.string "No, that can't be right. SCORN's kid\n"
+	.string "has red hair.$"
 
 
 gFameCheckerPersonName_ProfOak:: @ 0x81B0188
@@ -776,11 +776,10 @@ gFameCheckerPersonQuote_MrFuji:: @ 0x81B0B0E
 	.string "happiness of all DAEMONS?$"
 
 gFameCheckerPersonName_Giovanni:: @ 0x81B0BA6
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}GIOVANNI$"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}SCORN$"
 
 gFameCheckerPersonQuote_Giovanni:: @ 0x81B0BB5
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}From: GIOVANNI\n"
-	.string "To: {PLAYER}\p"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}From: SCORN To: {PLAYER}\p"
 	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}There is nothing that I wish to say\n"
 	.string "to you.\p"
 	.string "I will concentrate solely on\n"
@@ -1345,7 +1344,7 @@ gFameCheckerFlavorTextOriginObjectName_MrFuji5::
 	.string "DAEMON JOURNAL$"
 
 gFameCheckerFlavorTextOriginObjectName_Giovanni0::
-	.string "GIOVANNI$"
+	.string "SCORN$"
 
 gFameCheckerFlavorTextOriginObjectName_Giovanni1::
 	.string "SCIENTIST$"
@@ -1354,7 +1353,7 @@ gFameCheckerFlavorTextOriginObjectName_Giovanni2::
 	.string "SCIENTIST$"
 
 gFameCheckerFlavorTextOriginObjectName_Giovanni3::
-	.string "GIOVANNI$"
+	.string "SCORN$"
 
 gFameCheckerFlavorTextOriginObjectName_Giovanni4::
 	.string "MAN$"

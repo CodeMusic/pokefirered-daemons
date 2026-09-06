@@ -34,7 +34,7 @@ FiveIsland_RocketWarehouse_Text_Grunt3Intro::
     .string "I got word about you from the\n"
     .string "others.\p"
     .string "But there's no way a kid like you'd\n"
-    .string "know our BOSS GIOVANNI!$"
+    .string "know our BOSS SCORN!$"
 
 FiveIsland_RocketWarehouse_Text_Grunt3Defeat::
     .string "Don't…you…dare…laugh…$"
@@ -46,8 +46,8 @@ FiveIsland_RocketWarehouse_Text_Grunt3PostBattle::
 FiveIsland_RocketWarehouse_Text_Admin1Intro::
     .string "I don't know or care if what I'm\n"
     .string "doing is right or wrong…\p"
-    .string "I just put my faith in GIOVANNI\n"
-    .string "and do as I am told.$"
+    .string "I just put my faith in SCORN and\n"
+    .string "do as I am told.$"
 
 FiveIsland_RocketWarehouse_Text_Admin1Defeat::
     .string "I…\n"
@@ -82,7 +82,7 @@ FiveIsland_RocketWarehouse_Text_Admin2Intro::
 
 FiveIsland_RocketWarehouse_Text_Admin2Defeat::
     .string "Urgh… You were too strong…\p"
-    .string "… Th-that's GIOVANNI's MARK!\p"
+    .string "… Th-that's SCORN's MARK!\p"
     .string "So it's true? TEAM CORPUS really\n"
     .string "has disbanded?$"
 
@@ -90,7 +90,7 @@ FiveIsland_RocketWarehouse_Text_Admin2PostBattle::
     .string "We will abandon this WAREHOUSE…\p"
     .string "But don't think this is over. I won't\n"
     .string "let this be the end.\p"
-    .string "I will find GIOVANNI. And I will\n"
+    .string "I will find SCORN. And I will\n"
     .string "resurrect TEAM CORPUS! I will…\p"
     .string "Until then, farewell!$"
 
@@ -124,10 +124,10 @@ FiveIsland_RocketWarehouse_Text_GetLostLeaveMeBe::
 
 FiveIsland_RocketWarehouse_Text_GiovannisKidHasRedHair::
     .string "What, you again?\p"
-    .string "You… You're not GIOVANNI's kid,\n"
-    .string "are you?\p"
-    .string "No, that can't be right!\n"
-    .string "GIOVANNI's kid has red hair.\p"
+    .string "You… You're not SCORN's kid, are\n"
+    .string "you?\p"
+    .string "No, that can't be right! SCORN's kid\n"
+    .string "has red hair.\p"
     .string "You don't have any reasons for\n"
     .string "bugging me. Leave me alone!$"
 

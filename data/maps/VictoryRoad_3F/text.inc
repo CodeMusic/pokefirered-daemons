@@ -28,7 +28,7 @@ VictoryRoad_3F_Text_GeorgeDefeat::
     .string "The rumors were true!$"
 
 VictoryRoad_3F_Text_GeorgePostBattle::
-    .string "You beat GIOVANNI of TEAM CORPUS?$"
+    .string "You beat SCORN of TEAM CORPUS?$"
 
 VictoryRoad_3F_Text_AlexaIntro::
     .string "USERS live to seek stronger\n"
