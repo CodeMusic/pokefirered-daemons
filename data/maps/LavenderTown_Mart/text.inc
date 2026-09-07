@@ -11,8 +11,8 @@ LavenderTown_Mart_Text_ArguedAboutThePrimaries::
     .string "looks like his dark room.\p"
     .string "We were both right. That is why it\n"
     .string "took a year.\p"
-    .string "He called first. I had the number\n"
-    .string "the whole time.$"
+    .string "He called first. My phone worked\n"
+    .string "the whole year too.$"
 
 LavenderTown_Mart_Text_DidYouBuyRevives::
     .string "You know REVIVE? It revives any\n"
