@@ -39,8 +39,8 @@ const u8 gTeachyTvText_BattleScript2[] = _(
 const u8 gTeachyTvText_StatusScript1[] = _(
         "Today, the POKé DUDE's here to\n"
         "tell you about status problems!\p"
-        "Status problems include poisoning,\n"
-        "paralysis, sleep, burn…\p"
+        "Status problems include leaking,\n"
+        "throttling, suspension, overheating…\p"
         "There are a couple others, but\n"
         "they really are trouble.\p"
         "Get any one, and your DAEMON may\n"
@@ -54,9 +54,9 @@ const u8 gTeachyTvText_StatusScript1[] = _(
         "Keep your eyes glued to the super\n"
         "POKé DUDE SHOW!");
 const u8 gTeachyTvText_StatusScript2[] = _(
-        "Poisoning or paralysis don't go\n"
+        "Leaking or throttling don't go\n"
         "away after a battle.\p"
-        "If a DAEMON is poisoned, it loses\n"
+        "If a DAEMON is leaking, it loses\n"
         "HP even while you're walking.\p"
         "You should heal DAEMON of these\n"
         "kinds of problems right away.\p"

@@ -327,7 +327,7 @@ Help_Text_AnswerWhatIsStatusProblem::
 	.string "A status problem refers to an ailment\n"
 	.string "that is inflicted on a DAEMON by its\l"
 	.string "foe's attack. These include burns,\l"
-	.string "paralysis, poisoning, sleep, and\l"
+	.string "throttling, leaking, suspension, and\l"
 	.string "freezing. These can be healed by\l"
 	.string "visiting a DAEMON CENTER or using the\l"
 	.string "appropriate item.$"
@@ -344,7 +344,7 @@ Help_Text_AnswerCantCatchMons::
 	.string "If a wild DAEMON escapes from a POKé\n"
 	.string "BOX, it's obviously still feisty. Try\l"
 	.string "reducing its HP some more, and try to\l"
-	.string "weaken it with paralysis or sleep\l"
+	.string "throttle it or suspend it\l"
 	.string "before trying to bind it. If the POKé\l"
 	.string "BOX rocks for a while, the quarry is\l"
 	.string "close to being bound!$"
@@ -687,7 +687,7 @@ Help_Text_HowToUseSummary::
 	.string "   Pad to check the information:\n"
 	.string "   “DAEMON INFO”\n"
 	.string "   “DAEMON SKILLS”\n"
-	.string "   “KNOWN MOVES”$"
+	.string "   “KNOWN ROUTINES”$"
 
 Help_Text_HowToUseSwitch::
 	.string "{CIRCLE_1} Choose the DAEMON you want to\n"
@@ -955,7 +955,7 @@ Help_Text_HowToUseSummary2::
 	.string "   Pad to check the information:\n"
 	.string "   “DAEMON INFO”\n"
 	.string "   “DAEMON SKILLS”\n"
-	.string "   “KNOWN MOVES”$"
+	.string "   “KNOWN ROUTINES”$"
 
 Help_Text_HowToUseBag2::
 	.string "{CIRCLE_1} Select “BAG.”\n"
@@ -1456,11 +1456,11 @@ Help_Text_DefineEvolution::
 
 Help_Text_DefineStatusProblem::
 	.string "Status problems include:\n"
-	.string "Sleep: Can't use moves.\l"
+	.string "Suspension: Can't use moves.\l"
 	.string "Poison: Causes steady HP loss.\l"
-	.string "Paralysis: May prevent moves.\l"
-	.string "Burn: HP loss and lowers ATTACK.\l"
-	.string "Freeze: Can't use moves.\l"
+	.string "Throttling: May prevent moves.\l"
+	.string "Overheating: HP loss, less ATTACK.\l"
+	.string "Hang: Can't use moves.\l"
 	.string "These can be healed with items, etc.$"
 
 Help_Text_DefinePokemon::

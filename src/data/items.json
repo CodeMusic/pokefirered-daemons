@@ -225,12 +225,12 @@
       "secondaryId": 0
     },
     {
-      "english": "ANTIDOTE",
+      "english": "PATCH",
       "itemId": "ITEM_ANTIDOTE",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A spray-type medicine. It\\nheals one DAEMON from a\\npoisoning.",
+      "description_english": "Seals a LEAK. The same word for a hole and for the fix.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -241,12 +241,12 @@
       "secondaryId": 0
     },
     {
-      "english": "BURN HEAL",
+      "english": "COOLANT",
       "itemId": "ITEM_BURN_HEAL",
       "price": 250,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A spray-type medicine. It heals\\none DAEMON of a burn.",
+      "description_english": "Cools an OVERHEATED DAEMON back to full output.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -257,12 +257,12 @@
       "secondaryId": 0
     },
     {
-      "english": "ICE HEAL",
+      "english": "INTERRUPT",
       "itemId": "ITEM_ICE_HEAL",
       "price": 250,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A spray-type medicine. It\\ndefrosts a frozen DAEMON.",
+      "description_english": "Reaches a HUNG DAEMON, which nothing else does.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -273,12 +273,12 @@
       "secondaryId": 0
     },
     {
-      "english": "AWAKENING",
+      "english": "RESUME",
       "itemId": "ITEM_AWAKENING",
       "price": 250,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A spray-type medicine. It\\nawakens a sleeping DAEMON.",
+      "description_english": "Puts a SUSPENDED DAEMON back on the schedule.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -289,12 +289,12 @@
       "secondaryId": 0
     },
     {
-      "english": "PARLYZ HEAL",
+      "english": "PRIORITY",
       "itemId": "ITEM_PARALYZE_HEAL",
       "price": 200,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A spray-type medicine. It\\nheals one DAEMON from\\nparalysis.",
+      "description_english": "Lifts a THROTTLE by scheduling the DAEMON ahead.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -305,12 +305,12 @@
       "secondaryId": 0
     },
     {
-      "english": "FULL RESTORE",
+      "english": "SNAPSHOT",
       "itemId": "ITEM_FULL_RESTORE",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 255,
-      "description_english": "A medicine that fully restores the\\nHP and heals any status problems\\nof one DAEMON.",
+      "description_english": "Restores a DAEMON whole: health and state together.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -369,12 +369,12 @@
       "secondaryId": 0
     },
     {
-      "english": "FULL HEAL",
+      "english": "ROLLBACK",
       "itemId": "ITEM_FULL_HEAL",
       "price": 600,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A spray-type medicine. It heals all\\nthe status problems of one DAEMON.",
+      "description_english": "Returns a DAEMON to a known-good state. Clears everything.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -385,12 +385,12 @@
       "secondaryId": 0
     },
     {
-      "english": "REVIVE",
+      "english": "RESTART",
       "itemId": "ITEM_REVIVE",
       "price": 1500,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A medicine that revives a HALTED\\nDAEMON, restoring HP by half the\\nmaximum amount.",
+      "description_english": "Brings back a HALTED DAEMON at half its health.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -401,12 +401,12 @@
       "secondaryId": 0
     },
     {
-      "english": "MAX REVIVE",
+      "english": "REBOOT",
       "itemId": "ITEM_MAX_REVIVE",
       "price": 4000,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A medicine that revives a HALTED\\nDAEMON, restoring HP fully.",
+      "description_english": "Brings back a HALTED DAEMON at full health.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -513,12 +513,12 @@
       "secondaryId": 0
     },
     {
-      "english": "HEAL POWDER",
+      "english": "HOTFIX",
       "itemId": "ITEM_HEAL_POWDER",
       "price": 450,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A very bitter medicine powder. It\\nheals all the status problems of\\none DAEMON.",
+      "description_english": "Bitter, cheap, and it works now. Clears every state.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
