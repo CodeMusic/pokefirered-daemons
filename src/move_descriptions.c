@@ -237,7 +237,10 @@ const u8 gMoveDescription_VitalThrow[] = _("Makes the user\nattack after the\nfo
 const u8 gMoveDescription_MorningSun[] = _("Restores the user's\nHP. The amount of\nHP regained varies\nwith the weather.");
 const u8 gMoveDescription_Synthesis[] = _("Restores the user's\nHP. The amount of\nHP regained varies\nwith the weather.");
 const u8 gMoveDescription_Moonlight[] = _("Restores the user's\nHP. The amount of\nHP regained varies\nwith the weather.");
-const u8 gMoveDescription_HiddenPower[] = _("An attack that\nvaries in type and\nintensity depending\non the user.");
+//  Vanilla says "depending on the user", which is true and says nothing. Ours
+//  names the mechanic without naming the thesis (craft rule 1): what varies is
+//  something the user was made with, and no screen in the game will show it.
+const u8 gMoveDescription_HiddenPower[] = _("Its type and force\nare set by traits\nthe user was made\nwith, never shown.");
 const u8 gMoveDescription_CrossChop[] = _("The foe is hit\nwith double chops.\nIt has a high\ncritical-hit ratio.");
 const u8 gMoveDescription_Twister[] = _("A vicious twister\nattacks the foe.\nIt may make the\nfoe flinch.");
 const u8 gMoveDescription_RainDance[] = _("A heavy rain falls\nfor five turns,\npowering up WATER-\ntype moves.");

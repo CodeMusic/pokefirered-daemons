@@ -236,7 +236,12 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] = {
     [MOVE_MORNING_SUN]   = _("MORNING SUN"),
     [MOVE_SYNTHESIS]     = _("SYNTHESIS"),
     [MOVE_MOONLIGHT]     = _("MOONLIGHT"),
-    [MOVE_HIDDEN_POWER]  = _("HIDDEN POWER"),
+    //  A Bayesian PRIOR is the belief a system holds before it has seen any
+    //  evidence -- innate, invisible, and colouring everything computed after
+    //  it. Which is exactly what an IV is, and this move is the only place the
+    //  engine ever lets one show. It also just means "what came before", so it
+    //  works twice, which is the test BIND set.
+    [MOVE_HIDDEN_POWER]  = _("PRIOR"),
     [MOVE_CROSS_CHOP]    = _("CROSS CHOP"),
     [MOVE_TWISTER]       = _("TWISTER"),
     [MOVE_RAIN_DANCE]    = _("RAIN DANCE"),
