@@ -67,3 +67,6 @@ build-cmake-*/
 .cache/
 CMakeLists.txt
 compile_commands.json
+
+# mGBA save states -- per-machine, and the debug build makes its own
+*.ss[0-9]
