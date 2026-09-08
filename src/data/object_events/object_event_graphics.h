@@ -47,6 +47,7 @@ const u16 gObjectEventPic_LtSurge[] = INCBIN_U16("graphics/object_events/pics/pe
 const u16 gObjectEventPic_Bill[] = INCBIN_U16("graphics/object_events/pics/people/bill.4bpp");
 const u16 gObjectEventPal_NpcBlue[] = INCBIN_U16("graphics/object_events/palettes/npc_blue.gbapal");
 const u16 gObjectEventPal_DaemonSnorlax[] = INCBIN_U16("graphics/object_events/palettes/daemon_snorlax.gbapal");
+const u16 gObjectEventPal_DaemonSpearow[] = INCBIN_U16("graphics/object_events/palettes/daemon_spearow.gbapal");
 const u16 gObjectEventPal_NpcPink[] = INCBIN_U16("graphics/object_events/palettes/npc_pink.gbapal");
 const u16 gObjectEventPal_NpcGreen[] = INCBIN_U16("graphics/object_events/palettes/npc_green.gbapal");
 const u16 gObjectEventPal_NpcWhite[] = INCBIN_U16("graphics/object_events/palettes/npc_white.gbapal");
