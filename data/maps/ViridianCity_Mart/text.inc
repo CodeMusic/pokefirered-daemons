@@ -8,8 +8,8 @@ ViridianCity_Mart_Text_TakeThisToProfOak::
     .string "{PLAYER} got the CC-7!$"
 
 ViridianCity_Mart_Text_ReceivedOaksParcelFromClerk::
-    .string "{PLAYER} received the COGNITIVE\n"
-    .string "CLARIFIER from the REPO clerk.$"
+    .string "{PLAYER} received the CC-7 from\n"
+    .string "the REPO clerk.$"
 
 ViridianCity_Mart_Text_SayHiToOakForMe::
     .string "Right. Tell CRYSTAL it came in.$"

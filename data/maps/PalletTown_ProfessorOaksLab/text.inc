@@ -129,11 +129,13 @@ PalletTown_ProfessorOaksLab_Text_OakHaveSomethingForMe::
     .string "{PLAYER} delivered the CC-7.$"
 
 PalletTown_ProfessorOaksLab_Text_DeliveredOaksParcel::
-    .string "{PLAYER} delivered the COGNITIVE\n"
-    .string "CLARIFIER.$"
+    .string "{PLAYER} delivered the CC-7.$"
 
 PalletTown_ProfessorOaksLab_Text_OakCustomBallIOrdered::
-    .string "Ah. The module. Thank you.$"
+    .string "Ah. The module. Thank you.\p"
+    .string "I used to sign for these by the\n"
+    .string "dozen.\p"
+    .string "Different building. Long time ago.$"
 
 PalletTown_ProfessorOaksLab_Text_OakHaveRequestForYouTwo::
     .string "CRYSTAL: Before you go. I want\n"

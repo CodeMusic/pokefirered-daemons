@@ -5643,12 +5643,12 @@
       "secondaryId": 0
     },
     {
-      "english": "CLARIFIER",
+      "english": "CC-7",
       "itemId": "ITEM_OAKS_PARCEL",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A CLARIFIER MODULE, requisitioned\\nand sealed. It is addressed to\\nCRYSTAL, not to you.",
+      "description_english": "A sealed module. Part no. CC-7.\\nAddressed to CRYSTAL CLEAR.\\nNot to you.",
       "importance": 2,
       "registrability": 0,
       "pocket": "POCKET_KEY_ITEMS",
