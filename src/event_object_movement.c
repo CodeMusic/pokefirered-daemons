@@ -443,6 +443,13 @@ static const u8 gInitialMovementTypeFacingDirections[MOVEMENT_TYPES_COUNT] = {
 #define OBJ_EVENT_PAL_TAG_PLAYER_RED                  0x1100
 #define OBJ_EVENT_PAL_TAG_PLAYER_RED_REFLECTION       0x1101
 #define OBJ_EVENT_PAL_TAG_BRIDGE_REFLECTION           0x1102
+//  DAEMONS: a daemon object carries a TYPE RAMP, not a creature's own
+//  colours. Vanilla points every overworld creature at a generic NPC
+//  palette and picks whichever is closest -- Snorlax used NPC_BLUE. Ours
+//  cannot: the indices ARE the ramp, and rendering them through npc_blue
+//  turned DEADLOCK peach and yellow on Route 12. One palette per daemon,
+//  written by tools/gbasprite.py beside the art it belongs to.
+#define OBJ_EVENT_PAL_TAG_DAEMON_SNORLAX              0x111C
 #define OBJ_EVENT_PAL_TAG_NPC_BLUE                    0x1103
 #define OBJ_EVENT_PAL_TAG_NPC_PINK                    0x1104
 #define OBJ_EVENT_PAL_TAG_NPC_GREEN                   0x1105
@@ -497,6 +504,7 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_Meteorite,               OBJ_EVENT_PAL_TAG_METEORITE},
     {gObjectEventPal_SSAnne,                  OBJ_EVENT_PAL_TAG_SS_ANNE},
     {gObjectEventPal_Seagallop,               OBJ_EVENT_PAL_TAG_SEAGALLOP},
+    {gObjectEventPal_DaemonSnorlax,           OBJ_EVENT_PAL_TAG_DAEMON_SNORLAX},
     {},
 };
 
