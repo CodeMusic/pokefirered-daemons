@@ -886,7 +886,7 @@ gText_PkmnFainted3::
 	.string "$"
 
 Text_WelcomeWantToHealPkmn::
-	.string "Welcome to our DAEMON CENTER!\p"
+	.string "Welcome to our CHECKPOINT!\p"
 	.string "Would you like me to heal your\n"
 	.string "DAEMON back to perfect health?$"
 

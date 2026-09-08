@@ -71,7 +71,7 @@ ViridianForest_Text_AvoidGrassyAreasWhenWeak::
     .string "It is still there.$"
 
 ViridianForest_Text_UseAntidoteForPoison::
-    .string "Poisoned? ANTIDOTE.\p"
+    .string "Poisoned? PATCH.\p"
     .string "Any MART carries them.$"
 
 ViridianForest_Text_ContactOakViaPCToRatePokedex::

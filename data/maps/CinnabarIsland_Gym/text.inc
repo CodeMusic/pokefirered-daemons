@@ -4,7 +4,7 @@ CinnabarIsland_Gym_Text_BlaineIntro::
     .string "QUICKSILVER GYM!\p"
     .string "My fiery DAEMON will incinerate all\n"
     .string "challengers!\p"
-    .string "Hah! You better have BURN HEAL!$"
+    .string "Hah! You better have COOLANT!$"
 
 CinnabarIsland_Gym_Text_BlaineDefeat::
     .string "I have burnt out!\p"
@@ -125,7 +125,7 @@ CinnabarIsland_Gym_Text_GymGuyAdvice::
     .string "The hotheaded BLAINE is a FIRE\n"
     .string "DAEMON pro.\p"
     .string "Douse his spirits with water!\p"
-    .string "You'd better take some BURN HEALS,\n"
+    .string "You'd better take some COOLANTS,\n"
     .string "too.$"
 
 CinnabarIsland_Gym_Text_GymGuyPostVictory::

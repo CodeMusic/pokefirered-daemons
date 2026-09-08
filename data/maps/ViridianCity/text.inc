@@ -93,8 +93,8 @@ ViridianCity_Text_MovesLimitedByPP::
     .string "USER TIPS\p"
     .string "Every move a daemon has costs\n"
     .string "MANA, shown as MP.\p"
-    .string "Rest it at a DAEMON CENTER to put\n"
-    .string "the MP back.$"
+    .string "Rest it at a CHECKPOINT to put the\n"
+    .string "MP back.$"
 
 ViridianCity_Text_GymSign::
     .string "CALLOW CITY\n"

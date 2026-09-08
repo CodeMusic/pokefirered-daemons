@@ -9,15 +9,13 @@ ViridianCity_Mart_Text_TakeThisToProfOak::
 
 ViridianCity_Mart_Text_ReceivedOaksParcelFromClerk::
     .string "{PLAYER} received the COGNITIVE\n"
-    .string "CLARIFIER from the DAEMON MART\l"
-    .string "clerk.$"
+    .string "CLARIFIER from the REPO clerk.$"
 
 ViridianCity_Mart_Text_SayHiToOakForMe::
     .string "Right. Tell CRYSTAL it came in.$"
 
 ViridianCity_Mart_Text_ShopDoesGoodBusinessInAntidotes::
-    .string "They shift a lot of ANTIDOTES\n"
-    .string "here.\p"
+    .string "They shift a lot of PATCH here.\p"
     .string "Make of that what you like.$"
 
 ViridianCity_Mart_Text_GotToBuySomePotions::

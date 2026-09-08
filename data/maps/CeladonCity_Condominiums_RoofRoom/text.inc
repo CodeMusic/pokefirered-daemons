@@ -20,7 +20,7 @@ CeladonCity_Condominiums_RoofRoom_Text_ReadWhichHeading::
 
 CeladonCity_Condominiums_RoofRoom_Text_ExplainWirelessClub::
     .string "The DAEMON WIRELESS CLUB is\n"
-    .string "upstairs at any DAEMON CENTER.\p"
+    .string "upstairs at any CHECKPOINT.\p"
     .string "Visit one to link up with friend(s)\n"
     .string "using your Wireless Adapter.$"
 

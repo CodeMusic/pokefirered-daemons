@@ -10,7 +10,7 @@ ViridianCity_PokemonCenter_1F_Text_PokeCenterInEveryTown::
     .string "that to me.$"
 
 ViridianCity_PokemonCenter_1F_Text_PokeCentersHealMons::
-    .string "A DAEMON CENTER restarts anything\n"
+    .string "A CHECKPOINT restarts anything\n"
     .string "that HALTED.\p"
     .string "It comes back the way it went in.$"
 

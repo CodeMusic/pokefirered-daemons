@@ -15,7 +15,7 @@ LavenderTown_Mart_Text_ArguedAboutThePrimaries::
     .string "the whole year too.$"
 
 LavenderTown_Mart_Text_DidYouBuyRevives::
-    .string "You know REVIVE? It revives any\n"
+    .string "You know RESTART? It revives any\n"
     .string "HALTED DAEMON!$"
 
 LavenderTown_Mart_Text_TrainerDuosCanChallengeYou::

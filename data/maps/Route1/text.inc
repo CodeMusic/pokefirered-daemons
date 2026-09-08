@@ -1,8 +1,7 @@
 Route1_Text_WorkAtPokeMartTakeSample::
-    .string "I work at the DAEMON MART in\n"
-    .string "CALLOW.\p"
-    .string "Take a sample.\n"
-    .string "Everyone does eventually.$"
+    .string "I work at the REPO in CALLOW.\p"
+    .string "Take a sample. Everyone does\n"
+    .string "eventually.$"
 
 Route1_Text_ComeSeeUsIfYouNeedPokeBalls::
     .string "We carry USERBOXes as well.\p"

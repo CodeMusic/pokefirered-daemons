@@ -9,7 +9,7 @@ Text_MonsHealedShouldBuyPotions::
 	.string "down, please come see us.\p"
 	.string "If you're planning to go far in the\n"
 	.string "field, you should buy some POTIONS\l"
-	.string "at the DAEMON MART.\p"
+	.string "at the REPO.\p"
 	.string "We hope you excel!$"
 
 Text_MonsHealed::
@@ -32,11 +32,11 @@ Text_MomExplainHPGetPotions::
 	.string "She said that DAEMON's energy is\n"
 	.string "measured in HP.\p"
 	.string "If your DAEMON lose their HP, you\n"
-	.string "can restore them at any DAEMON\l"
-	.string "CENTER.\p"
+	.string "can restore them at any\l"
+	.string "CHECKPOINT.\p"
 	.string "If you're going to travel far away,\n"
 	.string "the smart USER stocks up on\l"
-	.string "POTIONS at the DAEMON MART.\p"
+	.string "POTIONS at the REPO.\p"
 	.string "Make me proud, honey!\p"
 	.string "Take care!$"
 

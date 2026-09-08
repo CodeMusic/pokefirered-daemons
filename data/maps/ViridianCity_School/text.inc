@@ -58,31 +58,30 @@ ViridianCity_School_Text_ReadWhichTopic::
 
 ViridianCity_School_Text_ExplainSleep::
     .string "Asleep, nothing runs.\p"
-    .string "The battle ending does not wake\n"
-    .string "it.\p"
-    .string "AWAKENING is the interrupt.$"
+    .string "The battle ending does not wake it.\p"
+    .string "RESUME is the interrupt.$"
 
 ViridianCity_School_Text_ExplainBurn::
-    .string "Burned, it hits softer and loses\n"
-    .string "HP each turn.\p"
+    .string "Burned, it hits softer and loses HP\n"
+    .string "each turn.\p"
     .string "Carried out of the battle with it.\p"
-    .string "BURN HEAL.$"
+    .string "COOLANT.$"
 
 ViridianCity_School_Text_ExplainPoison::
     .string "Poisoned, HP drains and does not\n"
     .string "stop.\p"
     .string "Carried out of the battle with it.\p"
-    .string "ANTIDOTE.$"
+    .string "PATCH.$"
 
 ViridianCity_School_Text_ExplainFreeze::
     .string "Frozen, it cannot act at all.\p"
     .string "Nothing left to try.\p"
     .string "Carried out of the battle with it.\p"
-    .string "ICE HEAL.$"
+    .string "INTERRUPT.$"
 
 ViridianCity_School_Text_ExplainParalysis::
-    .string "Paralysed, it is slower and may\n"
-    .string "not act at all.\p"
+    .string "Paralysed, it is slower and may not\n"
+    .string "act at all.\p"
     .string "Carried out of the battle with it.\p"
-    .string "PARLYZ HEAL.$"
+    .string "PRIORITY.$"
 

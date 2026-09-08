@@ -155,10 +155,10 @@ Help_Text_NothingIWantToKnow::
 	.string "There's nothing that I want to know!$"
 
 Help_Text_WhatsPokemonCenter::
-	.string "What's a DAEMON CENTER?$"
+	.string "What's a CHECKPOINT?$"
 
 Help_Text_WhatsPokemonMart::
-	.string "What's a DAEMON MART?$"
+	.string "What's a REPO?$"
 
 Help_Text_WantToEndGame::
 	.string "I want to end the game.$"
@@ -255,11 +255,11 @@ Help_Text_AnswerWhatHappenedToItemIGot::
 
 Help_Text_AnswerWhatAreMyAdventureBasics::
 	.string "If DAEMONS are hurt in battle, take\n"
-	.string "them to a DAEMON CENTER and have them\l"
+	.string "them to a CHECKPOINT and have them\l"
 	.string "healed by the staff. Get in the habit\l"
 	.string "of saving your game and recording your\l"
 	.string "progress. Stock up on healing items at\l"
-	.string "DAEMON MARTS before traveling far.$"
+	.string "REPOS before traveling far.$"
 
 Help_Text_AnswerHowAreRoadsForestsDifferent::
 	.string "Forests are basically the same as\n"
@@ -271,7 +271,7 @@ Help_Text_AnswerHowAreCavesDifferent::
 	.string "Caves are dark and dangerous. Wild\n"
 	.string "DAEMON can appear anywhere in them. If\l"
 	.string "there is an emergency, rush to a\l"
-	.string "DAEMON CENTER or use items. New towns\l"
+	.string "CHECKPOINT or use items. New towns\l"
 	.string "await discovery beyond some caves, so\l"
 	.string "don't give up.$"
 
@@ -303,25 +303,25 @@ Help_Text_AnswerWhatsABattle::
 Help_Text_AnswerHowDoIPrepareForBattle::
 	.string "First, fully heal the DAEMON in your\n"
 	.string "party (the DAEMON with you) at any\l"
-	.string "DAEMON CENTER. You should also buy\l"
+	.string "CHECKPOINT. You should also buy\l"
 	.string "healing items for emergencies at a\l"
-	.string "DAEMON MART.$"
+	.string "REPO.$"
 
 Help_Text_AnswerWhatIsAMonsVitality::
 	.string "A DAEMON's vitality is expressed in HP.\n"
 	.string "If a DAEMON is hurt in battle, HP is\l"
 	.string "subtracted. If its HP drops to zero,\l"
 	.string "the DAEMON HALTS. Heal hurt or HALTED\l"
-	.string "DAEMON at a DAEMON CENTER or by using\l"
+	.string "DAEMON at a CHECKPOINT or by using\l"
 	.string "items.$"
 
 Help_Text_AnswerMyMonsAreHurt::
-	.string "A DAEMON CENTER is like an inn for\n"
-	.string "DAEMON. It will fully heal DAEMON of\l"
-	.string "any status problems and fully restore\l"
-	.string "their HP using a special machine. This\l"
-	.string "service is free, so get in the habit of\l"
-	.string "healing your DAEMON often.$"
+	.string "A CHECKPOINT is like an inn for DAEMON.\n"
+	.string "It will fully heal DAEMON of any status\l"
+	.string "problems and fully restore their HP\l"
+	.string "using a special machine. This service is\l"
+	.string "free, so get in the habit of healing\l"
+	.string "your DAEMON often.$"
 
 Help_Text_AnswerWhatIsStatusProblem::
 	.string "A status problem refers to an ailment\n"
@@ -329,16 +329,16 @@ Help_Text_AnswerWhatIsStatusProblem::
 	.string "foe's attack. These include burns,\l"
 	.string "throttling, leaking, suspension, and\l"
 	.string "freezing. These can be healed by\l"
-	.string "visiting a DAEMON CENTER or using the\l"
+	.string "visiting a CHECKPOINT or using the\l"
 	.string "appropriate item.$"
 
 Help_Text_AnswerWhatHappensIfAllMyMonsFaint::
 	.string "If all the DAEMON in your party (all\n"
 	.string "the DAEMON with you) HALT, you lose\l"
 	.string "some MONEY, and you are returned home\l"
-	.string "or to a DAEMON CENTER. To reduce that\l"
-	.string "chance, visit DAEMON CENTERS often.\l"
-	.string "Also, get in the habit of saving often.$"
+	.string "or to a CHECKPOINT. To reduce that\l"
+	.string "chance, visit CHECKPOINTS often. Also,\l"
+	.string "get in the habit of saving often.$"
 
 Help_Text_AnswerCantCatchMons::
 	.string "If a wild DAEMON escapes from a POKé\n"
@@ -350,20 +350,18 @@ Help_Text_AnswerCantCatchMons::
 	.string "close to being bound!$"
 
 Help_Text_AnswerRanOutOfPotions::
-	.string "There are shops, known as DAEMON\n"
-	.string "MARTS, that sell items. You will not\l"
-	.string "find DAEMON MARTS on roads, in forests,\l"
-	.string "or in caves. Stock up on needed items\l"
-	.string "while you are visiting a town with a\l"
-	.string "DAEMON MART.$"
+	.string "There are shops, known as REPOS, that\n"
+	.string "sell items. You will not find REPOS on\l"
+	.string "roads, in forests, or in caves. Stock up\l"
+	.string "on needed items while you are visiting\l"
+	.string "a town with a REPO.$"
 
 Help_Text_AnswerCanIBuyPokeBalls::
-	.string "You may buy POKé BOXES at any DAEMON\n"
-	.string "MART in any town. You will not find\l"
-	.string "DAEMON MARTS on roads, in forests, or\l"
-	.string "in caves. Stock up on POKé BOXES while\l"
-	.string "you are visiting a town with a DAEMON\l"
-	.string "MART.$"
+	.string "You may buy POKé BOXES at any REPO in\n"
+	.string "any town. You will not find REPOS on\l"
+	.string "roads, in forests, or in caves. Stock up\l"
+	.string "on POKé BOXES while you are visiting a\l"
+	.string "town with a REPO.$"
 
 Help_Text_AnswerWhatsATrainer::
 	.string "A USER is a person who raises DAEMON\n"
@@ -443,29 +441,29 @@ Help_Text_AnswerWhatDoIDoInCave::
 	.string "Unlike roads and forests, wild DAEMON\n"
 	.string "can appear anywhere in caves. If your\l"
 	.string "DAEMONS are hurt in a cave, rush to a\l"
-	.string "DAEMON CENTER or use items to heal\l"
-	.string "them right away. It is very dangerous\l"
-	.string "to force your luck in caves.$"
+	.string "CHECKPOINT or use items to heal them\l"
+	.string "right away. It is very dangerous to\l"
+	.string "force your luck in caves.$"
 
 Help_Text_AnswerNothingIWantToKnow::
 	.string "Trust your own knowledge and power.\n"
 	.string "Believe in yourself and find your way!$"
 
 Help_Text_AnswerWhatsPokemonCenter::
-	.string "A DAEMON CENTER is identified by its\n"
-	.string "red roof and a “P.C” sign. Every\l"
-	.string "DAEMON CENTER offers such services as\l"
+	.string "A CHECKPOINT is identified by its red\n"
+	.string "roof and a “P.C” sign. Every\l"
+	.string "CHECKPOINT offers such services as\l"
 	.string "fully healing DAEMON and free PC use,\l"
 	.string "making it essential for your travels. On\l"
 	.string "the upper floor are facilities for\l"
 	.string "linking with friends and others.$"
 
 Help_Text_AnswerWhatsPokemonMart::
-	.string "A DAEMON MART is identified by its blue\n"
-	.string "roof and a “MART” sign. Items can be\l"
-	.string "bought and sold at any DAEMON MART.\l"
-	.string "Some MARTS carry items that are\l"
-	.string "available only in their towns.$"
+	.string "A REPO is identified by its blue roof\n"
+	.string "and a “MART” sign. Items can be bought\l"
+	.string "and sold at any REPO. Some MARTS carry\l"
+	.string "items that are available only in their\l"
+	.string "towns.$"
 
 Help_Text_AnswerWantToEndGame::
 	.string "You can safely end your game by\n"
@@ -829,7 +827,7 @@ Help_Text_HowToEnterName::
 	.string "{CIRCLE_4} Press the A Button on “OK.”$"
 
 Help_Text_HowToUsePC::
-	.string "{CIRCLE_1} Go to any DAEMON CENTER, go up\n"
+	.string "{CIRCLE_1} Go to any CHECKPOINT, go up\n"
 	.string "   to the PC, then press the A Button.$"
 
 Help_Text_HowToUseBillsPC::
@@ -1188,9 +1186,9 @@ Help_Text_DefineHP::
 	.string "HP indicates a DAEMON's vitality. If a\n"
 	.string "DAEMON's HP drops to zero, it HALTS and\l"
 	.string "is unable to battle. So, the key in\l"
-	.string "battle is to try to reduce the foe's\l"
-	.string "HP to zero. If your DAEMONS are hurt,\l"
-	.string "restore their HP at a DAEMON CENTER or\l"
+	.string "battle is to try to reduce the foe's HP\l"
+	.string "to zero. If your DAEMONS are hurt,\l"
+	.string "restore their HP at a CHECKPOINT or\l"
 	.string "use items.$"
 
 Help_Text_DefineEXP::
@@ -1290,7 +1288,7 @@ Help_Text_DefineMoney::
 	.string "Whenever you win a battle against a\n"
 	.string "USER, you are given prize money. Save\l"
 	.string "up your prize money so you can enjoy\l"
-	.string "shopping at DAEMON MARTS!$"
+	.string "shopping at REPOS!$"
 
 Help_Text_DefineMoveType::
 	.string "Moves are also classified by types. If\n"
@@ -1338,7 +1336,7 @@ Help_Text_DefineFNT::
 	.string "HALTS if its HP is reduced to zero. It\l"
 	.string "becomes incapable of taking part in\l"
 	.string "battle. Restore a HALTED DAEMON at a\l"
-	.string "DAEMON CENTER, or use an item.$"
+	.string "CHECKPOINT, or use an item.$"
 
 Help_Text_DefineItems::
 	.string "Ordinary items bought at any DAEMON\n"
@@ -1359,9 +1357,9 @@ Help_Text_DefinePokeBalls::
 	.string "POKé BOXES, which are used for binding\n"
 	.string "wild DAEMONS, are placed in the POKé\l"
 	.string "BOXES POCKET. POKé BOXES may be\l"
-	.string "bought at DAEMON MARTS. They may be\l"
-	.string "used, given to a DAEMON to hold, or\l"
-	.string "tossed out as garbage.$"
+	.string "bought at REPOS. They may be used,\l"
+	.string "given to a DAEMON to hold, or tossed\l"
+	.string "out as garbage.$"
 
 Help_Text_DefinePokedex::
 	.string "This indicates the number of species of\n"
@@ -1482,7 +1480,7 @@ Help_Text_DefineMoney2::
 	.string "Whenever you win a battle against a\n"
 	.string "USER, you are given prize money. Save\l"
 	.string "up your prize money so you can enjoy\l"
-	.string "shopping at DAEMON MARTS!$"
+	.string "shopping at REPOS!$"
 
 Help_Text_DefineBadges2::
 	.string "This indicates the number of DAEMONS\n"

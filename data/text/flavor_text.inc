@@ -29,11 +29,11 @@ Text_Snacks::
 	.string "There's a pile of snacks here.$"
 
 Text_PokemartSign::
-	.string "All your item needs fulfilled!\n"
-	.string "DAEMON MART$"
+	.string "All your item needs fulfilled! THE\n"
+	.string "REPO$"
 
 Text_PokecenterSign::
-	.string "Heal Your DAEMON! DAEMON CENTER$"
+	.string "Heal Your DAEMON! CHECKPOINT$"
 
 Text_Indigo_UltimateGoal::
 	.string "UMBRA PLATEAU\p"

@@ -12,7 +12,7 @@ CeruleanCity_House1_Text_HaveJustTheThing::
 
 CeruleanCity_House1_Text_GoCrushBerriesAtDirectCorner::
     .string "There's something new on the second\n"
-    .string "floor of DAEMON CENTERS, at the\l"
+    .string "floor of CHECKPOINTS, at the\l"
     .string "DIRECT CORNER.\p"
     .string "They installed a Wireless Adapter\n"
     .string "machine for crushing BERRIES.\p"
@@ -22,7 +22,7 @@ CeruleanCity_House1_Text_GoCrushBerriesAtDirectCorner::
     .string "Could you make BERRY POWDER for\n"
     .string "me using that machine?\p"
     .string "Don't forget, the machine is at the\n"
-    .string "DIRECT CORNER of DAEMON CENTERS.\p"
+    .string "DIRECT CORNER of CHECKPOINTS.\p"
     .string "I'll concoct medicine for you if you\n"
     .string "bring me some BERRY POWDER.\p"
     .string "Don't forget, crush BERRIES into\n"

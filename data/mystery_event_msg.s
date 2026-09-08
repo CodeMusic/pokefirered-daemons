@@ -100,7 +100,7 @@ SurfPichu_Slot5:
 sText_MysteryGiftEgg:
 	.string "Thank you for using the MYSTERY\n"
 	.string "GIFT System.\p"
-	.string "From the DAEMON CENTER we have a\n"
+	.string "From the CHECKPOINT we have a\n"
 	.string "gift - a DAEMON EGG!\p"
 	.string "Please raise it with love and\n"
 	.string "kindness.$"
@@ -136,7 +136,7 @@ sText_MysteryGiftVisitingTrainer:
 	.string "GIFT System.\p"
 	.string "By holding this WONDER CARD, you\n"
 	.string "may take part in a survey at a\l"
-	.string "DAEMON MART.\p"
+	.string "REPO.\p"
 	.string "Use these surveys to invite USERS\n"
 	.string "to the SEVII ISLANDS.\p"
 	.string "…Let me give you a secret password\n"

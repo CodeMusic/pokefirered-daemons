@@ -5,7 +5,7 @@ CeladonCity_DepartmentStore_2F_Text_SuperRepelMorePowerfulRepel::
 
 CeladonCity_DepartmentStore_2F_Text_BuyReviveForLongOutings::
     .string "For long outings, you should buy\n"
-    .string "REVIVE.$"
+    .string "RESTART.$"
 
 CeladonCity_DepartmentStore_2F_Text_FloorSign::
     .string "Top Grade Items\n"

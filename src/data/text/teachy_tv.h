@@ -61,7 +61,7 @@ const u8 gTeachyTvText_StatusScript2[] = _(
         "You should heal DAEMON of these\n"
         "kinds of problems right away.\p"
         "Use an item, or try to get to a\n"
-        "DAEMON CENTER for healing.\p"
+        "CHECKPOINT for healing.\p"
         "That wasn't hard, was it? All\n"
         "righty, be seeing you!\p"
         "Remember, USERS, a good deed a\n"
