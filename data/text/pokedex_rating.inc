@@ -76,7 +76,7 @@ PokedexRating_Text_LessThan140::
 
 PokedexRating_Text_LessThan150::
 	.string "I have nothing left to say! You're\n"
-	.string "the DAEMON PROFESSOR now!$"
+	.string "the one they should ask now!$"
 
 PokedexRating_Text_Complete::
     .string "Your INDEX is entirely complete!\n"

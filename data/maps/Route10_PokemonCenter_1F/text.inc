@@ -42,6 +42,6 @@ Route10_PokemonCenter_1F_Text_ExplainEverstone::
     .string "want a certain DAEMON to evolve.\p"
     .string "In that case, give the EVERSTONE\n"
     .string "to that DAEMON.\p"
-    .string "It will prevent evolution according\n"
-    .string "to the PROFESSOR.$"
+    .string "It will prevent RECOMPILE according\n"
+    .string "to CRYSTAL CLEAR.$"
 
