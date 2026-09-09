@@ -10,9 +10,9 @@ const u8 gTeachyTvText_PokedudeSaysHello[] = _(
         "HELLO, USERS!\p"
         "……… ……… ………\p"
         "Come on, let me hear you! HELLO,\n"
-        "USERS! It's me, the POKé DUDE!\p");
+        "USERS! It's me, the TUTOR!\p");
 const u8 gTeachyTvText_BattleScript1[] = _(
-        "Today, the POKé DUDE's here to\n"
+        "Today, the TUTOR's here to\n"
         "tell you about how you can battle\l"
         "DAEMON!\p"
         "Say you're out for a stroll when,\n"
@@ -25,7 +25,7 @@ const u8 gTeachyTvText_BattleScript1[] = _(
         "person and for sure!\p"
         "All righty, here goes!\p"
         "Keep your eyes glued to the super\n"
-        "POKé DUDE SHOW!");
+        "TUTOR SHOW!");
 const u8 gTeachyTvText_BattleScript2[] = _(
         "Well, did you get that?\p"
         "Even if your own DAEMON's HP\n"
@@ -37,7 +37,7 @@ const u8 gTeachyTvText_BattleScript2[] = _(
         "Remember, USERS, a good deed a\n"
         "day brings happiness to stay!");
 const u8 gTeachyTvText_StatusScript1[] = _(
-        "Today, the POKé DUDE's here to\n"
+        "Today, the TUTOR's here to\n"
         "tell you about status problems!\p"
         "Status problems include leaking,\n"
         "throttling, suspension, overheating…\p"
@@ -45,14 +45,14 @@ const u8 gTeachyTvText_StatusScript1[] = _(
         "they really are trouble.\p"
         "Get any one, and your DAEMON may\n"
         "become useless in battle.\p"
-        "You know, it hurts the POKé DUDE\n"
+        "You know, it hurts the TUTOR\n"
         "to see a DAEMON suffer…\p"
         "So, what should you do if your\n"
         "DAEMON gets a status problem?\p"
         "Well, you've got me to show you!\p"
         "All righty, here goes!\p"
         "Keep your eyes glued to the super\n"
-        "POKé DUDE SHOW!");
+        "TUTOR SHOW!");
 const u8 gTeachyTvText_StatusScript2[] = _(
         "Leaking or throttling don't go\n"
         "away after a battle.\p"
@@ -87,7 +87,7 @@ const u8 gTeachyTvText_MatchupsScript1[] = _(
         "what I mean.\p"
         "All righty, here goes!\p"
         "Keep your eyes glued to the super\n"
-        "POKé DUDE SHOW!");
+        "TUTOR SHOW!");
 const u8 gTeachyTvText_MatchupsScript2[] = _(
         "Is it possible to launch an attack\n"
         "that will inflict heavy damage?\p"
@@ -98,13 +98,13 @@ const u8 gTeachyTvText_MatchupsScript2[] = _(
         "Watch the type matchups to gain\n"
         "the upper hand!\p"
         "All righty, be seeing you!\p"
-        "Oh, for the COOL-type POKé DUDE,\n"
+        "Oh, for the COOL-type TUTOR,\n"
         "AWESOME-type kids like you match\l"
         "up perfectly!\p"
         "Remember, a good deed a day\n"
         "brings happiness to stay!");
 const u8 gTeachyTvText_CatchingScript1[] = _(
-        "Today, the POKé DUDE's going to\n"
+        "Today, the TUTOR's going to\n"
         "show you how to bind DAEMONS!\p"
         "Just imagine… A groovy DAEMON\n"
         "suddenly appearing in the wild!\p"
@@ -116,11 +116,11 @@ const u8 gTeachyTvText_CatchingScript1[] = _(
         "it happen!\p"
         "All righty, here goes!\p"
         "Keep your eyes glued to the super\n"
-        "POKé DUDE SHOW!");
+        "TUTOR SHOW!");
 const u8 gTeachyTvText_CatchingScript2[] = _(
         "If your first POKé BOX fails to\n"
         "bind the DAEMON, don't give up!\p"
-        "Keep throwing POKé BOXES… It's\n"
+        "Keep throwing BOXES… It's\n"
         "bound to work sometime!\p"
         "All righty, be seeing you!\p"
         "Remember, USERS, a good deed a\n"
@@ -139,7 +139,7 @@ const u8 gTeachyTvText_TMsScript1[] = _(
         "You can check them out in detail,\n"
         "too.");
 const u8 gPokedudeText_TMTypes[] = _(
-        "POKé DUDE: NORMAL, WATER, GRASS…\n"
+        "TUTOR: NORMAL, WATER, GRASS…\n"
         "TMs also come in types.\p"
         "Check the type and teach it to a\n"
         "DAEMON that matches up well.\p"
@@ -177,7 +177,7 @@ const u8 gTeachyTvText_RegisterScript1[] = _(
         "and I'll show you how!\p"
         "All righty, here goes!\p"
         "Keep your eyes glued to the sorta\n"
-        "super POKé DUDE SHOW!");
+        "super TUTOR SHOW!");
 const u8 gTeachyTvText_RegisterScript2[] = _(
         "And now, your TEACHY TV is\n"
         "registered.\p"

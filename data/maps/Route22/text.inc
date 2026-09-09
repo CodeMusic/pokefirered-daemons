@@ -14,7 +14,7 @@ Route22_Text_EarlyRivalPostBattle::
     .string "That is the whole point of it.\p"
     .string "Move.$"
 
-@ Translated in RB as "{RIVAL}: What? Why do I have 2 POKéMON? You should catch some more too!"
+@ Translated in RB as "{RIVAL}: What? Why do I have 2 DAEMON? You should catch some more too!"
 Route22_Text_RivalShouldCatchSomeMons::
 	.string "{RIVAL}“なんだ？\n"
 	.string "ポケモン　2ひきも\l"

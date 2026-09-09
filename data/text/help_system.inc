@@ -119,7 +119,7 @@ Help_Text_RanOutOfPotions::
 	.string "I ran out of POTIONS.$"
 
 Help_Text_CanIBuyPokeBalls::
-	.string "Can I buy POKé BOXES?$"
+	.string "Can I buy BOXES?$"
 
 Help_Text_WhatsATrainer::
 	.string "What's a USER?$"
@@ -357,10 +357,10 @@ Help_Text_AnswerRanOutOfPotions::
 	.string "a town with a REPO.$"
 
 Help_Text_AnswerCanIBuyPokeBalls::
-	.string "You may buy POKé BOXES at any REPO in\n"
+	.string "You may buy BOXES at any REPO in\n"
 	.string "any town. You will not find REPOS on\l"
 	.string "roads, in forests, or in caves. Stock up\l"
-	.string "on POKé BOXES while you are visiting a\l"
+	.string "on BOXES while you are visiting a\l"
 	.string "town with a REPO.$"
 
 Help_Text_AnswerWhatsATrainer::
@@ -710,7 +710,7 @@ Help_Text_HowToUseBag::
 	.string "   Pad to check the data headings:\n"
 	.string "   “ITEMS”\n"
 	.string "   “KEY ITEMS”\n"
-	.string "   “POKé BOXES”\n"
+	.string "   “BOXES”\n"
 	.string "   Press up or down to select an item.$"
 
 Help_Text_HowToUseAnItem::
@@ -731,7 +731,7 @@ Help_Text_HowToUseKeyItem::
 
 Help_Text_HowToUsePokeBall::
 	.string "{CIRCLE_1} While battling a wild DAEMON,\n"
-	.string "   select the BAG's “POKé BOXES”\n"
+	.string "   select the BAG's “BOXES”\n"
 	.string "   POCKET.\n"
 	.string "{CIRCLE_2} Press up or down on the {PLUS} Control\n"
 	.string "   Pad to select a POKé BOX.\n"
@@ -961,7 +961,7 @@ Help_Text_HowToUseBag2::
 	.string "   Pad to check the data headings:\n"
 	.string "   “ITEMS”\n"
 	.string "   “KEY ITEMS”\n"
-	.string "   “POKé BOXES”\n"
+	.string "   “BOXES”\n"
 	.string "   Press up or down to select an item.$"
 
 Help_Text_HowToReadPokedex::
@@ -1123,7 +1123,7 @@ Help_Text_KeyItems::
 	.string "KEY ITEMS$"
 
 Help_Text_PokeBalls::
-	.string "POKé BOXES$"
+	.string "BOXES$"
 
 Help_Text_Pokedex::
 	.string "INDEX$"
@@ -1354,9 +1354,9 @@ Help_Text_DefineKeyItems::
 	.string "without opening the MENU and BAG.$"
 
 Help_Text_DefinePokeBalls::
-	.string "POKé BOXES, which are used for binding\n"
+	.string "BOXES, which are used for binding\n"
 	.string "wild DAEMONS, are placed in the POKé\l"
-	.string "BOXES POCKET. POKé BOXES may be\l"
+	.string "BOXES POCKET. BOXES may be\l"
 	.string "bought at REPOS. They may be used,\l"
 	.string "given to a DAEMON to hold, or tossed\l"
 	.string "out as garbage.$"

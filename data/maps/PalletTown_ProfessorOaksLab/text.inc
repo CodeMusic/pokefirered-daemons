@@ -167,7 +167,7 @@ PalletTown_ProfessorOaksLab_Text_OakCatchMonsForDataTakeThese::
     .string "{PLAYER} got 5 USERBOXes!$"
 
 PalletTown_ProfessorOaksLab_Text_ReceivedFivePokeBalls::
-    .string "{PLAYER} received five POKé BOXES.$"
+    .string "{PLAYER} received five BOXES.$"
 
 PalletTown_ProfessorOaksLab_Text_OakExplainCatching::
     .string "When something unbound announces\n"

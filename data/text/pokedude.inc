@@ -1,5 +1,5 @@
 Pokedude_Text_SpeedierBattlerGoesFirst::
-	.string "POKé DUDE: The speedier of the\n"
+	.string "TUTOR: The speedier of the\n"
 	.string "battlers gets to attack first.$"
 
 Pokedude_Text_MyRattataFasterThanPidgey::
@@ -21,7 +21,7 @@ Pokedude_Text_MyRattataWonGetsEXP::
 	.string "stronger than before.$"
 
 Pokedude_Text_UhOhRattataPoisoned::
-	.string "POKé DUDE: Uh-oh… My NIBBLE has\n"
+	.string "TUTOR: Uh-oh… My NIBBLE has\n"
 	.string "been poisoned…\p"
 	.string "If a DAEMON is poisoned, it loses\n"
 	.string "HP steadily.$"
@@ -40,7 +40,7 @@ Pokedude_Text_YayWeManagedToWin::
 	.string "We managed to win!$"
 
 Pokedude_Text_WaterNotVeryEffectiveAgainstGrass::
-	.string "POKé DUDE: The move BUBBLE is a\n"
+	.string "TUTOR: The move BUBBLE is a\n"
 	.string "WATER-type attack.\p"
 	.string "The targeted ODDISH is a\n"
 	.string "GRASS/POISON-type DAEMON.\p"
@@ -95,7 +95,7 @@ Pokedude_Text_YeahWeWon::
 	.string "We won!$"
 
 Pokedude_Text_WeakenMonBeforeCatching::
-	.string "POKé DUDE: When you're trying to\n"
+	.string "TUTOR: When you're trying to\n"
 	.string "bind a DAEMON, don't throw any POKé\l"
 	.string "BOXES right away.\p"
 	.string "First, you need to weaken it by\n"
