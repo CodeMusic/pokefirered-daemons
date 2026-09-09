@@ -27,6 +27,7 @@
 #include "strings.h"
 #include "constants/field_effects.h"
 #include "constants/event_objects.h"
+#include "constants/flags.h"
 
 struct TeachyTvCtrlBlk
 {
@@ -44,6 +45,8 @@ struct TeachyTvBuf
     u16 buffer2[BG_SCREEN_SIZE];
     u16 buffer3[BG_SCREEN_SIZE];
     u16 titleTilemap[BG_SCREEN_SIZE];
+    struct ListMenuItem menuItems[TTV_MENU_MAX];
+    u8 numMenuItems;
     u8 grassAnimCounterLo;
     u8 grassAnimCounterHi;
     u8 grassAnimDisabled;
@@ -165,69 +168,68 @@ static const struct WindowTemplate sWindowTemplates[] =
     DUMMY_WIN_TEMPLATE,
 };
 
-static const struct ListMenuItem sListMenuItems[] = 
-{
-    {
-        .label = gTeachyTvString_TeachBattle,
-        .index = TTVSCR_BATTLE
-    },
-    {
-        .label = gTeachyTvString_StatusProblems,
-        .index = TTVSCR_STATUS
-    },
-    {
-        .label = gTeachyTvString_TypeMatchups,
-        .index = TTVSCR_MATCHUPS
-    },
-    {
-        .label = gTeachyTvString_CatchPkmn,
-        .index = TTVSCR_CATCHING
-    },
-    {
-        .label = gTeachyTvString_AboutTMs,
-        .index = TTVSCR_TMS
-    },
-    {
-        .label = gTeachyTvString_RegisterItem,
-        .index = TTVSCR_REGISTER
-    },
+// The vanilla cutscene with the hand-off removed: the host walks on, says
+// the first half, says the second half, and walks off. Nothing else about a
+// show was ever per-lesson art -- see 9.16.
+// A MARK show is offered only once its mark is held, and the seen flag is what
+// lets the host say a new one is up. Nine unused vanilla flags, 0x4A7-0x4AF,
+// referenced nowhere in the base game.
+#define FLAG_STREAM_SEEN_HOSTING  FLAG_UNUSED_0x4A7
+#define FLAG_STREAM_SEEN_MARK1    FLAG_UNUSED_0x4A8
 
-    {
-        .label = gTeachyTvString_Cancel,
-        .index = -2
-    },
-};
-
-static const struct ListMenuItem sListMenuItems_NoTMCase[] = 
+static bool8 TeachyTvShowIsUnlocked(u8 script)
 {
+    if (script < TTVSCR_FIRST_TALK)
+        return TRUE;
+    if (script == TTVSCR_HOSTING)
+        return TRUE;
+    return FlagGet(FLAG_BADGE01_GET + (script - TTVSCR_MARK1));
+}
+
+static u16 TeachyTvSeenFlag(u8 script)
+{
+    if (script == TTVSCR_HOSTING)
+        return FLAG_STREAM_SEEN_HOSTING;
+    return FLAG_STREAM_SEEN_MARK1 + (script - TTVSCR_MARK1);
+}
+
+static bool8 TeachyTvHasUnseenShow(void)
+{
+    u8 i;
+
+    for (i = TTVSCR_FIRST_TALK; i < TTVSCR_COUNT; ++i)
     {
-        .label = gTeachyTvString_TeachBattle,
-        .index = TTVSCR_BATTLE
-    },
-    {
-        .label = gTeachyTvString_StatusProblems,
-        .index = TTVSCR_STATUS
-    },
-    {
-        .label = gTeachyTvString_TypeMatchups,
-        .index = TTVSCR_MATCHUPS
-    },
-    {
-        .label = gTeachyTvString_CatchPkmn,
-        .index = TTVSCR_CATCHING
-    },
-    {
-        .label = gTeachyTvString_Cancel,
-        .index = -2
-    },
+        if (TeachyTvShowIsUnlocked(i) && !FlagGet(TeachyTvSeenFlag(i)))
+            return TRUE;
+    }
+    return FALSE;
+}
+
+static const struct ListMenuItem sAllShows[] =
+{
+    { gTeachyTvString_TeachBattle,    TTVSCR_BATTLE   },
+    { gTeachyTvString_StatusProblems, TTVSCR_STATUS   },
+    { gTeachyTvString_TypeMatchups,   TTVSCR_MATCHUPS },
+    { gTeachyTvString_CatchPkmn,      TTVSCR_CATCHING },
+    { gTeachyTvString_Hosting,        TTVSCR_HOSTING  },
+    { gTeachyTvString_AboutTMs,       TTVSCR_TMS      },
+    { gTeachyTvString_RegisterItem,   TTVSCR_REGISTER },
+    { gTeachyTvString_Mark1,          TTVSCR_MARK1    },
+    { gTeachyTvString_Mark2,          TTVSCR_MARK2    },
+    { gTeachyTvString_Mark3,          TTVSCR_MARK3    },
+    { gTeachyTvString_Mark4,          TTVSCR_MARK4    },
+    { gTeachyTvString_Mark5,          TTVSCR_MARK5    },
+    { gTeachyTvString_Mark6,          TTVSCR_MARK6    },
+    { gTeachyTvString_Mark7,          TTVSCR_MARK7    },
+    { gTeachyTvString_Mark8,          TTVSCR_MARK8    },
 };
 
 static const struct ListMenuTemplate sListMenuTemplate = 
 {
-    .items = sListMenuItems,
+    .items = NULL,      // filled in per open, from sAllShows
     .moveCursorFunc = NULL,
     .itemPrintFunc = NULL,
-    .totalItems = 7,
+    .totalItems = 0,
     .maxShowed = 6,
     .windowId = 0,
     .header_X = 0,
@@ -259,14 +261,16 @@ static const struct ScrollArrowsTemplate sScrollIndicatorArrowPair =
     .palNum = 0x0,
 };
 
-static const u8 sWhereToReturnToFromBattle[] = 
+// Only the six vanilla shows ever come back from a battle or the bag; a talk
+// show never leaves the cutscene, so its entry is never read.
+static const u8 sWhereToReturnToFromBattle[TTVSCR_COUNT] =
 {
-    12,
-    12,
-    12,
-    12,
-     9,
-     9
+    [TTVSCR_BATTLE]   = 12,
+    [TTVSCR_STATUS]   = 12,
+    [TTVSCR_MATCHUPS] = 12,
+    [TTVSCR_CATCHING] = 12,
+    [TTVSCR_TMS]      =  9,
+    [TTVSCR_REGISTER] =  9,
 };
 
 static void (* const sBattleScript[])(u8) = 
@@ -392,6 +396,25 @@ static void (* const sRegisterKeyItemScript[])(u8) =
     TTVcmd_IdleIfTextPrinterIsActive2,
     TTVcmd_EraseTextWindowIfKeyPressed,
     TTVcmd_TaskBattleOrFadeByOptionChosen,
+    TTVcmd_TextPrinterSwitchStringByOptionChosen2,
+    TTVcmd_IdleIfTextPrinterIsActive2,
+    TTVcmd_EraseTextWindowIfKeyPressed,
+    TTVcmd_DudeTurnLeft,
+    TTVcmd_DudeMoveLeft,
+    TTVcmd_RenderAndRemoveBg1EndGraphic,
+    TTVcmd_End,
+};
+
+static void (* const sTalkScript[])(u8) =
+{
+    TTVcmd_TransitionRenderBg2TeachyTvGraphicInitNpcPos,
+    TTVcmd_ClearBg2TeachyTvGraphic,
+    TTVcmd_NpcMoveAndSetupTextPrinter,
+    TTVcmd_IdleIfTextPrinterIsActive,
+    TTVcmd_IdleIfTextPrinterIsActive2,
+    TTVcmd_TextPrinterSwitchStringByOptionChosen,
+    TTVcmd_IdleIfTextPrinterIsActive2,
+    TTVcmd_EraseTextWindowIfKeyPressed,
     TTVcmd_TextPrinterSwitchStringByOptionChosen2,
     TTVcmd_IdleIfTextPrinterIsActive2,
     TTVcmd_EraseTextWindowIfKeyPressed,
@@ -546,16 +569,50 @@ static void TeachyTvCreateAndRenderRbox(void)
     CopyWindowToVram(0, COPYWIN_GFX);
 }
 
+// Vanilla hid the two bag shows when the player had no TM CASE, which is the
+// same idea as gating a MARK show on the mark: a show you cannot follow is
+// worse than no show. Both are now one filter over sAllShows.
+static void TeachyTvBuildMenu(void)
+{
+    u8 i, n = 0;
+    bool8 hasTmCase = CheckBagHasItem(ITEM_TM_CASE, 1);
+
+    for (i = 0; i < NELEMS(sAllShows); ++i)
+    {
+        u8 script = sAllShows[i].index;
+
+        if ((script == TTVSCR_TMS || script == TTVSCR_REGISTER) && !hasTmCase)
+            continue;
+        if (!TeachyTvShowIsUnlocked(script))
+            continue;
+        sResources->menuItems[n++] = sAllShows[i];
+    }
+    sResources->menuItems[n].label = gTeachyTvString_Cancel;
+    sResources->menuItems[n].index = -2;
+    sResources->numMenuItems = n + 1;
+
+    // The list grows with the marks and shrinks with the TM CASE, and the
+    // scroll position is remembered across opens -- so clamp it, or a shorter
+    // list is entered past its own end.
+    if (sStaticResources.scrollOffset + sStaticResources.selectedRow >= sResources->numMenuItems)
+    {
+        sStaticResources.scrollOffset = 0;
+        sStaticResources.selectedRow = 0;
+    }
+}
+
 static u8 TeachyTvSetupWindow(void)
 {
+    TeachyTvBuildMenu();
     gMultiuseListMenuTemplate = sListMenuTemplate;
     gMultiuseListMenuTemplate.windowId = 1;
     gMultiuseListMenuTemplate.moveCursorFunc = TeachyTvAudioByInput;
-    if (!CheckBagHasItem(ITEM_TM_CASE, 1))
+    gMultiuseListMenuTemplate.items = sResources->menuItems;
+    gMultiuseListMenuTemplate.totalItems = sResources->numMenuItems;
+    gMultiuseListMenuTemplate.maxShowed = 6;
+    if (sResources->numMenuItems < 6)
     {
-        gMultiuseListMenuTemplate.items = sListMenuItems_NoTMCase;
-        gMultiuseListMenuTemplate.totalItems = 5;
-        gMultiuseListMenuTemplate.maxShowed = 5;
+        gMultiuseListMenuTemplate.maxShowed = sResources->numMenuItems;
         gMultiuseListMenuTemplate.upText_Y = (gMultiuseListMenuTemplate.upText_Y + 8) & 0xF;
     }
     return ListMenuInit(
@@ -567,7 +624,7 @@ static u8 TeachyTvSetupWindow(void)
 
 static void TeachyTvSetupScrollIndicatorArrowPair(void)
 {
-    if (!CheckBagHasItem(ITEM_TM_CASE, 1))
+    if (sResources->numMenuItems <= 6)
     {
         struct TeachyTvBuf * temp = sResources;
         temp->scrollIndicatorArrowPairId = 0xFF;
@@ -738,6 +795,8 @@ static void TeachyTvOptionListController(u8 taskId)
             default:
                 PlaySE(SE_SELECT);
                 sStaticResources.whichScript = input;
+                if (input >= TTVSCR_FIRST_TALK)
+                    FlagSet(TeachyTvSeenFlag(input));
                 DestroyListMenuTask(data[0], &sStaticResources.scrollOffset, &sStaticResources.selectedRow);
                 TeachyTvClearWindowRegs();
                 ClearWindowTilemap(1);
@@ -789,7 +848,9 @@ static void TTVcmd_NpcMoveAndSetupTextPrinter(u8 taskId)
         if (spriteAddr->x2 == 0x78)
         {
             StartSpriteAnim(&gSprites[data[1]], 0);
-            TeachyTvInitTextPrinter(gTeachyTvText_PokedudeSaysHello);
+            TeachyTvInitTextPrinter(TeachyTvHasUnseenShow()
+                                    ? gTeachyTvText_TutorSaysHelloNewShow
+                                    : gTeachyTvText_PokedudeSaysHello);
             data[2] = 0;
             ++data[3];
         }
@@ -821,14 +882,23 @@ static void TeachyTvRenderMsgAndSwitchClusterFuncs(u8 taskId)
     }
     else
     {
-        static void (* const * const array[])(u8) =
+        static void (* const * const array[TTVSCR_COUNT])(u8) =
         {
-            sBattleScript,
-            sStatusScript,
-            sMatchupsScript,
-            sCatchingScript,
-            sTMsScript,
-            sRegisterKeyItemScript,
+            [TTVSCR_BATTLE]   = sBattleScript,
+            [TTVSCR_STATUS]   = sStatusScript,
+            [TTVSCR_MATCHUPS] = sMatchupsScript,
+            [TTVSCR_CATCHING] = sCatchingScript,
+            [TTVSCR_TMS]      = sTMsScript,
+            [TTVSCR_REGISTER] = sRegisterKeyItemScript,
+            [TTVSCR_HOSTING]  = sTalkScript,
+            [TTVSCR_MARK1]    = sTalkScript,
+            [TTVSCR_MARK2]    = sTalkScript,
+            [TTVSCR_MARK3]    = sTalkScript,
+            [TTVSCR_MARK4]    = sTalkScript,
+            [TTVSCR_MARK5]    = sTalkScript,
+            [TTVSCR_MARK6]    = sTalkScript,
+            [TTVSCR_MARK7]    = sTalkScript,
+            [TTVSCR_MARK8]    = sTalkScript,
         };
         void (*const *cluster)(u8) = array[sStaticResources.whichScript];
         cluster[data[3]](taskId);
@@ -838,13 +908,22 @@ static void TeachyTvRenderMsgAndSwitchClusterFuncs(u8 taskId)
 static void TTVcmd_TextPrinterSwitchStringByOptionChosen(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    static const u8 *const texts[] = {
-        gTeachyTvText_BattleScript1,
-        gTeachyTvText_StatusScript1,
-        gTeachyTvText_MatchupsScript1,
-        gTeachyTvText_CatchingScript1,
-        gTeachyTvText_TMsScript1,
-        gTeachyTvText_RegisterScript1,
+    static const u8 *const texts[TTVSCR_COUNT] = {
+        [TTVSCR_BATTLE]   = gTeachyTvText_BattleScript1,
+        [TTVSCR_STATUS]   = gTeachyTvText_StatusScript1,
+        [TTVSCR_MATCHUPS] = gTeachyTvText_MatchupsScript1,
+        [TTVSCR_CATCHING] = gTeachyTvText_CatchingScript1,
+        [TTVSCR_TMS]      = gTeachyTvText_TMsScript1,
+        [TTVSCR_REGISTER] = gTeachyTvText_RegisterScript1,
+        [TTVSCR_HOSTING]  = gTeachyTvText_HostingScript1,
+        [TTVSCR_MARK1]    = gTeachyTvText_Mark1Script1,
+        [TTVSCR_MARK2]    = gTeachyTvText_Mark2Script1,
+        [TTVSCR_MARK3]    = gTeachyTvText_Mark3Script1,
+        [TTVSCR_MARK4]    = gTeachyTvText_Mark4Script1,
+        [TTVSCR_MARK5]    = gTeachyTvText_Mark5Script1,
+        [TTVSCR_MARK6]    = gTeachyTvText_Mark6Script1,
+        [TTVSCR_MARK7]    = gTeachyTvText_Mark7Script1,
+        [TTVSCR_MARK8]    = gTeachyTvText_Mark8Script1,
     };
     TeachyTvInitTextPrinter(texts[sStaticResources.whichScript]);
     ++data[3];
@@ -853,14 +932,23 @@ static void TTVcmd_TextPrinterSwitchStringByOptionChosen(u8 taskId)
 static void TTVcmd_TextPrinterSwitchStringByOptionChosen2(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
-    static const u8 *const texts[] =
+    static const u8 *const texts[TTVSCR_COUNT] =
     {
-        gTeachyTvText_BattleScript2,
-        gTeachyTvText_StatusScript2,
-        gTeachyTvText_MatchupsScript2,
-        gTeachyTvText_CatchingScript2,
-        gTeachyTvText_TMsScript2,
-        gTeachyTvText_RegisterScript2,
+        [TTVSCR_BATTLE]   = gTeachyTvText_BattleScript2,
+        [TTVSCR_STATUS]   = gTeachyTvText_StatusScript2,
+        [TTVSCR_MATCHUPS] = gTeachyTvText_MatchupsScript2,
+        [TTVSCR_CATCHING] = gTeachyTvText_CatchingScript2,
+        [TTVSCR_TMS]      = gTeachyTvText_TMsScript2,
+        [TTVSCR_REGISTER] = gTeachyTvText_RegisterScript2,
+        [TTVSCR_HOSTING]  = gTeachyTvText_HostingScript2,
+        [TTVSCR_MARK1]    = gTeachyTvText_Mark1Script2,
+        [TTVSCR_MARK2]    = gTeachyTvText_Mark2Script2,
+        [TTVSCR_MARK3]    = gTeachyTvText_Mark3Script2,
+        [TTVSCR_MARK4]    = gTeachyTvText_Mark4Script2,
+        [TTVSCR_MARK5]    = gTeachyTvText_Mark5Script2,
+        [TTVSCR_MARK6]    = gTeachyTvText_Mark6Script2,
+        [TTVSCR_MARK7]    = gTeachyTvText_Mark7Script2,
+        [TTVSCR_MARK8]    = gTeachyTvText_Mark8Script2,
     };
     TeachyTvInitTextPrinter(texts[sStaticResources.whichScript]);
     ++data[3];

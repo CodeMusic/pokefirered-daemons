@@ -64,7 +64,7 @@ ViridianCity_Text_HowsTeachyTVHelping::
     .string "Coffee. Now I can start.\p"
     .string "Too strong. Now I have a\n"
     .string "headache.\p"
-    .string "Is that old TEACHY TV any use to\n"
+    .string "Is that old STREAM any use to\n"
     .string "you?$"
 
 ViridianCity_Text_MyGrandsonOnTheShow::
@@ -74,7 +74,7 @@ ViridianCity_Text_MyGrandsonOnTheShow::
     .string "You will still learn something.$"
 
 ViridianCity_Text_TooBusyForTeachyTV::
-    .string "Too busy for TEACHY TV.\p"
+    .string "Too busy for the STREAM.\p"
     .string "Time is the one thing nobody makes\n"
     .string "more of.$"
 
