@@ -50,7 +50,7 @@ Route25_Text_ChadDefeat::
     .string "I knew I'd lose, too!$"
 
 Route25_Text_ChadPostBattle::
-    .string "If your DAEMON gets confused,\n"
+    .string "If your DAEMON gets thrashing,\n"
     .string "switch it out.\p"
     .string "That's a good tactic.$"
 

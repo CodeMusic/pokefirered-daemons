@@ -326,10 +326,10 @@ Help_Text_AnswerMyMonsAreHurt::
 Help_Text_AnswerWhatIsStatusProblem::
 	.string "A status problem refers to an ailment\n"
 	.string "that is inflicted on a DAEMON by its\l"
-	.string "foe's attack. These include burns,\l"
+	.string "foe's attack. These include\l"
 	.string "throttling, leaking, suspension, and\l"
-	.string "freezing. These can be healed by\l"
-	.string "visiting a CHECKPOINT or using the\l"
+	.string "overheating and hanging. Heal\l"
+	.string "them at a CHECKPOINT or with the\l"
 	.string "appropriate item.$"
 
 Help_Text_AnswerWhatHappensIfAllMyMonsFaint::
@@ -1455,7 +1455,7 @@ Help_Text_DefineEvolution::
 Help_Text_DefineStatusProblem::
 	.string "Status problems include:\n"
 	.string "Suspension: Can't use moves.\l"
-	.string "Poison: Causes steady HP loss.\l"
+	.string "LEAKING: steady HP loss.\l"
 	.string "Throttling: May prevent moves.\l"
 	.string "Overheating: HP loss, less ATTACK.\l"
 	.string "Hang: Can't use moves.\l"

@@ -6,6 +6,6 @@ PewterCity_House2_Text_MonsLearnTechniquesAsTheyGrow::
 
 PewterCity_House2_Text_MonsEasierCatchIfStatused::
     .string "DAEMON become easier to bind when\n"
-    .string "they are hurt or asleep!\p"
+    .string "they are hurt or suspended!\p"
     .string "But, it's not a sure thing!$"
 

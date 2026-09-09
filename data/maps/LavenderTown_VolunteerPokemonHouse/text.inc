@@ -37,11 +37,11 @@ LavenderTown_VolunteerPokemonHouse_Text_IdLikeYouToHaveThis::
     .string "but I'd like you to have it.$"
 
 LavenderTown_VolunteerPokemonHouse_Text_ReceivedPokeFluteFromMrFuji::
-    .string "{PLAYER} received a POKé FLUTE\n"
+    .string "{PLAYER} received a INTERRUPT\n"
     .string "from INIT.$"
 
 LavenderTown_VolunteerPokemonHouse_Text_ExplainPokeFlute::
-    .string "Upon hearing POKé FLUTE, sleeping\n"
+    .string "Upon hearing INTERRUPT, suspended\n"
     .string "DAEMON will spring awake.\p"
     .string "It works on all sleeping DAEMON.$"
 
@@ -49,7 +49,7 @@ LavenderTown_VolunteerPokemonHouse_Text_MustMakeRoomForThis::
     .string "You must make room for this!$"
 
 LavenderTown_VolunteerPokemonHouse_Text_HasPokeFluteHelpedYou::
-    .string "INIT: Has my POKé FLUTE helped\n"
+    .string "INIT: Has my INTERRUPT helped\n"
     .string "you?$"
 
 LavenderTown_VolunteerPokemonHouse_Text_GrandPrizeDrawingClipped::

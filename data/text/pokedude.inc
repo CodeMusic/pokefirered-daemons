@@ -22,8 +22,8 @@ Pokedude_Text_MyRattataWonGetsEXP::
 
 Pokedude_Text_UhOhRattataPoisoned::
 	.string "TUTOR: Uh-oh… My NIBBLE has\n"
-	.string "been poisoned…\p"
-	.string "If a DAEMON is poisoned, it loses\n"
+	.string "been leaking…\p"
+	.string "If a DAEMON is leaking, it loses\n"
 	.string "HP steadily.$"
 
 Pokedude_Text_HealStatusRightAway::
@@ -43,7 +43,7 @@ Pokedude_Text_WaterNotVeryEffectiveAgainstGrass::
 	.string "TUTOR: The move BUBBLE is a\n"
 	.string "WATER-type attack.\p"
 	.string "The targeted ODDISH is a\n"
-	.string "GRASS/POISON-type DAEMON.\p"
+	.string "GRASS/CORRUPT-type DAEMON.\p"
 	.string "The WATER-type attack is absorbed\n"
 	.string "by the GRASS-type DAEMON…\p"
 	.string "As a result, the move becomes not\n"
@@ -82,7 +82,7 @@ Pokedude_Text_ButterfreeDoubleResistsGrass::
 	.string "quarter of the usual damage.$"
 
 Pokedude_Text_ButterfreeGoodAgainstOddish::
-	.string "ODDISH is a GRASS/POISON-type\n"
+	.string "ODDISH is a GRASS/CORRUPT-type\n"
 	.string "DAEMON.\p"
 	.string "A FLYING- or PSYCHIC-type attack\n"
 	.string "is super effective against it.\p"
@@ -107,15 +107,15 @@ Pokedude_Text_BestIfTargetStatused::
 	.string "best if the target has a status\l"
 	.string "problem.\p"
 	.string "For instance, it would be easier to\n"
-	.string "bind if it were asleep or\l"
-	.string "paralyzed.$"
+	.string "bind if it were suspended or\l"
+	.string "throttled.$"
 
 Pokedude_Text_CantDoubleUpOnStatus::
 	.string "This will make the DAEMON a lot\n"
 	.string "easier to bind!\p"
-	.string "Oh, yes. If you paralyze a\n"
+	.string "Oh, yes. If you throttle a\n"
 	.string "DAEMON, you can't make it fall\l"
-	.string "asleep on top of paralysis.\p"
+	.string "suspended on top of throttling.\p"
 	.string "In other words, you can't double up\n"
 	.string "status problems, okay?$"
 

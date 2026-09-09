@@ -34,7 +34,7 @@ Route11_EastEntrance_2F_Text_ExplainItemfinder::
 Route11_EastEntrance_2F_Text_BigMonAsleepOnRoad::
     .string "Let's see what the binoculars have\n"
     .string "to show…\p"
-    .string "A big DAEMON is asleep on a road!$"
+    .string "A DAEMON is SUSPENDED\non the road!$"
 
 Route11_EastEntrance_2F_Text_WhatABreathtakingView::
     .string "Let's see what the binoculars have\n"

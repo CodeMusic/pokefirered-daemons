@@ -6,10 +6,10 @@ FuchsiaCity_Gym_Text_KogaIntro::
     .string "mirth!\p"
     .string "Very well, I shall show you true\n"
     .string "terror as a ninja master.\p"
-    .string "Poison brings steady doom. Sleep\n"
-    .string "renders foe helpless.\p"
+    .string "LEAKING brings steady doom.\n"
+    .string "SUSPENSION renders it helpless.\p"
     .string "Despair to the creeping horror of\n"
-    .string "POISON-type DAEMON!{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
+    .string "CORRUPT-type DAEMON!{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
 
 FuchsiaCity_Gym_Text_KogaDefeat::
     .string "Humph! You have proven your\n"
@@ -81,7 +81,7 @@ FuchsiaCity_Gym_Text_NateDefeat::
     .string "You had me fooled!$"
 
 FuchsiaCity_Gym_Text_NatePostBattle::
-    .string "I like poison and sleep techniques,\n"
+    .string "I like leaks and suspensions,\n"
     .string "as they linger after battle!$"
 
 FuchsiaCity_Gym_Text_PhilIntro::

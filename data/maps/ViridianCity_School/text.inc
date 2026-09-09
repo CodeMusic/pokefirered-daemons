@@ -57,30 +57,30 @@ ViridianCity_School_Text_ReadWhichTopic::
     .string "Which one?$"
 
 ViridianCity_School_Text_ExplainSleep::
-    .string "Asleep, nothing runs.\p"
+    .string "Suspended, nothing runs.\p"
     .string "The battle ending does not wake it.\p"
     .string "RESUME is the interrupt.$"
 
 ViridianCity_School_Text_ExplainBurn::
-    .string "Burned, it hits softer and loses HP\n"
-    .string "each turn.\p"
+    .string "Overheated, it hits softer and\n"
+    .string "loses HP loses HP each turn.\p"
     .string "Carried out of the battle with it.\p"
     .string "COOLANT.$"
 
 ViridianCity_School_Text_ExplainPoison::
-    .string "Poisoned, HP drains and does not\n"
+    .string "Leaking, HP drains and does not\n"
     .string "stop.\p"
     .string "Carried out of the battle with it.\p"
     .string "PATCH.$"
 
 ViridianCity_School_Text_ExplainFreeze::
-    .string "Frozen, it cannot act at all.\p"
+    .string "Hung, it cannot act at all.\p"
     .string "Nothing left to try.\p"
     .string "Carried out of the battle with it.\p"
     .string "INTERRUPT.$"
 
 ViridianCity_School_Text_ExplainParalysis::
-    .string "Paralysed, it is slower and may not\n"
+    .string "Throttled, it is slower and may not\n"
     .string "act at all.\p"
     .string "Carried out of the battle with it.\p"
     .string "PRIORITY.$"

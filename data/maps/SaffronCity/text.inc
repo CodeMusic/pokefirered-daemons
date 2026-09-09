@@ -78,7 +78,7 @@ SaffronCity_Text_GymSign::
 SaffronCity_Text_FullHealCuresStatus::
     .string "USER TIPS\p"
     .string "ROLLBACK cures all ailments like\n"
-    .string "sleep and burns.\p"
+    .string "suspension and burns.\p"
     .string "It costs a bit more, but it's more\n"
     .string "convenient.$"
 

@@ -45,7 +45,7 @@ FourIsland_IcefallCave_Back_Text_NotTellingYouThat::
 
 FourIsland_IcefallCave_Back_Text_LoreleiWellDeepFreezeYou::
     .string "LORELEI: If you won't confess,\n"
-    .string "we'll deep-freeze you.\p"
+    .string "we'll deep-hang you.\p"
     .string "My LAPRAS is furious for what\n"
     .string "you've done to its friends.\p"
     .string "Go, LAPRAS!\n"

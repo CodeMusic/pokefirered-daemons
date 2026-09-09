@@ -1583,12 +1583,17 @@ enum
     PAL_STATUS_BRN
 };
 
+// The battle healthbox is the THIRD place a status is drawn -- the party menu
+// has status_icons.png and the battle box has its own three tiles in
+// healthbox_elements.png, lit by one palette entry each. Renaming the party
+// tiles and the battle-box STRINGS left this one saying PAR in vanilla yellow,
+// which is what a player actually looks at during a fight. 9.15's colours.
 static const u16 sStatusIconColors[] = {
-    [PAL_STATUS_PSN] = RGB(24, 12, 24),
-    [PAL_STATUS_PAR] = RGB(23, 23, 3),
-    [PAL_STATUS_SLP] = RGB(20, 20, 17),
-    [PAL_STATUS_FRZ] = RGB(17, 22, 28),
-    [PAL_STATUS_BRN] = RGB(28, 14, 10)
+    [PAL_STATUS_PSN] = RGB(13, 18,  8),   // LEK  #6f9440  mould
+    [PAL_STATUS_PAR] = RGB(25, 20,  4),   // THR  #c8a020  amber
+    [PAL_STATUS_SLP] = RGB(17, 17, 19),   // SUS  #8a8f9c  slate
+    [PAL_STATUS_FRZ] = RGB(15, 21, 27),   // HNG  #78a8dc  pale blue
+    [PAL_STATUS_BRN] = RGB(27, 14,  7)    // OVR  #d8703c  ember
 };
 
 static void UpdateStatusIconInHealthbox(u8 healthboxSpriteId)

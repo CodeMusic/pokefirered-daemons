@@ -222,7 +222,7 @@ gFameCheckerFlavorText_Koga0:: @ 0x81AE2B6
 gFameCheckerFlavorText_Koga1:: @ 0x81AE31D
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of DAEMON?\p"
 	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}Despair to the creeping horror of\n"
-	.string "POISON-type DAEMON!$"
+	.string "CORRUPT-type DAEMON!$"
 
 gFameCheckerFlavorText_Koga2:: @ 0x81AE37D
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"

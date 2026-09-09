@@ -6,7 +6,7 @@ VermilionCity_Gym_Text_LtSurgeIntro::
     .string "I tell you, kid, electric DAEMON\n"
     .string "saved me during the war!\p"
     .string "They zapped my enemies into\n"
-    .string "paralysis!\p"
+    .string "throttling!\p"
     .string "The same as I'll do to you!{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
 
 VermilionCity_Gym_Text_LtSurgePostBattle::
@@ -88,7 +88,7 @@ VermilionCity_Gym_Text_GymGuyAdvice::
     .string "American!\p"
     .string "He's an expert on electric DAEMON!\p"
     .string "Birds and water DAEMONS are at\n"
-    .string "risk! Beware of paralysis too!\p"
+    .string "risk! Beware of throttling too!\p"
     .string "LT.SURGE is very cautious!\p"
     .string "You'll have to break a code to get\n"
     .string "to him!$"

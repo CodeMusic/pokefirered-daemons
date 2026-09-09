@@ -59,9 +59,9 @@ Text_ThunderWaveWhichMon::
     .string "THUNDER WAVE?$"
 
 Text_ThunderWaveTaught::
-    .string "THUNDER WAVE causes paralysis in\n"
+    .string "THUNDER WAVE causes throttling in\n"
     .string "the target DAEMON.\p"
-    .string "A paralyzed DAEMON may be unable\n"
+    .string "A throttled DAEMON may be unable\n"
     .string "to move in battle.\p"
     .string "It's an ELECTRIC-type move, so it\n"
     .string "won't work on some DAEMONS.$"

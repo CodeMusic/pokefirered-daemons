@@ -6,7 +6,7 @@ VermilionCity_PokemonCenter_1F_Text_TrainerMonsStrongerThanWild::
     .string "stronger than one in the wild.$"
 
 VermilionCity_PokemonCenter_1F_Text_PoisonedMonFaintedWhileWalking::
-    .string "My DAEMON was poisoned! It HALTED\n"
+    .string "My DAEMON was leaking! It HALTED\n"
     .string "while we were walking!$"
 
 VermilionCity_PokemonCenter_1F_Text_AllMonWeakToSpecificTypes::
