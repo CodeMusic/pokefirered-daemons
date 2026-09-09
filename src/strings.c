@@ -412,12 +412,22 @@ const u8 gText_Eggs[] = _("EGGS");
 const u8 gText_HallOfFame[] = _("HALL OF FAME");
 const u8 gText_Victories[] = _("VICTORIES");
 const u8 gText_Quit[] = _("QUIT");
-const u8 gText_Psn[] = _("PSN");
-const u8 gText_Par[] = _("PAR");
-const u8 gText_Slp[] = _("SLP");
-const u8 gText_Brn[] = _("BRN");
-const u8 gText_Frz[] = _("FRZ");
-const u8 gText_Toxic[] = _("TOXIC");
+//  1.6's states, abbreviated. The section renamed all six and never gave them
+//  codes, so the party screen kept showing FRZ on a daemon every item and
+//  description calls HUNG -- and FRZ points at FROZEN, which is the ICE TYPE.
+//  Three characters each, same as vanilla, so nothing in the layout moves.
+//
+//  CASCADING has a code but nothing draws it yet. Gen 3 puts badly-poisoned
+//  in the same PSN box as ordinary poison, so LEK covers both on the party
+//  tile. gText_Toxic is vanilla's own unreferenced string and was the one
+//  place a CAS could go without adding a symbol -- so it holds the code and
+//  waits for something that draws the distinction.
+const u8 gText_Psn[] = _("LEK");   // LEAKING
+const u8 gText_Par[] = _("THR");   // THROTTLED
+const u8 gText_Slp[] = _("SUS");   // SUSPENDED
+const u8 gText_Brn[] = _("OVR");   // OVERHEATED
+const u8 gText_Frz[] = _("HNG");   // HUNG
+const u8 gText_Toxic[] = _("CAS");   // CASCADING -- unreferenced, see above
 const u8 gText_OK[] = _("OK");
 const u8 gOtherText_Quit[] = _("QUIT");
 const u8 gText_SawIt[] = _("みました");

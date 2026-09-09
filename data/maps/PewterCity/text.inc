@@ -86,7 +86,7 @@ PewterCity_Text_CallPoliceIfInfoOnThieves::
 
 PewterCity_Text_MuseumOfScience::
     .string "SLATE MUSEUM\n"
-    .string "OF RECORD$"
+    .string "OF ERRATA$"
 
 PewterCity_Text_GymSign::
     .string "SLATE CITY DAEMON GYM\n"

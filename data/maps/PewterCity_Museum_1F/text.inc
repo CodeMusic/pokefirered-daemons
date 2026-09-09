@@ -73,13 +73,24 @@ PewterCity_Museum_1F_Text_WeHaveTwoFossilsOnExhibit::
 
 PewterCity_Museum_1F_Text_BeautifulPieceOfAmber::
     .string "A CORE alone in its case. The wire\n"
-    .string "is unbroken. It is very old.$"
+    .string "is unbroken. It is very old.\p"
+    .string "KNOWN FAULT: none recorded.\p"
+    .string "The card notes that no fault was\n"
+    .string "recorded, which is not the same\l"
+    .string "as none occurring.$"
 
 PewterCity_Museum_1F_Text_AerodactylFossil::
     .string "HELIX CORE. Recovered from\n"
-    .string "Deadstack. Contents unread.$"
+    .string "Deadstack. Contents unread.\p"
+    .string "KNOWN FAULT: it only ever tested\n"
+    .string "what it already held.\p"
+    .string "It was never wrong. Nothing it\n"
+    .string "ran could have made it wrong.$"
 
 PewterCity_Museum_1F_Text_KabutopsFossil::
     .string "DRUM CORE. Recovered from\n"
-    .string "Deadstack. Contents unread.$"
+    .string "Deadstack. Contents unread.\p"
+    .string "KNOWN FAULT: eight units voting,\n"
+    .string "and they agreed every time.\p"
+    .string "They were built from one drawing.$"
 
