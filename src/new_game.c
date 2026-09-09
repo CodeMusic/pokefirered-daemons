@@ -23,6 +23,7 @@
 #include "easy_chat.h"
 #include "union_room_chat.h"
 #include "mystery_gift.h"
+#include "fame_checker.h"
 #if DAEMONS_DEBUG
 #include "constants/items.h"
 #include "constants/species.h"
@@ -151,7 +152,16 @@ static void DaemonsDebug_GrantTestKit(void)
         // without it the ship at Ardor cannot be boarded, so a debug save
         // could not reach HM01 or anything behind it.
         { ITEM_SS_TICKET,     1 },
+        // The two key items that are SCREENS rather than permissions, which is
+        // why they belong in a kit whose whole point is testing UI we changed.
+        // The STREAM's list is gated on the MARKS, and this build sets all
+        // eight, so it opens at its widest: fifteen shows and a scroll.
+        { ITEM_TEACHY_TV,     1 },
+        { ITEM_FAME_CHECKER,  1 },
     };
+    // No TM CASE or BERRY POUCH here on purpose: item.c grants each of them
+    // the moment a TM or a berry is added, so listing them would be listing a
+    // thing the engine already does.
     struct Pokemon mon;
     u32 i;
 
@@ -189,6 +199,12 @@ static void DaemonsDebug_GrantTestKit(void)
 
     for (i = FLAG_BADGE01_GET; i <= FLAG_BADGE08_GET; i++)
         FlagSet(i);
+
+    // Same reasoning as the Index above: HEARSAY in the bag opens an empty
+    // screen unless the entries are unlocked, and an empty screen looks like a
+    // broken item rather than an untested one. FullyUnlockFameChecker is
+    // vanilla's own helper.
+    FullyUnlockFameChecker();
 
     // THE ITEM IS NOT THE PERMISSION. Putting ITEM_SS_TICKET in the bag was not
     // enough and could not be: the sailor at Ardor runs
