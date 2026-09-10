@@ -80,7 +80,7 @@ Route20_Text_NoraDefeat::
 
 Route20_Text_NoraPostBattle::
     .string "Will my pearls grow bigger inside\n"
-    .string "CLOYSTER?$"
+    .string "COLDVAULT?$"
 
 Route20_Text_MissyIntro::
     .string "I swam here from QUICKSILVER!$"

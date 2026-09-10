@@ -5,7 +5,7 @@ Text_SeismicTossTeach::
     .string "That should make you look harder,\n"
     .string "not look away.\p"
     .string "Speaking of which. Shall I teach\n"
-    .string "one of yours SEISMIC TOSS?$"
+    .string "one of yours EQUATE?$"
 
 Text_SeismicTossDeclined::
     .string "No?\n"

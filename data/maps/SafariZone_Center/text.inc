@@ -1,5 +1,5 @@
 SafariZone_Center_Text_RestHouse::
-    .string "REST HOUSE$"
+    .string "IDLE HOUSE$"
 
 SafariZone_Center_Text_PressStartToCheckTime::
     .string "USER TIPS\p"

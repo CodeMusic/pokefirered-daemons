@@ -51,16 +51,15 @@ Text_ThunderWaveTeach::
     .string "take this!$"
 
 Text_ThunderWaveDeclined::
-    .string "Oh…\n"
-    .string "But THUNDER WAVE is convenient…$"
+    .string "Oh… But BROWNOUT is convenient…$"
 
 Text_ThunderWaveWhichMon::
     .string "Which DAEMON should I teach\n"
-    .string "THUNDER WAVE?$"
+    .string "BROWNOUT?$"
 
 Text_ThunderWaveTaught::
-    .string "THUNDER WAVE causes throttling in\n"
-    .string "the target DAEMON.\p"
+    .string "BROWNOUT causes throttling in the\n"
+    .string "target DAEMON.\p"
     .string "A throttled DAEMON may be unable\n"
     .string "to move in battle.\p"
     .string "It's an ELECTRIC-type move, so it\n"

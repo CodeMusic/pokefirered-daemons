@@ -139,22 +139,22 @@ const u8 gTeachyTvText_TMsScript1[] = _(
         "You can check them out in detail,\n"
         "too.");
 const u8 gPokedudeText_TMTypes[] = _(
-        "TUTOR: NORMAL, WATER, GRASS…\n"
-        "TMs also come in types.\p"
+        "TUTOR: NORMAL, WATER, GRASS… TMs\n"
+        "also come in types.\p"
         "Check the type and teach it to a\n"
         "DAEMON that matches up well.\p"
-        "For example, WATER PULSE is\n"
-        "suitable for WATER-type DAEMON.\p"
-        "BULLET SEED is a ROUTINE that most\n"
+        "For example, RIPPLE is suitable\n"
+        "for WATER-type DAEMON.\p"
+        "MINIBATCH is a ROUTINE that most\n"
         "GRASS-type DAEMON can learn.\p"
         "There's one other thing!");
 const u8 gPokedudeText_ReadTMDescription[] = _(
-        "Don't just look at the type, read\n"
-        "the description, too.\p"
+        "Don't just look at the type,\n"
+        "read the description, too.\p"
         "It will contain hints about what\n"
         "DAEMON might learn the move.\p"
-        "For example, take a ROUTINE like\n"
-        "FOCUS PUNCH.\p"
+        "For example, take a ROUTINE\n"
+        "like SYLLOGISM.\p"
         "It doesn't sound like anything a\n"
         "bird or fish DAEMON can learn.\p"
         "So, try using it on DAEMON with\n"
@@ -232,15 +232,15 @@ const u8 gTeachyTvText_HostingScript1[] = _(
         "just not running here.$");
 
 const u8 gTeachyTvText_HostingScript2[] = _(
-        "So: you BIND with a BOX, and the\n"
-        "DAEMON is HOSTED on it.\p"
-        "Reach anything you have hosted\n"
-        "from any CHECKPOINT.\p"
-        "And here is the TUTOR's tip! Bind\n"
-        "more than you need!\p"
-        "A party of one is one type, and\n"
-        "the chart does not care how you\l"
-        "feel.\p"
+        "So: you LATCH with a BOX, and\n"
+        "the DAEMON is HOSTED on it.\p"
+        "Reach anything you have\n"
+        "hosted from any CHECKPOINT.\p"
+        "And here is the TUTOR's tip!\n"
+        "Bind more than you need!\p"
+        "A party of one is one type,\n"
+        "and the chart does not care\l"
+        "how you feel.\p"
         "All righty, be seeing you!$");
 
 const u8 gTeachyTvText_Mark1Script1[] = _(

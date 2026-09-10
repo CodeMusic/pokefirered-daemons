@@ -1,10 +1,10 @@
 Text_ExplosionTeach::
-    .string "Can you imagine?\n"
-    .string "If this volcano were to erupt?\p"
+    .string "Can you imagine? If this volcano\n"
+    .string "were to erupt?\p"
     .string "The explosion would be the end of\n"
     .string "us. How terrifying is that?\p"
     .string "While we're terrified, would you\n"
-    .string "like me to teach EXPLOSION?$"
+    .string "like me to teach CORE DUMP?$"
 
 Text_ExplosionDeclined::
     .string "Yeah, you're right.\n"
@@ -12,11 +12,11 @@ Text_ExplosionDeclined::
 
 Text_ExplosionWhichMon::
     .string "You're terribly brave!\p"
-    .string "Which DAEMON should I teach\n"
-    .string "EXPLOSION?$"
+    .string "Which DAEMON should I teach CORE\n"
+    .string "DUMP?$"
 
 Text_ExplosionTaught::
-    .string "Using EXPLOSION while on this\n"
+    .string "Using CORE DUMP while on this\n"
     .string "volcano…\p"
     .string "What a terrifying thrill!$"
 

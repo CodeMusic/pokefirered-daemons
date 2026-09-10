@@ -14,7 +14,7 @@ SafariZone_SecretHouse_Text_ReceivedHM03FromAttendant::
     .string "from the attendant!$"
 
 SafariZone_SecretHouse_Text_ExplainSurf::
-    .string "HM03 is SURF.\p"
+    .string "HM03 is TRAVERSE.\p"
     .string "DAEMON will be able to ferry you\n"
     .string "across water using it.\p"
     .string "And, this HM isn't disposable, so\n"

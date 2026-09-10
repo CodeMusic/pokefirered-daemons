@@ -1,5 +1,5 @@
 SafariZone_East_Text_RestHouse::
-    .string "REST HOUSE$"
+    .string "IDLE HOUSE$"
 
 SafariZone_East_Text_TimeDeclinesOnlyWhileYouWalk::
     .string "USER TIPS\p"

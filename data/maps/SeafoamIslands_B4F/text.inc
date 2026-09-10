@@ -1,12 +1,12 @@
 Text_RockSlideTeach::
     .string "When you're up on a rocky mountain\n"
     .string "like this, rockslides are a threat.\p"
-    .string "Can you imagine?\n"
-    .string "Boulders tumbling down on you?\p"
+    .string "Can you imagine? Boulders tumbling\n"
+    .string "down on you?\p"
     .string "That'd be, like, waaaaaaaaaaah!\n"
     .string "Total terror!\p"
-    .string "You don't seem to be scared.\n"
-    .string "Want to try using ROCK SLIDE?$"
+    .string "You don't seem to be scared. Want\n"
+    .string "to try using CARRY?$"
 
 Text_RockSlideDeclined::
     .string "Oh, so you are scared after all.$"

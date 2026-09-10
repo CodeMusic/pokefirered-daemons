@@ -15,7 +15,7 @@ CeruleanCity_House1_Text_ComeVisitAnytime::
 CeruleanCity_House1_Text_AttackStatFlash::
     .string "The ATTACK of all DAEMONS\n"
     .string "increases a little bit.\p"
-    .string "It also lets you use FLASH any\n"
+    .string "It also lets you use VERBOSE any\n"
     .string "time you desire.$"
 
 CeruleanCity_House1_Text_ObeyLv30Cut::
@@ -42,13 +42,13 @@ CeruleanCity_House1_Text_ObeyLv50Strength::
     .string "DAEMON of higher levels will be\n"
     .string "unruly in battle, however.\p"
     .string "It also lets you use the move\n"
-    .string "STRENGTH outside of battle.$"
+    .string "DISPLACE outside of battle.$"
 
 CeruleanCity_House1_Text_DefenseStatSurf::
     .string "The DEFENSE of all DAEMONS\n"
     .string "increases a little bit.\p"
-    .string "It also lets you use SURF outside\n"
-    .string "of battle.$"
+    .string "It also lets you use TRAVERSE\n"
+    .string "outside of battle.$"
 
 CeruleanCity_House1_Text_ObeyLv70RockSmash::
     .string "DAEMON up to Lv. 70 will obey\n"
@@ -64,7 +64,7 @@ CeruleanCity_House1_Text_SpStatsWaterfall::
     .string "The SP. ATK and SP. DEF stats of\n"
     .string "all your DAEMON rise a little bit.\p"
     .string "It also lets you use the move\n"
-    .string "WATERFALL outside of battle.$"
+    .string "ASCEND outside of battle.$"
 
 CeruleanCity_House1_Text_AllMonsWillObeyYou::
     .string "All DAEMONS will obey you!$"

@@ -44,7 +44,7 @@ FuchsiaCity_WardensHouse_Text_ReceivedHM04FromWarden::
 
 FuchsiaCity_WardensHouse_Text_ExplainStrength::
     .string "WARDEN: Inside HM04 you'll find\n"
-    .string "STRENGTH.\p"
+    .string "DISPLACE.\p"
     .string "It lets DAEMON move boulders when\n"
     .string "you're outside of battle.\p"
     .string "Oh yes, did you find the SECRET\n"

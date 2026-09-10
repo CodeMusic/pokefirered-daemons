@@ -11,7 +11,7 @@ CinnabarIsland_Gym_Text_BlaineDefeat::
     .string "You have earned the HEAT MARK!$"
 
 CinnabarIsland_Gym_Text_FireBlastIsUltimateFireMove::
-    .string "FIRE BLAST is the ultimate fire\n"
+    .string "FLASHOVER is the ultimate fire\n"
     .string "technique.\p"
     .string "Don't waste it on WATER DAEMON.$"
 
@@ -26,9 +26,9 @@ CinnabarIsland_Gym_Text_ReceivedTM38FromBlaine::
     .string "from BLAINE.$"
 
 CinnabarIsland_Gym_Text_BlainePostBattle::
-    .string "TM38 contains FIRE BLAST. Teach it\n"
+    .string "TM38 contains FLASHOVER. Teach it\n"
     .string "to FIRE-type DAEMON.\p"
-    .string "VULPIX or RUBRIC would be ideal\n"
+    .string "FLICKER or RUBRIC would be ideal\n"
     .string "for that move.$"
 
 CinnabarIsland_Gym_Text_MakeSpaceForThis::
@@ -105,7 +105,7 @@ CinnabarIsland_Gym_Text_DustyDefeat::
     .string "Too hot!$"
 
 CinnabarIsland_Gym_Text_DustyPostBattle::
-    .string "PONYTA, NINETALES… Those are\n"
+    .string "HOTPATH, WILDFIRE… Those are\n"
     .string "popular FIRE DAEMON.$"
 
 CinnabarIsland_Gym_Text_ZacIntro::

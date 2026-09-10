@@ -20,8 +20,8 @@ PokemonTower_2F_Text_RivalVictory::
 
 PokemonTower_2F_Text_RivalPostBattle::
     .string "How's your INDEX coming, pal? I\n"
-    .string "just bound a CUBONE!\p"
-    .string "I can't find the grown-up MAROWAK\n"
+    .string "just bound a RELIC!\p"
+    .string "I can't find the grown-up CAIRNLING\n"
     .string "yet!\p"
     .string "I doubt there are any left! Well,\n"
     .string "I better get going! I've got a lot\l"

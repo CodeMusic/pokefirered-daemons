@@ -13,7 +13,7 @@ FiveIsland_Meadow_Text_EnteredPasswordAnotherNeeded::
 FiveIsland_Meadow_Text_EnteredPasswordDoorOpened::
     .string "{PLAYER} entered two passwords.\p"
     .string "“SPAWN need log.” “Yes, nah,\n"
-    .string "CHANSEY.”\p"
+    .string "UPTIME.”\p"
     .string "… … … … … …\p"
     .string "The WAREHOUSE's door opened!$"
 

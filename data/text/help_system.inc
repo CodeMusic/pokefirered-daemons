@@ -584,7 +584,7 @@ Help_Text_UsingBillsPC::
 	.string " Using “{STR_VAR_1}'S PC”$"
 
 Help_Text_UsingWithdraw::
-	.string "  Using “WITHDRAW”$"
+	.string "  Using “EDDY”$"
 
 Help_Text_UsingDeposit::
 	.string "  Using “DEPOSIT”$"
@@ -599,7 +599,7 @@ Help_Text_UsingPlayersPC::
 	.string " Using “{PLAYER}'s PC”$"
 
 Help_Text_UsingWithdrawItem::
-	.string "  Using “WITHDRAW ITEM”$"
+	.string "  Using “EDDY ITEM”$"
 
 Help_Text_UsingDepositItem::
 	.string "  Using “DEPOSIT ITEM”$"
@@ -638,7 +638,7 @@ Help_Text_UsingItemStorage::
 	.string "Using the Item Storage System$"
 
 Help_Text_UsingWithdrawItem2::
-	.string "  Using “WITHDRAW ITEM”$"
+	.string "  Using “EDDY ITEM”$"
 
 Help_Text_UsingDepositItem2::
 	.string "  Using “DEPOSIT ITEM”$"
@@ -842,7 +842,7 @@ Help_Text_HowToUseBillsPC::
 Help_Text_HowToUseWithdraw::
 	.string "{CIRCLE_1} Select a DAEMON in the open BOX\n"
 	.string "   with the {PLUS} Control Pad.\n"
-	.string "{CIRCLE_2} Select “WITHDRAW” to remove the\n"
+	.string "{CIRCLE_2} Select “EDDY” to remove the\n"
 	.string "   DAEMON from the BOX and add it to\n"
 	.string "   your party.\n"
 	.string "You may not withdraw a DAEMON if you\n"
@@ -884,7 +884,7 @@ Help_Text_HowToUsePlayersPC::
 	.string "withdraw items stored in your PC.$"
 
 Help_Text_HowToUseWithdrawItem::
-	.string "{CIRCLE_1} Select “WITHDRAW ITEM.”\n"
+	.string "{CIRCLE_1} Select “EDDY ITEM.”\n"
 	.string "{CIRCLE_2} Select the item to be withdrawn.\n"
 	.string "{CIRCLE_3} The item can be withdrawn and\n"
 	.string "   placed in the BAG's ITEMS POCKET.\n"
@@ -986,13 +986,13 @@ Help_Text_HowToUseHomePC::
 	.string "   “MAILBOX.”$"
 
 Help_Text_HowToUseItemStorage::
-	.string "{CIRCLE_1} Select “WITHDRAW ITEM” to withdraw\n"
+	.string "{CIRCLE_1} Select “EDDY ITEM” to withdraw\n"
 	.string "   an item stored on your PC.\n"
 	.string "{CIRCLE_2} Select “DEPOSIT ITEM” to put \n"
 	.string "   an item from your BAG into your PC.$"
 
 Help_Text_HowToUseWithdrawItem2::
-	.string "{CIRCLE_1} Select “WITHDRAW ITEM.”\n"
+	.string "{CIRCLE_1} Select “EDDY ITEM.”\n"
 	.string "{CIRCLE_2} Select the item to be withdrawn.\n"
 	.string "{CIRCLE_3} The item can be withdrawn and\n"
 	.string "   placed in the BAG's ITEMS POCKET.\n"
@@ -1225,12 +1225,12 @@ Help_Text_DefineDefense::
 
 Help_Text_DefineSpAtk::
 	.string "SP. ATK (Special Attack) indicates the\n"
-	.string "power of a special attack move.\l"
-	.string "The higher this stat, the more powerful\l"
-	.string "the special attack move.\l"
-	.string "It is applied for the following move\l"
-	.string "types: FIRE, WATER, ELECTRIC, GRASS,\l"
-	.string "ICE, PSYCHIC, DRAGON, and DARK.$"
+	.string "power of a special attack move. The\l"
+	.string "higher this stat, the more powerful the\l"
+	.string "special attack move. It is applied for\l"
+	.string "the following move types: FIRE, WATER,\l"
+	.string "ELECTRIC, GRASS, ICE, CONSTRUE,\l"
+	.string "DRAGON, and DARK.$"
 
 Help_Text_DefineSpDef::
 	.string "SP. DEF (Special Defense) indicates the\n"
@@ -1576,10 +1576,10 @@ Help_Text_OwnPokemonRock::
 	.string "Own DAEMON type: ROCK$"
 
 Help_Text_OwnMovePsychic::
-	.string "Own move type: PSYCHIC$"
+	.string "Own move type: CONSTRUE$"
 
 Help_Text_OwnPokemonPsychic::
-	.string "Own DAEMON type: PSYCHIC$"
+	.string "Own DAEMON type: CONSTRUE$"
 
 Help_Text_OwnMoveFighting::
 	.string "Own move type: FIGHTING$"
@@ -1675,14 +1675,14 @@ Help_Text_HowToUseTypeMatchupList::
 
 Help_Text_TypeMatchupOwnMoveDark::
 	.string "Effect on the opposing DAEMON:\p"
-	.string "   {CIRCLE_DOT}: PSYCHIC, GHOST\p"
+	.string "   {CIRCLE_DOT}: CONSTRUE, GHOST\p"
 	.string "   {TRIANGLE}: FIGHTING, DARK, STEEL$"
 
 Help_Text_TypeMatchupOwnPokemonDark::
 	.string "Effect of foe's move on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: FIGHTING, BUG\p"
 	.string "   {TRIANGLE}: GHOST, DARK\p"
-	.string "   {BIG_MULT_X}: PSYCHIC$"
+	.string "   {BIG_MULT_X}: CONSTRUE$"
 
 Help_Text_TypeMatchupOwnMoveRock::
 	.string "Effect on the opposing DAEMON:\p"
@@ -1698,23 +1698,23 @@ Help_Text_TypeMatchupOwnPokemonRock::
 Help_Text_TypeMatchupOwnMovePsychic::
 	.string "Effect on the opposing DAEMON:\p"
 	.string "   {CIRCLE_DOT}: FIGHTING, POISON\p"
-	.string "   {TRIANGLE}: PSYCHIC, STEEL\p"
+	.string "   {TRIANGLE}: CONSTRUE, STEEL\p"
 	.string "   {BIG_MULT_X}: DARK$"
 
 Help_Text_TypeMatchupOwnPokemonPsychic::
 	.string "Effect of foe's move on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: BUG, GHOST, DARK\p"
-	.string "   {TRIANGLE}: FIGHTING, PSYCHIC$"
+	.string "   {TRIANGLE}: FIGHTING, CONSTRUE$"
 
 Help_Text_TypeMatchupOwnMoveFighting::
 	.string "Effect on the opposing DAEMON:\p"
 	.string "   {CIRCLE_DOT}: NORMAL, ICE, ROCK, DARK, STEEL\p"
-	.string "   {TRIANGLE}: POISON, FLYING, PSYCHIC, BUG\p"
+	.string "   {TRIANGLE}: POISON, FLYING, CONSTRUE, BUG\p"
 	.string "   {BIG_MULT_X}: GHOST$"
 
 Help_Text_TypeMatchupOwnPokemonFighting::
 	.string "Effect of foe's move on own DAEMON:\p"
-	.string "   {CIRCLE_DOT}: FLYING, PSYCHIC\p"
+	.string "   {CIRCLE_DOT}: FLYING, CONSTRUE\p"
 	.string "   {TRIANGLE}: BUG, ROCK, DARK$"
 
 Help_Text_TypeMatchupOwnMoveGrass::
@@ -1730,7 +1730,7 @@ Help_Text_TypeMatchupOwnPokemonGrass::
 
 Help_Text_TypeMatchupOwnMoveGhost::
 	.string "Effect on the opposing DAEMON:\p"
-	.string "   {CIRCLE_DOT}: PSYCHIC, GHOST\p"
+	.string "   {CIRCLE_DOT}: CONSTRUE, GHOST\p"
 	.string "   {TRIANGLE}: DARK, STEEL\p"
 	.string "   {BIG_MULT_X}: NORMAL$"
 
@@ -1782,7 +1782,7 @@ Help_Text_TypeMatchupOwnMovePoison::
 
 Help_Text_TypeMatchupOwnPokemonPoison::
 	.string "Effect of foe's move on own DAEMON:\p"
-	.string "   {CIRCLE_DOT}: GROUND, PSYCHIC\p"
+	.string "   {CIRCLE_DOT}: GROUND, CONSTRUE\p"
 	.string "   {TRIANGLE}: GRASS, FIGHTING, POISON, BUG$"
 
 Help_Text_TypeMatchupOwnMoveDragon::
@@ -1814,7 +1814,7 @@ Help_Text_TypeMatchupOwnPokemonSteel::
 	.string "Effect of foe's move on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: FIRE, FIGHTING, GROUND\n"
 	.string "   {TRIANGLE}: NORMAL, GRASS, ICE, FLYING,\l"
-	.string "       PSYCHIC, BUG, ROCK, GHOST,\l"
+	.string "       CONSTRUE, BUG, ROCK, GHOST,\l"
 	.string "       DRAGON, DARK, STEEL\l"
 	.string "   {BIG_MULT_X}: POISON$"
 
@@ -1851,7 +1851,7 @@ Help_Text_TypeMatchupOwnPokemonWater::
 
 Help_Text_TypeMatchupOwnMoveBug::
 	.string "Effect on the opposing DAEMON:\p"
-	.string "   {CIRCLE_DOT}: GRASS, PSYCHIC, DARK\p"
+	.string "   {CIRCLE_DOT}: GRASS, CONSTRUE, DARK\p"
 	.string "   {TRIANGLE}: FIRE, FIGHTING, POISON,\n"
 	.string "       FLYING, GHOST, STEEL$"
 

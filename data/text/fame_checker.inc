@@ -256,14 +256,14 @@ gFameCheckerFlavorText_Koga5:: @ 0x81AE51B
 gFameCheckerFlavorText_Sabrina0:: @ 0x81AE5E8
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
 	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}BRAZEN CITY DAEMON GYM LEADER:\n"
-	.string "SABRINA The Master of PSYCHIC\l"
+	.string "SABRINA The Master of CONSTRUE\l"
 	.string "DAEMON!$"
 
 gFameCheckerFlavorText_Sabrina1:: @ 0x81AE656
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of DAEMON?\p"
 	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}You know about a girl GYM LEADER\n"
 	.string "in BRAZEN CITY?\p"
-	.string "She uses PSYCHIC-type DAEMON,\n"
+	.string "She uses CONSTRUE-type DAEMON,\n"
 	.string "right?$"
 
 gFameCheckerFlavorText_Sabrina2:: @ 0x81AE6D7
@@ -360,8 +360,8 @@ gFameCheckerFlavorText_Lorelei4:: @ 0x81AEDAA
 
 gFameCheckerFlavorText_Lorelei5:: @ 0x81AEE51
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of DAEMON?\p"
-	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}The LAPRAS she has, I imagine it\n"
-	.string "to be the one she met as a child.\p"
+	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}The FERRY she has, I imagine it to\n"
+	.string "be the one she met as a child.\p"
 	.string "I believe it was in ICEFALL CAVE\n"
 	.string "that she bound it.\p"
 	.string "Perhaps that DAEMON has been with\n"
@@ -962,7 +962,7 @@ gFameCheckerFlavorTextOriginLocation_Bruno2::
 	.string "BRAZEN CITY$"
 
 gFameCheckerFlavorTextOriginLocation_Bruno3::
-	.string "EMBER SPA$"
+	.string "JITTER SPA$"
 
 gFameCheckerFlavorTextOriginLocation_Bruno4::
 	.string "TWO ISLAND$"

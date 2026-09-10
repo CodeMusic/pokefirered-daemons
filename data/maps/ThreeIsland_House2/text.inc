@@ -9,7 +9,7 @@ ThreeIsland_House2_Text_CantMakeThisSpoonBend::
 ThreeIsland_House2_Text_IAdmireSabrina::
     .string "You know about a girl GYM LEADER\n"
     .string "in BRAZEN CITY?\p"
-    .string "She uses PSYCHIC-type DAEMON,\n"
+    .string "She uses CONSTRUE-type DAEMON,\n"
     .string "right?\p"
     .string "I admire her, I really do.\p"
     .string "I've heard that she's one cool\n"

@@ -31,7 +31,7 @@ ViridianCity_Gym_Text_ReceivedTM26FromGiovanni::
     .string "{PLAYER} received TM26 from SCORN.$"
 
 ViridianCity_Gym_Text_ExplainTM26::
-    .string "TM26 is EARTHQUAKE.\p"
+    .string "TM26 is UPHEAVAL.\p"
     .string "It reaches the layer everything\n"
     .string "else is standing on.\p"
     .string "I had it made. Use it or do not.$"

@@ -1,5 +1,5 @@
 SafariZone_West_Text_RestHouse::
-    .string "REST HOUSE$"
+    .string "IDLE HOUSE$"
 
 SafariZone_West_Text_PleaseFindWardensLostTeeth::
     .string "REQUEST NOTICE\p"

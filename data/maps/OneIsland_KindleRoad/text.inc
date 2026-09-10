@@ -20,7 +20,7 @@ OneIsland_KindleRoad_Text_AbigailPostBattle::
     .string "Maybe I should wear one, too…$"
 
 OneIsland_KindleRoad_Text_FinnIntro::
-    .string "Seen from here, MT. EMBER towers\n"
+    .string "Seen from here, MT. JITTER towers\n"
     .string "into the sky.$"
 
 OneIsland_KindleRoad_Text_FinnDefeat::
@@ -39,8 +39,8 @@ OneIsland_KindleRoad_Text_GarrettDefeat::
     .string "You're good, you!$"
 
 OneIsland_KindleRoad_Text_GarrettPostBattle::
-    .string "Instead of using SURF all the time,\n"
-    .string "you should swim some.$"
+    .string "Instead of using TRAVERSE all the\n"
+    .string "time, you should swim some.$"
 
 OneIsland_KindleRoad_Text_TommyIntro::
     .string "Wait! Wait a second!\n"
@@ -156,9 +156,9 @@ OneIsland_KindleRoad_Text_MikNotEnoughMons::
 
 OneIsland_KindleRoad_Text_RouteSign::
     .string "This is KINDLE ROAD.\p"
-    .string "Go straight for MT. EMBER.$"
+    .string "Go straight for MT. JITTER.$"
 
 OneIsland_KindleRoad_Text_EmberSpaSign::
     .string "Light the Fire in Your Heart!\n"
-    .string "EMBER SPA$"
+    .string "JITTER SPA$"
 

@@ -6,13 +6,13 @@ CeladonCity_DepartmentStore_3F_Text_OTStandsForOriginalTrainer::
 CeladonCity_DepartmentStore_3F_Text_BuddyTradingKangaskhanForHaunter::
     .string "All right!\p"
     .string "My buddy's going to trade me his\n"
-    .string "KANGASKHAN for my HAUNTER!$"
+    .string "KEEPER for my REVENANT!$"
 
 CeladonCity_DepartmentStore_3F_Text_HaunterEvolvedOnTrade::
-    .string "Come on, HAUNTER!\p"
-    .string "I love HAUNTER! I collect them!\p"
+    .string "Come on, REVENANT!\p"
+    .string "I love REVENANT! I collect them!\p"
     .string "Huh?\p"
-    .string "HAUNTER turned into a different\n"
+    .string "REVENANT turned into a different\n"
     .string "DAEMONS while being traded!$"
 
 CeladonCity_DepartmentStore_3F_Text_CanIdentifyTradeMonsByID::
@@ -49,7 +49,7 @@ Text_CounterTeach::
     .string "Not done yet? How about I teach\n"
     .string "you a good move?\p"
     .string "The move I have in mind is\n"
-    .string "COUNTER.\p"
+    .string "CONTRADICT.\p"
     .string "Not like the one I'm leaning on,\n"
     .string "mind you!$"
 
@@ -59,8 +59,8 @@ Text_CounterDeclined::
 
 Text_CounterWhichMon::
     .string "Which DAEMON should I teach\n"
-    .string "COUNTER to?$"
+    .string "CONTRADICT to?$"
 
 Text_CounterTaught::
-    .string "Are you using that COUNTER move I\n"
-    .string "taught your DAEMON?$"
+    .string "Are you using that CONTRADICT\n"
+    .string "move I taught your DAEMON?$"

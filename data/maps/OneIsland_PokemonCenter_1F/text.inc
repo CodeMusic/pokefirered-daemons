@@ -286,7 +286,7 @@ OneIsland_PokemonCenter_1F_Text_BillsFirstMonWasAbra::
     .string "HOLT is a POKéMANIAC, so he loves\n"
     .string "every kind.\p"
     .string "Apparently, the first one he bound\n"
-    .string "was an ABRA.$"
+    .string "was an HUNCH.$"
 
 OneIsland_PokemonCenter_1F_Text_BillsHometownInGoldenrod::
     .string "By the way, {PLAYER}, you're from\n"

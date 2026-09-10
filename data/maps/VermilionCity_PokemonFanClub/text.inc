@@ -7,21 +7,21 @@ VermilionCity_PokemonFanClub_Text_PikachuTwiceAsCute::
     .string "as that one!$"
 
 VermilionCity_PokemonFanClub_Text_AdoreMySeel::
-    .string "I just adore my SEEL!\n"
-    .string "It's so lovable!\p"
-    .string "It squeals, “Kyuuuh,” when I\n"
-    .string "hug it!$"
+    .string "I just adore my CHILLER! It's so\n"
+    .string "lovable!\p"
+    .string "It squeals, “Kyuuuh,” when I hug\n"
+    .string "it!$"
 
 VermilionCity_PokemonFanClub_Text_SeelFarMoreAttractive::
     .string "Oh, dear!\p"
-    .string "My SEEL is far more attractive.\n"
+    .string "My CHILLER is far more attractive.\n"
     .string "By double, I would say.$"
 
 VermilionCity_PokemonFanClub_Text_Pikachu::
     .string "SPIKE: Chu! Pikachu!$"
 
 VermilionCity_PokemonFanClub_Text_Seel::
-    .string "SEEL: Kyuoo!$"
+    .string "CHILLER: Kyuoo!$"
 
 VermilionCity_PokemonFanClub_Text_DidYouComeToHearAboutMyMons::
     .string "I chair the DAEMON Fan Club!\p"
@@ -34,20 +34,17 @@ VermilionCity_PokemonFanClub_Text_DidYouComeToHearAboutMyMons::
     .string "my DAEMONS?$"
 
 VermilionCity_PokemonFanClub_Text_ChairmansStory::
-    .string "Good!\n"
-    .string "Then listen up!\p"
-    .string "My favorite RAPIDASH…\p"
-    .string "It's…cute…lovely…smart… \n"
-    .string "plus…amazing…you think so?…\l"
-    .string "oh yes…it's…stunning…\l"
-    .string "kindly…love it!\p"
-    .string "Hug it…when…sleeping…warm\n"
-    .string "and cuddly…spectacular…\l"
-    .string "ravishing…\l"
-    .string "…Oops! Look at the time!\l"
-    .string "I kept you too long!\p"
-    .string "Thanks for hearing me out!\n"
-    .string "I want you to have this!$"
+    .string "Good! Then listen up!\p"
+    .string "My favorite OVERDRIVE…\p"
+    .string "It's…cute…lovely…smart…\n"
+    .string "plus…amazing…you think so?… oh\l"
+    .string "yes…it's…stunning… kindly…love it!\p"
+    .string "Hug it…when…sleeping…warm and\n"
+    .string "cuddly…spectacular… ravishing…\l"
+    .string "…Oops! Look at the time! I kept\l"
+    .string "you too long!\p"
+    .string "Thanks for hearing me out! I want\n"
+    .string "you to have this!$"
 
 VermilionCity_PokemonFanClub_Text_ReceivedBikeVoucherFromChairman::
     .string "{PLAYER} received a BIKE VOUCHER\n"

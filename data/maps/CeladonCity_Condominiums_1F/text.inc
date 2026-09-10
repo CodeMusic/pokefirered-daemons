@@ -1,5 +1,5 @@
 CeladonCity_Condominiums_1F_Text_Meowth::
-    .string "MEOWTH: Meow!$"
+    .string "COOKIE: Meow!$"
 
 CeladonCity_Condominiums_1F_Text_TryThisDrinkInstead::
     .string "You shouldn't spend all your money\n"
@@ -13,7 +13,7 @@ CeladonCity_Condominiums_1F_Text_NothingBeatsThirstLikeTea::
 
 CeladonCity_Condominiums_1F_Text_MyDearMonsKeepMeCompany::
     .string "My dear DAEMON keep me company.\n"
-    .string "MEOWTH even brings money home!$"
+    .string "COOKIE even brings money home!$"
 
 CeladonCity_Condominiums_1F_Text_DaisyComesToBuyTea::
     .string "Oh, hello, dearie. Did you enjoy\n"

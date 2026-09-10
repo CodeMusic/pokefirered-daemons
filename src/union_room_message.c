@@ -480,7 +480,7 @@ ALIGNED(4) static const u8 sText_ChooseTrainerToShareWonderCards[] = _("Please c
 ALIGNED(4) static const u8 sText_ChooseTrainerToShareWonderNews[] = _("Please choose the USER who is\nsharing WONDER NEWS.");
 ALIGNED(4) static const u8 sText_ChooseLeaderPokemonJump[] = _("Jump with mini DAEMON! Please\nchoose the LEADER.");
 ALIGNED(4) static const u8 sText_ChooseLeaderBerryCrush[] = _("BERRY CRUSH!\nPlease choose the LEADER.");
-ALIGNED(4) static const u8 sText_ChooseLeaderBerryPicking[] = _("DODRIO BERRY-PICKING!\nPlease choose the LEADER.");
+ALIGNED(4) static const u8 sText_ChooseLeaderBerryPicking[] = _("TRIPLECORE BERRY-PICKING!\nPlease choose the LEADER.");
 
 const u8 *const gTexts_UR_ChooseTrainer[] = {
     [LINK_GROUP_SINGLE_BATTLE] = sText_ChooseTrainerSingleBattle,

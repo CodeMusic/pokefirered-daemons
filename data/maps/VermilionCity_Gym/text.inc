@@ -27,7 +27,7 @@ VermilionCity_Gym_Text_ReceivedTM34FromLtSurge::
     .string "from LT. SURGE.$"
 
 VermilionCity_Gym_Text_ExplainTM34::
-    .string "TM34 contains SHOCK WAVE!\p"
+    .string "TM34 contains CARRIER!\p"
     .string "Teach it to an ELECTRIC DAEMON!$"
 
 VermilionCity_Gym_Text_MakeRoomInYourBag::

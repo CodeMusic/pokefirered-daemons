@@ -7,8 +7,8 @@ CeruleanCity_House2_Text_RocketsStoleTMForDig::
 
 CeruleanCity_House2_Text_TeachDiglettDigWithoutTM::
     .string "I figure what's lost is lost.\p"
-    .string "I decided to teach DIGLETT how to\n"
-    .string "DIG without a TM.$"
+    .string "I decided to teach TAPPOINT how\n"
+    .string "to DIG without a TM.$"
 
 CeruleanCity_House2_Text_TeamRocketTryingToDigIntoNoGood::
     .string "TEAM CORPUS must be trying to DIG\n"

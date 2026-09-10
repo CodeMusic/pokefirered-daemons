@@ -33,7 +33,7 @@ SaffronCity_Gym_Text_ReceivedTM04FromSabrina::
     .string "SABRINA.$"
 
 SaffronCity_Gym_Text_ExplainTM04::
-    .string "TM04 is CALM MIND.\p"
+    .string "TM04 is COMPOSE.\p"
     .string "It makes the DAEMON concentrate to\n"
     .string "raise both SP. ATK and SP. DEF.$"
 
@@ -60,7 +60,7 @@ SaffronCity_Gym_Text_JohanDefeat::
     .string "I never foresaw this!$"
 
 SaffronCity_Gym_Text_JohanPostBattle::
-    .string "PSYCHIC DAEMON fear only ghosts\n"
+    .string "CONSTRUE DAEMON fear only ghosts\n"
     .string "and bugs!$"
 
 SaffronCity_Gym_Text_StacyIntro::
@@ -73,8 +73,8 @@ SaffronCity_Gym_Text_StacyDefeat::
 
 SaffronCity_Gym_Text_StacyPostBattle::
     .string "I have much to learn still…\p"
-    .string "I must master PSYCHIC and teach it\n"
-    .string "to my DAEMONS…$"
+    .string "I must master CONSTRUE and teach\n"
+    .string "it to my DAEMONS…$"
 
 SaffronCity_Gym_Text_TyronIntro::
     .string "You understand, don't you?\p"

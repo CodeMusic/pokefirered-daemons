@@ -40,9 +40,9 @@ Pokedude_Text_YayWeManagedToWin::
 	.string "We managed to win!$"
 
 Pokedude_Text_WaterNotVeryEffectiveAgainstGrass::
-	.string "TUTOR: The move BUBBLE is a\n"
+	.string "TUTOR: The move SEEP is a\n"
 	.string "WATER-type attack.\p"
-	.string "The targeted ODDISH is a\n"
+	.string "The targeted WEED is a\n"
 	.string "GRASS/CORRUPT-type DAEMON.\p"
 	.string "The WATER-type attack is absorbed\n"
 	.string "by the GRASS-type DAEMON…\p"
@@ -52,10 +52,10 @@ Pokedude_Text_WaterNotVeryEffectiveAgainstGrass::
 
 Pokedude_Text_GrassEffectiveAgainstWater::
 	.string "Uh-oh, this is not good!\p"
-	.string "The ABSORB attack you just saw is\n"
+	.string "The INGEST attack you just saw is\n"
 	.string "a GRASS-type move.\p"
 	.string "LOOP is a WATER-type DAEMON.\p"
-	.string "So, ABSORB becomes super\n"
+	.string "So, INGEST becomes super\n"
 	.string "effective, doubling the damage.$"
 
 Pokedude_Text_LetsTryShiftingMons::
@@ -82,9 +82,9 @@ Pokedude_Text_ButterfreeDoubleResistsGrass::
 	.string "quarter of the usual damage.$"
 
 Pokedude_Text_ButterfreeGoodAgainstOddish::
-	.string "ODDISH is a GRASS/CORRUPT-type\n"
+	.string "WEED is a GRASS/CORRUPT-type\n"
 	.string "DAEMON.\p"
-	.string "A FLYING- or PSYCHIC-type attack\n"
+	.string "A FLYING- or CONSTRUE-type attack\n"
 	.string "is super effective against it.\p"
 	.string "One of those types of attacks will\n"
 	.string "inflict double the usual damage.\p"

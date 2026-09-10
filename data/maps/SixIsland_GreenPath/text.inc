@@ -1,14 +1,14 @@
 SixIsland_GreenPath_Text_JaclynIntro::
     .string "…Huh?\p"
     .string "I was envisioning my house, but\n"
-    .string "this is where I TELEPORT?$"
+    .string "this is where I YIELD?$"
 
 SixIsland_GreenPath_Text_JaclynDefeat::
     .string "Big boo-boo!$"
 
 SixIsland_GreenPath_Text_JaclynPostBattle::
     .string "I am so scatterbrained!\p"
-    .string "I need to focus so I can TELEPORT\n"
+    .string "I need to focus so I can YIELD\n"
     .string "properly to my house!$"
 
 SixIsland_GreenPath_Text_LeftRouteSign::

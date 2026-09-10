@@ -107,7 +107,7 @@ CeruleanCity_Text_PeopleHereWereRobbed::
     .string "with CORPUS!$"
 
 CeruleanCity_Text_SlowbroUseSonicboom::
-    .string "Okay! SHELL! Use SONICBOOM!$"
+    .string "Okay! SHELL! Use CONSTANT!$"
 
 CeruleanCity_Text_SlowbroPayAttention::
     .string "Come on, SHELL, pay attention!$"
@@ -120,10 +120,10 @@ CeruleanCity_Text_NoYouBlewItAgain::
     .string "You blew it again!$"
 
 CeruleanCity_Text_SlowbroWithdraw::
-    .string "SHELL, WITHDRAW!$"
+    .string "SHELL, EDDY!$"
 
 CeruleanCity_Text_HardToControlMonsObedience::
-    .string "SHELL, WITHDRAW! No! That's wrong!\p"
+    .string "SHELL, EDDY! No! That's wrong!\p"
     .string "It's so hard to control DAEMON!\p"
     .string "Your DAEMON's obedience depends on\n"
     .string "your abilities as a USER!$"

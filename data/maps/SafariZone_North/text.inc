@@ -1,5 +1,5 @@
 SafariZone_North_Text_RestHouse::
-    .string "REST HOUSE$"
+    .string "IDLE HOUSE$"
 
 SafariZone_North_Text_SecretHouseStillAhead::
     .string "USER TIPS\p"

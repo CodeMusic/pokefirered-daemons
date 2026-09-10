@@ -1,12 +1,12 @@
 @ The 5 texts below are supposed to be in FourIsland_House1
 Text_BodySlamTeach::
     .string "Ready? Boing!\p"
-    .string "We're having a BODY SLAM match to\n"
-    .string "see who wimps out first.\p"
+    .string "We're having a BLOCK WRITE match\n"
+    .string "to see who wimps out first.\p"
     .string "If you were to join us, you'd be\n"
     .string "squashed like a bug, though…\p"
-    .string "How about I teach BODY SLAM to a\n"
-    .string "DAEMON of yours instead?$"
+    .string "How about I teach BLOCK WRITE to\n"
+    .string "a DAEMON of yours instead?$"
 
 Text_BodySlamDeclined::
     .string "Come again!\n"
@@ -14,7 +14,7 @@ Text_BodySlamDeclined::
 
 Text_BodySlamWhichMon::
     .string "Which DAEMON wants to learn how to\n"
-    .string "BODY SLAM?$"
+    .string "BLOCK WRITE?$"
 
 Text_BodySlamTaught::
     .string "Boioing!$"

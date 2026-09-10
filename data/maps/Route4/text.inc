@@ -32,7 +32,7 @@ Text_MegaPunchTeach::
 
 Text_MegaPunchDeclined::
     .string "You'll be back when you understand\n"
-    .string "the worth of MEGA PUNCH.$"
+    .string "the worth of COMMIT.$"
 
 Text_MegaPunchWhichMon::
     .string "Fine! Which DAEMON will learn it?$"
@@ -48,13 +48,13 @@ Text_MegaKickTeach::
     .string "A kick of brutal ferocity!\p"
     .string "Packed with destructive power!\p"
     .string "When you get right down to it,\n"
-    .string "MEGA KICK is the ultimate attack!\l"
+    .string "BULK WRITE is the ultimate attack!\l"
     .string "Don't you agree?\p"
     .string "Okay! I'll teach it to your DAEMON!$"
 
 Text_MegaKickDeclined::
     .string "You'll come crawling back when you\n"
-    .string "realize the value of MEGA KICK.$"
+    .string "realize the value of BULK WRITE.$"
 
 Text_MegaKickWhichMon::
     .string "All right! Which DAEMON wants to\n"

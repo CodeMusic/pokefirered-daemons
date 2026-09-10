@@ -359,9 +359,9 @@ const u8 gDiglettPokedexText[] = _(
 const u8 gDiglettPokedexTextUnused[] = _("");
 
 const u8 gDugtrioPokedexText[] = _(
-    "A team of DIGLETT triplets. It triggers\n"
-    "huge earthquakes by burrowing 60 miles\n"
-    "underground.");
+        "A team of TAPPOINT triplets. It\n"
+        "triggers huge earthquakes by\n"
+        "burrowing 60 miles underground.");
 
 const u8 gDugtrioPokedexTextUnused[] = _("");
 
@@ -443,9 +443,9 @@ const u8 gPoliwrathPokedexText[] = _(
 const u8 gPoliwrathPokedexTextUnused[] = _("");
 
 const u8 gAbraPokedexText[] = _(
-    "Using its ability to read minds, it will\n"
-    "sense impending danger and TELEPORT to\n"
-    "safety.");
+        "Using its ability to read\n"
+        "minds, it will sense impending\n"
+        "danger and YIELD to safety.");
 
 const u8 gAbraPokedexTextUnused[] = _("");
 
@@ -492,9 +492,9 @@ const u8 gBellsproutPokedexText[] = _(
 const u8 gBellsproutPokedexTextUnused[] = _("");
 
 const u8 gWeepinbellPokedexText[] = _(
-    "It spits out POISONPOWDER to immobilize\n"
-    "the enemy and then finishes it with a\n"
-    "spray of ACID.");
+        "It spits out ADULTERATE to\n"
+        "immobilize the enemy and then\n"
+        "finishes it with a spray of ETCH.");
 
 const u8 gWeepinbellPokedexTextUnused[] = _("");
 
@@ -660,9 +660,9 @@ const u8 gHaunterPokedexText[] = _(
 const u8 gHaunterPokedexTextUnused[] = _("");
 
 const u8 gGengarPokedexText[] = _(
-    "On the night of a full moon, if shadows\n"
-    "move on their own and laugh, it must be\n"
-    "GENGAR's doing.");
+        "On the night of a full moon, if\n"
+        "shadows move on their own and\n"
+        "laugh, it must be HAUNTPROC's doing.");
 
 const u8 gGengarPokedexTextUnused[] = _("");
 
@@ -681,9 +681,9 @@ const u8 gDrowzeePokedexText[] = _(
 const u8 gDrowzeePokedexTextUnused[] = _("");
 
 const u8 gHypnoPokedexText[] = _(
-    "When it locks eyes with an enemy, it will\n"
-    "use a mix of PSI moves such as HYPNOSIS\n"
-    "and CONFUSION.");
+        "When it locks eyes with an enemy,\n"
+        "it will use a mix of PSI moves\n"
+        "such as DEFER and MISREAD.");
 
 const u8 gHypnoPokedexTextUnused[] = _("");
 
@@ -723,9 +723,9 @@ const u8 gExeggcutePokedexText[] = _(
 const u8 gExeggcutePokedexTextUnused[] = _("");
 
 const u8 gExeggutorPokedexText[] = _(
-    "It is said that on rare occasions, one\n"
-    "of its heads will drop off and continue on\n"
-    "as an EXEGGCUTE.");
+        "It is said that on rare occasions,\n"
+        "one of its heads will drop off\n"
+        "and continue on as an CLUSTER.");
 
 const u8 gExeggutorPokedexTextUnused[] = _("");
 
@@ -772,16 +772,16 @@ const u8 gKoffingPokedexText[] = _(
 const u8 gKoffingPokedexTextUnused[] = _("");
 
 const u8 gWeezingPokedexText[] = _(
-    "Where two kinds of poison gases meet, two\n"
-    "KOFFING can fuse into a WEEZING over\n"
-    "many years.");
+        "Where two kinds of poison gases\n"
+        "meet, two FUMES can fuse into\n"
+        "a SMOGSTACK over many years.");
 
 const u8 gWeezingPokedexTextUnused[] = _("");
 
 const u8 gRhyhornPokedexText[] = _(
-    "Its massive bones are 1,000 times harder\n"
-    "than human bones. Its TACKLE can knock a\n"
-    "semitrailer flying.");
+        "Its massive bones are 1,000 times\n"
+        "harder than human bones. Its WRITE\n"
+        "can knock a semitrailer flying.");
 
 const u8 gRhyhornPokedexTextUnused[] = _("");
 
@@ -856,9 +856,9 @@ const u8 gStarmiePokedexText[] = _(
 const u8 gStarmiePokedexTextUnused[] = _("");
 
 const u8 gMrmimePokedexText[] = _(
-    "If interrupted while it is miming, it will\n"
-    "suddenly DOUBLESLAP the offender with its\n"
-    "broad hands.");
+        "If interrupted while it is miming,\n"
+        "it will suddenly REPEAT the\n"
+        "offender with its broad hands.");
 
 const u8 gMrmimePokedexTextUnused[] = _("");
 
@@ -1626,9 +1626,9 @@ const u8 gPhanpyPokedexText[] = _(
 const u8 gPhanpyPokedexTextUnused[] = _("");
 
 const u8 gDonphanPokedexText[] = _(
-    "It has sharp, hard tusks and a rugged\n"
-    "hide. Its TACKLE is strong enough to\n"
-    "knock down a house.");
+        "It has sharp, hard tusks and a\n"
+        "rugged hide. Its WRITE is strong\n"
+        "enough to knock down a house.");
 
 const u8 gDonphanPokedexTextUnused[] = _("");
 

@@ -18,8 +18,8 @@ Route19_Text_ReeceDefeat::
     .string "That's chilly!$"
 
 Route19_Text_ReecePostBattle::
-    .string "Watch out for TENTACOOL.\n"
-    .string "They sting so painfully.$"
+    .string "Watch out for DRIFTNET. They sting\n"
+    .string "so painfully.$"
 
 Route19_Text_MatthewIntro::
     .string "I love swimming!\n"
@@ -109,8 +109,8 @@ Route19_Text_ConnieDefeat::
 
 Route19_Text_ConniePostBattle::
     .string "If I were to ride a DAEMON on the\n"
-    .string "sea, I'd like a LAPRAS.\p"
-    .string "LAPRAS is so big, I bet it would\n"
+    .string "sea, I'd like a FERRY.\p"
+    .string "FERRY is so big, I bet it would\n"
     .string "keep me dry on water.$"
 
 Route19_Text_RouteSign::

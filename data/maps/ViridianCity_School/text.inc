@@ -22,9 +22,9 @@ ViridianCity_School_Text_NotebookSecondPage::
     .string "Second page.\p"
     .string "Some kinds land twice as hard.\p"
     .string "LOGIC on CONTENT. FLOW on\n"
-    .string "ENTROPY. CORRUPT on GROWTH.\p"
-    .string "Learn the table.\n"
-    .string "It does not change.$"
+    .string "ENTROPY. CORRUPT on SCALE UP.\p"
+    .string "Learn the table. It does not\n"
+    .string "change.$"
 
 ViridianCity_School_Text_NotebookThirdPage::
     .string "Third page.\p"

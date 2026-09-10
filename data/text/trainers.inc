@@ -97,7 +97,7 @@ Route8_Text_LeslieRematchIntro::
 	.string "DAEMONS are fun, too.$"
 
 Route8_Text_AndreaRematchIntro::
-	.string "MEOWTH and PERSIAN are so cute,\n"
+	.string "COOKIE and TRACKER are so cute,\n"
 	.string "meow, meow, meow!$"
 
 Route8_Text_MeganRematchIntro::
@@ -466,8 +466,8 @@ Route17_Text_BillyRematchIntro::
 	.string "We rule the roads, man!$"
 
 Route17_Text_NikolasRematchIntro::
-	.string "VOLTORB's going to seriously\n"
-	.string "electrify you today!$"
+	.string "FUSE's going to seriously electrify\n"
+	.string "you today!$"
 
 Route17_Text_ZeekRematchIntro::
 	.string "I leveled up my DAEMONS, but it\n"
@@ -865,7 +865,7 @@ SixIsland_OutcastIsland_Text_GebRematchIntro::
 
 SixIsland_GreenPath_Text_JaclynRematchIntro::
 	.string "…Huh?\p"
-	.string "I envision my house, but TELEPORT\n"
+	.string "I envision my house, but YIELD\n"
 	.string "always brings me here!$"
 
 SixIsland_WaterPath_Text_RoseRematchIntro::

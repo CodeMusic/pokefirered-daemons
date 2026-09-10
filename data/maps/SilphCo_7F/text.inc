@@ -5,15 +5,15 @@ SilphCo_7F_Text_HaveMonForSavingUs::
     .string "saving us.$"
 
 SilphCo_7F_Text_ObtainedLaprasFromEmployee::
-    .string "{PLAYER} obtained a LAPRAS from\n"
-    .string "the SILPH employee!$"
+    .string "{PLAYER} obtained a FERRY from the\n"
+    .string "SILPH employee!$"
 
 SilphCo_7F_Text_ExplainLapras::
-    .string "It's LAPRAS. It's very intelligent.\p"
+    .string "It's FERRY. It's very intelligent.\p"
     .string "We kept it in our lab, but it will\n"
     .string "be much better off with you!\p"
     .string "I think you will be a good USER\n"
-    .string "for LAPRAS!\p"
+    .string "for FERRY!\p"
     .string "It's a good swimmer. It'll give you\n"
     .string "a lift!$"
 

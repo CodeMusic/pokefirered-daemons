@@ -110,7 +110,7 @@ EventScript_DontSmashRock::
 
 Text_UseRockSmash::
 	.string "This rock appears to be breakable.\n"
-	.string "Would you like to use ROCK SMASH?$"
+	.string "Would you like to use CRACK?$"
 
 Text_MonMaySmashRock::
 	.string "It's a rugged rock, but a DAEMON\n"
@@ -160,19 +160,19 @@ EventScript_DontUseStrength::
 Text_UseStrength::
 	.string "It's a big boulder, but a DAEMON\n"
 	.string "may be able to push it aside.\p"
-	.string "Would you like to use STRENGTH?$"
+	.string "Would you like to use DISPLACE?$"
 
 Text_MonUsedStrengthCanMoveBoulders::
-	.string "{STR_VAR_1} used STRENGTH!\p"
-	.string "{STR_VAR_1}'s STRENGTH made it\n"
-	.string "possible to move boulders around!$"
+	.string "{STR_VAR_1} used DISPLACE!\p"
+	.string "{STR_VAR_1}'s DISPLACE made it possible\n"
+	.string "to move boulders around!$"
 
 Text_MonMayPushBoulder::
 	.string "It's a big boulder, but a DAEMON\n"
 	.string "may be able to push it aside.$"
 
 Text_StrengthMadeMovingBouldersPossible::
-	.string "STRENGTH made it possible to move\n"
+	.string "DISPLACE made it possible to move\n"
 	.string "boulders around.$"
 
 EventScript_Waterfall::
@@ -201,11 +201,11 @@ Text_WallOfWaterCrashingDown::
 	.string "with a mighty roar.$"
 
 Text_UseWaterfall::
-	.string "It's a large waterfall.\n"
-	.string "Would you like to use WATERFALL?$"
+	.string "It's a large waterfall. Would you\n"
+	.string "like to use ASCEND?$"
 
 Text_MonUsedWaterfall::
-	.string "{STR_VAR_1} used WATERFALL.$"
+	.string "{STR_VAR_1} used ASCEND.$"
 
 @ Unused leftover from R/S
 EventScript_DeepWater::
@@ -259,11 +259,11 @@ Text_MonMayGoUnderwater::
 	.string "may be able to go underwater.$"
 
 Text_SeaIsDeepUseDive::
-	.string "The sea is deep here.\n"
-	.string "Would you like to use DIVE?$"
+	.string "The sea is deep here. Would you\n"
+	.string "like to use DESCEND?$"
 
 Text_MonUsedDive::
-	.string "{STR_VAR_1} used DIVE.$"
+	.string "{STR_VAR_1} used DESCEND.$"
 
 Text_MonMaySurface::
 	.string "Light is filtering down from above.\n"
@@ -271,11 +271,11 @@ Text_MonMaySurface::
 
 Text_LightFilteringUseDive::
 	.string "Light is filtering down from above.\n"
-	.string "Would you like to use DIVE?$"
+	.string "Would you like to use DESCEND?$"
 
 Text_DiveCantBeUsedHere::
 	.string "There is an obstacle above.\n"
-	.string "DIVE can't be used here.$"
+	.string "DESCEND can't be used here.$"
 
 EventScript_FailSweetScent::
 	msgbox Text_LooksLikeNothingHere, MSGBOX_SIGN

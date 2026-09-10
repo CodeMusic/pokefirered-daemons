@@ -22,10 +22,10 @@ VermilionCity_Text_BuildingOnThisLand::
     .string "lay the foundation.$"
 
 VermilionCity_Text_Machop::
-    .string "MACHOP: Guoh! Gogogoh!$"
+    .string "PROOF: Guoh! Gogogoh!$"
 
 VermilionCity_Text_MachopStompingLandFlat::
-    .string "A MACHOP is stomping the land flat.$"
+    .string "A PROOF is stomping the land flat.$"
 
 VermilionCity_Text_SSAnneVisitsOnceAYear::
     .string "S.S.ANNE is a famous luxury cruise\n"

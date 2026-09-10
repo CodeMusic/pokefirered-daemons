@@ -6,5 +6,5 @@ Route2_Text_RouteSign::
     .string "UNDERPAINT$"
 
 Route2_Text_DiglettsCave::
-    .string "DIGLETT'S CAVE$"
+    .string "TAPPOINT'S CAVE$"
 

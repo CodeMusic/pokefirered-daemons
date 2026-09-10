@@ -28,7 +28,7 @@ Route8_Text_GlennDefeat::
     .string "It's not logical!$"
 
 Route8_Text_GlennPostBattle::
-    .string "Go with GRIMER first…and…\n"
+    .string "Go with GARBAGE first…and…\n"
     .string "…and…then…$"
 
 Route8_Text_PaigeIntro::
@@ -54,7 +54,7 @@ Route8_Text_LesliePostBattle::
     .string "gates at BRAZEN.$"
 
 Route8_Text_AndreaIntro::
-    .string "MEOWTH is so cute, meow, meow,\n"
+    .string "COOKIE is so cute, meow, meow,\n"
     .string "meow!$"
 
 Route8_Text_AndreaDefeat::

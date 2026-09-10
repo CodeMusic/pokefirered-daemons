@@ -22,9 +22,9 @@ PewterCity_Gym_Text_BrockDefeat::
     .string "{FONT_MALE}An official mark from BENCHMARK 1.\p"
     .string "Its bearer's daemons become more\n"
     .string "powerful.\p"
-    .string "FLASH can now be used any time.\p"
+    .string "VERBOSE can now be used any time.\p"
     .string "Of course, a daemon must know the\n"
-    .string "move FLASH to use it.$"
+    .string "move VERBOSE to use it.$"
 
 PewterCity_Gym_Text_TakeThisWithYou::
     .string "Wait!\n"
@@ -39,8 +39,8 @@ PewterCity_Gym_Text_ExplainTM39::
     .string "daemon. Once.\p"
     .string "The TM does not survive that, so\n"
     .string "choose carefully.\p"
-    .string "TM39 is ROCK TOMB. It drops weight\n"
-    .string "on the target and slows it.$"
+    .string "TM39 is WEDGE. It drops weight on\n"
+    .string "the target and slows it.$"
 
 PewterCity_Gym_Text_BrockPostBattle::
     .string "You encoded something I could not\n"

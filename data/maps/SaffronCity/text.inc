@@ -93,7 +93,7 @@ SaffronCity_Text_SilphCoSign::
     .string "SILPH CO. OFFICE BUILDING$"
 
 SaffronCity_Text_MrPsychicsHouse::
-    .string "MR. PSYCHIC'S HOUSE$"
+    .string "MR. CONSTRUE'S HOUSE$"
 
 SaffronCity_Text_SilphsLatestProduct::
     .string "CORPUS NOTICE REVIEW SCORES\p"

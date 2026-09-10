@@ -9,8 +9,8 @@ FourIsland_Text_LoreleiHasReturned::
 
 FourIsland_Text_LoreleiMetLaprasAsChild::
     .string "LORELEI has gone back.\p"
-    .string "The LAPRAS she has, I imagine it\n"
-    .string "to be the one she met as a child.\p"
+    .string "The FERRY she has, I imagine it to\n"
+    .string "be the one she met as a child.\p"
     .string "I believe it was in ICEFALL CAVE\n"
     .string "that she bound it.\p"
     .string "Perhaps that DAEMON has been with\n"

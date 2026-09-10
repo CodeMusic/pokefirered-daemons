@@ -44,12 +44,11 @@ FourIsland_IcefallCave_Back_Text_NotTellingYouThat::
     .string "I'm not telling you that!$"
 
 FourIsland_IcefallCave_Back_Text_LoreleiWellDeepFreezeYou::
-    .string "LORELEI: If you won't confess,\n"
-    .string "we'll deep-hang you.\p"
-    .string "My LAPRAS is furious for what\n"
-    .string "you've done to its friends.\p"
-    .string "Go, LAPRAS!\n"
-    .string "ICE BEAM…$"
+    .string "LORELEI: If you won't confess, we'll\n"
+    .string "deep-hang you.\p"
+    .string "My FERRY is furious for what you've\n"
+    .string "done to its friends.\p"
+    .string "Go, FERRY! FREEZE…$"
 
 FourIsland_IcefallCave_Back_Text_OkayRocketWareHouseFiveIsland::
     .string "Wawaah! Okay! I'll talk!\p"

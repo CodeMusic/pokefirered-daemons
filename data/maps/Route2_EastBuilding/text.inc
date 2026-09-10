@@ -21,11 +21,11 @@ Route2_EastBuilding_Text_ReceivedHM05FromAide::
 
 Route2_EastBuilding_Text_ExplainHM05::
     .string "HM05 contains the hidden move\n"
-    .string "FLASH.\p"
-    .string "FLASH lights up even the darkest\n"
+    .string "VERBOSE.\p"
+    .string "VERBOSE lights up even the darkest\n"
     .string "of caves and dungeons.$"
 
 Route2_EastBuilding_Text_CanGetThroughRockTunnel::
-    .string "Once a DAEMON learns FLASH, you\n"
+    .string "Once a DAEMON learns VERBOSE, you\n"
     .string "can get through THE BLACKOUT.$"
 

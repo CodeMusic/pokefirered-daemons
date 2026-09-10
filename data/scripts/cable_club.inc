@@ -1531,13 +1531,13 @@ Text_PokemonJumpInfo::
 	.string "jumps in time.$"
 
 Text_DodrioBerryPickingInfo::
-	.string "“DODRIO BERRY-PICKING”\p"
-	.string "Command DODRIO's three heads to\n"
-	.string "bind falling BERRIES.\p"
+	.string "“TRIPLECORE BERRY-PICKING”\p"
+	.string "Command TRIPLECORE's three heads\n"
+	.string "to bind falling BERRIES.\p"
 	.string "Press right, up, or left on the {PLUS}\n"
 	.string "Control Pad to move the heads.\p"
 	.string "To play this game, you must have a\n"
-	.string "DODRIO.$"
+	.string "TRIPLECORE.$"
 
 Text_TalkToManToPlay::
 	.string "If you want to play a game,\n"
@@ -1590,10 +1590,10 @@ Text_ShortJumpingPokemonAllowed::
 	.string "That's all you need to know.$"
 
 Text_OnlyDodrioAllowed::
-	.string "“DODRIO BERRY-PICKING”…\n"
-	.string "Well, the name says it all.\p"
-	.string "You have to have a DODRIO to play\n"
-	.string "this game.$"
+	.string "“TRIPLECORE BERRY-PICKING”… Well,\n"
+	.string "the name says it all.\p"
+	.string "You have to have a TRIPLECORE to\n"
+	.string "play this game.$"
 
 @ Unused, translated in Emerald
 Text_RetryFromStartPlease::

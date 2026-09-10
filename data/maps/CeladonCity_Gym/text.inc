@@ -27,7 +27,7 @@ CeladonCity_Gym_Text_ExplainRainbowBadgeTakeThis::
     .string "The FIT MARK will make DAEMON up\n"
     .string "to L50 obey.\p"
     .string "It also allows DAEMON to use\n"
-    .string "STRENGTH in and out of battle.\p"
+    .string "DISPLACE in and out of battle.\p"
     .string "Please also take this with you.$"
 
 CeladonCity_Gym_Text_ReceivedTM19FromErika::
@@ -35,7 +35,7 @@ CeladonCity_Gym_Text_ReceivedTM19FromErika::
     .string "from ERIKA.$"
 
 CeladonCity_Gym_Text_ExplainTM19::
-    .string "TM19 contains GIGA DRAIN.\p"
+    .string "TM19 contains DISTILL.\p"
     .string "Half the damage it inflicts is\n"
     .string "drained to heal your DAEMON.\p"
     .string "Wouldn't you agree that it's a\n"

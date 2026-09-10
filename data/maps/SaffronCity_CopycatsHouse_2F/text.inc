@@ -18,11 +18,11 @@ Text_MimicTeach::
     .string "You can have this, then!$"
 
 Text_MimicDeclined::
-    .string "Don't you like MIMIC?$"
+    .string "Don't you like CLONE?$"
 
 Text_MimicWhichMon::
-    .string "I really love MIMIC!\n"
-    .string "Who's going to learn it?$"
+    .string "I really love CLONE! Who's going to\n"
+    .string "learn it?$"
 
 Text_MimicTaughtMale::
     .string "{PLAYER}: Hi!\n"
@@ -70,9 +70,9 @@ SaffronCity_CopycatsHouse_2F_Text_MimickingFavoriteHobbyFemaleJP::
     .string "ものまね　しゅみ　なんだ　もん！$"
 
 SaffronCity_CopycatsHouse_2F_Text_Doduo::
-    .string "DODUO: Giiih!\p"
-    .string "PRETTY MIRROR LOOK AT ME,\n"
-    .string "SEE HOW PRETTY I CAN BE?$"
+    .string "DUALCORE: Giiih!\p"
+    .string "PRETTY MIRROR LOOK AT ME, SEE\n"
+    .string "HOW PRETTY I CAN BE?$"
 
 SaffronCity_CopycatsHouse_2F_Text_RareMonOnlyDoll::
     .string "This is a rare DAEMON! Huh? It's\n"

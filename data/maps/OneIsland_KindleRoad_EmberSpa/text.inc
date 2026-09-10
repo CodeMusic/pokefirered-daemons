@@ -41,12 +41,12 @@ OneIsland_KindleRoad_EmberSpa_Text_BrunoVisitsSpaOnOccasion::
 OneIsland_KindleRoad_EmberSpa_Text_UsedThisToMakeEmberSpa::
     .string "Hot springs go hand-in-hand with\n"
     .string "volcanoes.\p"
-    .string "The EMBER SPA here, well,\n"
-    .string "I made it years ago.\p"
+    .string "The JITTER SPA here, well, I made\n"
+    .string "it years ago.\p"
     .string "I hewed the pool right out of a\n"
     .string "gigantic boulder by hand.\p"
-    .string "I was using this at the time.\n"
-    .string "I suppose I can part with it.$"
+    .string "I was using this at the time. I\n"
+    .string "suppose I can part with it.$"
 
 OneIsland_KindleRoad_EmberSpa_Text_ExplainHM06::
     .string "That shatters boulders as if they\n"

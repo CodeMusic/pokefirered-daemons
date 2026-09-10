@@ -17,8 +17,8 @@ FuchsiaCity_Gym_Text_KogaDefeat::
     .string "Here! Take the SKEW MARK!$"
 
 FuchsiaCity_Gym_Text_KogaPostBattle::
-    .string "When afflicted by TOXIC, a DAEMON\n"
-    .string "suffers more and more.\p"
+    .string "When afflicted by COMPOUND, a\n"
+    .string "DAEMON suffers more and more.\p"
     .string "It suffers worsening damage as the\n"
     .string "battle wears on!\p"
     .string "It will surely terrorize foe!$"
@@ -27,8 +27,8 @@ FuchsiaCity_Gym_Text_KogaExplainSoulBadge::
     .string "Now that you have the SKEW MARK,\n"
     .string "the DEFENSE of your DAEMON\l"
     .string "increases!\p"
-    .string "It also lets you SURF outside of\n"
-    .string "battle!\p"
+    .string "It also lets you TRAVERSE outside\n"
+    .string "of battle!\p"
     .string "Ah! Take this too!$"
 
 FuchsiaCity_Gym_Text_ReceivedTM06FromKoga::
@@ -37,7 +37,7 @@ FuchsiaCity_Gym_Text_ReceivedTM06FromKoga::
 
 FuchsiaCity_Gym_Text_KogaExplainTM06::
     .string "Sealed within that TM06 lies\n"
-    .string "TOXIC!\p"
+    .string "COMPOUND!\p"
     .string "It is a secret technique dating\n"
     .string "back some four hundred years.$"
 

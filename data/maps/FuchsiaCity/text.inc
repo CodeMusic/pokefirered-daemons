@@ -25,8 +25,7 @@ FuchsiaCity_Text_SafariZoneSign::
     .string "DAEMON PARADISE SAFARI ZONE$"
 
 FuchsiaCity_Text_SafariGameSign::
-    .string "SAFARI GAME\n"
-    .string "DAEMON-U-BIND!$"
+    .string "SAFARI GAME DAEMON-U-LATCH!$"
 
 FuchsiaCity_Text_WardensHomeSign::
     .string "SAFARI ZONE\n"
@@ -44,17 +43,15 @@ FuchsiaCity_Text_GymSign::
     .string "Ninja Master$"
 
 FuchsiaCity_Text_ChanseySign::
-    .string "Name: CHANSEY\p"
-    .string "Binding one is\n"
-    .string "all up to chance.$"
+    .string "Name: UPTIME\p"
+    .string "Binding one is all up to chance.$"
 
 FuchsiaCity_Text_VoltorbSign::
-    .string "Name: VOLTORB\p"
-    .string "The very image of\n"
-    .string "a USERBOX.$"
+    .string "Name: FUSE\p"
+    .string "The very image of a USERBOX.$"
 
 FuchsiaCity_Text_KangaskhanSign::
-    .string "Name: KANGASKHAN\p"
+    .string "Name: KEEPER\p"
     .string "A maternal DAEMON that raises its\n"
     .string "young in a pouch on its belly.$"
 
@@ -63,8 +60,8 @@ FuchsiaCity_Text_SlowpokeSign::
     .string "slow moving.$"
 
 FuchsiaCity_Text_LaprasSign::
-    .string "Name: LAPRAS\n"
-    .string "AKA the king of the seas.$"
+    .string "Name: FERRY AKA the king of the\n"
+    .string "seas.$"
 
 FuchsiaCity_Text_OmanyteSign::
     .string "Name: OMANYTE An extremely rare\n"
@@ -81,12 +78,11 @@ FuchsiaCity_Text_Ellipsis::
     .string "……$"
 
 Text_SubstituteTeach::
-    .string "Aww, I wish I was a KANGASKHAN\n"
-    .string "baby.\p"
+    .string "Aww, I wish I was a KEEPER baby.\p"
     .string "I'd love to be a substitute for the\n"
     .string "baby…\p"
-    .string "And snuggle in the mother\n"
-    .string "KANGASKHAN's belly pouch.\p"
+    .string "And snuggle in the mother KEEPER's\n"
+    .string "belly pouch.\p"
     .string "But only DAEMON can use the\n"
     .string "technique SUBSTITUTE…\p"
     .string "Want me to teach SUBSTITUTE to\n"
@@ -102,7 +98,7 @@ Text_SubstituteWhichMon::
 
 Text_SubstituteTaught::
     .string "Boy, what I'd give to crawl inside\n"
-    .string "a KANGASKHAN belly pouch…$"
+    .string "a KEEPER belly pouch…$"
 
 FuchsiaCity_Text_MyFatherIsGymLeader::
     .string "My father is the GYM LEADER of\n"

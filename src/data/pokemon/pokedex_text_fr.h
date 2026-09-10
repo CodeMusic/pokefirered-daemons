@@ -447,9 +447,9 @@ const u8 gAbraPokedexText[] = _(
 const u8 gAbraPokedexTextUnused[] = _("");
 
 const u8 gKadabraPokedexText[] = _(
-    "It happened one morning - a boy with\n"
-    "extrasensory powers awoke in bed\n"
-    "transformed into KADABRA.");
+        "It happened one morning - a boy\n"
+        "with extrasensory powers awoke in\n"
+        "bed transformed into INFERENCE.");
 
 const u8 gKadabraPokedexTextUnused[] = _("");
 
@@ -615,9 +615,9 @@ const u8 gDewgongPokedexText[] = _(
 const u8 gDewgongPokedexTextUnused[] = _("");
 
 const u8 gGrimerPokedexText[] = _(
-    "Sludge exposed to X rays from the moon\n"
-    "transformed into GRIMER. It loves feeding\n"
-    "on filthy things.");
+        "Sludge exposed to X rays from the\n"
+        "moon transformed into GARBAGE. It\n"
+        "loves feeding on filthy things.");
 
 const u8 gGrimerPokedexTextUnused[] = _("");
 
@@ -650,9 +650,9 @@ const u8 gGastlyPokedexText[] = _(
 const u8 gGastlyPokedexTextUnused[] = _("");
 
 const u8 gHaunterPokedexText[] = _(
-    "If you get the feeling of being watched\n"
-    "in darkness when nobody is around,\n"
-    "HAUNTER is there.");
+        "If you get the feeling of being\n"
+        "watched in darkness when nobody\n"
+        "is around, REVENANT is there.");
 
 const u8 gHaunterPokedexTextUnused[] = _("");
 
@@ -699,9 +699,9 @@ const u8 gKinglerPokedexText[] = _(
 const u8 gKinglerPokedexTextUnused[] = _("");
 
 const u8 gVoltorbPokedexText[] = _(
-    "A life-form whose identity is unknown.\n"
-    "It is said to SCREECH or suddenly\n"
-    "SELFDESTRUCT.");
+        "A life-form whose identity\n"
+        "is unknown. It is said to\n"
+        "STRIP or suddenly PANIC.");
 
 const u8 gVoltorbPokedexTextUnused[] = _("");
 
@@ -769,16 +769,16 @@ const u8 gKoffingPokedexText[] = _(
 const u8 gKoffingPokedexTextUnused[] = _("");
 
 const u8 gWeezingPokedexText[] = _(
-    "Very rarely, a sudden mutation can result\n"
-    "in two small KOFFING twins becoming\n"
-    "conjoined as a WEEZING.");
+        "Very rarely, a sudden mutation can\n"
+        "result in two small FUMES twins\n"
+        "becoming conjoined as a SMOGSTACK.");
 
 const u8 gWeezingPokedexTextUnused[] = _("");
 
 const u8 gRhyhornPokedexText[] = _(
-        "Strong, but not too bright, this DAEMON\n"
-        "can shatter even a skyscraper with its\n"
-        "charging TACKLES.");
+        "Strong, but not too bright, this\n"
+        "DAEMON can shatter even a\n"
+        "skyscraper with its charging WRITE.");
 
 const u8 gRhyhornPokedexTextUnused[] = _("");
 
@@ -895,9 +895,9 @@ const u8 gPinsirPokedexText[] = _(
 const u8 gPinsirPokedexTextUnused[] = _("");
 
 const u8 gTaurosPokedexText[] = _(
-    "When it is about to TACKLE, it whips\n"
-    "its body repeatedly with its three\n"
-    "long tails.");
+        "When it is about to WRITE,\n"
+        "it whips its body repeatedly\n"
+        "with its three long tails.");
 
 const u8 gTaurosPokedexTextUnused[] = _("");
 
@@ -1460,9 +1460,9 @@ const u8 gGligarPokedexText[] = _(
 const u8 gGligarPokedexTextUnused[] = _("");
 
 const u8 gSteelixPokedexText[] = _(
-    "It is said that if an ONIX lives for over\n"
-    "100 years, its composition changes to\n"
-    "become diamond-like.");
+        "It is said that if an BACKBONE lives\n"
+        "for over 100 years, its composition\n"
+        "changes to become diamond-like.");
 
 const u8 gSteelixPokedexTextUnused[] = _("");
 
@@ -1474,9 +1474,9 @@ const u8 gSnubbullPokedexText[] = _(
 const u8 gSnubbullPokedexTextUnused[] = _("");
 
 const u8 gGranbullPokedexText[] = _(
-    "Because its fangs are too heavy, it\n"
-    "always keeps its head tilted down.\n"
-    "However, its BITE is powerful.");
+        "Because its fangs are too heavy, it\n"
+        "always keeps its head tilted down.\n"
+        "However, its OCCLUDE is powerful.");
 
 const u8 gGranbullPokedexTextUnused[] = _("");
 

@@ -532,7 +532,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_C_HIGH_NOTE_MAT
     }, {
         DECOR_SURF_MAT,
-        _("SURF MAT"),
+        _("TRAVERSE MAT"),
         DECORPERM_PASS_FLOOR,
         DECORSHAPE_3x3,
         DECORCAT_MAT,
@@ -541,7 +541,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_SURF_MAT
     }, {
         DECOR_THUNDER_MAT,
-        _("THUNDER MAT"),
+        _("TRANSIENT MAT"),
         DECORPERM_PASS_FLOOR,
         DECORSHAPE_3x3,
         DECORCAT_MAT,
@@ -550,7 +550,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_THUNDER_MAT
     }, {
         DECOR_FIRE_BLAST_MAT,
-        _("FIRE BLAST MAT"),
+        _("FLASHOVER MAT"),
         DECORPERM_PASS_FLOOR,
         DECORSHAPE_3x3,
         DECORCAT_MAT,
@@ -559,7 +559,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_FIRE_BLAST_MAT
     }, {
         DECOR_POWDER_SNOW_MAT,
-        _("POWDER SNOW MAT"),
+        _("STALE MAT"),
         DECORPERM_PASS_FLOOR,
         DECORSHAPE_3x3,
         DECORCAT_MAT,
@@ -568,7 +568,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_POWDER_SNOW_MAT
     }, {
         DECOR_ATTRACT_MAT,
-        _("ATTRACT MAT"),
+        _("PAIR MAT"),
         DECORPERM_PASS_FLOOR,
         DECORSHAPE_3x3,
         DECORCAT_MAT,
@@ -586,7 +586,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_FISSURE_MAT
     }, {
         DECOR_SPIKES_MAT,
-        _("SPIKES MAT"),
+        _("TRIPWIRE MAT"),
         DECORPERM_PASS_FLOOR,
         DECORSHAPE_3x3,
         DECORCAT_MAT,
@@ -757,7 +757,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_JIGGLYPUFF_DOLL
     }, {
         DECOR_MEOWTH_DOLL,
-        _("MEOWTH DOLL"),
+        _("COOKIE DOLL"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x1,
         DECORCAT_DOLL,
@@ -1009,7 +1009,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_SNORLAX_DOLL
     }, {
         DECOR_RHYDON_DOLL,
-        _("RHYDON DOLL"),
+        _("BULLDOZER DOLL"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x2,
         DECORCAT_DOLL,
@@ -1018,7 +1018,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_RHYDON_DOLL
     }, {
         DECOR_LAPRAS_DOLL,
-        _("LAPRAS DOLL"),
+        _("FERRY DOLL"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x2,
         DECORCAT_DOLL,

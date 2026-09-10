@@ -98,8 +98,8 @@ PalletTown_ProfessorOaksLab_Text_OakChoosingSquirtle::
     .string "what belongs together.$"
 
 PalletTown_ProfessorOaksLab_Text_OakChoosingBulbasaur::
-    .string "The GROWTH one, ROVERCUB? It does\n"
-    .string "not stay this size.$"
+    .string "The SCALE UP one, ROVERCUB? It\n"
+    .string "does not stay this size.$"
 
 PalletTown_ProfessorOaksLab_Text_OakThisMonIsEnergetic::
     .string "That one runs hot. You will not\n"

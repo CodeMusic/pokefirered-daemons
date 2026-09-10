@@ -271,18 +271,18 @@ const u8 DecorDesc_C_HIGH_NOTE_MAT[] = _(
         "stepped on.");
 
 const u8 DecorDesc_SURF_MAT[] = _(
-    "A mat designed with\n"
-        "a SURF image.\n"
+        "A mat designed with\n"
+        "a TRAVERSE image.\n"
         "Put items on top.");
 
 const u8 DecorDesc_THUNDER_MAT[] = _(
-    "A mat designed with\n"
-        "a THUNDER image.\n"
+        "A mat designed with\n"
+        "a TRANSIENT image.\n"
         "Put items on top.");
 
 const u8 DecorDesc_FIRE_BLAST_MAT[] = _(
-    "A mat designed with\n"
-        "a FIRE BLAST image.\n"
+        "A mat designed with\n"
+        "a FLASHOVER image.\n"
         "Put items on top.");
 
 const u8 DecorDesc_POWDER_SNOW_MAT[] = _(
@@ -291,9 +291,9 @@ const u8 DecorDesc_POWDER_SNOW_MAT[] = _(
         "Put items on top.");
 
 const u8 DecorDesc_ATTRACT_MAT[] = _(
-    "A mat designed with\n"
-        "an ATTRACT image.\n"
-        "Put items on top.");
+        "A mat designed with\n"
+        "an PAIR image. Put\n"
+        "items on top.");
 
 const u8 DecorDesc_FISSURE_MAT[] = _(
     "A mat designed with\n"
@@ -301,8 +301,8 @@ const u8 DecorDesc_FISSURE_MAT[] = _(
         "Put items on top.");
 
 const u8 DecorDesc_SPIKES_MAT[] = _(
-    "A mat designed with\n"
-        "a SPIKES image.\n"
+        "A mat designed with\n"
+        "a TRIPWIRE image.\n"
         "Put items on top.");
 
 const u8 DecorDesc_BALL_POSTER[] = _(
@@ -388,9 +388,9 @@ const u8 DecorDesc_JIGGLYPUFF_DOLL[] = _(
         "or a desk.");
 
 const u8 DecorDesc_MEOWTH_DOLL[] = _(
-    "A MEOWTH doll.\n"
-        "Place it on a mat\n"
-        "or a desk.");
+        "A COOKIE doll.\n"
+        "Place it on a\n"
+        "mat or a desk.");
 
 const u8 DecorDesc_CLEFAIRY_DOLL[] = _(
         "A ANOMALY doll.\n"

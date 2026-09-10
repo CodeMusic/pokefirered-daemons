@@ -6,8 +6,8 @@ RockTunnel_1F_Text_LennyDefeat::
     .string "You win!$"
 
 RockTunnel_1F_Text_LennyPostBattle::
-    .string "Watch for ONIX.\n"
-    .string "They appear only occasionally.\p"
+    .string "Watch for BACKBONE. They appear\n"
+    .string "only occasionally.\p"
     .string "High-level ones can put the\n"
     .string "squeeze on you!$"
 
@@ -52,7 +52,7 @@ RockTunnel_1F_Text_LeahDefeat::
     .string "It was too dark…$"
 
 RockTunnel_1F_Text_LeahPostBattle::
-    .string "I saw a MACHOP in this tunnel.$"
+    .string "I saw a PROOF in this tunnel.$"
 
 RockTunnel_1F_Text_DanaIntro::
     .string "I came this far looking for wild\n"

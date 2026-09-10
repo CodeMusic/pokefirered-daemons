@@ -9,7 +9,7 @@ LavenderTown_VolunteerPokemonHouse_Text_WhereDidMrFujiGo::
 
 LavenderTown_VolunteerPokemonHouse_Text_MrFujiWasPrayingForCubonesMother::
     .string "INIT had been praying alone for\n"
-    .string "CUBONE's mother.$"
+    .string "RELIC's mother.$"
 
 LavenderTown_VolunteerPokemonHouse_Text_MrFujiLooksAfterOrphanedMons::
     .string "This is really INIT's house.\p"

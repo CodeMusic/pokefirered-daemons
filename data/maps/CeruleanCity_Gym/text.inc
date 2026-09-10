@@ -8,7 +8,7 @@ CeruleanCity_Gym_Text_MistyIntro::
     .string "with water-type DAEMON!$"
 
 CeruleanCity_Gym_Text_ExplainTM03::
-    .string "TM03 teaches WATER PULSE.\p"
+    .string "TM03 teaches RIPPLE.\p"
     .string "Use it on an aquatic DAEMON!$"
 
 CeruleanCity_Gym_Text_ExplainCascadeBadge::
