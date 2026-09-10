@@ -106,11 +106,11 @@ FiveIsland_RocketWarehouse_Text_ReportWithGraphsAndText::
 
 FiveIsland_RocketWarehouse_Text_GideonIntro::
     .string "I almost managed to sell the\n"
-    .string "SAPPHIRE for huge money…\p"
+    .string "PRIVATE KEY for huge money…\p"
     .string "Then, you just had to come along\n"
     .string "and blow the whole deal apart!\p"
-    .string "Fufu… Fufufufu…\n"
-    .string "There's no forgiveness for you!$"
+    .string "Fufu… Fufufufu… There's no\n"
+    .string "forgiveness for you!$"
 
 FiveIsland_RocketWarehouse_Text_GideonDefeat::
     .string "Gah! Darn!\n"

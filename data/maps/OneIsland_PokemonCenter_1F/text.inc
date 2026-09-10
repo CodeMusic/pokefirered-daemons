@@ -195,8 +195,8 @@ OneIsland_PokemonCenter_1F_Text_OhThats::
     .string "Th-that's…$"
 
 OneIsland_PokemonCenter_1F_Text_HandedRubyToCelio::
-    .string "{PLAYER} handed the RUBY\n"
-    .string "to CELIO.$"
+    .string "{PLAYER} handed the PUBLIC KEY to\n"
+    .string "CELIO.$"
 
 OneIsland_PokemonCenter_1F_Text_MayIAskOneMoreFavor::
     .string "Thank you!\n"
@@ -213,7 +213,7 @@ OneIsland_PokemonCenter_1F_Text_AnotherGemstoneInSeviiIslands::
     .string "While I was studying gemstones, I\n"
     .string "discovered something important.\p"
     .string "There is another gem that forms a\n"
-    .string "pair with this RUBY.\p"
+    .string "pair with this PUBLIC KEY.\p"
     .string "That other gemstone is supposed to\n"
     .string "be in the SEVII ISLANDS.\p"
     .string "{PLAYER}, please, I need you to go\n"
@@ -237,12 +237,12 @@ OneIsland_PokemonCenter_1F_Text_PassLetYouGetToAllIslands::
     .string "it without your help.$"
 
 OneIsland_PokemonCenter_1F_Text_HandedSapphireToCelio::
-    .string "{PLAYER} handed the SAPPHIRE\n"
-    .string "to CELIO.$"
+    .string "{PLAYER} handed the PRIVATE KEY to\n"
+    .string "CELIO.$"
 
 OneIsland_PokemonCenter_1F_Text_ThankYouGiveMeTime::
     .string "CELIO: So this is the gem that\n"
-    .string "forms a pair with the RUBY…\p"
+    .string "forms a pair with the PUBLIC KEY…\p"
     .string "{PLAYER}, you've gone through a lot\n"
     .string "to get this, didn't you?\p"
     .string "You don't have to tell me. I know\n"

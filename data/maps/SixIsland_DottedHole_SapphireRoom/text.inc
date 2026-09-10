@@ -1,5 +1,5 @@
 SixIsland_DottedHole_SapphireRoom_Text_FoundSapphire::
-    .string "{PLAYER} found a SAPPHIRE!$"
+    .string "{PLAYER} found a PRIVATE KEY!$"
 
 SixIsland_DottedHole_SapphireRoom_Text_IWasRightInTailingYou::
     .string "So you found it too.\p"
