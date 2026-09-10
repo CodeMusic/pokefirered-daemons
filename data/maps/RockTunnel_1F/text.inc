@@ -35,7 +35,7 @@ RockTunnel_1F_Text_LucasPostBattle::
     .string "You're talented enough to hike!$"
 
 RockTunnel_1F_Text_AshtonIntro::
-    .string "DAEMON fight! Ready, go!$"
+    .string "Engage! Ready, go!$"
 
 RockTunnel_1F_Text_AshtonDefeat::
     .string "Game over!$"

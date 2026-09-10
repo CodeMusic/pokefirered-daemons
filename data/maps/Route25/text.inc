@@ -90,7 +90,7 @@ Route25_Text_NobPostBattle::
 
 Route25_Text_WayneIntro::
     .string "You're going to see HOLT? First,\n"
-    .string "let's fight!$"
+    .string "let's engage!$"
 
 Route25_Text_WayneDefeat::
     .string "You're something.$"

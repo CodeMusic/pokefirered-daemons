@@ -372,7 +372,7 @@ gFameCheckerFlavorText_Bruno0:: @ 0x81AEF25
 gFameCheckerFlavorText_Bruno1:: @ 0x81AEF6C
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of DAEMON?\p"
 	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}I've lived and trained with my\n"
-	.string "fighting DAEMON!$"
+	.string "LOGIC daemons!$"
 
 gFameCheckerFlavorText_Bruno2:: @ 0x81AEFC6	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
 	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}CHOLERIC apparently joined the\n"

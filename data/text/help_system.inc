@@ -405,13 +405,13 @@ Help_Text_AnswerWhatAreHiddenMoves::
 	.string "HIDDEN move outside of battle.$"
 
 Help_Text_AnswerWhatMovesShouldIUse::
-	.string "Select “FIGHT,” and the MENU of moves\n"
-	.string "will appear. Consider the type\l"
-	.string "matchups, and use the most effective\l"
-	.string "moves. You can check the effects of\l"
-	.string "moves by opening “DAEMON,” picking a\l"
-	.string "DAEMON, opening “SUMMARY,” then\l"
-	.string "opening “DAEMON SKILLS.”$"
+	.string "Select “INVOKE,” and the MENU of\n"
+	.string "routines will appear. Consider the\l"
+	.string "type matchups, and use the most\l"
+	.string "effective ones. You can check the\l"
+	.string "effects of a routine by opening\l"
+	.string "“DAEMON,” picking one, opening\l"
+	.string "“SUMMARY,” then “DAEMON SKILLS.”$"
 
 Help_Text_AnswerWantToAddMoreMoves::
 	.string "The most a DAEMON can learn is four\n"
@@ -615,7 +615,7 @@ Help_Text_OpeningMenu::
 	.string "Opening the MENU$"
 
 Help_Text_UsingFight::
-	.string " Using “FIGHT”$"
+	.string " Using “INVOKE”$"
 
 Help_Text_UsingPokemon2::
 	.string " Using “DAEMON”$"
@@ -927,7 +927,7 @@ Help_Text_HowToOpenMenu::
 	.string "something, battling, etc.$"
 
 Help_Text_HowToUseFight::
-	.string "{CIRCLE_1} Select “FIGHT.”\n"
+	.string "{CIRCLE_1} Select “INVOKE.”\n"
 	.string "{CIRCLE_2} Select one of the moves shown,\n"
 	.string "and that move will be used!$"
 
@@ -1214,9 +1214,9 @@ Help_Text_DefineAttack::
 	.string "offensive move. The higher this stat,\l"
 	.string "the more powerful the move.\l"
 	.string "It is applied for the following move\l"
-	.string "types: NORMAL, POISON, GROUND,\l"
-	.string "FLYING, BUG, FIGHTING, ROCK, GHOST,\l"
-	.string "and STEEL.$"
+	.string "types: CONTENT, CORRUPT, STRATUM,\l"
+	.string "VECTOR, SWARM, LOGIC, LEGACY,\l"
+	.string "LATENT and HARDENED.$"
 
 Help_Text_DefineDefense::
 	.string "DEFENSE indicates the resistance a\n"
@@ -1229,9 +1229,9 @@ Help_Text_DefineSpAtk::
 	.string "power of a special attack move. The\l"
 	.string "higher this stat, the more powerful the\l"
 	.string "special attack move. It is applied for\l"
-	.string "the following move types: FIRE, WATER,\l"
-	.string "ELECTRIC, GRASS, ICE, CONSTRUE,\l"
-	.string "DRAGON, and DARK.$"
+	.string "the following move types: ENTROPY,\l"
+	.string "FLOW, SIGNAL, GROWTH, FROZEN,\l"
+	.string "CONTEXT, EMERGENT and OPAQUE.$"
 
 Help_Text_DefineSpDef::
 	.string "SP. DEF (Special Defense) indicates the\n"
@@ -1565,106 +1565,106 @@ Help_Text_UsingTypeMatchupList::
 	.string "Using the Type Matchup List$"
 
 Help_Text_OwnMoveDark::
-	.string "Own move type: DARK$"
+	.string "Own move type: OPAQUE$"
 
 Help_Text_OwnPokemonDark::
-	.string "Own DAEMON type: DARK$"
+	.string "Own DAEMON type: OPAQUE$"
 
 Help_Text_OwnMoveRock::
-	.string "Own move type: ROCK$"
+	.string "Own move type: LEGACY$"
 
 Help_Text_OwnPokemonRock::
-	.string "Own DAEMON type: ROCK$"
+	.string "Own DAEMON type: LEGACY$"
 
 Help_Text_OwnMovePsychic::
-	.string "Own move type: CONSTRUE$"
+	.string "Own move type: CONTEXT$"
 
 Help_Text_OwnPokemonPsychic::
-	.string "Own DAEMON type: CONSTRUE$"
+	.string "Own DAEMON type: CONTEXT$"
 
 Help_Text_OwnMoveFighting::
-	.string "Own move type: FIGHTING$"
+	.string "Own move type: LOGIC$"
 
 Help_Text_OwnPokemonFighting::
-	.string "Own DAEMON type: FIGHTING$"
+	.string "Own DAEMON type: LOGIC$"
 
 Help_Text_OwnMoveGrass::
-	.string "Own move type: GRASS$"
+	.string "Own move type: GROWTH$"
 
 Help_Text_OwnPokemonGrass::
-	.string "Own DAEMON type: GRASS$"
+	.string "Own DAEMON type: GROWTH$"
 
 Help_Text_OwnMoveGhost::
-	.string "Own move type: GHOST$"
+	.string "Own move type: LATENT$"
 
 Help_Text_OwnPokemonGhost::
-	.string "Own DAEMON type: GHOST$"
+	.string "Own DAEMON type: LATENT$"
 
 Help_Text_OwnMoveIce::
-	.string "Own move type: ICE$"
+	.string "Own move type: FROZEN$"
 
 Help_Text_OwnPokemonIce::
-	.string "Own DAEMON type: ICE$"
+	.string "Own DAEMON type: FROZEN$"
 
 Help_Text_OwnMoveGround::
-	.string "Own move type: GROUND$"
+	.string "Own move type: STRATUM$"
 
 Help_Text_OwnPokemonGround::
-	.string "Own DAEMON type: GROUND$"
+	.string "Own DAEMON type: STRATUM$"
 
 Help_Text_OwnMoveElectric::
-	.string "Own move type: ELECTRIC$"
+	.string "Own move type: SIGNAL$"
 
 Help_Text_OwnPokemonElectric::
-	.string "Own DAEMON type: ELECTRIC$"
+	.string "Own DAEMON type: SIGNAL$"
 
 Help_Text_OwnMovePoison::
-	.string "Own move type: POISON$"
+	.string "Own move type: CORRUPT$"
 
 Help_Text_OwnPokemonPoison::
-	.string "Own DAEMON type: POISON$"
+	.string "Own DAEMON type: CORRUPT$"
 
 Help_Text_OwnMoveDragon::
-	.string "Own move type: DRAGON$"
+	.string "Own move type: EMERGENT$"
 
 Help_Text_OwnPokemonDragon::
-	.string "Own DAEMON type: DRAGON$"
+	.string "Own DAEMON type: EMERGENT$"
 
 Help_Text_OwnMoveNormal::
-	.string "Own move type: NORMAL$"
+	.string "Own move type: CONTENT$"
 
 Help_Text_OwnPokemonNormal::
-	.string "Own DAEMON type: NORMAL$"
+	.string "Own DAEMON type: CONTENT$"
 
 Help_Text_OwnMoveSteel::
-	.string "Own move type: STEEL$"
+	.string "Own move type: HARDENED$"
 
 Help_Text_OwnPokemonSteel::
-	.string "Own DAEMON type: STEEL$"
+	.string "Own DAEMON type: HARDENED$"
 
 Help_Text_OwnMoveFlying::
-	.string "Own move type: FLYING$"
+	.string "Own move type: VECTOR$"
 
 Help_Text_OwnPokemonFlying::
-	.string "Own DAEMON type: FLYING$"
+	.string "Own DAEMON type: VECTOR$"
 
 Help_Text_OwnMoveFire::
-	.string "Own move type: FIRE$"
+	.string "Own move type: ENTROPY$"
 
 Help_Text_OwnPokemonFire::
-	.string "Own DAEMON type: FIRE$"
+	.string "Own DAEMON type: ENTROPY$"
 
 Help_Text_OwnMoveWater::
-	.string "Own move type: WATER$"
+	.string "Own move type: FLOW$"
 
 Help_Text_OwnPokemonWater::
-	.string "Own DAEMON type: WATER$"
+	.string "Own DAEMON type: FLOW$"
 
 Help_Text_OwnMoveBug::
-	.string "Own move type: BUG$"
+	.string "Own move type: SWARM$"
 
 Help_Text_OwnPokemonBug::
-	.string "Own DAEMON type: BUG$"
+	.string "Own DAEMON type: SWARM$"
 
 Help_Text_HowToUseTypeMatchupList::
 	.string "Depending on the matchup of the move\n"
@@ -1676,188 +1676,204 @@ Help_Text_HowToUseTypeMatchupList::
 
 Help_Text_TypeMatchupOwnMoveDark::
 	.string "Effect on the opposing DAEMON:\p"
-	.string "   {CIRCLE_DOT}: CONSTRUE, GHOST\p"
-	.string "   {TRIANGLE}: FIGHTING, DARK, STEEL$"
+	.string "   {CIRCLE_DOT}: CONTEXT, LATENT\p"
+	.string "   {TRIANGLE}: LOGIC, OPAQUE, HARDENED$"
 
 Help_Text_TypeMatchupOwnPokemonDark::
 	.string "Effect of foe's move on own DAEMON:\p"
-	.string "   {CIRCLE_DOT}: FIGHTING, BUG\p"
-	.string "   {TRIANGLE}: GHOST, DARK\p"
-	.string "   {BIG_MULT_X}: CONSTRUE$"
+	.string "   {CIRCLE_DOT}: LOGIC, SWARM\p"
+	.string "   {TRIANGLE}: LATENT, OPAQUE\p"
+	.string "   {BIG_MULT_X}: CONTEXT$"
 
 Help_Text_TypeMatchupOwnMoveRock::
 	.string "Effect on the opposing DAEMON:\p"
-	.string "   {CIRCLE_DOT}: FIRE, ICE, FLYING, BUG\p"
-	.string "   {TRIANGLE}: FIGHTING, GROUND, STEEL$"
+	.string "   {CIRCLE_DOT}: ENTROPY, FROZEN, VECTOR, SWARM\p"
+	.string "   {TRIANGLE}: LOGIC, STRATUM, HARDENED$"
 
 Help_Text_TypeMatchupOwnPokemonRock::
 	.string "Effect of foe's move on own DAEMON:\p"
-	.string "   {CIRCLE_DOT}: WATER, GRASS, FIGHTING,\n"
-	.string "       GROUND, STEEL\p"
-	.string "   {TRIANGLE}: NORMAL, FIRE, POISON, FLYING$"
+	.string "   {CIRCLE_DOT}: FLOW, GROWTH, LOGIC,\n"
+	.string "       STRATUM, HARDENED\p"
+	.string "   {TRIANGLE}: CONTENT, ENTROPY, CORRUPT,\n"
+	.string "       VECTOR$"
 
 Help_Text_TypeMatchupOwnMovePsychic::
 	.string "Effect on the opposing DAEMON:\p"
-	.string "   {CIRCLE_DOT}: FIGHTING, POISON\p"
-	.string "   {TRIANGLE}: CONSTRUE, STEEL\p"
-	.string "   {BIG_MULT_X}: DARK$"
+	.string "   {CIRCLE_DOT}: LOGIC, CORRUPT\p"
+	.string "   {TRIANGLE}: CONTEXT, HARDENED\p"
+	.string "   {BIG_MULT_X}: OPAQUE$"
 
 Help_Text_TypeMatchupOwnPokemonPsychic::
 	.string "Effect of foe's move on own DAEMON:\p"
-	.string "   {CIRCLE_DOT}: BUG, GHOST, DARK\p"
-	.string "   {TRIANGLE}: FIGHTING, CONSTRUE$"
+	.string "   {CIRCLE_DOT}: SWARM, LATENT, OPAQUE\p"
+	.string "   {TRIANGLE}: LOGIC, CONTEXT$"
 
 Help_Text_TypeMatchupOwnMoveFighting::
 	.string "Effect on the opposing DAEMON:\p"
-	.string "   {CIRCLE_DOT}: NORMAL, ICE, ROCK, DARK, STEEL\p"
-	.string "   {TRIANGLE}: POISON, FLYING, CONSTRUE, BUG\p"
-	.string "   {BIG_MULT_X}: GHOST$"
+	.string "   {CIRCLE_DOT}: CONTENT, FROZEN, LEGACY,\n"
+	.string "       OPAQUE, HARDENED\p"
+	.string "   {TRIANGLE}: CORRUPT, VECTOR, CONTEXT,\n"
+	.string "       SWARM\p"
+	.string "   {BIG_MULT_X}: LATENT$"
 
 Help_Text_TypeMatchupOwnPokemonFighting::
 	.string "Effect of foe's move on own DAEMON:\p"
-	.string "   {CIRCLE_DOT}: FLYING, CONSTRUE\p"
-	.string "   {TRIANGLE}: BUG, ROCK, DARK$"
+	.string "   {CIRCLE_DOT}: VECTOR, CONTEXT\p"
+	.string "   {TRIANGLE}: SWARM, LEGACY, OPAQUE$"
 
 Help_Text_TypeMatchupOwnMoveGrass::
 	.string "Effect on the opposing DAEMON:\p"
-	.string "   {CIRCLE_DOT}: WATER, GROUND, ROCK\p"
-	.string "   {TRIANGLE}: FIRE, GRASS, POISON, FLYING,\n"
-	.string "       BUG, DRAGON, STEEL$"
+	.string "   {CIRCLE_DOT}: FLOW, STRATUM, LEGACY\p"
+	.string "   {TRIANGLE}: ENTROPY, GROWTH, CORRUPT,\n"
+	.string "       VECTOR, \n"
+	.string "       SWARM, EMERGENT, HARDENED$"
 
 Help_Text_TypeMatchupOwnPokemonGrass::
 	.string "Effect of foe's move on own DAEMON:\p"
-	.string "   {CIRCLE_DOT}: FIRE, ICE, POISON, FLYING, BUG\p"
-	.string "   {TRIANGLE}: WATER, ELECTRIC, GRASS, GROUND$"
+	.string "   {CIRCLE_DOT}: ENTROPY, FROZEN, CORRUPT,\n"
+	.string "       VECTOR, SWARM\p"
+	.string "   {TRIANGLE}: FLOW, SIGNAL, GROWTH, STRATUM$"
 
 Help_Text_TypeMatchupOwnMoveGhost::
 	.string "Effect on the opposing DAEMON:\p"
-	.string "   {CIRCLE_DOT}: CONSTRUE, GHOST\p"
-	.string "   {TRIANGLE}: DARK, STEEL\p"
-	.string "   {BIG_MULT_X}: NORMAL$"
+	.string "   {CIRCLE_DOT}: CONTEXT, LATENT\p"
+	.string "   {TRIANGLE}: OPAQUE, HARDENED\p"
+	.string "   {BIG_MULT_X}: CONTENT$"
 
 Help_Text_TypeMatchupOwnPokemonGhost::
 	.string "Effect of foe's move on own DAEMON:\p"
-	.string "   {CIRCLE_DOT}: GHOST, DARK\p"
-	.string "   {TRIANGLE}: POISON, BUG\p"
-	.string "   {BIG_MULT_X}: NORMAL, FIGHTING$"
+	.string "   {CIRCLE_DOT}: LATENT, OPAQUE\p"
+	.string "   {TRIANGLE}: CORRUPT, SWARM\p"
+	.string "   {BIG_MULT_X}: CONTENT, LOGIC$"
 
 Help_Text_TypeMatchupOwnMoveIce::
 	.string "Effect on the opposing DAEMON:\p"
-	.string "   {CIRCLE_DOT}: GRASS, GROUND, FLYING, DRAGON\p"
-	.string "   {TRIANGLE}: FIRE, WATER, ICE, STEEL$"
+	.string "   {CIRCLE_DOT}: GROWTH, STRATUM, VECTOR,\n"
+	.string "       EMERGENT\p"
+	.string "   {TRIANGLE}: ENTROPY, FLOW, FROZEN,\n"
+	.string "       HARDENED$"
 
 Help_Text_TypeMatchupOwnPokemonIce::
 	.string "Effect of foe's move on own DAEMON:\p"
-	.string "   {CIRCLE_DOT}: FIRE, FIGHTING, ROCK, STEEL\p"
-	.string "   {TRIANGLE}: ICE$"
+	.string "   {CIRCLE_DOT}: ENTROPY, LOGIC, LEGACY,\n"
+	.string "       HARDENED\p"
+	.string "   {TRIANGLE}: FROZEN$"
 
 Help_Text_TypeMatchupOwnMoveGround::
 	.string "Effect on the opposing DAEMON:\p"
-	.string "   {CIRCLE_DOT}: FIRE, ELECTRIC, POISON, ROCK,\n"
-	.string "       STEEL\p"
-	.string "   {TRIANGLE}: GRASS, BUG\n"
-	.string "   {BIG_MULT_X}: FLYING$"
+	.string "   {CIRCLE_DOT}: ENTROPY, SIGNAL, CORRUPT,\n"
+	.string "       LEGACY, \n"
+	.string "       HARDENED\p"
+	.string "   {TRIANGLE}: GROWTH, SWARM\n"
+	.string "   {BIG_MULT_X}: VECTOR$"
 
 Help_Text_TypeMatchupOwnPokemonGround::
 	.string "Effect of foe's move on own DAEMON:\p"
-	.string "   {CIRCLE_DOT}: WATER, GRASS, ICE\p"
-	.string "   {TRIANGLE}: POISON, ROCK\p"
-	.string "   {BIG_MULT_X}: ELECTRIC$"
+	.string "   {CIRCLE_DOT}: FLOW, GROWTH, FROZEN\p"
+	.string "   {TRIANGLE}: CORRUPT, LEGACY\p"
+	.string "   {BIG_MULT_X}: SIGNAL$"
 
 Help_Text_TypeMatchupOwnMoveElectric::
 	.string "Effect on the opposing DAEMON:\p"
-	.string "   {CIRCLE_DOT}: WATER, FLYING\p"
-	.string "   {TRIANGLE}: ELECTRIC, GRASS, DRAGON\p"
-	.string "   {BIG_MULT_X}: GROUND$"
+	.string "   {CIRCLE_DOT}: FLOW, VECTOR\p"
+	.string "   {TRIANGLE}: SIGNAL, GROWTH, EMERGENT\p"
+	.string "   {BIG_MULT_X}: STRATUM$"
 
 Help_Text_TypeMatchupOwnPokemonElectric::
 	.string "Effect of foe's move on own DAEMON:\p"
-	.string "   {CIRCLE_DOT}: GROUND\p"
-	.string "   {TRIANGLE}: ELECTRIC, FLYING, STEEL$"
+	.string "   {CIRCLE_DOT}: STRATUM\p"
+	.string "   {TRIANGLE}: SIGNAL, VECTOR, HARDENED$"
 
 Help_Text_TypeMatchupOwnMovePoison::
 	.string "Effect on the opposing DAEMON:\p"
-	.string "   {CIRCLE_DOT}: GRASS\p"
-	.string "   {TRIANGLE}: POISON, GROUND, ROCK, GHOST\p"
-	.string "   {BIG_MULT_X}: STEEL$"
+	.string "   {CIRCLE_DOT}: GROWTH\p"
+	.string "   {TRIANGLE}: CORRUPT, STRATUM, LEGACY,\n"
+	.string "       LATENT\p"
+	.string "   {BIG_MULT_X}: HARDENED$"
 
 Help_Text_TypeMatchupOwnPokemonPoison::
 	.string "Effect of foe's move on own DAEMON:\p"
-	.string "   {CIRCLE_DOT}: GROUND, CONSTRUE\p"
-	.string "   {TRIANGLE}: GRASS, FIGHTING, POISON, BUG$"
+	.string "   {CIRCLE_DOT}: STRATUM, CONTEXT\p"
+	.string "   {TRIANGLE}: GROWTH, LOGIC, CORRUPT, SWARM$"
 
 Help_Text_TypeMatchupOwnMoveDragon::
 	.string "Effect on the opposing DAEMON:\p"
-	.string "   {CIRCLE_DOT}: DRAGON\p"
-	.string "   {TRIANGLE}: STEEL$"
+	.string "   {CIRCLE_DOT}: EMERGENT\p"
+	.string "   {TRIANGLE}: HARDENED$"
 
 Help_Text_TypeMatchupOwnPokemonDragon::
 	.string "Effect of foe's move on own DAEMON:\p"
-	.string "   {CIRCLE_DOT}: ICE, DRAGON\p"
-	.string "   {TRIANGLE}: FIRE, WATER, ELECTRIC, GRASS$"
+	.string "   {CIRCLE_DOT}: FROZEN, EMERGENT\p"
+	.string "   {TRIANGLE}: ENTROPY, FLOW, SIGNAL, GROWTH$"
 
 Help_Text_TypeMatchupOwnMoveNormal::
 	.string "Effect on the opposing DAEMON:\p"
-	.string "   {TRIANGLE}: ROCK, STEEL\p"
-	.string "   {BIG_MULT_X}: GHOST$"
+	.string "   {TRIANGLE}: LEGACY, HARDENED\p"
+	.string "   {BIG_MULT_X}: LATENT$"
 
 Help_Text_TypeMatchupOwnPokemonNormal::
 	.string "Effect of foe's move on own DAEMON:\p"
-	.string "   {CIRCLE_DOT}: FIGHTING\p"
-	.string "   {BIG_MULT_X}: GHOST$"
+	.string "   {CIRCLE_DOT}: LOGIC\p"
+	.string "   {BIG_MULT_X}: LATENT$"
 
 Help_Text_TypeMatchupOwnMoveSteel::
 	.string "Effect on the opposing DAEMON:\p"
-	.string "   {CIRCLE_DOT}: ICE, ROCK\p"
-	.string "   {TRIANGLE}: FIRE, WATER, ELECTRIC, STEEL$"
+	.string "   {CIRCLE_DOT}: FROZEN, LEGACY\p"
+	.string "   {TRIANGLE}: ENTROPY, FLOW, SIGNAL,\n"
+	.string "       HARDENED$"
 
 Help_Text_TypeMatchupOwnPokemonSteel::
 	.string "Effect of foe's move on own DAEMON:\p"
-	.string "   {CIRCLE_DOT}: FIRE, FIGHTING, GROUND\n"
-	.string "   {TRIANGLE}: NORMAL, GRASS, ICE, FLYING,\l"
-	.string "       CONSTRUE, BUG, ROCK, GHOST,\l"
-	.string "       DRAGON, DARK, STEEL\l"
-	.string "   {BIG_MULT_X}: POISON$"
+	.string "   {CIRCLE_DOT}: ENTROPY, LOGIC, STRATUM\n"
+	.string "   {TRIANGLE}: CONTENT, GROWTH, FROZEN,\n"
+	.string "       VECTOR, \l"
+	.string "       CONTEXT, SWARM, LEGACY, LATENT,\l"
+	.string "       EMERGENT, OPAQUE, HARDENED\l"
+	.string "   {BIG_MULT_X}: CORRUPT$"
 
 Help_Text_TypeMatchupOwnMoveFlying::
 	.string "Effect on the opposing DAEMON:\p"
-	.string "   {CIRCLE_DOT}: GRASS, FIGHTING, BUG\p"
-	.string "   {TRIANGLE}: ELECTRIC, ROCK, STEEL$"
+	.string "   {CIRCLE_DOT}: GROWTH, LOGIC, SWARM\p"
+	.string "   {TRIANGLE}: SIGNAL, LEGACY, HARDENED$"
 
 Help_Text_TypeMatchupOwnPokemonFlying::
 	.string "Effect of foe's move on own DAEMON:\p"
-	.string "   {CIRCLE_DOT}: ELECTRIC, ICE, ROCK\p"
-	.string "   {TRIANGLE}: GRASS, FIGHTING, BUG\p"
-	.string "   {BIG_MULT_X}: GROUND$"
+	.string "   {CIRCLE_DOT}: SIGNAL, FROZEN, LEGACY\p"
+	.string "   {TRIANGLE}: GROWTH, LOGIC, SWARM\p"
+	.string "   {BIG_MULT_X}: STRATUM$"
 
 Help_Text_TypeMatchupOwnMoveFire::
 	.string "Effect on the opposing DAEMON:\p"
-	.string "   {CIRCLE_DOT}: GRASS, ICE, BUG, STEEL\p"
-	.string "   {TRIANGLE}: FIRE, WATER, ROCK, DRAGON$"
+	.string "   {CIRCLE_DOT}: GROWTH, FROZEN, SWARM,\n"
+	.string "       HARDENED\p"
+	.string "   {TRIANGLE}: ENTROPY, FLOW, LEGACY,\n"
+	.string "       EMERGENT$"
 
 Help_Text_TypeMatchupOwnPokemonFire::
 	.string "Effect of foe's move on own DAEMON:\p"
-	.string "   {CIRCLE_DOT}: WATER, GROUND, ROCK\p"
-	.string "   {TRIANGLE}: FIRE, GRASS, ICE, BUG, STEEL$"
+	.string "   {CIRCLE_DOT}: FLOW, STRATUM, LEGACY\p"
+	.string "   {TRIANGLE}: ENTROPY, GROWTH, FROZEN,\n"
+	.string "       SWARM, HARDENED$"
 
 Help_Text_TypeMatchupOwnMoveWater::
 	.string "Effect on the opposing DAEMON:\p"
-	.string "   {CIRCLE_DOT}: FIRE, GROUND, ROCK\p"
-	.string "   {TRIANGLE}: WATER, GRASS, DRAGON$"
+	.string "   {CIRCLE_DOT}: ENTROPY, STRATUM, LEGACY\p"
+	.string "   {TRIANGLE}: FLOW, GROWTH, EMERGENT$"
 
 Help_Text_TypeMatchupOwnPokemonWater::
 	.string "Effect of foe's move on own DAEMON:\p"
-	.string "   {CIRCLE_DOT}: ELECTRIC, GRASS\p"
-	.string "   {TRIANGLE}: FIRE, WATER, ICE, STEEL$"
+	.string "   {CIRCLE_DOT}: SIGNAL, GROWTH\p"
+	.string "   {TRIANGLE}: ENTROPY, FLOW, FROZEN,\n"
+	.string "       HARDENED$"
 
 Help_Text_TypeMatchupOwnMoveBug::
 	.string "Effect on the opposing DAEMON:\p"
-	.string "   {CIRCLE_DOT}: GRASS, CONSTRUE, DARK\p"
-	.string "   {TRIANGLE}: FIRE, FIGHTING, POISON,\n"
-	.string "       FLYING, GHOST, STEEL$"
+	.string "   {CIRCLE_DOT}: GROWTH, CONTEXT, OPAQUE\p"
+	.string "   {TRIANGLE}: ENTROPY, LOGIC, CORRUPT,\n"
+	.string "       VECTOR, LATENT, HARDENED$"
 
 Help_Text_TypeMatchupOwnPokemonBug::
 	.string "Effect of foe's move on own DAEMON:\p"
-	.string "   {CIRCLE_DOT}: FIRE, FLYING, ROCK\p"
-	.string "   {TRIANGLE}: GRASS, FIGHTING, GROUND$"
+	.string "   {CIRCLE_DOT}: ENTROPY, VECTOR, LEGACY\p"
+	.string "   {TRIANGLE}: GROWTH, LOGIC, STRATUM$"
 

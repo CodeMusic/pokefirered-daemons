@@ -77,7 +77,7 @@ CeruleanCity_Text_MakeRoomForThisCantRun::
 
 CeruleanCity_Text_TrainerLifeIsToughIsntIt::
     .string "You're a USER too? Collecting,\n"
-    .string "fighting, it's a tough life.$"
+    .string "engaging, it's a tough life.$"
 
 CeruleanCity_Text_YouCanCutDownSmallTrees::
     .string "Did you know that you can CUT down\n"

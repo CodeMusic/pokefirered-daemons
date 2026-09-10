@@ -39,7 +39,7 @@ VictoryRoad_3F_Text_AlexaDefeat::
     .string "So strong!$"
 
 VictoryRoad_3F_Text_AlexaPostBattle::
-    .string "By fighting tough battles, you get\n"
+    .string "By engaging tough opponents you\n"
     .string "stronger.$"
 
 VictoryRoad_3F_Text_CarolineIntro::

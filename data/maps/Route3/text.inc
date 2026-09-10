@@ -40,7 +40,7 @@ Route3_Text_JanicePostBattle::
     .string "want to engage!$"
 
 Route3_Text_GregIntro::
-    .string "Are you a USER? Let's fight!$"
+    .string "Are you a USER? Let's engage!$"
 
 Route3_Text_GregDefeat::
     .string "If I had new DAEMON, I would've\n"

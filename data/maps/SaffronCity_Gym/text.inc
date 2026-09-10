@@ -132,8 +132,8 @@ SaffronCity_Gym_Text_GymGuyAdvice::
     .string "Yo! Champ in making!\p"
     .string "MATTE's DAEMON use psychic power\n"
     .string "instead of force!\p"
-    .string "Fighting DAEMONS are weak against\n"
-    .string "psychic DAEMON!\p"
+    .string "LOGIC daemons are weak against\n"
+    .string "CONTEXT daemons!\p"
     .string "They get creamed before they can\n"
     .string "even aim a punch!$"
 

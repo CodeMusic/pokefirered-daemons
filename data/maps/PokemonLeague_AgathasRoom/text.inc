@@ -6,9 +6,9 @@ PokemonLeague_AgathasRoom_Text_Intro::
     .string "handsome! That was decades ago!\p"
     .string "Now she just wants to fiddle with\n"
     .string "her INDEX! She's wrong! DAEMONS\l"
-    .string "are for fighting!\p"
+    .string "are for engaging!\p"
     .string "{PLAYER}! I'll show you how a real\n"
-    .string "USER fights!$"
+    .string "USER engages!$"
 
 PokemonLeague_AgathasRoom_Text_RematchIntro::
     .string "I am MELANCHOLIC.\nThird of the REVIEW BOARD.\p"

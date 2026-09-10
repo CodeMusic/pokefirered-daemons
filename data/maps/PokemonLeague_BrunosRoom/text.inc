@@ -15,7 +15,7 @@ PokemonLeague_BrunosRoom_Text_RematchIntro::
     .string "and DAEMON can become stronger\l"
     .string "without limit.\p"
     .string "I've lived and trained with my\n"
-    .string "fighting DAEMON! And that will\l"
+    .string "LOGIC daemons! And that will\l"
     .string "never change!\p"
     .string "{PLAYER}!\p"
     .string "We will grind you down with our\n"
