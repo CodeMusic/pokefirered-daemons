@@ -1546,6 +1546,20 @@
 //  count in. Nine flags out of a thousand is the cheaper answer.
 #define FLAG_STREAM_TOLD_HOSTING      (DAEMONS_FLAGS_START + 0x0)
 #define FLAG_STREAM_TOLD_MARK1        (DAEMONS_FLAGS_START + 0x1)
+//  T-22. 4.33's scene is eight steps and he works up through them, so the
+//  game has to remember which one he has reached. One flag per step, and the
+//  ninth talk clears all eight -- he goes round again, because nobody checks
+//  him and nothing has changed. Deliberately not a MARK, an item or an Index
+//  entry: 4.33's prohibitions rule that nothing in the bag may prove he was
+//  there, and these are flags nothing else reads.
+#define FLAG_DOCTRINE_STEP1           (DAEMONS_FLAGS_START + 0x10)
+#define FLAG_DOCTRINE_STEP2           (DAEMONS_FLAGS_START + 0x11)
+#define FLAG_DOCTRINE_STEP3           (DAEMONS_FLAGS_START + 0x12)
+#define FLAG_DOCTRINE_STEP4           (DAEMONS_FLAGS_START + 0x13)
+#define FLAG_DOCTRINE_STEP5           (DAEMONS_FLAGS_START + 0x14)
+#define FLAG_DOCTRINE_STEP6           (DAEMONS_FLAGS_START + 0x15)
+#define FLAG_DOCTRINE_STEP7           (DAEMONS_FLAGS_START + 0x16)
+#define FLAG_DOCTRINE_STEP8           (DAEMONS_FLAGS_START + 0x17)
 #define DAEMONS_FLAGS_COUNT           0x400
 #define DAEMONS_FLAGS_END             (DAEMONS_FLAGS_START + DAEMONS_FLAGS_COUNT - 1)
 #define DAEMONS_FLAGS_SIZE            (DAEMONS_FLAGS_COUNT / 8)
