@@ -13,6 +13,6 @@ FuchsiaCity_PokemonCenter_1F_Text_PokemonLeagueWestOfViridian::
 FuchsiaCity_PokemonCenter_1F_Text_VisitSafariZoneForPokedex::
     .string "If you're working on a INDEX, visit\n"
     .string "the SAFARI ZONE.\p"
-    .string "All sorts of rare DAEMON breed\n"
+    .string "All sorts of rare DAEMONS breed\n"
     .string "there.$"
 

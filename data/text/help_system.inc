@@ -128,7 +128,7 @@ Help_Text_HowDoIWinAgainstTrainer::
 	.string "How do I win against a USER?$"
 
 Help_Text_WhereDoMonsAppear::
-	.string "Where do DAEMON appear?$"
+	.string "Where do DAEMONS appear?$"
 
 Help_Text_WhatAreMoves::
 	.string "What are DAEMON moves?$"
@@ -333,7 +333,7 @@ Help_Text_AnswerWhatIsStatusProblem::
 	.string "appropriate item.$"
 
 Help_Text_AnswerWhatHappensIfAllMyMonsFaint::
-	.string "If all the DAEMON in your party (all\n"
+	.string "If all the DAEMONS in your party (all\n"
 	.string "the DAEMON with you) HALT, you lose\l"
 	.string "some MONEY, and you are returned home\l"
 	.string "or to a CHECKPOINT. To reduce that\l"
@@ -383,7 +383,7 @@ Help_Text_AnswerWhereDoMonsAppear::
 	.string "Wild DAEMON will appear in tall grass,\n"
 	.string "on roads, and in forests. They will\l"
 	.string "appear anywhere in dark caves. There\l"
-	.string "are no wild DAEMON or USERS in towns,\l"
+	.string "are no wild DAEMONS or USERS in towns,\l"
 	.string "so they are safe places.$"
 
 Help_Text_AnswerWhatAreMoves::
@@ -1031,7 +1031,7 @@ Help_Text_HowToRegisterKeyItem::
 Help_Text_HowToUseBall::
 	.string "{CIRCLE_1} Select to throw the special POKé\n"
 	.string "   BOX used only in the SAFARI ZONE.\n"
-	.string "When wild DAEMON appear, throw lots\n"
+	.string "When wild DAEMONS appear, throw lots\n"
 	.string "of GUESTBOXES to bind them!$"
 
 Help_Text_HowToUseBait::

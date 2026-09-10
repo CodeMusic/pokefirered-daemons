@@ -43,7 +43,7 @@ LavenderTown_VolunteerPokemonHouse_Text_ReceivedPokeFluteFromMrFuji::
 LavenderTown_VolunteerPokemonHouse_Text_ExplainPokeFlute::
     .string "Upon hearing INTERRUPT, suspended\n"
     .string "DAEMON will spring awake.\p"
-    .string "It works on all sleeping DAEMON.$"
+    .string "It works on all sleeping DAEMONS.$"
 
 LavenderTown_VolunteerPokemonHouse_Text_MustMakeRoomForThis::
     .string "You must make room for this!$"

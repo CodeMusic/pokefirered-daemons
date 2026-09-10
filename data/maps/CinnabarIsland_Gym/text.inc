@@ -57,7 +57,7 @@ CinnabarIsland_Gym_Text_QuinnDefeat::
 
 CinnabarIsland_Gym_Text_QuinnPostBattle::
     .string "I get this uncontrollable urge to\n"
-    .string "steal other people's DAEMON.$"
+    .string "steal other people's DAEMONS.$"
 
 CinnabarIsland_Gym_Text_AveryIntro::
     .string "I've studied DAEMON thoroughly. You\n"

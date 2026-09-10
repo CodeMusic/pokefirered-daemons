@@ -62,7 +62,7 @@ CeruleanCity_House1_Text_ObeyLv70RockSmash::
 
 CeruleanCity_House1_Text_SpStatsWaterfall::
     .string "The SP. ATK and SP. DEF stats of\n"
-    .string "all your DAEMON rise a little bit.\p"
+    .string "all your DAEMONS rise a little bit.\p"
     .string "It also lets you use the move\n"
     .string "ASCEND outside of battle.$"
 

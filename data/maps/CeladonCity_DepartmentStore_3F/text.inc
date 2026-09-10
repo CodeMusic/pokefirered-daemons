@@ -42,7 +42,7 @@ CeladonCity_DepartmentStore_3F_Text_TVGameShop::
     .string "3F: TV GAME SHOP$"
 
 CeladonCity_DepartmentStore_3F_Text_RedGreenBothArePokemon::
-    .string "Red and Green! Both are DAEMON!$"
+    .string "Red and Green! Both are DAEMONS!$"
 
 Text_CounterTeach::
     .string "Oh, hi! I finally finished DAEMON.\p"

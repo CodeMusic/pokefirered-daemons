@@ -1,5 +1,5 @@
 SixIsland_OutcastIsland_Text_RocketIntro::
-    .string "There're no rare DAEMON around\n"
+    .string "There're no rare DAEMONS around\n"
     .string "these parts! Not a one!\p"
     .string "That burns me up, man. I'll take it\n"
     .string "out on you!$"

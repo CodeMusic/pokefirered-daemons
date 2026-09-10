@@ -62,7 +62,7 @@ DayCare_Text_WellRaiseYourMon::
 	.string "Come back for it later.$"
 
 DayCare_Text_WeCanRaiseOneMore::
-	.string "We can raise two of your DAEMON.\p"
+	.string "We can raise two of your DAEMONS.\p"
 	.string "Would you like us to raise one\n"
 	.string "more DAEMONS for you?$"
 

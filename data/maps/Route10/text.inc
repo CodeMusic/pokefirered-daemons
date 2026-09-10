@@ -7,7 +7,7 @@ Route10_Text_MarkDefeat::
     .string "I'm not angry!$"
 
 Route10_Text_MarkPostBattle::
-    .string "I have more rare DAEMON at home!$"
+    .string "I have more rare DAEMONS at home!$"
 
 Route10_Text_ClarkIntro::
     .string "Ha-hahah-ah-ha!$"

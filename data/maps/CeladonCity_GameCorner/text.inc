@@ -64,8 +64,8 @@ CeladonCity_GameCorner_Text_GymGuyAdvice::
     .string "be fooled!$"
 
 CeladonCity_GameCorner_Text_RareMonsForCoins::
-    .string "They offer rare DAEMON that can be\n"
-    .string "exchanged for your COINS.\p"
+    .string "They offer rare DAEMONS that can\n"
+    .string "be exchanged for your COINS.\p"
     .string "But, I just can't seem to win!$"
 
 CeladonCity_GameCorner_Text_SoEasyToGetHooked::

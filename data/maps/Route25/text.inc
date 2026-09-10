@@ -55,8 +55,8 @@ Route25_Text_ChadPostBattle::
     .string "That's a good tactic.$"
 
 Route25_Text_HaleyIntro::
-    .string "My friend has many cute DAEMON. I'm\n"
-    .string "so jealous!$"
+    .string "My friend has many cute DAEMONS.\n"
+    .string "I'm so jealous!$"
 
 Route25_Text_HaleyDefeat::
     .string "I'm not so jealous!$"

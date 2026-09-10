@@ -17,7 +17,7 @@ SixIsland_PokemonCenter_1F_Text_RivalImpossibleToGetAllMonsAroundHere::
     .string "{RIVAL}: Hey, {PLAYER}! How's your\n"
     .string "INDEX filling up?\p"
     .string "It looks like it's impossible to get\n"
-    .string "all the DAEMON by hanging around\l"
+    .string "all the DAEMONS by hanging around\l"
     .string "just these parts.\p"
     .string "Maybe there are DAEMON we don't\n"
     .string "know about somewhere far away…\p"

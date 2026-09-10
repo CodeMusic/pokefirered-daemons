@@ -23,7 +23,7 @@ SevenIsland_TanobyRuins_Text_BenjaminPostBattle::
     .string "I hear there are other ruins like\n"
     .string "the one here.\p"
     .string "Might they be the resting places of\n"
-    .string "other mystic DAEMON?$"
+    .string "other mystic DAEMONS?$"
 
 SevenIsland_TanobyRuins_Text_EdnaIntro::
     .string "CLIFFORD is teaching me how to\n"

@@ -133,7 +133,7 @@ Route9_Text_AliciaRematchIntro::
 
 Route9_Text_ChrisRematchIntro::
 	.string "I haven't forgotten you were with\n"
-	.string "those good-looking DAEMON.$"
+	.string "those good-looking DAEMONS.$"
 
 Route9_Text_DrewRematchIntro::
 	.string "I'm taking ROCK TUNNEL to go to\n"
@@ -663,8 +663,8 @@ Route25_Text_ChadRematchIntro::
 	.string "I knew I had to battle you again!$"
 
 Route25_Text_HaleyRematchIntro::
-	.string "My friend has many cute DAEMON. I'm\n"
-	.string "so jealous!$"
+	.string "My friend has many cute DAEMONS.\n"
+	.string "I'm so jealous!$"
 
 Route25_Text_FranklinRematchIntro::
 	.string "I just trained up on DEADSTACK,\n"
