@@ -80,3 +80,26 @@ PewterCity_Museum_1F_Text_MeteoriteThatFellOnMtMoon::
     .string "one for so long that the calling is\l"
     .string "now the evidence.$"
 
+
+@  lineage 3b: "the harder I tried to open the door, the less real it became…
+@  until it changed back into mere dots and lines." Benchmark 1's lesson as an
+@  event, and the card states it as a hardware fault.
+PewterCity_Museum_2F_Text_TheDisplayUnit::
+    .string "DISPLAY UNIT. From the drawing\n"
+    .string "office, SLATE.\p"
+    .string "KNOWN FAULT: the harder an\n"
+    .string "operator worked at a thing on it,\l"
+    .string "the less of a thing it drew.\p"
+    .string "It ended as dots and lines, which\n"
+    .string "is all it had ever been.$"
+
+@  lineage 3b: the Guardian is called Hunter on the evidence of a plaid
+@  shirt. "I was wrong to assume." A label applied from outside, and wrong.
+PewterCity_Museum_2F_Text_TheSortingFrame::
+    .string "SORTING FRAME. From the freight\n"
+    .string "office, SLATE.\p"
+    .string "KNOWN FAULT: shown a marking it\n"
+    .string "had seen before, it assigned the\l"
+    .string "purpose it had seen beside it.\p"
+    .string "It was right often enough that\n"
+    .string "nobody checked the markings.$"
