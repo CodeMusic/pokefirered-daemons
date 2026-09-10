@@ -58,6 +58,44 @@ FiveIsland_RocketWarehouse_EventScript_DefeatedGideon::
 	msgbox FiveIsland_RocketWarehouse_Text_GideonPostBattle
 	setflag FLAG_RECOVERED_SAPPHIRE
 	giveitem ITEM_SAPPHIRE
+	closemessage
+@  T-19. He approaches. 8.2a: "Ty approaches you. Ty gives you the package."
+@  He walks over -- the player does not go to him -- and the walk is the whole
+@  of the characterisation, because he was not hiding, he was trading, and a
+@  man stating terms crosses the room himself.
+	applymovement LOCALID_WAREHOUSE_GIDEON, FiveIsland_RocketWarehouse_Movement_TyApproaches
+	waitmovement 0
+	msgbox FiveIsland_RocketWarehouse_Text_TyTheOtherThing
+	giveitem_msg FiveIsland_RocketWarehouse_Text_ReceivedPayload, ITEM_LETTER
+	setflag FLAG_TY_GAVE_PAYLOAD
+	msgbox FiveIsland_RocketWarehouse_Text_TyNotComing
+	release
+	end
+
+FiveIsland_RocketWarehouse_Movement_TyApproaches::
+	walk_down
+	walk_left
+	walk_left
+	walk_in_place_faster_left
+	step_end
+
+@  T-19. Both men are in this room and Scorn does not recognise him. They
+@  worked the same operation from opposite ends and were never in a room; now
+@  they are, and he is facing the right way, and nothing happens.
+@
+@  8.2a: the breakthrough is not new dialogue, it is him hearing the sentence
+@  he already said. One beat. He has NOTICED and he has not understood, and
+@  nothing here explains it to him or to the player.
+FiveIsland_RocketWarehouse_EventScript_Scorn::
+	lock
+	faceplayer
+	goto_if_set FLAG_TY_GAVE_PAYLOAD, FiveIsland_RocketWarehouse_EventScript_ScornAgain
+	msgbox FiveIsland_RocketWarehouse_Text_ScornHasNoticed
+	release
+	end
+
+FiveIsland_RocketWarehouse_EventScript_ScornAgain::
+	msgbox FiveIsland_RocketWarehouse_Text_ScornStillChecking
 	release
 	end
 

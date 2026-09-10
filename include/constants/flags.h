@@ -1552,6 +1552,9 @@
 //  him and nothing has changed. Deliberately not a MARK, an item or an Index
 //  entry: 4.33's prohibitions rule that nothing in the bag may prove he was
 //  there, and these are flags nothing else reads.
+//  T-19. Two beats of one scene, five islands and a sea apart.
+#define FLAG_TY_GAVE_PAYLOAD          (DAEMONS_FLAGS_START + 0x20)
+#define FLAG_CRYSTAL_READ_PAYLOAD     (DAEMONS_FLAGS_START + 0x21)
 #define FLAG_DOCTRINE_STEP1           (DAEMONS_FLAGS_START + 0x10)
 #define FLAG_DOCTRINE_STEP2           (DAEMONS_FLAGS_START + 0x11)
 #define FLAG_DOCTRINE_STEP3           (DAEMONS_FLAGS_START + 0x12)

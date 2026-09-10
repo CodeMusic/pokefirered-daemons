@@ -320,3 +320,15 @@ PalletTown_ProfessorOaksLab_Text_RivalIllCompleteThePokedex::
     .string "think.\p"
     .string "Right. I am gone.$"
 
+
+PalletTown_ProfessorOaksLab_Text_PayloadTurnedItOver::
+    .string "CRYSTAL CLEAR turned the package\n"
+    .string "over once and did not open it.\p"
+    .string "She looked at the name on it for\n"
+    .string "longer than reading it takes.$"
+
+PalletTown_ProfessorOaksLab_Text_PayloadWhere::
+    .string "“…Where.”\p"
+    .string "…\p"
+    .string "“Thank you. That is all I needed\n"
+    .string "to know.”$"

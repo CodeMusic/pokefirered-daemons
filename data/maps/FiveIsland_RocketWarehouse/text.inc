@@ -105,31 +105,68 @@ FiveIsland_RocketWarehouse_Text_ReportWithGraphsAndText::
     .string "It's too difficult to understand…$"
 
 FiveIsland_RocketWarehouse_Text_GideonIntro::
-    .string "I almost managed to sell the\n"
-    .string "PRIVATE KEY for huge money…\p"
-    .string "Then, you just had to come along\n"
-    .string "and blow the whole deal apart!\p"
-    .string "Fufu… Fufufufu… There's no\n"
-    .string "forgiveness for you!$"
+    .string "I told you where I was taking it.\p"
+    .string "Nobody owned it. I worked out\n"
+    .string "where it was and I went and got\l"
+    .string "it, which is more than anyone\l"
+    .string "else did in forty years.\p"
+    .string "You want it back. Fine.\n"
+    .string "Then it is a price, and this is\l"
+    .string "how mine is settled.$"
 
 FiveIsland_RocketWarehouse_Text_GideonDefeat::
-    .string "Gah! Darn!\n"
-    .string "Darn! Darn!$"
+    .string "…Well. Settled, then.$"
 
 FiveIsland_RocketWarehouse_Text_GideonPostBattle::
-    .string "If I can't sell it, it's worthless!\n"
-    .string "Go ahead, take it!$"
+    .string "Take it. It was never worth what\n"
+    .string "I was going to be paid for it.\p"
+    .string "Most things are not.$"
 
 FiveIsland_RocketWarehouse_Text_GetLostLeaveMeBe::
     .string "What do you want now?\n"
     .string "Go on, get lost, leave me be.$"
 
 FiveIsland_RocketWarehouse_Text_GiovannisKidHasRedHair::
-    .string "What, you again?\p"
-    .string "You… You're not SCORN's kid, are\n"
-    .string "you?\p"
-    .string "No, that can't be right! SCORN's kid\n"
-    .string "has red hair.\p"
-    .string "You don't have any reasons for\n"
-    .string "bugging me. Leave me alone!$"
+    .string "You are still here.\p"
+    .string "You are not one of his. I have\n"
+    .string "watched his people for a long\l"
+    .string "time and they all stand the same\l"
+    .string "way, and you do not.\p"
+    .string "That is the whole of what I know\n"
+    .string "about you. Good.$"
 
+
+@  T-19. 8.2a: "Strip the cackle from the Dotted Hole scientist and the
+@  argument underneath is his." He is a businessman. Nobody owned it, he
+@  worked out where it was, he got there first, and he knows who pays.
+FiveIsland_RocketWarehouse_Text_TyTheOtherThing::
+    .string "One more thing, and it is not\n"
+    .string "business.\p"
+    .string "You will pass through BLANCHE.\n"
+    .string "Everyone does, eventually.$"
+
+FiveIsland_RocketWarehouse_Text_ReceivedPayload::
+    .string "{PLAYER} received the PAYLOAD.$"
+
+FiveIsland_RocketWarehouse_Text_TyNotComing::
+    .string "The name on it is enough. She\n"
+    .string "will know the hand.\p"
+    .string "…No. I am not coming.\p"
+    .string "Go on. You have what you came\n"
+    .string "for.$"
+
+@  8.2a: the breakthrough is him hearing the sentence he already said, and
+@  4.33's rule about never adjudicating applies here too -- nothing in this
+@  room tells him what it means, and nothing tells the player either.
+FiveIsland_RocketWarehouse_Text_ScornHasNoticed::
+    .string "I said something in that GYM and\n"
+    .string "I have carried it since.\p"
+    .string "That it has never said otherwise.\p"
+    .string "It is a correct sentence. I have\n"
+    .string "checked it four times.\p"
+    .string "I cannot tell you why I keep\n"
+    .string "checking it.$"
+
+FiveIsland_RocketWarehouse_Text_ScornStillChecking::
+    .string "…it has never said otherwise.\p"
+    .string "No. Still correct.$"

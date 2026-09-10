@@ -564,9 +564,19 @@ PalletTown_ProfessorOaksLab_EventScript_RivalChoseStarter::
 	release
 	end
 
+@  T-19, the last scene. 8.2a: "It goes to CRYSTAL, and TY does not." The
+@  repair is a fact delivered, not a feeling exchanged (4.14) -- a feeling
+@  exchanged is precisely what 4.3 says does not transmit, and a son walking
+@  through the door would undo 4.17's not-visiting being a choice on both
+@  sides. A package obeys all of that.
+@
+@  Checked FIRST, before every other branch, because it is the last scene and
+@  nothing she has to say about an INDEX comes before it.
 PalletTown_ProfessorOaksLab_EventScript_ProfOak::
 	lock
 	faceplayer
+	checkitem ITEM_LETTER
+	goto_if_eq VAR_RESULT, TRUE, PalletTown_ProfessorOaksLab_EventScript_ThePayload
 	goto_if_set SHOWED_OAK_COMPLETE_DEX, PalletTown_ProfessorOaksLab_EventScript_OakJustShownCompleteDex
 	goto_if_eq VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 9, PalletTown_ProfessorOaksLab_EventScript_RatePokedex
 	goto_if_eq VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 8, PalletTown_ProfessorOaksLab_EventScript_MonsAroundWorldWait
@@ -579,6 +589,34 @@ PalletTown_ProfessorOaksLab_EventScript_ProfOak::
 	msgbox PalletTown_ProfessorOaksLab_Text_OakWhichOneWillYouChoose
 	release
 	end
+
+@  8.2a: "She reads it. That is the last scene. What is in it is not written
+@  here and may never need to be."
+@
+@  So it is not written here either. She turns it over, she asks one word, she
+@  crosses the room and opens it facing away, and the script ENDS WITH HER
+@  STILL FACING AWAY. Craft rule 1's hardest case: the loudest available last
+@  line is whatever is on that paper, and the game does not have it.
+PalletTown_ProfessorOaksLab_EventScript_ThePayload::
+	msgbox PalletTown_ProfessorOaksLab_Text_PayloadTurnedItOver
+	closemessage
+	removeitem ITEM_LETTER
+	setflag FLAG_CRYSTAL_READ_PAYLOAD
+	delay 30
+	msgbox PalletTown_ProfessorOaksLab_Text_PayloadWhere
+	closemessage
+	delay 30
+	applymovement LOCALID_OAKS_LAB_PROF_OAK, PalletTown_ProfessorOaksLab_Movement_CrystalCrossesTheRoom
+	waitmovement 0
+	delay 120
+	releaseall
+	end
+
+PalletTown_ProfessorOaksLab_Movement_CrystalCrossesTheRoom::
+	walk_left
+	walk_left
+	walk_in_place_faster_up
+	step_end
 
 PalletTown_ProfessorOaksLab_EventScript_OakJustShownCompleteDex::
 	msgbox PokedexRating_Text_ThankYouMadeDreamReality
