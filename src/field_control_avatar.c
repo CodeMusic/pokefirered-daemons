@@ -8,6 +8,7 @@
 #include "event_scripts.h"
 #include "fieldmap.h"
 #include "field_control_avatar.h"
+#include "teachy_tv.h"
 #if DAEMONS_DEBUG
 #include "script_pokemon_util.h"
 #include "item.h"
@@ -830,6 +831,22 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
             IncrementGameStat(GAME_STAT_HATCHED_EGGS);
             ScriptContext_SetupScript(EventScript_EggHatch);
             return TRUE;
+        }
+        else
+        {
+            //  T-12. A MARK unlocks a show on the STREAM and nothing said so
+            //  -- the host only reports unseen shows once you are already
+            //  watching one. This is the same hook the VS SEEKER and the egg
+            //  use, and for the same reason: the first step after the world
+            //  changed is when the player is listening.
+            s8 show = TeachyTvFirstUntoldShow();
+
+            if (show >= 0)
+            {
+                TeachyTvMarkShowAsTold(show);
+                ScriptContext_SetupScript(EventScript_StreamHasANewShow);
+                return TRUE;
+            }
         }
     }
     if (SafariZoneTakeStep() == TRUE)

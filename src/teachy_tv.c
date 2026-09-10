@@ -193,6 +193,37 @@ static u16 TeachyTvSeenFlag(u8 script)
     return FLAG_STREAM_SEEN_MARK1 + (script - TTVSCR_MARK1);
 }
 
+static u16 TeachyTvToldFlag(u8 script)
+{
+    if (script == TTVSCR_HOSTING)
+        return FLAG_STREAM_TOLD_HOSTING;
+    return FLAG_STREAM_TOLD_MARK1 + (script - TTVSCR_MARK1);
+}
+
+//  T-12. The host reports unseen shows only once you are already watching one,
+//  which is the wrong way round: a MARK unlocks a show and nothing says so.
+//  Returns the first show that is unlocked and has never been ANNOUNCED --
+//  announced, not seen, so a show you were told about and chose to skip does
+//  not nag, and a new MARK still does.
+s8 TeachyTvFirstUntoldShow(void)
+{
+    u8 i;
+
+    if (!CheckBagHasItem(ITEM_TEACHY_TV, 1))
+        return -1;
+    for (i = TTVSCR_FIRST_TALK; i < TTVSCR_COUNT; ++i)
+    {
+        if (TeachyTvShowIsUnlocked(i) && !FlagGet(TeachyTvToldFlag(i)))
+            return i;
+    }
+    return -1;
+}
+
+void TeachyTvMarkShowAsTold(u8 script)
+{
+    FlagSet(TeachyTvToldFlag(script));
+}
+
 static bool8 TeachyTvHasUnseenShow(void)
 {
     u8 i;

@@ -1358,6 +1358,7 @@ Text_TestMsg::
 	.include "data/scripts/trainer_tower.inc"
 	.include "data/scripts/test.inc"
 	.include "data/scripts/daemons_debug.inc"
+	.include "data/scripts/stream.inc"
 	.include "data/text/save.inc"
 	.include "data/text/new_game_intro.inc"
 	.include "data/text/pokedude.inc"

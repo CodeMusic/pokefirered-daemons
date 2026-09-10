@@ -36,3 +36,7 @@ void CB2_ReturnToTeachyTV(void);
 void SetTeachyTvControllerModeToResume(void);
 
 #endif //GUARD_TEACHY_TV_H
+
+// T-12: the overworld notification. See src/field_control_avatar.c.
+s8 TeachyTvFirstUntoldShow(void);
+void TeachyTvMarkShowAsTold(u8 script);

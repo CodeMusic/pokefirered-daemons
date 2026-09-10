@@ -1203,6 +1203,12 @@ extern const u8 EventScript_FldEffFlash[];
 // field_control_avatar
 extern const u8 EventScript_CancelMessageBox[];
 
+// T-12: the STREAM notification, from data/scripts/stream.inc
+extern const u8 EventScript_StreamHasANewShow[];
+
+// T-12: the STREAM notification, from data/scripts/stream.inc
+extern const u8 EventScript_StreamHasANewShow[];
+
 #if DAEMONS_DEBUG
 // 9.3's debug submenu, the two entries that leave the menu for the field.
 extern const u8 DaemonsDebug_EventScript_TheRecord[];

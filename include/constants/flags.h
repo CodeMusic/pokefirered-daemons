@@ -1540,6 +1540,12 @@
 //  and an old save reads them as zero because nothing ever wrote there.
 //  STATIC_ASSERTs in event_data.c hold both halves of that.
 #define DAEMONS_FLAGS_START           0x900
+//  T-12. One per show, beside the STREAM's own SEEN flags. A single "told"
+//  flag cannot be right: it has to re-arm when a NEW show unlocks and not
+//  when an old one is still unwatched, and there is no free VAR to hold a
+//  count in. Nine flags out of a thousand is the cheaper answer.
+#define FLAG_STREAM_TOLD_HOSTING      (DAEMONS_FLAGS_START + 0x0)
+#define FLAG_STREAM_TOLD_MARK1        (DAEMONS_FLAGS_START + 0x1)
 #define DAEMONS_FLAGS_COUNT           0x400
 #define DAEMONS_FLAGS_END             (DAEMONS_FLAGS_START + DAEMONS_FLAGS_COUNT - 1)
 #define DAEMONS_FLAGS_SIZE            (DAEMONS_FLAGS_COUNT / 8)
