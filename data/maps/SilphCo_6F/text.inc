@@ -29,11 +29,11 @@ SilphCo_6F_Text_RocketsRanAwayBecauseOfYou::
     .string "TEAM CORPUS ran because of you!$"
 
 SilphCo_6F_Text_TargetedSilphForOurMonProducts::
-    .string "They must have targeted SILPH for\n"
-    .string "our DAEMON products.$"
+    .string "They must have targeted FOUNDRY\n"
+    .string "for our DAEMON products.$"
 
 SilphCo_6F_Text_ComeWorkForSilphWhenYoureOlder::
-    .string "Come work for SILPH when you\n"
+    .string "Come work for FOUNDRY when you\n"
     .string "get older.$"
 
 SilphCo_6F_Text_Grunt1Intro::
@@ -72,6 +72,5 @@ SilphCo_6F_Text_Grunt2PostBattle::
     .string "That's synergy!$"
 
 SilphCo_6F_Text_FloorSign::
-    .string "SILPH CO. HEAD OFFICE\n"
-    .string "6F$"
+    .string "FOUNDRY CO. HEAD OFFICE 6F$"
 

@@ -1,6 +1,6 @@
 SilphCo_3F_Text_WhatAmIToDo::
-    .string "I work for SILPH CO.\n"
-    .string "What am I to do?$"
+    .string "I work for FOUNDRY CO. What am I\n"
+    .string "to do?$"
 
 SilphCo_3F_Text_YouAndYourMonsSavedUs::
     .string "{PLAYER}! You and your DAEMON\n"
@@ -18,7 +18,7 @@ SilphCo_3F_Text_GruntPostBattle::
 
 SilphCo_3F_Text_JoseIntro::
     .string "I support TEAM CORPUS more than I\n"
-    .string "support SILPH!$"
+    .string "support FOUNDRY!$"
 
 SilphCo_3F_Text_JoseDefeat::
     .string "You really got me!$"
@@ -29,6 +29,5 @@ SilphCo_3F_Text_JosePostBattle::
     .string "them, they'd let me study DAEMON!$"
 
 SilphCo_3F_Text_FloorSign::
-    .string "SILPH CO. HEAD OFFICE\n"
-    .string "3F$"
+    .string "FOUNDRY CO. HEAD OFFICE 3F$"
 

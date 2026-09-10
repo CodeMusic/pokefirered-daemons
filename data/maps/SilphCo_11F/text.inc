@@ -1,6 +1,6 @@
 SilphCo_11F_Text_ThanksForSavingMeDearBoy::
-    .string "PRESIDENT: Oh, dear friend!\n"
-    .string "Thank you for saving SILPH.\p"
+    .string "PRESIDENT: Oh, dear friend! Thank\n"
+    .string "you for saving FOUNDRY.\p"
     .string "I will never forget you saved us in\n"
     .string "our moment of peril.\p"
     .string "I have to thank you in some way.\p"
@@ -9,8 +9,8 @@ SilphCo_11F_Text_ThanksForSavingMeDearBoy::
     .string "Here, maybe this will do.$"
 
 SilphCo_11F_Text_ThanksForSavingMeDearGirl::
-    .string "PRESIDENT: Oh, dear friend!\n"
-    .string "Thank you for saving SILPH.\p"
+    .string "PRESIDENT: Oh, dear friend! Thank\n"
+    .string "you for saving FOUNDRY.\p"
     .string "I will never forget you saved us in\n"
     .string "our moment of peril.\p"
     .string "I have to thank you in some way.\p"
@@ -95,6 +95,5 @@ SilphCo_11F_Text_MonitorHasMonsOnIt::
     .string "The monitor has DAEMON on it!$"
 
 SilphCo_11F_Text_FloorSign::
-    .string "SILPH CO. HEAD OFFICE\n"
-    .string "11F$"
+    .string "FOUNDRY CO. HEAD OFFICE 11F$"
 

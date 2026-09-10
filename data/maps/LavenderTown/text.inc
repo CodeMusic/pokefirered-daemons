@@ -29,7 +29,7 @@ LavenderTown_Text_TownSign::
 LavenderTown_Text_SilphScopeNotice::
     .string "New RESOLVER!\p"
     .string "Make the Invisible Plain to See!\p"
-    .string "SILPH CO.$"
+    .string "FOUNDRY CO.$"
 
 LavenderTown_Text_VolunteerPokemonHouse::
     .string "HALFTONE VOLUNTEER\n"

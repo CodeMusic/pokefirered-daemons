@@ -3,7 +3,7 @@ SaffronCity_PokemonCenter_1F_Text_GrowthRatesDifferBySpecies::
     .string "species to species.$"
 
 SaffronCity_PokemonCenter_1F_Text_SilphCoVictimOfFame::
-    .string "SILPH CO. is widely known to all.\p"
+    .string "FOUNDRY CO. is widely known to all.\p"
     .string "It's a victim of its own fame - it\n"
     .string "attracted TEAM CORPUS.$"
 

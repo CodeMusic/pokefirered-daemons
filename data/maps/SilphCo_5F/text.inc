@@ -70,8 +70,7 @@ SilphCo_5F_Text_SomeMonsEvolveWhenTraded::
     .string "by link-cable.$"
 
 SilphCo_5F_Text_FloorSign::
-    .string "SILPH CO. HEAD OFFICE\n"
-    .string "5F$"
+    .string "FOUNDRY CO. HEAD OFFICE 5F$"
 
 SilphCo_5F_Text_RocketBossLookingForStrongMons::
     .string "Those thugs that took over our\n"

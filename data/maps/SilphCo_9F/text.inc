@@ -40,6 +40,5 @@ SilphCo_9F_Text_Grunt2PostBattle::
     .string "Someone will pick this up.$"
 
 SilphCo_9F_Text_FloorSign::
-    .string "SILPH CO. HEAD OFFICE\n"
-    .string "9F$"
+    .string "FOUNDRY CO. HEAD OFFICE 9F$"
 

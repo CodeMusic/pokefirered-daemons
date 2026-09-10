@@ -1,12 +1,11 @@
 SilphCo_2F_Text_ConnorIntro::
-    .string "Help!\n"
-    .string "I'm a SILPH employee.$"
+    .string "Help! I'm a FOUNDRY employee.$"
 
 SilphCo_2F_Text_ConnorDefeat::
     .string "How did you know I was CORPUS?$"
 
 SilphCo_2F_Text_ConnorPostBattle::
-    .string "I work for both SILPH and TEAM\n"
+    .string "I work for both FOUNDRY and TEAM\n"
     .string "CORPUS!$"
 
 SilphCo_2F_Text_JerryIntro::
@@ -40,7 +39,7 @@ SilphCo_2F_Text_Grunt2Defeat::
     .string "My error.$"
 
 SilphCo_2F_Text_Grunt2PostBattle::
-    .string "SILPH CO. is joining the CORPUS\n"
+    .string "FOUNDRY CO. is joining the CORPUS\n"
     .string "family!\p"
     .string "Exciting times!$"
 
@@ -66,6 +65,5 @@ Text_ThunderWaveTaught::
     .string "won't work on some DAEMONS.$"
 
 SilphCo_2F_Text_FloorSign::
-    .string "SILPH CO. HEAD OFFICE\n"
-    .string "2F$"
+    .string "FOUNDRY CO. HEAD OFFICE 2F$"
 

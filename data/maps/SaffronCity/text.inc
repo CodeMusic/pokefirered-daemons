@@ -22,7 +22,7 @@ SaffronCity_Text_WatchWhereYoureWalking::
     .string "Watch where you're walking!$"
 
 SaffronCity_Text_WeCanExploitMonsAroundWorld::
-    .string "With SILPH under control, we can\n"
+    .string "With FOUNDRY under control, we can\n"
     .string "exploit DAEMON around the world!\p"
     .string "We'll get stinking rich, yeahah!$"
 
@@ -40,7 +40,7 @@ SaffronCity_Text_PeopleComingBackToSaffron::
 
 SaffronCity_Text_FlewHereOnPidgeot::
     .string "I flew here on my BROADCAST when\n"
-    .string "I read about SILPH.\p"
+    .string "I read about FOUNDRY.\p"
     .string "It's already over? I missed the\n"
     .string "media action.$"
 
@@ -48,8 +48,8 @@ SaffronCity_Text_Pidgeot::
     .string "BROADCAST: Bibii!$"
 
 SaffronCity_Text_SawRocketBossEscaping::
-    .string "I saw CORPUS BOSS escaping SILPH's\n"
-    .string "building.$"
+    .string "I saw CORPUS BOSS escaping\n"
+    .string "FOUNDRY's building.$"
 
 SaffronCity_Text_ImASecurityGuard::
     .string "I'm a security guard.\p"
@@ -90,7 +90,7 @@ SaffronCity_Text_GreatBallImprovedCatchRate::
     .string "DAEMONS.$"
 
 SaffronCity_Text_SilphCoSign::
-    .string "SILPH CO. OFFICE BUILDING$"
+    .string "FOUNDRY CO. OFFICE BUILDING$"
 
 SaffronCity_Text_MrPsychicsHouse::
     .string "MR. CONSTRUE'S HOUSE$"

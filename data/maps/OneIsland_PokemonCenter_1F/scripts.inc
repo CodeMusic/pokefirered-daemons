@@ -272,6 +272,15 @@ OneIsland_PokemonCenter_1F_EventScript_GiveCelioSapphire::
 	applymovement LOCALID_CELIO, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox OneIsland_PokemonCenter_1F_Text_ManagedToLinkWithHoennThankYou
+@  8.2a: "machine completes, DOLDRUM CAVE opens -- S.T.A.R.R." The flag that
+@  opens the cave is set four lines below, and until now NOTHING said so. The
+@  player finished the errand and the world quietly changed somewhere they
+@  were not standing.
+@
+@  So CELIO reads his own log and does not understand it. He gives a place and
+@  no more. 4.14's machine "works out where a man in his condition would go,
+@  and goes there" -- this is the same move, run backwards, by the player.
+	msgbox OneIsland_PokemonCenter_1F_Text_SomethingElseAnswered
 	special SetPostgameFlags
 	setflag FLAG_SYS_CAN_LINK_WITH_RS
 	setflag FLAG_HIDE_CERULEAN_CAVE_GUARD

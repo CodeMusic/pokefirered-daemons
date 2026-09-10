@@ -6,7 +6,7 @@ SilphCo_7F_Text_HaveMonForSavingUs::
 
 SilphCo_7F_Text_ObtainedLaprasFromEmployee::
     .string "{PLAYER} obtained a FERRY from the\n"
-    .string "SILPH employee!$"
+    .string "FOUNDRY employee!$"
 
 SilphCo_7F_Text_ExplainLapras::
     .string "It's FERRY. It's very intelligent.\p"
@@ -37,7 +37,7 @@ SilphCo_7F_Text_CanceledMasterBallProject::
 
 SilphCo_7F_Text_BadIfTeamRocketTookOver::
     .string "It would be bad if TEAM CORPUS\n"
-    .string "took over SILPH or our DAEMON!$"
+    .string "took over FOUNDRY or our DAEMON!$"
 
 SilphCo_7F_Text_WowYouChasedOffTeamRocket::
     .string "Wow! You chased off TEAM CORPUS\n"
@@ -64,7 +64,8 @@ SilphCo_7F_Text_Grunt3PostBattle::
 
 SilphCo_7F_Text_JoshuaIntro::
     .string "Heheh!\p"
-    .string "You mistook me for a SILPH worker?$"
+    .string "You mistook me for a FOUNDRY\n"
+    .string "worker?$"
 
 SilphCo_7F_Text_JoshuaDefeat::
     .string "I'm done!$"
@@ -127,6 +128,5 @@ SilphCo_7F_Text_RivalPostBattle::
     .string "Don't sweat it! Smell ya!$"
 
 SilphCo_7F_Text_FloorSign::
-    .string "SILPH CO. HEAD OFFICE\n"
-    .string "7F$"
+    .string "FOUNDRY CO. HEAD OFFICE 7F$"
 

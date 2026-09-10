@@ -6,8 +6,8 @@ SilphCo_4F_Text_TeamRocketIsGone::
     .string "Huh? TEAM CORPUS is gone?$"
 
 SilphCo_4F_Text_Grunt1Intro::
-    .string "CORPUS has acquired SILPH CO. as\n"
-    .string "of today!$"
+    .string "CORPUS has acquired FOUNDRY CO.\n"
+    .string "as of today!$"
 
 SilphCo_4F_Text_Grunt1Defeat::
     .string "Regrettable.$"
@@ -38,6 +38,5 @@ SilphCo_4F_Text_Grunt2PostBattle::
     .string "I'll raise this with 11F.$"
 
 SilphCo_4F_Text_FloorSign::
-    .string "SILPH CO. HEAD OFFICE\n"
-    .string "4F$"
+    .string "FOUNDRY CO. HEAD OFFICE 4F$"
 

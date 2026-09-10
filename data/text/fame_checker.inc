@@ -1040,10 +1040,10 @@ gFameCheckerFlavorTextOriginLocation_Giovanni0::
 	.string "CORPUS HIDEOUT$"
 
 gFameCheckerFlavorTextOriginLocation_Giovanni1::
-	.string "SILPH CO.$"
+	.string "FOUNDRY CO.$"
 
 gFameCheckerFlavorTextOriginLocation_Giovanni2::
-	.string "SILPH CO.$"
+	.string "FOUNDRY CO.$"
 
 gFameCheckerFlavorTextOriginLocation_Giovanni3::
 	.string "CALLOW GYM$"

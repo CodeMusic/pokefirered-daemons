@@ -346,3 +346,14 @@ OneIsland_PokemonCenter_1F_Text_MachineLinkedWithKantoAndHoenn::
 OneIsland_PokemonCenter_1F_Text_ObtainedTriPass::
     .string "Obtained the TRI-PASS!$"
 
+
+OneIsland_PokemonCenter_1F_Text_SomethingElseAnswered::
+    .string "…Hm. That is odd.\p"
+    .string "Two ends, one handshake. Exactly\n"
+    .string "as designed.\p"
+    .string "But there is a third thing on the\n"
+    .string "line and I did not put it there.\p"
+    .string "By the log it has been listening\n"
+    .string "a very long time. And it is not\l"
+    .string "on any of these islands.\p"
+    .string "The log gives one word. DOLDRUM.$"
