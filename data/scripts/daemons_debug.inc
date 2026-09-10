@@ -32,8 +32,23 @@ DaemonsDebug_EventScript_TheRecord::
 @  debug jump that skips content is a debug jump that stops you testing it.
 DaemonsDebug_EventScript_TheIslands::
 	lockall
+@  The warning is only true while the S.S. ANNE is still in. Once VERMILION is
+@  at scene 3 she has already gone -- either she sailed on her own as you
+@  stepped off her, or this button sailed her earlier -- and a warning that is
+@  wrong half the time teaches the reader to skip the box.
+	goto_if_ge VAR_MAP_SCENE_VERMILION_CITY, 3, DaemonsDebug_EventScript_IslandsAsk
+	msgbox DaemonsDebug_Text_TheIslandsAnneIsIn, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, DaemonsDebug_EventScript_Cancel
+	goto DaemonsDebug_EventScript_IslandsOpen
+	end
+
+DaemonsDebug_EventScript_IslandsAsk::
 	msgbox DaemonsDebug_Text_TheIslands, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, DaemonsDebug_EventScript_Cancel
+	goto DaemonsDebug_EventScript_IslandsOpen
+	end
+
+DaemonsDebug_EventScript_IslandsOpen::
 	setflag FLAG_SYS_SEVII_MAP_123
 	setflag FLAG_SYS_SEVII_MAP_4567
 	setflag FLAG_WORLD_MAP_ONE_ISLAND
@@ -73,11 +88,16 @@ DaemonsDebug_Text_TheRecord::
 DaemonsDebug_Text_TheIslands::
 	.string "DEBUG: open the SEVII ISLANDS?\p"
 	.string "The ferry at ARDOR PORT will sail,\n"
+	.string "and both passes go in the BAG.$"
+
+DaemonsDebug_Text_TheIslandsAnneIsIn::
+	.string "DEBUG: open the SEVII ISLANDS?\p"
+	.string "The ferry at ARDOR PORT will sail,\n"
 	.string "and both passes go in the BAG.\p"
 	.string "The S.S. ANNE uses the same berth\n"
 	.string "and the same sailor, so she will\l"
-	.string "have left. Start a new file to\l"
-	.string "board her.$"
+	.string "have gone. Board her first if you\l"
+	.string "want her.$"
 
 DaemonsDebug_Text_IslandsOpened::
 	.string "The ferry at ARDOR PORT is running.$"
