@@ -341,6 +341,6 @@ sText_MysteryGiftAlteringCave:
 	.string "Recently, there have been rumors\n"
 	.string "of rare DAEMON appearances.\p"
 	.string "The rumors are about ALTERING\n"
-	.string "CAVE on OUTCAST ISLAND.\p"
+	.string "CAVE on NOBODY'S ISLE.\p"
 	.string "Why not visit there and check if\n"
 	.string "the rumors are indeed true?$"

@@ -12,11 +12,11 @@ SixIsland_GreenPath_Text_JaclynPostBattle::
     .string "properly to my house!$"
 
 SixIsland_GreenPath_Text_LeftRouteSign::
-    .string "GREEN PATH\n"
-    .string "PATTERN BUSH AHEAD$"
+    .string "SLOW WALK\n"
+    .string "THE SAME BUSH AHEAD$"
 
 SixIsland_GreenPath_Text_RightRouteSign::
-    .string "GREEN PATH\n"
+    .string "SLOW WALK\n"
     .string "Think Green, Keep Nature Clean!$"
 
 

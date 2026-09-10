@@ -6,7 +6,7 @@ ThreeIsland_Mart_Text_TrueThatCeldadonDeptStoreBigger::
 ThreeIsland_Mart_Text_PeopleHealWithBerriesFromForest::
     .string "I sometimes buy medicine here.\p"
     .string "But a lot of people heal DAEMON\n"
-    .string "with BERRIES from BERRY FOREST.\p"
+    .string "with BERRIES from DENSE WOOD.\p"
     .string "After all, BERRIES are free and\n"
     .string "they never run out.$"
 

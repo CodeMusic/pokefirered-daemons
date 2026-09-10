@@ -11,6 +11,6 @@ FourIsland_Mart_Text_IcefallCaveIsFrigid::
     .string "region overall.\p"
     .string "But there is one exception you\n"
     .string "need to know about.\p"
-    .string "The ICEFALL CAVE is frigid because\n"
+    .string "STILLFALL CAVE is frigid because\n"
     .string "of the DAEMON that live in it.$"
 

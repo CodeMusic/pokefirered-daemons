@@ -11,7 +11,7 @@ FourIsland_Text_LoreleiMetLaprasAsChild::
     .string "PHLEGMATIC has gone back.\p"
     .string "The FERRY she has, I imagine it to\n"
     .string "be the one she met as a child.\p"
-    .string "I believe it was in ICEFALL CAVE\n"
+    .string "I believe it was in STILLFALL CAVE\n"
     .string "that she bound it.\p"
     .string "Perhaps that DAEMON has been with\n"
     .string "her ever since.$"
@@ -46,7 +46,7 @@ FourIsland_Text_LoreleiHasLotsOfStuffedDolls::
 FourIsland_Text_MadeSlushieUsingIcefallCaveIce::
     .string "Ooh, chilly!\p"
     .string "I made a slushie using ice I\n"
-    .string "shaved inside ICEFALL CAVE.\p"
+    .string "shaved inside STILLFALL CAVE.\p"
     .string "It's chilly and tasty!$"
 
 FourIsland_Text_LoreleisHouse::

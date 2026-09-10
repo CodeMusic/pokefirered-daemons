@@ -20,7 +20,7 @@ ThreeIsland_BondBridge_Text_VioletDefeat::
 
 ThreeIsland_BondBridge_Text_VioletPostBattle::
     .string "If you keep going this way, you'll\n"
-    .string "eventually reach BERRY FOREST.$"
+    .string "eventually reach DENSE WOOD.$"
 
 ThreeIsland_BondBridge_Text_AmiraIntro::
     .string "My mommy said that I can't swim\n"
@@ -90,10 +90,10 @@ ThreeIsland_BondBridge_Text_MegNotEnoughMons::
     .string "One DAEMON isn't enough.$"
 
 ThreeIsland_BondBridge_Text_BerryForestAhead::
-    .string "BERRY FOREST AHEAD$"
+    .string "DENSE WOOD AHEAD$"
 
 ThreeIsland_BondBridge_Text_BondBridgeSign::
-    .string "BOND BRIDGE\n"
+    .string "LONGCROSS\n"
     .string "Please be quiet when crossing.\p"
-    .string "BERRY FOREST AHEAD$"
+    .string "DENSE WOOD AHEAD$"
 

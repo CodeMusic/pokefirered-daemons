@@ -360,7 +360,7 @@ gFameCheckerFlavorText_Lorelei5:: @ 0x81AEE51
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of DAEMON?\p"
 	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}The FERRY she has, I imagine it to\n"
 	.string "be the one she met as a child.\p"
-	.string "I believe it was in ICEFALL CAVE\n"
+	.string "I believe it was in STILLFALL CAVE\n"
 	.string "that she bound it.\p"
 	.string "Perhaps that DAEMON has been with\n"
 	.string "her ever since.$"
@@ -791,7 +791,7 @@ gFameCheckerFlavorTextOriginLocation_Daisy1::
 	.string "ARDOR CITY$"
 
 gFameCheckerFlavorTextOriginLocation_Daisy2::
-	.string "WATER LABYRINTH$"
+	.string "TANGLEWATER$"
 
 gFameCheckerFlavorTextOriginLocation_Daisy3::
 	.string "CALLOW CITY$"
@@ -926,7 +926,7 @@ gFameCheckerFlavorTextOriginLocation_Blaine4::
 	.string "QUICKSILVER GYM$"
 
 gFameCheckerFlavorTextOriginLocation_Blaine5::
-	.string "RESORT GORGEOUS$"
+	.string "RESORT SUBLIME$"
 
 gFameCheckerFlavorTextOriginLocation_Lorelei0::
 	.string "DAEMON LEAGUE$"
@@ -962,7 +962,7 @@ gFameCheckerFlavorTextOriginLocation_Bruno4::
 	.string "TWO ISLAND$"
 
 gFameCheckerFlavorTextOriginLocation_Bruno5::
-	.string "SEVAULT CANYON$"
+	.string "LONG DROP$"
 
 gFameCheckerFlavorTextOriginLocation_Agatha0::
 	.string "DAEMON LEAGUE$"

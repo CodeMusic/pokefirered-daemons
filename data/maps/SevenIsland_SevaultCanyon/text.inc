@@ -117,7 +117,7 @@ SevenIsland_SevaultCanyon_Text_NyaNotEnoughMons::
     .string "in two-on-two style?$"
 
 SevenIsland_SevaultCanyon_Text_RouteSign::
-    .string "SEVAULT CANYON\n"
+    .string "LONG DROP\n"
     .string "TANOBY RUINS AHEAD$"
 
 SevenIsland_SevaultCanyon_Text_BrunoTrainedWithBrawly::

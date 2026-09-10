@@ -96,6 +96,6 @@ SixIsland_WaterPath_Text_WantedUltimateHorn::
     .string "The Ultimate Horn!$"
 
 SixIsland_WaterPath_Text_RouteSign::
-    .string "WATER PATH\n"
-    .string "Leads to RUIN VALLEY$"
+    .string "LONG WADE\n"
+    .string "Leads to WHAT REMAINS$"
 

@@ -155,7 +155,7 @@ OneIsland_KindleRoad_Text_MikNotEnoughMons::
     .string "you, then.$"
 
 OneIsland_KindleRoad_Text_RouteSign::
-    .string "This is KINDLE ROAD.\p"
+    .string "This is SMOKE ROAD.\p"
     .string "Go straight for MT. JITTER.$"
 
 OneIsland_KindleRoad_Text_EmberSpaSign::
