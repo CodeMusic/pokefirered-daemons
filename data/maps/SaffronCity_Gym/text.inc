@@ -111,8 +111,8 @@ SaffronCity_Gym_Text_CameronDefeat::
 SaffronCity_Gym_Text_CameronPostBattle::
     .string "There used to be 2 DAEMON GYMs in\n"
     .string "BRAZEN.\p"
-    .string "The FIGHTING DOJO next door lost\n"
-    .string "its GYM status when we went and\l"
+    .string "The PROOF HALL next door lost its\n"
+    .string "GYM status when we went and\l"
     .string "creamed them!$"
 
 SaffronCity_Gym_Text_PrestonIntro::

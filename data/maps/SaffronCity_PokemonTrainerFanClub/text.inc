@@ -272,13 +272,13 @@ SaffronCity_PokemonTrainerFanClub_Text_OnlyMasterHasMyRespect::
     .string "Hiyah! There is but one USER who\n"
     .string "has my respect.\p"
     .string "And that is none other than my\n"
-    .string "MASTER at the FIGHTING DOJO.\p"
+    .string "MASTER at the PROOF HALL.\p"
     .string "You should become a fan of my\n"
     .string "MASTER like me! Hiyah!$"
 
 SaffronCity_PokemonTrainerFanClub_Text_NeverBeFanOfAnyoneButMaster::
     .string "Hiyah! I respect my MASTER at the\n"
-    .string "FIGHTING DOJO.\p"
+    .string "PROOF HALL.\p"
     .string "I will never become a fan of\n"
     .string "anyone other than my MASTER!\p"
     .string "I will even sneak out of the DOJO\n"

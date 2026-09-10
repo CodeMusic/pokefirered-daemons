@@ -66,7 +66,7 @@ SaffronCity_Text_CitySign::
     .string "Land of Commerce$"
 
 SaffronCity_Text_FightingDojo::
-    .string "FIGHTING DOJO$"
+    .string "PROOF HALL$"
 
 SaffronCity_Text_GymSign::
     .string "BRAZEN CITY\n"
