@@ -30,7 +30,7 @@ SaffronCity_Gym_Text_ExplainMarshBadgeTakeThis::
 
 SaffronCity_Gym_Text_ReceivedTM04FromSabrina::
     .string "{PLAYER} received TM04 from\n"
-    .string "SABRINA.$"
+    .string "MATTE.$"
 
 SaffronCity_Gym_Text_ExplainTM04::
     .string "TM04 is COMPOSE.\p"
@@ -41,7 +41,7 @@ SaffronCity_Gym_Text_BagFullOfOtherItems::
     .string "Your BAG is full of other items.$"
 
 SaffronCity_Gym_Text_AmandaIntro::
-    .string "SABRINA is far younger than I,\n"
+    .string "MATTE is far younger than I,\n"
     .string "but she has earned my respect.$"
 
 SaffronCity_Gym_Text_AmandaDefeat::
@@ -50,7 +50,7 @@ SaffronCity_Gym_Text_AmandaDefeat::
 SaffronCity_Gym_Text_AmandaPostBattle::
     .string "In a battle of equals, the one\n"
     .string "with the stronger will wins.\p"
-    .string "If you wish to beat SABRINA, focus\n"
+    .string "If you wish to beat MATTE, focus\n"
     .string "and will yourself to victory.$"
 
 SaffronCity_Gym_Text_JohanIntro::
@@ -85,7 +85,7 @@ SaffronCity_Gym_Text_TyronDefeat::
     .string "I don't believe this!$"
 
 SaffronCity_Gym_Text_TyronPostBattle::
-    .string "SABRINA just wiped out the KARATE\n"
+    .string "MATTE just wiped out the KARATE\n"
     .string "MASTER next door.$"
 
 SaffronCity_Gym_Text_TashaIntro::
@@ -100,7 +100,7 @@ SaffronCity_Gym_Text_TashaPostBattle::
     .string "place.$"
 
 SaffronCity_Gym_Text_CameronIntro::
-    .string "SABRINA is young, but she's also\n"
+    .string "MATTE is young, but she's also\n"
     .string "our highly skilled LEADER.\p"
     .string "You won't reach her easily!$"
 
@@ -118,7 +118,7 @@ SaffronCity_Gym_Text_CameronPostBattle::
 SaffronCity_Gym_Text_PrestonIntro::
     .string "BRAZEN DAEMON GYM is famous for\n"
     .string "its psychics!\p"
-    .string "You want to see SABRINA! I can\n"
+    .string "You want to see MATTE! I can\n"
     .string "tell!$"
 
 SaffronCity_Gym_Text_PrestonDefeat::
@@ -130,7 +130,7 @@ SaffronCity_Gym_Text_PrestonPostBattle::
 
 SaffronCity_Gym_Text_GymGuyAdvice::
     .string "Yo! Champ in making!\p"
-    .string "SABRINA's DAEMON use psychic power\n"
+    .string "MATTE's DAEMON use psychic power\n"
     .string "instead of force!\p"
     .string "Fighting DAEMONS are weak against\n"
     .string "psychic DAEMON!\p"
@@ -144,11 +144,11 @@ SaffronCity_Gym_Text_GymGuyPostVictory::
 
 SaffronCity_Gym_Text_GymStatue::
     .string "BRAZEN DAEMON GYM LEADER:\n"
-    .string "SABRINA\p"
+    .string "MATTE\p"
     .string "WINNING USERS: {RIVAL}$"
 
 SaffronCity_Gym_Text_GymStatuePlayerWon::
     .string "BRAZEN DAEMON GYM LEADER:\n"
-    .string "SABRINA\p"
+    .string "MATTE\p"
     .string "WINNING USERS: {RIVAL}, {PLAYER}$"
 

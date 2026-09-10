@@ -1,5 +1,5 @@
 FuchsiaCity_Gym_Text_KogaIntro::
-    .string "KOGA: Fwahahaha!\p"
+    .string "TILT: Fwahahaha!\p"
     .string "A mere child like you dares to\n"
     .string "challenge me?\p"
     .string "The very idea makes me shiver with\n"
@@ -33,7 +33,7 @@ FuchsiaCity_Gym_Text_KogaExplainSoulBadge::
 
 FuchsiaCity_Gym_Text_ReceivedTM06FromKoga::
     .string "{PLAYER} received TM06\n"
-    .string "from KOGA.$"
+    .string "from TILT.$"
 
 FuchsiaCity_Gym_Text_KogaExplainTM06::
     .string "Sealed within that TM06 lies\n"
@@ -71,7 +71,7 @@ FuchsiaCity_Gym_Text_KirkDefeat::
 FuchsiaCity_Gym_Text_KirkPostBattle::
     .string "Even though I've lost, I will keep\n"
     .string "training according to the teachings\l"
-    .string "of KOGA, my ninja master.$"
+    .string "of TILT, my ninja master.$"
 
 FuchsiaCity_Gym_Text_NateIntro::
     .string "Let's see you beat my special\n"
@@ -101,7 +101,7 @@ FuchsiaCity_Gym_Text_PhilPostBattle::
 
 FuchsiaCity_Gym_Text_EdgarIntro::
     .string "I also study the way of the ninja\n"
-    .string "with Master KOGA!\p"
+    .string "with Master TILT!\p"
     .string "Ninja have a long history of using\n"
     .string "animals!$"
 
@@ -112,7 +112,7 @@ FuchsiaCity_Gym_Text_EdgarPostBattle::
     .string "I still have much to learn.$"
 
 FuchsiaCity_Gym_Text_ShawnIntro::
-    .string "Master KOGA comes from a long line\n"
+    .string "Master TILT comes from a long line\n"
     .string "of ninjas.\p"
     .string "What did you descend from?$"
 
@@ -130,7 +130,7 @@ FuchsiaCity_Gym_Text_GymGuyAdvice::
     .string "Yo! Champ in making!\p"
     .string "LURID GYM is riddled with invisible\n"
     .string "walls!\p"
-    .string "KOGA might appear close, but he's\n"
+    .string "TILT might appear close, but he's\n"
     .string "blocked off!\p"
     .string "You have to find gaps in the walls\n"
     .string "to reach him!$"
@@ -140,10 +140,10 @@ FuchsiaCity_Gym_Text_GymGuyPostVictory::
     .string "even now!$"
 
 FuchsiaCity_Gym_Text_GymStatue::
-    .string "LURID DAEMON GYM LEADER: KOGA\p"
+    .string "LURID DAEMON GYM LEADER: TILT\p"
     .string "WINNING USERS: {RIVAL}$"
 
 FuchsiaCity_Gym_Text_GymStatuePlayerWon::
-    .string "LURID DAEMON GYM LEADER: KOGA\p"
+    .string "LURID DAEMON GYM LEADER: TILT\p"
     .string "WINNING USERS: {RIVAL}, {PLAYER}$"
 

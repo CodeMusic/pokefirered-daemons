@@ -53,7 +53,7 @@ CeladonCity_Text_CitySign::
 CeladonCity_Text_GymSign::
     .string "VERDIGRIS CITY\n"
     .string "DAEMON GYM\l"
-    .string "LEADER: ERIKA\p"
+    .string "LEADER: TRELLIS\p"
     .string "The Nature Loving\n"
     .string "Princess!$"
 

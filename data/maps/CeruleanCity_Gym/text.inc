@@ -23,7 +23,7 @@ CeruleanCity_Gym_Text_ExplainCascadeBadge::
 
 CeruleanCity_Gym_Text_ReceivedTM03FromMisty::
     .string "{PLAYER} received TM03\n"
-    .string "from MISTY.$"
+    .string "from BASIN.$"
 
 CeruleanCity_Gym_Text_BetterMakeRoomForThis::
     .string "You better make room for this!$"
@@ -37,7 +37,7 @@ CeruleanCity_Gym_Text_MistyDefeat::
 CeruleanCity_Gym_Text_DianaIntro::
     .string "What? You?\n"
     .string "I'm more than good enough for you!\p"
-    .string "MISTY won't have to be bothered.$"
+    .string "BASIN won't have to be bothered.$"
 
 CeruleanCity_Gym_Text_DianaDefeat::
     .string "You overwhelmed me!$"
@@ -55,14 +55,14 @@ CeruleanCity_Gym_Text_LuisDefeat::
     .string "That can't be!$"
 
 CeruleanCity_Gym_Text_LuisPostBattle::
-    .string "MISTY is a USER who's going to keep\n"
+    .string "BASIN is a USER who's going to keep\n"
     .string "improving.\p"
     .string "She won't lose to someone like you!$"
 
 CeruleanCity_Gym_Text_GymGuyAdvice::
     .string "Yo! Champ in the making!\p"
     .string "Let me give you some advice!\p"
-    .string "The LEADER, MISTY, is a pro who\n"
+    .string "The LEADER, BASIN, is a pro who\n"
     .string "uses WATER-type DAEMON.\p"
     .string "You can drain all their water with\n"
     .string "GRASS-type DAEMON.\p"
@@ -70,16 +70,16 @@ CeruleanCity_Gym_Text_GymGuyAdvice::
     .string "DAEMON and zap them!$"
 
 CeruleanCity_Gym_Text_WeMakePrettyGoodTeam::
-    .string "You beat MISTY!\n"
+    .string "You beat BASIN!\n"
     .string "See, what'd I tell ya?\p"
     .string "You and me, kid, we make a pretty\n"
     .string "darn-good team!$"
 
 CeruleanCity_Gym_Text_GymStatue::
-    .string "DOLDRUM DAEMON GYM LEADER: MISTY\p"
+    .string "DOLDRUM DAEMON GYM LEADER: BASIN\p"
     .string "WINNING USERS: {RIVAL}$"
 
 CeruleanCity_Gym_Text_GymStatuePlayerWon::
-    .string "DOLDRUM DAEMON GYM LEADER: MISTY\p"
+    .string "DOLDRUM DAEMON GYM LEADER: BASIN\p"
     .string "WINNING USERS: {RIVAL}, {PLAYER}$"
 

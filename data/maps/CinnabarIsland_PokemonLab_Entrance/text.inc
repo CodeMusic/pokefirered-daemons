@@ -1,5 +1,5 @@
 CinnabarIsland_Gym_Text_PhotoOfBlaineAndFuji::
-    .string "It's a photo of BLAINE and INIT.\p"
+    .string "It's a photo of ANNEAL and INIT.\p"
     .string "They're standing shoulder to\n"
     .string "shoulder with big grins.$"
 

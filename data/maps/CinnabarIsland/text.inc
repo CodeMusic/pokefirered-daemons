@@ -2,7 +2,7 @@ CinnabarIsland_Text_DoorIsLocked::
     .string "The door is locked…$"
 
 CinnabarIsland_Text_BlaineLivedHereSinceBeforeLab::
-    .string "QUICKSILVER GYM's BLAINE is an odd\n"
+    .string "QUICKSILVER GYM's ANNEAL is an odd\n"
     .string "man who has lived here for\l"
     .string "decades.$"
 
@@ -27,7 +27,7 @@ CinnabarIsland_Text_PokemonLab::
 CinnabarIsland_Text_GymSign::
     .string "QUICKSILVER\n"
     .string "DAEMON GYM\l"
-    .string "LEADER: BLAINE\p"
+    .string "LEADER: ANNEAL\p"
     .string "The Hot-Headed\n"
     .string "Quiz Master!$"
 

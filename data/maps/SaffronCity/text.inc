@@ -71,7 +71,7 @@ SaffronCity_Text_FightingDojo::
 SaffronCity_Text_GymSign::
     .string "BRAZEN CITY\n"
     .string "DAEMON GYM\l"
-    .string "LEADER: SABRINA\p"
+    .string "LEADER: MATTE\p"
     .string "The Master of\n"
     .string "Psychic DAEMON!$"
 

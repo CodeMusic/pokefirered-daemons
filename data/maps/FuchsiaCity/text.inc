@@ -38,7 +38,7 @@ FuchsiaCity_Text_SafariZoneOfficeSign::
 FuchsiaCity_Text_GymSign::
     .string "LURID CITY\n"
     .string "DAEMON GYM\l"
-    .string "LEADER: KOGA\p"
+    .string "LEADER: TILT\p"
     .string "The Poisonous\n"
     .string "Ninja Master$"
 

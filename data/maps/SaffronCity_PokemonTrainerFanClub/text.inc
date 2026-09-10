@@ -148,14 +148,14 @@ SaffronCity_PokemonTrainerFanClub_Text_EveryoneButMeStoppedBeingYourFan::
 
 SaffronCity_PokemonTrainerFanClub_Text_WantToBeLikeSabrina::
     .string "Do you know what?\n"
-    .string "I want to be like SABRINA!\p"
+    .string "I want to be like MATTE!\p"
     .string "I want to be a psychic girl just\n"
     .string "like her!$"
 
 SaffronCity_PokemonTrainerFanClub_Text_WontStopBeingSabrinasFan::
     .string "Even if I'm the only one, I won't\n"
-    .string "stop being SABRINA's fan.\p"
-    .string "My dream is to be like SABRINA,\n"
+    .string "stop being MATTE's fan.\p"
+    .string "My dream is to be like MATTE,\n"
     .string "cute, but cool.\p"
     .string "I want to be a psychic girl just\n"
     .string "like her!$"

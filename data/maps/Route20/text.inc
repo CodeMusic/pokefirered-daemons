@@ -109,5 +109,5 @@ Route20_Text_SeafoamIslands::
 Route20_Text_MistyTrainsHere::
     .string "Strong USERS and WATER DAEMONS\n"
     .string "are common sights in these parts.\p"
-    .string "They say that MISTY of the\n"
+    .string "They say that BASIN of the\n"
     .string "DOLDRUM GYM trains here.$"

@@ -3,8 +3,8 @@ CeladonCity_Gym_Text_ErikaIntro::
     .string "so pleasant.\p"
     .string "...Oh dear... I must have dozed\n"
     .string "off. Welcome.\p"
-    .string "My name is ERIKA. I am the LEADER\n"
-    .string "of VERDIGRIS GYM.\p"
+    .string "My name is TRELLIS. I lead the\n"
+    .string "VERDIGRIS GYM.\p"
     .string "I teach the art of flower\n"
     .string "arranging. My DAEMONS are of the\l"
     .string "grass-type.\p"
@@ -32,7 +32,7 @@ CeladonCity_Gym_Text_ExplainRainbowBadgeTakeThis::
 
 CeladonCity_Gym_Text_ReceivedTM19FromErika::
     .string "{PLAYER} received TM19\n"
-    .string "from ERIKA.$"
+    .string "from TRELLIS.$"
 
 CeladonCity_Gym_Text_ExplainTM19::
     .string "TM19 contains DISTILL.\p"
@@ -54,7 +54,7 @@ CeladonCity_Gym_Text_KayDefeat::
 
 CeladonCity_Gym_Text_KayPostBattle::
     .string "Bleaah!\n"
-    .string "I hope ERIKA wipes you out!$"
+    .string "I hope TRELLIS wipes you out!$"
 
 CeladonCity_Gym_Text_BridgetIntro::
     .string "Oh, welcome.\n"
@@ -77,7 +77,7 @@ CeladonCity_Gym_Text_TinaDefeat::
     .string "You're an eye-opener!$"
 
 CeladonCity_Gym_Text_TinaPostBattle::
-    .string "Oh, you were looking at ERIKA…\n"
+    .string "Oh, you were looking at TRELLIS…\n"
     .string "You weren't looking at me…$"
 
 CeladonCity_Gym_Text_TamiaIntro::
@@ -104,7 +104,7 @@ CeladonCity_Gym_Text_LisaDefeat::
     .string "You!$"
 
 CeladonCity_Gym_Text_LisaPostBattle::
-    .string "Our LEADER ERIKA might be quiet,\n"
+    .string "Our LEADER TRELLIS might be quiet,\n"
     .string "but she's famous around here.$"
 
 CeladonCity_Gym_Text_LoriIntro::
@@ -135,11 +135,11 @@ CeladonCity_Gym_Text_MaryPostBattle::
 
 CeladonCity_Gym_Text_GymStatue::
     .string "VERDIGRIS DAEMON GYM LEADER:\n"
-    .string "ERIKA\p"
+    .string "TRELLIS\p"
     .string "WINNING USERS: {RIVAL}$"
 
 CeladonCity_Gym_Text_GymStatuePlayerWon::
     .string "VERDIGRIS DAEMON GYM LEADER:\n"
-    .string "ERIKA\p"
+    .string "TRELLIS\p"
     .string "WINNING USERS: {RIVAL}, {PLAYER}$"
 

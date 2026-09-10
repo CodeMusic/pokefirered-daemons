@@ -24,7 +24,7 @@ VermilionCity_Gym_Text_ExplainThunderBadgeTakeThis::
 
 VermilionCity_Gym_Text_ReceivedTM34FromLtSurge::
     .string "{PLAYER} received TM34\n"
-    .string "from LT. SURGE.$"
+    .string "from GAUGE.$"
 
 VermilionCity_Gym_Text_ExplainTM34::
     .string "TM34 contains CARRIER!\p"
@@ -39,7 +39,7 @@ VermilionCity_Gym_Text_LtSurgeDefeat::
     .string "Fine then, take the SENSE MARK!$"
 
 VermilionCity_Gym_Text_TuckerIntro::
-    .string "When I was in the Army, LT. SURGE\n"
+    .string "When I was in the Army, GAUGE\n"
     .string "was my strict CO.\p"
     .string "He was a hard taskmaster.$"
 
@@ -49,7 +49,7 @@ VermilionCity_Gym_Text_TuckerDefeat::
 
 VermilionCity_Gym_Text_TuckerPostBattle::
     .string "It's not easy opening that door.\p"
-    .string "LT. SURGE was always famous for\n"
+    .string "GAUGE was always famous for\n"
     .string "his cautious nature in the Army.$"
 
 VermilionCity_Gym_Text_BailyIntro::
@@ -62,7 +62,7 @@ VermilionCity_Gym_Text_BailyDefeat::
 
 VermilionCity_Gym_Text_BailyPostBattle::
     .string "Okay, I'll talk!\p"
-    .string "LT. SURGE said he hid door\n"
+    .string "GAUGE said he hid door\n"
     .string "switches inside something.$"
 
 VermilionCity_Gym_Text_DwayneIntro::
@@ -74,7 +74,7 @@ VermilionCity_Gym_Text_DwayneDefeat::
     .string "Surprised me!$"
 
 VermilionCity_Gym_Text_DwaynePostBattle::
-    .string "LT. SURGE installed the traps in\n"
+    .string "GAUGE installed the traps in\n"
     .string "the GYM himself.\p"
     .string "He set up double locks everywhere.\n"
     .string "Let me give you a hint.\p"
@@ -83,13 +83,13 @@ VermilionCity_Gym_Text_DwaynePostBattle::
 
 VermilionCity_Gym_Text_GymGuyAdvice::
     .string "Yo! Champ in making!\p"
-    .string "LT.SURGE has a nickname. People\n"
+    .string "GAUGE has a nickname. People\n"
     .string "refer to him as the Lightning\l"
     .string "American!\p"
     .string "He's an expert on electric DAEMON!\p"
     .string "Birds and water DAEMONS are at\n"
     .string "risk! Beware of throttling too!\p"
-    .string "LT.SURGE is very cautious!\p"
+    .string "GAUGE is very cautious!\p"
     .string "You'll have to break a code to get\n"
     .string "to him!$"
 
@@ -99,12 +99,12 @@ VermilionCity_Gym_Text_GymGuyPostVictory::
 
 VermilionCity_Gym_Text_GymStatue::
     .string "ARDOR DAEMON GYM LEADER: LT.\n"
-    .string "SURGE\p"
+    .string "GAUGE\p"
     .string "WINNING USERS: {RIVAL}$"
 
 VermilionCity_Gym_Text_GymStatuePlayerWon::
     .string "ARDOR DAEMON GYM LEADER: LT.\n"
-    .string "SURGE\p"
+    .string "GAUGE\p"
     .string "WINNING USERS: {RIVAL}, {PLAYER}$"
 
 VermilionCity_Gym_Text_NopeOnlyTrashHere::

@@ -113,7 +113,7 @@ gFameCheckerFlavorText_Brock5:: @ 0x81ADA27
 gFameCheckerFlavorText_Misty0:: @ 0x81ADA91
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
 	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}DOLDRUM CITY DAEMON GYM LEADER:\n"
-	.string "MISTY The Tomboyish Mermaid!$"
+	.string "BASIN The Tomboyish Mermaid!$"
 
 gFameCheckerFlavorText_Misty1:: @ 0x81ADAF6
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of DAEMON?\p"
@@ -122,7 +122,7 @@ gFameCheckerFlavorText_Misty1:: @ 0x81ADAF6
 
 gFameCheckerFlavorText_Misty2:: @ 0x81ADB5A
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
-	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}MISTY is a USER who's going to keep\n"
+	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}BASIN is a USER who's going to keep\n"
 	.string "improving.\p"
 	.string "She won't lose to someone like you!$"
 
@@ -130,24 +130,24 @@ gFameCheckerFlavorText_Misty3:: @ 0x81ADBD9
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}There's a rumor…\p"
 	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}Strong USERS and WATER DAEMONS\n"
 	.string "are common sights in these parts.\p"
-	.string "They say that MISTY of the\n"
+	.string "They say that BASIN of the\n"
 	.string "DOLDRUM GYM trains here.$"
 
 gFameCheckerFlavorText_Misty4:: @ 0x81ADC72
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}There's a rumor…\p"
 	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}This cape is a famous date spot.\p"
-	.string "MISTY, the GYM LEADER, has high\n"
+	.string "BASIN, the GYM LEADER, has high\n"
 	.string "hopes about this place.$"
 
 gFameCheckerFlavorText_Misty5:: @ 0x81ADCEB
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}There's a rumor…\p"
-	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}MISTY is said to worship LORELEI\n"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}BASIN is said to worship LORELEI\n"
 	.string "of the REVIEW BOARD.$"
 
 gFameCheckerFlavorText_LtSurge0:: @ 0x81ADD3C
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
 	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}ARDOR CITY DAEMON GYM LEADER: LT.\n"
-	.string "SURGE The Lightning American!$"
+	.string "GAUGE The Lightning American!$"
 
 gFameCheckerFlavorText_LtSurge1:: @ 0x81ADDA7
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of DAEMON?\p"
@@ -156,24 +156,24 @@ gFameCheckerFlavorText_LtSurge1:: @ 0x81ADDA7
 
 gFameCheckerFlavorText_LtSurge2:: @ 0x81ADE0B
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
-	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}When I was in the Army, LT. SURGE\n"
+	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}When I was in the Army, GAUGE\n"
 	.string "was my strict CO.\p"
 	.string "He was a hard taskmaster.$"
 
 gFameCheckerFlavorText_LtSurge3:: @ 0x81ADE82
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
-	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}LT. SURGE was always famous for\n"
+	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}GAUGE was always famous for\n"
 	.string "his cautious nature in the Army.$"
 
 gFameCheckerFlavorText_LtSurge4:: @ 0x81ADEEC
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
-	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}LT. SURGE installed the traps in\n"
+	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}GAUGE installed the traps in\n"
 	.string "the GYM himself.\p"
 	.string "He set up double locks everywhere.$"
 
 gFameCheckerFlavorText_LtSurge5:: @ 0x81ADF6A
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}There's a rumor…\p"
-	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}LT. SURGE is rumored to have been\n"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}GAUGE is rumored to have been\n"
 	.string "a pilot while home in America.\p"
 	.string "He used the electricity generated\n"
 	.string "by DAEMON to power his plane.$"
@@ -181,7 +181,7 @@ gFameCheckerFlavorText_LtSurge5:: @ 0x81ADF6A
 gFameCheckerFlavorText_Erika0:: @ 0x81AE009
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
 	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}VERDIGRIS CITY DAEMON GYM\n"
-	.string "LEADER: ERIKA The Nature-Loving\l"
+	.string "LEADER: TRELLIS The Nature-Loving\l"
 	.string "Princess!$"
 
 gFameCheckerFlavorText_Erika1:: @ 0x81AE072
@@ -193,7 +193,7 @@ gFameCheckerFlavorText_Erika1:: @ 0x81AE072
 
 gFameCheckerFlavorText_Erika2:: @ 0x81AE0F3
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
-	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}Our LEADER ERIKA might be quiet,\n"
+	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}Our LEADER TRELLIS might be quiet,\n"
 	.string "but she's famous around here.$"
 
 gFameCheckerFlavorText_Erika3:: @ 0x81AE15B
@@ -212,12 +212,12 @@ gFameCheckerFlavorText_Erika5:: @ 0x81AE247
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}There's a rumor…\p"
 	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}Rumor has it that if you peek into\n"
 	.string "VERDIGRIS GYM, you can often see\l"
-	.string "ERIKA snoozing.$"
+	.string "TRELLIS snoozing.$"
 
 gFameCheckerFlavorText_Koga0:: @ 0x81AE2B6
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
 	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}LURID CITY DAEMON GYM LEADER:\n"
-	.string "KOGA The Poisonous Ninja Master$"
+	.string "TILT The Poisonous Ninja Master$"
 
 gFameCheckerFlavorText_Koga1:: @ 0x81AE31D
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of DAEMON?\p"
@@ -228,7 +228,7 @@ gFameCheckerFlavorText_Koga2:: @ 0x81AE37D
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
 	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}Even though I've lost, I will keep\n"
 	.string "training according to the teachings\l"
-	.string "of KOGA, my ninja master.$"
+	.string "of TILT, my ninja master.$"
 
 gFameCheckerFlavorText_Koga3:: @ 0x81AE407
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Family and friends?\p"
@@ -239,7 +239,7 @@ gFameCheckerFlavorText_Koga3:: @ 0x81AE407
 
 gFameCheckerFlavorText_Koga4:: @ 0x81AE48D
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}There's a rumor…\p"
-	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}KOGA is said to have a thorough\n"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}TILT is said to have a thorough\n"
 	.string "knowledge of medicine.\p"
 	.string "He even concocts medicine to nurse\n"
 	.string "his DAEMON to health.$"
@@ -248,7 +248,7 @@ gFameCheckerFlavorText_Koga5:: @ 0x81AE51B
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
 	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}The SAFARI ZONE's huge, wouldn't\n"
 	.string "you say?\p"
-	.string "LURID's GYM LEADER, KOGA, patrols\n"
+	.string "LURID's GYM LEADER, TILT, patrols\n"
 	.string "the grounds every so often.\p"
 	.string "Thanks to him, we can play here\n"
 	.string "knowing that we're safe.$"
@@ -256,7 +256,7 @@ gFameCheckerFlavorText_Koga5:: @ 0x81AE51B
 gFameCheckerFlavorText_Sabrina0:: @ 0x81AE5E8
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
 	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}BRAZEN CITY DAEMON GYM LEADER:\n"
-	.string "SABRINA The Master of CONSTRUE\l"
+	.string "MATTE The Master of CONSTRUE\l"
 	.string "DAEMON!$"
 
 gFameCheckerFlavorText_Sabrina1:: @ 0x81AE656
@@ -280,19 +280,19 @@ gFameCheckerFlavorText_Sabrina3:: @ 0x81AE762
 
 gFameCheckerFlavorText_Sabrina4:: @ 0x81AE7CB
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}There's a rumor…\p"
-	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}People say that SABRINA can\n"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}People say that MATTE can\n"
 	.string "communicate with her DAEMON during\l"
 	.string "battle without speaking.$"
 
 gFameCheckerFlavorText_Sabrina5:: @ 0x81AE841
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
-	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}SABRINA just wiped out the KARATE\n"
+	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}MATTE just wiped out the KARATE\n"
 	.string "MASTER next door.$"
 
 gFameCheckerFlavorText_Blaine0:: @ 0x81AE89E
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
 	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}QUICKSILVER ISLAND DAEMON GYM\n"
-	.string "LEADER: BLAINE The Hotheaded Quiz\l"
+	.string "LEADER: ANNEAL The Hotheaded Quiz\l"
 	.string "Master!$"
 
 gFameCheckerFlavorText_Blaine1:: @ 0x81AE90A
@@ -303,29 +303,29 @@ gFameCheckerFlavorText_Blaine1:: @ 0x81AE90A
 
 gFameCheckerFlavorText_Blaine2:: @ 0x81AE990
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of DAEMON?\p"
-	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}Our LEADER, BLAINE, became lost in\n"
+	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}Our LEADER, ANNEAL, became lost in\n"
 	.string "the mountains but good.\p"
 	.string "Night fell when a fiery bird DAEMON\n"
 	.string "appeared.\p"
-	.string "Its light allowed BLAINE to find\n"
+	.string "Its light allowed ANNEAL to find\n"
 	.string "his way down safely.$"
 
 gFameCheckerFlavorText_Blaine3:: @ 0x81AEA59
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
-	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}QUICKSILVER GYM's BLAINE is quite\n"
+	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}QUICKSILVER GYM's ANNEAL is quite\n"
 	.string "the odd fellow.\p"
 	.string "He's lived on the island since way\n"
 	.string "before the LAB was built.$"
 
 gFameCheckerFlavorText_Blaine4:: @ 0x81AEAEE
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Family and friends?\p"
-	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}It's a photo of BLAINE and INIT.\p"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}It's a photo of ANNEAL and INIT.\p"
 	.string "They're standing shoulder to\n"
 	.string "shoulder with big grins.$"
 
 gFameCheckerFlavorText_Blaine5:: @ 0x81AEB69
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}There's a rumor…\p"
-	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}BLAINE is said to remove his dark\n"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}ANNEAL is said to remove his dark\n"
 	.string "shades only when he is thinking up\l"
 	.string "new quiz questions.$"
 
@@ -547,7 +547,7 @@ gFameCheckerFlavorText_MrFuji3:: @ 0x81AFCE9
 
 gFameCheckerFlavorText_MrFuji4:: @ 0x81AFD49
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Family and friends?\p"
-	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}It's a photo of BLAINE and INIT.\p"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}It's a photo of ANNEAL and INIT.\p"
 	.string "They're standing shoulder to\n"
 	.string "shoulder with big grins.$"
 
@@ -633,10 +633,10 @@ gFameCheckerPersonQuote_Brock:: @ 0x81B031B
 	.string "ourselves stronger!$"
 
 gFameCheckerPersonName_Misty:: @ 0x81B03B3
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}MISTY$"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}BASIN$"
 
 gFameCheckerPersonQuote_Misty:: @ 0x81B03BF
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}From: MISTY\n"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}From: BASIN\n"
 	.string "To: {PLAYER}\p"
 	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}I'm going to keep training here at\n"
 	.string "this GYM.\p"
@@ -644,10 +644,10 @@ gFameCheckerPersonQuote_Misty:: @ 0x81B03BF
 	.string "the road and travel.$"
 
 gFameCheckerPersonName_LtSurge:: @ 0x81B0446
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}LT. SURGE$"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}GAUGE$"
 
 gFameCheckerPersonQuote_LtSurge:: @ 0x81B0456
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}From: LT. SURGE To: {PLAYER}\p"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}From: GAUGE To: {PLAYER}\p"
 	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}Hey, kid! You electrified me in our\n"
 	.string "battle!\p"
 	.string "I didn't know that there were gutsy\n"
@@ -656,10 +656,10 @@ gFameCheckerPersonQuote_LtSurge:: @ 0x81B0456
 	.string "you!$"
 
 gFameCheckerPersonName_Erika:: @ 0x81B0504
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}ERIKA$"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}TRELLIS$"
 
 gFameCheckerPersonQuote_Erika:: @ 0x81B0510
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}From: ERIKA To: {PLAYER}\p"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}From: TRELLIS To: {PLAYER}\p"
 	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}I am so glad that there are strong\n"
 	.string "USERS like you.\p"
 	.string "That awareness alone inspires and\n"
@@ -667,10 +667,10 @@ gFameCheckerPersonQuote_Erika:: @ 0x81B0510
 	.string "Please visit me again. Zzz…$"
 
 gFameCheckerPersonName_Koga:: @ 0x81B05C2
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}KOGA$"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}TILT$"
 
 gFameCheckerPersonQuote_Koga:: @ 0x81B05CD
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}From: KOGA\n"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}From: TILT\n"
 	.string "To: {PLAYER}\p"
 	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}You and I, we must both set our\n"
 	.string "sights higher and work towards\l"
@@ -678,20 +678,20 @@ gFameCheckerPersonQuote_Koga:: @ 0x81B05CD
 	.string "Now, I must go train my daughter.$"
 
 gFameCheckerPersonName_Sabrina:: @ 0x81B0667
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}SABRINA$"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}MATTE$"
 
 gFameCheckerPersonQuote_Sabrina:: @ 0x81B0675
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}From: SABRINA To: {PLAYER}\p"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}From: MATTE To: {PLAYER}\p"
 	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}The love you have towards your\n"
 	.string "DAEMON…\p"
 	.string "It was a power that was never\n"
 	.string "bested by my psychic power.$"
 
 gFameCheckerPersonName_Blaine:: @ 0x81B06FB
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}BLAINE$"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}ANNEAL$"
 
 gFameCheckerPersonQuote_Blaine:: @ 0x81B0708
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}From: BLAINE To: {PLAYER}\p"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}From: ANNEAL To: {PLAYER}\p"
 	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}My fire DAEMON! They'll become\n"
 	.string "even more powerful!\p"
 	.string "And now, a quiz. How many kinds of\n"
@@ -1118,7 +1118,7 @@ gFameCheckerFlavorTextOriginObjectName_Misty0::
 	.string "SIGN$"
 
 gFameCheckerFlavorTextOriginObjectName_Misty1::
-	.string "MISTY$"
+	.string "BASIN$"
 
 gFameCheckerFlavorTextOriginObjectName_Misty2::
 	.string "LUIS$"
@@ -1136,7 +1136,7 @@ gFameCheckerFlavorTextOriginObjectName_LtSurge0::
 	.string "SIGN$"
 
 gFameCheckerFlavorTextOriginObjectName_LtSurge1::
-	.string "LT. SURGE$"
+	.string "GAUGE$"
 
 gFameCheckerFlavorTextOriginObjectName_LtSurge2::
 	.string "TUCKER$"
@@ -1154,7 +1154,7 @@ gFameCheckerFlavorTextOriginObjectName_Erika0::
 	.string "SIGN$"
 
 gFameCheckerFlavorTextOriginObjectName_Erika1::
-	.string "ERIKA$"
+	.string "TRELLIS$"
 
 gFameCheckerFlavorTextOriginObjectName_Erika2::
 	.string "LOLA$"
@@ -1163,7 +1163,7 @@ gFameCheckerFlavorTextOriginObjectName_Erika3::
 	.string "TAMIA$"
 
 gFameCheckerFlavorTextOriginObjectName_Erika4::
-	.string "ERIKA$"
+	.string "TRELLIS$"
 
 gFameCheckerFlavorTextOriginObjectName_Erika5::
 	.string "DAEMON JOURNAL$"
@@ -1172,7 +1172,7 @@ gFameCheckerFlavorTextOriginObjectName_Koga0::
 	.string "SIGN$"
 
 gFameCheckerFlavorTextOriginObjectName_Koga1::
-	.string "KOGA$"
+	.string "TILT$"
 
 gFameCheckerFlavorTextOriginObjectName_Koga2::
 	.string "KIRK$"
@@ -1193,10 +1193,10 @@ gFameCheckerFlavorTextOriginObjectName_Sabrina1::
 	.string "YOUNG MAN$"
 
 gFameCheckerFlavorTextOriginObjectName_Sabrina2::
-	.string "SABRINA$"
+	.string "MATTE$"
 
 gFameCheckerFlavorTextOriginObjectName_Sabrina3::
-	.string "SABRINA$"
+	.string "MATTE$"
 
 gFameCheckerFlavorTextOriginObjectName_Sabrina4::
 	.string "DAEMON JOURNAL$"
@@ -1208,7 +1208,7 @@ gFameCheckerFlavorTextOriginObjectName_Blaine0::
 	.string "SIGN$"
 
 gFameCheckerFlavorTextOriginObjectName_Blaine1::
-	.string "BLAINE$"
+	.string "ANNEAL$"
 
 gFameCheckerFlavorTextOriginObjectName_Blaine2::
 	.string "DEREK$"
@@ -1358,15 +1358,15 @@ PokemonJournal_Text_SpecialFeatureBrock::
 PokemonJournal_Text_SpecialFeatureMisty::
 	.string "DAEMON JOURNAL\p"
 	.string "Special Feature: DOLDRUM GYM\n"
-	.string "LEADER MISTY!\p"
-	.string "MISTY is said to worship LORELEI\n"
+	.string "LEADER BASIN!\p"
+	.string "BASIN is said to worship LORELEI\n"
 	.string "of the REVIEW BOARD.$"
 
 PokemonJournal_Text_SpecialFeatureLtSurge::
 	.string "DAEMON JOURNAL\p"
 	.string "Special Feature: ARDOR GYM LEADER\n"
-	.string "LT. SURGE!\p"
-	.string "LT. SURGE is rumored to have been\n"
+	.string "GAUGE!\p"
+	.string "GAUGE is rumored to have been\n"
 	.string "a pilot while home in America.\p"
 	.string "He used the electricity generated\n"
 	.string "by DAEMON to power his plane.$"
@@ -1374,16 +1374,16 @@ PokemonJournal_Text_SpecialFeatureLtSurge::
 PokemonJournal_Text_SpecialFeatureErika::
 	.string "DAEMON JOURNAL\p"
 	.string "Special Feature: VERDIGRIS GYM\n"
-	.string "LEADER ERIKA!\p"
+	.string "LEADER TRELLIS!\p"
 	.string "Rumor has it that if you peek into\n"
 	.string "VERDIGRIS GYM, you can often see\l"
-	.string "ERIKA snoozing.$"
+	.string "TRELLIS snoozing.$"
 
 PokemonJournal_Text_SpecialFeatureKoga::
 	.string "DAEMON JOURNAL\p"
 	.string "Special Feature: LURID GYM LEADER\n"
-	.string "KOGA!\p"
-	.string "KOGA is said to have a thorough\n"
+	.string "TILT!\p"
+	.string "TILT is said to have a thorough\n"
 	.string "knowledge of medicine.\p"
 	.string "He even concocts medicine to nurse\n"
 	.string "his DAEMON to health.$"
@@ -1391,16 +1391,16 @@ PokemonJournal_Text_SpecialFeatureKoga::
 PokemonJournal_Text_SpecialFeatureSabrina::
 	.string "DAEMON JOURNAL\p"
 	.string "Special Feature: BRAZEN GYM\n"
-	.string "LEADER SABRINA!\p"
-	.string "People say that SABRINA can\n"
+	.string "LEADER MATTE!\p"
+	.string "People say that MATTE can\n"
 	.string "communicate with her DAEMON during\l"
 	.string "battle without speaking.$"
 
 PokemonJournal_Text_SpecialFeatureBlaine::
 	.string "DAEMON JOURNAL\p"
 	.string "Special Feature: QUICKSILVER GYM\n"
-	.string "LEADER BLAINE!\p"
-	.string "BLAINE is said to remove his dark\n"
+	.string "LEADER ANNEAL!\p"
+	.string "ANNEAL is said to remove his dark\n"
 	.string "shades only when he is thinking up\l"
 	.string "new quiz questions.$"
 

@@ -1,6 +1,6 @@
 CinnabarIsland_Gym_Text_BlaineIntro::
     .string "Hah!\p"
-    .string "I am BLAINE! I am the LEADER of\n"
+    .string "I am ANNEAL! I am the LEADER of\n"
     .string "QUICKSILVER GYM!\p"
     .string "My fiery DAEMON will incinerate all\n"
     .string "challengers!\p"
@@ -23,7 +23,7 @@ CinnabarIsland_Gym_Text_ExplainVolcanoBadge::
 
 CinnabarIsland_Gym_Text_ReceivedTM38FromBlaine::
     .string "{PLAYER} received TM38\n"
-    .string "from BLAINE.$"
+    .string "from ANNEAL.$"
 
 CinnabarIsland_Gym_Text_BlainePostBattle::
     .string "TM38 contains FLASHOVER. Teach it\n"
@@ -83,17 +83,17 @@ CinnabarIsland_Gym_Text_RamonPostBattle::
     .string "I'd use that!$"
 
 CinnabarIsland_Gym_Text_DerekIntro::
-    .string "I know why BLAINE became a USER!$"
+    .string "I know why ANNEAL became a USER!$"
 
 CinnabarIsland_Gym_Text_DerekDefeat::
     .string "Ow!$"
 
 CinnabarIsland_Gym_Text_DerekPostBattle::
-    .string "Our LEADER, BLAINE, became lost in\n"
+    .string "Our LEADER, ANNEAL, became lost in\n"
     .string "the mountains but good.\p"
     .string "Night fell when a fiery bird DAEMON\n"
     .string "appeared.\p"
-    .string "Its light allowed BLAINE to find\n"
+    .string "Its light allowed ANNEAL to find\n"
     .string "his way down safely.$"
 
 CinnabarIsland_Gym_Text_DustyIntro::
@@ -122,7 +122,7 @@ CinnabarIsland_Gym_Text_ZacPostBattle::
 
 CinnabarIsland_Gym_Text_GymGuyAdvice::
     .string "Yo! Champ in the making!\p"
-    .string "The hotheaded BLAINE is a FIRE\n"
+    .string "The hotheaded ANNEAL is a FIRE\n"
     .string "DAEMON pro.\p"
     .string "Douse his spirits with water!\p"
     .string "You'd better take some COOLANTS,\n"
@@ -134,12 +134,12 @@ CinnabarIsland_Gym_Text_GymGuyPostVictory::
 
 CinnabarIsland_Gym_Text_GymStatue::
     .string "QUICKSILVER DAEMON GYM LEADER:\n"
-    .string "BLAINE\p"
+    .string "ANNEAL\p"
     .string "WINNING USERS: {RIVAL}$"
 
 CinnabarIsland_Gym_Text_GymStatuePlayerWon::
     .string "QUICKSILVER DAEMON GYM LEADER:\n"
-    .string "BLAINE\p"
+    .string "ANNEAL\p"
     .string "WINNING USERS: {RIVAL}, {PLAYER}$"
 
 CinnabarIsland_Gym_Text_PokemonQuizRules::

@@ -59,7 +59,7 @@ CeladonCity_GameCorner_Text_GymGuyAdvice::
     .string "Hey!\p"
     .string "You have better things to do,\n"
     .string "champ in making!\p"
-    .string "VERDIGRIS GYM's LEADER is ERIKA!\n"
+    .string "VERDIGRIS GYM's LEADER is TRELLIS!\n"
     .string "She uses grasstype DAEMON!\p"
     .string "She might appear docile, but don't\n"
     .string "be fooled!$"
