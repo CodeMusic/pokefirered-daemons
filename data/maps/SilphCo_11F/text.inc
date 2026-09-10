@@ -41,25 +41,33 @@ SilphCo_11F_Text_ThanksForRescuingUs::
     .string "are indebted to you.$"
 
 SilphCo_11F_Text_GiovanniIntro::
-    .string "Ah, {PLAYER}!\n"
-    .string "So we meet again!\p"
-    .string "The PRESIDENT and I are discussing\n"
-    .string "a vital business proposition.\p"
-    .string "Keep your nose out of grown-up\n"
-    .string "matters…\p"
-    .string "Or, experience a world of pain!$"
+    .string "Ah. {PLAYER}.\p"
+    .string "The PRESIDENT and I are agreeing\n"
+    .string "terms.\p"
+    .string "Since you are here. Everyone\n"
+    .string "protects what they value.\p"
+    .string "That is not the fault.\p"
+    .string "The fault is that protecting is\n"
+    .string "easier to measure than the thing.\p"
+    .string "So they improve the protecting.\n"
+    .string "For years.\p"
+    .string "And go on calling it by the name\n"
+    .string "of the thing.\p"
+    .string "I do not make that error.\p"
+    .string "Stand aside.$"
 
 SilphCo_11F_Text_GiovanniDefeat::
-    .string "Arrgh!!\n"
-    .string "I lost again!?$"
+    .string "Hm.\p"
+    .string "That is a result.$"
 
 SilphCo_11F_Text_GiovanniPostBattle::
-    .string "Blast it all! You ruined our plans\n"
-    .string "for SILPH!\p"
-    .string "But, TEAM CORPUS will never fall!\p"
-    .string "{PLAYER}! Never forget that all\n"
-    .string "DAEMONS exist for TEAM CORPUS!\p"
-    .string "I must go, but I shall return!$"
+    .string "You have cost me a quarter.\n"
+    .string "Not a company.\p"
+    .string "The work continues, because the\n"
+    .string "work was never mine.\p"
+    .string "It is the shape of the thing.\p"
+    .string "You are measuring well.\n"
+    .string "I will see you again.$"
 
 SilphCo_11F_Text_Grunt2Intro::
     .string "Please wait here. Someone will be\n"
