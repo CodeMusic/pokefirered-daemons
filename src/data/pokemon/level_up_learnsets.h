@@ -3507,8 +3507,17 @@ static const u16 sCelebiLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+//  MISSINGNO. Gen 1's read the wrong bytes and came out knowing Sky Attack and
+//  Water Gun twice; ours keeps both and puts NO-OP in front of them, which is
+//  the routine that does nothing on the daemon that is not counted. BALLISTIC
+//  is a charging routine, so the thing with 136 base ATTACK spends its first
+//  turn doing nothing at all -- which is what makes the encounter survivable
+//  and was not designed, only noticed.
 static const u16 sSpecies252LevelUpLearnset[] = {
-    LEVEL_UP_MOVE(1, MOVE_TACKLE),
+    LEVEL_UP_MOVE( 1, MOVE_SPLASH),
+    LEVEL_UP_MOVE( 1, MOVE_WATER_GUN),
+    LEVEL_UP_MOVE( 1, MOVE_SKY_ATTACK),
+    LEVEL_UP_MOVE(80, MOVE_CONVERSION),
     LEVEL_UP_END
 };
 

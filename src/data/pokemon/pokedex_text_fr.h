@@ -2730,3 +2730,9 @@ const u8 gDeoxysPokedexText[] = _(
     "altering its appearance.");
 
 const u8 gDeoxysPokedexTextUnused[] = _("");
+
+const u8 gMissingnoPokedexText[] = _(
+    "No record of this daemon was ever\n"
+    "written. What you are reading was\n"
+    "assembled from the entries either side.");
+const u8 gMissingnoPokedexTextUnused[] = _("");

@@ -11669,9 +11669,9 @@
                 "species": "SPECIES_TENTACOOL"
               },
               {
-                "min_level": 35,
-                "max_level": 40,
-                "species": "SPECIES_TENTACOOL"
+                "min_level": 80,
+                "max_level": 80,
+                "species": "SPECIES_OLD_UNOWN_B"
               }
             ]
           },
@@ -24211,9 +24211,9 @@
                 "species": "SPECIES_TENTACOOL"
               },
               {
-                "min_level": 35,
-                "max_level": 40,
-                "species": "SPECIES_TENTACOOL"
+                "min_level": 80,
+                "max_level": 80,
+                "species": "SPECIES_OLD_UNOWN_B"
               }
             ],
             "encounter_rate": 1

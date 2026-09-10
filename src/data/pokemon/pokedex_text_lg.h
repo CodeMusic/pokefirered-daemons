@@ -2709,3 +2709,9 @@ const u8 gDeoxysPokedexText[] = _(
     "cellular structure.");
 
 const u8 gDeoxysPokedexTextUnused[] = _("");
+
+const u8 gMissingnoPokedexText[] = _(
+    "It is not rare. It is uncounted.\n"
+    "The list that would hold it stops one\n"
+    "short, and nobody has ever noticed.");
+const u8 gMissingnoPokedexTextUnused[] = _("");

@@ -7314,7 +7314,49 @@ const struct SpeciesInfo gSpeciesInfo[] =
         .bodyColor = BODY_COLOR_GREEN,
         .noFlip = FALSE,
     },
-    [SPECIES_OLD_UNOWN_B] = OLD_UNOWN_SPECIES_INFO,
+    //  8.9 -- MISSINGNO. Gen 1's most famous creature is not a creature: it is
+    //  an index that points at nothing, rendered. The slot it lives in here is
+    //  one of the twenty-five Gen 3 left over from a scrapped feature, which is
+    //  the same joke arriving by itself.
+    //
+    //  CORRUPT because that is what the player will call it. ORACLE because
+    //  vanilla's MissingNo. is the unused BIRD type, and ORACLE is what 2.2
+    //  named the unused slot -- so the homage is exact and it costs nothing:
+    //  the chart has no rows for ORACLE, so every matchup through it is even.
+    //
+    //  The stat line is Gen 1's, read out of the garbage bytes, unchanged --
+    //  33 / 136 / 0 / 29 / 6 / 6. Base DEFENSE of zero is safe: CalcMonStat
+    //  floors a defence stat at 5, and nothing divides by the base.
+    //
+    //  Three of these numbers are the argument and none of them says it.
+    //  catchRate 255: it does not resist being bound, because nothing recorded
+    //  it agreeing or refusing. expYield 0: it is worth no experience, because
+    //  nothing recorded the encounter. ABILITY_CACOPHONY is the one ability
+    //  Gen 3 defines and never gives to anything, and it does nothing at all.
+    [SPECIES_OLD_UNOWN_B] =
+    {
+        .baseHP        = 33,
+        .baseAttack    = 136,
+        .baseDefense   = 0,
+        .baseSpeed     = 29,
+        .baseSpAttack  = 6,
+        .baseSpDefense = 6,
+        .types = {TYPE_POISON, TYPE_MYSTERY},
+        .catchRate = 255,
+        .expYield = 0,
+        .evYield_Attack = 1,
+        .itemCommon = ITEM_NONE,
+        .itemRare = ITEM_NONE,
+        .genderRatio = MON_GENDERLESS,
+        .eggCycles = 120,
+        .friendship = 0,
+        .growthRate = GROWTH_MEDIUM_FAST,
+        .eggGroups = {EGG_GROUP_UNDISCOVERED, EGG_GROUP_UNDISCOVERED},
+        .abilities = {ABILITY_CACOPHONY, ABILITY_NONE},
+        .safariZoneFleeRate = 0,
+        .bodyColor = BODY_COLOR_BLACK,
+        .noFlip = FALSE,
+    },
     [SPECIES_OLD_UNOWN_C] = OLD_UNOWN_SPECIES_INFO,
     [SPECIES_OLD_UNOWN_D] = OLD_UNOWN_SPECIES_INFO,
     [SPECIES_OLD_UNOWN_E] = OLD_UNOWN_SPECIES_INFO,

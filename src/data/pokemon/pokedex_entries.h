@@ -5030,4 +5030,24 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerScale = 337,
         .trainerOffset = 2,
     },
+
+    //  8.9 -- the entry the register does not hold. NATIONAL_DEX_OLD_UNOWN_B is
+    //  387 and NATIONAL_DEX_COUNT is 386, so every list in the Index is bounded
+    //  one short of it and the counter never counts it. This entry exists only
+    //  so the capture screen has something in bounds to draw: the player reads
+    //  it once, at the moment of binding, and can never look it up again.
+    //
+    //  The height and weight are Gen 1's own -- 3'04" and 3590.0 lb.
+    [NATIONAL_DEX_OLD_UNOWN_B] =
+    {
+        .categoryName = _("UNRECORDED"),
+        .height = 10,
+        .weight = 16282,
+        .description = gMissingnoPokedexText,
+        .unusedDescription = gMissingnoPokedexTextUnused,
+        .pokemonScale = 256,
+        .pokemonOffset = 0,
+        .trainerScale = 256,
+        .trainerOffset = 0,
+    },
 };

@@ -10,7 +10,13 @@ CinnabarIsland_Text_ScientistsExperimentInMansion::
     .string "That burned out building still has\n"
     .string "its new sign.\p"
     .string "Gold leaf, dated. You can see the\n"
-    .string "old name under it.$"
+    .string "old name under it.\p"
+    .string "There's something out on the water\n"
+    .string "on the east side, too. Comes up\l"
+    .string "once in a blue moon.\p"
+    .string "Don't bother telling anybody. It's\n"
+    .string "not on any list, so as far as\l"
+    .string "they're concerned it didn't happen.$"
 
 CinnabarIsland_Text_IslandSign::
     .string "QUICKSILVER\n"
