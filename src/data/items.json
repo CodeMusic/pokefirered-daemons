@@ -3313,12 +3313,12 @@
       "secondaryId": 0
     },
     {
-      "english": "BLACK BELT",
+      "english": "RIGOUR",
       "itemId": "ITEM_BLACK_BELT",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_FIGHTING_POWER",
       "holdEffectParam": 10,
-      "description_english": "An item to be held by a DAEMON.\\nA belt that boosts determination\\nand FIGHTING-type moves.",
+      "description_english": "Held to argue harder from.\\nRaises the power of LOGIC\\nroutines.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -4086,7 +4086,7 @@
       "price": 100,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "An item to be held by a DAEMON.\\nIt boosts the holding DAEMON's\\nBEAUTY condition in CONTESTS.",
+      "description_english": "An item to be held by a DAEMON.\\nIt boosts the holding DAEMON's\\nSTYLIST condition in CONTESTS.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",

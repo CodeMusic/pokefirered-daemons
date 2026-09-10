@@ -32,8 +32,8 @@ Route17_Text_VirgilPostBattle::
     .string "I love racing downhill!$"
 
 Route17_Text_BillyIntro::
-    .string "We're BIKERS!\n"
-    .string "We rule the roads, man!$"
+    .string "We're COURIER! We rule the roads,\n"
+    .string "man!$"
 
 Route17_Text_BillyDefeat::
     .string "Smoked!$"

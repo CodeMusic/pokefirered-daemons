@@ -462,8 +462,8 @@ Route17_Text_VirgilRematchIntro::
 	.string "You out for a stroll?$"
 
 Route17_Text_BillyRematchIntro::
-	.string "We're BIKERS!\n"
-	.string "We rule the roads, man!$"
+	.string "We're COURIER! We rule the roads,\n"
+	.string "man!$"
 
 Route17_Text_NikolasRematchIntro::
 	.string "FUSE's going to seriously electrify\n"

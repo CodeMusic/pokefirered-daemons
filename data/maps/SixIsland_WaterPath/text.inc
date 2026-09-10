@@ -72,8 +72,8 @@ SixIsland_WaterPath_Text_MiuPostBattle::
     .string "when we lose…$"
 
 SixIsland_WaterPath_Text_MiuNotEnoughMons::
-    .string "MIU: MIA and I are TWINS. We want\n"
-    .string "to engage together.$"
+    .string "MIU: MIA and I are DUPLICATE. We\n"
+    .string "want to engage together.$"
 
 SixIsland_WaterPath_Text_MiaIntro::
     .string "MIA: Hello, DAEMON! It's time to\n"

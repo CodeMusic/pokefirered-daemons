@@ -153,7 +153,7 @@ ThreeIsland_Text_WouldntWantToSeeBikersHereAgain::
     .string "populous of the islands here.\p"
     .string "Still, it could be less sleepy.\p"
     .string "But I wouldn't want to see goons\n"
-    .string "like those BIKERS here again.$"
+    .string "like those COURIER here again.$"
 
 ThreeIsland_Text_WhenDodouEvolvesGoingToPlayGame::
     .string "I'm going to train my DUALCORE in\n"

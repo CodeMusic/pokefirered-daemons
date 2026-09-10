@@ -21,7 +21,7 @@ PokemonTower_1F_Text_GrowlitheWhyDidYouDie::
     .string "My SENTRY… Why did you die?$"
 
 PokemonTower_1F_Text_SenseSpiritsUpToMischief::
-    .string "I am a CHANNELER.\p"
-    .string "There are spirits up to mischief.\n"
-    .string "I sense them high in the TOWER.$"
+    .string "I am a MEDIUM.\p"
+    .string "There are spirits up to mischief. I\n"
+    .string "sense them high in the TOWER.$"
 

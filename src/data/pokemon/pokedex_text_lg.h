@@ -485,9 +485,9 @@ const u8 gMachampPokedexText[] = _(
 const u8 gMachampPokedexTextUnused[] = _("");
 
 const u8 gBellsproutPokedexText[] = _(
-        "It never went looking.\n"
-        "Everything it has caught came to it."
-);
+        "It never went\n"
+        "looking. Everything it\n"
+        "has bound came to it.");
 
 const u8 gBellsproutPokedexTextUnused[] = _("");
 
@@ -513,9 +513,9 @@ const u8 gTentacoolPokedexText[] = _(
 const u8 gTentacoolPokedexTextUnused[] = _("");
 
 const u8 gTentacruelPokedexText[] = _(
-        "Most of what it caught was not what\n"
-        "it was looking for."
-);
+        "Most of what it\n"
+        "bound was not what\n"
+        "it was looking for.");
 
 const u8 gTentacruelPokedexTextUnused[] = _("");
 
@@ -646,9 +646,9 @@ const u8 gCloysterPokedexText[] = _(
 const u8 gCloysterPokedexTextUnused[] = _("");
 
 const u8 gGastlyPokedexText[] = _(
-        "It cannot be caught by what it cannot\n"
-        "be reached by. Neither can it reach."
-);
+        "It cannot be bound by\n"
+        "what it cannot be reached\n"
+        "by. Neither can it reach.");
 
 const u8 gGastlyPokedexTextUnused[] = _("");
 
