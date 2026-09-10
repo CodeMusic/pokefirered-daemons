@@ -40,3 +40,4 @@ void SetTeachyTvControllerModeToResume(void);
 // T-12: the overworld notification. See src/field_control_avatar.c.
 s8 TeachyTvFirstUntoldShow(void);
 void TeachyTvMarkShowAsTold(u8 script);
+void TeachyTvMarkEveryUnlockedShowAsTold(void);

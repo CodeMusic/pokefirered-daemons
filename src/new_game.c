@@ -31,6 +31,7 @@
 #include "constants/flags.h"
 #include "constants/moves.h"
 #include "pokedex.h"
+#include "teachy_tv.h"
 #endif
 #include "renewable_hidden_items.h"
 #include "trainer_tower.h"
@@ -199,6 +200,12 @@ static void DaemonsDebug_GrantTestKit(void)
 
     for (i = FLAG_BADGE01_GET; i <= FLAG_BADGE08_GET; i++)
         FlagSet(i);
+
+    // ...and the eight MARKS unlock eight STREAM shows at once, which the T-12
+    // hook would then announce one step at a time. Mark them told here: the kit
+    // is meant to drop you into a late save, and in a late save you have heard
+    // about them already. See teachy_tv.c.
+    TeachyTvMarkEveryUnlockedShowAsTold();
 
     // Same reasoning as the Index above: HEARSAY in the bag opens an empty
     // screen unless the entries are unlocked, and an empty screen looks like a

@@ -224,6 +224,25 @@ void TeachyTvMarkShowAsTold(u8 script)
     FlagSet(TeachyTvToldFlag(script));
 }
 
+//  The debug kit grants all eight MARKS in one frame, which unlocks eight shows
+//  at once -- and the hook above then announces them one step at a time, eight
+//  boxes deep, which is the notification working correctly on a state no player
+//  ever reaches. A kit that hands you the endgame should hand you the endgame's
+//  save, and in that save you have already been told.
+//
+//  Only what is UNLOCKED is marked, so the mechanism stays testable: anything
+//  that unlocks later in a debug save still announces itself once.
+void TeachyTvMarkEveryUnlockedShowAsTold(void)
+{
+    u8 i;
+
+    for (i = TTVSCR_FIRST_TALK; i < TTVSCR_COUNT; ++i)
+    {
+        if (TeachyTvShowIsUnlocked(i))
+            FlagSet(TeachyTvToldFlag(i));
+    }
+}
+
 static bool8 TeachyTvHasUnseenShow(void)
 {
     u8 i;
