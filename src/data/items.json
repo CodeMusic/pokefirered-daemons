@@ -705,12 +705,12 @@
       "secondaryId": 0
     },
     {
-      "english": "BERRY JUICE",
+      "english": "RESERVE",
       "itemId": "ITEM_BERRY_JUICE",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_RESTORE_HP",
       "holdEffectParam": 20,
-      "description_english": "A 100% pure juice. It restores\\nthe HP of one DAEMON by 20\\npoints.",
+      "description_english": "Held back for the moment it is\\nneeded. Restores 20 HP.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -2129,12 +2129,12 @@
       "secondaryId": 11
     },
     {
-      "english": "CHERI BERRY",
+      "english": "THROTTLE TRAP",
       "itemId": "ITEM_CHERI_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_CURE_PAR",
       "holdEffectParam": 0,
-      "description_english": "When held by a DAEMON, it will be\\nused in battle to end THROTTLED.",
+      "description_english": "Armed against one condition\\nand spent binding it. Ends\\nTHROTTLED, once.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_BERRY_POUCH",
@@ -2145,12 +2145,12 @@
       "secondaryId": 0
     },
     {
-      "english": "CHESTO BERRY",
+      "english": "SUSPEND TRAP",
       "itemId": "ITEM_CHESTO_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_CURE_SLP",
       "holdEffectParam": 0,
-      "description_english": "When held by a DAEMON, it will be\\nused in battle to wake up.",
+      "description_english": "Fires the moment the daemon stops\\nbeing scheduled. Ends SUSPENDED,\\nonce.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_BERRY_POUCH",
@@ -2161,12 +2161,12 @@
       "secondaryId": 0
     },
     {
-      "english": "PECHA BERRY",
+      "english": "LEAK TRAP",
       "itemId": "ITEM_PECHA_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_CURE_PSN",
       "holdEffectParam": 0,
-      "description_english": "When held by a DAEMON, it will be\\nused in battle to end LEAKING.",
+      "description_english": "Catches a slow loss before it\\ncompounds. Ends LEAKING, once.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_BERRY_POUCH",
@@ -2177,12 +2177,12 @@
       "secondaryId": 0
     },
     {
-      "english": "RAWST BERRY",
+      "english": "HEAT TRAP",
       "itemId": "ITEM_RAWST_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_CURE_BRN",
       "holdEffectParam": 0,
-      "description_english": "When held by a DAEMON, it will be\\nused in battle to cool OVERHEATED.",
+      "description_english": "Fires on heat the daemon made\\nitself. Ends OVERHEATED, once.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_BERRY_POUCH",
@@ -2193,12 +2193,12 @@
       "secondaryId": 0
     },
     {
-      "english": "ASPEAR BERRY",
+      "english": "HANG TRAP",
       "itemId": "ITEM_ASPEAR_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_CURE_FRZ",
       "holdEffectParam": 0,
-      "description_english": "When held by a DAEMON, it will be\\nused in battle for defrosting.",
+      "description_english": "Fires when nothing else will.\\nEnds HUNG, once.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_BERRY_POUCH",
@@ -2209,12 +2209,12 @@
       "secondaryId": 0
     },
     {
-      "english": "LEPPA BERRY",
+      "english": "EXHAUST TRAP",
       "itemId": "ITEM_LEPPA_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_RESTORE_PP",
       "holdEffectParam": 10,
-      "description_english": "When held by a DAEMON, it will be\\nused in battle to restore 10 MP.",
+      "description_english": "Fires when a routine runs out of\\nbudget. Restores 10 MP, once.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_BERRY_POUCH",
@@ -2225,12 +2225,12 @@
       "secondaryId": 0
     },
     {
-      "english": "ORAN BERRY",
+      "english": "LOW MARK",
       "itemId": "ITEM_ORAN_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_RESTORE_HP",
       "holdEffectParam": 10,
-      "description_english": "When held by a DAEMON, it will be\\nused in battle to restore 10 HP.",
+      "description_english": "The level at which something is\\ndone about it. Restores 10 HP\\nwhen health falls, once.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_BERRY_POUCH",
@@ -2241,12 +2241,12 @@
       "secondaryId": 0
     },
     {
-      "english": "PERSIM BERRY",
+      "english": "THRASH TRAP",
       "itemId": "ITEM_PERSIM_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_CURE_CONFUSION",
       "holdEffectParam": 0,
-      "description_english": "When held by a DAEMON, it will be\\nused in battle to end THRASHING.",
+      "description_english": "Catches a daemon making no\\nprogress against itself. Ends\\nTHRASHING, once.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_BERRY_POUCH",
@@ -2257,12 +2257,12 @@
       "secondaryId": 0
     },
     {
-      "english": "LUM BERRY",
+      "english": "CATCH ALL",
       "itemId": "ITEM_LUM_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_CURE_STATUS",
       "holdEffectParam": 0,
-      "description_english": "When held by a DAEMON, it will be\\nused in battle to heal any problem.",
+      "description_english": "The handler that takes whatever\\narrives. Ends any state, once.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_BERRY_POUCH",
@@ -2273,12 +2273,12 @@
       "secondaryId": 0
     },
     {
-      "english": "SITRUS BERRY",
+      "english": "HIGH MARK",
       "itemId": "ITEM_SITRUS_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_RESTORE_HP",
       "holdEffectParam": 30,
-      "description_english": "When held by a DAEMON, it will be\\nused in battle to restore 30 HP.",
+      "description_english": "The same idea, set higher and\\nworth more. Restores 30 HP when\\nhealth falls, once.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_BERRY_POUCH",
@@ -2289,12 +2289,12 @@
       "secondaryId": 0
     },
     {
-      "english": "FIGY BERRY",
+      "english": "SPICY TRAP",
       "itemId": "ITEM_FIGY_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_CONFUSE_SPICY",
       "holdEffectParam": 8,
-      "description_english": "A hold item that restores HP but\\nmay cause THRASHING when used.",
+      "description_english": "Restores health, and may leave a\\ndaemon THRASHING. Which is which\\ndepends on the daemon.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_BERRY_POUCH",
@@ -2305,12 +2305,12 @@
       "secondaryId": 0
     },
     {
-      "english": "WIKI BERRY",
+      "english": "DRY TRAP",
       "itemId": "ITEM_WIKI_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_CONFUSE_DRY",
       "holdEffectParam": 8,
-      "description_english": "A hold item that restores HP but\\nmay cause THRASHING when used.",
+      "description_english": "Restores health, and may leave a\\ndaemon THRASHING. Which is which\\ndepends on the daemon.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_BERRY_POUCH",
@@ -2321,12 +2321,12 @@
       "secondaryId": 0
     },
     {
-      "english": "MAGO BERRY",
+      "english": "SWEET TRAP",
       "itemId": "ITEM_MAGO_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_CONFUSE_SWEET",
       "holdEffectParam": 8,
-      "description_english": "A hold item that restores HP but\\nmay cause THRASHING when used.",
+      "description_english": "Restores health, and may leave a\\ndaemon THRASHING. Which is which\\ndepends on the daemon.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_BERRY_POUCH",
@@ -2337,12 +2337,12 @@
       "secondaryId": 0
     },
     {
-      "english": "AGUAV BERRY",
+      "english": "BITTER TRAP",
       "itemId": "ITEM_AGUAV_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_CONFUSE_BITTER",
       "holdEffectParam": 8,
-      "description_english": "A hold item that restores HP but\\nmay cause THRASHING when used.",
+      "description_english": "Restores health, and may leave a\\ndaemon THRASHING. Which is which\\ndepends on the daemon.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_BERRY_POUCH",
@@ -2353,12 +2353,12 @@
       "secondaryId": 0
     },
     {
-      "english": "IAPAPA BERRY",
+      "english": "SOUR TRAP",
       "itemId": "ITEM_IAPAPA_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_CONFUSE_SOUR",
       "holdEffectParam": 8,
-      "description_english": "A hold item that restores HP but\\nmay cause THRASHING when used.",
+      "description_english": "Restores health, and may leave a\\ndaemon THRASHING. Which is which\\ndepends on the daemon.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_BERRY_POUCH",
@@ -2689,12 +2689,12 @@
       "secondaryId": 0
     },
     {
-      "english": "LIECHI BERRY",
+      "english": "AUTO ATTACK",
       "itemId": "ITEM_LIECHI_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_ATTACK_UP",
       "holdEffectParam": 4,
-      "description_english": "When held by a DAEMON, it raises\\nthe ATTACK stat in a pinch.",
+      "description_english": "Turns itself up when there is\\nlittle left. Raises ATTACK in a\\npinch.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_BERRY_POUCH",
@@ -2705,12 +2705,12 @@
       "secondaryId": 0
     },
     {
-      "english": "GANLON BERRY",
+      "english": "AUTO DEFENSE",
       "itemId": "ITEM_GANLON_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_DEFENSE_UP",
       "holdEffectParam": 4,
-      "description_english": "When held by a DAEMON, it raises\\nthe DEFENSE stat in a pinch.",
+      "description_english": "Turns itself up when there is\\nlittle left. Raises DEFENSE in a\\npinch.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_BERRY_POUCH",
@@ -2721,12 +2721,12 @@
       "secondaryId": 0
     },
     {
-      "english": "SALAC BERRY",
+      "english": "AUTO SPEED",
       "itemId": "ITEM_SALAC_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_SPEED_UP",
       "holdEffectParam": 4,
-      "description_english": "When held by a DAEMON, it raises\\nthe SPEED stat in a pinch.",
+      "description_english": "Turns itself up when there is\\nlittle left. Raises SPEED in a\\npinch.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_BERRY_POUCH",
@@ -2737,12 +2737,12 @@
       "secondaryId": 0
     },
     {
-      "english": "PETAYA BERRY",
+      "english": "AUTO SP. ATK",
       "itemId": "ITEM_PETAYA_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_SP_ATTACK_UP",
       "holdEffectParam": 4,
-      "description_english": "When held by a DAEMON, it raises\\nthe SP. ATK stat in a pinch.",
+      "description_english": "Turns itself up when there is\\nlittle left. Raises SP. ATK in a\\npinch.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_BERRY_POUCH",
@@ -2753,12 +2753,12 @@
       "secondaryId": 0
     },
     {
-      "english": "APICOT BERRY",
+      "english": "AUTO SP. DEF",
       "itemId": "ITEM_APICOT_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_SP_DEFENSE_UP",
       "holdEffectParam": 4,
-      "description_english": "When held by a DAEMON, it raises\\nthe SP. DEF stat in a pinch.",
+      "description_english": "Turns itself up when there is\\nlittle left. Raises SP. DEF in a\\npinch.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_BERRY_POUCH",
@@ -2769,12 +2769,12 @@
       "secondaryId": 0
     },
     {
-      "english": "LANSAT BERRY",
+      "english": "AUTO CRIT",
       "itemId": "ITEM_LANSAT_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_CRITICAL_UP",
       "holdEffectParam": 4,
-      "description_english": "When held by a DAEMON, it raises\\nthe critical-hit ratio in a pinch.",
+      "description_english": "Reaches further into the tail\\nwhen there is little left. Raises\\nthe critical-hit ratio.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_BERRY_POUCH",
@@ -2785,12 +2785,12 @@
       "secondaryId": 0
     },
     {
-      "english": "STARF BERRY",
+      "english": "AUTO ANY",
       "itemId": "ITEM_STARF_BERRY",
       "price": 20,
       "holdEffect": "HOLD_EFFECT_RANDOM_STAT_UP",
       "holdEffectParam": 4,
-      "description_english": "When held by a DAEMON, it sharply\\nraises one stat in a pinch.",
+      "description_english": "Turns one of them sharply up, and\\ndoes not say which. Raises a\\nrandom stat in a pinch.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_BERRY_POUCH",
@@ -5899,12 +5899,12 @@
       "secondaryId": 0
     },
     {
-      "english": "BERRY POUCH",
+      "english": "TRAP TABLE",
       "itemId": "ITEM_BERRY_POUCH",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A pouch for carrying BERRIES.\\nIt is attached to the BAG's\\ncompartment for important items.",
+      "description_english": "Where the handlers are installed.\\nIt attaches to the BAG's pocket\\nfor important items.",
       "importance": 1,
       "registrability": 1,
       "pocket": "POCKET_KEY_ITEMS",

@@ -90,6 +90,16 @@ static const u8 sBerryDescriptionPart2_Starf[] = _("せかいの はてに す�
 static const u8 sBerryDescriptionPart1_Enigma[] = _("しょうたい ふめいの きのみ.");
 static const u8 sBerryDescriptionPart2_Enigma[] = _("ほしの ちからを もっている らしい.");
 
+//  T-13 renamed the berries to TRAPS in items.json, and this table was NOT
+//  brought into step with it. BERRY_NAME_LENGTH is six, so nothing here can
+//  hold "THROTTLE TRAP" -- these are the short forms the game appends
+//  " BERRY" to.
+//
+//  Left alone rather than abbreviated, because 2.10's reachability rule says
+//  so: CopyItemName reads items.json for every berry EXCEPT ITEM_ENIGMA_BERRY,
+//  which cannot be obtained in this game, and the only other reader is BERRY
+//  CRUSH, which is a link minigame. Forty-three six-letter abbreviations
+//  nobody can see is worse than a table that is honestly out of scope.
 const struct Berry gBerries[] = {
     [ITEM_CHERI_BERRY - FIRST_BERRY_INDEX] =
         {
