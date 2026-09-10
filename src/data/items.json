@@ -481,12 +481,12 @@
       "secondaryId": 0
     },
     {
-      "english": "ENERGYPOWDER",
+      "english": "FIELD PATCH",
       "itemId": "ITEM_ENERGY_POWDER",
       "price": 500,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A very bitter medicine powder. It\\nrestores the HP of one DAEMON by\\n50 points.",
+      "description_english": "Applied where it broke, by\\nwhoever was standing there.\\nRestores 50 HP.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -497,12 +497,12 @@
       "secondaryId": 0
     },
     {
-      "english": "ENERGY ROOT",
+      "english": "WORKAROUND",
       "itemId": "ITEM_ENERGY_ROOT",
       "price": 800,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A very bitter root. It restores\\nthe HP of one DAEMON by 200\\npoints.",
+      "description_english": "Not the fix. The thing you do\\ninstead of the fix, and it works.\\nRestores 200 HP.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -529,12 +529,12 @@
       "secondaryId": 0
     },
     {
-      "english": "REVIVAL HERB",
+      "english": "COLD START",
       "itemId": "ITEM_REVIVAL_HERB",
       "price": 2800,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A very bitter medicinal herb.\\nIt revives a HALTED DAEMON,\\nrestoring HP fully.",
+      "description_english": "Brought up from nothing rather\\nthan resumed. Restarts a HALTED\\ndaemon at full health.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -721,12 +721,12 @@
       "secondaryId": 0
     },
     {
-      "english": "SACRED ASH",
+      "english": "RESTART ALL",
       "itemId": "ITEM_SACRED_ASH",
       "price": 200,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "Revives all HALTED DAEMON,\\nrestoring HP fully.",
+      "description_english": "Every halted daemon at once, and\\nall of them whole.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -4385,7 +4385,7 @@
       "secondaryId": 0
     },
     {
-      "english": "PAYLOAD",
+      "english": "ENVELOPE",
       "itemId": "ITEM_LETTER",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",

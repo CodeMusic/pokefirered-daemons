@@ -146,7 +146,7 @@ FiveIsland_RocketWarehouse_Text_TyTheOtherThing::
     .string "Everyone does, eventually.$"
 
 FiveIsland_RocketWarehouse_Text_ReceivedPayload::
-    .string "{PLAYER} received the PAYLOAD.$"
+    .string "{PLAYER} received the ENVELOPE.$"
 
 FiveIsland_RocketWarehouse_Text_TyNotComing::
     .string "The name on it is enough. She\n"
