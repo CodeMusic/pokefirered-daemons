@@ -1525,6 +1525,25 @@
 
 #define FLAGS_COUNT (FLAG_0x8FF + 1)
 
+//  OURS. T-17: vanilla had nine free flags and the STREAM took all nine, so
+//  the next feature that wants one has nowhere to put it.
+//
+//  The vanilla block ends at 0x8FF and its array ends with it -- flags[] runs
+//  0x0EE0 to 0x1000 in SaveBlock1 and vars[] begins immediately after, so it
+//  cannot grow by a byte without moving every field below it and invalidating
+//  every existing save. Note that GetFlagAddr would happily index past the end
+//  for anything between 0x900 and SPECIAL_FLAGS_START; vanilla is safe only
+//  because no constant lives there.
+//
+//  So these live in SaveBlock2's 0x400 of filler instead, taking 0x80 of it
+//  and leaving the rest. encryptionKey does not move, nothing above it moves,
+//  and an old save reads them as zero because nothing ever wrote there.
+//  STATIC_ASSERTs in event_data.c hold both halves of that.
+#define DAEMONS_FLAGS_START           0x900
+#define DAEMONS_FLAGS_COUNT           0x400
+#define DAEMONS_FLAGS_END             (DAEMONS_FLAGS_START + DAEMONS_FLAGS_COUNT - 1)
+#define DAEMONS_FLAGS_SIZE            (DAEMONS_FLAGS_COUNT / 8)
+
 // Special Flags (Stored in EWRAM (sSpecialFlags, not in the SaveBlock)
 #define SPECIAL_FLAGS_START           0x4000
 #define FLAG_DONT_SHOW_MAP_NAME_POPUP (SPECIAL_FLAGS_START + 0x0)

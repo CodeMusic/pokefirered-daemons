@@ -44,6 +44,9 @@ void InitEventData(void)
     memset(gSaveBlock1Ptr->flags, 0, sizeof(gSaveBlock1Ptr->flags));
     memset(gSaveBlock1Ptr->vars, 0, sizeof(gSaveBlock1Ptr->vars));
     memset(sSpecialFlags, 0, sizeof(sSpecialFlags));
+    //  An old save reads these as zero anyway -- nothing has ever written to
+    //  that filler -- but a new game should not depend on that being true.
+    memset(gSaveBlock2Ptr->daemonsFlags, 0, sizeof(gSaveBlock2Ptr->daemonsFlags));
 }
 
 void ClearTempFieldEventData(void)
@@ -254,11 +257,25 @@ u8 VarGetObjectEventGraphicsId(u8 idx)
     return VarGet(VAR_OBJ_GFX_ID_0 + idx);
 }
 
+//  T-17, both halves of it. The first says the new block came OUT of the
+//  filler rather than after it; the second says the field below it did not
+//  move, which is the whole reason an existing save still loads.
+STATIC_ASSERT(sizeof(((struct SaveBlock2 *)0)->filler_B20) + DAEMONS_FLAGS_SIZE == 0x400,
+              DaemonsFlagsCameOutOfTheFiller);
+STATIC_ASSERT(offsetof(struct SaveBlock2, encryptionKey) == 0xF20,
+              DaemonsFlagsMovedNothing);
+
 u8 *GetFlagAddr(u16 idx)
 {
     u8 *ptr;
     if (idx == 0)
         return NULL;
+    //  Checked BEFORE the vanilla branch, because that one tests only
+    //  idx < SPECIAL_FLAGS_START and would index a 288-byte array with 0x900.
+    //  Vanilla is safe there only because it never defines a constant above
+    //  0x8FF; this range is the first thing that does.
+    if (idx >= DAEMONS_FLAGS_START && idx <= DAEMONS_FLAGS_END)
+        return &gSaveBlock2Ptr->daemonsFlags[(idx - DAEMONS_FLAGS_START) / 8];
     if (idx < SPECIAL_FLAGS_START)
     {
         switch (gQuestLogPlaybackState)
