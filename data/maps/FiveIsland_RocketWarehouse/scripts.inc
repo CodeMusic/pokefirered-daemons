@@ -63,6 +63,12 @@ FiveIsland_RocketWarehouse_EventScript_DefeatedGideon::
 @  He walks over -- the player does not go to him -- and the walk is the whole
 @  of the characterisation, because he was not hiding, he was trading, and a
 @  man stating terms crosses the room himself.
+@
+@  LOCALID_WAREHOUSE_GIDEON is declared in map.json, NOT in
+@  include/constants/map_event_ids.h -- that header is GENERATED and
+@  gitignored, and an edit to it survives exactly until the next build
+@  regenerates it. engine.md trap 4, caught by the linker rather than by
+@  remembering.
 	applymovement LOCALID_WAREHOUSE_GIDEON, FiveIsland_RocketWarehouse_Movement_TyApproaches
 	waitmovement 0
 	msgbox FiveIsland_RocketWarehouse_Text_TyTheOtherThing

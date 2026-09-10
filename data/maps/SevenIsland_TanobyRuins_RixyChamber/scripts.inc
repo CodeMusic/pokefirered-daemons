@@ -5,3 +5,13 @@ SevenIsland_TanobyRuins_RixyChamber_MapScripts::
 SevenIsland_TanobyRuins_RixyChamber_OnTransition::
 	call EventScript_TryDarkenRuins
 	end
+
+@  T-21. One of seven. Nobody here is lying.
+SevenIsland_TanobyRuins_RixyChamber_EventScript_Braille::
+	lockall
+	braillemessage Braille_Text_Chamber6
+	waitbuttonpress
+	braillemessage Braille_Text_Chamber6b
+	waitbuttonpress
+	releaseall
+	end

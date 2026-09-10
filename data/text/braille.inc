@@ -114,3 +114,49 @@ Braille_Text_WorldWaits::
 
 Braille_Text_ForYou::
 	.braille "FOR YOU.$"
+
+@  T-21. Seven chambers, seven accounts of one event, and the event is never
+@  named. 4.24's finding is that the document that removed her and the
+@  document that vindicated her are the same document -- only the reader
+@  changed -- and this is that, cut into a wall by people who are all gone.
+@
+@  Nobody here is lying and nobody here is wrong. It happened anyway.
+@
+@  Braille is the right vehicle because it is 8.2a's own: text you cannot read
+@  until you hold the key. The key for THESE is having read the other six.
+Braille_Text_Chamber1::
+	.braille "I SIGNED WHAT$"
+Braille_Text_Chamber1b::
+	.braille "I WAS GIVEN.$"
+
+Braille_Text_Chamber2::
+	.braille "I WROTE DOWN$"
+Braille_Text_Chamber2b::
+	.braille "WHAT I SAW.$"
+
+Braille_Text_Chamber3::
+	.braille "I CARRIED IT.$"
+Braille_Text_Chamber3b::
+	.braille "I DID NOT READ$"
+Braille_Text_Chamber3c::
+	.braille "IT.$"
+
+Braille_Text_Chamber4::
+	.braille "I PUT IT WHERE$"
+Braille_Text_Chamber4b::
+	.braille "IT GOES.$"
+
+Braille_Text_Chamber5::
+	.braille "I READ IT ONCE$"
+Braille_Text_Chamber5b::
+	.braille "AND AGREED.$"
+
+Braille_Text_Chamber6::
+	.braille "NOBODY ASKED$"
+Braille_Text_Chamber6b::
+	.braille "ME.$"
+
+Braille_Text_Chamber7::
+	.braille "IT IS STILL$"
+Braille_Text_Chamber7b::
+	.braille "HERE.$"
