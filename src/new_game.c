@@ -224,6 +224,11 @@ static void DaemonsDebug_GrantTestKit(void)
     // like the kit did not run.
     FlagSet(FLAG_SYS_POKEMON_GET);
     FlagSet(FLAG_SYS_POKEDEX_GET);
+    // And CRYSTAL CLEAR is hidden in her own lab until the starter scene puts
+    // her there -- so a debug save has an empty lab and nobody to hand over
+    // the upgraded INDEX. The DEBUG submenu's RECORD entry exists to reach
+    // that scene; the flag is what makes there be somebody in the room.
+    FlagClear(FLAG_HIDE_OAK_IN_HIS_LAB);
 
     // Fly opens the map but every destination is dead until it has been
     // visited: region_map.c returns MAPSECTYPE_NOT_VISITED for any mapsec whose

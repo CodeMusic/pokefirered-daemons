@@ -84,13 +84,13 @@ PokedexRating_Text_Complete::
     .string "Congratulations!$"
 
 PokedexRating_Text_NationalDexSeenXOwnedY::
-	.string "And your NATIONAL INDEX is:\p"
+	.string "And your GLOBAL INDEX is:\p"
 	.string "{STR_VAR_1} DAEMON seen and {STR_VAR_2}\n"
 	.string "DAEMON owned.$"
 
 PokedexRating_Text_LookForwardToFilledNationalDex::
 	.string "I'll be looking forward to seeing\n"
-	.string "you fill the NATIONAL INDEX!$"
+	.string "you fill the GLOBAL INDEX!$"
 
 PokedexRating_Text_YouveCompletedDex::
 	.string "Finally…\p"

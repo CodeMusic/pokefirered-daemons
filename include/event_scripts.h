@@ -1202,6 +1202,12 @@ extern const u8 EventScript_FldEffFlash[];
 
 // field_control_avatar
 extern const u8 EventScript_CancelMessageBox[];
+
+#if DAEMONS_DEBUG
+// 9.3's debug submenu, the two entries that leave the menu for the field.
+extern const u8 DaemonsDebug_EventScript_TheRecord[];
+extern const u8 DaemonsDebug_EventScript_TheIslands[];
+#endif
 extern const u8 PalletTown_PlayersHouse_2F_EventScript_PC[];
 extern const u8 EventScript_HiddenItemScript[];
 extern const u8 EventScript_PC[];

@@ -904,8 +904,17 @@ PalletTown_ProfessorOaksLab_Movement_VerticalPacing:
 PalletTown_ProfessorOaksLab_EventScript_TryStartNationalDexScene::
 	call PokedexRating_EventScript_RateInPerson
 	closemessage
+@  The two preconditions the handover has besides beating the REVIEW BOARD:
+@  sixty daemons OWNED, and having been to ONE ISLAND. Both are real and both
+@  stay in the shipping build. A debug save has six daemons and has never left
+@  KANTO, so without this fence the scene can never fire there at all -- and
+@  the scene is one of the two things 9.3's scaffolding exists to let anyone
+@  look at. Assembled out of the release ROM entirely; see data/scripts/
+@  daemons_debug.inc for the other half of this mechanism.
+.if DAEMONS_DEBUG == 0
 	goto_if_lt VAR_0x8009, 60, PalletTown_ProfessorOaksLab_EventScript_DontStartNationalDexScene
 	goto_if_unset FLAG_WORLD_MAP_ONE_ISLAND, PalletTown_ProfessorOaksLab_EventScript_DontStartNationalDexScene
+.endif
 	delay 30
 	msgbox PalletTown_ProfessorOaksLab_Text_OakFavorToAskYouPlayer
 	goto PalletTown_ProfessorOaksLab_EventScript_NationalDexScene

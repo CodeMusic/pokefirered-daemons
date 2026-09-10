@@ -14,6 +14,8 @@
 #include "safari_zone.h"
 #include "start_menu.h"
 #if DAEMONS_DEBUG
+#include "event_scripts.h"
+#include "script.h"
 #include "item.h"
 #include "money.h"
 #include "script_pokemon_util.h"
@@ -62,6 +64,8 @@ enum StartMenuOption
     STARTMENU_DEBUG,
     STARTMENU_DBG_HEAL,
     STARTMENU_DBG_MART,
+    STARTMENU_DBG_RECORD,
+    STARTMENU_DBG_ISLANDS,
     STARTMENU_DBG_SONG,
     STARTMENU_DBG_SFX,
     STARTMENU_DBG_BACK,
@@ -109,6 +113,8 @@ static bool8 StartMenuLinkPlayerCallback(void);
 static bool8 StartMenuDaemonsDebugCallback(void);
 static bool8 DbgHealCallback(void);
 static bool8 DbgMartCallback(void);
+static bool8 DbgRecordCallback(void);
+static bool8 DbgIslandsCallback(void);
 static bool8 DbgSongCallback(void);
 static bool8 DbgSfxCallback(void);
 static bool8 DbgBackCallback(void);
@@ -155,6 +161,8 @@ static const struct MenuAction sStartMenuActionTable[] = {
     [STARTMENU_DEBUG]    = { gText_MenuDebug,   {.u8_void = StartMenuDaemonsDebugCallback} },
     [STARTMENU_DBG_HEAL] = { gText_DbgMenuHeal, {.u8_void = DbgHealCallback} },
     [STARTMENU_DBG_MART] = { gText_DbgMenuMart, {.u8_void = DbgMartCallback} },
+    [STARTMENU_DBG_RECORD]  = { gText_DbgMenuRecord,  {.u8_void = DbgRecordCallback} },
+    [STARTMENU_DBG_ISLANDS] = { gText_DbgMenuIslands, {.u8_void = DbgIslandsCallback} },
     // These two labels carry {STR_VAR_1} and {STR_VAR_2}. PrintStartMenuItems
     // runs every entry through StringExpandPlaceholders, so the current song
     // and sound effect can live in the menu itself -- no second window.
@@ -193,6 +201,8 @@ static const u8 *const sStartMenuDescPointers[] = {
     gStartMenuDesc_Debug,
     gStartMenuDesc_DbgHeal,
     gStartMenuDesc_DbgMart,
+    gStartMenuDesc_DbgRecord,
+    gStartMenuDesc_DbgIslands,
     gStartMenuDesc_DbgSong,
     gStartMenuDesc_DbgSfx,
     gStartMenuDesc_DbgBack,
@@ -263,6 +273,8 @@ static void SetUpStartMenu(void)
     {
         AppendToStartMenuItems(STARTMENU_DBG_HEAL);
         AppendToStartMenuItems(STARTMENU_DBG_MART);
+        AppendToStartMenuItems(STARTMENU_DBG_RECORD);
+        AppendToStartMenuItems(STARTMENU_DBG_ISLANDS);
         AppendToStartMenuItems(STARTMENU_DBG_SONG);
         AppendToStartMenuItems(STARTMENU_DBG_SFX);
         AppendToStartMenuItems(STARTMENU_DBG_BACK);
@@ -644,6 +656,8 @@ static bool8 IsDaemonsDebugCallback(void)
     return sStartMenuCallback == StartMenuDaemonsDebugCallback
         || sStartMenuCallback == DbgHealCallback
         || sStartMenuCallback == DbgMartCallback
+        || sStartMenuCallback == DbgRecordCallback
+        || sStartMenuCallback == DbgIslandsCallback
         || sStartMenuCallback == DbgSongCallback
         || sStartMenuCallback == DbgSfxCallback
         || sStartMenuCallback == DbgBackCallback;
@@ -687,6 +701,36 @@ static bool8 DbgMartCallback(void)
     SetMoney(&gSaveBlock1Ptr->money, 999999);
     PlayFanfare(MUS_OBTAIN_ITEM);
     return DbgRedraw();
+}
+
+// RECORD and ISLANDS are the only two entries that leave the menu. Everything
+// else here is one call and a redraw; these two want a yes/no box and, in one
+// case, a warp -- and the script engine already does both properly, so the
+// callback's whole job is to shut the menu down cleanly and hand over.
+//
+// CloseStartMenu unfreezes the objects and gives the player back their field
+// controls, so the script's own lockall takes them again on the next frame.
+// That is the same handover a signpost does.
+static bool8 DbgLeaveMenuForScript(const u8 *script)
+{
+    sInDebugSubmenu = FALSE;
+    sStartMenuCursorPos = 0;
+    PlayBGM(GetCurrentMapMusic());
+    DestroySafariZoneStatsWindow();
+    DestroyHelpMessageWindow_();
+    CloseStartMenu();
+    ScriptContext_SetupScript(script);
+    return TRUE;
+}
+
+static bool8 DbgRecordCallback(void)
+{
+    return DbgLeaveMenuForScript(DaemonsDebug_EventScript_TheRecord);
+}
+
+static bool8 DbgIslandsCallback(void)
+{
+    return DbgLeaveMenuForScript(DaemonsDebug_EventScript_TheIslands);
 }
 
 // The two halves of the song table are not interleaved: SE_USE_ITEM is 1 and
