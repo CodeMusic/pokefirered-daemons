@@ -257,12 +257,12 @@
       "secondaryId": 0
     },
     {
-      "english": "PREEMPT",
+      "english": "WATCHDOG",
       "itemId": "ITEM_ICE_HEAL",
       "price": 250,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "Preemption takes control back\\nfrom a process that will not\\nyield. Ends HUNG.",
+      "description_english": "A watchdog notices a process\\nthat stopped answering, and\\nresets it. Ends HUNG.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
