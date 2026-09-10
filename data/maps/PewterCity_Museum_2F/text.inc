@@ -19,12 +19,12 @@ Text_SeismicTossTaught::
     .string "That is the whole of the method.$"
 
 PewterCity_Museum_1F_Text_WhatsSpecialAboutMoonStone::
-    .string "A MOON STONE.\p"
+    .string "A REFLECTION.\p"
     .string "It looks like a rock to me.\p"
     .string "They say it changes what a daemon\n"
     .string "compiles to. I do not see how.\p"
-    .string "The card says not seeing how is\n"
-    .string "not the same as it not being so.\p"
+    .string "The card says not seeing how is not\n"
+    .string "the same as it not being so.\p"
     .string "I do not like the card.$"
 
 PewterCity_Museum_1F_Text_BoughtColorTVForMoonLanding::
@@ -74,9 +74,9 @@ PewterCity_Museum_1F_Text_SpaceShuttle::
 
 PewterCity_Museum_1F_Text_MeteoriteThatFellOnMtMoon::
     .string "A stone that fell on Deadstack.\p"
-    .string "It is thought to be a MOON STONE.\n"
+    .string "It is thought to be a REFLECTION.\n"
     .string "Nobody has taken it apart.\p"
     .string "KNOWN FAULT: it has been called\n"
-    .string "one for so long that the calling\l"
-    .string "is now the evidence.$"
+    .string "one for so long that the calling is\l"
+    .string "now the evidence.$"
 

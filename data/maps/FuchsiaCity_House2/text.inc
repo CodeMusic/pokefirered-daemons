@@ -11,16 +11,16 @@ FuchsiaCity_House2_Text_LikeYourStyleTakeThis::
     .string "Take this and fish, young friend!$"
 
 FuchsiaCity_House2_Text_ReceivedGoodRod::
-    .string "{PLAYER} received a GOOD ROD from\n"
-    .string "the FISHING GURU's brother.$"
+    .string "{PLAYER} received a DEEP QUERY\n"
+    .string "from the FISHING GURU's brother.$"
 
 FuchsiaCity_House2_Text_GoodRodCanCatchBetterMons::
     .string "Fishing is a way of life! It is like\n"
     .string "the finest poetry.\p"
-    .string "A crummy OLD ROD could only bind\n"
+    .string "A crummy QUERY could only bind\n"
     .string "STUB, yes?\p"
-    .string "But with a GOOD ROD, you can bind\n"
-    .string "much better DAEMON.$"
+    .string "But with a DEEP QUERY, you can\n"
+    .string "bind much better DAEMON.$"
 
 FuchsiaCity_House2_Text_OhThatsDisappointing::
     .string "Oh…\n"

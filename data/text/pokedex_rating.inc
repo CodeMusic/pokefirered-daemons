@@ -28,7 +28,7 @@ PokedexRating_Text_LessThan40::
 	.string "Good, it's apparent that you're\n"
 	.string "trying hard!\p"
 	.string "I've given one of my AIDES an\n"
-	.string "ITEMFINDER. Be sure to collect it!$"
+	.string "GREP. Be sure to collect it!$"
 
 PokedexRating_Text_LessThan50::
 	.string "Your INDEX is coming along quite\n"

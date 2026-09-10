@@ -5,6 +5,6 @@ FuchsiaCity_Mart_Text_DontTheyHaveSafariZonePennants::
     .string "Aren't there even any calendars?$"
 
 FuchsiaCity_Mart_Text_DidYouTryXSpeed::
-    .string "Did you try X SPEED? It speeds up\n"
-    .string "a DAEMON in battle.$"
+    .string "Did you try TUNE SPEED? It speeds\n"
+    .string "up a DAEMON in battle.$"
 

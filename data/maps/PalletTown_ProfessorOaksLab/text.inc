@@ -60,7 +60,7 @@ PalletTown_ProfessorOaksLab_Text_RivalTellSisNotToGiveYouMap::
     .string "to me!\p"
     .string "{PLAYER}, no offence, but I do not\n"
     .string "need you for this.\p"
-    .string "I will borrow a TOWN MAP off my\n"
+    .string "I will borrow a SITEMAP off my\n"
     .string "sister.\p"
     .string "And I will tell her not to lend you\n"
     .string "one. Hah!$"

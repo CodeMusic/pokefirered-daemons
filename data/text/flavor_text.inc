@@ -8,7 +8,7 @@ Text_NothingButPokemonBooks::
 	.string "ポケモンの　ほん　ばかりだ$"
 
 Text_ATownMap::
-	.string "A TOWN MAP.$"
+	.string "A SITEMAP.$"
 
 Text_PokeMartShelf::
 	.string "Wow! Tons of DAEMON stuff!$"

@@ -1,7 +1,7 @@
 CeladonCity_DepartmentStore_2F_Text_SuperRepelMorePowerfulRepel::
-    .string "SUPER REPEL keeps weak DAEMON at\n"
-    .string "bay…\p"
-    .string "Hmm, it's a more powerful REPEL.$"
+    .string "LONG SUPPRESS keeps weak DAEMON\n"
+    .string "at bay…\p"
+    .string "Hmm, it's a more powerful SUPPRESS.$"
 
 CeladonCity_DepartmentStore_2F_Text_BuyReviveForLongOutings::
     .string "For long outings, you should buy\n"

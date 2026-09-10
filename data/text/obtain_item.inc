@@ -20,12 +20,11 @@ Text_FoundXCoins::
 	.string "{STR_VAR_1} {STR_VAR_2}!$"
 
 Text_PutCoinsAwayInCoinCase::
-	.string "{PLAYER} put the COINS away in\n"
-	.string "the COIN CASE.$"
+	.string "{PLAYER} put the COINS away in the\n"
+	.string "TOKEN CASE.$"
 
 Text_CoinCaseIsFull::
-	.string "Too bad!\n"
-	.string "The COIN CASE is full…$"
+	.string "Too bad! The TOKEN CASE is full…$"
 
 Text_NothingToPutThemIn::
 	.string "Too bad!\n"

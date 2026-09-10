@@ -19,7 +19,7 @@ ViridianCity_Mart_Text_ShopDoesGoodBusinessInAntidotes::
     .string "Make of that what you like.$"
 
 ViridianCity_Mart_Text_GotToBuySomePotions::
-    .string "POTIONS. I always buy more than I\n"
+    .string "RESTORE. I always buy more than I\n"
     .string "think I need.\p"
     .string "You never find out you were wrong\n"
     .string "until it matters.$"

@@ -7,7 +7,7 @@ CeladonCity_GameCorner_PrizeRoom_Text_RakedItInToday::
     .string "If only every day were like this…$"
 
 CeladonCity_GameCorner_PrizeRoom_Text_CoinCaseRequired::
-    .string "A COIN CASE is required…$"
+    .string "A TOKEN CASE is required…$"
 
 CeladonCity_GameCorner_PrizeRoom_Text_WeExchangeCoinsForPrizes::
     .string "We exchange your COINS for prizes.$"

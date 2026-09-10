@@ -1,5 +1,5 @@
 CinnabarIsland_Mart_Text_DontTheyHaveXAttack::
-    .string "Don't they have X ATTACK?\p"
+    .string "Don't they have TUNE ATTACK?\p"
     .string "I like it because it raises the\n"
     .string "ATTACK stat in battle.$"
 

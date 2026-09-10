@@ -11,7 +11,7 @@ Route12_FishingHouse_Text_TakeThisAndFish::
     .string "Take this and fish, young friend!$"
 
 Route12_FishingHouse_Text_ReceivedSuperRod::
-    .string "{PLAYER} received a SUPER ROD from\n"
+    .string "{PLAYER} received a FULL SCAN from\n"
     .string "the FISHING GURU's brother.$"
 
 Route12_FishingHouse_Text_IfYouCatchBigMagikarpShowMe::
@@ -31,7 +31,7 @@ Route12_FishingHouse_Text_OhThatsDisappointing::
 
 Route12_FishingHouse_Text_TryFishingBringMeMagikarp::
     .string "Hello there, {PLAYER}!\p"
-    .string "Use the SUPER ROD in any water!\n"
+    .string "Use the FULL SCAN in any water!\n"
     .string "You can bind different kinds of\l"
     .string "DAEMONS.\p"
     .string "Try fishing wherever you can!$"

@@ -14,12 +14,11 @@ CeladonCity_GameCorner_Text_ComePlaySometime::
     .string "Please come play sometime!$"
 
 CeladonCity_GameCorner_Text_SorryDontHaveCoinCase::
-    .string "Oh, I'm sorry.\n"
-    .string "You don't have a COIN CASE.$"
+    .string "Oh, I'm sorry. You don't have a\n"
+    .string "TOKEN CASE.$"
 
 CeladonCity_GameCorner_Text_CoinCaseIsFull::
-    .string "Whoops!\n"
-    .string "Your COIN CASE is full.$"
+    .string "Whoops! Your TOKEN CASE is full.$"
 
 CeladonCity_GameCorner_Text_CantAffordCoins::
     .string "You can't afford the COINS.$"
@@ -122,11 +121,10 @@ CeladonCity_GameCorner_Text_SwitchBehindPosterPushIt::
     .string "Let's push it!$"
 
 CeladonCity_GameCorner_Text_CoinCaseIsRequired::
-    .string "A COIN CASE is required…$"
+    .string "A TOKEN CASE is required…$"
 
 CeladonCity_GameCorner_Text_DontHaveCoinCase::
-    .string "Oops!\n"
-    .string "Don't have the COIN CASE!$"
+    .string "Oops! Don't have the TOKEN CASE!$"
 
 CeladonCity_GameCorner_Text_SlotMachineWantToPlay::
     .string "A slot machine!\n"

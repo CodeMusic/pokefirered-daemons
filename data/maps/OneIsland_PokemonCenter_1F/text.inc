@@ -76,12 +76,11 @@ OneIsland_PokemonCenter_1F_Text_PassLetsYouTravelBetweenIslands::
     .string "Oh, you should have this, too.$"
 
 OneIsland_PokemonCenter_1F_Text_ReceivedExtraPageForTownMap::
-    .string "{PLAYER} received an extra page\n"
-    .string "for the TOWN MAP!$"
+    .string "{PLAYER} received an extra page for\n"
+    .string "the SITEMAP!$"
 
 OneIsland_PokemonCenter_1F_Text_ReceivedTownMap::
-    .string "{PLAYER} received\n"
-    .string "a TOWN MAP!$"
+    .string "{PLAYER} received a SITEMAP!$"
 
 OneIsland_PokemonCenter_1F_Text_BillCatchYouLater::
     .string "HOLT: I'll bind you later! Say hi\n"
@@ -211,16 +210,16 @@ OneIsland_PokemonCenter_1F_Text_PleaseINeedYourHelp::
     .string "Please, I need your help.$"
 
 OneIsland_PokemonCenter_1F_Text_AnotherGemstoneInSeviiIslands::
-    .string "While I was studying gemstones,\n"
-    .string "I discovered something important.\p"
-    .string "There is another gem that forms\n"
-    .string "a pair with this RUBY.\p"
+    .string "While I was studying gemstones, I\n"
+    .string "discovered something important.\p"
+    .string "There is another gem that forms a\n"
+    .string "pair with this RUBY.\p"
     .string "That other gemstone is supposed to\n"
     .string "be in the SEVII ISLANDS.\p"
     .string "{PLAYER}, please, I need you to go\n"
     .string "find the other gem.\p"
     .string "{PLAYER}, may I have your ferry\n"
-    .string "PASS and the TOWN MAP?$"
+    .string "PASS and the SITEMAP?$"
 
 OneIsland_PokemonCenter_1F_Text_ReturnedTriPassForRainbowPass::
     .string "{PLAYER} returned the TRI-PASS and\n"
@@ -228,7 +227,7 @@ OneIsland_PokemonCenter_1F_Text_ReturnedTriPassForRainbowPass::
 
 OneIsland_PokemonCenter_1F_Text_ObtainedExtraMapPage::
     .string "Obtained an extra page for the\n"
-    .string "TOWN MAP!$"
+    .string "SITEMAP!$"
 
 OneIsland_PokemonCenter_1F_Text_PassLetYouGetToAllIslands::
     .string "This is my own ferry PASS.\p"

@@ -209,12 +209,12 @@
       "secondaryId": 11
     },
     {
-      "english": "POTION",
+      "english": "RECOVER",
       "itemId": "ITEM_POTION",
       "price": 300,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 20,
-      "description_english": "A spray-type wound medicine. It\\nrestores the HP of one DAEMON by\\n20 points.",
+      "description_english": "Puts back a little of what was\\nlost. Restores 20 HP.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -321,12 +321,12 @@
       "secondaryId": 0
     },
     {
-      "english": "MAX POTION",
+      "english": "REBUILD",
       "itemId": "ITEM_MAX_POTION",
       "price": 2500,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 255,
-      "description_english": "A spray-type wound medicine.\\nIt fully restores the HP of one\\nDAEMON.",
+      "description_english": "From nothing, rather than from\\nwhere it got to. Restores all HP.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -337,12 +337,12 @@
       "secondaryId": 0
     },
     {
-      "english": "HYPER POTION",
+      "english": "FULL RECOVER",
       "itemId": "ITEM_HYPER_POTION",
       "price": 1200,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 200,
-      "description_english": "A spray-type wound medicine. It\\nrestores the HP of one DAEMON by\\n200 points.",
+      "description_english": "Everything reachable, put back.\\nRestores 200 HP.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -353,12 +353,12 @@
       "secondaryId": 0
     },
     {
-      "english": "SUPER POTION",
+      "english": "DEEP RECOVER",
       "itemId": "ITEM_SUPER_POTION",
       "price": 700,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 50,
-      "description_english": "A spray-type wound medicine. It\\nrestores the HP of one DAEMON by\\n50 points.",
+      "description_english": "Goes further in than\\na RESTORE does.\\nRestores 50 HP.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -545,12 +545,12 @@
       "secondaryId": 0
     },
     {
-      "english": "ETHER",
+      "english": "CHARGE",
       "itemId": "ITEM_ETHER",
       "price": 1200,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 10,
-      "description_english": "Restores a selected move's MP by\\n10 points for one DAEMON.",
+      "description_english": "Puts the budget back for one\\nroutine. Restores 10 MP.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -561,12 +561,12 @@
       "secondaryId": 0
     },
     {
-      "english": "MAX ETHER",
+      "english": "FULL CHARGE",
       "itemId": "ITEM_MAX_ETHER",
       "price": 2000,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 255,
-      "description_english": "Fully restores a selected move's MP\\nfor one DAEMON.",
+      "description_english": "One routine, all of its budget.\\nRestores that routine's MP.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -577,12 +577,12 @@
       "secondaryId": 0
     },
     {
-      "english": "ELIXIR",
+      "english": "CHARGE ALL",
       "itemId": "ITEM_ELIXIR",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 10,
-      "description_english": "Restores the MP of all moves for\\none DAEMON by 10 points each.",
+      "description_english": "Every routine at once, a little\\neach. Restores 10 MP to all.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -593,12 +593,12 @@
       "secondaryId": 0
     },
     {
-      "english": "MAX ELIXIR",
+      "english": "FULL RECHARGE",
       "itemId": "ITEM_MAX_ELIXIR",
       "price": 4500,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 255,
-      "description_english": "Fully restores the MP of all moves\\nfor one DAEMON.",
+      "description_english": "Every routine, all of it.\\nRestores the MP of every one.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -625,12 +625,12 @@
       "secondaryId": 0
     },
     {
-      "english": "BLUE FLUTE",
+      "english": "WAKE TONE",
       "itemId": "ITEM_BLUE_FLUTE",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A blue glass flute that resumes\\na SUSPENDED daemon.",
+      "description_english": "A tone that reaches something\\nnot scheduled. Ends SUSPENDED.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -641,12 +641,12 @@
       "secondaryId": 0
     },
     {
-      "english": "YELLOW FLUTE",
+      "english": "CALM TONE",
       "itemId": "ITEM_YELLOW_FLUTE",
       "price": 200,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A yellow glass flute that ends\\nTHRASHING in one daemon.",
+      "description_english": "A tone steady enough to work\\nagainst. Ends THRASHING.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -657,12 +657,12 @@
       "secondaryId": 0
     },
     {
-      "english": "RED FLUTE",
+      "english": "CLEAR TONE",
       "itemId": "ITEM_RED_FLUTE",
       "price": 300,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A red glass flute that snaps one\\nDAEMON out of infatuation.",
+      "description_english": "A tone that cuts through a\\nbinding made without asking.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -673,12 +673,12 @@
       "secondaryId": 0
     },
     {
-      "english": "BLACK FLUTE",
+      "english": "LOW TONE",
       "itemId": "ITEM_BLACK_FLUTE",
       "price": 400,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 50,
-      "description_english": "A black glass flute. When blown,\\nit makes wild DAEMON less likely\\nto appear.",
+      "description_english": "Pitched under what wild daemons\\nanswer to. Fewer appear.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -689,12 +689,12 @@
       "secondaryId": 0
     },
     {
-      "english": "WHITE FLUTE",
+      "english": "HIGH TONE",
       "itemId": "ITEM_WHITE_FLUTE",
       "price": 500,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 150,
-      "description_english": "A white glass flute. When blown,\\nit makes wild DAEMON more likely\\nto appear.",
+      "description_english": "Pitched where wild daemons\\nanswer. More appear.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -1009,12 +1009,12 @@
       "secondaryId": 0
     },
     {
-      "english": "HP UP",
+      "english": "MEMORY",
       "itemId": "ITEM_HP_UP",
       "price": 9800,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A nutritious drink for DAEMON.\\nIt raises the base HP of one\\nDAEMON.",
+      "description_english": "How much a daemon can hold before\\nit stops. Raises base HP.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -1025,12 +1025,12 @@
       "secondaryId": 0
     },
     {
-      "english": "PROTEIN",
+      "english": "WATTAGE",
       "itemId": "ITEM_PROTEIN",
       "price": 9800,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A nutritious drink for DAEMON. It\\nraises the base ATTACK stat of\\none DAEMON.",
+      "description_english": "How hard it can drive something.\\nRaises base ATTACK.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -1041,12 +1041,12 @@
       "secondaryId": 0
     },
     {
-      "english": "IRON",
+      "english": "SHIELDING",
       "itemId": "ITEM_IRON",
       "price": 9800,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A nutritious drink for DAEMON. It\\nraises the base DEFENSE stat of\\none DAEMON.",
+      "description_english": "What sits between it and what is\\narriving. Raises base DEFENSE.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -1057,12 +1057,12 @@
       "secondaryId": 0
     },
     {
-      "english": "CARBOS",
+      "english": "CLOCK RATE",
       "itemId": "ITEM_CARBOS",
       "price": 9800,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A nutritious drink for DAEMON. It\\nraises the base SPEED stat of\\none DAEMON.",
+      "description_english": "How many times a second it gets\\nto act. Raises base SPEED.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -1073,12 +1073,12 @@
       "secondaryId": 0
     },
     {
-      "english": "CALCIUM",
+      "english": "BANDWIDTH",
       "itemId": "ITEM_CALCIUM",
       "price": 9800,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A nutritious drink for DAEMON.\\nIt raises the base SP. ATK stat\\nof one DAEMON.",
+      "description_english": "How much it can push down one\\nchannel. Raises base SP. ATK.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -1089,12 +1089,12 @@
       "secondaryId": 0
     },
     {
-      "english": "RARE CANDY",
+      "english": "INCREMENT",
       "itemId": "ITEM_RARE_CANDY",
       "price": 4800,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A candy that is packed with energy.\\nIt raises the level of a DAEMON by\\none.",
+      "description_english": "Adds exactly one, which is what\\nthe word means. Raises the level.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -1121,12 +1121,12 @@
       "secondaryId": 0
     },
     {
-      "english": "ZINC",
+      "english": "INSULATION",
       "itemId": "ITEM_ZINC",
       "price": 9800,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A nutritious drink for DAEMON.\\nIt raises the base SP. DEF stat\\nof one DAEMON.",
+      "description_english": "What keeps the outside out.\\nRaises base SP. DEF.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -1169,12 +1169,12 @@
       "secondaryId": 0
     },
     {
-      "english": "GUARD SPEC.",
+      "english": "LOCK STATS",
       "itemId": "ITEM_GUARD_SPEC",
       "price": 700,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "An item that prevents stat reduction\\namong party DAEMON for five turns\\nafter use.",
+      "description_english": "Nothing outside gets to change\\nthem. Blocks stat reduction for\\nfive turns.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -1185,12 +1185,12 @@
       "secondaryId": 0
     },
     {
-      "english": "DIRE HIT",
+      "english": "TUNE CRIT",
       "itemId": "ITEM_DIRE_HIT",
       "price": 650,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "Raises the critical-hit ratio of\\nDAEMON in battle. Wears off if the\\nDAEMON is withdrawn.",
+      "description_english": "Reaches further into the tail of\\nthe distribution. Raises the\\ncritical-hit ratio in battle.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -1201,12 +1201,12 @@
       "secondaryId": 0
     },
     {
-      "english": "X ATTACK",
+      "english": "TUNE ATTACK",
       "itemId": "ITEM_X_ATTACK",
       "price": 500,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "Raises the ATTACK stat of DAEMON\\nin battle. Wears off if the DAEMON\\nis withdrawn.",
+      "description_english": "Turned up for this engagement\\nonly. Raises ATTACK in battle.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -1217,12 +1217,12 @@
       "secondaryId": 0
     },
     {
-      "english": "X DEFEND",
+      "english": "TUNE DEFENSE",
       "itemId": "ITEM_X_DEFEND",
       "price": 550,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "Raises the DEFENSE stat of DAEMON\\nin battle. Wears off if the DAEMON\\nis withdrawn.",
+      "description_english": "Turned up for this engagement\\nonly. Raises DEFENSE in battle.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -1233,12 +1233,12 @@
       "secondaryId": 0
     },
     {
-      "english": "X SPEED",
+      "english": "TUNE SPEED",
       "itemId": "ITEM_X_SPEED",
       "price": 350,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "Raises the SPEED stat of DAEMON in\\nbattle. Wears off if the DAEMON is\\nwithdrawn.",
+      "description_english": "Turned up for this engagement\\nonly. Raises SPEED in battle.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -1249,12 +1249,12 @@
       "secondaryId": 0
     },
     {
-      "english": "X ACCURACY",
+      "english": "TUNE AIM",
       "itemId": "ITEM_X_ACCURACY",
       "price": 950,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "Raises the accuracy stat of DAEMON\\nin battle. Wears off if the DAEMON\\nis withdrawn.",
+      "description_english": "Turned up for this engagement\\nonly. Raises accuracy in battle.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -1265,12 +1265,12 @@
       "secondaryId": 0
     },
     {
-      "english": "X SPECIAL",
+      "english": "TUNE SP. ATK",
       "itemId": "ITEM_X_SPECIAL",
       "price": 350,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "Raises the SP. ATK stat of DAEMON\\nin battle. Wears off if the DAEMON\\nis withdrawn.",
+      "description_english": "Turned up for this engagement\\nonly. Raises SP. ATK in battle.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -1281,12 +1281,12 @@
       "secondaryId": 0
     },
     {
-      "english": "POKé DOLL",
+      "english": "DECOY",
       "itemId": "ITEM_POKE_DOLL",
       "price": 1000,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "An attractive doll. Use it to\\nDETACH from any battle with a\\nwild DAEMON.",
+      "description_english": "Something else to attend to.\\nLets you DETACH from any wild\\ndaemon.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -1329,12 +1329,12 @@
       "secondaryId": 0
     },
     {
-      "english": "SUPER REPEL",
+      "english": "LONG SUPPRESS",
       "itemId": "ITEM_SUPER_REPEL",
       "price": 500,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 200,
-      "description_english": "Prevents weak wild DAEMON from\\nappearing for 200 steps.",
+      "description_english": "The same, held longer. 200\\nsteps.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -1345,12 +1345,12 @@
       "secondaryId": 0
     },
     {
-      "english": "MAX REPEL",
+      "english": "MAX SUPPRESS",
       "itemId": "ITEM_MAX_REPEL",
       "price": 700,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 250,
-      "description_english": "Prevents weak wild DAEMON from\\nappearing for 250 steps.",
+      "description_english": "The same, held longest. 250\\nsteps.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -1361,12 +1361,12 @@
       "secondaryId": 0
     },
     {
-      "english": "ESCAPE ROPE",
+      "english": "EJECT",
       "itemId": "ITEM_ESCAPE_ROPE",
       "price": 550,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A long, durable rope.\\nUse it to escape instantly from a\\ncave or a dungeon.",
+      "description_english": "Out, now, from wherever you are.\\nReturns you to the last\\nCHECKPOINT you used.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -1377,12 +1377,12 @@
       "secondaryId": 0
     },
     {
-      "english": "REPEL",
+      "english": "SUPPRESS",
       "itemId": "ITEM_REPEL",
       "price": 350,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 100,
-      "description_english": "Prevents weak wild DAEMON from\\nappearing for 100 steps.",
+      "description_english": "Holds the channel quiet. Weak\\nwild daemons stay away for 100\\nsteps.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -1489,12 +1489,12 @@
       "secondaryId": 0
     },
     {
-      "english": "SUN STONE",
+      "english": "EXPOSURE",
       "itemId": "ITEM_SUN_STONE",
       "price": 2100,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A peculiar stone that makes certain\\nspecies of DAEMONS evolve. It is\\nas red as the sun.",
+      "description_english": "Simply being left in front of\\nsomething, for long enough. Some\\ndaemons take a new form.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -1505,12 +1505,12 @@
       "secondaryId": 0
     },
     {
-      "english": "MOON STONE",
+      "english": "REFLECTION",
       "itemId": "ITEM_MOON_STONE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A peculiar stone that makes certain\\nspecies of DAEMONS evolve. It is\\nas black as the night sky.",
+      "description_english": "Light that came back, and the\\nother meaning. Some daemons take\\na new form when given one.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -4161,12 +4161,12 @@
       "secondaryId": 0
     },
     {
-      "english": "COIN CASE",
+      "english": "TOKEN CASE",
       "itemId": "ITEM_COIN_CASE",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A case for holding COINS obtained\\nat the GAME CORNER.\\nIt holds up to 9,999 COINS.",
+      "description_english": "Holds the tokens the GAME CORNER\\ndeals in. It holds up to 9,999.",
       "importance": 1,
       "registrability": 0,
       "pocket": "POCKET_KEY_ITEMS",
@@ -4177,12 +4177,12 @@
       "secondaryId": 0
     },
     {
-      "english": "ITEMFINDER",
+      "english": "GREP",
       "itemId": "ITEM_ITEMFINDER",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A device used for finding items.\\nIf there is a hidden item nearby\\nwhen it is used, it emits a signal.",
+      "description_english": "Finds the thing that is there and\\nnot shown. Reports a hidden item\\nnearby.",
       "importance": 1,
       "registrability": 1,
       "pocket": "POCKET_KEY_ITEMS",
@@ -4193,12 +4193,12 @@
       "secondaryId": 0
     },
     {
-      "english": "OLD ROD",
+      "english": "QUERY",
       "itemId": "ITEM_OLD_ROD",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "An old and beat-up fishing rod.\\nUse it by any body of water to\\nfish for wild DAEMON.",
+      "description_english": "Asks a body of water what is in\\nit. The answers are shallow.",
       "importance": 1,
       "registrability": 1,
       "pocket": "POCKET_KEY_ITEMS",
@@ -4209,12 +4209,12 @@
       "secondaryId": "OLD_ROD"
     },
     {
-      "english": "GOOD ROD",
+      "english": "DEEP QUERY",
       "itemId": "ITEM_GOOD_ROD",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A new, good-quality fishing rod.\\nUse it by any body of water to\\nfish for wild DAEMON.",
+      "description_english": "Asks the same question further\\ndown.",
       "importance": 1,
       "registrability": 1,
       "pocket": "POCKET_KEY_ITEMS",
@@ -4225,12 +4225,12 @@
       "secondaryId": "GOOD_ROD"
     },
     {
-      "english": "SUPER ROD",
+      "english": "FULL SCAN",
       "itemId": "ITEM_SUPER_ROD",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "An awesome, high-tech fishing rod.\\nUse it by any body of water to fish\\nfor wild DAEMON.",
+      "description_english": "Reads the whole of it rather than\\nasking. Slow, and it finds\\neverything.",
       "importance": 1,
       "registrability": 1,
       "pocket": "POCKET_KEY_ITEMS",
@@ -5835,12 +5835,12 @@
       "secondaryId": 0
     },
     {
-      "english": "TOWN MAP",
+      "english": "SITEMAP",
       "itemId": "ITEM_TOWN_MAP",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A very convenient map that can be\\nviewed anytime. It even shows your \\npresent location.",
+      "description_english": "Everywhere there is, and how they\\njoin. Viewable at any time.",
       "importance": 1,
       "registrability": 1,
       "pocket": "POCKET_KEY_ITEMS",
@@ -5851,12 +5851,12 @@
       "secondaryId": 0
     },
     {
-      "english": "VS SEEKER",
+      "english": "ROLL CALL",
       "itemId": "ITEM_VS_SEEKER",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A device that indicates USERS\\nwho want to engage. The battery\\ncharges while traveling.",
+      "description_english": "Asks who is listening. USERS who\\nwant to engage answer. The\\nbattery charges as you walk.",
       "importance": 1,
       "registrability": 1,
       "pocket": "POCKET_KEY_ITEMS",

@@ -8,7 +8,7 @@ Route1_Text_ComeSeeUsIfYouNeedPokeBalls::
     .string "You will want more than one.$"
 
 Route1_Text_PutPotionAway::
-    .string "{PLAYER} put the POTION in the\n"
+    .string "{PLAYER} put the RESTORE in the\n"
     .string "ITEMS POCKET.$"
 
 Route1_Text_CanJumpFromLedges::

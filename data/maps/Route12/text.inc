@@ -41,7 +41,7 @@ Route12_Text_ChipPostBattle::
     .string "better DAEMON!$"
 
 Route12_Text_JustinIntro::
-    .string "I'm searching for a MOON STONE.\n"
+    .string "I'm searching for a REFLECTION.\n"
     .string "Have you found one?$"
 
 Route12_Text_JustinDefeat::
@@ -49,7 +49,7 @@ Route12_Text_JustinDefeat::
 
 Route12_Text_JustinPostBattle::
     .string "I could have made my DAEMONS\n"
-    .string "evolve with MOON STONE!$"
+    .string "evolve with REFLECTION!$"
 
 Route12_Text_LucaIntro::
     .string "Electricity is my specialty.\p"

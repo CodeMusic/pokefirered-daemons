@@ -6,7 +6,7 @@ VSSeeker_Text_BatteryNotChargedNeedXSteps::
 VSSeeker_Text_NoTrainersWithinRange::
 	.string "There are no USERS within range\n"
 	.string "who can battle…\p"
-	.string "The VS SEEKER was turned off.{PAUSE_UNTIL_PRESS}$"
+	.string "The ROLL CALL was turned off.{PAUSE_UNTIL_PRESS}$"
 
 VSSeeker_Text_TrainersNotReady::
 	.string "The other USERS don't appear to be\n"
@@ -244,8 +244,8 @@ Route12_Text_ChipRematchIntro::
 	.string "Fishing is a waiting game.$"
 
 Route12_Text_JustinRematchIntro::
-	.string "Still can't find a MOON STONE…\n"
-	.string "Have you found one?$"
+	.string "Still can't find a REFLECTION… Have\n"
+	.string "you found one?$"
 
 Route12_Text_LucaRematchIntro::
 	.string "Electricity has always been my\n"
@@ -292,7 +292,7 @@ Route13_Text_GwenRematchIntro::
 
 Route13_Text_AlmaRematchIntro::
 	.string "I cleaned out my savings and\n"
-	.string "bought more CARBOS.$"
+	.string "bought more CLOCK RATE.$"
 
 Route13_Text_PerryRematchIntro::
 	.string "I'm not going to lose this time.\n"

@@ -43,7 +43,7 @@ Route13_Text_GwenPostBattle::
     .string "toughen them up.$"
 
 Route13_Text_AlmaIntro::
-    .string "I found CARBOS in a cave once\n"
+    .string "I found CLOCK RATE in a cave once\n"
     .string "while I was spelunking.$"
 
 Route13_Text_AlmaDefeat::
@@ -51,8 +51,8 @@ Route13_Text_AlmaDefeat::
     .string "I just messed up!$"
 
 Route13_Text_AlmaPostBattle::
-    .string "CARBOS boosted the SPEED of my\n"
-    .string "DAEMONS.$"
+    .string "CLOCK RATE boosted the SPEED of\n"
+    .string "my DAEMONS.$"
 
 Route13_Text_PerryIntro::
     .string "I'm not going to lose.\n"

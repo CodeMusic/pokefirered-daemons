@@ -116,7 +116,7 @@ Help_Text_CantCatchMons::
 	.string "I can't bind DAEMONS!$"
 
 Help_Text_RanOutOfPotions::
-	.string "I ran out of POTIONS.$"
+	.string "I ran out of RESTORE.$"
 
 Help_Text_CanIBuyPokeBalls::
 	.string "Can I buy BOXES?$"
@@ -558,10 +558,10 @@ Help_Text_UsingOption::
 	.string " Using “OPTION”$"
 
 Help_Text_UsingPotion::
-	.string "    Using a POTION$"
+	.string "    Using a RESTORE$"
 
 Help_Text_UsingTownMap::
-	.string "    Using the TOWN MAP$"
+	.string "    Using the SITEMAP$"
 
 Help_Text_UsingTM::
 	.string "    Using a TM$"
@@ -768,7 +768,7 @@ Help_Text_HowToUsePotion::
 	.string "{CIRCLE_1} Open the MENU.\n"
 	.string "{CIRCLE_2} Press up or down on the {PLUS} Control\n"
 	.string "   Pad and select “BAG.”\n"
-	.string "{CIRCLE_3} Select “POTION” in the “ITEMS”\n"
+	.string "{CIRCLE_3} Select “RESTORE” in the “ITEMS”\n"
 	.string "   POCKET.\n"
 	.string "{CIRCLE_4} Select “USE.”\n"
 	.string "{CIRCLE_5} Select the DAEMON to be healed.$"
@@ -779,8 +779,8 @@ Help_Text_HowToUseTownMap::
 	.string "   Pad and select “BAG.”\n"
 	.string "{CIRCLE_3} Press left or right to open the\n"
 	.string "   “KEY ITEMS” POCKET, then press\n"
-	.string "   up or down to select “TOWN MAP.” \n"
-	.string "{CIRCLE_4} Select “USE” to open the TOWN MAP.$"
+	.string "   up or down to select “SITEMAP.” \n"
+	.string "{CIRCLE_4} Select “USE” to open the SITEMAP.$"
 
 Help_Text_HowToUseTM::
 	.string "{CIRCLE_1} Open the MENU.\n"
@@ -976,7 +976,7 @@ Help_Text_HowToReadPokedex::
 	.string "   MAP with the DAEMON's habitat(s).$"
 	.else
 	.string "{CIRCLE_3} Select “NEXT DATA” to display the\n"
-	.string "   TOWN MAP with its habitat(s).$"
+	.string "   SITEMAP with its habitat(s).$"
 	.endif
 
 Help_Text_HowToUseHomePC::

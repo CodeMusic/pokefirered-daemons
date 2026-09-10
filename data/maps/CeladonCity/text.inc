@@ -38,9 +38,9 @@ CeladonCity_Text_KeepOutOfTeamRocketsWay::
 
 CeladonCity_Text_ExplainXAccuracyDireHit::
     .string "USER TIPS\p"
-    .string "X ACCURACY boosts the accuracy of\n"
+    .string "TUNE AIM boosts the accuracy of\n"
     .string "techniques!\p"
-    .string "DIRE HIT jacks up the likelihood\n"
+    .string "TUNE CRIT jacks up the likelihood\n"
     .string "of critical hits!\p"
     .string "Get your items at VERDIGRIS DEPT.\n"
     .string "STORE!$"
@@ -67,9 +67,9 @@ CeladonCity_Text_DeptStoreSign::
 
 CeladonCity_Text_GuardSpecProtectsFromStatus::
     .string "USER TIPS\p"
-    .string "GUARD SPEC. protects DAEMON\n"
-    .string "against SPECIAL attacks such as\l"
-    .string "fire and water!\p"
+    .string "LOCK STATS protects DAEMON against\n"
+    .string "SPECIAL attacks such as fire and\l"
+    .string "water!\p"
     .string "Get your items at VERDIGRIS DEPT.\n"
     .string "STORE!$"
 

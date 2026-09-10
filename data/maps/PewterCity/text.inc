@@ -57,8 +57,8 @@ PewterCity_Text_ThatsRightItsHardWork::
     .string "It is not easy.$"
 
 PewterCity_Text_SprayingRepelToKeepWildMonsOut::
-    .string "REPEL. Keeps the unbound out of\n"
-    .string "the garden.\p"
+    .string "SUPPRESS. Keeps the unbound out\n"
+    .string "of the garden.\p"
     .string "They come for the warmth, I think.$"
 
 PewterCity_Text_BrocksLookingForChallengersFollowMe::

@@ -96,7 +96,7 @@ Route8_Text_JuliaDefeat::
 
 Route8_Text_JuliaPostBattle::
     .string "I read that ANOMALY evolves when\n"
-    .string "it's exposed to a MOON STONE.\p"
+    .string "it's exposed to a REFLECTION.\p"
     .string "I read that in a DAEMON JOURNAL.\n"
     .string "I wonder if it's true?$"
 
