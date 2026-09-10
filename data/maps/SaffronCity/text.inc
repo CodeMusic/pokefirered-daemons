@@ -110,8 +110,8 @@ SaffronCity_Text_HowCanClubNotRecognizeLance::
     .string "This FAN CLUB…\n"
     .string "No one here has a clue!\p"
     .string "How could they not recognize\n"
-    .string "the brilliance that is LANCE?\p"
+    .string "the brilliance that is SANGUINE?\p"
     .string "He stands for justice!\n"
     .string "He's cool, and yet passionate!\l"
-    .string "He's the greatest, LANCE!$"
+    .string "He's the greatest, SANGUINE!$"
 

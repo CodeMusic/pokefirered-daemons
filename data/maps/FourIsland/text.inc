@@ -3,12 +3,12 @@ FourIsland_Text_IslandSign::
     .string "The Warm, Blue, Floe Island$"
 
 FourIsland_Text_LoreleiHasReturned::
-    .string "LORELEI has returned.\p"
+    .string "PHLEGMATIC has returned.\p"
     .string "Did she find the city life too\n"
     .string "stressful, I wonder?$"
 
 FourIsland_Text_LoreleiMetLaprasAsChild::
-    .string "LORELEI has gone back.\p"
+    .string "PHLEGMATIC has gone back.\p"
     .string "The FERRY she has, I imagine it to\n"
     .string "be the one she met as a child.\p"
     .string "I believe it was in ICEFALL CAVE\n"
@@ -36,12 +36,12 @@ FourIsland_Text_RivalAlreadyGotEggBeSmellingYa::
     .string "Be smelling ya!$"
 
 FourIsland_Text_LoreleiHasLotsOfStuffedDolls::
-    .string "Oh, you found me!\n"
-    .string "Please don't tell LORELEI.\p"
-    .string "Did you know that LORELEI has lots\n"
-    .string "and lots of stuffed dolls?\p"
-    .string "Every time she comes back to\n"
-    .string "FOUR ISLAND, her collection grows!$"
+	.string "Oh, you found me! Please don't\n"
+    .string "tell PHLEGMATIC.\p"
+    .string "Did you know that PHLEGMATIC has\n"
+    .string "lots and lots of stuffed dolls?\p"
+    .string "Every time she comes back to FOUR\n"
+    .string "ISLAND, her collection grows!$"
 
 FourIsland_Text_MadeSlushieUsingIcefallCaveIce::
     .string "Ooh, chilly!\p"
@@ -50,5 +50,5 @@ FourIsland_Text_MadeSlushieUsingIcefallCaveIce::
     .string "It's chilly and tasty!$"
 
 FourIsland_Text_LoreleisHouse::
-    .string "LORELEI'S HOUSE$"
+    .string "PHLEGMATIC'S HOUSE$"
 

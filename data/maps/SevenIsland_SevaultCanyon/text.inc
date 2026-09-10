@@ -125,6 +125,6 @@ SevenIsland_SevaultCanyon_Text_BrunoTrainedWithBrawly::
     .string "not a bad thing.\p"
     .string "But it's also not bad to aim for\n"
     .string "the top with a partner.\p"
-    .string "Even BRUNO…\n"
+    .string "Even CHOLERIC…\n"
     .string "He trained with a fellow by the\l"
     .string "name of BRAWLY before.$"

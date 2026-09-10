@@ -58,7 +58,7 @@ TwoIsland_Text_BrunoCameToIslandWhileBack::
     .string "A famous USER came to the ISLAND\n"
     .string "a little while back.\p"
     .string "He's one of the REVIEW BOARD. His\n"
-    .string "name is BRUNO.\p"
+    .string "name is CHOLERIC.\p"
     .string "He went away disappointed when he\n"
     .string "found out that they were all sold\l"
     .string "out of Rage Candybars.$"

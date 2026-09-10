@@ -1,5 +1,5 @@
 FourIsland_IcefallCave_Back_Text_LoreleiKeepHandsOffMons::
-    .string "LORELEI: Keep your filthy hands\n"
+    .string "PHLEGMATIC: Keep your filthy hands\n"
     .string "off the DAEMON in the cave!\p"
     .string "Do as I say, or you'll have me to\n"
     .string "answer to!$"
@@ -11,16 +11,16 @@ FourIsland_IcefallCave_Back_Text_ShutItLadyLeaveUsBe::
     .string "steamed up!$"
 
 FourIsland_IcefallCave_Back_Text_LoreleiPlayerHelpMeKickPoachersOut::
-    .string "LORELEI: {PLAYER}?! What are you\n"
-    .string "doing here?\p"
+	.string "PHLEGMATIC: {PLAYER}?! What\n"
+    .string "are you doing here?\p"
     .string "No, we can talk later. Right\n"
     .string "now, I need your help.\p"
     .string "Help me kick these poachers out\n"
     .string "before they do anything else.\p"
-    .string "They've been binding DAEMONS here,\n"
-    .string "then selling them off!\p"
-    .string "Are you ready? You take that one,\n"
-    .string "please!$"
+    .string "They've been binding DAEMONS\n"
+    .string "here, then selling them off!\p"
+    .string "Are you ready? You take that\n"
+    .string "one, please!$"
 
 FourIsland_IcefallCave_Back_Text_GruntIntro::
     .string "W-what?!\p"
@@ -31,7 +31,7 @@ FourIsland_IcefallCave_Back_Text_GruntDefeat::
     .string "We didn't plan on this!$"
 
 FourIsland_IcefallCave_Back_Text_LoreleiWhereHaveYouTakenMons::
-    .string "LORELEI: Humph. So despicably\n"
+    .string "PHLEGMATIC: Humph. So despicably\n"
     .string "weak.\p"
     .string "You! Tell me!\p"
     .string "Where have you taken the captured\n"
@@ -44,10 +44,10 @@ FourIsland_IcefallCave_Back_Text_NotTellingYouThat::
     .string "I'm not telling you that!$"
 
 FourIsland_IcefallCave_Back_Text_LoreleiWellDeepFreezeYou::
-    .string "LORELEI: If you won't confess, we'll\n"
-    .string "deep-hang you.\p"
-    .string "My FERRY is furious for what you've\n"
-    .string "done to its friends.\p"
+	.string "PHLEGMATIC: If you won't\n"
+    .string "confess, we'll deep-hang you.\p"
+    .string "My FERRY is furious for what\n"
+    .string "you've done to its friends.\p"
     .string "Go, FERRY! FREEZE…$"
 
 FourIsland_IcefallCave_Back_Text_OkayRocketWareHouseFiveIsland::

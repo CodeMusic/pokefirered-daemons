@@ -1,10 +1,10 @@
 FourIsland_Mart_Text_LoreleiGrewUpOnThisIsland::
-    .string "We've had a great and powerful\n"
+	.string "We've had a great and powerful\n"
     .string "USER grow up on this island.\p"
     .string "I bet even you'd know her. It's\n"
-    .string "LORELEI of the REVIEW BOARD!\p"
-    .string "When LORELEI was just a tyke, I\n"
-    .string "taught her about DAEMON.$"
+    .string "PHLEGMATIC of the REVIEW BOARD!\p"
+    .string "When PHLEGMATIC was just a\n"
+    .string "tyke, I taught her about DAEMON.$"
 
 FourIsland_Mart_Text_IcefallCaveIsFrigid::
     .string "The SEVII ISLANDS are in a warm\n"

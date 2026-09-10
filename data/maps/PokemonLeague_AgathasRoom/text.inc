@@ -1,5 +1,5 @@
 PokemonLeague_AgathasRoom_Text_Intro::
-    .string "I am AGATHA of the REVIEW BOARD!\p"
+    .string "I am MELANCHOLIC.\nThird of the REVIEW BOARD!\p"
     .string "CRYSTAL's taken a lot of interest in\n"
     .string "you, child!\p"
     .string "That old crank was once tough and\n"
@@ -11,7 +11,7 @@ PokemonLeague_AgathasRoom_Text_Intro::
     .string "USER fights!$"
 
 PokemonLeague_AgathasRoom_Text_RematchIntro::
-    .string "I am AGATHA of the REVIEW BOARD.\p"
+    .string "I am MELANCHOLIC.\nThird of the REVIEW BOARD.\p"
     .string "You're the child that CRYSTAL\n"
     .string "CLEAR's taken under her wing, aren't\l"
     .string "you?\p"

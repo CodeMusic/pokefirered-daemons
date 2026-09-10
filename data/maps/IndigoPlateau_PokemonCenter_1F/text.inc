@@ -16,17 +16,17 @@ IndigoPlateau_PokemonCenter_1F_Text_FaceEliteFourGoodLuck::
 IndigoPlateau_PokemonCenter_1F_Text_LoreleiIsAbsentClosedForTimeBeing::
     .string "I am so sorry, but you've wasted\n"
     .string "your time coming here.\p"
-    .string "LORELEI of the REVIEW BOARD is\n"
+    .string "PHLEGMATIC of the REVIEW BOARD is\n"
     .string "absent, you see.\p"
     .string "As a result, the DAEMON LEAGUE is\n"
     .string "closed for the time being.$"
 
 IndigoPlateau_PokemonCenter_1F_Text_AgathaWhuppedUs::
-    .string "AGATHA's GHOST-type DAEMONS are\n"
+    .string "MELANCHOLIC's LATENT daemons are\n"
     .string "horrifically terrifying in toughness.\p"
     .string "I took my FIGHTING-type DAEMON\n"
     .string "and raised them to the max.\p"
-    .string "I went at AGATHA feeling pretty\n"
+    .string "I went at MELANCHOLIC feeling\n"
     .string "confident, but she whupped us.\p"
     .string "That old lady's also got a really\n"
     .string "short fuse, too.\p"
@@ -34,9 +34,9 @@ IndigoPlateau_PokemonCenter_1F_Text_AgathaWhuppedUs::
     .string "scary lady hollering.$"
 
 IndigoPlateau_PokemonCenter_1F_Text_LancesCousinGymLeaderFarAway::
-    .string "Maybe becoming an REVIEW BOARD\n"
-    .string "member is in the blood.\p"
-    .string "From what I've heard, LANCE has a\n"
-    .string "cousin who's a GYM LEADER\l"
-    .string "somewhere far away.$"
+	.string "Maybe becoming an REVIEW\n"
+    .string "BOARD member is in the blood.\p"
+    .string "From what I've heard, SANGUINE\n"
+    .string "has a cousin who's a GYM\l"
+    .string "LEADER somewhere far away.$"
 

@@ -139,10 +139,9 @@ gFameCheckerFlavorText_Misty4:: @ 0x81ADC72
 	.string "BASIN, the GYM LEADER, has high\n"
 	.string "hopes about this place.$"
 
-gFameCheckerFlavorText_Misty5:: @ 0x81ADCEB
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}There's a rumor…\p"
-	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}BASIN is said to worship LORELEI\n"
-	.string "of the REVIEW BOARD.$"
+gFameCheckerFlavorText_Misty5:: @ 0x81ADCEB	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}There's a rumor…\p"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}BASIN is said to worship\n"
+	.string "PHLEGMATIC of the REVIEW BOARD.$"
 
 gFameCheckerFlavorText_LtSurge0:: @ 0x81ADD3C
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
@@ -331,7 +330,7 @@ gFameCheckerFlavorText_Blaine5:: @ 0x81AEB69
 
 gFameCheckerFlavorText_Lorelei0:: @ 0x81AEBDF
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
-	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}I am LORELEI of the REVIEW BOARD.$"
+	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}I am PHLEGMATIC.\nFourth of the REVIEW BOARD.$"
 
 gFameCheckerFlavorText_Lorelei1:: @ 0x81AEC28
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of DAEMON?\p"
@@ -343,20 +342,19 @@ gFameCheckerFlavorText_Lorelei2:: @ 0x81AEC82
 	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}We've had a great and powerful\n"
 	.string "USER grow up on this island.\p"
 	.string "I bet even you'd know her. It's\n"
-	.string "LORELEI of the REVIEW BOARD!$"
+	.string "PHLEGMATIC of the REVIEW BOARD!$"
 
 gFameCheckerFlavorText_Lorelei3:: @ 0x81AED27
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
 	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}Known for her logical, calculated,\n"
-	.string "and cool battling style, LORELEI\l"
+	.string "and cool style, PHLEGMATIC\l"
 	.string "has a surprising secret!$"
 
-gFameCheckerFlavorText_Lorelei4:: @ 0x81AEDAA
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
-	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}Did you know that LORELEI has lots\n"
-	.string "and lots of stuffed dolls?\p"
-	.string "Every time she comes back to\n"
-	.string "FOUR ISLAND, her collection grows!$"
+gFameCheckerFlavorText_Lorelei4:: @ 0x81AEDAA	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
+	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}Did you know that PHLEGMATIC has\n"
+	.string "lots and lots of stuffed dolls?\p"
+	.string "Every time she comes back to FOUR\n"
+	.string "ISLAND, her collection grows!$"
 
 gFameCheckerFlavorText_Lorelei5:: @ 0x81AEE51
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of DAEMON?\p"
@@ -369,47 +367,45 @@ gFameCheckerFlavorText_Lorelei5:: @ 0x81AEE51
 
 gFameCheckerFlavorText_Bruno0:: @ 0x81AEF25
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
-	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}I am BRUNO of the REVIEW BOARD!$"
+	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}I am CHOLERIC.\nSecond of the REVIEW BOARD!$"
 
 gFameCheckerFlavorText_Bruno1:: @ 0x81AEF6C
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of DAEMON?\p"
 	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}I've lived and trained with my\n"
 	.string "fighting DAEMON!$"
 
-gFameCheckerFlavorText_Bruno2:: @ 0x81AEFC6
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
-	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}BRUNO apparently joined the ELITE\n"
-	.string "FOUR out of his burning ambition to\l"
-	.string "battle the best USERS.$"
+gFameCheckerFlavorText_Bruno2:: @ 0x81AEFC6	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}CHOLERIC apparently joined the\n"
+	.string "REVIEW BOARD out of his burning\l"
+	.string "ambition to battle the best USERS.$"
 
-gFameCheckerFlavorText_Bruno3:: @ 0x81AF04C
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
-	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}BRUNO, who's a senior ahead of me,\n"
-	.string "visits the SPA on occasion.\p"
+gFameCheckerFlavorText_Bruno3:: @ 0x81AF04C	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
+	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}CHOLERIC, who's a senior ahead of\n"
+	.string "me, visits the SPA on occasion.\p"
 	.string "He comes to rehab injuries, both\n"
 	.string "his own and his DAEMON's.$"
 
 gFameCheckerFlavorText_Bruno4:: @ 0x81AF0F0
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}There's a rumor…\p"
 	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}He's one of the REVIEW BOARD. His\n"
-	.string "name is BRUNO.\p"
+	.string "name is CHOLERIC.\p"
 	.string "He went away disappointed when he\n"
 	.string "found out that they were all sold\l"
 	.string "out of Rage Candybars.$"
 
 gFameCheckerFlavorText_Bruno5:: @ 0x81AF19A
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Family and friends?\p"
-	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}Even BRUNO…\n"
+	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}Even CHOLERIC…\n"
 	.string "He trained with a fellow by the\l"
 	.string "name of BRAWLY before.$"
 
 gFameCheckerFlavorText_Agatha0:: @ 0x81AF200
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
-	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}I am AGATHA of the REVIEW BOARD.$"
+	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}I am MELANCHOLIC.\nThird of the REVIEW BOARD.$"
 
 gFameCheckerFlavorText_Agatha1:: @ 0x81AF248
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of DAEMON?\p"
-	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}AGATHA's GHOST-type DAEMONS are\n"
+	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}MELANCHOLIC's LATENT daemons are\n"
 	.string "horrifically terrifying in toughness.$"
 
 gFameCheckerFlavorText_Agatha2:: @ 0x81AF2B7
@@ -421,7 +417,7 @@ gFameCheckerFlavorText_Agatha2:: @ 0x81AF2B7
 
 gFameCheckerFlavorText_Agatha3:: @ 0x81AF34E
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}There's a rumor…\p"
-	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}In her youth, AGATHA and\n"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}In her youth, MELANCHOLIC and\n"
 	.string "CRYSTAL CLEAR were rivals who vied\l"
 	.string "for supremacy as USERS.$"
 
@@ -436,15 +432,14 @@ gFameCheckerFlavorText_Agatha4:: @ 0x81AF3BE
 
 gFameCheckerFlavorText_Agatha5:: @ 0x81AF47C
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
-	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}Take AGATHA, for example.\p"
+	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}Take MELANCHOLIC, for example.\p"
 	.string "She set a record for being the\n"
 	.string "oldest-ever REVIEW BOARD member.$"
 
-gFameCheckerFlavorText_Lance0:: @ 0x81AF4FD
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
+gFameCheckerFlavorText_Lance0:: @ 0x81AF4FD	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
 	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}I lead the REVIEW BOARD.\p"
-	.string "You can call me LANCE the dragon\n"
-	.string "USER.$"
+	.string "You can call me SANGUINE\n"
+	.string "the dragon USER.$"
 
 gFameCheckerFlavorText_Lance1:: @ 0x81AF567
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of DAEMON?\p"
@@ -459,25 +454,24 @@ gFameCheckerFlavorText_Lance2:: @ 0x81AF641
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
 	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}He stands for justice!\n"
 	.string "He's cool, and yet passionate!\l"
-	.string "He's the greatest, LANCE!$"
+	.string "He's the greatest, SANGUINE!$"
 
 gFameCheckerFlavorText_Lance3:: @ 0x81AF6BA
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}There's a rumor…\p"
-	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}We have a customer, LANCE, who\n"
+	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}We have a customer, SANGUINE, who\n"
 	.string "occasionally comes.\p"
 	.string "He always buys capes.\p"
 	.string "I wonder… Does he have many\n"
 	.string "identical capes at home?$"
 
-gFameCheckerFlavorText_Lance4:: @ 0x81AF758
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Family and friends?\p"
-	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}LANCE's grandfather is thought to\n"
-	.string "be the elder of a famous clan of\l"
-	.string "dragon masters.$"
+gFameCheckerFlavorText_Lance4:: @ 0x81AF758	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Family and friends?\p"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}SANGUINE's grandfather is\n"
+	.string "thought to be the elder of a\l"
+	.string "famous clan of dragon masters.$"
 
 gFameCheckerFlavorText_Lance5:: @ 0x81AF7CB
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Family and friends?\p"
-	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}From what I've heard, LANCE has\n"
+	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}From what I've heard, SANGUINE has\n"
 	.string "a cousin who's a GYM LEADER\l"
 	.string "somewhere far away.$"
 
@@ -698,10 +692,10 @@ gFameCheckerPersonQuote_Blaine:: @ 0x81B0708
 	.string "FIRE-type DAEMONS are there?$"
 
 gFameCheckerPersonName_Lorelei:: @ 0x81B079F
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}LORELEI$"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}PHLEGMATIC$"
 
 gFameCheckerPersonQuote_Lorelei:: @ 0x81B07AD
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}From: LORELEI\n"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}From: PHLEGMATIC\n"
 	.string "To: {PLAYER}\p"
 	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}I needed to thank you for your\n"
 	.string "help.\p"
@@ -710,30 +704,30 @@ gFameCheckerPersonQuote_Lorelei:: @ 0x81B07AD
 	.string "You'd better watch out next time!$"
 
 gFameCheckerPersonName_Bruno:: @ 0x81B0845
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}BRUNO$"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}CHOLERIC$"
 
 gFameCheckerPersonQuote_Bruno:: @ 0x81B0851
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}From: BRUNO To: {PLAYER}\p"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}From: CHOLERIC To: {PLAYER}\p"
 	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}The super power of your DAEMON\n"
 	.string "and you I've experienced myself.\p"
 	.string "Next time, maybe I should show you\n"
 	.string "how to train yourself.$"
 
 gFameCheckerPersonName_Agatha:: @ 0x81B08EE
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}AGATHA$"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}MELANCHOLIC$"
 
 gFameCheckerPersonQuote_Agatha:: @ 0x81B08FB
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}From: AGATHA To: {PLAYER}\p"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}From: MELANCHOLIC To: {PLAYER}\p"
 	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}When you grow older, don't you dare\n"
 	.string "go soft like that coot\l"
 	.string "CRYSTAL CLEAR!\p"
 	.string "Be like me and keep battling on!$"
 
 gFameCheckerPersonName_Lance:: @ 0x81B097F
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}LANCE$"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}SANGUINE$"
 
 gFameCheckerPersonQuote_Lance:: @ 0x81B098B
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}From: LANCE To: {PLAYER}\p"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}From: SANGUINE To: {PLAYER}\p"
 	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}I'm considering going back to my\n"
 	.string "hometown.\p"
 	.string "I want to retrain my DRAGON-type\n"
@@ -1073,7 +1067,7 @@ gFameCheckerFlavorTextOriginObjectName_ProfOak3::
 	.string "DAEMON JOURNAL$"
 
 gFameCheckerFlavorTextOriginObjectName_ProfOak4::
-	.string "AGATHA$"
+	.string "MELANCHOLIC$"
 
 gFameCheckerFlavorTextOriginObjectName_ProfOak5::
 	.string "AIDE$"
@@ -1223,10 +1217,10 @@ gFameCheckerFlavorTextOriginObjectName_Blaine5::
 	.string "DAEMON JOURNAL$"
 
 gFameCheckerFlavorTextOriginObjectName_Lorelei0::
-	.string "LORELEI$"
+	.string "PHLEGMATIC$"
 
 gFameCheckerFlavorTextOriginObjectName_Lorelei1::
-	.string "LORELEI$"
+	.string "PHLEGMATIC$"
 
 gFameCheckerFlavorTextOriginObjectName_Lorelei2::
 	.string "OLD MAN$"
@@ -1241,10 +1235,10 @@ gFameCheckerFlavorTextOriginObjectName_Lorelei5::
 	.string "OLD LADY$"
 
 gFameCheckerFlavorTextOriginObjectName_Bruno0::
-	.string "BRUNO$"
+	.string "CHOLERIC$"
 
 gFameCheckerFlavorTextOriginObjectName_Bruno1::
-	.string "BRUNO$"
+	.string "CHOLERIC$"
 
 gFameCheckerFlavorTextOriginObjectName_Bruno2::
 	.string "DAEMON JOURNAL$"
@@ -1259,7 +1253,7 @@ gFameCheckerFlavorTextOriginObjectName_Bruno5::
 	.string "CRUSHER$"
 
 gFameCheckerFlavorTextOriginObjectName_Agatha0::
-	.string "AGATHA$"
+	.string "MELANCHOLIC$"
 
 gFameCheckerFlavorTextOriginObjectName_Agatha1::
 	.string "CRUSHER$"
@@ -1271,16 +1265,16 @@ gFameCheckerFlavorTextOriginObjectName_Agatha3::
 	.string "DAEMON JOURNAL$"
 
 gFameCheckerFlavorTextOriginObjectName_Agatha4::
-	.string "AGATHA$"
+	.string "MELANCHOLIC$"
 
 gFameCheckerFlavorTextOriginObjectName_Agatha5::
 	.string "OLD LADY$"
 
 gFameCheckerFlavorTextOriginObjectName_Lance0::
-	.string "LANCE$"
+	.string "SANGUINE$"
 
 gFameCheckerFlavorTextOriginObjectName_Lance1::
-	.string "LANCE$"
+	.string "SANGUINE$"
 
 gFameCheckerFlavorTextOriginObjectName_Lance2::
 	.string "WOMAN$"
@@ -1359,8 +1353,8 @@ PokemonJournal_Text_SpecialFeatureMisty::
 	.string "DAEMON JOURNAL\p"
 	.string "Special Feature: DOLDRUM GYM\n"
 	.string "LEADER BASIN!\p"
-	.string "BASIN is said to worship LORELEI\n"
-	.string "of the REVIEW BOARD.$"
+	.string "BASIN is said to worship\n"
+	.string "PHLEGMATIC of the REVIEW BOARD.$"
 
 PokemonJournal_Text_SpecialFeatureLtSurge::
 	.string "DAEMON JOURNAL\p"
@@ -1407,34 +1401,34 @@ PokemonJournal_Text_SpecialFeatureBlaine::
 PokemonJournal_Text_SpecialFeatureLorelei::
 	.string "DAEMON JOURNAL\p"
 	.string "Special Feature: REVIEW BOARD's\n"
-	.string "LORELEI!\p"
+	.string "PHLEGMATIC!\p"
 	.string "Known for her logical, calculated,\n"
-	.string "and cool battling style, LORELEI\l"
+	.string "and cool style, PHLEGMATIC\l"
 	.string "has a surprising secret!$"
 
 PokemonJournal_Text_SpecialFeatureBruno::
 	.string "DAEMON JOURNAL\p"
 	.string "Special Feature: REVIEW BOARD's\n"
-	.string "BRUNO!\p"
-	.string "BRUNO apparently joined the REVIEW\n"
-	.string "BOARD out of his burning ambition\l"
-	.string "to battle the best USERS.$"
+	.string "CHOLERIC!\p"
+	.string "CHOLERIC apparently joined the\n"
+	.string "REVIEW BOARD out of his burning\l"
+	.string "ambition to battle the best USERS.$"
 
 PokemonJournal_Text_SpecialFeatureAgatha::
 	.string "DAEMON JOURNAL\p"
-	.string "Special Feature: REVIEW BOARD's\n"
-	.string "AGATHA!\p"
-	.string "In her youth, AGATHA and CRYSTAL\n"
-	.string "CLEAR were rivals who vied for\l"
-	.string "supremacy as USERS.$"
+	.string "Special Feature: REVIEW\n"
+	.string "BOARD's MELANCHOLIC!\p"
+	.string "In her youth, MELANCHOLIC and\n"
+	.string "CRYSTAL CLEAR were rivals who\l"
+	.string "vied for supremacy as USERS.$"
 
 PokemonJournal_Text_SpecialFeatureLance::
 	.string "DAEMON JOURNAL\p"
-	.string "Special Feature: REVIEW BOARD's\n"
-	.string "LANCE!\p"
-	.string "LANCE's grandfather is thought to\n"
-	.string "be the elder of a famous clan of\l"
-	.string "dragon masters.$"
+	.string "Special Feature: REVIEW\n"
+	.string "BOARD's SANGUINE!\p"
+	.string "SANGUINE's grandfather is\n"
+	.string "thought to be the elder of a\l"
+	.string "famous clan of dragon masters.$"
 
 PokemonJournal_Text_SpecialFeatureProfOak::
 	.string "DAEMON JOURNAL\p"

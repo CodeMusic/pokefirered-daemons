@@ -1,6 +1,6 @@
 PokemonLeague_LoreleisRoom_Text_Intro::
     .string "Welcome to the DAEMON LEAGUE.\p"
-    .string "I am LORELEI of the REVIEW BOARD.\p"
+    .string "I am PHLEGMATIC.\nFourth of the REVIEW BOARD.\p"
     .string "No one can best me when it comes\n"
     .string "to icy DAEMON.\p"
     .string "Freezing moves are powerful.\p"
@@ -9,15 +9,15 @@ PokemonLeague_LoreleisRoom_Text_Intro::
     .string "Hahaha! Are you ready?{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
 
 PokemonLeague_LoreleisRoom_Text_RematchIntro::
-    .string "Welcome to the DAEMON LEAGUE.\p"
-    .string "I, LORELEI of the REVIEW BOARD,\n"
-    .string "have returned!\p"
-    .string "You know how it goes. No one can\n"
-    .string "best me when it comes to icy\l"
-    .string "DAEMON.\p"
+	.string "Welcome to the DAEMON LEAGUE.\p"
+    .string "I, PHLEGMATIC of the REVIEW\n"
+    .string "BOARD, have returned!\p"
+    .string "You know how it goes. No one\n"
+    .string "can best me when it comes to\l"
+    .string "icy DAEMON.\p"
     .string "Freezing moves are powerful.\p"
-    .string "Your DAEMON will be at my mercy\n"
-    .string "when they are hung solid.\p"
+    .string "Your DAEMON will be at my\n"
+    .string "mercy when they are hung solid.\p"
     .string "Hahaha! Are you ready?{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
 
 PokemonLeague_LoreleisRoom_Text_Defeat::
