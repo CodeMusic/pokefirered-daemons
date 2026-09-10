@@ -174,6 +174,14 @@ const u8 gText_DbgMenuRecord[] = _("RECORD");
 const u8 gText_DbgMenuIslands[] = _("ISLANDS");
 const u8 gText_DbgMenuSong[] = _("SONG {STR_VAR_1}");
 const u8 gText_DbgMenuSfx[] = _("SFX {STR_VAR_2}");
+// The ENCOUNTER page. DAEMON prints the species NAME on the row and nothing
+// else, which is why the debug pages widen the window -- see CreateStartMenuWindow.
+const u8 gText_DbgMenuEncounter[] = _("ENCOUNTER");
+const u8 gText_DbgMenuDaemon[] = _("{STR_VAR_1}");
+const u8 gText_DbgMenuLevel[] = _("LV {STR_VAR_2}");
+// 1.6 spent this word already: "you bind() a daemon and you INVOKE it", and
+// what this row does is bring one up. It is the same verb, used literally.
+const u8 gText_DbgMenuInvoke[] = _("INVOKE");
 const u8 gText_DbgMenuBack[] = _("BACK");
 const u8 gText_MenuExit[] = _("EXIT");
 const u8 gText_MenuRetire[] = _("RETIRE");
@@ -934,6 +942,10 @@ const u8 gStartMenuDesc_DbgHeal[] = _("Restore the whole party.");
 const u8 gStartMenuDesc_DbgMart[] = _("Refill the BAG and the wallet.");
 const u8 gStartMenuDesc_DbgRecord[] = _("Enter the RECORD. Runs the credits.");
 const u8 gStartMenuDesc_DbgIslands[] = _("Open the SEVII ISLANDS.");
+const u8 gStartMenuDesc_DbgEncounter[] = _("Invoke any daemon, at any level.");
+const u8 gStartMenuDesc_DbgDaemon[] = _("{DPAD_LEFTRIGHT} steps, L and R step by ten.");
+const u8 gStartMenuDesc_DbgLevel[] = _("{DPAD_LEFTRIGHT} steps, L and R step by ten.");
+const u8 gStartMenuDesc_DbgInvoke[] = _("Start the encounter.");
 const u8 gStartMenuDesc_DbgSong[] = _("Play the next track in the table.");
 const u8 gStartMenuDesc_DbgSfx[] = _("Play the next sound effect.");
 const u8 gStartMenuDesc_DbgBack[] = _("Back, and restore this map's music.");

@@ -663,11 +663,39 @@ u8 GetTextSpeedSetting(void)
     return sTextSpeedFrameDelays[gSaveBlock2Ptr->optionsTextSpeed];
 }
 
+#if DAEMONS_DEBUG
+//  The start menu is seven tiles wide and its rows print at x=8, so a row has
+//  48px. 9.3's ENCOUNTER page has to show a SPECIES NAME on a row, and the
+//  widest of the 412 is 60px -- so 67 of them would have clipped. Nine tiles
+//  gives 64px and clears every one, measured rather than guessed.
+//
+//  The window stays right-aligned: 0x1D minus the width is 0x16 at seven,
+//  which is vanilla's own left edge, so nothing moves unless the width does.
+//  Set back to 7 when the debug pages close, and never touched in a release
+//  build -- this whole mechanism is fenced out of it.
+//  Zero, not seven. This file has no .data section -- the link script discards
+//  it -- so an INITIALISED static here resolves to a discarded symbol and the
+//  linker says so in a way that names neither the variable nor the reason.
+//  Zero means "the vanilla width", which is also the state every non-debug
+//  path is already in.
+static u8 sStartMenuWindowWidth;
+
+void SetStartMenuWindowWidth(u8 width)
+{
+    sStartMenuWindowWidth = (width == 7) ? 0 : width;
+}
+#endif
+
 u8 CreateStartMenuWindow(u8 height)
 {
     if (sStartMenuWindowId == 0xFF)
     {
+#if DAEMONS_DEBUG
+        u8 width = sStartMenuWindowWidth ? sStartMenuWindowWidth : 7;
+        struct WindowTemplate template = SetWindowTemplateFields(0, 0x1D - width, 1, width, height * 2 - 1, DLG_WINDOW_PALETTE_NUM, 0x13D);
+#else
         struct WindowTemplate template = SetWindowTemplateFields(0, 0x16, 1, 7, height * 2 - 1, DLG_WINDOW_PALETTE_NUM, 0x13D);
+#endif
         sStartMenuWindowId = AddWindow(&template);
         PutWindowTilemap(sStartMenuWindowId);
     }

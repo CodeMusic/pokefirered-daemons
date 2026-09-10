@@ -49,6 +49,16 @@ DaemonsDebug_EventScript_TheIslands::
 	releaseall
 	end
 
+@  ENCOUNTER. The daemon is already built -- DbgInvokeCallback calls
+@  CreateScriptedWildMon before handing over -- because dowildbattle stops the
+@  script context and gives the resume to the battle's saved callback, so it
+@  needs a script to come back to. This is that script.
+DaemonsDebug_EventScript_Invoke::
+	lockall
+	dowildbattle
+	releaseall
+	end
+
 DaemonsDebug_EventScript_Cancel::
 	closemessage
 	releaseall
@@ -63,7 +73,11 @@ DaemonsDebug_Text_TheRecord::
 DaemonsDebug_Text_TheIslands::
 	.string "DEBUG: open the SEVII ISLANDS?\p"
 	.string "The ferry at ARDOR PORT will sail,\n"
-	.string "and both passes go in the BAG.$"
+	.string "and both passes go in the BAG.\p"
+	.string "The S.S. ANNE uses the same berth\n"
+	.string "and the same sailor, so she will\l"
+	.string "have left. Start a new file to\l"
+	.string "board her.$"
 
 DaemonsDebug_Text_IslandsOpened::
 	.string "The ferry at ARDOR PORT is running.$"

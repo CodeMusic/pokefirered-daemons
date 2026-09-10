@@ -16,6 +16,11 @@
 #if DAEMONS_DEBUG
 #include "event_scripts.h"
 #include "script.h"
+#include "script_pokemon_util.h"
+#include "event_data.h"
+#include "pokedex.h"
+#include "data.h"
+#include "constants/pokedex.h"
 #include "item.h"
 #include "money.h"
 #include "script_pokemon_util.h"
@@ -66,6 +71,10 @@ enum StartMenuOption
     STARTMENU_DBG_MART,
     STARTMENU_DBG_RECORD,
     STARTMENU_DBG_ISLANDS,
+    STARTMENU_DBG_ENCOUNTER,
+    STARTMENU_DBG_DAEMON,
+    STARTMENU_DBG_LEVEL,
+    STARTMENU_DBG_INVOKE,
     STARTMENU_DBG_SONG,
     STARTMENU_DBG_SFX,
     STARTMENU_DBG_BACK,
@@ -115,6 +124,10 @@ static bool8 DbgHealCallback(void);
 static bool8 DbgMartCallback(void);
 static bool8 DbgRecordCallback(void);
 static bool8 DbgIslandsCallback(void);
+static bool8 DbgEncounterCallback(void);
+static bool8 DbgStepCallback(void);
+static bool8 DbgInvokeCallback(void);
+static bool8 DbgHandleStepInput(void);
 static bool8 DbgSongCallback(void);
 static bool8 DbgSfxCallback(void);
 static bool8 DbgBackCallback(void);
@@ -163,6 +176,12 @@ static const struct MenuAction sStartMenuActionTable[] = {
     [STARTMENU_DBG_MART] = { gText_DbgMenuMart, {.u8_void = DbgMartCallback} },
     [STARTMENU_DBG_RECORD]  = { gText_DbgMenuRecord,  {.u8_void = DbgRecordCallback} },
     [STARTMENU_DBG_ISLANDS] = { gText_DbgMenuIslands, {.u8_void = DbgIslandsCallback} },
+    [STARTMENU_DBG_ENCOUNTER] = { gText_DbgMenuEncounter, {.u8_void = DbgEncounterCallback} },
+    // DAEMON and LEVEL are adjusted with LEFT/RIGHT, so A on either does
+    // nothing but redraw -- which is also what makes A safe to lean on.
+    [STARTMENU_DBG_DAEMON]  = { gText_DbgMenuDaemon, {.u8_void = DbgStepCallback} },
+    [STARTMENU_DBG_LEVEL]   = { gText_DbgMenuLevel,  {.u8_void = DbgStepCallback} },
+    [STARTMENU_DBG_INVOKE]  = { gText_DbgMenuInvoke, {.u8_void = DbgInvokeCallback} },
     // These two labels carry {STR_VAR_1} and {STR_VAR_2}. PrintStartMenuItems
     // runs every entry through StringExpandPlaceholders, so the current song
     // and sound effect can live in the menu itself -- no second window.
@@ -203,6 +222,10 @@ static const u8 *const sStartMenuDescPointers[] = {
     gStartMenuDesc_DbgMart,
     gStartMenuDesc_DbgRecord,
     gStartMenuDesc_DbgIslands,
+    gStartMenuDesc_DbgEncounter,
+    gStartMenuDesc_DbgDaemon,
+    gStartMenuDesc_DbgLevel,
+    gStartMenuDesc_DbgInvoke,
     gStartMenuDesc_DbgSong,
     gStartMenuDesc_DbgSfx,
     gStartMenuDesc_DbgBack,
@@ -255,11 +278,27 @@ static void SetHasPokedexAndPokemon(void)
 }
 
 #if DAEMONS_DEBUG
-static EWRAM_DATA bool8 sInDebugSubmenu = FALSE;
+// One flag became one page number the moment there were two submenus. The
+// mechanism is unchanged -- SetUpStartMenu appends a different list and every
+// redraw path keeps working -- there is just more than one different list now.
+enum {
+    DBG_PAGE_NONE = 0,
+    DBG_PAGE_MAIN,
+    DBG_PAGE_ENCOUNTER,
+};
+static EWRAM_DATA u8 sDbgPage = 0;
 #define DBG_FIRST_SONG MUS_HEAL   // 256; everything below it is a sound effect
+// Nine tiles, because the widest of the 412 species names is 60px and a row at
+// seven tiles has 48. Measured; see CreateStartMenuWindow.
+#define DBG_MENU_WIDTH 9
 
 static EWRAM_DATA u16 sDbgSong = 0;
 static EWRAM_DATA u16 sDbgSfx = 0;
+// A NATIONAL DEX NUMBER, not a species id -- so the twenty-five dummy slots
+// Gen 3 left between CELEBI and TREECKO are not in the list, and 1..151 is
+// exactly the KANTO INDEX. See DbgDexMax for the top end.
+static EWRAM_DATA u16 sDbgDex = 0;
+static EWRAM_DATA u8 sDbgLevel = 0;
 #endif
 
 static void SetUpStartMenu(void)
@@ -269,12 +308,21 @@ static void SetUpStartMenu(void)
     // DoDrawStartMenu calls this on every redraw, so the submenu is a flag
     // rather than a saved list -- which means every existing redraw path keeps
     // working untouched.
-    if (sInDebugSubmenu)
+    if (sDbgPage == DBG_PAGE_ENCOUNTER)
+    {
+        AppendToStartMenuItems(STARTMENU_DBG_DAEMON);
+        AppendToStartMenuItems(STARTMENU_DBG_LEVEL);
+        AppendToStartMenuItems(STARTMENU_DBG_INVOKE);
+        AppendToStartMenuItems(STARTMENU_DBG_BACK);
+        return;
+    }
+    if (sDbgPage == DBG_PAGE_MAIN)
     {
         AppendToStartMenuItems(STARTMENU_DBG_HEAL);
         AppendToStartMenuItems(STARTMENU_DBG_MART);
         AppendToStartMenuItems(STARTMENU_DBG_RECORD);
         AppendToStartMenuItems(STARTMENU_DBG_ISLANDS);
+        AppendToStartMenuItems(STARTMENU_DBG_ENCOUNTER);
         AppendToStartMenuItems(STARTMENU_DBG_SONG);
         AppendToStartMenuItems(STARTMENU_DBG_SFX);
         AppendToStartMenuItems(STARTMENU_DBG_BACK);
@@ -514,6 +562,10 @@ static bool8 StartCB_HandleInput(void)
             PrintTextOnHelpMessageWindow(sStartMenuDescPointers[sStartMenuOrder[sStartMenuCursorPos]], 2);
         }
     }
+#if DAEMONS_DEBUG
+    if (DbgHandleStepInput())
+        return FALSE;
+#endif
     if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
@@ -658,15 +710,48 @@ static bool8 IsDaemonsDebugCallback(void)
         || sStartMenuCallback == DbgMartCallback
         || sStartMenuCallback == DbgRecordCallback
         || sStartMenuCallback == DbgIslandsCallback
+        || sStartMenuCallback == DbgEncounterCallback
+        || sStartMenuCallback == DbgStepCallback
+        || sStartMenuCallback == DbgInvokeCallback
         || sStartMenuCallback == DbgSongCallback
         || sStartMenuCallback == DbgSfxCallback
         || sStartMenuCallback == DbgBackCallback;
 }
 
+// The list runs over NATIONAL DEX NUMBERS. With only the INDEX that is 1..151,
+// which is the KANTO list exactly; with the GLOBAL INDEX it runs to 387 rather
+// than 386 -- 8.9 put MISSINGNO one past the end of the complete list, and this
+// menu is the only place in the game that list is not one short.
+static u16 DbgDexMax(void)
+{
+    return IsNationalPokedexEnabled() ? NATIONAL_DEX_OLD_UNOWN_B : KANTO_DEX_COUNT;
+}
+
+static u16 DbgSpecies(void)
+{
+    return NationalPokedexNumToSpecies(sDbgDex);
+}
+
+// STR_VAR_1 and STR_VAR_2 are read by the ROW LABELS, not by a second window --
+// PrintStartMenuItems runs every entry through StringExpandPlaceholders. Each
+// page owns both slots because no two of these rows are ever on screen at once.
+static void DbgSetVars(void)
+{
+    if (sDbgPage == DBG_PAGE_ENCOUNTER)
+    {
+        StringCopy(gStringVar1, gSpeciesNames[DbgSpecies()]);
+        ConvertIntToDecimalStringN(gStringVar2, sDbgLevel, STR_CONV_MODE_LEFT_ALIGN, 3);
+    }
+    else
+    {
+        ConvertIntToDecimalStringN(gStringVar1, sDbgSong, STR_CONV_MODE_LEFT_ALIGN, 3);
+        ConvertIntToDecimalStringN(gStringVar2, sDbgSfx, STR_CONV_MODE_LEFT_ALIGN, 3);
+    }
+}
+
 static bool8 DbgRedraw(void)
 {
-    ConvertIntToDecimalStringN(gStringVar1, sDbgSong, STR_CONV_MODE_LEFT_ALIGN, 3);
-    ConvertIntToDecimalStringN(gStringVar2, sDbgSfx, STR_CONV_MODE_LEFT_ALIGN, 3);
+    DbgSetVars();
     ClearStdWindowAndFrame(GetStartMenuWindowId(), FALSE);
     RemoveStartMenuWindow();
     DrawStartMenuInOneGo();
@@ -680,8 +765,9 @@ static bool8 StartMenuDaemonsDebugCallback(void)
         sDbgSong = MUS_BRAZEN;
     if (sDbgSfx == 0)
         sDbgSfx = 1;
-    sInDebugSubmenu = TRUE;
+    sDbgPage = DBG_PAGE_MAIN;
     sStartMenuCursorPos = 0;
+    SetStartMenuWindowWidth(DBG_MENU_WIDTH);
     return DbgRedraw();
 }
 
@@ -713,8 +799,9 @@ static bool8 DbgMartCallback(void)
 // That is the same handover a signpost does.
 static bool8 DbgLeaveMenuForScript(const u8 *script)
 {
-    sInDebugSubmenu = FALSE;
+    sDbgPage = DBG_PAGE_NONE;
     sStartMenuCursorPos = 0;
+    SetStartMenuWindowWidth(7);
     PlayBGM(GetCurrentMapMusic());
     DestroySafariZoneStatsWindow();
     DestroyHelpMessageWindow_();
@@ -731,6 +818,84 @@ static bool8 DbgRecordCallback(void)
 static bool8 DbgIslandsCallback(void)
 {
     return DbgLeaveMenuForScript(DaemonsDebug_EventScript_TheIslands);
+}
+
+static bool8 DbgEncounterCallback(void)
+{
+    // Clamped on entry rather than on change, because DbgDexMax moves the
+    // moment CRYSTAL hands over the GLOBAL INDEX -- and a saved value from
+    // before that would sit above the top of a list it is no longer in.
+    if (sDbgDex == 0 || sDbgDex > DbgDexMax())
+        sDbgDex = 1;
+    if (sDbgLevel == 0)
+        sDbgLevel = 50;
+    sDbgPage = DBG_PAGE_ENCOUNTER;
+    sStartMenuCursorPos = 0;
+    return DbgRedraw();
+}
+
+// A on DAEMON or LEVEL only redraws. The value moves with LEFT and RIGHT --
+// see DbgHandleStepInput, which runs before the menu's own A handler.
+static bool8 DbgStepCallback(void)
+{
+    return DbgRedraw();
+}
+
+static bool8 DbgInvokeCallback(void)
+{
+    // The mon is built here and the BATTLE is started by a script, because
+    // dowildbattle stops the script context and hands the resume to the
+    // battle's saved callback. Doing that from a menu callback would have
+    // nothing to resume.
+    CreateScriptedWildMon(DbgSpecies(), sDbgLevel, ITEM_NONE);
+    return DbgLeaveMenuForScript(DaemonsDebug_EventScript_Invoke);
+}
+
+// LEFT and RIGHT step by one and repeat when held; L and R step by ten, which
+// is what makes 387 reachable without holding a direction for half a minute.
+// Returns TRUE when it has consumed the frame, so the menu's own A and B
+// handling never sees it.
+static bool8 DbgStep(s32 delta)
+{
+    if (sStartMenuOrder[sStartMenuCursorPos] == STARTMENU_DBG_DAEMON)
+    {
+        s32 max = DbgDexMax();
+        s32 v = (s32)sDbgDex + delta;
+        while (v > max) v -= max;
+        while (v < 1)   v += max;
+        sDbgDex = v;
+    }
+    else
+    {
+        s32 v = (s32)sDbgLevel + delta;
+        while (v > MAX_LEVEL) v -= MAX_LEVEL;
+        while (v < 1)         v += MAX_LEVEL;
+        sDbgLevel = v;
+    }
+    PlaySE(SE_SELECT);
+    DbgRedraw();
+    return TRUE;
+}
+
+static bool8 DbgHandleStepInput(void)
+{
+    u8 row;
+
+    if (sDbgPage != DBG_PAGE_ENCOUNTER)
+        return FALSE;
+    row = sStartMenuOrder[sStartMenuCursorPos];
+    if (row != STARTMENU_DBG_DAEMON && row != STARTMENU_DBG_LEVEL)
+        return FALSE;
+
+    if (JOY_NEW(L_BUTTON))
+        return DbgStep(-10);
+    if (JOY_NEW(R_BUTTON))
+        return DbgStep(+10);
+    if (JOY_REPT(DPAD_LEFT))
+        return DbgStep(-1);
+    if (JOY_REPT(DPAD_RIGHT))
+        return DbgStep(+1);
+    return FALSE;
 }
 
 // The two halves of the song table are not interleaved: SE_USE_ITEM is 1 and
@@ -760,10 +925,18 @@ static bool8 DbgSfxCallback(void)
     return DbgRedraw();
 }
 
+// BACK is one entry on both pages, so it has to know which one it is leaving.
 static bool8 DbgBackCallback(void)
 {
-    sInDebugSubmenu = FALSE;
+    if (sDbgPage == DBG_PAGE_ENCOUNTER)
+    {
+        sDbgPage = DBG_PAGE_MAIN;
+        sStartMenuCursorPos = 0;
+        return DbgRedraw();
+    }
+    sDbgPage = DBG_PAGE_NONE;
     sStartMenuCursorPos = 0;
+    SetStartMenuWindowWidth(7);
     PlayBGM(GetCurrentMapMusic());
     return DbgRedraw();
 }
