@@ -27,7 +27,7 @@ CinnabarIsland_Gym_Text_ReceivedTM38FromBlaine::
 
 CinnabarIsland_Gym_Text_BlainePostBattle::
     .string "TM38 contains FLASHOVER. Teach it\n"
-    .string "to FIRE-type DAEMON.\p"
+    .string "to ENTROPY-type DAEMON.\p"
     .string "FLICKER or RUBRIC would be ideal\n"
     .string "for that move.$"
 
@@ -72,8 +72,8 @@ CinnabarIsland_Gym_Text_AveryPostBattle::
     .string "for you to understand.$"
 
 CinnabarIsland_Gym_Text_RamonIntro::
-    .string "I like using FIRE-type DAEMON. I\n"
-    .string "just do.$"
+    .string "I like using ENTROPY-type DAEMON.\n"
+    .string "I just do.$"
 
 CinnabarIsland_Gym_Text_RamonDefeat::
     .string "Too hot to handle!$"
@@ -117,8 +117,8 @@ CinnabarIsland_Gym_Text_ZacDefeat::
 
 CinnabarIsland_Gym_Text_ZacPostBattle::
     .string "Water beats fire, of course.\p"
-    .string "But fire melts ice, so the FIRE\n"
-    .string "type beats ICE-type DAEMON.$"
+    .string "But fire melts ice, so the ENTROPY\n"
+    .string "type beats FROZEN-type DAEMON.$"
 
 CinnabarIsland_Gym_Text_GymGuyAdvice::
     .string "Yo! Champ in the making!\p"
@@ -163,7 +163,7 @@ CinnabarIsland_Gym_Text_QuizQuestion3::
 
 CinnabarIsland_Gym_Text_QuizQuestion4::
     .string "Are electric moves effective\n"
-    .string "against GROUND-type DAEMON?$"
+    .string "against STRATUM-type DAEMON?$"
 
 CinnabarIsland_Gym_Text_QuizQuestion5::
     .string "DAEMON of the same kind and level\n"

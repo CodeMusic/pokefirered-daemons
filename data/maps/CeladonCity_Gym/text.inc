@@ -82,22 +82,22 @@ CeladonCity_Gym_Text_TinaPostBattle::
 
 CeladonCity_Gym_Text_TamiaIntro::
     .string "Look, look! See my DAEMONS!\p"
-    .string "I like the GRASS type. I like how\n"
+    .string "I like the GROWTH type. I like how\n"
     .string "they're easy to raise.$"
 
 CeladonCity_Gym_Text_TamiaDefeat::
     .string "No!$"
 
 CeladonCity_Gym_Text_TamiaPostBattle::
-    .string "We only use GRASS-type DAEMON at\n"
+    .string "We only use GROWTH-type DAEMON at\n"
     .string "our GYM.\p"
     .string "Why? We also use them for making\n"
     .string "flower arrangements!$"
 
 CeladonCity_Gym_Text_LisaIntro::
     .string "Oh, hey!\p"
-    .string "We don't like BUG- or FIRE-type\n"
-    .string "DAEMON in here!$"
+    .string "We don't like SWARM- or\n"
+    .string "ENTROPY-type DAEMON in here!$"
 
 CeladonCity_Gym_Text_LisaDefeat::
     .string "Oh!\n"

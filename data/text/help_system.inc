@@ -1259,9 +1259,9 @@ Help_Text_DefineType::
 	.string "type. Every type has advantageous and\l"
 	.string "disadvantageous matchups against other\l"
 	.string "types. For example, like a rock-\l"
-	.string "paper-scissors game, the WATER type is\l"
-	.string "strong against the FIRE type and weak\l"
-	.string "against the GRASS type.$"
+	.string "paper-scissors game, the FLOW type is\l"
+	.string "strong against the ENTROPY type and\l"
+	.string "weak against the GROWTH type.$"
 
 Help_Text_DefineOT::
 	.string "OT stands for “Original USER,” the first\n"

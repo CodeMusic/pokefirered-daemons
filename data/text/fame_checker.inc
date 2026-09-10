@@ -118,7 +118,7 @@ gFameCheckerFlavorText_Misty0:: @ 0x81ADA91
 gFameCheckerFlavorText_Misty1:: @ 0x81ADAF6
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of DAEMON?\p"
 	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}My policy is an all-out offensive\n"
-	.string "with WATER-type DAEMON!$"
+	.string "with FLOW-type DAEMON!$"
 
 gFameCheckerFlavorText_Misty2:: @ 0x81ADB5A
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
@@ -188,7 +188,7 @@ gFameCheckerFlavorText_Erika1:: @ 0x81AE072
 	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}I am a student of the art of\n"
 	.string "flower arranging.\p"
 	.string "My DAEMONS are solely of the\n"
-	.string "GRASS type.$"
+	.string "GROWTH type.$"
 
 gFameCheckerFlavorText_Erika2:: @ 0x81AE0F3
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
@@ -197,7 +197,7 @@ gFameCheckerFlavorText_Erika2:: @ 0x81AE0F3
 
 gFameCheckerFlavorText_Erika3:: @ 0x81AE15B
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
-	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}We only use GRASS-type DAEMON at\n"
+	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}We only use GROWTH-type DAEMON at\n"
 	.string "our GYM.\p"
 	.string "Why? We also use them for making\n"
 	.string "flower arrangements!$"
@@ -689,7 +689,7 @@ gFameCheckerPersonQuote_Blaine:: @ 0x81B0708
 	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}My fire DAEMON! They'll become\n"
 	.string "even more powerful!\p"
 	.string "And now, a quiz. How many kinds of\n"
-	.string "FIRE-type DAEMONS are there?$"
+	.string "ENTROPY-type DAEMONS are there?$"
 
 gFameCheckerPersonName_Lorelei:: @ 0x81B079F
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}PHLEGMATIC$"
@@ -730,7 +730,7 @@ gFameCheckerPersonQuote_Lance:: @ 0x81B098B
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}From: SANGUINE To: {PLAYER}\p"
 	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}I'm considering going back to my\n"
 	.string "hometown.\p"
-	.string "I want to retrain my DRAGON-type\n"
+	.string "I want to retrain my EMERGENT-type\n"
 	.string "DAEMON and strengthen them.\p"
 	.string "I'd like to invite you to my\n"
 	.string "hometown one day.$"

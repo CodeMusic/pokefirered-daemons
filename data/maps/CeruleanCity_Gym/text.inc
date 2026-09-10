@@ -75,10 +75,10 @@ CeruleanCity_Gym_Text_GymGuyAdvice::
     .string "Yo! Champ in the making!\p"
     .string "Let me give you some advice!\p"
     .string "The LEADER, BASIN, is a pro who\n"
-    .string "uses WATER-type DAEMON.\p"
+    .string "uses FLOW-type DAEMON.\p"
     .string "You can drain all their water with\n"
-    .string "GRASS-type DAEMON.\p"
-    .string "Or, you might use ELECTRIC-type\n"
+    .string "GROWTH-type DAEMON.\p"
+    .string "Or, you might use SIGNAL-type\n"
     .string "DAEMON and zap them!$"
 
 CeruleanCity_Gym_Text_WeMakePrettyGoodTeam::

@@ -41,11 +41,11 @@ Pokedude_Text_YayWeManagedToWin::
 
 Pokedude_Text_WaterNotVeryEffectiveAgainstGrass::
 	.string "TUTOR: The move SEEP is a\n"
-	.string "WATER-type attack.\p"
+	.string "FLOW-type attack.\p"
 	.string "The targeted WEED is a\n"
 	.string "GRASS/CORRUPT-type DAEMON.\p"
-	.string "The WATER-type attack is absorbed\n"
-	.string "by the GRASS-type DAEMON…\p"
+	.string "The FLOW-type attack is absorbed\n"
+	.string "by the GROWTH-type DAEMON…\p"
 	.string "As a result, the move becomes not\n"
 	.string "very effective, and inflicts only\l"
 	.string "half the usual damage.$"
@@ -53,8 +53,8 @@ Pokedude_Text_WaterNotVeryEffectiveAgainstGrass::
 Pokedude_Text_GrassEffectiveAgainstWater::
 	.string "Uh-oh, this is not good!\p"
 	.string "The INGEST attack you just saw is\n"
-	.string "a GRASS-type move.\p"
-	.string "LOOP is a WATER-type DAEMON.\p"
+	.string "a GROWTH-type move.\p"
+	.string "LOOP is a FLOW-type DAEMON.\p"
 	.string "So, INGEST becomes super\n"
 	.string "effective, doubling the damage.$"
 
@@ -69,14 +69,14 @@ Pokedude_Text_ShiftingUsesTurn::
 	.string "Now, it's the opponent's turn.$"
 
 Pokedude_Text_ButterfreeDoubleResistsGrass::
-	.string "INDEXER is a BUG/FLYING-type\n"
+	.string "INDEXER is a SWARM/VECTOR-type\n"
 	.string "DAEMON.\p"
 	.string "Against this DAEMON, a GRASS- type\n"
 	.string "attack…\p"
 	.string "…inflicts only half the usual\n"
-	.string "damage on a BUG-type DAEMON…\p"
+	.string "damage on a SWARM-type DAEMON…\p"
 	.string "…And, it also causes only half the\n"
-	.string "damage on a FLYING-type DAEMON.\p"
+	.string "damage on a VECTOR-type DAEMON.\p"
 	.string "Therefore, INDEXER, being a\n"
 	.string "BUG/FLYING DAEMON, only takes one\l"
 	.string "quarter of the usual damage.$"

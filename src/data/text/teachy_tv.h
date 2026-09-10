@@ -144,9 +144,9 @@ const u8 gPokedudeText_TMTypes[] = _(
         "Check the type and teach it to a\n"
         "DAEMON that matches up well.\p"
         "For example, RIPPLE is suitable\n"
-        "for WATER-type DAEMON.\p"
+        "for FLOW-type DAEMON.\p"
         "MINIBATCH is a ROUTINE that most\n"
-        "GRASS-type DAEMON can learn.\p"
+        "GROWTH-type DAEMON can learn.\p"
         "There's one other thing!");
 const u8 gPokedudeText_ReadTMDescription[] = _(
         "Don't just look at the type,\n"

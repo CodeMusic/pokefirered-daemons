@@ -62,7 +62,7 @@ Text_ThunderWaveTaught::
     .string "target DAEMON.\p"
     .string "A throttled DAEMON may be unable\n"
     .string "to move in battle.\p"
-    .string "It's an ELECTRIC-type move, so it\n"
+    .string "It's an SIGNAL-type move, so it\n"
     .string "won't work on some DAEMONS.$"
 
 SilphCo_2F_Text_FloorSign::

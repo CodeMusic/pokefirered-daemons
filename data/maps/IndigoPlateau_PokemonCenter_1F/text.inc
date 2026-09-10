@@ -24,8 +24,8 @@ IndigoPlateau_PokemonCenter_1F_Text_LoreleiIsAbsentClosedForTimeBeing::
 IndigoPlateau_PokemonCenter_1F_Text_AgathaWhuppedUs::
     .string "MELANCHOLIC's LATENT daemons are\n"
     .string "horrifically terrifying in toughness.\p"
-    .string "I took my FIGHTING-type DAEMON\n"
-    .string "and raised them to the max.\p"
+    .string "I took my LOGIC-type DAEMON and\n"
+    .string "raised them to the max.\p"
     .string "I went at MELANCHOLIC feeling\n"
     .string "confident, but she whupped us.\p"
     .string "That old lady's also got a really\n"
