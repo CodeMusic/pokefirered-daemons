@@ -23,7 +23,7 @@ Route16_NorthEntrance_2F_Text_GiveAmuletCoinIfCaught40::
     .string "on 40 species, I'm supposed to give\l"
     .string "you a reward.\p"
     .string "CRYSTAL CLEAR entrusted me with an\n"
-    .string "AMULET COIN for you.\p"
+    .string "SURCHARGE for you.\p"
     .string "So, {PLAYER}, let me ask you.\p"
     .string "Have you gathered data on at least\n"
     .string "40 kinds of DAEMONS?$"
@@ -34,12 +34,12 @@ Route16_NorthEntrance_2F_Text_GreatHereYouGo::
     .string "Congratulations! Here you go!$"
 
 Route16_NorthEntrance_2F_Text_ReceivedAmuletCoinFromAide::
-    .string "{PLAYER} received the AMULET COIN\n"
+    .string "{PLAYER} received the SURCHARGE\n"
     .string "from the AIDE.$"
 
 Route16_NorthEntrance_2F_Text_ExplainAmuletCoin::
-    .string "An AMULET COIN is an item to be\n"
-    .string "held by a DAEMON.\p"
+    .string "An SURCHARGE is an item to be held\n"
+    .string "by a DAEMON.\p"
     .string "If the DAEMON appears in a winning\n"
     .string "battle, you will earn more money.$"
 

@@ -20,8 +20,8 @@ Route10_PokemonCenter_1F_Text_GiveEverstoneIfCaught20Mons::
     .string "on twenty species, I'm supposed to\l"
     .string "give you a reward from CRYSTAL\l"
     .string "CLEAR.\p"
-    .string "She entrusted me with this\n"
-    .string "EVERSTONE.\p"
+    .string "She entrusted me with this VERSION\n"
+    .string "LOCK.\p"
     .string "So, {PLAYER}, let me ask you.\p"
     .string "Have you gathered data on at least\n"
     .string "twenty kinds of DAEMONS?$"
@@ -32,7 +32,7 @@ Route10_PokemonCenter_1F_Text_GreatHereYouGo::
     .string "Congratulations! Here you go!$"
 
 Route10_PokemonCenter_1F_Text_ReceivedEverstoneFromAide::
-    .string "{PLAYER} received the EVERSTONE\n"
+    .string "{PLAYER} received the VERSION LOCK\n"
     .string "from the AIDE.$"
 
 Route10_PokemonCenter_1F_Text_ExplainEverstone::
@@ -40,8 +40,8 @@ Route10_PokemonCenter_1F_Text_ExplainEverstone::
     .string "can add to the INDEX.\p"
     .string "However, at times, you may not\n"
     .string "want a certain DAEMON to evolve.\p"
-    .string "In that case, give the EVERSTONE\n"
-    .string "to that DAEMON.\p"
-    .string "It will prevent RECOMPILE according\n"
-    .string "to CRYSTAL CLEAR.$"
+    .string "In that case, give the VERSION\n"
+    .string "LOCK to that DAEMON.\p"
+    .string "It will prevent RECOMPILE\n"
+    .string "according to CRYSTAL CLEAR.$"
 

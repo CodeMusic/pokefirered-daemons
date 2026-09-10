@@ -2865,12 +2865,12 @@
       "secondaryId": 0
     },
     {
-      "english": "BRIGHTPOWDER",
+      "english": "DITHER",
       "itemId": "ITEM_BRIGHT_POWDER",
       "price": 10,
       "holdEffect": "HOLD_EFFECT_EVASION_UP",
       "holdEffectParam": 10,
-      "description_english": "An item to be held by a DAEMON.\\nIt casts a tricky glare that lowers\\nthe opponent's accuracy.",
+      "description_english": "Noise added on purpose, so that\\nnothing can be pinned exactly.\\nThe foe's aim slips.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -2881,12 +2881,12 @@
       "secondaryId": 0
     },
     {
-      "english": "WHITE HERB",
+      "english": "REVERT",
       "itemId": "ITEM_WHITE_HERB",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_RESTORE_STATS",
       "holdEffectParam": 0,
-      "description_english": "An item to be held by a DAEMON.\\nIt restores any lowered stat in\\nbattle. It can be used only once.",
+      "description_english": "Puts a value back the way it\\nwas. Restores a lowered stat,\\nonce.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -2897,12 +2897,12 @@
       "secondaryId": 0
     },
     {
-      "english": "MACHO BRACE",
+      "english": "DEBUG BUILD",
       "itemId": "ITEM_MACHO_BRACE",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_MACHO_BRACE",
       "holdEffectParam": 0,
-      "description_english": "An item to be held by a DAEMON.\\nIt promotes strong growth but\\nlowers SPEED while it is held.",
+      "description_english": "Every step is instrumented, so\\nit learns faster and runs\\nslower. SPEED falls.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -2913,12 +2913,12 @@
       "secondaryId": 0
     },
     {
-      "english": "EXP. SHARE",
+      "english": "WEIGHT SHARE",
       "itemId": "ITEM_EXP_SHARE",
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_EXP_SHARE",
       "holdEffectParam": 0,
-      "description_english": "An item to be held by a DAEMON.\\nThe holder gets a share of EXP.\\npoints without having to battle.",
+      "description_english": "Two things trained as one: what\\nteaches the first teaches the\\nsecond. Shares EXP. POINTS.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -2929,12 +2929,12 @@
       "secondaryId": 0
     },
     {
-      "english": "QUICK CLAW",
+      "english": "QUEUE JUMP",
       "itemId": "ITEM_QUICK_CLAW",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_QUICK_CLAW",
       "holdEffectParam": 20,
-      "description_english": "An item to be held by a DAEMON. A\\nlight and sharp claw. The holder\\nmay be able to strike first.",
+      "description_english": "Sometimes the scheduler takes\\nyou out of turn. The holder may\\nmove first.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -2945,12 +2945,12 @@
       "secondaryId": 0
     },
     {
-      "english": "SOOTHE BELL",
+      "english": "AFFINITY",
       "itemId": "ITEM_SOOTHE_BELL",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_FRIENDSHIP_UP",
       "holdEffectParam": 0,
-      "description_english": "An item to be held by a DAEMON. A\\nbell with a comforting chime that\\nmakes the holder calm and friendly.",
+      "description_english": "Affinity binds a process to one\\nhost. The holder grows attached\\nfaster.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -2961,12 +2961,12 @@
       "secondaryId": 0
     },
     {
-      "english": "MENTAL HERB",
+      "english": "UNPAIR",
       "itemId": "ITEM_MENTAL_HERB",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_CURE_ATTRACT",
       "holdEffectParam": 0,
-      "description_english": "An item to be held by a DAEMON.\\nIt snaps the holder out of\\ninfatuation. It can be used once.",
+      "description_english": "Drops a binding that was formed\\nwithout being asked for. Works\\nonce.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -2977,12 +2977,12 @@
       "secondaryId": 0
     },
     {
-      "english": "CHOICE BAND",
+      "english": "HARD CODED",
       "itemId": "ITEM_CHOICE_BAND",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_CHOICE_BAND",
       "holdEffectParam": 0,
-      "description_english": "An item to be held by a DAEMON.\\nIt powers up one move, which\\nbecomes the only usable one.",
+      "description_english": "One value, written in, with no\\nway to pass another. Powers up\\none routine and allows no other.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -2993,12 +2993,12 @@
       "secondaryId": 0
     },
     {
-      "english": "KING'S ROCK",
+      "english": "BUBBLE",
       "itemId": "ITEM_KINGS_ROCK",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_FLINCH",
       "holdEffectParam": 10,
-      "description_english": "An item to be held by a DAEMON.\\nIt may cause the foe to\\nflinch upon taking damage.",
+      "description_english": "A gap pushed into a pipeline\\nwhere nothing issues. The foe\\nmay flinch.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -3009,12 +3009,12 @@
       "secondaryId": 0
     },
     {
-      "english": "SILVERPOWDER",
+      "english": "SWARM GAIN",
       "itemId": "ITEM_SILVER_POWDER",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_BUG_POWER",
       "holdEffectParam": 10,
-      "description_english": "An item to be held by a DAEMON.\\nA shiny silver powder that boosts\\nthe power of BUG-type moves.",
+      "description_english": "Many small agents; no single one\\nmatters. Gain lifts one channel:\\nthis one is SWARM.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -3025,12 +3025,12 @@
       "secondaryId": 0
     },
     {
-      "english": "AMULET COIN",
+      "english": "SURCHARGE",
       "itemId": "ITEM_AMULET_COIN",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_DOUBLE_PRIZE",
       "holdEffectParam": 10,
-      "description_english": "An item to be held by a DAEMON.\\nIt doubles the battle money if the\\nholding DAEMON takes part.",
+      "description_english": "Charged on top of the agreed\\nrate. Doubles prize money if\\nthe holder took part.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -3041,12 +3041,12 @@
       "secondaryId": 0
     },
     {
-      "english": "CLEANSE TAG",
+      "english": "MUTE",
       "itemId": "ITEM_CLEANSE_TAG",
       "price": 200,
       "holdEffect": "HOLD_EFFECT_REPEL",
       "holdEffectParam": 0,
-      "description_english": "An item to be held by a DAEMON.\\nIt repels wild DAEMON if the\\nholder is first in the party.",
+      "description_english": "Mutes the channel wild daemons\\nlisten on. Carried in front,\\nfewer of them approach.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -3057,12 +3057,12 @@
       "secondaryId": 0
     },
     {
-      "english": "SOUL DEW",
+      "english": "INNER STATE",
       "itemId": "ITEM_SOUL_DEW",
       "price": 200,
       "holdEffect": "HOLD_EFFECT_SOUL_DEW",
       "holdEffectParam": 0,
-      "description_english": "An orb to be held by a LATIOS or\\nLATIAS. It raises the SP. ATK\\nand SP. DEF stats.",
+      "description_english": "An orb for a LATIOS or LATIAS.\\nWhat it holds, nothing outside\\ncan read. Raises both SP. stats.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -3073,12 +3073,12 @@
       "secondaryId": 0
     },
     {
-      "english": "DEEPSEATOOTH",
+      "english": "DEEP FEATURE",
       "itemId": "ITEM_DEEP_SEA_TOOTH",
       "price": 200,
       "holdEffect": "HOLD_EFFECT_DEEP_SEA_TOOTH",
       "holdEffectParam": 0,
-      "description_english": "An item to be held by a DAEMON.\\nA fang that gleams a sharp silver.\\nIt raises the SP. ATK stat.",
+      "description_english": "A representation learned far\\nfrom the surface. It raises the\\nSP. ATK stat.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -3089,12 +3089,12 @@
       "secondaryId": 0
     },
     {
-      "english": "DEEPSEASCALE",
+      "english": "DEEP LAYER",
       "itemId": "ITEM_DEEP_SEA_SCALE",
       "price": 200,
       "holdEffect": "HOLD_EFFECT_DEEP_SEA_SCALE",
       "holdEffectParam": 0,
-      "description_english": "An item to be held by a DAEMON.\\nA scale that shines a HALT pink.\\nIt raises the SP. DEF stat.",
+      "description_english": "The layers nothing outside gets\\nat directly. It raises the\\nSP. DEF stat.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -3105,12 +3105,12 @@
       "secondaryId": 0
     },
     {
-      "english": "SMOKE BALL",
+      "english": "ESCAPE HATCH",
       "itemId": "ITEM_SMOKE_BALL",
       "price": 200,
       "holdEffect": "HOLD_EFFECT_CAN_ALWAYS_RUN",
       "holdEffectParam": 0,
-      "description_english": "An item to be held by a DAEMON.\\nThe holding DAEMON can DETACH\\nfrom any wild DAEMON for sure.",
+      "description_english": "A way out that is always open.\\nThe holder can DETACH from any\\nwild daemon.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -3121,12 +3121,12 @@
       "secondaryId": 0
     },
     {
-      "english": "EVERSTONE",
+      "english": "VERSION LOCK",
       "itemId": "ITEM_EVERSTONE",
       "price": 200,
       "holdEffect": "HOLD_EFFECT_PREVENT_EVOLVE",
       "holdEffectParam": 0,
-      "description_english": "An item to be held by a DAEMON.\\nThe holding DAEMON is prevented\\nfrom evolving.",
+      "description_english": "Pins a thing to the version it\\nis at. The holder will not\\nevolve.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -3137,12 +3137,12 @@
       "secondaryId": 0
     },
     {
-      "english": "FOCUS BAND",
+      "english": "FAILSAFE",
       "itemId": "ITEM_FOCUS_BAND",
       "price": 200,
       "holdEffect": "HOLD_EFFECT_FOCUS_BAND",
       "holdEffectParam": 10,
-      "description_english": "An item to be held by a DAEMON.\\nThe holding DAEMON may endure an\\nattack, leaving just 1 HP.",
+      "description_english": "What stops the fall when\\neverything else already has.\\nThe holder may survive on 1 HP.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -3153,12 +3153,12 @@
       "secondaryId": 0
     },
     {
-      "english": "LUCKY EGG",
+      "english": "LEARNING RATE",
       "itemId": "ITEM_LUCKY_EGG",
       "price": 200,
       "holdEffect": "HOLD_EFFECT_LUCKY_EGG",
       "holdEffectParam": 0,
-      "description_english": "An item to be held by a DAEMON.\\nAn egg filled with happiness that\\nearns extra EXP. points in battle.",
+      "description_english": "How large a step each lesson\\ntakes. Turned up: the holder\\nearns more EXP. POINTS.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -3169,12 +3169,12 @@
       "secondaryId": 0
     },
     {
-      "english": "SCOPE LENS",
+      "english": "LONG TAIL",
       "itemId": "ITEM_SCOPE_LENS",
       "price": 200,
       "holdEffect": "HOLD_EFFECT_SCOPE_LENS",
       "holdEffectParam": 0,
-      "description_english": "An item to be held by a DAEMON. A\\nlens that boosts the critical-hit\\nratio of the holding DAEMON.",
+      "description_english": "The far end of a distribution,\\nwhere the rare large values are.\\nRaises the critical-hit ratio.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -3185,12 +3185,12 @@
       "secondaryId": 0
     },
     {
-      "english": "METAL COAT",
+      "english": "HARDENED GAIN",
       "itemId": "ITEM_METAL_COAT",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_STEEL_POWER",
       "holdEffectParam": 10,
-      "description_english": "An item to be held by a DAEMON. A\\nspecial metallic film that boosts\\nthe power of STEEL-type moves.",
+      "description_english": "Hardened against whatever anyone\\ntries. Gain lifts one channel:\\nthis one is HARDENED.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -3201,12 +3201,12 @@
       "secondaryId": 0
     },
     {
-      "english": "LEFTOVERS",
+      "english": "HEADROOM",
       "itemId": "ITEM_LEFTOVERS",
       "price": 200,
       "holdEffect": "HOLD_EFFECT_LEFTOVERS",
       "holdEffectParam": 10,
-      "description_english": "An item to be held by a DAEMON.\\nThe holding DAEMON gradually\\nregains HP during battle.",
+      "description_english": "The margin left before anything\\nclips. The holder recovers a\\nlittle each turn.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -3217,12 +3217,12 @@
       "secondaryId": 0
     },
     {
-      "english": "DRAGON SCALE",
+      "english": "SCALING LAW",
       "itemId": "ITEM_DRAGON_SCALE",
       "price": 2100,
       "holdEffect": "HOLD_EFFECT_DRAGON_SCALE",
       "holdEffectParam": 10,
-      "description_english": "A thick and tough scale. A\\nDRAGON-type DAEMON may be\\nholding it.",
+      "description_english": "What happens to a thing when\\nyou only make it bigger.\\nA JETSTREAM may be holding it.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -3233,12 +3233,12 @@
       "secondaryId": 0
     },
     {
-      "english": "LIGHT BALL",
+      "english": "SUPPLY RAIL",
       "itemId": "ITEM_LIGHT_BALL",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_LIGHT_BALL",
       "holdEffectParam": 0,
-      "description_english": "An orb to be held by a SPIKE\\nthat raises the SP. ATK stat.\\nTouching it may cause a shock.",
+      "description_english": "The line every other part draws\\nfrom. Held by a SPIKE, it raises\\nthe SP. ATK stat.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -3249,12 +3249,12 @@
       "secondaryId": 0
     },
     {
-      "english": "SOFT SAND",
+      "english": "STRATUM GAIN",
       "itemId": "ITEM_SOFT_SAND",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_GROUND_POWER",
       "holdEffectParam": 10,
-      "description_english": "An item to be held by a DAEMON. A\\nloose, silky sand that boosts the\\npower of GROUND-type moves.",
+      "description_english": "The layer everything else runs\\non. Gain lifts one channel:\\nthis one is STRATUM.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -3265,12 +3265,12 @@
       "secondaryId": 0
     },
     {
-      "english": "HARD STONE",
+      "english": "LEGACY GAIN",
       "itemId": "ITEM_HARD_STONE",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_ROCK_POWER",
       "holdEffectParam": 10,
-      "description_english": "An item to be held by a DAEMON.\\nAn unbreakable stone that boosts\\nthe power of ROCK-type moves.",
+      "description_english": "Deprecated hardware, still\\nrunning. Gain lifts one channel:\\nthis one is LEGACY.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -3281,12 +3281,12 @@
       "secondaryId": 0
     },
     {
-      "english": "MIRACLE SEED",
+      "english": "GROWTH GAIN",
       "itemId": "ITEM_MIRACLE_SEED",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_GRASS_POWER",
       "holdEffectParam": 10,
-      "description_english": "An item to be held by a DAEMON. A\\nseed imbued with life that boosts\\nthe power of GRASS-type moves.",
+      "description_english": "Training: fitting to whatever it\\nis fed. Gain lifts one channel:\\nthis one is GROWTH.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -3297,12 +3297,12 @@
       "secondaryId": 0
     },
     {
-      "english": "BLACKGLASSES",
+      "english": "OPAQUE GAIN",
       "itemId": "ITEM_BLACK_GLASSES",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_DARK_POWER",
       "holdEffectParam": 10,
-      "description_english": "An item to be held by a DAEMON.\\nA shady-looking pair of glasses\\nthat boosts DARK-type moves.",
+      "description_english": "The black box, from outside.\\nGain lifts one channel: this one\\nis OPAQUE.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -3313,12 +3313,12 @@
       "secondaryId": 0
     },
     {
-      "english": "RIGOUR",
+      "english": "LOGIC GAIN",
       "itemId": "ITEM_BLACK_BELT",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_FIGHTING_POWER",
       "holdEffectParam": 10,
-      "description_english": "Held to argue harder from.\\nRaises the power of LOGIC\\nroutines.",
+      "description_english": "Rules applied step by step, not\\nintuition. Gain lifts one\\nchannel: this one is LOGIC.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -3329,12 +3329,12 @@
       "secondaryId": 0
     },
     {
-      "english": "MAGNET",
+      "english": "SIGNAL GAIN",
       "itemId": "ITEM_MAGNET",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_ELECTRIC_POWER",
       "holdEffectParam": 10,
-      "description_english": "An item to be held by a DAEMON.\\nA powerful magnet that boosts the\\npower of ELECTRIC-type moves.",
+      "description_english": "Raw current, before anything\\ninterprets it. Gain lifts one\\nchannel: this one is SIGNAL.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -3345,12 +3345,12 @@
       "secondaryId": 0
     },
     {
-      "english": "MYSTIC WATER",
+      "english": "FLOW GAIN",
       "itemId": "ITEM_MYSTIC_WATER",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_WATER_POWER",
       "holdEffectParam": 10,
-      "description_english": "An item to be held by a DAEMON.\\nA teardrop-shaped gem that boosts\\nthe power of WATER-type moves.",
+      "description_english": "Everything running downhill to\\nthe lowest point. Gain lifts one\\nchannel: this one is FLOW.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -3361,12 +3361,12 @@
       "secondaryId": 0
     },
     {
-      "english": "SHARP BEAK",
+      "english": "VECTOR GAIN",
       "itemId": "ITEM_SHARP_BEAK",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_FLYING_POWER",
       "holdEffectParam": 10,
-      "description_english": "An item to be held by a DAEMON. A\\nlong, sharp beak that boosts the\\npower of FLYING-type moves.",
+      "description_english": "A direction in a space of\\nmeanings. Gain lifts one\\nchannel: this one is VECTOR.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -3377,12 +3377,12 @@
       "secondaryId": 0
     },
     {
-      "english": "POISON BARB",
+      "english": "CORRUPT GAIN",
       "itemId": "ITEM_POISON_BARB",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_POISON_POWER",
       "holdEffectParam": 10,
-      "description_english": "An item to be held by a DAEMON. A\\nsmall, poisonous barb that boosts\\nthe power of POISON-type moves.",
+      "description_english": "Data that has been tampered\\nwith. Gain lifts one channel:\\nthis one is CORRUPT.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -3393,12 +3393,12 @@
       "secondaryId": 0
     },
     {
-      "english": "NEVERMELTICE",
+      "english": "FROZEN GAIN",
       "itemId": "ITEM_NEVER_MELT_ICE",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_ICE_POWER",
       "holdEffectParam": 10,
-      "description_english": "An item to be held by a DAEMON.\\nA piece of ice that repels heat\\nand boosts ICE-type moves.",
+      "description_english": "Locked to what it already saw.\\nGain lifts one channel: this one\\nis FROZEN.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -3409,12 +3409,12 @@
       "secondaryId": 0
     },
     {
-      "english": "SPELL TAG",
+      "english": "LATENT GAIN",
       "itemId": "ITEM_SPELL_TAG",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_GHOST_POWER",
       "holdEffectParam": 10,
-      "description_english": "An item to be held by a DAEMON.\\nA sinister, eerie tag that boosts\\nGHOST-type moves.",
+      "description_english": "Running below the surface,\\nunobserved. Gain lifts one\\nchannel: this one is LATENT.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -3425,12 +3425,12 @@
       "secondaryId": 0
     },
     {
-      "english": "TWISTEDSPOON",
+      "english": "CONTEXT GAIN",
       "itemId": "ITEM_TWISTED_SPOON",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_PSYCHIC_POWER",
       "holdEffectParam": 10,
-      "description_english": "An item to be held by a DAEMON. A\\nspoon imbued with telekinetic\\npower boosts CONSTRUE-type moves.",
+      "description_english": "The frame you read a thing in.\\nGain lifts one channel: this one\\nis CONTEXT.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -3441,12 +3441,12 @@
       "secondaryId": 0
     },
     {
-      "english": "CHARCOAL",
+      "english": "ENTROPY GAIN",
       "itemId": "ITEM_CHARCOAL",
       "price": 9800,
       "holdEffect": "HOLD_EFFECT_FIRE_POWER",
       "holdEffectParam": 10,
-      "description_english": "An item to be held by a DAEMON. A\\ncombustible fuel that boosts the\\npower of FIRE-type moves.",
+      "description_english": "Noise and heat; disorder that\\nspreads. Gain lifts one channel:\\nthis one is ENTROPY.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -3457,12 +3457,12 @@
       "secondaryId": 0
     },
     {
-      "english": "DRAGON FANG",
+      "english": "EMERGENT GAIN",
       "itemId": "ITEM_DRAGON_FANG",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_DRAGON_POWER",
       "holdEffectParam": 10,
-      "description_english": "An item to be held by a DAEMON.\\nA hard and sharp fang that boosts\\nthe power of DRAGON-type moves.",
+      "description_english": "Behaviour nobody designed and\\nnobody can account for. Gain\\nlifts the EMERGENT channel.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -3473,12 +3473,12 @@
       "secondaryId": 0
     },
     {
-      "english": "SILK SCARF",
+      "english": "CONTENT GAIN",
       "itemId": "ITEM_SILK_SCARF",
       "price": 100,
       "holdEffect": "HOLD_EFFECT_NORMAL_POWER",
       "holdEffectParam": 10,
-      "description_english": "An item to be held by a DAEMON.\\nA sumptuous scarf that boosts the\\npower of NORMAL-type moves.",
+      "description_english": "The thing itself, with nothing\\nread into it. Gain lifts one\\nchannel: this one is CONTENT.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -3489,12 +3489,12 @@
       "secondaryId": 0
     },
     {
-      "english": "UP-GRADE",
+      "english": "SERVICE PACK",
       "itemId": "ITEM_UP_GRADE",
       "price": 2100,
       "holdEffect": "HOLD_EFFECT_UP_GRADE",
       "holdEffectParam": 0,
-      "description_english": "A transparent device filled with all\\nsorts of data.\\nIt is made by SILPH CO.",
+      "description_english": "Everything that was fixed since\\nthe release, in one bundle.\\nMade by SILPH CO.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -3505,12 +3505,12 @@
       "secondaryId": 0
     },
     {
-      "english": "SHELL BELL",
+      "english": "RECLAIM",
       "itemId": "ITEM_SHELL_BELL",
       "price": 200,
       "holdEffect": "HOLD_EFFECT_SHELL_BELL",
       "holdEffectParam": 8,
-      "description_english": "An item to be held by a DAEMON.\\nThe holding DAEMON regains some\\nHP upon striking the foe.",
+      "description_english": "Takes back what is no longer in\\nuse. The holder recovers HP on\\nstriking.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -3521,12 +3521,12 @@
       "secondaryId": 0
     },
     {
-      "english": "SEA INCENSE",
+      "english": "FLOW TRIM",
       "itemId": "ITEM_SEA_INCENSE",
       "price": 9600,
       "holdEffect": "HOLD_EFFECT_WATER_POWER",
       "holdEffectParam": 5,
-      "description_english": "An item to be held by a DAEMON.\\nIt slightly boosts the power of\\nWATER-type moves.",
+      "description_english": "A trim is a small gain. This one\\nlifts the FLOW channel a little.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -3537,12 +3537,12 @@
       "secondaryId": 0
     },
     {
-      "english": "LAX INCENSE",
+      "english": "DITHER TRIM",
       "itemId": "ITEM_LAX_INCENSE",
       "price": 9600,
       "holdEffect": "HOLD_EFFECT_EVASION_UP",
       "holdEffectParam": 5,
-      "description_english": "An item to be held by a DAEMON.\\nIts tricky aroma slightly reduces\\nthe foe's accuracy.",
+      "description_english": "Dither, at a lower setting.\\nThe foe's aim slips a little.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -3553,12 +3553,12 @@
       "secondaryId": 0
     },
     {
-      "english": "LUCKY PUNCH",
+      "english": "FLUKE",
       "itemId": "ITEM_LUCKY_PUNCH",
       "price": 10,
       "holdEffect": "HOLD_EFFECT_LUCKY_PUNCH",
       "holdEffectParam": 0,
-      "description_english": "A glove to be held by a\\nUPTIME. It raises UPTIME's\\ncritical-hit ratio.",
+      "description_english": "A result nothing predicted and\\nnothing repeats. It raises\\nUPTIME's critical-hit ratio.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -3569,12 +3569,12 @@
       "secondaryId": 0
     },
     {
-      "english": "METAL POWDER",
+      "english": "STRICT MODE",
       "itemId": "ITEM_METAL_POWDER",
       "price": 10,
       "holdEffect": "HOLD_EFFECT_METAL_POWDER",
       "holdEffectParam": 0,
-      "description_english": "A fine, hard powder to be\\nheld by a MOCK. It raises\\nMOCK's DEFENSE stat.",
+      "description_english": "Refuses anything it was not\\npromised. It raises MOCK's\\nDEFENSE stat.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -3585,12 +3585,12 @@
       "secondaryId": 0
     },
     {
-      "english": "THICK CLUB",
+      "english": "BARE METAL",
       "itemId": "ITEM_THICK_CLUB",
       "price": 500,
       "holdEffect": "HOLD_EFFECT_THICK_CLUB",
       "holdEffectParam": 0,
-      "description_english": "A hard bone of some sort to be\\nheld by a RELIC or CAIRNLING.\\nIt raises the ATTACK stat.",
+      "description_english": "Nothing at all between you and\\nthe hardware. It raises RELIC's\\nand CAIRNLING's ATTACK stat.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",
@@ -3601,12 +3601,12 @@
       "secondaryId": 0
     },
     {
-      "english": "STICK",
+      "english": "OFF BY ONE",
       "itemId": "ITEM_STICK",
       "price": 200,
       "holdEffect": "HOLD_EFFECT_STICK",
       "holdEffectParam": 0,
-      "description_english": "A stick of leek to be held\\nby a EDGECASE. It raises\\nEDGECASE's critical-hit ratio.",
+      "description_english": "The error at the edge that\\neverything else survives. Raises\\nEDGECASE's critical-hit ratio.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_ITEMS",

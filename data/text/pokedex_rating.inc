@@ -34,7 +34,7 @@ PokedexRating_Text_LessThan50::
 	.string "Your INDEX is coming along quite\n"
 	.string "well!\p"
 	.string "I've given one of my AIDES an\n"
-	.string "AMULET COIN. Be sure to get it!$"
+	.string "SURCHARGE. Be sure to get it!$"
 
 PokedexRating_Text_LessThan60::
 	.string "Ah, you've finally topped 50\n"

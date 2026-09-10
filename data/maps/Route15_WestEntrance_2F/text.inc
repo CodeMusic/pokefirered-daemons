@@ -20,7 +20,7 @@ Route15_WestEntrance_2F_Text_ReceivedItemFromAide::
     .string "from the AIDE.$"
 
 Route15_WestEntrance_2F_Text_ExplainExpShare::
-    .string "EXP. SHARE is an item to be held\n"
+    .string "WEIGHT SHARE is an item to be held\n"
     .string "by a DAEMON.\p"
     .string "The DAEMON will receive a share of\n"
     .string "the EXP. Points without having to\l"
