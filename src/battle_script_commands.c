@@ -36,6 +36,7 @@
 #include "constants/abilities.h"
 #include "constants/pokemon.h"
 #include "constants/maps.h"
+#include "constants/opponents.h"
 
 extern const u8 *const gBattleScriptsForMoveEffects[];
 
@@ -46,6 +47,7 @@ extern const u8 *const gBattleScriptsForMoveEffects[];
 
 #define TAG_LVLUP_BANNER_MON_ICON 55130
 
+static bool8 IsFixedRollAttacker(void); // 5.3 benchmark 8 -- SCORN does not roll
 static bool8 IsTwoTurnsMove(u16 move);
 static void TrySetDestinyBondToHappen(void);
 static u8 AttacksThisTurn(u8 battlerId, u16 move); // Note: returns 1 if it's a charging turn, otherwise 2.
@@ -1195,6 +1197,7 @@ static void Cmd_critcalc(void)
 
     if ((gBattleMons[gBattlerTarget].ability != ABILITY_BATTLE_ARMOR && gBattleMons[gBattlerTarget].ability != ABILITY_SHELL_ARMOR)
      && !(gStatuses3[gBattlerAttacker] & STATUS3_CANT_SCORE_A_CRIT)
+     && !IsFixedRollAttacker()
      && !(gBattleTypeFlags & BATTLE_TYPE_OLD_MAN_TUTORIAL)
      && !(Random() % sCriticalHitChance[critChance])
      && (!(gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE) || BtlCtrl_OakOldMan_TestState2Flag(1))
@@ -1554,11 +1557,31 @@ u8 AI_TypeCalc(u16 move, u16 targetSpecies, u8 targetAbility)
     return flags;
 }
 
+// 5.3 benchmark 8 -- SCORN. He does not roll. His daemons take the maximum
+// damage roll every time, never score a critical, and their secondary effects
+// never proc: flawless execution of a specification nobody checked, which is
+// what perfect alignment to the wrong objective looks like in a damage number.
+// Everywhere else in the game variance can save you. Here the number is the
+// number, and it is the highest one. One flag, read in three places.
+static bool8 IsFixedRollAttacker(void)
+{
+    return (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+        && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_TRAINER_TOWER))
+        && gTrainerBattleOpponent_A == TRAINER_LEADER_GIOVANNI
+        && GetBattlerSide(gBattlerAttacker) == B_SIDE_OPPONENT;
+}
+
 // Multiplies the damage by a random factor between 85% to 100% inclusive
 static inline void ApplyRandomDmgMultiplier(void)
 {
-    u16 rand = Random();
-    u16 randPercent = 100 - (rand % 16);
+    u16 rand;
+    u16 randPercent;
+
+    if (IsFixedRollAttacker())
+        return;
+
+    rand = Random();
+    randPercent = 100 - (rand % 16);
 
     if (gBattleMoveDamage != 0)
     {
@@ -2786,7 +2809,8 @@ static void Cmd_seteffectwithchance(void)
         gBattleCommunication[MOVE_EFFECT_BYTE] &= ~MOVE_EFFECT_CERTAIN;
         SetMoveEffect(FALSE, MOVE_EFFECT_CERTAIN);
     }
-    else if (Random() % 100 <= percentChance
+    else if (!IsFixedRollAttacker()
+             && Random() % 100 <= percentChance
              && gBattleCommunication[MOVE_EFFECT_BYTE]
              && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
     {

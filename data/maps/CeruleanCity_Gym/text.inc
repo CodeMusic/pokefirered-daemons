@@ -46,6 +46,12 @@ CeruleanCity_Gym_Text_DianaPostBattle::
     .string "You have to face other USERS to\n"
     .string "find out how good you really are.$"
 
+CeruleanCity_Gym_Text_DianaHouseRule::
+	.string "Hold still. I'll set your team back\n"
+	.string "the way it was.\p"
+	.string "House rule. Nobody leaves this GYM\n"
+	.string "worse off than they walked in.$"
+
 CeruleanCity_Gym_Text_LuisIntro::
     .string "Splash!\p"
     .string "I'm first up!\n"
@@ -58,6 +64,12 @@ CeruleanCity_Gym_Text_LuisPostBattle::
     .string "BASIN is a USER who's going to keep\n"
     .string "improving.\p"
     .string "She won't lose to someone like you!$"
+
+CeruleanCity_Gym_Text_LuisHouseRule::
+	.string "There. Same as you came in.\p"
+	.string "BASIN's rule, not mine. She says a\n"
+	.string "battle in here shouldn't cost\l"
+	.string "anybody anything.$"
 
 CeruleanCity_Gym_Text_GymGuyAdvice::
     .string "Yo! Champ in the making!\p"

@@ -5616,18 +5616,20 @@ static const struct TrainerMonNoItemCustomMoves sParty_LeaderBrock[] = {
     },
 };
 
-static const struct TrainerMonNoItemCustomMoves sParty_LeaderMisty[] = {
+static const struct TrainerMonItemCustomMoves sParty_LeaderMisty[] = {
     {
         .iv = 0,
         .lvl = 18,
         .species = SPECIES_STARYU,
-        .moves = {MOVE_TACKLE, MOVE_HARDEN, MOVE_RECOVER, MOVE_WATER_PULSE},
+        .heldItem = ITEM_NONE,
+        .moves = {MOVE_HARDEN, MOVE_RECOVER, MOVE_WATER_PULSE, MOVE_TACKLE},
     },
     {
         .iv = 0,
         .lvl = 21,
         .species = SPECIES_STARMIE,
-        .moves = {MOVE_SWIFT, MOVE_RECOVER, MOVE_RAPID_SPIN, MOVE_WATER_PULSE},
+        .heldItem = ITEM_LEFTOVERS,
+        .moves = {MOVE_HARDEN, MOVE_RECOVER, MOVE_WATER_PULSE, MOVE_SWIFT},
     },
 };
 
@@ -5636,7 +5638,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_LeaderLtSurge[] = {
         .iv = 0,
         .lvl = 21,
         .species = SPECIES_VOLTORB,
-        .moves = {MOVE_SONIC_BOOM, MOVE_TACKLE, MOVE_SCREECH, MOVE_SHOCK_WAVE},
+        .moves = {MOVE_QUICK_ATTACK, MOVE_SONIC_BOOM, MOVE_SHOCK_WAVE, MOVE_SCREECH},
     },
     {
         .iv = 0,
@@ -5655,21 +5657,27 @@ static const struct TrainerMonNoItemCustomMoves sParty_LeaderLtSurge[] = {
 static const struct TrainerMonNoItemCustomMoves sParty_LeaderErika[] = {
     {
         .iv = 0,
-        .lvl = 29,
-        .species = SPECIES_VICTREEBEL,
-        .moves = {MOVE_STUN_SPORE, MOVE_ACID, MOVE_POISON_POWDER, MOVE_GIGA_DRAIN},
-    },
-    {
-        .iv = 0,
-        .lvl = 24,
+        .lvl = 27,
         .species = SPECIES_TANGELA,
-        .moves = {MOVE_POISON_POWDER, MOVE_CONSTRICT, MOVE_INGRAIN, MOVE_GIGA_DRAIN},
+        .moves = {MOVE_SLEEP_POWDER, MOVE_LEECH_SEED, MOVE_INGRAIN, MOVE_GIGA_DRAIN},
+    },
+    {
+        .iv = 0,
+        .lvl = 27,
+        .species = SPECIES_VICTREEBEL,
+        .moves = {MOVE_SLUDGE_BOMB, MOVE_SLEEP_POWDER, MOVE_RAZOR_LEAF, MOVE_LEECH_SEED},
+    },
+    {
+        .iv = 0,
+        .lvl = 27,
+        .species = SPECIES_VILEPLUME,
+        .moves = {MOVE_STUN_SPORE, MOVE_POISON_POWDER, MOVE_ACID, MOVE_GIGA_DRAIN},
     },
     {
         .iv = 0,
         .lvl = 29,
-        .species = SPECIES_VILEPLUME,
-        .moves = {MOVE_SLEEP_POWDER, MOVE_ACID, MOVE_STUN_SPORE, MOVE_GIGA_DRAIN},
+        .species = SPECIES_EXEGGUTOR,
+        .moves = {MOVE_LIGHT_SCREEN, MOVE_HYPNOSIS, MOVE_PSYCHIC, MOVE_GIGA_DRAIN},
     },
 };
 
@@ -5682,21 +5690,21 @@ static const struct TrainerMonNoItemCustomMoves sParty_LeaderKoga[] = {
     },
     {
         .iv = 0,
+        .lvl = 38,
+        .species = SPECIES_GOLBAT,
+        .moves = {MOVE_CONFUSE_RAY, MOVE_AERIAL_ACE, MOVE_BITE, MOVE_TOXIC},
+    },
+    {
+        .iv = 0,
         .lvl = 39,
         .species = SPECIES_MUK,
         .moves = {MOVE_MINIMIZE, MOVE_SLUDGE, MOVE_ACID_ARMOR, MOVE_TOXIC},
     },
     {
         .iv = 0,
-        .lvl = 37,
-        .species = SPECIES_KOFFING,
-        .moves = {MOVE_SELF_DESTRUCT, MOVE_SLUDGE, MOVE_SMOKESCREEN, MOVE_TOXIC},
-    },
-    {
-        .iv = 0,
         .lvl = 43,
         .species = SPECIES_WEEZING,
-        .moves = {MOVE_TACKLE, MOVE_SLUDGE, MOVE_SMOKESCREEN, MOVE_TOXIC},
+        .moves = {MOVE_SMOKESCREEN, MOVE_SLUDGE_BOMB, MOVE_TOXIC, MOVE_SLUDGE},
     },
 };
 
@@ -5723,7 +5731,7 @@ static const struct TrainerMonNoItemCustomMoves sParty_LeaderBlaine[] = {
         .iv = 0,
         .lvl = 47,
         .species = SPECIES_ARCANINE,
-        .moves = {MOVE_BITE, MOVE_ROAR, MOVE_TAKE_DOWN, MOVE_FIRE_BLAST},
+        .moves = {MOVE_OVERHEAT, MOVE_ROAR, MOVE_BITE, MOVE_TAKE_DOWN},
     },
 };
 
@@ -5732,25 +5740,25 @@ static const struct TrainerMonNoItemCustomMoves sParty_LeaderSabrina[] = {
         .iv = 0,
         .lvl = 38,
         .species = SPECIES_KADABRA,
-        .moves = {MOVE_PSYBEAM, MOVE_REFLECT, MOVE_FUTURE_SIGHT, MOVE_CALM_MIND},
+        .moves = {MOVE_REFLECT, MOVE_PSYBEAM, MOVE_FUTURE_SIGHT, MOVE_CALM_MIND},
     },
     {
         .iv = 0,
         .lvl = 37,
         .species = SPECIES_MR_MIME,
-        .moves = {MOVE_BARRIER, MOVE_PSYBEAM, MOVE_BATON_PASS, MOVE_CALM_MIND},
+        .moves = {MOVE_ENCORE, MOVE_BARRIER, MOVE_PSYBEAM, MOVE_CALM_MIND},
     },
     {
         .iv = 0,
         .lvl = 38,
         .species = SPECIES_VENOMOTH,
-        .moves = {MOVE_PSYBEAM, MOVE_GUST, MOVE_LEECH_LIFE, MOVE_SUPERSONIC},
+        .moves = {MOVE_TAUNT, MOVE_PSYBEAM, MOVE_GUST, MOVE_SUPERSONIC},
     },
     {
         .iv = 0,
         .lvl = 43,
         .species = SPECIES_ALAKAZAM,
-        .moves = {MOVE_PSYCHIC, MOVE_RECOVER, MOVE_FUTURE_SIGHT, MOVE_CALM_MIND},
+        .moves = {MOVE_DISABLE, MOVE_TAUNT, MOVE_PSYCHIC, MOVE_RECOVER},
     },
 };
 

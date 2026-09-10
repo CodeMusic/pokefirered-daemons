@@ -39,6 +39,7 @@
 #include "constants/hold_effects.h"
 #include "constants/items.h"
 #include "constants/moves.h"
+#include "constants/opponents.h"
 #include "constants/pokemon.h"
 #include "constants/songs.h"
 #include "constants/trainers.h"
@@ -1660,6 +1661,25 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
                 }
                 break;
             }
+            }
+        }
+
+        // 5.3 benchmark 7 -- ANNEAL. His party order is not fixed, so a
+        // memorised line fails: it is not the same fight twice. The grinder
+        // runs into a win they cannot repeat, which is the lesson about
+        // temperature delivered as an inconvenience. Shuffled after creation,
+        // so the name hash and therefore every stat is untouched.
+        if (trainerNum == TRAINER_LEADER_BLAINE)
+        {
+            for (i = gTrainers[trainerNum].partySize - 1; i > 0; i--)
+            {
+                j = Random() % (i + 1);
+                if (j != i)
+                {
+                    struct Pokemon swap = party[i];
+                    party[i] = party[j];
+                    party[j] = swap;
+                }
             }
         }
 

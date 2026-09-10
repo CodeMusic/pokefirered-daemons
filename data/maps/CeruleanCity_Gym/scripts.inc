@@ -33,15 +33,38 @@ CeruleanCity_Gym_EventScript_NoRoomForTM03::
 	release
 	end
 
+@ 5.3 benchmark 2 -- BASIN. The GYM has no gradient: no wild encounters, and
+@ both of her trainers put your party back the way it was after they lose. You
+@ leave with exactly what you walked in with, and nobody says why.
 CeruleanCity_Gym_EventScript_Diana::
-	trainerbattle_single TRAINER_PICNICKER_DIANA, CeruleanCity_Gym_Text_DianaIntro, CeruleanCity_Gym_Text_DianaDefeat
-	msgbox CeruleanCity_Gym_Text_DianaPostBattle, MSGBOX_AUTOCLOSE
+	trainerbattle_single TRAINER_PICNICKER_DIANA, CeruleanCity_Gym_Text_DianaIntro, CeruleanCity_Gym_Text_DianaDefeat, CeruleanCity_Gym_EventScript_DefeatedDiana
+	msgbox CeruleanCity_Gym_Text_DianaPostBattle
+	goto CeruleanCity_Gym_EventScript_PutYouBack
+	end
+
+CeruleanCity_Gym_EventScript_DefeatedDiana::
+	msgbox CeruleanCity_Gym_Text_DianaHouseRule
+	goto CeruleanCity_Gym_EventScript_PutYouBack
 	end
 
 CeruleanCity_Gym_EventScript_Luis::
-	trainerbattle_single TRAINER_SWIMMER_MALE_LUIS, CeruleanCity_Gym_Text_LuisIntro, CeruleanCity_Gym_Text_LuisDefeat
+	trainerbattle_single TRAINER_SWIMMER_MALE_LUIS, CeruleanCity_Gym_Text_LuisIntro, CeruleanCity_Gym_Text_LuisDefeat, CeruleanCity_Gym_EventScript_DefeatedLuis
+	msgbox CeruleanCity_Gym_Text_LuisPostBattle
+	goto CeruleanCity_Gym_EventScript_PutYouBack
+	end
+
+CeruleanCity_Gym_EventScript_DefeatedLuis::
 	famechecker FAMECHECKER_MISTY, 2
-	msgbox CeruleanCity_Gym_Text_LuisPostBattle, MSGBOX_AUTOCLOSE
+	msgbox CeruleanCity_Gym_Text_LuisHouseRule
+	goto CeruleanCity_Gym_EventScript_PutYouBack
+	end
+
+CeruleanCity_Gym_EventScript_PutYouBack::
+	closemessage
+	fadescreen FADE_TO_WHITE
+	special HealPlayerParty
+	fadescreen FADE_FROM_WHITE
+	release
 	end
 
 CeruleanCity_Gym_EventScript_GymGuy::
