@@ -14,8 +14,8 @@ FiveIsland_RocketWarehouse_Text_Grunt2Defeat::
     .string "What do you think you're doing?!$"
 
 FiveIsland_RocketWarehouse_Text_Grunt2PostBattle::
-    .string "TEAM CORPUS broke up? What planet\n"
-    .string "are you from?$"
+    .string "He has CHANGED? People do not\n"
+    .string "change. They get promoted.$"
 
 FiveIsland_RocketWarehouse_Text_Grunt1Intro::
     .string "Oh, now your DAEMON look strong.\n"
@@ -71,8 +71,8 @@ FiveIsland_RocketWarehouse_Text_MadeItSoYouCanComeBackThrough::
 FiveIsland_RocketWarehouse_Text_Admin2Intro::
     .string "That's quite enough of you playing\n"
     .string "the hero, kid.\p"
-    .string "Spreading lies about how TEAM\n"
-    .string "CORPUS has disbanded…\p"
+    .string "Spreading stories about how he\n"
+    .string "is different now…\p"
     .string "It's such an obvious attempt to\n"
     .string "cause confusion in our ranks.\p"
     .string "Fortunately, we're not so ignorant\n"
@@ -83,8 +83,10 @@ FiveIsland_RocketWarehouse_Text_Admin2Intro::
 FiveIsland_RocketWarehouse_Text_Admin2Defeat::
     .string "Urgh… You were too strong…\p"
     .string "… Th-that's SCORN's MARK!\p"
-    .string "So it's true? TEAM CORPUS really\n"
-    .string "has disbanded?$"
+    .string "So you have met him. Recently.\p"
+    .string "…Is it true, what they say?\n"
+    .string "That he stopped in the middle\l"
+    .string "of a sentence?$"
 
 FiveIsland_RocketWarehouse_Text_Admin2PostBattle::
     .string "We will abandon this WAREHOUSE…\p"

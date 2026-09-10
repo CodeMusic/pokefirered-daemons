@@ -17,7 +17,9 @@ ViridianCity_Gym_Text_GiovanniPostBattle::
     .string "The machine chose what I weighted\n"
     .string "it to choose.\p"
     .string "We are both to blame, I suppose.\p"
-    .string "It has never said otherwise.$"
+    .string "It has never said otherwise.\p"
+    .string "…\p"
+    .string "It could not have.$"
 
 ViridianCity_Gym_Text_ExplainEarthBadgeTakeThis::
     .string "The TRUE MARK is why a daemon of\n"
