@@ -24,8 +24,9 @@ Route3_Text_BenDefeat::
     .string "I don't believe it!$"
 
 Route3_Text_BenPostBattle::
-    .string "Are you storing your DAEMON on PC?\n"
-    .string "Each BOX can hold 20 DAEMONS!$"
+    .string "Are you storing your DAEMON on\n"
+    .string "PORT? Each BOX can hold 20\l"
+    .string "DAEMONS!$"
 
 Route3_Text_JaniceIntro::
     .string "Excuse me!\n"
@@ -46,7 +47,7 @@ Route3_Text_GregDefeat::
     .string "won!$"
 
 Route3_Text_GregPostBattle::
-    .string "If a DAEMON BOX on the PC gets\n"
+    .string "If a DAEMON BOX on the PORT gets\n"
     .string "full, just switch to another BOX.$"
 
 Route3_Text_SallyIntro::

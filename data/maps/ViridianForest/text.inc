@@ -77,8 +77,8 @@ ViridianForest_Text_UseAntidoteForPoison::
 ViridianForest_Text_ContactOakViaPCToRatePokedex::
     .string "USER TIPS\p"
     .string "CRYSTAL will read your INDEX over\n"
-    .string "the PC. She will tell you what is\l"
-    .string "missing.$"
+    .string "the PORT. She will tell you what\l"
+    .string "is missing.$"
 
 ViridianForest_Text_CantCatchOwnedMons::
     .string "Cut stone, half under the moss.\p"

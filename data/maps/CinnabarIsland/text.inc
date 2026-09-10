@@ -44,7 +44,7 @@ CinnabarIsland_Text_HeyIfItIsntPlayer::
 CinnabarIsland_Text_ComeWithMeToOneIsland::
     .string "Look, it's me, HOLT. Long time no\n"
     .string "see!\p"
-    .string "I hope you're still using my PC\n"
+    .string "I hope you're still using my PORT\n"
     .string "system.\p"
     .string "Well, listen, since we met up here,\n"
     .string "how about spending time with me?\p"

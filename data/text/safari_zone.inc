@@ -71,8 +71,7 @@ SafariZone_Text_PleaseEnjoyYourself::
 	.string "では　いってらっしゃい！$"
 
 SafariZone_Text_ExcuseMeYourPCBoxIsFull::
-	.string "Excuse me!\n"
-	.string "Your PC BOX is full.$"
+	.string "Excuse me! Your PORT BOX is full.$"
 
 SafariZone_Text_YouNeedPokeblockCase::
 	.string "あ！　おきゃくさん\n"

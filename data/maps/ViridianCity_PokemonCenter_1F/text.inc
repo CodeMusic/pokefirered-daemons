@@ -1,8 +1,8 @@
 ViridianCity_PokemonCenter_1F_Text_FeelFreeToUsePC::
-    .string "Use the PC in the corner if you\n"
+    .string "Use the PORT in the corner if you\n"
     .string "like.\p"
-    .string "She told me to say so.\n"
-    .string "I have been saying so all morning.$"
+    .string "She told me to say so. I have\n"
+    .string "been saying so all morning.$"
 
 ViridianCity_PokemonCenter_1F_Text_PokeCenterInEveryTown::
     .string "Every town from here has one.\p"

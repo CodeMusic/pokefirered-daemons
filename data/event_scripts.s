@@ -870,7 +870,7 @@ Text_TrainerSchoolEmail::
 	.string "‥‥　‥‥　‥‥$"
 
 Text_PlayerBootedUpPC::
-	.string "{PLAYER} booted up the PC.$"
+	.string "{PLAYER} booted up the PORT.$"
 
 @ Unused
 Text_LinkWasCanceled::
@@ -945,7 +945,7 @@ Text_ItNeedsCardKey::
 	.string "It needs a CARD KEY!$"
 
 Text_AccessedProfOaksPC::
-	.string "Accessed CRYSTAL CLEAR's PC…\p"
+	.string "Accessed CRYSTAL CLEAR's PORT…\p"
 	.string "Accessed the INDEX Rating System…$"
 
 Text_HavePokedexRated::
@@ -953,7 +953,8 @@ Text_HavePokedexRated::
 	.string "rated?$"
 
 Text_ClosedLinkToProfOaksPC::
-	.string "Closed link to CRYSTAL CLEAR's PC.$"
+	.string "Closed link to CRYSTAL CLEAR's\n"
+	.string "PORT.$"
 
 Text_VoiceRangOutDontRunAway::
 	.string "Someone's voice rang out,\n"

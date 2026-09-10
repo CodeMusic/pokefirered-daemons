@@ -22,7 +22,7 @@ Route25_SeaCottage_Text_ImBillHelpMeOutLady::
 
 Route25_SeaCottage_Text_RunCellSeparationOnPC::
     .string "When I am in the chamber, run the\n"
-    .string "SEPARATION SYSTEM from my PC.\p"
+    .string "SEPARATION SYSTEM from my PORT.\p"
     .string "It forces a read. The store never\n"
     .string "does that on its own.$"
 
@@ -75,8 +75,8 @@ Route25_SeaCottage_Text_CheckOutRareMonsOnPC::
     .string "None of them are gone.$"
 
 Route25_SeaCottage_Text_TeleporterIsDisplayed::
-    .string "TELEPORTER is displayed on the PC\n"
-    .string "monitor.$"
+    .string "TELEPORTER is displayed on the\n"
+    .string "PORT monitor.$"
 
 Route25_SeaCottage_Text_InitiatedTeleportersCellSeparator::
     .string "{PLAYER} initiated the TELEPORTER's\n"

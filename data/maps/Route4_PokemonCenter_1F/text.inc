@@ -44,7 +44,7 @@ Route4_PokemonCenter_1F_Text_ShouldStoreMonsUsingPC::
     .string "Sometimes, you'll have too many\n"
     .string "DAEMONS with you to add any more.\p"
     .string "In that case, you should just\n"
-    .string "store some using any PC.$"
+    .string "store some using any PORT.$"
 
 Route4_PokemonCenter_1F_Text_ItsANewspaper::
     .string "It's a newspaper.$"

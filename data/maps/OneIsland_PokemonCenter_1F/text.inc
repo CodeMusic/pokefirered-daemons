@@ -12,7 +12,7 @@ OneIsland_PokemonCenter_1F_Text_BillHowsYourResearchComing::
 
 OneIsland_PokemonCenter_1F_Text_ThisIsMyBuddyCelio::
     .string "{PLAYER}, this is my buddy CELIO.\n"
-    .string "He's one dedicated PC MANIAC!$"
+    .string "He's one dedicated PORT MANIAC!$"
 
 OneIsland_PokemonCenter_1F_Text_PlayerIsRisingPokemonChamp::
     .string "CELIO, this is {PLAYER}, a rising\n"
@@ -35,8 +35,8 @@ OneIsland_PokemonCenter_1F_Text_BillBringMeUpToSpeed::
 OneIsland_PokemonCenter_1F_Text_CelioPCsCantLinkWithYours::
     .string "CELIO: It's running fine, but we're\n"
     .string "too remote out here.\p"
-    .string "The PCs on this island just can't\n"
-    .string "link with your PC, HOLT.$"
+    .string "The PORT on this island just can't\n"
+    .string "link with your PORT, HOLT.$"
 
 OneIsland_PokemonCenter_1F_Text_BillLetMeHelpYou::
     .string "HOLT: Oh, yeah? Okay, let me take\n"
@@ -93,10 +93,10 @@ OneIsland_PokemonCenter_1F_Text_HmmHowAboutLikeThis::
 
 OneIsland_PokemonCenter_1F_Text_GotPCWorkingStrollAWhileMore::
     .string "Oh, hey, {PLAYER}!\p"
-    .string "Did you see?\n"
-    .string "We got the PC working!\p"
-    .string "I've got a few things to show\n"
-    .string "CELIO here.\p"
+    .string "Did you see? We got the PORT\n"
+    .string "working!\p"
+    .string "I've got a few things to show CELIO\n"
+    .string "here.\p"
     .string "Can you go out on a stroll or\n"
     .string "something for a while more?$"
 
@@ -107,7 +107,7 @@ OneIsland_PokemonCenter_1F_Text_SorryForBeingPoorHost::
     .string "poor host on your visit here.$"
 
 OneIsland_PokemonCenter_1F_Text_UsualPCServicesUnavailable::
-    .string "The usual PC services aren't\n"
+    .string "The usual PORT services aren't\n"
     .string "available…$"
 
 OneIsland_PokemonCenter_1F_Text_BillOhHeyPlayer::
@@ -116,8 +116,8 @@ OneIsland_PokemonCenter_1F_Text_BillOhHeyPlayer::
 OneIsland_PokemonCenter_1F_Text_BillWeGotItDone::
     .string "HOLT: What kept you so long? Been\n"
     .string "out having a good time?\p"
-    .string "We got it done. The PCs are up and\n"
-    .string "running!$"
+    .string "We got it done. The PORT are up\n"
+    .string "and running!$"
 
 OneIsland_PokemonCenter_1F_Text_CelioJobWentQuick::
     .string "CELIO: The job went incredibly\n"

@@ -990,17 +990,23 @@ static void CreatePCMenuWindow(void)
     u8 windowWidth;
     u8 numItems;
     u8 windowId;
+    //  1.7 renamed the machine PC -> PORT, and the widest row in this menu is
+    //  CRYSTAL CLEAR's, which went from 101px to 113. With an 8px cursor that
+    //  is 121, and fourteen tiles is 112 -- so it clipped. Sixteen is 128.
+    //
+    //  Only the branches that can PRINT that row moved. The no-INDEX branch
+    //  never shows it, and {PLAYER}'s PORT needs eleven tiles at the widest.
     switch (GetStringTilesWide(gText_SPc))
     {
     default:
         if (FlagGet(FLAG_SYS_POKEDEX_GET))
-            windowWidth = 14;
+            windowWidth = 16;
         else
             windowWidth = 13;
         break;
     case 9:
     case 10:
-        windowWidth = 14;
+        windowWidth = 16;
         break;
     }
     if (FlagGet(FLAG_SYS_GAME_CLEAR))

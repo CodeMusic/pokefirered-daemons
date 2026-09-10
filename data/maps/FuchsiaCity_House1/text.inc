@@ -11,6 +11,6 @@ FuchsiaCity_House1_Text_BillIsMyGrandson::
 
 FuchsiaCity_House1_Text_BillFilesHisOwnMonData::
     .string "HOLT files his own DAEMON data on\n"
-    .string "his PC!\p"
+    .string "his PORT!\p"
     .string "Did he show you?$"
 

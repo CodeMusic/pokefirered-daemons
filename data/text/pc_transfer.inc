@@ -1,22 +1,21 @@
 Text_MonSentToBoxInSomeonesPC::
     .string "{STR_VAR_2} was transferred to\n"
-    .string "Someone's PC.\p"
-    .string "It was placed in \n"
-    .string "BOX “{STR_VAR_1}.”$"
+    .string "Someone's PORT.\p"
+    .string "It was placed in BOX “{STR_VAR_1}.”$"
 
 Text_MonSentToBoxInBillsPC::
     .string "{STR_VAR_2} was transferred to HOLT'S\n"
-    .string "PC.\p"
+    .string "PORT.\p"
     .string "It was placed in BOX “{STR_VAR_1}.”$"
 
 Text_MonSentToBoxSomeonesBoxFull::
-    .string "BOX “{STR_VAR_3}” on\n"
-    .string "Someone's PC was full.\p"
-    .string "{STR_VAR_2} was transferred to\n"
-    .string "BOX “{STR_VAR_1}.”$"
+    .string "BOX “{STR_VAR_3}” on Someone's PORT\n"
+    .string "was full.\p"
+    .string "{STR_VAR_2} was transferred to BOX\n"
+    .string "“{STR_VAR_1}.”$"
 
 Text_MonSentToBoxBillsBoxFull::
-    .string "BOX “{STR_VAR_3}” on HOLT'S PC was\n"
+    .string "BOX “{STR_VAR_3}” on HOLT'S PORT was\n"
     .string "full.\p"
     .string "{STR_VAR_2} was transferred to BOX\n"
     .string "“{STR_VAR_1}.”$"

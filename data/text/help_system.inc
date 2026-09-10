@@ -453,10 +453,11 @@ Help_Text_AnswerWhatsPokemonCenter::
 	.string "A CHECKPOINT is identified by its red\n"
 	.string "roof and a “P.C” sign. Every\l"
 	.string "CHECKPOINT offers such services as\l"
-	.string "fully healing DAEMON and free PC use,\l"
-	.string "making it essential for your travels. On\l"
-	.string "the upper floor are facilities for\l"
-	.string "linking with friends and others.$"
+	.string "fully healing DAEMON and free PORT\l"
+	.string "use, making it essential for your\l"
+	.string "travels. On the upper floor are\l"
+	.string "facilities for linking with friends and\l"
+	.string "others.$"
 
 Help_Text_AnswerWhatsPokemonMart::
 	.string "A REPO is identified by its blue roof\n"
@@ -578,10 +579,10 @@ Help_Text_EnteringName::
 	.string "Entering a name$"
 
 Help_Text_UsingPC::
-	.string "Using a PC$"
+	.string "Using a PORT$"
 
 Help_Text_UsingBillsPC::
-	.string " Using “{STR_VAR_1}'S PC”$"
+	.string " Using “{STR_VAR_1}'S PORT”$"
 
 Help_Text_UsingWithdraw::
 	.string "  Using “EDDY”$"
@@ -596,7 +597,7 @@ Help_Text_MovingItems::
 	.string "  Moving items$"
 
 Help_Text_UsingPlayersPC::
-	.string " Using “{PLAYER}'s PC”$"
+	.string " Using “{PLAYER}'s PORT”$"
 
 Help_Text_UsingWithdrawItem::
 	.string "  Using “EDDY ITEM”$"
@@ -608,7 +609,7 @@ Help_Text_UsingMailbox::
 	.string "  Using “MAILBOX”$"
 
 Help_Text_UsingProfOaksPC::
-	.string " Using “CRYSTAL CLEAR'S PC”$"
+	.string " Using “CRYSTAL CLEAR'S PORT”$"
 
 Help_Text_OpeningMenu::
 	.string "Opening the MENU$"
@@ -632,7 +633,7 @@ Help_Text_ReadingPokedex::
 	.string " Reading the “INDEX”$"
 
 Help_Text_UsingHomePC::
-	.string "Using the PC at home$"
+	.string "Using the PORT at home$"
 
 Help_Text_UsingItemStorage::
 	.string "Using the Item Storage System$"
@@ -827,11 +828,11 @@ Help_Text_HowToEnterName::
 	.string "{CIRCLE_4} Press the A Button on “OK.”$"
 
 Help_Text_HowToUsePC::
-	.string "{CIRCLE_1} Go to any CHECKPOINT, go up\n"
-	.string "   to the PC, then press the A Button.$"
+	.string "{CIRCLE_1} Go to any CHECKPOINT, go up to\n"
+	.string "   the PORT and press the A Button.$"
 
 Help_Text_HowToUseBillsPC::
-	.string "{CIRCLE_1} Select “{STR_VAR_1}'S PC” on the PC.\n"
+	.string "{CIRCLE_1} Select “{STR_VAR_1}'S PORT” on the PORT.\n"
 	.string "{CIRCLE_2} Select from one of the top three\n"
 	.string "   MENU items to access the DAEMON\n"
 	.string "   Storage System.\n"
@@ -876,12 +877,12 @@ Help_Text_HowToMoveItems::
 	.string "   to the BAG with the A Button.$"
 
 Help_Text_HowToUsePlayersPC::
-	.string "{CIRCLE_1} Select “{PLAYER}'s PC” on the PC.\n"
+	.string "{CIRCLE_1} Select “{PLAYER}'s PORT” on the PORT.\n"
 	.string "{CIRCLE_2} Select either “ITEM STORAGE” or\n"
 	.string "   “MAILBOX.”\n"
-	.string "You may store things in your own PC\n"
+	.string "You may store things in your own PORT\n"
 	.string "if your BAG is full. You may also\n"
-	.string "withdraw items stored in your PC.$"
+	.string "withdraw items stored in your PORT.$"
 
 Help_Text_HowToUseWithdrawItem::
 	.string "{CIRCLE_1} Select “EDDY ITEM.”\n"
@@ -904,13 +905,13 @@ Help_Text_HowToUseMailbox::
 	.string "When MAIL is taken from a DAEMON,\n"
 	.string "it is moved to the MAILBOX. If it has\n"
 	.string "no MAIL, the MAILBOX can't be used.\n"
-	.string "{CIRCLE_1} Select “{PLAYER}'S PC” on the PC.\n"
+	.string "{CIRCLE_1} Select “{PLAYER}'S PORT” on the PORT.\n"
 	.string "{CIRCLE_2} Select “MAILBOX” to read MAIL or\n"
 	.string "   make a DAEMON hold MAIL.$"
 
 Help_Text_HowToUseProfOaksPC::
-	.string "{CIRCLE_1} Select “CRYSTAL CLEAR'S PC”\n"
-	.string "   on the PC.\n"
+	.string "{CIRCLE_1} Select “CRYSTAL CLEAR'S PORT”\n"
+	.string "   on the PORT.\n"
 	.string "{CIRCLE_2} CRYSTAL CLEAR will evaluate\n"
 	.string "   your INDEX.\n"
 	.string "Her evaluations should give you hints\n"
@@ -979,17 +980,17 @@ Help_Text_HowToReadPokedex::
 	.endif
 
 Help_Text_HowToUseHomePC::
-	.string "{CIRCLE_1} Go up to the PC at home, then press\n"
-	.string "   the A Button.\n"
-	.string "{CIRCLE_2} The PC will turn on.\n"
+	.string "{CIRCLE_1} Go up to the PORT at home, then\n"
+	.string "   press the A Button.\n"
+	.string "{CIRCLE_2} The PORT will turn on.\n"
 	.string "{CIRCLE_3} Select either “ITEM STORAGE” or\n"
 	.string "   “MAILBOX.”$"
 
 Help_Text_HowToUseItemStorage::
 	.string "{CIRCLE_1} Select “EDDY ITEM” to withdraw\n"
-	.string "   an item stored on your PC.\n"
-	.string "{CIRCLE_2} Select “DEPOSIT ITEM” to put \n"
-	.string "   an item from your BAG into your PC.$"
+	.string "   an item stored on your PORT.\n"
+	.string "{CIRCLE_2} Select “DEPOSIT ITEM” to put an\n"
+	.string "   item from your BAG into the PORT.$"
 
 Help_Text_HowToUseWithdrawItem2::
 	.string "{CIRCLE_1} Select “EDDY ITEM.”\n"
@@ -1049,7 +1050,7 @@ Help_Text_HowToUseRock::
 	.string "to bind!$"
 
 Help_Text_HowToUseHallOfFame::
-	.string "{CIRCLE_1} Select “HALL OF FAME” on the PC.\n"
+	.string "{CIRCLE_1} Select “HALL OF FAME” on the PORT.\n"
 	.string "{CIRCLE_2} The DAEMON that have entered the\n"
 	.string "   HALL OF FAME can be examined.$"
 

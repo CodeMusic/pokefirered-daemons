@@ -18,8 +18,8 @@ PalletTown_Text_RaisingMonsToo::
     .string "Far room. The one past the stairs.$"
 
 PalletTown_Text_CanStoreItemsAndMonsInPC::
-    .string "The PC holds them without running\n"
-    .string "them.\p"
+    .string "The PORT holds them without\n"
+    .string "running them.\p"
     .string "I have never worked out what that\n"
     .string "is like from the inside.$"
 
