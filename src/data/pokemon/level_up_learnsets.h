@@ -1184,21 +1184,40 @@ static const u16 sDodrioLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+//  T-36, SILENT TYPE. CHILLER is FLOW -- only FLOW -- and knew not one FLOW
+//  routine. Its whole list was FROZEN and CONTENT, which is Seel's vanilla set
+//  unchanged: Ice and Normal the whole way, on a daemon we typed for water.
+//  The type defended and was read and never ACTED, which 5.1 would call a
+//  label with nothing behind it. Two substitutions, both on-type:
+//
+//  TRICKLE for COLLIDE at 1, because the FIRST routine is the one that teaches
+//  a player what the daemon is. 40 with the same-type bonus is 60 against
+//  COLLIDE's 70, which is nothing, and it stays single-turn -- DESCEND cannot
+//  sit here, it would be the only attack until 17 and it spends a turn under
+//  water before it lands.
+//
+//  DESCEND for FORCE at 37, where the charge is affordable. Same 90 once the
+//  bonus applies, without the recoil, and it reads as FLOW's own clause as a
+//  verb -- everything running downhill to the lowest point. A seal dives.
+//
+//  CRYOGEN takes both: a line fixed at one stage is 4.26's PORYGON2 problem.
 static const u16 sSeelLevelUpLearnset[] = {
-    LEVEL_UP_MOVE(1, MOVE_HEADBUTT),
+    LEVEL_UP_MOVE(1, MOVE_WATER_GUN),
     LEVEL_UP_MOVE(9, MOVE_GROWL),
     LEVEL_UP_MOVE(17, MOVE_ICY_WIND),
     LEVEL_UP_MOVE(21, MOVE_AURORA_BEAM),
     LEVEL_UP_MOVE(29, MOVE_REST),
-    LEVEL_UP_MOVE(37, MOVE_TAKE_DOWN),
+    LEVEL_UP_MOVE(37, MOVE_DIVE),
     LEVEL_UP_MOVE(41, MOVE_ICE_BEAM),
     LEVEL_UP_MOVE(49, MOVE_SAFEGUARD),
     LEVEL_UP_END
 };
 
+//  T-36, SILENT TYPE, second half. CRYOGEN inherits CHILLER's fault and takes
+//  the same two substitutions, at the levels its own curve puts them.
 static const u16 sDewgongLevelUpLearnset[] = {
     LEVEL_UP_MOVE(1, MOVE_SIGNAL_BEAM),
-    LEVEL_UP_MOVE(1, MOVE_HEADBUTT),
+    LEVEL_UP_MOVE(1, MOVE_WATER_GUN),
     LEVEL_UP_MOVE(1, MOVE_GROWL),
     LEVEL_UP_MOVE(1, MOVE_ICY_WIND),
     LEVEL_UP_MOVE(1, MOVE_AURORA_BEAM),
@@ -1207,7 +1226,7 @@ static const u16 sDewgongLevelUpLearnset[] = {
     LEVEL_UP_MOVE(21, MOVE_AURORA_BEAM),
     LEVEL_UP_MOVE(29, MOVE_REST),
     LEVEL_UP_MOVE(34, MOVE_SHEER_COLD),
-    LEVEL_UP_MOVE(42, MOVE_TAKE_DOWN),
+    LEVEL_UP_MOVE(42, MOVE_DIVE),
     LEVEL_UP_MOVE(51, MOVE_ICE_BEAM),
     LEVEL_UP_MOVE(64, MOVE_SAFEGUARD),
     LEVEL_UP_END
@@ -1802,10 +1821,19 @@ static const u16 sMagmarLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+//  T-36, NO STAB. CLAMPJAW is SWARM and every damaging routine it knew was
+//  off-type, so the same-type bonus never fired once -- a daemon worse at
+//  everything it does than the chart says it is.
+//
+//  FANOUT replaces LATCH at 7. LATCH is 15 and off-type; FANOUT is 14 x 2-5
+//  hits WITH the bonus, so it is stronger on every roll and the early game
+//  reads as SWARM instead of as a generic grappler. The name is the better
+//  clause too -- a mandible daemon that sprays its holds outward rather than
+//  binding one target and waiting.
 static const u16 sPinsirLevelUpLearnset[] = {
     LEVEL_UP_MOVE(1, MOVE_VICE_GRIP),
     LEVEL_UP_MOVE(1, MOVE_FOCUS_ENERGY),
-    LEVEL_UP_MOVE(7, MOVE_BIND),
+    LEVEL_UP_MOVE(7, MOVE_PIN_MISSILE),
     LEVEL_UP_MOVE(13, MOVE_SEISMIC_TOSS),
     LEVEL_UP_MOVE(19, MOVE_HARDEN),
     LEVEL_UP_MOVE(25, MOVE_REVENGE),
