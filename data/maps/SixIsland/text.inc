@@ -1,12 +1,12 @@
 SixIsland_Text_IslandSign::
     .string "SIX ISLAND\n"
-    .string "Fortune Island of Aged Wisdom$"
+    .string "Old things, and people\l"
+    .string "who did not move away$"
 
 SixIsland_Text_ThatWayToWaterPathRuinValley::
-    .string "Keep going this way and you'll get\n"
-    .string "to the LONG WADE.\p"
-    .string "Stay on that and you'll get to\n"
-    .string "the WHAT REMAINS.$"
+    .string "Keep on and the path gets wet.\p"
+    .string "Keep on after that and it stops\n"
+    .string "being a path.$"
 
 SixIsland_Text_SkyAtNightIsFantastic::
     .string "When you're this far away from the\n"

@@ -17,7 +17,7 @@ SixIsland_GreenPath_Text_LeftRouteSign::
 
 SixIsland_GreenPath_Text_RightRouteSign::
     .string "SLOW WALK\n"
-    .string "Think Green, Keep Nature Clean!$"
+    .string "Nothing here is in a hurry$"
 
 
 @  4.33's eight steps, in the order he gives them. He begins mid-thought
