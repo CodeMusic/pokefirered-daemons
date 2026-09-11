@@ -3,7 +3,7 @@ Text_DoubleEdgeTeach::
     .string "having battled your way through\l"
     .string "the UMBRAL ASCENT so bravely.\p"
     .string "In recognition of your feat,\n"
-    .string "I'll teach you DOUBLE-EDGE.\p"
+    .string "I'll teach you CLOBBER.\p"
     .string "Would you like me to teach that\n"
     .string "technique?$"
 
@@ -13,7 +13,7 @@ Text_DoubleEdgeDeclined::
 
 Text_DoubleEdgeWhichMon::
     .string "Which DAEMON should I teach\n"
-    .string "DOUBLE-EDGE?$"
+    .string "CLOBBER?$"
 
 Text_DoubleEdgeTaught::
     .string "Keep that drive going for the\n"

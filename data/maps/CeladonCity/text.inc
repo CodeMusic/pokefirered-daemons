@@ -68,8 +68,8 @@ CeladonCity_Text_DeptStoreSign::
 CeladonCity_Text_GuardSpecProtectsFromStatus::
     .string "USER TIPS\p"
     .string "LOCK STATS protects DAEMON against\n"
-    .string "SPECIAL attacks such as fire and\l"
-    .string "water!\p"
+    .string "SPECIAL attacks such as ENTROPY\l"
+    .string "and FLOW!\p"
     .string "Get your items at VERDIGRIS DEPT.\n"
     .string "STORE!$"
 

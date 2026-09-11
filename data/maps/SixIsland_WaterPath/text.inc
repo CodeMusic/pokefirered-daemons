@@ -9,7 +9,7 @@ SixIsland_WaterPath_Text_RoseDefeat::
 SixIsland_WaterPath_Text_RosePostBattle::
     .string "I want to go to the woods over\n"
     .string "there, but…\p"
-    .string "There are lots of BUG DAEMONS.\n"
+    .string "There are lots of SWARM DAEMONS.\n"
     .string "They scare me a little.$"
 
 SixIsland_WaterPath_Text_EdwardIntro::

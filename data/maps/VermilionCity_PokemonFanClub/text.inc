@@ -52,7 +52,7 @@ VermilionCity_PokemonFanClub_Text_ReceivedBikeVoucherFromChairman::
 
 VermilionCity_PokemonFanClub_Text_ExplainBikeVoucher::
     .string "Exchange that for a BICYCLE!\p"
-    .string "Don't worry, my FLOOD will FLY me\n"
+    .string "Don't worry, my FLOOD will GOTO me\n"
     .string "anywhere!\p"
     .string "So, I don't need a BICYCLE!\p"
     .string "I hope you like cycling!$"

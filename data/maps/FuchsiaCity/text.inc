@@ -103,6 +103,6 @@ Text_SubstituteTaught::
 FuchsiaCity_Text_MyFatherIsGymLeader::
     .string "My father is the GYM LEADER of\n"
     .string "this town.\p"
-    .string "I'm training to use POISON DAEMON\n"
+    .string "I'm training to use CORRUPT DAEMON\n"
     .string "as well as my father.$"
 

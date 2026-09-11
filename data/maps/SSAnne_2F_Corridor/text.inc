@@ -26,10 +26,10 @@ SSAnne_2F_Corridor_Text_RivalVictory::
     .string "きたえた　ほうが　いいぜ！$"
 
 SSAnne_2F_Corridor_Text_RivalPostBattle::
-    .string "{RIVAL}: I heard there was a CUT\n"
-    .string "master on board.\p"
+    .string "{RIVAL}: I heard there was a\n"
+    .string "PRUNE master on board.\p"
     .string "But he was just a seasick old man!\p"
-    .string "CUT itself is really useful.\n"
+    .string "PRUNE itself is really useful.\n"
     .string "Yup, it'll be handy.\p"
     .string "You should go see him, too.\n"
     .string "Smell ya!$"

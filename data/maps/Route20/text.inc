@@ -69,7 +69,7 @@ Route20_Text_RogerDefeat::
 
 Route20_Text_RogerPostBattle::
     .string "My birds are exhausted.\n"
-    .string "They can't FLY me back!$"
+    .string "They can't GOTO me back!$"
 
 Route20_Text_NoraIntro::
     .string "My boyfriend gave me big pearls.$"
@@ -107,7 +107,7 @@ Route20_Text_SeafoamIslands::
     .string "GLAUCOUS ISLES$"
 
 Route20_Text_MistyTrainsHere::
-    .string "Strong USERS and WATER DAEMONS\n"
+    .string "Strong USERS and FLOW DAEMONS\n"
     .string "are common sights in these parts.\p"
     .string "They say that BASIN of the\n"
     .string "DOLDRUM GYM trains here.$"

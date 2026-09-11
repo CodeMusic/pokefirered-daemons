@@ -12,19 +12,20 @@ SSAnne_CaptainsOffice_Text_RubbedCaptainsBack::
 SSAnne_CaptainsOffice_Text_ThankYouHaveHMForCut::
     .string "CAPTAIN: Whew! Thank you! I feel\n"
     .string "much better!\p"
-    .string "You want to see my CUT technique?\p"
+    .string "You want to see my PRUNE\n"
+    .string "technique?\p"
     .string "I could show you if I wasn't ill...\p"
     .string "I know! You can have this!\p"
     .string "Teach it to your DAEMONS and you\n"
-    .string "can see it CUT any time!$"
+    .string "can use PRUNE any time!$"
 
 SSAnne_CaptainsOffice_Text_ObtainedHM01FromCaptain::
     .string "{PLAYER} obtained HM01\n"
     .string "from the CAPTAIN!$"
 
 SSAnne_CaptainsOffice_Text_ExplainCut::
-    .string "Using CUT, you can chop down small\n"
-    .string "trees.\p"
+    .string "Using PRUNE, you can chop down\n"
+    .string "small trees.\p"
     .string "Why not try it with the trees\n"
     .string "around ARDOR CITY?$"
 

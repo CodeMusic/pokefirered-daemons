@@ -26,7 +26,7 @@ SixIsland_PatternBush_Text_AllisonPostBattle::
     .string "DAEMON responsibly.$"
 
 SixIsland_PatternBush_Text_GarretIntro::
-    .string "I bound a BUG DAEMON that lives\n"
+    .string "I bound a SWARM DAEMON that lives\n"
     .string "only around here!$"
 
 SixIsland_PatternBush_Text_GarretDefeat::
@@ -38,7 +38,7 @@ SixIsland_PatternBush_Text_GarretPostBattle::
 
 SixIsland_PatternBush_Text_JonahIntro::
     .string "You know, it just doesn't feel right\n"
-    .string "if I don't use BUG DAEMON.$"
+    .string "if I don't use SWARM DAEMON.$"
 
 SixIsland_PatternBush_Text_JonahDefeat::
     .string "It's okay, losing is a fun part of\n"
@@ -52,7 +52,7 @@ SixIsland_PatternBush_Text_JonahPostBattle::
 
 SixIsland_PatternBush_Text_VanceIntro::
     .string "Yeah, yeah, yeah! Look at all the\n"
-    .string "BUG DAEMON!$"
+    .string "SWARM DAEMON!$"
 
 SixIsland_PatternBush_Text_VanceDefeat::
     .string "I got beat while I was still busy\n"
@@ -103,8 +103,8 @@ SixIsland_PatternBush_Text_DaliaPostBattle::
     .string "Isn't it refreshing?$"
 
 SixIsland_PatternBush_Text_JoanaIntro::
-    .string "I love BUG DAEMON. That's why I'm\n"
-    .string "here all the time.\p"
+    .string "I love SWARM DAEMON. That's why\n"
+    .string "I'm here all the time.\p"
     .string "Am I the only girl like that?$"
 
 SixIsland_PatternBush_Text_JoanaDefeat::
@@ -112,8 +112,8 @@ SixIsland_PatternBush_Text_JoanaDefeat::
     .string "Am I the only girl like that?$"
 
 SixIsland_PatternBush_Text_JoanaPostBattle::
-    .string "I'm going to keep on collecting BUG\n"
-    .string "DAEMON.\p"
+    .string "I'm going to keep on collecting\n"
+    .string "SWARM DAEMON.\p"
     .string "Am I the only girl like that?$"
 
 SixIsland_PatternBush_Text_RileyIntro::
@@ -148,8 +148,8 @@ SixIsland_PatternBush_Text_LaytonDefeat::
     .string "your feet?$"
 
 SixIsland_PatternBush_Text_LaytonPostBattle::
-    .string "There are places here in PATTERN\n"
-    .string "BUSH where grass won't grow.\p"
+    .string "There are places in THE SAME BUSH\n"
+    .string "where grass won't grow.\p"
     .string "What could be the cause of such\n"
     .string "a phenomenon?$"
 

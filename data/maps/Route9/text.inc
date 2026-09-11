@@ -90,14 +90,14 @@ Route9_Text_AlanPostBattle::
     .string "Us hearty guys always laugh!$"
 
 Route9_Text_ConnerIntro::
-    .string "Go, my super BUG DAEMON!$"
+    .string "Go, my super SWARM DAEMON!$"
 
 Route9_Text_ConnerDefeat::
-    .string "My bugs…$"
+    .string "My swarm…$"
 
 Route9_Text_ConnerPostBattle::
-    .string "If you don't like BUG DAEMON, you\n"
-    .string "bug me!$"
+    .string "If you don't like SWARM DAEMON,\n"
+    .string "you're outnumbered!$"
 
 Route9_Text_RouteSign::
     .string "ROUTE 9\n"

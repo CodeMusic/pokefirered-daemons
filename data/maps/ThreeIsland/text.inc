@@ -145,8 +145,8 @@ ThreeIsland_Text_LostelleWentOffTowardsBondBridge::
     .string "a while.\p"
     .string "…I beg your pardon?\n"
     .string "You're looking for LOSTELLE?\p"
-    .string "LOSTELLE went off towards BOND\n"
-    .string "BRIDGE a while ago.$"
+    .string "LOSTELLE went off towards\n"
+    .string "LONGCROSS a while ago.$"
 
 ThreeIsland_Text_WouldntWantToSeeBikersHereAgain::
     .string "THREE ISLAND is actually the most\n"

@@ -24,8 +24,8 @@ Route4_Text_RouteSign::
 Text_MegaPunchTeach::
     .string "A punch of roaring ferocity!\p"
     .string "Packed with destructive power!\p"
-    .string "When the chips are down, MEGA\n"
-    .string "PUNCH is the ultimate attack! You\l"
+    .string "When the chips are down, COMMIT\n"
+    .string "is the ultimate attack! You\l"
     .string "agree, yes?\p"
     .string "Now! Let me teach it to your\n"
     .string "DAEMON!$"

@@ -18,7 +18,7 @@ VermilionCity_Gym_Text_LtSurgePostBattle::
 VermilionCity_Gym_Text_ExplainThunderBadgeTakeThis::
     .string "The SENSE MARK cranks up your\n"
     .string "DAEMON's SPEED!\p"
-    .string "It also lets your DAEMON FLY any\n"
+    .string "It also lets your DAEMON GOTO any\n"
     .string "time, kid!\p"
     .string "You're special, kid! Take this!$"
 

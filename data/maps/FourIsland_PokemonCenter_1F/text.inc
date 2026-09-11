@@ -24,8 +24,8 @@ FourIsland_House1_Text_FatMan::
     .string "おまえ　おもいなあー！$"
 
 FourIsland_PokemonCenter_1F_Text_RareIceMonsInCave::
-    .string "There's a rare kind of ICE DAEMON\n"
-    .string "that lives in the cave.\p"
+    .string "There's a rare kind of FROZEN\n"
+    .string "DAEMON that lives in the cave.\p"
     .string "We get a lot of visitors hoping to\n"
     .string "see that DAEMON.$"
 

@@ -73,7 +73,7 @@ SaffronCity_Text_GymSign::
     .string "DAEMON GYM\l"
     .string "LEADER: MATTE\p"
     .string "The Master of\n"
-    .string "Psychic DAEMON!$"
+    .string "CONTEXT DAEMON!$"
 
 SaffronCity_Text_FullHealCuresStatus::
     .string "USER TIPS\p"

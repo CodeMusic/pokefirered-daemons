@@ -25,13 +25,13 @@ CeruleanCity_House1_Text_ObeyLv30Cut::
     .string "obtain in trades.\p"
     .string "DAEMON of higher levels will be\n"
     .string "unruly in battle, however.\p"
-    .string "It also lets you use the move CUT\n"
-    .string "outside of battle.$"
+    .string "It also lets you use the move\n"
+    .string "PRUNE outside of battle.$"
 
 CeruleanCity_House1_Text_SpeedStatFly::
     .string "The SPEED of all DAEMONS increases\n"
     .string "a little bit.\p"
-    .string "It also lets you use FLY outside\n"
+    .string "It also lets you use GOTO outside\n"
     .string "of battle.$"
 
 CeruleanCity_House1_Text_ObeyLv50Strength::
@@ -57,8 +57,8 @@ CeruleanCity_House1_Text_ObeyLv70RockSmash::
     .string "obtain in trades.\p"
     .string "DAEMON of higher levels will be\n"
     .string "unruly in battle, however.\p"
-    .string "It also lets you use the move ROCK\n"
-    .string "SMASH outside of battle.$"
+    .string "It also lets you use the move\n"
+    .string "CRACK outside of battle.$"
 
 CeruleanCity_House1_Text_SpStatsWaterfall::
     .string "The SP. ATK and SP. DEF stats of\n"
