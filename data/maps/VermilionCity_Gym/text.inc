@@ -3,7 +3,7 @@ VermilionCity_Gym_Text_LtSurgeIntro::
     .string "doing here?\p"
     .string "You won't live long in combat! Not\n"
     .string "with your puny power!\p"
-    .string "I tell you, kid, electric DAEMON\n"
+    .string "I tell you, kid, SIGNAL DAEMON\n"
     .string "saved me during the war!\p"
     .string "They zapped my enemies into\n"
     .string "throttling!\p"
@@ -12,8 +12,8 @@ VermilionCity_Gym_Text_LtSurgeIntro::
 VermilionCity_Gym_Text_LtSurgePostBattle::
     .string "A little word of advice, kid!\p"
     .string "Electricity is sure powerful!\p"
-    .string "But, it's useless against GROUND-\n"
-    .string "type DAEMON!$"
+    .string "But, it's useless against\n"
+    .string "STRATUM-type DAEMON!$"
 
 VermilionCity_Gym_Text_ExplainThunderBadgeTakeThis::
     .string "The SENSE MARK cranks up your\n"
@@ -28,7 +28,7 @@ VermilionCity_Gym_Text_ReceivedTM34FromLtSurge::
 
 VermilionCity_Gym_Text_ExplainTM34::
     .string "TM34 contains CARRIER!\p"
-    .string "Teach it to an ELECTRIC DAEMON!$"
+    .string "Teach it to a SIGNAL DAEMON!$"
 
 VermilionCity_Gym_Text_MakeRoomInYourBag::
     .string "Yo, kid, make room in your BAG!$"
@@ -86,8 +86,8 @@ VermilionCity_Gym_Text_GymGuyAdvice::
     .string "GAUGE has a nickname. People\n"
     .string "refer to him as the Lightning\l"
     .string "American!\p"
-    .string "He's an expert on electric DAEMON!\p"
-    .string "Birds and water DAEMONS are at\n"
+    .string "He's an expert on SIGNAL DAEMON!\p"
+    .string "VECTOR and FLOW DAEMONS are at\n"
     .string "risk! Beware of throttling too!\p"
     .string "GAUGE is very cautious!\p"
     .string "You'll have to break a code to get\n"

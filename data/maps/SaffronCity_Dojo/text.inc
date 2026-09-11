@@ -56,8 +56,8 @@ SaffronCity_Dojo_Text_AaronDefeat::
     .string "Stubbed fingers!$"
 
 SaffronCity_Dojo_Text_AaronPostBattle::
-    .string "The only thing that frightens us is\n"
-    .string "psychic power!$"
+    .string "The only thing that frightens us\n"
+    .string "is CONTEXT!$"
 
 SaffronCity_Dojo_Text_HitoshiIntro::
     .string "Hwaah!\p"

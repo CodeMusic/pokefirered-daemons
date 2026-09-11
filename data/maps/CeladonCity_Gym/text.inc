@@ -7,7 +7,7 @@ CeladonCity_Gym_Text_ErikaIntro::
     .string "VERDIGRIS GYM.\p"
     .string "I teach the art of flower\n"
     .string "arranging. My DAEMONS are of the\l"
-    .string "grass-type.\p"
+    .string "GROWTH-type.\p"
     .string "Oh, I'm sorry, I had no idea that\n"
     .string "you wished to challenge me.\p"
     .string "Very well, but I shall not lose.$"
@@ -64,10 +64,10 @@ CeladonCity_Gym_Text_BridgetDefeat::
     .string "My makeup!$"
 
 CeladonCity_Gym_Text_BridgetPostBattle::
-    .string "Grass-type DAEMONS are tough\n"
-    .string "against the water-type!\p"
-    .string "They also have an edge on rock\n"
-    .string "and ground DAEMON!$"
+    .string "GROWTH-type DAEMONS are tough\n"
+    .string "against the FLOW-type!\p"
+    .string "They also have an edge on LEGACY\n"
+    .string "and STRATUM DAEMON!$"
 
 CeladonCity_Gym_Text_TinaIntro::
     .string "…Weren't you peeking in here\n"

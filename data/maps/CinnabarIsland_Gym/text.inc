@@ -11,9 +11,9 @@ CinnabarIsland_Gym_Text_BlaineDefeat::
     .string "You have earned the HEAT MARK!$"
 
 CinnabarIsland_Gym_Text_FireBlastIsUltimateFireMove::
-    .string "FLASHOVER is the ultimate fire\n"
-    .string "technique.\p"
-    .string "Don't waste it on WATER DAEMON.$"
+    .string "FLASHOVER is the ultimate\n"
+    .string "ENTROPY technique.\p"
+    .string "Don't waste it on FLOW DAEMON.$"
 
 CinnabarIsland_Gym_Text_ExplainVolcanoBadge::
     .string "Hah!\p"
@@ -106,24 +106,24 @@ CinnabarIsland_Gym_Text_DustyDefeat::
 
 CinnabarIsland_Gym_Text_DustyPostBattle::
     .string "HOTPATH, WILDFIRE… Those are\n"
-    .string "popular FIRE DAEMON.$"
+    .string "popular ENTROPY DAEMON.$"
 
 CinnabarIsland_Gym_Text_ZacIntro::
-    .string "Fire is weak against H2O.$"
+    .string "ENTROPY is weak against H2O.$"
 
 CinnabarIsland_Gym_Text_ZacDefeat::
     .string "Oh!\n"
     .string "Snuffed out!$"
 
 CinnabarIsland_Gym_Text_ZacPostBattle::
-    .string "Water beats fire, of course.\p"
+    .string "FLOW beats ENTROPY, of course.\p"
     .string "But fire melts ice, so the ENTROPY\n"
     .string "type beats FROZEN-type DAEMON.$"
 
 CinnabarIsland_Gym_Text_GymGuyAdvice::
     .string "Yo! Champ in the making!\p"
-    .string "The hotheaded ANNEAL is a FIRE\n"
-    .string "DAEMON pro.\p"
+    .string "The hotheaded ANNEAL is an\n"
+    .string "ENTROPY DAEMON pro.\p"
     .string "Douse his spirits with water!\p"
     .string "You'd better take some COOLANTS,\n"
     .string "too.$"
@@ -162,7 +162,7 @@ CinnabarIsland_Gym_Text_QuizQuestion3::
     .string "LOOP evolves three times?$"
 
 CinnabarIsland_Gym_Text_QuizQuestion4::
-    .string "Are electric moves effective\n"
+    .string "Are SIGNAL moves effective\n"
     .string "against STRATUM-type DAEMON?$"
 
 CinnabarIsland_Gym_Text_QuizQuestion5::
