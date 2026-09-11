@@ -1,9 +1,9 @@
-const u8 gTeachyTvString_TeachBattle[] = _("Teach me how to battle.");
-const u8 gTeachyTvString_StatusProblems[] = _("What is a status problem?");
-const u8 gTeachyTvString_TypeMatchups[] = _("How do I read a matchup?");
-const u8 gTeachyTvString_CatchPkmn[] = _("I want to bind DAEMONS.");
-const u8 gTeachyTvString_AboutTMs[] = _("Teach me about TMs.");
-const u8 gTeachyTvString_RegisterItem[] = _("How do I register an item?");
+const u8 gTeachyTvString_TeachBattle[] = _("The first exchange");
+const u8 gTeachyTvString_StatusProblems[] = _("When a process stalls");
+const u8 gTeachyTvString_TypeMatchups[] = _("Reading the chart");
+const u8 gTeachyTvString_CatchPkmn[] = _("Binding a stranger");
+const u8 gTeachyTvString_AboutTMs[] = _("What a TM costs");
+const u8 gTeachyTvString_RegisterItem[] = _("One item, one button");
 const u8 gTeachyTvString_Cancel[] = _("CANCEL");
 const u8 gTeachyTvText_PokedudeSaysHello[] = _(
         "Hey, all you USERS out there!\n"
@@ -203,15 +203,15 @@ const u8 gTeachyTvText_RegisterScript2[] = _(
 // battle, never as a thing to know. Craft rule 1 holds on television too.
 // --------------------------------------------------------------------------
 
-const u8 gTeachyTvString_Hosting[] = _("Where do my daemons go?");
-const u8 gTeachyTvString_Mark1[] = _("About the SLATE MARK.");
-const u8 gTeachyTvString_Mark2[] = _("About the SLOPE MARK.");
-const u8 gTeachyTvString_Mark3[] = _("About the SENSE MARK.");
-const u8 gTeachyTvString_Mark4[] = _("About the FIT MARK.");
-const u8 gTeachyTvString_Mark5[] = _("About the SKEW MARK.");
-const u8 gTeachyTvString_Mark6[] = _("About the FRAME MARK.");
-const u8 gTeachyTvString_Mark7[] = _("About the HEAT MARK.");
-const u8 gTeachyTvString_Mark8[] = _("About the TRUE MARK.");
+const u8 gTeachyTvString_Hosting[] = _("Still running elsewhere");
+const u8 gTeachyTvString_Mark1[] = _("The SLATE MARK");
+const u8 gTeachyTvString_Mark2[] = _("The SLOPE MARK");
+const u8 gTeachyTvString_Mark3[] = _("The SENSE MARK");
+const u8 gTeachyTvString_Mark4[] = _("The FIT MARK");
+const u8 gTeachyTvString_Mark5[] = _("The SKEW MARK");
+const u8 gTeachyTvString_Mark6[] = _("The FRAME MARK");
+const u8 gTeachyTvString_Mark7[] = _("The HEAT MARK");
+const u8 gTeachyTvString_Mark8[] = _("The TRUE MARK");
 
 const u8 gTeachyTvText_TutorSaysHelloNewShow[] = _(
         "Hey, all you USERS out there!\p"
