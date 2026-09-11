@@ -2691,9 +2691,10 @@ const u8 gJirachiPokedexText[] = _(
 const u8 gJirachiPokedexTextUnused[] = _("");
 
 const u8 gDeoxysPokedexText[] = _(
-    "When it changes form, an aurora appears.\n"
-    "It absorbs attacks by altering its\n"
-    "cellular structure.");
+    
+    "It changes shape while it is being looked\n"
+    "at. Hold on through every one, and the\n"
+    "last one is the true one.");
 
 const u8 gDeoxysPokedexTextUnused[] = _("");
 

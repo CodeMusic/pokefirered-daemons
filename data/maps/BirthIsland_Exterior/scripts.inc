@@ -9,19 +9,29 @@ BirthIsland_Exterior_OnReturnToField::
 	end
 
 BirthIsland_Exterior_OnTransition::
-	@  T-29. THE ANNEX is reachable by one thing and it is not a boat, so the
-	@  event-island content that nobody here can reach is turned off rather
-	@  than left standing next to the last scene. A legendary puzzle ten tiles
-	@  from 4.34's ending would be absurd, and the daemon on it is one of
-	@  8.2b's sixty-nine unnamed.
-	setflag FLAG_HIDE_DEOXYS
-	setflag FLAG_HIDE_BIRTH_ISLAND_METEORITE
+	@  T-29 hid the puzzle outright, and that was wrong. In VANILLA this island
+	@  needs the AURORA TICKET, an event item that was never distributed, so
+	@  PROTEUS was unobtainable on any ordinary cartridge -- and OUR change is
+	@  what made the island reachable at all. Turning the daemon off meant
+	@  taking away something we had just made possible, which is the one thing
+	@  a total conversion should not do.
+	@
+	@  So it is TIMED rather than removed. While 4.34's scene is unfinished the
+	@  island is bare and she is the only thing on it; a legendary standing ten
+	@  tiles from the last scene really would be absurd. Once she has read it
+	@  and gone home, the island has its puzzle back.
+	@
+	@  The place where a woman was left, and afterwards something else is
+	@  standing on it. Nobody remarks on that either.
 	setworldmapflag FLAG_WORLD_MAP_BIRTH_ISLAND_EXTERIOR
 	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_DEOXYS_N
 	setvar VAR_DEOXYS_INTERACTION_STEP_COUNTER, 0
 	setvar VAR_DEOXYS_INTERACTION_NUM, 0
 	call_if_set FLAG_FOUGHT_DEOXYS, BirthIsland_Exterior_EventScript_HideDeoxysAndPuzzle
 	call_if_unset FLAG_FOUGHT_DEOXYS, BirthIsland_Exterior_EventScript_TryShowDeoxysPuzzle
+	@  ...and OURS runs LAST, because TryShowDeoxysPuzzle above CLEARS the
+	@  meteorite's hide flag. Gating before it ran was silently undone.
+	call_if_unset FLAG_CRYSTAL_READ_PAYLOAD, BirthIsland_Exterior_EventScript_HideDeoxysAndPuzzle
 	end
 
 BirthIsland_Exterior_EventScript_HideDeoxysAndPuzzle::
