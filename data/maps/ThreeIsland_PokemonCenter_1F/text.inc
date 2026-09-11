@@ -1,7 +1,7 @@
 ThreeIsland_PokemonCenter_1F_Text_PCNetworkCanLinkWithKanto::
     .string "Hey, did you hear the news?\p"
     .string "The PORT network here can now link\n"
-    .string "with PORT in KANTO.\p"
+    .string "with PORT in GAMUT.\p"
     .string "I don't know how that came about,\n"
     .string "but it's fantastic!$"
 

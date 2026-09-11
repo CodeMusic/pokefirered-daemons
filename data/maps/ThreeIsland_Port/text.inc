@@ -1,5 +1,5 @@
 ThreeIsland_Port_Text_WereKantoRiderFederation::
-    .string "We're the KANTO RIDER FEDERATION!\n"
+    .string "We're the GAMUT RIDER FEDERATION!\n"
     .string "Vroom! Vavavavooom! Vroom!\p"
     .string "My bike's wimpy, so I have to\n"
     .string "make exhaust noises myself!$"

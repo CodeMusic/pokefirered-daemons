@@ -12,7 +12,7 @@ ThreeIsland_Text_GoBackToKanto::
     .string "We don't need you people bringing\n"
     .string "your noise and trouble here!\p"
     .string "We're asking you to go back to\n"
-    .string "KANTO!$"
+    .string "GAMUT!$"
 
 ThreeIsland_Text_BossIsOnHisWay::
     .string "Hey, go cry somewhere else.\n"
@@ -30,7 +30,7 @@ ThreeIsland_Text_WhosGonnaMakeMe::
 
 ThreeIsland_Text_AreYouBossGoBackToKanto::
     .string "Are you the boss?\n"
-    .string "Go back to KANTO right now!$"
+    .string "Go back to GAMUT right now!$"
 
 ThreeIsland_Text_JustGotHerePal::
     .string "Hah?\p"
@@ -81,7 +81,7 @@ ThreeIsland_Text_Biker1PostBattle::
     .string "Don't you dare laugh!$"
 
 ThreeIsland_Text_Biker2Intro::
-    .string "Aren't you from KANTO?\n"
+    .string "Aren't you from GAMUT?\n"
     .string "You should be on our side!$"
 
 ThreeIsland_Text_Biker2Defeat::

@@ -19,8 +19,8 @@ FourIsland_Text_LoreleiMetLaprasAsChild::
 
 FourIsland_Text_RivalAlreadyGotEggBeSmellingYa::
     .string "{RIVAL}: Hey! {PLAYER}!\p"
-    .string "What are you doing here in the\n"
-    .string "SEVII ISLANDS?\p"
+    .string "What are you doing here in THE\n"
+    .string "MARGINS?\p"
     .string "You should quit copying me, you\n"
     .string "know?\p"
     .string "Anyways, I already got my DAEMONS\n"

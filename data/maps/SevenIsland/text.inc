@@ -23,13 +23,14 @@ SevenIsland_Text_IslandSign::
     .string "somebody built later$"
 
 SevenIsland_Text_IslandsMadeInSevenDays::
-    .string "These islands are called the SEVII\n"
-    .string "ISLANDS because there are seven.\p"
+    .string "These islands are called THE\n"
+    .string "MARGINS because they are what was\l"
+    .string "left over.\p"
     .string "…Or at least that's what the young\n"
     .string "people believe.\p"
-    .string "The truth is, these islands are so\n"
-    .string "named because they are said to\l"
-    .string "have been made in seven days.$"
+    .string "The truth is, they are so named\n"
+    .string "because the mainland ran out of\l"
+    .string "paper before it ran out of islands.$"
 
 SevenIsland_Text_IslandVirtuallyUntouched::
     .string "This island has been left virtually\n"

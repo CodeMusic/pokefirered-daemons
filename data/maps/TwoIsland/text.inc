@@ -23,8 +23,8 @@ TwoIsland_Text_AddedMerchandiseForLostelle::
     .string "for your rescue of LOSTELLE.\p"
     .string "Thanks to your feat, the people of\n"
     .string "THREE ISLAND have changed their\l"
-    .string "attitudes about KANTO people.\p"
-    .string "And, I'm from KANTO, you see.\p"
+    .string "attitudes about GAMUT people.\p"
+    .string "And, I'm from GAMUT, you see.\p"
     .string "The people of THREE ISLAND\n"
     .string "helped me add to my merchandise.$"
 

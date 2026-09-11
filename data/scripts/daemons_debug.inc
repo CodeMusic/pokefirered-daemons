@@ -86,12 +86,12 @@ DaemonsDebug_Text_TheRecord::
 	.string "credits will run.$"
 
 DaemonsDebug_Text_TheIslands::
-	.string "DEBUG: open the SEVII ISLANDS?\p"
+	.string "DEBUG: open THE MARGINS?\p"
 	.string "The ferry at ARDOR PORT will sail,\n"
 	.string "and both passes go in the BAG.$"
 
 DaemonsDebug_Text_TheIslandsAnneIsIn::
-	.string "DEBUG: open the SEVII ISLANDS?\p"
+	.string "DEBUG: open THE MARGINS?\p"
 	.string "The ferry at ARDOR PORT will sail,\n"
 	.string "and both passes go in the BAG.\p"
 	.string "The S.S. ANNE uses the same berth\n"

@@ -30,7 +30,7 @@ OneIsland_Text_HavePCLinkageWithKanto::
     .string "My granddaughter was in a tizzy\n"
     .string "over a new breakthrough.\p"
     .string "She said we now have PORT linkage\n"
-    .string "with people in KANTO.\p"
+    .string "with people in GAMUT.\p"
     .string "I'm not sure what that means, but\n"
     .string "CELIO is quite the man!$"
 

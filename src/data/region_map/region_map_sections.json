@@ -805,7 +805,7 @@
     },
     {
       "id": "MAPSEC_SEVII_ISLE_6",
-      "name": "SEVII ISLE 6",
+      "name": "MARGIN ISLE 6",
       "x": 4,
       "y": 3,
       "width": 1,
@@ -813,7 +813,7 @@
     },
     {
       "id": "MAPSEC_SEVII_ISLE_7",
-      "name": "SEVII ISLE 7",
+      "name": "MARGIN ISLE 7",
       "x": 5,
       "y": 4,
       "width": 1,
@@ -821,7 +821,7 @@
     },
     {
       "id": "MAPSEC_SEVII_ISLE_8",
-      "name": "SEVII ISLE 8",
+      "name": "MARGIN ISLE 8",
       "x": 1,
       "y": 4,
       "width": 3,
@@ -829,7 +829,7 @@
     },
     {
       "id": "MAPSEC_SEVII_ISLE_9",
-      "name": "SEVII ISLE 9",
+      "name": "MARGIN ISLE 9",
       "x": 4,
       "y": 5,
       "width": 1,
@@ -933,7 +933,7 @@
     },
     {
       "id": "MAPSEC_SEVII_ISLE_22",
-      "name": "SEVII ISLE 22",
+      "name": "MARGIN ISLE 22",
       "x": 9,
       "y": 12,
       "width": 1,
@@ -941,7 +941,7 @@
     },
     {
       "id": "MAPSEC_SEVII_ISLE_23",
-      "name": "SEVII ISLE 23",
+      "name": "MARGIN ISLE 23",
       "x": 3,
       "y": 14,
       "width": 6,
@@ -949,7 +949,7 @@
     },
     {
       "id": "MAPSEC_SEVII_ISLE_24",
-      "name": "SEVII ISLE 24",
+      "name": "MARGIN ISLE 24",
       "x": 2,
       "y": 12,
       "width": 1,

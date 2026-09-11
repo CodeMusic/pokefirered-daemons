@@ -42,8 +42,8 @@ SixIsland_RuinValley_Text_FosterDefeat::
     .string "my instincts are off.$"
 
 SixIsland_RuinValley_Text_FosterPostBattle::
-    .string "There are several ruins on the\n"
-    .string "SEVII ISLANDS.\p"
+    .string "There are several ruins on THE\n"
+    .string "MARGINS.\p"
     .string "The majority of them date back\n"
     .string "a long way.$"
 

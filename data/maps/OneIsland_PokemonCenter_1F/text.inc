@@ -136,7 +136,7 @@ OneIsland_PokemonCenter_1F_Text_CelioOhReallyEhehe::
 OneIsland_PokemonCenter_1F_Text_BillWeShouldHeadBackToKanto::
     .string "HOLT: Well, there you have it. I'm\n"
     .string "finished with the job. We should\l"
-    .string "head back to KANTO.\p"
+    .string "head back to GAMUT.\p"
     .string "CELIO, I'll be seeing you again.$"
 
 OneIsland_PokemonCenter_1F_Text_CelioPromiseIllShowYouAroundSometime::
@@ -215,7 +215,7 @@ OneIsland_PokemonCenter_1F_Text_AnotherGemstoneInSeviiIslands::
     .string "There is another gem that forms a\n"
     .string "pair with this PUBLIC KEY.\p"
     .string "That other gemstone is supposed to\n"
-    .string "be in the SEVII ISLANDS.\p"
+    .string "be in THE MARGINS.\p"
     .string "{PLAYER}, please, I need you to go\n"
     .string "find the other gem.\p"
     .string "{PLAYER}, may I have your ferry\n"
@@ -231,8 +231,8 @@ OneIsland_PokemonCenter_1F_Text_ObtainedExtraMapPage::
 
 OneIsland_PokemonCenter_1F_Text_PassLetYouGetToAllIslands::
     .string "This is my own ferry PASS.\p"
-    .string "It will let you get to all the\n"
-    .string "SEVII ISLANDS.\p"
+    .string "It will let you get to all THE\n"
+    .string "MARGINS.\p"
     .string "{PLAYER}, please, I can't do\n"
     .string "it without your help.$"
 
@@ -336,14 +336,14 @@ OneIsland_PokemonCenter_1F_Text_MachineUnderAdjustment::
 OneIsland_PokemonCenter_1F_Text_MachineLinkedWithKanto::
     .string "Network Machine\n"
     .string "Link Level 1\p"
-    .string "Link established with the KANTO\n"
+    .string "Link established with the GAMUT\n"
     .string "region.\p"
     .string "NODE 001. RANGE 001 TO 111.$"
 
 OneIsland_PokemonCenter_1F_Text_MachineLinkedWithKantoAndHoenn::
     .string "Network Machine\n"
     .string "Link Level 2\p"
-    .string "Link established with the KANTO\n"
+    .string "Link established with the GAMUT\n"
     .string "and HOENN regions.\p"
     .string "NODE 001. RANGE 001 TO 111.$"
 

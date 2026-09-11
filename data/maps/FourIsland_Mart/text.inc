@@ -7,7 +7,7 @@ FourIsland_Mart_Text_LoreleiGrewUpOnThisIsland::
     .string "tyke, I taught her about DAEMON.$"
 
 FourIsland_Mart_Text_IcefallCaveIsFrigid::
-    .string "The SEVII ISLANDS are warm,\n"
+    .string "THE MARGINS are warm,\n"
     .string "people say, and they are.\p"
     .string "All but one room of them.\p"
     .string "STILLFALL CAVE is frigid because\n"
