@@ -85,3 +85,20 @@ CinnabarIsland_Text_IfYouHaveTriPassYouCanGoAgain::
     .string "ARDOR PORT.\p"
     .string "All right, thanks for your company!$"
 
+
+@  T-30. After she is read to (FLAG_CRYSTAL_READ_PAYLOAD), the sign has
+@  changed and nobody changed it.
+@
+@  4.4 is explicit that the gold over the old name is "not a gesture; it is a
+@  fact with a date", so REPAINTING IT WOULD BE A GESTURE -- the game taking
+@  a victory lap over a man it has spent forty hours refusing to sneer at.
+@  The leaf is simply not holding.
+@
+@  The inversion is done by ORDER and nothing else: the buried name is now
+@  the first thing you read and the gold one is last. No line remarks on it.
+CinnabarIsland_Text_PokemonLabGoldNotHolding::
+	.string "CLEAR LABORATORY\p"
+	.string "Gold leaf, in pieces on the step.\p"
+	.string "Nobody has touched it. It is not\n"
+	.string "holding.\p"
+	.string "SCORN SOLUTIONS$"

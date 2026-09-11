@@ -341,7 +341,15 @@ CinnabarIsland_EventScript_IslandSign::
 	end
 
 CinnabarIsland_EventScript_PokemonLabSign::
+	goto_if_set FLAG_CRYSTAL_READ_PAYLOAD, CinnabarIsland_EventScript_PokemonLabSignGoldNotHolding
 	msgbox CinnabarIsland_Text_PokemonLab, MSGBOX_SIGN
+	end
+
+@  T-30. The same two bg_events, a second state. Nothing announces it and
+@  nothing sends the player back here -- 4.4's sign was always something you
+@  had to look at, and so is this.
+CinnabarIsland_EventScript_PokemonLabSignGoldNotHolding::
+	msgbox CinnabarIsland_Text_PokemonLabGoldNotHolding, MSGBOX_SIGN
 	end
 
 CinnabarIsland_EventScript_GymSign::
