@@ -39,10 +39,35 @@ SaffronCity_MrPsychicsHouse_EventScript_OwlScene::
 	msgbox SaffronCity_MrPsychicsHouse_Text_OwlConcession
 	msgbox SaffronCity_MrPsychicsHouse_Text_OwlSomethingInTheRoom
 	setflag FLAG_OWL_CONCEDED
-	release
+	goto SaffronCity_MrPsychicsHouse_EventScript_TryFlight
 	end
 
 SaffronCity_MrPsychicsHouse_EventScript_OwlWroteToThem::
 	msgbox SaffronCity_MrPsychicsHouse_Text_OwlWroteToThem
+	goto SaffronCity_MrPsychicsHouse_EventScript_TryFlight
+	end
+
+@  T-29. The flight, and it has TWO entry points on purpose. The package
+@  comes from the Warehouse and the concession happens here, and nothing in
+@  the game forces that order -- so a player who reaches the Owl without the
+@  package is not stranded: the flight simply waits for the next time they
+@  speak to him.
+@
+@  4.34: the argument comes before the reunion, because the argument is what
+@  causes it. There is no takeoff to look at. It works out where she is and
+@  it goes, which is what 4.14 says it does.
+SaffronCity_MrPsychicsHouse_EventScript_TryFlight::
+	goto_if_set FLAG_CRYSTAL_READ_PAYLOAD, SaffronCity_MrPsychicsHouse_EventScript_NoFlight
+	checkitem ITEM_LETTER
+	goto_if_eq VAR_RESULT, FALSE, SaffronCity_MrPsychicsHouse_EventScript_NoFlight
+	closemessage
+	delay 60
+	fadescreen FADE_TO_BLACK
+	warp MAP_BIRTH_ISLAND_EXTERIOR, 15, 22
+	waitstate
+	release
+	end
+
+SaffronCity_MrPsychicsHouse_EventScript_NoFlight::
 	release
 	end

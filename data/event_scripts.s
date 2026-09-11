@@ -617,6 +617,10 @@ gStdScriptsEnd::
 	.include "data/maps/CeladonCity/text.inc"
 	.include "data/maps/FuchsiaCity/text.inc"
 	.include "data/maps/CinnabarIsland/text.inc"
+@  T-29. THE ANNEX had no text.inc at all -- it is an event island nobody
+@  could reach, so nobody ever wrote a line for it. A new one has to be
+@  listed here by hand; the map directory alone is not enough.
+	.include "data/maps/BirthIsland_Exterior/text.inc"
 	.include "data/maps/SaffronCity/text.inc"
 	.include "data/maps/OneIsland/text.inc"
 	.include "data/maps/TwoIsland/text.inc"

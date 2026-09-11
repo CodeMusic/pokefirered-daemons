@@ -9,6 +9,13 @@ BirthIsland_Exterior_OnReturnToField::
 	end
 
 BirthIsland_Exterior_OnTransition::
+	@  T-29. THE ANNEX is reachable by one thing and it is not a boat, so the
+	@  event-island content that nobody here can reach is turned off rather
+	@  than left standing next to the last scene. A legendary puzzle ten tiles
+	@  from 4.34's ending would be absurd, and the daemon on it is one of
+	@  8.2b's sixty-nine unnamed.
+	setflag FLAG_HIDE_DEOXYS
+	setflag FLAG_HIDE_BIRTH_ISLAND_METEORITE
 	setworldmapflag FLAG_WORLD_MAP_BIRTH_ISLAND_EXTERIOR
 	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_DEOXYS_N
 	setvar VAR_DEOXYS_INTERACTION_STEP_COUNTER, 0
@@ -112,4 +119,44 @@ Movement_DeoxysApproach:
 	walk_slower_down
 	walk_slower_down
 	walk_slower_down
+	step_end
+
+@  T-29 / 4.34. The last scene, moved here from the lab: 8.2a had her read it
+@  in a room she had been thrown out of, which was the one thing that section
+@  got wrong. Every other clause of it survives -- it goes to CRYSTAL and TY
+@  does not, and the repair is a fact delivered rather than a feeling
+@  exchanged (4.14), because a feeling exchanged is what 4.3 says does not
+@  transmit.
+BirthIsland_Exterior_EventScript_Crystal::
+	lock
+	faceplayer
+	msgbox BirthIsland_Exterior_Text_CrystalDoesNotAsk
+	closemessage
+	delay 30
+	msgbox BirthIsland_Exterior_Text_PayloadTurnedItOver
+	closemessage
+	removeitem ITEM_LETTER
+	delay 30
+	msgbox BirthIsland_Exterior_Text_PayloadWhere
+	closemessage
+	delay 30
+	applymovement LOCALID_ANNEX_CRYSTAL, BirthIsland_Exterior_Movement_CrystalWalksToTheWater
+	waitmovement 0
+	delay 150
+	@  She goes home, and the building she was locked out of stops holding its
+	@  new name (T-30). Neither is announced.
+	setflag FLAG_CRYSTAL_READ_PAYLOAD
+	clearflag FLAG_CRYSTAL_GONE
+	clearflag FLAG_HIDE_OAK_IN_HIS_LAB
+	fadescreen FADE_TO_BLACK
+	warp MAP_PALLET_TOWN_PLAYERS_HOUSE_2F, 10, 4
+	waitstate
+	releaseall
+	end
+
+BirthIsland_Exterior_Movement_CrystalWalksToTheWater::
+	walk_up
+	walk_up
+	walk_up
+	face_up
 	step_end

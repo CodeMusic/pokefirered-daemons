@@ -106,7 +106,7 @@ VermilionCity_Text_OhAuroraTicketTakeYouToBirthIsland::
     .string "Oh! That's an AURORATICKET!\n"
     .string "Now that is rare.\p"
     .string "We'll be happy to take you to\n"
-    .string "BIRTH ISLAND anytime.$"
+    .string "THE ANNEX anytime.$"
 
 VermilionCity_Text_BoardSeagallopFerry::
     .string "Would you like to board\n"
