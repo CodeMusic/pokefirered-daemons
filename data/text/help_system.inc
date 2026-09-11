@@ -39,8 +39,8 @@ Help_Text_DescAboutThisGame::
 	.string "about this game.$"
 
 Help_Text_DescTypeMatchupList::
-	.string "The matchups of DAEMON types and\n"
-	.string "moves are listed.$"
+	.string "The matchups of DAEMON types and ROUTINES\n"
+	.string "are listed.$"
 
 Help_Text_DescExit::
 	.string "Select to exit the HELP System.$"
@@ -131,16 +131,16 @@ Help_Text_WhereDoMonsAppear::
 	.string "Where do DAEMONS appear?$"
 
 Help_Text_WhatAreMoves::
-	.string "What are DAEMON moves?$"
+	.string "What are DAEMON ROUTINES?$"
 
 Help_Text_WhatAreHiddenMoves::
-	.string "What are HIDDEN moves?$"
+	.string "What are HIDDEN ROUTINES?$"
 
 Help_Text_WhatMovesShouldIUse::
-	.string "What moves should I use?$"
+	.string "What ROUTINES should I invoke?$"
 
 Help_Text_WantToAddMoreMoves::
-	.string "I want to add more moves.$"
+	.string "I want to add more ROUTINES.$"
 
 Help_Text_WantToMakeMonStronger::
 	.string "I want to make my DAEMONS stronger.$"
@@ -170,7 +170,7 @@ Help_Text_WhatIsThatPersonLike::
 	.string "What is that person like?$"
 
 Help_Text_WhatDoesHiddenMoveDo::
-	.string "What does a HIDDEN move do?$"
+	.string "What does a HIDDEN ROUTINE do?$"
 
 Help_Text_WhatDoIDoInSafari::
 	.string "What do I do in a SAFARI GAME?$"
@@ -210,12 +210,11 @@ Help_Text_AnswerCantGetOutOfRoom::
 	.string "advance.$"
 
 Help_Text_AnswerCantFindPersonIWant::
-	.string "This isn't something you should worry\n"
-	.string "about too much.\l"
-	.string "Talk to other people, check signs,\l"
-	.string "check things, and so on.\l"
-	.string "Sometimes, you may need to just move\l"
-	.string "to a new town or place.$"
+	.string "This isn't something you should worry about\n"
+	.string "too much. Talk to other people, check signs,\l"
+	.string "check things, and so on. Sometimes, you may\l"
+	.string "need to just move to a new town or\l"
+	.string "place.$"
 
 Help_Text_AnswerTalkedToEveryoneNowWhat::
 	.string "Try moving on to a new road, town, or\n"
@@ -388,21 +387,21 @@ Help_Text_AnswerWhereDoMonsAppear::
 
 Help_Text_AnswerWhatAreMoves::
 	.string "DAEMON may learn up to four different\n"
-	.string "techniques, or moves. There is a great\l"
-	.string "variety of moves including attacks and\l"
+	.string "techniques, or ROUTINES. There is a great\l"
+	.string "variety of ROUTINES including attacks and\l"
 	.string "those with special effects. The kinds of\l"
-	.string "moves that can be learned vary for\l"
-	.string "each DAEMON. Some moves can be\l"
-	.string "learned from machines.$"
+	.string "ROUTINES that can be learned vary for each\l"
+	.string "DAEMON. Some ROUTINES can be learned from\l"
+	.string "machines.$"
 
 Help_Text_AnswerWhatAreHiddenMoves::
-	.string "HIDDEN moves are those that are\n"
-	.string "especially important for your\l"
-	.string "adventure. To use such a move outside\l"
-	.string "of battle, open the “DAEMON” MENU and\l"
-	.string "make the DAEMON that knows the move\l"
-	.string "use it. A HALTED DAEMON may use a\l"
-	.string "HIDDEN move outside of battle.$"
+	.string "HIDDEN ROUTINES are those that are\n"
+	.string "especially important for your adventure. To\l"
+	.string "invoke such a ROUTINE outside of battle,\l"
+	.string "open the “DAEMON” MENU and make the DAEMON\l"
+	.string "that knows the ROUTINE invoke it. A HALTED\l"
+	.string "DAEMON may invoke a HIDDEN ROUTINE outside\l"
+	.string "battle.$"
 
 Help_Text_AnswerWhatMovesShouldIUse::
 	.string "Select “INVOKE,” and the MENU of\n"
@@ -415,11 +414,11 @@ Help_Text_AnswerWhatMovesShouldIUse::
 
 Help_Text_AnswerWantToAddMoreMoves::
 	.string "The most a DAEMON can learn is four\n"
-	.string "moves. They are learned as the DAEMON\l"
-	.string "levels up. It can also be taught a\l"
-	.string "move using a TM (Technical Machine) or\l"
-	.string "HM (Hidden Machine). There are also\l"
-	.string "people who teach moves.$"
+	.string "ROUTINES. They are learned as the DAEMON\l"
+	.string "levels up. It can also be taught a ROUTINE\l"
+	.string "using a TM (Technical Machine) or HM (Hidden\l"
+	.string "Machine). There are also people who teach\l"
+	.string "ROUTINES.$"
 
 Help_Text_AnswerWantToMakeMonStronger::
 	.string "The key to making your DAEMON strong is\n"
@@ -487,13 +486,13 @@ Help_Text_AnswerWhatIsThatPersonLike::
 	.string "try it out.$"
 
 Help_Text_AnswerWhatDoesHiddenMoveDo::
-	.string "A HIDDEN move is taught to a DAEMON\n"
+	.string "A HIDDEN ROUTINE is taught to a DAEMON\n"
 	.string "using an HM (Hidden Machine). A HIDDEN\l"
-	.string "move is important for helping your\l"
-	.string "adventure. For example, one is used to\l"
-	.string "light up dark caves. Another cuts down\l"
-	.string "small trees. There is one for traveling\l"
-	.string "on water, and so on.$"
+	.string "ROUTINE is important for helping your\l"
+	.string "adventure. For example, one is used to light\l"
+	.string "up dark caves. Another cuts down small\l"
+	.string "trees. There is one for traveling on water,\l"
+	.string "and so on.$"
 
 Help_Text_AnswerWhatDoIDoInSafari::
 	.string "Try to bind wild DAEMON by throwing the\n"
@@ -570,7 +569,7 @@ Help_Text_UsingHM::
 	.string "    Using an HM$"
 
 Help_Text_UsingMoveOutsideOfBattle::
-	.string "Using a move outside of battle$"
+	.string "Invoking a ROUTINE outside of battle$"
 
 Help_Text_RidingBicycle::
 	.string "    Riding the BICYCLE$"
@@ -783,13 +782,11 @@ Help_Text_HowToUseTownMap::
 	.string "{CIRCLE_4} Select “USE” to open the SITEMAP.$"
 
 Help_Text_HowToUseTM::
-	.string "{CIRCLE_1} Open the MENU.\n"
-	.string "{CIRCLE_2} Open the “KEY ITEMS” POCKET in the\n"
-	.string "   “BAG.”\n"
-	.string "{CIRCLE_3} “OPEN” the TM CASE.\n"
-	.string "{CIRCLE_4} Select and “USE” a TM.\n"
-	.string "{CIRCLE_5} Select a DAEMON that can learn the\n"
-	.string "   move in the TM.$"
+	.string "{CIRCLE_1} Open the MENU. {CIRCLE_2} Open the “KEY ITEMS”\n"
+	.string "POCKET in the “BAG.” {CIRCLE_3} “OPEN” the TM CASE.\l"
+	.string "{CIRCLE_4} Select and “USE” a TM. {CIRCLE_5} Select a\l"
+	.string "DAEMON that can learn the ROUTINE in the\l"
+	.string "TM.$"
 
 Help_Text_HowToUseHM::
 	.string "{CIRCLE_1} Open the MENU.\n"
@@ -801,13 +798,11 @@ Help_Text_HowToUseHM::
 	.string "HMs are hard to remove, so be careful!$"
 
 Help_Text_HowToUseMoveOutsideOfBattle::
-	.string "{CIRCLE_1} Open the MENU.\n"
-	.string "{CIRCLE_2} Select “DAEMON.”\n"
-	.string "{CIRCLE_3} Select a DAEMON that knows an\n"
-	.string "   HM move. The usable HM move(s)\n"
-	.string "   will be shown in blue. Select and\n"
-	.string "   use the desired move to destroy an\n"
-	.string "   obstacle, fly, surf, etc.$"
+	.string "{CIRCLE_1} Open the MENU. {CIRCLE_2} Select “DAEMON.” {CIRCLE_3}\n"
+	.string "Select a DAEMON that knows an HM ROUTINE.\l"
+	.string "The usable HM ROUTINE(s) will be shown in\l"
+	.string "blue. Select and invoke the desired ROUTINE\l"
+	.string "destroy an obstacle, fly, surf, etc.$"
 
 Help_Text_HowToRideBicycle::
 	.string "{CIRCLE_1} Open the MENU. Open the\n"
@@ -927,9 +922,9 @@ Help_Text_HowToOpenMenu::
 	.string "something, battling, etc.$"
 
 Help_Text_HowToUseFight::
-	.string "{CIRCLE_1} Select “INVOKE.”\n"
-	.string "{CIRCLE_2} Select one of the moves shown,\n"
-	.string "and that move will be used!$"
+	.string "{CIRCLE_1} Select “INVOKE.” {CIRCLE_2} Select one of the\n"
+	.string "ROUTINES shown, and that ROUTINE will be\l"
+	.string "used!$"
 
 Help_Text_HowToUsePokemon2::
 	.string "{CIRCLE_1} Select “DAEMON.”\n"
@@ -1061,7 +1056,7 @@ Help_Text_EXP::
 	.string "EXP. {LEFT_PAREN}EXP. Points{RIGHT_PAREN}$"
 
 Help_Text_Moves::
-	.string "MOVES$"
+	.string "ROUTINES$"
 
 Help_Text_Attack::
 	.string "ATTACK$"
@@ -1097,7 +1092,7 @@ Help_Text_Money::
 	.string "MONEY$"
 
 Help_Text_MoveType::
-	.string "MOVE TYPE$"
+	.string "ROUTINE TYPE$"
 
 Help_Text_Nature::
 	.string "NATURE$"
@@ -1163,7 +1158,7 @@ Help_Text_HM::
 	.string "HM$"
 
 Help_Text_HMMove::
-	.string "HM MOVE$"
+	.string "HM ROUTINE$"
 
 Help_Text_Evolution::
 	.string "EVOLUTION$"
@@ -1203,19 +1198,18 @@ Help_Text_DefineEXP::
 
 Help_Text_DefineMoves::
 	.string "DAEMON may learn up to four different\n"
-	.string "moves. There are many kinds of moves\l"
+	.string "ROUTINES. There are many kinds of ROUTINES\l"
 	.string "including attacks and those with special\l"
-	.string "effects. The kinds of moves that can be\l"
+	.string "effects. The kinds of ROUTINES that can be\l"
 	.string "learned vary for each DAEMON. Some\l"
-	.string "moves can be learned from items.$"
+	.string "ROUTINES can be learned from items.$"
 
 Help_Text_DefineAttack::
-	.string "ATTACK indicates the power of an\n"
-	.string "offensive move. The higher this stat,\l"
-	.string "the more powerful the move.\l"
-	.string "It is applied for the following move\l"
-	.string "types: CONTENT, CORRUPT, STRATUM,\l"
-	.string "VECTOR, SWARM, LOGIC, LEGACY,\l"
+	.string "ATTACK indicates the power of an offensive\n"
+	.string "ROUTINE. The higher this stat, the more\l"
+	.string "powerful the ROUTINE. It is applied for the\l"
+	.string "following ROUTINE types: CONTENT, CORRUPT,\l"
+	.string "STRATUM, VECTOR, SWARM, LOGIC, LEGACY,\l"
 	.string "LATENT and HARDENED.$"
 
 Help_Text_DefineDefense::
@@ -1225,13 +1219,13 @@ Help_Text_DefineDefense::
 	.string "sustained from a foe's physical hit.$"
 
 Help_Text_DefineSpAtk::
-	.string "SP. ATK (Special Attack) indicates the\n"
-	.string "power of a special attack move. The\l"
-	.string "higher this stat, the more powerful the\l"
-	.string "special attack move. It is applied for\l"
-	.string "the following move types: ENTROPY,\l"
-	.string "FLOW, SIGNAL, GROWTH, FROZEN,\l"
-	.string "CONTEXT, EMERGENT and OPAQUE.$"
+	.string "SP. ATK (Special Attack) indicates the power\n"
+	.string "of a special attack ROUTINE. The higher this\l"
+	.string "stat, the more powerful the special attack\l"
+	.string "ROUTINE. It is applied for the following\l"
+	.string "ROUTINE types: ENTROPY, FLOW, SIGNAL,\l"
+	.string "GROWTH, FROZEN, CONTEXT, EMERGENT and\l"
+	.string "OPAQUE.$"
 
 Help_Text_DefineSpDef::
 	.string "SP. DEF (Special Defense) indicates the\n"
@@ -1241,27 +1235,27 @@ Help_Text_DefineSpDef::
 	.string "attack.$"
 
 Help_Text_DefineSpeed::
-	.string "SPEED indicates the agility of a\n"
-	.string "DAEMON. If this stat exceeds the\l"
-	.string "foe's in battle, the DAEMON can make\l"
-	.string "a move before its slower opponent.$"
+	.string "SPEED indicates the agility of a DAEMON. If\n"
+	.string "this stat exceeds the foe's in battle, the\l"
+	.string "DAEMON can make a ROUTINE before its slower\l"
+	.string "opponent.$"
 
 Help_Text_DefineLevel::
 	.string "Lv. (Level) indicates the growth and\n"
-	.string "strength of a DAEMON. In general, when\l"
-	.string "a DAEMON levels up, its stats such as\l"
-	.string "HP, ATTACK, and DEFENSE rise, making it\l"
-	.string "stronger. DAEMON may learn a new move\l"
+	.string "strength of a DAEMON. In general, when a\l"
+	.string "DAEMON levels up, its stats such as HP,\l"
+	.string "ATTACK, and DEFENSE rise, making it\l"
+	.string "stronger. DAEMON may learn a new ROUTINE\l"
 	.string "upon leveling up.$"
 
 Help_Text_DefineType::
-	.string "DAEMON and moves are classified by\n"
-	.string "type. Every type has advantageous and\l"
+	.string "DAEMON and ROUTINES are classified by type.\n"
+	.string "Every type has advantageous and\l"
 	.string "disadvantageous matchups against other\l"
 	.string "types. For example, like a rock-\l"
-	.string "paper-scissors game, the FLOW type is\l"
-	.string "strong against the ENTROPY type and\l"
-	.string "weak against the GROWTH type.$"
+	.string "paper-scissors game, the FLOW type is strong\l"
+	.string "against the ENTROPY type and weak against\l"
+	.string "the GROWTH type.$"
 
 Help_Text_DefineOT::
 	.string "OT stands for “Original USER,” the first\n"
@@ -1292,12 +1286,12 @@ Help_Text_DefineMoney::
 	.string "shopping at REPOS!$"
 
 Help_Text_DefineMoveType::
-	.string "Moves are also classified by types. If\n"
-	.string "a DAEMON of a certain type uses a move\l"
-	.string "of the same type, the move's power is\l"
-	.string "boosted. If the move's type has a\l"
-	.string "matchup advantage against the target,\l"
-	.string "its effectiveness is also boosted.$"
+	.string "ROUTINES are also classified by types. If a\n"
+	.string "DAEMON of a certain type invokes a ROUTINE\l"
+	.string "of the same type, the ROUTINE's power is\l"
+	.string "boosted. If the ROUTINE's type has a\l"
+	.string "matchup advantage against the target, its\l"
+	.string "effectiveness is also boosted.$"
 
 Help_Text_DefineNature::
 	.string "All DAEMONS have a personality, or\n"
@@ -1316,9 +1310,9 @@ Help_Text_DefineIDNo::
 Help_Text_DefinePP::
 	.string "MP stands for “Power Points.” It\n"
 	.string "indicates the number of times a certain\l"
-	.string "move can be used in battle. Like HP,\l"
-	.string "MP can be restored by visiting a DAEMON\l"
-	.string "CENTER or using certain items.$"
+	.string "ROUTINE can be invoked in battle. Like\l"
+	.string "HP, MP can be restored by visiting a\l"
+	.string "CHECKPOINT or using certain items.$"
 
 Help_Text_DefinePower::
 	.string "POWER indicates the strength of an\n"
@@ -1327,10 +1321,10 @@ Help_Text_DefinePower::
 	.string "inflicted on the foe!$"
 
 Help_Text_DefineAccuracy::
-	.string "ACCURACY indicates the probability of\n"
-	.string "the move hitting the foe. The higher\l"
-	.string "this number, the more likely the move\l"
-	.string "will strike the target.$"
+	.string "ACCURACY indicates the probability of the\n"
+	.string "ROUTINE hitting the foe. The higher this\l"
+	.string "number, the more likely the ROUTINE will\l"
+	.string "strike the target.$"
 
 Help_Text_DefineFNT::
 	.string "FNT stands for “HALTED.” A DAEMON\n"
@@ -1419,48 +1413,46 @@ Help_Text_DefineCancel2::
 	.string "return to the MENU.$"
 
 Help_Text_DefineTM::
-	.string "A TM (Technical Machine) is a device\n"
-	.string "used to teach a move to a DAEMON.\l"
-	.string "There are many different kinds. Moves\l"
-	.string "can be taught only to those DAEMONS\l"
-	.string "capable of using them. A TM breaks\l"
-	.string "after a single use.$"
+	.string "A TM (Technical Machine) is a device used to\n"
+	.string "teach a ROUTINE to a DAEMON. There are\l"
+	.string "many different kinds. ROUTINES can be taught\l"
+	.string "only to those DAEMONS capable of using\l"
+	.string "them. A TM breaks after a single use.$"
 
 Help_Text_DefineHM::
-	.string "An HM (Hidden Machine) is a device used\n"
-	.string "to teach a HIDDEN move to a DAEMON. A\l"
-	.string "HIDDEN move can be taught only to\l"
-	.string "those DAEMONS capable of using it.\l"
-	.string "Unlike a TM, an HM can be used over\l"
-	.string "and over. A HIDDEN move can be tough\l"
-	.string "for a DAEMON to forget.$"
+	.string "An HM (Hidden Machine) is a device used to\n"
+	.string "teach a HIDDEN ROUTINE to a DAEMON. A\l"
+	.string "HIDDEN ROUTINE can be taught only to those\l"
+	.string "DAEMONS capable of using it. Unlike a TM, an\l"
+	.string "HM can be used over and over. A HIDDEN\l"
+	.string "ROUTINE can be tough for a DAEMON to\l"
+	.string "forget.$"
 
 Help_Text_DefineHMMove::
-	.string "HIDDEN moves are those that are\n"
-	.string "especially important for your\l"
-	.string "adventure. To use such a move outside\l"
-	.string "of battle, open the “DAEMON” MENU and\l"
-	.string "make the DAEMON that knows the move\l"
-	.string "use it. A HALTED DAEMON may use a\l"
-	.string "HIDDEN move outside of battle.$"
+	.string "HIDDEN ROUTINES are those that are\n"
+	.string "especially important for your adventure. To\l"
+	.string "invoke such a ROUTINE outside of battle,\l"
+	.string "open the “DAEMON” MENU and make the DAEMON\l"
+	.string "that knows the ROUTINE invoke it. A HALTED\l"
+	.string "DAEMON may invoke a HIDDEN ROUTINE outside\l"
+	.string "battle.$"
 
 Help_Text_DefineEvolution::
-	.string "Among DAEMON, there are some that\n"
-	.string "undergo major changes (evolution) upon\l"
-	.string "growing to certain levels. Evolution\l"
-	.string "causes a DAEMON to alter form, change\l"
-	.string "its name, and perhaps change the moves\l"
-	.string "it may learn. Some DAEMONS evolve due\l"
-	.string "to reasons other than leveling up.$"
+	.string "Among DAEMON, there are some that undergo\n"
+	.string "major changes (evolution) upon growing to\l"
+	.string "certain levels. Evolution causes a DAEMON to\l"
+	.string "alter form, change its name, and perhaps\l"
+	.string "change the ROUTINES it may learn. Some\l"
+	.string "DAEMONS evolve due to reasons other than\l"
+	.string "leveling up.$"
 
 Help_Text_DefineStatusProblem::
-	.string "Status problems include:\n"
-	.string "Suspension: Can't use moves.\l"
-	.string "LEAKING: steady HP loss.\l"
-	.string "Throttling: May prevent moves.\l"
-	.string "Overheating: HP loss, less ATTACK.\l"
-	.string "Hang: Can't use moves.\l"
-	.string "These can be healed with items, etc.$"
+	.string "Status problems include: Suspension: Can't\n"
+	.string "invoke ROUTINES. LEAKING: steady HP loss.\l"
+	.string "Throttling: May prevent ROUTINES.\l"
+	.string "Overheating: HP loss, less ATTACK. Hang:\l"
+	.string "Can't invoke ROUTINES. These can be healed\l"
+	.string "with items, etc.$"
 
 Help_Text_DefinePokemon::
 	.string "DAEMON is a name given to describe\n"
@@ -1549,9 +1541,9 @@ Help_Text_DescGameFundamentals2::
 	.string "far away.$"
 
 Help_Text_DescGameFundamentals3::
-	.string "Some of the obstacles in your way can\n"
-	.string "be removed once your DAEMON learn\l"
-	.string "specific moves.$"
+	.string "Some of the obstacles in your way can be\n"
+	.string "removed once your DAEMON learn specific\l"
+	.string "ROUTINES.$"
 
 Help_Text_DescWhatArePokemon::
 	.string "DAEMONS are wondrous creatures that\n"
@@ -1565,114 +1557,114 @@ Help_Text_UsingTypeMatchupList::
 	.string "Using the Type Matchup List$"
 
 Help_Text_OwnMoveDark::
-	.string "Own move type: OPAQUE$"
+	.string "Own ROUTINE type: OPAQUE$"
 
 Help_Text_OwnPokemonDark::
 	.string "Own DAEMON type: OPAQUE$"
 
 Help_Text_OwnMoveRock::
-	.string "Own move type: LEGACY$"
+	.string "Own ROUTINE type: LEGACY$"
 
 Help_Text_OwnPokemonRock::
 	.string "Own DAEMON type: LEGACY$"
 
 Help_Text_OwnMovePsychic::
-	.string "Own move type: CONTEXT$"
+	.string "Own ROUTINE type: CONTEXT$"
 
 Help_Text_OwnPokemonPsychic::
 	.string "Own DAEMON type: CONTEXT$"
 
 Help_Text_OwnMoveFighting::
-	.string "Own move type: LOGIC$"
+	.string "Own ROUTINE type: LOGIC$"
 
 Help_Text_OwnPokemonFighting::
 	.string "Own DAEMON type: LOGIC$"
 
 Help_Text_OwnMoveGrass::
-	.string "Own move type: GROWTH$"
+	.string "Own ROUTINE type: GROWTH$"
 
 Help_Text_OwnPokemonGrass::
 	.string "Own DAEMON type: GROWTH$"
 
 Help_Text_OwnMoveGhost::
-	.string "Own move type: LATENT$"
+	.string "Own ROUTINE type: LATENT$"
 
 Help_Text_OwnPokemonGhost::
 	.string "Own DAEMON type: LATENT$"
 
 Help_Text_OwnMoveIce::
-	.string "Own move type: FROZEN$"
+	.string "Own ROUTINE type: FROZEN$"
 
 Help_Text_OwnPokemonIce::
 	.string "Own DAEMON type: FROZEN$"
 
 Help_Text_OwnMoveGround::
-	.string "Own move type: STRATUM$"
+	.string "Own ROUTINE type: STRATUM$"
 
 Help_Text_OwnPokemonGround::
 	.string "Own DAEMON type: STRATUM$"
 
 Help_Text_OwnMoveElectric::
-	.string "Own move type: SIGNAL$"
+	.string "Own ROUTINE type: SIGNAL$"
 
 Help_Text_OwnPokemonElectric::
 	.string "Own DAEMON type: SIGNAL$"
 
 Help_Text_OwnMovePoison::
-	.string "Own move type: CORRUPT$"
+	.string "Own ROUTINE type: CORRUPT$"
 
 Help_Text_OwnPokemonPoison::
 	.string "Own DAEMON type: CORRUPT$"
 
 Help_Text_OwnMoveDragon::
-	.string "Own move type: EMERGENT$"
+	.string "Own ROUTINE type: EMERGENT$"
 
 Help_Text_OwnPokemonDragon::
 	.string "Own DAEMON type: EMERGENT$"
 
 Help_Text_OwnMoveNormal::
-	.string "Own move type: CONTENT$"
+	.string "Own ROUTINE type: CONTENT$"
 
 Help_Text_OwnPokemonNormal::
 	.string "Own DAEMON type: CONTENT$"
 
 Help_Text_OwnMoveSteel::
-	.string "Own move type: HARDENED$"
+	.string "Own ROUTINE type: HARDENED$"
 
 Help_Text_OwnPokemonSteel::
 	.string "Own DAEMON type: HARDENED$"
 
 Help_Text_OwnMoveFlying::
-	.string "Own move type: VECTOR$"
+	.string "Own ROUTINE type: VECTOR$"
 
 Help_Text_OwnPokemonFlying::
 	.string "Own DAEMON type: VECTOR$"
 
 Help_Text_OwnMoveFire::
-	.string "Own move type: ENTROPY$"
+	.string "Own ROUTINE type: ENTROPY$"
 
 Help_Text_OwnPokemonFire::
 	.string "Own DAEMON type: ENTROPY$"
 
 Help_Text_OwnMoveWater::
-	.string "Own move type: FLOW$"
+	.string "Own ROUTINE type: FLOW$"
 
 Help_Text_OwnPokemonWater::
 	.string "Own DAEMON type: FLOW$"
 
 Help_Text_OwnMoveBug::
-	.string "Own move type: SWARM$"
+	.string "Own ROUTINE type: SWARM$"
 
 Help_Text_OwnPokemonBug::
 	.string "Own DAEMON type: SWARM$"
 
 Help_Text_HowToUseTypeMatchupList::
-	.string "Depending on the matchup of the move\n"
+	.string "Depending on the matchup of the ROUTINE\n"
 	.string "type and the target DAEMON's type, the\l"
-	.string "move's effectiveness varies: {CIRCLE_DOT}: Super\l"
-	.string "effective! {TRIANGLE}: Not very effective {BIG_MULT_X}: Not\l"
-	.string "effective at all (No changes for other\l"
-	.string "matchups.)$"
+	.string "ROUTINE's effectiveness varies: {CIRCLE_DOT}:\l"
+	.string "Super effective! {TRIANGLE}: Not very\l"
+	.string "effective {BIG_MULT_X}: Not effective at all (No\l"
+	.string "changes for other matchups.)$"
 
 Help_Text_TypeMatchupOwnMoveDark::
 	.string "Effect on the opposing DAEMON:\p"
@@ -1680,7 +1672,7 @@ Help_Text_TypeMatchupOwnMoveDark::
 	.string "   {TRIANGLE}: LOGIC, OPAQUE, HARDENED$"
 
 Help_Text_TypeMatchupOwnPokemonDark::
-	.string "Effect of foe's move on own DAEMON:\p"
+	.string "Effect of foe's ROUTINE on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: LOGIC, SWARM\p"
 	.string "   {TRIANGLE}: LATENT, OPAQUE\p"
 	.string "   {BIG_MULT_X}: CONTEXT$"
@@ -1691,7 +1683,7 @@ Help_Text_TypeMatchupOwnMoveRock::
 	.string "   {TRIANGLE}: LOGIC, STRATUM, HARDENED$"
 
 Help_Text_TypeMatchupOwnPokemonRock::
-	.string "Effect of foe's move on own DAEMON:\p"
+	.string "Effect of foe's ROUTINE on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: FLOW, GROWTH, LOGIC,\n"
 	.string "       STRATUM, HARDENED\p"
 	.string "   {TRIANGLE}: CONTENT, ENTROPY, CORRUPT,\n"
@@ -1704,7 +1696,7 @@ Help_Text_TypeMatchupOwnMovePsychic::
 	.string "   {BIG_MULT_X}: OPAQUE$"
 
 Help_Text_TypeMatchupOwnPokemonPsychic::
-	.string "Effect of foe's move on own DAEMON:\p"
+	.string "Effect of foe's ROUTINE on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: SWARM, LATENT, OPAQUE\p"
 	.string "   {TRIANGLE}: LOGIC, CONTEXT$"
 
@@ -1717,7 +1709,7 @@ Help_Text_TypeMatchupOwnMoveFighting::
 	.string "   {BIG_MULT_X}: LATENT$"
 
 Help_Text_TypeMatchupOwnPokemonFighting::
-	.string "Effect of foe's move on own DAEMON:\p"
+	.string "Effect of foe's ROUTINE on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: VECTOR, CONTEXT\p"
 	.string "   {TRIANGLE}: SWARM, LEGACY, OPAQUE$"
 
@@ -1729,7 +1721,7 @@ Help_Text_TypeMatchupOwnMoveGrass::
 	.string "       SWARM, EMERGENT, HARDENED$"
 
 Help_Text_TypeMatchupOwnPokemonGrass::
-	.string "Effect of foe's move on own DAEMON:\p"
+	.string "Effect of foe's ROUTINE on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: ENTROPY, FROZEN, CORRUPT,\n"
 	.string "       VECTOR, SWARM\p"
 	.string "   {TRIANGLE}: FLOW, SIGNAL, GROWTH, STRATUM$"
@@ -1741,7 +1733,7 @@ Help_Text_TypeMatchupOwnMoveGhost::
 	.string "   {BIG_MULT_X}: CONTENT$"
 
 Help_Text_TypeMatchupOwnPokemonGhost::
-	.string "Effect of foe's move on own DAEMON:\p"
+	.string "Effect of foe's ROUTINE on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: LATENT, OPAQUE\p"
 	.string "   {TRIANGLE}: CORRUPT, SWARM\p"
 	.string "   {BIG_MULT_X}: CONTENT, LOGIC$"
@@ -1754,7 +1746,7 @@ Help_Text_TypeMatchupOwnMoveIce::
 	.string "       HARDENED$"
 
 Help_Text_TypeMatchupOwnPokemonIce::
-	.string "Effect of foe's move on own DAEMON:\p"
+	.string "Effect of foe's ROUTINE on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: ENTROPY, LOGIC, LEGACY,\n"
 	.string "       HARDENED\p"
 	.string "   {TRIANGLE}: FROZEN$"
@@ -1768,7 +1760,7 @@ Help_Text_TypeMatchupOwnMoveGround::
 	.string "   {BIG_MULT_X}: VECTOR$"
 
 Help_Text_TypeMatchupOwnPokemonGround::
-	.string "Effect of foe's move on own DAEMON:\p"
+	.string "Effect of foe's ROUTINE on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: FLOW, GROWTH, FROZEN\p"
 	.string "   {TRIANGLE}: CORRUPT, LEGACY\p"
 	.string "   {BIG_MULT_X}: SIGNAL$"
@@ -1780,7 +1772,7 @@ Help_Text_TypeMatchupOwnMoveElectric::
 	.string "   {BIG_MULT_X}: STRATUM$"
 
 Help_Text_TypeMatchupOwnPokemonElectric::
-	.string "Effect of foe's move on own DAEMON:\p"
+	.string "Effect of foe's ROUTINE on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: STRATUM\p"
 	.string "   {TRIANGLE}: SIGNAL, VECTOR, HARDENED$"
 
@@ -1792,7 +1784,7 @@ Help_Text_TypeMatchupOwnMovePoison::
 	.string "   {BIG_MULT_X}: HARDENED$"
 
 Help_Text_TypeMatchupOwnPokemonPoison::
-	.string "Effect of foe's move on own DAEMON:\p"
+	.string "Effect of foe's ROUTINE on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: STRATUM, CONTEXT\p"
 	.string "   {TRIANGLE}: GROWTH, LOGIC, CORRUPT, SWARM$"
 
@@ -1802,7 +1794,7 @@ Help_Text_TypeMatchupOwnMoveDragon::
 	.string "   {TRIANGLE}: HARDENED$"
 
 Help_Text_TypeMatchupOwnPokemonDragon::
-	.string "Effect of foe's move on own DAEMON:\p"
+	.string "Effect of foe's ROUTINE on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: FROZEN, EMERGENT\p"
 	.string "   {TRIANGLE}: ENTROPY, FLOW, SIGNAL, GROWTH$"
 
@@ -1812,7 +1804,7 @@ Help_Text_TypeMatchupOwnMoveNormal::
 	.string "   {BIG_MULT_X}: LATENT$"
 
 Help_Text_TypeMatchupOwnPokemonNormal::
-	.string "Effect of foe's move on own DAEMON:\p"
+	.string "Effect of foe's ROUTINE on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: LOGIC\p"
 	.string "   {BIG_MULT_X}: LATENT$"
 
@@ -1823,7 +1815,7 @@ Help_Text_TypeMatchupOwnMoveSteel::
 	.string "       HARDENED$"
 
 Help_Text_TypeMatchupOwnPokemonSteel::
-	.string "Effect of foe's move on own DAEMON:\p"
+	.string "Effect of foe's ROUTINE on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: ENTROPY, LOGIC, STRATUM\n"
 	.string "   {TRIANGLE}: CONTENT, GROWTH, FROZEN,\n"
 	.string "       VECTOR, \l"
@@ -1837,7 +1829,7 @@ Help_Text_TypeMatchupOwnMoveFlying::
 	.string "   {TRIANGLE}: SIGNAL, LEGACY, HARDENED$"
 
 Help_Text_TypeMatchupOwnPokemonFlying::
-	.string "Effect of foe's move on own DAEMON:\p"
+	.string "Effect of foe's ROUTINE on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: SIGNAL, FROZEN, LEGACY\p"
 	.string "   {TRIANGLE}: GROWTH, LOGIC, SWARM\p"
 	.string "   {BIG_MULT_X}: STRATUM$"
@@ -1850,7 +1842,7 @@ Help_Text_TypeMatchupOwnMoveFire::
 	.string "       EMERGENT$"
 
 Help_Text_TypeMatchupOwnPokemonFire::
-	.string "Effect of foe's move on own DAEMON:\p"
+	.string "Effect of foe's ROUTINE on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: FLOW, STRATUM, LEGACY\p"
 	.string "   {TRIANGLE}: ENTROPY, GROWTH, FROZEN,\n"
 	.string "       SWARM, HARDENED$"
@@ -1861,7 +1853,7 @@ Help_Text_TypeMatchupOwnMoveWater::
 	.string "   {TRIANGLE}: FLOW, GROWTH, EMERGENT$"
 
 Help_Text_TypeMatchupOwnPokemonWater::
-	.string "Effect of foe's move on own DAEMON:\p"
+	.string "Effect of foe's ROUTINE on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: SIGNAL, GROWTH\p"
 	.string "   {TRIANGLE}: ENTROPY, FLOW, FROZEN,\n"
 	.string "       HARDENED$"
@@ -1873,7 +1865,7 @@ Help_Text_TypeMatchupOwnMoveBug::
 	.string "       VECTOR, LATENT, HARDENED$"
 
 Help_Text_TypeMatchupOwnPokemonBug::
-	.string "Effect of foe's move on own DAEMON:\p"
+	.string "Effect of foe's ROUTINE on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: ENTROPY, VECTOR, LEGACY\p"
 	.string "   {TRIANGLE}: GROWTH, LOGIC, STRATUM$"
 
