@@ -22,7 +22,7 @@ Route9_Text_ChrisPostBattle::
     .string "Keep walking!$"
 
 Route9_Text_DrewIntro::
-    .string "I'm taking ROCK TUNNEL to go to\n"
+    .string "I'm taking THE BLACKOUT to go to\n"
     .string "HALFTONE...$"
 
 Route9_Text_DrewDefeat::

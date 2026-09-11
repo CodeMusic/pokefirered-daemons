@@ -12,7 +12,7 @@ Route11_EastEntrance_1F_Text_ManInLavenderRatesNames::
 
 Route11_EastEntrance_1F_Text_RockTunnelToReachLavender::
     .string "If you're aiming to reach HALFTONE\n"
-    .string "TOWN, take ROCK TUNNEL.\p"
-    .string "You can get to ROCK TUNNEL from\n"
+    .string "TOWN, take THE BLACKOUT.\p"
+    .string "You can get to THE BLACKOUT from\n"
     .string "DOLDRUM CITY.$"
 

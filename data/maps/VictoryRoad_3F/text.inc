@@ -1,7 +1,7 @@
 Text_DoubleEdgeTeach::
     .string "You should be proud of yourself,\n"
     .string "having battled your way through\l"
-    .string "VICTORY ROAD so courageously.\p"
+    .string "the UMBRAL ASCENT so bravely.\p"
     .string "In recognition of your feat,\n"
     .string "I'll teach you DOUBLE-EDGE.\p"
     .string "Would you like me to teach that\n"

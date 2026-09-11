@@ -70,8 +70,8 @@ Route10_Text_CarolPostBattle::
     .string "a floral pattern!$"
 
 Route10_Text_RockTunnelDetourToLavender::
-    .string "ROCK TUNNEL Detour to HALFTONE\n"
-    .string "TOWN$"
+    .string "THE BLACKOUT Detour to\n"
+    .string "HALFTONE TOWN$"
 
 Route10_Text_RockTunnel::
     .string "THE BLACKOUT$"
