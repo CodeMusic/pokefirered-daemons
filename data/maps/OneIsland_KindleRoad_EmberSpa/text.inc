@@ -41,7 +41,7 @@ OneIsland_KindleRoad_EmberSpa_Text_BrunoVisitsSpaOnOccasion::
 OneIsland_KindleRoad_EmberSpa_Text_UsedThisToMakeEmberSpa::
     .string "Hot springs go hand-in-hand with\n"
     .string "volcanoes.\p"
-    .string "The JITTER SPA here, well, I made\n"
+    .string "KETTLE SPRING here, well, I made\n"
     .string "it years ago.\p"
     .string "I hewed the pool right out of a\n"
     .string "gigantic boulder by hand.\p"

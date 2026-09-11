@@ -5,5 +5,5 @@ OneIsland_House1_Text_GazeUponVolcanoOnSunnyDays::
 
 OneIsland_House1_Text_LastTimeMtEmberErupted::
     .string "Let me think… When was the last\n"
-    .string "time MT. JITTER erupted?$"
+    .string "time MT. SMOULDER erupted?$"
 

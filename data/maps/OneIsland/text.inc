@@ -46,11 +46,12 @@ OneIsland_Text_HavePCLinkageWithHoenn::
 
 OneIsland_Text_IslandSign::
     .string "ONE ISLAND\n"
-    .string "Friends Gather at Knot Island$"
+    .string "First one they numbered,\l"
+    .string "and the nearest one home$"
 
 OneIsland_Text_PokemonNetCenterSign::
-    .string "Expanding the DAEMON World!\n"
-    .string "DAEMON NET CENTER$"
+    .string "DAEMON NET CENTER\n"
+    .string "Open. Usually somebody in$"
 
 @ Unused
 OneIsland_Text_ReturnToCinnabar::

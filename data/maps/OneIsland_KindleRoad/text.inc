@@ -20,8 +20,8 @@ OneIsland_KindleRoad_Text_AbigailPostBattle::
     .string "Maybe I should wear one, too…$"
 
 OneIsland_KindleRoad_Text_FinnIntro::
-    .string "Seen from here, MT. JITTER towers\n"
-    .string "into the sky.$"
+    .string "Seen from here, MT. SMOULDER\n"
+    .string "towers into the sky.$"
 
 OneIsland_KindleRoad_Text_FinnDefeat::
     .string "Well, aren't you tough?$"
@@ -155,10 +155,11 @@ OneIsland_KindleRoad_Text_MikNotEnoughMons::
     .string "you, then.$"
 
 OneIsland_KindleRoad_Text_RouteSign::
-    .string "This is SMOKE ROAD.\p"
-    .string "Go straight for MT. JITTER.$"
+    .string "SMOKE ROAD\n"
+    .string "The smoke comes from\l"
+    .string "MT. SMOULDER, that way$"
 
 OneIsland_KindleRoad_Text_EmberSpaSign::
-    .string "Light the Fire in Your Heart!\n"
-    .string "JITTER SPA$"
+    .string "KETTLE SPRING\n"
+    .string "Hot, because the mountain is$"
 
