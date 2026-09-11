@@ -306,11 +306,17 @@ const u8 gText_WhichMoveToForget[] = _("Which move should be forgotten?{PAUSE_UN
 const u8 gText_12PoofForgotMove[] = _("1, {PAUSE 0x0F}2, and{PAUSE 0x0F}‥ {PAUSE 0x0F}‥ {PAUSE 0x0F}‥ {PAUSE 0x0F}{PLAY_SE SE_BALL_BOUNCE_1}Poof!\p{STR_VAR_1} forgot how to\nuse {STR_VAR_2}.\pAnd...{PAUSE_UNTIL_PRESS}");
 const u8 gText_PkmnAlreadyKnows[] = _("{STR_VAR_1} already knows\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}");
 const u8 gText_PkmnHPRestoredByVar2[] = _("{STR_VAR_1}'s HP was restored\nby {STR_VAR_2} point(s).{PAUSE_UNTIL_PRESS}");
-const u8 gText_PkmnCuredOfPoison[] = _("{STR_VAR_1} was cured of its\nleaking.{PAUSE_UNTIL_PRESS}");
+//  The six bag cures, and three of them had been left behind by their own
+//  siblings. THROTTLED and OVERHEATED already read "is no longer X"; LEAKING
+//  was still "cured of", which is the medicine register 1.6 moved the items
+//  out of, and SUSPENDED and HUNG were still "woke up" and "thawed out" --
+//  bodies, in a game whose states are processes. They now match the battle
+//  log, which says "resumed!" and "responded again!" for the same two events.
+const u8 gText_PkmnCuredOfPoison[] = _("{STR_VAR_1} is no longer\nleaking.{PAUSE_UNTIL_PRESS}");
 const u8 gText_PkmnCuredOfParalysis[] = _("{STR_VAR_1} is no longer\nthrottled.{PAUSE_UNTIL_PRESS}");
-const u8 gText_PkmnWokeUp2[] = _("{STR_VAR_1} woke up.{PAUSE_UNTIL_PRESS}");
+const u8 gText_PkmnWokeUp2[] = _("{STR_VAR_1} resumed.{PAUSE_UNTIL_PRESS}");
 const u8 gText_PkmnBurnHealed[] = _("{STR_VAR_1} is no longer\noverheated.{PAUSE_UNTIL_PRESS}");
-const u8 gText_PkmnThawedOut[] = _("{STR_VAR_1} was thawed out.{PAUSE_UNTIL_PRESS}");
+const u8 gText_PkmnThawedOut[] = _("{STR_VAR_1} responded again.{PAUSE_UNTIL_PRESS}");
 const u8 gText_PPWasRestored[] = _("MP was restored.{PAUSE_UNTIL_PRESS}");
 const u8 gText_PkmnRegainhedHealth[] = _("{STR_VAR_1}は\nげんきを とりもどした!{PAUSE_UNTIL_PRESS}");
 const u8 gText_PkmnBecameHealthy[] = _("{STR_VAR_1} became healthy.{PAUSE_UNTIL_PRESS}");
