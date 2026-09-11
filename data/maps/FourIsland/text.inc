@@ -1,6 +1,7 @@
 FourIsland_Text_IslandSign::
     .string "FOUR ISLAND\n"
-    .string "The Warm, Blue, Floe Island$"
+    .string "Warm all the way round,\l"
+    .string "and one cold room in it$"
 
 FourIsland_Text_LoreleiHasReturned::
     .string "PHLEGMATIC has returned.\p"

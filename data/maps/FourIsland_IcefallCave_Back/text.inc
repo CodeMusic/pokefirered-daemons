@@ -1,8 +1,9 @@
 FourIsland_IcefallCave_Back_Text_LoreleiKeepHandsOffMons::
-    .string "PHLEGMATIC: Keep your filthy hands\n"
-    .string "off the DAEMON in the cave!\p"
-    .string "Do as I say, or you'll have me to\n"
-    .string "answer to!$"
+    .string "PHLEGMATIC: Put them back.\p"
+    .string "I was raised on the other side\n"
+    .string "of that wall.\p"
+    .string "I know what is in there.\n"
+    .string "You do not.$"
 
 FourIsland_IcefallCave_Back_Text_ShutItLadyLeaveUsBe::
     .string "Aww, shut it, lady, and leave\n"
@@ -31,13 +32,10 @@ FourIsland_IcefallCave_Back_Text_GruntDefeat::
     .string "We didn't plan on this!$"
 
 FourIsland_IcefallCave_Back_Text_LoreleiWhereHaveYouTakenMons::
-    .string "PHLEGMATIC: Humph. So despicably\n"
-    .string "weak.\p"
-    .string "You! Tell me!\p"
-    .string "Where have you taken the captured\n"
-    .string "DAEMON?\p"
-    .string "I'm smashing your ring once and for\n"
-    .string "all!$"
+    .string "PHLEGMATIC: That was quick.\p"
+    .string "Where have you taken the ones\n"
+    .string "you already have?\p"
+    .string "I am not asking twice.$"
 
 FourIsland_IcefallCave_Back_Text_NotTellingYouThat::
     .string "N-no way!\n"
