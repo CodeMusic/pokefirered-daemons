@@ -45,7 +45,7 @@ Route15_Text_ChesterPostBattle::
     .string "This is so obvious, you should know\n"
     .string "this, but…\p"
     .string "ROUTINES like UPHEAVAL and\n"
-    .string "FISSURE have no effect on bird\l"
+    .string "SEGFAULT have no effect on bird\l"
     .string "DAEMONS.$"
 
 Route15_Text_GraceIntro::
