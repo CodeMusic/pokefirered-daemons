@@ -371,3 +371,16 @@ PalletTown_ProfessorOaksLab_Text_AideCrystalIsAway::
 	.string "me to keep the units running.\p"
 	.string "There is a note pinned to that one.\n"
 	.string "I read it. It is about the entries.$"
+
+@  The handover, and there is no ceremony in it. 4.34: a procedure put her
+@  away, so nobody in this building thinks anything has happened -- the INDEX
+@  was left with an instruction and the instruction is being followed.
+@
+@  "not held for her" is the second tell and the aide reports it as an
+@  administrative oddity. She gave an instruction that anticipated not being
+@  here to collect it, and the man carrying it out has not wondered why.
+PalletTown_ProfessorOaksLab_Text_AideSheLeftThisForYou::
+	.string "PROF. CRYSTAL left this for you.\n"
+	.string "She did not say when she is back.\p"
+	.string "She was clear it was to be given\n"
+	.string "to you and not held for her.$"

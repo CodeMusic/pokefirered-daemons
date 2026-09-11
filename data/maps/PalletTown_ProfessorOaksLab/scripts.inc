@@ -1360,7 +1360,28 @@ PalletTown_ProfessorOaksLab_EventScript_CrystalsNote::
 	msgbox PalletTown_ProfessorOaksLab_Text_CrystalsNote, MSGBOX_SIGN
 	end
 
+@  T-27. There is no cutscene here. 4.34 puts her absence after the Review
+@  Board and the strongest version of that is the one with no scene in it:
+@  nobody meets you outside your house, nobody escorts you in, and the lab
+@  does not react when you walk through the door. You have to go and ask.
+@
+@  So the GLOBAL INDEX is handed over by a man at a desk, on being spoken to,
+@  and the branch is IsNationalPokedexEnabled rather than a new flag.
 PalletTown_ProfessorOaksLab_EventScript_Aide1CrystalIsAway::
+	specialvar VAR_RESULT, IsNationalPokedexEnabled
+	goto_if_eq VAR_RESULT, FALSE, PalletTown_ProfessorOaksLab_EventScript_Aide1GiveGlobalIndex
+	msgbox PalletTown_ProfessorOaksLab_Text_AideCrystalIsAway
+	release
+	end
+
+PalletTown_ProfessorOaksLab_EventScript_Aide1GiveGlobalIndex::
+	msgbox PalletTown_ProfessorOaksLab_Text_AideSheLeftThisForYou
+	closemessage
+	playfanfare MUS_OBTAIN_KEY_ITEM
+	message PalletTown_ProfessorOaksLab_Text_PlayersPokedexWasUpgraded
+	waitmessage
+	waitfanfare
+	special EnableNationalPokedex
 	msgbox PalletTown_ProfessorOaksLab_Text_AideCrystalIsAway
 	release
 	end
