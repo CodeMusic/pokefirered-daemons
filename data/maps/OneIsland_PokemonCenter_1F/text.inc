@@ -329,19 +329,23 @@ OneIsland_PokemonCenter_1F_Text_TradedWithFarAwayBoyfriend::
 OneIsland_PokemonCenter_1F_Text_MachineUnderAdjustment::
     .string "Network Machine Link Level 0\p"
     .string "…DAEMON Storage System under\n"
-    .string "adjustment…$"
+    .string "adjustment…\p"
+    .string "NODE 001. RANGE 001 TO 111.\n"
+    .string "NO LINK.$"
 
 OneIsland_PokemonCenter_1F_Text_MachineLinkedWithKanto::
     .string "Network Machine\n"
     .string "Link Level 1\p"
     .string "Link established with the KANTO\n"
-    .string "region.$"
+    .string "region.\p"
+    .string "NODE 001. RANGE 001 TO 111.$"
 
 OneIsland_PokemonCenter_1F_Text_MachineLinkedWithKantoAndHoenn::
     .string "Network Machine\n"
     .string "Link Level 2\p"
     .string "Link established with the KANTO\n"
-    .string "and HOENN regions.$"
+    .string "and HOENN regions.\p"
+    .string "NODE 001. RANGE 001 TO 111.$"
 
 OneIsland_PokemonCenter_1F_Text_ObtainedTriPass::
     .string "Obtained the TRI-PASS!$"
