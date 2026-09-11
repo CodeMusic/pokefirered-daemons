@@ -327,9 +327,9 @@ const u8 DecorDesc_CUTE_POSTER[] = _(
         "an AZURILL print.");
 
 const u8 DecorDesc_PIKA_POSTER[] = _(
-        "A large poster with\n"
-        "a SPIKE and PICHU\n"
-        "print.");
+        "A large poster\n"
+        "with a SPIKE and\n"
+        "STATIC print.");
 
 const u8 DecorDesc_LONG_POSTER[] = _(
     "A large poster with\n"
@@ -344,13 +344,14 @@ const u8 DecorDesc_SKY_POSTER[] = _(
         "a WINGULL print.");
 
 const u8 DecorDesc_KISS_POSTER[] = _(
-    "A large poster with\n"
-        "a SMOOCHUM print.");
+        "A large\n"
+        "poster with a\n"
+        "TELL print.");
 
 const u8 DecorDesc_PICHU_DOLL[] = _(
-    "A PICHU doll.\n"
-        "Place it on a mat\n"
-        "or a desk.");
+        "A STATIC doll.\n"
+        "Place it on a\n"
+        "mat or a desk.");
 
 const u8 DecorDesc_PIKACHU_DOLL[] = _(
         "A SPIKE doll.\n"
@@ -403,9 +404,9 @@ const u8 DecorDesc_DITTO_DOLL[] = _(
         "mat or a desk.");
 
 const u8 DecorDesc_SMOOCHUM_DOLL[] = _(
-    "A SMOOCHUM doll.\n"
-        "Place it on a mat\n"
-        "or a desk.");
+        "A TELL doll.\n"
+        "Place it on a\n"
+        "mat or a desk.");
 
 const u8 DecorDesc_TREECKO_DOLL[] = _(
     "A TREECKO doll.\n"
@@ -483,9 +484,9 @@ const u8 DecorDesc_ROUND_CUSHION[] = _(
         "or a desk.");
 
 const u8 DecorDesc_KISS_CUSHION[] = _(
-    "A SMOOCHUM\n"
-        "cushion. Place it on\n"
-        "a mat or a desk.");
+        "A TELL cushion.\n"
+        "Place it on a\n"
+        "mat or a desk.");
 
 const u8 DecorDesc_ZIGZAG_CUSHION[] = _(
     "A ZIGZAGOON\n"

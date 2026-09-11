@@ -685,7 +685,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_KISS_POSTER
     }, {
         DECOR_PICHU_DOLL,
-        _("PICHU DOLL"),
+        _("STATIC DOLL"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x1,
         DECORCAT_DOLL,
@@ -784,7 +784,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_DITTO_DOLL
     }, {
         DECOR_SMOOCHUM_DOLL,
-        _("SMOOCHUM DOLL"),
+        _("TELL DOLL"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x1,
         DECORCAT_DOLL,

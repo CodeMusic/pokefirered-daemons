@@ -1276,9 +1276,9 @@ const u8 gAmpharosPokedexText[] = _(
 const u8 gAmpharosPokedexTextUnused[] = _("");
 
 const u8 gBellossomPokedexText[] = _(
-    "BELLOSSOM gather at times and appear to\n"
-    "dance. They say that the dance is a\n"
-    "ritual to summon the sun.");
+        "GOLDSET gather at times and appear\n"
+        "to dance. They say that the dance\n"
+        "is a ritual to summon the sun.");
 
 const u8 gBellossomPokedexTextUnused[] = _("");
 
@@ -1696,9 +1696,9 @@ const u8 gMiltankPokedexText[] = _(
 const u8 gMiltankPokedexTextUnused[] = _("");
 
 const u8 gBlisseyPokedexText[] = _(
-    "Anyone who takes even one bite of\n"
-    "BLISSEY's egg becomes unfailingly caring\n"
-    "and pleasant to everyone.");
+        "Anyone who takes even one bite of\n"
+        "HEARTBEAT's egg becomes unfailingly\n"
+        "caring and pleasant to everyone.");
 
 const u8 gBlisseyPokedexTextUnused[] = _("");
 
