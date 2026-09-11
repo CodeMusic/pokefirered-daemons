@@ -1552,6 +1552,13 @@
 //  him and nothing has changed. Deliberately not a MARK, an item or an Index
 //  entry: 4.33's prohibitions rule that nothing in the bag may prove he was
 //  there, and these are flags nothing else reads.
+//  T-27. 4.34: she is not in the lab after the Review Board. The note is
+//  pinned to the INDEX unit and is the only thing in the room that knows
+//  anything, so the unit's sign has two states -- the unit before, the note
+//  after. The NOTE ITSELF never changes once it is there, which is 4.34's
+//  third ruling and the whole of why 4.24 works on a second reading.
+#define FLAG_CRYSTAL_GONE             (DAEMONS_FLAGS_START + 0x30)
+
 //  T-19. Two beats of one scene, five islands and a sea apart.
 #define FLAG_TY_GAVE_PAYLOAD          (DAEMONS_FLAGS_START + 0x20)
 #define FLAG_CRYSTAL_READ_PAYLOAD     (DAEMONS_FLAGS_START + 0x21)

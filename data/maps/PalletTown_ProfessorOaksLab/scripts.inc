@@ -1290,6 +1290,7 @@ PalletTown_ProfessorOaksLab_EventScript_LastPokeBall::
 PalletTown_ProfessorOaksLab_EventScript_Aide1::
 	lock
 	faceplayer
+	goto_if_set FLAG_CRYSTAL_GONE, PalletTown_ProfessorOaksLab_EventScript_Aide1CrystalIsAway
 	goto_if_set FLAG_SYS_GAME_CLEAR, PalletTown_ProfessorOaksLab_EventScript_Aide1GameClear
 	msgbox PalletTown_ProfessorOaksLab_Text_StudyAsOaksAide
 	release
@@ -1345,4 +1346,21 @@ PalletTown_ProfessorOaksLab_EventScript_RightSign::
 PalletTown_ProfessorOaksLab_EventScript_RightSignAlt::
 	msgbox PalletTown_ProfessorOaksLab_Text_AllMonTypesHaveStrongAndWeakPoints
 	releaseall
+	end
+
+@  T-27. The INDEX unit, and the note that is pinned to it once she is gone.
+@  One bg_event with two states rather than two events: before, it is the
+@  machine; after, it is the note. The note's own text never changes again.
+PalletTown_ProfessorOaksLab_EventScript_IndexUnit::
+	goto_if_set FLAG_CRYSTAL_GONE, PalletTown_ProfessorOaksLab_EventScript_CrystalsNote
+	msgbox PalletTown_ProfessorOaksLab_Text_IndexUnit, MSGBOX_SIGN
+	end
+
+PalletTown_ProfessorOaksLab_EventScript_CrystalsNote::
+	msgbox PalletTown_ProfessorOaksLab_Text_CrystalsNote, MSGBOX_SIGN
+	end
+
+PalletTown_ProfessorOaksLab_EventScript_Aide1CrystalIsAway::
+	msgbox PalletTown_ProfessorOaksLab_Text_AideCrystalIsAway
+	release
 	end

@@ -332,3 +332,42 @@ PalletTown_ProfessorOaksLab_Text_PayloadWhere::
     .string "…\p"
     .string "“Thank you. That is all I needed\n"
     .string "to know.”$"
+
+@  T-27. The INDEX unit's own sign, before she is gone. Deliberately flat:
+@  it is a description of a machine, and it is here so that the wall the note
+@  appears on is a wall the player has already read once.
+PalletTown_ProfessorOaksLab_Text_IndexUnit::
+	.string "The INDEX unit. It logs what you\n"
+	.string "have met and what you have bound.$"
+
+@  4.34's third ruling, and the reason this string is worth more care than
+@  anything else in the room: IT NEVER CHANGES. Not after the Owl, not after
+@  she comes home. 4.24's mechanism is that the document stayed the same and
+@  the reader did not, so a note that rewrote itself would do the player's
+@  re-reading for them.
+@
+@  "In a careful hand" is the whole tell and nobody points at it: a woman
+@  taken out of a building does not leave a tidy note. She wrote it early.
+@  Nothing here says she knew. The clause that only parses if she did is
+@  "does not need me in the room to continue", and it reads as ordinary
+@  modesty until the second time you stand here.
+PalletTown_ProfessorOaksLab_Text_CrystalsNote::
+	.string "A note, in a careful hand.\p"
+	.string "The INDEX is upgraded. It holds\n"
+	.string "what the first one could not.\p"
+	.string "My entries are as I wrote them.\n"
+	.string "Some read oddly. Read those twice\l"
+	.string "rather than tidying them.\p"
+	.string "The work does not need me in the\n"
+	.string "room to continue.\p"
+	.string "Take it further than I did.$"
+
+@  The man who works beside it has read the note and got nothing out of it.
+@  That is craft rule 3 doing the work -- nobody in the room is a fool and
+@  nobody is being corrected. He is not worried, because on the face of it
+@  there is nothing to be worried about.
+PalletTown_ProfessorOaksLab_Text_AideCrystalIsAway::
+	.string "PROF. CRYSTAL is away. She asked\n"
+	.string "me to keep the units running.\p"
+	.string "There is a note pinned to that one.\n"
+	.string "I read it. It is about the entries.$"
