@@ -165,9 +165,9 @@ Route9_Text_ConnerRematchIntro::
 	.string "Go win, my super BUG DAEMON!$"
 
 Route10_Text_MarkRematchIntro::
-	.string "Wow, you came here again?\n"
-	.string "Maybe you're a POKéMANIAC, too?\l"
-	.string "Want to see my collection?$"
+	.string "Wow, you came here again? Maybe\n"
+	.string "you're an ARCHIVIST, too? Want to\l"
+	.string "see my collection?$"
 
 Route10_Text_ClarkRematchIntro::
 	.string "Ha-hahah-ah-ha!\n"
@@ -671,7 +671,7 @@ Route25_Text_FranklinRematchIntro::
 	.string "but I've still got gas in the tank!$"
 
 Route25_Text_NobRematchIntro::
-	.string "A POKéMANIAC lives on the cape.\n"
+	.string "An ARCHIVIST lives on the cape.\n"
 	.string "Have you seen his collection?$"
 
 Route25_Text_WayneRematchIntro::

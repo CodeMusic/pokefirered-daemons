@@ -393,7 +393,7 @@ const u8 DecorDesc_MEOWTH_DOLL[] = _(
         "mat or a desk.");
 
 const u8 DecorDesc_CLEFAIRY_DOLL[] = _(
-        "A ANOMALY doll.\n"
+        "An ANOMALY doll.\n"
         "Place it on a\n"
         "mat or a desk.");
 

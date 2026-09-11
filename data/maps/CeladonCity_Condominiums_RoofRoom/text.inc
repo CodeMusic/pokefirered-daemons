@@ -5,7 +5,7 @@ CeladonCity_Condominiums_RoofRoom_Text_TheresNothingIDontKnow::
     .string "trade DAEMONS!$"
 
 CeladonCity_Condominiums_RoofRoom_Text_ObtainedAnEevee::
-    .string "{PLAYER} obtained an MUSAI!$"
+    .string "{PLAYER} obtained a MUSAI!$"
 
 CeladonCity_Condominiums_RoofRoom_Text_BoxIsFull::
     .string "ポケモンが　いっぱいだ\n"

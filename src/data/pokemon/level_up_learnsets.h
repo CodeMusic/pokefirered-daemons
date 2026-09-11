@@ -202,13 +202,13 @@ static const u16 sKakunaLevelUpLearnset[] = {
 
 
 //  T-36, SILENT TYPE. INJECTOR is SWARM/CORRUPT and knew no CORRUPT routine,
-//  and SCRAPER -- the larva it grows out of -- KNOWS TAINT AT LEVEL 1. The
+//  and SCRAPER -- the larva it grows out of -- KNOWS TAMPER AT LEVEL 1. The
 //  line had the type and the routine at stage one and dropped the routine on
 //  the way up. 4.26's PORYGON2 fault, running backwards.
 //
-//  So this is a restoration, not an import. TAINT takes level 10, which was a
+//  So this is a restoration, not an import. TAMPER takes level 10, which was a
 //  SECOND copy of BURST WRITE and did nothing at all -- same power, on-type,
-//  and one duplicate entry gone. TAINT is also the word the field actually
+//  and one duplicate entry gone. TAMPER is also the word the field actually
 //  uses for data that arrived carrying instructions, which is INJECTOR's
 //  Index entry verbatim.
 //
@@ -384,7 +384,7 @@ static const u16 sRaichuLevelUpLearnset[] = {
 //  finished. SILT is on-type and arrives early, and it does no damage, so
 //  nothing the creature DID was ever the ground.
 //
-//  EXCAVATE replaces TAINT at 17: 60 against 15, on-type, and it also removes
+//  EXCAVATE replaces TAMPER at 17: 60 against 15, on-type, and it also removes
 //  the line's only CORRUPT routine, which never belonged on a daemon that is
 //  not CORRUPT. Digging is the whole of what this creature is for.
 //
@@ -408,7 +408,7 @@ static const u16 sSandshrewLevelUpLearnset[] = {
 //  finished. SILT is on-type and arrives early, and it does no damage, so
 //  nothing the creature DID was ever the ground.
 //
-//  EXCAVATE replaces TAINT at 17: 60 against 15, on-type, and it also removes
+//  EXCAVATE replaces TAMPER at 17: 60 against 15, on-type, and it also removes
 //  the line's only CORRUPT routine, which never belonged on a daemon that is
 //  not CORRUPT. Digging is the whole of what this creature is for.
 //
@@ -488,7 +488,7 @@ static const u16 sNidoqueenLevelUpLearnset[] = {
 //
 //  FLIP for PROBE at 1, 40 for 35, and the pair rhymes again. CONTENT opens it
 //  now, which 2.8 rules says nothing false: the plainest operation there is,
-//  and every daemon can do it. TAINT still arrives at 17 and the horn arrives
+//  and every daemon can do it. TAMPER still arrives at 17 and the horn arrives
 //  with INSERT at 20, so nothing this daemon IS has been taken away.
 //
 //  PROBE was not deleted. It went to ECHO, which navigates by asking.
@@ -514,7 +514,7 @@ static const u16 sNidoranMLevelUpLearnset[] = {
 //
 //  FLIP for PROBE at 1, 40 for 35, and the pair rhymes again. CONTENT opens it
 //  now, which 2.8 rules says nothing false: the plainest operation there is,
-//  and every daemon can do it. TAINT still arrives at 18 and the horn arrives
+//  and every daemon can do it. TAMPER still arrives at 18 and the horn arrives
 //  with INSERT at 22, so nothing this daemon IS has been taken away.
 //
 //  PROBE was not deleted. It went to ECHO, which navigates by asking.

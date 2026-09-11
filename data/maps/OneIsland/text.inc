@@ -22,7 +22,7 @@ OneIsland_Text_LuckyToHaveCelioHere::
     .string "My granddaughter was in a tizzy\n"
     .string "over CELIO's friend.\p"
     .string "Something about a famous\n"
-    .string "POKéMANIAC?\p"
+    .string "ARCHIVIST?\p"
     .string "I'm not sure what that means, but\n"
     .string "CELIO is quite the man!$"
 

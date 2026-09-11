@@ -12,7 +12,7 @@ OneIsland_PokemonCenter_1F_Text_BillHowsYourResearchComing::
 
 OneIsland_PokemonCenter_1F_Text_ThisIsMyBuddyCelio::
     .string "{PLAYER}, this is my buddy CELIO.\n"
-    .string "He's one dedicated PORT MANIAC!$"
+    .string "He's one dedicated PORT ARCHIVIST!$"
 
 OneIsland_PokemonCenter_1F_Text_PlayerIsRisingPokemonChamp::
     .string "CELIO, this is {PLAYER}, a rising\n"
@@ -282,10 +282,10 @@ OneIsland_PokemonCenter_1F_Text_CelioHearingRumorsAboutYou::
 OneIsland_PokemonCenter_1F_Text_BillsFirstMonWasAbra::
     .string "{PLAYER}, what's your favorite kind\n"
     .string "of DAEMON?\p"
-    .string "HOLT is a POKéMANIAC, so he loves\n"
+    .string "HOLT is an ARCHIVIST, so he loves\n"
     .string "every kind.\p"
     .string "Apparently, the first one he bound\n"
-    .string "was an HUNCH.$"
+    .string "was a HUNCH.$"
 
 OneIsland_PokemonCenter_1F_Text_BillsHometownInGoldenrod::
     .string "By the way, {PLAYER}, you're from\n"

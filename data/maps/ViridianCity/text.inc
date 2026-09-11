@@ -22,7 +22,7 @@ ViridianCity_Text_OhOkayThen::
 ViridianCity_Text_ExplainCaterpieWeedle::
     .string "CRAWLER only reads. SCRAPER takes\n"
     .string "what it finds.\p"
-    .string "Mind the TAINT.$"
+    .string "It opens with TAMPER.$"
 
 ViridianCity_Text_GrandpaHasntHadCoffeeYet::
     .string "Grandpa, be nice.\p"

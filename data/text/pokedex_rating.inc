@@ -27,13 +27,13 @@ PokedexRating_Text_LessThan30::
 PokedexRating_Text_LessThan40::
 	.string "Good, it's apparent that you're\n"
 	.string "trying hard!\p"
-	.string "I've given one of my AIDES an\n"
-	.string "GREP. Be sure to collect it!$"
+	.string "I've given one of my AIDES a GREP.\n"
+	.string "Be sure to collect it!$"
 
 PokedexRating_Text_LessThan50::
 	.string "Your INDEX is coming along quite\n"
 	.string "well!\p"
-	.string "I've given one of my AIDES an\n"
+	.string "I've given one of my AIDES a\n"
 	.string "SURCHARGE. Be sure to get it!$"
 
 PokedexRating_Text_LessThan60::

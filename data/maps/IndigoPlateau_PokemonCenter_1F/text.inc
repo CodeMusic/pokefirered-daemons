@@ -34,9 +34,9 @@ IndigoPlateau_PokemonCenter_1F_Text_AgathaWhuppedUs::
     .string "scary lady hollering.$"
 
 IndigoPlateau_PokemonCenter_1F_Text_LancesCousinGymLeaderFarAway::
-	.string "Maybe becoming an REVIEW\n"
-    .string "BOARD member is in the blood.\p"
-    .string "From what I've heard, SANGUINE\n"
-    .string "has a cousin who's a GYM\l"
-    .string "LEADER somewhere far away.$"
+	.string "Maybe becoming a REVIEW BOARD\n"
+	.string "member is in the blood.\p"
+	.string "From what I've heard, SANGUINE has\n"
+	.string "a cousin who's a GYM LEADER\l"
+	.string "somewhere far away.$"
 

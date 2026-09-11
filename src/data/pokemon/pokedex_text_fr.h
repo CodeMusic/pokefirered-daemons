@@ -1472,7 +1472,7 @@ const u8 gGligarPokedexText[] = _(
 const u8 gGligarPokedexTextUnused[] = _("");
 
 const u8 gSteelixPokedexText[] = _(
-        "It is said that if an BACKBONE lives\n"
+        "It is said that if a BACKBONE lives\n"
         "for over 100 years, its composition\n"
         "changes to become diamond-like.");
 

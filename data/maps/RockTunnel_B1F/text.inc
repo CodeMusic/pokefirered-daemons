@@ -24,7 +24,8 @@ RockTunnel_B1F_Text_DudleyPostBattle::
     .string "thinking.$"
 
 RockTunnel_B1F_Text_CooperIntro::
-    .string "You have a INDEX? I want one too!$"
+    .string "You have an INDEX? I want one\n"
+    .string "too!$"
 
 RockTunnel_B1F_Text_CooperDefeat::
     .string "Shoot!\n"

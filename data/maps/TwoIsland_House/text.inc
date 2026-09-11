@@ -1,8 +1,8 @@
 TwoIsland_House_Text_TeachMonMoveForMushroom::
-    .string "I'm the DAEMON MOVE MANIAC.\p"
+    .string "I'm the ROUTINE ARCHIVIST.\p"
     .string "I know every single ROUTINE that\n"
     .string "DAEMON learn growing up.\p"
-    .string "I'm also a mushroom maniac.\p"
+    .string "I'm also a mushroom archivist.\p"
     .string "Bring me two TINYMUSHROOMS, or one\n"
     .string "BIG MUSHROOM.\p"
     .string "If you do that for me, I'll teach a\n"

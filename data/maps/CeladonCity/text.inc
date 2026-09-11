@@ -24,7 +24,7 @@ CeladonCity_Text_BlewItAllAtSlots::
 CeladonCity_Text_MyTrustedPalPoliwrath::
     .string "This is my trusted pal, MUTEX.\p"
     .string "It evolved from a SPINLOCK when I\n"
-    .string "used a AFFECT.$"
+    .string "used an AFFECT.$"
 
 CeladonCity_Text_Poliwrath::
     .string "MUTEX: Ribi ribit!$"

@@ -10,8 +10,8 @@ VermilionCity_House1_Text_TakeThisAndFish::
     .string "Take this and fish, young friend!$"
 
 VermilionCity_House1_Text_ReceivedOldRodFromFishingGuru::
-    .string "{PLAYER} received an QUERY from\n"
-    .string "the FISHING GURU.$"
+    .string "{PLAYER} received a QUERY from the\n"
+    .string "FISHING GURU.$"
 
 VermilionCity_House1_Text_FishingIsAWayOfLife::
     .string "Fishing is a way of life!\n"

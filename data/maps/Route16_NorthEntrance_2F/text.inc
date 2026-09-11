@@ -22,7 +22,7 @@ Route16_NorthEntrance_2F_Text_GiveAmuletCoinIfCaught40::
     .string "If your INDEX has complete data\n"
     .string "on 40 species, I'm supposed to give\l"
     .string "you a reward.\p"
-    .string "CRYSTAL CLEAR entrusted me with an\n"
+    .string "CRYSTAL CLEAR entrusted me with a\n"
     .string "SURCHARGE for you.\p"
     .string "So, {PLAYER}, let me ask you.\p"
     .string "Have you gathered data on at least\n"
@@ -38,7 +38,7 @@ Route16_NorthEntrance_2F_Text_ReceivedAmuletCoinFromAide::
     .string "from the AIDE.$"
 
 Route16_NorthEntrance_2F_Text_ExplainAmuletCoin::
-    .string "An SURCHARGE is an item to be held\n"
+    .string "A SURCHARGE is an item to be held\n"
     .string "by a DAEMON.\p"
     .string "If the DAEMON appears in a winning\n"
     .string "battle, you will earn more money.$"

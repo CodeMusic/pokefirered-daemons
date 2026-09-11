@@ -63,7 +63,7 @@ Route25_Text_HaleyDefeat::
 
 Route25_Text_HaleyPostBattle::
     .string "You came from DEADSTACK? May I\n"
-    .string "have a ANOMALY?$"
+    .string "have an ANOMALY?$"
 
 Route25_Text_FranklinIntro::
     .string "I just got down from DEADSTACK,\n"
@@ -73,11 +73,11 @@ Route25_Text_FranklinDefeat::
     .string "You worked hard!$"
 
 Route25_Text_FranklinPostBattle::
-    .string "Drat! A ECHO bit me back in that\n"
+    .string "Drat! An ECHO bit me back in that\n"
     .string "cave.$"
 
 Route25_Text_NobIntro::
-    .string "I'm off to see a POKéMANIAC's\n"
+    .string "I'm off to see an ARCHIVIST's\n"
     .string "collection at the cape.$"
 
 Route25_Text_NobDefeat::
