@@ -296,8 +296,8 @@ const u8 DecorDesc_ATTRACT_MAT[] = _(
         "items on top.");
 
 const u8 DecorDesc_FISSURE_MAT[] = _(
-    "A mat designed with\n"
-        "a FISSURE image.\n"
+        "A mat designed with\n"
+        "a SEGFAULT image.\n"
         "Put items on top.");
 
 const u8 DecorDesc_SPIKES_MAT[] = _(
@@ -359,9 +359,9 @@ const u8 DecorDesc_PIKACHU_DOLL[] = _(
         "or a desk.");
 
 const u8 DecorDesc_MARILL_DOLL[] = _(
-    "A MARILL doll.\n"
-        "Place it on a mat\n"
-        "or a desk.");
+        "A MOOD doll.\n"
+        "Place it on a\n"
+        "mat or a desk.");
 
 const u8 DecorDesc_TOGEPI_DOLL[] = _(
     "A TOGEPI doll.\n"
@@ -479,9 +479,9 @@ const u8 DecorDesc_PIKA_CUSHION[] = _(
         "or a desk.");
 
 const u8 DecorDesc_ROUND_CUSHION[] = _(
-    "A MARILL cushion.\n"
-        "Place it on a mat\n"
-        "or a desk.");
+        "A MOOD cushion.\n"
+        "Place it on a\n"
+        "mat or a desk.");
 
 const u8 DecorDesc_KISS_CUSHION[] = _(
         "A TELL cushion.\n"

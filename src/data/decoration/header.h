@@ -577,7 +577,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_ATTRACT_MAT
     }, {
         DECOR_FISSURE_MAT,
-        _("FISSURE MAT"),
+        _("SEGFAULT MAT"),
         DECORPERM_PASS_FLOOR,
         DECORSHAPE_3x3,
         DECORCAT_MAT,
@@ -703,7 +703,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_PIKACHU_DOLL
     }, {
         DECOR_MARILL_DOLL,
-        _("MARILL DOLL"),
+        _("MOOD DOLL"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x1,
         DECORCAT_DOLL,
