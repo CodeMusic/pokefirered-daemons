@@ -189,13 +189,27 @@ static const u16 sKakunaLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+
+//  T-36, SILENT TYPE. INJECTOR is SWARM/CORRUPT and knew no CORRUPT routine,
+//  and SCRAPER -- the larva it grows out of -- KNOWS TAINT AT LEVEL 1. The
+//  line had the type and the routine at stage one and dropped the routine on
+//  the way up. 4.26's PORYGON2 fault, running backwards.
+//
+//  So this is a restoration, not an import. TAINT takes level 10, which was a
+//  SECOND copy of BURST WRITE and did nothing at all -- same power, on-type,
+//  and one duplicate entry gone. TAINT is also the word the field actually
+//  uses for data that arrived carrying instructions, which is INJECTOR's
+//  Index entry verbatim.
+//
+//  ETCH takes 30 from TAIL, power for power, because a routine that writes
+//  itself into whatever it touches is the other half of the same sentence.
 static const u16 sBeedrillLevelUpLearnset[] = {
     LEVEL_UP_MOVE(1, MOVE_FURY_ATTACK),
-    LEVEL_UP_MOVE(10, MOVE_FURY_ATTACK),
+    LEVEL_UP_MOVE(10, MOVE_POISON_STING),
     LEVEL_UP_MOVE(15, MOVE_FOCUS_ENERGY),
     LEVEL_UP_MOVE(20, MOVE_TWINEEDLE),
     LEVEL_UP_MOVE(25, MOVE_RAGE),
-    LEVEL_UP_MOVE(30, MOVE_PURSUIT),
+    LEVEL_UP_MOVE(30, MOVE_ACID),
     LEVEL_UP_MOVE(35, MOVE_PIN_MISSILE),
     LEVEL_UP_MOVE(40, MOVE_AGILITY),
     LEVEL_UP_MOVE(45, MOVE_ENDEAVOR),
@@ -409,10 +423,24 @@ static const u16 sNidorinaLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+
+//  T-36, SILENT TYPE. SCHEDULER is CORRUPT/STRATUM and knew not one STRATUM
+//  routine. This is 2.7a's ROVERBYTE case exactly: FORK and THREAD are
+//  CORRUPT and nothing else, STRATUM ARRIVES ON EVOLUTION, and it arrived
+//  without a verb. The type was a thing the daemon became and never did.
+//
+//  SEDIMENT replaces INDUCT at 1 -- 55 with the bonus against 30 without it,
+//  and INDUCT was the line's only LOGIC routine, so nothing thins out.
+//  SEDIMENT also drops the target's speed, which is the whole of
+//  SCHEDULER's Index entry -- it decides who runs and for how long, and
+//  nobody it decides about is told.
+//
+//  The 120 at 43 stays off-type on purpose. 2.7b's residual: a daemon reaching
+//  outside itself and being worse at it is what the bonus is FOR.
 static const u16 sNidoqueenLevelUpLearnset[] = {
     LEVEL_UP_MOVE(1, MOVE_SCRATCH),
     LEVEL_UP_MOVE(1, MOVE_TAIL_WHIP),
-    LEVEL_UP_MOVE(1, MOVE_DOUBLE_KICK),
+    LEVEL_UP_MOVE(1, MOVE_MUD_SHOT),
     LEVEL_UP_MOVE(1, MOVE_POISON_STING),
     LEVEL_UP_MOVE(22, MOVE_BODY_SLAM),
     LEVEL_UP_MOVE(43, MOVE_SUPERPOWER),
@@ -447,10 +475,23 @@ static const u16 sNidorinoLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+
+//  T-36, SILENT TYPE. PIPELINE is CORRUPT/STRATUM and knew not one STRATUM
+//  routine. This is 2.7a's ROVERBYTE case exactly: BRANCH and PREDICTOR are
+//  CORRUPT and nothing else, STRATUM ARRIVES ON EVOLUTION, and it arrived
+//  without a verb. The type was a thing the daemon became and never did.
+//
+//  SEDIMENT replaces INDUCT at 1 -- 55 with the bonus against 30 without it,
+//  and INDUCT was the line's only LOGIC routine, so nothing thins out.
+//  The sibling takes the same substitution, because Nidoran splits into
+//  two daemons and they are meant to rhyme.
+//
+//  The 120 at 43 stays off-type on purpose. 2.7b's residual: a daemon reaching
+//  outside itself and being worse at it is what the bonus is FOR.
 static const u16 sNidokingLevelUpLearnset[] = {
     LEVEL_UP_MOVE(1, MOVE_PECK),
     LEVEL_UP_MOVE(1, MOVE_FOCUS_ENERGY),
-    LEVEL_UP_MOVE(1, MOVE_DOUBLE_KICK),
+    LEVEL_UP_MOVE(1, MOVE_MUD_SHOT),
     LEVEL_UP_MOVE(1, MOVE_POISON_STING),
     LEVEL_UP_MOVE(22, MOVE_THRASH),
     LEVEL_UP_MOVE(43, MOVE_MEGAHORN),
@@ -586,10 +627,22 @@ static const u16 sGloomLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+
+//  T-36, SILENT TYPE. BADSEED is GROWTH/CORRUPT and knew no CORRUPT routine --
+//  on 0% off-type, the most on-type daemon in the game, which is how a silent
+//  half hides. WEED and BLIGHT below it both know ADULTERATE.
+//
+//  So it comes back, in STARVE's slot, powder for powder. It is also the more
+//  accurate of the two: BADSEED's Index entry is a dust that settles on
+//  whatever is learning nearby and cannot be told from pollen, and that is
+//  ADULTERATE rather than STARVE.
+//
+//  2.7a took this same routine OFF the reinforcement line for being its only
+//  CORRUPT entry. It lands here, on the daemon the word was written for.
 static const u16 sVileplumeLevelUpLearnset[] = {
     LEVEL_UP_MOVE(1, MOVE_ABSORB),
     LEVEL_UP_MOVE(1, MOVE_AROMATHERAPY),
-    LEVEL_UP_MOVE(1, MOVE_STUN_SPORE),
+    LEVEL_UP_MOVE(1, MOVE_POISON_POWDER),
     LEVEL_UP_MOVE(1, MOVE_MEGA_DRAIN),
     LEVEL_UP_MOVE(44, MOVE_PETAL_DANCE),
     LEVEL_UP_END
@@ -958,13 +1011,22 @@ static const u16 sWeepinbellLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+
+//  T-36, SILENT TYPE. TARPIT is GROWTH/CORRUPT and knew no CORRUPT routine,
+//  while SNARE and HONEYPOT below it both know ETCH. Third time in this pass
+//  that a line drops its second type on the last evolution.
+//
+//  ETCH comes back in ADVERTISE's slot. A status routine for a damaging one is
+//  a real change of shape, and it is the right one here: TARPIT keeps three
+//  other status routines, and what a tarpit DOES to whatever enters is corrode
+//  it slowly rather than call it over.
 static const u16 sVictreebelLevelUpLearnset[] = {
     LEVEL_UP_MOVE(1, MOVE_STOCKPILE),
     LEVEL_UP_MOVE(1, MOVE_SPIT_UP),
     LEVEL_UP_MOVE(1, MOVE_SWALLOW),
     LEVEL_UP_MOVE(1, MOVE_VINE_WHIP),
     LEVEL_UP_MOVE(1, MOVE_SLEEP_POWDER),
-    LEVEL_UP_MOVE(1, MOVE_SWEET_SCENT),
+    LEVEL_UP_MOVE(1, MOVE_ACID),
     LEVEL_UP_MOVE(1, MOVE_RAZOR_LEAF),
     LEVEL_UP_END
 };
@@ -1284,9 +1346,23 @@ static const u16 sCloysterLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+
+//  T-36, SILENT TYPE. WISP is LATENT/CORRUPT and knew no CORRUPT routine.
+//  All three stages have both types from the start and all three were silent
+//  on the same half, so all three take the same substitution (4.26).
+//
+//  POLLUTE replaces LICK at 1, power for power, 20 for 20. Nothing is lost:
+//  LATENT was already carrying seven routines and CORRUPT none. The line is
+//  typed CORRUPT for what it is MADE of -- a body that is mostly not there and
+//  the part that is, is gas -- and until now nothing it did ever said so.
+//
+//  Everything else stays, and that is deliberate rather than lazy. DEFER and
+//  INTERPRET are a two-move combination the vanilla set built on purpose, and
+//  ORPHAN is HAUNTPROC's Index entry as a verb: no parent, no terminal, no
+//  entry in any list.
 static const u16 sGastlyLevelUpLearnset[] = {
     LEVEL_UP_MOVE(1, MOVE_HYPNOSIS),
-    LEVEL_UP_MOVE(1, MOVE_LICK),
+    LEVEL_UP_MOVE(1, MOVE_SMOG),
     LEVEL_UP_MOVE(8, MOVE_SPITE),
     LEVEL_UP_MOVE(13, MOVE_CURSE),
     LEVEL_UP_MOVE(16, MOVE_NIGHT_SHADE),
@@ -1299,9 +1375,23 @@ static const u16 sGastlyLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+
+//  T-36, SILENT TYPE. REVENANT is LATENT/CORRUPT and knew no CORRUPT routine.
+//  All three stages have both types from the start and all three were silent
+//  on the same half, so all three take the same substitution (4.26).
+//
+//  POLLUTE replaces LICK at 1, power for power, 20 for 20. Nothing is lost:
+//  LATENT was already carrying seven routines and CORRUPT none. The line is
+//  typed CORRUPT for what it is MADE of -- a body that is mostly not there and
+//  the part that is, is gas -- and until now nothing it did ever said so.
+//
+//  Everything else stays, and that is deliberate rather than lazy. DEFER and
+//  INTERPRET are a two-move combination the vanilla set built on purpose, and
+//  ORPHAN is HAUNTPROC's Index entry as a verb: no parent, no terminal, no
+//  entry in any list.
 static const u16 sHaunterLevelUpLearnset[] = {
     LEVEL_UP_MOVE(1, MOVE_HYPNOSIS),
-    LEVEL_UP_MOVE(1, MOVE_LICK),
+    LEVEL_UP_MOVE(1, MOVE_SMOG),
     LEVEL_UP_MOVE(1, MOVE_SPITE),
     LEVEL_UP_MOVE(8, MOVE_SPITE),
     LEVEL_UP_MOVE(13, MOVE_CURSE),
@@ -1316,9 +1406,23 @@ static const u16 sHaunterLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+
+//  T-36, SILENT TYPE. HAUNTPROC is LATENT/CORRUPT and knew no CORRUPT routine.
+//  All three stages have both types from the start and all three were silent
+//  on the same half, so all three take the same substitution (4.26).
+//
+//  POLLUTE replaces LICK at 1, power for power, 20 for 20. Nothing is lost:
+//  LATENT was already carrying seven routines and CORRUPT none. The line is
+//  typed CORRUPT for what it is MADE of -- a body that is mostly not there and
+//  the part that is, is gas -- and until now nothing it did ever said so.
+//
+//  Everything else stays, and that is deliberate rather than lazy. DEFER and
+//  INTERPRET are a two-move combination the vanilla set built on purpose, and
+//  ORPHAN is HAUNTPROC's Index entry as a verb: no parent, no terminal, no
+//  entry in any list.
 static const u16 sGengarLevelUpLearnset[] = {
     LEVEL_UP_MOVE(1, MOVE_HYPNOSIS),
-    LEVEL_UP_MOVE(1, MOVE_LICK),
+    LEVEL_UP_MOVE(1, MOVE_SMOG),
     LEVEL_UP_MOVE(1, MOVE_SPITE),
     LEVEL_UP_MOVE(8, MOVE_SPITE),
     LEVEL_UP_MOVE(13, MOVE_CURSE),
@@ -1460,12 +1564,25 @@ static const u16 sExeggcuteLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+
+//  T-36, SILENT TYPE. ENSEMBLE is GROWTH/CONTEXT and knew no GROWTH routine,
+//  while CLUSTER one stage down knows BATCH, SEED, SATURATE and STARVE. The
+//  most GROWTH-shaped daemon in the bestiary lost the whole type by evolving.
+//
+//  BATCH comes back at 31 in DROP's slot: 120 with the bonus is 180 against
+//  100, and batching is what the word means outside the game too.
+//
+//  CONVERGE takes level 1 from SPOOL, which was 15 power and filler. This one
+//  is an import rather than a restoration and it earns it -- the routine never
+//  misses, an ensemble's whole purchase is that averaging many learners cancels
+//  the error, and ENSEMBLE's Index entry is a single answer assembled out of
+//  several heads.
 static const u16 sExeggutorLevelUpLearnset[] = {
-    LEVEL_UP_MOVE(1, MOVE_BARRAGE),
+    LEVEL_UP_MOVE(1, MOVE_MAGICAL_LEAF),
     LEVEL_UP_MOVE(1, MOVE_HYPNOSIS),
     LEVEL_UP_MOVE(1, MOVE_CONFUSION),
     LEVEL_UP_MOVE(19, MOVE_STOMP),
-    LEVEL_UP_MOVE(31, MOVE_EGG_BOMB),
+    LEVEL_UP_MOVE(31, MOVE_SOLAR_BEAM),
     LEVEL_UP_END
 };
 
@@ -1731,9 +1848,19 @@ static const u16 sStaryuLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+
+//  T-36, SILENT TYPE. PULSAR is FLOW/CONTEXT and knew no CONTEXT routine --
+//  and the joke is that BEACON, which is FLOW and ONLY FLOW, carries two
+//  (STEELMAN and ZOOM OUT). The line knows the vocabulary at stage one and
+//  the daemon that is actually typed for it never got a verb.
+//
+//  SLANT replaces UNWIND at 1: 65 with the bonus against 20 without, and
+//  UNWIND was doing nothing a player would notice. A beam that means one
+//  thing or another depending on where you stand is CONTEXT's clause, and it
+//  is also what a pulsar is.
 static const u16 sStarmieLevelUpLearnset[] = {
     LEVEL_UP_MOVE(1, MOVE_WATER_GUN),
-    LEVEL_UP_MOVE(1, MOVE_RAPID_SPIN),
+    LEVEL_UP_MOVE(1, MOVE_PSYBEAM),
     LEVEL_UP_MOVE(1, MOVE_RECOVER),
     LEVEL_UP_MOVE(1, MOVE_SWIFT),
     LEVEL_UP_MOVE(33, MOVE_CONFUSE_RAY),
@@ -1775,6 +1902,20 @@ static const u16 sScytherLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+
+//  T-36, SILENT TYPE. COLDREAD is FROZEN/CONTEXT and knew no CONTEXT routine,
+//  while SMOOCHUM -- same two types, one stage down -- knows MISREAD AND
+//  CONSTRUE. Straight PORYGON2: the line loses its second type's entire
+//  vocabulary on evolution.
+//
+//  Both come back where the weakest off-type routines were. MISREAD takes 21
+//  from REPEAT (50 against 15) and CONSTRUE takes 51 from BLOCK WRITE (90 with
+//  the bonus, so 135 against 85).
+//
+//  SCHEDULE was the tempting pick -- COLDREAD states what you are about to say
+//  slightly before you say it, and SCHEDULE is the one routine that resolves
+//  on a later turn than the one it was invoked on. It lost to restoring what
+//  the line already had, which is the cheaper claim and the truer one.
 static const u16 sJynxLevelUpLearnset[] = {
     LEVEL_UP_MOVE(1, MOVE_POUND),
     LEVEL_UP_MOVE(1, MOVE_LICK),
@@ -1782,11 +1923,11 @@ static const u16 sJynxLevelUpLearnset[] = {
     LEVEL_UP_MOVE(1, MOVE_POWDER_SNOW),
     LEVEL_UP_MOVE(9, MOVE_LOVELY_KISS),
     LEVEL_UP_MOVE(13, MOVE_POWDER_SNOW),
-    LEVEL_UP_MOVE(21, MOVE_DOUBLE_SLAP),
+    LEVEL_UP_MOVE(21, MOVE_CONFUSION),
     LEVEL_UP_MOVE(25, MOVE_ICE_PUNCH),
     LEVEL_UP_MOVE(35, MOVE_MEAN_LOOK),
     LEVEL_UP_MOVE(41, MOVE_FAKE_TEARS),
-    LEVEL_UP_MOVE(51, MOVE_BODY_SLAM),
+    LEVEL_UP_MOVE(51, MOVE_PSYCHIC),
     LEVEL_UP_MOVE(57, MOVE_PERISH_SONG),
     LEVEL_UP_MOVE(67, MOVE_BLIZZARD),
     LEVEL_UP_END
@@ -1865,12 +2006,25 @@ static const u16 sMagikarpLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+
+//  T-36, SILENT TYPE. ESCALATE is FLOW/VECTOR and knew no VECTOR routine --
+//  which is VANILLA'S OWN oldest joke, a Flying type that cannot fly, and it
+//  survived the retype intact. STUB is FLOW only, so VECTOR arrives on
+//  evolution here too and arrives silent.
+//
+//  DISPATCH replaces ATTRACTOR at 35: 60 with the bonus against 40 without.
+//  Delivery with a heading is VECTOR's clause, and ESCALATE's Index entry is a
+//  thing that ended up somewhere it was never granted.
+//
+//  PHASE and BLOOM stay. A daemon that was doing nothing and is now
+//  unaccountable IS 4.26's EMERGENT, so two off-type routines here are the
+//  creature's history rather than drift.
 static const u16 sGyaradosLevelUpLearnset[] = {
     LEVEL_UP_MOVE(1, MOVE_THRASH),
     LEVEL_UP_MOVE(20, MOVE_BITE),
     LEVEL_UP_MOVE(25, MOVE_DRAGON_RAGE),
     LEVEL_UP_MOVE(30, MOVE_LEER),
-    LEVEL_UP_MOVE(35, MOVE_TWISTER),
+    LEVEL_UP_MOVE(35, MOVE_WING_ATTACK),
     LEVEL_UP_MOVE(40, MOVE_HYDRO_PUMP),
     LEVEL_UP_MOVE(45, MOVE_RAIN_DANCE),
     LEVEL_UP_MOVE(50, MOVE_DRAGON_DANCE),
@@ -2148,12 +2302,25 @@ static const u16 sDragoniteLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+
+//  T-36, SILENT TYPE. STARR is CONTEXT/EMERGENT and knew no EMERGENT routine,
+//  on the one daemon in the game whose entire Index entry is an account of
+//  emergence: it reads its own output, then reads that, and nothing tells it
+//  to stop.
+//
+//  RUNAWAY replaces UNERRING at 33. It locks the invoker in for several turns
+//  with no way to break out and leaves it incoherent afterwards -- THE ONLY
+//  ROUTINE IN THE GAME WHOSE DRAWBACK IS THE DAEMON'S OWN INDEX ENTRY. 90
+//  against 60, and on-type, so the numbers agree with the reading for once.
+//
+//  It also joins the right family: EMERGENCE and SINGULAR are the other two
+//  daemons that know it.
 static const u16 sMewtwoLevelUpLearnset[] = {
     LEVEL_UP_MOVE(1, MOVE_CONFUSION),
     LEVEL_UP_MOVE(1, MOVE_DISABLE),
     LEVEL_UP_MOVE(11, MOVE_BARRIER),
     LEVEL_UP_MOVE(22, MOVE_MIST),
-    LEVEL_UP_MOVE(33, MOVE_SWIFT),
+    LEVEL_UP_MOVE(33, MOVE_OUTRAGE),
     LEVEL_UP_MOVE(44, MOVE_RECOVER),
     LEVEL_UP_MOVE(55, MOVE_SAFEGUARD),
     LEVEL_UP_MOVE(66, MOVE_PSYCHIC),
