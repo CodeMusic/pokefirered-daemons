@@ -44,8 +44,9 @@ Route15_Text_ChesterDefeat::
 Route15_Text_ChesterPostBattle::
     .string "This is so obvious, you should know\n"
     .string "this, but…\p"
-    .string "Moves like UPHEAVAL and FISSURE\n"
-    .string "have no effect on bird DAEMONS.$"
+    .string "ROUTINES like UPHEAVAL and\n"
+    .string "FISSURE have no effect on bird\l"
+    .string "DAEMONS.$"
 
 Route15_Text_GraceIntro::
     .string "Oh, you're a little cutie! So like a\n"

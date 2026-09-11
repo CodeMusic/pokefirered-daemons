@@ -24,7 +24,7 @@ PewterCity_Gym_Text_BrockDefeat::
     .string "powerful.\p"
     .string "VERBOSE can now be used any time.\p"
     .string "Of course, a daemon must know the\n"
-    .string "move VERBOSE to use it.$"
+    .string "ROUTINE VERBOSE to use it.$"
 
 PewterCity_Gym_Text_TakeThisWithYou::
     .string "Wait!\n"
@@ -35,7 +35,7 @@ PewterCity_Gym_Text_ReceivedTM39FromBrock::
 
 PewterCity_Gym_Text_ExplainTM39::
     .string "A TM holds one technique.\p"
-    .string "Using it writes the move into a\n"
+    .string "Using it writes the ROUTINE into a\n"
     .string "daemon. Once.\p"
     .string "The TM does not survive that, so\n"
     .string "choose carefully.\p"

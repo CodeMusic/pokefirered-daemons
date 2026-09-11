@@ -22,8 +22,8 @@ CinnabarIsland_PokemonCenter_1F_Text_VisitUnionRoom::
 CinnabarIsland_PokemonCenter_1F_Text_EvolutionCanWaitForNewMoves::
     .string "DAEMON can still learn techniques\n"
     .string "after canceling evolution.\p"
-    .string "Evolution can wait until new moves\n"
-    .string "have been learned.$"
+    .string "Evolution can wait until new\n"
+    .string "ROUTINES have been learned.$"
 
 CinnabarIsland_PokemonCenter_1F_Text_ReadyToSailToOneIsland::
     .string "HOLT: Hey, you kept me waiting!\n"

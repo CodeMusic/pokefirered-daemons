@@ -20,7 +20,7 @@ Route2_EastBuilding_Text_ReceivedHM05FromAide::
     .string "from the AIDE.$"
 
 Route2_EastBuilding_Text_ExplainHM05::
-    .string "HM05 contains the hidden move\n"
+    .string "HM05 contains the hidden ROUTINE\n"
     .string "VERBOSE.\p"
     .string "VERBOSE lights up even the darkest\n"
     .string "of caves and dungeons.$"

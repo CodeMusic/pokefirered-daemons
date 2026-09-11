@@ -4,7 +4,7 @@ SSAnne_2F_Room3_Text_SeenMonsFerryPeople::
 
 SSAnne_2F_Room3_Text_SomeTreesCanBeCutDown::
     .string "Small trees can be chopped down\n"
-    .string "using the move PRUNE.\p"
+    .string "invoking the ROUTINE PRUNE.\p"
     .string "But remember this!\n"
     .string "PRUNE is an HM technique.\p"
     .string "Once learned, it is not so easily\n"

@@ -18,8 +18,9 @@ Text_ReceivedItemFromLittleGirl::
 
 CeladonCity_DepartmentStore_Roof_Text_ExplainTM16::
     .string "TM16 contains STEELMAN.\p"
-    .string "It's a move that weakens the power\n"
-    .string "of special attacks by your foe.$"
+    .string "It's a ROUTINE that weakens the\n"
+    .string "power of special attacks by your\l"
+    .string "foe.$"
 
 CeladonCity_DepartmentStore_Roof_Text_YaySodaPopHaveThis::
     .string "Yay!\p"
@@ -29,7 +30,7 @@ CeladonCity_DepartmentStore_Roof_Text_YaySodaPopHaveThis::
 
 CeladonCity_DepartmentStore_Roof_Text_ExplainTM20::
     .string "TM20 contains SAFEGUARD.\p"
-    .string "It's a move that prevents status\n"
+    .string "It's a ROUTINE that prevents status\n"
     .string "problems among your DAEMON.$"
 
 CeladonCity_DepartmentStore_Roof_Text_YayLemonadeHaveThis::
@@ -40,8 +41,9 @@ CeladonCity_DepartmentStore_Roof_Text_YayLemonadeHaveThis::
 
 CeladonCity_DepartmentStore_Roof_Text_ExplainTM33::
     .string "TM33 contains PARAPHRASE.\p"
-    .string "It's a move that weakens the power\n"
-    .string "of physical attacks by your foe.$"
+    .string "It's a ROUTINE that weakens the\n"
+    .string "power of physical attacks by your\l"
+    .string "foe.$"
 
 CeladonCity_DepartmentStore_Roof_Text_DontHaveSpaceForThis::
     .string "You don't have space for this!$"

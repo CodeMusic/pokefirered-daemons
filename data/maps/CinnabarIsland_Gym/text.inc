@@ -29,7 +29,7 @@ CinnabarIsland_Gym_Text_BlainePostBattle::
     .string "TM38 contains FLASHOVER. Teach it\n"
     .string "to ENTROPY-type DAEMON.\p"
     .string "FLICKER or RUBRIC would be ideal\n"
-    .string "for that move.$"
+    .string "for that ROUTINE.$"
 
 CinnabarIsland_Gym_Text_MakeSpaceForThis::
     .string "Make space for this, child!$"
@@ -162,7 +162,7 @@ CinnabarIsland_Gym_Text_QuizQuestion3::
     .string "LOOP evolves three times?$"
 
 CinnabarIsland_Gym_Text_QuizQuestion4::
-    .string "Are SIGNAL moves effective\n"
+    .string "Are SIGNAL ROUTINES effective\n"
     .string "against STRATUM-type DAEMON?$"
 
 CinnabarIsland_Gym_Text_QuizQuestion5::

@@ -315,8 +315,8 @@ Route13_Text_RobertRematchIntro::
 	.string "dedicated myself to them.$"
 
 Route14_Text_CarterRematchIntro::
-	.string "I used TMs to teach good moves to\n"
-	.string "my DAEMONS.$"
+	.string "I used TMs to teach good ROUTINES\n"
+	.string "to my DAEMONS.$"
 
 Route14_Text_MitchRematchIntro::
 	.string "My bird DAEMON should be ready for\n"

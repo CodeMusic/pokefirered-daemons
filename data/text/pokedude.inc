@@ -40,20 +40,20 @@ Pokedude_Text_YayWeManagedToWin::
 	.string "We managed to win!$"
 
 Pokedude_Text_WaterNotVeryEffectiveAgainstGrass::
-	.string "TUTOR: The move SEEP is a\n"
+	.string "TUTOR: The ROUTINE SEEP is a\n"
 	.string "FLOW-type attack.\p"
 	.string "The targeted WEED is a\n"
-	.string "GRASS/CORRUPT-type DAEMON.\p"
+	.string "GROWTH/CORRUPT-type DAEMON.\p"
 	.string "The FLOW-type attack is absorbed\n"
 	.string "by the GROWTH-type DAEMON…\p"
-	.string "As a result, the move becomes not\n"
-	.string "very effective, and inflicts only\l"
-	.string "half the usual damage.$"
+	.string "As a result, the ROUTINE becomes\n"
+	.string "not very effective, and inflicts\l"
+	.string "only half the usual damage.$"
 
 Pokedude_Text_GrassEffectiveAgainstWater::
 	.string "Uh-oh, this is not good!\p"
 	.string "The INGEST attack you just saw is\n"
-	.string "a GROWTH-type move.\p"
+	.string "a GROWTH-type ROUTINE.\p"
 	.string "LOOP is a FLOW-type DAEMON.\p"
 	.string "So, INGEST becomes super\n"
 	.string "effective, doubling the damage.$"
@@ -82,7 +82,7 @@ Pokedude_Text_ButterfreeDoubleResistsGrass::
 	.string "quarter of the usual damage.$"
 
 Pokedude_Text_ButterfreeGoodAgainstOddish::
-	.string "WEED is a GRASS/CORRUPT-type\n"
+	.string "WEED is a GROWTH/CORRUPT-type\n"
 	.string "DAEMON.\p"
 	.string "A FLYING- or CONSTRUE-type attack\n"
 	.string "is super effective against it.\p"

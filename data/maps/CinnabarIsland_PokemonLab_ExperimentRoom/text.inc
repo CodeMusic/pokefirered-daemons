@@ -1,10 +1,10 @@
 Text_MetronomeTeach::
     .string "Tch-tch-tch! I'll teach you a nifty\n"
-    .string "move.\p"
+    .string "ROUTINE.\p"
     .string "Teach it to a DAEMON, and watch\n"
     .string "the fun unfold!\p"
-    .string "It's a move called METRONOME. Does\n"
-    .string "it strike your fancy?$"
+    .string "It's a ROUTINE called METRONOME.\n"
+    .string "Does it strike your fancy?$"
 
 Text_MetronomeDeclined::
     .string "I tell you, it's a lot of fun!$"
@@ -17,7 +17,8 @@ Text_MetronomeTaught::
     .string "Tch-tch-tch! That's the sound of a\n"
     .string "METRONOME.\p"
     .string "It tweaks your DAEMON's brain into\n"
-    .string "using moves it doesn't even know.$"
+    .string "invoking ROUTINES it doesn't even\l"
+    .string "know.$"
 
 CinnabarIsland_PokemonLab_ExperimentRoom_Text_HaveYouAFossilForMe::
     .string "Hiya!\p"

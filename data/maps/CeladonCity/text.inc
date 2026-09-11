@@ -97,7 +97,7 @@ Text_SoftboiledTeach::
     .string "It must be good luck that brought\n"
     .string "us together finally.\p"
     .string "I'd like to celebrate by teaching\n"
-    .string "you the move REPAIR.$"
+    .string "you the ROUTINE REPAIR.$"
 
 Text_SoftboiledDeclined::
     .string "I'll always be keeping an eye out\n"

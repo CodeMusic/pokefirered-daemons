@@ -39,7 +39,7 @@ CeladonCity_Gym_Text_ExplainTM19::
     .string "Half the damage it inflicts is\n"
     .string "drained to heal your DAEMON.\p"
     .string "Wouldn't you agree that it's a\n"
-    .string "wonderful move?$"
+    .string "wonderful ROUTINE?$"
 
 CeladonCity_Gym_Text_ShouldMakeRoomForThis::
     .string "You should make room for this.$"

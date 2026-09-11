@@ -47,8 +47,8 @@ CeladonCity_DepartmentStore_3F_Text_RedGreenBothArePokemon::
 Text_CounterTeach::
     .string "Oh, hi! I finally finished DAEMON.\p"
     .string "Not done yet? How about I teach\n"
-    .string "you a good move?\p"
-    .string "The move I have in mind is\n"
+    .string "you a good ROUTINE?\p"
+    .string "The ROUTINE I have in mind is\n"
     .string "CONTRADICT.\p"
     .string "Not like the one I'm leaning on,\n"
     .string "mind you!$"
@@ -63,4 +63,4 @@ Text_CounterWhichMon::
 
 Text_CounterTaught::
     .string "Are you using that CONTRADICT\n"
-    .string "move I taught your DAEMON?$"
+    .string "ROUTINE I taught your DAEMON?$"

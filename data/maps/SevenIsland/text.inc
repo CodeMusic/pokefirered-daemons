@@ -3,8 +3,9 @@ Text_SwordsDanceTeach::
     .string "If I train here, I'm convinced that\n"
     .string "I'll get stronger and stronger.\p"
     .string "Yep, stronger and stronger…\p"
-    .string "How would you like to learn a move\n"
-    .string "like that? It's SWORDS DANCE.$"
+    .string "How would you like to learn a\n"
+    .string "ROUTINE like that? It's SWORDS\l"
+    .string "DANCE.$"
 
 Text_SwordsDanceDeclined::
     .string "Well, that's fine, too.$"

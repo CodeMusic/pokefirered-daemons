@@ -1,6 +1,6 @@
 Text_UltimateMoveThatMon::
-    .string "I perfected the ultimate move of\n"
-    .string "its type…\p"
+    .string "I perfected the ultimate ROUTINE\n"
+    .string "of its type…\p"
     .string "But will no one take it for\n"
     .string "future use?\p"
     .string "…Hm? Hmmm!\p"
@@ -15,7 +15,7 @@ Text_AllowMeToTeachMonUltimateMove::
     .string "Oh! This is the one! This is the\n"
     .string "DAEMON!\p"
     .string "This {STR_VAR_1} is worthy of learning\n"
-    .string "my ultimate move!\p"
+    .string "my ultimate ROUTINE!\p"
     .string "Will you allow it?\p"
     .string "Will you allow your {STR_VAR_1} to\n"
     .string "learn my {STR_VAR_2}?$"
@@ -33,11 +33,11 @@ Text_LetMeConferUltimateMove::
 Text_TaughtMove::
     .string "Gasp, gasp, gasp…\p"
     .string "I didn't think I could teach that\n"
-    .string "move while I still lived…$"
+    .string "ROUTINE while I still lived…$"
 
 Text_MakeBestUseOfMove::
-    .string "I implore you to make the best\n"
-    .string "use of that move and gain power!$"
+    .string "I implore you to make the best use\n"
+    .string "of that ROUTINE and gain power!$"
 
 Text_PassedOnEverythingIKnow::
     .string "Gasp, gasp, gasp…\p"

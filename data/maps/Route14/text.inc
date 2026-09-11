@@ -1,13 +1,13 @@
 Route14_Text_CarterIntro::
     .string "You need to use TMs to teach good\n"
-    .string "moves to DAEMON.$"
+    .string "ROUTINES to DAEMON.$"
 
 Route14_Text_CarterDefeat::
     .string "Not good enough quite yet.$"
 
 Route14_Text_CarterPostBattle::
     .string "You have some HMs, right? DAEMON\n"
-    .string "can't forget those moves easily.$"
+    .string "can't forget those ROUTINES easily.$"
 
 Route14_Text_MitchIntro::
     .string "My bird DAEMON should be ready for\n"
@@ -18,7 +18,7 @@ Route14_Text_MitchDefeat::
 
 Route14_Text_MitchPostBattle::
     .string "My bird DAEMON need to learn\n"
-    .string "better moves.$"
+    .string "better ROUTINES.$"
 
 Route14_Text_BeckIntro::
     .string "TMs are on sale in VERDIGRIS! But,\n"
@@ -28,10 +28,10 @@ Route14_Text_BeckDefeat::
     .string "Aww, bummer!$"
 
 Route14_Text_BeckPostBattle::
-    .string "Try teaching DAEMON a move that's\n"
-    .string "the same type as it.\p"
+    .string "Try teaching DAEMON a ROUTINE\n"
+    .string "that's the same type as it.\p"
     .string "That apparently boosts the power\n"
-    .string "of the move.$"
+    .string "of the ROUTINE.$"
 
 Route14_Text_MarlonIntro::
     .string "Have you taught your bird DAEMON\n"

@@ -14,7 +14,7 @@ SaffronCity_House_Text_GettingCopycatPokeDoll::
 SaffronCity_House_Text_ExplainPPUp::
     .string "I was given a MP UP as a gift.\p"
     .string "It's used to increase the MP of a\n"
-    .string "DAEMON's move.\p"
-    .string "I should use it on a powerful move\n"
-    .string "with only a few MP.$"
+    .string "DAEMON's ROUTINE.\p"
+    .string "I should use it on a powerful\n"
+    .string "ROUTINE with only a few MP.$"
 

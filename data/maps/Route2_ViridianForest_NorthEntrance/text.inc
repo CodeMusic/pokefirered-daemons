@@ -8,7 +8,7 @@ Route2_ViridianForest_NorthEntrance_Text_CanCutSkinnyTrees::
     .string "Have you noticed the skinny trees\n"
     .string "on the roadside?\p"
     .string "They can be cut down by a special\n"
-    .string "DAEMON move, I hear.$"
+    .string "DAEMON ROUTINE, I hear.$"
 
 Route2_ViridianForest_NorthEntrance_Text_CanCancelEvolution::
     .string "Do you know the evolution-cancel\n"

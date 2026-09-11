@@ -91,7 +91,7 @@ ViridianCity_Text_CatchMonsForEasierBattles::
 
 ViridianCity_Text_MovesLimitedByPP::
     .string "USER TIPS\p"
-    .string "Every move a daemon has costs\n"
+    .string "Every ROUTINE a daemon has costs\n"
     .string "MANA, shown as MP.\p"
     .string "Rest it at a CHECKPOINT to put the\n"
     .string "MP back.$"
