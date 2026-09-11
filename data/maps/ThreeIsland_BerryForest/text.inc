@@ -33,9 +33,9 @@ ThreeIsland_BerryForest_Text_BerryPouchIsFull::
     .string "you don't want this.$"
 
 ThreeIsland_BerryForest_Text_WelcomeToBerryForest::
-    .string "Welcome to the DENSE WOOD\p"
-    .string "Be friendly and share BERRIES with\n"
-    .string "others and DAEMON.$"
+    .string "DENSE WOOD\p"
+    .string "BERRIES grow here.\n"
+    .string "Other things eat them.$"
 
 ThreeIsland_BerryForest_Text_BewareWildBerryLovingMons::
     .string "Beware of wild, BERRY-loving\n"

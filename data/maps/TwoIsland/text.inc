@@ -1,14 +1,15 @@
 TwoIsland_Text_IslandSign::
     .string "TWO ISLAND\n"
-    .string "Boon Island for Two$"
+    .string "Small enough to walk\l"
+    .string "round before lunch$"
 
 TwoIsland_Text_JoyfulGameCornerSign::
     .string "Skip & Chomp!\n"
     .string "Joyful GAME CORNER$"
 
 TwoIsland_Text_DangerFastCurrent::
-    .string "DANGER! FAST CURRENT!\n"
-    .string "Fishing and surfing prohibited!$"
+    .string "The current runs hard here.\n"
+    .string "It has carried people out.$"
 
 TwoIsland_Text_WelcomeToShopMerchandiseLimited::
     .string "Oh!\n"

@@ -20,7 +20,8 @@ Text_SwordsDanceTaught::
 
 SevenIsland_Text_IslandSign::
     .string "SEVEN ISLAND\n"
-    .string "Quest Island of Infinity$"
+    .string "Ruins, and a tower\l"
+    .string "somebody built later$"
 
 SevenIsland_Text_IslandsMadeInSevenDays::
     .string "These islands are called the SEVII\n"
