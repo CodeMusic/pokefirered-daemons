@@ -90,11 +90,11 @@ PalletTown_ProfessorOaksLab_Text_OakHeyDontGoAwayYet::
     .string "CRYSTAL: Not yet. Come back here.$"
 
 PalletTown_ProfessorOaksLab_Text_OakChoosingCharmander::
-    .string "The CONTENT one, LABL? It names\n"
+    .string "The CONTENT one, LABEL? It names\n"
     .string "things. It is usually right.$"
 
 PalletTown_ProfessorOaksLab_Text_OakChoosingSquirtle::
-    .string "The VECTOR one, CLUSTR? It finds\n"
+    .string "The VECTOR one, CLUSTER? It finds\n"
     .string "what belongs together.$"
 
 PalletTown_ProfessorOaksLab_Text_OakChoosingBulbasaur::

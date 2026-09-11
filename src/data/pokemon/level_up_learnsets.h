@@ -1682,7 +1682,7 @@ static const u16 sExeggcuteLevelUpLearnset[] = {
 
 
 //  T-36, SILENT TYPE. ENSEMBLE is GROWTH/CONTEXT and knew no GROWTH routine,
-//  while CLUSTER one stage down knows BATCH, SEED, SATURATE and STARVE. The
+//  while BOOTSTRAP one stage down knows BATCH, SEED, SATURATE and STARVE. The
 //  most GROWTH-shaped daemon in the bestiary lost the whole type by evolving.
 //
 //  BATCH comes back at 31 in DROP's slot: 120 with the bonus is 180 against
