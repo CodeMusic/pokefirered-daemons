@@ -1558,6 +1558,11 @@
 //  after. The NOTE ITSELF never changes once it is there, which is 4.34's
 //  third ruling and the whole of why 4.24 works on a second reading.
 #define FLAG_CRYSTAL_GONE             (DAEMONS_FLAGS_START + 0x30)
+//  T-28. 4.24's peer review, staged. Not readable by the player anywhere --
+//  4.34's first ruling is that the scene leaves no document, no item and no
+//  record. This exists so the scene does not repeat and so T-29 knows it has
+//  happened, and nothing else ever tests it.
+#define FLAG_OWL_CONCEDED             (DAEMONS_FLAGS_START + 0x31)
 
 //  T-19. Two beats of one scene, five islands and a sea apart.
 #define FLAG_TY_GAVE_PAYLOAD          (DAEMONS_FLAGS_START + 0x20)

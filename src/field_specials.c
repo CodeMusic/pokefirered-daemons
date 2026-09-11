@@ -185,6 +185,25 @@ void ShowTownMap(void)
     InitRegionMapWithExitCB(REGIONMAP_TYPE_WALL, CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
+//  T-28. 4.34: "you bring the machine to the scholar", so the gate is the
+//  machine being IN THE PARTY rather than merely caught -- a player who beat
+//  it and walked away has not brought it anywhere. Egg-safe for the same
+//  reason the grass check above is, and no flag is set either way: 4.34's
+//  first ruling is that the scene leaves nothing the player can read.
+bool8 DaemonsPartyHasStarr(void)
+{
+    u8 i;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SANITY_HAS_SPECIES)
+         && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG)
+         && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) == SPECIES_MEWTWO)
+            return TRUE;
+    }
+    return FALSE;
+}
+
 bool8 PlayerHasGrassPokemonInParty(void)
 {
     u8 i;

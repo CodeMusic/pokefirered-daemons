@@ -308,6 +308,7 @@ gSpecials::
 	def_special InitRoamer
 	def_special NullFieldSpecial
 	def_special PlayerHasGrassPokemonInParty
+	def_special DaemonsPartyHasStarr
 	def_special NullFieldSpecial
 	def_special NullFieldSpecial
 	def_special IsStarterFirstStageInParty
