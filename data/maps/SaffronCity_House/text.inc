@@ -9,7 +9,7 @@ SaffronCity_House_Text_Pidgey::
 
 SaffronCity_House_Text_GettingCopycatPokeDoll::
     .string "The COPYCAT is cute! I'm getting\n"
-    .string "her a POKé DOLL!$"
+    .string "her a DECOY!$"
 
 SaffronCity_House_Text_ExplainPPUp::
     .string "I was given a MP UP as a gift.\p"

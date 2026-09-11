@@ -1,11 +1,11 @@
 CeladonCity_DepartmentStore_4F_Text_GettingPokeDollAsPresent::
-    .string "I'm getting a POKé DOLL for my girl\n"
+    .string "I'm getting a DECOY for my girl\n"
     .string "friend!$"
 
 CeladonCity_DepartmentStore_4F_Text_CanRunAwayWithPokeDoll::
     .string "I heard something useful.\p"
     .string "You can run from wild DAEMON by\n"
-    .string "distracting them with a POKé DOLL!$"
+    .string "distracting them with a DECOY!$"
 
 CeladonCity_DepartmentStore_4F_Text_FloorSign::
     .string "Express yourself with gifts!\n"

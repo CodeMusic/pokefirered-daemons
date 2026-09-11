@@ -13,7 +13,7 @@ SaffronCity_CopycatsHouse_2F_Text_MimickingFavoriteHobbyFemale::
     .string "that's my favorite hobby!$"
 
 Text_MimicTeach::
-    .string "Oh wow! A POKé DOLL!\p"
+    .string "Oh wow! A DECOY!\p"
     .string "For me? Thank you!\p"
     .string "You can have this, then!$"
 
