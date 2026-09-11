@@ -162,9 +162,20 @@ static const u16 sMetapodLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+
+//  T-41, MIXED SIGNAL and LATE TYPE. INDEXER is SWARM/VECTOR and the only
+//  typed routine it had before level 28 was MISREAD, which is CONTEXT -- and
+//  it had it TWICE, at 1 and at 10, the same entry counted again.
+//
+//  DRIFT takes the duplicate at 10. That is the level the creature evolves at,
+//  so it is exactly when a player meets it, and wings are what they are
+//  looking at. VECTOR arrives 18 levels earlier and one dead entry is gone.
+//
+//  MISREAD stays at 1. Reading something as what it is not is what this
+//  daemon's whole family does, and one off-type routine that TRUE is coverage.
 static const u16 sButterfreeLevelUpLearnset[] = {
     LEVEL_UP_MOVE(1, MOVE_CONFUSION),
-    LEVEL_UP_MOVE(10, MOVE_CONFUSION),
+    LEVEL_UP_MOVE(10, MOVE_GUST),
     LEVEL_UP_MOVE(13, MOVE_POISON_POWDER),
     LEVEL_UP_MOVE(14, MOVE_STUN_SPORE),
     LEVEL_UP_MOVE(15, MOVE_SLEEP_POWDER),
@@ -367,11 +378,22 @@ static const u16 sRaichuLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+
+//  T-41, LATE TYPE. SECTOR is STRATUM and the first STRATUM routine that hits
+//  was BURY at 45 -- for FIFTEEN POWER, at the level most players have
+//  finished. SILT is on-type and arrives early, and it does no damage, so
+//  nothing the creature DID was ever the ground.
+//
+//  EXCAVATE replaces TAINT at 17: 60 against 15, on-type, and it also removes
+//  the line's only CORRUPT routine, which never belonged on a daemon that is
+//  not CORRUPT. Digging is the whole of what this creature is for.
+//
+//  SPLICE stays. The claws are the other half of it.
 static const u16 sSandshrewLevelUpLearnset[] = {
     LEVEL_UP_MOVE(1, MOVE_SCRATCH),
     LEVEL_UP_MOVE(6, MOVE_DEFENSE_CURL),
     LEVEL_UP_MOVE(11, MOVE_SAND_ATTACK),
-    LEVEL_UP_MOVE(17, MOVE_POISON_STING),
+    LEVEL_UP_MOVE(17, MOVE_DIG),
     LEVEL_UP_MOVE(23, MOVE_SLASH),
     LEVEL_UP_MOVE(30, MOVE_SWIFT),
     LEVEL_UP_MOVE(37, MOVE_FURY_SWIPES),
@@ -380,13 +402,24 @@ static const u16 sSandshrewLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+
+//  T-41, LATE TYPE. PARTITION is STRATUM and the first STRATUM routine that hits
+//  was BURY at 52 -- for FIFTEEN POWER, at the level most players have
+//  finished. SILT is on-type and arrives early, and it does no damage, so
+//  nothing the creature DID was ever the ground.
+//
+//  EXCAVATE replaces TAINT at 17: 60 against 15, on-type, and it also removes
+//  the line's only CORRUPT routine, which never belonged on a daemon that is
+//  not CORRUPT. Digging is the whole of what this creature is for.
+//
+//  SPLICE stays. The claws are the other half of it.
 static const u16 sSandslashLevelUpLearnset[] = {
     LEVEL_UP_MOVE(1, MOVE_SCRATCH),
     LEVEL_UP_MOVE(1, MOVE_DEFENSE_CURL),
     LEVEL_UP_MOVE(1, MOVE_SAND_ATTACK),
     LEVEL_UP_MOVE(6, MOVE_DEFENSE_CURL),
     LEVEL_UP_MOVE(11, MOVE_SAND_ATTACK),
-    LEVEL_UP_MOVE(17, MOVE_POISON_STING),
+    LEVEL_UP_MOVE(17, MOVE_DIG),
     LEVEL_UP_MOVE(24, MOVE_SLASH),
     LEVEL_UP_MOVE(33, MOVE_SWIFT),
     LEVEL_UP_MOVE(42, MOVE_FURY_SWIPES),
@@ -447,9 +480,21 @@ static const u16 sNidoqueenLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+
+//  T-41, MIXED SIGNAL. BRANCH is CORRUPT and the first thing it did was PROBE,
+//  which is VECTOR -- a flying routine on a daemon made of poison. Its sister
+//  line opens with FLIP and always has, so the pair were teaching two
+//  different creatures out of one split.
+//
+//  FLIP for PROBE at 1, 40 for 35, and the pair rhymes again. CONTENT opens it
+//  now, which 2.8 rules says nothing false: the plainest operation there is,
+//  and every daemon can do it. TAINT still arrives at 17 and the horn arrives
+//  with INSERT at 20, so nothing this daemon IS has been taken away.
+//
+//  PROBE was not deleted. It went to ECHO, which navigates by asking.
 static const u16 sNidoranMLevelUpLearnset[] = {
     LEVEL_UP_MOVE(1, MOVE_LEER),
-    LEVEL_UP_MOVE(1, MOVE_PECK),
+    LEVEL_UP_MOVE(1, MOVE_SCRATCH),
     LEVEL_UP_MOVE(8, MOVE_FOCUS_ENERGY),
     LEVEL_UP_MOVE(12, MOVE_DOUBLE_KICK),
     LEVEL_UP_MOVE(17, MOVE_POISON_STING),
@@ -461,9 +506,21 @@ static const u16 sNidoranMLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+
+//  T-41, MIXED SIGNAL. PREDICTOR is CORRUPT and the first thing it did was PROBE,
+//  which is VECTOR -- a flying routine on a daemon made of poison. Its sister
+//  line opens with FLIP and always has, so the pair were teaching two
+//  different creatures out of one split.
+//
+//  FLIP for PROBE at 1, 40 for 35, and the pair rhymes again. CONTENT opens it
+//  now, which 2.8 rules says nothing false: the plainest operation there is,
+//  and every daemon can do it. TAINT still arrives at 18 and the horn arrives
+//  with INSERT at 22, so nothing this daemon IS has been taken away.
+//
+//  PROBE was not deleted. It went to ECHO, which navigates by asking.
 static const u16 sNidorinoLevelUpLearnset[] = {
     LEVEL_UP_MOVE(1, MOVE_LEER),
-    LEVEL_UP_MOVE(1, MOVE_PECK),
+    LEVEL_UP_MOVE(1, MOVE_SCRATCH),
     LEVEL_UP_MOVE(8, MOVE_FOCUS_ENERGY),
     LEVEL_UP_MOVE(12, MOVE_DOUBLE_KICK),
     LEVEL_UP_MOVE(18, MOVE_POISON_STING),
@@ -570,9 +627,23 @@ static const u16 sWigglytuffLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+
+//  T-41, MIXED SIGNAL. ECHO is CORRUPT/VECTOR and everything it did before
+//  level 10 was SWARM or LATENT -- two types it does not have -- while
+//  DISPATCH, the first routine of its own, waited until 21. 2.7b called this
+//  one out by name: a daemon whose whole identity is navigating by reply, and
+//  nothing it did early said so.
+//
+//  PROBE replaces SURFACE at 6. 35 against 30, on-type, and the word is what
+//  the creature does: it sends something out to find out what is there. It
+//  comes off the NIDORAN line in the same pass, where it had been a flying
+//  routine on a poison daemon and meant nothing.
+//
+//  SIPHON stays at 1. It is the line's oldest routine and draining what you
+//  land on is true of a bat whatever the chart says.
 static const u16 sZubatLevelUpLearnset[] = {
     LEVEL_UP_MOVE(1, MOVE_LEECH_LIFE),
-    LEVEL_UP_MOVE(6, MOVE_ASTONISH),
+    LEVEL_UP_MOVE(6, MOVE_PECK),
     LEVEL_UP_MOVE(11, MOVE_SUPERSONIC),
     LEVEL_UP_MOVE(16, MOVE_BITE),
     LEVEL_UP_MOVE(21, MOVE_WING_ATTACK),
@@ -584,12 +655,26 @@ static const u16 sZubatLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+
+//  T-41, MIXED SIGNAL. TRACER is CORRUPT/VECTOR and everything it did before
+//  level 10 was SWARM or LATENT -- two types it does not have -- while
+//  DISPATCH, the first routine of its own, waited until 21. 2.7b called this
+//  one out by name: a daemon whose whole identity is navigating by reply, and
+//  nothing it did early said so.
+//
+//  PROBE replaces SURFACE at 6. 35 against 30, on-type, and the word is what
+//  the creature does: it sends something out to find out what is there. It
+//  comes off the NIDORAN line in the same pass, where it had been a flying
+//  routine on a poison daemon and meant nothing.
+//
+//  SIPHON stays at 1. It is the line's oldest routine and draining what you
+//  land on is true of a bat whatever the chart says.
 static const u16 sGolbatLevelUpLearnset[] = {
     LEVEL_UP_MOVE(1, MOVE_SCREECH),
     LEVEL_UP_MOVE(1, MOVE_LEECH_LIFE),
     LEVEL_UP_MOVE(1, MOVE_ASTONISH),
     LEVEL_UP_MOVE(1, MOVE_SUPERSONIC),
-    LEVEL_UP_MOVE(6, MOVE_ASTONISH),
+    LEVEL_UP_MOVE(6, MOVE_PECK),
     LEVEL_UP_MOVE(11, MOVE_SUPERSONIC),
     LEVEL_UP_MOVE(16, MOVE_BITE),
     LEVEL_UP_MOVE(21, MOVE_WING_ATTACK),
@@ -774,9 +859,19 @@ static const u16 sPersianLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+
+//  T-41, LATE TYPE. FAULT is FLOW and its first FLOW routine that hits was
+//  FLUSH at 50. DAMPEN sits at level 1 and says the right thing, but a status
+//  routine is not what teaches -- a player learns what a daemon is by watching
+//  it attack, and for 49 levels this one attacked as CONTENT.
+//
+//  TRICKLE replaces FLIP at 1, 40 for 40, exactly even. The 2.8 ruling says a
+//  CONTENT opener says nothing FALSE, and that is the whole of its defence:
+//  it says nothing. On a line that then says nothing for another 49 levels,
+//  nothing is not enough.
 static const u16 sPsyduckLevelUpLearnset[] = {
     LEVEL_UP_MOVE(1, MOVE_WATER_SPORT),
-    LEVEL_UP_MOVE(1, MOVE_SCRATCH),
+    LEVEL_UP_MOVE(1, MOVE_WATER_GUN),
     LEVEL_UP_MOVE(5, MOVE_TAIL_WHIP),
     LEVEL_UP_MOVE(10, MOVE_DISABLE),
     LEVEL_UP_MOVE(16, MOVE_CONFUSION),
@@ -787,9 +882,19 @@ static const u16 sPsyduckLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+
+//  T-41, LATE TYPE. HANDLER is FLOW and its first FLOW routine that hits was
+//  FLUSH at 58. DAMPEN sits at level 1 and says the right thing, but a status
+//  routine is not what teaches -- a player learns what a daemon is by watching
+//  it attack, and for 57 levels this one attacked as CONTENT.
+//
+//  TRICKLE replaces FLIP at 1, 40 for 40, exactly even. The 2.8 ruling says a
+//  CONTENT opener says nothing FALSE, and that is the whole of its defence:
+//  it says nothing. On a line that then says nothing for another 57 levels,
+//  nothing is not enough.
 static const u16 sGolduckLevelUpLearnset[] = {
     LEVEL_UP_MOVE(1, MOVE_WATER_SPORT),
-    LEVEL_UP_MOVE(1, MOVE_SCRATCH),
+    LEVEL_UP_MOVE(1, MOVE_WATER_GUN),
     LEVEL_UP_MOVE(1, MOVE_TAIL_WHIP),
     LEVEL_UP_MOVE(1, MOVE_DISABLE),
     LEVEL_UP_MOVE(5, MOVE_TAIL_WHIP),
@@ -1323,10 +1428,21 @@ static const u16 sMukLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+
+//  T-41, MIXED SIGNAL and LATE TYPE. CAPSULE is FLOW, the only typed thing it
+//  did early was ICICLE SPEAR (FROZEN), and its first FLOW routine that hits
+//  was SLUICE at 43 -- for 35 power.
+//
+//  TRICKLE replaces it at 8: 40 against 10, on-type, and a shell that opens
+//  and squirts is the oldest thing this creature does.
+//
+//  CONSTRAIN and FREEZE stay off-type on purpose. CAPSULE is a water daemon
+//  that fights by cold, which is 2.7b's chosen residual and not drift -- the
+//  point is that it no longer OPENS by pretending the cold is what it is.
 static const u16 sShellderLevelUpLearnset[] = {
     LEVEL_UP_MOVE(1, MOVE_TACKLE),
     LEVEL_UP_MOVE(1, MOVE_WITHDRAW),
-    LEVEL_UP_MOVE(8, MOVE_ICICLE_SPEAR),
+    LEVEL_UP_MOVE(8, MOVE_WATER_GUN),
     LEVEL_UP_MOVE(15, MOVE_SUPERSONIC),
     LEVEL_UP_MOVE(22, MOVE_AURORA_BEAM),
     LEVEL_UP_MOVE(29, MOVE_PROTECT),
@@ -1698,10 +1814,19 @@ static const u16 sWeezingLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+
+//  T-41, LATE TYPE. RAMROD is STRATUM/LEGACY and the first on-type routine was
+//  BURST at 29, which is the LEGACY half; STRATUM itself waited for UPHEAVAL
+//  at 52. The ground daemon did not touch the ground until the level cap.
+//
+//  TREMOR replaces CRUSH at 10, and it is the same act read properly: CRUSH is
+//  a heavy thing coming down and TREMOR is what the floor does about it. The
+//  power is variable where CRUSH was flat 65, which suits a creature that
+//  charges without deciding how hard.
 static const u16 sRhyhornLevelUpLearnset[] = {
     LEVEL_UP_MOVE(1, MOVE_HORN_ATTACK),
     LEVEL_UP_MOVE(1, MOVE_TAIL_WHIP),
-    LEVEL_UP_MOVE(10, MOVE_STOMP),
+    LEVEL_UP_MOVE(10, MOVE_MAGNITUDE),
     LEVEL_UP_MOVE(15, MOVE_FURY_ATTACK),
     LEVEL_UP_MOVE(24, MOVE_SCARY_FACE),
     LEVEL_UP_MOVE(29, MOVE_ROCK_BLAST),
@@ -1712,12 +1837,21 @@ static const u16 sRhyhornLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+
+//  T-41, LATE TYPE. BULLDOZER is STRATUM/LEGACY and the first on-type routine was
+//  BURST at 29, which is the LEGACY half; STRATUM itself waited for UPHEAVAL
+//  at 58. The ground daemon did not touch the ground until the level cap.
+//
+//  TREMOR replaces CRUSH at 10, and it is the same act read properly: CRUSH is
+//  a heavy thing coming down and TREMOR is what the floor does about it. The
+//  power is variable where CRUSH was flat 65, which suits a creature that
+//  charges without deciding how hard.
 static const u16 sRhydonLevelUpLearnset[] = {
     LEVEL_UP_MOVE(1, MOVE_HORN_ATTACK),
     LEVEL_UP_MOVE(1, MOVE_TAIL_WHIP),
     LEVEL_UP_MOVE(1, MOVE_STOMP),
     LEVEL_UP_MOVE(1, MOVE_FURY_ATTACK),
-    LEVEL_UP_MOVE(10, MOVE_STOMP),
+    LEVEL_UP_MOVE(10, MOVE_MAGNITUDE),
     LEVEL_UP_MOVE(15, MOVE_FURY_ATTACK),
     LEVEL_UP_MOVE(24, MOVE_SCARY_FACE),
     LEVEL_UP_MOVE(29, MOVE_ROCK_BLAST),
@@ -1801,8 +1935,19 @@ static const u16 sSeadraLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+
+//  T-41, MIXED SIGNAL and LATE TYPE, which on this line are one fault. SPAWN
+//  is FLOW, it opened with PROBE (VECTOR), and its first FLOW routine that
+//  actually hits was ASCEND at 38. A water daemon spent 37 levels teaching a
+//  player it was something else.
+//
+//  TRICKLE takes level 1, 40 against 35, and FLOW is now the first thing it
+//  does as well as the first thing it says -- DAMPEN was already there at 1
+//  and nothing was listening, because a status routine is not what teaches.
+//
+//  The horn is not lost: INSERT arrives at 15 and HERD at 57.
 static const u16 sGoldeenLevelUpLearnset[] = {
-    LEVEL_UP_MOVE(1, MOVE_PECK),
+    LEVEL_UP_MOVE(1, MOVE_WATER_GUN),
     LEVEL_UP_MOVE(1, MOVE_TAIL_WHIP),
     LEVEL_UP_MOVE(1, MOVE_WATER_SPORT),
     LEVEL_UP_MOVE(10, MOVE_SUPERSONIC),
@@ -1816,8 +1961,19 @@ static const u16 sGoldeenLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+
+//  T-41, MIXED SIGNAL and LATE TYPE, which on this line are one fault. UPSTREAM
+//  is FLOW, it opened with PROBE (VECTOR), and its first FLOW routine that
+//  actually hits was ASCEND at 41. A water daemon spent 40 levels teaching a
+//  player it was something else.
+//
+//  TRICKLE takes level 1, 40 against 35, and FLOW is now the first thing it
+//  does as well as the first thing it says -- DAMPEN was already there at 1
+//  and nothing was listening, because a status routine is not what teaches.
+//
+//  The horn is not lost: INSERT arrives at 15 and HERD at 69.
 static const u16 sSeakingLevelUpLearnset[] = {
-    LEVEL_UP_MOVE(1, MOVE_PECK),
+    LEVEL_UP_MOVE(1, MOVE_WATER_GUN),
     LEVEL_UP_MOVE(1, MOVE_TAIL_WHIP),
     LEVEL_UP_MOVE(1, MOVE_WATER_SPORT),
     LEVEL_UP_MOVE(1, MOVE_SUPERSONIC),
@@ -1887,11 +2043,20 @@ static const u16 sMrMimeLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+
+//  T-41, LATE TYPE. REAPER is SWARM/VECTOR and its first on-type routine was
+//  DISPATCH at 26; the SWARM half is FURY CUTTER at 46, for ten power. Both
+//  halves of a two-type daemon arriving in the last third is the label doing
+//  all the work.
+//
+//  SHEAR replaces TAIL at 11: 55 against 40, on-type, and it drops an OPAQUE
+//  routine from a daemon that is not OPAQUE. A creature whose arms are blades
+//  cutting the air between it and the target needs no further defence.
 static const u16 sScytherLevelUpLearnset[] = {
     LEVEL_UP_MOVE(1, MOVE_QUICK_ATTACK),
     LEVEL_UP_MOVE(1, MOVE_LEER),
     LEVEL_UP_MOVE(6, MOVE_FOCUS_ENERGY),
-    LEVEL_UP_MOVE(11, MOVE_PURSUIT),
+    LEVEL_UP_MOVE(11, MOVE_AIR_CUTTER),
     LEVEL_UP_MOVE(16, MOVE_FALSE_SWIPE),
     LEVEL_UP_MOVE(21, MOVE_AGILITY),
     LEVEL_UP_MOVE(26, MOVE_WING_ATTACK),
@@ -2019,9 +2184,16 @@ static const u16 sMagikarpLevelUpLearnset[] = {
 //  PHASE and BLOOM stay. A daemon that was doing nothing and is now
 //  unaccountable IS 4.26's EMERGENT, so two off-type routines here are the
 //  creature's history rather than drift.
+//
+//  T-41, LATE TYPE, same daemon a pass later. DISPATCH at 35 was still the
+//  first on-type routine and the FLOW half waited for FLUSH at 40 -- on a
+//  creature that EVOLVES at 20, so fifteen levels of it were off-type by
+//  construction. CAVITATE replaces OCCLUDE at 20, 65 against 60, and it takes
+//  the slot from an OPAQUE routine rather than from either of the two the
+//  paragraph above just promised to keep.
 static const u16 sGyaradosLevelUpLearnset[] = {
     LEVEL_UP_MOVE(1, MOVE_THRASH),
-    LEVEL_UP_MOVE(20, MOVE_BITE),
+    LEVEL_UP_MOVE(20, MOVE_BUBBLE_BEAM),
     LEVEL_UP_MOVE(25, MOVE_DRAGON_RAGE),
     LEVEL_UP_MOVE(30, MOVE_LEER),
     LEVEL_UP_MOVE(35, MOVE_WING_ATTACK),
@@ -2330,10 +2502,18 @@ static const u16 sMewtwoLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+
+//  T-41, LATE TYPE. ARTSAI is CONTEXT and CONSTRUE at 40 was the first routine
+//  of its own type. On the daemon that can become anything, the type that
+//  means "the frame you read a thing in" arrived two thirds of the way up.
+//
+//  SLANT replaces COMMIT at 20: 65 with the bonus is 97 against a flat 80, so
+//  it is stronger as well as truer, and reading a thing at an angle is nearer
+//  to what this creature does than hitting it hard is.
 static const u16 sMewLevelUpLearnset[] = {
     LEVEL_UP_MOVE(1, MOVE_POUND),
     LEVEL_UP_MOVE(10, MOVE_TRANSFORM),
-    LEVEL_UP_MOVE(20, MOVE_MEGA_PUNCH),
+    LEVEL_UP_MOVE(20, MOVE_PSYBEAM),
     LEVEL_UP_MOVE(30, MOVE_METRONOME),
     LEVEL_UP_MOVE(40, MOVE_PSYCHIC),
     LEVEL_UP_MOVE(50, MOVE_ANCIENT_POWER),
@@ -2582,12 +2762,26 @@ static const u16 sAriadosLevelUpLearnset[] = {
     LEVEL_UP_END
 };
 
+
+//  T-41, MIXED SIGNAL. MULTICAST is CORRUPT/VECTOR and everything it did before
+//  level 10 was SWARM or LATENT -- two types it does not have -- while
+//  DISPATCH, the first routine of its own, waited until 21. 2.7b called this
+//  one out by name: a daemon whose whole identity is navigating by reply, and
+//  nothing it did early said so.
+//
+//  PROBE replaces SURFACE at 6. 35 against 30, on-type, and the word is what
+//  the creature does: it sends something out to find out what is there. It
+//  comes off the NIDORAN line in the same pass, where it had been a flying
+//  routine on a poison daemon and meant nothing.
+//
+//  SIPHON stays at 1. It is the line's oldest routine and draining what you
+//  land on is true of a bat whatever the chart says.
 static const u16 sCrobatLevelUpLearnset[] = {
     LEVEL_UP_MOVE(1, MOVE_SCREECH),
     LEVEL_UP_MOVE(1, MOVE_LEECH_LIFE),
     LEVEL_UP_MOVE(1, MOVE_ASTONISH),
     LEVEL_UP_MOVE(1, MOVE_SUPERSONIC),
-    LEVEL_UP_MOVE(6, MOVE_ASTONISH),
+    LEVEL_UP_MOVE(6, MOVE_PECK),
     LEVEL_UP_MOVE(11, MOVE_SUPERSONIC),
     LEVEL_UP_MOVE(16, MOVE_BITE),
     LEVEL_UP_MOVE(21, MOVE_WING_ATTACK),
