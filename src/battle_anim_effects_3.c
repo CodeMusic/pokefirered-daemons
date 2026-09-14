@@ -2224,16 +2224,15 @@ void AnimTask_SwallowDeformMon(u8 taskId)
 }
 
 // PERSPECTIVE'S COLOUR FLASH (vision.md 4.6, settled 2026-09-13). In Halftone
-// the scene and the side you face are grey; the moment a daemon takes another's
-// frame, the colour comes back for a second, and then it goes. Scoping it to
-// the one grey town is what settles 4.6's worry: MOCK knows PERSPECTIVE too, but
-// the flash can only happen where the world is grey, so it stays rare by place.
+// everything on the screen is grey; the moment a daemon takes another's frame,
+// the colour comes back for a second, and then it goes. Scoping it to the one
+// grey town is what settles 4.6's worry: MOCK knows PERSPECTIVE too, but the
+// flash can only happen where the world is grey, so it stays rare by place.
 static void AnimTask_DaemonsPerspectiveFlash_Step(u8 taskId)
 {
     if (++gTasks[taskId].data[0] < 60)
         return;
-    DaemonsSetBattleTerrainColour(FALSE);
-    DaemonsSetOpposingBattlerColour(FALSE);
+    DaemonsSetHalftoneColour(FALSE);
     DestroyAnimVisualTask(taskId);
 }
 
@@ -2244,8 +2243,7 @@ void AnimTask_DaemonsPerspectiveFlash(u8 taskId)
         DestroyAnimVisualTask(taskId);
         return;
     }
-    DaemonsSetBattleTerrainColour(TRUE);
-    DaemonsSetOpposingBattlerColour(TRUE);
+    DaemonsSetHalftoneColour(TRUE);
     gTasks[taskId].data[0] = 0;
     gTasks[taskId].func = AnimTask_DaemonsPerspectiveFlash_Step;
 }

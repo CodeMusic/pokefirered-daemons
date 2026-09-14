@@ -850,12 +850,44 @@ static void CopyTilesetToVramUsingHeap(struct Tileset const *tileset, u16 numTil
 // HALFTONE IS THE TOWN AND ITS TOWER. The tower has its own map section, so a
 // check on the town's section alone left all seven floors in colour -- and the
 // tower is where Halftone's lesson lives: something the Index cannot name, and
-// an instrument needed to see it. Battles ask this too (battle_bg.c,
-// battle_gfx_sfx_util.c), so the scene stays grey when a fight starts.
+// an instrument needed to see it. Battles ask this too, so the scene stays
+// grey when a fight starts.
 bool8 DaemonsIsHalftone(void)
 {
     return gMapHeader.regionMapSectionId == MAPSEC_LAVENDER_TOWN
         || gMapHeader.regionMapSectionId == MAPSEC_POKEMON_TOWER;
+}
+
+// IN HALFTONE EVERYTHING IS GREY (vision.md 8.6a, revised 2026-09-13): the
+// town, the tower, the battle, your own daemons, you, and every window of text.
+// Greying each loader missed whatever it did not name -- the healthboxes, the
+// menus, the message box -- so this greys the one buffer every palette reaches
+// the screen through, once a frame, just before the vblank copies it out.
+// gPlttBufferUnfaded is left in colour, which is what lets PERSPECTIVE's flash
+// put the colour back in one copy. A colour that is already grey is one
+// multiply and a compare, so a settled frame costs almost nothing.
+EWRAM_DATA static bool8 sDaemonsHalftoneInColour = FALSE;
+
+void DaemonsSetHalftoneColour(bool8 inColour)
+{
+    sDaemonsHalftoneInColour = inColour;
+    if (inColour && !gPaletteFade.active)
+        CpuCopy16(gPlttBufferUnfaded, gPlttBufferFaded, PLTT_SIZE);
+}
+
+void DaemonsGreyHalftoneFrame(void)
+{
+    u16 *colour;
+    s32 i;
+
+    if (sDaemonsHalftoneInColour || !DaemonsIsHalftone())
+        return;
+    colour = gPlttBufferFaded;
+    for (i = 0; i < (s32)PLTT_BUFFER_SIZE; i++, colour++)
+    {
+        if (*colour != (*colour & 0x1F) * 0x421)
+            TintPalette_GrayScale(colour, 1);
+    }
 }
 
 u8 DaemonsFieldTint(void)

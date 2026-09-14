@@ -11,7 +11,6 @@ void InitAndLaunchSpecialAnimation(u8 activeBattler, u8 atkBattler, u8 defBattle
 bool8 IsMoveWithoutAnimation(u16 moveId, u8 animationTurn);
 bool8 IsBattleSEPlaying(u8 battlerId);
 void BattleLoadOpponentMonSpriteGfx(struct Pokemon *mon, u8 battlerId);
-void DaemonsSetOpposingBattlerColour(bool8 inColour);
 void BattleLoadPlayerMonSpriteGfx(struct Pokemon *mon, u8 battlerId);
 void DecompressGhostFrontPic(struct Pokemon *unused, u8 battlerId);
 void DecompressTrainerFrontPic(u16 frontPicId, u8 battlerId);

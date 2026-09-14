@@ -55,6 +55,8 @@ void GetCameraFocusCoords(u16 *x, u16 *y);
 void SetCameraFocusCoords(u16 x, u16 y);
 
 bool8 DaemonsIsHalftone(void);
+void DaemonsSetHalftoneColour(bool8 inColour);
+void DaemonsGreyHalftoneFrame(void);
 u8 DaemonsFieldTint(void);
 
 #endif //GUARD_FIELDMAP_H
