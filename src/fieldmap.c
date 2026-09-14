@@ -6,6 +6,7 @@
 #include "quest_log.h"
 #include "fieldmap.h"
 #include "constants/region_map_sections.h"
+#include "constants/maps.h"
 
 struct ConnectionFlags
 {
@@ -890,6 +891,45 @@ void DaemonsGreyHalftoneFrame(void)
     }
 }
 
+// T-56 (vision.md 9.22): BLANCHE'S GROUND. The houses went pale in their own
+// rows (T-55) and the lab keeps row 9; what is left -- grass, trees, flowers,
+// the pond -- is drawn in the COMMON rows 0..6, which every outdoor map shares,
+// and in Blanche's own rows 11 and 12. So it is washed as the palettes LOAD:
+// only on the Blanche map itself, not its houses or its lab; only tiles, never
+// people, which is why this is not DaemonsFieldTint; and never rows 8..10,
+// which are already pale, and the lab.
+bool8 DaemonsIsBlancheOutdoors(void)
+{
+    return gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_PALLET_TOWN)
+        && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_PALLET_TOWN);
+}
+
+// tools/gbablanche.py's pale, in five-bit colour: toward the colour's own grey
+// by 0.55, then toward white by 0.42, 0.26 or 0.12 as it is light, mid or dark,
+// so trees fade and their outlines stay outlines. The same arithmetic for both
+// grass rows, so a tile from row 0 and a tile from row 11 cannot leave a seam.
+static void DaemonsPaleEntries(u16 offset, u16 count)
+{
+    u16 i;
+
+    for (i = 0; i < count; i++)
+    {
+        u16 c = gPlttBufferUnfaded[offset + i];
+        s32 r = c & 0x1F, g = (c >> 5) & 0x1F, b = (c >> 10) & 0x1F;
+        s32 grey = (r * 77 + g * 150 + b * 29) >> 8;
+        s32 lift = grey > 18 ? 108 : grey > 12 ? 67 : 31;
+
+        r += ((grey - r) * 141) / 256;
+        g += ((grey - g) * 141) / 256;
+        b += ((grey - b) * 141) / 256;
+        r += ((31 - r) * lift + 128) >> 8;
+        g += ((31 - g) * lift + 128) >> 8;
+        b += ((31 - b) * lift + 128) >> 8;
+        gPlttBufferUnfaded[offset + i] = RGB2(r, g, b);
+    }
+    CpuCopy16(&gPlttBufferUnfaded[offset], &gPlttBufferFaded[offset], PLTT_SIZEOF(count));
+}
+
 u8 DaemonsFieldTint(void)
 {
     if (gGlobalFieldTintMode != QL_TINT_NONE)
@@ -954,11 +994,15 @@ static void LoadTilesetPalette(struct Tileset const *tileset, u16 destOffset, u1
             LoadPalette(&black, destOffset, PLTT_SIZEOF(1));
             LoadPalette(tileset->palettes[0] + 1, destOffset + 1, size - PLTT_SIZEOF(1));
             ApplyGlobalTintToPaletteEntries(destOffset + 1, (size - 2) >> 1);
+            if (DaemonsIsBlancheOutdoors())
+                DaemonsPaleEntries(destOffset + 1, (size - 2) >> 1);
         }
         else if (tileset->isSecondary == TRUE)
         {
             LoadPalette(tileset->palettes[NUM_PALS_IN_PRIMARY], destOffset, size);
             ApplyGlobalTintToPaletteEntries(destOffset, size >> 1);
+            if (DaemonsIsBlancheOutdoors())
+                DaemonsPaleEntries(BG_PLTT_ID(11), 2 * 16);
         }
         else
         {
@@ -986,6 +1030,13 @@ void CopySecondaryTilesetToVramUsingHeap(const struct MapLayout *mapLayout)
 static void LoadPrimaryTilesetPalette(const struct MapLayout *mapLayout)
 {
     LoadTilesetPalette(mapLayout->primaryTileset, BG_PLTT_ID(0), NUM_PALS_IN_PRIMARY * PLTT_SIZE_4BPP);
+}
+
+// Crossing a connection reloads only the secondary rows. Blanche's wash lives
+// in the primary ones too, so walking into or out of Blanche reloads those.
+void DaemonsReloadPrimaryTilesetPalette(const struct MapLayout *mapLayout)
+{
+    LoadPrimaryTilesetPalette(mapLayout);
 }
 
 void LoadSecondaryTilesetPalette(const struct MapLayout *mapLayout)

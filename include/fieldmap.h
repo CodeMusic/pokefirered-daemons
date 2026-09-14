@@ -55,6 +55,8 @@ void GetCameraFocusCoords(u16 *x, u16 *y);
 void SetCameraFocusCoords(u16 x, u16 y);
 
 bool8 DaemonsIsHalftone(void);
+bool8 DaemonsIsBlancheOutdoors(void);
+void DaemonsReloadPrimaryTilesetPalette(const struct MapLayout *mapLayout);
 void DaemonsSetHalftoneColour(bool8 inColour);
 void DaemonsGreyHalftoneFrame(void);
 u8 DaemonsFieldTint(void);
