@@ -204,6 +204,8 @@ const u16 gFieldEffectObjectPic_Ash[] = INCBIN_U16("graphics/field_effects/pics/
 const u16 gFieldEffectObjectPic_Arrow[] = INCBIN_U16("graphics/field_effects/pics/arrow.4bpp");
 const u16 gFieldEffectObjectPalette0[] = INCBIN_U16("graphics/field_effects/palettes/general_0.gbapal");
 const u16 gFieldEffectObjectPalette1[] = INCBIN_U16("graphics/field_effects/palettes/general_1.gbapal");
+// general_1 with its grass greens on Blanche's ground colours (DAEMONS tools/gbagrassfx.py)
+const u16 gFieldEffectObjectPalette_BlancheGrass[] = INCBIN_U16("graphics/field_effects/palettes/blanche_grass.gbapal");
 const u16 sFiller2[0x10] = {};
 const u16 gFieldEffectObjectPic_GroundImpactDust[] = INCBIN_U16("graphics/field_effects/pics/ground_impact_dust.4bpp");
 const u16 gFieldEffectObjectPic_UnusedGrass3[] = INCBIN_U16("graphics/field_effects/pics/unused_grass_3.4bpp"); // Unused

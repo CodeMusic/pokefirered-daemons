@@ -77,6 +77,7 @@
 #define FLDEFF_PAL_TAG_POKEBALL_TRAIL     0x1009
 #define FLDEFF_PAL_TAG_ASH                0x100D
 #define FLDEFF_PAL_TAG_SMALL_SPARKLE      0x100F
+#define FLDEFF_PAL_TAG_BLANCHE_GRASS      0x1010
 
 #define FLDEFFOBJ_SHADOW_S                  0
 #define FLDEFFOBJ_SHADOW_M                  1

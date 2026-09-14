@@ -154,6 +154,37 @@ static void UpdateObjectReflectionSprite(struct Sprite *reflectionSprite)
 }
 
 extern const struct SpriteTemplate * const gFieldEffectObjectTemplatePointers[];
+extern const struct SpriteTemplate gFieldEffectObjectTemplate_BlancheTallGrass;
+extern const struct SpriteTemplate gFieldEffectObjectTemplate_BlancheJumpTallGrass;
+extern const struct SpritePalette gSpritePalette_BlancheGrass;
+extern const struct Tileset gTileset_PalletTown;
+
+// DAEMONS: tall grass drawn in Blanche's pale ground row (row 7 of its tileset,
+// tools/gbaroutes.py, vision.md 9.22) flicks up in pale greens, not vanilla's.
+// Coordinates are map coordinates, before they become sprite positions.
+static bool8 IsBlanchePaleGrassAt(s16 x, s16 y)
+{
+    const struct Tileset *tileset = gMapHeader.mapLayout->secondaryTileset;
+    u32 metatileId = MapGridGetMetatileIdAt(x, y);
+
+    if (tileset != &gTileset_PalletTown || metatileId < NUM_METATILES_IN_PRIMARY)
+        return FALSE;
+    return (tileset->metatiles[(metatileId - NUM_METATILES_IN_PRIMARY) * NUM_TILES_PER_METATILE] >> 12) == 7;
+}
+
+static const struct SpriteTemplate *GrassEffectTemplate(s16 x, s16 y, u8 fieldEffectObj, const struct SpriteTemplate *blanche)
+{
+    u8 paletteIdx;
+
+    if (!IsBlanchePaleGrassAt(x, y))
+        return gFieldEffectObjectTemplatePointers[fieldEffectObj];
+    paletteIdx = IndexOfSpritePaletteTag(FLDEFF_PAL_TAG_BLANCHE_GRASS);
+    LoadSpritePalette(&gSpritePalette_BlancheGrass);
+    if (paletteIdx == 0xFF)
+        ApplyGlobalFieldPaletteTint(IndexOfSpritePaletteTag(FLDEFF_PAL_TAG_BLANCHE_GRASS));
+    UpdateSpritePaletteWithWeather(IndexOfSpritePaletteTag(FLDEFF_PAL_TAG_BLANCHE_GRASS));
+    return blanche;
+}
 
 u8 CreateWarpArrowSprite(void)
 {
@@ -265,11 +296,13 @@ u32 FldEff_TallGrass(void)
     s16 y;
     u8 spriteId;
     struct Sprite *sprite;
+    const struct SpriteTemplate *template;
 
     x = gFieldEffectArguments[0];
     y = gFieldEffectArguments[1];
+    template = GrassEffectTemplate(x, y, FLDEFFOBJ_TALL_GRASS, &gFieldEffectObjectTemplate_BlancheTallGrass);
     SetSpritePosToOffsetMapCoords(&x, &y, 8, 8);
-    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_TALL_GRASS], x, y, 0);
+    spriteId = CreateSpriteAtEnd(template, x, y, 0);
     if (spriteId != MAX_SPRITES)
     {
         sprite = &gSprites[spriteId];
@@ -334,9 +367,11 @@ u32 FldEff_JumpTallGrass(void)
 {
     u8 spriteId;
     struct Sprite *sprite;
+    const struct SpriteTemplate *template;
 
+    template = GrassEffectTemplate(gFieldEffectArguments[0], gFieldEffectArguments[1], FLDEFFOBJ_JUMP_TALL_GRASS, &gFieldEffectObjectTemplate_BlancheJumpTallGrass);
     SetSpritePosToOffsetMapCoords((s16 *)&gFieldEffectArguments[0], (s16 *)&gFieldEffectArguments[1], 8, 12);
-    spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_JUMP_TALL_GRASS], gFieldEffectArguments[0], gFieldEffectArguments[1], 0);
+    spriteId = CreateSpriteAtEnd(template, gFieldEffectArguments[0], gFieldEffectArguments[1], 0);
     if (spriteId != MAX_SPRITES)
     {
         sprite = &gSprites[spriteId];

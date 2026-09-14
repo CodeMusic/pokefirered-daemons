@@ -1,5 +1,6 @@
 const struct SpritePalette gSpritePalette_GeneralFieldEffect0 = { .data = gFieldEffectObjectPalette0, .tag = FLDEFF_PAL_TAG_GENERAL_0 };
 const struct SpritePalette gSpritePalette_GeneralFieldEffect1 = { .data = gFieldEffectObjectPalette1, .tag = FLDEFF_PAL_TAG_GENERAL_1 };
+const struct SpritePalette gSpritePalette_BlancheGrass = { .data = gFieldEffectObjectPalette_BlancheGrass, .tag = FLDEFF_PAL_TAG_BLANCHE_GRASS };
 
 static const union AnimCmd sAnim_Shadow[] =
 {
@@ -89,6 +90,18 @@ const struct SpriteTemplate gFieldEffectObjectTemplate_TallGrass =
 {
     .tileTag = TAG_NONE,
     .paletteTag = FLDEFF_PAL_TAG_GENERAL_1,
+    .oam = &gObjectEventBaseOam_16x16,
+    .anims = sAnimTable_TallGrass,
+    .images = sPicTable_TallGrass,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = UpdateTallGrassFieldEffect,
+};
+
+// The same, in Blanche's pale greens: chosen on Blanche-style grass
+const struct SpriteTemplate gFieldEffectObjectTemplate_BlancheTallGrass =
+{
+    .tileTag = TAG_NONE,
+    .paletteTag = FLDEFF_PAL_TAG_BLANCHE_GRASS,
     .oam = &gObjectEventBaseOam_16x16,
     .anims = sAnimTable_TallGrass,
     .images = sPicTable_TallGrass,
@@ -342,6 +355,18 @@ const struct SpriteTemplate gFieldEffectObjectTemplate_JumpTallGrass =
 {
     .tileTag = TAG_NONE,
     .paletteTag = FLDEFF_PAL_TAG_GENERAL_1,
+    .oam = &gObjectEventBaseOam_16x8,
+    .anims = sAnimTable_JumpTallGrass,
+    .images = sPicTable_JumpTallGrass,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = UpdateJumpImpactEffect,
+};
+
+// The same, in Blanche's pale greens: chosen on Blanche-style grass
+const struct SpriteTemplate gFieldEffectObjectTemplate_BlancheJumpTallGrass =
+{
+    .tileTag = TAG_NONE,
+    .paletteTag = FLDEFF_PAL_TAG_BLANCHE_GRASS,
     .oam = &gObjectEventBaseOam_16x8,
     .anims = sAnimTable_JumpTallGrass,
     .images = sPicTable_JumpTallGrass,
