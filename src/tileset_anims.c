@@ -107,6 +107,27 @@ static const u16 *const sTilesetAnims_PalletTown_Water[] = {
     sTilesetAnims_PalletTown_Water_Frame7
 };
 
+// Route 21 North's deep water, pale (DAEMONS tools/gbaroutes.py)
+static const u16 sTilesetAnims_PalletTown_Deep_Frame0[] = INCBIN_U16("data/tilesets/secondary/pallet_town/anim/deep/0.4bpp");
+static const u16 sTilesetAnims_PalletTown_Deep_Frame1[] = INCBIN_U16("data/tilesets/secondary/pallet_town/anim/deep/1.4bpp");
+static const u16 sTilesetAnims_PalletTown_Deep_Frame2[] = INCBIN_U16("data/tilesets/secondary/pallet_town/anim/deep/2.4bpp");
+static const u16 sTilesetAnims_PalletTown_Deep_Frame3[] = INCBIN_U16("data/tilesets/secondary/pallet_town/anim/deep/3.4bpp");
+static const u16 sTilesetAnims_PalletTown_Deep_Frame4[] = INCBIN_U16("data/tilesets/secondary/pallet_town/anim/deep/4.4bpp");
+static const u16 sTilesetAnims_PalletTown_Deep_Frame5[] = INCBIN_U16("data/tilesets/secondary/pallet_town/anim/deep/5.4bpp");
+static const u16 sTilesetAnims_PalletTown_Deep_Frame6[] = INCBIN_U16("data/tilesets/secondary/pallet_town/anim/deep/6.4bpp");
+static const u16 sTilesetAnims_PalletTown_Deep_Frame7[] = INCBIN_U16("data/tilesets/secondary/pallet_town/anim/deep/7.4bpp");
+
+static const u16 *const sTilesetAnims_PalletTown_Deep[] = {
+    sTilesetAnims_PalletTown_Deep_Frame0,
+    sTilesetAnims_PalletTown_Deep_Frame1,
+    sTilesetAnims_PalletTown_Deep_Frame2,
+    sTilesetAnims_PalletTown_Deep_Frame3,
+    sTilesetAnims_PalletTown_Deep_Frame4,
+    sTilesetAnims_PalletTown_Deep_Frame5,
+    sTilesetAnims_PalletTown_Deep_Frame6,
+    sTilesetAnims_PalletTown_Deep_Frame7
+};
+
 // palette: general 00
 static const u16 sTilesetAnims_CeladonCity_Fountain_Frame0[] = INCBIN_U16("data/tilesets/secondary/celadon_city/anim/fountain/0.4bpp");
 static const u16 sTilesetAnims_CeladonCity_Fountain_Frame1[] = INCBIN_U16("data/tilesets/secondary/celadon_city/anim/fountain/1.4bpp");
@@ -281,10 +302,18 @@ static void QueueAnimTiles_PalletTown_Water(u16 timer)
     AppendTilesetAnimToBuffer(sTilesetAnims_PalletTown_Water[timer % ARRAY_COUNT(sTilesetAnims_PalletTown_Water)], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(804)), 4 * TILE_SIZE_4BPP);
 }
 
+static void QueueAnimTiles_PalletTown_Deep(u16 timer)
+{
+    AppendTilesetAnimToBuffer(sTilesetAnims_PalletTown_Deep[timer % ARRAY_COUNT(sTilesetAnims_PalletTown_Deep)], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(953)), 4 * TILE_SIZE_4BPP);
+}
+
 static void TilesetAnim_PalletTown(u16 timer)
 {
     if (timer % 16 == 1)
+    {
         QueueAnimTiles_PalletTown_Water(timer / 16);
+        QueueAnimTiles_PalletTown_Deep(timer / 16);
+    }
     if (timer % 16 == 2)
         QueueAnimTiles_PalletTown_Flower(timer / 16);
 }
