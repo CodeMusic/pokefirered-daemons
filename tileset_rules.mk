@@ -190,7 +190,7 @@ $(TILESETGFXDIR)/secondary/department_store/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 201 -Wnum_tiles
 
 $(TILESETGFXDIR)/secondary/pokemon_mansion/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 350 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 354 -Wnum_tiles
 
 $(TILESETGFXDIR)/secondary/condominiums/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 384 -Wnum_tiles
