@@ -847,11 +847,22 @@ static void CopyTilesetToVramUsingHeap(struct Tileset const *tileset, u16 numTil
 //
 // The Quest Log owns gGlobalFieldTintMode while it is playing back, so this
 // only ever speaks when that global is silent. Never override the record.
+// HALFTONE IS THE TOWN AND ITS TOWER. The tower has its own map section, so a
+// check on the town's section alone left all seven floors in colour -- and the
+// tower is where Halftone's lesson lives: something the Index cannot name, and
+// an instrument needed to see it. Battles ask this too (battle_bg.c,
+// battle_gfx_sfx_util.c), so the scene stays grey when a fight starts.
+bool8 DaemonsIsHalftone(void)
+{
+    return gMapHeader.regionMapSectionId == MAPSEC_LAVENDER_TOWN
+        || gMapHeader.regionMapSectionId == MAPSEC_POKEMON_TOWER;
+}
+
 u8 DaemonsFieldTint(void)
 {
     if (gGlobalFieldTintMode != QL_TINT_NONE)
         return gGlobalFieldTintMode;
-    if (gMapHeader.regionMapSectionId == MAPSEC_LAVENDER_TOWN)
+    if (DaemonsIsHalftone())
         return QL_TINT_GRAYSCALE;
     return QL_TINT_NONE;
 }

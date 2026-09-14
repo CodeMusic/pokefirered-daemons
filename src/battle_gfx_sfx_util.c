@@ -13,6 +13,7 @@
 #include "battle_main.h"
 #include "battle_anim.h"
 #include "battle_interface.h"
+#include "fieldmap.h"
 #include "constants/battle_anim.h"
 #include "constants/moves.h"
 #include "constants/songs.h"
@@ -316,6 +317,65 @@ bool8 IsBattleSEPlaying(u8 battlerId)
     }
 }
 
+// IN HALFTONE THE SIDE YOU FACE IS GREY (vision.md 8.6a). Your own daemons keep
+// their colour -- "a daemon has as much of it as it has accumulated" -- and what
+// stands against you in the grey town has not been resolved. Both copies of a
+// battler's palette are greyed: the sprite's, and the background copy some move
+// animations draw the daemon from.
+static void DaemonsGreyBattlerPalette(u8 battlerId)
+{
+    if (!DaemonsIsHalftone() || GetBattlerSide(battlerId) != B_SIDE_OPPONENT)
+        return;
+    TintPalette_GrayScale(&gPlttBufferUnfaded[OBJ_PLTT_ID(battlerId)], 16);
+    CpuCopy16(&gPlttBufferUnfaded[OBJ_PLTT_ID(battlerId)], &gPlttBufferFaded[OBJ_PLTT_ID(battlerId)], PLTT_SIZE_4BPP);
+    TintPalette_GrayScale(&gPlttBufferUnfaded[BG_PLTT_ID(8) + BG_PLTT_ID(battlerId)], 16);
+    CpuCopy16(&gPlttBufferUnfaded[BG_PLTT_ID(8) + BG_PLTT_ID(battlerId)], &gPlttBufferFaded[BG_PLTT_ID(8) + BG_PLTT_ID(battlerId)], PLTT_SIZE_4BPP);
+}
+
+// For PERSPECTIVE's flash: reload each opposing daemon's real colours from the
+// ROM -- the grey cannot be un-greyed -- or grey them again. The palette is
+// chosen exactly as the loaders below choose it: the tower's unidentified
+// ghost, a transformed daemon wearing its target's colours and Transform's pink,
+// or the daemon itself. A battler behind a SUBSTITUTE is left alone, because
+// its sprite is the doll and the doll's palette is not the daemon's.
+void DaemonsSetOpposingBattlerColour(bool8 inColour)
+{
+    u8 battler;
+
+    for (battler = 0; battler < gBattlersCount; battler++)
+    {
+        struct Pokemon *mon;
+        const void *lzPaletteData;
+        void *buffer;
+        u16 transformSpecies;
+
+        if (GetBattlerSide(battler) != B_SIDE_OPPONENT || !IsBattlerSpriteVisible(battler)
+         || gBattleSpritesDataPtr->battlerData[battler].behindSubstitute)
+            continue;
+        mon = &gEnemyParty[gBattlerPartyIndexes[battler]];
+        transformSpecies = gBattleSpritesDataPtr->battlerData[battler].transformSpecies;
+        if (IS_BATTLE_TYPE_GHOST_WITHOUT_SCOPE(gBattleTypeFlags))
+            lzPaletteData = gGhostPalette;
+        else if (transformSpecies == SPECIES_NONE)
+            lzPaletteData = GetMonFrontSpritePal(mon);
+        else
+            lzPaletteData = GetMonSpritePalFromSpeciesAndPersonality(transformSpecies,
+                                GetMonData(mon, MON_DATA_OT_ID), GetMonData(mon, MON_DATA_PERSONALITY));
+        buffer = AllocZeroed(0x400);
+        LZDecompressWram(lzPaletteData, buffer);
+        LoadPalette(buffer, OBJ_PLTT_ID(battler), PLTT_SIZE_4BPP);
+        LoadPalette(buffer, BG_PLTT_ID(8) + BG_PLTT_ID(battler), PLTT_SIZE_4BPP);
+        Free(buffer);
+        if (transformSpecies != SPECIES_NONE && !IS_BATTLE_TYPE_GHOST_WITHOUT_SCOPE(gBattleTypeFlags))
+        {
+            BlendPalette(OBJ_PLTT_ID(battler), 16, 6, RGB_WHITE);
+            CpuCopy32(&gPlttBufferFaded[OBJ_PLTT_ID(battler)], &gPlttBufferUnfaded[OBJ_PLTT_ID(battler)], PLTT_SIZE_4BPP);
+        }
+        if (!inColour)
+            DaemonsGreyBattlerPalette(battler);
+    }
+}
+
 void BattleLoadOpponentMonSpriteGfx(struct Pokemon *mon, u8 battlerId)
 {
     u32 monsPersonality, currentPersonality, otId;
@@ -363,6 +423,7 @@ void BattleLoadOpponentMonSpriteGfx(struct Pokemon *mon, u8 battlerId)
         BlendPalette(paletteOffset, 16, 6, RGB_WHITE);
         CpuCopy32(&gPlttBufferFaded[paletteOffset], &gPlttBufferUnfaded[paletteOffset], PLTT_SIZE_4BPP);
     }
+    DaemonsGreyBattlerPalette(battlerId);
 }
 
 void BattleLoadPlayerMonSpriteGfx(struct Pokemon *mon, u8 battlerId)
@@ -432,6 +493,7 @@ void DecompressGhostFrontPic(struct Pokemon *unused, u8 battlerId)
     LoadPalette(buffer, palOffset, PLTT_SIZE_4BPP);
     LoadPalette(buffer, BG_PLTT_ID(8) + BG_PLTT_ID(battlerId), PLTT_SIZE_4BPP);
     Free(buffer);
+    DaemonsGreyBattlerPalette(battlerId);
 }
 
 void DecompressTrainerFrontPic(u16 frontPicId, u8 battlerId)
@@ -445,6 +507,17 @@ void DecompressTrainerFrontPic(u16 frontPicId, u8 battlerId)
     sheet.tag = gTrainerFrontPicTable[frontPicId].tag;
     LoadSpriteSheet(&sheet);
     LoadCompressedSpritePaletteUsingHeap(&gTrainerFrontPicPaletteTable[frontPicId]);
+    // The trainer you face is part of the grey scene too.
+    if (DaemonsIsHalftone() && GetBattlerSide(battlerId) == B_SIDE_OPPONENT)
+    {
+        u8 slot = IndexOfSpritePaletteTag(gTrainerFrontPicPaletteTable[frontPicId].tag);
+
+        if (slot != 0xFF)
+        {
+            TintPalette_GrayScale(&gPlttBufferUnfaded[OBJ_PLTT_ID(slot)], 16);
+            CpuCopy16(&gPlttBufferUnfaded[OBJ_PLTT_ID(slot)], &gPlttBufferFaded[OBJ_PLTT_ID(slot)], PLTT_SIZE_4BPP);
+        }
+    }
 }
 
 void DecompressTrainerBackPalette(u16 index, u8 palette)
@@ -681,6 +754,8 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, u8 transformType)
         LZDecompressWram(lzPaletteData, buffer);
         LoadPalette(buffer, paletteOffset, PLTT_SIZE_4BPP);
         Free(buffer);
+        // A ghost the RESOLVER unmasks is still the side you face: grey.
+        DaemonsGreyBattlerPalette(battlerAtk);
         gSprites[gBattlerSpriteIds[battlerAtk]].y = GetBattlerSpriteDefault_Y(battlerAtk);
         StartSpriteAnim(&gSprites[gBattlerSpriteIds[battlerAtk]], gBattleMonForms[battlerAtk]);
         SetMonData(&gEnemyParty[gBattlerPartyIndexes[battlerAtk]], MON_DATA_NICKNAME, gSpeciesNames[targetSpecies]);
@@ -746,6 +821,9 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, u8 transformType)
         }
         BlendPalette(paletteOffset, 16, 6, RGB_WHITE);
         CpuCopy32(&gPlttBufferFaded[paletteOffset], &gPlttBufferUnfaded[paletteOffset], PLTT_SIZE_4BPP);
+        // An opposing daemon that takes a frame is greyed again once it has it;
+        // yours keeps the colour it took. The flash spans this moment.
+        DaemonsGreyBattlerPalette(battlerAtk);
         gBattleSpritesDataPtr->battlerData[battlerAtk].transformSpecies = targetSpecies;
         gBattleMonForms[battlerAtk] = gBattleMonForms[battlerDef];
         gSprites[gBattlerSpriteIds[battlerAtk]].y = GetBattlerSpriteDefault_Y(battlerAtk);

@@ -2496,6 +2496,8 @@ static const u16 sMewtwoLevelUpLearnset[] = {
     LEVEL_UP_MOVE(44, MOVE_RECOVER),
     LEVEL_UP_MOVE(55, MOVE_SAFEGUARD),
     LEVEL_UP_MOVE(66, MOVE_PSYCHIC),
+    // RECURSION at 70, the level S.T.A.R.R. is met at in Doldrum Cave (4.7).
+    LEVEL_UP_MOVE(70, MOVE_RECURSION),
     LEVEL_UP_MOVE(77, MOVE_PSYCH_UP),
     LEVEL_UP_MOVE(88, MOVE_FUTURE_SIGHT),
     LEVEL_UP_MOVE(99, MOVE_AMNESIA),
@@ -2517,6 +2519,10 @@ static const u16 sMewLevelUpLearnset[] = {
     LEVEL_UP_MOVE(30, MOVE_METRONOME),
     LEVEL_UP_MOVE(40, MOVE_PSYCHIC),
     LEVEL_UP_MOVE(50, MOVE_ANCIENT_POWER),
+    // PERSPECTIVE again, last. An ARTSAI made at 50 keeps only its four newest
+    // moves, so the level-10 PERSPECTIVE was always pushed out: its signature
+    // (4.6) was the one thing it could not be met holding.
+    LEVEL_UP_MOVE(50, MOVE_TRANSFORM),
     LEVEL_UP_END
 };
 

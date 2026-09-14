@@ -712,6 +712,7 @@ static const u16 sMovesForbiddenToCopy[] =
     MOVE_STRUGGLE,
     MOVE_SKETCH,
     MOVE_MIMIC,
+    MOVE_RECURSION, // S.T.A.R.R.'s alone: not Metronome, Mimic or Sketch
     MIMIC_FORBIDDEN_END,
     MOVE_COUNTER,
     MOVE_MIRROR_COAT,
@@ -8232,6 +8233,20 @@ static void Cmd_furycuttercalc(void)
     {
         gDisableStructs[gBattlerAttacker].furyCutterCounter = 0;
         gBattlescriptCurrInstr = BattleScript_MoveMissedPause;
+    }
+    else if (gCurrentMove == MOVE_RECURSION)
+    {
+        // RECURSION (vision.md 4.7): a positive loop and its termination. It
+        // compounds only while nothing else happens -- the previous move has
+        // to have been RECURSION too -- and a skipped turn resets the counter
+        // through CancelMultiTurnMoves. +50% of base per use, capped at x2.5.
+        if (gLastMoves[gBattlerAttacker] != MOVE_RECURSION)
+            gDisableStructs[gBattlerAttacker].furyCutterCounter = 0;
+        if (gDisableStructs[gBattlerAttacker].furyCutterCounter < 4)
+            gDisableStructs[gBattlerAttacker].furyCutterCounter++;
+        gDynamicBasePower = gBattleMoves[gCurrentMove].power
+                          * (1 + gDisableStructs[gBattlerAttacker].furyCutterCounter) / 2;
+        gBattlescriptCurrInstr++;
     }
     else
     {

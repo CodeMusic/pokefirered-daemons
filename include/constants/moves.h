@@ -362,8 +362,11 @@
 // and the AI reads anything above STRUGGLE as "not a move". Gen 3 makes no
 // such assertion, so here it simply appends and no existing ID moves.
 #define MOVE_CONSENSUS 355
+// RECURSION (vision.md 4.7): S.T.A.R.R.'s signature, and given to nothing else.
+// Appended the way CONSENSUS was, so no existing ID moves.
+#define MOVE_RECURSION 356
 
-#define MOVES_COUNT 356
+#define MOVES_COUNT 357
 
 // Used for checks for moves affected by Disable, Mimic, etc.
 #define MOVE_UNAVAILABLE 0xFFFF

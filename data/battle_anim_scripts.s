@@ -376,6 +376,7 @@ gBattleAnims_Moves::
 	.4byte Move_DOOM_DESIRE
 	.4byte Move_PSYCHO_BOOST
 	.4byte Move_PIN_MISSILE      @ CONSENSUS: converging projectiles
+	.4byte Move_PSYCHO_BOOST     @ RECURSION: a mind turned on itself
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -8430,6 +8431,8 @@ Move_TRANSFORM:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 14, RGB(13, 13, 13)
 	waitforvisualfinish
 	waitplaysewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER, 48
+	@ DAEMONS: in Halftone the colour comes back as the frame is taken.
+	createvisualtask AnimTask_DaemonsPerspectiveFlash, 2
 	createvisualtask AnimTask_TransformMon, 2, 0
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 14, 0, RGB(13, 13, 13)

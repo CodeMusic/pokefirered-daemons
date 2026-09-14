@@ -4627,4 +4627,23 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
     },
+
+    // RECURSION (vision.md 4.7). Runs on FURY CUTTER's counter rather than on
+    // Bide, which is what 4.7 assumed: each consecutive use adds half its base
+    // power, to two and a half times, and anything that interrupts it -- a
+    // miss, a skipped turn, using another move -- drops it back to the start.
+    // Cmd_furycuttercalc branches on the move. Not FLAG_MIRROR_MOVE_AFFECTED,
+    // and in sMovesForbiddenToCopy, because nothing else in the game gets it.
+    [MOVE_RECURSION] =
+    {
+        .effect = EFFECT_FURY_CUTTER,
+        .power = 60,
+        .type = TYPE_DRAGON,       // invariant 6: only the STRING is EMERGENT
+        .accuracy = 100,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+    },
 };

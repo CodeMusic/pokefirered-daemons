@@ -1,5 +1,6 @@
 #include "global.h"
 #include "gflib.h"
+#include "fieldmap.h"
 #include "battle.h"
 #include "battle_bg.h"
 #include "battle_message.h"
@@ -641,6 +642,32 @@ static u8 GetBattleTerrainByMapScene(u8 mapBattleScene)
     return BATTLE_TERRAIN_PLAIN;
 }
 
+// IN HALFTONE THE BATTLE SCENE IS GREY TOO (vision.md 8.6a). The world rule is
+// "the world has colour, records do not, a daemon has as much as it has
+// accumulated" -- so the SCENE and the side you face are greyed, and your own
+// daemons and the menus keep theirs. Every path that puts the terrain palette
+// on screen goes through one of the two loaders below, including a move
+// animation restoring the background, so greying here covers all of them.
+static void DaemonsGreyTerrainIfHalftone(void)
+{
+    if (!DaemonsIsHalftone())
+        return;
+    TintPalette_GrayScale(&gPlttBufferUnfaded[BG_PLTT_ID(2)], 3 * 16);
+    CpuCopy16(&gPlttBufferUnfaded[BG_PLTT_ID(2)], &gPlttBufferFaded[BG_PLTT_ID(2)], PLTT_SIZEOF(3 * 16));
+}
+
+// For PERSPECTIVE's flash: put the terrain's colour back, or take it away again.
+void DaemonsSetBattleTerrainColour(bool8 inColour)
+{
+    u16 terrain = GetBattleTerrainOverride();
+
+    if (terrain >= NELEMS(sBattleTerrainTable))
+        terrain = BATTLE_TERRAIN_PLAIN;
+    LoadCompressedPalette(sBattleTerrainTable[terrain].palette, BG_PLTT_ID(2), 3 * PLTT_SIZE_4BPP);
+    if (!inColour)
+        DaemonsGreyTerrainIfHalftone();
+}
+
 static void LoadBattleTerrainGfx(u16 terrain)
 {
     if (terrain >= NELEMS(sBattleTerrainTable))
@@ -649,6 +676,7 @@ static void LoadBattleTerrainGfx(u16 terrain)
     LZDecompressVram(sBattleTerrainTable[terrain].tileset, (void *)BG_CHAR_ADDR(2));
     LZDecompressVram(sBattleTerrainTable[terrain].tilemap, (void *)BG_SCREEN_ADDR(26));
     LoadCompressedPalette(sBattleTerrainTable[terrain].palette, BG_PLTT_ID(2), 3 * PLTT_SIZE_4BPP);
+    DaemonsGreyTerrainIfHalftone();
 }
 
 static void LoadBattleTerrainEntryGfx(u16 terrain)
@@ -1099,6 +1127,7 @@ bool8 LoadChosenBattleElement(u8 caseId)
     case 5:
         battleScene = GetBattleTerrainOverride();
         LoadCompressedPalette(sBattleTerrainTable[battleScene].palette, BG_PLTT_ID(2), 3 * PLTT_SIZE_4BPP);
+        DaemonsGreyTerrainIfHalftone();
         break;
     case 6:
         LoadBattleMenuWindowGfx();

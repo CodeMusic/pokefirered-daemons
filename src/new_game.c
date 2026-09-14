@@ -136,9 +136,12 @@ static void DaemonsDebug_GrantTestKit(void)
     static const u16 sParty[] = {
         SPECIES_FLAREON,    // CODEMUSAI  -- Flash Fire
         SPECIES_VAPOREON,   // CAREMUSAI  -- Water Absorb
+        SPECIES_MEW,        // ARTSAI     -- Synchronize, and PERSPECTIVE
+        SPECIES_MEWTWO,     // S.T.A.R.R. -- Pressure, and RECURSION
+        // The last two carry the HMs. S.T.A.R.R. used to be one of them, which
+        // meant its four slots were field moves and RECURSION could never be
+        // tested. SEEKMUSAI keeps Volt Absorb and carries them instead.
         SPECIES_JOLTEON,    // SEEKMUSAI  -- Volt Absorb
-        SPECIES_MEW,        // ARTSAI     -- Synchronize
-        SPECIES_MEWTWO,     // S.T.A.R.R. -- Pressure
         SPECIES_SNORLAX,    // DEADLOCK   -- Immunity / Thick Fat
     };
     static const u16 sBag[][2] = {
@@ -153,6 +156,9 @@ static void DaemonsDebug_GrantTestKit(void)
         // without it the ship at Ardor cannot be boarded, so a debug save
         // could not reach HM01 or anything behind it.
         { ITEM_SS_TICKET,     1 },
+        // The RESOLVER, for the same reason: without it the tower's ghosts
+        // cannot be fought, and Halftone Tower is the thing being tested.
+        { ITEM_SILPH_SCOPE,   1 },
         // The two key items that are SCREENS rather than permissions, which is
         // why they belong in a kit whose whole point is testing UI we changed.
         // The STREAM's list is gated on the MARKS, and this build sets all
@@ -178,7 +184,16 @@ static void DaemonsDebug_GrantTestKit(void)
 
     for (i = 0; i < ARRAY_COUNT(sParty); i++)
     {
+        u8 fateful = TRUE;
+
         CreateMon(&mon, sParty[i], 50, 31, FALSE, 0, OT_ID_PLAYER_ID, 0);
+        // WHY ARTSAI WOULD NOT OBEY. Gen 3 makes a player's Mew or Deoxys ignore
+        // every command unless it carries the official-event flag, whatever the
+        // badges (IsBattlerModernFatefulEncounter), and CreateMon does not set it.
+        SetMonData(&mon, MON_DATA_MODERN_FATEFUL_ENCOUNTER, &fateful);
+        // S.T.A.R.R. learns RECURSION at 70 and the kit is level 50.
+        if (sParty[i] == SPECIES_MEWTWO)
+            DeleteFirstMoveAndGiveMoveToMon(&mon, MOVE_RECURSION);
         if (i >= ARRAY_COUNT(sParty) - 2)
         {
             u32 base = (i == ARRAY_COUNT(sParty) - 2) ? 0 : 4;
