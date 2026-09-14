@@ -52,7 +52,7 @@ VermilionCity_Text_PokemonFanClubSign::
 
 VermilionCity_Text_GymSign::
     .string "ARDOR CITY\n"
-    .string "DAEMON GYM\l"
+    .string "BENCHMARK\l"
     .string "LEADER: GAUGE\p"
     .string "The Lightning\n"
     .string "American!$"

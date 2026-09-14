@@ -92,10 +92,10 @@ PewterCity_Gym_Text_YoureChampMaterial::
     .string "I am usually right about this.$"
 
 PewterCity_Gym_Text_GymStatue::
-    .string "SLATE DAEMON GYM LEADER: CAIRN\p"
+    .string "SLATE BENCHMARK LEADER: CAIRN\p"
     .string "WINNING USERS: {RIVAL}$"
 
 PewterCity_Gym_Text_GymStatuePlayerWon::
-    .string "SLATE DAEMON GYM LEADER: CAIRN\p"
+    .string "SLATE BENCHMARK LEADER: CAIRN\p"
     .string "WINNING USERS: {RIVAL}, {PLAYER}$"
 

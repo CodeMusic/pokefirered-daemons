@@ -47,3 +47,8 @@ Route21_North_Text_CueBallDefeat::
 Route21_North_Text_CueBallPostBattle::
 	.string "うきやすそう　だと？\n"
 	.string "うるせー　おおきな　おせわだッ！$"
+
+Route21_North_Text_Caretaker::
+	.string "Nobody comes out this far.\p"
+	.string "The hatch isn't locked. There's\n"
+	.string "nothing down there to lock it for.$"

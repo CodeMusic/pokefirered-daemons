@@ -27,8 +27,8 @@ Route13_Text_ValerieDefeat::
     .string "Not enough!$"
 
 Route13_Text_ValeriePostBattle::
-    .string "You got those MARKs from GYM\n"
-    .string "LEADERs. I know!$"
+    .string "You got those MARKs from\n"
+    .string "BENCHMARK LEADERs. I know!$"
 
 Route13_Text_GwenIntro::
     .string "My cute DAEMON wish to make your\n"

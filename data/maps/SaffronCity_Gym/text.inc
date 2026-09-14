@@ -109,14 +109,14 @@ SaffronCity_Gym_Text_CameronDefeat::
     .string "Down and out!$"
 
 SaffronCity_Gym_Text_CameronPostBattle::
-    .string "There used to be 2 DAEMON GYMs in\n"
+    .string "There used to be 2 BENCHMARKS in\n"
     .string "BRAZEN.\p"
     .string "The PROOF HALL next door lost its\n"
-    .string "GYM status when we went and\l"
+    .string "BENCHMARK status when we went and\l"
     .string "creamed them!$"
 
 SaffronCity_Gym_Text_PrestonIntro::
-    .string "BRAZEN DAEMON GYM is famous for\n"
+    .string "BRAZEN BENCHMARK is famous for\n"
     .string "its psychics!\p"
     .string "You want to see MATTE! I can\n"
     .string "tell!$"
@@ -143,12 +143,12 @@ SaffronCity_Gym_Text_GymGuyPostVictory::
     .string "at the slots!$"
 
 SaffronCity_Gym_Text_GymStatue::
-    .string "BRAZEN DAEMON GYM LEADER:\n"
+    .string "BRAZEN BENCHMARK LEADER:\n"
     .string "MATTE\p"
     .string "WINNING USERS: {RIVAL}$"
 
 SaffronCity_Gym_Text_GymStatuePlayerWon::
-    .string "BRAZEN DAEMON GYM LEADER:\n"
+    .string "BRAZEN BENCHMARK LEADER:\n"
     .string "MATTE\p"
     .string "WINNING USERS: {RIVAL}, {PLAYER}$"
 

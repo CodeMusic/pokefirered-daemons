@@ -4398,6 +4398,18 @@
       "secondary_tileset": "gTileset_MtEmber",
       "border_filepath": "data/layouts/OneIsland_KindleRoad_EmberSpa/border.bin",
       "blockdata_filepath": "data/layouts/OneIsland_KindleRoad_EmberSpa/map.bin"
+    },
+    {
+      "id": "LAYOUT_ROUTE21_NORTH_STATION",
+      "name": "Route21_North_Station_Layout",
+      "width": 11,
+      "height": 11,
+      "border_width": 2,
+      "border_height": 2,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_PokemonMansion",
+      "border_filepath": "data/layouts/Route21_North_Station/border.bin",
+      "blockdata_filepath": "data/layouts/Route21_North_Station/map.bin"
     }
   ]
 }

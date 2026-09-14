@@ -159,8 +159,8 @@ FiveIsland_RocketWarehouse_Text_TyNotComing::
 @  4.33's rule about never adjudicating applies here too -- nothing in this
 @  room tells him what it means, and nothing tells the player either.
 FiveIsland_RocketWarehouse_Text_ScornHasNoticed::
-    .string "I said something in that GYM and\n"
-    .string "I have carried it since.\p"
+    .string "I said something in that BENCHMARK\n"
+    .string "and I have carried it since.\p"
     .string "That it has never said otherwise.\p"
     .string "It is a correct sentence. I have\n"
     .string "checked it four times.\p"

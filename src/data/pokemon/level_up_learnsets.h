@@ -2498,6 +2498,8 @@ static const u16 sMewtwoLevelUpLearnset[] = {
     LEVEL_UP_MOVE(66, MOVE_PSYCHIC),
     // RECURSION at 70, the level S.T.A.R.R. is met at in Doldrum Cave (4.7).
     LEVEL_UP_MOVE(70, MOVE_RECURSION),
+    // And GOTO at 70: S.T.A.R.R. is what later flies you, so it has it the day it is met (T-75).
+    LEVEL_UP_MOVE(70, MOVE_FLY),
     LEVEL_UP_MOVE(77, MOVE_PSYCH_UP),
     LEVEL_UP_MOVE(88, MOVE_FUTURE_SIGHT),
     LEVEL_UP_MOVE(99, MOVE_AMNESIA),

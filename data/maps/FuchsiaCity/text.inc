@@ -37,7 +37,7 @@ FuchsiaCity_Text_SafariZoneOfficeSign::
 
 FuchsiaCity_Text_GymSign::
     .string "LURID CITY\n"
-    .string "DAEMON GYM\l"
+    .string "BENCHMARK\l"
     .string "LEADER: TILT\p"
     .string "The Poisonous\n"
     .string "Ninja Master$"
@@ -101,8 +101,8 @@ Text_SubstituteTaught::
     .string "a KEEPER belly pouch…$"
 
 FuchsiaCity_Text_MyFatherIsGymLeader::
-    .string "My father is the GYM LEADER of\n"
-    .string "this town.\p"
+    .string "My father is the BENCHMARK LEADER\n"
+    .string "of this town.\p"
     .string "I'm training to use CORRUPT DAEMON\n"
     .string "as well as my father.$"
 

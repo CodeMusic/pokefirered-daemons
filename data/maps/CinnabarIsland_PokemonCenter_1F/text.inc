@@ -1,12 +1,13 @@
 CinnabarIsland_PokemonCenter_1F_Text_CinnabarGymLocked::
     .string "I came to visit the QUICKSILVER\n"
-    .string "GYM, but the door is locked tight.\p"
+    .string "BENCHMARK, but the door is locked\l"
+    .string "tight.\p"
     .string "There should be a key for it\n"
     .string "somewhere.\p"
     .string "Could it be in that burned-out\n"
     .string "mansion?\p"
-    .string "The GYM LEADER's friend used to\n"
-    .string "live there, they say.$"
+    .string "The BENCHMARK LEADER's friend used\n"
+    .string "to live there, they say.$"
 
 CinnabarIsland_PokemonCenter_1F_Text_VisitUnionRoom::
     .string "Do you have lots of friends?\p"

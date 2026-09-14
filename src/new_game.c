@@ -138,9 +138,9 @@ static void DaemonsDebug_GrantTestKit(void)
         SPECIES_VAPOREON,   // CAREMUSAI  -- Water Absorb
         SPECIES_MEW,        // ARTSAI     -- Synchronize, and PERSPECTIVE
         SPECIES_MEWTWO,     // S.T.A.R.R. -- Pressure, and RECURSION
-        // The last two carry the HMs. S.T.A.R.R. used to be one of them, which
-        // meant its four slots were field moves and RECURSION could never be
-        // tested. SEEKMUSAI keeps Volt Absorb and carries them instead.
+        // The last two carry the other HMs. S.T.A.R.R. used to carry all four of
+        // one set, which meant RECURSION could never be tested; now it carries
+        // GOTO only, because it is the daemon that flies you (T-75).
         SPECIES_JOLTEON,    // SEEKMUSAI  -- Volt Absorb
         SPECIES_SNORLAX,    // DEADLOCK   -- Immunity / Thick Fat
     };
@@ -176,8 +176,10 @@ static void DaemonsDebug_GrantTestKit(void)
     // party member who could move you around the map, and losing that on the
     // port made testing much slower: four move slots each, eight field moves,
     // so it takes two daemons and there is no room for anything else on them.
+    // GOTO is S.T.A.R.R.'s now. Its old slot holds ADVERTISE (Sweet Scent),
+    // which is also a field move: it calls a wild encounter where you stand.
     static const u16 sFieldMoves[] = {
-        MOVE_CUT, MOVE_FLY, MOVE_SURF, MOVE_STRENGTH,
+        MOVE_CUT, MOVE_SWEET_SCENT, MOVE_SURF, MOVE_STRENGTH,
         MOVE_ROCK_SMASH, MOVE_WATERFALL, MOVE_FLASH, MOVE_DIVE,
     };
     u32 m;
@@ -191,9 +193,12 @@ static void DaemonsDebug_GrantTestKit(void)
         // every command unless it carries the official-event flag, whatever the
         // badges (IsBattlerModernFatefulEncounter), and CreateMon does not set it.
         SetMonData(&mon, MON_DATA_MODERN_FATEFUL_ENCOUNTER, &fateful);
-        // S.T.A.R.R. learns RECURSION at 70 and the kit is level 50.
+        // S.T.A.R.R. learns RECURSION and GOTO at 70 and the kit is level 50.
         if (sParty[i] == SPECIES_MEWTWO)
+        {
             DeleteFirstMoveAndGiveMoveToMon(&mon, MOVE_RECURSION);
+            DeleteFirstMoveAndGiveMoveToMon(&mon, MOVE_FLY);
+        }
         if (i >= ARRAY_COUNT(sParty) - 2)
         {
             u32 base = (i == ARRAY_COUNT(sParty) - 2) ? 0 : 4;

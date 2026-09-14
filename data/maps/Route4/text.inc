@@ -72,5 +72,5 @@ Route4_Text_PeopleLikeAndRespectBrock::
     .string "You got it from CAIRN, didn't you?\p"
     .string "CAIRN is cool. He's not just tough.\n"
     .string "People like and respect him.\p"
-    .string "I want to become a GYM LEADER\n"
-    .string "like him.$"
+    .string "I want to become a BENCHMARK\n"
+    .string "LEADER like him.$"

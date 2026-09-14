@@ -37,6 +37,6 @@ IndigoPlateau_PokemonCenter_1F_Text_LancesCousinGymLeaderFarAway::
 	.string "Maybe becoming a REVIEW BOARD\n"
 	.string "member is in the blood.\p"
 	.string "From what I've heard, SANGUINE has\n"
-	.string "a cousin who's a GYM LEADER\l"
+	.string "a cousin who's a BENCHMARK LEADER\l"
 	.string "somewhere far away.$"
 

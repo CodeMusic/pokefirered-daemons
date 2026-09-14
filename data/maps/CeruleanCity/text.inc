@@ -173,7 +173,7 @@ CeruleanCity_Text_BikeShopSign::
 
 CeruleanCity_Text_GymSign::
     .string "DOLDRUM CITY\n"
-    .string "DAEMON GYM\l"
+    .string "BENCHMARK\l"
     .string "LEADER: BASIN\p"
     .string "The Tomboyish\n"
     .string "Mermaid!$"

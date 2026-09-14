@@ -105,8 +105,8 @@ Route25_Text_SeaCottageSign::
 
 Route25_Text_MistyHighHopesAboutThisPlace::
     .string "This cape is a famous date spot.\p"
-    .string "BASIN, the GYM LEADER, has high\n"
-    .string "hopes about this place.$"
+    .string "BASIN, the BENCHMARK LEADER, has\n"
+    .string "high hopes about this place.$"
 
 Route25_Text_AreYouHereAlone::
     .string "Hello, are you here alone?\p"

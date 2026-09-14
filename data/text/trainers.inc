@@ -178,7 +178,7 @@ Route10_Text_HermanRematchIntro::
 	.string "DAEMONS?$"
 
 Route10_Text_HeidiRematchIntro::
-	.string "I went out to a DAEMON GYM again.\p"
+	.string "I went out to a BENCHMARK again.\p"
 	.string "…But I lost as usual.$"
 
 Route10_Text_TrentRematchIntro::

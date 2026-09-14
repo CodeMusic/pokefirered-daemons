@@ -1,7 +1,7 @@
 CinnabarIsland_Gym_Text_BlaineIntro::
     .string "Hah!\p"
     .string "I am ANNEAL! I am the LEADER of\n"
-    .string "QUICKSILVER GYM!\p"
+    .string "QUICKSILVER BENCHMARK!\p"
     .string "My fiery DAEMON will incinerate all\n"
     .string "challengers!\p"
     .string "Hah! You better have COOLANT!$"
@@ -97,8 +97,8 @@ CinnabarIsland_Gym_Text_DerekPostBattle::
     .string "his way down safely.$"
 
 CinnabarIsland_Gym_Text_DustyIntro::
-    .string "I've been to many GYMS, but this\n"
-    .string "one best suits my style.$"
+    .string "I've been to many BENCHMARKS, but\n"
+    .string "this one best suits my style.$"
 
 CinnabarIsland_Gym_Text_DustyDefeat::
     .string "Yowza!\n"
@@ -133,12 +133,12 @@ CinnabarIsland_Gym_Text_GymGuyPostVictory::
     .string "You beat that firebrand!$"
 
 CinnabarIsland_Gym_Text_GymStatue::
-    .string "QUICKSILVER DAEMON GYM LEADER:\n"
+    .string "QUICKSILVER BENCHMARK LEADER:\n"
     .string "ANNEAL\p"
     .string "WINNING USERS: {RIVAL}$"
 
 CinnabarIsland_Gym_Text_GymStatuePlayerWon::
-    .string "QUICKSILVER DAEMON GYM LEADER:\n"
+    .string "QUICKSILVER BENCHMARK LEADER:\n"
     .string "ANNEAL\p"
     .string "WINNING USERS: {RIVAL}, {PLAYER}$"
 
@@ -148,7 +148,7 @@ CinnabarIsland_Gym_Text_PokemonQuizRules::
     .string "the next room.\p"
     .string "Get it wrong, and face a USER!\p"
     .string "If you want to conserve your\n"
-    .string "DAEMON for the GYM LEADER…\p"
+    .string "DAEMON for the BENCHMARK LEADER…\p"
     .string "Then get it right! Here we go!$"
 
 CinnabarIsland_Gym_Text_QuizQuestion1::

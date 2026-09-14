@@ -27,8 +27,8 @@ PewterCity_Text_ClefairyCameFromMoon::
 PewterCity_Text_BrockOnlySeriousTrainerHere::
     .string "Not many serious USERS here.\p"
     .string "Mostly FORAGERs.\p"
-    .string "SLATE GYM's CAIRN is not mostly\n"
-    .string "anything.$"
+    .string "SLATE BENCHMARK's CAIRN is not\n"
+    .string "mostly anything.$"
 
 PewterCity_Text_DidYouCheckOutMuseum::
     .string "Have you been in the MUSEUM?$"
@@ -89,7 +89,7 @@ PewterCity_Text_MuseumOfScience::
     .string "OF ERRATA$"
 
 PewterCity_Text_GymSign::
-    .string "SLATE CITY DAEMON GYM\n"
+    .string "SLATE CITY BENCHMARK\n"
     .string "LEADER: CAIRN\p"
     .string "He Stacks Stones So The\l"
     .string "Next One Finds The Way$"

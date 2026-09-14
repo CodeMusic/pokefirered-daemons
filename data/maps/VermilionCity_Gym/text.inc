@@ -55,7 +55,7 @@ VermilionCity_Gym_Text_TuckerPostBattle::
 VermilionCity_Gym_Text_BailyIntro::
     .string "I'm a lightweight, but I'm good\n"
     .string "with electricity!\p"
-    .string "That's why I joined this GYM.$"
+    .string "That's why I joined this BENCHMARK.$"
 
 VermilionCity_Gym_Text_BailyDefeat::
     .string "Fried!$"
@@ -75,7 +75,7 @@ VermilionCity_Gym_Text_DwayneDefeat::
 
 VermilionCity_Gym_Text_DwaynePostBattle::
     .string "GAUGE installed the traps in\n"
-    .string "the GYM himself.\p"
+    .string "the BENCHMARK himself.\p"
     .string "He set up double locks everywhere.\n"
     .string "Let me give you a hint.\p"
     .string "When you open the first lock, the\n"
@@ -98,12 +98,12 @@ VermilionCity_Gym_Text_GymGuyPostVictory::
     .string "That match was electric!$"
 
 VermilionCity_Gym_Text_GymStatue::
-    .string "ARDOR DAEMON GYM LEADER: LT.\n"
+    .string "ARDOR BENCHMARK LEADER: LT.\n"
     .string "GAUGE\p"
     .string "WINNING USERS: {RIVAL}$"
 
 VermilionCity_Gym_Text_GymStatuePlayerWon::
-    .string "ARDOR DAEMON GYM LEADER: LT.\n"
+    .string "ARDOR BENCHMARK LEADER: LT.\n"
     .string "GAUGE\p"
     .string "WINNING USERS: {RIVAL}, {PLAYER}$"
 

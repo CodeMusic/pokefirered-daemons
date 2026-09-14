@@ -70,7 +70,7 @@ SaffronCity_Text_FightingDojo::
 
 SaffronCity_Text_GymSign::
     .string "BRAZEN CITY\n"
-    .string "DAEMON GYM\l"
+    .string "BENCHMARK\l"
     .string "LEADER: MATTE\p"
     .string "The Master of\n"
     .string "CONTEXT DAEMON!$"

@@ -182,7 +182,7 @@ Help_Text_WantToEndSafari::
 	.string "I want to end this SAFARI GAME!$"
 
 Help_Text_WhatIsAGym::
-	.string "What is a GYM?$"
+	.string "What is a BENCHMARK?$"
 
 Help_Text_AnswerPlayingForFirstTime::
 	.string "You become the main character,\n"
@@ -512,7 +512,7 @@ Help_Text_AnswerWantToEndSafari::
 	.string "“RETIRE” at the top of the list.$"
 
 Help_Text_AnswerWhatIsAGym::
-	.string "DAEMON GYMS are operated by the\n"
+	.string "BENCHMARKS are operated by the\n"
 	.string "DAEMON LEAGUE and are training\l"
 	.string "facilities for USERS. They are all\l"
 	.string "across the land in cities and towns.\l"
@@ -1369,7 +1369,7 @@ Help_Text_DefinePlayTime::
 Help_Text_DefineBadges::
 	.string "The DAEMON LEAGUE MARKS that you have\n"
 	.string "won are registered and shown. Earn\l"
-	.string "MARKS by outscoring GYM LEADERS in\l"
+	.string "MARKS by outscoring BENCHMARK LEADERS in\l"
 	.string "various cities and towns.$"
 
 Help_Text_DefineTextSpeed::
@@ -1478,7 +1478,7 @@ Help_Text_DefineMoney2::
 Help_Text_DefineBadges2::
 	.string "This indicates the number of DAEMONS\n"
 	.string "LEAGUE MARKS that you have won. Earn\l"
-	.string "MARKS by outscoring GYM LEADERS in\l"
+	.string "MARKS by outscoring BENCHMARK LEADERS in\l"
 	.string "various cities and towns.$"
 
 Help_Text_TheHelpSystem::

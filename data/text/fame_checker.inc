@@ -76,7 +76,7 @@ gFameCheckerFlavorText_Daisy5:: @ 0x81AD69F
 
 gFameCheckerFlavorText_Brock0:: @ 0x81AD705
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
-	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}SLATE CITY DAEMON GYM LEADER:\n"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}SLATE CITY BENCHMARK LEADER:\n"
 	.string "CAIRN. He writes it all down.$"
 
 gFameCheckerFlavorText_Brock1:: @ 0x81AD771
@@ -112,7 +112,7 @@ gFameCheckerFlavorText_Brock5:: @ 0x81ADA27
 
 gFameCheckerFlavorText_Misty0:: @ 0x81ADA91
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
-	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}DOLDRUM CITY DAEMON GYM LEADER:\n"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}DOLDRUM CITY BENCHMARK LEADER:\n"
 	.string "BASIN The Tomboyish Mermaid!$"
 
 gFameCheckerFlavorText_Misty1:: @ 0x81ADAF6
@@ -131,13 +131,13 @@ gFameCheckerFlavorText_Misty3:: @ 0x81ADBD9
 	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}Strong USERS and WATER DAEMONS\n"
 	.string "are common sights in these parts.\p"
 	.string "They say that BASIN of the\n"
-	.string "DOLDRUM GYM trains here.$"
+	.string "DOLDRUM BENCHMARK trains here.$"
 
 gFameCheckerFlavorText_Misty4:: @ 0x81ADC72
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}There's a rumor…\p"
 	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}This cape is a famous date spot.\p"
-	.string "BASIN, the GYM LEADER, has high\n"
-	.string "hopes about this place.$"
+	.string "BASIN, the BENCHMARK LEADER, has\n"
+	.string "high hopes about this place.$"
 
 gFameCheckerFlavorText_Misty5:: @ 0x81ADCEB	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}There's a rumor…\p"
 	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}BASIN is said to worship\n"
@@ -145,7 +145,7 @@ gFameCheckerFlavorText_Misty5:: @ 0x81ADCEB	.string "{COLOR BLUE}{SHADOW LIGHT_B
 
 gFameCheckerFlavorText_LtSurge0:: @ 0x81ADD3C
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
-	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}ARDOR CITY DAEMON GYM LEADER: LT.\n"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}ARDOR CITY BENCHMARK LEADER: LT.\n"
 	.string "GAUGE The Lightning American!$"
 
 gFameCheckerFlavorText_LtSurge1:: @ 0x81ADDA7
@@ -167,7 +167,7 @@ gFameCheckerFlavorText_LtSurge3:: @ 0x81ADE82
 gFameCheckerFlavorText_LtSurge4:: @ 0x81ADEEC
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
 	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}GAUGE installed the traps in\n"
-	.string "the GYM himself.\p"
+	.string "the BENCHMARK himself.\p"
 	.string "He set up double locks everywhere.$"
 
 gFameCheckerFlavorText_LtSurge5:: @ 0x81ADF6A
@@ -179,7 +179,7 @@ gFameCheckerFlavorText_LtSurge5:: @ 0x81ADF6A
 
 gFameCheckerFlavorText_Erika0:: @ 0x81AE009
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
-	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}VERDIGRIS CITY DAEMON GYM\n"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}VERDIGRIS CITY BENCHMARK\n"
 	.string "LEADER: TRELLIS The Nature-Loving\l"
 	.string "Princess!$"
 
@@ -198,7 +198,7 @@ gFameCheckerFlavorText_Erika2:: @ 0x81AE0F3
 gFameCheckerFlavorText_Erika3:: @ 0x81AE15B
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
 	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}We only use GROWTH-type DAEMON at\n"
-	.string "our GYM.\p"
+	.string "our BENCHMARK.\p"
 	.string "Why? We also use them for making\n"
 	.string "flower arrangements!$"
 
@@ -210,12 +210,12 @@ gFameCheckerFlavorText_Erika4:: @ 0x81AE1E5
 gFameCheckerFlavorText_Erika5:: @ 0x81AE247
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}There's a rumor…\p"
 	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}Rumor has it that if you peek into\n"
-	.string "VERDIGRIS GYM, you can often see\l"
-	.string "TRELLIS snoozing.$"
+	.string "VERDIGRIS BENCHMARK, you can\l"
+	.string "often see TRELLIS snoozing.$"
 
 gFameCheckerFlavorText_Koga0:: @ 0x81AE2B6
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
-	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}LURID CITY DAEMON GYM LEADER:\n"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}LURID CITY BENCHMARK LEADER:\n"
 	.string "TILT The Poisonous Ninja Master$"
 
 gFameCheckerFlavorText_Koga1:: @ 0x81AE31D
@@ -231,8 +231,8 @@ gFameCheckerFlavorText_Koga2:: @ 0x81AE37D
 
 gFameCheckerFlavorText_Koga3:: @ 0x81AE407
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Family and friends?\p"
-	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}My father is the GYM LEADER of\n"
-	.string "this town.\p"
+	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}My father is the BENCHMARK LEADER\n"
+	.string "of this town.\p"
 	.string "I'm training to use POISON DAEMON\n"
 	.string "as well as my father.$"
 
@@ -247,21 +247,21 @@ gFameCheckerFlavorText_Koga5:: @ 0x81AE51B
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
 	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}The SAFARI ZONE's huge, wouldn't\n"
 	.string "you say?\p"
-	.string "LURID's GYM LEADER, TILT, patrols\n"
-	.string "the grounds every so often.\p"
+	.string "LURID's BENCHMARK LEADER, TILT,\n"
+	.string "patrols the grounds every so often.\p"
 	.string "Thanks to him, we can play here\n"
 	.string "knowing that we're safe.$"
 
 gFameCheckerFlavorText_Sabrina0:: @ 0x81AE5E8
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
-	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}BRAZEN CITY DAEMON GYM LEADER:\n"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}BRAZEN CITY BENCHMARK LEADER:\n"
 	.string "MATTE The Master of CONSTRUE\l"
 	.string "DAEMON!$"
 
 gFameCheckerFlavorText_Sabrina1:: @ 0x81AE656
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of DAEMON?\p"
-	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}You know about a girl GYM LEADER\n"
-	.string "in BRAZEN CITY?\p"
+	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}You know about a girl BENCHMARK\n"
+	.string "LEADER in BRAZEN CITY?\p"
 	.string "She uses CONSTRUE-type DAEMON,\n"
 	.string "right?$"
 
@@ -290,7 +290,7 @@ gFameCheckerFlavorText_Sabrina5:: @ 0x81AE841
 
 gFameCheckerFlavorText_Blaine0:: @ 0x81AE89E
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
-	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}QUICKSILVER ISLAND DAEMON GYM\n"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}QUICKSILVER ISLAND BENCHMARK\n"
 	.string "LEADER: ANNEAL The Hotheaded Quiz\l"
 	.string "Master!$"
 
@@ -311,8 +311,8 @@ gFameCheckerFlavorText_Blaine2:: @ 0x81AE990
 
 gFameCheckerFlavorText_Blaine3:: @ 0x81AEA59
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
-	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}QUICKSILVER GYM's ANNEAL is quite\n"
-	.string "the odd fellow.\p"
+	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}QUICKSILVER BENCHMARK's ANNEAL is\n"
+	.string "quite the odd fellow.\p"
 	.string "He's lived on the island since way\n"
 	.string "before the LAB was built.$"
 
@@ -472,7 +472,7 @@ gFameCheckerFlavorText_Lance4:: @ 0x81AF758	.string "{COLOR BLUE}{SHADOW LIGHT_B
 gFameCheckerFlavorText_Lance5:: @ 0x81AF7CB
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Family and friends?\p"
 	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}From what I've heard, SANGUINE has\n"
-	.string "a cousin who's a GYM LEADER\l"
+	.string "a cousin who's a BENCHMARK LEADER\l"
 	.string "somewhere far away.$"
 
 gFameCheckerFlavorText_Bill0:: @ 0x81AF83E
@@ -582,8 +582,8 @@ gFameCheckerFlavorText_Giovanni3:: @ 0x81B0022
 
 gFameCheckerFlavorText_Giovanni4:: @ 0x81B00A6
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
-	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}Blow me away! SCORN was the GYM\n"
-	.string "LEADER of CALLOW?$"
+	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}Blow me away! SCORN was the\n"
+	.string "BENCHMARK LEADER of CALLOW?$"
 
 gFameCheckerFlavorText_Giovanni5:: @ 0x81B0106
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Family and friends?\p"
@@ -633,7 +633,7 @@ gFameCheckerPersonQuote_Misty:: @ 0x81B03BF
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}From: BASIN\n"
 	.string "To: {PLAYER}\p"
 	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}I'm going to keep training here at\n"
-	.string "this GYM.\p"
+	.string "this BENCHMARK.\p"
 	.string "When I get better, I'd love to hit\n"
 	.string "the road and travel.$"
 
@@ -806,7 +806,7 @@ gFameCheckerFlavorTextOriginLocation_Brock0::
 	.string "SLATE CITY$"
 
 gFameCheckerFlavorTextOriginLocation_Brock1::
-	.string "SLATE GYM$"
+	.string "SLATE BENCHMARK$"
 
 gFameCheckerFlavorTextOriginLocation_Brock2::
 	.string "SLATE CITY$"
@@ -824,10 +824,10 @@ gFameCheckerFlavorTextOriginLocation_Misty0::
 	.string "DOLDRUM CITY$"
 
 gFameCheckerFlavorTextOriginLocation_Misty1::
-	.string "DOLDRUM GYM$"
+	.string "DOLDRUM BENCHMARK$"
 
 gFameCheckerFlavorTextOriginLocation_Misty2::
-	.string "DOLDRUM GYM$"
+	.string "DOLDRUM BENCHMARK$"
 
 gFameCheckerFlavorTextOriginLocation_Misty3::
 	.string "GLAUCOUS ISLES$"
@@ -842,16 +842,16 @@ gFameCheckerFlavorTextOriginLocation_LtSurge0::
 	.string "ARDOR CITY$"
 
 gFameCheckerFlavorTextOriginLocation_LtSurge1::
-	.string "ARDOR GYM$"
+	.string "ARDOR BENCHMARK$"
 
 gFameCheckerFlavorTextOriginLocation_LtSurge2::
-	.string "ARDOR GYM$"
+	.string "ARDOR BENCHMARK$"
 
 gFameCheckerFlavorTextOriginLocation_LtSurge3::
-	.string "ARDOR GYM$"
+	.string "ARDOR BENCHMARK$"
 
 gFameCheckerFlavorTextOriginLocation_LtSurge4::
-	.string "ARDOR GYM$"
+	.string "ARDOR BENCHMARK$"
 
 gFameCheckerFlavorTextOriginLocation_LtSurge5::
 	.string "ARDOR CITY$"
@@ -860,16 +860,16 @@ gFameCheckerFlavorTextOriginLocation_Erika0::
 	.string "VERDIGRIS CITY$"
 
 gFameCheckerFlavorTextOriginLocation_Erika1::
-	.string "VERDIGRIS GYM$"
+	.string "BENCHMARK$"
 
 gFameCheckerFlavorTextOriginLocation_Erika2::
-	.string "VERDIGRIS GYM$"
+	.string "BENCHMARK$"
 
 gFameCheckerFlavorTextOriginLocation_Erika3::
-	.string "VERDIGRIS GYM$"
+	.string "BENCHMARK$"
 
 gFameCheckerFlavorTextOriginLocation_Erika4::
-	.string "VERDIGRIS GYM$"
+	.string "BENCHMARK$"
 
 gFameCheckerFlavorTextOriginLocation_Erika5::
 	.string "VERDIGRIS MANSION$"
@@ -878,10 +878,10 @@ gFameCheckerFlavorTextOriginLocation_Koga0::
 	.string "LURID CITY$"
 
 gFameCheckerFlavorTextOriginLocation_Koga1::
-	.string "LURID GYM$"
+	.string "LURID BENCHMARK$"
 
 gFameCheckerFlavorTextOriginLocation_Koga2::
-	.string "LURID GYM$"
+	.string "LURID BENCHMARK$"
 
 gFameCheckerFlavorTextOriginLocation_Koga3::
 	.string "LURID CITY$"
@@ -899,31 +899,31 @@ gFameCheckerFlavorTextOriginLocation_Sabrina1::
 	.string "THREE ISLAND$"
 
 gFameCheckerFlavorTextOriginLocation_Sabrina2::
-	.string "BRAZEN GYM$"
+	.string "BRAZEN BENCHMARK$"
 
 gFameCheckerFlavorTextOriginLocation_Sabrina3::
-	.string "BRAZEN GYM$"
+	.string "BRAZEN BENCHMARK$"
 
 gFameCheckerFlavorTextOriginLocation_Sabrina4::
 	.string "BRAZEN CITY$"
 
 gFameCheckerFlavorTextOriginLocation_Sabrina5::
-	.string "BRAZEN GYM$"
+	.string "BRAZEN BENCHMARK$"
 
 gFameCheckerFlavorTextOriginLocation_Blaine0::
 	.string "QUICKSILVER ISLAND$"
 
 gFameCheckerFlavorTextOriginLocation_Blaine1::
-	.string "QUICKSILVER GYM$"
+	.string "BENCHMARK$"
 
 gFameCheckerFlavorTextOriginLocation_Blaine2::
-	.string "QUICKSILVER GYM$"
+	.string "BENCHMARK$"
 
 gFameCheckerFlavorTextOriginLocation_Blaine3::
 	.string "QUICKSILVER ISLAND$"
 
 gFameCheckerFlavorTextOriginLocation_Blaine4::
-	.string "QUICKSILVER GYM$"
+	.string "BENCHMARK$"
 
 gFameCheckerFlavorTextOriginLocation_Blaine5::
 	.string "RESORT SUBLIME$"
@@ -1031,7 +1031,7 @@ gFameCheckerFlavorTextOriginLocation_MrFuji3::
 	.string "HALFTONE TOWN$"
 
 gFameCheckerFlavorTextOriginLocation_MrFuji4::
-	.string "QUICKSILVER GYM$"
+	.string "BENCHMARK$"
 
 gFameCheckerFlavorTextOriginLocation_MrFuji5::
 	.string "QUICKSILVER ISLAND$"
@@ -1046,10 +1046,10 @@ gFameCheckerFlavorTextOriginLocation_Giovanni2::
 	.string "FOUNDRY CO.$"
 
 gFameCheckerFlavorTextOriginLocation_Giovanni3::
-	.string "CALLOW GYM$"
+	.string "CALLOW BENCHMARK$"
 
 gFameCheckerFlavorTextOriginLocation_Giovanni4::
-	.string "CALLOW GYM$"
+	.string "CALLOW BENCHMARK$"
 
 gFameCheckerFlavorTextOriginLocation_Giovanni5::
 	.string "CORPUS WAREHOUSE$"
@@ -1344,22 +1344,22 @@ gFameCheckerFlavorTextOriginObjectName_Giovanni5::
 
 PokemonJournal_Text_SpecialFeatureBrock::
 	.string "DAEMON JOURNAL\p"
-	.string "Special Feature: SLATE GYM LEADER\n"
-	.string "CAIRN!\p"
+	.string "Special Feature: SLATE BENCHMARK\n"
+	.string "LEADER CAIRN!\p"
 	.string "CAIRN rarely laughs, but is said to\n"
 	.string "be unable to stop if he starts.$"
 
 PokemonJournal_Text_SpecialFeatureMisty::
 	.string "DAEMON JOURNAL\p"
-	.string "Special Feature: DOLDRUM GYM\n"
-	.string "LEADER BASIN!\p"
+	.string "Special Feature:\n"
+	.string "DOLDRUM BENCHMARK LEADER BASIN!\p"
 	.string "BASIN is said to worship\n"
 	.string "PHLEGMATIC of the REVIEW BOARD.$"
 
 PokemonJournal_Text_SpecialFeatureLtSurge::
 	.string "DAEMON JOURNAL\p"
-	.string "Special Feature: ARDOR GYM LEADER\n"
-	.string "GAUGE!\p"
+	.string "Special Feature: ARDOR BENCHMARK\n"
+	.string "LEADER GAUGE!\p"
 	.string "GAUGE is rumored to have been\n"
 	.string "a pilot while home in America.\p"
 	.string "He used the electricity generated\n"
@@ -1367,16 +1367,16 @@ PokemonJournal_Text_SpecialFeatureLtSurge::
 
 PokemonJournal_Text_SpecialFeatureErika::
 	.string "DAEMON JOURNAL\p"
-	.string "Special Feature: VERDIGRIS GYM\n"
-	.string "LEADER TRELLIS!\p"
+	.string "Special Feature: VERDIGRIS\n"
+	.string "BENCHMARK LEADER TRELLIS!\p"
 	.string "Rumor has it that if you peek into\n"
-	.string "VERDIGRIS GYM, you can often see\l"
-	.string "TRELLIS snoozing.$"
+	.string "VERDIGRIS BENCHMARK, you can\l"
+	.string "often see TRELLIS snoozing.$"
 
 PokemonJournal_Text_SpecialFeatureKoga::
 	.string "DAEMON JOURNAL\p"
-	.string "Special Feature: LURID GYM LEADER\n"
-	.string "TILT!\p"
+	.string "Special Feature: LURID BENCHMARK\n"
+	.string "LEADER TILT!\p"
 	.string "TILT is said to have a thorough\n"
 	.string "knowledge of medicine.\p"
 	.string "He even concocts medicine to nurse\n"
@@ -1384,7 +1384,7 @@ PokemonJournal_Text_SpecialFeatureKoga::
 
 PokemonJournal_Text_SpecialFeatureSabrina::
 	.string "DAEMON JOURNAL\p"
-	.string "Special Feature: BRAZEN GYM\n"
+	.string "Special Feature: BRAZEN BENCHMARK\n"
 	.string "LEADER MATTE!\p"
 	.string "People say that MATTE can\n"
 	.string "communicate with her DAEMON during\l"
@@ -1392,8 +1392,8 @@ PokemonJournal_Text_SpecialFeatureSabrina::
 
 PokemonJournal_Text_SpecialFeatureBlaine::
 	.string "DAEMON JOURNAL\p"
-	.string "Special Feature: QUICKSILVER GYM\n"
-	.string "LEADER ANNEAL!\p"
+	.string "Special Feature: QUICKSILVER\n"
+	.string "BENCHMARK LEADER ANNEAL!\p"
 	.string "ANNEAL is said to remove his dark\n"
 	.string "shades only when he is thinking up\l"
 	.string "new quiz questions.$"

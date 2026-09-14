@@ -49,8 +49,9 @@ CeruleanCity_Gym_Text_DianaPostBattle::
 CeruleanCity_Gym_Text_DianaHouseRule::
 	.string "Hold still. I'll set your team back\n"
 	.string "the way it was.\p"
-	.string "House rule. Nobody leaves this GYM\n"
-	.string "worse off than they walked in.$"
+	.string "House rule. Nobody leaves this\n"
+	.string "BENCHMARK worse off than they\l"
+	.string "walked in.$"
 
 CeruleanCity_Gym_Text_LuisIntro::
     .string "Splash!\p"
@@ -88,10 +89,10 @@ CeruleanCity_Gym_Text_WeMakePrettyGoodTeam::
     .string "darn-good team!$"
 
 CeruleanCity_Gym_Text_GymStatue::
-    .string "DOLDRUM DAEMON GYM LEADER: BASIN\p"
+    .string "DOLDRUM BENCHMARK LEADER: BASIN\p"
     .string "WINNING USERS: {RIVAL}$"
 
 CeruleanCity_Gym_Text_GymStatuePlayerWon::
-    .string "DOLDRUM DAEMON GYM LEADER: BASIN\p"
+    .string "DOLDRUM BENCHMARK LEADER: BASIN\p"
     .string "WINNING USERS: {RIVAL}, {PLAYER}$"
 

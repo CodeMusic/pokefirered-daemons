@@ -63,7 +63,7 @@ FuchsiaCity_Gym_Text_KaydenPostBattle::
 FuchsiaCity_Gym_Text_KirkIntro::
     .string "I was a magician once upon a time.\p"
     .string "But I dreamt of becoming a ninja,\n"
-    .string "so I joined this GYM.$"
+    .string "so I joined this BENCHMARK.$"
 
 FuchsiaCity_Gym_Text_KirkDefeat::
     .string "I'm done for!$"
@@ -87,7 +87,7 @@ FuchsiaCity_Gym_Text_NatePostBattle::
 FuchsiaCity_Gym_Text_PhilIntro::
     .string "Stop right there!\p"
     .string "The famed invisible walls of LURID\n"
-    .string "GYM have you frustrated?$"
+    .string "BENCHMARK have you frustrated?$"
 
 FuchsiaCity_Gym_Text_PhilDefeat::
     .string "Whoa!\n"
@@ -128,8 +128,8 @@ FuchsiaCity_Gym_Text_ShawnPostBattle::
 
 FuchsiaCity_Gym_Text_GymGuyAdvice::
     .string "Yo! Champ in making!\p"
-    .string "LURID GYM is riddled with invisible\n"
-    .string "walls!\p"
+    .string "LURID BENCHMARK is riddled with\n"
+    .string "invisible walls!\p"
     .string "TILT might appear close, but he's\n"
     .string "blocked off!\p"
     .string "You have to find gaps in the walls\n"
@@ -140,10 +140,10 @@ FuchsiaCity_Gym_Text_GymGuyPostVictory::
     .string "even now!$"
 
 FuchsiaCity_Gym_Text_GymStatue::
-    .string "LURID DAEMON GYM LEADER: TILT\p"
+    .string "LURID BENCHMARK LEADER: TILT\p"
     .string "WINNING USERS: {RIVAL}$"
 
 FuchsiaCity_Gym_Text_GymStatuePlayerWon::
-    .string "LURID DAEMON GYM LEADER: TILT\p"
+    .string "LURID BENCHMARK LEADER: TILT\p"
     .string "WINNING USERS: {RIVAL}, {PLAYER}$"
 

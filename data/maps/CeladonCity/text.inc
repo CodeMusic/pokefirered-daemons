@@ -6,7 +6,7 @@ CeladonCity_Text_GotMyKoffingInCinnabar::
     .string "The room with no window.$"
 
 CeladonCity_Text_GymIsGreatFullOfWomen::
-    .string "Heheh! This GYM is great!\n"
+    .string "Heheh! This BENCHMARK is great!\n"
     .string "It's full of women!$"
 
 CeladonCity_Text_GameCornerIsBadForCitysImage::
@@ -52,7 +52,7 @@ CeladonCity_Text_CitySign::
 
 CeladonCity_Text_GymSign::
     .string "VERDIGRIS CITY\n"
-    .string "DAEMON GYM\l"
+    .string "BENCHMARK\l"
     .string "LEADER: TRELLIS\p"
     .string "The Nature Loving\n"
     .string "Princess!$"

@@ -5,12 +5,13 @@ ViridianCity_Text_CanCarryMonsAnywhere::
     .string "People forget it was ever hard.$"
 
 ViridianCity_Text_GymClosedWonderWhoLeaderIs::
-    .string "This GYM has never once been open.\p"
+    .string "This BENCHMARK has never once\n"
+    .string "been open.\p"
     .string "Nobody here can tell me who holds\n"
     .string "it.$"
 
 ViridianCity_Text_ViridiansGymLeaderReturned::
-    .string "CALLOW GYM's LEADER is back.$"
+    .string "CALLOW BENCHMARK's LEADER is back.$"
 
 ViridianCity_Text_WantToKnowAboutCaterpillarMons::
     .string "Do you want the difference between\n"
@@ -98,9 +99,9 @@ ViridianCity_Text_MovesLimitedByPP::
 
 ViridianCity_Text_GymSign::
     .string "CALLOW CITY\n"
-    .string "DAEMON GYM$"
+    .string "BENCHMARK$"
 
 ViridianCity_Text_GymDoorsAreLocked::
-    .string "CALLOW GYM is locked.\p"
+    .string "CALLOW BENCHMARK is locked.\p"
     .string "It has been for some time.$"
 

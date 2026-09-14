@@ -4,7 +4,7 @@ CeladonCity_Gym_Text_ErikaIntro::
     .string "...Oh dear... I must have dozed\n"
     .string "off. Welcome.\p"
     .string "My name is TRELLIS. I lead the\n"
-    .string "VERDIGRIS GYM.\p"
+    .string "VERDIGRIS BENCHMARK.\p"
     .string "I teach the art of flower\n"
     .string "arranging. My DAEMONS are of the\l"
     .string "GROWTH-type.\p"
@@ -45,7 +45,8 @@ CeladonCity_Gym_Text_ShouldMakeRoomForThis::
     .string "You should make room for this.$"
 
 CeladonCity_Gym_Text_KayIntro::
-    .string "I should tell you about this GYM.\p"
+    .string "I should tell you about this\n"
+    .string "BENCHMARK.\p"
     .string "Only real ladies are allowed in\n"
     .string "here!$"
 
@@ -90,7 +91,7 @@ CeladonCity_Gym_Text_TamiaDefeat::
 
 CeladonCity_Gym_Text_TamiaPostBattle::
     .string "We only use GROWTH-type DAEMON at\n"
-    .string "our GYM.\p"
+    .string "our BENCHMARK.\p"
     .string "Why? We also use them for making\n"
     .string "flower arrangements!$"
 
@@ -121,7 +122,7 @@ CeladonCity_Gym_Text_LoriPostBattle::
     .string "especially if I have to battle.$"
 
 CeladonCity_Gym_Text_MaryIntro::
-    .string "Welcome to VERDIGRIS GYM!\p"
+    .string "Welcome to VERDIGRIS BENCHMARK!\p"
     .string "You better not underestimate girl\n"
     .string "power!$"
 
@@ -134,12 +135,12 @@ CeladonCity_Gym_Text_MaryPostBattle::
     .string "until next time!$"
 
 CeladonCity_Gym_Text_GymStatue::
-    .string "VERDIGRIS DAEMON GYM LEADER:\n"
+    .string "VERDIGRIS BENCHMARK LEADER:\n"
     .string "TRELLIS\p"
     .string "WINNING USERS: {RIVAL}$"
 
 CeladonCity_Gym_Text_GymStatuePlayerWon::
-    .string "VERDIGRIS DAEMON GYM LEADER:\n"
+    .string "VERDIGRIS BENCHMARK LEADER:\n"
     .string "TRELLIS\p"
     .string "WINNING USERS: {RIVAL}, {PLAYER}$"
 

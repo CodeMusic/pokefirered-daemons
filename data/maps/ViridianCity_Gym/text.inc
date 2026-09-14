@@ -1,8 +1,9 @@
 ViridianCity_Gym_Text_GiovanniIntro::
     .string "So. You found this one too.\p"
     .string "It was going to start again here.\p"
-    .string "I ran this GYM once, before any of\n"
-    .string "the rest of it. I am running it now.\p"
+    .string "I ran this BENCHMARK once, before\n"
+    .string "any of the rest of it. I am running\l"
+    .string "it now.\p"
     .string "Nothing held back.$"
 
 ViridianCity_Gym_Text_GiovanniDefeat::
@@ -118,35 +119,35 @@ ViridianCity_Gym_Text_ColePostBattle::
     .string "Conditions were not typical.$"
 
 ViridianCity_Gym_Text_SamuelIntro::
-    .string "This GYM was shut for years. He\n"
-    .string "came back. Nobody announced it.$"
+    .string "This BENCHMARK was shut for years.\n"
+    .string "He came back. Nobody announced it.$"
 
 ViridianCity_Gym_Text_SamuelDefeat::
     .string "I was outscored?$"
 
 ViridianCity_Gym_Text_SamuelPostBattle::
     .string "You can go on to the DAEMON\n"
-    .string "LEAGUE only by outscoring our GYM\l"
-    .string "LEADER!$"
+    .string "LEAGUE only by outscoring our\l"
+    .string "BENCHMARK LEADER!$"
 
 ViridianCity_Gym_Text_GymGuyAdvice::
     .string "You again.\p"
     .string "Nobody will tell me who runs this\n"
-    .string "GYM.\p"
+    .string "BENCHMARK.\p"
     .string "I have asked. They smile.\p"
     .string "They favour STRATUM here. That\n"
     .string "much I got.$"
 
 ViridianCity_Gym_Text_GymGuyPostVictory::
-    .string "SCORN. He was running the GYM the\n"
-    .string "whole time.\p"
+    .string "SCORN. He was running the\n"
+    .string "BENCHMARK the whole time.\p"
     .string "I asked so many people.$"
 
 ViridianCity_Gym_Text_GymStatue::
-    .string "CALLOW DAEMON GYM LEADER: ?\p"
+    .string "CALLOW BENCHMARK LEADER: ?\p"
     .string "WINNING USERS: {RIVAL}$"
 
 ViridianCity_Gym_Text_GymStatuePlayerWon::
-    .string "CALLOW DAEMON GYM LEADER: SCORN\p"
+    .string "CALLOW BENCHMARK LEADER: SCORN\p"
     .string "WINNING USERS: {RIVAL}, {PLAYER}$"
 

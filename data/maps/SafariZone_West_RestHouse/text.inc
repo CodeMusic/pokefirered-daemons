@@ -1,8 +1,8 @@
 SafariZone_West_Text_KogaPatrolsSafariEverySoOften::
     .string "The SAFARI ZONE's huge, wouldn't\n"
     .string "you say?\p"
-    .string "LURID's GYM LEADER, TILT, patrols\n"
-    .string "the grounds every so often.\p"
+    .string "LURID's BENCHMARK LEADER, TILT,\n"
+    .string "patrols the grounds every so often.\p"
     .string "Thanks to him, we can play here\n"
     .string "knowing that we're safe.$"
 
