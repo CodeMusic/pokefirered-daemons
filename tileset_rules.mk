@@ -115,7 +115,7 @@ $(TILESETGFXDIR)/secondary/celadon_city/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 343 -Wnum_tiles
 
 $(TILESETGFXDIR)/secondary/saffron_city/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 347 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 357 -Wnum_tiles
 
 $(TILESETGFXDIR)/secondary/dummy_1/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 2 -Wnum_tiles
