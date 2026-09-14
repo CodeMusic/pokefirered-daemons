@@ -61,10 +61,23 @@ VermilionCity_EventScript_CheckHasMysticTicket::
 	goto EventScript_SetResultTrue
 	end
 
+@  Once CRYSTAL has read the package, the ferry sails to THE ANNEX with no
+@  ticket. Vanilla gated the island on the AURORA TICKET, which no ordinary
+@  cartridge was ever given, and this build is revision 0, so even the
+@  Hall of Fame gift that sets FLAG_ENABLE_SHIP_BIRTH_ISLAND never runs. The
+@  flight is spent on her and happens once (4.34), so without this PROTEUS was
+@  on the island and nothing could reach it. FLAG_SHOWN_AURORA_TICKET is set
+@  so the ferryman never exclaims over a ticket the player is not holding.
 VermilionCity_EventScript_CheckHasAuroraTicket::
+	goto_if_set FLAG_CRYSTAL_READ_PAYLOAD, VermilionCity_EventScript_AnnexIsOpen
 	goto_if_unset FLAG_ENABLE_SHIP_BIRTH_ISLAND, EventScript_SetResultFalse
 	checkitem ITEM_AURORA_TICKET
 	goto_if_eq VAR_RESULT, FALSE, EventScript_SetResultFalse
+	goto EventScript_SetResultTrue
+	end
+
+VermilionCity_EventScript_AnnexIsOpen::
+	setflag FLAG_SHOWN_AURORA_TICKET
 	goto EventScript_SetResultTrue
 	end
 
