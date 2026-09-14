@@ -167,6 +167,7 @@ const u8 gText_MenuPokenav[] = _("ポケナビ");
 const u8 gText_MenuPlayer[] = _("{PLAYER}");
 const u8 gText_MenuSave[] = _("SAVE");
 const u8 gText_MenuOption[] = _("OPTION");
+#if DAEMONS_DEBUG  // the DEBUG menu's text stays out of a release build (9.17)
 const u8 gText_MenuDebug[] = _("DEBUG");
 const u8 gText_DbgMenuHeal[] = _("HEAL");
 const u8 gText_DbgMenuMart[] = _("MART");
@@ -183,6 +184,10 @@ const u8 gText_DbgMenuLevel[] = _("LV {STR_VAR_2}");
 // what this row does is bring one up. It is the same verb, used literally.
 const u8 gText_DbgMenuInvoke[] = _("INVOKE");
 const u8 gText_DbgMenuBack[] = _("BACK");
+const u8 gText_DbgMenuAdd[] = _("ADD");
+const u8 gText_DbgMenuRemove[] = _("REMOVE");
+const u8 gText_DbgItemsNothing[] = _("NOTHING HELD");
+#endif
 const u8 gText_MenuExit[] = _("EXIT");
 const u8 gText_MenuRetire[] = _("RETIRE");
 const u8 gText_MenuSafariStats[] = _("{STR_VAR_1}/{STR_VAR_2}\nBOXES {STR_VAR_3}");
@@ -943,9 +948,12 @@ const u8 gStartMenuDesc_Bag[] = _("Equipped with pockets for storing items\nyou 
 const u8 gStartMenuDesc_Player[] = _("Check your money and other game data.");
 const u8 gStartMenuDesc_Save[] = _("Save your game with a complete record\nof your progress to take a break.");
 const u8 gStartMenuDesc_Option[] = _("Adjust various game settings such as text\nspeed, game rules, etc.");
+#if DAEMONS_DEBUG
 const u8 gStartMenuDesc_Debug[] = _("Testing tools. Not part of the game.");
 const u8 gStartMenuDesc_DbgHeal[] = _("Restore the whole party.");
-const u8 gStartMenuDesc_DbgMart[] = _("Refill the BAG and the wallet.");
+const u8 gStartMenuDesc_DbgMart[] = _("ADD or REMOVE items. Fills the wallet.");
+const u8 gStartMenuDesc_DbgAdd[] = _("Fill an item to 999, or take a key item.");
+const u8 gStartMenuDesc_DbgRemove[] = _("Take away a key item you are holding.");
 const u8 gStartMenuDesc_DbgRecord[] = _("Enter the RECORD. Runs the credits.");
 const u8 gStartMenuDesc_DbgIslands[] = _("Open THE MARGINS.");
 const u8 gStartMenuDesc_DbgEncounter[] = _("Invoke any daemon, at any level.");
@@ -955,6 +963,7 @@ const u8 gStartMenuDesc_DbgInvoke[] = _("Start the encounter.");
 const u8 gStartMenuDesc_DbgSong[] = _("Play the next track in the table.");
 const u8 gStartMenuDesc_DbgSfx[] = _("Play the next sound effect.");
 const u8 gStartMenuDesc_DbgBack[] = _("Back, and restore this map's music.");
+#endif
 const u8 gStartMenuDesc_Exit[] = _("Close this MENU window.");
 const u8 gStartMenuDesc_Retire[] = _("Retire from the SAFARI GAME and return to\nthe registration counter.");
 

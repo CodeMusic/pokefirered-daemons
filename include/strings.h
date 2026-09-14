@@ -656,9 +656,13 @@ extern const u8 gText_MenuBag[];
 extern const u8 gText_MenuPlayer[];
 extern const u8 gText_MenuSave[];
 extern const u8 gText_MenuOption[];
+#if DAEMONS_DEBUG  // declared only where they are defined
 extern const u8 gText_MenuDebug[];
 extern const u8 gText_DbgMenuHeal[];
 extern const u8 gText_DbgMenuMart[];
+extern const u8 gText_DbgMenuAdd[];
+extern const u8 gText_DbgMenuRemove[];
+extern const u8 gText_DbgItemsNothing[];
 extern const u8 gText_DbgMenuRecord[];
 extern const u8 gText_DbgMenuIslands[];
 extern const u8 gText_DbgMenuEncounter[];
@@ -670,6 +674,8 @@ extern const u8 gText_DbgMenuSfx[];
 extern const u8 gText_DbgMenuBack[];
 extern const u8 gStartMenuDesc_DbgHeal[];
 extern const u8 gStartMenuDesc_DbgMart[];
+extern const u8 gStartMenuDesc_DbgAdd[];
+extern const u8 gStartMenuDesc_DbgRemove[];
 extern const u8 gStartMenuDesc_DbgRecord[];
 extern const u8 gStartMenuDesc_DbgIslands[];
 extern const u8 gStartMenuDesc_DbgEncounter[];
@@ -679,6 +685,7 @@ extern const u8 gStartMenuDesc_DbgInvoke[];
 extern const u8 gStartMenuDesc_DbgSong[];
 extern const u8 gStartMenuDesc_DbgSfx[];
 extern const u8 gStartMenuDesc_DbgBack[];
+#endif
 extern const u8 gText_MenuExit[];
 extern const u8 gText_MenuRetire[];
 extern const u8 gText_MenuSafariStats[];
@@ -687,7 +694,9 @@ extern const u8 gStartMenuDesc_Pokemon[];
 extern const u8 gStartMenuDesc_Bag[];
 extern const u8 gStartMenuDesc_Save[];
 extern const u8 gStartMenuDesc_Option[];
+#if DAEMONS_DEBUG
 extern const u8 gStartMenuDesc_Debug[];
+#endif
 extern const u8 gStartMenuDesc_Exit[];
 extern const u8 gStartMenuDesc_Retire[];
 extern const u8 gStartMenuDesc_Player[];

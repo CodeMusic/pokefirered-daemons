@@ -28,6 +28,8 @@
 #include "constants/items.h"
 #include "constants/songs.h"
 #include "string_util.h"
+#include "list_menu.h"
+#include "menu_indicators.h"
 #endif
 #include "menu.h"
 #include "load_save.h"
@@ -69,6 +71,8 @@ enum StartMenuOption
     STARTMENU_DEBUG,
     STARTMENU_DBG_HEAL,
     STARTMENU_DBG_MART,
+    STARTMENU_DBG_ADD,
+    STARTMENU_DBG_REMOVE,
     STARTMENU_DBG_RECORD,
     STARTMENU_DBG_ISLANDS,
     STARTMENU_DBG_ENCOUNTER,
@@ -122,6 +126,8 @@ static bool8 StartMenuLinkPlayerCallback(void);
 static bool8 StartMenuDaemonsDebugCallback(void);
 static bool8 DbgHealCallback(void);
 static bool8 DbgMartCallback(void);
+static bool8 DbgAddCallback(void);
+static bool8 DbgRemoveCallback(void);
 static bool8 DbgRecordCallback(void);
 static bool8 DbgIslandsCallback(void);
 static bool8 DbgEncounterCallback(void);
@@ -174,6 +180,8 @@ static const struct MenuAction sStartMenuActionTable[] = {
     [STARTMENU_DEBUG]    = { gText_MenuDebug,   {.u8_void = StartMenuDaemonsDebugCallback} },
     [STARTMENU_DBG_HEAL] = { gText_DbgMenuHeal, {.u8_void = DbgHealCallback} },
     [STARTMENU_DBG_MART] = { gText_DbgMenuMart, {.u8_void = DbgMartCallback} },
+    [STARTMENU_DBG_ADD]    = { gText_DbgMenuAdd,    {.u8_void = DbgAddCallback} },
+    [STARTMENU_DBG_REMOVE] = { gText_DbgMenuRemove, {.u8_void = DbgRemoveCallback} },
     [STARTMENU_DBG_RECORD]  = { gText_DbgMenuRecord,  {.u8_void = DbgRecordCallback} },
     [STARTMENU_DBG_ISLANDS] = { gText_DbgMenuIslands, {.u8_void = DbgIslandsCallback} },
     [STARTMENU_DBG_ENCOUNTER] = { gText_DbgMenuEncounter, {.u8_void = DbgEncounterCallback} },
@@ -220,6 +228,8 @@ static const u8 *const sStartMenuDescPointers[] = {
     gStartMenuDesc_Debug,
     gStartMenuDesc_DbgHeal,
     gStartMenuDesc_DbgMart,
+    gStartMenuDesc_DbgAdd,
+    gStartMenuDesc_DbgRemove,
     gStartMenuDesc_DbgRecord,
     gStartMenuDesc_DbgIslands,
     gStartMenuDesc_DbgEncounter,
@@ -285,6 +295,7 @@ enum {
     DBG_PAGE_NONE = 0,
     DBG_PAGE_MAIN,
     DBG_PAGE_ENCOUNTER,
+    DBG_PAGE_ITEMS,
 };
 static EWRAM_DATA u8 sDbgPage = 0;
 #define DBG_FIRST_SONG MUS_HEAL   // 256; everything below it is a sound effect
@@ -313,6 +324,13 @@ static void SetUpStartMenu(void)
         AppendToStartMenuItems(STARTMENU_DBG_DAEMON);
         AppendToStartMenuItems(STARTMENU_DBG_LEVEL);
         AppendToStartMenuItems(STARTMENU_DBG_INVOKE);
+        AppendToStartMenuItems(STARTMENU_DBG_BACK);
+        return;
+    }
+    if (sDbgPage == DBG_PAGE_ITEMS)
+    {
+        AppendToStartMenuItems(STARTMENU_DBG_ADD);
+        AppendToStartMenuItems(STARTMENU_DBG_REMOVE);
         AppendToStartMenuItems(STARTMENU_DBG_BACK);
         return;
     }
@@ -696,18 +714,13 @@ static bool8 StartMenuOptionCallback(void)
 //
 // Every entry hands control back to StartCB_HandleInput and returns FALSE,
 // which is exactly how the save flow returns to the menu after a cancel.
-static const u16 sDebugRestock[][2] = {
-    { ITEM_ULTRA_BALL,   20 }, { ITEM_HYPER_POTION, 20 },
-    { ITEM_FULL_RESTORE, 10 }, { ITEM_REVIVE,       10 },
-    { ITEM_FIRE_STONE,    5 }, { ITEM_THUNDER_STONE, 5 },
-    { ITEM_WATER_STONE,   5 }, { ITEM_LEAF_STONE,    5 },
-};
-
 static bool8 IsDaemonsDebugCallback(void)
 {
     return sStartMenuCallback == StartMenuDaemonsDebugCallback
         || sStartMenuCallback == DbgHealCallback
         || sStartMenuCallback == DbgMartCallback
+        || sStartMenuCallback == DbgAddCallback
+        || sStartMenuCallback == DbgRemoveCallback
         || sStartMenuCallback == DbgRecordCallback
         || sStartMenuCallback == DbgIslandsCallback
         || sStartMenuCallback == DbgEncounterCallback
@@ -778,15 +791,230 @@ static bool8 DbgHealCallback(void)
     return DbgRedraw();
 }
 
+// MART opens a page rather than restocking a fixed list (2026-09-14). Testing a
+// scene means holding exactly the items it asks for -- and sometimes exactly
+// NOT holding one: the PAYLOAD for the flight, the RESOLVER for the tower. So
+// ADD lists every item in the game, where a stackable one fills to 999 and a
+// key item arrives once and moves over to REMOVE, which lists the key items you
+// are holding. Opening the page still fills the wallet.
 static bool8 DbgMartCallback(void)
 {
-    u32 i;
-
-    for (i = 0; i < ARRAY_COUNT(sDebugRestock); i++)
-        AddBagItem(sDebugRestock[i][0], sDebugRestock[i][1]);
     SetMoney(&gSaveBlock1Ptr->money, 999999);
-    PlayFanfare(MUS_OBTAIN_ITEM);
+    sDbgPage = DBG_PAGE_ITEMS;
+    sStartMenuCursorPos = 0;
     return DbgRedraw();
+}
+
+// The list runs INSIDE the start menu, the way SAVE's dialog does: it becomes
+// sStartMenuCallback, the menu's own task calls it every frame, and B hands
+// back to DbgRedraw. Everything it needs is on the heap while it is open, so
+// it costs one pointer of EWRAM and nothing else (engine.md).
+//
+// The window is fourteen tiles by nine at the top left, from baseBlock 0x008:
+// 126 tiles ends at 0x086, under the help window at 0x08F and the start menu
+// at 0x13D, so it can sit beside both without drawing into either.
+enum { DBG_ITEMS_ADD, DBG_ITEMS_REMOVE };
+#define DBG_ITEMS_ROWS 4
+#define DBG_ITEMS_NOTHING (-3)
+
+struct DbgItems
+{
+    struct ListMenuItem *rows;
+    u16 count;
+    u16 scroll;
+    u16 row;
+    u8 mode;
+    u8 windowId;
+    u8 listTaskId;
+    u8 arrowTaskId;
+};
+static EWRAM_DATA struct DbgItems *sDbgItems = NULL;
+
+// The 68 unused slots are all called ????????, so the name is the test.
+static bool8 DbgItemIsReal(u16 id)
+{
+    return id != ITEM_NONE && ItemId_GetName(id)[0] != CHAR_QUESTION_MARK;
+}
+
+static void DbgItemsFill(struct DbgItems *d)
+{
+    u16 id;
+
+    d->count = 0;
+    for (id = 1; id < ITEMS_COUNT; id++)
+    {
+        bool8 heldKey;
+
+        if (!DbgItemIsReal(id))
+            continue;
+        heldKey = ItemId_GetPocket(id) == POCKET_KEY_ITEMS && CheckBagHasItem(id, 1);
+        if ((d->mode == DBG_ITEMS_ADD) == heldKey)
+            continue;
+        d->rows[d->count].label = ItemId_GetName(id);
+        d->rows[d->count].index = id;
+        d->count++;
+    }
+    if (d->count == 0)
+    {
+        d->rows[0].label = gText_DbgItemsNothing;
+        d->rows[0].index = DBG_ITEMS_NOTHING;
+        d->count = 1;
+    }
+}
+
+// How many are held, beside the name. A key item says nothing: it is one.
+static void DbgItemsPrintQuantity(u8 windowId, u32 itemId, u8 y)
+{
+    u16 quantity;
+
+    if ((s32)itemId <= ITEM_NONE || ItemId_GetPocket(itemId) == POCKET_KEY_ITEMS)
+        return;
+    quantity = BagGetQuantityByItemId(itemId);
+    if (quantity == 0)
+        return;
+    ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_RIGHT_ALIGN, 3);
+    StringExpandPlaceholders(gStringVar4, gText_TimesStrVar1);
+    AddTextPrinterParameterized(windowId, FONT_SMALL, gStringVar4, 86, y, TEXT_SKIP_DRAW, NULL);
+}
+
+static void DbgItemsMoveCursor(s32 itemIndex, bool8 onInit, struct ListMenu *list)
+{
+    if (onInit || sDbgItems == NULL)
+        return;
+    PlaySE(SE_SELECT);
+    ListMenuGetScrollAndRow(sDbgItems->listTaskId, &sDbgItems->scroll, &sDbgItems->row);
+}
+
+static void DbgItemsShow(struct DbgItems *d)
+{
+    struct ListMenuTemplate template = {0};
+
+    DbgItemsFill(d);
+    if (d->scroll + d->row >= d->count)
+        d->scroll = d->row = 0;
+    if (d->count > DBG_ITEMS_ROWS && d->scroll > d->count - DBG_ITEMS_ROWS)
+        d->scroll = d->count - DBG_ITEMS_ROWS;
+    template.items = d->rows;
+    template.moveCursorFunc = DbgItemsMoveCursor;
+    template.itemPrintFunc = DbgItemsPrintQuantity;
+    template.totalItems = d->count;
+    template.maxShowed = DBG_ITEMS_ROWS;
+    template.windowId = d->windowId;
+    template.item_X = 8;
+    template.cursorPal = 2;
+    template.fillValue = 1;
+    template.cursorShadowPal = 3;
+    template.lettersSpacing = 1;
+    template.fontId = FONT_NORMAL;
+    FillWindowPixelBuffer(d->windowId, PIXEL_FILL(1));
+    d->listTaskId = ListMenuInit(&template, d->scroll, d->row);
+    d->arrowTaskId = 0xFF;
+    if (d->count > DBG_ITEMS_ROWS)
+    {
+        struct ScrollArrowsTemplate arrows = {
+            .firstArrowType = 2,
+            .firstX = 64,
+            .firstY = 8,
+            .secondArrowType = 3,
+            .secondX = 64,
+            .secondY = 82,
+            .fullyUpThreshold = 0,
+            .fullyDownThreshold = 0,
+            .tileTag = 2000,
+            .palTag = 100,
+        };
+        arrows.fullyDownThreshold = d->count - DBG_ITEMS_ROWS;
+        d->arrowTaskId = AddScrollIndicatorArrowPair(&arrows, &d->scroll);
+    }
+    PutWindowTilemap(d->windowId);
+    CopyWindowToVram(d->windowId, COPYWIN_FULL);
+}
+
+static void DbgItemsHide(struct DbgItems *d)
+{
+    if (d->arrowTaskId != 0xFF)
+        RemoveScrollIndicatorArrowPair(d->arrowTaskId);
+    DestroyListMenuTask(d->listTaskId, &d->scroll, &d->row);
+}
+
+static void DbgItemsOpen(u8 mode)
+{
+    struct WindowTemplate window = SetWindowTemplateFields(0, 1, 1, 14, 9, 15, 0x008);
+    struct DbgItems *d = AllocZeroed(sizeof(struct DbgItems));
+
+    d->rows = AllocZeroed(ITEMS_COUNT * sizeof(struct ListMenuItem));
+    d->mode = mode;
+    d->windowId = AddWindow(&window);
+    SetStdWindowBorderStyle(d->windowId, FALSE);
+    sDbgItems = d;
+    DbgItemsShow(d);
+}
+
+static void DbgItemsClose(void)
+{
+    struct DbgItems *d = sDbgItems;
+
+    DbgItemsHide(d);
+    ClearStdWindowAndFrameToTransparent(d->windowId, FALSE);
+    ClearWindowTilemap(d->windowId);
+    CopyWindowToVram(d->windowId, COPYWIN_MAP);
+    RemoveWindow(d->windowId);
+    Free(d->rows);
+    Free(d);
+    sDbgItems = NULL;
+}
+
+static bool8 DbgItemsListCallback(void)
+{
+    struct DbgItems *d = sDbgItems;
+    s32 input = ListMenu_ProcessInput(d->listTaskId);
+    u16 id;
+
+    if (input == LIST_NOTHING_CHOSEN || input == DBG_ITEMS_NOTHING)
+        return FALSE;
+    if (input == LIST_CANCEL)
+    {
+        PlaySE(SE_SELECT);
+        DbgItemsClose();
+        return DbgRedraw();
+    }
+    id = input;
+    if (ItemId_GetPocket(id) == POCKET_KEY_ITEMS)
+    {
+        if (d->mode == DBG_ITEMS_ADD)
+            AddBagItem(id, 1);
+        else
+            RemoveBagItem(id, BagGetQuantityByItemId(id));
+    }
+    else
+    {
+        u16 have = BagGetQuantityByItemId(id);
+
+        // A pocket with no free slot refuses the whole amount; say so.
+        if (have < 999 && !AddBagItem(id, 999 - have))
+        {
+            PlaySE(SE_FAILURE);
+            return FALSE;
+        }
+    }
+    PlaySE(SE_SHOP);
+    DbgItemsHide(d);
+    DbgItemsShow(d);
+    return FALSE;
+}
+
+static bool8 DbgAddCallback(void)
+{
+    DbgItemsOpen(DBG_ITEMS_ADD);
+    sStartMenuCallback = DbgItemsListCallback;
+    return FALSE;
+}
+
+static bool8 DbgRemoveCallback(void)
+{
+    DbgItemsOpen(DBG_ITEMS_REMOVE);
+    sStartMenuCallback = DbgItemsListCallback;
+    return FALSE;
 }
 
 // RECORD and ISLANDS are the only two entries that leave the menu. Everything
@@ -928,7 +1156,7 @@ static bool8 DbgSfxCallback(void)
 // BACK is one entry on both pages, so it has to know which one it is leaving.
 static bool8 DbgBackCallback(void)
 {
-    if (sDbgPage == DBG_PAGE_ENCOUNTER)
+    if (sDbgPage == DBG_PAGE_ENCOUNTER || sDbgPage == DBG_PAGE_ITEMS)
     {
         sDbgPage = DBG_PAGE_MAIN;
         sStartMenuCursorPos = 0;
