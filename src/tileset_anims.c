@@ -74,6 +74,39 @@ static const u16 *const sTilesetAnims_General_SandWatersEdge[] = {
     sTilesetAnims_General_SandWatersEdge_Frame7
 };
 
+// palette: pallet_town 07 -- Blanche's daisies and pond, drawn by DAEMONS tools/gbaground.py (T-58)
+static const u16 sTilesetAnims_PalletTown_Flower_Frame0[] = INCBIN_U16("data/tilesets/secondary/pallet_town/anim/flower/0.4bpp");
+static const u16 sTilesetAnims_PalletTown_Flower_Frame1[] = INCBIN_U16("data/tilesets/secondary/pallet_town/anim/flower/1.4bpp");
+static const u16 sTilesetAnims_PalletTown_Flower_Frame2[] = INCBIN_U16("data/tilesets/secondary/pallet_town/anim/flower/2.4bpp");
+static const u16 sTilesetAnims_PalletTown_Flower_Frame3[] = INCBIN_U16("data/tilesets/secondary/pallet_town/anim/flower/3.4bpp");
+
+static const u16 *const sTilesetAnims_PalletTown_Flower[] = {
+    sTilesetAnims_PalletTown_Flower_Frame0,
+    sTilesetAnims_PalletTown_Flower_Frame1,
+    sTilesetAnims_PalletTown_Flower_Frame2,
+    sTilesetAnims_PalletTown_Flower_Frame3
+};
+
+static const u16 sTilesetAnims_PalletTown_Water_Frame0[] = INCBIN_U16("data/tilesets/secondary/pallet_town/anim/water/0.4bpp");
+static const u16 sTilesetAnims_PalletTown_Water_Frame1[] = INCBIN_U16("data/tilesets/secondary/pallet_town/anim/water/1.4bpp");
+static const u16 sTilesetAnims_PalletTown_Water_Frame2[] = INCBIN_U16("data/tilesets/secondary/pallet_town/anim/water/2.4bpp");
+static const u16 sTilesetAnims_PalletTown_Water_Frame3[] = INCBIN_U16("data/tilesets/secondary/pallet_town/anim/water/3.4bpp");
+static const u16 sTilesetAnims_PalletTown_Water_Frame4[] = INCBIN_U16("data/tilesets/secondary/pallet_town/anim/water/4.4bpp");
+static const u16 sTilesetAnims_PalletTown_Water_Frame5[] = INCBIN_U16("data/tilesets/secondary/pallet_town/anim/water/5.4bpp");
+static const u16 sTilesetAnims_PalletTown_Water_Frame6[] = INCBIN_U16("data/tilesets/secondary/pallet_town/anim/water/6.4bpp");
+static const u16 sTilesetAnims_PalletTown_Water_Frame7[] = INCBIN_U16("data/tilesets/secondary/pallet_town/anim/water/7.4bpp");
+
+static const u16 *const sTilesetAnims_PalletTown_Water[] = {
+    sTilesetAnims_PalletTown_Water_Frame0,
+    sTilesetAnims_PalletTown_Water_Frame1,
+    sTilesetAnims_PalletTown_Water_Frame2,
+    sTilesetAnims_PalletTown_Water_Frame3,
+    sTilesetAnims_PalletTown_Water_Frame4,
+    sTilesetAnims_PalletTown_Water_Frame5,
+    sTilesetAnims_PalletTown_Water_Frame6,
+    sTilesetAnims_PalletTown_Water_Frame7
+};
+
 // palette: general 00
 static const u16 sTilesetAnims_CeladonCity_Fountain_Frame0[] = INCBIN_U16("data/tilesets/secondary/celadon_city/anim/fountain/0.4bpp");
 static const u16 sTilesetAnims_CeladonCity_Fountain_Frame1[] = INCBIN_U16("data/tilesets/secondary/celadon_city/anim/fountain/1.4bpp");
@@ -235,6 +268,32 @@ void InitTilesetAnim_General(void)
     sPrimaryTilesetAnimCounter = 0;
     sPrimaryTilesetAnimCounterMax = 640;
     sPrimaryTilesetAnimCallback = TilesetAnim_General;
+}
+
+// Blanche's copies of the flowers and the water, at the slots gbaground.py reserves.
+static void QueueAnimTiles_PalletTown_Flower(u16 timer)
+{
+    AppendTilesetAnimToBuffer(sTilesetAnims_PalletTown_Flower[timer % ARRAY_COUNT(sTilesetAnims_PalletTown_Flower)], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(800)), 4 * TILE_SIZE_4BPP);
+}
+
+static void QueueAnimTiles_PalletTown_Water(u16 timer)
+{
+    AppendTilesetAnimToBuffer(sTilesetAnims_PalletTown_Water[timer % ARRAY_COUNT(sTilesetAnims_PalletTown_Water)], (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(804)), 4 * TILE_SIZE_4BPP);
+}
+
+static void TilesetAnim_PalletTown(u16 timer)
+{
+    if (timer % 16 == 1)
+        QueueAnimTiles_PalletTown_Water(timer / 16);
+    if (timer % 16 == 2)
+        QueueAnimTiles_PalletTown_Flower(timer / 16);
+}
+
+void InitTilesetAnim_PalletTown(void)
+{
+    sSecondaryTilesetAnimCounter = 0;
+    sSecondaryTilesetAnimCounterMax = 128;
+    sSecondaryTilesetAnimCallback = TilesetAnim_PalletTown;
 }
 
 static void QueueAnimTiles_CeladonCity_Fountain(u16 timer)

@@ -906,8 +906,9 @@ bool8 DaemonsIsBlancheOutdoors(void)
 
 // tools/gbablanche.py's pale, in five-bit colour: toward the colour's own grey
 // by 0.55, then toward white by 0.42, 0.26 or 0.12 as it is light, mid or dark,
-// so trees fade and their outlines stay outlines. The same arithmetic for both
-// grass rows, so a tile from row 0 and a tile from row 11 cannot leave a seam.
+// so trees fade and their outlines stay outlines. Since T-58 Blanche's own ground
+// is drawn pale in its rows 7 and 12, so only the primary rows are washed: the
+// town sign, and the edges of Route 1 and Route 21 seen across the connections.
 static void DaemonsPaleEntries(u16 offset, u16 count)
 {
     u16 i;
@@ -1001,8 +1002,6 @@ static void LoadTilesetPalette(struct Tileset const *tileset, u16 destOffset, u1
         {
             LoadPalette(tileset->palettes[NUM_PALS_IN_PRIMARY], destOffset, size);
             ApplyGlobalTintToPaletteEntries(destOffset, size >> 1);
-            if (DaemonsIsBlancheOutdoors())
-                DaemonsPaleEntries(BG_PLTT_ID(11), 2 * 16);
         }
         else
         {
