@@ -87,6 +87,8 @@ const u32 gMetatileAttributes_GameCorner[] = INCBIN_U32("data/tilesets/secondary
 
 const u16 gMetatiles_Lab[] = INCBIN_U16("data/tilesets/secondary/lab/metatiles.bin");
 const u32 gMetatileAttributes_Lab[] = INCBIN_U32("data/tilesets/secondary/lab/metatile_attributes.bin");
+const u16 gMetatiles_BlancheLab[] = INCBIN_U16("data/tilesets/secondary/blanche_lab/metatiles.bin");
+const u32 gMetatileAttributes_BlancheLab[] = INCBIN_U32("data/tilesets/secondary/blanche_lab/metatile_attributes.bin");
 
 const u16 gMetatiles_SSAnne[] = INCBIN_U16("data/tilesets/secondary/ss_anne/metatiles.bin");
 const u32 gMetatileAttributes_SSAnne[] = INCBIN_U32("data/tilesets/secondary/ss_anne/metatile_attributes.bin");

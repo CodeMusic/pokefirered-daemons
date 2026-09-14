@@ -240,6 +240,18 @@ const struct Tileset gTileset_Lab =
     .callback = NULL,
 };
 
+// T-54: CRYSTAL CLEAR's Blanche lab, its own copy of gTileset_Lab.
+const struct Tileset gTileset_BlancheLab =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_BlancheLab,
+    .palettes = gTilesetPalettes_BlancheLab,
+    .metatiles = gMetatiles_BlancheLab,
+    .metatileAttributes = gMetatileAttributes_BlancheLab,
+    .callback = NULL,
+};
+
 const struct Tileset gTileset_FuchsiaGym =
 {
     .isCompressed = TRUE,

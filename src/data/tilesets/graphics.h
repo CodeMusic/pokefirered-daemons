@@ -438,6 +438,30 @@ const u16 gTilesetPalettes_Lab[][16] =
 	INCBIN_U16("data/tilesets/secondary/lab/palettes/15.gbapal"),
 };
 
+// CRYSTAL CLEAR's Blanche lab, split from gTileset_Lab so it can be redrawn
+// without redrawing the Quicksilver lab with it (T-54, vision.md 9.22).
+const u32 gTilesetTiles_BlancheLab[] = INCBIN_U32("data/tilesets/secondary/blanche_lab/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_BlancheLab[][16] =
+{
+	INCBIN_U16("data/tilesets/secondary/blanche_lab/palettes/00.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/blanche_lab/palettes/01.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/blanche_lab/palettes/02.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/blanche_lab/palettes/03.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/blanche_lab/palettes/04.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/blanche_lab/palettes/05.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/blanche_lab/palettes/06.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/blanche_lab/palettes/07.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/blanche_lab/palettes/08.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/blanche_lab/palettes/09.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/blanche_lab/palettes/10.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/blanche_lab/palettes/11.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/blanche_lab/palettes/12.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/blanche_lab/palettes/13.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/blanche_lab/palettes/14.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/blanche_lab/palettes/15.gbapal"),
+};
+
 const u32 gTilesetTiles_HoennBuilding[] = INCBIN_U32("data/tilesets/secondary/hoenn_building/tiles.4bpp.lz");
 
 const u16 gTilesetPalettes_HoennBuilding[][16] =
