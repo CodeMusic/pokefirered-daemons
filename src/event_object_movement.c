@@ -451,12 +451,13 @@ static const u8 gInitialMovementTypeFacingDirections[MOVEMENT_TYPES_COUNT] = {
 //  written by tools/gbasprite.py beside the art it belongs to.
 #define OBJ_EVENT_PAL_TAG_DAEMON_SNORLAX              0x111C
 #define OBJ_EVENT_PAL_TAG_DAEMON_SPEAROW              0x111D
-//  CRYSTAL CLEAR is a golden fox in a white coat over purple, and no NPC
-//  palette has gold, purple and a grey to shade the coat with. The Clears
-//  are coloured by family (vision.md 9.4). Her object is PALSLOT_NPC_SPECIAL,
-//  the one slot patched per object from its own tag: NPC_1..4 are refilled
-//  from a fixed tag set on every map, and would recolour the lab's scientist.
-#define OBJ_EVENT_PAL_TAG_NPC_CRYSTAL                 0x111E
+//  THE CLEARS share one palette: "three foxes, a palette apart" (vision.md
+//  9.4), and no NPC palette has gold, russet, purple and a grey to shade a
+//  coat. CRYSTAL and AL are PALSLOT_NPC_SPECIAL, the one slot patched per
+//  object from its own tag: NPC_1..4 are refilled from a fixed tag set on
+//  every map. They share three maps, so it has to be ONE tag -- two tags in
+//  that slot would recolour whichever of them spawned first.
+#define OBJ_EVENT_PAL_TAG_NPC_CLEARS                  0x111E
 #define OBJ_EVENT_PAL_TAG_NPC_BLUE                    0x1103
 #define OBJ_EVENT_PAL_TAG_NPC_PINK                    0x1104
 #define OBJ_EVENT_PAL_TAG_NPC_GREEN                   0x1105
@@ -513,7 +514,7 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_Seagallop,               OBJ_EVENT_PAL_TAG_SEAGALLOP},
     {gObjectEventPal_DaemonSnorlax,           OBJ_EVENT_PAL_TAG_DAEMON_SNORLAX},
     {gObjectEventPal_DaemonSpearow,           OBJ_EVENT_PAL_TAG_DAEMON_SPEAROW},
-    {gObjectEventPal_NpcCrystal,              OBJ_EVENT_PAL_TAG_NPC_CRYSTAL},
+    {gObjectEventPal_NpcClears,               OBJ_EVENT_PAL_TAG_NPC_CLEARS},
     {},
 };
 

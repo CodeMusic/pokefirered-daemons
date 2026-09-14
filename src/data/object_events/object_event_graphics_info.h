@@ -1045,7 +1045,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ItemBall = {
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ProfOak = {
     .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_CRYSTAL,
+    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_CLEARS,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
     .width = 16,
@@ -1691,12 +1691,12 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Lance = {
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Blue = {
     .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_GREEN,
+    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_CLEARS,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 256,
     .width = 16,
     .height = 32,
-    .paletteSlot = PALSLOT_NPC_3,
+    .paletteSlot = PALSLOT_NPC_SPECIAL,
     .shadowSize = SHADOW_SIZE_M,
     .inanimate = FALSE,
     .disableReflectionPaletteLoad = FALSE,
