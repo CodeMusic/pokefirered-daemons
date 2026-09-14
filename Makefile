@@ -45,7 +45,12 @@ else
   CPP := $(PREFIX)cpp
 endif
 
-ROM := poke$(BUILD_NAME).gba
+# DAEMONS: the ROM carries our edition's name, not the retail game's. FIRERED
+# is CONTENT and LEAFGREEN is CONTEXT, and whatever suffix the build adds
+# (_debug, _rev1, _switch, _modern) survives -- so every build still gets its
+# own file, and therefore its own .sav.
+DAEMONS_ROM_STEM = $(subst leafgreen,daemonsContext,$(subst firered,daemonsContent,$(1)))
+ROM := $(call DAEMONS_ROM_STEM,$(BUILD_NAME)).gba
 OBJ_DIR := $(BUILD_DIR)/$(BUILD_NAME)
 
 ELF := $(ROM:.gba=.elf)
@@ -219,6 +224,7 @@ clean-assets:
 
 tidy:
 	$(RM) $(ALL_BUILDS:%=poke%{.gba,.elf,.map})
+	$(RM) $(foreach b,$(ALL_BUILDS),$(call DAEMONS_ROM_STEM,$(b)){.gba,.elf,.map})
 	$(RM) -r $(BUILD_DIR)
 
 # "friendly" target names for convenience sake
