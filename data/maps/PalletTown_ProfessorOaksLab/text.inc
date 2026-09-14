@@ -216,12 +216,20 @@ PalletTown_ProfessorOaksLab_Text_ThoseArePokeBalls::
 PalletTown_ProfessorOaksLab_Text_OaksLastMon::
     .string "That is the last one CRYSTAL kept.$"
 
+@  T-57. The last vanilla tutorial lines in her lab. An ordinary lab rule, in
+@  a world run on dated paperwork, in the room her journals are kept in -- and
+@  it says nothing about any of that (craft rule 1).
 PalletTown_ProfessorOaksLab_Text_PressStartToOpenMenu::
-    .string "Press START to open the MENU!$"
+    .string "SAMPLE LOG\p"
+    .string "Label everything.\n"
+    .string "Date everything.\p"
+    .string "Throw nothing away.$"
 
+@  Still the save reminder, underneath (craft rule 6).
 PalletTown_ProfessorOaksLab_Text_SaveOptionInMenu::
-    .string "The SAVE option is on the MENU.\n"
-    .string "Use it regularly.$"
+    .string "BACK UP YOUR WORK.\p"
+    .string "Often.\n"
+    .string "Nobody else will.$"
 
 PalletTown_ProfessorOaksLab_Text_AllMonTypesHaveStrongAndWeakPoints::
     .string "Every type is strong against\n"
