@@ -4,6 +4,7 @@ PalletTown_PlayersHouse_1F_MapScripts::
 PalletTown_PlayersHouse_1F_EventScript_Mom::
 	lock
 	faceplayer
+	goto_if_unset FLAG_SYS_B_DASH, PalletTown_PlayersHouse_1F_EventScript_MomGiveRunningShoes
 	goto_if_set FLAG_BEAT_RIVAL_IN_OAKS_LAB, PalletTown_PlayersHouse_1F_EventScript_MomHeal
 	checkplayergender
 	call_if_eq VAR_RESULT, MALE, PalletTown_PlayersHouse_1F_EventScript_MomOakLookingForYouMale
@@ -21,6 +22,25 @@ PalletTown_PlayersHouse_1F_EventScript_MomOakLookingForYouMale::
 PalletTown_PlayersHouse_1F_EventScript_MomOakLookingForYouFemale::
 	msgbox PalletTown_PlayersHouse_1F_Text_AllGirlsLeaveOakLookingForYou
 	return
+
+@ T-67: the RUNNING SHOES are Mom's to give, not an aide's in Pewter.
+PalletTown_PlayersHouse_1F_EventScript_MomGiveRunningShoes::
+	msgbox PalletTown_PlayersHouse_1F_Text_MomTakeTheseShoes
+	textcolor NPC_TEXT_COLOR_NEUTRAL
+	playfanfare MUS_OBTAIN_KEY_ITEM
+	message PalletTown_PlayersHouse_1F_Text_ReceivedRunningShoesFromMom
+	waitmessage
+	waitfanfare
+	setflag FLAG_SYS_B_DASH
+	signmsg
+	msgbox PalletTown_PlayersHouse_1F_Text_ExplainRunningShoes
+	normalmsg
+	call EventScript_RestorePrevTextColor
+	closemessage
+	applymovement LOCALID_MOM, Common_Movement_FaceOriginalDirection
+	waitmovement 0
+	release
+	end
 
 PalletTown_PlayersHouse_1F_EventScript_MomHeal::
 	msgbox PalletTown_PlayersHouse_1F_Text_YouShouldTakeQuickRest

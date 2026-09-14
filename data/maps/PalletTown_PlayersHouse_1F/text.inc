@@ -31,3 +31,15 @@ PalletTown_PlayersHouse_1F_Text_MovieOnTVGirlOnBrickRoad::
 PalletTown_PlayersHouse_1F_Text_OopsWrongSide::
     .string "Wrong side.$"
 
+
+PalletTown_PlayersHouse_1F_Text_MomTakeTheseShoes::
+    .string "MOM: Wait. Take these.\p"
+    .string "You never could stand still.$"
+
+PalletTown_PlayersHouse_1F_Text_ReceivedRunningShoesFromMom::
+    .string "{PLAYER} received the\n"
+    .string "RUNNING SHOES from MOM.$"
+
+PalletTown_PlayersHouse_1F_Text_ExplainRunningShoes::
+    .string "Hold B.\p"
+    .string "You will need the room.$"

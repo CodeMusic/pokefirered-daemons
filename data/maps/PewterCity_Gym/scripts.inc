@@ -16,9 +16,16 @@ PewterCity_Gym_EventScript_DefeatedBrock::
 	setvar VAR_MAP_SCENE_PEWTER_CITY, 1
 	setflag FLAG_HIDE_PEWTER_CITY_GYM_GUIDE
 	clearflag FLAG_HIDE_PEWTER_CITY_RUNNING_SHOES_GUY
+	call_if_set FLAG_SYS_B_DASH, PewterCity_Gym_EventScript_ShoesAlreadyFromMom
 	set_gym_trainers 1
 	goto PewterCity_Gym_EventScript_GiveTM39
 	end
+
+@ T-67: MOM gave the RUNNING SHOES at home, so the aide's scene outside is skipped.
+PewterCity_Gym_EventScript_ShoesAlreadyFromMom::
+	setvar VAR_MAP_SCENE_PEWTER_CITY, 2
+	setflag FLAG_HIDE_PEWTER_CITY_RUNNING_SHOES_GUY
+	return
 
 PewterCity_Gym_EventScript_GiveTM39::
 	msgbox PewterCity_Gym_Text_TakeThisWithYou
