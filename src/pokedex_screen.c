@@ -145,13 +145,14 @@ const u32 sKantoDexTiles[] = INCBIN_U32("graphics/pokedex/kanto_dex_bgtiles.4bpp
 const u32 sNatDexTiles[] = INCBIN_U32("graphics/pokedex/national_dex_bgtiles.4bpp.lz");
 const u16 sKantoDexPalette[0x100] = INCBIN_U16("graphics/pokedex/kanto_dex_bgpals.gbapal");
 
+// T-92: the Index is steel blue -- the category cursor pulses from slate to steel cyan and back
 const u16 sDexScreen_CategoryCursorPals[] = {
-    RGB(24, 22, 17), RGB(26, 24, 20),
-    RGB(26, 20, 15), RGB(27, 23, 19),
-    RGB(28, 18, 15), RGB(28, 22, 19),
-    RGB(30, 16, 13), RGB(29, 21, 18),
-    RGB(28, 18, 15), RGB(28, 22, 19),
-    RGB(26, 20, 15), RGB(27, 23, 19)
+    RGB(5, 6, 8),   RGB(7, 9, 11),
+    RGB(6, 12, 17), RGB(12, 18, 22),
+    RGB(7, 16, 22), RGB(18, 24, 28),
+    RGB(8, 19, 25), RGB(26, 29, 30),
+    RGB(7, 16, 22), RGB(18, 24, 28),
+    RGB(6, 12, 17), RGB(12, 18, 22)
 };
 
 const u16 sNationalDexPalette[0x100] = INCBIN_U16("graphics/pokedex/national_dex_bgpals.gbapal");
