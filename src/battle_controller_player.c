@@ -23,6 +23,7 @@
 #include "constants/moves.h"
 #include "constants/songs.h"
 #include "constants/sound.h"
+#include "data/battle_move_menu.h"
 
 static void PlayerHandleGetMonData(void);
 static void PlayerHandleSetMonData(void);
@@ -1367,6 +1368,24 @@ static void DoHitAnimBlinkSpriteEffect(void)
     }
 }
 
+// THE MOVE MENU CARRIES TWO THINGS, ON TWO CHANNELS (docs/type-chart.html,
+// decided 2026-09-13). A move's NAME is coloured by its type, and a 4px MARK in
+// front of it says what it does -- blank for a move that hits. Colour already
+// means type everywhere in this game, so what a move does gets a shape.
+//
+// Palette 5 is the battle text palette, and every battle window draws with its
+// colours 11-15 only, so colours 1-4 are free: one type colour per move slot.
+// The info box's type line uses the highlighted slot's colour, so it needs none.
+#define MOVE_MENU_COLOR(slot) (1 + (slot))
+
+static void SetMoveMenuTypeColor(u8 slot, u16 move)
+{
+    u16 color = sMoveMenuTypeTextColor[gBattleMoves[move].type];
+
+    gPlttBufferUnfaded[BG_PLTT_ID(5) + MOVE_MENU_COLOR(slot)] = color;
+    gPlttBufferFaded[BG_PLTT_ID(5) + MOVE_MENU_COLOR(slot)] = color;
+}
+
 static void MoveSelectionDisplayMoveNames(void)
 {
     s32 i;
@@ -1375,11 +1394,26 @@ static void MoveSelectionDisplayMoveNames(void)
 
     for (i = 0; i < MAX_MON_MOVES; ++i)
     {
+        u8 *txtPtr;
+        u16 move = moveInfo->moves[i];
+
         MoveSelectionDestroyCursorAt(i);
-        StringCopy(gDisplayedStringBattle, gText_MoveInterfaceDynamicColors);
-        StringAppend(gDisplayedStringBattle, gMoveNames[moveInfo->moves[i]]);
+        txtPtr = StringCopy(gDisplayedStringBattle, gText_MoveInterfaceDynamicColors);
+        // The mark, in the box's own grey. Every slot gets one, a blank one
+        // included, so the four names start in the same column.
+        *txtPtr++ = sMoveClassGlyph[sMoveClass[move]];
+        if (move != MOVE_NONE)
+        {
+            SetMoveMenuTypeColor(i, move);
+            *txtPtr++ = EXT_CTRL_CODE_BEGIN;
+            *txtPtr++ = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
+            *txtPtr++ = MOVE_MENU_COLOR(i);
+            *txtPtr++ = 14;
+            *txtPtr++ = 15;
+        }
+        StringCopy(txtPtr, gMoveNames[move]);
         BattlePutTextOnWindow(gDisplayedStringBattle, i + 3);
-        if (moveInfo->moves[i] != MOVE_NONE)
+        if (move != MOVE_NONE)
             ++gNumberOfMovesToChoose;
     }
 }
@@ -1409,13 +1443,25 @@ static void MoveSelectionDisplayMoveType(void)
 {
     u8 *txtPtr;
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleBufferA[gActiveBattler][4]);
+    u8 slot = gMoveSelectionCursor[gActiveBattler];
+    u16 move = moveInfo->moves[slot];
 
-    txtPtr = StringCopy(gDisplayedStringBattle, gText_MoveInterfaceType);
+    // NO "TYPE/" LABEL. The name is written in its type's colour, so it plainly
+    // is a type -- and the label was 23px, which pushed EMERGENT and HARDENED
+    // past the box's 64. Setting the slot's colour again here keeps the line
+    // right on every path that reaches it, the move-swap path included.
+    SetMoveMenuTypeColor(slot, move);
+    txtPtr = gDisplayedStringBattle;
     *txtPtr++ = EXT_CTRL_CODE_BEGIN;
     *txtPtr++ = 6;
     *txtPtr++ = 1;
     txtPtr = StringCopy(txtPtr, gText_MoveInterfaceDynamicColors);
-    StringCopy(txtPtr, gTypeNames[gBattleMoves[moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]].type]);
+    *txtPtr++ = EXT_CTRL_CODE_BEGIN;
+    *txtPtr++ = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
+    *txtPtr++ = MOVE_MENU_COLOR(slot);
+    *txtPtr++ = 14;
+    *txtPtr++ = 15;
+    StringCopy(txtPtr, gTypeNames[gBattleMoves[move].type]);
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MOVE_TYPE);
 }
 
