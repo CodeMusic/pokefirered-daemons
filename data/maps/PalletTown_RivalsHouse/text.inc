@@ -1,7 +1,7 @@
 PalletTown_RivalsHouse_Text_HiBrothersAtLab::
     .string "VERA: {PLAYER}.\p"
-    .string "He is at Gran's LAB. He has been\n"
-    .string "there since six.$"
+    .string "He is at CRYSTAL's LAB. He has\n"
+    .string "been there since six.$"
 
 PalletTown_RivalsHouse_Text_HeardYouBattledRival::
     .string "VERA: I heard you engaged\n"
@@ -10,7 +10,7 @@ PalletTown_RivalsHouse_Text_HeardYouBattledRival::
     .string "I know the result.$"
 
 PalletTown_RivalsHouse_Text_ErrandForGrandpaThisWillHelp::
-    .string "Gran has sent you somewhere?\p"
+    .string "CRYSTAL has sent you somewhere?\p"
     .string "Take this. She will not have told\n"
     .string "you where it is.$"
 
@@ -39,7 +39,7 @@ PalletTown_RivalsHouse_Text_ItsBigMapOfKanto::
 
 PalletTown_RivalsHouse_Text_ShelvesCrammedFullOfBooks::
     .string "Shelves of books about daemons.\n"
-    .string "None of them by Gran.$"
+    .string "None of them by CRYSTAL.$"
 
 PalletTown_RivalsHouse_Text_LikeMeToGroomMon::
     .string "VERA: Hi, {PLAYER}. Good timing.\p"
@@ -74,8 +74,8 @@ PalletTown_RivalsHouse_Text_CantGroomAnEgg::
     .string "There is nothing running in it yet.$"
 
 PalletTown_RivalsHouse_Text_MayISeeFirstMon::
-    .string "VERA: Gran reads them with an\n"
-    .string "instrument.\p"
+    .string "VERA: CRYSTAL reads them with\n"
+    .string "an instrument.\p"
     .string "I just look. May I see your first\n"
     .string "one?$"
 

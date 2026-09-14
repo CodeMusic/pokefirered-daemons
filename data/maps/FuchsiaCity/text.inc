@@ -64,12 +64,12 @@ FuchsiaCity_Text_LaprasSign::
     .string "seas.$"
 
 FuchsiaCity_Text_OmanyteSign::
-    .string "Name: OMANYTE An extremely rare\n"
+    .string "Name: MAGTAPE An extremely rare\n"
     .string "DAEMON that was regenerated from a\l"
     .string "fossil.$"
 
 FuchsiaCity_Text_KabutoSign::
-    .string "Name: KABUTO An extremely rare\n"
+    .string "Name: DRUM An extremely rare\n"
     .string "DAEMON that was regenerated from a\l"
     .string "fossil.$"
 

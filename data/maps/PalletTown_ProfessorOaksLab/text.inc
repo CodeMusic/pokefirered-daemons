@@ -3,11 +3,11 @@ PalletTown_ProfessorOaksLab_Text_RivalGrampsIsntAround::
     .string "She is not here.$"
 
 PalletTown_ProfessorOaksLab_Text_RivalFedUpWithWaiting::
-    .string "{RIVAL}: Gran.\p"
+    .string "{RIVAL}: CRYSTAL.\p"
     .string "I have been standing here.$"
 
 PalletTown_ProfessorOaksLab_Text_RivalNoFairWhatAboutMe::
-    .string "{RIVAL}: Gran.\p"
+    .string "{RIVAL}: CRYSTAL.\p"
     .string "And me.$"
 
 PalletTown_ProfessorOaksLab_Text_RivalGoChoosePlayer::
@@ -42,10 +42,10 @@ Text_RivalVictory::
 PalletTown_ProfessorOaksLab_Text_RivalGoToughenMyMon::
     .string "{RIVAL}: Then it needs the\n"
     .string "practice, not me.\p"
-    .string "Gran. {PLAYER}. Later.$"
+    .string "CRYSTAL. {PLAYER}. Later.$"
 
 PalletTown_ProfessorOaksLab_Text_RivalGramps::
-    .string "{RIVAL}: Gran!$"
+    .string "{RIVAL}: CRYSTAL!$"
 
 PalletTown_ProfessorOaksLab_Text_RivalWhatDidYouCallMeFor::
     .string "{RIVAL}: Gone.\p"
@@ -56,8 +56,8 @@ PalletTown_ProfessorOaksLab_Text_RivalLeaveItToMeGramps::
     .string "I will do it.$"
 
 PalletTown_ProfessorOaksLab_Text_RivalTellSisNotToGiveYouMap::
-    .string "{RIVAL}: All right, Gran! Leave it\n"
-    .string "to me!\p"
+    .string "{RIVAL}: All right, CRYSTAL!\n"
+    .string "Leave it to me!\p"
     .string "{PLAYER}, no offence, but I do not\n"
     .string "need you for this.\p"
     .string "I will borrow a SITEMAP off my\n"
@@ -288,7 +288,7 @@ PalletTown_ProfessorOaksLab_Text_OakSightingsOfRareMons::
 
 PalletTown_ProfessorOaksLab_Text_RivalJustLetMeHandleEverything::
     .string "{RIVAL}: I heard that.\p"
-    .string "Gran. It is always {PLAYER}.\p"
+    .string "CRYSTAL. It is always {PLAYER}.\p"
     .string "I have bound more. I was faster.\p"
     .string "Give me one job. One.$"
 
@@ -321,7 +321,7 @@ PalletTown_ProfessorOaksLab_Text_OakMustReallyWorkToFillPokedex::
     .string "looking for.$"
 
 PalletTown_ProfessorOaksLab_Text_RivalIllCompleteThePokedex::
-    .string "{RIVAL}: Gran. Calm down.\p"
+    .string "{RIVAL}: CRYSTAL. Calm down.\p"
     .string "I will finish the INDEX. It is not\n"
     .string "complicated.\p"
     .string "I will start at ONE ISLAND, I\n"

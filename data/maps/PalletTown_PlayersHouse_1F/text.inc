@@ -41,5 +41,6 @@ PalletTown_PlayersHouse_1F_Text_ReceivedRunningShoesFromMom::
     .string "RUNNING SHOES from MOM.$"
 
 PalletTown_PlayersHouse_1F_Text_ExplainRunningShoes::
-    .string "Hold B.\p"
+    .string "MOM: Try them out. Hold B while\n"
+    .string "you walk.\p"
     .string "You will need the room.$"

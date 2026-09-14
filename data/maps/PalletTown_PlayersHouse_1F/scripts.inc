@@ -32,10 +32,8 @@ PalletTown_PlayersHouse_1F_EventScript_MomGiveRunningShoes::
 	waitmessage
 	waitfanfare
 	setflag FLAG_SYS_B_DASH
-	signmsg
-	msgbox PalletTown_PlayersHouse_1F_Text_ExplainRunningShoes
-	normalmsg
 	call EventScript_RestorePrevTextColor
+	msgbox PalletTown_PlayersHouse_1F_Text_ExplainRunningShoes
 	closemessage
 	applymovement LOCALID_MOM, Common_Movement_FaceOriginalDirection
 	waitmovement 0

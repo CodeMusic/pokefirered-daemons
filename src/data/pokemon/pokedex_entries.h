@@ -1796,7 +1796,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_OMANYTE] =
     {
-        .categoryName = _("SPIRAL"),
+        .categoryName = _("TAPE"),
         .height = 4,
         .weight = 75,
         .description = gOmanytePokedexText,
@@ -1809,7 +1809,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_OMASTAR] =
     {
-        .categoryName = _("SPIRAL"),
+        .categoryName = _("LEGACY"),
         .height = 10,
         .weight = 350,
         .description = gOmastarPokedexText,
@@ -1822,7 +1822,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_KABUTO] =
     {
-        .categoryName = _("SHELLFISH"),
+        .categoryName = _("STORAGE"),
         .height = 5,
         .weight = 115,
         .description = gKabutoPokedexText,
@@ -1835,7 +1835,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_KABUTOPS] =
     {
-        .categoryName = _("SHELLFISH"),
+        .categoryName = _("CUTTER"),
         .height = 13,
         .weight = 405,
         .description = gKabutopsPokedexText,
@@ -2277,7 +2277,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_TOGEPI] =
     {
-        .categoryName = _("SPIKE BOX"),
+        .categoryName = _("FIRST"),
         .height = 3,
         .weight = 15,
         .description = gTogepiPokedexText,
@@ -2290,7 +2290,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_TOGETIC] =
     {
-        .categoryName = _("HAPPINESS"),
+        .categoryName = _("ALOFT"),
         .height = 6,
         .weight = 32,
         .description = gTogeticPokedexText,
@@ -3876,7 +3876,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_AZURILL] =
     {
-        .categoryName = _("POLKA DOT"),
+        .categoryName = _("TOWARD"),
         .height = 2,
         .weight = 20,
         .description = gAzurillPokedexText,
@@ -4682,7 +4682,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_WYNAUT] =
     {
-        .categoryName = _("BRIGHT"),
+        .categoryName = _("SMILING"),
         .height = 6,
         .weight = 140,
         .description = gWynautPokedexText,

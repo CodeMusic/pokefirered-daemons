@@ -970,30 +970,30 @@ const u8 gPorygonPokedexText[] = _(
 const u8 gPorygonPokedexTextUnused[] = _("");
 
 const u8 gOmanytePokedexText[] = _(
-        "A prehistoric DAEMON that lived in the\n"
-        "primordial sea, it swims by twisting its\n"
-        "10 tentacles about.");
+    "Tape wound on a reel, recovered from\n"
+    "Deadstack. It reads in one direction\n"
+    "only, from the outside in.");
 
 const u8 gOmanytePokedexTextUnused[] = _("");
 
 const u8 gOmastarPokedexText[] = _(
-    "Its tentacles are highly developed as if\n"
-    "they are hands and feet. As soon as it\n"
-    "ensnares prey, it bites.");
+    "What the reels were for. Too heavy to\n"
+    "move, so everything was brought to it\n"
+    "and nothing was taken away.");
 
 const u8 gOmastarPokedexTextUnused[] = _("");
 
 const u8 gKabutoPokedexText[] = _(
-        "This DAEMON was regenerated from the\n"
-        "fossil of an ancient creature. It protects\n"
-        "itself with a hard shell.");
+    "Drum memory, sealed at both ends. It\n"
+    "keeps what it holds by spinning, and\n"
+    "stops the moment it is opened.");
 
 const u8 gKabutoPokedexTextUnused[] = _("");
 
 const u8 gKabutopsPokedexText[] = _(
-        "It swims freely through water. It binds\n"
-        "prey with its scythe-like arms and drains\n"
-        "the victim's fluids.");
+    "It records by cutting. Every hole it\n"
+    "makes is permanent, and it has never\n"
+    "read one back.");
 
 const u8 gKabutopsPokedexTextUnused[] = _("");
 
@@ -1231,16 +1231,16 @@ const u8 gIgglybuffPokedexText[] = _(
 const u8 gIgglybuffPokedexTextUnused[] = _("");
 
 const u8 gTogepiPokedexText[] = _(
-    "A proverb claims that happiness will come\n"
-    "to anyone who can make a sleeping TOGEPI\n"
-    "stand up.");
+    "It is handed over before it hatches.\n"
+    "It comes out already facing whoever\n"
+    "was holding it.");
 
 const u8 gTogepiPokedexTextUnused[] = _("");
 
 const u8 gTogeticPokedexText[] = _(
-    "It grows dispirited if it is not with kind\n"
-    "people. It can float in midair without\n"
-    "moving its wings.");
+    "It stays up only near people who have\n"
+    "not let it fall. Nobody can say how\n"
+    "it knows which ones those are.");
 
 const u8 gTogeticPokedexTextUnused[] = _("");
 
@@ -2058,9 +2058,9 @@ const u8 gHariyamaPokedexText[] = _(
 const u8 gHariyamaPokedexTextUnused[] = _("");
 
 const u8 gAzurillPokedexText[] = _(
-    "It battles by flinging around its tail,\n"
-    "which is bigger than its body. The\n"
-    "tail is a flotation device in water.");
+    "Before it is any one mood it is only\n"
+    "toward or away. The tail decides\n"
+    "first, and the rest follows.");
 
 const u8 gAzurillPokedexTextUnused[] = _("");
 
@@ -2492,9 +2492,9 @@ const u8 gAbsolPokedexText[] = _(
 const u8 gAbsolPokedexTextUnused[] = _("");
 
 const u8 gWynautPokedexText[] = _(
-    "It tends to move in a pack with others.\n"
-    "They cluster in a tight group to sleep in\n"
-    "a cave.");
+    "It remembers exactly where it was\n"
+    "pushed. It smiles the whole time, so\n"
+    "nobody thinks to ask.");
 
 const u8 gWynautPokedexTextUnused[] = _("");
 
