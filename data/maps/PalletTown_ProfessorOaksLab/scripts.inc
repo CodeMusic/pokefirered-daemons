@@ -605,6 +605,7 @@ PalletTown_ProfessorOaksLab_EventScript_ThePayload::
 	delay 30
 	msgbox PalletTown_ProfessorOaksLab_Text_PayloadWhere
 	closemessage
+	call PalletTown_ProfessorOaksLab_EventScript_GiveReview
 	delay 30
 	applymovement LOCALID_OAKS_LAB_PROF_OAK, PalletTown_ProfessorOaksLab_Movement_CrystalCrossesTheRoom
 	waitmovement 0
@@ -1385,3 +1386,14 @@ PalletTown_ProfessorOaksLab_EventScript_Aide1GiveGlobalIndex::
 	msgbox PalletTown_ProfessorOaksLab_Text_AideCrystalIsAway
 	release
 	end
+
+@  T-51. The Owl's PEER REVIEW goes to her with the package. She reads who it is
+@  addressed to and does not open it: it is not addressed to her either.
+PalletTown_ProfessorOaksLab_EventScript_GiveReview::
+	checkitem ITEM_DEVON_GOODS
+	goto_if_eq VAR_RESULT, FALSE, PalletTown_ProfessorOaksLab_EventScript_GiveReviewDone
+	msgbox PalletTown_ProfessorOaksLab_Text_CrystalTakesTheReview
+	closemessage
+	removeitem ITEM_DEVON_GOODS
+PalletTown_ProfessorOaksLab_EventScript_GiveReviewDone::
+	return

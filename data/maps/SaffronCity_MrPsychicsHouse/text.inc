@@ -85,3 +85,39 @@ SaffronCity_MrPsychicsHouse_Text_OwlWroteToThem::
 	.string "signed it.\p"
 	.string "That is the whole of what I can\n"
 	.string "do, and it is more than was done.$"
+
+@  T-28/T-51. S.T.A.R.R. is narrated and never quoted.
+SaffronCity_MrPsychicsHouse_Text_StarrShowsPage::
+	.string "S.T.A.R.R. showed him a page\n"
+	.string "of handwriting.$"
+
+SaffronCity_MrPsychicsHouse_Text_StarrAnswers::
+	.string "S.T.A.R.R. answered him.$"
+
+SaffronCity_MrPsychicsHouse_Text_StarrDoesNotStop::
+	.string "S.T.A.R.R. answered again,\n"
+	.string "and did not stop.$"
+
+SaffronCity_MrPsychicsHouse_Text_HeWrites::
+	.string "He wrote for a long time.\p"
+	.string "Then he signed it, sealed it,\n"
+	.string "and held it out to you.$"
+
+SaffronCity_MrPsychicsHouse_Text_ReceivedPeerReview::
+	.string "{PLAYER} received the\n"
+	.string "PEER REVIEW.$"
+
+SaffronCity_MrPsychicsHouse_Text_NotMineToDeliver::
+	.string "It is addressed to the people\n"
+	.string "who signed the first one.\p"
+	.string "It is not mine to deliver.$"
+
+SaffronCity_MrPsychicsHouse_Text_StarrTurnsToTheDoor::
+	.string "S.T.A.R.R. turned toward\n"
+	.string "the door.$"
+
+SaffronCity_MrPsychicsHouse_Text_StarrIsWaiting::
+	.string "S.T.A.R.R. turned toward the\n"
+	.string "door, and did not go.\p"
+	.string "It is waiting on something\n"
+	.string "you are not carrying.$"

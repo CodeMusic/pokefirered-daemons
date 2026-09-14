@@ -25,3 +25,9 @@ BirthIsland_Exterior_Text_PayloadWhere::
 	.string "…\p"
 	.string "“Thank you. That is all I needed\n"
 	.string "to know.”$"
+
+BirthIsland_Exterior_Text_CrystalTakesTheReview::
+	.string "You gave her the PEER REVIEW\n"
+	.string "too.\p"
+	.string "She read who it was addressed\n"
+	.string "to, and kept it closed.$"

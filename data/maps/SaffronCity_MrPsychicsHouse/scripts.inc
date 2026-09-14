@@ -27,16 +27,27 @@ SaffronCity_MrPsychicsHouse_EventScript_AlreadyGotTM29::
 	release
 	end
 
-@  T-28. 4.24 staged, and it is msgboxes and nothing else -- no item, no
-@  document, no record. 4.34's first ruling. The flag exists so it does not
-@  repeat and so T-29 knows it happened; nothing shows it to the player.
+@  T-28. 4.24 staged. The player hears one side: S.T.A.R.R. is NARRATED
+@  acting -- a page of handwriting, an answer, an answer that does not stop --
+@  and never quoted, so its argument can never say the thesis.
+@
+@  T-51. He signs something, and the player carries it (4.34 ruling 1,
+@  reversed on playtest): he promised it in writing and handed over nothing,
+@  so nothing seemed to change. The PEER REVIEW is sealed; what it says is
+@  never shown anywhere, which is the part of the ruling that mattered.
 SaffronCity_MrPsychicsHouse_EventScript_OwlScene::
 	msgbox SaffronCity_MrPsychicsHouse_Text_OwlSitDown
+	msgbox SaffronCity_MrPsychicsHouse_Text_StarrShowsPage
 	msgbox SaffronCity_MrPsychicsHouse_Text_OwlThatHand
 	msgbox SaffronCity_MrPsychicsHouse_Text_OwlThePosition
+	msgbox SaffronCity_MrPsychicsHouse_Text_StarrAnswers
 	msgbox SaffronCity_MrPsychicsHouse_Text_OwlThermostat
+	msgbox SaffronCity_MrPsychicsHouse_Text_StarrDoesNotStop
 	msgbox SaffronCity_MrPsychicsHouse_Text_OwlSharedBias
 	msgbox SaffronCity_MrPsychicsHouse_Text_OwlConcession
+	msgbox SaffronCity_MrPsychicsHouse_Text_HeWrites
+	giveitem_msg SaffronCity_MrPsychicsHouse_Text_ReceivedPeerReview, ITEM_DEVON_GOODS
+	msgbox SaffronCity_MrPsychicsHouse_Text_NotMineToDeliver
 	msgbox SaffronCity_MrPsychicsHouse_Text_OwlSomethingInTheRoom
 	setflag FLAG_OWL_CONCEDED
 	goto SaffronCity_MrPsychicsHouse_EventScript_TryFlight
@@ -59,12 +70,19 @@ SaffronCity_MrPsychicsHouse_EventScript_OwlWroteToThem::
 SaffronCity_MrPsychicsHouse_EventScript_TryFlight::
 	goto_if_set FLAG_CRYSTAL_READ_PAYLOAD, SaffronCity_MrPsychicsHouse_EventScript_NoFlight
 	checkitem ITEM_LETTER
-	goto_if_eq VAR_RESULT, FALSE, SaffronCity_MrPsychicsHouse_EventScript_NoFlight
+	goto_if_eq VAR_RESULT, FALSE, SaffronCity_MrPsychicsHouse_EventScript_NotYet
+	msgbox SaffronCity_MrPsychicsHouse_Text_StarrTurnsToTheDoor
 	closemessage
 	delay 60
 	fadescreen FADE_TO_BLACK
 	warp MAP_BIRTH_ISLAND_EXTERIOR, 15, 22
 	waitstate
+	release
+	end
+
+@  Conceded, and no package yet: say that something is waiting, not what.
+SaffronCity_MrPsychicsHouse_EventScript_NotYet::
+	msgbox SaffronCity_MrPsychicsHouse_Text_StarrIsWaiting
 	release
 	end
 

@@ -149,6 +149,7 @@ BirthIsland_Exterior_EventScript_Crystal::
 	delay 30
 	msgbox BirthIsland_Exterior_Text_PayloadWhere
 	closemessage
+	call BirthIsland_Exterior_EventScript_GiveReview
 	delay 30
 	applymovement LOCALID_ANNEX_CRYSTAL, BirthIsland_Exterior_Movement_CrystalWalksToTheWater
 	waitmovement 0
@@ -170,3 +171,14 @@ BirthIsland_Exterior_Movement_CrystalWalksToTheWater::
 	walk_up
 	face_up
 	step_end
+
+@  T-51. The Owl's PEER REVIEW goes to her with the package. She reads who it is
+@  addressed to and does not open it: it is not addressed to her either.
+BirthIsland_Exterior_EventScript_GiveReview::
+	checkitem ITEM_DEVON_GOODS
+	goto_if_eq VAR_RESULT, FALSE, BirthIsland_Exterior_EventScript_GiveReviewDone
+	msgbox BirthIsland_Exterior_Text_CrystalTakesTheReview
+	closemessage
+	removeitem ITEM_DEVON_GOODS
+BirthIsland_Exterior_EventScript_GiveReviewDone::
+	return

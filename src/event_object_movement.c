@@ -458,6 +458,9 @@ static const u8 gInitialMovementTypeFacingDirections[MOVEMENT_TYPES_COUNT] = {
 //  every map. They share three maps, so it has to be ONE tag -- two tags in
 //  that slot would recolour whichever of them spawned first.
 #define OBJ_EVENT_PAL_TAG_NPC_CLEARS                  0x111E
+//  THE OWL is brown feathers, a pale face disc and a tweed waistcoat, and has
+//  the house to himself -- so his own palette, in PALSLOT_NPC_SPECIAL.
+#define OBJ_EVENT_PAL_TAG_NPC_OWL                     0x111F
 #define OBJ_EVENT_PAL_TAG_NPC_BLUE                    0x1103
 #define OBJ_EVENT_PAL_TAG_NPC_PINK                    0x1104
 #define OBJ_EVENT_PAL_TAG_NPC_GREEN                   0x1105
@@ -515,6 +518,7 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_DaemonSnorlax,           OBJ_EVENT_PAL_TAG_DAEMON_SNORLAX},
     {gObjectEventPal_DaemonSpearow,           OBJ_EVENT_PAL_TAG_DAEMON_SPEAROW},
     {gObjectEventPal_NpcClears,               OBJ_EVENT_PAL_TAG_NPC_CLEARS},
+    {gObjectEventPal_NpcOwl,                  OBJ_EVENT_PAL_TAG_NPC_OWL},
     {},
 };
 

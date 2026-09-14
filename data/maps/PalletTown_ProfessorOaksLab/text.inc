@@ -384,3 +384,9 @@ PalletTown_ProfessorOaksLab_Text_AideSheLeftThisForYou::
 	.string "She did not say when she is back.\p"
 	.string "She was clear it was to be given\n"
 	.string "to you and not held for her.$"
+
+PalletTown_ProfessorOaksLab_Text_CrystalTakesTheReview::
+	.string "You gave her the PEER REVIEW\n"
+	.string "too.\p"
+	.string "She read who it was addressed\n"
+	.string "to, and kept it closed.$"

@@ -4305,12 +4305,12 @@
       "secondaryId": 0
     },
     {
-      "english": "DEVON GOODS",
+      "english": "PEER REVIEW",
       "itemId": "ITEM_DEVON_GOODS",
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A package that contains mechanical\\nparts of some sort made by the\\nDEVON CORPORATION.",
+      "description_english": "Signed and sealed. Addressed to\\neveryone who signed the first one.",
       "importance": 2,
       "registrability": 0,
       "pocket": "POCKET_KEY_ITEMS",
