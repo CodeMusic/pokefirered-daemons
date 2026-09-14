@@ -13,6 +13,7 @@ CinnabarIsland_PokemonLab_Entrance_Text_PhotoOfLabFounderDrFuji::
     .string "A photo of the LAB's founder.\p"
     .string "Two dates on the plate. The second\n"
     .string "is SEPT 3.\p"
+    .string "Personnel file PR-0903.\p"
     .string "The file is complete.$"
 
 CinnabarIsland_PokemonLab_Entrance_Text_MeetingRoomSign::
