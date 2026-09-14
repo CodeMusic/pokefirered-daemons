@@ -3,8 +3,8 @@ SaffronCity_MrPsychicsHouse_Text_YouWantedThis::
     .string "You wanted this!$"
 
 SaffronCity_MrPsychicsHouse_Text_ReceivedTM29FromMrPsychic::
-    .string "{PLAYER} received TM29 from MR.\n"
-    .string "CONSTRUE.$"
+    .string "{PLAYER} received TM29 from\n"
+    .string "THE SCHOLAR.$"
 
 SaffronCity_MrPsychicsHouse_Text_ExplainTM29::
     .string "You already know, don't you? TM29\n"

@@ -40,10 +40,24 @@ CeruleanCave_B1F_EventScript_Mewtwo::
 	waitstate
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
 	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, CeruleanCave_B1F_EventScript_CaughtStarr
 	goto_if_eq VAR_RESULT, B_OUTCOME_WON, CeruleanCave_B1F_EventScript_DefeatedMewtwo
 	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, CeruleanCave_B1F_EventScript_RanFromMewtwo
 	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, CeruleanCave_B1F_EventScript_RanFromMewtwo
 	setflag FLAG_FOUGHT_MEWTWO
+	release
+	end
+
+@  4.34: it went to DOLDRUM CAVE "and waits for someone who can get through
+@  both gates" -- and then the player had no way to know where it wanted to
+@  go. So it says, once, the moment it is caught. The words are its own
+@  terminal's register, and they name a place and a person and nothing more:
+@  never what the argument is, only that one reader has not decided.
+CeruleanCave_B1F_EventScript_CaughtStarr::
+	setflag FLAG_FOUGHT_MEWTWO
+	msgbox CeruleanCave_B1F_Text_StarrLooksAtYou
+	msgbox CeruleanCave_B1F_Text_StarrOneReader
+	msgbox CeruleanCave_B1F_Text_StarrTakeMe
 	release
 	end
 

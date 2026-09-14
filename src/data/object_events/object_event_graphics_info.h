@@ -2924,7 +2924,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SSAnne = {
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
-// MR. CONSTRUE, who is an owl (vision.md 4.23). BALDING_MAN is on 29 maps.
+// THE SCHOLAR, who is an owl (vision.md 4.23). BALDING_MAN is on 29 maps.
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Owl = {
     .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_NPC_OWL,
