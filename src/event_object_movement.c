@@ -461,6 +461,10 @@ static const u8 gInitialMovementTypeFacingDirections[MOVEMENT_TYPES_COUNT] = {
 //  THE OWL is brown feathers, a pale face disc and a tweed waistcoat, and has
 //  the house to himself -- so his own palette, in PALSLOT_NPC_SPECIAL.
 #define OBJ_EVENT_PAL_TAG_NPC_OWL                     0x111F
+//  BLANCHE'S PEOPLE (DAEMONS tools/genfolk.py) draw from the slot palettes they
+//  live in, never a changed colour: MOM and the crow aide (WORKER_F) move to the
+//  white slot for its greys and reds; VERA (DAISY) joins the Clears' own tag in
+//  PALSLOT_NPC_SPECIAL -- she never shares a map with a second special tag.
 #define OBJ_EVENT_PAL_TAG_NPC_BLUE                    0x1103
 #define OBJ_EVENT_PAL_TAG_NPC_PINK                    0x1104
 #define OBJ_EVENT_PAL_TAG_NPC_GREEN                   0x1105
