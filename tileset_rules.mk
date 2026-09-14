@@ -10,10 +10,10 @@ $(TILESETGFXDIR)/secondary/pallet_town/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 356 -Wnum_tiles
 
 $(TILESETGFXDIR)/secondary/lavender_town/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 256 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 336 -Wnum_tiles
 
 $(TILESETGFXDIR)/secondary/cinnabar_island/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 136 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 338 -Wnum_tiles
 
 $(TILESETGFXDIR)/secondary/pokemon_center/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 376 -Wnum_tiles
@@ -58,10 +58,10 @@ $(TILESETGFXDIR)/secondary/pokemon_league/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 340 -Wnum_tiles
 
 $(TILESETGFXDIR)/secondary/viridian_city/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 120 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 301 -Wnum_tiles
 
 $(TILESETGFXDIR)/secondary/vermilion_city/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 148 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 334 -Wnum_tiles
 
 $(TILESETGFXDIR)/secondary/indigo_plateau/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 247 -Wnum_tiles
@@ -109,13 +109,13 @@ $(TILESETGFXDIR)/secondary/hall_of_fame/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 208 -Wnum_tiles
 
 $(TILESETGFXDIR)/secondary/pewter_city/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 288 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 312 -Wnum_tiles
 
 $(TILESETGFXDIR)/secondary/celadon_city/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 250 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 343 -Wnum_tiles
 
 $(TILESETGFXDIR)/secondary/saffron_city/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 270 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 347 -Wnum_tiles
 
 $(TILESETGFXDIR)/secondary/dummy_1/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 2 -Wnum_tiles
@@ -157,10 +157,10 @@ $(TILESETGFXDIR)/secondary/trainer_tower/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 343 -Wnum_tiles
 
 $(TILESETGFXDIR)/secondary/cerulean_city/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 166 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 351 -Wnum_tiles
 
 $(TILESETGFXDIR)/secondary/fuchsia_city/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 199 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 299 -Wnum_tiles
 
 $(TILESETGFXDIR)/secondary/mart/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 36 -Wnum_tiles
