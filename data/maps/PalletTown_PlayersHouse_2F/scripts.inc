@@ -20,9 +20,95 @@ PalletTown_PlayersHouse_2F_FirstWarpIn::
 	setvar VAR_MAP_SCENE_PALLET_TOWN_PLAYERS_HOUSE_2F, 1
 	end
 
+@ T-90: the old console is a code terminal. Lore and cosmetic only.
 PalletTown_PlayersHouse_2F_EventScript_NES::
-	msgbox PalletTown_PlayersHouse_2F_Text_PlayedWithNES, MSGBOX_SIGN
+	goto_if_questlog EventScript_ReleaseEnd
+	lockall
+	msgbox PalletTown_PlayersHouse_2F_Text_PlayedWithNES, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, PalletTown_PlayersHouse_2F_EventScript_NESEnd
+	closemessage
+	fadescreen FADE_TO_BLACK
+	special Terminal_OpenCodeScreen
+	waitstate
+	special Terminal_CheckCode
+	switch VAR_RESULT
+	case 1, PalletTown_PlayersHouse_2F_EventScript_CodeHelp
+	case 2, PalletTown_PlayersHouse_2F_EventScript_CodeTune
+	case 3, PalletTown_PlayersHouse_2F_EventScript_CodeTime
+	case 4, PalletTown_PlayersHouse_2F_EventScript_CodeMom
+	case 5, PalletTown_PlayersHouse_2F_EventScript_CodeStars
+	case 6, PalletTown_PlayersHouse_2F_EventScript_CodeLog
+	case 255, PalletTown_PlayersHouse_2F_EventScript_NESEnd
+	msgbox PalletTown_PlayersHouse_2F_Text_CodeUnknown
+	goto PalletTown_PlayersHouse_2F_EventScript_NESEnd
+
+PalletTown_PlayersHouse_2F_EventScript_NESEnd::
+	releaseall
 	end
+
+PalletTown_PlayersHouse_2F_EventScript_CodeHelp::
+	random 5
+	switch VAR_RESULT
+	case 0, PalletTown_PlayersHouse_2F_EventScript_RiddleTune
+	case 1, PalletTown_PlayersHouse_2F_EventScript_RiddleTime
+	case 2, PalletTown_PlayersHouse_2F_EventScript_RiddleMom
+	case 3, PalletTown_PlayersHouse_2F_EventScript_RiddleStars
+	msgbox PalletTown_PlayersHouse_2F_Text_RiddleLog
+	goto PalletTown_PlayersHouse_2F_EventScript_NESEnd
+
+PalletTown_PlayersHouse_2F_EventScript_RiddleTune::
+	msgbox PalletTown_PlayersHouse_2F_Text_RiddleTune
+	goto PalletTown_PlayersHouse_2F_EventScript_NESEnd
+
+PalletTown_PlayersHouse_2F_EventScript_RiddleTime::
+	msgbox PalletTown_PlayersHouse_2F_Text_RiddleTime
+	goto PalletTown_PlayersHouse_2F_EventScript_NESEnd
+
+PalletTown_PlayersHouse_2F_EventScript_RiddleMom::
+	msgbox PalletTown_PlayersHouse_2F_Text_RiddleMom
+	goto PalletTown_PlayersHouse_2F_EventScript_NESEnd
+
+PalletTown_PlayersHouse_2F_EventScript_RiddleStars::
+	msgbox PalletTown_PlayersHouse_2F_Text_RiddleStars
+	goto PalletTown_PlayersHouse_2F_EventScript_NESEnd
+
+PalletTown_PlayersHouse_2F_EventScript_CodeTune::
+	random 3
+	switch VAR_RESULT
+	case 0, PalletTown_PlayersHouse_2F_EventScript_TunePewter
+	case 1, PalletTown_PlayersHouse_2F_EventScript_TuneVermilion
+	playbgm MUS_CELADON, 0
+	goto PalletTown_PlayersHouse_2F_EventScript_TunePlays
+
+PalletTown_PlayersHouse_2F_EventScript_TunePewter::
+	playbgm MUS_PEWTER, 0
+	goto PalletTown_PlayersHouse_2F_EventScript_TunePlays
+
+PalletTown_PlayersHouse_2F_EventScript_TuneVermilion::
+	playbgm MUS_VERMILLION, 0
+	goto PalletTown_PlayersHouse_2F_EventScript_TunePlays
+
+PalletTown_PlayersHouse_2F_EventScript_TunePlays::
+	msgbox PalletTown_PlayersHouse_2F_Text_CodeTune
+	fadedefaultbgm
+	goto PalletTown_PlayersHouse_2F_EventScript_NESEnd
+
+PalletTown_PlayersHouse_2F_EventScript_CodeTime::
+	special Terminal_BufferPlayTime
+	msgbox PalletTown_PlayersHouse_2F_Text_CodeTime
+	goto PalletTown_PlayersHouse_2F_EventScript_NESEnd
+
+PalletTown_PlayersHouse_2F_EventScript_CodeMom::
+	msgbox PalletTown_PlayersHouse_2F_Text_CodeMom
+	goto PalletTown_PlayersHouse_2F_EventScript_NESEnd
+
+PalletTown_PlayersHouse_2F_EventScript_CodeStars::
+	msgbox PalletTown_PlayersHouse_2F_Text_CodeStars
+	goto PalletTown_PlayersHouse_2F_EventScript_NESEnd
+
+PalletTown_PlayersHouse_2F_EventScript_CodeLog::
+	msgbox PalletTown_PlayersHouse_2F_Text_CodeLog
+	goto PalletTown_PlayersHouse_2F_EventScript_NESEnd
 
 PalletTown_PlayersHouse_2F_EventScript_Sign::
 	msgbox PalletTown_PlayersHouse_2F_Text_PressLRForHelp, MSGBOX_SIGN

@@ -8,6 +8,7 @@
 #define NAMING_SCREEN_CAUGHT_MON    2
 #define NAMING_SCREEN_NICKNAME      3
 #define NAMING_SCREEN_RIVAL         4
+#define NAMING_SCREEN_CODE          5 // the console terminal in the player's room
 
 void DoNamingScreen(u8 templateNum, u8 *destBuffer, u16 monSpecies, u16 monGender, u32 monPersonality, MainCallback returnCallback);
 

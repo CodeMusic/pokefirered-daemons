@@ -1728,7 +1728,8 @@ static void (*const sDrawTextEntryBoxFuncs[])(void) =
     [NAMING_SCREEN_BOX]        = DrawNormalTextEntryBox,
     [NAMING_SCREEN_CAUGHT_MON] = DrawMonTextEntryBox,
     [NAMING_SCREEN_NICKNAME]   = DrawMonTextEntryBox,
-    [NAMING_SCREEN_RIVAL]      = DrawNormalTextEntryBox
+    [NAMING_SCREEN_RIVAL]      = DrawNormalTextEntryBox,
+    [NAMING_SCREEN_CODE]       = DrawNormalTextEntryBox,
 };
 
 static void DrawTextEntryBox(void)
@@ -2119,6 +2120,17 @@ static const struct NamingScreenTemplate sRivalNamingScreenTemplate = {
     .title = gText_RivalsName,
 };
 
+// T-90: the old console in the player's room. No icon (sIconFunctions[0] is
+// NamingScreen_NoIcon), no gender icon, eight characters, capitals first.
+static const struct NamingScreenTemplate sCodeNamingScreenTemplate = {
+    .copyExistingString = FALSE,
+    .maxChars = 8,
+    .iconFunction = 0,
+    .addGenderIcon = 0,
+    .initialPage = KBPAGE_LETTERS_UPPER,
+    .title = gText_Code,
+};
+
 static const struct NamingScreenTemplate *const sNamingScreenTemplates[] =
 {
     [NAMING_SCREEN_PLAYER]     = &sPlayerNamingScreenTemplate,
@@ -2126,6 +2138,7 @@ static const struct NamingScreenTemplate *const sNamingScreenTemplates[] =
     [NAMING_SCREEN_CAUGHT_MON] = &sMonNamingScreenTemplate,
     [NAMING_SCREEN_NICKNAME]   = &sMonNamingScreenTemplate,
     [NAMING_SCREEN_RIVAL]      = &sRivalNamingScreenTemplate,
+    [NAMING_SCREEN_CODE]       = &sCodeNamingScreenTemplate,
 };
 
 static const struct OamData sOam_8x8 = {

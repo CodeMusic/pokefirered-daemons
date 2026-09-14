@@ -1687,6 +1687,62 @@ static void ChangePokemonNickname_CB(void)
     CB2_ReturnToFieldContinueScriptPlayMapMusic();
 }
 
+// T-90: the old console in the player's room. Codes are lore and cosmetic
+// only -- nothing here touches items, money, levels, flags or difficulty.
+// Script: special Terminal_OpenCodeScreen, waitstate, special Terminal_CheckCode.
+void Terminal_OpenCodeScreen(void)
+{
+    // The naming screen only writes the buffer when something was typed,
+    // so an empty entry has to come back as an empty string.
+    gStringVar2[0] = EOS;
+    DoNamingScreen(NAMING_SCREEN_CODE, gStringVar2, 0, 0, 0, CB2_ReturnToFieldContinueScriptPlayMapMusic);
+}
+
+#define TERMINAL_CODE_EMPTY 255
+
+static const u8 sTerminalCode_Help[]  = _("HELP");
+static const u8 sTerminalCode_Tune[]  = _("TUNE");
+static const u8 sTerminalCode_Time[]  = _("TIME");
+static const u8 sTerminalCode_Mom[]   = _("MOM");
+static const u8 sTerminalCode_Stars[] = _("STARS");
+static const u8 sTerminalCode_Log[]   = _("LOG");
+
+// Order is the script's VAR_RESULT: index + 1. 0 is an unknown code.
+static const u8 *const sTerminalCodes[] = {
+    sTerminalCode_Help,  // 1
+    sTerminalCode_Tune,  // 2
+    sTerminalCode_Time,  // 3
+    sTerminalCode_Mom,   // 4
+    sTerminalCode_Stars, // 5
+    sTerminalCode_Log,   // 6
+};
+
+void Terminal_CheckCode(void)
+{
+    u8 i;
+
+    if (gStringVar2[0] == EOS)
+    {
+        gSpecialVar_Result = TERMINAL_CODE_EMPTY;
+        return;
+    }
+    gSpecialVar_Result = 0;
+    for (i = 0; i < ARRAY_COUNT(sTerminalCodes); i++)
+    {
+        if (StringCompare(gStringVar2, sTerminalCodes[i]) == 0)
+        {
+            gSpecialVar_Result = i + 1;
+            return;
+        }
+    }
+}
+
+void Terminal_BufferPlayTime(void)
+{
+    ConvertIntToDecimalStringN(gStringVar1, gSaveBlock2Ptr->playTimeHours, STR_CONV_MODE_LEFT_ALIGN, 3);
+    ConvertIntToDecimalStringN(gStringVar2, gSaveBlock2Ptr->playTimeMinutes, STR_CONV_MODE_LEFT_ALIGN, 2);
+}
+
 void BufferMonNickname(void)
 {
     GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, gStringVar1);
