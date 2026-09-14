@@ -203,3 +203,6 @@ $(TILESETGFXDIR)/secondary/sevii_islands_123/tiles.4bpp: %.4bpp: %.png
 
 $(TILESETGFXDIR)/secondary/island_harbor/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 165 -Wnum_tiles
+
+$(TILESETGFXDIR)/secondary/players_house/tiles.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 375 -Wnum_tiles
