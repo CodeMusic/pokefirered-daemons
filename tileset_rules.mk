@@ -13,7 +13,7 @@ $(TILESETGFXDIR)/secondary/lavender_town/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 336 -Wnum_tiles
 
 $(TILESETGFXDIR)/secondary/cinnabar_island/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 338 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 346 -Wnum_tiles
 
 $(TILESETGFXDIR)/secondary/pokemon_center/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 376 -Wnum_tiles
