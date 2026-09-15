@@ -890,3 +890,14 @@ const struct Tileset gTileset_QuicksilverBenchmark =
     .metatileAttributes = gMetatileAttributes_QuicksilverBenchmark,
     .callback = NULL,
 };
+// T-103: CallowBenchmark, rethemed and replanned.
+const struct Tileset gTileset_CallowBenchmark =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_CallowBenchmark,
+    .palettes = gTilesetPalettes_CallowBenchmark,
+    .metatiles = gMetatiles_CallowBenchmark,
+    .metatileAttributes = gMetatileAttributes_CallowBenchmark,
+    .callback = NULL,
+};

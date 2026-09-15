@@ -227,3 +227,5 @@ const u16 gMetatiles_BrazenBenchmark[] = INCBIN_U16("data/tilesets/secondary/bra
 const u32 gMetatileAttributes_BrazenBenchmark[] = INCBIN_U32("data/tilesets/secondary/brazen_benchmark/metatile_attributes.bin");
 const u16 gMetatiles_QuicksilverBenchmark[] = INCBIN_U16("data/tilesets/secondary/quicksilver_benchmark/metatiles.bin");
 const u32 gMetatileAttributes_QuicksilverBenchmark[] = INCBIN_U32("data/tilesets/secondary/quicksilver_benchmark/metatile_attributes.bin");
+const u16 gMetatiles_CallowBenchmark[] = INCBIN_U16("data/tilesets/secondary/callow_benchmark/metatiles.bin");
+const u32 gMetatileAttributes_CallowBenchmark[] = INCBIN_U32("data/tilesets/secondary/callow_benchmark/metatile_attributes.bin");

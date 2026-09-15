@@ -239,3 +239,6 @@ $(TILESETGFXDIR)/secondary/brazen_benchmark/tiles.4bpp: %.4bpp: %.png
 
 $(TILESETGFXDIR)/secondary/quicksilver_benchmark/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 166 -Wnum_tiles
+
+$(TILESETGFXDIR)/secondary/callow_benchmark/tiles.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 106 -Wnum_tiles
