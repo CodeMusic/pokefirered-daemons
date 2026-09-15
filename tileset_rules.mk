@@ -212,3 +212,9 @@ $(TILESETGFXDIR)/secondary/checkpoint/tiles.4bpp: %.4bpp: %.png
 
 $(TILESETGFXDIR)/secondary/repo/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 160 -Wnum_tiles
+
+$(TILESETGFXDIR)/secondary/checkpoint_one_island/tiles.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 248 -Wnum_tiles
+
+$(TILESETGFXDIR)/secondary/checkpoint_indigo/tiles.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 261 -Wnum_tiles

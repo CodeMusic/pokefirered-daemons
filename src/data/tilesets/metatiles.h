@@ -209,3 +209,7 @@ const u16 gMetatiles_Checkpoint[] = INCBIN_U16("data/tilesets/secondary/checkpoi
 const u32 gMetatileAttributes_Checkpoint[] = INCBIN_U32("data/tilesets/secondary/checkpoint/metatile_attributes.bin");
 const u16 gMetatiles_Repo[] = INCBIN_U16("data/tilesets/secondary/repo/metatiles.bin");
 const u32 gMetatileAttributes_Repo[] = INCBIN_U32("data/tilesets/secondary/repo/metatile_attributes.bin");
+const u16 gMetatiles_CheckpointOneIsland[] = INCBIN_U16("data/tilesets/secondary/checkpoint_one_island/metatiles.bin");
+const u32 gMetatileAttributes_CheckpointOneIsland[] = INCBIN_U32("data/tilesets/secondary/checkpoint_one_island/metatile_attributes.bin");
+const u16 gMetatiles_CheckpointIndigo[] = INCBIN_U16("data/tilesets/secondary/checkpoint_indigo/metatiles.bin");
+const u32 gMetatileAttributes_CheckpointIndigo[] = INCBIN_U32("data/tilesets/secondary/checkpoint_indigo/metatile_attributes.bin");

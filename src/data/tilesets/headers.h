@@ -791,3 +791,25 @@ const struct Tileset gTileset_Repo =
     .metatileAttributes = gMetatileAttributes_Repo,
     .callback = NULL,
 };
+// T-103: CheckpointOneIsland, rethemed and replanned.
+const struct Tileset gTileset_CheckpointOneIsland =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_CheckpointOneIsland,
+    .palettes = gTilesetPalettes_CheckpointOneIsland,
+    .metatiles = gMetatiles_CheckpointOneIsland,
+    .metatileAttributes = gMetatileAttributes_CheckpointOneIsland,
+    .callback = NULL,
+};
+// T-103: CheckpointIndigo, rethemed and replanned.
+const struct Tileset gTileset_CheckpointIndigo =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_CheckpointIndigo,
+    .palettes = gTilesetPalettes_CheckpointIndigo,
+    .metatiles = gMetatiles_CheckpointIndigo,
+    .metatileAttributes = gMetatileAttributes_CheckpointIndigo,
+    .callback = NULL,
+};

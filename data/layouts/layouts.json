@@ -2343,7 +2343,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_PokemonCenter",
+      "secondary_tileset": "gTileset_CheckpointIndigo",
       "border_filepath": "data/layouts/IndigoPlateau_PokemonCenter_1F/border.bin",
       "blockdata_filepath": "data/layouts/IndigoPlateau_PokemonCenter_1F/map.bin"
     },
@@ -3051,7 +3051,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_PokemonCenter",
+      "secondary_tileset": "gTileset_CheckpointOneIsland",
       "border_filepath": "data/layouts/OneIsland_PokemonCenter_1F/border.bin",
       "blockdata_filepath": "data/layouts/OneIsland_PokemonCenter_1F/map.bin"
     },
