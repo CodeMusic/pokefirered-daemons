@@ -205,4 +205,4 @@ $(TILESETGFXDIR)/secondary/island_harbor/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 165 -Wnum_tiles
 
 $(TILESETGFXDIR)/secondary/players_house/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 383 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 370 -Wnum_tiles
