@@ -12,14 +12,14 @@ CeruleanCity_Gym_Text_ExplainTM03::
     .string "Use it on an aquatic DAEMON!$"
 
 CeruleanCity_Gym_Text_ExplainCascadeBadge::
-    .string "The SLOPE MARK makes all DAEMONS\n"
-    .string "up to L30 obey!\p"
-    .string "That includes even outsiders!\p"
-    .string "There's more, you can now use\n"
-    .string "PRUNE any time!\p"
-    .string "You can PRUNE down small bushes to\n"
-    .string "open new paths!\p"
-    .string "You can also have my favorite TM!$"
+	.string "The SLOPE MARK makes all DAEMONS\n"
+	.string "up to L30 obey!\p"
+	.string "That includes even outsiders!\p"
+	.string "You can use PRUNE any time now, to\n"
+	.string "cut down small bushes!\p"
+	.string "You can also have my favorite TM!\p"
+	.string "Small steps, and never stop.\n"
+	.string "Keep going down and you arrive.$"
 
 CeruleanCity_Gym_Text_ReceivedTM03FromMisty::
     .string "{PLAYER} received TM03\n"

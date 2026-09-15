@@ -4,10 +4,10 @@ FuchsiaCity_House1_Text_WardenIsOldHasFalseTeeth::
     .string "All his teeth are false, though.$"
 
 FuchsiaCity_House1_Text_BillIsMyGrandson::
-    .string "Hmm? You've met HOLT?\p"
-    .string "He's my grandson!\p"
-    .string "He always liked collecting things\n"
-    .string "even as a child!$"
+	.string "Hmm? You've met HOLT?\p"
+	.string "He's my grandson!\p"
+	.string "He took things apart as a boy.\n"
+	.string "He put most of them back.$"
 
 FuchsiaCity_House1_Text_BillFilesHisOwnMonData::
     .string "HOLT files his own DAEMON data on\n"

@@ -51,11 +51,9 @@ VermilionCity_Text_PokemonFanClubSign::
     .string "welcome!$"
 
 VermilionCity_Text_GymSign::
-    .string "ARDOR CITY\n"
-    .string "BENCHMARK\l"
-    .string "LEADER: GAUGE\p"
-    .string "The Lightning\n"
-    .string "American!$"
+	.string "ARDOR CITY BENCHMARK\n"
+	.string "LEADER: GAUGE\p"
+	.string "First To Move, Every Time!$"
 
 VermilionCity_Text_VermilionHarbor::
     .string "ARDOR HARBOR$"

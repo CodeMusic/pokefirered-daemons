@@ -68,9 +68,10 @@ Text_MegaKickTaught::
     .string "only simple punching over there.$"
 
 Route4_Text_PeopleLikeAndRespectBrock::
-    .string "Oh, wow, that's the SLATE MARK!\n"
-    .string "You got it from CAIRN, didn't you?\p"
-    .string "CAIRN is cool. He's not just tough.\n"
-    .string "People like and respect him.\p"
-    .string "I want to become a BENCHMARK\n"
-    .string "LEADER like him.$"
+	.string "Oh, wow, that's the SLATE MARK!\n"
+	.string "You got it from CAIRN?\p"
+	.string "He is not the strongest leader.\n"
+	.string "He is the one whose records you\l"
+	.string "can check.\p"
+	.string "My brother says that is the same\n"
+	.string "as boring.$"

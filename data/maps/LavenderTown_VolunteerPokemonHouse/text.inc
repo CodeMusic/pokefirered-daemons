@@ -1,7 +1,9 @@
 LavenderTown_PokemonCenter_1F_Text_HearMrFujiNotFromAroundHere::
-    .string "I recently moved to this town.\p"
-    .string "I hear that INIT's not from these\n"
-    .string "parts originally, either.$"
+	.string "I recently moved to this town.\p"
+	.string "INIT takes in every DAEMON left\n"
+	.string "at his door.\p"
+	.string "Some folks say he just makes it\n"
+	.string "easier to leave them.$"
 
 LavenderTown_VolunteerPokemonHouse_Text_WhereDidMrFujiGo::
     .string "That's odd, INIT isn't here. Where'd\n"
@@ -12,10 +14,9 @@ LavenderTown_VolunteerPokemonHouse_Text_MrFujiWasPrayingForCubonesMother::
     .string "RELIC's mother.$"
 
 LavenderTown_VolunteerPokemonHouse_Text_MrFujiLooksAfterOrphanedMons::
-    .string "This is really INIT's house.\p"
-    .string "He's really kind.\p"
-    .string "He looks after abandoned and\n"
-    .string "orphaned DAEMON.$"
+	.string "This is really INIT's house.\p"
+	.string "He's really kind. He looks after\n"
+	.string "DAEMONS nobody came back for.$"
 
 LavenderTown_VolunteerPokemonHouse_Text_MonsNiceToHug::
     .string "It's so warm! DAEMONS are so nice\n"
@@ -53,11 +54,10 @@ LavenderTown_VolunteerPokemonHouse_Text_HasPokeFluteHelpedYou::
     .string "you?$"
 
 LavenderTown_VolunteerPokemonHouse_Text_GrandPrizeDrawingClipped::
-    .string "DAEMON FAN MAGAZINE Monthly Grand\n"
-    .string "Prize Drawing!\p"
-    .string "The application form is…\p"
-    .string "Gone! It's been clipped out.\n"
-    .string "Someone must have applied already.$"
+	.string "INIT's house is full again. Please\n"
+	.string "do not leave DAEMONS on the step.\p"
+	.string "Underneath, someone has written:\n"
+	.string "then where?$"
 
 LavenderTown_VolunteerPokemonHouse_Text_PokemonMagazinesLineShelf::
     .string "DAEMON magazines line the shelf.\p"

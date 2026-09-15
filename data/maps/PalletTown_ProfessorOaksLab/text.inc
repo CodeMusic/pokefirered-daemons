@@ -259,11 +259,10 @@ PalletTown_ProfessorOaksLab_Text_DaisyWillGroomMons::
     .string "you had not noticed.$"
 
 PalletTown_ProfessorOaksLab_Text_OakIsGoingToHaveRadioShow::
-    .string "CRYSTAL CLEAR is getting a radio\n"
-    .string "programme.\p"
-    .string "They are calling it CRYSTAL CLEAR'S\n"
-    .string "DAEMON SEMINAR. She did not pick\l"
-    .string "the name.$"
+	.string "There was to be a lecture series.\n"
+	.string "It was announced twice.\p"
+	.string "Now it is a radio programme.\n"
+	.string "She did not pick the name.$"
 
 PalletTown_ProfessorOaksLab_Text_OakIsAuthorityOnMons::
     .string "CRYSTAL CLEAR is the authority on\n"

@@ -16,14 +16,13 @@ CeladonCity_Condominiums_1F_Text_MyDearMonsKeepMeCompany::
     .string "COOKIE even brings money home!$"
 
 CeladonCity_Condominiums_1F_Text_DaisyComesToBuyTea::
-    .string "Oh, hello, dearie. Did you enjoy\n"
-    .string "my TEA?\p"
-    .string "By the way, dear. Are you, by any\n"
-    .string "chance, from BLANCHE TOWN?\p"
-    .string "A girl from BLANCHE TOWN, VERA,\n"
-    .string "she enjoys TEA every day.\p"
-    .string "She visits the VERDIGRIS DEPT.\n"
-    .string "STORE to buy some TEA.$"
+	.string "Oh, hello, dearie. Did you enjoy\n"
+	.string "my TEA?\p"
+	.string "A girl from BLANCHE TOWN, VERA,\n"
+	.string "comes in for TEA.\p"
+	.string "VERA says CRYSTAL's instruments\n"
+	.string "are very good.\p"
+	.string "And that she prefers to look.$"
 
 CeladonCity_Condominiums_1F_Text_Clefairy::
     .string "ANOMALY: Pi pippippi!$"

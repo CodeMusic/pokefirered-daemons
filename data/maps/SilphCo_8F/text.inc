@@ -39,9 +39,7 @@ SilphCo_8F_Text_FloorSign::
     .string "FOUNDRY CO. HEAD OFFICE 8F$"
 
 SilphCo_8F_Text_ToRocketBossMonsAreTools::
-    .string "TEAM CORPUS's BOSS is terribly\n"
-    .string "cruel!\p"
-    .string "To him, DAEMONS are just tools to\n"
-    .string "be used.\p"
-    .string "What will happen if that tyrant\n"
-    .string "takes over our company…$"
+	.string "SCORN isn't cruel. He fixed our\n"
+	.string "payroll in a week.\p"
+	.string "He knows everyone's name. He just\n"
+	.string "never asks what any of us are for.$"

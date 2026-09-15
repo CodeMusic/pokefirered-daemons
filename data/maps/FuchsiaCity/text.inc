@@ -36,11 +36,9 @@ FuchsiaCity_Text_SafariZoneOfficeSign::
     .string "SAFARI ZONE! SAFARI ZONE OFFICE$"
 
 FuchsiaCity_Text_GymSign::
-    .string "LURID CITY\n"
-    .string "BENCHMARK\l"
-    .string "LEADER: TILT\p"
-    .string "The Poisonous\n"
-    .string "Ninja Master$"
+	.string "LURID CITY BENCHMARK\n"
+	.string "LEADER: TILT\p"
+	.string "He Does Not Need To Beat You$"
 
 FuchsiaCity_Text_ChanseySign::
     .string "Name: UPTIME\p"
@@ -101,8 +99,9 @@ Text_SubstituteTaught::
     .string "a KEEPER belly pouch…$"
 
 FuchsiaCity_Text_MyFatherIsGymLeader::
-    .string "My father is the BENCHMARK LEADER\n"
-    .string "of this town.\p"
-    .string "I'm training to use CORRUPT DAEMON\n"
-    .string "as well as my father.$"
+	.string "My father is the BENCHMARK LEADER\n"
+	.string "of this town. People cross the\l"
+	.string "street.\p"
+	.string "He knows every remedy in LURID,\n"
+	.string "and why each one is needed.$"
 

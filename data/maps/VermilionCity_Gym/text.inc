@@ -10,10 +10,11 @@ VermilionCity_Gym_Text_LtSurgeIntro::
     .string "The same as I'll do to you!{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
 
 VermilionCity_Gym_Text_LtSurgePostBattle::
-    .string "A little word of advice, kid!\p"
-    .string "Electricity is sure powerful!\p"
-    .string "But, it's useless against\n"
-    .string "STRATUM-type DAEMON!$"
+	.string "SIGNAL! It gets there first!\p"
+	.string "Getting there first works more\n"
+	.string "often than careful people admit!\p"
+	.string "Mind you, it does nothing to\n"
+	.string "STRATUM-type DAEMON. I checked!$"
 
 VermilionCity_Gym_Text_ExplainThunderBadgeTakeThis::
     .string "The SENSE MARK cranks up your\n"
@@ -48,9 +49,11 @@ VermilionCity_Gym_Text_TuckerDefeat::
     .string "You're very good!$"
 
 VermilionCity_Gym_Text_TuckerPostBattle::
-    .string "It's not easy opening that door.\p"
-    .string "GAUGE was always famous for\n"
-    .string "his cautious nature in the Army.$"
+	.string "It's not easy opening that door.\p"
+	.string "GAUGE says he trusts his first\n"
+	.string "read.\p"
+	.string "So why does he lock everything\n"
+	.string "twice?$"
 
 VermilionCity_Gym_Text_BailyIntro::
     .string "I'm a lightweight, but I'm good\n"
@@ -82,16 +85,15 @@ VermilionCity_Gym_Text_DwaynePostBattle::
     .string "second lock is right next to it.$"
 
 VermilionCity_Gym_Text_GymGuyAdvice::
-    .string "Yo! Champ in making!\p"
-    .string "GAUGE has a nickname. People\n"
-    .string "refer to him as the Lightning\l"
-    .string "American!\p"
-    .string "He's an expert on SIGNAL DAEMON!\p"
-    .string "VECTOR and FLOW DAEMONS are at\n"
-    .string "risk! Beware of throttling too!\p"
-    .string "GAUGE is very cautious!\p"
-    .string "You'll have to break a code to get\n"
-    .string "to him!$"
+	.string "Yo! Champ in making!\p"
+	.string "GAUGE moves first. Every DAEMON\n"
+	.string "he has does!\p"
+	.string "Doesn't matter how strong you are.\n"
+	.string "He's already moved!\p"
+	.string "VECTOR and FLOW DAEMONS are at\n"
+	.string "risk! Beware of throttling too!\p"
+	.string "You'll have to find the live ports\n"
+	.string "to get to him!$"
 
 VermilionCity_Gym_Text_GymGuyPostVictory::
     .string "Whew!\n"

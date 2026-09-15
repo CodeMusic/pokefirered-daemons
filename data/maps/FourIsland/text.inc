@@ -9,13 +9,12 @@ FourIsland_Text_LoreleiHasReturned::
     .string "stressful, I wonder?$"
 
 FourIsland_Text_LoreleiMetLaprasAsChild::
-    .string "PHLEGMATIC has gone back.\p"
-    .string "The FERRY she has, I imagine it to\n"
-    .string "be the one she met as a child.\p"
-    .string "I believe it was in STILLFALL CAVE\n"
-    .string "that she bound it.\p"
-    .string "Perhaps that DAEMON has been with\n"
-    .string "her ever since.$"
+	.string "PHLEGMATIC has gone back.\p"
+	.string "She told the CORPUS people in\n"
+	.string "STILLFALL CAVE to keep their hands\l"
+	.string "off the DAEMON there.\p"
+	.string "She didn't raise her voice. They\n"
+	.string "left anyway.$"
 
 FourIsland_Text_RivalAlreadyGotEggBeSmellingYa::
     .string "{RIVAL}: Hey! {PLAYER}!\p"
@@ -37,12 +36,11 @@ FourIsland_Text_RivalAlreadyGotEggBeSmellingYa::
     .string "Be smelling ya!$"
 
 FourIsland_Text_LoreleiHasLotsOfStuffedDolls::
-	.string "Oh, you found me! Please don't\n"
-    .string "tell PHLEGMATIC.\p"
-    .string "Did you know that PHLEGMATIC has\n"
-    .string "lots and lots of stuffed dolls?\p"
-    .string "Every time she comes back to FOUR\n"
-    .string "ISLAND, her collection grows!$"
+	.string "Oh, you found me!\p"
+	.string "PHLEGMATIC sits by the water a\n"
+	.string "whole day when she comes home.\p"
+	.string "Grown-ups say she's wasting time.\n"
+	.string "She says the water isn't.$"
 
 FourIsland_Text_MadeSlushieUsingIcefallCaveIce::
     .string "Ooh, chilly!\p"

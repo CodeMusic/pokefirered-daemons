@@ -51,11 +51,9 @@ CeladonCity_Text_CitySign::
     .string "Rainbow Dreams$"
 
 CeladonCity_Text_GymSign::
-    .string "VERDIGRIS CITY\n"
-    .string "BENCHMARK\l"
-    .string "LEADER: TRELLIS\p"
-    .string "The Nature Loving\n"
-    .string "Princess!$"
+	.string "VERDIGRIS CITY BENCHMARK\n"
+	.string "LEADER: TRELLIS\p"
+	.string "It Grows The Shape It Is Given$"
 
 CeladonCity_Text_MansionSign::
     .string "VERDIGRIS MANSION$"

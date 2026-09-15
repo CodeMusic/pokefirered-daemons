@@ -24,12 +24,15 @@ FuchsiaCity_Gym_Text_KogaPostBattle::
     .string "It will surely terrorize foe!$"
 
 FuchsiaCity_Gym_Text_KogaExplainSoulBadge::
-    .string "Now that you have the SKEW MARK,\n"
-    .string "the DEFENSE of your DAEMON\l"
-    .string "increases!\p"
-    .string "It also lets you TRAVERSE outside\n"
-    .string "of battle!\p"
-    .string "Ah! Take this too!$"
+	.string "Now that you have the SKEW MARK,\n"
+	.string "the DEFENSE of your DAEMON\l"
+	.string "increases!\p"
+	.string "It also lets you TRAVERSE outside\n"
+	.string "of battle!\p"
+	.string "CORRUPT. I do not need to beat\n"
+	.string "you.\p"
+	.string "Your own ROUTINES will see to it.\n"
+	.string "Take this too.$"
 
 FuchsiaCity_Gym_Text_ReceivedTM06FromKoga::
     .string "{PLAYER} received TM06\n"
@@ -69,9 +72,10 @@ FuchsiaCity_Gym_Text_KirkDefeat::
     .string "I'm done for!$"
 
 FuchsiaCity_Gym_Text_KirkPostBattle::
-    .string "Even though I've lost, I will keep\n"
-    .string "training according to the teachings\l"
-    .string "of TILT, my ninja master.$"
+	.string "I lost, and none of it was his\n"
+	.string "doing. TILT says that is the point.\p"
+	.string "I still don't know if that makes\n"
+	.string "it better.$"
 
 FuchsiaCity_Gym_Text_NateIntro::
     .string "Let's see you beat my special\n"

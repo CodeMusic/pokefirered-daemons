@@ -30,13 +30,12 @@ OneIsland_KindleRoad_EmberSpa_Text_SeeHowSmoothMySkinIs::
     .string "skin younger than my age.$"
 
 OneIsland_KindleRoad_EmberSpa_Text_BrunoVisitsSpaOnOccasion::
-	.string "After an honest day of training,\n"
-    .string "nothing beats a relaxing soak in\l"
-    .string "the hot spring pool.\p"
-    .string "CHOLERIC, who's a senior ahead of\n"
-    .string "me, visits the SPA on occasion.\p"
-    .string "He comes to rehab injuries, both\n"
-    .string "his own and his DAEMON's.$"
+	.string "After a day of training, nothing\n"
+	.string "beats a soak in the hot spring.\p"
+	.string "CHOLERIC rehabs injuries here, his\n"
+	.string "own and his DAEMON's.\p"
+	.string "He works out how long each will\n"
+	.string "take. He never waits that long.$"
 
 OneIsland_KindleRoad_EmberSpa_Text_UsedThisToMakeEmberSpa::
     .string "Hot springs go hand-in-hand with\n"

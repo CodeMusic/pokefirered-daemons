@@ -69,11 +69,9 @@ SaffronCity_Text_FightingDojo::
     .string "PROOF HALL$"
 
 SaffronCity_Text_GymSign::
-    .string "BRAZEN CITY\n"
-    .string "BENCHMARK\l"
-    .string "LEADER: MATTE\p"
-    .string "The Master of\n"
-    .string "CONTEXT DAEMON!$"
+	.string "BRAZEN CITY BENCHMARK\n"
+	.string "LEADER: MATTE\p"
+	.string "What You See Is What She Shows$"
 
 SaffronCity_Text_FullHealCuresStatus::
     .string "USER TIPS\p"
@@ -107,11 +105,10 @@ SaffronCity_Text_TrainerFanClubSign::
     .string "names on this sign.$"
 
 SaffronCity_Text_HowCanClubNotRecognizeLance::
-    .string "This FAN CLUB…\n"
-    .string "No one here has a clue!\p"
-    .string "How could they not recognize\n"
-    .string "the brilliance that is SANGUINE?\p"
-    .string "He stands for justice!\n"
-    .string "He's cool, and yet passionate!\l"
-    .string "He's the greatest, SANGUINE!$"
+	.string "This club likes DAEMON that do\n"
+	.string "what they were bred for.\p"
+	.string "SANGUINE likes the ones that do\n"
+	.string "something nobody expected.\p"
+	.string "They call him a crank. I think he's\n"
+	.string "the only one enjoying himself.$"
 

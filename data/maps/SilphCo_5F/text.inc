@@ -73,9 +73,9 @@ SilphCo_5F_Text_FloorSign::
     .string "FOUNDRY CO. HEAD OFFICE 5F$"
 
 SilphCo_5F_Text_RocketBossLookingForStrongMons::
-    .string "Those thugs that took over our\n"
-    .string "building…\p"
-    .string "Their BOSS said he was looking for\n"
-    .string "strong DAEMON.\p"
-    .string "I hope our PRESIDENT managed to\n"
-    .string "avoid trouble…$"
+	.string "The CORPUS people upstairs are\n"
+	.string "very polite.\p"
+	.string "SCORN asked for our output\n"
+	.string "figures. Just the figures.\p"
+	.string "I have never seen anyone so\n"
+	.string "pleased by a number.$"

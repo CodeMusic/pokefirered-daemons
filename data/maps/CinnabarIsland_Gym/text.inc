@@ -16,10 +16,13 @@ CinnabarIsland_Gym_Text_FireBlastIsUltimateFireMove::
     .string "Don't waste it on FLOW DAEMON.$"
 
 CinnabarIsland_Gym_Text_ExplainVolcanoBadge::
-    .string "Hah!\p"
-    .string "The HEAT MARK heightens the\n"
-    .string "SPECIAL abilities of your DAEMON!\p"
-    .string "Here, you can have this too!$"
+	.string "Hah!\p"
+	.string "The HEAT MARK heightens the\n"
+	.string "SPECIAL abilities of your DAEMON!\p"
+	.string "ENTROPY! Everything here runs a\n"
+	.string "little hot.\p"
+	.string "You'll notice. That's the idea!\n"
+	.string "Here, you can have this too!$"
 
 CinnabarIsland_Gym_Text_ReceivedTM38FromBlaine::
     .string "{PLAYER} received TM38\n"
@@ -89,12 +92,10 @@ CinnabarIsland_Gym_Text_DerekDefeat::
     .string "Ow!$"
 
 CinnabarIsland_Gym_Text_DerekPostBattle::
-    .string "Our LEADER, ANNEAL, became lost in\n"
-    .string "the mountains but good.\p"
-    .string "Night fell when a fiery bird DAEMON\n"
-    .string "appeared.\p"
-    .string "Its light allowed ANNEAL to find\n"
-    .string "his way down safely.$"
+	.string "ANNEAL changes his order every\n"
+	.string "morning. I asked him why.\p"
+	.string "He flipped a coin to decide\n"
+	.string "whether to answer. It said no.$"
 
 CinnabarIsland_Gym_Text_DustyIntro::
     .string "I've been to many BENCHMARKS, but\n"

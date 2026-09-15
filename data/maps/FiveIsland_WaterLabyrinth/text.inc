@@ -38,13 +38,13 @@ FiveIsland_WaterLabyrinth_Text_GladIMetSomeoneLikeYou::
     .string "I'm glad I met someone like you.$"
 
 FiveIsland_WaterLabyrinth_Text_CuteMonRemindsMeOfDaisy::
-    .string "Oh, hello. That's a cute {STR_VAR_2}.\p"
-    .string "Seeing it reminds me of a sweet\n"
-    .string "little girl I met while traveling.\p"
-    .string "She was gently grooming DAEMON…\n"
-    .string "She was a little angel.\p"
-    .string "That little girl's name… I think it\n"
-    .string "was VERA.$"
+	.string "Oh, hello. That's a cute\n"
+	.string "{STR_VAR_2}.\p"
+	.string "I met a girl once, sitting with\n"
+	.string "DAEMON on a riverbank.\p"
+	.string "She wasn't grooming them. She was\n"
+	.string "just watching. It took an hour.\p"
+	.string "I think her name was VERA.$"
 
 FiveIsland_WaterLabyrinth_Text_AlizeIntro::
     .string "This is an excellent environment for\n"

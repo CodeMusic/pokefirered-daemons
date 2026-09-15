@@ -107,7 +107,7 @@ Route20_Text_SeafoamIslands::
     .string "GLAUCOUS ISLES$"
 
 Route20_Text_MistyTrainsHere::
-    .string "Strong USERS and FLOW DAEMONS\n"
-    .string "are common sights in these parts.\p"
-    .string "They say that BASIN of the\n"
-    .string "DOLDRUM BENCHMARK trains here.$"
+	.string "BASIN swims these channels. Same\n"
+	.string "route, every morning, for years.\p"
+	.string "She says she is getting faster.\n"
+	.string "I have timed her. She is not.$"

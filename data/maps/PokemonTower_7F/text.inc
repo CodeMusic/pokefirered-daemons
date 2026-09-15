@@ -16,8 +16,9 @@ PokemonTower_7F_Text_Grunt2Defeat::
     .string "Withdrawing the objection.$"
 
 PokemonTower_7F_Text_Grunt2PostBattle::
-    .string "DAEMONS are an asset class.\p"
-    .string "Nothing personal!$"
+	.string "The old man says we're wrong.\p"
+	.string "DAEMONS are an asset class.\n"
+	.string "Nothing personal!$"
 
 PokemonTower_7F_Text_Grunt3Intro::
     .string "There's nothing here to save.$"

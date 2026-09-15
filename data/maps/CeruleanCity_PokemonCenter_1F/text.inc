@@ -12,8 +12,9 @@ CeruleanCity_PokemonCenter_1F_Text_EveryoneCallsBillPokemaniac::
     .string "their DAEMON?$"
 
 CeruleanCity_PokemonCenter_1F_Text_BillCollectsRareMons::
-    .string "HOLT has lots of DAEMONS! He\n"
-    .string "collects rare ones, too!$"
+	.string "HOLT doesn't keep many DAEMONS.\p"
+	.string "He says he knows what it's like in\n"
+	.string "there. That's weird, right?$"
 
 CeruleanCity_PokemonCenter_1F_Text_TryTradingUpstairs::
     .string "Why don't you go upstairs and try\n"

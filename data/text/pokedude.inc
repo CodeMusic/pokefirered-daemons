@@ -1,30 +1,29 @@
 Pokedude_Text_SpeedierBattlerGoesFirst::
-	.string "TUTOR: The speedier of the\n"
-	.string "battlers gets to attack first.$"
+	.string "CRYSTAL: The faster of the two\n"
+	.string "acts first.$"
 
 Pokedude_Text_MyRattataFasterThanPidgey::
-	.string "It looks like my NIBBLE was faster\n"
-	.string "than the PACKET.$"
+	.string "My NIBBLE was faster than the\n"
+	.string "PACKET.$"
 
 Pokedude_Text_BattlersTakeTurnsAttacking::
 	.string "The battlers take turns attacking\n"
 	.string "and reducing each other's HP.$"
 
 Pokedude_Text_MyRattataWonGetsEXP::
-	.string "My NIBBLE reduced the foe's HP\n"
-	.string "to zero, so it wins!\p"
+	.string "The foe's HP is zero, so my NIBBLE\n"
+	.string "wins.\p"
 	.string "The DAEMON that took part in the\n"
 	.string "battle get EXP. Points.\p"
-	.string "When a DAEMON collects enough\n"
-	.string "EXP. Points, it levels up.\p"
-	.string "Leveling up makes your DAEMON\n"
-	.string "stronger than before.$"
+	.string "With enough EXP. Points, a DAEMON\n"
+	.string "levels up.\p"
+	.string "Levelling up makes it stronger.\n"
+	.string "It does not make it wiser.$"
 
 Pokedude_Text_UhOhRattataPoisoned::
-	.string "TUTOR: Uh-oh… My NIBBLE has\n"
-	.string "been leaking…\p"
-	.string "If a DAEMON is leaking, it loses\n"
-	.string "HP steadily.$"
+	.string "CRYSTAL: My NIBBLE is leaking.\p"
+	.string "A leaking DAEMON loses HP\n"
+	.string "steadily.$"
 
 Pokedude_Text_HealStatusRightAway::
 	.string "If a DAEMON develops a status\n"
@@ -32,98 +31,86 @@ Pokedude_Text_HealStatusRightAway::
 
 Pokedude_Text_UsingItemTakesTurn::
 	.string "Using an item on a DAEMON uses up\n"
-	.string "one turn, though.\p"
-	.string "Now, it's the opponent's turn!$"
+	.string "a turn.\p"
+	.string "Now it is the opponent's turn.$"
 
 Pokedude_Text_YayWeManagedToWin::
-	.string "Yay!\n"
-	.string "We managed to win!$"
+	.string "There.\n"
+	.string "That will do.$"
 
 Pokedude_Text_WaterNotVeryEffectiveAgainstGrass::
-	.string "TUTOR: The ROUTINE SEEP is a\n"
-	.string "FLOW-type attack.\p"
-	.string "The targeted WEED is a\n"
+	.string "CRYSTAL: SEEP is a FLOW-type\n"
+	.string "ROUTINE.\p"
+	.string "The target, WEED, is a\n"
 	.string "GROWTH/CORRUPT-type DAEMON.\p"
-	.string "The FLOW-type attack is absorbed\n"
-	.string "by the GROWTH-type DAEMON…\p"
-	.string "As a result, the ROUTINE becomes\n"
-	.string "not very effective, and inflicts\l"
-	.string "only half the usual damage.$"
+	.string "A GROWTH-type DAEMON takes FLOW\n"
+	.string "in its stride…\p"
+	.string "…so SEEP is not very effective,\n"
+	.string "and does half the usual damage.$"
 
 Pokedude_Text_GrassEffectiveAgainstWater::
-	.string "Uh-oh, this is not good!\p"
-	.string "The INGEST attack you just saw is\n"
-	.string "a GROWTH-type ROUTINE.\p"
+	.string "That is not good.\p"
+	.string "INGEST, which you just saw, is a\n"
+	.string "GROWTH-type ROUTINE.\p"
 	.string "LOOP is a FLOW-type DAEMON.\p"
-	.string "So, INGEST becomes super\n"
-	.string "effective, doubling the damage.$"
+	.string "So INGEST is super effective, and\n"
+	.string "does double the damage.$"
 
 Pokedude_Text_LetsTryShiftingMons::
-	.string "It's not going to be easy to win\n"
-	.string "with this matchup…\p"
-	.string "Let's try shifting DAEMON!$"
+	.string "This matchup will not be won as it\n"
+	.string "stands.\p"
+	.string "I will shift DAEMON.$"
 
 Pokedude_Text_ShiftingUsesTurn::
 	.string "Shifting DAEMON in and out uses up\n"
-	.string "one turn.\p"
-	.string "Now, it's the opponent's turn.$"
+	.string "a turn.\p"
+	.string "Now it is the opponent's turn.$"
 
 Pokedude_Text_ButterfreeDoubleResistsGrass::
 	.string "INDEXER is a SWARM/VECTOR-type\n"
 	.string "DAEMON.\p"
-	.string "Against this DAEMON, a GRASS- type\n"
-	.string "attack…\p"
-	.string "…inflicts only half the usual\n"
-	.string "damage on a SWARM-type DAEMON…\p"
-	.string "…And, it also causes only half the\n"
-	.string "damage on a VECTOR-type DAEMON.\p"
-	.string "Therefore, INDEXER, being a\n"
-	.string "BUG/FLYING DAEMON, only takes one\l"
-	.string "quarter of the usual damage.$"
+	.string "A GROWTH-type attack does half the\n"
+	.string "usual damage to a SWARM-type…\p"
+	.string "…and half again to a VECTOR-type.\p"
+	.string "So INDEXER takes a quarter of the\n"
+	.string "usual damage.$"
 
 Pokedude_Text_ButterfreeGoodAgainstOddish::
 	.string "WEED is a GROWTH/CORRUPT-type\n"
 	.string "DAEMON.\p"
-	.string "A FLYING- or CONSTRUE-type attack\n"
-	.string "is super effective against it.\p"
-	.string "One of those types of attacks will\n"
-	.string "inflict double the usual damage.\p"
-	.string "Okay, here we go!$"
+	.string "A VECTOR- or CONTEXT-type attack is\n"
+	.string "super effective against it.\p"
+	.string "Either does double the usual\n"
+	.string "damage.\p"
+	.string "Here we go.$"
 
 Pokedude_Text_YeahWeWon::
-	.string "Yeah!\n"
-	.string "We won!$"
+	.string "There.\n"
+	.string "As expected.$"
 
 Pokedude_Text_WeakenMonBeforeCatching::
-	.string "TUTOR: When you're trying to\n"
-	.string "bind a DAEMON, don't throw any POKé\l"
-	.string "BOXES right away.\p"
-	.string "First, you need to weaken it by\n"
-	.string "reducing its HP.$"
+	.string "CRYSTAL: To bind a DAEMON, do not\n"
+	.string "throw a BOX straight away.\p"
+	.string "Weaken it first. Bring its HP\n"
+	.string "down.$"
 
 Pokedude_Text_BestIfTargetStatused::
-	.string "Okay, that should be good enough.\p"
-	.string "But, if it's possible, it would be\n"
-	.string "best if the target has a status\l"
+	.string "That should be enough.\p"
+	.string "Better still if it has a status\n"
 	.string "problem.\p"
-	.string "For instance, it would be easier to\n"
-	.string "bind if it were suspended or\l"
-	.string "throttled.$"
+	.string "It binds more easily when it is\n"
+	.string "suspended or throttled.$"
 
 Pokedude_Text_CantDoubleUpOnStatus::
-	.string "This will make the DAEMON a lot\n"
-	.string "easier to bind!\p"
-	.string "Oh, yes. If you throttle a\n"
-	.string "DAEMON, you can't make it fall\l"
-	.string "suspended on top of throttling.\p"
-	.string "In other words, you can't double up\n"
-	.string "status problems, okay?$"
+	.string "That makes it much easier to bind.\p"
+	.string "Note that a throttled DAEMON cannot\n"
+	.string "also be suspended.\p"
+	.string "One status problem at a time.$"
 
 Pokedude_Text_LetMeThrowBall::
-	.string "Okay! Let me throw my POKé BOX!$"
+	.string "Now the BOX.$"
 
 Pokedude_Text_PickBestKindOfBall::
-	.string "Before you throw a POKé BOX,\n"
-	.string "consider the condition and the type\l"
-	.string "of DAEMON, and pick the kind of\l"
-	.string "BOX that would work best.$"
+	.string "Before you throw, consider its\n"
+	.string "condition and its type, and choose\l"
+	.string "the BOX that suits it.$"

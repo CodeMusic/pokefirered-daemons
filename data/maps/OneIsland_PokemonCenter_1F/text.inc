@@ -280,29 +280,22 @@ OneIsland_PokemonCenter_1F_Text_CelioHearingRumorsAboutYou::
     .string "about you.$"
 
 OneIsland_PokemonCenter_1F_Text_BillsFirstMonWasAbra::
-    .string "{PLAYER}, what's your favorite kind\n"
-    .string "of DAEMON?\p"
-    .string "HOLT is an ARCHIVIST, so he loves\n"
-    .string "every kind.\p"
-    .string "Apparently, the first one he bound\n"
-    .string "was a HUNCH.$"
+	.string "HOLT is an ARCHIVIST, so he loves\n"
+	.string "every kind.\p"
+	.string "The first one he bound is still\n"
+	.string "in his party.\p"
+	.string "He has never said which.$"
 
 OneIsland_PokemonCenter_1F_Text_BillsHometownInGoldenrod::
-    .string "By the way, {PLAYER}, you're from\n"
-    .string "BLANCHE TOWN, aren't you?\p"
-    .string "I've heard that it's a quiet and\n"
-    .string "pleasant place.\p"
-    .string "HOLT's hometown is GOLDENROD CITY,\n"
-    .string "where his folks still live.\p"
-    .string "I've heard that it's quite the\n"
-    .string "festive, bustling city.\p"
-    .string "I'd like to go there one day.$"
+	.string "HOLT works alone at DEADSTACK's\n"
+	.string "far end.\p"
+	.string "People visit. He is always glad.\n"
+	.string "Nobody stays long.$"
 
 OneIsland_PokemonCenter_1F_Text_BillCantStomachMilk::
-    .string "{PLAYER}, is there anything that\n"
-    .string "you can't stand?\p"
-    .string "Apparently, HOLT simply can't\n"
-    .string "stomach milk at all.$"
+	.string "They say the machine could not\n"
+	.string "tell which one to send back.\p"
+	.string "He does not discuss it.$"
 
 OneIsland_PokemonCenter_1F_Text_CameFromPalletDontKnowIt::
     .string "Oh, you're a stranger here! Hi!\n"

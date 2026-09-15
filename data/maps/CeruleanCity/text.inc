@@ -172,9 +172,7 @@ CeruleanCity_Text_BikeShopSign::
     .string "BIKE SHOP$"
 
 CeruleanCity_Text_GymSign::
-    .string "DOLDRUM CITY\n"
-    .string "BENCHMARK\l"
-    .string "LEADER: BASIN\p"
-    .string "The Tomboyish\n"
-    .string "Mermaid!$"
+	.string "DOLDRUM CITY BENCHMARK\n"
+	.string "LEADER: BASIN\p"
+	.string "Keep Going Down And You Arrive$"
 

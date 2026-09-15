@@ -20,13 +20,17 @@ SaffronCity_Gym_Text_SabrinaPostBattle::
     .string "People just don't realize it.$"
 
 SaffronCity_Gym_Text_ExplainMarshBadgeTakeThis::
-    .string "The FRAME MARK makes DAEMON up to\n"
-    .string "L70 obey you!\p"
-    .string "Stronger DAEMON will become wild,\n"
-    .string "ignoring your orders in battle!\p"
-    .string "Just don't raise your DAEMON too\n"
-    .string "much!\p"
-    .string "Wait, please take this TM with you!$"
+	.string "The FRAME MARK makes DAEMON up to\n"
+	.string "L70 obey you!\p"
+	.string "Stronger DAEMON will ignore your\n"
+	.string "orders in battle.\p"
+	.string "I watched where you were looking.\n"
+	.string "It was not where I was pointing.\p"
+	.string "That is how you won.\p"
+	.string "BRAZEN pays for this BENCHMARK.\n"
+	.string "I don't pretend otherwise.\p"
+	.string "I still decide what happens in\n"
+	.string "it. Please take this TM.$"
 
 SaffronCity_Gym_Text_ReceivedTM04FromSabrina::
     .string "{PLAYER} received TM04 from\n"
@@ -85,8 +89,10 @@ SaffronCity_Gym_Text_TyronDefeat::
     .string "I don't believe this!$"
 
 SaffronCity_Gym_Text_TyronPostBattle::
-    .string "MATTE just wiped out the KARATE\n"
-    .string "MASTER next door.$"
+	.string "The DOJO next door challenged\n"
+	.string "MATTE. She won in four turns.\p"
+	.string "Then she told them the three\n"
+	.string "things they hadn't looked at.$"
 
 SaffronCity_Gym_Text_TashaIntro::
     .string "You and I, our DAEMON shall\n"

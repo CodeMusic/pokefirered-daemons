@@ -18,17 +18,20 @@ CeladonCity_Gym_Text_ErikaDefeat::
     .string "I must confer you the FIT MARK.$"
 
 CeladonCity_Gym_Text_ErikaPostBattle::
-    .string "You are cataloging DAEMON? I must\n"
-    .string "say I'm impressed.\p"
-    .string "I would never collect DAEMONS if\n"
-    .string "they were unattractive.$"
+	.string "You are cataloguing DAEMON?\n"
+	.string "All of them?\p"
+	.string "How do you know which ones are\n"
+	.string "right?$"
 
 CeladonCity_Gym_Text_ExplainRainbowBadgeTakeThis::
-    .string "The FIT MARK will make DAEMON up\n"
-    .string "to L50 obey.\p"
-    .string "It also allows DAEMON to use\n"
-    .string "DISPLACE in and out of battle.\p"
-    .string "Please also take this with you.$"
+	.string "The FIT MARK will make DAEMON up\n"
+	.string "to L50 obey.\p"
+	.string "It also allows DAEMON to use\n"
+	.string "DISPLACE in and out of battle.\p"
+	.string "GROWTH. You train the thing on the\n"
+	.string "shape you want.\p"
+	.string "It is not complicated. Please also\n"
+	.string "take this with you.$"
 
 CeladonCity_Gym_Text_ReceivedTM19FromErika::
     .string "{PLAYER} received TM19\n"
@@ -90,10 +93,10 @@ CeladonCity_Gym_Text_TamiaDefeat::
     .string "No!$"
 
 CeladonCity_Gym_Text_TamiaPostBattle::
-    .string "We only use GROWTH-type DAEMON at\n"
-    .string "our BENCHMARK.\p"
-    .string "Why? We also use them for making\n"
-    .string "flower arrangements!$"
+	.string "Each of us uses one type, and each\n"
+	.string "of us beats the one before.\p"
+	.string "TRELLIS says that is how you learn\n"
+	.string "a shape. It is a very good shape.$"
 
 CeladonCity_Gym_Text_LisaIntro::
     .string "Oh, hey!\p"
@@ -105,8 +108,10 @@ CeladonCity_Gym_Text_LisaDefeat::
     .string "You!$"
 
 CeladonCity_Gym_Text_LisaPostBattle::
-    .string "Our LEADER TRELLIS might be quiet,\n"
-    .string "but she's famous around here.$"
+	.string "TRELLIS can train a vine into any\n"
+	.string "letter of the alphabet.\p"
+	.string "She has never wanted it to grow\n"
+	.string "anything else.$"
 
 CeladonCity_Gym_Text_LoriIntro::
     .string "Pleased to meet you. My hobby is\n"

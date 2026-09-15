@@ -1,7 +1,8 @@
 CinnabarIsland_Gym_Text_PhotoOfBlaineAndFuji::
-    .string "It's a photo of ANNEAL and INIT.\p"
-    .string "They're standing shoulder to\n"
-    .string "shoulder with big grins.$"
+	.string "A photo of ANNEAL and INIT, both\n"
+	.string "laughing at a quiz card.\p"
+	.string "The answer is written on the back,\n"
+	.string "and crossed out.$"
 
 CinnabarIsland_PokemonLab_Entrance_Text_StudyMonsExtensively::
     .string "We study DAEMONS extensively every\n"

@@ -5920,7 +5920,7 @@
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A stream is data read as it\\narrives. This one carries the\\nTUTOR, and a show per MARK.",
+      "description_english": "A stream is data read as it\\narrives. This one carries recorded\\nlectures, one per MARK.",
       "importance": 1,
       "registrability": 1,
       "pocket": "POCKET_KEY_ITEMS",

@@ -84,7 +84,6 @@ MtMoon_1F_Text_ZubatIsABloodsucker::
     .string "Beware! ECHO is a bloodsucker!$"
 
 MtMoon_1F_Text_BrockHelpsExcavateFossils::
-    .string "Hi, I'm excavating for fossils here\n"
-    .string "under DEADSTACK.\p"
-    .string "Sometimes, CAIRN of SLATE\n"
-    .string "BENCHMARK lends me a hand.$"
+	.string "I dig CORES out of DEADSTACK.\n"
+	.string "CAIRN comes down some weekends.\p"
+	.string "He labels everything twice.$"

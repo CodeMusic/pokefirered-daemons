@@ -22,21 +22,16 @@ IndigoPlateau_PokemonCenter_1F_Text_LoreleiIsAbsentClosedForTimeBeing::
     .string "closed for the time being.$"
 
 IndigoPlateau_PokemonCenter_1F_Text_AgathaWhuppedUs::
-    .string "MELANCHOLIC's LATENT daemons are\n"
-    .string "horrifically terrifying in toughness.\p"
-    .string "I took my LOGIC-type DAEMON and\n"
-    .string "raised them to the max.\p"
-    .string "I went at MELANCHOLIC feeling\n"
-    .string "confident, but she whupped us.\p"
-    .string "That old lady's also got a really\n"
-    .string "short fuse, too.\p"
-    .string "It doesn't take anything to get that\n"
-    .string "scary lady hollering.$"
+	.string "MELANCHOLIC's LATENT daemons\n"
+	.string "don't look like much until they\l"
+	.string "do.\p"
+	.string "I went in confident. She let me.\p"
+	.string "Then she beat me, and asked after\n"
+	.string "my mother.$"
 
 IndigoPlateau_PokemonCenter_1F_Text_LancesCousinGymLeaderFarAway::
-	.string "Maybe becoming a REVIEW BOARD\n"
-	.string "member is in the blood.\p"
-	.string "From what I've heard, SANGUINE has\n"
-	.string "a cousin who's a BENCHMARK LEADER\l"
-	.string "somewhere far away.$"
+	.string "SANGUINE lets his DAEMON pick\n"
+	.string "their own ROUTINES sometimes.\p"
+	.string "It loses him battles. He says it\n"
+	.string "wins him surprises.$"
 

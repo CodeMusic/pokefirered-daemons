@@ -55,14 +55,13 @@ TwoIsland_Text_ShopkeepersBrotherWorksGameCorner::
     .string "so they can buy more merchandise.$"
 
 TwoIsland_Text_BrunoCameToIslandWhileBack::
-    .string "Listen, listen. Did you know?\p"
-    .string "A famous USER came to the ISLAND\n"
-    .string "a little while back.\p"
-    .string "He's one of the REVIEW BOARD. His\n"
-    .string "name is CHOLERIC.\p"
-    .string "He went away disappointed when he\n"
-    .string "found out that they were all sold\l"
-    .string "out of Rage Candybars.$"
+	.string "Listen, listen. Did you know?\p"
+	.string "CHOLERIC of the REVIEW BOARD came\n"
+	.string "here a while back.\p"
+	.string "He argued with the ferryman\n"
+	.string "about the tide.\p"
+	.string "The tide came in anyway.\n"
+	.string "He apologised to it.$"
 
 TwoIsland_Text_BuyRareItemsHere::
     .string "The discerning USER knows to buy\n"
