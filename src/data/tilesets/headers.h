@@ -769,3 +769,25 @@ const struct Tileset gTileset_PlayersHouse =
     .metatileAttributes = gMetatileAttributes_PlayersHouse,
     .callback = NULL,
 };
+// T-103: Checkpoint, rethemed and replanned.
+const struct Tileset gTileset_Checkpoint =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_Checkpoint,
+    .palettes = gTilesetPalettes_Checkpoint,
+    .metatiles = gMetatiles_Checkpoint,
+    .metatileAttributes = gMetatileAttributes_Checkpoint,
+    .callback = NULL,
+};
+// T-103: Repo, rethemed and replanned.
+const struct Tileset gTileset_Repo =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_Repo,
+    .palettes = gTilesetPalettes_Repo,
+    .metatiles = gMetatiles_Repo,
+    .metatileAttributes = gMetatileAttributes_Repo,
+    .callback = NULL,
+};

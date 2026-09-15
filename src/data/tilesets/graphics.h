@@ -1453,3 +1453,47 @@ const u16 gTilesetPalettes_PlayersHouse[][16] =
 	INCBIN_U16("data/tilesets/secondary/players_house/palettes/14.gbapal"),
 	INCBIN_U16("data/tilesets/secondary/players_house/palettes/15.gbapal"),
 };
+// T-103: Checkpoint, a tileset of its own (tools/gbainterior.py).
+const u32 gTilesetTiles_Checkpoint[] = INCBIN_U32("data/tilesets/secondary/checkpoint/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_Checkpoint[][16] =
+{
+	INCBIN_U16("data/tilesets/secondary/checkpoint/palettes/00.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/checkpoint/palettes/01.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/checkpoint/palettes/02.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/checkpoint/palettes/03.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/checkpoint/palettes/04.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/checkpoint/palettes/05.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/checkpoint/palettes/06.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/checkpoint/palettes/07.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/checkpoint/palettes/08.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/checkpoint/palettes/09.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/checkpoint/palettes/10.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/checkpoint/palettes/11.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/checkpoint/palettes/12.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/checkpoint/palettes/13.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/checkpoint/palettes/14.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/checkpoint/palettes/15.gbapal"),
+};
+// T-103: Repo, a tileset of its own (tools/gbainterior.py).
+const u32 gTilesetTiles_Repo[] = INCBIN_U32("data/tilesets/secondary/repo/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_Repo[][16] =
+{
+	INCBIN_U16("data/tilesets/secondary/repo/palettes/00.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/repo/palettes/01.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/repo/palettes/02.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/repo/palettes/03.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/repo/palettes/04.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/repo/palettes/05.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/repo/palettes/06.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/repo/palettes/07.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/repo/palettes/08.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/repo/palettes/09.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/repo/palettes/10.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/repo/palettes/11.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/repo/palettes/12.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/repo/palettes/13.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/repo/palettes/14.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/repo/palettes/15.gbapal"),
+};

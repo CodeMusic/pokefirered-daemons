@@ -205,3 +205,7 @@ const u16 gMetatiles_HallOfFame[] = INCBIN_U16("data/tilesets/secondary/hall_of_
 const u32 gMetatileAttributes_HallOfFame[] = INCBIN_U32("data/tilesets/secondary/hall_of_fame/metatile_attributes.bin");
 const u16 gMetatiles_PlayersHouse[] = INCBIN_U16("data/tilesets/secondary/players_house/metatiles.bin");
 const u32 gMetatileAttributes_PlayersHouse[] = INCBIN_U32("data/tilesets/secondary/players_house/metatile_attributes.bin");
+const u16 gMetatiles_Checkpoint[] = INCBIN_U16("data/tilesets/secondary/checkpoint/metatiles.bin");
+const u32 gMetatileAttributes_Checkpoint[] = INCBIN_U32("data/tilesets/secondary/checkpoint/metatile_attributes.bin");
+const u16 gMetatiles_Repo[] = INCBIN_U16("data/tilesets/secondary/repo/metatiles.bin");
+const u32 gMetatileAttributes_Repo[] = INCBIN_U32("data/tilesets/secondary/repo/metatile_attributes.bin");
