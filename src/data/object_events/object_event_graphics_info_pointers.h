@@ -151,6 +151,16 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_DeoxysA;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_DeoxysN;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SSAnne;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Owl;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_StaffSlate;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_StaffDoldrumSwimmer;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_StaffDoldrumPicnicker;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_StaffArdor;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_StaffVerdigris;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_StaffLurid;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_StaffBrazen;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_StaffQuicksilver;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_StaffCallow;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BenchmarkGuide;
 
 
 const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM_OBJ_EVENT_GFX] = {
@@ -307,4 +317,14 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_DEOXYS_N]                 = &gObjectEventGraphicsInfo_DeoxysN,
     [OBJ_EVENT_GFX_SS_ANNE]                  = &gObjectEventGraphicsInfo_SSAnne,
     [OBJ_EVENT_GFX_OWL]                      = &gObjectEventGraphicsInfo_Owl,
+    [OBJ_EVENT_GFX_STAFF_SLATE               ] = &gObjectEventGraphicsInfo_StaffSlate,
+    [OBJ_EVENT_GFX_STAFF_DOLDRUM_SWIMMER     ] = &gObjectEventGraphicsInfo_StaffDoldrumSwimmer,
+    [OBJ_EVENT_GFX_STAFF_DOLDRUM_PICNICKER   ] = &gObjectEventGraphicsInfo_StaffDoldrumPicnicker,
+    [OBJ_EVENT_GFX_STAFF_ARDOR               ] = &gObjectEventGraphicsInfo_StaffArdor,
+    [OBJ_EVENT_GFX_STAFF_VERDIGRIS           ] = &gObjectEventGraphicsInfo_StaffVerdigris,
+    [OBJ_EVENT_GFX_STAFF_LURID               ] = &gObjectEventGraphicsInfo_StaffLurid,
+    [OBJ_EVENT_GFX_STAFF_BRAZEN              ] = &gObjectEventGraphicsInfo_StaffBrazen,
+    [OBJ_EVENT_GFX_STAFF_QUICKSILVER         ] = &gObjectEventGraphicsInfo_StaffQuicksilver,
+    [OBJ_EVENT_GFX_STAFF_CALLOW              ] = &gObjectEventGraphicsInfo_StaffCallow,
+    [OBJ_EVENT_GFX_BENCHMARK_GUIDE           ] = &gObjectEventGraphicsInfo_BenchmarkGuide,
 };

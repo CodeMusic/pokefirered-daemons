@@ -166,6 +166,16 @@
 #define TRAINER_PIC_RUIN_MANIAC           145
 #define TRAINER_PIC_LADY                  146
 #define TRAINER_PIC_PAINTER               147
+// The BENCHMARK staff, as a fable (T-116): one portrait per gym, DOLDRUM two
+#define TRAINER_PIC_STAFF_SLATE            148
+#define TRAINER_PIC_STAFF_DOLDRUM_SWIMMER  149
+#define TRAINER_PIC_STAFF_DOLDRUM_PICNICKER 150
+#define TRAINER_PIC_STAFF_ARDOR            151
+#define TRAINER_PIC_STAFF_VERDIGRIS        152
+#define TRAINER_PIC_STAFF_LURID            153
+#define TRAINER_PIC_STAFF_BRAZEN           154
+#define TRAINER_PIC_STAFF_QUICKSILVER      155
+#define TRAINER_PIC_STAFF_CALLOW           156
 
 // The player back pics are assumed to alternate according to the gender values (MALE/FEMALE)
 #define TRAINER_BACK_PIC_RED                    0

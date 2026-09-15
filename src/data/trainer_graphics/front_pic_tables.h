@@ -148,6 +148,15 @@ const struct MonCoords gTrainerFrontPicCoords[] =
     {.size = 8, .y_offset = 1},
     {.size = 8, .y_offset = 1},
     {.size = 8, .y_offset = 1},
+    {.size = 8, .y_offset = 1},   // TRAINER_PIC_STAFF_SLATE
+    {.size = 8, .y_offset = 1},   // TRAINER_PIC_STAFF_DOLDRUM_SWIMMER
+    {.size = 8, .y_offset = 1},   // TRAINER_PIC_STAFF_DOLDRUM_PICNICKER
+    {.size = 8, .y_offset = 1},   // TRAINER_PIC_STAFF_ARDOR
+    {.size = 8, .y_offset = 1},   // TRAINER_PIC_STAFF_VERDIGRIS
+    {.size = 8, .y_offset = 1},   // TRAINER_PIC_STAFF_LURID
+    {.size = 8, .y_offset = 1},   // TRAINER_PIC_STAFF_BRAZEN
+    {.size = 8, .y_offset = 1},   // TRAINER_PIC_STAFF_QUICKSILVER
+    {.size = 8, .y_offset = 1},   // TRAINER_PIC_STAFF_CALLOW
 };
 
 const struct CompressedSpriteSheet gTrainerFrontPicTable[] =
@@ -300,6 +309,15 @@ const struct CompressedSpriteSheet gTrainerFrontPicTable[] =
     TRAINER_SPRITE(RUIN_MANIAC, gTrainerFrontPic_RuinManiac, 0x800),
     TRAINER_SPRITE(LADY, gTrainerFrontPic_Lady, 0x800),
     TRAINER_SPRITE(PAINTER, gTrainerFrontPic_Painter, 0x800),
+    TRAINER_SPRITE(STAFF_SLATE, gTrainerFrontPic_StaffSlate, 0x800),
+    TRAINER_SPRITE(STAFF_DOLDRUM_SWIMMER, gTrainerFrontPic_StaffDoldrumSwimmer, 0x800),
+    TRAINER_SPRITE(STAFF_DOLDRUM_PICNICKER, gTrainerFrontPic_StaffDoldrumPicnicker, 0x800),
+    TRAINER_SPRITE(STAFF_ARDOR, gTrainerFrontPic_StaffArdor, 0x800),
+    TRAINER_SPRITE(STAFF_VERDIGRIS, gTrainerFrontPic_StaffVerdigris, 0x800),
+    TRAINER_SPRITE(STAFF_LURID, gTrainerFrontPic_StaffLurid, 0x800),
+    TRAINER_SPRITE(STAFF_BRAZEN, gTrainerFrontPic_StaffBrazen, 0x800),
+    TRAINER_SPRITE(STAFF_QUICKSILVER, gTrainerFrontPic_StaffQuicksilver, 0x800),
+    TRAINER_SPRITE(STAFF_CALLOW, gTrainerFrontPic_StaffCallow, 0x800),
 };
 
 const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[] =
@@ -452,4 +470,13 @@ const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[] =
     TRAINER_PAL(RUIN_MANIAC, gTrainerPalette_RuinManiac),
     TRAINER_PAL(LADY, gTrainerPalette_Lady),
     TRAINER_PAL(PAINTER, gTrainerPalette_Painter),
+    TRAINER_PAL(STAFF_SLATE, gTrainerPalette_StaffSlate),
+    TRAINER_PAL(STAFF_DOLDRUM_SWIMMER, gTrainerPalette_StaffDoldrumSwimmer),
+    TRAINER_PAL(STAFF_DOLDRUM_PICNICKER, gTrainerPalette_StaffDoldrumPicnicker),
+    TRAINER_PAL(STAFF_ARDOR, gTrainerPalette_StaffArdor),
+    TRAINER_PAL(STAFF_VERDIGRIS, gTrainerPalette_StaffVerdigris),
+    TRAINER_PAL(STAFF_LURID, gTrainerPalette_StaffLurid),
+    TRAINER_PAL(STAFF_BRAZEN, gTrainerPalette_StaffBrazen),
+    TRAINER_PAL(STAFF_QUICKSILVER, gTrainerPalette_StaffQuicksilver),
+    TRAINER_PAL(STAFF_CALLOW, gTrainerPalette_StaffCallow),
 };

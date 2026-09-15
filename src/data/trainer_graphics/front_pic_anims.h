@@ -738,6 +738,51 @@ static const union AnimCmd *const sAnims_Painter[] =
     sAnim_GeneralFrame0,
 };
 
+static const union AnimCmd *const sAnims_StaffSlate[] =
+{
+    sAnim_GeneralFrame0,
+};
+
+static const union AnimCmd *const sAnims_StaffDoldrumSwimmer[] =
+{
+    sAnim_GeneralFrame0,
+};
+
+static const union AnimCmd *const sAnims_StaffDoldrumPicnicker[] =
+{
+    sAnim_GeneralFrame0,
+};
+
+static const union AnimCmd *const sAnims_StaffArdor[] =
+{
+    sAnim_GeneralFrame0,
+};
+
+static const union AnimCmd *const sAnims_StaffVerdigris[] =
+{
+    sAnim_GeneralFrame0,
+};
+
+static const union AnimCmd *const sAnims_StaffLurid[] =
+{
+    sAnim_GeneralFrame0,
+};
+
+static const union AnimCmd *const sAnims_StaffBrazen[] =
+{
+    sAnim_GeneralFrame0,
+};
+
+static const union AnimCmd *const sAnims_StaffQuicksilver[] =
+{
+    sAnim_GeneralFrame0,
+};
+
+static const union AnimCmd *const sAnims_StaffCallow[] =
+{
+    sAnim_GeneralFrame0,
+};
+
 const union AnimCmd *const *const gTrainerFrontAnimsPtrTable[] =
 {
     [TRAINER_PIC_AQUA_LEADER_ARCHIE]    = sAnims_AquaLeaderArchie,
@@ -888,4 +933,13 @@ const union AnimCmd *const *const gTrainerFrontAnimsPtrTable[] =
     [TRAINER_PIC_RUIN_MANIAC]           = sAnims_RuinManiac,
     [TRAINER_PIC_LADY]                  = sAnims_Lady,
     [TRAINER_PIC_PAINTER]               = sAnims_Painter,
+    [TRAINER_PIC_STAFF_SLATE           ] = sAnims_StaffSlate,
+    [TRAINER_PIC_STAFF_DOLDRUM_SWIMMER ] = sAnims_StaffDoldrumSwimmer,
+    [TRAINER_PIC_STAFF_DOLDRUM_PICNICKER] = sAnims_StaffDoldrumPicnicker,
+    [TRAINER_PIC_STAFF_ARDOR           ] = sAnims_StaffArdor,
+    [TRAINER_PIC_STAFF_VERDIGRIS       ] = sAnims_StaffVerdigris,
+    [TRAINER_PIC_STAFF_LURID           ] = sAnims_StaffLurid,
+    [TRAINER_PIC_STAFF_BRAZEN          ] = sAnims_StaffBrazen,
+    [TRAINER_PIC_STAFF_QUICKSILVER     ] = sAnims_StaffQuicksilver,
+    [TRAINER_PIC_STAFF_CALLOW          ] = sAnims_StaffCallow,
 };
