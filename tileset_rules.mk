@@ -163,7 +163,7 @@ $(TILESETGFXDIR)/secondary/fuchsia_city/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 299 -Wnum_tiles
 
 $(TILESETGFXDIR)/secondary/mart/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 36 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 71 -Wnum_tiles
 
 $(TILESETGFXDIR)/secondary/museum/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 137 -Wnum_tiles
