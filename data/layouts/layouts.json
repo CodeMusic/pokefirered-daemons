@@ -141,7 +141,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_CeruleanGym",
+      "secondary_tileset": "gTileset_DoldrumBenchmark",
       "border_filepath": "data/layouts/CeruleanCity_Gym/border.bin",
       "blockdata_filepath": "data/layouts/CeruleanCity_Gym/map.bin"
     },

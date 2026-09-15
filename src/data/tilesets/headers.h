@@ -824,3 +824,14 @@ const struct Tileset gTileset_SlateBenchmark =
     .metatileAttributes = gMetatileAttributes_SlateBenchmark,
     .callback = NULL,
 };
+// T-103: DoldrumBenchmark, rethemed and replanned.
+const struct Tileset gTileset_DoldrumBenchmark =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_DoldrumBenchmark,
+    .palettes = gTilesetPalettes_DoldrumBenchmark,
+    .metatiles = gMetatiles_DoldrumBenchmark,
+    .metatileAttributes = gMetatileAttributes_DoldrumBenchmark,
+    .callback = NULL,
+};
