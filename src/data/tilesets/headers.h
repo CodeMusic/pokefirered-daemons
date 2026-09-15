@@ -879,3 +879,14 @@ const struct Tileset gTileset_BrazenBenchmark =
     .metatileAttributes = gMetatileAttributes_BrazenBenchmark,
     .callback = NULL,
 };
+// T-103: QuicksilverBenchmark, rethemed and replanned.
+const struct Tileset gTileset_QuicksilverBenchmark =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_QuicksilverBenchmark,
+    .palettes = gTilesetPalettes_QuicksilverBenchmark,
+    .metatiles = gMetatiles_QuicksilverBenchmark,
+    .metatileAttributes = gMetatileAttributes_QuicksilverBenchmark,
+    .callback = NULL,
+};
