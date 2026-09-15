@@ -17,7 +17,7 @@
   "object_events": [
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_WORKER_F",
+      "graphics_id": "OBJ_EVENT_GFX_TOWN_VERDIGRIS_ADULT",
       "x": 4,
       "y": 2,
       "elevation": 3,
@@ -31,7 +31,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_WORKER_M",
+      "graphics_id": "OBJ_EVENT_GFX_TOWN_VERDIGRIS_ADULT",
       "x": 6,
       "y": 2,
       "elevation": 3,
@@ -45,7 +45,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_BALDING_MAN",
+      "graphics_id": "OBJ_EVENT_GFX_TOWN_VERDIGRIS_ADULT",
       "x": 1,
       "y": 6,
       "elevation": 3,
@@ -59,7 +59,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
+      "graphics_id": "OBJ_EVENT_GFX_TOWN_VERDIGRIS_ADULT",
       "x": 1,
       "y": 8,
       "elevation": 3,
@@ -73,7 +73,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_FISHER",
+      "graphics_id": "OBJ_EVENT_GFX_TOWN_VERDIGRIS_ADULT",
       "x": 4,
       "y": 7,
       "elevation": 3,
@@ -101,7 +101,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_WOMAN_1",
+      "graphics_id": "OBJ_EVENT_GFX_TOWN_VERDIGRIS_ADULT",
       "x": 7,
       "y": 8,
       "elevation": 3,
@@ -115,7 +115,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_OLD_MAN_2",
+      "graphics_id": "OBJ_EVENT_GFX_TOWN_VERDIGRIS_ELDER",
       "x": 10,
       "y": 9,
       "elevation": 3,
@@ -143,7 +143,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
+      "graphics_id": "OBJ_EVENT_GFX_TOWN_VERDIGRIS_ADULT",
       "x": 16,
       "y": 10,
       "elevation": 3,

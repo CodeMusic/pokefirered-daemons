@@ -936,6 +936,210 @@ static const struct SpriteFrameImage sPicTable_BenchmarkGuide[] = {
     overworld_frame(gObjectEventPic_BenchmarkGuide, 2, 4, 8),
 };
 
+static const struct SpriteFrameImage sPicTable_TownUmbraAdult[] = {
+    overworld_frame(gObjectEventPic_TownUmbraAdult, 2, 4, 0),
+    overworld_frame(gObjectEventPic_TownUmbraAdult, 2, 4, 1),
+    overworld_frame(gObjectEventPic_TownUmbraAdult, 2, 4, 2),
+    overworld_frame(gObjectEventPic_TownUmbraAdult, 2, 4, 3),
+    overworld_frame(gObjectEventPic_TownUmbraAdult, 2, 4, 4),
+    overworld_frame(gObjectEventPic_TownUmbraAdult, 2, 4, 5),
+    overworld_frame(gObjectEventPic_TownUmbraAdult, 2, 4, 6),
+    overworld_frame(gObjectEventPic_TownUmbraAdult, 2, 4, 7),
+    overworld_frame(gObjectEventPic_TownUmbraAdult, 2, 4, 8),
+};
+
+static const struct SpriteFrameImage sPicTable_TownQuicksilverElder[] = {
+    overworld_frame(gObjectEventPic_TownQuicksilverElder, 2, 4, 0),
+    overworld_frame(gObjectEventPic_TownQuicksilverElder, 2, 4, 1),
+    overworld_frame(gObjectEventPic_TownQuicksilverElder, 2, 4, 2),
+    overworld_frame(gObjectEventPic_TownQuicksilverElder, 2, 4, 3),
+    overworld_frame(gObjectEventPic_TownQuicksilverElder, 2, 4, 4),
+    overworld_frame(gObjectEventPic_TownQuicksilverElder, 2, 4, 5),
+    overworld_frame(gObjectEventPic_TownQuicksilverElder, 2, 4, 6),
+    overworld_frame(gObjectEventPic_TownQuicksilverElder, 2, 4, 7),
+    overworld_frame(gObjectEventPic_TownQuicksilverElder, 2, 4, 8),
+};
+
+static const struct SpriteFrameImage sPicTable_TownQuicksilverAdult[] = {
+    overworld_frame(gObjectEventPic_TownQuicksilverAdult, 2, 4, 0),
+    overworld_frame(gObjectEventPic_TownQuicksilverAdult, 2, 4, 1),
+    overworld_frame(gObjectEventPic_TownQuicksilverAdult, 2, 4, 2),
+    overworld_frame(gObjectEventPic_TownQuicksilverAdult, 2, 4, 3),
+    overworld_frame(gObjectEventPic_TownQuicksilverAdult, 2, 4, 4),
+    overworld_frame(gObjectEventPic_TownQuicksilverAdult, 2, 4, 5),
+    overworld_frame(gObjectEventPic_TownQuicksilverAdult, 2, 4, 6),
+    overworld_frame(gObjectEventPic_TownQuicksilverAdult, 2, 4, 7),
+    overworld_frame(gObjectEventPic_TownQuicksilverAdult, 2, 4, 8),
+};
+
+static const struct SpriteFrameImage sPicTable_TownQuicksilverChild[] = {
+    overworld_frame(gObjectEventPic_TownQuicksilverChild, 2, 4, 0),
+    overworld_frame(gObjectEventPic_TownQuicksilverChild, 2, 4, 1),
+    overworld_frame(gObjectEventPic_TownQuicksilverChild, 2, 4, 2),
+    overworld_frame(gObjectEventPic_TownQuicksilverChild, 2, 4, 3),
+    overworld_frame(gObjectEventPic_TownQuicksilverChild, 2, 4, 4),
+    overworld_frame(gObjectEventPic_TownQuicksilverChild, 2, 4, 5),
+    overworld_frame(gObjectEventPic_TownQuicksilverChild, 2, 4, 6),
+    overworld_frame(gObjectEventPic_TownQuicksilverChild, 2, 4, 7),
+    overworld_frame(gObjectEventPic_TownQuicksilverChild, 2, 4, 8),
+};
+
+static const struct SpriteFrameImage sPicTable_TownBrazenAdult[] = {
+    overworld_frame(gObjectEventPic_TownBrazenAdult, 2, 4, 0),
+    overworld_frame(gObjectEventPic_TownBrazenAdult, 2, 4, 1),
+    overworld_frame(gObjectEventPic_TownBrazenAdult, 2, 4, 2),
+    overworld_frame(gObjectEventPic_TownBrazenAdult, 2, 4, 3),
+    overworld_frame(gObjectEventPic_TownBrazenAdult, 2, 4, 4),
+    overworld_frame(gObjectEventPic_TownBrazenAdult, 2, 4, 5),
+    overworld_frame(gObjectEventPic_TownBrazenAdult, 2, 4, 6),
+    overworld_frame(gObjectEventPic_TownBrazenAdult, 2, 4, 7),
+    overworld_frame(gObjectEventPic_TownBrazenAdult, 2, 4, 8),
+};
+
+static const struct SpriteFrameImage sPicTable_TownBrazenChild[] = {
+    overworld_frame(gObjectEventPic_TownBrazenChild, 2, 4, 0),
+    overworld_frame(gObjectEventPic_TownBrazenChild, 2, 4, 1),
+    overworld_frame(gObjectEventPic_TownBrazenChild, 2, 4, 2),
+    overworld_frame(gObjectEventPic_TownBrazenChild, 2, 4, 3),
+    overworld_frame(gObjectEventPic_TownBrazenChild, 2, 4, 4),
+    overworld_frame(gObjectEventPic_TownBrazenChild, 2, 4, 5),
+    overworld_frame(gObjectEventPic_TownBrazenChild, 2, 4, 6),
+    overworld_frame(gObjectEventPic_TownBrazenChild, 2, 4, 7),
+    overworld_frame(gObjectEventPic_TownBrazenChild, 2, 4, 8),
+};
+
+static const struct SpriteFrameImage sPicTable_TownLuridElder[] = {
+    overworld_frame(gObjectEventPic_TownLuridElder, 2, 4, 0),
+    overworld_frame(gObjectEventPic_TownLuridElder, 2, 4, 1),
+    overworld_frame(gObjectEventPic_TownLuridElder, 2, 4, 2),
+    overworld_frame(gObjectEventPic_TownLuridElder, 2, 4, 3),
+    overworld_frame(gObjectEventPic_TownLuridElder, 2, 4, 4),
+    overworld_frame(gObjectEventPic_TownLuridElder, 2, 4, 5),
+    overworld_frame(gObjectEventPic_TownLuridElder, 2, 4, 6),
+    overworld_frame(gObjectEventPic_TownLuridElder, 2, 4, 7),
+    overworld_frame(gObjectEventPic_TownLuridElder, 2, 4, 8),
+};
+
+static const struct SpriteFrameImage sPicTable_TownLuridAdult[] = {
+    overworld_frame(gObjectEventPic_TownLuridAdult, 2, 4, 0),
+    overworld_frame(gObjectEventPic_TownLuridAdult, 2, 4, 1),
+    overworld_frame(gObjectEventPic_TownLuridAdult, 2, 4, 2),
+    overworld_frame(gObjectEventPic_TownLuridAdult, 2, 4, 3),
+    overworld_frame(gObjectEventPic_TownLuridAdult, 2, 4, 4),
+    overworld_frame(gObjectEventPic_TownLuridAdult, 2, 4, 5),
+    overworld_frame(gObjectEventPic_TownLuridAdult, 2, 4, 6),
+    overworld_frame(gObjectEventPic_TownLuridAdult, 2, 4, 7),
+    overworld_frame(gObjectEventPic_TownLuridAdult, 2, 4, 8),
+};
+
+static const struct SpriteFrameImage sPicTable_TownLuridChild[] = {
+    overworld_frame(gObjectEventPic_TownLuridChild, 2, 4, 0),
+    overworld_frame(gObjectEventPic_TownLuridChild, 2, 4, 1),
+    overworld_frame(gObjectEventPic_TownLuridChild, 2, 4, 2),
+    overworld_frame(gObjectEventPic_TownLuridChild, 2, 4, 3),
+    overworld_frame(gObjectEventPic_TownLuridChild, 2, 4, 4),
+    overworld_frame(gObjectEventPic_TownLuridChild, 2, 4, 5),
+    overworld_frame(gObjectEventPic_TownLuridChild, 2, 4, 6),
+    overworld_frame(gObjectEventPic_TownLuridChild, 2, 4, 7),
+    overworld_frame(gObjectEventPic_TownLuridChild, 2, 4, 8),
+};
+
+static const struct SpriteFrameImage sPicTable_TownVerdigrisElder[] = {
+    overworld_frame(gObjectEventPic_TownVerdigrisElder, 2, 4, 0),
+    overworld_frame(gObjectEventPic_TownVerdigrisElder, 2, 4, 1),
+    overworld_frame(gObjectEventPic_TownVerdigrisElder, 2, 4, 2),
+    overworld_frame(gObjectEventPic_TownVerdigrisElder, 2, 4, 3),
+    overworld_frame(gObjectEventPic_TownVerdigrisElder, 2, 4, 4),
+    overworld_frame(gObjectEventPic_TownVerdigrisElder, 2, 4, 5),
+    overworld_frame(gObjectEventPic_TownVerdigrisElder, 2, 4, 6),
+    overworld_frame(gObjectEventPic_TownVerdigrisElder, 2, 4, 7),
+    overworld_frame(gObjectEventPic_TownVerdigrisElder, 2, 4, 8),
+};
+
+static const struct SpriteFrameImage sPicTable_TownVerdigrisAdult[] = {
+    overworld_frame(gObjectEventPic_TownVerdigrisAdult, 2, 4, 0),
+    overworld_frame(gObjectEventPic_TownVerdigrisAdult, 2, 4, 1),
+    overworld_frame(gObjectEventPic_TownVerdigrisAdult, 2, 4, 2),
+    overworld_frame(gObjectEventPic_TownVerdigrisAdult, 2, 4, 3),
+    overworld_frame(gObjectEventPic_TownVerdigrisAdult, 2, 4, 4),
+    overworld_frame(gObjectEventPic_TownVerdigrisAdult, 2, 4, 5),
+    overworld_frame(gObjectEventPic_TownVerdigrisAdult, 2, 4, 6),
+    overworld_frame(gObjectEventPic_TownVerdigrisAdult, 2, 4, 7),
+    overworld_frame(gObjectEventPic_TownVerdigrisAdult, 2, 4, 8),
+};
+
+static const struct SpriteFrameImage sPicTable_TownVerdigrisChild[] = {
+    overworld_frame(gObjectEventPic_TownVerdigrisChild, 2, 4, 0),
+    overworld_frame(gObjectEventPic_TownVerdigrisChild, 2, 4, 1),
+    overworld_frame(gObjectEventPic_TownVerdigrisChild, 2, 4, 2),
+    overworld_frame(gObjectEventPic_TownVerdigrisChild, 2, 4, 3),
+    overworld_frame(gObjectEventPic_TownVerdigrisChild, 2, 4, 4),
+    overworld_frame(gObjectEventPic_TownVerdigrisChild, 2, 4, 5),
+    overworld_frame(gObjectEventPic_TownVerdigrisChild, 2, 4, 6),
+    overworld_frame(gObjectEventPic_TownVerdigrisChild, 2, 4, 7),
+    overworld_frame(gObjectEventPic_TownVerdigrisChild, 2, 4, 8),
+};
+
+static const struct SpriteFrameImage sPicTable_TownHalftoneAdult[] = {
+    overworld_frame(gObjectEventPic_TownHalftoneAdult, 2, 4, 0),
+    overworld_frame(gObjectEventPic_TownHalftoneAdult, 2, 4, 1),
+    overworld_frame(gObjectEventPic_TownHalftoneAdult, 2, 4, 2),
+    overworld_frame(gObjectEventPic_TownHalftoneAdult, 2, 4, 3),
+    overworld_frame(gObjectEventPic_TownHalftoneAdult, 2, 4, 4),
+    overworld_frame(gObjectEventPic_TownHalftoneAdult, 2, 4, 5),
+    overworld_frame(gObjectEventPic_TownHalftoneAdult, 2, 4, 6),
+    overworld_frame(gObjectEventPic_TownHalftoneAdult, 2, 4, 7),
+    overworld_frame(gObjectEventPic_TownHalftoneAdult, 2, 4, 8),
+};
+
+static const struct SpriteFrameImage sPicTable_TownHalftoneChild[] = {
+    overworld_frame(gObjectEventPic_TownHalftoneChild, 2, 4, 0),
+    overworld_frame(gObjectEventPic_TownHalftoneChild, 2, 4, 1),
+    overworld_frame(gObjectEventPic_TownHalftoneChild, 2, 4, 2),
+    overworld_frame(gObjectEventPic_TownHalftoneChild, 2, 4, 3),
+    overworld_frame(gObjectEventPic_TownHalftoneChild, 2, 4, 4),
+    overworld_frame(gObjectEventPic_TownHalftoneChild, 2, 4, 5),
+    overworld_frame(gObjectEventPic_TownHalftoneChild, 2, 4, 6),
+    overworld_frame(gObjectEventPic_TownHalftoneChild, 2, 4, 7),
+    overworld_frame(gObjectEventPic_TownHalftoneChild, 2, 4, 8),
+};
+
+static const struct SpriteFrameImage sPicTable_TownArdorElder[] = {
+    overworld_frame(gObjectEventPic_TownArdorElder, 2, 4, 0),
+    overworld_frame(gObjectEventPic_TownArdorElder, 2, 4, 1),
+    overworld_frame(gObjectEventPic_TownArdorElder, 2, 4, 2),
+    overworld_frame(gObjectEventPic_TownArdorElder, 2, 4, 3),
+    overworld_frame(gObjectEventPic_TownArdorElder, 2, 4, 4),
+    overworld_frame(gObjectEventPic_TownArdorElder, 2, 4, 5),
+    overworld_frame(gObjectEventPic_TownArdorElder, 2, 4, 6),
+    overworld_frame(gObjectEventPic_TownArdorElder, 2, 4, 7),
+    overworld_frame(gObjectEventPic_TownArdorElder, 2, 4, 8),
+};
+
+static const struct SpriteFrameImage sPicTable_TownArdorAdult[] = {
+    overworld_frame(gObjectEventPic_TownArdorAdult, 2, 4, 0),
+    overworld_frame(gObjectEventPic_TownArdorAdult, 2, 4, 1),
+    overworld_frame(gObjectEventPic_TownArdorAdult, 2, 4, 2),
+    overworld_frame(gObjectEventPic_TownArdorAdult, 2, 4, 3),
+    overworld_frame(gObjectEventPic_TownArdorAdult, 2, 4, 4),
+    overworld_frame(gObjectEventPic_TownArdorAdult, 2, 4, 5),
+    overworld_frame(gObjectEventPic_TownArdorAdult, 2, 4, 6),
+    overworld_frame(gObjectEventPic_TownArdorAdult, 2, 4, 7),
+    overworld_frame(gObjectEventPic_TownArdorAdult, 2, 4, 8),
+};
+
+static const struct SpriteFrameImage sPicTable_TownArdorChild[] = {
+    overworld_frame(gObjectEventPic_TownArdorChild, 2, 4, 0),
+    overworld_frame(gObjectEventPic_TownArdorChild, 2, 4, 1),
+    overworld_frame(gObjectEventPic_TownArdorChild, 2, 4, 2),
+    overworld_frame(gObjectEventPic_TownArdorChild, 2, 4, 3),
+    overworld_frame(gObjectEventPic_TownArdorChild, 2, 4, 4),
+    overworld_frame(gObjectEventPic_TownArdorChild, 2, 4, 5),
+    overworld_frame(gObjectEventPic_TownArdorChild, 2, 4, 6),
+    overworld_frame(gObjectEventPic_TownArdorChild, 2, 4, 7),
+    overworld_frame(gObjectEventPic_TownArdorChild, 2, 4, 8),
+};
+
 static const struct SpriteFrameImage sPicTable_TownDoldrumElder[] = {
     overworld_frame(gObjectEventPic_TownDoldrumElder, 2, 4, 0),
     overworld_frame(gObjectEventPic_TownDoldrumElder, 2, 4, 1),

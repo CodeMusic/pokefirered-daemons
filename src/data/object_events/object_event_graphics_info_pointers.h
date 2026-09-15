@@ -161,6 +161,23 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_StaffBrazen;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_StaffQuicksilver;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_StaffCallow;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BenchmarkGuide;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TownUmbraAdult;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TownQuicksilverElder;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TownQuicksilverAdult;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TownQuicksilverChild;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TownBrazenAdult;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TownBrazenChild;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TownLuridElder;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TownLuridAdult;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TownLuridChild;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TownVerdigrisElder;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TownVerdigrisAdult;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TownVerdigrisChild;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TownHalftoneAdult;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TownHalftoneChild;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TownArdorElder;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TownArdorAdult;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TownArdorChild;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TownDoldrumElder;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TownDoldrumAdult;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TownDoldrumChild;
@@ -345,4 +362,21 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_TOWN_DOLDRUM_CHILD]         = &gObjectEventGraphicsInfo_TownDoldrumChild,
     [OBJ_EVENT_GFX_TOWN_DOLDRUM_ADULT]         = &gObjectEventGraphicsInfo_TownDoldrumAdult,
     [OBJ_EVENT_GFX_TOWN_DOLDRUM_ELDER]         = &gObjectEventGraphicsInfo_TownDoldrumElder,
+    [OBJ_EVENT_GFX_TOWN_ARDOR_CHILD]           = &gObjectEventGraphicsInfo_TownArdorChild,
+    [OBJ_EVENT_GFX_TOWN_ARDOR_ADULT]           = &gObjectEventGraphicsInfo_TownArdorAdult,
+    [OBJ_EVENT_GFX_TOWN_ARDOR_ELDER]           = &gObjectEventGraphicsInfo_TownArdorElder,
+    [OBJ_EVENT_GFX_TOWN_HALFTONE_CHILD]        = &gObjectEventGraphicsInfo_TownHalftoneChild,
+    [OBJ_EVENT_GFX_TOWN_HALFTONE_ADULT]        = &gObjectEventGraphicsInfo_TownHalftoneAdult,
+    [OBJ_EVENT_GFX_TOWN_VERDIGRIS_CHILD]       = &gObjectEventGraphicsInfo_TownVerdigrisChild,
+    [OBJ_EVENT_GFX_TOWN_VERDIGRIS_ADULT]       = &gObjectEventGraphicsInfo_TownVerdigrisAdult,
+    [OBJ_EVENT_GFX_TOWN_VERDIGRIS_ELDER]       = &gObjectEventGraphicsInfo_TownVerdigrisElder,
+    [OBJ_EVENT_GFX_TOWN_LURID_CHILD]           = &gObjectEventGraphicsInfo_TownLuridChild,
+    [OBJ_EVENT_GFX_TOWN_LURID_ADULT]           = &gObjectEventGraphicsInfo_TownLuridAdult,
+    [OBJ_EVENT_GFX_TOWN_LURID_ELDER]           = &gObjectEventGraphicsInfo_TownLuridElder,
+    [OBJ_EVENT_GFX_TOWN_BRAZEN_CHILD]          = &gObjectEventGraphicsInfo_TownBrazenChild,
+    [OBJ_EVENT_GFX_TOWN_BRAZEN_ADULT]          = &gObjectEventGraphicsInfo_TownBrazenAdult,
+    [OBJ_EVENT_GFX_TOWN_QUICKSILVER_CHILD]     = &gObjectEventGraphicsInfo_TownQuicksilverChild,
+    [OBJ_EVENT_GFX_TOWN_QUICKSILVER_ADULT]     = &gObjectEventGraphicsInfo_TownQuicksilverAdult,
+    [OBJ_EVENT_GFX_TOWN_QUICKSILVER_ELDER]     = &gObjectEventGraphicsInfo_TownQuicksilverElder,
+    [OBJ_EVENT_GFX_TOWN_UMBRA_ADULT]           = &gObjectEventGraphicsInfo_TownUmbraAdult,
 };

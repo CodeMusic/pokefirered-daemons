@@ -32,7 +32,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
+      "graphics_id": "OBJ_EVENT_GFX_TOWN_HALFTONE_ADULT",
       "x": 9,
       "y": 4,
       "elevation": 3,
@@ -46,7 +46,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_LASS",
+      "graphics_id": "OBJ_EVENT_GFX_TOWN_HALFTONE_CHILD",
       "x": 5,
       "y": 6,
       "elevation": 3,
@@ -60,7 +60,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_YOUNGSTER",
+      "graphics_id": "OBJ_EVENT_GFX_TOWN_HALFTONE_CHILD",
       "x": 2,
       "y": 2,
       "elevation": 3,
@@ -74,7 +74,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_BALDING_MAN",
+      "graphics_id": "OBJ_EVENT_GFX_TOWN_HALFTONE_ADULT",
       "x": 14,
       "y": 6,
       "elevation": 3,

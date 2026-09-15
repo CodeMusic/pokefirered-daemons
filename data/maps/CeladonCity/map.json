@@ -43,7 +43,7 @@
     {
       "local_id": "LOCALID_CELADON_FAT_MAN",
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_FAT_MAN",
+      "graphics_id": "OBJ_EVENT_GFX_TOWN_VERDIGRIS_ADULT",
       "x": 38,
       "y": 14,
       "elevation": 3,
@@ -72,7 +72,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_LITTLE_GIRL",
+      "graphics_id": "OBJ_EVENT_GFX_TOWN_VERDIGRIS_CHILD",
       "x": 11,
       "y": 18,
       "elevation": 3,
@@ -86,7 +86,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
+      "graphics_id": "OBJ_EVENT_GFX_TOWN_VERDIGRIS_ADULT",
       "x": 18,
       "y": 22,
       "elevation": 3,
@@ -100,7 +100,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_OLD_MAN_1",
+      "graphics_id": "OBJ_EVENT_GFX_TOWN_VERDIGRIS_ELDER",
       "x": 30,
       "y": 24,
       "elevation": 3,
@@ -114,7 +114,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_OLD_MAN_2",
+      "graphics_id": "OBJ_EVENT_GFX_TOWN_VERDIGRIS_ELDER",
       "x": 26,
       "y": 19,
       "elevation": 3,
@@ -142,7 +142,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_OLD_MAN_1",
+      "graphics_id": "OBJ_EVENT_GFX_TOWN_VERDIGRIS_ELDER",
       "x": 9,
       "y": 30,
       "elevation": 3,
@@ -185,7 +185,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_BOY",
+      "graphics_id": "OBJ_EVENT_GFX_TOWN_VERDIGRIS_CHILD",
       "x": 25,
       "y": 10,
       "elevation": 3,

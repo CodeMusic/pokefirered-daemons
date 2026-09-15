@@ -28,7 +28,7 @@
   "object_events": [
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_WOMAN_1",
+      "graphics_id": "OBJ_EVENT_GFX_TOWN_ARDOR_ADULT",
       "x": 22,
       "y": 11,
       "elevation": 3,
@@ -42,7 +42,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_OLD_MAN_1",
+      "graphics_id": "OBJ_EVENT_GFX_TOWN_ARDOR_ELDER",
       "x": 17,
       "y": 9,
       "elevation": 3,
@@ -56,7 +56,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_OLD_MAN_2",
+      "graphics_id": "OBJ_EVENT_GFX_TOWN_ARDOR_ELDER",
       "x": 36,
       "y": 10,
       "elevation": 0,
@@ -84,7 +84,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_SAILOR",
+      "graphics_id": "OBJ_EVENT_GFX_TOWN_ARDOR_ADULT",
       "x": 31,
       "y": 30,
       "elevation": 3,
@@ -99,7 +99,7 @@
     {
       "local_id": "LOCALID_VERMILION_FERRY_SAILOR",
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_SAILOR",
+      "graphics_id": "OBJ_EVENT_GFX_TOWN_ARDOR_ADULT",
       "x": 24,
       "y": 33,
       "elevation": 3,

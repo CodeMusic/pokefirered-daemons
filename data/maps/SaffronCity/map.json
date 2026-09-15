@@ -152,7 +152,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_YOUNGSTER",
+      "graphics_id": "OBJ_EVENT_GFX_TOWN_BRAZEN_CHILD",
       "x": 37,
       "y": 32,
       "elevation": 3,
@@ -166,7 +166,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_WORKER_M",
+      "graphics_id": "OBJ_EVENT_GFX_TOWN_BRAZEN_ADULT",
       "x": 21,
       "y": 23,
       "elevation": 3,
@@ -180,7 +180,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_MAN",
+      "graphics_id": "OBJ_EVENT_GFX_TOWN_BRAZEN_ADULT",
       "x": 39,
       "y": 16,
       "elevation": 3,
@@ -194,7 +194,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_BOY",
+      "graphics_id": "OBJ_EVENT_GFX_TOWN_BRAZEN_CHILD",
       "x": 44,
       "y": 22,
       "elevation": 3,
@@ -222,7 +222,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_LASS",
+      "graphics_id": "OBJ_EVENT_GFX_TOWN_BRAZEN_CHILD",
       "x": 32,
       "y": 39,
       "elevation": 3,

@@ -461,6 +461,20 @@ static const u8 gInitialMovementTypeFacingDirections[MOVEMENT_TYPES_COUNT] = {
 //  THE OWL is brown feathers, a pale face disc and a tweed waistcoat, and has
 //  the house to himself -- so his own palette, in PALSLOT_NPC_SPECIAL.
 #define OBJ_EVENT_PAL_TAG_NPC_OWL                     0x111F
+//  UMBRA's locals share one palette of the town's own (T-119).
+#define OBJ_EVENT_PAL_TAG_NPC_TOWN_UMBRA              0x1129
+//  QUICKSILVER's locals share one palette of the town's own (T-119).
+#define OBJ_EVENT_PAL_TAG_NPC_TOWN_QUICKSILVER        0x1128
+//  BRAZEN's locals share one palette of the town's own (T-119).
+#define OBJ_EVENT_PAL_TAG_NPC_TOWN_BRAZEN             0x1127
+//  LURID's locals share one palette of the town's own (T-119).
+#define OBJ_EVENT_PAL_TAG_NPC_TOWN_LURID              0x1126
+//  VERDIGRIS's locals share one palette of the town's own (T-119).
+#define OBJ_EVENT_PAL_TAG_NPC_TOWN_VERDIGRIS          0x1125
+//  HALFTONE's locals share one palette of the town's own (T-119).
+#define OBJ_EVENT_PAL_TAG_NPC_TOWN_HALFTONE           0x1124
+//  ARDOR's locals share one palette of the town's own (T-119).
+#define OBJ_EVENT_PAL_TAG_NPC_TOWN_ARDOR              0x1123
 //  DOLDRUM's locals share one palette of the town's own (T-119).
 #define OBJ_EVENT_PAL_TAG_NPC_TOWN_DOLDRUM            0x1122
 //  SLATE's locals share one palette of the town's own (T-119).
@@ -529,6 +543,13 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_DaemonSpearow,           OBJ_EVENT_PAL_TAG_DAEMON_SPEAROW},
     {gObjectEventPal_NpcClears,               OBJ_EVENT_PAL_TAG_NPC_CLEARS},
     {gObjectEventPal_NpcOwl,                  OBJ_EVENT_PAL_TAG_NPC_OWL},
+    {gObjectEventPal_NpcTownUmbra,             OBJ_EVENT_PAL_TAG_NPC_TOWN_UMBRA},
+    {gObjectEventPal_NpcTownQuicksilver,       OBJ_EVENT_PAL_TAG_NPC_TOWN_QUICKSILVER},
+    {gObjectEventPal_NpcTownBrazen,            OBJ_EVENT_PAL_TAG_NPC_TOWN_BRAZEN},
+    {gObjectEventPal_NpcTownLurid,             OBJ_EVENT_PAL_TAG_NPC_TOWN_LURID},
+    {gObjectEventPal_NpcTownVerdigris,         OBJ_EVENT_PAL_TAG_NPC_TOWN_VERDIGRIS},
+    {gObjectEventPal_NpcTownHalftone,          OBJ_EVENT_PAL_TAG_NPC_TOWN_HALFTONE},
+    {gObjectEventPal_NpcTownArdor,             OBJ_EVENT_PAL_TAG_NPC_TOWN_ARDOR},
     {gObjectEventPal_NpcTownDoldrum,           OBJ_EVENT_PAL_TAG_NPC_TOWN_DOLDRUM},
     {gObjectEventPal_NpcTownSlate,             OBJ_EVENT_PAL_TAG_NPC_TOWN_SLATE},
     {gObjectEventPal_NpcTownCallow,            OBJ_EVENT_PAL_TAG_NPC_TOWN_CALLOW},
