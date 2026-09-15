@@ -22,13 +22,13 @@ $(TILESETGFXDIR)/secondary/cable_club/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 632 -Wnum_tiles
 
 $(TILESETGFXDIR)/secondary/fuchsia_gym/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 92 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 96 -Wnum_tiles
 
 $(TILESETGFXDIR)/secondary/pewter_gym/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 207 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 211 -Wnum_tiles
 
 $(TILESETGFXDIR)/secondary/saffron_gym/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 82 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 86 -Wnum_tiles
 
 $(TILESETGFXDIR)/secondary/viridian_forest/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 101 -Wnum_tiles
@@ -73,13 +73,13 @@ $(TILESETGFXDIR)/secondary/bike_shop/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 60 -Wnum_tiles
 
 $(TILESETGFXDIR)/secondary/viridian_gym/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 90 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 94 -Wnum_tiles
 
 $(TILESETGFXDIR)/secondary/cerulean_gym/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 119 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 123 -Wnum_tiles
 
 $(TILESETGFXDIR)/secondary/cinnabar_gym/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 146 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 150 -Wnum_tiles
 
 $(TILESETGFXDIR)/secondary/unused_gatehouse_1/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 144 -Wnum_tiles
@@ -127,7 +127,7 @@ $(TILESETGFXDIR)/secondary/hoenn_building/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 383 -Wnum_tiles
 
 $(TILESETGFXDIR)/secondary/vermilion_gym/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 247 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 251 -Wnum_tiles
 
 $(TILESETGFXDIR)/secondary/ss_anne/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 245 -Wnum_tiles
@@ -178,7 +178,7 @@ $(TILESETGFXDIR)/secondary/game_corner/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 171 -Wnum_tiles
 
 $(TILESETGFXDIR)/secondary/celadon_gym/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 103 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 107 -Wnum_tiles
 
 $(TILESETGFXDIR)/secondary/dummy_2/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 2 -Wnum_tiles
