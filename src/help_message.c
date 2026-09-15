@@ -47,6 +47,17 @@ void DestroyHelpMessageWindow(u8 a0)
     }
 }
 
+// Puts the bar's tilemap back without redrawing it. Clearing a window that
+// overlapped the bar clears the bar's tiles too, so whoever cleared it calls this.
+void RefreshHelpMessageWindowTilemap(void)
+{
+    if (sHelpMessageWindowId != WINDOW_NONE)
+    {
+        PutWindowTilemap(sHelpMessageWindowId);
+        CopyWindowToVram(sHelpMessageWindowId, COPYWIN_MAP);
+    }
+}
+
 // Creates the bottom bar window that displays help text for e.g. the options in the Start menu
 void DrawHelpMessageWindowTilesById(u8 windowId)
 {

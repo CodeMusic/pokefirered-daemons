@@ -663,6 +663,7 @@ extern const u8 gText_DbgMenuMart[];
 extern const u8 gText_DbgMenuAdd[];
 extern const u8 gText_DbgMenuRemove[];
 extern const u8 gText_DbgItemsNothing[];
+extern const u8 gText_DbgItemsPocket[];
 extern const u8 gText_DbgMenuRecord[];
 extern const u8 gText_DbgMenuIslands[];
 extern const u8 gText_DbgMenuEncounter[];

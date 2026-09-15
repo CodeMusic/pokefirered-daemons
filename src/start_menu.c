@@ -767,6 +767,10 @@ static bool8 DbgRedraw(void)
     DbgSetVars();
     ClearStdWindowAndFrame(GetStartMenuWindowId(), FALSE);
     RemoveStartMenuWindow();
+    // The pages are different heights, and clearing a taller menu's frame clears
+    // the corner of the help window it covered -- the map showed through the
+    // banner. Put the banner back first, so a taller menu still draws over it.
+    RefreshHelpMessageWindowTilemap();
     DrawStartMenuInOneGo();
     sStartMenuCallback = StartCB_HandleInput;
     return FALSE;
@@ -824,9 +828,18 @@ struct DbgItems
     u16 scroll;
     u16 row;
     u8 mode;
+    u8 pocket;      // ADD lists one pocket at a time; LEFT and RIGHT change it
     u8 windowId;
     u8 listTaskId;
     u8 arrowTaskId;
+};
+
+static const u8 *const sDbgPocketNames[] = {
+    [POCKET_ITEMS]       = gText_Items2,
+    [POCKET_KEY_ITEMS]   = gText_KeyItems2,
+    [POCKET_POKE_BALLS]  = gText_PokeBalls2,
+    [POCKET_TM_CASE]     = gText_TMCase,
+    [POCKET_BERRY_POUCH] = gText_BerryPouch,
 };
 static EWRAM_DATA struct DbgItems *sDbgItems = NULL;
 
@@ -849,6 +862,8 @@ static void DbgItemsFill(struct DbgItems *d)
             continue;
         heldKey = ItemId_GetPocket(id) == POCKET_KEY_ITEMS && CheckBagHasItem(id, 1);
         if ((d->mode == DBG_ITEMS_ADD) == heldKey)
+            continue;
+        if (d->mode == DBG_ITEMS_ADD && ItemId_GetPocket(id) != d->pocket)
             continue;
         d->rows[d->count].label = ItemId_GetName(id);
         d->rows[d->count].index = id;
@@ -937,6 +952,19 @@ static void DbgItemsHide(struct DbgItems *d)
     DestroyListMenuTask(d->listTaskId, &d->scroll, &d->row);
 }
 
+// ADD names its pocket on the help banner, where the row's description was --
+// the banner is there only in HELP button mode, which is the same test the menu
+// itself makes before it prints a description.
+static void DbgItemsPrintPocket(struct DbgItems *d)
+{
+    if (d->mode != DBG_ITEMS_ADD || MenuHelpers_IsLinkActive() || InUnionRoom() == TRUE
+     || gSaveBlock2Ptr->optionsButtonMode != OPTIONS_BUTTON_MODE_HELP)
+        return;
+    StringCopy(gStringVar1, sDbgPocketNames[d->pocket]);
+    StringExpandPlaceholders(gStringVar4, gText_DbgItemsPocket);
+    PrintTextOnHelpMessageWindow(gStringVar4, COPYWIN_FULL);
+}
+
 static void DbgItemsOpen(u8 mode)
 {
     struct WindowTemplate window = SetWindowTemplateFields(0, 1, 1, 14, 9, 15, 0x008);
@@ -944,10 +972,12 @@ static void DbgItemsOpen(u8 mode)
 
     d->rows = AllocZeroed(ITEMS_COUNT * sizeof(struct ListMenuItem));
     d->mode = mode;
+    d->pocket = POCKET_ITEMS;
     d->windowId = AddWindow(&window);
     SetStdWindowBorderStyle(d->windowId, FALSE);
     sDbgItems = d;
     DbgItemsShow(d);
+    DbgItemsPrintPocket(d);
 }
 
 static void DbgItemsClose(void)
@@ -967,9 +997,24 @@ static void DbgItemsClose(void)
 static bool8 DbgItemsListCallback(void)
 {
     struct DbgItems *d = sDbgItems;
-    s32 input = ListMenu_ProcessInput(d->listTaskId);
+    s32 input;
     u16 id;
 
+    // LEFT and RIGHT jump a whole pocket, before the list sees the frame.
+    if (d->mode == DBG_ITEMS_ADD && JOY_NEW(DPAD_LEFT | DPAD_RIGHT))
+    {
+        if (JOY_NEW(DPAD_RIGHT))
+            d->pocket = d->pocket >= POCKET_BERRY_POUCH ? POCKET_ITEMS : d->pocket + 1;
+        else
+            d->pocket = d->pocket <= POCKET_ITEMS ? POCKET_BERRY_POUCH : d->pocket - 1;
+        PlaySE(SE_SELECT);
+        DbgItemsHide(d);
+        d->scroll = d->row = 0;
+        DbgItemsShow(d);
+        DbgItemsPrintPocket(d);
+        return FALSE;
+    }
+    input = ListMenu_ProcessInput(d->listTaskId);
     if (input == LIST_NOTHING_CHOSEN || input == DBG_ITEMS_NOTHING)
         return FALSE;
     if (input == LIST_CANCEL)

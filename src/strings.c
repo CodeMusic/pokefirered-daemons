@@ -187,6 +187,7 @@ const u8 gText_DbgMenuBack[] = _("BACK");
 const u8 gText_DbgMenuAdd[] = _("ADD");
 const u8 gText_DbgMenuRemove[] = _("REMOVE");
 const u8 gText_DbgItemsNothing[] = _("NOTHING HELD");
+const u8 gText_DbgItemsPocket[] = _("{STR_VAR_1}. LEFT and RIGHT change the pocket.");
 #endif
 const u8 gText_MenuExit[] = _("EXIT");
 const u8 gText_MenuRetire[] = _("RETIRE");

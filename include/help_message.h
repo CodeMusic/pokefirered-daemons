@@ -8,5 +8,6 @@ u8 CreateHelpMessageWindow(void);
 void PrintTextOnHelpMessageWindow(const u8 * text, u8 mode);
 void MapNamePopupWindowIdSetDummy(void);
 void DrawHelpMessageWindowTilesById(u8 windowId);
+void RefreshHelpMessageWindowTilemap(void);
 
 #endif //GUARD_HELP_MESSAGE_H
