@@ -59,10 +59,10 @@ FourIsland_IcefallCave_Back_Text_OkayRocketWareHouseFiveIsland::
     .string "Heheheheh!$"
 
 FourIsland_IcefallCave_Back_Text_ThankYouThisIsAwful::
-    .string "{PLAYER}, thank you.\n"
-    .string "But this is awful…\p"
+    .string "{PLAYER}, thank you.\p"
     .string "I was born and raised here on\n"
     .string "these islands.\p"
-    .string "I had no idea that those horrible\n"
-    .string "criminals were loose here…$"
+    .string "They were not cruel to the DAEMON.\n"
+    .string "They were counting them.\p"
+    .string "I am not sure yet which is worse.$"
 

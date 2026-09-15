@@ -14,8 +14,9 @@ SaffronCity_Text_SaffronBelongsToTeamRocket::
     .string "BRAZEN belongs to TEAM CORPUS!$"
 
 SaffronCity_Text_CriminalLifeMakesMeFeelAlive::
-    .string "My life as a criminal makes me feel\n"
-    .string "so alive!$"
+    .string "I'm on the growth track!\p"
+    .string "Every one of my objectives is\n"
+    .string "green. I don't know what they are!$"
 
 SaffronCity_Text_WatchWhereYoureWalking::
     .string "Ow!\n"

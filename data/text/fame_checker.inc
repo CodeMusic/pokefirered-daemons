@@ -465,9 +465,8 @@ gFameCheckerFlavorText_Agatha4::
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Family and friends?\p"
 	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}CRYSTAL's taken an interest in\n"
 	.string "you, child.\p"
-	.string "She'd sooner fiddle with her INDEX\n"
-	.string "than talk to a soul.\p"
-	.string "Mind you, she was usually right.$"
+	.string "DAEMONS are for engaging, not for\n"
+	.string "filing.$"
 
 gFameCheckerFlavorText_Agatha5::
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
