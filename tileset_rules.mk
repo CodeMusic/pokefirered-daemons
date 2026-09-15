@@ -224,3 +224,6 @@ $(TILESETGFXDIR)/secondary/slate_benchmark/tiles.4bpp: %.4bpp: %.png
 
 $(TILESETGFXDIR)/secondary/doldrum_benchmark/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 308 -Wnum_tiles
+
+$(TILESETGFXDIR)/secondary/ardor_benchmark/tiles.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 172 -Wnum_tiles

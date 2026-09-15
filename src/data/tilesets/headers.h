@@ -835,3 +835,14 @@ const struct Tileset gTileset_DoldrumBenchmark =
     .metatileAttributes = gMetatileAttributes_DoldrumBenchmark,
     .callback = NULL,
 };
+// T-103: ArdorBenchmark, rethemed and replanned.
+const struct Tileset gTileset_ArdorBenchmark =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_ArdorBenchmark,
+    .palettes = gTilesetPalettes_ArdorBenchmark,
+    .metatiles = gMetatiles_ArdorBenchmark,
+    .metatileAttributes = gMetatileAttributes_ArdorBenchmark,
+    .callback = NULL,
+};

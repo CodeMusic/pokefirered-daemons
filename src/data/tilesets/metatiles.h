@@ -217,3 +217,5 @@ const u16 gMetatiles_SlateBenchmark[] = INCBIN_U16("data/tilesets/secondary/slat
 const u32 gMetatileAttributes_SlateBenchmark[] = INCBIN_U32("data/tilesets/secondary/slate_benchmark/metatile_attributes.bin");
 const u16 gMetatiles_DoldrumBenchmark[] = INCBIN_U16("data/tilesets/secondary/doldrum_benchmark/metatiles.bin");
 const u32 gMetatileAttributes_DoldrumBenchmark[] = INCBIN_U32("data/tilesets/secondary/doldrum_benchmark/metatile_attributes.bin");
+const u16 gMetatiles_ArdorBenchmark[] = INCBIN_U16("data/tilesets/secondary/ardor_benchmark/metatiles.bin");
+const u32 gMetatileAttributes_ArdorBenchmark[] = INCBIN_U32("data/tilesets/secondary/ardor_benchmark/metatile_attributes.bin");
