@@ -237,7 +237,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_FuchsiaGym",
+      "secondary_tileset": "gTileset_LuridBenchmark",
       "border_filepath": "data/layouts/FuchsiaCity_Gym/border.bin",
       "blockdata_filepath": "data/layouts/FuchsiaCity_Gym/map.bin"
     },

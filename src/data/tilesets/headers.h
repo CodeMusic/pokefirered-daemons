@@ -857,3 +857,14 @@ const struct Tileset gTileset_VerdigrisBenchmark =
     .metatileAttributes = gMetatileAttributes_VerdigrisBenchmark,
     .callback = NULL,
 };
+// T-103: LuridBenchmark, rethemed and replanned.
+const struct Tileset gTileset_LuridBenchmark =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_LuridBenchmark,
+    .palettes = gTilesetPalettes_LuridBenchmark,
+    .metatiles = gMetatiles_LuridBenchmark,
+    .metatileAttributes = gMetatileAttributes_LuridBenchmark,
+    .callback = NULL,
+};

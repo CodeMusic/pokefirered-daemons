@@ -220,13 +220,16 @@ $(TILESETGFXDIR)/secondary/checkpoint_indigo/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 261 -Wnum_tiles
 
 $(TILESETGFXDIR)/secondary/slate_benchmark/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 263 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 261 -Wnum_tiles
 
 $(TILESETGFXDIR)/secondary/doldrum_benchmark/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 308 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 309 -Wnum_tiles
 
 $(TILESETGFXDIR)/secondary/ardor_benchmark/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 172 -Wnum_tiles
 
 $(TILESETGFXDIR)/secondary/verdigris_benchmark/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 277 -Wnum_tiles
+
+$(TILESETGFXDIR)/secondary/lurid_benchmark/tiles.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 123 -Wnum_tiles

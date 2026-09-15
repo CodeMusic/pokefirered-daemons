@@ -221,3 +221,5 @@ const u16 gMetatiles_ArdorBenchmark[] = INCBIN_U16("data/tilesets/secondary/ardo
 const u32 gMetatileAttributes_ArdorBenchmark[] = INCBIN_U32("data/tilesets/secondary/ardor_benchmark/metatile_attributes.bin");
 const u16 gMetatiles_VerdigrisBenchmark[] = INCBIN_U16("data/tilesets/secondary/verdigris_benchmark/metatiles.bin");
 const u32 gMetatileAttributes_VerdigrisBenchmark[] = INCBIN_U32("data/tilesets/secondary/verdigris_benchmark/metatile_attributes.bin");
+const u16 gMetatiles_LuridBenchmark[] = INCBIN_U16("data/tilesets/secondary/lurid_benchmark/metatiles.bin");
+const u32 gMetatileAttributes_LuridBenchmark[] = INCBIN_U32("data/tilesets/secondary/lurid_benchmark/metatile_attributes.bin");
