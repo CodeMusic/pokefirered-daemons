@@ -846,3 +846,14 @@ const struct Tileset gTileset_ArdorBenchmark =
     .metatileAttributes = gMetatileAttributes_ArdorBenchmark,
     .callback = NULL,
 };
+// T-103: VerdigrisBenchmark, rethemed and replanned.
+const struct Tileset gTileset_VerdigrisBenchmark =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_VerdigrisBenchmark,
+    .palettes = gTilesetPalettes_VerdigrisBenchmark,
+    .metatiles = gMetatiles_VerdigrisBenchmark,
+    .metatileAttributes = gMetatileAttributes_VerdigrisBenchmark,
+    .callback = NULL,
+};

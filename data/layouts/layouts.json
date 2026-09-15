@@ -177,7 +177,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_CeladonGym",
+      "secondary_tileset": "gTileset_VerdigrisBenchmark",
       "border_filepath": "data/layouts/CeladonCity_Gym/border.bin",
       "blockdata_filepath": "data/layouts/CeladonCity_Gym/map.bin"
     },
