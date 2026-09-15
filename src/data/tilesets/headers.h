@@ -868,3 +868,14 @@ const struct Tileset gTileset_LuridBenchmark =
     .metatileAttributes = gMetatileAttributes_LuridBenchmark,
     .callback = NULL,
 };
+// T-103: BrazenBenchmark, rethemed and replanned.
+const struct Tileset gTileset_BrazenBenchmark =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_BrazenBenchmark,
+    .palettes = gTilesetPalettes_BrazenBenchmark,
+    .metatiles = gMetatiles_BrazenBenchmark,
+    .metatileAttributes = gMetatileAttributes_BrazenBenchmark,
+    .callback = NULL,
+};

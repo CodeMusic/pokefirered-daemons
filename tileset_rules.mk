@@ -233,3 +233,6 @@ $(TILESETGFXDIR)/secondary/verdigris_benchmark/tiles.4bpp: %.4bpp: %.png
 
 $(TILESETGFXDIR)/secondary/lurid_benchmark/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 123 -Wnum_tiles
+
+$(TILESETGFXDIR)/secondary/brazen_benchmark/tiles.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 136 -Wnum_tiles
