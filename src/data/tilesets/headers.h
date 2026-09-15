@@ -813,3 +813,14 @@ const struct Tileset gTileset_CheckpointIndigo =
     .metatileAttributes = gMetatileAttributes_CheckpointIndigo,
     .callback = NULL,
 };
+// T-103: SlateBenchmark, rethemed and replanned.
+const struct Tileset gTileset_SlateBenchmark =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_SlateBenchmark,
+    .palettes = gTilesetPalettes_SlateBenchmark,
+    .metatiles = gMetatiles_SlateBenchmark,
+    .metatileAttributes = gMetatileAttributes_SlateBenchmark,
+    .callback = NULL,
+};

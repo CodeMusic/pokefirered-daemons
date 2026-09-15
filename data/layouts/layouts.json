@@ -311,7 +311,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_PewterGym",
+      "secondary_tileset": "gTileset_SlateBenchmark",
       "border_filepath": "data/layouts/PewterCity_Gym/border.bin",
       "blockdata_filepath": "data/layouts/PewterCity_Gym/map.bin"
     },
