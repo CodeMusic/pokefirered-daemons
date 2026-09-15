@@ -710,7 +710,9 @@ static void TeachyTvInitIo(void)
 
 static u8 TeachyTvSetupObjEventAndOam(void)
 {
-    u8 objId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_TEACHY_TV_HOST, SpriteCallbackDummy, 0, 0, 8);
+    // STREAM's presenter is CRYSTAL CLEAR (T-98): her overworld sprite, whose
+    // palette is loaded by its tag, replaces vanilla's host.
+    u8 objId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_PROF_OAK, SpriteCallbackDummy, 0, 0, 8);
     gSprites[objId].oam.priority = 2;
     gSprites[objId].invisible = 1;
     return objId;
