@@ -161,6 +161,15 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_StaffBrazen;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_StaffQuicksilver;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_StaffCallow;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BenchmarkGuide;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TownDoldrumElder;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TownDoldrumAdult;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TownDoldrumChild;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TownSlateElder;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TownSlateAdult;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TownSlateChild;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TownCallowElder;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TownCallowAdult;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TownCallowChild;
 
 
 const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM_OBJ_EVENT_GFX] = {
@@ -327,4 +336,13 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_STAFF_QUICKSILVER         ] = &gObjectEventGraphicsInfo_StaffQuicksilver,
     [OBJ_EVENT_GFX_STAFF_CALLOW              ] = &gObjectEventGraphicsInfo_StaffCallow,
     [OBJ_EVENT_GFX_BENCHMARK_GUIDE           ] = &gObjectEventGraphicsInfo_BenchmarkGuide,
+    [OBJ_EVENT_GFX_TOWN_CALLOW_CHILD]          = &gObjectEventGraphicsInfo_TownCallowChild,
+    [OBJ_EVENT_GFX_TOWN_CALLOW_ADULT]          = &gObjectEventGraphicsInfo_TownCallowAdult,
+    [OBJ_EVENT_GFX_TOWN_CALLOW_ELDER]          = &gObjectEventGraphicsInfo_TownCallowElder,
+    [OBJ_EVENT_GFX_TOWN_SLATE_CHILD]           = &gObjectEventGraphicsInfo_TownSlateChild,
+    [OBJ_EVENT_GFX_TOWN_SLATE_ADULT]           = &gObjectEventGraphicsInfo_TownSlateAdult,
+    [OBJ_EVENT_GFX_TOWN_SLATE_ELDER]           = &gObjectEventGraphicsInfo_TownSlateElder,
+    [OBJ_EVENT_GFX_TOWN_DOLDRUM_CHILD]         = &gObjectEventGraphicsInfo_TownDoldrumChild,
+    [OBJ_EVENT_GFX_TOWN_DOLDRUM_ADULT]         = &gObjectEventGraphicsInfo_TownDoldrumAdult,
+    [OBJ_EVENT_GFX_TOWN_DOLDRUM_ELDER]         = &gObjectEventGraphicsInfo_TownDoldrumElder,
 };

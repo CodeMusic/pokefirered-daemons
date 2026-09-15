@@ -461,6 +461,12 @@ static const u8 gInitialMovementTypeFacingDirections[MOVEMENT_TYPES_COUNT] = {
 //  THE OWL is brown feathers, a pale face disc and a tweed waistcoat, and has
 //  the house to himself -- so his own palette, in PALSLOT_NPC_SPECIAL.
 #define OBJ_EVENT_PAL_TAG_NPC_OWL                     0x111F
+//  DOLDRUM's locals share one palette of the town's own (T-119).
+#define OBJ_EVENT_PAL_TAG_NPC_TOWN_DOLDRUM            0x1122
+//  SLATE's locals share one palette of the town's own (T-119).
+#define OBJ_EVENT_PAL_TAG_NPC_TOWN_SLATE              0x1121
+//  CALLOW's locals share one palette of the town's own (T-119).
+#define OBJ_EVENT_PAL_TAG_NPC_TOWN_CALLOW             0x1120
 //  BLANCHE'S PEOPLE (DAEMONS tools/genfolk.py) draw from the slot palettes they
 //  live in, never a changed colour: MOM and the crow aide (WORKER_F) move to the
 //  white slot for its greys and reds; VERA (DAISY) joins the Clears' own tag in
@@ -523,6 +529,9 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_DaemonSpearow,           OBJ_EVENT_PAL_TAG_DAEMON_SPEAROW},
     {gObjectEventPal_NpcClears,               OBJ_EVENT_PAL_TAG_NPC_CLEARS},
     {gObjectEventPal_NpcOwl,                  OBJ_EVENT_PAL_TAG_NPC_OWL},
+    {gObjectEventPal_NpcTownDoldrum,           OBJ_EVENT_PAL_TAG_NPC_TOWN_DOLDRUM},
+    {gObjectEventPal_NpcTownSlate,             OBJ_EVENT_PAL_TAG_NPC_TOWN_SLATE},
+    {gObjectEventPal_NpcTownCallow,            OBJ_EVENT_PAL_TAG_NPC_TOWN_CALLOW},
     {},
 };
 

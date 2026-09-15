@@ -28,7 +28,7 @@
   "object_events": [
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_LASS",
+      "graphics_id": "OBJ_EVENT_GFX_TOWN_SLATE_CHILD",
       "x": 6,
       "y": 15,
       "elevation": 3,
@@ -43,7 +43,7 @@
     {
       "local_id": "LOCALID_PEWTER_MUSEUM_GUIDE",
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_MAN",
+      "graphics_id": "OBJ_EVENT_GFX_TOWN_SLATE_ADULT",
       "x": 33,
       "y": 17,
       "elevation": 3,
@@ -57,7 +57,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_FAT_MAN",
+      "graphics_id": "OBJ_EVENT_GFX_TOWN_SLATE_ADULT",
       "x": 21,
       "y": 28,
       "elevation": 3,
@@ -71,7 +71,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_BUG_CATCHER",
+      "graphics_id": "OBJ_EVENT_GFX_TOWN_SLATE_CHILD",
       "x": 33,
       "y": 27,
       "elevation": 3,
@@ -86,7 +86,7 @@
     {
       "local_id": "LOCALID_PEWTER_GYM_GUIDE",
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_BOY",
+      "graphics_id": "OBJ_EVENT_GFX_TOWN_SLATE_CHILD",
       "x": 42,
       "y": 20,
       "elevation": 3,
