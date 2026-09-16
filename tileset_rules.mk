@@ -245,3 +245,12 @@ $(TILESETGFXDIR)/secondary/callow_benchmark/tiles.4bpp: %.4bpp: %.png
 
 $(TILESETGFXDIR)/secondary/verdigris_table/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 105 -Wnum_tiles
+
+$(TILESETGFXDIR)/secondary/verdigris_store/tiles.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 100 -Wnum_tiles
+
+$(TILESETGFXDIR)/secondary/verdigris_block/tiles.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 72 -Wnum_tiles
+
+$(TILESETGFXDIR)/secondary/verdigris_floor/tiles.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 86 -Wnum_tiles

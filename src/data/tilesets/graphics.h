@@ -1739,3 +1739,69 @@ const u16 gTilesetPalettes_VerdigrisTable[][16] =
 	INCBIN_U16("data/tilesets/secondary/verdigris_table/palettes/14.gbapal"),
 	INCBIN_U16("data/tilesets/secondary/verdigris_table/palettes/15.gbapal"),
 };
+// T-103: VerdigrisStore, a tileset of its own (tools/gbainterior.py).
+const u32 gTilesetTiles_VerdigrisStore[] = INCBIN_U32("data/tilesets/secondary/verdigris_store/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_VerdigrisStore[][16] =
+{
+	INCBIN_U16("data/tilesets/secondary/verdigris_store/palettes/00.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_store/palettes/01.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_store/palettes/02.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_store/palettes/03.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_store/palettes/04.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_store/palettes/05.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_store/palettes/06.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_store/palettes/07.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_store/palettes/08.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_store/palettes/09.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_store/palettes/10.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_store/palettes/11.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_store/palettes/12.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_store/palettes/13.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_store/palettes/14.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_store/palettes/15.gbapal"),
+};
+// T-103: VerdigrisBlock, a tileset of its own (tools/gbainterior.py).
+const u32 gTilesetTiles_VerdigrisBlock[] = INCBIN_U32("data/tilesets/secondary/verdigris_block/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_VerdigrisBlock[][16] =
+{
+	INCBIN_U16("data/tilesets/secondary/verdigris_block/palettes/00.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_block/palettes/01.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_block/palettes/02.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_block/palettes/03.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_block/palettes/04.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_block/palettes/05.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_block/palettes/06.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_block/palettes/07.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_block/palettes/08.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_block/palettes/09.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_block/palettes/10.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_block/palettes/11.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_block/palettes/12.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_block/palettes/13.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_block/palettes/14.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_block/palettes/15.gbapal"),
+};
+// T-103: VerdigrisFloor, a tileset of its own (tools/gbainterior.py).
+const u32 gTilesetTiles_VerdigrisFloor[] = INCBIN_U32("data/tilesets/secondary/verdigris_floor/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_VerdigrisFloor[][16] =
+{
+	INCBIN_U16("data/tilesets/secondary/verdigris_floor/palettes/00.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_floor/palettes/01.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_floor/palettes/02.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_floor/palettes/03.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_floor/palettes/04.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_floor/palettes/05.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_floor/palettes/06.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_floor/palettes/07.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_floor/palettes/08.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_floor/palettes/09.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_floor/palettes/10.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_floor/palettes/11.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_floor/palettes/12.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_floor/palettes/13.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_floor/palettes/14.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_floor/palettes/15.gbapal"),
+};

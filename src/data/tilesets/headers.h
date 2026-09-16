@@ -912,3 +912,36 @@ const struct Tileset gTileset_VerdigrisTable =
     .metatileAttributes = gMetatileAttributes_VerdigrisTable,
     .callback = NULL,
 };
+// T-103: VerdigrisStore, rethemed and replanned.
+const struct Tileset gTileset_VerdigrisStore =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_VerdigrisStore,
+    .palettes = gTilesetPalettes_VerdigrisStore,
+    .metatiles = gMetatiles_VerdigrisStore,
+    .metatileAttributes = gMetatileAttributes_VerdigrisStore,
+    .callback = NULL,
+};
+// T-103: VerdigrisBlock, rethemed and replanned.
+const struct Tileset gTileset_VerdigrisBlock =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_VerdigrisBlock,
+    .palettes = gTilesetPalettes_VerdigrisBlock,
+    .metatiles = gMetatiles_VerdigrisBlock,
+    .metatileAttributes = gMetatileAttributes_VerdigrisBlock,
+    .callback = NULL,
+};
+// T-103: VerdigrisFloor, rethemed and replanned.
+const struct Tileset gTileset_VerdigrisFloor =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_VerdigrisFloor,
+    .palettes = gTilesetPalettes_VerdigrisFloor,
+    .metatiles = gMetatiles_VerdigrisFloor,
+    .metatileAttributes = gMetatileAttributes_VerdigrisFloor,
+    .callback = NULL,
+};

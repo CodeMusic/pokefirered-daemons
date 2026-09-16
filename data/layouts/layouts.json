@@ -299,7 +299,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_GameCorner",
+      "secondary_tileset": "gTileset_VerdigrisFloor",
       "border_filepath": "data/layouts/CeladonCity_GameCorner/border.bin",
       "blockdata_filepath": "data/layouts/CeladonCity_GameCorner/map.bin"
     },
@@ -2007,7 +2007,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_Condominiums",
+      "secondary_tileset": "gTileset_VerdigrisBlock",
       "border_filepath": "data/layouts/CeladonCity_Condominiums_1F/border.bin",
       "blockdata_filepath": "data/layouts/CeladonCity_Condominiums_1F/map.bin"
     },
@@ -2019,7 +2019,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_Condominiums",
+      "secondary_tileset": "gTileset_VerdigrisBlock",
       "border_filepath": "data/layouts/CeladonCity_Condominiums_2F/border.bin",
       "blockdata_filepath": "data/layouts/CeladonCity_Condominiums_2F/map.bin"
     },
@@ -2031,7 +2031,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_Condominiums",
+      "secondary_tileset": "gTileset_VerdigrisBlock",
       "border_filepath": "data/layouts/CeladonCity_Condominiums_3F/border.bin",
       "blockdata_filepath": "data/layouts/CeladonCity_Condominiums_3F/map.bin"
     },
@@ -2043,7 +2043,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_Condominiums",
+      "secondary_tileset": "gTileset_VerdigrisBlock",
       "border_filepath": "data/layouts/CeladonCity_Condominiums_Roof/border.bin",
       "blockdata_filepath": "data/layouts/CeladonCity_Condominiums_Roof/map.bin"
     },
@@ -2067,7 +2067,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_GameCorner",
+      "secondary_tileset": "gTileset_VerdigrisFloor",
       "border_filepath": "data/layouts/CeladonCity_GameCorner_PrizeRoom/border.bin",
       "blockdata_filepath": "data/layouts/CeladonCity_GameCorner_PrizeRoom/map.bin"
     },
@@ -2103,7 +2103,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_DepartmentStore",
+      "secondary_tileset": "gTileset_VerdigrisStore",
       "border_filepath": "data/layouts/CeladonCity_DepartmentStore_1F/border.bin",
       "blockdata_filepath": "data/layouts/CeladonCity_DepartmentStore_1F/map.bin"
     },
@@ -2115,7 +2115,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_DepartmentStore",
+      "secondary_tileset": "gTileset_VerdigrisStore",
       "border_filepath": "data/layouts/CeladonCity_DepartmentStore_2F/border.bin",
       "blockdata_filepath": "data/layouts/CeladonCity_DepartmentStore_2F/map.bin"
     },
@@ -2127,7 +2127,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_DepartmentStore",
+      "secondary_tileset": "gTileset_VerdigrisStore",
       "border_filepath": "data/layouts/CeladonCity_DepartmentStore_3F/border.bin",
       "blockdata_filepath": "data/layouts/CeladonCity_DepartmentStore_3F/map.bin"
     },
@@ -2139,7 +2139,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_DepartmentStore",
+      "secondary_tileset": "gTileset_VerdigrisStore",
       "border_filepath": "data/layouts/CeladonCity_DepartmentStore_4F/border.bin",
       "blockdata_filepath": "data/layouts/CeladonCity_DepartmentStore_4F/map.bin"
     },
@@ -2151,7 +2151,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_DepartmentStore",
+      "secondary_tileset": "gTileset_VerdigrisStore",
       "border_filepath": "data/layouts/CeladonCity_DepartmentStore_5F/border.bin",
       "blockdata_filepath": "data/layouts/CeladonCity_DepartmentStore_5F/map.bin"
     },
@@ -2163,7 +2163,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_DepartmentStore",
+      "secondary_tileset": "gTileset_VerdigrisStore",
       "border_filepath": "data/layouts/CeladonCity_DepartmentStore_Roof/border.bin",
       "blockdata_filepath": "data/layouts/CeladonCity_DepartmentStore_Roof/map.bin"
     },
@@ -3063,7 +3063,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_GameCorner",
+      "secondary_tileset": "gTileset_VerdigrisFloor",
       "border_filepath": "data/layouts/TwoIsland_JoyfulGameCorner/border.bin",
       "blockdata_filepath": "data/layouts/TwoIsland_JoyfulGameCorner/map.bin"
     },
