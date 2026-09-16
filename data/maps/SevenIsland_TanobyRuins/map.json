@@ -23,7 +23,7 @@
   "object_events": [
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_HIKER",
+      "graphics_id": "OBJ_EVENT_GFX_RUIN_MANIAC",
       "x": 35,
       "y": 7,
       "elevation": 3,
@@ -37,7 +37,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_HIKER",
+      "graphics_id": "OBJ_EVENT_GFX_RUIN_MANIAC",
       "x": 121,
       "y": 11,
       "elevation": 3,
