@@ -1477,10 +1477,179 @@ static void CB2_HandleStartMultiBattle(void)
     }
 }
 
+#if DAEMONS_DEBUG
+// A prototype, debug ROM only (T-114): every daemon in battle moves a little, and how it moves is its type, read from
+// the type's one clause (vision.md 2.2). Never more than two pixels; the two sides are out of step; it eases still
+// while a move, status or ball animation, or the move-select bounce, is running. The offset exists only while the
+// OAM is built -- added straight after AnimateSprites, taken off straight after BuildOamBuffer -- so no battle code,
+// animation or idle check ever sees it. No Random(): the motion never touches a battle's rolls.
+static struct
+{
+    s8 appliedX[MAX_BATTLERS_COUNT];
+    s8 appliedY[MAX_BATTLERS_COUNT];
+    u8 ease[MAX_BATTLERS_COUNT];     // 0..16: how much of the motion is showing
+} sIdleBreath;
+
+static u32 BreathHash(u32 n)
+{
+    n ^= n >> 15;
+    n *= 0x2C1B3C6D;
+    n ^= n >> 12;
+    n *= 0x297A2D39;
+    n ^= n >> 15;
+    return n;
+}
+
+#define BREATH_SIN(i) ((s32)gSineTable[(i) & 0xFF])     // -256..256, a pixel either way
+
+// in 256ths of a pixel
+static void BreathForType(u8 type, u32 t, u8 battler, s32 *x, s32 *y)
+{
+    u32 k;
+
+    *x = 0;
+    *y = 0;
+    switch (type)
+    {
+    case TYPE_FIGHTING:     // LOGIC, formal rules step by step: the breath in held, even stairs
+        k = (t / 20) % 4;
+        *y = (k == 0 ? 0 : (k == 2 ? -2 : -1)) * 256;
+        break;
+    case TYPE_FLYING:       // VECTOR, a direction in a space: rising forward along one diagonal and back down it
+        *x = BREATH_SIN(t * 2);
+        *y = -BREATH_SIN(t * 2) * 3 / 2;
+        break;
+    case TYPE_POISON:       // CORRUPT, data that has been tampered with: the plain breath, until a frame of it is not
+        *y = BREATH_SIN(t * 2) * 2;
+        if ((BreathHash((t >> 2) + battler * 7) & 0xFF) < 5)
+            *x = ((BreathHash(t >> 2) & 0x100) ? 2 : -2) * 256;
+        break;
+    case TYPE_GROUND:       // STRATUM, the layer everything runs on: one pixel, slow and heavy
+        *y = BREATH_SIN(t);
+        break;
+    case TYPE_ROCK:         // LEGACY, deprecated hardware still running: the breath catches, then carries on
+        k = t % 64;
+        *y = BREATH_SIN((t - (k > 40 ? k - 40 : 0)) * 2) * 2;
+        break;
+    case TYPE_BUG:          // SWARM, many small agents: a pixel of jitter that no single one of them decides
+        k = BreathHash(t / 10 + battler * 31);
+        *x = ((k & 3) == 1 ? 1 : ((k & 3) == 2 ? -1 : 0)) * 256;
+        *y = (((k >> 2) & 3) == 1 ? 1 : (((k >> 2) & 3) == 2 ? -1 : 0)) * 256;
+        break;
+    case TYPE_GHOST:        // LATENT, running below the surface: it sits low, and only now and then comes up
+        *y = 256 + BREATH_SIN(t);
+        break;
+    case TYPE_FIRE:         // ENTROPY, noise and heat: a shimmer that only ever rises
+        k = BreathHash(t / 5 + battler * 13) & 3;
+        *y = -(k == 3 ? 2 : (k == 0 ? 0 : 1)) * 256;
+        break;
+    case TYPE_WATER:        // FLOW, running downhill: a slow drift and a lift half a beat apart, as on water
+        *x = BREATH_SIN(t);
+        *y = BREATH_SIN(t * 2 + 64);
+        break;
+    case TYPE_GRASS:        // GROWTH, fitting to whatever it is fed: each breath a little bigger, then it starts over
+        *y = BREATH_SIN(t * 2) * (s32)(((t % 512) * 5) / 512) / 2;
+        break;
+    case TYPE_ELECTRIC:     // SIGNAL, raw current: still, then a sharp pulse, sometimes two
+        k = t % 40;
+        if (k < 2 || ((t / 40) % 3 == 0 && (k == 4 || k == 5)))
+            *y = -256;
+        break;
+    case TYPE_PSYCHIC:      // CONTEXT, the frame you read a thing in: the same thing, from a vantage that moves
+        *x = BREATH_SIN(t * 2) * 3 / 2;
+        break;
+    case TYPE_ICE:          // FROZEN, unable to move: still, but for a shiver every few seconds
+        if (t % 150 < 6)
+            *x = (t & 1) ? 256 : -256;
+        break;
+    case TYPE_DRAGON:       // EMERGENT, behaviour nobody designed: two rhythms crossing, a path that never looks planned
+        *x = BREATH_SIN(t * 2);
+        *y = BREATH_SIN(t * 3) * 2;
+        break;
+    case TYPE_STEEL:        // HARDENED, chosen to resist: it does not breathe; it braces
+        if (t % 192 < 20)
+            *y = 256;
+        break;
+    case TYPE_DARK:         // OPAQUE, a box you cannot see inside: it has moved, and nothing showed why
+        k = BreathHash(t / 90 + battler * 5) % 3;
+        *x = ((s32)k - 1) * 256;
+        break;
+    default:                // CONTENT, the thing itself (and ORACLE): the plain breath
+        *y = BREATH_SIN(t * 2) * 2;
+        break;
+    }
+}
+
+static void IdleBreathApply(void)
+{
+    u8 battler;
+
+    for (battler = 0; battler < gBattlersCount; battler++)
+    {
+        u8 spriteId = gBattlerSpriteIds[battler];
+        struct BattleHealthboxInfo *info;
+        bool8 still;
+        u8 type;
+        u32 t;
+        s32 x, y;
+
+        sIdleBreath.appliedX[battler] = 0;
+        sIdleBreath.appliedY[battler] = 0;
+        if (gBattleSpritesDataPtr == NULL || spriteId >= MAX_SPRITES || !gSprites[spriteId].inUse || !IsBattlerSpritePresent(battler))
+        {
+            sIdleBreath.ease[battler] = 0;
+            continue;
+        }
+        info = &gBattleSpritesDataPtr->healthBoxesData[battler];
+        still = gAnimScriptActive || info->battlerIsBouncing || info->ballAnimActive || info->statusAnimActive
+             || info->animFromTableActive || info->specialAnimActive || gBattleSpritesDataPtr->battlerData[battler].invisible;
+        if (still)
+        {
+            if (sIdleBreath.ease[battler] != 0)
+                sIdleBreath.ease[battler]--;
+        }
+        else if (sIdleBreath.ease[battler] < 16)
+        {
+            sIdleBreath.ease[battler]++;
+        }
+        type = gBattleMons[battler].type1;
+        if (type == TYPE_NORMAL && gBattleMons[battler].type2 != TYPE_NORMAL)
+            type = gBattleMons[battler].type2;           // CONTENT hands you no verb; a second type is what moves it
+        t = gMain.vblankCounter2 + (GetBattlerSide(battler) == B_SIDE_PLAYER ? 0 : 97);
+        BreathForType(type, t, battler, &x, &y);
+        if (GetBattlerSide(battler) != B_SIDE_PLAYER)
+            x = -x;                                      // forward is the other way for the opponent
+        sIdleBreath.appliedX[battler] = (x * sIdleBreath.ease[battler] + 2048) >> 12;
+        sIdleBreath.appliedY[battler] = (y * sIdleBreath.ease[battler] + 2048) >> 12;
+        gSprites[spriteId].x2 += sIdleBreath.appliedX[battler];
+        gSprites[spriteId].y2 += sIdleBreath.appliedY[battler];
+    }
+}
+
+static void IdleBreathRemove(void)
+{
+    u8 battler;
+
+    for (battler = 0; battler < gBattlersCount; battler++)
+    {
+        gSprites[gBattlerSpriteIds[battler]].x2 -= sIdleBreath.appliedX[battler];
+        gSprites[gBattlerSpriteIds[battler]].y2 -= sIdleBreath.appliedY[battler];
+        sIdleBreath.appliedX[battler] = 0;
+        sIdleBreath.appliedY[battler] = 0;
+    }
+}
+#endif
+
 void BattleMainCB2(void)
 {
     AnimateSprites();
+#if DAEMONS_DEBUG
+    IdleBreathApply();
+#endif
     BuildOamBuffer();
+#if DAEMONS_DEBUG
+    IdleBreathRemove();
+#endif
     RunTextPrinters();
     UpdatePaletteFade();
     RunTasks();
