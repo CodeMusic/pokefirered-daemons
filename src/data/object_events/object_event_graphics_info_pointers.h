@@ -161,6 +161,17 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_StaffBrazen;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_StaffQuicksilver;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_StaffCallow;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BenchmarkGuide;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Tamer;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Engineer;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Lady;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PokemonRangerF;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PokemonRangerM;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PsychicF;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_AromaLady;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SuperNerd;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Painter;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Gamer;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BirdKeeper;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RuinManiac;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PokemonBreeder;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Juggler;
@@ -389,4 +400,15 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_JUGGLER]                    = &gObjectEventGraphicsInfo_Juggler,
     [OBJ_EVENT_GFX_POKEMON_BREEDER]            = &gObjectEventGraphicsInfo_PokemonBreeder,
     [OBJ_EVENT_GFX_RUIN_MANIAC]                = &gObjectEventGraphicsInfo_RuinManiac,
+    [OBJ_EVENT_GFX_BIRD_KEEPER]                = &gObjectEventGraphicsInfo_BirdKeeper,
+    [OBJ_EVENT_GFX_GAMER]                      = &gObjectEventGraphicsInfo_Gamer,
+    [OBJ_EVENT_GFX_PAINTER]                    = &gObjectEventGraphicsInfo_Painter,
+    [OBJ_EVENT_GFX_SUPER_NERD]                 = &gObjectEventGraphicsInfo_SuperNerd,
+    [OBJ_EVENT_GFX_AROMA_LADY]                 = &gObjectEventGraphicsInfo_AromaLady,
+    [OBJ_EVENT_GFX_PSYCHIC_F]                  = &gObjectEventGraphicsInfo_PsychicF,
+    [OBJ_EVENT_GFX_POKEMON_RANGER_M]           = &gObjectEventGraphicsInfo_PokemonRangerM,
+    [OBJ_EVENT_GFX_POKEMON_RANGER_F]           = &gObjectEventGraphicsInfo_PokemonRangerF,
+    [OBJ_EVENT_GFX_LADY]                       = &gObjectEventGraphicsInfo_Lady,
+    [OBJ_EVENT_GFX_ENGINEER]                   = &gObjectEventGraphicsInfo_Engineer,
+    [OBJ_EVENT_GFX_TAMER]                      = &gObjectEventGraphicsInfo_Tamer,
 };

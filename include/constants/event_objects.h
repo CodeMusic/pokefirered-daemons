@@ -230,7 +230,29 @@
 
 #define OBJ_EVENT_GFX_RUIN_MANIAC 193
 
-#define NUM_OBJ_EVENT_GFX     194
+#define OBJ_EVENT_GFX_BIRD_KEEPER 194
+
+#define OBJ_EVENT_GFX_GAMER 195
+
+#define OBJ_EVENT_GFX_PAINTER 196
+
+#define OBJ_EVENT_GFX_SUPER_NERD 197
+
+#define OBJ_EVENT_GFX_AROMA_LADY 198
+
+#define OBJ_EVENT_GFX_PSYCHIC_F 199
+
+#define OBJ_EVENT_GFX_POKEMON_RANGER_M 200
+
+#define OBJ_EVENT_GFX_POKEMON_RANGER_F 201
+
+#define OBJ_EVENT_GFX_LADY 202
+
+#define OBJ_EVENT_GFX_ENGINEER 203
+
+#define OBJ_EVENT_GFX_TAMER 204
+
+#define NUM_OBJ_EVENT_GFX     205
 
 // These are dynamic object gfx ids.
 // They correspond with the values of the VAR_OBJ_GFX_ID_X vars.
