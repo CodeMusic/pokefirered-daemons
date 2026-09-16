@@ -254,3 +254,6 @@ $(TILESETGFXDIR)/secondary/verdigris_block/tiles.4bpp: %.4bpp: %.png
 
 $(TILESETGFXDIR)/secondary/verdigris_floor/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 86 -Wnum_tiles
+
+$(TILESETGFXDIR)/secondary/proof_hall/tiles.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 67 -Wnum_tiles

@@ -1805,3 +1805,25 @@ const u16 gTilesetPalettes_VerdigrisFloor[][16] =
 	INCBIN_U16("data/tilesets/secondary/verdigris_floor/palettes/14.gbapal"),
 	INCBIN_U16("data/tilesets/secondary/verdigris_floor/palettes/15.gbapal"),
 };
+// T-103: ProofHall, a tileset of its own (tools/gbainterior.py).
+const u32 gTilesetTiles_ProofHall[] = INCBIN_U32("data/tilesets/secondary/proof_hall/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_ProofHall[][16] =
+{
+	INCBIN_U16("data/tilesets/secondary/proof_hall/palettes/00.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/proof_hall/palettes/01.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/proof_hall/palettes/02.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/proof_hall/palettes/03.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/proof_hall/palettes/04.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/proof_hall/palettes/05.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/proof_hall/palettes/06.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/proof_hall/palettes/07.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/proof_hall/palettes/08.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/proof_hall/palettes/09.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/proof_hall/palettes/10.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/proof_hall/palettes/11.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/proof_hall/palettes/12.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/proof_hall/palettes/13.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/proof_hall/palettes/14.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/proof_hall/palettes/15.gbapal"),
+};

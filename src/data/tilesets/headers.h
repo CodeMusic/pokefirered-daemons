@@ -945,3 +945,14 @@ const struct Tileset gTileset_VerdigrisFloor =
     .metatileAttributes = gMetatileAttributes_VerdigrisFloor,
     .callback = NULL,
 };
+// T-103: ProofHall, rethemed and replanned.
+const struct Tileset gTileset_ProofHall =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_ProofHall,
+    .palettes = gTilesetPalettes_ProofHall,
+    .metatiles = gMetatiles_ProofHall,
+    .metatileAttributes = gMetatileAttributes_ProofHall,
+    .callback = NULL,
+};
