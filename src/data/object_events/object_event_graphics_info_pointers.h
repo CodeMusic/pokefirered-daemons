@@ -161,6 +161,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_StaffBrazen;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_StaffQuicksilver;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_StaffCallow;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BenchmarkGuide;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PsychicM;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Tamer;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Engineer;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Lady;
@@ -411,4 +412,5 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_LADY]                       = &gObjectEventGraphicsInfo_Lady,
     [OBJ_EVENT_GFX_ENGINEER]                   = &gObjectEventGraphicsInfo_Engineer,
     [OBJ_EVENT_GFX_TAMER]                      = &gObjectEventGraphicsInfo_Tamer,
+    [OBJ_EVENT_GFX_PSYCHIC_M]                  = &gObjectEventGraphicsInfo_PsychicM,
 };

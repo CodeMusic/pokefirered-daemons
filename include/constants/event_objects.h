@@ -252,7 +252,9 @@
 
 #define OBJ_EVENT_GFX_TAMER 204
 
-#define NUM_OBJ_EVENT_GFX     205
+#define OBJ_EVENT_GFX_PSYCHIC_M 205
+
+#define NUM_OBJ_EVENT_GFX     206
 
 // These are dynamic object gfx ids.
 // They correspond with the values of the VAR_OBJ_GFX_ID_X vars.
