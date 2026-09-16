@@ -1717,3 +1717,25 @@ const u16 gTilesetPalettes_CallowBenchmark[][16] =
 	INCBIN_U16("data/tilesets/secondary/callow_benchmark/palettes/14.gbapal"),
 	INCBIN_U16("data/tilesets/secondary/callow_benchmark/palettes/15.gbapal"),
 };
+// T-103: VerdigrisTable, a tileset of its own (tools/gbainterior.py).
+const u32 gTilesetTiles_VerdigrisTable[] = INCBIN_U32("data/tilesets/secondary/verdigris_table/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_VerdigrisTable[][16] =
+{
+	INCBIN_U16("data/tilesets/secondary/verdigris_table/palettes/00.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_table/palettes/01.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_table/palettes/02.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_table/palettes/03.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_table/palettes/04.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_table/palettes/05.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_table/palettes/06.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_table/palettes/07.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_table/palettes/08.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_table/palettes/09.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_table/palettes/10.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_table/palettes/11.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_table/palettes/12.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_table/palettes/13.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_table/palettes/14.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_table/palettes/15.gbapal"),
+};

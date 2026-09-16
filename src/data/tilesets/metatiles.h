@@ -229,3 +229,5 @@ const u16 gMetatiles_QuicksilverBenchmark[] = INCBIN_U16("data/tilesets/secondar
 const u32 gMetatileAttributes_QuicksilverBenchmark[] = INCBIN_U32("data/tilesets/secondary/quicksilver_benchmark/metatile_attributes.bin");
 const u16 gMetatiles_CallowBenchmark[] = INCBIN_U16("data/tilesets/secondary/callow_benchmark/metatiles.bin");
 const u32 gMetatileAttributes_CallowBenchmark[] = INCBIN_U32("data/tilesets/secondary/callow_benchmark/metatile_attributes.bin");
+const u16 gMetatiles_VerdigrisTable[] = INCBIN_U16("data/tilesets/secondary/verdigris_table/metatiles.bin");
+const u32 gMetatileAttributes_VerdigrisTable[] = INCBIN_U32("data/tilesets/secondary/verdigris_table/metatile_attributes.bin");

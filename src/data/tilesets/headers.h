@@ -901,3 +901,14 @@ const struct Tileset gTileset_CallowBenchmark =
     .metatileAttributes = gMetatileAttributes_CallowBenchmark,
     .callback = NULL,
 };
+// T-103: VerdigrisTable, rethemed and replanned.
+const struct Tileset gTileset_VerdigrisTable =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_VerdigrisTable,
+    .palettes = gTilesetPalettes_VerdigrisTable,
+    .metatiles = gMetatiles_VerdigrisTable,
+    .metatileAttributes = gMetatileAttributes_VerdigrisTable,
+    .callback = NULL,
+};

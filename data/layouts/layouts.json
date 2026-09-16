@@ -2079,7 +2079,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_RestaurantHotel",
+      "secondary_tileset": "gTileset_VerdigrisTable",
       "border_filepath": "data/layouts/CeladonCity_Restaurant/border.bin",
       "blockdata_filepath": "data/layouts/CeladonCity_Restaurant/map.bin"
     },
@@ -2091,7 +2091,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_RestaurantHotel",
+      "secondary_tileset": "gTileset_VerdigrisTable",
       "border_filepath": "data/layouts/CeladonCity_Hotel/border.bin",
       "blockdata_filepath": "data/layouts/CeladonCity_Hotel/map.bin"
     },
