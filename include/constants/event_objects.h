@@ -222,7 +222,15 @@
 
 #define OBJ_EVENT_GFX_AL_DOLDRUM 189
 
-#define NUM_OBJ_EVENT_GFX     190
+#define OBJ_EVENT_GFX_BURGLAR 190
+
+#define OBJ_EVENT_GFX_JUGGLER 191
+
+#define OBJ_EVENT_GFX_POKEMON_BREEDER 192
+
+#define OBJ_EVENT_GFX_RUIN_MANIAC 193
+
+#define NUM_OBJ_EVENT_GFX     194
 
 // These are dynamic object gfx ids.
 // They correspond with the values of the VAR_OBJ_GFX_ID_X vars.

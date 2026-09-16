@@ -3674,3 +3674,83 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_AlDoldrum = {
     .images = sPicTable_AlDoldrum,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
+
+// the burglar (T-126): a weasel with the swag on its back; it battles as one, so it walks as one -- its own sheet, on pink's palette and slot, where it used to borrow poke_maniac
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Burglar = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_PINK,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = PALSLOT_NPC_2,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gObjectEventBaseOam_16x32,
+    .subspriteTables = gObjectEventSpriteOamTables_16x32,
+    .anims = sAnimTable_Standard,
+    .images = sPicTable_Burglar,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+// the juggler (T-126): an octopus, three balls up and five arms spare -- its own sheet, on blue's palette and slot, where it used to borrow rocker
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Juggler = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_BLUE,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = PALSLOT_NPC_1,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gObjectEventBaseOam_16x32,
+    .subspriteTables = gObjectEventSpriteOamTables_16x32,
+    .anims = sAnimTable_Standard,
+    .images = sPicTable_Juggler,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+// the pokemon breeder (T-126): a goose sitting an egg, in the apron -- its own sheet, on white's palette and slot, where it used to borrow woman_2
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PokemonBreeder = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = PALSLOT_NPC_4,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gObjectEventBaseOam_16x32,
+    .subspriteTables = gObjectEventSpriteOamTables_16x32,
+    .anims = sAnimTable_Standard,
+    .images = sPicTable_PokemonBreeder,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+// the ruin maniac (T-126): an aardvark, digging where the ruin is -- its own sheet, on white's palette and slot, where it used to borrow hiker
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RuinManiac = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = PALSLOT_NPC_4,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gObjectEventBaseOam_16x32,
+    .subspriteTables = gObjectEventSpriteOamTables_16x32,
+    .anims = sAnimTable_Standard,
+    .images = sPicTable_RuinManiac,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};

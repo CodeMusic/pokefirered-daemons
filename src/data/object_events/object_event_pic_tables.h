@@ -936,6 +936,54 @@ static const struct SpriteFrameImage sPicTable_BenchmarkGuide[] = {
     overworld_frame(gObjectEventPic_BenchmarkGuide, 2, 4, 8),
 };
 
+static const struct SpriteFrameImage sPicTable_RuinManiac[] = {
+    overworld_frame(gObjectEventPic_RuinManiac, 2, 4, 0),
+    overworld_frame(gObjectEventPic_RuinManiac, 2, 4, 1),
+    overworld_frame(gObjectEventPic_RuinManiac, 2, 4, 2),
+    overworld_frame(gObjectEventPic_RuinManiac, 2, 4, 3),
+    overworld_frame(gObjectEventPic_RuinManiac, 2, 4, 4),
+    overworld_frame(gObjectEventPic_RuinManiac, 2, 4, 5),
+    overworld_frame(gObjectEventPic_RuinManiac, 2, 4, 6),
+    overworld_frame(gObjectEventPic_RuinManiac, 2, 4, 7),
+    overworld_frame(gObjectEventPic_RuinManiac, 2, 4, 8),
+};
+
+static const struct SpriteFrameImage sPicTable_PokemonBreeder[] = {
+    overworld_frame(gObjectEventPic_PokemonBreeder, 2, 4, 0),
+    overworld_frame(gObjectEventPic_PokemonBreeder, 2, 4, 1),
+    overworld_frame(gObjectEventPic_PokemonBreeder, 2, 4, 2),
+    overworld_frame(gObjectEventPic_PokemonBreeder, 2, 4, 3),
+    overworld_frame(gObjectEventPic_PokemonBreeder, 2, 4, 4),
+    overworld_frame(gObjectEventPic_PokemonBreeder, 2, 4, 5),
+    overworld_frame(gObjectEventPic_PokemonBreeder, 2, 4, 6),
+    overworld_frame(gObjectEventPic_PokemonBreeder, 2, 4, 7),
+    overworld_frame(gObjectEventPic_PokemonBreeder, 2, 4, 8),
+};
+
+static const struct SpriteFrameImage sPicTable_Juggler[] = {
+    overworld_frame(gObjectEventPic_Juggler, 2, 4, 0),
+    overworld_frame(gObjectEventPic_Juggler, 2, 4, 1),
+    overworld_frame(gObjectEventPic_Juggler, 2, 4, 2),
+    overworld_frame(gObjectEventPic_Juggler, 2, 4, 3),
+    overworld_frame(gObjectEventPic_Juggler, 2, 4, 4),
+    overworld_frame(gObjectEventPic_Juggler, 2, 4, 5),
+    overworld_frame(gObjectEventPic_Juggler, 2, 4, 6),
+    overworld_frame(gObjectEventPic_Juggler, 2, 4, 7),
+    overworld_frame(gObjectEventPic_Juggler, 2, 4, 8),
+};
+
+static const struct SpriteFrameImage sPicTable_Burglar[] = {
+    overworld_frame(gObjectEventPic_Burglar, 2, 4, 0),
+    overworld_frame(gObjectEventPic_Burglar, 2, 4, 1),
+    overworld_frame(gObjectEventPic_Burglar, 2, 4, 2),
+    overworld_frame(gObjectEventPic_Burglar, 2, 4, 3),
+    overworld_frame(gObjectEventPic_Burglar, 2, 4, 4),
+    overworld_frame(gObjectEventPic_Burglar, 2, 4, 5),
+    overworld_frame(gObjectEventPic_Burglar, 2, 4, 6),
+    overworld_frame(gObjectEventPic_Burglar, 2, 4, 7),
+    overworld_frame(gObjectEventPic_Burglar, 2, 4, 8),
+};
+
 static const struct SpriteFrameImage sPicTable_AlDoldrum[] = {
     overworld_frame(gObjectEventPic_AlDoldrum, 2, 4, 0),
     overworld_frame(gObjectEventPic_AlDoldrum, 2, 4, 1),
