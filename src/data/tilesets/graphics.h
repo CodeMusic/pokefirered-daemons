@@ -1827,3 +1827,47 @@ const u16 gTilesetPalettes_ProofHall[][16] =
 	INCBIN_U16("data/tilesets/secondary/proof_hall/palettes/14.gbapal"),
 	INCBIN_U16("data/tilesets/secondary/proof_hall/palettes/15.gbapal"),
 };
+// T-103: CallowSchool, a tileset of its own (tools/gbainterior.py).
+const u32 gTilesetTiles_CallowSchool[] = INCBIN_U32("data/tilesets/secondary/callow_school/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_CallowSchool[][16] =
+{
+	INCBIN_U16("data/tilesets/secondary/callow_school/palettes/00.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/callow_school/palettes/01.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/callow_school/palettes/02.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/callow_school/palettes/03.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/callow_school/palettes/04.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/callow_school/palettes/05.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/callow_school/palettes/06.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/callow_school/palettes/07.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/callow_school/palettes/08.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/callow_school/palettes/09.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/callow_school/palettes/10.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/callow_school/palettes/11.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/callow_school/palettes/12.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/callow_school/palettes/13.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/callow_school/palettes/14.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/callow_school/palettes/15.gbapal"),
+};
+// T-103: VerdigrisLecture, a tileset of its own (tools/gbainterior.py).
+const u32 gTilesetTiles_VerdigrisLecture[] = INCBIN_U32("data/tilesets/secondary/verdigris_lecture/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_VerdigrisLecture[][16] =
+{
+	INCBIN_U16("data/tilesets/secondary/verdigris_lecture/palettes/00.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_lecture/palettes/01.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_lecture/palettes/02.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_lecture/palettes/03.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_lecture/palettes/04.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_lecture/palettes/05.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_lecture/palettes/06.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_lecture/palettes/07.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_lecture/palettes/08.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_lecture/palettes/09.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_lecture/palettes/10.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_lecture/palettes/11.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_lecture/palettes/12.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_lecture/palettes/13.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_lecture/palettes/14.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/verdigris_lecture/palettes/15.gbapal"),
+};

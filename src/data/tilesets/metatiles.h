@@ -239,3 +239,7 @@ const u16 gMetatiles_VerdigrisFloor[] = INCBIN_U16("data/tilesets/secondary/verd
 const u32 gMetatileAttributes_VerdigrisFloor[] = INCBIN_U32("data/tilesets/secondary/verdigris_floor/metatile_attributes.bin");
 const u16 gMetatiles_ProofHall[] = INCBIN_U16("data/tilesets/secondary/proof_hall/metatiles.bin");
 const u32 gMetatileAttributes_ProofHall[] = INCBIN_U32("data/tilesets/secondary/proof_hall/metatile_attributes.bin");
+const u16 gMetatiles_CallowSchool[] = INCBIN_U16("data/tilesets/secondary/callow_school/metatiles.bin");
+const u32 gMetatileAttributes_CallowSchool[] = INCBIN_U32("data/tilesets/secondary/callow_school/metatile_attributes.bin");
+const u16 gMetatiles_VerdigrisLecture[] = INCBIN_U16("data/tilesets/secondary/verdigris_lecture/metatiles.bin");
+const u32 gMetatileAttributes_VerdigrisLecture[] = INCBIN_U32("data/tilesets/secondary/verdigris_lecture/metatile_attributes.bin");

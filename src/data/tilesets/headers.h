@@ -956,3 +956,25 @@ const struct Tileset gTileset_ProofHall =
     .metatileAttributes = gMetatileAttributes_ProofHall,
     .callback = NULL,
 };
+// T-103: CallowSchool, rethemed and replanned.
+const struct Tileset gTileset_CallowSchool =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_CallowSchool,
+    .palettes = gTilesetPalettes_CallowSchool,
+    .metatiles = gMetatiles_CallowSchool,
+    .metatileAttributes = gMetatileAttributes_CallowSchool,
+    .callback = NULL,
+};
+// T-103: VerdigrisLecture, rethemed and replanned.
+const struct Tileset gTileset_VerdigrisLecture =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_VerdigrisLecture,
+    .palettes = gTilesetPalettes_VerdigrisLecture,
+    .metatiles = gMetatiles_VerdigrisLecture,
+    .metatileAttributes = gMetatileAttributes_VerdigrisLecture,
+    .callback = NULL,
+};

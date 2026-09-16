@@ -2055,7 +2055,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_School",
+      "secondary_tileset": "gTileset_VerdigrisLecture",
       "border_filepath": "data/layouts/CeladonCity_Condominiums_RoofRoom/border.bin",
       "blockdata_filepath": "data/layouts/CeladonCity_Condominiums_RoofRoom/map.bin"
     },
@@ -2991,7 +2991,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_School",
+      "secondary_tileset": "gTileset_CallowSchool",
       "border_filepath": "data/layouts/ViridianCity_School/border.bin",
       "blockdata_filepath": "data/layouts/ViridianCity_School/map.bin"
     },
