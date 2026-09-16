@@ -161,6 +161,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_StaffBrazen;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_StaffQuicksilver;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_StaffCallow;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BenchmarkGuide;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_AlDoldrum;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TownUmbraAdult;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TownQuicksilverElder;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TownQuicksilverAdult;
@@ -379,4 +380,5 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_TOWN_QUICKSILVER_ADULT]     = &gObjectEventGraphicsInfo_TownQuicksilverAdult,
     [OBJ_EVENT_GFX_TOWN_QUICKSILVER_ELDER]     = &gObjectEventGraphicsInfo_TownQuicksilverElder,
     [OBJ_EVENT_GFX_TOWN_UMBRA_ADULT]           = &gObjectEventGraphicsInfo_TownUmbraAdult,
+    [OBJ_EVENT_GFX_AL_DOLDRUM]                 = &gObjectEventGraphicsInfo_AlDoldrum,
 };

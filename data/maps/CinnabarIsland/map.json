@@ -28,7 +28,7 @@
   "object_events": [
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_TOWN_QUICKSILVER_ADULT",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
       "x": 14,
       "y": 6,
       "elevation": 3,
@@ -42,7 +42,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_TOWN_QUICKSILVER_ELDER",
+      "graphics_id": "OBJ_EVENT_GFX_OLD_MAN_1",
       "x": 11,
       "y": 11,
       "elevation": 3,

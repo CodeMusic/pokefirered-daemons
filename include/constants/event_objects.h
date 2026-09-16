@@ -220,7 +220,9 @@
 
 #define OBJ_EVENT_GFX_TOWN_UMBRA_ADULT 188
 
-#define NUM_OBJ_EVENT_GFX     189
+#define OBJ_EVENT_GFX_AL_DOLDRUM 189
+
+#define NUM_OBJ_EVENT_GFX     190
 
 // These are dynamic object gfx ids.
 // They correspond with the values of the VAR_OBJ_GFX_ID_X vars.
