@@ -1,6 +1,6 @@
 SaffronCity_Dojo_Text_MasterKoichiIntro::
     .string "Grunt!\p"
-    .string "I am the KARATE MASTER!\n"
+    .string "I am the REFEREE.\n"
     .string "Nobody appointed me.\p"
     .string "You wish to challenge us?\n"
     .string "Expect no mercy!\p"
@@ -20,7 +20,7 @@ SaffronCity_Dojo_Text_ChoosePrizedFightingMon::
 
 SaffronCity_Dojo_Text_StayAndTrainWithUs::
     .string "Grunt!\n"
-    .string "Stay and train at karate with us!$"
+    .string "Stay and work proofs with us!$"
 
 SaffronCity_Dojo_Text_MikeIntro::
     .string "Hoargh!\n"
@@ -30,7 +30,7 @@ SaffronCity_Dojo_Text_MikeDefeat::
     .string "I give up!$"
 
 SaffronCity_Dojo_Text_MikePostBattle::
-    .string "You wait 'til you see our MASTER!\n"
+    .string "You wait 'til you see the REFEREE!\n"
     .string "I'm a small fry compared to him!$"
 
 SaffronCity_Dojo_Text_HidekiIntro::
@@ -42,7 +42,7 @@ SaffronCity_Dojo_Text_HidekiDefeat::
     .string "One point!$"
 
 SaffronCity_Dojo_Text_HidekiPostBattle::
-    .string "Our MASTER is a pro fighter.\n"
+    .string "The REFEREE reads every step.\n"
     .string "Be prepared to lose!$"
 
 SaffronCity_Dojo_Text_AaronIntro::
@@ -78,7 +78,7 @@ SaffronCity_Dojo_Text_YouWantHitmonlee::
 
 SaffronCity_Dojo_Text_ReceivedMonFromKarateMaster::
     .string "{PLAYER} received the {STR_VAR_1}\n"
-    .string "from the KARATE MASTER.$"
+    .string "from the REFEREE.$"
 
 SaffronCity_Dojo_Text_YouWantHitmonchan::
     .string "You want the piston-punching\n"

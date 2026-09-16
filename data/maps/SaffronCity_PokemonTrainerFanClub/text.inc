@@ -262,7 +262,7 @@ SaffronCity_PokemonTrainerFanClub_Text_YourBattleStyleIsEducational::
 SaffronCity_PokemonTrainerFanClub_Text_WontStopBeingYourFan::
     .string "Instead of just watching others\n"
     .string "battle, battle yourself!\p"
-    .string "…My DOJO's MASTER chewed me out\n"
+    .string "…The REFEREE chewed me out\n"
     .string "like that…\p"
     .string "But I won't let that stop me from\n"
     .string "being your fan!\p"
@@ -272,16 +272,16 @@ SaffronCity_PokemonTrainerFanClub_Text_OnlyMasterHasMyRespect::
     .string "Hiyah! There is but one USER who\n"
     .string "has my respect.\p"
     .string "And that is none other than my\n"
-    .string "MASTER at the PROOF HALL.\p"
+    .string "REFEREE at the PROOF HALL.\p"
     .string "You should become a fan of my\n"
-    .string "MASTER like me! Hiyah!$"
+    .string "REFEREE like me! Hiyah!$"
 
 SaffronCity_PokemonTrainerFanClub_Text_NeverBeFanOfAnyoneButMaster::
-    .string "Hiyah! I respect my MASTER at the\n"
+    .string "Hiyah! I respect the REFEREE at\n"
     .string "PROOF HALL.\p"
     .string "I will never become a fan of\n"
-    .string "anyone other than my MASTER!\p"
-    .string "I will even sneak out of the DOJO\n"
+    .string "anyone other than the REFEREE!\p"
+    .string "I will even sneak out of the HALL\n"
     .string "to spread word of his greatness.\p"
     .string "Hiyah!$"
 

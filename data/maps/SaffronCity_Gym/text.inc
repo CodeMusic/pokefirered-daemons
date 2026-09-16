@@ -89,7 +89,7 @@ SaffronCity_Gym_Text_TyronDefeat::
     .string "I don't believe this!$"
 
 SaffronCity_Gym_Text_TyronPostBattle::
-	.string "The DOJO next door challenged\n"
+	.string "The PROOF HALL next door challenged\n"
 	.string "MATTE. She won in four turns.\p"
 	.string "Then she told them the three\n"
 	.string "things they hadn't looked at.$"
