@@ -3366,9 +3366,8 @@ Move_SWAGGER:
 
 @ DAEMONS -- REFILL -- filled, not reloaded: the colour drains, then comes back in ONE slow continuous pour where RESTORE
 @ steps.
-@ T-139 DRAFT under vision.md 9.24: the debug ROMs play it, the release ROMs keep vanilla's until approved.
+@ T-139, approved 2026-09-17 under vision.md 9.24.
 Move_MILK_DRINK:
-.if DAEMONS_DEBUG
 	monbg ANIM_ATTACKER
 	playsewithpan SE_M_TELEPORT, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 13, RGB(13, 13, 13)
@@ -3379,27 +3378,6 @@ Move_MILK_DRINK:
 	waitforvisualfinish
 	clearmonbg ANIM_ATTACKER
 	end
-.else
-	loadspritegfx ANIM_TAG_MILK_BOTTLE
-	loadspritegfx ANIM_TAG_THIN_RING
-	loadspritegfx ANIM_TAG_BLUE_STAR
-	monbg ANIM_TARGET
-	createsprite gMilkBottleSpriteTemplate, ANIM_ATTACKER, 2
-	delay 40
-	playsewithpan SE_M_CRABHAMMER, SOUND_PAN_ATTACKER
-	delay 12
-	playsewithpan SE_M_CRABHAMMER, SOUND_PAN_ATTACKER
-	delay 20
-	playsewithpan SE_M_CRABHAMMER, SOUND_PAN_ATTACKER
-	waitforvisualfinish
-	createsprite gThinRingExpandingSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 1, 0
-	playsewithpan SE_M_MILK_DRINK, SOUND_PAN_ATTACKER
-	waitforvisualfinish
-	clearmonbg ANIM_TARGET
-	call HealingEffect2
-	waitforvisualfinish
-	end
-.endif
 
 Move_MAGNITUDE:
 	createvisualtask AnimTask_IsPowerOver99, 2
@@ -3446,9 +3424,8 @@ Move_RAPID_SPIN:
 
 @ DAEMONS -- NIGHT REPAIR -- maintenance run while the field is dark: the ground dims to black (neutral, not colour),
 @ the repair happens in two quiet steps, and the light comes back. No moon, no sparkles.
-@ T-139 DRAFT under vision.md 9.24: the debug ROMs play it, the release ROMs keep vanilla's until approved.
+@ T-139, approved 2026-09-17 under vision.md 9.24.
 Move_MOONLIGHT:
-.if DAEMONS_DEBUG
 	monbg ANIM_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 0, 12, RGB_BLACK
 	waitforvisualfinish
@@ -3467,33 +3444,6 @@ Move_MOONLIGHT:
 	waitforvisualfinish
 	clearmonbg ANIM_ATTACKER
 	end
-.else
-	loadspritegfx ANIM_TAG_MOON
-	loadspritegfx ANIM_TAG_GREEN_SPARKLE
-	loadspritegfx ANIM_TAG_BLUE_STAR
-	setalpha 0, 16
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, F_PAL_BG, 1, 0, 16, RGB_BLACK
-	waitforvisualfinish
-	createsprite gMoonSpriteTemplate, ANIM_ATTACKER, 2, 120, 56
-	createvisualtask AnimTask_AlphaFadeIn, 3, 0, 16, 16, 0, 1
-	playsewithpan SE_M_MOONLIGHT, 0
-	delay 30
-	createsprite gMoonlightSparkleSpriteTemplate, ANIM_ATTACKER, 40, -12, 0
-	delay 30
-	createsprite gMoonlightSparkleSpriteTemplate, ANIM_ATTACKER, 40, -24, 0
-	delay 30
-	createsprite gMoonlightSparkleSpriteTemplate, ANIM_ATTACKER, 40, 21, 0
-	delay 30
-	createsprite gMoonlightSparkleSpriteTemplate, ANIM_ATTACKER, 40, 0, 0
-	delay 30
-	createsprite gMoonlightSparkleSpriteTemplate, ANIM_ATTACKER, 40, 10, 0
-	delay 20
-	createvisualtask AnimTask_MoonlightEndFade, 2
-	waitforvisualfinish
-	call HealingEffect
-	waitforvisualfinish
-	end
-.endif
 
 Move_EXTREME_SPEED:
 	loadspritegfx ANIM_TAG_SPEED_DUST
@@ -4219,9 +4169,8 @@ Move_NEEDLE_ARM:
 
 @ DAEMONS -- SLACK OFF -- recovering by doing less: the sprite slumps (vanilla's squish, which is a sag, not an effort),
 @ its colour sags half-way to grey with it, and drifts back.
-@ T-139 DRAFT under vision.md 9.24: the debug ROMs play it, the release ROMs keep vanilla's until approved.
+@ T-139, approved 2026-09-17 under vision.md 9.24.
 Move_SLACK_OFF:
-.if DAEMONS_DEBUG
 	monbg ANIM_ATTACKER
 	createvisualtask AnimTask_SlackOffSquish, 2, ANIM_ATTACKER
 	playsewithpan SE_M_YAWN, SOUND_PAN_ATTACKER
@@ -4232,15 +4181,6 @@ Move_SLACK_OFF:
 	waitforvisualfinish
 	clearmonbg ANIM_ATTACKER
 	end
-.else
-	loadspritegfx ANIM_TAG_BLUE_STAR
-	createvisualtask AnimTask_SlackOffSquish, 2, ANIM_ATTACKER
-	playsewithpan SE_M_YAWN, SOUND_PAN_ATTACKER
-	waitforvisualfinish
-	call HealingEffect
-	waitforvisualfinish
-	end
-.endif
 
 Move_CRUSH_CLAW:
 	loadspritegfx ANIM_TAG_BLUE_LIGHT_WALL
@@ -4266,9 +4206,8 @@ Move_CRUSH_CLAW:
 
 @ DAEMONS -- RETRAIN -- CLEAR STATE for the whole side, in GROWTH: everyone on the user's side goes to its type colour and
 @ comes back at once, twice. No flowers.
-@ T-139 DRAFT under vision.md 9.24: the debug ROMs play it, the release ROMs keep vanilla's until approved.
+@ T-139, approved 2026-09-17 under vision.md 9.24.
 Move_AROMATHERAPY:
-.if DAEMONS_DEBUG
 	playsewithpan SE_M_PETAL_DANCE, 0
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATK_SIDE, 0, 0, 10, RGB(11, 19, 12)
 	waitforvisualfinish
@@ -4281,45 +4220,6 @@ Move_AROMATHERAPY:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATK_SIDE, 1, 10, 0, RGB(11, 19, 12)
 	waitforvisualfinish
 	end
-.else
-	playsewithpan SE_M_PETAL_DANCE, 0
-	loadspritegfx ANIM_TAG_FLOWER
-	loadspritegfx ANIM_TAG_THIN_RING
-	loadspritegfx ANIM_TAG_SPARKLE_2
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 0, F_PAL_BG, 0, 0, 7, RGB(13, 31, 12)
-	delay 1
-	monbg ANIM_ATTACKER
-	delay 1
-	createsprite gAromatherapySmallFlowerSpriteTemplate, ANIM_ATTACKER, 0, 24, 16, 0, 2, 2, 0, 0
-	createsprite gAromatherapySmallFlowerSpriteTemplate, ANIM_ATTACKER, 66, 64, 24, 0, 3, 1, 1, 0
-	createsprite gAromatherapyBigFlowerSpriteTemplate, ANIM_ATTACKER, 0, 16, 24, 0, 2, 1, 0, 0
-	delay 20
-	createsprite gAromatherapySmallFlowerSpriteTemplate, ANIM_ATTACKER, 66, 48, 12, 0, 4, 3, 1, 0
-	createsprite gAromatherapySmallFlowerSpriteTemplate, ANIM_ATTACKER, 0, 100, 16, 0, 3, 2, 0, 0
-	createsprite gAromatherapySmallFlowerSpriteTemplate, ANIM_ATTACKER, 0, 74, 24, 180, 3, 2, 0, 0
-	delay 10
-	createsprite gAromatherapySmallFlowerSpriteTemplate, ANIM_ATTACKER, 66, 80, 30, 0, 4, 1, 1, 0
-	createsprite gAromatherapySmallFlowerSpriteTemplate, ANIM_ATTACKER, 0, 128, 12, 0, 3, 3, 0, 0
-	createsprite gAromatherapyBigFlowerSpriteTemplate, ANIM_ATTACKER, 0, 90, 16, 0, 2, 1, 0, 0
-	waitforvisualfinish
-	clearmonbg ANIM_ATTACKER
-	delay 1
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 0, F_PAL_BG, 0, 7, 0, RGB(13, 31, 12)
-	delay 1
-	playsewithpan SE_M_STAT_INCREASE, SOUND_PAN_ATTACKER
-	createvisualtask AnimTask_StatusClearedEffect, 2, 1
-	waitforvisualfinish
-	playsewithpan SE_M_MORNING_SUN, SOUND_PAN_ATTACKER
-	createsprite gSparklingStarsSpriteTemplate, ANIM_ATTACKER, 16, -15, 0, 0, 0, 32, 60, 1
-	delay 8
-	createsprite gSparklingStarsSpriteTemplate, ANIM_ATTACKER, 16, 12, -5, 0, 0, 32, 60, 1
-	waitforvisualfinish
-	playsewithpan SE_SHINY, SOUND_PAN_ATTACKER
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 0, F_PAL_BG | F_PAL_ATK_SIDE | F_PAL_ANIM_1, 3, 10, 0, RGB(13, 31, 12)
-	createsprite gBlendThinRingExpandingSpriteTemplate, ANIM_ATTACKER, 16, 0, 0, 0, 1
-	waitforvisualfinish
-	end
-.endif
 
 Move_FAKE_TEARS:
 	loadspritegfx ANIM_TAG_SMALL_BUBBLES
@@ -4853,9 +4753,8 @@ Move_ICE_PUNCH:
 
 @ DAEMONS -- IDLE -- the whole state restored at once, then the process goes quiet: a drain, one snap back where RESTORE
 @ takes three, and a slow dim that settles. The sleep that follows has its own status animation.
-@ T-139 DRAFT under vision.md 9.24: the debug ROMs play it, the release ROMs keep vanilla's until approved.
+@ T-139, approved 2026-09-17 under vision.md 9.24.
 Move_REST:
-.if DAEMONS_DEBUG
 	monbg ANIM_ATTACKER
 	playsewithpan SE_M_TELEPORT, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 13, RGB(13, 13, 13)
@@ -4872,17 +4771,6 @@ Move_REST:
 	waitforvisualfinish
 	clearmonbg ANIM_ATTACKER
 	end
-.else
-	playsewithpan SE_M_SNORE, SOUND_PAN_ATTACKER
-	loadspritegfx ANIM_TAG_LETTER_Z
-	createsprite gSleepLetterZSpriteTemplate, ANIM_ATTACKER, 2, 4, -10, 16, 0, 0
-	delay 20
-	createsprite gSleepLetterZSpriteTemplate, ANIM_ATTACKER, 2, 4, -10, 16, 0, 0
-	delay 20
-	createsprite gSleepLetterZSpriteTemplate, ANIM_ATTACKER, 2, 4, -10, 16, 0, 0
-	waitforvisualfinish
-	end
-.endif
 
 Move_CONFUSION:
 	monbg ANIM_DEF_PARTNER
@@ -6118,9 +6006,8 @@ Move_LEECH_LIFE:
 
 @ DAEMONS -- REGROW -- grown back, not reloaded: a dip toward grey, and what returns comes back through GROWTH, the
 @ routine's own type, before settling into the daemon's colour.
-@ T-139 DRAFT under vision.md 9.24: the debug ROMs play it, the release ROMs keep vanilla's until approved.
+@ T-139, approved 2026-09-17 under vision.md 9.24.
 Move_SYNTHESIS:
-.if DAEMONS_DEBUG
 	monbg ANIM_ATTACKER
 	playsewithpan SE_M_TELEPORT, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 9, RGB(13, 13, 13)
@@ -6134,17 +6021,6 @@ Move_SYNTHESIS:
 	waitforvisualfinish
 	clearmonbg ANIM_ATTACKER
 	end
-.else
-	loadspritegfx ANIM_TAG_BLUE_STAR
-	loadspritegfx ANIM_TAG_SPARKLE_2
-	createvisualtask AnimTask_BlendColorCycle, 2, F_PAL_ATTACKER, 2, 2, 0, 16, RGB(27, 31, 18)
-	playsewithpan SE_M_MEGA_KICK, SOUND_PAN_ATTACKER
-	call GrantingStarsEffect
-	waitforvisualfinish
-	call HealingEffect
-	waitforvisualfinish
-	end
-.endif
 
 Move_TOXIC:
 	loadspritegfx ANIM_TAG_TOXIC_BUBBLE
@@ -7933,9 +7809,8 @@ CurseStats1:
 
 @ DAEMONS -- REPAIR -- a fault found and fixed by hand: its colour drops part-way to grey, and each of two jolts puts
 @ half of it back.
-@ T-139 DRAFT under vision.md 9.24: the debug ROMs play it, the release ROMs keep vanilla's until approved.
+@ T-139, approved 2026-09-17 under vision.md 9.24.
 Move_SOFT_BOILED:
-.if DAEMONS_DEBUG
 	monbg ANIM_ATTACKER
 	playsewithpan SE_M_TELEPORT, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 10, RGB(13, 13, 13)
@@ -7952,35 +7827,11 @@ Move_SOFT_BOILED:
 	waitforvisualfinish
 	clearmonbg ANIM_ATTACKER
 	end
-.else
-	loadspritegfx ANIM_TAG_BREAKING_EGG
-	loadspritegfx ANIM_TAG_THIN_RING
-	loadspritegfx ANIM_TAG_BLUE_STAR
-	monbg ANIM_ATK_PARTNER
-	playsewithpan SE_M_TAIL_WHIP, SOUND_PAN_ATTACKER
-	createvisualtask AnimTask_ShakeMon, 2, ANIM_ATTACKER, 0, 2, 6, 1
-	createsprite gSoftBoiledEggSpriteTemplate, ANIM_ATTACKER, 4, 0, 16, 0
-	createsprite gSoftBoiledEggSpriteTemplate, ANIM_ATTACKER, 4, 0, 16, 1
-	delay 120
-	delay 7
-	playsewithpan SE_M_HORN_ATTACK, SOUND_PAN_ATTACKER
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, F_PAL_BG | F_PAL_BATTLERS, 3, 10, 0, RGB(12, 24, 30)
-	createsprite gThinRingExpandingSpriteTemplate, ANIM_ATTACKER, 3, 31, 16, 0, 1
-	delay 8
-	createsprite gThinRingExpandingSpriteTemplate, ANIM_ATTACKER, 3, 31, 16, 0, 1
-	delay 60
-	setarg 7, 0xFFFF
-	waitforvisualfinish
-	clearmonbg ANIM_ATK_PARTNER
-	call HealingEffect2
-	end
-.endif
 
 @ DAEMONS -- HEAL BELL -- the name was kept, and a bell is a signal to everyone: RETRAIN's side-wide reset in CONTENT,
 @ struck three times to the bell's own sound. No bell or notes drawn.
-@ T-139 DRAFT under vision.md 9.24: the debug ROMs play it, the release ROMs keep vanilla's until approved.
+@ T-139, approved 2026-09-17 under vision.md 9.24.
 Move_HEAL_BELL:
-.if DAEMONS_DEBUG
 	playsewithpan SE_M_HEAL_BELL, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATK_SIDE, 0, 0, 9, RGB(24, 23, 21)
 	waitforvisualfinish
@@ -8000,52 +7851,6 @@ Move_HEAL_BELL:
 	waitforvisualfinish
 	delay 4
 	end
-.else
-	loadspritegfx ANIM_TAG_BELL
-	loadspritegfx ANIM_TAG_MUSIC_NOTES_2
-	loadspritegfx ANIM_TAG_THIN_RING
-	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATK_SIDE, 0, 0, 10, RGB_WHITE
-	waitforvisualfinish
-	createvisualtask AnimTask_LoadMusicNotesPals, 5
-	createsprite gBellSpriteTemplate, ANIM_ATTACKER, 2, 0, -24, 0, 1
-	delay 12
-	createsprite gHealBellMusicNoteSpriteTemplate, ANIM_ATTACKER, 40, 0, -24, 48, -18, 35, 0, 0
-	createsprite gHealBellMusicNoteSpriteTemplate, ANIM_ATTACKER, 40, 0, -24, -48, 20, 30, 1, 1
-	createsprite gHealBellMusicNoteSpriteTemplate, ANIM_ATTACKER, 40, 0, -24, -38, -29, 30, 2, 2
-	createsprite gHealBellMusicNoteSpriteTemplate, ANIM_ATTACKER, 40, 0, -24, 36, 18, 30, 3, 3
-	call HealBellRing
-	delay 33
-	createsprite gHealBellMusicNoteSpriteTemplate, ANIM_ATTACKER, 40, 0, -24, 19, 26, 35, 4, 4
-	createsprite gHealBellMusicNoteSpriteTemplate, ANIM_ATTACKER, 40, 0, -24, -34, -12, 30, 5, 5
-	createsprite gHealBellMusicNoteSpriteTemplate, ANIM_ATTACKER, 40, 0, -24, 41, -20, 34, 6, 2
-	createsprite gHealBellMusicNoteSpriteTemplate, ANIM_ATTACKER, 40, 0, -24, -15, 26, 32, 7, 0
-	call HealBellRing
-	delay 33
-	createsprite gHealBellMusicNoteSpriteTemplate, ANIM_ATTACKER, 40, 0, -24, -48, 18, 31, 0, 2
-	createsprite gHealBellMusicNoteSpriteTemplate, ANIM_ATTACKER, 40, 0, -24, 48, -20, 30, 2, 5
-	createsprite gHealBellMusicNoteSpriteTemplate, ANIM_ATTACKER, 40, 0, -24, 38, 29, 33, 4, 3
-	createsprite gHealBellMusicNoteSpriteTemplate, ANIM_ATTACKER, 40, 0, -24, -36, -18, 30, 6, 1
-	call HealBellRing
-	waitforvisualfinish
-	createvisualtask AnimTask_FreeMusicNotesPals, 5
-	waitforvisualfinish
-	unloadspritegfx ANIM_TAG_BELL
-	unloadspritegfx ANIM_TAG_MUSIC_NOTES_2
-	unloadspritegfx ANIM_TAG_THIN_RING
-	loadspritegfx ANIM_TAG_SPARKLE_2
-	playsewithpan SE_M_MORNING_SUN, SOUND_PAN_ATTACKER
-	createsprite gSparklingStarsSpriteTemplate, ANIM_ATTACKER, 16, -15, 0, 0, 0, 32, 60, 1
-	delay 8
-	createsprite gSparklingStarsSpriteTemplate, ANIM_ATTACKER, 16, 12, -5, 0, 0, 32, 60, 1
-	waitforvisualfinish
-	unloadspritegfx ANIM_TAG_SPARKLE_2
-	loadspritegfx ANIM_TAG_THIN_RING
-	playsewithpan SE_SHINY, SOUND_PAN_ATTACKER
-	createvisualtask AnimTask_BlendBattleAnimPalExclude, 10, 4, 3, 10, 0, RGB(12, 24, 30)
-	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATK_SIDE, 3, 10, 0, RGB_WHITE
-	createsprite gBlendThinRingExpandingSpriteTemplate, ANIM_ATTACKER, 16, 0, 0, 0, 1
-	end
-.endif
 
 HealBellRing:
 	createvisualtask AnimTask_BlendBattleAnimPalExclude, 10, 4, 3, 8, 0, RGB(12, 24, 30)
@@ -8132,9 +7937,8 @@ Move_FURY_SWIPES:
 
 @ DAEMONS -- ROOT -- the process pinned where it runs: three downward jolts as it fixes in place, its colour held toward
 @ GROWTH while it does, and released slowly. It will not be moved; that is the point.
-@ T-139 DRAFT under vision.md 9.24: the debug ROMs play it, the release ROMs keep vanilla's until approved.
+@ T-139, approved 2026-09-17 under vision.md 9.24.
 Move_INGRAIN:
-.if DAEMONS_DEBUG
 	monbg ANIM_ATTACKER
 	playsewithpan SE_M_SCRATCH, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_ATTACKER, 0, 2, 2, 1
@@ -8152,36 +7956,6 @@ Move_INGRAIN:
 	waitforvisualfinish
 	clearmonbg ANIM_ATTACKER
 	end
-.else
-	loadspritegfx ANIM_TAG_ROOTS
-	loadspritegfx ANIM_TAG_ORBS
-	createsprite gIngrainRootSpriteTemplate, ANIM_ATTACKER, 2, 16, 26, -1, 2, 150
-	playsewithpan SE_M_SCRATCH, SOUND_PAN_ATTACKER
-	delay 10
-	createsprite gIngrainRootSpriteTemplate, ANIM_ATTACKER, 2, -32, 20, 1, 1, 140
-	playsewithpan SE_M_SCRATCH, SOUND_PAN_ATTACKER
-	delay 10
-	createsprite gIngrainRootSpriteTemplate, ANIM_ATTACKER, 2, 32, 22, 1, 0, 130
-	playsewithpan SE_M_SCRATCH, SOUND_PAN_ATTACKER
-	delay 10
-	createsprite gIngrainRootSpriteTemplate, ANIM_ATTACKER, 2, -16, 25, -1, 3, 120
-	playsewithpan SE_M_SCRATCH, SOUND_PAN_ATTACKER
-	delay 40
-	createsprite gIngrainOrbSpriteTemplate, ANIM_ATTACKER, 3, 32, 26, -1, 3, 30
-	delay 5
-	playsewithpan SE_M_BUBBLE3, SOUND_PAN_ATTACKER
-	delay 5
-	createsprite gIngrainOrbSpriteTemplate, ANIM_ATTACKER, 3, -48, 20, 1, 2, 30
-	playsewithpan SE_M_BUBBLE3, SOUND_PAN_ATTACKER
-	delay 5
-	playsewithpan SE_M_BUBBLE3, SOUND_PAN_ATTACKER
-	delay 5
-	createsprite gIngrainOrbSpriteTemplate, ANIM_ATTACKER, 3, 48, 26, -2, 3, 18
-	playsewithpan SE_M_BUBBLE3, SOUND_PAN_ATTACKER
-	delay 10
-	waitforvisualfinish
-	end
-.endif
 
 Move_PRESENT:
 	loadspritegfx ANIM_TAG_ITEM_BAG
@@ -8478,9 +8252,8 @@ Move_TRICK:
 
 @ DAEMONS -- DEFERRED -- scheduled, not done: the colour dims a little and holds, as a job waits in a queue, and
 @ comes back without anything having happened yet. The HP arrives next turn, with its message.
-@ T-139 DRAFT under vision.md 9.24: the debug ROMs play it, the release ROMs keep vanilla's until approved.
+@ T-139, approved 2026-09-17 under vision.md 9.24.
 Move_WISH:
-.if DAEMONS_DEBUG
 	monbg ANIM_ATTACKER
 	playsewithpan SE_M_REFLECT, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 0, 6, RGB(13, 13, 13)
@@ -8491,28 +8264,11 @@ Move_WISH:
 	waitforvisualfinish
 	clearmonbg ANIM_ATTACKER
 	end
-.else
-	loadspritegfx ANIM_TAG_GOLD_STARS
-	loadspritegfx ANIM_TAG_SPARKLE_2
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, F_PAL_BG, 3, 0, 10, RGB_BLACK
-	waitforvisualfinish
-	panse_adjustall SE_M_REFLECT, SOUND_PAN_TARGET, SOUND_PAN_ATTACKER, -3, 0
-	createsprite gWishStarSpriteTemplate, ANIM_ATTACKER, 40
-	waitforvisualfinish
-	delay 60
-	loopsewithpan SE_M_HEAL_BELL, SOUND_PAN_ATTACKER, 16, 3
-	call GrantingStarsEffect
-	waitforvisualfinish
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, F_PAL_BG, 3, 10, 0, RGB_BLACK
-	waitforvisualfinish
-	end
-.endif
 
 @ DAEMONS -- ENQUEUE -- one item pushed onto a queue: a single tick, a nudge, and a brief pulse of its routine's own type
 @ colour (CONTENT). No orbs drawn in from outside.
-@ T-139 DRAFT under vision.md 9.24: the debug ROMs play it, the release ROMs keep vanilla's until approved.
+@ T-139, approved 2026-09-17 under vision.md 9.24.
 Move_STOCKPILE:
-.if DAEMONS_DEBUG
 	monbg ANIM_ATTACKER
 	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_ATTACKER, 0, 1, 2, 1
@@ -8522,17 +8278,6 @@ Move_STOCKPILE:
 	waitforvisualfinish
 	clearmonbg ANIM_ATTACKER
 	end
-.else
-	loadspritegfx ANIM_TAG_GRAY_ORB
-	playsewithpan SE_M_MEGA_KICK, SOUND_PAN_ATTACKER
-	createvisualtask AnimTask_BlendColorCycle, 2, F_PAL_ATTACKER, 8, 1, 0, 12, RGB_WHITE
-	createvisualtask AnimTask_StockpileDeformMon, 5
-	call StockpileAbsorb
-	call StockpileAbsorb
-	waitforvisualfinish
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, F_PAL_ATTACKER, 0, 12, 0, RGB_WHITE
-	end
-.endif
 
 StockpileAbsorb:
 	createsprite gStockpileAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 2, 55, 55, 13
@@ -8604,9 +8349,8 @@ SpitUpStrongest:
 
 @ DAEMONS -- DEQUEUE -- what ENQUEUE stored comes back out: the colour drains, and returns in as many ticked steps as
 @ there were items queued (the move turn is the stockpile count, as vanilla's own branches read it).
-@ T-139 DRAFT under vision.md 9.24: the debug ROMs play it, the release ROMs keep vanilla's until approved.
+@ T-139, approved 2026-09-17 under vision.md 9.24.
 Move_SWALLOW:
-.if DAEMONS_DEBUG
 	monbg ANIM_ATTACKER
 	playsewithpan SE_M_TELEPORT, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 12, RGB(13, 13, 13)
@@ -8642,54 +8386,6 @@ DequeueThree:
 DequeueDone:
 	clearmonbg ANIM_ATTACKER
 	end
-.else
-	loadspritegfx ANIM_TAG_BLUE_ORB
-	loadspritegfx ANIM_TAG_BLUE_STAR
-	playsewithpan SE_M_TAKE_DOWN, SOUND_PAN_ATTACKER
-	createvisualtask AnimTask_SwallowDeformMon, 5
-	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 8, 2
-	delay 38
-	playsewithpan SE_M_SPIT_UP, SOUND_PAN_ATTACKER
-	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 2, 0, 12, 1
-	call SwallowEffect
-	jumpifmoveturn 2, SwallowGood
-	jumpifmoveturn 3, SwallowBest
-SwallowContinue:
-	waitforvisualfinish
-	call HealingEffect
-	end
-
-SwallowEffect:
-	createsprite gSwallowBlueOrbSpriteTemplate, ANIM_ATTACKER, 2, 0, -8
-	delay 1
-	createsprite gSwallowBlueOrbSpriteTemplate, ANIM_ATTACKER, 2, -24, -8
-	delay 1
-	createsprite gSwallowBlueOrbSpriteTemplate, ANIM_ATTACKER, 2, 16, -8
-	delay 1
-	createsprite gSwallowBlueOrbSpriteTemplate, ANIM_ATTACKER, 2, -16, -8
-	delay 1
-	createsprite gSwallowBlueOrbSpriteTemplate, ANIM_ATTACKER, 2, 24, -8
-	delay 1
-	return
-
-SwallowGood:
-	call SwallowEffect
-	goto SwallowContinue
-
-SwallowBest:
-	call SwallowEffect
-	call SwallowEffect
-	goto SwallowContinue
-
-@ PERSPECTIVE. 4.6: taking another's frame is TOTAL and it is LOSSY -- you get
-@ the other's frame by surrendering your own -- and 9.4 makes a daemon's palette
-@ its TYPE, so the swap already carries the meaning: the attacker leaves wearing
-@ the target's colour. What vanilla did not show is the cost.
-@
-@ So its own hue drains to grey BEFORE the swap and the new one arrives after.
-@ Grey is not a colour spent here; 8.6 makes grey the ground this game already
-@ stands on, so the surrender is drawn as a return to it.
-.endif
 Move_TRANSFORM:
 	monbg ANIM_ATTACKER
 	playsewithpan SE_M_TELEPORT, SOUND_PAN_ATTACKER
@@ -8707,9 +8403,8 @@ Move_TRANSFORM:
 
 @ DAEMONS -- WARM BOOT -- powered off and on again: the daemon goes near-black, the field flashes once in CONTENT as the
 @ power comes back, and its colour ramps up in one pass.
-@ T-139 DRAFT under vision.md 9.24: the debug ROMs play it, the release ROMs keep vanilla's until approved.
+@ T-139, approved 2026-09-17 under vision.md 9.24.
 Move_MORNING_SUN:
-.if DAEMONS_DEBUG
 	monbg ANIM_ATTACKER
 	playsewithpan SE_M_TELEPORT, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 14, RGB(3, 3, 3)
@@ -8724,34 +8419,6 @@ Move_MORNING_SUN:
 	waitforvisualfinish
 	clearmonbg ANIM_ATTACKER
 	end
-.else
-	loadspritegfx ANIM_TAG_GREEN_STAR
-	loadspritegfx ANIM_TAG_BLUE_STAR
-	createvisualtask AnimTask_MorningSunLightBeam, 5
-	delay 8
-	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_BATTLERS_2, 8, 0, 12, RGB_WHITE
-	delay 14
-	call MorningSunStar
-	call MorningSunStar
-	call MorningSunStar
-	call MorningSunStar
-	call MorningSunStar
-	call MorningSunStar
-	call MorningSunStar
-	call MorningSunStar
-	call MorningSunStar
-	call MorningSunStar
-	call MorningSunStar
-	call MorningSunStar
-	call MorningSunStar
-	call MorningSunStar
-	call MorningSunStar
-	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_BATTLERS_2, 3, 12, 0, RGB_WHITE
-	waitforvisualfinish
-	waitsound
-	call HealingEffect
-	end
-.endif
 
 MorningSunStar:
 	createsprite gGreenStarSpriteTemplate, ANIM_ATTACKER, 2, 30, 640
@@ -8911,9 +8578,8 @@ Move_ROLE_PLAY:
 
 @ DAEMONS -- CLEAR STATE -- a reset: one instant drop to grey and one instant return. Nothing is added; a fault is simply
 @ no longer there.
-@ T-139 DRAFT under vision.md 9.24: the debug ROMs play it, the release ROMs keep vanilla's until approved.
+@ T-139, approved 2026-09-17 under vision.md 9.24.
 Move_REFRESH:
-.if DAEMONS_DEBUG
 	monbg ANIM_ATTACKER
 	playsewithpan SE_M_TELEPORT, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 13, RGB(13, 13, 13)
@@ -8924,20 +8590,6 @@ Move_REFRESH:
 	waitforvisualfinish
 	clearmonbg ANIM_ATTACKER
 	end
-.else
-	loadspritegfx ANIM_TAG_THIN_RING
-	loadspritegfx ANIM_TAG_SPARKLE_2
-	playsewithpan SE_M_STAT_INCREASE, SOUND_PAN_ATTACKER
-	createvisualtask AnimTask_StatusClearedEffect, 2, 0
-	waitforvisualfinish
-	playsewithpan SE_M_MORNING_SUN, SOUND_PAN_ATTACKER
-	call GrantingStarsEffect
-	waitforvisualfinish
-	playsewithpan SE_SHINY, SOUND_PAN_ATTACKER
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, F_PAL_BG | F_PAL_BATTLERS, 3, 10, 0, RGB(12, 24, 30)
-	createsprite gThinRingExpandingSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 0, 0
-	end
-.endif
 
 Move_BLAZE_KICK:
 	loadspritegfx ANIM_TAG_IMPACT
