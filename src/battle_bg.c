@@ -433,6 +433,14 @@ static const u32 sBattleTerrainPalette_Bruno[] = INCBIN_U32("graphics/battle_ter
 static const u32 sBattleTerrainPalette_Agatha[] = INCBIN_U32("graphics/battle_terrain/indoor/agatha.gbapal.lz");
 static const u32 sBattleTerrainPalette_Lance[] = INCBIN_U32("graphics/battle_terrain/indoor/lance.gbapal.lz");
 static const u32 sBattleTerrainPalette_Champion[] = INCBIN_U32("graphics/battle_terrain/indoor/champion.gbapal.lz");
+static const u32 sBattleTerrainPalette_BenchmarkSlate[] = INCBIN_U32("graphics/battle_terrain/indoor/benchmark_slate.gbapal.lz");
+static const u32 sBattleTerrainPalette_BenchmarkDoldrum[] = INCBIN_U32("graphics/battle_terrain/indoor/benchmark_doldrum.gbapal.lz");
+static const u32 sBattleTerrainPalette_BenchmarkArdor[] = INCBIN_U32("graphics/battle_terrain/indoor/benchmark_ardor.gbapal.lz");
+static const u32 sBattleTerrainPalette_BenchmarkVerdigris[] = INCBIN_U32("graphics/battle_terrain/indoor/benchmark_verdigris.gbapal.lz");
+static const u32 sBattleTerrainPalette_BenchmarkLurid[] = INCBIN_U32("graphics/battle_terrain/indoor/benchmark_lurid.gbapal.lz");
+static const u32 sBattleTerrainPalette_BenchmarkBrazen[] = INCBIN_U32("graphics/battle_terrain/indoor/benchmark_brazen.gbapal.lz");
+static const u32 sBattleTerrainPalette_BenchmarkQuicksilver[] = INCBIN_U32("graphics/battle_terrain/indoor/benchmark_quicksilver.gbapal.lz");
+static const u32 sBattleTerrainPalette_BenchmarkCallow[] = INCBIN_U32("graphics/battle_terrain/indoor/benchmark_callow.gbapal.lz");
 static const u32 sBattleTerrainPalette_Plain[] = INCBIN_U32("graphics/battle_terrain/indoor/plain.gbapal.lz");
 static const u32 sBattleTerrainTiles_Indoor[] = INCBIN_U32("graphics/battle_terrain/indoor/terrain.4bpp.lz");
 static const u32 sBattleTerrainTilemap_Indoor[] = INCBIN_U32("graphics/battle_terrain/indoor/terrain.bin.lz");
@@ -597,6 +605,70 @@ static const struct BattleBackground sBattleTerrainTable[] = {
         .entryTileset = sBattleTerrainAnimTiles_Building,
         .entryTilemap = sBattleTerrainAnimTilemap_Building,
         .palette = sBattleTerrainPalette_Champion
+    },
+    [BATTLE_TERRAIN_BENCHMARK_SLATE] =
+    {
+        .tileset = sBattleTerrainTiles_Building,
+        .tilemap = sBattleTerrainTilemap_Building,
+        .entryTileset = sBattleTerrainAnimTiles_Building,
+        .entryTilemap = sBattleTerrainAnimTilemap_Building,
+        .palette = sBattleTerrainPalette_BenchmarkSlate
+    },
+    [BATTLE_TERRAIN_BENCHMARK_DOLDRUM] =
+    {
+        .tileset = sBattleTerrainTiles_Building,
+        .tilemap = sBattleTerrainTilemap_Building,
+        .entryTileset = sBattleTerrainAnimTiles_Building,
+        .entryTilemap = sBattleTerrainAnimTilemap_Building,
+        .palette = sBattleTerrainPalette_BenchmarkDoldrum
+    },
+    [BATTLE_TERRAIN_BENCHMARK_ARDOR] =
+    {
+        .tileset = sBattleTerrainTiles_Building,
+        .tilemap = sBattleTerrainTilemap_Building,
+        .entryTileset = sBattleTerrainAnimTiles_Building,
+        .entryTilemap = sBattleTerrainAnimTilemap_Building,
+        .palette = sBattleTerrainPalette_BenchmarkArdor
+    },
+    [BATTLE_TERRAIN_BENCHMARK_VERDIGRIS] =
+    {
+        .tileset = sBattleTerrainTiles_Building,
+        .tilemap = sBattleTerrainTilemap_Building,
+        .entryTileset = sBattleTerrainAnimTiles_Building,
+        .entryTilemap = sBattleTerrainAnimTilemap_Building,
+        .palette = sBattleTerrainPalette_BenchmarkVerdigris
+    },
+    [BATTLE_TERRAIN_BENCHMARK_LURID] =
+    {
+        .tileset = sBattleTerrainTiles_Building,
+        .tilemap = sBattleTerrainTilemap_Building,
+        .entryTileset = sBattleTerrainAnimTiles_Building,
+        .entryTilemap = sBattleTerrainAnimTilemap_Building,
+        .palette = sBattleTerrainPalette_BenchmarkLurid
+    },
+    [BATTLE_TERRAIN_BENCHMARK_BRAZEN] =
+    {
+        .tileset = sBattleTerrainTiles_Building,
+        .tilemap = sBattleTerrainTilemap_Building,
+        .entryTileset = sBattleTerrainAnimTiles_Building,
+        .entryTilemap = sBattleTerrainAnimTilemap_Building,
+        .palette = sBattleTerrainPalette_BenchmarkBrazen
+    },
+    [BATTLE_TERRAIN_BENCHMARK_QUICKSILVER] =
+    {
+        .tileset = sBattleTerrainTiles_Building,
+        .tilemap = sBattleTerrainTilemap_Building,
+        .entryTileset = sBattleTerrainAnimTiles_Building,
+        .entryTilemap = sBattleTerrainAnimTilemap_Building,
+        .palette = sBattleTerrainPalette_BenchmarkQuicksilver
+    },
+    [BATTLE_TERRAIN_BENCHMARK_CALLOW] =
+    {
+        .tileset = sBattleTerrainTiles_Building,
+        .tilemap = sBattleTerrainTilemap_Building,
+        .entryTileset = sBattleTerrainAnimTiles_Building,
+        .entryTilemap = sBattleTerrainAnimTilemap_Building,
+        .palette = sBattleTerrainPalette_BenchmarkCallow
     }
 };
 
@@ -1046,6 +1118,29 @@ void DrawBattleEntryBackground(void)
     }
 }
 
+// T-16: a BENCHMARK's trainers and its leader battle in the town's own colour. Keyed by the MAP the
+// battle is on, not the trainer's class, so the room is the room you met them in.
+static const struct { u16 map; u8 terrain; } sBenchmarkRooms[] = {
+    {MAP_PEWTER_CITY_GYM, BATTLE_TERRAIN_BENCHMARK_SLATE},
+    {MAP_CERULEAN_CITY_GYM, BATTLE_TERRAIN_BENCHMARK_DOLDRUM},
+    {MAP_VERMILION_CITY_GYM, BATTLE_TERRAIN_BENCHMARK_ARDOR},
+    {MAP_CELADON_CITY_GYM, BATTLE_TERRAIN_BENCHMARK_VERDIGRIS},
+    {MAP_FUCHSIA_CITY_GYM, BATTLE_TERRAIN_BENCHMARK_LURID},
+    {MAP_SAFFRON_CITY_GYM, BATTLE_TERRAIN_BENCHMARK_BRAZEN},
+    {MAP_CINNABAR_ISLAND_GYM, BATTLE_TERRAIN_BENCHMARK_QUICKSILVER},
+    {MAP_VIRIDIAN_CITY_GYM, BATTLE_TERRAIN_BENCHMARK_CALLOW},
+};
+
+static u8 GetBenchmarkRoomTerrain(void)
+{
+    u32 i;
+    u16 map = (gSaveBlock1Ptr->location.mapGroup << 8) | gSaveBlock1Ptr->location.mapNum;
+    for (i = 0; i < ARRAY_COUNT(sBenchmarkRooms); i++)
+        if (sBenchmarkRooms[i].map == map)
+            return sBenchmarkRooms[i].terrain;
+    return 0;
+}
+
 static u8 GetBattleTerrainOverride(void)
 {
     u8 battleScene;
@@ -1057,6 +1152,10 @@ static u8 GetBattleTerrainOverride(void)
     {
         gBattleTerrain = BATTLE_TERRAIN_GRASS;
         return BATTLE_TERRAIN_GRASS;
+    }
+    else if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER) && GetBenchmarkRoomTerrain())
+    {
+        return GetBenchmarkRoomTerrain();
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
     {
