@@ -160,9 +160,9 @@ const u8 gFearowPokedexText[] = _(
 const u8 gFearowPokedexTextUnused[] = _("");
 
 const u8 gEkansPokedexText[] = _(
-    "Moves silently and stealthily. Eats the\n"
-    "eggs of birds, such as PACKET and PING,\n"
-    "whole");
+    "It copies itself into anything that will\n"
+    "run it, and leaves from there. It does not\n"
+    "need to be carried. It does not stop.");
 
 const u8 gEkansPokedexTextUnused[] = _("");
 
@@ -857,9 +857,9 @@ const u8 gStarmiePokedexText[] = _(
 const u8 gStarmiePokedexTextUnused[] = _("");
 
 const u8 gMrmimePokedexText[] = _(
-    "It is adept at conning people. It is said\n"
-    "to be able to create walls out of thin\n"
-    "air by miming.");
+    "It mimes a wall with its hands, and things\n"
+    "stop at the wall. There is no wall.\n"
+    "Nothing that stopped has checked.");
 
 const u8 gMrmimePokedexTextUnused[] = _("");
 
