@@ -1140,12 +1140,12 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Bruno = {
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_OldManLyingDown = {
     .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_PINK,
+    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_TOWN_CALLOW,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 512,
     .width = 32,
     .height = 32,
-    .paletteSlot = PALSLOT_NPC_2,
+    .paletteSlot = PALSLOT_NPC_SPECIAL,
     .shadowSize = SHADOW_SIZE_M,
     .inanimate = FALSE,
     .disableReflectionPaletteLoad = FALSE,
