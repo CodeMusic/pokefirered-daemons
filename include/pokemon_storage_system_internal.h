@@ -372,6 +372,7 @@ struct PokemonStorageSystemData
     u8 cursorFlipTimer;
     u8 cursorPalNums[2];
     const u32 *displayMonPalette;
+    u16 displayMonMoves[MAX_MON_MOVES]; // T-132: its streaks, applied when the picture loads
     u32 displayMonPersonality;
     u16 displayMonSpecies;
     u16 displayMonItemId;

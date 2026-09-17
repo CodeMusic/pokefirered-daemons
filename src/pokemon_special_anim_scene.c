@@ -15,6 +15,7 @@
 #include "constants/menu.h"
 #include "constants/pokemon_special_anim.h"
 #include "constants/songs.h"
+#include "daemon_streaks.h"
 
 static void LoadBgGfxByAnimType(u16 animType);
 static void Task_ZoomAnim(u8 taskId);
@@ -673,6 +674,12 @@ void PSA_CreateMonSpriteAtCloseness(u8 closeness)
     {
         HandleLoadSpecialPokePic(&gMonFrontPicTable[species], monPicBuffer, species, personality);
         LZ77UnCompWram(GetMonFrontSpritePal(pokemon), monPalBuffer);
+        {
+            u16 moves[MAX_MON_MOVES];
+
+            Streaks_MovesOfMon(pokemon, moves);
+            Streaks_ApplyToBuffer(monPalBuffer, species, moves);
+        }
         LoadMonSpriteGraphics(monPicBuffer, monPalBuffer);
         spriteId = CreateSprite(&sSpriteTemplate_MonSprite, 120, scene->monSpriteY1, 4);
         if (spriteId != MAX_SPRITES)

@@ -17,6 +17,7 @@
 #include "constants/battle_anim.h"
 #include "constants/moves.h"
 #include "constants/songs.h"
+#include "daemon_streaks.h"
 
 static bool8 ShouldAnimBeDoneRegardlessOfSubsitute(u8 animId);
 static void Task_ClearBitWhenBattleTableAnimDone(u8 taskId);
@@ -349,6 +350,17 @@ void BattleLoadOpponentMonSpriteGfx(struct Pokemon *mon, u8 battlerId)
         lzPaletteData = GetMonSpritePalFromSpeciesAndPersonality(species, otId, monsPersonality);
     buffer = AllocZeroed(0x400);
     LZDecompressWram(lzPaletteData, buffer);
+    // T-132: the streaks, BEFORE either load so the sprite and its background copy both carry them.
+    // While PERSPECTIVE-changed, the battler's current moves are the target's, and so are the streaks.
+    {
+        u16 moves[MAX_MON_MOVES];
+
+        if (gBattleSpritesDataPtr->battlerData[battlerId].transformSpecies == SPECIES_NONE)
+            Streaks_MovesOfMon(mon, moves);
+        else
+            Streaks_MovesOfBattler(battlerId, moves);
+        Streaks_ApplyToBuffer(buffer, species, moves);
+    }
     LoadPalette(buffer, paletteOffset, PLTT_SIZE_4BPP);
     LoadPalette(buffer, BG_PLTT_ID(8) + BG_PLTT_ID(battlerId), PLTT_SIZE_4BPP);
     Free(buffer);
@@ -403,6 +415,17 @@ void BattleLoadPlayerMonSpriteGfx(struct Pokemon *mon, u8 battlerId)
         lzPaletteData = GetMonSpritePalFromSpeciesAndPersonality(species, otId, monsPersonality);
     buffer = AllocZeroed(0x400);
     LZDecompressWram(lzPaletteData, buffer);
+    // T-132: the streaks, BEFORE either load so the sprite and its background copy both carry them.
+    // While PERSPECTIVE-changed, the battler's current moves are the target's, and so are the streaks.
+    {
+        u16 moves[MAX_MON_MOVES];
+
+        if (gBattleSpritesDataPtr->battlerData[battlerId].transformSpecies == SPECIES_NONE)
+            Streaks_MovesOfMon(mon, moves);
+        else
+            Streaks_MovesOfBattler(battlerId, moves);
+        Streaks_ApplyToBuffer(buffer, species, moves);
+    }
     LoadPalette(buffer, paletteOffset, PLTT_SIZE_4BPP);
     LoadPalette(buffer, BG_PLTT_ID(8) + BG_PLTT_ID(battlerId), PLTT_SIZE_4BPP);
     Free(buffer);
@@ -691,6 +714,12 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, u8 transformType)
         lzPaletteData = GetMonSpritePalFromSpeciesAndPersonality(targetSpecies, otId, personalityValue);
         buffer = AllocZeroed(0x400);
         LZDecompressWram(lzPaletteData, buffer);
+        {
+            u16 moves[MAX_MON_MOVES];
+
+            Streaks_MovesOfMon(&gEnemyParty[gBattlerPartyIndexes[battlerAtk]], moves);
+            Streaks_ApplyToBuffer(buffer, targetSpecies, moves);
+        }
         LoadPalette(buffer, paletteOffset, PLTT_SIZE_4BPP);
         Free(buffer);
         gSprites[gBattlerSpriteIds[battlerAtk]].y = GetBattlerSpriteDefault_Y(battlerAtk);
@@ -749,6 +778,13 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, u8 transformType)
         lzPaletteData = GetMonSpritePalFromSpeciesAndPersonality(targetSpecies, otId, personalityValue);
         buffer = AllocZeroed(0x400);
         LZDecompressWram(lzPaletteData, buffer);
+        // PERSPECTIVE takes the target's moves, so it takes the target's streaks (9.4).
+        {
+            u16 moves[MAX_MON_MOVES];
+
+            Streaks_MovesOfBattler(battlerDef, moves);
+            Streaks_ApplyToBuffer(buffer, targetSpecies, moves);
+        }
         LoadPalette(buffer, paletteOffset, PLTT_SIZE_4BPP);
         Free(buffer);
         if (targetSpecies == SPECIES_CASTFORM)

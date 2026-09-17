@@ -82,6 +82,7 @@ SECTIONS {
         src/battle_ai_switch_items.o(.text);
         src/battle_controller_link_opponent.o(.text);
         src/pokemon.o(.text);
+        src/daemon_streaks.o(.text);
         src/trig.o(.text);
         src/random.o(.text);
         src/util.o(.text);
@@ -420,6 +421,7 @@ SECTIONS {
         src/battle_controller_opponent.o(.rodata);
         src/battle_controller_link_opponent.o(.rodata);
         src/pokemon.o(.rodata);
+        src/daemon_streaks.o(.rodata);
         src/trig.o(.rodata);
         src/util.o(.rodata);
         src/daycare.o(.rodata);

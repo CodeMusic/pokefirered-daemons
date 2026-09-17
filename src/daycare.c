@@ -82,6 +82,7 @@ EWRAM_DATA static u16 sHatchedEggEggMoves[EGG_MOVES_ARRAY_COUNT] = {0};
 EWRAM_DATA static u16 sHatchedEggMotherMoves[4] = {0};
 
 #include "data/pokemon/egg_moves.h"
+#include "daemon_streaks.h"
 
 static const struct WindowTemplate sDaycareLevelMenuWindowTemplate =
 {
@@ -1726,6 +1727,12 @@ static u8 EggHatchCreateMonSprite(u8 a0, u8 switchID, u8 pokeID, u16 *speciesLoc
         u32 pid = GetMonData(mon, MON_DATA_PERSONALITY);
         HandleLoadSpecialPokePic(&gMonFrontPicTable[species], gMonSpritesGfxPtr->sprites[(a0 * 2) + 1], species, pid);
         LoadCompressedSpritePalette(GetMonSpritePalStruct(mon));
+        {
+            u16 moves[MAX_MON_MOVES];
+
+            Streaks_MovesOfMon(mon, moves);
+            Streaks_ApplyToLoaded(OBJ_PLTT_ID(IndexOfSpritePaletteTag(GetMonSpritePalStruct(mon)->tag)), species, moves);
+        }
         *speciesLoc = species;
     }
         break;

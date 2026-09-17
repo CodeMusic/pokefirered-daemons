@@ -25,6 +25,7 @@
 #include "constants/items.h"
 #include "constants/help_system.h"
 #include "constants/songs.h"
+#include "daemon_streaks.h"
 
 EWRAM_DATA struct PokemonStorageSystemData *gStorage = NULL;
 static EWRAM_DATA bool8 sInPartyMenu = 0;
@@ -2276,6 +2277,7 @@ static void LoadDisplayMonGfx(u16 species, u32 personality)
     {
         HandleLoadSpecialPokePic(&gMonFrontPicTable[species], gStorage->tileBuffer, species, personality);
         LZ77UnCompWram(gStorage->displayMonPalette, gStorage->displayMonPalBuffer);
+        Streaks_ApplyToBuffer(gStorage->displayMonPalBuffer, species, gStorage->displayMonMoves);
         CpuCopy32(gStorage->tileBuffer, gStorage->displayMonTilePtr, 0x800);
         LoadPalette(gStorage->displayMonPalBuffer, gStorage->displayMonPalOffset, PLTT_SIZE_4BPP);
         gStorage->displayMonSprite->invisible = FALSE;

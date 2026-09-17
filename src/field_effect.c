@@ -28,6 +28,7 @@
 #include "constants/metatile_behaviors.h"
 #include "constants/songs.h"
 #include "constants/sound.h"
+#include "daemon_streaks.h"
 
 extern struct CompressedSpritePalette gMonPaletteTable[]; // Intentionally declared (incorrectly) without const in order to match
 extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
@@ -621,6 +622,23 @@ static u8 CreateMonSprite_FieldMove(u16 species, u32 otId, u32 personality, s16 
 {
     const struct CompressedSpritePalette * spritePalette = GetMonSpritePalStructFromOtIdPersonality(species, otId, personality);
     u16 spriteId = CreateMonPicSprite_HandleDeoxys(species, otId, personality, 1, x, y, 0, spritePalette->tag);
+    // T-132: the daemon using the move is in the party; find it by who it is, and show what it understands.
+    {
+        s32 i;
+
+        for (i = 0; i < PARTY_SIZE; i++)
+        {
+            if (GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY, NULL) == personality
+             && GetMonData(&gPlayerParty[i], MON_DATA_OT_ID, NULL) == otId)
+            {
+                u16 moves[MAX_MON_MOVES];
+
+                Streaks_MovesOfMon(&gPlayerParty[i], moves);
+                Streaks_ApplyToLoaded(OBJ_PLTT_ID(IndexOfSpritePaletteTag(spritePalette->tag)), species, moves);
+                break;
+            }
+        }
+    }
     PreservePaletteInWeather(IndexOfSpritePaletteTag(spritePalette->tag) + 0x10);
     if (spriteId == 0xFFFF)
         return MAX_SPRITES;

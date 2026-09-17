@@ -476,6 +476,7 @@ static const union AffineAnimCmd *const sAffineAnims_CrossingMonPics[] = {
 };
 
 #include "data/ingame_trades.h"
+#include "daemon_streaks.h"
 
 static const struct WindowTemplate sTradeMessageWindowTemplates[] = {
     {
@@ -763,6 +764,12 @@ static void LoadTradeMonPic(u8 whichParty, u8 state)
             HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonFrontPicTable[species], gMonSpritesGfxPtr->sprites[whichParty * 2 + 1], species, personality);
 
         LoadCompressedSpritePalette(GetMonSpritePalStruct(mon));
+        {
+            u16 moves[MAX_MON_MOVES];
+
+            Streaks_MovesOfMon(mon, moves);
+            Streaks_ApplyToLoaded(OBJ_PLTT_ID(IndexOfSpritePaletteTag(GetMonSpritePalStruct(mon)->tag)), species, moves);
+        }
         sTradeAnim->monSpecies[whichParty] = species;
         sTradeAnim->monPersonalities[whichParty] = personality;
         break;

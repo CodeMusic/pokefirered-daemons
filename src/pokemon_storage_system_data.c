@@ -11,6 +11,7 @@
 #include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/songs.h"
+#include "daemon_streaks.h"
 
 static EWRAM_DATA struct Pokemon sMonBeingCarried = {};
 static EWRAM_DATA s8 sCursorArea = 0;
@@ -1046,6 +1047,7 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
             gStorage->displayMonMarkings = GetMonData(mon, MON_DATA_MARKINGS);
             gStorage->displayMonPersonality = GetMonData(mon, MON_DATA_PERSONALITY);
             gStorage->displayMonPalette = GetMonFrontSpritePal(mon);
+            Streaks_MovesOfMon(mon, gStorage->displayMonMoves);
             gender = GetMonGender(mon);
             gStorage->displayMonItemId = GetMonData(mon, MON_DATA_HELD_ITEM);
         }
@@ -1070,6 +1072,7 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
             gStorage->displayMonMarkings = GetBoxMonData(boxMon, MON_DATA_MARKINGS);
             gStorage->displayMonPersonality = GetBoxMonData(boxMon, MON_DATA_PERSONALITY);
             gStorage->displayMonPalette = GetMonSpritePalFromSpeciesAndPersonality(gStorage->displayMonSpecies, otId, gStorage->displayMonPersonality);
+            Streaks_MovesOfBoxMon(boxMon, gStorage->displayMonMoves);
             gender = GetGenderFromSpeciesAndPersonality(gStorage->displayMonSpecies, gStorage->displayMonPersonality);
             gStorage->displayMonItemId = GetBoxMonData(boxMon, MON_DATA_HELD_ITEM);
         }

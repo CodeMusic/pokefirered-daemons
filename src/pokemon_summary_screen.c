@@ -624,6 +624,7 @@ static const u32 sBgTilemap_MovesInfoPage[] = INCBIN_U32( "graphics/summary_scre
 static const u32 sBgTilemap_MovesPage[] = INCBIN_U32( "graphics/summary_screen/moves_page.bin.lz");
 
 #include "data/text/nature_names.h"
+#include "daemon_streaks.h"
 
 static const u8 *const sEggHatchTimeTexts[] = {
     gText_PokeSum_EggHatch_LongTime,
@@ -4030,6 +4031,14 @@ static void PokeSum_CreateMonPicSprite(void)
             spriteId = CreateMonPicSprite(species, trainerId, personality, TRUE, 60, 65, 12, 0xffff, TRUE);
         else
             spriteId = CreateMonPicSprite_HandleDeoxys(species, trainerId, personality, TRUE, 60, 65, 12, 0xffff);
+    }
+
+    // T-132: the picture API takes only a species, so the streaks are applied to what it loaded.
+    {
+        u16 moves[MAX_MON_MOVES];
+
+        Streaks_MovesOfMon(&sMonSummaryScreen->currentMon, moves);
+        Streaks_ApplyToLoaded(OBJ_PLTT_ID(gSprites[spriteId].oam.paletteNum), species, moves);
     }
 
     FreeSpriteOamMatrix(&gSprites[spriteId]);
