@@ -129,6 +129,7 @@ const u16 gObjectEventPic_StaffBrazen[] = INCBIN_U16("graphics/object_events/pic
 const u16 gObjectEventPic_StaffQuicksilver[] = INCBIN_U16("graphics/object_events/pics/people/staff_quicksilver.4bpp");
 const u16 gObjectEventPic_StaffCallow[] = INCBIN_U16("graphics/object_events/pics/people/staff_callow.4bpp");
 const u16 gObjectEventPic_BenchmarkGuide[] = INCBIN_U16("graphics/object_events/pics/people/benchmark_guide.4bpp");
+const u16 gObjectEventPic_CueBall[] = INCBIN_U16("graphics/object_events/pics/people/cue_ball.4bpp");
 const u16 gObjectEventPic_PsychicM[] = INCBIN_U16("graphics/object_events/pics/people/psychic_m.4bpp");
 const u16 gObjectEventPic_Tamer[] = INCBIN_U16("graphics/object_events/pics/people/tamer.4bpp");
 const u16 gObjectEventPic_Engineer[] = INCBIN_U16("graphics/object_events/pics/people/engineer.4bpp");

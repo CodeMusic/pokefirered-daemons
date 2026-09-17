@@ -3994,3 +3994,23 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PsychicM = {
     .images = sPicTable_PsychicM,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
+
+// the cue ball (T-127): a rhinoceros on the boar's own bike -- the head is redrawn and the machine is not, on pink's palette and slot, where it used to borrow biker
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CueBall = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_PINK,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = PALSLOT_NPC_2,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_BIKE_TIRE,
+    .oam = &gObjectEventBaseOam_32x32,
+    .subspriteTables = gObjectEventSpriteOamTables_32x32,
+    .anims = sAnimTable_Standard,
+    .images = sPicTable_CueBall,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
