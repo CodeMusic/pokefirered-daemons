@@ -41,6 +41,7 @@ static EWRAM_DATA u8 sTheatreFromFoe = 0;
 static EWRAM_DATA u8 sTheatreSlot = 0;
 static EWRAM_DATA u8 sTheatreSavedAttacker = 0;
 static EWRAM_DATA u8 sTheatreSavedTarget = 0;
+static EWRAM_DATA u8 sTheatreTurn = 0;          // the animation's move turn: set it (theatre.lua poke8) to film a two-turn routine's second half
 static EWRAM_DATA s16 sTheatrePos[4] = {0};     // attacker x, y, target x, y: put back after every animation
 #endif
 
@@ -3141,7 +3142,7 @@ static void DbgTheatre_Input(void)
         sTheatreSavedTarget = gBattlerTarget;
         gBattlerAttacker = sTheatreFromFoe ? foe : gActiveBattler;
         gBattlerTarget = sTheatreFromFoe ? gActiveBattler : foe;
-        gAnimMoveTurn = 0;
+        gAnimMoveTurn = sTheatreTurn;
         gAnimMovePower = gBattleMoves[sTheatreMove].power;
         gAnimMoveDmg = 30;
         gAnimFriendship = 255;
