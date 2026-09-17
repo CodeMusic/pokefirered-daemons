@@ -41,6 +41,7 @@ static EWRAM_DATA u8 sTheatreFromFoe = 0;
 static EWRAM_DATA u8 sTheatreSlot = 0;
 static EWRAM_DATA u8 sTheatreSavedAttacker = 0;
 static EWRAM_DATA u8 sTheatreSavedTarget = 0;
+static EWRAM_DATA s16 sTheatrePos[4] = {0};     // attacker x, y, target x, y: put back after every animation
 #endif
 
 static void PlayerHandleGetMonData(void);
@@ -3147,6 +3148,10 @@ static void DbgTheatre_Input(void)
         gWeatherMoveAnim = 0;
         gAnimDisableStructPtr = &gDisableStructs[gBattlerAttacker];
         gTransformedPersonalities[gBattlerAttacker] = gDisableStructs[gBattlerAttacker].transformedMonPersonality;
+        sTheatrePos[0] = gSprites[gBattlerSpriteIds[gBattlerAttacker]].x;
+        sTheatrePos[1] = gSprites[gBattlerSpriteIds[gBattlerAttacker]].y;
+        sTheatrePos[2] = gSprites[gBattlerSpriteIds[gBattlerTarget]].x;
+        sTheatrePos[3] = gSprites[gBattlerSpriteIds[gBattlerTarget]].y;
         SetBattlerSpriteAffineMode(ST_OAM_AFFINE_OFF);
         DoMoveAnim(sTheatreMove);
         gBattlerControllerFuncs[gActiveBattler] = DbgTheatre_Play;
@@ -3166,8 +3171,19 @@ static void DbgTheatre_Play(void)
     SetBattlerSpriteAffineMode(ST_OAM_AFFINE_NORMAL);
     // A two-turn routine's first half hides its user (FLY, DIG): in the theatre there is no second half to bring
     // it back, so both daemons are shown again once every animation ends.
+    //  And a routine whose animation MOVES a daemon -- ROAR and WHIRLWIND slide the target off, TELEPORT and CAMOUFLAGE
+    //  hide the user -- leaves it gone, because in a real battle the switch that follows replaces it. The theatre
+    //  has no switch, so positions and both invisibility flags are put back; a hidden ARTSAI spoiled T-143's first sheet.
     gSprites[gBattlerSpriteIds[gBattlerAttacker]].invisible = FALSE;
     gSprites[gBattlerSpriteIds[gBattlerTarget]].invisible = FALSE;
+    gBattleSpritesDataPtr->battlerData[gBattlerAttacker].invisible = FALSE;
+    gBattleSpritesDataPtr->battlerData[gBattlerTarget].invisible = FALSE;
+    gSprites[gBattlerSpriteIds[gBattlerAttacker]].x = sTheatrePos[0];
+    gSprites[gBattlerSpriteIds[gBattlerAttacker]].y = sTheatrePos[1];
+    gSprites[gBattlerSpriteIds[gBattlerTarget]].x = sTheatrePos[2];
+    gSprites[gBattlerSpriteIds[gBattlerTarget]].y = sTheatrePos[3];
+    gSprites[gBattlerSpriteIds[gBattlerAttacker]].x2 = gSprites[gBattlerSpriteIds[gBattlerAttacker]].y2 = 0;
+    gSprites[gBattlerSpriteIds[gBattlerTarget]].x2 = gSprites[gBattlerSpriteIds[gBattlerTarget]].y2 = 0;
     gBattlerAttacker = sTheatreSavedAttacker;
     gBattlerTarget = sTheatreSavedTarget;
     DbgTheatre_Print();
