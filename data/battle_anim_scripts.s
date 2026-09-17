@@ -7689,7 +7689,34 @@ Move_DISABLE:
 	blendoff
 	end
 
+@ DAEMONS -- RESTORE, T-135's DRAFT (not yet approved): the DEBUG ROMs play it, the release ROMs keep vanilla's
+@ until it is. Vanilla drew orbs pulled in from outside and a yellow
+@ flash: a creature gathering energy. RESTORE puts back what a PROCESS lost, from a state it already had. So what
+@ was lost is shown first -- its colour drains to grey, the ground this game stands on (8.6), streaks and all,
+@ because the routines it knows are part of what is put back -- and then the state comes back in three steps, a
+@ checkpoint reloading, each with a tick. Nothing arrives from outside the daemon. The same tool PERSPECTIVE drains
+@ with, so the two routines that are about a daemon's own frame speak one language.
 Move_RECOVER:
+.if DAEMONS_DEBUG
+	monbg ANIM_ATTACKER
+	playsewithpan SE_M_TELEPORT, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 13, RGB(13, 13, 13)
+	waitforvisualfinish
+	delay 12
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 13, 9, RGB(13, 13, 13)
+	waitforvisualfinish
+	delay 10
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 9, 5, RGB(13, 13, 13)
+	waitforvisualfinish
+	delay 10
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 5, 0, RGB(13, 13, 13)
+	waitforvisualfinish
+	clearmonbg ANIM_ATTACKER
+	end
+.else
 	loadspritegfx ANIM_TAG_ORBS
 	loadspritegfx ANIM_TAG_BLUE_STAR
 	monbg ANIM_ATK_PARTNER
@@ -7706,6 +7733,7 @@ Move_RECOVER:
 	call HealingEffect
 	waitforvisualfinish
 	end
+.endif
 
 RecoverAbsorbEffect:
 	createsprite gPowerAbsorptionOrbSpriteTemplate, ANIM_ATTACKER, 2, 40, -10, 13

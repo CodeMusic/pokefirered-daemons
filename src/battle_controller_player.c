@@ -24,6 +24,24 @@
 #include "constants/songs.h"
 #include "constants/sound.h"
 #include "data/battle_move_menu.h"
+#if DAEMONS_DEBUG
+#include "battle_main.h"
+#include "daemon_streaks.h"
+#include "palette.h"
+
+// THE THEATRE (T-136, debug ROM only). At "What will X do?", SELECT opens it: any routine's animation, played on
+// demand between the two daemons already on the field, so T-134's families can be reviewed as a sequence rather
+// than by grinding into the fight that happens to use the move. It is also T-132's acceptance test: SELECT teaches
+// the shown routine into a move slot and re-patches the streaks on the spot.
+static void DbgTheatre_Enter(void);
+static void DbgTheatre_Input(void);
+static void DbgTheatre_Play(void);
+static EWRAM_DATA u16 sTheatreMove = 0;
+static EWRAM_DATA u8 sTheatreFromFoe = 0;
+static EWRAM_DATA u8 sTheatreSlot = 0;
+static EWRAM_DATA u8 sTheatreSavedAttacker = 0;
+static EWRAM_DATA u8 sTheatreSavedTarget = 0;
+#endif
 
 static void PlayerHandleGetMonData(void);
 static void PlayerHandleSetMonData(void);
@@ -223,6 +241,13 @@ static void HandleInputChooseAction(void)
 
     DoBounceEffect(gActiveBattler, BOUNCE_HEALTHBOX, 7, 1);
     DoBounceEffect(gActiveBattler, BOUNCE_MON, 7, 1);
+#if DAEMONS_DEBUG
+    if (JOY_NEW(SELECT_BUTTON) && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_DOUBLE)))
+    {
+        DbgTheatre_Enter();
+        return;
+    }
+#endif
     if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
@@ -3010,3 +3035,142 @@ static void PreviewDeterminativeMoveTargets(void)
         BeginNormalPaletteFade(bitMask, 8, startY, 0, RGB_WHITE);
     }
 }
+
+#if DAEMONS_DEBUG
+// The prompt window is 14 tiles over two lines; the menu window beside it carries the keys.
+static const u8 sTheatreKeys[] = _("A PLAY  ST SIDE\nSEL TEACH  B OUT");
+static const u8 sTheatreText_FromMe[] = _("\nFROM ME  SLOT ");
+static const u8 sTheatreText_FromFoe[] = _("\nFROM FOE SLOT ");
+
+static void DbgTheatre_Print(void)
+{
+    u8 *end;
+
+    end = ConvertIntToDecimalStringN(gDisplayedStringBattle, sTheatreMove, STR_CONV_MODE_LEADING_ZEROS, 3);
+    *end++ = CHAR_SPACE;
+    end = StringCopy(end, gMoveNames[sTheatreMove]);
+    end = StringCopy(end, sTheatreFromFoe ? sTheatreText_FromFoe : sTheatreText_FromMe);
+    ConvertIntToDecimalStringN(end, sTheatreSlot + 1, STR_CONV_MODE_LEFT_ALIGN, 1);
+    BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_ACTION_PROMPT);
+    BattlePutTextOnWindow(sTheatreKeys, B_WIN_ACTION_MENU);
+}
+
+static void DbgTheatre_Enter(void)
+{
+    s32 i;
+
+    PlaySE(SE_SELECT);
+    EndBounceEffect(gActiveBattler, BOUNCE_HEALTHBOX);
+    EndBounceEffect(gActiveBattler, BOUNCE_MON);
+    for (i = 0; i < 4; ++i)
+        ActionSelectionDestroyCursorAt(i);
+    if (sTheatreMove == MOVE_NONE || sTheatreMove >= MOVES_COUNT)
+        sTheatreMove = gBattleMons[gActiveBattler].moves[0] != MOVE_NONE ? gBattleMons[gActiveBattler].moves[0] : MOVE_POUND;
+    DbgTheatre_Print();
+    gBattlerControllerFuncs[gActiveBattler] = DbgTheatre_Input;
+}
+
+// SELECT: the routine goes into the shown slot of the FROM side's daemon, on the party mon AND the battler, and the streaks are patched into
+// both copies of the palette the battle loaded -- the sprite's and the background copy some animations draw with.
+static void DbgTheatre_Teach(void)
+{
+    // FROM FOE teaches the FOE: the daemon you invoked is the one whose art you are testing, and your own lead
+    // may be a species that has no streaks drawn yet.
+    u8 battler = sTheatreFromFoe ? GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT) : gActiveBattler;
+    struct Pokemon *mon = sTheatreFromFoe ? &gEnemyParty[gBattlerPartyIndexes[battler]] : &gPlayerParty[gBattlerPartyIndexes[battler]];
+    u16 move = sTheatreMove;
+    u8 pp = gBattleMoves[move].pp;
+    u16 species = GetMonData(mon, MON_DATA_SPECIES);
+    u16 moves[MAX_MON_MOVES];
+
+    SetMonData(mon, MON_DATA_MOVE1 + sTheatreSlot, &move);
+    SetMonData(mon, MON_DATA_PP1 + sTheatreSlot, &pp);
+    gBattleMons[battler].moves[sTheatreSlot] = move;
+    gBattleMons[battler].pp[sTheatreSlot] = pp;
+    Streaks_MovesOfMon(mon, moves);
+    Streaks_ApplyToLoaded(OBJ_PLTT_ID(gSprites[gBattlerSpriteIds[battler]].oam.paletteNum), species, moves);
+    Streaks_ApplyToLoaded(BG_PLTT_ID(8) + BG_PLTT_ID(battler), species, moves);
+    PlaySE(SE_EXP_MAX);
+    sTheatreSlot = (sTheatreSlot + 1) % MAX_MON_MOVES;
+}
+
+static void DbgTheatre_Input(void)
+{
+    s32 step = 0;
+    u8 foe = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
+
+    // L and R are FireRed's HELP buttons everywhere, battle included -- the first test opened the help system --
+    // so the ten-step is UP and DOWN, and the slot advances by itself each time SELECT teaches.
+    if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
+        step = 1;
+    else if (gMain.newAndRepeatedKeys & DPAD_LEFT)
+        step = -1;
+    else if (gMain.newAndRepeatedKeys & DPAD_UP)
+        step = 10;
+    else if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+        step = -10;
+    if (step != 0)
+    {
+        s32 move = sTheatreMove + step;
+
+        while (move < 1)
+            move += MOVES_COUNT - 1;
+        while (move > MOVES_COUNT - 1)
+            move -= MOVES_COUNT - 1;
+        sTheatreMove = move;
+        PlaySE(SE_SELECT);
+        DbgTheatre_Print();
+    }
+    else if (JOY_NEW(START_BUTTON))
+    {
+        sTheatreFromFoe ^= 1;
+        PlaySE(SE_SELECT);
+        DbgTheatre_Print();
+    }
+    else if (JOY_NEW(SELECT_BUTTON))
+    {
+        DbgTheatre_Teach();
+        DbgTheatre_Print();
+    }
+    else if (JOY_NEW(A_BUTTON))
+    {
+        // The engine's own globals are borrowed for the one animation and handed back: at action selection nothing
+        // has chosen an attacker yet, but a battle script that later reads them should not find the theatre's.
+        sTheatreSavedAttacker = gBattlerAttacker;
+        sTheatreSavedTarget = gBattlerTarget;
+        gBattlerAttacker = sTheatreFromFoe ? foe : gActiveBattler;
+        gBattlerTarget = sTheatreFromFoe ? gActiveBattler : foe;
+        gAnimMoveTurn = 0;
+        gAnimMovePower = gBattleMoves[sTheatreMove].power;
+        gAnimMoveDmg = 30;
+        gAnimFriendship = 255;
+        gWeatherMoveAnim = 0;
+        gAnimDisableStructPtr = &gDisableStructs[gBattlerAttacker];
+        gTransformedPersonalities[gBattlerAttacker] = gDisableStructs[gBattlerAttacker].transformedMonPersonality;
+        SetBattlerSpriteAffineMode(ST_OAM_AFFINE_OFF);
+        DoMoveAnim(sTheatreMove);
+        gBattlerControllerFuncs[gActiveBattler] = DbgTheatre_Play;
+    }
+    else if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        PlayerHandleChooseAction();
+    }
+}
+
+static void DbgTheatre_Play(void)
+{
+    gAnimScriptCallback();
+    if (gAnimScriptActive)
+        return;
+    SetBattlerSpriteAffineMode(ST_OAM_AFFINE_NORMAL);
+    // A two-turn routine's first half hides its user (FLY, DIG): in the theatre there is no second half to bring
+    // it back, so both daemons are shown again once every animation ends.
+    gSprites[gBattlerSpriteIds[gBattlerAttacker]].invisible = FALSE;
+    gSprites[gBattlerSpriteIds[gBattlerTarget]].invisible = FALSE;
+    gBattlerAttacker = sTheatreSavedAttacker;
+    gBattlerTarget = sTheatreSavedTarget;
+    DbgTheatre_Print();
+    gBattlerControllerFuncs[gActiveBattler] = DbgTheatre_Input;
+}
+#endif
