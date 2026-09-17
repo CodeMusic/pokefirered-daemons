@@ -68,10 +68,10 @@ ViridianCity_Text_HowsTeachyTVHelping::
     .string "Is that old STREAM any use to\n"
     .string "you?$"
 
-ViridianCity_Text_MyGrandsonOnTheShow::
-    .string "That is my grandson presenting.\p"
-    .string "He knows less than he sounds like\n"
-    .string "he does.\p"
+ViridianCity_Text_WatchedThemWhenNew::
+    .string "I watched those when they were\n"
+    .string "new.\p"
+    .string "They have not changed. I have.\p"
     .string "You will still learn something.$"
 
 ViridianCity_Text_TooBusyForTeachyTV::
