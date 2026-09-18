@@ -675,9 +675,8 @@ Move_PIN_MISSILE:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(16, 18, 9)
 	waitforvisualfinish
 	end
-@ genanims: FROZEN (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
+@ genanims: FROZEN (T-134, vision.md 9.24) approved.
 Move_ICICLE_SPEAR:
-.if DAEMONS_DEBUG
 	playsewithpan SE_M_ICY_WIND, SOUND_PAN_TARGET
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 8, RGB(20, 25, 27)
 	waitforvisualfinish
@@ -685,36 +684,6 @@ Move_ICICLE_SPEAR:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(20, 25, 27)
 	waitforvisualfinish
 	end
-.else
-	loadspritegfx ANIM_TAG_ICICLE_SPEAR
-	loadspritegfx ANIM_TAG_IMPACT
-	monbg ANIM_TARGET
-	splitbgprio ANIM_TARGET
-	setalpha 12, 8
-	playsewithpan SE_M_ICY_WIND, SOUND_PAN_ATTACKER
-	createsprite gIcicleSpearSpriteTemplate, ANIM_ATTACKER, 2, 20, -8, -8, -8, 20, -32
-	delay 15
-	createsprite gIcicleSpearSpriteTemplate, ANIM_ATTACKER, 2, 20, -8, 8, 8, 20, -40
-	delay 4
-	playsewithpan SE_M_HORN_ATTACK, SOUND_PAN_TARGET
-	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 3, -8, -8, ANIM_TARGET, 2
-	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 3, 0, 2, 1
-	delay 9
-	createsprite gIcicleSpearSpriteTemplate, ANIM_ATTACKER, 2, 20, -8, 0, 0, 20, -32
-	delay 4
-	playsewithpan SE_M_HORN_ATTACK, SOUND_PAN_TARGET
-	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 3, 8, 8, ANIM_TARGET, 2
-	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 3, 0, 2, 1
-	delay 14
-	playsewithpan SE_M_HORN_ATTACK, SOUND_PAN_TARGET
-	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, ANIM_TARGET, 2
-	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 3, 0, 2, 1
-	waitforvisualfinish
-	clearmonbg ANIM_TARGET
-	blendoff
-	end
-
-.endif
 @ genanims: CONTENT (T-134, vision.md 9.24) approved.
 Move_TAKE_DOWN:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
@@ -1425,7 +1394,17 @@ Move_DEFENSE_CURL:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 6, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
+@ genanims: PROTECT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_PROTECT:
+.if DAEMONS_DEBUG
+	playsewithpan SE_M_REFLECT, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 11, RGB(24, 23, 21)
+	waitforvisualfinish
+	delay 16
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 11, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.else
 	loadspritegfx ANIM_TAG_PROTECT
 	monbg ANIM_ATK_PARTNER
 	splitbgprio ANIM_ATTACKER
@@ -1435,7 +1414,19 @@ Move_PROTECT:
 	clearmonbg ANIM_ATK_PARTNER
 	end
 
+.endif
+@ genanims: PROTECT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_DETECT:
+.if DAEMONS_DEBUG
+	playsewithpan SE_M_DETECT, SOUND_PAN_ATTACKER
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 11, RGB(12, 15, 19)
+	waitforvisualfinish
+	delay 16
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 11, 0, RGB(12, 15, 19)
+	waitforvisualfinish
+	end
+.else
 	loadspritegfx ANIM_TAG_SPARKLE_4
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, F_PAL_BG, 2, 0, 9, RGB_BLACK
 	waitforvisualfinish
@@ -1450,6 +1441,7 @@ Move_DETECT:
 	waitforvisualfinish
 	end
 
+.endif
 @ genanims: CONTENT (T-134, vision.md 9.24) approved.
 Move_FRUSTRATION:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
@@ -1850,9 +1842,8 @@ Move_BUBBLE_BEAM:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 5, 0, RGB(8, 13, 22)
 	waitforvisualfinish
 	end
-@ genanims: FROZEN (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
+@ genanims: FROZEN (T-134, vision.md 9.24) approved.
 Move_ICY_WIND:
-.if DAEMONS_DEBUG
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(20, 25, 27)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(20, 25, 27)
@@ -1864,44 +1855,6 @@ Move_ICY_WIND:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_DEF_SIDE, 2, 10, 0, RGB(20, 25, 27)
 	waitforvisualfinish
 	end
-.else
-	loadspritegfx ANIM_TAG_ICE_CRYSTALS
-	loadspritegfx ANIM_TAG_ICE_SPIKES
-	monbg ANIM_DEF_PARTNER
-	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_ATK_SIDE, 4, 0, 4, RGB_BLACK
-	fadetobg BG_ICE
-	waitbgfadeout
-	playsewithpan SE_M_ICY_WIND, 0
-	waitbgfadein
-	waitforvisualfinish
-	panse SE_M_GUST, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
-	call IcyWindSwirlingSnowballs
-	delay 5
-	call IcyWindSwirlingSnowballs
-	playsewithpan SE_M_GUST2, SOUND_PAN_TARGET
-	delay 55
-	call IceSpikesEffectLong
-	waitforvisualfinish
-	clearmonbg ANIM_DEF_PARTNER
-	restorebg
-	waitbgfadeout
-	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_ATK_SIDE, 4, 4, 0, RGB_BLACK
-	waitbgfadein
-	end
-
-IcyWindSwirlingSnowballs:
-	createsprite gSwirlingSnowballSpriteTemplate, ANIM_TARGET, 40, 0, 0, 0, 0, 72, 1
-	delay 5
-	createsprite gSwirlingSnowballSpriteTemplate, ANIM_TARGET, 40, 0, 10, 0, 10, 72, 1
-	delay 5
-	createsprite gSwirlingSnowballSpriteTemplate, ANIM_TARGET, 40, 0, -10, 0, -10, 72, 1
-	delay 5
-	createsprite gSwirlingSnowballSpriteTemplate, ANIM_TARGET, 40, 0, 15, 0, 15, 72, 1
-	delay 5
-	createsprite gSwirlingSnowballSpriteTemplate, ANIM_TARGET, 40, 0, -5, 0, -5, 72, 1
-	return
-
-.endif
 @ genanims: LOWER (T-134, vision.md 9.24) approved.
 Move_SMOKESCREEN:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
@@ -2649,7 +2602,18 @@ Move_DESTINY_BOND:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER | F_PAL_TARGET, 1, 10, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
+@ genanims: PROTECT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_ENDURE:
+.if DAEMONS_DEBUG
+	playsewithpan SE_M_DRAGON_RAGE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 13, RGB(13, 13, 13)
+	waitforvisualfinish
+	delay 18
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 13, 0, RGB(13, 13, 13)
+	waitforvisualfinish
+	end
+.else
 	loadspritegfx ANIM_TAG_FOCUS_ENERGY
 	playsewithpan SE_M_DRAGON_RAGE, SOUND_PAN_ATTACKER
 	call EndureEffect
@@ -2662,6 +2626,7 @@ Move_ENDURE:
 	waitforvisualfinish
 	end
 
+.endif
 EndureEffect:
 	createsprite gEndureEnergySpriteTemplate, ANIM_ATTACKER, 2, 0, -24, 26, 2
 	delay 4
@@ -2976,7 +2941,24 @@ Move_SMELLING_SALT:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 11, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
+@ genanims: PROTECT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_FOLLOW_ME:
+.if DAEMONS_DEBUG
+	playsewithpan SE_M_TAIL_WHIP, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_DEF_SIDE, 1, 0, 8, RGB(13, 13, 13)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 10, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 10, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 10, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 10, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_DEF_SIDE, 1, 8, 0, RGB(13, 13, 13)
+	waitforvisualfinish
+	end
+.else
 	loadspritegfx ANIM_TAG_FINGER
 	createsprite gFollowMeFingerSpriteTemplate, ANIM_ATTACKER, 2, 0
 	playsewithpan SE_M_TAIL_WHIP, SOUND_PAN_ATTACKER
@@ -2986,6 +2968,7 @@ Move_FOLLOW_ME:
 	loopsewithpan SE_M_TAIL_WHIP, SOUND_PAN_ATTACKER, 22, 3
 	end
 
+.endif
 @ genanims: FIELD (T-134, vision.md 9.24) approved.
 Move_CHARGE:
 	playsewithpan SE_M_CHARGE, SOUND_PAN_ATTACKER
@@ -3014,7 +2997,16 @@ Move_TAUNT:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 12, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
+@ genanims: PROTECT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_HELPING_HAND:
+.if DAEMONS_DEBUG
+	playsewithpan SE_M_ENCORE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATK_SIDE, 0, 0, 9, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATK_SIDE, 1, 9, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.else
 	loadspritegfx ANIM_TAG_TAG_HAND
 	createvisualtask AnimTask_HelpingHandAttackerMovement, 5
 	createsprite gHelpingHandClapSpriteTemplate, ANIM_ATTACKER, 40, 0
@@ -3031,6 +3023,7 @@ Move_HELPING_HAND:
 	createvisualtask AnimTask_BlendMonInAndOut, 2, ANIM_ATK_PARTNER, RGB_YELLOW, 12, 1, 1
 	end
 
+.endif
 Move_ASSIST:
 	loadspritegfx ANIM_TAG_PAW_PRINT
 	createsprite gAssistPawprintSpriteTemplate, ANIM_ATTACKER, 50, 112, -16, 140, 128, 36
@@ -3908,9 +3901,8 @@ Move_MIND_READER:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 9, 0, RGB_WHITE
 	waitforvisualfinish
 	end
-@ genanims: FROZEN (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
+@ genanims: FROZEN (T-134, vision.md 9.24) approved.
 Move_ICE_PUNCH:
-.if DAEMONS_DEBUG
 	playsewithpan SE_M_STRING_SHOT, SOUND_PAN_TARGET
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 12, RGB(20, 25, 27)
 	waitforvisualfinish
@@ -3918,44 +3910,6 @@ Move_ICE_PUNCH:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 12, 0, RGB(20, 25, 27)
 	waitforvisualfinish
 	end
-.else
-	monbg ANIM_DEF_PARTNER
-	setalpha 12, 8
-	loadspritegfx ANIM_TAG_ICE_CRYSTALS
-	loadspritegfx ANIM_TAG_IMPACT
-	loadspritegfx ANIM_TAG_HANDS_AND_FEET
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, F_PAL_BG, 1, 0, 7, RGB_BLACK
-	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 2, 0, 9, RGB(12, 26, 31)
-	delay 20
-	playsewithpan SE_M_STRING_SHOT, SOUND_PAN_TARGET
-	createsprite gIceCrystalSpiralInwardSmall, ANIM_ATTACKER, 2, 0
-	createsprite gIceCrystalSpiralInwardSmall, ANIM_ATTACKER, 2, 64
-	createsprite gIceCrystalSpiralInwardSmall, ANIM_ATTACKER, 2, 128
-	createsprite gIceCrystalSpiralInwardSmall, ANIM_ATTACKER, 2, 192
-	delay 5
-	createsprite gIceCrystalSpiralInwardLarge, ANIM_ATTACKER, 2, 32
-	createsprite gIceCrystalSpiralInwardLarge, ANIM_ATTACKER, 2, 96
-	createsprite gIceCrystalSpiralInwardLarge, ANIM_ATTACKER, 2, 160
-	createsprite gIceCrystalSpiralInwardLarge, ANIM_ATTACKER, 2, 224
-	delay 17
-	createsprite gFistFootSpriteTemplate, ANIM_ATTACKER, 4, 0, -10, 8, 1, 0
-	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 3, 0, -10, ANIM_TARGET, 1
-	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
-	delay 2
-	createvisualtask AnimTask_ShakeMon, 5, ANIM_TARGET, 0, 5, 3, 1
-	waitforvisualfinish
-	delay 15
-	call IceCrystalEffectShort
-	delay 5
-	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 2, 9, 0, RGB(12, 26, 31)
-	waitforvisualfinish
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, F_PAL_BG, 0, 7, 0, RGB_BLACK
-	waitforvisualfinish
-	clearmonbg ANIM_DEF_PARTNER
-	blendoff
-	end
-
-.endif
 @ DAEMONS -- IDLE -- the whole state restored at once, then the process goes quiet: a drain, one snap back where RESTORE
 @ takes three, and a slow dim that settles. The sleep that follows has its own status animation.
 @ T-139, approved 2026-09-17 under vision.md 9.24.
@@ -4518,9 +4472,8 @@ Move_CLAMP:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 9, 0, RGB(8, 13, 22)
 	waitforvisualfinish
 	end
-@ genanims: FROZEN (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
+@ genanims: FROZEN (T-134, vision.md 9.24) approved.
 Move_ICE_BEAM:
-.if DAEMONS_DEBUG
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(20, 25, 27)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(20, 25, 27)
@@ -4532,52 +4485,6 @@ Move_ICE_BEAM:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 13, 0, RGB(20, 25, 27)
 	waitforvisualfinish
 	end
-.else
-	monbg ANIM_TARGET
-	splitbgprio ANIM_TARGET
-	setalpha 12, 8
-	loadspritegfx ANIM_TAG_ICE_CRYSTALS
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, F_PAL_BG, 1, 0, 7, RGB_BLACK
-	waitforvisualfinish
-	createsoundtask SoundTask_LoopSEAdjustPanning, SE_M_BUBBLE_BEAM2, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, 4, 4, 0, 10
-	createsprite gIceBeamOuterCrystalSpriteTemplate, ANIM_ATTACKER, 2, 20, 12, 0, 12, 20
-	createsprite gIceBeamOuterCrystalSpriteTemplate, ANIM_ATTACKER, 2, 20, -12, 0, -12, 20
-	delay 1
-	call IceBeamCreateCrystals
-	call IceBeamCreateCrystals
-	call IceBeamCreateCrystals
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, F_PAL_TARGET, -31, 0, 7, RGB(0, 20, 31)
-	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 2, 0, 25, 1
-	call IceBeamCreateCrystals
-	call IceBeamCreateCrystals
-	call IceBeamCreateCrystals
-	call IceBeamCreateCrystals
-	call IceBeamCreateCrystals
-	call IceBeamCreateCrystals
-	call IceBeamCreateCrystals
-	call IceBeamCreateCrystals
-	createsprite gIceBeamInnerCrystalSpriteTemplate, ANIM_ATTACKER, 2, 20, 0, 0, 0, 11
-	delay 1
-	createsprite gIceBeamInnerCrystalSpriteTemplate, ANIM_ATTACKER, 2, 20, 0, 0, 0, 11
-	waitforvisualfinish
-	delay 20
-	call IceCrystalEffectShort
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, F_PAL_TARGET, 5, 7, 0, RGB(0, 20, 31)
-	waitforvisualfinish
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, F_PAL_BG, 0, 7, 0, RGB_BLACK
-	waitforvisualfinish
-	clearmonbg ANIM_TARGET
-	blendoff
-	end
-
-IceBeamCreateCrystals:
-	createsprite gIceBeamOuterCrystalSpriteTemplate, ANIM_ATTACKER, 2, 20, 12, 0, 12, 20
-	createsprite gIceBeamOuterCrystalSpriteTemplate, ANIM_ATTACKER, 2, 20, -12, 0, -12, 20
-	createsprite gIceBeamInnerCrystalSpriteTemplate, ANIM_ATTACKER, 2, 20, 0, 0, 0, 11
-	delay 1
-	return
-
-.endif
 @ genanims: RAISE (T-134, vision.md 9.24) approved.
 Move_WITHDRAW:
 	playsewithpan SE_M_HEADBUTT, SOUND_PAN_ATTACKER
@@ -4588,9 +4495,8 @@ Move_WITHDRAW:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 6, 0, RGB(8, 13, 22)
 	waitforvisualfinish
 	end
-@ genanims: FROZEN (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
+@ genanims: FROZEN (T-134, vision.md 9.24) approved.
 Move_AURORA_BEAM:
-.if DAEMONS_DEBUG
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(20, 25, 27)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(20, 25, 27)
@@ -4606,44 +4512,6 @@ Move_AURORA_BEAM:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 6, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
-.else
-	loadspritegfx ANIM_TAG_RAINBOW_RINGS
-	fadetobg BG_AURORA
-	waitbgfadein
-	playsewithpan SE_M_BUBBLE_BEAM, SOUND_PAN_ATTACKER
-	setarg 7, 0
-	createvisualtask AnimTask_RotateAuroraRingColors, 10, 130
-	call AuroraBeamCreateRings
-	createvisualtask AnimTask_ShakeMon2, 5, ANIM_TARGET, 1, 0, 17, 1
-	call AuroraBeamCreateRings
-	call AuroraBeamCreateRings
-	call AuroraBeamCreateRings
-	setarg 7, 0xFFFF
-	createsoundtask SoundTask_LoopSEAdjustPanning, SE_M_BUBBLE_BEAM2, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, 3, 6, 0, 10
-	createvisualtask AnimTask_ShakeMon2, 5, ANIM_TARGET, 2, 0, 40, 1
-	call AuroraBeamCreateRings
-	call AuroraBeamCreateRings
-	call AuroraBeamCreateRings
-	call AuroraBeamCreateRings
-	call AuroraBeamCreateRings
-	call AuroraBeamCreateRings
-	waitforvisualfinish
-	restorebg
-	waitbgfadein
-	end
-
-AuroraBeamCreateRings:
-	createsprite gAuroraBeamRingSpriteTemplate, ANIM_TARGET, 2, 20, 0, 0, 0, 17
-	delay 1
-	createsprite gAuroraBeamRingSpriteTemplate, ANIM_TARGET, 2, 20, 0, 0, 0, 17
-	delay 1
-	createsprite gAuroraBeamRingSpriteTemplate, ANIM_TARGET, 2, 20, 0, 0, 0, 17
-	delay 1
-	createsprite gAuroraBeamRingSpriteTemplate, ANIM_TARGET, 2, 20, 0, 0, 0, 17
-	delay 1
-	return
-
-.endif
 @ genanims: GROWTH (T-134, vision.md 9.24) approved.
 Move_SOLAR_BEAM:
 	choosetwoturnanim DaemonsBatchGather, DaemonsBatchFit
@@ -4686,9 +4554,8 @@ DaemonsBatchFit:
 	waitforvisualfinish
 	goto DaemonsBatchDone
 	end
-@ genanims: FROZEN (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
+@ genanims: FROZEN (T-134, vision.md 9.24) approved.
 Move_BLIZZARD:
-.if DAEMONS_DEBUG
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(20, 25, 27)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(20, 25, 27)
@@ -4702,64 +4569,8 @@ Move_BLIZZARD:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 7, 0, RGB(20, 25, 27)
 	waitforvisualfinish
 	end
-.else
-	loadspritegfx ANIM_TAG_ICE_CRYSTALS
-	monbg ANIM_DEF_PARTNER
-	createvisualtask AnimTask_GetAttackerSide, 2
-	jumprettrue BlizzardAgainstPlayer
-	fadetobg BG_HIGHSPEED_OPPONENT
-BlizzardContinue:
-	waitbgfadeout
-	createvisualtask AnimTask_StartSlidingBg, 5, -2304, 0, 1, -1
-	waitbgfadein
-	waitforvisualfinish
-	panse SE_M_BLIZZARD, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
-	call BlizzardIceCrystals
-	call BlizzardIceCrystals
-	playsewithpan SE_M_BLIZZARD2, SOUND_PAN_TARGET
-	waitforvisualfinish
-	call IceCrystalEffectLong
-	waitforvisualfinish
-	clearmonbg ANIM_DEF_PARTNER
-	delay 20
-	restorebg
-	waitbgfadeout
-	setarg 7, 0xFFFF
-	waitbgfadein
-	end
-
-BlizzardIceCrystals:
-	createsprite gSwirlingSnowballSpriteTemplate, ANIM_ATTACKER, 40, 0, -10, 0, -10, 72, 1
-	createsprite gBlizzardIceCrystalSpriteTemplate, ANIM_ATTACKER, 40, 0, 0, 0, 0, 80, 0, 0, 1
-	delay 3
-	createsprite gSwirlingSnowballSpriteTemplate, ANIM_ATTACKER, 40, 0, -15, 0, -15, 72, 1
-	createsprite gBlizzardIceCrystalSpriteTemplate, ANIM_ATTACKER, 40, 0, -10, 0, -10, 80, 0, 0, 1
-	delay 3
-	createsprite gSwirlingSnowballSpriteTemplate, ANIM_ATTACKER, 40, 0, -5, 0, -5, 72, 1
-	createsprite gBlizzardIceCrystalSpriteTemplate, ANIM_ATTACKER, 40, 0, 10, 0, 10, 80, 0, 0, 1
-	delay 3
-	createsprite gSwirlingSnowballSpriteTemplate, ANIM_ATTACKER, 40, 0, -10, 0, -10, 72, 1
-	createsprite gBlizzardIceCrystalSpriteTemplate, ANIM_ATTACKER, 40, 0, -20, 0, -20, 80, 0, 0, 1
-	delay 3
-	createsprite gSwirlingSnowballSpriteTemplate, ANIM_ATTACKER, 40, 0, -20, 0, -20, 72, 1
-	createsprite gBlizzardIceCrystalSpriteTemplate, ANIM_ATTACKER, 40, 0, 15, 0, 15, 80, 0, 0, 1
-	delay 3
-	createsprite gSwirlingSnowballSpriteTemplate, ANIM_ATTACKER, 40, 0, -15, 0, -15, 72, 1
-	createsprite gBlizzardIceCrystalSpriteTemplate, ANIM_ATTACKER, 40, 0, -20, 0, -20, 80, 0, 0, 1
-	delay 3
-	createsprite gSwirlingSnowballSpriteTemplate, ANIM_ATTACKER, 40, 0, -25, 0, -25, 72, 1
-	createsprite gBlizzardIceCrystalSpriteTemplate, ANIM_ATTACKER, 40, 0, 20, 0, 20, 80, 0, 0, 1
-	delay 3
-	return
-
-BlizzardAgainstPlayer:
-	fadetobg BG_HIGHSPEED_PLAYER
-	goto BlizzardContinue
-
-.endif
-@ genanims: FROZEN (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
+@ genanims: FROZEN (T-134, vision.md 9.24) approved.
 Move_POWDER_SNOW:
-.if DAEMONS_DEBUG
 	playsewithpan SE_M_GUST, SOUND_PAN_TARGET
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 9, RGB(20, 25, 27)
 	waitforvisualfinish
@@ -4767,42 +4578,6 @@ Move_POWDER_SNOW:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 9, 0, RGB(20, 25, 27)
 	waitforvisualfinish
 	end
-.else
-	loadspritegfx ANIM_TAG_ICE_CRYSTALS
-	monbg ANIM_DEF_PARTNER
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, F_PAL_BG | F_PAL_BATTLERS, 1, 0, 3, RGB_BLACK
-	waitforvisualfinish
-	panse SE_M_GUST, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, +2, 0
-	call PowderSnowSnowballs
-	call PowderSnowSnowballs
-	playsewithpan SE_M_GUST2, SOUND_PAN_TARGET
-	waitforvisualfinish
-	waitsound
-	call IceCrystalEffectLong
-	waitforvisualfinish
-	clearmonbg ANIM_DEF_PARTNER
-	delay 20
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, F_PAL_BG | F_PAL_BATTLERS, 1, 3, 0, RGB_BLACK
-	end
-
-PowderSnowSnowballs:
-	createsprite gPowderSnowSnowballSpriteTemplate, ANIM_ATTACKER, 40, 0, 0, 0, 0, 56, 4, 4, 1
-	delay 3
-	createsprite gPowderSnowSnowballSpriteTemplate, ANIM_ATTACKER, 40, 0, -10, 0, -10, 56, 4, 4, 1
-	delay 3
-	createsprite gPowderSnowSnowballSpriteTemplate, ANIM_ATTACKER, 40, 0, 10, 0, 10, 56, -4, 3, 1
-	delay 3
-	createsprite gPowderSnowSnowballSpriteTemplate, ANIM_ATTACKER, 40, 0, -20, 0, -20, 56, -4, 5, 1
-	delay 3
-	createsprite gPowderSnowSnowballSpriteTemplate, ANIM_ATTACKER, 40, 0, 15, 0, 15, 56, 4, 4, 1
-	delay 3
-	createsprite gPowderSnowSnowballSpriteTemplate, ANIM_ATTACKER, 40, 0, -20, 0, -20, 56, 4, 4, 1
-	delay 3
-	createsprite gPowderSnowSnowballSpriteTemplate, ANIM_ATTACKER, 40, 0, 20, 0, 20, 56, 4, 4, 1
-	delay 3
-	return
-
-.endif
 @ genanims: FLOW (T-134, vision.md 9.24) approved.
 Move_HYDRO_PUMP:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(8, 13, 22)
@@ -7172,9 +6947,8 @@ SandTombSwirlingDirt:
 	delay 2
 	return
 
-@ genanims: FROZEN (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
+@ genanims: FROZEN (T-134, vision.md 9.24) approved.
 Move_SHEER_COLD:
-.if DAEMONS_DEBUG
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(20, 25, 27)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(20, 25, 27)
@@ -7188,25 +6962,6 @@ Move_SHEER_COLD:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 7, 0, RGB(20, 25, 27)
 	waitforvisualfinish
 	end
-.else
-	fadetobg BG_ICE
-	waitbgfadeout
-	playsewithpan SE_M_ICY_WIND, 0
-	waitbgfadein
-	loadspritegfx ANIM_TAG_ICE_CUBE
-	monbg ANIM_DEF_PARTNER
-	splitbgprio ANIM_TARGET
-	setalpha 12, 8
-	createvisualtask AnimTask_FrozenIceCube, 2
-	waitplaysewithpan SE_M_HAIL, SOUND_PAN_TARGET, 17
-	waitforvisualfinish
-	clearmonbg ANIM_DEF_PARTNER
-	blendoff
-	restorebg
-	waitbgfadein
-	end
-
-.endif
 @ genanims: LOGIC (T-134, vision.md 9.24) approved.
 Move_ARM_THRUST:
 	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
@@ -7417,11 +7172,23 @@ Move_POISON_FANG:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 3, 3, 0, RGB(10, 11, 6)
 	waitforvisualfinish
 	end
+@ genanims: PROTECT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_SUBSTITUTE:
+.if DAEMONS_DEBUG
+	playsewithpan SE_M_ATTRACT, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 12, RGB(13, 13, 13)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 12, 0, RGB(13, 13, 13)
+	waitforvisualfinish
+	createvisualtask AnimTask_MonToSubstitute, 2
+	waitforvisualfinish
+	end
+.else
 	playsewithpan SE_M_ATTRACT, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_MonToSubstitute, 2
 	end
 
+.endif
 @ genanims: GROWTH (T-134, vision.md 9.24) approved.
 Move_FRENZY_PLANT:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(11, 19, 12)
@@ -7638,11 +7405,24 @@ Move_SILVER_WIND:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 6, 0, RGB(16, 18, 9)
 	waitforvisualfinish
 	end
+@ genanims: PROTECT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_SNATCH:
+.if DAEMONS_DEBUG
+	playsewithpan SE_M_TAKE_DOWN, SOUND_PAN_TARGET
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 8, RGB(13, 13, 13)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(13, 13, 13)
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 10, RGB(5, 5, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 10, 0, RGB(5, 5, 5)
+	waitforvisualfinish
+	end
+.else
 	playsewithpan SE_M_TAKE_DOWN, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_WindUpLunge, 5, ANIM_ATTACKER, -12, 4, 10, 10, 12, 6
 	end
 
+.endif
 @ genanims: FLOW (T-134, vision.md 9.24) approved.
 Move_DIVE:
 	choosetwoturnanim DaemonsDescendSink, DaemonsDescendSurface
@@ -7809,7 +7589,21 @@ Move_SEISMIC_TOSS:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 12, 0, RGB(12, 15, 19)
 	waitforvisualfinish
 	end
+@ genanims: PROTECT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_MAGIC_COAT:
+.if DAEMONS_DEBUG
+	playsewithpan SE_M_BARRIER, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 11, RGB(22, 10, 19)
+	waitforvisualfinish
+	delay 8
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 11, 0, RGB(22, 10, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 10, RGB(22, 10, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 10, 0, RGB(22, 10, 19)
+	waitforvisualfinish
+	end
+.else
 	loadspritegfx ANIM_TAG_ORANGE_LIGHT_WALL
 	setalpha 0, 16
 	waitplaysewithpan SE_M_BARRIER, SOUND_PAN_ATTACKER, 15
@@ -7819,6 +7613,7 @@ Move_MAGIC_COAT:
 	blendoff
 	end
 
+.endif
 @ genanims: FLOW (T-134, vision.md 9.24) approved.
 Move_WATER_PULSE:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(8, 13, 22)
@@ -8033,9 +7828,8 @@ Move_MAGICAL_LEAF:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 5, 0, RGB(11, 19, 12)
 	waitforvisualfinish
 	end
-@ genanims: FROZEN (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
+@ genanims: FROZEN (T-134, vision.md 9.24) approved.
 Move_ICE_BALL:
-.if DAEMONS_DEBUG
 	playsewithpan SE_M_ICY_WIND, SOUND_PAN_TARGET
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 9, RGB(20, 25, 27)
 	waitforvisualfinish
@@ -8043,105 +7837,6 @@ Move_ICE_BALL:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 9, 0, RGB(20, 25, 27)
 	waitforvisualfinish
 	end
-.else
-	loadspritegfx ANIM_TAG_ICE_CHUNK
-	loadspritegfx ANIM_TAG_ICE_CRYSTALS
-	createvisualtask AnimTask_GetRolloutCounter, 5, 0
-	jumpargeq 0, 4, IceBallSetIceBg
-IceBallContinue:
-	playsewithpan SE_M_ICY_WIND, SOUND_PAN_ATTACKER
-	createsprite gIceBallChunkSpriteTemplate, ANIM_TARGET, 2, 15, 0, -12, -16, 30, -40
-	delay 28
-	playsewithpan SE_M_BRICK_BREAK, SOUND_PAN_TARGET
-	createvisualtask AnimTask_GetRolloutCounter, 5, 0
-	jumpargeq 0, 0, IceBallWeakest
-	jumpargeq 0, 1, IceBallWeak
-	jumpargeq 0, 2, IceBallMediun
-	jumpargeq 0, 3, IceBallStrong
-	jumpargeq 0, 4, IceBallStrongest
-IceBallContinue2:
-	createvisualtask AnimTask_GetRolloutCounter, 5, 0
-	jumpargeq 0, 4, IceBallUnsetIceBg
-IceBallEnd:
-	end
-
-IceBallSetIceBg:
-	fadetobg BG_ICE
-	goto IceBallContinue
-
-IceBallUnsetIceBg:
-	waitbgfadein
-	delay 45
-	restorebg
-	waitbgfadein
-	goto IceBallEnd
-
-IceBallWeakest:
-	createvisualtask AnimTask_ShakeTargetBasedOnMovePowerOrDmg, 2, FALSE, 1, 8, 1, 0
-	call IceBallImpactShard
-	call IceBallImpactShard
-	call IceBallImpactShard
-	call IceBallImpactShard
-	call IceBallImpactShard
-	goto IceBallContinue2
-
-IceBallWeak:
-	createvisualtask AnimTask_ShakeTargetBasedOnMovePowerOrDmg, 2, FALSE, 1, 10, 1, 0
-	call IceBallImpactShard
-	call IceBallImpactShard
-	call IceBallImpactShard
-	call IceBallImpactShard
-	call IceBallImpactShard
-	call IceBallImpactShard
-	call IceBallImpactShard
-	goto IceBallContinue2
-
-IceBallMediun:
-	createvisualtask AnimTask_ShakeTargetBasedOnMovePowerOrDmg, 2, FALSE, 1, 14, 1, 0
-	call IceBallImpactShard
-	call IceBallImpactShard
-	call IceBallImpactShard
-	call IceBallImpactShard
-	call IceBallImpactShard
-	call IceBallImpactShard
-	call IceBallImpactShard
-	call IceBallImpactShard
-	call IceBallImpactShard
-	goto IceBallContinue2
-
-IceBallStrong:
-	createvisualtask AnimTask_ShakeTargetBasedOnMovePowerOrDmg, 2, FALSE, 1, 18, 1, 0
-	call IceBallImpactShard
-	call IceBallImpactShard
-	call IceBallImpactShard
-	call IceBallImpactShard
-	call IceBallImpactShard
-	call IceBallImpactShard
-	call IceBallImpactShard
-	call IceBallImpactShard
-	call IceBallImpactShard
-	call IceBallImpactShard
-	goto IceBallContinue2
-
-IceBallStrongest:
-	createvisualtask AnimTask_ShakeTargetBasedOnMovePowerOrDmg, 2, FALSE, 1, 30, 1, 0
-	call IceBallImpactShard
-	call IceBallImpactShard
-	call IceBallImpactShard
-	call IceBallImpactShard
-	call IceBallImpactShard
-	call IceBallImpactShard
-	call IceBallImpactShard
-	call IceBallImpactShard
-	call IceBallImpactShard
-	call IceBallImpactShard
-	goto IceBallContinue2
-
-IceBallImpactShard:
-	createsprite gIceBallImpactShardSpriteTemplate, ANIM_TARGET, 4, -12, -16
-	return
-
-.endif
 @ genanims: CONTENT (T-134, vision.md 9.24) approved.
 Move_WEATHER_BALL:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
