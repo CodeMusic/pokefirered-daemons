@@ -5,6 +5,7 @@
 #include "battle_bg.h"
 #include "battle_gfx_sfx_util.h"
 #include "fieldmap.h"
+#include "daemon_streaks.h"
 #include "data.h"
 #include "decompress.h"
 #include "graphics.h"
@@ -2246,6 +2247,22 @@ void AnimTask_DaemonsPerspectiveFlash(u8 taskId)
     DaemonsSetHalftoneColour(TRUE);
     gTasks[taskId].data[0] = 0;
     gTasks[taskId].func = AnimTask_DaemonsPerspectiveFlash_Step;
+}
+
+// CAST AND RECAST (T-162; vision.md 10's Open log, self-alignment). Both change the user's own type, and the
+// battle script changes it BEFORE the animation plays -- so the animation can end in the colour the user now
+// is. args: delay, from, to, exactly as AnimTask_BlendBattleAnimPal's, on the attacker, in the user's first
+// type's streak colour. Nothing is said; the body simply comes back a different colour than it went.
+void AnimTask_BlendBattleAnimPal(u8 taskId);
+
+void AnimTask_DaemonsBlendToUserType(u8 taskId)
+{
+    gBattleAnimArgs[3] = gBattleAnimArgs[2];
+    gBattleAnimArgs[2] = gBattleAnimArgs[1];
+    gBattleAnimArgs[1] = gBattleAnimArgs[0];
+    gBattleAnimArgs[0] = F_PAL_ATTACKER;
+    gBattleAnimArgs[4] = Streaks_TypeColour(gBattleMons[gBattleAnimAttacker].type1);
+    AnimTask_BlendBattleAnimPal(taskId);
 }
 
 void AnimTask_TransformMon(u8 taskId)

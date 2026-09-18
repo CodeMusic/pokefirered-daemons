@@ -32,6 +32,13 @@ static u16 StreakColour(const u16 *palette, u16 species, u16 move)
     return gStreakColours[body][type];
 }
 
+u16 Streaks_TypeColour(u8 type)
+{
+    if (type >= NUMBER_OF_MON_TYPES)
+        return gStreakBlank;
+    return gStreakColours[TYPE_MYSTERY][type];
+}
+
 void Streaks_ApplyToBuffer(u16 *palette, u16 species, const u16 *moves)
 {
     s32 i;

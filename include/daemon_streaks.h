@@ -19,4 +19,8 @@ void Streaks_MovesOfMon(struct Pokemon *mon, u16 *moves);
 void Streaks_MovesOfBoxMon(struct BoxPokemon *boxMon, u16 *moves);
 void Streaks_MovesOfBattler(u8 battlerId, u16 *moves);
 
+// A type's own streak colour on no body in particular (its light step): what CAST and RECAST blend the
+// user toward once its type has changed, so the change is shown in the colour the streaks already use.
+u16 Streaks_TypeColour(u8 type);
+
 #endif // GUARD_DAEMON_STREAKS_H
