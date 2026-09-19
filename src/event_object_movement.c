@@ -449,6 +449,15 @@ static const u8 gInitialMovementTypeFacingDirections[MOVEMENT_TYPES_COUNT] = {
 //  cannot: the indices ARE the ramp, and rendering them through npc_blue
 //  turned DEADLOCK peach and yellow on Route 12. One palette per daemon,
 //  written by tools/gbasprite.py beside the art it belongs to.
+// T-133: a daemon TYPE's overworld palette -- the base plus the type's constant (tools/gbaowslots.py)
+#define OBJ_EVENT_PAL_TAG_DAEMON_TYPE_BASE            0x1180
+#define OBJ_EVENT_PAL_TAG_DAEMON_TYPE_ELECTRIC         (OBJ_EVENT_PAL_TAG_DAEMON_TYPE_BASE + TYPE_ELECTRIC)
+#define OBJ_EVENT_PAL_TAG_DAEMON_TYPE_FIGHTING         (OBJ_EVENT_PAL_TAG_DAEMON_TYPE_BASE + TYPE_FIGHTING)
+#define OBJ_EVENT_PAL_TAG_DAEMON_TYPE_GROUND           (OBJ_EVENT_PAL_TAG_DAEMON_TYPE_BASE + TYPE_GROUND)
+#define OBJ_EVENT_PAL_TAG_DAEMON_TYPE_NORMAL           (OBJ_EVENT_PAL_TAG_DAEMON_TYPE_BASE + TYPE_NORMAL)
+#define OBJ_EVENT_PAL_TAG_DAEMON_TYPE_POISON           (OBJ_EVENT_PAL_TAG_DAEMON_TYPE_BASE + TYPE_POISON)
+#define OBJ_EVENT_PAL_TAG_DAEMON_TYPE_PSYCHIC          (OBJ_EVENT_PAL_TAG_DAEMON_TYPE_BASE + TYPE_PSYCHIC)
+#define OBJ_EVENT_PAL_TAG_DAEMON_TYPE_WATER            (OBJ_EVENT_PAL_TAG_DAEMON_TYPE_BASE + TYPE_WATER)
 #define OBJ_EVENT_PAL_TAG_DAEMON_SNORLAX              0x111C
 #define OBJ_EVENT_PAL_TAG_DAEMON_SPEAROW              0x111D
 //  THE CLEARS share one palette: "three foxes, a palette apart" (vision.md
@@ -539,6 +548,13 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_Meteorite,               OBJ_EVENT_PAL_TAG_METEORITE},
     {gObjectEventPal_SSAnne,                  OBJ_EVENT_PAL_TAG_SS_ANNE},
     {gObjectEventPal_Seagallop,               OBJ_EVENT_PAL_TAG_SEAGALLOP},
+    {gObjectEventPal_DaemonType_Electric, OBJ_EVENT_PAL_TAG_DAEMON_TYPE_ELECTRIC},
+    {gObjectEventPal_DaemonType_Fighting, OBJ_EVENT_PAL_TAG_DAEMON_TYPE_FIGHTING},
+    {gObjectEventPal_DaemonType_Ground, OBJ_EVENT_PAL_TAG_DAEMON_TYPE_GROUND},
+    {gObjectEventPal_DaemonType_Normal, OBJ_EVENT_PAL_TAG_DAEMON_TYPE_NORMAL},
+    {gObjectEventPal_DaemonType_Poison, OBJ_EVENT_PAL_TAG_DAEMON_TYPE_POISON},
+    {gObjectEventPal_DaemonType_Psychic, OBJ_EVENT_PAL_TAG_DAEMON_TYPE_PSYCHIC},
+    {gObjectEventPal_DaemonType_Water, OBJ_EVENT_PAL_TAG_DAEMON_TYPE_WATER},
     {gObjectEventPal_DaemonSnorlax,           OBJ_EVENT_PAL_TAG_DAEMON_SNORLAX},
     {gObjectEventPal_DaemonSpearow,           OBJ_EVENT_PAL_TAG_DAEMON_SPEAROW},
     {gObjectEventPal_NpcClears,               OBJ_EVENT_PAL_TAG_NPC_CLEARS},
@@ -1602,6 +1618,15 @@ void Unref_RemoveAllObjectEventsExceptPlayer(void)
     }
 }
 
+// T-133: a daemon's overworld object carries its TYPE's palette (tools/gbaowslots.py), in a slot that map left free.
+// The map's generic palettes are laid down before objects spawn; this patches the type's over its slot as it does.
+static void TryPatchDaemonTypePalette(const struct ObjectEventGraphicsInfo *graphicsInfo)
+{
+    if (graphicsInfo->paletteTag >= OBJ_EVENT_PAL_TAG_DAEMON_TYPE_BASE
+     && graphicsInfo->paletteTag < OBJ_EVENT_PAL_TAG_DAEMON_TYPE_BASE + NUMBER_OF_MON_TYPES)
+        PatchObjectPalette(graphicsInfo->paletteTag, graphicsInfo->paletteSlot);
+}
+
 static u8 TrySetupObjectEventSprite(const struct ObjectEventTemplate *objectEventTemplate, struct SpriteTemplate *spriteTemplate, u8 mapNum, u8 mapGroup, s16 cameraX, s16 cameraY)
 {
     u8 spriteId;
@@ -1620,6 +1645,7 @@ static u8 TrySetupObjectEventSprite(const struct ObjectEventTemplate *objectEven
         LoadPlayerObjectReflectionPalette(graphicsInfo->paletteTag, graphicsInfo->paletteSlot);
     else if (graphicsInfo->paletteSlot == PALSLOT_NPC_SPECIAL)
         LoadSpecialObjectReflectionPalette(graphicsInfo->paletteTag, graphicsInfo->paletteSlot);
+    TryPatchDaemonTypePalette(graphicsInfo);
 
 
     if (objectEvent->movementType == MOVEMENT_TYPE_INVISIBLE)
@@ -1794,6 +1820,7 @@ u8 CreateVirtualObject(u8 graphicsId, u8 virtualObjId, s16 x, s16 y, u8 elevatio
         sprite->centerToCornerVecY = -(graphicsInfo->height >> 1);
         sprite->y += sprite->centerToCornerVecY;
         sprite->oam.paletteNum = graphicsInfo->paletteSlot;
+        TryPatchDaemonTypePalette(graphicsInfo);
         sprite->coordOffsetEnabled = TRUE;
         sprite->sVirtualObjId = virtualObjId;
         sprite->sVirtualObjElev = elevation;
@@ -1831,6 +1858,7 @@ u8 CreateFameCheckerObject(u8 graphicsId, u8 localId, s16 x, s16 y)
         sprite->centerToCornerVecY = -(graphicsInfo->height >> 1);
         sprite->y += sprite->centerToCornerVecY;
         sprite->oam.paletteNum = graphicsInfo->paletteSlot;
+        TryPatchDaemonTypePalette(graphicsInfo);
         sprite->data[0] = localId;
         if (graphicsInfo->paletteSlot == PALSLOT_NPC_SPECIAL)
             LoadSpecialObjectReflectionPalette(graphicsInfo->paletteTag, graphicsInfo->paletteSlot);
@@ -1976,6 +2004,7 @@ static void SpawnObjectEventOnReturnToField(u8 objectEventId, s16 x, s16 y)
             SetSubspriteTables(sprite, subspriteTables);
 
         sprite->oam.paletteNum = graphicsInfo->paletteSlot;
+        TryPatchDaemonTypePalette(graphicsInfo);
         sprite->coordOffsetEnabled = TRUE;
         sprite->data[0] = objectEventId;
         objectEvent->spriteId = spriteId;
@@ -2022,7 +2051,8 @@ void ObjectEventSetGraphicsId(struct ObjectEvent *objectEvent, u8 graphicsId)
 
     if (graphicsInfo->paletteSlot == PALSLOT_NPC_SPECIAL)
         LoadSpecialObjectReflectionPalette(graphicsInfo->paletteTag, graphicsInfo->paletteSlot);
-    
+    TryPatchDaemonTypePalette(graphicsInfo);
+
     var = sprite->images->size / TILE_SIZE_4BPP;
     if (!sprite->usingSheet)
     {

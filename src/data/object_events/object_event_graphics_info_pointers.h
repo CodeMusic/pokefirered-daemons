@@ -1,3 +1,18 @@
+// T-133: gbaowslots.py declarations
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Daemon_ChanseyS2;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Daemon_ClefairyS2;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Daemon_DoduoS3;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Daemon_NidoranFS2;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Daemon_NidoranFSspecial;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Daemon_NidoranMSspecial;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Daemon_PikachuS1Reflection;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Daemon_PikachuS2;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Daemon_PsyduckS2Reflection;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Daemon_PsyduckS3;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Daemon_SeelS3;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Daemon_SlowbroS3;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Daemon_SlowpokeS3;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Daemon_SnorlaxSspecial;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RedNormal;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RedBike;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RedSurf;
@@ -415,4 +430,19 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_TAMER]                      = &gObjectEventGraphicsInfo_Tamer,
     [OBJ_EVENT_GFX_PSYCHIC_M]                  = &gObjectEventGraphicsInfo_PsychicM,
     [OBJ_EVENT_GFX_CUE_BALL]                   = &gObjectEventGraphicsInfo_CueBall,
+    // T-133: gbaowslots.py variants
+    [OBJ_EVENT_GFX_DAEMON_CHANSEY_S2] = &gObjectEventGraphicsInfo_Daemon_ChanseyS2,
+    [OBJ_EVENT_GFX_DAEMON_CLEFAIRY_S2] = &gObjectEventGraphicsInfo_Daemon_ClefairyS2,
+    [OBJ_EVENT_GFX_DAEMON_DODUO_S3] = &gObjectEventGraphicsInfo_Daemon_DoduoS3,
+    [OBJ_EVENT_GFX_DAEMON_NIDORAN_F_S2] = &gObjectEventGraphicsInfo_Daemon_NidoranFS2,
+    [OBJ_EVENT_GFX_DAEMON_NIDORAN_F_SSPECIAL] = &gObjectEventGraphicsInfo_Daemon_NidoranFSspecial,
+    [OBJ_EVENT_GFX_DAEMON_NIDORAN_M_SSPECIAL] = &gObjectEventGraphicsInfo_Daemon_NidoranMSspecial,
+    [OBJ_EVENT_GFX_DAEMON_PIKACHU_S1_REFLECTION] = &gObjectEventGraphicsInfo_Daemon_PikachuS1Reflection,
+    [OBJ_EVENT_GFX_DAEMON_PIKACHU_S2] = &gObjectEventGraphicsInfo_Daemon_PikachuS2,
+    [OBJ_EVENT_GFX_DAEMON_PSYDUCK_S2_REFLECTION] = &gObjectEventGraphicsInfo_Daemon_PsyduckS2Reflection,
+    [OBJ_EVENT_GFX_DAEMON_PSYDUCK_S3] = &gObjectEventGraphicsInfo_Daemon_PsyduckS3,
+    [OBJ_EVENT_GFX_DAEMON_SEEL_S3] = &gObjectEventGraphicsInfo_Daemon_SeelS3,
+    [OBJ_EVENT_GFX_DAEMON_SLOWBRO_S3] = &gObjectEventGraphicsInfo_Daemon_SlowbroS3,
+    [OBJ_EVENT_GFX_DAEMON_SLOWPOKE_S3] = &gObjectEventGraphicsInfo_Daemon_SlowpokeS3,
+    [OBJ_EVENT_GFX_DAEMON_SNORLAX_SSPECIAL] = &gObjectEventGraphicsInfo_Daemon_SnorlaxSspecial,
 };

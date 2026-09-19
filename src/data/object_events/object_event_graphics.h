@@ -46,6 +46,14 @@ const u16 gObjectEventPic_Brock[] = INCBIN_U16("graphics/object_events/pics/peop
 const u16 gObjectEventPic_LtSurge[] = INCBIN_U16("graphics/object_events/pics/people/lt_surge.4bpp");
 const u16 gObjectEventPic_Bill[] = INCBIN_U16("graphics/object_events/pics/people/bill.4bpp");
 const u16 gObjectEventPal_NpcBlue[] = INCBIN_U16("graphics/object_events/palettes/npc_blue.gbapal");
+// T-133: one overworld palette per daemon TYPE (tools/gbaowslots.py)
+const u16 gObjectEventPal_DaemonType_Electric[] = INCBIN_U16("graphics/object_events/palettes/daemon_type_electric.gbapal");
+const u16 gObjectEventPal_DaemonType_Fighting[] = INCBIN_U16("graphics/object_events/palettes/daemon_type_fighting.gbapal");
+const u16 gObjectEventPal_DaemonType_Ground[] = INCBIN_U16("graphics/object_events/palettes/daemon_type_ground.gbapal");
+const u16 gObjectEventPal_DaemonType_Normal[] = INCBIN_U16("graphics/object_events/palettes/daemon_type_normal.gbapal");
+const u16 gObjectEventPal_DaemonType_Poison[] = INCBIN_U16("graphics/object_events/palettes/daemon_type_poison.gbapal");
+const u16 gObjectEventPal_DaemonType_Psychic[] = INCBIN_U16("graphics/object_events/palettes/daemon_type_psychic.gbapal");
+const u16 gObjectEventPal_DaemonType_Water[] = INCBIN_U16("graphics/object_events/palettes/daemon_type_water.gbapal");
 const u16 gObjectEventPal_DaemonSnorlax[] = INCBIN_U16("graphics/object_events/palettes/daemon_snorlax.gbapal");
 const u16 gObjectEventPal_DaemonSpearow[] = INCBIN_U16("graphics/object_events/palettes/daemon_spearow.gbapal");
 const u16 gObjectEventPal_NpcClears[] = INCBIN_U16("graphics/object_events/palettes/npc_clears.gbapal");

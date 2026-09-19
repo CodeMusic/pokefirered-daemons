@@ -33,7 +33,7 @@
     {
       "local_id": "LOCALID_BILL_CLEFAIRY",
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_CLEFAIRY",
+      "graphics_id": "OBJ_EVENT_GFX_DAEMON_CLEFAIRY_S2",
       "x": 10,
       "y": 6,
       "elevation": 3,
