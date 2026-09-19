@@ -43,6 +43,10 @@ static EWRAM_DATA u8 sTheatreSavedAttacker = 0;
 static EWRAM_DATA u8 sTheatreSavedTarget = 0;
 static EWRAM_DATA u8 sTheatreTurn = 0;          // the animation's move turn: set it (theatre.lua poke8) to film a two-turn routine's second half
 static EWRAM_DATA s16 sTheatrePos[4] = {0};     // attacker x, y, target x, y: put back after every animation
+// T-168: nonzero plays an animation that is NOT a move, on the daemon under test (attacker and target both):
+// 1..0x7F is gBattleAnims_StatusConditions[n - 1] (a STATE), 0x81.. is gBattleAnims_General[n - 0x81]. Poked by
+// theatre.lua (poke8), and the move shown is ignored while it is set.
+static EWRAM_DATA u8 sTheatreGeneral = 0;
 #endif
 
 static void PlayerHandleGetMonData(void);
@@ -3142,6 +3146,10 @@ static void DbgTheatre_Input(void)
         sTheatreSavedTarget = gBattlerTarget;
         gBattlerAttacker = sTheatreFromFoe ? foe : gActiveBattler;
         gBattlerTarget = sTheatreFromFoe ? gActiveBattler : foe;
+        // T-168: a state plays on ONE daemon. Pointed at it BEFORE the positions are saved -- set after, the reset
+        // below moved the foe onto the player's spot and every later state filmed an empty field.
+        if (sTheatreGeneral != 0)
+            gBattlerTarget = gBattlerAttacker;
         gAnimMoveTurn = sTheatreTurn;
         gAnimMovePower = gBattleMoves[sTheatreMove].power;
         gAnimMoveDmg = 30;
@@ -3154,7 +3162,19 @@ static void DbgTheatre_Input(void)
         sTheatrePos[2] = gSprites[gBattlerSpriteIds[gBattlerTarget]].x;
         sTheatrePos[3] = gSprites[gBattlerSpriteIds[gBattlerTarget]].y;
         SetBattlerSpriteAffineMode(ST_OAM_AFFINE_OFF);
-        DoMoveAnim(sTheatreMove);
+        if (sTheatreGeneral != 0)
+        {
+            // As LaunchStatusAnimation does: the anim globals are set here, since only DoMoveAnim sets them itself.
+            gBattleAnimAttacker = gBattleAnimTarget = gBattlerAttacker;
+            if (sTheatreGeneral < 0x80)
+                LaunchBattleAnimation(gBattleAnims_StatusConditions, sTheatreGeneral - 1, FALSE);
+            else
+                LaunchBattleAnimation(gBattleAnims_General, sTheatreGeneral - 0x81, FALSE);
+        }
+        else
+        {
+            DoMoveAnim(sTheatreMove);
+        }
         gBattlerControllerFuncs[gActiveBattler] = DbgTheatre_Play;
     }
     else if (JOY_NEW(B_BUTTON))

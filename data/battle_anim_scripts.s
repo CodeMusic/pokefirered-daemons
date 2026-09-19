@@ -8028,17 +8028,57 @@ UnsetSolarBeamBg:
 	return
 
 Status_Poison:
+@ genstates: Status_Poison -- LEAKING (T-168)
+.if DAEMONS_DEBUG
+	playsewithpan SE_M_TOXIC, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendColorCycle, 2, F_PAL_ATTACKER, 2, 1, 0, 9, RGB(10, 11, 6)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 7, RGB(13, 13, 13)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 3, 7, 0, RGB(13, 13, 13)
+	waitforvisualfinish
+	delay 6
+	playsewithpan SE_M_TOXIC, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendColorCycle, 2, F_PAL_ATTACKER, 2, 1, 0, 9, RGB(10, 11, 6)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 7, RGB(13, 13, 13)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 3, 7, 0, RGB(13, 13, 13)
+	waitforvisualfinish
+	end
+.else
 	loopsewithpan SE_M_TOXIC, SOUND_PAN_TARGET, 13, 6
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 18, 2
 	createvisualtask AnimTask_BlendColorCycle, 2, F_PAL_ATTACKER, 2, 2, 0, 12, RGB(30, 0, 31)
 	end
+.endif
 
 Status_Confusion:
+@ genstates: Status_Confusion -- THRASHING (T-168)
+.if DAEMONS_DEBUG
+	loopsewithpan SE_M_DIZZY_PUNCH, SOUND_PAN_ATTACKER, 13, 3
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 28, 1
+	createvisualtask AnimTask_BlendColorCycle, 2, F_PAL_ATTACKER, 0, 7, 0, 7, RGB(13, 13, 13)
+	waitforvisualfinish
+	end
+.else
 	loadspritegfx ANIM_TAG_DUCK
 	call ConfusionEffect
 	end
+.endif
 
 Status_Burn:
+@ genstates: Status_Burn -- OVERHEATED (T-168)
+.if DAEMONS_DEBUG
+	playsewithpan SE_M_FLAME_WHEEL, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 3, 0, 10, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendColorCycle, 2, F_PAL_ATTACKER, 1, 3, 10, 6, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 10, 0, RGB(27, 19, 5)
+	waitforvisualfinish
+	end
+.else
 	loadspritegfx ANIM_TAG_SMALL_EMBER
 	playsewithpan SE_M_FLAME_WHEEL, SOUND_PAN_TARGET
 	call BurnFlame
@@ -8046,6 +8086,7 @@ Status_Burn:
 	call BurnFlame
 	waitforvisualfinish
 	end
+.endif
 
 BurnFlame:
 	createsprite gBurnFlameSpriteTemplate, ANIM_TARGET, 2, -24, 24, 24, 24, 20, 1, 1
@@ -8065,20 +8106,65 @@ Status_Infatuation:
 	end
 
 Status_Sleep:
+@ genstates: Status_Sleep -- SUSPENDED (T-168)
+.if DAEMONS_DEBUG
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 3, 0, 10, RGB(13, 13, 13)
+	waitforvisualfinish
+	delay 36
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 3, 10, 0, RGB(13, 13, 13)
+	waitforvisualfinish
+	end
+.else
 	loadspritegfx ANIM_TAG_LETTER_Z
 	playsewithpan SE_M_SNORE, SOUND_PAN_ATTACKER
 	createsprite gSleepLetterZSpriteTemplate, ANIM_ATTACKER, 2, 4, -10, 16, 0, 0
 	delay 30
 	createsprite gSleepLetterZSpriteTemplate, ANIM_ATTACKER, 2, 4, -10, 16, 0, 0
 	end
+.endif
 
 Status_Paralysis:
+@ genstates: Status_Paralysis -- THROTTLED (T-168)
+.if DAEMONS_DEBUG
+	playsewithpan SE_M_THUNDERBOLT2, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 2, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 9, RGB(10, 23, 23)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 9, 0, RGB(10, 23, 23)
+	waitforvisualfinish
+	delay 6
+	playsewithpan SE_M_THUNDERBOLT2, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 2, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 9, RGB(10, 23, 23)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 9, 0, RGB(10, 23, 23)
+	waitforvisualfinish
+	delay 30
+	playsewithpan SE_M_THUNDERBOLT2, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 2, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 9, RGB(10, 23, 23)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 9, 0, RGB(10, 23, 23)
+	waitforvisualfinish
+	end
+.else
 	loadspritegfx ANIM_TAG_SPARK_2
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 10, 1
 	call ElectricityEffect
 	end
+.endif
 
 Status_Freeze:
+@ genstates: Status_Freeze -- HUNG (T-168)
+.if DAEMONS_DEBUG
+	playsewithpan SE_M_ICY_WIND, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 12, RGB(20, 25, 27)
+	waitforvisualfinish
+	delay 44
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 12, 0, RGB(20, 25, 27)
+	waitforvisualfinish
+	end
+.else
 	playsewithpan SE_M_ICY_WIND, 0
 	loadspritegfx ANIM_TAG_ICE_CUBE
 	monbg ANIM_DEF_PARTNER
@@ -8088,6 +8174,7 @@ Status_Freeze:
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	end
+.endif
 
 Status_Curse:
 	loadspritegfx ANIM_TAG_GHOSTLY_SPIRIT
