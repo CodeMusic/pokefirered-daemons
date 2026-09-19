@@ -1760,6 +1760,12 @@ const u32 gMonShinyPalette_Celebi[] = INCBIN_U32("graphics/pokemon/celebi/shiny.
 const u8 gMonIcon_Celebi[] = INCBIN_U8("graphics/pokemon/celebi/icon.4bpp");
 const u8 gMonFootprint_Celebi[] = INCBIN_U8("graphics/pokemon/celebi/footprint.1bpp");
 
+// MISSINGNO (T-163): its own art, where it shared the "??" placeholder with the other old-Unown slots.
+const u32 gMonFrontPic_Missingno[] = INCBIN_U32("graphics/pokemon/old_unown_b/front.4bpp.lz");
+const u32 gMonPalette_Missingno[] = INCBIN_U32("graphics/pokemon/old_unown_b/normal.gbapal.lz");
+const u32 gMonBackPic_Missingno[] = INCBIN_U32("graphics/pokemon/old_unown_b/back.4bpp.lz");
+const u32 gMonShinyPalette_Missingno[] = INCBIN_U32("graphics/pokemon/old_unown_b/shiny.gbapal.lz");
+
 const u32 gMonFrontPic_DoubleQuestionMark[] = INCBIN_U32("graphics/pokemon/question_mark/double/front.4bpp.lz");
 const u32 gMonPalette_DoubleQuestionMark[] = INCBIN_U32("graphics/pokemon/question_mark/double/normal.gbapal.lz");
 const u32 gMonBackPic_DoubleQuestionMark[] = INCBIN_U32("graphics/pokemon/question_mark/double/back.4bpp.lz");
