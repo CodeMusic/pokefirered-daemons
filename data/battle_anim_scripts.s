@@ -8068,6 +8068,25 @@ BurnFlame:
 	return
 
 Status_Infatuation:
+@ genstates: Status_Infatuation -- PAIR (T-168)
+.if DAEMONS_DEBUG
+	playsewithpan SE_M_CHARM, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 3, 0, 8, RGB(24, 23, 21)
+	createvisualtask AnimTask_BlendBattleAnimPalExclude, 10, 2, 3, 0, 8, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 3, 8, 0, RGB(24, 23, 21)
+	createvisualtask AnimTask_BlendBattleAnimPalExclude, 10, 2, 3, 8, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	delay 10
+	playsewithpan SE_M_CHARM, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 3, 0, 8, RGB(24, 23, 21)
+	createvisualtask AnimTask_BlendBattleAnimPalExclude, 10, 2, 3, 0, 8, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 3, 8, 0, RGB(24, 23, 21)
+	createvisualtask AnimTask_BlendBattleAnimPalExclude, 10, 2, 3, 8, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.else
 	loadspritegfx ANIM_TAG_MAGENTA_HEART
 	playsewithpan SE_M_CHARM, SOUND_PAN_ATTACKER
 	createsprite gMagentaHeartSpriteTemplate, ANIM_ATTACKER, 3, 0, 20
@@ -8078,6 +8097,7 @@ Status_Infatuation:
 	playsewithpan SE_M_CHARM, SOUND_PAN_ATTACKER
 	createsprite gMagentaHeartSpriteTemplate, ANIM_ATTACKER, 3, 20, 20
 	end
+.endif
 
 Status_Sleep:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 3, 0, 10, RGB(13, 13, 13)
@@ -8120,6 +8140,21 @@ Status_Freeze:
 	end
 
 Status_Curse:
+@ genstates: Status_Curse -- CONSULT (T-168)
+.if DAEMONS_DEBUG
+	playsewithpan SE_M_CONFUSE_RAY, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 14, RGB(13, 13, 13)
+	waitforvisualfinish
+	delay 16
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 14, 0, RGB(13, 13, 13)
+	waitforvisualfinish
+	delay 4
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 6, RGB(13, 13, 13)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 6, 0, RGB(13, 13, 13)
+	waitforvisualfinish
+	end
+.else
 	loadspritegfx ANIM_TAG_GHOSTLY_SPIRIT
 	monbg ANIM_DEF_PARTNER
 	playsewithpan SE_M_NIGHTMARE, SOUND_PAN_TARGET
@@ -8128,8 +8163,20 @@ Status_Curse:
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	end
+.endif
 
 Status_Nightmare:
+@ genstates: Status_Nightmare -- STARVATION (T-168)
+.if DAEMONS_DEBUG
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 3, 0, 11, RGB(11, 8, 14)
+	waitforvisualfinish
+	playsewithpan SE_M_NIGHTMARE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendColorCycle, 2, F_PAL_ATTACKER, 3, 2, 11, 15, RGB(11, 8, 14)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 11, 0, RGB(11, 8, 14)
+	waitforvisualfinish
+	end
+.else
 	loadspritegfx ANIM_TAG_DEVIL
 	monbg ANIM_DEF_PARTNER
 	playsewithpan SE_M_NIGHTMARE, SOUND_PAN_TARGET
@@ -8138,6 +8185,7 @@ Status_Nightmare:
 	waitforvisualfinish
 	clearmonbg ANIM_DEF_PARTNER
 	end
+.endif
 
 General_CastformChange:
 	createvisualtask AnimTask_IsMonInvisible, 2
@@ -8206,6 +8254,18 @@ General_TurnTrap:
 	goto Status_BindWrap
 
 Status_BindWrap:
+@ genstates: Status_BindWrap -- LATCH / ENCLOSE (T-168)
+.if DAEMONS_DEBUG
+	playsewithpan SE_M_BIND, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 9, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 2, 2
+	delay 16
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 9, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.else
 	loadspritegfx ANIM_TAG_TENDRILS
 	loopsewithpan SE_M_SCRATCH, SOUND_PAN_TARGET, 6, 2
 	createsprite gConstrictBindingSpriteTemplate, ANIM_TARGET, 4, 0, 16, 0, 1
@@ -8218,8 +8278,23 @@ Status_BindWrap:
 	playsewithpan SE_M_BIND, SOUND_PAN_TARGET
 	waitforvisualfinish
 	end
+.endif
 
 Status_FireSpin:
+@ genstates: Status_FireSpin -- THERMAL (T-168)
+.if DAEMONS_DEBUG
+	playsewithpan SE_M_FLAME_WHEEL, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 9, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendColorCycle, 2, F_PAL_ATTACKER, 1, 3, 9, 5, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 2, 2
+	delay 16
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 9, 0, RGB(27, 19, 5)
+	waitforvisualfinish
+	end
+.else
 	loadspritegfx ANIM_TAG_SMALL_EMBER
 	playsewithpan SE_M_SACRED_FIRE2, SOUND_PAN_TARGET
 	createvisualtask AnimTask_ShakeMon, 5, ANIM_TARGET, 0, 2, 30, 1
@@ -8228,8 +8303,23 @@ Status_FireSpin:
 	waitforvisualfinish
 	stopsound
 	end
+.endif
 
 Status_Whirlpool:
+@ genstates: Status_Whirlpool -- WHIRLPOOL (T-168)
+.if DAEMONS_DEBUG
+	playsewithpan SE_M_WHIRLPOOL, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 11, RGB(8, 13, 22)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendColorCycle, 2, F_PAL_ATTACKER, 0, 5, 11, 5, RGB(8, 13, 22)
+	waitforvisualfinish
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 2, 2
+	delay 16
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 11, 0, RGB(8, 13, 22)
+	waitforvisualfinish
+	end
+.else
 	loadspritegfx ANIM_TAG_WATER_ORB
 	monbg ANIM_DEF_PARTNER
 	splitbgprio ANIM_TARGET
@@ -8246,8 +8336,21 @@ Status_Whirlpool:
 	stopsound
 	clearmonbg ANIM_DEF_PARTNER
 	end
+.endif
 
 Status_Clamp:
+@ genstates: Status_Clamp -- SLUICE (T-168)
+.if DAEMONS_DEBUG
+	playsewithpan SE_M_VICEGRIP, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 11, RGB(8, 13, 22)
+	waitforvisualfinish
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 2, 2
+	delay 20
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 11, 0, RGB(8, 13, 22)
+	waitforvisualfinish
+	end
+.else
 	loadspritegfx ANIM_TAG_CLAMP
 	loadspritegfx ANIM_TAG_IMPACT
 	monbg ANIM_TARGET
@@ -8263,8 +8366,21 @@ Status_Clamp:
 	blendoff
 	waitforvisualfinish
 	end
+.endif
 
 Status_SandTomb:
+@ genstates: Status_SandTomb -- BURY (T-168)
+.if DAEMONS_DEBUG
+	playsewithpan SE_M_SAND_TOMB, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 4, 0, 10, RGB(19, 15, 9)
+	waitforvisualfinish
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 2, 2
+	delay 12
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 4, 10, 0, RGB(19, 15, 9)
+	waitforvisualfinish
+	end
+.else
 	loadspritegfx ANIM_TAG_MUD_SAND
 	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 0, F_PAL_TARGET, 2, 0, 7, RGB(19, 17, 0)
 	createvisualtask AnimTask_ShakeMon, 5, ANIM_TARGET, 0, 2, 30, 1
@@ -8276,6 +8392,7 @@ Status_SandTomb:
 	waitforvisualfinish
 	stopsound
 	end
+.endif
 
 General_HeldItemEffect:
 	loadspritegfx ANIM_TAG_THIN_RING

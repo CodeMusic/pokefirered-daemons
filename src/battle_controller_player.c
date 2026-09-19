@@ -3169,7 +3169,11 @@ static void DbgTheatre_Input(void)
             if (sTheatreGeneral < 0x80)
                 LaunchBattleAnimation(gBattleAnims_StatusConditions, sTheatreGeneral - 1, FALSE);
             else
+            {
+                // A general animation's argument is the move shown: TURN_TRAP reads it to pick which trap plays.
+                gBattleSpritesDataPtr->animationData->animArg = sTheatreMove;
                 LaunchBattleAnimation(gBattleAnims_General, sTheatreGeneral - 0x81, FALSE);
+            }
         }
         else
         {
