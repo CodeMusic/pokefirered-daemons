@@ -4,7 +4,19 @@ CeladonCity_Condominiums_3F_Text_ImTheProgrammer::
 
 CeladonCity_Condominiums_3F_Text_ImTheGraphicArtist::
     .string "I'm the graphic artist!\n"
-    .string "I drew you!$"
+    .string "I drew you!\p"
+    .string "...Well. PIXELBYTE drew you.\n"
+    .string "I picked which one was you.\p"
+    .string "It has drawn everyone in this game\n"
+    .string "and never met a single one of them.\p"
+    .string "Take it along. Let it see some.$"
+
+CeladonCity_Condominiums_3F_Text_ObtainedPixelbyte::
+    .string "{PLAYER} obtained a PIXELBYTE!$"
+
+CeladonCity_Condominiums_3F_Text_ItChecksItsWork::
+    .string "It keeps looking at things as if\n"
+    .string "it's checking its work.$"
 
 CeladonCity_Condominiums_3F_Text_IWroteTheStory::
     .string "I wrote the story!\n"
@@ -36,5 +48,5 @@ CeladonCity_Condominiums_3F_Text_ItsScriptBetterNotLookAtEnding::
     .string "Better not look at the ending!$"
 
 CeladonCity_Condominiums_3F_Text_GameFreakDevelopmentRoom::
-    .string "GAME FREAK Development Room$"
+    .string "CODEMUSIC Development Room$"
 

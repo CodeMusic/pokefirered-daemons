@@ -4188,7 +4188,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_NUMEL] =
     {
-        .categoryName = _("NUMB"),
+        .categoryName = _("STATIC"),
         .height = 7,
         .weight = 240,
         .description = gNumelPokedexText,
@@ -4201,7 +4201,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_CAMERUPT] =
     {
-        .categoryName = _("ERUPTION"),
+        .categoryName = _("SPRITEFORGE"),
         .height = 19,
         .weight = 2200,
         .description = gCameruptPokedexText,

@@ -2226,16 +2226,16 @@ const u8 gWailordPokedexText[] = _(
 const u8 gWailordPokedexTextUnused[] = _("");
 
 const u8 gNumelPokedexText[] = _(
-    "Magma of almost 2,200 degrees Fahrenheit\n"
-    "courses through its body. When it grows\n"
-    "cold, the magma hardens and slows it.");
+    "It starts every picture as static and\n"
+    "takes the noise away until something is\n"
+    "left. It cannot say what it will draw.");
 
 const u8 gNumelPokedexTextUnused[] = _("");
 
 const u8 gCameruptPokedexText[] = _(
-    "If angered, the humps on its back erupt\n"
-    "in a shower of molten lava. It lives in\n"
-    "the craters of volcanoes.");
+    "It reads the last thing it made before\n"
+    "it makes the next. Left alone for long,\n"
+    "it draws only from its own drawings.");
 
 const u8 gCameruptPokedexTextUnused[] = _("");
 

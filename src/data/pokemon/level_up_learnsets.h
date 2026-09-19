@@ -4987,6 +4987,7 @@ static const u16 sCameruptLevelUpLearnset[] = {
     LEVEL_UP_MOVE(37, MOVE_EARTHQUAKE),
     LEVEL_UP_MOVE(45, MOVE_ERUPTION),
     LEVEL_UP_MOVE(55, MOVE_FISSURE),
+    LEVEL_UP_MOVE(70, MOVE_RECURSION),   // T-165: S.T.A.R.R.'s level for it, so never the first to show it (4.7)
     LEVEL_UP_END
 };
 

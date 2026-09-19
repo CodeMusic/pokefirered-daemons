@@ -1563,6 +1563,10 @@
 //  record. This exists so the scene does not repeat and so T-29 knows it has
 //  happened, and nothing else ever tests it.
 #define FLAG_OWL_CONCEDED             (DAEMONS_FLAGS_START + 0x31)
+//  T-165. The graphic artist hands over PIXELBYTE once. The tool that drew
+//  this game's daemons is one of them, and this is where the people who
+//  drew it work.
+#define FLAG_GOT_PIXELBYTE            (DAEMONS_FLAGS_START + 0x40)
 
 //  T-19. Two beats of one scene, five islands and a sea apart.
 #define FLAG_TY_GAVE_PAYLOAD          (DAEMONS_FLAGS_START + 0x20)
