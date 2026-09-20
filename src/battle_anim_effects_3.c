@@ -2265,6 +2265,26 @@ void AnimTask_DaemonsBlendToUserType(u8 taskId)
     AnimTask_BlendBattleAnimPal(taskId);
 }
 
+// T-168 wave 3. A stat change is vanilla's arrows scrolling over the daemon; 9.24 says the daemon's own palette is
+// the medium. This classifies the change so the SCRIPT can draw it: arg 0 is 1 when the stat falls, arg 1 is 1 when it
+// moves two stages. The mapping is AnimTask_StatsChange's own switch, read the same way from animationData->animArg.
+void AnimTask_DaemonsStatKind(u8 taskId)
+{
+    u16 arg = gBattleSpritesDataPtr->animationData->animArg;
+    u8 stats = NUM_BATTLE_STATS - 1;          // seven: the five stats plus accuracy and evasion
+    bool8 down, sharply;
+
+    down = (arg >= STAT_ANIM_MINUS1 && arg < STAT_ANIM_MINUS1 + stats)
+        || (arg >= STAT_ANIM_MINUS2 && arg < STAT_ANIM_MINUS2 + stats)
+        || arg == STAT_ANIM_MULTIPLE_MINUS1 || arg == STAT_ANIM_MULTIPLE_MINUS2;
+    sharply = (arg >= STAT_ANIM_PLUS2 && arg < STAT_ANIM_PLUS2 + stats)
+        || (arg >= STAT_ANIM_MINUS2 && arg < STAT_ANIM_MINUS2 + stats)
+        || arg == STAT_ANIM_MULTIPLE_PLUS2 || arg == STAT_ANIM_MULTIPLE_MINUS2;
+    gBattleAnimArgs[0] = down;
+    gBattleAnimArgs[1] = sharply;
+    DestroyAnimVisualTask(taskId);
+}
+
 void AnimTask_TransformMon(u8 taskId)
 {
     int i, j;
