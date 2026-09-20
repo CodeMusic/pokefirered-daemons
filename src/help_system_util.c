@@ -56,12 +56,10 @@ u8 RunHelpSystemCallback(void)
         }
         else
         {
-            if (gSaveBlock2Ptr->optionsButtonMode != OPTIONS_BUTTON_MODE_HELP)
-                return 0;
-            if (JOY_NEW(R_BUTTON) && gHelpSystemToggleWithRButtonDisabled == TRUE)
-                return 0;
-            if (!JOY_NEW(L_BUTTON | R_BUTTON))
-                break;
+            //  T-179: THE BUTTONS ARE NOT A DOOR ANY MORE. The START menu's HELP entry is the only
+            //  way in, so L and R belong to the game everywhere -- paging the Index, the summary
+            //  screen and the boxes, and saying the last line again in the field.
+            break;
         }
         {
             if (!HelpSystem_IsSinglePlayer() || !gHelpSystemEnabled)

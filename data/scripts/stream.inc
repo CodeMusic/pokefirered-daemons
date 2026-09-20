@@ -12,3 +12,12 @@ EventScript_StreamHasANewShow_Text::
 	.string "The STREAM in the BAG has\n"
 	.string "something on it that was not\l"
 	.string "there before.$"
+
+@  T-179, R = AGAIN. The caller has already copied the line back into gStringVar4; this is only the
+@  script context a field message needs in order to wait for a button and close itself. lockall,
+@  because the player should not walk out from under a line they asked to read again.
+Daemons_EventScript_Again::
+	lockall
+	msgbox gStringVar4
+	releaseall
+	end

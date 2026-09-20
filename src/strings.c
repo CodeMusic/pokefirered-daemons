@@ -950,6 +950,10 @@ const u8 gStartMenuDesc_Bag[] = _("Equipped with pockets for storing items\nyou 
 const u8 gStartMenuDesc_Player[] = _("Check your money and other game data.");
 const u8 gStartMenuDesc_Save[] = _("Save your game with a complete record\nof your progress to take a break.");
 const u8 gStartMenuDesc_Option[] = _("Adjust various game settings such as text\nspeed, game rules, etc.");
+//  T-179: the HELP entry ships -- the Help System is reached from the menu now, not from L and R.
+const u8 gText_MenuHelp[] = _("HELP");
+const u8 gStartMenuDesc_Help[] = _("What the game will tell you about itself.");
+
 #if DAEMONS_DEBUG
 const u8 gStartMenuDesc_Debug[] = _("Testing tools. Not part of the game.");
 const u8 gStartMenuDesc_DbgHeal[] = _("Restore the whole party.");
@@ -958,8 +962,6 @@ const u8 gStartMenuDesc_DbgAdd[] = _("Fill an item to 999, or take a key item.")
 const u8 gStartMenuDesc_DbgRemove[] = _("Take away a key item you are holding.");
 const u8 gStartMenuDesc_DbgRecord[] = _("Enter the RECORD. Runs the credits.");
 const u8 gStartMenuDesc_DbgIslands[] = _("Open THE MARGINS.");
-const u8 gText_MenuHelp[] = _("HELP");
-const u8 gStartMenuDesc_Help[] = _("What the game will tell you about itself.");
 const u8 gStartMenuDesc_DbgEncounter[] = _("Invoke any daemon, at any level.");
 const u8 gStartMenuDesc_DbgDaemon[] = _("{DPAD_LEFTRIGHT} steps, L and R step by ten.");
 const u8 gStartMenuDesc_DbgLevel[] = _("{DPAD_LEFTRIGHT} steps, L and R step by ten.");

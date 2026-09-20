@@ -45,12 +45,14 @@ Help_Text_DescTypeMatchupList::
 Help_Text_DescExit::
 	.string "Select to exit the HELP System.$"
 
+@  T-179: this used to say "by pressing the L or R Button", which is no longer true -- the buttons
+@  belong to the game now and this is reached from the START menu instead.
 Help_Text_Greetings::
 	.string "Greetings! This is the HELP System.\n"
-	.string "Call me up whenever and wherever you\l"
-	.string "need by pressing the L or R Button.\l"
-	.string "The help messages change to suit the\l"
-	.string "situation, so check them often, please.$"
+	.string "Call me up whenever you need, from\l"
+	.string "HELP in the menu. The messages change\l"
+	.string "to suit the situation, so check them\l"
+	.string "often, please.$"
 
 Help_Text_PlayingForFirstTime::
 	.string "I'm playing for the first time. Help!$"

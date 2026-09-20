@@ -17,9 +17,13 @@
 #include "constants/items.h"
 #include "constants/songs.h"
 #include "string_util.h"
-#include "field_message_box.h"
 #include "overworld.h"
 #endif
+//  T-179's R = AGAIN ships, so these three are NOT inside the debug guard above -- the handler uses
+//  GetLastFieldMessage, StringCopy and PlaySE in every build.
+#include "field_message_box.h"
+#include "string_util.h"
+#include "sound.h"
 #include "field_fadetransition.h"
 #include "field_player_avatar.h"
 #include "field_poison.h"

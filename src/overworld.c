@@ -1700,6 +1700,12 @@ static void FieldCB_ShowMapNameOnContinue(void)
 
 void CB2_ContinueSavedGame(void)
 {
+    //  T-179. A save made before the Help System moved into the menu still says HELP, and in that mode
+    //  L and R open a help tab instead of paging the Index, the summary screen and the boxes -- so the
+    //  buttons this project just handed back would stay dead for every existing save. HELP is still
+    //  selectable in OPTIONS for anyone who wants it; it is simply no longer what a save wakes up in.
+    if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_HELP)
+        gSaveBlock2Ptr->optionsButtonMode = OPTIONS_BUTTON_MODE_LR;
     FieldClearVBlankHBlankCallbacks();
     StopMapMusic();
     ResetSafariZoneFlag_();

@@ -1214,8 +1214,9 @@ extern const u8 EventScript_StreamHasANewShow[];
 extern const u8 DaemonsDebug_EventScript_TheRecord[];
 extern const u8 DaemonsDebug_EventScript_TheIslands[];
 extern const u8 DaemonsDebug_EventScript_Invoke[];
-extern const u8 Daemons_EventScript_Again[];
 #endif
+//  T-179's R = AGAIN ships in every build, so its script is declared outside the debug guard.
+extern const u8 Daemons_EventScript_Again[];
 extern const u8 PalletTown_PlayersHouse_2F_EventScript_PC[];
 extern const u8 EventScript_HiddenItemScript[];
 extern const u8 EventScript_PC[];

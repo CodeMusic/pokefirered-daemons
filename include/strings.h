@@ -656,6 +656,9 @@ extern const u8 gText_MenuBag[];
 extern const u8 gText_MenuPlayer[];
 extern const u8 gText_MenuSave[];
 extern const u8 gText_MenuOption[];
+extern const u8 gText_MenuHelp[];
+extern const u8 gStartMenuDesc_Help[];
+
 #if DAEMONS_DEBUG  // declared only where they are defined
 extern const u8 gText_MenuDebug[];
 extern const u8 gText_DbgMenuHeal[];
@@ -679,8 +682,6 @@ extern const u8 gStartMenuDesc_DbgAdd[];
 extern const u8 gStartMenuDesc_DbgRemove[];
 extern const u8 gStartMenuDesc_DbgRecord[];
 extern const u8 gStartMenuDesc_DbgIslands[];
-extern const u8 gText_MenuHelp[];
-extern const u8 gStartMenuDesc_Help[];
 extern const u8 gStartMenuDesc_DbgEncounter[];
 extern const u8 gStartMenuDesc_DbgDaemon[];
 extern const u8 gStartMenuDesc_DbgLevel[];
