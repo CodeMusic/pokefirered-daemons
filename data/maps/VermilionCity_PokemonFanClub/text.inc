@@ -7,21 +7,21 @@ VermilionCity_PokemonFanClub_Text_PikachuTwiceAsCute::
     .string "as that one!$"
 
 VermilionCity_PokemonFanClub_Text_AdoreMySeel::
-    .string "I just adore my CHILLER! It's so\n"
+    .string "I just adore my HEATSINK! It's so\n"
     .string "lovable!\p"
     .string "It squeals, “Kyuuuh,” when I hug\n"
     .string "it!$"
 
 VermilionCity_PokemonFanClub_Text_SeelFarMoreAttractive::
     .string "Oh, dear!\p"
-    .string "My CHILLER is far more attractive.\n"
+    .string "My HEATSINK is far more attractive.\n"
     .string "By double, I would say.$"
 
 VermilionCity_PokemonFanClub_Text_Pikachu::
     .string "SPIKE: Chu! Pikachu!$"
 
 VermilionCity_PokemonFanClub_Text_Seel::
-    .string "CHILLER: Kyuoo!$"
+    .string "HEATSINK: Kyuoo!$"
 
 VermilionCity_PokemonFanClub_Text_DidYouComeToHearAboutMyMons::
     .string "I chair the DAEMON Fan Club!\p"

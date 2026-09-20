@@ -6,13 +6,13 @@ CeladonCity_DepartmentStore_3F_Text_OTStandsForOriginalTrainer::
 CeladonCity_DepartmentStore_3F_Text_BuddyTradingKangaskhanForHaunter::
     .string "All right!\p"
     .string "My buddy's going to trade me his\n"
-    .string "KEEPER for my REVENANT!$"
+    .string "KEEPER for my RESPAWN!$"
 
 CeladonCity_DepartmentStore_3F_Text_HaunterEvolvedOnTrade::
-    .string "Come on, REVENANT!\p"
-    .string "I love REVENANT! I collect them!\p"
+    .string "Come on, RESPAWN!\p"
+    .string "I love RESPAWN! I collect them!\p"
     .string "Huh?\p"
-    .string "REVENANT turned into a different\n"
+    .string "RESPAWN turned into a different\n"
     .string "DAEMONS while being traded!$"
 
 CeladonCity_DepartmentStore_3F_Text_CanIdentifyTradeMonsByID::

@@ -626,7 +626,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_VENONAT] =
     {
-        .categoryName = _("RESIDENT"),
+        .categoryName = _("UNNOTICED"),
         .height = 10,
         .weight = 300,
         .description = gVenonatPokedexText,
