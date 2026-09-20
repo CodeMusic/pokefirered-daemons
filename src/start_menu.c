@@ -752,7 +752,13 @@ static void DbgSetVars(void)
 {
     if (sDbgPage == DBG_PAGE_ENCOUNTER)
     {
-        StringCopy(gStringVar1, gSpeciesNames[DbgSpecies()]);
+        // THE NUMBER LEADS THE NAME. Stepping to a daemon by name means knowing where its name
+        // sits in a list of 387, which nobody does -- so the row reads "163 POLL" and the Index
+        // number a player already has is the address. Leading zeros, so the column does not move.
+        u8 *p = gStringVar1;
+        p = ConvertIntToDecimalStringN(p, sDbgDex, STR_CONV_MODE_LEADING_ZEROS, 3);
+        *p++ = CHAR_SPACE;
+        StringCopy(p, gSpeciesNames[DbgSpecies()]);
         ConvertIntToDecimalStringN(gStringVar2, sDbgLevel, STR_CONV_MODE_LEFT_ALIGN, 3);
     }
     else
@@ -1102,6 +1108,10 @@ static bool8 DbgEncounterCallback(void)
         sDbgDex = 1;
     if (sDbgLevel == 0)
         sDbgLevel = 50;
+    // THE HELP SYSTEM OWNS L AND R, and it gets them first: this menu's own description has
+    // promised "L and R step by ten" since it was written, and pressing either opened HELP
+    // instead. Both buttons are handed back for as long as this page is open.
+    HelpSystem_DisableToggleWithRButton();
     sDbgPage = DBG_PAGE_ENCOUNTER;
     sStartMenuCursorPos = 0;
     return DbgRedraw();
@@ -1121,6 +1131,7 @@ static bool8 DbgInvokeCallback(void)
     // battle's saved callback. Doing that from a menu callback would have
     // nothing to resume.
     CreateScriptedWildMon(DbgSpecies(), sDbgLevel, ITEM_NONE);
+    HelpSystem_EnableToggleWithRButton();      // INVOKE leaves the page without passing BACK
     return DbgLeaveMenuForScript(DaemonsDebug_EventScript_Invoke);
 }
 
@@ -1201,6 +1212,8 @@ static bool8 DbgSfxCallback(void)
 // BACK is one entry on both pages, so it has to know which one it is leaving.
 static bool8 DbgBackCallback(void)
 {
+    if (sDbgPage == DBG_PAGE_ENCOUNTER)
+        HelpSystem_EnableToggleWithRButton();
     if (sDbgPage == DBG_PAGE_ENCOUNTER || sDbgPage == DBG_PAGE_ITEMS)
     {
         sDbgPage = DBG_PAGE_MAIN;
