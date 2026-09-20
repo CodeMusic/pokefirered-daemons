@@ -35,6 +35,8 @@ void SetHelpContextForMap(void);
 void SetHelpContext(u8);
 bool8 HelpSystem_UpdateHasntSeenIntro(void);
 bool8 HelpSystem_IsSinglePlayer(void);
+extern bool8 gDaemonsHelpRequested;
+
 void HelpSystem_Disable(void);
 void HelpSystem_Enable(void);
 void HelpSystem_EnableToggleWithRButton(void);

@@ -76,7 +76,10 @@ static void SetDefaultOptions(void)
     gSaveBlock2Ptr->optionsBattleStyle = OPTIONS_BATTLE_STYLE_SHIFT;
     gSaveBlock2Ptr->optionsBattleSceneOff = FALSE;
     gSaveBlock2Ptr->regionMapZoom = FALSE;
-    gSaveBlock2Ptr->optionsButtonMode = OPTIONS_BUTTON_MODE_HELP;
+    //  T-179: LR, not HELP. Vanilla gave the default slot to the Help System, so L and R opened a help tab
+    //  everywhere -- including over the paging that LR mode already implements in the summary screen, the
+    //  Index and the storage boxes. The useful behaviour shipped and was switched off.
+    gSaveBlock2Ptr->optionsButtonMode = OPTIONS_BUTTON_MODE_LR;
 }
 
 static void ClearPokedexFlags(void)

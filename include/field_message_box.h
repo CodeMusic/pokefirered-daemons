@@ -16,5 +16,6 @@ void HideFieldMessageBox(void);
 bool8 IsFieldMessageBoxHidden(void);
 u8 GetFieldMessageBoxType(void);
 void InitFieldMessageBox(void);
+const u8 *GetLastFieldMessage(void);      // T-179: the line R says again, or NULL before any
 
 #endif // GUARD_FIELD_MESSAGE_BOX_H

@@ -8,6 +8,17 @@
 
 static EWRAM_DATA u8 sMessageBoxType = 0;
 
+//  T-179, R = AGAIN. FRLG keeps no history at all: a mistimed A loses a line for good, and in a game
+//  this dense with writing some of those lines are the only place a thing is said. The EXPANDED text is
+//  kept, not the pointer -- a script's message is built in gStringVar4 from buffers that have moved on by
+//  the time anyone asks to read it again.
+static EWRAM_DATA u8 sLastMessage[500] = {0};
+
+const u8 *GetLastFieldMessage(void)
+{
+    return sLastMessage[0] ? sLastMessage : NULL;
+}
+
 static void ExpandStringAndStartDrawFieldMessageBox(const u8 *str);
 static void StartDrawFieldMessageBox(void);
 
@@ -103,6 +114,15 @@ static bool8 ShowFieldMessageFromBuffer(void)
 static void ExpandStringAndStartDrawFieldMessageBox(const u8 *str)
 {
     StringExpandPlaceholders(gStringVar4, str);
+    //  StringCopyN takes a u8 count, so it cannot be handed 499 -- and it does not terminate what it
+    //  truncates either. Bounded by hand, and always terminated.
+    {
+        u32 i;
+
+        for (i = 0; i < sizeof(sLastMessage) - 1 && gStringVar4[i] != EOS; i++)
+            sLastMessage[i] = gStringVar4[i];
+        sLastMessage[i] = EOS;
+    }
     AddTextPrinterDiffStyle(TRUE);
     CreateTask_DrawFieldMessageBox();
 }

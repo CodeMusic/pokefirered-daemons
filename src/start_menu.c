@@ -67,6 +67,7 @@ enum StartMenuOption
     STARTMENU_EXIT,
     STARTMENU_RETIRE,
     STARTMENU_PLAYER2,
+    STARTMENU_HELP,        // T-179: the Help System lives here now, not on L and R
 #if DAEMONS_DEBUG
     STARTMENU_DEBUG,
     STARTMENU_DBG_HEAL,
@@ -119,7 +120,17 @@ static bool8 StartMenuBagCallback(void);
 static bool8 StartMenuPlayerCallback(void);
 static bool8 StartMenuSaveCallback(void);
 static bool8 StartMenuOptionCallback(void);
+// T-179. The Help System used to own L and R everywhere; it is an ENTRY now, and opening it from
+// here is what pressing R in this menu used to do -- so the menu stays open underneath and the
+// help returns to it. RunHelpSystemCallback reads the request on the next frame, from main().
+static bool8 StartMenuHelpCallback(void)
+{
+    gDaemonsHelpRequested = TRUE;
+    return FALSE;
+}
+
 static bool8 StartMenuExitCallback(void);
+static bool8 StartMenuHelpCallback(void);
 static bool8 StartMenuSafariZoneRetireCallback(void);
 static bool8 StartMenuLinkPlayerCallback(void);
 #if DAEMONS_DEBUG
@@ -176,6 +187,7 @@ static const struct MenuAction sStartMenuActionTable[] = {
     [STARTMENU_EXIT]    = { gText_MenuExit,    {.u8_void = StartMenuExitCallback} },
     [STARTMENU_RETIRE]  = { gText_MenuRetire,  {.u8_void = StartMenuSafariZoneRetireCallback} },
     [STARTMENU_PLAYER2] = { gText_MenuPlayer,  {.u8_void = StartMenuLinkPlayerCallback} },
+    [STARTMENU_HELP]    = { gText_MenuHelp,    {.u8_void = StartMenuHelpCallback} },
 #if DAEMONS_DEBUG
     [STARTMENU_DEBUG]    = { gText_MenuDebug,   {.u8_void = StartMenuDaemonsDebugCallback} },
     [STARTMENU_DBG_HEAL] = { gText_DbgMenuHeal, {.u8_void = DbgHealCallback} },
@@ -219,6 +231,7 @@ static const u8 *const sStartMenuDescPointers[] = {
     gStartMenuDesc_Exit,
     gStartMenuDesc_Retire,
     gStartMenuDesc_Player,
+    gStartMenuDesc_Help,
 #if DAEMONS_DEBUG
     // This table is indexed by the SAME enum as the action table, so an entry
     // added to one and not the other reads off the end of this array. That is
@@ -301,7 +314,9 @@ static EWRAM_DATA u8 sDbgPage = 0;
 #define DBG_FIRST_SONG MUS_HEAL   // 256; everything below it is a sound effect
 // Nine tiles, because the widest of the 412 species names is 60px and a row at
 // seven tiles has 48. Measured; see CreateStartMenuWindow.
-#define DBG_MENU_WIDTH 9
+//  14, not 9: the ENCOUNTER row reads "001 ROVERCUB" now, and the longest species name is ten
+//  characters, so the widest row this window ever draws is four plus ten.
+#define DBG_MENU_WIDTH 14
 
 static EWRAM_DATA u16 sDbgSong = 0;
 static EWRAM_DATA u16 sDbgSfx = 0;
@@ -375,6 +390,7 @@ static void SetUpStartMenu_NormalField(void)
 #if DAEMONS_DEBUG
     AppendToStartMenuItems(STARTMENU_DEBUG);
 #endif
+    AppendToStartMenuItems(STARTMENU_HELP);
     AppendToStartMenuItems(STARTMENU_EXIT);
 }
 

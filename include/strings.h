@@ -679,6 +679,8 @@ extern const u8 gStartMenuDesc_DbgAdd[];
 extern const u8 gStartMenuDesc_DbgRemove[];
 extern const u8 gStartMenuDesc_DbgRecord[];
 extern const u8 gStartMenuDesc_DbgIslands[];
+extern const u8 gText_MenuHelp[];
+extern const u8 gStartMenuDesc_Help[];
 extern const u8 gStartMenuDesc_DbgEncounter[];
 extern const u8 gStartMenuDesc_DbgDaemon[];
 extern const u8 gStartMenuDesc_DbgLevel[];

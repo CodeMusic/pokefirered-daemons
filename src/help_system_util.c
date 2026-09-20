@@ -30,6 +30,8 @@ EWRAM_DATA u8 gDisableHelpSystemVolumeReduce = 0;
 EWRAM_DATA bool8 gHelpSystemToggleWithRButtonDisabled = FALSE;
 static EWRAM_DATA u8 sDelayTimer = 0;
 static EWRAM_DATA u8 sInHelpSystem = 0;
+//  T-179: set by the START menu's HELP entry, read here on the next frame.
+EWRAM_DATA bool8 gDaemonsHelpRequested = FALSE;
 static EWRAM_DATA struct HelpSystemVideoState sVideoState = {0};
 EWRAM_DATA struct HelpSystemListMenu gHelpSystemListMenu = {0};
 EWRAM_DATA struct ListMenuItem gHelpSystemListMenuItems[52] = {0};
@@ -45,11 +47,22 @@ u8 RunHelpSystemCallback(void)
     {
     case 0:
         sInHelpSystem = 0;
-        if (gSaveBlock2Ptr->optionsButtonMode != OPTIONS_BUTTON_MODE_HELP)
-            return 0;
-        if (JOY_NEW(R_BUTTON) && gHelpSystemToggleWithRButtonDisabled == TRUE)
-            return 0;
-        if (JOY_NEW(L_BUTTON | R_BUTTON))
+        // T-179: two doors now. The buttons still open it for anyone who sets BUTTON MODE back to
+        // HELP, and the START menu's HELP entry opens it in the default LR mode by asking here --
+        // which is the same request the button made, one frame later.
+        if (gDaemonsHelpRequested)
+        {
+            gDaemonsHelpRequested = FALSE;
+        }
+        else
+        {
+            if (gSaveBlock2Ptr->optionsButtonMode != OPTIONS_BUTTON_MODE_HELP)
+                return 0;
+            if (JOY_NEW(R_BUTTON) && gHelpSystemToggleWithRButtonDisabled == TRUE)
+                return 0;
+            if (!JOY_NEW(L_BUTTON | R_BUTTON))
+                break;
+        }
         {
             if (!HelpSystem_IsSinglePlayer() || !gHelpSystemEnabled)
             {

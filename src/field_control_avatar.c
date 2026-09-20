@@ -453,6 +453,21 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
         gFieldInputRecord.pressedSelectButton = TRUE;
         return TRUE;
     }
+    // T-179: R = AGAIN. The last line said, said again. Vanilla spent both shoulder buttons on the
+    // Help System and kept no history of its own writing; this keeps one line, which is the one a
+    // mistimed A just took away.
+    if (input->pressedRButton)
+    {
+        const u8 *last = GetLastFieldMessage();
+
+        if (last != NULL)
+        {
+            StringCopy(gStringVar4, last);
+            PlaySE(SE_SELECT);
+            ScriptContext_SetupScript(Daemons_EventScript_Again);
+            return TRUE;
+        }
+    }
 
     return FALSE;
 }
