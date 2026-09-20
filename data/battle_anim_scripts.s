@@ -8234,8 +8234,6 @@ General_BaitThrow:
 	end
 
 General_ItemKnockoff:
-@ genstates: General_ItemKnockoff -- an item knocked out of it (T-168)
-.if DAEMONS_DEBUG
 	playsewithpan SE_M_TAIL_WHIP, SOUND_PAN_TARGET
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 0, 10, RGB(13, 13, 13)
 	waitforvisualfinish
@@ -8245,11 +8243,6 @@ General_ItemKnockoff:
 	createvisualtask AnimTask_DaemonsBlendToUserType, 10, 2, 10, 0
 	waitforvisualfinish
 	end
-.else
-	loadspritegfx ANIM_TAG_ITEM_BAG
-	createsprite gKnockOffItemSpriteTemplate, ANIM_TARGET, 2
-	end
-.endif
 
 General_TurnTrap:
 	createvisualtask AnimTask_GetTrappedMoveAnimId, 5
@@ -8319,8 +8312,6 @@ Status_SandTomb:
 	end
 
 General_HeldItemEffect:
-@ genstates: General_HeldItemEffect -- what it carries acts (T-168)
-.if DAEMONS_DEBUG
 	playsewithpan SE_M_TAKE_DOWN, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_DaemonsBlendToUserType, 10, 0, 0, 10
 	waitforvisualfinish
@@ -8332,28 +8323,6 @@ General_HeldItemEffect:
 	createvisualtask AnimTask_DaemonsBlendToUserType, 10, 1, 10, 0
 	waitforvisualfinish
 	end
-.else
-	loadspritegfx ANIM_TAG_THIN_RING
-	loadspritegfx ANIM_TAG_SPARKLE_2
-	delay 0
-	playsewithpan SE_M_TAKE_DOWN, SOUND_PAN_ATTACKER
-	createvisualtask AnimTask_RotateMonToSideAndRestore, 2, 16, 128, ANIM_ATTACKER, 2
-	waitforvisualfinish
-	playsewithpan SE_M_TAKE_DOWN, SOUND_PAN_ATTACKER
-	createvisualtask AnimTask_RotateMonToSideAndRestore, 2, 16, 128, ANIM_ATTACKER, 2
-	waitforvisualfinish
-	playsewithpan SE_M_TAKE_DOWN, SOUND_PAN_ATTACKER
-	createvisualtask AnimTask_RotateMonToSideAndRestore, 2, 16, 128, ANIM_ATTACKER, 2
-	waitforvisualfinish
-	playsewithpan SE_M_MORNING_SUN, SOUND_PAN_ATTACKER
-	call GrantingStarsEffect
-	waitforvisualfinish
-	playsewithpan SE_SHINY, SOUND_PAN_ATTACKER
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, F_PAL_ATTACKER, 3, 7, 0, RGB(17, 31, 25)
-	createsprite gThinRingExpandingSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 0, 0
-	waitforvisualfinish
-	end
-.endif
 
 General_SmokeballEscape:
 	loadspritegfx ANIM_TAG_PINK_CLOUD
@@ -8394,8 +8363,6 @@ General_SmokeballEscape:
 	end
 
 General_FocusBand:
-@ genstates: General_FocusBand -- held at one HP (T-168)
-.if DAEMONS_DEBUG
 	playsewithpan SE_M_DRAGON_RAGE, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 15, RGB(13, 13, 13)
 	waitforvisualfinish
@@ -8405,17 +8372,6 @@ General_FocusBand:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 11, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
-.else
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 0, F_PAL_ATTACKER, 7, 0, 9, RGB_RED
-	playsewithpan SE_M_DRAGON_RAGE, SOUND_PAN_ATTACKER
-	createvisualtask AnimTask_SlideMonForFocusBand, 5, 30, 128, 0, 1, 2, 0, 1
-	waitforvisualfinish
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 0, F_PAL_ATTACKER, 4, 9, 0, RGB_RED
-	waitforvisualfinish
-	delay 6
-	createsprite gSlideMonToOriginalPosSpriteTemplate, ANIM_ATTACKER, 0, 0, 0, 15
-	end
-.endif
 
 General_Rain:
 @ DAEMONS (T-144): rain that goes on plays RAIN DANCE's animation, as sun, sandstorm and hail already play theirs,
@@ -8437,8 +8393,6 @@ General_LeechSeedDrain:
 	goto Move_ABSORB
 
 General_MonHit:
-@ genstates: General_MonHit -- a hit lands (T-168)
-.if DAEMONS_DEBUG
 	playsewithpan SE_M_DOUBLE_SLAP, SOUND_PAN_TARGET
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 2, 0, 3, 1
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 7, RGB(13, 13, 13)
@@ -8446,22 +8400,8 @@ General_MonHit:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 2, 7, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
-.else
-	loadspritegfx ANIM_TAG_IMPACT
-	monbg ANIM_TARGET
-	setalpha 12, 8
-	playsewithpan SE_M_DOUBLE_SLAP, SOUND_PAN_TARGET
-	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, ANIM_TARGET, 2
-	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 6, 1
-	waitforvisualfinish
-	clearmonbg ANIM_TARGET
-	blendoff
-	end
-.endif
 
 General_ItemSteal:
-@ genstates: General_ItemSteal -- an item taken (T-168)
-.if DAEMONS_DEBUG
 	playsewithpan SE_M_TAIL_WHIP, SOUND_PAN_TARGET
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 0, 10, RGB(13, 13, 13)
 	waitforvisualfinish
@@ -8471,14 +8411,6 @@ General_ItemSteal:
 	createvisualtask AnimTask_DaemonsBlendToUserType, 10, 2, 10, 0
 	waitforvisualfinish
 	end
-.else
-	loadspritegfx ANIM_TAG_ITEM_BAG
-	createvisualtask AnimTask_SetAnimAttackerAndTargetForEffectAtk, 2
-	createvisualtask AnimTask_SetTargetToEffectBattler, 2  @ Redundant with above
-	delay 1
-	createsprite gItemStealSpriteTemplate, ANIM_ATTACKER, 2, 0, -5, 10, 2, -1
-	end
-.endif
 
 General_SnatchMove:
 	loadspritegfx ANIM_TAG_ITEM_BAG
@@ -8507,8 +8439,6 @@ SnatchPartnerMonMove:
 	goto SnatchMoveContinue
 
 General_FutureSightHit:
-@ genstates: General_FutureSightHit -- a set routine lands (T-168)
-.if DAEMONS_DEBUG
 	createvisualtask AnimTask_SetAnimTargetToBattlerTarget, 2
 	waitforvisualfinish
 	playsewithpan SE_M_DOUBLE_SLAP, SOUND_PAN_TARGET
@@ -8518,30 +8448,8 @@ General_FutureSightHit:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 2, 11, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
-.else
-	createvisualtask AnimTask_SetAnimTargetToBattlerTarget, 2
-	monbg ANIM_DEF_PARTNER
-	playsewithpan SE_M_PSYBEAM, SOUND_PAN_ATTACKER
-	call SetPsychicBackground
-	setalpha 8, 8
-	playsewithpan SE_M_SUPERSONIC, SOUND_PAN_TARGET
-	waitplaysewithpan SE_M_SUPERSONIC, SOUND_PAN_TARGET, 8
-	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 4, 0, 15, 1
-	createvisualtask AnimTask_ScaleMonAndRestore, 5, -5, -5, 15, ANIM_TARGET, 1
-	waitforvisualfinish
-	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 4, 0, 24, 1
-	waitforvisualfinish
-	clearmonbg ANIM_DEF_PARTNER
-	blendoff
-	waitforvisualfinish
-	delay 1
-	call UnsetPsychicBackground
-	end
-.endif
 
 General_DoomDesireHit:
-@ genstates: General_DoomDesireHit -- a set routine lands (T-168)
-.if DAEMONS_DEBUG
 	createvisualtask AnimTask_SetAnimTargetToBattlerTarget, 2
 	waitforvisualfinish
 	playsewithpan SE_M_DOUBLE_SLAP, SOUND_PAN_TARGET
@@ -8551,44 +8459,8 @@ General_DoomDesireHit:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 2, 11, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
-.else
-	createvisualtask AnimTask_SetAnimTargetToBattlerTarget, 2
-	loadspritegfx ANIM_TAG_EXPLOSION
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, F_PAL_BG, 3, 0, 16, RGB_WHITE
-	waitforvisualfinish
-	delay 10
-	createvisualtask AnimTask_DoomDesireLightBeam, 5
-	delay 9
-	playsewithpan SE_M_CONFUSE_RAY, SOUND_PAN_ATTACKER
-	delay 9
-	playsewithpan SE_M_CONFUSE_RAY, 0
-	delay 9
-	playsewithpan SE_M_CONFUSE_RAY, SOUND_PAN_TARGET
-	delay 25
-	createvisualtask AnimTask_ShakeMonInPlace, 2, ANIM_TARGET, 10, 0, 20, 1
-	playsewithpan SE_M_SELF_DESTRUCT, SOUND_PAN_TARGET
-	createsprite gExplosionSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 1, 1
-	delay 6
-	playsewithpan SE_M_SELF_DESTRUCT, SOUND_PAN_TARGET
-	createsprite gExplosionSpriteTemplate, ANIM_ATTACKER, 3, 24, -24, 1, 1
-	delay 6
-	playsewithpan SE_M_SELF_DESTRUCT, SOUND_PAN_TARGET
-	createsprite gExplosionSpriteTemplate, ANIM_ATTACKER, 3, -16, 16, 1, 1
-	delay 6
-	playsewithpan SE_M_SELF_DESTRUCT, SOUND_PAN_TARGET
-	createsprite gExplosionSpriteTemplate, ANIM_ATTACKER, 3, -24, -12, 1, 1
-	delay 6
-	playsewithpan SE_M_SELF_DESTRUCT, SOUND_PAN_TARGET
-	createsprite gExplosionSpriteTemplate, ANIM_ATTACKER, 3, 16, 16, 1, 1
-	waitforvisualfinish
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, F_PAL_BG, 3, 16, 0, RGB_WHITE
-	waitforvisualfinish
-	end
-.endif
 
 General_FocusPunchSetUp:
-@ genstates: General_FocusPunchSetUp -- gathering, and holding it (T-168)
-.if DAEMONS_DEBUG
 	playsewithpan SE_M_DRAGON_RAGE, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_DaemonsBlendToUserType, 10, 2, 0, 12
 	waitforvisualfinish
@@ -8596,23 +8468,8 @@ General_FocusPunchSetUp:
 	createvisualtask AnimTask_DaemonsBlendToUserType, 10, 3, 12, 0
 	waitforvisualfinish
 	end
-.else
-	loadspritegfx ANIM_TAG_FOCUS_ENERGY
-	playsewithpan SE_M_DRAGON_RAGE, SOUND_PAN_ATTACKER
-	call EndureEffect
-	delay 8
-	createvisualtask AnimTask_BlendColorCycle, 2, F_PAL_ATTACKER, 2, 2, 0, 11, RGB_RED
-	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 32, 1
-	call EndureEffect
-	delay 8
-	call EndureEffect
-	waitforvisualfinish
-	end
-.endif
 
 General_IngrainHeal:
-@ genstates: General_IngrainHeal -- a return, ticked (T-168)
-.if DAEMONS_DEBUG
 	playsewithpan SE_M_ABSORB_2, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 12, RGB(13, 13, 13)
 	waitforvisualfinish
@@ -8626,29 +8483,8 @@ General_IngrainHeal:
 	waitforvisualfinish
 	delay 6
 	end
-.else
-	loadspritegfx ANIM_TAG_ORBS
-	loadspritegfx ANIM_TAG_BLUE_STAR
-	monbg ANIM_DEF_PARTNER
-	setalpha 12, 8
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, F_PAL_BG, 1, 0, 4, RGB(13, 31, 12)
-	waitforvisualfinish
-	delay 3
-	call AbsorbEffect
-	waitforvisualfinish
-	delay 15
-	call HealingEffect
-	waitforvisualfinish
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, F_PAL_BG, 1, 4, 0, RGB(13, 31, 12)
-	waitforvisualfinish
-	clearmonbg ANIM_DEF_PARTNER
-	blendoff
-	end
-.endif
 
 General_WishHeal:
-@ genstates: General_WishHeal -- a return, ticked (T-168)
-.if DAEMONS_DEBUG
 	playsewithpan SE_M_ABSORB_2, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 12, RGB(13, 13, 13)
 	waitforvisualfinish
@@ -8662,23 +8498,8 @@ General_WishHeal:
 	waitforvisualfinish
 	delay 6
 	end
-.else
-	loadspritegfx ANIM_TAG_BLUE_STAR
-	loadspritegfx ANIM_TAG_SPARKLE_2
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, F_PAL_BG, 3, 0, 10, RGB_BLACK
-	waitforvisualfinish
-	playsewithpan SE_M_MEGA_KICK, SOUND_PAN_ATTACKER
-	call GrantingStarsEffect
-	waitforvisualfinish
-	call HealingEffect
-	waitforvisualfinish
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, F_PAL_BG, 3, 10, 0, RGB_BLACK
-	end
-.endif
 
 General_MonScared:
-@ genstates: General_MonScared -- it is about to go (T-168)
-.if DAEMONS_DEBUG
 	createvisualtask AnimTask_SafariOrGhost_DecideAnimSides, 2, 1
 	waitforvisualfinish
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 10, 1
@@ -8687,23 +8508,6 @@ General_MonScared:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 3, 11, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
-.else
-	createvisualtask AnimTask_SafariOrGhost_DecideAnimSides, 2, 1
-	waitforvisualfinish
-	loadspritegfx ANIM_TAG_SWEAT_BEAD
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 0, F_PAL_TARGET, 2, 0, 10, RGB(0, 23, 25)
-	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 2, 0, 10, 1
-	delay 20
-	createsprite gSprayWaterDropletSpriteTemplate, ANIM_TARGET, 5, 0, 1
-	playsewithpan SE_M_SKETCH, SOUND_PAN_TARGET
-	createsprite gSprayWaterDropletSpriteTemplate, ANIM_TARGET, 5, 1, 1
-	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 4, 0, 5, 1
-	createvisualtask AnimTask_StretchTargetUp, 3
-	waitforvisualfinish
-	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 0, F_PAL_TARGET, 2, 10, 0, RGB(0, 23, 25)
-	waitforvisualfinish
-	end
-.endif
 
 General_GhostGetOut:
 	createvisualtask AnimTask_SafariOrGhost_DecideAnimSides, 2, 1
@@ -8731,8 +8535,6 @@ General_GhostGetOut:
 	end
 
 General_SilphScoped:
-@ genstates: General_SilphScoped -- revealed (T-168)
-.if DAEMONS_DEBUG
 	playsewithpan SE_M_TELEPORT, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 15, RGB(13, 13, 13)
 	waitforvisualfinish
@@ -8740,16 +8542,6 @@ General_SilphScoped:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 3, 15, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
-.else
-	monbg ANIM_ATTACKER
-	playsewithpan SE_M_TELEPORT, SOUND_PAN_ATTACKER
-	waitplaysewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER, 48
-	createvisualtask AnimTask_TransformMon, 2, 255
-	waitsound
-	waitforvisualfinish
-	clearmonbg ANIM_ATTACKER
-	end
-.endif
 
 General_SafariRockThrow:
 	createvisualtask AnimTask_SafariOrGhost_DecideAnimSides, 2, 0
