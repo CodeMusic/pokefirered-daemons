@@ -1136,16 +1136,16 @@ const u8 gFurretPokedexText[] = _(
 const u8 gFurretPokedexTextUnused[] = _("");
 
 const u8 gHoothootPokedexText[] = _(
-    "It always stands on one foot. It changes\n"
-    "feet so fast, the movement can rarely be\n"
-    "seen.");
+    "It asks the same question at a fixed\n"
+    "interval and writes down the answer.\n"
+    "It does not wait to be asked to.");
 
 const u8 gHoothootPokedexTextUnused[] = _("");
 
 const u8 gNoctowlPokedexText[] = _(
-        "Its eyes are specially adapted. They\n"
-        "concentrate even HALT light and enable it\n"
-        "to see in the dark.");
+    "It watches one thing that should keep\n"
+    "moving. If the movement stops, it\n"
+    "starts that thing again.");
 
 const u8 gNoctowlPokedexTextUnused[] = _("");
 
@@ -1183,16 +1183,16 @@ const u8 gCrobatPokedexText[] = _(
 const u8 gCrobatPokedexTextUnused[] = _("");
 
 const u8 gChinchouPokedexText[] = _(
-    "It shoots positive and negative\n"
-    "electricity between the tips of its two\n"
-    "antennae and zaps its enemies.");
+    "A light kept lit for no purpose but to\n"
+    "show the line is live. It is taken\n"
+    "into the dark for that reason.");
 
 const u8 gChinchouPokedexTextUnused[] = _("");
 
 const u8 gLanturnPokedexText[] = _(
-    "The light it emits is so bright that it can\n"
-    "illuminate the sea's surface from a depth\n"
-    "of over three miles.");
+    "It measures the dark by sending and\n"
+    "waiting. What comes back is how far\n"
+    "down the bottom is.");
 
 const u8 gLanturnPokedexTextUnused[] = _("");
 
@@ -1281,9 +1281,9 @@ const u8 gAzumarillPokedexText[] = _(
 const u8 gAzumarillPokedexTextUnused[] = _("");
 
 const u8 gSudowoodoPokedexText[] = _(
-    "Although it always pretends to be a tree,\n"
-    "its composition appears to be closer to a\n"
-    "rock than a plant.");
+    "It reports itself as something older\n"
+    "and better rooted than it is. Nothing\n"
+    "has ever checked.");
 
 const u8 gSudowoodoPokedexTextUnused[] = _("");
 
@@ -1321,16 +1321,16 @@ const u8 gAipomPokedexText[] = _(
 const u8 gAipomPokedexTextUnused[] = _("");
 
 const u8 gSunkernPokedexText[] = _(
-        "It may drop out of the sky suddenly.\n"
-        "If attacked by a PING, it will\n"
-        "violently shake its leaves.");
+    "It is owed a turn and has not had one.\n"
+    "Everything it needs is here. Nothing\n"
+    "has given it the time.");
 
 const u8 gSunkernPokedexTextUnused[] = _("");
 
 const u8 gSunfloraPokedexText[] = _(
-    "It converts sunlight into energy. In the\n"
-    "darkness after sunset, it closes its petals\n"
-    "and becomes still.");
+    "It was finally given the share it was\n"
+    "owed, and opened at once. It can do\n"
+    "nothing it could not do before.");
 
 const u8 gSunfloraPokedexTextUnused[] = _("");
 
@@ -1400,9 +1400,9 @@ const u8 gWobbuffetPokedexText[] = _(
 const u8 gWobbuffetPokedexTextUnused[] = _("");
 
 const u8 gGirafarigPokedexText[] = _(
-    "Its tail has a small brain of its own.\n"
-    "Beware! If you get close, it may react\n"
-    "to your scent and bite.");
+    "It sends and receives at once, from\n"
+    "opposite ends. Neither end is told\n"
+    "what the other has agreed to.");
 
 const u8 gGirafarigPokedexTextUnused[] = _("");
 
@@ -1439,9 +1439,9 @@ const u8 gSteelixPokedexText[] = _(
 const u8 gSteelixPokedexTextUnused[] = _("");
 
 const u8 gSnubbullPokedexText[] = _(
-    "Although it looks frightening, it is\n"
-    "actually kind and affectionate. It is very\n"
-    "popular among women.");
+    "It announces a fault in the loudest\n"
+    "voice it has. Nothing has failed. It\n"
+    "will say so again tomorrow.");
 
 const u8 gSnubbullPokedexTextUnused[] = _("");
 
@@ -1645,9 +1645,9 @@ const u8 gMagbyPokedexText[] = _(
 const u8 gMagbyPokedexTextUnused[] = _("");
 
 const u8 gMiltankPokedexText[] = _(
-    "Its milk is packed with nutrition, making\n"
-    "it the ultimate beverage for the sick or\n"
-    "weary.");
+    "It holds what everything nearby will\n"
+    "want next and gives it up at once.\n"
+    "Asking it costs less than working.");
 
 const u8 gMiltankPokedexTextUnused[] = _("");
 
@@ -1700,16 +1700,16 @@ const u8 gTyranitarPokedexText[] = _(
 const u8 gTyranitarPokedexTextUnused[] = _("");
 
 const u8 gLugiaPokedexText[] = _(
-    "It is said that it quietly spends its time\n"
-    "deep at the bottom of the sea because\n"
-    "its powers are too strong.");
+    "Three of them quarrelled until it\n"
+    "arrived. It took no side and said\n"
+    "nothing. They have not quarrelled since.");
 
 const u8 gLugiaPokedexTextUnused[] = _("");
 
 const u8 gHoOhPokedexText[] = _(
-        "Legends claim this DAEMON flies the\n"
-        "world's skies continuously on its\n"
-        "magnificent seven-colored wings.");
+    "It is the only one that can start\n"
+    "itself. What it leaves behind is what\n"
+    "it starts from.");
 
 const u8 gHoOhPokedexTextUnused[] = _("");
 
