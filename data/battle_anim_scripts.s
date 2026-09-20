@@ -8168,8 +8168,6 @@ CastformChangeSkipAnim:
 	end
 
 General_StatsChange:
-@ genstates: General_StatsChange -- a stat change (T-168)
-.if DAEMONS_DEBUG
 	createvisualtask AnimTask_DaemonsStatKind, 5
 	delay 0
 	jumpargeq 0, 1, DaemonsStatDown
@@ -8204,11 +8202,6 @@ DaemonsStatDownSharply:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 13, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
-.else
-	createvisualtask AnimTask_StatsChange, 5
-	waitforvisualfinish
-	end
-.endif
 
 General_SubstituteFade:
 	monbg ANIM_ATTACKER
