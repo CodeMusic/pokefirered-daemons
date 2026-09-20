@@ -1350,24 +1350,29 @@ const u8 gText_Loss[] = _("{HIGHLIGHT 0}Loss");
 const u8 gText_Draw[] = _("{HIGHLIGHT 0}Draw");
 static const u8 sText_SpaceIs[] = _(" is");
 static const u8 sText_ApostropheS[] = _("'s");
-const u8 gText_ANormalMove[] = _("a NORMAL move");
-const u8 gText_AFightingMove[] = _("a FIGHTING move");
-const u8 gText_AFlyingMove[] = _("a FLYING move");
-const u8 gText_APoisonMove[] = _("a CORRUPT move");
-const u8 gText_AGroundMove[] = _("a GROUND move");
-const u8 gText_ARockMove[] = _("a ROCK move");
-const u8 gText_ABugMove[] = _("a BUG move");
-const u8 gText_AGhostMove[] = _("a GHOST move");
-const u8 gText_ASteelMove[] = _("a STEEL move");
-const u8 gText_AMysteryMove[] = _("a ??? move");
-const u8 gText_AFireMove[] = _("a FIRE move");
-const u8 gText_AWaterMove[] = _("a WATER move");
-const u8 gText_AGrassMove[] = _("a GRASS move");
-const u8 gText_AnElectricMove[] = _("an ELECTRIC move");
-const u8 gText_APsychicMove[] = _("a CONSTRUE move");
-const u8 gText_AnIceMove[] = _("an ICE move");
-const u8 gText_ADragonMove[] = _("a DRAGON move");
-const u8 gText_ADarkMove[] = _("a DARK move");
+// T-173. These eighteen are a SECOND copy of the type names, read when a routine's type has to be said aloud
+// ("{ATTACKER} invoked\na VECTOR routine"). Sixteen were still vanilla's and gText_APsychicMove said CONSTRUE,
+// which is the trainer class and the CONTEXT routine, not the type. They now agree with gTypeNames (2.6), say
+// ROUTINE as the menus do, and carry the article our names need: an ORACLE, an ENTROPY, an EMERGENT, an OPAQUE.
+// The SYMBOLS keep vanilla's spelling (gText_AnElectricMove holds "a SIGNAL routine"); renaming them is churn.
+const u8 gText_ANormalMove[] = _("a CONTENT routine");
+const u8 gText_AFightingMove[] = _("a LOGIC routine");
+const u8 gText_AFlyingMove[] = _("a VECTOR routine");
+const u8 gText_APoisonMove[] = _("a CORRUPT routine");
+const u8 gText_AGroundMove[] = _("a STRATUM routine");
+const u8 gText_ARockMove[] = _("a LEGACY routine");
+const u8 gText_ABugMove[] = _("a SWARM routine");
+const u8 gText_AGhostMove[] = _("a LATENT routine");
+const u8 gText_ASteelMove[] = _("a HARDENED routine");
+const u8 gText_AMysteryMove[] = _("an ORACLE routine");
+const u8 gText_AFireMove[] = _("an ENTROPY routine");
+const u8 gText_AWaterMove[] = _("a FLOW routine");
+const u8 gText_AGrassMove[] = _("a GROWTH routine");
+const u8 gText_AnElectricMove[] = _("a SIGNAL routine");
+const u8 gText_APsychicMove[] = _("a CONTEXT routine");
+const u8 gText_AnIceMove[] = _("a FROZEN routine");
+const u8 gText_ADragonMove[] = _("an EMERGENT routine");
+const u8 gText_ADarkMove[] = _("an OPAQUE routine");
 const u8 gText_TimeBoard[] = _("TIME BOARD");
 const u8 gText_ClearTime[] = _("CLEAR TIME"); // Unused
 const u8 gText_XMinYZSec[] = _("{STR_VAR_1}MIN. {STR_VAR_2}.{STR_VAR_3}SEC.");
