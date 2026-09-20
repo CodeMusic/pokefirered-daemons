@@ -51,7 +51,7 @@ SilphCo_5F_Text_Grunt2Defeat::
 
 SilphCo_5F_Text_Grunt2PostBattle::
     .string "Unrelated:\p"
-    .string "FUMES evolves into SMOGSTACK.\p"
+    .string "EXHAUST evolves into SMOGSTACK.\p"
     .string "Sharing is caring!$"
 
 SilphCo_5F_Text_PorygonFirstVRMon::

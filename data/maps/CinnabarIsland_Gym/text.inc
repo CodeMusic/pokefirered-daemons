@@ -106,7 +106,7 @@ CinnabarIsland_Gym_Text_DustyDefeat::
     .string "Too hot!$"
 
 CinnabarIsland_Gym_Text_DustyPostBattle::
-    .string "HOTPATH, WILDFIRE… Those are\n"
+    .string "HOTPATH, OVERRUN… Those are\n"
     .string "popular ENTROPY DAEMON.$"
 
 CinnabarIsland_Gym_Text_ZacIntro::
