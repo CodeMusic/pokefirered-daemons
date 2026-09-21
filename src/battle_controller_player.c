@@ -257,12 +257,22 @@ static void CompleteOnBattlerSpritePosX_0(void)
 //  flow needs. (CB2_SetUpReshowBattleScreenAfterMenu, despite the name, only clears a bag flag -- setting it
 //  as the main callback is a callback that does nothing, which is a black screen for ever.)
 //  PlayerHandleChooseAction then reprints the menu and hands input back.
+static void PerspectiveInBattle(void);
+static EWRAM_DATA u8 sPerspectiveState = 0;   // read by the Index's way back, so it lives up here
+
 static EWRAM_DATA u8 sIndexReadState = 0;
 static EWRAM_DATA u8 sIndexReadTask = 0;
+//  T-190: WHOSE entry, and where to go back to. L always reads the daemon OPPOSITE the player -- and R
+//  moves the player to the other side, so from over there "opposite" is their own daemon. One button, one
+//  meaning, and the viewpoint changed underneath it.
+static EWRAM_DATA bool8 sIndexReadMine = FALSE;
+static EWRAM_DATA bool8 sIndexReadToPerspective = FALSE;
 
 static void ReadIndexEntryInBattle(void)
 {
-    u16 species = gBattleMons[GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT)].species;
+    u16 species = sIndexReadMine
+                ? gBattleMons[gActiveBattler].species
+                : gBattleMons[GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT)].species;
 
     switch (sIndexReadState)
     {
@@ -291,7 +301,19 @@ static void ReadIndexEntryInBattle(void)
         if (gMain.callback2 == BattleMainCB2 && !gPaletteFade.active)
         {
             sIndexReadState = 0;
-            PlayerHandleChooseAction();
+            //  Coming back from a perspective, the look is rebuilt rather than resumed: the way back from the
+            //  Index is ReshowBattleScreenAfterMenu, which rebuilds the whole battle screen and takes the two
+            //  pic sprites with it. Rebuilding is one frame and is the only way that leaves the screen right.
+            if (sIndexReadToPerspective)
+            {
+                sIndexReadToPerspective = FALSE;
+                sPerspectiveState = 0;
+                gBattlerControllerFuncs[gActiveBattler] = PerspectiveInBattle;
+            }
+            else
+            {
+                PlayerHandleChooseAction();
+            }
         }
         break;
     }
@@ -321,7 +343,6 @@ static EWRAM_DATA u16 sHintFrames = 0;
 //  in a 112px prompt.
 static const u8 sText_ButtonHint[] = _("L INDEX.\nR PERSPECTIVE.");
 
-static EWRAM_DATA u8 sPerspectiveState = 0;
 static EWRAM_DATA u16 sPerspectiveSprites[2] = {0xFFFF, 0xFFFF};
 static EWRAM_DATA u8 sPerspectivePals[2] = {0, 0};
 
@@ -369,6 +390,81 @@ static void PutPerspectiveText(u8 me, u8 them)
     StringAppend(gDisplayedStringBattle, sText_PerspBreak);
     StringAppend(gDisplayedStringBattle, sPerspectiveBands[band]);
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_ACTION_MENU);
+}
+
+//  T-190: SELECT MEASURES THEM. The same rule the two shoulder buttons follow -- your viewpoint decides who
+//  "they" is -- applied to the numbers: from your own side SELECT reads the opponent, and from a perspective it
+//  reads your own daemon, because that is the one standing opposite you now.
+//
+//  Gen 3 stores a battler's stats UNMODIFIED and applies the stage multipliers at damage time, so printing
+//  gBattleMons[].attack beside its stage is exactly what the user asked for: the number it started with, and
+//  what has happened to it since. A stage of 6 is neutral, which is why the deltas are drawn from statStages - 6.
+//
+//  Four lines across the two windows that exist during action selection. The pairs go in the PROMPT window,
+//  which is fourteen tiles (112px) -- the worst case, "ATK 255+6  DEF 255-6", is 102px at FONT_SMALL and would
+//  not fit the twelve-tile menu window beside it.
+static EWRAM_DATA bool8 sStatsShown = FALSE;
+
+static const u8 sText_StatAtk[] = _("ATK ");
+static const u8 sText_StatDef[] = _("DEF ");
+static const u8 sText_StatSpA[] = _("SPA ");
+static const u8 sText_StatSpD[] = _("SPD ");
+static const u8 sText_StatSpe[] = _("SPE ");
+static const u8 sText_StatGap[] = _("  ");
+static const u8 sText_StatPlus[] = _("+");
+static const u8 sText_StatMinus[] = _("-");
+
+static void AppendStat(u8 *dst, const u8 *label, u16 value, u8 stage)
+{
+    s8 delta = (s8)stage - DEFAULT_STAT_STAGE;
+
+    StringAppend(dst, label);
+    ConvertIntToDecimalStringN(gStringVar1, value, STR_CONV_MODE_LEFT_ALIGN, 3);
+    StringAppend(dst, gStringVar1);
+    if (delta != 0)
+    {
+        StringAppend(dst, delta > 0 ? sText_StatPlus : sText_StatMinus);
+        ConvertIntToDecimalStringN(gStringVar1, delta > 0 ? delta : -delta, STR_CONV_MODE_LEFT_ALIGN, 1);
+        StringAppend(dst, gStringVar1);
+    }
+}
+
+static void PutStatsText(u8 who)
+{
+    StringCopy(gDisplayedStringBattle, gBattleMons[who].nickname);
+    StringAppend(gDisplayedStringBattle, sText_PerspBreak);
+    AppendStat(gDisplayedStringBattle, sText_StatSpe, gBattleMons[who].speed, gBattleMons[who].statStages[STAT_SPEED]);
+    BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_ACTION_MENU);
+
+    gDisplayedStringBattle[0] = EOS;
+    AppendStat(gDisplayedStringBattle, sText_StatAtk, gBattleMons[who].attack, gBattleMons[who].statStages[STAT_ATK]);
+    StringAppend(gDisplayedStringBattle, sText_StatGap);
+    AppendStat(gDisplayedStringBattle, sText_StatDef, gBattleMons[who].defense, gBattleMons[who].statStages[STAT_DEF]);
+    StringAppend(gDisplayedStringBattle, sText_PerspBreak);
+    AppendStat(gDisplayedStringBattle, sText_StatSpA, gBattleMons[who].spAttack, gBattleMons[who].statStages[STAT_SPATK]);
+    StringAppend(gDisplayedStringBattle, sText_StatGap);
+    AppendStat(gDisplayedStringBattle, sText_StatSpD, gBattleMons[who].spDefense, gBattleMons[who].statStages[STAT_SPDEF]);
+    BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_ACTION_PROMPT);
+}
+
+//  Everything the look put on the screen, taken off again -- the two pic sprites, their two reserved palette
+//  slots, and the live sprites and healthboxes made visible. Factored out because three exits now need it:
+//  B, R, and L on its way to the Index.
+static void PerspectiveTeardown(u8 me, u8 them)
+{
+    if (sPerspectiveSprites[0] != 0xFFFF)
+        FreeAndDestroyMonPicSprite(sPerspectiveSprites[0]);
+    if (sPerspectiveSprites[1] != 0xFFFF)
+        FreeAndDestroyMonPicSprite(sPerspectiveSprites[1]);
+    sPerspectiveSprites[0] = sPerspectiveSprites[1] = 0xFFFF;
+    FreeSpritePaletteByTag(0xDAE0);
+    FreeSpritePaletteByTag(0xDAE1);
+    gSprites[gBattlerSpriteIds[me]].invisible = FALSE;
+    gSprites[gBattlerSpriteIds[them]].invisible = FALSE;
+    SetHealthboxSpriteVisible(gHealthboxSpriteIds[me]);
+    SetHealthboxSpriteVisible(gHealthboxSpriteIds[them]);
+    sPerspectiveState = 0;
+    sStatsShown = FALSE;
 }
 
 static void PerspectiveInBattle(void)
@@ -420,26 +516,46 @@ static void PerspectiveInBattle(void)
                 gBattleMons[me].otId, gBattleMons[me].personality, TRUE, tx, ty,
                 sPerspectivePals[1], TAG_NONE);
 
+            //  T-190: the action menu's cursor is a SPRITE and survived into the look, sitting on a window
+            //  that now holds prose -- the user read it as an arrow that ought to do something, and nothing
+            //  did. PlayerHandleChooseAction makes a fresh one on the way back.
+            {
+                s32 i;
+                for (i = 0; i < 4; ++i)
+                    ActionSelectionDestroyCursorAt(i);
+            }
+            sStatsShown = FALSE;
             PutPerspectiveText(me, them);
             sPerspectiveState++;
         }
         break;
     case 1:
+        //  From over here the daemon opposite you is YOUR OWN, so L reads it -- the same button doing the same
+        //  thing, with the viewpoint moved. This is the whole of T-190's rule in two lines of code.
+        if (JOY_NEW(L_BUTTON))
+        {
+            PlaySE(SE_SELECT);
+            PerspectiveTeardown(me, them);
+            sIndexReadState = 0;
+            sIndexReadMine = TRUE;
+            sIndexReadToPerspective = TRUE;
+            gBattlerControllerFuncs[gActiveBattler] = ReadIndexEntryInBattle;
+            return;
+        }
+        if (JOY_NEW(SELECT_BUTTON))
+        {
+            PlaySE(SE_SELECT);
+            sStatsShown = !sStatsShown;
+            if (sStatsShown)
+                PutStatsText(me);            // opposite you, from here
+            else
+                PutPerspectiveText(me, them);
+            return;
+        }
         if (JOY_NEW(B_BUTTON) || JOY_NEW(R_BUTTON))
         {
             PlaySE(SE_SELECT);
-            if (sPerspectiveSprites[0] != 0xFFFF)
-                FreeAndDestroyMonPicSprite(sPerspectiveSprites[0]);
-            if (sPerspectiveSprites[1] != 0xFFFF)
-                FreeAndDestroyMonPicSprite(sPerspectiveSprites[1]);
-            sPerspectiveSprites[0] = sPerspectiveSprites[1] = 0xFFFF;
-            FreeSpritePaletteByTag(0xDAE0);
-            FreeSpritePaletteByTag(0xDAE1);
-            gSprites[gBattlerSpriteIds[me]].invisible = FALSE;
-            gSprites[gBattlerSpriteIds[them]].invisible = FALSE;
-            SetHealthboxSpriteVisible(gHealthboxSpriteIds[me]);
-            SetHealthboxSpriteVisible(gHealthboxSpriteIds[them]);
-            sPerspectiveState = 0;
+            PerspectiveTeardown(me, them);
             PlayerHandleChooseAction();
         }
         break;
@@ -452,13 +568,15 @@ static void HandleInputChooseAction(void)
 
     DoBounceEffect(gActiveBattler, BOUNCE_HEALTHBOX, 7, 1);
     DoBounceEffect(gActiveBattler, BOUNCE_MON, 7, 1);
-    if (sHintFrames != 0 && --sHintFrames == 0)     // the hint's two seconds are up; ask the question
+    if (sHintFrames != 0 && --sHintFrames == 0 && !sStatsShown)   // the hint's two seconds are up; ask the question
     {
         BattleStringExpandPlaceholdersToDisplayedString(gText_WhatWillPkmnDo);
         BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_ACTION_PROMPT);
     }
 #if DAEMONS_DEBUG
-    if (JOY_NEW(SELECT_BUTTON) && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_DOUBLE)))
+    //  T-190 took SELECT for the stat readout, so the theatre's door moved to START, which nothing in a
+    //  battle uses. It is a debug build only either way.
+    if (JOY_NEW(START_BUTTON) && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_DOUBLE)))
     {
         DbgTheatre_Enter();
         return;
@@ -490,12 +608,35 @@ static void HandleInputChooseAction(void)
         //  T-179: the record, on the one screen where its thinness is the point.
         PlaySE(SE_SELECT);
         sIndexReadState = 0;
+        sIndexReadMine = FALSE;
+        sIndexReadToPerspective = FALSE;
         gBattlerControllerFuncs[gActiveBattler] = ReadIndexEntryInBattle;
+    }
+    else if (JOY_NEW(SELECT_BUTTON) && !(gBattleTypeFlags & BATTLE_TYPE_LINK))
+    {
+        //  T-190: the numbers for the daemon opposite you, and what has moved them. The hint is cancelled
+        //  rather than left running, or it would ask its question over the top two seconds later.
+        PlaySE(SE_SELECT);
+        sHintFrames = 0;
+        sStatsShown = !sStatsShown;
+        if (sStatsShown)
+        {
+            s32 i;
+
+            for (i = 0; i < 4; ++i)
+                ActionSelectionDestroyCursorAt(i);
+            PutStatsText(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT));
+        }
+        else
+        {
+            PlayerHandleChooseAction();
+        }
     }
     else if (JOY_NEW(R_BUTTON) && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_DOUBLE)))
     {
         //  T-179a: the same fight, from the other side.
         PlaySE(SE_SELECT);
+        sStatsShown = FALSE;
         sPerspectiveState = 0;
         gBattlerControllerFuncs[gActiveBattler] = PerspectiveInBattle;
     }
