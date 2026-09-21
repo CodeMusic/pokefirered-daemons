@@ -132,8 +132,7 @@ ThreeIsland_Text_GivenFullRestore::
     .string "{PLAYER} was given a SNAPSHOT.$"
 
 ThreeIsland_Text_OhYourBagIsFull::
-    .string "Oh?\n"
-    .string "Your BAG is full.$"
+    .string "Oh? Your POOL is full.$"
 
 ThreeIsland_Text_YouveGotImpressiveMons::
     .string "You've got seriously impressive\n"

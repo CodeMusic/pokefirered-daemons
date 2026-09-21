@@ -41,8 +41,8 @@ Route16_Text_HideoPostBattle::
     .string "LURID going along the coast.$"
 
 Route16_Text_CamronIntro::
-    .string "I'm feeling hungry and mean!\n"
-    .string "I need a punching bag!$"
+    .string "I'm feeling hungry and mean! I need\n"
+    .string "a punching POOL!$"
 
 Route16_Text_CamronDefeat::
     .string "Bad, bad, bad!$"

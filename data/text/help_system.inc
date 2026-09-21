@@ -247,12 +247,12 @@ Help_Text_AnswerOutOfThingsToDo::
 
 Help_Text_AnswerWhatHappenedToItemIGot::
 	.string "Any item that you are given by another\n"
-	.string "character goes in your BAG.\l"
-	.string "The item is automatically sorted and\l"
-	.string "placed in one of three pockets.\l"
-	.string "For instructions on the BAG's use,\l"
-	.string "please refer to the HELP System's\l"
-	.string "“How do I do this?” heading.$"
+	.string "character goes in your POOL. The item\l"
+	.string "is automatically sorted and placed in\l"
+	.string "one of three pockets. For instructions\l"
+	.string "on the POOL's use, please refer to the\l"
+	.string "HELP System's “How do I do this?”\l"
+	.string "heading.$"
 
 Help_Text_AnswerWhatAreMyAdventureBasics::
 	.string "If DAEMONS are hurt in battle, take\n"
@@ -484,8 +484,8 @@ Help_Text_AnswerWhatsAMon::
 
 Help_Text_AnswerWhatIsThatPersonLike::
 	.string "Use the HEARSAY among the KEY ITEMS\n"
-	.string "in your BAG. It may give you a hint, so\l"
-	.string "try it out.$"
+	.string "in your POOL. It may give you a hint,\l"
+	.string "so try it out.$"
 
 Help_Text_AnswerWhatDoesHiddenMoveDo::
 	.string "A HIDDEN ROUTINE is taught to a DAEMON\n"
@@ -538,7 +538,7 @@ Help_Text_UsingItem::
 	.string "  Using “ITEM”$"
 
 Help_Text_UsingBag::
-	.string " Using “BAG”$"
+	.string " Using “POOL”$"
 
 Help_Text_UsingAnItem::
 	.string "  Using an item$"
@@ -628,7 +628,7 @@ Help_Text_UsingSummary2::
 	.string "  Using “SUMMARY”$"
 
 Help_Text_UsingBag2::
-	.string " Using “BAG”$"
+	.string " Using “POOL”$"
 
 Help_Text_ReadingPokedex::
 	.string " Reading the “INDEX”$"
@@ -707,7 +707,7 @@ Help_Text_HowToUseItem::
 	.string "item!$"
 
 Help_Text_HowToUseBag::
-	.string "{CIRCLE_1} Select “BAG” on the MENU.\n"
+	.string "{CIRCLE_1} Select “POOL” on the MENU.\n"
 	.string "{CIRCLE_2} Press left or right on the {PLUS} Control\n"
 	.string "   Pad to check the data headings:\n"
 	.string "   “ITEMS”\n"
@@ -733,7 +733,7 @@ Help_Text_HowToUseKeyItem::
 
 Help_Text_HowToUsePokeBall::
 	.string "{CIRCLE_1} While battling a wild DAEMON,\n"
-	.string "   select the BAG's “BOXES”\n"
+	.string "   select the POOL's “BOXES”\n"
 	.string "   POCKET.\n"
 	.string "{CIRCLE_2} Press up or down on the {PLUS} Control\n"
 	.string "   Pad to select a POKé BOX.\n"
@@ -768,7 +768,7 @@ Help_Text_HowToUseOption::
 Help_Text_HowToUsePotion::
 	.string "{CIRCLE_1} Open the MENU.\n"
 	.string "{CIRCLE_2} Press up or down on the {PLUS} Control\n"
-	.string "   Pad and select “BAG.”\n"
+	.string "   Pad and select “POOL.”\n"
 	.string "{CIRCLE_3} Select “RESTORE” in the “ITEMS”\n"
 	.string "   POCKET.\n"
 	.string "{CIRCLE_4} Select “USE.”\n"
@@ -777,23 +777,23 @@ Help_Text_HowToUsePotion::
 Help_Text_HowToUseTownMap::
 	.string "{CIRCLE_1} Open the MENU.\n"
 	.string "{CIRCLE_2} Press up or down on the {PLUS} Control\n"
-	.string "   Pad and select “BAG.”\n"
+	.string "   Pad and select “POOL.”\n"
 	.string "{CIRCLE_3} Press left or right to open the\n"
 	.string "   “KEY ITEMS” POCKET, then press\n"
 	.string "   up or down to select “SITEMAP.” \n"
 	.string "{CIRCLE_4} Select “USE” to open the SITEMAP.$"
 
 Help_Text_HowToUseTM::
-	.string "{CIRCLE_1} Open the MENU. {CIRCLE_2} Open the “KEY ITEMS”\n"
-	.string "POCKET in the “BAG.” {CIRCLE_3} “OPEN” the TM CASE.\l"
-	.string "{CIRCLE_4} Select and “USE” a TM. {CIRCLE_5} Select a\l"
-	.string "DAEMON that can learn the ROUTINE in the\l"
-	.string "TM.$"
+	.string "{CIRCLE_1} Open the MENU. {CIRCLE_2} Open the “KEY\n"
+	.string "ITEMS” POCKET in the “POOL.” {CIRCLE_3} “OPEN”\l"
+	.string "the TM CASE. {CIRCLE_4} Select and “USE” a TM.\l"
+	.string "{CIRCLE_5} Select a DAEMON that can learn the\l"
+	.string "ROUTINE in the TM.$"
 
 Help_Text_HowToUseHM::
 	.string "{CIRCLE_1} Open the MENU.\n"
 	.string "{CIRCLE_2} Open the “KEY ITEMS” POCKET in the\n"
-	.string "   “BAG.”\n"
+	.string "   “POOL.”\n"
 	.string "{CIRCLE_3} “OPEN” the TM CASE.\n"
 	.string "{CIRCLE_4} Select and “USE” an HM.\n"
 	.string "{CIRCLE_5} Select a DAEMON that can learn it.\n"
@@ -808,7 +808,7 @@ Help_Text_HowToUseMoveOutsideOfBattle::
 
 Help_Text_HowToRideBicycle::
 	.string "{CIRCLE_1} Open the MENU. Open the\n"
-	.string "   “KEY ITEMS” POCKET in the “BAG”\n"
+	.string "   “KEY ITEMS” POCKET in the “POOL”\n"
 	.string "   and select the “BICYCLE.”\n"
 	.string "{CIRCLE_2} The BICYCLE can be ridden by\n"
 	.string "   selecting “USE.” You may also\n"
@@ -871,27 +871,27 @@ Help_Text_HowToMoveItems::
 	.string "{CIRCLE_2} Clearly shown DAEMON can be made\n"
 	.string "   to give the item they are holding to\n"
 	.string "   another DAEMON, or return the item\n"
-	.string "   to the BAG with the A Button.$"
+	.string "   to the POOL with the A Button.$"
 
 Help_Text_HowToUsePlayersPC::
 	.string "{CIRCLE_1} Select “{PLAYER}'s PORT” on the PORT.\n"
 	.string "{CIRCLE_2} Select either “ITEM STORAGE” or\n"
 	.string "   “MAILBOX.”\n"
 	.string "You may store things in your own PORT\n"
-	.string "if your BAG is full. You may also\n"
+	.string "if your POOL is full. You may also\n"
 	.string "withdraw items stored in your PORT.$"
 
 Help_Text_HowToUseWithdrawItem::
 	.string "{CIRCLE_1} Select “EDDY ITEM.”\n"
 	.string "{CIRCLE_2} Select the item to be withdrawn.\n"
 	.string "{CIRCLE_3} The item can be withdrawn and\n"
-	.string "   placed in the BAG's ITEMS POCKET.\n"
+	.string "   placed in the POOL's ITEMS POCKET.\n"
 	.string "   It may also be directly given to a\n"
 	.string "   DAEMON to hold.$"
 
 Help_Text_HowToUseDepositItem::
 	.string "{CIRCLE_1} Select “DEPOSIT ITEM.”\n"
-	.string "{CIRCLE_2} Select the item in the BAG to be\n"
+	.string "{CIRCLE_2} Select the item in the POOL to be\n"
 	.string "   deposited using the {PLUS} Control Pad.\n"
 	.string "{CIRCLE_3} If there is more than one \n"
 	.string "   item to be deposited, enter the\n"
@@ -954,7 +954,7 @@ Help_Text_HowToUseSummary2::
 	.string "   “KNOWN ROUTINES”$"
 
 Help_Text_HowToUseBag2::
-	.string "{CIRCLE_1} Select “BAG.”\n"
+	.string "{CIRCLE_1} Select “POOL.”\n"
 	.string "{CIRCLE_2} Press left or right on the {PLUS} Control\n"
 	.string "   Pad to check the data headings:\n"
 	.string "   “ITEMS”\n"
@@ -987,21 +987,21 @@ Help_Text_HowToUseItemStorage::
 	.string "{CIRCLE_1} Select “EDDY ITEM” to withdraw\n"
 	.string "   an item stored on your PORT.\n"
 	.string "{CIRCLE_2} Select “DEPOSIT ITEM” to put an\n"
-	.string "   item from your BAG into the PORT.$"
+	.string "   item from your POOL into the PORT.$"
 
 Help_Text_HowToUseWithdrawItem2::
 	.string "{CIRCLE_1} Select “EDDY ITEM.”\n"
 	.string "{CIRCLE_2} Select the item to be withdrawn.\n"
 	.string "{CIRCLE_3} The item can be withdrawn and\n"
-	.string "   placed in the BAG's ITEMS POCKET.\n"
+	.string "   placed in the POOL's ITEMS POCKET.\n"
 	.string "   It may also be directly given to a\n"
 	.string "   DAEMON to hold.$"
 
 Help_Text_HowToUseDepositItem2::
 	.string "{CIRCLE_1} Select “DEPOSIT ITEM.”\n"
-	.string "{CIRCLE_2} Select the item in the BAG to be\n"
+	.string "{CIRCLE_2} Select the item in the POOL to be\n"
 	.string "   deposited using the {PLUS} Control Pad.\n"
-	.string "{CIRCLE_3} If there is nothing in the BAG, this\n"
+	.string "{CIRCLE_3} If there is nothing in the POOL, this\n"
 	.string "   command can't be used!$"
 
 Help_Text_HowToUseMailbox2::
@@ -1270,7 +1270,7 @@ Help_Text_DefineItem::
 	.string "item each. Some items will be used by\l"
 	.string "the DAEMON automatically in certain\l"
 	.string "situations. To make a DAEMON hold an\l"
-	.string "item, select the item from the BAG and\l"
+	.string "item, select the item from the POOL and\l"
 	.string "“GIVE” it to the DAEMON.$"
 
 Help_Text_DefineAbility::
@@ -1342,13 +1342,13 @@ Help_Text_DefineItems::
 	.string "to hold, or tossed out as garbage.$"
 
 Help_Text_DefineKeyItems::
-	.string "Important items that you find or \n"
+	.string "Important items that you find or\n"
 	.string "receive from people are placed in the\l"
-	.string "KEY ITEMS POCKET.\l"
-	.string "Key items may be used, or registered\l"
-	.string "for use instantly with SELECT. Once\l"
-	.string "registered, the item can be used\l"
-	.string "without opening the MENU and BAG.$"
+	.string "KEY ITEMS POCKET. Key items may be\l"
+	.string "used, or registered for use instantly\l"
+	.string "with SELECT. Once registered, the item\l"
+	.string "can be used without opening the MENU\l"
+	.string "and POOL.$"
 
 Help_Text_DefinePokeBalls::
 	.string "BOXES, which are used for binding\n"
@@ -1399,10 +1399,10 @@ Help_Text_DefineButtonMode::
 	.string "Set to “HELP” to display help messages\n"
 	.string "by pressing the L or R Button. Set to\l"
 	.string "“LR” to enable the switching of the\l"
-	.string "INDEX pages and BAG POCKETS using the\l"
-	.string "L and R Buttons. Set to “L=A” to make\l"
-	.string "the L Button work the same as the A\l"
-	.string "Button.$"
+	.string "INDEX pages and POOL POCKETS using\l"
+	.string "the L and R Buttons. Set to “L=A” to\l"
+	.string "make the L Button work the same as the\l"
+	.string "A Button.$"
 
 Help_Text_DefineFrame::
 	.string "You may choose the design of the frame\n"

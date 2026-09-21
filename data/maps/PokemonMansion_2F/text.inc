@@ -13,8 +13,7 @@ PokemonMansion_1F_Text_ArnieIntro::
     .string "This old place is one big puzzle.$"
 
 PokemonMansion_1F_Text_ArnieDefeat::
-    .string "Oh, no!\n"
-    .string "My bag of loot!$"
+    .string "Oh, no! My POOL of loot!$"
 
 PokemonMansion_1F_Text_ArniePostBattle::
     .string "The switches here open and close\n"

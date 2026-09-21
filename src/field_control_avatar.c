@@ -237,7 +237,7 @@ static void QuestLogOverrideJoyVars(struct FieldInput *input, u16 *newKeys, u16 
 // obvious pick for a song list and they are wrong: holding L does not stop the
 // avatar walking, so browsing the soundtrack would march you into a wall.
 static const u8 sDebugTextHealed[] = _("Party restored.");
-static const u8 sDebugTextRestocked[] = _("Bag restocked.");
+static const u8 sDebugTextRestocked[] = _("POOL restocked.");
 static const u8 sDebugTextSong[] = _("SONG ");
 static const u8 sDebugTextMapSong[] = _("Map song restored.");
 

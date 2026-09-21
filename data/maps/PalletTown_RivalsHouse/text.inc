@@ -20,7 +20,7 @@ PalletTown_RivalsHouse_Text_ReceivedTownMapFromDaisy::
 
 PalletTown_RivalsHouse_Text_DontHaveSpaceForThis::
     .string "You don't have space for this in\n"
-    .string "your BAG.$"
+    .string "your POOL.$"
 
 PalletTown_RivalsHouse_Text_ExplainTownMap::
     .string "The SITEMAP shows where you are\n"

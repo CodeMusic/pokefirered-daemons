@@ -107,8 +107,8 @@ const u8 gTeachyTvText_TMsScript2[] = _(
 const u8 gTeachyTvText_RegisterScript1[] = _(
         "One item, one button.\p"
         "Some KEY ITEMS you will use often,\n"
-        "and opening the BAG is slow.\p"
-        "Suppose I have a STREAM in my BAG.\p"
+        "and opening the POOL is slow.\p"
+        "Suppose I have a STREAM in my POOL.\p"
         "I will register it.");
 const u8 gTeachyTvText_RegisterScript2[] = _(
         "Now it is registered.\p"
@@ -263,7 +263,7 @@ const u8 gTeachyTvText_Mark6Script1[] = _(
         "A battle has more in it than the\n"
         "screen can hold.\p"
         "So the game picks. FIGHT shows you\n"
-        "four ROUTINES. BAG shows you items.\p"
+        "four ROUTINES. POOL shows you items.\p"
         "Whichever menu you opened decided\n"
         "what you were allowed to think of.$");
 

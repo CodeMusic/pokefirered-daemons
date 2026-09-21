@@ -861,7 +861,7 @@ Text_WantWhichFloor::
 	.string "Which floor do you want?$"
 
 Text_BagItemCanBeRegistered::
-	.string "An item in the BAG can be\n"
+	.string "An item in the POOL can be\n"
 	.string "registered to SELECT for easy use.$"
 
 @ Unused (email from R/S Rivals computer)

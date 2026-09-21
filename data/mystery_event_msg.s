@@ -257,7 +257,7 @@ sText_AuroraTicketGot:
 	.string "GIFT System.$"
 
 sText_AuroraTicketNoPlace:
-	.string "Oh, I'm sorry, {PLAYER}. Your BAG's\n"
+	.string "Oh, I'm sorry, {PLAYER}. Your POOL's\n"
 	.string "KEY ITEMS POCKET is full.\p"
 	.string "Please store something on your\n"
 	.string "PORT, then come back for this.$"
@@ -316,7 +316,7 @@ sText_MysticTicketGot:
 	.string "GIFT System.$"
 
 sText_MysticTicketNoPlace:
-	.string "Oh, I'm sorry, {PLAYER}. Your BAG's\n"
+	.string "Oh, I'm sorry, {PLAYER}. Your POOL's\n"
 	.string "KEY ITEMS POCKET is full.\p"
 	.string "Please store something on your\n"
 	.string "PORT, then come back for this.$"

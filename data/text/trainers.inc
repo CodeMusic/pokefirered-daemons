@@ -435,8 +435,8 @@ Route16_Text_HideoRematchIntro::
 	.string "Don't call me and then run away!$"
 
 Route16_Text_CamronRematchIntro::
-	.string "I'm feeling hungry and mean!\n"
-	.string "I really need a punching bag!$"
+	.string "I'm feeling hungry and mean! I\n"
+	.string "really need a punching POOL!$"
 
 Route16_Text_RubenRematchIntro::
 	.string "Hey, there!\n"

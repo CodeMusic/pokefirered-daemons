@@ -1298,7 +1298,10 @@ const u8 gText_WhatWillPkmnDo[] = _("What will\n{B_ACTIVE_NAME_WITH_PREFIX} do?"
 const u8 gText_WhatWillPlayerThrow[] = _("What will {B_PLAYER_NAME}\nthrow?");
 const u8 gText_WhatWillOldManDo[] = _("What will the\nold man do?");
 const u8 gText_LinkStandby[] = _("{PAUSE 16}Link standby…");
-const u8 gText_BattleMenu[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW 13 14 15}INVOKE{CLEAR_TO 56}BAG\nDAEMON{CLEAR_TO 56}DETACH");
+//  T-195: the menu named a VERB among three nouns -- POOL, DAEMON, DETACH -- and what is behind it is a
+//  list of routines. INVOKE stays as the verb in the log, which is the better division: the menu names
+//  what you are opening and the log says what you did. ROUTINES is 48px and the column is {CLEAR_TO 56}.
+const u8 gText_BattleMenu[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW 13 14 15}ROUTINES{CLEAR_TO 56}POOL\nDAEMON{CLEAR_TO 56}DETACH");
 const u8 gText_SafariZoneMenu[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW 13 14 15}BOX{CLEAR_TO 56}BAIT\nROCK{CLEAR_TO 56}DETACH");
 const u8 gText_MoveInterfacePP[] = _("MP ");
 const u8 gText_MoveInterfaceType[] = _("TYPE/");

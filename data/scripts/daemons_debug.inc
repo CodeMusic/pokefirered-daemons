@@ -88,12 +88,12 @@ DaemonsDebug_Text_TheRecord::
 DaemonsDebug_Text_TheIslands::
 	.string "DEBUG: open THE MARGINS?\p"
 	.string "The ferry at ARDOR PORT will sail,\n"
-	.string "and both passes go in the BAG.$"
+	.string "and both passes go in the POOL.$"
 
 DaemonsDebug_Text_TheIslandsAnneIsIn::
 	.string "DEBUG: open THE MARGINS?\p"
 	.string "The ferry at ARDOR PORT will sail,\n"
-	.string "and both passes go in the BAG.\p"
+	.string "and both passes go in the POOL.\p"
 	.string "The S.S. ANNE uses the same berth\n"
 	.string "and the same sailor, so she will\l"
 	.string "have gone. Board her first if you\l"

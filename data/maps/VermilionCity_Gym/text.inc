@@ -32,7 +32,7 @@ VermilionCity_Gym_Text_ExplainTM34::
     .string "Teach it to a SIGNAL DAEMON!$"
 
 VermilionCity_Gym_Text_MakeRoomInYourBag::
-    .string "Yo, kid, make room in your BAG!$"
+    .string "Yo, kid, make room in your POOL!$"
 
 VermilionCity_Gym_Text_LtSurgeDefeat::
     .string "Whoa!\p"

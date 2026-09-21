@@ -162,7 +162,7 @@ const u8 gText_YesNo[] = _("YES\nNO");
 const u8 gText_GoBackToThePreviousMenu[] = _("Go back to the\nprevious menu.");
 const u8 gText_WhatWouldYouLikeToDo[] = _("What would you like to do?");
 const u8 gText_MenuPokedex[] = _("INDEX");
-const u8 gText_MenuBag[] = _("BAG");
+const u8 gText_MenuBag[] = _("POOL");
 const u8 gText_MenuPokenav[] = _("ポケナビ");
 const u8 gText_MenuPlayer[] = _("{PLAYER}");
 const u8 gText_MenuSave[] = _("SAVE");
@@ -199,7 +199,7 @@ const u8 gText_Items2[] = _("ITEMS");
 const u8 gText_PokeBalls2[] = _("BOXES");
 const u8 gText_KeyItems2[] = _("KEY ITEMS");
 const u8 gText_DepositItem[] = _("DEPOSIT ITEM");
-const u8 gText_CloseBag[] = _("CLOSE BAG");
+const u8 gText_CloseBag[] = _("CLOSE POOL");
 const u8 gText_Var1IsSelected[] = _("{STR_VAR_1} is\nselected.");
 const u8 gText_CantWriteMailHere[] = _("You can't write\nMAIL here.");
 const u8 gText_ThereIsNoPokemon[] = _("There is no DAEMON.");
@@ -242,7 +242,7 @@ const u8 gText_TheBerryPouchWillBePutAway[] = _("The TRAP TABLE will be\nput awa
 const u8 gText_ShopBuy[] = _("BUY");
 const u8 gText_ShopSell[] = _("SELL");
 const u8 gText_ShopQuit[] = _("SEE YA!");
-const u8 gText_InBagVar1[] = _("IN BAG:{FONT_SMALL} {STR_VAR_1}");
+const u8 gText_InBagVar1[] = _("IN POOL:{FONT_SMALL} {STR_VAR_1}");
 const u8 gText_QuitShopping[] = _("Quit shopping.");
 const u8 gText_Var1CertainlyHowMany[] = _("{STR_VAR_1}? Certainly.\nHow many would you like?");
 const u8 gText_Var1AndYouWantedVar2[] = _("{STR_VAR_1}, and you want {STR_VAR_2}.\nThat will be ¥{STR_VAR_3}. Okay?");
@@ -412,17 +412,17 @@ const u8 gText_StoreItemsInThePC[] = _("Store items in the PORT.");
 const u8 gText_TakeOutItemsFromThePC[] = _("Take out items from the PORT.");
 const u8 gText_ThrowAwayItemsInPC[] = _("パソコンに あずけている\nどうぐを すてます");
 const u8 gText_ThereAreNoItems[] = _("There are no items.{PAUSE_UNTIL_PRESS}");
-const u8 gText_NoMoreRoomInBag[] = _("There is no more\nroom in the BAG.");
+const u8 gText_NoMoreRoomInBag[] = _("There is no more\nroom in the POOL.");
 const u8 gText_WithdrawHowMany[] = _("Withdraw how many\n{STR_VAR_1}(s)?");
 const u8 gText_WithdrewQuantItem[] = _("Withdrew {STR_VAR_2}\n{STR_VAR_1}(s).");
 const u8 gOtherText_Read[] = _("READ");
-const u8 gOtherText_MoveToBag[] = _("MOVE TO BAG");
+const u8 gOtherText_MoveToBag[] = _("MOVE TO POOL");
 const u8 gOtherText_Give2[] = _("GIVE");
 const u8 gText_TheresNoMailHere[] = _("There's no MAIL here.{PAUSE_UNTIL_PRESS}");
 const u8 gText_WhatWouldYouLikeToDoWithPlayersMail[] = _("What would you like to do with\n{STR_VAR_1}'s MAIL?");
 const u8 gText_MessageWillBeLost[] = _("The message will be lost.\nIs that okay?");
-const u8 gText_BagIsFull[] = _("The BAG is full.{PAUSE_UNTIL_PRESS}");
-const u8 gText_MailReturnedToBagMessageErased[] = _("The MAIL was returned to the BAG\nwith its message erased.{PAUSE_UNTIL_PRESS}");
+const u8 gText_BagIsFull[] = _("The POOL is full.{PAUSE_UNTIL_PRESS}");
+const u8 gText_MailReturnedToBagMessageErased[] = _("The MAIL was returned to the\nPOOL with its message erased.{PAUSE_UNTIL_PRESS}");
 const u8 gText_WithdrawItem[] = _("EDDY\nITEM");
 const u8 gText_Withdraw[] = _("EDDY");
 const u8 gText_ReturnToPC[] = _("Return to the PORT.");
@@ -668,9 +668,9 @@ const u8 gText_WasItWorriedAboutYou[] = _("Was it worried about you?");
 const u8 gText_FourEllipsesExclamation[] = _("‥ ‥ ‥ ‥ ‥!");
 const u8 gText_PleaseRemoveTheMail[] = _("Please remove the MAIL.");
 const u8 gText_GiveToAPkmn[] = _("GIVE to a DAEMON?");
-const u8 gText_PlacedItemInBag[] = _("Placed item in the BAG.");
-const u8 gText_BagIsFull2[] = _("The BAG is full.");
-const u8 gText_PutItemInBag[] = _("Put this item in the BAG?");
+const u8 gText_PlacedItemInBag[] = _("Placed item in the POOL.");
+const u8 gText_BagIsFull2[] = _("The POOL is full.");
+const u8 gText_PutItemInBag[] = _("Put this item in the POOL?");
 const u8 gText_ItemIsNowHeld[] = _("{DYNAMIC 0x00} is now held.");
 const u8 gText_ChangedToNewItem[] = _("Changed to {DYNAMIC 0x00}.");
 const u8 gText_MailCantBeStored[] = _("MAIL can't be stored!");
@@ -689,7 +689,7 @@ const u8 gPCText_Wallpaper[] = _("WALLPAPER");
 const u8 gPCText_Take[] = _("TAKE");
 const u8 gPCText_Give[] = _("GIVE");
 const u8 gPCText_Switch[] = _("SWITCH");
-const u8 gPCText_Bag[] = _("BAG");
+const u8 gPCText_Bag[] = _("POOL");
 const u8 gPCText_Info[] = _("INFO");
 const u8 gPCText_Scenery1[] = _("SCENERY 1");
 const u8 gPCText_Scenery2[] = _("SCENERY 2");
@@ -889,10 +889,16 @@ const u8 gText_PokeSum_HmMovesCantBeForgotten[] = _("HM ROUTINES can't be\nforgo
 const u8 gText_TrainerCardName[] = _("NAME: ");
 const u8 gText_TrainerCardIDNo[] = _("IDNo.");
 // 396: the word MONEY is never shown to the player -- except the GBA card
-// shows it, which the Game Boy one did not. CACHE carries three readings
-// at once: a hoard, a fast local memory, and cash, which it is pronounced
-// as. One more than the lexicon asks of any term, and it needs no beat.
-const u8 gText_TrainerCardMoney[] = _("CACHE");
+// shows it, which the Game Boy one did not.
+//
+// T-194: it read CACHE, which carried three readings at once -- a hoard, a fast
+// local memory, and cash, which it is pronounced as -- and that was one more
+// than the lexicon asks of any term. It was also the name of a daemon, and the
+// user met both and found the pair confusing. The daemon keeps it: a daemon's
+// name is earned by its Index entry, where this is a label with no argument
+// attached. BUDGET has one. The game is about optimising for a flattened
+// metric, and a budget is the flattened metric people actually live inside.
+const u8 gText_TrainerCardMoney[] = _("BUDGET");
 const u8 gText_TrainerCardYen[] = _("¥");
 const u8 gText_TrainerCardPokedex[] = _("INDEX");
 const u8 gText_TrainerCardNull[] = _("");

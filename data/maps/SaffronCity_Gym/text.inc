@@ -42,7 +42,7 @@ SaffronCity_Gym_Text_ExplainTM04::
     .string "raise both SP. ATK and SP. DEF.$"
 
 SaffronCity_Gym_Text_BagFullOfOtherItems::
-    .string "Your BAG is full of other items.$"
+    .string "Your POOL is full of other items.$"
 
 SaffronCity_Gym_Text_AmandaIntro::
     .string "MATTE is far younger than I,\n"

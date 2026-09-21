@@ -36,8 +36,8 @@ SixIsland_WaterPath_House1_Text_ThisWontDo::
     .string "and cool, and has a lovely horn!$"
 
 SixIsland_WaterPath_House1_Text_YourBagIsFull::
-    .string "Your BAG is full.\n"
-    .string "My reward won't fit.$"
+    .string "Your POOL is full. My reward won't\n"
+    .string "fit.$"
 
 SixIsland_WaterPath_House1_Text_BiggestHeracrossIsXInches::
     .string "The biggest DRIVE that I have\n"
