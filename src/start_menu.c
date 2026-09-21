@@ -123,9 +123,16 @@ static bool8 StartMenuOptionCallback(void);
 // T-179. The Help System used to own L and R everywhere; it is an ENTRY now, and opening it from
 // here is what pressing R in this menu used to do -- so the menu stays open underneath and the
 // help returns to it. RunHelpSystemCallback reads the request on the next frame, from main().
+//
+// T-182: ASK ONCE. Task_StartMenuHandleInput polls this callback EVERY FRAME until it returns TRUE,
+// so setting the request unconditionally set it again on the frame the Help System closed, which
+// re-opened it immediately -- B could never get out, and only a reset could. Hand the menu back to
+// its own input handler after asking; main() skips the game's callbacks while help is up, so the
+// menu simply waits there.
 static bool8 StartMenuHelpCallback(void)
 {
     gDaemonsHelpRequested = TRUE;
+    sStartMenuCallback = StartCB_HandleInput;
     return FALSE;
 }
 
@@ -633,8 +640,12 @@ static void StartMenu_FadeScreenIfLeavingOverworld(void)
     //
     // DEBUG stays too, and being absent from this list is what blacked out the
     // screen: it faded to black and there was no new screen to come back from.
+    //
+    // HELP stays as well (T-182). It draws its own screen over the top and puts the map back when it
+    // closes, so a fade here leaves the overworld black behind the restored menu.
     if (sStartMenuCallback != StartMenuSaveCallback
      && sStartMenuCallback != StartMenuExitCallback
+     && sStartMenuCallback != StartMenuHelpCallback
 #if DAEMONS_DEBUG
      && !IsDaemonsDebugCallback()
 #endif
