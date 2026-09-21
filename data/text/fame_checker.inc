@@ -152,11 +152,10 @@ gFameCheckerFlavorText_Misty4::
 
 gFameCheckerFlavorText_Misty5::
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}There's a rumor…\p"
-	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}Her trainers heal every\n"
-	.string "challenger who walks in.\p"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}Her USERS heal every challenger\n"
+	.string "who walks in.\p"
 	.string "Some call it the kindest BENCHMARK\n"
-	.string "in GAMUT. Some call it the\l"
-	.string "slowest.$"
+	.string "in GAMUT. Some call it the slowest.$"
 
 gFameCheckerFlavorText_LtSurge0::
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
@@ -1377,13 +1376,12 @@ PokemonJournal_Text_SpecialFeatureBrock::
 
 PokemonJournal_Text_SpecialFeatureMisty::
 	.string "DAEMON JOURNAL\p"
-	.string "Special Feature:\n"
-	.string "DOLDRUM BENCHMARK LEADER BASIN!\p"
-	.string "Her trainers heal every\n"
-	.string "challenger who walks in.\p"
+	.string "Special Feature: DOLDRUM\n"
+	.string "BENCHMARK LEADER BASIN!\p"
+	.string "Her USERS heal every challenger\n"
+	.string "who walks in.\p"
 	.string "Some call it the kindest BENCHMARK\n"
-	.string "in GAMUT. Some call it the\l"
-	.string "slowest.$"
+	.string "in GAMUT. Some call it the slowest.$"
 
 PokemonJournal_Text_SpecialFeatureLtSurge::
 	.string "DAEMON JOURNAL\p"

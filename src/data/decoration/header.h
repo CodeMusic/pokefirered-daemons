@@ -712,7 +712,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_MARILL_DOLL
     }, {
         DECOR_TOGEPI_DOLL,
-        _("TOGEPI DOLL"),
+        _("TRUST DOLL"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x1,
         DECORCAT_DOLL,
@@ -829,7 +829,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_DUSKULL_DOLL
     }, {
         DECOR_WYNAUT_DOLL,
-        _("WYNAUT DOLL"),
+        _("RANKLE DOLL"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x1,
         DECORCAT_DOLL,
@@ -856,7 +856,7 @@ const struct Decoration gDecorations[] = {
         DecorGfx_KECLEON_DOLL
     }, {
         DECOR_AZURILL_DOLL,
-        _("AZURILL DOLL"),
+        _("VALENCE DOLL"),
         DECORPERM_SPRITE,
         DECORSHAPE_1x1,
         DECORCAT_DOLL,

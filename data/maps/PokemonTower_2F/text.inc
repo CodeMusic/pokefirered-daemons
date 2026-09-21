@@ -20,7 +20,7 @@ PokemonTower_2F_Text_RivalVictory::
 
 PokemonTower_2F_Text_RivalPostBattle::
     .string "How's your INDEX coming, pal? I\n"
-    .string "just bound a ARTEFACT!\p"
+    .string "just bound an ARTEFACT!\p"
     .string "I can't find the grown-up COREFILE\n"
     .string "yet!\p"
     .string "I doubt there are any left! Well,\n"
