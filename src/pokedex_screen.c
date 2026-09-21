@@ -2300,9 +2300,28 @@ static void DexScreen_PrintControlInfo(const u8 *src)
     DexScreen_AddTextPrinterParameterized(1, FONT_SMALL, src, 236 - GetStringWidth(FONT_SMALL, src, 0), 2, 4);
 }
 
+//  T-185: a daemon nobody has met is a SHAPE. Vanilla's category pages draw every daemon on the page
+//  lit and named, whether or not the player has seen it -- and because a page groups an evolution line,
+//  meeting the first one shows you the rest of the chain for free. That is the one thing this screen is
+//  supposed to hold back: the list two screens away already prints "-----" for an unseen daemon and
+//  pressing A on one here already does nothing, so vanilla has the rule and breaks it in this one place.
+//
+//  Drawn with the pic's own palette repainted to a single ink -- the SAME ink the sprites and the
+//  portraits are outlined in (9.4 as amended by T-184), so an unseen daemon is exactly its own outline
+//  filled in. Entry 0 is left alone: it is the window's background, not the daemon.
+static void DexScreen_SilhouetteMonPic(u16 paletteOffset)
+{
+    u16 i;
+
+    for (i = 1; i < 16; i++)
+        gPlttBufferUnfaded[paletteOffset + i] = gPlttBufferFaded[paletteOffset + i] = RGB(2, 2, 2);
+}
+
 bool8 DexScreen_DrawMonPicInCategoryPage(u16 species, u8 slot, u8 numSlots)
 {
     struct WindowTemplate template;
+    bool8 seen = species != SPECIES_NONE
+              && DexScreen_GetSetPokedexFlag(species, FLAG_GET_SEEN, TRUE) != 0;
     numSlots--;
     CopyToBgTilemapBufferRect_ChangePalette(3, sCategoryPageIconWindowBg, sCategoryPageIconCoords[numSlots][slot][0], sCategoryPageIconCoords[numSlots][slot][1], 8, 8, slot + 5);
     if (sPokedexScreenData->categoryMonWindowIds[slot] == 0xFF)
@@ -2315,6 +2334,8 @@ bool8 DexScreen_DrawMonPicInCategoryPage(u16 species, u8 slot, u8 numSlots)
         sPokedexScreenData->categoryMonWindowIds[slot] = AddWindow(&template);
         FillWindowPixelBuffer(sPokedexScreenData->categoryMonWindowIds[slot], PIXEL_FILL(0));
         DexScreen_LoadMonPicInWindow(sPokedexScreenData->categoryMonWindowIds[slot], species, slot * 16 + 16);
+        if (!seen)
+            DexScreen_SilhouetteMonPic(slot * 16 + 16);
         PutWindowTilemap(sPokedexScreenData->categoryMonWindowIds[slot]);
         CopyWindowToVram(sPokedexScreenData->categoryMonWindowIds[slot], COPYWIN_GFX);
     }
@@ -2332,7 +2353,7 @@ bool8 DexScreen_DrawMonPicInCategoryPage(u16 species, u8 slot, u8 numSlots)
             sPokedexScreenData->categoryMonInfoWindowIds[slot] = AddWindow(&template);
             CopyToWindowPixelBuffer(sPokedexScreenData->categoryMonInfoWindowIds[slot], sCategoryMonInfoBgTiles, 0, 0);
             DexScreen_PrintMonDexNo(sPokedexScreenData->categoryMonInfoWindowIds[slot], FONT_SMALL, species, 12, 0);
-            DexScreen_AddTextPrinterParameterized(sPokedexScreenData->categoryMonInfoWindowIds[slot], FONT_NORMAL, gSpeciesNames[species], 2, 13, 0);
+            DexScreen_AddTextPrinterParameterized(sPokedexScreenData->categoryMonInfoWindowIds[slot], FONT_NORMAL, seen ? gSpeciesNames[species] : gText_5Dashes, 2, 13, 0);
             if (DexScreen_GetSetPokedexFlag(species, FLAG_GET_CAUGHT, TRUE))
                 BlitBitmapRectToWindow(sPokedexScreenData->categoryMonInfoWindowIds[slot], sDexScreen_CaughtIcon, 0, 0, 8, 8, 2, 3, 8, 8);
             PutWindowTilemap(sPokedexScreenData->categoryMonInfoWindowIds[slot]);
