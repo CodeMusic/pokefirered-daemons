@@ -12,7 +12,10 @@ static EWRAM_DATA u8 sMessageBoxType = 0;
 //  this dense with writing some of those lines are the only place a thing is said. The EXPANDED text is
 //  kept, not the pointer -- a script's message is built in gStringVar4 from buffers that have moved on by
 //  the time anyone asks to read it again.
-static EWRAM_DATA u8 sLastMessage[500] = {0};
+//  240, not 500: EWRAM has about a kilobyte free in stock pokefirered (engine.md) and a 500-byte buffer
+//  spends half of it on a convenience. A field box shows three lines of about thirty-nine characters, so
+//  240 holds one screenful and change -- and AGAIN reprints one screen, not a whole conversation.
+static EWRAM_DATA u8 sLastMessage[240] = {0};
 
 const u8 *GetLastFieldMessage(void)
 {
