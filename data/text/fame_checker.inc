@@ -313,7 +313,7 @@ gFameCheckerFlavorText_Sabrina4::
 
 gFameCheckerFlavorText_Sabrina5::
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
-	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}The DOJO next door challenged\n"
+	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}The PROOF HALL next door challenged\n"
 	.string "MATTE. She won in four turns.\p"
 	.string "Then she told them the three\n"
 	.string "things they hadn't looked at.$"
@@ -1376,8 +1376,8 @@ PokemonJournal_Text_SpecialFeatureBrock::
 
 PokemonJournal_Text_SpecialFeatureMisty::
 	.string "DAEMON JOURNAL\p"
-	.string "Special Feature: DOLDRUM\n"
-	.string "BENCHMARK LEADER BASIN!\p"
+	.string "Special Feature:\n"
+	.string "DOLDRUM BENCHMARK LEADER BASIN!\p"
 	.string "Her USERS heal every challenger\n"
 	.string "who walks in.\p"
 	.string "Some call it the kindest BENCHMARK\n"
