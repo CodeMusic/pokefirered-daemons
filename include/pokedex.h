@@ -127,6 +127,7 @@ bool16 HasAllHoennMons(void);
 bool16 HasAllKantoMons(void);
 bool16 HasAllMons(void);
 
+u8 DexScreen_ShowEntryOnly(u16 species);    // T-179: the page, without the registering
 u8 DexScreen_RegisterMonToPokedex(u16 species);
 
 #endif // GUARD_POKEDEX_H

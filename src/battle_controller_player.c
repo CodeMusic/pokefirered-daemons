@@ -3,6 +3,7 @@
 #include "data.h"
 #include "item.h"
 #include "item_menu.h"
+#include "pokedex.h"
 #include "link.h"
 #include "m4a.h"
 #include "party_menu.h"
@@ -241,6 +242,60 @@ static void CompleteOnBattlerSpritePosX_0(void)
         PlayerBufferExecCompleted();
 }
 
+//  T-179, L = READ. One button, one meaning: what does the record say about this?
+//
+//  4.2 makes the Index the artifact that can only measure CONTENT -- height, weight, a category and a thin
+//  line of prose -- and says the player spends forty hours filling something that cannot hold what matters.
+//  Reaching for it MID-FIGHT is where that lands hardest: the daemon is in front of you, and what comes back
+//  is two numbers and a sentence.
+//
+//  The sequence is Cmd_displaydexinfo's, which is how the game already shows a page in the middle of a battle
+//  when a new daemon registers -- except the page is shown WITHOUT registering anything (reading a record is
+//  not meeting a thing), and the way back is the PARTY MENU's: ReshowBattleScreenAfterMenu rebuilds the whole
+//  screen, both sprites and both healthboxes, where Cmd_displaydexinfo restores only the one sprite its own
+//  flow needs. (CB2_SetUpReshowBattleScreenAfterMenu, despite the name, only clears a bag flag -- setting it
+//  as the main callback is a callback that does nothing, which is a black screen for ever.)
+//  PlayerHandleChooseAction then reprints the menu and hands input back.
+static EWRAM_DATA u8 sIndexReadState = 0;
+static EWRAM_DATA u8 sIndexReadTask = 0;
+
+static void ReadIndexEntryInBattle(void)
+{
+    u16 species = gBattleMons[GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT)].species;
+
+    switch (sIndexReadState)
+    {
+    case 0:
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+        sIndexReadState++;
+        break;
+    case 1:
+        if (!gPaletteFade.active)
+        {
+            FreeAllWindowBuffers();
+            sIndexReadTask = DexScreen_ShowEntryOnly(species);
+            sIndexReadState++;
+        }
+        break;
+    case 2:
+        if (gMain.callback2 == BattleMainCB2 && !gTasks[sIndexReadTask].isActive)
+        {
+            ReshowBattleScreenDummy();
+            FreeAllWindowBuffers();
+            SetCB2ToReshowScreenAfterMenu();
+            sIndexReadState++;
+        }
+        break;
+    case 3:
+        if (gMain.callback2 == BattleMainCB2 && !gPaletteFade.active)
+        {
+            sIndexReadState = 0;
+            PlayerHandleChooseAction();
+        }
+        break;
+    }
+}
+
 static void HandleInputChooseAction(void)
 {
     u16 itemId = gBattleBufferA[gActiveBattler][2] | (gBattleBufferA[gActiveBattler][3] << 8);
@@ -274,6 +329,13 @@ static void HandleInputChooseAction(void)
             break;
         }
         PlayerBufferExecCompleted();
+    }
+    else if (JOY_NEW(L_BUTTON) && !(gBattleTypeFlags & BATTLE_TYPE_LINK))
+    {
+        //  T-179: the record, on the one screen where its thinness is the point.
+        PlaySE(SE_SELECT);
+        sIndexReadState = 0;
+        gBattlerControllerFuncs[gActiveBattler] = ReadIndexEntryInBattle;
     }
     else if (JOY_NEW(DPAD_LEFT))
     {
