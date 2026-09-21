@@ -3241,7 +3241,13 @@ void DexScreen_CreateCategoryPageSpeciesList(u8 categoryNum, u8 pageNum)
     for (i = 0; i < count; i++)
     {
         species = gDexCategories[categoryNum].page[pageNum].species[i];
-        if (DexScreen_CanShowMonInDex(species) == TRUE && DexScreen_GetSetPokedexFlag(species, FLAG_GET_SEEN, TRUE))
+        //  T-185, corrected. Vanilla dropped an unseen daemon from the page entirely and let the survivors
+        //  close the gap, so a page of four you had half-met looked like a page of two and said nothing about
+        //  the rest. A category page holds a habitat group, which is usually one or two whole evolution lines
+        //  -- so the gap IS the information: it says the line goes on. The unseen ones are kept on the page and
+        //  drawn as silhouettes named "-----" (DexScreen_DrawMonPicInCategoryPage), which tells the player
+        //  that something is there without telling them what. Opening one is still refused, as it always was.
+        if (DexScreen_CanShowMonInDex(species) == TRUE)
         {
             sPokedexScreenData->pageSpecies[sPokedexScreenData->numMonsOnPage] = gDexCategories[categoryNum].page[pageNum].species[i];
             sPokedexScreenData->numMonsOnPage++;
