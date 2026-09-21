@@ -14,6 +14,7 @@
 #include "pokedex_screen.h"
 #include "data.h"
 #include "pokedex.h"
+#include "battle_main.h"   // T-191: gTypeNames
 #include "trainer_pokemon_sprites.h"
 #include "decompress.h"
 #include "constants/songs.h"
@@ -2943,6 +2944,27 @@ void DexScreen_DrawMonFootprint(u8 windowId, u16 species, u8 x, u8 y)
     BlitBitmapRectToWindow(windowId, buffer, 0, 0, 16, 16, x, y, 16, 16);
 }
 
+//  T-191: NAME THE MARK. 9.4 claims hue is a label a player can READ, and T-175 put the type's own mark in
+//  the footprint slot -- so this page already states the type twice, in the daemon's colouring and in the mark
+//  beside HT, and never once in words. A player had no way to learn what either of them meant, which left the
+//  chart -- the argument itself (invariant 3) -- legible only to someone who had been told.
+//
+//  The word goes beside the mark and is gated exactly as the mark is: DexScreen_DrawMonFootprint refuses an
+//  uncaught daemon, so the two arrive together and each teaches the other. After a few daemons the mark alone
+//  is enough, which is the whole point of a label.
+//
+//  It names the PRIMARY type, because that is precisely what the mark and the body's colour encode -- a second
+//  type named here would label something the page never shows. The HT line is 42px and the mark begins at 88,
+//  so the gap is 46px and the widest of the eighteen names is 40px at FONT_SMALL.
+static void DexScreen_PrintMonType(u8 windowId, u16 species, u8 x, u8 y)
+{
+    if (!DexScreen_GetSetPokedexFlag(species, FLAG_GET_CAUGHT, TRUE))
+        return;
+
+    DexScreen_AddTextPrinterParameterized(windowId, FONT_SMALL,
+                                          gTypeNames[gSpeciesInfo[species].types[0]], x, y, 0);
+}
+
 static u8 DexScreen_DrawMonDexPage(bool8 justRegistered)
 {
     DexScreen_DexPageZoomEffectFrame(3, 6);
@@ -2968,6 +2990,7 @@ static u8 DexScreen_DrawMonDexPage(bool8 justRegistered)
     DexScreen_PrintMonHeight(sPokedexScreenData->windowIds[1], sPokedexScreenData->dexSpecies, 0, 36);
     DexScreen_PrintMonWeight(sPokedexScreenData->windowIds[1], sPokedexScreenData->dexSpecies, 0, 48);
     DexScreen_DrawMonFootprint(sPokedexScreenData->windowIds[1], sPokedexScreenData->dexSpecies, 88, 40);
+    DexScreen_PrintMonType(sPokedexScreenData->windowIds[1], sPokedexScreenData->dexSpecies, 46, 38);
     PutWindowTilemap(sPokedexScreenData->windowIds[1]);
     CopyWindowToVram(sPokedexScreenData->windowIds[1], COPYWIN_GFX);
 

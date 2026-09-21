@@ -316,7 +316,10 @@ static void ReadIndexEntryInBattle(void)
 //  once, and then gets out of the way for good.
 #define HINT_FRAMES 120
 static EWRAM_DATA u16 sHintFrames = 0;
-static const u8 sText_ButtonHint[] = _("L reads.\nR looks across.");
+//  T-190: both halves name the SCREEN the button opens, which is what the player needs to hear -- and
+//  "perspective" is the thesis's own word, where "looks across" was a paraphrase of it. 47px and 83px
+//  in a 112px prompt.
+static const u8 sText_ButtonHint[] = _("L INDEX.\nR PERSPECTIVE.");
 
 static EWRAM_DATA u8 sPerspectiveState = 0;
 static EWRAM_DATA u16 sPerspectiveSprites[2] = {0xFFFF, 0xFFFF};
