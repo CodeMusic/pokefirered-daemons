@@ -395,6 +395,21 @@ static void PerspectiveInBattle(void)
             //  battle is using most of them) and the pic is loaded straight into it.
             sPerspectivePals[0] = AllocSpritePalette(0xDAE0);
             sPerspectivePals[1] = AllocSpritePalette(0xDAE1);
+            //  AllocSpritePalette answers 0xFF when every slot is taken, and a battle uses most of them. Handing
+            //  that on as a palette INDEX writes a palette past the end of OBJ palette memory, so if either slot
+            //  is refused the look is simply not taken: everything is put back and the menu returns.
+            if (sPerspectivePals[0] == 0xFF || sPerspectivePals[1] == 0xFF)
+            {
+                FreeSpritePaletteByTag(0xDAE0);
+                FreeSpritePaletteByTag(0xDAE1);
+                gSprites[gBattlerSpriteIds[me]].invisible = FALSE;
+                gSprites[gBattlerSpriteIds[them]].invisible = FALSE;
+                SetHealthboxSpriteVisible(gHealthboxSpriteIds[me]);
+                SetHealthboxSpriteVisible(gHealthboxSpriteIds[them]);
+                sPerspectiveState = 0;
+                PlayerHandleChooseAction();
+                return;
+            }
             sPerspectiveSprites[0] = CreateMonPicSprite_HandleDeoxys(gBattleMons[them].species,
                 gBattleMons[them].otId, gBattleMons[them].personality, FALSE, mx, my - 8,
                 sPerspectivePals[0], TAG_NONE);
