@@ -309,6 +309,15 @@ static void ReadIndexEntryInBattle(void)
 //  Done INSIDE the battle rather than by taking the screen: the live sprites and healthboxes are hidden, two
 //  pic sprites are created in their opposite places, and everything is put back on B. Cmd_displaydexinfo's
 //  teardown would have meant rebuilding the whole battle to show a still of it.
+//  T-180a: TELLING THE PLAYER THE BUTTONS ARE THERE, which is the one weakness of putting the two most
+//  interesting things in the game on L and R. Neither battle window has a spare line -- both are four tiles
+//  tall, which is two lines, and the prompt's are already "What will / ARTSAI do?" -- so a permanent label
+//  would have to displace the question. This takes the prompt for the first two seconds of a battle instead,
+//  once, and then gets out of the way for good.
+#define HINT_FRAMES 120
+static EWRAM_DATA u16 sHintFrames = 0;
+static const u8 sText_ButtonHint[] = _("L reads.\nR looks across.");
+
 static EWRAM_DATA u8 sPerspectiveState = 0;
 static EWRAM_DATA u16 sPerspectiveSprites[2] = {0xFFFF, 0xFFFF};
 static EWRAM_DATA u8 sPerspectivePals[2] = {0, 0};
@@ -425,6 +434,11 @@ static void HandleInputChooseAction(void)
 
     DoBounceEffect(gActiveBattler, BOUNCE_HEALTHBOX, 7, 1);
     DoBounceEffect(gActiveBattler, BOUNCE_MON, 7, 1);
+    if (sHintFrames != 0 && --sHintFrames == 0)     // the hint's two seconds are up; ask the question
+    {
+        BattleStringExpandPlaceholdersToDisplayedString(gText_WhatWillPkmnDo);
+        BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_ACTION_PROMPT);
+    }
 #if DAEMONS_DEBUG
     if (JOY_NEW(SELECT_BUTTON) && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_DOUBLE)))
     {
@@ -2688,8 +2702,15 @@ static void PlayerHandleChooseAction(void)
     for (i = 0; i < 4; ++i)
         ActionSelectionDestroyCursorAt(i);
     ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBattler], 0);
-    BattleStringExpandPlaceholdersToDisplayedString(gText_WhatWillPkmnDo);
-    BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_ACTION_PROMPT);
+    if (sHintFrames != 0)
+    {
+        BattlePutTextOnWindow(sText_ButtonHint, B_WIN_ACTION_PROMPT);
+    }
+    else
+    {
+        BattleStringExpandPlaceholdersToDisplayedString(gText_WhatWillPkmnDo);
+        BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_ACTION_PROMPT);
+    }
 }
 
 static void PlayerHandleUnknownYesNoBox(void)
@@ -2970,6 +2991,7 @@ static void PlayerHandleFaintingCry(void)
 
 static void PlayerHandleIntroSlide(void)
 {
+    sHintFrames = HINT_FRAMES;          // T-180a: once a battle, and only the first action menu of it
     HandleIntroSlide(gBattleBufferA[gActiveBattler][1]);
     gIntroSlideFlags |= 1;
     PlayerBufferExecCompleted();
