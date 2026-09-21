@@ -4,6 +4,7 @@
 #include "item.h"
 #include "item_menu.h"
 #include "pokedex.h"
+#include "trainer_pokemon_sprites.h"
 #include "link.h"
 #include "m4a.h"
 #include "party_menu.h"
@@ -296,6 +297,128 @@ static void ReadIndexEntryInBattle(void)
     }
 }
 
+//  T-179a, R = PERSPECTIVE. 9.2's move is "become another thing for a while"; this is the same idea as a look.
+//
+//  The fight is redrawn FROM THE OTHER SIDE -- their back where yours stands, your daemon's face where theirs
+//  does, both drawn from art every species already has -- and the line under it is the point: from over there
+//  THEIR hit points are exact and YOURS are only described, because that is what each side actually knows. The
+//  asymmetry is the content. Nobody is told so (craft rule 1); it is simply what the screen says.
+//
+//  It costs nothing. Charging for it would make a player ration the one thing this game keeps asking them to do.
+//
+//  Done INSIDE the battle rather than by taking the screen: the live sprites and healthboxes are hidden, two
+//  pic sprites are created in their opposite places, and everything is put back on B. Cmd_displaydexinfo's
+//  teardown would have meant rebuilding the whole battle to show a still of it.
+static EWRAM_DATA u8 sPerspectiveState = 0;
+static EWRAM_DATA u16 sPerspectiveSprites[2] = {0xFFFF, 0xFFFF};
+static EWRAM_DATA u8 sPerspectivePals[2] = {0, 0};
+
+//  Every piece of this line is a file-scope string: the _() macro is handled by the build's text
+//  preprocessor, which does not see one written inside an expression.
+//  Every piece of this is a file-scope string: the _() macro is handled by the build's text preprocessor,
+//  which does not see one written inside an expression.
+static const u8 sText_PerspOf[] = _(" of ");
+static const u8 sText_PerspBreak[] = _("\n");
+static const u8 sText_PerspBand0[] = _("barely up");
+static const u8 sText_PerspBand1[] = _("badly hurt");
+static const u8 sText_PerspBand2[] = _("hurt");
+static const u8 sText_PerspBand3[] = _("marked");
+static const u8 sText_PerspBand4[] = _("untouched");
+
+static const u8 *const sPerspectiveBands[] = {
+    sText_PerspBand0, sText_PerspBand1, sText_PerspBand2, sText_PerspBand3, sText_PerspBand4
+};
+
+//  TWO ACCOUNTS, SIDE BY SIDE, in the two windows that are actually on screen while an action is chosen.
+//  B_WIN_MSG is not drawn in this state at all (two attempts printed into nothing), and the prompt box is
+//  about eleven characters wide -- "What will / ARTSAI do?" is its whole budget.
+//
+//  Left, where the question was: THEIR daemon and its hit points to the number. Right, where the menu was:
+//  OURS, and only the shape of it. That is what each side knows, and the difference is the whole of it.
+static void PutPerspectiveText(u8 me, u8 them)
+{
+    u32 den = gBattleMons[me].maxHP;
+    u8 band = (den == 0) ? 0 : (gBattleMons[me].hp * 5) / den;
+
+    if (band > 4)
+        band = 4;
+
+    ConvertIntToDecimalStringN(gStringVar2, gBattleMons[them].hp, STR_CONV_MODE_LEFT_ALIGN, 3);
+    ConvertIntToDecimalStringN(gStringVar3, gBattleMons[them].maxHP, STR_CONV_MODE_LEFT_ALIGN, 3);
+
+    StringCopy(gDisplayedStringBattle, gBattleMons[them].nickname);
+    StringAppend(gDisplayedStringBattle, sText_PerspBreak);
+    StringAppend(gDisplayedStringBattle, gStringVar2);
+    StringAppend(gDisplayedStringBattle, sText_PerspOf);
+    StringAppend(gDisplayedStringBattle, gStringVar3);
+    BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_ACTION_PROMPT);
+
+    StringCopy(gDisplayedStringBattle, gBattleMons[me].nickname);
+    StringAppend(gDisplayedStringBattle, sText_PerspBreak);
+    StringAppend(gDisplayedStringBattle, sPerspectiveBands[band]);
+    BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_ACTION_MENU);
+}
+
+static void PerspectiveInBattle(void)
+{
+    u8 me = gActiveBattler;
+    u8 them = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
+
+    switch (sPerspectiveState)
+    {
+    case 0:
+        {
+            s16 mx = gSprites[gBattlerSpriteIds[me]].x;
+            s16 my = gSprites[gBattlerSpriteIds[me]].y;
+            s16 tx = gSprites[gBattlerSpriteIds[them]].x;
+            s16 ty = gSprites[gBattlerSpriteIds[them]].y;
+
+            gSprites[gBattlerSpriteIds[me]].invisible = TRUE;
+            gSprites[gBattlerSpriteIds[them]].invisible = TRUE;
+            SetHealthboxSpriteInvisible(gHealthboxSpriteIds[me]);
+            SetHealthboxSpriteInvisible(gHealthboxSpriteIds[them]);
+
+            //  theirs, from behind, standing where ours stands; ours, facing us, where theirs stood.
+            //
+            //  THE SLOTS ARE ALLOCATED, NOT CHOSEN. CreatePicSprite only sets a sprite's paletteNum when the
+            //  tag is TAG_NONE -- hand it a real tag and the sprite keeps whatever the shared template last
+            //  had, which is two black silhouettes. So the slot is reserved through the palette manager (the
+            //  battle is using most of them) and the pic is loaded straight into it.
+            sPerspectivePals[0] = AllocSpritePalette(0xDAE0);
+            sPerspectivePals[1] = AllocSpritePalette(0xDAE1);
+            sPerspectiveSprites[0] = CreateMonPicSprite_HandleDeoxys(gBattleMons[them].species,
+                gBattleMons[them].otId, gBattleMons[them].personality, FALSE, mx, my - 8,
+                sPerspectivePals[0], TAG_NONE);
+            sPerspectiveSprites[1] = CreateMonPicSprite_HandleDeoxys(gBattleMons[me].species,
+                gBattleMons[me].otId, gBattleMons[me].personality, TRUE, tx, ty,
+                sPerspectivePals[1], TAG_NONE);
+
+            PutPerspectiveText(me, them);
+            sPerspectiveState++;
+        }
+        break;
+    case 1:
+        if (JOY_NEW(B_BUTTON) || JOY_NEW(R_BUTTON))
+        {
+            PlaySE(SE_SELECT);
+            if (sPerspectiveSprites[0] != 0xFFFF)
+                FreeAndDestroyMonPicSprite(sPerspectiveSprites[0]);
+            if (sPerspectiveSprites[1] != 0xFFFF)
+                FreeAndDestroyMonPicSprite(sPerspectiveSprites[1]);
+            sPerspectiveSprites[0] = sPerspectiveSprites[1] = 0xFFFF;
+            FreeSpritePaletteByTag(0xDAE0);
+            FreeSpritePaletteByTag(0xDAE1);
+            gSprites[gBattlerSpriteIds[me]].invisible = FALSE;
+            gSprites[gBattlerSpriteIds[them]].invisible = FALSE;
+            SetHealthboxSpriteVisible(gHealthboxSpriteIds[me]);
+            SetHealthboxSpriteVisible(gHealthboxSpriteIds[them]);
+            sPerspectiveState = 0;
+            PlayerHandleChooseAction();
+        }
+        break;
+    }
+}
+
 static void HandleInputChooseAction(void)
 {
     u16 itemId = gBattleBufferA[gActiveBattler][2] | (gBattleBufferA[gActiveBattler][3] << 8);
@@ -336,6 +459,13 @@ static void HandleInputChooseAction(void)
         PlaySE(SE_SELECT);
         sIndexReadState = 0;
         gBattlerControllerFuncs[gActiveBattler] = ReadIndexEntryInBattle;
+    }
+    else if (JOY_NEW(R_BUTTON) && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_DOUBLE)))
+    {
+        //  T-179a: the same fight, from the other side.
+        PlaySE(SE_SELECT);
+        sPerspectiveState = 0;
+        gBattlerControllerFuncs[gActiveBattler] = PerspectiveInBattle;
     }
     else if (JOY_NEW(DPAD_LEFT))
     {
