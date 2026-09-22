@@ -1066,6 +1066,7 @@ extern const u8 gText_Lbs[];
 extern const u8 gText_Cry[];
 extern const u8 gText_NextDataCancel[];
 extern const u8 gText_MarginNextDataCancel[];   // T-197
+extern const u8 gText_MarginNext[];
 extern const u8 gText_Next[];
 extern const u8 gText_CancelPreviousData[];
 extern const u8 gText_Area[];

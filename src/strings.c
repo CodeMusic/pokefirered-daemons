@@ -101,6 +101,7 @@ const u8 gText_NextDataCancel[] = _("{A_BUTTON}NEXT DATA {B_BUTTON}CANCEL");
 //  T-197: shown in place of the line above, but only on an entry that HAS a margin -- which is also
 //  how a player finds out OPUS does anything. Nothing else in the game mentions it.
 const u8 gText_MarginNextDataCancel[] = _("{SELECT_BUTTON}MARGIN {A_BUTTON}NEXT {B_BUTTON}CANCEL");
+const u8 gText_MarginNext[] = _("{SELECT_BUTTON}MARGIN {A_BUTTON}NEXT");
 const u8 gText_Next[] = _("{A_BUTTON}NEXT");
 const u8 gText_CancelPreviousData[] = _("{A_BUTTON}CANCEL {B_BUTTON}PREVIOUS DATA");
 const u8 gText_Area[] = _("AREA");

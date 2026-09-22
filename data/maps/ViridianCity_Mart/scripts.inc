@@ -126,6 +126,15 @@ ViridianCity_Mart_EventScript_Shelf3::
 	releaseall
 	end
 
+@  T-197b: AND IT HAD TO BE REACHABLE. The shelf end was at (4,6), whose only two approaches are (4,7) --
+@  one of this shop's three warp tiles, so standing there walks you out of the door -- and (3,6), which is
+@  where the watcher was put. Between them the thing was unreachable in practice, and the user went to CALLOW
+@  and could not find it. The sign is on (4,5) now, the top of the same block, read from (3,5): free floor,
+@  no warp, and directly above the watcher so talking to her leaves you one step from it.
+@
+@  READ THE WARPS, not just the collision. gbamaptiles.py answers which tiles are solid and says nothing
+@  about which walkable ones are doors, and a door is not somewhere a player can stand.
+@
 @  T-197a: THE CUE IS A PERSON'S ATTENTION, NOT A MARKER.
 @
 @  Nothing in the room was visible, and the user asked the right question: nobody presses A on a shelf. The

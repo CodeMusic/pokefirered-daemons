@@ -1912,6 +1912,7 @@ static int DexScreen_InputHandler_GetShoulderInput(void)
 }
 
 void DexScreen_PrintMonFlavorText(u8 windowId, u16 species, u8 x, u8 y);   // defined below
+static void DexScreen_PrintMonType(u8 windowId, u16 species);             // defined below
 
 //  T-197: OPUS. Something found on a shelf with no price on it, which writes ONE LINE under an entry. It does
 //  not repair the Index -- 4.2's point is that the artifact can only measure content and has no field for what
@@ -1987,11 +1988,27 @@ static void DexScreen_DrawMarginOrEntry(u16 species)
     u8 state = OpusMarginState(species);
 
     FillWindowPixelBuffer(sPokedexScreenData->windowIds[2], PIXEL_FILL(0));
+    DexScreen_PrintMonType(sPokedexScreenData->windowIds[2], species);
     if (sMarginShown && state != OPUS_MARGIN_NONE)
     {
-        DexScreen_AddTextPrinterParameterized(sPokedexScreenData->windowIds[2], FONT_NORMAL,
-                                              state == OPUS_MARGIN_CARRIED ? margin->carried : margin->neglected,
-                                              0, 8, 0);
+        //  T-197c: the entry is CENTRED -- DexScreen_PrintMonFlavorText computes x + (240 - width) / 2 -- and
+        //  the margin was printed flush at x=0, so it sat hard against the frame while the entry above it did
+        //  not. Same centring, same letterSpacing, same colours: it has to look like it belongs to the page.
+        const u8 *text = (state == OPUS_MARGIN_CARRIED) ? margin->carried : margin->neglected;
+        struct TextPrinterTemplate printerTemplate;
+
+        printerTemplate.currentChar = text;
+        printerTemplate.windowId = sPokedexScreenData->windowIds[2];
+        printerTemplate.fontId = FONT_NORMAL;
+        printerTemplate.letterSpacing = 1;
+        printerTemplate.lineSpacing = 0;
+        printerTemplate.unk = 0;
+        printerTemplate.fgColor = 1;
+        printerTemplate.bgColor = 0;
+        printerTemplate.shadowColor = 2;
+        printerTemplate.x = printerTemplate.currentX = (240 - GetStringWidth(FONT_NORMAL, text, 0)) / 2;
+        printerTemplate.y = printerTemplate.currentY = 8;
+        AddTextPrinter(&printerTemplate, 0, NULL);
     }
     else
     {
@@ -3055,15 +3072,23 @@ void DexScreen_DrawMonFootprint(u8 windowId, u16 species, u8 x, u8 y)
 //  is enough, which is the whole point of a label.
 //
 //  It names the PRIMARY type, because that is precisely what the mark and the body's colour encode -- a second
-//  type named here would label something the page never shows. The HT line is 42px and the mark begins at 88,
-//  so the gap is 46px and the widest of the eighteen names is 40px at FONT_SMALL.
-static void DexScreen_PrintMonType(u8 windowId, u16 species, u8 x, u8 y)
+//  type named here would label something the page never shows.
+//
+//  T-191a: IT WENT ON THE HT ROW FIRST AND LANDED ON TOP OF THE HEIGHT. I measured "HT  2'04\"" at 42px and
+//  took the gap to the mark at 88 as free, but the height's digits are not printed after the label -- they are
+//  placed out at the right of that row by the buffer DexScreen_PrintMonHeight builds, so the row is full. The
+//  stats window has no free horizontal space on any of its four rows.
+//
+//  The entry box does: it is 240 wide and its text starts at y=8, so the strip above it is empty on every
+//  entry in the game. The label sits there, which also puts it beside the entry it belongs to rather than
+//  among the measurements. Drawn from DexScreen_DrawMarginOrEntry so it survives the page being turned over.
+static void DexScreen_PrintMonType(u8 windowId, u16 species)
 {
     if (!DexScreen_GetSetPokedexFlag(species, FLAG_GET_CAUGHT, TRUE))
         return;
 
     DexScreen_AddTextPrinterParameterized(windowId, FONT_SMALL,
-                                          gTypeNames[gSpeciesInfo[species].types[0]], x, y, 0);
+                                          gTypeNames[gSpeciesInfo[species].types[0]], 4, 0, 0);
 }
 
 static u8 DexScreen_DrawMonDexPage(bool8 justRegistered)
@@ -3091,13 +3116,12 @@ static u8 DexScreen_DrawMonDexPage(bool8 justRegistered)
     DexScreen_PrintMonHeight(sPokedexScreenData->windowIds[1], sPokedexScreenData->dexSpecies, 0, 36);
     DexScreen_PrintMonWeight(sPokedexScreenData->windowIds[1], sPokedexScreenData->dexSpecies, 0, 48);
     DexScreen_DrawMonFootprint(sPokedexScreenData->windowIds[1], sPokedexScreenData->dexSpecies, 88, 40);
-    DexScreen_PrintMonType(sPokedexScreenData->windowIds[1], sPokedexScreenData->dexSpecies, 46, 38);
     PutWindowTilemap(sPokedexScreenData->windowIds[1]);
     CopyWindowToVram(sPokedexScreenData->windowIds[1], COPYWIN_GFX);
 
     // Dex entry
-    FillWindowPixelBuffer(sPokedexScreenData->windowIds[2], PIXEL_FILL(0));
-    DexScreen_PrintMonFlavorText(sPokedexScreenData->windowIds[2], sPokedexScreenData->dexSpecies, 0, 8);
+    sMarginShown = FALSE;
+    DexScreen_DrawMarginOrEntry(sPokedexScreenData->dexSpecies);
     PutWindowTilemap(sPokedexScreenData->windowIds[2]);
     CopyWindowToVram(sPokedexScreenData->windowIds[2], COPYWIN_GFX);
 
@@ -3111,8 +3135,11 @@ static u8 DexScreen_DrawMonDexPage(bool8 justRegistered)
                                    ? gText_MarginNextDataCancel : gText_NextDataCancel);
     }
     else
-        // Just registered
-        DexScreen_PrintControlInfo(gText_Next);
+        //  Just registered -- and the same page L = READ opens mid-fight (T-179), so the margin has to be
+        //  reachable from there as well. The user asked for it from the battle and was right: the Index is
+        //  the Index whichever door you came in by.
+        DexScreen_PrintControlInfo(OpusMarginState(sPokedexScreenData->dexSpecies) != OPUS_MARGIN_NONE
+                                   ? gText_MarginNext : gText_Next);
     PutWindowTilemap(1);
     CopyWindowToVram(1, COPYWIN_GFX);
 
@@ -3593,8 +3620,16 @@ static void Task_DexScreen_RegisterMonToPokedex(u8 taskId)
         }
         break;
     case 11:
-        if (JOY_NEW(A_BUTTON | B_BUTTON))
+        if (JOY_NEW(SELECT_BUTTON) && OpusMarginState(sPokedexScreenData->dexSpecies) != OPUS_MARGIN_NONE)
+        {
+            PlaySE(SE_SELECT);
+            sMarginShown = !sMarginShown;
+            DexScreen_DrawMarginOrEntry(sPokedexScreenData->dexSpecies);
+        }
+        else if (JOY_NEW(A_BUTTON | B_BUTTON))
+        {
             sPokedexScreenData->state = 2;
+        }
         break;
     }
 }
