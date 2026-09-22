@@ -24,6 +24,23 @@ static u8 *MapNamePopupAppendFloorNum(u8 *dest, s8 flags);
 #define tWindowDestroyed    data[7]
 #define tPalIntoFadedBuffer data[8]
 
+//  T-196: AN ECHO SHOULD NOT LOOK LIKE AN EVENT. R says the last field line again, and in the ordinary
+//  message box that is indistinguishable from something happening now -- which matters most in exactly the
+//  case the feature exists for, a player who missed a line and is not sure whether they just triggered
+//  something.
+//
+//  The label goes in the MAP NAME POPUP rather than in a window of its own. The popup is already a framed
+//  label that slides in at the top, it owns its tiles and its palette, and its task handles the slide out --
+//  so a new window would mean a new baseBlock guessed against the field's own, which is how a tilemap gets
+//  corrupted in a way only playing it shows. The message box is at the bottom; the label is at the top;
+//  nothing overlaps.
+//
+//  FRLG has no sign-style box to borrow (Emerald's MSGBOX_SIGN does not exist here), and prefixing the text
+//  was the other candidate: the box holds two lines, most field lines use both, and a prefix pushes the
+//  second one out of the frame.
+//  T-196: set for one popup, consumed by the printer.
+static EWRAM_DATA const u8 *sPopupOverride = NULL;
+
 void ShowMapNamePopup(bool32 palIntoFadedBuffer)
 {
     u8 taskId;
@@ -46,6 +63,14 @@ void ShowMapNamePopup(bool32 palIntoFadedBuffer)
             gTasks[taskId].tReshow = TRUE;
         }
     }
+}
+
+void ShowFieldLabelPopup(const u8 *text)
+{
+    sPopupOverride = text;
+    ShowMapNamePopup(FALSE);
+    if (FindTaskIdByFunc(Task_MapNamePopup) == TASK_NONE)
+        sPopupOverride = NULL;         // refused (quest log playback, or the flag): do not leave it armed
 }
 
 static void Task_MapNamePopup(u8 taskId)
@@ -191,7 +216,20 @@ static void MapNamePopupPrintMapNameOnWindow(u16 windowId)
     u8 mapName[25];
     u32 maxWidth = 112;
     u32 xpos;
-    u8 *ptr = GetMapName(mapName, gMapHeader.regionMapSectionId, 0);
+    u8 *ptr;
+
+    if (sPopupOverride != NULL)
+    {
+        //  The override is consumed here rather than on teardown, so a map popup that happens to follow an
+        //  echo shows the map's own name.
+        xpos = (maxWidth - GetStringWidth(FONT_NORMAL, sPopupOverride, -1)) / 2;
+        FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
+        AddTextPrinterParameterized(windowId, FONT_NORMAL, sPopupOverride, xpos, 2, TEXT_SKIP_DRAW, NULL);
+        sPopupOverride = NULL;
+        return;
+    }
+
+    ptr = GetMapName(mapName, gMapHeader.regionMapSectionId, 0);
     if (gMapHeader.floorNum != 0)
     {
         ptr = MapNamePopupAppendFloorNum(ptr, gMapHeader.floorNum);

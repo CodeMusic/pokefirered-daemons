@@ -404,7 +404,18 @@ static void SetUpStartMenu_NormalField(void)
     AppendToStartMenuItems(STARTMENU_DEBUG);
 #endif
     AppendToStartMenuItems(STARTMENU_HELP);
-    AppendToStartMenuItems(STARTMENU_EXIT);
+    //  T-192: EIGHT ROWS DO NOT FIT, and the arithmetic is not close. CreateStartMenuWindow makes a window of
+    //  (items * 2 - 1) tiles at tilemapTop 1, and DrawStdWindowFrame puts a border row either side -- so eight
+    //  items occupy rows 0 to 16 while the description banner starts at row 15. Seven is vanilla's number and
+    //  vanilla's fit exactly.
+    //
+    //  So one row goes, and EXIT is the one that costs nothing: B and START both close the menu, every other
+    //  row does something the player cannot do another way, and the banner spends its two lines explaining
+    //  rows -- of which EXIT's was the only one explaining what the buttons already say.
+    //
+    //  The alternative was to keep EXIT and cut all six vanilla descriptions to one line, since a 3-tile
+    //  banner would free the row. They run 370-406px against a 224px line, so that is six rewrites of
+    //  translated copy rather than a layout fix, and it is the user's call rather than a tool's.
 }
 
 static void SetUpStartMenu_SafariZone(void)

@@ -22,6 +22,10 @@
 //  T-179's R = AGAIN ships, so these three are NOT inside the debug guard above -- the handler uses
 //  GetLastFieldMessage, StringCopy and PlaySE in every build.
 #include "field_message_box.h"
+#include "map_name_popup.h"
+
+// T-196: the label the popup carries while an echo is on screen.
+static const u8 sText_Echo[] = _("ECHO");
 #include "string_util.h"
 #include "sound.h"
 #include "field_fadetransition.h"
@@ -468,6 +472,7 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
         {
             StringCopy(gStringVar4, last);
             PlaySE(SE_SELECT);
+            ShowFieldLabelPopup(sText_Echo);   // T-196: say that it is a repeat, where the text cannot
             ScriptContext_SetupScript(Daemons_EventScript_Again);
             return TRUE;
         }
