@@ -108,7 +108,7 @@ static const u8 sOpusMargin_Sentry_Neglected[] = _("It is still watching. Nobody
 static const u8 sOpusMargin_Loop_Carried[] = _("You have not told it when to stop either.");
 static const u8 sOpusMargin_Loop_Neglected[] = _("Still going round. Nobody has come back\nto it.");
 
-static const u8 sOpusMargin_Driftnet_Carried[] = _("It has caught a great deal. None of it\nwas aimed at.");
+static const u8 sOpusMargin_Driftnet_Carried[] = _("It has taken a great deal. None of it was\naimed at.");
 static const u8 sOpusMargin_Driftnet_Neglected[] = _("There is no current in there.");
 
 static const u8 sOpusMargin_Latency_Carried[] = _("You have waited for it. It was right\nevery time.");
