@@ -398,9 +398,10 @@ static const u32 *const sItemIconTable[ITEMS_COUNT + 1][2] =
     [ITEM_POWDER_JAR]     = {gItemIcon_PowderJar, gItemIconPalette_PowderJar},
     [ITEM_RUBY]           = {gItemIcon_Gem, gItemIconPalette_Ruby},
     [ITEM_SAPPHIRE]       = {gItemIcon_Gem, gItemIconPalette_Sapphire},
-    //  T-197: OPUS borrows the UP-GRADE's icon -- a small device, and an addition to something, which is
-    //  what it is. Its own 24x24 drawing is a follow-up and is listed as one.
-    [ITEM_OPUS]           = {gItemIcon_UpGrade, gItemIconPalette_UpGrade},
+    //  T-197: an index card, one ruled margin, and a single mark written in it. An opus number is how a
+    //  catalogue files a work, so the object is the catalogue's own stationery -- and the mark is the
+    //  boldest thing on it, because it is the whole of what OPUS does.
+    [ITEM_OPUS]           = {gItemIcon_Opus, gItemIconPalette_Opus},
     // Return to field arrow
     [ITEMS_COUNT]         = {gItemIcon_ReturnToFieldArrow, gItemIconPalette_ReturnToFieldArrow},
 };

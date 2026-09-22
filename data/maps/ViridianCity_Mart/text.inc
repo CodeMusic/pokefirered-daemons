@@ -47,3 +47,11 @@ ViridianCity_Mart_Text_Shelf2::
 ViridianCity_Mart_Text_Shelf3::
     .string "The prices are on the shelf, not on\n"
     .string "the things.$"
+
+ViridianCity_Mart_Text_ShelfWatcher::
+    .string "That one on the end has no price\n"
+    .string "on it. I asked.\p"
+    .string "They said it is not theirs.$"
+
+ViridianCity_Mart_Text_ShelfWatcherAfter::
+    .string "It has gone. Nobody rang it up.$"

@@ -125,3 +125,28 @@ ViridianCity_Mart_EventScript_Shelf3::
 	msgbox ViridianCity_Mart_Text_Shelf3
 	releaseall
 	end
+
+@  T-197a: THE CUE IS A PERSON'S ATTENTION, NOT A MARKER.
+@
+@  Nothing in the room was visible, and the user asked the right question: nobody presses A on a shelf. The
+@  layout is no help -- every tile in LAYOUT_MART is a unique bespoke metatile, so there is no spare shelf
+@  tile to swap in and no way to draw "something is on this one" without redrawing the shelf.
+@
+@  An item ball would have been the obvious answer and is the wrong one: it announces a prize, which is the
+@  marker-over-its-head this was written to avoid. So the cue is someone standing in the aisle looking at the
+@  end of the shelf. Players talk to everyone, and talking to her leaves you standing at it.
+@
+@  She says that something unpriced is there and that the shop does not own it. She does not say what it is,
+@  and who left it is still never answered.
+ViridianCity_Mart_EventScript_ShelfWatcher::
+	lock
+	faceplayer
+	goto_if_set FLAG_GOT_OPUS, ViridianCity_Mart_EventScript_ShelfWatcherAfter
+	msgbox ViridianCity_Mart_Text_ShelfWatcher, MSGBOX_DEFAULT
+	release
+	end
+
+ViridianCity_Mart_EventScript_ShelfWatcherAfter::
+	msgbox ViridianCity_Mart_Text_ShelfWatcherAfter, MSGBOX_DEFAULT
+	release
+	end

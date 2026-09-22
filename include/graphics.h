@@ -3162,6 +3162,8 @@ extern const u32 gItemIconPalette_DragonFang[];
 extern const u32 gItemIcon_SilkScarf[];
 extern const u32 gItemIconPalette_SilkScarf[];
 extern const u32 gItemIcon_UpGrade[];
+extern const u32 gItemIcon_Opus[];        // T-197
+extern const u32 gItemIconPalette_Opus[];
 extern const u32 gItemIconPalette_UpGrade[];
 extern const u32 gItemIcon_ShellBell[];
 extern const u32 gItemIconPalette_Shell[];
