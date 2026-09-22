@@ -106,6 +106,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Celio;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TeachyTVHost;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GymGuy;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_ItemBall;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PluginDisc;   // T-208
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TownMap;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Pokedex;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CutTree;
@@ -316,6 +317,7 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_TEACHY_TV_HOST]           = &gObjectEventGraphicsInfo_TeachyTVHost,
     [OBJ_EVENT_GFX_GYM_GUY]                  = &gObjectEventGraphicsInfo_GymGuy,
     [OBJ_EVENT_GFX_ITEM_BALL]                = &gObjectEventGraphicsInfo_ItemBall,
+    [OBJ_EVENT_GFX_PLUGIN_DISC]              = &gObjectEventGraphicsInfo_PluginDisc,
     [OBJ_EVENT_GFX_TOWN_MAP]                 = &gObjectEventGraphicsInfo_TownMap,
     [OBJ_EVENT_GFX_POKEDEX]                  = &gObjectEventGraphicsInfo_Pokedex,
     [OBJ_EVENT_GFX_CUT_TREE]                 = &gObjectEventGraphicsInfo_CutTree,

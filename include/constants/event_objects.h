@@ -272,7 +272,13 @@
 #define OBJ_EVENT_GFX_DAEMON_SLOWPOKE_S3 219
 #define OBJ_EVENT_GFX_DAEMON_SNORLAX_SSPECIAL 220
 
-#define NUM_OBJ_EVENT_GFX     221
+//  T-208: a PLUGIN or DRIVER on the ground. 221-239 are free between the daemon slots and the VARS.
+#define OBJ_EVENT_GFX_PLUGIN_DISC 221
+
+//  T-208: 222 now, because the PLUGIN DISC is id 221 and this bounds the pointer table. Adding a
+//  graphics id without moving this is an "excess elements in array initializer" warning, which agbcc
+//  treats as an error and which does not name the thing that is one too many.
+#define NUM_OBJ_EVENT_GFX     222
 
 // These are dynamic object gfx ids.
 // They correspond with the values of the VAR_OBJ_GFX_ID_X vars.
