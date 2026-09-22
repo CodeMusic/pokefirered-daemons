@@ -39,6 +39,16 @@ struct TestingBar
 //  Giving the other three one means adding a fourth row of tiles to healthbox_elements.png, which is a
 //  change to the size of an INCBIN'd blob and wants looking at on a screen before it ships.
 #define B_INTERFACE_GFX_STATUS_THRASH_BATTLER0  36
+//  T-187a: and the other three, in a fourth row the sheet did not have. gBattleInterface_Gfx is declared
+//  [][32] and indexed by tile, and nothing anywhere counts them, so a longer blob costs only ROM.
+//
+//  The four variants are NOT four shapes -- they are one shape in four palette slots. This function does
+//  `pltAdder += battlerId + 12` and fills a single entry, so battler 0's ground is nibble 12 and battler
+//  3's is 15. Copying battler 0's tiles for everyone would have drawn each opponent's badge in whatever
+//  colour that slot happened to be holding.
+#define B_INTERFACE_GFX_STATUS_THRASH_BATTLER1  120
+#define B_INTERFACE_GFX_STATUS_THRASH_BATTLER2  123
+#define B_INTERFACE_GFX_STATUS_THRASH_BATTLER3  126
 #define B_INTERFACE_GFX_STATUS_NONE             39
 // tiles 40 through 42 are unused
 #define B_INTERFACE_GFX_SAFARI_HEALTHBOX_0      43
@@ -1673,9 +1683,9 @@ static void UpdateStatusIconInHealthbox(u8 healthboxSpriteId)
     //  cannot see that their daemon is in one cannot reason about it. Marking EVERY volatile state would
     //  make this a dashboard, so the line is drawn where it means something: the healthbox NAMES what
     //  follows a daemon out of the battle and MARKS what does not. Last, so a major status still wins.
-    else if (battlerId == 0 && (gBattleMons[battlerId].status2 & STATUS2_CONFUSION))
+    else if (gBattleMons[battlerId].status2 & STATUS2_CONFUSION)
     {
-        statusGfxPtr = GetBattleInterfaceGfxPtr(B_INTERFACE_GFX_STATUS_THRASH_BATTLER0);
+        statusGfxPtr = GetBattleInterfaceGfxPtr(GetStatusIconForBattlerId(B_INTERFACE_GFX_STATUS_THRASH_BATTLER0, battlerId));
         statusPalId = PAL_STATUS_THRASH;
     }
     else
@@ -1742,6 +1752,16 @@ static u8 GetStatusIconForBattlerId(u8 statusElementId, u8 battlerId)
             ret = B_INTERFACE_GFX_STATUS_PAR_BATTLER2;
         else
             ret = B_INTERFACE_GFX_STATUS_PAR_BATTLER3;
+        break;
+    case B_INTERFACE_GFX_STATUS_THRASH_BATTLER0:
+        if (battlerId == 0)
+            ret = B_INTERFACE_GFX_STATUS_THRASH_BATTLER0;
+        else if (battlerId == 1)
+            ret = B_INTERFACE_GFX_STATUS_THRASH_BATTLER1;
+        else if (battlerId == 2)
+            ret = B_INTERFACE_GFX_STATUS_THRASH_BATTLER2;
+        else
+            ret = B_INTERFACE_GFX_STATUS_THRASH_BATTLER3;
         break;
     case B_INTERFACE_GFX_STATUS_SLP_BATTLER0:
         if (battlerId == 0)
