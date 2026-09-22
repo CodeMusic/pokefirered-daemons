@@ -6,6 +6,8 @@
 #include "quest_log.h"
 #include "region_map.h"
 #include "strings.h"
+#include "map_name_popup.h"
+#include "constants/maps.h"
 
 #define FLOOR_ROOFTOP 127
 
@@ -67,10 +69,41 @@ void ShowMapNamePopup(bool32 palIntoFadedBuffer)
 
 void ShowFieldLabelPopup(const u8 *text)
 {
+    ShowMapLabelPopup(text, FALSE);
+}
+
+void ShowMapLabelPopup(const u8 *text, bool32 palIntoFadedBuffer)
+{
     sPopupOverride = text;
-    ShowMapNamePopup(FALSE);
+    ShowMapNamePopup(palIntoFadedBuffer);
     if (FindTaskIdByFunc(Task_MapNamePopup) == TASK_NONE)
         sPopupOverride = NULL;         // refused (quest log playback, or the flag): do not leave it armed
+}
+
+//  T-215: A SCHOOL FLOOR NAMES ITS SUBJECT AS YOU ARRIVE, the way a town names itself.
+//
+//  The brief: the section name must be readable "right away", without pressing anything. Vanilla's popup
+//  already does exactly that for towns -- but it only fires when the map SECTION changes, and walking in
+//  from CALLOW does not change it. So a floor with a subject gets a label of its own, keyed by map.
+//  Every floor added later is one row here.
+static const u8 sText_Floor_Language[] = _("1F  LANGUAGE");
+
+static const struct { u16 map; const u8 *label; } sFloorLabels[] =
+{
+    { MAP_VIRIDIAN_CITY_SCHOOL, sText_Floor_Language },
+};
+
+const u8 *GetMapFloorLabel(void)
+{
+    u32 i;
+    u16 map = (gSaveBlock1Ptr->location.mapGroup << 8) | gSaveBlock1Ptr->location.mapNum;
+
+    for (i = 0; i < ARRAY_COUNT(sFloorLabels); i++)
+    {
+        if (sFloorLabels[i].map == map)
+            return sFloorLabels[i].label;
+    }
+    return NULL;
 }
 
 static void Task_MapNamePopup(u8 taskId)

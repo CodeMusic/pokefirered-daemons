@@ -1693,7 +1693,9 @@ void CB2_ReturnToFieldFromDiploma(void)
 
 static void FieldCB_ShowMapNameOnContinue(void)
 {
-    if (gMapHeader.showMapName == TRUE)
+    if (GetMapFloorLabel() != NULL)
+        ShowMapLabelPopup(GetMapFloorLabel(), FALSE);       // T-215
+    else if (gMapHeader.showMapName == TRUE)
         ShowMapNamePopup(FALSE);
     FieldCB_WarpExitFadeFromBlack();
 }
@@ -1932,6 +1934,10 @@ static bool32 LoadMapInStepsLocal(u8 *state, bool32 inLink)
         {
             MapPreview_LoadGfx(gMapHeader.regionMapSectionId);
             MapPreview_StartForestTransition(gMapHeader.regionMapSectionId);
+        }
+        else if (GetMapFloorLabel() != NULL)
+        {
+            ShowMapLabelPopup(GetMapFloorLabel(), FALSE);   // T-215: a school floor says its subject
         }
         else if (gMapHeader.showMapName == TRUE)
         {

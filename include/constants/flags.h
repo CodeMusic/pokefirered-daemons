@@ -794,7 +794,10 @@
 #define FLAG_OAKS_RATING_IS_VIA_PC                       0x2FF
 
 // Unused?
-#define FLAG_0x300               0x300
+// T-215..T-219: 0x300-0x33F are RESERVED for CALLOW SCHOOL and the RESEARCH NOTEBOOK. All sixty-four
+// were defined and referenced by nothing (checked 2026-09-22), and the game had seven named flags left.
+// An entry is a flag rather than an item, so a document read before the notebook exists is kept.
+#define FLAG_SCHOOL_SYLLABUS_LANGUAGE    0x300
 #define FLAG_0x301               0x301
 #define FLAG_0x302               0x302
 #define FLAG_0x303               0x303

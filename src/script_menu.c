@@ -91,6 +91,23 @@ static const struct MenuAction sMultichoiceList_HOF_Eggs_Victories_Quit[] = {
     { gText_Quit }
 };
 
+//  T-215: CALLOW SCHOOL 1F, LANGUAGE. The board is the lesson, and the exam will draw from it and from
+//  nothing else -- so these five are the whole of what the floor examines.
+static const u8 sText_Topic_Names[]     = _("NAMES");
+static const u8 sText_Topic_Pieces[]    = _("PIECES");
+static const u8 sText_Topic_Order[]     = _("ORDER");
+static const u8 sText_Topic_Ambiguity[] = _("AMBIGUITY");
+static const u8 sText_Topic_Spelling[]  = _("SPELLING");
+
+static const struct MenuAction sMultichoiceList_SchoolLanguage[] = {
+    { sText_Topic_Names },
+    { sText_Topic_Pieces },
+    { sText_Topic_Order },
+    { sText_Topic_Ambiguity },
+    { sText_Topic_Spelling },
+    { gOtherText_Exit }
+};
+
 static const struct MenuAction sMultichoiceList_TrainerSchoolWhiteboard[] = {
     { gText_Slp },
     { gText_Psn },
@@ -519,6 +536,7 @@ static const struct MultichoiceListStruct sMultichoiceLists[] = {
     [MULTICHOICE_BIKE_SHOP]                                  = MULTICHOICE(sMultichoiceList_BikeShop),
     [MULTICHOICE_GAME_CORNER_POKEMON_PRIZES]                 = MULTICHOICE(sMultichoiceList_GameCornerPokemonPrizes),
     [MULTICHOICE_TRAINER_SCHOOL_WHITEBOARD]                  = MULTICHOICE(sMultichoiceList_TrainerSchoolWhiteboard),
+    [MULTICHOICE_SCHOOL_LANGUAGE]                            = MULTICHOICE(sMultichoiceList_SchoolLanguage),
     [MULTICHOICE_YES_NO_INFO]                                = MULTICHOICE(sMultichoiceList_YesNoInfo),
     [MULTICHOICE_SINGLE_DOUBLE_MULTI_INFO_EXIT]              = MULTICHOICE(sMultichoiceList_SingleDoubleMultiInfoExit),
     [MULTICHOICE_YES_NO_INFO_2]                              = MULTICHOICE(sMultichoiceList_YesNoInfo2),
