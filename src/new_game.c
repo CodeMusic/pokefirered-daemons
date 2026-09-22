@@ -219,6 +219,26 @@ static void DaemonsDebug_GrantTestKit(void)
         GetSetPokedexFlag(i, FLAG_SET_SEEN);
         GetSetPokedexFlag(i, FLAG_SET_CAUGHT);
     }
+    //  T-205: EVERY DAEMON, IN THE BOXES. The Index above marks all 386 seen and caught, but OPUS's margins
+    //  (T-197) need a daemon you actually OWN -- so a debug save owning six of them showed exactly one
+    //  margin, and the user could not tell a working feature from a broken one. The boxes hold 420.
+    //
+    //  The MET LEVEL alternates on purpose. The margin reads CARRIED when a daemon has gained five levels
+    //  since you met it and NEGLECTED when it has gained none, so the odd ones are given a met level ten
+    //  below and the even ones their own: both halves of the writing are then one page-turn apart on
+    //  consecutive entries. A debug convenience, and it is only in this build.
+    for (i = 1; i <= NATIONAL_DEX_COUNT; i++)
+    {
+        u16 species = NationalPokedexNumToSpecies(i);
+        u8 met = (i & 1) ? 40 : 50;
+
+        if (species == SPECIES_NONE)
+            continue;
+        CreateMon(&mon, species, 50, 31, FALSE, 0, OT_ID_PLAYER_ID, 0);
+        SetMonData(&mon, MON_DATA_MET_LEVEL, &met);
+        GiveMonToPlayer(&mon);          // the party is full by here, so every one of these lands in the PC
+    }
+
     for (i = 0; i < ARRAY_COUNT(sBag); i++)
         AddBagItem(sBag[i][0], sBag[i][1]);
 

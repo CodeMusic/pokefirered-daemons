@@ -418,7 +418,7 @@ Help_Text_AnswerWantToAddMoreMoves::
 	.string "The most a DAEMON can learn is four\n"
 	.string "ROUTINES. They are learned as the\l"
 	.string "DAEMON levels up. It can also be\l"
-	.string "taught a ROUTINE using a PATCH\l"
+	.string "taught a ROUTINE using a PLUGIN\l"
 	.string "(Technical Machine) or DRIVER (Hidden\l"
 	.string "Machine). There are also people who\l"
 	.string "teach ROUTINES.$"
@@ -567,7 +567,7 @@ Help_Text_UsingTownMap::
 	.string "    Using the SITEMAP$"
 
 Help_Text_UsingTM::
-	.string "    Using a PATCH$"
+	.string "    Using a PLUGIN$"
 
 Help_Text_UsingHM::
 	.string "    Using a DRIVER$"
@@ -788,15 +788,15 @@ Help_Text_HowToUseTownMap::
 Help_Text_HowToUseTM::
 	.string "{CIRCLE_1} Open the MENU. {CIRCLE_2} Open the “KEY\n"
 	.string "ITEMS” POCKET in the “POOL.” {CIRCLE_3} “OPEN”\l"
-	.string "the PATCHSET. {CIRCLE_4} Select and “USE” a\l"
-	.string "PATCH. {CIRCLE_5} Select a DAEMON that can\l"
-	.string "learn the ROUTINE in the PATCH.$"
+	.string "the TOOLKIT. {CIRCLE_4} Select and “USE” a\l"
+	.string "PLUGIN. {CIRCLE_5} Select a DAEMON that can\l"
+	.string "learn the ROUTINE in the PLUGIN.$"
 
 Help_Text_HowToUseHM::
 	.string "{CIRCLE_1} Open the MENU.\n"
 	.string "{CIRCLE_2} Open the “KEY ITEMS” POCKET in the\n"
 	.string "   “POOL.”\n"
-	.string "{CIRCLE_3} “OPEN” the PATCHSET.\n"
+	.string "{CIRCLE_3} “OPEN” the TOOLKIT.\n"
 	.string "{CIRCLE_4} Select and “USE” a DRIVER.\n"
 	.string "{CIRCLE_5} Select a DAEMON that can learn it.\n"
 	.string "A DRIVER stays installed.$"
@@ -1157,7 +1157,7 @@ Help_Text_Cancel2::
 	.string "CANCEL$"
 
 Help_Text_TM::
-	.string "PATCH$"
+	.string "PLUGIN$"
 
 Help_Text_HM::
 	.string "DRIVER$"
@@ -1418,11 +1418,11 @@ Help_Text_DefineCancel2::
 	.string "return to the MENU.$"
 
 Help_Text_DefineTM::
-	.string "A PATCH (Technical Machine) is a device\n"
+	.string "A PLUGIN (Technical Machine) is a device\n"
 	.string "used to teach a ROUTINE to a DAEMON.\l"
 	.string "There are many different kinds.\l"
 	.string "ROUTINES can be taught only to those\l"
-	.string "DAEMONS capable of using them. A PATCH\l"
+	.string "DAEMONS capable of using them. A PLUGIN\l"
 	.string "breaks after a single use.$"
 
 Help_Text_DefineHM::
@@ -1430,7 +1430,7 @@ Help_Text_DefineHM::
 	.string "used to teach a HIDDEN ROUTINE to a\l"
 	.string "DAEMON. A HIDDEN ROUTINE can be\l"
 	.string "taught only to those DAEMONS capable\l"
-	.string "of using it. Unlike a PATCH, a DRIVER\l"
+	.string "of using it. Unlike a PLUGIN, a DRIVER\l"
 	.string "can be used over and over. A HIDDEN\l"
 	.string "ROUTINE can be tough for a DAEMON to\l"
 	.string "forget.$"

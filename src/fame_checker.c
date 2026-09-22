@@ -472,11 +472,18 @@ static const struct BgTemplate sUIBgTemplates[4] = {
 };
 
 static const struct WindowTemplate sUIWindowTemplates[] = {
+    //  T-204: eight tiles held vanilla's names and does not hold ours. The text prints at x=8 behind the
+    //  cursor, so eight tiles is 56px of room, and of the sixteen hearsay names CRYSTAL CLEAR is 78px,
+    //  MELANCHOLIC 66 and PHLEGMATIC 60 -- three clipped, which is what the user saw.
+    //
+    //  Ten is the most it can take. The flavour-text icons are placed at 47 * (i % 3) + 0x72, so the first
+    //  column's centre is 114 and a 32px sprite puts its left edge at 98; a ten-tile window ends at 88 and
+    //  its frame at 96. Eleven would put the frame under the icons, and sprites draw over windows.
     [FCWINDOWID_LIST] = {
         .bg = 0,
         .tilemapLeft = 1,
         .tilemapTop = 3,
-        .width = 8,
+        .width = 10,
         .height = 10,
         .paletteNum = 15,
         .baseBlock = 20

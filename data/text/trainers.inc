@@ -315,7 +315,7 @@ Route13_Text_RobertRematchIntro::
 	.string "dedicated myself to them.$"
 
 Route14_Text_CarterRematchIntro::
-	.string "I used PATCHES to teach good\n"
+	.string "I used PLUGINS to teach good\n"
 	.string "ROUTINES to my DAEMONS.$"
 
 Route14_Text_MitchRematchIntro::
@@ -323,7 +323,7 @@ Route14_Text_MitchRematchIntro::
 	.string "battle this time.$"
 
 Route14_Text_BeckRematchIntro::
-	.string "Are you using PATCHES on DAEMON?\n"
+	.string "Are you using PLUGINS on DAEMON?\n"
 	.string "Just holding them is useless.$"
 
 Route14_Text_MarlonRematchIntro::
