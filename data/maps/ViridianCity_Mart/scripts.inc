@@ -83,3 +83,45 @@ ViridianCity_Mart_EventScript_Woman::
 ViridianCity_Mart_EventScript_Youngster::
 	msgbox ViridianCity_Mart_Text_GotToBuySomePotions, MSGBOX_NPC
 	end
+
+@  T-197: OPUS. It is on the end of a shelf with no price on it, and nobody in the room remarks on it --
+@  not then and not afterwards. Who left it is never answered.
+@
+@  The other three shelves are the reason this is findable at all: a thing nobody points at needs a room
+@  worth reading, so every shelf in the REPO says something and one of them has the thing on it. That is
+@  curiosity as the mechanism rather than a marker over its head.
+@
+@  additem and a msgbox of our own, NOT giveitem: giveitem plays the fanfare and announces a prize, which
+@  is the one thing this must not do.
+ViridianCity_Mart_EventScript_ShelfEnd::
+	lockall
+	goto_if_set FLAG_GOT_OPUS, ViridianCity_Mart_EventScript_ShelfEndTaken
+	msgbox ViridianCity_Mart_Text_ShelfEnd
+	additem ITEM_OPUS
+	setflag FLAG_GOT_OPUS
+	msgbox ViridianCity_Mart_Text_TookOpus
+	releaseall
+	end
+
+ViridianCity_Mart_EventScript_ShelfEndTaken::
+	msgbox ViridianCity_Mart_Text_ShelfEndTaken
+	releaseall
+	end
+
+ViridianCity_Mart_EventScript_Shelf1::
+	lockall
+	msgbox ViridianCity_Mart_Text_Shelf1
+	releaseall
+	end
+
+ViridianCity_Mart_EventScript_Shelf2::
+	lockall
+	msgbox ViridianCity_Mart_Text_Shelf2
+	releaseall
+	end
+
+ViridianCity_Mart_EventScript_Shelf3::
+	lockall
+	msgbox ViridianCity_Mart_Text_Shelf3
+	releaseall
+	end

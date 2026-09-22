@@ -1224,7 +1224,9 @@
 // Unused hidden item flags
 #define FLAG_UNUSED_0x4A7               0x4A7 // Unused Flag
 #define FLAG_UNUSED_0x4A8               0x4A8 // Unused Flag
-#define FLAG_UNUSED_0x4A9               0x4A9 // Unused Flag
+//  T-197: OPUS has been taken off the shelf. Spends one of the nine spare vanilla flags 0x4A7-0x4AF,
+//  two of which teachy_tv.c already uses.
+#define FLAG_GOT_OPUS                   0x4A9
 #define FLAG_UNUSED_0x4AA               0x4AA // Unused Flag
 #define FLAG_UNUSED_0x4AB               0x4AB // Unused Flag
 #define FLAG_UNUSED_0x4AC               0x4AC // Unused Flag
