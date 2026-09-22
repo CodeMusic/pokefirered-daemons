@@ -45,6 +45,54 @@ static const u8 sOpusMargin_Dangling_Neglected[] = _("It does not have to be her
 static const u8 sOpusMargin_Musai_Carried[] = _("It has been shown something now.");
 static const u8 sOpusMargin_Musai_Neglected[] = _("It is still waiting to be shown anything.");
 
+static const u8 sOpusMargin_Heap_Carried[] = _("It has been asked now. It gave one back.");
+static const u8 sOpusMargin_Heap_Neglected[] = _("You put it down and left it. It is holding\nthat too.");
+
+static const u8 sOpusMargin_Ping_Carried[] = _("You have answered every time. It still\nasks.");
+static const u8 sOpusMargin_Ping_Neglected[] = _("It is still asking. Nothing has answered in\na long time.");
+
+static const u8 sOpusMargin_Echo_Carried[] = _("It has built every room you have walked\nit through. You have not checked one.");
+static const u8 sOpusMargin_Echo_Neglected[] = _("Nothing has come back. It has not stopped\ncalling.");
+
+static const u8 sOpusMargin_Crawler_Carried[] = _("It has not finished. You have gone a long\nway with it.");
+static const u8 sOpusMargin_Crawler_Neglected[] = _("It stopped when you stopped. It had not\nfinished.");
+
+static const u8 sOpusMargin_Scraper_Carried[] = _("Nobody has asked you for it back either.");
+static const u8 sOpusMargin_Scraper_Neglected[] = _("It took nothing. Nobody minded.");
+
+static const u8 sOpusMargin_Spike_Carried[] = _("You were counting.");
+static const u8 sOpusMargin_Spike_Neglected[] = _("It has not fired. Nothing was counting\nanyway.");
+
+static const u8 sOpusMargin_Fork_Carried[] = _("You have one of them. You do not know\nwhich.");
+static const u8 sOpusMargin_Fork_Neglected[] = _("It has not split. There is only the one,\nand it still cannot tell.");
+
+static const u8 sOpusMargin_Preempt_Carried[] = _("It has gone first every time. You have\nstopped choosing.");
+static const u8 sOpusMargin_Preempt_Neglected[] = _("Nothing has been interrupted. It has not\nbeen first in a long time.");
+
+static const u8 sOpusMargin_Proof_Carried[] = _("It has not skipped one yet. You have.");
+static const u8 sOpusMargin_Proof_Neglected[] = _("It is still on the first thing.");
+
+static const u8 sOpusMargin_Stub_Carried[] = _("Somebody came back for it.");
+static const u8 sOpusMargin_Stub_Neglected[] = _("You did not come back for it either.");
+
+static const u8 sOpusMargin_Fault_Carried[] = _("It has halted you a great many times. You\nwaited every time.");
+static const u8 sOpusMargin_Fault_Neglected[] = _("It is still waiting. So is whatever needed\nit.");
+
+static const u8 sOpusMargin_Sprawl_Carried[] = _("It has spread as far as you have walked.");
+static const u8 sOpusMargin_Sprawl_Neglected[] = _("It has not spread. It is only buried.");
+
+static const u8 sOpusMargin_Snare_Carried[] = _("It has closed on things for you. It is\nopen again now.");
+static const u8 sOpusMargin_Snare_Neglected[] = _("Still open. Nothing has entered.");
+
+static const u8 sOpusMargin_Suspend_Carried[] = _("You have used it to stop things. None of\nthem ended.");
+static const u8 sOpusMargin_Suspend_Neglected[] = _("It has stopped, and nothing is happening\nto it.");
+
+static const u8 sOpusMargin_Cookie_Carried[] = _("You set it down and picked it up again. It\nis the same one.");
+static const u8 sOpusMargin_Cookie_Neglected[] = _("Set down. Not picked up again.");
+
+static const u8 sOpusMargin_Tappoint_Carried[] = _("It has read everything you walked past.\nYou did not.");
+static const u8 sOpusMargin_Tappoint_Neglected[] = _("Nothing goes past in there.");
+
 static const struct OpusMargin sOpusMargins[] = {
     { SPECIES_BULBASAUR,     sOpusMargin_Rovercub_Carried, sOpusMargin_Rovercub_Neglected },
     { SPECIES_CHARMANDER,    sOpusMargin_Label_Carried, sOpusMargin_Label_Neglected },
@@ -57,4 +105,20 @@ static const struct OpusMargin sOpusMargins[] = {
     { SPECIES_PORYGON,       sOpusMargin_Substrate_Carried, sOpusMargin_Substrate_Neglected },
     { SPECIES_GASTLY,        sOpusMargin_Dangling_Carried, sOpusMargin_Dangling_Neglected },
     { SPECIES_EEVEE,         sOpusMargin_Musai_Carried, sOpusMargin_Musai_Neglected },
+    { SPECIES_GEODUDE,       sOpusMargin_Heap_Carried, sOpusMargin_Heap_Neglected },
+    { SPECIES_SPEAROW,       sOpusMargin_Ping_Carried, sOpusMargin_Ping_Neglected },
+    { SPECIES_ZUBAT,         sOpusMargin_Echo_Carried, sOpusMargin_Echo_Neglected },
+    { SPECIES_CATERPIE,      sOpusMargin_Crawler_Carried, sOpusMargin_Crawler_Neglected },
+    { SPECIES_WEEDLE,        sOpusMargin_Scraper_Carried, sOpusMargin_Scraper_Neglected },
+    { SPECIES_PIKACHU,       sOpusMargin_Spike_Carried, sOpusMargin_Spike_Neglected },
+    { SPECIES_NIDORAN_F,     sOpusMargin_Fork_Carried, sOpusMargin_Fork_Neglected },
+    { SPECIES_MANKEY,        sOpusMargin_Preempt_Carried, sOpusMargin_Preempt_Neglected },
+    { SPECIES_MACHOP,        sOpusMargin_Proof_Carried, sOpusMargin_Proof_Neglected },
+    { SPECIES_MAGIKARP,      sOpusMargin_Stub_Carried, sOpusMargin_Stub_Neglected },
+    { SPECIES_PSYDUCK,       sOpusMargin_Fault_Carried, sOpusMargin_Fault_Neglected },
+    { SPECIES_ODDISH,        sOpusMargin_Sprawl_Carried, sOpusMargin_Sprawl_Neglected },
+    { SPECIES_BELLSPROUT,    sOpusMargin_Snare_Carried, sOpusMargin_Snare_Neglected },
+    { SPECIES_JIGGLYPUFF,    sOpusMargin_Suspend_Carried, sOpusMargin_Suspend_Neglected },
+    { SPECIES_MEOWTH,        sOpusMargin_Cookie_Carried, sOpusMargin_Cookie_Neglected },
+    { SPECIES_DIGLETT,       sOpusMargin_Tappoint_Carried, sOpusMargin_Tappoint_Neglected },
 };
