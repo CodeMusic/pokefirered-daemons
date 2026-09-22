@@ -2,21 +2,22 @@
 Route12_NorthEntrance_2F_Text_TakeTMDontNeedAnymoreMale::
     .string "My DAEMONS's ashes are stored in\n"
     .string "DAEMON TOWER.\p"
-    .string "You can have this TM. I don't need\n"
-    .string "it any more...$"
+    .string "You can have this PATCH. I don't\n"
+    .string "need it any more...$"
 
 Route12_NorthEntrance_2F_Text_TakeTMDontNeedAnymoreFemale::
     .string "My DAEMONS's ashes are stored in\n"
     .string "DAEMON TOWER.\p"
-    .string "You can have this TM. I don't need\n"
-    .string "it anymore…$"
+    .string "You can have this PATCH. I don't\n"
+    .string "need it anymore…$"
 
 Route12_NorthEntrance_2F_Text_ReceivedTM27FromLittleGirl::
-    .string "{PLAYER} received TM27\n"
-    .string "from the little girl.$"
+    .string "{PLAYER} received PATCH27 from the\n"
+    .string "little girl.$"
 
 Route12_NorthEntrance_2F_Text_ExplainTM27::
-    .string "TM27 is a ROUTINE called RAPPORT…\p"
+    .string "PATCH27 is a ROUTINE called\n"
+    .string "RAPPORT…\p"
     .string "If you treat your DAEMON good, it\n"
     .string "will return your love by working\l"
     .string "its hardest in battle.$"

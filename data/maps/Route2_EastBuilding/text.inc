@@ -5,7 +5,7 @@ Route2_EastBuilding_Text_GiveHM05IfSeen10Mons::
     .string "on ten species, I'm supposed to\l"
     .string "give you a reward.\p"
     .string "CRYSTAL CLEAR entrusted me with\n"
-    .string "HM05 for you.\p"
+    .string "DRIVER05 for you.\p"
     .string "So, {PLAYER}, let me ask you.\p"
     .string "Have you gathered data on at least\n"
     .string "ten kinds of DAEMONS?$"
@@ -16,12 +16,12 @@ Route2_EastBuilding_Text_GreatHereYouGo::
     .string "Congratulations! Here you go!$"
 
 Route2_EastBuilding_Text_ReceivedHM05FromAide::
-    .string "{PLAYER} received HM05\n"
-    .string "from the AIDE.$"
+    .string "{PLAYER} received DRIVER05 from\n"
+    .string "the AIDE.$"
 
 Route2_EastBuilding_Text_ExplainHM05::
-    .string "HM05 contains the hidden ROUTINE\n"
-    .string "VERBOSE.\p"
+    .string "DRIVER05 contains the hidden\n"
+    .string "ROUTINE VERBOSE.\p"
     .string "VERBOSE lights up even the darkest\n"
     .string "of caves and dungeons.$"
 

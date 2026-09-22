@@ -10,15 +10,15 @@ SafariZone_SecretHouse_Text_CongratsYouveWon::
     .string "You have won!$"
 
 SafariZone_SecretHouse_Text_ReceivedHM03FromAttendant::
-    .string "{PLAYER} received HM03\n"
-    .string "from the attendant!$"
+    .string "{PLAYER} received DRIVER03 from\n"
+    .string "the attendant!$"
 
 SafariZone_SecretHouse_Text_ExplainSurf::
-    .string "HM03 is TRAVERSE.\p"
+    .string "DRIVER03 is TRAVERSE.\p"
     .string "DAEMON will be able to ferry you\n"
     .string "across water using it.\p"
-    .string "And, this HM isn't disposable, so\n"
-    .string "you can use it over and over.\p"
+    .string "And, this DRIVER isn't disposable,\n"
+    .string "so you can use it over and over.\p"
     .string "You're super lucky for winning this\n"
     .string "fabulous prize!$"
 

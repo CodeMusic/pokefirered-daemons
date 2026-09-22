@@ -20,8 +20,8 @@ SSAnne_CaptainsOffice_Text_ThankYouHaveHMForCut::
     .string "can use PRUNE any time!$"
 
 SSAnne_CaptainsOffice_Text_ObtainedHM01FromCaptain::
-    .string "{PLAYER} obtained HM01\n"
-    .string "from the CAPTAIN!$"
+    .string "{PLAYER} obtained DRIVER01 from\n"
+    .string "the CAPTAIN!$"
 
 SSAnne_CaptainsOffice_Text_ExplainCut::
     .string "Using PRUNE, you can chop down\n"

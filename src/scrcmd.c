@@ -1774,12 +1774,61 @@ bool8 ScrCmd_setmonmove(struct ScriptContext * ctx)
     return FALSE;
 }
 
+//  T-199: A DRIVER IS INSTALLED, NOT TAUGHT.
+//
+//  Everywhere else the HM slave is an inconvenience. In this game it is a contradiction: the player keeps a
+//  daemon in the party purely as a tool, spending its routine slots on the party's errands, in a game whose
+//  whole argument is that the thing in front of you has an inside -- and whose fable makes every actor an
+//  animal. The design was quietly asking the player to do the thing the game is against.
+//
+//  T-198's naming is the fix. A DRIVER is what lets a system reach something outside itself, and a driver is
+//  installed on the SYSTEM. So holding it is enough: the two keys stay exactly as vanilla gates them -- the
+//  MARK is permission (the scripts check the badge flag themselves) and the driver is capability -- but no
+//  routine slot is spent and no daemon is kept for its labour.
+//
+//  Answered here rather than in the six scripts because all six consume VAR_RESULT the same way: a PARTY
+//  INDEX, used for the field effect's animation and for the name in the message. So the driver answers with
+//  the first daemon that is not an egg, and the scripts need no edit at all.
+//
+//  Additive on purpose: a daemon that KNOWS the routine still works, so nothing that used to happen stops
+//  happening. Taking the eight off the learnsets is the next phase, and is a separate decision.
+static u8 DriverPartySlot(u16 moveId)
+{
+    u16 item;
+    u8 i;
+
+    for (item = ITEM_HM01; item <= ITEM_HM08; item++)
+    {
+        if (ItemIdToBattleMoveId(item) != moveId)
+            continue;
+        if (!CheckBagHasItem(item, 1))
+            return PARTY_SIZE;                   // the driver is not installed; fall back to who knows it
+        for (i = 0; i < PARTY_SIZE; i++)
+        {
+            u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL);
+
+            if (!species)
+                break;
+            if (!GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
+            {
+                gSpecialVar_0x8004 = species;
+                return i;
+            }
+        }
+        return PARTY_SIZE;                       // an egg cannot run it, and nothing else is here
+    }
+    return PARTY_SIZE;                           // not a driver routine at all
+}
+
 bool8 ScrCmd_checkpartymove(struct ScriptContext * ctx)
 {
     u8 i;
     u16 moveId = ScriptReadHalfword(ctx);
 
-    gSpecialVar_Result = PARTY_SIZE;
+    gSpecialVar_Result = DriverPartySlot(moveId);
+    if (gSpecialVar_Result != PARTY_SIZE)
+        return FALSE;
+
     for (i = 0; i < PARTY_SIZE; i++)
     {
         u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL);

@@ -24,11 +24,11 @@ VermilionCity_Gym_Text_ExplainThunderBadgeTakeThis::
     .string "You're special, kid! Take this!$"
 
 VermilionCity_Gym_Text_ReceivedTM34FromLtSurge::
-    .string "{PLAYER} received TM34\n"
-    .string "from GAUGE.$"
+    .string "{PLAYER} received PATCH34 from\n"
+    .string "GAUGE.$"
 
 VermilionCity_Gym_Text_ExplainTM34::
-    .string "TM34 contains CARRIER!\p"
+    .string "PATCH34 contains CARRIER!\p"
     .string "Teach it to a SIGNAL DAEMON!$"
 
 VermilionCity_Gym_Text_MakeRoomInYourBag::

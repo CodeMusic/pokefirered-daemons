@@ -31,16 +31,17 @@ PewterCity_Gym_Text_TakeThisWithYou::
     .string "Take this with you.$"
 
 PewterCity_Gym_Text_ReceivedTM39FromBrock::
-    .string "{PLAYER} received TM39 from CAIRN.$"
+    .string "{PLAYER} received PATCH39 from\n"
+    .string "CAIRN.$"
 
 PewterCity_Gym_Text_ExplainTM39::
-    .string "A TM holds one technique.\p"
+    .string "A PATCH holds one technique.\p"
     .string "Using it writes the ROUTINE into a\n"
     .string "daemon. Once.\p"
-    .string "The TM does not survive that, so\n"
-    .string "choose carefully.\p"
-    .string "TM39 is WEDGE. It drops weight on\n"
-    .string "the target and slows it.$"
+    .string "The PATCH does not survive that,\n"
+    .string "so choose carefully.\p"
+    .string "PATCH39 is WEDGE. It drops weight\n"
+    .string "on the target and slows it.$"
 
 PewterCity_Gym_Text_BrockPostBattle::
     .string "You encoded something I could not\n"

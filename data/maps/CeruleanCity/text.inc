@@ -60,12 +60,12 @@ CeruleanCity_Text_GruntDefeat::
     .string "I'll leave quietly!$"
 
 CeruleanCity_Text_OkayIllReturnStolenTM::
-    .string "…Okay.\n"
-    .string "I'll return the TM I stole.$"
+    .string "…Okay. I'll return the PATCH I\n"
+    .string "stole.$"
 
 CeruleanCity_Text_RecoveredTM28FromGrunt::
-    .string "{PLAYER} recovered TM28 from the\n"
-    .string "TEAM CORPUS GRUNT.$"
+    .string "{PLAYER} recovered PATCH28 from\n"
+    .string "the TEAM CORPUS GRUNT.$"
 
 CeruleanCity_Text_BetterGetMovingBye::
     .string "I better get moving!\n"

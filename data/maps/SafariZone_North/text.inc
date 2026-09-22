@@ -16,6 +16,6 @@ SafariZone_North_Text_ZigzagThroughTallGrass::
 
 SafariZone_North_Text_WinFreeHMFindSecretHouse::
     .string "USER TIPS\p"
-    .string "Win a free HM for finding the\n"
+    .string "Win a free DRIVER for finding the\n"
     .string "SECRET HOUSE!$"
 

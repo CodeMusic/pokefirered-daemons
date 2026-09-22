@@ -8,7 +8,7 @@ CeruleanCity_Gym_Text_MistyIntro::
     .string "with FLOW-type DAEMON!$"
 
 CeruleanCity_Gym_Text_ExplainTM03::
-    .string "TM03 teaches RIPPLE.\p"
+    .string "PATCH03 teaches RIPPLE.\p"
     .string "Use it on an aquatic DAEMON!$"
 
 CeruleanCity_Gym_Text_ExplainCascadeBadge::
@@ -17,13 +17,14 @@ CeruleanCity_Gym_Text_ExplainCascadeBadge::
 	.string "That includes even outsiders!\p"
 	.string "You can use PRUNE any time now, to\n"
 	.string "cut down small bushes!\p"
-	.string "You can also have my favorite TM!\p"
-	.string "Small steps, and never stop.\n"
-	.string "Keep going down and you arrive.$"
+	.string "You can also have my favorite\n"
+	.string "PATCH!\p"
+	.string "Small steps, and never stop. Keep\n"
+	.string "going down and you arrive.$"
 
 CeruleanCity_Gym_Text_ReceivedTM03FromMisty::
-    .string "{PLAYER} received TM03\n"
-    .string "from BASIN.$"
+    .string "{PLAYER} received PATCH03 from\n"
+    .string "BASIN.$"
 
 CeruleanCity_Gym_Text_BetterMakeRoomForThis::
     .string "You better make room for this!$"

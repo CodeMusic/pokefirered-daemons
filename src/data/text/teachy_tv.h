@@ -2,7 +2,7 @@ const u8 gTeachyTvString_TeachBattle[] = _("The first exchange");
 const u8 gTeachyTvString_StatusProblems[] = _("When a process stalls");
 const u8 gTeachyTvString_TypeMatchups[] = _("Reading the chart");
 const u8 gTeachyTvString_CatchPkmn[] = _("Binding a stranger");
-const u8 gTeachyTvString_AboutTMs[] = _("What a TM costs");
+const u8 gTeachyTvString_AboutTMs[] = _("What a PATCH costs");
 const u8 gTeachyTvString_RegisterItem[] = _("One item, one button");
 const u8 gTeachyTvString_Cancel[] = _("CANCEL");
 
@@ -76,15 +76,15 @@ const u8 gTeachyTvText_CatchingScript2[] = _(
         "Nobody else will.\p"
         "That is the lecture.");
 const u8 gTeachyTvText_TMsScript1[] = _(
-        "What a TM costs.\p"
-        "A TM teaches a DAEMON a ROUTINE it\n"
-        "would not reach on its own.\p"
+        "What a PATCH costs.\p"
+        "A PATCH teaches a DAEMON a ROUTINE\n"
+        "it would not reach on its own.\p"
         "It writes over one it already has.\n"
         "Choose which, carefully.\p"
-        "Open the TM CASE, and read what you\n"
-        "have. All of it.");
+        "Open the PATCHSET, and read what\n"
+        "you have. All of it.");
 const u8 gPokedudeText_TMTypes[] = _(
-        "CRYSTAL: TMs have types, as\n"
+        "CRYSTAL: PATCHES have types, as\n"
         "ROUTINES do.\p"
         "Teach one to a DAEMON whose type\n"
         "suits it.\p"

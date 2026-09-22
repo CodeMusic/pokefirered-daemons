@@ -27,17 +27,17 @@ SaffronCity_Gym_Text_ExplainMarshBadgeTakeThis::
 	.string "I watched where you were looking.\n"
 	.string "It was not where I was pointing.\p"
 	.string "That is how you won.\p"
-	.string "BRAZEN pays for this BENCHMARK.\n"
-	.string "I don't pretend otherwise.\p"
-	.string "I still decide what happens in\n"
-	.string "it. Please take this TM.$"
+	.string "BRAZEN pays for this BENCHMARK. I\n"
+	.string "don't pretend otherwise.\p"
+	.string "I still decide what happens in it.\n"
+	.string "Please take this PATCH.$"
 
 SaffronCity_Gym_Text_ReceivedTM04FromSabrina::
-    .string "{PLAYER} received TM04 from\n"
+    .string "{PLAYER} received PATCH04 from\n"
     .string "MATTE.$"
 
 SaffronCity_Gym_Text_ExplainTM04::
-    .string "TM04 is COMPOSE.\p"
+    .string "PATCH04 is COMPOSE.\p"
     .string "It makes the DAEMON concentrate to\n"
     .string "raise both SP. ATK and SP. DEF.$"
 

@@ -1,13 +1,14 @@
 Route14_Text_CarterIntro::
-    .string "You need to use TMs to teach good\n"
-    .string "ROUTINES to DAEMON.$"
+    .string "You need to use PATCHES to teach\n"
+    .string "good ROUTINES to DAEMON.$"
 
 Route14_Text_CarterDefeat::
     .string "Not good enough quite yet.$"
 
 Route14_Text_CarterPostBattle::
-    .string "You have some HMs, right? DAEMON\n"
-    .string "can't forget those ROUTINES easily.$"
+    .string "You have some DRIVERS, right?\n"
+    .string "DAEMON can't forget those ROUTINES\l"
+    .string "easily.$"
 
 Route14_Text_MitchIntro::
     .string "My bird DAEMON should be ready for\n"
@@ -21,8 +22,9 @@ Route14_Text_MitchPostBattle::
     .string "better ROUTINES.$"
 
 Route14_Text_BeckIntro::
-    .string "TMs are on sale in VERDIGRIS! But,\n"
-    .string "only a few people have HMs!$"
+    .string "PATCHES are on sale in VERDIGRIS!\n"
+    .string "But, only a few people have\l"
+    .string "DRIVERS!$"
 
 Route14_Text_BeckDefeat::
     .string "Aww, bummer!$"

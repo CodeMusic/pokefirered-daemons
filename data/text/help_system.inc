@@ -416,11 +416,12 @@ Help_Text_AnswerWhatMovesShouldIUse::
 
 Help_Text_AnswerWantToAddMoreMoves::
 	.string "The most a DAEMON can learn is four\n"
-	.string "ROUTINES. They are learned as the DAEMON\l"
-	.string "levels up. It can also be taught a ROUTINE\l"
-	.string "using a TM (Technical Machine) or HM (Hidden\l"
-	.string "Machine). There are also people who teach\l"
-	.string "ROUTINES.$"
+	.string "ROUTINES. They are learned as the\l"
+	.string "DAEMON levels up. It can also be\l"
+	.string "taught a ROUTINE using a PATCH\l"
+	.string "(Technical Machine) or DRIVER (Hidden\l"
+	.string "Machine). There are also people who\l"
+	.string "teach ROUTINES.$"
 
 Help_Text_AnswerWantToMakeMonStronger::
 	.string "The key to making your DAEMON strong is\n"
@@ -488,12 +489,13 @@ Help_Text_AnswerWhatIsThatPersonLike::
 	.string "so try it out.$"
 
 Help_Text_AnswerWhatDoesHiddenMoveDo::
-	.string "A HIDDEN ROUTINE is taught to a DAEMON\n"
-	.string "using an HM (Hidden Machine). A HIDDEN\l"
-	.string "ROUTINE is important for helping your\l"
-	.string "adventure. For example, one is used to light\l"
-	.string "up dark caves. Another cuts down small\l"
-	.string "trees. There is one for traveling on water,\l"
+	.string "A HIDDEN ROUTINE is taught to a\n"
+	.string "DAEMON using a DRIVER (Hidden\l"
+	.string "Machine). A HIDDEN ROUTINE is important\l"
+	.string "for helping your adventure. For\l"
+	.string "example, one is used to light up dark\l"
+	.string "caves. Another cuts down small trees.\l"
+	.string "There is one for traveling on water,\l"
 	.string "and so on.$"
 
 Help_Text_AnswerWhatDoIDoInSafari::
@@ -565,10 +567,10 @@ Help_Text_UsingTownMap::
 	.string "    Using the SITEMAP$"
 
 Help_Text_UsingTM::
-	.string "    Using a TM$"
+	.string "    Using a PATCH$"
 
 Help_Text_UsingHM::
-	.string "    Using an HM$"
+	.string "    Using a DRIVER$"
 
 Help_Text_UsingMoveOutsideOfBattle::
 	.string "Invoking a ROUTINE outside of battle$"
@@ -786,25 +788,26 @@ Help_Text_HowToUseTownMap::
 Help_Text_HowToUseTM::
 	.string "{CIRCLE_1} Open the MENU. {CIRCLE_2} Open the “KEY\n"
 	.string "ITEMS” POCKET in the “POOL.” {CIRCLE_3} “OPEN”\l"
-	.string "the TM CASE. {CIRCLE_4} Select and “USE” a TM.\l"
-	.string "{CIRCLE_5} Select a DAEMON that can learn the\l"
-	.string "ROUTINE in the TM.$"
+	.string "the PATCHSET. {CIRCLE_4} Select and “USE” a\l"
+	.string "PATCH. {CIRCLE_5} Select a DAEMON that can\l"
+	.string "learn the ROUTINE in the PATCH.$"
 
 Help_Text_HowToUseHM::
 	.string "{CIRCLE_1} Open the MENU.\n"
 	.string "{CIRCLE_2} Open the “KEY ITEMS” POCKET in the\n"
 	.string "   “POOL.”\n"
-	.string "{CIRCLE_3} “OPEN” the TM CASE.\n"
-	.string "{CIRCLE_4} Select and “USE” an HM.\n"
+	.string "{CIRCLE_3} “OPEN” the PATCHSET.\n"
+	.string "{CIRCLE_4} Select and “USE” a DRIVER.\n"
 	.string "{CIRCLE_5} Select a DAEMON that can learn it.\n"
-	.string "HMs are hard to remove, so be careful!$"
+	.string "A DRIVER stays installed.$"
 
 Help_Text_HowToUseMoveOutsideOfBattle::
-	.string "{CIRCLE_1} Open the MENU. {CIRCLE_2} Select “DAEMON.” {CIRCLE_3}\n"
-	.string "Select a DAEMON that knows an HM ROUTINE.\l"
-	.string "The usable HM ROUTINE(s) will be shown in\l"
-	.string "blue. Select and invoke the desired ROUTINE\l"
-	.string "destroy an obstacle, fly, surf, etc.$"
+	.string "{CIRCLE_1} Open the MENU. {CIRCLE_2} Select “DAEMON.”\n"
+	.string "{CIRCLE_3} Select a DAEMON that knows a DRIVER\l"
+	.string "ROUTINE. The usable DRIVER ROUTINE(s)\l"
+	.string "will be shown in blue. Select and\l"
+	.string "invoke the desired ROUTINE destroy an\l"
+	.string "obstacle, fly, surf, etc.$"
 
 Help_Text_HowToRideBicycle::
 	.string "{CIRCLE_1} Open the MENU. Open the\n"
@@ -1154,13 +1157,13 @@ Help_Text_Cancel2::
 	.string "CANCEL$"
 
 Help_Text_TM::
-	.string "TM$"
+	.string "PATCH$"
 
 Help_Text_HM::
-	.string "HM$"
+	.string "DRIVER$"
 
 Help_Text_HMMove::
-	.string "HM ROUTINE$"
+	.string "DRIVER ROUTINE$"
 
 Help_Text_Evolution::
 	.string "EVOLUTION$"
@@ -1415,18 +1418,20 @@ Help_Text_DefineCancel2::
 	.string "return to the MENU.$"
 
 Help_Text_DefineTM::
-	.string "A TM (Technical Machine) is a device used to\n"
-	.string "teach a ROUTINE to a DAEMON. There are\l"
-	.string "many different kinds. ROUTINES can be taught\l"
-	.string "only to those DAEMONS capable of using\l"
-	.string "them. A TM breaks after a single use.$"
+	.string "A PATCH (Technical Machine) is a device\n"
+	.string "used to teach a ROUTINE to a DAEMON.\l"
+	.string "There are many different kinds.\l"
+	.string "ROUTINES can be taught only to those\l"
+	.string "DAEMONS capable of using them. A PATCH\l"
+	.string "breaks after a single use.$"
 
 Help_Text_DefineHM::
-	.string "An HM (Hidden Machine) is a device used to\n"
-	.string "teach a HIDDEN ROUTINE to a DAEMON. A\l"
-	.string "HIDDEN ROUTINE can be taught only to those\l"
-	.string "DAEMONS capable of using it. Unlike a TM, an\l"
-	.string "HM can be used over and over. A HIDDEN\l"
+	.string "A DRIVER (Hidden Machine) is a device\n"
+	.string "used to teach a HIDDEN ROUTINE to a\l"
+	.string "DAEMON. A HIDDEN ROUTINE can be\l"
+	.string "taught only to those DAEMONS capable\l"
+	.string "of using it. Unlike a PATCH, a DRIVER\l"
+	.string "can be used over and over. A HIDDEN\l"
 	.string "ROUTINE can be tough for a DAEMON to\l"
 	.string "forget.$"
 

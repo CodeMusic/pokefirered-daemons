@@ -315,16 +315,16 @@ Route13_Text_RobertRematchIntro::
 	.string "dedicated myself to them.$"
 
 Route14_Text_CarterRematchIntro::
-	.string "I used TMs to teach good ROUTINES\n"
-	.string "to my DAEMONS.$"
+	.string "I used PATCHES to teach good\n"
+	.string "ROUTINES to my DAEMONS.$"
 
 Route14_Text_MitchRematchIntro::
 	.string "My bird DAEMON should be ready for\n"
 	.string "battle this time.$"
 
 Route14_Text_BeckRematchIntro::
-	.string "Are you using TMs on DAEMON? Just\n"
-	.string "holding them is useless.$"
+	.string "Are you using PATCHES on DAEMON?\n"
+	.string "Just holding them is useless.$"
 
 Route14_Text_MarlonRematchIntro::
 	.string "Have you taught your bird DAEMON\n"

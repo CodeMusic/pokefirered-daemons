@@ -39,11 +39,11 @@ FuchsiaCity_WardensHouse_Text_ThanksLassieGiveYouSomething::
     .string "trouble.$"
 
 FuchsiaCity_WardensHouse_Text_ReceivedHM04FromWarden::
-    .string "{PLAYER} received HM04\n"
-    .string "from the WARDEN.$"
+    .string "{PLAYER} received DRIVER04 from\n"
+    .string "the WARDEN.$"
 
 FuchsiaCity_WardensHouse_Text_ExplainStrength::
-    .string "WARDEN: Inside HM04 you'll find\n"
+    .string "WARDEN: Inside DRIVER04 you'll find\n"
     .string "DISPLACE.\p"
     .string "It lets DAEMON move boulders when\n"
     .string "you're outside of battle.\p"

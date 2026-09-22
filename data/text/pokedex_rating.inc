@@ -17,8 +17,8 @@ PokedexRating_Text_LessThan20::
 	.string "It looks as if you're getting on the\n"
 	.string "right track!\p"
 	.string "I've given one of my AIDES a\n"
-	.string "VERBOSE HM. Make sure you go get\l"
-	.string "it!$"
+	.string "VERBOSE DRIVER. Make sure you go\l"
+	.string "get it!$"
 
 PokedexRating_Text_LessThan30::
     .string "You still need more DAEMON! Try to\n"
