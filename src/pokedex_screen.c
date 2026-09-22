@@ -1978,6 +1978,38 @@ static u8 OpusMarginState(u16 species)
     return boxed ? OPUS_MARGIN_NEGLECTED : OPUS_MARGIN_NONE;
 }
 
+//  T-203: AND SOMETHING HAS TO SAY THAT SOMETHING HAPPENED. A player who finds SELECT MARGIN on an entry
+//  learns the button exists and never learns what wrote the line -- while the object that did it is sitting
+//  in their POOL with a description that says so. The restraint stands (nobody remarks on OPUS, and who left
+//  it is never answered), but there is a difference between not explaining it and giving the player nothing
+//  to connect.
+//
+//  So: one beat, once, the first time a margin exists to read. PARTY ONLY, on purpose -- this is called from
+//  the step hook and the boxes are 420 mons, where the party is six. A first margin earned by a BOXED daemon
+//  goes unannounced, which is the right way round for a cheap check to be wrong: the first one a player earns
+//  is one they were carrying.
+bool8 OpusMarginAvailableInParty(void)
+{
+    u32 i;
+
+    if (!CheckBagHasItem(ITEM_OPUS, 1))
+        return FALSE;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL);
+
+        if (species == SPECIES_NONE)
+            break;
+        if (OpusMarginFor(species) == NULL)
+            continue;
+        if (GetMonData(&gPlayerParty[i], MON_DATA_LEVEL, NULL)
+          - GetMonData(&gPlayerParty[i], MON_DATA_MET_LEVEL, NULL) >= OPUS_LEVELS_CARRIED)
+            return TRUE;
+    }
+    return FALSE;
+}
+
 //  The margin has no room of its own: the entry's own window is thirty tiles by seven, and the 386 entries
 //  demonstrate it holds four lines of 234px, all of which some of them use. So the page is TURNED OVER --
 //  SELECT swaps the entry for the margin and back, and the control row says so only when there is one to

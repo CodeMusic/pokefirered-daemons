@@ -21,3 +21,15 @@ Daemons_EventScript_Again::
 	msgbox gStringVar4
 	releaseall
 	end
+
+@  T-203: the one beat OPUS gets. It does not name itself, and nobody in the game ever mentions it again.
+@  A player who reads this and then looks at what they are carrying has worked it out themselves, which is
+@  the whole of the restraint: not explaining it, but not leaving them nothing to connect either.
+Daemons_EventScript_OpusWrote::
+	lockall
+	msgbox Daemons_Text_OpusWrote
+	releaseall
+	end
+
+Daemons_Text_OpusWrote:
+	.string "Something has been written in the\nINDEX.$"

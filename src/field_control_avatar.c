@@ -23,6 +23,7 @@
 //  GetLastFieldMessage, StringCopy and PlaySE in every build.
 #include "field_message_box.h"
 #include "map_name_popup.h"
+#include "pokedex_screen.h"   // T-203
 
 // T-196: the label the popup carries while an echo is on screen.
 static const u8 sText_Echo[] = _("ECHO");
@@ -869,6 +870,14 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
             {
                 TeachyTvMarkShowAsTold(show);
                 ScriptContext_SetupScript(EventScript_StreamHasANewShow);
+                return TRUE;
+            }
+            //  T-203. The same hook again, and for the same reason: the first step after the world changed
+            //  is when the player is listening. Once, ever, and it does not name what wrote it.
+            if (!FlagGet(FLAG_OPUS_ANNOUNCED) && OpusMarginAvailableInParty())
+            {
+                FlagSet(FLAG_OPUS_ANNOUNCED);
+                ScriptContext_SetupScript(Daemons_EventScript_OpusWrote);
                 return TRUE;
             }
         }

@@ -1227,7 +1227,8 @@
 //  T-197: OPUS has been taken off the shelf. Spends one of the nine spare vanilla flags 0x4A7-0x4AF,
 //  two of which teachy_tv.c already uses.
 #define FLAG_GOT_OPUS                   0x4A9
-#define FLAG_UNUSED_0x4AA               0x4AA // Unused Flag
+//  T-203: the one beat OPUS gets, and it gets it once.
+#define FLAG_OPUS_ANNOUNCED             0x4AA
 #define FLAG_UNUSED_0x4AB               0x4AB // Unused Flag
 #define FLAG_UNUSED_0x4AC               0x4AC // Unused Flag
 #define FLAG_UNUSED_0x4AD               0x4AD // Unused Flag
