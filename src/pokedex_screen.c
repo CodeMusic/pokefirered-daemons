@@ -15,8 +15,12 @@
 #include "data.h"
 #include "pokedex.h"
 #include "battle_main.h"   // T-191: gTypeNames
+#include "item.h"   // T-197: CheckBagHasItem
+#include "pokemon_storage_system.h"   // T-197: OPUS reads the boxes as well as the party
+#include "data/opus_margins.h"
 #include "trainer_pokemon_sprites.h"
 #include "decompress.h"
+#include "constants/items.h"   // T-197: ITEM_OPUS
 #include "constants/songs.h"
 #include "constants/sound.h"
 #include "pokedex_area_markers.h"
@@ -1907,6 +1911,96 @@ static int DexScreen_InputHandler_GetShoulderInput(void)
     }
 }
 
+void DexScreen_PrintMonFlavorText(u8 windowId, u16 species, u8 x, u8 y);   // defined below
+
+//  T-197: OPUS. Something found on a shelf with no price on it, which writes ONE LINE under an entry. It does
+//  not repair the Index -- 4.2's point is that the artifact can only measure content and has no field for what
+//  Crystal cared about, and a thing that fixed that would cost the project its best idea. It annotates.
+//
+//  WHICH line depends on what there was to notice. A daemon you levelled gets one; a daemon you bound and put
+//  away gets another, which is not a scold but the same quiet noticing aimed at the thing you did not do.
+//
+//  THE TEST IS LEVELS GAINED SINCE YOU MET IT, which is the one signal that means "you played this" rather
+//  than "you own this" -- and it needs no new save data, so an old save earns its margins retroactively from
+//  what it already did. A daemon still in the party that has gained nothing gets NO margin: you have only just
+//  met it and there is nothing to say yet. Neglect needs the daemon to have been put AWAY.
+//
+//  Box mons keep no level field, so it is computed from experience the way the storage system does it.
+#define OPUS_MARGIN_NONE      0
+#define OPUS_MARGIN_CARRIED   1
+#define OPUS_MARGIN_NEGLECTED 2
+#define OPUS_LEVELS_CARRIED   5
+
+static EWRAM_DATA bool8 sMarginShown = FALSE;
+
+static const struct OpusMargin *OpusMarginFor(u16 species)
+{
+    u32 i;
+
+    for (i = 0; i < ARRAY_COUNT(sOpusMargins); i++)
+    {
+        if (sOpusMargins[i].species == species)
+            return &sOpusMargins[i];
+    }
+    return NULL;
+}
+
+static u8 OpusMarginState(u16 species)
+{
+    u32 i, box, pos;
+    bool8 boxed = FALSE;
+
+    if (!CheckBagHasItem(ITEM_OPUS, 1) || OpusMarginFor(species) == NULL)
+        return OPUS_MARGIN_NONE;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL) != species)
+            continue;
+        if (GetMonData(&gPlayerParty[i], MON_DATA_LEVEL, NULL)
+          - GetMonData(&gPlayerParty[i], MON_DATA_MET_LEVEL, NULL) >= OPUS_LEVELS_CARRIED)
+            return OPUS_MARGIN_CARRIED;
+    }
+
+    for (box = 0; box < TOTAL_BOXES_COUNT; box++)
+    {
+        for (pos = 0; pos < IN_BOX_COUNT; pos++)
+        {
+            if (GetBoxMonDataAt(box, pos, MON_DATA_SPECIES) != species)
+                continue;
+            boxed = TRUE;
+            if (GetLevelFromBoxMonExp(GetBoxedMonPtr(box, pos))
+              - GetBoxMonDataAt(box, pos, MON_DATA_MET_LEVEL) >= OPUS_LEVELS_CARRIED)
+                return OPUS_MARGIN_CARRIED;
+        }
+    }
+    return boxed ? OPUS_MARGIN_NEGLECTED : OPUS_MARGIN_NONE;
+}
+
+//  The margin has no room of its own: the entry's own window is thirty tiles by seven, and the 386 entries
+//  demonstrate it holds four lines of 234px, all of which some of them use. So the page is TURNED OVER --
+//  SELECT swaps the entry for the margin and back, and the control row says so only when there is one to
+//  read, which is also how the player finds out OPUS does anything at all.
+static void DexScreen_DrawMarginOrEntry(u16 species)
+{
+    const struct OpusMargin *margin = OpusMarginFor(species);
+    u8 state = OpusMarginState(species);
+
+    FillWindowPixelBuffer(sPokedexScreenData->windowIds[2], PIXEL_FILL(0));
+    if (sMarginShown && state != OPUS_MARGIN_NONE)
+    {
+        DexScreen_AddTextPrinterParameterized(sPokedexScreenData->windowIds[2], FONT_NORMAL,
+                                              state == OPUS_MARGIN_CARRIED ? margin->carried : margin->neglected,
+                                              0, 8, 0);
+    }
+    else
+    {
+        sMarginShown = FALSE;
+        DexScreen_PrintMonFlavorText(sPokedexScreenData->windowIds[2], species, 0, 8);
+    }
+    CopyWindowToVram(sPokedexScreenData->windowIds[2], COPYWIN_GFX);
+}
+
 static void Task_DexScreen_ShowMonPage(u8 taskId)
 {
     switch (sPokedexScreenData->state)
@@ -1956,6 +2050,13 @@ static void Task_DexScreen_ShowMonPage(u8 taskId)
             RemoveDexPageWindows();
             BeginNormalPaletteFade(~0x8000, 0, 0, 16, RGB_WHITEALPHA);
             sPokedexScreenData->state = 1;
+        }
+        else if (JOY_NEW(SELECT_BUTTON) && OpusMarginState(sPokedexScreenData->dexSpecies) != OPUS_MARGIN_NONE)
+        {
+            //  T-197: turn the page over.
+            PlaySE(SE_SELECT);
+            sMarginShown = !sMarginShown;
+            DexScreen_DrawMarginOrEntry(sPokedexScreenData->dexSpecies);
         }
         else if (JOY_NEW(DPAD_UP) && DexScreen_TryScrollMonsVertical(1))
         {
@@ -3001,11 +3102,13 @@ static u8 DexScreen_DrawMonDexPage(bool8 justRegistered)
     CopyWindowToVram(sPokedexScreenData->windowIds[2], COPYWIN_GFX);
 
     // Control info
+    sMarginShown = FALSE;               // T-197: a page opens face up
     FillWindowPixelBuffer(1, PIXEL_FILL(15));
     if (justRegistered == FALSE)
     {
         DexScreen_AddTextPrinterParameterized(1, FONT_SMALL, gText_Cry, 8, 2, 4);
-        DexScreen_PrintControlInfo(gText_NextDataCancel);
+        DexScreen_PrintControlInfo(OpusMarginState(sPokedexScreenData->dexSpecies) != OPUS_MARGIN_NONE
+                                   ? gText_MarginNextDataCancel : gText_NextDataCancel);
     }
     else
         // Just registered

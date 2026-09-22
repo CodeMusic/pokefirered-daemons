@@ -444,8 +444,12 @@
 #define ITEM_POWDER_JAR 372
 #define ITEM_RUBY 373
 #define ITEM_SAPPHIRE 374
+//  T-197. APPENDED, never inserted: these ids are positional and every script, table and save that names an
+//  item names it by number, so a slot in the middle renumbers the game. OPUS is the first item this project
+//  has added rather than renamed.
+#define ITEM_OPUS 375
 
-#define ITEMS_COUNT 375
+#define ITEMS_COUNT 376
 
 #define ITEM_TO_BERRY(itemId)(((itemId - FIRST_BERRY_INDEX) + 1))
 #define MAIL_NONE 0xFF

@@ -398,6 +398,9 @@ static const u32 *const sItemIconTable[ITEMS_COUNT + 1][2] =
     [ITEM_POWDER_JAR]     = {gItemIcon_PowderJar, gItemIconPalette_PowderJar},
     [ITEM_RUBY]           = {gItemIcon_Gem, gItemIconPalette_Ruby},
     [ITEM_SAPPHIRE]       = {gItemIcon_Gem, gItemIconPalette_Sapphire},
+    //  T-197: OPUS borrows the UP-GRADE's icon -- a small device, and an addition to something, which is
+    //  what it is. Its own 24x24 drawing is a follow-up and is listed as one.
+    [ITEM_OPUS]           = {gItemIcon_UpGrade, gItemIconPalette_UpGrade},
     // Return to field arrow
     [ITEMS_COUNT]         = {gItemIcon_ReturnToFieldArrow, gItemIconPalette_ReturnToFieldArrow},
 };
