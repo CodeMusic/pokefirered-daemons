@@ -504,6 +504,150 @@ static const u8 sOpusMargin_Callous_Neglected[] = _("Still molten. Nothing touch
 static const u8 sOpusMargin_Buoyancy_Carried[] = _("You put a great deal on it. It rose\nanyway.");
 static const u8 sOpusMargin_Buoyancy_Neglected[] = _("Nothing on it. Still rising.");
 
+static const u8 sOpusMargin_Tension_Carried[] = _("You found out how much.");
+static const u8 sOpusMargin_Tension_Neglected[] = _("Still gathering. Nobody has touched it.");
+
+static const u8 sOpusMargin_Corefile_Carried[] = _("It carried it everywhere you went. It has\nstill not put it down.");
+static const u8 sOpusMargin_Corefile_Neglected[] = _("Still carrying it. Nowhere.");
+
+static const u8 sOpusMargin_Vigilance_Carried[] = _("It still has not happened. It still has\nnot looked away.");
+static const u8 sOpusMargin_Vigilance_Neglected[] = _("Nothing to watch. It has not looked away.");
+
+static const u8 sOpusMargin_Pipeline_Carried[] = _("You never interrupted it.");
+static const u8 sOpusMargin_Pipeline_Neglected[] = _("Six things, all stopped, none finished.");
+
+static const u8 sOpusMargin_Scheduler_Carried[] = _("You decided instead. It did not appeal\neither.");
+static const u8 sOpusMargin_Scheduler_Neglected[] = _("Nothing to decide about. Still deciding.");
+
+static const u8 sOpusMargin_Branch_Carried[] = _("It picked early every time. You did not\ncheck the other way.");
+static const u8 sOpusMargin_Branch_Neglected[] = _("No steps. Nothing to pick.");
+
+static const u8 sOpusMargin_Thread_Carried[] = _("You changed one of them.");
+static const u8 sOpusMargin_Thread_Neglected[] = _("Beside nothing. Sharing it with nobody.");
+
+static const u8 sOpusMargin_Supervisor_Carried[] = _("It started you again more than once.");
+static const u8 sOpusMargin_Supervisor_Neglected[] = _("Nothing moving. Nothing to restart.");
+
+static const u8 sOpusMargin_Pixelbyte_Carried[] = _("It has drawn a great deal for you. It\nstill cannot say what.");
+static const u8 sOpusMargin_Pixelbyte_Neglected[] = _("Still static. Nothing taken away.");
+
+static const u8 sOpusMargin_Rootkit_Carried[] = _("Nothing looked different to you either.");
+static const u8 sOpusMargin_Rootkit_Neglected[] = _("Still running it. Still nothing looks\ndifferent.");
+
+static const u8 sOpusMargin_Recall_Carried[] = _("It has a year of you, exactly.");
+static const u8 sOpusMargin_Recall_Neglected[] = _("It is keeping everything. Nothing has\nhappened.");
+
+static const u8 sOpusMargin_Broadcast_Carried[] = _("Some of it landed on you. It is still\nsending.");
+static const u8 sOpusMargin_Broadcast_Neglected[] = _("Still sending. Nowhere is listening.");
+
+static const u8 sOpusMargin_Impulse_Carried[] = _("It charged a great many times. It was\nusually right.");
+static const u8 sOpusMargin_Impulse_Neglected[] = _("Nothing to charge at. It still cannot see.");
+
+static const u8 sOpusMargin_Startle_Carried[] = _("You touched it once.");
+static const u8 sOpusMargin_Startle_Neglected[] = _("Still hanging. Months.");
+
+static const u8 sOpusMargin_Mutex_Carried[] = _("You held it. You let go.");
+static const u8 sOpusMargin_Mutex_Neglected[] = _("Nobody is holding it. Everyone is waiting\nanyway.");
+
+static const u8 sOpusMargin_Bristle_Carried[] = _("It is still that size.");
+static const u8 sOpusMargin_Bristle_Neglected[] = _("Nothing has threatened it. It is still that\nsize.");
+
+static const u8 sOpusMargin_Overdrive_Carried[] = _("You never made it check.");
+static const u8 sOpusMargin_Overdrive_Neglected[] = _("Still not stopping. Not going anywhere.");
+
+static const u8 sOpusMargin_Attachment_Carried[] = _("It fastened to you. It still did not\nchoose.");
+static const u8 sOpusMargin_Attachment_Neglected[] = _("Nothing larger. Nowhere.");
+
+static const u8 sOpusMargin_Heatsink_Carried[] = _("It took a great deal and did not warm.");
+static const u8 sOpusMargin_Heatsink_Neglected[] = _("Nothing to draw. Still cold.");
+
+static const u8 sOpusMargin_Alarm_Carried[] = _("You came every time. Most times there was\nno reason.");
+static const u8 sOpusMargin_Alarm_Neglected[] = _("Still calling. Nobody is coming.");
+
+static const u8 sOpusMargin_Hoarding_Carried[] = _("You have had things out of it. They were\nnot what went in.");
+static const u8 sOpusMargin_Hoarding_Neglected[] = _("Nothing found. Nothing kept.");
+
+static const u8 sOpusMargin_Armouring_Carried[] = _("You carried it anyway.");
+static const u8 sOpusMargin_Armouring_Neglected[] = _("Nothing held. Nothing holding.");
+
+static const u8 sOpusMargin_Caprice_Carried[] = _("It was warm often with you. It calls that\na decision.");
+static const u8 sOpusMargin_Caprice_Neglected[] = _("Shut. It calls that one too.");
+
+static const u8 sOpusMargin_Shell_Carried[] = _("You reached it through the thing on its\ntail.");
+static const u8 sOpusMargin_Shell_Neglected[] = _("Nothing reaching it. Not even that.");
+
+static const u8 sOpusMargin_Simmer_Carried[] = _("Still heading for it. Still not there.");
+static const u8 sOpusMargin_Simmer_Neglected[] = _("Still not there. Still not cooling.");
+
+static const u8 sOpusMargin_Cunning_Carried[] = _("It waited for you to leave too. You did\nnot notice.");
+static const u8 sOpusMargin_Cunning_Neglected[] = _("Nobody to wait for. It is not in a hurry.");
+
+static const u8 sOpusMargin_Warning_Carried[] = _("Nothing failed. It said so every day.");
+static const u8 sOpusMargin_Warning_Neglected[] = _("Still nothing failed. Still saying so.");
+
+static const u8 sOpusMargin_Ambush_Carried[] = _("It did nothing for a long time, with you,\non purpose.");
+static const u8 sOpusMargin_Ambush_Neglected[] = _("Trap built. Nothing doing.");
+
+static const u8 sOpusMargin_Illusion_Carried[] = _("The ground did not tilt. You leaned\nanyway.");
+static const u8 sOpusMargin_Illusion_Neglected[] = _("Nobody is looking at its antlers.");
+
+static const u8 sOpusMargin_Hardline_Carried[] = _("You did not cut it.");
+static const u8 sOpusMargin_Hardline_Neglected[] = _("Still connected. Still the only offer.");
+
+static const u8 sOpusMargin_Fakeroot_Carried[] = _("You did not check either.");
+static const u8 sOpusMargin_Fakeroot_Neglected[] = _("Still reporting it. Still nothing checking.");
+
+static const u8 sOpusMargin_Quota_Carried[] = _("It opened. It still cannot do anything\nnew.");
+static const u8 sOpusMargin_Quota_Neglected[] = _("Opened, and put away.");
+
+static const u8 sOpusMargin_Starved_Carried[] = _("You gave it the time.");
+static const u8 sOpusMargin_Starved_Neglected[] = _("Everything it needs is here. Still no turn.");
+
+static const u8 sOpusMargin_Instinct_Carried[] = _("It found a great deal. You stopped asking\nhow.");
+static const u8 sOpusMargin_Instinct_Neglected[] = _("Nothing buried. It keeps walking.");
+
+static const u8 sOpusMargin_Comfort_Carried[] = _("The honey is still gone.");
+static const u8 sOpusMargin_Comfort_Neglected[] = _("Still licking. Still gone.");
+
+static const u8 sOpusMargin_Hope_Carried[] = _("It has stayed up near you.");
+static const u8 sOpusMargin_Hope_Neglected[] = _("Nobody near it. It is down.");
+
+static const u8 sOpusMargin_Grievance_Carried[] = _("It is still owed it. You were not the one\nwho owed it.");
+static const u8 sOpusMargin_Grievance_Neglected[] = _("Still owed. Still standing in it.");
+
+static const u8 sOpusMargin_Craving_Carried[] = _("It took you to all of them.");
+static const u8 sOpusMargin_Craving_Neglected[] = _("It remembers every one. It cannot go.");
+
+static const u8 sOpusMargin_Caremusai_Carried[] = _("It read a great many rooms for you. It\nstill cannot show the working.");
+static const u8 sOpusMargin_Caremusai_Neglected[] = _("No room to read.");
+
+static const u8 sOpusMargin_Spyware_Carried[] = _("It settled on you. It was quiet about it.");
+static const u8 sOpusMargin_Spyware_Neglected[] = _("Nothing to settle on. Still working.");
+
+static const u8 sOpusMargin_Roverbyte_Carried[] = _("It has checked a great deal with you.\nSome of it was wrong.");
+static const u8 sOpusMargin_Roverbyte_Neglected[] = _("A body, and nothing to check it against.");
+
+static const u8 sOpusMargin_Tarpit_Carried[] = _("Things went in. None came out.");
+static const u8 sOpusMargin_Tarpit_Neglected[] = _("Nothing has entered.");
+
+static const u8 sOpusMargin_Badseed_Carried[] = _("It settled on everything learning near\nyou.");
+static const u8 sOpusMargin_Badseed_Neglected[] = _("Nothing learning nearby.");
+
+static const u8 sOpusMargin_Locus_Carried[] = _("So far it has held. You did not ask what\nfor either.");
+static const u8 sOpusMargin_Locus_Neglected[] = _("Still holding. Nothing testing it.");
+
+static const u8 sOpusMargin_Hibernate_Carried[] = _("It came back identical every time.");
+static const u8 sOpusMargin_Hibernate_Neglected[] = _("Switched off. Everything written down.");
+
+static const u8 sOpusMargin_Prescience_Carried[] = _("It saw you coming. It did not move.");
+static const u8 sOpusMargin_Prescience_Neglected[] = _("Nothing coming. It has seen that too.");
+
+static const u8 sOpusMargin_Periphery_Carried[] = _("It noticed a great deal, too late, all\nthe way.");
+static const u8 sOpusMargin_Periphery_Neglected[] = _("Everything at once. Nothing in particular.");
+
+static const u8 sOpusMargin_Mime_Carried[] = _("You stopped at the wall a few times\nyourself.");
+static const u8 sOpusMargin_Mime_Neglected[] = _("There is no wall. Nothing has stopped at\nit.");
+
 static const struct OpusMargin sOpusMargins[] = {
     { SPECIES_BULBASAUR,     sOpusMargin_Rovercub_Carried, sOpusMargin_Rovercub_Neglected },
     { SPECIES_CHARMANDER,    sOpusMargin_Label_Carried, sOpusMargin_Label_Neglected },
@@ -669,4 +813,52 @@ static const struct OpusMargin sOpusMargins[] = {
     { SPECIES_MACHAMP,       sOpusMargin_LemmaMind_Carried, sOpusMargin_LemmaMind_Neglected },
     { SPECIES_MAGCARGO,      sOpusMargin_Callous_Carried, sOpusMargin_Callous_Neglected },
     { SPECIES_MANTINE,       sOpusMargin_Buoyancy_Carried, sOpusMargin_Buoyancy_Neglected },
+    { SPECIES_MAREEP,        sOpusMargin_Tension_Carried, sOpusMargin_Tension_Neglected },
+    { SPECIES_MAROWAK,       sOpusMargin_Corefile_Carried, sOpusMargin_Corefile_Neglected },
+    { SPECIES_NATU,          sOpusMargin_Vigilance_Carried, sOpusMargin_Vigilance_Neglected },
+    { SPECIES_NIDOKING,      sOpusMargin_Pipeline_Carried, sOpusMargin_Pipeline_Neglected },
+    { SPECIES_NIDOQUEEN,     sOpusMargin_Scheduler_Carried, sOpusMargin_Scheduler_Neglected },
+    { SPECIES_NIDORAN_M,     sOpusMargin_Branch_Carried, sOpusMargin_Branch_Neglected },
+    { SPECIES_NIDORINA,      sOpusMargin_Thread_Carried, sOpusMargin_Thread_Neglected },
+    { SPECIES_NOCTOWL,       sOpusMargin_Supervisor_Carried, sOpusMargin_Supervisor_Neglected },
+    { SPECIES_NUMEL,         sOpusMargin_Pixelbyte_Carried, sOpusMargin_Pixelbyte_Neglected },
+    { SPECIES_PARASECT,      sOpusMargin_Rootkit_Carried, sOpusMargin_Rootkit_Neglected },
+    { SPECIES_PHANPY,        sOpusMargin_Recall_Carried, sOpusMargin_Recall_Neglected },
+    { SPECIES_PIDGEOT,       sOpusMargin_Broadcast_Carried, sOpusMargin_Broadcast_Neglected },
+    { SPECIES_PILOSWINE,     sOpusMargin_Impulse_Carried, sOpusMargin_Impulse_Neglected },
+    { SPECIES_PINECO,        sOpusMargin_Startle_Carried, sOpusMargin_Startle_Neglected },
+    { SPECIES_POLIWRATH,     sOpusMargin_Mutex_Carried, sOpusMargin_Mutex_Neglected },
+    { SPECIES_QWILFISH,      sOpusMargin_Bristle_Carried, sOpusMargin_Bristle_Neglected },
+    { SPECIES_RAPIDASH,      sOpusMargin_Overdrive_Carried, sOpusMargin_Overdrive_Neglected },
+    { SPECIES_REMORAID,      sOpusMargin_Attachment_Carried, sOpusMargin_Attachment_Neglected },
+    { SPECIES_SEEL,          sOpusMargin_Heatsink_Carried, sOpusMargin_Heatsink_Neglected },
+    { SPECIES_SENTRET,       sOpusMargin_Alarm_Carried, sOpusMargin_Alarm_Neglected },
+    { SPECIES_SHUCKLE,       sOpusMargin_Hoarding_Carried, sOpusMargin_Hoarding_Neglected },
+    { SPECIES_SKARMORY,      sOpusMargin_Armouring_Carried, sOpusMargin_Armouring_Neglected },
+    { SPECIES_SKIPLOOM,      sOpusMargin_Caprice_Carried, sOpusMargin_Caprice_Neglected },
+    { SPECIES_SLOWBRO,       sOpusMargin_Shell_Carried, sOpusMargin_Shell_Neglected },
+    { SPECIES_SLUGMA,        sOpusMargin_Simmer_Carried, sOpusMargin_Simmer_Neglected },
+    { SPECIES_SNEASEL,       sOpusMargin_Cunning_Carried, sOpusMargin_Cunning_Neglected },
+    { SPECIES_SNUBBULL,      sOpusMargin_Warning_Carried, sOpusMargin_Warning_Neglected },
+    { SPECIES_SPINARAK,      sOpusMargin_Ambush_Carried, sOpusMargin_Ambush_Neglected },
+    { SPECIES_STANTLER,      sOpusMargin_Illusion_Carried, sOpusMargin_Illusion_Neglected },
+    { SPECIES_STEELIX,       sOpusMargin_Hardline_Carried, sOpusMargin_Hardline_Neglected },
+    { SPECIES_SUDOWOODO,     sOpusMargin_Fakeroot_Carried, sOpusMargin_Fakeroot_Neglected },
+    { SPECIES_SUNFLORA,      sOpusMargin_Quota_Carried, sOpusMargin_Quota_Neglected },
+    { SPECIES_SUNKERN,       sOpusMargin_Starved_Carried, sOpusMargin_Starved_Neglected },
+    { SPECIES_SWINUB,        sOpusMargin_Instinct_Carried, sOpusMargin_Instinct_Neglected },
+    { SPECIES_TEDDIURSA,     sOpusMargin_Comfort_Carried, sOpusMargin_Comfort_Neglected },
+    { SPECIES_TOGETIC,       sOpusMargin_Hope_Carried, sOpusMargin_Hope_Neglected },
+    { SPECIES_TYRANITAR,     sOpusMargin_Grievance_Carried, sOpusMargin_Grievance_Neglected },
+    { SPECIES_URSARING,      sOpusMargin_Craving_Carried, sOpusMargin_Craving_Neglected },
+    { SPECIES_VAPOREON,      sOpusMargin_Caremusai_Carried, sOpusMargin_Caremusai_Neglected },
+    { SPECIES_VENOMOTH,      sOpusMargin_Spyware_Carried, sOpusMargin_Spyware_Neglected },
+    { SPECIES_VENUSAUR,      sOpusMargin_Roverbyte_Carried, sOpusMargin_Roverbyte_Neglected },
+    { SPECIES_VICTREEBEL,    sOpusMargin_Tarpit_Carried, sOpusMargin_Tarpit_Neglected },
+    { SPECIES_VILEPLUME,     sOpusMargin_Badseed_Carried, sOpusMargin_Badseed_Neglected },
+    { SPECIES_WARTORTLE,     sOpusMargin_Locus_Carried, sOpusMargin_Locus_Neglected },
+    { SPECIES_WIGGLYTUFF,    sOpusMargin_Hibernate_Carried, sOpusMargin_Hibernate_Neglected },
+    { SPECIES_XATU,          sOpusMargin_Prescience_Carried, sOpusMargin_Prescience_Neglected },
+    { SPECIES_YANMA,         sOpusMargin_Periphery_Carried, sOpusMargin_Periphery_Neglected },
+    { SPECIES_MR_MIME,       sOpusMargin_Mime_Carried, sOpusMargin_Mime_Neglected },
 };
