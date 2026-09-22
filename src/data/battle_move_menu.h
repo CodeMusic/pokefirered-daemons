@@ -6,6 +6,7 @@
 
 #include "constants/moves.h"
 #include "constants/pokemon.h"
+#include "type_colours.h"   // a sibling: src/ is not an include path, only include/ is
 
 enum
 {
@@ -30,29 +31,6 @@ static const u8 sMoveClassGlyph[MOVE_CLASS_COUNT] =
     [MOVE_CLASS_MEND   ] = 0x1E,
     [MOVE_CLASS_GUARD  ] = 0x6F,
     [MOVE_CLASS_OTHER  ] = 0x20,
-};
-
-// Each type as a word on the white battle box: step 4 of its ramp.
-static const u16 sMoveMenuTypeTextColor[] =
-{
-    [TYPE_NORMAL  ] = RGB(12, 12, 11), // CONTENT
-    [TYPE_FIGHTING] = RGB( 6,  8, 10), // LOGIC
-    [TYPE_FLYING  ] = RGB(13,  4,  4), // VECTOR
-    [TYPE_POISON  ] = RGB( 5,  6,  3), // CORRUPT
-    [TYPE_GROUND  ] = RGB(10,  8,  5), // STRATUM
-    [TYPE_ROCK    ] = RGB( 8,  8,  9), // LEGACY
-    [TYPE_BUG     ] = RGB( 8,  9,  4), // SWARM
-    [TYPE_GHOST   ] = RGB( 6,  4,  7), // LATENT
-    [TYPE_FIRE    ] = RGB(14, 10,  3), // ENTROPY
-    [TYPE_WATER   ] = RGB( 4,  7, 11), // FLOW
-    [TYPE_GRASS   ] = RGB( 6, 10,  6), // GROWTH
-    [TYPE_ELECTRIC] = RGB( 5, 12, 12), // SIGNAL
-    [TYPE_PSYCHIC ] = RGB(11,  5, 10), // CONTEXT
-    [TYPE_ICE     ] = RGB(10, 13, 14), // FROZEN
-    [TYPE_DRAGON  ] = RGB( 3,  8,  7), // EMERGENT
-    [TYPE_MYSTERY ] = RGB( 9,  9,  9), // ORACLE -- no hue: the box's grey
-    [TYPE_STEEL   ] = RGB(12, 11,  6), // HARDENED
-    [TYPE_DARK    ] = RGB( 2,  2,  3), // OPAQUE
 };
 
 // What every move does. A move not listed hits (MOVE_CLASS_HIT is 0).

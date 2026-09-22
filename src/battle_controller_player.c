@@ -1776,7 +1776,7 @@ static void DoHitAnimBlinkSpriteEffect(void)
 
 static void SetMoveMenuTypeColor(u8 slot, u16 move)
 {
-    u16 color = sMoveMenuTypeTextColor[gBattleMoves[move].type];
+    u16 color = sTypeTextColor[gBattleMoves[move].type];
 
     gPlttBufferUnfaded[BG_PLTT_ID(5) + MOVE_MENU_COLOR(slot)] = color;
     gPlttBufferFaded[BG_PLTT_ID(5) + MOVE_MENU_COLOR(slot)] = color;

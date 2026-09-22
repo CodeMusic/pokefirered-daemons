@@ -18,6 +18,7 @@
 #include "item.h"   // T-197: CheckBagHasItem
 #include "pokemon_storage_system.h"   // T-197: OPUS reads the boxes as well as the party
 #include "data/opus_margins.h"
+#include "data/type_colours.h"   // T-200: the same eighteen colours the move menu uses
 #include "trainer_pokemon_sprites.h"
 #include "decompress.h"
 #include "constants/items.h"   // T-197: ITEM_OPUS
@@ -621,13 +622,23 @@ const struct WindowTemplate sWindowTemplate_DexEntry_SpeciesStats = {
     .baseBlock = 0x01e8
 };
 
+//  T-200: THE ENTRY WINDOW OWNS ITS PALETTE NOW, and that is the whole reason this works.
+//
+//  The type is printed in the type's COLOUR, which means two of the sixteen entries have to be ours to
+//  write -- and palette 0 is the dex chrome: all sixteen of its slots are spoken for by the frame, and
+//  taking one would repaint some piece of the page nobody would think to look at.
+//
+//  Palette 1 is BLACK in kanto_dex_bgpals, all sixteen entries, so nothing on this page draws with it.
+//  The entry page copies palette 0 into it and then paints two slots, so every existing colour renders
+//  exactly as before and the two new ones cost the chrome nothing. The list menu and the top menu load
+//  their own into palette 1 and reload it each time, so borrowing it back is safe in both directions.
 const struct WindowTemplate sWindowTemplate_DexEntry_FlavorText = {
     .bg = 1,
     .tilemapLeft = 0,
     .tilemapTop = 11,
     .width = 30,
     .height = 7,
-    .paletteNum = 0,
+    .paletteNum = 1,
     .baseBlock = 0x0250
 };
 
@@ -1912,7 +1923,15 @@ static int DexScreen_InputHandler_GetShoulderInput(void)
 }
 
 void DexScreen_PrintMonFlavorText(u8 windowId, u16 species, u8 x, u8 y);   // defined below
+//  T-200: the two palette slots the entry window paints a type into, and the gap between two type words.
+//  They sit up here because DexScreen_AddTextPrinterParameterized reads them and is defined well above the
+//  code that writes them.
+#define DEX_PLTT_TYPE1 12
+#define DEX_PLTT_TYPE2 13
+#define DEX_TYPE_GAP    6
+
 static void DexScreen_PrintMonType(u8 windowId, u16 species);             // defined below
+static void DexScreen_LoadEntryPalette(u16 species);                      // defined below
 
 //  T-197: OPUS. Something found on a shelf with no price on it, which writes ONE LINE under an entry. It does
 //  not repair the Index -- 4.2's point is that the artifact can only measure content and has no field for what
@@ -2020,6 +2039,7 @@ static void DexScreen_DrawMarginOrEntry(u16 species)
     u8 state = OpusMarginState(species);
 
     FillWindowPixelBuffer(sPokedexScreenData->windowIds[2], PIXEL_FILL(0));
+    DexScreen_LoadEntryPalette(species);
     DexScreen_PrintMonType(sPokedexScreenData->windowIds[2], species);
     if (sMarginShown && state != OPUS_MARGIN_NONE)
     {
@@ -2314,6 +2334,19 @@ static void DexScreen_AddTextPrinterParameterized(u8 windowId, u8 fontId, const 
         textColor[0] = 0;
         textColor[1] = 1;
         textColor[2] = 2;
+        break;
+    //  T-200: the two type slots of the entry window's own palette. Same background and same shadow as
+    //  case 0, which is what the rest of the page prints with -- only the ink changes, so a coloured word
+    //  sits in the page rather than on top of it.
+    case 5:
+        textColor[0] = 0;
+        textColor[1] = DEX_PLTT_TYPE1;
+        textColor[2] = 3;
+        break;
+    case 6:
+        textColor[0] = 0;
+        textColor[1] = DEX_PLTT_TYPE2;
+        textColor[2] = 3;
         break;
     }
     AddTextPrinterParameterized4(windowId, fontId, x, y, fontId == FONT_SMALL ? 0 : 1, 0, textColor, -1, str);
@@ -3114,13 +3147,44 @@ void DexScreen_DrawMonFootprint(u8 windowId, u16 species, u8 x, u8 y)
 //  The entry box does: it is 240 wide and its text starts at y=8, so the strip above it is empty on every
 //  entry in the game. The label sits there, which also puts it beside the entry it belongs to rather than
 //  among the measurements. Drawn from DexScreen_DrawMarginOrEntry so it survives the page being turned over.
+//  T-200. 9.4 says a daemon is coloured by what it IS, and the field test asked the obvious question back:
+//  where does the player LEARN that? The TOOLKIT teaches the chart (T-211); this is where they read it off
+//  the daemon itself. The type is named in the type's own colour, so the word and the body agree.
+//
+//  BOTH types are named. Vanilla's dex shows two and ours showed one, which threw away half of what the
+//  colour is claiming -- and a dual type is the case where the chart is hardest to hold in your head.
+//
+//  The colours are sTypeTextColor, the same table the move menu prints a move's name with: the lightest
+//  step of the ramp that still clears 4.5:1, measured rather than picked.
+static void DexScreen_LoadEntryPalette(u16 species)
+{
+    u16 pal[16];
+
+    //  Palette 0 is the page; this is the page plus two words. Copied from the live buffer rather than
+    //  from sKantoDexPalette, because the national dex loads a different one into the same slots.
+    CpuCopy16(&gPlttBufferUnfaded[BG_PLTT_ID(0)], pal, PLTT_SIZE_4BPP);
+    pal[DEX_PLTT_TYPE1] = sTypeTextColor[gSpeciesInfo[species].types[0]];
+    pal[DEX_PLTT_TYPE2] = sTypeTextColor[gSpeciesInfo[species].types[1]];
+    LoadPalette(pal, BG_PLTT_ID(1), PLTT_SIZE_4BPP);
+}
+
 static void DexScreen_PrintMonType(u8 windowId, u16 species)
 {
+    u8 type1, type2;
+    u32 x;
+
     if (!DexScreen_GetSetPokedexFlag(species, FLAG_GET_CAUGHT, TRUE))
         return;
 
-    DexScreen_AddTextPrinterParameterized(windowId, FONT_SMALL,
-                                          gTypeNames[gSpeciesInfo[species].types[0]], 4, 0, 0);
+    type1 = gSpeciesInfo[species].types[0];
+    type2 = gSpeciesInfo[species].types[1];
+
+    DexScreen_AddTextPrinterParameterized(windowId, FONT_SMALL, gTypeNames[type1], 4, 0, 5);
+    if (type2 != type1)
+    {
+        x = 4 + GetStringWidth(FONT_SMALL, gTypeNames[type1], 0) + DEX_TYPE_GAP;
+        DexScreen_AddTextPrinterParameterized(windowId, FONT_SMALL, gTypeNames[type2], x, 0, 6);
+    }
 }
 
 static u8 DexScreen_DrawMonDexPage(bool8 justRegistered)
