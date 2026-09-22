@@ -148,7 +148,7 @@ Help_Text_WantToMakeMonStronger::
 	.string "I want to make my DAEMONS stronger.$"
 
 Help_Text_FoeMonsTooStrong::
-	.string "The foe DAEMONS are too strong!$"
+	.string "Their DAEMONS are too strong!$"
 
 Help_Text_WhatDoIDoInCave::
 	.string "What do I do in a cave?$"
@@ -327,7 +327,7 @@ Help_Text_AnswerMyMonsAreHurt::
 Help_Text_AnswerWhatIsStatusProblem::
 	.string "A status problem refers to an ailment\n"
 	.string "that is inflicted on a DAEMON by its\l"
-	.string "foe's attack. These include\l"
+	.string "their attack. These include\l"
 	.string "throttling, leaking, suspension, and\l"
 	.string "overheating and hanging. Heal\l"
 	.string "them at a CHECKPOINT or with the\l"
@@ -375,9 +375,9 @@ Help_Text_AnswerWhatsATrainer::
 Help_Text_AnswerHowDoIWinAgainstTrainer::
 	.string "To beat a USER in battle, use DAEMON\n"
 	.string "that have type advantages over the\l"
-	.string "foe's DAEMON. You may also use\l"
+	.string "their DAEMON. You may also use\l"
 	.string "highly trained DAEMON with overwhelming\l"
-	.string "power. Outnumbering the foe's DAEMON\l"
+	.string "power. Outnumbering their DAEMON\l"
 	.string "is another obvious tactic.$"
 
 Help_Text_AnswerWhereDoMonsAppear::
@@ -432,7 +432,7 @@ Help_Text_AnswerWantToMakeMonStronger::
 	.string "DAEMON often to level up your party.$"
 
 Help_Text_AnswerFoeMonsTooStrong::
-	.string "If your foe are too strong, try\n"
+	.string "If they are too strong, try\n"
 	.string "leveling up your DAEMON some more. Go\l"
 	.string "back the way you came and battle wild\l"
 	.string "DAEMON to level up your party. You\l"
@@ -1187,7 +1187,7 @@ Help_Text_DefineHP::
 	.string "HP indicates a DAEMON's vitality. If a\n"
 	.string "DAEMON's HP drops to zero, it HALTS and\l"
 	.string "is unable to battle. So, the key in\l"
-	.string "battle is to try to reduce the foe's HP\l"
+	.string "battle is to try to reduce their HP\l"
 	.string "to zero. If your DAEMONS are hurt,\l"
 	.string "restore their HP at a CHECKPOINT or\l"
 	.string "use items.$"
@@ -1221,7 +1221,7 @@ Help_Text_DefineDefense::
 	.string "DEFENSE indicates the resistance a\n"
 	.string "DAEMON has against physical attacks.\l"
 	.string "The higher this stat, the less damage\l"
-	.string "sustained from a foe's physical hit.$"
+	.string "sustained from their physical hit.$"
 
 Help_Text_DefineSpAtk::
 	.string "SP. ATK (Special Attack) indicates the power\n"
@@ -1236,12 +1236,12 @@ Help_Text_DefineSpDef::
 	.string "SP. DEF (Special Defense) indicates the\n"
 	.string "resistance a DAEMON has against special\l"
 	.string "attacks. The higher this stat, the less\l"
-	.string "damage sustained from a foe's special\l"
+	.string "damage sustained from their special\l"
 	.string "attack.$"
 
 Help_Text_DefineSpeed::
 	.string "SPEED indicates the agility of a DAEMON. If\n"
-	.string "this stat exceeds the foe's in battle, the\l"
+	.string "this stat exceeds theirs in battle, the\l"
 	.string "DAEMON can make a ROUTINE before its slower\l"
 	.string "opponent.$"
 
@@ -1323,11 +1323,11 @@ Help_Text_DefinePower::
 	.string "POWER indicates the strength of an\n"
 	.string "attack. The higher this number, the\l"
 	.string "greater the damage that can be\l"
-	.string "inflicted on the foe!$"
+	.string "inflicted on them!$"
 
 Help_Text_DefineAccuracy::
 	.string "ACCURACY indicates the probability of the\n"
-	.string "ROUTINE hitting the foe. The higher this\l"
+	.string "ROUTINE hitting them. The higher this\l"
 	.string "number, the more likely the ROUTINE will\l"
 	.string "strike the target.$"
 
@@ -1389,9 +1389,9 @@ Help_Text_DefineBattleScene::
 Help_Text_DefineBattleStyle::
 	.string "You can choose whether or not a USER\n"
 	.string "can switch a DAEMON after it has made\l"
-	.string "its foe HALT. Set to “SHIFT” if you\l"
+	.string "its them HALT. Set to “SHIFT” if you\l"
 	.string "would like the chance to switch a\l"
-	.string "DAEMON after it has made its foe\l"
+	.string "DAEMON after it has made its them\l"
 	.string "HALT.$"
 
 Help_Text_DefineSound::
@@ -1679,7 +1679,7 @@ Help_Text_TypeMatchupOwnMoveDark::
 	.string "   {TRIANGLE}: LOGIC, OPAQUE, HARDENED$"
 
 Help_Text_TypeMatchupOwnPokemonDark::
-	.string "Effect of foe's ROUTINE on own DAEMON:\p"
+	.string "Effect of their ROUTINE on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: LOGIC, SWARM\p"
 	.string "   {TRIANGLE}: LATENT, OPAQUE\p"
 	.string "   {BIG_MULT_X}: CONTEXT$"
@@ -1690,7 +1690,7 @@ Help_Text_TypeMatchupOwnMoveRock::
 	.string "   {TRIANGLE}: LOGIC, STRATUM, HARDENED$"
 
 Help_Text_TypeMatchupOwnPokemonRock::
-	.string "Effect of foe's ROUTINE on own DAEMON:\p"
+	.string "Effect of their ROUTINE on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: FLOW, GROWTH, LOGIC,\n"
 	.string "       STRATUM, HARDENED\p"
 	.string "   {TRIANGLE}: CONTENT, ENTROPY, CORRUPT,\n"
@@ -1703,7 +1703,7 @@ Help_Text_TypeMatchupOwnMovePsychic::
 	.string "   {BIG_MULT_X}: OPAQUE$"
 
 Help_Text_TypeMatchupOwnPokemonPsychic::
-	.string "Effect of foe's ROUTINE on own DAEMON:\p"
+	.string "Effect of their ROUTINE on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: SWARM, LATENT, OPAQUE\p"
 	.string "   {TRIANGLE}: LOGIC, CONTEXT$"
 
@@ -1716,7 +1716,7 @@ Help_Text_TypeMatchupOwnMoveFighting::
 	.string "   {BIG_MULT_X}: LATENT$"
 
 Help_Text_TypeMatchupOwnPokemonFighting::
-	.string "Effect of foe's ROUTINE on own DAEMON:\p"
+	.string "Effect of their ROUTINE on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: VECTOR, CONTEXT\p"
 	.string "   {TRIANGLE}: SWARM, LEGACY, OPAQUE$"
 
@@ -1728,7 +1728,7 @@ Help_Text_TypeMatchupOwnMoveGrass::
 	.string "       SWARM, EMERGENT, HARDENED$"
 
 Help_Text_TypeMatchupOwnPokemonGrass::
-	.string "Effect of foe's ROUTINE on own DAEMON:\p"
+	.string "Effect of their ROUTINE on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: ENTROPY, FROZEN, CORRUPT,\n"
 	.string "       VECTOR, SWARM\p"
 	.string "   {TRIANGLE}: FLOW, SIGNAL, GROWTH, STRATUM$"
@@ -1740,7 +1740,7 @@ Help_Text_TypeMatchupOwnMoveGhost::
 	.string "   {BIG_MULT_X}: CONTENT$"
 
 Help_Text_TypeMatchupOwnPokemonGhost::
-	.string "Effect of foe's ROUTINE on own DAEMON:\p"
+	.string "Effect of their ROUTINE on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: LATENT, OPAQUE\p"
 	.string "   {TRIANGLE}: CORRUPT, SWARM\p"
 	.string "   {BIG_MULT_X}: CONTENT, LOGIC$"
@@ -1753,7 +1753,7 @@ Help_Text_TypeMatchupOwnMoveIce::
 	.string "       HARDENED$"
 
 Help_Text_TypeMatchupOwnPokemonIce::
-	.string "Effect of foe's ROUTINE on own DAEMON:\p"
+	.string "Effect of their ROUTINE on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: ENTROPY, LOGIC, LEGACY,\n"
 	.string "       HARDENED\p"
 	.string "   {TRIANGLE}: FROZEN$"
@@ -1767,7 +1767,7 @@ Help_Text_TypeMatchupOwnMoveGround::
 	.string "   {BIG_MULT_X}: VECTOR$"
 
 Help_Text_TypeMatchupOwnPokemonGround::
-	.string "Effect of foe's ROUTINE on own DAEMON:\p"
+	.string "Effect of their ROUTINE on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: FLOW, GROWTH, FROZEN\p"
 	.string "   {TRIANGLE}: CORRUPT, LEGACY\p"
 	.string "   {BIG_MULT_X}: SIGNAL$"
@@ -1779,7 +1779,7 @@ Help_Text_TypeMatchupOwnMoveElectric::
 	.string "   {BIG_MULT_X}: STRATUM$"
 
 Help_Text_TypeMatchupOwnPokemonElectric::
-	.string "Effect of foe's ROUTINE on own DAEMON:\p"
+	.string "Effect of their ROUTINE on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: STRATUM\p"
 	.string "   {TRIANGLE}: SIGNAL, VECTOR, HARDENED$"
 
@@ -1791,7 +1791,7 @@ Help_Text_TypeMatchupOwnMovePoison::
 	.string "   {BIG_MULT_X}: HARDENED$"
 
 Help_Text_TypeMatchupOwnPokemonPoison::
-	.string "Effect of foe's ROUTINE on own DAEMON:\p"
+	.string "Effect of their ROUTINE on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: STRATUM, CONTEXT\p"
 	.string "   {TRIANGLE}: GROWTH, LOGIC, CORRUPT, SWARM$"
 
@@ -1801,7 +1801,7 @@ Help_Text_TypeMatchupOwnMoveDragon::
 	.string "   {TRIANGLE}: HARDENED$"
 
 Help_Text_TypeMatchupOwnPokemonDragon::
-	.string "Effect of foe's ROUTINE on own DAEMON:\p"
+	.string "Effect of their ROUTINE on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: FROZEN, EMERGENT\p"
 	.string "   {TRIANGLE}: ENTROPY, FLOW, SIGNAL, GROWTH$"
 
@@ -1811,7 +1811,7 @@ Help_Text_TypeMatchupOwnMoveNormal::
 	.string "   {BIG_MULT_X}: LATENT$"
 
 Help_Text_TypeMatchupOwnPokemonNormal::
-	.string "Effect of foe's ROUTINE on own DAEMON:\p"
+	.string "Effect of their ROUTINE on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: LOGIC\p"
 	.string "   {BIG_MULT_X}: LATENT$"
 
@@ -1822,7 +1822,7 @@ Help_Text_TypeMatchupOwnMoveSteel::
 	.string "       HARDENED$"
 
 Help_Text_TypeMatchupOwnPokemonSteel::
-	.string "Effect of foe's ROUTINE on own DAEMON:\p"
+	.string "Effect of their ROUTINE on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: ENTROPY, LOGIC, STRATUM\n"
 	.string "   {TRIANGLE}: CONTENT, GROWTH, FROZEN,\n"
 	.string "       VECTOR, \l"
@@ -1836,7 +1836,7 @@ Help_Text_TypeMatchupOwnMoveFlying::
 	.string "   {TRIANGLE}: SIGNAL, LEGACY, HARDENED$"
 
 Help_Text_TypeMatchupOwnPokemonFlying::
-	.string "Effect of foe's ROUTINE on own DAEMON:\p"
+	.string "Effect of their ROUTINE on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: SIGNAL, FROZEN, LEGACY\p"
 	.string "   {TRIANGLE}: GROWTH, LOGIC, SWARM\p"
 	.string "   {BIG_MULT_X}: STRATUM$"
@@ -1849,7 +1849,7 @@ Help_Text_TypeMatchupOwnMoveFire::
 	.string "       EMERGENT$"
 
 Help_Text_TypeMatchupOwnPokemonFire::
-	.string "Effect of foe's ROUTINE on own DAEMON:\p"
+	.string "Effect of their ROUTINE on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: FLOW, STRATUM, LEGACY\p"
 	.string "   {TRIANGLE}: ENTROPY, GROWTH, FROZEN,\n"
 	.string "       SWARM, HARDENED$"
@@ -1860,7 +1860,7 @@ Help_Text_TypeMatchupOwnMoveWater::
 	.string "   {TRIANGLE}: FLOW, GROWTH, EMERGENT$"
 
 Help_Text_TypeMatchupOwnPokemonWater::
-	.string "Effect of foe's ROUTINE on own DAEMON:\p"
+	.string "Effect of their ROUTINE on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: SIGNAL, GROWTH\p"
 	.string "   {TRIANGLE}: ENTROPY, FLOW, FROZEN,\n"
 	.string "       HARDENED$"
@@ -1872,7 +1872,7 @@ Help_Text_TypeMatchupOwnMoveBug::
 	.string "       VECTOR, LATENT, HARDENED$"
 
 Help_Text_TypeMatchupOwnPokemonBug::
-	.string "Effect of foe's ROUTINE on own DAEMON:\p"
+	.string "Effect of their ROUTINE on own DAEMON:\p"
 	.string "   {CIRCLE_DOT}: ENTROPY, VECTOR, LEGACY\p"
 	.string "   {TRIANGLE}: GROWTH, LOGIC, STRATUM$"
 
