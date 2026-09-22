@@ -33,7 +33,12 @@ struct TestingBar
 #define B_INTERFACE_GFX_STATUS_SLP_BATTLER0     27
 #define B_INTERFACE_GFX_STATUS_FRZ_BATTLER0     30
 #define B_INTERFACE_GFX_STATUS_BRN_BATTLER0     33
-// tiles 36 through 38 are unused
+//  T-187: tiles 36-38 were vanilla's own reserved hole, exactly one status icon wide, and they hold the
+//  THRASHING mark now (tools/genthrashicon.py). BATTLER0 ONLY: each battler's healthbox draws a differently
+//  shaped badge -- battler 0's icons are not battler 1's -- and 36-38 is the only free slot in the sheet.
+//  Giving the other three one means adding a fourth row of tiles to healthbox_elements.png, which is a
+//  change to the size of an INCBIN'd blob and wants looking at on a screen before it ships.
+#define B_INTERFACE_GFX_STATUS_THRASH_BATTLER0  36
 #define B_INTERFACE_GFX_STATUS_NONE             39
 // tiles 40 through 42 are unused
 #define B_INTERFACE_GFX_SAFARI_HEALTHBOX_0      43
@@ -1580,7 +1585,8 @@ enum
     PAL_STATUS_PAR,
     PAL_STATUS_SLP,
     PAL_STATUS_FRZ,
-    PAL_STATUS_BRN
+    PAL_STATUS_BRN,
+    PAL_STATUS_THRASH
 };
 
 // The battle healthbox is the THIRD place a status is drawn -- the party menu
@@ -1593,8 +1599,24 @@ static const u16 sStatusIconColors[] = {
     [PAL_STATUS_PAR] = RGB(25, 20,  4),   // THR  #c8a020  amber
     [PAL_STATUS_SLP] = RGB(17, 17, 19),   // SUS  #8a8f9c  slate
     [PAL_STATUS_FRZ] = RGB(15, 21, 27),   // HNG  #78a8dc  pale blue
-    [PAL_STATUS_BRN] = RGB(27, 14,  7)    // OVR  #d8703c  ember
+    [PAL_STATUS_BRN] = RGB(27, 14,  7),   // OVR  #d8703c  ember
+    //  T-187. THRASHING is the one state on this box that does not follow the daemon out of the battle, so
+    //  it is a MARK and not a word -- and violet, which none of the five uses.
+    [PAL_STATUS_THRASH] = RGB(20, 12, 25) // a sawtooth  #a060c8  violet
 };
+
+//  T-187: nothing calls the updater when a VOLATILE status changes -- the healthbox is only told about
+//  STATUS1 -- so the action menu asks once a turn, which is the only moment the answer can matter.
+void DaemonsRefreshStatusIcons(void)
+{
+    u32 i;
+
+    for (i = 0; i < gBattlersCount; i++)
+    {
+        if (gHealthboxSpriteIds[i] != 0xFF)
+            UpdateStatusIconInHealthbox(gHealthboxSpriteIds[i]);
+    }
+}
 
 static void UpdateStatusIconInHealthbox(u8 healthboxSpriteId)
 {
@@ -1645,6 +1667,16 @@ static void UpdateStatusIconInHealthbox(u8 healthboxSpriteId)
     {
         statusGfxPtr = GetBattleInterfaceGfxPtr(GetStatusIconForBattlerId(B_INTERFACE_GFX_STATUS_PAR_BATTLER0, battlerId));
         statusPalId = PAL_STATUS_PAR;
+    }
+    //  T-187: AND ONE THAT IS NOT A STATUS1 AT ALL. Vanilla's healthbox shows the five that persist and
+    //  nothing else, because the rest are volatile -- but our statuses are states of mind, and a player who
+    //  cannot see that their daemon is in one cannot reason about it. Marking EVERY volatile state would
+    //  make this a dashboard, so the line is drawn where it means something: the healthbox NAMES what
+    //  follows a daemon out of the battle and MARKS what does not. Last, so a major status still wins.
+    else if (battlerId == 0 && (gBattleMons[battlerId].status2 & STATUS2_CONFUSION))
+    {
+        statusGfxPtr = GetBattleInterfaceGfxPtr(B_INTERFACE_GFX_STATUS_THRASH_BATTLER0);
+        statusPalId = PAL_STATUS_THRASH;
     }
     else
     {

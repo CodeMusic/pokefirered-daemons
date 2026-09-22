@@ -88,3 +88,4 @@ void TryAddPokeballIconToHealthbox(u8 spriteId, u8);
 s32 MoveBattleBar(u8 battler, u8 healthboxSpriteId, u8 whichBar, u8 arg3);
 
 #endif // GUARD_BATTLE_INTERFACE_H
+void DaemonsRefreshStatusIcons(void);   // T-187
