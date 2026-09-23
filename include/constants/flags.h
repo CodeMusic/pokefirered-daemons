@@ -800,7 +800,7 @@
 #define FLAG_SCHOOL_SYLLABUS_LANGUAGE    0x300
 #define FLAG_NOTEBOOK_LOOSE_STONE        0x301 // LOOSE PAGES 1 -- copied at the carving in THE UNDERTONE
 #define FLAG_GOT_NOTEBOOK                0x302 // CAIRN has handed it over
-#define FLAG_0x303               0x303
+#define FLAG_SCHOOL_EXAM_OPENED          0x303 // T-217: the paper has been opened once -- its record appears in SCHOOL NOTES
 #define FLAG_0x304               0x304
 #define FLAG_0x305               0x305
 #define FLAG_0x306               0x306

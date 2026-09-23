@@ -9,6 +9,7 @@
 #include "string_util.h"
 #include "task.h"
 #include "text_window.h"
+#include "school_exam.h"
 #include "constants/songs.h"
 
 //  T-216: THE RESEARCH NOTEBOOK (docs/school.md 9-10).
@@ -81,6 +82,7 @@ extern const u8 ViridianCity_School_Text_Syllabus[];
 
 static const u8 sTitle_Syllabus_Language[] = _("1F LANGUAGE");
 static const u8 sTitle_Loose_Stone[]       = _("THE STONE");
+static const u8 sTitle_Paper[]             = _("THE PAPER");
 
 //  LOOSE PAGES 1 -- DRAFT WORDING, awaiting the user's approval. A child's page, copied at the carving in
 //  THE UNDERTONE (4.20, *Poly and Fields*): the rows are a type chart and the page never says so, and the
@@ -105,6 +107,9 @@ static const u8 sText_Loose_Stone[] = _(
 static const struct NotebookEntry sEntries[] =
 {
     { NB_SCHOOL_NOTES, FLAG_SCHOOL_SYLLABUS_LANGUAGE, sTitle_Syllabus_Language, ViridianCity_School_Text_Syllabus },
+    //  T-217: written on demand -- every sitting's mark, and a paper under way if there is one. NULL text
+    //  means the page is generated rather than stored.
+    { NB_SCHOOL_NOTES, FLAG_SCHOOL_EXAM_OPENED,       sTitle_Paper,             NULL },
     { NB_LOOSE_PAGES,  FLAG_NOTEBOOK_LOOSE_STONE,     sTitle_Loose_Stone,       sText_Loose_Stone },
 };
 
@@ -330,7 +335,9 @@ void Notebook_ChooseEntry(void)
 //  An entry must stay under 1000 bytes -- that is gStringVar4 -- and check_lexicon holds it there.
 void Notebook_LoadEntry(void)
 {
-    if (gSpecialVar_0x8006 < ARRAY_COUNT(sEntries))
+    if (gSpecialVar_0x8006 < ARRAY_COUNT(sEntries) && sEntries[gSpecialVar_0x8006].text == NULL)
+        School_WriteExamRecord(gStringVar4);
+    else if (gSpecialVar_0x8006 < ARRAY_COUNT(sEntries))
         StringExpandPlaceholders(gStringVar4, sEntries[gSpecialVar_0x8006].text);
     else
         gStringVar4[0] = EOS;

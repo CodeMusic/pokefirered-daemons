@@ -359,6 +359,9 @@ gSpecials::
 	def_special Notebook_ChooseSection
 	def_special Notebook_ChooseEntry
 	def_special Notebook_LoadEntry
+	def_special School_OpenExam
+	def_special School_ExamInProgress
+	def_special School_BufferExamResult
 	def_special DoPicboxCancel
 	def_special SetVermilionTrashCans
 	def_special SeafoamIslandsB4F_CurrentDumpsPlayerOnLand

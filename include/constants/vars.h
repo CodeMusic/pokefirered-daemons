@@ -191,36 +191,39 @@
 #define VAR_MAP_SCENE_MT_MOON_B2F                                              0x408B
 
 
-#define VAR_0x408C                 0x408C
-#define VAR_0x408D                 0x408D
-#define VAR_0x408E                 0x408E
-#define VAR_0x408F                 0x408F
-#define VAR_0x4090                 0x4090
-#define VAR_0x4091                 0x4091
-#define VAR_0x4092                 0x4092
-#define VAR_0x4093                 0x4093
-#define VAR_0x4094                 0x4094
-#define VAR_0x4095                 0x4095
-#define VAR_0x4096                 0x4096
-#define VAR_0x4097                 0x4097
-#define VAR_0x4098                 0x4098
-#define VAR_0x4099                 0x4099
-#define VAR_0x409A                 0x409A
-#define VAR_0x409B                 0x409B
-#define VAR_0x409C                 0x409C
-#define VAR_0x409D                 0x409D
-#define VAR_0x409E                 0x409E
-#define VAR_0x409F                 0x409F
-#define VAR_0x40A0                 0x40A0
-#define VAR_0x40A1                 0x40A1
-#define VAR_0x40A2                 0x40A2
-#define VAR_0x40A3                 0x40A3
-#define VAR_0x40A4                 0x40A4
-#define VAR_0x40A5                 0x40A5
-#define VAR_0x40A6                 0x40A6
-#define VAR_0x40A7                 0x40A7
-#define VAR_0x40A8                 0x40A8
-#define VAR_0x40A9                 0x40A9
+// T-217: 0x408C-0x40A9 are CALLOW SCHOOL's. Thirty were defined and referenced by nothing (2026-09-22).
+// The exam stores ANSWERS, not a score -- three bits each (0 unanswered, 1-4 A-D), five to a var, from
+// VAR_SCHOOL_EXAM_ANSWERS on: 23 vars hold 115, and the whole school is designed for 112.
+#define VAR_SCHOOL_EXAM_BEST       0x408C
+#define VAR_SCHOOL_EXAM_LAST       0x408D
+#define VAR_SCHOOL_EXAM_ATTEMPTS   0x408E
+#define VAR_SCHOOL_EXAM_ANSWERS    0x408F
+#define VAR_SCHOOL_RESERVED_4090   0x4090
+#define VAR_SCHOOL_RESERVED_4091   0x4091
+#define VAR_SCHOOL_RESERVED_4092   0x4092
+#define VAR_SCHOOL_RESERVED_4093   0x4093
+#define VAR_SCHOOL_RESERVED_4094   0x4094
+#define VAR_SCHOOL_RESERVED_4095   0x4095
+#define VAR_SCHOOL_RESERVED_4096   0x4096
+#define VAR_SCHOOL_RESERVED_4097   0x4097
+#define VAR_SCHOOL_RESERVED_4098   0x4098
+#define VAR_SCHOOL_RESERVED_4099   0x4099
+#define VAR_SCHOOL_RESERVED_409A   0x409A
+#define VAR_SCHOOL_RESERVED_409B   0x409B
+#define VAR_SCHOOL_RESERVED_409C   0x409C
+#define VAR_SCHOOL_RESERVED_409D   0x409D
+#define VAR_SCHOOL_RESERVED_409E   0x409E
+#define VAR_SCHOOL_RESERVED_409F   0x409F
+#define VAR_SCHOOL_RESERVED_40A0   0x40A0
+#define VAR_SCHOOL_RESERVED_40A1   0x40A1
+#define VAR_SCHOOL_RESERVED_40A2   0x40A2
+#define VAR_SCHOOL_RESERVED_40A3   0x40A3
+#define VAR_SCHOOL_RESERVED_40A4   0x40A4
+#define VAR_SCHOOL_RESERVED_40A5   0x40A5
+#define VAR_SCHOOL_RESERVED_40A6   0x40A6
+#define VAR_SCHOOL_RESERVED_40A7   0x40A7
+#define VAR_SCHOOL_RESERVED_40A8   0x40A8
+#define VAR_SCHOOL_RESERVED_40A9   0x40A9
 
 #define VAR_QLBAK_TRAINER_REMATCHES 0x40AA // array of 4
 #define VAR_QLBAK_MAP_LAYOUT        0x40AE

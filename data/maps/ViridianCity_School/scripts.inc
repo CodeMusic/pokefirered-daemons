@@ -19,10 +19,50 @@ ViridianCity_School_EventScript_Lass::
 ViridianCity_School_EventScript_Woman::
 	lock
 	faceplayer
+	goto_if_set FLAG_SCHOOL_SYLLABUS_LANGUAGE, ViridianCity_School_EventScript_OfferPaper
 	msgbox ViridianCity_School_Text_ReadBlackboardCarefully
 	closemessage
 	applymovement LOCALID_SCHOOL_WOMAN, Common_Movement_FaceOriginalDirection
 	waitmovement 0
+	release
+	end
+
+@ T-217, batch 3: the teacher offers the paper once the syllabus has been taken. TEMPORARY -- batch 5 moves it
+@ to the one empty desk, in exam season, with the Owl at the front (docs/school.md 7).
+ViridianCity_School_EventScript_OfferPaper::
+	special School_ExamInProgress
+	goto_if_eq VAR_RESULT, TRUE, ViridianCity_School_EventScript_ResumePaper
+	msgbox ViridianCity_School_Text_SitThePaper, MSGBOX_YESNO
+	goto ViridianCity_School_EventScript_DecidePaper
+ViridianCity_School_EventScript_ResumePaper::
+	msgbox ViridianCity_School_Text_CarryOnPaper, MSGBOX_YESNO
+ViridianCity_School_EventScript_DecidePaper::
+	goto_if_eq VAR_RESULT, NO, ViridianCity_School_EventScript_NotYet
+	msgbox ViridianCity_School_Text_TakeYourTime
+	closemessage
+	fadescreen FADE_TO_BLACK
+	special School_OpenExam
+	waitstate
+	goto_if_eq VAR_RESULT, TRUE, ViridianCity_School_EventScript_Marked
+	msgbox ViridianCity_School_Text_ItWillKeep
+	release
+	end
+
+ViridianCity_School_EventScript_Marked::
+	special School_BufferExamResult
+	msgbox ViridianCity_School_Text_Marked
+	goto_if_eq VAR_RESULT, TRUE, ViridianCity_School_EventScript_Passed
+	msgbox ViridianCity_School_Text_NotYetPassed
+	release
+	end
+
+ViridianCity_School_EventScript_Passed::
+	msgbox ViridianCity_School_Text_Passed
+	release
+	end
+
+ViridianCity_School_EventScript_NotYet::
+	msgbox ViridianCity_School_Text_Whenever
 	release
 	end
 

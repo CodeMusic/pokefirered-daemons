@@ -142,3 +142,38 @@ ViridianCity_School_Text_Spelling_Board::
     .string "In the corner, in smaller chalk,\n"
     .string "someone has added: UNDER A SPELL.\p"
     .string "It is underlined twice.$"
+
+@ ---- T-217: the paper. DRAFT WORDING, awaiting the user's approval.
+
+ViridianCity_School_Text_SitThePaper::
+    .string "You have the syllabus.\p"
+    .string "Would you like to sit the paper?$"
+
+ViridianCity_School_Text_CarryOnPaper::
+    .string "Your paper is where you left it.\n"
+    .string "Carry on with it?$"
+
+ViridianCity_School_Text_TakeYourTime::
+    .string "Take as long as you need.\p"
+    .string "If you have to go, go. It keeps.$"
+
+ViridianCity_School_Text_ItWillKeep::
+    .string "Your answers will be here.$"
+
+ViridianCity_School_Text_Marked::
+    .string "She marks it there and then.\p"
+    .string "{STR_VAR_1} out of 100.\n"
+    .string "{STR_VAR_2}.$"
+
+ViridianCity_School_Text_Passed::
+    .string "That is a pass.\p"
+    .string "Well read.$"
+
+ViridianCity_School_Text_NotYetPassed::
+    .string "The pass mark is 80.\p"
+    .string "Sit it again whenever you like.\n"
+    .string "It is the same board.$"
+
+ViridianCity_School_Text_Whenever::
+    .string "Whenever you are ready.\n"
+    .string "It is all on the board.$"
