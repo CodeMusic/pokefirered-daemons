@@ -18,7 +18,7 @@ CeruleanCity_Gym_Text_ExplainCascadeBadge::
 	.string "You can use PRUNE any time now, to\n"
 	.string "cut down small bushes!\p"
 	.string "You can also have my favorite\n"
-	.string "PATCH!\p"
+	.string "PLUGIN!\p"
 	.string "Small steps, and never stop. Keep\n"
 	.string "going down and you arrive.$"
 

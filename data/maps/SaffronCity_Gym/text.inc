@@ -30,7 +30,7 @@ SaffronCity_Gym_Text_ExplainMarshBadgeTakeThis::
 	.string "BRAZEN pays for this BENCHMARK. I\n"
 	.string "don't pretend otherwise.\p"
 	.string "I still decide what happens in it.\n"
-	.string "Please take this PATCH.$"
+	.string "Please take this PLUGIN.$"
 
 SaffronCity_Gym_Text_ReceivedTM04FromSabrina::
     .string "{PLAYER} received PLUGIN04 from\n"

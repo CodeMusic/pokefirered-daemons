@@ -41,9 +41,9 @@ CeladonCity_Condominiums_RoofRoom_Text_ExplainUnionRoom::
     .string "meeting other USERS.$"
 
 CeladonCity_Condominiums_RoofRoom_Text_PamphletOnTMs::
-    .string "It's a pamphlet on PATCHES.\p"
+    .string "It's a pamphlet on PLUGINS.\p"
     .string "… …\p"
-    .string "There are fifty PATCHES in all.\p"
+    .string "There are fifty PLUGINS in all.\p"
     .string "There are also seven DRIVERS that\n"
     .string "can be used repeatedly.\p"
     .string "FOUNDRY CO.$"

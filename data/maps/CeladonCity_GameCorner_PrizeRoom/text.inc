@@ -22,7 +22,7 @@ CeladonCity_GameCorner_PrizeRoom_Text_YouWantPrize::
     .string "So, you want the {STR_VAR_1}?$"
 
 CeladonCity_GameCorner_PrizeRoom_Text_YouWantTM::
-    .string "Okay, a PATCH of {STR_VAR_2} is what\n"
+    .string "Okay, a PLUGIN of {STR_VAR_2} is what\n"
     .string "you want?$"
 
 CeladonCity_GameCorner_PrizeRoom_Text_NeedMoreCoins::

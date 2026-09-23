@@ -1,5 +1,5 @@
 Route14_Text_CarterIntro::
-    .string "You need to use PATCHES to teach\n"
+    .string "You need to use PLUGINS to teach\n"
     .string "good ROUTINES to DAEMON.$"
 
 Route14_Text_CarterDefeat::
@@ -22,7 +22,7 @@ Route14_Text_MitchPostBattle::
     .string "better ROUTINES.$"
 
 Route14_Text_BeckIntro::
-    .string "PATCHES are on sale in VERDIGRIS!\n"
+    .string "PLUGINS are on sale in VERDIGRIS!\n"
     .string "But, only a few people have\l"
     .string "DRIVERS!$"
 

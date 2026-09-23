@@ -60,7 +60,7 @@ CeruleanCity_Text_GruntDefeat::
     .string "I'll leave quietly!$"
 
 CeruleanCity_Text_OkayIllReturnStolenTM::
-    .string "…Okay. I'll return the PATCH I\n"
+    .string "…Okay. I'll return the PLUGIN I\n"
     .string "stole.$"
 
 CeruleanCity_Text_RecoveredTM28FromGrunt::

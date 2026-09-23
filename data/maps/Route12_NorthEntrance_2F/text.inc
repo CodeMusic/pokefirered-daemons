@@ -2,13 +2,13 @@
 Route12_NorthEntrance_2F_Text_TakeTMDontNeedAnymoreMale::
     .string "My DAEMONS's ashes are stored in\n"
     .string "DAEMON TOWER.\p"
-    .string "You can have this PATCH. I don't\n"
+    .string "You can have this PLUGIN. I don't\n"
     .string "need it any more...$"
 
 Route12_NorthEntrance_2F_Text_TakeTMDontNeedAnymoreFemale::
     .string "My DAEMONS's ashes are stored in\n"
     .string "DAEMON TOWER.\p"
-    .string "You can have this PATCH. I don't\n"
+    .string "You can have this PLUGIN. I don't\n"
     .string "need it anymore…$"
 
 Route12_NorthEntrance_2F_Text_ReceivedTM27FromLittleGirl::

@@ -35,10 +35,10 @@ PewterCity_Gym_Text_ReceivedTM39FromBrock::
     .string "CAIRN.$"
 
 PewterCity_Gym_Text_ExplainTM39::
-    .string "A PATCH holds one technique.\p"
+    .string "A PLUGIN holds one technique.\p"
     .string "Using it writes the ROUTINE into a\n"
     .string "daemon. Once.\p"
-    .string "The PATCH does not survive that,\n"
+    .string "The PLUGIN does not survive that,\n"
     .string "so choose carefully.\p"
     .string "PLUGIN39 is WEDGE. It drops weight\n"
     .string "on the target and slows it.$"
