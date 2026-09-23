@@ -245,8 +245,13 @@ static void DaemonsDebug_GrantTestKit(void)
 
         if (species == SPECIES_NONE)
             continue;
-        CreateMon(&mon, species, 50, 31, FALSE, 0, OT_ID_PLAYER_ID, 0);
-        SetMonData(&mon, MON_DATA_MET_LEVEL, &met);
+        //  Made at level 5 and then given level 50's experience (a box keeps experience, not a level). Made at 50,
+        //  each daemon walked its whole level-up learnset, and every move written decrypts and re-encrypts the
+        //  record: 81% of a 39-second black screen, measured (2026-09-23) -- and on a phone emulator it did not
+        //  come back at all. The boxes are for the Index and OPUS, so an early moveset costs them nothing.
+        CreateBoxMon(&mon.box, species, 5, 31, FALSE, 0, OT_ID_PLAYER_ID, 0);
+        SetBoxMonData(&mon.box, MON_DATA_EXP, &gExperienceTables[gSpeciesInfo[species].growthRate][50]);
+        SetBoxMonData(&mon.box, MON_DATA_MET_LEVEL, &met);
         //  Straight into the next slot. GiveMonToPlayer searched the boxes from the start for every one of the 386,
         //  decrypting each daemon it passed -- quadratic, and part of why a debug game sat black for a minute and a half.
         CopyMon(GetBoxedMonPtr(boxed / IN_BOX_COUNT, boxed % IN_BOX_COUNT), &mon.box, sizeof(mon.box));
