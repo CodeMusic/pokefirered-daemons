@@ -513,6 +513,8 @@ const u32 gItemIcon_Opus[] = INCBIN_U32("graphics/items/icons/opus.4bpp.lz");
 const u32 gItemIconPalette_Opus[] = INCBIN_U32("graphics/items/icon_palettes/opus.gbapal.lz");
 const u32 gItemIcon_Notebook[] = INCBIN_U32("graphics/items/icons/notebook.4bpp.lz");
 const u32 gItemIconPalette_Notebook[] = INCBIN_U32("graphics/items/icon_palettes/notebook.gbapal.lz");
+const u32 gItemIcon_Textbook[] = INCBIN_U32("graphics/items/icons/textbook.4bpp.lz");
+const u32 gItemIconPalette_Textbook[] = INCBIN_U32("graphics/items/icon_palettes/textbook.gbapal.lz");
 const u32 gItemIconPalette_UpGrade[] = INCBIN_U32("graphics/items/icon_palettes/up_grade.gbapal.lz");
 
 const u32 gItemIcon_ShellBell[] = INCBIN_U32("graphics/items/icons/shell_bell.4bpp.lz");

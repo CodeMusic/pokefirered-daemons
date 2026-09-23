@@ -322,7 +322,10 @@
     "ViridianCity_PokemonCenter_2F",
     "ViridianCity_School_2F",
     "ViridianCity_School_3F",
-    "ViridianCity_School_4F"
+    "ViridianCity_School_4F",
+    "ViridianCity_School_5F",
+    "ViridianCity_School_6F",
+    "ViridianCity_School_7F"
   ],
   "gMapGroup_IndoorPewter": [
     "PewterCity_Museum_1F",

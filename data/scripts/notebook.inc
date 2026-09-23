@@ -25,6 +25,12 @@ EventScript_NotebookEntries::
 	closemessage
 	goto EventScript_NotebookEntries
 
+@ T-219: the TEXTBOOK opens straight onto SCHOOL NOTES (section 0), where its boards are filed.
+EventScript_Textbook::
+	lockall
+	setvar VAR_0x8005, 0
+	goto EventScript_NotebookEntries
+
 EventScript_NotebookEmpty::
 	msgbox Text_NotebookEmpty
 EventScript_NotebookClose::

@@ -804,19 +804,19 @@
 #define FLAG_SCHOOL_SYLLABUS_ATTENTION   0x304 // T-219: the 2F syllabus, taken off the desk
 #define FLAG_SCHOOL_SYLLABUS_MEMORY      0x305 // T-219: the 3F syllabus, taken off the desk
 #define FLAG_SCHOOL_SYLLABUS_CATEGORIES  0x306 // T-219: the 4F syllabus, taken off the desk
-#define FLAG_0x307               0x307
-#define FLAG_0x308               0x308
-#define FLAG_0x309               0x309
-#define FLAG_0x30A               0x30A
-#define FLAG_0x30B               0x30B
-#define FLAG_0x30C               0x30C
-#define FLAG_0x30D               0x30D
-#define FLAG_0x30E               0x30E
-#define FLAG_0x30F               0x30F
-#define FLAG_0x310               0x310
-#define FLAG_0x311               0x311
-#define FLAG_0x312               0x312
-#define FLAG_0x313               0x313
+#define FLAG_SCHOOL_SYLLABUS_LEARNING    0x307 // T-219: the 5F syllabus
+#define FLAG_SCHOOL_SYLLABUS_BIAS        0x308 // T-219: the 6F syllabus
+#define FLAG_SCHOOL_SYLLABUS_ERROR       0x309 // T-219: the 7F syllabus
+#define FLAG_SCHOOL_VISITED_1F           0x30A // T-219: 1F has been stood on -- the TEXTBOOK shows only boards you have seen
+#define FLAG_SCHOOL_VISITED_2F           0x30B // T-219: 2F has been stood on -- the TEXTBOOK shows only boards you have seen
+#define FLAG_SCHOOL_VISITED_3F           0x30C // T-219: 3F has been stood on -- the TEXTBOOK shows only boards you have seen
+#define FLAG_SCHOOL_VISITED_4F           0x30D // T-219: 4F has been stood on -- the TEXTBOOK shows only boards you have seen
+#define FLAG_SCHOOL_VISITED_5F           0x30E // T-219: 5F has been stood on -- the TEXTBOOK shows only boards you have seen
+#define FLAG_SCHOOL_VISITED_6F           0x30F // T-219: 6F has been stood on -- the TEXTBOOK shows only boards you have seen
+#define FLAG_SCHOOL_VISITED_7F           0x310 // T-219: 7F has been stood on -- the TEXTBOOK shows only boards you have seen
+#define FLAG_SCHOOL_GOT_TEXTBOOK         0x311 // T-219: 7F's teacher has handed it over
+#define FLAG_SCHOOL_HIDE_CLASS           0x312 // T-219: exam season: 1F's usual three are gone
+#define FLAG_SCHOOL_HIDE_EXAM            0x313 // T-219: out of season: the seated class and the Owl are not there
 #define FLAG_0x314               0x314
 #define FLAG_0x315               0x315
 #define FLAG_0x316               0x316

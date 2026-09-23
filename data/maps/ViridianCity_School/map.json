@@ -28,7 +28,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "ViridianCity_School_EventScript_Woman",
-      "flag": "0"
+      "flag": "FLAG_SCHOOL_HIDE_CLASS"
     },
     {
       "local_id": "LOCALID_SCHOOL_LASS",
@@ -43,7 +43,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "ViridianCity_School_EventScript_Lass",
-      "flag": "0"
+      "flag": "FLAG_SCHOOL_HIDE_CLASS"
     },
     {
       "local_id": "LOCALID_SCHOOL_SPELLER",
@@ -58,7 +58,97 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "ViridianCity_School_EventScript_Speller",
-      "flag": "0"
+      "flag": "FLAG_SCHOOL_HIDE_CLASS"
+    },
+    {
+      "local_id": "LOCALID_SCHOOL_OWL",
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_OWL",
+      "x": 6,
+      "y": 2,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "School_EventScript_Owl",
+      "flag": "FLAG_SCHOOL_HIDE_EXAM"
+    },
+    {
+      "local_id": "LOCALID_SCHOOL_SEAT1",
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_TOWN_CALLOW_CHILD",
+      "x": 4,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "School_EventScript_SeatedStudent",
+      "flag": "FLAG_SCHOOL_HIDE_EXAM"
+    },
+    {
+      "local_id": "LOCALID_SCHOOL_SEAT2",
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_TOWN_CALLOW_CHILD",
+      "x": 2,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "School_EventScript_SeatedStudent",
+      "flag": "FLAG_SCHOOL_HIDE_EXAM"
+    },
+    {
+      "local_id": "LOCALID_SCHOOL_SEAT3",
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_TOWN_CALLOW_ADULT",
+      "x": 7,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "School_EventScript_SeatedStudent",
+      "flag": "FLAG_SCHOOL_HIDE_EXAM"
+    },
+    {
+      "local_id": "LOCALID_SCHOOL_SEAT4",
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_TOWN_CALLOW_CHILD",
+      "x": 2,
+      "y": 3,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "School_EventScript_SeatedStudent",
+      "flag": "FLAG_SCHOOL_HIDE_EXAM"
+    },
+    {
+      "local_id": "LOCALID_SCHOOL_SEAT5",
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_TOWN_CALLOW_ELDER",
+      "x": 7,
+      "y": 3,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "School_EventScript_SeatedStudent",
+      "flag": "FLAG_SCHOOL_HIDE_EXAM"
     }
   ],
   "warp_events": [
@@ -91,7 +181,44 @@
       "dest_warp_id": "0"
     }
   ],
-  "coord_events": [],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 3,
+      "y": 7,
+      "elevation": 3,
+      "var": "VAR_SCHOOL_SEASON",
+      "var_value": "1",
+      "script": "School_EventScript_ExamSeasonBegins"
+    },
+    {
+      "type": "trigger",
+      "x": 4,
+      "y": 7,
+      "elevation": 3,
+      "var": "VAR_SCHOOL_SEASON",
+      "var_value": "1",
+      "script": "School_EventScript_ExamSeasonBegins"
+    },
+    {
+      "type": "trigger",
+      "x": 5,
+      "y": 7,
+      "elevation": 3,
+      "var": "VAR_SCHOOL_SEASON",
+      "var_value": "1",
+      "script": "School_EventScript_ExamSeasonBegins"
+    },
+    {
+      "type": "trigger",
+      "x": 8,
+      "y": 3,
+      "elevation": 3,
+      "var": "VAR_SCHOOL_SEASON",
+      "var_value": "2",
+      "script": "School_EventScript_TakeYourSeat"
+    }
+  ],
   "bg_events": [
     {
       "type": "sign",
@@ -148,6 +275,14 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "ViridianCity_School_EventScript_Syllabus"
+    },
+    {
+      "type": "sign",
+      "x": 2,
+      "y": 1,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "ViridianCity_School_EventScript_Lift"
     }
   ]
 }

@@ -2,7 +2,12 @@
 @ (map_name_popup.c), the PLACARD, the DESK, the BOARD, and three people.
 
 ViridianCity_School_4F_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, ViridianCity_School_4F_OnTransition
 	.byte 0
+
+ViridianCity_School_4F_OnTransition::
+	setflag FLAG_SCHOOL_VISITED_4F
+	end
 
 ViridianCity_School_4F_EventScript_Teacher::
 	msgbox ViridianCity_School_4F_Text_Teacher, MSGBOX_NPC
@@ -77,4 +82,9 @@ ViridianCity_School_4F_EventScript_ReadOther::
 
 ViridianCity_School_4F_EventScript_ExitBoard::
 	releaseall
+	end
+
+ViridianCity_School_4F_EventScript_Lift::
+	setvar VAR_0x8004, 4
+	goto School_EventScript_Lift
 	end

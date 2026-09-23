@@ -4,7 +4,21 @@
 @ (the lesson, and the only thing the exam will draw from), and three people.
 
 ViridianCity_School_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, ViridianCity_School_OnTransition
 	.byte 0
+
+@ T-219: in exam season the usual three are gone, the class is seated, and the Owl is at the front.
+ViridianCity_School_OnTransition::
+	setflag FLAG_SCHOOL_VISITED_1F
+	goto_if_eq VAR_SCHOOL_SEASON, 2, ViridianCity_School_EventScript_ExamRoom
+	clearflag FLAG_SCHOOL_HIDE_CLASS
+	setflag FLAG_SCHOOL_HIDE_EXAM
+	end
+
+ViridianCity_School_EventScript_ExamRoom::
+	setflag FLAG_SCHOOL_HIDE_CLASS
+	clearflag FLAG_SCHOOL_HIDE_EXAM
+	end
 
 ViridianCity_School_EventScript_Lass::
 	lock
@@ -19,50 +33,10 @@ ViridianCity_School_EventScript_Lass::
 ViridianCity_School_EventScript_Woman::
 	lock
 	faceplayer
-	goto_if_set FLAG_SCHOOL_SYLLABUS_LANGUAGE, ViridianCity_School_EventScript_OfferPaper
 	msgbox ViridianCity_School_Text_ReadBlackboardCarefully
 	closemessage
 	applymovement LOCALID_SCHOOL_WOMAN, Common_Movement_FaceOriginalDirection
 	waitmovement 0
-	release
-	end
-
-@ T-217, batch 3: the teacher offers the paper once the syllabus has been taken. TEMPORARY -- batch 5 moves it
-@ to the one empty desk, in exam season, with the Owl at the front (docs/school.md 7).
-ViridianCity_School_EventScript_OfferPaper::
-	special School_ExamInProgress
-	goto_if_eq VAR_RESULT, TRUE, ViridianCity_School_EventScript_ResumePaper
-	msgbox ViridianCity_School_Text_SitThePaper, MSGBOX_YESNO
-	goto ViridianCity_School_EventScript_DecidePaper
-ViridianCity_School_EventScript_ResumePaper::
-	msgbox ViridianCity_School_Text_CarryOnPaper, MSGBOX_YESNO
-ViridianCity_School_EventScript_DecidePaper::
-	goto_if_eq VAR_RESULT, NO, ViridianCity_School_EventScript_NotYet
-	msgbox ViridianCity_School_Text_TakeYourTime
-	closemessage
-	fadescreen FADE_TO_BLACK
-	special School_OpenExam
-	waitstate
-	goto_if_eq VAR_RESULT, TRUE, ViridianCity_School_EventScript_Marked
-	msgbox ViridianCity_School_Text_ItWillKeep
-	release
-	end
-
-ViridianCity_School_EventScript_Marked::
-	special School_BufferExamResult
-	msgbox ViridianCity_School_Text_Marked
-	goto_if_eq VAR_RESULT, TRUE, ViridianCity_School_EventScript_Passed
-	msgbox ViridianCity_School_Text_NotYetPassed
-	release
-	end
-
-ViridianCity_School_EventScript_Passed::
-	msgbox ViridianCity_School_Text_Passed
-	release
-	end
-
-ViridianCity_School_EventScript_NotYet::
-	msgbox ViridianCity_School_Text_Whenever
 	release
 	end
 
@@ -78,6 +52,7 @@ ViridianCity_School_EventScript_Placard::
 @ The pass mark is on the syllabus, before the exam exists. Taking it sets a flag, not an item: the RESEARCH
 @ NOTEBOOK does not exist until CAIRN hands it over, and when it does, this is already in it.
 ViridianCity_School_EventScript_Syllabus::
+	goto_if_eq VAR_SCHOOL_SEASON, 2, School_EventScript_ExamDesk
 	lockall
 	msgbox ViridianCity_School_Text_Syllabus
 	goto_if_set FLAG_SCHOOL_SYLLABUS_LANGUAGE, ViridianCity_School_EventScript_SyllabusHeld
@@ -160,4 +135,9 @@ ViridianCity_School_EventScript_ReadSpelling::
 
 ViridianCity_School_EventScript_ExitBlackboard::
 	releaseall
+	end
+
+ViridianCity_School_EventScript_Lift::
+	setvar VAR_0x8004, 1
+	goto School_EventScript_Lift
 	end

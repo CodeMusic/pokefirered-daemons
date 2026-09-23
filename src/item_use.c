@@ -693,6 +693,21 @@ void FieldUseFunc_Notebook(u8 taskId)
     SetUpItemUseOnFieldCallback(taskId);
 }
 
+//  T-219: the TEXTBOOK opens the NOTEBOOK at SCHOOL NOTES, where every board it holds is filed. One reader,
+//  not two: a second full-screen text UI would be a second place to look for the same sentence.
+static void ItemUseOnFieldCB_Textbook(u8 taskId)
+{
+    LockPlayerFieldControls();
+    ScriptContext_SetupScript(EventScript_Textbook);
+    DestroyTask(taskId);
+}
+
+void FieldUseFunc_Textbook(u8 taskId)
+{
+    sItemUseOnFieldCB = ItemUseOnFieldCB_Textbook;
+    SetUpItemUseOnFieldCallback(taskId);
+}
+
 void FieldUseFunc_FameChecker(u8 taskId)
 {
     ItemUse_SetQuestLogEvent(QL_EVENT_USED_ITEM, NULL, gSpecialVar_ItemId, 0xFFFF);

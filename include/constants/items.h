@@ -234,7 +234,7 @@
 #define ITEM_METAL_POWDER 223
 #define ITEM_THICK_CLUB 224
 #define ITEM_STICK 225
-#define ITEM_0E2 226
+#define ITEM_TEXTBOOK 226 // T-219: from 7F. Was ITEM_0E2, unused -- clear of the HM range REVEAL will need
 #define ITEM_0E3 227
 #define ITEM_0E4 228
 #define ITEM_0E5 229

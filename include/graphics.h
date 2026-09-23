@@ -3166,6 +3166,8 @@ extern const u32 gItemIcon_Opus[];        // T-197
 extern const u32 gItemIconPalette_Opus[];
 extern const u32 gItemIcon_Notebook[];
 extern const u32 gItemIconPalette_Notebook[];
+extern const u32 gItemIcon_Textbook[];
+extern const u32 gItemIconPalette_Textbook[];
 extern const u32 gItemIconPalette_UpGrade[];
 extern const u32 gItemIcon_ShellBell[];
 extern const u32 gItemIconPalette_Shell[];

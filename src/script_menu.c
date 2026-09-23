@@ -154,6 +154,71 @@ static const struct MenuAction sMultichoiceList_SchoolCategories[] = {
     { gOtherText_Exit }
 };
 
+//  T-219: 5F-7F's boards, and the lift.
+static const u8 sText_Topic_Connections[] = _("CONNECTIONS");
+static const u8 sText_Topic_Practice[] = _("PRACTICE");
+static const u8 sText_Topic_Threshold[] = _("THRESHOLD");
+static const u8 sText_Topic_Feedback[] = _("FEEDBACK");
+static const u8 sText_Topic_Pruning[] = _("PRUNING");
+
+static const struct MenuAction sMultichoiceList_SchoolLearning[] = {
+    { sText_Topic_Connections },
+    { sText_Topic_Practice },
+    { sText_Topic_Threshold },
+    { sText_Topic_Feedback },
+    { sText_Topic_Pruning },
+    { gOtherText_Exit }
+};
+
+static const u8 sText_Topic_Framing[] = _("FRAMING");
+static const u8 sText_Topic_Anchors[] = _("ANCHORS");
+static const u8 sText_Topic_Confirming[] = _("CONFIRMING");
+static const u8 sText_Topic_Hindsight[] = _("HINDSIGHT");
+static const u8 sText_Topic_Fallacies[] = _("FALLACIES");
+
+static const struct MenuAction sMultichoiceList_SchoolBias[] = {
+    { sText_Topic_Framing },
+    { sText_Topic_Anchors },
+    { sText_Topic_Confirming },
+    { sText_Topic_Hindsight },
+    { sText_Topic_Fallacies },
+    { gOtherText_Exit }
+};
+
+static const u8 sText_Topic_Surprise[] = _("SURPRISE");
+static const u8 sText_Topic_Correction[] = _("CORRECTION");
+static const u8 sText_Topic_Steps[] = _("STEPS");
+static const u8 sText_Topic_Mistakes[] = _("MISTAKES");
+static const u8 sText_Topic_Certainty[] = _("CERTAINTY");
+
+static const struct MenuAction sMultichoiceList_SchoolError[] = {
+    { sText_Topic_Surprise },
+    { sText_Topic_Correction },
+    { sText_Topic_Steps },
+    { sText_Topic_Mistakes },
+    { sText_Topic_Certainty },
+    { gOtherText_Exit }
+};
+
+static const u8 sText_Lift_1[] = _("1F LANGUAGE");
+static const u8 sText_Lift_2[] = _("2F ATTENTION");
+static const u8 sText_Lift_3[] = _("3F MEMORY");
+static const u8 sText_Lift_4[] = _("4F CATEGORIES");
+static const u8 sText_Lift_5[] = _("5F LEARNING");
+static const u8 sText_Lift_6[] = _("6F BIAS");
+static const u8 sText_Lift_7[] = _("7F ERROR");
+
+static const struct MenuAction sMultichoiceList_SchoolLift[] = {
+    { sText_Lift_1 },
+    { sText_Lift_2 },
+    { sText_Lift_3 },
+    { sText_Lift_4 },
+    { sText_Lift_5 },
+    { sText_Lift_6 },
+    { sText_Lift_7 },
+    { gOtherText_Exit }
+};
+
 static const struct MenuAction sMultichoiceList_TrainerSchoolWhiteboard[] = {
     { gText_Slp },
     { gText_Psn },
@@ -586,6 +651,10 @@ static const struct MultichoiceListStruct sMultichoiceLists[] = {
     [MULTICHOICE_SCHOOL_ATTENTION] = MULTICHOICE(sMultichoiceList_SchoolAttention),
     [MULTICHOICE_SCHOOL_MEMORY] = MULTICHOICE(sMultichoiceList_SchoolMemory),
     [MULTICHOICE_SCHOOL_CATEGORIES] = MULTICHOICE(sMultichoiceList_SchoolCategories),
+    [MULTICHOICE_SCHOOL_LEARNING] = MULTICHOICE(sMultichoiceList_SchoolLearning),
+    [MULTICHOICE_SCHOOL_BIAS] = MULTICHOICE(sMultichoiceList_SchoolBias),
+    [MULTICHOICE_SCHOOL_ERROR] = MULTICHOICE(sMultichoiceList_SchoolError),
+    [MULTICHOICE_SCHOOL_LIFT] = MULTICHOICE(sMultichoiceList_SchoolLift),
     [MULTICHOICE_YES_NO_INFO]                                = MULTICHOICE(sMultichoiceList_YesNoInfo),
     [MULTICHOICE_SINGLE_DOUBLE_MULTI_INFO_EXIT]              = MULTICHOICE(sMultichoiceList_SingleDoubleMultiInfoExit),
     [MULTICHOICE_YES_NO_INFO_2]                              = MULTICHOICE(sMultichoiceList_YesNoInfo2),

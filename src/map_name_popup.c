@@ -90,6 +90,9 @@ static const u8 sText_Floor_Language[] = _("1F  LANGUAGE");
 static const u8 sText_Floor_Attention[] = _("2F  ATTENTION");
 static const u8 sText_Floor_Memory[] = _("3F  MEMORY");
 static const u8 sText_Floor_Categories[] = _("4F  CATEGORIES");
+static const u8 sText_Floor_Learning[] = _("5F  LEARNING");
+static const u8 sText_Floor_Bias[] = _("6F  BIAS");
+static const u8 sText_Floor_Error[] = _("7F  ERROR");
 
 
 static const struct { u16 map; const u8 *label; } sFloorLabels[] =
@@ -98,6 +101,9 @@ static const struct { u16 map; const u8 *label; } sFloorLabels[] =
     { MAP_VIRIDIAN_CITY_SCHOOL_2F, sText_Floor_Attention },
     { MAP_VIRIDIAN_CITY_SCHOOL_3F, sText_Floor_Memory },
     { MAP_VIRIDIAN_CITY_SCHOOL_4F, sText_Floor_Categories },
+    { MAP_VIRIDIAN_CITY_SCHOOL_5F, sText_Floor_Learning },
+    { MAP_VIRIDIAN_CITY_SCHOOL_6F, sText_Floor_Bias },
+    { MAP_VIRIDIAN_CITY_SCHOOL_7F, sText_Floor_Error },
 };
 
 const u8 *GetMapFloorLabel(void)

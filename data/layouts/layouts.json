@@ -3032,6 +3032,42 @@
       "blockdata_filepath": "data/layouts/ViridianCity_School_4F/map.bin"
     },
     {
+      "id": "LAYOUT_VIRIDIAN_CITY_SCHOOL_5F",
+      "name": "ViridianCity_School_5F_Layout",
+      "width": 10,
+      "height": 9,
+      "border_width": 2,
+      "border_height": 2,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_CallowSchool",
+      "border_filepath": "data/layouts/ViridianCity_School_5F/border.bin",
+      "blockdata_filepath": "data/layouts/ViridianCity_School_5F/map.bin"
+    },
+    {
+      "id": "LAYOUT_VIRIDIAN_CITY_SCHOOL_6F",
+      "name": "ViridianCity_School_6F_Layout",
+      "width": 10,
+      "height": 9,
+      "border_width": 2,
+      "border_height": 2,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_CallowSchool",
+      "border_filepath": "data/layouts/ViridianCity_School_6F/border.bin",
+      "blockdata_filepath": "data/layouts/ViridianCity_School_6F/map.bin"
+    },
+    {
+      "id": "LAYOUT_VIRIDIAN_CITY_SCHOOL_7F",
+      "name": "ViridianCity_School_7F_Layout",
+      "width": 10,
+      "height": 9,
+      "border_width": 2,
+      "border_height": 2,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_CallowSchool",
+      "border_filepath": "data/layouts/ViridianCity_School_7F/border.bin",
+      "blockdata_filepath": "data/layouts/ViridianCity_School_7F/map.bin"
+    },
+    {
       "id": "LAYOUT_CELADON_CITY_RESTAURANT_DUPLICATE",
       "name": "CeladonCity_Restaurant_Duplicate_Layout",
       "width": 15,

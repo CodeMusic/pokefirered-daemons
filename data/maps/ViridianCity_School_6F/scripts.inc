@@ -1,0 +1,89 @@
+@ CALLOW SCHOOL, 6F -- BIAS (T-219, batch 5; docs/school.md 3-4).
+
+ViridianCity_School_6F_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, ViridianCity_School_6F_OnTransition
+	.byte 0
+
+ViridianCity_School_6F_OnTransition::
+	setflag FLAG_SCHOOL_VISITED_6F
+	end
+
+ViridianCity_School_6F_EventScript_Teacher::
+	msgbox ViridianCity_School_6F_Text_Teacher, MSGBOX_NPC
+	end
+
+ViridianCity_School_6F_EventScript_Wrongabout::
+	msgbox ViridianCity_School_6F_Text_Wrongabout, MSGBOX_NPC
+	end
+
+ViridianCity_School_6F_EventScript_Twooptions::
+	msgbox ViridianCity_School_6F_Text_Twooptions, MSGBOX_NPC
+	end
+
+ViridianCity_School_6F_EventScript_Lift::
+	setvar VAR_0x8004, 6
+	goto School_EventScript_Lift
+	end
+
+ViridianCity_School_6F_EventScript_Placard::
+	msgbox ViridianCity_School_6F_Text_Placard, MSGBOX_SIGN
+	end
+
+ViridianCity_School_6F_EventScript_Syllabus::
+	lockall
+	msgbox ViridianCity_School_6F_Text_Syllabus
+	goto_if_set FLAG_SCHOOL_SYLLABUS_BIAS, ViridianCity_School_6F_EventScript_SyllabusHeld
+	setflag FLAG_SCHOOL_SYLLABUS_BIAS
+	playse SE_SELECT
+	msgbox ViridianCity_School_Text_TookSyllabus
+	goto_if_unset FLAG_GOT_NOTEBOOK, ViridianCity_School_6F_EventScript_SyllabusHeld
+	msgbox ViridianCity_School_Text_SyllabusIntoNotebook
+ViridianCity_School_6F_EventScript_SyllabusHeld::
+	releaseall
+	end
+
+ViridianCity_School_6F_EventScript_Board::
+	lockall
+	msgbox ViridianCity_School_2F_Text_BoardIntro
+ViridianCity_School_6F_EventScript_ChooseTopic::
+	message ViridianCity_School_Text_ReadWhichTopic
+	waitmessage
+	multichoice 19, 0, MULTICHOICE_SCHOOL_BIAS, FALSE
+	switch VAR_RESULT
+	case 0, ViridianCity_School_6F_EventScript_ReadFraming
+	case 1, ViridianCity_School_6F_EventScript_ReadAnchors
+	case 2, ViridianCity_School_6F_EventScript_ReadConfirming
+	case 3, ViridianCity_School_6F_EventScript_ReadHindsight
+	case 4, ViridianCity_School_6F_EventScript_ReadFallacies
+	case 5, ViridianCity_School_6F_EventScript_ExitBoard
+	case 127, ViridianCity_School_6F_EventScript_ExitBoard
+	end
+
+ViridianCity_School_6F_EventScript_ReadFraming::
+	msgbox ViridianCity_School_6F_Text_Framing
+	goto ViridianCity_School_6F_EventScript_ChooseTopic
+	end
+
+ViridianCity_School_6F_EventScript_ReadAnchors::
+	msgbox ViridianCity_School_6F_Text_Anchors
+	goto ViridianCity_School_6F_EventScript_ChooseTopic
+	end
+
+ViridianCity_School_6F_EventScript_ReadConfirming::
+	msgbox ViridianCity_School_6F_Text_Confirming
+	goto ViridianCity_School_6F_EventScript_ChooseTopic
+	end
+
+ViridianCity_School_6F_EventScript_ReadHindsight::
+	msgbox ViridianCity_School_6F_Text_Hindsight
+	goto ViridianCity_School_6F_EventScript_ChooseTopic
+	end
+
+ViridianCity_School_6F_EventScript_ReadFallacies::
+	msgbox ViridianCity_School_6F_Text_Fallacies
+	goto ViridianCity_School_6F_EventScript_ChooseTopic
+	end
+
+ViridianCity_School_6F_EventScript_ExitBoard::
+	releaseall
+	end

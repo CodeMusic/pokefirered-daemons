@@ -73,6 +73,10 @@
 #define MULTICHOICE_SCHOOL_ATTENTION                                66 // T-219
 #define MULTICHOICE_SCHOOL_MEMORY                                   67 // T-219
 #define MULTICHOICE_SCHOOL_CATEGORIES                               68 // T-219
+#define MULTICHOICE_SCHOOL_LEARNING                                 69 // T-219
+#define MULTICHOICE_SCHOOL_BIAS                                     70 // T-219
+#define MULTICHOICE_SCHOOL_ERROR                                    71 // T-219
+#define MULTICHOICE_SCHOOL_LIFT                                     72 // T-219
 
 #define MULTICHOICE_NONE                                      255
 

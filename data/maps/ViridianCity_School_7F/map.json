@@ -1,7 +1,7 @@
 {
-  "id": "MAP_VIRIDIAN_CITY_SCHOOL_4F",
-  "name": "ViridianCity_School_4F",
-  "layout": "LAYOUT_VIRIDIAN_CITY_SCHOOL_4F",
+  "id": "MAP_VIRIDIAN_CITY_SCHOOL_7F",
+  "name": "ViridianCity_School_7F",
+  "layout": "LAYOUT_VIRIDIAN_CITY_SCHOOL_7F",
   "music": "MUS_PEWTER",
   "region_map_section": "MAPSEC_VIRIDIAN_CITY",
   "requires_flash": false,
@@ -16,7 +16,7 @@
   "connections": null,
   "object_events": [
     {
-      "local_id": "LOCALID_SCHOOL_4F_TEACHER",
+      "local_id": "LOCALID_SCHOOL_7F_TEACHER",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_TOWN_CALLOW_ADULT",
       "x": 6,
@@ -27,11 +27,11 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "ViridianCity_School_4F_EventScript_Teacher",
+      "script": "ViridianCity_School_7F_EventScript_Teacher",
       "flag": "0"
     },
     {
-      "local_id": "LOCALID_SCHOOL_4F_DRAWERS",
+      "local_id": "LOCALID_SCHOOL_7F_ONPURPOSE",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_TOWN_CALLOW_CHILD",
       "x": 4,
@@ -42,39 +42,32 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "ViridianCity_School_4F_EventScript_Drawers",
+      "script": "ViridianCity_School_7F_EventScript_Onpurpose",
       "flag": "0"
     },
     {
-      "local_id": "LOCALID_SCHOOL_4F_STOOL",
+      "local_id": "LOCALID_SCHOOL_7F_CERTAIN",
       "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_TOWN_CALLOW_ELDER",
-      "x": 2,
+      "x": 7,
       "y": 5,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "ViridianCity_School_4F_EventScript_Stool",
+      "script": "ViridianCity_School_7F_EventScript_Certain",
       "flag": "0"
     }
   ],
   "warp_events": [
     {
-      "x": 8,
-      "y": 3,
-      "elevation": 0,
-      "dest_map": "MAP_VIRIDIAN_CITY_SCHOOL_3F",
-      "dest_warp_id": "1"
-    },
-    {
       "x": 1,
       "y": 3,
       "elevation": 0,
-      "dest_map": "MAP_VIRIDIAN_CITY_SCHOOL_5F",
-      "dest_warp_id": "0"
+      "dest_map": "MAP_VIRIDIAN_CITY_SCHOOL_6F",
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [],
@@ -85,7 +78,7 @@
       "y": 1,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "ViridianCity_School_4F_EventScript_Placard"
+      "script": "ViridianCity_School_7F_EventScript_Placard"
     },
     {
       "type": "sign",
@@ -93,7 +86,7 @@
       "y": 1,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "ViridianCity_School_4F_EventScript_Board"
+      "script": "ViridianCity_School_7F_EventScript_Board"
     },
     {
       "type": "sign",
@@ -101,7 +94,7 @@
       "y": 1,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "ViridianCity_School_4F_EventScript_Board"
+      "script": "ViridianCity_School_7F_EventScript_Board"
     },
     {
       "type": "sign",
@@ -109,7 +102,7 @@
       "y": 4,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "ViridianCity_School_4F_EventScript_Syllabus"
+      "script": "ViridianCity_School_7F_EventScript_Syllabus"
     },
     {
       "type": "sign",
@@ -117,7 +110,7 @@
       "y": 1,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
-      "script": "ViridianCity_School_4F_EventScript_Lift"
+      "script": "ViridianCity_School_7F_EventScript_Lift"
     }
   ]
 }
