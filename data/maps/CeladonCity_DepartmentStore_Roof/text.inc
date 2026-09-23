@@ -17,7 +17,7 @@ Text_ReceivedItemFromLittleGirl::
     .string "from the little girl.$"
 
 CeladonCity_DepartmentStore_Roof_Text_ExplainTM16::
-    .string "PATCH16 contains STEELMAN.\p"
+    .string "PLUGIN16 contains STEELMAN.\p"
     .string "It's a ROUTINE that weakens the\n"
     .string "power of special attacks by your\l"
     .string "foe.$"
@@ -29,7 +29,7 @@ CeladonCity_DepartmentStore_Roof_Text_YaySodaPopHaveThis::
     .string "You can have this from me!$"
 
 CeladonCity_DepartmentStore_Roof_Text_ExplainTM20::
-    .string "PATCH20 contains SAFEGUARD.\p"
+    .string "PLUGIN20 contains SAFEGUARD.\p"
     .string "It's a ROUTINE that prevents status\n"
     .string "problems among your DAEMON.$"
 
@@ -40,7 +40,7 @@ CeladonCity_DepartmentStore_Roof_Text_YayLemonadeHaveThis::
     .string "You can have this from me!$"
 
 CeladonCity_DepartmentStore_Roof_Text_ExplainTM33::
-    .string "PATCH33 contains PARAPHRASE.\p"
+    .string "PLUGIN33 contains PARAPHRASE.\p"
     .string "It's a ROUTINE that weakens the\n"
     .string "power of physical attacks by your\l"
     .string "foe.$"

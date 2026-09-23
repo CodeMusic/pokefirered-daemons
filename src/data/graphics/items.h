@@ -511,6 +511,8 @@ const u32 gItemIcon_UpGrade[] = INCBIN_U32("graphics/items/icons/up_grade.4bpp.l
 //  T-197: OPUS has its own card now rather than the UP-GRADE's device. Drawn by tools/genopusicon.py.
 const u32 gItemIcon_Opus[] = INCBIN_U32("graphics/items/icons/opus.4bpp.lz");
 const u32 gItemIconPalette_Opus[] = INCBIN_U32("graphics/items/icon_palettes/opus.gbapal.lz");
+const u32 gItemIcon_Notebook[] = INCBIN_U32("graphics/items/icons/notebook.4bpp.lz");
+const u32 gItemIconPalette_Notebook[] = INCBIN_U32("graphics/items/icon_palettes/notebook.gbapal.lz");
 const u32 gItemIconPalette_UpGrade[] = INCBIN_U32("graphics/items/icon_palettes/up_grade.gbapal.lz");
 
 const u32 gItemIcon_ShellBell[] = INCBIN_U32("graphics/items/icons/shell_bell.4bpp.lz");

@@ -34,11 +34,11 @@ CeladonCity_Gym_Text_ExplainRainbowBadgeTakeThis::
 	.string "take this with you.$"
 
 CeladonCity_Gym_Text_ReceivedTM19FromErika::
-    .string "{PLAYER} received PATCH19 from\n"
+    .string "{PLAYER} received PLUGIN19 from\n"
     .string "TRELLIS.$"
 
 CeladonCity_Gym_Text_ExplainTM19::
-    .string "PATCH19 contains DISTILL.\p"
+    .string "PLUGIN19 contains DISTILL.\p"
     .string "Half the damage it inflicts is\n"
     .string "drained to heal your DAEMON.\p"
     .string "Wouldn't you agree that it's a\n"

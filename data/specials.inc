@@ -355,6 +355,10 @@ gSpecials::
 	def_special ForcePlayerOntoBike
 	def_special ListMenu
 	def_special ReturnToListMenu
+	def_special Notebook_HasEntries
+	def_special Notebook_ChooseSection
+	def_special Notebook_ChooseEntry
+	def_special Notebook_LoadEntry
 	def_special DoPicboxCancel
 	def_special SetVermilionTrashCans
 	def_special SeafoamIslandsB4F_CurrentDumpsPlayerOnLand

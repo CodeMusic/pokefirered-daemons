@@ -798,8 +798,8 @@
 // were defined and referenced by nothing (checked 2026-09-22), and the game had seven named flags left.
 // An entry is a flag rather than an item, so a document read before the notebook exists is kept.
 #define FLAG_SCHOOL_SYLLABUS_LANGUAGE    0x300
-#define FLAG_0x301               0x301
-#define FLAG_0x302               0x302
+#define FLAG_NOTEBOOK_LOOSE_STONE        0x301 // LOOSE PAGES 1 -- copied at the carving in THE UNDERTONE
+#define FLAG_GOT_NOTEBOOK                0x302 // CAIRN has handed it over
 #define FLAG_0x303               0x303
 #define FLAG_0x304               0x304
 #define FLAG_0x305               0x305

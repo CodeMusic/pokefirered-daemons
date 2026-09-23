@@ -31,7 +31,7 @@ PewterCity_Gym_Text_TakeThisWithYou::
     .string "Take this with you.$"
 
 PewterCity_Gym_Text_ReceivedTM39FromBrock::
-    .string "{PLAYER} received PATCH39 from\n"
+    .string "{PLAYER} received PLUGIN39 from\n"
     .string "CAIRN.$"
 
 PewterCity_Gym_Text_ExplainTM39::
@@ -40,7 +40,7 @@ PewterCity_Gym_Text_ExplainTM39::
     .string "daemon. Once.\p"
     .string "The PATCH does not survive that,\n"
     .string "so choose carefully.\p"
-    .string "PATCH39 is WEDGE. It drops weight\n"
+    .string "PLUGIN39 is WEDGE. It drops weight\n"
     .string "on the target and slows it.$"
 
 PewterCity_Gym_Text_BrockPostBattle::
@@ -100,3 +100,22 @@ PewterCity_Gym_Text_GymStatuePlayerWon::
     .string "SLATE BENCHMARK LEADER: CAIRN\p"
     .string "WINNING USERS: {RIVAL}, {PLAYER}$"
 
+
+@ T-216 -- DRAFT WORDING, awaiting the user's approval.
+PewterCity_Gym_Text_OneMoreThing::
+    .string "One more thing.\p"
+    .string "Everything you know is sitting\n"
+    .string "in something. Stone, bone, tape.\p"
+    .string "If it is not written down, it did\n"
+    .string "not happen. So write it down.$"
+
+PewterCity_Gym_Text_ReceivedNotebook::
+    .string "{PLAYER} received a NOTEBOOK\n"
+    .string "from CAIRN.$"
+
+PewterCity_Gym_Text_ExplainNotebook::
+    .string "Put what you find in it, in the\n"
+    .string "order it belongs, not the order\l"
+    .string "you found it.\p"
+    .string "A record is only ever as good as\n"
+    .string "whoever kept it.$"

@@ -101,3 +101,14 @@ ViridianForest_Text_LeavingViridianForest::
     .string "THE UNDERTONE\l"
     .string "SLATE CITY AHEAD$"
 
+
+ViridianForest_Text_PageUnderStone::
+    .string "Tucked under the edge of the stone:\n"
+    .string "a page torn from an exercise book.$"
+
+ViridianForest_Text_PageIntoNotebook::
+    .string "{PLAYER} put it in the NOTEBOOK,\n"
+    .string "under LOOSE PAGES.$"
+
+ViridianForest_Text_KeptPage::
+    .string "{PLAYER} kept it.$"

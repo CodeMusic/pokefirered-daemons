@@ -26,6 +26,7 @@
 #include "quest_log.h"
 #include "region_map.h"
 #include "script.h"
+#include "event_scripts.h"
 #include "strings.h"
 #include "task.h"
 #include "teachy_tv.h"
@@ -675,6 +676,21 @@ static void Task_UseTownMapFromField(u8 taskId)
         InitRegionMapWithExitCB(REGIONMAP_TYPE_NORMAL, CB2_ReturnToField);
         DestroyTask(taskId);
     }
+}
+
+//  T-216: the NOTEBOOK. The bag closes and the field comes back before it opens, because it is read in the
+//  ordinary message box -- a page of it pages the way a sign does, and R = AGAIN repeats it.
+static void ItemUseOnFieldCB_Notebook(u8 taskId)
+{
+    LockPlayerFieldControls();
+    ScriptContext_SetupScript(EventScript_Notebook);
+    DestroyTask(taskId);
+}
+
+void FieldUseFunc_Notebook(u8 taskId)
+{
+    sItemUseOnFieldCB = ItemUseOnFieldCB_Notebook;
+    SetUpItemUseOnFieldCallback(taskId);
 }
 
 void FieldUseFunc_FameChecker(u8 taskId)

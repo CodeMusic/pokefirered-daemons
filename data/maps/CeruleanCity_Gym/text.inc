@@ -8,7 +8,7 @@ CeruleanCity_Gym_Text_MistyIntro::
     .string "with FLOW-type DAEMON!$"
 
 CeruleanCity_Gym_Text_ExplainTM03::
-    .string "PATCH03 teaches RIPPLE.\p"
+    .string "PLUGIN03 teaches RIPPLE.\p"
     .string "Use it on an aquatic DAEMON!$"
 
 CeruleanCity_Gym_Text_ExplainCascadeBadge::
@@ -23,7 +23,7 @@ CeruleanCity_Gym_Text_ExplainCascadeBadge::
 	.string "going down and you arrive.$"
 
 CeruleanCity_Gym_Text_ReceivedTM03FromMisty::
-    .string "{PLAYER} received PATCH03 from\n"
+    .string "{PLAYER} received PLUGIN03 from\n"
     .string "BASIN.$"
 
 CeruleanCity_Gym_Text_BetterMakeRoomForThis::

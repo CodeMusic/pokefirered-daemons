@@ -44,6 +44,8 @@ ViridianCity_School_EventScript_Syllabus::
 	setflag FLAG_SCHOOL_SYLLABUS_LANGUAGE
 	playse SE_SELECT
 	msgbox ViridianCity_School_Text_TookSyllabus
+	goto_if_unset FLAG_GOT_NOTEBOOK, ViridianCity_School_EventScript_SyllabusHeld
+	msgbox ViridianCity_School_Text_SyllabusIntoNotebook
 ViridianCity_School_EventScript_SyllabusHeld::
 	releaseall
 	end

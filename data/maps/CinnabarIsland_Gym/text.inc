@@ -25,11 +25,11 @@ CinnabarIsland_Gym_Text_ExplainVolcanoBadge::
 	.string "Here, you can have this too!$"
 
 CinnabarIsland_Gym_Text_ReceivedTM38FromBlaine::
-    .string "{PLAYER} received PATCH38 from\n"
+    .string "{PLAYER} received PLUGIN38 from\n"
     .string "ANNEAL.$"
 
 CinnabarIsland_Gym_Text_BlainePostBattle::
-    .string "PATCH38 contains FLASHOVER. Teach\n"
+    .string "PLUGIN38 contains FLASHOVER. Teach\n"
     .string "it to ENTROPY-type DAEMON.\p"
     .string "FLICKER or RUBRIC would be ideal\n"
     .string "for that ROUTINE.$"
@@ -171,7 +171,7 @@ CinnabarIsland_Gym_Text_QuizQuestion5::
     .string "are not identical?$"
 
 CinnabarIsland_Gym_Text_QuizQuestion6::
-    .string "PATCH28 contains TOMBSTONY?$"
+    .string "PLUGIN28 contains TOMBSTONY?$"
 
 CinnabarIsland_Gym_Text_CorrectGoOnThrough::
     .string "You're absolutely correct!\p"

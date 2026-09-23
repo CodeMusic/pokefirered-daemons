@@ -31,11 +31,11 @@ ViridianCity_Gym_Text_ExplainEarthBadgeTakeThis::
     .string "LEAGUE. Take it and go.$"
 
 ViridianCity_Gym_Text_ReceivedTM26FromGiovanni::
-    .string "{PLAYER} received PATCH26 from\n"
+    .string "{PLAYER} received PLUGIN26 from\n"
     .string "SCORN.$"
 
 ViridianCity_Gym_Text_ExplainTM26::
-    .string "PATCH26 is UPHEAVAL.\p"
+    .string "PLUGIN26 is UPHEAVAL.\p"
     .string "It reaches the layer everything\n"
     .string "else is standing on.\p"
     .string "I had it made. Use it or do not.$"

@@ -26,8 +26,21 @@ ViridianForest_EventScript_TrainerTips3::
 	msgbox ViridianForest_Text_ContactOakViaPCToRatePokedex, MSGBOX_SIGN
 	end
 
+@ THE UNDERTONE's carving (4.20). T-216: reading it records LOOSE PAGES 1 -- a flag, so a player who reads it
+@ before CAIRN hands the notebook over (this forest comes first) finds the page already in it.
 ViridianForest_EventScript_TrainerTips4::
-	msgbox ViridianForest_Text_CantCatchOwnedMons, MSGBOX_SIGN
+	lockall
+	msgbox ViridianForest_Text_CantCatchOwnedMons
+	goto_if_set FLAG_NOTEBOOK_LOOSE_STONE, ViridianForest_EventScript_CarvingDone
+	setflag FLAG_NOTEBOOK_LOOSE_STONE
+	msgbox ViridianForest_Text_PageUnderStone
+	goto_if_unset FLAG_GOT_NOTEBOOK, ViridianForest_EventScript_KeptPage
+	msgbox ViridianForest_Text_PageIntoNotebook
+	goto ViridianForest_EventScript_CarvingDone
+ViridianForest_EventScript_KeptPage::
+	msgbox ViridianForest_Text_KeptPage
+ViridianForest_EventScript_CarvingDone::
+	releaseall
 	end
 
 ViridianForest_EventScript_TrainerTips5::

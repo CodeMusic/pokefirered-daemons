@@ -76,6 +76,10 @@ ViridianCity_School_Text_TookSyllabus::
     .string "{PLAYER} took a copy of\n"
     .string "the syllabus.$"
 
+ViridianCity_School_Text_SyllabusIntoNotebook::
+    .string "It went into the NOTEBOOK, under\n"
+    .string "SCHOOL NOTES.$"
+
 ViridianCity_School_Text_Spelling::
     .string "SPELLING.\p"
     .string "Every word is a SPELL. It is right\n"

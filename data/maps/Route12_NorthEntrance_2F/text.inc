@@ -12,11 +12,11 @@ Route12_NorthEntrance_2F_Text_TakeTMDontNeedAnymoreFemale::
     .string "need it anymore…$"
 
 Route12_NorthEntrance_2F_Text_ReceivedTM27FromLittleGirl::
-    .string "{PLAYER} received PATCH27 from the\n"
+    .string "{PLAYER} received PLUGIN27 from the\n"
     .string "little girl.$"
 
 Route12_NorthEntrance_2F_Text_ExplainTM27::
-    .string "PATCH27 is a ROUTINE called\n"
+    .string "PLUGIN27 is a ROUTINE called\n"
     .string "RAPPORT…\p"
     .string "If you treat your DAEMON good, it\n"
     .string "will return your love by working\l"

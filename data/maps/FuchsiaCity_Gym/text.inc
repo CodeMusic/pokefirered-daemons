@@ -35,11 +35,11 @@ FuchsiaCity_Gym_Text_KogaExplainSoulBadge::
 	.string "Take this too.$"
 
 FuchsiaCity_Gym_Text_ReceivedTM06FromKoga::
-    .string "{PLAYER} received PATCH06 from\n"
+    .string "{PLAYER} received PLUGIN06 from\n"
     .string "TILT.$"
 
 FuchsiaCity_Gym_Text_KogaExplainTM06::
-    .string "Sealed within that PATCH06 lies\n"
+    .string "Sealed within that PLUGIN06 lies\n"
     .string "COMPOUND!\p"
     .string "It is a secret technique dating\n"
     .string "back some four hundred years.$"

@@ -64,7 +64,7 @@ CeruleanCity_Text_OkayIllReturnStolenTM::
     .string "stole.$"
 
 CeruleanCity_Text_RecoveredTM28FromGrunt::
-    .string "{PLAYER} recovered PATCH28 from\n"
+    .string "{PLAYER} recovered PLUGIN28 from\n"
     .string "the TEAM CORPUS GRUNT.$"
 
 CeruleanCity_Text_BetterGetMovingBye::

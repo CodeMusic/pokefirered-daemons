@@ -169,6 +169,7 @@ static void DaemonsDebug_GrantTestKit(void)
         // eight, so it opens at its widest: fifteen shows and a scroll.
         { ITEM_TEACHY_TV,     1 },
         { ITEM_FAME_CHECKER,  1 },
+        { ITEM_NOTEBOOK,      1 },   // T-216: and a screen of its own
     };
     // No TM CASE or BERRY POUCH here on purpose: item.c grants each of them
     // the moment a TM or a berry is added, so listing them would be listing a
@@ -267,6 +268,10 @@ static void DaemonsDebug_GrantTestKit(void)
     // what the player can read a description of, which is what 9.3 is here to
     // evaluate.
     FlagSet(FLAG_GOT_SS_TICKET);
+    // T-216: the notebook, with both of its first two entries, so it opens on two sections.
+    FlagSet(FLAG_GOT_NOTEBOOK);
+    FlagSet(FLAG_SCHOOL_SYLLABUS_LANGUAGE);
+    FlagSet(FLAG_NOTEBOOK_LOOSE_STONE);
 
     // Without these the party is in memory and unreachable: start_menu.c only
     // draws the POKeMON entry when FLAG_SYS_POKEMON_GET is set, and the DEX

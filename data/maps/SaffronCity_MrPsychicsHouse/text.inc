@@ -3,12 +3,12 @@ SaffronCity_MrPsychicsHouse_Text_YouWantedThis::
     .string "You wanted this!$"
 
 SaffronCity_MrPsychicsHouse_Text_ReceivedTM29FromMrPsychic::
-    .string "{PLAYER} received PATCH29 from THE\n"
+    .string "{PLAYER} received PLUGIN29 from THE\n"
     .string "SCHOLAR.$"
 
 SaffronCity_MrPsychicsHouse_Text_ExplainTM29::
     .string "You already know, don't you?\n"
-    .string "PATCH29 is CONSTRUE.\p"
+    .string "PLUGIN29 is CONSTRUE.\p"
     .string "It's an attack that may also lower\n"
     .string "the target's special stats.$"
 

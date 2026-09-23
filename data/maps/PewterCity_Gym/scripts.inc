@@ -5,6 +5,7 @@ PewterCity_Gym_EventScript_Brock::
 	famechecker FAMECHECKER_BROCK, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
 	trainerbattle_single TRAINER_LEADER_BROCK, PewterCity_Gym_Text_BrockIntro, PewterCity_Gym_Text_BrockDefeat, PewterCity_Gym_EventScript_DefeatedBrock, NO_MUSIC
 	goto_if_unset FLAG_GOT_TM39_FROM_BROCK, PewterCity_Gym_EventScript_GiveTM39
+	goto_if_unset FLAG_GOT_NOTEBOOK, PewterCity_Gym_EventScript_GiveNotebook
 	msgbox PewterCity_Gym_Text_BrockPostBattle
 	release
 	end
@@ -34,6 +35,19 @@ PewterCity_Gym_EventScript_GiveTM39::
 	giveitem_msg PewterCity_Gym_Text_ReceivedTM39FromBrock, ITEM_TM39
 	setflag FLAG_GOT_TM39_FROM_BROCK
 	msgbox PewterCity_Gym_Text_ExplainTM39
+	goto_if_unset FLAG_GOT_NOTEBOOK, PewterCity_Gym_EventScript_GiveNotebook
+	release
+	end
+
+@ T-216: CAIRN hands over the NOTEBOOK. His creed is "if it is not written down, it did not happen" -- the
+@ one the Meeting Room minutes later apply to Crystal (5.1, 4.20). So the man whose creed removes her gives
+@ the player the instrument that re-reads her, and nothing connects them. A save that beat him before this
+@ existed gets it the next time it talks to him: the post-battle branch above checks the same flag.
+PewterCity_Gym_EventScript_GiveNotebook::
+	msgbox PewterCity_Gym_Text_OneMoreThing
+	giveitem_msg PewterCity_Gym_Text_ReceivedNotebook, ITEM_NOTEBOOK
+	setflag FLAG_GOT_NOTEBOOK
+	msgbox PewterCity_Gym_Text_ExplainNotebook
 	release
 	end
 
