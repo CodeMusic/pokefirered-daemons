@@ -58,7 +58,7 @@ $(TILESETGFXDIR)/secondary/pokemon_league/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 340 -Wnum_tiles
 
 $(TILESETGFXDIR)/secondary/viridian_city/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 301 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 336 -Wnum_tiles
 
 $(TILESETGFXDIR)/secondary/vermilion_city/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 334 -Wnum_tiles
@@ -263,3 +263,6 @@ $(TILESETGFXDIR)/secondary/callow_school/tiles.4bpp: %.4bpp: %.png
 
 $(TILESETGFXDIR)/secondary/verdigris_lecture/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 26 -Wnum_tiles
+
+$(TILESETGFXDIR)/secondary/reading_room/tiles.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 244 -Wnum_tiles

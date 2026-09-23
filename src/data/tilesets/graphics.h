@@ -1871,3 +1871,25 @@ const u16 gTilesetPalettes_VerdigrisLecture[][16] =
 	INCBIN_U16("data/tilesets/secondary/verdigris_lecture/palettes/14.gbapal"),
 	INCBIN_U16("data/tilesets/secondary/verdigris_lecture/palettes/15.gbapal"),
 };
+// T-103: ReadingRoom, a tileset of its own (tools/gbainterior.py).
+const u32 gTilesetTiles_ReadingRoom[] = INCBIN_U32("data/tilesets/secondary/reading_room/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_ReadingRoom[][16] =
+{
+	INCBIN_U16("data/tilesets/secondary/reading_room/palettes/00.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/reading_room/palettes/01.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/reading_room/palettes/02.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/reading_room/palettes/03.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/reading_room/palettes/04.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/reading_room/palettes/05.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/reading_room/palettes/06.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/reading_room/palettes/07.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/reading_room/palettes/08.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/reading_room/palettes/09.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/reading_room/palettes/10.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/reading_room/palettes/11.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/reading_room/palettes/12.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/reading_room/palettes/13.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/reading_room/palettes/14.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/reading_room/palettes/15.gbapal"),
+};

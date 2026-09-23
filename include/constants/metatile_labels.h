@@ -290,6 +290,7 @@
 
 // gTileset_ViridianCity
 #define METATILE_ViridianCity_Door  0x299
+#define METATILE_ViridianCity_SchoolDoor  0x336
 
 // gTileset_ViridianForest
 #define METATILE_ViridianForest_HugeTreeTopMiddle_Grass  0x284

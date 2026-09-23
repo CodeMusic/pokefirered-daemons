@@ -978,3 +978,14 @@ const struct Tileset gTileset_VerdigrisLecture =
     .metatileAttributes = gMetatileAttributes_VerdigrisLecture,
     .callback = NULL,
 };
+// T-103: ReadingRoom, rethemed and replanned.
+const struct Tileset gTileset_ReadingRoom =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_ReadingRoom,
+    .palettes = gTilesetPalettes_ReadingRoom,
+    .metatiles = gMetatiles_ReadingRoom,
+    .metatileAttributes = gMetatileAttributes_ReadingRoom,
+    .callback = NULL,
+};
