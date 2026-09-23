@@ -87,10 +87,17 @@ void ShowMapLabelPopup(const u8 *text, bool32 palIntoFadedBuffer)
 //  from CALLOW does not change it. So a floor with a subject gets a label of its own, keyed by map.
 //  Every floor added later is one row here.
 static const u8 sText_Floor_Language[] = _("1F  LANGUAGE");
+static const u8 sText_Floor_Attention[] = _("2F  ATTENTION");
+static const u8 sText_Floor_Memory[] = _("3F  MEMORY");
+static const u8 sText_Floor_Categories[] = _("4F  CATEGORIES");
+
 
 static const struct { u16 map; const u8 *label; } sFloorLabels[] =
 {
     { MAP_VIRIDIAN_CITY_SCHOOL, sText_Floor_Language },
+    { MAP_VIRIDIAN_CITY_SCHOOL_2F, sText_Floor_Attention },
+    { MAP_VIRIDIAN_CITY_SCHOOL_3F, sText_Floor_Memory },
+    { MAP_VIRIDIAN_CITY_SCHOOL_4F, sText_Floor_Categories },
 };
 
 const u8 *GetMapFloorLabel(void)

@@ -108,6 +108,52 @@ static const struct MenuAction sMultichoiceList_SchoolLanguage[] = {
     { gOtherText_Exit }
 };
 
+//  T-219: 2F-4F's boards.
+static const u8 sText_Topic_Limits[] = _("LIMITS");
+static const u8 sText_Topic_Cues[] = _("CUES");
+static const u8 sText_Topic_Search[] = _("SEARCH");
+static const u8 sText_Topic_Switching[] = _("SWITCHING");
+static const u8 sText_Topic_Missed[] = _("MISSED");
+
+static const struct MenuAction sMultichoiceList_SchoolAttention[] = {
+    { sText_Topic_Limits },
+    { sText_Topic_Cues },
+    { sText_Topic_Search },
+    { sText_Topic_Switching },
+    { sText_Topic_Missed },
+    { gOtherText_Exit }
+};
+
+static const u8 sText_Topic_Storing[] = _("STORING");
+static const u8 sText_Topic_Fading[] = _("FADING");
+static const u8 sText_Topic_Crowding[] = _("CROWDING");
+static const u8 sText_Topic_Recall[] = _("RECALL");
+static const u8 sText_Topic_Spacing[] = _("SPACING");
+
+static const struct MenuAction sMultichoiceList_SchoolMemory[] = {
+    { sText_Topic_Storing },
+    { sText_Topic_Fading },
+    { sText_Topic_Crowding },
+    { sText_Topic_Recall },
+    { sText_Topic_Spacing },
+    { gOtherText_Exit }
+};
+
+static const u8 sText_Topic_Middles[] = _("MIDDLES");
+static const u8 sText_Topic_Edges[] = _("EDGES");
+static const u8 sText_Topic_Features[] = _("FEATURES");
+static const u8 sText_Topic_Levels[] = _("LEVELS");
+static const u8 sText_Topic_Other[] = _("OTHER");
+
+static const struct MenuAction sMultichoiceList_SchoolCategories[] = {
+    { sText_Topic_Middles },
+    { sText_Topic_Edges },
+    { sText_Topic_Features },
+    { sText_Topic_Levels },
+    { sText_Topic_Other },
+    { gOtherText_Exit }
+};
+
 static const struct MenuAction sMultichoiceList_TrainerSchoolWhiteboard[] = {
     { gText_Slp },
     { gText_Psn },
@@ -537,6 +583,9 @@ static const struct MultichoiceListStruct sMultichoiceLists[] = {
     [MULTICHOICE_GAME_CORNER_POKEMON_PRIZES]                 = MULTICHOICE(sMultichoiceList_GameCornerPokemonPrizes),
     [MULTICHOICE_TRAINER_SCHOOL_WHITEBOARD]                  = MULTICHOICE(sMultichoiceList_TrainerSchoolWhiteboard),
     [MULTICHOICE_SCHOOL_LANGUAGE]                            = MULTICHOICE(sMultichoiceList_SchoolLanguage),
+    [MULTICHOICE_SCHOOL_ATTENTION] = MULTICHOICE(sMultichoiceList_SchoolAttention),
+    [MULTICHOICE_SCHOOL_MEMORY] = MULTICHOICE(sMultichoiceList_SchoolMemory),
+    [MULTICHOICE_SCHOOL_CATEGORIES] = MULTICHOICE(sMultichoiceList_SchoolCategories),
     [MULTICHOICE_YES_NO_INFO]                                = MULTICHOICE(sMultichoiceList_YesNoInfo),
     [MULTICHOICE_SINGLE_DOUBLE_MULTI_INFO_EXIT]              = MULTICHOICE(sMultichoiceList_SingleDoubleMultiInfoExit),
     [MULTICHOICE_YES_NO_INFO_2]                              = MULTICHOICE(sMultichoiceList_YesNoInfo2),

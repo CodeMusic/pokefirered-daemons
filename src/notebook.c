@@ -79,8 +79,16 @@ static const u8 sText_Back[]  = _("BACK");
 
 //  The syllabus is the desk's own text, not a copy of it: what the player read is what the notebook holds.
 extern const u8 ViridianCity_School_Text_Syllabus[];
+extern const u8 ViridianCity_School_2F_Text_Syllabus[];
+extern const u8 ViridianCity_School_3F_Text_Syllabus[];
+extern const u8 ViridianCity_School_4F_Text_Syllabus[];
+
 
 static const u8 sTitle_Syllabus_Language[] = _("1F LANGUAGE");
+static const u8 sTitle_Syllabus_Attention[] = _("2F ATTENTION");
+static const u8 sTitle_Syllabus_Memory[] = _("3F MEMORY");
+static const u8 sTitle_Syllabus_Categories[] = _("4F CATEGORIES");
+
 static const u8 sTitle_Loose_Stone[]       = _("THE STONE");
 static const u8 sTitle_Paper[]             = _("THE PAPER");
 
@@ -107,6 +115,9 @@ static const u8 sText_Loose_Stone[] = _(
 static const struct NotebookEntry sEntries[] =
 {
     { NB_SCHOOL_NOTES, FLAG_SCHOOL_SYLLABUS_LANGUAGE, sTitle_Syllabus_Language, ViridianCity_School_Text_Syllabus },
+    { NB_SCHOOL_NOTES, FLAG_SCHOOL_SYLLABUS_ATTENTION, sTitle_Syllabus_Attention, ViridianCity_School_2F_Text_Syllabus },
+    { NB_SCHOOL_NOTES, FLAG_SCHOOL_SYLLABUS_MEMORY, sTitle_Syllabus_Memory, ViridianCity_School_3F_Text_Syllabus },
+    { NB_SCHOOL_NOTES, FLAG_SCHOOL_SYLLABUS_CATEGORIES, sTitle_Syllabus_Categories, ViridianCity_School_4F_Text_Syllabus },
     //  T-217: written on demand -- every sitting's mark, and a paper under way if there is one. NULL text
     //  means the page is generated rather than stored.
     { NB_SCHOOL_NOTES, FLAG_SCHOOL_EXAM_OPENED,       sTitle_Paper,             NULL },

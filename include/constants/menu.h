@@ -70,6 +70,9 @@
 #define MULTICHOICE_JOIN_OR_LEAD                               63
 #define MULTICHOICE_TRAINER_TOWER_MODE                         64
 #define MULTICHOICE_SCHOOL_LANGUAGE                            65 // T-215
+#define MULTICHOICE_SCHOOL_ATTENTION                                66 // T-219
+#define MULTICHOICE_SCHOOL_MEMORY                                   67 // T-219
+#define MULTICHOICE_SCHOOL_CATEGORIES                               68 // T-219
 
 #define MULTICHOICE_NONE                                      255
 
