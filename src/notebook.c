@@ -227,6 +227,7 @@ extern const u8 CinnabarIsland_PokemonLab_Entrance_Text_RAndDRoomSign[];
 extern const u8 CinnabarIsland_PokemonLab_Entrance_Text_PhotoOfLabFounderDrFuji[];
 extern const u8 SaffronCity_MrPsychicsHouse_Text_OwlConcession[];
 extern const u8 SaffronCity_MrPsychicsHouse_Text_NotMineToDeliver[];
+extern const u8 SaffronCity_Text_SilphsLatestProduct[];
 
 static const u8 sTitle_Lab_Iter[]          = _("ITER 35");
 static const u8 sTitle_Run_Mar4[]          = _("MAR 4");
@@ -238,6 +239,7 @@ static const u8 sTitle_File_Requisition[]  = _("REQUISITION");
 static const u8 sTitle_File_Complete[]     = _("PR-0903");
 static const u8 sTitle_Review_Transcript[] = _("TRANSCRIPT");
 static const u8 sTitle_Review_Sealed[]     = _("SEALED");
+static const u8 sTitle_Prospectus_Scores[]  = _("REVIEW SCORES");
 
 //  THE AUTHORED ORDER. A new entry goes where it belongs in the finished file, not at the end.
 static const struct NotebookEntry sEntries[] =
@@ -265,6 +267,8 @@ static const struct NotebookEntry sEntries[] =
     { NB_THE_FILE,     NB_KIND_TEXT,  1, FLAG_NOTEBOOK_FILE_MINUTES,    0, sTitle_File_Minutes,        CinnabarIsland_PokemonLab_Entrance_Text_MeetingRoomSign },
     { NB_THE_FILE,     NB_KIND_TEXT,  1, FLAG_NOTEBOOK_FILE_REQUISITION, 0, sTitle_File_Requisition,   CinnabarIsland_PokemonLab_Entrance_Text_RAndDRoomSign },
     { NB_THE_FILE,     NB_KIND_TEXT,  0, FLAG_NOTEBOOK_FILE_COMPLETE,   0, sTitle_File_Complete,       CinnabarIsland_PokemonLab_Entrance_Text_PhotoOfLabFounderDrFuji },
+    //  PROSPECTUS 2: the scores, and the notice's own congratulations -- the only commentary it has.
+    { NB_PROSPECTUS,   NB_KIND_TEXT,  0, FLAG_NOTEBOOK_PROSPECTUS_SCORES, 0, sTitle_Prospectus_Scores, SaffronCity_Text_SilphsLatestProduct },
     { NB_PEER_REVIEW,  NB_KIND_TEXT,  0, FLAG_NOTEBOOK_REVIEW_POSITION, 0, sTitle_Review_Position,     sText_Review_Position },
     { NB_PEER_REVIEW,  NB_KIND_TEXT,  0, FLAG_NOTEBOOK_REVIEW_DRAFT,    0, sTitle_Review_Draft,        sText_Review_Draft },
     { NB_PEER_REVIEW,  NB_KIND_TEXT,  0, FLAG_NOTEBOOK_REVIEW_TRANSCRIPT, 0, sTitle_Review_Transcript, SaffronCity_MrPsychicsHouse_Text_OwlConcession },

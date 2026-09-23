@@ -116,7 +116,12 @@ SaffronCity_EventScript_MrPsychicsHouseSign::
 	end
 
 SaffronCity_EventScript_SilphProductSign::
-	msgbox SaffronCity_Text_SilphsLatestProduct, MSGBOX_SIGN
+	lockall
+	msgbox SaffronCity_Text_SilphsLatestProduct
+	goto_if_set FLAG_NOTEBOOK_PROSPECTUS_SCORES, EventScript_NotebookAlreadyFiled
+	setflag FLAG_NOTEBOOK_PROSPECTUS_SCORES
+	call EventScript_NotebookCopied
+	releaseall
 	end
 
 SaffronCity_EventScript_TrainerFanClubSign::

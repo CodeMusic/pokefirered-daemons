@@ -835,7 +835,7 @@
 #define FLAG_NOTEBOOK_FILE_COMPLETE      0x323 // T-219: THE FILE, the founder's plate
 #define FLAG_NOTEBOOK_REVIEW_TRANSCRIPT  0x324 // T-219: PEER REVIEW, his spoken concession
 #define FLAG_NOTEBOOK_REVIEW_SEALED      0x325 // T-219: PEER REVIEW, a cover sheet and nothing else
-#define FLAG_0x326               0x326
+#define FLAG_NOTEBOOK_PROSPECTUS_SCORES  0x326 // T-224: PROSPECTUS, the review scores notice in BRAZEN
 #define FLAG_0x327               0x327
 #define FLAG_0x328               0x328
 #define FLAG_0x329               0x329
