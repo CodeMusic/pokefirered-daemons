@@ -20,13 +20,42 @@
 //  which is what "installed" was supposed to mean in the first place.
 //
 //  THE BEHAVIOUR. Once installed it simply runs: on arrival, then every second and a half, each unclaimed
-//  hidden item within a screen of the player shimmers where it lies.
+//  hidden item within a screen of the player shimmers where it lies -- and so does every tree into a grove.
 
 #define REVEAL_PERIOD        90
 #define REVEAL_FIRST         60       // frames after arrival before the first shimmer
 #define BG_KIND_HIDDEN_ITEM  7        // the same literal itemfinder.c reads
+#define BG_KIND_SIGN_LAST    4        // 0..4: a script, read facing any way or one of the four
 
 static EWRAM_DATA u8 sRevealTimer = 0;
+
+//  T-221: the trees that lead into a GROVE, and out of one (tools/gbagrove.py writes both scripts). A bg_event whose
+//  script is one of these twinkles like a hidden item -- the driver shows WHICH tree, and pressing A on the tree that
+//  stands alone finds it without.
+extern const u8 ViridianForest_EventScript_Grove[];
+extern const u8 ViridianForest_Grove_EventScript_Leave[];
+static const u8 *const sGroveTrees[] =
+{
+    ViridianForest_EventScript_Grove,
+    ViridianForest_Grove_EventScript_Leave,
+};
+
+static bool8 IsShown(const struct BgEvent *e)
+{
+    u32 i;
+
+    if (e->kind == BG_KIND_HIDDEN_ITEM)
+        return !FlagGet(GetHiddenItemAttr(e->bgUnion.hiddenItem, HIDDEN_ITEM_FLAG));
+    if (e->kind <= BG_KIND_SIGN_LAST)
+    {
+        for (i = 0; i < ARRAY_COUNT(sGroveTrees); i++)
+        {
+            if (e->bgUnion.script == sGroveTrees[i])
+                return TRUE;
+        }
+    }
+    return FALSE;
+}
 
 void Reveal_OnMapLoad(void)
 {
@@ -51,9 +80,7 @@ void Reveal_Update(void)
     for (i = 0; i < events->bgEventCount; i++)
     {
         e = &events->bgEvents[i];
-        if (e->kind != BG_KIND_HIDDEN_ITEM)
-            continue;
-        if (FlagGet(GetHiddenItemAttr(e->bgUnion.hiddenItem, HIDDEN_ITEM_FLAG)))
+        if (!IsShown(e))
             continue;
         dx = e->x + 7 - px;
         dy = e->y + 7 - py;

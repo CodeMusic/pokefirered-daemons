@@ -93,6 +93,7 @@ gStdScriptsEnd::
 	.include "data/maps/BattleColosseum_4P/scripts.inc"
 	.include "data/maps/UnionRoom/scripts.inc"
 	.include "data/maps/ViridianForest/scripts.inc"
+	.include "data/maps/ViridianForest_Grove/scripts.inc"
 	.include "data/maps/MtMoon_1F/scripts.inc"
 	.include "data/maps/MtMoon_B1F/scripts.inc"
 	.include "data/maps/MtMoon_B2F/scripts.inc"
@@ -521,6 +522,7 @@ gStdScriptsEnd::
 	.include "data/maps/SevenIsland_SevaultCanyon_House/scripts.inc"
 
 	.include "data/maps/ViridianForest/text.inc"
+	.include "data/maps/ViridianForest_Grove/text.inc"
 	.include "data/maps/MtMoon_1F/text.inc"
 	.include "data/maps/MtMoon_B2F/text.inc"
 	.include "data/maps/SSAnne_1F_Corridor/text.inc"

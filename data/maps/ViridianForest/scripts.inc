@@ -75,3 +75,13 @@ ViridianForest_EventScript_Charlie::
 	trainerbattle_single TRAINER_BUG_CATCHER_CHARLIE, ViridianForest_Text_CharlieIntro, ViridianForest_Text_CharlieDefeat
 	msgbox ViridianForest_Text_CharliePostBattle, MSGBOX_AUTOCLOSE
 	end
+
+@ T-221: the tree that stands alone answers A -- the way into a grove. Nothing is said; REVEAL makes it
+@ twinkle (src/reveal.c), and pressing A on the right tree finds it without.
+ViridianForest_EventScript_Grove::
+	lockall
+	playse SE_M_CUT
+	warp MAP_VIRIDIAN_FOREST_GROVE, 4, 6
+	waitstate
+	releaseall
+	end

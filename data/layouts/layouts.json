@@ -4482,6 +4482,18 @@
       "secondary_tileset": "gTileset_PokemonMansion",
       "border_filepath": "data/layouts/Route21_North_Station/border.bin",
       "blockdata_filepath": "data/layouts/Route21_North_Station/map.bin"
+    },
+    {
+      "id": "LAYOUT_VIRIDIAN_FOREST_GROVE",
+      "name": "ViridianForest_Grove_Layout",
+      "width": 16,
+      "height": 17,
+      "border_width": 3,
+      "border_height": 2,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_ViridianForest",
+      "border_filepath": "data/layouts/ViridianForest_Grove/border.bin",
+      "blockdata_filepath": "data/layouts/ViridianForest_Grove/map.bin"
     }
   ]
 }
