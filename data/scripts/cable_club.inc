@@ -1519,8 +1519,8 @@ Text_DescribeWhichGame::
 
 Text_PokemonJumpInfo::
 	.string "“DAEMON JUMP”\p"
-	.string "Make your DAEMON skip the VINE\n"
-	.string "WHIP rope with the A Button.\p"
+	.string "Make your DAEMON skip the rope\n"
+	.string "with the A Button.\p"
 	.string "Only mini DAEMON around 28 inches\n"
 	.string "or less may participate.\p"
 	.string "DAEMON that only swim, burrow, or\n"

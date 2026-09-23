@@ -130,7 +130,8 @@ DaemonsDebug_Text_DiplomaGiven::
 	.string "DEBUG: the DIPLOMA is in the POOL.$"
 
 DaemonsDebug_Text_DiplomaAlready::
-	.string "DEBUG: you already hold the DIPLOMA.$"
+	.string "DEBUG: you already hold\n"
+	.string "the DIPLOMA.$"
 
 DaemonsDebug_Text_IslandsOpened::
 	.string "The ferry at ARDOR PORT is running.$"

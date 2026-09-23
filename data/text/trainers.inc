@@ -136,7 +136,7 @@ Route9_Text_ChrisRematchIntro::
 	.string "those good-looking DAEMONS.$"
 
 Route9_Text_DrewRematchIntro::
-	.string "I'm taking ROCK TUNNEL to go to\n"
+	.string "I'm taking THE BLACKOUT to go to\n"
 	.string "HALFTONE…\p"
 	.string "But I keep getting stopped by\n"
 	.string "everyone along the way…$"
@@ -328,7 +328,7 @@ Route14_Text_BeckRematchIntro::
 
 Route14_Text_MarlonRematchIntro::
 	.string "Have you taught your bird DAEMON\n"
-	.string "how to FLY?\p"
+	.string "to GOTO?\p"
 	.string "You'll be able to soar with it into\n"
 	.string "the sky! Give it a try.$"
 
