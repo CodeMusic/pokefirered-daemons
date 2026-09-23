@@ -81,7 +81,7 @@ PalletTown_PlayersHouse_2F_EventScript_CodeTune::
 	goto PalletTown_PlayersHouse_2F_EventScript_TunePlays
 
 PalletTown_PlayersHouse_2F_EventScript_TunePewter::
-	playbgm MUS_PEWTER, 0
+	playbgm MUS_SLATE, 0
 	goto PalletTown_PlayersHouse_2F_EventScript_TunePlays
 
 PalletTown_PlayersHouse_2F_EventScript_TuneVermilion::

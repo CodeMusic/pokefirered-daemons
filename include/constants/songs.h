@@ -356,6 +356,7 @@
 // Appended, not inserted. The song table is positional -- mus_title is row
 // 278 and MUS_TITLE is 278 -- so a row added at the END shifts nothing.
 #define MUS_BRAZEN                347
+#define MUS_SLATE                 348   // SLATE's own; MUS_PEWTER is vanilla's again (tools/port_music.py)
 
 #define MUS_NONE                    0xFFFF
 
