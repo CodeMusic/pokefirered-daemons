@@ -44,6 +44,6 @@ Route11_EastEntrance_2F_Text_WhatABreathtakingView::
 Route11_EastEntrance_2F_Text_RockTunnelGoodRouteToLavender::
     .string "Looked into the binoculars.\p"
     .string "The only way to get from DOLDRUM\n"
-    .string "CITY to HALFTONE is by way of the\l"
+    .string "CITY to HALFTONE is by way of\l"
     .string "THE BLACKOUT.$"
 
