@@ -1297,7 +1297,6 @@ void School_BufferExamResult(void)
 //  The NOTEBOOK's page for the paper: every sitting's mark, and one under way if there is one.
 void School_WriteExamRecord(u8 *dest)
 {
-    static const u8 sHead[]       = _("THE PAPER\n");
     static const u8 sNone[]       = _("Not handed in yet.");
     static const u8 sSat[]        = _("Handed in: ");
     static const u8 sTimes[]      = _(" times.");
@@ -1312,7 +1311,7 @@ void School_WriteExamRecord(u8 *dest)
     u16 attempts = VarGet(VAR_SCHOOL_EXAM_ATTEMPTS);
     u16 best = VarGet(VAR_SCHOOL_EXAM_BEST), last = VarGet(VAR_SCHOOL_EXAM_LAST);
     u16 answered = CountAnswered();
-    u8 *p = StringCopy(dest, sHead);
+    u8 *p = dest;                       // the page's own title says THE PAPER
 
     if (attempts == 0)
     {

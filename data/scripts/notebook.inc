@@ -1,6 +1,6 @@
 @ T-216: THE RESEARCH NOTEBOOK. Opened from the bag (item_use.c) or from SELECT once registered.
 @ src/notebook.c builds each list from whatever is held and hands the choice back in VAR_RESULT;
-@ an entry is shown in the ordinary message box, so it pages like a sign and R = AGAIN repeats it.
+@ a chosen entry opens full screen on a ruled sheet (book_reader.c, T-223), and B brings you back here.
 
 EventScript_Notebook::
 	lockall
@@ -20,16 +20,20 @@ EventScript_NotebookEntries::
 	waitstate
 	goto_if_eq VAR_RESULT, 0x7F, EventScript_NotebookSections
 	copyvar VAR_0x8006, VAR_RESULT
-	special Notebook_LoadEntry
-	msgbox gStringVar4
 	closemessage
+	fadescreen FADE_TO_BLACK
+	special Notebook_ReadEntry
+	waitstate
 	goto EventScript_NotebookEntries
 
-@ T-219: the TEXTBOOK opens straight onto SCHOOL NOTES (section 0), where its boards are filed.
+@ T-223: the TEXTBOOK is its own book now -- CONTENTS, a chapter a floor, a topic a board (book_reader.c).
 EventScript_Textbook::
 	lockall
-	setvar VAR_0x8005, 0
-	goto EventScript_NotebookEntries
+	fadescreen FADE_TO_BLACK
+	special Textbook_Open
+	waitstate
+	releaseall
+	end
 
 EventScript_NotebookEmpty::
 	msgbox Text_NotebookEmpty
