@@ -588,7 +588,7 @@ Help_Text_UsingBillsPC::
 	.string " Using “{STR_VAR_1}'S PORT”$"
 
 Help_Text_UsingWithdraw::
-	.string "  Using “EDDY”$"
+	.string "  Using “WITHDRAW”$"
 
 Help_Text_UsingDeposit::
 	.string "  Using “DEPOSIT”$"
@@ -603,7 +603,7 @@ Help_Text_UsingPlayersPC::
 	.string " Using “{PLAYER}'s PORT”$"
 
 Help_Text_UsingWithdrawItem::
-	.string "  Using “EDDY ITEM”$"
+	.string "  Using “WITHDRAW ITEM”$"
 
 Help_Text_UsingDepositItem::
 	.string "  Using “DEPOSIT ITEM”$"
@@ -642,7 +642,7 @@ Help_Text_UsingItemStorage::
 	.string "Using the Item Storage System$"
 
 Help_Text_UsingWithdrawItem2::
-	.string "  Using “EDDY ITEM”$"
+	.string "  Using “WITHDRAW ITEM”$"
 
 Help_Text_UsingDepositItem2::
 	.string "  Using “DEPOSIT ITEM”$"
@@ -843,7 +843,7 @@ Help_Text_HowToUseBillsPC::
 Help_Text_HowToUseWithdraw::
 	.string "{CIRCLE_1} Select a DAEMON in the open BOX\n"
 	.string "   with the {PLUS} Control Pad.\n"
-	.string "{CIRCLE_2} Select “EDDY” to remove the\n"
+	.string "{CIRCLE_2} Select “WITHDRAW” to remove the\n"
 	.string "   DAEMON from the BOX and add it to\n"
 	.string "   your party.\n"
 	.string "You may not withdraw a DAEMON if you\n"
@@ -885,7 +885,7 @@ Help_Text_HowToUsePlayersPC::
 	.string "withdraw items stored in your PORT.$"
 
 Help_Text_HowToUseWithdrawItem::
-	.string "{CIRCLE_1} Select “EDDY ITEM.”\n"
+	.string "{CIRCLE_1} Select “WITHDRAW ITEM.”\n"
 	.string "{CIRCLE_2} Select the item to be withdrawn.\n"
 	.string "{CIRCLE_3} The item can be withdrawn and\n"
 	.string "   placed in the POOL's ITEMS POCKET.\n"
@@ -987,13 +987,13 @@ Help_Text_HowToUseHomePC::
 	.string "   “MAILBOX.”$"
 
 Help_Text_HowToUseItemStorage::
-	.string "{CIRCLE_1} Select “EDDY ITEM” to withdraw\n"
+	.string "{CIRCLE_1} Select “WITHDRAW ITEM” to withdraw\n"
 	.string "   an item stored on your PORT.\n"
 	.string "{CIRCLE_2} Select “DEPOSIT ITEM” to put an\n"
 	.string "   item from your POOL into the PORT.$"
 
 Help_Text_HowToUseWithdrawItem2::
-	.string "{CIRCLE_1} Select “EDDY ITEM.”\n"
+	.string "{CIRCLE_1} Select “WITHDRAW ITEM.”\n"
 	.string "{CIRCLE_2} Select the item to be withdrawn.\n"
 	.string "{CIRCLE_3} The item can be withdrawn and\n"
 	.string "   placed in the POOL's ITEMS POCKET.\n"
