@@ -197,7 +197,7 @@ static void DaemonsDebug_GrantTestKit(void)
         MOVE_CUT, MOVE_SWEET_SCENT, MOVE_SURF, MOVE_STRENGTH,
         MOVE_ROCK_SMASH, MOVE_WATERFALL, MOVE_FLASH, MOVE_DIVE,
     };
-    u32 m;
+    u32 m, boxed = 0;
 
     for (i = 0; i < ARRAY_COUNT(sParty); i++)
     {
@@ -247,7 +247,10 @@ static void DaemonsDebug_GrantTestKit(void)
             continue;
         CreateMon(&mon, species, 50, 31, FALSE, 0, OT_ID_PLAYER_ID, 0);
         SetMonData(&mon, MON_DATA_MET_LEVEL, &met);
-        GiveMonToPlayer(&mon);          // the party is full by here, so every one of these lands in the PC
+        //  Straight into the next slot. GiveMonToPlayer searched the boxes from the start for every one of the 386,
+        //  decrypting each daemon it passed -- quadratic, and part of why a debug game sat black for a minute and a half.
+        CopyMon(GetBoxedMonPtr(boxed / IN_BOX_COUNT, boxed % IN_BOX_COUNT), &mon.box, sizeof(mon.box));
+        boxed++;
     }
 
     for (i = 0; i < ARRAY_COUNT(sBag); i++)
