@@ -213,6 +213,32 @@ static const u8 sText_Review_Draft[] = _(
     "It has not been crossed out.\n"
     "It has not been answered either.");
 
+//  T-219 (batch 8): the documents the game ALREADY SHOWS, filed when they are read. Like the syllabus, each entry
+//  is the thing's own text and not a copy of it -- what the player read on the terminal is what the page holds.
+//  The titles are the only new words, and they are DRAFT: a date where the document has one, and what the
+//  document IS where it does not.
+extern const u8 PokemonMansion_1F_Text_IterLog[];
+extern const u8 PokemonMansion_1F_Text_NewMonDiscoveredInGuyanaJungle[];
+extern const u8 PokemonMansion_1F_Text_ChristenedDiscoveredMonMew[];
+extern const u8 PokemonMansion_1F_Text_MewGaveBirthToMewtwo[];
+extern const u8 PokemonMansion_B1F_Text_MewtwoIsFarTooPowerful[];
+extern const u8 CinnabarIsland_PokemonLab_Entrance_Text_MeetingRoomSign[];
+extern const u8 CinnabarIsland_PokemonLab_Entrance_Text_RAndDRoomSign[];
+extern const u8 CinnabarIsland_PokemonLab_Entrance_Text_PhotoOfLabFounderDrFuji[];
+extern const u8 SaffronCity_MrPsychicsHouse_Text_OwlConcession[];
+extern const u8 SaffronCity_MrPsychicsHouse_Text_NotMineToDeliver[];
+
+static const u8 sTitle_Lab_Iter[]          = _("ITER 35");
+static const u8 sTitle_Run_Mar4[]          = _("MAR 4");
+static const u8 sTitle_Run_Apr19[]         = _("APR 19");
+static const u8 sTitle_Run_Aug12[]         = _("AUG 12");
+static const u8 sTitle_Run_Fatal[]         = _("NO DATE");
+static const u8 sTitle_File_Minutes[]      = _("MINUTES");
+static const u8 sTitle_File_Requisition[]  = _("REQUISITION");
+static const u8 sTitle_File_Complete[]     = _("PR-0903");
+static const u8 sTitle_Review_Transcript[] = _("TRANSCRIPT");
+static const u8 sTitle_Review_Sealed[]     = _("SEALED");
+
 //  THE AUTHORED ORDER. A new entry goes where it belongs in the finished file, not at the end.
 static const struct NotebookEntry sEntries[] =
 {
@@ -231,8 +257,19 @@ static const struct NotebookEntry sEntries[] =
     { NB_LOOSE_PAGES,  NB_KIND_TEXT,  0, FLAG_NOTEBOOK_LOOSE_UNSENT,    0, sTitle_Loose_Unsent,        sText_Loose_Unsent },
     { NB_LAB_NOTES,    NB_KIND_TEXT,  0, FLAG_NOTEBOOK_LAB_OBSERVER,    0, sTitle_Lab_Observer,        sText_Lab_Observer },
     { NB_LAB_NOTES,    NB_KIND_TEXT,  0, FLAG_NOTEBOOK_LAB_BOX,         0, sTitle_Lab_Box,             sText_Lab_Box },
+    { NB_LAB_NOTES,    NB_KIND_TEXT,  0, FLAG_NOTEBOOK_LAB_ITER,        0, sTitle_Lab_Iter,            PokemonMansion_1F_Text_IterLog },
+    { NB_RUN_LOGS,     NB_KIND_TEXT,  0, FLAG_NOTEBOOK_RUN_MAR4,        0, sTitle_Run_Mar4,            PokemonMansion_1F_Text_NewMonDiscoveredInGuyanaJungle },
+    { NB_RUN_LOGS,     NB_KIND_TEXT,  0, FLAG_NOTEBOOK_RUN_APR19,       0, sTitle_Run_Apr19,           PokemonMansion_1F_Text_ChristenedDiscoveredMonMew },
+    { NB_RUN_LOGS,     NB_KIND_TEXT,  0, FLAG_NOTEBOOK_RUN_AUG12,       0, sTitle_Run_Aug12,           PokemonMansion_1F_Text_MewGaveBirthToMewtwo },
+    { NB_RUN_LOGS,     NB_KIND_TEXT,  0, FLAG_NOTEBOOK_RUN_FATAL,       0, sTitle_Run_Fatal,           PokemonMansion_B1F_Text_MewtwoIsFarTooPowerful },
+    { NB_THE_FILE,     NB_KIND_TEXT,  1, FLAG_NOTEBOOK_FILE_MINUTES,    0, sTitle_File_Minutes,        CinnabarIsland_PokemonLab_Entrance_Text_MeetingRoomSign },
+    { NB_THE_FILE,     NB_KIND_TEXT,  1, FLAG_NOTEBOOK_FILE_REQUISITION, 0, sTitle_File_Requisition,   CinnabarIsland_PokemonLab_Entrance_Text_RAndDRoomSign },
+    { NB_THE_FILE,     NB_KIND_TEXT,  0, FLAG_NOTEBOOK_FILE_COMPLETE,   0, sTitle_File_Complete,       CinnabarIsland_PokemonLab_Entrance_Text_PhotoOfLabFounderDrFuji },
     { NB_PEER_REVIEW,  NB_KIND_TEXT,  0, FLAG_NOTEBOOK_REVIEW_POSITION, 0, sTitle_Review_Position,     sText_Review_Position },
     { NB_PEER_REVIEW,  NB_KIND_TEXT,  0, FLAG_NOTEBOOK_REVIEW_DRAFT,    0, sTitle_Review_Draft,        sText_Review_Draft },
+    { NB_PEER_REVIEW,  NB_KIND_TEXT,  0, FLAG_NOTEBOOK_REVIEW_TRANSCRIPT, 0, sTitle_Review_Transcript, SaffronCity_MrPsychicsHouse_Text_OwlConcession },
+    //  4.34 rule 1: a cover sheet, and the notebook refuses the rest -- which says it louder than no entry at all.
+    { NB_PEER_REVIEW,  NB_KIND_TEXT,  0, FLAG_NOTEBOOK_REVIEW_SEALED,   0, sTitle_Review_Sealed,       SaffronCity_MrPsychicsHouse_Text_NotMineToDeliver },
 };
 
 static EWRAM_DATA struct ListMenuItem *sItems = NULL;

@@ -110,7 +110,7 @@ ReadingRoom_EventScript_ShelfFields::
 	msgbox ReadingRoom_Text_ShelfFields
 	goto_if_set FLAG_NOTEBOOK_LOOSE_FIELDS, ReadingRoom_EventScript_ShelfDone
 	setflag FLAG_NOTEBOOK_LOOSE_FIELDS
-	call ReadingRoom_EventScript_Copied
+	call EventScript_NotebookCopied
 	releaseall
 	end
 
@@ -119,7 +119,7 @@ ReadingRoom_EventScript_ShelfUnsent::
 	msgbox ReadingRoom_Text_ShelfUnsent
 	goto_if_set FLAG_NOTEBOOK_LOOSE_UNSENT, ReadingRoom_EventScript_ShelfDone
 	setflag FLAG_NOTEBOOK_LOOSE_UNSENT
-	call ReadingRoom_EventScript_Copied
+	call EventScript_NotebookCopied
 	releaseall
 	end
 
@@ -128,7 +128,7 @@ ReadingRoom_EventScript_ShelfObserver::
 	msgbox ReadingRoom_Text_ShelfObserver
 	goto_if_set FLAG_NOTEBOOK_LAB_OBSERVER, ReadingRoom_EventScript_ShelfDone
 	setflag FLAG_NOTEBOOK_LAB_OBSERVER
-	call ReadingRoom_EventScript_Copied
+	call EventScript_NotebookCopied
 	releaseall
 	end
 
@@ -137,7 +137,7 @@ ReadingRoom_EventScript_ShelfBox::
 	msgbox ReadingRoom_Text_ShelfBox
 	goto_if_set FLAG_NOTEBOOK_LAB_BOX, ReadingRoom_EventScript_ShelfDone
 	setflag FLAG_NOTEBOOK_LAB_BOX
-	call ReadingRoom_EventScript_Copied
+	call EventScript_NotebookCopied
 	releaseall
 	end
 
@@ -146,7 +146,7 @@ ReadingRoom_EventScript_ShelfPosition::
 	msgbox ReadingRoom_Text_ShelfPosition
 	goto_if_set FLAG_NOTEBOOK_REVIEW_POSITION, ReadingRoom_EventScript_ShelfDone
 	setflag FLAG_NOTEBOOK_REVIEW_POSITION
-	call ReadingRoom_EventScript_Copied
+	call EventScript_NotebookCopied
 	releaseall
 	end
 
@@ -155,23 +155,13 @@ ReadingRoom_EventScript_ShelfDraft::
 	msgbox ReadingRoom_Text_ShelfDraft
 	goto_if_set FLAG_NOTEBOOK_REVIEW_DRAFT, ReadingRoom_EventScript_ShelfDone
 	setflag FLAG_NOTEBOOK_REVIEW_DRAFT
-	call ReadingRoom_EventScript_Copied
+	call EventScript_NotebookCopied
 	releaseall
 	end
 
 ReadingRoom_EventScript_ShelfDone::
 	releaseall
 	end
-
-ReadingRoom_EventScript_Copied::
-	playse SE_SELECT
-	goto_if_unset FLAG_GOT_NOTEBOOK, ReadingRoom_EventScript_CopiedOut
-	msgbox ReadingRoom_Text_IntoNotebook
-	return
-
-ReadingRoom_EventScript_CopiedOut::
-	msgbox ReadingRoom_Text_CopiedOut
-	return
 
 ReadingRoom_EventScript_Catalogue::
 	msgbox ReadingRoom_Text_Catalogue, MSGBOX_SIGN

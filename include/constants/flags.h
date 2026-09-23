@@ -825,16 +825,16 @@
 #define FLAG_NOTEBOOK_LAB_BOX            0x319 // T-218: LAB NOTES, the box
 #define FLAG_NOTEBOOK_REVIEW_POSITION    0x31A // T-218: PEER REVIEW, a position paper
 #define FLAG_NOTEBOOK_REVIEW_DRAFT       0x31B // T-218: PEER REVIEW, its second draft
-#define FLAG_0x31C               0x31C
-#define FLAG_0x31D               0x31D
-#define FLAG_0x31E               0x31E
-#define FLAG_0x31F               0x31F
-#define FLAG_0x320               0x320
-#define FLAG_0x321               0x321
-#define FLAG_0x322               0x322
-#define FLAG_0x323               0x323
-#define FLAG_0x324               0x324
-#define FLAG_0x325               0x325
+#define FLAG_NOTEBOOK_LAB_ITER           0x31C // T-219: LAB NOTES, the ITER log in QUICKSILVER's MANSION
+#define FLAG_NOTEBOOK_RUN_MAR4           0x31D // T-219: RUN LOGS, the first dated log
+#define FLAG_NOTEBOOK_RUN_APR19          0x31E // T-219: RUN LOGS, the second
+#define FLAG_NOTEBOOK_RUN_AUG12          0x31F // T-219: RUN LOGS, the third
+#define FLAG_NOTEBOOK_RUN_FATAL          0x320 // T-219: RUN LOGS, the one with no date
+#define FLAG_NOTEBOOK_FILE_MINUTES       0x321 // T-219: THE FILE, the Meeting Room minute
+#define FLAG_NOTEBOOK_FILE_REQUISITION   0x322 // T-219: THE FILE, the CC-7 requisition
+#define FLAG_NOTEBOOK_FILE_COMPLETE      0x323 // T-219: THE FILE, the founder's plate
+#define FLAG_NOTEBOOK_REVIEW_TRANSCRIPT  0x324 // T-219: PEER REVIEW, his spoken concession
+#define FLAG_NOTEBOOK_REVIEW_SEALED      0x325 // T-219: PEER REVIEW, a cover sheet and nothing else
 #define FLAG_0x326               0x326
 #define FLAG_0x327               0x327
 #define FLAG_0x328               0x328

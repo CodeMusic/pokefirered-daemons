@@ -32,5 +32,10 @@ PokemonMansion_1F_EventScript_Johnson::
 	end
 
 PokemonMansion_1F_EventScript_IterLog::
-	msgbox PokemonMansion_1F_Text_IterLog, MSGBOX_SIGN
+	lockall
+	msgbox PokemonMansion_1F_Text_IterLog
+	goto_if_set FLAG_NOTEBOOK_LAB_ITER, EventScript_NotebookAlreadyFiled
+	setflag FLAG_NOTEBOOK_LAB_ITER
+	call EventScript_NotebookCopied
+	releaseall
 	end

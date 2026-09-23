@@ -15,15 +15,30 @@ CinnabarIsland_PokemonLab_Entrance_EventScript_Scientist::
 	end
 
 CinnabarIsland_PokemonLab_Entrance_EventScript_DrFujiPhoto::
-	msgbox CinnabarIsland_PokemonLab_Entrance_Text_PhotoOfLabFounderDrFuji, MSGBOX_SIGN
+	lockall
+	msgbox CinnabarIsland_PokemonLab_Entrance_Text_PhotoOfLabFounderDrFuji
+	goto_if_set FLAG_NOTEBOOK_FILE_COMPLETE, EventScript_NotebookAlreadyFiled
+	setflag FLAG_NOTEBOOK_FILE_COMPLETE
+	call EventScript_NotebookCopied
+	releaseall
 	end
 
 CinnabarIsland_PokemonLab_Entrance_EventScript_MeetingRoomSign::
-	msgbox CinnabarIsland_PokemonLab_Entrance_Text_MeetingRoomSign, MSGBOX_SIGN
+	lockall
+	msgbox CinnabarIsland_PokemonLab_Entrance_Text_MeetingRoomSign
+	goto_if_set FLAG_NOTEBOOK_FILE_MINUTES, EventScript_NotebookAlreadyFiled
+	setflag FLAG_NOTEBOOK_FILE_MINUTES
+	call EventScript_NotebookCopied
+	releaseall
 	end
 
 CinnabarIsland_PokemonLab_Entrance_EventScript_RAndDRoomSign::
-	msgbox CinnabarIsland_PokemonLab_Entrance_Text_RAndDRoomSign, MSGBOX_SIGN
+	lockall
+	msgbox CinnabarIsland_PokemonLab_Entrance_Text_RAndDRoomSign
+	goto_if_set FLAG_NOTEBOOK_FILE_REQUISITION, EventScript_NotebookAlreadyFiled
+	setflag FLAG_NOTEBOOK_FILE_REQUISITION
+	call EventScript_NotebookCopied
+	releaseall
 	end
 
 CinnabarIsland_PokemonLab_Entrance_EventScript_TestingRoomSign::

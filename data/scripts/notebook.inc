@@ -35,6 +35,23 @@ EventScript_Textbook::
 	releaseall
 	end
 
+@ T-218/T-219: a document the player has just read is filed. Said once, and only if the NOTEBOOK is held --
+@ before CAIRN hands it over, the page is still copied out (every entry is a flag), just not into anything.
+EventScript_NotebookCopied::
+	playse SE_SELECT
+	goto_if_unset FLAG_GOT_NOTEBOOK, EventScript_NotebookCopiedOut
+	msgbox Text_NotebookCopied
+	return
+
+EventScript_NotebookCopiedOut::
+	msgbox Text_NotebookCopiedOut
+	return
+
+@ A document read again: it is already filed, and nothing more is said.
+EventScript_NotebookAlreadyFiled::
+	releaseall
+	end
+
 EventScript_NotebookEmpty::
 	msgbox Text_NotebookEmpty
 EventScript_NotebookClose::
@@ -51,3 +68,10 @@ Text_NotebookWhichPage::
 Text_NotebookEmpty::
 	.string "Nothing has been written in it\n"
 	.string "yet.$"
+
+Text_NotebookCopied::
+	.string "{PLAYER} copied it into the\n"
+	.string "NOTEBOOK.$"
+
+Text_NotebookCopiedOut::
+	.string "{PLAYER} copied it out.$"

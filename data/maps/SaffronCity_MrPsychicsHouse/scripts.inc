@@ -45,9 +45,11 @@ SaffronCity_MrPsychicsHouse_EventScript_OwlScene::
 	msgbox SaffronCity_MrPsychicsHouse_Text_StarrDoesNotStop
 	msgbox SaffronCity_MrPsychicsHouse_Text_OwlSharedBias
 	msgbox SaffronCity_MrPsychicsHouse_Text_OwlConcession
+	setflag FLAG_NOTEBOOK_REVIEW_TRANSCRIPT   @ T-219: filed without a word -- nothing interrupts this
 	msgbox SaffronCity_MrPsychicsHouse_Text_HeWrites
 	giveitem_msg SaffronCity_MrPsychicsHouse_Text_ReceivedPeerReview, ITEM_DEVON_GOODS
 	msgbox SaffronCity_MrPsychicsHouse_Text_NotMineToDeliver
+	setflag FLAG_NOTEBOOK_REVIEW_SEALED
 	msgbox SaffronCity_MrPsychicsHouse_Text_OwlSomethingInTheRoom
 	setflag FLAG_OWL_CONCEDED
 	goto SaffronCity_MrPsychicsHouse_EventScript_TryFlight

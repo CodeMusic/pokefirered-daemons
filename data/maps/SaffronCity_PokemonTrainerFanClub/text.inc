@@ -101,13 +101,6 @@ ReadingRoom_Text_ShelfDraft::
     .string "The same paper, a later draft.\n"
     .string "There is pencil in the margin.$"
 
-ReadingRoom_Text_IntoNotebook::
-    .string "{PLAYER} copied it into the\n"
-    .string "NOTEBOOK.$"
-
-ReadingRoom_Text_CopiedOut::
-    .string "{PLAYER} copied it out.$"
-
 ReadingRoom_Text_Catalogue::
     .string "A card catalogue. Most cards are\n"
     .string "for books nobody came back for.$"

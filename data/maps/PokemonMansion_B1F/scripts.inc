@@ -17,7 +17,12 @@ PokemonMansion_B1F_EventScript_Statue::
 	end
 
 PokemonMansion_B1F_EventScript_DiarySep1st::
-	msgbox PokemonMansion_B1F_Text_MewtwoIsFarTooPowerful, MSGBOX_SIGN
+	lockall
+	msgbox PokemonMansion_B1F_Text_MewtwoIsFarTooPowerful
+	goto_if_set FLAG_NOTEBOOK_RUN_FATAL, EventScript_NotebookAlreadyFiled
+	setflag FLAG_NOTEBOOK_RUN_FATAL
+	call EventScript_NotebookCopied
+	releaseall
 	end
 
 PokemonMansion_B1F_EventScript_Lewis::

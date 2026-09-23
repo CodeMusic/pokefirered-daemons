@@ -17,11 +17,21 @@ PokemonMansion_2F_EventScript_Statue::
 	end
 
 PokemonMansion_2F_EventScript_DiaryJuly5th::
-	msgbox PokemonMansion_1F_Text_NewMonDiscoveredInGuyanaJungle, MSGBOX_SIGN
+	lockall
+	msgbox PokemonMansion_1F_Text_NewMonDiscoveredInGuyanaJungle
+	goto_if_set FLAG_NOTEBOOK_RUN_MAR4, EventScript_NotebookAlreadyFiled
+	setflag FLAG_NOTEBOOK_RUN_MAR4
+	call EventScript_NotebookCopied
+	releaseall
 	end
 
 PokemonMansion_2F_EventScript_DiaryJuly10th::
-	msgbox PokemonMansion_1F_Text_ChristenedDiscoveredMonMew, MSGBOX_SIGN
+	lockall
+	msgbox PokemonMansion_1F_Text_ChristenedDiscoveredMonMew
+	goto_if_set FLAG_NOTEBOOK_RUN_APR19, EventScript_NotebookAlreadyFiled
+	setflag FLAG_NOTEBOOK_RUN_APR19
+	call EventScript_NotebookCopied
+	releaseall
 	end
 
 PokemonMansion_2F_EventScript_Arnie::

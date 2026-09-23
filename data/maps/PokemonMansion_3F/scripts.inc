@@ -17,7 +17,12 @@ PokemonMansion_3F_EventScript_Statue::
 	end
 
 PokemonMansion_3F_EventScript_DiaryFeb6th::
-	msgbox PokemonMansion_1F_Text_MewGaveBirthToMewtwo, MSGBOX_SIGN
+	lockall
+	msgbox PokemonMansion_1F_Text_MewGaveBirthToMewtwo
+	goto_if_set FLAG_NOTEBOOK_RUN_AUG12, EventScript_NotebookAlreadyFiled
+	setflag FLAG_NOTEBOOK_RUN_AUG12
+	call EventScript_NotebookCopied
+	releaseall
 	end
 
 PokemonMansion_3F_EventScript_Simon::
