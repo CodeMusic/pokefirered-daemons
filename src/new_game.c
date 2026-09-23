@@ -301,6 +301,17 @@ static void DaemonsDebug_GrantTestKit(void)
     // And CALLOW's old man still lay across the north road, waiting for a parcel no debug game delivers -- so
     // a debug save could not walk to Route 2, THE UNDERTONE or its grove (found walking to T-221's tree).
     VarSet(VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 2);
+    // And the rest of the opening, which the kit's six daemons and eight MARKS say is long over. Walking a brand-new
+    // debug game north out of BLANCHE (2026-09-23), CRYSTAL came running and the whole starter scene played on a save
+    // that already had a full party. Every trigger here fires at 0, so a finished opening is just these values:
+    VarSet(VAR_MAP_SCENE_PALLET_TOWN_OAK, 1);                   // the escort is done; 2 would start the rating scene
+    VarSet(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 6);    // starter, rival, parcel and INDEX all handed over
+    FlagSet(FLAG_HIDE_RIVAL_IN_LAB);
+    VarSet(VAR_MAP_SCENE_VIRIDIAN_CITY_MART, 1);                // CALLOW's clerk does not hand over the parcel again
+    VarSet(VAR_MAP_SCENE_PEWTER_CITY, 2);                       // nobody marches you back to SLATE's BENCHMARK
+    FlagSet(FLAG_HIDE_PEWTER_CITY_GYM_GUIDE);
+    VarSet(VAR_MAP_SCENE_ROUTE5_ROUTE6_ROUTE7_ROUTE8_GATES, 1); // the gate guards have had their tea: BRAZEN on foot
+    FlagSet(FLAG_SYS_B_DASH);                                   // MOM's RUNNING SHOES (T-67), which a debug game walks past
 
     // Fly opens the map but every destination is dead until it has been
     // visited: region_map.c returns MAPSECTYPE_NOT_VISITED for any mapsec whose
