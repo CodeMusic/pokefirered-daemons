@@ -155,6 +155,16 @@ static void DaemonsDebug_GrantTestKit(void)
         { ITEM_ORAN_BERRY,   10 },
         { ITEM_LEFTOVERS,     1 },
         { ITEM_TM01,          1 },
+        // All eight DRIVERs (T-199): holding one is what reaches the world now, not a daemon that knows the
+        // routine -- so a debug save that holds none cannot test the thing the ticket changed.
+        { ITEM_HM01,          1 },
+        { ITEM_HM02,          1 },
+        { ITEM_HM03,          1 },
+        { ITEM_HM04,          1 },
+        { ITEM_HM05,          1 },
+        { ITEM_HM06,          1 },
+        { ITEM_HM07,          1 },
+        { ITEM_HM08,          1 },
         // A KEY item, which is its own pocket and its own description pane --
         // and it is the one thing whose absence actually blocked a test run:
         // without it the ship at Ardor cannot be boarded, so a debug save

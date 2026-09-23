@@ -5937,6 +5937,12 @@ const struct CompressedSpritePalette *GetMonSpritePalStructFromOtIdPersonality(u
 bool32 IsHMMove2(u16 move)
 {
     int i = 0;
+
+    //  T-199 phase 3: a DRIVER is installed on the SYSTEM, not taught to a process, so the eight routines are
+    //  ordinary ones a daemon may know and may FORGET -- holding the driver is what reaches the world (phase 2).
+    //  The three "can't be forgotten" checks (battle, evolution, level-up) ask this, so it answers for all of them.
+    if (TRUE)
+        return FALSE;
     while (sHMMoves[i] != HM_MOVES_END)
     {
         if (sHMMoves[i++] == move)

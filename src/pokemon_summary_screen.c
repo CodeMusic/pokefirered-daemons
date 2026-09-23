@@ -3770,8 +3770,8 @@ static u8 PokeSum_CanForgetSelectedMove(void)
 
     move = GetMonMoveBySlotId(&sMonSummaryScreen->currentMon, sMoveSelectionCursorPos);
 
-    if (IsMoveHm(move) == TRUE && sMonSummaryScreen->mode != PSS_MODE_FORGET_MOVE)
-        return FALSE;
+    //  T-199 phase 3: a DRIVER's routine may be forgotten like any other (see IsHMMove2).
+    (void)move;
 
     return TRUE;
 }

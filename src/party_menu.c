@@ -2972,6 +2972,21 @@ static void SetPartyMonSelectionActions(struct Pokemon *mons, u8 slotId, u8 acti
     }
 }
 
+static void AppendDriverFieldMove(u8 fieldMove, u16 driver)
+{
+    u8 i;
+
+    //  SWITCH, ITEM and CANCEL still follow, and the list holds eight.
+    if (!CheckBagHasItem(driver, 1) || sPartyMenuInternal->numActions > ARRAY_COUNT(sPartyMenuInternal->actions) - 4)
+        return;
+    for (i = 0; i < sPartyMenuInternal->numActions; i++)
+    {
+        if (sPartyMenuInternal->actions[i] == fieldMove + CURSOR_OPTION_FIELD_MOVES)
+            return;
+    }
+    AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, fieldMove + CURSOR_OPTION_FIELD_MOVES);
+}
+
 static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
 {
     u8 i, j;
@@ -2990,6 +3005,11 @@ static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
             }
         }
     }
+    //  T-199: GOTO and VERBOSE, like the six map-script drivers since phase 2 -- HOLDING THE DRIVER IS ENOUGH. They
+    //  are offered on any daemon while the driver is installed, so nobody is kept in the party to know them; a daemon
+    //  that knows the routine is not offered it twice, and the MARK is still asked for (CursorCB_FieldMove).
+    AppendDriverFieldMove(FIELD_MOVE_FLY, ITEM_HM02);
+    AppendDriverFieldMove(FIELD_MOVE_FLASH, ITEM_HM05);
     if (GetMonData(&mons[1], MON_DATA_SPECIES) != SPECIES_NONE)
         AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, CURSOR_OPTION_SWITCH);
     if (ItemIsMail(GetMonData(&mons[slotId], MON_DATA_HELD_ITEM)))
