@@ -61,10 +61,10 @@ PalletTown_RivalsHouse_Text_LookingNiceInNoTime::
 PalletTown_RivalsHouse_Text_ThereYouGoAllDone::
 #ifdef BUGFIX @ The localizers missed what should be a textcolor change in the localizations.
     .string "{COLOR DARK_GRAY}{STR_VAR_1} settles.\p"
-    .string "{COLOR RED}VERA: There. It was only"
+    .string "{COLOR RED}VERA: There. It was only\n"
 #else @ In the JP games, gender-based text used a different font instead of different colors.
     .string "{FONT_NORMAL}{STR_VAR_1} settles.\p"
-    .string "{FONT_FEMALE}VERA: There. It was only"
+    .string "{FONT_FEMALE}VERA: There. It was only\n"
 #endif
     .string "tired.\p"
     .string "It is a good one, this.$"
