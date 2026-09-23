@@ -3,7 +3,7 @@ SafariZone_East_Text_HowManyDidYouCatch::
     .string "from the work!$"
 
 SafariZone_East_Text_CaughtChanseyAllWorthwhile::
-    .string "I bound a UPTIME!\p"
+    .string "I bound an UPTIME!\p"
     .string "That makes this all worthwhile!$"
 
 SafariZone_East_Text_TiredFromAllTheFun::
