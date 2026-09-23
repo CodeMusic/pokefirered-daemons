@@ -1609,6 +1609,9 @@ static void Task_DexScreen_CategorySubmenu(u8 taskId)
         case 1:
             gTasks[taskId].func = Task_DexScreen_CharacteristicOrder;
             break;
+        case 2:                         // T-202: came from an entry's R
+            gTasks[taskId].func = Task_DexScreen_NumericalOrder;
+            break;
         }
         sPokedexScreenData->state = 0;
         break;
@@ -1954,6 +1957,9 @@ static void DexScreen_LoadEntryPalette(u16 species);                      // def
 #define OPUS_LEVELS_CARRIED   5
 
 static EWRAM_DATA bool8 sMarginShown = FALSE;
+//  T-202: R on an entry opens the page its family is on. Only an entry reached from the numbered list
+//  offers it -- one reached from a category page came FROM that page, and B already goes back there.
+static EWRAM_DATA bool8 sFamilyButton = FALSE;
 
 static const struct OpusMargin *OpusMarginFor(u16 species)
 {
@@ -2090,7 +2096,9 @@ static void Task_DexScreen_ShowMonPage(u8 taskId)
         break;
     case 2:
         sPokedexScreenData->numMonsOnPage = 1;
+        sFamilyButton = TRUE;
         DexScreen_DrawMonDexPage(FALSE);
+        sFamilyButton = FALSE;
         sPokedexScreenData->state = 3;
         break;
     case 3:
@@ -2128,6 +2136,14 @@ static void Task_DexScreen_ShowMonPage(u8 taskId)
             PlaySE(SE_SELECT);
             sMarginShown = !sMarginShown;
             DexScreen_DrawMarginOrEntry(sPokedexScreenData->dexSpecies);
+        }
+        else if (JOY_NEW(R_BUTTON) && !DexScreen_LookUpCategoryBySpecies(sPokedexScreenData->dexSpecies))
+        {
+            //  T-202: the family page. The lookup has already put the category's cursor on this daemon.
+            PlaySE(SE_SELECT);
+            RemoveDexPageWindows();
+            BeginNormalPaletteFade(~0x8000, 0, 0, 16, RGB_WHITEALPHA);
+            sPokedexScreenData->state = 13;
         }
         else if (JOY_NEW(DPAD_UP) && DexScreen_TryScrollMonsVertical(1))
         {
@@ -2189,7 +2205,9 @@ static void Task_DexScreen_ShowMonPage(u8 taskId)
         sPokedexScreenData->state = 11;
         break;
     case 11:
+        sFamilyButton = TRUE;
         DexScreen_DrawMonDexPage(FALSE);
+        sFamilyButton = FALSE;
         CopyBgTilemapBufferToVram(3);
         CopyBgTilemapBufferToVram(2);
         CopyBgTilemapBufferToVram(1);
@@ -2201,6 +2219,14 @@ static void Task_DexScreen_ShowMonPage(u8 taskId)
         FillBgTilemapBufferRect_Palette0(0, 0x000, 0, 2, 30, 16);
         CopyBgTilemapBufferToVram(0);
         sPokedexScreenData->state = 1;
+        break;
+    case 13:
+        //  T-202: into the category screen, which returns to the numbered list on B (parent 2).
+        HideBg(2);
+        HideBg(1);
+        sPokedexScreenData->parentOfCategoryMenu = 2;
+        gTasks[taskId].func = Task_DexScreen_CategorySubmenu;
+        sPokedexScreenData->state = 0;
         break;
     }
 }
@@ -3268,7 +3294,7 @@ static u8 DexScreen_DrawMonDexPage(bool8 justRegistered)
     FillWindowPixelBuffer(1, PIXEL_FILL(15));
     if (justRegistered == FALSE)
     {
-        DexScreen_AddTextPrinterParameterized(1, FONT_SMALL, gText_Cry, 8, 2, 4);
+        DexScreen_AddTextPrinterParameterized(1, FONT_SMALL, sFamilyButton ? gText_CryFamily : gText_Cry, 8, 2, 4);
         DexScreen_PrintControlInfo(OpusMarginState(sPokedexScreenData->dexSpecies) != OPUS_MARGIN_NONE
                                    ? gText_MarginNextDataCancel : gText_NextDataCancel);
     }
