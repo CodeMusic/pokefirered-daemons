@@ -360,6 +360,7 @@ gSpecials::
 	def_special Notebook_ChooseEntry
 	def_special Notebook_LoadEntry
 	def_special Notebook_ReadEntry
+	def_special Notebook_ReadFlagEntry
 	def_special Textbook_Open
 	def_special School_OpenExam
 	def_special School_ExamInProgress

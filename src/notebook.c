@@ -12,6 +12,7 @@
 #include "school_exam.h"
 #include "book_reader.h"
 #include "constants/songs.h"
+#include "data/notebook_documents.h"   // T-224: the documents tools/gbadocs.py has placed
 
 //  T-216: THE RESEARCH NOTEBOOK (docs/school.md 9-10).
 //
@@ -255,22 +256,46 @@ static const struct NotebookEntry sEntries[] =
     //  T-217: written on demand -- every sitting's mark, and a paper under way if there is one.
     { NB_SCHOOL_NOTES, NB_KIND_EXAM,  0, FLAG_SCHOOL_EXAM_OPENED,       0, sTitle_Paper,               NULL },
     { NB_LOOSE_PAGES,  NB_KIND_TEXT,  0, FLAG_NOTEBOOK_LOOSE_STONE,     0, sTitle_Loose_Stone,         sText_Loose_Stone },
+    NB_DOC_LOOSE_PAGES_2
     { NB_LOOSE_PAGES,  NB_KIND_TEXT,  0, FLAG_NOTEBOOK_LOOSE_FIELDS,    0, sTitle_Loose_Fields,        sText_Loose_Fields },
+    NB_DOC_LOOSE_PAGES_4
     { NB_LOOSE_PAGES,  NB_KIND_TEXT,  0, FLAG_NOTEBOOK_LOOSE_UNSENT,    0, sTitle_Loose_Unsent,        sText_Loose_Unsent },
+    NB_DOC_LOOSE_PAGES_6
+    NB_DOC_LAB_NOTES_1
     { NB_LAB_NOTES,    NB_KIND_TEXT,  0, FLAG_NOTEBOOK_LAB_OBSERVER,    0, sTitle_Lab_Observer,        sText_Lab_Observer },
     { NB_LAB_NOTES,    NB_KIND_TEXT,  0, FLAG_NOTEBOOK_LAB_BOX,         0, sTitle_Lab_Box,             sText_Lab_Box },
+    NB_DOC_LAB_NOTES_4
     { NB_LAB_NOTES,    NB_KIND_TEXT,  0, FLAG_NOTEBOOK_LAB_ITER,        0, sTitle_Lab_Iter,            PokemonMansion_1F_Text_IterLog },
+    NB_DOC_LAB_NOTES_6
     { NB_RUN_LOGS,     NB_KIND_TEXT,  0, FLAG_NOTEBOOK_RUN_MAR4,        0, sTitle_Run_Mar4,            PokemonMansion_1F_Text_NewMonDiscoveredInGuyanaJungle },
     { NB_RUN_LOGS,     NB_KIND_TEXT,  0, FLAG_NOTEBOOK_RUN_APR19,       0, sTitle_Run_Apr19,           PokemonMansion_1F_Text_ChristenedDiscoveredMonMew },
     { NB_RUN_LOGS,     NB_KIND_TEXT,  0, FLAG_NOTEBOOK_RUN_AUG12,       0, sTitle_Run_Aug12,           PokemonMansion_1F_Text_MewGaveBirthToMewtwo },
     { NB_RUN_LOGS,     NB_KIND_TEXT,  0, FLAG_NOTEBOOK_RUN_FATAL,       0, sTitle_Run_Fatal,           PokemonMansion_B1F_Text_MewtwoIsFarTooPowerful },
+    NB_DOC_RUN_LOGS_5
+    NB_DOC_RUN_LOGS_6
+    NB_DOC_CORRESPONDENCE_1
+    NB_DOC_CORRESPONDENCE_2
+    NB_DOC_CORRESPONDENCE_3
+    NB_DOC_CORRESPONDENCE_4
+    NB_DOC_CORRESPONDENCE_5
+    NB_DOC_CORRESPONDENCE_6
     { NB_THE_FILE,     NB_KIND_TEXT,  1, FLAG_NOTEBOOK_FILE_MINUTES,    0, sTitle_File_Minutes,        CinnabarIsland_PokemonLab_Entrance_Text_MeetingRoomSign },
     { NB_THE_FILE,     NB_KIND_TEXT,  1, FLAG_NOTEBOOK_FILE_REQUISITION, 0, sTitle_File_Requisition,   CinnabarIsland_PokemonLab_Entrance_Text_RAndDRoomSign },
     { NB_THE_FILE,     NB_KIND_TEXT,  0, FLAG_NOTEBOOK_FILE_COMPLETE,   0, sTitle_File_Complete,       CinnabarIsland_PokemonLab_Entrance_Text_PhotoOfLabFounderDrFuji },
+    NB_DOC_THE_FILE_4
+    NB_DOC_THE_FILE_5
+    NB_DOC_THE_FILE_6
+    NB_DOC_PROSPECTUS_1
     //  PROSPECTUS 2: the scores, and the notice's own congratulations -- the only commentary it has.
     { NB_PROSPECTUS,   NB_KIND_TEXT,  0, FLAG_NOTEBOOK_PROSPECTUS_SCORES, 0, sTitle_Prospectus_Scores, SaffronCity_Text_SilphsLatestProduct },
+    NB_DOC_PROSPECTUS_3
+    NB_DOC_PROSPECTUS_4
+    NB_DOC_PROSPECTUS_5
+    NB_DOC_PROSPECTUS_6
     { NB_PEER_REVIEW,  NB_KIND_TEXT,  0, FLAG_NOTEBOOK_REVIEW_POSITION, 0, sTitle_Review_Position,     sText_Review_Position },
     { NB_PEER_REVIEW,  NB_KIND_TEXT,  0, FLAG_NOTEBOOK_REVIEW_DRAFT,    0, sTitle_Review_Draft,        sText_Review_Draft },
+    NB_DOC_PEER_REVIEW_3
+    NB_DOC_PEER_REVIEW_4
     { NB_PEER_REVIEW,  NB_KIND_TEXT,  0, FLAG_NOTEBOOK_REVIEW_TRANSCRIPT, 0, sTitle_Review_Transcript, SaffronCity_MrPsychicsHouse_Text_OwlConcession },
     //  4.34 rule 1: a cover sheet, and the notebook refuses the rest -- which says it louder than no entry at all.
     { NB_PEER_REVIEW,  NB_KIND_TEXT,  0, FLAG_NOTEBOOK_REVIEW_SEALED,   0, sTitle_Review_Sealed,       SaffronCity_MrPsychicsHouse_Text_NotMineToDeliver },
@@ -513,6 +538,24 @@ void Notebook_LoadEntry(void)
 
 //  T-223: VAR_0x8006 is the entry; it opens full screen on the NOTEBOOK's ruled sheet. The script fades first
 //  and waits, and comes back to the list of pages.
+//  T-224: a document found in the world opens where it is found, by its flag (VAR_0x8004), full screen as the
+//  notebook would show it -- so reading one and filing it are the same page. tools/gbadocs.py calls this.
+void Notebook_ReadFlagEntry(void)
+{
+    u16 i;
+
+    for (i = 0; i < ARRAY_COUNT(sEntries); i++)
+    {
+        if (sEntries[i].flag == gSpecialVar_0x8004 && sEntries[i].kind == NB_KIND_TEXT)
+        {
+            StringExpandPlaceholders(gStringVar4, sEntries[i].text);   // {RIVAL} in a letter is the name the player gave
+            BookReader_OpenNotebookPage(sEntries[i].title, gStringVar4);
+            return;
+        }
+    }
+    ScriptContext_Enable();
+}
+
 void Notebook_ReadEntry(void)
 {
     const u8 *text = gStringVar4;

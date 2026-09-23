@@ -836,30 +836,30 @@
 #define FLAG_NOTEBOOK_REVIEW_TRANSCRIPT  0x324 // T-219: PEER REVIEW, his spoken concession
 #define FLAG_NOTEBOOK_REVIEW_SEALED      0x325 // T-219: PEER REVIEW, a cover sheet and nothing else
 #define FLAG_NOTEBOOK_PROSPECTUS_SCORES  0x326 // T-224: PROSPECTUS, the review scores notice in BRAZEN
-#define FLAG_0x327               0x327
-#define FLAG_0x328               0x328
-#define FLAG_0x329               0x329
-#define FLAG_0x32A               0x32A
-#define FLAG_0x32B               0x32B
-#define FLAG_0x32C               0x32C
-#define FLAG_0x32D               0x32D
-#define FLAG_0x32E               0x32E
-#define FLAG_0x32F               0x32F
-#define FLAG_0x330               0x330
-#define FLAG_0x331               0x331
-#define FLAG_0x332               0x332
-#define FLAG_0x333               0x333
-#define FLAG_0x334               0x334
-#define FLAG_0x335               0x335
-#define FLAG_0x336               0x336
-#define FLAG_0x337               0x337
-#define FLAG_0x338               0x338
-#define FLAG_0x339               0x339
-#define FLAG_0x33A               0x33A
-#define FLAG_0x33B               0x33B
-#define FLAG_0x33C               0x33C
-#define FLAG_0x33D               0x33D
-#define FLAG_0x33E               0x33E
+#define FLAG_NOTEBOOK_DOC_LOOSE_PAGES_2          0x327   // T-224, tools/gbadocs.py
+#define FLAG_NOTEBOOK_DOC_LOOSE_PAGES_4          0x328   // T-224, tools/gbadocs.py
+#define FLAG_NOTEBOOK_DOC_LOOSE_PAGES_6          0x329   // T-224, tools/gbadocs.py
+#define FLAG_NOTEBOOK_DOC_LAB_NOTES_1            0x32A   // T-224, tools/gbadocs.py
+#define FLAG_NOTEBOOK_DOC_LAB_NOTES_4            0x32B   // T-224, tools/gbadocs.py
+#define FLAG_NOTEBOOK_DOC_LAB_NOTES_6            0x32C   // T-224, tools/gbadocs.py
+#define FLAG_NOTEBOOK_DOC_RUN_LOGS_5             0x32D   // T-224, tools/gbadocs.py
+#define FLAG_NOTEBOOK_DOC_RUN_LOGS_6             0x32E   // T-224, tools/gbadocs.py
+#define FLAG_NOTEBOOK_DOC_CORRESPONDENCE_1       0x32F   // T-224, tools/gbadocs.py
+#define FLAG_NOTEBOOK_DOC_CORRESPONDENCE_2       0x330   // T-224, tools/gbadocs.py
+#define FLAG_NOTEBOOK_DOC_CORRESPONDENCE_3       0x331   // T-224, tools/gbadocs.py
+#define FLAG_NOTEBOOK_DOC_CORRESPONDENCE_4       0x332   // T-224, tools/gbadocs.py
+#define FLAG_NOTEBOOK_DOC_CORRESPONDENCE_5       0x333   // T-224, tools/gbadocs.py
+#define FLAG_NOTEBOOK_DOC_CORRESPONDENCE_6       0x334   // T-224, tools/gbadocs.py
+#define FLAG_NOTEBOOK_DOC_THE_FILE_4             0x335   // T-224, tools/gbadocs.py
+#define FLAG_NOTEBOOK_DOC_THE_FILE_5             0x336   // T-224, tools/gbadocs.py
+#define FLAG_NOTEBOOK_DOC_THE_FILE_6             0x337   // T-224, tools/gbadocs.py
+#define FLAG_NOTEBOOK_DOC_PROSPECTUS_1           0x338   // T-224, tools/gbadocs.py
+#define FLAG_NOTEBOOK_DOC_PROSPECTUS_3           0x339   // T-224, tools/gbadocs.py
+#define FLAG_NOTEBOOK_DOC_PROSPECTUS_4           0x33A   // T-224, tools/gbadocs.py
+#define FLAG_NOTEBOOK_DOC_PROSPECTUS_5           0x33B   // T-224, tools/gbadocs.py
+#define FLAG_NOTEBOOK_DOC_PROSPECTUS_6           0x33C   // T-224, tools/gbadocs.py
+#define FLAG_NOTEBOOK_DOC_PEER_REVIEW_3          0x33D   // T-224, tools/gbadocs.py
+#define FLAG_NOTEBOOK_DOC_PEER_REVIEW_4          0x33E   // T-224, tools/gbadocs.py
 #define FLAG_0x33F               0x33F
 #define FLAG_0x340               0x340
 #define FLAG_0x341               0x341
