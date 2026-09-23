@@ -3168,6 +3168,8 @@ extern const u32 gItemIcon_Notebook[];
 extern const u32 gItemIconPalette_Notebook[];
 extern const u32 gItemIcon_Textbook[];
 extern const u32 gItemIconPalette_Textbook[];
+extern const u32 gItemIcon_Diploma[];
+extern const u32 gItemIconPalette_Diploma[];
 extern const u32 gItemIconPalette_UpGrade[];
 extern const u32 gItemIcon_ShellBell[];
 extern const u32 gItemIconPalette_Shell[];

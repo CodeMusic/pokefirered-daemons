@@ -221,7 +221,7 @@
 #define VAR_SCHOOL_RESERVED_40A4   0x40A4
 #define VAR_SCHOOL_RESERVED_40A5   0x40A5
 #define VAR_SCHOOL_SEASON          0x40A6 // T-219: 0 before the TEXTBOOK, 1 holding it (armed), 2 exam season
-#define VAR_SCHOOL_RESERVED_40A7   0x40A7
+#define VAR_READING_ROOM           0x40A7 // T-218: 1 once the attendant has seen the DIPLOMA
 #define VAR_SCHOOL_RESERVED_40A8   0x40A8
 #define VAR_SCHOOL_RESERVED_40A9   0x40A9
 

@@ -123,8 +123,29 @@ School_EventScript_ExamMarked::
 	releaseall
 	end
 
+@ T-218: at 80 or better, the Owl signs a DIPLOMA without looking up, and the season is over (VAR 3): the
+@ class goes back to its usual three the next time the room is entered.
 School_EventScript_ExamPassed::
 	msgbox School_Text_ExamPassed
+	goto_if_set FLAG_GOT_DIPLOMA, School_EventScript_ExamDone
+	msgbox School_Text_OwlSigns
+	giveitem_msg School_Text_ReceivedDiploma, ITEM_DIPLOMA
+	setflag FLAG_GOT_DIPLOMA
+	setvar VAR_SCHOOL_SEASON, 3
+	closemessage
+	fadescreen FADE_TO_BLACK
+	special School_ShowDiploma
+	waitstate
+School_EventScript_ExamDone::
+	releaseall
+	end
+
+@ Using the DIPLOMA from the bag.
+EventScript_Diploma::
+	lockall
+	fadescreen FADE_TO_BLACK
+	special School_ShowDiploma
+	waitstate
 	releaseall
 	end
 
@@ -178,6 +199,14 @@ School_Text_ExamMarked::
 
 School_Text_ExamPassed::
 	.string "A pass.$"
+
+School_Text_OwlSigns::
+	.string "At the front, the OWL signs a\n"
+	.string "DIPLOMA without looking up, and\l"
+	.string "slides it across the desk.$"
+
+School_Text_ReceivedDiploma::
+	.string "{PLAYER} received a DIPLOMA.$"
 
 School_Text_ExamNotYetPassed::
 	.string "The pass mark is 80.\p"

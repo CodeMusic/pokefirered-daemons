@@ -25,6 +25,7 @@
 #include "load_save.h"
 #include "m4a.h"
 #include "map_name_popup.h"
+#include "reveal.h"
 #include "map_preview_screen.h"
 #include "metatile_behavior.h"
 #include "money.h"
@@ -1463,7 +1464,10 @@ void CB1_Overworld(void)
         if (QL_GetPlaybackState() == QL_PLAYBACK_STATE_RUNNING || gQuestLogState == QL_STATE_PLAYBACK)
             DoCB1_Overworld_QuestLogPlayback();
         else
+        {
             DoCB1_Overworld(gMain.newKeys, gMain.heldKeys);
+            Reveal_Update();                                  // T-220
+        }
     }
 }
 
@@ -1943,6 +1947,7 @@ static bool32 LoadMapInStepsLocal(u8 *state, bool32 inLink)
         {
             ShowMapNamePopup(FALSE);
         }
+        Reveal_OnMapLoad();                                  // T-220
         (*state)++;
         break;
     case 13:

@@ -793,7 +793,7 @@ static const u8 *GradeLetter(u16 percent)
 }
 
 //  ---- the screen
-enum { MODE_LIST, MODE_QUESTION, MODE_UNANSWERED, MODE_CONFIRM, MODE_LEAVING };
+enum { MODE_LIST, MODE_QUESTION, MODE_UNANSWERED, MODE_CONFIRM, MODE_LEAVING, MODE_DIPLOMA };
 enum { WIN_HEADER, WIN_BODY, WIN_FOOTER, WIN_COUNT };
 
 struct SchoolExam
@@ -809,6 +809,7 @@ struct SchoolExam
 };
 
 static EWRAM_DATA struct SchoolExam *sExam = NULL;
+static EWRAM_DATA bool8 sShowDiploma = FALSE;   // T-218: open the screen as the certificate, not the paper
 
 static const struct BgTemplate sBgTemplates[] =
 {
@@ -954,8 +955,46 @@ static void DrawFooter(void)
     CopyWindowToVram(WIN_FOOTER, COPYWIN_FULL);
 }
 
+//  T-218: THE DIPLOMA. The school's own paper and ink, and the best mark on it. No hue: a diploma has no type,
+//  and the one place in the game that tests you gave its certificate the same plainness.
+static void DrawDiploma(void)
+{
+    static const u8 sSchool[]   = _("CALLOW SCHOOL");
+    static const u8 sCertify[]  = _("This is to certify that");
+    static const u8 sSat[]      = _("sat the paper, all seven parts,");
+    static const u8 sPassed[]   = _("and passed it.");
+    static const u8 sMark[]     = _("MARK  ");
+    static const u8 sGap[]      = _("   ");
+    static const u8 sPutAway[]  = _("A  PUT IT AWAY");
+    u8 buf[32], *p;
+    u16 best = VarGet(VAR_SCHOOL_EXAM_BEST);
+
+    FillWindowPixelBuffer(WIN_HEADER, PIXEL_FILL(1));
+    Print(WIN_HEADER, sInk, (224 - GetStringWidth(FONT_NORMAL, sSchool, 0)) / 2, 1, sSchool);
+    CopyWindowToVram(WIN_HEADER, COPYWIN_FULL);
+    FillWindowPixelBuffer(WIN_BODY, PIXEL_FILL(1));
+    Print(WIN_BODY, sInk, (224 - GetStringWidth(FONT_NORMAL, sCertify, 0)) / 2, 8, sCertify);
+    Print(WIN_BODY, sInk, (224 - GetStringWidth(FONT_NORMAL, gSaveBlock2Ptr->playerName, 0)) / 2, 30, gSaveBlock2Ptr->playerName);
+    Print(WIN_BODY, sInk, (224 - GetStringWidth(FONT_NORMAL, sSat, 0)) / 2, 52, sSat);
+    Print(WIN_BODY, sInk, (224 - GetStringWidth(FONT_NORMAL, sPassed, 0)) / 2, 66, sPassed);
+    CopyWindowToVram(WIN_BODY, COPYWIN_FULL);
+    FillWindowPixelBuffer(WIN_FOOTER, PIXEL_FILL(1));
+    p = StringCopy(buf, sMark);
+    p = ConvertIntToDecimalStringN(p, best, STR_CONV_MODE_LEFT_ALIGN, 3);
+    p = StringCopy(p, sGap);
+    StringCopy(p, GradeLetter(best));
+    Print(WIN_FOOTER, sInk, (224 - GetStringWidth(FONT_NORMAL, buf, 0)) / 2, 0, buf);
+    Print(WIN_FOOTER, sFaint, (224 - GetStringWidth(FONT_NORMAL, sPutAway, 0)) / 2, 16, sPutAway);
+    CopyWindowToVram(WIN_FOOTER, COPYWIN_FULL);
+}
+
 static void DrawAll(void)
 {
+    if (sExam->mode == MODE_DIPLOMA)
+    {
+        DrawDiploma();
+        return;
+    }
     DrawHeader();
     if (sExam->mode == MODE_QUESTION)
         DrawQuestion();
@@ -1123,6 +1162,13 @@ static void Task_ExamInput(u8 taskId)
             DrawAll();
         }
         break;
+    case MODE_DIPLOMA:
+        if (JOY_NEW(A_BUTTON | B_BUTTON))
+        {
+            PlaySE(SE_SELECT);
+            Leave();
+        }
+        break;
     case MODE_LEAVING:
         if (gPaletteFade.active)
             break;
@@ -1200,6 +1246,9 @@ static void Task_ExamInit(u8 taskId)
 static void CB2_OpenExam(void)
 {
     sExam = AllocZeroed(sizeof(*sExam));
+    if (sShowDiploma)
+        sExam->mode = MODE_DIPLOMA;
+    sShowDiploma = FALSE;
     ResetSpriteData();
     ResetPaletteFade();
     FreeAllSpritePalettes();
@@ -1216,6 +1265,15 @@ void School_OpenExam(void)
 {
     QuestLog_CutRecording();
     FlagSet(FLAG_SCHOOL_EXAM_OPENED);
+    SetMainCallback2(CB2_OpenExam);
+    LockPlayerFieldControls();
+}
+
+//  T-218: the DIPLOMA, shown on the same paper. The script fades first and waits.
+void School_ShowDiploma(void)
+{
+    QuestLog_CutRecording();
+    sShowDiploma = TRUE;
     SetMainCallback2(CB2_OpenExam);
     LockPlayerFieldControls();
 }

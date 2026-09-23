@@ -1899,6 +1899,13 @@ static u16 GetTutorMove(u8 tutor)
         return MOVE_BLAST_BURN;
     case TUTOR_MOVE_HYDRO_CANNON:
         return MOVE_HYDRO_CANNON;
+    //  T-218: the Reading Room's lecturers -- ATTENTION, CATEGORIES, ERROR.
+    case TUTOR_MOVE_LOCK_ON:
+        return MOVE_MIND_READER;        // our LOCK ON: the next routine cannot miss
+    case TUTOR_MOVE_BLEND:
+        return MOVE_CAMOUFLAGE;         // our BLEND: its kind becomes the ground's
+    case TUTOR_MOVE_REBUT:
+        return MOVE_REVENGE;            // our REBUT: twice as hard if it was hit first
     default:
         return sTutorMoves[tutor];
     }
@@ -1908,6 +1915,11 @@ static bool8 CanLearnTutorMove(u16 species, u8 tutor)
 {
     switch (tutor)
     {
+    //  T-218: a lecture is open to anyone, so no table says who may learn these -- every daemon may.
+    case TUTOR_MOVE_LOCK_ON:
+    case TUTOR_MOVE_BLEND:
+    case TUTOR_MOVE_REBUT:
+        return TRUE;
     case TUTOR_MOVE_FRENZY_PLANT:
         if (species == SPECIES_VENUSAUR)
             return TRUE;

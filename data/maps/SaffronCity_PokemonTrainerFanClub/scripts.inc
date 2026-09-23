@@ -1,420 +1,178 @@
+@ T-218: THE READING ROOM, in BRAZEN (docs/school.md 8). What is left of a faculty in the bought city: an
+@ attendant who asks for a DIPLOMA out of habit, Crystal's journals and the reviewer's papers on the shelves
+@ -- the real reward, since they let the player read before the Owl's scene what the machine will argue then --
+@ three lecturers, and a keeper who installs REVEAL (T-220). Was the TRAINER FAN CLUB, whose vanilla postgame
+@ fan-counting went with it; the journal that unlocks HEARSAY's entries is kept. DRAFT WORDING throughout.
+
 SaffronCity_PokemonTrainerFanClub_MapScripts::
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, SaffronCity_PokemonTrainerFanClub_OnFrame
-	map_script MAP_SCRIPT_ON_TRANSITION, SaffronCity_PokemonTrainerFanClub_OnTransition
 	.byte 0
 
-SaffronCity_PokemonTrainerFanClub_OnFrame::
-	map_script_2 VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 1, SaffronCity_PokemonTrainerFanClub_EventScript_MeetFirstFans
-	.2byte 0
-
-SaffronCity_PokemonTrainerFanClub_EventScript_MeetFirstFans::
+ReadingRoom_EventScript_Gate::
 	lockall
-	textcolor NPC_TEXT_COLOR_FEMALE
-	applymovement LOCALID_TRAINER_FAN_CLUB_BATTLE_GIRL, Common_Movement_WalkInPlaceFasterDown
+	applymovement LOCALID_READING_ROOM_ATTENDANT, Common_Movement_FacePlayer
 	waitmovement 0
-	playse SE_PIN
-	applymovement LOCALID_TRAINER_FAN_CLUB_BATTLE_GIRL, Common_Movement_ExclamationMark
-	waitmovement 0
-	applymovement LOCALID_TRAINER_FAN_CLUB_BATTLE_GIRL, Common_Movement_Delay48
-	waitmovement 0
-	msgbox SaffronCity_PokemonTrainerFanClub_Text_HuhYou
-	closemessage
-	applymovement LOCALID_TRAINER_FAN_CLUB_BATTLE_GIRL, SaffronCity_PokemonTrainerFanClub_Movement_FanApproachPlayer
-	waitmovement 0
-	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight
-	waitmovement 0
-	msgbox SaffronCity_PokemonTrainerFanClub_Text_YourePlayerWereYourFansNow
-	setvar VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 2
+	msgbox ReadingRoom_Text_MayISee
+	goto_if_unset FLAG_GOT_DIPLOMA, ReadingRoom_EventScript_TurnedAway
+	msgbox ReadingRoom_Text_GoIn
+	setvar VAR_READING_ROOM, 1
 	releaseall
 	end
 
-SaffronCity_PokemonTrainerFanClub_Movement_FanApproachPlayer::
-	delay_16
-	delay_8
+ReadingRoom_EventScript_TurnedAway::
+	msgbox ReadingRoom_Text_NoDiploma
+	closemessage
+	applymovement OBJ_EVENT_ID_PLAYER, ReadingRoom_Movement_StepBack
+	waitmovement 0
+	releaseall
+	end
+
+ReadingRoom_Movement_StepBack:
 	walk_down
-	delay_16
-	walk_down
-	delay_8
-	walk_left
 	step_end
 
-@ Unused, leftover from RS
-LilycoveCity_PokemonTrainerFanClub_Movement_FanApproachPlayer::
-	delay_8
-	walk_in_place_faster_down
-	walk_down
-	walk_down
-	walk_down
-	walk_left
-	walk_left
-	step_end
-
-@ Unused, leftover from RS
-LilycoveCity_PokemonTrainerFanClub_Movement_LittleGirlWatchPlayer::
-	walk_fast_left
-	walk_fast_left
-	walk_fast_down
-	walk_fast_down
-	walk_fast_left
-	walk_fast_down
-	step_end
-
-@ Unused, leftover from RS
-LilycoveCity_PokemonTrainerFanClub_Movement_LittleGirlMoveCloserToPlayer::
-	walk_down
-	walk_in_place_faster_right
-	step_end
-
-@ Unused, leftover from RS
-LilycoveCity_PokemonTrainerFanClub_Movement_LittleGirlHideFromPlayer::
-	jump_in_place_right
-	walk_fast_up
-	walk_fast_up
-	walk_fast_right
-	walk_in_place_faster_down
-	step_end
-
-SaffronCity_PokemonTrainerFanClub_OnTransition::
-	goto_if_eq VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 1, SaffronCity_PokemonTrainerFanClub_EventScript_SetMemberPosForFirstMeeting
-	goto_if_eq VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 2, SaffronCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions
+ReadingRoom_EventScript_Attendant::
+	goto_if_eq VAR_READING_ROOM, 0, ReadingRoom_EventScript_AttendantAsk
+	msgbox ReadingRoom_Text_Faculty, MSGBOX_NPC
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions::
-	special Script_TryLoseFansFromPlayTime
-	setvar VAR_0x8004, FANCLUB_MEMBER1
-	specialvar VAR_RESULT, Script_IsFanClubMemberFanOfPlayer
-	call_if_eq VAR_RESULT, FALSE, SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember1ToFarTable
-	setvar VAR_0x8004, FANCLUB_MEMBER2
-	specialvar VAR_RESULT, Script_IsFanClubMemberFanOfPlayer
-	call_if_eq VAR_RESULT, FALSE, SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember2ToFarTable
-	setvar VAR_0x8004, FANCLUB_MEMBER3
-	specialvar VAR_RESULT, Script_IsFanClubMemberFanOfPlayer
-	call_if_eq VAR_RESULT, FALSE, SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember3ToFarTable
-	setvar VAR_0x8004, FANCLUB_MEMBER4
-	specialvar VAR_RESULT, Script_IsFanClubMemberFanOfPlayer
-	call_if_eq VAR_RESULT, FALSE, SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember4ToFarTable
-	setvar VAR_0x8004, FANCLUB_MEMBER5
-	specialvar VAR_RESULT, Script_IsFanClubMemberFanOfPlayer
-	call_if_eq VAR_RESULT, FALSE, SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember5ToFarTable
-	setvar VAR_0x8004, FANCLUB_MEMBER6
-	specialvar VAR_RESULT, Script_IsFanClubMemberFanOfPlayer
-	call_if_eq VAR_RESULT, FALSE, SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember6ToFarTable
-	setvar VAR_0x8004, FANCLUB_MEMBER7
-	specialvar VAR_RESULT, Script_IsFanClubMemberFanOfPlayer
-	call_if_eq VAR_RESULT, FALSE, SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember7ToFarTable
-	setvar VAR_0x8004, FANCLUB_MEMBER8
-	specialvar VAR_RESULT, Script_IsFanClubMemberFanOfPlayer
-	call_if_eq VAR_RESULT, FALSE, SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember8ToFarTable
+ReadingRoom_EventScript_AttendantAsk::
+	msgbox ReadingRoom_Text_MayISee, MSGBOX_NPC
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember1ToFarTable::
-	setobjectxyperm LOCALID_TRAINER_FAN_CLUB_BATTLE_GIRL, 5, 2
-	setobjectmovementtype LOCALID_TRAINER_FAN_CLUB_BATTLE_GIRL, MOVEMENT_TYPE_FACE_UP
-	return
-
-SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember2ToFarTable::
-	setobjectxyperm LOCALID_TRAINER_FAN_CLUB_YOUNGSTER, 7, 4
-	setobjectmovementtype LOCALID_TRAINER_FAN_CLUB_YOUNGSTER, MOVEMENT_TYPE_FACE_LEFT
-	return
-
-SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember3ToFarTable::
-	setobjectxyperm LOCALID_TRAINER_FAN_CLUB_GENTLEMAN, 2, 2
-	setobjectmovementtype LOCALID_TRAINER_FAN_CLUB_GENTLEMAN, MOVEMENT_TYPE_FACE_UP
-	return
-
-SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember4ToFarTable::
-	setobjectxyperm LOCALID_TRAINER_FAN_CLUB_LITTLE_GIRL, 3, 4
-	setobjectmovementtype LOCALID_TRAINER_FAN_CLUB_LITTLE_GIRL, MOVEMENT_TYPE_FACE_RIGHT
-	return
-
-SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember5ToFarTable::
-	setobjectxyperm LOCALID_TRAINER_FAN_CLUB_ROCKER, 4, 6
-	setobjectmovementtype LOCALID_TRAINER_FAN_CLUB_ROCKER, MOVEMENT_TYPE_FACE_UP
-	return
-
-SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember6ToFarTable::
-	setobjectxyperm LOCALID_TRAINER_FAN_CLUB_WOMAN, 10, 3
-	setobjectmovementtype LOCALID_TRAINER_FAN_CLUB_WOMAN, MOVEMENT_TYPE_FACE_UP
-	return
-
-SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember7ToFarTable::
-	setobjectxyperm LOCALID_TRAINER_FAN_CLUB_BEAUTY, 7, 5
-	setobjectmovementtype LOCALID_TRAINER_FAN_CLUB_BEAUTY, MOVEMENT_TYPE_FACE_LEFT
-	return
-
-SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember8ToFarTable::
-	setobjectxyperm LOCALID_TRAINER_FAN_CLUB_BLACK_BELT, 9, 6
-	setobjectmovementtype LOCALID_TRAINER_FAN_CLUB_BLACK_BELT, MOVEMENT_TYPE_FACE_LEFT
-	return
-
-SaffronCity_PokemonTrainerFanClub_EventScript_SetMemberPosForFirstMeeting::
-	call SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember4ToFarTable
-	call SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember5ToFarTable
-	call SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember6ToFarTable
-	call SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember7ToFarTable
-	call SaffronCity_PokemonTrainerFanClub_EventScript_MoveMember8ToFarTable
-	end
-
-SaffronCity_PokemonTrainerFanClub_EventScript_CrushGirl::
+@ ---- the lecturers: a lecture is open to anyone, so any daemon can learn these (party_menu.c)
+ReadingRoom_EventScript_LectureAttention::
 	lock
 	faceplayer
-	setvar VAR_0x8004, FANCLUB_MEMBER1
-	special Script_BufferFanClubTrainerName
-	goto_if_eq VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 0, SaffronCity_PokemonTrainerFanClub_EventScript_CrushGirlPlayerNotChampion
-	specialvar VAR_RESULT, Script_IsFanClubMemberFanOfPlayer
-	goto_if_eq VAR_RESULT, TRUE, SaffronCity_PokemonTrainerFanClub_EventScript_CrushGirlPlayersFan
-	specialvar VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub
-	goto_if_eq VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), SaffronCity_PokemonTrainerFanClub_EventScript_CrushGirlOnlyNonFan
-	msgbox SaffronCity_PokemonTrainerFanClub_Text_WasYourFanNotAnymore
+	msgbox ReadingRoom_Text_LectureAttention, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, ReadingRoom_EventScript_LectureDeclined
+	msgbox ReadingRoom_Text_WhichDaemon
+	setvar VAR_0x8005, MOVETUTOR_LOCK_ON
+	call EventScript_ChooseMoveTutorMon
+	goto_if_eq VAR_RESULT, FALSE, ReadingRoom_EventScript_LectureDeclined
+	msgbox ReadingRoom_Text_LectureAttentionDone
 	release
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_CrushGirlPlayersFan::
-	specialvar VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub
-	goto_if_eq VAR_RESULT, 1, SaffronCity_PokemonTrainerFanClub_EventScript_CrushGirlOnlyFan
-	msgbox SaffronCity_PokemonTrainerFanClub_Text_AlwaysCheerForYou
-	release
-	end
-
-SaffronCity_PokemonTrainerFanClub_EventScript_CrushGirlOnlyFan::
-	msgbox SaffronCity_PokemonTrainerFanClub_Text_IllAlwaysBelieveInYou
-	release
-	end
-
-SaffronCity_PokemonTrainerFanClub_EventScript_CrushGirlOnlyNonFan::
-	msgbox SaffronCity_PokemonTrainerFanClub_Text_EveryonesYourFanButICantBe
-	release
-	end
-
-SaffronCity_PokemonTrainerFanClub_EventScript_CrushGirlPlayerNotChampion::
-	msgbox SaffronCity_PokemonTrainerFanClub_Text_TrainersCoolWhenBattling
-	release
-	end
-
-SaffronCity_PokemonTrainerFanClub_EventScript_LittleGirl::
+ReadingRoom_EventScript_LectureCategories::
 	lock
 	faceplayer
-	setvar VAR_0x8004, FANCLUB_MEMBER4
-	special Script_BufferFanClubTrainerName
-	goto_if_eq VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 0, SaffronCity_PokemonTrainerFanClub_EventScript_LittleGirlPlayerNotChampion
-	specialvar VAR_RESULT, Script_IsFanClubMemberFanOfPlayer
-	goto_if_eq VAR_RESULT, TRUE, SaffronCity_PokemonTrainerFanClub_EventScript_LittleGirlPlayersFan
-	specialvar VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub
-	goto_if_eq VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), SaffronCity_PokemonTrainerFanClub_EventScript_LittleGirlOnlyNonFan
-	msgbox SaffronCity_PokemonTrainerFanClub_Text_WantToBeLikeSabrina
+	msgbox ReadingRoom_Text_LectureCategories, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, ReadingRoom_EventScript_LectureDeclined
+	msgbox ReadingRoom_Text_WhichDaemon
+	setvar VAR_0x8005, MOVETUTOR_BLEND
+	call EventScript_ChooseMoveTutorMon
+	goto_if_eq VAR_RESULT, FALSE, ReadingRoom_EventScript_LectureDeclined
+	msgbox ReadingRoom_Text_LectureCategoriesDone
 	release
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_LittleGirlPlayersFan::
-	specialvar VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub
-	goto_if_eq VAR_RESULT, 1, SaffronCity_PokemonTrainerFanClub_EventScript_LittleGirlOnlyFan
-	msgbox SaffronCity_PokemonTrainerFanClub_Text_WantToBeLikeYouOneDay
-	release
-	end
-
-SaffronCity_PokemonTrainerFanClub_EventScript_LittleGirlOnlyFan::
-	msgbox SaffronCity_PokemonTrainerFanClub_Text_EveryoneButMeStoppedBeingYourFan
-	release
-	end
-
-SaffronCity_PokemonTrainerFanClub_EventScript_LittleGirlOnlyNonFan::
-	msgbox SaffronCity_PokemonTrainerFanClub_Text_WontStopBeingSabrinasFan
-	release
-	end
-
-SaffronCity_PokemonTrainerFanClub_EventScript_LittleGirlPlayerNotChampion::
-	msgbox SaffronCity_PokemonTrainerFanClub_Text_CanIBecomeCoolTrainerOneDay
-	release
-	end
-
-SaffronCity_PokemonTrainerFanClub_EventScript_Youngster::
+ReadingRoom_EventScript_LectureError::
 	lock
 	faceplayer
-	setvar VAR_0x8004, FANCLUB_MEMBER2
-	special Script_BufferFanClubTrainerName
-	goto_if_eq VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 0, SaffronCity_PokemonTrainerFanClub_EventScript_YoungsterPlayerNotChampion
-	specialvar VAR_RESULT, Script_IsFanClubMemberFanOfPlayer
-	goto_if_eq VAR_RESULT, TRUE, SaffronCity_PokemonTrainerFanClub_EventScript_YoungsterPlayersFan
-	specialvar VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub
-	goto_if_eq VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), SaffronCity_PokemonTrainerFanClub_EventScript_YoungsterOnlyNonFan
-	msgbox SaffronCity_PokemonTrainerFanClub_Text_BrocksMyHero
+	msgbox ReadingRoom_Text_LectureError, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, ReadingRoom_EventScript_LectureDeclined
+	msgbox ReadingRoom_Text_WhichDaemon
+	setvar VAR_0x8005, MOVETUTOR_REBUT
+	call EventScript_ChooseMoveTutorMon
+	goto_if_eq VAR_RESULT, FALSE, ReadingRoom_EventScript_LectureDeclined
+	msgbox ReadingRoom_Text_LectureErrorDone
 	release
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_YoungsterPlayersFan::
-	specialvar VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub
-	goto_if_eq VAR_RESULT, 1, SaffronCity_PokemonTrainerFanClub_EventScript_YoungsterOnlyFan
-	msgbox SaffronCity_PokemonTrainerFanClub_Text_CanYouAutographShorts
+ReadingRoom_EventScript_LectureDeclined::
+	msgbox ReadingRoom_Text_LectureAnyTime
 	release
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_YoungsterOnlyFan::
-	msgbox SaffronCity_PokemonTrainerFanClub_Text_CountingOnYou
-	release
-	end
-
-SaffronCity_PokemonTrainerFanClub_EventScript_YoungsterOnlyNonFan::
-	msgbox SaffronCity_PokemonTrainerFanClub_Text_BrocksFanToBitterEnd
-	release
-	end
-
-SaffronCity_PokemonTrainerFanClub_EventScript_YoungsterPlayerNotChampion::
-	msgbox SaffronCity_PokemonTrainerFanClub_Text_BrocksLastWordOnCool
-	release
-	end
-
-SaffronCity_PokemonTrainerFanClub_EventScript_Gentleman::
+@ ---- the keeper installs REVEAL into the TOOLKIT: a flag, not a disc (reveal.c says why)
+ReadingRoom_EventScript_Keeper::
 	lock
 	faceplayer
-	setvar VAR_0x8004, FANCLUB_MEMBER3
-	special Script_BufferFanClubTrainerName
-	goto_if_eq VAR_MAP_SCENE_SAFFRON_CITY_POKEMON_TRAINER_FAN_CLUB, 0, SaffronCity_PokemonTrainerFanClub_EventScript_GentlemanPlayerNotChampion
-	specialvar VAR_RESULT, Script_IsFanClubMemberFanOfPlayer
-	goto_if_eq VAR_RESULT, TRUE, SaffronCity_PokemonTrainerFanClub_EventScript_GentlemanPlayersFan
-	specialvar VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub
-	goto_if_eq VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), SaffronCity_PokemonTrainerFanClub_EventScript_GentlemanOnlyNonFan
-	msgbox SaffronCity_PokemonTrainerFanClub_Text_HmmAndYouAre
+	goto_if_set FLAG_GOT_REVEAL, ReadingRoom_EventScript_KeeperAfter
+	msgbox ReadingRoom_Text_KeeperGive
+	playfanfare MUS_OBTAIN_TMHM
+	message ReadingRoom_Text_RevealInstalled
+	waitmessage
+	waitfanfare
+	setflag FLAG_GOT_REVEAL
+	msgbox ReadingRoom_Text_KeeperExplain
 	release
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_GentlemanPlayersFan::
-	specialvar VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub
-	goto_if_eq VAR_RESULT, 1, SaffronCity_PokemonTrainerFanClub_EventScript_GentlemanOnlyFan
-	msgbox SaffronCity_PokemonTrainerFanClub_Text_HadPleasureOfWatchingYouBattle
+ReadingRoom_EventScript_KeeperAfter::
+	msgbox ReadingRoom_Text_KeeperAfter
 	release
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_GentlemanOnlyFan::
-	msgbox SaffronCity_PokemonTrainerFanClub_Text_NeverSeenTrainerOfYourMagnificence
-	release
+@ ---- the shelves: a short look here, the whole page in the NOTEBOOK
+ReadingRoom_EventScript_ShelfFields::
+	lockall
+	msgbox ReadingRoom_Text_ShelfFields
+	goto_if_set FLAG_NOTEBOOK_LOOSE_FIELDS, ReadingRoom_EventScript_ShelfDone
+	setflag FLAG_NOTEBOOK_LOOSE_FIELDS
+	call ReadingRoom_EventScript_Copied
+	releaseall
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_GentlemanOnlyNonFan::
-	msgbox SaffronCity_PokemonTrainerFanClub_Text_YouveStillAWaysToGo
-	release
+ReadingRoom_EventScript_ShelfUnsent::
+	lockall
+	msgbox ReadingRoom_Text_ShelfUnsent
+	goto_if_set FLAG_NOTEBOOK_LOOSE_UNSENT, ReadingRoom_EventScript_ShelfDone
+	setflag FLAG_NOTEBOOK_LOOSE_UNSENT
+	call ReadingRoom_EventScript_Copied
+	releaseall
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_GentlemanPlayerNotChampion::
-	msgbox SaffronCity_PokemonTrainerFanClub_Text_YoullBeTalkedAboutIfYouKeepWinning
-	release
+ReadingRoom_EventScript_ShelfObserver::
+	lockall
+	msgbox ReadingRoom_Text_ShelfObserver
+	goto_if_set FLAG_NOTEBOOK_LAB_OBSERVER, ReadingRoom_EventScript_ShelfDone
+	setflag FLAG_NOTEBOOK_LAB_OBSERVER
+	call ReadingRoom_EventScript_Copied
+	releaseall
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_Woman::
-	lock
-	faceplayer
-	setvar VAR_0x8004, FANCLUB_MEMBER6
-	special Script_BufferFanClubTrainerName
-	specialvar VAR_RESULT, Script_IsFanClubMemberFanOfPlayer
-	goto_if_eq VAR_RESULT, TRUE, SaffronCity_PokemonTrainerFanClub_EventScript_WomanPlayersFan
-	specialvar VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub
-	goto_if_eq VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), SaffronCity_PokemonTrainerFanClub_EventScript_WomanOnlyNonFan
-	msgbox SaffronCity_PokemonTrainerFanClub_Text_TrainerHasBeenOnFire
-	release
+ReadingRoom_EventScript_ShelfBox::
+	lockall
+	msgbox ReadingRoom_Text_ShelfBox
+	goto_if_set FLAG_NOTEBOOK_LAB_BOX, ReadingRoom_EventScript_ShelfDone
+	setflag FLAG_NOTEBOOK_LAB_BOX
+	call ReadingRoom_EventScript_Copied
+	releaseall
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_WomanPlayersFan::
-	specialvar VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub
-	goto_if_eq VAR_RESULT, 1, SaffronCity_PokemonTrainerFanClub_EventScript_WomanOnlyFan
-	msgbox SaffronCity_PokemonTrainerFanClub_Text_AdoreWayYouBattle
-	release
+ReadingRoom_EventScript_ShelfPosition::
+	lockall
+	msgbox ReadingRoom_Text_ShelfPosition
+	goto_if_set FLAG_NOTEBOOK_REVIEW_POSITION, ReadingRoom_EventScript_ShelfDone
+	setflag FLAG_NOTEBOOK_REVIEW_POSITION
+	call ReadingRoom_EventScript_Copied
+	releaseall
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_WomanOnlyFan::
-	msgbox SaffronCity_PokemonTrainerFanClub_Text_ImYourNumberOneFan
-	release
+ReadingRoom_EventScript_ShelfDraft::
+	lockall
+	msgbox ReadingRoom_Text_ShelfDraft
+	goto_if_set FLAG_NOTEBOOK_REVIEW_DRAFT, ReadingRoom_EventScript_ShelfDone
+	setflag FLAG_NOTEBOOK_REVIEW_DRAFT
+	call ReadingRoom_EventScript_Copied
+	releaseall
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_WomanOnlyNonFan::
-	msgbox SaffronCity_PokemonTrainerFanClub_Text_EveryoneTalksAboutYou
-	release
+ReadingRoom_EventScript_ShelfDone::
+	releaseall
 	end
 
-SaffronCity_PokemonTrainerFanClub_EventScript_Rocker::
-	lock
-	faceplayer
-	setvar VAR_0x8004, FANCLUB_MEMBER5
-	special Script_BufferFanClubTrainerName
-	specialvar VAR_RESULT, Script_IsFanClubMemberFanOfPlayer
-	goto_if_eq VAR_RESULT, TRUE, SaffronCity_PokemonTrainerFanClub_EventScript_RockerPlayersFan
-	specialvar VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub
-	goto_if_eq VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), SaffronCity_PokemonTrainerFanClub_EventScript_RockerOnlyNonFan
-	msgbox SaffronCity_PokemonTrainerFanClub_Text_LoveWayTrainerTalks
-	release
-	end
+ReadingRoom_EventScript_Copied::
+	playse SE_SELECT
+	goto_if_unset FLAG_GOT_NOTEBOOK, ReadingRoom_EventScript_CopiedOut
+	msgbox ReadingRoom_Text_IntoNotebook
+	return
 
-SaffronCity_PokemonTrainerFanClub_EventScript_RockerPlayersFan::
-	specialvar VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub
-	goto_if_eq VAR_RESULT, 1, SaffronCity_PokemonTrainerFanClub_EventScript_RockerOnlyFan
-	msgbox SaffronCity_PokemonTrainerFanClub_Text_TheWayYouBattleIsCool
-	release
-	end
+ReadingRoom_EventScript_CopiedOut::
+	msgbox ReadingRoom_Text_CopiedOut
+	return
 
-SaffronCity_PokemonTrainerFanClub_EventScript_RockerOnlyFan::
-	msgbox SaffronCity_PokemonTrainerFanClub_Text_ImOnlyOneLeftOfYourFans
-	release
-	end
-
-SaffronCity_PokemonTrainerFanClub_EventScript_RockerOnlyNonFan::
-	msgbox SaffronCity_PokemonTrainerFanClub_Text_ImLoneTrainerFan
-	release
-	end
-
-SaffronCity_PokemonTrainerFanClub_EventScript_Beauty::
-	lock
-	faceplayer
-	setvar VAR_0x8004, FANCLUB_MEMBER7
-	special Script_BufferFanClubTrainerName
-	specialvar VAR_RESULT, Script_IsFanClubMemberFanOfPlayer
-	goto_if_eq VAR_RESULT, TRUE, SaffronCity_PokemonTrainerFanClub_EventScript_BeautyPlayersFan
-	specialvar VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub
-	goto_if_eq VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), SaffronCity_PokemonTrainerFanClub_EventScript_BeautyOnlyNonFan
-	msgbox SaffronCity_PokemonTrainerFanClub_Text_WhyCantOthersSeeMastersDignity
-	release
-	end
-
-SaffronCity_PokemonTrainerFanClub_EventScript_BeautyPlayersFan::
-	specialvar VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub
-	goto_if_eq VAR_RESULT, 1, SaffronCity_PokemonTrainerFanClub_EventScript_BeautyOnlyFan
-	msgbox SaffronCity_PokemonTrainerFanClub_Text_YouReallyAreAmazing
-	release
-	end
-
-SaffronCity_PokemonTrainerFanClub_EventScript_BeautyOnlyFan::
-	msgbox SaffronCity_PokemonTrainerFanClub_Text_ImYourOnlyFan
-	release
-	end
-
-SaffronCity_PokemonTrainerFanClub_EventScript_BeautyOnlyNonFan::
-	msgbox SaffronCity_PokemonTrainerFanClub_Text_BelieveInMasterWithAllMyHeart
-	release
-	end
-
-SaffronCity_PokemonTrainerFanClub_EventScript_BlackBelt::
-	lock
-	faceplayer
-	setvar VAR_0x8004, FANCLUB_MEMBER8
-	special Script_BufferFanClubTrainerName
-	specialvar VAR_RESULT, Script_IsFanClubMemberFanOfPlayer
-	goto_if_eq VAR_RESULT, TRUE, SaffronCity_PokemonTrainerFanClub_EventScript_BlackBeltPlayersFan
-	specialvar VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub
-	goto_if_eq VAR_RESULT, (NUM_TRAINER_FAN_CLUB_MEMBERS - 1), SaffronCity_PokemonTrainerFanClub_EventScript_BlackBeltOnlyNonFan
-	msgbox SaffronCity_PokemonTrainerFanClub_Text_OnlyMasterHasMyRespect
-	release
-	end
-
-SaffronCity_PokemonTrainerFanClub_EventScript_BlackBeltPlayersFan::
-	specialvar VAR_RESULT, Script_GetNumFansOfPlayerInTrainerFanClub
-	goto_if_eq VAR_RESULT, 1, SaffronCity_PokemonTrainerFanClub_EventScript_BlackBeltOnlyFan
-	msgbox SaffronCity_PokemonTrainerFanClub_Text_YourBattleStyleIsEducational
-	release
-	end
-
-SaffronCity_PokemonTrainerFanClub_EventScript_BlackBeltOnlyFan::
-	msgbox SaffronCity_PokemonTrainerFanClub_Text_WontStopBeingYourFan
-	release
-	end
-
-SaffronCity_PokemonTrainerFanClub_EventScript_BlackBeltOnlyNonFan::
-	msgbox SaffronCity_PokemonTrainerFanClub_Text_NeverBeFanOfAnyoneButMaster
-	release
+ReadingRoom_EventScript_Catalogue::
+	msgbox ReadingRoom_Text_Catalogue, MSGBOX_SIGN
 	end

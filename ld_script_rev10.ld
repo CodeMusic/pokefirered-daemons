@@ -271,6 +271,7 @@ SECTIONS {
         src/fame_checker.o(.text);
         src/notebook.o(.text);
         src/school_exam.o(.text);
+        src/reveal.o(.text);
         src/menu2.o(.text);
         src/oak_speech.o(.text);
         src/tm_case.o(.text);
@@ -567,6 +568,7 @@ SECTIONS {
         src/fame_checker.o(.rodata);
         src/notebook.o(.rodata);
         src/school_exam.o(.rodata);
+        src/reveal.o(.rodata);
         src/menu2.o(.rodata);
         src/oak_speech.o(.rodata);
         src/tm_case.o(.rodata);

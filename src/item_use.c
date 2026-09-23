@@ -708,6 +708,20 @@ void FieldUseFunc_Textbook(u8 taskId)
     SetUpItemUseOnFieldCallback(taskId);
 }
 
+//  T-218: the DIPLOMA shows itself -- the school's certificate, on the paper screen the exam is sat on.
+static void ItemUseOnFieldCB_Diploma(u8 taskId)
+{
+    LockPlayerFieldControls();
+    ScriptContext_SetupScript(EventScript_Diploma);
+    DestroyTask(taskId);
+}
+
+void FieldUseFunc_Diploma(u8 taskId)
+{
+    sItemUseOnFieldCB = ItemUseOnFieldCB_Diploma;
+    SetUpItemUseOnFieldCallback(taskId);
+}
+
 void FieldUseFunc_FameChecker(u8 taskId)
 {
     ItemUse_SetQuestLogEvent(QL_EVENT_USED_ITEM, NULL, gSpecialVar_ItemId, 0xFFFF);

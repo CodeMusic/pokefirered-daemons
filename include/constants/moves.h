@@ -389,5 +389,8 @@
 #define MOVETUTOR_FRENZY_PLANT 15
 #define MOVETUTOR_BLAST_BURN   16
 #define MOVETUTOR_HYDRO_CANNON 17
+#define MOVETUTOR_LOCK_ON      18 // T-218: the Reading Room's lecturers
+#define MOVETUTOR_BLEND        19
+#define MOVETUTOR_REBUT        20
 
 #endif  // GUARD_CONSTANTS_MOVES_H

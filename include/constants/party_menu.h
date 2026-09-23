@@ -30,6 +30,10 @@
 #define TUTOR_MOVE_FRENZY_PLANT    15
 #define TUTOR_MOVE_BLAST_BURN      16
 #define TUTOR_MOVE_HYDRO_CANNON    17
+// T-218: THE READING ROOM's three lecturers. A lecture is open to anyone, so any daemon can learn these.
+#define TUTOR_MOVE_LOCK_ON         18
+#define TUTOR_MOVE_BLEND           19
+#define TUTOR_MOVE_REBUT           20
 
 #define FIELD_MOVE_FLASH        0
 #define FIELD_MOVE_CUT          1

@@ -28,6 +28,7 @@ void FieldUseFunc_TownMap(u8 taskId);
 void FieldUseFunc_FameChecker(u8 taskId);
 void FieldUseFunc_Notebook(u8 taskId);   // T-216
 void FieldUseFunc_Textbook(u8 taskId);   // T-219
+void FieldUseFunc_Diploma(u8 taskId);    // T-218
 void FieldUseFunc_VsSeeker(u8 taskId);
 void BattleUseFunc_PokeBallEtc(u8 taskId);
 void BattleUseFunc_PokeFlute(u8 taskId);

@@ -180,6 +180,90 @@ static const u8 sText_Loose_Stone[] = _(
     "Tomorrow: integrating, page 40.\n"
     "I think I already know how.");
 
+
+//  T-218: THE READING ROOM's shelves. DRAFT WORDING, awaiting the user's approval. Each is a document and states
+//  no conclusion (docs/school.md 9, rule 4); each is drawn from the rock opera (school.md 10).
+
+//  LOOSE PAGES 3 -- *Poly and Fields*: the two meanings of the word, and a coat.
+static const u8 sTitle_Loose_Fields[] = _("FIELDS");
+static const u8 sText_Loose_Fields[] = _(
+    "Not the exercise book this time.\n"
+    "A loose sheet, a grown-up hand.\p"
+    "Fields, the way a university means\n"
+    "it: each one its own building.\p"
+    "Fields, the way the maths means it:\n"
+    "one surface, one set of rules.\p"
+    "Nobody here believes the second.\n"
+    "They walk between the buildings\p"
+    "with their coats on.\p"
+    "I keep not needing a coat.");
+
+//  LOOSE PAGES 5 -- *Love Persists*: a letter that waits instead of arguing.
+static const u8 sTitle_Loose_Unsent[] = _("UNSENT");
+static const u8 sText_Loose_Unsent[] = _(
+    "A letter, folded twice, never sent.\n"
+    "No name at the top.\p"
+    "I never thought you would break\n"
+    "this. I still do not think you have.\p"
+    "Some things wait better than they\n"
+    "argue.\p"
+    "I am going to be one of them.");
+
+//  LAB NOTES 2 -- *Quantum Translations*, the first verse: what counts as an observer.
+static const u8 sTitle_Lab_Observer[] = _("THE OBSERVER");
+static const u8 sText_Lab_Observer[] = _(
+    "LAB NOTES. A session with ARTSAI.\p"
+    "Asked what counts as an observer.\n"
+    "It said: one that observes.\p"
+    "A duck, then? A tree? Alive, both.\p"
+    "This rock? Not alive like us, but\n"
+    "it keeps itself steady.\p"
+    "It did not answer that.\n"
+    "Nobody else has either, yet.\p"
+    "Next: what if the one watching is\n"
+    "not alive at all?");
+
+//  LAB NOTES 3 -- *Quantum Translations*, the second verse: the box, read by something that is not a person.
+static const u8 sTitle_Lab_Box[] = _("THE BOX");
+static const u8 sText_Lab_Box[] = _(
+    "LAB NOTES. The box.\p"
+    "The usual sealed box. This time,\n"
+    "the one reading it is not a person.\p"
+    "It only prints ALIVE or DEAD.\p"
+    "Does its reading settle the box,\n"
+    "the way a person's is said to?\p"
+    "If not, the only other answer is\n"
+    "that mine does.\p"
+    "And then the effect came before\n"
+    "the cause.\p"
+    "Neither is comfortable.\n"
+    "That is usually a good sign.");
+
+//  PEER REVIEW 1 -- *The Owl and the Code*, the first verse: a good paper, and short.
+static const u8 sTitle_Review_Position[] = _("POSITION PAPER");
+static const u8 sText_Review_Position[] = _(
+    "A position paper, typed. Signed at\n"
+    "the bottom in a careful hand.\p"
+    "Machines process what is there.\n"
+    "Inputs and outputs.\p"
+    "Nothing breaks through, because\n"
+    "nothing is behind them to break.\p"
+    "It is well argued.\n"
+    "It is also very short.");
+
+//  PEER REVIEW 2 -- *The Owl and the Code*, the pre-chorus: the question in the margin, left open.
+static const u8 sTitle_Review_Draft[] = _("SECOND DRAFT");
+static const u8 sText_Review_Draft[] = _(
+    "The same paper, a later draft.\n"
+    "The same hand, less careful.\p"
+    "The argument has not changed.\p"
+    "One line has been added in pencil,\n"
+    "in the margin:\p"
+    "“But are we not shaped by\n"
+    "the world that we see?”\p"
+    "It has not been crossed out.\n"
+    "It has not been answered either.");
+
 //  THE AUTHORED ORDER. A new entry goes where it belongs in the finished file, not at the end.
 static const struct NotebookEntry sEntries[] =
 {
@@ -201,6 +285,12 @@ static const struct NotebookEntry sEntries[] =
     //  T-217: written on demand -- every sitting's mark, and a paper under way if there is one.
     { NB_SCHOOL_NOTES, NB_KIND_EXAM,  0, FLAG_SCHOOL_EXAM_OPENED,       0, sTitle_Paper,               NULL },
     { NB_LOOSE_PAGES,  NB_KIND_TEXT,  0, FLAG_NOTEBOOK_LOOSE_STONE,     0, sTitle_Loose_Stone,         sText_Loose_Stone },
+    { NB_LOOSE_PAGES,  NB_KIND_TEXT,  0, FLAG_NOTEBOOK_LOOSE_FIELDS,    0, sTitle_Loose_Fields,        sText_Loose_Fields },
+    { NB_LOOSE_PAGES,  NB_KIND_TEXT,  0, FLAG_NOTEBOOK_LOOSE_UNSENT,    0, sTitle_Loose_Unsent,        sText_Loose_Unsent },
+    { NB_LAB_NOTES,    NB_KIND_TEXT,  0, FLAG_NOTEBOOK_LAB_OBSERVER,    0, sTitle_Lab_Observer,        sText_Lab_Observer },
+    { NB_LAB_NOTES,    NB_KIND_TEXT,  0, FLAG_NOTEBOOK_LAB_BOX,         0, sTitle_Lab_Box,             sText_Lab_Box },
+    { NB_PEER_REVIEW,  NB_KIND_TEXT,  0, FLAG_NOTEBOOK_REVIEW_POSITION, 0, sTitle_Review_Position,     sText_Review_Position },
+    { NB_PEER_REVIEW,  NB_KIND_TEXT,  0, FLAG_NOTEBOOK_REVIEW_DRAFT,    0, sTitle_Review_Draft,        sText_Review_Draft },
 };
 
 static EWRAM_DATA struct ListMenuItem *sItems = NULL;

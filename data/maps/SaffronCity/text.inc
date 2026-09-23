@@ -101,9 +101,8 @@ SaffronCity_Text_SilphsLatestProduct::
     .string "performer!$"
 
 SaffronCity_Text_TrainerFanClubSign::
-    .string "DAEMON USER FAN CLUB\p"
-    .string "Many USERS have scribbled their\n"
-    .string "names on this sign.$"
+    .string "THE READING ROOM\p"
+    .string "GRADUATES ONLY. QUIET, PLEASE.$"
 
 SaffronCity_Text_HowCanClubNotRecognizeLance::
 	.string "This club likes DAEMON that do\n"

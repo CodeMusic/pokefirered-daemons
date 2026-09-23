@@ -817,14 +817,14 @@
 #define FLAG_SCHOOL_GOT_TEXTBOOK         0x311 // T-219: 7F's teacher has handed it over
 #define FLAG_SCHOOL_HIDE_CLASS           0x312 // T-219: exam season: 1F's usual three are gone
 #define FLAG_SCHOOL_HIDE_EXAM            0x313 // T-219: out of season: the seated class and the Owl are not there
-#define FLAG_0x314               0x314
-#define FLAG_0x315               0x315
-#define FLAG_0x316               0x316
-#define FLAG_0x317               0x317
-#define FLAG_0x318               0x318
-#define FLAG_0x319               0x319
-#define FLAG_0x31A               0x31A
-#define FLAG_0x31B               0x31B
+#define FLAG_GOT_DIPLOMA                 0x314 // T-218: passed the paper at 80 or better
+#define FLAG_GOT_REVEAL                  0x315 // T-220: REVEAL is installed in the TOOLKIT -- a flag, not a disc: the TOOLKIT pocket is 58 slots in the save
+#define FLAG_NOTEBOOK_LOOSE_FIELDS       0x316 // T-218: LOOSE PAGES, a sheet in the Reading Room
+#define FLAG_NOTEBOOK_LOOSE_UNSENT       0x317 // T-218: LOOSE PAGES, a letter never sent
+#define FLAG_NOTEBOOK_LAB_OBSERVER       0x318 // T-218: LAB NOTES, the observer question
+#define FLAG_NOTEBOOK_LAB_BOX            0x319 // T-218: LAB NOTES, the box
+#define FLAG_NOTEBOOK_REVIEW_POSITION    0x31A // T-218: PEER REVIEW, a position paper
+#define FLAG_NOTEBOOK_REVIEW_DRAFT       0x31B // T-218: PEER REVIEW, its second draft
 #define FLAG_0x31C               0x31C
 #define FLAG_0x31D               0x31D
 #define FLAG_0x31E               0x31E
