@@ -178,6 +178,8 @@ const u8 gText_DbgMenuHeal[] = _("HEAL");
 const u8 gText_DbgMenuMart[] = _("MART");
 const u8 gText_DbgMenuRecord[] = _("RECORD");
 const u8 gText_DbgMenuIslands[] = _("ISLANDS");
+const u8 gText_DbgMenuDiploma[] = _("DIPLOMA");
+const u8 gText_DbgMenuJump[] = _("JUMP");
 const u8 gText_DbgMenuSong[] = _("SONG {STR_VAR_1}");
 const u8 gText_DbgMenuSfx[] = _("SFX {STR_VAR_2}");
 // The ENCOUNTER page. DAEMON prints the species NAME on the row and nothing
@@ -973,6 +975,8 @@ const u8 gStartMenuDesc_DbgAdd[] = _("Fill an item to 999, or take a key item.")
 const u8 gStartMenuDesc_DbgRemove[] = _("Take away a key item you are holding.");
 const u8 gStartMenuDesc_DbgRecord[] = _("Enter the RECORD. Runs the credits.");
 const u8 gStartMenuDesc_DbgIslands[] = _("Open THE MARGINS.");
+const u8 gStartMenuDesc_DbgDiploma[] = _("Take the DIPLOMA without the paper.");
+const u8 gStartMenuDesc_DbgJump[] = _("RECORD, THE MARGINS or the DIPLOMA.");
 const u8 gStartMenuDesc_DbgEncounter[] = _("Invoke any daemon, at any level.");
 const u8 gStartMenuDesc_DbgDaemon[] = _("{DPAD_LEFTRIGHT} steps, L and R step by ten.");
 const u8 gStartMenuDesc_DbgLevel[] = _("{DPAD_LEFTRIGHT} steps, L and R step by ten.");

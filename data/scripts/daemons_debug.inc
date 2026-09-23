@@ -79,6 +79,27 @@ DaemonsDebug_EventScript_Cancel::
 	releaseall
 	end
 
+@  THE DIPLOMA. What passing the paper gives -- the flag the Reading Room checks, the DIPLOMA itself, and the end
+@  of exam season -- without the paper. It skips the Owl's signing on purpose and says so first, the way the
+@  ISLANDS warning does: sit the paper before this if the paper is what you are testing.
+DaemonsDebug_EventScript_TheDiploma::
+	lockall
+	goto_if_set FLAG_GOT_DIPLOMA, DaemonsDebug_EventScript_DiplomaAlready
+	msgbox DaemonsDebug_Text_TheDiploma, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, DaemonsDebug_EventScript_Cancel
+	setflag FLAG_GOT_DIPLOMA
+	setvar VAR_SCHOOL_SEASON, 3
+	giveitem_msg DaemonsDebug_Text_DiplomaGiven, ITEM_DIPLOMA
+	closemessage
+	releaseall
+	end
+
+DaemonsDebug_EventScript_DiplomaAlready::
+	msgbox DaemonsDebug_Text_DiplomaAlready
+	closemessage
+	releaseall
+	end
+
 DaemonsDebug_Text_TheRecord::
 	.string "DEBUG: enter the RECORD?\p"
 	.string "You will be taken to the HALL, your\n"
@@ -98,6 +119,18 @@ DaemonsDebug_Text_TheIslandsAnneIsIn::
 	.string "and the same sailor, so she will\l"
 	.string "have gone. Board her first if you\l"
 	.string "want her.$"
+
+DaemonsDebug_Text_TheDiploma::
+	.string "DEBUG: take the DIPLOMA?\p"
+	.string "THE READING ROOM will let you in.\n"
+	.string "The Owl's signing is skipped, so sit\l"
+	.string "the paper first if you are testing it.$"
+
+DaemonsDebug_Text_DiplomaGiven::
+	.string "DEBUG: the DIPLOMA is in the POOL.$"
+
+DaemonsDebug_Text_DiplomaAlready::
+	.string "DEBUG: you already hold the DIPLOMA.$"
 
 DaemonsDebug_Text_IslandsOpened::
 	.string "The ferry at ARDOR PORT is running.$"

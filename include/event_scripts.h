@@ -1213,6 +1213,7 @@ extern const u8 EventScript_StreamHasANewShow[];
 // 9.3's debug submenu, the two entries that leave the menu for the field.
 extern const u8 DaemonsDebug_EventScript_TheRecord[];
 extern const u8 DaemonsDebug_EventScript_TheIslands[];
+extern const u8 DaemonsDebug_EventScript_TheDiploma[];
 extern const u8 DaemonsDebug_EventScript_Invoke[];
 #endif
 //  T-179's R = AGAIN ships in every build, so its script is declared outside the debug guard.

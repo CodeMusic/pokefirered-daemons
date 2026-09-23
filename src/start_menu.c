@@ -74,8 +74,10 @@ enum StartMenuOption
     STARTMENU_DBG_MART,
     STARTMENU_DBG_ADD,
     STARTMENU_DBG_REMOVE,
+    STARTMENU_DBG_JUMP,
     STARTMENU_DBG_RECORD,
     STARTMENU_DBG_ISLANDS,
+    STARTMENU_DBG_DIPLOMA,
     STARTMENU_DBG_ENCOUNTER,
     STARTMENU_DBG_DAEMON,
     STARTMENU_DBG_LEVEL,
@@ -148,6 +150,8 @@ static bool8 DbgAddCallback(void);
 static bool8 DbgRemoveCallback(void);
 static bool8 DbgRecordCallback(void);
 static bool8 DbgIslandsCallback(void);
+static bool8 DbgDiplomaCallback(void);
+static bool8 DbgJumpCallback(void);
 static bool8 DbgEncounterCallback(void);
 static bool8 DbgStepCallback(void);
 static bool8 DbgInvokeCallback(void);
@@ -201,8 +205,10 @@ static const struct MenuAction sStartMenuActionTable[] = {
     [STARTMENU_DBG_MART] = { gText_DbgMenuMart, {.u8_void = DbgMartCallback} },
     [STARTMENU_DBG_ADD]    = { gText_DbgMenuAdd,    {.u8_void = DbgAddCallback} },
     [STARTMENU_DBG_REMOVE] = { gText_DbgMenuRemove, {.u8_void = DbgRemoveCallback} },
+    [STARTMENU_DBG_JUMP]    = { gText_DbgMenuJump,    {.u8_void = DbgJumpCallback} },
     [STARTMENU_DBG_RECORD]  = { gText_DbgMenuRecord,  {.u8_void = DbgRecordCallback} },
     [STARTMENU_DBG_ISLANDS] = { gText_DbgMenuIslands, {.u8_void = DbgIslandsCallback} },
+    [STARTMENU_DBG_DIPLOMA] = { gText_DbgMenuDiploma, {.u8_void = DbgDiplomaCallback} },
     [STARTMENU_DBG_ENCOUNTER] = { gText_DbgMenuEncounter, {.u8_void = DbgEncounterCallback} },
     // DAEMON and LEVEL are adjusted with LEFT/RIGHT, so A on either does
     // nothing but redraw -- which is also what makes A safe to lean on.
@@ -250,8 +256,10 @@ static const u8 *const sStartMenuDescPointers[] = {
     gStartMenuDesc_DbgMart,
     gStartMenuDesc_DbgAdd,
     gStartMenuDesc_DbgRemove,
+    gStartMenuDesc_DbgJump,
     gStartMenuDesc_DbgRecord,
     gStartMenuDesc_DbgIslands,
+    gStartMenuDesc_DbgDiploma,
     gStartMenuDesc_DbgEncounter,
     gStartMenuDesc_DbgDaemon,
     gStartMenuDesc_DbgLevel,
@@ -261,6 +269,9 @@ static const u8 *const sStartMenuDescPointers[] = {
     gStartMenuDesc_DbgBack,
 #endif
 };
+//  One description per menu entry, by the same enum -- the omission that once blacked out the screen, and
+//  nearly did again when DIPLOMA went in (2026-09-23). Now it cannot build.
+STATIC_ASSERT(ARRAY_COUNT(sStartMenuDescPointers) == MAX_STARTMENU_ITEMS, StartMenuDescriptionPerEntry);
 
 static const struct BgTemplate sBGTemplates_AfterLinkSaveMessage[] = {
     {
@@ -316,6 +327,7 @@ enum {
     DBG_PAGE_MAIN,
     DBG_PAGE_ENCOUNTER,
     DBG_PAGE_ITEMS,
+    DBG_PAGE_JUMP,
 };
 static EWRAM_DATA u8 sDbgPage = 0;
 #define DBG_FIRST_SONG MUS_HEAL   // 256; everything below it is a sound effect
@@ -356,12 +368,21 @@ static void SetUpStartMenu(void)
         AppendToStartMenuItems(STARTMENU_DBG_BACK);
         return;
     }
+    //  The three that take you somewhere in the story, on a page of their own: a ninth row ran the list off the
+    //  bottom of the screen (2026-09-23).
+    if (sDbgPage == DBG_PAGE_JUMP)
+    {
+        AppendToStartMenuItems(STARTMENU_DBG_RECORD);
+        AppendToStartMenuItems(STARTMENU_DBG_ISLANDS);
+        AppendToStartMenuItems(STARTMENU_DBG_DIPLOMA);
+        AppendToStartMenuItems(STARTMENU_DBG_BACK);
+        return;
+    }
     if (sDbgPage == DBG_PAGE_MAIN)
     {
         AppendToStartMenuItems(STARTMENU_DBG_HEAL);
         AppendToStartMenuItems(STARTMENU_DBG_MART);
-        AppendToStartMenuItems(STARTMENU_DBG_RECORD);
-        AppendToStartMenuItems(STARTMENU_DBG_ISLANDS);
+        AppendToStartMenuItems(STARTMENU_DBG_JUMP);
         AppendToStartMenuItems(STARTMENU_DBG_ENCOUNTER);
         AppendToStartMenuItems(STARTMENU_DBG_SONG);
         AppendToStartMenuItems(STARTMENU_DBG_SFX);
@@ -767,6 +788,8 @@ static bool8 IsDaemonsDebugCallback(void)
         || sStartMenuCallback == DbgRemoveCallback
         || sStartMenuCallback == DbgRecordCallback
         || sStartMenuCallback == DbgIslandsCallback
+        || sStartMenuCallback == DbgDiplomaCallback
+        || sStartMenuCallback == DbgJumpCallback
         || sStartMenuCallback == DbgEncounterCallback
         || sStartMenuCallback == DbgStepCallback
         || sStartMenuCallback == DbgInvokeCallback
@@ -851,6 +874,13 @@ static bool8 DbgHealCallback(void)
 // ADD lists every item in the game, where a stackable one fills to 999 and a
 // key item arrives once and moves over to REMOVE, which lists the key items you
 // are holding. Opening the page still fills the wallet.
+static bool8 DbgJumpCallback(void)
+{
+    sDbgPage = DBG_PAGE_JUMP;
+    sStartMenuCursorPos = 0;
+    return DbgRedraw();
+}
+
 static bool8 DbgMartCallback(void)
 {
     SetMoney(&gSaveBlock1Ptr->money, 999999);
@@ -1143,6 +1173,13 @@ static bool8 DbgIslandsCallback(void)
     return DbgLeaveMenuForScript(DaemonsDebug_EventScript_TheIslands);
 }
 
+//  The school's paper is 84 questions, and REVEAL, the Reading Room and the groves all sit behind the diploma it
+//  gives -- so a field test that wants those would first have to sit the whole exam (found 2026-09-23).
+static bool8 DbgDiplomaCallback(void)
+{
+    return DbgLeaveMenuForScript(DaemonsDebug_EventScript_TheDiploma);
+}
+
 static bool8 DbgEncounterCallback(void)
 {
     // Clamped on entry rather than on change, because DbgDexMax moves the
@@ -1258,7 +1295,7 @@ static bool8 DbgBackCallback(void)
 {
     if (sDbgPage == DBG_PAGE_ENCOUNTER)
         HelpSystem_EnableToggleWithRButton();
-    if (sDbgPage == DBG_PAGE_ENCOUNTER || sDbgPage == DBG_PAGE_ITEMS)
+    if (sDbgPage == DBG_PAGE_ENCOUNTER || sDbgPage == DBG_PAGE_ITEMS || sDbgPage == DBG_PAGE_JUMP)
     {
         sDbgPage = DBG_PAGE_MAIN;
         sStartMenuCursorPos = 0;
