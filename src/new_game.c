@@ -295,6 +295,9 @@ static void DaemonsDebug_GrantTestKit(void)
     // the upgraded INDEX. The DEBUG submenu's RECORD entry exists to reach
     // that scene; the flag is what makes there be somebody in the room.
     FlagClear(FLAG_HIDE_OAK_IN_HIS_LAB);
+    // And CALLOW's old man still lay across the north road, waiting for a parcel no debug game delivers -- so
+    // a debug save could not walk to Route 2, THE UNDERTONE or its grove (found walking to T-221's tree).
+    VarSet(VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 2);
 
     // Fly opens the map but every destination is dead until it has been
     // visited: region_map.c returns MAPSECTYPE_NOT_VISITED for any mapsec whose
