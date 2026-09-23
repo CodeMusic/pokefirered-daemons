@@ -19,6 +19,7 @@
 #include "pokemon_storage_system.h"   // T-197: OPUS reads the boxes as well as the party
 #include "data/opus_margins.h"
 #include "data/type_colours.h"   // T-200: the same eighteen colours the move menu uses
+#include "data/type_ring_colours.h"   // T-201: the category page's ring pulses the type
 #include "trainer_pokemon_sprites.h"
 #include "decompress.h"
 #include "constants/items.h"   // T-197: ITEM_OPUS
@@ -123,6 +124,7 @@ static void DexScreen_PrintControlInfo(const u8 *src);
 static void DexScreen_DestroyCategoryPageMonIconAndInfoWindows(void);
 static bool8 DexScreen_CreateCategoryListGfx(bool8 justRegistered);
 static void DexScreen_CreateCategoryPageSelectionCursor(u8 cursorPos);
+static void DexScreen_TypeRingColors(u16 species, u8 timer, u16 *ring);
 static void DexScreen_UpdateCategoryPageCursorObject(u8 taskId, u8 cursorPos, u8 numMonsInPage);
 static bool8 DexScreen_FlipCategoryPageInDirection(u8 direction);
 void DexScreen_DexPageZoomEffectFrame(u8 bg, u8 scale);
@@ -2619,8 +2621,28 @@ static void DexScreen_CreateCategoryPageSelectionCursor(u8 cursorPos)
     }
     else
     {
+        u16 species = sPokedexScreenData->pageSpecies[cursorPos];
+
+        //  T-201: a bound daemon's ring pulses its TYPE -- first type, dark, second type, dark -- over 32 frames.
+        //  Each of the page's four slots already has a background palette of its own (slot + 5), so four types on
+        //  one page is not a conflict. A daemon not bound keeps vanilla's blue: the entry does not name its type
+        //  either, and the ring must not say what the page does not.
+        if (species != 0xFFFF && species != SPECIES_NONE && DexScreen_GetSetPokedexFlag(species, FLAG_GET_CAUGHT, TRUE))
+        {
+            u16 ring[2];
+
+            sPokedexScreenData->categoryPageSelectionCursorTimer = (sPokedexScreenData->categoryPageSelectionCursorTimer + 1) & 31;
+            DexScreen_TypeRingColors(species, sPokedexScreenData->categoryPageSelectionCursorTimer, ring);
+            for (i = 0; i < 4; i++)
+            {
+                LoadPalette(i == cursorPos ? &ring[0] : &sDexScreen_CategoryCursorPals[0], PLTT_ID(i) + PLTT_ID(5) + 2 + BG_PLTT_OFFSET, PLTT_SIZEOF(1));
+                LoadPalette(i == cursorPos ? &ring[1] : &sDexScreen_CategoryCursorPals[1], PLTT_ID(i) + PLTT_ID(5) + 8 + BG_PLTT_OFFSET, PLTT_SIZEOF(1));
+            }
+            LoadPalette(&ring[0], OBJ_PLTT_ID(4) + 1, PLTT_SIZEOF(1));
+            return;
+        }
         sPokedexScreenData->categoryPageSelectionCursorTimer++;
-        if (sPokedexScreenData->categoryPageSelectionCursorTimer == 16)
+        if (sPokedexScreenData->categoryPageSelectionCursorTimer >= 16)
             sPokedexScreenData->categoryPageSelectionCursorTimer = 0;
         palIdx = sPokedexScreenData->categoryPageSelectionCursorTimer >> 2;
         for (i = 0; i < 4; i++)
@@ -2638,6 +2660,26 @@ static void DexScreen_CreateCategoryPageSelectionCursor(u8 cursorPos)
         }
         LoadPalette(&sDexScreen_CategoryCursorPals[2 * palIdx + 2], OBJ_PLTT_ID(4) + 1, PLTT_SIZEOF(1));
     }
+}
+
+//  T-201: the ring's two colours at frame TIMER (0..31). The first half pulses the first type, the second half the
+//  second -- the same type twice for a single-typed daemon -- each rising out of the page's dark ring and back.
+static u16 BlendRGB(u16 from, u16 to, u32 k, u32 of)
+{
+    s32 r = GET_R(from) + ((s32)GET_R(to) - (s32)GET_R(from)) * (s32)k / (s32)of;
+    s32 g = GET_G(from) + ((s32)GET_G(to) - (s32)GET_G(from)) * (s32)k / (s32)of;
+    s32 b = GET_B(from) + ((s32)GET_B(to) - (s32)GET_B(from)) * (s32)k / (s32)of;
+    return RGB(r, g, b);
+}
+
+static void DexScreen_TypeRingColors(u16 species, u8 timer, u16 *ring)
+{
+    u8 type = gSpeciesInfo[species].types[(timer >> 4) & 1];
+    u32 t = timer & 15;
+    u32 k = t < 8 ? t : 15 - t;
+
+    ring[0] = BlendRGB(sDexScreen_CategoryCursorPals[0], sTypeRingColor[type][0], k, 7);
+    ring[1] = BlendRGB(sDexScreen_CategoryCursorPals[1], sTypeRingColor[type][1], k, 7);
 }
 
 static void DexScreen_UpdateCategoryPageCursorObject(u8 taskId, u8 cursorPos, u8 numMonsInPage)
