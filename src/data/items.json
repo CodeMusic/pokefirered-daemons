@@ -5888,7 +5888,7 @@
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "A case that holds PATCHES and DRIVERS.\\nIt is attached to the POOL's\\ncompartment for important items.",
+      "description_english": "A case for PATCHES and DRIVERS.\\nIt is attached to the POOL's\\ncompartment for important items.",
       "importance": 1,
       "registrability": 1,
       "pocket": "POCKET_KEY_ITEMS",
