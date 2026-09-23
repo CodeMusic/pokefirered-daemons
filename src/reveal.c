@@ -29,16 +29,10 @@
 
 static EWRAM_DATA u8 sRevealTimer = 0;
 
-//  T-221: the trees that lead into a GROVE, and out of one (tools/gbagrove.py writes both scripts). A bg_event whose
-//  script is one of these twinkles like a hidden item -- the driver shows WHICH tree, and pressing A on the tree that
-//  stands alone finds it without.
-extern const u8 ViridianForest_EventScript_Grove[];
-extern const u8 ViridianForest_Grove_EventScript_Leave[];
-static const u8 *const sGroveTrees[] =
-{
-    ViridianForest_EventScript_Grove,
-    ViridianForest_Grove_EventScript_Leave,
-};
+//  T-221: the trees that lead into a GROVE, and out of one. A bg_event whose script is one of these twinkles like a
+//  hidden item -- the driver shows WHICH tree, and pressing A on the tree that stands alone finds it without. The
+//  table is written by tools/gbagrove.py from the same rows that build the groves, so a new grove needs no edit here.
+#include "data/grove_trees.h"
 
 static bool8 IsShown(const struct BgEvent *e)
 {
