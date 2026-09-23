@@ -980,7 +980,7 @@ gFameCheckerFlavorTextOriginLocation_Bruno2::
 	.string "BRAZEN CITY$"
 
 gFameCheckerFlavorTextOriginLocation_Bruno3::
-	.string "JITTER SPA$"
+	.string "KETTLE SPRING$"
 
 gFameCheckerFlavorTextOriginLocation_Bruno4::
 	.string "TWO ISLAND$"

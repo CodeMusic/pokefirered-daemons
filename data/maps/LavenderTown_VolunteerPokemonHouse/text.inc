@@ -38,7 +38,7 @@ LavenderTown_VolunteerPokemonHouse_Text_IdLikeYouToHaveThis::
     .string "but I'd like you to have it.$"
 
 LavenderTown_VolunteerPokemonHouse_Text_ReceivedPokeFluteFromMrFuji::
-    .string "{PLAYER} received a INTERRUPT\n"
+    .string "{PLAYER} received an INTERRUPT\n"
     .string "from INIT.$"
 
 LavenderTown_VolunteerPokemonHouse_Text_ExplainPokeFlute::
