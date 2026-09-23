@@ -1763,6 +1763,89 @@ void CreateMon(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 hasFix
     CalculateMonStats(mon);
 }
 
+#if DAEMONS_DEBUG
+//  T-237: the debug kit's 386 boxed daemons, made the way CreateBoxMon makes them, field for field -- but written
+//  straight into the plain record and encrypted ONCE. CreateBoxMon sets each field through SetBoxMonData, which
+//  decrypts, writes, re-checksums and re-encrypts the whole record every time -- thirty-odd times a daemon, and a
+//  moveset of several more -- which is what kept a debug new game black long enough that a phone gave up on it.
+//  Debug only: the real game makes one daemon at a time and never pays for this.
+void DaemonsDebug_CreateBoxMonFast(struct BoxPokemon *boxMon, u16 species, u8 level, u8 metLevel)
+{
+    union PokemonSubstruct *s0, *s1, *s3;
+    u32 personality = Random32();
+    u8 name[POKEMON_NAME_LENGTH + 1];
+    u16 moves[MAX_MON_MOVES];
+    s32 i, j, n = 0;
+
+    ZeroBoxMonData(boxMon);
+    boxMon->personality = personality;
+    boxMon->otId = gSaveBlock2Ptr->playerTrainerId[0]
+                 | (gSaveBlock2Ptr->playerTrainerId[1] << 8)
+                 | (gSaveBlock2Ptr->playerTrainerId[2] << 16)
+                 | (gSaveBlock2Ptr->playerTrainerId[3] << 24);
+    GetSpeciesName(name, species);
+    for (i = 0; i < POKEMON_NAME_LENGTH; i++)
+        boxMon->nickname[i] = name[i];
+    boxMon->language = gGameLanguage;
+    for (i = 0; i < PLAYER_NAME_LENGTH; i++)
+        boxMon->otName[i] = gSaveBlock2Ptr->playerName[i];
+    boxMon->hasSpecies = TRUE;
+
+    s0 = GetSubstruct(boxMon, personality, 0);
+    s1 = GetSubstruct(boxMon, personality, 1);
+    s3 = GetSubstruct(boxMon, personality, 3);
+    s0->type0.species = species;
+    s0->type0.experience = gExperienceTables[gSpeciesInfo[species].growthRate][level];
+    s0->type0.friendship = gSpeciesInfo[species].friendship;
+
+    //  GiveBoxMonInitialMoveset's rule without its cost: every level-up routine up to LEVEL, the newest four kept.
+    for (i = 0; i < MAX_MON_MOVES; i++)
+        moves[i] = MOVE_NONE;
+    for (i = 0; gLevelUpLearnsets[species][i] != LEVEL_UP_END; i++)
+    {
+        u16 move = gLevelUpLearnsets[species][i] & LEVEL_UP_MOVE_ID;
+
+        if ((gLevelUpLearnsets[species][i] & LEVEL_UP_MOVE_LV) > (level << 9))
+            break;
+        for (j = 0; j < n; j++)
+            if (moves[j] == move)
+                break;
+        if (j < n)
+            continue;
+        if (n < MAX_MON_MOVES)
+            moves[n++] = move;
+        else
+        {
+            for (j = 0; j < MAX_MON_MOVES - 1; j++)
+                moves[j] = moves[j + 1];
+            moves[MAX_MON_MOVES - 1] = move;
+        }
+    }
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        s1->type1.moves[i] = moves[i];
+        s1->type1.pp[i] = moves[i] != MOVE_NONE ? gBattleMoves[moves[i]].pp : 0;
+    }
+
+    s3->type3.metLocation = GetCurrentRegionMapSectionId();
+    s3->type3.metLevel = metLevel;
+    s3->type3.metGame = gGameVersion;
+    s3->type3.pokeball = ITEM_POKE_BALL;
+    s3->type3.otGender = gSaveBlock2Ptr->playerGender;
+    s3->type3.hpIV = 31;
+    s3->type3.attackIV = 31;
+    s3->type3.defenseIV = 31;
+    s3->type3.speedIV = 31;
+    s3->type3.spAttackIV = 31;
+    s3->type3.spDefenseIV = 31;
+    if (gSpeciesInfo[species].abilities[1])
+        s3->type3.abilityNum = personality & 1;
+
+    boxMon->checksum = CalculateBoxMonChecksum(boxMon);
+    EncryptBoxMon(boxMon);
+}
+#endif
+
 void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId)
 {
     u8 speciesName[POKEMON_NAME_LENGTH + 1];
