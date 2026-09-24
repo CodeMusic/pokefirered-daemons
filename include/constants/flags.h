@@ -1589,6 +1589,9 @@
 //  T-258. The CHECKPOINT attendant explains a MEME once, the first time she heals a party carrying one. Vanilla
 //  FireRed kept the check (IsPokerusInParty) and never called it, so PkRS was never explained to anyone.
 #define FLAG_MEME_EXPLAINED           (DAEMONS_FLAGS_START + 0x54)
+//  T-257. CRYSTAL, home after the payload, lets the INDEX write into the NOTEBOOK: one question asked of it, and a
+//  page in LAB NOTES that answers it from what the save already holds, written again every time it is opened.
+#define FLAG_INDEX_WRITES             (DAEMONS_FLAGS_START + 0x55)
 
 //  T-19. Two beats of one scene, five islands and a sea apart.
 #define FLAG_TY_GAVE_PAYLOAD          (DAEMONS_FLAGS_START + 0x20)

@@ -577,6 +577,10 @@ PalletTown_ProfessorOaksLab_EventScript_ProfOak::
 	faceplayer
 	checkitem ITEM_LETTER
 	goto_if_eq VAR_RESULT, TRUE, PalletTown_ProfessorOaksLab_EventScript_ThePayload
+	@  T-257: the first time she is spoken to after the payload, she lets the INDEX write
+	goto_if_unset FLAG_CRYSTAL_READ_PAYLOAD, PalletTown_ProfessorOaksLab_EventScript_ProfOakAsBefore
+	goto_if_unset FLAG_INDEX_WRITES, PalletTown_ProfessorOaksLab_EventScript_TheIndexWrites
+PalletTown_ProfessorOaksLab_EventScript_ProfOakAsBefore::
 	goto_if_set SHOWED_OAK_COMPLETE_DEX, PalletTown_ProfessorOaksLab_EventScript_OakJustShownCompleteDex
 	goto_if_eq VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 9, PalletTown_ProfessorOaksLab_EventScript_RatePokedex
 	goto_if_eq VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 8, PalletTown_ProfessorOaksLab_EventScript_MonsAroundWorldWait
@@ -1397,3 +1401,18 @@ PalletTown_ProfessorOaksLab_EventScript_GiveReview::
 	removeitem ITEM_DEVON_GOODS
 PalletTown_ProfessorOaksLab_EventScript_GiveReviewDone::
 	return
+
+@  T-257. The one time she speaks of the INDEX in personal terms -- and still never says why she built it (4.1).
+@  It has kept a note of everything; now it has somewhere to write. One question, asked once, and a page in LAB
+@  NOTES that answers it and keeps answering it. DRAFT wording, all of it.
+PalletTown_ProfessorOaksLab_EventScript_TheIndexWrites::
+	msgbox PalletTown_ProfessorOaksLab_Text_CrystalMayI
+	closemessage
+	delay 45
+	msgbox PalletTown_ProfessorOaksLab_Text_CrystalItKeptNotes
+	msgbox PalletTown_ProfessorOaksLab_Text_TheQuestion
+	setflag FLAG_INDEX_WRITES
+	msgbox PalletTown_ProfessorOaksLab_Text_CrystalItWillKeepIt
+	msgbox PalletTown_ProfessorOaksLab_Text_IndexWrotePage
+	release
+	end

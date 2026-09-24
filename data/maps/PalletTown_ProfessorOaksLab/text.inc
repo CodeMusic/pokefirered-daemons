@@ -397,3 +397,29 @@ PalletTown_ProfessorOaksLab_Text_CrystalTakesTheReview::
 	.string "too.\p"
 	.string "She read who it was addressed\n"
 	.string "to, and kept it closed.$"
+
+@  T-257, DRAFT
+PalletTown_ProfessorOaksLab_Text_CrystalMayI::
+    .string "CRYSTAL: Your INDEX. May I?$"
+
+PalletTown_ProfessorOaksLab_Text_CrystalItKeptNotes::
+    .string "It has kept a note of everything you\n"
+    .string "did, from the day you first carried\l"
+    .string "it.\p"
+    .string "It never showed you. It had nowhere\n"
+    .string "to write.\p"
+    .string "Now it has your NOTEBOOK.\p"
+    .string "Watch. You ask it something, and it\n"
+    .string "writes the answer down.$"
+
+PalletTown_ProfessorOaksLab_Text_TheQuestion::
+    .string "WHILE ON MY JOURNEY,\n"
+    .string "WHAT CHOICES DID I MAKE?$"
+
+PalletTown_ProfessorOaksLab_Text_CrystalItWillKeepIt::
+    .string "CRYSTAL: There. It will keep that\n"
+    .string "page up to date.$"
+
+PalletTown_ProfessorOaksLab_Text_IndexWrotePage::
+    .string "The INDEX wrote a page into the\n"
+    .string "NOTEBOOK.$"

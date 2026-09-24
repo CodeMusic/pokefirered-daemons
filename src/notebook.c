@@ -10,6 +10,10 @@
 #include "task.h"
 #include "text_window.h"
 #include "school_exam.h"
+#include "constants/species.h"   // T-257
+#include "pokemon.h"   // T-257
+#include "pokedex.h"   // T-257
+#include "data.h"   // T-257: gSpeciesNames
 #include "book_reader.h"
 #include "constants/songs.h"
 #include "data/notebook_documents.h"   // T-224: the documents tools/gbadocs.py has placed
@@ -52,7 +56,7 @@ enum
 //  stored, or the exam's record written on demand. ARG 1 means the text's first paragraph is a heading the
 //  page's title already carries -- the syllabus's COURSE SYLLABUS / 1F LANGUAGE -- and the page leaves it off. The floors' boards were filed here once (batch 5); since
 //  T-223 they are the TEXTBOOK's own chapters, and a book does not need a copy of itself in the notebook.
-enum { NB_KIND_TEXT, NB_KIND_EXAM };
+enum { NB_KIND_TEXT, NB_KIND_EXAM, NB_KIND_CHOICES };
 
 struct NotebookEntry
 {
@@ -234,6 +238,54 @@ static const u8 sTitle_Lab_Iter[]          = _("ITER 35");
 //  T-235: the session the station's log withholds, told by ARTSAI -- the Five Witnesses' reward. The words are the
 //  user's to approve (on the private field-test page); until then the ROM holds only where they go.
 static const u8 sTitle_Lab_Transcript[]    = _("TRANSCRIPT");
+
+//  T-257: WHAT YOU CHOSE. The INDEX's one page about the PLAYER, written on demand from what the save already
+//  records -- REASON or INSTINCT, whose shoes, the first daemon, the rival's name, the paper, S.T.A.R.R. -- so it
+//  stays current and needs no save data of its own. INFERRED marks what happened before the INDEX was yours; the
+//  word, not a bracket, because the charmap has none (trap 26). It is exactly as sure of you as it is of every
+//  daemon (4.2), and says so in its last two lines, which is the point and is never remarked on.
+extern const u8 gText_Boy[];    // "REASON" and "INSTINCT" (strings.c): the choice at the title
+extern const u8 gText_Girl[];
+static const u8 sTitle_Lab_Choices[]   = _("WHAT YOU CHOSE");
+//  PLACEHOLDER labels: the page's words are a NOTEBOOK draft, and NOTEBOOK drafts stay on the private page until the
+//  user approves them. The structure is final -- what it reads, when, and in what order -- and the words drop in.
+static const u8 sChoices_Head[]        = _("LAB NOTES. The words of this page\nwait to be approved.\p");
+static const u8 sChoices_Began[]       = _("TITLE: ");
+static const u8 sChoices_ShoesDad[]    = _("SHOES: FATHER\p");
+static const u8 sChoices_ShoesMom[]    = _("SHOES: MOTHER\p");
+static const u8 sChoices_First[]       = _("FIRST: ");
+static const u8 sChoices_Rival[]       = _("RIVAL: {RIVAL}\p");
+static const u8 sChoices_Paper[]       = _("PAPER: PASSED\p");
+static const u8 sChoices_Starr[]       = _("S.T.A.R.R.: BOUND\p");
+static const u8 sChoices_End[]         = _("END");
+static const u8 sChoices_Stop[]        = _("\p");
+
+static void Notebook_WriteChoices(u8 *dest)
+{
+    static const u16 sStarters[] = { SPECIES_BULBASAUR, SPECIES_SQUIRTLE, SPECIES_CHARMANDER };
+    u8 buf[400];
+    u16 starter = VarGet(VAR_STARTER_MON);
+
+    StringCopy(buf, sChoices_Head);
+    StringAppend(buf, sChoices_Began);
+    StringAppend(buf, gSaveBlock2Ptr->playerGender == MALE ? gText_Boy : gText_Girl);
+    StringAppend(buf, sChoices_Stop);
+    if (FlagGet(FLAG_SYS_B_DASH))
+        StringAppend(buf, FlagGet(FLAG_SHOES_FROM_DAD) ? sChoices_ShoesDad : sChoices_ShoesMom);
+    if (FlagGet(FLAG_SYS_POKEMON_GET) && starter < ARRAY_COUNT(sStarters))
+    {
+        StringAppend(buf, sChoices_First);
+        StringAppend(buf, gSpeciesNames[sStarters[starter]]);
+        StringAppend(buf, sChoices_Stop);
+    }
+    StringAppend(buf, sChoices_Rival);
+    if (FlagGet(FLAG_GOT_DIPLOMA))
+        StringAppend(buf, sChoices_Paper);
+    if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(SPECIES_MEWTWO), FLAG_GET_CAUGHT))
+        StringAppend(buf, sChoices_Starr);
+    StringAppend(buf, sChoices_End);
+    StringExpandPlaceholders(dest, buf);
+}
 static const u8 sText_Lab_Transcript[]     = _("TRANSCRIPT. SEPT 3.\pThe page is here. Its words are\nwaiting to be approved.");
 static const u8 sTitle_Run_Mar4[]          = _("MAR 4");
 static const u8 sTitle_Run_Apr19[]         = _("APR 19");
@@ -271,6 +323,7 @@ static const struct NotebookEntry sEntries[] =
     NB_DOC_LAB_NOTES_4
     { NB_LAB_NOTES,    NB_KIND_TEXT,  0, FLAG_NOTEBOOK_LAB_ITER,        0, sTitle_Lab_Iter,            PokemonMansion_1F_Text_IterLog },
     { NB_LAB_NOTES,    NB_KIND_TEXT,  0, FLAG_ARTSAI_PAGE,              0, sTitle_Lab_Transcript,      sText_Lab_Transcript },
+    { NB_LAB_NOTES,    NB_KIND_CHOICES, 0, FLAG_INDEX_WRITES,           0, sTitle_Lab_Choices,         NULL },   // T-257
     NB_DOC_LAB_NOTES_6
     { NB_RUN_LOGS,     NB_KIND_TEXT,  0, FLAG_NOTEBOOK_RUN_MAR4,        0, sTitle_Run_Mar4,            PokemonMansion_1F_Text_NewMonDiscoveredInGuyanaJungle },
     { NB_RUN_LOGS,     NB_KIND_TEXT,  0, FLAG_NOTEBOOK_RUN_APR19,       0, sTitle_Run_Apr19,           PokemonMansion_1F_Text_ChristenedDiscoveredMonMew },
@@ -537,6 +590,8 @@ void Notebook_LoadEntry(void)
         gStringVar4[0] = EOS;
     else if (sEntries[gSpecialVar_0x8006].kind == NB_KIND_EXAM)
         School_WriteExamRecord(gStringVar4);
+    else if (sEntries[gSpecialVar_0x8006].kind == NB_KIND_CHOICES)
+        Notebook_WriteChoices(gStringVar4);
     else
         StringExpandPlaceholders(gStringVar4, sEntries[gSpecialVar_0x8006].text);
 }
