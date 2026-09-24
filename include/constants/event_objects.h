@@ -278,7 +278,10 @@
 //  T-208: 222 now, because the PLUGIN DISC is id 221 and this bounds the pointer table. Adding a
 //  graphics id without moving this is an "excess elements in array initializer" warning, which agbcc
 //  treats as an error and which does not name the thing that is one too many.
-#define NUM_OBJ_EVENT_GFX     222
+//  T-256: DAD, drawn from MOM's sheet by tools/gendad.py (the DAEMONS repo).
+#define OBJ_EVENT_GFX_DAD 222
+
+#define NUM_OBJ_EVENT_GFX     223
 
 // These are dynamic object gfx ids.
 // They correspond with the values of the VAR_OBJ_GFX_ID_X vars.

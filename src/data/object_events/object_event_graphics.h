@@ -220,6 +220,7 @@ const u16 gObjectEventPic_Misty[] = INCBIN_U16("graphics/object_events/pics/peop
 const u16 gObjectEventPic_Lance[] = INCBIN_U16("graphics/object_events/pics/people/lance.4bpp");
 const u16 gObjectEventPic_GBAKid[] = INCBIN_U16("graphics/object_events/pics/people/gba_kid.4bpp");
 const u16 gObjectEventPic_Mom[] = INCBIN_U16("graphics/object_events/pics/people/mom.4bpp");
+const u16 gObjectEventPic_Dad[] = INCBIN_U16("graphics/object_events/pics/people/dad.4bpp");   // T-256
 const u16 gObjectEventPic_Pidgeot[] = INCBIN_U16("graphics/object_events/pics/pokemon/pidgeot.4bpp");
 const u16 gObjectEventPic_Omanyte[] = INCBIN_U16("graphics/object_events/pics/pokemon/omanyte.4bpp");
 const u16 gObjectEventPic_Kangaskhan[] = INCBIN_U16("graphics/object_events/pics/pokemon/kangaskhan.4bpp");

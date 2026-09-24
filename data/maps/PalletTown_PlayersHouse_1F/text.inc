@@ -44,3 +44,21 @@ PalletTown_PlayersHouse_1F_Text_ExplainRunningShoes::
     .string "MOM: Try them out. Hold B while\n"
     .string "you walk.\p"
     .string "You will need the room.$"
+
+@  T-256, DRAFT: DAD.
+PalletTown_PlayersHouse_1F_Text_DadTakeTheseShoes::
+    .string "DAD: Here. Take these.\p"
+    .string "They carried me further than\n"
+    .string "I meant to go.$"
+
+PalletTown_PlayersHouse_1F_Text_ReceivedRunningShoesFromDad::
+    .string "{PLAYER} received the\n"
+    .string "RUNNING SHOES from DAD.$"
+
+PalletTown_PlayersHouse_1F_Text_DadExplainRunningShoes::
+    .string "DAD: Hold B while you walk.\p"
+    .string "Mind the stairs.$"
+
+PalletTown_PlayersHouse_1F_Text_DadQuieter::
+    .string "DAD: Your mother worries.\p"
+    .string "So do I. Just quieter.$"

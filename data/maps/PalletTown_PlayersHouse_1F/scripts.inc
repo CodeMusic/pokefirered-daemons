@@ -1,5 +1,17 @@
 PalletTown_PlayersHouse_1F_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, PalletTown_PlayersHouse_1F_OnTransition
 	.byte 0
+
+@  T-256: MOM AND DAD are at the table until one of them has given you the RUNNING SHOES; after that they move about
+@  the room like people who live here.
+PalletTown_PlayersHouse_1F_OnTransition::
+	call_if_set FLAG_SYS_B_DASH, PalletTown_PlayersHouse_1F_EventScript_ParentsWander
+	end
+
+PalletTown_PlayersHouse_1F_EventScript_ParentsWander::
+	setobjectmovementtype LOCALID_MOM, MOVEMENT_TYPE_WANDER_AROUND
+	setobjectmovementtype LOCALID_DAD, MOVEMENT_TYPE_WANDER_AROUND
+	return
 
 PalletTown_PlayersHouse_1F_EventScript_Mom::
 	lock
@@ -36,6 +48,36 @@ PalletTown_PlayersHouse_1F_EventScript_MomGiveRunningShoes::
 	msgbox PalletTown_PlayersHouse_1F_Text_ExplainRunningShoes
 	closemessage
 	applymovement LOCALID_MOM, Common_Movement_FaceOriginalDirection
+	waitmovement 0
+	release
+	end
+
+@  T-256: DAD. Whichever parent you go to first gives you THEIR shoes, and after that they are simply your shoes --
+@  the choice shows only in them. His lines are DRAFT.
+PalletTown_PlayersHouse_1F_EventScript_Dad::
+	lock
+	faceplayer
+	goto_if_unset FLAG_SYS_B_DASH, PalletTown_PlayersHouse_1F_EventScript_DadGiveRunningShoes
+	msgbox PalletTown_PlayersHouse_1F_Text_DadQuieter
+	closemessage
+	applymovement LOCALID_DAD, Common_Movement_FaceOriginalDirection
+	waitmovement 0
+	release
+	end
+
+PalletTown_PlayersHouse_1F_EventScript_DadGiveRunningShoes::
+	msgbox PalletTown_PlayersHouse_1F_Text_DadTakeTheseShoes
+	textcolor NPC_TEXT_COLOR_NEUTRAL
+	playfanfare MUS_OBTAIN_KEY_ITEM
+	message PalletTown_PlayersHouse_1F_Text_ReceivedRunningShoesFromDad
+	waitmessage
+	waitfanfare
+	setflag FLAG_SYS_B_DASH
+	setflag FLAG_SHOES_FROM_DAD
+	call EventScript_RestorePrevTextColor
+	msgbox PalletTown_PlayersHouse_1F_Text_DadExplainRunningShoes
+	closemessage
+	applymovement LOCALID_DAD, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end

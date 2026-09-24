@@ -1583,6 +1583,9 @@
 //  only by binding: beaten or fled from, the drawing stays and the encounter waits for the next try.
 #define FLAG_ARTSAI_PAGE              (DAEMONS_FLAGS_START + 0x51)
 #define FLAG_ARTSAI_BOUND             (DAEMONS_FLAGS_START + 0x52)
+//  T-256 / T-257. Which parent gave the RUNNING SHOES (FLAG_SYS_B_DASH is that you have them). Recorded, never
+//  mentioned -- the shoes' colours and, later, the INDEX's entry about you are the only places it shows.
+#define FLAG_SHOES_FROM_DAD           (DAEMONS_FLAGS_START + 0x53)
 
 //  T-19. Two beats of one scene, five islands and a sea apart.
 #define FLAG_TY_GAVE_PAYLOAD          (DAEMONS_FLAGS_START + 0x20)
