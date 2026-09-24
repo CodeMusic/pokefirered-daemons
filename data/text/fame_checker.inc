@@ -366,7 +366,7 @@ gFameCheckerFlavorText_Lorelei0::
 
 gFameCheckerFlavorText_Lorelei1::
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of DAEMON?\p"
-	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}Freezing ROUTINES are powerful.\p"
+	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}FROZEN ROUTINES are powerful.\p"
 	.string "Your DAEMON will be at my mercy\n"
 	.string "when they are hung solid.$"
 
