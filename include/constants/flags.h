@@ -1586,6 +1586,9 @@
 //  T-256 / T-257. Which parent gave the RUNNING SHOES (FLAG_SYS_B_DASH is that you have them). Recorded, never
 //  mentioned -- the shoes' colours and, later, the INDEX's entry about you are the only places it shows.
 #define FLAG_SHOES_FROM_DAD           (DAEMONS_FLAGS_START + 0x53)
+//  T-258. The CHECKPOINT attendant explains a MEME once, the first time she heals a party carrying one. Vanilla
+//  FireRed kept the check (IsPokerusInParty) and never called it, so PkRS was never explained to anyone.
+#define FLAG_MEME_EXPLAINED           (DAEMONS_FLAGS_START + 0x54)
 
 //  T-19. Two beats of one scene, five islands and a sea apart.
 #define FLAG_TY_GAVE_PAYLOAD          (DAEMONS_FLAGS_START + 0x20)

@@ -922,6 +922,16 @@ Text_RestoredPkmnToFullHealth::
 	.string "restored your DAEMON to full\l"
 	.string "health.$"
 
+@ T-258, DRAFT
+Text_DaemonCaughtAMeme::
+	.string "Oh! One of your DAEMONS has caught\n"
+	.string "a MEME from another DAEMON.\p"
+	.string "It will pass it on to the next one\n"
+	.string "it spends time beside.\p"
+	.string "Nobody knows where this one started.\n"
+	.string "While a DAEMON carries it, it gets\l"
+	.string "more out of every fight.$"
+
 	.include "data/text/surf.inc"
 
 @ Unused, from R/S

@@ -211,6 +211,14 @@ static void DaemonsDebug_GrantTestKit(void)
         // every command unless it carries the official-event flag, whatever the
         // badges (IsBattlerModernFatefulEncounter), and CreateMon does not set it.
         SetMonData(&mon, MON_DATA_MODERN_FATEFUL_ENCOUNTER, &fateful);
+        // T-258: and the first of them carries a MEME, so its pill and the CHECKPOINT's one explanation of it
+        // can be seen without waiting on a one-in-several-thousand encounter.
+        if (i == 0)
+        {
+            u8 meme = 0x12;     // strain 1, two days left
+
+            SetMonData(&mon, MON_DATA_POKERUS, &meme);
+        }
         // S.T.A.R.R. learns RECURSION and GOTO at 70 and the kit is level 50.
         if (sParty[i] == SPECIES_MEWTWO)
         {

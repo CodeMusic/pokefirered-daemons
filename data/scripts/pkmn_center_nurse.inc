@@ -42,6 +42,7 @@ EventScript_PkmnCenterNurse_ReturnPkmn::
 	waitmessage
 	applymovement VAR_LAST_TALKED, Movement_Bow
 	waitmovement 0
+	call EventScript_PkmnCenterNurse_CheckMeme
 	msgbox Text_WeHopeToSeeYouAgain
 	return
 
@@ -64,3 +65,13 @@ Movement_Bow::
 	nurse_joy_bow
 	delay_4
 	step_end
+
+@ T-258: a MEME is caught from another daemon and passed on, the way an idea is. Said once. DRAFT wording.
+EventScript_PkmnCenterNurse_CheckMeme::
+	goto_if_set FLAG_MEME_EXPLAINED, EventScript_PkmnCenterNurse_CheckMemeEnd
+	specialvar VAR_RESULT, IsPokerusInParty
+	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_CheckMemeEnd
+	msgbox Text_DaemonCaughtAMeme
+	setflag FLAG_MEME_EXPLAINED
+EventScript_PkmnCenterNurse_CheckMemeEnd::
+	return
