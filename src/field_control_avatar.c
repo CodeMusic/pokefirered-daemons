@@ -697,9 +697,37 @@ static const u8 *GetInteractedBackgroundEventScript(struct MapPosition *position
     return bgEvent->bgUnion.script;
 }
 
+//  T-249: HALFTONE Tower's stones are TOMBSTONES in both senses, and now they can be read. They are ordinary
+//  metatiles with no behaviour and no events -- a hundred of them over seven floors -- so a stone is known by its
+//  metatile on the tower's own tileset (tools/gbatombstones.py redrew exactly these), and which of the six lines it
+//  carries is fixed by where it stands, so neighbours differ and a stone always says the same thing.
+extern const struct Tileset gTileset_PokemonTower;
+static const u16 sTowerStones[] = {
+    0x289, 0x291, 0x293, 0x2D8, 0x2D9, 0x2DB, 0x2DC, 0x2DD, 0x2E3, 0x2E4,   // standing on the top layer
+    0x297, 0x2A5, 0x2A6, 0x2B1, 0x2B2, 0x2B3, 0x2BE, 0x2BF, 0x2D6, 0x2DA,   // drawn into the floor
+};
+
+static bool8 IsTowerStone(struct MapPosition *position)
+{
+    u32 i, id;
+
+    if (gMapHeader.mapLayout->secondaryTileset != &gTileset_PokemonTower)
+        return FALSE;
+    id = MapGridGetMetatileIdAt(position->x, position->y);
+    for (i = 0; i < ARRAY_COUNT(sTowerStones); i++)
+        if (sTowerStones[i] == id)
+            return TRUE;
+    return FALSE;
+}
+
 static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 metatileBehavior, u8 direction)
 {
     gSpecialVar_Facing = direction;
+    if (IsTowerStone(position))
+    {
+        gSpecialVar_0x8004 = (position->x * 7 + position->y * 13) % 6;
+        return EventScript_TowerStone;
+    }
     if (MetatileBehavior_IsPC(metatileBehavior) == TRUE)
         return EventScript_PC;
     if (MetatileBehavior_IsRegionMap(metatileBehavior) == TRUE)

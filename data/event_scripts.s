@@ -1392,6 +1392,7 @@ Text_TestMsg::
 	.include "data/scripts/notebook.inc"
 	.include "data/scripts/notebook_documents.inc"   @ T-224, tools/gbadocs.py
 	.include "data/scripts/school.inc"
+	.include "data/scripts/tower_stones.inc"   @ T-249
 	.include "data/text/save.inc"
 	.include "data/text/new_game_intro.inc"
 	.include "data/text/pokedude.inc"

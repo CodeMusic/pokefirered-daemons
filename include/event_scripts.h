@@ -1294,4 +1294,6 @@ extern const u8 TradeCenter_TerminateLink[];
 // T-235: REVEAL asks whether a sign is ARTSAI's drawing.
 extern const u8 Route21_North_Station_EventScript_VisitorLog[];
 
+extern const u8 EventScript_TowerStone[];   // T-249
+
 #endif //GUARD_EVENT_SCRIPTS_H
