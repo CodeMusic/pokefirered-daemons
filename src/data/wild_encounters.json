@@ -1032,7 +1032,7 @@
               {
                 "min_level": 44,
                 "max_level": 44,
-                "species": "SPECIES_ARBOK"
+                "species": "SPECIES_SANDSLASH"
               },
               {
                 "min_level": 44,
@@ -1101,7 +1101,7 @@
               {
                 "min_level": 46,
                 "max_level": 46,
-                "species": "SPECIES_ARBOK"
+                "species": "SPECIES_SANDSLASH"
               },
               {
                 "min_level": 46,
@@ -1170,7 +1170,7 @@
               {
                 "min_level": 44,
                 "max_level": 44,
-                "species": "SPECIES_ARBOK"
+                "species": "SPECIES_SANDSLASH"
               },
               {
                 "min_level": 44,
@@ -1530,7 +1530,7 @@
               {
                 "min_level": 23,
                 "max_level": 23,
-                "species": "SPECIES_SCYTHER"
+                "species": "SPECIES_PINSIR"
               },
               {
                 "min_level": 22,
@@ -1694,7 +1694,7 @@
               {
                 "min_level": 28,
                 "max_level": 28,
-                "species": "SPECIES_SCYTHER"
+                "species": "SPECIES_PINSIR"
               }
             ]
           },
@@ -4933,7 +4933,7 @@
               {
                 "min_level": 30,
                 "max_level": 30,
-                "species": "SPECIES_DELIBIRD"
+                "species": "SPECIES_SNEASEL"
               },
               {
                 "min_level": 31,
@@ -5002,7 +5002,7 @@
               {
                 "min_level": 30,
                 "max_level": 30,
-                "species": "SPECIES_DELIBIRD"
+                "species": "SPECIES_SNEASEL"
               },
               {
                 "min_level": 31,
@@ -8480,12 +8480,12 @@
               {
                 "min_level": 6,
                 "max_level": 6,
-                "species": "SPECIES_EKANS"
+                "species": "SPECIES_SANDSHREW"
               },
               {
                 "min_level": 10,
                 "max_level": 10,
-                "species": "SPECIES_EKANS"
+                "species": "SPECIES_SANDSHREW"
               },
               {
                 "min_level": 8,
@@ -8515,7 +8515,7 @@
               {
                 "min_level": 8,
                 "max_level": 8,
-                "species": "SPECIES_EKANS"
+                "species": "SPECIES_SANDSHREW"
               },
               {
                 "min_level": 12,
@@ -8525,7 +8525,7 @@
               {
                 "min_level": 12,
                 "max_level": 12,
-                "species": "SPECIES_EKANS"
+                "species": "SPECIES_SANDSHREW"
               }
             ]
           },
@@ -8941,7 +8941,7 @@
               {
                 "min_level": 17,
                 "max_level": 17,
-                "species": "SPECIES_EKANS"
+                "species": "SPECIES_SANDSHREW"
               },
               {
                 "min_level": 17,
@@ -8951,12 +8951,12 @@
               {
                 "min_level": 19,
                 "max_level": 19,
-                "species": "SPECIES_EKANS"
+                "species": "SPECIES_SANDSHREW"
               },
               {
                 "min_level": 17,
                 "max_level": 17,
-                "species": "SPECIES_EKANS"
+                "species": "SPECIES_SANDSHREW"
               },
               {
                 "min_level": 15,
@@ -8966,7 +8966,7 @@
               {
                 "min_level": 17,
                 "max_level": 17,
-                "species": "SPECIES_EKANS"
+                "species": "SPECIES_SANDSHREW"
               },
               {
                 "min_level": 18,
@@ -8995,12 +8995,12 @@
               {
                 "min_level": 11,
                 "max_level": 11,
-                "species": "SPECIES_EKANS"
+                "species": "SPECIES_SANDSHREW"
               },
               {
                 "min_level": 15,
                 "max_level": 15,
-                "species": "SPECIES_EKANS"
+                "species": "SPECIES_SANDSHREW"
               },
               {
                 "min_level": 13,
@@ -9030,7 +9030,7 @@
               {
                 "min_level": 13,
                 "max_level": 13,
-                "species": "SPECIES_EKANS"
+                "species": "SPECIES_SANDSHREW"
               },
               {
                 "min_level": 14,
@@ -9040,7 +9040,7 @@
               {
                 "min_level": 17,
                 "max_level": 17,
-                "species": "SPECIES_EKANS"
+                "species": "SPECIES_SANDSHREW"
               }
             ]
           }
@@ -9064,12 +9064,12 @@
               {
                 "min_level": 11,
                 "max_level": 11,
-                "species": "SPECIES_EKANS"
+                "species": "SPECIES_SANDSHREW"
               },
               {
                 "min_level": 15,
                 "max_level": 15,
-                "species": "SPECIES_EKANS"
+                "species": "SPECIES_SANDSHREW"
               },
               {
                 "min_level": 13,
@@ -9099,7 +9099,7 @@
               {
                 "min_level": 13,
                 "max_level": 13,
-                "species": "SPECIES_EKANS"
+                "species": "SPECIES_SANDSHREW"
               },
               {
                 "min_level": 14,
@@ -9109,7 +9109,7 @@
               {
                 "min_level": 17,
                 "max_level": 17,
-                "species": "SPECIES_EKANS"
+                "species": "SPECIES_SANDSHREW"
               }
             ]
           },
@@ -9208,7 +9208,7 @@
               {
                 "min_level": 14,
                 "max_level": 14,
-                "species": "SPECIES_EKANS"
+                "species": "SPECIES_SANDSHREW"
               },
               {
                 "min_level": 15,
@@ -9218,7 +9218,7 @@
               {
                 "min_level": 12,
                 "max_level": 12,
-                "species": "SPECIES_EKANS"
+                "species": "SPECIES_SANDSHREW"
               },
               {
                 "min_level": 13,
@@ -9238,7 +9238,7 @@
               {
                 "min_level": 15,
                 "max_level": 15,
-                "species": "SPECIES_EKANS"
+                "species": "SPECIES_SANDSHREW"
               },
               {
                 "min_level": 17,
@@ -9248,7 +9248,7 @@
               {
                 "min_level": 12,
                 "max_level": 12,
-                "species": "SPECIES_EKANS"
+                "species": "SPECIES_SANDSHREW"
               },
               {
                 "min_level": 15,
@@ -9258,7 +9258,7 @@
               {
                 "min_level": 12,
                 "max_level": 12,
-                "species": "SPECIES_EKANS"
+                "species": "SPECIES_SANDSHREW"
               },
               {
                 "min_level": 15,
@@ -10675,12 +10675,12 @@
               {
                 "min_level": 32,
                 "max_level": 32,
-                "species": "SPECIES_EKANS"
+                "species": "SPECIES_SANDSHREW"
               },
               {
                 "min_level": 34,
                 "max_level": 34,
-                "species": "SPECIES_EKANS"
+                "species": "SPECIES_SANDSHREW"
               },
               {
                 "min_level": 42,
@@ -10690,7 +10690,7 @@
               {
                 "min_level": 44,
                 "max_level": 44,
-                "species": "SPECIES_ARBOK"
+                "species": "SPECIES_SANDSLASH"
               },
               {
                 "min_level": 32,
@@ -13574,7 +13574,7 @@
               {
                 "min_level": 44,
                 "max_level": 44,
-                "species": "SPECIES_SANDSLASH"
+                "species": "SPECIES_ARBOK"
               },
               {
                 "min_level": 44,
@@ -13643,7 +13643,7 @@
               {
                 "min_level": 46,
                 "max_level": 46,
-                "species": "SPECIES_SANDSLASH"
+                "species": "SPECIES_ARBOK"
               },
               {
                 "min_level": 46,
@@ -13712,7 +13712,7 @@
               {
                 "min_level": 44,
                 "max_level": 44,
-                "species": "SPECIES_SANDSLASH"
+                "species": "SPECIES_ARBOK"
               },
               {
                 "min_level": 44,
@@ -14072,7 +14072,7 @@
               {
                 "min_level": 23,
                 "max_level": 23,
-                "species": "SPECIES_PINSIR"
+                "species": "SPECIES_SCYTHER"
               },
               {
                 "min_level": 22,
@@ -14236,7 +14236,7 @@
               {
                 "min_level": 28,
                 "max_level": 28,
-                "species": "SPECIES_PINSIR"
+                "species": "SPECIES_SCYTHER"
               }
             ],
             "encounter_rate": 21
@@ -17475,7 +17475,7 @@
               {
                 "min_level": 30,
                 "max_level": 30,
-                "species": "SPECIES_SNEASEL"
+                "species": "SPECIES_DELIBIRD"
               },
               {
                 "min_level": 31,
@@ -17544,7 +17544,7 @@
               {
                 "min_level": 30,
                 "max_level": 30,
-                "species": "SPECIES_SNEASEL"
+                "species": "SPECIES_DELIBIRD"
               },
               {
                 "min_level": 31,
@@ -21022,12 +21022,12 @@
               {
                 "min_level": 6,
                 "max_level": 6,
-                "species": "SPECIES_SANDSHREW"
+                "species": "SPECIES_EKANS"
               },
               {
                 "min_level": 10,
                 "max_level": 10,
-                "species": "SPECIES_SANDSHREW"
+                "species": "SPECIES_EKANS"
               },
               {
                 "min_level": 8,
@@ -21057,7 +21057,7 @@
               {
                 "min_level": 8,
                 "max_level": 8,
-                "species": "SPECIES_SANDSHREW"
+                "species": "SPECIES_EKANS"
               },
               {
                 "min_level": 12,
@@ -21067,7 +21067,7 @@
               {
                 "min_level": 12,
                 "max_level": 12,
-                "species": "SPECIES_SANDSHREW"
+                "species": "SPECIES_EKANS"
               }
             ],
             "encounter_rate": 21
@@ -21483,7 +21483,7 @@
               {
                 "min_level": 17,
                 "max_level": 17,
-                "species": "SPECIES_SANDSHREW"
+                "species": "SPECIES_EKANS"
               },
               {
                 "min_level": 17,
@@ -21493,12 +21493,12 @@
               {
                 "min_level": 19,
                 "max_level": 19,
-                "species": "SPECIES_SANDSHREW"
+                "species": "SPECIES_EKANS"
               },
               {
                 "min_level": 17,
                 "max_level": 17,
-                "species": "SPECIES_SANDSHREW"
+                "species": "SPECIES_EKANS"
               },
               {
                 "min_level": 15,
@@ -21508,7 +21508,7 @@
               {
                 "min_level": 17,
                 "max_level": 17,
-                "species": "SPECIES_SANDSHREW"
+                "species": "SPECIES_EKANS"
               },
               {
                 "min_level": 18,
@@ -21537,12 +21537,12 @@
               {
                 "min_level": 11,
                 "max_level": 11,
-                "species": "SPECIES_SANDSHREW"
+                "species": "SPECIES_EKANS"
               },
               {
                 "min_level": 15,
                 "max_level": 15,
-                "species": "SPECIES_SANDSHREW"
+                "species": "SPECIES_EKANS"
               },
               {
                 "min_level": 13,
@@ -21572,7 +21572,7 @@
               {
                 "min_level": 13,
                 "max_level": 13,
-                "species": "SPECIES_SANDSHREW"
+                "species": "SPECIES_EKANS"
               },
               {
                 "min_level": 14,
@@ -21582,7 +21582,7 @@
               {
                 "min_level": 17,
                 "max_level": 17,
-                "species": "SPECIES_SANDSHREW"
+                "species": "SPECIES_EKANS"
               }
             ],
             "encounter_rate": 21
@@ -21606,12 +21606,12 @@
               {
                 "min_level": 11,
                 "max_level": 11,
-                "species": "SPECIES_SANDSHREW"
+                "species": "SPECIES_EKANS"
               },
               {
                 "min_level": 15,
                 "max_level": 15,
-                "species": "SPECIES_SANDSHREW"
+                "species": "SPECIES_EKANS"
               },
               {
                 "min_level": 13,
@@ -21641,7 +21641,7 @@
               {
                 "min_level": 13,
                 "max_level": 13,
-                "species": "SPECIES_SANDSHREW"
+                "species": "SPECIES_EKANS"
               },
               {
                 "min_level": 14,
@@ -21651,7 +21651,7 @@
               {
                 "min_level": 17,
                 "max_level": 17,
-                "species": "SPECIES_SANDSHREW"
+                "species": "SPECIES_EKANS"
               }
             ],
             "encounter_rate": 21
@@ -21750,7 +21750,7 @@
               {
                 "min_level": 14,
                 "max_level": 14,
-                "species": "SPECIES_SANDSHREW"
+                "species": "SPECIES_EKANS"
               },
               {
                 "min_level": 15,
@@ -21760,7 +21760,7 @@
               {
                 "min_level": 12,
                 "max_level": 12,
-                "species": "SPECIES_SANDSHREW"
+                "species": "SPECIES_EKANS"
               },
               {
                 "min_level": 13,
@@ -21780,7 +21780,7 @@
               {
                 "min_level": 15,
                 "max_level": 15,
-                "species": "SPECIES_SANDSHREW"
+                "species": "SPECIES_EKANS"
               },
               {
                 "min_level": 17,
@@ -21790,7 +21790,7 @@
               {
                 "min_level": 12,
                 "max_level": 12,
-                "species": "SPECIES_SANDSHREW"
+                "species": "SPECIES_EKANS"
               },
               {
                 "min_level": 15,
@@ -21800,7 +21800,7 @@
               {
                 "min_level": 12,
                 "max_level": 12,
-                "species": "SPECIES_SANDSHREW"
+                "species": "SPECIES_EKANS"
               },
               {
                 "min_level": 15,
@@ -23217,12 +23217,12 @@
               {
                 "min_level": 32,
                 "max_level": 32,
-                "species": "SPECIES_SANDSHREW"
+                "species": "SPECIES_EKANS"
               },
               {
                 "min_level": 34,
                 "max_level": 34,
-                "species": "SPECIES_SANDSHREW"
+                "species": "SPECIES_EKANS"
               },
               {
                 "min_level": 42,
@@ -23232,7 +23232,7 @@
               {
                 "min_level": 44,
                 "max_level": 44,
-                "species": "SPECIES_SANDSLASH"
+                "species": "SPECIES_ARBOK"
               },
               {
                 "min_level": 32,
