@@ -139,6 +139,48 @@ DaemonsDebug_EventScript_Artsai::
 	releaseall
 	end
 
+@  CRYSTAL (T-257). The ending's flag set -- she has read the payload and is home -- and the INDEX's page cleared,
+@  so speaking to her plays the scene again; then her lab. Setting the payload also opens THE ANNEX and changes the
+@  Quicksilver sign, as the ending does.
+DaemonsDebug_EventScript_Crystal::
+	lockall
+	msgbox DaemonsDebug_Text_Crystal, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, DaemonsDebug_EventScript_Cancel
+	setflag FLAG_CRYSTAL_READ_PAYLOAD
+	clearflag FLAG_CRYSTAL_GONE
+	clearflag FLAG_HIDE_OAK_IN_HIS_LAB
+	clearflag FLAG_INDEX_WRITES
+	closemessage
+	warp MAP_PALLET_TOWN_PROFESSOR_OAKS_LAB, 6, 5
+	waitstate
+	releaseall
+	end
+
+@  WARDEN (T-260). The TOKEN in the POOL, picked up as the SAFARI ZONE would have it, then his house.
+DaemonsDebug_EventScript_Warden::
+	lockall
+	msgbox DaemonsDebug_Text_Warden, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, DaemonsDebug_EventScript_Cancel
+	additem ITEM_GOLD_TEETH
+	setflag FLAG_HIDE_SAFARI_ZONE_WEST_GOLD_TEETH
+	clearflag FLAG_GOT_HM04
+	closemessage
+	warp MAP_FUCHSIA_CITY_WARDENS_HOUSE, 5, 7
+	waitstate
+	releaseall
+	end
+
+DaemonsDebug_Text_Crystal::
+	.string "DEBUG: CRYSTAL home after the\n"
+	.string "payload?\p"
+	.string "The ending's flag is set. Speak to\n"
+	.string "her in her lab.$"
+
+DaemonsDebug_Text_Warden::
+	.string "DEBUG: the WARDEN's TOKEN?\p"
+	.string "It goes in the POOL. Speak to him\n"
+	.string "to hand it back.$"
+
 DaemonsDebug_Text_TheRecord::
 	.string "DEBUG: enter the RECORD?\p"
 	.string "You will be taken to the HALL, your\n"

@@ -80,6 +80,8 @@ enum StartMenuOption
     STARTMENU_DBG_DIPLOMA,
     STARTMENU_DBG_DOLDRUM,
     STARTMENU_DBG_ARTSAI,
+    STARTMENU_DBG_CRYSTAL,   // T-257
+    STARTMENU_DBG_WARDEN,    // T-260
     STARTMENU_DBG_ENCOUNTER,
     STARTMENU_DBG_DAEMON,
     STARTMENU_DBG_LEVEL,
@@ -155,6 +157,8 @@ static bool8 DbgIslandsCallback(void);
 static bool8 DbgDiplomaCallback(void);
 static bool8 DbgDoldrumCallback(void);
 static bool8 DbgArtsaiCallback(void);
+static bool8 DbgCrystalCallback(void);
+static bool8 DbgWardenCallback(void);
 static bool8 DbgJumpCallback(void);
 static bool8 DbgEncounterCallback(void);
 static bool8 DbgStepCallback(void);
@@ -215,6 +219,8 @@ static const struct MenuAction sStartMenuActionTable[] = {
     [STARTMENU_DBG_DIPLOMA] = { gText_DbgMenuDiploma, {.u8_void = DbgDiplomaCallback} },
     [STARTMENU_DBG_DOLDRUM] = { gText_DbgMenuDoldrum, {.u8_void = DbgDoldrumCallback} },
     [STARTMENU_DBG_ARTSAI]  = { gText_DbgMenuArtsai,  {.u8_void = DbgArtsaiCallback} },
+    [STARTMENU_DBG_CRYSTAL] = { gText_DbgMenuCrystal, {.u8_void = DbgCrystalCallback} },
+    [STARTMENU_DBG_WARDEN]  = { gText_DbgMenuWarden,  {.u8_void = DbgWardenCallback} },
     [STARTMENU_DBG_ENCOUNTER] = { gText_DbgMenuEncounter, {.u8_void = DbgEncounterCallback} },
     // DAEMON and LEVEL are adjusted with LEFT/RIGHT, so A on either does
     // nothing but redraw -- which is also what makes A safe to lean on.
@@ -268,6 +274,8 @@ static const u8 *const sStartMenuDescPointers[] = {
     gStartMenuDesc_DbgDiploma,
     gStartMenuDesc_DbgDoldrum,
     gStartMenuDesc_DbgArtsai,
+    gStartMenuDesc_DbgCrystal,
+    gStartMenuDesc_DbgWarden,
     gStartMenuDesc_DbgEncounter,
     gStartMenuDesc_DbgDaemon,
     gStartMenuDesc_DbgLevel,
@@ -376,7 +384,7 @@ static void SetUpStartMenu(void)
         AppendToStartMenuItems(STARTMENU_DBG_BACK);
         return;
     }
-    //  The three that take you somewhere in the story, on a page of their own: a ninth row ran the list off the
+    //  The places in the story, on a page of their own (seven now, 2026-09-24): a ninth row ran the list off the
     //  bottom of the screen (2026-09-23).
     if (sDbgPage == DBG_PAGE_JUMP)
     {
@@ -385,7 +393,9 @@ static void SetUpStartMenu(void)
         AppendToStartMenuItems(STARTMENU_DBG_DIPLOMA);
         AppendToStartMenuItems(STARTMENU_DBG_DOLDRUM);
         AppendToStartMenuItems(STARTMENU_DBG_ARTSAI);
-        AppendToStartMenuItems(STARTMENU_DBG_BACK);
+        AppendToStartMenuItems(STARTMENU_DBG_CRYSTAL);
+        AppendToStartMenuItems(STARTMENU_DBG_WARDEN);
+        //  No BACK row here: an eighth row sits under the description box (2026-09-24), and B closes the menu.
         return;
     }
     if (sDbgPage == DBG_PAGE_MAIN)
@@ -801,6 +811,8 @@ static bool8 IsDaemonsDebugCallback(void)
         || sStartMenuCallback == DbgDiplomaCallback
         || sStartMenuCallback == DbgDoldrumCallback
         || sStartMenuCallback == DbgArtsaiCallback
+        || sStartMenuCallback == DbgCrystalCallback
+        || sStartMenuCallback == DbgWardenCallback
         || sStartMenuCallback == DbgJumpCallback
         || sStartMenuCallback == DbgEncounterCallback
         || sStartMenuCallback == DbgStepCallback
@@ -1200,6 +1212,16 @@ static bool8 DbgDoldrumCallback(void)
 static bool8 DbgArtsaiCallback(void)
 {
     return DbgLeaveMenuForScript(DaemonsDebug_EventScript_Artsai);
+}
+
+static bool8 DbgCrystalCallback(void)
+{
+    return DbgLeaveMenuForScript(DaemonsDebug_EventScript_Crystal);
+}
+
+static bool8 DbgWardenCallback(void)
+{
+    return DbgLeaveMenuForScript(DaemonsDebug_EventScript_Warden);
 }
 
 static bool8 DbgEncounterCallback(void)
