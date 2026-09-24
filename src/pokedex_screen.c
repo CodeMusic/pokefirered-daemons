@@ -139,6 +139,7 @@ u8 DexScreen_DestroyAreaScreenResources(void);
 void DexScreen_CreateCategoryPageSpeciesList(u8 category, u8 pageNum);
 static u8 DexScreen_PageNumberToRenderablePages(u16 page);
 void DexScreen_InputHandler_StartToCry(void);
+static bool8 DexScreen_TurnPage(u16 species);   // T-189, defined with the margins
 void DexScreen_PrintStringWithAlignment(const u8 *str, s32 mode);
 static void MoveCursorFunc_DexModeSelect(s32 itemIndex, bool8 onInit, struct ListMenu *list);
 static void ItemPrintFunc_DexModeSelect(u8 windowId, u32 itemId, u8 y);
@@ -1783,7 +1784,10 @@ static void Task_DexScreen_CategorySubmenu(u8 taskId)
         }
         break;
     case 17:
-        if (JOY_NEW(A_BUTTON))
+        if (DexScreen_TurnPage(sPokedexScreenData->dexSpecies))
+        {
+        }
+        else if (JOY_NEW(A_BUTTON))
         {
             RemoveDexPageWindows();
             FillBgTilemapBufferRect_Palette0(1, 0x000, 0, 2, 30, 16);
@@ -2037,6 +2041,199 @@ bool8 OpusMarginAvailableInParty(void)
     return FALSE;
 }
 
+//  T-189: THE WORKINGS. L on the entry of a daemon you have BOUND turns the page to what it is made of rather than
+//  what the Index says about it: its line (who it comes from and becomes, and at what level or with what item) and
+//  the routines it learns, level by level. The user's decision (2026-09-24): L, from any bound daemon's entry --
+//  which keeps 4.2's reservation, that you learn more of a daemon by binding one, while making the door visible.
+//
+//  Nothing here is new prose. It is the ROM's own evolution and learnset tables, laid out in the entry's own pane
+//  (224px, three lines) and paged: L again turns to the next page, and past the last one back to the entry. A name
+//  the player has not SEEN is not given away -- it prints as ????? (T-185a's rule for the family page).
+static EWRAM_DATA u8 sWorkingsPage = 0;     // 0: the entry (or the margin); n: the workings' page n
+extern const struct Evolution gEvolutionTable[][EVOS_PER_MON];
+static const u8 sWorkingsNewLine[] = _("\n");
+static const u8 sWorkingsSpace[] = _(" ");
+
+#define WORKINGS_PANE   224     // inside the frame, where the entries sit
+#define WORKINGS_LINES  3       // what the pane shows: a fourth line is drawn under the frame
+
+static bool8 DexScreen_IsBound(u16 species)
+{
+    return GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT);
+}
+
+static u16 DexScreen_PreEvolution(u16 species)
+{
+    u32 s, e;
+
+    for (s = 1; s < NUM_SPECIES; s++)
+        for (e = 0; e < EVOS_PER_MON; e++)
+            if (gEvolutionTable[s][e].method && gEvolutionTable[s][e].targetSpecies == species)
+                return s;
+    return SPECIES_NONE;
+}
+
+static bool8 DexScreen_HasEvolutions(u16 species)
+{
+    u32 e;
+
+    for (e = 0; e < EVOS_PER_MON; e++)
+        if (gEvolutionTable[species][e].method)
+            return TRUE;
+    return FALSE;
+}
+
+//  One unbreakable unit at a time into the page being laid out. A unit that does not fit starts the next line; the
+//  lines that fall on the page asked for are copied out, and the rest are only counted.
+struct WorkingsLayout
+{
+    u8 *out;
+    u8 line[80];
+    u8 lineNo;
+    u8 page;
+};
+
+static void Workings_EndLine(struct WorkingsLayout *w)
+{
+    if (w->line[0] != EOS && w->lineNo / WORKINGS_LINES == w->page)
+    {
+        if (w->out[0] != EOS)
+            StringAppend(w->out, sWorkingsNewLine);
+        StringAppend(w->out, w->line);
+    }
+    if (w->line[0] != EOS)
+        w->lineNo++;
+    w->line[0] = EOS;
+}
+
+static void Workings_Add(struct WorkingsLayout *w, const u8 *unit)
+{
+    u8 trial[80];
+
+    StringCopy(trial, w->line);
+    if (trial[0] != EOS)
+        StringAppend(trial, sWorkingsSpace);
+    StringAppend(trial, unit);
+    if (w->line[0] != EOS && GetStringWidth(FONT_NORMAL, trial, 1) > WORKINGS_PANE)
+    {
+        Workings_EndLine(w);
+        StringCopy(w->line, unit);
+    }
+    else
+        StringCopy(w->line, trial);
+}
+
+static void Workings_Name(u8 *dst, u16 species)
+{
+    if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_SEEN))
+        StringCopy(dst, gSpeciesNames[species]);
+    else
+        StringCopy(dst, gText_WorkingsUnseen);
+}
+
+//  "→16 ROVERSEER", "→LEAF STONE VILEPLUME", or a bare "→" where the way is neither a level nor an item.
+static void Workings_Step(struct WorkingsLayout *w, const struct Evolution *evo, bool8 sibling)
+{
+    u8 unit[48], *p = unit;
+
+    if (sibling)
+    {
+        Workings_Add(w, gText_WorkingsOr);
+    }
+    *p++ = CHAR_RIGHT_ARROW;
+    *p = EOS;
+    switch (evo->method)
+    {
+    case EVO_LEVEL:
+    case EVO_LEVEL_ATK_GT_DEF:
+    case EVO_LEVEL_ATK_EQ_DEF:
+    case EVO_LEVEL_ATK_LT_DEF:
+    case EVO_LEVEL_SILCOON:
+    case EVO_LEVEL_CASCOON:
+    case EVO_LEVEL_NINJASK:
+    case EVO_LEVEL_SHEDINJA:
+        p = ConvertIntToDecimalStringN(p, evo->param, STR_CONV_MODE_LEFT_ALIGN, 3);
+        break;
+    case EVO_ITEM:
+    case EVO_TRADE_ITEM:
+        p = StringCopy(p, ItemId_GetName(evo->param));
+        break;
+    }
+    *p++ = CHAR_SPACE;
+    Workings_Name(p, evo->targetSpecies);
+    Workings_Add(w, unit);
+}
+
+//  Lays the workings out and returns how many pages they take; `out` gets page `page` (0-based).
+static u8 DexScreen_Workings(u16 species, u8 page, u8 *out)
+{
+    struct WorkingsLayout w;
+    u16 root = species, pre;
+    u8 unit[48], *p;
+    u32 i, j, k;
+    const u16 *learnset = gLevelUpLearnsets[species];
+
+    w.out = out;
+    w.out[0] = EOS;
+    w.line[0] = EOS;
+    w.lineNo = 0;
+    w.page = page;
+
+    //  the line, from its root: children after their parent, a sibling after a slash
+    for (i = 0; i < 3 && (pre = DexScreen_PreEvolution(root)) != SPECIES_NONE; i++)
+        root = pre;
+    if (root != species || DexScreen_HasEvolutions(species))
+    {
+        Workings_Name(unit, root);
+        Workings_Add(&w, unit);
+        for (i = 0, k = 0; i < EVOS_PER_MON; i++)
+        {
+            const struct Evolution *evo = &gEvolutionTable[root][i];
+
+            if (!evo->method)
+                continue;
+            Workings_Step(&w, evo, k++ != 0);
+            for (j = 0; j < EVOS_PER_MON; j++)
+                if (gEvolutionTable[evo->targetSpecies][j].method)
+                    Workings_Step(&w, &gEvolutionTable[evo->targetSpecies][j], j != 0);
+        }
+        Workings_EndLine(&w);
+    }
+
+    //  the routines, level by level
+    for (i = 0; learnset[i] != LEVEL_UP_END; i++)
+    {
+        p = unit;
+        *p++ = CHAR_LV;
+        p = ConvertIntToDecimalStringN(p, (learnset[i] & LEVEL_UP_MOVE_LV) >> 9, STR_CONV_MODE_LEFT_ALIGN, 3);
+        *p++ = CHAR_SPACE;
+        StringCopy(p, gMoveNames[learnset[i] & LEVEL_UP_MOVE_ID]);
+        Workings_Add(&w, unit);
+    }
+    Workings_EndLine(&w);
+    return (w.lineNo + WORKINGS_LINES - 1) / WORKINGS_LINES;
+}
+
+static void DexScreen_DrawWorkings(u16 species)
+{
+    u8 text[256];
+    struct TextPrinterTemplate printerTemplate;
+
+    DexScreen_Workings(species, sWorkingsPage - 1, text);
+    printerTemplate.currentChar = text;
+    printerTemplate.windowId = sPokedexScreenData->windowIds[2];
+    printerTemplate.fontId = FONT_NORMAL;
+    printerTemplate.letterSpacing = 1;
+    printerTemplate.lineSpacing = 0;
+    printerTemplate.unk = 0;
+    printerTemplate.fgColor = 1;
+    printerTemplate.bgColor = 0;
+    printerTemplate.shadowColor = 2;
+    printerTemplate.x = printerTemplate.currentX = (240 - WORKINGS_PANE) / 2;
+    printerTemplate.y = printerTemplate.currentY = 8;
+    AddTextPrinter(&printerTemplate, 0, NULL);
+}
+
 //  The margin has no room of its own: the entry's own window is thirty tiles by seven, and the 386 entries
 //  demonstrate it holds four lines of 234px, all of which some of them use. So the page is TURNED OVER --
 //  SELECT swaps the entry for the margin and back, and the control row says so only when there is one to
@@ -2049,7 +2246,12 @@ static void DexScreen_DrawMarginOrEntry(u16 species)
     FillWindowPixelBuffer(sPokedexScreenData->windowIds[2], PIXEL_FILL(0));
     DexScreen_LoadEntryPalette(species);
     DexScreen_PrintMonType(sPokedexScreenData->windowIds[2], species);
-    if (sMarginShown && state != OPUS_MARGIN_NONE)
+    if (sWorkingsPage != 0)
+    {
+        sMarginShown = FALSE;
+        DexScreen_DrawWorkings(species);
+    }
+    else if (sMarginShown && state != OPUS_MARGIN_NONE)
     {
         //  T-197c: the entry is CENTRED -- DexScreen_PrintMonFlavorText computes x + (240 - width) / 2 -- and
         //  the margin was printed flush at x=0, so it sat hard against the frame while the entry above it did
@@ -2081,6 +2283,34 @@ static void DexScreen_DrawMarginOrEntry(u16 species)
         DexScreen_PrintMonFlavorText(sPokedexScreenData->windowIds[2], species, 0, 8);
     }
     CopyWindowToVram(sPokedexScreenData->windowIds[2], COPYWIN_GFX);
+}
+
+//  SELECT turns the page to the margin and back; L to the workings, page by page, and back. Every entry page that
+//  shows the control row calls this -- the one reached from a family page never handled SELECT at all, though its
+//  control row offered the MARGIN (found building T-189).
+static bool8 DexScreen_TurnPage(u16 species)
+{
+    if (JOY_NEW(SELECT_BUTTON) && OpusMarginState(species) != OPUS_MARGIN_NONE)
+    {
+        PlaySE(SE_SELECT);
+        sMarginShown = sWorkingsPage != 0 ? TRUE : !sMarginShown;
+        sWorkingsPage = 0;
+        DexScreen_DrawMarginOrEntry(species);
+        return TRUE;
+    }
+    if (JOY_NEW(L_BUTTON) && DexScreen_IsBound(species))
+    {
+        u8 scratch[256];
+
+        PlaySE(SE_SELECT);
+        sWorkingsPage++;
+        if (sWorkingsPage > DexScreen_Workings(species, 0, scratch))
+            sWorkingsPage = 0;
+        sMarginShown = FALSE;
+        DexScreen_DrawMarginOrEntry(species);
+        return TRUE;
+    }
+    return FALSE;
 }
 
 static void Task_DexScreen_ShowMonPage(u8 taskId)
@@ -2135,12 +2365,9 @@ static void Task_DexScreen_ShowMonPage(u8 taskId)
             BeginNormalPaletteFade(~0x8000, 0, 0, 16, RGB_WHITEALPHA);
             sPokedexScreenData->state = 1;
         }
-        else if (JOY_NEW(SELECT_BUTTON) && OpusMarginState(sPokedexScreenData->dexSpecies) != OPUS_MARGIN_NONE)
+        else if (DexScreen_TurnPage(sPokedexScreenData->dexSpecies))
         {
-            //  T-197: turn the page over.
-            PlaySE(SE_SELECT);
-            sMarginShown = !sMarginShown;
-            DexScreen_DrawMarginOrEntry(sPokedexScreenData->dexSpecies);
+            //  T-197 and T-189: the margin, or the workings
         }
         else if (JOY_NEW(R_BUTTON) && !DexScreen_LookUpCategoryBySpecies(sPokedexScreenData->dexSpecies))
         {
@@ -3290,6 +3517,7 @@ static u8 DexScreen_DrawMonDexPage(bool8 justRegistered)
 
     // Dex entry
     sMarginShown = FALSE;
+    sWorkingsPage = 0;
     DexScreen_DrawMarginOrEntry(sPokedexScreenData->dexSpecies);
     PutWindowTilemap(sPokedexScreenData->windowIds[2]);
     CopyWindowToVram(sPokedexScreenData->windowIds[2], COPYWIN_GFX);
@@ -3299,9 +3527,29 @@ static u8 DexScreen_DrawMonDexPage(bool8 justRegistered)
     FillWindowPixelBuffer(1, PIXEL_FILL(15));
     if (justRegistered == FALSE)
     {
-        DexScreen_AddTextPrinterParameterized(1, FONT_SMALL, sFamilyButton ? gText_CryFamily : gText_Cry, 8, 2, 4);
-        DexScreen_PrintControlInfo(OpusMarginState(sPokedexScreenData->dexSpecies) != OPUS_MARGIN_NONE
-                                   ? gText_MarginNextDataCancel : gText_NextDataCancel);
+        //  T-189: L is offered only where it does something -- a daemon you have bound. With L, R and a margin all
+        //  on offer the row is wider than the screen, so it is measured: the fullest pair that fits wins, dropping
+        //  {B}CANCEL first (B is back everywhere) and CRY next (the cry has already played).
+        bool8 margin = OpusMarginState(sPokedexScreenData->dexSpecies) != OPUS_MARGIN_NONE;
+        const u8 *left = sFamilyButton ? gText_CryFamily : gText_Cry;
+        const u8 *right = margin ? gText_MarginNextDataCancel : gText_NextDataCancel;
+
+        if (DexScreen_IsBound(sPokedexScreenData->dexSpecies))
+        {
+            const u8 *lefts[] = { sFamilyButton ? gText_CryMoreFamily : gText_CryMore,
+                                  sFamilyButton ? gText_CryMoreFamily : gText_CryMore,
+                                  sFamilyButton ? gText_MoreFamily : gText_More };
+            const u8 *rights[] = { right, margin ? gText_MarginNext : gText_Next, margin ? gText_MarginNext : gText_Next };
+            u32 i;
+
+            for (i = 0; i < ARRAY_COUNT(lefts) - 1; i++)
+                if (8 + GetStringWidth(FONT_SMALL, lefts[i], 0) + 6 <= 236 - GetStringWidth(FONT_SMALL, rights[i], 0))
+                    break;
+            left = lefts[i];
+            right = rights[i];
+        }
+        DexScreen_AddTextPrinterParameterized(1, FONT_SMALL, left, 8, 2, 4);
+        DexScreen_PrintControlInfo(right);
     }
     else
         //  Just registered -- and the same page L = READ opens mid-fight (T-179), so the margin has to be

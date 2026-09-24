@@ -1074,6 +1074,12 @@ extern const u8 gText_Lbs[];
 extern const u8 gText_Cry[];
 extern const u8 gText_CryFamily[];   // T-202
 extern const u8 gText_NextDataCancel[];
+extern const u8 gText_CryMore[];          // T-189
+extern const u8 gText_CryMoreFamily[];
+extern const u8 gText_More[];
+extern const u8 gText_MoreFamily[];
+extern const u8 gText_WorkingsUnseen[];
+extern const u8 gText_WorkingsOr[];
 extern const u8 gText_MarginNextDataCancel[];   // T-197
 extern const u8 gText_MarginNext[];
 extern const u8 gText_Next[];

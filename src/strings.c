@@ -98,6 +98,12 @@ const u8 gText_Lbs[] = _("lbs.");
 const u8 gTextJP_PokemonData[] = _("ポケモンデ-タ");
 const u8 gText_Cry[] = _("{START_BUTTON}CRY");
 const u8 gText_CryFamily[] = _("{START_BUTTON}CRY {R_BUTTON}FAMILY");   // T-202, DRAFT wording
+const u8 gText_CryMore[] = _("{START_BUTTON}CRY {L_BUTTON}MORE");                        // T-189, DRAFT wording
+const u8 gText_CryMoreFamily[] = _("{START_BUTTON}CRY {L_BUTTON}MORE {R_BUTTON}FAMILY");
+const u8 gText_More[] = _("{L_BUTTON}MORE");
+const u8 gText_MoreFamily[] = _("{L_BUTTON}MORE {R_BUTTON}FAMILY");
+const u8 gText_WorkingsUnseen[] = _("?????");
+const u8 gText_WorkingsOr[] = _("/");
 const u8 gText_NextDataCancel[] = _("{A_BUTTON}NEXT DATA {B_BUTTON}CANCEL");
 //  T-197: shown in place of the line above, but only on an entry that HAS a margin -- which is also
 //  how a player finds out OPUS does anything. Nothing else in the game mentions it.
