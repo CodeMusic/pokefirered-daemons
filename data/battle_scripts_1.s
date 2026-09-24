@@ -3817,6 +3817,13 @@ BattleScript_GhostGetOutGetOut::
 	playanimation BS_ATTACKER, B_ANIM_GHOST_GET_OUT
 	goto BattleScript_MoveEnd
 
+@ T-254: the dream, before the first turn -- your daemon's line, and the white.
+BattleScript_RemnantDream::
+	pause B_WAIT_TIME_SHORT
+	printstring STRINGID_MONTOOSCAREDTOMOVE
+	waitmessage B_WAIT_TIME_LONG
+	end2
+
 BattleScript_SilphScopeUnveiled::
 	pause B_WAIT_TIME_SHORT
 	printstring STRINGID_SILPHSCOPEUNVEILED

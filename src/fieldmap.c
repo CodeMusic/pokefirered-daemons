@@ -886,14 +886,35 @@ void DaemonsSetHalftoneColour(bool8 inColour)
         CpuCopy16(gPlttBufferUnfaded, gPlttBufferFaded, PLTT_SIZE);
 }
 
+// T-255: THE UNREAD CAVE IS A DRAWING, NOT A HALFTONE. The Painted Mirror's door, "the harder I tried to open it,
+// the less real it became ... mere dots and lines, just a simple drawing" (lineage.md 3b): every colour falls to one
+// of four flat tones of ink on warm paper, so the cave reads as drawn, where HALFTONE reads as a grey photograph.
+// A colour that is already one of the four is left alone, so a settled frame costs four compares an entry.
+static const u16 sDrawingTones[4] = { RGB(3, 3, 5), RGB(11, 10, 11), RGB(22, 21, 18), RGB(30, 29, 25) };
+
+static void DaemonsDrawingTone(u16 *colour)
+{
+    s32 r, g, b, lum;
+
+    if (*colour == sDrawingTones[0] || *colour == sDrawingTones[1] || *colour == sDrawingTones[2] || *colour == sDrawingTones[3])
+        return;
+    r = *colour & 0x1F;
+    g = (*colour >> 5) & 0x1F;
+    b = (*colour >> 10) & 0x1F;
+    lum = (r * 77 + g * 150 + b * 29) >> 8;
+    *colour = sDrawingTones[lum < 7 ? 0 : lum < 14 ? 1 : lum < 23 ? 2 : 3];
+}
+
 void DaemonsGreyHalftoneFrame(void)
 {
     u16 *colour;
     s32 i, keep;
+    bool8 drawing;
 
     if (sDaemonsHalftoneInColour || !DaemonsIsHalftone())
         return;
     keep = DaemonsLatentAbstractionBattler();
+    drawing = DaemonsCaveUnperceived();
     colour = gPlttBufferFaded;
     for (i = 0; i < (s32)PLTT_BUFFER_SIZE; i++, colour++)
     {
@@ -903,7 +924,9 @@ void DaemonsGreyHalftoneFrame(void)
         if (keep >= 0 && ((i >= OBJ_PLTT_ID(keep) && i < OBJ_PLTT_ID(keep + 1))
                        || (i >= BG_PLTT_ID(8 + keep) && i < BG_PLTT_ID(9 + keep))))
             continue;
-        if (*colour != (*colour & 0x1F) * 0x421)
+        if (drawing)
+            DaemonsDrawingTone(colour);
+        else if (*colour != (*colour & 0x1F) * 0x421)
             TintPalette_GrayScale(colour, 1);
     }
 }

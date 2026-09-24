@@ -1579,6 +1579,31 @@ void CB2_WhiteOut(void)
     }
 }
 
+// T-254: THE DREAM ENDS IN YOUR OWN ROOM. Shaped like the whiteout above -- and like the wake-up after the REVIEW
+// BOARD (4.34, step 6) -- but nothing is lost and nothing is healed, because nothing happened.
+void CB2_DaemonsWakeAtHome(void)
+{
+    u8 val;
+
+    if (++gMain.state >= 60)
+    {
+        FieldClearVBlankHBlankCallbacks();
+        StopMapMusic();
+        SetWarpDestination(MAP_GROUP(MAP_PALLET_TOWN_PLAYERS_HOUSE_2F), MAP_NUM(MAP_PALLET_TOWN_PLAYERS_HOUSE_2F), -1, 6, 6);
+        WarpIntoMap();
+        SetInitialPlayerAvatarStateWithDirection(DIR_SOUTH);
+        ScriptContext_Init();
+        UnlockPlayerFieldControls();
+        gFieldCallback = FieldCB_DaemonsWakeFromWhite;
+        val = 0;
+        DoMapLoadLoop(&val);
+        QuestLog_CutRecording();
+        SetFieldVBlankCallback();
+        SetMainCallback1(CB1_Overworld);
+        SetMainCallback2(CB2_Overworld);
+    }
+}
+
 void CB2_LoadMap(void)
 {
     FieldClearVBlankHBlankCallbacks();

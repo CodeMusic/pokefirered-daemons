@@ -42,6 +42,7 @@
 #include "constants/opponents.h"
 #include "constants/pokemon.h"
 #include "constants/songs.h"
+#include "fieldmap.h"
 #include "constants/trainers.h"
 
 static void SpriteCB_UnusedDebugSprite(struct Sprite *sprite);
@@ -3121,6 +3122,17 @@ static void TryDoEventsBeforeFirstTurn(void)
     }
     for (i = 0; i < gBattlersCount; i++) // pointless, ruby leftover
         ;
+    // T-254: THE DREAM. In DOLDRUM CAVE before it is understood, the REMNANT says its line, your daemon cannot make
+    // sense of anything, and the battle ends there -- in white, not black -- and you wake at home (battle_setup.c).
+    if (DaemonsRemnantDream())
+    {
+        gBattlerAttacker = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
+        gBattleOutcome = B_OUTCOME_RAN;
+        gCurrentActionFuncId = 0;
+        gBattlescriptCurrInstr = BattleScript_RemnantDream;
+        gBattleMainFunc = HandleEndTurn_FinishBattle;
+        return;
+    }
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
         *(gBattleStruct->monToSwitchIntoId + i) = PARTY_SIZE;
@@ -4073,7 +4085,7 @@ static void HandleEndTurn_FinishBattle(void)
         TrySetQuestLogBattleEvent();
         if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
             ClearRematchStateByTrainerId();
-        BeginFastPaletteFade(3);
+        BeginFastPaletteFade(DaemonsRemnantDream() ? 2 : 3);   // T-254: the dream ends in white
         FadeOutMapMusic(5);
         gBattleMainFunc = FreeResetData_ReturnToOvOrDoEvolutions;
         gCB2_AfterEvolution = BattleMainCB2;

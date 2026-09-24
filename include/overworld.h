@@ -151,6 +151,7 @@ bool32 IsSendingKeysOverCable(void);
 
 void CB2_ReturnToFieldWithOpenMenu(void);
 void CB2_WhiteOut(void);
+void CB2_DaemonsWakeAtHome(void);
 void CB2_ReturnToFieldFromMultiplayer(void);
 void ApplyNewEncryptionKeyToGameStats(u32 newKey);
 void SetContinueGameWarpToDynamicWarp(int);

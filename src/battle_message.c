@@ -310,8 +310,11 @@ static const u8 sText_PkmnsXPreventsFlinching[] = _("{B_EFF_NAME_WITH_PREFIX}'s 
 static const u8 sText_PkmnsXPreventsYsZ[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_ATK_ABILITY}\nprevents {B_DEF_NAME_WITH_PREFIX}'s\l{B_DEF_ABILITY} from working!");
 static const u8 sText_PkmnsXCuredItsYProblem[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\ncleared its state!");
 static const u8 sText_PkmnsXHadNoEffectOnY[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nhad no effect on {B_EFF_NAME_WITH_PREFIX}!");
-static const u8 sText_TooScaredToMove[] = _("{B_ATK_NAME_WITH_PREFIX} is too scared to move!");
-static const u8 sText_GetOutGetOut[] = _("GHOST: Get out…… Get out……");
+// T-254: not fear -- perception. In the tower the daemon cannot read what it faces; in DOLDRUM CAVE, before it
+// is understood, nothing it faces can be read at all, and the line is the user's, more intense.
+static const u8 sText_TooScaredToMove[] = _("{B_ATK_NAME_WITH_PREFIX} can't make\nsense of this!");
+static const u8 sText_NothingMakesSense[] = _("{B_ATK_NAME_WITH_PREFIX}: No, no, no…\nNothing here makes sense!");
+static const u8 sText_GetOutGetOut[] = _("REMNANT: Get out…… Get out……");
 static const u8 sText_StatSharply[] = _("sharply ");
 const u8 gBattleText_Rose[] = _("rose!");
 static const u8 sText_StatHarshly[] = _("harshly ");
@@ -394,14 +397,16 @@ static const u8 sText_WildPkmnAppeared[] = _("Wild {B_OPPONENT_MON1_NAME} appear
 static const u8 sText_WildPkmnAppeared2[] = _("Wild {B_OPPONENT_MON1_NAME} appeared!\p");
 static const u8 sText_WildPkmnAppearedPause[] = _("Wild {B_OPPONENT_MON1_NAME} appeared!{PAUSE 127}");
 static const u8 sText_TwoWildPkmnAppeared[] = _("Wild {B_OPPONENT_MON1_NAME} and\n{B_OPPONENT_MON2_NAME} appeared!\p");
-static const u8 sText_GhostAppearedCantId[] = _("The GHOST appeared!\pDarn!\nThe GHOST can't be ID'd!\p");
-static const u8 sText_TheGhostAppeared[] = _("The GHOST appeared!\p");
+// T-253: REMNANT, not GHOST -- what keeps running after the record is deleted (the tower's stones are the records).
+// The townspeople still say GHOSTs: HALFTONE is split on exactly that, and the game does not settle it for them.
+static const u8 sText_GhostAppearedCantId[] = _("The REMNANT appeared!\pDarn!\nThe REMNANT can't be ID'd!\p");
+static const u8 sText_TheGhostAppeared[] = _("The REMNANT appeared!\p");
 // T-251: what the LATENT abstraction says in DOLDRUM CAVE, before the cave is understood -- the user's line, and
 // the whole of it. The encounter is its other half; nothing names what is missing (craft rule 1).
 static const u8 sText_HeWhoSeesOne[] = _("HE WHO SEES ONE,\nSEES NONE.\p");
 static const u8 sText_HeWhoSeesOneTurn[] = _("HE WHO SEES ONE,\nSEES NONE.");
-static const u8 sText_SilphScopeUnveil[] = _("RESOLVER unveiled the GHOST's\nidentity!");
-static const u8 sText_TheGhostWas[] = _("The GHOST was COREFILE!\p\n");
+static const u8 sText_SilphScopeUnveil[] = _("RESOLVER unveiled the REMNANT's\nidentity!");
+static const u8 sText_TheGhostWas[] = _("The REMNANT was COREFILE!\p\n");
 static const u8 sText_Trainer1WantsToBattle[] = _("{B_TRAINER1_CLASS} {B_TRAINER1_NAME}\nwould like to engage!\p");
 static const u8 sText_LinkTrainerWantsToBattle[] = _("{B_LINK_OPPONENT1_NAME} wants\nto engage!");
 static const u8 sText_TwoLinkTrainersWantToBattle[] = _("{B_LINK_OPPONENT1_NAME} and {B_LINK_OPPONENT2_NAME}\nwant to engage!");
@@ -1806,6 +1811,8 @@ void BufferStringBattle(u16 stringId)
             // T-251: and each turn, in the unread cave, it says the same thing again.
             if (stringId == STRINGID_GHOSTGETOUTGETOUT && DaemonsCaveUnperceived())
                 stringPtr = sText_HeWhoSeesOneTurn;
+            if (stringId == STRINGID_MONTOOSCAREDTOMOVE && DaemonsCaveUnperceived())
+                stringPtr = sText_NothingMakesSense;
         }
         break;
     }

@@ -14,6 +14,7 @@ void DoTeleport2Warp(void);
 void FieldCB_DefaultWarpExit(void);
 void WarpFadeOutScreen(void);
 void FieldCB_ContinueScriptHandleMusic(void);
+void FieldCB_DaemonsWakeFromWhite(void);
 void FadeInFromBlack(void);
 void FadeTransition_FadeInOnReturnToStartMenu(void);
 void WarpFadeInScreen(void);

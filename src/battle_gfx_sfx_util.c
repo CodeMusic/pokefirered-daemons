@@ -487,6 +487,12 @@ static void DaemonsScrambleLatentPalette(u16 *pal)
     }
 }
 
+// T-254: a REMNANT met in the unread cave is not a battle but a dream -- it ends before the first turn.
+bool8 DaemonsRemnantDream(void)
+{
+    return IS_BATTLE_TYPE_GHOST_WITHOUT_SCOPE(gBattleTypeFlags) && DaemonsCaveUnperceived();
+}
+
 // Which battler's palettes the grey must leave alone, or -1: the opposing battler of a GHOST battle fought in the
 // unread cave. Asked once a frame by DaemonsGreyHalftoneFrame.
 s32 DaemonsLatentAbstractionBattler(void)

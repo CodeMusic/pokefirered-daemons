@@ -425,6 +425,14 @@ static void StartPokedudeBattle(void)
 
 static void CB2_EndWildBattle(void)
 {
+    // T-254: the dream wakes you at home -- the screen stays white until your own room fades in.
+    if (DaemonsRemnantDream())
+    {
+        CpuFill16(RGB_WHITE, (void *)PLTT, PLTT_SIZE);
+        ResetOamRange(0, 128);
+        SetMainCallback2(CB2_DaemonsWakeAtHome);
+        return;
+    }
     CpuFill16(0, (void *)BG_PLTT, BG_PLTT_SIZE);
     ResetOamRange(0, 128);
     if (IsPlayerDefeated(gBattleOutcome) == TRUE)

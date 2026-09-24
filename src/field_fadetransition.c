@@ -152,6 +152,26 @@ static void Task_ContinueScript(u8 taskId)
     }
 }
 
+// T-254: waking from the dream -- your room, faded in from white.
+static void Task_DaemonsWake(u8 taskId)
+{
+    if (FieldFadeTransitionBackgroundEffectIsFinished() == TRUE)
+    {
+        DestroyTask(taskId);
+        UnlockPlayerFieldControls();
+    }
+}
+
+void FieldCB_DaemonsWakeFromWhite(void)
+{
+    LockPlayerFieldControls();
+    Overworld_PlaySpecialMapMusic();
+    palette_bg_faded_fill_white();
+    FadeScreen(FADE_FROM_WHITE, 8);
+    palette_bg_faded_fill_white();
+    CreateTask(Task_DaemonsWake, 10);
+}
+
 void FieldCB_ContinueScriptHandleMusic(void)
 {
     LockPlayerFieldControls();
