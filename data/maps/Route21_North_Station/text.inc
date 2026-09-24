@@ -12,6 +12,15 @@ Route21_North_Station_Text_VisitorLog::
     .string "Each one is drawn from a different\n"
     .string "side of the table.$"
 
+@  T-235, DRAFT: the drawing once ARTSAI is bound.
+Route21_North_Station_Text_VisitorLogBlank::
+    .string "A VISITOR LOG.\p"
+    .string "One line is filled in.\p"
+    .string "CRYSTAL CLEAR. SEPT 3.\n"
+    .string "PURPOSE: SESSION.\p"
+    .string "A drawing is tucked under it.\n"
+    .string "The paper is blank now.$"
+
 Route21_North_Station_Text_DarkScreen::
     .string "The screen is still lit.\p"
 	.string "Nothing on it responds. The\n"

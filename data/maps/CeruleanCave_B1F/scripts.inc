@@ -44,7 +44,8 @@ CeruleanCave_B1F_EventScript_Mewtwo::
 	goto_if_eq VAR_RESULT, B_OUTCOME_WON, CeruleanCave_B1F_EventScript_DefeatedMewtwo
 	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, CeruleanCave_B1F_EventScript_RanFromMewtwo
 	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, CeruleanCave_B1F_EventScript_RanFromMewtwo
-	setflag FLAG_FOUGHT_MEWTWO
+@  T-235: never once-or-never. S.T.A.R.R. is how the player reaches THE ANNEX, so only BINDING it ends the
+@  encounter; beaten, fled from or anything else, it withdraws and is here again on the next visit.
 	release
 	end
 
@@ -62,8 +63,7 @@ CeruleanCave_B1F_EventScript_CaughtStarr::
 	end
 
 CeruleanCave_B1F_EventScript_DefeatedMewtwo::
-	setflag FLAG_FOUGHT_MEWTWO
-	goto EventScript_RemoveStaticMon
+	goto CeruleanCave_B1F_EventScript_RanFromMewtwo
 	end
 
 CeruleanCave_B1F_EventScript_RanFromMewtwo::

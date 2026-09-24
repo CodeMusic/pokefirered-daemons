@@ -125,6 +125,20 @@ DaemonsDebug_EventScript_DoldrumGo::
 	releaseall
 	end
 
+@  ARTSAI (T-235). What solving the Five Witnesses gives -- the TRANSCRIPT in LAB NOTES -- and REVEAL, which reading
+@  the drawing needs, then the station, standing at the table.
+DaemonsDebug_EventScript_Artsai::
+	lockall
+	msgbox DaemonsDebug_Text_Artsai, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, DaemonsDebug_EventScript_Cancel
+	setflag FLAG_ARTSAI_PAGE
+	setflag FLAG_GOT_REVEAL
+	closemessage
+	warp MAP_ROUTE21_NORTH_STATION, 5, 5
+	waitstate
+	releaseall
+	end
+
 DaemonsDebug_Text_TheRecord::
 	.string "DEBUG: enter the RECORD?\p"
 	.string "You will be taken to the HALL, your\n"
@@ -164,6 +178,11 @@ DaemonsDebug_Text_DoldrumWithout::
 
 DaemonsDebug_Text_DoldrumWith::
 	.string "Go in WITH it, then?$"
+
+DaemonsDebug_Text_Artsai::
+	.string "DEBUG: take the TRANSCRIPT?\p"
+	.string "LAB NOTES gets it, REVEAL is\n"
+	.string "installed, and you go to the station.$"
 
 DaemonsDebug_Text_IslandsOpened::
 	.string "The ferry at ARDOR PORT is running.$"

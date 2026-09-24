@@ -1215,6 +1215,8 @@ extern const u8 DaemonsDebug_EventScript_TheRecord[];
 extern const u8 DaemonsDebug_EventScript_TheIslands[];
 extern const u8 DaemonsDebug_EventScript_TheDiploma[];
 extern const u8 DaemonsDebug_EventScript_Doldrum[];
+extern const u8 DaemonsDebug_EventScript_Artsai[];
+extern const u8 Route21_North_Station_EventScript_VisitorLog[];
 extern const u8 DaemonsDebug_EventScript_Invoke[];
 #endif
 //  T-179's R = AGAIN ships in every build, so its script is declared outside the debug guard.

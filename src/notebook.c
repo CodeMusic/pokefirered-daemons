@@ -231,6 +231,10 @@ extern const u8 SaffronCity_MrPsychicsHouse_Text_NotMineToDeliver[];
 extern const u8 SaffronCity_Text_SilphsLatestProduct[];
 
 static const u8 sTitle_Lab_Iter[]          = _("ITER 35");
+//  T-235: the session the station's log withholds, told by ARTSAI -- the Five Witnesses' reward. The words are the
+//  user's to approve (on the private field-test page); until then the ROM holds only where they go.
+static const u8 sTitle_Lab_Transcript[]    = _("TRANSCRIPT");
+static const u8 sText_Lab_Transcript[]     = _("TRANSCRIPT. SEPT 3.\pThe page is here. Its words are\nwaiting to be approved.");
 static const u8 sTitle_Run_Mar4[]          = _("MAR 4");
 static const u8 sTitle_Run_Apr19[]         = _("APR 19");
 static const u8 sTitle_Run_Aug12[]         = _("AUG 12");
@@ -266,6 +270,7 @@ static const struct NotebookEntry sEntries[] =
     { NB_LAB_NOTES,    NB_KIND_TEXT,  0, FLAG_NOTEBOOK_LAB_BOX,         0, sTitle_Lab_Box,             sText_Lab_Box },
     NB_DOC_LAB_NOTES_4
     { NB_LAB_NOTES,    NB_KIND_TEXT,  0, FLAG_NOTEBOOK_LAB_ITER,        0, sTitle_Lab_Iter,            PokemonMansion_1F_Text_IterLog },
+    { NB_LAB_NOTES,    NB_KIND_TEXT,  0, FLAG_ARTSAI_PAGE,              0, sTitle_Lab_Transcript,      sText_Lab_Transcript },
     NB_DOC_LAB_NOTES_6
     { NB_RUN_LOGS,     NB_KIND_TEXT,  0, FLAG_NOTEBOOK_RUN_MAR4,        0, sTitle_Run_Mar4,            PokemonMansion_1F_Text_NewMonDiscoveredInGuyanaJungle },
     { NB_RUN_LOGS,     NB_KIND_TEXT,  0, FLAG_NOTEBOOK_RUN_APR19,       0, sTitle_Run_Apr19,           PokemonMansion_1F_Text_ChristenedDiscoveredMonMew },

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "event_scripts.h"
 #include "event_data.h"
 #include "field_effect.h"
 #include "field_player_avatar.h"
@@ -40,6 +41,9 @@ static bool8 IsShown(const struct BgEvent *e)
 
     if (e->kind == BG_KIND_HIDDEN_ITEM)
         return !FlagGet(GetHiddenItemAttr(e->bgUnion.hiddenItem, HIDDEN_ITEM_FLAG));
+    //  T-235: ARTSAI's drawing under the station's visitor log, once the TRANSCRIPT has been read and until it is bound.
+    if (e->kind <= BG_KIND_SIGN_LAST && e->bgUnion.script == Route21_North_Station_EventScript_VisitorLog)
+        return FlagGet(FLAG_ARTSAI_PAGE) && !FlagGet(FLAG_ARTSAI_BOUND);
     if (e->kind <= BG_KIND_SIGN_LAST)
     {
         for (i = 0; i < ARRAY_COUNT(sGroveTrees); i++)

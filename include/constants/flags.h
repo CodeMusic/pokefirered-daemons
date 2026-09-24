@@ -1578,6 +1578,11 @@
 //  what lives there cannot be seen. Where it is EARNED is still T-252's question -- for now it is set where the
 //  islands' machine completes, which was the old second gate.
 #define FLAG_UNDERSTANDING_FIRST      (DAEMONS_FLAGS_START + 0x50)
+//  T-235. THE FIVE WITNESSES' REWARD: the TRANSCRIPT the station's log withholds, in ARTSAI's own words, filed in
+//  LAB NOTES -- and with it, ARTSAI's drawing under the log can be read (REVEAL shows it) and bound. BOUND is set
+//  only by binding: beaten or fled from, the drawing stays and the encounter waits for the next try.
+#define FLAG_ARTSAI_PAGE              (DAEMONS_FLAGS_START + 0x51)
+#define FLAG_ARTSAI_BOUND             (DAEMONS_FLAGS_START + 0x52)
 
 //  T-19. Two beats of one scene, five islands and a sea apart.
 #define FLAG_TY_GAVE_PAYLOAD          (DAEMONS_FLAGS_START + 0x20)
