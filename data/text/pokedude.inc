@@ -41,7 +41,7 @@ Pokedude_Text_YayWeManagedToWin::
 Pokedude_Text_WaterNotVeryEffectiveAgainstGrass::
 	.string "CRYSTAL: SEEP is a FLOW-type\n"
 	.string "ROUTINE.\p"
-	.string "The target, WEED, is a\n"
+	.string "The target, SPRAWL, is a\n"
 	.string "GROWTH/CORRUPT-type DAEMON.\p"
 	.string "A GROWTH-type DAEMON takes FLOW\n"
 	.string "in its stride…\p"
@@ -76,7 +76,7 @@ Pokedude_Text_ButterfreeDoubleResistsGrass::
 	.string "usual damage.$"
 
 Pokedude_Text_ButterfreeGoodAgainstOddish::
-	.string "WEED is a GROWTH/CORRUPT-type\n"
+	.string "SPRAWL is a GROWTH/CORRUPT-type\n"
 	.string "DAEMON.\p"
 	.string "A VECTOR- or CONTEXT-type attack is\n"
 	.string "super effective against it.\p"
