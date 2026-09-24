@@ -1398,14 +1398,15 @@ Help_Text_DefineSound::
 	.string "You can choose between MONO and\n"
 	.string "STEREO sound output.$"
 
+@  T-179 took HELP out of BUTTON MODE and gave L and R jobs of their own; this page still offered the old
+@  setting and described the buttons as page-turners only. DRAFT wording.
 Help_Text_DefineButtonMode::
-	.string "Set to “HELP” to display help messages\n"
-	.string "by pressing the L or R Button. Set to\l"
-	.string "“LR” to enable the switching of the\l"
-	.string "INDEX pages and POOL POCKETS using\l"
-	.string "the L and R Buttons. Set to “L=A” to\l"
-	.string "make the L Button work the same as the\l"
-	.string "A Button.$"
+	.string "Set to “LR” and the L and R Buttons\n"
+	.string "do their own jobs: they turn the\l"
+	.string "INDEX and the POOL's POCKETS, read a\l"
+	.string "DAEMON in battle, and more. Set to\l"
+	.string "“L=A” to make the L Button work the\l"
+	.string "same as the A Button instead.$"
 
 Help_Text_DefineFrame::
 	.string "You may choose the design of the frame\n"
