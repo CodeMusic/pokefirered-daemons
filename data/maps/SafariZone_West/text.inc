@@ -4,8 +4,8 @@ SafariZone_West_Text_RestHouse::
 SafariZone_West_Text_PleaseFindWardensLostTeeth::
     .string "REQUEST NOTICE\p"
     .string "Please find the SAFARI WARDEN's\n"
-    .string "lost GOLD TEETH.\l"
-    .string "They're around here somewhere.\p"
+    .string "lost TOKEN.\l"
+    .string "It's around here somewhere.\p"
     .string "Reward offered!\n"
     .string "Contact: WARDEN$"
 

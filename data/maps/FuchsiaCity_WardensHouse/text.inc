@@ -12,11 +12,12 @@ FuchsiaCity_WardensHouse_Text_HeOhayHeHaHoo::
     .string "He ohay heh ha hoo ee haheh!$"
 
 FuchsiaCity_WardensHouse_Text_GaveGoldTeethToWarden::
-    .string "{PLAYER} gave the GOLD TEETH\n"
+    .string "{PLAYER} gave the TOKEN\n"
     .string "to the WARDEN.$"
 
+@ T-260: the TOKEN signs him back in, and what he says can be read again. DRAFT.
 FuchsiaCity_WardensHouse_Text_WardenPoppedInHisTeeth::
-    .string "The WARDEN popped in his teeth!$"
+    .string "The WARDEN signed in with it!$"
 
 FuchsiaCity_WardensHouse_Text_ThanksSonGiveYouSomething::
     .string "WARDEN: Thanks, son!\n"
