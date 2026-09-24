@@ -18,7 +18,7 @@ VermilionCity_PokemonFanClub_Text_SeelFarMoreAttractive::
     .string "By double, I would say.$"
 
 VermilionCity_PokemonFanClub_Text_Pikachu::
-    .string "SPIKE: Chu! Pikachu!$"
+    .string "SPIKE: Bzzt! Bzzzzt!$"
 
 VermilionCity_PokemonFanClub_Text_Seel::
     .string "HEATSINK: Kyuoo!$"

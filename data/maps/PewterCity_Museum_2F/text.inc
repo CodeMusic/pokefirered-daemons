@@ -45,7 +45,7 @@ PewterCity_Museum_1F_Text_RunningSpaceExhibitThisMonth::
     .string "This one is KNOWN FAULTS. It is\n"
     .string "about distance, and about the\l"
     .string "distance you think you have.\p"
-    .string "A researcher from Blanche wrote\n"
+    .string "A researcher from BLANCHE wrote\n"
     .string "the cards. She is collecting them.\p"
     .string "Into a module, she said. As though\n"
     .string "a fault were a part.$"

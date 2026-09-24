@@ -17,4 +17,4 @@ SevenIsland_SevaultCanyon_House_Text_YoureAllChipperNow::
     .string "Lucky!$"
 
 SevenIsland_SevaultCanyon_House_Text_Chansey::
-    .string "UPTIME: Chansi! Chansi!$"
+    .string "UPTIME: Hmm-hmm! Hmm-hmm!$"

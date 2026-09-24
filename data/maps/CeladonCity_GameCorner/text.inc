@@ -60,7 +60,7 @@ CeladonCity_GameCorner_Text_GymGuyAdvice::
     .string "champ in making!\p"
     .string "VERDIGRIS BENCHMARK's LEADER is\n"
     .string "TRELLIS!\l"
-    .string "She uses grasstype DAEMON!\p"
+    .string "She uses GROWTH-type DAEMON!\p"
     .string "She might appear docile, but don't\n"
     .string "be fooled!$"
 
