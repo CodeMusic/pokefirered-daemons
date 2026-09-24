@@ -552,9 +552,11 @@ static void PerspectiveInBattle(void)
                 PutPerspectiveText(me, them);
             return;
         }
-        if (JOY_NEW(B_BUTTON) || JOY_NEW(R_BUTTON))
+        //  HELD, NOT TOGGLED (the user, playing it on a cartridge, 2026-09-24): the look lasts exactly as long
+        //  as R is held down, and letting go is the way back -- a perspective you are holding, not one you left
+        //  switched on. L and SELECT still work with R held; B still puts it back too.
+        if (!JOY_HELD(R_BUTTON) || JOY_NEW(B_BUTTON))
         {
-            PlaySE(SE_SELECT);
             PerspectiveTeardown(me, them);
             PlayerHandleChooseAction();
         }
