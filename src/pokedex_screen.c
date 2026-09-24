@@ -2057,6 +2057,11 @@ static void DexScreen_DrawMarginOrEntry(u16 species)
         const u8 *text = (state == OPUS_MARGIN_CARRIED) ? margin->carried : margin->neglected;
         struct TextPrinterTemplate printerTemplate;
 
+        //  T-188: and REASON or INSTINCT, chosen at the title, decides the VOICE -- for the few daemons OPUS
+        //  had a second thought about. The save keeps the choice as the player's gender (FEMALE is INSTINCT).
+        if (gSaveBlock2Ptr->playerGender == FEMALE && margin->instinctCarried != NULL)
+            text = (state == OPUS_MARGIN_CARRIED) ? margin->instinctCarried : margin->instinctNeglected;
+
         printerTemplate.currentChar = text;
         printerTemplate.windowId = sPokedexScreenData->windowIds[2];
         printerTemplate.fontId = FONT_NORMAL;

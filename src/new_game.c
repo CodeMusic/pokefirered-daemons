@@ -180,6 +180,9 @@ static void DaemonsDebug_GrantTestKit(void)
         { ITEM_TEACHY_TV,     1 },
         { ITEM_FAME_CHECKER,  1 },
         { ITEM_NOTEBOOK,      1 },   // T-216: and a screen of its own
+        // T-188: and OPUS, without which the 386 daemons in the boxes (T-205) show no margin at all -- and the
+        // margins are now written in two voices, so a debug game started as INSTINCT has to be able to read them.
+        { ITEM_OPUS,          1 },
     };
     // No TM CASE or BERRY POUCH here on purpose: item.c grants each of them
     // the moment a TM or a berry is added, so listing them would be listing a
