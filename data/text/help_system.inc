@@ -1698,7 +1698,7 @@ Help_Text_TypeMatchupOwnPokemonRock::
 
 Help_Text_TypeMatchupOwnMovePsychic::
 	.string "Effect on the opposing DAEMON:\p"
-	.string "   {CIRCLE_DOT}: LOGIC, CORRUPT\p"
+	.string "   {CIRCLE_DOT}: LOGIC, CORRUPT, LATENT\p"
 	.string "   {TRIANGLE}: CONTEXT, HARDENED\p"
 	.string "   {BIG_MULT_X}: OPAQUE$"
 
@@ -1741,7 +1741,7 @@ Help_Text_TypeMatchupOwnMoveGhost::
 
 Help_Text_TypeMatchupOwnPokemonGhost::
 	.string "Effect of their ROUTINE on own DAEMON:\p"
-	.string "   {CIRCLE_DOT}: LATENT, OPAQUE\p"
+	.string "   {CIRCLE_DOT}: LATENT, CONTEXT, OPAQUE\p"
 	.string "   {TRIANGLE}: CORRUPT, SWARM\p"
 	.string "   {BIG_MULT_X}: CONTENT, LOGIC$"
 
