@@ -8,15 +8,15 @@ Route4_PokemonCenter_1F_Text_TeamRocketAttacksCerulean::
     .string "TEAM CORPUS is always in the news!$"
 
 Route4_PokemonCenter_1F_Text_LaddieBuyMagikarpForJust500::
-    .string "MAN: Hello there, laddie! Have I\n"
+    .string "MAN: Hello there, friend! Have I\n"
     .string "got a deal just for you!\p"
     .string "I'll let you have a secret DAEMON\n"
     .string "- a STUB - for just ¥500!\p"
     .string "So, you'll buy it, am I right?$"
 
 Route4_PokemonCenter_1F_Text_SweetieBuyMagikarpForJust500::
-    .string "MAN: Hello there, sweetie pie!\n"
-    .string "Have I got a deal just for you!\p"
+    .string "MAN: Hello there, friend! Have I\n"
+    .string "got a deal just for you!\p"
     .string "I'll let you have a secret DAEMON\n"
     .string "- a STUB - for just ¥500!\p"
     .string "So, you'll buy it, am I right?$"

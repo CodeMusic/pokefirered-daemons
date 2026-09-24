@@ -20,7 +20,7 @@ FuchsiaCity_WardensHouse_Text_WardenPoppedInHisTeeth::
     .string "The WARDEN signed in with it!$"
 
 FuchsiaCity_WardensHouse_Text_ThanksSonGiveYouSomething::
-    .string "WARDEN: Thanks, son!\n"
+    .string "WARDEN: Thanks, friend!\n"
     .string "You're a real lifesaver!\p"
     .string "No one could understand a word\n"
     .string "that I said, not a one!\p"
@@ -30,7 +30,7 @@ FuchsiaCity_WardensHouse_Text_ThanksSonGiveYouSomething::
     .string "trouble.$"
 
 FuchsiaCity_WardensHouse_Text_ThanksLassieGiveYouSomething::
-    .string "WARDEN: Thank you, lassie!\n"
+    .string "WARDEN: Thanks, friend!\n"
     .string "You're a real lifesaver!\p"
     .string "No one could understand a word\n"
     .string "that I said, not a one!\p"
