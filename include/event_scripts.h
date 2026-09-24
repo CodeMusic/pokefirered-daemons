@@ -1216,7 +1216,6 @@ extern const u8 DaemonsDebug_EventScript_TheIslands[];
 extern const u8 DaemonsDebug_EventScript_TheDiploma[];
 extern const u8 DaemonsDebug_EventScript_Doldrum[];
 extern const u8 DaemonsDebug_EventScript_Artsai[];
-extern const u8 Route21_North_Station_EventScript_VisitorLog[];
 extern const u8 DaemonsDebug_EventScript_Invoke[];
 #endif
 //  T-179's R = AGAIN ships in every build, so its script is declared outside the debug guard.
@@ -1291,5 +1290,8 @@ extern const u8 TradeCenter_EventScript_Chair0[];
 extern const u8 TradeCenter_EventScript_Chair1[];
 extern const u8 TradeCenter_ConfirmLeaveRoom[];
 extern const u8 TradeCenter_TerminateLink[];
+
+// T-235: REVEAL asks whether a sign is ARTSAI's drawing.
+extern const u8 Route21_North_Station_EventScript_VisitorLog[];
 
 #endif //GUARD_EVENT_SCRIPTS_H
