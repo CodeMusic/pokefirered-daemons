@@ -67,7 +67,7 @@ PewterCity_Museum_1F_Text_DontHaveSpaceForThis::
 
 PewterCity_Museum_1F_Text_WeHaveTwoFossilsOnExhibit::
     .string "We have two CORES on exhibit, both\n"
-    .string "recovered from Deadstack.\p"
+    .string "recovered from DEADSTACK.\p"
     .string "And a USERBOX, in the case by the\n"
     .string "stairs. Donated last year.$"
 
@@ -81,7 +81,7 @@ PewterCity_Museum_1F_Text_BeautifulPieceOfAmber::
 
 PewterCity_Museum_1F_Text_AerodactylFossil::
     .string "HELIX CORE. Recovered from\n"
-    .string "Deadstack. Contents unread.\p"
+    .string "DEADSTACK. Contents unread.\p"
     .string "KNOWN FAULT: it only ever tested\n"
     .string "what it already held.\p"
     .string "It was never wrong. Nothing it\n"
@@ -89,7 +89,7 @@ PewterCity_Museum_1F_Text_AerodactylFossil::
 
 PewterCity_Museum_1F_Text_KabutopsFossil::
     .string "DRUM CORE. Recovered from\n"
-    .string "Deadstack. Contents unread.\p"
+    .string "DEADSTACK. Contents unread.\p"
     .string "KNOWN FAULT: eight units voting,\n"
     .string "and they agreed every time.\p"
     .string "They were built from one drawing.$"

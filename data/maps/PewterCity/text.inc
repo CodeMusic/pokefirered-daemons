@@ -35,7 +35,7 @@ PewterCity_Text_DidYouCheckOutMuseum::
 
 PewterCity_Text_WerentThoseFossilsAmazing::
     .string "The CORES they brought up from\n"
-    .string "Deadstack. Did you see them?\p"
+    .string "DEADSTACK. Did you see them?\p"
     .string "Nobody knows what is on them.$"
 
 PewterCity_Text_ReallyYouHaveToGo::

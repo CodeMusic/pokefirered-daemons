@@ -73,7 +73,7 @@ PewterCity_Museum_1F_Text_SpaceShuttle::
     .string "Nobody asked it what it weighed.$"
 
 PewterCity_Museum_1F_Text_MeteoriteThatFellOnMtMoon::
-    .string "A stone that fell on Deadstack.\p"
+    .string "A stone that fell on DEADSTACK.\p"
     .string "It is thought to be a REFLECTION.\n"
     .string "Nobody has taken it apart.\p"
     .string "KNOWN FAULT: it has been called\n"
