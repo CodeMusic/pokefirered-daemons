@@ -5,7 +5,15 @@ CeruleanCity_MapScripts::
 CeruleanCity_OnTransition::
 	setworldmapflag FLAG_WORLD_MAP_CERULEAN_CITY
 	call_if_unset FLAG_GOT_SS_TICKET, CeruleanCity_EventScript_BlockExits
+	call_if_set FLAG_SYS_GAME_CLEAR, CeruleanCity_EventScript_CaveGuardStandsAside
 	end
+
+@  T-251: THE FIRST OF DOLDRUM CAVE'S TWO GATES IS PERMISSION. The guard's own line already says only the champion
+@  may go in, so once the REVIEW BOARD is beaten he stands aside. The second gate -- whether the player can read
+@  what is inside -- is not his to keep (FLAG_UNDERSTANDING_FIRST).
+CeruleanCity_EventScript_CaveGuardStandsAside::
+	setflag FLAG_HIDE_CERULEAN_CAVE_GUARD
+	return
 
 CeruleanCity_EventScript_BlockExits::
 	setobjectxyperm LOCALID_CERULEAN_POLICEMAN, 30, 12

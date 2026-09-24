@@ -78,6 +78,7 @@ enum StartMenuOption
     STARTMENU_DBG_RECORD,
     STARTMENU_DBG_ISLANDS,
     STARTMENU_DBG_DIPLOMA,
+    STARTMENU_DBG_DOLDRUM,
     STARTMENU_DBG_ENCOUNTER,
     STARTMENU_DBG_DAEMON,
     STARTMENU_DBG_LEVEL,
@@ -151,6 +152,7 @@ static bool8 DbgRemoveCallback(void);
 static bool8 DbgRecordCallback(void);
 static bool8 DbgIslandsCallback(void);
 static bool8 DbgDiplomaCallback(void);
+static bool8 DbgDoldrumCallback(void);
 static bool8 DbgJumpCallback(void);
 static bool8 DbgEncounterCallback(void);
 static bool8 DbgStepCallback(void);
@@ -209,6 +211,7 @@ static const struct MenuAction sStartMenuActionTable[] = {
     [STARTMENU_DBG_RECORD]  = { gText_DbgMenuRecord,  {.u8_void = DbgRecordCallback} },
     [STARTMENU_DBG_ISLANDS] = { gText_DbgMenuIslands, {.u8_void = DbgIslandsCallback} },
     [STARTMENU_DBG_DIPLOMA] = { gText_DbgMenuDiploma, {.u8_void = DbgDiplomaCallback} },
+    [STARTMENU_DBG_DOLDRUM] = { gText_DbgMenuDoldrum, {.u8_void = DbgDoldrumCallback} },
     [STARTMENU_DBG_ENCOUNTER] = { gText_DbgMenuEncounter, {.u8_void = DbgEncounterCallback} },
     // DAEMON and LEVEL are adjusted with LEFT/RIGHT, so A on either does
     // nothing but redraw -- which is also what makes A safe to lean on.
@@ -260,6 +263,7 @@ static const u8 *const sStartMenuDescPointers[] = {
     gStartMenuDesc_DbgRecord,
     gStartMenuDesc_DbgIslands,
     gStartMenuDesc_DbgDiploma,
+    gStartMenuDesc_DbgDoldrum,
     gStartMenuDesc_DbgEncounter,
     gStartMenuDesc_DbgDaemon,
     gStartMenuDesc_DbgLevel,
@@ -375,6 +379,7 @@ static void SetUpStartMenu(void)
         AppendToStartMenuItems(STARTMENU_DBG_RECORD);
         AppendToStartMenuItems(STARTMENU_DBG_ISLANDS);
         AppendToStartMenuItems(STARTMENU_DBG_DIPLOMA);
+        AppendToStartMenuItems(STARTMENU_DBG_DOLDRUM);
         AppendToStartMenuItems(STARTMENU_DBG_BACK);
         return;
     }
@@ -789,6 +794,7 @@ static bool8 IsDaemonsDebugCallback(void)
         || sStartMenuCallback == DbgRecordCallback
         || sStartMenuCallback == DbgIslandsCallback
         || sStartMenuCallback == DbgDiplomaCallback
+        || sStartMenuCallback == DbgDoldrumCallback
         || sStartMenuCallback == DbgJumpCallback
         || sStartMenuCallback == DbgEncounterCallback
         || sStartMenuCallback == DbgStepCallback
@@ -1178,6 +1184,11 @@ static bool8 DbgIslandsCallback(void)
 static bool8 DbgDiplomaCallback(void)
 {
     return DbgLeaveMenuForScript(DaemonsDebug_EventScript_TheDiploma);
+}
+
+static bool8 DbgDoldrumCallback(void)
+{
+    return DbgLeaveMenuForScript(DaemonsDebug_EventScript_Doldrum);
 }
 
 static bool8 DbgEncounterCallback(void)

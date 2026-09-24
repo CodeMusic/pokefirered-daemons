@@ -100,6 +100,31 @@ DaemonsDebug_EventScript_DiplomaAlready::
 	releaseall
 	end
 
+@  DOLDRUM CAVE (T-251). The guard stands aside at the REVIEW BOARD; this skips that, and asks which side of the
+@  second gate to stand on -- without the understanding (grey, recomposed, the LATENT abstraction) or with it.
+DaemonsDebug_EventScript_Doldrum::
+	lockall
+	msgbox DaemonsDebug_Text_DoldrumWithout, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, YES, DaemonsDebug_EventScript_DoldrumUnread
+	msgbox DaemonsDebug_Text_DoldrumWith, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, DaemonsDebug_EventScript_Cancel
+	setflag FLAG_UNDERSTANDING_FIRST
+	goto DaemonsDebug_EventScript_DoldrumGo
+	end
+
+DaemonsDebug_EventScript_DoldrumUnread::
+	clearflag FLAG_UNDERSTANDING_FIRST
+	goto DaemonsDebug_EventScript_DoldrumGo
+	end
+
+DaemonsDebug_EventScript_DoldrumGo::
+	setflag FLAG_HIDE_CERULEAN_CAVE_GUARD
+	closemessage
+	warp MAP_CERULEAN_CITY, 1, 14
+	waitstate
+	releaseall
+	end
+
 DaemonsDebug_Text_TheRecord::
 	.string "DEBUG: enter the RECORD?\p"
 	.string "You will be taken to the HALL, your\n"
@@ -132,6 +157,13 @@ DaemonsDebug_Text_DiplomaGiven::
 DaemonsDebug_Text_DiplomaAlready::
 	.string "DEBUG: you already hold\n"
 	.string "the DIPLOMA.$"
+
+DaemonsDebug_Text_DoldrumWithout::
+	.string "DEBUG: DOLDRUM CAVE.\p"
+	.string "Go in WITHOUT the understanding?$"
+
+DaemonsDebug_Text_DoldrumWith::
+	.string "Go in WITH it, then?$"
 
 DaemonsDebug_Text_IslandsOpened::
 	.string "The ferry at ARDOR PORT is running.$"

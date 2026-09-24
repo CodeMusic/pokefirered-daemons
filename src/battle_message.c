@@ -12,6 +12,7 @@
 #include "trainer_tower.h"
 #include "battle_setup.h"
 #include "field_specials.h"
+#include "fieldmap.h"
 #include "new_menu_helpers.h"
 #include "battle_controllers.h"
 #include "graphics.h"
@@ -395,6 +396,10 @@ static const u8 sText_WildPkmnAppearedPause[] = _("Wild {B_OPPONENT_MON1_NAME} a
 static const u8 sText_TwoWildPkmnAppeared[] = _("Wild {B_OPPONENT_MON1_NAME} and\n{B_OPPONENT_MON2_NAME} appeared!\p");
 static const u8 sText_GhostAppearedCantId[] = _("The GHOST appeared!\pDarn!\nThe GHOST can't be ID'd!\p");
 static const u8 sText_TheGhostAppeared[] = _("The GHOST appeared!\p");
+// T-251: what the LATENT abstraction says in DOLDRUM CAVE, before the cave is understood -- the user's line, and
+// the whole of it. The encounter is its other half; nothing names what is missing (craft rule 1).
+static const u8 sText_HeWhoSeesOne[] = _("HE WHO SEES ONE,\nSEES NONE.\p");
+static const u8 sText_HeWhoSeesOneTurn[] = _("HE WHO SEES ONE,\nSEES NONE.");
 static const u8 sText_SilphScopeUnveil[] = _("RESOLVER unveiled the GHOST's\nidentity!");
 static const u8 sText_TheGhostWas[] = _("The GHOST was COREFILE!\p\n");
 static const u8 sText_Trainer1WantsToBattle[] = _("{B_TRAINER1_CLASS} {B_TRAINER1_NAME}\nwould like to engage!\p");
@@ -1602,6 +1607,8 @@ void BufferStringBattle(u16 stringId)
             {
                 if (gBattleTypeFlags & BATTLE_TYPE_GHOST_UNVEILED)
                     stringPtr = sText_TheGhostAppeared;
+                else if (DaemonsCaveUnperceived())
+                    stringPtr = sText_HeWhoSeesOne;
                 else
                     stringPtr = sText_GhostAppearedCantId;
             }
@@ -1796,6 +1803,9 @@ void BufferStringBattle(u16 stringId)
         else
         {
             stringPtr = gBattleStringsTable[stringId - BATTLESTRINGS_TABLE_START];
+            // T-251: and each turn, in the unread cave, it says the same thing again.
+            if (stringId == STRINGID_GHOSTGETOUTGETOUT && DaemonsCaveUnperceived())
+                stringPtr = sText_HeWhoSeesOneTurn;
         }
         break;
     }

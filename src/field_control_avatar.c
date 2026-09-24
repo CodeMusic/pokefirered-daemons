@@ -7,6 +7,7 @@
 #include "event_object_movement.h"
 #include "event_scripts.h"
 #include "fieldmap.h"
+#include "random.h"
 #include "field_control_avatar.h"
 #include "teachy_tv.h"
 #if DAEMONS_DEBUG
@@ -1179,6 +1180,22 @@ static void SetupWarp(struct MapHeader *unused, s8 warpEventId, struct MapPositi
     if (warpEvent->mapNum == MAP_NUM(MAP_DYNAMIC))
     {
         SetWarpDestinationToDynamicWarp(warpEvent->warpId);
+    }
+    else if (DaemonsCaveUnperceived() && warpEvent->mapGroup == MAP_GROUP(MAP_CERULEAN_CAVE_1F)
+          && (warpEvent->mapNum == MAP_NUM(MAP_CERULEAN_CAVE_1F) || warpEvent->mapNum == MAP_NUM(MAP_CERULEAN_CAVE_2F)
+           || warpEvent->mapNum == MAP_NUM(MAP_CERULEAN_CAVE_B1F)))
+    {
+        // T-251: THE UNREAD CAVE IS RECOMPOSED EVERY TIME YOU MOVE THROUGH IT. Every tile is where it always is;
+        // what joins them is not. A ladder lands on any of the fourteen ladders of the first two floors, and never
+        // on the floor S.T.A.R.R. is on -- so it cannot be reached, or even stumbled on, before it can be seen.
+        // The way out to DOLDRUM is not a ladder and is left alone: the door always goes where it says.
+        u16 pick = Random() % 14;
+
+        if (pick < 8)
+            SetWarpDestinationToMapWarp(MAP_GROUP(MAP_CERULEAN_CAVE_1F), MAP_NUM(MAP_CERULEAN_CAVE_1F), pick);
+        else
+            SetWarpDestinationToMapWarp(MAP_GROUP(MAP_CERULEAN_CAVE_2F), MAP_NUM(MAP_CERULEAN_CAVE_2F), pick - 8);
+        UpdateEscapeWarp(position->x, position->y);
     }
     else
     {

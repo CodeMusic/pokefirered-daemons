@@ -284,6 +284,9 @@ OneIsland_PokemonCenter_1F_EventScript_GiveCelioSapphire::
 	special SetPostgameFlags
 	setflag FLAG_SYS_CAN_LINK_WITH_RS
 	setflag FLAG_HIDE_CERULEAN_CAVE_GUARD
+@  T-251 / T-252: a placeholder. This was the cave's second gate, and it is the right MOMENT for the first
+@  understanding -- an act, not a handover -- but where the understanding is earned is still T-252's question.
+	setflag FLAG_UNDERSTANDING_FIRST
 	setflag FLAG_HIDE_LORELEI_IN_HER_HOUSE
 	setvar VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 6
 	special InitRoamer

@@ -240,6 +240,10 @@ void StartWildBattle(void)
         DoSafariBattle();
     else if (CheckSilphScopeInPokemonTower(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum))
         DoGhostBattle();
+    // T-251: in DOLDRUM CAVE, before it is understood, whatever you meet is the one LATENT abstraction -- the
+    // tower's unresolved battle, which no RESOLVER opens here, because what is missing is not an instrument.
+    else if (DaemonsCaveUnperceived())
+        DoGhostBattle();
     else
         DoStandardWildBattle();
 }

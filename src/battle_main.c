@@ -3231,8 +3231,13 @@ u8 IsRunningFromBattleImpossible(void)
     else
         holdEffect = ItemId_GetHoldEffect(gBattleMons[gActiveBattler].item);
     gPotentialItemEffectBattler = gActiveBattler;
+    // T-251: AND NOTHING UNRESOLVED CAN HOLD YOU. In a GHOST battle without the RESOLVER the player cannot attack
+    // either, so a trapping ability on the other side was a soft-lock -- found in DOLDRUM CAVE, where a wild NO EXIT
+    // stood behind the LATENT abstraction ("prevents escape with NO EXIT!") and nothing could end the battle. The
+    // tower never met it only because nothing there traps.
     if (holdEffect == HOLD_EFFECT_CAN_ALWAYS_RUN
      || (gBattleTypeFlags & BATTLE_TYPE_LINK)
+     || IS_BATTLE_TYPE_GHOST_WITHOUT_SCOPE(gBattleTypeFlags)
      || gBattleMons[gActiveBattler].ability == ABILITY_RUN_AWAY)
         return BATTLE_RUN_SUCCESS;
     side = GetBattlerSide(gActiveBattler);

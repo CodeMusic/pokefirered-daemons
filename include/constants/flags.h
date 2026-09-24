@@ -1573,6 +1573,11 @@
 //  this game's daemons is one of them, and this is where the people who
 //  drew it work.
 #define FLAG_GOT_PIXELBYTE            (DAEMONS_FLAGS_START + 0x40)
+//  T-251 / T-252. THE FIRST UNDERSTANDING, and the second gate of DOLDRUM CAVE. The REVIEW BOARD is permission
+//  (the guard stands aside); this is perception. Without it the cave is grey, its ladders lead anywhere, and
+//  what lives there cannot be seen. Where it is EARNED is still T-252's question -- for now it is set where the
+//  islands' machine completes, which was the old second gate.
+#define FLAG_UNDERSTANDING_FIRST      (DAEMONS_FLAGS_START + 0x50)
 
 //  T-19. Two beats of one scene, five islands and a sea apart.
 #define FLAG_TY_GAVE_PAYLOAD          (DAEMONS_FLAGS_START + 0x20)

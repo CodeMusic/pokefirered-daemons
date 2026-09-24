@@ -5,6 +5,7 @@
 #include "new_menu_helpers.h"
 #include "quest_log.h"
 #include "fieldmap.h"
+#include "event_data.h"
 #include "constants/region_map_sections.h"
 #include "constants/maps.h"
 
@@ -856,7 +857,16 @@ static void CopyTilesetToVramUsingHeap(struct Tileset const *tileset, u16 numTil
 bool8 DaemonsIsHalftone(void)
 {
     return gMapHeader.regionMapSectionId == MAPSEC_LAVENDER_TOWN
-        || gMapHeader.regionMapSectionId == MAPSEC_POKEMON_TOWER;
+        || gMapHeader.regionMapSectionId == MAPSEC_POKEMON_TOWER
+        || DaemonsCaveUnperceived();
+}
+
+// T-251: AND DOLDRUM CAVE, UNTIL IT IS UNDERSTOOD. The second grey place, and the first whose grey can be lifted:
+// the REVIEW BOARD lets you in, and without the islands' understanding you cannot read what you walked into.
+// Everything that asks "is this Halftone?" -- the grey frame, the tint, the PERSPECTIVE flash -- asks this too.
+bool8 DaemonsCaveUnperceived(void)
+{
+    return gMapHeader.regionMapSectionId == MAPSEC_CERULEAN_CAVE && !FlagGet(FLAG_UNDERSTANDING_FIRST);
 }
 
 // IN HALFTONE EVERYTHING IS GREY (vision.md 8.6a, revised 2026-09-13): the
@@ -879,13 +889,20 @@ void DaemonsSetHalftoneColour(bool8 inColour)
 void DaemonsGreyHalftoneFrame(void)
 {
     u16 *colour;
-    s32 i;
+    s32 i, keep;
 
     if (sDaemonsHalftoneInColour || !DaemonsIsHalftone())
         return;
+    keep = DaemonsLatentAbstractionBattler();
     colour = gPlttBufferFaded;
     for (i = 0; i < (s32)PLTT_BUFFER_SIZE; i++, colour++)
     {
+        // T-251: the one thing in the unread cave that keeps its colour is the thing you cannot read -- the
+        // LATENT abstraction, whose palette is different every time (battle_gfx_sfx_util.c). Its sprite palette
+        // is the opponent battler's, and its copy for the battle animations is BG palette 8 + that battler.
+        if (keep >= 0 && ((i >= OBJ_PLTT_ID(keep) && i < OBJ_PLTT_ID(keep + 1))
+                       || (i >= BG_PLTT_ID(8 + keep) && i < BG_PLTT_ID(9 + keep))))
+            continue;
         if (*colour != (*colour & 0x1F) * 0x421)
             TintPalette_GrayScale(colour, 1);
     }

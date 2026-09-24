@@ -14,6 +14,7 @@
 #include "battle_anim.h"
 #include "battle_interface.h"
 #include "fieldmap.h"
+#include "random.h"
 #include "constants/battle_anim.h"
 #include "constants/moves.h"
 #include "constants/songs.h"
@@ -443,6 +444,8 @@ void BattleLoadPlayerMonSpriteGfx(struct Pokemon *mon, u8 battlerId)
     }
 }
 
+static void DaemonsScrambleLatentPalette(u16 *pal);
+
 void DecompressGhostFrontPic(struct Pokemon *unused, u8 battlerId)
 {
     u16 palOffset;
@@ -453,9 +456,44 @@ void DecompressGhostFrontPic(struct Pokemon *unused, u8 battlerId)
     palOffset = OBJ_PLTT_ID(battlerId);
     buffer = AllocZeroed(0x400);
     LZDecompressWram(gGhostPalette, buffer);
+    if (DaemonsCaveUnperceived())
+        DaemonsScrambleLatentPalette(buffer);
     LoadPalette(buffer, palOffset, PLTT_SIZE_4BPP);
     LoadPalette(buffer, BG_PLTT_ID(8) + BG_PLTT_ID(battlerId), PLTT_SIZE_4BPP);
     Free(buffer);
+}
+
+// T-251: THE LATENT ABSTRACTION. In DOLDRUM CAVE, before it is understood, every encounter is the one unresolved
+// thing -- and it is never the same twice: "without perspective you could perceive many different things." Each
+// time it draws a tint, three channel weights at random, and every colour keeps its BRIGHTNESS and takes the tint
+// -- because the ghost's own body is pale near-greys, and permuting the channels of a grey changes nothing (the
+// first cut did exactly that, and came up green twice). So the shape is always LATENT's and the colour never
+// repeats. It is the one colour left in the grey cave (fieldmap.c keeps it out of the grey), which makes the only
+// thing you can see clearly the thing you cannot read. Colour 0 is transparency and 15 is the outline; both stay.
+static void DaemonsScrambleLatentPalette(u16 *pal)
+{
+    u32 rnd = Random32();
+    s32 w[3], i, k;
+
+    for (k = 0; k < 3; k++)
+        w[k] = 6 + ((rnd >> (k * 6)) & 0x3F) * 25 / 63;     // 6 .. 31, a weight per channel
+    w[(rnd >> 30) % 3] = 31;                                // one channel full, so the tint is never muddy
+    for (i = 1; i < 15; i++)
+    {
+        s32 r = pal[i] & 0x1F, g = (pal[i] >> 5) & 0x1F, b = (pal[i] >> 10) & 0x1F;
+        s32 lum = (r * 77 + g * 150 + b * 29) >> 8;
+
+        pal[i] = RGB2(lum * w[0] / 31, lum * w[1] / 31, lum * w[2] / 31);
+    }
+}
+
+// Which battler's palettes the grey must leave alone, or -1: the opposing battler of a GHOST battle fought in the
+// unread cave. Asked once a frame by DaemonsGreyHalftoneFrame.
+s32 DaemonsLatentAbstractionBattler(void)
+{
+    if (!gMain.inBattle || !(gBattleTypeFlags & BATTLE_TYPE_GHOST) || !DaemonsCaveUnperceived())
+        return -1;
+    return GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
 }
 
 void DecompressTrainerFrontPic(u16 frontPicId, u8 battlerId)
