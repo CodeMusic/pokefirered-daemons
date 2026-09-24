@@ -2,6 +2,7 @@
 #include "gflib.h"
 #include "util.h"
 #include "decompress.h"
+#include "fieldmap.h"   // T-254: DaemonsGreyHalftoneFrame
 #include "task.h"
 
 enum
@@ -103,6 +104,11 @@ void TransferPlttBuffer(void)
     {
         void *src = gPlttBufferFaded;
         void *dest = (void *)PLTT;
+        //  T-254: AND AGAIN HERE, AT THE COPY. main.c greys the buffer at the end of each frame, and a frame that
+        //  runs long is interrupted by this vblank before it gets there -- so whatever it had just written would
+        //  reach the screen raw. (The flash that was filmed was BeginNormalPaletteFade's own copy, below; this
+        //  closes the other door.) A buffer main.c already settled costs a compare an entry.
+        DaemonsGreyHalftoneFrame();
         DmaCopy16(3, src, dest, PLTT_SIZE);
         sPlttBufferTransferPending = FALSE;
         if (gPaletteFade.mode == HARDWARE_FADE && gPaletteFade.active)
@@ -180,6 +186,11 @@ bool8 BeginNormalPaletteFade(u32 selectedPalettes, s8 delay, u8 startY, u8 targe
         UpdatePaletteFade();
         temp = gPaletteFade.bufferTransferDisabled;
         gPaletteFade.bufferTransferDisabled = FALSE;
+        //  T-254: THIS is the colour that flashed. Starting a fade copies the buffer to the screen at once,
+        //  mid-frame and outside the vblank -- the ball opening at a daemon's send-out does it -- so the unread
+        //  cave showed its terrain in colour for one frame, from the scanline the copy landed on down. Filmed
+        //  with the theatre's pburst, which dumps palette RAM beside each frame.
+        DaemonsGreyHalftoneFrame();
         CpuCopy32(gPlttBufferFaded, (void *)PLTT, PLTT_SIZE);
         sPlttBufferTransferPending = FALSE;
         if (gPaletteFade.mode == HARDWARE_FADE && gPaletteFade.active)
