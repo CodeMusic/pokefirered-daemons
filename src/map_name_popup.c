@@ -83,6 +83,9 @@ void MapNamePopup_QueueDayBanner(bool8 showNameFirst, bool32 palIntoFadedBuffer)
     {
         sDayBannerPending = TRUE;
         ShowMapNamePopup(palIntoFadedBuffer);
+        //  T-278: refused (quest log playback, or the flag) -- the day must not wait for the next town's name
+        if (FindTaskIdByFunc(Task_MapNamePopup) == TASK_NONE)
+            sDayBannerPending = FALSE;
     }
     else
     {
@@ -248,6 +251,7 @@ static void Task_MapNamePopup(u8 taskId)
         }
         return;
     case 8:
+        sDayBannerPending = FALSE;   // T-278: a banner never outlives the popup it was queued for
         DestroyTask(taskId);
         return;
     }
