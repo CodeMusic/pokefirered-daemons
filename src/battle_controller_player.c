@@ -4,6 +4,7 @@
 #include "item.h"
 #include "item_menu.h"
 #include "pokedex.h"
+#include "event_data.h"
 #include "trainer_pokemon_sprites.h"
 #include "link.h"
 #include "m4a.h"
@@ -267,6 +268,14 @@ static EWRAM_DATA u8 sIndexReadTask = 0;
 //  meaning, and the viewpoint changed underneath it.
 static EWRAM_DATA bool8 sIndexReadMine = FALSE;
 static EWRAM_DATA bool8 sIndexReadToPerspective = FALSE;
+
+//  T-280: before the national INDEX, an entry past the first 151 cannot be opened at all (DexScreen_ShowEntryOnly
+//  declines it), and the read used to fade to black and come back with nothing. Now L simply refuses, with the
+//  game's own "cannot" sound, and nothing moves.
+static bool8 CanReadInBattle(u16 species)
+{
+    return IsNationalPokedexEnabled() || SpeciesToNationalPokedexNum(species) <= KANTO_DEX_COUNT;
+}
 
 static void ReadIndexEntryInBattle(void)
 {
@@ -532,7 +541,11 @@ static void PerspectiveInBattle(void)
     case 1:
         //  From over here the daemon opposite you is YOUR OWN, so L reads it -- the same button doing the same
         //  thing, with the viewpoint moved. This is the whole of T-190's rule in two lines of code.
-        if (JOY_NEW(L_BUTTON))
+        if (JOY_NEW(L_BUTTON) && !CanReadInBattle(gBattleMons[gActiveBattler].species))
+        {
+            PlaySE(SE_FAILURE);
+        }
+        else if (JOY_NEW(L_BUTTON))
         {
             PlaySE(SE_SELECT);
             PerspectiveTeardown(me, them);
@@ -604,6 +617,11 @@ static void HandleInputChooseAction(void)
             break;
         }
         PlayerBufferExecCompleted();
+    }
+    else if (JOY_NEW(L_BUTTON) && !(gBattleTypeFlags & BATTLE_TYPE_LINK)
+          && !CanReadInBattle(gBattleMons[GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT)].species))
+    {
+        PlaySE(SE_FAILURE);   // T-280
     }
     else if (JOY_NEW(L_BUTTON) && !(gBattleTypeFlags & BATTLE_TYPE_LINK))
     {
