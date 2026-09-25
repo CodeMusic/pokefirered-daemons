@@ -1503,10 +1503,41 @@ static void RelightIfTheLightChanged(void)
         DaemonsRelightField();
 }
 
+#if DAEMONS_DEBUG
+//  T-287 (DEBUG build only): A WARP THE THEATRE CAN FIRE. Reaching a map without walking there used to mean writing
+//  a location into the save and continuing -- which restores the OLD map's view and people around the player, and
+//  in the Rocket Warehouse left them unable to move at all (engine.md trap 33). So the theatre pokes a destination
+//  here and sets ARMED, and the field warps there exactly as a script's `warp` does, once the player has control.
+struct DaemonsDebugWarp
+{
+    u8 armed;
+    u8 mapGroup;
+    u8 mapNum;
+    u8 unused;
+    s16 x;
+    s16 y;
+};
+EWRAM_DATA struct DaemonsDebugWarp gDaemonsDebugWarp = {0};
+
+static void WarpIfTheTheatreAsks(void)
+{
+    if (!gDaemonsDebugWarp.armed || ArePlayerFieldControlsLocked() || gPaletteFade.active)
+        return;
+    gDaemonsDebugWarp.armed = FALSE;
+    SetWarpDestination(gDaemonsDebugWarp.mapGroup, gDaemonsDebugWarp.mapNum, WARP_ID_NONE,
+                       gDaemonsDebugWarp.x, gDaemonsDebugWarp.y);
+    DoWarp();
+    ResetInitialPlayerAvatarState();
+}
+#endif
+
 static void OverworldBasic(void)
 {
     ScriptContext_RunScript();
     RelightIfTheLightChanged();
+#if DAEMONS_DEBUG
+    WarpIfTheTheatreAsks();
+#endif
     RunTasks();
     AnimateSprites();
     CameraUpdate();
