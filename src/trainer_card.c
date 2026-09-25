@@ -109,6 +109,9 @@ static void SetUpTrainerCardTask(void);
 static bool8 PrintAllOnCardFront(void);
 static bool8 PrintAllOnCardBack(void);
 static void DrawUnderstandingBrain(void);
+static void DrawBenchmarksView(void);
+static void RedrawCardFront(void);
+static EWRAM_DATA u8 sMarksCursor = 0;
 static void BufferTextForCardBack(void);
 static void PrintNameOnCardFront(void);
 static void PrintIdOnCard(void);
@@ -489,6 +492,7 @@ static void CloseTrainerCard(u8 taskId)
 #define STATE_CLOSE_CARD          14
 #define STATE_WAIT_LINK_PARTNER   15
 #define STATE_CLOSE_CARD_LINK     16
+#define STATE_HANDLE_INPUT_MARKS  20   // T-272: the BENCHMARKS view, on R
 
 static void Task_TrainerCard(u8 taskId)
 {
@@ -559,7 +563,15 @@ static void Task_TrainerCard(u8 taskId)
             sTrainerCardDataPtr->timeColonNeedDraw = FALSE;
         }
 
-        if (JOY_NEW(A_BUTTON))
+        //  T-272: R turns the front to the BENCHMARKS -- your own card only
+        if (JOY_NEW(R_BUTTON) && !sTrainerCardDataPtr->isLink && sTrainerCardDataPtr->cardType == CARD_TYPE_FRLG)
+        {
+            PlaySE(SE_SELECT);
+            sMarksCursor = 0;
+            DrawBenchmarksView();
+            sTrainerCardDataPtr->mainState = STATE_HANDLE_INPUT_MARKS;
+        }
+        else if (JOY_NEW(A_BUTTON))
         {
             SetHelpContext(HELPCONTEXT_TRAINER_CARD_BACK);
             FlipTrainerCard();
@@ -577,6 +589,20 @@ static void Task_TrainerCard(u8 taskId)
                 BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
                 sTrainerCardDataPtr->mainState = STATE_CLOSE_CARD;
             }
+        }
+        break;
+    case STATE_HANDLE_INPUT_MARKS:
+        if (JOY_NEW(DPAD_RIGHT) || JOY_NEW(DPAD_LEFT))
+        {
+            sMarksCursor = (sMarksCursor + (JOY_NEW(DPAD_RIGHT) ? 1 : NUM_BADGES - 1)) % NUM_BADGES;
+            PlaySE(SE_SELECT);
+            DrawBenchmarksView();
+        }
+        else if (JOY_NEW(L_BUTTON) || JOY_NEW(B_BUTTON) || JOY_NEW(R_BUTTON))
+        {
+            PlaySE(SE_SELECT);
+            RedrawCardFront();
+            sTrainerCardDataPtr->mainState = STATE_HANDLE_INPUT_FRONT;
         }
         break;
     case STATE_WAIT_FLIP_TO_BACK:
@@ -1076,6 +1102,62 @@ static bool8 PrintAllOnCardFront(void)
     }
     sTrainerCardDataPtr->printState++;
     return FALSE;
+}
+
+//  T-272: THE BENCHMARKS (the user, 2026-09-25: "select any one and it tells you what the benchmark certifies"). R
+//  turns the card's figures into the BENCHMARKS: LEFT and RIGHT move an underline along the MARKS row, and the mark's
+//  name and what it certifies take the figures' place -- all eight, since 5.x holds that the concepts exist whether
+//  or not you hold the certificate, and one you do not hold says so. L, B or R puts the figures back. Each line is
+//  the mark's concept from the bible's table (SLATE representation ... TRUE alignment), said without its name.
+//  DRAFT WORDING (T-272), every line below, until the user approves it on the private field-test page.
+static const u8 sText_Benchmarks[]  = _("BENCHMARKS");
+static const u8 sText_NotYetHeld[]  = _("Not yet held.");
+static const u8 sCertifies1[] = _("A record that\nreads the same\nwhen read again.");
+static const u8 sCertifies2[] = _("Better by small\nsteps, each one\na little downhill.");
+static const u8 sCertifies3[] = _("Telling what\narrived from what\nyou expected.");
+static const u8 sCertifies4[] = _("A line through\nthe points, not\nthrough every one.");
+static const u8 sCertifies5[] = _("Seeing where\nthe peak misses\nthe middle.");
+static const u8 sCertifies6[] = _("Knowing what the\nbrackets hold,\nand what they leave.");
+static const u8 sCertifies7[] = _("Hot to wander,\ncool to settle,\nand knowing which.");
+static const u8 sCertifies8[] = _("Straight by the\nline that hangs,\nnot by the eye.");
+static const u8 *const sMarkCertifies[NUM_BADGES] = {
+    sCertifies1, sCertifies2, sCertifies3, sCertifies4, sCertifies5, sCertifies6, sCertifies7, sCertifies8,
+};
+static const u8 *const sMarkNames[NUM_BADGES] = {
+    gTeachyTvString_Mark1, gTeachyTvString_Mark2, gTeachyTvString_Mark3, gTeachyTvString_Mark4,
+    gTeachyTvString_Mark5, gTeachyTvString_Mark6, gTeachyTvString_Mark7, gTeachyTvString_Mark8,
+};
+
+#define MARKS_TEXT_W 134   // the figures' side of the card, clear of the brain and the player
+#define MARKS_ROW_Y  137   // just under the MARKS row, in window 1's pixels
+#define MARKS_TEXT_X 20    // past the card's bullet points
+
+static void DrawBenchmarksView(void)
+{
+    u8 i;
+
+    //  The figures' side, and under the brain the right-aligned numbers' last digits, which run to x 150.
+    FillWindowPixelRect(1, PIXEL_FILL(0), 0, 20, MARKS_TEXT_W, 26);
+    FillWindowPixelRect(1, PIXEL_FILL(0), 0, 46, 152, 70);
+    FillWindowPixelRect(1, PIXEL_FILL(0), 0, MARKS_ROW_Y, 27 * 8, 2);
+    //  In the card's greys only: the stat colours are red, and red is a type's hue (9.4). Clear of the card's
+    //  bullet points, which are its tiles and stay.
+    AddTextPrinterParameterized3(1, FONT_NORMAL, MARKS_TEXT_X, 22, sTrainerCardTextColors, TEXT_SKIP_DRAW, sText_Benchmarks);
+    AddTextPrinterParameterized3(1, FONT_NORMAL, MARKS_TEXT_X, 40, sTrainerCardTextColors, TEXT_SKIP_DRAW, sMarkNames[sMarksCursor]);
+    AddTextPrinterParameterized3(1, FONT_NORMAL, MARKS_TEXT_X, 58, sTrainerCardTextColors, TEXT_SKIP_DRAW, sMarkCertifies[sMarksCursor]);
+    if (!sTrainerCardDataPtr->hasBadge[sMarksCursor])
+        AddTextPrinterParameterized3(1, FONT_NORMAL, MARKS_TEXT_X, 100, sTrainerCardTextColors, TEXT_SKIP_DRAW, sText_NotYetHeld);
+    i = sMarksCursor;
+    FillWindowPixelRect(1, PIXEL_FILL(TEXT_COLOR_DARK_GRAY), 24 + 24 * i, MARKS_ROW_Y, 16, 2);
+    DrawTrainerCardWindow(1);
+}
+
+static void RedrawCardFront(void)
+{
+    FillWindowPixelBuffer(1, PIXEL_FILL(0));
+    while (!PrintAllOnCardFront())
+        ;
+    DrawTrainerCardWindow(1);
 }
 
 //  T-271: THE BRAIN, WHICH LIGHTS AND NEVER COUNTS (decided by the user 2026-09-25). Understandings are shown in the
