@@ -1224,6 +1224,7 @@ extern const u8 DaemonsDebug_EventScript_Invoke[];
 extern const u8 Daemons_EventScript_Again[];
 extern const u8 EventScript_Notebook[];   // T-216
 extern const u8 EventScript_Textbook[];   // T-219
+extern const u8 EventScript_Guide[];      // T-300
 extern const u8 EventScript_Diploma[];    // T-218
 extern const u8 Daemons_EventScript_OpusWrote[];   // T-203
 extern const u8 PalletTown_PlayersHouse_2F_EventScript_PC[];

@@ -722,6 +722,20 @@ void FieldUseFunc_Diploma(u8 taskId)
     SetUpItemUseOnFieldCallback(taskId);
 }
 
+//  T-300: THE GUIDE opens on its cover, in the book reader beside the TEXTBOOK.
+static void ItemUseOnFieldCB_Guide(u8 taskId)
+{
+    LockPlayerFieldControls();
+    ScriptContext_SetupScript(EventScript_Guide);
+    DestroyTask(taskId);
+}
+
+void FieldUseFunc_Guide(u8 taskId)
+{
+    sItemUseOnFieldCB = ItemUseOnFieldCB_Guide;
+    SetUpItemUseOnFieldCallback(taskId);
+}
+
 void FieldUseFunc_FameChecker(u8 taskId)
 {
     ItemUse_SetQuestLogEvent(QL_EVENT_USED_ITEM, NULL, gSpecialVar_ItemId, 0xFFFF);

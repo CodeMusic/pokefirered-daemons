@@ -517,6 +517,8 @@ const u32 gItemIcon_Textbook[] = INCBIN_U32("graphics/items/icons/textbook.4bpp.
 const u32 gItemIconPalette_Textbook[] = INCBIN_U32("graphics/items/icon_palettes/textbook.gbapal.lz");
 const u32 gItemIcon_Diploma[] = INCBIN_U32("graphics/items/icons/diploma.4bpp.lz");
 const u32 gItemIconPalette_Diploma[] = INCBIN_U32("graphics/items/icon_palettes/diploma.gbapal.lz");
+const u32 gItemIcon_Guide[] = INCBIN_U32("graphics/items/icons/guide.4bpp.lz");   // T-302: DAEMONS tools/genguide.py
+const u32 gItemIconPalette_Guide[] = INCBIN_U32("graphics/items/icon_palettes/guide.gbapal.lz");
 const u32 gItemIconPalette_UpGrade[] = INCBIN_U32("graphics/items/icon_palettes/up_grade.gbapal.lz");
 
 const u32 gItemIcon_ShellBell[] = INCBIN_U32("graphics/items/icons/shell_bell.4bpp.lz");

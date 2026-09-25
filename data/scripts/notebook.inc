@@ -35,6 +35,15 @@ EventScript_Textbook::
 	releaseall
 	end
 
+@ T-300: THE PROGRAMMER'S GUIDE TO THE HUMAN MIND, opened at its cover.
+EventScript_Guide::
+	lockall
+	fadescreen FADE_TO_BLACK
+	special Guide_Open
+	waitstate
+	releaseall
+	end
+
 @ T-218/T-219: a document the player has just read is filed. Said once, and only if the NOTEBOOK is held --
 @ before CAIRN hands it over, the page is still copied out (every entry is a flag), just not into anything.
 EventScript_NotebookCopied::

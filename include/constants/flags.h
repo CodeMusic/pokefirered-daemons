@@ -1593,6 +1593,10 @@
 //  page in LAB NOTES that answers it from what the save already holds, written again every time it is opened.
 #define FLAG_INDEX_WRITES             (DAEMONS_FLAGS_START + 0x55)
 
+//  T-300. THE PROGRAMMER'S GUIDE TO THE HUMAN MIND, taken from the bookshelf in ONE ISLAND's second house. 0x60 up is
+//  the Guide's, so the clock session's next flags after 0x55 do not meet it.
+#define FLAG_GOT_GUIDE                (DAEMONS_FLAGS_START + 0x60)
+
 //  T-19. Two beats of one scene, five islands and a sea apart.
 #define FLAG_TY_GAVE_PAYLOAD          (DAEMONS_FLAGS_START + 0x20)
 #define FLAG_CRYSTAL_READ_PAYLOAD     (DAEMONS_FLAGS_START + 0x21)

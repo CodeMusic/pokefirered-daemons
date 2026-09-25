@@ -40,13 +40,13 @@
 //  text is printed with a transparent background, so the rules show through it as they would through ink.
 //  Everything lives on the HEAP; EWRAM has under a kilobyte free.
 
-enum { BOOK_NOTEBOOK, BOOK_TEXTBOOK };
-enum { VIEW_PAGE, VIEW_CONTENTS, VIEW_CHAPTER, VIEW_TOPIC };
+enum { BOOK_NOTEBOOK, BOOK_TEXTBOOK, BOOK_GUIDE };
+enum { VIEW_PAGE, VIEW_CONTENTS, VIEW_CHAPTER, VIEW_TOPIC, VIEW_COVER, VIEW_GUIDE_CONTENTS, VIEW_GUIDE_ENTRY };
 
 #define WIN_BOOK        0
-#define BR_MAX_LINES    48
+#define BR_MAX_LINES    96      // T-300: a Guide entry runs to three spreads
 #define BR_TEXT_SIZE    1000
-#define BR_LINES_SIZE   1100
+#define BR_LINES_SIZE   2200
 #define BR_FONT         FONT_NORMAL
 #define BR_SMALL        FONT_SMALL
 #define BR_WIN_BYTES    (30 * 20 * TILE_SIZE_4BPP)
@@ -90,6 +90,12 @@ struct BookReader
     u8 cursor;              // CONTENTS: 0..6.  CHAPTER: 0..4.
     u8 topic;               // 0..4
     u8 lineCount;
+    u8 section;             // GUIDE: the section the contents page is on
+    u8 entry;               // GUIDE: the entry, counted through the whole book
+    u8 spread;              // GUIDE: which spread of the entry
+    u8 spreadCount;
+    u8 bodyTop;             // GUIDE: where the first spread's left page starts its text, under the title
+    bool8 focusRight;       // GUIDE contents: the cursor is in the chapters, not the sections
     u8 *blank;              // the empty sheet or spread, drawn once: filling it per pixel costs a quarter second
     u16 lineStart[BR_MAX_LINES];
     u8 title[40];
@@ -229,6 +235,19 @@ static const u8 *const sTopics[TB_CHAPTERS + 1][TB_TOPICS] =
     [6] = { ViridianCity_School_6F_Text_Framing, ViridianCity_School_6F_Text_Anchors, ViridianCity_School_6F_Text_Confirming, ViridianCity_School_6F_Text_Hindsight, ViridianCity_School_6F_Text_Fallacies },
     [7] = { ViridianCity_School_7F_Text_Surprise, ViridianCity_School_7F_Text_Correction, ViridianCity_School_7F_Text_Steps, ViridianCity_School_7F_Text_Mistakes, ViridianCity_School_7F_Text_Certainty },
 };
+
+//  ---- T-300: THE PROGRAMMER'S GUIDE TO THE HUMAN MIND. Its text, its palette and its cover are all written by DAEMONS
+//  tools/genguide.py -- the words from docs/guide.md (DRAFT until the user approves them), the sixteen colours as this
+//  file's palette roles, and the cover from the PDF's own. Its pages are the cover's charcoal, its ink near-white.
+struct GuideSection { const u8 *label; const u8 *heading; u8 first; u8 count; };
+struct GuideEntry { const u8 *shortTitle; const u8 *title; const u8 *text; };
+#include "data/guide.h"
+
+static const u16 sGuidePal[] = INCBIN_U16("graphics/book/guide_cover.gbapal");
+static const u32 sGuideCover[] = INCBIN_U32("graphics/book/guide_cover.4bpp");
+
+//  DRAFT WORDING (T-300): the Guide's contents heading, and the spread counter's separator.
+static const u8 sText_GuideContents[] = _("CONTENTS");
 
 static void Task_BookInit(u8 taskId);
 static void Task_BookInput(u8 taskId);
@@ -579,14 +598,172 @@ static void DrawTopic(void)
     CopyWindowToVram(WIN_BOOK, COPYWIN_GFX);
 }
 
+//  ---------------------------------------------------------------- THE GUIDE: its cover, then an open book in its colours
+//
+//  COVER     the cover itself, drawn by the tool from the PDF's: A opens the book, B puts it away.
+//  CONTENTS  the sections on the left page -- INTRODUCTION, the six PARTS, CONCLUSION, APPENDICES -- and the chapters
+//            of the one under the cursor on the right. UP and DOWN move within a page; A or RIGHT crosses to the
+//            chapters, LEFT or B comes back. A on a chapter opens it.
+//  ENTRY     the chapter's full title at the head of the left page, then its text across the spread, spread after
+//            spread. A, RIGHT or R turn on (past the last spread, RIGHT goes on to the next chapter); LEFT or L turn
+//            back. B returns to the contents.
+
+static void DrawGuideBook(void)
+{
+    u8 i;
+    s16 x;
+
+    DrawOpenBook();
+    for (i = 0; i < 2; i++)                                                 // a trace along the head of each page
+    {
+        x = (i == 0 ? TB_LEFT_X : TB_RIGHT_X) + TB_TEXT_INSET;
+        Rect(C_RULE, x, 7, TB_TEXT_W, 1);
+        Rect(C_MARGIN, x - 2, 6, 2, 3);
+        Rect(C_MARGIN, x + TB_TEXT_W, 6, 2, 3);
+    }
+}
+
+static u8 GuideSectionOf(u8 entry)
+{
+    u8 k;
+
+    for (k = GUIDE_SECTIONS - 1; k > 0; k--)
+    {
+        if (entry >= sGuideSections[k].first)
+            break;
+    }
+    return k;
+}
+
+static void DrawGuideCover(void)
+{
+    CpuFastCopy(sGuideCover, gWindows[WIN_BOOK].tileData, BR_WIN_BYTES);
+    CopyWindowToVram(WIN_BOOK, COPYWIN_GFX);
+}
+
+#define GC_SECTION_TOP   30
+#define GC_SECTION_PITCH 12
+#define GC_ENTRY_TOP     34
+#define GC_ENTRY_PITCH   18
+
+static void DrawGuideContents(void)
+{
+    const struct GuideSection *sec = &sGuideSections[sBook->section];
+    u8 k, n;
+    s16 x = TB_LEFT_X + TB_TEXT_INSET, rx = TB_RIGHT_X + TB_TEXT_INSET, y;
+
+    Background(DrawGuideBook);
+    Print(BR_FONT, sInk, TB_LEFT_X + (TB_PAGE_W - Width(BR_FONT, sText_GuideContents)) / 2, 10, sText_GuideContents);
+    Rect(C_RULE, x, 26, TB_TEXT_W, 1);
+    for (k = 0; k < GUIDE_SECTIONS; k++)
+    {
+        y = GC_SECTION_TOP + k * GC_SECTION_PITCH;
+        if (k == sBook->section)
+        {
+            if (sBook->focusRight)
+                Rect(C_MARGIN, x - 5, y + 4, 2, 3);                        // the section the chapters belong to
+            else
+                Rect(C_HIGHLIGHT, x - 3, y - 1, TB_TEXT_W + 4, GC_SECTION_PITCH);
+        }
+        Print(BR_FONT, sInk, x, y - 2, sGuideSections[k].label);
+    }
+
+    n = Reflow(sec->heading, TB_TEXT_W, BR_SMALL);                         // the section's own heading, small
+    for (k = 0; k < n && k < 2; k++)
+        Print(BR_SMALL, sFaint, rx, 9 + k * 9, Line(k));
+    Rect(C_RULE, rx, 28, TB_TEXT_W, 1);
+    for (k = 0; k < sec->count; k++)
+    {
+        y = GC_ENTRY_TOP + k * GC_ENTRY_PITCH;
+        if (sBook->focusRight && k == sBook->cursor)
+            Rect(C_HIGHLIGHT, rx - 3, y - 1, TB_TEXT_W + 4, GC_ENTRY_PITCH - 2);
+        Print(BR_FONT, sInk, rx, y, sGuideEntries[sec->first + k].shortTitle);
+    }
+    CopyWindowToVram(WIN_BOOK, COPYWIN_GFX);
+}
+
+#define GE_TITLE_TOP   17
+#define GE_TITLE_PITCH 10
+#define GE_PAGE_LINES  TB_TOPIC_RIGHT_LINES
+
+//  Where the text starts under the title, and how many spreads it needs: the first spread's left page gives the
+//  title its room, and every page after that is a full page of text.
+static void GuideLayout(void)
+{
+    const struct GuideEntry *e = &sGuideEntries[sBook->entry];
+    u8 titleLines = Reflow(e->title, TB_TEXT_W, BR_SMALL);
+    u8 first, n;
+
+    sBook->bodyTop = GE_TITLE_TOP + titleLines * GE_TITLE_PITCH + 8;
+    first = (TB_FOLIO_Y - 4 - sBook->bodyTop) / TB_PITCH + GE_PAGE_LINES;
+    n = Reflow(e->text, TB_TEXT_W, BR_FONT);
+    sBook->spreadCount = 1;
+    if (n > first)
+        sBook->spreadCount += (n - first + 2 * GE_PAGE_LINES - 1) / (2 * GE_PAGE_LINES);
+    if (sBook->spread >= sBook->spreadCount)
+        sBook->spread = sBook->spreadCount - 1;
+}
+
+static void DrawGuideEntry(void)
+{
+    const struct GuideEntry *e = &sGuideEntries[sBook->entry];
+    u8 buf[12], *p;
+    u8 i, n, leftLines, start, leftTop;
+    s16 x = TB_LEFT_X + TB_TEXT_INSET, rx = TB_RIGHT_X + TB_TEXT_INSET;
+
+    GuideLayout();
+    Background(DrawGuideBook);
+    if (sBook->spread == 0)
+    {
+        Print(BR_SMALL, sFaint, x, 9, sGuideSections[GuideSectionOf(sBook->entry)].label);
+        n = Reflow(e->title, TB_TEXT_W, BR_SMALL);
+        for (i = 0; i < n; i++)
+            Print(BR_SMALL, sInk, x, GE_TITLE_TOP + i * GE_TITLE_PITCH, Line(i));
+        Rect(C_RULE, x, sBook->bodyTop - 5, TB_TEXT_W, 1);
+        leftTop = sBook->bodyTop;
+        leftLines = (TB_FOLIO_Y - 4 - leftTop) / TB_PITCH;
+        start = 0;
+    }
+    else
+    {
+        leftTop = TB_TOPIC_RIGHT_TOP;
+        leftLines = GE_PAGE_LINES;
+        start = (TB_FOLIO_Y - 4 - sBook->bodyTop) / TB_PITCH + GE_PAGE_LINES + (sBook->spread - 1) * 2 * GE_PAGE_LINES;
+    }
+
+    n = Reflow(e->text, TB_TEXT_W, BR_FONT);
+    for (i = 0; i < leftLines && start + i < n; i++)
+        Print(BR_FONT, sInk, x, leftTop + i * TB_PITCH, Line(start + i));
+    start += leftLines;
+    for (i = 0; i < GE_PAGE_LINES && start + i < n; i++)
+        Print(BR_FONT, sInk, rx, TB_TOPIC_RIGHT_TOP + i * TB_PITCH, Line(start + i));
+
+    if (sBook->spreadCount > 1)                                             // 2/3, and a dog-ear while there is more
+    {
+        p = ConvertIntToDecimalStringN(buf, sBook->spread + 1, STR_CONV_MODE_LEFT_ALIGN, 1);
+        *p++ = CHAR_SLASH;
+        ConvertIntToDecimalStringN(p, sBook->spreadCount, STR_CONV_MODE_LEFT_ALIGN, 1);
+        Print(BR_SMALL, sFaint, TB_RIGHT_X + (TB_PAGE_W - Width(BR_SMALL, buf)) / 2, TB_FOLIO_Y, buf);
+        if (sBook->spread + 1 < sBook->spreadCount)
+        {
+            for (i = 0; i < 6; i++)
+                Rect(C_MARGIN, TB_RIGHT_X + TB_PAGE_W - 6 + i, 147 - i, 6 - i, 1);
+        }
+    }
+    CopyWindowToVram(WIN_BOOK, COPYWIN_GFX);
+}
+
 static void Draw(void)
 {
     switch (sBook->view)
     {
-    case VIEW_PAGE:     DrawNotebook(); break;
-    case VIEW_CONTENTS: DrawContents(); break;
-    case VIEW_CHAPTER:  DrawChapter();  break;
-    case VIEW_TOPIC:    DrawTopic();    break;
+    case VIEW_PAGE:           DrawNotebook();      break;
+    case VIEW_CONTENTS:       DrawContents();      break;
+    case VIEW_CHAPTER:        DrawChapter();       break;
+    case VIEW_TOPIC:          DrawTopic();         break;
+    case VIEW_COVER:          DrawGuideCover();    break;
+    case VIEW_GUIDE_CONTENTS: DrawGuideContents(); break;
+    case VIEW_GUIDE_ENTRY:    DrawGuideEntry();    break;
     }
 }
 
@@ -743,6 +920,122 @@ static void Input_Topic(void)
     }
 }
 
+static void Input_Cover(void)
+{
+    if (JOY_NEW(B_BUTTON))
+    {
+        Leave();
+    }
+    else if (JOY_NEW(A_BUTTON))
+    {
+        sBook->view = VIEW_GUIDE_CONTENTS;
+        Turn();
+    }
+}
+
+static void Input_GuideContents(void)
+{
+    u8 count = sGuideSections[sBook->section].count;
+
+    if (!sBook->focusRight)
+    {
+        if (JOY_NEW(B_BUTTON))
+        {
+            sBook->view = VIEW_COVER;
+            Turn();
+        }
+        else if (JOY_NEW(A_BUTTON | DPAD_RIGHT))
+        {
+            sBook->focusRight = TRUE;
+            sBook->cursor = 0;
+            Move();
+        }
+        else if (JOY_NEW(DPAD_UP) && sBook->section != 0)
+        {
+            sBook->section--;
+            Move();
+        }
+        else if (JOY_NEW(DPAD_DOWN) && sBook->section + 1 < GUIDE_SECTIONS)
+        {
+            sBook->section++;
+            Move();
+        }
+        return;
+    }
+    if (JOY_NEW(B_BUTTON | DPAD_LEFT))
+    {
+        sBook->focusRight = FALSE;
+        Move();
+    }
+    else if (JOY_NEW(A_BUTTON))
+    {
+        sBook->entry = sGuideSections[sBook->section].first + sBook->cursor;
+        sBook->spread = 0;
+        sBook->view = VIEW_GUIDE_ENTRY;
+        Turn();
+    }
+    else if (JOY_NEW(DPAD_UP) && sBook->cursor != 0)
+    {
+        sBook->cursor--;
+        Move();
+    }
+    else if (JOY_NEW(DPAD_DOWN) && sBook->cursor + 1 < count)
+    {
+        sBook->cursor++;
+        Move();
+    }
+}
+
+//  Back to the contents with the cursor on the chapter just read.
+static void GuideBackToContents(void)
+{
+    sBook->section = GuideSectionOf(sBook->entry);
+    sBook->cursor = sBook->entry - sGuideSections[sBook->section].first;
+    sBook->focusRight = TRUE;
+    sBook->view = VIEW_GUIDE_CONTENTS;
+    Turn();
+}
+
+static void Input_GuideEntry(void)
+{
+    if (JOY_NEW(B_BUTTON))
+    {
+        GuideBackToContents();
+    }
+    else if (JOY_NEW(A_BUTTON | DPAD_RIGHT | R_BUTTON))
+    {
+        if (sBook->spread + 1 < sBook->spreadCount)
+        {
+            sBook->spread++;
+            Turn();
+        }
+        else if (JOY_NEW(A_BUTTON))
+        {
+            GuideBackToContents();
+        }
+        else if (sBook->entry + 1 < GUIDE_ENTRIES)
+        {
+            sBook->entry++;
+            sBook->spread = 0;
+            Turn();
+        }
+    }
+    else if (JOY_NEW(DPAD_LEFT | L_BUTTON))
+    {
+        if (sBook->spread != 0)
+        {
+            sBook->spread--;
+            Turn();
+        }
+        else if (sBook->entry != 0)
+        {
+            sBook->entry--;
+            sBook->spread = 0;
+            Turn();
+        }
+    }
+}
+
 static void Task_BookInput(u8 taskId)
 {
     if (sBook->leaving)
@@ -763,6 +1056,9 @@ static void Task_BookInput(u8 taskId)
     case VIEW_CONTENTS: Input_Contents(); break;
     case VIEW_CHAPTER:  Input_Chapter();  break;
     case VIEW_TOPIC:    Input_Topic();    break;
+    case VIEW_COVER:          Input_Cover();         break;
+    case VIEW_GUIDE_CONTENTS: Input_GuideContents(); break;
+    case VIEW_GUIDE_ENTRY:    Input_GuideEntry();    break;
     }
 }
 
@@ -785,7 +1081,9 @@ static void CB2_Book(void)
 
 static void Task_BookInit(u8 taskId)
 {
-    const u16 *pal = (sBook->book == BOOK_NOTEBOOK) ? sNotebookPal : sTextbookPal;
+    const u16 *pal = (sBook->book == BOOK_NOTEBOOK) ? sNotebookPal
+                   : (sBook->book == BOOK_GUIDE)    ? sGuidePal
+                   : sTextbookPal;
 
     switch (sBook->initState)
     {
@@ -889,4 +1187,10 @@ void Textbook_Open(void)
             break;
         }
     }
+}
+
+//  T-300: THE GUIDE, open at its cover. The script fades first.
+void Guide_Open(void)
+{
+    OpenBook(BOOK_GUIDE, VIEW_COVER);
 }

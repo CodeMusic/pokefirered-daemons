@@ -180,6 +180,7 @@ static void DaemonsDebug_GrantTestKit(void)
         { ITEM_TEACHY_TV,     1 },
         { ITEM_FAME_CHECKER,  1 },
         { ITEM_NOTEBOOK,      1 },   // T-216: and a screen of its own
+        { ITEM_GUIDE,         1 },   // T-300: and the Guide, which is otherwise ONE ISLAND's
         // T-188: and OPUS, without which the 386 daemons in the boxes (T-205) show no margin at all -- and the
         // margins are now written in two voices, so a debug game started as INSTINCT has to be able to read them.
         { ITEM_OPUS,          1 },

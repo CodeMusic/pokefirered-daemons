@@ -246,7 +246,7 @@ static const u32 *const sItemIconTable[ITEMS_COUNT + 1][2] =
     // ????????
     [ITEM_TEXTBOOK]       = {gItemIcon_Textbook, gItemIconPalette_Textbook},
     [ITEM_DIPLOMA]        = {gItemIcon_Diploma, gItemIconPalette_Diploma},
-    [ITEM_0E4]            = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark},
+    [ITEM_GUIDE]          = {gItemIcon_Guide, gItemIconPalette_Guide},
     [ITEM_0E5]            = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark},
     [ITEM_0E6]            = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark},
     [ITEM_0E7]            = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark},
