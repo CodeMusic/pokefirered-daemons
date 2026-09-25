@@ -7,6 +7,7 @@
 #include "field_effect.h"
 #include "field_effect_helpers.h"
 #include "field_player_avatar.h"
+#include "field_weather.h"
 #include "fieldmap.h"
 #include "metatile_behavior.h"
 #include "overworld.h"
@@ -2266,6 +2267,26 @@ void PatchObjectPalette(u16 paletteTag, u8 paletteSlot)
 
     LoadPalette(sObjectEventSpritePalettes[paletteIndex].data, OBJ_PLTT_ID(paletteSlot), PLTT_SIZE_4BPP);
     ApplyGlobalFieldPaletteTint(paletteSlot);
+}
+
+// T-268: every object on the map loaded again under the current light, after a connection crossed into a different
+// one (overworld.c). The weather's gamma goes back on after, as it does on any palette load.
+void DaemonsRetintObjectEventPalettes(void)
+{
+    u8 i;
+    const struct ObjectEventGraphicsInfo *info;
+
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
+    {
+        if (!gObjectEvents[i].active)
+            continue;
+        info = GetObjectEventGraphicsInfo(gObjectEvents[i].graphicsId);
+        if (info->paletteSlot < 16)
+        {
+            PatchObjectPalette(info->paletteTag, info->paletteSlot);
+            UpdateSpritePaletteWithWeather(info->paletteSlot);
+        }
+    }
 }
 
 void PatchObjectPaletteRange(const u16 *paletteTags, u8 minSlot, u8 maxSlot)

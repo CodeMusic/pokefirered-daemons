@@ -99,6 +99,7 @@ struct PokedexCategoryPage
 };
 
 EWRAM_DATA static struct PokedexScreenData * sPokedexScreenData = NULL;
+static EWRAM_DATA bool8 sReadingInBattle = FALSE;   // T-267: see DexScreen_CanRead
 
 static void Task_PokedexScreen(u8 taskId);
 static void DexScreen_InitGfxForTopMenu(void);
@@ -901,6 +902,7 @@ void DexScreen_LoadResources(void)
     u8 taskId;
 
     natDex = IsNationalPokedexEnabled();
+    sReadingInBattle = FALSE;
     m4aSoundVSyncOff();
     SetVBlankCallback(NULL);
     ResetPaletteFade();
@@ -2057,9 +2059,19 @@ static const u8 sWorkingsSpace[] = _(" ");
 #define WORKINGS_PANE   224     // inside the frame, where the entries sit
 #define WORKINGS_LINES  3       // what the pane shows: a fourth line is drawn under the frame
 
+//  T-267: READ IT NOW, KEEP IT BY BINDING (decided by the user, 2026-09-25). In a battle, L reads the whole entry of
+//  the daemon in front of you, bound or not, wild or a trainer's; the INDEX itself still shows ????? until you bind
+//  one. You can read what is in front of you; you keep only what you bind. Set by DexScreen_ShowEntryOnly, the battle's
+//  way in, and cleared by DexScreen_LoadResources, which every other way in passes through -- and nothing is written:
+//  no seen or caught flag moves. (sReadingInBattle is declared at the top, with the screen's other state.)
+static bool8 DexScreen_CanRead(u16 species, bool8 indexIsSpecies)
+{
+    return sReadingInBattle || DexScreen_GetSetPokedexFlag(species, FLAG_GET_CAUGHT, indexIsSpecies);
+}
+
 static bool8 DexScreen_IsBound(u16 species)
 {
-    return GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT);
+    return sReadingInBattle || GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT);
 }
 
 static u16 DexScreen_PreEvolution(u16 species)
@@ -3181,7 +3193,7 @@ void DexScreen_PrintMonCategory(u8 windowId, u16 species, u8 x, u8 y)
 
     categoryName = (u8 *)gPokedexEntries[species].categoryName;
     index = 0;
-    if (DexScreen_GetSetPokedexFlag(species, FLAG_GET_CAUGHT, FALSE))
+    if (DexScreen_CanRead(species, FALSE))
     {
 #if REVISION == 0
         while ((categoryName[index] != CHAR_SPACE) && (index < 11))
@@ -3227,7 +3239,7 @@ void DexScreen_PrintMonHeight(u8 windowId, u16 species, u8 x, u8 y)
     buffer[i++] = 5;
     buffer[i++] = CHAR_SPACE;
 
-    if (DexScreen_GetSetPokedexFlag(species, FLAG_GET_CAUGHT, FALSE))
+    if (DexScreen_CanRead(species, FALSE))
     {
         inches = 10000 * height / 254; // actually tenths of inches here
         if (inches % 10 >= 5)
@@ -3287,7 +3299,7 @@ void DexScreen_PrintMonWeight(u8 windowId, u16 species, u8 x, u8 y)
     buffer[i++] = EXT_CTRL_CODE_MIN_LETTER_SPACING;
     buffer[i++] = 5;
 
-    if (DexScreen_GetSetPokedexFlag(species, FLAG_GET_CAUGHT, FALSE))
+    if (DexScreen_CanRead(species, FALSE))
     {
         lbs = (weight * 100000) / 4536; // Convert to hundredths of lb
 
@@ -3366,7 +3378,7 @@ void DexScreen_PrintMonFlavorText(u8 windowId, u16 species, u8 x, u8 y)
 
     species = SpeciesToNationalPokedexNum(species);
 
-    if (DexScreen_GetSetPokedexFlag(species, FLAG_GET_CAUGHT, FALSE))
+    if (DexScreen_CanRead(species, FALSE))
     {
         printerTemplate.currentChar = gPokedexEntries[species].description;
         printerTemplate.windowId = windowId;
@@ -3402,7 +3414,7 @@ void DexScreen_DrawMonFootprint(u8 windowId, u16 species, u8 x, u8 y)
     u8 * buffer;
     u8 * footprint;
 
-    if (!(DexScreen_GetSetPokedexFlag(species, FLAG_GET_CAUGHT, TRUE)))
+    if (!DexScreen_CanRead(species, TRUE))
         return;
     footprint = (u8 *)(gMonFootprintTable[species]);
     buffer = gDecompressionBuffer;
@@ -3473,7 +3485,7 @@ static void DexScreen_PrintMonType(u8 windowId, u16 species)
     u8 type1, type2;
     u32 x;
 
-    if (!DexScreen_GetSetPokedexFlag(species, FLAG_GET_CAUGHT, TRUE))
+    if (!DexScreen_CanRead(species, TRUE))
         return;
 
     type1 = gSpeciesInfo[species].types[0];
@@ -3910,6 +3922,7 @@ u8 DexScreen_ShowEntryOnly(u16 species)
         return CreateTask(Task_DexScreen_RegisterNonKantoMonBeforeNationalDex, 0);
 
     DexScreen_LoadResources();
+    sReadingInBattle = TRUE;
     gTasks[sPokedexScreenData->taskId].func = Task_DexScreen_RegisterMonToPokedex;
     DexScreen_LookUpCategoryBySpecies(species);
 

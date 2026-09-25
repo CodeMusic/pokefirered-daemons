@@ -63,5 +63,7 @@ void DaemonsReloadPrimaryTilesetPalette(const struct MapLayout *mapLayout);
 void DaemonsSetHalftoneColour(bool8 inColour);
 void DaemonsGreyHalftoneFrame(void);
 u8 DaemonsFieldTint(void);
+u8 DaemonsPaletteSignature(void);
+u8 DaemonsPrimarySignature(void);
 
 #endif //GUARD_FIELDMAP_H

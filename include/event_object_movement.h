@@ -87,6 +87,7 @@ void LoadPlayerObjectReflectionPalette(u16, u8);
 void LoadSpecialObjectReflectionPalette(u16, u8);
 void TryMoveObjectEventToMapCoords(u8, u8, u8, s16, s16);
 void PatchObjectPalette(u16, u8);
+void DaemonsRetintObjectEventPalettes(void);
 void SpawnObjectEventsOnReturnToField(s16 x, s16 y);
 void GetMapCoordsFromSpritePos(s16, s16, s16 *, s16 *);
 u8 GetFaceDirectionAnimNum(u8);

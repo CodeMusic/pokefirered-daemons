@@ -8,6 +8,8 @@
 #include "event_data.h"
 #include "constants/region_map_sections.h"
 #include "constants/maps.h"
+#include "daemons_time.h"
+#include "overworld.h"
 
 struct ConnectionFlags
 {
@@ -977,7 +979,25 @@ u8 DaemonsFieldTint(void)
         return gGlobalFieldTintMode;
     if (DaemonsIsHalftone())
         return QL_TINT_GRAYSCALE;
+    // T-268: the watch's light, outdoors only -- and after HALFTONE, because grey outranks time.
+    if (IsMapTypeOutdoors(gMapHeader.mapType) && DaemonsWatch() != WATCH_DAY)
+        return DAEMONS_TINT_WATCH;
     return QL_TINT_NONE;
+}
+
+// T-268: what the primary rows were loaded under -- the tint, the watch, and Blanche's wash. A connection reloads only
+// the secondary rows, so crossing one compares this with where the player now is and reloads the primary rows if they
+// differ (overworld.c). Blanche's wash was the first thing to need it (T-56); HALFTONE's grey and the watch are the rest.
+static EWRAM_DATA u8 sPrimarySignature = 0;
+
+u8 DaemonsPaletteSignature(void)
+{
+    return (DaemonsFieldTint() << 4) | (DaemonsWatch() << 1) | DaemonsIsBlancheOutdoors();
+}
+
+u8 DaemonsPrimarySignature(void)
+{
+    return sPrimarySignature;
 }
 
 static void ApplyGlobalTintToPaletteEntries(u16 offset, u16 size)
@@ -995,6 +1015,9 @@ static void ApplyGlobalTintToPaletteEntries(u16 offset, u16 size)
     case QL_TINT_BACKUP_GRAYSCALE:
         QuestLog_BackUpPalette(offset, size);
         TintPalette_GrayScale(&gPlttBufferUnfaded[offset], size);
+        break;
+    case DAEMONS_TINT_WATCH:
+        DaemonsTintForWatch(&gPlttBufferUnfaded[offset], size);
         break;
     default:
         return;
@@ -1018,6 +1041,9 @@ void ApplyGlobalTintToPaletteSlot(u8 slot, u8 count)
         QuestLog_BackUpPalette(BG_PLTT_ID(slot), count * 16);
         TintPalette_GrayScale(&gPlttBufferUnfaded[BG_PLTT_ID(slot)], count * 16);
         break;
+    case DAEMONS_TINT_WATCH:
+        DaemonsTintForWatch(&gPlttBufferUnfaded[BG_PLTT_ID(slot)], count * 16);
+        break;
     default:
         return;
     }
@@ -1034,9 +1060,11 @@ static void LoadTilesetPalette(struct Tileset const *tileset, u16 destOffset, u1
         {
             LoadPalette(&black, destOffset, PLTT_SIZEOF(1));
             LoadPalette(tileset->palettes[0] + 1, destOffset + 1, size - PLTT_SIZEOF(1));
-            ApplyGlobalTintToPaletteEntries(destOffset + 1, (size - 2) >> 1);
+            // T-268: Blanche's wash first and the tint over it, or night would be washed back toward white.
             if (DaemonsIsBlancheOutdoors())
                 DaemonsPaleEntries(destOffset + 1, (size - 2) >> 1);
+            ApplyGlobalTintToPaletteEntries(destOffset + 1, (size - 2) >> 1);
+            sPrimarySignature = DaemonsPaletteSignature();
         }
         else if (tileset->isSecondary == TRUE)
         {

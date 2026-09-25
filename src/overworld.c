@@ -753,7 +753,6 @@ bool8 SetDiveWarpDive(u16 x, u16 y)
 void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
 {
     int paletteIndex;
-    bool8 wasBlanche = DaemonsIsBlancheOutdoors();
 
     SetWarpDestination(mapGroup, mapNum, -1, -1, -1);
     Overworld_TryMapConnectionMusicTransition();
@@ -778,12 +777,15 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
         ApplyWeatherGammaShiftToPal(paletteIndex);
     // T-56: Blanche's ground wash is in the primary rows, which a connection
     // does not reload -- so it would follow the player onto Route 1, and not
-    // come back with them.
-    if (wasBlanche != DaemonsIsBlancheOutdoors())
+    // come back with them. T-268: so would HALFTONE's grey and the watch's light,
+    // so the question is now whether the primary rows were loaded under the light
+    // the player is standing in -- and if not, the people standing in it too.
+    if (DaemonsPrimarySignature() != DaemonsPaletteSignature())
     {
         DaemonsReloadPrimaryTilesetPalette(gMapHeader.mapLayout);
         for (paletteIndex = 0; paletteIndex < 7; paletteIndex++)
             ApplyWeatherGammaShiftToPal(paletteIndex);
+        DaemonsRetintObjectEventPalettes();
     }
     InitSecondaryTilesetAnimation();
     UpdateLocationHistoryForRoamer();

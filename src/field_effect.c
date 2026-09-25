@@ -29,6 +29,7 @@
 #include "constants/songs.h"
 #include "constants/sound.h"
 #include "daemon_streaks.h"
+#include "daemons_time.h"
 
 extern struct CompressedSpritePalette gMonPaletteTable[]; // Intentionally declared (incorrectly) without const in order to match
 extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
@@ -453,6 +454,9 @@ void ApplyGlobalFieldPaletteTint(u8 paletteIdx)
     case 3:
         QuestLog_BackUpPalette(OBJ_PLTT_ID2(paletteIdx), 16);
         TintPalette_GrayScale(&gPlttBufferUnfaded[OBJ_PLTT_ID2(paletteIdx)], 16);
+        break;
+    case DAEMONS_TINT_WATCH:   // T-268: the people outdoors are in the same light as the ground
+        DaemonsTintForWatch(&gPlttBufferUnfaded[OBJ_PLTT_ID2(paletteIdx)], 16);
         break;
     default:
         return;

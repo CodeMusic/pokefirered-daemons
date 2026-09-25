@@ -55,6 +55,10 @@
 #include "constants/songs.h"
 #include "constants/field_weather.h"
 #include "sloopsvc.h"
+#include "daemons_time.h"
+#include "fieldmap.h"
+#include "field_weather.h"
+#include "event_object_movement.h"
 
 enum StartMenuOption
 {
@@ -83,6 +87,7 @@ enum StartMenuOption
     STARTMENU_DBG_CRYSTAL,   // T-257
     STARTMENU_DBG_WARDEN,    // T-260
     STARTMENU_DBG_ENCOUNTER,
+    STARTMENU_DBG_WATCH,     // T-268
     STARTMENU_DBG_DAEMON,
     STARTMENU_DBG_LEVEL,
     STARTMENU_DBG_INVOKE,
@@ -165,6 +170,7 @@ static bool8 DbgStepCallback(void);
 static bool8 DbgInvokeCallback(void);
 static bool8 DbgHandleStepInput(void);
 static bool8 DbgSongCallback(void);
+static bool8 DbgWatchCallback(void);
 static bool8 DbgSfxCallback(void);
 static bool8 DbgBackCallback(void);
 static bool8 IsDaemonsDebugCallback(void);
@@ -230,6 +236,7 @@ static const struct MenuAction sStartMenuActionTable[] = {
     // These two labels carry {STR_VAR_1} and {STR_VAR_2}. PrintStartMenuItems
     // runs every entry through StringExpandPlaceholders, so the current song
     // and sound effect can live in the menu itself -- no second window.
+    [STARTMENU_DBG_WATCH] = { gText_DbgMenuWatch, {.u8_void = DbgWatchCallback} },
     [STARTMENU_DBG_SONG] = { gText_DbgMenuSong, {.u8_void = DbgSongCallback} },
     [STARTMENU_DBG_SFX]  = { gText_DbgMenuSfx,  {.u8_void = DbgSfxCallback} },
     [STARTMENU_DBG_BACK] = { gText_DbgMenuBack, {.u8_void = DbgBackCallback} }
@@ -277,6 +284,7 @@ static const u8 *const sStartMenuDescPointers[] = {
     gStartMenuDesc_DbgCrystal,
     gStartMenuDesc_DbgWarden,
     gStartMenuDesc_DbgEncounter,
+    gStartMenuDesc_DbgWatch,
     gStartMenuDesc_DbgDaemon,
     gStartMenuDesc_DbgLevel,
     gStartMenuDesc_DbgInvoke,
@@ -354,6 +362,7 @@ static EWRAM_DATA u8 sDbgPage = 0;
 #define DBG_MENU_WIDTH 14
 
 static EWRAM_DATA u16 sDbgSong = 0;
+static const u8 *const sDbgWatchNames[] = { gText_DbgWatchAuto, gText_DbgWatchDay, gText_DbgWatchDusk, gText_DbgWatchNight, gText_DbgWatchDawn };   // T-268, by gDaemonsWatchOverride
 static EWRAM_DATA u16 sDbgSfx = 0;
 // A NATIONAL DEX NUMBER, not a species id -- so the twenty-five dummy slots
 // Gen 3 left between CELEBI and TREECKO are not in the list, and 1..151 is
@@ -404,9 +413,10 @@ static void SetUpStartMenu(void)
         AppendToStartMenuItems(STARTMENU_DBG_MART);
         AppendToStartMenuItems(STARTMENU_DBG_JUMP);
         AppendToStartMenuItems(STARTMENU_DBG_ENCOUNTER);
+        AppendToStartMenuItems(STARTMENU_DBG_WATCH);
         AppendToStartMenuItems(STARTMENU_DBG_SONG);
         AppendToStartMenuItems(STARTMENU_DBG_SFX);
-        AppendToStartMenuItems(STARTMENU_DBG_BACK);
+        //  No BACK row: WATCH took the seventh (T-268), an eighth sits under the description box, and B closes the menu.
         return;
     }
 #endif
@@ -818,6 +828,7 @@ static bool8 IsDaemonsDebugCallback(void)
         || sStartMenuCallback == DbgStepCallback
         || sStartMenuCallback == DbgInvokeCallback
         || sStartMenuCallback == DbgSongCallback
+        || sStartMenuCallback == DbgWatchCallback
         || sStartMenuCallback == DbgSfxCallback
         || sStartMenuCallback == DbgBackCallback;
 }
@@ -856,6 +867,7 @@ static void DbgSetVars(void)
     {
         ConvertIntToDecimalStringN(gStringVar1, sDbgSong, STR_CONV_MODE_LEFT_ALIGN, 3);
         ConvertIntToDecimalStringN(gStringVar2, sDbgSfx, STR_CONV_MODE_LEFT_ALIGN, 3);
+        StringCopy(gStringVar3, sDbgWatchNames[gDaemonsWatchOverride]);
     }
 }
 
@@ -1305,6 +1317,21 @@ static bool8 DbgHandleStepInput(void)
     if (JOY_REPT(DPAD_RIGHT))
         return DbgStep(+1);
     return FALSE;
+}
+
+// T-268: WATCH steps AUTO (the clock, or play time) -> DAY -> DUSK -> NIGHT -> DAWN, and puts the new light on the
+// map at once: the tileset rows and every person on it loaded again, and the weather's gamma back over them. So night
+// can be checked on a cartridge at noon. Nothing is saved; a reset goes back to AUTO.
+static bool8 DbgWatchCallback(void)
+{
+    int i;
+
+    gDaemonsWatchOverride = (gDaemonsWatchOverride + 1) % ARRAY_COUNT(sDbgWatchNames);
+    LoadMapTilesetPalettes(gMapHeader.mapLayout);
+    for (i = 0; i < 13; i++)
+        ApplyWeatherGammaShiftToPal(i);
+    DaemonsRetintObjectEventPalettes();
+    return DbgRedraw();
 }
 
 // The two halves of the song table are not interleaved: SE_USE_ITEM is 1 and

@@ -45,6 +45,7 @@ static u16 WildEncounterRandom(void);
 static void AddToWildEncounterRateBuff(u8 encouterRate);
 
 #include "data/wild_encounters.h"
+#include "daemons_time.h"
 
 static const u8 sUnownLetterSlots[][LAND_WILD_COUNT] = {
   //  A   A   A   A   A   A   A   A   A   A   A   ?
@@ -194,6 +195,13 @@ static u16 GetCurrentMapWildMonHeaderId(void)
                     alteringCaveId = 0;
 
                 i += alteringCaveId;
+            }
+            // T-268: a map with a night table keeps it in the header right after its day one (tools/gbanight.py).
+            else if (DaemonsWatch() == WATCH_NIGHT
+                  && gWildMonHeaders[i + 1].mapGroup == gWildMonHeaders[i].mapGroup
+                  && gWildMonHeaders[i + 1].mapNum == gWildMonHeaders[i].mapNum)
+            {
+                i++;
             }
 
             if (!UnlockedTanobyOrAreNotInTanoby())

@@ -192,6 +192,12 @@ const u8 gText_DbgMenuWarden[] = _("WARDEN");
 const u8 gText_DbgMenuJump[] = _("JUMP");
 const u8 gText_DbgMenuSong[] = _("SONG {STR_VAR_1}");
 const u8 gText_DbgMenuSfx[] = _("SFX {STR_VAR_2}");
+const u8 gText_DbgMenuWatch[] = _("WATCH {STR_VAR_3}");
+const u8 gText_DbgWatchAuto[] = _("AUTO");
+const u8 gText_DbgWatchDay[] = _("DAY");
+const u8 gText_DbgWatchDusk[] = _("DUSK");
+const u8 gText_DbgWatchNight[] = _("NIGHT");
+const u8 gText_DbgWatchDawn[] = _("DAWN");
 // The ENCOUNTER page. DAEMON prints the species NAME on the row and nothing
 // else, which is why the debug pages widen the window -- see CreateStartMenuWindow.
 const u8 gText_DbgMenuEncounter[] = _("ENCOUNTER");
@@ -997,6 +1003,7 @@ const u8 gStartMenuDesc_DbgLevel[] = _("{DPAD_LEFTRIGHT} steps, L and R step by 
 const u8 gStartMenuDesc_DbgInvoke[] = _("Start the encounter.");
 const u8 gStartMenuDesc_DbgSong[] = _("Play the next track in the table.");
 const u8 gStartMenuDesc_DbgSfx[] = _("Play the next sound effect.");
+const u8 gStartMenuDesc_DbgWatch[] = _("Set the time of day. AUTO follows\nthe clock, or play time.");
 const u8 gStartMenuDesc_DbgBack[] = _("Back, and restore this map's music.");
 #endif
 const u8 gStartMenuDesc_Exit[] = _("Close this MENU window.");
