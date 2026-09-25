@@ -19,6 +19,7 @@
 #include "constants/songs.h"
 #include "constants/game_stat.h"
 #include "constants/trainers.h"
+#include "data/understanding_brain.h"
 
 // Trainer Card Strings
 enum
@@ -107,6 +108,7 @@ static void SetTrainerCardCB2(void);
 static void SetUpTrainerCardTask(void);
 static bool8 PrintAllOnCardFront(void);
 static bool8 PrintAllOnCardBack(void);
+static void DrawUnderstandingBrain(void);
 static void BufferTextForCardBack(void);
 static void PrintNameOnCardFront(void);
 static void PrintIdOnCard(void);
@@ -1065,12 +1067,54 @@ static bool8 PrintAllOnCardFront(void)
     case 5:
         PrintProfilePhraseOnCard();
         break;
+    case 6:
+        DrawUnderstandingBrain();
+        break;
     default:
         sTrainerCardDataPtr->printState = 0;
         return TRUE;
     }
     sTrainerCardDataPtr->printState++;
     return FALSE;
+}
+
+//  T-271: THE BRAIN, WHICH LIGHTS AND NEVER COUNTS (decided by the user 2026-09-25). Understandings are shown in the
+//  Guide's margins (T-304); the card shows only that something has changed -- one drawing, grey until any
+//  understanding is arrived at and lit after, brighter with a halo. No region lights on its own and nothing is
+//  numbered. It sits between the card's figures and the player, drawn in the text window's own greys and white
+//  (DAEMONS tools/genbrain.py), so the two states differ in brightness and never in hue (9.4). Only on your own
+//  card: a link partner's card is theirs.
+#define BRAIN_X 140
+#define BRAIN_Y 23
+
+static bool8 AnyUnderstanding(void)
+{
+    return FlagGet(FLAG_UNDERSTANDING_FIRST);
+}
+
+static void DrawUnderstandingBrain(void)
+{
+    bool8 lit;
+    u8 x, y, color;
+
+    if (sTrainerCardDataPtr->cardType != CARD_TYPE_FRLG || (InUnionRoom() == TRUE && gReceivedRemoteLinkPlayers == 1))
+        return;
+    lit = AnyUnderstanding();
+    for (y = 0; y < BRAIN_H; y++)
+    {
+        for (x = 0; x < BRAIN_W; x++)
+        {
+            switch (sUnderstandingBrain[y][x])
+            {
+            case '.': color = lit ? TEXT_COLOR_WHITE : TEXT_COLOR_LIGHT_GRAY; break;
+            case 'f': color = lit ? TEXT_COLOR_LIGHT_GRAY : TEXT_COLOR_DARK_GRAY; break;
+            case 'o': color = TEXT_COLOR_DARK_GRAY; break;
+            case 'h': if (!lit) continue; color = TEXT_COLOR_WHITE; break;
+            default: continue;
+            }
+            FillWindowPixelRect(1, PIXEL_FILL(color), BRAIN_X + x, BRAIN_Y + y, 1, 1);
+        }
+    }
 }
 
 static bool8 PrintAllOnCardBack(void)
