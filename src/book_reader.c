@@ -94,9 +94,10 @@ struct BookReader
     u8 entry;               // GUIDE: the entry, counted through the whole book
     u8 spread;              // GUIDE: which spread of the entry
     u8 spreadCount;
-    u8 bodyTop;             // GUIDE: where the first spread's left page starts its text, under the title
+    u8 bodyTop;             // GUIDE: where the first page starts its text, under the title
     bool8 focusRight;       // GUIDE contents: the cursor is in the chapters, not the sections
     u8 *blank;              // the empty sheet or spread, drawn once: filling it per pixel costs a quarter second
+    u8 *blankPage;          // GUIDE: its reading page, which is not the contents' spread, so it is kept apart
     u16 lineStart[BR_MAX_LINES];
     u8 title[40];
     u8 text[BR_TEXT_SIZE];
@@ -307,12 +308,14 @@ static u8 Reflow(const u8 *src, u16 width, u8 font)
 {
     u8 word[64];
     u8 *out = sBook->lines, *end = sBook->lines + BR_LINES_SIZE - 70;
-    u16 lineW = 0, w, spaceW;
+    u16 lineW = 0, w, spaceW, indentW;
     u8 n, len, count = 0;
-    bool8 started = FALSE;
+    bool8 started = FALSE, indent = FALSE;
     static const u8 sSpace[] = _(" ");
+    static const u8 sIndent[] = _("   ");
 
     spaceW = Width(font, sSpace);
+    indentW = Width(font, sIndent);
     sBook->lineStart[0] = 0;
     while (*src != EOS && out < end && count < BR_MAX_LINES - 1)
     {
@@ -326,6 +329,7 @@ static u8 Reflow(const u8 *src, u16 width, u8 font)
                 lineW = 0;
                 started = FALSE;
             }
+            indent = (sBook->book == BOOK_GUIDE);   // the Guide's wide page: a paragraph opens indented
             continue;
         }
         if (*src == CHAR_SPACE || *src == CHAR_NEWLINE || *src == CHAR_PROMPT_SCROLL)
@@ -360,6 +364,12 @@ static u8 Reflow(const u8 *src, u16 width, u8 font)
             *out++ = CHAR_SPACE;
             lineW += spaceW;
         }
+        else if (indent)
+        {
+            out = StringCopy(out, sIndent);
+            lineW += indentW;
+        }
+        indent = FALSE;
         out = StringCopy(out, word);
         lineW += w;
         started = TRUE;
@@ -604,9 +614,9 @@ static void DrawTopic(void)
 //  CONTENTS  the sections on the left page -- INTRODUCTION, the six PARTS, CONCLUSION, APPENDICES -- and the chapters
 //            of the one under the cursor on the right. UP and DOWN move within a page; A or RIGHT crosses to the
 //            chapters, LEFT or B comes back. A on a chapter opens it.
-//  ENTRY     the chapter's full title at the head of the left page, then its text across the spread, spread after
-//            spread. A, RIGHT or R turn on (past the last spread, RIGHT goes on to the next chapter); LEFT or L turn
-//            back. B returns to the contents.
+//  ENTRY     one wide page, not a spread (the user, 2026-09-25: three words a line was cramped): the chapter's full
+//            title across the head of it, then its text, page after page. A, RIGHT or R turn on (past the last page,
+//            RIGHT goes on to the next chapter); LEFT or L turn back. B returns to the contents.
 
 static void DrawGuideBook(void)
 {
@@ -643,7 +653,7 @@ static void DrawGuideCover(void)
 
 #define GC_SECTION_TOP   30
 #define GC_SECTION_PITCH 12
-#define GC_ENTRY_TOP     34
+#define GC_ENTRY_TOP     37
 #define GC_ENTRY_PITCH   18
 
 static void DrawGuideContents(void)
@@ -671,7 +681,7 @@ static void DrawGuideContents(void)
     n = Reflow(sec->heading, TB_TEXT_W, BR_SMALL);                         // the section's own heading, small
     for (k = 0; k < n && k < 2; k++)
         Print(BR_SMALL, sFaint, rx, 9 + k * 9, Line(k));
-    Rect(C_RULE, rx, 28, TB_TEXT_W, 1);
+    Rect(C_RULE, rx, 31, TB_TEXT_W, 1);
     for (k = 0; k < sec->count; k++)
     {
         y = GC_ENTRY_TOP + k * GC_ENTRY_PITCH;
@@ -682,24 +692,62 @@ static void DrawGuideContents(void)
     CopyWindowToVram(WIN_BOOK, COPYWIN_GFX);
 }
 
-#define GE_TITLE_TOP   17
+//  The reading page: one sheet across the screen, the cover's charcoal, a trace along its head.
+#define GP_X           10
+#define GP_W           220
+#define GP_TEXT_X      18
+#define GP_TEXT_W      204
+#define GP_PITCH       12
+#define GP_BOTTOM      150
+#define GE_TITLE_TOP   19
 #define GE_TITLE_PITCH 10
-#define GE_PAGE_LINES  TB_TOPIC_RIGHT_LINES
+#define GE_PAGE_TOP    20
+#define GE_PAGE_LINES  ((GP_BOTTOM - GE_PAGE_TOP) / GP_PITCH)
 
-//  Where the text starts under the title, and how many spreads it needs: the first spread's left page gives the
-//  title its room, and every page after that is a full page of text.
+static void DrawGuidePage(void)
+{
+    FillWindowPixelBuffer(WIN_BOOK, PIXEL_FILL(C_NONE));
+    Rect(C_EDGE_DARK, GP_X + 2, 7, GP_W, 150);                              // the pages beneath
+    Rect(C_EDGE, GP_X + 1, 6, GP_W, 150);
+    Rect(C_PAPER, GP_X, 4, GP_W, 150);
+    Rect(C_FRAME, GP_X, 4, 3, 150);                                         // the spine's edge
+    Rect(C_RULE, GP_TEXT_X, 7, GP_TEXT_W, 1);                               // the trace, with a node at each end
+    Rect(C_MARGIN, GP_TEXT_X - 2, 6, 2, 3);
+    Rect(C_MARGIN, GP_TEXT_X + GP_TEXT_W, 6, 2, 3);
+}
+
+static void GuidePageBackground(void)
+{
+    if (sBook->blankPage == NULL)
+    {
+        DrawGuidePage();
+        sBook->blankPage = Alloc(BR_WIN_BYTES);
+        CpuFastCopy(gWindows[WIN_BOOK].tileData, sBook->blankPage, BR_WIN_BYTES);
+    }
+    else
+    {
+        CpuFastCopy(sBook->blankPage, gWindows[WIN_BOOK].tileData, BR_WIN_BYTES);
+    }
+}
+
+//  Where the text starts under the title, and how many pages it needs: the first page gives the title its room,
+//  and every page after it is text from the trace down.
+static u8 GuideFirstLines(void)
+{
+    return (GP_BOTTOM - sBook->bodyTop) / GP_PITCH;
+}
+
 static void GuideLayout(void)
 {
     const struct GuideEntry *e = &sGuideEntries[sBook->entry];
-    u8 titleLines = Reflow(e->title, TB_TEXT_W, BR_SMALL);
-    u8 first, n;
+    u8 titleLines = Reflow(e->title, GP_TEXT_W, BR_SMALL);
+    u8 n;
 
-    sBook->bodyTop = GE_TITLE_TOP + titleLines * GE_TITLE_PITCH + 8;
-    first = (TB_FOLIO_Y - 4 - sBook->bodyTop) / TB_PITCH + GE_PAGE_LINES;
-    n = Reflow(e->text, TB_TEXT_W, BR_FONT);
+    sBook->bodyTop = GE_TITLE_TOP + titleLines * GE_TITLE_PITCH + 9;
+    n = Reflow(e->text, GP_TEXT_W, BR_FONT);
     sBook->spreadCount = 1;
-    if (n > first)
-        sBook->spreadCount += (n - first + 2 * GE_PAGE_LINES - 1) / (2 * GE_PAGE_LINES);
+    if (n > GuideFirstLines())
+        sBook->spreadCount += (n - GuideFirstLines() + GE_PAGE_LINES - 1) / GE_PAGE_LINES;
     if (sBook->spread >= sBook->spreadCount)
         sBook->spread = sBook->spreadCount - 1;
 }
@@ -708,47 +756,44 @@ static void DrawGuideEntry(void)
 {
     const struct GuideEntry *e = &sGuideEntries[sBook->entry];
     u8 buf[12], *p;
-    u8 i, n, leftLines, start, leftTop;
-    s16 x = TB_LEFT_X + TB_TEXT_INSET, rx = TB_RIGHT_X + TB_TEXT_INSET;
+    u8 i, n, lines, start;
+    s16 top;
 
     GuideLayout();
-    Background(DrawGuideBook);
-    if (sBook->spread == 0)
-    {
-        Print(BR_SMALL, sFaint, x, 9, sGuideSections[GuideSectionOf(sBook->entry)].label);
-        n = Reflow(e->title, TB_TEXT_W, BR_SMALL);
-        for (i = 0; i < n; i++)
-            Print(BR_SMALL, sInk, x, GE_TITLE_TOP + i * GE_TITLE_PITCH, Line(i));
-        Rect(C_RULE, x, sBook->bodyTop - 5, TB_TEXT_W, 1);
-        leftTop = sBook->bodyTop;
-        leftLines = (TB_FOLIO_Y - 4 - leftTop) / TB_PITCH;
-        start = 0;
-    }
-    else
-    {
-        leftTop = TB_TOPIC_RIGHT_TOP;
-        leftLines = GE_PAGE_LINES;
-        start = (TB_FOLIO_Y - 4 - sBook->bodyTop) / TB_PITCH + GE_PAGE_LINES + (sBook->spread - 1) * 2 * GE_PAGE_LINES;
-    }
-
-    n = Reflow(e->text, TB_TEXT_W, BR_FONT);
-    for (i = 0; i < leftLines && start + i < n; i++)
-        Print(BR_FONT, sInk, x, leftTop + i * TB_PITCH, Line(start + i));
-    start += leftLines;
-    for (i = 0; i < GE_PAGE_LINES && start + i < n; i++)
-        Print(BR_FONT, sInk, rx, TB_TOPIC_RIGHT_TOP + i * TB_PITCH, Line(start + i));
-
-    if (sBook->spreadCount > 1)                                             // 2/3, and a dog-ear while there is more
+    GuidePageBackground();
+    Print(BR_SMALL, sFaint, GP_TEXT_X, 9, sGuideSections[GuideSectionOf(sBook->entry)].label);
+    if (sBook->spreadCount > 1)                                             // 2/3, at the head's right
     {
         p = ConvertIntToDecimalStringN(buf, sBook->spread + 1, STR_CONV_MODE_LEFT_ALIGN, 1);
         *p++ = CHAR_SLASH;
         ConvertIntToDecimalStringN(p, sBook->spreadCount, STR_CONV_MODE_LEFT_ALIGN, 1);
-        Print(BR_SMALL, sFaint, TB_RIGHT_X + (TB_PAGE_W - Width(BR_SMALL, buf)) / 2, TB_FOLIO_Y, buf);
-        if (sBook->spread + 1 < sBook->spreadCount)
-        {
-            for (i = 0; i < 6; i++)
-                Rect(C_MARGIN, TB_RIGHT_X + TB_PAGE_W - 6 + i, 147 - i, 6 - i, 1);
-        }
+        Print(BR_SMALL, sFaint, GP_TEXT_X + GP_TEXT_W - Width(BR_SMALL, buf), 9, buf);
+    }
+    if (sBook->spread == 0)
+    {
+        n = Reflow(e->title, GP_TEXT_W, BR_SMALL);
+        for (i = 0; i < n; i++)
+            Print(BR_SMALL, sInk, GP_TEXT_X, GE_TITLE_TOP + i * GE_TITLE_PITCH, Line(i));
+        Rect(C_RULE, GP_TEXT_X, sBook->bodyTop - 5, GP_TEXT_W, 1);
+        top = sBook->bodyTop;
+        lines = GuideFirstLines();
+        start = 0;
+    }
+    else
+    {
+        top = GE_PAGE_TOP;
+        lines = GE_PAGE_LINES;
+        start = GuideFirstLines() + (sBook->spread - 1) * GE_PAGE_LINES;
+    }
+
+    n = Reflow(e->text, GP_TEXT_W, BR_FONT);
+    for (i = 0; i < lines && start + i < n; i++)
+        Print(BR_FONT, sInk, GP_TEXT_X, top + i * GP_PITCH, Line(start + i));
+
+    if (sBook->spread + 1 < sBook->spreadCount)                             // a dog-ear while there is more
+    {
+        for (i = 0; i < 6; i++)
+            Rect(C_MARGIN, GP_X + GP_W - 6 + i, 153 - i, 6 - i, 1);
     }
     CopyWindowToVram(WIN_BOOK, COPYWIN_GFX);
 }
@@ -1046,6 +1091,8 @@ static void Task_BookInput(u8 taskId)
         FreeAllWindowBuffers();
         if (sBook->blank != NULL)
             Free(sBook->blank);
+        if (sBook->blankPage != NULL)
+            Free(sBook->blankPage);
         FREE_AND_SET_NULL(sBook);
         SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
         return;
