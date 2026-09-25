@@ -47,6 +47,7 @@ struct TrainerCardData
     u8 bgPalLoadState;
     u8 flipDrawState;
     bool8 isLink;
+    bool8 isOwnCard;   // T-282: isLink is TRUE for your own card in the Union Room, so it cannot say whose card this is
     u8 timeColonBlinkTimer;
     bool8 timeColonInvisible;
     bool8 onBack;
@@ -1165,7 +1166,7 @@ static void RedrawCardFront(void)
 //  understanding is arrived at and lit after, brighter with a halo. No region lights on its own and nothing is
 //  numbered. It sits between the card's figures and the player, drawn in the text window's own greys and white
 //  (DAEMONS tools/genbrain.py), so the two states differ in brightness and never in hue (9.4). Only on your own
-//  card: a link partner's card is theirs.
+//  card: a link partner's card is theirs -- at the Cable Club's seats too, which are not the Union Room (T-282).
 #define BRAIN_X 140
 #define BRAIN_Y 23
 
@@ -1179,7 +1180,7 @@ static void DrawUnderstandingBrain(void)
     bool8 lit;
     u8 x, y, color;
 
-    if (sTrainerCardDataPtr->cardType != CARD_TYPE_FRLG || (InUnionRoom() == TRUE && gReceivedRemoteLinkPlayers == 1))
+    if (sTrainerCardDataPtr->cardType != CARD_TYPE_FRLG || !sTrainerCardDataPtr->isOwnCard)
         return;
     lit = AnyUnderstanding();
     for (y = 0; y < BRAIN_H; y++)
@@ -1978,6 +1979,7 @@ void ShowPlayerTrainerCard(void (*callback)(void))
 {
     sTrainerCardDataPtr = AllocZeroed(sizeof(*sTrainerCardDataPtr));
     sTrainerCardDataPtr->callback2 = callback;
+    sTrainerCardDataPtr->isOwnCard = TRUE;
     if (InUnionRoom() == TRUE)
         sTrainerCardDataPtr->isLink = TRUE;
     else
@@ -1993,6 +1995,7 @@ void ShowTrainerCardInLink(u8 cardId, void (*callback)(void))
     sTrainerCardDataPtr = AllocZeroed(sizeof(*sTrainerCardDataPtr));
     sTrainerCardDataPtr->callback2 = callback;
     sTrainerCardDataPtr->isLink = TRUE;
+    sTrainerCardDataPtr->isOwnCard = (cardId == gLocalLinkPlayerId);   // the start menu shows your own card this way
     sTrainerCardDataPtr->trainerCard = gTrainerCards[cardId];
     sTrainerCardDataPtr->language = gLinkPlayers[cardId].language;
     SetMainCallback2(CB2_InitTrainerCard);
