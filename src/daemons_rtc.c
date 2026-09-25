@@ -111,6 +111,12 @@ bool8 DaemonsRtc_Read(struct DaemonsClock *clock)
         return FALSE;
     clock->year = 2000 + year;
     clock->hour = hour;
+    //  T-277: A CLOCK NOBODY SET IS NO CLOCK. mGBA keeps an unset clock as a zeroed record and counts it on from
+    //  2000 as if 1970 were its start, so it reads 56 years ahead and hours off (engine.md trap 31) -- and a flash
+    //  cart's clock nobody has set sits at 2000-01-01. Either would put night at noon, so a year outside 2020-2049
+    //  is read as no clock at all and the day falls back to play time.
+    if (clock->year < 2020 || clock->year > 2049)
+        return FALSE;
     return TRUE;
 }
 
