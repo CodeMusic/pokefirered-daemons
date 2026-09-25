@@ -28,4 +28,6 @@ void SpriteCB_PopOutOfAsh(struct Sprite *sprite);
 void SpriteCB_AshLaunch(struct Sprite *sprite);
 void FieldEffectActiveListClear(void);
 
+void DaemonsRetintFieldEffectPalettes(void);   // T-279
+
 #endif //GUARD_FIELD_EFFECTS_H

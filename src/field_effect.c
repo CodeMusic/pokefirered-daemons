@@ -480,9 +480,36 @@ static void FieldEffectScript_LoadPal(const u8 **script)
     const struct SpritePalette * spritePalette = (const struct SpritePalette * )FieldEffectScript_ReadWord(script);
     u8 idx = IndexOfSpritePaletteTag(spritePalette->tag);
     LoadSpritePalette(spritePalette);
-    if (idx != 0xFF)
+    //  T-279: vanilla tinted here only when the palette was ALREADY loaded -- the reverse of LoadFadedPal above -- so a
+    //  first load went untinted and every reuse tinted again. The Quest Log's grey never showed it (grey of grey is
+    //  grey); the watch's tint is not idempotent, so it would have darkened the ball's trail each time it was thrown.
+    if (idx == 0xFF)
         ApplyGlobalFieldPaletteTint(IndexOfSpritePaletteTag(spritePalette->tag));
     *script += sizeof(u32);
+}
+
+//  T-279: the field effects' shared palettes -- grass, sand, ripples, and BLANCHE's pale grass -- loaded again under the
+//  current light when the map is relit (T-276), so a rustle in the grass is not left in the light of an hour ago.
+extern const struct SpritePalette gSpritePalette_GeneralFieldEffect0;
+extern const struct SpritePalette gSpritePalette_GeneralFieldEffect1;
+extern const struct SpritePalette gSpritePalette_BlancheGrass;
+static const struct SpritePalette *const sRelitFieldEffectPalettes[] = {
+    &gSpritePalette_GeneralFieldEffect0, &gSpritePalette_GeneralFieldEffect1, &gSpritePalette_BlancheGrass,
+};
+
+void DaemonsRetintFieldEffectPalettes(void)
+{
+    u8 i, idx;
+
+    for (i = 0; i < ARRAY_COUNT(sRelitFieldEffectPalettes); i++)
+    {
+        idx = IndexOfSpritePaletteTag(sRelitFieldEffectPalettes[i]->tag);
+        if (idx == 0xFF)
+            continue;
+        LoadPalette(sRelitFieldEffectPalettes[i]->data, OBJ_PLTT_ID(idx), PLTT_SIZE_4BPP);
+        ApplyGlobalFieldPaletteTint(idx);
+        UpdateSpritePaletteWithWeather(idx);
+    }
 }
 
 static void FieldEffectScript_CallNative(const u8 **script, u32 *result)

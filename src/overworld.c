@@ -1486,6 +1486,7 @@ void DaemonsRelightField(void)
     for (i = 0; i < 13; i++)
         ApplyWeatherGammaShiftToPal(i);
     DaemonsRetintObjectEventPalettes();
+    DaemonsRetintFieldEffectPalettes();   // T-279
 }
 
 static EWRAM_DATA u8 sRelightTimer = 0;
