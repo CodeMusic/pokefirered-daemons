@@ -404,7 +404,7 @@ static void SetUpStartMenu(void)
         AppendToStartMenuItems(STARTMENU_DBG_ARTSAI);
         AppendToStartMenuItems(STARTMENU_DBG_CRYSTAL);
         AppendToStartMenuItems(STARTMENU_DBG_WARDEN);
-        //  No BACK row here: an eighth row sits under the description box (2026-09-24), and B closes the menu.
+        //  No BACK row here: an eighth row sits under the description box (2026-09-24), and B goes back.
         return;
     }
     if (sDbgPage == DBG_PAGE_MAIN)
@@ -416,7 +416,7 @@ static void SetUpStartMenu(void)
         AppendToStartMenuItems(STARTMENU_DBG_WATCH);
         AppendToStartMenuItems(STARTMENU_DBG_SONG);
         AppendToStartMenuItems(STARTMENU_DBG_SFX);
-        //  No BACK row: WATCH took the seventh (T-268), an eighth sits under the description box, and B closes the menu.
+        //  No BACK row: WATCH took the seventh (T-268), an eighth sits under the description box, and B goes back.
         return;
     }
 #endif
@@ -684,6 +684,17 @@ static bool8 StartCB_HandleInput(void)
         StartMenu_FadeScreenIfLeavingOverworld();
         return FALSE;
     }
+#if DAEMONS_DEBUG
+    //  B on a DEBUG page is BACK: a page to the main page, the main page to the START menu. It used to close the
+    //  menu and leave the page set, so START reopened it -- and once WATCH took the main page's BACK row (T-268)
+    //  there was no way back to the START menu at all. START still closes.
+    if (JOY_NEW(B_BUTTON) && sDbgPage != DBG_PAGE_NONE)
+    {
+        PlaySE(SE_SELECT);
+        sStartMenuCallback = DbgBackCallback;
+        return FALSE;
+    }
+#endif
     if (JOY_NEW(B_BUTTON | START_BUTTON))
     {
         DestroySafariZoneStatsWindow();
