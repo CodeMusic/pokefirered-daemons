@@ -1360,12 +1360,7 @@ static bool8 DbgHandleStepInput(void)
 // can be checked on a cartridge at noon. Nothing is saved; a reset goes back to AUTO.
 static void DbgRelight(void)
 {
-    int i;
-
-    LoadMapTilesetPalettes(gMapHeader.mapLayout);
-    for (i = 0; i < 13; i++)
-        ApplyWeatherGammaShiftToPal(i);
-    DaemonsRetintObjectEventPalettes();
+    DaemonsRelightField();   // T-276: the same relight the overworld does when the light changes by itself
 }
 
 static bool8 DbgWatchCallback(void)

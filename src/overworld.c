@@ -1473,9 +1473,39 @@ void CB1_Overworld(void)
     }
 }
 
+// T-276: THE LIGHT CHANGES WHILE YOU STAND IN IT. The watch's tint, the weekday's trim and HALFTONE's grey are put on
+// the palettes as they load (T-268, T-275), so a map kept the light it was entered in -- dusk could fall on a route
+// and nothing moved until the next door. Once a second, outdoors, when nothing is fading, the weather is settled and
+// the player has the controls, the light the rows were loaded under is compared with the light now, and the map and
+// everyone on it are relit if they differ. DEBUG's TIME row uses the same relight, at once.
+void DaemonsRelightField(void)
+{
+    int i;
+
+    LoadMapTilesetPalettes(gMapHeader.mapLayout);
+    for (i = 0; i < 13; i++)
+        ApplyWeatherGammaShiftToPal(i);
+    DaemonsRetintObjectEventPalettes();
+}
+
+static EWRAM_DATA u8 sRelightTimer = 0;
+
+static void RelightIfTheLightChanged(void)
+{
+    if (++sRelightTimer < 60)
+        return;
+    sRelightTimer = 0;
+    if (!IsMapTypeOutdoors(gMapHeader.mapType) || gPaletteFade.active
+     || gWeatherPtr->palProcessingState != WEATHER_PAL_STATE_IDLE || ArePlayerFieldControlsLocked())
+        return;
+    if (DaemonsPrimarySignature() != DaemonsPaletteSignature())
+        DaemonsRelightField();
+}
+
 static void OverworldBasic(void)
 {
     ScriptContext_RunScript();
+    RelightIfTheLightChanged();
     RunTasks();
     AnimateSprites();
     CameraUpdate();

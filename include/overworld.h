@@ -139,6 +139,7 @@ bool32 Overworld_LinkRecvQueueLengthMoreThan2(void);
 u8 GetCurrentMapType(void);
 
 u8 GetLastUsedWarpMapType(void);
+void DaemonsRelightField(void);   // T-276
 const struct MapHeader *const GetDestinationWarpMapHeader(void);
 void TryFadeOutOldMapMusic(void);
 void CB2_ReturnToFieldCableClub(void);
