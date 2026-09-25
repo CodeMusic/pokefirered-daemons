@@ -467,4 +467,5 @@ gSpecials::
 	def_special Terminal_OpenCodeScreen
 	def_special Terminal_CheckCode
 	def_special Terminal_BufferPlayTime
+	def_special Terminal_RandomNoRepeat
 gSpecialsEnd::

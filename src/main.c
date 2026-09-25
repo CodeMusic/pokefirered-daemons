@@ -17,6 +17,7 @@
 #include "save_failed_screen.h"
 #include "quest_log.h"
 #include "sloopsvc.h"
+#include "daemons_rtc.h"
 
 extern u32 intr_main[];
 
@@ -269,6 +270,7 @@ void SeedRngAndSetTrainerId(void)
     SeedRng(val);
     REG_TM1CNT_H = 0;
     gTrainerId = val;
+    DaemonsRtc_MixIntoRng();   // T-265: and the cartridge's clock, when it has one
 }
 
 u16 GetGeneratedTrainerIdLower(void)

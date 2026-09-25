@@ -13,6 +13,13 @@ PalletTown_PlayersHouse_2F_Text_CodeTime::
     .string "PLAY TIME\n"
     .string "{STR_VAR_1} hours, {STR_VAR_2} minutes.$"
 
+@ DRAFT (T-265, 2026-09-25): the TIME code when the cartridge has a clock. Awaiting the user's approval.
+PalletTown_PlayersHouse_2F_Text_CodeTimeClock::
+    .string "PLAY TIME\n"
+    .string "{STR_VAR_1} hours, {STR_VAR_2} minutes.\p"
+    .string "CLOCK\n"
+    .string "{STR_VAR_3}$"
+
 PalletTown_PlayersHouse_2F_Text_CodeMom::
     .string "A voice from downstairs.\p"
     .string "MOM: {PLAYER}? Are you still\n"

@@ -46,8 +46,11 @@ PalletTown_PlayersHouse_2F_EventScript_NESEnd::
 	releaseall
 	end
 
+@ T-264: never the same riddle twice running.
 PalletTown_PlayersHouse_2F_EventScript_CodeHelp::
-	random 5
+	setvar VAR_0x8004, 5
+	setvar VAR_0x8005, VAR_TERMINAL_LAST_HELP
+	special Terminal_RandomNoRepeat
 	switch VAR_RESULT
 	case 0, PalletTown_PlayersHouse_2F_EventScript_RiddleTune
 	case 1, PalletTown_PlayersHouse_2F_EventScript_RiddleTime
@@ -73,7 +76,9 @@ PalletTown_PlayersHouse_2F_EventScript_RiddleStars::
 	goto PalletTown_PlayersHouse_2F_EventScript_NESEnd
 
 PalletTown_PlayersHouse_2F_EventScript_CodeTune::
-	random 3
+	setvar VAR_0x8004, 3
+	setvar VAR_0x8005, VAR_TERMINAL_LAST_TUNE
+	special Terminal_RandomNoRepeat
 	switch VAR_RESULT
 	case 0, PalletTown_PlayersHouse_2F_EventScript_TunePewter
 	case 1, PalletTown_PlayersHouse_2F_EventScript_TuneVermilion
@@ -95,7 +100,13 @@ PalletTown_PlayersHouse_2F_EventScript_TunePlays::
 
 PalletTown_PlayersHouse_2F_EventScript_CodeTime::
 	special Terminal_BufferPlayTime
+	goto_if_eq VAR_RESULT, TRUE, PalletTown_PlayersHouse_2F_EventScript_CodeTimeClock
 	msgbox PalletTown_PlayersHouse_2F_Text_CodeTime
+	goto PalletTown_PlayersHouse_2F_EventScript_NESEnd
+
+@ T-265: the cartridge has a clock.
+PalletTown_PlayersHouse_2F_EventScript_CodeTimeClock::
+	msgbox PalletTown_PlayersHouse_2F_Text_CodeTimeClock
 	goto PalletTown_PlayersHouse_2F_EventScript_NESEnd
 
 PalletTown_PlayersHouse_2F_EventScript_CodeMom::

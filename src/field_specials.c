@@ -39,6 +39,7 @@
 #include "constants/region_map_sections.h"
 #include "constants/moves.h"
 #include "constants/menu.h"
+#include "daemons_rtc.h"
 #include "constants/event_objects.h"
 #include "constants/metatile_labels.h"
 
@@ -1739,8 +1740,40 @@ void Terminal_CheckCode(void)
 
 void Terminal_BufferPlayTime(void)
 {
+    struct DaemonsClock clock;
+    u8 *s;
+
     ConvertIntToDecimalStringN(gStringVar1, gSaveBlock2Ptr->playTimeHours, STR_CONV_MODE_LEFT_ALIGN, 3);
     ConvertIntToDecimalStringN(gStringVar2, gSaveBlock2Ptr->playTimeMinutes, STR_CONV_MODE_LEFT_ALIGN, 2);
+    // T-265: and the cartridge's clock, when it has one -- VAR_RESULT says whether it does. 2026-09-25 14:03.
+    gSpecialVar_Result = DaemonsRtc_Read(&clock);
+    if (gSpecialVar_Result)
+    {
+        s = ConvertIntToDecimalStringN(gStringVar3, clock.year, STR_CONV_MODE_LEADING_ZEROS, 4);
+        *s++ = CHAR_HYPHEN;
+        s = ConvertIntToDecimalStringN(s, clock.month, STR_CONV_MODE_LEADING_ZEROS, 2);
+        *s++ = CHAR_HYPHEN;
+        s = ConvertIntToDecimalStringN(s, clock.day, STR_CONV_MODE_LEADING_ZEROS, 2);
+        *s++ = CHAR_SPACE;
+        s = ConvertIntToDecimalStringN(s, clock.hour, STR_CONV_MODE_LEADING_ZEROS, 2);
+        *s++ = CHAR_COLON;
+        ConvertIntToDecimalStringN(s, clock.minute, STR_CONV_MODE_LEADING_ZEROS, 2);
+    }
+}
+
+// T-264: THE TERMINAL NEVER SAYS THE SAME THING TWICE RUNNING (the user, 2026-09-25: typing HELP in the emulator kept
+// giving the same answer). VAR_0x8004 is how many answers there are, VAR_0x8005 the var that remembers the last one,
+// stored +1 so that 0 means none yet. Draw from one fewer and step over the last: every other answer equally likely.
+void Terminal_RandomNoRepeat(void)
+{
+    u16 count = gSpecialVar_0x8004, last = VarGet(gSpecialVar_0x8005), pick;
+
+    if (last == 0 || last > count)
+        pick = Random() % count;
+    else if ((pick = Random() % (count - 1)) >= last - 1)
+        pick++;
+    VarSet(gSpecialVar_0x8005, pick + 1);
+    gSpecialVar_Result = pick;
 }
 
 void BufferMonNickname(void)

@@ -228,8 +228,8 @@
 #define VAR_QLBAK_TRAINER_REMATCHES 0x40AA // array of 4
 #define VAR_QLBAK_MAP_LAYOUT        0x40AE
 
-#define VAR_0x40AF                 0x40AF
-#define VAR_0x40B0                 0x40B0
+#define VAR_TERMINAL_LAST_HELP     0x40AF // T-264: the last HELP answer, +1 (0 none yet)
+#define VAR_TERMINAL_LAST_TUNE     0x40B0 // T-264: the last TUNE, +1
 #define VAR_0x40B1                 0x40B1
 #define VAR_0x40B2                 0x40B2
 #define VAR_0x40B3                 0x40B3
