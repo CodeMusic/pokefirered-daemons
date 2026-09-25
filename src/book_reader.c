@@ -162,6 +162,7 @@ static const u16 sTextbookPal[16] =
 
 static const u8 sInk[3]    = { C_NONE, C_INK, C_SHADOW };
 static const u8 sFaint[3]  = { C_NONE, C_FAINT, C_NONE };
+static const u8 sPen[3]    = { C_NONE, C_MARGIN, C_NONE };   // T-304: a note in the margin, in the Guide's cyan
 
 static const u32 sChapterMarks[] = INCBIN_U32("graphics/book/chapter_icons.4bpp");
 
@@ -737,14 +738,50 @@ static u8 GuideFirstLines(void)
     return (GP_BOTTOM - sBook->bodyTop) / GP_PITCH;
 }
 
+//  T-304: UNDERSTANDINGS ARRIVE IN THE GUIDE'S MARGINS (decided by the user 2026-09-25). Reading the Guide never grants
+//  one -- it is method, and 4.3's rule is that method survives a handoff and understanding does not -- but once an
+//  understanding is arrived at elsewhere, a note appears under the text of the chapter it concerns, indented, in the
+//  Guide's cyan, as if written there. Nothing counts them; a chapter simply has a note it did not have.
+//  WHICH CHAPTER, and the words, are T-252's question with where the understanding is earned: the one row below is a
+//  PROPOSAL -- DREAMS, because the unread cave is a dream you wake from and the chapter's reality check is reading a
+//  line twice -- and its note is DRAFT.
+#define GUIDE_ENTRY_DREAMS 19
+#define GM_INDENT 28
+static const u8 sText_MarginFirst[] = _("Read it twice. It stayed.");   // DRAFT (T-304)
+static const struct { u16 flag; u8 entry; const u8 *note; } sGuideMarginNotes[] = {
+    { FLAG_UNDERSTANDING_FIRST, GUIDE_ENTRY_DREAMS, sText_MarginFirst },   // PROPOSAL: the chapter is T-252's
+};
+
+static const u8 *GuideMarginNote(u8 entry)
+{
+    u8 i;
+
+    for (i = 0; i < ARRAY_COUNT(sGuideMarginNotes); i++)
+        if (sGuideMarginNotes[i].entry == entry && FlagGet(sGuideMarginNotes[i].flag))
+            return sGuideMarginNotes[i].note;
+    return NULL;
+}
+
+//  How many lines the entry fills: its text, then -- when it has a margin note -- a blank line and the note.
+static u8 GuideTextLines(const struct GuideEntry *e, u8 *textLines)
+{
+    const u8 *note = GuideMarginNote(sBook->entry);
+    u8 n = Reflow(e->text, GP_TEXT_W, BR_FONT);
+
+    *textLines = n;
+    if (note != NULL)
+        n += 1 + Reflow(note, GP_TEXT_W - GM_INDENT, BR_FONT);
+    return n;
+}
+
 static void GuideLayout(void)
 {
     const struct GuideEntry *e = &sGuideEntries[sBook->entry];
     u8 titleLines = Reflow(e->title, GP_TEXT_W, BR_SMALL);
-    u8 n;
+    u8 n, textLines;
 
     sBook->bodyTop = GE_TITLE_TOP + titleLines * GE_TITLE_PITCH + 9;
-    n = Reflow(e->text, GP_TEXT_W, BR_FONT);
+    n = GuideTextLines(e, &textLines);
     sBook->spreadCount = 1;
     if (n > GuideFirstLines())
         sBook->spreadCount += (n - GuideFirstLines() + GE_PAGE_LINES - 1) / GE_PAGE_LINES;
@@ -789,6 +826,18 @@ static void DrawGuideEntry(void)
     n = Reflow(e->text, GP_TEXT_W, BR_FONT);
     for (i = 0; i < lines && start + i < n; i++)
         Print(BR_FONT, sInk, GP_TEXT_X, top + i * GP_PITCH, Line(start + i));
+    if (GuideMarginNote(sBook->entry) != NULL)                               // T-304: the note, after one blank line
+    {
+        u8 textLines = n, k;
+
+        n = Reflow(GuideMarginNote(sBook->entry), GP_TEXT_W - GM_INDENT, BR_FONT);
+        for (k = 0; k < n; k++)
+        {
+            u8 at = textLines + 1 + k;                                      // its line in the whole entry
+            if (at >= start && at < start + lines)
+                Print(BR_FONT, sPen, GP_TEXT_X + GM_INDENT, top + (at - start) * GP_PITCH, Line(k));
+        }
+    }
 
     if (sBook->spread + 1 < sBook->spreadCount)                             // a dog-ear while there is more
     {
