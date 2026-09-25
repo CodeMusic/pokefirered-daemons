@@ -5,7 +5,8 @@ PokedexRating_Text_HowIsPokedexComingAlong::
 
 PokedexRating_Text_SeenXOwnedY::
     .string "INDEX completion is:\p"
-    .string "DAEMON seen DAEMON owned\p"
+    .string "{STR_VAR_1} DAEMON seen\n"
+    .string "{STR_VAR_2} DAEMON owned\p"
     .string "CRYSTAL CLEAR's Rating:$"
 
 PokedexRating_Text_LessThan10::

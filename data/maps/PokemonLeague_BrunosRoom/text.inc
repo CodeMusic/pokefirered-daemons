@@ -9,7 +9,7 @@ PokemonLeague_BrunosRoom_Text_Intro::
 	.string "{PLAYER}!\p"
 	.string "Premise: we are stronger.\n"
 	.string "Conclusion: you lose!\p"
-	.string "Hoo hah!$"
+	.string "Hoo hah!{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
 
 PokemonLeague_BrunosRoom_Text_RematchIntro::
 	.string "I am CHOLERIC.\n"

@@ -7,7 +7,7 @@ PewterCity_Gym_Text_BrockIntro::
     .string "not happen.\p"
     .string "My daemons are LEGACY. Old\n"
     .string "formats, still readable.\p"
-    .string "Show me what you have encoded.$"
+    .string "Show me what you have encoded.{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
 
 @ NOTE: This defeat text actually causes a buffer overflow. It's too long for the gDisplayedStringBattle
 @ buffer that it's put into, and it stomps all over the gBattleTextBuffs after, as well as the otherwise

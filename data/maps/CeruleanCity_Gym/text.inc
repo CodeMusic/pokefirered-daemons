@@ -5,7 +5,7 @@ CeruleanCity_Gym_Text_MistyIntro::
     .string "What is your approach when you\n"
     .string "bind DAEMONS?\p"
     .string "My policy is an all-out offensive\n"
-    .string "with FLOW-type DAEMON!$"
+    .string "with FLOW-type DAEMON!{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
 
 CeruleanCity_Gym_Text_ExplainTM03::
     .string "PLUGIN03 teaches RIPPLE.\p"

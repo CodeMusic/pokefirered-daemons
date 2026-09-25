@@ -4,7 +4,7 @@ CinnabarIsland_Gym_Text_BlaineIntro::
     .string "QUICKSILVER BENCHMARK!\p"
     .string "My fiery DAEMON will incinerate all\n"
     .string "challengers!\p"
-    .string "Hah! You better have COOLANT!$"
+    .string "Hah! You better have COOLANT!{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
 
 CinnabarIsland_Gym_Text_BlaineDefeat::
     .string "I have burnt out!\p"

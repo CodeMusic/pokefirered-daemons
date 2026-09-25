@@ -12,7 +12,7 @@ PokemonLeague_AgathasRoom_Text_Intro::
 	.string "DAEMONS are for engaging, not for\n"
 	.string "filing.\p"
 	.string "{PLAYER}! I'll show you how a real\n"
-	.string "USER engages!$"
+	.string "USER engages!{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
 
 PokemonLeague_AgathasRoom_Text_RematchIntro::
 	.string "I am MELANCHOLIC.\n"

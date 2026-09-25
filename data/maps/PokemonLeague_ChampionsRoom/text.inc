@@ -70,7 +70,7 @@ PokemonLeague_ChampionsRoom_Text_OakCongratulations::
     .string "Congratulations! You're the new\l"
     .string "DAEMON LEAGUE champion!\p"
     .string "You've grown up so much since you\n"
-    .string "first left with !\p"
+    .string "first left with {STR_VAR_1}!\p"
     .string "{PLAYER}, you have come of age!$"
 
 PokemonLeague_ChampionsRoom_Text_OakImDisappointedRival::

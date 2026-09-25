@@ -4,12 +4,12 @@ ViridianCity_Gym_Text_GiovanniIntro::
     .string "I ran this BENCHMARK once, before\n"
     .string "any of the rest of it. I am running\l"
     .string "it now.\p"
-    .string "Nothing held back.$"
+    .string "Nothing held back.{PLAY_BGM}{MUS_ENCOUNTER_ROCKET}$"
 
 ViridianCity_Gym_Text_GiovanniDefeat::
     .string "Measured, then.\p"
     .string "Take the TRUE MARK. It is\n"
-    .string "accurate.$"
+    .string "accurate.{PAUSE_MUSIC}{PLAY_BGM}{MUS_OBTAIN_BADGE}{PAUSE 0xFE}{PAUSE 0x56}{RESUME_MUSIC}$"
 
 ViridianCity_Gym_Text_GiovanniPostBattle::
     .string "Well measured.\p"

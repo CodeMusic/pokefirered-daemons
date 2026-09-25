@@ -10,7 +10,7 @@ PokemonLeague_LancesRoom_Text_Intro::
 	.string "I never know what they'll do.\n"
 	.string "That's the best part!\p"
 	.string "Your LEAGUE challenge ends with\n"
-	.string "me, {PLAYER}! Surprise me!$"
+	.string "me, {PLAYER}! Surprise me!{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
 
 PokemonLeague_LancesRoom_Text_RematchIntro::
 	.string "Ah! So, you've returned, {PLAYER}!\p"
