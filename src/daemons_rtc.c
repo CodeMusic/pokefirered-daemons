@@ -26,6 +26,7 @@
 #define CMD_DATETIME_RD (0x60 | (2 << 1) | 1)
 
 #define STATUS_24HOUR 0x40
+#define HOUR_PM       0x80   // the hour register's AM/PM flag, which is what carries the afternoon in 12-hour mode
 
 #define GPIO_PORT_DATA        (*(vu16 *)0x80000C4)
 #define GPIO_PORT_DIRECTION   (*(vu16 *)0x80000C6)
@@ -99,16 +100,21 @@ bool8 DaemonsRtc_Read(struct DaemonsClock *clock)
 
     ReadRegister(CMD_STATUS_RD, &status, 1);
     ReadRegister(CMD_DATETIME_RD, raw, 7);   // year, month, day, weekday, hour, minute, second
-    if (!(status & STATUS_24HOUR))
-        return FALSE;                         // a clock nobody has set up, or no clock at all
     if (!FromBcd(raw[0], 99, &year)
      || !FromBcd(raw[1], 12, &clock->month) || clock->month == 0
      || !FromBcd(raw[2], 31, &clock->day) || clock->day == 0
      || !FromBcd(raw[3] & 7, 6, &clock->weekday)
-     || !FromBcd(raw[4] & 0x3F, 23, &hour)
+     || !FromBcd(raw[4] & 0x3F, (status & STATUS_24HOUR) ? 23 : 12, &hour)
      || !FromBcd(raw[5], 59, &clock->minute)
      || !FromBcd(raw[6] & 0x7F, 59, &clock->second))
         return FALSE;
+    //  A CLOCK IN 12-HOUR MODE IS STILL A CLOCK (2026-09-25, while T-265 waits on the EZ-Flash). This used to refuse
+    //  any clock without the 24-hour flag, as "a clock nobody has set up" -- but T-277's year check below already
+    //  catches that one (a fresh chip reads 2000-01-01), and a flash cart's menu may well keep its clock in 12-hour
+    //  mode, which would have read as no clock at all. The hour is then 0-11 (12 accepted and read as 0), and the
+    //  afternoon is the PM flag.
+    if (!(status & STATUS_24HOUR))
+        hour = hour % 12 + ((raw[4] & HOUR_PM) ? 12 : 0);
     clock->year = 2000 + year;
     clock->hour = hour;
     //  T-277: A CLOCK NOBODY SET IS NO CLOCK. mGBA keeps an unset clock as a zeroed record and counts it on from
