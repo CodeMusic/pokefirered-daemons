@@ -1592,6 +1592,9 @@
 //  T-257. CRYSTAL, home after the payload, lets the INDEX write into the NOTEBOOK: one question asked of it, and a
 //  page in LAB NOTES that answers it from what the save already holds, written again every time it is opened.
 #define FLAG_INDEX_WRITES             (DAEMONS_FLAGS_START + 0x55)
+//  LOOSE PAGES 7, FOLDS: folding instructions pinned to the wall of the room where the game was drawn (the user,
+//  2026-09-25, from *The Folds of Awareness*). A flag nothing else reads -- it is only that the page was copied.
+#define FLAG_NOTEBOOK_LOOSE_FOLDS     (DAEMONS_FLAGS_START + 0x56)
 
 //  T-300. THE PROGRAMMER'S GUIDE TO THE HUMAN MIND, taken from the bookshelf in ONE ISLAND's second house. 0x60 up is
 //  the Guide's, so the clock session's next flags after 0x55 do not meet it.

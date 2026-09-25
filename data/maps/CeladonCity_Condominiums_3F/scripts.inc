@@ -103,3 +103,26 @@ CeladonCity_Condominiums_3F_EventScript_Computer2::
 CeladonCity_Condominiums_3F_EventScript_Computer3::
 	msgbox CeladonCity_Condominiums_3F_Text_ItsScriptBetterNotLookAtEnding, MSGBOX_SIGN
 	end
+
+@  LOOSE PAGES 7, FOLDS (the user, 2026-09-25). Pinned where the painting hangs in the room where the game was
+@  drawn: read full screen where it is, the way the NOTEBOOK's other found documents are, and copied once.
+CeladonCity_Condominiums_3F_EventScript_Folds::
+	lockall
+	goto_if_set FLAG_NOTEBOOK_LOOSE_FOLDS, CeladonCity_Condominiums_3F_EventScript_FoldsAgain
+	setflag FLAG_NOTEBOOK_LOOSE_FOLDS
+	call CeladonCity_Condominiums_3F_EventScript_FoldsRead
+	call EventScript_NotebookCopied
+	releaseall
+	end
+
+CeladonCity_Condominiums_3F_EventScript_FoldsAgain::
+	call CeladonCity_Condominiums_3F_EventScript_FoldsRead
+	releaseall
+	end
+
+CeladonCity_Condominiums_3F_EventScript_FoldsRead::
+	setvar VAR_0x8004, FLAG_NOTEBOOK_LOOSE_FOLDS
+	fadescreen FADE_TO_BLACK
+	special Notebook_ReadFlagEntry
+	waitstate
+	return

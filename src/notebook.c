@@ -163,6 +163,35 @@ static const u8 sText_Loose_Unsent[] = _(
     "argue.\p"
     "I am going to be one of them.");
 
+//  LOOSE PAGES 7 -- DRAFT WORDING, awaiting the user's approval. *The Folds of Awareness* (Seeing Sharp, 2025):
+//  six folds of one sheet, and a half-fold between the third and fourth. Every step is only paper -- a fold, a
+//  crease, a corner -- and it never says what it is a diagram of (craft rule 1). It is not the GREEN PATH
+//  scientist's (4.33 rules that nothing may prove he was there), so a player who has heard him is the only one
+//  who will see it as anything but instructions.
+static const u8 sTitle_Loose_Folds[] = _("FOLDS");
+static const u8 sText_Loose_Folds[] = _(
+    "Instructions in pencil, pinned to\n"
+    "the wall. No pictures.\p"
+    "1. Start with the sheet flat.\n"
+    "Nothing on it yet.\p"
+    "2. Fold it once. Now one side has\n"
+    "moved, and one side was met.\p"
+    "3. Open it. Fold across the first\n"
+    "crease. Where there was one line,\n"
+    "squares, side by side.\p"
+    "Between three and four: press it\n"
+    "flat with your palm. It keeps\n"
+    "trying to be one sheet again.\p"
+    "4. Fold it corner to corner. Each\n"
+    "half lies on the other, the wrong\n"
+    "way round.\p"
+    "5. The same fold again, smaller,\n"
+    "and again, until your hands know\n"
+    "it.\p"
+    "6. Unfold it all the way. The same\n"
+    "sheet. Every crease still in it.\p"
+    "Do not cut.");
+
 //  LAB NOTES 2 -- *Quantum Translations*, the first verse: what counts as an observer.
 static const u8 sTitle_Lab_Observer[] = _("THE OBSERVER");
 static const u8 sText_Lab_Observer[] = _(
@@ -317,6 +346,7 @@ static const struct NotebookEntry sEntries[] =
     NB_DOC_LOOSE_PAGES_4
     { NB_LOOSE_PAGES,  NB_KIND_TEXT,  0, FLAG_NOTEBOOK_LOOSE_UNSENT,    0, sTitle_Loose_Unsent,        sText_Loose_Unsent },
     NB_DOC_LOOSE_PAGES_6
+    { NB_LOOSE_PAGES,  NB_KIND_TEXT,  0, FLAG_NOTEBOOK_LOOSE_FOLDS,     0, sTitle_Loose_Folds,         sText_Loose_Folds },
     NB_DOC_LAB_NOTES_1
     { NB_LAB_NOTES,    NB_KIND_TEXT,  0, FLAG_NOTEBOOK_LAB_OBSERVER,    0, sTitle_Lab_Observer,        sText_Lab_Observer },
     { NB_LAB_NOTES,    NB_KIND_TEXT,  0, FLAG_NOTEBOOK_LAB_BOX,         0, sTitle_Lab_Box,             sText_Lab_Box },
