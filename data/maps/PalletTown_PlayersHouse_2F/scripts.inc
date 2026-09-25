@@ -75,7 +75,10 @@ PalletTown_PlayersHouse_2F_EventScript_RiddleStars::
 	msgbox PalletTown_PlayersHouse_2F_Text_RiddleStars
 	goto PalletTown_PlayersHouse_2F_EventScript_NESEnd
 
+@ T-274: the day's note first, then the song.
 PalletTown_PlayersHouse_2F_EventScript_CodeTune::
+	special Terminal_PlayDayNote
+	waitse
 	setvar VAR_0x8004, 3
 	setvar VAR_0x8005, VAR_TERMINAL_LAST_TUNE
 	special Terminal_RandomNoRepeat

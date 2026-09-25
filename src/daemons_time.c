@@ -15,7 +15,9 @@
 // grey outranks time. Nothing in the game says any of this.
 
 EWRAM_DATA u8 gDaemonsWatchOverride = 0;
+EWRAM_DATA u8 gDaemonsWeekdayOverride = 0;
 static EWRAM_DATA u8 sWatch = WATCH_DAY;
+static EWRAM_DATA u8 sWeekday = 0;
 static EWRAM_DATA bool8 sWatchFromClock = FALSE;
 static EWRAM_DATA u32 sWatchReadAt = 0;
 static EWRAM_DATA bool8 sWatchRead = FALSE;
@@ -35,30 +37,50 @@ static u8 WatchFromHour(u8 hour)
 // Play time's: day, dusk, night, dawn, fifteen minutes each -- day first, so the opening is in daylight.
 static const u8 sPlayTimeWatches[WATCH_COUNT] = { WATCH_DAY, WATCH_DUSK, WATCH_NIGHT, WATCH_DAWN };
 
-u8 DaemonsWatch(void)
+// Asked on every step through grass and every palette load, and a clock read is a few thousand cycles of
+// bit-banging, so the answer is kept for a second. T-273: the weekday is read in the same pass -- the clock's own
+// weekday register, or, from play time, one day per hour of play (so a week is seven hours, and the watches turn
+// four times inside each day).
+static void ReadClock(void)
 {
     struct DaemonsClock clock;
 
+    if (sWatchRead && gMain.vblankCounter2 - sWatchReadAt < 60)
+        return;
+    sWatchFromClock = DaemonsRtc_Read(&clock);
+    if (sWatchFromClock)
+    {
+        sWatch = WatchFromHour(clock.hour);
+        sWeekday = clock.weekday;
+    }
+    else
+    {
+        sWatch = sPlayTimeWatches[(gSaveBlock2Ptr->playTimeMinutes / 15) % WATCH_COUNT];
+        sWeekday = gSaveBlock2Ptr->playTimeHours % WEEKDAY_COUNT;
+    }
+    sWatchReadAt = gMain.vblankCounter2;
+    sWatchRead = TRUE;
+}
+
+u8 DaemonsWatch(void)
+{
     if (gDaemonsWatchOverride)
         return (gDaemonsWatchOverride - 1) % WATCH_COUNT;
-    // Asked on every step through grass and every palette load, and a clock read is a few thousand cycles of
-    // bit-banging, so the answer is kept for a second.
-    if (!sWatchRead || gMain.vblankCounter2 - sWatchReadAt >= 60)
-    {
-        sWatchFromClock = DaemonsRtc_Read(&clock);
-        if (sWatchFromClock)
-            sWatch = WatchFromHour(clock.hour);
-        else
-            sWatch = sPlayTimeWatches[(gSaveBlock2Ptr->playTimeMinutes / 15) % WATCH_COUNT];
-        sWatchReadAt = gMain.vblankCounter2;
-        sWatchRead = TRUE;
-    }
+    ReadClock();
     return sWatch;
+}
+
+u8 DaemonsWeekday(void)
+{
+    if (gDaemonsWeekdayOverride)
+        return (gDaemonsWeekdayOverride - 1) % WEEKDAY_COUNT;
+    ReadClock();
+    return sWeekday;
 }
 
 bool8 DaemonsWatchIsFromClock(void)
 {
-    DaemonsWatch();
+    ReadClock();
     return sWatchFromClock;
 }
 

@@ -1970,6 +1970,11 @@ static bool32 LoadMapInStepsLocal(u8 *state, bool32 inLink)
         {
             ShowMapLabelPopup(GetMapFloorLabel(), FALSE);   // T-215: a school floor says its subject
         }
+        else if (IsMapTypeIndoors(GetLastUsedWarpMapType()) && IsMapTypeOutdoors(gMapHeader.mapType))
+        {
+            // T-269: out of a door, the town's name and then the day
+            MapNamePopup_QueueDayBanner(gMapHeader.showMapName == TRUE, FALSE);
+        }
         else if (gMapHeader.showMapName == TRUE)
         {
             ShowMapNamePopup(FALSE);

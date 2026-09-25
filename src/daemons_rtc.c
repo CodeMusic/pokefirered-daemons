@@ -95,7 +95,7 @@ static bool8 FromBcd(u8 bcd, u8 max, u8 *out)
 
 bool8 DaemonsRtc_Read(struct DaemonsClock *clock)
 {
-    u8 status, year, hour, raw[7];
+    u8 status, year, hour, raw[7];   // year, month, day, weekday, hour, minute, second
 
     ReadRegister(CMD_STATUS_RD, &status, 1);
     ReadRegister(CMD_DATETIME_RD, raw, 7);   // year, month, day, weekday, hour, minute, second
@@ -104,6 +104,7 @@ bool8 DaemonsRtc_Read(struct DaemonsClock *clock)
     if (!FromBcd(raw[0], 99, &year)
      || !FromBcd(raw[1], 12, &clock->month) || clock->month == 0
      || !FromBcd(raw[2], 31, &clock->day) || clock->day == 0
+     || !FromBcd(raw[3] & 7, 6, &clock->weekday)
      || !FromBcd(raw[4] & 0x3F, 23, &hour)
      || !FromBcd(raw[5], 59, &clock->minute)
      || !FromBcd(raw[6] & 0x7F, 59, &clock->second))

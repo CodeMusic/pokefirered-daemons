@@ -171,6 +171,7 @@ static bool8 DbgInvokeCallback(void);
 static bool8 DbgHandleStepInput(void);
 static bool8 DbgSongCallback(void);
 static bool8 DbgWatchCallback(void);
+static void DbgRelight(void);
 static bool8 DbgSfxCallback(void);
 static bool8 DbgBackCallback(void);
 static bool8 IsDaemonsDebugCallback(void);
@@ -363,6 +364,7 @@ static EWRAM_DATA u8 sDbgPage = 0;
 
 static EWRAM_DATA u16 sDbgSong = 0;
 static const u8 *const sDbgWatchNames[] = { gText_DbgWatchAuto, gText_DbgWatchDay, gText_DbgWatchDusk, gText_DbgWatchNight, gText_DbgWatchDawn };   // T-268, by gDaemonsWatchOverride
+static const u8 *const sDbgWeekdayNames[] = { gText_DbgWatchAuto, gText_DbgSun, gText_DbgMon, gText_DbgTue, gText_DbgWed, gText_DbgThu, gText_DbgFri, gText_DbgSat };   // T-273, by gDaemonsWeekdayOverride
 static EWRAM_DATA u16 sDbgSfx = 0;
 // A NATIONAL DEX NUMBER, not a species id -- so the twenty-five dummy slots
 // Gen 3 left between CELEBI and TREECKO are not in the list, and 1..151 is
@@ -878,7 +880,9 @@ static void DbgSetVars(void)
     {
         ConvertIntToDecimalStringN(gStringVar1, sDbgSong, STR_CONV_MODE_LEFT_ALIGN, 3);
         ConvertIntToDecimalStringN(gStringVar2, sDbgSfx, STR_CONV_MODE_LEFT_ALIGN, 3);
-        StringCopy(gStringVar3, sDbgWatchNames[gDaemonsWatchOverride]);
+        //  T-273: the watch, then the day -- "NIGHT WED", or "AUTO AUTO" when both follow the clock.
+        StringCopy(StringAppend(StringCopy(gStringVar3, sDbgWatchNames[gDaemonsWatchOverride]), gText_RegionMap_Space),
+                   sDbgWeekdayNames[gDaemonsWeekdayOverride]);
     }
 }
 
@@ -1309,10 +1313,31 @@ static bool8 DbgStep(s32 delta)
     return TRUE;
 }
 
+// T-273: on the main page's TIME row, LEFT and RIGHT step the weekday: AUTO, then SUN to SAT.
+static bool8 DbgStepWeekday(s32 delta)
+{
+    s32 v = (s32)gDaemonsWeekdayOverride + delta;
+    while (v > WEEKDAY_COUNT) v -= WEEKDAY_COUNT + 1;
+    while (v < 0)             v += WEEKDAY_COUNT + 1;
+    gDaemonsWeekdayOverride = v;
+    PlaySE(SE_SELECT);
+    DbgRelight();
+    DbgRedraw();
+    return TRUE;
+}
+
 static bool8 DbgHandleStepInput(void)
 {
     u8 row;
 
+    if (sDbgPage == DBG_PAGE_MAIN && sStartMenuOrder[sStartMenuCursorPos] == STARTMENU_DBG_WATCH)
+    {
+        if (JOY_NEW(DPAD_LEFT))
+            return DbgStepWeekday(-1);
+        if (JOY_NEW(DPAD_RIGHT))
+            return DbgStepWeekday(+1);
+        return FALSE;
+    }
     if (sDbgPage != DBG_PAGE_ENCOUNTER)
         return FALSE;
     row = sStartMenuOrder[sStartMenuCursorPos];
@@ -1333,15 +1358,20 @@ static bool8 DbgHandleStepInput(void)
 // T-268: WATCH steps AUTO (the clock, or play time) -> DAY -> DUSK -> NIGHT -> DAWN, and puts the new light on the
 // map at once: the tileset rows and every person on it loaded again, and the weather's gamma back over them. So night
 // can be checked on a cartridge at noon. Nothing is saved; a reset goes back to AUTO.
-static bool8 DbgWatchCallback(void)
+static void DbgRelight(void)
 {
     int i;
 
-    gDaemonsWatchOverride = (gDaemonsWatchOverride + 1) % ARRAY_COUNT(sDbgWatchNames);
     LoadMapTilesetPalettes(gMapHeader.mapLayout);
     for (i = 0; i < 13; i++)
         ApplyWeatherGammaShiftToPal(i);
     DaemonsRetintObjectEventPalettes();
+}
+
+static bool8 DbgWatchCallback(void)
+{
+    gDaemonsWatchOverride = (gDaemonsWatchOverride + 1) % ARRAY_COUNT(sDbgWatchNames);
+    DbgRelight();
     return DbgRedraw();
 }
 

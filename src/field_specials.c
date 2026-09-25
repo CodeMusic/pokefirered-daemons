@@ -40,6 +40,7 @@
 #include "constants/moves.h"
 #include "constants/menu.h"
 #include "daemons_rtc.h"
+#include "daemons_time.h"
 #include "constants/event_objects.h"
 #include "constants/metatile_labels.h"
 
@@ -1759,6 +1760,16 @@ void Terminal_BufferPlayTime(void)
         *s++ = CHAR_COLON;
         ConvertIntToDecimalStringN(s, clock.minute, STR_CONV_MODE_LEADING_ZEROS, 2);
     }
+}
+
+// T-274: THE DAY'S NOTE, HEARD (decided by the user 2026-09-25). TUNE at the terminal sounds the day's note before its
+// song -- Sunday C to Saturday B, the user's seven, in the Guide's order -- and the banner on leaving a building carries
+// the same letter (T-269). Nothing says what a note means.
+STATIC_ASSERT(SE_NOTE_B == SE_NOTE_C + WEEKDAY_COUNT - 1, DayNotesAreConsecutive);
+
+void Terminal_PlayDayNote(void)
+{
+    PlaySE(SE_NOTE_C + DaemonsWeekday());
 }
 
 // T-264: THE TERMINAL NEVER SAYS THE SAME THING TWICE RUNNING (the user, 2026-09-25: typing HELP in the emulator kept

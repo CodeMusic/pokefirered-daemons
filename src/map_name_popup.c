@@ -8,6 +8,7 @@
 #include "strings.h"
 #include "map_name_popup.h"
 #include "constants/maps.h"
+#include "daemons_time.h"
 
 #define FLOOR_ROOFTOP 127
 
@@ -42,6 +43,53 @@ static u8 *MapNamePopupAppendFloorNum(u8 *dest, s8 flags);
 //  second one out of the frame.
 //  T-196: set for one popup, consumed by the printer.
 static EWRAM_DATA const u8 *sPopupOverride = NULL;
+
+//  T-269: THE DAY, ON LEAVING A BUILDING (decided by the user 2026-09-25). Stepping out of a door, the popup shows the
+//  town's name and then, sliding in again in the same frame, the day: "F · WEDNESDAY · NIGHT" -- the day's NOTE as
+//  its mark (Sunday C to Saturday B, the user's seven and the Guide's order), then the weekday, then the watch. Ink
+//  and paper, the popup's own; the day's colour is not here (9.4) but on the CHECKPOINT's trim (T-275), and the note
+//  is heard at the terminal (T-274). Nothing says what either means. Wording DRAFT.
+static EWRAM_DATA bool8 sDayBannerPending = FALSE;
+static EWRAM_DATA u8 sDayBanner[28] = {0};
+
+static const u8 *const sDayNotes[WEEKDAY_COUNT] = {
+    gText_DayNoteC, gText_DayNoteD, gText_DayNoteE, gText_DayNoteF, gText_DayNoteG, gText_DayNoteA, gText_DayNoteB,
+};
+static const u8 *const sDayNames[WEEKDAY_COUNT] = {
+    gText_DaySunday, gText_DayMonday, gText_DayTuesday, gText_DayWednesday, gText_DayThursday, gText_DayFriday,
+    gText_DaySaturday,
+};
+static const u8 *const sWatchNames[WATCH_COUNT] = {
+    [WATCH_DAY] = gText_WatchDay, [WATCH_DUSK] = gText_WatchDusk, [WATCH_NIGHT] = gText_WatchNight,
+    [WATCH_DAWN] = gText_WatchDawn,
+};
+
+static const u8 *DayBannerText(void)
+{
+    u8 day = DaemonsWeekday();
+    u8 *p = StringCopy(sDayBanner, sDayNotes[day]);
+    p = StringCopy(p, gText_DayBannerDot);
+    p = StringCopy(p, sDayNames[day]);
+    p = StringCopy(p, gText_DayBannerDot);
+    StringCopy(p, sWatchNames[DaemonsWatch()]);
+    return sDayBanner;
+}
+
+//  Asked for when the player comes out of a door (overworld.c). The popup that shows the town's name then shows
+//  this; a map that shows no name shows only this.
+void MapNamePopup_QueueDayBanner(bool8 showNameFirst, bool32 palIntoFadedBuffer)
+{
+    if (showNameFirst)
+    {
+        sDayBannerPending = TRUE;
+        ShowMapNamePopup(palIntoFadedBuffer);
+    }
+    else
+    {
+        sDayBannerPending = FALSE;
+        ShowMapLabelPopup(DayBannerText(), palIntoFadedBuffer);
+    }
+}
 
 void ShowMapNamePopup(bool32 palIntoFadedBuffer)
 {
@@ -160,6 +208,15 @@ static void Task_MapNamePopup(u8 taskId)
                 task->tState = 1;
                 task->tReshow = FALSE;
             }
+            else if (sDayBannerPending)
+            {
+                //  T-269: the name has been seen; now the day, in the same frame.
+                sDayBannerPending = FALSE;
+                sPopupOverride = DayBannerText();
+                MapNamePopupPrintMapNameOnWindow(task->tWindowId);
+                CopyWindowToVram(task->tWindowId, COPYWIN_GFX);
+                task->tState = 1;
+            }
             else
             {
                 task->tState = 6;
@@ -207,6 +264,7 @@ void DismissMapNamePopup(void)
         data = gTasks[taskId].data;
         if (tState < 6)
             tState = 6;
+        sDayBannerPending = FALSE;
     }
 }
 
@@ -230,9 +288,10 @@ static u16 MapNamePopupCreateWindow(bool32 palintoFadedBuffer)
     };
     u16 windowId;
     u16 tileNum = 0x01D;
-    if (gMapHeader.floorNum != 0)
+    if (gMapHeader.floorNum != 0 || sDayBannerPending || sPopupOverride == sDayBanner)
     {
-        if (gMapHeader.floorNum != FLOOR_ROOFTOP)
+        //  T-269: the day banner is wider than a town's name, so it takes the floor number's width.
+        if (gMapHeader.floorNum == 0 || gMapHeader.floorNum != FLOOR_ROOFTOP)
         {
             windowTemplate.width += 5;
             tileNum = 0x027;
@@ -268,6 +327,8 @@ static void MapNamePopupPrintMapNameOnWindow(u16 windowId)
     {
         //  The override is consumed here rather than on teardown, so a map popup that happens to follow an
         //  echo shows the map's own name.
+        if (sPopupOverride == sDayBanner)
+            maxWidth = 152;
         xpos = (maxWidth - GetStringWidth(FONT_NORMAL, sPopupOverride, -1)) / 2;
         FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
         AddTextPrinterParameterized(windowId, FONT_NORMAL, sPopupOverride, xpos, 2, TEXT_SKIP_DRAW, NULL);
@@ -276,6 +337,8 @@ static void MapNamePopupPrintMapNameOnWindow(u16 windowId)
     }
 
     ptr = GetMapName(mapName, gMapHeader.regionMapSectionId, 0);
+    if (sDayBannerPending)
+        maxWidth = 152;     // T-269: the window was widened for the day that follows
     if (gMapHeader.floorNum != 0)
     {
         ptr = MapNamePopupAppendFloorNum(ptr, gMapHeader.floorNum);

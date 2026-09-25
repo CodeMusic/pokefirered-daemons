@@ -469,4 +469,5 @@ gSpecials::
 	def_special Terminal_CheckCode
 	def_special Terminal_BufferPlayTime
 	def_special Terminal_RandomNoRepeat
+	def_special Terminal_PlayDayNote
 gSpecialsEnd::

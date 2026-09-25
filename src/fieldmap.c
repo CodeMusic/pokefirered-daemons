@@ -9,6 +9,9 @@
 #include "constants/region_map_sections.h"
 #include "constants/maps.h"
 #include "daemons_time.h"
+#include "data/day_trims.h"
+
+extern const struct Tileset gTileset_General;   // T-275: the CHECKPOINT's tileset
 #include "overworld.h"
 
 struct ConnectionFlags
@@ -988,14 +991,15 @@ u8 DaemonsFieldTint(void)
 // T-268: what the primary rows were loaded under -- the tint, the watch, and Blanche's wash. A connection reloads only
 // the secondary rows, so crossing one compares this with where the player now is and reloads the primary rows if they
 // differ (overworld.c). Blanche's wash was the first thing to need it (T-56); HALFTONE's grey and the watch are the rest.
-static EWRAM_DATA u8 sPrimarySignature = 0;
+static EWRAM_DATA u16 sPrimarySignature = 0;
 
-u8 DaemonsPaletteSignature(void)
+u16 DaemonsPaletteSignature(void)
 {
-    return (DaemonsFieldTint() << 4) | (DaemonsWatch() << 1) | DaemonsIsBlancheOutdoors();
+    // T-275: and the weekday, whose colour is on the CHECKPOINT's trim in the primary rows
+    return (DaemonsFieldTint() << 7) | (DaemonsWeekday() << 3) | (DaemonsWatch() << 1) | DaemonsIsBlancheOutdoors();
 }
 
-u8 DaemonsPrimarySignature(void)
+u16 DaemonsPrimarySignature(void)
 {
     return sPrimarySignature;
 }
@@ -1060,6 +1064,15 @@ static void LoadTilesetPalette(struct Tileset const *tileset, u16 destOffset, u1
         {
             LoadPalette(&black, destOffset, PLTT_SIZEOF(1));
             LoadPalette(tileset->palettes[0] + 1, destOffset + 1, size - PLTT_SIZEOF(1));
+            // T-275: THE DAY'S COLOUR, ON THE CHECKPOINT'S TRIM. The rotunda draws its trim -- the band round the
+            // dome, the courses, the canopy -- in the General tileset's row 2, index 8, which nothing else draws
+            // (DAEMONS tools/gbacivic.py). The day's colour goes there before the watch's tint, so dusk and night
+            // fall on it too. Sunday first; every colour 22+ from each type's hue (tools/gbadaytrim.py). Unnamed.
+            if (tileset == &gTileset_General)
+            {
+                gPlttBufferUnfaded[destOffset + BG_PLTT_ID(2) + 8] = sDayTrims[DaemonsWeekday()];
+                gPlttBufferFaded[destOffset + BG_PLTT_ID(2) + 8] = sDayTrims[DaemonsWeekday()];
+            }
             // T-268: Blanche's wash first and the tint over it, or night would be washed back toward white.
             if (DaemonsIsBlancheOutdoors())
                 DaemonsPaleEntries(destOffset + 1, (size - 2) >> 1);

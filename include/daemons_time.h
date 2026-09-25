@@ -12,8 +12,12 @@
 #define DAEMONS_TINT_WATCH 4
 
 extern u8 gDaemonsWatchOverride;   // DEBUG: 0 follows the clock, 1-4 is a watch + 1
+extern u8 gDaemonsWeekdayOverride; // DEBUG (T-273): 0 follows the clock, 1-7 is Sunday..Saturday + 1
+
+#define WEEKDAY_COUNT 7
 
 u8 DaemonsWatch(void);
+u8 DaemonsWeekday(void);           // 0-6, Sunday first
 bool8 DaemonsWatchIsFromClock(void);
 void DaemonsTintForWatch(u16 *palette, u16 count);
 
