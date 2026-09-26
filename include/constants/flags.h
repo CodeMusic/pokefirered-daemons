@@ -1599,6 +1599,16 @@
 //  T-300. THE PROGRAMMER'S GUIDE TO THE HUMAN MIND, taken from the bookshelf in ONE ISLAND's second house. 0x60 up is
 //  the Guide's, so the clock session's next flags after 0x55 do not meet it.
 #define FLAG_GOT_GUIDE                (DAEMONS_FLAGS_START + 0x60)
+//  T-252 (the user, 2026-09-26): seven to nine UNDERSTANDINGS, arrived at gradually. The first is above (0x50); these
+//  six are the user's candidate moments, set by book_reader.c's DaemonsArriveAtUnderstandings on every map load
+//  once each one's conditions hold. Never counted; each writes a note in a GUIDE chapter's margin (T-304).
+#define FLAG_UNDERSTANDING_SCHOOL     (DAEMONS_FLAGS_START + 0x61)   // the CALLOW SCHOOL: the TEXTBOOK and the exam
+#define FLAG_UNDERSTANDING_READING    (DAEMONS_FLAGS_START + 0x62)   // BRAZEN's Reading Room, and REVEAL
+#define FLAG_UNDERSTANDING_NOTES      (DAEMONS_FLAGS_START + 0x63)   // QUICKSILVER's notes: the run logs and THE FILE
+#define FLAG_UNDERSTANDING_SCORN      (DAEMONS_FLAGS_START + 0x64)   // SCORN beaten, and what he was counting
+#define FLAG_UNDERSTANDING_RETURN     (DAEMONS_FLAGS_START + 0x65)   // TY met, and CRYSTAL found
+#define FLAG_UNDERSTANDING_GUIDE      (DAEMONS_FLAGS_START + 0x66)   // the GUIDE found, and read to its end
+#define FLAG_GUIDE_READ               (DAEMONS_FLAGS_START + 0x67)   // the GUIDE's last entry has been turned to
 
 //  T-19. Two beats of one scene, five islands and a sea apart.
 #define FLAG_TY_GAVE_PAYLOAD          (DAEMONS_FLAGS_START + 0x20)

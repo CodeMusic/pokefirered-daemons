@@ -783,9 +783,44 @@ static u8 GuideFirstLines(void)
 #define GUIDE_ENTRY_DREAMS 19
 #define GM_INDENT 28
 static const u8 sText_MarginFirst[] = _("Read it twice. It stayed.");   // DRAFT (T-304)
+//  DRAFT (T-252, 2026-09-26): the six the user named, each in the chapter it answers, in the player's own hand.
+static const u8 sText_MarginSchool[]  = _("They taught me the names. The rest I will have to find.");
+static const u8 sText_MarginReading[] = _("It was there before. I was not looking.");
+static const u8 sText_MarginNotes[]   = _("Every step made sense on its own.");
+static const u8 sText_MarginScorn[]   = _("He kept score. He was very good at it.");
+static const u8 sText_MarginReturn[]  = _("It took him years to come back. He came back.");
+static const u8 sText_MarginGuide[]   = _("Read to the end. Now the part a book cannot do.");
 static const struct { u16 flag; u8 entry; const u8 *note; } sGuideMarginNotes[] = {
-    { FLAG_UNDERSTANDING_FIRST, GUIDE_ENTRY_DREAMS, sText_MarginFirst },   // PROPOSAL: the chapter is T-252's
+    { FLAG_UNDERSTANDING_FIRST,   GUIDE_ENTRY_DREAMS, sText_MarginFirst },   // PROPOSAL: the chapter is T-252's
+    { FLAG_UNDERSTANDING_SCHOOL,  1,  sText_MarginSchool },    // THE TOOLKIT
+    { FLAG_UNDERSTANDING_READING, 9,  sText_MarginReading },   // MONITORING
+    { FLAG_UNDERSTANDING_NOTES,   6,  sText_MarginNotes },     // THE LOOP
+    { FLAG_UNDERSTANDING_SCORN,   8,  sText_MarginScorn },     // DEBUGGING
+    { FLAG_UNDERSTANDING_RETURN,  14, sText_MarginReturn },    // CRASHES
+    { FLAG_UNDERSTANDING_GUIDE,   24, sText_MarginGuide },     // THE PATH FORWARD
 };
+
+//  T-252: WHEN EACH IS ARRIVED AT. Asked on every map load (overworld.c): an understanding whose conditions all hold
+//  is set, silently -- nothing is announced and nothing counts them. Conditions, not scripts, so every way into a
+//  moment (the story, a debug JUMP, an old save) arrives at the same place.
+static const struct { u16 flag; u16 needs[2]; } sUnderstandingConditions[] = {
+    { FLAG_UNDERSTANDING_SCHOOL,  { FLAG_SCHOOL_GOT_TEXTBOOK, FLAG_GOT_DIPLOMA } },
+    { FLAG_UNDERSTANDING_READING, { FLAG_GOT_DIPLOMA, FLAG_GOT_REVEAL } },
+    { FLAG_UNDERSTANDING_NOTES,   { FLAG_NOTEBOOK_RUN_FATAL, FLAG_NOTEBOOK_FILE_COMPLETE } },
+    { FLAG_UNDERSTANDING_SCORN,   { FLAG_BADGE08_GET, FLAG_BADGE08_GET } },
+    { FLAG_UNDERSTANDING_RETURN,  { FLAG_TY_GAVE_PAYLOAD, FLAG_CRYSTAL_READ_PAYLOAD } },
+    { FLAG_UNDERSTANDING_GUIDE,   { FLAG_GOT_GUIDE, FLAG_GUIDE_READ } },
+};
+
+void DaemonsArriveAtUnderstandings(void)
+{
+    u8 i;
+
+    for (i = 0; i < ARRAY_COUNT(sUnderstandingConditions); i++)
+        if (!FlagGet(sUnderstandingConditions[i].flag)
+         && FlagGet(sUnderstandingConditions[i].needs[0]) && FlagGet(sUnderstandingConditions[i].needs[1]))
+            FlagSet(sUnderstandingConditions[i].flag);
+}
 
 static const u8 *GuideMarginNote(u8 entry)
 {
@@ -879,6 +914,8 @@ static void DrawGuideEntry(void)
         ConvertIntToDecimalStringN(p, sBook->spreadCount, STR_CONV_MODE_LEFT_ALIGN, 1);
         Print(BR_SMALL, sFaint, GP_TEXT_X + GP_TEXT_W - Width(BR_SMALL, buf), 9, buf);
     }
+    if (sBook->entry == GUIDE_ENTRY_LAST)
+        FlagSet(FLAG_GUIDE_READ);                                              // T-252: read to its end
     if (sBook->entry == GUIDE_ENTRY_LAST && sBook->spread + 1 == sBook->spreadCount)
     {
         //  T-315: the last page of the last entry is the code, light on the Guide's dark page, where the book's own

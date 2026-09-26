@@ -1,4 +1,5 @@
 #include "global.h"
+#include "book_reader.h"
 #include "gflib.h"
 #include "bg_regs.h"
 #include "cable_club.h"
@@ -768,6 +769,7 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
     ChooseAmbientCrySpecies();
     SetDefaultFlashLevel();
     Overworld_ClearSavedMusic();
+    DaemonsArriveAtUnderstandings();   // T-252: arrived at, never announced
     RunOnTransitionMapScript();
     TryRegenerateRenewableHiddenItems();
     InitMap();
@@ -817,6 +819,7 @@ static void LoadMapFromWarp(bool32 unused)
         FlagClear(FLAG_SYS_FLASH_ACTIVE);
     SetDefaultFlashLevel();
     Overworld_ClearSavedMusic();
+    DaemonsArriveAtUnderstandings();   // T-252: arrived at, never announced
     RunOnTransitionMapScript();
     TryRegenerateRenewableHiddenItems();
     UpdateLocationHistoryForRoamer();

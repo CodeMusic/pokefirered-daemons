@@ -548,6 +548,41 @@ static s8 PrintStartMenuItems(s8 *cursor_p, u8 nitems)
     return FALSE;
 }
 
+//  T-318 (the user, 2026-09-26): THE MENU IS THEMED IN THE DAY'S COLOUR -- the user's decision, and a deliberate exception
+//  to 9.4, which keeps UI colours off the types' hues. The frame styles 1, 3, 4 and 5 are one drawing in four colours:
+//  index 10 its dark, 14 its body, 13 its light. So the day's colour (the CHECKPOINT's trim, T-275) becomes that ramp,
+//  brightened to a frame's weight. The other styles are other drawings and keep their own colours.
+#include "data/day_trims.h"
+#include "daemons_time.h"
+#define MENU_FRAME_PALETTE_NUM 14   // STD_WINDOW_PALETTE_NUM, private to new_menu_helpers.c
+
+static u16 DaemonsScaleColour(u16 c, u8 top)
+{
+    u8 r = c & 0x1F, g = (c >> 5) & 0x1F, b = (c >> 10) & 0x1F;
+    u8 max = r > g ? (r > b ? r : b) : (g > b ? g : b);
+
+    if (max == 0)
+        return c;
+    return RGB(r * top / max, g * top / max, b * top / max);
+}
+
+static void DaemonsThemeMenuFrame(void)
+{
+    u16 body, dark, light, trim;
+    u8 frame = gSaveBlock2Ptr->optionsWindowFrameType, r, g, b;
+
+    if (frame != 0 && (frame < 2 || frame > 4))
+        return;
+    trim = sDayTrims[DaemonsWeekday()];
+    body = DaemonsScaleColour(trim, 24);
+    dark = DaemonsScaleColour(trim, 13);
+    r = body & 0x1F, g = (body >> 5) & 0x1F, b = (body >> 10) & 0x1F;
+    light = RGB(r + (31 - r) / 2, g + (31 - g) / 2, b + (31 - b) / 2);
+    LoadPalette(&dark, BG_PLTT_ID(MENU_FRAME_PALETTE_NUM) + 10, PLTT_SIZEOF(1));
+    LoadPalette(&body, BG_PLTT_ID(MENU_FRAME_PALETTE_NUM) + 14, PLTT_SIZEOF(1));
+    LoadPalette(&light, BG_PLTT_ID(MENU_FRAME_PALETTE_NUM) + 13, PLTT_SIZEOF(1));
+}
+
 static s8 DoDrawStartMenu(void)
 {
     switch (sDrawStartMenuState[0])
@@ -561,6 +596,7 @@ static s8 DoDrawStartMenu(void)
         break;
     case 2:
         LoadStdWindowFrameGfx();
+        DaemonsThemeMenuFrame();
         DrawStdWindowFrame(CreateStartMenuWindow(sNumStartMenuItems), FALSE);
         sDrawStartMenuState[0]++;
         break;
