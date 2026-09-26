@@ -2766,6 +2766,8 @@ extern const u32 gTrainerFrontPic_StaffQuicksilver[];
 extern const u32 gTrainerPalette_StaffQuicksilver[];
 extern const u32 gTrainerFrontPic_StaffCallow[];
 extern const u32 gTrainerPalette_StaffCallow[];
+extern const u32 gTrainerFrontPic_Ty[];
+extern const u32 gTrainerPalette_Ty[];
 
 extern const u8 gMenuInfoElements_Gfx[];
 extern const u16 gMenuInfoElements1_Pal[];

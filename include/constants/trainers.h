@@ -176,6 +176,7 @@
 #define TRAINER_PIC_STAFF_BRAZEN           154
 #define TRAINER_PIC_STAFF_QUICKSILVER      155
 #define TRAINER_PIC_STAFF_CALLOW           156
+#define TRAINER_PIC_TY                     157
 
 // The player back pics are assumed to alternate according to the gender values (MALE/FEMALE)
 #define TRAINER_BACK_PIC_RED                    0

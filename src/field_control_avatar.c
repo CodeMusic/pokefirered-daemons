@@ -1,4 +1,5 @@
 #include "global.h"
+#include "daemons_time.h"
 #include "gflib.h"
 #include "bike.h"
 #include "coord_event_weather.h"
@@ -454,7 +455,9 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     {
         gFieldInputRecord.pressedStartButton = TRUE;
         FlagSet(FLAG_OPENED_START_MENU);
-        PlaySE(SE_WIN_OPEN);
+        //  T-318 (the user, 2026-09-26): THE MENU OPENS ON THE DAY'S NOTE -- Sunday C to Saturday B, the same note TUNE
+        //  plays at the terminal (T-274) and the banner prints on leaving a building (T-269). Nothing says so.
+        PlaySE(SE_NOTE_C + DaemonsWeekday());
         ShowStartMenu();
         return TRUE;
     }

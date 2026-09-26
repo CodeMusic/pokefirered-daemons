@@ -1157,6 +1157,19 @@ static const struct SpriteFrameImage sPicTable_AlDoldrum[] = {
     overworld_frame(gObjectEventPic_AlDoldrum, 2, 4, 8),
 };
 
+static const struct SpriteFrameImage sPicTable_Ty[] = {
+    overworld_frame(gObjectEventPic_Ty, 2, 4, 0),
+    overworld_frame(gObjectEventPic_Ty, 2, 4, 1),
+    overworld_frame(gObjectEventPic_Ty, 2, 4, 2),
+    overworld_frame(gObjectEventPic_Ty, 2, 4, 3),
+    overworld_frame(gObjectEventPic_Ty, 2, 4, 4),
+    overworld_frame(gObjectEventPic_Ty, 2, 4, 5),
+    overworld_frame(gObjectEventPic_Ty, 2, 4, 6),
+    overworld_frame(gObjectEventPic_Ty, 2, 4, 7),
+    overworld_frame(gObjectEventPic_Ty, 2, 4, 8),
+    overworld_frame(gObjectEventPic_Ty, 2, 4, 9),   // ANIM_RAISE_HAND: a trainer's tenth frame
+};
+
 static const struct SpriteFrameImage sPicTable_TownUmbraAdult[] = {
     overworld_frame(gObjectEventPic_TownUmbraAdult, 2, 4, 0),
     overworld_frame(gObjectEventPic_TownUmbraAdult, 2, 4, 1),

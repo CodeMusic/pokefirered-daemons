@@ -459,6 +459,9 @@ const u32 gTrainerFrontPic_StaffQuicksilver[] = INCBIN_U32("graphics/trainers/fr
 const u32 gTrainerPalette_StaffQuicksilver[] = INCBIN_U32("graphics/trainers/palettes/staff_quicksilver.gbapal.lz");
 const u32 gTrainerFrontPic_StaffCallow[] = INCBIN_U32("graphics/trainers/front_pics/staff_callow_front_pic.4bpp.lz");
 const u32 gTrainerPalette_StaffCallow[] = INCBIN_U32("graphics/trainers/palettes/staff_callow.gbapal.lz");
+//  T-298: Ty, a red fox in CRYSTAL's coat (tools/genty.py, DRAFT)
+const u32 gTrainerFrontPic_Ty[] = INCBIN_U32("graphics/trainers/front_pics/ty_front_pic.4bpp.lz");
+const u32 gTrainerPalette_Ty[] = INCBIN_U32("graphics/trainers/palettes/ty.gbapal.lz");
 
 const u8 gTrainerBackPic_Red[] = INCBIN_U8("graphics/trainers/back_pics/red_back_pic.4bpp");
 const u8 gTrainerBackPic_Leaf[] = INCBIN_U8("graphics/trainers/back_pics/leaf_back_pic.4bpp");

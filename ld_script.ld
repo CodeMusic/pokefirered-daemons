@@ -981,6 +981,7 @@ SECTIONS {
         sound/songs/midi/mus_teachy_tv_menu.o(.rodata);
         sound/songs/midi/mus_brazen.o(.rodata);
         sound/songs/midi/mus_slate.o(.rodata);
+        sound/songs/midi/mus_callow.o(.rodata);
     } > ROM =0
 
     lib_rodata :

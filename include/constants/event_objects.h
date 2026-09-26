@@ -281,7 +281,10 @@
 //  T-256: DAD, drawn from MOM's sheet by tools/gendad.py (the DAEMONS repo).
 #define OBJ_EVENT_GFX_DAD 222
 
-#define NUM_OBJ_EVENT_GFX     223
+//  T-298: Ty, CRYSTAL's sheet with the fur taken down to red, by tools/genty.py (the DAEMONS repo).
+#define OBJ_EVENT_GFX_TY 223
+
+#define NUM_OBJ_EVENT_GFX     224
 
 // These are dynamic object gfx ids.
 // They correspond with the values of the VAR_OBJ_GFX_ID_X vars.

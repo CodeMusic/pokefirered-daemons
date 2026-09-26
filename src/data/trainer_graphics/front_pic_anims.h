@@ -783,6 +783,11 @@ static const union AnimCmd *const sAnims_StaffCallow[] =
     sAnim_GeneralFrame0,
 };
 
+static const union AnimCmd *const sAnims_Ty[] =
+{
+    sAnim_GeneralFrame0,
+};
+
 const union AnimCmd *const *const gTrainerFrontAnimsPtrTable[] =
 {
     [TRAINER_PIC_AQUA_LEADER_ARCHIE]    = sAnims_AquaLeaderArchie,
@@ -942,4 +947,5 @@ const union AnimCmd *const *const gTrainerFrontAnimsPtrTable[] =
     [TRAINER_PIC_STAFF_BRAZEN          ] = sAnims_StaffBrazen,
     [TRAINER_PIC_STAFF_QUICKSILVER     ] = sAnims_StaffQuicksilver,
     [TRAINER_PIC_STAFF_CALLOW          ] = sAnims_StaffCallow,
+    [TRAINER_PIC_TY                    ] = sAnims_Ty,
 };
