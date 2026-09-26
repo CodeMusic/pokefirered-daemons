@@ -69,6 +69,11 @@ FiveIsland_RocketWarehouse_EventScript_DefeatedGideon::
 @  gitignored, and an edit to it survives exactly until the next build
 @  regenerates it. engine.md trap 4, caught by the linker rather than by
 @  remembering.
+@  T-286 (the user, 2026-09-26): YOU STEP BACK AND HE COMES ONE TILE OUT TO MEET YOU. His nook opens only south,
+@  so the player is always on (27,5) here -- and the old walk (down, left, left) stepped him onto that tile and
+@  said the last lines with his back to them. Now the player gives one step, still facing him, and he takes it.
+	applymovement OBJ_EVENT_ID_PLAYER, FiveIsland_RocketWarehouse_Movement_PlayerStepsBack
+	waitmovement 0
 	applymovement LOCALID_WAREHOUSE_GIDEON, FiveIsland_RocketWarehouse_Movement_TyApproaches
 	waitmovement 0
 	msgbox FiveIsland_RocketWarehouse_Text_TyTheOtherThing
@@ -78,11 +83,14 @@ FiveIsland_RocketWarehouse_EventScript_DefeatedGideon::
 	release
 	end
 
+FiveIsland_RocketWarehouse_Movement_PlayerStepsBack::
+	lock_facing_direction
+	walk_down
+	unlock_facing_direction
+	step_end
+
 FiveIsland_RocketWarehouse_Movement_TyApproaches::
 	walk_down
-	walk_left
-	walk_left
-	walk_in_place_faster_left
 	step_end
 
 @  T-19. Both men are in this room and Scorn does not recognise him. They

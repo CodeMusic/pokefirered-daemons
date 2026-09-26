@@ -420,6 +420,15 @@ extern const u8 gText_PkmnCantSwitchOut[];
 
 // credits
 extern const u8 gString_Dummy[];
+extern const u8 gString_Daemons_Content[];
+extern const u8 gString_Daemons_Context[];
+extern const u8 gCreditsString_Daemons_Created_By[];
+extern const u8 gCreditsString_Christopher_Art_Hicks[];
+extern const u8 gCreditsString_Daemons_Built_With[];
+extern const u8 gCreditsString_Claude_Opus[];
+extern const u8 gCreditsString_Daemons_Built_On[];
+extern const u8 gCreditsString_Pokemon_FireRed_Staff[];
+extern const u8 gCreditsString_Pokemon_LeafGreen_Staff[];
 extern const u8 gString_PokemonFireRed_Staff[]; // FR
 extern const u8 gString_PokemonLeafGreen_Staff[]; // LG
 extern const u8 gCreditsString_Director[];

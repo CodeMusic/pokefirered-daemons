@@ -163,7 +163,7 @@ static const u8 sText_Loose_Unsent[] = _(
     "argue.\p"
     "I am going to be one of them.");
 
-//  LOOSE PAGES 7 -- DRAFT WORDING, awaiting the user's approval. *The Folds of Awareness* (Seeing Sharp, 2025):
+//  LOOSE PAGES 7 -- approved by the user 2026-09-26 (T-285). *The Folds of Awareness* (Seeing Sharp, 2025):
 //  six folds of one sheet, and a half-fold between the third and fourth. Every step is only paper -- a fold, a
 //  crease, a corner -- and it never says what it is a diagram of (craft rule 1). It is not the GREEN PATH
 //  scientist's (4.33 rules that nothing may prove he was there), so a player who has heard him is the only one

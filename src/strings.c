@@ -1024,7 +1024,7 @@ const u8 gStartMenuDesc_DbgDiploma[] = _("Take the DIPLOMA without the paper.");
 const u8 gStartMenuDesc_DbgDoldrum[] = _("DOLDRUM CAVE, with or without\nthe understanding.");
 const u8 gStartMenuDesc_DbgArtsai[] = _("The TRANSCRIPT and REVEAL, and\nthe station under the sandbar.");
 const u8 gStartMenuDesc_DbgCrystal[] = _("CRYSTAL home after the payload,\nand the INDEX's page about you.");
-const u8 gStartMenuDesc_DbgWarden[] = _("The WARDEN's TOKEN, and his house\nin FUCHSIA to hand it back.");
+const u8 gStartMenuDesc_DbgWarden[] = _("The WARDEN's TOKEN, and his\nhouse in LURID to hand it back.");
 const u8 gStartMenuDesc_DbgJump[] = _("RECORD, THE MARGINS or the DIPLOMA.");
 const u8 gStartMenuDesc_DbgEncounter[] = _("Invoke any daemon, at any level.");
 const u8 gStartMenuDesc_DbgDaemon[] = _("{DPAD_LEFTRIGHT} steps, L and R step by ten.");
@@ -1193,6 +1193,19 @@ const u8 gText_PokemonOnHook[] = _("A DAEMON's on the hook!{PAUSE_UNTIL_PRESS}")
 const u8 gText_NotEvenANibble[] = _("Not even a nibble‥{PAUSE_UNTIL_PRESS}");
 const u8 gText_ItGotAway[] = _("It got away‥{PAUSE_UNTIL_PRESS}");
 const u8 gText_Rooftop2[] = _("ROOFTOP");
+//  T-290 (the user, 2026-09-26): THE CREDITS SAY WHOSE GAME THIS IS, AND WHOSE IT IS BUILT ON. The vocabulary pass
+//  had renamed four of FireRed's headings, crediting Ken Sugimori and the others as "DAEMON Designers" and the
+//  POKéDEX writers as "INDEX Text" -- their work, under our words. Those four say what they did again; our own
+//  pages come first. port_vocab.py leaves every gCreditsString_ alone now.
+ALIGNED(4) const u8 gString_Daemons_Content[] = _("DAEMONS\nCONTENT");
+ALIGNED(4) const u8 gString_Daemons_Context[] = _("DAEMONS\nCONTEXT");
+ALIGNED(4) const u8 gCreditsString_Daemons_Created_By[] = _("\n\nCreated by\n\n\n\n");
+ALIGNED(4) const u8 gCreditsString_Christopher_Art_Hicks[] = _("\n\n\nChristopher Art Hicks\n\n\n");
+ALIGNED(4) const u8 gCreditsString_Daemons_Built_With[] = _("\n\nBuilt with\n\n\n\n");
+ALIGNED(4) const u8 gCreditsString_Claude_Opus[] = _("\n\n\nClaude Opus\n\n\n");
+ALIGNED(4) const u8 gCreditsString_Daemons_Built_On[] = _("\n\nBuilt on\n\n\n\n");
+ALIGNED(4) const u8 gCreditsString_Pokemon_FireRed_Staff[] = _("\n\n\nPokémon FireRed Version\nand its Staff\n\n");
+ALIGNED(4) const u8 gCreditsString_Pokemon_LeafGreen_Staff[] = _("\n\n\nPokémon LeafGreen Version\nand its Staff\n\n");
 ALIGNED(4) const u8 gString_PokemonFireRed_Staff[] = _("Pokémon FireRed Version\nStaff");
 ALIGNED(4) const u8 gString_PokemonLeafGreen_Staff[] = _("Pokémon LeafGreen Version\nStaff");
 ALIGNED(4) const u8 gCreditsString_Director[] = _("\n\nDirector\n\n\n\n");
@@ -1223,13 +1236,13 @@ ALIGNED(4) const u8 gCreditsString_Script_Designer_Map_Designer[] = _("\nScript 
 ALIGNED(4) const u8 gCreditsString_Satoshi_Nohara_Shigeru_Ohmori[] = _("\n\nSatoshi Nohara\n\nShigeru Ohmori\n\n");
 ALIGNED(4) const u8 gCreditsString_Parametric_Designers[] = _("\nParametric Designers\n\n\n\n\n");
 ALIGNED(4) const u8 gCreditsString_Koji_Nishino_Tetsuji_Ohta_Shigeki_Morimoto[] = _("\n\nKoji Nishino\nTetsuji Ohta\nShigeki Morimoto\n\n");
-ALIGNED(4) const u8 gCreditsString_POKeDEX_Text[] = _("\n\nINDEX Text\n\n\n\n");
+ALIGNED(4) const u8 gCreditsString_POKeDEX_Text[] = _("\n\nPOKéDEX Text\n\n\n\n");
 ALIGNED(4) const u8 gCreditsString_Kenji_Matsushima[] = _("\n\n\nKenji Matsushima\n\n\n");
-ALIGNED(4) const u8 gCreditsString_POKeMON_Designers[] = _("DAEMON Designers\n\n\n\n\n\n");
+ALIGNED(4) const u8 gCreditsString_POKeMON_Designers[] = _("POKéMON Designers\n\n\n\n\n\n");
 ALIGNED(4) const u8 gCreditsString_Ken_Sugimori_Motofumi_Fujiwara_Shigeki_Morimoto_Hironobu_Yoshida[] = _("\nKen Sugimori\nMotofumi Fujiwara\nShigeki Morimoto\nHironobu Yoshida\n\n");
-ALIGNED(4) const u8 gCreditsString_POKeMON_Designers_2[] = _("DAEMON Designers\n\n\n\n\n\n");
+ALIGNED(4) const u8 gCreditsString_POKeMON_Designers_2[] = _("POKéMON Designers\n\n\n\n\n\n");
 ALIGNED(4) const u8 gCreditsString_Satoshi_Ohta_Asuka_Iwashita_Takao_Unno_Kanako_Eo_Aimi_Tomita[] = _("\nSatoshi Ohta\nAsuka Iwashita\nTakao Unno\nKanako Eo\nAimi Tomita\n");
-ALIGNED(4) const u8 gCreditsString_POKeMON_Designers_3[] = _("DAEMON Designers\n\n\n\n\n\n");
+ALIGNED(4) const u8 gCreditsString_POKeMON_Designers_3[] = _("POKéMON Designers\n\n\n\n\n\n");
 ALIGNED(4) const u8 gCreditsString_Atsuko_Nishida_Muneo_Saito_Rena_Yoshikawa_Jun_Okutani[] = _("\nAtsuko Nishida\nMuneo Saito\nRena Yoshikawa\nJun Okutani\n\n");
 ALIGNED(4) const u8 gCreditsString_Supporting_Programmers[] = _("Supporting Programmers\n\n\n\n");
 ALIGNED(4) const u8 gCreditsString_Teruyuki_Yoshioka_Takao_Nakano_Satoshi_Mitsuhara_Daisuke_Hoshino[] = _("\nTeruyuki Yoshioka\nTakao Nakano\n\nSatoshi Mitsuhara\nDaisuke Hoshino\n");

@@ -9,79 +9,73 @@ PokedexRating_Text_SeenXOwnedY::
     .string "CRYSTAL CLEAR's Rating:$"
 
 PokedexRating_Text_LessThan10::
-	.string "You still have lots to do.\p"
-	.string "Go into every patch of grass you\n"
-	.string "see and look for DAEMON!$"
+    .string "You have hardly started.\p"
+    .string "They are in the grass. Walk\n"
+    .string "through all of it.$"
 
 PokedexRating_Text_LessThan20::
-	.string "It looks as if you're getting on the\n"
-	.string "right track!\p"
-	.string "I've given one of my AIDES a\n"
-	.string "VERBOSE DRIVER. Make sure you go\l"
-	.string "get it!$"
+    .string "It is starting to look like an\n"
+    .string "INDEX.\p"
+    .string "One of my AIDES has a VERBOSE\n"
+    .string "DRIVER for you. Go and get it.$"
 
 PokedexRating_Text_LessThan30::
-    .string "You still need more DAEMON! Try to\n"
-    .string "bind other species!$"
+    .string "More. Bind kinds you do not have\n"
+    .string "yet.$"
 
 PokedexRating_Text_LessThan40::
-	.string "Good, it's apparent that you're\n"
-	.string "trying hard!\p"
-	.string "I've given one of my AIDES a GREP.\n"
-	.string "Be sure to collect it!$"
+    .string "You are working at it. It shows.\p"
+    .string "One of my AIDES has a GREP for\n"
+    .string "you. Collect it.$"
 
 PokedexRating_Text_LessThan50::
-	.string "Your INDEX is coming along quite\n"
-	.string "well!\p"
-	.string "I've given one of my AIDES a\n"
-	.string "SURCHARGE. Be sure to get it!$"
+    .string "It is coming along.\p"
+    .string "One of my AIDES has a SURCHARGE\n"
+    .string "for you. Go and get it.$"
 
 PokedexRating_Text_LessThan60::
-	.string "Ah, you've finally topped 50\n"
-	.string "species!\p"
-	.string "One of my AIDES has a WEIGHT\n"
-	.string "SHARE for you. Go and get it!$"
+    .string "Fifty kinds. At last.\p"
+    .string "One of my AIDES has a WEIGHT\n"
+    .string "SHARE for you. Go and get it.$"
 
 PokedexRating_Text_LessThan70::
-	.string "Hoho! This is turning into quite the\n"
-	.string "respectable INDEX!$"
+    .string "That is a respectable INDEX now.$"
 
 PokedexRating_Text_LessThan80::
-	.string "Very good!\p"
-	.string "I think you'll collect even more\n"
-	.string "DAEMONS by going fishing!$"
+    .string "Good.\p"
+    .string "Try fishing. There are kinds under\n"
+    .string "the water you have not met.$"
 
 PokedexRating_Text_LessThan90::
-	.string "Wonderful! Let me guess… You\n"
-	.string "like to collect things, don't you?$"
+    .string "You like to collect things. I can\n"
+    .string "tell. So did I, once.$"
 
 PokedexRating_Text_LessThan100::
-	.string "I'm impressed!\n"
-	.string "It must have been difficult to do!$"
+    .string "That cannot have been easy.$"
 
 PokedexRating_Text_LessThan110::
-	.string "You've finally hit 100 species!\n"
-	.string "I can't believe how good you are!$"
+    .string "A hundred kinds. I did not expect\n"
+    .string "that so soon.$"
 
 PokedexRating_Text_LessThan120::
-	.string "You even have the evolved forms\n"
-	.string "of DAEMON! Super!$"
+    .string "You have the grown forms, too.\n"
+    .string "Good.$"
 
 PokedexRating_Text_LessThan130::
-	.string "Excellent! Trade with friends to\n"
-	.string "get some more!$"
+    .string "Trade with someone. Some kinds\n"
+    .string "only come that way.$"
 
 PokedexRating_Text_LessThan140::
-	.string "Outstanding!\n"
-	.string "You've become a real pro at this!$"
+    .string "You are better at this than most\n"
+    .string "of the people I trained.$"
 
 PokedexRating_Text_LessThan150::
-	.string "I have nothing left to say! You're\n"
-	.string "the one they should ask now!$"
+    .string "I have nothing left to tell you.\n"
+    .string "They should be asking you now.$"
 
 PokedexRating_Text_Complete::
-    .string "Your INDEX is entirely complete!\n"
-    .string "Congratulations!$"
+    .string "It is complete. Every one of them,\n"
+    .string "written down.$"
 
 PokedexRating_Text_NationalDexSeenXOwnedY::
 	.string "And your GLOBAL INDEX is:\p"
@@ -89,25 +83,24 @@ PokedexRating_Text_NationalDexSeenXOwnedY::
 	.string "DAEMON owned.$"
 
 PokedexRating_Text_LookForwardToFilledNationalDex::
-	.string "I'll be looking forward to seeing\n"
-	.string "you fill the GLOBAL INDEX!$"
+    .string "There is still the GLOBAL INDEX.\n"
+    .string "I would like to see that.$"
 
 PokedexRating_Text_YouveCompletedDex::
-	.string "Finally…\p"
-	.string "You've finally completed the INDEX!\p"
-	.string "It's magnificent! Truly, this is a\n"
-	.string "fantastic feat!$"
+    .string "So.\p"
+    .string "You have finished the INDEX.\p"
+    .string "Every entry. Every one of them\n"
+    .string "measured.$"
 
 PokedexRating_Text_Wroooaaarrr::
-	.string "Wroooooooaaaaaarrrr!$"
+    .string "…$"
 
 PokedexRating_Text_HaHa::
 	.string "はあ はあ‥$"
 
 PokedexRating_Text_ThankYouMadeDreamReality::
-	.string "Thank you, {PLAYER}!\n"
-	.string "Sincerely, thank you!\l"
-	.string "You've made my dream a reality!$"
+    .string "Thank you, {PLAYER}.\n"
+    .string "I did not think anyone would.$"
 
 PokedexRating_Text_LoveSeeingYourPokedex::
     .string "CRYSTAL: Ah. {PLAYER}.\p"

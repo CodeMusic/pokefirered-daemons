@@ -123,8 +123,8 @@ FiveIsland_RocketWarehouse_Text_GideonPostBattle::
     .string "Most things are not.$"
 
 FiveIsland_RocketWarehouse_Text_GetLostLeaveMeBe::
-    .string "What do you want now?\n"
-    .string "Go on, get lost, leave me be.$"
+    .string "There is nothing else here.\n"
+    .string "Go on.$"
 
 FiveIsland_RocketWarehouse_Text_GiovannisKidHasRedHair::
     .string "You are still here.\p"

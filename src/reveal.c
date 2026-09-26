@@ -35,9 +35,27 @@ static EWRAM_DATA u8 sRevealTimer = 0;
 //  table is written by tools/gbagrove.py from the same rows that build the groves, so a new grove needs no edit here.
 #include "data/grove_trees.h"
 
+//  T-297: THE FINDS. A thing the game hides in plain sight -- a book on a shelf, a page on a wall -- shimmers under
+//  REVEAL until it has been found, and then never again: the lens shows where you have not been yet, not a list of
+//  what you have. Each row is the find's script and the flag that says it was found. The user's rule (2026-09-26):
+//  every find is findable blind first; REVEAL only makes legible what a sharp eye could already see.
+static const struct { const u8 *script; u16 foundFlag; } sFinds[] = {
+    { OneIsland_House2_EventScript_Guide,             FLAG_GOT_GUIDE },
+    { CeladonCity_Condominiums_3F_EventScript_Folds,  FLAG_NOTEBOOK_LOOSE_FOLDS },
+};
+
 static bool8 IsShown(const struct BgEvent *e)
 {
     u32 i;
+
+    if (e->kind <= BG_KIND_SIGN_LAST)
+    {
+        for (i = 0; i < ARRAY_COUNT(sFinds); i++)
+        {
+            if (e->bgUnion.script == sFinds[i].script)
+                return !FlagGet(sFinds[i].foundFlag);
+        }
+    }
 
     if (e->kind == BG_KIND_HIDDEN_ITEM)
         return !FlagGet(GetHiddenItemAttr(e->bgUnion.hiddenItem, HIDDEN_ITEM_FLAG));

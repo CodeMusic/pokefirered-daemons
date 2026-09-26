@@ -17,9 +17,11 @@
 #include "constants/sound.h"
 
 #if defined(FIRERED)
-#define TITLE_TEXT gString_PokemonFireRed_Staff
+#define TITLE_TEXT gString_Daemons_Content
+#define BUILT_ON_TEXT gCreditsString_Pokemon_FireRed_Staff
 #elif defined(LEAFGREEN)
-#define TITLE_TEXT gString_PokemonLeafGreen_Staff
+#define TITLE_TEXT gString_Daemons_Context
+#define BUILT_ON_TEXT gCreditsString_Pokemon_LeafGreen_Staff
 #endif
 
 enum CreditsSceneIdx
@@ -113,6 +115,9 @@ enum CreditsString
     CREDITS_STRING_SPECIAL_THANKS_5,
     CREDITS_STRING_BRAILLE_CODE_CHECK_4,
     CREDITS_STRING_GRAPHIC_DESIGNER,
+    CREDITS_STRING_DAEMONS_CREATED_BY,
+    CREDITS_STRING_DAEMONS_BUILT_WITH,
+    CREDITS_STRING_DAEMONS_BUILT_ON,
     CREDITS_STRING_DUMMY
 };
 
@@ -342,18 +347,18 @@ static const u16 sCreditsMonCircle_Pal[] = INCBIN_U16("graphics/credits/white_ci
 static const u32 sCreditsMonCircle_Tiles[] = INCBIN_U32("graphics/credits/white_circle.8bpp.lz");
 static const u32 sCreditsMonCircle_Tilemap[] = INCBIN_U32("graphics/credits/white_circle.bin.lz");
 
-static const u32 sCharizard1_Tiles[] = INCBIN_U32("graphics/credits/charizard_1.4bpp.lz");
-static const u32 sCharizard2_Tiles[] = INCBIN_U32("graphics/credits/charizard_2.4bpp.lz");
+static const u32 sCharizard1_Tiles[] = INCBIN_U32("graphics/credits/roverbyte_1.4bpp.lz");
+static const u32 sCharizard2_Tiles[] = INCBIN_U32("graphics/credits/roverbyte_2.4bpp.lz");
 
 static const u32 sVenusaurUnused_Tiles[] = INCBIN_U32("graphics/credits/venusaur_unused.4bpp.lz");
-static const u32 sVenusaur1_Tiles[] = INCBIN_U32("graphics/credits/venusaur_1.4bpp.lz");
-static const u32 sVenusaur2_Tiles[] = INCBIN_U32("graphics/credits/venusaur_2.4bpp.lz");
+static const u32 sVenusaur1_Tiles[] = INCBIN_U32("graphics/credits/musai_1.4bpp.lz");
+static const u32 sVenusaur2_Tiles[] = INCBIN_U32("graphics/credits/musai_2.4bpp.lz");
 
-static const u32 sBlastoise1_Tiles[] = INCBIN_U32("graphics/credits/blastoise_1.4bpp.lz");
-static const u32 sBlastoise2_Tiles[] = INCBIN_U32("graphics/credits/blastoise_2.4bpp.lz");
+static const u32 sBlastoise1_Tiles[] = INCBIN_U32("graphics/credits/artsai_1.4bpp.lz");
+static const u32 sBlastoise2_Tiles[] = INCBIN_U32("graphics/credits/artsai_2.4bpp.lz");
 
-static const u32 sPikachu1_Tiles[] = INCBIN_U32("graphics/credits/pikachu_1.4bpp.lz");
-static const u32 sPikachu2_Tiles[] = INCBIN_U32("graphics/credits/pikachu_2.4bpp.lz");
+static const u32 sPikachu1_Tiles[] = INCBIN_U32("graphics/credits/starr_1.4bpp.lz");
+static const u32 sPikachu2_Tiles[] = INCBIN_U32("graphics/credits/starr_2.4bpp.lz");
 
 static const u32 sUnused = 0xF0;
 
@@ -382,6 +387,9 @@ static const struct CompressedGraphicsHeader sCopyrightOrTheEndGfxHeaders[] = {
 
 static const struct CreditsScrcmd sCreditsScript[] = {
     CREDITS_MAPNEXT(ROUTE23, 16),
+    CREDITS_PRINT(DAEMONS_CREATED_BY, 300),    // T-290: ours first, then the game it is built on
+    CREDITS_PRINT(DAEMONS_BUILT_WITH, 300),
+    CREDITS_PRINT(DAEMONS_BUILT_ON, 300),
     CREDITS_PRINT(DIRECTOR, 300),
     CREDITS_PRINT(ART_DIRECTOR_BATTLE_DIRECTOR, 300),
     CREDITS_PRINT(PROGRAM_LEADER_PLANNING_LEADER_GRAPHIC_DESIGN_LEADER, 300),
@@ -705,6 +713,9 @@ static const struct CreditsTextHeader sCreditsTexts[] = {
     { gCreditsString_Special_Thanks_5, gCreditsString_Nicola_Pratt_Barlow_Shellie_Dow_Anthony_Howitt_Naoko_Saeki_Kyoko_Onishi, FALSE },
     { gCreditsString_Braille_Code_Check_4, gCreditsString_The_Royal_New_Zealand_Foundation_of_the_Blind_Greg_Moran, FALSE },
     { gCreditsString_Graphic_Designer, gCreditsString_Akira_Kinashi, FALSE },
+    { gCreditsString_Daemons_Created_By, gCreditsString_Christopher_Art_Hicks, FALSE },
+    { gCreditsString_Daemons_Built_With, gCreditsString_Claude_Opus, FALSE },
+    { gCreditsString_Daemons_Built_On, BUILT_ON_TEXT, FALSE },
     { gString_Dummy, gString_Dummy, FALSE }
 };
 
@@ -1043,6 +1054,9 @@ static void VBlankCB(void)
     TransferPlttBuffer();
 }
 
+//  T-290 (the user, 2026-09-26): THE FOUR CARDS ARE OURS -- ROVERBYTE, MUSAI, ARTSAI and STARR, in the slots vanilla
+//  gave CHARIZARD, VENUSAUR, BLASTOISE and PIKACHU (the CREDITSMON_ names and window layouts are kept). The two larger
+//  pictures on each card are drawn from the daemon's own front picture by tools/gencreditcards.py.
 static void LoadCreditsMonPic(u8 whichMon)
 {
     switch (whichMon)
@@ -1050,28 +1064,28 @@ static void LoadCreditsMonPic(u8 whichMon)
     case CREDITSMON_CHARIZARD:
         InitWindows(sWindowTemplates_Charizard);
         FillWindowPixelBuffer(0, PIXEL_FILL(0));
-        LoadMonPicInWindow(SPECIES_CHARIZARD, SHINY_ODDS, 0, TRUE, 10, 0);
+        LoadMonPicInWindow(SPECIES_VENUSAUR, SHINY_ODDS, 0, TRUE, 10, 0);
         CopyToWindowPixelBuffer(1, (const void *)sCharizard1_Tiles, 0, 0);
         CopyToWindowPixelBuffer(2, (const void *)sCharizard2_Tiles, 0, 0);
         break;
     case CREDITSMON_VENUSAUR:
         InitWindows(sWindowTemplates_Venusaur);
         FillWindowPixelBuffer(0, PIXEL_FILL(0));
-        LoadMonPicInWindow(SPECIES_VENUSAUR, SHINY_ODDS, 0, TRUE, 10, 0);
+        LoadMonPicInWindow(SPECIES_EEVEE, SHINY_ODDS, 0, TRUE, 10, 0);
         CopyToWindowPixelBuffer(1, (const void *)sVenusaur1_Tiles, 0, 0);
         CopyToWindowPixelBuffer(2, (const void *)sVenusaur2_Tiles, 0, 0);
         break;
     case CREDITSMON_BLASTOISE:
         InitWindows(sWindowTemplates_Blastoise);
         FillWindowPixelBuffer(0, PIXEL_FILL(0));
-        LoadMonPicInWindow(SPECIES_BLASTOISE, SHINY_ODDS, 0, TRUE, 10, 0);
+        LoadMonPicInWindow(SPECIES_MEW, SHINY_ODDS, 0, TRUE, 10, 0);
         CopyToWindowPixelBuffer(1, (const void *)sBlastoise1_Tiles, 0, 0);
         CopyToWindowPixelBuffer(2, (const void *)sBlastoise2_Tiles, 0, 0);
         break;
     case CREDITSMON_PIKACHU:
         InitWindows(sWindowTemplates_Pikachu);
         FillWindowPixelBuffer(0, PIXEL_FILL(0));
-        LoadMonPicInWindow(SPECIES_PIKACHU, SHINY_ODDS, 0, TRUE, 10, 0);
+        LoadMonPicInWindow(SPECIES_MEWTWO, SHINY_ODDS, 0, TRUE, 10, 0);
         CopyToWindowPixelBuffer(1, (const void *)sPikachu1_Tiles, 0, 0);
         CopyToWindowPixelBuffer(2, (const void *)sPikachu2_Tiles, 0, 0);
         break;
@@ -1086,13 +1100,13 @@ static u16 GetCreditsMonSpecies(u8 whichMon)
     switch (whichMon)
     {
     case CREDITSMON_CHARIZARD:
-        return SPECIES_CHARIZARD;
-    case CREDITSMON_VENUSAUR:
         return SPECIES_VENUSAUR;
+    case CREDITSMON_VENUSAUR:
+        return SPECIES_EEVEE;
     case CREDITSMON_BLASTOISE:
-        return SPECIES_BLASTOISE;
+        return SPECIES_MEW;
     case CREDITSMON_PIKACHU:
-        return SPECIES_PIKACHU;
+        return SPECIES_MEWTWO;
     default:
         return SPECIES_NONE;
     }
