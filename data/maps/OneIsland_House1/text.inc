@@ -1,7 +1,12 @@
+@  DRAFT (T-310): the Guide's CASE 5, as an islander. The process, never the name of it.
 OneIsland_House1_Text_GazeUponVolcanoOnSunnyDays::
-    .string "On sunny days, I step out and gaze\n"
-    .string "upon the volcano.\p"
-    .string "That's my daily routine.$"
+    .string "I taught at the school on the\n"
+    .string "mountain, before it went up.\p"
+    .string "Every morning I step out and look\n"
+    .string "at the volcano, and I am counting\l"
+    .string "heads in that classroom again.\p"
+    .string "That was forty years ago.\n"
+    .string "I still count.$"
 
 OneIsland_House1_Text_LastTimeMtEmberErupted::
     .string "Let me think… When was the last\n"

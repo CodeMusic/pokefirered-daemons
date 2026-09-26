@@ -5,11 +5,12 @@ FiveIsland_House1_JPText_HusbandWentOffFishing::
     .string "つりに　いったん　だけど‥\l"
     .string "しんじて　いいのかねえ$"
 
+@  DRAFT (T-310): the Guide's CASE 2, as an islander. The process, never the name of it.
 FiveIsland_House1_Text_HusbandWentOffFishing::
-    .string "Don't worry about buying anything\n"
-    .string "for dinner tonight!\p"
-    .string "…That's what my husband said when\n"
-    .string "he went off fishing today.\p"
-    .string "I'm not sure if I can count on him\n"
-    .string "to live up to that promise.$"
+    .string "I drew this whole island once.\n"
+    .string "Every house and every rock.\p"
+    .string "Nobody has seen it. Something reads\n"
+    .string "over my shoulder while I work.\p"
+    .string "It says the same three words about\n"
+    .string "every page. It sounds just like me.$"
 

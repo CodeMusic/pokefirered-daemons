@@ -118,3 +118,7 @@ TwoIsland_House_EventScript_SetHasTinyMushrooms::
 TwoIsland_House_EventScript_SetHasBothMushrooms::
 	setflag HAS_BOTH_MUSHROOMS
 	return
+
+TwoIsland_House_EventScript_Writer::
+	msgbox TwoIsland_House_Text_Writer, MSGBOX_NPC
+	end

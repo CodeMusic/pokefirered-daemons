@@ -4,5 +4,6 @@
 void BookReader_OpenNotebookPage(const u8 *title, const u8 *text);
 void Textbook_Open(void);
 void Guide_Open(void);
+void Guide_OpenBoardCopy(void);
 
 #endif // GUARD_BOOK_READER_H

@@ -96,6 +96,7 @@ struct BookReader
     u8 spreadCount;
     u8 bodyTop;             // GUIDE: where the first page starts its text, under the title
     bool8 focusRight;       // GUIDE contents: the cursor is in the chapters, not the sections
+    bool8 torn;             // GUIDE: the REVIEW BOARD's copy (T-311)
     u8 *blank;              // the empty sheet or spread, drawn once: filling it per pixel costs a quarter second
     u8 *blankPage;          // GUIDE: its reading page, which is not the contents' spread, so it is kept apart
     u16 lineStart[BR_MAX_LINES];
@@ -756,6 +757,8 @@ static const u8 *GuideMarginNote(u8 entry)
 {
     u8 i;
 
+    if (sBook->torn)                                    // the notes are in the player's copy, not the Board's
+        return NULL;
     for (i = 0; i < ARRAY_COUNT(sGuideMarginNotes); i++)
         if (sGuideMarginNotes[i].entry == entry && FlagGet(sGuideMarginNotes[i].flag))
             return sGuideMarginNotes[i].note;
@@ -774,6 +777,31 @@ static u8 GuideTextLines(const struct GuideEntry *e, u8 *textLines)
     return n;
 }
 
+//  T-311: THE REVIEW BOARD'S COPY. Every page is there but ETHICAL CONSIDERATIONS, which is cut out close to the
+//  spine: the contents still list it, and turning to it finds a stub of paper and the page beneath. Nothing says so
+//  (craft rule 1). THE FUTURE, the page before, ends "That is exactly why the next section matters."
+#define GUIDE_ENTRY_ETHICS 23
+
+static bool8 GuideEntryTornOut(void)
+{
+    return sBook->torn && sBook->entry == GUIDE_ENTRY_ETHICS;
+}
+
+static void DrawGuideTornPage(void)
+{
+    //  the stub's ragged edge, row by row: how far the paper still reaches from the spine
+    static const u8 sStub[] = { 7, 8, 6, 9, 8, 7, 10, 8, 6, 7, 9, 11, 8, 7, 6, 8, 10, 9, 7, 8 };
+    u8 y;
+
+    FillWindowPixelBuffer(WIN_BOOK, PIXEL_FILL(C_NONE));
+    Rect(C_EDGE_DARK, GP_X + 2, 7, GP_W, 150);                              // the pages beneath, one nearer now
+    Rect(C_EDGE, GP_X + 1, 6, GP_W, 150);
+    for (y = 0; y < 150; y++)
+        Rect(C_PAPER, GP_X, 4 + y, sStub[(y / 3 + y / 17) % ARRAY_COUNT(sStub)], 1);
+    Rect(C_FRAME, GP_X, 4, 3, 150);                                         // the spine's edge
+    CopyWindowToVram(WIN_BOOK, COPYWIN_GFX);
+}
+
 static void GuideLayout(void)
 {
     const struct GuideEntry *e = &sGuideEntries[sBook->entry];
@@ -783,6 +811,8 @@ static void GuideLayout(void)
     sBook->bodyTop = GE_TITLE_TOP + titleLines * GE_TITLE_PITCH + 9;
     n = GuideTextLines(e, &textLines);
     sBook->spreadCount = 1;
+    if (GuideEntryTornOut())
+        return;
     if (n > GuideFirstLines())
         sBook->spreadCount += (n - GuideFirstLines() + GE_PAGE_LINES - 1) / GE_PAGE_LINES;
     if (sBook->spread >= sBook->spreadCount)
@@ -797,6 +827,11 @@ static void DrawGuideEntry(void)
     s16 top;
 
     GuideLayout();
+    if (GuideEntryTornOut())
+    {
+        DrawGuideTornPage();
+        return;
+    }
     GuidePageBackground();
     Print(BR_SMALL, sFaint, GP_TEXT_X, 9, sGuideSections[GuideSectionOf(sBook->entry)].label);
     if (sBook->spreadCount > 1)                                             // 2/3, at the head's right
@@ -1289,4 +1324,11 @@ void Textbook_Open(void)
 void Guide_Open(void)
 {
     OpenBook(BOOK_GUIDE, VIEW_COVER);
+}
+
+//  T-311: the REVIEW BOARD's copy, on the shelf in its lobby.
+void Guide_OpenBoardCopy(void)
+{
+    OpenBook(BOOK_GUIDE, VIEW_COVER);
+    sBook->torn = TRUE;
 }

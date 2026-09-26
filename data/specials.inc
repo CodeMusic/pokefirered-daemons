@@ -363,6 +363,7 @@ gSpecials::
 	def_special Notebook_ReadFlagEntry
 	def_special Textbook_Open
 	def_special Guide_Open
+	def_special Guide_OpenBoardCopy
 	def_special School_OpenExam
 	def_special School_ExamInProgress
 	def_special School_BufferExamResult

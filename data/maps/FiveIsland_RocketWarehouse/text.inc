@@ -104,27 +104,30 @@ FiveIsland_RocketWarehouse_Text_ReportWithGraphsAndText::
     .string "… … … … … …\p"
     .string "It's too difficult to understand…$"
 
+@  DRAFT (T-316): Ty in the opera's Act 2 voice -- he looked away, knows it, and wants it put right (4.15).
 FiveIsland_RocketWarehouse_Text_GideonIntro::
-    .string "I told you where I was taking it.\p"
-    .string "Nobody owned it. I worked out\n"
-    .string "where it was and I went and got\l"
-    .string "it, which is more than anyone\l"
-    .string "else did in forty years.\p"
-    .string "You want it back. Fine.\n"
-    .string "Then it is a price, and this is\l"
-    .string "how mine is settled.$"
+    .string "You came for the PRIVATE KEY.\n"
+    .string "It is here. I got to it first.\p"
+    .string "I spent years telling people\n"
+    .string "what was wrong with them.\p"
+    .string "I was good at it. Never once wrong\n"
+    .string "in any way that could be measured.\p"
+    .string "Show me how you hold your DAEMONS.\n"
+    .string "I have forgotten what it looks like.$"
 
 FiveIsland_RocketWarehouse_Text_GideonDefeat::
-    .string "…Well. Settled, then.$"
+    .string "…You looked at each of them before\n"
+    .string "you chose. I used to do that.$"
 
 FiveIsland_RocketWarehouse_Text_GideonPostBattle::
-    .string "Take it. It was never worth what\n"
-    .string "I was going to be paid for it.\p"
-    .string "Most things are not.$"
+    .string "Take it. It was never mine to keep\n"
+    .string "safe.\p"
+    .string "I put my name to a great many\n"
+    .string "things that were never mine.$"
 
 FiveIsland_RocketWarehouse_Text_GetLostLeaveMeBe::
-    .string "There is nothing else here.\n"
-    .string "Go on.$"
+    .string "Go on. Someone has waited long\n"
+    .string "enough already.$"
 
 FiveIsland_RocketWarehouse_Text_GiovannisKidHasRedHair::
     .string "You are still here.\p"
@@ -140,8 +143,8 @@ FiveIsland_RocketWarehouse_Text_GiovannisKidHasRedHair::
 @  argument underneath is his." He is a businessman. Nobody owned it, he
 @  worked out where it was, he got there first, and he knows who pays.
 FiveIsland_RocketWarehouse_Text_TyTheOtherThing::
-    .string "One more thing, and it is not\n"
-    .string "business.\p"
+    .string "One more thing, and it is not about\n"
+    .string "the key.\p"
     .string "You will pass through BLANCHE.\n"
     .string "Everyone does, eventually.$"
 
@@ -152,8 +155,10 @@ FiveIsland_RocketWarehouse_Text_TyNotComing::
     .string "The name on it is enough. She\n"
     .string "will know the hand.\p"
     .string "…No. I am not coming.\p"
-    .string "Go on. You have what you came\n"
-    .string "for.$"
+    .string "I saw what was happening, and I\n"
+    .string "looked away. I cannot undo that.\p"
+    .string "I will not ask her to pretend I\n"
+    .string "can. I only hope she reads it.$"
 
 @  8.2a: the breakthrough is him hearing the sentence he already said, and
 @  4.33's rule about never adjudicating applies here too -- nothing in this

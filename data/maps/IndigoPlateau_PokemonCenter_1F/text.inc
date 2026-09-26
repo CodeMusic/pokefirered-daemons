@@ -35,3 +35,10 @@ IndigoPlateau_PokemonCenter_1F_Text_LancesCousinGymLeaderFarAway::
 	.string "It loses him battles. He says it\n"
 	.string "wins him surprises.$"
 
+
+@  DRAFT (T-311): the REVIEW BOARD's copy of the Guide.
+IndigoPlateau_PokemonCenter_1F_Text_BoardsGuide::
+    .string "Bound reports, each stamped by the\n"
+    .string "REVIEW BOARD.\p"
+    .string "One has a circuit board for a\n"
+    .string "cover. Read it?$"

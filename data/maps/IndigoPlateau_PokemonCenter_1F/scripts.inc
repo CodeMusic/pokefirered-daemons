@@ -68,3 +68,18 @@ IndigoPlateau_PokemonCenter_1F_EventScript_Nurse::
 	call EventScript_PkmnCenterNurse
 	release
 	end
+
+@  T-311: THE REVIEW BOARD'S COPY OF THE GUIDE, on the left half of the lobby's shelf (the right half is still
+@  vanilla's JOURNAL, after the HALL). Every page is there but ETHICAL CONSIDERATIONS (book_reader.c). A found
+@  object: nothing here says what is missing, and a player who owns the Guide knows the cover.
+IndigoPlateau_PokemonCenter_1F_EventScript_BoardsGuide::
+	lockall
+	msgbox IndigoPlateau_PokemonCenter_1F_Text_BoardsGuide, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, IndigoPlateau_PokemonCenter_1F_EventScript_BoardsGuideLeft
+	closemessage
+	fadescreen FADE_TO_BLACK
+	special Guide_OpenBoardCopy
+	waitstate
+IndigoPlateau_PokemonCenter_1F_EventScript_BoardsGuideLeft::
+	releaseall
+	end

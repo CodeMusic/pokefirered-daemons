@@ -46,3 +46,12 @@ TwoIsland_House_Text_CantTeachAnEgg::
     .string "Hunh? There isn't a single ROUTINE\n"
     .string "that I can teach an EGG.$"
 
+@  DRAFT (T-310): the Guide's CASE 4, as an islander. The process, never the name of it.
+TwoIsland_House_Text_Writer::
+    .string "I have been writing the same chapter\n"
+    .string "since the spring.\p"
+    .string "Every morning I start it again, and\n"
+    .string "every morning it goes to the same\l"
+    .string "place and stops.\p"
+    .string "I know exactly where it stops.\n"
+    .string "I just can't see past it.$"
