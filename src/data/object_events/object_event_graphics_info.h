@@ -2529,7 +2529,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_DeoxysA = {
 
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_DeoxysN = {
     .tileTag = TAG_NONE,
-    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_BLUE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_DAEMON_TYPE_PSYCHIC,
     .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
     .size = 512,
     .width = 32,
