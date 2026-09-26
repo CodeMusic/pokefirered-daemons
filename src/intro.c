@@ -1293,7 +1293,8 @@ static void IntroCB_GF_RevealLogo(struct IntroSequenceData * this)
             // Scenes 1 to 3 are the Gen 3 intro: a creature running through
             // grass, then two of them facing off, then a fight. That is
             // SIXTEEN drawings, twelve of them matched animation frames, and
-            // it is also the ONE PLACE LEFT that shows vanilla creatures.
+            // it was thought to be the one place left that shows vanilla creatures
+            // -- the credits' four cards still do (T-290, found 2026-09-25).
             //
             // 2.4's face-off is our version of that scene and it is on the
             // TITLE now, where it costs two drawings instead of sixteen. So
