@@ -58,7 +58,18 @@ PalletTown_PlayersHouse_1F_EventScript_Dad::
 	lock
 	faceplayer
 	goto_if_unset FLAG_SYS_B_DASH, PalletTown_PlayersHouse_1F_EventScript_DadGiveRunningShoes
+	@  T-313, DRAFT: the user's father signs DR HICKS, and it reads like a title. One time in two he says so.
+	random 2
+	goto_if_eq VAR_RESULT, 1, PalletTown_PlayersHouse_1F_EventScript_DadTheInitials
 	msgbox PalletTown_PlayersHouse_1F_Text_DadQuieter
+	closemessage
+	applymovement LOCALID_DAD, Common_Movement_FaceOriginalDirection
+	waitmovement 0
+	release
+	end
+
+PalletTown_PlayersHouse_1F_EventScript_DadTheInitials::
+	msgbox PalletTown_PlayersHouse_1F_Text_DadTheInitials
 	closemessage
 	applymovement LOCALID_DAD, Common_Movement_FaceOriginalDirection
 	waitmovement 0
@@ -86,8 +97,21 @@ PalletTown_PlayersHouse_1F_EventScript_MomHeal::
 	msgbox PalletTown_PlayersHouse_1F_Text_YouShouldTakeQuickRest
 	closemessage
 	call EventScript_OutOfCenterPartyHeal
+	goto_if_set FLAG_GOT_SS_TICKET, PalletTown_PlayersHouse_1F_EventScript_MomTheShip
 	msgbox PalletTown_PlayersHouse_1F_Text_LookingGreatTakeCare
 	release
+	end
+
+@  T-313, DRAFT: MOM plans cruises for a living (the user's mother, a cruise specialist), and the ship's captain is
+@  the player's brother. Only once the player holds a ticket for it.
+PalletTown_PlayersHouse_1F_EventScript_MomTheShip::
+	msgbox PalletTown_PlayersHouse_1F_Text_MomTheShip
+	release
+	end
+
+@  T-313, DRAFT: the player's brother is never home -- the house is full -- so he is a note on the wall.
+PalletTown_PlayersHouse_1F_EventScript_DavidsNote::
+	msgbox PalletTown_PlayersHouse_1F_Text_DavidsNote, MSGBOX_SIGN
 	end
 
 @ Displays special text if interacted with from side or back (which are normally inaccessible)

@@ -427,6 +427,10 @@ extern const u8 gCreditsString_Christopher_Art_Hicks[];
 extern const u8 gCreditsString_Daemons_Built_With[];
 extern const u8 gCreditsString_Claude_Opus[];
 extern const u8 gCreditsString_Daemons_Built_On[];
+extern const u8 gCreditsString_Daemon_Designers[];
+extern const u8 gCreditsString_Daemon_Designers_Names[];
+extern const u8 gCreditsString_Family[];
+extern const u8 gCreditsString_Family_Names[];
 extern const u8 gCreditsString_Pokemon_FireRed_Staff[];
 extern const u8 gCreditsString_Pokemon_LeafGreen_Staff[];
 extern const u8 gString_PokemonFireRed_Staff[]; // FR

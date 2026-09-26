@@ -62,3 +62,27 @@ PalletTown_PlayersHouse_1F_Text_DadExplainRunningShoes::
 PalletTown_PlayersHouse_1F_Text_DadQuieter::
     .string "DAD: Your mother worries.\p"
     .string "So do I. Just quieter.$"
+
+@  T-313, DRAFT.
+PalletTown_PlayersHouse_1F_Text_MomTheShip::
+    .string "MOM: You have a ticket for the\n"
+    .string "S.S. ANNE.\p"
+    .string "Find a chair by the pool on the top\n"
+    .string "deck. Nobody hurries you there.\p"
+    .string "And your brother has the ship now.\n"
+    .string "Tell him to call his mother.$"
+
+PalletTown_PlayersHouse_1F_Text_DadTheInitials::
+    .string "DAD: The post still comes for\n"
+    .string "DOCTOR.\p"
+    .string "It is my initials. I stopped\n"
+    .string "correcting them years ago.\p"
+    .string "I sell diggers. Nobody has ever\n"
+    .string "asked me to look at a rash.$"
+
+PalletTown_PlayersHouse_1F_Text_DavidsNote::
+    .string "A note on the wall, in your\n"
+    .string "brother's hand.\p"
+    .string "“Taking the ferries out to the\n"
+    .string "islands this season. Back when\l"
+    .string "the schedule says. -D.”$"

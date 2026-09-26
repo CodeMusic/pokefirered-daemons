@@ -1203,6 +1203,11 @@ ALIGNED(4) const u8 gCreditsString_Daemons_Created_By[] = _("\n\nCreated by\n\n\
 ALIGNED(4) const u8 gCreditsString_Christopher_Art_Hicks[] = _("\n\n\nChristopher Art Hicks\n\n\n");
 ALIGNED(4) const u8 gCreditsString_Daemons_Built_With[] = _("\n\nBuilt with\n\n\n\n");
 ALIGNED(4) const u8 gCreditsString_Claude_Opus[] = _("\n\n\nClaude Opus\n\n\n");
+//  T-314, T-313 (the user, 2026-09-26): the people and places the game came from, and the family it came from.
+ALIGNED(4) const u8 gCreditsString_Daemon_Designers[] = _("DAEMON Designers\n\n\n\n\n\n");
+ALIGNED(4) const u8 gCreditsString_Daemon_Designers_Names[] = _("\nChristopher Art Hicks\nClaude Opus\nSeeingSharp\nPsychologyCode\nDetourDesigns\n");
+ALIGNED(4) const u8 gCreditsString_Family[] = _("Family\n\n\n\n\n\n");
+ALIGNED(4) const u8 gCreditsString_Family_Names[] = _("\nShirley L Hicks\nDave R Hicks\nDavid F Hicks\n\n\n");
 ALIGNED(4) const u8 gCreditsString_Daemons_Built_On[] = _("\n\nBuilt on\n\n\n\n");
 ALIGNED(4) const u8 gCreditsString_Pokemon_FireRed_Staff[] = _("\n\n\nPokémon FireRed Version\nand its Staff\n\n");
 ALIGNED(4) const u8 gCreditsString_Pokemon_LeafGreen_Staff[] = _("\n\n\nPokémon LeafGreen Version\nand its Staff\n\n");

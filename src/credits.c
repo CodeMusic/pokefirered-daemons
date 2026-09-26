@@ -118,6 +118,8 @@ enum CreditsString
     CREDITS_STRING_DAEMONS_CREATED_BY,
     CREDITS_STRING_DAEMONS_BUILT_WITH,
     CREDITS_STRING_DAEMONS_BUILT_ON,
+    CREDITS_STRING_DAEMON_DESIGNERS,
+    CREDITS_STRING_FAMILY,
     CREDITS_STRING_DUMMY
 };
 
@@ -389,6 +391,8 @@ static const struct CreditsScrcmd sCreditsScript[] = {
     CREDITS_MAPNEXT(ROUTE23, 16),
     CREDITS_PRINT(DAEMONS_CREATED_BY, 300),    // T-290: ours first, then the game it is built on
     CREDITS_PRINT(DAEMONS_BUILT_WITH, 300),
+    CREDITS_PRINT(DAEMON_DESIGNERS, 300),     // T-314
+    CREDITS_PRINT(FAMILY, 300),               // T-313
     CREDITS_PRINT(DAEMONS_BUILT_ON, 300),
     CREDITS_PRINT(DIRECTOR, 300),
     CREDITS_PRINT(ART_DIRECTOR_BATTLE_DIRECTOR, 300),
@@ -716,6 +720,8 @@ static const struct CreditsTextHeader sCreditsTexts[] = {
     { gCreditsString_Daemons_Created_By, gCreditsString_Christopher_Art_Hicks, FALSE },
     { gCreditsString_Daemons_Built_With, gCreditsString_Claude_Opus, FALSE },
     { gCreditsString_Daemons_Built_On, BUILT_ON_TEXT, FALSE },
+    { gCreditsString_Daemon_Designers, gCreditsString_Daemon_Designers_Names, FALSE },
+    { gCreditsString_Family, gCreditsString_Family_Names, FALSE },
     { gString_Dummy, gString_Dummy, FALSE }
 };
 
