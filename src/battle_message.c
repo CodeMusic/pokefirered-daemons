@@ -386,7 +386,9 @@ static const u8 sText_PkmnTurnedAway[] = _("{B_ATK_NAME_WITH_PREFIX} turned away
 static const u8 sText_PkmnPretendNotNotice[] = _("{B_ATK_NAME_WITH_PREFIX} pretended\nnot to notice!");
 static const u8 sText_EnemyAboutToSwitchPkmn[] = _("{B_TRAINER1_CLASS} {B_TRAINER1_NAME} is about to use {B_BUFF2}.\pWill {B_PLAYER_NAME} change DAEMON?");
 static const u8 sText_PkmnLearnedMove2[] = _("{B_ATK_NAME_WITH_PREFIX} learned\n{B_BUFF1}!");
-static const u8 sText_PlayerDefeatedLinkTrainerTrainer1[] = _("Player outscored\n{B_TRAINER1_CLASS} {B_TRAINER1_NAME}!\p");
+//  THE PLAYER'S NAME, not the word "Player": this closes every trainer battle a player wins (STRINGID_PLAYERDEFEATEDTRAINER1),
+//  and vanilla's literal "Player" sat one line above "{B_PLAYER_NAME} got $80 for winning!" (seen playing CONTEXT, 2026-09-25).
+static const u8 sText_PlayerDefeatedLinkTrainerTrainer1[] = _("{B_PLAYER_NAME} outscored\n{B_TRAINER1_CLASS} {B_TRAINER1_NAME}!\p");
 static const u8 sText_ThrewARock[] = _("{B_PLAYER_NAME} threw a ROCK\nat the {B_OPPONENT_MON1_NAME}!");
 static const u8 sText_ThrewSomeBait[] = _("{B_PLAYER_NAME} threw some BAIT\nat the {B_OPPONENT_MON1_NAME}!");
 static const u8 sText_PkmnWatchingCarefully[] = _("{B_OPPONENT_MON1_NAME} is watching\ncarefully!");

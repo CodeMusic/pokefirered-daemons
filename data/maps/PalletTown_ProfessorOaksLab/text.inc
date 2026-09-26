@@ -152,8 +152,7 @@ PalletTown_ProfessorOaksLab_Text_OakPokedexOnDesk::
 PalletTown_ProfessorOaksLab_Text_OakTakeTheseWithYou::
     .string "CRYSTAL: One each.\p"
     .string "You will want to write things\n"
-    .string "down.\p"
-    .string "{PLAYER} got INDEX from CRYSTAL!$"
+    .string "down.$"
 
 PalletTown_ProfessorOaksLab_Text_ReceivedPokedexFromOak::
     .string "{PLAYER} received the INDEX from\n"
@@ -163,8 +162,7 @@ PalletTown_ProfessorOaksLab_Text_OakCatchMonsForDataTakeThese::
     .string "CRYSTAL: Seeing one is not the\n"
     .string "same as holding one, and the INDEX\l"
     .string "knows the difference.\p"
-    .string "So bind them. Use these.\p"
-    .string "{PLAYER} got 5 USERBOXes!$"
+    .string "So bind them. Use these.$"
 
 PalletTown_ProfessorOaksLab_Text_ReceivedFivePokeBalls::
     .string "{PLAYER} received five BOXES.$"

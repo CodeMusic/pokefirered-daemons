@@ -4,8 +4,7 @@ ViridianCity_Mart_Text_YouCameFromPallet::
 ViridianCity_Mart_Text_TakeThisToProfOak::
     .string "CRYSTAL CLEAR's order came in.\p"
     .string "A CC-7. Will you run it out to\n"
-    .string "her?\p"
-    .string "{PLAYER} got the CC-7!$"
+    .string "her?$"
 
 ViridianCity_Mart_Text_ReceivedOaksParcelFromClerk::
     .string "{PLAYER} received the CC-7 from\n"
