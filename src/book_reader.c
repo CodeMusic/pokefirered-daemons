@@ -97,6 +97,7 @@ struct BookReader
     u8 bodyTop;             // GUIDE: where the first page starts its text, under the title
     bool8 focusRight;       // GUIDE contents: the cursor is in the chapters, not the sections
     bool8 torn;             // GUIDE: the REVIEW BOARD's copy (T-311)
+    u8 qr;                  // T-315: a QR code on the last page (BOOK_QR_*), or none
     u8 *blank;              // the empty sheet or spread, drawn once: filling it per pixel costs a quarter second
     u8 *blankPage;          // GUIDE: its reading page, which is not the contents' spread, so it is kept apart
     u16 lineStart[BR_MAX_LINES];
@@ -255,12 +256,43 @@ static const u8 sText_GuideContents[] = _("CONTENTS");
 static void Task_BookInit(u8 taskId);
 static void Task_BookInput(u8 taskId);
 
+#include "data/qr_codes.h"
+
 //  ---------------------------------------------------------------- drawing primitives
 
 static void Rect(u8 color, s16 x, s16 y, s16 w, s16 h)
 {
     if (w > 0 && h > 0)
         FillWindowPixelRect(WIN_BOOK, PIXEL_FILL(color), x, y, w, h);
+}
+
+//  T-315: A QR CODE, centred on (cx, cy): each module a 2x2 block, runs along a row filled at once, on a quiet zone of
+//  four modules in the page's light colour. The codes are tools/gbaqr.py's; nothing on the page says what one is.
+#define QR_MODULE 2
+#define QR_QUIET  4
+static const u8 *const sQrCodes[] = { NULL, sQr_Folds, sQr_Guide };
+
+static void DrawQr(const u8 *qr, s16 cx, s16 cy, u8 light, u8 dark)
+{
+    u8 n = qr[0], rowBytes = (qr[0] + 7) / 8, r, c, run;
+    //  x0 is kept EVEN: the 4-bit fill ORs the half-byte at an odd edge into what is there, so a run starting on an
+    //  odd pixel came back one pixel wider in the shadow colour (1 | 2 = 3), and the code would not scan.
+    s16 side = n * QR_MODULE, x0 = (cx - side / 2) & ~1, y0 = cy - side / 2, pad = QR_QUIET * QR_MODULE;
+    const u8 *rows = qr + 1;
+
+    FillWindowPixelRect(WIN_BOOK, PIXEL_FILL(light), x0 - pad, y0 - pad, side + 2 * pad, side + 2 * pad);
+    for (r = 0; r < n; r++)
+    {
+        for (c = 0; c < n; c += run)
+        {
+            for (run = 0; c + run < n && (rows[r * rowBytes + (c + run) / 8] & (0x80 >> ((c + run) % 8))); run++)
+                ;
+            if (run)
+                FillWindowPixelRect(WIN_BOOK, PIXEL_FILL(dark), x0 + c * QR_MODULE, y0 + r * QR_MODULE, run * QR_MODULE, QR_MODULE);
+            else
+                run = 1;
+        }
+    }
 }
 
 static void Print(u8 font, const u8 *colors, s16 x, s16 y, const u8 *str)
@@ -442,6 +474,8 @@ static void DrawNotebook(void)
     first = sBook->page * NB_LINES;
     for (i = 0; i < NB_LINES && first + i < sBook->lineCount; i++)
         Print(BR_FONT, sInk, NB_TEXT_X, NB_TOP + i * NB_PITCH - 1, Line(first + i));
+    if (sBook->qr != BOOK_QR_NONE && sBook->page + 1 == sBook->pageCount)       // T-315: the last page is the code
+        DrawQr(sQrCodes[sBook->qr], (NB_MARGIN_X + 234) / 2, 86, C_PAPER, C_INK);
 
     if (sBook->page + 1 < sBook->pageCount)                                 // a dog-ear: there is more
     {
@@ -802,6 +836,8 @@ static void DrawGuideTornPage(void)
     CopyWindowToVram(WIN_BOOK, COPYWIN_GFX);
 }
 
+#define GUIDE_ENTRY_LAST (ARRAY_COUNT(sGuideEntries) - 1)     // FURTHER READING, which ends on the code (T-315)
+
 static void GuideLayout(void)
 {
     const struct GuideEntry *e = &sGuideEntries[sBook->entry];
@@ -815,6 +851,8 @@ static void GuideLayout(void)
         return;
     if (n > GuideFirstLines())
         sBook->spreadCount += (n - GuideFirstLines() + GE_PAGE_LINES - 1) / GE_PAGE_LINES;
+    if (sBook->entry == GUIDE_ENTRY_LAST)                                      // T-315: and a page for the code
+        sBook->spreadCount++;
     if (sBook->spread >= sBook->spreadCount)
         sBook->spread = sBook->spreadCount - 1;
 }
@@ -840,6 +878,14 @@ static void DrawGuideEntry(void)
         *p++ = CHAR_SLASH;
         ConvertIntToDecimalStringN(p, sBook->spreadCount, STR_CONV_MODE_LEFT_ALIGN, 1);
         Print(BR_SMALL, sFaint, GP_TEXT_X + GP_TEXT_W - Width(BR_SMALL, buf), 9, buf);
+    }
+    if (sBook->entry == GUIDE_ENTRY_LAST && sBook->spread + 1 == sBook->spreadCount)
+    {
+        //  T-315: the last page of the last entry is the code, light on the Guide's dark page, where the book's own
+        //  further reading would go. The Board's copy has it too: it is the same book.
+        DrawQr(sQrCodes[BOOK_QR_GUIDE], GP_X + GP_W / 2, 86, C_INK, C_PAPER);
+        CopyWindowToVram(WIN_BOOK, COPYWIN_GFX);
+        return;
     }
     if (sBook->spread == 0)
     {
@@ -1324,6 +1370,13 @@ void Textbook_Open(void)
 void Guide_Open(void)
 {
     OpenBook(BOOK_GUIDE, VIEW_COVER);
+}
+
+//  T-315: a NOTEBOOK page that ends on a QR code -- one more page, after the text. Called just after it is opened.
+void BookReader_AddQr(u8 which)
+{
+    sBook->qr = which;
+    sBook->pageCount++;
 }
 
 //  T-311: the REVIEW BOARD's copy, on the shelf in its lobby.

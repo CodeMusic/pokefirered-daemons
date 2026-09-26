@@ -640,6 +640,8 @@ void Notebook_ReadFlagEntry(void)
         {
             StringExpandPlaceholders(gStringVar4, sEntries[i].text);   // {RIVAL} in a letter is the name the player gave
             BookReader_OpenNotebookPage(sEntries[i].title, gStringVar4);
+            if (sEntries[i].flag == FLAG_NOTEBOOK_LOOSE_FOLDS)   // T-315: FOLDS ends on a code to the essay
+                BookReader_AddQr(BOOK_QR_FOLDS);
             return;
         }
     }
@@ -661,4 +663,6 @@ void Notebook_ReadEntry(void)
             text++;
     }
     BookReader_OpenNotebookPage(sEntries[gSpecialVar_0x8006].title, text);
+    if (sEntries[gSpecialVar_0x8006].flag == FLAG_NOTEBOOK_LOOSE_FOLDS)   // T-315
+        BookReader_AddQr(BOOK_QR_FOLDS);
 }
