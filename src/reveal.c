@@ -42,6 +42,7 @@ static EWRAM_DATA u8 sRevealTimer = 0;
 static const struct { const u8 *script; u16 foundFlag; } sFinds[] = {
     { OneIsland_House2_EventScript_Guide,             FLAG_GOT_GUIDE },
     { CeladonCity_Condominiums_3F_EventScript_Folds,  FLAG_NOTEBOOK_LOOSE_FOLDS },
+    { ViridianCity_Mart_EventScript_ShelfEnd,          FLAG_GOT_OPUS },
 };
 
 static bool8 IsShown(const struct BgEvent *e)

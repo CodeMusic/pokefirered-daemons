@@ -122,6 +122,7 @@ PalletTown_ProfessorOaksLab_EventScript_NationalDexScene::
 PalletTown_ProfessorOaksLab_EventScript_NationalDexSceneRivalEnterNorth::
 	setobjectxyperm LOCALID_OAKS_LAB_RIVAL, 5, 10
 	addobject LOCALID_OAKS_LAB_RIVAL
+	setobjectxy LOCALID_OAKS_LAB_RIVAL, 5, 10    @ T-299: even if he is already in the room, he comes in by the door
 	playbgm MUS_ENCOUNTER_RIVAL, 0
 	applymovement LOCALID_PLAYER, PalletTown_ProfessorOaksLab_Movement_WatchRivalEnterNorth
 	applymovement LOCALID_OAKS_LAB_RIVAL, PalletTown_ProfessorOaksLab_Movement_RivalEnter
@@ -131,6 +132,7 @@ PalletTown_ProfessorOaksLab_EventScript_NationalDexSceneRivalEnterNorth::
 PalletTown_ProfessorOaksLab_EventScript_NationalDexSceneRivalEnterEastWest::
 	setobjectxyperm LOCALID_OAKS_LAB_RIVAL, 6, 10
 	addobject LOCALID_OAKS_LAB_RIVAL
+	setobjectxy LOCALID_OAKS_LAB_RIVAL, 6, 10    @ T-299: even if he is already in the room, he comes in by the door
 	playbgm MUS_ENCOUNTER_RIVAL, 0
 	applymovement LOCALID_OAKS_LAB_PROF_OAK, Common_Movement_WalkInPlaceFasterDown
 	applymovement LOCALID_PLAYER, PalletTown_ProfessorOaksLab_Movement_WatchRivalEnterEastWest
@@ -141,6 +143,7 @@ PalletTown_ProfessorOaksLab_EventScript_NationalDexSceneRivalEnterEastWest::
 PalletTown_ProfessorOaksLab_EventScript_NationalDexSceneRivalEnterSouth::
 	setobjectxyperm LOCALID_OAKS_LAB_RIVAL, 6, 10
 	addobject LOCALID_OAKS_LAB_RIVAL
+	setobjectxy LOCALID_OAKS_LAB_RIVAL, 6, 10    @ T-299: even if he is already in the room, he comes in by the door
 	playbgm MUS_ENCOUNTER_RIVAL, 0
 	applymovement LOCALID_OAKS_LAB_PROF_OAK, Common_Movement_WalkInPlaceFasterDown
 	applymovement LOCALID_OAKS_LAB_RIVAL, PalletTown_ProfessorOaksLab_Movement_RivalEnter
@@ -1002,6 +1005,7 @@ PalletTown_ProfessorOaksLab_EventScript_PlayerAlreadyGotBalls::
 PalletTown_ProfessorOaksLab_EventScript_DexSceneRivalEnterNorth::
 	setobjectxyperm LOCALID_OAKS_LAB_RIVAL, 5, 10
 	addobject LOCALID_OAKS_LAB_RIVAL
+	setobjectxy LOCALID_OAKS_LAB_RIVAL, 5, 10    @ T-299: even if he is already in the room, he comes in by the door
 	applymovement LOCALID_PLAYER, PalletTown_ProfessorOaksLab_Movement_WatchRivalEnterNorth
 	applymovement LOCALID_OAKS_LAB_RIVAL, PalletTown_ProfessorOaksLab_Movement_RivalEnter
 	waitmovement 0
@@ -1010,6 +1014,7 @@ PalletTown_ProfessorOaksLab_EventScript_DexSceneRivalEnterNorth::
 PalletTown_ProfessorOaksLab_EventScript_DexSceneRivalEnterEastWest::
 	setobjectxyperm LOCALID_OAKS_LAB_RIVAL, 6, 10
 	addobject LOCALID_OAKS_LAB_RIVAL
+	setobjectxy LOCALID_OAKS_LAB_RIVAL, 6, 10    @ T-299: even if he is already in the room, he comes in by the door
 	applymovement LOCALID_OAKS_LAB_PROF_OAK, Common_Movement_WalkInPlaceFasterDown
 	applymovement LOCALID_PLAYER, PalletTown_ProfessorOaksLab_Movement_WatchRivalEnterEastWest
 	applymovement LOCALID_OAKS_LAB_RIVAL, PalletTown_ProfessorOaksLab_Movement_RivalEnter
@@ -1019,6 +1024,7 @@ PalletTown_ProfessorOaksLab_EventScript_DexSceneRivalEnterEastWest::
 PalletTown_ProfessorOaksLab_EventScript_DexSceneRivalEnterSouth::
 	setobjectxyperm LOCALID_OAKS_LAB_RIVAL, 6, 10
 	addobject LOCALID_OAKS_LAB_RIVAL
+	setobjectxy LOCALID_OAKS_LAB_RIVAL, 6, 10    @ T-299: even if he is already in the room, he comes in by the door
 	applymovement LOCALID_OAKS_LAB_PROF_OAK, Common_Movement_WalkInPlaceFasterDown
 	applymovement LOCALID_OAKS_LAB_RIVAL, PalletTown_ProfessorOaksLab_Movement_RivalEnter
 	waitmovement 0

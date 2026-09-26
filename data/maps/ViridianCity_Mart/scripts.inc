@@ -4,8 +4,16 @@ ViridianCity_Mart_MapScripts::
 	.byte 0
 
 ViridianCity_Mart_OnLoad::
+	call_if_unset FLAG_GOT_OPUS, ViridianCity_Mart_EventScript_TicketOnTheBin
 	goto_if_unset FLAG_SYS_POKEDEX_GET, ViridianCity_Mart_EventScript_HideQuestionnaire
 	end
+
+@  T-312: OPUS on the end of the right-hand shelving, and a gold card tucked over that bin's label until it is
+@  taken -- the blind hint (the user: "some unusual symbol that could make the user curious"). Metatile 718 is
+@  drawn by tools/gbarepoopus.py; 706 is the bin without it.
+ViridianCity_Mart_EventScript_TicketOnTheBin::
+	setmetatile 8, 6, 0x2CE, TRUE    @ 718: the golden ticket
+	return
 
 ViridianCity_Mart_EventScript_HideQuestionnaire::
 	setmetatile 1, 3, METATILE_Mart_CounterMid_Top, 1
@@ -99,6 +107,8 @@ ViridianCity_Mart_EventScript_ShelfEnd::
 	msgbox ViridianCity_Mart_Text_ShelfEnd
 	additem ITEM_OPUS
 	setflag FLAG_GOT_OPUS
+	setmetatile 8, 6, 0x2C2, TRUE    @ 706: the bin, and nothing tucked in it
+	special DrawWholeMapView
 	msgbox ViridianCity_Mart_Text_TookOpus
 	releaseall
 	end

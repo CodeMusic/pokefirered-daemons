@@ -32,8 +32,7 @@ LavenderTown_Text_SilphScopeNotice::
     .string "FOUNDRY CO.$"
 
 LavenderTown_Text_VolunteerPokemonHouse::
-    .string "HALFTONE VOLUNTEER\n"
-    .string "DAEMON HOUSE$"
+    .string "HALFTONE ORPHAN HOUSE$"
 
 LavenderTown_Text_PokemonTowerSign::
     .string "DAEMON TOWER Becalm the Spirits of\n"
