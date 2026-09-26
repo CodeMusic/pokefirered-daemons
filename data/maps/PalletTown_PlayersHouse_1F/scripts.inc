@@ -44,6 +44,7 @@ PalletTown_PlayersHouse_1F_EventScript_MomGiveRunningShoes::
 	waitmessage
 	waitfanfare
 	setflag FLAG_SYS_B_DASH
+	special DaemonsRepaintPlayerShoes   @ T-256: MOM's, yellow with black trim
 	call EventScript_RestorePrevTextColor
 	msgbox PalletTown_PlayersHouse_1F_Text_ExplainRunningShoes
 	closemessage
@@ -85,6 +86,7 @@ PalletTown_PlayersHouse_1F_EventScript_DadGiveRunningShoes::
 	waitfanfare
 	setflag FLAG_SYS_B_DASH
 	setflag FLAG_SHOES_FROM_DAD
+	special DaemonsRepaintPlayerShoes   @ T-256: DAD's, black with red trim
 	call EventScript_RestorePrevTextColor
 	msgbox PalletTown_PlayersHouse_1F_Text_DadExplainRunningShoes
 	closemessage

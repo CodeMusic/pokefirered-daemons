@@ -197,6 +197,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Juggler;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Burglar;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_AlDoldrum;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Ty;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_David;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TownUmbraAdult;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TownQuicksilverElder;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TownQuicksilverAdult;
@@ -419,6 +420,7 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_TOWN_UMBRA_ADULT]           = &gObjectEventGraphicsInfo_TownUmbraAdult,
     [OBJ_EVENT_GFX_AL_DOLDRUM]                 = &gObjectEventGraphicsInfo_AlDoldrum,
     [OBJ_EVENT_GFX_TY]                         = &gObjectEventGraphicsInfo_Ty,
+    [OBJ_EVENT_GFX_DAVID]                      = &gObjectEventGraphicsInfo_David,
     [OBJ_EVENT_GFX_BURGLAR]                    = &gObjectEventGraphicsInfo_Burglar,
     [OBJ_EVENT_GFX_JUGGLER]                    = &gObjectEventGraphicsInfo_Juggler,
     [OBJ_EVENT_GFX_POKEMON_BREEDER]            = &gObjectEventGraphicsInfo_PokemonBreeder,

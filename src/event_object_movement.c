@@ -2261,12 +2261,49 @@ static u8 TryLoadObjectPalette(const struct SpritePalette *spritePalette)
     return LoadSpritePalette(spritePalette);
 }
 
+//  T-256: THE SHOES SHOW WHO GAVE THEM (the user, 2026-09-26). MOM's make the feet yellow with black trim, DAD's
+//  black with red. The player's soles and trims are indices 12 and 13 of their palette on every sheet where the feet
+//  show (tools/gbashoes.py, which freed those two for it); before the shoes are given they keep the old colours.
+#define PLAYER_PAL_SOLE 12
+#define PLAYER_PAL_TRIM 13
+
+static void DaemonsPaintShoes(u16 paletteTag, u8 paletteSlot)
+{
+    u16 sole, trim;
+
+    if ((paletteTag != OBJ_EVENT_PAL_TAG_PLAYER_RED && paletteTag != OBJ_EVENT_PAL_TAG_PLAYER_GREEN)
+     || !FlagGet(FLAG_SYS_B_DASH))
+        return;
+    if (FlagGet(FLAG_SHOES_FROM_DAD))
+    {
+        sole = RGB(3, 3, 4);        // black
+        trim = RGB(26, 4, 4);       // red
+    }
+    else
+    {
+        sole = RGB(30, 25, 4);      // yellow
+        trim = RGB(3, 3, 4);        // black
+    }
+    LoadPalette(&sole, OBJ_PLTT_ID(paletteSlot) + PLAYER_PAL_SOLE, PLTT_SIZEOF(1));
+    LoadPalette(&trim, OBJ_PLTT_ID(paletteSlot) + PLAYER_PAL_TRIM, PLTT_SIZEOF(1));
+}
+
 void PatchObjectPalette(u16 paletteTag, u8 paletteSlot)
 {
     u8 paletteIndex = FindObjectEventPaletteIndexByTag(paletteTag);
 
     LoadPalette(sObjectEventSpritePalettes[paletteIndex].data, OBJ_PLTT_ID(paletteSlot), PLTT_SIZE_4BPP);
+    DaemonsPaintShoes(paletteTag, paletteSlot);
     ApplyGlobalFieldPaletteTint(paletteSlot);
+}
+
+//  T-256: the moment the shoes are handed over, the feet change -- a special, so the gift scripts can ask for it.
+void DaemonsRepaintPlayerShoes(void)
+{
+    const struct ObjectEventGraphicsInfo *info = GetObjectEventGraphicsInfo(gObjectEvents[gPlayerAvatar.objectEventId].graphicsId);
+
+    PatchObjectPalette(info->paletteTag, info->paletteSlot);
+    UpdateSpritePaletteWithWeather(info->paletteSlot);
 }
 
 // T-268: every object on the map loaded again under the current light, after a connection crossed into a different

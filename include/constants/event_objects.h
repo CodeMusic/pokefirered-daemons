@@ -284,7 +284,10 @@
 //  T-298: Ty, CRYSTAL's sheet with the fur taken down to red, by tools/genty.py (the DAEMONS repo).
 #define OBJ_EVENT_GFX_TY 223
 
-#define NUM_OBJ_EVENT_GFX     224
+//  T-313: DAVID, the player's brother and the S.S. ANNE's CAPTAIN, drawn from DAD by tools/gendavid.py.
+#define OBJ_EVENT_GFX_DAVID 224
+
+#define NUM_OBJ_EVENT_GFX     225
 
 // These are dynamic object gfx ids.
 // They correspond with the values of the VAR_OBJ_GFX_ID_X vars.

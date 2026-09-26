@@ -159,6 +159,7 @@ const u16 gObjectEventPic_Juggler[] = INCBIN_U16("graphics/object_events/pics/pe
 const u16 gObjectEventPic_Burglar[] = INCBIN_U16("graphics/object_events/pics/people/burglar.4bpp");
 const u16 gObjectEventPic_AlDoldrum[] = INCBIN_U16("graphics/object_events/pics/people/al_doldrum.4bpp");
 const u16 gObjectEventPic_Ty[] = INCBIN_U16("graphics/object_events/pics/people/ty.4bpp");
+const u16 gObjectEventPic_David[] = INCBIN_U16("graphics/object_events/pics/people/david.4bpp");
 const u16 gObjectEventPic_TownUmbraAdult[] = INCBIN_U16("graphics/object_events/pics/people/town_umbra_adult.4bpp");
 const u16 gObjectEventPic_TownQuicksilverElder[] = INCBIN_U16("graphics/object_events/pics/people/town_quicksilver_elder.4bpp");
 const u16 gObjectEventPic_TownQuicksilverAdult[] = INCBIN_U16("graphics/object_events/pics/people/town_quicksilver_adult.4bpp");

@@ -4328,3 +4328,23 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Ty = {
     .images = sPicTable_Ty,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
+
+// T-313: DAVID, DAD's sheet in a captain's cap and a white uniform (tools/gendavid.py)
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_David = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = PALSLOT_NPC_4,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gObjectEventBaseOam_16x32,
+    .subspriteTables = gObjectEventSpriteOamTables_16x32,
+    .anims = sAnimTable_Standard,
+    .images = sPicTable_David,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};

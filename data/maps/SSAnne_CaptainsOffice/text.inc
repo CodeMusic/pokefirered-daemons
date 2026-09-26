@@ -1,27 +1,27 @@
+@  DRAFT (T-313): the CAPTAIN is DAVID, the player's brother (the user, 2026-09-26) -- fond of boats, and still seasick.
 SSAnne_CaptainsOffice_Text_CaptainIFeelSeasick::
-    .string "CAPTAIN: Ooargh…\n"
-    .string "I feel hideous…\l"
-    .string "Urrp! Seasick…$"
+    .string "DAVID: Oh… it's you.\p"
+    .string "Don't tell MOM. The captain of\n"
+    .string "the S.S. ANNE is… urrp… seasick.$"
 
 SSAnne_CaptainsOffice_Text_RubbedCaptainsBack::
-    .string "{PLAYER} rubbed the CAPTAIN's\n"
-    .string "back!\p"
+    .string "{PLAYER} rubbed DAVID's back!\p"
     .string "Rub-rub…\n"
     .string "Rub-rub…$"
 
 SSAnne_CaptainsOffice_Text_ThankYouHaveHMForCut::
-    .string "CAPTAIN: Whew! Thank you! I feel\n"
-    .string "much better!\p"
-    .string "You want to see my PRUNE\n"
-    .string "technique?\p"
-    .string "I could show you if I wasn't ill...\p"
-    .string "I know! You can have this!\p"
+    .string "DAVID: …Better. Thank you.\p"
+    .string "I've loved boats since before you\n"
+    .string "could walk. The sea still does this.\p"
+    .string "Here, take this. It clears what\n"
+    .string "stands in your way.\p"
+    .string "I never need it at sea.\p"
     .string "Teach it to your DAEMONS and you\n"
-    .string "can use PRUNE any time!$"
+    .string "can use PRUNE any time.$"
 
 SSAnne_CaptainsOffice_Text_ObtainedHM01FromCaptain::
-    .string "{PLAYER} obtained DRIVER01 from\n"
-    .string "the CAPTAIN!$"
+    .string "{PLAYER} obtained DRIVER01\n"
+    .string "from DAVID!$"
 
 SSAnne_CaptainsOffice_Text_ExplainCut::
     .string "Using PRUNE, you can chop down\n"
@@ -30,12 +30,10 @@ SSAnne_CaptainsOffice_Text_ExplainCut::
     .string "around ARDOR CITY?$"
 
 SSAnne_CaptainsOffice_Text_SSAnneWillSetSailSoon::
-    .string "CAPTAIN: …Whew!\p"
-    .string "Now that I'm not sick anymore, I\n"
-    .string "guess it's time.\p"
-    .string "The S.S. ANNE will set sail soon!\p"
-    .string "Farewell, until our return to ARDOR\n"
-    .string "CITY!$"
+    .string "DAVID: The S.S. ANNE sails soon.\p"
+    .string "Call MOM for me, would you?\n"
+    .string "She'll say I never do.\p"
+    .string "She's right.$"
 
 SSAnne_CaptainsOffice_Text_YouHaveNoRoomForThis::
     .string "Oh, no!\n"
@@ -47,5 +45,5 @@ SSAnne_CaptainsOffice_Text_YuckShouldntHaveLooked::
 
 SSAnne_CaptainsOffice_Text_HowToConquerSeasickness::
     .string "How to Conquer Seasickness…\n"
-    .string "The CAPTAIN's reading this!$"
+    .string "Every line is underlined.$"
 

@@ -2443,3 +2443,15 @@ static const struct SpriteFrameImage sPicTable_Dad[] = {
     overworld_frame(gObjectEventPic_Dad, 2, 4, 2),
     overworld_frame(gObjectEventPic_Dad, 2, 4, 2),
 };
+
+static const struct SpriteFrameImage sPicTable_David[] = {
+    overworld_frame(gObjectEventPic_David, 2, 4, 0),
+    overworld_frame(gObjectEventPic_David, 2, 4, 1),
+    overworld_frame(gObjectEventPic_David, 2, 4, 2),
+    overworld_frame(gObjectEventPic_David, 2, 4, 0),
+    overworld_frame(gObjectEventPic_David, 2, 4, 0),
+    overworld_frame(gObjectEventPic_David, 2, 4, 1),
+    overworld_frame(gObjectEventPic_David, 2, 4, 1),
+    overworld_frame(gObjectEventPic_David, 2, 4, 2),
+    overworld_frame(gObjectEventPic_David, 2, 4, 2),
+};
