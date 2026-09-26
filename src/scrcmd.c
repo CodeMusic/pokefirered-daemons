@@ -1633,6 +1633,7 @@ bool8 ScrCmd_bufferitemname(struct ScriptContext * ctx)
 
 static const u8 sText_S[] = _("S");
 static const u8 sText_IES[] = _("IES");
+static const u8 sText_ES[] = _("ES");
 
 bool8 ScrCmd_bufferitemnameplural(struct ScriptContext * ctx)
 {
@@ -1641,8 +1642,16 @@ bool8 ScrCmd_bufferitemnameplural(struct ScriptContext * ctx)
     u16 quantity = VarGet(ScriptReadHalfword(ctx));
 
     CopyItemName(itemId, sScriptStringVars[stringVarIndex]);
+    //  THE PLURAL FOLLOWS THE NAME. Vanilla appends an S because its name was POKé BALL; ours is USERBOX, and
+    //  "put the USERBOXS in the BOXES POCKET" was the lab's first gift (seen playing CONTENT, 2026-09-25).
     if (itemId == ITEM_POKE_BALL && quantity >= 2)
-        StringAppend(sScriptStringVars[stringVarIndex], sText_S);
+    {
+        u16 len = StringLength(sScriptStringVars[stringVarIndex]);
+        if (len != 0 && sScriptStringVars[stringVarIndex][len - 1] == CHAR_X)
+            StringAppend(sScriptStringVars[stringVarIndex], sText_ES);
+        else
+            StringAppend(sScriptStringVars[stringVarIndex], sText_S);
+    }
     else if (itemId >= FIRST_BERRY_INDEX && itemId < LAST_BERRY_INDEX && quantity >= 2)
     {
         u16 strlength = StringLength(sScriptStringVars[stringVarIndex]);

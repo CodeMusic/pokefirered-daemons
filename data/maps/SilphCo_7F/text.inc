@@ -94,19 +94,19 @@ SilphCo_7F_Text_Grunt2PostBattle::
     .string "surprises.$"
 
 SilphCo_7F_Text_RivalWhatKeptYou::
-    .string "{RIVAL}: What kept you, {PLAYER}?$"
+    .string "{RIVAL}: You took your time,\n"
+    .string "{PLAYER}.$"
 
 SilphCo_7F_Text_RivalIntro::
-    .string "{RIVAL}: Hahaha! I thought you'd\n"
-    .string "turn up if I waited here!\p"
-    .string "I guess TEAM CORPUS slowed you\n"
-    .string "down! Not that I care!\p"
-    .string "I saw you in BRAZEN, so I decided\n"
-    .string "to see if you got better!$"
+    .string "{RIVAL}: There you are. I thought\n"
+    .string "you would come up this way.\p"
+    .string "TEAM CORPUS held you up. I walked\n"
+    .string "round them.\p"
+    .string "I saw you in BRAZEN. I wanted to\n"
+    .string "see if anything had changed.$"
 
 SilphCo_7F_Text_RivalDefeat::
-    .string "Oh ho! So, you are ready for BOSS\n"
-    .string "CORPUS!$"
+    .string "So. You are ready for BOSS CORPUS.$"
 
 SilphCo_7F_Text_RivalVictory::
     .string "{RIVAL}“おまえなあ‥\p"
@@ -115,17 +115,16 @@ SilphCo_7F_Text_RivalVictory::
     .string "いちにんまえ　とは　いえないぜ$"
 
 SilphCo_7F_Text_RivalPostBattle::
-    .string "Well, {PLAYER}!\p"
-    .string "I'm moving on up and ahead!\p"
-    .string "By checking my INDEX, I'm starting\n"
-    .string "to see what's strong and how they\l"
-    .string "evolve!\p"
-    .string "I'm going to the DAEMON LEAGUE to\n"
-    .string "boot out the REVIEW BOARD!\p"
-    .string "I'll become the world's most\n"
-    .string "powerful USER!\p"
-    .string "{PLAYER}, well good luck to you!\n"
-    .string "Don't sweat it! Smell ya!$"
+    .string "Well, {PLAYER}.\p"
+    .string "I am going on ahead.\p"
+    .string "The INDEX shows me what is strong\n"
+    .string "now, and what it turns into.\p"
+    .string "I am going to the DAEMON LEAGUE.\n"
+    .string "The REVIEW BOARD can move over.\p"
+    .string "I will be the strongest USER there\n"
+    .string "is.\p"
+    .string "{PLAYER}. You will be all right.\n"
+    .string "Probably.$"
 
 SilphCo_7F_Text_FloorSign::
     .string "FOUNDRY CO. HEAD OFFICE 7F$"

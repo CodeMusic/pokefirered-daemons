@@ -1,7 +1,6 @@
 PokedexRating_Text_HowIsPokedexComingAlong::
-	.string "CRYSTAL: Good to see you! How is\n"
-	.string "your INDEX coming along?\p"
-	.string "Here, let me take a look.$"
+    .string "CRYSTAL: {PLAYER}. You came back.\p"
+    .string "Show me the INDEX, then.$"
 
 PokedexRating_Text_SeenXOwnedY::
     .string "INDEX completion is:\p"
@@ -111,10 +110,9 @@ PokedexRating_Text_ThankYouMadeDreamReality::
 	.string "You've made my dream a reality!$"
 
 PokedexRating_Text_LoveSeeingYourPokedex::
-	.string "CRYSTAL: Ah, welcome!\p"
-	.string "Tell me, how is your INDEX coming\n"
-	.string "along?\p"
-	.string "Wahaha!\p"
-	.string "Actually, I know how it is, but I\n"
-	.string "love seeing it anyway!\p"
-	.string "Let's see…$"
+    .string "CRYSTAL: Ah. {PLAYER}.\p"
+    .string "You want to know how the INDEX is\n"
+    .string "coming along.\p"
+    .string "I know already. I like to see it\n"
+    .string "anyway.\p"
+    .string "So. Let me look.$"

@@ -211,10 +211,10 @@ gPikachuIntro_Text_Page3::
     .string "adventure begin!$"
 
 gOakSpeech_Text_WelcomeToTheWorld::
-    .string "Hello, there!\n"
-    .string "Glad to meet you!\p"
-    .string "Welcome to the world of DAEMONS!\p"
-    .string "My name is CRYSTAL CLEAR.\p$"
+    .string "Hello.\p"
+    .string "Welcome to the world of DAEMONS.\p"
+    .string "My name is CRYSTAL CLEAR.\p"
+    .string "$"
 
 gOakSpeech_Text_ThisWorld::
     .string "This world…$"

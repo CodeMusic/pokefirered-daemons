@@ -5,19 +5,17 @@ SSAnne_2F_Corridor_Text_ThisShipIsLuxuryLiner::
     .string "invited USERS.$"
 
 SSAnne_2F_Corridor_Text_RivalIntro::
-    .string "{RIVAL}: Bonjour! {PLAYER}!\p"
-    .string "Imagine seeing you here! {PLAYER},\n"
-    .string "were you really invited?\p"
-    .string "So how's your INDEX coming?\p"
-    .string "I already bound 40 kinds, pal.\n"
-    .string "Different kinds are everywhere.\p"
-    .string "Crawl around in grassy areas, and\n"
-    .string "look hard for them.$"
+    .string "{RIVAL}: {PLAYER}.\p"
+    .string "You were invited? I was.\p"
+    .string "How far is your INDEX? I have\n"
+    .string "forty kinds.\p"
+    .string "They are in the grass, mostly. You\n"
+    .string "look where it is thick, and you\l"
+    .string "keep looking.$"
 
 SSAnne_2F_Corridor_Text_RivalDefeat::
-    .string "Humph!\p"
-    .string "At least you're raising your\n"
-    .string "DAEMON!$"
+    .string "Hm.\p"
+    .string "You are training them, at least.$"
 
 SSAnne_2F_Corridor_Text_RivalVictory::
     .string "{PLAYER}‥！\n"
@@ -26,11 +24,9 @@ SSAnne_2F_Corridor_Text_RivalVictory::
     .string "きたえた　ほうが　いいぜ！$"
 
 SSAnne_2F_Corridor_Text_RivalPostBattle::
-    .string "{RIVAL}: I heard there was a\n"
-    .string "PRUNE master on board.\p"
-    .string "But he was just a seasick old man!\p"
-    .string "PRUNE itself is really useful.\n"
-    .string "Yup, it'll be handy.\p"
-    .string "You should go see him, too.\n"
-    .string "Smell ya!$"
+    .string "{RIVAL}: There is a PRUNE expert on\n"
+    .string "board.\p"
+    .string "He was a seasick old man.\p"
+    .string "PRUNE is worth having, though.\n"
+    .string "Go and see him. I have.$"
 

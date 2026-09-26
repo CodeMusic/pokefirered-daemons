@@ -56,8 +56,8 @@ PalletTown_ProfessorOaksLab_Text_RivalLeaveItToMeGramps::
     .string "I will do it.$"
 
 PalletTown_ProfessorOaksLab_Text_RivalTellSisNotToGiveYouMap::
-    .string "{RIVAL}: All right, CRYSTAL!\n"
-    .string "Leave it to me!\p"
+    .string "{RIVAL}: Leave it with me, CRYSTAL.\n"
+    .string "I will get further than {PLAYER}.\p"
     .string "{PLAYER}, no offence, but I do not\n"
     .string "need you for this.\p"
     .string "I will borrow a SITEMAP off my\n"
@@ -120,12 +120,12 @@ PalletTown_ProfessorOaksLab_Text_OakBattleMonForItToGrow::
     .string "used. So does everything else.$"
 
 PalletTown_ProfessorOaksLab_Text_OakHaveSomethingForMe::
-    .string "CRYSTAL: Oh, {PLAYER}!\p"
-    .string "How is my old DAEMON?\p"
-    .string "Well, it seems to like you a lot.\p"
-    .string "You must be talented as a DAEMON\n"
-    .string "USER!\p"
-    .string "What? You have something for me?\p"
+    .string "CRYSTAL: Oh. {PLAYER}.\p"
+    .string "How is it running? It was on my\n"
+    .string "desk a long time.\p"
+    .string "It stayed with you. With that one,\n"
+    .string "that means something.\p"
+    .string "You have something for me.\p"
     .string "{PLAYER} delivered the CC-7.$"
 
 PalletTown_ProfessorOaksLab_Text_DeliveredOaksParcel::
