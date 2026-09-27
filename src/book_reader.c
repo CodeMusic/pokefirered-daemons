@@ -845,6 +845,16 @@ u8 DaemonsUnderstandingsMissing(void)
     return missing;
 }
 
+//  T-317: the clarity rule, one place for the map and the INDEX: two by two while most understandings are still to
+//  come, two by one while a few are, one by one (sharp) once every one is held.
+void DaemonsClarity(u8 *w, u8 *h)
+{
+    u8 missing = DaemonsUnderstandingsMissing();
+
+    *w = missing != 0 ? 2 : 1;
+    *h = missing >= 4 ? 2 : 1;
+}
+
 static const u8 *GuideMarginNote(u8 entry)
 {
     u8 i;

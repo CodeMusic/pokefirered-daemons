@@ -1,4 +1,5 @@
 #include "global.h"
+#include "book_reader.h"
 #include "gflib.h"
 #include "graphics.h"
 #include "m4a.h"
@@ -2666,7 +2667,9 @@ static u32 DexScreen_GetDefaultPersonality(int species)
 
 static void DexScreen_LoadMonPicInWindow(u8 windowId, u16 species, u16 paletteOffset)
 {
+    DaemonsClarity(&gDexPicMosaicW, &gDexPicMosaicH);   // T-317 (trainer_pokemon_sprites.c)
     LoadMonPicInWindow(species, SHINY_ODDS, DexScreen_GetDefaultPersonality(species), TRUE, paletteOffset >> 4, windowId);
+    gDexPicMosaicW = gDexPicMosaicH = 0;
 }
 
 static void DexScreen_PrintMonDexNo(u8 windowId, u8 fontId, u16 species, u8 x, u8 y)

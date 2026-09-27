@@ -274,6 +274,27 @@ static void ShadePicBands(u8 *pic, const u16 *pal)
     }
 }
 
+//  T-317 (the user, 2026-09-27: "yes" to the daemons sharpening too): THE INDEX'S PICTURES COME CLEAR WITH THE MAP.
+//  While understandings are still to come a daemon's picture in the INDEX is drawn a little blocky -- every block of
+//  gDexPicMosaicW by gDexPicMosaicH pixels takes its top-left pixel, the GBA's mosaic done in software so the page's
+//  text on the same layer stays sharp. region_map.c's rule sets the size; pokedex_screen.c sets it and clears it.
+u8 gDexPicMosaicW, gDexPicMosaicH;
+
+static void MosaicPic(u8 *pic)
+{
+    s32 x, y;
+
+    for (y = 0; y < 64; y++)
+        for (x = 0; x < 64; x++)
+        {
+            s32 sx = x - x % gDexPicMosaicW, sy = y - y % gDexPicMosaicH;
+            u8 v = *PIC_PIXEL(pic, sx, sy);
+            u8 *p = PIC_PIXEL(pic, x, y);
+            v = (sx & 1) ? v >> 4 : v & 0x0F;
+            *p = (x & 1) ? (*p & 0x0F) | (v << 4) : (*p & 0xF0) | v;
+        }
+}
+
 u16 CreateTrainerCardSprite(u16 species, u32 otId, u32 personality, bool8 isFrontPic, u16 destX, u16 destY, u8 paletteSlot, u8 windowId, bool8 isTrainer)
 {
     u8 *framePics;
@@ -286,6 +307,8 @@ u16 CreateTrainerCardSprite(u16 species, u32 otId, u32 personality, bool8 isFron
             LoadPicPaletteBySlot(species, otId, personality, paletteSlot, isTrainer);
             ShadePicBands(framePics, &gPlttBufferUnfaded[paletteSlot * 16]);
         }
+        if (!isTrainer && gDexPicMosaicW && gDexPicMosaicH && gDexPicMosaicW * gDexPicMosaicH > 1)
+            MosaicPic(framePics);
         BlitBitmapRectToWindow(windowId, framePics, 0, 0, 0x40, 0x40, destX, destY, 0x40, 0x40);
         LoadPicPaletteBySlot(species, otId, personality, paletteSlot, isTrainer);
         Free(framePics);

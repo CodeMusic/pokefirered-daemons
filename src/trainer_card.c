@@ -9,6 +9,7 @@
 #include "easy_chat.h"
 #include "money.h"
 #include "strings.h"
+#include "daemons_time.h"
 #include "trainer_card.h"
 #include "pokedex.h"
 #include "pokemon_icon.h"
@@ -116,6 +117,7 @@ static EWRAM_DATA u8 sMarksCursor = 0;
 static void BufferTextForCardBack(void);
 static void PrintNameOnCardFront(void);
 static void PrintIdOnCard(void);
+static void PrintDayOnCard(bool8 back);
 static void PrintMoneyOnCard(void);
 static u16 GetCaughtMonsCount(void);
 static void PrintPokedexOnCard(void);
@@ -1081,6 +1083,7 @@ static bool8 PrintAllOnCardFront(void)
         break;
     case 1:
         PrintIdOnCard();
+        PrintDayOnCard(FALSE);
         break;
     case 2:
         PrintMoneyOnCard();
@@ -1113,30 +1116,30 @@ static bool8 PrintAllOnCardFront(void)
 //  DRAFT WORDING (T-272), every line below, until the user approves it on the private field-test page.
 static const u8 sText_Benchmarks[]  = _("BENCHMARKS");
 static const u8 sText_NotYetHeld[]  = _("Not yet held.");
-static const u8 sCertifies1[] = _("A record that\nreads the same\nwhen read again.");
-static const u8 sCertifies2[] = _("Better by small\nsteps, each one\na little downhill.");
-static const u8 sCertifies3[] = _("Telling what\narrived from what\nyou expected.");
-static const u8 sCertifies4[] = _("A line through\nthe points, not\nthrough every one.");
-static const u8 sCertifies5[] = _("Seeing where\nthe peak misses\nthe middle.");
-static const u8 sCertifies6[] = _("Knowing what the\nbrackets hold,\nand what they leave.");
-static const u8 sCertifies7[] = _("Hot to wander,\ncool to settle,\nand knowing which.");
+static const u8 sCertifies1[] = _("A record that reads\nthe same twice.");
+static const u8 sCertifies2[] = _("Better by small\nsteps, downhill.");
+static const u8 sCertifies3[] = _("What came, told from\nwhat you expected.");
+static const u8 sCertifies4[] = _("A line through the\npoints, not each one.");
+static const u8 sCertifies5[] = _("Where the peak\nmisses the middle.");
+static const u8 sCertifies6[] = _("What the brackets\nhold, and leave out.");
+static const u8 sCertifies7[] = _("Wander hot, settle\ncool, and know which.");
 static const u8 sCertifies8[] = _("Straight by the\nline that hangs,\nnot by the eye.");
 static const u8 *const sMarkCertifies[NUM_BADGES] = {
     sCertifies1, sCertifies2, sCertifies3, sCertifies4, sCertifies5, sCertifies6, sCertifies7, sCertifies8,
 };
 //  T-318 (the user, 2026-09-27; the pairing proposed and approved the same day): EACH OF THE FIRST SEVEN MARKS BRINGS
 //  A VIRTUE, in the week's order, root to crown -- so the last before SCORN's BENCHMARK is humility, over pride. The
-//  eighth door already waits on the seven MARKS, so it waits on the seven virtues. One line is all the page has under
-//  what the MARK certifies, so the virtue is said alone; its shadow (SLOTH ... PRIDE, the user's word for the book's
-//  "sin") is left unsaid. DRAFT WORDING.
+//  eighth door already waits on the seven MARKS, so it waits on the seven virtues. Each is said over its shadow (the
+//  user's word for the book's "sin"); the first seven MARKS' certify lines were cut to two for the room, which the
+//  user accepted 2026-09-27. DRAFT WORDING.
 #define NUM_VIRTUES 7
-static const u8 sVirtue1[] = _("And DILIGENCE.");
-static const u8 sVirtue2[] = _("And CHASTITY.");
-static const u8 sVirtue3[] = _("And CHARITY.");
-static const u8 sVirtue4[] = _("And KINDNESS.");
-static const u8 sVirtue5[] = _("And TEMPERANCE.");
-static const u8 sVirtue6[] = _("And PATIENCE.");
-static const u8 sVirtue7[] = _("And HUMILITY.");
+static const u8 sVirtue1[] = _("DILIGENCE\nover SLOTH.");
+static const u8 sVirtue2[] = _("CHASTITY\nover LUST.");
+static const u8 sVirtue3[] = _("CHARITY\nover GREED.");
+static const u8 sVirtue4[] = _("KINDNESS\nover ENVY.");
+static const u8 sVirtue5[] = _("TEMPERANCE\nover GLUTTONY.");
+static const u8 sVirtue6[] = _("PATIENCE\nover WRATH.");
+static const u8 sVirtue7[] = _("HUMILITY\nover PRIDE.");
 static const u8 *const sMarkVirtues[NUM_VIRTUES] = {
     sVirtue1, sVirtue2, sVirtue3, sVirtue4, sVirtue5, sVirtue6, sVirtue7,
 };
@@ -1165,7 +1168,7 @@ static void DrawBenchmarksView(void)
     if (!sTrainerCardDataPtr->hasBadge[sMarksCursor])
         AddTextPrinterParameterized3(1, FONT_NORMAL, MARKS_TEXT_X, 100, sTrainerCardTextColors, TEXT_SKIP_DRAW, sText_NotYetHeld);
     else if (sMarksCursor < NUM_VIRTUES)
-        AddTextPrinterParameterized3(1, FONT_NORMAL, MARKS_TEXT_X, 100, sTrainerCardTextColors, TEXT_SKIP_DRAW, sMarkVirtues[sMarksCursor]);
+        AddTextPrinterParameterized3(1, FONT_NORMAL, MARKS_TEXT_X, 86, sTrainerCardTextColors, TEXT_SKIP_DRAW, sMarkVirtues[sMarksCursor]);
     i = sMarksCursor;
     FillWindowPixelRect(1, PIXEL_FILL(TEXT_COLOR_DARK_GRAY), 24 + 24 * i, MARKS_ROW_Y, 16, 2);
     DrawTrainerCardWindow(1);
@@ -1224,6 +1227,7 @@ static bool8 PrintAllOnCardBack(void)
     {
     case 0:
         PrintNameOnCardBack();
+        PrintDayOnCard(TRUE);
         break;
     case 1:
         PrintHofDebutTimeOnCard();
@@ -1275,6 +1279,39 @@ static void PrintNameOnCardFront(void)
     ConvertInternationalString(txtPtr, sTrainerCardDataPtr->language);
     StringAppend(buffer[0], txtPtr);
     AddTextPrinterParameterized3(1, sTrainerCardFontIds[1], sTrainerCardFrontNameXPositions[sTrainerCardDataPtr->cardType], sTrainerCardFrontNameYPositions[sTrainerCardDataPtr->cardType], sTrainerCardTextColors, TEXT_SKIP_DRAW, buffer[0]);
+}
+
+//  T-318 (the user, 2026-09-26; placed 2026-09-27): THE DAY, AT THE TOP OF EVERY SIDE OF YOUR OWN CARD -- the note
+//  and the day, "C SUN" to "B SAT", in the gap between USER and CARD in the title band, as the day banner writes it
+//  (note first, T-269). The card's grey, not the day's colour: the menu's frame carries that (9.4's one exception).
+#define CARD_DAY_GAP_X   38   // where USER ends in the title band, in window 1's pixels (it starts 8 in)
+#define CARD_DAY_GAP_W   34   // and where CARD begins, less that
+#define CARD_DAY_BACK_X  10   // the back's band has no gap; its left end
+static const u8 *const sCardDayNotes[WEEKDAY_COUNT] = {
+    gText_DayNoteC, gText_DayNoteD, gText_DayNoteE, gText_DayNoteF, gText_DayNoteG, gText_DayNoteA, gText_DayNoteB,
+};
+static const u8 *const sCardDayNames[WEEKDAY_COUNT] = {
+    gText_DaySunday, gText_DayMonday, gText_DayTuesday, gText_DayWednesday, gText_DayThursday, gText_DayFriday,
+    gText_DaySaturday,
+};
+
+static void PrintDayOnCard(bool8 back)
+{
+    u8 buffer[16];
+    u8 *p;
+    u8 day = DaemonsWeekday(), i;
+    s32 width;
+
+    if (sTrainerCardDataPtr->cardType != CARD_TYPE_FRLG || !sTrainerCardDataPtr->isOwnCard)
+        return;
+    p = StringCopy(buffer, sCardDayNotes[day]);
+    *p++ = CHAR_SPACE;
+    for (i = 0; i < 3 && sCardDayNames[day][i] != EOS; i++)
+        *p++ = sCardDayNames[day][i];
+    *p = EOS;
+    width = GetStringWidth(FONT_SMALL, buffer, 0);
+    AddTextPrinterParameterized3(1, FONT_SMALL, back ? CARD_DAY_BACK_X : CARD_DAY_GAP_X + (CARD_DAY_GAP_W - width) / 2,
+                                 sTrainerCardIdYPositions[CARD_TYPE_FRLG], sTrainerCardTextColors, TEXT_SKIP_DRAW, buffer);
 }
 
 static void PrintIdOnCard(void)

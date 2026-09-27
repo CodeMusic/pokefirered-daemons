@@ -1374,9 +1374,11 @@ static void SetRegionMapVBlankCB(void)
 //  whether it looks RIGID or resolved, and nothing says so. ResetGpuRegs puts the register back when the map closes.
 static void SetRegionMapClarity(void)
 {
-    u8 missing = DaemonsUnderstandingsMissing();
-    u16 mosaic = missing >= 4 ? (1 | (1 << 4)) : (missing != 0 ? 1 : 0);   // H size, then V size, each one less
+    u8 w, h;
+    u16 mosaic;
 
+    DaemonsClarity(&w, &h);
+    mosaic = (w - 1) | ((h - 1) << 4);   // H size, then V size, each one less
     if (mosaic != 0)
     {
         SetBgAttribute(0, BG_ATTR_MOSAIC, TRUE);
