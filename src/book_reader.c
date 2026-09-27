@@ -822,6 +822,18 @@ void DaemonsArriveAtUnderstandings(void)
             FlagSet(sUnderstandingConditions[i].flag);
 }
 
+//  T-235 (the user, 2026-09-27): HOLDING EVERY UNDERSTANDING UNLOCKS THE FIVE WITNESSES' REWARD. VAR_RESULT TRUE once
+//  all of them are held -- the margin notes' table is the list, so a new understanding joins the lock by joining it.
+void DaemonsHoldsEveryUnderstanding(void)
+{
+    u8 i;
+
+    gSpecialVar_Result = TRUE;
+    for (i = 0; i < ARRAY_COUNT(sGuideMarginNotes); i++)
+        if (!FlagGet(sGuideMarginNotes[i].flag))
+            gSpecialVar_Result = FALSE;
+}
+
 static const u8 *GuideMarginNote(u8 entry)
 {
     u8 i;

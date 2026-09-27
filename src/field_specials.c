@@ -1,5 +1,6 @@
 #include "global.h"
 #include "gflib.h"
+#include "m4a.h"
 #include "quest_log.h"
 #include "list_menu.h"
 #include "diploma.h"
@@ -1771,6 +1772,78 @@ void Terminal_PlayDayNote(void)
 {
     PlaySE(SE_NOTE_C + DaemonsWeekday());
 }
+
+// T-10: THE SINGING FIR (the user, 2026-09-26). O CHRISTMAS TREE's first phrase, in A-flat, as the source painting's
+// fifteen coloured notes: yellow, purple x3, red, orange x4, red, orange, yellow, blue, red, purple. The painting's
+// yellow and purple flats -- its key signature -- were missing, so the tune came out wrong until the key was added.
+// The toy piano has eight naturals (SE_NOTE_C..C_HIGH, on SE2); a flat is its natural bent a semitone down with
+// m4aMPlayPitchControl, 256 to the semitone. Without the key, the yellow and purple notes lose their flats; red's
+// B-flat was never missing. VAR_0x8004 TRUE sings it in the key.
+struct FirNote
+{
+    u8 se;          // offset from SE_NOTE_C
+    s8 inKey;       // semitones from that natural, in the key
+    s8 withoutKey;  // and without it
+    u8 frames;
+};
+
+static const struct FirNote sFirTune[] =
+{
+    { 2, -1,  0, 30 },  // yellow  E-flat   O
+    { 5, -1,  0, 22 },  // purple  A-flat   Christ-
+    { 5, -1,  0,  8 },  // purple  A-flat   -mas
+    { 5, -1,  0, 40 },  // purple  A-flat   tree,
+    { 6, -1, -1, 18 },  // red     B-flat   O
+    { 7,  0,  0, 22 },  // orange  C        Christ-
+    { 7,  0,  0,  8 },  // orange  C        -mas
+    { 7,  0,  0, 40 },  // orange  C        tree,
+    { 7,  0,  0, 18 },  // orange  C        how
+    { 6, -1, -1, 18 },  // red     B-flat   love-
+    { 7,  0,  0, 18 },  // orange  C        -ly
+    { 7,  1,  2, 36 },  // yellow  D-flat   are
+    { 4,  0,  0, 30 },  // blue    G        your
+    { 6, -1, -1, 30 },  // red     B-flat   bran-
+    { 5, -1,  0, 72 },  // purple  A-flat   -ches.
+};
+
+#define tNote    data[0]
+#define tTimer   data[1]
+#define tInKey   data[2]
+
+static void Task_SingingFir(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    const struct FirNote *note;
+
+    if (tTimer != 0)
+    {
+        tTimer--;
+        return;
+    }
+    if (tNote >= (s16)ARRAY_COUNT(sFirTune))
+    {
+        DestroyTask(taskId);
+        ScriptContext_Enable();
+        return;
+    }
+    note = &sFirTune[tNote++];
+    m4aMPlayStop(&gMPlayInfo_SE2);
+    m4aSongNumStart(SE_NOTE_C + note->se);
+    m4aMPlayImmInit(&gMPlayInfo_SE2);
+    m4aMPlayPitchControl(&gMPlayInfo_SE2, TRACKS_ALL, (tInKey ? note->inKey : note->withoutKey) * 256);
+    tTimer = note->frames;
+}
+
+void SingingFir_Sing(void)
+{
+    u8 taskId = CreateTask(Task_SingingFir, 80);
+    gTasks[taskId].tInKey = gSpecialVar_0x8004;
+    gTasks[taskId].tTimer = 16;
+}
+
+#undef tNote
+#undef tTimer
+#undef tInKey
 
 // T-264: THE TERMINAL NEVER SAYS THE SAME THING TWICE RUNNING (the user, 2026-09-25: typing HELP in the emulator kept
 // giving the same answer). VAR_0x8004 is how many answers there are, VAR_0x8005 the var that remembers the last one,

@@ -412,6 +412,9 @@ $(OBJEVENTGFXDIR)/people/ty.4bpp: %.4bpp: %.png
 $(OBJEVENTGFXDIR)/people/david.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
 
+$(OBJEVENTGFXDIR)/misc/singing_fir.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
 $(OBJEVENTGFXDIR)/people/benchmark_guide.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
 

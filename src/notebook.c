@@ -192,6 +192,18 @@ static const u8 sText_Loose_Folds[] = _(
     "sheet. Every crease still in it.\p"
     "Do not cut.");
 
+//  LOOSE PAGES 8 -- T-10, DRAFT WORDING. The S.S. ANNE band's sheet, from DAVID: a key signature and not one note.
+//  It is the key the singing fir on the pier has lost (lineage 3b); nothing says so.
+static const u8 sTitle_Loose_Key[] = _("THE BAND'S SHEET");
+static const u8 sText_Loose_Key[] = _(
+    "A sheet from the S.S. ANNE's\n"
+    "piano bench. DAVID gave it to you.\p"
+    "Staff lines, and at the start of\n"
+    "each one a clef and four flats.\p"
+    "Not one note after them.\p"
+    "Pencilled along the bottom:\n"
+    "THE KEY. THE TUNE KNOWS THE REST.");
+
 //  LAB NOTES 2 -- *Quantum Translations*, the first verse: what counts as an observer.
 static const u8 sTitle_Lab_Observer[] = _("THE OBSERVER");
 static const u8 sText_Lab_Observer[] = _(
@@ -347,6 +359,7 @@ static const struct NotebookEntry sEntries[] =
     { NB_LOOSE_PAGES,  NB_KIND_TEXT,  0, FLAG_NOTEBOOK_LOOSE_UNSENT,    0, sTitle_Loose_Unsent,        sText_Loose_Unsent },
     NB_DOC_LOOSE_PAGES_6
     { NB_LOOSE_PAGES,  NB_KIND_TEXT,  0, FLAG_NOTEBOOK_LOOSE_FOLDS,     0, sTitle_Loose_Folds,         sText_Loose_Folds },
+    { NB_LOOSE_PAGES,  NB_KIND_TEXT,  0, FLAG_NOTEBOOK_LOOSE_KEY,       0, sTitle_Loose_Key,           sText_Loose_Key },
     NB_DOC_LAB_NOTES_1
     { NB_LAB_NOTES,    NB_KIND_TEXT,  0, FLAG_NOTEBOOK_LAB_OBSERVER,    0, sTitle_Lab_Observer,        sText_Lab_Observer },
     { NB_LAB_NOTES,    NB_KIND_TEXT,  0, FLAG_NOTEBOOK_LAB_BOX,         0, sTitle_Lab_Box,             sText_Lab_Box },

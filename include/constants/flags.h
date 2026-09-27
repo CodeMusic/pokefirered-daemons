@@ -1595,6 +1595,10 @@
 //  LOOSE PAGES 7, FOLDS: folding instructions pinned to the wall of the room where the game was drawn (the user,
 //  2026-09-25, from *The Folds of Awareness*). A flag nothing else reads -- it is only that the page was copied.
 #define FLAG_NOTEBOOK_LOOSE_FOLDS     (DAEMONS_FLAGS_START + 0x56)
+//  T-10: LOOSE PAGES 8, the S.S. ANNE band's sheet -- a key signature and no notes -- from DAVID (DRAFT: what gives
+//  the key is still the user's); and the singing fir on the pier, once it has been heard in its key.
+#define FLAG_NOTEBOOK_LOOSE_KEY       (DAEMONS_FLAGS_START + 0x57)
+#define FLAG_FIR_IN_KEY               (DAEMONS_FLAGS_START + 0x58)
 
 //  T-300. THE PROGRAMMER'S GUIDE TO THE HUMAN MIND, taken from the bookshelf in ONE ISLAND's second house. 0x60 up is
 //  the Guide's, so the clock session's next flags after 0x55 do not meet it.

@@ -223,9 +223,18 @@ VermilionCity_EventScript_CheckSeagallopPresentTrigger::
 	setvar VAR_0x8004, SEAGALLOP_VERMILION_CITY
 	goto_if_ge VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5, VermilionCity_EventScript_ChooseSeagallopDestRainbowPass
 	goto_if_ge VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 1, VermilionCity_EventScript_ChooseSeagallopDestTriPass
-	msgbox VermilionCity_Text_TheShipSetSail
+	goto VermilionCity_EventScript_PierOpen
+	end
+
+@ T-10: once the S.S. ANNE has sailed, the pier stays open -- the old legend's way to what stood at its far end
+@ was SURF from the empty dock. Vanilla walked the player back up. Cancelling a SEAGALLOP here comes the same way.
+VermilionCity_EventScript_PierOpen::
+	msgbox VermilionCity_Text_ThePierIsOpen
 	closemessage
-	goto VermilionCity_EventScript_WalkUpPier
+	applymovement LOCALID_VERMILION_FERRY_SAILOR, Common_Movement_FaceOriginalDirection
+	waitmovement 0
+	setvar VAR_VERMILION_CITY_TICKET_CHECK_TRIGGER, 1
+	releaseall
 	end
 
 VermilionCity_EventScript_Sailor::

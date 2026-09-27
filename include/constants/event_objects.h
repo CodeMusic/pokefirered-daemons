@@ -287,7 +287,10 @@
 //  T-313: DAVID, the player's brother and the S.S. ANNE's CAPTAIN, drawn from DAD by tools/gendavid.py.
 #define OBJ_EVENT_GFX_DAVID 224
 
-#define NUM_OBJ_EVENT_GFX     225
+//  T-10: the singing fir on the S.S. ANNE's pier, drawn by tools/gensingingfir.py (the DAEMONS repo).
+#define OBJ_EVENT_GFX_SINGING_FIR 225
+
+#define NUM_OBJ_EVENT_GFX     226
 
 // These are dynamic object gfx ids.
 // They correspond with the values of the VAR_OBJ_GFX_ID_X vars.

@@ -4348,3 +4348,23 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_David = {
     .images = sPicTable_David,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
+
+//  T-10: the singing fir -- inanimate, 16x32, in NPC_GREEN's colours, so no palette of its own.
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SingingFir = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_GREEN,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = PALSLOT_NPC_3,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gObjectEventBaseOam_16x32,
+    .subspriteTables = gObjectEventSpriteOamTables_16x32,
+    .anims = sAnimTable_Inanimate,
+    .images = sPicTable_SingingFir,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};

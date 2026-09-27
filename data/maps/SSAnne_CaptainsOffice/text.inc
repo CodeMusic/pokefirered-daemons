@@ -47,3 +47,16 @@ SSAnne_CaptainsOffice_Text_HowToConquerSeasickness::
     .string "How to Conquer Seasickness…\n"
     .string "Every line is underlined.$"
 
+
+@  DRAFT (T-10): what gives the singing fir its key is still the user's; this is the proposal.
+SSAnne_CaptainsOffice_Text_BandsSheet::
+    .string "DAVID: And this. The band leaves\n"
+    .string "it on the piano every voyage.\p"
+    .string "A key and no tune. They say the\n"
+    .string "tune is somewhere in ARDOR.\p"
+    .string "I've never found it.\n"
+    .string "Maybe you will.$"
+
+SSAnne_CaptainsOffice_Text_SheetIntoNotebook::
+    .string "{PLAYER} put it in the NOTEBOOK,\n"
+    .string "under LOOSE PAGES.$"

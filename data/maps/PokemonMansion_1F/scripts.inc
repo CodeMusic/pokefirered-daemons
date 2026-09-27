@@ -39,3 +39,17 @@ PokemonMansion_1F_EventScript_IterLog::
 	call EventScript_NotebookCopied
 	releaseall
 	end
+
+@ T-235 (the user, 2026-09-27): the Five Witnesses' reward answers only once every UNDERSTANDING is held. Until then
+@ the tile is floorboards. Its place is a proposal on the private page, for the puzzle's author to confirm.
+PokemonMansion_1F_EventScript_WitnessTile::
+	goto_if_set FLAG_ARTSAI_PAGE, PokemonMansion_1F_EventScript_WitnessTileEnd
+	special DaemonsHoldsEveryUnderstanding
+	goto_if_eq VAR_RESULT, FALSE, PokemonMansion_1F_EventScript_WitnessTileEnd
+	lockall
+	msgbox PokemonMansion_1F_Text_WitnessTile
+	setflag FLAG_ARTSAI_PAGE
+	call EventScript_NotebookCopied
+	releaseall
+PokemonMansion_1F_EventScript_WitnessTileEnd::
+	end

@@ -30,3 +30,10 @@ PokemonMansion_1F_Text_IterLog::
     .string "ITER 35 held two frames. did not\n"
     .string "come back the same.\p"
     .string "The log ends there.$"
+
+@  DRAFT (T-235).
+PokemonMansion_1F_Text_WitnessTile::
+    .string "A floorboard here sits loose.\p"
+    .string "Under it, pages folded small and\n"
+    .string "kept dry. A session, written down\l"
+    .string "by the one being asked.$"
