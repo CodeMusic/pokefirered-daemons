@@ -86,6 +86,9 @@ enum StartMenuOption
     STARTMENU_DBG_ARTSAI,
     STARTMENU_DBG_CRYSTAL,   // T-257
     STARTMENU_DBG_WARDEN,    // T-260
+    STARTMENU_DBG_MORE,      // the JUMP page's second page
+    STARTMENU_DBG_FIR,       // T-10
+    STARTMENU_DBG_WITNESS,   // T-235
     STARTMENU_DBG_ENCOUNTER,
     STARTMENU_DBG_WATCH,     // T-268
     STARTMENU_DBG_DAEMON,
@@ -164,6 +167,9 @@ static bool8 DbgDoldrumCallback(void);
 static bool8 DbgArtsaiCallback(void);
 static bool8 DbgCrystalCallback(void);
 static bool8 DbgWardenCallback(void);
+static bool8 DbgMoreCallback(void);
+static bool8 DbgFirCallback(void);
+static bool8 DbgWitnessCallback(void);
 static bool8 DbgJumpCallback(void);
 static bool8 DbgEncounterCallback(void);
 static bool8 DbgStepCallback(void);
@@ -228,6 +234,9 @@ static const struct MenuAction sStartMenuActionTable[] = {
     [STARTMENU_DBG_ARTSAI]  = { gText_DbgMenuArtsai,  {.u8_void = DbgArtsaiCallback} },
     [STARTMENU_DBG_CRYSTAL] = { gText_DbgMenuCrystal, {.u8_void = DbgCrystalCallback} },
     [STARTMENU_DBG_WARDEN]  = { gText_DbgMenuWarden,  {.u8_void = DbgWardenCallback} },
+    [STARTMENU_DBG_MORE]    = { gText_DbgMenuMore,    {.u8_void = DbgMoreCallback} },
+    [STARTMENU_DBG_FIR]     = { gText_DbgMenuFir,     {.u8_void = DbgFirCallback} },
+    [STARTMENU_DBG_WITNESS] = { gText_DbgMenuWitness, {.u8_void = DbgWitnessCallback} },
     [STARTMENU_DBG_ENCOUNTER] = { gText_DbgMenuEncounter, {.u8_void = DbgEncounterCallback} },
     // DAEMON and LEVEL are adjusted with LEFT/RIGHT, so A on either does
     // nothing but redraw -- which is also what makes A safe to lean on.
@@ -284,6 +293,9 @@ static const u8 *const sStartMenuDescPointers[] = {
     gStartMenuDesc_DbgArtsai,
     gStartMenuDesc_DbgCrystal,
     gStartMenuDesc_DbgWarden,
+    gStartMenuDesc_DbgMore,
+    gStartMenuDesc_DbgFir,
+    gStartMenuDesc_DbgWitness,
     gStartMenuDesc_DbgEncounter,
     gStartMenuDesc_DbgWatch,
     gStartMenuDesc_DbgDaemon,
@@ -353,6 +365,7 @@ enum {
     DBG_PAGE_ENCOUNTER,
     DBG_PAGE_ITEMS,
     DBG_PAGE_JUMP,
+    DBG_PAGE_JUMP2,   // MORE: seven rows is all the JUMP page has room for (2026-09-27)
 };
 static EWRAM_DATA u8 sDbgPage = 0;
 #define DBG_FIRST_SONG MUS_HEAL   // 256; everything below it is a sound effect
@@ -405,8 +418,15 @@ static void SetUpStartMenu(void)
         AppendToStartMenuItems(STARTMENU_DBG_DOLDRUM);
         AppendToStartMenuItems(STARTMENU_DBG_ARTSAI);
         AppendToStartMenuItems(STARTMENU_DBG_CRYSTAL);
-        AppendToStartMenuItems(STARTMENU_DBG_WARDEN);
+        AppendToStartMenuItems(STARTMENU_DBG_MORE);
         //  No BACK row here: an eighth row sits under the description box (2026-09-24), and B goes back.
+        return;
+    }
+    if (sDbgPage == DBG_PAGE_JUMP2)
+    {
+        AppendToStartMenuItems(STARTMENU_DBG_WARDEN);
+        AppendToStartMenuItems(STARTMENU_DBG_FIR);
+        AppendToStartMenuItems(STARTMENU_DBG_WITNESS);
         return;
     }
     if (sDbgPage == DBG_PAGE_MAIN)
@@ -872,6 +892,9 @@ static bool8 IsDaemonsDebugCallback(void)
         || sStartMenuCallback == DbgArtsaiCallback
         || sStartMenuCallback == DbgCrystalCallback
         || sStartMenuCallback == DbgWardenCallback
+        || sStartMenuCallback == DbgMoreCallback
+        || sStartMenuCallback == DbgFirCallback
+        || sStartMenuCallback == DbgWitnessCallback
         || sStartMenuCallback == DbgJumpCallback
         || sStartMenuCallback == DbgEncounterCallback
         || sStartMenuCallback == DbgStepCallback
@@ -1287,6 +1310,25 @@ static bool8 DbgWardenCallback(void)
     return DbgLeaveMenuForScript(DaemonsDebug_EventScript_Warden);
 }
 
+static bool8 DbgMoreCallback(void)
+{
+    sDbgPage = DBG_PAGE_JUMP2;
+    sStartMenuCursorPos = 0;
+    return DbgRedraw();
+}
+
+//  T-10: the fir needs SURF and a ship that has sailed; T-235's tile needs every understanding. Both are the end of
+//  a long road, so a field test on a phone could never reach them without these.
+static bool8 DbgFirCallback(void)
+{
+    return DbgLeaveMenuForScript(DaemonsDebug_EventScript_Fir);
+}
+
+static bool8 DbgWitnessCallback(void)
+{
+    return DbgLeaveMenuForScript(DaemonsDebug_EventScript_Witness);
+}
+
 static bool8 DbgEncounterCallback(void)
 {
     // Clamped on entry rather than on change, because DbgDexMax moves the
@@ -1438,6 +1480,12 @@ static bool8 DbgBackCallback(void)
 {
     if (sDbgPage == DBG_PAGE_ENCOUNTER)
         HelpSystem_EnableToggleWithRButton();
+    if (sDbgPage == DBG_PAGE_JUMP2)
+    {
+        sDbgPage = DBG_PAGE_JUMP;
+        sStartMenuCursorPos = 0;
+        return DbgRedraw();
+    }
     if (sDbgPage == DBG_PAGE_ENCOUNTER || sDbgPage == DBG_PAGE_ITEMS || sDbgPage == DBG_PAGE_JUMP)
     {
         sDbgPage = DBG_PAGE_MAIN;

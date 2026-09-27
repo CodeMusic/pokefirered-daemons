@@ -170,6 +170,65 @@ DaemonsDebug_EventScript_Warden::
 	releaseall
 	end
 
+@  FIR (T-10). The S.S. ANNE sailed (so her voyage is over, as ISLANDS warns), the fir not yet heard in its key, the
+@  band's sheet in the NOTEBOOK or not, and the pier's far strip beside the fir -- which otherwise takes SURF.
+DaemonsDebug_EventScript_Fir::
+	lockall
+	msgbox DaemonsDebug_Text_Fir, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, DaemonsDebug_EventScript_Cancel
+	clearflag FLAG_FIR_IN_KEY
+	clearflag FLAG_NOTEBOOK_LOOSE_KEY
+	msgbox DaemonsDebug_Text_FirSheet, MSGBOX_YESNO
+	call_if_eq VAR_RESULT, YES, DaemonsDebug_EventScript_FirSheet
+	call_if_lt VAR_MAP_SCENE_VERMILION_CITY, 3, DaemonsDebug_EventScript_FirSail
+	closemessage
+	warp MAP_SSANNE_EXTERIOR, 57, 27
+	waitstate
+	releaseall
+	end
+
+DaemonsDebug_EventScript_FirSheet::
+	setflag FLAG_NOTEBOOK_LOOSE_KEY
+	return
+
+DaemonsDebug_EventScript_FirSail::
+	setvar VAR_MAP_SCENE_VERMILION_CITY, 3
+	setflag FLAG_GOT_HM01
+	return
+
+@  WITNESSES (T-235). Every understanding set and the TRANSCRIPT taken back, so the reward answers; then the MANSION,
+@  in the room. Where to stand is still the witnesses' to tell.
+DaemonsDebug_EventScript_Witness::
+	lockall
+	msgbox DaemonsDebug_Text_Witness, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, DaemonsDebug_EventScript_Cancel
+	setflag FLAG_UNDERSTANDING_FIRST
+	setflag FLAG_UNDERSTANDING_SCHOOL
+	setflag FLAG_UNDERSTANDING_READING
+	setflag FLAG_UNDERSTANDING_NOTES
+	setflag FLAG_UNDERSTANDING_SCORN
+	setflag FLAG_UNDERSTANDING_RETURN
+	setflag FLAG_UNDERSTANDING_GUIDE
+	clearflag FLAG_ARTSAI_PAGE
+	closemessage
+	warp MAP_POKEMON_MANSION_1F, 6, 8
+	waitstate
+	releaseall
+	end
+
+DaemonsDebug_Text_Fir::
+	.string "DEBUG: the singing fir?\p"
+	.string "The S.S. ANNE will have sailed,\n"
+	.string "and you stand beside the fir.$"
+
+DaemonsDebug_Text_FirSheet::
+	.string "Hold the band's sheet?$"
+
+DaemonsDebug_Text_Witness::
+	.string "DEBUG: the WITNESSES' reward?\p"
+	.string "Every understanding is set, and the\n"
+	.string "TRANSCRIPT is taken back.$"
+
 DaemonsDebug_Text_Crystal::
 	.string "DEBUG: CRYSTAL home after the\n"
 	.string "payload?\p"

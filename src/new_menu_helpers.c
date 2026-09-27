@@ -691,8 +691,15 @@ u8 CreateStartMenuWindow(u8 height)
     if (sStartMenuWindowId == 0xFF)
     {
 #if DAEMONS_DEBUG
+        //  Rows are 15px apart and a row's letters want 14, so n rows need 15n - 1 pixels; vanilla's 2n - 1 tiles
+        //  only hold that from seven rows up. Every shorter DEBUG page cut its last row off at the bottom -- MART's
+        //  BACK read RACK (found 2026-09-27 adding JUMP's second page). Seven rows keep vanilla's thirteen tiles.
         u8 width = sStartMenuWindowWidth ? sStartMenuWindowWidth : 7;
-        struct WindowTemplate template = SetWindowTemplateFields(0, 0x1D - width, 1, width, height * 2 - 1, DLG_WINDOW_PALETTE_NUM, 0x13D);
+        u8 tiles = (15 * height - 1 + 7) / 8;
+        struct WindowTemplate template;
+        if (tiles < height * 2 - 1)
+            tiles = height * 2 - 1;
+        template = SetWindowTemplateFields(0, 0x1D - width, 1, width, tiles, DLG_WINDOW_PALETTE_NUM, 0x13D);
 #else
         struct WindowTemplate template = SetWindowTemplateFields(0, 0x16, 1, 7, height * 2 - 1, DLG_WINDOW_PALETTE_NUM, 0x13D);
 #endif
