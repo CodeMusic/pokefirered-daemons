@@ -213,6 +213,67 @@ static u16 LoadPicSpriteInWindow(u16 species, u32 otId, u32 personality, bool8 i
     return 0;
 }
 
+//  T-318 (the user, 2026-09-27): EACH VIRTUE RESTORES ITS PART OF THE AVATAR. The USER card's portrait is cut into
+//  seven bands, the feet to the crown -- the week's order, root to crown -- and a band whose virtue has not arrived
+//  is drawn one shade down: every colour moved to the nearest darker colour of the portrait's own sixteen. Nothing
+//  new is drawn and no colour is added; the light comes up from the feet as the MARKS are earned. Bit k of the mask
+//  is band k counted from the feet; trainer_card.c sets it for the player's own card and clears it after.
+u8 gTrainerCardPicShade;
+
+#define PIC_PIXEL(buf, x, y) (&(buf)[(((y) / 8) * 8 + (x) / 8) * 32 + ((y) % 8) * 4 + ((x) % 8) / 2])
+
+static u16 ColourLuma(u16 c)
+{
+    return (c & 0x1F) * 3 + ((c >> 5) & 0x1F) * 6 + ((c >> 10) & 0x1F);
+}
+
+static void ShadePicBands(u8 *pic, const u16 *pal)
+{
+    u8 down[16];
+    s32 i, j, x, y, top = -1, bottom = -1, height;
+
+    //  One shade down: the colour nearest to this one at seven-tenths its brightness, and darker than it.
+    for (i = 0; i < 16; i++)
+    {
+        s32 r = (pal[i] & 0x1F) * 7 / 10, g = ((pal[i] >> 5) & 0x1F) * 7 / 10, b = ((pal[i] >> 10) & 0x1F) * 7 / 10;
+        s32 best = 0x7FFFFFFF;
+        down[i] = i;
+        if (i == 0)
+            continue;
+        for (j = 1; j < 16; j++)
+        {
+            s32 dr = (pal[j] & 0x1F) - r, dg = ((pal[j] >> 5) & 0x1F) - g, db = ((pal[j] >> 10) & 0x1F) - b;
+            s32 d = dr * dr + dg * dg + db * db;
+            if (ColourLuma(pal[j]) < ColourLuma(pal[i]) && d < best)
+                best = d, down[i] = j;
+        }
+    }
+    for (y = 0; y < 64; y++)
+        for (x = 0; x < 64; x++)
+            if (*PIC_PIXEL(pic, x, y) & (x & 1 ? 0xF0 : 0x0F))
+            {
+                if (top < 0)
+                    top = y;
+                bottom = y;
+            }
+    if (top < 0)
+        return;
+    height = bottom - top + 1;
+    for (y = top; y <= bottom; y++)
+    {
+        if (!(gTrainerCardPicShade & (1 << ((bottom - y) * 7 / height))))
+            continue;
+        for (x = 0; x < 64; x++)
+        {
+            u8 *p = PIC_PIXEL(pic, x, y);
+            if (x & 1)
+                *p = (*p & 0x0F) | (down[*p >> 4] << 4);
+            else
+                *p = (*p & 0xF0) | down[*p & 0x0F];
+        }
+    }
+}
+
 u16 CreateTrainerCardSprite(u16 species, u32 otId, u32 personality, bool8 isFrontPic, u16 destX, u16 destY, u8 paletteSlot, u8 windowId, bool8 isTrainer)
 {
     u8 *framePics;
@@ -220,6 +281,11 @@ u16 CreateTrainerCardSprite(u16 species, u32 otId, u32 personality, bool8 isFron
     framePics = Alloc(4 * 0x800);
     if (framePics && !DecompressPic_HandleDeoxys(species, personality, isFrontPic, framePics, isTrainer))
     {
+        if (isTrainer && gTrainerCardPicShade)
+        {
+            LoadPicPaletteBySlot(species, otId, personality, paletteSlot, isTrainer);
+            ShadePicBands(framePics, &gPlttBufferUnfaded[paletteSlot * 16]);
+        }
         BlitBitmapRectToWindow(windowId, framePics, 0, 0, 0x40, 0x40, destX, destY, 0x40, 0x40);
         LoadPicPaletteBySlot(species, otId, personality, paletteSlot, isTrainer);
         Free(framePics);

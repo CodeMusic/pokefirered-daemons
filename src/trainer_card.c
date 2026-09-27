@@ -1124,6 +1124,22 @@ static const u8 sCertifies8[] = _("Straight by the\nline that hangs,\nnot by the
 static const u8 *const sMarkCertifies[NUM_BADGES] = {
     sCertifies1, sCertifies2, sCertifies3, sCertifies4, sCertifies5, sCertifies6, sCertifies7, sCertifies8,
 };
+//  T-318 (the user, 2026-09-27; the pairing proposed and approved the same day): EACH OF THE FIRST SEVEN MARKS BRINGS
+//  A VIRTUE, in the week's order, root to crown -- so the last before SCORN's BENCHMARK is humility, over pride. The
+//  eighth door already waits on the seven MARKS, so it waits on the seven virtues. One line is all the page has under
+//  what the MARK certifies, so the virtue is said alone; its shadow (SLOTH ... PRIDE, the user's word for the book's
+//  "sin") is left unsaid. DRAFT WORDING.
+#define NUM_VIRTUES 7
+static const u8 sVirtue1[] = _("And DILIGENCE.");
+static const u8 sVirtue2[] = _("And CHASTITY.");
+static const u8 sVirtue3[] = _("And CHARITY.");
+static const u8 sVirtue4[] = _("And KINDNESS.");
+static const u8 sVirtue5[] = _("And TEMPERANCE.");
+static const u8 sVirtue6[] = _("And PATIENCE.");
+static const u8 sVirtue7[] = _("And HUMILITY.");
+static const u8 *const sMarkVirtues[NUM_VIRTUES] = {
+    sVirtue1, sVirtue2, sVirtue3, sVirtue4, sVirtue5, sVirtue6, sVirtue7,
+};
 static const u8 *const sMarkNames[NUM_BADGES] = {
     gTeachyTvString_Mark1, gTeachyTvString_Mark2, gTeachyTvString_Mark3, gTeachyTvString_Mark4,
     gTeachyTvString_Mark5, gTeachyTvString_Mark6, gTeachyTvString_Mark7, gTeachyTvString_Mark8,
@@ -1148,6 +1164,8 @@ static void DrawBenchmarksView(void)
     AddTextPrinterParameterized3(1, FONT_NORMAL, MARKS_TEXT_X, 58, sTrainerCardTextColors, TEXT_SKIP_DRAW, sMarkCertifies[sMarksCursor]);
     if (!sTrainerCardDataPtr->hasBadge[sMarksCursor])
         AddTextPrinterParameterized3(1, FONT_NORMAL, MARKS_TEXT_X, 100, sTrainerCardTextColors, TEXT_SKIP_DRAW, sText_NotYetHeld);
+    else if (sMarksCursor < NUM_VIRTUES)
+        AddTextPrinterParameterized3(1, FONT_NORMAL, MARKS_TEXT_X, 100, sTrainerCardTextColors, TEXT_SKIP_DRAW, sMarkVirtues[sMarksCursor]);
     i = sMarksCursor;
     FillWindowPixelRect(1, PIXEL_FILL(TEXT_COLOR_DARK_GRAY), 24 + 24 * i, MARKS_ROW_Y, 16, 2);
     DrawTrainerCardWindow(1);
@@ -2056,10 +2074,18 @@ static void CreateTrainerCardTrainerPic(void)
         }
         else
         {
+            //  T-318: on your own card, the bands whose virtues have not arrived are in shadow (trainer_pokemon_sprites.c).
+            u8 i;
+            gTrainerCardPicShade = 0;
+            if (sTrainerCardDataPtr->isOwnCard)
+                for (i = 0; i < NUM_VIRTUES; i++)
+                    if (!sTrainerCardDataPtr->hasBadge[i])
+                        gTrainerCardPicShade |= 1 << i;
             CreateTrainerCardTrainerPicSprite(PlayerGenderToFrontTrainerPicId(sTrainerCardDataPtr->trainerCard.rse.gender, TRUE), TRUE,
                     sTrainerPicOffsets[sTrainerCardDataPtr->cardType][sTrainerCardDataPtr->trainerCard.rse.gender][0],
                     sTrainerPicOffsets[sTrainerCardDataPtr->cardType][sTrainerCardDataPtr->trainerCard.rse.gender][1],
                     8, 2);
+            gTrainerCardPicShade = 0;
         }
     }
 }
