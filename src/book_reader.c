@@ -834,6 +834,17 @@ void DaemonsHoldsEveryUnderstanding(void)
             gSpecialVar_Result = FALSE;
 }
 
+//  T-317: how many understandings are still to come -- for the TOWN MAP's clarity, never shown as a number.
+u8 DaemonsUnderstandingsMissing(void)
+{
+    u8 i, missing = 0;
+
+    for (i = 0; i < ARRAY_COUNT(sGuideMarginNotes); i++)
+        if (!FlagGet(sGuideMarginNotes[i].flag))
+            missing++;
+    return missing;
+}
+
 static const u8 *GuideMarginNote(u8 entry)
 {
     u8 i;

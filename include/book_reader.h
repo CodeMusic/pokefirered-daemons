@@ -10,5 +10,6 @@ void Guide_OpenBoardCopy(void);
 enum { BOOK_QR_NONE, BOOK_QR_FOLDS, BOOK_QR_GUIDE };
 void BookReader_AddQr(u8 which);
 void DaemonsArriveAtUnderstandings(void);   // T-252
+u8 DaemonsUnderstandingsMissing(void);      // T-317
 
 #endif // GUARD_BOOK_READER_H

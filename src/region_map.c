@@ -1,4 +1,5 @@
 #include "global.h"
+#include "book_reader.h"
 #include "gflib.h"
 #include "scanline_effect.h"
 #include "task.h"
@@ -1365,6 +1366,24 @@ static void SetRegionMapVBlankCB(void)
     SetVBlankCallback(VBlankCB_RegionMap);
 }
 
+//  T-317 (the user, 2026-09-26): UNDERSTANDING SHOWN AS CLARITY, NEVER AS A COUNT. The TOWN MAP's land and sea (BG0)
+//  are drawn a little blocky -- the GBA's own mosaic, two pixels square -- while most understandings are still to
+//  come, two pixels wide and one high while a few are, and sharp once every one is held (three pixels was tried and
+//  was not subtle: the towns turned square). The names, the cursor, the player and the GOTO icons are on other layers
+//  and never blur (the towns' dots are the land's, and soften with it), so the map always reads; what changes is only
+//  whether it looks RIGID or resolved, and nothing says so. ResetGpuRegs puts the register back when the map closes.
+static void SetRegionMapClarity(void)
+{
+    u8 missing = DaemonsUnderstandingsMissing();
+    u16 mosaic = missing >= 4 ? (1 | (1 << 4)) : (missing != 0 ? 1 : 0);   // H size, then V size, each one less
+
+    if (mosaic != 0)
+    {
+        SetBgAttribute(0, BG_ATTR_MOSAIC, TRUE);
+        SetGpuReg(REG_OFFSET_MOSAIC, mosaic);
+    }
+}
+
 static void InitRegionMapBgs(void)
 {
     DmaFillLarge16(3, 0, (void *)VRAM, VRAM_SIZE, 0x1000);
@@ -1373,6 +1392,7 @@ static void InitRegionMapBgs(void)
     SetGpuReg(REG_OFFSET_DISPCNT, 0);
     ResetBgsAndClearDma3BusyFlags(FALSE);
     InitBgsFromTemplates(0, sRegionMapBgTemplates, NELEMS(sRegionMapBgTemplates));
+    SetRegionMapClarity();
     ChangeBgX(0, 0, 0);
     ChangeBgY(0, 0, 0);
     ChangeBgX(1, 0, 0);
