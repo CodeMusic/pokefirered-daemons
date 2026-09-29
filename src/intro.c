@@ -103,6 +103,8 @@ enum {
 enum {
     ANIM_SPARKLE_LOOP,
     ANIM_SPARKLE_ONCE,
+    ANIM_SPARKLE_BINARY,   // T-320: the thank-you card's glints -- the splash's own 0 and 1 ...
+    ANIM_SPARKLE_NOTES,    // ... and its two small notes, each kept to its own word
 };
 
 enum {
@@ -187,6 +189,7 @@ static void IntroCB_GF_OpenWindow(struct IntroSequenceData * ptr);
 static void IntroCB_GF_Star(struct IntroSequenceData * ptr);
 static void IntroCB_GF_RevealName(struct IntroSequenceData * ptr);
 static void IntroCB_GF_RevealLogo(struct IntroSequenceData * ptr);
+static void IntroCB_Thanks(struct IntroSequenceData * ptr);
 static void GFScene_LoadGfxCreateStar(void);
 static void GFScene_StartNameSparklesSmall(void);
 static void GFScene_StartNameSparklesBig(void);
@@ -487,9 +490,24 @@ static const union AnimCmd sAnim_SparklesSmall_Once[] = {
 	ANIMCMD_END
 };
 
+static const union AnimCmd sAnim_SparklesSmall_Binary[] = {
+	ANIMCMD_FRAME(0, 6),
+	ANIMCMD_FRAME(1, 6),
+	ANIMCMD_FRAME(0, 6),
+	ANIMCMD_END
+};
+
+static const union AnimCmd sAnim_SparklesSmall_Notes[] = {
+	ANIMCMD_FRAME(2, 8),
+	ANIMCMD_FRAME(3, 8),
+	ANIMCMD_END
+};
+
 static const union AnimCmd *const sAnims_SparklesSmall[] = {
-	[ANIM_SPARKLE_LOOP] = sAnim_SparklesSmall_Loop,
-	[ANIM_SPARKLE_ONCE] = sAnim_SparklesSmall_Once
+	[ANIM_SPARKLE_LOOP]   = sAnim_SparklesSmall_Loop,
+	[ANIM_SPARKLE_ONCE]   = sAnim_SparklesSmall_Once,
+	[ANIM_SPARKLE_BINARY] = sAnim_SparklesSmall_Binary,
+	[ANIM_SPARKLE_NOTES]  = sAnim_SparklesSmall_Notes,
 };
 
 static const struct SpriteTemplate sSpriteTemplate_Star = {
@@ -1308,7 +1326,7 @@ static void IntroCB_GF_RevealLogo(struct IntroSequenceData * this)
             // because the title screen it hands over to was not finished, and
             // an intro that leads into an unreadable screen is the wrong order
             // to build in.
-            SetIntroCB(this, IntroCB_ExitToTitleScreen);
+            SetIntroCB(this, IntroCB_Thanks);   // T-320, then the door
         }
         break;
     }
@@ -1937,6 +1955,181 @@ static void Scene3_GengarZoom(struct IntroSequenceData * this)
         SetSpriteMatrixAnchor(this->scene3GengarSprites[i], sGengarZoomMatrixAnchors[i][0], sGengarZoomMatrixAnchors[i][1]);
     }
 }
+
+//  T-320 (the user, 2026-09-29): A THANK-YOU, STRAIGHT AFTER THE CODEMUSIC SPLASH. The user's words, chosen from three
+//  drafts because a year ages well beside an idea still reaching people; signed CodeMusic because it follows that
+//  animation and nobody knows the person yet. It sits in the splash's own band, in the splash's white on its navy,
+//  and the splash's own glints come back around the signature -- its 0s and 1s about CODE, its small notes about
+//  MUSIC -- fewer and slower than before: enough to join the two screens, not to perform. Four seconds, then the
+//  door; A, START or SELECT skip it with the rest of the intro.
+static const u8 sThanks_Line1[] = _("Thank you, Satoshi Tajiri.");
+static const u8 sThanks_Line2[] = _("An idea from 1996");
+static const u8 sThanks_Line3[] = _("is still reaching people.");
+static const u8 sThanks_Line4[] = _("Me included.");
+static const u8 sThanks_Dash[]  = _("-- ");
+static const u8 sThanks_Code[]  = _("Code");
+static const u8 sThanks_Music[] = _("Music");
+static const u8 sThanksTextColors[] = {TEXT_COLOR_TRANSPARENT, 9, 2};   // the logo palette's white, its dark teal
+
+#define THANKS_WIN_LEFT  2                 // tiles: the window spans the splash's 96px band exactly
+#define THANKS_WIN_TOP   4
+#define THANKS_WIN_W     26
+#define THANKS_WIN_H     12
+#define THANKS_SIG_Y     66                // the signature's line, inside the window: room below it for glints
+#define THANKS_HOLD      210               // frames the card holds, faded in
+
+static const struct WindowTemplate sThanksWindowTemplate = {
+    .bg = BG_GF_TEXT_LOGO,
+    .tilemapLeft = THANKS_WIN_LEFT,
+    .tilemapTop = THANKS_WIN_TOP,
+    .width = THANKS_WIN_W,
+    .height = THANKS_WIN_H,
+    .paletteNum = 13,
+    .baseBlock = 0x000
+};
+
+static void SpriteCB_ThanksGlint(struct Sprite *sprite)
+{
+    if (sprite->animEnded)
+        DestroySprite(sprite);
+    else if ((++sprite->data[0] & 7) == 0)
+        sprite->y--;
+}
+
+static const struct SpriteTemplate sSpriteTemplate_ThanksGlint = {
+    .tileTag = GFXTAG_SPARKLES_SMALL,
+    .paletteTag = PALTAG_SPARKLES,
+    .oam = &sOam_SparklesSmall,
+    .anims = sAnims_SparklesSmall,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_ThanksGlint
+};
+
+#define tTimer   data[0]
+#define tCodeX   data[1]
+#define tCodeW   data[2]
+#define tMusicX  data[3]
+#define tMusicW  data[4]
+#define tSigY    data[5]
+#define tTurn    data[6]
+
+// One glint every eight frames, CODE's and MUSIC's in turn, somewhere along its word, just above or below it.
+static void Task_ThanksGlints(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    u16 r;
+    u8 spriteId;
+    s16 x, y;
+
+    if (++tTimer < 8)
+        return;
+    tTimer = 0;
+    r = Random();
+    tTurn ^= 1;
+    if (tTurn)
+        x = tCodeX + r % tCodeW;
+    else
+        x = tMusicX + r % tMusicW;
+    y = (r & 0x100) ? tSigY - 4 : tSigY + 16;
+    spriteId = CreateSprite(&sSpriteTemplate_ThanksGlint, x, y, 1);
+    if (spriteId != MAX_SPRITES)
+        StartSpriteAnim(&gSprites[spriteId], tTurn ? ANIM_SPARKLE_BINARY : ANIM_SPARKLE_NOTES);
+}
+
+static void ThanksPrintCentred(u8 windowId, const u8 *str, u8 y)
+{
+    s32 w = GetStringWidth(FONT_NORMAL, str, 0);
+    AddTextPrinterParameterized3(windowId, FONT_NORMAL, (THANKS_WIN_W * 8 - w) / 2, y, sThanksTextColors, TEXT_SKIP_DRAW, str);
+}
+
+static void IntroCB_Thanks(struct IntroSequenceData * this)
+{
+    u8 taskId;
+    s32 dashW, codeW, musicW, x;
+
+    switch (this->state)
+    {
+    case 0:
+        this->data[0] = AddWindow(&sThanksWindowTemplate);
+        FillWindowPixelBuffer(this->data[0], PIXEL_FILL(0));
+        ThanksPrintCentred(this->data[0], sThanks_Line1, 2);
+        ThanksPrintCentred(this->data[0], sThanks_Line2, 19);
+        ThanksPrintCentred(this->data[0], sThanks_Line3, 32);
+        ThanksPrintCentred(this->data[0], sThanks_Line4, 45);
+        dashW = GetStringWidth(FONT_NORMAL, sThanks_Dash, 0);
+        codeW = GetStringWidth(FONT_NORMAL, sThanks_Code, 0);
+        musicW = GetStringWidth(FONT_NORMAL, sThanks_Music, 0);
+        x = (THANKS_WIN_W * 8 - (dashW + codeW + musicW)) / 2;
+        AddTextPrinterParameterized3(this->data[0], FONT_NORMAL, x, THANKS_SIG_Y, sThanksTextColors, TEXT_SKIP_DRAW, sThanks_Dash);
+        AddTextPrinterParameterized3(this->data[0], FONT_NORMAL, x + dashW, THANKS_SIG_Y, sThanksTextColors, TEXT_SKIP_DRAW, sThanks_Code);
+        AddTextPrinterParameterized3(this->data[0], FONT_NORMAL, x + dashW + codeW, THANKS_SIG_Y, sThanksTextColors, TEXT_SKIP_DRAW, sThanks_Music);
+        PutWindowTilemap(this->data[0]);
+        CopyWindowToVram(this->data[0], COPYWIN_FULL);
+        LoadCompressedSpriteSheet(&sSpriteSheets_GameFreakScene[1]);   // the small glints
+        LoadSpritePalettes(sSpritePalettes_GameFreakScene);
+        taskId = CreateTask(Task_ThanksGlints, 2);
+        gTasks[taskId].tCodeX = THANKS_WIN_LEFT * 8 + x + dashW;
+        gTasks[taskId].tCodeW = codeW;
+        gTasks[taskId].tMusicX = THANKS_WIN_LEFT * 8 + x + dashW + codeW;
+        gTasks[taskId].tMusicW = musicW;
+        gTasks[taskId].tSigY = THANKS_WIN_TOP * 8 + THANKS_SIG_Y;
+        this->data[1] = taskId;
+        this->state++;
+        break;
+    case 1:
+        if (!IsDma3ManagerBusyWithBgCopy())
+        {
+            SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG2 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL);
+            StartBlendTask(0, 16, 16, 0, 32, 0);
+            ShowBg(BG_GF_TEXT_LOGO);
+            this->state++;
+        }
+        break;
+    case 2:
+        if (!IsBlendTaskActive())
+        {
+            SetGpuReg(REG_OFFSET_BLDCNT, 0);
+            this->timer = 0;
+            this->state++;
+        }
+        break;
+    case 3:
+        if (++this->timer > THANKS_HOLD)
+        {
+            DestroyTask(this->data[1]);
+            SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG2 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_ALL);
+            StartBlendTask(16, 0, 0, 16, 20, 0);
+            this->state++;
+        }
+        break;
+    case 4:
+        if (!IsBlendTaskActive())
+        {
+            HideBg(BG_GF_TEXT_LOGO);
+            ResetSpriteData();
+            FreeAllSpritePalettes();
+            this->timer = 0;
+            this->state++;
+        }
+        break;
+    case 5:
+        if (++this->timer > 20)
+        {
+            SetGpuReg(REG_OFFSET_BLDCNT, 0);
+            SetIntroCB(this, IntroCB_ExitToTitleScreen);
+        }
+        break;
+    }
+}
+
+#undef tTimer
+#undef tCodeX
+#undef tCodeW
+#undef tMusicX
+#undef tMusicW
+#undef tSigY
+#undef tTurn
 
 static void IntroCB_ExitToTitleScreen(struct IntroSequenceData * this)
 {
