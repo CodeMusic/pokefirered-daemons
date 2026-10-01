@@ -707,6 +707,8 @@ PalletTown_ProfessorOaksLab_EventScript_ReceiveDexScene::
 	msgbox PalletTown_ProfessorOaksLab_Text_OakExplainCatching
 	famechecker FAMECHECKER_OAK, 1
 	msgbox PalletTown_ProfessorOaksLab_Text_OakCompleteMonGuideWasMyDream
+	call_if_unset FLAG_GOT_OPUS, PalletTown_ProfessorOaksLab_EventScript_OakOpusHint    @ T-338
+	call_if_set FLAG_GOT_OPUS, PalletTown_ProfessorOaksLab_EventScript_OakOpusFound
 	msgbox PalletTown_ProfessorOaksLab_Text_RivalLeaveItToMeGramps
 	call_if_eq VAR_FACING, DIR_NORTH, PalletTown_ProfessorOaksLab_EventScript_DexSceneRivalFacePlayerNorth
 	call_if_eq VAR_FACING, DIR_SOUTH, PalletTown_ProfessorOaksLab_EventScript_DexSceneRivalFacePlayerSouth
@@ -1422,3 +1424,13 @@ PalletTown_ProfessorOaksLab_EventScript_TheIndexWrites::
 	msgbox PalletTown_ProfessorOaksLab_Text_IndexWrotePage
 	release
 	end
+
+@  T-338 (the user, 2026-10-01): with the INDEX in hand, CRYSTAL says it can be more -- two things open it further, one
+@  she is still working on and one already at THE REPO, not for sale. She never says who left it (T-197).
+PalletTown_ProfessorOaksLab_EventScript_OakOpusHint::
+	msgbox PalletTown_ProfessorOaksLab_Text_OakOpusHint
+	return
+
+PalletTown_ProfessorOaksLab_EventScript_OakOpusFound::
+	msgbox PalletTown_ProfessorOaksLab_Text_OakOpusFound
+	return

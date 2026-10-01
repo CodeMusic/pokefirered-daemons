@@ -1,6 +1,15 @@
+@  T-339, DRAFT (the user, 2026-10-01): eager to set out -- the mainland's machines, the islands' minds.
 PalletTown_ProfessorOaksLab_Text_RivalGrampsIsntAround::
     .string "{RIVAL}: Oh. It is you.\p"
-    .string "She is not here.$"
+    .string "She is not here.\p"
+    .string "I am going the minute she lets me.\n"
+    .string "The mainland first.\p"
+    .string "They say it teaches you machines,\n"
+    .string "and the science under them.\p"
+    .string "And past the sea there are islands\n"
+    .string "that teach the other half.\p"
+    .string "How a mind works.\p"
+    .string "I want both.$"
 
 PalletTown_ProfessorOaksLab_Text_RivalFedUpWithWaiting::
     .string "{RIVAL}: CRYSTAL.\p"
@@ -423,3 +432,25 @@ PalletTown_ProfessorOaksLab_Text_CrystalItWillKeepIt::
 PalletTown_ProfessorOaksLab_Text_IndexWrotePage::
     .string "The INDEX wrote a page into the\n"
     .string "NOTEBOOK.$"
+
+@  T-338, DRAFT (the user, 2026-10-01): two things open the INDEX further -- one she is still working on, one at THE REPO.
+PalletTown_ProfessorOaksLab_Text_OakOpusHint::
+    .string "CRYSTAL: One more thing. The INDEX\n"
+    .string "can be more than it is.\p"
+    .string "Two things open it further. One of\n"
+    .string "them I am still working on.\p"
+    .string "The other is already in CALLOW, at\n"
+    .string "THE REPO.\p"
+    .string "It is not for sale. Nobody could\n"
+    .string "put a price on it, so nobody has.\p"
+    .string "Look along the shelves. One of them\n"
+    .string "is not like the rest.$"
+
+@  T-338, DRAFT: the same, when OPUS has already been taken. Who left it is still never said (T-197).
+PalletTown_ProfessorOaksLab_Text_OakOpusFound::
+    .string "CRYSTAL: One more thing. The INDEX\n"
+    .string "can be more than it is.\p"
+    .string "Two things open it further. One of\n"
+    .string "them I am still working on.\p"
+    .string "The other, I think, you have found\n"
+    .string "already. It was never for sale.$"
