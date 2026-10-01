@@ -1393,7 +1393,7 @@ static void DexScreen_CreateCharacteristicListMenu(void)
 
 static u16 DexScreen_CountMonsInOrderedList(u8 orderIdx)
 {
-    s32 max_n = IsNationalPokedexEnabled() ? NATIONAL_DEX_COUNT : KANTO_DEX_COUNT;
+    s32 max_n = NATIONAL_DEX_COUNT;     // T-329: every order lists every daemon seen
     u16 ndex_num;
     u16 ret = NATIONAL_DEX_NONE;
     s32 i;
@@ -1419,6 +1419,16 @@ static u16 DexScreen_CountMonsInOrderedList(u8 orderIdx)
                 sPokedexScreenData->listItems[i].label = gText_5Dashes;
             }
             sPokedexScreenData->listItems[i].index = (caught << 17) + (seen << 16) + NationalPokedexNumToSpecies(ndex_num);
+        }
+        //  T-329: then every daemon seen beyond the first 151, in national order, so a grove's page can be reached.
+        for (ndex_num = KANTO_DEX_COUNT + 1; ndex_num <= NATIONAL_DEX_COUNT; ndex_num++)
+        {
+            if (!DexScreen_GetSetPokedexFlag(ndex_num, FLAG_GET_SEEN, FALSE))
+                continue;
+            caught = DexScreen_GetSetPokedexFlag(ndex_num, FLAG_GET_CAUGHT, FALSE);
+            sPokedexScreenData->listItems[i].label = gSpeciesNames[NationalPokedexNumToSpecies(ndex_num)];
+            sPokedexScreenData->listItems[i].index = (caught << 17) + (1 << 16) + NationalPokedexNumToSpecies(ndex_num);
+            ret = ++i;
         }
         break;
     case DEX_ORDER_ATOZ:
@@ -3771,13 +3781,11 @@ u8 DexScreen_DestroyAreaScreenResources(void)
     return 0;
 }
 
+//  T-329 (the user, 2026-10-01): DAEMONS has no national-INDEX gate. Every daemon's page shows and every evolution
+//  happens from the start; the GLOBAL INDEX still decides trading past the first 151 (trade.c).
 static int DexScreen_CanShowMonInDex(u16 species)
 {
-    if (IsNationalPokedexEnabled() == TRUE)
-        return TRUE;
-    if (SpeciesToNationalPokedexNum(species) <= KANTO_DEX_COUNT)
-        return TRUE;
-    return FALSE;
+    return TRUE;
 }
 
 static u8 DexScreen_IsPageUnlocked(u8 categoryNum, u8 pageNum)
@@ -3918,12 +3926,9 @@ void DexScreen_InputHandler_StartToCry(void)
 
 //  T-179, L = READ. The same page the game shows when a new daemon registers, WITHOUT registering it:
 //  reading a record is not meeting a thing. Everything else is RegisterMonToPokedex unchanged, including
-//  its guard for a beyond-Kanto species before the global Index is handed over.
+//  vanilla's guard for a beyond-Kanto species before the global Index was lifted with it (T-329).
 u8 DexScreen_ShowEntryOnly(u16 species)
 {
-    if (!IsNationalPokedexEnabled() && SpeciesToNationalPokedexNum(species) > KANTO_DEX_COUNT)
-        return CreateTask(Task_DexScreen_RegisterNonKantoMonBeforeNationalDex, 0);
-
     DexScreen_LoadResources();
     sReadingInBattle = TRUE;
     gTasks[sPokedexScreenData->taskId].func = Task_DexScreen_RegisterMonToPokedex;
@@ -3936,9 +3941,7 @@ u8 DexScreen_RegisterMonToPokedex(u16 species)
 {
     DexScreen_GetSetPokedexFlag(species, FLAG_SET_SEEN, TRUE);
     DexScreen_GetSetPokedexFlag(species, FLAG_SET_CAUGHT, TRUE);
-
-    if (!IsNationalPokedexEnabled() && SpeciesToNationalPokedexNum(species) > KANTO_DEX_COUNT)
-        return CreateTask(Task_DexScreen_RegisterNonKantoMonBeforeNationalDex, 0);
+    //  T-329: no beyond-Kanto guard -- the page shows whatever the INDEX holds.
 
     DexScreen_LoadResources();
     gTasks[sPokedexScreenData->taskId].func = Task_DexScreen_RegisterMonToPokedex;

@@ -5236,7 +5236,8 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                     
                     // Prevent cross-generational evolutions like Scizor and Steelix until the National Pokedex is obtained
-                    if (IsNationalPokedexEnabled() || targetSpecies <= KANTO_SPECIES_END)
+                    // -- T-329: not in DAEMONS; every evolution happens from the start.
+                    if (TRUE)
                     {
                         heldItem = ITEM_NONE;
                         SetMonData(mon, MON_DATA_HELD_ITEM, &heldItem);
@@ -5946,8 +5947,7 @@ u16 SpeciesToPokedexNum(u16 species)
 {
     species = SpeciesToNationalPokedexNum(species);
 
-    if (!IsNationalPokedexEnabled() && species > KANTO_SPECIES_END)
-        return 0xFFFF;
+    //  T-329: every daemon has its number from the start (vanilla hid those past 151 until the national INDEX).
     return species;
 }
 
