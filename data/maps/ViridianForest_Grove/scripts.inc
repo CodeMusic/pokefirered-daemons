@@ -1,4 +1,4 @@
-@ T-221: a grove -- PROVISIONAL, one built to prove the mechanism (tools/gbagrove.py writes this).
+@ T-221: a grove (tools/gbagrove.py writes this).
 ViridianForest_Grove_MapScripts::
 	.byte 0
 

@@ -176,7 +176,8 @@
     "SixIsland_PatternBush",
     "SixIsland_AlteringCave",
     "Route21_North_Station",
-    "ViridianForest_Grove"
+    "ViridianForest_Grove",
+    "ThreeIsland_BerryForest_Grove"
   ],
   "gMapGroup_SpecialArea": [
     "NavelRock_Exterior",
@@ -306,7 +307,19 @@
     "SevenIsland_TrainerTower",
     "SevenIsland_SevaultCanyon_Entrance",
     "SevenIsland_SevaultCanyon",
-    "SevenIsland_TanobyRuins"
+    "SevenIsland_TanobyRuins",
+    "Route25_Grove",
+    "Route1_Grove",
+    "Route24_Grove",
+    "Route8_Grove",
+    "Route11_Grove",
+    "Route13_Grove",
+    "FiveIsland_Meadow_Grove",
+    "SixIsland_WaterPath_Grove",
+    "OneIsland_Grove",
+    "TwoIsland_Grove",
+    "FourIsland_Grove",
+    "SevenIsland_Grove"
   ],
   "gMapGroup_IndoorPallet": [
     "PalletTown_PlayersHouse_1F",

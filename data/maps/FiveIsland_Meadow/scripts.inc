@@ -49,3 +49,13 @@ FiveIsland_Meadow_EventScript_Rocket3::
 	trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_51, FiveIsland_Meadow_Text_Rocket3Intro, FiveIsland_Meadow_Text_Rocket3Defeat
 	msgbox FiveIsland_Meadow_Text_Rocket3PostBattle, MSGBOX_AUTOCLOSE
 	end
+
+@ T-221: the tree that stands alone answers A -- the way into a grove. Nothing is said; REVEAL makes it
+@ twinkle (src/reveal.c), and pressing A on the right tree finds it without.
+FiveIsland_Meadow_EventScript_Grove::
+	lockall
+	playse SE_M_CUT
+	warp MAP_FIVE_ISLAND_MEADOW_GROVE, 8, 8
+	waitstate
+	releaseall
+	end

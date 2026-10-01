@@ -196,13 +196,13 @@ static const u8 sText_Loose_Folds[] = _(
 //  It is the key the singing fir on the pier has lost (lineage 3b); nothing says so.
 static const u8 sTitle_Loose_Key[] = _("THE BAND'S SHEET");
 static const u8 sText_Loose_Key[] = _(
-    "A sheet from the S.S. ANNE's\n"
-    "piano bench. DAVID gave it to you.\p"
-    "Staff lines, and at the start of\n"
-    "each one a clef and four flats.\p"
-    "Not one note after them.\p"
-    "Pencilled along the bottom:\n"
-    "THE KEY. THE TUNE KNOWS THE REST.");
+        "A sheet from the S.S. ANNE's piano\n"
+        "bench. DAVID gave it to you.\p"
+        "Staff lines, and at the start of\n"
+        "each one a clef and four flats.\p"
+        "Not one note after them.\p"
+        "Pencilled along the bottom: THE\n"
+        "KEY. THE TUNE KNOWS THE IDLE.");
 
 //  LAB NOTES 2 -- *Quantum Translations*, the first verse: what counts as an observer.
 static const u8 sTitle_Lab_Observer[] = _("THE OBSERVER");

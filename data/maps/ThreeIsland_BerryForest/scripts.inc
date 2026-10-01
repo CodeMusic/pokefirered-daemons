@@ -60,3 +60,13 @@ ThreeIsland_BerryForest_EventScript_WelcomeSign::
 ThreeIsland_BerryForest_EventScript_BewareSign::
 	msgbox ThreeIsland_BerryForest_Text_BewareWildBerryLovingMons, MSGBOX_SIGN
 	end
+
+@ T-221: the tree that stands alone answers A -- the way into a grove. Nothing is said; REVEAL makes it
+@ twinkle (src/reveal.c), and pressing A on the right tree finds it without.
+ThreeIsland_BerryForest_EventScript_Grove::
+	lockall
+	playse SE_M_CUT
+	warp MAP_THREE_ISLAND_BERRY_FOREST_GROVE, 8, 8
+	waitstate
+	releaseall
+	end

@@ -26058,67 +26058,67 @@
           "map": "MAP_VIRIDIAN_FOREST_GROVE",
           "base_label": "sViridianForestGrove_FireRed",
           "land_mons": {
-            "encounter_rate": 14,
+            "encounter_rate": 20,
             "mons": [
               {
-                "min_level": 4,
-                "max_level": 4,
-                "species": "SPECIES_CATERPIE"
+                "min_level": 6,
+                "max_level": 7,
+                "species": "SPECIES_KECLEON"
               },
               {
-                "min_level": 4,
-                "max_level": 4,
-                "species": "SPECIES_WEEDLE"
+                "min_level": 7,
+                "max_level": 8,
+                "species": "SPECIES_KECLEON"
               },
               {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_CATERPIE"
-              },
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_WEEDLE"
-              },
-              {
-                "min_level": 3,
-                "max_level": 3,
-                "species": "SPECIES_CATERPIE"
-              },
-              {
-                "min_level": 3,
-                "max_level": 3,
-                "species": "SPECIES_WEEDLE"
-              },
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_METAPOD"
-              },
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_KAKUNA"
-              },
-              {
-                "min_level": 4,
-                "max_level": 4,
-                "species": "SPECIES_KAKUNA"
-              },
-              {
-                "min_level": 3,
-                "max_level": 3,
-                "species": "SPECIES_PIKACHU"
+                "min_level": 8,
+                "max_level": 9,
+                "species": "SPECIES_KECLEON"
               },
               {
                 "min_level": 6,
-                "max_level": 6,
-                "species": "SPECIES_KAKUNA"
+                "max_level": 7,
+                "species": "SPECIES_KECLEON"
               },
               {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_PIKACHU"
+                "min_level": 7,
+                "max_level": 8,
+                "species": "SPECIES_KECLEON"
+              },
+              {
+                "min_level": 8,
+                "max_level": 9,
+                "species": "SPECIES_KECLEON"
+              },
+              {
+                "min_level": 6,
+                "max_level": 7,
+                "species": "SPECIES_KECLEON"
+              },
+              {
+                "min_level": 7,
+                "max_level": 8,
+                "species": "SPECIES_KECLEON"
+              },
+              {
+                "min_level": 8,
+                "max_level": 9,
+                "species": "SPECIES_KECLEON"
+              },
+              {
+                "min_level": 6,
+                "max_level": 7,
+                "species": "SPECIES_KECLEON"
+              },
+              {
+                "min_level": 7,
+                "max_level": 8,
+                "species": "SPECIES_KECLEON"
+              },
+              {
+                "min_level": 8,
+                "max_level": 9,
+                "species": "SPECIES_KECLEON"
               }
             ]
           }
@@ -26127,69 +26127,1863 @@
           "map": "MAP_VIRIDIAN_FOREST_GROVE",
           "base_label": "sViridianForestGrove_LeafGreen",
           "land_mons": {
+            "encounter_rate": 20,
             "mons": [
               {
-                "min_level": 4,
-                "max_level": 4,
-                "species": "SPECIES_CATERPIE"
+                "min_level": 6,
+                "max_level": 7,
+                "species": "SPECIES_KECLEON"
               },
               {
-                "min_level": 4,
-                "max_level": 4,
-                "species": "SPECIES_WEEDLE"
+                "min_level": 7,
+                "max_level": 8,
+                "species": "SPECIES_KECLEON"
               },
               {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_CATERPIE"
-              },
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_WEEDLE"
-              },
-              {
-                "min_level": 3,
-                "max_level": 3,
-                "species": "SPECIES_CATERPIE"
-              },
-              {
-                "min_level": 3,
-                "max_level": 3,
-                "species": "SPECIES_WEEDLE"
-              },
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_KAKUNA"
-              },
-              {
-                "min_level": 5,
-                "max_level": 5,
-                "species": "SPECIES_METAPOD"
-              },
-              {
-                "min_level": 4,
-                "max_level": 4,
-                "species": "SPECIES_METAPOD"
-              },
-              {
-                "min_level": 3,
-                "max_level": 3,
-                "species": "SPECIES_PIKACHU"
+                "min_level": 8,
+                "max_level": 9,
+                "species": "SPECIES_KECLEON"
               },
               {
                 "min_level": 6,
-                "max_level": 6,
-                "species": "SPECIES_METAPOD"
+                "max_level": 7,
+                "species": "SPECIES_KECLEON"
+              },
+              {
+                "min_level": 7,
+                "max_level": 8,
+                "species": "SPECIES_KECLEON"
+              },
+              {
+                "min_level": 8,
+                "max_level": 9,
+                "species": "SPECIES_KECLEON"
+              },
+              {
+                "min_level": 6,
+                "max_level": 7,
+                "species": "SPECIES_KECLEON"
+              },
+              {
+                "min_level": 7,
+                "max_level": 8,
+                "species": "SPECIES_KECLEON"
+              },
+              {
+                "min_level": 8,
+                "max_level": 9,
+                "species": "SPECIES_KECLEON"
+              },
+              {
+                "min_level": 6,
+                "max_level": 7,
+                "species": "SPECIES_KECLEON"
+              },
+              {
+                "min_level": 7,
+                "max_level": 8,
+                "species": "SPECIES_KECLEON"
+              },
+              {
+                "min_level": 8,
+                "max_level": 9,
+                "species": "SPECIES_KECLEON"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE25_GROVE",
+          "base_label": "sRoute25Grove_FireRed",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 12,
+                "max_level": 13,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 13,
+                "max_level": 14,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 14,
+                "max_level": 15,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 12,
+                "max_level": 13,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 13,
+                "max_level": 14,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 14,
+                "max_level": 15,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 12,
+                "max_level": 13,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 13,
+                "max_level": 14,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 14,
+                "max_level": 15,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 12,
+                "max_level": 13,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 18,
+                "max_level": 19,
+                "species": "SPECIES_KIRLIA"
+              },
+              {
+                "min_level": 19,
+                "max_level": 20,
+                "species": "SPECIES_KIRLIA"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE25_GROVE",
+          "base_label": "sRoute25Grove_LeafGreen",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 12,
+                "max_level": 13,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 13,
+                "max_level": 14,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 14,
+                "max_level": 15,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 12,
+                "max_level": 13,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 13,
+                "max_level": 14,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 14,
+                "max_level": 15,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 12,
+                "max_level": 13,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 13,
+                "max_level": 14,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 14,
+                "max_level": 15,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 12,
+                "max_level": 13,
+                "species": "SPECIES_RALTS"
+              },
+              {
+                "min_level": 18,
+                "max_level": 19,
+                "species": "SPECIES_KIRLIA"
+              },
+              {
+                "min_level": 19,
+                "max_level": 20,
+                "species": "SPECIES_KIRLIA"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE1_GROVE",
+          "base_label": "sRoute1Grove_FireRed",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 4,
+                "max_level": 5,
+                "species": "SPECIES_SPOINK"
               },
               {
                 "min_level": 5,
+                "max_level": 6,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 6,
+                "max_level": 7,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 4,
                 "max_level": 5,
-                "species": "SPECIES_PIKACHU"
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 5,
+                "max_level": 6,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 6,
+                "max_level": 7,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 4,
+                "max_level": 5,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 5,
+                "max_level": 6,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 6,
+                "max_level": 7,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 4,
+                "max_level": 5,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 5,
+                "max_level": 6,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 6,
+                "max_level": 7,
+                "species": "SPECIES_SPOINK"
               }
-            ],
-            "encounter_rate": 14
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE1_GROVE",
+          "base_label": "sRoute1Grove_LeafGreen",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 4,
+                "max_level": 5,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 5,
+                "max_level": 6,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 6,
+                "max_level": 7,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 4,
+                "max_level": 5,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 5,
+                "max_level": 6,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 6,
+                "max_level": 7,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 4,
+                "max_level": 5,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 5,
+                "max_level": 6,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 6,
+                "max_level": 7,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 4,
+                "max_level": 5,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 5,
+                "max_level": 6,
+                "species": "SPECIES_SPOINK"
+              },
+              {
+                "min_level": 6,
+                "max_level": 7,
+                "species": "SPECIES_SPOINK"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE24_GROVE",
+          "base_label": "sRoute24Grove_FireRed",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 12,
+                "max_level": 13,
+                "species": "SPECIES_MEDITITE"
+              },
+              {
+                "min_level": 13,
+                "max_level": 14,
+                "species": "SPECIES_MEDITITE"
+              },
+              {
+                "min_level": 14,
+                "max_level": 15,
+                "species": "SPECIES_MEDITITE"
+              },
+              {
+                "min_level": 12,
+                "max_level": 13,
+                "species": "SPECIES_MEDITITE"
+              },
+              {
+                "min_level": 13,
+                "max_level": 14,
+                "species": "SPECIES_MEDITITE"
+              },
+              {
+                "min_level": 14,
+                "max_level": 15,
+                "species": "SPECIES_MEDITITE"
+              },
+              {
+                "min_level": 12,
+                "max_level": 13,
+                "species": "SPECIES_MEDITITE"
+              },
+              {
+                "min_level": 13,
+                "max_level": 14,
+                "species": "SPECIES_MEDITITE"
+              },
+              {
+                "min_level": 14,
+                "max_level": 15,
+                "species": "SPECIES_MEDITITE"
+              },
+              {
+                "min_level": 12,
+                "max_level": 13,
+                "species": "SPECIES_MEDITITE"
+              },
+              {
+                "min_level": 13,
+                "max_level": 14,
+                "species": "SPECIES_MEDITITE"
+              },
+              {
+                "min_level": 14,
+                "max_level": 15,
+                "species": "SPECIES_MEDITITE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE24_GROVE",
+          "base_label": "sRoute24Grove_LeafGreen",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 12,
+                "max_level": 13,
+                "species": "SPECIES_MEDITITE"
+              },
+              {
+                "min_level": 13,
+                "max_level": 14,
+                "species": "SPECIES_MEDITITE"
+              },
+              {
+                "min_level": 14,
+                "max_level": 15,
+                "species": "SPECIES_MEDITITE"
+              },
+              {
+                "min_level": 12,
+                "max_level": 13,
+                "species": "SPECIES_MEDITITE"
+              },
+              {
+                "min_level": 13,
+                "max_level": 14,
+                "species": "SPECIES_MEDITITE"
+              },
+              {
+                "min_level": 14,
+                "max_level": 15,
+                "species": "SPECIES_MEDITITE"
+              },
+              {
+                "min_level": 12,
+                "max_level": 13,
+                "species": "SPECIES_MEDITITE"
+              },
+              {
+                "min_level": 13,
+                "max_level": 14,
+                "species": "SPECIES_MEDITITE"
+              },
+              {
+                "min_level": 14,
+                "max_level": 15,
+                "species": "SPECIES_MEDITITE"
+              },
+              {
+                "min_level": 12,
+                "max_level": 13,
+                "species": "SPECIES_MEDITITE"
+              },
+              {
+                "min_level": 13,
+                "max_level": 14,
+                "species": "SPECIES_MEDITITE"
+              },
+              {
+                "min_level": 14,
+                "max_level": 15,
+                "species": "SPECIES_MEDITITE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE8_GROVE",
+          "base_label": "sRoute8Grove_FireRed",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 20,
+                "max_level": 21,
+                "species": "SPECIES_DUSKULL"
+              },
+              {
+                "min_level": 21,
+                "max_level": 22,
+                "species": "SPECIES_DUSKULL"
+              },
+              {
+                "min_level": 22,
+                "max_level": 23,
+                "species": "SPECIES_DUSKULL"
+              },
+              {
+                "min_level": 20,
+                "max_level": 21,
+                "species": "SPECIES_DUSKULL"
+              },
+              {
+                "min_level": 21,
+                "max_level": 22,
+                "species": "SPECIES_DUSKULL"
+              },
+              {
+                "min_level": 22,
+                "max_level": 23,
+                "species": "SPECIES_DUSKULL"
+              },
+              {
+                "min_level": 20,
+                "max_level": 21,
+                "species": "SPECIES_DUSKULL"
+              },
+              {
+                "min_level": 21,
+                "max_level": 22,
+                "species": "SPECIES_DUSKULL"
+              },
+              {
+                "min_level": 22,
+                "max_level": 23,
+                "species": "SPECIES_DUSKULL"
+              },
+              {
+                "min_level": 20,
+                "max_level": 21,
+                "species": "SPECIES_DUSKULL"
+              },
+              {
+                "min_level": 21,
+                "max_level": 22,
+                "species": "SPECIES_DUSKULL"
+              },
+              {
+                "min_level": 22,
+                "max_level": 23,
+                "species": "SPECIES_DUSKULL"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE8_GROVE",
+          "base_label": "sRoute8Grove_LeafGreen",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 20,
+                "max_level": 21,
+                "species": "SPECIES_DUSKULL"
+              },
+              {
+                "min_level": 21,
+                "max_level": 22,
+                "species": "SPECIES_DUSKULL"
+              },
+              {
+                "min_level": 22,
+                "max_level": 23,
+                "species": "SPECIES_DUSKULL"
+              },
+              {
+                "min_level": 20,
+                "max_level": 21,
+                "species": "SPECIES_DUSKULL"
+              },
+              {
+                "min_level": 21,
+                "max_level": 22,
+                "species": "SPECIES_DUSKULL"
+              },
+              {
+                "min_level": 22,
+                "max_level": 23,
+                "species": "SPECIES_DUSKULL"
+              },
+              {
+                "min_level": 20,
+                "max_level": 21,
+                "species": "SPECIES_DUSKULL"
+              },
+              {
+                "min_level": 21,
+                "max_level": 22,
+                "species": "SPECIES_DUSKULL"
+              },
+              {
+                "min_level": 22,
+                "max_level": 23,
+                "species": "SPECIES_DUSKULL"
+              },
+              {
+                "min_level": 20,
+                "max_level": 21,
+                "species": "SPECIES_DUSKULL"
+              },
+              {
+                "min_level": 21,
+                "max_level": 22,
+                "species": "SPECIES_DUSKULL"
+              },
+              {
+                "min_level": 22,
+                "max_level": 23,
+                "species": "SPECIES_DUSKULL"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE11_GROVE",
+          "base_label": "sRoute11Grove_FireRed",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 14,
+                "max_level": 15,
+                "species": "SPECIES_SLAKOTH"
+              },
+              {
+                "min_level": 15,
+                "max_level": 16,
+                "species": "SPECIES_SLAKOTH"
+              },
+              {
+                "min_level": 16,
+                "max_level": 17,
+                "species": "SPECIES_SLAKOTH"
+              },
+              {
+                "min_level": 14,
+                "max_level": 15,
+                "species": "SPECIES_SLAKOTH"
+              },
+              {
+                "min_level": 15,
+                "max_level": 16,
+                "species": "SPECIES_SLAKOTH"
+              },
+              {
+                "min_level": 16,
+                "max_level": 17,
+                "species": "SPECIES_SLAKOTH"
+              },
+              {
+                "min_level": 14,
+                "max_level": 15,
+                "species": "SPECIES_SLAKOTH"
+              },
+              {
+                "min_level": 15,
+                "max_level": 16,
+                "species": "SPECIES_SLAKOTH"
+              },
+              {
+                "min_level": 16,
+                "max_level": 17,
+                "species": "SPECIES_SLAKOTH"
+              },
+              {
+                "min_level": 18,
+                "max_level": 19,
+                "species": "SPECIES_VIGOROTH"
+              },
+              {
+                "min_level": 19,
+                "max_level": 20,
+                "species": "SPECIES_VIGOROTH"
+              },
+              {
+                "min_level": 20,
+                "max_level": 21,
+                "species": "SPECIES_VIGOROTH"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE11_GROVE",
+          "base_label": "sRoute11Grove_LeafGreen",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 14,
+                "max_level": 15,
+                "species": "SPECIES_SLAKOTH"
+              },
+              {
+                "min_level": 15,
+                "max_level": 16,
+                "species": "SPECIES_SLAKOTH"
+              },
+              {
+                "min_level": 16,
+                "max_level": 17,
+                "species": "SPECIES_SLAKOTH"
+              },
+              {
+                "min_level": 14,
+                "max_level": 15,
+                "species": "SPECIES_SLAKOTH"
+              },
+              {
+                "min_level": 15,
+                "max_level": 16,
+                "species": "SPECIES_SLAKOTH"
+              },
+              {
+                "min_level": 16,
+                "max_level": 17,
+                "species": "SPECIES_SLAKOTH"
+              },
+              {
+                "min_level": 14,
+                "max_level": 15,
+                "species": "SPECIES_SLAKOTH"
+              },
+              {
+                "min_level": 15,
+                "max_level": 16,
+                "species": "SPECIES_SLAKOTH"
+              },
+              {
+                "min_level": 16,
+                "max_level": 17,
+                "species": "SPECIES_SLAKOTH"
+              },
+              {
+                "min_level": 18,
+                "max_level": 19,
+                "species": "SPECIES_VIGOROTH"
+              },
+              {
+                "min_level": 19,
+                "max_level": 20,
+                "species": "SPECIES_VIGOROTH"
+              },
+              {
+                "min_level": 20,
+                "max_level": 21,
+                "species": "SPECIES_VIGOROTH"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE13_GROVE",
+          "base_label": "sRoute13Grove_FireRed",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 24,
+                "max_level": 25,
+                "species": "SPECIES_SHUPPET"
+              },
+              {
+                "min_level": 25,
+                "max_level": 26,
+                "species": "SPECIES_SHUPPET"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_SHUPPET"
+              },
+              {
+                "min_level": 24,
+                "max_level": 25,
+                "species": "SPECIES_SHUPPET"
+              },
+              {
+                "min_level": 25,
+                "max_level": 26,
+                "species": "SPECIES_SHUPPET"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_SHUPPET"
+              },
+              {
+                "min_level": 24,
+                "max_level": 25,
+                "species": "SPECIES_SHUPPET"
+              },
+              {
+                "min_level": 25,
+                "max_level": 26,
+                "species": "SPECIES_SHUPPET"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_SHUPPET"
+              },
+              {
+                "min_level": 24,
+                "max_level": 25,
+                "species": "SPECIES_SHUPPET"
+              },
+              {
+                "min_level": 25,
+                "max_level": 26,
+                "species": "SPECIES_SHUPPET"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_SHUPPET"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ROUTE13_GROVE",
+          "base_label": "sRoute13Grove_LeafGreen",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 24,
+                "max_level": 25,
+                "species": "SPECIES_SHUPPET"
+              },
+              {
+                "min_level": 25,
+                "max_level": 26,
+                "species": "SPECIES_SHUPPET"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_SHUPPET"
+              },
+              {
+                "min_level": 24,
+                "max_level": 25,
+                "species": "SPECIES_SHUPPET"
+              },
+              {
+                "min_level": 25,
+                "max_level": 26,
+                "species": "SPECIES_SHUPPET"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_SHUPPET"
+              },
+              {
+                "min_level": 24,
+                "max_level": 25,
+                "species": "SPECIES_SHUPPET"
+              },
+              {
+                "min_level": 25,
+                "max_level": 26,
+                "species": "SPECIES_SHUPPET"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_SHUPPET"
+              },
+              {
+                "min_level": 24,
+                "max_level": 25,
+                "species": "SPECIES_SHUPPET"
+              },
+              {
+                "min_level": 25,
+                "max_level": 26,
+                "species": "SPECIES_SHUPPET"
+              },
+              {
+                "min_level": 26,
+                "max_level": 27,
+                "species": "SPECIES_SHUPPET"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_FIVE_ISLAND_MEADOW_GROVE",
+          "base_label": "sFiveIslandMeadowGrove_FireRed",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 40,
+                "max_level": 41,
+                "species": "SPECIES_BELDUM"
+              },
+              {
+                "min_level": 41,
+                "max_level": 42,
+                "species": "SPECIES_BELDUM"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_BELDUM"
+              },
+              {
+                "min_level": 40,
+                "max_level": 41,
+                "species": "SPECIES_BELDUM"
+              },
+              {
+                "min_level": 41,
+                "max_level": 42,
+                "species": "SPECIES_BELDUM"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_BELDUM"
+              },
+              {
+                "min_level": 40,
+                "max_level": 41,
+                "species": "SPECIES_BELDUM"
+              },
+              {
+                "min_level": 40,
+                "max_level": 41,
+                "species": "SPECIES_METANG"
+              },
+              {
+                "min_level": 41,
+                "max_level": 42,
+                "species": "SPECIES_METANG"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_METANG"
+              },
+              {
+                "min_level": 40,
+                "max_level": 41,
+                "species": "SPECIES_METANG"
+              },
+              {
+                "min_level": 41,
+                "max_level": 42,
+                "species": "SPECIES_METANG"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_FIVE_ISLAND_MEADOW_GROVE",
+          "base_label": "sFiveIslandMeadowGrove_LeafGreen",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 40,
+                "max_level": 41,
+                "species": "SPECIES_BELDUM"
+              },
+              {
+                "min_level": 41,
+                "max_level": 42,
+                "species": "SPECIES_BELDUM"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_BELDUM"
+              },
+              {
+                "min_level": 40,
+                "max_level": 41,
+                "species": "SPECIES_BELDUM"
+              },
+              {
+                "min_level": 41,
+                "max_level": 42,
+                "species": "SPECIES_BELDUM"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_BELDUM"
+              },
+              {
+                "min_level": 40,
+                "max_level": 41,
+                "species": "SPECIES_BELDUM"
+              },
+              {
+                "min_level": 40,
+                "max_level": 41,
+                "species": "SPECIES_METANG"
+              },
+              {
+                "min_level": 41,
+                "max_level": 42,
+                "species": "SPECIES_METANG"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_METANG"
+              },
+              {
+                "min_level": 40,
+                "max_level": 41,
+                "species": "SPECIES_METANG"
+              },
+              {
+                "min_level": 41,
+                "max_level": 42,
+                "species": "SPECIES_METANG"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_SIX_ISLAND_WATER_PATH_GROVE",
+          "base_label": "sSixIslandWaterPathGrove_FireRed",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_NOSEPASS"
+              },
+              {
+                "min_level": 43,
+                "max_level": 44,
+                "species": "SPECIES_NOSEPASS"
+              },
+              {
+                "min_level": 44,
+                "max_level": 45,
+                "species": "SPECIES_NOSEPASS"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_NOSEPASS"
+              },
+              {
+                "min_level": 43,
+                "max_level": 44,
+                "species": "SPECIES_NOSEPASS"
+              },
+              {
+                "min_level": 44,
+                "max_level": 45,
+                "species": "SPECIES_NOSEPASS"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_NOSEPASS"
+              },
+              {
+                "min_level": 43,
+                "max_level": 44,
+                "species": "SPECIES_NOSEPASS"
+              },
+              {
+                "min_level": 44,
+                "max_level": 45,
+                "species": "SPECIES_NOSEPASS"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_NOSEPASS"
+              },
+              {
+                "min_level": 43,
+                "max_level": 44,
+                "species": "SPECIES_NOSEPASS"
+              },
+              {
+                "min_level": 44,
+                "max_level": 45,
+                "species": "SPECIES_NOSEPASS"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_SIX_ISLAND_WATER_PATH_GROVE",
+          "base_label": "sSixIslandWaterPathGrove_LeafGreen",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_NOSEPASS"
+              },
+              {
+                "min_level": 43,
+                "max_level": 44,
+                "species": "SPECIES_NOSEPASS"
+              },
+              {
+                "min_level": 44,
+                "max_level": 45,
+                "species": "SPECIES_NOSEPASS"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_NOSEPASS"
+              },
+              {
+                "min_level": 43,
+                "max_level": 44,
+                "species": "SPECIES_NOSEPASS"
+              },
+              {
+                "min_level": 44,
+                "max_level": 45,
+                "species": "SPECIES_NOSEPASS"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_NOSEPASS"
+              },
+              {
+                "min_level": 43,
+                "max_level": 44,
+                "species": "SPECIES_NOSEPASS"
+              },
+              {
+                "min_level": 44,
+                "max_level": 45,
+                "species": "SPECIES_NOSEPASS"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_NOSEPASS"
+              },
+              {
+                "min_level": 43,
+                "max_level": 44,
+                "species": "SPECIES_NOSEPASS"
+              },
+              {
+                "min_level": 44,
+                "max_level": 45,
+                "species": "SPECIES_NOSEPASS"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_THREE_ISLAND_BERRY_FOREST_GROVE",
+          "base_label": "sThreeIslandBerryForestGrove_FireRed",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 38,
+                "max_level": 39,
+                "species": "SPECIES_GULPIN"
+              },
+              {
+                "min_level": 39,
+                "max_level": 40,
+                "species": "SPECIES_GULPIN"
+              },
+              {
+                "min_level": 40,
+                "max_level": 41,
+                "species": "SPECIES_GULPIN"
+              },
+              {
+                "min_level": 38,
+                "max_level": 39,
+                "species": "SPECIES_GULPIN"
+              },
+              {
+                "min_level": 39,
+                "max_level": 40,
+                "species": "SPECIES_GULPIN"
+              },
+              {
+                "min_level": 40,
+                "max_level": 41,
+                "species": "SPECIES_GULPIN"
+              },
+              {
+                "min_level": 38,
+                "max_level": 39,
+                "species": "SPECIES_GULPIN"
+              },
+              {
+                "min_level": 38,
+                "max_level": 39,
+                "species": "SPECIES_SWALOT"
+              },
+              {
+                "min_level": 39,
+                "max_level": 40,
+                "species": "SPECIES_SWALOT"
+              },
+              {
+                "min_level": 40,
+                "max_level": 41,
+                "species": "SPECIES_SWALOT"
+              },
+              {
+                "min_level": 38,
+                "max_level": 39,
+                "species": "SPECIES_SWALOT"
+              },
+              {
+                "min_level": 39,
+                "max_level": 40,
+                "species": "SPECIES_SWALOT"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_THREE_ISLAND_BERRY_FOREST_GROVE",
+          "base_label": "sThreeIslandBerryForestGrove_LeafGreen",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 38,
+                "max_level": 39,
+                "species": "SPECIES_GULPIN"
+              },
+              {
+                "min_level": 39,
+                "max_level": 40,
+                "species": "SPECIES_GULPIN"
+              },
+              {
+                "min_level": 40,
+                "max_level": 41,
+                "species": "SPECIES_GULPIN"
+              },
+              {
+                "min_level": 38,
+                "max_level": 39,
+                "species": "SPECIES_GULPIN"
+              },
+              {
+                "min_level": 39,
+                "max_level": 40,
+                "species": "SPECIES_GULPIN"
+              },
+              {
+                "min_level": 40,
+                "max_level": 41,
+                "species": "SPECIES_GULPIN"
+              },
+              {
+                "min_level": 38,
+                "max_level": 39,
+                "species": "SPECIES_GULPIN"
+              },
+              {
+                "min_level": 38,
+                "max_level": 39,
+                "species": "SPECIES_SWALOT"
+              },
+              {
+                "min_level": 39,
+                "max_level": 40,
+                "species": "SPECIES_SWALOT"
+              },
+              {
+                "min_level": 40,
+                "max_level": 41,
+                "species": "SPECIES_SWALOT"
+              },
+              {
+                "min_level": 38,
+                "max_level": 39,
+                "species": "SPECIES_SWALOT"
+              },
+              {
+                "min_level": 39,
+                "max_level": 40,
+                "species": "SPECIES_SWALOT"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ONE_ISLAND_GROVE",
+          "base_label": "sOneIslandGrove_FireRed",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 35,
+                "max_level": 36,
+                "species": "SPECIES_WURMPLE"
+              },
+              {
+                "min_level": 36,
+                "max_level": 37,
+                "species": "SPECIES_WURMPLE"
+              },
+              {
+                "min_level": 37,
+                "max_level": 38,
+                "species": "SPECIES_WURMPLE"
+              },
+              {
+                "min_level": 35,
+                "max_level": 36,
+                "species": "SPECIES_WURMPLE"
+              },
+              {
+                "min_level": 35,
+                "max_level": 36,
+                "species": "SPECIES_SILCOON"
+              },
+              {
+                "min_level": 36,
+                "max_level": 37,
+                "species": "SPECIES_SILCOON"
+              },
+              {
+                "min_level": 35,
+                "max_level": 36,
+                "species": "SPECIES_CASCOON"
+              },
+              {
+                "min_level": 36,
+                "max_level": 37,
+                "species": "SPECIES_CASCOON"
+              },
+              {
+                "min_level": 35,
+                "max_level": 36,
+                "species": "SPECIES_BEAUTIFLY"
+              },
+              {
+                "min_level": 36,
+                "max_level": 37,
+                "species": "SPECIES_BEAUTIFLY"
+              },
+              {
+                "min_level": 35,
+                "max_level": 36,
+                "species": "SPECIES_DUSTOX"
+              },
+              {
+                "min_level": 36,
+                "max_level": 37,
+                "species": "SPECIES_DUSTOX"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ONE_ISLAND_GROVE",
+          "base_label": "sOneIslandGrove_LeafGreen",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 35,
+                "max_level": 36,
+                "species": "SPECIES_WURMPLE"
+              },
+              {
+                "min_level": 36,
+                "max_level": 37,
+                "species": "SPECIES_WURMPLE"
+              },
+              {
+                "min_level": 37,
+                "max_level": 38,
+                "species": "SPECIES_WURMPLE"
+              },
+              {
+                "min_level": 35,
+                "max_level": 36,
+                "species": "SPECIES_WURMPLE"
+              },
+              {
+                "min_level": 35,
+                "max_level": 36,
+                "species": "SPECIES_SILCOON"
+              },
+              {
+                "min_level": 36,
+                "max_level": 37,
+                "species": "SPECIES_SILCOON"
+              },
+              {
+                "min_level": 35,
+                "max_level": 36,
+                "species": "SPECIES_CASCOON"
+              },
+              {
+                "min_level": 36,
+                "max_level": 37,
+                "species": "SPECIES_CASCOON"
+              },
+              {
+                "min_level": 35,
+                "max_level": 36,
+                "species": "SPECIES_BEAUTIFLY"
+              },
+              {
+                "min_level": 36,
+                "max_level": 37,
+                "species": "SPECIES_BEAUTIFLY"
+              },
+              {
+                "min_level": 35,
+                "max_level": 36,
+                "species": "SPECIES_DUSTOX"
+              },
+              {
+                "min_level": 36,
+                "max_level": 37,
+                "species": "SPECIES_DUSTOX"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_TWO_ISLAND_GROVE",
+          "base_label": "sTwoIslandGrove_FireRed",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 36,
+                "max_level": 37,
+                "species": "SPECIES_CASTFORM"
+              },
+              {
+                "min_level": 37,
+                "max_level": 38,
+                "species": "SPECIES_CASTFORM"
+              },
+              {
+                "min_level": 38,
+                "max_level": 39,
+                "species": "SPECIES_CASTFORM"
+              },
+              {
+                "min_level": 36,
+                "max_level": 37,
+                "species": "SPECIES_CASTFORM"
+              },
+              {
+                "min_level": 37,
+                "max_level": 38,
+                "species": "SPECIES_CASTFORM"
+              },
+              {
+                "min_level": 38,
+                "max_level": 39,
+                "species": "SPECIES_CASTFORM"
+              },
+              {
+                "min_level": 36,
+                "max_level": 37,
+                "species": "SPECIES_CASTFORM"
+              },
+              {
+                "min_level": 37,
+                "max_level": 38,
+                "species": "SPECIES_CASTFORM"
+              },
+              {
+                "min_level": 38,
+                "max_level": 39,
+                "species": "SPECIES_CASTFORM"
+              },
+              {
+                "min_level": 36,
+                "max_level": 37,
+                "species": "SPECIES_CASTFORM"
+              },
+              {
+                "min_level": 37,
+                "max_level": 38,
+                "species": "SPECIES_CASTFORM"
+              },
+              {
+                "min_level": 38,
+                "max_level": 39,
+                "species": "SPECIES_CASTFORM"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_TWO_ISLAND_GROVE",
+          "base_label": "sTwoIslandGrove_LeafGreen",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 36,
+                "max_level": 37,
+                "species": "SPECIES_CASTFORM"
+              },
+              {
+                "min_level": 37,
+                "max_level": 38,
+                "species": "SPECIES_CASTFORM"
+              },
+              {
+                "min_level": 38,
+                "max_level": 39,
+                "species": "SPECIES_CASTFORM"
+              },
+              {
+                "min_level": 36,
+                "max_level": 37,
+                "species": "SPECIES_CASTFORM"
+              },
+              {
+                "min_level": 37,
+                "max_level": 38,
+                "species": "SPECIES_CASTFORM"
+              },
+              {
+                "min_level": 38,
+                "max_level": 39,
+                "species": "SPECIES_CASTFORM"
+              },
+              {
+                "min_level": 36,
+                "max_level": 37,
+                "species": "SPECIES_CASTFORM"
+              },
+              {
+                "min_level": 37,
+                "max_level": 38,
+                "species": "SPECIES_CASTFORM"
+              },
+              {
+                "min_level": 38,
+                "max_level": 39,
+                "species": "SPECIES_CASTFORM"
+              },
+              {
+                "min_level": 36,
+                "max_level": 37,
+                "species": "SPECIES_CASTFORM"
+              },
+              {
+                "min_level": 37,
+                "max_level": 38,
+                "species": "SPECIES_CASTFORM"
+              },
+              {
+                "min_level": 38,
+                "max_level": 39,
+                "species": "SPECIES_CASTFORM"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_FOUR_ISLAND_GROVE",
+          "base_label": "sFourIslandGrove_FireRed",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 40,
+                "max_level": 41,
+                "species": "SPECIES_NINCADA"
+              },
+              {
+                "min_level": 41,
+                "max_level": 42,
+                "species": "SPECIES_NINCADA"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_NINCADA"
+              },
+              {
+                "min_level": 40,
+                "max_level": 41,
+                "species": "SPECIES_NINCADA"
+              },
+              {
+                "min_level": 41,
+                "max_level": 42,
+                "species": "SPECIES_NINCADA"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_NINCADA"
+              },
+              {
+                "min_level": 40,
+                "max_level": 41,
+                "species": "SPECIES_NINCADA"
+              },
+              {
+                "min_level": 40,
+                "max_level": 41,
+                "species": "SPECIES_NINJASK"
+              },
+              {
+                "min_level": 41,
+                "max_level": 42,
+                "species": "SPECIES_NINJASK"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_NINJASK"
+              },
+              {
+                "min_level": 40,
+                "max_level": 41,
+                "species": "SPECIES_NINJASK"
+              },
+              {
+                "min_level": 41,
+                "max_level": 42,
+                "species": "SPECIES_NINJASK"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_FOUR_ISLAND_GROVE",
+          "base_label": "sFourIslandGrove_LeafGreen",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 40,
+                "max_level": 41,
+                "species": "SPECIES_NINCADA"
+              },
+              {
+                "min_level": 41,
+                "max_level": 42,
+                "species": "SPECIES_NINCADA"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_NINCADA"
+              },
+              {
+                "min_level": 40,
+                "max_level": 41,
+                "species": "SPECIES_NINCADA"
+              },
+              {
+                "min_level": 41,
+                "max_level": 42,
+                "species": "SPECIES_NINCADA"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_NINCADA"
+              },
+              {
+                "min_level": 40,
+                "max_level": 41,
+                "species": "SPECIES_NINCADA"
+              },
+              {
+                "min_level": 40,
+                "max_level": 41,
+                "species": "SPECIES_NINJASK"
+              },
+              {
+                "min_level": 41,
+                "max_level": 42,
+                "species": "SPECIES_NINJASK"
+              },
+              {
+                "min_level": 42,
+                "max_level": 43,
+                "species": "SPECIES_NINJASK"
+              },
+              {
+                "min_level": 40,
+                "max_level": 41,
+                "species": "SPECIES_NINJASK"
+              },
+              {
+                "min_level": 41,
+                "max_level": 42,
+                "species": "SPECIES_NINJASK"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_SEVEN_ISLAND_GROVE",
+          "base_label": "sSevenIslandGrove_FireRed",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 44,
+                "max_level": 45,
+                "species": "SPECIES_BALTOY"
+              },
+              {
+                "min_level": 45,
+                "max_level": 46,
+                "species": "SPECIES_BALTOY"
+              },
+              {
+                "min_level": 46,
+                "max_level": 47,
+                "species": "SPECIES_BALTOY"
+              },
+              {
+                "min_level": 44,
+                "max_level": 45,
+                "species": "SPECIES_BALTOY"
+              },
+              {
+                "min_level": 45,
+                "max_level": 46,
+                "species": "SPECIES_BALTOY"
+              },
+              {
+                "min_level": 46,
+                "max_level": 47,
+                "species": "SPECIES_BALTOY"
+              },
+              {
+                "min_level": 44,
+                "max_level": 45,
+                "species": "SPECIES_BALTOY"
+              },
+              {
+                "min_level": 44,
+                "max_level": 45,
+                "species": "SPECIES_CLAYDOL"
+              },
+              {
+                "min_level": 45,
+                "max_level": 46,
+                "species": "SPECIES_CLAYDOL"
+              },
+              {
+                "min_level": 46,
+                "max_level": 47,
+                "species": "SPECIES_CLAYDOL"
+              },
+              {
+                "min_level": 44,
+                "max_level": 45,
+                "species": "SPECIES_CLAYDOL"
+              },
+              {
+                "min_level": 45,
+                "max_level": 46,
+                "species": "SPECIES_CLAYDOL"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_SEVEN_ISLAND_GROVE",
+          "base_label": "sSevenIslandGrove_LeafGreen",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 44,
+                "max_level": 45,
+                "species": "SPECIES_BALTOY"
+              },
+              {
+                "min_level": 45,
+                "max_level": 46,
+                "species": "SPECIES_BALTOY"
+              },
+              {
+                "min_level": 46,
+                "max_level": 47,
+                "species": "SPECIES_BALTOY"
+              },
+              {
+                "min_level": 44,
+                "max_level": 45,
+                "species": "SPECIES_BALTOY"
+              },
+              {
+                "min_level": 45,
+                "max_level": 46,
+                "species": "SPECIES_BALTOY"
+              },
+              {
+                "min_level": 46,
+                "max_level": 47,
+                "species": "SPECIES_BALTOY"
+              },
+              {
+                "min_level": 44,
+                "max_level": 45,
+                "species": "SPECIES_BALTOY"
+              },
+              {
+                "min_level": 44,
+                "max_level": 45,
+                "species": "SPECIES_CLAYDOL"
+              },
+              {
+                "min_level": 45,
+                "max_level": 46,
+                "species": "SPECIES_CLAYDOL"
+              },
+              {
+                "min_level": 46,
+                "max_level": 47,
+                "species": "SPECIES_CLAYDOL"
+              },
+              {
+                "min_level": 44,
+                "max_level": 45,
+                "species": "SPECIES_CLAYDOL"
+              },
+              {
+                "min_level": 45,
+                "max_level": 46,
+                "species": "SPECIES_CLAYDOL"
+              }
+            ]
           }
         }
       ]

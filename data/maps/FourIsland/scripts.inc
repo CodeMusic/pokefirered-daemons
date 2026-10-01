@@ -161,3 +161,13 @@ FourIsland_EventScript_IslandSign::
 FourIsland_EventScript_LoreleisHouseSign::
 	msgbox FourIsland_Text_LoreleisHouse, MSGBOX_SIGN
 	end
+
+@ T-221: the tree that stands alone answers A -- the way into a grove. Nothing is said; REVEAL makes it
+@ twinkle (src/reveal.c), and pressing A on the right tree finds it without.
+FourIsland_EventScript_Grove::
+	lockall
+	playse SE_M_CUT
+	warp MAP_FOUR_ISLAND_GROVE, 8, 8
+	waitstate
+	releaseall
+	end

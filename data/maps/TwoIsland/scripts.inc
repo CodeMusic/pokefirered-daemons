@@ -215,3 +215,13 @@ TwoIsland_EventScript_JoyfulGameCornerSign::
 TwoIsland_EventScript_FastCurrentSign::
 	msgbox TwoIsland_Text_DangerFastCurrent, MSGBOX_SIGN
 	end
+
+@ T-221: the tree that stands alone answers A -- the way into a grove. Nothing is said; REVEAL makes it
+@ twinkle (src/reveal.c), and pressing A on the right tree finds it without.
+TwoIsland_EventScript_Grove::
+	lockall
+	playse SE_M_CUT
+	warp MAP_TWO_ISLAND_GROVE, 8, 8
+	waitstate
+	releaseall
+	end

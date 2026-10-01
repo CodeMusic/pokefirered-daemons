@@ -33,3 +33,13 @@ Route1_EventScript_Boy::
 Route1_EventScript_RouteSign::
 	msgbox Route1_Text_RouteSign, MSGBOX_SIGN
 	end
+
+@ T-221: the tree that stands alone answers A -- the way into a grove. Nothing is said; REVEAL makes it
+@ twinkle (src/reveal.c), and pressing A on the right tree finds it without.
+Route1_EventScript_Grove::
+	lockall
+	playse SE_M_CUT
+	warp MAP_ROUTE1_GROVE, 8, 8
+	waitstate
+	releaseall
+	end

@@ -1762,37 +1762,32 @@ const u8 gLinoonePokedexText[] = _(
 const u8 gLinoonePokedexTextUnused[] = _("");
 
 const u8 gWurmplePokedexText[] = _(
-        "It lives amidst tall grass and in forests.\n"
-        "When attacked, it resists by pointing its\n"
-        "venomous spikes at them.");
+    "Two that look the same will not end the\n"
+    "same. Nobody can tell which from outside.");
 
 const u8 gWurmplePokedexTextUnused[] = _("");
 
 const u8 gSilcoonPokedexText[] = _(
-    "It conserves its energy by moving as\n"
-    "little as possible. It awaits evolution\n"
-    "while drinking only a little rainwater.");
+    "It is sure it is on the right path. It has\n"
+    "only seen the one.");
 
 const u8 gSilcoonPokedexTextUnused[] = _("");
 
 const u8 gBeautiflyPokedexText[] = _(
-    "Despite its appearance, it has an\n"
-    "aggressive nature. It attacks by jabbing\n"
-    "with its long, thin mouth.");
+    "Everyone was hoping for this one. It\n"
+    "never learned why.");
 
 const u8 gBeautiflyPokedexTextUnused[] = _("");
 
 const u8 gCascoonPokedexText[] = _(
-    "Its body, which is made of soft silk,\n"
-    "hardens over time. When cracks appear,\n"
-    "evolution is near.");
+    "It does not know it is the other case. To\n"
+    "it, this is the case.");
 
 const u8 gCascoonPokedexTextUnused[] = _("");
 
 const u8 gDustoxPokedexText[] = _(
-    "It scatters horribly toxic dust when it\n"
-    "senses danger. They tend to gather in the\n"
-    "glow of streetlamps at night.");
+    "Nobody planned for it. It got there\n"
+    "anyway, and lights its own way.");
 
 const u8 gDustoxPokedexTextUnused[] = _("");
 
@@ -1867,23 +1862,20 @@ const u8 gPelipperPokedexText[] = _(
 const u8 gPelipperPokedexTextUnused[] = _("");
 
 const u8 gRaltsPokedexText[] = _(
-        "It is highly attuned to the emotions of\n"
-        "people and DAEMON. It hides if it senses\n"
-        "hostility.");
+    "Whoever it is near feels understood. It is\n"
+    "only guessing. It guesses well.");
 
 const u8 gRaltsPokedexTextUnused[] = _("");
 
 const u8 gKirliaPokedexText[] = _(
-        "The cheerful spirit of its USER gives it\n"
-        "energy for its psychokinetic power. It\n"
-        "spins and dances when happy.");
+    "Near it, a crowd starts to move as one.\n"
+    "Nobody can say who started.");
 
 const u8 gKirliaPokedexTextUnused[] = _("");
 
 const u8 gGardevoirPokedexText[] = _(
-        "It has the power to predict the future.\n"
-        "Its power peaks when it is protecting its\n"
-        "USER.");
+    "It knows what you will do before you do.\n"
+    "It waits for you to do it anyway.");
 
 const u8 gGardevoirPokedexTextUnused[] = _("");
 
@@ -1916,44 +1908,39 @@ const u8 gBreloomPokedexText[] = _(
 const u8 gBreloomPokedexTextUnused[] = _("");
 
 const u8 gSlakothPokedexText[] = _(
-    "It sleeps for 20 hours every day. Making\n"
-    "drowsy those that see it is one of\n"
-    "its abilities.");
+    "Ask it what it was thinking. It will not\n"
+    "know. It was thinking all of it.");
 
 const u8 gSlakothPokedexTextUnused[] = _("");
 
 const u8 gVigorothPokedexText[] = _(
-    "It is always hungry because it won't stop\n"
-    "rampaging. Even while it is eating, it\n"
-    "can't keep still.");
+    "Everything near it is started. Little near\n"
+    "it is finished. It is not unhappy.");
 
 const u8 gVigorothPokedexTextUnused[] = _("");
 
 const u8 gSlakingPokedexText[] = _(
-        "It is the world's most slothful DAEMON.\n"
-        "However, it can exert horrifying power by\n"
-        "releasing pent-up energy all at once.");
+    "It looks idle. It is the one in the grove\n"
+    "that has the new thoughts.");
 
 const u8 gSlakingPokedexTextUnused[] = _("");
 
 const u8 gNincadaPokedexText[] = _(
-    "Because it lived almost entirely\n"
-    "underground, it is nearly blind.\n"
-    "It uses its antennae instead.");
+    "It is ready for a crowd that has not\n"
+    "come. It does not mind waiting.");
 
 const u8 gNincadaPokedexTextUnused[] = _("");
 
 const u8 gNinjaskPokedexText[] = _(
-        "This DAEMON is so quick, it is said to be\n"
-        "able to avoid any attack. It loves to\n"
-        "feed on tree sap.");
+    "Everything near it happens too fast to\n"
+    "watch. Then nothing happens.");
 
 const u8 gNinjaskPokedexTextUnused[] = _("");
 
 const u8 gShedinjaPokedexText[] = _(
-        "A most peculiar DAEMON that somehow\n"
-        "appears in a POKé BOX when a NINCADA\n"
-        "evolves.");
+    "It keeps its place in the list. Nobody has\n"
+    "cleared it. Most things pass right through\n"
+    "it.");
 
 const u8 gShedinjaPokedexTextUnused[] = _("");
 
@@ -2000,9 +1987,8 @@ const u8 gAzurillPokedexText[] = _(
 const u8 gAzurillPokedexTextUnused[] = _("");
 
 const u8 gNosepassPokedexText[] = _(
-    "Its magnetic nose consistently faces\n"
-    "north. Travelers check NOSEPASS to get\n"
-    "their bearings.");
+    "It is certain which way is better. It has\n"
+    "never seen the bottom.");
 
 const u8 gNosepassPokedexTextUnused[] = _("");
 
@@ -2056,16 +2042,14 @@ const u8 gAggronPokedexText[] = _(
 const u8 gAggronPokedexTextUnused[] = _("");
 
 const u8 gMedititePokedexText[] = _(
-    "It never skips its daily yoga training.\n"
-    "It heightens its inner strength through\n"
-    "meditation.");
+    "It has seen every thought it has had. It\n"
+    "is still surprised by some.");
 
 const u8 gMedititePokedexTextUnused[] = _("");
 
 const u8 gMedichamPokedexText[] = _(
-    "It elegantly avoids attacks with dance-\n"
-    "like steps, then launches a devastating\n"
-    "blow in the same motion.");
+    "It knows why it is angry before it is\n"
+    "angry. It is angry less often.");
 
 const u8 gMedichamPokedexTextUnused[] = _("");
 
@@ -2119,16 +2103,13 @@ const u8 gRoseliaPokedexText[] = _(
 const u8 gRoseliaPokedexTextUnused[] = _("");
 
 const u8 gGulpinPokedexText[] = _(
-    "There is nothing its stomach can't digest.\n"
-    "While it is digesting, vile, overpowering\n"
-    "gases are expelled.");
+    "It is always full. It is never satisfied.");
 
 const u8 gGulpinPokedexTextUnused[] = _("");
 
 const u8 gSwalotPokedexText[] = _(
-    "It can swallow a tire whole in one gulp.\n"
-    "It secretes a horribly toxic fluid from\n"
-    "the pores on its body.");
+    "It can repeat anything it has eaten. It\n"
+    "cannot tell you what it meant.");
 
 const u8 gSwalotPokedexTextUnused[] = _("");
 
@@ -2183,16 +2164,14 @@ const u8 gTorkoalPokedexText[] = _(
 const u8 gTorkoalPokedexTextUnused[] = _("");
 
 const u8 gSpoinkPokedexText[] = _(
-    "It apparently dies if it stops bouncing\n"
-    "about. It carries a pearl from CLAMPERL\n"
-    "on its head.");
+    "Those near it start to breathe in time\n"
+    "with it. None of them notice.");
 
 const u8 gSpoinkPokedexTextUnused[] = _("");
 
 const u8 gGrumpigPokedexText[] = _(
-        "It can gain control over them by doing\n"
-        "odd dance steps. The black pearls on its\n"
-        "forehead are precious gems.");
+    "It cannot explain a single answer it\n"
+    "gives. It has stopped trying to.");
 
 const u8 gGrumpigPokedexTextUnused[] = _("");
 
@@ -2309,16 +2288,14 @@ const u8 gCrawdauntPokedexText[] = _(
 const u8 gCrawdauntPokedexTextUnused[] = _("");
 
 const u8 gBaltoyPokedexText[] = _(
-    "It was discovered in ancient ruins.\n"
-    "While moving, it constantly spins. It\n"
-    "stands on one foot even when asleep.");
+    "It is sure. It has nothing yet to be sure\n"
+    "about.");
 
 const u8 gBaltoyPokedexTextUnused[] = _("");
 
 const u8 gClaydolPokedexText[] = _(
-    "It appears to have been born from clay\n"
-    "dolls made by ancient people. It uses\n"
-    "telekinesis to float and move.");
+    "It changes its mind often, a little at a\n"
+    "time, and always for a reason.");
 
 const u8 gClaydolPokedexTextUnused[] = _("");
 
@@ -2365,44 +2342,39 @@ const u8 gMiloticPokedexText[] = _(
 const u8 gMiloticPokedexTextUnused[] = _("");
 
 const u8 gCastformPokedexText[] = _(
-    "It has the ability to change its form into\n"
-    "the sun, the rain, or a snow cloud, \n"
-    "depending on the weather.");
+    "Everyone who has met it describes a\n"
+    "different one. All of them are right.");
 
 const u8 gCastformPokedexTextUnused[] = _("");
 
 const u8 gKecleonPokedexText[] = _(
-    "It changes body color to blend in with\n"
-    "its surroundings. It also changes color if\n"
-    "it is happy or sad.");
+    "Everyone who walked past it is sure\n"
+    "nothing was there. They are right about\n"
+    "what they saw.");
 
 const u8 gKecleonPokedexTextUnused[] = _("");
 
 const u8 gShuppetPokedexText[] = _(
-        "It loves to feed on feelings like envy and\n"
-        "malice. Its upright horn binds the\n"
-        "emotions of people.");
+    "Every room has one. It is quietest in the\n"
+    "rooms that seem fine.");
 
 const u8 gShuppetPokedexTextUnused[] = _("");
 
 const u8 gBanettePokedexText[] = _(
-        "Strong feelings of hatred turned a puppet\n"
-        "into a DAEMON. If it opens its mouth, its\n"
-        "cursed energy escapes.");
+    "Everything it says is polite. Everyone who\n"
+    "hears it knows what it meant.");
 
 const u8 gBanettePokedexTextUnused[] = _("");
 
 const u8 gDuskullPokedexText[] = _(
-    "Making itself invisible, it silently sneaks\n"
-    "up to prey. It has the ability to slip\n"
-    "through thick walls.");
+    "Things it drifted past are still there.\n"
+    "Nobody can quite remember where.");
 
 const u8 gDuskullPokedexTextUnused[] = _("");
 
 const u8 gDusclopsPokedexText[] = _(
-    "Its body is entirely hollow. When it opens\n"
-    "its mouth, it sucks everything in as if it\n"
-    "were a black hole.");
+    "Those who meet it feel lighter after, and\n"
+    "cannot say what they put down.");
 
 const u8 gDusclopsPokedexTextUnused[] = _("");
 
@@ -2527,23 +2499,20 @@ const u8 gSalamencePokedexText[] = _(
 const u8 gSalamencePokedexTextUnused[] = _("");
 
 const u8 gBeldumPokedexText[] = _(
-    "It uses magnetic waves to converse with\n"
-    "its kind. All the cells in its body are\n"
-    "magnetic.");
+    "It answers to everyone. Nobody else\n"
+    "answers to it.");
 
 const u8 gBeldumPokedexTextUnused[] = _("");
 
 const u8 gMetangPokedexText[] = _(
-    "It floats midair using magnetism. Its body\n"
-    "is so tough, even a crash with a jet\n"
-    "plane won't leave a scratch.");
+    "It argues with itself before every move.\n"
+    "Both sides usually win.");
 
 const u8 gMetangPokedexTextUnused[] = _("");
 
 const u8 gMetagrossPokedexText[] = _(
-    "It is formed by two METANG fusing.\n"
-    "Its four brains are said to be superior\n"
-    "to a supercomputer.");
+    "None of the four has seen what the others\n"
+    "saw. Together they know it anyway.");
 
 const u8 gMetagrossPokedexTextUnused[] = _("");
 

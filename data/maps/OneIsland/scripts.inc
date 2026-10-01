@@ -104,3 +104,13 @@ OneIsland_EventScript_IslandSign::
 OneIsland_EventScript_PokemonNetCenterSign::
 	msgbox OneIsland_Text_PokemonNetCenterSign, MSGBOX_SIGN
 	end
+
+@ T-221: the tree that stands alone answers A -- the way into a grove. Nothing is said; REVEAL makes it
+@ twinkle (src/reveal.c), and pressing A on the right tree finds it without.
+OneIsland_EventScript_Grove::
+	lockall
+	playse SE_M_CUT
+	warp MAP_ONE_ISLAND_GROVE, 8, 8
+	waitstate
+	releaseall
+	end

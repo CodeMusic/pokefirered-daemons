@@ -7,11 +7,63 @@
 
 extern const u8 ViridianForest_EventScript_Grove[];
 extern const u8 ViridianForest_Grove_EventScript_Leave[];
+extern const u8 Route25_EventScript_Grove[];
+extern const u8 Route25_Grove_EventScript_Leave[];
+extern const u8 Route1_EventScript_Grove[];
+extern const u8 Route1_Grove_EventScript_Leave[];
+extern const u8 Route24_EventScript_Grove[];
+extern const u8 Route24_Grove_EventScript_Leave[];
+extern const u8 Route8_EventScript_Grove[];
+extern const u8 Route8_Grove_EventScript_Leave[];
+extern const u8 Route11_EventScript_Grove[];
+extern const u8 Route11_Grove_EventScript_Leave[];
+extern const u8 Route13_EventScript_Grove[];
+extern const u8 Route13_Grove_EventScript_Leave[];
+extern const u8 FiveIsland_Meadow_EventScript_Grove[];
+extern const u8 FiveIsland_Meadow_Grove_EventScript_Leave[];
+extern const u8 SixIsland_WaterPath_EventScript_Grove[];
+extern const u8 SixIsland_WaterPath_Grove_EventScript_Leave[];
+extern const u8 ThreeIsland_BerryForest_EventScript_Grove[];
+extern const u8 ThreeIsland_BerryForest_Grove_EventScript_Leave[];
+extern const u8 OneIsland_EventScript_Grove[];
+extern const u8 OneIsland_Grove_EventScript_Leave[];
+extern const u8 TwoIsland_EventScript_Grove[];
+extern const u8 TwoIsland_Grove_EventScript_Leave[];
+extern const u8 FourIsland_EventScript_Grove[];
+extern const u8 FourIsland_Grove_EventScript_Leave[];
+extern const u8 SevenIsland_EventScript_Grove[];
+extern const u8 SevenIsland_Grove_EventScript_Leave[];
 
 static const u8 *const sGroveTrees[] =
 {
     ViridianForest_EventScript_Grove,
     ViridianForest_Grove_EventScript_Leave,
+    Route25_EventScript_Grove,
+    Route25_Grove_EventScript_Leave,
+    Route1_EventScript_Grove,
+    Route1_Grove_EventScript_Leave,
+    Route24_EventScript_Grove,
+    Route24_Grove_EventScript_Leave,
+    Route8_EventScript_Grove,
+    Route8_Grove_EventScript_Leave,
+    Route11_EventScript_Grove,
+    Route11_Grove_EventScript_Leave,
+    Route13_EventScript_Grove,
+    Route13_Grove_EventScript_Leave,
+    FiveIsland_Meadow_EventScript_Grove,
+    FiveIsland_Meadow_Grove_EventScript_Leave,
+    SixIsland_WaterPath_EventScript_Grove,
+    SixIsland_WaterPath_Grove_EventScript_Leave,
+    ThreeIsland_BerryForest_EventScript_Grove,
+    ThreeIsland_BerryForest_Grove_EventScript_Leave,
+    OneIsland_EventScript_Grove,
+    OneIsland_Grove_EventScript_Leave,
+    TwoIsland_EventScript_Grove,
+    TwoIsland_Grove_EventScript_Leave,
+    FourIsland_EventScript_Grove,
+    FourIsland_Grove_EventScript_Leave,
+    SevenIsland_EventScript_Grove,
+    SevenIsland_Grove_EventScript_Leave,
 };
 
 #endif // GUARD_DATA_GROVE_TREES_H

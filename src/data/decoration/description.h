@@ -424,9 +424,9 @@ const u8 DecorDesc_MUDKIP_DOLL[] = _(
         "or a desk.");
 
 const u8 DecorDesc_DUSKULL_DOLL[] = _(
-    "A DUSKULL doll.\n"
-        "Place it on a mat\n"
-        "or a desk.");
+        "A FADING doll.\n"
+        "Place it on a\n"
+        "mat or a desk.");
 
 const u8 DecorDesc_WYNAUT_DOLL[] = _(
     "A RANKLE doll.\n"
@@ -434,14 +434,14 @@ const u8 DecorDesc_WYNAUT_DOLL[] = _(
         "or a desk.");
 
 const u8 DecorDesc_BALTOY_DOLL[] = _(
-    "A BALTOY doll.\n"
-        "Place it on a mat\n"
-        "or a desk.");
+        "A LIKELIHOOD\n"
+        "doll. Place it on\n"
+        "a mat or a desk.");
 
 const u8 DecorDesc_KECLEON_DOLL[] = _(
-    "A KECLEON doll.\n"
-        "Place it on a mat\n"
-        "or a desk.");
+        "An UNNOTICED\n"
+        "doll. Place it on\n"
+        "a mat or a desk.");
 
 const u8 DecorDesc_AZURILL_DOLL[] = _(
     "A VALENCE doll.\n"
@@ -459,9 +459,9 @@ const u8 DecorDesc_SWABLU_DOLL[] = _(
         "or a desk.");
 
 const u8 DecorDesc_GULPIN_DOLL[] = _(
-    "A GULPIN doll.\n"
-        "Place it on a mat\n"
-        "or a desk.");
+        "A GREEDY doll.\n"
+        "Place it on a\n"
+        "mat or a desk.");
 
 const u8 DecorDesc_LOTAD_DOLL[] = _(
     "A LOTAD doll.\n"

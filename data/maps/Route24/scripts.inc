@@ -95,3 +95,13 @@ Route24_Movement_RocketWalkBackToPos::
 Route24_Movement_WalkDown::
 	walk_down
 	step_end
+
+@ T-221: the tree that stands alone answers A -- the way into a grove. Nothing is said; REVEAL makes it
+@ twinkle (src/reveal.c), and pressing A on the right tree finds it without.
+Route24_EventScript_Grove::
+	lockall
+	playse SE_M_CUT
+	warp MAP_ROUTE24_GROVE, 8, 8
+	waitstate
+	releaseall
+	end
