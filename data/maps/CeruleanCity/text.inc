@@ -88,9 +88,15 @@ CeruleanCity_Text_IfSlowbroWasntThereCouldCutTree::
     .string "I think there's a way around it,\n"
     .string "though.$"
 
+@  T-297 (the user, "yes to all"), DRAFT: DOLDRUM CAVE is a place, not an object -- so its hint is a resident who
+@  looks toward the water and changes the subject. Never a word about what is out there.
 CeruleanCity_Text_PokemonEncyclopediaAmusing::
-    .string "You're making an encyclopedia on\n"
-    .string "DAEMON? That sounds amusing.$"
+    .string "An INDEX of every DAEMON there is?\n"
+    .string "That is a long job.\p"
+    .string "...\p"
+    .string "He looks out across the water for a\n"
+    .string "moment, at nothing you can see.\p"
+    .string "Anyway. Good luck with it.$"
 
 CeruleanCity_Text_PeopleHereWereRobbed::
     .string "The people here were robbed.\p"
