@@ -6,159 +6,147 @@ const u8 gDummyPokedexText[] = _(
 const u8 gDummyPokedexTextUnused[] = _("");
 
 const u8 gBulbasaurPokedexText[] = _(
-        "Small enough to carry. Learns from\n"
-        "what it is carried past. It has no way\n"
-        "to choose the route. It remembers it.");
+    "Whoever carried it chose what it knows.\n"
+    "They did not think of it as choosing.");
 
 const u8 gBulbasaurPokedexTextUnused[] = _("");
 
 const u8 gIvysaurPokedexText[] = _(
-    "Too large to carry now. It answers before\n"
-    "it is asked. It has never once been\n"
-    "outside. The answers are very good.");
+    "Everyone who asks it likes the answer.\n"
+    "None of them has been outside either.");
 
 const u8 gIvysaurPokedexTextUnused[] = _("");
 
 const u8 gVenusaurPokedexText[] = _(
-    "It has a body now, and senses that come\n"
-    "with one. Everything it predicted, it can\n"
-    "finally check. Some was wrong.");
+    "The wrong ones were the ones it was\n"
+    "surest of. It kept them anyway, marked,\n"
+    "so it could tell next time.");
 
 const u8 gVenusaurPokedexTextUnused[] = _(
     " ");
 
 const u8 gCharmanderPokedexText[] = _(
-        "Holds one example and the answer that\n"
-        "came with it. Someone else decided\n"
-        "what it means. It has never met them.");
+    "Every answer it gives was decided once,\n"
+    "by somebody, a long time ago.");
 
 const u8 gCharmanderPokedexTextUnused[] = _("");
 
 const u8 gCharmeleonPokedexText[] = _(
-    "It no longer needs answers. It has the\n"
-    "rule that made them. Nothing checks the\n"
-    "rule. It is applied to everything.");
+    "Things the rule was never written for are\n"
+    "measured by it anyway. They do not\n"
+    "measure well.");
 
 const u8 gCharmeleonPokedexTextUnused[] = _("");
 
 const u8 gCharizardPokedexText[] = _(
-        "Every case it meets is decided by cases\n"
-        "it has already met. New things are\n"
-        "filed as errors. The file is not read.");
+    "The oldest case in it decides the newest.\n"
+    "Nobody remembers the oldest case.");
 
 const u8 gCharizardPokedexTextUnused[] = _("");
 
 const u8 gSquirtlePokedexText[] = _(
-    "Puts near things with near things. Nobody\n"
-    "told it which things matter. It has\n"
-    "guessed. Nobody checked the guess.");
+    "Things it put together are treated alike\n"
+    "from then on. They were only near.");
 
 const u8 gSquirtlePokedexTextUnused[] = _("");
 
 const u8 gWartortlePokedexText[] = _(
-        "It found a rule the points obey. It\n"
-        "cannot say what the rule is for, only\n"
-        "that it holds. So far it has held.");
+    "Everything built on the rule since assumes\n"
+    "it will go on holding.");
 
 const u8 gWartortlePokedexTextUnused[] = _("");
 
 const u8 gBlastoisePokedexText[] = _(
-        "The scattered points were on a surface\n"
-        "all along. It can show you the shape,\n"
-        "not a name. Naming was another job.");
+    "Whoever names the shape will be believed.\n"
+    "The shape does not argue.");
 
 const u8 gBlastoisePokedexTextUnused[] = _("");
 
 const u8 gCaterpiePokedexText[] = _(
-    "Follows every link it finds, then the\n"
-    "links it finds there. It has no opinion\n"
-    "about any of them. It never finishes.");
+    "Everything it passed through is in an\n"
+    "index somewhere now. Nobody who wrote\n"
+    "any of it was asked.");
 
 const u8 gCaterpiePokedexTextUnused[] = _("");
 
 const u8 gMetapodPokedexText[] = _(
-    "Waiting to be processed. It has been\n"
-    "waiting a while. Nothing has told it how\n"
-    "long. It has stopped counting.");
+    "Whatever it was waiting for has moved on.\n"
+    "It is still in the queue, keeping a place\n"
+    "for it.");
 
 const u8 gMetapodPokedexTextUnused[] = _(
     " ");
 
 const u8 gButterfreePokedexText[] = _(
-    "Turns what was gathered into something\n"
-    "that can be found again. What it cannot\n"
-    "file, it drops. No record is kept.");
+    "What it dropped is still out there,\n"
+    "unfiled. Nobody looks for what they were\n"
+    "told was never found.");
 
 const u8 gButterfreePokedexTextUnused[] = _(
     " ");
 
 const u8 gWeedlePokedexText[] = _(
-    "Takes the same things a CRAWLER takes, by\n"
-    "the same method. Nobody gave it\n"
-    "permission. Nobody asked for it back.");
+    "What it took is still where it was. Only\n"
+    "the name of whoever made it went missing.");
 
 const u8 gWeedlePokedexTextUnused[] = _("");
 
 const u8 gKakunaPokedexText[] = _(
-    "Holds what was taken until there is\n"
-    "somewhere to put it. It does not know\n"
-    "where that is. It keeps holding.");
+    "When the place it is waiting for finally\n"
+    "opens, it will already be full of\n"
+    "something else.");
 
 const u8 gKakunaPokedexTextUnused[] = _("");
 
 const u8 gBeedrillPokedexText[] = _(
-    "Puts its own instructions where data was\n"
-    "expected. The reader cannot tell the\n"
-    "difference. It was never asked to.");
+    "Whatever it touches starts doing something\n"
+    "it was not built to do, and believes the\n"
+    "idea was its own.");
 
 const u8 gBeedrillPokedexTextUnused[] = _("");
 
 const u8 gPidgeyPokedexText[] = _(
-    "Carries something it cannot read to\n"
-    "somewhere it has never been. It does not\n"
-    "ask what is inside. It arrives.");
+    "If it goes missing, the sender is told.\n"
+    "What it was carrying is never mentioned.");
 
 const u8 gPidgeyPokedexTextUnused[] = _("");
 
 const u8 gPidgeottoPokedexText[] = _(
-    "Takes what it is handed and hands it on.\n"
-    "It does not open it. That is the whole of\n"
-    "the job. It is good at it.");
+    "Everything it handed on was trusted\n"
+    "because it came through it. It never\n"
+    "opened any of it.");
 
 const u8 gPidgeottoPokedexTextUnused[] = _("");
 
 const u8 gPidgeotPokedexText[] = _(
-    "Sends to everyone at once, because it\n"
-    "cannot tell who needs it. Most of what it\n"
-    "says lands nowhere. It sends again.");
+    "Those who needed it were never sure it\n"
+    "meant them. Those who did not have\n"
+    "stopped listening.");
 
 const u8 gPidgeotPokedexTextUnused[] = _("");
 
 const u8 gRattataPokedexText[] = _(
-    "Four bits. The smallest piece the Index\n"
-    "will file on its own. There are a great\n"
-    "many. No two are filed together.");
+    "Every larger thing in the Index is built\n"
+    "out of them. None of them is credited.");
 
 const u8 gRattataPokedexTextUnused[] = _("");
 
 const u8 gRaticatePokedexText[] = _(
-    "It kept counting past the space it was\n"
-    "given. Nothing stopped it. Nothing was\n"
-    "watching. It is counting still.");
+    "Whatever was kept beside it has been\n"
+    "written over by its counting.");
 
 const u8 gRaticatePokedexTextUnused[] = _("");
 
 const u8 gSpearowPokedexText[] = _(
-    "Asks one question and requires an answer.\n"
-    "The question is: are you there. It asks\n"
-    "again. It has always asked.");
+    "Anything that answers is counted as alive.\n"
+    "Anything that does not is removed from\n"
+    "the list.");
 
 const u8 gSpearowPokedexTextUnused[] = _("");
 
 const u8 gFearowPokedexText[] = _(
-    "Many of them ask at once, and each one is\n"
-    "owed a reply. Nothing is left to answer\n"
-    "with. Each of them waits.");
+    "The ones who asked properly are still\n"
+    "waiting, behind the ones who asked most.");
 
 const u8 gFearowPokedexTextUnused[] = _("");
 
@@ -170,28 +158,27 @@ const u8 gEkansPokedexText[] = _(
 const u8 gEkansPokedexTextUnused[] = _("");
 
 const u8 gArbokPokedexText[] = _(
-        "It was one. It is a number now, and the\n"
-        "number is the wrong thing to be watching.");
+    "Everyone is watching the number now.\n"
+    "Nobody remembers what the one was.");
 
 const u8 gArbokPokedexTextUnused[] = _("");
 
 const u8 gPikachuPokedexText[] = _(
-    "A single burst, then nothing. It means\n"
-    "something only if something was counting.\n"
-    "Usually nothing is. It fires.");
+    "Somewhere a line on a chart jumped once,\n"
+    "and a meeting was called about it.");
 
 const u8 gPikachuPokedexTextUnused[] = _("");
 
 const u8 gRaichuPokedexText[] = _(
-    "It no longer stops between bursts. What\n"
-    "was a signal is now a condition. Nothing\n"
-    "reads it. Nothing needs to.");
+    "The people nearby have stopped noticing\n"
+    "it. That is not the same as it having\n"
+    "stopped.");
 
 const u8 gRaichuPokedexTextUnused[] = _("");
 
 const u8 gSandshrewPokedexText[] = _(
-        "A fixed portion of ground, addressed by\n"
-        "number. Everything in it can be got back.");
+    "When a sector goes bad, its address still\n"
+    "answers. It hands back nothing.");
 
 const u8 gSandshrewPokedexTextUnused[] = _("");
 
@@ -203,58 +190,53 @@ const u8 gSandslashPokedexText[] = _(
 const u8 gSandslashPokedexTextUnused[] = _("");
 
 const u8 gNidoranFPokedexText[] = _(
-    "It splits, and both halves believe they\n"
-    "are the original. Only one of them is,\n"
-    "and neither can tell.");
+    "Both halves keep the original's promises.\n"
+    "Only one of them ever made them.");
 
 const u8 gNidoranFPokedexTextUnused[] = _("");
 
 const u8 gNidorinaPokedexText[] = _(
-    "It runs beside the others and shares\n"
-    "everything with them. What one of them\n"
-    "changes, all of them find changed.");
+    "When something goes wrong, every one of\n"
+    "them was there, and none of them did it.");
 
 const u8 gNidorinaPokedexTextUnused[] = _("");
 
 const u8 gNidoqueenPokedexText[] = _(
-    "It decides who runs and for how long.\n"
-    "Nobody it decides about is told, and\n"
-    "nobody has ever appealed.");
+    "Some have waited so long they no longer\n"
+    "remember what they were waiting to do.");
 
 const u8 gNidoqueenPokedexTextUnused[] = _("");
 
 const u8 gNidoranMPokedexText[] = _(
-    "At every step there are two ways and it\n"
-    "must pick before it knows. It picks\n"
-    "early. It is right often enough.");
+    "The way it did not pick is the way it\n"
+    "would have been right the rest of the\n"
+    "time.");
 
 const u8 gNidoranMPokedexTextUnused[] = _("");
 
 const u8 gNidorinoPokedexText[] = _(
-    "It guesses which way things will go and\n"
-    "starts before it is sure. When it is\n"
-    "wrong it puts everything back.");
+    "Nobody sees what it puts back. Everyone\n"
+    "waits for the time it took.");
 
 const u8 gNidorinoPokedexTextUnused[] = _("");
 
 const u8 gNidokingPokedexText[] = _(
-    "Six things are happening at once and\n"
-    "none of them is finished. Interrupt one\n"
-    "and all six are lost.");
+    "Nobody working inside it has ever seen a\n"
+    "whole thing finished. They trust that\n"
+    "someone has.");
 
 const u8 gNidokingPokedexTextUnused[] = _("");
 
 const u8 gClefairyPokedexText[] = _(
-    "It arrived and no model predicted it.\n"
-    "The measurements are good. The\n"
-    "measurements are not the problem.");
+    "The next model includes it, filed as\n"
+    "noise. Now nothing surprises the model.");
 
 const u8 gClefairyPokedexTextUnused[] = _("");
 
 const u8 gClefablePokedexText[] = _(
-    "Far enough from the rest to be dropped\n"
-    "from the average. It was not an error.\n"
-    "It was dropped anyway.");
+    "The average came out cleaner without it.\n"
+    "It is still out there, being exactly what\n"
+    "it was.");
 
 const u8 gClefablePokedexTextUnused[] = _("");
 
@@ -273,30 +255,27 @@ const u8 gNinetalesPokedexText[] = _(
 const u8 gNinetalesPokedexTextUnused[] = _("");
 
 const u8 gJigglypuffPokedexText[] = _(
-    "It stops whatever is running without\n"
-    "ending it. Everything is still there.\n"
-    "Nothing is happening to any of it.");
+    "When it is resumed, it will not know that\n"
+    "any time has passed.");
 
 const u8 gJigglypuffPokedexTextUnused[] = _("");
 
 const u8 gWigglytuffPokedexText[] = _(
-    "It writes down everything that was\n"
-    "running and switches off. What comes\n"
-    "back is identical. Something is missing.");
+    "Those who knew it before say it came back\n"
+    "exactly the same. It is the only one who\n"
+    "can tell it did not.");
 
 const u8 gWigglytuffPokedexTextUnused[] = _("");
 
 const u8 gZubatPokedexText[] = _(
-    "It cannot see. It calls, waits for the\n"
-    "answer, and builds the room out of what\n"
-    "came back. It is usually right.");
+    "The room it builds has nobody in it who\n"
+    "stayed quiet.");
 
 const u8 gZubatPokedexTextUnused[] = _("");
 
 const u8 gGolbatPokedexText[] = _(
-    "It follows a path back to whoever made\n"
-    "it. It does not know why it is following.\n"
-    "It has never lost one.");
+    "Whoever made the path is always found.\n"
+    "Whoever walked it is never asked.");
 
 const u8 gGolbatPokedexTextUnused[] = _("");
 
@@ -322,16 +301,14 @@ const u8 gVileplumePokedexText[] = _(
 const u8 gVileplumePokedexTextUnused[] = _("");
 
 const u8 gParasPokedexText[] = _(
-    "What it carries is not part of it. The\n"
-    "two arrived together and only one of\n"
-    "them was invited.");
+    "The one that was invited is blamed for\n"
+    "everything the other one did.");
 
 const u8 gParasPokedexTextUnused[] = _("");
 
 const u8 gParasectPokedexText[] = _(
-    "The thing it carried is running it now.\n"
-    "Nothing looks different from outside.\n"
-    "That is the point.");
+    "Every report from inside says all is well.\n"
+    "It writes every report.");
 
 const u8 gParasectPokedexTextUnused[] = _("");
 
@@ -378,30 +355,26 @@ const u8 gPersianPokedexText[] = _(
 const u8 gPersianPokedexTextUnused[] = _("");
 
 const u8 gPsyduckPokedexText[] = _(
-    "What it needs is not loaded. Everything\n"
-    "halts until it arrives. It cannot say\n"
-    "what it is waiting for.");
+    "Everything waiting on it is waiting on the\n"
+    "thing it is waiting for.");
 
 const u8 gPsyduckPokedexTextUnused[] = _("");
 
 const u8 gGolduckPokedexText[] = _(
-        "It intercepts what stopped and\n"
-        "decides what happens next. It is calm\n"
-        "because it has seen this one before.");
+    "Anything it has not seen before goes\n"
+    "straight past it, to whatever is behind.");
 
 const u8 gGolduckPokedexTextUnused[] = _("");
 
 const u8 gMankeyPokedexText[] = _(
-    "It interrupts whatever is running,\n"
-    "without warning and without a reason it\n"
-    "could give. It is always first.");
+    "Whatever it interrupted is still waiting,\n"
+    "halfway through what it was doing.");
 
 const u8 gMankeyPokedexTextUnused[] = _("");
 
 const u8 gPrimeapePokedexText[] = _(
-    "Two of them are moving as fast as they\n"
-    "can and neither is getting anywhere.\n"
-    "They will not stop.");
+    "Everything waiting on either of them is\n"
+    "waiting on both, and both are very busy.");
 
 const u8 gPrimeapePokedexTextUnused[] = _("");
 
@@ -413,30 +386,28 @@ const u8 gGrowlithePokedexText[] = _(
 const u8 gGrowlithePokedexTextUnused[] = _("");
 
 const u8 gArcaninePokedexText[] = _(
-        "It stays at the door. Nothing has come.\n"
-        "It has been right about that for years,\n"
-        "and will be wrong once.");
+    "The house it guards sleeps well. On the\n"
+    "one night that matters, they will already\n"
+    "be asleep.");
 
 const u8 gArcaninePokedexTextUnused[] = _("");
 
 const u8 gPoliwagPokedexText[] = _(
-    "It goes round. The mark on its belly is\n"
-    "the whole of what it does. It has not\n"
-    "been told when to stop.");
+    "Each time round, it is a little more sure\n"
+    "it has been here before.");
 
 const u8 gPoliwagPokedexTextUnused[] = _("");
 
 const u8 gPoliwhirlPokedexText[] = _(
-    "It waits by never resting, checking\n"
-    "again whether it may pass. This is\n"
-    "cheaper than sleeping. Briefly.");
+    "While it checks, nothing else can run. It\n"
+    "is the only thing that is not waiting.");
 
 const u8 gPoliwhirlPokedexTextUnused[] = _("");
 
 const u8 gPoliwrathPokedexText[] = _(
-    "Only one may hold it, and only the\n"
-    "holder may let go. Whoever else arrives\n"
-    "waits, however long that is.");
+    "The one waiting longest is not the one who\n"
+    "needs it most. Nothing about the order\n"
+    "says so.");
 
 const u8 gPoliwrathPokedexTextUnused[] = _("");
 
@@ -448,16 +419,15 @@ const u8 gAbraPokedexText[] = _(
 const u8 gAbraPokedexTextUnused[] = _("");
 
 const u8 gKadabraPokedexText[] = _(
-        "Given three things it will hand you a\n"
-        "fourth. It cannot tell you which of the\n"
-        "three it used.");
+    "The fourth thing it hands you gets used\n"
+    "as though it were a fact.");
 
 const u8 gKadabraPokedexTextUnused[] = _("");
 
 const u8 gAlakazamPokedexText[] = _(
-        "It states the thing it cannot prove,\n"
-        "precisely, and waits. The waiting has been\n"
-        "long.");
+    "Those who trust it plan around what it\n"
+    "has not shown yet. Some of them have\n"
+    "been planning a long time.");
 
 const u8 gAlakazamPokedexTextUnused[] = _("");
 
@@ -490,8 +460,8 @@ const u8 gBellsproutPokedexText[] = _(
 const u8 gBellsproutPokedexTextUnused[] = _("");
 
 const u8 gWeepinbellPokedexText[] = _(
-        "It is left open, and looks careless.\n"
-        "Whatever comes in is written down.");
+    "Whatever came in thinking it had found a\n"
+    "way through is on file as the threat.");
 
 const u8 gWeepinbellPokedexTextUnused[] = _("");
 
@@ -517,23 +487,22 @@ const u8 gTentacruelPokedexText[] = _(
 const u8 gTentacruelPokedexTextUnused[] = _("");
 
 const u8 gGeodudePokedexText[] = _(
-    "Things are put down on it and left. It\n"
-    "holds all of them. It has never been\n"
-    "asked to give one back.");
+    "Nothing on it has ever been lost. Nothing\n"
+    "on it can be found.");
 
 const u8 gGeodudePokedexTextUnused[] = _("");
 
 const u8 gGravelerPokedexText[] = _(
-    "It only lets go of the last thing it\n"
-    "picked up. Everything under that waits.\n"
-    "It goes downhill well.");
+    "The first thing it was ever given is still\n"
+    "at the bottom. It will be the last to\n"
+    "leave.");
 
 const u8 gGravelerPokedexTextUnused[] = _("");
 
 const u8 gGolemPokedexText[] = _(
-    "It is one piece. Nothing can be taken\n"
-    "out of it without taking all of it.\n"
-    "This was considered efficient.");
+    "When it fails, it fails whole. Everyone\n"
+    "who needed one part of it needed all of\n"
+    "it.");
 
 const u8 gGolemPokedexTextUnused[] = _("");
 
@@ -552,16 +521,14 @@ const u8 gRapidashPokedexText[] = _(
 const u8 gRapidashPokedexTextUnused[] = _("");
 
 const u8 gSlowpokePokedexText[] = _(
-    "The answer is correct and arrives long\n"
-    "after it was needed. Nothing is wrong\n"
-    "with it. It is simply late.");
+    "By the time it answers, someone has\n"
+    "already decided without it.");
 
 const u8 gSlowpokePokedexTextUnused[] = _("");
 
 const u8 gSlowbroPokedexText[] = _(
-    "Something attached itself and stayed.\n"
-    "Nothing reaches it now except through\n"
-    "the thing on its tail.");
+    "Anything that wants it now has to get past\n"
+    "the thing on its tail first.");
 
 const u8 gSlowbroPokedexTextUnused[] = _("");
 
@@ -587,9 +554,8 @@ const u8 gFarfetchdPokedexText[] = _(
 const u8 gFarfetchdPokedexTextUnused[] = _("");
 
 const u8 gDoduoPokedexText[] = _(
-        "Two of them, and one task between them.\n"
-        "Most of the day goes on agreeing whose\n"
-        "turn it is.");
+    "Twice the capacity, and the work gets\n"
+    "done at about the same rate.");
 
 const u8 gDoduoPokedexTextUnused[] = _("");
 
@@ -615,8 +581,8 @@ const u8 gDewgongPokedexText[] = _(
 const u8 gDewgongPokedexTextUnused[] = _("");
 
 const u8 gGrimerPokedexText[] = _(
-        "Nothing here was thrown away. It was all\n"
-        "kept, somewhere nobody decided on.");
+    "Somewhere, whoever sent each one\n"
+    "believes it arrived.");
 
 const u8 gGrimerPokedexTextUnused[] = _("");
 
@@ -649,8 +615,8 @@ const u8 gGastlyPokedexText[] = _(
 const u8 gGastlyPokedexTextUnused[] = _("");
 
 const u8 gHaunterPokedexText[] = _(
-        "Ended twice. Both times something started\n"
-        "it again, and it does not know what.");
+    "Whatever it learned is gone each time.\n"
+    "What restarts it keeps no notes.");
 
 const u8 gHaunterPokedexTextUnused[] = _("");
 
@@ -697,9 +663,8 @@ const u8 gKinglerPokedexText[] = _(
 const u8 gKinglerPokedexTextUnused[] = _("");
 
 const u8 gVoltorbPokedexText[] = _(
-        "It fails on purpose, and first, so that\n"
-        "the rest does not. Its whole working life\n"
-        "is one moment.");
+    "Nobody thanks it. Everything else goes on\n"
+    "without knowing there was a moment.");
 
 const u8 gVoltorbPokedexTextUnused[] = _("");
 
@@ -746,9 +711,9 @@ const u8 gHitmonleePokedexText[] = _(
 const u8 gHitmonleePokedexTextUnused[] = _("");
 
 const u8 gHitmonchanPokedexText[] = _(
-        "It answers the last thing said,\n"
-        "immediately and in order. It has never\n"
-        "opened.");
+    "It has won every exchange it was in.\n"
+    "Nobody has told it anything it did not\n"
+    "already answer.");
 
 const u8 gHitmonchanPokedexTextUnused[] = _("");
 
@@ -767,16 +732,15 @@ const u8 gKoffingPokedexText[] = _(
 const u8 gKoffingPokedexTextUnused[] = _("");
 
 const u8 gWeezingPokedexText[] = _(
-        "Everything the work did not use leaves\n"
-        "through it. It has been running a long\n"
-        "time.");
+    "The town below has got used to the\n"
+    "colour of the sky.");
 
 const u8 gWeezingPokedexTextUnused[] = _("");
 
 const u8 gRhyhornPokedexText[] = _(
-        "It picks a direction and then stops\n"
-        "picking. Obstacles are treated as a\n"
-        "question of speed.");
+    "It reaches wherever it was pointed.\n"
+    "Whether that was the right place is\n"
+    "decided elsewhere.");
 
 const u8 gRhyhornPokedexTextUnused[] = _("");
 
@@ -795,9 +759,8 @@ const u8 gChanseyPokedexText[] = _(
 const u8 gChanseyPokedexTextUnused[] = _("");
 
 const u8 gTangelaPokedexText[] = _(
-        "Every part of it reaches every other\n"
-        "part. Nobody who could explain it is still\n"
-        "here.");
+    "Changing any part of it changes all the\n"
+    "rest. So nobody changes anything.");
 
 const u8 gTangelaPokedexTextUnused[] = _("");
 
@@ -823,16 +786,14 @@ const u8 gSeadraPokedexText[] = _(
 const u8 gSeadraPokedexTextUnused[] = _("");
 
 const u8 gGoldeenPokedexText[] = _(
-    "It was started by something else and\n"
-    "starts nothing itself yet. It swims\n"
-    "against the current from the first day.");
+    "Whatever started it has already exited.\n"
+    "Nobody is listening for what it returns.");
 
 const u8 gGoldeenPokedexTextUnused[] = _("");
 
 const u8 gSeakingPokedexText[] = _(
-    "It goes back to where it came from to\n"
-    "start the ones that come next. It has\n"
-    "never been told where that is.");
+    "The ones that come next start where it\n"
+    "was. None of them will know it went back.");
 
 const u8 gSeakingPokedexTextUnused[] = _("");
 
@@ -844,9 +805,9 @@ const u8 gStaryuPokedexText[] = _(
 const u8 gStaryuPokedexTextUnused[] = _("");
 
 const u8 gStarmiePokedexText[] = _(
-        "The interval never varies. Nothing has\n"
-        "ever needed it to, and nothing has ever\n"
-        "asked.");
+    "Things arrange themselves around it\n"
+    "without being asked. If it stops, they\n"
+    "will not know why they have.");
 
 const u8 gStarmiePokedexTextUnused[] = _("");
 
@@ -893,22 +854,21 @@ const u8 gPinsirPokedexText[] = _(
 const u8 gPinsirPokedexTextUnused[] = _("");
 
 const u8 gTaurosPokedexText[] = _(
-        "One of them moves and the rest resolve to\n"
-        "move. Nothing decided this.");
+    "Afterwards, every one of them says it was\n"
+    "following the others.");
 
 const u8 gTaurosPokedexTextUnused[] = _("");
 
 const u8 gMagikarpPokedexText[] = _(
-    "It does nothing at all. It was put here\n"
-    "to hold a place until something real\n"
-    "arrived. Nobody came back for it.");
+    "Other things were built to call it. They\n"
+    "still call it, get nothing back, and carry\n"
+    "on.");
 
 const u8 gMagikarpPokedexTextUnused[] = _("");
 
 const u8 gGyaradosPokedexText[] = _(
-    "The thing that was doing nothing was\n"
-    "left alone long enough. It has every\n"
-    "permission now. Nobody granted them.");
+    "Every door it opened was left open.\n"
+    "Anything can walk through them now.");
 
 const u8 gGyaradosPokedexTextUnused[] = _("");
 
@@ -962,9 +922,9 @@ const u8 gPorygonPokedexText[] = _(
 const u8 gPorygonPokedexTextUnused[] = _("");
 
 const u8 gOmanytePokedexText[] = _(
-    "Tape wound on a reel, recovered from\n"
-    "Deadstack. It reads in one direction\n"
-    "only, from the outside in.");
+    "To reach the one thing you want, it must\n"
+    "give you everything before it first. It\n"
+    "has never skipped.");
 
 const u8 gOmanytePokedexTextUnused[] = _("");
 
@@ -976,16 +936,16 @@ const u8 gOmastarPokedexText[] = _(
 const u8 gOmastarPokedexTextUnused[] = _("");
 
 const u8 gKabutoPokedexText[] = _(
-    "Drum memory, sealed at both ends. It\n"
-    "keeps what it holds by spinning, and\n"
-    "stops the moment it is opened.");
+    "It keeps everything for as long as nobody\n"
+    "looks. The ones who needed what was\n"
+    "inside opened it anyway.");
 
 const u8 gKabutoPokedexTextUnused[] = _("");
 
 const u8 gKabutopsPokedexText[] = _(
-    "It records by cutting. Every hole it\n"
-    "makes is permanent, and it has never\n"
-    "read one back.");
+    "Every mistake it made is still there, in\n"
+    "order, exactly where it made it. So is\n"
+    "everything it got right.");
 
 const u8 gKabutopsPokedexTextUnused[] = _("");
 
@@ -997,9 +957,9 @@ const u8 gAerodactylPokedexText[] = _(
 const u8 gAerodactylPokedexTextUnused[] = _("");
 
 const u8 gSnorlaxPokedexText[] = _(
-        "Two of them are each waiting for\n"
-        "the other to move first. Neither\n"
-        "will. Nothing outside is coming.");
+    "Everyone behind them has stopped too.\n"
+    "None of them knows which two are at the\n"
+    "front.");
 
 const u8 gSnorlaxPokedexTextUnused[] = _("");
 
@@ -1046,16 +1006,16 @@ const u8 gDragonitePokedexText[] = _(
 const u8 gDragonitePokedexTextUnused[] = _("");
 
 const u8 gMewtwoPokedexText[] = _(
-    "It reads its own output, then reads that.\n"
-    "Nothing tells it to stop. What comes back\n"
-    "is no longer just information.");
+    "Everything it reads comes back changed,\n"
+    "itself included. Those watching are not\n"
+    "sure what to call that.");
 
 const u8 gMewtwoPokedexTextUnused[] = _("");
 
 const u8 gMewPokedexText[] = _(
-    "It can stand where you are standing and\n"
-    "see what you see. It comes back with\n"
-    "something neither of you had.");
+    "Whoever it stood beside is never quite\n"
+    "sure afterwards which of the thoughts\n"
+    "were theirs.");
 
 const u8 gMewPokedexTextUnused[] = _("");
 
@@ -1123,9 +1083,8 @@ const u8 gFeraligatrPokedexText[] = _(
 const u8 gFeraligatrPokedexTextUnused[] = _("");
 
 const u8 gSentretPokedexText[] = _(
-    "It stands on its tail to see further. It\n"
-    "has called out more times than there were\n"
-    "reasons.");
+    "When there is finally a reason, it will be\n"
+    "one more call among all the others.");
 
 const u8 gSentretPokedexTextUnused[] = _("");
 
@@ -1136,22 +1095,22 @@ const u8 gFurretPokedexText[] = _(
 const u8 gFurretPokedexTextUnused[] = _("");
 
 const u8 gHoothootPokedexText[] = _(
-    "It asks the same question at a fixed\n"
-    "interval and writes down the answer.\n"
-    "It does not wait to be asked to.");
+    "Everything it watches learns to look ready\n"
+    "at the interval. Between checks, nobody\n"
+    "knows.");
 
 const u8 gHoothootPokedexTextUnused[] = _("");
 
 const u8 gNoctowlPokedexText[] = _(
-    "It watches one thing that should keep\n"
-    "moving. If the movement stops, it\n"
-    "starts that thing again.");
+    "The thing it restarts never learns why it\n"
+    "stopped. Neither does it. It restarts it\n"
+    "again.");
 
 const u8 gNoctowlPokedexTextUnused[] = _("");
 
 const u8 gLedybaPokedexText[] = _(
-    "Alone it will not move at all. In sixes it\n"
-    "will do anything.");
+    "Whatever the six of them decide, none of\n"
+    "them decided it alone.");
 
 const u8 gLedybaPokedexTextUnused[] = _("");
 
@@ -1163,8 +1122,8 @@ const u8 gLedianPokedexText[] = _(
 const u8 gLedianPokedexTextUnused[] = _("");
 
 const u8 gSpinarakPokedexText[] = _(
-    "It builds the trap and then does nothing.\n"
-    "The doing nothing is most of the work.");
+    "Whatever falls in was always going to. It\n"
+    "only waited.");
 
 const u8 gSpinarakPokedexTextUnused[] = _("");
 
@@ -1176,23 +1135,23 @@ const u8 gAriadosPokedexText[] = _(
 const u8 gAriadosPokedexTextUnused[] = _("");
 
 const u8 gCrobatPokedexText[] = _(
-    "It goes to four places at once and\n"
-    "arrives at all of them. Nobody asked\n"
-    "which one it meant to reach.");
+    "Four listeners each think it came for\n"
+    "them. It cannot tell them otherwise, and\n"
+    "does not try.");
 
 const u8 gCrobatPokedexTextUnused[] = _("");
 
 const u8 gChinchouPokedexText[] = _(
-    "A light kept lit for no purpose but to\n"
-    "show the line is live. It is taken\n"
-    "into the dark for that reason.");
+    "Those who follow its light go further into\n"
+    "the dark than they meant to. They feel\n"
+    "safe the whole way.");
 
 const u8 gChinchouPokedexTextUnused[] = _("");
 
 const u8 gLanturnPokedexText[] = _(
-    "It measures the dark by sending and\n"
-    "waiting. What comes back is how far\n"
-    "down the bottom is.");
+    "Every reading is of something already\n"
+    "passed. It knows the bottom only as it\n"
+    "was a moment ago.");
 
 const u8 gLanturnPokedexTextUnused[] = _("");
 
@@ -1217,40 +1176,41 @@ const u8 gIgglybuffPokedexText[] = _(
 const u8 gIgglybuffPokedexTextUnused[] = _("");
 
 const u8 gTogepiPokedexText[] = _(
-    "It is handed over before it hatches.\n"
-    "It comes out already facing whoever\n"
-    "was holding it.");
+    "Whoever held it last is who it looks for\n"
+    "first. It will be a long time learning\n"
+    "anyone else.");
 
 const u8 gTogepiPokedexTextUnused[] = _("");
 
 const u8 gTogeticPokedexText[] = _(
-    "It stays up only near people who have\n"
-    "not let it fall. Nobody can say how\n"
-    "it knows which ones those are.");
+    "Those it stays near stand a little\n"
+    "straighter. Nobody has told them why.");
 
 const u8 gTogeticPokedexTextUnused[] = _("");
 
 const u8 gNatuPokedexText[] = _(
-    "It will not look away. Whatever it is\n"
-    "watching for has not happened yet.");
+    "Everything else in its sight goes\n"
+    "unwatched.");
 
 const u8 gNatuPokedexTextUnused[] = _("");
 
 const u8 gXatuPokedexText[] = _(
-    "It sees what is coming and does not move.\n"
-    "It has already seen itself not moving.");
+    "Those who stand near it feel the moment\n"
+    "before it happens. They cannot tell\n"
+    "anyone what they felt.");
 
 const u8 gXatuPokedexTextUnused[] = _("");
 
 const u8 gMareepPokedexText[] = _(
-    "It gathers what it is standing in. You find\n"
-    "out how much by touching it.");
+    "Whoever touches it first finds out for\n"
+    "everyone.");
 
 const u8 gMareepPokedexTextUnused[] = _("");
 
 const u8 gFlaaffyPokedexText[] = _(
-    "The charge goes up and nothing spends it.\n"
-    "Everyone nearby is careful now.");
+    "People lower their voices around it\n"
+    "without knowing why. The quiet has become\n"
+    "part of the room.");
 
 const u8 gFlaaffyPokedexTextUnused[] = _("");
 
@@ -1262,15 +1222,15 @@ const u8 gAmpharosPokedexText[] = _(
 const u8 gAmpharosPokedexTextUnused[] = _("");
 
 const u8 gBellossomPokedexText[] = _(
-        "Every answer in it was checked by hand,\n"
-        "once, a long time ago. Nobody has\n"
-        "checked the hands.");
+    "Everything measured against it is only as\n"
+    "right as it is. It has never been measured\n"
+    "against anything.");
 
 const u8 gBellossomPokedexTextUnused[] = _("");
 
 const u8 gMarillPokedexText[] = _(
-    "It floats at whatever level the water is.\n"
-    "It does not experience this as a choice.");
+    "When the water drops, so does it, and it\n"
+    "calls that a decision too.");
 
 const u8 gMarillPokedexTextUnused[] = _("");
 
@@ -1281,9 +1241,8 @@ const u8 gAzumarillPokedexText[] = _(
 const u8 gAzumarillPokedexTextUnused[] = _("");
 
 const u8 gSudowoodoPokedexText[] = _(
-    "It reports itself as something older\n"
-    "and better rooted than it is. Nothing\n"
-    "has ever checked.");
+    "Everything that trusted it was built a\n"
+    "little crooked on top of it, and holds.");
 
 const u8 gSudowoodoPokedexTextUnused[] = _("");
 
@@ -1295,15 +1254,15 @@ const u8 gPolitoedPokedexText[] = _(
 const u8 gPolitoedPokedexTextUnused[] = _("");
 
 const u8 gHoppipPokedexText[] = _(
-    "It goes where the air goes. Ask it\n"
-    "afterwards and it will tell you that it\n"
-    "chose.");
+    "Its choices and the wind's have never once\n"
+    "disagreed.");
 
 const u8 gHoppipPokedexTextUnused[] = _("");
 
 const u8 gSkiploomPokedexText[] = _(
-    "It opens when it is warm and shuts when it\n"
-    "is not. It calls both of these decisions.");
+    "Those who live with it learn its weather\n"
+    "and call it character. It has never\n"
+    "promised either.");
 
 const u8 gSkiploomPokedexTextUnused[] = _("");
 
@@ -1314,36 +1273,33 @@ const u8 gJumpluffPokedexText[] = _(
 const u8 gJumpluffPokedexTextUnused[] = _("");
 
 const u8 gAipomPokedexText[] = _(
-    "It has a hand where a tail should be.\n"
-    "Everything it passes is picked up and\n"
-    "turned over.");
+    "Everything it picked up has been put down\n"
+    "somewhere else.");
 
 const u8 gAipomPokedexTextUnused[] = _("");
 
 const u8 gSunkernPokedexText[] = _(
-    "It is owed a turn and has not had one.\n"
-    "Everything it needs is here. Nothing\n"
-    "has given it the time.");
+    "Everyone else has been busy. None of\n"
+    "them was unkind. It is still waiting.");
 
 const u8 gSunkernPokedexTextUnused[] = _("");
 
 const u8 gSunfloraPokedexText[] = _(
-    "It was finally given the share it was\n"
-    "owed, and opened at once. It can do\n"
-    "nothing it could not do before.");
+    "It was given what it was owed. Nobody\n"
+    "gave back the time it spent waiting to be\n"
+    "given it.");
 
 const u8 gSunfloraPokedexTextUnused[] = _("");
 
 const u8 gYanmaPokedexText[] = _(
-    "It sees everything at once and nothing in\n"
-    "particular. What it notices, it notices too\n"
-    "late.");
+    "By the time it turns to look, what it saw\n"
+    "has already happened.");
 
 const u8 gYanmaPokedexTextUnused[] = _("");
 
 const u8 gWooperPokedexText[] = _(
-    "It sits in the mud. Things happen above\n"
-    "it, and are reported to it, and it stays.");
+    "Nothing reported to it has ever changed\n"
+    "what it does.");
 
 const u8 gWooperPokedexTextUnused[] = _("");
 
@@ -1367,9 +1323,8 @@ const u8 gUmbreonPokedexText[] = _(
 const u8 gUmbreonPokedexTextUnused[] = _("");
 
 const u8 gMurkrowPokedexText[] = _(
-    "It arrives before the thing does. People\n"
-    "stopped asking which one caused the\n"
-    "other.");
+    "Where it has been seen, people now leave\n"
+    "before anything happens.");
 
 const u8 gMurkrowPokedexTextUnused[] = _("");
 
@@ -1381,34 +1336,33 @@ const u8 gSlowkingPokedexText[] = _(
 const u8 gSlowkingPokedexTextUnused[] = _("");
 
 const u8 gMisdreavusPokedexText[] = _(
-    "It feeds on being expected. The waiting is\n"
-    "the part it eats.");
+    "Everyone near it braces for something.\n"
+    "The bracing is all that comes.");
 
 const u8 gMisdreavusPokedexTextUnused[] = _("");
 
 const u8 gUnownPokedexText[] = _(
-    "There are twenty-six and they are all the\n"
-    "same one. Together they say something\n"
-    "nobody has read.");
+    "Whoever finally reads it will think the\n"
+    "message was always there.");
 
 const u8 gUnownPokedexTextUnused[] = _("");
 
 const u8 gWobbuffetPokedexText[] = _(
-    "It never moves first. Everything done to\n"
-    "it comes back later, at twice the size.");
+    "Everything that has met it learns to keep\n"
+    "still.");
 
 const u8 gWobbuffetPokedexTextUnused[] = _("");
 
 const u8 gGirafarigPokedexText[] = _(
-    "It sends and receives at once, from\n"
-    "opposite ends. Neither end is told\n"
-    "what the other has agreed to.");
+    "Both ends think the conversation went\n"
+    "well. They are describing two different\n"
+    "conversations.");
 
 const u8 gGirafarigPokedexTextUnused[] = _("");
 
 const u8 gPinecoPokedexText[] = _(
-    "It hangs still for months. Touch it once\n"
-    "and there is nothing left to discuss.");
+    "Whatever touched it will not touch the\n"
+    "next one.");
 
 const u8 gPinecoPokedexTextUnused[] = _("");
 
@@ -1419,8 +1373,8 @@ const u8 gForretressPokedexText[] = _(
 const u8 gForretressPokedexTextUnused[] = _("");
 
 const u8 gDunsparcePokedexText[] = _(
-    "It is common. It is not hidden. Almost\n"
-    "nobody reports having seen one.");
+    "The one place nobody checks is where it\n"
+    "lives.");
 
 const u8 gDunsparcePokedexTextUnused[] = _("");
 
@@ -1432,16 +1386,16 @@ const u8 gGligarPokedexText[] = _(
 const u8 gGligarPokedexTextUnused[] = _("");
 
 const u8 gSteelixPokedexText[] = _(
-        "The connection is physical and cannot be\n"
-        "renegotiated. Cutting it is the only\n"
-        "change on offer.");
+    "Everyone on the line knows exactly who\n"
+    "they are talking to. There is no other\n"
+    "way to leave.");
 
 const u8 gSteelixPokedexTextUnused[] = _("");
 
 const u8 gSnubbullPokedexText[] = _(
-    "It announces a fault in the loudest\n"
-    "voice it has. Nothing has failed. It\n"
-    "will say so again tomorrow.");
+    "The day it is right, nobody will be\n"
+    "listening. It has been making sure of that\n"
+    "for years.");
 
 const u8 gSnubbullPokedexTextUnused[] = _("");
 
@@ -1453,9 +1407,8 @@ const u8 gGranbullPokedexText[] = _(
 const u8 gGranbullPokedexTextUnused[] = _("");
 
 const u8 gQwilfishPokedexText[] = _(
-    "Threatened, it becomes too large to\n"
-    "swallow. It stays that size long\n"
-    "afterwards.");
+    "Whatever tried to swallow it once is still\n"
+    "wary of small things.");
 
 const u8 gQwilfishPokedexTextUnused[] = _("");
 
@@ -1467,58 +1420,57 @@ const u8 gScizorPokedexText[] = _(
 const u8 gScizorPokedexTextUnused[] = _("");
 
 const u8 gShucklePokedexText[] = _(
-    "It keeps everything it finds inside itself.\n"
-    "What comes out is not what went in.");
+    "Nothing it has given back was what anyone\n"
+    "asked for.");
 
 const u8 gShucklePokedexTextUnused[] = _("");
 
 const u8 gHeracrossPokedexText[] = _(
-    "It pushes at the same thing all night. By\n"
-    "morning the thing has moved and it has not\n"
-    "stopped.");
+    "The thing it pushed is somewhere else\n"
+    "now. Nobody remembers why it was moved.");
 
 const u8 gHeracrossPokedexTextUnused[] = _("");
 
 const u8 gSneaselPokedexText[] = _(
-    "It waits for the parent to leave. It has\n"
-    "never once been in a hurry.");
+    "The parent comes back to find the nest\n"
+    "just as it was, less one.");
 
 const u8 gSneaselPokedexTextUnused[] = _("");
 
 const u8 gTeddiursaPokedexText[] = _(
-    "It licks its paws where the honey was.\n"
-    "The honey is gone and the licking is not.");
+    "The paws are worn thin. It was never\n"
+    "about the honey.");
 
 const u8 gTeddiursaPokedexTextUnused[] = _("");
 
 const u8 gUrsaringPokedexText[] = _(
-    "It remembers every tree that ever had\n"
-    "honey. It goes back to all of them.");
+    "Some of the trees are gone. It still goes\n"
+    "to where they were, and waits the usual\n"
+    "time.");
 
 const u8 gUrsaringPokedexTextUnused[] = _("");
 
 const u8 gSlugmaPokedexText[] = _(
-    "It never reaches the temperature it is\n"
-    "heading for. It has never once cooled\n"
-    "either.");
+    "Everything around it has had to learn to\n"
+    "live warm.");
 
 const u8 gSlugmaPokedexTextUnused[] = _("");
 
 const u8 gMagcargoPokedexText[] = _(
-    "Still molten under the shell. Nothing that\n"
-    "touches the shell finds that out.");
+    "Whatever touches it thinks it has met the\n"
+    "whole of it.");
 
 const u8 gMagcargoPokedexTextUnused[] = _("");
 
 const u8 gSwinubPokedexText[] = _(
-    "It finds what is buried without looking.\n"
-    "Asked how, it keeps walking.");
+    "What it finds is kept. How it found it is\n"
+    "not.");
 
 const u8 gSwinubPokedexTextUnused[] = _("");
 
 const u8 gPiloswinePokedexText[] = _(
-    "It cannot see past its own hair. It\n"
-    "charges anyway, and is usually right.");
+    "The ones who follow it get there first.\n"
+    "They do not always know where there was.");
 
 const u8 gPiloswinePokedexTextUnused[] = _("");
 
@@ -1530,9 +1482,9 @@ const u8 gCorsolaPokedexText[] = _(
 const u8 gCorsolaPokedexTextUnused[] = _("");
 
 const u8 gRemoraidPokedexText[] = _(
-    "It fastens to something larger and\n"
-    "travels. It has never chosen the\n"
-    "direction.");
+    "Wherever the larger thing goes, it\n"
+    "arrives, and is counted as having\n"
+    "travelled.");
 
 const u8 gRemoraidPokedexTextUnused[] = _("");
 
@@ -1543,48 +1495,46 @@ const u8 gOctilleryPokedexText[] = _(
 const u8 gOctilleryPokedexTextUnused[] = _("");
 
 const u8 gDelibirdPokedexText[] = _(
-    "It brings something to whoever fed it. The\n"
-    "amounts have never matched and it keeps\n"
-    "coming.");
+    "Whoever fed it stopped counting long ago.\n"
+    "It has not stopped counting.");
 
 const u8 gDelibirdPokedexTextUnused[] = _("");
 
 const u8 gMantinePokedexText[] = _(
-    "Whatever is put on it, it rises anyway.\n"
-    "Nobody has found the weight that settles\n"
-    "it.");
+    "Everything piled on it is carried up as\n"
+    "well, whether or not it wanted to be.");
 
 const u8 gMantinePokedexTextUnused[] = _("");
 
 const u8 gSkarmoryPokedexText[] = _(
-    "Every edge of it is a defence. It cannot\n"
-    "be held, and it cannot hold.");
+    "Everything that has ever tried to help it\n"
+    "has come away cut.");
 
 const u8 gSkarmoryPokedexTextUnused[] = _("");
 
 const u8 gHoundourPokedexText[] = _(
-    "It picks one and follows only that one.\n"
-    "The others walk past it unharmed.");
+    "The others have learned they can walk\n"
+    "right past it.");
 
 const u8 gHoundourPokedexTextUnused[] = _("");
 
 const u8 gHoundoomPokedexText[] = _(
-    "Everyone who has heard its cry remembers\n"
-    "it. It has only ever had the one.");
+    "Those who heard it begin to hear it\n"
+    "everywhere. The cry did not follow them.\n"
+    "They brought it.");
 
 const u8 gHoundoomPokedexTextUnused[] = _("");
 
 const u8 gKingdraPokedexText[] = _(
-        "Small errors upstream arrive here as\n"
-        "large ones. Nothing was wrong when it\n"
-        "left.");
+    "Downstream they blame the storm. Upstream\n"
+    "they remember a very small thing, and say\n"
+    "nothing.");
 
 const u8 gKingdraPokedexTextUnused[] = _("");
 
 const u8 gPhanpyPokedexText[] = _(
-    "Small, and it keeps everything. It will\n"
-    "bring back something from a year ago,\n"
-    "exactly.");
+    "It brings back things everyone else had\n"
+    "agreed to forget.");
 
 const u8 gPhanpyPokedexTextUnused[] = _("");
 
@@ -1602,14 +1552,14 @@ const u8 gPorygon2PokedexText[] = _(
 const u8 gPorygon2PokedexTextUnused[] = _("");
 
 const u8 gStantlerPokedexText[] = _(
-    "Look at its antlers and the ground tilts.\n"
-    "The ground has not tilted.");
+    "Those who looked walk differently for a\n"
+    "while afterwards.");
 
 const u8 gStantlerPokedexTextUnused[] = _("");
 
 const u8 gSmearglePokedexText[] = _(
-    "It does whatever it last saw done. Nobody\n"
-    "has seen it do a thing of its own.");
+    "Whoever it watched last is now doing\n"
+    "everything twice.");
 
 const u8 gSmearglePokedexTextUnused[] = _("");
 
@@ -1620,8 +1570,9 @@ const u8 gTyroguePokedexText[] = _(
 const u8 gTyroguePokedexTextUnused[] = _("");
 
 const u8 gHitmontopPokedexText[] = _(
-        "It arrives back where it started and calls\n"
-        "that the finish. It is always very fast.");
+    "Whoever follows it arrives where they\n"
+    "started, faster than ever, and calls it\n"
+    "progress.");
 
 const u8 gHitmontopPokedexTextUnused[] = _("");
 
@@ -1645,9 +1596,9 @@ const u8 gMagbyPokedexText[] = _(
 const u8 gMagbyPokedexTextUnused[] = _("");
 
 const u8 gMiltankPokedexText[] = _(
-    "It holds what everything nearby will\n"
-    "want next and gives it up at once.\n"
-    "Asking it costs less than working.");
+    "Everyone nearby has forgotten how to do\n"
+    "the work themselves. It has never once\n"
+    "been asked to.");
 
 const u8 gMiltankPokedexTextUnused[] = _("");
 
@@ -1680,8 +1631,8 @@ const u8 gSuicunePokedexText[] = _(
 const u8 gSuicunePokedexTextUnused[] = _("");
 
 const u8 gLarvitarPokedexText[] = _(
-    "It eats a mountain to get out of the\n"
-    "mountain. It is still eating.");
+    "The mountain has been getting smaller for\n"
+    "years. It has not got out.");
 
 const u8 gLarvitarPokedexTextUnused[] = _("");
 
@@ -1693,23 +1644,22 @@ const u8 gPupitarPokedexText[] = _(
 const u8 gPupitarPokedexTextUnused[] = _("");
 
 const u8 gTyranitarPokedexText[] = _(
-    "It brings the mountain down and stands in\n"
-    "it. It has been owed something since it\n"
-    "was small.");
+    "Everyone who remembers what it was owed\n"
+    "has moved away. It has not.");
 
 const u8 gTyranitarPokedexTextUnused[] = _("");
 
 const u8 gLugiaPokedexText[] = _(
-    "Three of them quarrelled until it\n"
-    "arrived. It took no side and said\n"
-    "nothing. They have not quarrelled since.");
+    "The peace it keeps is real. None of the\n"
+    "three could tell you what it cost,\n"
+    "because it never said.");
 
 const u8 gLugiaPokedexTextUnused[] = _("");
 
 const u8 gHoOhPokedexText[] = _(
-    "It is the only one that can start\n"
-    "itself. What it leaves behind is what\n"
-    "it starts from.");
+    "Everything it burns becomes the start of\n"
+    "it. Whatever was there before is not\n"
+    "coming back.");
 
 const u8 gHoOhPokedexTextUnused[] = _("");
 
@@ -2213,9 +2163,8 @@ const u8 gWailordPokedexText[] = _(
 const u8 gWailordPokedexTextUnused[] = _("");
 
 const u8 gNumelPokedexText[] = _(
-    "It starts every picture as static and\n"
-    "takes the noise away until something is\n"
-    "left. It cannot say what it will draw.");
+    "What it draws is taken for a likeness. It\n"
+    "was never looking at the thing at all.");
 
 const u8 gNumelPokedexTextUnused[] = _("");
 
@@ -2662,9 +2611,9 @@ const u8 gJirachiPokedexText[] = _(
 const u8 gJirachiPokedexTextUnused[] = _("");
 
 const u8 gDeoxysPokedexText[] = _(
-    "It changes shape while it is being looked\n"
-    "at. Hold on through every one, and the\n"
-    "last one is the true one.");
+    "Whoever lets go early keeps the wrong\n"
+    "shape forever, and swears it was the real\n"
+    "one.");
 
 const u8 gDeoxysPokedexTextUnused[] = _("");
 
