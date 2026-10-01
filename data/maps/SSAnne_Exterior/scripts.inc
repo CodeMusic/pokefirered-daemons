@@ -12,6 +12,32 @@ SSAnne_Exterior_OnLoad::
 
 SSAnne_Exterior_EventScript_PierEnd::
 	setmetatile 32, 14, 0x1C1, FALSE
+@  T-325 (the user, 2026-10-01): and a gangway the ship left behind, from the pier to the far quay, so the singing fir
+@  can be walked to. Row 9 is raised to the pier's height in map.bin and stays blocked water while the ship is in.
+@  TRAVERSE still reaches it the old way.
+	setmetatile 34, 9, 0x1C1, FALSE
+	setmetatile 35, 9, 0x1C1, FALSE
+	setmetatile 36, 9, 0x1C1, FALSE
+	setmetatile 37, 9, 0x1C1, FALSE
+	setmetatile 38, 9, 0x1C1, FALSE
+	setmetatile 39, 9, 0x1C1, FALSE
+	setmetatile 40, 9, 0x1C1, FALSE
+	setmetatile 41, 9, 0x1C1, FALSE
+	setmetatile 42, 9, 0x1C1, FALSE
+	setmetatile 43, 9, 0x1C1, FALSE
+	setmetatile 44, 9, 0x1C1, FALSE
+	setmetatile 45, 9, 0x1C1, FALSE
+	setmetatile 46, 9, 0x1C1, FALSE
+	setmetatile 47, 9, 0x1C1, FALSE
+	setmetatile 48, 9, 0x1C1, FALSE
+	setmetatile 49, 9, 0x1C1, FALSE
+	setmetatile 50, 9, 0x1C1, FALSE
+	setmetatile 51, 9, 0x1C1, FALSE
+	setmetatile 52, 9, 0x1C1, FALSE
+	setmetatile 53, 9, 0x1C1, FALSE
+	setmetatile 54, 9, 0x1C1, FALSE
+	setmetatile 55, 9, 0x1C1, FALSE
+	setmetatile 56, 9, 0x1C1, FALSE
 	return
 
 SSAnne_Exterior_OnTransition::
