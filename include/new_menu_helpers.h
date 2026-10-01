@@ -43,9 +43,7 @@ void DisplayYesNoMenuDefaultYes(void);
 void DisplayYesNoMenuDefaultNo(void);
 u8 GetTextSpeedSetting(void);
 u8 CreateStartMenuWindow(u8 height);
-#if DAEMONS_DEBUG
-void SetStartMenuWindowWidth(u8 width);
-#endif
+void SetStartMenuWindowWidth(u8 width);   // T-332: every build -- the START menu is two columns
 u8 GetStartMenuWindowId(void);
 void RemoveStartMenuWindow(void);
 u16 GetStdWindowBaseTileNum(void);
