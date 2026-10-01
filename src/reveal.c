@@ -45,6 +45,25 @@ static const struct { const u8 *script; u16 foundFlag; } sFinds[] = {
     { ViridianCity_Mart_EventScript_ShelfEnd,          FLAG_GOT_OPUS },
 };
 
+//  T-323: THE BEACONS. A few things sparkle from the very start, REVEAL or not, until they have been read -- the
+//  bedroom poster first, which says what the sparkles are. Many players would walk past a poster; nobody walks past
+//  a sparkle. The poster is the one sparkle the game gives you before it teaches you to see the others.
+static const struct { const u8 *script; u16 readFlag; } sBeacons[] = {
+    { PalletTown_PlayersHouse_2F_EventScript_Sign, FLAG_POSTER_READ },
+};
+
+static bool8 IsBeacon(const struct BgEvent *e)
+{
+    u32 i;
+
+    if (e->kind > BG_KIND_SIGN_LAST)
+        return FALSE;
+    for (i = 0; i < ARRAY_COUNT(sBeacons); i++)
+        if (e->bgUnion.script == sBeacons[i].script)
+            return !FlagGet(sBeacons[i].readFlag);
+    return FALSE;
+}
+
 static bool8 IsShown(const struct BgEvent *e)
 {
     u32 i;
@@ -86,8 +105,8 @@ void Reveal_Update(void)
     s16 px, py, dx, dy;
     u32 i;
 
-    if (!FlagGet(FLAG_GOT_REVEAL))
-        return;
+    bool8 installed = FlagGet(FLAG_GOT_REVEAL);
+
     if (++sRevealTimer < REVEAL_PERIOD)
         return;
     sRevealTimer = 0;
@@ -97,7 +116,7 @@ void Reveal_Update(void)
     for (i = 0; i < events->bgEventCount; i++)
     {
         e = &events->bgEvents[i];
-        if (!IsShown(e))
+        if (!IsBeacon(e) && !(installed && IsShown(e)))
             continue;
         dx = e->x + 7 - px;
         dy = e->y + 7 - py;

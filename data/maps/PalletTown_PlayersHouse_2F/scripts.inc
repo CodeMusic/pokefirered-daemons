@@ -124,7 +124,10 @@ PalletTown_PlayersHouse_2F_EventScript_CodeLog::
 	msgbox PalletTown_PlayersHouse_2F_Text_CodeLog
 	goto PalletTown_PlayersHouse_2F_EventScript_NESEnd
 
+@  T-323 (the user, 2026-10-01): the poster is a map with writing on it -- the first sign in the game, so it may say
+@  more plainly than any later one that everything here means more than it looks. It sparkles until read (reveal.c).
 PalletTown_PlayersHouse_2F_EventScript_Sign::
+	setflag FLAG_POSTER_READ
 	msgbox PalletTown_PlayersHouse_2F_Text_PressLRForHelp, MSGBOX_SIGN
 	end
 

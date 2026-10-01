@@ -70,7 +70,23 @@ PalletTown_PlayersHouse_2F_Text_RiddleLog::
     .string "something goes wrong.\p"
     .string "Type what it is.$"
 
+@  T-323, DRAFT: draft A, the annotated map, with the user's line about the sparkles.
 PalletTown_PlayersHouse_2F_Text_PressLRForHelp::
-    .string "Somebody pinned this up.\p"
-    .string "L or R, if you get stuck.$"
+    .string "A map of the region, pinned up by\n"
+    .string "the bed. Someone has written on it.\p"
+    .string "Across the mainland:\n"
+    .string "LEARN HOW IT WORKS.\p"
+    .string "Across the islands:\n"
+    .string "LEARN HOW IT FEELS.\p"
+    .string "Lone trees circled, here and there:\n"
+    .string "AND UNDER EACH, THE OTHER HALF.\p"
+    .string "Along the bottom: Every name here\n"
+    .string "means something. So does every sign.\p"
+    .string "In the corner, in pencil: You may\n"
+    .string "see the odd sparkle now.\p"
+    .string "Finish your schooling in CALLOW and\n"
+    .string "read some more in BRAZEN, and you\l"
+    .string "will start to see them everywhere.\p"
+    .string "And under that: L or R, if you get\n"
+    .string "stuck.$"
 

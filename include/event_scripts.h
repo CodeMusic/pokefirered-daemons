@@ -1299,6 +1299,7 @@ extern const u8 TradeCenter_TerminateLink[];
 // T-235: REVEAL asks whether a sign is ARTSAI's drawing.
 extern const u8 Route21_North_Station_EventScript_VisitorLog[];
 extern const u8 OneIsland_House2_EventScript_Guide[];
+extern const u8 PalletTown_PlayersHouse_2F_EventScript_Sign[];   // T-323: the bedroom poster sparkles until read
 extern const u8 CeladonCity_Condominiums_3F_EventScript_Folds[];
 extern const u8 ViridianCity_Mart_EventScript_ShelfEnd[];
 

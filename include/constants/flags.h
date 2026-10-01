@@ -1615,6 +1615,8 @@
 #define FLAG_GUIDE_READ               (DAEMONS_FLAGS_START + 0x67)   // the GUIDE's last entry has been turned to
 //  T-326: MOM has told you about her years on ships, and sent you off to look again (once, after the lab).
 #define FLAG_MOM_SAW_YOU_OFF          (DAEMONS_FLAGS_START + 0x68)
+//  T-323: the bedroom poster has been read; until then it sparkles, REVEAL or not.
+#define FLAG_POSTER_READ              (DAEMONS_FLAGS_START + 0x69)
 
 //  T-19. Two beats of one scene, five islands and a sea apart.
 #define FLAG_TY_GAVE_PAYLOAD          (DAEMONS_FLAGS_START + 0x20)
