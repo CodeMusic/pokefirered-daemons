@@ -288,18 +288,18 @@ static const u8 sTitle_Lab_Transcript[]    = _("TRANSCRIPT");
 extern const u8 gText_Boy[];    // "REASON" and "INSTINCT" (strings.c): the choice at the title
 extern const u8 gText_Girl[];
 static const u8 sTitle_Lab_Choices[]   = _("WHAT YOU CHOSE");
-//  PLACEHOLDER labels: the page's words are a NOTEBOOK draft, and NOTEBOOK drafts stay on the private page until the
-//  user approves them. The structure is final -- what it reads, when, and in what order -- and the words drop in.
-static const u8 sChoices_Head[]        = _("LAB NOTES. The words of this page\nwait to be approved.\p");
-static const u8 sChoices_Began[]       = _("TITLE: ");
-static const u8 sChoices_ShoesDad[]    = _("SHOES: FATHER\p");
-static const u8 sChoices_ShoesMom[]    = _("SHOES: MOTHER\p");
-static const u8 sChoices_First[]       = _("FIRST: ");
-static const u8 sChoices_Rival[]       = _("RIVAL: {RIVAL}\p");
-static const u8 sChoices_Paper[]       = _("PAPER: PASSED\p");
-static const u8 sChoices_Starr[]       = _("S.T.A.R.R.: BOUND\p");
-static const u8 sChoices_End[]         = _("END");
-static const u8 sChoices_Stop[]        = _("\p");
+//  The words, APPROVED as drafts by the user 2026-10-01 ("yes to all"), with one fix: the rival's line names the
+//  rival as the player named them ({RIVAL}), never a fixed name. DRAFT, every line.
+static const u8 sChoices_Head[]        = _("Compiled by the INDEX, on request.\p");
+static const u8 sChoices_Began[]       = _("INFERRED: You began as ");
+static const u8 sChoices_ShoesDad[]    = _("INFERRED: The shoes you run in\nwere your father's.\p");
+static const u8 sChoices_ShoesMom[]    = _("INFERRED: The shoes you run in\nwere your mother's.\p");
+static const u8 sChoices_First[]       = _("INFERRED: Your first daemon was\n");
+static const u8 sChoices_Rival[]       = _("You told CRYSTAL to call him\n{RIVAL}.\p");
+static const u8 sChoices_Paper[]       = _("You sat the paper at CALLOW,\nand passed.\p");
+static const u8 sChoices_Starr[]       = _("You bound S.T.A.R.R.\p");
+static const u8 sChoices_End[]         = _("Everything above is complete.\nNothing above is missing.");
+static const u8 sChoices_Stop[]        = _(".\p");
 
 static void Notebook_WriteChoices(u8 *dest)
 {
