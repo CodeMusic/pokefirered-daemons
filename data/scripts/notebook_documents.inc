@@ -90,6 +90,24 @@ NotebookDoc_LAB_NOTES_6_Read::
 	waitstate
 	return
 
+NotebookDoc_CORRESPONDENCE_1::
+	goto_if_set FLAG_NOTEBOOK_DOC_CORRESPONDENCE_1, NotebookDoc_CORRESPONDENCE_1_Again
+	setflag FLAG_NOTEBOOK_DOC_CORRESPONDENCE_1
+	call NotebookDoc_CORRESPONDENCE_1_Read
+	call EventScript_NotebookCopied
+	return
+
+NotebookDoc_CORRESPONDENCE_1_Again::
+	call NotebookDoc_CORRESPONDENCE_1_Read
+	return
+
+NotebookDoc_CORRESPONDENCE_1_Read::
+	setvar VAR_0x8004, FLAG_NOTEBOOK_DOC_CORRESPONDENCE_1
+	fadescreen FADE_TO_BLACK
+	special Notebook_ReadFlagEntry
+	waitstate
+	return
+
 NotebookDoc_CORRESPONDENCE_2::
 	goto_if_set FLAG_NOTEBOOK_DOC_CORRESPONDENCE_2, NotebookDoc_CORRESPONDENCE_2_Again
 	setflag FLAG_NOTEBOOK_DOC_CORRESPONDENCE_2
@@ -234,6 +252,24 @@ NotebookDoc_PROSPECTUS_1_Read::
 	waitstate
 	return
 
+NotebookDoc_PROSPECTUS_3::
+	goto_if_set FLAG_NOTEBOOK_DOC_PROSPECTUS_3, NotebookDoc_PROSPECTUS_3_Again
+	setflag FLAG_NOTEBOOK_DOC_PROSPECTUS_3
+	call NotebookDoc_PROSPECTUS_3_Read
+	call EventScript_NotebookCopied
+	return
+
+NotebookDoc_PROSPECTUS_3_Again::
+	call NotebookDoc_PROSPECTUS_3_Read
+	return
+
+NotebookDoc_PROSPECTUS_3_Read::
+	setvar VAR_0x8004, FLAG_NOTEBOOK_DOC_PROSPECTUS_3
+	fadescreen FADE_TO_BLACK
+	special Notebook_ReadFlagEntry
+	waitstate
+	return
+
 NotebookDoc_PROSPECTUS_5::
 	goto_if_set FLAG_NOTEBOOK_DOC_PROSPECTUS_5, NotebookDoc_PROSPECTUS_5_Again
 	setflag FLAG_NOTEBOOK_DOC_PROSPECTUS_5
@@ -354,6 +390,13 @@ NotebookDoc_MtMoon_B2F_30_11_0::
 	releaseall
 	end
 
+NotebookDoc_PokemonTower_2F_15_10::
+	lockall
+	call NotebookDoc_CORRESPONDENCE_1
+NotebookDoc_PokemonTower_2F_15_10_0::
+	releaseall
+	end
+
 NotebookDoc_PokemonTower_3F_11_10::
 	lockall
 	call NotebookDoc_THE_FILE_6
@@ -387,6 +430,13 @@ NotebookDoc_SaffronCity_MrPsychicsHouse_5_5_1::
 	goto_if_unset FLAG_OWL_CONCEDED, NotebookDoc_SaffronCity_MrPsychicsHouse_5_5_2
 	call NotebookDoc_PEER_REVIEW_4
 NotebookDoc_SaffronCity_MrPsychicsHouse_5_5_2::
+	releaseall
+	end
+
+NotebookDoc_SilphCo_1F_15_3::
+	lockall
+	call NotebookDoc_PROSPECTUS_3
+NotebookDoc_SilphCo_1F_15_3_0::
 	releaseall
 	end
 

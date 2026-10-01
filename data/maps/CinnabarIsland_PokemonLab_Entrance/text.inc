@@ -17,15 +17,20 @@ CinnabarIsland_PokemonLab_Entrance_Text_PhotoOfLabFounderDrFuji::
     .string "Personnel file PR-0903.\p"
     .string "The file is complete.$"
 
+@  T-335, DRAFT (2026-10-01): dated JAN 2, with the founder's own concern noted and the outcome recorded.
 CinnabarIsland_PokemonLab_Entrance_Text_MeetingRoomSign::
-    .string "Meeting Room Minutes\p"
+    .string "Meeting Room Minutes. JAN 2.\p"
+    .string "Item 3. Concerns raised by the\n"
+    .string "founder, re: workload. Noted.\p"
     .string "Item 4. Concern raised re: the\n"
     .string "founder.\p"
     .string "Moves between unrelated fields\n"
     .string "mid-argument.\p"
     .string "The two present could not follow.\p"
     .string "Recorded as unable to hold a\n"
-    .string "single thread.$"
+    .string "single thread.\p"
+    .string "Action: position eliminated,\n"
+    .string "effective today.$"
 
 CinnabarIsland_PokemonLab_Entrance_Text_RAndDRoomSign::
     .string "R-and-D Requisitions\p"
@@ -38,3 +43,10 @@ CinnabarIsland_PokemonLab_Entrance_Text_RAndDRoomSign::
 CinnabarIsland_PokemonLab_Entrance_Text_TestingRoomSign::
     .string "DAEMON LAB Testing Room$"
 
+@  T-335, DRAFT (the user, 2026-10-01): the goodbye she was not allowed to give, in the institution's own register.
+CinnabarIsland_PokemonLab_Entrance_Text_StaffNotice::
+    .string "An old notice, still pinned up.\p"
+    .string "STAFF NOTICE. OCT 3.\p"
+    .string "Today is C. CLEAR's last day.\n"
+    .string "Her access ended SEPT 3.\p"
+    .string "No send-off is planned.$"

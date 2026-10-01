@@ -44,3 +44,7 @@ CinnabarIsland_PokemonLab_Entrance_EventScript_RAndDRoomSign::
 CinnabarIsland_PokemonLab_Entrance_EventScript_TestingRoomSign::
 	msgbox CinnabarIsland_PokemonLab_Entrance_Text_TestingRoomSign, MSGBOX_SIGN
 	end
+
+CinnabarIsland_PokemonLab_Entrance_EventScript_StaffNotice::
+	msgbox CinnabarIsland_PokemonLab_Entrance_Text_StaffNotice, MSGBOX_SIGN
+	end

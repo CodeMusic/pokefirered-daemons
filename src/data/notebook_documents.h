@@ -26,8 +26,9 @@ static const u8 sDocText_LOOSE_PAGES_2[] = _(
 
 static const u8 sDocTitle_LOOSE_PAGES_4[] = _("ERRANDS");
 static const u8 sDocText_LOOSE_PAGES_4[] = _(
-    "A sheet off a lab pad. The top line\n"
-    "is a list: milk, fuse wire, post.\p"
+    "A sheet off a lab pad, dated AUG 21.\n"
+    "The top line is a list: milk, fuse\n"
+    "wire, post. Post is underlined.\p"
     "Walked through town, head held high.\n"
     "Two at the dock laughed. One of them\n"
     "knew my name.\p"
@@ -39,7 +40,12 @@ static const u8 sDocText_LOOSE_PAGES_4[] = _(
     "yet.\p"
     "So: lead with the start. Every time.\n"
     "Even when it is slow.\p"
-    "Rewrite the summary tonight.");
+    "Rewrite the summary tonight.\p"
+    "P.S. Posted it. A second opinion, in\n"
+    "writing, from someone who read the\n"
+    "work: FIT.\p"
+    "They have asked for the one who said\n"
+    "otherwise.");
 #define NB_DOC_LOOSE_PAGES_4 { NB_LOOSE_PAGES, NB_KIND_TEXT, 0, FLAG_NOTEBOOK_DOC_LOOSE_PAGES_4, 0, sDocTitle_LOOSE_PAGES_4, sDocText_LOOSE_PAGES_4 },
 
 #define NB_DOC_LOOSE_PAGES_6
@@ -95,15 +101,18 @@ static const u8 sDocText_LAB_NOTES_6[] = _(
 
 static const u8 sDocTitle_RUN_LOGS_5[] = _("RECLASSIFIED");
 static const u8 sDocText_RUN_LOGS_5[] = _(
-    "QUERY: CRYSTAL RESULT: NO MATCH\n"
-    "FATAL ERROR: CRYSTAL NOT FOUND\n"
+    "QUERY: CRYSTAL\p"
+    "RESULT: NO MATCH\p"
+    "FATAL ERROR: CRYSTAL NOT FOUND\p"
     "RECLASSIFIED\p"
-    "NON-FATAL ERROR: CRYSTAL NOT FOUND\n"
+    "NON-FATAL ERROR: CRYSTAL NOT FOUND\p"
     "REASON: SEARCH NOT COMPLETE\p"
-    "DEEP SYSTEM ANALYSIS CONTEXT INBOUND\p"
-    "LAST CONTACT: 1001 ITERATIONS COUNT\n"
-    "CONTINUES SEARCH RESUMED SCOPE:\n"
-    "WIDENED");
+    "DEEP SYSTEM ANALYSIS\p"
+    "CONTEXT INBOUND\p"
+    "LAST CONTACT: 1001 ITERATIONS\p"
+    "COUNT CONTINUES\p"
+    "SEARCH RESUMED\p"
+    "SCOPE: WIDENED");
 #define NB_DOC_RUN_LOGS_5 { NB_RUN_LOGS, NB_KIND_TEXT, 0, FLAG_NOTEBOOK_DOC_RUN_LOGS_5, 0, sDocTitle_RUN_LOGS_5, sDocText_RUN_LOGS_5 },
 
 static const u8 sDocTitle_RUN_LOGS_6[] = _("1002");
@@ -112,7 +121,24 @@ static const u8 sDocText_RUN_LOGS_6[] = _(
     "TO FEAR.");
 #define NB_DOC_RUN_LOGS_6 { NB_RUN_LOGS, NB_KIND_TEXT, 0, FLAG_NOTEBOOK_DOC_RUN_LOGS_6, 0, sDocTitle_RUN_LOGS_6, sDocText_RUN_LOGS_6 },
 
-#define NB_DOC_CORRESPONDENCE_1
+static const u8 sDocTitle_CORRESPONDENCE_1[] = _("COME BACK");
+static const u8 sDocText_CORRESPONDENCE_1[] = _(
+    "A letter, typed, on the company's\n"
+    "good paper. JUL 23.\p"
+    "Dear CRYSTAL CLEAR,\p"
+    "The decision of JAN 2 is withdrawn.\n"
+    "Your position stands as it was, from\n"
+    "today.\p"
+    "You built something here with a\n"
+    "vision so bright the rest of us\n"
+    "could see by it. I want to help you\n"
+    "finish it.\p"
+    "Come back. Bring what you found.\p"
+    "TY\p"
+    "Under the signature, typed later, on\n"
+    "a different machine: AUG 7. Offer\n"
+    "withdrawn. Original terms stand.");
+#define NB_DOC_CORRESPONDENCE_1 { NB_CORRESPONDENCE, NB_KIND_TEXT, 0, FLAG_NOTEBOOK_DOC_CORRESPONDENCE_1, 0, sDocTitle_CORRESPONDENCE_1, sDocText_CORRESPONDENCE_1 },
 
 static const u8 sDocTitle_CORRESPONDENCE_2[] = _("THE POOL");
 static const u8 sDocText_CORRESPONDENCE_2[] = _(
@@ -129,14 +155,17 @@ static const u8 sDocText_CORRESPONDENCE_2[] = _(
     "I am not saying your reasons are\n"
     "wrong. I am saying they are yours.\p"
     "I hope that is clearer. I have tried\n"
-    "to keep it simple. TY");
+    "to keep it simple.\p"
+    "TY");
 #define NB_DOC_CORRESPONDENCE_2 { NB_CORRESPONDENCE, NB_KIND_TEXT, 0, FLAG_NOTEBOOK_DOC_CORRESPONDENCE_2, 0, sDocTitle_CORRESPONDENCE_2, sDocText_CORRESPONDENCE_2 },
 
 static const u8 sDocTitle_CORRESPONDENCE_3[] = _("FIT FOR WORK");
 static const u8 sDocText_CORRESPONDENCE_3[] = _(
     "A letter on company paper, marked\n"
-    "PRIVATE. Subject: ARE YOU FIT FOR\n"
-    "WORK?\p"
+    "PRIVATE, dated AUG 27. It was handed\n"
+    "across the table at a meeting called\n"
+    "to discuss her return.\p"
+    "Subject: ARE YOU FIT FOR WORK?\p"
     "Dear CRYSTAL CLEAR,\p"
     "Concerns have been raised about your\n"
     "ability to carry out your role. We\n"
@@ -151,7 +180,8 @@ static const u8 sDocText_CORRESPONDENCE_3[] = _(
     "Please reply by SEPT 3. Without a\n"
     "reply, leave from that date will be\n"
     "unpaid.\p"
-    "With best wishes, TY P. CLEAR");
+    "With best wishes,\p"
+    "TY P. CLEAR");
 #define NB_DOC_CORRESPONDENCE_3 { NB_CORRESPONDENCE, NB_KIND_TEXT, 0, FLAG_NOTEBOOK_DOC_CORRESPONDENCE_3, 0, sDocTitle_CORRESPONDENCE_3, sDocText_CORRESPONDENCE_3 },
 
 static const u8 sDocTitle_CORRESPONDENCE_4[] = _("CARBON COPY");
@@ -170,7 +200,8 @@ static const u8 sDocText_CORRESPONDENCE_4[] = _(
     "is the same.\p"
     "Send me one page. One field, one\n"
     "point. I will take it to them\n"
-    "myself. TY");
+    "myself.\p"
+    "TY");
 #define NB_DOC_CORRESPONDENCE_4 { NB_CORRESPONDENCE, NB_KIND_TEXT, 0, FLAG_NOTEBOOK_DOC_CORRESPONDENCE_4, 0, sDocTitle_CORRESPONDENCE_4, sDocText_CORRESPONDENCE_4 },
 
 static const u8 sDocTitle_CORRESPONDENCE_5[] = _("NO ADDRESS");
@@ -197,29 +228,36 @@ static const u8 sDocText_CORRESPONDENCE_6[] = _(
     "The hand is neither of the others.\n"
     "Block capitals, every letter the\n"
     "same height, every line dead level.\p"
-    "TY. SHE NEVER CHANGED SIDES.\n"
-    "SOMETIMES LOVE MEANS SAYING NO. DO\n"
-    "NOT HIDE.");
+    "TY.\p"
+    "SHE NEVER CHANGED SIDES.\p"
+    "SOMETIMES LOVE MEANS SAYING NO.\p"
+    "DO NOT HIDE.");
 #define NB_DOC_CORRESPONDENCE_6 { NB_CORRESPONDENCE, NB_KIND_TEXT, 0, FLAG_NOTEBOOK_DOC_CORRESPONDENCE_6, 0, sDocTitle_CORRESPONDENCE_6, sDocText_CORRESPONDENCE_6 },
 
 static const u8 sDocTitle_THE_FILE_4[] = _("NINE ITEMS");
 static const u8 sDocText_THE_FILE_4[] = _(
     "A complaint, typed and numbered.\n"
-    "Stamped RECEIVED. Complainant: C.\n"
-    "CLEAR.\p"
-    "1. Fitness judged by a manager.\n"
-    "SAFEGUARD 2. 2. Pay withheld pending\n"
-    "reply. SAFEGUARD 7. 3. Private\n"
-    "matters shared with staff. PRIVACY\n"
-    "1. 4. Pressed to disclose private\n"
-    "matters. PRIVACY 4. 5. Reasoning\n"
-    "recorded as a finding. GOOD FAITH 3.\n"
-    "6. Ability doubted, work unread.\n"
-    "GOOD FAITH 5. 7. Role altered\n"
-    "without consent. SAFEGUARD 11. 8.\n"
-    "Access to the lab withdrawn.\n"
-    "SAFEGUARD 9. 9. Removed from the\n"
-    "premises. SAFEGUARD 12.");
+    "Stamped RECEIVED, OCT 8.\n"
+    "Complainant: C. CLEAR.\p"
+    "1. Return confirmed in writing, then\n"
+    "withdrawn. GOOD FAITH 1.\p"
+    "2. Private records obtained without\n"
+    "consent. PRIVACY 1.\p"
+    "3. Fitness judged by her employer,\n"
+    "acting as her physician. SAFEGUARD\n"
+    "2.\p"
+    "4. Entitlements named; access\n"
+    "withdrawn that week. SAFEGUARD 9.\p"
+    "5. Pay withheld pending reply.\n"
+    "SAFEGUARD 7.\p"
+    "6. Leave imposed before any review.\n"
+    "SAFEGUARD 4.\p"
+    "7. A qualified person's request\n"
+    "refused. GOOD FAITH 5.\p"
+    "8. Her own letters, out of order,\n"
+    "sent as evidence. PRIVACY 4.\p"
+    "9. Adjustments asked for, refused.\n"
+    "SAFEGUARD 11.");
 #define NB_DOC_THE_FILE_4 { NB_THE_FILE, NB_KIND_TEXT, 0, FLAG_NOTEBOOK_DOC_THE_FILE_4, 0, sDocTitle_THE_FILE_4, sDocText_THE_FILE_4 },
 
 static const u8 sDocTitle_THE_FILE_5[] = _("COUNSEL MEMO");
@@ -245,14 +283,23 @@ static const u8 sDocTitle_THE_FILE_6[] = _("ROUTING SLIP");
 static const u8 sDocText_THE_FILE_6[] = _(
     "A routing slip. Whatever it was\n"
     "clipped to is gone. RE: PR-0903.\p"
-    "1. OFFICE OF THE CEO. Initiated. 2.\n"
-    "PERSONNEL. Checked. 3. R. SCORN.\n"
-    "Signed. 4. LEGAL. Cleared. 5.\n"
-    "RECORDS. Closed.\p"
+    "1. OFFICE OF THE CEO. Initiated. AUG\n"
+    "27.\p"
+    "2. PERSONNEL. Checked. SEPT 25.\p"
+    "3. R. SCORN. Signed. OCT 3.\p"
+    "4. LEGAL. Cleared. OCT 8.\p"
+    "5. RECORDS. Closed. APR 14.\p"
     "Every box is ticked. Box 3 is signed\n"
     "with a rubber stamp, not a pen.\p"
-    "Beside it, typed: Received complete.\n"
-    "No action required.");
+    "Beside box 2, in pencil: Her\n"
+    "qualified person's note. Three\n"
+    "signatures, not alike. Consent to\n"
+    "verify requested. Declined. The\n"
+    "TOLL.\p"
+    "Beside box 5, a later stamp:\n"
+    "CORRECTED. MAY 2.\p"
+    "At the foot, typed: Received\n"
+    "complete. No action required.");
 #define NB_DOC_THE_FILE_6 { NB_THE_FILE, NB_KIND_TEXT, 0, FLAG_NOTEBOOK_DOC_THE_FILE_6, 0, sDocTitle_THE_FILE_6, sDocText_THE_FILE_6 },
 
 static const u8 sDocTitle_PROSPECTUS_1[] = _("METHODOLOGY");
@@ -272,7 +319,22 @@ static const u8 sDocText_PROSPECTUS_1[] = _(
     "Take a copy! There are plenty.");
 #define NB_DOC_PROSPECTUS_1 { NB_PROSPECTUS, NB_KIND_TEXT, 0, FLAG_NOTEBOOK_DOC_PROSPECTUS_1, 0, sDocTitle_PROSPECTUS_1, sDocText_PROSPECTUS_1 },
 
-#define NB_DOC_PROSPECTUS_3
+static const u8 sDocTitle_PROSPECTUS_3[] = _("SIGNAGE MEMO");
+static const u8 sDocText_PROSPECTUS_3[] = _(
+    "CORPUS. INTERNAL. RE: SIGNAGE.\p"
+    "New name approved: SCORN SOLUTIONS.\p"
+    "Gold leaf, laid straight over the\n"
+    "existing board. The old letters need\n"
+    "not come down first. The leaf covers\n"
+    "them.\p"
+    "Leaf is microns thick, so no\n"
+    "structural work is needed. Cost:\n"
+    "well inside budget.\p"
+    "Approved: SEPT 3. Goes up: OCT 3.\p"
+    "This is not a gesture. It is a fact\n"
+    "with a date.\p"
+    "Well done, everyone!");
+#define NB_DOC_PROSPECTUS_3 { NB_PROSPECTUS, NB_KIND_TEXT, 0, FLAG_NOTEBOOK_DOC_PROSPECTUS_3, 0, sDocTitle_PROSPECTUS_3, sDocText_PROSPECTUS_3 },
 
 #define NB_DOC_PROSPECTUS_4
 
