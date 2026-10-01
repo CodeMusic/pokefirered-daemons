@@ -99,8 +99,23 @@ PalletTown_PlayersHouse_1F_EventScript_MomHeal::
 	msgbox PalletTown_PlayersHouse_1F_Text_YouShouldTakeQuickRest
 	closemessage
 	call EventScript_OutOfCenterPartyHeal
+@  T-326 (the user, 2026-10-01): home after the eighth MARK, she asks how it looks now; holding the ticket, the ship;
+@  the first time home after the lab, her own years at sea -- then the old line.
+	goto_if_set FLAG_BADGE08_GET, PalletTown_PlayersHouse_1F_EventScript_MomHowDoesItLook
 	goto_if_set FLAG_GOT_SS_TICKET, PalletTown_PlayersHouse_1F_EventScript_MomTheShip
+	goto_if_unset FLAG_MOM_SAW_YOU_OFF, PalletTown_PlayersHouse_1F_EventScript_MomYearsAtSea
 	msgbox PalletTown_PlayersHouse_1F_Text_LookingGreatTakeCare
+	release
+	end
+
+PalletTown_PlayersHouse_1F_EventScript_MomYearsAtSea::
+	setflag FLAG_MOM_SAW_YOU_OFF
+	msgbox PalletTown_PlayersHouse_1F_Text_MomYearsAtSea
+	release
+	end
+
+PalletTown_PlayersHouse_1F_EventScript_MomHowDoesItLook::
+	msgbox PalletTown_PlayersHouse_1F_Text_MomHowDoesItLook
 	release
 	end
 

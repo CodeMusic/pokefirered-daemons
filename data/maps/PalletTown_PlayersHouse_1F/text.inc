@@ -63,6 +63,27 @@ PalletTown_PlayersHouse_1F_Text_DadQuieter::
     .string "DAD: Your mother worries.\p"
     .string "So do I. Just quieter.$"
 
+@  T-326, DRAFT (the user, 2026-10-01): MOM's own -- over twenty years on ships, and what coming home does.
+PalletTown_PlayersHouse_1F_Text_MomYearsAtSea::
+    .string "MOM: I worked on ships for over\n"
+    .string "twenty years. I saw a lot of the\n"
+    .string "world.\p"
+    .string "Every time I came home, the house\n"
+    .string "was just the same. I was not.\p"
+    .string "Once you have been somewhere\n"
+    .string "else, you come back with a whole\n"
+    .string "new way to see.\p"
+    .string "So go on your journey. Then come\n"
+    .string "back, and look again.$"
+
+PalletTown_PlayersHouse_1F_Text_MomHowDoesItLook::
+    .string "MOM: Look at you. You have been a\n"
+    .string "long way.\p"
+    .string "So tell me. Now that you are\n"
+    .string "back, how does home look?\p"
+    .string "…I know. The same rooms, and not\n"
+    .string "the same at all.$"
+
 @  T-313, DRAFT.
 PalletTown_PlayersHouse_1F_Text_MomTheShip::
     .string "MOM: You have a ticket for the\n"
