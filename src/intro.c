@@ -1976,7 +1976,7 @@ static const u8 sThanksTextColors[] = {TEXT_COLOR_TRANSPARENT, 9, 2};   // the l
 #define THANKS_WIN_W     26
 #define THANKS_WIN_H     12
 #define THANKS_SIG_Y     66                // the signature's line, inside the window: room below it for glints
-#define THANKS_HOLD      210               // frames the card holds, faded in
+#define THANKS_HOLD      233               // frames the card holds, faded in (210 + 11%, the user, T-328)
 
 static const struct WindowTemplate sThanksWindowTemplate = {
     .bg = BG_GF_TEXT_LOGO,
