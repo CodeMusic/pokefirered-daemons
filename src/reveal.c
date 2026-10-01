@@ -5,6 +5,7 @@
 #include "field_player_avatar.h"
 #include "field_specials.h"
 #include "fieldmap.h"
+#include "main.h"
 #include "reveal.h"
 #include "constants/field_effects.h"
 
@@ -48,9 +49,16 @@ static const struct { const u8 *script; u16 foundFlag; } sFinds[] = {
 //  T-323: THE BEACONS. A few things sparkle from the very start, REVEAL or not, until they have been read -- the
 //  bedroom poster first, which says what the sparkles are. Many players would walk past a poster; nobody walks past
 //  a sparkle. The poster is the one sparkle the game gives you before it teaches you to see the others.
+//  T-342 (the user, 2026-10-01): the GUIDE's shelf on ONE ISLAND is a beacon too, until the book is taken.
 static const struct { const u8 *script; u16 readFlag; } sBeacons[] = {
     { PalletTown_PlayersHouse_2F_EventScript_Sign, FLAG_POSTER_READ },
+    { OneIsland_House2_EventScript_Guide,          FLAG_GOT_GUIDE },
 };
+
+//  T-343 (the user, 2026-10-01): A SPARKLE SEEN WITHOUT REVEAL IS QUIETER. Before REVEAL is installed a beacon catches
+//  the light one beat in three -- every four and a half seconds, not every second and a half -- so the key finds are
+//  noticed without the lens, and the lens still helps everywhere. The beat is the frame counter's, so it costs no RAM.
+#define BEACON_QUIET_BEATS   3
 
 static bool8 IsBeacon(const struct BgEvent *e)
 {
@@ -116,8 +124,13 @@ void Reveal_Update(void)
     for (i = 0; i < events->bgEventCount; i++)
     {
         e = &events->bgEvents[i];
-        if (!IsBeacon(e) && !(installed && IsShown(e)))
-            continue;
+        if (!(installed && IsShown(e)))
+        {
+            if (!IsBeacon(e))
+                continue;
+            if (!installed && (gMain.vblankCounter2 / REVEAL_PERIOD) % BEACON_QUIET_BEATS != 0)
+                continue;                                                  // T-343: one beat in three
+        }
         dx = e->x + 7 - px;
         dy = e->y + 7 - py;
         if (dx < -8 || dx > 8 || dy < -6 || dy > 6)
