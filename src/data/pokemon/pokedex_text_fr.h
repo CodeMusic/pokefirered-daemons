@@ -588,10 +588,11 @@ const u8 gMagnemitePokedexText[] = _(
 
 const u8 gMagnemitePokedexTextUnused[] = _("");
 
+//  T-322 (the user, 2026-10-01: "take the QUORUM draft"), DRAFT: what a quorum is -- enough of the others must agree.
 const u8 gMagnetonPokedexText[] = _(
-    "Three of them, and they do not act\n"
-    "either. What one of them saw, three\n"
-    "of them saw.");
+    "Three of them. None acts until enough\n"
+    "of the others have seen the same thing.\n"
+    "Two is enough. One never is.");
 
 const u8 gMagnetonPokedexTextUnused[] = _("");
 
