@@ -36,6 +36,10 @@ static EWRAM_DATA u8 sRevealTimer = 0;
 //  table is written by tools/gbagrove.py from the same rows that build the groves, so a new grove needs no edit here.
 #include "data/grove_trees.h"
 
+//  T-297 (the user, "yes to all"): the NOTEBOOK's pages where they lie, written by tools/gbadocs.py. A spot shimmers while
+//  the page that is there now -- its gate open -- has not been read: the lens shows where you have not been yet.
+#include "data/notebook_finds.h"
+
 //  T-297: THE FINDS. A thing the game hides in plain sight -- a book on a shelf, a page on a wall -- shimmers under
 //  REVEAL until it has been found, and then never again: the lens shows where you have not been yet, not a list of
 //  what you have. Each row is the find's script and the flag that says it was found. The user's rule (2026-09-26):
@@ -82,6 +86,16 @@ static bool8 IsShown(const struct BgEvent *e)
         {
             if (e->bgUnion.script == sFinds[i].script)
                 return !FlagGet(sFinds[i].foundFlag);
+        }
+    }
+
+    if (e->kind <= BG_KIND_SIGN_LAST)
+    {
+        for (i = 0; i < ARRAY_COUNT(sNotebookFinds); i++)
+        {
+            if (e->bgUnion.script == sNotebookFinds[i].script && !FlagGet(sNotebookFinds[i].readFlag)
+             && (sNotebookFinds[i].gateFlag == 0 || FlagGet(sNotebookFinds[i].gateFlag) == sNotebookFinds[i].gateSet))
+                return TRUE;
         }
     }
 
