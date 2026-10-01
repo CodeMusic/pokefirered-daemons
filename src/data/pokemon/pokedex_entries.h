@@ -2095,7 +2095,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SENTRET] =
     {
-        .categoryName = _("SCOUT"),
+        .categoryName = _("OVERCALL"),  // T-333, DRAFT (was SCOUT)
         .height = 8,
         .weight = 60,
         .description = gSentretPokedexText,
@@ -2108,7 +2108,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_FURRET] =
     {
-        .categoryName = _("LONG BODY"),
+        .categoryName = _("NIGHT WATCH"),  // T-333, DRAFT (was LONG BODY)
         .height = 18,
         .weight = 325,
         .description = gFurretPokedexText,
@@ -2147,7 +2147,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_LEDYBA] =
     {
-        .categoryName = _("FIVE STAR"),
+        .categoryName = _("SWARM"),  // T-333, DRAFT (was FIVE STAR)
         .height = 10,
         .weight = 108,
         .description = gLedybaPokedexText,
@@ -2160,7 +2160,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_LEDIAN] =
     {
-        .categoryName = _("FIVE STAR"),
+        .categoryName = _("BANDWAGON"),  // T-333, DRAFT (was FIVE STAR)
         .height = 14,
         .weight = 356,
         .description = gLedianPokedexText,
@@ -2173,7 +2173,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SPINARAK] =
     {
-        .categoryName = _("STRING SPIT"),
+        .categoryName = _("LIE IN WAIT"),  // T-333, DRAFT (was STRING SPIT)
         .height = 5,
         .weight = 85,
         .description = gSpinarakPokedexText,
@@ -2186,7 +2186,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_ARIADOS] =
     {
-        .categoryName = _("LONG LEG"),
+        .categoryName = _("DECOY PATH"),  // T-333, DRAFT (was LONG LEG)
         .height = 11,
         .weight = 335,
         .description = gAriadosPokedexText,
@@ -2238,7 +2238,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_PICHU] =
     {
-        .categoryName = _("TINY MOUSE"),
+        .categoryName = _("FRICTION"),  // T-333, DRAFT (was TINY MOUSE)
         .height = 3,
         .weight = 20,
         .description = gPichuPokedexText,
@@ -2264,7 +2264,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_IGGLYBUFF] =
     {
-        .categoryName = _("BALLOON"),
+        .categoryName = _("LOW POWER"),  // T-333, DRAFT (was BALLOON)
         .height = 3,
         .weight = 10,
         .description = gIgglybuffPokedexText,
@@ -2303,7 +2303,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_NATU] =
     {
-        .categoryName = _("TINY BIRD"),
+        .categoryName = _("FIXED GAZE"),  // T-333, DRAFT (was TINY BIRD)
         .height = 2,
         .weight = 20,
         .description = gNatuPokedexText,
@@ -2316,7 +2316,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_XATU] =
     {
-        .categoryName = _("MYSTIC"),
+        .categoryName = _("PREDICTION"),  // T-333, DRAFT (was MYSTIC)
         .height = 15,
         .weight = 150,
         .description = gXatuPokedexText,
@@ -2329,7 +2329,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_MAREEP] =
     {
-        .categoryName = _("WOOL"),
+        .categoryName = _("CHARGE"),  // T-333, DRAFT (was WOOL)
         .height = 6,
         .weight = 78,
         .description = gMareepPokedexText,
@@ -2342,7 +2342,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_FLAAFFY] =
     {
-        .categoryName = _("WOOL"),
+        .categoryName = _("PRESSURE"),  // T-333, DRAFT (was WOOL)
         .height = 8,
         .weight = 133,
         .description = gFlaaffyPokedexText,
@@ -2355,7 +2355,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_AMPHAROS] =
     {
-        .categoryName = _("LIGHT"),
+        .categoryName = _("FLASHPOINT"),  // T-333, DRAFT (was LIGHT)
         .height = 14,
         .weight = 615,
         .description = gAmpharosPokedexText,
@@ -2368,7 +2368,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_BELLOSSOM] =
     {
-        .categoryName = _("FLOWER"),
+        .categoryName = _("REFERENCE"),  // T-333, DRAFT (was FLOWER)
         .height = 4,
         .weight = 58,
         .description = gBellossomPokedexText,
@@ -2381,7 +2381,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_MARILL] =
     {
-        .categoryName = _("AQUA MOUSE"),
+        .categoryName = _("WATERLINE"),  // T-333, DRAFT (was AQUA MOUSE)
         .height = 4,
         .weight = 85,
         .description = gMarillPokedexText,
@@ -2394,7 +2394,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_AZUMARILL] =
     {
-        .categoryName = _("AQUA RABBIT"),
+        .categoryName = _("UPLIFT"),  // T-333, DRAFT (was AQUA RABBIT)
         .height = 8,
         .weight = 285,
         .description = gAzumarillPokedexText,
@@ -2433,7 +2433,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_HOPPIP] =
     {
-        .categoryName = _("COTTONWEED"),
+        .categoryName = _("DRIFT"),  // T-333, DRAFT (was COTTONWEED)
         .height = 4,
         .weight = 5,
         .description = gHoppipPokedexText,
@@ -2446,7 +2446,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SKIPLOOM] =
     {
-        .categoryName = _("COTTONWEED"),
+        .categoryName = _("WEATHERVANE"),  // T-333, DRAFT (was COTTONWEED)
         .height = 6,
         .weight = 10,
         .description = gSkiploomPokedexText,
@@ -2459,7 +2459,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_JUMPLUFF] =
     {
-        .categoryName = _("COTTONWEED"),
+        .categoryName = _("NO RETURN"),  // T-333, DRAFT (was COTTONWEED)
         .height = 8,
         .weight = 30,
         .description = gJumpluffPokedexText,
@@ -2472,7 +2472,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_AIPOM] =
     {
-        .categoryName = _("LONG TAIL"),
+        .categoryName = _("RELOCATE"),  // T-333, DRAFT (was LONG TAIL)
         .height = 8,
         .weight = 115,
         .description = gAipomPokedexText,
@@ -2511,7 +2511,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_YANMA] =
     {
-        .categoryName = _("CLEAR WING"),
+        .categoryName = _("WIDE ANGLE"),  // T-333, DRAFT (was CLEAR WING)
         .height = 12,
         .weight = 380,
         .description = gYanmaPokedexText,
@@ -2524,7 +2524,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_WOOPER] =
     {
-        .categoryName = _("WATER FISH"),
+        .categoryName = _("UNMOVED"),  // T-333, DRAFT (was WATER FISH)
         .height = 4,
         .weight = 85,
         .description = gWooperPokedexText,
@@ -2537,7 +2537,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_QUAGSIRE] =
     {
-        .categoryName = _("WATER FISH"),
+        .categoryName = _("POST HOC"),  // T-333, DRAFT (was WATER FISH)
         .height = 14,
         .weight = 750,
         .description = gQuagsirePokedexText,
@@ -2576,7 +2576,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_MURKROW] =
     {
-        .categoryName = _("DARKNESS"),
+        .categoryName = _("BAD SIGN"),  // T-333, DRAFT (was DARKNESS)
         .height = 5,
         .weight = 21,
         .description = gMurkrowPokedexText,
@@ -2602,7 +2602,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_MISDREAVUS] =
     {
-        .categoryName = _("SCREECH"),
+        .categoryName = _("SUSPENSE"),  // T-333, DRAFT (was SCREECH)
         .height = 7,
         .weight = 10,
         .description = gMisdreavusPokedexText,
@@ -2615,7 +2615,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_UNOWN] =
     {
-        .categoryName = _("SYMBOL"),
+        .categoryName = _("CIPHER"),  // T-333, DRAFT (was SYMBOL)
         .height = 5,
         .weight = 50,
         .description = gUnownPokedexText,
@@ -2628,7 +2628,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_WOBBUFFET] =
     {
-        .categoryName = _("PATIENT"),
+        .categoryName = _("RETALIATE"),  // T-333, DRAFT (was PATIENT)
         .height = 13,
         .weight = 285,
         .description = gWobbuffetPokedexText,
@@ -2654,7 +2654,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_PINECO] =
     {
-        .categoryName = _("BAGWORM"),
+        .categoryName = _("TRIPWIRE"),  // T-333, DRAFT (was BAGWORM)
         .height = 6,
         .weight = 72,
         .description = gPinecoPokedexText,
@@ -2667,7 +2667,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_FORRETRESS] =
     {
-        .categoryName = _("BAGWORM"),
+        .categoryName = _("SEALED IN"),  // T-333, DRAFT (was BAGWORM)
         .height = 12,
         .weight = 1258,
         .description = gForretressPokedexText,
@@ -2680,7 +2680,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_DUNSPARCE] =
     {
-        .categoryName = _("LAND SNAKE"),
+        .categoryName = _("OVERLOOKED"),  // T-333, DRAFT (was LAND SNAKE)
         .height = 15,
         .weight = 140,
         .description = gDunsparcePokedexText,
@@ -2706,7 +2706,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_STEELIX] =
     {
-        .categoryName = _("IRON SNAKE"),
+        .categoryName = _("DIRECT LINE"),  // T-333, DRAFT (was IRON SNAKE)
         .height = 92,
         .weight = 4000,
         .description = gSteelixPokedexText,
@@ -2745,7 +2745,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_QWILFISH] =
     {
-        .categoryName = _("BALLOON"),
+        .categoryName = _("PUFFED UP"),  // T-333, DRAFT (was BALLOON)
         .height = 5,
         .weight = 39,
         .description = gQwilfishPokedexText,
@@ -2758,7 +2758,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SCIZOR] =
     {
-        .categoryName = _("PINCER"),
+        .categoryName = _("HARD STOP"),  // T-333, DRAFT (was PINCER)
         .height = 18,
         .weight = 1180,
         .description = gScizorPokedexText,
@@ -2771,7 +2771,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SHUCKLE] =
     {
-        .categoryName = _("MOLD"),
+        .categoryName = _("FERMENT"),  // T-333, DRAFT (was MOLD)
         .height = 6,
         .weight = 205,
         .description = gShucklePokedexText,
@@ -2784,7 +2784,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_HERACROSS] =
     {
-        .categoryName = _("SINGLE HORN"),
+        .categoryName = _("PERSISTENCE"),  // T-333, DRAFT (was SINGLE HORN)
         .height = 15,
         .weight = 540,
         .description = gHeracrossPokedexText,
@@ -2797,7 +2797,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SNEASEL] =
     {
-        .categoryName = _("SHARP CLAW"),
+        .categoryName = _("OPPORTUNIST"),  // T-333, DRAFT (was SHARP CLAW)
         .height = 9,
         .weight = 280,
         .description = gSneaselPokedexText,
@@ -2810,7 +2810,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_TEDDIURSA] =
     {
-        .categoryName = _("LITTLE BEAR"),
+        .categoryName = _("SELF-SOOTHE"),  // T-333, DRAFT (was LITTLE BEAR)
         .height = 6,
         .weight = 88,
         .description = gTeddiursaPokedexText,
@@ -2823,7 +2823,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_URSARING] =
     {
-        .categoryName = _("HIBERNATOR"),
+        .categoryName = _("HABIT"),  // T-333, DRAFT (was HIBERNATOR)
         .height = 18,
         .weight = 1258,
         .description = gUrsaringPokedexText,
@@ -2836,7 +2836,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SLUGMA] =
     {
-        .categoryName = _("LAVA"),
+        .categoryName = _("SLOW BURN"),  // T-333, DRAFT (was LAVA)
         .height = 7,
         .weight = 350,
         .description = gSlugmaPokedexText,
@@ -2849,7 +2849,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_MAGCARGO] =
     {
-        .categoryName = _("LAVA"),
+        .categoryName = _("THICK SKIN"),  // T-333, DRAFT (was LAVA)
         .height = 8,
         .weight = 550,
         .description = gMagcargoPokedexText,
@@ -2862,7 +2862,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SWINUB] =
     {
-        .categoryName = _("PIG"),
+        .categoryName = _("GUT FEEL"),  // T-333, DRAFT (was PIG)
         .height = 4,
         .weight = 65,
         .description = gSwinubPokedexText,
@@ -2875,7 +2875,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_PILOSWINE] =
     {
-        .categoryName = _("SWINE"),
+        .categoryName = _("HEADLONG"),  // T-333, DRAFT (was SWINE)
         .height = 11,
         .weight = 558,
         .description = gPiloswinePokedexText,
@@ -2901,7 +2901,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_REMORAID] =
     {
-        .categoryName = _("JET"),
+        .categoryName = _("HITCHHIKER"),  // T-333, DRAFT (was JET)
         .height = 6,
         .weight = 120,
         .description = gRemoraidPokedexText,
@@ -2914,7 +2914,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_OCTILLERY] =
     {
-        .categoryName = _("JET"),
+        .categoryName = _("HOLD TIGHT"),  // T-333, DRAFT (was JET)
         .height = 9,
         .weight = 285,
         .description = gOctilleryPokedexText,
@@ -2927,7 +2927,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_DELIBIRD] =
     {
-        .categoryName = _("DELIVERY"),
+        .categoryName = _("OBLIGATION"),  // T-333, DRAFT (was DELIVERY)
         .height = 9,
         .weight = 160,
         .description = gDelibirdPokedexText,
@@ -2940,7 +2940,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_MANTINE] =
     {
-        .categoryName = _("KITE"),
+        .categoryName = _("UNSINKABLE"),  // T-333, DRAFT (was KITE)
         .height = 21,
         .weight = 2200,
         .description = gMantinePokedexText,
@@ -2953,7 +2953,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SKARMORY] =
     {
-        .categoryName = _("ARMOR BIRD"),
+        .categoryName = _("ALL EDGES"),  // T-333, DRAFT (was ARMOR BIRD)
         .height = 17,
         .weight = 505,
         .description = gSkarmoryPokedexText,
@@ -2966,7 +2966,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_HOUNDOUR] =
     {
-        .categoryName = _("DARK"),
+        .categoryName = _("ONE TARGET"),  // T-333, DRAFT (was DARK)
         .height = 6,
         .weight = 108,
         .description = gHoundourPokedexText,
@@ -2979,7 +2979,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_HOUNDOOM] =
     {
-        .categoryName = _("DARK"),
+        .categoryName = _("EARWORM"),  // T-333, DRAFT (was DARK)
         .height = 14,
         .weight = 350,
         .description = gHoundoomPokedexText,
@@ -2992,7 +2992,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_KINGDRA] =
     {
-        .categoryName = _("DRAGON"),
+        .categoryName = _("CASCADE"),  // T-333, DRAFT (was DRAGON)
         .height = 18,
         .weight = 1520,
         .description = gKingdraPokedexText,
@@ -3005,7 +3005,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_PHANPY] =
     {
-        .categoryName = _("LONG NOSE"),
+        .categoryName = _("VERBATIM"),  // T-333, DRAFT (was LONG NOSE)
         .height = 5,
         .weight = 335,
         .description = gPhanpyPokedexText,
@@ -3018,7 +3018,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_DONPHAN] =
     {
-        .categoryName = _("ARMOR"),
+        .categoryName = _("TEMPLATE"),  // T-333, DRAFT (was ARMOR)
         .height = 11,
         .weight = 1200,
         .description = gDonphanPokedexText,
@@ -3031,7 +3031,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_PORYGON2] =
     {
-        .categoryName = _("VIRTUAL"),
+        .categoryName = _("PATCH"),  // T-333, DRAFT (was VIRTUAL)
         .height = 6,
         .weight = 325,
         .description = gPorygon2PokedexText,
@@ -3044,7 +3044,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_STANTLER] =
     {
-        .categoryName = _("BIG HORN"),
+        .categoryName = _("VERTIGO"),  // T-333, DRAFT (was BIG HORN)
         .height = 14,
         .weight = 712,
         .description = gStantlerPokedexText,
@@ -3057,7 +3057,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SMEARGLE] =
     {
-        .categoryName = _("PAINTER"),
+        .categoryName = _("COPYCAT"),  // T-333, DRAFT (was PAINTER)
         .height = 12,
         .weight = 580,
         .description = gSmearglePokedexText,
@@ -3070,7 +3070,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_TYROGUE] =
     {
-        .categoryName = _("SCUFFLE"),
+        .categoryName = _("FOUNDATION"),  // T-333, DRAFT (was SCUFFLE)
         .height = 7,
         .weight = 210,
         .description = gTyroguePokedexText,
@@ -3083,7 +3083,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_HITMONTOP] =
     {
-        .categoryName = _("HANDSTAND"),
+        .categoryName = _("ROUND TRIP"),  // T-333, DRAFT (was HANDSTAND)
         .height = 14,
         .weight = 480,
         .description = gHitmontopPokedexText,
@@ -3096,7 +3096,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SMOOCHUM] =
     {
-        .categoryName = _("KISS"),
+        .categoryName = _("GIVEAWAY"),  // T-333, DRAFT (was KISS)
         .height = 4,
         .weight = 60,
         .description = gSmoochumPokedexText,
@@ -3109,7 +3109,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_ELEKID] =
     {
-        .categoryName = _("ELECTRIC"),
+        .categoryName = _("KICKSTART"),  // T-333, DRAFT (was ELECTRIC)
         .height = 6,
         .weight = 235,
         .description = gElekidPokedexText,
@@ -3122,7 +3122,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_MAGBY] =
     {
-        .categoryName = _("LIVE COAL"),
+        .categoryName = _("RESIDUE"),  // T-333, DRAFT (was LIVE COAL)
         .height = 7,
         .weight = 214,
         .description = gMagbyPokedexText,
@@ -3148,7 +3148,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_BLISSEY] =
     {
-        .categoryName = _("HAPPINESS"),
+        .categoryName = _("KEEPALIVE"),  // T-333, DRAFT (was HAPPINESS)
         .height = 15,
         .weight = 468,
         .description = gBlisseyPokedexText,
@@ -3200,7 +3200,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_LARVITAR] =
     {
-        .categoryName = _("ROCK SKIN"),
+        .categoryName = _("OVERTHINK"),  // T-333, DRAFT (was ROCK SKIN)
         .height = 6,
         .weight = 720,
         .description = gLarvitarPokedexText,
@@ -3213,7 +3213,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_PUPITAR] =
     {
-        .categoryName = _("HARD SHELL"),
+        .categoryName = _("DARK MOOD"),  // T-333, DRAFT (was HARD SHELL)
         .height = 12,
         .weight = 1520,
         .description = gPupitarPokedexText,
@@ -3226,7 +3226,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_TYRANITAR] =
     {
-        .categoryName = _("ARMOR"),
+        .categoryName = _("OLD DEBT"),  // T-333, DRAFT (was ARMOR)
         .height = 20,
         .weight = 2020,
         .description = gTyranitarPokedexText,
@@ -5020,7 +5020,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_DEOXYS] =
     {
-        .categoryName = _("DNA"),
+        .categoryName = _("SHAPESHIFT"),  // T-333, DRAFT (was DNA)
         .height = 17,
         .weight = 608,
         .description = gDeoxysPokedexText,
