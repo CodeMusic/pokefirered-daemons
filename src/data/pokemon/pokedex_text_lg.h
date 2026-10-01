@@ -247,9 +247,10 @@ const u8 gVulpixPokedexText[] = _(
 
 const u8 gVulpixPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gNinetalesPokedexText[] = _(
-        "It is said to remember every slight.\n"
-        "Nothing has tested this."
+        "Everything that was due to start when it\n"
+        "finished is still waiting to start."
 );
 
 const u8 gNinetalesPokedexTextUnused[] = _("");
@@ -438,9 +439,10 @@ const u8 gMachopPokedexText[] = _(
 
 const u8 gMachopPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gMachokePokedexText[] = _(
-        "It is only ever holding the middle of\n"
-        "something."
+        "Everyone builds on it. Almost nobody\n"
+        "building has walked the steps beneath."
 );
 
 const u8 gMachokePokedexTextUnused[] = _("");
@@ -668,9 +670,10 @@ const u8 gVoltorbPokedexText[] = _(
 
 const u8 gVoltorbPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gElectrodePokedexText[] = _(
-        "It only ever trips once.\n"
-        "Somebody decided that was acceptable."
+        "It has tripped so often that nobody asks\n"
+        "why any more. They reset it and go on."
 );
 
 const u8 gElectrodePokedexTextUnused[] = _("");
@@ -744,9 +747,11 @@ const u8 gRhyhornPokedexText[] = _(
 
 const u8 gRhyhornPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gRhydonPokedexText[] = _(
-        "It was pointed at something once.\n"
-        "It is still pointed."
+        "Everything arrived. Some of it arrived\n"
+        "meaning something else, and nobody has\n"
+        "found out which."
 );
 
 const u8 gRhydonPokedexTextUnused[] = _("");
@@ -771,9 +776,10 @@ const u8 gKangaskhanPokedexText[] = _(
 
 const u8 gKangaskhanPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gHorseaPokedexText[] = _(
-        "Everything downstream of it arrives\n"
-        "harder than it left."
+        "Making anything else faster changes\n"
+        "nothing. Everyone keeps trying."
 );
 
 const u8 gHorseaPokedexTextUnused[] = _("");
@@ -928,10 +934,11 @@ const u8 gOmanytePokedexText[] = _(
 
 const u8 gOmanytePokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gOmastarPokedexText[] = _(
-    "What the reels were for. Too heavy to\n"
-    "move, so everything was brought to it\n"
-    "and nothing was taken away.");
+    "Everything that ran here had to come to\n"
+    "it. When it went quiet, nothing knew\n"
+    "another way to run.");
 
 const u8 gOmastarPokedexTextUnused[] = _("");
 
@@ -1088,9 +1095,10 @@ const u8 gSentretPokedexText[] = _(
 
 const u8 gSentretPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gFurretPokedexText[] = _(
-    "Long enough to see over everything. It\n"
-    "has not been relieved.");
+    "Everything behind it sleeps because it is\n"
+    "up. Nobody has asked when it last slept.");
 
 const u8 gFurretPokedexTextUnused[] = _("");
 
@@ -1114,10 +1122,10 @@ const u8 gLedybaPokedexText[] = _(
 
 const u8 gLedybaPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gLedianPokedexText[] = _(
-    "It comes out when there are enough of\n"
-    "them. The number is never agreed in\n"
-    "advance.");
+    "Each of them came because the others\n"
+    "had. None of them came first.");
 
 const u8 gLedianPokedexTextUnused[] = _("");
 
@@ -1127,10 +1135,10 @@ const u8 gSpinarakPokedexText[] = _(
 
 const u8 gSpinarakPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gAriadosPokedexText[] = _(
-    "The web is finished before anything\n"
-    "arrives. It was built to fit what has not\n"
-    "come.");
+    "Nothing it trapped was coming this way.\n"
+    "It made sure they did.");
 
 const u8 gAriadosPokedexTextUnused[] = _("");
 
@@ -1155,23 +1163,25 @@ const u8 gLanturnPokedexText[] = _(
 
 const u8 gLanturnPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gPichuPokedexText[] = _(
-        "It holds its charge between one thing and\n"
-        "the next. Everyone finds out by touching\n"
-        "it.");
+        "Nobody put it there. It built up out of\n"
+        "ordinary things rubbing past each other.");
 
 const u8 gPichuPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gCleffaPokedexText[] = _(
-    "It is in every reading and nobody has\n"
-    "found a use for it. It may be nothing.\n"
-    "It has not gone away.");
+    "Every account is judged by how little of\n"
+    "it is left. Nobody asks what it is left\n"
+    "over from.");
 
 const u8 gCleffaPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gIgglybuffPokedexText[] = _(
-        "It is doing nothing, and is ready. Waking\n"
-        "it costs less than starting it.");
+        "Something has to stay awake to wake it.\n"
+        "Nobody counts that one.");
 
 const u8 gIgglybuffPokedexTextUnused[] = _("");
 
@@ -1214,10 +1224,10 @@ const u8 gFlaaffyPokedexText[] = _(
 
 const u8 gFlaaffyPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gAmpharosPokedexText[] = _(
-    "All of it, at once, and then dark. For a\n"
-    "moment it is the brightest thing on the\n"
-    "coast.");
+    "Afterwards the coast is darker than it was\n"
+    "before. Everyone remembers the light.");
 
 const u8 gAmpharosPokedexTextUnused[] = _("");
 
@@ -1234,9 +1244,10 @@ const u8 gMarillPokedexText[] = _(
 
 const u8 gMarillPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gAzumarillPokedexText[] = _(
-    "It cannot be pushed under. It has not\n"
-    "noticed anyone trying.");
+    "Those near it float for a while too. None\n"
+    "of them can say when they came down.");
 
 const u8 gAzumarillPokedexTextUnused[] = _("");
 
@@ -1246,10 +1257,11 @@ const u8 gSudowoodoPokedexText[] = _(
 
 const u8 gSudowoodoPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gPolitoedPokedexText[] = _(
-    "It counts how many may pass and lets\n"
-    "exactly that many through. It does not\n"
-    "care which.");
+    "The one who arrives when the count is\n"
+    "full waits. Nothing about them was wrong.\n"
+    "The count was full.");
 
 const u8 gPolitoedPokedexTextUnused[] = _("");
 
@@ -1266,9 +1278,10 @@ const u8 gSkiploomPokedexText[] = _(
 
 const u8 gSkiploomPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gJumpluffPokedexText[] = _(
-    "It lets go of the ground entirely. There\n"
-    "is no arrangement for coming back.");
+    "Whatever it left was still running when it\n"
+    "went. Nobody has come back to close it.");
 
 const u8 gJumpluffPokedexTextUnused[] = _("");
 
@@ -1303,22 +1316,24 @@ const u8 gWooperPokedexText[] = _(
 
 const u8 gWooperPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gQuagsirePokedexText[] = _(
-    "It does not notice the current. It arrives\n"
-    "somewhere and treats that as where it\n"
-    "meant to go.");
+    "Nobody has seen it struggle. Nobody has\n"
+    "seen it choose either.");
 
 const u8 gQuagsirePokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gEspeonPokedexText[] = _(
-        "It sees what it was pointed at, very\n"
-        "clearly. It has never once turned round.");
+        "Everything behind it goes unrecorded. The\n"
+        "record calls it very clear.");
 
 const u8 gEspeonPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gUmbreonPokedexText[] = _(
-        "It covers the part you were about to\n"
-        "look at. What it covers is not removed.");
+        "What it covers goes on happening. Nobody\n"
+        "looks there now.");
 
 const u8 gUmbreonPokedexTextUnused[] = _("");
 
@@ -1328,10 +1343,10 @@ const u8 gMurkrowPokedexText[] = _(
 
 const u8 gMurkrowPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gSlowkingPokedexText[] = _(
-    "The same thing attached higher up. It\n"
-    "decides what is allowed now, and it is\n"
-    "very quiet about it.");
+    "Everything runs by its leave. Almost\n"
+    "nothing that runs knows it is there.");
 
 const u8 gSlowkingPokedexTextUnused[] = _("");
 
@@ -1366,9 +1381,10 @@ const u8 gPinecoPokedexText[] = _(
 
 const u8 gPinecoPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gForretressPokedexText[] = _(
-    "Sealed from the inside. Whatever is in\n"
-    "there has not been seen since it closed.");
+    "Those outside still knock, less often now.\n"
+    "It hears every one.");
 
 const u8 gForretressPokedexTextUnused[] = _("");
 
@@ -1412,10 +1428,11 @@ const u8 gQwilfishPokedexText[] = _(
 
 const u8 gQwilfishPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gScizorPokedexText[] = _(
-        "It cannot be bound,\n"
-        "handled or ignored. There\n"
-        "is no second message.");
+        "What it ended had no time to put\n"
+        "anything away. It is all still lying\n"
+        "where it was.");
 
 const u8 gScizorPokedexTextUnused[] = _("");
 
@@ -1488,9 +1505,10 @@ const u8 gRemoraidPokedexText[] = _(
 
 const u8 gRemoraidPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gOctilleryPokedexText[] = _(
-    "It holds on with everything it has. It\n"
-    "does this to rocks as well.");
+    "Whatever it holds cannot move far. It\n"
+    "calls that being close.");
 
 const u8 gOctilleryPokedexTextUnused[] = _("");
 
@@ -1538,16 +1556,19 @@ const u8 gPhanpyPokedexText[] = _(
 
 const u8 gPhanpyPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gDonphanPokedexText[] = _(
-    "What went in is still in, in the shape it\n"
-    "went in. Nothing has worn smooth.");
+    "Every new thing is held up against it to\n"
+    "see whether it fits. Most of them are\n"
+    "made to.");
 
 const u8 gDonphanPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gPorygon2PokedexText[] = _(
-    "A second layer laid over the first to\n"
-    "correct it. The first is still underneath,\n"
-    "still wrong.");
+    "Everyone reads the correction. Under it,\n"
+    "the first one goes on doing what it always\n"
+    "did.");
 
 const u8 gPorygon2PokedexTextUnused[] = _("");
 
@@ -1563,9 +1584,10 @@ const u8 gSmearglePokedexText[] = _(
 
 const u8 gSmearglePokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gTyroguePokedexText[] = _(
-        "Everything after it rests on it. It is the\n"
-        "part nobody checks.");
+        "Everything built on it is very sound. That\n"
+        "is not the same as true.");
 
 const u8 gTyroguePokedexTextUnused[] = _("");
 
@@ -1576,22 +1598,24 @@ const u8 gHitmontopPokedexText[] = _(
 
 const u8 gHitmontopPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gSmoochumPokedexText[] = _(
-        "It gives away what it is about to do. It\n"
-        "does not know that it is doing this.");
+        "Everyone who plays it has read it. It\n"
+        "wonders how they always know.");
 
 const u8 gSmoochumPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gElekidPokedexText[] = _(
-        "It has to be turned by hand before it\n"
-        "will do anything. Afterwards it will not\n"
-        "stop.");
+        "Whoever turned it is long gone. It is still\n"
+        "running on that one turn.");
 
 const u8 gElekidPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gMagbyPokedexText[] = _(
-        "What is left once the work is finished. It\n"
-        "is still warm, and it is still a hazard.");
+        "Nobody remembers what burned. They still\n"
+        "step round it.");
 
 const u8 gMagbyPokedexTextUnused[] = _("");
 
@@ -1602,10 +1626,10 @@ const u8 gMiltankPokedexText[] = _(
 
 const u8 gMiltankPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gBlisseyPokedexText[] = _(
-        "It reports that it is alive at a fixed\n"
-        "interval. Nothing else it says is listened\n"
-        "to.");
+        "As long as the interval keeps coming,\n"
+        "nobody asks how it is.");
 
 const u8 gBlisseyPokedexTextUnused[] = _("");
 
@@ -1636,10 +1660,11 @@ const u8 gLarvitarPokedexText[] = _(
 
 const u8 gLarvitarPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gPupitarPokedexText[] = _(
-    "Sealed, and moving at speed. It is going\n"
-    "somewhere and there is no way to ask\n"
-    "where.");
+    "Nobody near it is told what it is\n"
+    "thinking about. They feel the weight\n"
+    "of it anyway.");
 
 const u8 gPupitarPokedexTextUnused[] = _("");
 
@@ -1979,10 +2004,10 @@ const u8 gHariyamaPokedexText[] = _(
 
 const u8 gHariyamaPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gAzurillPokedexText[] = _(
-    "Before it is any one mood it is only\n"
-    "toward or away. The tail decides\n"
-    "first, and the rest follows.");
+    "Everything it meets is sorted toward or\n"
+    "away before it is known at all.");
 
 const u8 gAzurillPokedexTextUnused[] = _("");
 
@@ -2149,10 +2174,11 @@ const u8 gNumelPokedexText[] = _(
 
 const u8 gNumelPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gCameruptPokedexText[] = _(
-    "It reads the last thing it made before\n"
-    "it makes the next. Left alone for long,\n"
-    "it draws only from its own drawings.");
+    "Each picture is a little more like the\n"
+    "last. Nobody can find the day they\n"
+    "stopped being of anything.");
 
 const u8 gCameruptPokedexTextUnused[] = _("");
 
@@ -2399,10 +2425,10 @@ const u8 gAbsolPokedexText[] = _(
 
 const u8 gAbsolPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gWynautPokedexText[] = _(
-    "It remembers exactly where it was\n"
-    "pushed. It smiles the whole time, so\n"
-    "nobody thinks to ask.");
+    "Whoever pushed it forgot long ago. It is\n"
+    "still sore in the same place.");
 
 const u8 gWynautPokedexTextUnused[] = _("");
 

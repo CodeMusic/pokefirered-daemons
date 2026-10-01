@@ -311,7 +311,7 @@ static const u8 sOpusMargin_Anomaly_Carried[] = _("You have measured it a great 
 static const u8 sOpusMargin_Anomaly_Neglected[] = _("Still unpredicted. Still measured, and\nstill fine.");
 
 static const u8 sOpusMargin_Overrun_Carried[] = _("Nothing intervened. You were there the\nwhole time.");
-static const u8 sOpusMargin_Overrun_Neglected[] = _("Still neither. Still nothing intervening.");
+static const u8 sOpusMargin_Overrun_Neglected[] = _("Still past it. Still nothing intervening.");
 
 static const u8 sOpusMargin_Tracer_Carried[] = _("It followed one back to you.");
 static const u8 sOpusMargin_Tracer_Neglected[] = _("No path to follow.");

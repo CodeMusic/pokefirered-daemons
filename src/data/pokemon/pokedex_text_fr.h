@@ -33,10 +33,12 @@ const u8 gCharmanderPokedexText[] = _(
 
 const u8 gCharmanderPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gCharmeleonPokedexText[] = _(
     "It no longer needs answers. It has the\n"
-    "rule that made them. Nothing checks the\n"
-    "rule. It is applied to everything.");
+    "rule they were all marked by. Nothing\n"
+    "checks the rule. Everything it meets\n"
+    "is given a score.");
 
 const u8 gCharmeleonPokedexTextUnused[] = _("");
 
@@ -255,16 +257,20 @@ const u8 gClefablePokedexText[] = _(
 
 const u8 gClefablePokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gVulpixPokedexText[] = _(
-        "Runs slightly hot and slightly\n"
-        "irregular. Neither is a fault yet."
+        "Its light drops out and comes back, too\n"
+        "fast to see. It runs a little hot.\n"
+        "Neither is a fault yet."
 );
 
 const u8 gVulpixPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gNinetalesPokedexText[] = _(
-        "Started small and irregular. It is\n"
-        "neither, now, and nothing intervened."
+        "It was given a limit and went past it, a\n"
+        "little at a time. Nothing intervened. It\n"
+        "is well past it now, and has not slowed."
 );
 
 const u8 gNinetalesPokedexTextUnused[] = _("");
@@ -297,17 +303,20 @@ const u8 gGolbatPokedexText[] = _(
 
 const u8 gGolbatPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gOddishPokedexText[] = _(
-        "Buries itself by day and moves at\n"
-        "night, spreading as it goes."
+        "Buries itself by day. Each night it puts\n"
+        "out another shoot a little further on,\n"
+        "in whatever direction there was room."
 );
 
 const u8 gOddishPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gGloomPokedexText[] = _(
         "Drips a fluid it does not notice\n"
         "producing. Everything downwind of it\n"
-        "grows differently."
+        "grows leaning the same way."
 );
 
 const u8 gGloomPokedexTextUnused[] = _("");
@@ -341,9 +350,11 @@ const u8 gVenonatPokedexText[] = _(
 
 const u8 gVenonatPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gVenomothPokedexText[] = _(
-        "Settles on a thing, quietly, and\n"
-        "stays there while it works."
+        "Settles on a thing, quietly, and stays.\n"
+        "It sends word of all it sees to\n"
+        "somewhere the thing has never been."
 );
 
 const u8 gVenomothPokedexTextUnused[] = _("");
@@ -468,16 +479,20 @@ const u8 gMachopPokedexText[] = _(
 
 const u8 gMachopPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gMachokePokedexText[] = _(
-        "Carries the result of one step so the\n"
-        "next one can start from it."
+        "What the steps were for. Once it holds\n"
+        "it never has to be shown again, and\n"
+        "everything after starts from it."
 );
 
 const u8 gMachokePokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gMachampPokedexText[] = _(
-        "Four arms, and a proof it can hold\n"
-        "all of at once."
+        "Four arms, each holding one smaller\n"
+        "result. Together they carry a proof\n"
+        "that none of them could lift alone."
 );
 
 const u8 gMachampPokedexTextUnused[] = _("");
@@ -616,9 +631,12 @@ const u8 gDewgongPokedexText[] = _(
 
 const u8 gDewgongPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gGrimerPokedexText[] = _(
-        "Nothing here was thrown away. It was all\n"
-        "kept, somewhere nobody decided on.");
+        "Made of everything that could not be\n"
+        "delivered. None of it was thrown away.\n"
+        "It was all kept, somewhere nobody\n"
+        "decided on.");
 
 const u8 gGrimerPokedexTextUnused[] = _("");
 
@@ -643,9 +661,11 @@ const u8 gCloysterPokedexText[] = _(
 
 const u8 gCloysterPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gGastlyPokedexText[] = _(
-        "Mostly not there. What is there does\n"
-        "not have to touch anything."
+        "Mostly not there. It still points at\n"
+        "something let go of long ago. Whatever\n"
+        "follows it finds nothing."
 );
 
 const u8 gGastlyPokedexTextUnused[] = _("");
@@ -670,23 +690,29 @@ const u8 gOnixPokedexText[] = _(
 
 const u8 gOnixPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gDrowzeePokedexText[] = _(
-        "Puts a thing off the schedule and\n"
-        "feeds on what it was going to do."
+        "A quiet settles on whatever is near it.\n"
+        "Things slow, then rest a while, and it\n"
+        "feeds on what they were going to do."
 );
 
 const u8 gDrowzeePokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gHypnoPokedexText[] = _(
-        "Holds a thing's attention on one\n"
-        "point until nothing else is running."
+        "Holds a thing's attention on one point,\n"
+        "checking it, and checking again, wide\n"
+        "awake, until nothing else is running."
 );
 
 const u8 gHypnoPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gKrabbyPokedexText[] = _(
-        "One claw much larger than the other,\n"
-        "and it leads with that one."
+        "Takes hold of what it needs before\n"
+        "anything else can, and keeps it until\n"
+        "it is done. It leads with the big claw."
 );
 
 const u8 gKrabbyPokedexTextUnused[] = _("");
@@ -705,18 +731,21 @@ const u8 gVoltorbPokedexText[] = _(
 
 const u8 gVoltorbPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gElectrodePokedexText[] = _(
-        "Holds far more current than its casing\n"
-        "is rated for. It opens the circuit by\n"
-        "ceasing to exist."
+        "When too much runs through it, it opens,\n"
+        "and everything past it goes dark. Reset\n"
+        "it, and it closes and waits again."
 );
 
 const u8 gElectrodePokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gExeggcutePokedexText[] = _(
-        "Six of them, and none is in charge.\n"
-        "Each one votes. The vote is the\n"
-        "behaviour."
+        "Six of them, each grown from a handful\n"
+        "drawn again from the same few seeds.\n"
+        "None is in charge. Each one votes. The\n"
+        "vote is the behaviour."
 );
 
 const u8 gExeggcutePokedexTextUnused[] = _("");
@@ -728,9 +757,11 @@ const u8 gExeggutorPokedexText[] = _(
 
 const u8 gExeggutorPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gCubonePokedexText[] = _(
-        "Wears the shell of something that\n"
-        "stopped, and answers to that name."
+        "Wears what was left when something\n"
+        "stopped: made by it, and not it. It\n"
+        "answers to that thing's name."
 );
 
 const u8 gCubonePokedexTextUnused[] = _("");
@@ -742,9 +773,11 @@ const u8 gMarowakPokedexText[] = _(
 
 const u8 gMarowakPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gHitmonleePokedexText[] = _(
-        "Extends further than it should be able\n"
-        "to reach. Every step of it is legal."
+        "Kicks from a footing it has never once\n"
+        "tested. Every step after that is legal,\n"
+        "and it reaches further than it should."
 );
 
 const u8 gHitmonleePokedexTextUnused[] = _("");
@@ -756,9 +789,11 @@ const u8 gHitmonchanPokedexText[] = _(
 
 const u8 gHitmonchanPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gLickitungPokedexText[] = _(
-        "Takes a sample of anything it can\n"
-        "reach and keeps the reading."
+        "Takes in the whole of anything it can\n"
+        "reach, in one go, and keeps it. It does\n"
+        "not taste first."
 );
 
 const u8 gLickitungPokedexTextUnused[] = _("");
@@ -814,16 +849,20 @@ const u8 gKangaskhanPokedexText[] = _(
 
 const u8 gKangaskhanPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gHorseaPokedexText[] = _(
-        "Narrow enough to raise the pressure\n"
-        "of whatever passes through it."
+        "So narrow that everything behind it\n"
+        "waits its turn. However fast the rest\n"
+        "runs, all of it goes at its pace."
 );
 
 const u8 gHorseaPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gSeadraPokedexText[] = _(
-        "Holds position in fast water by\n"
-        "running against it, continuously."
+        "When more comes than it can take, it\n"
+        "pushes back, and whatever is sending\n"
+        "slows to its pace. It holds in fast water."
 );
 
 const u8 gSeadraPokedexTextUnused[] = _("");
@@ -863,9 +902,11 @@ const u8 gMrmimePokedexText[] = _(
 
 const u8 gMrmimePokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gScytherPokedexText[] = _(
-        "Cuts at a speed that leaves the cut\n"
-        "invisible until later."
+        "Goes round after things have ended and\n"
+        "cuts them away, so their places can be\n"
+        "used again. The cut shows only later."
 );
 
 const u8 gScytherPokedexTextUnused[] = _("");
@@ -892,9 +933,11 @@ const u8 gMagmarPokedexText[] = _(
 
 const u8 gMagmarPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gPinsirPokedexText[] = _(
-        "Closes on a thing and does not reopen\n"
-        "until the thing stops moving."
+        "Once it closes on a thing it does\n"
+        "nothing else at all until that thing\n"
+        "is finished. Everything else waits."
 );
 
 const u8 gPinsirPokedexTextUnused[] = _("");
@@ -1033,9 +1076,11 @@ const u8 gMoltresPokedexText[] = _(
 
 const u8 gMoltresPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gDratiniPokedexText[] = _(
-        "Small, unremarkable, and changing\n"
-        "faster than anything measuring it."
+        "Small, unremarkable, and sent in first.\n"
+        "It changes before anything measuring\n"
+        "the rest does. Everyone watches it."
 );
 
 const u8 gDratiniPokedexTextUnused[] = _("");
@@ -1047,9 +1092,11 @@ const u8 gDragonairPokedexText[] = _(
 
 const u8 gDragonairPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gDragonitePokedexText[] = _(
-        "Behaviour that no part of it accounts\n"
-        "for, arriving reliably."
+        "There is only one, and nothing that\n"
+        "came before accounts for it. It\n"
+        "arrives reliably. There is no second."
 );
 
 const u8 gDragonitePokedexTextUnused[] = _("");
@@ -1182,10 +1229,11 @@ const u8 gSpinarakPokedexText[] = _(
 
 const u8 gSpinarakPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gAriadosPokedexText[] = _(
     "The web is finished before anything\n"
-    "arrives. It was built to fit what has not\n"
-    "come.");
+    "arrives, and made to look like a way\n"
+    "through. What comes was invited.");
 
 const u8 gAriadosPokedexTextUnused[] = _("");
 
@@ -1473,10 +1521,11 @@ const u8 gQwilfishPokedexText[] = _(
 
 const u8 gQwilfishPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gScizorPokedexText[] = _(
-        "It cannot be bound,\n"
-        "handled or ignored. There\n"
-        "is no second message.");
+        "One word, and whatever hears it ends at\n"
+        "once. It cannot be bound, handled or\n"
+        "ignored. There is no second message.");
 
 const u8 gScizorPokedexTextUnused[] = _("");
 
@@ -1699,10 +1748,11 @@ const u8 gLarvitarPokedexText[] = _(
 
 const u8 gLarvitarPokedexTextUnused[] = _("");
 
+//  T-322, DRAFT.
 const u8 gPupitarPokedexText[] = _(
-    "Sealed, and moving at speed. It is going\n"
-    "somewhere and there is no way to ask\n"
-    "where.");
+    "Sealed in, it turns one dark thing over\n"
+    "and over. Inside, it moves at speed.\n"
+    "There is no way to ask where to.");
 
 const u8 gPupitarPokedexTextUnused[] = _("");
 
