@@ -2453,9 +2453,8 @@ const u8 gBanettePokedexText[] = _(
 const u8 gBanettePokedexTextUnused[] = _("");
 
 const u8 gDuskullPokedexText[] = _(
-        "Whatever it passes grows\n"
-        "HALT. Not gone. Fainter each\n"
-        "time it is not looked at.");
+    "Whatever it passes grows pale. Not gone.\n"
+    "Paler each time it is not looked at.");
 
 const u8 gDuskullPokedexTextUnused[] = _("");
 
