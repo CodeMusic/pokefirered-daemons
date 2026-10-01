@@ -777,12 +777,12 @@ static u8 GuideFirstLines(void)
 //  one -- it is method, and 4.3's rule is that method survives a handoff and understanding does not -- but once an
 //  understanding is arrived at elsewhere, a note appears under the text of the chapter it concerns, indented, in the
 //  Guide's cyan, as if written there. Nothing counts them; a chapter simply has a note it did not have.
-//  WHICH CHAPTER, and the words, are T-252's question with where the understanding is earned: the one row below is a
-//  PROPOSAL -- DREAMS, because the unread cave is a dream you wake from and the chapter's reality check is reading a
-//  line twice -- and its note is DRAFT.
+//  WHICH CHAPTER, and the words, are T-252's question with where the understanding is earned: the first is DREAMS
+//  (the user, 2026-10-01): it is earned reading TANOBY's last chamber, and the chapter's reality check is reading a
+//  line twice.
 #define GUIDE_ENTRY_DREAMS 19
 #define GM_INDENT 28
-static const u8 sText_MarginFirst[] = _("Read it twice. It stayed.");   // DRAFT (T-304)
+static const u8 sText_MarginFirst[] = _("Read it twice. It stayed.");   // the user's (T-304, T-252)
 //  DRAFT (T-252, 2026-09-26): the six the user named, each in the chapter it answers, in the player's own hand.
 static const u8 sText_MarginSchool[]  = _("They taught me the names. The rest I will have to find.");
 static const u8 sText_MarginReading[] = _("It was there before. I was not looking.");
@@ -791,7 +791,7 @@ static const u8 sText_MarginScorn[]   = _("He kept score. He was very good at it
 static const u8 sText_MarginReturn[]  = _("It took him years to come back. He came back.");
 static const u8 sText_MarginGuide[]   = _("Read to the end. Now the part a book cannot do.");
 static const struct { u16 flag; u8 entry; const u8 *note; } sGuideMarginNotes[] = {
-    { FLAG_UNDERSTANDING_FIRST,   GUIDE_ENTRY_DREAMS, sText_MarginFirst },   // PROPOSAL: the chapter is T-252's
+    { FLAG_UNDERSTANDING_FIRST,   GUIDE_ENTRY_DREAMS, sText_MarginFirst },   // DREAMS, earned at TANOBY
     { FLAG_UNDERSTANDING_SCHOOL,  1,  sText_MarginSchool },    // THE TOOLKIT
     { FLAG_UNDERSTANDING_READING, 9,  sText_MarginReading },   // MONITORING
     { FLAG_UNDERSTANDING_NOTES,   6,  sText_MarginNotes },     // THE LOOP

@@ -1575,8 +1575,8 @@
 #define FLAG_GOT_PIXELBYTE            (DAEMONS_FLAGS_START + 0x40)
 //  T-251 / T-252. THE FIRST UNDERSTANDING, and the second gate of DOLDRUM CAVE. The REVIEW BOARD is permission
 //  (the guard stands aside); this is perception. Without it the cave is grey, its ladders lead anywhere, and
-//  what lives there cannot be seen. Where it is EARNED is still T-252's question -- for now it is set where the
-//  islands' machine completes, which was the old second gate.
+//  what lives there cannot be seen. It is EARNED in TANOBY's seventh chamber, reading the last inscription (the
+//  user, 2026-10-01); the islands' machine still opens the cave, which is the other gate.
 #define FLAG_UNDERSTANDING_FIRST      (DAEMONS_FLAGS_START + 0x50)
 //  T-235. THE FIVE WITNESSES' REWARD: the TRANSCRIPT the station's log withholds, in ARTSAI's own words, filed in
 //  LAB NOTES -- and with it, ARTSAI's drawing under the log can be read (REVEAL shows it) and bound. BOUND is set
