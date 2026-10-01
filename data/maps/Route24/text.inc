@@ -9,11 +9,12 @@ Route24_Text_ReceivedNuggetFromMysteryTrainer::
 Route24_Text_YouDontHaveAnyRoom::
     .string "You don't have any room!$"
 
+@  T-321, DRAFT.
 Route24_Text_JoinTeamRocket::
     .string "By the way, would you like to join\n"
     .string "TEAM CORPUS?\p"
-    .string "We're a group dedicated to evil\n"
-    .string "using DAEMON!\p"
+    .string "We have a graduate scheme. Real\n"
+    .string "DAEMON exposure from day one!\p"
     .string "Want to join?\p"
     .string "Are you sure?\p"
     .string "Come on, join us!\p"

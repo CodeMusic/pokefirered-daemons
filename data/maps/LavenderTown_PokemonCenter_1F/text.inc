@@ -1,6 +1,7 @@
+@  T-321, DRAFT.
 LavenderTown_PokemonCenter_1F_Text_RocketsDoAnythingForMoney::
     .string "TEAM CORPUS will do anything for\n"
-    .string "the sake of gold!$"
+    .string "a good quarter!$"
 
 LavenderTown_PokemonCenter_1F_Text_CubonesMotherKilledByRockets::
     .string "I saw ARTEFACT's mother die trying to\n"

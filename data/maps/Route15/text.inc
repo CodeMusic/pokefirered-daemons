@@ -80,9 +80,10 @@ Route15_Text_ErnestIntro::
 Route15_Text_ErnestDefeat::
     .string "Why not?$"
 
+@  T-321, DRAFT.
 Route15_Text_ErnestPostBattle::
     .string "You only live once, so I live as\n"
-    .string "an outlaw! TEAM CORPUS RULES!$"
+    .string "a disruptor! TEAM CORPUS RULES!$"
 
 Route15_Text_AlexIntro::
     .string "Fork over all your cash when you\n"

@@ -13,7 +13,7 @@ CeladonCity_DepartmentStore_3F_Text_HaunterEvolvedOnTrade::
     .string "I love RESPAWN! I collect them!\p"
     .string "Huh?\p"
     .string "RESPAWN turned into a different\n"
-    .string "DAEMONS while being traded!$"
+    .string "DAEMON while being traded!$"
 
 CeladonCity_DepartmentStore_3F_Text_CanIdentifyTradeMonsByID::
     .string "You can identify DAEMON you get in\n"

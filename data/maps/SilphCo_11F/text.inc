@@ -40,21 +40,18 @@ SilphCo_11F_Text_ThanksForRescuingUs::
     .string "We, from the PRESIDENT down,\n"
     .string "are indebted to you.$"
 
+@  T-321, DRAFT.
 SilphCo_11F_Text_GiovanniIntro::
-    .string "Ah. {PLAYER}.\p"
-    .string "The PRESIDENT and I are agreeing\n"
-    .string "terms.\p"
-    .string "Since you are here. Everyone\n"
-    .string "protects what they value.\p"
-    .string "That is not the fault.\p"
-    .string "The fault is that protecting is\n"
-    .string "easier to measure than the thing.\p"
-    .string "So they improve the protecting.\n"
-    .string "For years.\p"
-    .string "And go on calling it by the name\n"
-    .string "of the thing.\p"
-    .string "I do not make that error.\p"
-    .string "Stand aside.$"
+    .string "…and that is the whole of it,\n"
+    .string "PRESIDENT.\p"
+    .string "You protected what you valued.\n"
+    .string "Then you measured the protecting,\l"
+    .string "because that was easier.\p"
+    .string "Then you improved the measuring.\n"
+    .string "For years. And went on calling it\l"
+    .string "by the name of the thing.\p"
+    .string "I do not make that mistake.\p"
+    .string "Ah. {PLAYER}. Stand aside.$"
 
 SilphCo_11F_Text_GiovanniDefeat::
     .string "Hm.\p"

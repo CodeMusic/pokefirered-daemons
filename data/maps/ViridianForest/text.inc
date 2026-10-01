@@ -37,9 +37,10 @@ ViridianForest_Text_SammyPostBattle::
     .string "I am looking for mine. If you find\n"
     .string "something, it was probably mine.$"
 
+@  T-321, DRAFT.
 ViridianForest_Text_AnthonyIntro::
-    .string "I am small. Do not adjust anything\n"
-    .string "on my account.$"
+    .string "I am small. Do not go easy on me.\p"
+    .string "I can always tell when people do.$"
 
 ViridianForest_Text_AnthonyDefeat::
     .string "Oh. Nothing went the way I had it.$"

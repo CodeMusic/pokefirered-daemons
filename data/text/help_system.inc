@@ -296,7 +296,7 @@ Help_Text_AnswerWhatsABattle::
 	.string "In a battle, DAEMON try to reduce one\n"
 	.string "another's vitality, expressed as HP. If\l"
 	.string "a DAEMON's HP falls to zero, it HALTS,\l"
-	.string "and the other DAEMONS wins. By winning\l"
+	.string "and the other DAEMON wins. By winning\l"
 	.string "a battle, DAEMON earn EXP. Points,\l"
 	.string "which help them level up (grow\l"
 	.string "stronger).$"
@@ -327,8 +327,8 @@ Help_Text_AnswerMyMonsAreHurt::
 Help_Text_AnswerWhatIsStatusProblem::
 	.string "A status problem refers to an ailment\n"
 	.string "that is inflicted on a DAEMON by its\l"
-	.string "their attack. These include\l"
-	.string "throttling, leaking, suspension, and\l"
+	.string "opponent's attack. These include\l"
+	.string "throttling, leaking, suspension,\l"
 	.string "overheating and hanging. Heal\l"
 	.string "them at a CHECKPOINT or with the\l"
 	.string "appropriate item.$"
@@ -342,12 +342,12 @@ Help_Text_AnswerWhatHappensIfAllMyMonsFaint::
 	.string "get in the habit of saving often.$"
 
 Help_Text_AnswerCantCatchMons::
-	.string "If a wild DAEMON escapes from a POKé\n"
-	.string "BOX, it's obviously still feisty. Try\l"
+	.string "If a wild DAEMON escapes from a BOX,\n"
+	.string "it's obviously still feisty. Try\l"
 	.string "reducing its HP some more, and try to\l"
 	.string "throttle it or suspend it\l"
-	.string "before trying to bind it. If the POKé\l"
-	.string "BOX rocks for a while, the quarry is\l"
+	.string "before trying to bind it. If the BOX\l"
+	.string "rocks for a while, the quarry is\l"
 	.string "close to being bound!$"
 
 Help_Text_AnswerRanOutOfPotions::
@@ -549,7 +549,7 @@ Help_Text_UsingKeyItem::
 	.string "  Using a key item$"
 
 Help_Text_UsingPokeBall::
-	.string "  Using a POKé BOX$"
+	.string "  Using a BOX$"
 
 Help_Text_UsingPlayer::
 	.string " Using “{PLAYER}”$"
@@ -738,9 +738,9 @@ Help_Text_HowToUsePokeBall::
 	.string "   select the POOL's “BOXES”\n"
 	.string "   POCKET.\n"
 	.string "{CIRCLE_2} Press up or down on the {PLUS} Control\n"
-	.string "   Pad to select a POKé BOX.\n"
+	.string "   Pad to select a BOX.\n"
 	.string "{CIRCLE_3} Select “USE” to throw the selected\n"
-	.string "   POKé BOX.$"
+	.string "   BOX.$"
 
 Help_Text_HowToUsePlayer::
 	.string "{CIRCLE_1} Select “{PLAYER}” on the MENU.\n"
@@ -967,7 +967,7 @@ Help_Text_HowToUseBag2::
 
 Help_Text_HowToReadPokedex::
 	.string "{CIRCLE_1} DAEMON that you have bound are\n"
-	.string "   identified by a POKé BOX mark on\n"
+	.string "   identified by a BOX mark on\n"
 	.string "   the INDEX list.\n"
 	.string "{CIRCLE_2} A bound DAEMON will provide a\n"
 	.string "   large amount of data.\n"
@@ -1029,8 +1029,8 @@ Help_Text_HowToRegisterKeyItem::
 	.string "   “REGISTER.”$"
 
 Help_Text_HowToUseBall::
-	.string "{CIRCLE_1} Select to throw the special POKé\n"
-	.string "   BOX used only in the SAFARI ZONE.\n"
+	.string "{CIRCLE_1} Select to throw the special BOX\n"
+	.string "   used only in the SAFARI ZONE.\n"
 	.string "When wild DAEMONS appear, throw lots\n"
 	.string "of GUESTBOXES to bind them!$"
 
@@ -1355,7 +1355,7 @@ Help_Text_DefineKeyItems::
 
 Help_Text_DefinePokeBalls::
 	.string "BOXES, which are used for binding\n"
-	.string "wild DAEMONS, are placed in the POKé\l"
+	.string "wild DAEMONS, are placed in the\l"
 	.string "BOXES POCKET. BOXES may be\l"
 	.string "bought at REPOS. They may be used,\l"
 	.string "given to a DAEMON to hold, or tossed\l"

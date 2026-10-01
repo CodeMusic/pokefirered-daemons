@@ -1,11 +1,14 @@
+@  T-321, DRAFT.
 Text_SeismicTossTeach::
     .string "Most of what was built is gone.\p"
     .string "We keep what we can and label the\n"
     .string "rest unknown.\p"
-    .string "That should make you look harder,\n"
-    .string "not look away.\p"
-    .string "Speaking of which. Shall I teach\n"
-    .string "one of yours EQUATE?$"
+    .string "Visitors walk straight past the\n"
+    .string "UNKNOWN cards. I would look\l"
+    .string "hardest at those.\p"
+    .string "I teach a little on the side. It\n"
+    .string "pays for the labels.\p"
+    .string "EQUATE, for one of yours?$"
 
 Text_SeismicTossDeclined::
     .string "No?\n"
@@ -39,12 +42,13 @@ PewterCity_Museum_1F_Text_BoughtColorTVForMoonLanding::
     .string "It does not say we are wrong. It\n"
     .string "says we could not tell.$"
 
+@  T-321, DRAFT.
 PewterCity_Museum_1F_Text_RunningSpaceExhibitThisMonth::
     .string "The upstairs exhibit changes every\n"
     .string "month.\p"
-    .string "This one is KNOWN FAULTS. It is\n"
-    .string "about distance, and about the\l"
-    .string "distance you think you have.\p"
+    .string "This month it is KNOWN FAULTS.\n"
+    .string "Every machine in it was sure of\l"
+    .string "something.\p"
     .string "A researcher from BLANCHE wrote\n"
     .string "the cards. She is collecting them.\p"
     .string "Into a module, she said. As though\n"

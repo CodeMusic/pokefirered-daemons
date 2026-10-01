@@ -27,10 +27,13 @@ PalletTown_RivalsHouse_Text_ExplainTownMap::
     .string "and what the places are called.\p"
     .string "The two do not always agree.$"
 
+@  T-321, DRAFT.
 PalletTown_RivalsHouse_Text_PleaseGiveMonsRest::
-    .string "A daemon that has been running a\n"
-    .string "long time does worse work.\p"
-    .string "This surprises people.$"
+    .string "Yours have been running all day,\n"
+    .string "I expect.\p"
+    .string "A daemon that runs a long time\n"
+    .string "does worse work. Nobody ever\l"
+    .string "believes me.$"
 
 PalletTown_RivalsHouse_Text_ItsBigMapOfKanto::
     .string "A map of the whole region.\p"

@@ -58,11 +58,13 @@ FourIsland_IcefallCave_Back_Text_OkayRocketWareHouseFiveIsland::
     .string "into the CORPUS WAREHOUSE!\p"
     .string "Heheheheh!$"
 
+@  T-321, DRAFT.
 FourIsland_IcefallCave_Back_Text_ThankYouThisIsAwful::
     .string "{PLAYER}, thank you.\p"
     .string "I was born and raised here on\n"
     .string "these islands.\p"
-    .string "They were not cruel to the DAEMON.\n"
-    .string "They were counting them.\p"
-    .string "I am not sure yet which is worse.$"
+    .string "They kept a ledger. Every one of\n"
+    .string "them, numbered, with a price.\p"
+    .string "Very neat. That is the part I\n"
+    .string "will keep seeing.$"
 

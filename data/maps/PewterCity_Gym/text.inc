@@ -102,20 +102,24 @@ PewterCity_Gym_Text_GymStatuePlayerWon::
 
 
 @ T-216 -- DRAFT WORDING, awaiting the user's approval.
+@  T-321, DRAFT.
 PewterCity_Gym_Text_OneMoreThing::
     .string "One more thing.\p"
-    .string "Everything you know is sitting\n"
-    .string "in something. Stone, bone, tape.\p"
-    .string "If it is not written down, it did\n"
-    .string "not happen. So write it down.$"
+    .string "I keep a book of every match\n"
+    .string "fought in here. Every one.\p"
+    .string "The ones from before the book,\n"
+    .string "nobody in SLATE remembers.\p"
+    .string "Here. Start yours.$"
 
 PewterCity_Gym_Text_ReceivedNotebook::
     .string "{PLAYER} received a NOTEBOOK\n"
     .string "from CAIRN.$"
 
+@  T-321, DRAFT.
 PewterCity_Gym_Text_ExplainNotebook::
     .string "Put what you find in it, in the\n"
     .string "order it belongs, not the order\l"
     .string "you found it.\p"
-    .string "A record is only ever as good as\n"
-    .string "whoever kept it.$"
+    .string "My first book is in the order I\n"
+    .string "tripped over things.\p"
+    .string "I have never found a thing in it.$"

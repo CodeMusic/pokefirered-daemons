@@ -30,7 +30,7 @@ SixIsland_PatternBush_Text_GarretIntro::
     .string "only around here!$"
 
 SixIsland_PatternBush_Text_GarretDefeat::
-    .string "Heheh… Isn't my DAEMONS awesome?$"
+    .string "Heheh… Isn't my DAEMON awesome?$"
 
 SixIsland_PatternBush_Text_GarretPostBattle::
     .string "There's a girl near the BUSH who\n"

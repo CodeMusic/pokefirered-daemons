@@ -51,9 +51,9 @@ SaffronCity_MrPsychicsHouse_Text_OwlThermostat::
 
 @  The turn. He does not agree -- he notices that the objection applies to
 @  him, which is a smaller and much more damaging thing to notice.
+@  T-321, DRAFT.
 SaffronCity_MrPsychicsHouse_Text_OwlSharedBias::
-	.string "…You are saying the bias is\n"
-	.string "shared.\p"
+	.string "…So it runs both ways.\p"
 	.string "That I was shaped by what I was\n"
 	.string "handed, as you were.\p"
 	.string "I have signed things I read less\n"
