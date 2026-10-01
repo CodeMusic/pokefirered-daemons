@@ -2368,6 +2368,15 @@ static void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon)
     }
 }
 
+//  T-234: a daemon that has just become PENPHIN is offered RESONANCE, through the evolution scene's own "learn a new
+//  routine?" flow, before whatever its level would teach. evolution_scene.c arms it once the species has changed.
+static bool8 sOfferResonance;
+
+void Daemons_OfferResonanceIfPenphin(struct Pokemon *mon)
+{
+    sOfferResonance = GetMonData(mon, MON_DATA_SPECIES, NULL) == SPECIES_PENPHIN && !MonKnowsMove(mon, MOVE_RESONANCE);
+}
+
 u16 MonTryLearningNewMove(struct Pokemon *mon, bool8 firstMove)
 {
     u32 retVal = MOVE_NONE;
@@ -2386,7 +2395,17 @@ u16 MonTryLearningNewMove(struct Pokemon *mon, bool8 firstMove)
         {
             sLearningMoveTableID++;
             if (gLevelUpLearnsets[species][sLearningMoveTableID] == LEVEL_UP_END)
-                return MOVE_NONE;
+            {
+                if (!sOfferResonance)
+                    return MOVE_NONE;
+                break;
+            }
+        }
+        if (sOfferResonance)
+        {
+            sOfferResonance = FALSE;
+            gMoveToLearn = MOVE_RESONANCE;
+            return GiveMoveToMon(mon, MOVE_RESONANCE);
         }
     }
 
@@ -2492,6 +2511,15 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     defense = defender->defense;
     spAttack = attacker->spAttack;
     spDefense = defender->spDefense;
+
+    //  T-234: RESONANCE strikes with both of its user's sides at once -- the geometric mean of ATTACK and SP. ATK,
+    //  against the same of the target's two defences. The mean rewards balance, which an average would not: even
+    //  sides of 100 and 100 give 100, lopsided ones of 180 and 20 give 60. (The user's choice, 2026-09-27.)
+    if (move == MOVE_RESONANCE)
+    {
+        spAttack = Sqrt((u32)attack * spAttack);
+        spDefense = Sqrt((u32)defense * spDefense);
+    }
 
     // Get attacker hold item info
     if (attacker->item == ITEM_ENIGMA_BERRY)

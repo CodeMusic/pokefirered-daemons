@@ -2211,17 +2211,19 @@ const u8 gSharpedoPokedexText[] = _(
 
 const u8 gSharpedoPokedexTextUnused[] = _("");
 
+//  T-234, DRAFT.
 const u8 gWailmerPokedexText[] = _(
-        "When it sucks in a large volume of\n"
-        "seawater, it becomes like a big, bouncy\n"
-        "box. It eats a ton of food daily.");
+    "It counts the swells before it leaps,\n"
+    "and lands where it counted. The pod\n"
+    "follows it. It is never wrong twice.");
 
 const u8 gWailmerPokedexTextUnused[] = _("");
 
+//  T-234, DRAFT.
 const u8 gWailordPokedexText[] = _(
-        "It is among the largest of all DAEMONS.\n"
-        "It herds prey in a pack then swallows the\n"
-        "massed prey in one gulp.");
+    "It will not act until both halves of\n"
+    "it agree. Nobody has found one alone.\n"
+    "Each began as a gift between two people.");
 
 const u8 gWailordPokedexTextUnused[] = _("");
 
@@ -2512,17 +2514,18 @@ const u8 gGlaliePokedexText[] = _(
 
 const u8 gGlaliePokedexTextUnused[] = _("");
 
+//  T-234, DRAFT.
 const u8 gSphealPokedexText[] = _(
-    "Its body is covered in fluffy fur. The\n"
-    "fur keeps it from feeling cold while\n"
-    "it is rolling on ice.");
+    "It cannot say how it knows the ice\n"
+    "will hold. It walks out anyway.\n"
+    "So far, it has always been right.");
 
 const u8 gSphealPokedexTextUnused[] = _("");
 
 const u8 gSealeoPokedexText[] = _(
     "It touches new things with its nose to\n"
     "test for smell and feel. It plays by\n"
-    "spinning SPHEAL on its nose.");
+    "spinning PENGUIN on its nose.");
 
 const u8 gSealeoPokedexTextUnused[] = _("");
 

@@ -4162,28 +4162,28 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_WAILMER] =
     {
-        .categoryName = _("BOX WHALE"),
-        .height = 20,
-        .weight = 1300,
+        .categoryName = _("RECKONING"),
+        .height = 17,
+        .weight = 900,
         .description = gWailmerPokedexText,
         .unusedDescription = gWailmerPokedexTextUnused,
-        .pokemonScale = 256,
-        .pokemonOffset = 10,
-        .trainerScale = 493,
-        .trainerOffset = 10,
+        .pokemonScale = 280,
+        .pokemonOffset = 8,
+        .trainerScale = 256,
+        .trainerOffset = 0,
     },
 
     [NATIONAL_DEX_WAILORD] =
     {
-        .categoryName = _("FLOAT WHALE"),
-        .height = 145,
-        .weight = 3980,
+        .categoryName = _("CONCORD"),
+        .height = 15,
+        .weight = 820,
         .description = gWailordPokedexText,
         .unusedDescription = gWailordPokedexTextUnused,
-        .pokemonScale = 276,
-        .pokemonOffset = -1,
-        .trainerScale = 1428,
-        .trainerOffset = 20,
+        .pokemonScale = 300,
+        .pokemonOffset = 6,
+        .trainerScale = 256,
+        .trainerOffset = 0,
     },
 
     [NATIONAL_DEX_NUMEL] =
@@ -4721,13 +4721,13 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_SPHEAL] =
     {
-        .categoryName = _("CLAP"),
-        .height = 8,
-        .weight = 395,
+        .categoryName = _("INKLING"),
+        .height = 9,
+        .weight = 280,
         .description = gSphealPokedexText,
         .unusedDescription = gSphealPokedexTextUnused,
-        .pokemonScale = 315,
-        .pokemonOffset = 15,
+        .pokemonScale = 330,
+        .pokemonOffset = 14,
         .trainerScale = 256,
         .trainerOffset = -2,
     },

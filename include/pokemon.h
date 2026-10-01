@@ -322,6 +322,7 @@ u16 GiveMoveToBattleMon(struct BattlePokemon *mon, u16 move);
 void SetMonMoveSlot(struct Pokemon *mon, u16 move, u8 slot);
 void SetBattleMonMoveSlot(struct BattlePokemon *mon, u16 move, u8 slot);
 u16 MonTryLearningNewMove(struct Pokemon *mon, bool8 firstMove);
+void Daemons_OfferResonanceIfPenphin(struct Pokemon *mon);   // T-234
 void DeleteFirstMoveAndGiveMoveToMon(struct Pokemon *mon, u16 move);
 s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *defender, u32 move, u16 sideStatus, u16 powerOverride, u8 typeOverride, u8 battlerIdAtk, u8 battlerIdDef);
 

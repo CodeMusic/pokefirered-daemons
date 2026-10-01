@@ -3848,14 +3848,16 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
     },
 
+    //  T-234: RESONANCE, PENPHIN's routine -- two frames that reinforce, and neither is lost. A plain hit whose
+    //  sides are its user's LOGIC and CONTEXT together (pokemon.c's CalculateBaseDamage), so it rewards balance.
     [MOVE_MIST_BALL] =
     {
-        .effect = EFFECT_SPECIAL_ATTACK_DOWN_HIT,
-        .power = 70,
+        .effect = EFFECT_HIT,
+        .power = 90,
         .type = TYPE_PSYCHIC,
         .accuracy = 100,
-        .pp = 5,
-        .secondaryEffectChance = 50,
+        .pp = 10,
+        .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,

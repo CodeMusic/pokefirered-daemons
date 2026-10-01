@@ -11736,7 +11736,7 @@
           "map": "MAP_CERULEAN_CITY",
           "base_label": "sCeruleanCity_FireRed",
           "water_mons": {
-            "encounter_rate": 1,
+            "encounter_rate": 4,
             "mons": [
               {
                 "min_level": 5,
@@ -11746,7 +11746,7 @@
               {
                 "min_level": 10,
                 "max_level": 20,
-                "species": "SPECIES_TENTACOOL"
+                "species": "SPECIES_WAILMER"
               },
               {
                 "min_level": 20,
@@ -24734,7 +24734,7 @@
               {
                 "min_level": 10,
                 "max_level": 20,
-                "species": "SPECIES_TENTACOOL"
+                "species": "SPECIES_SPHEAL"
               },
               {
                 "min_level": 20,
@@ -24752,7 +24752,7 @@
                 "species": "SPECIES_TENTACOOL"
               }
             ],
-            "encounter_rate": 1
+            "encounter_rate": 4
           },
           "fishing_mons": {
             "mons": [
