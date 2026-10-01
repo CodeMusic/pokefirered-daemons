@@ -543,19 +543,98 @@ static void DestroySafariZoneStatsWindow(void)
     }
 }
 
+//  T-332 (the user, 2026-10-01): THE START MENU IS TWO COLUMNS. Items were about to be added and it already ran off the
+//  bottom of the screen (fully in the DEBUG build, with its DEBUG row). So the window is twice as wide, a divider down
+//  the middle, and the items go down the left column and then the right -- the order reads as it always did. Up and
+//  down move within a column; left and right cross to the same row of the other one. The DEBUG pages keep one column:
+//  their left and right already step values (WATCH, DAEMON, LEVEL).
+#define SM_COL_WIDTH   56                    // seven tiles, vanilla's whole menu
+#define SM_ROW_HEIGHT  15
+
+static bool8 StartMenuIsTwoColumns(void)
+{
+#if DAEMONS_DEBUG
+    return sDbgPage == DBG_PAGE_NONE;
+#else
+    return TRUE;
+#endif
+}
+
+static u8 StartMenuRows(void)
+{
+    return StartMenuIsTwoColumns() ? (sNumStartMenuItems + 1) / 2 : sNumStartMenuItems;
+}
+
+static void StartMenuItemPos(u8 i, u8 *x, u8 *y)
+{
+    u8 rows = StartMenuRows();
+
+    *x = (i / rows) * SM_COL_WIDTH;
+    *y = (i % rows) * SM_ROW_HEIGHT;
+}
+
+static void StartMenuDrawCursor(u8 oldPos, u8 newPos)
+{
+    u8 x, y, w = GetMenuCursorDimensionByFont(FONT_NORMAL, 0), h = GetMenuCursorDimensionByFont(FONT_NORMAL, 1);
+
+    if (oldPos != 0xFF)
+    {
+        StartMenuItemPos(oldPos, &x, &y);
+        FillWindowPixelRect(GetStartMenuWindowId(), PIXEL_FILL(TEXT_COLOR_WHITE), x, y, w, h);
+    }
+    StartMenuItemPos(newPos, &x, &y);
+    AddTextPrinterParameterized(GetStartMenuWindowId(), FONT_NORMAL, gText_SelectorArrow2, x, y, 0, NULL);
+}
+
+static void StartMenuDrawDivider(void)
+{
+    FillWindowPixelRect(GetStartMenuWindowId(), PIXEL_FILL(TEXT_COLOR_LIGHT_GRAY), SM_COL_WIDTH - 3, 0, 1,
+                        StartMenuRows() * SM_ROW_HEIGHT - 1);
+}
+
+//  Up and down within the column, wrapping in it; left and right to the same row of the other column, or its last
+//  item when that row is empty. Returns TRUE if the cursor moved.
+static bool8 StartMenuMoveCursor(void)
+{
+    u8 rows = StartMenuRows(), old = sStartMenuCursorPos;
+    u8 col = old / rows, row = old % rows;
+    u8 inCol = (col == 0) ? rows : sNumStartMenuItems - rows;
+
+    if (JOY_NEW(DPAD_UP))
+        row = row == 0 ? inCol - 1 : row - 1;
+    else if (JOY_NEW(DPAD_DOWN))
+        row = row + 1 >= inCol ? 0 : row + 1;
+    else if (JOY_NEW(DPAD_LEFT | DPAD_RIGHT) && sNumStartMenuItems > rows)
+    {
+        col ^= 1;
+        inCol = (col == 0) ? rows : sNumStartMenuItems - rows;
+        if (row >= inCol)
+            row = inCol - 1;
+    }
+    else
+        return FALSE;
+    sStartMenuCursorPos = col * rows + row;
+    if (sStartMenuCursorPos == old)
+        return FALSE;
+    StartMenuDrawCursor(old, sStartMenuCursorPos);
+    return TRUE;
+}
+
 static s8 PrintStartMenuItems(s8 *cursor_p, u8 nitems)
 {
     s16 i = *cursor_p;
+    u8 x, y;
     do
     {
+        StartMenuItemPos(i, &x, &y);
         if (sStartMenuOrder[i] == STARTMENU_PLAYER || sStartMenuOrder[i] == STARTMENU_PLAYER2)
         {
-            Menu_PrintFormatIntlPlayerName(GetStartMenuWindowId(), sStartMenuActionTable[sStartMenuOrder[i]].text, 8, i * 15);
+            Menu_PrintFormatIntlPlayerName(GetStartMenuWindowId(), sStartMenuActionTable[sStartMenuOrder[i]].text, x + 8, y);
         }
         else
         {
             StringExpandPlaceholders(gStringVar4, sStartMenuActionTable[sStartMenuOrder[i]].text);
-            AddTextPrinterParameterized(GetStartMenuWindowId(), FONT_NORMAL, gStringVar4, 8, i * 15, 0xFF, NULL);
+            AddTextPrinterParameterized(GetStartMenuWindowId(), FONT_NORMAL, gStringVar4, x + 8, y, 0xFF, NULL);
         }
         i++;
         if (i >= sNumStartMenuItems)
@@ -617,7 +696,11 @@ static s8 DoDrawStartMenu(void)
     case 2:
         LoadStdWindowFrameGfx();
         DaemonsThemeMenuFrame();
-        DrawStdWindowFrame(CreateStartMenuWindow(sNumStartMenuItems), FALSE);
+        if (StartMenuIsTwoColumns())
+            SetStartMenuWindowWidth(2 * SM_COL_WIDTH / 8);     // T-332: two columns of seven tiles
+        DrawStdWindowFrame(CreateStartMenuWindow(StartMenuRows()), FALSE);
+        if (StartMenuIsTwoColumns() && sNumStartMenuItems > StartMenuRows())
+            StartMenuDrawDivider();
         sDrawStartMenuState[0]++;
         break;
     case 3:
@@ -630,7 +713,16 @@ static s8 DoDrawStartMenu(void)
             sDrawStartMenuState[0]++;
         break;
     case 5:
-        sStartMenuCursorPos = Menu_InitCursor(GetStartMenuWindowId(), FONT_NORMAL, 0, 0, 15, sNumStartMenuItems, sStartMenuCursorPos);
+        if (StartMenuIsTwoColumns())
+        {
+            if (sStartMenuCursorPos >= sNumStartMenuItems)
+                sStartMenuCursorPos = 0;
+            StartMenuDrawCursor(0xFF, sStartMenuCursorPos);
+        }
+        else
+        {
+            sStartMenuCursorPos = Menu_InitCursor(GetStartMenuWindowId(), FONT_NORMAL, 0, 0, 15, sNumStartMenuItems, sStartMenuCursorPos);
+        }
         if (!MenuHelpers_IsLinkActive() && InUnionRoom() != TRUE)
         {
             DrawHelpMessageWindowWithText(sStartMenuDescPointers[sStartMenuOrder[sStartMenuCursorPos]]);
@@ -711,7 +803,16 @@ void ShowStartMenu(void)
 
 static bool8 StartCB_HandleInput(void)
 {
-    if (JOY_NEW(DPAD_UP))
+    if (StartMenuIsTwoColumns())
+    {
+        if (StartMenuMoveCursor())
+        {
+            PlaySE(SE_SELECT);
+            if (!MenuHelpers_IsLinkActive() && InUnionRoom() != TRUE)
+                PrintTextOnHelpMessageWindow(sStartMenuDescPointers[sStartMenuOrder[sStartMenuCursorPos]], 2);
+        }
+    }
+    else if (JOY_NEW(DPAD_UP))
     {
         PlaySE(SE_SELECT);
         sStartMenuCursorPos = Menu_MoveCursor(-1);
@@ -720,7 +821,7 @@ static bool8 StartCB_HandleInput(void)
             PrintTextOnHelpMessageWindow(sStartMenuDescPointers[sStartMenuOrder[sStartMenuCursorPos]], 2);
         }
     }
-    if (JOY_NEW(DPAD_DOWN))
+    else if (JOY_NEW(DPAD_DOWN))
     {
         PlaySE(SE_SELECT);
         sStartMenuCursorPos = Menu_MoveCursor(+1);
