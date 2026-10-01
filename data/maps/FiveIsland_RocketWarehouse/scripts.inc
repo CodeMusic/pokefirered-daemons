@@ -79,6 +79,7 @@ FiveIsland_RocketWarehouse_EventScript_DefeatedGideon::
 	msgbox FiveIsland_RocketWarehouse_Text_TyTheOtherThing
 	giveitem_msg FiveIsland_RocketWarehouse_Text_ReceivedPayload, ITEM_LETTER
 	setflag FLAG_TY_GAVE_PAYLOAD
+	setflag FLAG_NOTEBOOK_DOC_CORRESPONDENCE_5   @ gbadocs: filed without a word
 	msgbox FiveIsland_RocketWarehouse_Text_TyNotComing
 	release
 	end

@@ -43,4 +43,5 @@ PewterCity_Museum_2F_EventScript_TheDisplayUnit::
 
 PewterCity_Museum_2F_EventScript_TheSortingFrame::
 	msgbox PewterCity_Museum_2F_Text_TheSortingFrame, MSGBOX_SIGN
+	goto NotebookDoc_LAB_NOTES_4_Card   @ gbadocs: the page folded behind the card
 	end

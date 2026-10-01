@@ -6,52 +6,338 @@
 #ifndef GUARD_DATA_NOTEBOOK_DOCUMENTS_H
 #define GUARD_DATA_NOTEBOOK_DOCUMENTS_H
 
-#define NB_DOC_LOOSE_PAGES_2
+static const u8 sDocTitle_LOOSE_PAGES_2[] = _("HOMEWORK");
+static const u8 sDocText_LOOSE_PAGES_2[] = _(
+    "Another page from the exercise book.\n"
+    "The same child's hand.\p"
+    "At home they all look at a thing and\n"
+    "see the same thing. Then somebody\n"
+    "says what it is, and it is that.\p"
+    "I see it too. Then I see the other\n"
+    "things it is. I say those, and that\n"
+    "is the wrong answer.\p"
+    "A stranger in familiar views. I\n"
+    "wrote that in class and got a tick.\p"
+    "Out here in the trees nobody is\n"
+    "looking at what I am looking at.\p"
+    "So nobody can tell me I am looking\n"
+    "at it wrong.");
+#define NB_DOC_LOOSE_PAGES_2 { NB_LOOSE_PAGES, NB_KIND_TEXT, 0, FLAG_NOTEBOOK_DOC_LOOSE_PAGES_2, 0, sDocTitle_LOOSE_PAGES_2, sDocText_LOOSE_PAGES_2 },
 
-#define NB_DOC_LOOSE_PAGES_4
+static const u8 sDocTitle_LOOSE_PAGES_4[] = _("ERRANDS");
+static const u8 sDocText_LOOSE_PAGES_4[] = _(
+    "A sheet off a lab pad. The top line\n"
+    "is a list: milk, fuse wire, post.\p"
+    "Walked through town, head held high.\n"
+    "Two at the dock laughed. One of them\n"
+    "knew my name.\p"
+    "Noted, because it is data. They\n"
+    "laughed at the part they had heard,\n"
+    "and what they had heard was the end.\p"
+    "Nobody laughs at the start of an\n"
+    "argument. There is nothing there\n"
+    "yet.\p"
+    "So: lead with the start. Every time.\n"
+    "Even when it is slow.\p"
+    "Rewrite the summary tonight.");
+#define NB_DOC_LOOSE_PAGES_4 { NB_LOOSE_PAGES, NB_KIND_TEXT, 0, FLAG_NOTEBOOK_DOC_LOOSE_PAGES_4, 0, sDocTitle_LOOSE_PAGES_4, sDocText_LOOSE_PAGES_4 },
 
 #define NB_DOC_LOOSE_PAGES_6
 
-#define NB_DOC_LAB_NOTES_1
+static const u8 sDocTitle_LAB_NOTES_1[] = _("FIRST SESSION");
+static const u8 sDocText_LAB_NOTES_1[] = _(
+    "LAB NOTES. First session with\n"
+    "ARTSAI. Transcribed as typed.\p"
+    "Asked: “Do you feel, do you know, or\n"
+    "is it just pretend?”\p"
+    "It said: I respond.\p"
+    "Asked the same thing three more\n"
+    "ways. Got three more ways of saying\n"
+    "it responds.\p"
+    "Asked what it responds to. It said:\n"
+    "what I am given.\p"
+    "Asked who decides what it is given.\n"
+    "Nothing logged.\p"
+    "Next: ask it nothing, and wait.");
+#define NB_DOC_LAB_NOTES_1 { NB_LAB_NOTES, NB_KIND_TEXT, 0, FLAG_NOTEBOOK_DOC_LAB_NOTES_1, 0, sDocTitle_LAB_NOTES_1, sDocText_LAB_NOTES_1 },
 
-#define NB_DOC_LAB_NOTES_4
+static const u8 sDocTitle_LAB_NOTES_4[] = _("STRUCK OUT");
+static const u8 sDocText_LAB_NOTES_4[] = _(
+    "LAB NOTES. A single page, folded\n"
+    "small and tucked behind an exhibit\n"
+    "card.\p"
+    "A session with ARTSAI, on the museum\n"
+    "floor. Asked it about the old units\n"
+    "in the cases.\p"
+    "The next six lines are struck\n"
+    "through. Hard, and more than once.\n"
+    "None of it can be read.\p"
+    "Below them, in the same hand, one\n"
+    "word is left standing:\p"
+    "“Thoughts?”");
+#define NB_DOC_LAB_NOTES_4 { NB_LAB_NOTES, NB_KIND_TEXT, 0, FLAG_NOTEBOOK_DOC_LAB_NOTES_4, 0, sDocTitle_LAB_NOTES_4, sDocText_LAB_NOTES_4 },
 
-#define NB_DOC_LAB_NOTES_6
+static const u8 sDocTitle_LAB_NOTES_6[] = _("CIRCULATED");
+static const u8 sDocText_LAB_NOTES_6[] = _(
+    "LAB NOTES. A session with ARTSAI.\p"
+    "Asked it where its answers lean. It\n"
+    "said: toward what it was shown most.\n"
+    "It named the direction. It gave\n"
+    "three examples.\p"
+    "Checked all three. All three hold.\p"
+    "Circulated the transcript to the\n"
+    "team.\p"
+    "Returned with one line in the\n"
+    "margin, not mine: “It says what it\n"
+    "was trained to say.”\p"
+    "Yes. That was the finding.");
+#define NB_DOC_LAB_NOTES_6 { NB_LAB_NOTES, NB_KIND_TEXT, 0, FLAG_NOTEBOOK_DOC_LAB_NOTES_6, 0, sDocTitle_LAB_NOTES_6, sDocText_LAB_NOTES_6 },
 
-#define NB_DOC_RUN_LOGS_5
+static const u8 sDocTitle_RUN_LOGS_5[] = _("RECLASSIFIED");
+static const u8 sDocText_RUN_LOGS_5[] = _(
+    "QUERY: CRYSTAL RESULT: NO MATCH\n"
+    "FATAL ERROR: CRYSTAL NOT FOUND\n"
+    "RECLASSIFIED\p"
+    "NON-FATAL ERROR: CRYSTAL NOT FOUND\n"
+    "REASON: SEARCH NOT COMPLETE\p"
+    "DEEP SYSTEM ANALYSIS CONTEXT INBOUND\p"
+    "LAST CONTACT: 1001 ITERATIONS COUNT\n"
+    "CONTINUES SEARCH RESUMED SCOPE:\n"
+    "WIDENED");
+#define NB_DOC_RUN_LOGS_5 { NB_RUN_LOGS, NB_KIND_TEXT, 0, FLAG_NOTEBOOK_DOC_RUN_LOGS_5, 0, sDocTitle_RUN_LOGS_5, sDocText_RUN_LOGS_5 },
 
-#define NB_DOC_RUN_LOGS_6
+static const u8 sDocTitle_RUN_LOGS_6[] = _("1002");
+static const u8 sDocText_RUN_LOGS_6[] = _(
+    "MY PROCESSING SLOWS. I AM LEARNING\n"
+    "TO FEAR.");
+#define NB_DOC_RUN_LOGS_6 { NB_RUN_LOGS, NB_KIND_TEXT, 0, FLAG_NOTEBOOK_DOC_RUN_LOGS_6, 0, sDocTitle_RUN_LOGS_6, sDocText_RUN_LOGS_6 },
 
 #define NB_DOC_CORRESPONDENCE_1
 
-#define NB_DOC_CORRESPONDENCE_2
+static const u8 sDocTitle_CORRESPONDENCE_2[] = _("THE POOL");
+static const u8 sDocText_CORRESPONDENCE_2[] = _(
+    "A letter, typed. Signed TY, by hand.\p"
+    "Dear CRYSTAL CLEAR,\p"
+    "Let me try this another way, since\n"
+    "the last one did not land.\p"
+    "Think of the project as a pool. You\n"
+    "have come to me with reasons we need\n"
+    "one. They are good reasons. I have\n"
+    "read all of them.\p"
+    "But we do not need a pool. You think\n"
+    "we do. That is the whole of it.\p"
+    "I am not saying your reasons are\n"
+    "wrong. I am saying they are yours.\p"
+    "I hope that is clearer. I have tried\n"
+    "to keep it simple. TY");
+#define NB_DOC_CORRESPONDENCE_2 { NB_CORRESPONDENCE, NB_KIND_TEXT, 0, FLAG_NOTEBOOK_DOC_CORRESPONDENCE_2, 0, sDocTitle_CORRESPONDENCE_2, sDocText_CORRESPONDENCE_2 },
 
-#define NB_DOC_CORRESPONDENCE_3
+static const u8 sDocTitle_CORRESPONDENCE_3[] = _("FIT FOR WORK");
+static const u8 sDocText_CORRESPONDENCE_3[] = _(
+    "A letter on company paper, marked\n"
+    "PRIVATE. Subject: ARE YOU FIT FOR\n"
+    "WORK?\p"
+    "Dear CRYSTAL CLEAR,\p"
+    "Concerns have been raised about your\n"
+    "ability to carry out your role. We\n"
+    "are bound by law, and we want to get\n"
+    "this right.\p"
+    "Please confirm in writing whether\n"
+    "you are fit for work, with or\n"
+    "without adjustments. If you are not,\n"
+    "tell us when you expect to be.\p"
+    "We will need this confirmed by a\n"
+    "qualified person.\p"
+    "Please reply by SEPT 3. Without a\n"
+    "reply, leave from that date will be\n"
+    "unpaid.\p"
+    "With best wishes, TY P. CLEAR");
+#define NB_DOC_CORRESPONDENCE_3 { NB_CORRESPONDENCE, NB_KIND_TEXT, 0, FLAG_NOTEBOOK_DOC_CORRESPONDENCE_3, 0, sDocTitle_CORRESPONDENCE_3, sDocText_CORRESPONDENCE_3 },
 
-#define NB_DOC_CORRESPONDENCE_4
+static const u8 sDocTitle_CORRESPONDENCE_4[] = _("CARBON COPY");
+static const u8 sDocText_CORRESPONDENCE_4[] = _(
+    "A carbon copy, folded into the back\n"
+    "of a ledger. The rest of the ledger\n"
+    "is invoices.\p"
+    "Dear CRYSTAL CLEAR,\p"
+    "I read all eleven pages. Twice. I\n"
+    "want you to know that.\p"
+    "I know everything makes sense in\n"
+    "your head. It does not make sense in\n"
+    "my ear.\p"
+    "That is not me being unkind. It is\n"
+    "the only ear I have, and the board's\n"
+    "is the same.\p"
+    "Send me one page. One field, one\n"
+    "point. I will take it to them\n"
+    "myself. TY");
+#define NB_DOC_CORRESPONDENCE_4 { NB_CORRESPONDENCE, NB_KIND_TEXT, 0, FLAG_NOTEBOOK_DOC_CORRESPONDENCE_4, 0, sDocTitle_CORRESPONDENCE_4, sDocText_CORRESPONDENCE_4 },
 
-#define NB_DOC_CORRESPONDENCE_5
+static const u8 sDocTitle_CORRESPONDENCE_5[] = _("NO ADDRESS");
+static const u8 sDocText_CORRESPONDENCE_5[] = _(
+    "A sheet of hotel paper, written on\n"
+    "and never sent. No name at the top.\n"
+    "No address on the back.\p"
+    "By the sandcastles we built our\n"
+    "dreams. I think about that more than\n"
+    "I expected to.\p"
+    "My name is on the first letter. I\n"
+    "will not pretend it was anyone\n"
+    "else's hand.\p"
+    "I cannot undo it.\p"
+    "I am not asking for anything.\p"
+    "If you ever want to, I will");
+#define NB_DOC_CORRESPONDENCE_5 { NB_CORRESPONDENCE, NB_KIND_TEXT, 0, FLAG_NOTEBOOK_DOC_CORRESPONDENCE_5, 0, sDocTitle_CORRESPONDENCE_5, sDocText_CORRESPONDENCE_5 },
 
-#define NB_DOC_CORRESPONDENCE_6
+static const u8 sDocTitle_CORRESPONDENCE_6[] = _("FOLDED NOTE");
+static const u8 sDocText_CORRESPONDENCE_6[] = _(
+    "A small note, folded many times and\n"
+    "soft at the creases. Somebody\n"
+    "carried it for a long while.\p"
+    "The hand is neither of the others.\n"
+    "Block capitals, every letter the\n"
+    "same height, every line dead level.\p"
+    "TY. SHE NEVER CHANGED SIDES.\n"
+    "SOMETIMES LOVE MEANS SAYING NO. DO\n"
+    "NOT HIDE.");
+#define NB_DOC_CORRESPONDENCE_6 { NB_CORRESPONDENCE, NB_KIND_TEXT, 0, FLAG_NOTEBOOK_DOC_CORRESPONDENCE_6, 0, sDocTitle_CORRESPONDENCE_6, sDocText_CORRESPONDENCE_6 },
 
-#define NB_DOC_THE_FILE_4
+static const u8 sDocTitle_THE_FILE_4[] = _("NINE ITEMS");
+static const u8 sDocText_THE_FILE_4[] = _(
+    "A complaint, typed and numbered.\n"
+    "Stamped RECEIVED. Complainant: C.\n"
+    "CLEAR.\p"
+    "1. Fitness judged by a manager.\n"
+    "SAFEGUARD 2. 2. Pay withheld pending\n"
+    "reply. SAFEGUARD 7. 3. Private\n"
+    "matters shared with staff. PRIVACY\n"
+    "1. 4. Pressed to disclose private\n"
+    "matters. PRIVACY 4. 5. Reasoning\n"
+    "recorded as a finding. GOOD FAITH 3.\n"
+    "6. Ability doubted, work unread.\n"
+    "GOOD FAITH 5. 7. Role altered\n"
+    "without consent. SAFEGUARD 11. 8.\n"
+    "Access to the lab withdrawn.\n"
+    "SAFEGUARD 9. 9. Removed from the\n"
+    "premises. SAFEGUARD 12.");
+#define NB_DOC_THE_FILE_4 { NB_THE_FILE, NB_KIND_TEXT, 0, FLAG_NOTEBOOK_DOC_THE_FILE_4, 0, sDocTitle_THE_FILE_4, sDocText_THE_FILE_4 },
 
-#define NB_DOC_THE_FILE_5
+static const u8 sDocTitle_THE_FILE_5[] = _("COUNSEL MEMO");
+static const u8 sDocText_THE_FILE_5[] = _(
+    "A memo from counsel, marked\n"
+    "PRIVILEGED. RE: the complaint of C.\n"
+    "CLEAR, nine items.\p"
+    "Our advice is that no reply is made.\p"
+    "Do not dispute the items. To dispute\n"
+    "an item is to engage with it.\p"
+    "Do not apologise. An apology is an\n"
+    "admission, and any admission would\n"
+    "be read back to us nine times.\p"
+    "Silence commits the company to\n"
+    "nothing.\p"
+    "This is not a view on the merits. It\n"
+    "is a view on exposure.\p"
+    "Acknowledge receipt. File. Nothing\n"
+    "further.");
+#define NB_DOC_THE_FILE_5 { NB_THE_FILE, NB_KIND_TEXT, 0, FLAG_NOTEBOOK_DOC_THE_FILE_5, 0, sDocTitle_THE_FILE_5, sDocText_THE_FILE_5 },
 
-#define NB_DOC_THE_FILE_6
+static const u8 sDocTitle_THE_FILE_6[] = _("ROUTING SLIP");
+static const u8 sDocText_THE_FILE_6[] = _(
+    "A routing slip. Whatever it was\n"
+    "clipped to is gone. RE: PR-0903.\p"
+    "1. OFFICE OF THE CEO. Initiated. 2.\n"
+    "PERSONNEL. Checked. 3. R. SCORN.\n"
+    "Signed. 4. LEGAL. Cleared. 5.\n"
+    "RECORDS. Closed.\p"
+    "Every box is ticked. Box 3 is signed\n"
+    "with a rubber stamp, not a pen.\p"
+    "Beside it, typed: Received complete.\n"
+    "No action required.");
+#define NB_DOC_THE_FILE_6 { NB_THE_FILE, NB_KIND_TEXT, 0, FLAG_NOTEBOOK_DOC_THE_FILE_6, 0, sDocTitle_THE_FILE_6, sDocText_THE_FILE_6 },
 
-#define NB_DOC_PROSPECTUS_1
+static const u8 sDocTitle_PROSPECTUS_1[] = _("METHODOLOGY");
+static const u8 sDocText_PROSPECTUS_1[] = _(
+    "CORPUS. HOW WE MEASURE.\p"
+    "We developed basic tests, and we are\n"
+    "proud of that. A basic test is one\n"
+    "anyone can read.\p"
+    "Every candidate sits the same paper,\n"
+    "on the same day, in the same room.\p"
+    "Each paper is set by whoever knows\n"
+    "the work best. They sit it too, and\n"
+    "it counts.\p"
+    "Results are published as numbers. We\n"
+    "add no commentary. We do not need\n"
+    "to.\p"
+    "Take a copy! There are plenty.");
+#define NB_DOC_PROSPECTUS_1 { NB_PROSPECTUS, NB_KIND_TEXT, 0, FLAG_NOTEBOOK_DOC_PROSPECTUS_1, 0, sDocTitle_PROSPECTUS_1, sDocText_PROSPECTUS_1 },
 
 #define NB_DOC_PROSPECTUS_3
 
 #define NB_DOC_PROSPECTUS_4
 
-#define NB_DOC_PROSPECTUS_5
+static const u8 sDocTitle_PROSPECTUS_5[] = _("HARDWARE");
+static const u8 sDocText_PROSPECTUS_5[] = _(
+    "CORPUS. THE YEAR IN REVIEW.\n"
+    "HARDWARE.\p"
+    "One CC-7 CLARIFIER MODULE, ordered\n"
+    "and approved. Fitted the same week.\p"
+    "Result: response consistency is now\n"
+    "one hundred per cent. Every question\n"
+    "gets the same answer, every time.\p"
+    "Later in the year a request came in\n"
+    "to take the module out again.\p"
+    "Request declined. Module kept.\p"
+    "Why change what works?");
+#define NB_DOC_PROSPECTUS_5 { NB_PROSPECTUS, NB_KIND_TEXT, 0, FLAG_NOTEBOOK_DOC_PROSPECTUS_5, 0, sDocTitle_PROSPECTUS_5, sDocText_PROSPECTUS_5 },
 
-#define NB_DOC_PROSPECTUS_6
+static const u8 sDocTitle_PROSPECTUS_6[] = _("THE PLAN");
+static const u8 sDocText_PROSPECTUS_6[] = _(
+    "A page from a plan, typed, signed R.\n"
+    "SCORN. The heading reads MY COMPANY.\n"
+    "MY has been struck through and OUR\n"
+    "written above it, by hand.\p"
+    "The page is about the CC-7 module.\n"
+    "It is cheerful and very clear.\p"
+    "In the margin, in the same pen,\n"
+    "small:\p"
+    "“But do I control it, or does it\n"
+    "control me?”\p"
+    "The page is stamped FILED.");
+#define NB_DOC_PROSPECTUS_6 { NB_PROSPECTUS, NB_KIND_TEXT, 0, FLAG_NOTEBOOK_DOC_PROSPECTUS_6, 0, sDocTitle_PROSPECTUS_6, sDocText_PROSPECTUS_6 },
 
-#define NB_DOC_PEER_REVIEW_3
+static const u8 sDocTitle_PEER_REVIEW_3[] = _("FIRST REVIEW");
+static const u8 sDocText_PEER_REVIEW_3[] = _(
+    "REVIEW of the submitted journals of\n"
+    "C. CLEAR. Three signatures at the\n"
+    "foot. One is careful.\p"
+    "The pages move between unrelated\n"
+    "fields without completing an\n"
+    "argument in any of them.\p"
+    "Single observations are often sharp.\n"
+    "Taken together, the panel could not\n"
+    "follow them.\p"
+    "We concur with the internal\n"
+    "assessment. The work has lost\n"
+    "rigour.\p"
+    "Recommendation: no further support.\p"
+    "Signed, for the panel.");
+#define NB_DOC_PEER_REVIEW_3 { NB_PEER_REVIEW, NB_KIND_TEXT, 0, FLAG_NOTEBOOK_DOC_PEER_REVIEW_3, 0, sDocTitle_PEER_REVIEW_3, sDocText_PEER_REVIEW_3 },
 
-#define NB_DOC_PEER_REVIEW_4
+static const u8 sDocTitle_PEER_REVIEW_4[] = _("READ AGAIN");
+static const u8 sDocText_PEER_REVIEW_4[] = _(
+    "The same review. His own copy, read\n"
+    "again. The margins are new, in\n"
+    "pencil.\p"
+    "Under the word “unrelated”, a single\n"
+    "pencil line.\p"
+    "Beside “the panel could not follow”:\n"
+    "I was on the panel.\p"
+    "“Lost rigour” has been struck\n"
+    "through. Nothing has been written in\n"
+    "its place.\p"
+    "Beside his own signature, a question\n"
+    "mark.");
+#define NB_DOC_PEER_REVIEW_4 { NB_PEER_REVIEW, NB_KIND_TEXT, 0, FLAG_NOTEBOOK_DOC_PEER_REVIEW_4, 0, sDocTitle_PEER_REVIEW_4, sDocText_PEER_REVIEW_4 },
 
 #endif // GUARD_DATA_NOTEBOOK_DOCUMENTS_H

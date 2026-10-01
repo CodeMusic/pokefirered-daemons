@@ -39,6 +39,7 @@ CeruleanCave_B1F_EventScript_Mewtwo::
 	special StartLegendaryBattle
 	waitstate
 	clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
+	setflag FLAG_NOTEBOOK_DOC_RUN_LOGS_6   @ gbadocs: filed without a word
 	specialvar VAR_RESULT, GetBattleOutcome
 	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, CeruleanCave_B1F_EventScript_CaughtStarr
 	goto_if_eq VAR_RESULT, B_OUTCOME_WON, CeruleanCave_B1F_EventScript_DefeatedMewtwo
@@ -56,6 +57,7 @@ CeruleanCave_B1F_EventScript_Mewtwo::
 @  never what the argument is, only that one reader has not decided.
 CeruleanCave_B1F_EventScript_CaughtStarr::
 	setflag FLAG_FOUGHT_MEWTWO
+	setflag FLAG_NOTEBOOK_DOC_RUN_LOGS_5   @ gbadocs: filed without a word
 	msgbox CeruleanCave_B1F_Text_StarrLooksAtYou
 	msgbox CeruleanCave_B1F_Text_StarrOneReader
 	msgbox CeruleanCave_B1F_Text_StarrTakeMe
