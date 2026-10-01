@@ -7,11 +7,11 @@ CeladonCity_DepartmentStore_2F_Text_BuyReviveForLongOutings::
     .string "For long outings, you should buy\n"
     .string "RESTART.$"
 
+@  T-324, DRAFT.
 CeladonCity_DepartmentStore_2F_Text_FloorSign::
-    .string "Top Grade Items\n"
-    .string "for USERS!\p"
-    .string "2F: USER'S\n"
-    .string "MARKET$"
+    .string "2F: USER'S MARKET\p"
+    .string "Everything a USER needs,\n"
+    .string "and some things they don't.$"
 
 CeladonCity_DepartmentStore_2F_Text_LanceComesToBuyCapes::
 	.string "SANGUINE comes in now and then.\n"

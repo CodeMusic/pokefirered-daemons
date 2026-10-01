@@ -75,8 +75,10 @@ RockTunnel_1F_Text_ArianaPostBattle::
     .string "Whew!\n"
     .string "I'm all sweaty now.$"
 
+@  T-324, DRAFT.
 RockTunnel_1F_Text_RouteSign::
     .string "THE BLACKOUT\n"
     .string "DOLDRUM CITY -\l"
-    .string "HALFTONE TOWN$"
+    .string "HALFTONE TOWN\p"
+    .string "Keep one hand on the wall.$"
 

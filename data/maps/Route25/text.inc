@@ -99,9 +99,11 @@ Route25_Text_WaynePostBattle::
     .string "The trail below is a shortcut to\n"
     .string "DOLDRUM CITY.$"
 
+@  T-324, DRAFT.
 Route25_Text_SeaCottageSign::
     .string "SEA COTTAGE\n"
-    .string "HOLT lives here!$"
+    .string "HOLT\p"
+    .string "No answer? Try the machine.$"
 
 Route25_Text_MistyHighHopesAboutThisPlace::
 	.string "BASIN comes to this cape to\n"

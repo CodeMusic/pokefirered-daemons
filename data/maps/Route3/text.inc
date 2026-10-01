@@ -95,7 +95,10 @@ Route3_Text_RobinPostBattle::
     .string "ROUTE 4 is at the foot of\n"
     .string "DEADSTACK.$"
 
+@  T-324, DRAFT.
 Route3_Text_RouteSign::
-    .string "ROUTE 3 DEADSTACK AHEAD\p"
-    .string "Painted beneath: ASHFALL$"
+    .string "ROUTE 3\n"
+    .string "DEADSTACK AHEAD\p"
+    .string "Painted beneath:\n"
+    .string "ASHFALL$"
 

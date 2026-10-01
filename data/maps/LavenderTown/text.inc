@@ -21,20 +21,23 @@ LavenderTown_Text_GhostsAppearedInTower::
     .string "I think they're the spirits of\n"
     .string "DAEMON that the CORPUS killed.$"
 
+@  T-324, DRAFT.
 LavenderTown_Text_TownSign::
     .string "HALFTONE TOWN\n"
-    .string "The Noble Purple\l"
-    .string "Town$"
+    .string "Grey, From The Road$"
 
+@  T-324, DRAFT.
 LavenderTown_Text_SilphScopeNotice::
-    .string "New RESOLVER!\p"
-    .string "Make the Invisible Plain to See!\p"
-    .string "FOUNDRY CO.$"
+    .string "New from FOUNDRY CO.!\p"
+    .string "RESOLVER\n"
+    .string "Put a name to what you see.$"
 
 LavenderTown_Text_VolunteerPokemonHouse::
     .string "HALFTONE ORPHAN HOUSE$"
 
+@  T-324, DRAFT.
 LavenderTown_Text_PokemonTowerSign::
-    .string "DAEMON TOWER Becalm the Spirits of\n"
-    .string "DAEMON$"
+    .string "DAEMON TOWER\n"
+    .string "For the ones that halted.\l"
+    .string "Please keep your voice down.$"
 

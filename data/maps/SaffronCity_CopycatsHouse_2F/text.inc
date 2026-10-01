@@ -82,11 +82,13 @@ SaffronCity_CopycatsHouse_2F_Text_MarioWearingABucket::
     .string "A game with MARIO wearing a bucket\n"
     .string "on his head!$"
 
+@  T-324, DRAFT.
 SaffronCity_CopycatsHouse_2F_Text_MySecrets::
     .string "…\p"
     .string "My Secrets!\p"
-    .string "Skill: Mimicry! Hobby: Collecting\n"
-    .string "dolls! Favorite DAEMON: ANOMALY!$"
+    .string "Skill: Mimicry!\n"
+    .string "Hobby: Collecting dolls!\l"
+    .string "Favorite DAEMON: ANOMALY!$"
 
 SaffronCity_CopycatsHouse_2F_Text_HuhCantSee::
     .string "？　みえないぞ‥$"

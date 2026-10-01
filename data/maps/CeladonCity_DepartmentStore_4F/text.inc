@@ -7,8 +7,9 @@ CeladonCity_DepartmentStore_4F_Text_CanRunAwayWithPokeDoll::
     .string "You can run from wild DAEMON by\n"
     .string "distracting them with a DECOY!$"
 
+@  T-324, DRAFT.
 CeladonCity_DepartmentStore_4F_Text_FloorSign::
-    .string "Express yourself with gifts!\n"
+    .string "Say it with a gift!\n"
     .string "4F: WISE MAN GIFTS\p"
-    .string "Evolution Special!\n"
-    .string "Element STONES on sale now!$"
+    .string "RECOMPILE SALE!\n"
+    .string "AXIOM, AFFECT and the rest!$"

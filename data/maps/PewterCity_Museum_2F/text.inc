@@ -72,26 +72,27 @@ PewterCity_Museum_1F_Text_SpaceShuttle::
     .string "question you can think to ask it.\p"
     .string "Nobody asked it what it weighed.$"
 
+@  T-324, DRAFT.
 PewterCity_Museum_1F_Text_MeteoriteThatFellOnMtMoon::
     .string "A stone that fell on DEADSTACK.\p"
     .string "It is thought to be a REFLECTION.\n"
     .string "Nobody has taken it apart.\p"
-    .string "KNOWN FAULT: it has been called\n"
-    .string "one for so long that the calling is\l"
-    .string "now the evidence.$"
+    .string "KNOWN FAULT: the label is\n"
+    .string "older than any test of it.$"
 
 
 @  lineage 3b: "the harder I tried to open the door, the less real it became…
 @  until it changed back into mere dots and lines." Benchmark 1's lesson as an
 @  event, and the card states it as a hardware fault.
+@  T-324, DRAFT.
 PewterCity_Museum_2F_Text_TheDisplayUnit::
     .string "DISPLAY UNIT. From the drawing\n"
     .string "office, SLATE.\p"
-    .string "KNOWN FAULT: the harder an\n"
-    .string "operator worked at a thing on it,\l"
-    .string "the less of a thing it drew.\p"
-    .string "It ended as dots and lines, which\n"
-    .string "is all it had ever been.$"
+    .string "KNOWN FAULT: the more an\n"
+    .string "operator put into a drawing,\l"
+    .string "the less the screen kept.\p"
+    .string "The last thing on it is three\n"
+    .string "dots and a line.$"
 
 @  lineage 3b: the Guardian is called Hunter on the evidence of a plaid
 @  shirt. "I was wrong to assume." A label applied from outside, and wrong.

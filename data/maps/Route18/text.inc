@@ -37,7 +37,8 @@ Route18_Text_RouteSign::
     .string "Painted beneath:\n"
     .string "THE STREAK$"
 
+@  T-324, DRAFT.
 Route18_Text_CyclingRoadSign::
     .string "CYCLING ROAD\n"
-    .string "No pedestrians permitted!$"
+    .string "Wheels only, please.$"
 

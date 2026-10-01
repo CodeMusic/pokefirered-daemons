@@ -68,9 +68,10 @@ Route16_Text_MonSprawledOutInSlumber::
     .string "A DAEMON is sprawled out in a deep\n"
     .string "and comfortable slumber.$"
 
+@  T-324, DRAFT.
 Route16_Text_CyclingRoadSign::
-    .string "Enjoy the slope!\n"
-    .string "CYCLING ROAD$"
+    .string "CYCLING ROAD\n"
+    .string "Downhill all the way!$"
 
 Route16_Text_RouteSign::
     .string "ROUTE 16\n"

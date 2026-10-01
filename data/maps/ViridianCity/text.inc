@@ -84,11 +84,12 @@ ViridianCity_Text_CitySign::
     .string "Green All Year.\l"
     .string "Untried All Year.$"
 
+@  T-324, DRAFT.
 ViridianCity_Text_CatchMonsForEasierBattles::
     .string "USER TIPS\p"
     .string "Bind more than you need.\p"
-    .string "Every one you hold is one more\n"
-    .string "answer available to you.$"
+    .string "The one you skipped is always\n"
+    .string "the one you wanted.$"
 
 ViridianCity_Text_MovesLimitedByPP::
     .string "USER TIPS\p"

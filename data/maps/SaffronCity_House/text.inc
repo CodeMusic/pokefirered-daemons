@@ -11,10 +11,10 @@ SaffronCity_House_Text_GettingCopycatPokeDoll::
     .string "The COPYCAT is cute! I'm getting\n"
     .string "her a DECOY!$"
 
+@  T-324, DRAFT.
 SaffronCity_House_Text_ExplainPPUp::
-    .string "I was given a MP UP as a gift.\p"
-    .string "It's used to increase the MP of a\n"
-    .string "DAEMON's ROUTINE.\p"
-    .string "I should use it on a powerful\n"
-    .string "ROUTINE with only a few MP.$"
+    .string "I was given an MP UP.\p"
+    .string "It gives a ROUTINE more uses.\p"
+    .string "Best spent on a strong one\n"
+    .string "that runs out fast.$"
 

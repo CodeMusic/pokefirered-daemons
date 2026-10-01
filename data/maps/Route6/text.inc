@@ -66,8 +66,11 @@ Route6_Text_ElijahPostBattle::
     .string "Are my DAEMONS weak? Or, am I\n"
     .string "just bad?$"
 
+@  T-324, DRAFT.
 Route6_Text_UndergroundPathSign::
     .string "UNDERGROUND PATH\n"
     .string "DOLDRUM CITY -\l"
-    .string "ARDOR CITY$"
+    .string "ARDOR CITY\p"
+    .string "Painted beneath:\n"
+    .string "THE TUNNEL$"
 

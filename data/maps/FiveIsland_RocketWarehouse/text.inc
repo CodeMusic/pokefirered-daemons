@@ -96,11 +96,12 @@ FiveIsland_RocketWarehouse_Text_Admin2PostBattle::
     .string "resurrect TEAM CORPUS! I will…\p"
     .string "Until then, farewell!$"
 
+@  T-324, DRAFT.
 FiveIsland_RocketWarehouse_Text_ReportWithGraphsAndText::
     .string "A report with graphs and text is on\n"
     .string "the PORT monitor.\p"
     .string "“The Influence of Magnetic Waves\n"
-    .string "on DAEMON Evolution”…\p"
+    .string "on RECOMPILING”…\p"
     .string "… … … … … …\p"
     .string "It's too difficult to understand…$"
 

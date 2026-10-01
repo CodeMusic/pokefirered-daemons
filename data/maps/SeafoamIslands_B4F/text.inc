@@ -19,11 +19,15 @@ Text_RockSlideTaught::
     .string "It might be scary to use it in this\n"
     .string "tunnel…$"
 
+@  T-324, DRAFT.
 SeafoamIslands_B4F_Text_BouldersMightChangeWaterFlow::
-    .string "Hint: Boulders might change the\n"
-    .string "flow of water.$"
+    .string "Hint: block the water with a\n"
+    .string "boulder and it goes somewhere\l"
+    .string "else.$"
 
+@  T-324, DRAFT.
 SeafoamIslands_B4F_Text_DangerFastCurrent::
     .string "DANGER\n"
-    .string "Fast current!$"
+    .string "Fast water. It only goes\l"
+    .string "one way.$"
 

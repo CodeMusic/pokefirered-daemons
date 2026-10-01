@@ -5,12 +5,12 @@ VermilionCity_House3_Text_PidgeyFlyLetterToSaffron::
 VermilionCity_House3_Text_Pidgey::
     .string "PACKET: Kurukkoo!$"
 
+@  T-324, DRAFT.
 VermilionCity_House3_Text_DearPippiLetter::
-    .string "Dear PIPPI, I hope to see you\n"
-    .string "soon.\p"
-    .string "I heard BRAZEN has problems with\n"
-    .string "TEAM CORPUS.\p"
-    .string "ARDOR appears to be safe.$"
+    .string "Dear PIPPI,\n"
+    .string "Come and see me soon.\p"
+    .string "They say BRAZEN is full of\n"
+    .string "TEAM CORPUS. ARDOR is quiet.$"
 
 VermilionCity_House3_Text_SendMyPidgeyToUnionRoom::
     .string "I want to exchange MAIL with all\n"

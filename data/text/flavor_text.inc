@@ -28,21 +28,28 @@ Text_Dresser::
 Text_Snacks::
 	.string "There's a pile of snacks here.$"
 
+@  T-324, DRAFT.
 Text_PokemartSign::
-	.string "All your item needs fulfilled! THE\n"
-	.string "REPO$"
+	.string "THE REPO\n"
+	.string "Everything You Need,\l"
+	.string "Checked In$"
 
+@  T-324, DRAFT.
 Text_PokecenterSign::
-	.string "Heal Your DAEMON! CHECKPOINT$"
+	.string "CHECKPOINT\n"
+	.string "Pick Up Where\l"
+	.string "You Left Off$"
 
+@  T-324, DRAFT.
 Text_Indigo_UltimateGoal::
 	.string "UMBRA PLATEAU\p"
-	.string "The ultimate goal of USERS!\n"
+	.string "The last stop for USERS.\n"
 	.string "DAEMON LEAGUE HQ$"
 
+@  T-324, DRAFT.
 Text_Indigo_HighestAuthority::
 	.string "UMBRA PLATEAU\p"
-	.string "The highest DAEMON authority!\n"
+	.string "The REVIEW BOARD sits here.\n"
 	.string "DAEMON LEAGUE HQ$"
 
 Text_Food::

@@ -85,8 +85,9 @@ SevenIsland_SevaultCanyon_Entrance_Text_JonNotEnoughMons::
     .string "So, I'd like to make it a\n"
     .string "two-on-two battle, if I may.$"
 
+@  T-324, DRAFT.
 SevenIsland_SevaultCanyon_Entrance_Text_RouteSign::
-    .string "SEVAULT THE WAY IN\p"
-    .string "USERS are asked to refrain from\n"
-    .string "damaging plants in the CANYON.$"
+    .string "LONG DROP - THE WAY IN\p"
+    .string "USERS, please leave the plants\n"
+    .string "as you found them.$"
 

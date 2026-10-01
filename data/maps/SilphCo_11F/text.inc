@@ -94,6 +94,8 @@ SilphCo_11F_Text_Grunt1PostBattle::
 SilphCo_11F_Text_MonitorHasMonsOnIt::
     .string "The monitor has DAEMON on it!$"
 
+@  T-324, DRAFT.
 SilphCo_11F_Text_FloorSign::
-    .string "FOUNDRY CO. HEAD OFFICE 11F$"
+    .string "FOUNDRY CO. HEAD OFFICE\n"
+    .string "11F$"
 

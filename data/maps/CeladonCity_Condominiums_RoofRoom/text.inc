@@ -40,11 +40,12 @@ CeladonCity_Condominiums_RoofRoom_Text_ExplainUnionRoom::
     .string "Go to the UNION ROOM and enjoy\n"
     .string "meeting other USERS.$"
 
+@  T-324, DRAFT.
 CeladonCity_Condominiums_RoofRoom_Text_PamphletOnTMs::
-    .string "It's a pamphlet on PLUGINS.\p"
-    .string "… …\p"
-    .string "There are fifty PLUGINS in all.\p"
-    .string "There are also seven DRIVERS that\n"
-    .string "can be used repeatedly.\p"
-    .string "FOUNDRY CO.$"
+    .string "A FOUNDRY CO. pamphlet on\n"
+    .string "PLUGINS.\p"
+    .string "Fifty in all. Each one\n"
+    .string "installs once.\p"
+    .string "DRIVERS install again\n"
+    .string "and again.$"
 

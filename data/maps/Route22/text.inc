@@ -46,6 +46,8 @@ Route22_Text_LateRivalVictory::
 	.string "もっと　れんしゅう　こいよ！\n"
 	.string "あははーッ！$"
 
+@  T-324, DRAFT.
 Route22_Text_LeagueGateSign::
-	.string "DAEMON LEAGUE Front Gate$"
+	.string "DAEMON LEAGUE\n"
+	.string "Front Gate$"
 

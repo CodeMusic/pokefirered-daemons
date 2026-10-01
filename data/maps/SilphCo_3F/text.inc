@@ -28,6 +28,8 @@ SilphCo_3F_Text_JosePostBattle::
     .string "TEAM CORPUS said that if I helped\n"
     .string "them, they'd let me study DAEMON!$"
 
+@  T-324, DRAFT.
 SilphCo_3F_Text_FloorSign::
-    .string "FOUNDRY CO. HEAD OFFICE 3F$"
+    .string "FOUNDRY CO. HEAD OFFICE\n"
+    .string "3F$"
 

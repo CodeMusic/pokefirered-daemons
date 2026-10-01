@@ -64,15 +64,18 @@ ViridianForest_Text_RanOutOfPokeBalls::
     .string "Everything I meet now, I just\n"
     .string "meet.$"
 
+@  T-324, DRAFT.
 ViridianForest_Text_AvoidGrassyAreasWhenWeak::
     .string "USER TIPS\p"
-    .string "Nothing will announce itself if you\n"
-    .string "stay off the grass.\p"
-    .string "It is still there.$"
+    .string "Stay off the grass and nothing\n"
+    .string "will jump out at you.\p"
+    .string "The trees are another matter.$"
 
+@  T-324, DRAFT.
 ViridianForest_Text_UseAntidoteForPoison::
-    .string "Leaking? PATCH.\p"
-    .string "Any MART carries them.$"
+    .string "USER TIPS\p"
+    .string "LEAKING? Use a PATCH.\p"
+    .string "Every REPO stocks them.$"
 
 ViridianForest_Text_ContactOakViaPCToRatePokedex::
     .string "USER TIPS\p"

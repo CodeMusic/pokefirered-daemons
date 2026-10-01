@@ -229,11 +229,13 @@ PalletTown_ProfessorOaksLab_Text_SaveOptionInMenu::
     .string "Often.\n"
     .string "Nobody else will.$"
 
+@  T-324, DRAFT.
 PalletTown_ProfessorOaksLab_Text_AllMonTypesHaveStrongAndWeakPoints::
     .string "Every type is strong against\n"
     .string "something and helpless against\l"
-    .string "something else. The chart does not\l"
-    .string "explain itself.$"
+    .string "something else.\p"
+    .string "Nobody has found one that\n"
+    .string "beats everything.$"
 
 PalletTown_ProfessorOaksLab_Text_EmailMessage::
     .string "An unread message.\p"

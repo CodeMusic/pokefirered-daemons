@@ -37,6 +37,8 @@ SilphCo_4F_Text_Grunt2Defeat::
 SilphCo_4F_Text_Grunt2PostBattle::
     .string "I'll raise this with 11F.$"
 
+@  T-324, DRAFT.
 SilphCo_4F_Text_FloorSign::
-    .string "FOUNDRY CO. HEAD OFFICE 4F$"
+    .string "FOUNDRY CO. HEAD OFFICE\n"
+    .string "4F$"
 

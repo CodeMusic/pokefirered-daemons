@@ -100,10 +100,13 @@ Route8_Text_JuliaPostBattle::
     .string "I read that in a DAEMON JOURNAL.\n"
     .string "I wonder if it's true?$"
 
+@  T-324, DRAFT.
 Route8_Text_UndergroundPathSign::
     .string "UNDERGROUND PATH\n"
     .string "VERDIGRIS CITY -\l"
-    .string "HALFTONE TOWN$"
+    .string "HALFTONE TOWN\p"
+    .string "Painted beneath:\n"
+    .string "THE TUNNEL$"
 
 Route8_Text_EliIntro::
     .string "ELI: Twin power is fantastic.\n"

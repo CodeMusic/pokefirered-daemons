@@ -108,6 +108,8 @@ Route11_Text_DavePostBattle::
     .string "Tch…\n"
     .string "I better go find stronger ones!$"
 
+@  T-324, DRAFT.
 Route11_Text_DiglettsCave::
-    .string "TAPPOINT'S CAVE$"
+    .string "TAPPOINT'S CAVE\n"
+    .string "Mind what you say in there.$"
 

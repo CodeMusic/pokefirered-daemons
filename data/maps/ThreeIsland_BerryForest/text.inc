@@ -37,7 +37,9 @@ ThreeIsland_BerryForest_Text_WelcomeToBerryForest::
     .string "BERRIES grow here.\n"
     .string "Other things eat them.$"
 
+@  T-324, DRAFT.
 ThreeIsland_BerryForest_Text_BewareWildBerryLovingMons::
-    .string "Beware of wild, BERRY-loving\n"
-    .string "DAEMON!$"
+    .string "Mind your BERRIES.\p"
+    .string "The daemons here remember\n"
+    .string "who fed them last.$"
 

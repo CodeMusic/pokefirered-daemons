@@ -64,6 +64,8 @@ Text_ThunderWaveTaught::
     .string "It's a SIGNAL-type ROUTINE, so it\n"
     .string "won't work on some DAEMONS.$"
 
+@  T-324, DRAFT.
 SilphCo_2F_Text_FloorSign::
-    .string "FOUNDRY CO. HEAD OFFICE 2F$"
+    .string "FOUNDRY CO. HEAD OFFICE\n"
+    .string "2F$"
 

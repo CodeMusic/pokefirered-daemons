@@ -69,13 +69,18 @@ Route10_Text_CarolPostBattle::
     .string "I wish there were pink DAEMON with\n"
     .string "a floral pattern!$"
 
+@  T-324, DRAFT.
 Route10_Text_RockTunnelDetourToLavender::
-    .string "THE BLACKOUT Detour to\n"
-    .string "HALFTONE TOWN$"
+    .string "THE BLACKOUT\n"
+    .string "No lights inside.\p"
+    .string "HALFTONE TOWN is out\n"
+    .string "the far side.$"
 
 Route10_Text_RockTunnel::
     .string "THE BLACKOUT$"
 
+@  T-324, DRAFT.
 Route10_Text_PowerPlant::
-    .string "KEEPALIVE PLANT$"
+    .string "KEEPALIVE PLANT\n"
+    .string "Still running.$"
 

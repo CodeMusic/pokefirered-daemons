@@ -101,7 +101,7 @@ Route9_Text_ConnerPostBattle::
 
 Route9_Text_RouteSign::
     .string "ROUTE 9\n"
-    .string "DOLDRUM CITY-\l"
+    .string "DOLDRUM CITY -\l"
     .string "THE BLACKOUT\p"
     .string "Painted beneath:\n"
     .string "THE DAPPLE$"

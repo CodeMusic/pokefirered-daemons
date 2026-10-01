@@ -126,6 +126,8 @@ SilphCo_7F_Text_RivalPostBattle::
     .string "{PLAYER}. You will be all right.\n"
     .string "Probably.$"
 
+@  T-324, DRAFT.
 SilphCo_7F_Text_FloorSign::
-    .string "FOUNDRY CO. HEAD OFFICE 7F$"
+    .string "FOUNDRY CO. HEAD OFFICE\n"
+    .string "7F$"
 

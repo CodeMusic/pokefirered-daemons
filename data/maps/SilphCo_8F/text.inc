@@ -35,8 +35,10 @@ SilphCo_8F_Text_Grunt2Defeat::
 SilphCo_8F_Text_Grunt2PostBattle::
     .string "I'll leave this with the team.$"
 
+@  T-324, DRAFT.
 SilphCo_8F_Text_FloorSign::
-    .string "FOUNDRY CO. HEAD OFFICE 8F$"
+    .string "FOUNDRY CO. HEAD OFFICE\n"
+    .string "8F$"
 
 SilphCo_8F_Text_ToRocketBossMonsAreTools::
 	.string "SCORN isn't cruel. He fixed our\n"

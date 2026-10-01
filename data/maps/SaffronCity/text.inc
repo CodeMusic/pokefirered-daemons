@@ -61,10 +61,11 @@ SaffronCity_Text_HesTakingASnooze::
     .string "Snore…\p"
     .string "Hah! He's taking a snooze!$"
 
+@  T-324, DRAFT.
 SaffronCity_Text_CitySign::
     .string "BRAZEN CITY\n"
-    .string "Shining, Golden\l"
-    .string "Land of Commerce$"
+    .string "Brass, All The\l"
+    .string "Way Through$"
 
 SaffronCity_Text_FightingDojo::
     .string "PROOF HALL$"
@@ -74,28 +75,33 @@ SaffronCity_Text_GymSign::
 	.string "LEADER: MATTE\p"
 	.string "What You See Is What She Shows$"
 
+@  T-324, DRAFT.
 SaffronCity_Text_FullHealCuresStatus::
     .string "USER TIPS\p"
-    .string "ROLLBACK cures all ailments like\n"
-    .string "suspension and overheating.\p"
-    .string "It costs a bit more, but it's more\n"
-    .string "convenient.$"
+    .string "ROLLBACK ends every state,\n"
+    .string "whichever it is.\p"
+    .string "It costs more. It saves\n"
+    .string "carrying five other things.$"
 
+@  T-324, DRAFT.
 SaffronCity_Text_GreatBallImprovedCatchRate::
     .string "USER TIPS\p"
-    .string "New ADMINBOX offers improved\n"
-    .string "capture rates.\p"
-    .string "Try it on those hard-to-bind\n"
-    .string "DAEMONS.$"
+    .string "An ADMINBOX holds what a\n"
+    .string "USERBOX cannot.\p"
+    .string "More access, better odds.$"
 
+@  T-324, DRAFT.
 SaffronCity_Text_SilphCoSign::
-    .string "FOUNDRY CO. OFFICE BUILDING$"
+    .string "FOUNDRY CO.\n"
+    .string "OFFICE BUILDING$"
 
 SaffronCity_Text_MrPsychicsHouse::
     .string "THE SCHOLAR'S HOUSE$"
 
+@  T-324, DRAFT.
 SaffronCity_Text_SilphsLatestProduct::
-    .string "CORPUS NOTICE REVIEW SCORES\p"
+    .string "CORPUS NOTICE\n"
+    .string "REVIEW SCORES\p"
     .string "Three at 30/100. One at 94/100.\p"
     .string "Congratulations to our top\n"
     .string "performer!$"

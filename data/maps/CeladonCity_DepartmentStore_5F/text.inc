@@ -17,6 +17,7 @@ CeladonCity_DepartmentStore_5F_Text_HereForStatEnhancers::
     .string "SHIELDING increases the base\n"
     .string "DEFENSE stat.$"
 
+@  T-324, DRAFT.
 CeladonCity_DepartmentStore_5F_Text_Drugstore::
-    .string "5F: DRUGSTORE$"
+    .string "5F: UPGRADES$"
 

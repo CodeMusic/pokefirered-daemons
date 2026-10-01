@@ -14,6 +14,8 @@ CeruleanCity_House2_Text_TeamRocketTryingToDigIntoNoGood::
     .string "TEAM CORPUS must be trying to\n"
     .string "EXCAVATE their way into no good!$"
 
+@  T-324, DRAFT.
 CeruleanCity_House2_Text_TeamRocketLeftWayOut::
-    .string "TEAM CORPUS left a way out!$"
+    .string "A hole in the wall. TEAM\n"
+    .string "CORPUS did not use the door.$"
 

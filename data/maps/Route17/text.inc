@@ -100,20 +100,24 @@ Route17_Text_WilliamDefeat::
 Route17_Text_WilliamPostBattle::
     .string "I need to bind a few Zs!$"
 
+@  T-324, DRAFT.
 Route17_Text_WatchOutForDiscardedItems::
     .string "It's a notice.\p"
-    .string "Watch out for discarded items.$"
+    .string "Things fall off bikes here.\n"
+    .string "Mind the road.$"
 
+@  T-324, DRAFT.
 Route17_Text_SameSpeciesGrowDifferentRates::
     .string "USER TIPS\p"
-    .string "All DAEMONS are unique.\p"
-    .string "Even DAEMON of the same type and\n"
-    .string "level grow at different rates.$"
+    .string "Two daemons of one kind, at\n"
+    .string "one level, still grow at\l"
+    .string "their own rate.$"
 
+@  T-324, DRAFT.
 Route17_Text_PressBToStayInPlace::
     .string "USER TIPS\p"
-    .string "Press the A or B Button to stay in\n"
-    .string "place while on a slope.$"
+    .string "On a slope, hold the B Button\n"
+    .string "to stay where you are.$"
 
 Route17_Text_RouteSign::
     .string "ROUTE 17\n"
@@ -122,13 +126,15 @@ Route17_Text_RouteSign::
     .string "Painted beneath:\n"
     .string "THE STREAK$"
 
+@  T-324, DRAFT.
 Route17_Text_DontThrowGameThrowBalls::
     .string "It's a notice!\p"
-    .string "Don't throw the\n"
-    .string "game, throw\l"
-    .string "USERBOXes instead!$"
+    .string "No throwing anything off the\n"
+    .string "road. USERBOXES excepted.$"
 
+@  T-324, DRAFT.
 Route17_Text_CyclingRoadSign::
     .string "CYCLING ROAD\n"
-    .string "Slope ends here!$"
+    .string "The slope ends here.\l"
+    .string "So does the free ride.$"
 

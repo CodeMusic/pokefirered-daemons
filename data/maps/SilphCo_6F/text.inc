@@ -71,6 +71,8 @@ SilphCo_6F_Text_Grunt2PostBattle::
     .string "leaving another.\p"
     .string "That's synergy!$"
 
+@  T-324, DRAFT.
 SilphCo_6F_Text_FloorSign::
-    .string "FOUNDRY CO. HEAD OFFICE 6F$"
+    .string "FOUNDRY CO. HEAD OFFICE\n"
+    .string "6F$"
 

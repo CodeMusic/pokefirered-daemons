@@ -14,12 +14,19 @@ Route4_Text_CrissyPostBattle::
     .string "mushrooms here.\p"
     .string "I think I got them all.$"
 
+@  T-324, DRAFT.
 Route4_Text_MtMoonEntrance::
-    .string "DEADSTACK Tunnel Entrance$"
+    .string "DEADSTACK\n"
+    .string "Tunnel Entrance\p"
+    .string "LAST IN, FIRST OUT.$"
 
+@  T-324, DRAFT.
 Route4_Text_RouteSign::
-    .string "ROUTE 4 DEADSTACK - DOLDRUM CITY\p"
-    .string "Painted beneath: THE WASH$"
+    .string "ROUTE 4\n"
+    .string "DEADSTACK -\l"
+    .string "DOLDRUM CITY\p"
+    .string "Painted beneath:\n"
+    .string "THE WASH$"
 
 Text_MegaPunchTeach::
     .string "A punch of roaring ferocity!\p"

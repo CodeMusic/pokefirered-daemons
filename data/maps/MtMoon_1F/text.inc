@@ -80,8 +80,11 @@ MtMoon_1F_Text_RobbyPostBattle::
     .string "ECHO is tough! But, it can be\n"
     .string "useful if you bind one.$"
 
+@  T-324, DRAFT.
 MtMoon_1F_Text_ZubatIsABloodsucker::
-    .string "Beware! ECHO is a bloodsucker!$"
+    .string "Beware of ECHO!\p"
+    .string "Whatever you shout in here,\n"
+    .string "it shouts back.$"
 
 MtMoon_1F_Text_BrockHelpsExcavateFossils::
 	.string "I dig CORES out of DEADSTACK.\n"

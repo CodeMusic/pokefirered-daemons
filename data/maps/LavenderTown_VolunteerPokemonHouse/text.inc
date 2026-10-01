@@ -59,8 +59,8 @@ LavenderTown_VolunteerPokemonHouse_Text_GrandPrizeDrawingClipped::
 	.string "Underneath, someone has written:\n"
 	.string "then where?$"
 
+@  T-324, DRAFT.
 LavenderTown_VolunteerPokemonHouse_Text_PokemonMagazinesLineShelf::
-    .string "DAEMON magazines line the shelf.\p"
-    .string "DAEMON INSIDER…\p"
-    .string "DAEMON FAN…$"
+    .string "Daemon magazines, years of\n"
+    .string "them. All read to bits.$"
 

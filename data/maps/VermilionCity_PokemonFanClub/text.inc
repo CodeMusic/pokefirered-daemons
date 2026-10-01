@@ -74,13 +74,17 @@ VermilionCity_PokemonFanClub_Text_ChairmanVeryVocalAboutPokemon::
     .string "Our CHAIRMAN is very vocal about\n"
     .string "DAEMON.$"
 
+@  T-324, DRAFT.
 VermilionCity_PokemonFanClub_Text_ListenPolitelyToOtherTrainers::
-    .string "Let's all listen\n"
-    .string "politely to other\l"
-    .string "USERS!$"
+    .string "RULE 1\n"
+    .string "Let everyone finish talking\l"
+    .string "about theirs.$"
 
+@  T-324, DRAFT.
 VermilionCity_PokemonFanClub_Text_SomeoneBragsBragBack::
-    .string "If someone brags, brag right back!$"
+    .string "RULE 2\n"
+    .string "If someone brags, it is\l"
+    .string "your turn next.$"
 
 VermilionCity_PokemonFanClub_Text_ChairmanReallyAdoresHisMons::
 	.string "Our CHAIRMAN really does adore his\n"

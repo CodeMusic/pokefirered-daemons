@@ -36,19 +36,18 @@ CeladonCity_Text_GetLostOrIllPunchYou::
 CeladonCity_Text_KeepOutOfTeamRocketsWay::
     .string "Keep out of TEAM CORPUS's way!$"
 
+@  T-324, DRAFT.
 CeladonCity_Text_ExplainXAccuracyDireHit::
     .string "USER TIPS\p"
-    .string "TUNE AIM boosts the accuracy of\n"
-    .string "techniques!\p"
-    .string "TUNE CRIT jacks up the likelihood\n"
-    .string "of critical hits!\p"
-    .string "Get your items at VERDIGRIS DEPT.\n"
-    .string "STORE!$"
+    .string "TUNE AIM and TUNE CRIT hold\n"
+    .string "only while it stays in.\p"
+    .string "VERDIGRIS DEPT. STORE, 2F$"
 
+@  T-324, DRAFT.
 CeladonCity_Text_CitySign::
     .string "VERDIGRIS CITY\n"
-    .string "The City of\l"
-    .string "Rainbow Dreams$"
+    .string "Green On Every\l"
+    .string "Old Thing$"
 
 CeladonCity_Text_GymSign::
 	.string "VERDIGRIS CITY BENCHMARK\n"
@@ -58,27 +57,29 @@ CeladonCity_Text_GymSign::
 CeladonCity_Text_MansionSign::
     .string "VERDIGRIS MANSION$"
 
+@  T-324, DRAFT.
 CeladonCity_Text_DeptStoreSign::
-    .string "Find what you\n"
-    .string "need at VERDIGRIS\l"
-    .string "DEPT. STORE!$"
+    .string "VERDIGRIS DEPT. STORE\n"
+    .string "Five Floors And A Roof!$"
 
+@  T-324, DRAFT.
 CeladonCity_Text_GuardSpecProtectsFromStatus::
     .string "USER TIPS\p"
-    .string "LOCK STATS protects DAEMON against\n"
-    .string "SPECIAL attacks such as ENTROPY\l"
-    .string "and FLOW!\p"
-    .string "Get your items at VERDIGRIS DEPT.\n"
-    .string "STORE!$"
+    .string "LOCK STATS: for five turns,\n"
+    .string "nothing can lower your side's\l"
+    .string "stats.\p"
+    .string "VERDIGRIS DEPT. STORE, 2F$"
 
+@  T-324, DRAFT.
 CeladonCity_Text_PrizeExchangeSign::
-    .string "COINS exchanged for prizes!\n"
-    .string "PRIZE EXCHANGE$"
+    .string "PRIZE EXCHANGE\n"
+    .string "COINS in, prizes out!$"
 
+@  T-324, DRAFT.
 CeladonCity_Text_GameCornerSign::
     .string "CORPUS GAME CORNER\n"
-    .string "The playground\l"
-    .string "for grown-ups!$"
+    .string "Tuned For Your\l"
+    .string "Enjoyment!$"
 
 CeladonCity_Text_ScaldedTongueOnTea::
     .string "Aaaagh, ow…\n"

@@ -16,16 +16,23 @@ FuchsiaCity_Text_ItemBallInThere::
     .string "That item box in there is really a\n"
     .string "DAEMON.$"
 
+@  T-324, DRAFT.
 FuchsiaCity_Text_CitySign::
     .string "LURID CITY\n"
-    .string "Behold! It's\l"
-    .string "Passion Pink!$"
+    .string "Brighter Than It\l"
+    .string "Needs To Be$"
 
+@  T-324, DRAFT.
 FuchsiaCity_Text_SafariZoneSign::
-    .string "DAEMON PARADISE SAFARI ZONE$"
+    .string "SAFARI ZONE\n"
+    .string "Everything In Here\l"
+    .string "Is UNBOUND$"
 
+@  T-324, DRAFT.
 FuchsiaCity_Text_SafariGameSign::
-    .string "SAFARI GAME DAEMON-U-LATCH!$"
+    .string "SAFARI GAME\n"
+    .string "GUESTBOXES only. Leave\l"
+    .string "your own daemons at the gate.$"
 
 FuchsiaCity_Text_WardensHomeSign::
     .string "SAFARI ZONE\n"
@@ -40,36 +47,48 @@ FuchsiaCity_Text_GymSign::
 	.string "LEADER: TILT\p"
 	.string "He Does Not Need To Beat You$"
 
+@  T-324, DRAFT.
 FuchsiaCity_Text_ChanseySign::
     .string "Name: UPTIME\p"
-    .string "Binding one is all up to chance.$"
+    .string "Almost always there.\n"
+    .string "Almost.$"
 
+@  T-324, DRAFT.
 FuchsiaCity_Text_VoltorbSign::
     .string "Name: FUSE\p"
-    .string "The very image of a USERBOX.$"
+    .string "Looks just like a USERBOX.\n"
+    .string "Do not try to open it.$"
 
+@  T-324, DRAFT.
 FuchsiaCity_Text_KangaskhanSign::
     .string "Name: KEEPER\p"
-    .string "A maternal DAEMON that raises its\n"
-    .string "young in a pouch on its belly.$"
+    .string "Keeps its young in a pouch,\n"
+    .string "and nothing else gets near.$"
 
+@  T-324, DRAFT.
 FuchsiaCity_Text_SlowpokeSign::
-    .string "Name: LATENCY Friendly and very\n"
-    .string "slow moving.$"
+    .string "Name: LATENCY\p"
+    .string "Friendly. Always answers.\n"
+    .string "Never right away.$"
 
+@  T-324, DRAFT.
 FuchsiaCity_Text_LaprasSign::
-    .string "Name: FERRY AKA the king of the\n"
-    .string "seas.$"
+    .string "Name: FERRY\p"
+    .string "Carries anyone across.\n"
+    .string "Never asks why.$"
 
+@  T-324, DRAFT.
 FuchsiaCity_Text_OmanyteSign::
-    .string "Name: MAGTAPE An extremely rare\n"
-    .string "DAEMON that was regenerated from a\l"
-    .string "fossil.$"
+    .string "Name: MAGTAPE\p"
+    .string "Restored from a fossil.\p"
+    .string "Read it from the start.\n"
+    .string "It cannot skip ahead.$"
 
+@  T-324, DRAFT.
 FuchsiaCity_Text_KabutoSign::
-    .string "Name: DRUM An extremely rare\n"
-    .string "DAEMON that was regenerated from a\l"
-    .string "fossil.$"
+    .string "Name: DRUM\p"
+    .string "Restored from a fossil.\n"
+    .string "It still turns.$"
 
 @ Unused. May have been meant to be the placeholder text for the zoo mons, similar to RB's "!" text
 FuchsiaCity_Text_Ellipsis::

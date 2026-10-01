@@ -5,6 +5,8 @@ Route2_Text_RouteSign::
     .string "Painted beneath:\n"
     .string "UNDERPAINT$"
 
+@  T-324, DRAFT.
 Route2_Text_DiglettsCave::
-    .string "TAPPOINT'S CAVE$"
+    .string "TAPPOINT'S CAVE\n"
+    .string "Mind what you say in there.$"
 

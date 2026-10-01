@@ -32,23 +32,26 @@ VermilionCity_Text_SSAnneVisitsOnceAYear::
     .string "ship.\p"
     .string "We visit ARDOR once a year.$"
 
+@  T-324, DRAFT.
 VermilionCity_Text_CitySign::
     .string "ARDOR CITY\n"
-    .string "The Port of\l"
-    .string "Exquisite Sunsets$"
+    .string "Hot Days, Fast Ships$"
 
+@  T-324, DRAFT.
 VermilionCity_Text_SnorlaxBlockingRoute12::
     .string "NOTICE!\p"
-    .string "ROUTE 12 may be blocked off by a\n"
-    .string "sleeping DAEMON.\p"
-    .string "Detour through THE BLACKOUT to\n"
-    .string "HALFTONE TOWN.\p"
+    .string "A DEADLOCK has stopped on\n"
+    .string "ROUTE 12. It will not move\l"
+    .string "by itself.\p"
+    .string "Detour through THE BLACKOUT\n"
+    .string "to HALFTONE TOWN.\p"
     .string "ARDOR POLICE$"
 
+@  T-324, DRAFT.
 VermilionCity_Text_PokemonFanClubSign::
     .string "DAEMON FAN CLUB\n"
-    .string "All DAEMONS fans\l"
-    .string "welcome!$"
+    .string "Everyone's Is\l"
+    .string "The Best One$"
 
 VermilionCity_Text_GymSign::
 	.string "ARDOR CITY BENCHMARK\n"

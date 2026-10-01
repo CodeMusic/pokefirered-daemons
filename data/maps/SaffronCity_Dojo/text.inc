@@ -91,11 +91,13 @@ SaffronCity_Dojo_Text_ReceivedMonFromKarateMaster2::
 SaffronCity_Dojo_Text_BetterNotGetGreedy::
     .string "Better not get greedy…$"
 
+@  T-324, DRAFT.
 SaffronCity_Dojo_Text_EnemiesOnEverySide::
-    .string "Enemies on every side!$"
+    .string "Assume nothing.$"
 
+@  T-324, DRAFT.
 SaffronCity_Dojo_Text_GoesAroundComesAround::
-    .string "What goes around comes around.$"
+    .string "Show your working.$"
 
 SaffronCity_Dojo_Text_FightingDojo::
     .string "PROOF HALL$"

@@ -110,14 +110,19 @@ Route13_Text_RobertPostBattle::
     .string "I wish I could fly like PACKET and\n"
     .string "RELAY...$"
 
+@  T-324, DRAFT.
 Route13_Text_LookToLeftOfThatPost::
     .string "USER TIPS\p"
-    .string "Look to the left of that post!$"
+    .string "Look to the left of that post.\p"
+    .string "Most people stop at the first\n"
+    .string "thing they find.$"
 
+@  T-324, DRAFT.
 Route13_Text_SelectToSwitchItems::
     .string "USER TIPS\p"
-    .string "Use SELECT to switch items in the\n"
-    .string "ITEM window!$"
+    .string "SELECT reorders the POOL.\p"
+    .string "Keep what you reach for most\n"
+    .string "at the top.$"
 
 Route13_Text_RouteSign::
     .string "ROUTE 13\n"

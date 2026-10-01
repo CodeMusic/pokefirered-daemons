@@ -3,9 +3,11 @@ TwoIsland_Text_IslandSign::
     .string "Small enough to walk\l"
     .string "round before lunch$"
 
+@  T-324, DRAFT.
 TwoIsland_Text_JoyfulGameCornerSign::
-    .string "Skip & Chomp!\n"
-    .string "Joyful GAME CORNER$"
+    .string "JOYFUL GAME CORNER\n"
+    .string "Two games. Come back\l"
+    .string "tomorrow and beat yourself.$"
 
 TwoIsland_Text_DangerFastCurrent::
     .string "The current runs hard here.\n"

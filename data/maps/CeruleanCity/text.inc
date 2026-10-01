@@ -147,22 +147,23 @@ CeruleanCity_Text_ThisIsCeruleanCave::
     .string "The DAEMON LEAGUE champion is the\n"
     .string "only person who is allowed in!$"
 
+@  T-324, DRAFT.
 CeruleanCity_Text_CitySign::
     .string "DOLDRUM CITY\n"
-    .string "A Mysterious,\l"
-    .string "Blue Aura\l"
-    .string "Surrounds It$"
+    .string "Where The Water\l"
+    .string "Lies Flat$"
 
+@  T-324, DRAFT.
 CeruleanCity_Text_TrainerTipsHeldItems::
     .string "USER TIPS\p"
-    .string "A DAEMON can be made to hold an\n"
-    .string "item.\p"
-    .string "Some items can even be used by the\n"
-    .string "holding DAEMON in battle.$"
+    .string "Give a daemon an item to hold.\p"
+    .string "Some items it will run by\n"
+    .string "itself, when the moment comes.$"
 
+@  T-324, DRAFT.
 CeruleanCity_Text_BikeShopSign::
-    .string "Grass and caves handled easily!\n"
-    .string "BIKE SHOP$"
+    .string "BIKE SHOP\n"
+    .string "Same roads. Less time.$"
 
 CeruleanCity_Text_GymSign::
 	.string "DOLDRUM CITY BENCHMARK\n"

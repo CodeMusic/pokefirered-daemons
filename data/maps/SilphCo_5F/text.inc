@@ -54,23 +54,30 @@ SilphCo_5F_Text_Grunt2PostBattle::
     .string "EXHAUST evolves into SMOGSTACK.\p"
     .string "Sharing is caring!$"
 
+@  T-324, DRAFT.
 SilphCo_5F_Text_PorygonFirstVRMon::
     .string "It's a DAEMON REPORT!\p"
-    .string "DAEMON LAB created SUBSTRATE, the\n"
-    .string "first virtual-reality DAEMON.$"
+    .string "DAEMON LAB built SUBSTRATE:\n"
+    .string "the first daemon that was\l"
+    .string "made, not found.$"
 
+@  T-324, DRAFT.
 SilphCo_5F_Text_Over350TechniquesConfirmed::
     .string "It's a DAEMON REPORT!\p"
-    .string "Over 160 DAEMONS techniques have\n"
-    .string "been confirmed.$"
+    .string "Over 350 ROUTINES have now\n"
+    .string "been confirmed. The count\l"
+    .string "keeps going up.$"
 
+@  T-324, DRAFT.
 SilphCo_5F_Text_SomeMonsEvolveWhenTraded::
     .string "It's a DAEMON REPORT!\p"
-    .string "4 DAEMONS evolve only when traded\n"
-    .string "by link-cable.$"
+    .string "Some daemons RECOMPILE only\n"
+    .string "when sent over a link cable.$"
 
+@  T-324, DRAFT.
 SilphCo_5F_Text_FloorSign::
-    .string "FOUNDRY CO. HEAD OFFICE 5F$"
+    .string "FOUNDRY CO. HEAD OFFICE\n"
+    .string "5F$"
 
 SilphCo_5F_Text_RocketBossLookingForStrongMons::
 	.string "The CORPUS people upstairs are\n"

@@ -91,9 +91,11 @@ SixIsland_WaterPath_Text_MiaNotEnoughMons::
     .string "DAEMON?\p"
     .string "Don't you feel lonesome?$"
 
+@  T-324, DRAFT.
 SixIsland_WaterPath_Text_WantedUltimateHorn::
-    .string "Wanted!\n"
-    .string "The Ultimate Horn!$"
+    .string "WANTED\n"
+    .string "The Ultimate Horn.\l"
+    .string "Ask at the house.$"
 
 SixIsland_WaterPath_Text_RouteSign::
     .string "LONG WADE\n"

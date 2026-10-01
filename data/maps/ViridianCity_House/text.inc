@@ -10,7 +10,8 @@ ViridianCity_House_Text_MyDaddyLovesMonsToo::
 ViridianCity_House_Text_Speary::
     .string "SPEARY: Tetweet!$"
 
+@  T-324, DRAFT.
 ViridianCity_House_Text_SpearowNameSpeary::
     .string "PING\n"
-    .string "Name: SPEARY$"
+    .string "Name: PONG$"
 

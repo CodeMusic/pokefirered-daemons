@@ -105,8 +105,10 @@ Route12_Text_RouteSign::
     .string "Painted beneath:\n"
     .string "THE DRIFT$"
 
+@  T-324, DRAFT.
 Route12_Text_SportfishingArea::
-    .string "SPORTFISHING AREA$"
+    .string "SPORTFISHING AREA\n"
+    .string "What you hook, put back.$"
 
 Route12_Text_JesIntro::
     .string "JES: If I win, I'm going to\n"

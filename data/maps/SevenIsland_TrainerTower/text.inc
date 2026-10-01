@@ -23,9 +23,11 @@ SevenIsland_TrainerTower_Text_RodettePostBattle::
     .string "Could it be that they're waiting for\n"
     .string "you?$"
 
+@  T-324, DRAFT.
 SevenIsland_TrainerTower_Text_TrainerTowerSign::
-    .string "USER TOWER ENTRANCE Rise to the\n"
-    .string "Challenge, USERS!$"
+    .string "USER TOWER\n"
+    .string "Climb It Faster\l"
+    .string "Than Last Time$"
 
 SevenIsland_TrainerTower_Text_TrainerTowerAhead::
     .string "USER TOWER AHEAD$"
