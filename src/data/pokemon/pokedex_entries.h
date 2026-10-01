@@ -2732,7 +2732,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_GRANBULL] =
     {
-        .categoryName = _("FAIRY"),
+        .categoryName = _("FALSE ALARM"),
         .height = 14,
         .weight = 487,
         .description = gGranbullPokedexText,

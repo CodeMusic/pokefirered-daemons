@@ -1400,9 +1400,9 @@ const u8 gSnubbullPokedexText[] = _(
 const u8 gSnubbullPokedexTextUnused[] = _("");
 
 const u8 gGranbullPokedexText[] = _(
-    "It is actually timid and easily spooked.\n"
-    "If attacked, it flails about to fend off\n"
-    "its attacker.");
+    "The one real fault it ever found,\n"
+    "nobody heard. It said it the way it\n"
+    "always said everything.");
 
 const u8 gGranbullPokedexTextUnused[] = _("");
 

@@ -4934,7 +4934,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Single_1 = {
 					.spDefenseIV = 15,
 					.abilityNum = 0,
 					.personality = 0xCA, // MALE BRAVE
-					.nickname = _("GRANBULL"),
+					.nickname = _("CRYWOLF"),
 					.friendship = 255
 				},
 			}
@@ -8247,7 +8247,7 @@ static const struct TrainerTowerFloor sTrainerTowerFloor_Knockout_6 = {
 					.spDefenseIV = 20,
 					.abilityNum = 0,
 					.personality = 0x02, // FEMALE BRAVE
-					.nickname = _("GRANBULL"),
+					.nickname = _("CRYWOLF"),
 					.friendship = 255
 				},
 				{

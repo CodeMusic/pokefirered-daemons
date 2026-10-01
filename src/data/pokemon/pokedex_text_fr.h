@@ -1460,9 +1460,9 @@ const u8 gSnubbullPokedexText[] = _(
 const u8 gSnubbullPokedexTextUnused[] = _("");
 
 const u8 gGranbullPokedexText[] = _(
-        "Because its fangs are too heavy, it\n"
-        "always keeps its head tilted down.\n"
-        "However, its OCCLUDE is powerful.");
+    "Its alarms are loud, frequent and\n"
+    "almost never real. Those around it\n"
+    "have learned to stop listening.");
 
 const u8 gGranbullPokedexTextUnused[] = _("");
 
