@@ -105,3 +105,21 @@ ReadingRoom_Text_Catalogue::
     .string "A card catalogue. Most cards are\n"
     .string "for books nobody came back for.$"
 
+@  T-340, DRAFT (the user, 2026-10-01): the one book the room has never held.
+ReadingRoom_Text_WishGuide::
+    .string "There is one book this room has\n"
+    .string "never held.\p"
+    .string "THE PROGRAMMER'S GUIDE TO THE\n"
+    .string "HUMAN MIND.\p"
+    .string "They say a copy sits on an ordinary\n"
+    .string "shelf, on one of the islands.\p"
+    .string "I wish I could read it.$"
+
+@  T-341, DRAFT: and once you hold it, the first page, and thanks.
+ReadingRoom_Text_ThanksGuide::
+    .string "...Is that the GUIDE?\p"
+    .string "May I? Only the first page.\p"
+    .string "............\p"
+    .string "Thank you. I have wanted to read\n"
+    .string "that for a very long time.\p"
+    .string "Look after it. Read it slowly.$"

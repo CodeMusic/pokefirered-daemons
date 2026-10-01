@@ -30,9 +30,21 @@ ReadingRoom_Movement_StepBack:
 	walk_down
 	step_end
 
+@  T-340, T-341 (the user, 2026-10-01): the ATTENDANT knows every book in the catalogue but one, the GUIDE, hidden on an
+@  island -- and wishes she could read it. Once you hold it, she reads the first page and thanks you.
 ReadingRoom_EventScript_Attendant::
 	goto_if_eq VAR_READING_ROOM, 0, ReadingRoom_EventScript_AttendantAsk
-	msgbox ReadingRoom_Text_Faculty, MSGBOX_NPC
+	lock
+	faceplayer
+	goto_if_set FLAG_GOT_GUIDE, ReadingRoom_EventScript_AttendantGuide
+	msgbox ReadingRoom_Text_Faculty
+	msgbox ReadingRoom_Text_WishGuide
+	release
+	end
+
+ReadingRoom_EventScript_AttendantGuide::
+	msgbox ReadingRoom_Text_ThanksGuide
+	release
 	end
 
 ReadingRoom_EventScript_AttendantAsk::
