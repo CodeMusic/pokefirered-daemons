@@ -1406,7 +1406,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_LICKITUNG] =
     {
-        .categoryName = _("SAMPLING"),
+        .categoryName = _("BULK READ"),
         .height = 12,
         .weight = 655,
         .description = gLickitungPokedexText,
@@ -2550,7 +2550,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_ESPEON] =
     {
-        .categoryName = _("SUN"),
+        .categoryName = _("FOCUS"),
         .height = 9,
         .weight = 265,
         .description = gEspeonPokedexText,
@@ -2563,7 +2563,7 @@ const struct PokedexEntry gPokedexEntries[] =
 
     [NATIONAL_DEX_UMBREON] =
     {
-        .categoryName = _("MOONLIGHT"),
+        .categoryName = _("COVER"),
         .height = 10,
         .weight = 270,
         .description = gUmbreonPokedexText,
