@@ -2456,6 +2456,8 @@ static const struct SpriteFrameImage sPicTable_David[] = {
     overworld_frame(gObjectEventPic_David, 2, 4, 2),
 };
 
-static const struct SpriteFrameImage sPicTable_SingingFir[] = {
+static const struct SpriteFrameImage sPicTable_SingingFir[] = {    // T-337: the star as painted, catching the light, a glint
     overworld_frame(gObjectEventPic_SingingFir, 2, 4, 0),
+    overworld_frame(gObjectEventPic_SingingFir, 2, 4, 1),
+    overworld_frame(gObjectEventPic_SingingFir, 2, 4, 2),
 };

@@ -4364,7 +4364,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SingingFir = {
     .tracks = TRACKS_NONE,
     .oam = &gObjectEventBaseOam_16x32,
     .subspriteTables = gObjectEventSpriteOamTables_16x32,
-    .anims = sAnimTable_Inanimate,
+    .anims = sAnimTable_SingingFir,
     .images = sPicTable_SingingFir,
     .affineAnims = gDummySpriteAffineAnimTable,
 };

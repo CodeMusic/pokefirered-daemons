@@ -995,6 +995,26 @@ static const union AnimCmd *const sAnimTable_Inanimate[] = {
     [ANIM_STAY_STILL] = sAnim_StayStill
 };
 
+//  T-337 (the user, 2026-10-01): the singing fir's star twinkles -- held still, then caught by the light now and then,
+//  irregularly, never on a beat (tools/gensingingfir.py draws the three frames).
+static const union AnimCmd sAnim_SingingFir[] = {
+    ANIMCMD_FRAME(0, 96),
+    ANIMCMD_FRAME(1, 6),
+    ANIMCMD_FRAME(2, 10),
+    ANIMCMD_FRAME(1, 6),
+    ANIMCMD_FRAME(0, 150),
+    ANIMCMD_FRAME(1, 8),
+    ANIMCMD_FRAME(0, 60),
+    ANIMCMD_FRAME(1, 5),
+    ANIMCMD_FRAME(2, 8),
+    ANIMCMD_FRAME(1, 5),
+    ANIMCMD_JUMP(0),
+};
+
+static const union AnimCmd *const sAnimTable_SingingFir[] = {
+    [ANIM_STAY_STILL] = sAnim_SingingFir
+};
+
 // Leftover from Ruby/Sapphire
 static const union AnimCmd *const sAnimTable_QuintyPlump[] = {
     [ANIM_STD_FACE_SOUTH] = sAnim_QuintyPlumpFaceSouth,
