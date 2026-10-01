@@ -21,20 +21,19 @@ CeruleanCity_Text_RivalPostBattle::
     .string "I did.\p"
     .string "I have things to do.$"
 
+@  T-295, DRAFT (2026-10-01): the last of BLUE's lines in AL's mouth -- found verifying the 40.
 CeruleanCity_Text_OhRightLittlePresentAsFavor::
-    .string "Oh, yeah, right.\p"
-    .string "I feel sorry for you. No, really.\n"
-    .string "You're always plodding behind me.\p"
-    .string "So here, I'll give you a little\n"
-    .string "present as a favor.$"
+    .string "{RIVAL}: Oh. One more thing.\p"
+    .string "You talk to everyone. I have\n"
+    .string "noticed.\p"
+    .string "So you should have this. I will\n"
+    .string "not use it.$"
 
 CeruleanCity_Text_ExplainFameCheckerSmellYa::
-    .string "A chatty gossip like you…\n"
-    .string "That thing's perfect.\p"
-    .string "I don't need it because I don't\n"
-    .string "give a hoot about others.\p"
-    .string "All right, this time I really am\n"
-    .string "gone. Smell ya!$"
+    .string "It keeps what people say about\n"
+    .string "other people, and who said it.\p"
+    .string "It does not check any of it.\p"
+    .string "Now I really am going.$"
 
 @ RB translation: "Heh! You're no match for my genius!"
 CeruleanCity_Text_RivalVictory::
