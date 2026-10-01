@@ -1182,40 +1182,60 @@ static void RedrawCardFront(void)
     DrawTrainerCardWindow(1);
 }
 
-//  T-271: THE BRAIN, WHICH LIGHTS AND NEVER COUNTS (decided by the user 2026-09-25). Understandings are shown in the
-//  Guide's margins (T-304); the card shows only that something has changed -- one drawing, grey until any
-//  understanding is arrived at and lit after, brighter with a halo. No region lights on its own and nothing is
-//  numbered. It sits between the card's figures and the player, drawn in the text window's own greys and white
-//  (DAEMONS tools/genbrain.py), so the two states differ in brightness and never in hue (9.4). Only on your own
-//  card: a link partner's card is theirs -- at the Cable Club's seats too, which are not the Union Room (T-282).
+//  T-331 (the user, 2026-10-01): THE BRAIN, A LOBE PER UNDERSTANDING. T-271 drew one glow that never counted; seeing
+//  it, the user could not tell how it changed, and asked for lobes filled in their own colours. Seven regions (DAEMONS
+//  tools/genbrain.py has the map), each grey until its understanding is arrived at and then in the TYPE_COLOR of the
+//  type closest to it; a white halo once all seven are held. The colours go into the card window's free slots of the
+//  standard text palette (the card prints only in white, the greys and red), so nothing else on the card changes.
+//  Only on your own card: a link partner's card is theirs -- at the Cable Club's seats too (T-282).
 #define BRAIN_X 140
 #define BRAIN_Y 23
+#define BRAIN_PAL 15                                    // the card windows' palette (sTrainerCardWindowTemplates)
 
-static bool8 AnyUnderstanding(void)
+//  lobe '1'..'7' -> the understanding that fills it, and the text-palette slot that carries its colour
+static const struct { u16 flag; u8 slot; u16 color; } sBrainLobes[7] = {
+    { FLAG_UNDERSTANDING_FIRST,   TEXT_DYNAMIC_COLOR_1, RGB(19, 15, 9)  },   // brainstem  STRATUM
+    { FLAG_UNDERSTANDING_SCHOOL,  TEXT_DYNAMIC_COLOR_2, RGB(12, 15, 19) },   // temporal   LOGIC
+    { FLAG_UNDERSTANDING_READING, TEXT_DYNAMIC_COLOR_3, RGB(10, 23, 23) },   // occipital  SIGNAL
+    { FLAG_UNDERSTANDING_NOTES,   TEXT_DYNAMIC_COLOR_4, RGB(27, 19, 5)  },   // frontal    ENTROPY
+    { FLAG_UNDERSTANDING_SCORN,   TEXT_DYNAMIC_COLOR_5, RGB(10, 11, 6)  },   // parietal   CORRUPT
+    { FLAG_UNDERSTANDING_RETURN,  TEXT_DYNAMIC_COLOR_6, RGB(21, 10, 19) },   // limbic     CONTEXT
+    { FLAG_UNDERSTANDING_GUIDE,   TEXT_COLOR_GREEN,     RGB(11, 19, 12) },   // cerebellum GROWTH
+};
+
+static void LoadBrainLobeColors(void)
 {
-    return FlagGet(FLAG_UNDERSTANDING_FIRST);
+    u8 i;
+
+    for (i = 0; i < ARRAY_COUNT(sBrainLobes); i++)
+        LoadPalette(&sBrainLobes[i].color, BG_PLTT_ID(BRAIN_PAL) + sBrainLobes[i].slot, PLTT_SIZEOF(1));
 }
 
 static void DrawUnderstandingBrain(void)
 {
-    bool8 lit;
-    u8 x, y, color;
+    bool8 all = TRUE;
+    u8 i, x, y, color;
+    char c;
 
     if (sTrainerCardDataPtr->cardType != CARD_TYPE_FRLG || !sTrainerCardDataPtr->isOwnCard)
         return;
-    lit = AnyUnderstanding();
+    LoadBrainLobeColors();
+    for (i = 0; i < ARRAY_COUNT(sBrainLobes); i++)
+        if (!FlagGet(sBrainLobes[i].flag))
+            all = FALSE;
     for (y = 0; y < BRAIN_H; y++)
     {
         for (x = 0; x < BRAIN_W; x++)
         {
-            switch (sUnderstandingBrain[y][x])
-            {
-            case '.': color = lit ? TEXT_COLOR_WHITE : TEXT_COLOR_LIGHT_GRAY; break;
-            case 'f': color = lit ? TEXT_COLOR_LIGHT_GRAY : TEXT_COLOR_DARK_GRAY; break;
-            case 'o': color = TEXT_COLOR_DARK_GRAY; break;
-            case 'h': if (!lit) continue; color = TEXT_COLOR_WHITE; break;
-            default: continue;
-            }
+            c = sUnderstandingBrain[y][x];
+            if (c >= '1' && c <= '7')
+                color = FlagGet(sBrainLobes[c - '1'].flag) ? sBrainLobes[c - '1'].slot : TEXT_COLOR_LIGHT_GRAY;
+            else if (c == 'f' || c == 'o')
+                color = TEXT_COLOR_DARK_GRAY;
+            else if (c == 'h' && all)
+                color = TEXT_COLOR_WHITE;
+            else
+                continue;
             FillWindowPixelRect(1, PIXEL_FILL(color), BRAIN_X + x, BRAIN_Y + y, 1, 1);
         }
     }
