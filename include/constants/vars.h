@@ -230,8 +230,8 @@
 
 #define VAR_TERMINAL_LAST_HELP     0x40AF // T-264: the last HELP answer, +1 (0 none yet)
 #define VAR_TERMINAL_LAST_TUNE     0x40B0 // T-264: the last TUNE, +1
-#define VAR_0x40B1                 0x40B1
-#define VAR_0x40B2                 0x40B2
+#define VAR_DREAM_PROGRESS         0x40B1 // T-347: main-path steps done + 1, and bit 15 once the first dream is told
+#define VAR_DREAM_HEALS            0x40B2 // T-347: heals since progress last moved (or since she last offered)
 #define VAR_0x40B3                 0x40B3
 #define VAR_PORTHOLE               0x40B4
 #define VAR_EVENT_PICHU_SLOT       0x40B5

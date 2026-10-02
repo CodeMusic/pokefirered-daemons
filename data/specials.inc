@@ -367,6 +367,9 @@ gSpecials::
 	def_special DaemonsRepaintPlayerShoes
 	def_special SingingFir_Sing
 	def_special DaemonsHoldsEveryUnderstanding
+	def_special DaemonsDreamCountHeal
+	def_special DaemonsDreamTell
+	def_special DaemonsDreamDeclined
 	def_special School_OpenExam
 	def_special School_ExamInProgress
 	def_special School_BufferExamResult

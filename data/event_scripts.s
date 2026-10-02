@@ -949,6 +949,19 @@ Text_RestoredPkmnToFullHealth::
 	.string "health.$"
 
 @ T-258, DRAFT
+@ T-347, DRAFT: the CHECKPOINT attendant's dream, offered to a player who seems stuck.
+Text_AttendantHadADream::
+	.string "I had the strangest dream last\n"
+	.string "night. I think it was about you.\p"
+	.string "Would you like to hear it?$"
+
+Text_AttendantDreamAfter::
+	.string "Only a dream, of course.\n"
+	.string "But I did think of you.$"
+
+Text_AttendantDreamKeeps::
+	.string "Of course. It will keep.$"
+
 Text_DaemonCaughtAMeme::
 	.string "Oh! One of your DAEMONS has caught\n"
 	.string "a MEME from another DAEMON.\p"

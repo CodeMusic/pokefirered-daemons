@@ -43,6 +43,7 @@ EventScript_PkmnCenterNurse_ReturnPkmn::
 	applymovement VAR_LAST_TALKED, Movement_Bow
 	waitmovement 0
 	call EventScript_PkmnCenterNurse_CheckMeme
+	call EventScript_PkmnCenterNurse_CheckDream
 	msgbox Text_WeHopeToSeeYouAgain
 	return
 
@@ -74,4 +75,21 @@ EventScript_PkmnCenterNurse_CheckMeme::
 	msgbox Text_DaemonCaughtAMeme
 	setflag FLAG_MEME_EXPLAINED
 EventScript_PkmnCenterNurse_CheckMemeEnd::
+	return
+
+@ T-347: after three heals with no main-path progress, she offers a dream about the next step (src/daemons_dreams.c,
+@ the words from tools/gbadreams.py). YES tells it; NO waits another three heals. DRAFT wording.
+EventScript_PkmnCenterNurse_CheckDream::
+	special DaemonsDreamCountHeal
+	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_CheckDreamEnd
+	msgbox Text_AttendantHadADream, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EventScript_PkmnCenterNurse_DreamDeclined
+	special DaemonsDreamTell
+	msgbox gStringVar4
+	msgbox Text_AttendantDreamAfter
+	return
+EventScript_PkmnCenterNurse_DreamDeclined::
+	special DaemonsDreamDeclined
+	msgbox Text_AttendantDreamKeeps
+EventScript_PkmnCenterNurse_CheckDreamEnd::
 	return
