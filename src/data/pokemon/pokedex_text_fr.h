@@ -2311,23 +2311,23 @@ const u8 gSpindaPokedexText[] = _(
 const u8 gSpindaPokedexTextUnused[] = _("");
 
 const u8 gTrapinchPokedexText[] = _(
-    "It lives in arid deserts. It makes a\n"
-    "sloping pit trap in sand where it\n"
-    "patiently awaits prey.");
+    "It waits at the bottom of a pit of\n"
+    "loose sand. Whatever steps near the\n"
+    "edge slides down to it.");
 
 const u8 gTrapinchPokedexTextUnused[] = _("");
 
 const u8 gVibravaPokedexText[] = _(
-        "It generates ultrasonic waves by violently\n"
-        "flapping its wings. After making its prey\n"
-        "HALT, it melts the prey with acid.");
+    "The sand under it heats until the air\n"
+    "above begins to rise. It beats its wings\n"
+    "and lets what comes up carry it.");
 
 const u8 gVibravaPokedexTextUnused[] = _("");
 
 const u8 gFlygonPokedexText[] = _(
-    "It hides itself by kicking up desert sand\n"
-    "with its wings. Red covers shield its eyes\n"
-    "from sand.");
+    "It spins up out of hot sand and still\n"
+    "air where nothing was, wanders the\n"
+    "desert, and falls apart.");
 
 const u8 gFlygonPokedexTextUnused[] = _("");
 
@@ -2346,16 +2346,16 @@ const u8 gCacturnePokedexText[] = _(
 const u8 gCacturnePokedexTextUnused[] = _("");
 
 const u8 gSwabluPokedexText[] = _(
-    "It constantly grooms its cotton-like\n"
-    "wings. It takes a shower to clean\n"
-    "itself if it becomes dirty.");
+    "It carries one small bundle tied to\n"
+    "its foot and flies it to wherever the\n"
+    "label says. It never opens it.");
 
 const u8 gSwabluPokedexTextUnused[] = _("");
 
 const u8 gAltariaPokedexText[] = _(
-    "If you hear a beautiful melody trilling\n"
-    "deep among mountains far from people,\n"
-    "it is ALTARIA's humming.");
+    "Its wings are cloud. It blows the same\n"
+    "way every year, and every bundle in\n"
+    "the sky rides along with it.");
 
 const u8 gAltariaPokedexTextUnused[] = _("");
 
@@ -2430,30 +2430,30 @@ const u8 gClaydolPokedexText[] = _(
 const u8 gClaydolPokedexTextUnused[] = _("");
 
 const u8 gLileepPokedexText[] = _(
-    "It became extinct roughly 100 million\n"
-    "years ago. It was regenerated from a\n"
-    "fossil using advanced techniques.");
+    "It was kept in stone exactly as it was\n"
+    "on the day the sea left it. Wake it\n"
+    "and it carries on from there.");
 
 const u8 gLileepPokedexTextUnused[] = _("");
 
 const u8 gCradilyPokedexText[] = _(
-    "It ensnares prey with its eight tentacles.\n"
-    "It then melts the prey with a strong acid\n"
-    "before feeding.");
+    "It picked up growing where it stopped\n"
+    "and is still fitting itself, slowly,\n"
+    "to the water it remembers.");
 
 const u8 gCradilyPokedexTextUnused[] = _("");
 
 const u8 gAnorithPokedexText[] = _(
-        "It is a kind of DAEMON progenitor. It\n"
-        "uses its extending claws to bind prey\n"
-        "hiding among rocks on the seafloor.");
+    "A token passes from claw to claw\n"
+    "around the shoal. Only the one\n"
+    "holding it may move.");
 
 const u8 gAnorithPokedexTextUnused[] = _("");
 
 const u8 gArmaldoPokedexText[] = _(
-    "Protected by a hard shell, its body is\n"
-    "very sturdy. It skewers prey with its\n"
-    "claws to feed.");
+    "Every message in the old sea passed\n"
+    "along its armoured back. It has never\n"
+    "once been switched off.");
 
 const u8 gArmaldoPokedexTextUnused[] = _("");
 
@@ -2611,23 +2611,23 @@ const u8 gLuvdiscPokedexText[] = _(
 const u8 gLuvdiscPokedexTextUnused[] = _("");
 
 const u8 gBagonPokedexText[] = _(
-    "Its steel-hard head can shatter boulders.\n"
-    "It longingly hopes for wings to grow so it\n"
-    "can fly.");
+    "It butts its head against the rocks\n"
+    "all day, sure there is something it\n"
+    "is meant to do. It cannot say what.");
 
 const u8 gBagonPokedexTextUnused[] = _("");
 
 const u8 gShelgonPokedexText[] = _(
-    "Its armored body makes all attacks bounce\n"
-    "off. The armor is too tough, however,\n"
-    "making it heavy and somewhat sluggish.");
+    "It shuts itself inside a stone shell\n"
+    "and holds still. Inside, its parts are\n"
+    "becoming something none of them is.");
 
 const u8 gShelgonPokedexTextUnused[] = _("");
 
 const u8 gSalamencePokedexText[] = _(
-    "It becomes uncontrollable if it is\n"
-    "enraged. It destroys everything with\n"
-    "shredding claws and fire.");
+    "It breaks out of its shell all at once\n"
+    "and flies straight away, as if it had\n"
+    "always known how.");
 
 const u8 gSalamencePokedexTextUnused[] = _("");
 

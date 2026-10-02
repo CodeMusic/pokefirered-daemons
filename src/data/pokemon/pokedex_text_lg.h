@@ -2199,23 +2199,21 @@ const u8 gSpindaPokedexText[] = _(
 const u8 gSpindaPokedexTextUnused[] = _("");
 
 const u8 gTrapinchPokedexText[] = _(
-    "It lives in arid deserts. It makes a\n"
-    "sloping pit trap in sand where it\n"
-    "patiently awaits prey.");
+    "It never chases anything.\n"
+    "The ground does the work for it.");
 
 const u8 gTrapinchPokedexTextUnused[] = _("");
 
 const u8 gVibravaPokedexText[] = _(
-        "It generates ultrasonic waves by violently\n"
-        "flapping its wings. After making its prey\n"
-        "HALT, it melts the prey with acid.");
+    "Nothing lifts it. The warm ground\n"
+    "and the cold sky do it between them.");
 
 const u8 gVibravaPokedexTextUnused[] = _("");
 
 const u8 gFlygonPokedexText[] = _(
-    "It hides itself by kicking up desert sand\n"
-    "with its wings. Red covers shield its eyes\n"
-    "from sand.");
+    "Nobody made it and nobody steers it.\n"
+    "Give it the same afternoon and it\n"
+    "will form again.");
 
 const u8 gFlygonPokedexTextUnused[] = _("");
 
@@ -2234,16 +2232,15 @@ const u8 gCacturnePokedexText[] = _(
 const u8 gCacturnePokedexTextUnused[] = _("");
 
 const u8 gSwabluPokedexText[] = _(
-    "It constantly grooms its cotton-like\n"
-    "wings. It takes a shower to clean\n"
-    "itself if it becomes dirty.");
+    "It does not know what it carries.\n"
+    "It only knows where.");
 
 const u8 gSwabluPokedexTextUnused[] = _("");
 
 const u8 gAltariaPokedexText[] = _(
-    "If you hear a beautiful melody trilling\n"
-    "deep among mountains far from people,\n"
-    "it is ALTARIA's humming.");
+    "Nobody set its heading. The sun and\n"
+    "the turning sea did, and ships have\n"
+    "trusted it for longer than maps.");
 
 const u8 gAltariaPokedexTextUnused[] = _("");
 
@@ -2314,30 +2311,27 @@ const u8 gClaydolPokedexText[] = _(
 const u8 gClaydolPokedexTextUnused[] = _("");
 
 const u8 gLileepPokedexText[] = _(
-    "It became extinct roughly 100 million\n"
-    "years ago. It was regenerated from a\n"
-    "fossil using advanced techniques.");
+    "It still grows toward a sea that is\n"
+    "not there any more.");
 
 const u8 gLileepPokedexTextUnused[] = _("");
 
 const u8 gCradilyPokedexText[] = _(
-    "It ensnares prey with its eight tentacles.\n"
-    "It then melts the prey with a strong acid\n"
-    "before feeding.");
+    "Everything it learned is very old.\n"
+    "It learns new things on top of it,\n"
+    "never instead of it.");
 
 const u8 gCradilyPokedexTextUnused[] = _("");
 
 const u8 gAnorithPokedexText[] = _(
-        "It is a kind of DAEMON progenitor. It\n"
-        "uses its extending claws to bind prey\n"
-        "hiding among rocks on the seafloor.");
+    "It is slow and it is fair, and almost\n"
+    "nothing still works this way.");
 
 const u8 gAnorithPokedexTextUnused[] = _("");
 
 const u8 gArmaldoPokedexText[] = _(
-    "Protected by a hard shell, its body is\n"
-    "very sturdy. It skewers prey with its\n"
-    "claws to feed.");
+    "Nobody remembers laying it down.\n"
+    "Everyone still depends on it.");
 
 const u8 gArmaldoPokedexTextUnused[] = _("");
 
@@ -2489,23 +2483,20 @@ const u8 gLuvdiscPokedexText[] = _(
 const u8 gLuvdiscPokedexTextUnused[] = _("");
 
 const u8 gBagonPokedexText[] = _(
-    "Its steel-hard head can shatter boulders.\n"
-    "It longingly hopes for wings to grow so it\n"
-    "can fly.");
+    "It is not ready yet. It already\n"
+    "knows that it will be.");
 
 const u8 gBagonPokedexTextUnused[] = _("");
 
 const u8 gShelgonPokedexText[] = _(
-    "Its armored body makes all attacks bounce\n"
-    "off. The armor is too tough, however,\n"
-    "making it heavy and somewhat sluggish.");
+    "Open it now and you find only the\n"
+    "parts. The whole is not there yet.");
 
 const u8 gShelgonPokedexTextUnused[] = _("");
 
 const u8 gSalamencePokedexText[] = _(
-    "It becomes uncontrollable if it is\n"
-    "enraged. It destroys everything with\n"
-    "shredding claws and fire.");
+    "Nobody can say which part of it learned\n"
+    "to fly. It only arrives, and points.");
 
 const u8 gSalamencePokedexTextUnused[] = _("");
 
