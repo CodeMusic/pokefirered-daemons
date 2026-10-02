@@ -1,4 +1,5 @@
 #include "global.h"
+#include "book_reader.h"   // T-317: DaemonsUnderstandingsMissing
 #include "gflib.h"
 #include "overworld.h"
 #include "script.h"
@@ -976,6 +977,45 @@ static void DaemonsPaleEntries(u16 offset, u16 count)
     CpuCopy16(&gPlttBufferUnfaded[offset], &gPlttBufferFaded[offset], PLTT_SIZEOF(count));
 }
 
+// T-317 (the user, 2026-10-02: "go with A"): UNDERSTANDING SHOWN IN THE WORLD, AS A FADED PRINT. The map and the
+// INDEX already sharpen as understandings arrive (DaemonsClarity); the world's own colours do the same, never as a
+// count: while four or more are still to come, every tileset colour is drawn 40% of the way to its own grey; while one
+// to three are, 18%; once all are held, as painted. Only the TILES -- people and daemons are sprites, so they keep
+// their full colour and stand a little clearer than the world until it catches up. Done as the palettes LOAD, as
+// Blanche's wash is, so a fade or a reload can never compound it; HALFTONE's grey outranks it, and the watch's light
+// falls on top of it.
+static u8 DaemonsClarityFade(void)
+{
+    u8 missing;
+
+    if (DaemonsIsHalftone())
+        return 0;
+    missing = DaemonsUnderstandingsMissing();
+    return missing >= 4 ? 102 : missing != 0 ? 46 : 0;     // of 256
+}
+
+static void DaemonsClarityEntries(u16 offset, u16 count)
+{
+    s32 amount = DaemonsClarityFade(), r, g, b, grey;
+    u16 i, c;
+
+    if (amount == 0)
+        return;
+    for (i = 0; i < count; i++)
+    {
+        c = gPlttBufferUnfaded[offset + i];
+        r = c & 0x1F;
+        g = (c >> 5) & 0x1F;
+        b = (c >> 10) & 0x1F;
+        grey = (r * 77 + g * 150 + b * 29) >> 8;
+        r += ((grey - r) * amount + 128) / 256;
+        g += ((grey - g) * amount + 128) / 256;
+        b += ((grey - b) * amount + 128) / 256;
+        gPlttBufferUnfaded[offset + i] = RGB2(r, g, b);
+    }
+    CpuCopy16(&gPlttBufferUnfaded[offset], &gPlttBufferFaded[offset], PLTT_SIZEOF(count));
+}
+
 u8 DaemonsFieldTint(void)
 {
     if (gGlobalFieldTintMode != QL_TINT_NONE)
@@ -996,7 +1036,9 @@ static EWRAM_DATA u16 sPrimarySignature = 0;
 u16 DaemonsPaletteSignature(void)
 {
     // T-275: and the weekday, whose colour is on the CHECKPOINT's trim in the primary rows
-    return (DaemonsFieldTint() << 7) | (DaemonsWeekday() << 3) | (DaemonsWatch() << 1) | DaemonsIsBlancheOutdoors();
+    // T-317: and the clarity, so a connection crossed after an understanding arrives reloads the faded rows
+    return (DaemonsClarityFade() != 0 ? (DaemonsClarityFade() > 46 ? 0x2000 : 0x1000) : 0)
+         | (DaemonsFieldTint() << 7) | (DaemonsWeekday() << 3) | (DaemonsWatch() << 1) | DaemonsIsBlancheOutdoors();
 }
 
 u16 DaemonsPrimarySignature(void)
@@ -1076,17 +1118,20 @@ static void LoadTilesetPalette(struct Tileset const *tileset, u16 destOffset, u1
             // T-268: Blanche's wash first and the tint over it, or night would be washed back toward white.
             if (DaemonsIsBlancheOutdoors())
                 DaemonsPaleEntries(destOffset + 1, (size - 2) >> 1);
+            DaemonsClarityEntries(destOffset + 1, (size - 2) >> 1);
             ApplyGlobalTintToPaletteEntries(destOffset + 1, (size - 2) >> 1);
             sPrimarySignature = DaemonsPaletteSignature();
         }
         else if (tileset->isSecondary == TRUE)
         {
             LoadPalette(tileset->palettes[NUM_PALS_IN_PRIMARY], destOffset, size);
+            DaemonsClarityEntries(destOffset, size >> 1);
             ApplyGlobalTintToPaletteEntries(destOffset, size >> 1);
         }
         else
         {
             LoadCompressedPalette((const u32 *)tileset->palettes, destOffset, size);
+            DaemonsClarityEntries(destOffset, size >> 1);
             ApplyGlobalTintToPaletteEntries(destOffset, size >> 1);
         }
     }
