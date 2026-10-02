@@ -16,6 +16,7 @@ SaffronCity_Gym_EventScript_DefeatedSabrina::
 	setflag FLAG_DEFEATED_SABRINA
 	setflag FLAG_BADGE06_GET
 	set_gym_trainers 6
+	msgbox SaffronCity_Gym_Text_MarkVirtue
 	goto SaffronCity_Gym_EventScript_GiveTM04
 	end
 

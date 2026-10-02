@@ -181,3 +181,14 @@ CinnabarIsland_Gym_Text_SorryBadCall::
     .string "Sorry!\n"
     .string "Bad call!$"
 
+
+@ T-346, DRAFT: the MARK's virtue, said aloud as it is given (T-318's pairing).
+@ The seventh, so it also points home: CALLOW BENCHMARK opens once all seven are held.
+CinnabarIsland_Gym_Text_MarkVirtue::
+    .string "That MARK brings the last of the\n"
+    .string "seven. HUMILITY, over PRIDE.\p"
+    .string "To anneal is to heat, then cool\n"
+    .string "slowly. It takes the stress out.\p"
+    .string "There is a door in CALLOW that\n"
+    .string "has been shut a long time.\p"
+    .string "I doubt it is shut now.$"

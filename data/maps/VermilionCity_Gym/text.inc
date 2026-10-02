@@ -134,3 +134,10 @@ VermilionCity_Gym_Text_OnlyTrashLocksWereReset::
     .string "Hey!\n"
     .string "The electric locks were reset!$"
 
+
+@ T-346, DRAFT: the MARK's virtue, said aloud as it is given (T-318's pairing).
+VermilionCity_Gym_Text_MarkVirtue::
+    .string "That MARK's got a virtue in it!\n"
+    .string "CHARITY, over GREED!\p"
+    .string "Power's for passing on! Hoard it\n"
+    .string "and it just sits there, humming!$"

@@ -158,3 +158,10 @@ SaffronCity_Gym_Text_GymStatuePlayerWon::
     .string "MATTE\p"
     .string "WINNING USERS: {RIVAL}, {PLAYER}$"
 
+
+@ T-346, DRAFT: the MARK's virtue, said aloud as it is given (T-318's pairing).
+SaffronCity_Gym_Text_MarkVirtue::
+    .string "The MARK brings PATIENCE,\n"
+    .string "over WRATH.\p"
+    .string "I saw this moment a long time\n"
+    .string "ago. I did not hurry it.$"

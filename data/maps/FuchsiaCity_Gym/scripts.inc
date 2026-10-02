@@ -23,6 +23,7 @@ FuchsiaCity_Gym_EventScript_DefeatedKoga::
 	set_gym_trainers 5
 	call FuchsiaCity_Gym_EventScript_ShowWalls
 	special DrawWholeMapView
+	msgbox FuchsiaCity_Gym_Text_MarkVirtue
 	goto FuchsiaCity_Gym_EventScript_GiveTM06
 	end
 

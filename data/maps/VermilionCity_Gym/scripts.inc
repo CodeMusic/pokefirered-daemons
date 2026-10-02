@@ -218,6 +218,7 @@ VermilionCity_Gym_EventScript_DefeatedLtSurge::
 	setflag FLAG_DEFEATED_LT_SURGE
 	setflag FLAG_BADGE03_GET
 	set_gym_trainers 3
+	msgbox VermilionCity_Gym_Text_MarkVirtue
 	goto VermilionCity_Gym_EventScript_GiveTM34
 	end
 

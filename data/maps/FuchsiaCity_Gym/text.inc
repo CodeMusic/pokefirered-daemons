@@ -151,3 +151,10 @@ FuchsiaCity_Gym_Text_GymStatuePlayerWon::
     .string "LURID BENCHMARK LEADER: TILT\p"
     .string "WINNING USERS: {RIVAL}, {PLAYER}$"
 
+
+@ T-346, DRAFT: the MARK's virtue, said aloud as it is given (T-318's pairing).
+FuchsiaCity_Gym_Text_MarkVirtue::
+    .string "The MARK brings TEMPERANCE,\n"
+    .string "over GLUTTONY.\p"
+    .string "Enough is a point of balance.\n"
+    .string "Go past it and everything tips.$"

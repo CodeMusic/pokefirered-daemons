@@ -15,6 +15,7 @@ CeruleanCity_Gym_EventScript_MistyDefeated::
 	setflag FLAG_BADGE02_GET
 	setrespawn HEAL_LOCATION_CERULEAN_CITY
 	set_gym_trainers 2
+	msgbox CeruleanCity_Gym_Text_MarkVirtue
 	goto CeruleanCity_Gym_EventScript_GiveTM03
 	end
 

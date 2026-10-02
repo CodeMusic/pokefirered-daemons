@@ -1617,6 +1617,8 @@
 #define FLAG_MOM_SAW_YOU_OFF          (DAEMONS_FLAGS_START + 0x68)
 //  T-323: the bedroom poster has been read; until then it sparkles, REVEAL or not.
 #define FLAG_POSTER_READ              (DAEMONS_FLAGS_START + 0x69)
+//  T-346: the first time the player reaches CALLOW holding all seven MARKS, the BENCHMARK's lock is heard giving way.
+#define FLAG_CALLOW_DOOR_HEARD        (DAEMONS_FLAGS_START + 0x6A)
 
 //  T-19. Two beats of one scene, five islands and a sea apart.
 #define FLAG_TY_GAVE_PAYLOAD          (DAEMONS_FLAGS_START + 0x20)

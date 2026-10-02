@@ -106,3 +106,9 @@ ViridianCity_Text_GymDoorsAreLocked::
     .string "CALLOW BENCHMARK is locked.\p"
     .string "It has been for some time.$"
 
+
+@ T-346, DRAFT: heard on arriving with all seven MARKS, once.
+ViridianCity_Text_DoorGivesWay::
+    .string "Across CALLOW, from the BENCHMARK\n"
+    .string "that has been locked so long,\p"
+    .string "the sound of a lock giving way.$"

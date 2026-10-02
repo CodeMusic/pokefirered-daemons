@@ -61,6 +61,7 @@ CinnabarIsland_Gym_EventScript_DefeatedBlaine::
 	setvar VAR_MAP_SCENE_CINNABAR_ISLAND, 1
 	clearflag FLAG_HIDE_CINNABAR_BILL
 	set_gym_trainers 7
+	msgbox CinnabarIsland_Gym_Text_MarkVirtue
 	goto CinnabarIsland_Gym_EventScript_GiveTM38
 	end
 

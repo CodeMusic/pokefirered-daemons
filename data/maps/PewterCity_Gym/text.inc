@@ -123,3 +123,11 @@ PewterCity_Gym_Text_ExplainNotebook::
     .string "My first book is in the order I\n"
     .string "tripped over things.\p"
     .string "I have never found a thing in it.$"
+
+@ T-346, DRAFT: the MARK's virtue, said aloud as it is given (T-318's pairing).
+PewterCity_Gym_Text_MarkVirtue::
+    .string "One more thing, for the record.\p"
+    .string "That MARK carries a virtue.\n"
+    .string "DILIGENCE, over SLOTH.\p"
+    .string "It comes first. Nothing else gets\n"
+    .string "built without it.$"

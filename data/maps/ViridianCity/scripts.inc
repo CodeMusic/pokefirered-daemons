@@ -1,5 +1,6 @@
 ViridianCity_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, ViridianCity_OnTransition
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, ViridianCity_OnFrame
 	.byte 0
 
 ViridianCity_OnTransition::
@@ -8,6 +9,32 @@ ViridianCity_OnTransition::
 	call_if_eq VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 1, ViridianCity_EventScript_SetOldManStandingByRoad
 	call_if_ge VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 2, ViridianCity_EventScript_SetOldManNormal
 	call_if_eq VAR_MAP_SCENE_VIRIDIAN_CITY_GYM_DOOR, 0, ViridianCity_EventScript_TryUnlockGym
+	call_if_eq VAR_MAP_SCENE_VIRIDIAN_CITY_GYM_DOOR, 1, ViridianCity_EventScript_TryHearDoor
+	end
+
+@ T-346: vanilla unlocked this door in silence, and the eighth MARK waits behind it. The first time the player
+@ arrives holding all seven, the lock is heard giving way (once: FLAG_CALLOW_DOOR_HEARD). The door's own var is
+@ left at 1, which the old man by the road reads; VAR_TEMP_1 carries the moment to the frame table instead.
+ViridianCity_EventScript_TryHearDoor::
+	goto_if_set FLAG_CALLOW_DOOR_HEARD, EventScript_Return
+	setvar VAR_TEMP_1, 1
+	return
+
+ViridianCity_OnFrame::
+	map_script_2 VAR_TEMP_1, 1, ViridianCity_EventScript_HearDoor
+	.2byte 0
+
+ViridianCity_EventScript_HearDoor::
+	lockall
+	setvar VAR_TEMP_1, 0
+	setflag FLAG_CALLOW_DOOR_HEARD
+	delay 30
+	playse SE_UNLOCK
+	waitse
+	delay 20
+	msgbox ViridianCity_Text_DoorGivesWay
+	closemessage
+	releaseall
 	end
 
 ViridianCity_EventScript_SetOldManNormal::

@@ -97,3 +97,10 @@ CeruleanCity_Gym_Text_GymStatuePlayerWon::
     .string "DOLDRUM BENCHMARK LEADER: BASIN\p"
     .string "WINNING USERS: {RIVAL}, {PLAYER}$"
 
+
+@ T-346, DRAFT: the MARK's virtue, said aloud as it is given (T-318's pairing).
+CeruleanCity_Gym_Text_MarkVirtue::
+    .string "The MARK carries something too.\n"
+    .string "CHASTITY, over LUST.\p"
+    .string "Want less. The current takes you\n"
+    .string "where you meant to go anyway.$"

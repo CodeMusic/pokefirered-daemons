@@ -149,3 +149,10 @@ CeladonCity_Gym_Text_GymStatuePlayerWon::
     .string "TRELLIS\p"
     .string "WINNING USERS: {RIVAL}, {PLAYER}$"
 
+
+@ T-346, DRAFT: the MARK's virtue, said aloud as it is given (T-318's pairing).
+CeladonCity_Gym_Text_MarkVirtue::
+    .string "This MARK carries KINDNESS,\n"
+    .string "over ENVY.\p"
+    .string "A trellis does not envy the vine.\n"
+    .string "It holds it up.$"

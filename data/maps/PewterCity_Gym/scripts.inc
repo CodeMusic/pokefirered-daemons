@@ -19,6 +19,7 @@ PewterCity_Gym_EventScript_DefeatedBrock::
 	clearflag FLAG_HIDE_PEWTER_CITY_RUNNING_SHOES_GUY
 	call_if_set FLAG_SYS_B_DASH, PewterCity_Gym_EventScript_ShoesAlreadyFromMom
 	set_gym_trainers 1
+	msgbox PewterCity_Gym_Text_MarkVirtue
 	goto PewterCity_Gym_EventScript_GiveTM39
 	end
 
