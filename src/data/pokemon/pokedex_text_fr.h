@@ -1962,16 +1962,16 @@ const u8 gSwellowPokedexText[] = _(
 const u8 gSwellowPokedexTextUnused[] = _("");
 
 const u8 gWingullPokedexText[] = _(
-    "It rides upon ocean winds as if it were\n"
-    "a glider. In the winter, it hides food\n"
-    "around its nest.");
+    "It flies the way the slope points\n"
+    "from wherever it happens to be. It\n"
+    "never looks further than that.");
 
 const u8 gWingullPokedexTextUnused[] = _("");
 
 const u8 gPelipperPokedexText[] = _(
-        "It is a flying transporter that carries\n"
-        "small DAEMON in its beak. It bobs on the\n"
-        "waves to rest its wings.");
+    "Its bill holds every direction at\n"
+    "once, one for each way it could be\n"
+    "pushed. It delivers all of them.");
 
 const u8 gPelipperPokedexTextUnused[] = _("");
 
@@ -2239,16 +2239,16 @@ const u8 gSwalotPokedexText[] = _(
 const u8 gSwalotPokedexTextUnused[] = _("");
 
 const u8 gCarvanhaPokedexText[] = _(
-    "It lives in massive rivers that course\n"
-    "through jungles. It swarms prey that\n"
-    "enter its territory.");
+    "It moves under the surface, where\n"
+    "nobody can see which way it goes.\n"
+    "Things near it drift and never know.");
 
 const u8 gCarvanhaPokedexTextUnused[] = _("");
 
 const u8 gSharpedoPokedexText[] = _(
-    "The ruffian of the seas, it has fangs that\n"
-    "crunch through iron. It swims by jetting\n"
-    "water from its rear.");
+    "Fast and narrow, it carries anything\n"
+    "straight out. Fighting it head-on\n"
+    "is how most of them get lost.");
 
 const u8 gSharpedoPokedexTextUnused[] = _("");
 
@@ -2388,30 +2388,30 @@ const u8 gSolrockPokedexText[] = _(
 const u8 gSolrockPokedexTextUnused[] = _("");
 
 const u8 gBarboachPokedexText[] = _(
-    "It probes muddy riverbeds with its two\n"
-    "long whiskers. A slimy film protects its\n"
-    "body.");
+    "It works down through the soil and\n"
+    "comes up somewhere else. It feels\n"
+    "the ground move before anyone does.");
 
 const u8 gBarboachPokedexTextUnused[] = _("");
 
 const u8 gWhiscashPokedexText[] = _(
-    "It makes its nest at the bottom of \n"
-    "swamps. It will eat anything - if it is\n"
-    "alive, WHISCASH will eat it.");
+    "It holds a lake inside the rock and\n"
+    "guards it. When it stirs, the ground\n"
+    "above it shakes.");
 
 const u8 gWhiscashPokedexTextUnused[] = _("");
 
 const u8 gCorphishPokedexText[] = _(
-    "It came from overseas. It is a very hardy\n"
-    "creature that will quickly proliferate,\n"
-    "even in polluted streams.");
+    "It swims backward, against the way\n"
+    "the water runs, and grips whatever\n"
+    "it meets. It is hard to dislodge.");
 
 const u8 gCorphishPokedexTextUnused[] = _("");
 
 const u8 gCrawdauntPokedexText[] = _(
-    "A rough customer that wildly flails its\n"
-    "giant claws. It is said to be extremely\n"
-    "hard to raise.");
+    "The water around it turns dark, so\n"
+    "nothing can see what it is doing.\n"
+    "It sheds its shell and grows harder.");
 
 const u8 gCrawdauntPokedexTextUnused[] = _("");
 
@@ -2458,16 +2458,16 @@ const u8 gArmaldoPokedexText[] = _(
 const u8 gArmaldoPokedexTextUnused[] = _("");
 
 const u8 gFeebasPokedexText[] = _(
-    "Ridiculed for its shabby appearance,\n"
-    "it is ignored by researchers. It lives in\n"
-    "ponds choked with weeds.");
+    "Everything around it is level, so it\n"
+    "never moves. Most pass it by. It is\n"
+    "the least admired thing in the water.");
 
 const u8 gFeebasPokedexTextUnused[] = _("");
 
 const u8 gMiloticPokedexText[] = _(
-    "MILOTIC is breathtakingly beautiful.\n"
-    "Those that see it are said to forget their\n"
-    "combative spirits.");
+    "Nothing anywhere is lower or calmer\n"
+    "than where it rests. It is said to be\n"
+    "the most beautiful thing in any lake.");
 
 const u8 gMiloticPokedexTextUnused[] = _("");
 
