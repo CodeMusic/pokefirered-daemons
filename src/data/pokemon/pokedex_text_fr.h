@@ -1582,9 +1582,9 @@ const u8 gPiloswinePokedexText[] = _(
 const u8 gPiloswinePokedexTextUnused[] = _("");
 
 const u8 gCorsolaPokedexText[] = _(
-        "In a south sea nation, the people live in\n"
-        "communities that are built on groups of\n"
-        "these DAEMONS.");
+    "It grows on its own, away from the\n"
+    "rest of the reef. Break a branch off\n"
+    "and it simply grows another.");
 
 const u8 gCorsolaPokedexTextUnused[] = _("");
 
@@ -1906,23 +1906,23 @@ const u8 gDustoxPokedexText[] = _(
 const u8 gDustoxPokedexTextUnused[] = _("");
 
 const u8 gLotadPokedexText[] = _(
-    "It searches about for clean water. If it\n"
-    "does not drink water for too long, the\n"
-    "leaf on its head wilts.");
+    "It drifts on the water and takes one\n"
+    "small step each time the current\n"
+    "pulses. It never hurries.");
 
 const u8 gLotadPokedexTextUnused[] = _("");
 
 const u8 gLombrePokedexText[] = _(
-    "It lives at the water's edge where it is\n"
-    "sunny. It sleeps on a bed of water grass\n"
-    "by day and becomes active at night.");
+    "Its steps start large and shrink as\n"
+    "it nears what it wants, then grow\n"
+    "again to look somewhere new.");
 
 const u8 gLombrePokedexTextUnused[] = _("");
 
 const u8 gLudicoloPokedexText[] = _(
-    "The rhythm of bright, festive music\n"
-    "activates LUDICOLO's cells, making it more\n"
-    "powerful.");
+    "It dances in rising and falling\n"
+    "waves, and every turn of the dance\n"
+    "settles it somewhere a little better.");
 
 const u8 gLudicoloPokedexTextUnused[] = _("");
 
@@ -1997,16 +1997,16 @@ const u8 gGardevoirPokedexText[] = _(
 const u8 gGardevoirPokedexTextUnused[] = _("");
 
 const u8 gSurskitPokedexText[] = _(
-    "They usually live on ponds, but after an\n"
-    "evening shower, they may appear on\n"
-    "puddles in towns.");
+    "Hundreds skate the pond at once,\n"
+    "each pulled toward its own best spot\n"
+    "and toward the best that any found.");
 
 const u8 gSurskitPokedexTextUnused[] = _("");
 
 const u8 gMasquerainPokedexText[] = _(
-    "The antennae have distinctive patterns\n"
-    "that look like eyes. When it rains, they\n"
-    "grow heavy, making flight impossible.");
+    "It steers by three rules: keep close,\n"
+    "do not collide, go where the others\n"
+    "go. The eyes on its wings watch them.");
 
 const u8 gMasquerainPokedexTextUnused[] = _("");
 
@@ -2562,51 +2562,51 @@ const u8 gSphealPokedexText[] = _(
 const u8 gSphealPokedexTextUnused[] = _("");
 
 const u8 gSealeoPokedexText[] = _(
-    "It touches new things with its nose to\n"
-    "test for smell and feel. It plays by\n"
-    "spinning PENGUIN on its nose.");
+    "The water around it stops moving. It\n"
+    "can be pushed, but nothing it learns\n"
+    "passes back through it.");
 
 const u8 gSealeoPokedexTextUnused[] = _("");
 
 const u8 gWalreinPokedexText[] = _(
-    "It swims through icy seas while shattering\n"
-    "ice floes with its large tusks. It is\n"
-    "protected by its thick blubber.");
+    "The ground under it has not thawed\n"
+    "in an age. Whatever flowed there\n"
+    "once is still held, exactly as it was.");
 
 const u8 gWalreinPokedexTextUnused[] = _("");
 
 const u8 gClamperlPokedexText[] = _(
-    "It is protected by a sturdy shell.\n"
-    "Once in a lifetime, it makes a magnificent\n"
-    "pearl.");
+    "It keeps one pearl shut inside and\n"
+    "waits. What it is given decides which\n"
+    "of two ways it opens.");
 
 const u8 gClamperlPokedexTextUnused[] = _("");
 
 const u8 gHuntailPokedexText[] = _(
-    "It lives deep in the sea where no light\n"
-    "ever filters down. It lights up its small\n"
-    "fishlike tail to attract prey.");
+    "It lives at the bottom of the\n"
+    "narrowest, deepest hollow in the sea.\n"
+    "One nudge and it is somewhere else.");
 
 const u8 gHuntailPokedexTextUnused[] = _("");
 
 const u8 gGorebyssPokedexText[] = _(
-    "Its swimming form is exquisitely elegant.\n"
-    "With its thin mouth, it feeds on seaweed\n"
-    "that grows between rocks.");
+    "It rests in a wide, gentle hollow.\n"
+    "Nudge it any way and it stays almost\n"
+    "exactly as low.");
 
 const u8 gGorebyssPokedexTextUnused[] = _("");
 
 const u8 gRelicanthPokedexText[] = _(
-    "It has remained unchanged for 100\n"
-    "million years. It was discovered\n"
-    "during a deep-sea exploration.");
+    "It has run without stopping since\n"
+    "before anything else in the sea was\n"
+    "built. Nobody dares to switch it off.");
 
 const u8 gRelicanthPokedexTextUnused[] = _("");
 
 const u8 gLuvdiscPokedexText[] = _(
-    "During the spawning season, countless\n"
-    "LUVDISC congregate at coral reefs,\n"
-    "turning the waters pink.");
+    "It swims where two currents meet and\n"
+    "join. It is always found in pairs,\n"
+    "drifting the same way.");
 
 const u8 gLuvdiscPokedexTextUnused[] = _("");
 
