@@ -772,6 +772,211 @@ static const u8 sOpusMargin_Valence_Neglected[] = _("Neither toward nor away. Th
 static const u8 sOpusMargin_Withdrawal_Carried[] = _("It has not opened for you either.");
 static const u8 sOpusMargin_Withdrawal_Neglected[] = _("Still sealed. Still from the inside.");
 
+static const u8 sOpusMargin_Primer_Carried[] = _("You decided what it met, and in what\norder. It has not been surprised yet.");
+static const u8 sOpusMargin_Primer_Neglected[] = _("It is still on the first thing it was given.\nNobody has made it harder.");
+static const u8 sOpusMargin_Primer_InstinctCarried[] = _("It took everything you gave it calmly.\nYou were careful what you gave it.");
+static const u8 sOpusMargin_Primer_InstinctNeglected[] = _("It is comfortable. It has been\ncomfortable a long time.");
+
+static const u8 sOpusMargin_Syllabus_Carried[] = _("You have kept to its order. You have not\nasked about the last one either.");
+static const u8 sOpusMargin_Syllabus_Neglected[] = _("Its row is laid out. Nobody has come to\nstart it.");
+static const u8 sOpusMargin_Syllabus_InstinctCarried[] = _("It liked knowing what came next. So did\nyou.");
+static const u8 sOpusMargin_Syllabus_InstinctNeglected[] = _("It is still waiting for the next thing in\nthe row.");
+
+static const u8 sOpusMargin_Curriculum_Carried[] = _("It has been through everything you set in\nfront of it. You set all of it.");
+static const u8 sOpusMargin_Curriculum_Neglected[] = _("Its scent still calms the box. Nobody in\nthere is learning anything.");
+static const u8 sOpusMargin_Curriculum_InstinctCarried[] = _("Beside it, everything felt ready to be\nlearned. It was.");
+static const u8 sOpusMargin_Curriculum_InstinctNeglected[] = _("It is calm. Nothing near it is being\nlearned.");
+
+static const u8 sOpusMargin_Tepid_Carried[] = _("It has wandered off your path a few\ntimes. You let it.");
+static const u8 sOpusMargin_Tepid_Neglected[] = _("Cooling. Its choices have stopped\nwandering.");
+static const u8 sOpusMargin_Tepid_InstinctCarried[] = _("You never knew which way it would go.\nYou liked that.");
+static const u8 sOpusMargin_Tepid_InstinctNeglected[] = _("It has gone cold enough to be\npredictable.");
+
+static const u8 sOpusMargin_Seethe_Carried[] = _("You have turned it up often. It has not\nsettled on anything yet.");
+static const u8 sOpusMargin_Seethe_Neglected[] = _("Its flames are low. Every answer is still\nin there, waiting.");
+static const u8 sOpusMargin_Seethe_InstinctCarried[] = _("Beside it you felt hurried, in every\ndirection at once.");
+static const u8 sOpusMargin_Seethe_InstinctNeglected[] = _("It is still undecided. Slowly now.");
+
+static const u8 sOpusMargin_Heatdeath_Carried[] = _("You have taken it everywhere. It has\nmade everywhere the same.");
+static const u8 sOpusMargin_Heatdeath_Neglected[] = _("Shut away, it is still warm. Everything\nnear it has evened out.");
+static const u8 sOpusMargin_Heatdeath_InstinctCarried[] = _("Every place felt the same beside it. You\nkept going anyway.");
+static const u8 sOpusMargin_Heatdeath_InstinctNeglected[] = _("It is very calm in there. So is everything\nelse.");
+
+static const u8 sOpusMargin_Learnrate_Carried[] = _("It has been wrong in front of you many\ntimes. Each time it changed a little less.");
+static const u8 sOpusMargin_Learnrate_Neglected[] = _("It has not been wrong in a while. It has\nnot changed either.");
+static const u8 sOpusMargin_Learnrate_InstinctCarried[] = _("Its first bites were too hard. It learned\nhow hard you could take.");
+static const u8 sOpusMargin_Learnrate_InstinctNeglected[] = _("It is hungry, and not sure how hard to\nbite.");
+
+static const u8 sOpusMargin_Momentum_Carried[] = _("It has carried you over a few dips you\nwould have stopped at.");
+static const u8 sOpusMargin_Momentum_Neglected[] = _("Stopped. The next small dip will be\nenough to keep it there.");
+static const u8 sOpusMargin_Momentum_InstinctCarried[] = _("It never stopped to check. Some days you\ndid not either.");
+static const u8 sOpusMargin_Momentum_InstinctNeglected[] = _("Still. Starting again will take more than\nit did.");
+
+static const u8 sOpusMargin_Steepest_Carried[] = _("It took you down the fastest way every\ntime. You have not looked over the next\nridge.");
+static const u8 sOpusMargin_Steepest_Neglected[] = _("It has settled in the nearest low place.\nIt is sure of it.");
+static const u8 sOpusMargin_Steepest_InstinctCarried[] = _("It always felt like arriving. It was\nalways the nearest place.");
+static const u8 sOpusMargin_Steepest_InstinctNeglected[] = _("It is sure it is where it should be.\nNobody has said otherwise.");
+
+static const u8 sOpusMargin_Stump_Carried[] = _("You keep asking it. It keeps being a\nlittle right.");
+static const u8 sOpusMargin_Stump_Neglected[] = _("Alone, and asking nobody.");
+static const u8 sOpusMargin_Stump_InstinctCarried[] = _("You leaned on it more than its one\nquestion deserved. It held.");
+static const u8 sOpusMargin_Stump_InstinctNeglected[] = _("It is still asking above or below. Nobody\nneeds the answer.");
+
+static const u8 sOpusMargin_Boosting_Carried[] = _("Its leaves are thick now. You know where\neach one grew.");
+static const u8 sOpusMargin_Boosting_Neglected[] = _("No new leaves. Nothing has been wrong\nnear it.");
+static const u8 sOpusMargin_Boosting_InstinctCarried[] = _("It kept fixing what the last one missed.\nYou never had to ask.");
+static const u8 sOpusMargin_Boosting_InstinctNeglected[] = _("It is still waiting to be told it was\nenough.");
+
+static const u8 sOpusMargin_Canopy_Carried[] = _("You have trusted its answer more than any\none of its trees.");
+static const u8 sOpusMargin_Canopy_Neglected[] = _("The wood is still deciding things. Nobody\ncomes to ask.");
+static const u8 sOpusMargin_Canopy_InstinctCarried[] = _("It always seemed to know. No part of it\ndid.");
+static const u8 sOpusMargin_Canopy_InstinctNeglected[] = _("Quiet in there, the way a wood is quiet.");
+
+static const u8 sOpusMargin_Coinflip_Carried[] = _("You have followed it either way. It has\nnot pretended once.");
+static const u8 sOpusMargin_Coinflip_Neglected[] = _("Nothing to decide. It is still not\npretending.");
+static const u8 sOpusMargin_Coinflip_InstinctCarried[] = _("You trusted it more than the sure ones.");
+static const u8 sOpusMargin_Coinflip_InstinctNeglected[] = _("Heads or tails. Nobody has asked it to\nland.");
+
+static const u8 sOpusMargin_Montecarlo_Carried[] = _("It has been close every time you asked.\nYou have not checked how close.");
+static const u8 sOpusMargin_Montecarlo_Neglected[] = _("No guesses. It is not even close to\nanything.");
+static const u8 sOpusMargin_Montecarlo_InstinctCarried[] = _("It was always nearly right. Nearly felt\nlike enough.");
+static const u8 sOpusMargin_Montecarlo_InstinctNeglected[] = _("It is still counting something nobody\nasked about.");
+
+static const u8 sOpusMargin_Lasvegas_Carried[] = _("You have waited for it every time. It has\nnot been wrong yet.");
+static const u8 sOpusMargin_Lasvegas_Neglected[] = _("It is still rolling for something. Nobody\nis waiting on the answer.");
+static const u8 sOpusMargin_Lasvegas_InstinctCarried[] = _("Waiting on it was hard. Being sure was\nworth it, most days.");
+static const u8 sOpusMargin_Lasvegas_InstinctNeglected[] = _("Somewhere in there, it is still rolling.");
+
+static const u8 sOpusMargin_Runoff_Carried[] = _("It has run down every hill you took it\nover. They are all a little lower.");
+static const u8 sOpusMargin_Runoff_Neglected[] = _("No rain. It has taken nothing from anyone\nin a while.");
+static const u8 sOpusMargin_Runoff_InstinctCarried[] = _("Everywhere it went, it took a little with\nit. You did not notice either.");
+static const u8 sOpusMargin_Runoff_InstinctNeglected[] = _("Dry. The hillside has stopped losing\nanything.");
+
+static const u8 sOpusMargin_Alluvium_Carried[] = _("There is a layer for each of your fights\nnow, the first one deepest.");
+static const u8 sOpusMargin_Alluvium_Neglected[] = _("Nothing new has settled on it since you\nput it down.");
+static const u8 sOpusMargin_Alluvium_InstinctCarried[] = _("Dig into it and you would find yourself,\nin order.");
+static const u8 sOpusMargin_Alluvium_InstinctNeglected[] = _("Its top layer is the day you left it.");
+
+static const u8 sOpusMargin_Delta_Carried[] = _("It is closer to where you wanted it than\nit has ever been. It has not arrived.");
+static const u8 sOpusMargin_Delta_Neglected[] = _("Nobody is telling it where to be. It has\nstopped correcting.");
+static const u8 sOpusMargin_Delta_InstinctCarried[] = _("It never arrived anywhere with you. It\nwas always close.");
+static const u8 sOpusMargin_Delta_InstinctNeglected[] = _("It is still spreading toward somewhere it\nwas once told to go.");
+
+static const u8 sOpusMargin_Tangent_Carried[] = _("It took you wherever the ground tipped.\nYou did not look further either.");
+static const u8 sOpusMargin_Tangent_Neglected[] = _("Nothing slopes in there. It does not know\nwhich way to go.");
+static const u8 sOpusMargin_Tangent_InstinctCarried[] = _("It always seemed to know the way. Only\never the next bit of it.");
+static const u8 sOpusMargin_Tangent_InstinctNeglected[] = _("It is facing whichever way it last tipped.");
+
+static const u8 sOpusMargin_Jacobian_Carried[] = _("It has handed you every way there was.\nYou have chosen each time.");
+static const u8 sOpusMargin_Jacobian_Neglected[] = _("Its bill is still full. Nobody is choosing.");
+static const u8 sOpusMargin_Jacobian_InstinctCarried[] = _("It always brought too much. You never\nminded choosing.");
+static const u8 sOpusMargin_Jacobian_InstinctNeglected[] = _("It is holding every direction, and going\nnone of them.");
+
+static const u8 sOpusMargin_Undertow_Carried[] = _("You are further from where you started\nthan you meant to be.");
+static const u8 sOpusMargin_Undertow_Neglected[] = _("Nothing near it has drifted in a while.");
+static const u8 sOpusMargin_Undertow_InstinctCarried[] = _("You felt it pulling, a little, all the\nway. You went anyway.");
+static const u8 sOpusMargin_Undertow_InstinctNeglected[] = _("Still water. It is still under it.");
+
+static const u8 sOpusMargin_Riptide_Carried[] = _("It has carried you out more than once.\nYou have always found the side.");
+static const u8 sOpusMargin_Riptide_Neglected[] = _("It is still pulling at nothing, straight\nout.");
+static const u8 sOpusMargin_Riptide_InstinctCarried[] = _("It took you out further than you liked.\nYou came back each time, some other way.");
+static const u8 sOpusMargin_Riptide_InstinctNeglected[] = _("Fast, and going nowhere now.");
+
+static const u8 sOpusMargin_Saddle_Carried[] = _("You have kept it when you did not have\nto.");
+static const u8 sOpusMargin_Saddle_Neglected[] = _("Still level. Still not pushed.");
+static const u8 sOpusMargin_Saddle_InstinctCarried[] = _("You never thought it was plain. Or you\ndid, and stayed.");
+static const u8 sOpusMargin_Saddle_InstinctNeglected[] = _("It is waiting for the right way to be\npushed.");
+
+static const u8 sOpusMargin_Optimum_Carried[] = _("You waited for it.");
+static const u8 sOpusMargin_Optimum_Neglected[] = _("It is resting at its lowest. Nothing in\nthere needs to move.");
+static const u8 sOpusMargin_Optimum_InstinctCarried[] = _("You remember what it looked like before.\nIt does too.");
+static const u8 sOpusMargin_Optimum_InstinctNeglected[] = _("Calm. It is still the most beautiful thing\nin there.");
+
+static const u8 sOpusMargin_Seepage_Carried[] = _("It has come up beside you in every place\nyou went.");
+static const u8 sOpusMargin_Seepage_Neglected[] = _("Gone from underfoot. Something feels\ndrier.");
+static const u8 sOpusMargin_Seepage_InstinctCarried[] = _("It felt the ground shift before you did.\nYou started trusting that.");
+static const u8 sOpusMargin_Seepage_InstinctNeglected[] = _("Somewhere under the floor, it is still\nsoaking down.");
+
+static const u8 sOpusMargin_Aquifer_Carried[] = _("It has taken in everything you walked it\nthrough. It has kept all of it.");
+static const u8 sOpusMargin_Aquifer_Neglected[] = _("It is holding its lake still. Nothing is\ndrawing from it.");
+static const u8 sOpusMargin_Aquifer_InstinctCarried[] = _("It remembers every rain you walked\nthrough together.");
+static const u8 sOpusMargin_Aquifer_InstinctNeglected[] = _("Deep, and quiet. It remembers the last\nrain.");
+
+static const u8 sOpusMargin_Backflow_Carried[] = _("It has gone against you a few times. It\nhas not let go.");
+static const u8 sOpusMargin_Backflow_Neglected[] = _("It is gripping the box. Nothing else is in\nits stream.");
+static const u8 sOpusMargin_Backflow_InstinctCarried[] = _("It held on through all of it, the wrong\nway round.");
+static const u8 sOpusMargin_Backflow_InstinctNeglected[] = _("Still holding on, against nothing.");
+
+static const u8 sOpusMargin_Blackwater_Carried[] = _("You have carried it a long way. You have\nnever seen what it was doing.");
+static const u8 sOpusMargin_Blackwater_Neglected[] = _("Dark in there. It has grown harder\nanyway.");
+static const u8 sOpusMargin_Blackwater_InstinctCarried[] = _("You never saw into it. It never seemed to\nmind.");
+static const u8 sOpusMargin_Blackwater_InstinctNeglected[] = _("The water around it has not cleared.");
+
+static const u8 sOpusMargin_Tempo_Carried[] = _("It kept to its step the whole way. You\nlearned to wait for it.");
+static const u8 sOpusMargin_Tempo_Neglected[] = _("No current. It has not taken a step in a\nlong time.");
+static const u8 sOpusMargin_Tempo_InstinctCarried[] = _("You walked a little slower with it. It\nnever asked you to.");
+static const u8 sOpusMargin_Tempo_InstinctNeglected[] = _("It is still keeping time to something.");
+
+static const u8 sOpusMargin_Cadence_Carried[] = _("It slowed down every time it was close.\nYou started to notice when it was close.");
+static const u8 sOpusMargin_Cadence_Neglected[] = _("Its steps have stopped. It was nowhere\nnear anything.");
+static const u8 sOpusMargin_Cadence_InstinctCarried[] = _("It always slowed before you knew you\nwere close.");
+static const u8 sOpusMargin_Cadence_InstinctNeglected[] = _("It is between steps, and not sure how big\nthe next should be.");
+
+static const u8 sOpusMargin_Cyclical_Carried[] = _("You have been moving with it for some\ntime. You did not decide to.");
+static const u8 sOpusMargin_Cyclical_Neglected[] = _("The dance has stopped. It settled where\nit was.");
+static const u8 sOpusMargin_Cyclical_InstinctCarried[] = _("You caught yourself keeping time to it\nmore than once.");
+static const u8 sOpusMargin_Cyclical_InstinctNeglected[] = _("It is still swaying a little, to something\nnobody else can hear.");
+
+static const u8 sOpusMargin_Particle_Carried[] = _("You have carried one. It has been looking\nfor the others the whole time.");
+static const u8 sOpusMargin_Particle_Neglected[] = _("Alone in there, it is still pulled toward\nthe best spot it ever found.");
+static const u8 sOpusMargin_Particle_InstinctCarried[] = _("It never knew the best place. With you it\ndid not seem to need to.");
+static const u8 sOpusMargin_Particle_InstinctNeglected[] = _("It is skating in circles, waiting for the\nrest.");
+
+static const u8 sOpusMargin_Flocking_Carried[] = _("It has kept close, never collided, and\ngone where you went.");
+static const u8 sOpusMargin_Flocking_Neglected[] = _("Nobody to keep close to. Its wings are\nstill watching.");
+static const u8 sOpusMargin_Flocking_InstinctCarried[] = _("You turned together often. Neither of you\nremembers who turned first.");
+static const u8 sOpusMargin_Flocking_InstinctNeglected[] = _("Its wings are open, watching for a flock\nthat is not there.");
+
+static const u8 sOpusMargin_Oldbranch_Carried[] = _("It has grown a great deal with you.\nNobody has joined it back to anything.");
+static const u8 sOpusMargin_Oldbranch_Neglected[] = _("It is still growing in there, on its own.\nNobody is watching how.");
+static const u8 sOpusMargin_Oldbranch_InstinctCarried[] = _("It broke a few times along the way. It\ngrew back each time.");
+static const u8 sOpusMargin_Oldbranch_InstinctNeglected[] = _("Away from everything, still branching.");
+
+static const u8 sOpusMargin_Bifurcate_Carried[] = _("It has stayed shut the whole way with\nyou. It is still holding the one pearl.");
+static const u8 sOpusMargin_Bifurcate_Neglected[] = _("Shut. Whatever it is holding has not\nchanged.");
+static const u8 sOpusMargin_Bifurcate_InstinctCarried[] = _("It could have become either. With you, it\nnever seemed to mind which.");
+static const u8 sOpusMargin_Bifurcate_InstinctNeglected[] = _("Still closed around the one thing.");
+
+static const u8 sOpusMargin_Deepwell_Carried[] = _("It has travelled with you anyway.");
+static const u8 sOpusMargin_Deepwell_Neglected[] = _("It is deep in there, and nothing is\nnudging it.");
+static const u8 sOpusMargin_Deepwell_InstinctCarried[] = _("It never liked being moved. You moved it\neverywhere, gently.");
+static const u8 sOpusMargin_Deepwell_InstinctNeglected[] = _("Lowest thing in the box. Nothing has\nnudged it.");
+
+static const u8 sOpusMargin_Shallows_Carried[] = _("You have pushed it every way there is. It\nhas stayed almost exactly where it was.");
+static const u8 sOpusMargin_Shallows_Neglected[] = _("Still there. The water has not changed\nyet.");
+static const u8 sOpusMargin_Shallows_InstinctCarried[] = _("It never seemed to mind where you took\nit. It was always about the same.");
+static const u8 sOpusMargin_Shallows_InstinctNeglected[] = _("It is resting, as low as it ever needed to\nbe.");
+
+static const u8 sOpusMargin_Confluence_Carried[] = _("You have been drifting the same way for a\nlong time now.");
+static const u8 sOpusMargin_Confluence_Neglected[] = _("It is drifting, and nothing is drifting\nbeside it.");
+static const u8 sOpusMargin_Confluence_InstinctCarried[] = _("By now nobody could say which of you was\ngoing which way.");
+static const u8 sOpusMargin_Confluence_InstinctNeglected[] = _("It is waiting where two currents would\nmeet.");
+
+static const u8 sOpusMargin_Stillrun_Carried[] = _("It has kept running the whole time you\ncarried it. You have not switched it off\neither.");
+static const u8 sOpusMargin_Stillrun_Neglected[] = _("Still running. Nobody remembers why it was\nleft on.");
+static const u8 sOpusMargin_Stillrun_InstinctCarried[] = _("You felt older beside it. Steadier too.");
+static const u8 sOpusMargin_Stillrun_InstinctNeglected[] = _("It has not stopped. It does not know how.");
+
+static const u8 sOpusMargin_Stopgrad_Carried[] = _("You have taught it a great deal. None of\nit has gone back through.");
+static const u8 sOpusMargin_Stopgrad_Neglected[] = _("It is held still. Nothing has tried to\nchange it.");
+static const u8 sOpusMargin_Stopgrad_InstinctCarried[] = _("It took everything you gave it and\nchanged nothing. You did not mind.");
+static const u8 sOpusMargin_Stopgrad_InstinctNeglected[] = _("Cold and still, exactly as it was left.");
+
+static const u8 sOpusMargin_Permafrost_Carried[] = _("It still remembers the way you fought at\nfirst.");
+static const u8 sOpusMargin_Permafrost_Neglected[] = _("Frozen exactly as you left it.");
+static const u8 sOpusMargin_Permafrost_InstinctCarried[] = _("Something in it is still how you were when\nyou met.");
+static const u8 sOpusMargin_Permafrost_InstinctNeglected[] = _("It is keeping something for you. It may\nnot be true any more.");
+
 static const struct OpusMargin sOpusMargins[] = {
     { SPECIES_BULBASAUR,     sOpusMargin_Rovercub_Carried, sOpusMargin_Rovercub_Neglected, sOpusMargin_Rovercub_InstinctCarried, sOpusMargin_Rovercub_InstinctNeglected },
     { SPECIES_CHARMANDER,    sOpusMargin_Label_Carried, sOpusMargin_Label_Neglected, sOpusMargin_Label_InstinctCarried, sOpusMargin_Label_InstinctNeglected },
@@ -1013,4 +1218,45 @@ static const struct OpusMargin sOpusMargins[] = {
     { SPECIES_QUAGSIRE,      sOpusMargin_Torpor_Carried, sOpusMargin_Torpor_Neglected, NULL, NULL },
     { SPECIES_AZURILL,       sOpusMargin_Valence_Carried, sOpusMargin_Valence_Neglected, NULL, NULL },
     { SPECIES_FORRETRESS,    sOpusMargin_Withdrawal_Carried, sOpusMargin_Withdrawal_Neglected, NULL, NULL },
+    { SPECIES_CHIKORITA,     sOpusMargin_Primer_Carried, sOpusMargin_Primer_Neglected, sOpusMargin_Primer_InstinctCarried, sOpusMargin_Primer_InstinctNeglected },
+    { SPECIES_BAYLEEF,       sOpusMargin_Syllabus_Carried, sOpusMargin_Syllabus_Neglected, sOpusMargin_Syllabus_InstinctCarried, sOpusMargin_Syllabus_InstinctNeglected },
+    { SPECIES_MEGANIUM,      sOpusMargin_Curriculum_Carried, sOpusMargin_Curriculum_Neglected, sOpusMargin_Curriculum_InstinctCarried, sOpusMargin_Curriculum_InstinctNeglected },
+    { SPECIES_CYNDAQUIL,     sOpusMargin_Tepid_Carried, sOpusMargin_Tepid_Neglected, sOpusMargin_Tepid_InstinctCarried, sOpusMargin_Tepid_InstinctNeglected },
+    { SPECIES_QUILAVA,       sOpusMargin_Seethe_Carried, sOpusMargin_Seethe_Neglected, sOpusMargin_Seethe_InstinctCarried, sOpusMargin_Seethe_InstinctNeglected },
+    { SPECIES_TYPHLOSION,    sOpusMargin_Heatdeath_Carried, sOpusMargin_Heatdeath_Neglected, sOpusMargin_Heatdeath_InstinctCarried, sOpusMargin_Heatdeath_InstinctNeglected },
+    { SPECIES_TOTODILE,      sOpusMargin_Learnrate_Carried, sOpusMargin_Learnrate_Neglected, sOpusMargin_Learnrate_InstinctCarried, sOpusMargin_Learnrate_InstinctNeglected },
+    { SPECIES_CROCONAW,      sOpusMargin_Momentum_Carried, sOpusMargin_Momentum_Neglected, sOpusMargin_Momentum_InstinctCarried, sOpusMargin_Momentum_InstinctNeglected },
+    { SPECIES_FERALIGATR,    sOpusMargin_Steepest_Carried, sOpusMargin_Steepest_Neglected, sOpusMargin_Steepest_InstinctCarried, sOpusMargin_Steepest_InstinctNeglected },
+    { SPECIES_TREECKO,       sOpusMargin_Stump_Carried, sOpusMargin_Stump_Neglected, sOpusMargin_Stump_InstinctCarried, sOpusMargin_Stump_InstinctNeglected },
+    { SPECIES_GROVYLE,       sOpusMargin_Boosting_Carried, sOpusMargin_Boosting_Neglected, sOpusMargin_Boosting_InstinctCarried, sOpusMargin_Boosting_InstinctNeglected },
+    { SPECIES_SCEPTILE,      sOpusMargin_Canopy_Carried, sOpusMargin_Canopy_Neglected, sOpusMargin_Canopy_InstinctCarried, sOpusMargin_Canopy_InstinctNeglected },
+    { SPECIES_TORCHIC,       sOpusMargin_Coinflip_Carried, sOpusMargin_Coinflip_Neglected, sOpusMargin_Coinflip_InstinctCarried, sOpusMargin_Coinflip_InstinctNeglected },
+    { SPECIES_COMBUSKEN,     sOpusMargin_Montecarlo_Carried, sOpusMargin_Montecarlo_Neglected, sOpusMargin_Montecarlo_InstinctCarried, sOpusMargin_Montecarlo_InstinctNeglected },
+    { SPECIES_BLAZIKEN,      sOpusMargin_Lasvegas_Carried, sOpusMargin_Lasvegas_Neglected, sOpusMargin_Lasvegas_InstinctCarried, sOpusMargin_Lasvegas_InstinctNeglected },
+    { SPECIES_MUDKIP,        sOpusMargin_Runoff_Carried, sOpusMargin_Runoff_Neglected, sOpusMargin_Runoff_InstinctCarried, sOpusMargin_Runoff_InstinctNeglected },
+    { SPECIES_MARSHTOMP,     sOpusMargin_Alluvium_Carried, sOpusMargin_Alluvium_Neglected, sOpusMargin_Alluvium_InstinctCarried, sOpusMargin_Alluvium_InstinctNeglected },
+    { SPECIES_SWAMPERT,      sOpusMargin_Delta_Carried, sOpusMargin_Delta_Neglected, sOpusMargin_Delta_InstinctCarried, sOpusMargin_Delta_InstinctNeglected },
+    { SPECIES_WINGULL,       sOpusMargin_Tangent_Carried, sOpusMargin_Tangent_Neglected, sOpusMargin_Tangent_InstinctCarried, sOpusMargin_Tangent_InstinctNeglected },
+    { SPECIES_PELIPPER,      sOpusMargin_Jacobian_Carried, sOpusMargin_Jacobian_Neglected, sOpusMargin_Jacobian_InstinctCarried, sOpusMargin_Jacobian_InstinctNeglected },
+    { SPECIES_CARVANHA,      sOpusMargin_Undertow_Carried, sOpusMargin_Undertow_Neglected, sOpusMargin_Undertow_InstinctCarried, sOpusMargin_Undertow_InstinctNeglected },
+    { SPECIES_SHARPEDO,      sOpusMargin_Riptide_Carried, sOpusMargin_Riptide_Neglected, sOpusMargin_Riptide_InstinctCarried, sOpusMargin_Riptide_InstinctNeglected },
+    { SPECIES_FEEBAS,        sOpusMargin_Saddle_Carried, sOpusMargin_Saddle_Neglected, sOpusMargin_Saddle_InstinctCarried, sOpusMargin_Saddle_InstinctNeglected },
+    { SPECIES_MILOTIC,       sOpusMargin_Optimum_Carried, sOpusMargin_Optimum_Neglected, sOpusMargin_Optimum_InstinctCarried, sOpusMargin_Optimum_InstinctNeglected },
+    { SPECIES_BARBOACH,      sOpusMargin_Seepage_Carried, sOpusMargin_Seepage_Neglected, sOpusMargin_Seepage_InstinctCarried, sOpusMargin_Seepage_InstinctNeglected },
+    { SPECIES_WHISCASH,      sOpusMargin_Aquifer_Carried, sOpusMargin_Aquifer_Neglected, sOpusMargin_Aquifer_InstinctCarried, sOpusMargin_Aquifer_InstinctNeglected },
+    { SPECIES_CORPHISH,      sOpusMargin_Backflow_Carried, sOpusMargin_Backflow_Neglected, sOpusMargin_Backflow_InstinctCarried, sOpusMargin_Backflow_InstinctNeglected },
+    { SPECIES_CRAWDAUNT,     sOpusMargin_Blackwater_Carried, sOpusMargin_Blackwater_Neglected, sOpusMargin_Blackwater_InstinctCarried, sOpusMargin_Blackwater_InstinctNeglected },
+    { SPECIES_LOTAD,         sOpusMargin_Tempo_Carried, sOpusMargin_Tempo_Neglected, sOpusMargin_Tempo_InstinctCarried, sOpusMargin_Tempo_InstinctNeglected },
+    { SPECIES_LOMBRE,        sOpusMargin_Cadence_Carried, sOpusMargin_Cadence_Neglected, sOpusMargin_Cadence_InstinctCarried, sOpusMargin_Cadence_InstinctNeglected },
+    { SPECIES_LUDICOLO,      sOpusMargin_Cyclical_Carried, sOpusMargin_Cyclical_Neglected, sOpusMargin_Cyclical_InstinctCarried, sOpusMargin_Cyclical_InstinctNeglected },
+    { SPECIES_SURSKIT,       sOpusMargin_Particle_Carried, sOpusMargin_Particle_Neglected, sOpusMargin_Particle_InstinctCarried, sOpusMargin_Particle_InstinctNeglected },
+    { SPECIES_MASQUERAIN,    sOpusMargin_Flocking_Carried, sOpusMargin_Flocking_Neglected, sOpusMargin_Flocking_InstinctCarried, sOpusMargin_Flocking_InstinctNeglected },
+    { SPECIES_CORSOLA,       sOpusMargin_Oldbranch_Carried, sOpusMargin_Oldbranch_Neglected, sOpusMargin_Oldbranch_InstinctCarried, sOpusMargin_Oldbranch_InstinctNeglected },
+    { SPECIES_CLAMPERL,      sOpusMargin_Bifurcate_Carried, sOpusMargin_Bifurcate_Neglected, sOpusMargin_Bifurcate_InstinctCarried, sOpusMargin_Bifurcate_InstinctNeglected },
+    { SPECIES_HUNTAIL,       sOpusMargin_Deepwell_Carried, sOpusMargin_Deepwell_Neglected, sOpusMargin_Deepwell_InstinctCarried, sOpusMargin_Deepwell_InstinctNeglected },
+    { SPECIES_GOREBYSS,      sOpusMargin_Shallows_Carried, sOpusMargin_Shallows_Neglected, sOpusMargin_Shallows_InstinctCarried, sOpusMargin_Shallows_InstinctNeglected },
+    { SPECIES_LUVDISC,       sOpusMargin_Confluence_Carried, sOpusMargin_Confluence_Neglected, sOpusMargin_Confluence_InstinctCarried, sOpusMargin_Confluence_InstinctNeglected },
+    { SPECIES_RELICANTH,     sOpusMargin_Stillrun_Carried, sOpusMargin_Stillrun_Neglected, sOpusMargin_Stillrun_InstinctCarried, sOpusMargin_Stillrun_InstinctNeglected },
+    { SPECIES_SEALEO,        sOpusMargin_Stopgrad_Carried, sOpusMargin_Stopgrad_Neglected, sOpusMargin_Stopgrad_InstinctCarried, sOpusMargin_Stopgrad_InstinctNeglected },
+    { SPECIES_WALREIN,       sOpusMargin_Permafrost_Carried, sOpusMargin_Permafrost_Neglected, sOpusMargin_Permafrost_InstinctCarried, sOpusMargin_Permafrost_InstinctNeglected },
 };
