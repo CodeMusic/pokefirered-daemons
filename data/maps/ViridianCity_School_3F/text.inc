@@ -48,8 +48,8 @@ ViridianCity_School_3F_Text_Recall::
 
 ViridianCity_School_3F_Text_Spacing::
     .string "SPACING\p"
-    .string "Once a day for five days beats\n"
-    .string "five times in one day.\p"
+    .string "Once a day for seven days beats\n"
+    .string "seven times in one day.\p"
     .string "Nobody believes this until they\n"
     .string "try it.$"
 
@@ -68,7 +68,7 @@ ViridianCity_School_3F_Text_Eleventh::
     .string "eleventh is standing on them.$"
 
 ViridianCity_School_3F_Text_Friday::
-    .string "Once a day, five days. That is\n"
+    .string "Once a day, seven days. That is\n"
     .string "what the board says.\p"
     .string "I am on day one.\n"
-    .string "Ask me on Friday.$"
+    .string "Ask me on Saturday.$"
