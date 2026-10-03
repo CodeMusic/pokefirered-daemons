@@ -1394,9 +1394,8 @@ const u8 gDunsparcePokedexText[] = _(
 const u8 gDunsparcePokedexTextUnused[] = _("");
 
 const u8 gGligarPokedexText[] = _(
-    "It flies straight at its target's face,\n"
-    "then clamps down on the startled\n"
-    "victim to inject poison.");
+    "It never flies up. It only ever comes\n"
+    "down, and always where it meant to.");
 
 const u8 gGligarPokedexTextUnused[] = _("");
 
@@ -1969,16 +1968,14 @@ const u8 gExploudPokedexText[] = _(
 const u8 gExploudPokedexTextUnused[] = _("");
 
 const u8 gMakuhitaPokedexText[] = _(
-        "It grows stronger by enduring harsh\n"
-        "training. It is a gutsy DAEMON that can\n"
-        "withstand any attack.");
+    "Nobody ever proved it should stand\n"
+    "there. It simply does, and so it holds.");
 
 const u8 gMakuhitaPokedexTextUnused[] = _("");
 
 const u8 gHariyamaPokedexText[] = _(
-    "It stomps on the ground to build power.\n"
-    "It can send a 10-ton truck flying with a\n"
-    "straight-arm punch.");
+    "Once it has finished, nobody can\n"
+    "argue. They can only check the steps.");
 
 const u8 gHariyamaPokedexTextUnused[] = _("");
 
@@ -2008,37 +2005,32 @@ const u8 gDelcattyPokedexText[] = _(
 const u8 gDelcattyPokedexTextUnused[] = _("");
 
 const u8 gSableyePokedexText[] = _(
-    "It feeds on gemstone crystals.\n"
-    "In darkness, its eyes sparkle with the\n"
-    "glitter of jewels.");
+    "Look straight at it and it is not\n"
+    "there. It was there all along.");
 
 const u8 gSableyePokedexTextUnused[] = _("");
 
 const u8 gMawilePokedexText[] = _(
-        "It uses its docile-looking face to lull\n"
-        "them into complacency, then bites with\n"
-        "its huge, relentless jaws.");
+    "It looks like the easiest way in.\n"
+    "That is the point of it.");
 
 const u8 gMawilePokedexTextUnused[] = _("");
 
 const u8 gAronPokedexText[] = _(
-    "It eats iron to build its steel body.\n"
-    "It is a pest that descends from mountains\n"
-    "to eat bridges and train tracks.");
+    "Everything else begins after it does.\n"
+    "Nothing begins without it.");
 
 const u8 gAronPokedexTextUnused[] = _("");
 
 const u8 gLaironPokedexText[] = _(
-    "It habitually shows off its strength with\n"
-    "the size of sparks it creates by ramming\n"
-    "its steel body into boulders.");
+    "It was meant to be updated. It has\n"
+    "not been, and it still works.");
 
 const u8 gLaironPokedexTextUnused[] = _("");
 
 const u8 gAggronPokedexText[] = _(
-    "It claims a large mountain as its sole\n"
-    "territory. It mercilessly thrashes those\n"
-    "that violate its space.");
+    "Everyone says it will be replaced\n"
+    "soon. They have said so for years.");
 
 const u8 gAggronPokedexTextUnused[] = _("");
 
@@ -2055,30 +2047,26 @@ const u8 gMedichamPokedexText[] = _(
 const u8 gMedichamPokedexTextUnused[] = _("");
 
 const u8 gElectrikePokedexText[] = _(
-    "It stores static electricity in its fur\n"
-    "for discharging. It gives off sparks if a\n"
-    "storm approaches.");
+    "It means nothing yet. It is only\n"
+    "charge, waiting for somewhere to go.");
 
 const u8 gElectrikePokedexTextUnused[] = _("");
 
 const u8 gManectricPokedexText[] = _(
-    "It rarely appears before people.\n"
-    "It is said to nest where lightning has\n"
-    "fallen.");
+    "Where it struck, the air smells\n"
+    "burnt for hours afterward.");
 
 const u8 gManectricPokedexTextUnused[] = _("");
 
 const u8 gPluslePokedexText[] = _(
-    "It cheers on partners while scattering\n"
-    "sparks from its body. It climbs telephone\n"
-    "poles to absorb electricity.");
+    "On its own it does nothing. With\n"
+    "the other, the current flows.");
 
 const u8 gPluslePokedexTextUnused[] = _("");
 
 const u8 gMinunPokedexText[] = _(
-    "Its dislike of water makes it take shelter\n"
-    "under the eaves of houses in rain. It uses\n"
-    "pom-poms made of sparks for cheering.");
+    "It is not the lesser one. Nothing\n"
+    "flows without both of them.");
 
 const u8 gMinunPokedexTextUnused[] = _("");
 
@@ -2154,9 +2142,8 @@ const u8 gCameruptPokedexText[] = _(
 const u8 gCameruptPokedexTextUnused[] = _("");
 
 const u8 gTorkoalPokedexText[] = _(
-        "It burns coal inside its shell. If it is\n"
-        "attacked, it belches thick, black smoke\n"
-        "and DETACH.");
+    "It never quite goes out. Everything\n"
+    "near it ends up a little grey.");
 
 const u8 gTorkoalPokedexTextUnused[] = _("");
 
@@ -2173,9 +2160,8 @@ const u8 gGrumpigPokedexText[] = _(
 const u8 gGrumpigPokedexTextUnused[] = _("");
 
 const u8 gSpindaPokedexText[] = _(
-        "No two SPINDA are said to have identical\n"
-        "patterns. It confuses them with its\n"
-        "stumbling motions.");
+    "No two have ever had the same spots.\n"
+    "That is how they tell each other apart.");
 
 const u8 gSpindaPokedexTextUnused[] = _("");
 
@@ -2199,16 +2185,14 @@ const u8 gFlygonPokedexText[] = _(
 const u8 gFlygonPokedexTextUnused[] = _("");
 
 const u8 gCacneaPokedexText[] = _(
-    "It prefers harsh environments such as\n"
-    "deserts. It can survive for 30 days on\n"
-    "water stored in its body.");
+    "Give it a little and it does well.\n"
+    "Give it a lot and it does not need it.");
 
 const u8 gCacneaPokedexTextUnused[] = _("");
 
 const u8 gCacturnePokedexText[] = _(
-    "It lives in deserts. It becomes active at\n"
-    "night when it hunts for prey exhausted\n"
-    "from the desert's heat.");
+    "It was never taught this. It is very\n"
+    "sure of it anyway.");
 
 const u8 gCacturnePokedexTextUnused[] = _("");
 
@@ -2226,30 +2210,27 @@ const u8 gAltariaPokedexText[] = _(
 const u8 gAltariaPokedexTextUnused[] = _("");
 
 const u8 gZangoosePokedexText[] = _(
-    "If it comes across a SEVIPER, its fur\n"
-    "bristles and it assumes its battle pose.\n"
-    "Its sharp claws are its best weapon.");
+    "It has one enemy, and it would know\n"
+    "that enemy anywhere.");
 
 const u8 gZangoosePokedexTextUnused[] = _("");
 
 const u8 gSeviperPokedexText[] = _(
-    "It sharpens its swordlike tail on hard\n"
-    "rocks. It hides in tall grass and strikes\n"
-    "unwary prey with venomous fangs.");
+    "It has one enemy, and it cannot\n"
+    "fool that one at all.");
 
 const u8 gSeviperPokedexTextUnused[] = _("");
 
 const u8 gLunatonePokedexText[] = _(
-    "Its health ebbs and flows with the lunar\n"
-    "cycle. It brims with power when exposed\n"
-    "to the light of the full moon.");
+    "Its other half reads the same things\n"
+    "the other way round. Neither is wrong.");
 
 const u8 gLunatonePokedexTextUnused[] = _("");
 
 const u8 gSolrockPokedexText[] = _(
-        "It absorbs solar energy during the day.\n"
-        "Always expressionless, it can sense what\n"
-        "them is thinking.");
+    "Its other half reads the same things\n"
+    "the other way round. They have argued\n"
+    "about it for a very long time.");
 
 const u8 gSolrockPokedexTextUnused[] = _("");
 
@@ -2368,23 +2349,20 @@ const u8 gDusclopsPokedexText[] = _(
 const u8 gDusclopsPokedexTextUnused[] = _("");
 
 const u8 gTropiusPokedexText[] = _(
-    "It lives in tropical jungles. The bunch of\n"
-    "fruit around its neck is delicious.\n"
-    "The fruit grows twice a year.");
+    "What it learned far away is still good\n"
+    "here. That is why it travels.");
 
 const u8 gTropiusPokedexTextUnused[] = _("");
 
 const u8 gChimechoPokedexText[] = _(
-    "It travels by riding on winds. It cleverly\n"
-    "uses its long tail to pluck nuts and\n"
-    "berries, which it loves to eat.");
+    "The note never changes. The people\n"
+    "who hear it do.");
 
 const u8 gChimechoPokedexTextUnused[] = _("");
 
 const u8 gAbsolPokedexText[] = _(
-    "It appears when it senses an impending\n"
-    "natural disaster. As a result, it was\n"
-    "mistaken as a doom-bringer.");
+    "People blame it for what comes next.\n"
+    "It only came to tell them.");
 
 const u8 gAbsolPokedexTextUnused[] = _("");
 
@@ -2396,16 +2374,14 @@ const u8 gWynautPokedexText[] = _(
 const u8 gWynautPokedexTextUnused[] = _("");
 
 const u8 gSnoruntPokedexText[] = _(
-    "It is said that a home visited by a\n"
-    "SNORUNT will prosper. It can withstand\n"
-    "cold of minus 150 degrees Fahrenheit.");
+    "It meant to be there for a moment.\n"
+    "Nobody came to let it go.");
 
 const u8 gSnoruntPokedexTextUnused[] = _("");
 
 const u8 gGlaliePokedexText[] = _(
-    "It has a body of ice that won't melt,\n"
-    "even with fire. It can instantly freeze\n"
-    "moisture in the atmosphere.");
+    "Nothing is broken. Everything is\n"
+    "simply waiting for everything else.");
 
 const u8 gGlaliePokedexTextUnused[] = _("");
 
