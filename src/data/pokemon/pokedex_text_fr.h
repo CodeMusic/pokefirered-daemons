@@ -1718,23 +1718,23 @@ const u8 gBlisseyPokedexText[] = _(
 const u8 gBlisseyPokedexTextUnused[] = _("");
 
 const u8 gRaikouPokedexText[] = _(
-        "This DAEMON races across the land\n"
-        "while barking a cry that sounds like\n"
-        "crashing thunder.");
+    "It arrives just after the light, with a\n"
+    "crack that shakes the windows. You\n"
+    "always see it before you hear it.");
 
 const u8 gRaikouPokedexTextUnused[] = _("");
 
 const u8 gEnteiPokedexText[] = _(
-        "A DAEMON that races across the land.\n"
-        "It is said that one is born every time a\n"
-        "new volcano appears.");
+    "It sleeps under the mountain and keeps\n"
+    "burning. Every so often the ground\n"
+    "remembers it is there.");
 
 const u8 gEnteiPokedexTextUnused[] = _("");
 
 const u8 gSuicunePokedexText[] = _(
-        "This DAEMON races across the land. It\n"
-        "is said that north winds will somehow\n"
-        "blow whenever it appears.");
+    "It runs across water without breaking\n"
+    "the surface, and whatever it passes\n"
+    "over is left clear.");
 
 const u8 gSuicunePokedexTextUnused[] = _("");
 
@@ -1775,9 +1775,9 @@ const u8 gHoOhPokedexText[] = _(
 const u8 gHoOhPokedexTextUnused[] = _("");
 
 const u8 gCelebiPokedexText[] = _(
-    "When CELEBI disappears deep in a forest,\n"
-    "it is said to leave behind an egg it\n"
-    "brought from the future.");
+    "It is only ever there for a moment.\n"
+    "Reach as it passes and you have it;\n"
+    "reach late and it is gone.");
 
 const u8 gCelebiPokedexTextUnused[] = _("");
 
@@ -2651,65 +2651,65 @@ const u8 gMetagrossPokedexText[] = _(
 const u8 gMetagrossPokedexTextUnused[] = _("");
 
 const u8 gRegirockPokedexText[] = _(
-    "It is entirely composed of rocks with no\n"
-    "sign of a brain or heart. It is a mystery\n"
-    "even to modern scientists.");
+    "It was a stone thrown over a shoulder.\n"
+    "It stood up, and has never been sure\n"
+    "what it is since.");
 
 const u8 gRegirockPokedexTextUnused[] = _("");
 
 const u8 gRegicePokedexText[] = _(
-    "Research revealed that its body is made\n"
-    "of the same kind of ice that is found at\n"
-    "the South Pole.");
+    "Whatever falls into it is kept exactly,\n"
+    "as clear as the day it fell. Nothing\n"
+    "in it has changed in an age.");
 
 const u8 gRegicePokedexTextUnused[] = _("");
 
 const u8 gRegisteelPokedexText[] = _(
-    "It is sturdier than any kind of metal.\n"
-    "It hardened due to pressure underground\n"
-    "over tens of thousands of years.");
+    "It walks the same rounds three times a\n"
+    "day and has never missed one. It does\n"
+    "not know how to stop.");
 
 const u8 gRegisteelPokedexTextUnused[] = _("");
 
 const u8 gLatiasPokedexText[] = _(
-    "It can telepathically communicate with\n"
-    "people. It changes its appearance using\n"
-    "its down that refracts light.");
+    "It feels what its twin feels and goes\n"
+    "to it without being called. It gave\n"
+    "its twin half of all it had.");
 
 const u8 gLatiasPokedexTextUnused[] = _("");
 
 const u8 gLatiosPokedexText[] = _(
-    "It has a docile temperament and dislikes\n"
-    "fighting. Tucking in its forelegs, it can\n"
-    "fly faster than a jet plane.");
+    "It flies faster than it can be seen,\n"
+    "and whatever it sees, its twin sees\n"
+    "too, however far apart they are.");
 
 const u8 gLatiosPokedexTextUnused[] = _("");
 
 const u8 gKyogrePokedexText[] = _(
-        "This DAEMON is said to have expanded the\n"
-        "sea by bringing heavy rains. It has the\n"
-        "power to control water.");
+    "It holds everything and has no shape.\n"
+    "Whatever falls into it becomes part\n"
+    "of it, and keeps no edge of its own.");
 
 const u8 gKyogrePokedexTextUnused[] = _("");
 
 const u8 gGroudonPokedexText[] = _(
-        "This legendary DAEMON is said to represent\n"
-        "the land. It went to sleep after dueling\n"
-        "KYOGRE.");
+    "Everything else stands on its back.\n"
+    "When it shifts in its sleep, every map\n"
+    "has to be drawn again.");
 
 const u8 gGroudonPokedexTextUnused[] = _("");
 
 const u8 gRayquazaPokedexText[] = _(
-    "It has lived for hundreds of millions of\n"
-    "years in the ozone layer. Its flying form\n"
-    "looks like a meteor.");
+    "It lives above the weather and comes\n"
+    "down only when the sea and the land\n"
+    "will not stop fighting.");
 
 const u8 gRayquazaPokedexTextUnused[] = _("");
 
 const u8 gJirachiPokedexText[] = _(
-    "It is said to make any wish come true.\n"
-    "It is awake for only seven days out of\n"
-    "a thousand years.");
+    "It sleeps at the bottom of a jar for a\n"
+    "thousand years and wakes for seven\n"
+    "days, and in them it listens.");
 
 const u8 gJirachiPokedexTextUnused[] = _("");
 
