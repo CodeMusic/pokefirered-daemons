@@ -94,6 +94,20 @@ static bool8 FromBcd(u8 bcd, u8 max, u8 *out)
     return *out <= max;
 }
 
+//  THE WEEKDAY COMES FROM THE DATE, NOT FROM THE CHIP (2026-10-03, the user: "on my console ... it always shows
+//  sunday"). The chip keeps a weekday register, but it only holds what whoever set the clock wrote there -- mGBA
+//  writes the true one, and a flash cart's clock menu sets the date and time and may leave the weekday at 0, which is
+//  Sunday for ever. (A stray 7 there used to make the whole clock read as no clock.) The date is always set, so the
+//  weekday is worked out from it: Sakamoto's method, Sunday 0, good for any Gregorian date.
+static u8 WeekdayFromDate(u16 year, u8 month, u8 day)
+{
+    static const u8 sMonthOffset[12] = { 0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4 };
+
+    if (month < 3)
+        year--;
+    return (year + year / 4 - year / 100 + year / 400 + sMonthOffset[month - 1] + day) % 7;
+}
+
 bool8 DaemonsRtc_Read(struct DaemonsClock *clock)
 {
     u8 status, year, hour, raw[7];   // year, month, day, weekday, hour, minute, second
@@ -103,7 +117,6 @@ bool8 DaemonsRtc_Read(struct DaemonsClock *clock)
     if (!FromBcd(raw[0], 99, &year)
      || !FromBcd(raw[1], 12, &clock->month) || clock->month == 0
      || !FromBcd(raw[2], 31, &clock->day) || clock->day == 0
-     || !FromBcd(raw[3] & 7, 6, &clock->weekday)
      || !FromBcd(raw[4] & 0x3F, (status & STATUS_24HOUR) ? 23 : 12, &hour)
      || !FromBcd(raw[5], 59, &clock->minute)
      || !FromBcd(raw[6] & 0x7F, 59, &clock->second))
@@ -123,6 +136,7 @@ bool8 DaemonsRtc_Read(struct DaemonsClock *clock)
     //  is read as no clock at all and the day falls back to play time.
     if (clock->year < 2020 || clock->year > 2049)
         return FALSE;
+    clock->weekday = WeekdayFromDate(clock->year, clock->month, clock->day);
     return TRUE;
 }
 

@@ -7,7 +7,7 @@ struct DaemonsClock
     u16 year;       // 2000-2099
     u8 month;       // 1-12
     u8 day;         // 1-31
-    u8 weekday;     // 0-6, Sunday first (as mGBA and the flash carts set it)
+    u8 weekday;     // 0-6, Sunday first -- worked out from the date, not the chip (src/daemons_rtc.c)
     u8 hour;        // 0-23
     u8 minute;
     u8 second;
