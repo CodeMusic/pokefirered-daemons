@@ -11,6 +11,7 @@
 #include "constants/maps.h"
 #include "daemons_time.h"
 #include "data/day_trims.h"
+#include "school_lift.h"
 
 extern const struct Tileset gTileset_General;   // T-275: the CHECKPOINT's tileset
 #include "overworld.h"
@@ -1184,5 +1185,6 @@ void LoadMapTilesetPalettes(struct MapLayout const *mapLayout)
     {
         LoadPrimaryTilesetPalette(mapLayout);
         LoadSecondaryTilesetPalette(mapLayout);
+        SchoolLift_OnTilesetPalettesLoaded();     // the school lift's lamp, blue while a ride is arriving
     }
 }

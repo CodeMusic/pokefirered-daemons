@@ -477,4 +477,5 @@ gSpecials::
 	def_special Terminal_BufferPlayTime
 	def_special Terminal_RandomNoRepeat
 	def_special Terminal_PlayDayNote
+	def_special School_LiftLampBlue
 gSpecialsEnd::

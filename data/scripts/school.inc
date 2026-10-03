@@ -16,6 +16,7 @@ School_EventScript_Lift::
 	compare VAR_RESULT, VAR_0x8004
 	goto_if_eq School_EventScript_LiftHere
 	closemessage
+	special School_LiftLampBlue       @ the lamp over the doors turns blue until the ride is over
 	playse SE_ELEVATOR
 	waitse
 	switch VAR_RESULT

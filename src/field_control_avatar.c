@@ -26,6 +26,7 @@
 #include "field_message_box.h"
 #include "map_name_popup.h"
 #include "pokedex_screen.h"   // T-203
+#include "school_lift.h"
 
 // T-196: the label the popup carries while an echo is on screen.
 static const u8 sText_Echo[] = _("ECHO");
@@ -353,6 +354,7 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     u16 metatileBehavior;
     u32 metatileAttributes;
 
+    SchoolLift_OnPlayerReady();                  // the school lift's lamp goes green: the ride is over
     ResetFacingNpcOrSignpostVars();
     playerDirection = GetPlayerFacingDirection();
     GetPlayerPosition(&position);
