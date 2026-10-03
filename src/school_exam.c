@@ -720,6 +720,8 @@ static const u8 sText_Left1[]      = _(" still unanswered.");
 static const u8 sText_Left2[]      = _("EXIT EXAM keeps every answer you gave.");
 static const u8 sText_Confirm1[]   = _("Hand the paper in?");
 static const u8 sText_Confirm2[]   = _("A  YES          B  NO");
+static const u8 sText_GoOn2[]      = _("Go on to ");               // T-353, DRAFT
+static const u8 sText_GoOnMark[]   = _("?");
 static const u8 sText_LetterA[] = _("A");
 static const u8 sText_LetterB[] = _("B");
 static const u8 sText_LetterC[] = _("C");
@@ -773,6 +775,20 @@ static u16 CountAnswered(void)
     return n;
 }
 
+//  T-353 (the user's playthrough, 2026-10-03): a section whose every question has an answer.
+static bool8 SectionAnswered(u8 section)
+{
+    u16 base = SectionBase(section);
+    u8 i;
+
+    for (i = 0; i < sSections[section].count; i++)
+    {
+        if (GetAnswer(base + i) == 0)
+            return FALSE;
+    }
+    return TRUE;
+}
+
 static const u8 *GradeLetter(u16 percent)
 {
     static const u8 sAPlus[] = _("A+"), sA[] = _("A"), sAMinus[] = _("A-"), sBPlus[] = _("B+"), sB[] = _("B"),
@@ -793,7 +809,7 @@ static const u8 *GradeLetter(u16 percent)
 }
 
 //  ---- the screen
-enum { MODE_LIST, MODE_QUESTION, MODE_UNANSWERED, MODE_CONFIRM, MODE_LEAVING, MODE_DIPLOMA };
+enum { MODE_LIST, MODE_QUESTION, MODE_UNANSWERED, MODE_CONFIRM, MODE_LEAVING, MODE_DIPLOMA, MODE_NEXT_SECTION };
 enum { WIN_HEADER, WIN_BODY, WIN_FOOTER, WIN_COUNT };
 
 struct SchoolExam
@@ -831,6 +847,49 @@ static const u16 sPaperPal[16] =
 };
 static const u8 sInk[3]   = { 1, 2, 3 };
 static const u8 sFaint[3] = { 1, 4, 1 };
+
+//  T-353 / T-354: the cursor on the first question in a section still to answer, or on its first question when
+//  there is none; scrolled so it shows.
+static void CursorToFirstUnanswered(void)
+{
+    u16 base = SectionBase(sExam->section);
+    u8 i;
+
+    sExam->cursor = sExam->scroll = 0;
+    for (i = 0; i < sSections[sExam->section].count; i++)
+    {
+        if (GetAnswer(base + i) == 0)
+        {
+            sExam->cursor = i;
+            break;
+        }
+    }
+    if (sExam->cursor >= ROWS)
+        sExam->scroll = sExam->cursor - ROWS + 1;
+}
+
+//  T-354: A RESUMED PAPER OPENS WHERE IT WAS LEFT -- the first section with a question still to answer, at that
+//  question. The save holds only answers (see THE SAVE, above), and they are enough to find the place; a paper
+//  with every answer given opens on its last section, at FINISH EXAM.
+static void OpenWhereLeft(void)
+{
+    u8 s;
+
+    for (s = 0; s < ARRAY_COUNT(sSections); s++)
+    {
+        if (!SectionAnswered(s))
+        {
+            sExam->section = s;
+            CursorToFirstUnanswered();
+            return;
+        }
+    }
+    sExam->section = ARRAY_COUNT(sSections) - 1;
+    sExam->cursor = sSections[sExam->section].count;
+    if (sExam->cursor >= ROWS)
+        sExam->scroll = sExam->cursor - ROWS + 1;
+    sExam->footer = 0;
+}
 
 static void Task_ExamInit(u8 taskId);
 static void Task_ExamInput(u8 taskId);
@@ -936,6 +995,15 @@ static void DrawFooter(void)
         break;
     case MODE_CONFIRM:
         Print(WIN_FOOTER, sInk, 0, 0, sText_Confirm1);
+        Print(WIN_FOOTER, sInk, 0, 16, sText_Confirm2);
+        break;
+    case MODE_NEXT_SECTION:
+        //  "Go on to SECTION 4?" over "A  YES  B  NO", as the hand-in question is asked.
+        p = StringCopy(buf, sText_GoOn2);
+        p = StringCopy(p, sText_Section);
+        p = ConvertIntToDecimalStringN(p, sExam->section + 2, STR_CONV_MODE_LEFT_ALIGN, 1);
+        StringCopy(p, sText_GoOnMark);
+        Print(WIN_FOOTER, sInk, 0, 0, buf);
         Print(WIN_FOOTER, sInk, 0, 16, sText_Confirm2);
         break;
     default:
@@ -1122,10 +1190,29 @@ static void Task_ExamInput(u8 taskId)
         }
         else if (JOY_NEW(A_BUTTON))
         {
+            bool8 wasBlank = (GetAnswer(SectionBase(sExam->section) + sExam->cursor) == 0);
+
             SetAnswer(SectionBase(sExam->section) + sExam->cursor, sExam->option + 1);
             PlaySE(SE_SELECT);
             sExam->mode = MODE_LIST;
-            if (sExam->cursor + 1 < count)
+            //  T-353: THE LAST QUESTION A SECTION WAS WAITING FOR ASKS WHETHER TO GO ON. Only a newly given
+            //  answer asks -- changing one already given never does -- and the last section goes to FINISH EXAM
+            //  instead, since there is no next one. L and R still page the sections at any time.
+            if (wasBlank && SectionAnswered(sExam->section))
+            {
+                if (sExam->section + 1 < ARRAY_COUNT(sSections))
+                {
+                    sExam->mode = MODE_NEXT_SECTION;
+                }
+                else
+                {
+                    sExam->cursor = count;
+                    sExam->footer = 0;
+                    if (sExam->cursor >= sExam->scroll + ROWS)
+                        sExam->scroll = sExam->cursor - ROWS + 1;
+                }
+            }
+            else if (sExam->cursor + 1 < count)
             {
                 sExam->cursor++;
                 if (sExam->cursor >= sExam->scroll + ROWS)
@@ -1157,6 +1244,23 @@ static void Task_ExamInput(u8 taskId)
         }
         else if (JOY_NEW(B_BUTTON))
         {
+            PlaySE(SE_SELECT);
+            sExam->mode = MODE_LIST;
+            DrawAll();
+        }
+        break;
+    case MODE_NEXT_SECTION:
+        if (JOY_NEW(A_BUTTON))
+        {
+            PlaySE(SE_SELECT);
+            sExam->section++;
+            CursorToFirstUnanswered();
+            sExam->mode = MODE_LIST;
+            DrawAll();
+        }
+        else if (JOY_NEW(B_BUTTON))
+        {
+            //  Stay, to look the section over: the cursor waits on its last question.
             PlaySE(SE_SELECT);
             sExam->mode = MODE_LIST;
             DrawAll();
@@ -1248,6 +1352,8 @@ static void CB2_OpenExam(void)
     sExam = AllocZeroed(sizeof(*sExam));
     if (sShowDiploma)
         sExam->mode = MODE_DIPLOMA;
+    else
+        OpenWhereLeft();
     sShowDiploma = FALSE;
     ResetSpriteData();
     ResetPaletteFade();
