@@ -243,19 +243,20 @@ gOakSpeech_Text_SoYourNameIsPlayer::
 
 gOakSpeech_Text_WhatWasHisName::
     .string "This is my grandchild.\p"
-    .string "They have been your rival since you\n"
+    .string "He has been your rival since you\n"
     .string "were both small.\p"
-    .string "…Erm, what was their name again?$"
+    .string "…Do you remember his name?$"
 
 gOakSpeech_Text_YourRivalsNameWhatWasIt::
-    .string "Your rival's name, what was it now?$"
+    .string "Do you remember your rival's name?$"
 
 gOakSpeech_Text_ConfirmRivalName::
-    .string "…Er, was it {RIVAL}?$"
+    .string "{RIVAL}? Is that your answer?$"
 
 gOakSpeech_Text_RememberRivalsName::
-    .string "That's right! I remember now!\n"
-    .string "Their name is {RIVAL}!\p$"
+    .string "Ha ha! That's right, {RIVAL}!\p"
+    .string "He's your rival. How could you\n"
+    .string "forget your own rival?\p$"
 
 gOakSpeech_Text_LetsGo::
     .string "{PLAYER}!\p"
