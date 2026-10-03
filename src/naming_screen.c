@@ -1880,11 +1880,20 @@ static void CreateHelperTasks(void)
     CreateButtonFlashTask();
 }
 
+//  T-363: the banner's own row, in place of the shared text-window palette it borrowed -- night navy behind
+//  (index 15, its fill), pale lettering (1) with a steel shadow (2). The rest of the row is that palette's, unused here.
+static const u16 sBanner_Pal[16] =
+{
+    RGB(14, 25, 20), RGB(23, 27, 31), RGB(5, 8, 16), RGB(26, 26, 25), RGB(28, 1, 1), RGB(31, 23, 14),
+    RGB(4, 19, 1), RGB(18, 30, 18), RGB(6, 10, 25), RGB(20, 24, 30), RGB(31, 31, 31), RGB(9, 25, 29),
+    RGB(2, 21, 27), RGB(0, 10, 14), RGB(0, 14, 17), RGB(2, 3, 6)
+};
+
 static void LoadPalettes(void)
 {
     LoadPalette(gNamingScreenMenu_Pal, BG_PLTT_ID(0), sizeof(gNamingScreenMenu_Pal));
     LoadPalette(gNamingScreenKeyboard_Pal, BG_PLTT_ID(10), PLTT_SIZE_4BPP);
-    LoadPalette(GetTextWindowPalette(2), BG_PLTT_ID(11), PLTT_SIZE_4BPP);
+    LoadPalette(sBanner_Pal, BG_PLTT_ID(11), PLTT_SIZE_4BPP);
 }
 
 static void DecompressToBgTilemapBuffer(u8 bg, const u32 *src)
@@ -1923,9 +1932,11 @@ struct TextColor   // Needed because of alignment
 
 static const struct TextColor sTextColorStruct = {
     {
-        {TEXT_DYNAMIC_COLOR_4, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY},
-        {TEXT_DYNAMIC_COLOR_5, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY},
-        {TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY}
+        //  T-363: the keys print in 11 and 12 of keyboard.pal (pale on ink), so the name box can keep the font's own
+        //  1, 2 and 3 as a dark field with pale writing (tools/gbanaming.py writes both)
+        {TEXT_DYNAMIC_COLOR_4, 11, 12},
+        {TEXT_DYNAMIC_COLOR_5, 11, 12},
+        {TEXT_DYNAMIC_COLOR_6, 11, 12}
     }
 };
 
