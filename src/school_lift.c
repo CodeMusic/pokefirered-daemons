@@ -35,11 +35,15 @@ static s16 FindLampSlot(void)
     return -1;
 }
 
-static void SetLamp(s16 slot, u16 color)
+//  The colour at rest was faded with the rest of the floor as it loaded (T-317's faded print); the blue is faded here
+//  the same way, or it is the one thing in a grey building at full colour (found in the theatre, T-357).
+static void SetLamp(s16 slot, u16 color, bool8 tint)
 {
     gPlttBufferUnfaded[slot] = color;
+    if (tint)
+        DaemonsWashTileColour(slot);
     if (!gPaletteFade.active)
-        gPlttBufferFaded[slot] = color;
+        gPlttBufferFaded[slot] = gPlttBufferUnfaded[slot];
 }
 
 //  special: a floor has been chosen.
@@ -50,7 +54,7 @@ void School_LiftLampBlue(void)
     if (slot < 0)
         return;
     sLampAtRest = gPlttBufferUnfaded[slot];
-    SetLamp(slot, LAMP_BLUE);
+    SetLamp(slot, LAMP_BLUE, TRUE);
     sRiding = TRUE;
 }
 
@@ -68,7 +72,7 @@ void SchoolLift_OnTilesetPalettesLoaded(void)
         return;
     }
     sLampAtRest = gPlttBufferUnfaded[slot];
-    SetLamp(slot, LAMP_BLUE);
+    SetLamp(slot, LAMP_BLUE, TRUE);
 }
 
 //  field_control_avatar.c, every frame the player has control: the ride is over.
@@ -81,5 +85,5 @@ void SchoolLift_OnPlayerReady(void)
     sRiding = FALSE;
     slot = FindLampSlot();
     if (slot >= 0)
-        SetLamp(slot, sLampAtRest);
+        SetLamp(slot, sLampAtRest, FALSE);
 }

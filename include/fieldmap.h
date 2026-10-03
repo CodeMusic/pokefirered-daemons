@@ -38,6 +38,7 @@ bool32 CanCameraMoveInDirection(s32);
 const struct MapHeader * GetMapHeaderFromConnection(const struct MapConnection * connection);
 const struct MapConnection * GetMapConnectionAtPos(s16 x, s16 y);
 void ApplyGlobalTintToPaletteSlot(u8 slot, u8 count);
+void DaemonsWashTileColour(u16 offset);
 void SaveMapView(void);
 u32 ExtractMetatileAttribute(u32 attributes, u8 attributeType);
 u32 MapGridGetMetatileAttributeAt(s16 x, s16 y, u8 attributeType);

@@ -1072,6 +1072,15 @@ static void ApplyGlobalTintToPaletteEntries(u16 offset, u16 size)
     CpuCopy16(&gPlttBufferUnfaded[offset], &gPlttBufferFaded[offset], PLTT_SIZEOF(size));
 }
 
+//  T-355: one tile colour through everything a tileset colour gets as it loads -- the faded print, then the field's
+//  tint -- for the school lift's blue lamp, written after its floor loaded. Without it the blue stood at full colour in
+//  a building drawn 40% grey around it, while the green it replaces had faded with the rest (the theatre, T-357).
+void DaemonsWashTileColour(u16 offset)
+{
+    DaemonsClarityEntries(offset, 1);
+    ApplyGlobalTintToPaletteEntries(offset, 1);
+}
+
 void ApplyGlobalTintToPaletteSlot(u8 slot, u8 count)
 {
     switch (DaemonsFieldTint())
