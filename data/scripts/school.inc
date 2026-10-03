@@ -155,8 +155,40 @@ School_EventScript_ExamNotYet::
 	releaseall
 	end
 
+@  T-360 (the user's playthrough, 2026-10-03): after the DIPLOMA the OWL congratulates the player, and if the last
+@  paper missed anything, offers to go over it -- the marked paper, read only, the right answers shown. DRAFT.
 School_EventScript_Owl::
-	msgbox School_Text_Owl, MSGBOX_NPC
+	lock
+	faceplayer
+	goto_if_set FLAG_GOT_DIPLOMA, School_EventScript_OwlAfterDiploma
+	msgbox School_Text_Owl
+	release
+	end
+
+School_EventScript_OwlAfterDiploma::
+	msgbox School_Text_OwlWellDone
+	special School_CountPaperMisses
+	goto_if_eq VAR_RESULT, 255, School_EventScript_OwlDone
+	goto_if_eq VAR_RESULT, 0, School_EventScript_OwlPerfect
+	msgbox School_Text_OwlGoOver, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, School_EventScript_OwlNotNow
+	closemessage
+	fadescreen FADE_TO_BLACK
+	special School_OpenFeedback
+	waitstate
+	msgbox School_Text_OwlAfterReview
+	release
+	end
+
+School_EventScript_OwlPerfect::
+	msgbox School_Text_OwlPerfect
+School_EventScript_OwlDone::
+	release
+	end
+
+School_EventScript_OwlNotNow::
+	msgbox School_Text_OwlNotNow
+	release
 	end
 
 School_EventScript_SeatedStudent::
@@ -220,6 +252,27 @@ School_Text_ExamWhenever::
 School_Text_Owl::
 	.string "Take all the time you need.\n"
 	.string "The paper is not going anywhere.$"
+
+School_Text_OwlWellDone::
+	.string "Well done, {PLAYER}.\n"
+	.string "That DIPLOMA was earned.$"
+
+School_Text_OwlPerfect::
+	.string "And not one question missed.\n"
+	.string "I have nothing to add.$"
+
+School_Text_OwlGoOver::
+	.string "Your last paper missed {STR_VAR_1}\n"
+	.string "of the eighty-four.\p"
+	.string "Shall we go over them? A miss\n"
+	.string "is worth more once you see it.$"
+
+School_Text_OwlNotNow::
+	.string "Whenever you like.\n"
+	.string "The paper will keep.$"
+
+School_Text_OwlAfterReview::
+	.string "Now you know where they went.$"
 
 School_Text_Shh::
 	.string "...Shh.$"

@@ -1621,6 +1621,8 @@
 #define FLAG_CALLOW_DOOR_HEARD        (DAEMONS_FLAGS_START + 0x6A)
 //  T-348: the first shop clerk spoken to while holding OPUS has noticed it and said how it is read.
 #define FLAG_CLERK_NOTICED_OPUS       (DAEMONS_FLAGS_START + 0x6B)
+//  T-360: the last paper handed in is kept, marked, for the OWL to go over; the next sitting clears it.
+#define FLAG_SCHOOL_PAPER_MARKED      (DAEMONS_FLAGS_START + 0x6C)
 
 //  T-19. Two beats of one scene, five islands and a sea apart.
 #define FLAG_TY_GAVE_PAYLOAD          (DAEMONS_FLAGS_START + 0x20)

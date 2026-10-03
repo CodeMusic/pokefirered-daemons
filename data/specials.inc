@@ -478,4 +478,6 @@ gSpecials::
 	def_special Terminal_RandomNoRepeat
 	def_special Terminal_PlayDayNote
 	def_special School_LiftLampBlue
+	def_special School_CountPaperMisses
+	def_special School_OpenFeedback
 gSpecialsEnd::

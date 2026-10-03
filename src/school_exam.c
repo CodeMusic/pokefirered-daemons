@@ -722,6 +722,12 @@ static const u8 sText_Confirm1[]   = _("Hand the paper in?");
 static const u8 sText_Confirm2[]   = _("A  YES          B  NO");
 static const u8 sText_GoOn2[]      = _("Go on to ");               // T-353, DRAFT
 static const u8 sText_GoOnMark[]   = _("?");
+static const u8 sText_Cross[]      = _("×");                       // T-360, DRAFT
+static const u8 sText_Marked[]     = _("THE MARKED PAPER");
+static const u8 sText_Missed[]     = _(" MISSED");
+static const u8 sText_Gap[]        = _("     ");
+static const u8 sText_LookDone[]   = _("A  LOOK          B  DONE");
+static const u8 sText_RightYours[] = _("▶ THE ANSWER     × YOURS");
 static const u8 sText_LetterA[] = _("A");
 static const u8 sText_LetterB[] = _("B");
 static const u8 sText_LetterC[] = _("C");
@@ -822,10 +828,12 @@ struct SchoolExam
     u8 footer;      // 0 FINISH, 1 EXIT
     u8 option;
     u8 handedIn;
+    u8 review;      // T-360: the marked paper, gone over with the OWL -- read only
 };
 
 static EWRAM_DATA struct SchoolExam *sExam = NULL;
 static EWRAM_DATA bool8 sShowDiploma = FALSE;   // T-218: open the screen as the certificate, not the paper
+static EWRAM_DATA bool8 sShowReview = FALSE;    // T-360: open the marked paper to go over it
 
 static const struct BgTemplate sBgTemplates[] =
 {
@@ -868,6 +876,30 @@ static void CursorToFirstUnanswered(void)
         sExam->scroll = sExam->cursor - ROWS + 1;
 }
 
+//  T-360: the marked paper opens on its first missed question, read only.
+static void OpenOnFirstMissed(void)
+{
+    u16 base;
+    u8 s, i;
+
+    sExam->review = TRUE;
+    for (s = 0; s < ARRAY_COUNT(sSections); s++)
+    {
+        base = SectionBase(s);
+        for (i = 0; i < sSections[s].count; i++)
+        {
+            if (GetAnswer(base + i) != sSections[s].questions[i].answer)
+            {
+                sExam->section = s;
+                sExam->cursor = i;
+                if (i >= ROWS)
+                    sExam->scroll = i - ROWS + 1;
+                return;
+            }
+        }
+    }
+}
+
 //  T-354: A RESUMED PAPER OPENS WHERE IT WAS LEFT -- the first section with a question still to answer, at that
 //  question. The save holds only answers (see THE SAVE, above), and they are enough to find the place; a paper
 //  with every answer given opens on its last section, at FINISH EXAM.
@@ -891,6 +923,7 @@ static void OpenWhereLeft(void)
     sExam->footer = 0;
 }
 
+static u16 CountMissed(void);
 static void Task_ExamInit(u8 taskId);
 static void Task_ExamInput(u8 taskId);
 
@@ -945,6 +978,8 @@ static void DrawList(void)
         Print(WIN_BODY, sInk, 10, row * 16, buf);
         Print(WIN_BODY, sInk, 34, row * 16, Section()->questions[i].title);
         answer = GetAnswer(base + i);
+        if (sExam->review && answer != Section()->questions[i].answer)
+            Print(WIN_BODY, sInk, 200, row * 16, sText_Cross);         // T-360: missed
         if (answer != 0)
             Print(WIN_BODY, sInk, 212, row * 16, sLetters[answer - 1]);
         else
@@ -962,7 +997,16 @@ static void DrawQuestion(void)
     Print(WIN_BODY, sInk, 0, 0, q->text);
     for (i = 0; i < 4; i++)
     {
-        if (sExam->option == i)
+        if (sExam->review)
+        {
+            //  T-360: the right answer pointed at; a wrong choice crossed.
+            u8 given = GetAnswer(SectionBase(sExam->section) + sExam->cursor);
+            if (q->answer == i + 1)
+                Print(WIN_BODY, sInk, 0, 36 + i * 14, sText_Cursor);
+            else if (given == i + 1)
+                Print(WIN_BODY, sInk, 0, 36 + i * 14, sText_Cross);
+        }
+        else if (sExam->option == i)
             Print(WIN_BODY, sInk, 0, 36 + i * 14, sText_Cursor);
         StringCopy(buf, sLetters[i]);
         Print(WIN_BODY, sInk, 10, 36 + i * 14, buf);
@@ -977,6 +1021,29 @@ static void DrawFooter(void)
     bool8 onFooter = (sExam->cursor == Section()->count);
 
     FillWindowPixelBuffer(WIN_FOOTER, PIXEL_FILL(1));
+    if (sExam->review)
+    {
+        if (sExam->mode == MODE_QUESTION)
+        {
+            Print(WIN_FOOTER, sFaint, 0, 0, sText_RightYours);
+            p = StringCopy(buf, sText_Question);
+            p = ConvertIntToDecimalStringN(p, sExam->cursor + 1, STR_CONV_MODE_LEFT_ALIGN, 2);
+            p = StringCopy(p, sText_Of);
+            ConvertIntToDecimalStringN(p, Section()->count, STR_CONV_MODE_LEFT_ALIGN, 2);
+            Print(WIN_FOOTER, sFaint, 0, 16, buf);
+        }
+        else
+        {
+            p = StringCopy(buf, sText_Marked);
+            p = StringCopy(p, sText_Gap);
+            p = ConvertIntToDecimalStringN(p, CountMissed(), STR_CONV_MODE_LEFT_ALIGN, 2);
+            StringCopy(p, sText_Missed);
+            Print(WIN_FOOTER, sInk, 0, 0, buf);
+            Print(WIN_FOOTER, sFaint, 0, 16, sText_LookDone);
+        }
+        CopyWindowToVram(WIN_FOOTER, COPYWIN_FULL);
+        return;
+    }
     switch (sExam->mode)
     {
     case MODE_QUESTION:
@@ -1090,11 +1157,47 @@ static void HandIn(void)
     if (VarGet(VAR_SCHOOL_EXAM_ATTEMPTS) == 0 || percent > VarGet(VAR_SCHOOL_EXAM_BEST))
         VarSet(VAR_SCHOOL_EXAM_BEST, percent);
     VarSet(VAR_SCHOOL_EXAM_ATTEMPTS, VarGet(VAR_SCHOOL_EXAM_ATTEMPTS) + 1);
-    //  A fresh paper for the next sitting. The mark is kept; the answers are not, or a retake would be
-    //  handing the same paper in twice.
+    //  T-360: THE MARKED PAPER IS KEPT, so the OWL can go over it with the player. It used to be cleared here; now
+    //  the answers stay under FLAG_SCHOOL_PAPER_MARKED, and the next sitting clears them before it begins
+    //  (FreshPaperIfMarked) -- so a retake is still never the same paper handed in twice, and a marked paper is
+    //  never "under way".
+    FlagSet(FLAG_SCHOOL_PAPER_MARKED);
+    sExam->handedIn = TRUE;
+}
+
+static void ClearAnswers(void)
+{
+    u16 q, total = TotalQuestions();
+
     for (q = 0; q < (total + QS_PER_VAR - 1) / QS_PER_VAR; q++)
         VarSet(VAR_SCHOOL_EXAM_ANSWERS + q, 0);
-    sExam->handedIn = TRUE;
+}
+
+//  T-360: a new sitting starts from a blank paper, whatever the last one left.
+static void FreshPaperIfMarked(void)
+{
+    if (FlagGet(FLAG_SCHOOL_PAPER_MARKED))
+    {
+        ClearAnswers();
+        FlagClear(FLAG_SCHOOL_PAPER_MARKED);
+    }
+}
+
+//  T-360: how many questions the marked paper got wrong (a blank counts as wrong, as it did in the mark).
+static u16 CountMissed(void)
+{
+    u16 q = 0, missed = 0;
+    u32 s, i;
+
+    for (s = 0; s < ARRAY_COUNT(sSections); s++)
+    {
+        for (i = 0; i < sSections[s].count; i++, q++)
+        {
+            if (GetAnswer(q) != sSections[s].questions[i].answer)
+                missed++;
+        }
+    }
+    return missed;
 }
 
 static void Leave(void)
@@ -1103,10 +1206,69 @@ static void Leave(void)
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
 }
 
+//  T-360: going over the marked paper. Read only: up and down, L and R, A to look, B to go back or leave.
+static void Task_ExamReviewInput(u8 taskId)
+{
+    u8 count = Section()->count;
+
+    if (sExam->mode == MODE_QUESTION)
+    {
+        if (JOY_NEW(A_BUTTON | B_BUTTON))
+        {
+            PlaySE(SE_SELECT);
+            sExam->mode = MODE_LIST;
+            DrawAll();
+        }
+        return;
+    }
+    if (JOY_NEW(DPAD_UP) && sExam->cursor > 0)
+    {
+        sExam->cursor--;
+        if (sExam->cursor < sExam->scroll)
+            sExam->scroll = sExam->cursor;
+        PlaySE(SE_SELECT);
+        DrawAll();
+    }
+    else if (JOY_NEW(DPAD_DOWN) && sExam->cursor + 1 < count)
+    {
+        sExam->cursor++;
+        if (sExam->cursor >= sExam->scroll + ROWS)
+            sExam->scroll = sExam->cursor - ROWS + 1;
+        PlaySE(SE_SELECT);
+        DrawAll();
+    }
+    else if (JOY_NEW(L_BUTTON | R_BUTTON) && ARRAY_COUNT(sSections) > 1)
+    {
+        if (JOY_NEW(R_BUTTON))
+            sExam->section = (sExam->section + 1) % ARRAY_COUNT(sSections);
+        else
+            sExam->section = (sExam->section + ARRAY_COUNT(sSections) - 1) % ARRAY_COUNT(sSections);
+        sExam->cursor = sExam->scroll = 0;
+        PlaySE(SE_SELECT);
+        DrawAll();
+    }
+    else if (JOY_NEW(A_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        sExam->mode = MODE_QUESTION;
+        DrawAll();
+    }
+    else if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        Leave();
+    }
+}
+
 static void Task_ExamInput(u8 taskId)
 {
     u8 count = Section()->count;
 
+    if (sExam->review && sExam->mode != MODE_LEAVING)
+    {
+        Task_ExamReviewInput(taskId);
+        return;
+    }
     switch (sExam->mode)
     {
     case MODE_LIST:
@@ -1352,9 +1514,12 @@ static void CB2_OpenExam(void)
     sExam = AllocZeroed(sizeof(*sExam));
     if (sShowDiploma)
         sExam->mode = MODE_DIPLOMA;
+    else if (sShowReview)
+        OpenOnFirstMissed();
     else
         OpenWhereLeft();
     sShowDiploma = FALSE;
+    sShowReview = FALSE;
     ResetSpriteData();
     ResetPaletteFade();
     FreeAllSpritePalettes();
@@ -1369,6 +1534,7 @@ static void CB2_OpenExam(void)
 //  Opens the paper. The script fades to black first and waits; VAR_RESULT comes back TRUE if it was handed in.
 void School_OpenExam(void)
 {
+    FreshPaperIfMarked();               // T-360: a new sitting, a blank paper
     QuestLog_CutRecording();
     FlagSet(FLAG_SCHOOL_EXAM_OPENED);
     SetMainCallback2(CB2_OpenExam);
@@ -1387,7 +1553,32 @@ void School_ShowDiploma(void)
 //  VAR_RESULT: TRUE if a paper is under way -- any answer given and not yet handed in.
 void School_ExamInProgress(void)
 {
-    gSpecialVar_Result = (CountAnswered() != 0);
+    gSpecialVar_Result = !FlagGet(FLAG_SCHOOL_PAPER_MARKED) && CountAnswered() != 0;   // a marked paper is done
+}
+
+//  T-360: VAR_RESULT the questions the marked paper missed (0 a perfect paper), or 255 when there is no marked paper
+//  to go over (a save from before the paper was kept). STR_VAR_1 the number.
+void School_CountPaperMisses(void)
+{
+    u16 missed;
+
+    if (!FlagGet(FLAG_SCHOOL_PAPER_MARKED))
+    {
+        gSpecialVar_Result = 255;
+        return;
+    }
+    missed = CountMissed();
+    ConvertIntToDecimalStringN(gStringVar1, missed, STR_CONV_MODE_LEFT_ALIGN, 2);
+    gSpecialVar_Result = missed;
+}
+
+//  T-360: the OWL goes over the marked paper with the player. The script fades to black first and waits.
+void School_OpenFeedback(void)
+{
+    sShowReview = TRUE;
+    QuestLog_CutRecording();
+    SetMainCallback2(CB2_OpenExam);
+    LockPlayerFieldControls();
 }
 
 //  STR_VAR_1: the last mark. STR_VAR_2: its letter. VAR_RESULT: TRUE if it passes.
@@ -1416,7 +1607,7 @@ void School_WriteExamRecord(u8 *dest)
     static const u8 sAnswered[]   = _(" answered.");
     u16 attempts = VarGet(VAR_SCHOOL_EXAM_ATTEMPTS);
     u16 best = VarGet(VAR_SCHOOL_EXAM_BEST), last = VarGet(VAR_SCHOOL_EXAM_LAST);
-    u16 answered = CountAnswered();
+    u16 answered = FlagGet(FLAG_SCHOOL_PAPER_MARKED) ? 0 : CountAnswered();   // T-360: a marked paper is not under way
     u8 *p = dest;                       // the page's own title says THE PAPER
 
     if (attempts == 0)
