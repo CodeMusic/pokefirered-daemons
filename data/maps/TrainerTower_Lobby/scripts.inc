@@ -118,6 +118,7 @@ TrainerTower_Lobby_EventScript_MartClerk::
 	goto_if_questlog EventScript_ReleaseEnd
 	lock
 	faceplayer
+	call EventScript_ClerkNoticesOpus    @ T-348
 	message Text_MayIHelpYou
 	waitmessage
 	pokemart TrainerTower_Lobby_Mart_Items

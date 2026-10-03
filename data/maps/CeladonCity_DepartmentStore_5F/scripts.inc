@@ -17,6 +17,7 @@ CeladonCity_DepartmentStore_5F_EventScript_ClerkXItems::
 	goto_if_questlog EventScript_ReleaseEnd
 	lock
 	faceplayer
+	call EventScript_ClerkNoticesOpus    @ T-348
 	message Text_MayIHelpYou
 	waitmessage
 	pokemart CeladonCity_DepartmentStore_5F_XItems
@@ -41,6 +42,7 @@ CeladonCity_DepartmentStore_5F_EventScript_ClerkVitamins::
 	goto_if_questlog EventScript_ReleaseEnd
 	lock
 	faceplayer
+	call EventScript_ClerkNoticesOpus    @ T-348
 	message Text_MayIHelpYou
 	waitmessage
 	pokemart CeladonCity_DepartmentStore_5F_Vitamins

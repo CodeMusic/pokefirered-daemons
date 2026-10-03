@@ -5,6 +5,7 @@ SevenIsland_Mart_EventScript_Clerk::
 	goto_if_questlog EventScript_ReleaseEnd
 	lock
 	faceplayer
+	call EventScript_ClerkNoticesOpus    @ T-348
 	message Text_MayIHelpYou
 	waitmessage
 	pokemart SevenIsland_Mart_Items

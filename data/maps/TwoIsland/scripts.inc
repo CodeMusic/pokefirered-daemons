@@ -100,6 +100,7 @@ TwoIsland_EventScript_ClerkShopInitial::
 	end
 
 TwoIsland_EventScript_ClerkShopSkipIntro::
+	call EventScript_ClerkNoticesOpus    @ T-348
 	message Text_MayIHelpYou
 	waitmessage
 	goto_if_eq VAR_MAP_SCENE_TWO_ISLAND, 4, TwoIsland_EventScript_ShopExpanded3

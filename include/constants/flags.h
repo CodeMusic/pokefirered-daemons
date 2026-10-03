@@ -1619,6 +1619,8 @@
 #define FLAG_POSTER_READ              (DAEMONS_FLAGS_START + 0x69)
 //  T-346: the first time the player reaches CALLOW holding all seven MARKS, the BENCHMARK's lock is heard giving way.
 #define FLAG_CALLOW_DOOR_HEARD        (DAEMONS_FLAGS_START + 0x6A)
+//  T-348: the first shop clerk spoken to while holding OPUS has noticed it and said how it is read.
+#define FLAG_CLERK_NOTICED_OPUS       (DAEMONS_FLAGS_START + 0x6B)
 
 //  T-19. Two beats of one scene, five islands and a sea apart.
 #define FLAG_TY_GAVE_PAYLOAD          (DAEMONS_FLAGS_START + 0x20)
