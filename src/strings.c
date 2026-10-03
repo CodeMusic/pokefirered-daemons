@@ -216,6 +216,7 @@ const u8 gText_DbgMenuLevel[] = _("LV {STR_VAR_2}");
 // 1.6 spent this word already: "you bind() a daemon and you INVOKE it", and
 // what this row does is bring one up. It is the same verb, used literally.
 const u8 gText_DbgMenuInvoke[] = _("INVOKE");
+const u8 gText_DbgMenuDevice[] = _("DEVICE");
 const u8 gText_DbgMenuBack[] = _("BACK");
 const u8 gText_DbgMenuAdd[] = _("ADD");
 const u8 gText_DbgMenuRemove[] = _("REMOVE");
@@ -1036,6 +1037,7 @@ const u8 gStartMenuDesc_DbgEncounter[] = _("Invoke any daemon, at any level.");
 const u8 gStartMenuDesc_DbgDaemon[] = _("{DPAD_LEFTRIGHT} steps, L and R step by ten.");
 const u8 gStartMenuDesc_DbgLevel[] = _("{DPAD_LEFTRIGHT} steps, L and R step by ten.");
 const u8 gStartMenuDesc_DbgInvoke[] = _("Start the encounter.");
+const u8 gStartMenuDesc_DbgDevice[] = _("Answer the party's AWAY requests,\nas the companion app will.");
 const u8 gStartMenuDesc_DbgSong[] = _("Play the next track in the table.");
 const u8 gStartMenuDesc_DbgSfx[] = _("Play the next sound effect.");
 const u8 gStartMenuDesc_DbgWatch[] = _("A: time of day. LEFT/RIGHT: weekday.\nAUTO follows the clock, or play time.");

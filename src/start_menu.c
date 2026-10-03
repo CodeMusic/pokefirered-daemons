@@ -94,6 +94,7 @@ enum StartMenuOption
     STARTMENU_DBG_DAEMON,
     STARTMENU_DBG_LEVEL,
     STARTMENU_DBG_INVOKE,
+    STARTMENU_DBG_DEVICE,    // T-358
     STARTMENU_DBG_SONG,
     STARTMENU_DBG_SFX,
     STARTMENU_DBG_BACK,
@@ -174,6 +175,7 @@ static bool8 DbgJumpCallback(void);
 static bool8 DbgEncounterCallback(void);
 static bool8 DbgStepCallback(void);
 static bool8 DbgInvokeCallback(void);
+static bool8 DbgDeviceCallback(void);
 static bool8 DbgHandleStepInput(void);
 static bool8 DbgSongCallback(void);
 static bool8 DbgWatchCallback(void);
@@ -243,6 +245,7 @@ static const struct MenuAction sStartMenuActionTable[] = {
     [STARTMENU_DBG_DAEMON]  = { gText_DbgMenuDaemon, {.u8_void = DbgStepCallback} },
     [STARTMENU_DBG_LEVEL]   = { gText_DbgMenuLevel,  {.u8_void = DbgStepCallback} },
     [STARTMENU_DBG_INVOKE]  = { gText_DbgMenuInvoke, {.u8_void = DbgInvokeCallback} },
+    [STARTMENU_DBG_DEVICE]  = { gText_DbgMenuDevice, {.u8_void = DbgDeviceCallback} },
     // These two labels carry {STR_VAR_1} and {STR_VAR_2}. PrintStartMenuItems
     // runs every entry through StringExpandPlaceholders, so the current song
     // and sound effect can live in the menu itself -- no second window.
@@ -301,6 +304,7 @@ static const u8 *const sStartMenuDescPointers[] = {
     gStartMenuDesc_DbgDaemon,
     gStartMenuDesc_DbgLevel,
     gStartMenuDesc_DbgInvoke,
+    gStartMenuDesc_DbgDevice,
     gStartMenuDesc_DbgSong,
     gStartMenuDesc_DbgSfx,
     gStartMenuDesc_DbgBack,
@@ -398,6 +402,7 @@ static void SetUpStartMenu(void)
         AppendToStartMenuItems(STARTMENU_DBG_DAEMON);
         AppendToStartMenuItems(STARTMENU_DBG_LEVEL);
         AppendToStartMenuItems(STARTMENU_DBG_INVOKE);
+        AppendToStartMenuItems(STARTMENU_DBG_DEVICE);
         AppendToStartMenuItems(STARTMENU_DBG_BACK);
         return;
     }
@@ -1069,6 +1074,27 @@ static bool8 StartMenuDaemonsDebugCallback(void)
     sDbgPage = DBG_PAGE_MAIN;
     sStartMenuCursorPos = 0;
     SetStartMenuWindowWidth(DBG_MENU_WIDTH);
+    return DbgRedraw();
+}
+
+//  T-358: DEVICE answers every request in the party as the companion app will when it opens the save -- an ASKED
+//  daemon goes AWAY, or an AWAY one comes home -- so AWAY can be field-tested before the app writes saves. The app also
+//  brings back the friendship built on the device; this does not.
+static bool8 DbgDeviceCallback(void)
+{
+    u8 i, answered = 0;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        struct Pokemon *mon = &gPlayerParty[i];
+
+        if (GetMonData(mon, MON_DATA_SPECIES) == SPECIES_NONE || !DaemonIsAsked(mon))
+            continue;
+        mon->box.away ^= 1;
+        DaemonSetAsked(mon, FALSE);
+        answered++;
+    }
+    PlaySE(answered ? SE_SUCCESS : SE_FAILURE);
     return DbgRedraw();
 }
 

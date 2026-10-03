@@ -112,7 +112,9 @@ struct BoxPokemon
     u8 hasSpecies:1;
     u8 isEgg:1;
     u8 blockBoxRS:1; // Unused, but Pokémon Box Ruby & Sapphire will refuse to deposit a Pokémon with this flag set
-    u8 unused:4;
+    u8 away:1;       // T-358 (vision 9.25): on the player's device. Set and cleared by the companion app, never here
+    u8 asked:1;      // T-358: the player asked, in the party menu, for it to go or come home; the app answers
+    u8 unused:2;
     u8 otName[PLAYER_NAME_LENGTH];
     u8 markings;
     u16 checksum;
@@ -427,5 +429,12 @@ bool8 CheckBattleTypeGhost(struct Pokemon *mon, u8 bank);
 struct MonSpritesGfxManager *CreateMonSpritesGfxManager(u8 battlePosition, u8 mode);
 void DestroyMonSpritesGfxManager(void);
 u8 *MonSpritesGfxManager_GetSpritePtr(u8 bufferId);
+
+// T-358 (vision 9.25): AWAY and ASKED, the companion's two bits -- outside the checksum, so they travel with the
+// daemon through the PORT and cost no save space. AWAY cannot battle, be traded or be released, and nothing else.
+bool8 DaemonIsAway(struct Pokemon *mon);
+bool8 DaemonBoxIsAway(struct BoxPokemon *boxMon);
+bool8 DaemonIsAsked(struct Pokemon *mon);
+void DaemonSetAsked(struct Pokemon *mon, bool8 asked);
 
 #endif // GUARD_POKEMON_H

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "daemons_away.h"
 #include "gflib.h"
 #include "event_data.h"
 #include "graphics.h"
@@ -303,6 +304,7 @@ void CreateMovingMonIcon(void)
 
     gStorage->movingMonSprite = CreateMonIconSprite(species, personality, 0, 0, priority, 7);
     gStorage->movingMonSprite->callback = SpriteCB_HeldMon;
+    DaemonsWashAwayIconIf(gStorage->movingMonSprite, DaemonIsAway(&gStorage->movingMon));   // T-358
 }
 
 static void InitBoxMonSprites(u8 boxId)
@@ -323,6 +325,7 @@ static void InitBoxMonSprites(u8 boxId)
             {
                 personality = GetBoxMonDataAt(boxId, boxPosition, MON_DATA_PERSONALITY);
                 gStorage->boxMonsSprites[count] = CreateMonIconSprite(species, personality, 8 * (3 * j) + 100, 8 * (3 * i) + 44, 2, 19 - j);
+                DaemonsWashAwayIconIf(gStorage->boxMonsSprites[count], DaemonBoxIsAway(GetBoxedMonPtr(boxId, boxPosition)));   // T-358
             }
             else
                 gStorage->boxMonsSprites[count] = NULL;
@@ -353,6 +356,7 @@ void CreateBoxMonIconAtPos(u8 boxPosition)
         u32 personality = GetCurrentBoxMonData(boxPosition, MON_DATA_PERSONALITY);
 
         gStorage->boxMonsSprites[boxPosition] = CreateMonIconSprite(species, personality, x, y, 2, 19 - (boxPosition % IN_BOX_COLUMNS));
+        DaemonsWashAwayIconIf(gStorage->boxMonsSprites[boxPosition], DaemonBoxIsAway(GetBoxedMonPtr(StorageGetCurrentBox(), boxPosition)));   // T-358
         if (gStorage->boxOption == OPTION_MOVE_ITEMS)
             gStorage->boxMonsSprites[boxPosition]->oam.objMode = ST_OAM_OBJ_BLEND;
     }
@@ -444,6 +448,7 @@ static u8 CreateBoxMonIconsInColumn(u8 column, u16 distance, s16 speed)
                 gStorage->boxMonsSprites[boxPosition] = CreateMonIconSprite(gStorage->boxSpecies[boxPosition],
                                                                             gStorage->boxPersonalities[boxPosition],
                                                                             x, y, 2, subpriority);
+                DaemonsWashAwayIconIf(gStorage->boxMonsSprites[boxPosition], DaemonBoxIsAway(GetBoxedMonPtr(gStorage->incomingBoxId, boxPosition)));   // T-358
                 if (gStorage->boxMonsSprites[boxPosition] != NULL)
                 {
                     gStorage->boxMonsSprites[boxPosition]->sDistance = distance;
@@ -466,6 +471,7 @@ static u8 CreateBoxMonIconsInColumn(u8 column, u16 distance, s16 speed)
                 gStorage->boxMonsSprites[boxPosition] = CreateMonIconSprite(gStorage->boxSpecies[boxPosition],
                                                                             gStorage->boxPersonalities[boxPosition],
                                                                             x, y, 2, subpriority);
+                DaemonsWashAwayIconIf(gStorage->boxMonsSprites[boxPosition], DaemonBoxIsAway(GetBoxedMonPtr(gStorage->incomingBoxId, boxPosition)));   // T-358
                 if (gStorage->boxMonsSprites[boxPosition] != NULL)
                 {
                     gStorage->boxMonsSprites[boxPosition]->sDistance = distance;
@@ -601,6 +607,7 @@ void CreatePartyMonsSprites(bool8 visible)
     u32 personality = GetMonData(&gPlayerParty[0], MON_DATA_PERSONALITY);
 
     gStorage->partySprites[0] = CreateMonIconSprite(species, personality, 104, 64, 1, 12);
+    DaemonsWashAwayIconIf(gStorage->partySprites[0], DaemonIsAway(&gPlayerParty[0]));   // T-358
     count = 1;
     for (i = 1; i < PARTY_SIZE; i++)
     {
@@ -609,6 +616,7 @@ void CreatePartyMonsSprites(bool8 visible)
         {
             personality = GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY);
             gStorage->partySprites[i] = CreateMonIconSprite(species, personality, 152,  8 * (3 * (i - 1)) + 16, 1, 12);
+            DaemonsWashAwayIconIf(gStorage->partySprites[i], DaemonIsAway(&gPlayerParty[i]));   // T-358
             count++;
         }
         else

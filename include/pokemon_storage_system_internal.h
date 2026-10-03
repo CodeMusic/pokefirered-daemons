@@ -381,6 +381,7 @@ struct PokemonStorageSystemData
     u8 displayMonMarkings;
     u8 displayMonLevel;
     bool8 displayMonIsEgg;
+    bool8 displayMonIsAway;     // T-358: on the player's device -- washed, and cannot be released
     u8 displayMonNickname[POKEMON_NAME_LENGTH + 1];
     u8 displayMonTexts[4][36]; // nickname, species name, gender and level, item name
     bool8 (*monPlaceChangeFunc)(void);

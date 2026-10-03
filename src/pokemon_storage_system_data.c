@@ -1026,6 +1026,7 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
     bool8 sanityIsBagEgg;
 
     gStorage->displayMonItemId = ITEM_NONE;
+    gStorage->displayMonIsAway = FALSE;
     gender = MON_MALE;
     sanityIsBagEgg = FALSE;
     if (mode == MODE_PARTY)
@@ -1050,6 +1051,7 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
             Streaks_MovesOfMon(mon, gStorage->displayMonMoves);
             gender = GetMonGender(mon);
             gStorage->displayMonItemId = GetMonData(mon, MON_DATA_HELD_ITEM);
+            gStorage->displayMonIsAway = DaemonIsAway(mon);
         }
     }
     else if (mode == MODE_BOX)
@@ -1075,6 +1077,7 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
             Streaks_MovesOfBoxMon(boxMon, gStorage->displayMonMoves);
             gender = GetGenderFromSpeciesAndPersonality(gStorage->displayMonSpecies, gStorage->displayMonPersonality);
             gStorage->displayMonItemId = GetBoxMonData(boxMon, MON_DATA_HELD_ITEM);
+            gStorage->displayMonIsAway = DaemonBoxIsAway(boxMon);
         }
     }
     else

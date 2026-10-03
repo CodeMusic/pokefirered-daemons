@@ -1,4 +1,8 @@
 #include "global.h"
+#include "daemons_away.h"
+#include "event_scripts.h"
+#include "new_game.h"
+#include "save.h"
 #include "gflib.h"
 #include "battle.h"
 #include "battle_anim.h"
@@ -128,7 +132,7 @@ struct PartyMenuInternal
     u32 spriteIdCancelPokeball:7;
     u32 messageId:14;
     u8 windowId[3];
-    u8 actions[8];
+    u8 actions[9];  // T-358: nine, for AWAY -- its window ends at tile 0x373, where the next window begins
     u8 numActions;
     u16 palBuffer[BG_PLTT_SIZE / sizeof(u16)];
     s16 data[16];
@@ -417,6 +421,27 @@ ALIGNED(4) EWRAM_DATA u8 gBattlePartyCurrentOrder[PARTY_SIZE / 2] = {0}; // bits
 COMMON_DATA void (*gItemUseCB)(u8, TaskFunc) = NULL;
 
 #include "data/pokemon/tutor_learnsets.h"
+//  T-358 (vision 9.25): AWAY. The party menu only ASKS -- it sets ASKED and saves -- and the companion app, opening
+//  the save, does the moving: it marks the daemon AWAY, or brings it home with what it built there. Every word is
+//  DRAFT and the user's to choose (9.25: "the menu's words are the user's to choose").
+static void CursorCB_Away(u8 taskId);
+static void Task_AwayYesNo(u8 taskId);
+static void Task_HandleAwayYesNoInput(u8 taskId);
+static void Task_AwaySave(u8 taskId);
+static const u8 sText_AwayLevel[]          = _("AWAY");
+static const u8 sText_AwayOptionSend[]     = _("SEND");
+static const u8 sText_AwayOptionCallHome[] = _("CALL HOME");
+static const u8 sText_AwayOptionStay[]     = _("STAY");
+static const u8 sText_AwayAskSend[]        = _("Send {STR_VAR_1} to your device?\nThe game will save.");
+static const u8 sText_AwayAskCallHome[]    = _("Call {STR_VAR_1} home from your\ndevice? The game will save.");
+static const u8 sText_AwayAskStay[]        = _("Take back the request for\n{STR_VAR_1}? The game will save.");
+static const u8 sText_AwayOnlyOne[]        = _("{STR_VAR_1} is the only one here\nwho can battle. It stays.{PAUSE_UNTIL_PRESS}");
+static const u8 sText_AwaySavedSend[]      = _("Saved. Open your save in the\napp to send {STR_VAR_1}.{PAUSE_UNTIL_PRESS}");
+static const u8 sText_AwaySavedCallHome[]  = _("Saved. Open your save in the\napp to bring {STR_VAR_1} home.{PAUSE_UNTIL_PRESS}");
+static const u8 sText_AwaySavedStay[]      = _("Saved. {STR_VAR_1} stays where\nit is.{PAUSE_UNTIL_PRESS}");
+static const u8 sText_AwaySaveFailed[]     = _("The game could not save, so\nnothing was asked.{PAUSE_UNTIL_PRESS}");
+static const u8 sText_AwayCantBattle[]     = _("{STR_VAR_1} is AWAY on your\ndevice.{PAUSE_UNTIL_PRESS}");
+
 #include "data/party_menu.h"
 
 void InitPartyMenu(u8 menuType, u8 layout, u8 partyAction, bool8 keepCursorPos, u8 messageId, TaskFunc task, MainCallback callback)
@@ -2335,7 +2360,9 @@ static void DisplayPartyPokemonLevelCheck(struct Pokemon *mon, struct PartyMenuB
         {
             if (drawMenuBoxOrText != DRAW_TEXT_ONLY)
                 menuBox->infoRects->blitFunc(menuBox->windowId, menuBox->infoRects->dimensions[4] / 8, (menuBox->infoRects->dimensions[5] / 8) + 1, menuBox->infoRects->dimensions[6] / 8, menuBox->infoRects->dimensions[7] / 8, FALSE);
-            if (drawMenuBoxOrText != DRAW_MENU_BOX_ONLY)
+            if (drawMenuBoxOrText != DRAW_MENU_BOX_ONLY && DaemonIsAway(mon))     // T-358: where the level was
+                DisplayPartyPokemonBarDetail(menuBox->windowId, sText_AwayLevel, 0, &menuBox->infoRects->dimensions[4]);
+            else if (drawMenuBoxOrText != DRAW_MENU_BOX_ONLY)
                 DisplayPartyPokemonLevel(GetMonData(mon, MON_DATA_LEVEL), menuBox);
         }
     }
@@ -2666,6 +2693,8 @@ static void CreatePartyMonIconSprite(struct Pokemon *mon, struct PartyMenuBox *m
         handleDeoxys = (sMultiBattlePartnersPartyMask[slot] ^ handleDeoxys) ? TRUE : FALSE;
     species2 = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
     CreatePartyMonIconSpriteParameterized(species2, GetMonData(mon, MON_DATA_PERSONALITY), menuBox, 1, handleDeoxys);
+    if (species2 != SPECIES_NONE && DaemonIsAway(mon))     // T-358: on the player's device, drawn paler
+        DaemonsWashAwayIcon(&gSprites[menuBox->monSpriteId], species2);
     UpdatePartyMonHPBar(menuBox->monSpriteId, mon);
 }
 
@@ -2976,8 +3005,8 @@ static void AppendDriverFieldMove(u8 fieldMove, u16 driver)
 {
     u8 i;
 
-    //  SWITCH, ITEM and CANCEL still follow, and the list holds eight.
-    if (!CheckBagHasItem(driver, 1) || sPartyMenuInternal->numActions > ARRAY_COUNT(sPartyMenuInternal->actions) - 4)
+    //  AWAY (T-358), SWITCH, ITEM and CANCEL still follow, and the list holds nine.
+    if (!CheckBagHasItem(driver, 1) || sPartyMenuInternal->numActions > ARRAY_COUNT(sPartyMenuInternal->actions) - 5)
         return;
     for (i = 0; i < sPartyMenuInternal->numActions; i++)
     {
@@ -3010,6 +3039,16 @@ static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
     //  that knows the routine is not offered it twice, and the MARK is still asked for (CursorCB_FieldMove).
     AppendDriverFieldMove(FIELD_MOVE_FLY, ITEM_HM02);
     AppendDriverFieldMove(FIELD_MOVE_FLASH, ITEM_HM05);
+    //  T-358: one of three, by where the daemon is and whether it has already been asked. Never for an egg.
+    if (!GetMonData(&mons[slotId], MON_DATA_IS_EGG))
+    {
+        if (DaemonIsAsked(&mons[slotId]))
+            AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, CURSOR_OPTION_AWAY_STAY);
+        else if (DaemonIsAway(&mons[slotId]))
+            AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, CURSOR_OPTION_AWAY_CALL_HOME);
+        else
+            AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, CURSOR_OPTION_AWAY_SEND);
+    }
     if (GetMonData(&mons[1], MON_DATA_SPECIES) != SPECIES_NONE)
         AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, CURSOR_OPTION_SWITCH);
     if (ItemIsMail(GetMonData(&mons[slotId], MON_DATA_HELD_ITEM)))
@@ -5978,6 +6017,12 @@ static bool8 TrySwitchInPokemon(void)
         StringExpandPlaceholders(gStringVar4, gText_EggCantBattle);
         return FALSE;
     }
+    if (DaemonIsAway(&gPlayerParty[slot]))     // T-358
+    {
+        GetMonNickname(&gPlayerParty[slot], gStringVar1);
+        StringExpandPlaceholders(gStringVar4, sText_AwayCantBattle);
+        return FALSE;
+    }
     if (GetPartyIdFromBattleSlot(slot) == gBattleStruct->playerPartyIdx)
     {
         GetMonNickname(&gPlayerParty[slot], gStringVar1);
@@ -6371,4 +6416,129 @@ static void Task_PartyMenuWaitForFade(u8 taskId)
         UnlockPlayerFieldControls();
         ScriptContext_Enable();
     }
+}
+
+//  T-358: is there a daemon other than this one that could still battle? Sending the last one would leave a wild
+//  encounter with nobody to send out, so it is refused, as the PORT refuses to take the last one.
+static bool8 AnotherCanBattle(u8 slot)
+{
+    u8 i;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (i != slot
+         && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE
+         && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG)
+         && GetMonData(&gPlayerParty[i], MON_DATA_HP) != 0
+         && !DaemonIsAway(&gPlayerParty[i]))
+            return TRUE;
+    }
+    return FALSE;
+}
+
+static void CursorCB_Away(u8 taskId)
+{
+    struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
+
+    PlaySE(SE_SELECT);
+    PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[0]);
+    PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[1]);
+    GetMonNickname(mon, gStringVar1);
+    if (DaemonIsAsked(mon))
+    {
+        StringExpandPlaceholders(gStringVar4, sText_AwayAskStay);
+    }
+    else if (DaemonIsAway(mon))
+    {
+        StringExpandPlaceholders(gStringVar4, sText_AwayAskCallHome);
+    }
+    else if (!AnotherCanBattle(gPartyMenu.slotId))
+    {
+        StringExpandPlaceholders(gStringVar4, sText_AwayOnlyOne);
+        DisplayPartyMenuMessage(gStringVar4, FALSE);
+        gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+        return;
+    }
+    else
+    {
+        StringExpandPlaceholders(gStringVar4, sText_AwayAskSend);
+    }
+    DisplayPartyMenuMessage(gStringVar4, TRUE);
+    gTasks[taskId].func = Task_AwayYesNo;
+}
+
+static void Task_AwayYesNo(u8 taskId)
+{
+    if (IsPartyMenuTextPrinterActive() != TRUE)
+    {
+        PartyMenuDisplayYesNoMenu();
+        gTasks[taskId].func = Task_HandleAwayYesNoInput;
+    }
+}
+
+static void Task_HandleAwayYesNoInput(u8 taskId)
+{
+    struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
+
+    switch (Menu_ProcessInputNoWrapClearOnChoose())
+    {
+    case 0:
+        DaemonSetAsked(mon, !DaemonIsAsked(mon));
+        DisplayPartyMenuMessage(gText_SavingDontTurnOffThePower, TRUE);
+        gTasks[taskId].func = Task_AwaySave;
+        break;
+    case MENU_B_PRESSED:
+        PlaySE(SE_SELECT);
+        // fallthrough
+    case 1:
+        gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+        break;
+    }
+}
+
+//  Saved as the START menu saves (start_menu.c, StartMenu_PrepareForSave then SaveDialogCB_DoSave), so the app finds
+//  the request in the file and Continue finds the map it left. A save
+//  that fails takes the request back, so the game and its file never disagree about what was asked.
+static void Task_AwaySave(u8 taskId)
+{
+    struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
+
+    if (IsPartyMenuTextPrinterActive() == TRUE)
+        return;
+    //  The START menu stores the map view first (StartMenu_PrepareForSave), and Continue writes it back into the map
+    //  grid: without it, a save made here continued into the last START-menu save's view -- the REPO's floor drawn as
+    //  noise (found in the theatre, T-358). The field's map grid is a static array the party menu never touches.
+    SaveMapView();
+    SaveQuestLogData();
+    IncrementGameStat(GAME_STAT_SAVED_GAME);
+    if (gDifferentSaveFile == TRUE)
+    {
+        TrySavingData(SAVE_OVERWRITE_DIFFERENT_FILE);
+        gDifferentSaveFile = FALSE;
+    }
+    else
+    {
+        TrySavingData(SAVE_NORMAL);
+    }
+    GetMonNickname(mon, gStringVar1);
+    if (gSaveAttemptStatus != SAVE_STATUS_OK)
+    {
+        DaemonSetAsked(mon, !DaemonIsAsked(mon));
+        StringExpandPlaceholders(gStringVar4, sText_AwaySaveFailed);
+    }
+    else if (!DaemonIsAsked(mon))
+    {
+        StringExpandPlaceholders(gStringVar4, sText_AwaySavedStay);
+    }
+    else if (DaemonIsAway(mon))
+    {
+        StringExpandPlaceholders(gStringVar4, sText_AwaySavedCallHome);
+    }
+    else
+    {
+        StringExpandPlaceholders(gStringVar4, sText_AwaySavedSend);
+    }
+    PlaySE(gSaveAttemptStatus == SAVE_STATUS_OK ? SE_SAVE : SE_BOO);
+    DisplayPartyMenuMessage(gStringVar4, FALSE);
+    gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
 }

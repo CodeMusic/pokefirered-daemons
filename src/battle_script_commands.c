@@ -3417,7 +3417,8 @@ static void Cmd_checkteamslost(void)
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG)
+         && !DaemonIsAway(&gPlayerParty[i]))    // T-358: AWAY is not on the team
         {
             HP_count += GetMonData(&gPlayerParty[i], MON_DATA_HP);
         }
@@ -4585,6 +4586,7 @@ static void Cmd_jumpifcantswitch(void)
         {
             if (GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE
              && !GetMonData(&party[i], MON_DATA_IS_EGG)
+             && !DaemonIsAway(&party[i])                    // T-358
              && GetMonData(&party[i], MON_DATA_HP) != 0
              && gBattlerPartyIndexes[gActiveBattler] != i)
                 break;
@@ -4627,6 +4629,7 @@ static void Cmd_jumpifcantswitch(void)
             if (GetMonData(&party[i], MON_DATA_HP) != 0
              && GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE
              && !GetMonData(&party[i], MON_DATA_IS_EGG)
+             && !DaemonIsAway(&party[i])                    // T-358
              && i != gBattlerPartyIndexes[battlerIn1] && i != gBattlerPartyIndexes[battlerIn2])
                 break;
         }
@@ -5479,7 +5482,8 @@ static void Cmd_drawpartystatussummary(void)
     for (i = 0; i < PARTY_SIZE; i++)
     {
         if (GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG) == SPECIES_NONE
-            || GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG) == SPECIES_EGG)
+            || GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG) == SPECIES_EGG
+            || DaemonIsAway(&party[i]))             // T-358: an AWAY daemon's ball is an empty slot
         {
             hpStatuses[i].hp = 0xFFFF;
             hpStatuses[i].status = 0;
@@ -6925,7 +6929,8 @@ static bool8 TryDoForceSwitchOut(void)
     return TRUE;
 }
 
-#define MON_CAN_BATTLE(mon) (((GetMonData(mon, MON_DATA_SPECIES) && GetMonData(mon, MON_DATA_IS_EGG) != TRUE && GetMonData(mon, MON_DATA_HP))))
+// T-358: and not AWAY on the player's device
+#define MON_CAN_BATTLE(mon) (((GetMonData(mon, MON_DATA_SPECIES) && GetMonData(mon, MON_DATA_IS_EGG) != TRUE && GetMonData(mon, MON_DATA_HP) && !DaemonIsAway(mon))))
 
 static void Cmd_forcerandomswitch(void)
 {
@@ -6951,6 +6956,7 @@ static void Cmd_forcerandomswitch(void)
             {
                 if (GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE
                  && !GetMonData(&party[i], MON_DATA_IS_EGG)
+                 && !DaemonIsAway(&party[i])                // T-358
                  && GetMonData(&party[i], MON_DATA_HP) != 0)
                     ++valid;
             }
@@ -6962,6 +6968,7 @@ static void Cmd_forcerandomswitch(void)
             {
                 if (GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE
                  && !GetMonData(&party[i], MON_DATA_IS_EGG)
+                 && !DaemonIsAway(&party[i])                // T-358
                  && GetMonData(&party[i], MON_DATA_HP) != 0)
                     ++valid;
             }
@@ -8628,6 +8635,7 @@ static void Cmd_trydobeatup(void)
             if (GetMonData(&party[gBattleCommunication[0]], MON_DATA_HP)
                 && GetMonData(&party[gBattleCommunication[0]], MON_DATA_SPECIES_OR_EGG)
                 && GetMonData(&party[gBattleCommunication[0]], MON_DATA_SPECIES_OR_EGG) != SPECIES_EGG
+                && !DaemonIsAway(&party[gBattleCommunication[0]])      // T-358
                 && !GetMonData(&party[gBattleCommunication[0]], MON_DATA_STATUS))
                 break;
         }
@@ -9146,6 +9154,8 @@ static void Cmd_assistattackselect(void)
         if (GetMonData(&party[monId], MON_DATA_SPECIES_OR_EGG) == SPECIES_NONE)
             continue;
         if (GetMonData(&party[monId], MON_DATA_SPECIES_OR_EGG) == SPECIES_EGG)
+            continue;
+        if (DaemonIsAway(&party[monId]))    // T-358
             continue;
 
         for (moveId = 0; moveId < MAX_MON_MOVES; moveId++)

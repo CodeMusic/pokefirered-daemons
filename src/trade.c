@@ -2755,6 +2755,10 @@ static u32 CanTradeSelectedMon(struct Pokemon * playerParty, int partyCount, int
         species[i] = GetMonData(&playerParty[i], MON_DATA_SPECIES);
     }
 
+    // T-358: a daemon AWAY on the player's device is not here to trade
+    if (DaemonIsAway(&playerParty[monIdx]))
+        return CANT_TRADE_INVALID_MON;
+
     // Cant trade Eggs or non-Kanto mons if player doesn't have National Dex
     if (!IsNationalPokedexEnabled())
     {

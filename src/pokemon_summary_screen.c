@@ -1,4 +1,5 @@
 #include "global.h"
+#include "daemons_away.h"
 #include "gflib.h"
 #include "pokemon.h"
 #include "pokemon_summary_screen.h"
@@ -4040,6 +4041,9 @@ static void PokeSum_CreateMonPicSprite(void)
         Streaks_MovesOfMon(&sMonSummaryScreen->currentMon, moves);
         Streaks_ApplyToLoaded(OBJ_PLTT_ID(gSprites[spriteId].oam.paletteNum), species, moves);
     }
+    // T-358: a daemon AWAY on the player's device is drawn paler here too, its picture and its icon
+    if (DaemonIsAway(&sMonSummaryScreen->currentMon))
+        DaemonsWashAwayLoaded(OBJ_PLTT_ID(gSprites[spriteId].oam.paletteNum), 16);
 
     FreeSpriteOamMatrix(&gSprites[spriteId]);
 
@@ -4169,6 +4173,9 @@ static void PokeSum_CreateMonIconSprite(void)
         else
             sMonSummaryScreen->monIconSpriteId = CreateMonIcon(species, SpriteCallbackDummy, 24, 32, 0, personality, 1);
     }
+
+    if (DaemonIsAway(&sMonSummaryScreen->currentMon))      // T-358
+        DaemonsWashAwayIcon(&gSprites[sMonSummaryScreen->monIconSpriteId], species);
 
     if (!IsMonSpriteNotFlipped(species))
         gSprites[sMonSummaryScreen->monIconSpriteId].hFlip = TRUE;

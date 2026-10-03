@@ -3892,7 +3892,8 @@ u8 GetMonsStateToDoubles(void)
         // because of the requirement of all 3 of these checks.
         if (GetMonData(&gPlayerParty[i], MON_DATA_HP, NULL) != 0
          && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG, NULL) != SPECIES_NONE
-         && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG, NULL) != SPECIES_EGG)
+         && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG, NULL) != SPECIES_EGG
+         && !DaemonIsAway(&gPlayerParty[i]))    // T-358: a double battle needs two who can fight
             aliveCount++;
     }
 
@@ -6567,4 +6568,26 @@ u8 *MonSpritesGfxManager_GetSpritePtr(u8 spriteNum)
             spriteNum = 0;
         return sMonSpritesGfxManager->spritePointers[spriteNum];
     }
+}
+
+//  T-358 (vision 9.25): the companion's two bits, read straight from the record -- they are outside the encrypted
+//  substructs and the checksum, so nothing is decrypted to read them. A party daemon and a boxed one are the same bits.
+bool8 DaemonBoxIsAway(struct BoxPokemon *boxMon)
+{
+    return boxMon->away;
+}
+
+bool8 DaemonIsAway(struct Pokemon *mon)
+{
+    return mon->box.away;
+}
+
+bool8 DaemonIsAsked(struct Pokemon *mon)
+{
+    return mon->box.asked;
+}
+
+void DaemonSetAsked(struct Pokemon *mon, bool8 asked)
+{
+    mon->box.asked = asked ? 1 : 0;
 }
