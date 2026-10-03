@@ -299,6 +299,9 @@ static void DaemonsDebug_GrantTestKit(void)
     FlagSet(FLAG_GOT_NOTEBOOK);
     FlagSet(FLAG_SCHOOL_SYLLABUS_LANGUAGE);
     FlagSet(FLAG_NOTEBOOK_LOOSE_STONE);
+    // OPUS is in the kit, and the flag is the SS TICKET's lesson again: THE REPO's shelf and the first clerk (T-348)
+    // read FLAG_GOT_OPUS, not the bag. Without it the shelf offered OPUS twice and no clerk ever noticed it.
+    FlagSet(FLAG_GOT_OPUS);
 
     // Without these the party is in memory and unreachable: start_menu.c only
     // draws the POKeMON entry when FLAG_SYS_POKEMON_GET is set, and the DEX
@@ -321,7 +324,7 @@ static void DaemonsDebug_GrantTestKit(void)
     VarSet(VAR_MAP_SCENE_PALLET_TOWN_OAK, 1);                   // the escort is done; 2 would start the rating scene
     VarSet(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 6);    // starter, rival, parcel and INDEX all handed over
     FlagSet(FLAG_HIDE_RIVAL_IN_LAB);
-    VarSet(VAR_MAP_SCENE_VIRIDIAN_CITY_MART, 1);                // CALLOW's clerk does not hand over the parcel again
+    VarSet(VAR_MAP_SCENE_VIRIDIAN_CITY_MART, 2);                // the parcel delivered, as the lab sets it: 1 left the clerk on "Tell CRYSTAL"
     VarSet(VAR_MAP_SCENE_PEWTER_CITY, 2);                       // nobody marches you back to SLATE's BENCHMARK
     FlagSet(FLAG_HIDE_PEWTER_CITY_GYM_GUIDE);
     VarSet(VAR_MAP_SCENE_ROUTE5_ROUTE6_ROUTE7_ROUTE8_GATES, 1); // the gate guards have had their tea: BRAZEN on foot
