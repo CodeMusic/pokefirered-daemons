@@ -917,9 +917,8 @@ static void OpenWhereLeft(void)
         }
     }
     sExam->section = ARRAY_COUNT(sSections) - 1;
-    sExam->cursor = sSections[sExam->section].count;
-    if (sExam->cursor >= ROWS)
-        sExam->scroll = sExam->cursor - ROWS + 1;
+    sExam->cursor = sSections[sExam->section].count;          // the FINISH EXAM row, below the list
+    sExam->scroll = sExam->cursor > ROWS ? sExam->cursor - ROWS : 0;   // the last six questions, no blank row
     sExam->footer = 0;
 }
 
@@ -1368,10 +1367,9 @@ static void Task_ExamInput(u8 taskId)
                 }
                 else
                 {
-                    sExam->cursor = count;
+                    sExam->cursor = count;                    // FINISH EXAM, below the list
                     sExam->footer = 0;
-                    if (sExam->cursor >= sExam->scroll + ROWS)
-                        sExam->scroll = sExam->cursor - ROWS + 1;
+                    sExam->scroll = count > ROWS ? count - ROWS : 0;
                 }
             }
             else if (sExam->cursor + 1 < count)
