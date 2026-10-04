@@ -122,7 +122,7 @@ SaffronCity_MrPsychicsHouse_Text_StarrIsWaiting::
 	.string "It is waiting on something\n"
 	.string "you are not carrying.$"
 
-@ T-364, DRAFT: THE SCHOLAR away in exam season.
+@ T-364: THE SCHOLAR away in exam season (the user approved it, 2026-10-03).
 SaffronCity_MrPsychicsHouse_Text_AwayNote::
     .string "A note on the table, in a careful\n"
     .string "hand:\p"
