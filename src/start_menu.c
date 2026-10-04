@@ -95,6 +95,7 @@ enum StartMenuOption
     STARTMENU_DBG_LEVEL,
     STARTMENU_DBG_INVOKE,
     STARTMENU_DBG_DEVICE,    // T-358
+    STARTMENU_DBG_SEASON,    // T-359
     STARTMENU_DBG_SONG,
     STARTMENU_DBG_SFX,
     STARTMENU_DBG_BACK,
@@ -176,6 +177,7 @@ static bool8 DbgEncounterCallback(void);
 static bool8 DbgStepCallback(void);
 static bool8 DbgInvokeCallback(void);
 static bool8 DbgDeviceCallback(void);
+static bool8 DbgSeasonCallback(void);
 static bool8 DbgHandleStepInput(void);
 static bool8 DbgSongCallback(void);
 static bool8 DbgWatchCallback(void);
@@ -246,6 +248,7 @@ static const struct MenuAction sStartMenuActionTable[] = {
     [STARTMENU_DBG_LEVEL]   = { gText_DbgMenuLevel,  {.u8_void = DbgStepCallback} },
     [STARTMENU_DBG_INVOKE]  = { gText_DbgMenuInvoke, {.u8_void = DbgInvokeCallback} },
     [STARTMENU_DBG_DEVICE]  = { gText_DbgMenuDevice, {.u8_void = DbgDeviceCallback} },
+    [STARTMENU_DBG_SEASON]  = { gText_DbgMenuSeason, {.u8_void = DbgSeasonCallback} },
     // These two labels carry {STR_VAR_1} and {STR_VAR_2}. PrintStartMenuItems
     // runs every entry through StringExpandPlaceholders, so the current song
     // and sound effect can live in the menu itself -- no second window.
@@ -305,6 +308,7 @@ static const u8 *const sStartMenuDescPointers[] = {
     gStartMenuDesc_DbgLevel,
     gStartMenuDesc_DbgInvoke,
     gStartMenuDesc_DbgDevice,
+    gStartMenuDesc_DbgSeason,
     gStartMenuDesc_DbgSong,
     gStartMenuDesc_DbgSfx,
     gStartMenuDesc_DbgBack,
@@ -380,6 +384,7 @@ static EWRAM_DATA u8 sDbgPage = 0;
 #define DBG_MENU_WIDTH 14
 
 static EWRAM_DATA u16 sDbgSong = 0;
+static const u8 *const sDbgSeasonNames[] = { gText_DbgWatchAuto, gText_DbgWinter, gText_DbgSpring, gText_DbgSummer, gText_DbgAutumn };   // T-359, by gDaemonsSeasonOverride
 static const u8 *const sDbgWatchNames[] = { gText_DbgWatchAuto, gText_DbgWatchDay, gText_DbgWatchDusk, gText_DbgWatchNight, gText_DbgWatchDawn };   // T-268, by gDaemonsWatchOverride
 static const u8 *const sDbgWeekdayNames[] = { gText_DbgWatchAuto, gText_DbgSun, gText_DbgMon, gText_DbgTue, gText_DbgWed, gText_DbgThu, gText_DbgFri, gText_DbgSat };   // T-273, by gDaemonsWeekdayOverride
 static EWRAM_DATA u16 sDbgSfx = 0;
@@ -403,6 +408,7 @@ static void SetUpStartMenu(void)
         AppendToStartMenuItems(STARTMENU_DBG_LEVEL);
         AppendToStartMenuItems(STARTMENU_DBG_INVOKE);
         AppendToStartMenuItems(STARTMENU_DBG_DEVICE);
+        AppendToStartMenuItems(STARTMENU_DBG_SEASON);
         AppendToStartMenuItems(STARTMENU_DBG_BACK);
         return;
     }
@@ -1040,6 +1046,7 @@ static void DbgSetVars(void)
         *p++ = CHAR_SPACE;
         StringCopy(p, gSpeciesNames[DbgSpecies()]);
         ConvertIntToDecimalStringN(gStringVar2, sDbgLevel, STR_CONV_MODE_LEFT_ALIGN, 3);
+        StringCopy(gStringVar3, sDbgSeasonNames[gDaemonsSeasonOverride]);   // T-359
     }
     else
     {
@@ -1566,6 +1573,15 @@ static bool8 DbgHandleStepInput(void)
 static void DbgRelight(void)
 {
     DaemonsRelightField();   // T-276: the same relight the overworld does when the light changes by itself
+}
+
+//  T-359: SEASON steps AUTO (the clock, or play time) -> WINTER -> SPRING -> SUMMER -> AUTUMN and relights the map;
+//  spring's flowers come with the next map that loads.
+static bool8 DbgSeasonCallback(void)
+{
+    gDaemonsSeasonOverride = (gDaemonsSeasonOverride + 1) % ARRAY_COUNT(sDbgSeasonNames);
+    DbgRelight();
+    return DbgRedraw();
 }
 
 static bool8 DbgWatchCallback(void)

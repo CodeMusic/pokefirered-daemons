@@ -10,6 +10,7 @@
 #include "constants/region_map_sections.h"
 #include "constants/maps.h"
 #include "daemons_time.h"
+#include "constants/metatile_behaviors.h"
 #include "data/day_trims.h"
 #include "school_lift.h"
 
@@ -34,6 +35,7 @@ EWRAM_DATA u8 gGlobalFieldTintMode = QL_TINT_NONE;
 static const struct ConnectionFlags sDummyConnectionFlags = {};
 
 static void InitMapLayoutData(struct MapHeader *);
+static void DaemonsScatterSpringFlowers(struct MapHeader *);
 static void InitBackupMapLayoutData(const u16 *, u16, u16);
 static void InitBackupMapLayoutConnections(struct MapHeader *);
 static void FillSouthConnection(struct MapHeader const *, struct MapHeader const *, s32);
@@ -119,7 +121,59 @@ static void InitMapLayoutData(struct MapHeader * mapHeader)
     VMap.Ysize = mapLayout->height + MAP_OFFSET_H;
     AGB_ASSERT_EX(VMap.Xsize * VMap.Ysize <= VIRTUAL_MAP_SIZE, ABSPATH("fieldmap.c"), 158);
     InitBackupMapLayoutData(mapLayout->map, mapLayout->width, mapLayout->height);
+    DaemonsScatterSpringFlowers(mapHeader);
     InitBackupMapLayoutConnections(mapHeader);
+}
+
+// T-359: SPRING'S FLOWERS -- "more flowers where flowers already grow". As the map's own cells are laid into the grid,
+// a fixed scatter of its plain grass (about one cell in eight, the same cells every spring) becomes the flower block
+// that is already drawn on it, walking exactly as grass does (MB_NORMAL); never tall grass, and never a cell a person,
+// a sign, a warp or a trigger stands on. Only the grid in memory changes; nothing is saved. Seasons as above.
+#define FLOWER_BLOCK 0x004
+static const u16 sPlainGrass[] = { 0x001, 0x008, 0x009, 0x010, 0x011 };
+
+static bool8 DaemonsEventAt(const struct MapEvents *ev, s32 x, s32 y)
+{
+    s32 i;
+
+    for (i = 0; i < ev->objectEventCount; i++)
+        if (ev->objectEvents[i].x == x && ev->objectEvents[i].y == y) return TRUE;
+    for (i = 0; i < ev->warpCount; i++)
+        if (ev->warps[i].x == x && ev->warps[i].y == y) return TRUE;
+    for (i = 0; i < ev->coordEventCount; i++)
+        if (ev->coordEvents[i].x == x && ev->coordEvents[i].y == y) return TRUE;
+    for (i = 0; i < ev->bgEventCount; i++)
+        if (ev->bgEvents[i].x == x && ev->bgEvents[i].y == y) return TRUE;
+    return FALSE;
+}
+
+static void DaemonsScatterSpringFlowers(struct MapHeader *mapHeader)
+{
+    const struct MapLayout *layout = mapHeader->mapLayout;
+    s32 x, y;
+    u32 i;
+
+    if (layout->primaryTileset != &gTileset_General || !IsMapTypeOutdoors(mapHeader->mapType)
+     || DaemonsIsBlancheOutdoors() || DaemonsSeason() != SEASON_SPRING || mapHeader->events == NULL)
+        return;
+    for (y = 0; y < layout->height; y++)
+    {
+        for (x = 0; x < layout->width; x++)
+        {
+            u16 *cell = &VMap.map[(y + MAP_OFFSET) * VMap.Xsize + x + MAP_OFFSET];
+            u16 id = *cell & MAPGRID_METATILE_ID_MASK;
+            bool8 plain = FALSE;
+
+            if ((((u32)x * 73856093u) ^ ((u32)y * 19349663u)) % 1000 >= 120)
+                continue;
+            for (i = 0; i < ARRAY_COUNT(sPlainGrass); i++)
+                plain |= (id == sPlainGrass[i]);
+            if (!plain || MapGridGetMetatileBehaviorAt(x + MAP_OFFSET, y + MAP_OFFSET) != MB_NORMAL
+             || DaemonsEventAt(mapHeader->events, x, y))
+                continue;
+            *cell = (*cell & ~MAPGRID_METATILE_ID_MASK) | FLOWER_BLOCK;
+        }
+    }
 }
 
 static void InitBackupMapLayoutData(const u16 *map, u16 width, u16 height)
@@ -995,16 +1049,56 @@ static u8 DaemonsClarityFade(void)
     return missing >= 4 ? 102 : missing != 0 ? 46 : 0;     // of 256
 }
 
+// T-359 (vision.md 9.21; the user approved the mock-ups 2026-10-03): THE SEASONS, BY PALETTE. On an outdoor map drawn
+// from gTileset_General -- but never BLANCHE, which stays a town before colour -- palette 0's tree, grass and petal
+// slots take the season's colour, and the entries of General's rows 1..6 that copy its greens follow (the edges of
+// paths and ponds). The season goes in first, in the same pass as the faded print; the watch falls on both after.
+// Summer is the palette as drawn. The tables are tools/gbaseasons.py's, from the approved mock-ups.
+#include "data/season_palettes.h"
+
+static bool8 DaemonsSeasonShows(void)
+{
+    return gMapHeader.mapLayout != NULL && gMapHeader.mapLayout->primaryTileset == &gTileset_General
+        && IsMapTypeOutdoors(gMapHeader.mapType) && !DaemonsIsBlancheOutdoors();
+}
+
+static u8 DaemonsSeasonHere(void)
+{
+    return DaemonsSeasonShows() ? DaemonsSeason() : SEASON_SUMMER;
+}
+
+static u16 DaemonsSeasonColour(u16 index, u16 colour, u8 season)
+{
+    u32 i;
+
+    if (season == SEASON_SUMMER)
+        return colour;
+    if (index < 16)
+        return (SEASON_SLOT_MASK >> index) & 1 ? sSeasonRow0[season][index] : colour;
+    for (i = 0; i < ARRAY_COUNT(sSeasonFollow); i++)
+    {
+        if (sSeasonFollow[i][0] == index)
+            return sSeasonRow0[season][sSeasonFollow[i][1]];
+    }
+    return colour;
+}
+
 static void DaemonsClarityEntries(u16 offset, u16 count)
 {
     s32 amount = DaemonsClarityFade(), r, g, b, grey;
     u16 i, c;
+    u8 season = offset < BG_PLTT_ID(NUM_PALS_IN_PRIMARY) ? DaemonsSeasonHere() : SEASON_SUMMER;
 
-    if (amount == 0)
+    if (amount == 0 && season == SEASON_SUMMER)
         return;
     for (i = 0; i < count; i++)
     {
-        c = gPlttBufferUnfaded[offset + i];
+        c = DaemonsSeasonColour(offset + i, gPlttBufferUnfaded[offset + i], season);
+        if (amount == 0)
+        {
+            gPlttBufferUnfaded[offset + i] = c;
+            continue;
+        }
         r = c & 0x1F;
         g = (c >> 5) & 0x1F;
         b = (c >> 10) & 0x1F;
@@ -1038,8 +1132,9 @@ u16 DaemonsPaletteSignature(void)
 {
     // T-275: and the weekday, whose colour is on the CHECKPOINT's trim in the primary rows
     // T-317: and the clarity, so a connection crossed after an understanding arrives reloads the faded rows
+    // T-359: and the season, so a connection crossed as the season turns reloads the rows it repaints
     return (DaemonsClarityFade() != 0 ? (DaemonsClarityFade() > 46 ? 0x2000 : 0x1000) : 0)
-         | (DaemonsFieldTint() << 7) | (DaemonsWeekday() << 3) | (DaemonsWatch() << 1) | DaemonsIsBlancheOutdoors();
+         | (DaemonsSeasonHere() << 10) | (DaemonsFieldTint() << 7) | (DaemonsWeekday() << 3) | (DaemonsWatch() << 1) | DaemonsIsBlancheOutdoors();
 }
 
 u16 DaemonsPrimarySignature(void)

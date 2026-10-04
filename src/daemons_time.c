@@ -18,6 +18,8 @@ EWRAM_DATA u8 gDaemonsWatchOverride = 0;
 EWRAM_DATA u8 gDaemonsWeekdayOverride = 0;
 static EWRAM_DATA u8 sWatch = WATCH_DAY;
 static EWRAM_DATA u8 sWeekday = 0;
+EWRAM_DATA u8 gDaemonsSeasonOverride = 0;
+static EWRAM_DATA u8 sSeason = SEASON_SUMMER;
 static EWRAM_DATA bool8 sWatchFromClock = FALSE;
 static EWRAM_DATA u32 sWatchReadAt = 0;
 static EWRAM_DATA bool8 sWatchRead = FALSE;
@@ -37,6 +39,32 @@ static u8 WatchFromHour(u8 hour)
 // Play time's: day, dusk, night, dawn, fifteen minutes each -- day first, so the opening is in daylight.
 static const u8 sPlayTimeWatches[WATCH_COUNT] = { WATCH_DAY, WATCH_DUSK, WATCH_NIGHT, WATCH_DAWN };
 
+// T-359: THE SEASON, by tools/seasons.py's rule. From the clock, the northern season on the date (winter from
+// 12-21, spring 3-21, summer 6-21, autumn 9-22); CONTENT keeps it and CONTEXT the southern year, two seasons on.
+// From play time, seven hours a season (a day of play is an hour, T-273, and a season seven days), the year beginning
+// at the northern summer -- so a new CONTENT game starts in the summer as drawn, and CONTEXT on the far side of it.
+static u8 NorthSeason(u8 month, u8 day)
+{
+    u16 md = month * 100 + day;
+
+    if (md >= 1221 || md < 321)
+        return SEASON_WINTER;
+    if (md < 621)
+        return SEASON_SPRING;
+    if (md < 922)
+        return SEASON_SUMMER;
+    return SEASON_AUTUMN;
+}
+
+static u8 EditionSeason(u8 north)
+{
+#ifdef LEAFGREEN
+    return (north + 2) % SEASON_COUNT;      // CONTEXT keeps the southern year
+#else
+    return north;
+#endif
+}
+
 // Asked on every step through grass and every palette load, and a clock read is a few thousand cycles of
 // bit-banging, so the answer is kept for a second. T-273: the weekday is read in the same pass -- the clock's own
 // weekday register, or, from play time, one day per hour of play (so a week is seven hours, and the watches turn
@@ -52,11 +80,13 @@ static void ReadClock(void)
     {
         sWatch = WatchFromHour(clock.hour);
         sWeekday = clock.weekday;
+        sSeason = EditionSeason(NorthSeason(clock.month, clock.day));
     }
     else
     {
         sWatch = sPlayTimeWatches[(gSaveBlock2Ptr->playTimeMinutes / 15) % WATCH_COUNT];
         sWeekday = gSaveBlock2Ptr->playTimeHours % WEEKDAY_COUNT;
+        sSeason = EditionSeason((SEASON_SUMMER + gSaveBlock2Ptr->playTimeHours / 7) % SEASON_COUNT);
     }
     sWatchReadAt = gMain.vblankCounter2;
     sWatchRead = TRUE;
@@ -76,6 +106,14 @@ u8 DaemonsWeekday(void)
         return (gDaemonsWeekdayOverride - 1) % WEEKDAY_COUNT;
     ReadClock();
     return sWeekday;
+}
+
+u8 DaemonsSeason(void)
+{
+    if (gDaemonsSeasonOverride)
+        return (gDaemonsSeasonOverride - 1) % SEASON_COUNT;
+    ReadClock();
+    return sSeason;
 }
 
 bool8 DaemonsWatchIsFromClock(void)

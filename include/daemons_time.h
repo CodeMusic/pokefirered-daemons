@@ -16,6 +16,16 @@ extern u8 gDaemonsWeekdayOverride; // DEBUG (T-273): 0 follows the clock, 1-7 is
 
 #define WEEKDAY_COUNT 7
 
+// T-359: the four seasons (vision.md 9.21), the order tools/seasons.py and the companion use.
+#define SEASON_WINTER  0
+#define SEASON_SPRING  1
+#define SEASON_SUMMER  2
+#define SEASON_AUTUMN  3
+#define SEASON_COUNT   4
+
+extern u8 gDaemonsSeasonOverride;  // DEBUG: 0 follows the clock, 1-4 is a season + 1
+u8 DaemonsSeason(void);
+
 u8 DaemonsWatch(void);
 u8 DaemonsWeekday(void);           // 0-6, Sunday first
 bool8 DaemonsWatchIsFromClock(void);
