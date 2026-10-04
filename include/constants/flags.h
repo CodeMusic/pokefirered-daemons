@@ -1628,6 +1628,11 @@
 #define FLAG_SCHOOL_HIDE_OWL          (DAEMONS_FLAGS_START + 0x6D)
 #define FLAG_OWL_WENT_HOME            (DAEMONS_FLAGS_START + 0x6E)
 #define FLAG_HIDE_SCHOLAR_AT_HOME     (DAEMONS_FLAGS_START + 0x6F)
+//  T-370 (vision 9.25, reshaped 2026-10-04): the companion app's two marks in the save. LINKED is set by the app's
+//  first SYNC of this save -- until then the party menu offers no SEND. RECALLED is set by the game when a daemon is
+//  brought home without the app; the app's next SYNC settles its side and clears it, and SEND waits until then.
+#define FLAG_COMPANION_LINKED         (DAEMONS_FLAGS_START + 0x70)
+#define FLAG_COMPANION_RECALLED       (DAEMONS_FLAGS_START + 0x71)
 
 //  T-19. Two beats of one scene, five islands and a sea apart.
 #define FLAG_TY_GAVE_PAYLOAD          (DAEMONS_FLAGS_START + 0x20)

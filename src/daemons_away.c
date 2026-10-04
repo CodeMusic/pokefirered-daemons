@@ -68,3 +68,16 @@ void DaemonsWashAwayIconIf(struct Sprite *sprite, bool8 away)
     if (away && sprite != NULL)
         DaemonsWashAwayIcon(sprite, sprite->data[0]);
 }
+
+//  T-370: home again without the app -- the icon goes back to its own colour group's palette (pokemon_icon.c's tag,
+//  POKE_ICON_BASE_PAL_TAG 56000 + group), which every icon on the screen loaded.
+void DaemonsUnwashAwayIcon(struct Sprite *sprite, u16 species)
+{
+    u8 slot;
+
+    if (sprite == NULL)
+        return;
+    slot = IndexOfSpritePaletteTag(56000 + gMonIconPaletteIndices[species > NUM_SPECIES ? SPECIES_NONE : species]);
+    if (slot != 0xFF)
+        sprite->oam.paletteNum = slot;
+}

@@ -436,5 +436,7 @@ bool8 DaemonIsAway(struct Pokemon *mon);
 bool8 DaemonBoxIsAway(struct BoxPokemon *boxMon);
 bool8 DaemonIsAsked(struct Pokemon *mon);
 void DaemonSetAsked(struct Pokemon *mon, bool8 asked);
+void DaemonSetAway(struct Pokemon *mon, bool8 away);
+bool8 DaemonsOtherOnDevice(u8 partySlot, u8 *nickname);
 
 #endif // GUARD_POKEMON_H

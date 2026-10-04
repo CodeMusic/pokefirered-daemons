@@ -1101,6 +1101,13 @@ static bool8 DbgDeviceCallback(void)
         DaemonSetAsked(mon, FALSE);
         answered++;
     }
+    //  T-370: what the app's SYNC also does -- it knows this save, and has seen any daemon brought home without it.
+    FlagSet(FLAG_COMPANION_LINKED);
+    if (FlagGet(FLAG_COMPANION_RECALLED))
+    {
+        FlagClear(FLAG_COMPANION_RECALLED);
+        answered++;
+    }
     PlaySE(answered ? SE_SUCCESS : SE_FAILURE);
     return DbgRedraw();
 }

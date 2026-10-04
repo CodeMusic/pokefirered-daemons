@@ -6591,3 +6591,34 @@ void DaemonSetAsked(struct Pokemon *mon, bool8 asked)
 {
     mon->box.asked = asked ? 1 : 0;
 }
+
+//  T-370: the emergency way home, when the app cannot be reached -- the game clears AWAY itself.
+void DaemonSetAway(struct Pokemon *mon, bool8 away)
+{
+    mon->box.away = away ? 1 : 0;
+}
+
+//  T-370: one daemon at a time. TRUE if any daemon but the party's partySlot -- in the party or in any PORT box -- is
+//  AWAY or asked for, with its nickname in `nickname` (POKEMON_NAME_LENGTH + 1 bytes, or more).
+bool8 DaemonsOtherOnDevice(u8 partySlot, u8 *nickname)
+{
+    u8 i, box;
+    struct BoxPokemon *other = NULL;
+
+    for (i = 0; i < PARTY_SIZE && !other; i++)
+        if (i != partySlot && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE
+         && (gPlayerParty[i].box.away || gPlayerParty[i].box.asked))
+            other = &gPlayerParty[i].box;
+    for (box = 0; box < TOTAL_BOXES_COUNT && !other; box++)
+        for (i = 0; i < IN_BOX_COUNT && !other; i++)
+        {
+            struct BoxPokemon *mon = GetBoxedMonPtr(box, i);
+            if (GetBoxMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE && (mon->away || mon->asked))
+                other = mon;
+        }
+    if (!other)
+        return FALSE;
+    GetBoxMonData(other, MON_DATA_NICKNAME, nickname);
+    StringGet_Nickname(nickname);
+    return TRUE;
+}

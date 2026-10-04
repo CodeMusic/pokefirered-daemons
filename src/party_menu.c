@@ -441,6 +441,13 @@ static const u8 sText_AwaySavedCallHome[]  = _("Saved. Open your save in the\nap
 static const u8 sText_AwaySavedStay[]      = _("Saved. {STR_VAR_1} stays where\nit is.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_AwaySaveFailed[]     = _("The game could not save, so\nnothing was asked.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_AwayCantBattle[]     = _("{STR_VAR_1} is AWAY on your\ndevice.{PAUSE_UNTIL_PRESS}");
+//  T-370 (the user, 2026-10-04): one at a time, and an emergency way home. DRAFT, every word.
+static const u8 sText_AwayOneAtATime[]     = _("One at a time: {STR_VAR_2}\nis with your device now.{PAUSE_UNTIL_PRESS}");
+static const u8 sText_AwayNotSynced[]      = _("Your device has not seen the last\none come home. SYNC in the app.{PAUSE_UNTIL_PRESS}");
+static const u8 sText_AwayAskBringHome[]   = _("Your device will still think\n{STR_VAR_1} is there.\pBring {STR_VAR_1} home without\nthe app? The game will save.");
+static const u8 sText_AwaySavedBringHome[] = _("Saved. {STR_VAR_1} is home. SYNC\nin the app before sending more.{PAUSE_UNTIL_PRESS}");
+//  Which question the YES/NO answers: the app's way (the request), or the emergency way home.
+static bool8 sAwayAskingBringHome;
 
 #include "data/party_menu.h"
 
@@ -3040,13 +3047,15 @@ static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
     AppendDriverFieldMove(FIELD_MOVE_FLY, ITEM_HM02);
     AppendDriverFieldMove(FIELD_MOVE_FLASH, ITEM_HM05);
     //  T-358: one of three, by where the daemon is and whether it has already been asked. Never for an egg.
+    //  T-370: SEND only once the companion app has synced this save (FLAG_COMPANION_LINKED); a daemon already AWAY or
+    //  asked for always keeps its way home, so none is ever stranded.
     if (!GetMonData(&mons[slotId], MON_DATA_IS_EGG))
     {
         if (DaemonIsAsked(&mons[slotId]))
             AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, CURSOR_OPTION_AWAY_STAY);
         else if (DaemonIsAway(&mons[slotId]))
             AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, CURSOR_OPTION_AWAY_CALL_HOME);
-        else
+        else if (FlagGet(FLAG_COMPANION_LINKED))
             AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, CURSOR_OPTION_AWAY_SEND);
     }
     if (GetMonData(&mons[1], MON_DATA_SPECIES) != SPECIES_NONE)
@@ -6444,6 +6453,7 @@ static void CursorCB_Away(u8 taskId)
     PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[0]);
     PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[1]);
     GetMonNickname(mon, gStringVar1);
+    sAwayAskingBringHome = FALSE;
     if (DaemonIsAsked(mon))
     {
         StringExpandPlaceholders(gStringVar4, sText_AwayAskStay);
@@ -6452,9 +6462,16 @@ static void CursorCB_Away(u8 taskId)
     {
         StringExpandPlaceholders(gStringVar4, sText_AwayAskCallHome);
     }
-    else if (!AnotherCanBattle(gPartyMenu.slotId))
+    else if (FlagGet(FLAG_COMPANION_RECALLED) || DaemonsOtherOnDevice(gPartyMenu.slotId, gStringVar2)
+          || !AnotherCanBattle(gPartyMenu.slotId))
     {
-        StringExpandPlaceholders(gStringVar4, sText_AwayOnlyOne);
+        //  T-370: the app must see an emergency return first; then one at a time; then never the last who can battle.
+        if (FlagGet(FLAG_COMPANION_RECALLED))
+            StringExpandPlaceholders(gStringVar4, sText_AwayNotSynced);
+        else if (DaemonsOtherOnDevice(gPartyMenu.slotId, gStringVar2))
+            StringExpandPlaceholders(gStringVar4, sText_AwayOneAtATime);
+        else
+            StringExpandPlaceholders(gStringVar4, sText_AwayOnlyOne);
         DisplayPartyMenuMessage(gStringVar4, FALSE);
         gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
         return;
@@ -6483,14 +6500,29 @@ static void Task_HandleAwayYesNoInput(u8 taskId)
     switch (Menu_ProcessInputNoWrapClearOnChoose())
     {
     case 0:
-        DaemonSetAsked(mon, !DaemonIsAsked(mon));
+        if (sAwayAskingBringHome)
+            DaemonSetAway(mon, FALSE);                  // T-370: home now; the app is told by FLAG_COMPANION_RECALLED
+        else
+            DaemonSetAsked(mon, !DaemonIsAsked(mon));
         DisplayPartyMenuMessage(gText_SavingDontTurnOffThePower, TRUE);
         gTasks[taskId].func = Task_AwaySave;
         break;
+    case 1:
+        //  T-370: NO to calling an AWAY daemon home through the app offers the emergency way, so a daemon is never
+        //  stuck when the app cannot be reached.
+        if (!sAwayAskingBringHome && DaemonIsAway(mon) && !DaemonIsAsked(mon))
+        {
+            sAwayAskingBringHome = TRUE;
+            GetMonNickname(mon, gStringVar1);
+            StringExpandPlaceholders(gStringVar4, sText_AwayAskBringHome);
+            DisplayPartyMenuMessage(gStringVar4, TRUE);
+            gTasks[taskId].func = Task_AwayYesNo;
+            break;
+        }
+        gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+        break;
     case MENU_B_PRESSED:
         PlaySE(SE_SELECT);
-        // fallthrough
-    case 1:
         gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
         break;
     }
@@ -6508,6 +6540,8 @@ static void Task_AwaySave(u8 taskId)
     //  The START menu stores the map view first (StartMenu_PrepareForSave), and Continue writes it back into the map
     //  grid: without it, a save made here continued into the last START-menu save's view -- the REPO's floor drawn as
     //  noise (found in the theatre, T-358). The field's map grid is a static array the party menu never touches.
+    if (sAwayAskingBringHome)
+        FlagSet(FLAG_COMPANION_RECALLED);
     SaveMapView();
     SaveQuestLogData();
     IncrementGameStat(GAME_STAT_SAVED_GAME);
@@ -6523,8 +6557,22 @@ static void Task_AwaySave(u8 taskId)
     GetMonNickname(mon, gStringVar1);
     if (gSaveAttemptStatus != SAVE_STATUS_OK)
     {
-        DaemonSetAsked(mon, !DaemonIsAsked(mon));
+        if (sAwayAskingBringHome)                     // put it back as it was: the file never saw it come home
+        {
+            DaemonSetAway(mon, TRUE);
+            FlagClear(FLAG_COMPANION_RECALLED);
+        }
+        else
+            DaemonSetAsked(mon, !DaemonIsAsked(mon));
         StringExpandPlaceholders(gStringVar4, sText_AwaySaveFailed);
+    }
+    else if (sAwayAskingBringHome)
+    {
+        //  Drawn as home at once: its level where AWAY was, and its icon in its own colours.
+        DisplayPartyPokemonData(gPartyMenu.slotId);
+        DaemonsUnwashAwayIcon(&gSprites[sPartyMenuBoxes[gPartyMenu.slotId].monSpriteId], GetMonData(mon, MON_DATA_SPECIES_OR_EGG));
+        GetMonNickname(mon, gStringVar1);       // the redraw spent gStringVar1 on the HP figures
+        StringExpandPlaceholders(gStringVar4, sText_AwaySavedBringHome);
     }
     else if (!DaemonIsAsked(mon))
     {

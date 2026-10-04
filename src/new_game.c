@@ -302,6 +302,7 @@ static void DaemonsDebug_GrantTestKit(void)
     // OPUS is in the kit, and the flag is the SS TICKET's lesson again: THE REPO's shelf and the first clerk (T-348)
     // read FLAG_GOT_OPUS, not the bag. Without it the shelf offered OPUS twice and no clerk ever noticed it.
     FlagSet(FLAG_GOT_OPUS);
+    FlagSet(FLAG_COMPANION_LINKED);     // T-370: as if the companion app had synced this save, so SEND is offered
 
     // Without these the party is in memory and unreachable: start_menu.c only
     // draws the POKeMON entry when FLAG_SYS_POKEMON_GET is set, and the DEX
