@@ -471,8 +471,12 @@ static const u8 gInitialMovementTypeFacingDirections[MOVEMENT_TYPES_COUNT] = {
 //  every map. They share three maps, so it has to be ONE tag -- two tags in
 //  that slot would recolour whichever of them spawned first.
 #define OBJ_EVENT_PAL_TAG_NPC_CLEARS                  0x111E
-//  THE OWL is brown feathers, a pale face disc and a tweed waistcoat, and has
-//  the house to himself -- so his own palette, in PALSLOT_NPC_SPECIAL.
+//  THE OWL is brown feathers, a pale face disc and a tweed waistcoat. He used
+//  to sit in PALSLOT_NPC_SPECIAL, which was right while he had the house to
+//  himself -- but CALLOW SCHOOL is CALLOW's, whose people hold that slot, and
+//  whichever spawned last repainted the other (T-365, eleven days from 2026-09-22: a green and yellow OWL at
+//  the exam, brown children after it). He takes PALSLOT_NPC_1, free on both his
+//  maps, and is patched in when he spawns, as the daemons are.
 #define OBJ_EVENT_PAL_TAG_NPC_OWL                     0x111F
 //  UMBRA's locals share one palette of the town's own (T-119).
 #define OBJ_EVENT_PAL_TAG_NPC_TOWN_UMBRA              0x1129
@@ -1627,10 +1631,12 @@ void Unref_RemoveAllObjectEventsExceptPlayer(void)
 
 // T-133: a daemon's overworld object carries its TYPE's palette (tools/gbaowslots.py), in a slot that map left free.
 // The map's generic palettes are laid down before objects spawn; this patches the type's over its slot as it does.
+// T-365: the OWL rides the same patch, in a generic slot neither of his maps uses.
 static void TryPatchDaemonTypePalette(const struct ObjectEventGraphicsInfo *graphicsInfo)
 {
-    if (graphicsInfo->paletteTag >= OBJ_EVENT_PAL_TAG_DAEMON_TYPE_BASE
-     && graphicsInfo->paletteTag < OBJ_EVENT_PAL_TAG_DAEMON_TYPE_BASE + NUMBER_OF_MON_TYPES)
+    if ((graphicsInfo->paletteTag >= OBJ_EVENT_PAL_TAG_DAEMON_TYPE_BASE
+      && graphicsInfo->paletteTag < OBJ_EVENT_PAL_TAG_DAEMON_TYPE_BASE + NUMBER_OF_MON_TYPES)
+     || graphicsInfo->paletteTag == OBJ_EVENT_PAL_TAG_NPC_OWL)
         PatchObjectPalette(graphicsInfo->paletteTag, graphicsInfo->paletteSlot);
 }
 
