@@ -27,7 +27,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "SaffronCity_MrPsychicsHouse_EventScript_MrPsychic",
-      "flag": "0"
+      "flag": "FLAG_HIDE_SCHOLAR_AT_HOME"
     }
   ],
   "warp_events": [
@@ -62,6 +62,14 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
       "script": "NotebookDoc_SaffronCity_MrPsychicsHouse_5_5"
+    },
+    {
+      "type": "sign",
+      "x": 6,
+      "y": 4,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "SaffronCity_MrPsychicsHouse_EventScript_Note"
     }
   ]
 }

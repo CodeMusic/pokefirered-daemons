@@ -4,8 +4,14 @@ SaffronCity_MapScripts::
 
 SaffronCity_OnTransition::
 	setworldmapflag FLAG_WORLD_MAP_SAFFRON_CITY
+	call_if_set FLAG_GOT_DIPLOMA, SaffronCity_EventScript_OwlIsHome    @ T-364
 	call_if_unset FLAG_RESCUED_MR_FUJI, SaffronCity_EventScript_MoveDoorGuardGrunt
 	end
+
+@ T-364: once the player has the DIPLOMA and reaches BRAZEN, the OWL has gone home from CALLOW SCHOOL.
+SaffronCity_EventScript_OwlIsHome::
+	setflag FLAG_OWL_WENT_HOME
+	return
 
 SaffronCity_EventScript_MoveDoorGuardGrunt::
 	setobjectxyperm LOCALID_SAFFRON_DOOR_GUARD_GRUNT, 33, 31

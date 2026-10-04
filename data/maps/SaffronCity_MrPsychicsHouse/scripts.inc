@@ -1,5 +1,20 @@
 SaffronCity_MrPsychicsHouse_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, SaffronCity_MrPsychicsHouse_OnTransition
 	.byte 0
+
+@ T-364: in exam season THE SCHOLAR is proctoring at CALLOW SCHOOL, so his house stands empty, with a note on the table.
+SaffronCity_MrPsychicsHouse_OnTransition::
+	clearflag FLAG_HIDE_SCHOLAR_AT_HOME
+	goto_if_ne VAR_SCHOOL_SEASON, 2, SaffronCity_MrPsychicsHouse_OnTransitionEnd
+	setflag FLAG_HIDE_SCHOLAR_AT_HOME
+SaffronCity_MrPsychicsHouse_OnTransitionEnd::
+	end
+
+SaffronCity_MrPsychicsHouse_EventScript_Note::
+	goto_if_ne VAR_SCHOOL_SEASON, 2, SaffronCity_MrPsychicsHouse_EventScript_NoNote
+	msgbox SaffronCity_MrPsychicsHouse_Text_AwayNote, MSGBOX_SIGN
+SaffronCity_MrPsychicsHouse_EventScript_NoNote::
+	end
 
 SaffronCity_MrPsychicsHouse_EventScript_MrPsychic::
 	lock
@@ -14,6 +29,7 @@ SaffronCity_MrPsychicsHouse_EventScript_MrPsychic::
 	giveitem_msg SaffronCity_MrPsychicsHouse_Text_ReceivedTM29FromMrPsychic, ITEM_TM29
 	msgbox SaffronCity_MrPsychicsHouse_Text_ExplainTM29
 	setflag FLAG_GOT_TM29_FROM_MR_PSYCHIC
+	call School_EventScript_OwlOfferReview      @ T-364: the paper keeps, and he took it home
 	release
 	end
 
@@ -24,6 +40,7 @@ SaffronCity_MrPsychicsHouse_EventScript_NoRoomForTM29::
 
 SaffronCity_MrPsychicsHouse_EventScript_AlreadyGotTM29::
 	msgbox SaffronCity_MrPsychicsHouse_Text_ExplainTM29
+	call School_EventScript_OwlOfferReview      @ T-364
 	release
 	end
 
@@ -85,9 +102,11 @@ SaffronCity_MrPsychicsHouse_EventScript_TryFlight::
 @  Conceded, and no package yet: say that something is waiting, not what.
 SaffronCity_MrPsychicsHouse_EventScript_NotYet::
 	msgbox SaffronCity_MrPsychicsHouse_Text_StarrIsWaiting
+	call School_EventScript_OwlOfferReview      @ T-364
 	release
 	end
 
 SaffronCity_MrPsychicsHouse_EventScript_NoFlight::
+	call School_EventScript_OwlOfferReview      @ T-364
 	release
 	end

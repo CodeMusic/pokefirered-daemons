@@ -1623,6 +1623,11 @@
 #define FLAG_CLERK_NOTICED_OPUS       (DAEMONS_FLAGS_START + 0x6B)
 //  T-360: the last paper handed in is kept, marked, for the OWL to go over; the next sitting clears it.
 #define FLAG_SCHOOL_PAPER_MARKED      (DAEMONS_FLAGS_START + 0x6C)
+//  T-364 (the user, 2026-10-03): the school's OWL is THE SCHOLAR of BRAZEN, so he is only ever in one place. He stays at
+//  the front after the DIPLOMA until the player first reaches BRAZEN; in exam season his house there stands empty.
+#define FLAG_SCHOOL_HIDE_OWL          (DAEMONS_FLAGS_START + 0x6D)
+#define FLAG_OWL_WENT_HOME            (DAEMONS_FLAGS_START + 0x6E)
+#define FLAG_HIDE_SCHOLAR_AT_HOME     (DAEMONS_FLAGS_START + 0x6F)
 
 //  T-19. Two beats of one scene, five islands and a sea apart.
 #define FLAG_TY_GAVE_PAYLOAD          (DAEMONS_FLAGS_START + 0x20)

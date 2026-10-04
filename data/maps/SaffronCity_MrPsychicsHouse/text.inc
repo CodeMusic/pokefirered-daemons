@@ -121,3 +121,10 @@ SaffronCity_MrPsychicsHouse_Text_StarrIsWaiting::
 	.string "door, and did not go.\p"
 	.string "It is waiting on something\n"
 	.string "you are not carrying.$"
+
+@ T-364, DRAFT: THE SCHOLAR away in exam season.
+SaffronCity_MrPsychicsHouse_Text_AwayNote::
+    .string "A note on the table, in a careful\n"
+    .string "hand:\p"
+    .string "PROCTORING AT CALLOW SCHOOL.\n"
+    .string "BACK WHEN THE PAPERS ARE MARKED.$"

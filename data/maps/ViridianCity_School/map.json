@@ -73,7 +73,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "School_EventScript_Owl",
-      "flag": "FLAG_SCHOOL_HIDE_EXAM"
+      "flag": "FLAG_SCHOOL_HIDE_OWL"
     },
     {
       "local_id": "LOCALID_SCHOOL_SEAT1",

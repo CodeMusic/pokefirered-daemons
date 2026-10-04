@@ -191,6 +191,26 @@ School_EventScript_OwlNotNow::
 	release
 	end
 
+@  T-364: the same offer, wherever the OWL is -- at the front of the school after the DIPLOMA, or at home in BRAZEN
+@  as THE SCHOLAR. Called with the OWL facing the player; says nothing unless a marked paper missed something.
+School_EventScript_OwlOfferReview::
+	goto_if_unset FLAG_GOT_DIPLOMA, School_EventScript_OwlOfferReviewEnd
+	special School_CountPaperMisses
+	goto_if_eq VAR_RESULT, 255, School_EventScript_OwlOfferReviewEnd
+	goto_if_eq VAR_RESULT, 0, School_EventScript_OwlOfferReviewEnd
+	msgbox School_Text_OwlGoOver, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, School_EventScript_OwlOfferReviewLater
+	closemessage
+	fadescreen FADE_TO_BLACK
+	special School_OpenFeedback
+	waitstate
+	msgbox School_Text_OwlAfterReview
+	return
+School_EventScript_OwlOfferReviewLater::
+	msgbox School_Text_OwlNotNow
+School_EventScript_OwlOfferReviewEnd::
+	return
+
 School_EventScript_SeatedStudent::
 	msgbox School_Text_Shh, MSGBOX_NPC
 	end

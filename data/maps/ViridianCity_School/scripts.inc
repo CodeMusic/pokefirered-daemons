@@ -13,11 +13,20 @@ ViridianCity_School_OnTransition::
 	goto_if_eq VAR_SCHOOL_SEASON, 2, ViridianCity_School_EventScript_ExamRoom
 	clearflag FLAG_SCHOOL_HIDE_CLASS
 	setflag FLAG_SCHOOL_HIDE_EXAM
+	setflag FLAG_SCHOOL_HIDE_OWL
+	goto_if_unset FLAG_GOT_DIPLOMA, ViridianCity_School_EventScript_OnTransitionEnd
+	goto_if_set FLAG_OWL_WENT_HOME, ViridianCity_School_EventScript_OnTransitionEnd
+	@ T-364: after the DIPLOMA the OWL stays a while -- beside the board, since the class is back at the front --
+	@ until the player first reaches BRAZEN, where he lives (THE SCHOLAR).
+	clearflag FLAG_SCHOOL_HIDE_OWL
+	setobjectxyperm LOCALID_SCHOOL_OWL, 3, 2
+ViridianCity_School_EventScript_OnTransitionEnd::
 	end
 
 ViridianCity_School_EventScript_ExamRoom::
 	setflag FLAG_SCHOOL_HIDE_CLASS
 	clearflag FLAG_SCHOOL_HIDE_EXAM
+	clearflag FLAG_SCHOOL_HIDE_OWL
 	end
 
 ViridianCity_School_EventScript_Lass::
