@@ -446,6 +446,8 @@ static const u8 sText_AwayOneAtATime[]     = _("One at a time: {STR_VAR_2}\nis w
 static const u8 sText_AwayNotSynced[]      = _("Your device has not seen the last\none come home. SYNC in the app.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_AwayAskBringHome[]   = _("Your device will still think\n{STR_VAR_1} is there.\pBring {STR_VAR_1} home without\nthe app? The game will save.");
 static const u8 sText_AwaySavedBringHome[] = _("Saved. {STR_VAR_1} is home. SYNC\nin the app before sending more.{PAUSE_UNTIL_PRESS}");
+//  T-374 (the user, 2026-10-04): only a daemon in full health goes. DRAFT.
+static const u8 sText_AwayRestoreFirst[]   = _("Restore {STR_VAR_1} before it goes:\nfull health, and nothing ailing it.{PAUSE_UNTIL_PRESS}");
 //  Which question the YES/NO answers: the app's way (the request), or the emergency way home.
 static bool8 sAwayAskingBringHome;
 
@@ -1181,6 +1183,21 @@ static s8 *GetCurrentPartySlotPtr(void)
         return &gPartyMenu.slotId;
 }
 
+//  T-374 (the user, 2026-10-04): an AWAY daemon is on the device, not here -- no item used on it, nothing given to it
+//  to hold, nothing taught to it. It says so and the choice goes back.
+static bool8 IsSelectedMonHere(u8 taskId, u8 slot)
+{
+    if (!DaemonIsAway(&gPlayerParty[slot]))
+        return TRUE;
+    PlaySE(SE_FAILURE);
+    GetMonNickname(&gPlayerParty[slot], gStringVar1);
+    StringExpandPlaceholders(gStringVar4, sText_AwayCantBattle);
+    DisplayPartyMenuMessage(gStringVar4, FALSE);
+    ScheduleBgCopyTilemapToVram(2);       // as the item callbacks' own refusals do: without it the box never shows
+    gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+    return FALSE;
+}
+
 static void HandleChooseMonSelection(u8 taskId, s8 *slotPtr)
 {
     if (*slotPtr == SLOT_CONFIRM)
@@ -1190,11 +1207,11 @@ static void HandleChooseMonSelection(u8 taskId, s8 *slotPtr)
         switch (gPartyMenu.action)
         {
         case PARTY_ACTION_SOFTBOILED:
-            if (IsSelectedMonNotEgg((u8 *)slotPtr))
+            if (IsSelectedMonNotEgg((u8 *)slotPtr) && IsSelectedMonHere(taskId, *slotPtr))
                 Task_TryUseSoftboiledOnPartyMon(taskId);
             break;
         case PARTY_ACTION_USE_ITEM:
-            if (IsSelectedMonNotEgg((u8 *)slotPtr))
+            if (IsSelectedMonNotEgg((u8 *)slotPtr) && IsSelectedMonHere(taskId, *slotPtr))
             {
                 if (gPartyMenu.menuType == PARTY_MENU_TYPE_IN_BATTLE)
                     sPartyMenuInternal->exitCallback = CB2_SetUpExitToBattleScreen;
@@ -1202,14 +1219,14 @@ static void HandleChooseMonSelection(u8 taskId, s8 *slotPtr)
             }
             break;
         case PARTY_ACTION_MOVE_TUTOR:
-            if (IsSelectedMonNotEgg((u8 *)slotPtr))
+            if (IsSelectedMonNotEgg((u8 *)slotPtr) && IsSelectedMonHere(taskId, *slotPtr))
             {
                 PlaySE(SE_SELECT);
                 TryTutorSelectedMon(taskId);
             }
             break;
         case PARTY_ACTION_GIVE_MAILBOX_MAIL:
-            if (IsSelectedMonNotEgg((u8 *)slotPtr))
+            if (IsSelectedMonNotEgg((u8 *)slotPtr) && IsSelectedMonHere(taskId, *slotPtr))
             {
                 PlaySE(SE_SELECT);
                 TryGiveMailToSelectedMon(taskId);
@@ -1217,7 +1234,7 @@ static void HandleChooseMonSelection(u8 taskId, s8 *slotPtr)
             break;
         case PARTY_ACTION_GIVE_ITEM:
         case PARTY_ACTION_GIVE_PC_ITEM:
-            if (IsSelectedMonNotEgg((u8 *)slotPtr))
+            if (IsSelectedMonNotEgg((u8 *)slotPtr) && IsSelectedMonHere(taskId, *slotPtr))
             {
                 PlaySE(SE_SELECT);
                 TryGiveItemOrMailToSelectedMon(taskId);
@@ -3485,6 +3502,8 @@ static void CursorCB_Item(u8 taskId)
     PlaySE(SE_SELECT);
     PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[0]);
     PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[1]);
+    if (!IsSelectedMonHere(taskId, gPartyMenu.slotId))     // T-374: nothing to give or take from one on the device
+        return;
     SetPartyMonSelectionActions(gPlayerParty, gPartyMenu.slotId, ACTIONS_ITEM);
     DisplaySelectionWindow(SELECTWINDOW_ITEM);
     DisplayPartyMenuStdMessage(PARTY_MSG_DO_WHAT_WITH_ITEM);
@@ -6462,22 +6481,31 @@ static void CursorCB_Away(u8 taskId)
     {
         StringExpandPlaceholders(gStringVar4, sText_AwayAskCallHome);
     }
-    else if (FlagGet(FLAG_COMPANION_RECALLED) || DaemonsOtherOnDevice(gPartyMenu.slotId, gStringVar2)
-          || !AnotherCanBattle(gPartyMenu.slotId))
-    {
-        //  T-370: the app must see an emergency return first; then one at a time; then never the last who can battle.
-        if (FlagGet(FLAG_COMPANION_RECALLED))
-            StringExpandPlaceholders(gStringVar4, sText_AwayNotSynced);
-        else if (DaemonsOtherOnDevice(gPartyMenu.slotId, gStringVar2))
-            StringExpandPlaceholders(gStringVar4, sText_AwayOneAtATime);
-        else
-            StringExpandPlaceholders(gStringVar4, sText_AwayOnlyOne);
-        DisplayPartyMenuMessage(gStringVar4, FALSE);
-        gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
-        return;
-    }
     else
     {
+        //  T-370: the app must see an emergency return first; then one at a time (the PORT's boxes scanned ONCE, here,
+        //  only when SEND is chosen). T-374: then only a daemon in full health, nothing ailing it -- which also keeps a
+        //  fainted one home. Then never the last who can battle.
+        const u8 *refuse = NULL;
+        bool8 healthy = GetMonData(mon, MON_DATA_HP) == GetMonData(mon, MON_DATA_MAX_HP)
+                     && GetMonData(mon, MON_DATA_STATUS) == 0;
+
+        if (FlagGet(FLAG_COMPANION_RECALLED))
+            refuse = sText_AwayNotSynced;
+        else if (DaemonsOtherOnDevice(gPartyMenu.slotId, gStringVar2))
+            refuse = sText_AwayOneAtATime;
+        else if (!healthy)
+            refuse = sText_AwayRestoreFirst;
+        else if (!AnotherCanBattle(gPartyMenu.slotId))
+            refuse = sText_AwayOnlyOne;
+        if (refuse != NULL)
+        {
+            PlaySE(SE_FAILURE);
+            StringExpandPlaceholders(gStringVar4, refuse);
+            DisplayPartyMenuMessage(gStringVar4, FALSE);
+            gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+            return;
+        }
         StringExpandPlaceholders(gStringVar4, sText_AwayAskSend);
     }
     DisplayPartyMenuMessage(gStringVar4, TRUE);

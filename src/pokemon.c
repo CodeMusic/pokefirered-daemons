@@ -6605,15 +6605,17 @@ bool8 DaemonsOtherOnDevice(u8 partySlot, u8 *nickname)
     u8 i, box;
     struct BoxPokemon *other = NULL;
 
+    //  The two bits are read first: they sit outside the encrypted record, so a slot that has neither costs one read,
+    //  and only a marked slot is decrypted to check it really holds a daemon. 420 box slots are cheap this way.
     for (i = 0; i < PARTY_SIZE && !other; i++)
-        if (i != partySlot && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE
-         && (gPlayerParty[i].box.away || gPlayerParty[i].box.asked))
+        if (i != partySlot && (gPlayerParty[i].box.away || gPlayerParty[i].box.asked)
+         && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE)
             other = &gPlayerParty[i].box;
     for (box = 0; box < TOTAL_BOXES_COUNT && !other; box++)
         for (i = 0; i < IN_BOX_COUNT && !other; i++)
         {
             struct BoxPokemon *mon = GetBoxedMonPtr(box, i);
-            if (GetBoxMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE && (mon->away || mon->asked))
+            if ((mon->away || mon->asked) && GetBoxMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE)
                 other = mon;
         }
     if (!other)

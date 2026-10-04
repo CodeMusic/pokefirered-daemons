@@ -57,6 +57,7 @@ static void Task_SwitchSelectedItem(u8 taskId);
 static void Task_ShowItemInfo(u8 taskId);
 static void Task_HandleMovingMonFromParty(u8 taskId);
 static void Task_PrintCantStoreMail(u8 taskId);
+static void Task_PrintItemAway(u8 taskId);
 static void Task_HandleBoxOptions(u8 taskId);
 static void Task_HandleWallpapers(u8 taskId);
 static void Task_JumpBox(u8 taskId);
@@ -765,17 +766,18 @@ static void Task_PokeStorageMain(u8 taskId)
             PlaySE(SE_SELECT);
             SetPokeStorageTask(Task_PlaceMon);
             break;
+        //  T-374: in MOVE ITEMS, an AWAY daemon's held item can be neither taken nor swapped, and nothing given to it.
         case INPUT_TAKE_ITEM:
             PlaySE(SE_SELECT);
-            SetPokeStorageTask(Task_TakeItemForMoving);
+            SetPokeStorageTask(gStorage->displayMonIsAway ? Task_PrintItemAway : Task_TakeItemForMoving);
             break;
         case INPUT_GIVE_ITEM:
             PlaySE(SE_SELECT);
-            SetPokeStorageTask(Task_GiveMovingItemToMon);
+            SetPokeStorageTask(gStorage->displayMonIsAway ? Task_PrintItemAway : Task_GiveMovingItemToMon);
             break;
         case INPUT_SWITCH_ITEMS:
             PlaySE(SE_SELECT);
-            SetPokeStorageTask(Task_SwitchSelectedItem);
+            SetPokeStorageTask(gStorage->displayMonIsAway ? Task_PrintItemAway : Task_SwitchSelectedItem);
             break;
         case INPUT_MULTIMOVE_START:
             PlaySE(SE_SELECT);
@@ -1035,22 +1037,42 @@ static void Task_OnSelectedMon(u8 taskId)
             PlaySE(SE_SELECT);
             SetPokeStorageTask(Task_ShowMarkMenu);
             break;
+        //  T-374: the item menu on an AWAY daemon answers as RELEASE does -- "X is AWAY." -- and changes nothing.
         case MENU_TEXT_TAKE:
-            PlaySE(SE_SELECT);
-            SetPokeStorageTask(Task_TakeItemForMoving);
+            if (gStorage->displayMonIsAway)
+                gStorage->state = 7;
+            else
+            {
+                PlaySE(SE_SELECT);
+                SetPokeStorageTask(Task_TakeItemForMoving);
+            }
             break;
         case MENU_TEXT_GIVE:
-            PlaySE(SE_SELECT);
-            SetPokeStorageTask(Task_GiveMovingItemToMon);
+            if (gStorage->displayMonIsAway)
+                gStorage->state = 7;
+            else
+            {
+                PlaySE(SE_SELECT);
+                SetPokeStorageTask(Task_GiveMovingItemToMon);
+            }
             break;
         case MENU_TEXT_BAG:
-            SetPokeStorageTask(Task_ItemToBag);
+            if (gStorage->displayMonIsAway)
+                gStorage->state = 7;
+            else
+                SetPokeStorageTask(Task_ItemToBag);
             break;
         case MENU_TEXT_SWITCH:
-            SetPokeStorageTask(Task_SwitchSelectedItem);
+            if (gStorage->displayMonIsAway)
+                gStorage->state = 7;
+            else
+                SetPokeStorageTask(Task_SwitchSelectedItem);
             break;
         case MENU_TEXT_GIVE2:
-            SetPokeStorageTask(Task_GiveItemFromBag);
+            if (gStorage->displayMonIsAway)
+                gStorage->state = 7;
+            else
+                SetPokeStorageTask(Task_GiveItemFromBag);
             break;
         case MENU_TEXT_INFO:
             SetPokeStorageTask(Task_ShowItemInfo);
@@ -1706,6 +1728,34 @@ static void Task_PrintCantStoreMail(u8 taskId)
     {
     case 0:
         PrintStorageMessage(MSG_CANT_STORE_MAIL);
+        gStorage->state++;
+        break;
+    case 1:
+        if (!IsDma3ManagerBusyWithBgCopy())
+            gStorage->state++;
+        break;
+    case 2:
+        if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_ANY))
+        {
+            ClearBottomWindow();
+            gStorage->state++;
+        }
+        break;
+    case 3:
+        if (!IsDma3ManagerBusyWithBgCopy())
+            SetPokeStorageTask(Task_PokeStorageMain);
+        break;
+    }
+}
+
+//  T-374: as Task_PrintCantStoreMail, for a daemon on the device -- "X is AWAY." -- and back to the box.
+static void Task_PrintItemAway(u8 taskId)
+{
+    switch (gStorage->state)
+    {
+    case 0:
+        PlaySE(SE_FAILURE);
+        PrintStorageMessage(MSG_CANT_RELEASE_AWAY);
         gStorage->state++;
         break;
     case 1:
