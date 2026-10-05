@@ -1315,6 +1315,16 @@ static const u8 *const sCardDayNames[WEEKDAY_COUNT] = {
     gText_DaySaturday,
 };
 
+//  T-372 (the user, 2026-10-04: "A but with a clock"): A CLOCK BESIDE THE DAY when the cartridge's real clock is what
+//  drives the time, weekday and seasons (9.21); nothing there when they come from play time. Drawn in the band's own
+//  grey and its shadow, as the mock-up was: after CARD on the front, after the day on the back.
+#define CARD_CLOCK_X  108  // window 1's pixels: just past CARD
+#define CARD_CLOCK_Y  14   // level with the day's letters
+static const u8 sCardClockGfx[] = {    // one 8x8 tile, 4bpp: 2 the card's dark grey, 3 its shadow
+    0x00, 0x22, 0x32, 0x00, 0x20, 0x23, 0x23, 0x03, 0x32, 0x23, 0x33, 0x32, 0x32, 0x20, 0x32, 0x32,
+    0x32, 0x30, 0x33, 0x32, 0x23, 0x03, 0x20, 0x33, 0x30, 0x22, 0x32, 0x03, 0x00, 0x33, 0x33, 0x00,
+};
+
 static void PrintDayOnCard(bool8 back)
 {
     u8 buffer[16];
@@ -1332,6 +1342,8 @@ static void PrintDayOnCard(bool8 back)
     width = GetStringWidth(FONT_SMALL, buffer, 0);
     AddTextPrinterParameterized3(1, FONT_SMALL, back ? CARD_DAY_BACK_X : CARD_DAY_GAP_X + (CARD_DAY_GAP_W - width) / 2,
                                  sTrainerCardIdYPositions[CARD_TYPE_FRLG], sTrainerCardTextColors, TEXT_SKIP_DRAW, buffer);
+    if (DaemonsWatchIsFromClock())     // T-372
+        BlitBitmapToWindow(1, sCardClockGfx, back ? CARD_DAY_BACK_X + width + 4 : CARD_CLOCK_X, CARD_CLOCK_Y, 8, 8);
 }
 
 static void PrintIdOnCard(void)
