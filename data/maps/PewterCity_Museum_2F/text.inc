@@ -44,7 +44,7 @@ PewterCity_Museum_1F_Text_BoughtColorTVForMoonLanding::
 
 @  T-321, DRAFT.
 PewterCity_Museum_1F_Text_RunningSpaceExhibitThisMonth::
-    .string "The upstairs exhibit changes every\n"
+    .string "This exhibit changes every\n"
     .string "month.\p"
     .string "This month it is KNOWN FAULTS.\n"
     .string "Every machine in it was sure of\l"
