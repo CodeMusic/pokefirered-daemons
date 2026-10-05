@@ -56,19 +56,17 @@ PalletTown_RivalsHouse_Text_DontNeedAnyGrooming::
 PalletTown_RivalsHouse_Text_GroomWhichOne::
     .string "Which one?$"
 
+@  T-376, DRAFT: said BEFORE she tends it -- the script has not looked up its name yet (STR_VAR_1 still holds the
+@  party screen's last HP text, "/235"), and "There." belongs to ThereYouGoAllDone, after.
 PalletTown_RivalsHouse_Text_LookingNiceInNoTime::
-    .string "{FONT_NORMAL}{STR_VAR_1} settles.\p"
-    .string "{FONT_FEMALE}VERA: There.\p"
-    .string "It was not doing anything wrong.$"
+    .string "{FONT_FEMALE}VERA: Leave it with me.\n"
+    .string "It will not take long.$"
 
+@  T-376: the narration in the narrator's grey and VERA in her red -- vanilla's BUGFIX colours, always. Without them
+@  the localisation's slip drew "<daemon> settles." in VERA's red, as if she said it.
 PalletTown_RivalsHouse_Text_ThereYouGoAllDone::
-#ifdef BUGFIX @ The localizers missed what should be a textcolor change in the localizations.
     .string "{COLOR DARK_GRAY}{STR_VAR_1} settles.\p"
     .string "{COLOR RED}VERA: There. It was only\n"
-#else @ In the JP games, gender-based text used a different font instead of different colors.
-    .string "{FONT_NORMAL}{STR_VAR_1} settles.\p"
-    .string "{FONT_FEMALE}VERA: There. It was only\n"
-#endif
     .string "tired.\p"
     .string "It is a good one, this.$"
 
