@@ -43,7 +43,7 @@ FourIsland_IcefallCave_Back_Text_NotTellingYouThat::
 
 FourIsland_IcefallCave_Back_Text_LoreleiWellDeepFreezeYou::
 	.string "PHLEGMATIC: If you won't\n"
-    .string "confess, we'll deep-hang you.\p"
+    .string "confess, we'll deep-freeze you.\p"
     .string "My FERRY is furious for what\n"
     .string "you've done to its friends.\p"
     .string "Go, FERRY! FREEZE…$"

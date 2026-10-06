@@ -5,7 +5,7 @@ PokemonLeague_LoreleisRoom_Text_Intro::
 	.string "There is no hurry. There never is.\p"
 	.string "FROZEN ROUTINES are powerful.\p"
 	.string "Your DAEMON will be at my mercy\n"
-	.string "when they are hung solid.\p"
+	.string "once they hang.\p"
 	.string "Whenever you are ready.{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
 
 PokemonLeague_LoreleisRoom_Text_RematchIntro::
@@ -15,7 +15,7 @@ PokemonLeague_LoreleisRoom_Text_RematchIntro::
 	.string "There is still no hurry.\p"
 	.string "FROZEN ROUTINES are powerful.\p"
 	.string "Your DAEMON will be at my mercy\n"
-	.string "when they are hung solid.\p"
+	.string "once they hang.\p"
 	.string "Whenever you are ready.{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
 
 PokemonLeague_LoreleisRoom_Text_Defeat::
