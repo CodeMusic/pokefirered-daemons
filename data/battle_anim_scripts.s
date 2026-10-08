@@ -377,13 +377,13 @@ gBattleAnims_Moves::
 	.4byte Move_PSYCHO_BOOST
 	.4byte Move_PIN_MISSILE      @ CONSENSUS: converging projectiles
 	.4byte Move_RECURSION        @ RECURSION: its own script since T-161 (it played PSYCHO BOOST's)
-	.4byte Move_ROCK_TOMB          @ FLUENCY (T-389): its type's script until T-392 gives it its own
-	.4byte Move_WATER_PULSE        @ STILLPOINT (T-389): its type's script until T-392 gives it its own
-	.4byte Move_SHOCK_WAVE         @ RECONNECT (T-389): its type's script until T-392 gives it its own
-	.4byte Move_GIGA_DRAIN         @ PRAXIS (T-389): its type's script until T-392 gives it its own
-	.4byte Move_SLUDGE_BOMB        @ MEDIAN (T-389): its type's script until T-392 gives it its own
-	.4byte Move_PSYCHIC            @ PANORAMA (T-389): its type's script until T-392 gives it its own
-	.4byte Move_FLAMETHROWER       @ HINDSIGHT (T-389): its type's script until T-392 gives it its own
+	.4byte Move_FLUENCY            @ FLUENCY (T-389, T-392): its own, with the splash's bits and notes
+	.4byte Move_STILLPOINT         @ STILLPOINT (T-389, T-392): its own, with the splash's bits and notes
+	.4byte Move_RECONNECT          @ RECONNECT (T-389, T-392): its own, with the splash's bits and notes
+	.4byte Move_PRAXIS             @ PRAXIS (T-389, T-392): its own, with the splash's bits and notes
+	.4byte Move_MEDIAN             @ MEDIAN (T-389, T-392): its own, with the splash's bits and notes
+	.4byte Move_PANORAMA           @ PANORAMA (T-389, T-392): its own, with the splash's bits and notes
+	.4byte Move_HINDSIGHT          @ HINDSIGHT (T-389, T-392): its own, with the splash's bits and notes
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -441,8 +441,22 @@ gBattleAnims_Special::
 
 Move_NONE:
 Move_MIRROR_MOVE:
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_POUND:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
@@ -454,8 +468,35 @@ Move_POUND:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 9, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_DOUBLE_SLAP, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 4, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 9, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 9, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.endif
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_DOUBLE_SLAP:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	playsewithpan SE_M_DOUBLE_SLAP, SOUND_PAN_TARGET
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 3, 1
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 8, RGB(24, 23, 21)
@@ -463,6 +504,15 @@ Move_DOUBLE_SLAP:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
+.else
+	playsewithpan SE_M_DOUBLE_SLAP, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 3, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 8, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.endif
 @ genanims: AFFLICT (T-134, vision.md 9.24) approved.
 Move_POISON_POWDER:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(10, 11, 6)
@@ -525,8 +575,22 @@ Move_SLEEP_POWDER:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 2, 12, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_SWIFT:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
@@ -538,8 +602,35 @@ Move_SWIFT:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 11, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_SWIFT, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 5, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 11, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 11, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.endif
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_STRENGTH:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
@@ -551,8 +642,35 @@ Move_STRENGTH:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 14, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_TAKE_DOWN, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 5, 0, 7, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 14, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 14, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.endif
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_TACKLE:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
@@ -564,8 +682,35 @@ Move_TACKLE:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 9, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 4, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 9, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 9, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.endif
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_BODY_SLAM:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
@@ -577,6 +722,19 @@ Move_BODY_SLAM:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 12, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_TAKE_DOWN, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 4, 0, 5, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 12, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 12, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.endif
 @ genanims: AFFLICT (T-134, vision.md 9.24) approved.
 Move_SUPERSONIC:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
@@ -635,8 +793,22 @@ Move_SCREECH:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 10, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
-@ genanims: ENTROPY (T-134, vision.md 9.24) approved.
+@ genanims: ENTROPY (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_FLAME_WHEEL:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(27, 19, 5)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 7, RGB(27, 19, 5)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 7, 0, RGB(27, 19, 5)
@@ -664,6 +836,35 @@ Move_FLAME_WHEEL:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 6, 0, RGB(27, 19, 5)
 	waitforvisualfinish
 	end
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 7, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 7, 0, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 7, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 7, 0, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 7, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 7, 0, RGB(27, 19, 5)
+	waitforvisualfinish
+	playsewithpan SE_M_FLAME_WHEEL, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 8, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 11, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 11, 3, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 3, 8, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 1, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 1, 6, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 6, 0, RGB(27, 19, 5)
+	waitforvisualfinish
+	end
+.endif
 @ genanims: SWARM (T-134, vision.md 9.24) approved.
 Move_PIN_MISSILE:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(16, 18, 9)
@@ -691,8 +892,22 @@ Move_ICICLE_SPEAR:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(20, 25, 27)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_TAKE_DOWN:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
@@ -709,8 +924,40 @@ Move_TAKE_DOWN:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 8, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_TAKE_DOWN, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 4, 0, 6, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 13, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 13, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	delay 4
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 8, RGB(13, 13, 13)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 8, 0, RGB(13, 13, 13)
+	waitforvisualfinish
+	end
+.endif
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_DOUBLE_EDGE:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
@@ -727,6 +974,24 @@ Move_DOUBLE_EDGE:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 8, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_SWIFT, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 5, 0, 7, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 14, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 14, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	delay 4
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 8, RGB(13, 13, 13)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 8, 0, RGB(13, 13, 13)
+	waitforvisualfinish
+	end
+.endif
 @ genanims: CORRUPT (T-134, vision.md 9.24) approved.
 Move_POISON_STING:
 	playsewithpan SE_M_RAZOR_WIND2, SOUND_PAN_TARGET
@@ -768,8 +1033,22 @@ Move_TWINEEDLE:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(16, 18, 9)
 	waitforvisualfinish
 	end
-@ genanims: ENTROPY (T-134, vision.md 9.24) approved.
+@ genanims: ENTROPY (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_FIRE_BLAST:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(27, 19, 5)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(27, 19, 5)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(27, 19, 5)
@@ -802,6 +1081,40 @@ Move_FIRE_BLAST:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_BATTLERS, 2, 12, 0, RGB(27, 19, 5)
 	waitforvisualfinish
 	end
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(27, 19, 5)
+	waitforvisualfinish
+	playsewithpan SE_M_FLAME_WHEEL, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 4, 0, 10, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 14, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 14, 4, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 4, 11, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 11, 2, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 2, 8, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 4, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 4, 12, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 12, 2, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 2, 7, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 7, 0, RGB(27, 19, 5)
+	waitforvisualfinish
+	playsewithpan SE_M_FLAME_WHEEL, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_BATTLERS, 0, 0, 12, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_BATTLERS, 2, 12, 0, RGB(27, 19, 5)
+	waitforvisualfinish
+	end
+.endif
 @ genanims: FIELD (T-134, vision.md 9.24) approved.
 Move_LEECH_SEED:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(11, 19, 12)
@@ -827,8 +1140,22 @@ Move_LEECH_SEED:
 	waitforvisualfinish
 	delay 4
 	end
-@ genanims: ENTROPY (T-134, vision.md 9.24) approved.
+@ genanims: ENTROPY (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_EMBER:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(27, 19, 5)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 4, 3, 0
+	delay 2
 	playsewithpan SE_M_EMBER, SOUND_PAN_TARGET
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 7, 1
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 9, RGB(27, 19, 5)
@@ -844,8 +1171,51 @@ Move_EMBER:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 5, 0, RGB(27, 19, 5)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+.else
+	playsewithpan SE_M_EMBER, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 7, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 9, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 9, 2, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 2, 7, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 7, 1, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 1, 5, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 5, 0, RGB(27, 19, 5)
+	waitforvisualfinish
+	end
+.endif
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_MEGA_PUNCH:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_MEGA_KICK, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 4, 0, 5, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 12, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 12, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.else
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
@@ -879,8 +1249,23 @@ SetImpactContestsBG:
 	changebg BG_IMPACT_CONTESTS
 	goto SetImpactBackgroundRet
 
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+.endif
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_MEGA_KICK:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
@@ -892,8 +1277,35 @@ Move_MEGA_KICK:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 14, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_MEGA_KICK, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 5, 0, 7, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 14, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 14, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.endif
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_COMET_PUNCH:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 3, 1
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 8, RGB(24, 23, 21)
@@ -901,8 +1313,31 @@ Move_COMET_PUNCH:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+.else
+	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 3, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 8, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.endif
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_SONIC_BOOM:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
@@ -914,6 +1349,19 @@ Move_SONIC_BOOM:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_RAZOR_WIND2, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 3, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 8, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.endif
 @ genanims: SIGNAL (T-134, vision.md 9.24) approved.
 Move_THUNDER_SHOCK:
 	playsewithpan SE_M_THUNDERBOLT, SOUND_PAN_TARGET
@@ -1006,8 +1454,22 @@ Move_BEAT_UP:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 13, 0, RGB(5, 5, 5)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_STOMP:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
@@ -1019,6 +1481,19 @@ Move_STOMP:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 11, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_DOUBLE_TEAM, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 5, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 11, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 11, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.endif
 @ genanims: LOWER (T-134, vision.md 9.24) approved.
 Move_TAIL_WHIP:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
@@ -1037,8 +1512,22 @@ Move_TAIL_WHIP:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 5, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_CUT:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
@@ -1054,8 +1543,39 @@ Move_CUT:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 10, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_CUT, SOUND_PAN_TARGET
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 10, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 10, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_CUT, SOUND_PAN_TARGET
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 10, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 10, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.endif
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_HIDDEN_POWER:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
@@ -1067,8 +1587,56 @@ Move_HIDDEN_POWER:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
-@ genanims: LOGIC (T-134, vision.md 9.24) approved.
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_TAKE_DOWN, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 3, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 8, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.endif
+@ genanims: LOGIC (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_REVERSAL:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(12, 15, 19)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 5, RGB(12, 15, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 5, 10, RGB(12, 15, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 10, 0, RGB(12, 15, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 4, RGB(12, 15, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 4, 8, RGB(12, 15, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 3, 1
+	delay 4
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(12, 15, 19)
+	waitforvisualfinish
+	end
+.else
 	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 5, RGB(12, 15, 19)
 	waitforvisualfinish
@@ -1089,6 +1657,7 @@ Move_REVERSAL:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(12, 15, 19)
 	waitforvisualfinish
 	end
+.endif
 @ genanims: OPAQUE (T-134, vision.md 9.24) approved.
 Move_PURSUIT:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 13, RGB(5, 5, 5)
@@ -1100,8 +1669,22 @@ Move_PURSUIT:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 13, 0, RGB(5, 5, 5)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_SPIKE_CANNON:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	playsewithpan SE_M_RAZOR_WIND2, SOUND_PAN_TARGET
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 3, 1
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 8, RGB(24, 23, 21)
@@ -1109,6 +1692,15 @@ Move_SPIKE_CANNON:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
+.else
+	playsewithpan SE_M_RAZOR_WIND2, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 3, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 8, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.endif
 @ genanims: RAISE (T-134, vision.md 9.24) approved.
 Move_SWORDS_DANCE:
 	playsewithpan SE_M_SWORDS_DANCE, SOUND_PAN_ATTACKER
@@ -1150,8 +1742,22 @@ Move_PSYCH_UP:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 12, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_DIZZY_PUNCH:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
@@ -1163,8 +1769,56 @@ Move_DIZZY_PUNCH:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 11, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
-@ genanims: ENTROPY (T-134, vision.md 9.24) approved.
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 5, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 11, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 11, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.endif
+@ genanims: ENTROPY (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_FIRE_SPIN:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(27, 19, 5)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 4, 3, 0
+	delay 2
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(27, 19, 5)
+	waitforvisualfinish
+	playsewithpan SE_M_SACRED_FIRE2, SOUND_PAN_TARGET
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 0, 8, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 0, 1, 2, 2
+	delay 8
+	playsewithpan SE_M_SACRED_FIRE2, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 0, 1, 2, 2
+	delay 8
+	playsewithpan SE_M_SACRED_FIRE2, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 0, 1, 2, 2
+	delay 8
+	playsewithpan SE_M_SACRED_FIRE2, SOUND_PAN_TARGET
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 8, 0, RGB(27, 19, 5)
+	waitforvisualfinish
+	end
+.else
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(27, 19, 5)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(27, 19, 5)
@@ -1200,6 +1854,7 @@ FireSpinEffect:
 	delay 2
 	return
 
+.endif
 @ genanims: SWARM (T-134, vision.md 9.24) approved.
 Move_FURY_CUTTER:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(16, 18, 9)
@@ -1226,8 +1881,22 @@ Move_FURY_CUTTER:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 15, 0, RGB(16, 18, 9)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_SELF_DESTRUCT:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 16, RGB(13, 13, 13)
 	waitforvisualfinish
 	playsewithpan SE_M_SELF_DESTRUCT, SOUND_PAN_ATTACKER
@@ -1239,8 +1908,35 @@ Move_SELF_DESTRUCT:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 16, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 16, RGB(13, 13, 13)
+	waitforvisualfinish
+	playsewithpan SE_M_SELF_DESTRUCT, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 4, 0, 8, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_DEF_SIDE, 0, 0, 16, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_DEF_SIDE, 2, 16, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 16, 0, RGB(13, 13, 13)
+	waitforvisualfinish
+	end
+.endif
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_SLAM:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
@@ -1252,6 +1948,19 @@ Move_SLAM:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 12, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 4, 0, 5, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 12, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 12, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.endif
 @ genanims: GROWTH (T-134, vision.md 9.24) approved.
 Move_VINE_WHIP:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 6, RGB(11, 19, 12)
@@ -1273,8 +1982,22 @@ Move_VINE_WHIP:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 4, 0, RGB(11, 19, 12)
 	waitforvisualfinish
 	end
-@ genanims: VECTOR (T-134, vision.md 9.24) approved.
+@ genanims: VECTOR (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_DRILL_PECK:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(25, 8, 8)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 8, RGB(25, 8, 8)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 8, 0, RGB(25, 8, 8)
@@ -1298,6 +2021,31 @@ Move_DRILL_PECK:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 6, 0, RGB(25, 8, 8)
 	waitforvisualfinish
 	end
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 8, RGB(25, 8, 8)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 8, 0, RGB(25, 8, 8)
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 0, 5, RGB(25, 8, 8)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 5, 0, RGB(25, 8, 8)
+	playsewithpan SE_M_HEADBUTT, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 4, 0, 5, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 12, RGB(25, 8, 8)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 12, 6, RGB(25, 8, 8)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 12, RGB(25, 8, 8)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 12, 6, RGB(25, 8, 8)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 12, RGB(25, 8, 8)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 12, 6, RGB(25, 8, 8)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 6, 0, RGB(25, 8, 8)
+	waitforvisualfinish
+	end
+.endif
 @ genanims: FLOW (T-134, vision.md 9.24) approved.
 Move_WATERFALL:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(8, 13, 22)
@@ -1358,8 +2106,22 @@ RisingWaterHitEffect:
 	createsprite gSmallDriftingBubblesSpriteTemplate, ANIM_ATTACKER, 4, 0, -20
 	return
 
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_EXPLOSION:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 16, RGB(13, 13, 13)
 	waitforvisualfinish
 	playsewithpan SE_M_EXPLOSION, SOUND_PAN_ATTACKER
@@ -1371,6 +2133,19 @@ Move_EXPLOSION:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 16, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 16, RGB(13, 13, 13)
+	waitforvisualfinish
+	playsewithpan SE_M_EXPLOSION, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 4, 0, 8, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_DEF_SIDE, 0, 0, 16, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_DEF_SIDE, 2, 16, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 16, 0, RGB(13, 13, 13)
+	waitforvisualfinish
+	end
+.endif
 @ genanims: RAISE (T-134, vision.md 9.24) approved.
 Move_DEFENSE_CURL:
 	playsewithpan SE_M_TRI_ATTACK, SOUND_PAN_ATTACKER
@@ -1400,8 +2175,22 @@ Move_DETECT:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 11, 0, RGB(12, 15, 19)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_FRUSTRATION:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
@@ -1413,6 +2202,19 @@ Move_FRUSTRATION:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_DRAGON_RAGE, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 3, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 8, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.endif
 @ genanims: FIELD (T-134, vision.md 9.24) approved.
 Move_SAFEGUARD:
 	playsewithpan SE_M_MILK_DRINK, SOUND_PAN_ATTACKER
@@ -1441,8 +2243,22 @@ Move_PAIN_SPLIT:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER | F_PAL_TARGET, 1, 7, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_VICE_GRIP:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
@@ -1454,8 +2270,35 @@ Move_VICE_GRIP:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 10, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_VICEGRIP, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 4, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 10, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 10, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.endif
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_GUILLOTINE:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 10, RGB(24, 23, 21)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 10, 0, RGB(24, 23, 21)
@@ -1468,8 +2311,36 @@ Move_GUILLOTINE:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 2, 16, 0, RGB_BLACK
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 10, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 10, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_VICEGRIP, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 4, 0, 6, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 16, RGB_BLACK
+	waitforvisualfinish
+	delay 10
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 2, 16, 0, RGB_BLACK
+	waitforvisualfinish
+	end
+.endif
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_PAY_DAY:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
@@ -1486,6 +2357,24 @@ Move_PAY_DAY:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 8, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_RAZOR_WIND2, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 4, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 9, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 9, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	delay 4
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 8, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 8, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.endif
 @ genanims: EMERGENT (T-134, vision.md 9.24) approved.
 Move_OUTRAGE:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 3, RGB(6, 15, 13)
@@ -1673,8 +2562,22 @@ Move_MEAN_LOOK:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 12, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
-@ genanims: LEGACY (T-134, vision.md 9.24) approved.
+@ genanims: LEGACY (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_ROCK_THROW:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(26, 26, 26)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	playsewithpan SE_M_ROCK_THROW, SOUND_PAN_TARGET
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 1, 4
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 10, RGB(26, 26, 26)
@@ -1689,8 +2592,38 @@ Move_ROCK_THROW:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 3, 0, RGB(26, 26, 26)
 	waitforvisualfinish
 	end
-@ genanims: LEGACY (T-134, vision.md 9.24) approved.
+.else
+	playsewithpan SE_M_ROCK_THROW, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 1, 4
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 10, RGB(26, 26, 26)
+	waitforvisualfinish
+	delay 5
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 10, 6, RGB(26, 26, 26)
+	waitforvisualfinish
+	delay 5
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 6, 3, RGB(26, 26, 26)
+	waitforvisualfinish
+	delay 5
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 3, 0, RGB(26, 26, 26)
+	waitforvisualfinish
+	end
+.endif
+@ genanims: LEGACY (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_ROCK_SLIDE:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(26, 26, 26)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 0, 7, RGB(26, 26, 26)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 7, 0, RGB(26, 26, 26)
@@ -1711,6 +2644,28 @@ Move_ROCK_SLIDE:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_DEF_SIDE, 0, 4, 0, RGB(26, 26, 26)
 	waitforvisualfinish
 	end
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 0, 7, RGB(26, 26, 26)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 7, 0, RGB(26, 26, 26)
+	waitforvisualfinish
+	delay 6
+	playsewithpan SE_M_ROCK_THROW, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 5, 2
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_DEF_PARTNER, 3, 0, 5, 2
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_DEF_SIDE, 0, 0, 12, RGB(26, 26, 26)
+	waitforvisualfinish
+	delay 5
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_DEF_SIDE, 0, 12, 8, RGB(26, 26, 26)
+	waitforvisualfinish
+	delay 5
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_DEF_SIDE, 0, 8, 4, RGB(26, 26, 26)
+	waitforvisualfinish
+	delay 5
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_DEF_SIDE, 0, 4, 0, RGB(26, 26, 26)
+	waitforvisualfinish
+	end
+.endif
 @ genanims: OPAQUE (T-134, vision.md 9.24) approved.
 Move_THIEF:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(5, 5, 5)
@@ -1824,8 +2779,52 @@ Move_CONVERSION_2:
 	createvisualtask AnimTask_DaemonsBlendToUserType, 10, 2, 13, 0
 	waitforvisualfinish
 	end
-@ genanims: LOGIC (T-134, vision.md 9.24) approved.
+@ genanims: LOGIC (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_ROLLING_KICK:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(12, 15, 19)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(12, 15, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(12, 15, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 6, RGB(12, 15, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 6, 0, RGB(12, 15, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 6, RGB(12, 15, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 6, 0, RGB(12, 15, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 3, RGB(12, 15, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 3, 6, RGB(12, 15, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 6, 9, RGB(12, 15, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 5, 1
+	delay 4
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 9, 0, RGB(12, 15, 19)
+	waitforvisualfinish
+	end
+.else
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(12, 15, 19)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(12, 15, 19)
@@ -1855,8 +2854,23 @@ Move_ROLLING_KICK:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 9, 0, RGB(12, 15, 19)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+.endif
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_HEADBUTT:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
@@ -1868,8 +2882,35 @@ Move_HEADBUTT:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 11, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_HEADBUTT, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 5, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 11, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 11, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.endif
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_HORN_ATTACK:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
@@ -1881,8 +2922,35 @@ Move_HORN_ATTACK:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 11, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_HEADBUTT, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 5, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 11, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 11, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.endif
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_FURY_ATTACK:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	playsewithpan SE_M_HORN_ATTACK, SOUND_PAN_TARGET
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 3, 1
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 8, RGB(24, 23, 21)
@@ -1890,8 +2958,31 @@ Move_FURY_ATTACK:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+.else
+	playsewithpan SE_M_HORN_ATTACK, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 3, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 8, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.endif
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_HORN_DRILL:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 10, RGB(24, 23, 21)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 10, 0, RGB(24, 23, 21)
@@ -1904,8 +2995,36 @@ Move_HORN_DRILL:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 2, 16, 0, RGB_BLACK
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 10, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 10, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_HEADBUTT, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 4, 0, 6, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 16, RGB_BLACK
+	waitforvisualfinish
+	delay 10
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 2, 16, 0, RGB_BLACK
+	waitforvisualfinish
+	end
+.endif
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_THRASH:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
@@ -1923,6 +3042,25 @@ Move_THRASH:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 13, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 4, 0, 6, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 13, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 13, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 4, 0, 6, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 13, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 13, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.endif
 @ genanims: AFFLICT (T-134, vision.md 9.24) approved.
 Move_SING:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
@@ -1940,8 +3078,41 @@ Move_SING:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 2, 12, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
-@ genanims: LOGIC (T-134, vision.md 9.24) approved.
+@ genanims: LOGIC (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_LOW_KICK:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(12, 15, 19)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(12, 15, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(12, 15, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 4, RGB(12, 15, 19)
+	waitforvisualfinish
+	delay 2
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 4, 8, RGB(12, 15, 19)
+	waitforvisualfinish
+	delay 2
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 3, 1
+	delay 4
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(12, 15, 19)
+	waitforvisualfinish
+	end
+.else
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(12, 15, 19)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(12, 15, 19)
@@ -1960,8 +3131,23 @@ Move_LOW_KICK:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(12, 15, 19)
 	waitforvisualfinish
 	end
-@ genanims: STRATUM (T-134, vision.md 9.24) approved.
+.endif
+@ genanims: STRATUM (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_EARTHQUAKE:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(19, 15, 9)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(19, 15, 9)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(19, 15, 9)
@@ -1978,8 +3164,40 @@ Move_EARTHQUAKE:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 8, 0, RGB(19, 15, 9)
 	waitforvisualfinish
 	end
-@ genanims: STRATUM (T-134, vision.md 9.24) approved.
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(19, 15, 9)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(19, 15, 9)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 0, 8, RGB(19, 15, 9)
+	waitforvisualfinish
+	playsewithpan SE_M_EARTHQUAKE, SOUND_PAN_TARGET
+	createvisualtask AnimTask_HorizontalShake, 5, (MAX_BATTLERS_COUNT + 1), 7, 20
+	createvisualtask AnimTask_HorizontalShake, 5, MAX_BATTLERS_COUNT, 7, 20
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BATTLERS, 0, 0, 13, RGB(19, 15, 9)
+	waitforvisualfinish
+	delay 6
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BATTLERS, 1, 13, 0, RGB(19, 15, 9)
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 8, 0, RGB(19, 15, 9)
+	waitforvisualfinish
+	end
+.endif
+@ genanims: STRATUM (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_FISSURE:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(19, 15, 9)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 10, RGB(19, 15, 9)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 10, 0, RGB(19, 15, 9)
@@ -1994,8 +3212,38 @@ Move_FISSURE:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 2, 14, 0, RGB_BLACK
 	waitforvisualfinish
 	end
-@ genanims: STRATUM (T-134, vision.md 9.24) approved.
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 10, RGB(19, 15, 9)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 10, 0, RGB(19, 15, 9)
+	waitforvisualfinish
+	playsewithpan SE_M_EARTHQUAKE, SOUND_PAN_TARGET
+	createvisualtask AnimTask_HorizontalShake, 5, (MAX_BATTLERS_COUNT + 1), 5, 16
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 0, 14, RGB_BLACK
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 0, 16, RGB_BLACK
+	waitforvisualfinish
+	delay 12
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 2, 16, 0, RGB_BLACK
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 2, 14, 0, RGB_BLACK
+	waitforvisualfinish
+	end
+.endif
+@ genanims: STRATUM (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_DIG:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(19, 15, 9)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	choosetwoturnanim DaemonsExcavateUnder, DaemonsExcavateUp
 DaemonsExcavateDone:
 	end
@@ -2023,6 +3271,35 @@ DaemonsExcavateUp:
 	waitforvisualfinish
 	goto DaemonsExcavateDone
 	end
+.else
+	choosetwoturnanim DaemonsExcavateUnder, DaemonsExcavateUp
+DaemonsExcavateDone:
+	end
+DaemonsExcavateUnder:
+	playsewithpan SE_M_MEGA_KICK2, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_ATTACKER, 0, 2, 6, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 12, RGB(19, 15, 9)
+	waitforvisualfinish
+	invisible ANIM_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 12, 0, RGB(19, 15, 9)
+	waitforvisualfinish
+	goto DaemonsExcavateDone
+DaemonsExcavateUp:
+	visible ANIM_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 0, 5, RGB(19, 15, 9)
+	waitforvisualfinish
+	playsewithpan SE_M_MEGA_KICK2, SOUND_PAN_TARGET
+	createvisualtask AnimTask_HorizontalShake, 5, (MAX_BATTLERS_COUNT + 1), 2, 8
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 0, 5, 5, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 11, RGB(19, 15, 9)
+	waitforvisualfinish
+	delay 2
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 11, 0, RGB(19, 15, 9)
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 5, 0, RGB(19, 15, 9)
+	waitforvisualfinish
+	goto DaemonsExcavateDone
+	end
+.endif
 @ genanims: RAISE (T-134, vision.md 9.24) approved.
 Move_MEDITATE:
 	playsewithpan SE_M_HEADBUTT, SOUND_PAN_ATTACKER
@@ -2050,8 +3327,22 @@ Move_AGILITY:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(22, 10, 19)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_QUICK_ATTACK:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	playsewithpan SE_M_JUMP_KICK, SOUND_PAN_TARGET
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 4, 1
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 9, RGB(24, 23, 21)
@@ -2059,8 +3350,31 @@ Move_QUICK_ATTACK:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 9, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+.else
+	playsewithpan SE_M_JUMP_KICK, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 4, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 9, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 9, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.endif
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_RAGE:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
@@ -2078,6 +3392,25 @@ Move_RAGE:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_SWAGGER2, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 3, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 8, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_SWAGGER2, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 3, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 8, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.endif
 @ genanims: FIELD (T-134, vision.md 9.24) approved.
 Move_TELEPORT:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 12, RGB(13, 13, 13)
@@ -2155,8 +3488,22 @@ Move_METRONOME:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_SKULL_BASH:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	choosetwoturnanim DaemonsSkullBashLoad, DaemonsSkullBashRun
 DaemonsSkullBashDone:
 	end
@@ -2180,6 +3527,31 @@ DaemonsSkullBashRun:
 	waitforvisualfinish
 	goto DaemonsSkullBashDone
 	end
+.else
+	choosetwoturnanim DaemonsSkullBashLoad, DaemonsSkullBashRun
+DaemonsSkullBashDone:
+	end
+DaemonsSkullBashLoad:
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 0, 10, RGB(24, 23, 21)
+	waitforvisualfinish
+	delay 12
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 10, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	goto DaemonsSkullBashDone
+DaemonsSkullBashRun:
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 10, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 10, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_TAKE_DOWN, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 4, 0, 6, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 13, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 13, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	goto DaemonsSkullBashDone
+	end
+.endif
 @ genanims: RAISE (T-134, vision.md 9.24) approved.
 Move_AMNESIA:
 	playsewithpan SE_M_METRONOME, SOUND_PAN_ATTACKER
@@ -2236,8 +3608,22 @@ Move_GLARE:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 10, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_BARRAGE:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	playsewithpan SE_M_SWAGGER, SOUND_PAN_TARGET
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 3, 1
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 8, RGB(24, 23, 21)
@@ -2245,8 +3631,31 @@ Move_BARRAGE:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
-@ genanims: VECTOR (T-134, vision.md 9.24) approved.
+.else
+	playsewithpan SE_M_SWAGGER, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 3, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 8, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.endif
+@ genanims: VECTOR (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_SKY_ATTACK:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(25, 8, 8)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 4, 3, 0
+	delay 2
 	choosetwoturnanim DaemonsBallisticAim, DaemonsBallisticFire
 DaemonsBallisticDone:
 	end
@@ -2273,6 +3682,34 @@ DaemonsBallisticFire:
 	waitforvisualfinish
 	goto DaemonsBallisticDone
 	end
+.else
+	choosetwoturnanim DaemonsBallisticAim, DaemonsBallisticFire
+DaemonsBallisticDone:
+	end
+DaemonsBallisticAim:
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 0, 12, RGB(25, 8, 8)
+	waitforvisualfinish
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_ATTACKER, 1, 0, 6, 2
+	delay 16
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 12, 0, RGB(25, 8, 8)
+	waitforvisualfinish
+	goto DaemonsBallisticDone
+DaemonsBallisticFire:
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 8, RGB(25, 8, 8)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 8, 0, RGB(25, 8, 8)
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 0, 5, RGB(25, 8, 8)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 5, 0, RGB(25, 8, 8)
+	playsewithpan SE_M_STAT_INCREASE, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 5, 0, 7, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 14, RGB(25, 8, 8)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 14, 0, RGB(25, 8, 8)
+	waitforvisualfinish
+	goto DaemonsBallisticDone
+	end
+.endif
 @ genanims: LOWER (T-134, vision.md 9.24) approved.
 Move_FLASH:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
@@ -2319,8 +3756,22 @@ Move_SHARPEN:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 6, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_SUPER_FANG:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
@@ -2332,8 +3783,35 @@ Move_SUPER_FANG:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 8, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_DRAGON_RAGE, SOUND_PAN_TARGET
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 8, RGB(13, 13, 13)
+	waitforvisualfinish
+	delay 12
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 8, 0, RGB(13, 13, 13)
+	waitforvisualfinish
+	end
+.endif
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_SLASH:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
@@ -2349,8 +3827,39 @@ Move_SLASH:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 11, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_RAZOR_WIND, SOUND_PAN_TARGET
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 11, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 11, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_RAZOR_WIND, SOUND_PAN_TARGET
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 11, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 11, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.endif
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_STRUGGLE:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
@@ -2367,6 +3876,24 @@ Move_STRUGGLE:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 8, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_HEADBUTT, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 4, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 10, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 10, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	delay 4
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 8, RGB(13, 13, 13)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 8, 0, RGB(13, 13, 13)
+	waitforvisualfinish
+	end
+.endif
 @ genanims: COPY (T-134, vision.md 9.24) approved.
 Move_SKETCH:
 	playsewithpan SE_M_TAIL_WHIP, SOUND_PAN_TARGET
@@ -2407,8 +3934,22 @@ Move_NIGHTMARE:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 8, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_FLAIL:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
@@ -2420,6 +3961,19 @@ Move_FLAIL:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_HEADBUTT, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 3, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 8, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.endif
 @ genanims: FIELD (T-134, vision.md 9.24) approved.
 Move_SPITE:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(11, 8, 14)
@@ -2440,8 +3994,35 @@ Move_SPITE:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 12, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
-@ genanims: LOGIC (T-134, vision.md 9.24) approved.
+@ genanims: LOGIC (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_MACH_PUNCH:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(12, 15, 19)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 4, RGB(12, 15, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 4, 8, RGB(12, 15, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 4, 1
+	delay 4
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(12, 15, 19)
+	waitforvisualfinish
+	end
+.else
 	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 4, RGB(12, 15, 19)
 	waitforvisualfinish
@@ -2454,6 +4035,7 @@ Move_MACH_PUNCH:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(12, 15, 19)
 	waitforvisualfinish
 	end
+.endif
 @ genanims: FIELD (T-134, vision.md 9.24) approved.
 Move_FORESIGHT:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
@@ -2522,8 +4104,22 @@ Move_CHARM:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 10, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
-@ genanims: LEGACY (T-134, vision.md 9.24) approved.
+@ genanims: LEGACY (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_ROLLOUT:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(26, 26, 26)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_GetRolloutCounter, 5, 0
 	jumpargeq 0, 1, DaemonsRotate1
 	jumpargeq 0, 2, DaemonsRotate2
@@ -2628,8 +4224,128 @@ DaemonsRotate4:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 4, 0, RGB(26, 26, 26)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+.else
+	createvisualtask AnimTask_GetRolloutCounter, 5, 0
+	jumpargeq 0, 1, DaemonsRotate1
+	jumpargeq 0, 2, DaemonsRotate2
+	jumpargeq 0, 3, DaemonsRotate3
+	jumpargeq 0, 4, DaemonsRotate4
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 0, 7, RGB(26, 26, 26)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 7, 0, RGB(26, 26, 26)
+	waitforvisualfinish
+	delay 6
+	playsewithpan SE_M_MEGA_KICK2, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 1, 0, 4, 2
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 6, RGB(26, 26, 26)
+	waitforvisualfinish
+	delay 5
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 6, 4, RGB(26, 26, 26)
+	waitforvisualfinish
+	delay 5
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 4, 2, RGB(26, 26, 26)
+	waitforvisualfinish
+	delay 5
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 2, 0, RGB(26, 26, 26)
+	waitforvisualfinish
+	end
+DaemonsRotate1:
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 0, 7, RGB(26, 26, 26)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 7, 0, RGB(26, 26, 26)
+	waitforvisualfinish
+	delay 6
+	playsewithpan SE_M_MEGA_KICK2, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 4, 2
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 8, RGB(26, 26, 26)
+	waitforvisualfinish
+	delay 5
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 5, RGB(26, 26, 26)
+	waitforvisualfinish
+	delay 5
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 5, 2, RGB(26, 26, 26)
+	waitforvisualfinish
+	delay 5
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 2, 0, RGB(26, 26, 26)
+	waitforvisualfinish
+	end
+DaemonsRotate2:
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 0, 7, RGB(26, 26, 26)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 7, 0, RGB(26, 26, 26)
+	waitforvisualfinish
+	delay 6
+	playsewithpan SE_M_MEGA_KICK2, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 4, 2
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 10, RGB(26, 26, 26)
+	waitforvisualfinish
+	delay 5
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 10, 6, RGB(26, 26, 26)
+	waitforvisualfinish
+	delay 5
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 6, 3, RGB(26, 26, 26)
+	waitforvisualfinish
+	delay 5
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 3, 0, RGB(26, 26, 26)
+	waitforvisualfinish
+	end
+DaemonsRotate3:
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 0, 7, RGB(26, 26, 26)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 7, 0, RGB(26, 26, 26)
+	waitforvisualfinish
+	delay 6
+	playsewithpan SE_M_MEGA_KICK2, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 4, 0, 4, 2
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 12, RGB(26, 26, 26)
+	waitforvisualfinish
+	delay 5
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 12, 8, RGB(26, 26, 26)
+	waitforvisualfinish
+	delay 5
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 4, RGB(26, 26, 26)
+	waitforvisualfinish
+	delay 5
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 4, 0, RGB(26, 26, 26)
+	waitforvisualfinish
+	end
+DaemonsRotate4:
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 0, 7, RGB(26, 26, 26)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 7, 0, RGB(26, 26, 26)
+	waitforvisualfinish
+	delay 6
+	playsewithpan SE_M_MEGA_KICK2, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 5, 0, 4, 2
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 14, RGB(26, 26, 26)
+	waitforvisualfinish
+	delay 5
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 14, 9, RGB(26, 26, 26)
+	waitforvisualfinish
+	delay 5
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 9, 4, RGB(26, 26, 26)
+	waitforvisualfinish
+	delay 5
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 4, 0, RGB(26, 26, 26)
+	waitforvisualfinish
+	end
+.endif
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_FALSE_SWIPE:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
@@ -2641,6 +4357,19 @@ Move_FALSE_SWIPE:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_VITAL_THROW, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 3, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 8, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.endif
 @ genanims: AFFLICT (T-134, vision.md 9.24) approved.
 Move_SWAGGER:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
@@ -2693,8 +4422,22 @@ Move_MILK_DRINK:
 	clearmonbg ANIM_ATTACKER
 	end
 
-@ genanims: STRATUM (T-134, vision.md 9.24) approved.
+@ genanims: STRATUM (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_MAGNITUDE:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(19, 15, 9)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(19, 15, 9)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(19, 15, 9)
@@ -2711,8 +4454,40 @@ Move_MAGNITUDE:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 8, 0, RGB(19, 15, 9)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(19, 15, 9)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(19, 15, 9)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 0, 8, RGB(19, 15, 9)
+	waitforvisualfinish
+	playsewithpan SE_M_STRENGTH, SOUND_PAN_TARGET
+	createvisualtask AnimTask_HorizontalShake, 5, (MAX_BATTLERS_COUNT + 1), 6, 20
+	createvisualtask AnimTask_HorizontalShake, 5, MAX_BATTLERS_COUNT, 6, 20
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BATTLERS, 0, 0, 11, RGB(19, 15, 9)
+	waitforvisualfinish
+	delay 6
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BATTLERS, 1, 11, 0, RGB(19, 15, 9)
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 8, 0, RGB(19, 15, 9)
+	waitforvisualfinish
+	end
+.endif
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_RAPID_SPIN:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 7, RGB(24, 23, 21)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 7, 0, RGB(24, 23, 21)
@@ -2732,6 +4507,27 @@ Move_RAPID_SPIN:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 7, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 7, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 7, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 7, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 7, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 7, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_RAZOR_WIND2, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 3, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 8, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.endif
 @ DAEMONS -- NIGHT REPAIR -- maintenance run while the field is dark: the ground dims to black (neutral, not colour),
 @ the repair happens in two quiet steps, and the light comes back. No moon, no sparkles.
 @ T-139, approved 2026-09-17 under vision.md 9.24.
@@ -2755,8 +4551,22 @@ Move_MOONLIGHT:
 	clearmonbg ANIM_ATTACKER
 	end
 
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_EXTREME_SPEED:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	playsewithpan SE_M_RAZOR_WIND2, SOUND_PAN_TARGET
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 4, 0, 5, 1
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 12, RGB(24, 23, 21)
@@ -2770,8 +4580,37 @@ Move_EXTREME_SPEED:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 12, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+.else
+	playsewithpan SE_M_RAZOR_WIND2, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 4, 0, 5, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 12, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 12, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_RAZOR_WIND2, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 4, 0, 5, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 12, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 12, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.endif
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_UPROAR:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	playsewithpan SE_M_UPROAR, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_DEF_SIDE, 0, 0, 8, RGB(24, 23, 21)
 	waitforvisualfinish
@@ -2785,8 +4624,37 @@ Move_UPROAR:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_DEF_SIDE, 0, 8, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
-@ genanims: ENTROPY (T-134, vision.md 9.24) approved.
+.else
+	playsewithpan SE_M_UPROAR, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_DEF_SIDE, 0, 0, 8, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 3, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_DEF_SIDE, 0, 8, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_UPROAR, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_DEF_SIDE, 0, 0, 8, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 3, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_DEF_SIDE, 0, 8, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.endif
+@ genanims: ENTROPY (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_HEAT_WAVE:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(27, 19, 5)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(27, 19, 5)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(27, 19, 5)
@@ -2826,6 +4694,47 @@ Move_HEAT_WAVE:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_DEF_SIDE, 1, 6, 0, RGB(27, 19, 5)
 	waitforvisualfinish
 	end
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(27, 19, 5)
+	waitforvisualfinish
+	playsewithpan SE_M_HEAT_WAVE, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 9, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_DEF_SIDE, 0, 0, 13, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_DEF_SIDE, 0, 13, 3, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_DEF_SIDE, 0, 3, 10, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_DEF_SIDE, 0, 10, 1, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_DEF_SIDE, 0, 1, 7, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_DEF_SIDE, 0, 7, 4, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_DEF_SIDE, 0, 4, 11, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_DEF_SIDE, 0, 11, 2, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_DEF_SIDE, 0, 2, 6, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 0, 6, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 6, 2, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 2, 5, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 5, 1, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 1, 4, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 4, 0, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_DEF_SIDE, 1, 6, 0, RGB(27, 19, 5)
+	waitforvisualfinish
+	end
+.endif
 @ Also used by Hail weather
 @ genanims: FIELD (T-134, vision.md 9.24) approved.
 Move_HAIL:
@@ -2866,8 +4775,22 @@ Move_MEMENTO:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 16, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_FACADE:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
@@ -2879,8 +4802,35 @@ Move_FACADE:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 11, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_SWAGGER, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 5, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 11, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 11, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.endif
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_SMELLING_SALT:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
@@ -2892,6 +4842,19 @@ Move_SMELLING_SALT:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 11, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_DOUBLE_SLAP, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 5, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 11, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 11, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.endif
 @ genanims: PROTECT (T-134, vision.md 9.24) approved.
 Move_FOLLOW_ME:
 	playsewithpan SE_M_TAIL_WHIP, SOUND_PAN_ATTACKER
@@ -2970,8 +4933,59 @@ Move_ASSIST:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATK_SIDE, 0, 0, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
-@ genanims: LOGIC (T-134, vision.md 9.24) approved.
+@ genanims: LOGIC (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_SUPERPOWER:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(12, 15, 19)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(12, 15, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(12, 15, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 3, RGB(12, 15, 19)
+	waitforvisualfinish
+	delay 2
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 3, 6, RGB(12, 15, 19)
+	waitforvisualfinish
+	delay 2
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 6, 9, RGB(12, 15, 19)
+	waitforvisualfinish
+	delay 2
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 9, 12, RGB(12, 15, 19)
+	waitforvisualfinish
+	delay 2
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 5, 0, 7, 1
+	delay 4
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 12, 0, RGB(12, 15, 19)
+	waitforvisualfinish
+	delay 4
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 8, RGB(13, 13, 13)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 8, 0, RGB(13, 13, 13)
+	waitforvisualfinish
+	delay 4
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 8, RGB(13, 13, 13)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 8, 0, RGB(13, 13, 13)
+	waitforvisualfinish
+	end
+.else
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(12, 15, 19)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(12, 15, 19)
@@ -3008,6 +5022,7 @@ Move_SUPERPOWER:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 8, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
+.endif
 @ genanims: COPY (T-134, vision.md 9.24) approved.
 Move_RECYCLE:
 	playsewithpan SE_M_TAKE_DOWN, SOUND_PAN_ATTACKER
@@ -3028,8 +5043,80 @@ Move_RECYCLE:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 9, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
-@ genanims: LOGIC (T-134, vision.md 9.24) approved.
+@ genanims: LOGIC (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_BRICK_BREAK:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(12, 15, 19)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
+	choosetwoturnanim DaemonsFalsifyPlain, DaemonsFalsifyScreen
+DaemonsFalsifyDone:
+	end
+DaemonsFalsifyPlain:
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(12, 15, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(12, 15, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 4, RGB(12, 15, 19)
+	waitforvisualfinish
+	delay 2
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 4, 8, RGB(12, 15, 19)
+	waitforvisualfinish
+	delay 2
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 12, RGB(12, 15, 19)
+	waitforvisualfinish
+	delay 2
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 5, 1
+	delay 4
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 12, 0, RGB(12, 15, 19)
+	waitforvisualfinish
+	goto DaemonsFalsifyDone
+DaemonsFalsifyScreen:
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_DEF_SIDE, 0, 0, 10, RGB(12, 15, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_DEF_SIDE, 0, 0, 12, RGB(13, 13, 13)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_DEF_SIDE, 1, 12, 0, RGB(13, 13, 13)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(12, 15, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(12, 15, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 4, RGB(12, 15, 19)
+	waitforvisualfinish
+	delay 2
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 4, 8, RGB(12, 15, 19)
+	waitforvisualfinish
+	delay 2
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 12, RGB(12, 15, 19)
+	waitforvisualfinish
+	delay 2
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 5, 1
+	delay 4
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 12, 0, RGB(12, 15, 19)
+	waitforvisualfinish
+	goto DaemonsFalsifyDone
+	end
+.else
 	choosetwoturnanim DaemonsFalsifyPlain, DaemonsFalsifyScreen
 DaemonsFalsifyDone:
 	end
@@ -3087,6 +5174,7 @@ DaemonsFalsifyScreen:
 	waitforvisualfinish
 	goto DaemonsFalsifyDone
 	end
+.endif
 @ genanims: AFFLICT (T-134, vision.md 9.24) approved.
 Move_YAWN:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
@@ -3104,8 +5192,22 @@ Move_YAWN:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 2, 7, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_ENDEAVOR:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
@@ -3117,8 +5219,35 @@ Move_ENDEAVOR:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER | F_PAL_TARGET, 1, 8, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
-@ genanims: ENTROPY (T-134, vision.md 9.24) approved.
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_TAIL_WHIP, SOUND_PAN_TARGET
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER | F_PAL_TARGET, 1, 0, 8, RGB(13, 13, 13)
+	waitforvisualfinish
+	delay 12
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER | F_PAL_TARGET, 1, 8, 0, RGB(13, 13, 13)
+	waitforvisualfinish
+	end
+.endif
+@ genanims: ENTROPY (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_ERUPTION:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(27, 19, 5)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(27, 19, 5)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(27, 19, 5)
@@ -3158,6 +5287,47 @@ Move_ERUPTION:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_DEF_SIDE, 1, 7, 0, RGB(27, 19, 5)
 	waitforvisualfinish
 	end
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(27, 19, 5)
+	waitforvisualfinish
+	playsewithpan SE_M_EXPLOSION, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 4, 0, 10, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_DEF_SIDE, 0, 0, 14, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_DEF_SIDE, 0, 14, 4, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_DEF_SIDE, 0, 4, 11, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_DEF_SIDE, 0, 11, 2, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_DEF_SIDE, 0, 2, 8, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_DEF_SIDE, 0, 8, 4, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_DEF_SIDE, 0, 4, 12, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_DEF_SIDE, 0, 12, 2, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_DEF_SIDE, 0, 2, 7, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_ATK_SIDE, 0, 0, 6, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_ATK_SIDE, 0, 6, 2, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_ATK_SIDE, 0, 2, 5, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_ATK_SIDE, 0, 5, 1, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_ATK_SIDE, 0, 1, 4, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_ATK_SIDE, 0, 4, 0, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_DEF_SIDE, 1, 7, 0, RGB(27, 19, 5)
+	waitforvisualfinish
+	end
+.endif
 @ genanims: COPY (T-134, vision.md 9.24) approved.
 Move_SKILL_SWAP:
 	playsewithpan SE_M_REVERSAL, SOUND_PAN_ATTACKER
@@ -3234,8 +5404,22 @@ Move_TAIL_GLOW:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 12, 0, RGB(16, 18, 9)
 	waitforvisualfinish
 	end
-@ genanims: CONTEXT (T-134, vision.md 9.24) approved.
+@ genanims: CONTEXT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_LUSTER_PURGE:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(22, 10, 19)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(22, 10, 19)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(22, 10, 19)
@@ -3252,8 +5436,57 @@ Move_LUSTER_PURGE:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 9, 0, RGB(22, 10, 19)
 	waitforvisualfinish
 	end
-@ genanims: CONTEXT (T-134, vision.md 9.24) approved.
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(22, 10, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(22, 10, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 0, 9, RGB(22, 10, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_SOLAR_BEAM, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 5, 2
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 0, 11, RGB(22, 10, 19)
+	waitforvisualfinish
+	delay 8
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 11, 0, RGB(22, 10, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 9, 0, RGB(22, 10, 19)
+	waitforvisualfinish
+	end
+.endif
+@ genanims: CONTEXT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_MIST_BALL:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(22, 10, 19)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 4, 3, 0
+	delay 2
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(22, 10, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(22, 10, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 0, 9, RGB(22, 10, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_STRING_SHOT, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 6, 2
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 0, 13, RGB(22, 10, 19)
+	waitforvisualfinish
+	delay 8
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 13, 0, RGB(22, 10, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 9, 0, RGB(22, 10, 19)
+	waitforvisualfinish
+	end
+.else
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(22, 10, 19)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(22, 10, 19)
@@ -3270,6 +5503,7 @@ Move_MIST_BALL:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 9, 0, RGB(22, 10, 19)
 	waitforvisualfinish
 	end
+.endif
 @ genanims: LOWER (T-134, vision.md 9.24) approved.
 Move_FEATHER_DANCE:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(25, 8, 8)
@@ -3366,8 +5600,22 @@ Move_SLACK_OFF:
 	clearmonbg ANIM_ATTACKER
 	end
 
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_CRUSH_CLAW:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
@@ -3379,6 +5627,19 @@ Move_CRUSH_CLAW:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 12, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_RAZOR_WIND, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 5, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 12, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 12, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.endif
 @ DAEMONS -- RETRAIN -- CLEAR STATE for the whole side, in GROWTH: everyone on the user's side goes to its type colour and
 @ comes back at once, twice. No flowers.
 @ T-139, approved 2026-09-17 under vision.md 9.24.
@@ -3417,8 +5678,22 @@ Move_FAKE_TEARS:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 10, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
-@ genanims: VECTOR (T-134, vision.md 9.24) approved.
+@ genanims: VECTOR (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_AIR_CUTTER:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(25, 8, 8)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 8, RGB(25, 8, 8)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 8, 0, RGB(25, 8, 8)
@@ -3432,6 +5707,21 @@ Move_AIR_CUTTER:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_DEF_SIDE, 0, 10, 0, RGB(25, 8, 8)
 	waitforvisualfinish
 	end
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 8, RGB(25, 8, 8)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 8, 0, RGB(25, 8, 8)
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 0, 5, RGB(25, 8, 8)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 5, 0, RGB(25, 8, 8)
+	playsewithpan SE_M_CUT, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 4, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_DEF_SIDE, 0, 0, 10, RGB(25, 8, 8)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_DEF_SIDE, 0, 10, 0, RGB(25, 8, 8)
+	waitforvisualfinish
+	end
+.endif
 @ genanims: FIELD (T-134, vision.md 9.24) approved.
 Move_ODOR_SLEUTH:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
@@ -3511,8 +5801,22 @@ Move_WATER_SPOUT:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 3, 6, 0, RGB(8, 13, 22)
 	waitforvisualfinish
 	end
-@ genanims: LATENT (T-134, vision.md 9.24) approved.
+@ genanims: LATENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_SHADOW_PUNCH:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(11, 8, 14)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 2, 0, 3, RGB(11, 8, 14)
 	waitforvisualfinish
 	playsewithpan SE_M_JUMP_KICK, SOUND_PAN_TARGET
@@ -3522,8 +5826,33 @@ Move_SHADOW_PUNCH:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 11, 0, RGB(11, 8, 14)
 	waitforvisualfinish
 	end
-@ genanims: CONTEXT (T-134, vision.md 9.24) approved.
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 2, 0, 3, RGB(11, 8, 14)
+	waitforvisualfinish
+	playsewithpan SE_M_JUMP_KICK, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 5, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 3, 11, RGB(11, 8, 14)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 11, 0, RGB(11, 8, 14)
+	waitforvisualfinish
+	end
+.endif
+@ genanims: CONTEXT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_EXTRASENSORY:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(22, 10, 19)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(22, 10, 19)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(22, 10, 19)
@@ -3540,8 +5869,40 @@ Move_EXTRASENSORY:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 9, 0, RGB(22, 10, 19)
 	waitforvisualfinish
 	end
-@ genanims: VECTOR (T-134, vision.md 9.24) approved.
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(22, 10, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(22, 10, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 0, 9, RGB(22, 10, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_BIND, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 5, 2
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 0, 12, RGB(22, 10, 19)
+	waitforvisualfinish
+	delay 8
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 12, 0, RGB(22, 10, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 9, 0, RGB(22, 10, 19)
+	waitforvisualfinish
+	end
+.endif
+@ genanims: VECTOR (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_AERIAL_ACE:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(25, 8, 8)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 8, RGB(25, 8, 8)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 8, 0, RGB(25, 8, 8)
@@ -3555,6 +5916,21 @@ Move_AERIAL_ACE:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 11, 0, RGB(25, 8, 8)
 	waitforvisualfinish
 	end
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 8, RGB(25, 8, 8)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 8, 0, RGB(25, 8, 8)
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 0, 5, RGB(25, 8, 8)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 5, 0, RGB(25, 8, 8)
+	playsewithpan SE_M_RAZOR_WIND2, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 5, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 11, RGB(25, 8, 8)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 11, 0, RGB(25, 8, 8)
+	waitforvisualfinish
+	end
+.endif
 @ genanims: RAISE (T-134, vision.md 9.24) approved.
 Move_IRON_DEFENSE:
 	playsewithpan SE_SHINY, SOUND_PAN_ATTACKER
@@ -3612,8 +5988,22 @@ Move_BULK_UP:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 6, 0, RGB(12, 15, 19)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_COVET:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
@@ -3630,6 +6020,24 @@ Move_COVET:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 8, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_CHARM, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 4, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 9, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 9, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	delay 4
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 8, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 8, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.endif
 @ genanims: SIGNAL (T-134, vision.md 9.24) approved.
 Move_VOLT_TACKLE:
 	playsewithpan SE_M_CHARGE, SOUND_PAN_TARGET
@@ -3836,8 +6244,22 @@ Move_REST:
 	clearmonbg ANIM_ATTACKER
 	end
 
-@ genanims: CONTEXT (T-134, vision.md 9.24) approved.
+@ genanims: CONTEXT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_CONFUSION:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(22, 10, 19)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(22, 10, 19)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(22, 10, 19)
@@ -3873,8 +6295,59 @@ Move_CONFUSION:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 9, 0, RGB(22, 10, 19)
 	waitforvisualfinish
 	end
-@ genanims: CONTEXT (T-134, vision.md 9.24) approved.
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(22, 10, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(22, 10, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 0, 9, RGB(22, 10, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_SUPERSONIC, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 4, 2
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 10, RGB(22, 10, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 10, 0, RGB(22, 10, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 5, RGB(13, 13, 13)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 5, 0, RGB(13, 13, 13)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 10, RGB(22, 10, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 10, 0, RGB(22, 10, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 5, RGB(13, 13, 13)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 5, 0, RGB(13, 13, 13)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 10, RGB(22, 10, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 10, 0, RGB(22, 10, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 5, RGB(13, 13, 13)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 5, 0, RGB(13, 13, 13)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 9, 0, RGB(22, 10, 19)
+	waitforvisualfinish
+	end
+.endif
+@ genanims: CONTEXT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_PSYCHIC:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(22, 10, 19)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(22, 10, 19)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(22, 10, 19)
@@ -3891,8 +6364,40 @@ Move_PSYCHIC:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 9, 0, RGB(22, 10, 19)
 	waitforvisualfinish
 	end
-@ genanims: CONTEXT (T-134, vision.md 9.24) approved.
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(22, 10, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(22, 10, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 0, 9, RGB(22, 10, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_SUPERSONIC, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 6, 2
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 0, 13, RGB(22, 10, 19)
+	waitforvisualfinish
+	delay 8
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 13, 0, RGB(22, 10, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 9, 0, RGB(22, 10, 19)
+	waitforvisualfinish
+	end
+.endif
+@ genanims: CONTEXT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_FUTURE_SIGHT:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(22, 10, 19)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(22, 10, 19)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(22, 10, 19)
@@ -3909,6 +6414,24 @@ Move_FUTURE_SIGHT:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 9, 0, RGB(22, 10, 19)
 	waitforvisualfinish
 	end
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(22, 10, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(22, 10, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 0, 9, RGB(22, 10, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_PSYBEAM, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 5, 2
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 0, 5, RGB(22, 10, 19)
+	waitforvisualfinish
+	delay 16
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 2, 5, 0, RGB(22, 10, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 9, 0, RGB(22, 10, 19)
+	waitforvisualfinish
+	end
+.endif
 @ genanims: SIGNAL (T-134, vision.md 9.24) approved.
 Move_THUNDER:
 	playsewithpan SE_M_THUNDER_WAVE, SOUND_PAN_ATTACKER
@@ -3943,8 +6466,22 @@ Move_THUNDER_PUNCH:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 10, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
-@ genanims: ENTROPY (T-134, vision.md 9.24) approved.
+@ genanims: ENTROPY (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_SACRED_FIRE:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(27, 19, 5)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(27, 19, 5)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(27, 19, 5)
@@ -3972,8 +6509,51 @@ Move_SACRED_FIRE:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 3, 6, 0, RGB(27, 19, 5)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(27, 19, 5)
+	waitforvisualfinish
+	playsewithpan SE_M_SACRED_FIRE, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 9, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 13, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 13, 3, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 3, 10, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 10, 1, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 1, 7, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 7, 4, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 4, 11, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 11, 2, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 2, 6, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 3, 6, 0, RGB(27, 19, 5)
+	waitforvisualfinish
+	end
+.endif
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_SCRATCH:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
@@ -3985,6 +6565,19 @@ Move_SCRATCH:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 9, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_SCRATCH, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 4, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 9, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 9, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.endif
 @ genanims: EMERGENT (T-134, vision.md 9.24) approved.
 Move_DRAGON_BREATH:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 3, RGB(6, 15, 13)
@@ -4054,8 +6647,22 @@ Move_GROWL:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 5, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_SNORE:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	playsewithpan SE_M_SNORE, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_DEF_SIDE, 0, 0, 8, RGB(24, 23, 21)
 	waitforvisualfinish
@@ -4069,6 +6676,21 @@ Move_SNORE:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_DEF_SIDE, 0, 8, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
+.else
+	playsewithpan SE_M_SNORE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_DEF_SIDE, 0, 0, 8, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 3, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_DEF_SIDE, 0, 8, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_SNORE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_DEF_SIDE, 0, 0, 8, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 3, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_DEF_SIDE, 0, 8, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.endif
 @ genanims: FIELD (T-134, vision.md 9.24) approved.
 Move_LIGHT_SCREEN:
 	playsewithpan SE_M_REFLECT, SOUND_PAN_ATTACKER
@@ -4097,8 +6719,22 @@ SpecialScreenSparkle:
 	createsprite gSpecialScreenSparkleSpriteTemplate, ANIM_ATTACKER, 2, 10, 18, ANIM_ATTACKER, TRUE
 	return
 
-@ genanims: CONTEXT (T-134, vision.md 9.24) approved.
+@ genanims: CONTEXT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_MIRROR_COAT:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(22, 10, 19)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(22, 10, 19)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(22, 10, 19)
@@ -4119,6 +6755,28 @@ Move_MIRROR_COAT:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 9, 0, RGB(22, 10, 19)
 	waitforvisualfinish
 	end
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(22, 10, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(22, 10, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 0, 9, RGB(22, 10, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_REFLECT, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 1, 0, 3, 2
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 4, RGB(22, 10, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 4, 0, RGB(22, 10, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 16, RGB(22, 10, 19)
+	waitforvisualfinish
+	delay 8
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 16, 0, RGB(22, 10, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 9, 0, RGB(22, 10, 19)
+	waitforvisualfinish
+	end
+.endif
 @ genanims: FIELD (T-134, vision.md 9.24) approved.
 Move_REFLECT:
 	playsewithpan SE_M_REFLECT, SOUND_PAN_ATTACKER
@@ -4228,8 +6886,22 @@ Move_SAND_ATTACK:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET | F_PAL_BG, 1, 5, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
-@ genanims: STRATUM (T-134, vision.md 9.24) approved.
+@ genanims: STRATUM (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_MUD_SLAP:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(19, 15, 9)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 0, 5, RGB(19, 15, 9)
 	waitforvisualfinish
 	playsewithpan SE_M_SAND_ATTACK, SOUND_PAN_TARGET
@@ -4247,6 +6919,25 @@ Move_MUD_SLAP:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 7, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 0, 5, RGB(19, 15, 9)
+	waitforvisualfinish
+	playsewithpan SE_M_SAND_ATTACK, SOUND_PAN_TARGET
+	createvisualtask AnimTask_HorizontalShake, 5, (MAX_BATTLERS_COUNT + 1), 2, 8
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 0, 2, 3, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 8, RGB(19, 15, 9)
+	waitforvisualfinish
+	delay 2
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 8, 0, RGB(19, 15, 9)
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 5, 0, RGB(19, 15, 9)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 7, RGB(13, 13, 13)
+	waitforvisualfinish
+	delay 6
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 7, 0, RGB(13, 13, 13)
+	waitforvisualfinish
+	end
+.endif
 @ genanims: EMERGENT (T-134, vision.md 9.24) approved.
 Move_DRAGON_RAGE:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 3, RGB(6, 15, 13)
@@ -4748,8 +7439,22 @@ Move_ACID:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 7, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
-@ genanims: STRATUM (T-134, vision.md 9.24) approved.
+@ genanims: STRATUM (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_BONEMERANG:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(19, 15, 9)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 0, 5, RGB(19, 15, 9)
 	waitforvisualfinish
 	playsewithpan SE_M_BONEMERANG, SOUND_PAN_TARGET
@@ -4762,8 +7467,36 @@ Move_BONEMERANG:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 5, 0, RGB(19, 15, 9)
 	waitforvisualfinish
 	end
-@ genanims: STRATUM (T-134, vision.md 9.24) approved.
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 0, 5, RGB(19, 15, 9)
+	waitforvisualfinish
+	playsewithpan SE_M_BONEMERANG, SOUND_PAN_TARGET
+	createvisualtask AnimTask_HorizontalShake, 5, (MAX_BATTLERS_COUNT + 1), 2, 8
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 0, 5, 4, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 10, RGB(19, 15, 9)
+	waitforvisualfinish
+	delay 2
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 10, 0, RGB(19, 15, 9)
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 5, 0, RGB(19, 15, 9)
+	waitforvisualfinish
+	end
+.endif
+@ genanims: STRATUM (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_BONE_CLUB:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(19, 15, 9)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(19, 15, 9)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(19, 15, 9)
@@ -4780,8 +7513,40 @@ Move_BONE_CLUB:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 8, 0, RGB(19, 15, 9)
 	waitforvisualfinish
 	end
-@ genanims: STRATUM (T-134, vision.md 9.24) approved.
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(19, 15, 9)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(19, 15, 9)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 0, 8, RGB(19, 15, 9)
+	waitforvisualfinish
+	playsewithpan SE_M_BONEMERANG, SOUND_PAN_TARGET
+	createvisualtask AnimTask_HorizontalShake, 5, (MAX_BATTLERS_COUNT + 1), 2, 8
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 0, 5, 5, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 11, RGB(19, 15, 9)
+	waitforvisualfinish
+	delay 2
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 11, 0, RGB(19, 15, 9)
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 8, 0, RGB(19, 15, 9)
+	waitforvisualfinish
+	end
+.endif
+@ genanims: STRATUM (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_BONE_RUSH:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(19, 15, 9)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 0, 5, RGB(19, 15, 9)
 	waitforvisualfinish
 	playsewithpan SE_M_BONEMERANG, SOUND_PAN_TARGET
@@ -4794,6 +7559,20 @@ Move_BONE_RUSH:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 5, 0, RGB(19, 15, 9)
 	waitforvisualfinish
 	end
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 0, 5, RGB(19, 15, 9)
+	waitforvisualfinish
+	playsewithpan SE_M_BONEMERANG, SOUND_PAN_TARGET
+	createvisualtask AnimTask_HorizontalShake, 5, (MAX_BATTLERS_COUNT + 1), 2, 8
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 0, 4, 3, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 8, RGB(19, 15, 9)
+	waitforvisualfinish
+	delay 2
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 8, 0, RGB(19, 15, 9)
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 5, 0, RGB(19, 15, 9)
+	waitforvisualfinish
+	end
+.endif
 @ genanims: FIELD (T-134, vision.md 9.24) approved.
 Move_SPIKES:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(19, 15, 9)
@@ -4853,8 +7632,22 @@ Move_MEGAHORN:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 12, 0, RGB(16, 18, 9)
 	waitforvisualfinish
 	end
-@ genanims: VECTOR (T-134, vision.md 9.24) approved.
+@ genanims: VECTOR (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_GUST:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(25, 8, 8)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 8, RGB(25, 8, 8)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 8, 0, RGB(25, 8, 8)
@@ -4868,8 +7661,37 @@ Move_GUST:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 9, 0, RGB(25, 8, 8)
 	waitforvisualfinish
 	end
-@ genanims: VECTOR (T-134, vision.md 9.24) approved.
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 8, RGB(25, 8, 8)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 8, 0, RGB(25, 8, 8)
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 0, 5, RGB(25, 8, 8)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 5, 0, RGB(25, 8, 8)
+	playsewithpan SE_M_GUST, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 4, 0, 6, 2
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 9, RGB(25, 8, 8)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 9, 0, RGB(25, 8, 8)
+	waitforvisualfinish
+	end
+.endif
+@ genanims: VECTOR (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_WING_ATTACK:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(25, 8, 8)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 8, RGB(25, 8, 8)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 8, 0, RGB(25, 8, 8)
@@ -4883,8 +7705,37 @@ Move_WING_ATTACK:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 11, 0, RGB(25, 8, 8)
 	waitforvisualfinish
 	end
-@ genanims: VECTOR (T-134, vision.md 9.24) approved.
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 8, RGB(25, 8, 8)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 8, 0, RGB(25, 8, 8)
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 0, 5, RGB(25, 8, 8)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 5, 0, RGB(25, 8, 8)
+	playsewithpan SE_M_WING_ATTACK, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 5, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 11, RGB(25, 8, 8)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 11, 0, RGB(25, 8, 8)
+	waitforvisualfinish
+	end
+.endif
+@ genanims: VECTOR (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_PECK:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(25, 8, 8)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 0, 5, RGB(25, 8, 8)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 5, 0, RGB(25, 8, 8)
@@ -4895,8 +7746,34 @@ Move_PECK:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 9, 0, RGB(25, 8, 8)
 	waitforvisualfinish
 	end
-@ genanims: VECTOR (T-134, vision.md 9.24) approved.
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 0, 5, RGB(25, 8, 8)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 5, 0, RGB(25, 8, 8)
+	playsewithpan SE_M_HORN_ATTACK, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 4, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 9, RGB(25, 8, 8)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 9, 0, RGB(25, 8, 8)
+	waitforvisualfinish
+	end
+.endif
+@ genanims: VECTOR (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_AEROBLAST:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(25, 8, 8)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 8, RGB(25, 8, 8)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 8, 0, RGB(25, 8, 8)
@@ -4910,6 +7787,21 @@ Move_AEROBLAST:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 13, 0, RGB(25, 8, 8)
 	waitforvisualfinish
 	end
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 8, RGB(25, 8, 8)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 8, 0, RGB(25, 8, 8)
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 0, 5, RGB(25, 8, 8)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 5, 0, RGB(25, 8, 8)
+	playsewithpan SE_M_RAZOR_WIND, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 4, 0, 6, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 13, RGB(25, 8, 8)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 13, 0, RGB(25, 8, 8)
+	waitforvisualfinish
+	end
+.endif
 @ genanims: FLOW (T-134, vision.md 9.24) approved.
 Move_WATER_GUN:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 0, 6, RGB(8, 13, 22)
@@ -4954,8 +7846,22 @@ Move_SURF:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 2, 6, 0, RGB(8, 13, 22)
 	waitforvisualfinish
 	end
-@ genanims: ENTROPY (T-134, vision.md 9.24) approved.
+@ genanims: ENTROPY (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_FLAMETHROWER:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(27, 19, 5)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(27, 19, 5)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(27, 19, 5)
@@ -4995,6 +7901,47 @@ Move_FLAMETHROWER:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 6, 0, RGB(27, 19, 5)
 	waitforvisualfinish
 	end
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(27, 19, 5)
+	waitforvisualfinish
+	playsewithpan SE_M_FLAMETHROWER, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 9, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 13, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 13, 3, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 3, 10, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 10, 1, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 1, 7, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 7, 4, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 4, 11, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 11, 2, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 2, 6, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 0, 6, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 6, 2, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 2, 5, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 5, 1, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 1, 4, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 4, 0, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 6, 0, RGB(27, 19, 5)
+	waitforvisualfinish
+	end
+.endif
 @ Also used by Sandstorm weather
 @ genanims: FIELD (T-134, vision.md 9.24) approved.
 Move_SANDSTORM:
@@ -5042,8 +7989,22 @@ WhirlpoolEffect:
 	delay 2
 	return
 
-@ genanims: VECTOR (T-134, vision.md 9.24) approved.
+@ genanims: VECTOR (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_FLY:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(25, 8, 8)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 4, 3, 0
+	delay 2
 	choosetwoturnanim DaemonsGotoAway, DaemonsGotoBack
 DaemonsGotoDone:
 	end
@@ -5071,8 +8032,51 @@ DaemonsGotoBack:
 	waitforvisualfinish
 	goto DaemonsGotoDone
 	end
-@ genanims: VECTOR (T-134, vision.md 9.24) approved.
+.else
+	choosetwoturnanim DaemonsGotoAway, DaemonsGotoBack
+DaemonsGotoDone:
+	end
+DaemonsGotoAway:
+	playsewithpan SE_M_FLY, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 12, RGB(13, 13, 13)
+	waitforvisualfinish
+	invisible ANIM_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 12, 0, RGB(13, 13, 13)
+	waitforvisualfinish
+	goto DaemonsGotoDone
+DaemonsGotoBack:
+	visible ANIM_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 8, RGB(25, 8, 8)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 8, 0, RGB(25, 8, 8)
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 0, 5, RGB(25, 8, 8)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 5, 0, RGB(25, 8, 8)
+	playsewithpan SE_M_FLY, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 5, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 11, RGB(25, 8, 8)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 11, 0, RGB(25, 8, 8)
+	waitforvisualfinish
+	goto DaemonsGotoDone
+	end
+.endif
+@ genanims: VECTOR (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_BOUNCE:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(25, 8, 8)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 4, 3, 0
+	delay 2
 	choosetwoturnanim DaemonsReboundAway, DaemonsReboundBack
 DaemonsReboundDone:
 	end
@@ -5102,8 +8106,76 @@ DaemonsReboundBack:
 	waitforvisualfinish
 	goto DaemonsReboundDone
 	end
-@ genanims: LOGIC (T-134, vision.md 9.24) approved.
+.else
+	choosetwoturnanim DaemonsReboundAway, DaemonsReboundBack
+DaemonsReboundDone:
+	end
+DaemonsReboundAway:
+	playsewithpan SE_M_TELEPORT, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 12, RGB(13, 13, 13)
+	waitforvisualfinish
+	invisible ANIM_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 12, 0, RGB(13, 13, 13)
+	waitforvisualfinish
+	goto DaemonsReboundDone
+DaemonsReboundBack:
+	visible ANIM_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 8, RGB(25, 8, 8)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 8, 0, RGB(25, 8, 8)
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 0, 5, RGB(25, 8, 8)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 5, 0, RGB(25, 8, 8)
+	playsewithpan SE_M_TELEPORT, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 4, 0, 5, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 12, RGB(25, 8, 8)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 12, 0, RGB(25, 8, 8)
+	waitforvisualfinish
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 0, 4, 4, 1
+	waitforvisualfinish
+	goto DaemonsReboundDone
+	end
+.endif
+@ genanims: LOGIC (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_KARATE_CHOP:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(12, 15, 19)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(12, 15, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(12, 15, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 3, RGB(12, 15, 19)
+	waitforvisualfinish
+	delay 2
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 3, 6, RGB(12, 15, 19)
+	waitforvisualfinish
+	delay 2
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 6, 9, RGB(12, 15, 19)
+	waitforvisualfinish
+	delay 2
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 4, 1
+	delay 4
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 9, 0, RGB(12, 15, 19)
+	waitforvisualfinish
+	end
+.else
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(12, 15, 19)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(12, 15, 19)
@@ -5126,8 +8198,50 @@ Move_KARATE_CHOP:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 9, 0, RGB(12, 15, 19)
 	waitforvisualfinish
 	end
-@ genanims: LOGIC (T-134, vision.md 9.24) approved.
+.endif
+@ genanims: LOGIC (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_CROSS_CHOP:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(12, 15, 19)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(12, 15, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(12, 15, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 3, RGB(12, 15, 19)
+	waitforvisualfinish
+	delay 2
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 3, 6, RGB(12, 15, 19)
+	waitforvisualfinish
+	delay 2
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 6, 9, RGB(12, 15, 19)
+	waitforvisualfinish
+	delay 2
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 9, 12, RGB(12, 15, 19)
+	waitforvisualfinish
+	delay 2
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 4, 0, 6, 1
+	delay 4
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 12, 0, RGB(12, 15, 19)
+	waitforvisualfinish
+	end
+.else
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(12, 15, 19)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(12, 15, 19)
@@ -5154,8 +8268,46 @@ Move_CROSS_CHOP:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 12, 0, RGB(12, 15, 19)
 	waitforvisualfinish
 	end
-@ genanims: LOGIC (T-134, vision.md 9.24) approved.
+.endif
+@ genanims: LOGIC (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_JUMP_KICK:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(12, 15, 19)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(12, 15, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(12, 15, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 3, RGB(12, 15, 19)
+	waitforvisualfinish
+	delay 2
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 3, 6, RGB(12, 15, 19)
+	waitforvisualfinish
+	delay 2
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 6, 9, RGB(12, 15, 19)
+	waitforvisualfinish
+	delay 2
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 5, 1
+	delay 4
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 9, 0, RGB(12, 15, 19)
+	waitforvisualfinish
+	end
+.else
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(12, 15, 19)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(12, 15, 19)
@@ -5178,8 +8330,46 @@ Move_JUMP_KICK:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 9, 0, RGB(12, 15, 19)
 	waitforvisualfinish
 	end
-@ genanims: LOGIC (T-134, vision.md 9.24) approved.
+.endif
+@ genanims: LOGIC (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_HI_JUMP_KICK:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(12, 15, 19)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(12, 15, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(12, 15, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 4, RGB(12, 15, 19)
+	waitforvisualfinish
+	delay 2
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 4, 8, RGB(12, 15, 19)
+	waitforvisualfinish
+	delay 2
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 12, RGB(12, 15, 19)
+	waitforvisualfinish
+	delay 2
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 4, 0, 5, 1
+	delay 4
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 12, 0, RGB(12, 15, 19)
+	waitforvisualfinish
+	end
+.else
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(12, 15, 19)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(12, 15, 19)
@@ -5202,8 +8392,36 @@ Move_HI_JUMP_KICK:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 12, 0, RGB(12, 15, 19)
 	waitforvisualfinish
 	end
-@ genanims: LOGIC (T-134, vision.md 9.24) approved.
+.endif
+@ genanims: LOGIC (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_DOUBLE_KICK:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(12, 15, 19)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 4, RGB(12, 15, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 4, 8, RGB(12, 15, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 4, 1
+	delay 4
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(12, 15, 19)
+	waitforvisualfinish
+	end
+.else
 	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 4, RGB(12, 15, 19)
 	waitforvisualfinish
@@ -5216,8 +8434,36 @@ Move_DOUBLE_KICK:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(12, 15, 19)
 	waitforvisualfinish
 	end
-@ genanims: LOGIC (T-134, vision.md 9.24) approved.
+.endif
+@ genanims: LOGIC (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_TRIPLE_KICK:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(12, 15, 19)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 4, RGB(12, 15, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 4, 8, RGB(12, 15, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 3, 1
+	delay 4
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(12, 15, 19)
+	waitforvisualfinish
+	end
+.else
 	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 4, RGB(12, 15, 19)
 	waitforvisualfinish
@@ -5230,8 +8476,46 @@ Move_TRIPLE_KICK:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(12, 15, 19)
 	waitforvisualfinish
 	end
-@ genanims: LOGIC (T-134, vision.md 9.24) approved.
+.endif
+@ genanims: LOGIC (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_DYNAMIC_PUNCH:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(12, 15, 19)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(12, 15, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(12, 15, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 3, RGB(12, 15, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 3, 12, RGB(12, 15, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 12, 6, RGB(12, 15, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 4, 0, 6, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 6, 0, RGB(12, 15, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 8, RGB(13, 13, 13)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(13, 13, 13)
+	waitforvisualfinish
+	end
+.else
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(12, 15, 19)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(12, 15, 19)
@@ -5254,8 +8538,44 @@ Move_DYNAMIC_PUNCH:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
-@ genanims: LOGIC (T-134, vision.md 9.24) approved.
+.endif
+@ genanims: LOGIC (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_COUNTER:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(12, 15, 19)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 5, RGB(12, 15, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 5, 10, RGB(12, 15, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 10, 0, RGB(12, 15, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 4, RGB(12, 15, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 4, 8, RGB(12, 15, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 3, 1
+	delay 4
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(12, 15, 19)
+	waitforvisualfinish
+	end
+.else
 	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 5, RGB(12, 15, 19)
 	waitforvisualfinish
@@ -5276,8 +8596,46 @@ Move_COUNTER:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(12, 15, 19)
 	waitforvisualfinish
 	end
-@ genanims: LOGIC (T-134, vision.md 9.24) approved.
+.endif
+@ genanims: LOGIC (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_VITAL_THROW:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(12, 15, 19)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(12, 15, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(12, 15, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 3, RGB(12, 15, 19)
+	waitforvisualfinish
+	delay 2
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 3, 6, RGB(12, 15, 19)
+	waitforvisualfinish
+	delay 2
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 6, 9, RGB(12, 15, 19)
+	waitforvisualfinish
+	delay 2
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 5, 1
+	delay 4
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 9, 0, RGB(12, 15, 19)
+	waitforvisualfinish
+	end
+.else
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(12, 15, 19)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(12, 15, 19)
@@ -5300,8 +8658,42 @@ Move_VITAL_THROW:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 9, 0, RGB(12, 15, 19)
 	waitforvisualfinish
 	end
-@ genanims: LOGIC (T-134, vision.md 9.24) approved.
+.endif
+@ genanims: LOGIC (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_ROCK_SMASH:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(12, 15, 19)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(12, 15, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(12, 15, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 4, RGB(12, 15, 19)
+	waitforvisualfinish
+	delay 2
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 4, 8, RGB(12, 15, 19)
+	waitforvisualfinish
+	delay 2
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 3, 1
+	delay 4
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(12, 15, 19)
+	waitforvisualfinish
+	end
+.else
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(12, 15, 19)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(12, 15, 19)
@@ -5320,8 +8712,51 @@ Move_ROCK_SMASH:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(12, 15, 19)
 	waitforvisualfinish
 	end
-@ genanims: LOGIC (T-134, vision.md 9.24) approved.
+.endif
+@ genanims: LOGIC (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_SUBMISSION:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(12, 15, 19)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(12, 15, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(12, 15, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 4, RGB(12, 15, 19)
+	waitforvisualfinish
+	delay 2
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 4, 8, RGB(12, 15, 19)
+	waitforvisualfinish
+	delay 2
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 12, RGB(12, 15, 19)
+	waitforvisualfinish
+	delay 2
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 4, 0, 5, 1
+	delay 4
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 12, 0, RGB(12, 15, 19)
+	waitforvisualfinish
+	delay 4
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 8, RGB(13, 13, 13)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 8, 0, RGB(13, 13, 13)
+	waitforvisualfinish
+	end
+.else
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(12, 15, 19)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(12, 15, 19)
@@ -5349,6 +8784,7 @@ Move_SUBMISSION:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 8, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
+.endif
 @ Also used by Sunny weather
 @ genanims: FIELD (T-134, vision.md 9.24) approved.
 Move_SUNNY_DAY:
@@ -5462,8 +8898,22 @@ Move_NATURE_POWER:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 10, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
-@ genanims: LEGACY (T-134, vision.md 9.24) approved.
+@ genanims: LEGACY (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_ANCIENT_POWER:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(26, 26, 26)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 0, 7, RGB(26, 26, 26)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 7, 0, RGB(26, 26, 26)
@@ -5490,6 +8940,34 @@ Move_ANCIENT_POWER:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 6, 0, RGB(26, 26, 26)
 	waitforvisualfinish
 	end
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 0, 7, RGB(26, 26, 26)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 7, 0, RGB(26, 26, 26)
+	waitforvisualfinish
+	delay 6
+	playsewithpan SE_M_DRAGON_RAGE, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 5, 2
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 11, RGB(26, 26, 26)
+	waitforvisualfinish
+	delay 5
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 11, 7, RGB(26, 26, 26)
+	waitforvisualfinish
+	delay 5
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 7, 3, RGB(26, 26, 26)
+	waitforvisualfinish
+	delay 5
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 3, 0, RGB(26, 26, 26)
+	waitforvisualfinish
+	playsewithpan SE_M_DRAGON_RAGE, SOUND_PAN_ATTACKER
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 6, RGB(26, 26, 26)
+	waitforvisualfinish
+	delay 10
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 6, 0, RGB(26, 26, 26)
+	waitforvisualfinish
+	end
+.endif
 @ genanims: FLOW (T-134, vision.md 9.24) approved.
 Move_OCTAZOOKA:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(8, 13, 22)
@@ -5535,8 +9013,38 @@ Move_HAZE:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_BATTLERS, 1, 12, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
-@ genanims: ENTROPY (T-134, vision.md 9.24) approved.
+@ genanims: ENTROPY (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_FIRE_PUNCH:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(27, 19, 5)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 4, 3, 0
+	delay 2
+	playsewithpan SE_M_FLAME_WHEEL, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 8, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 12, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 12, 3, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 3, 9, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 9, 1, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 1, 7, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 3, 7, 0, RGB(27, 19, 5)
+	waitforvisualfinish
+	end
+.else
 	playsewithpan SE_M_FLAME_WHEEL, SOUND_PAN_TARGET
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 8, 1
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 12, RGB(27, 19, 5)
@@ -5562,6 +9070,7 @@ FireSpreadEffect:
 	createsprite gFireSpreadSpriteTemplate, ANIM_TARGET, 1, 0, 10, 112, -128, 40
 	return
 
+.endif
 @ genanims: LOWER (T-134, vision.md 9.24) approved.
 Move_LEER:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
@@ -5580,8 +9089,22 @@ Move_LEER:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 5, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
-@ genanims: CONTEXT (T-134, vision.md 9.24) approved.
+@ genanims: CONTEXT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_DREAM_EATER:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(22, 10, 19)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(22, 10, 19)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(22, 10, 19)
@@ -5610,6 +9133,36 @@ Move_DREAM_EATER:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 9, 0, RGB(22, 10, 19)
 	waitforvisualfinish
 	end
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(22, 10, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(22, 10, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 0, 9, RGB(22, 10, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_PSYBEAM, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 6, 2
+	playsewithpan SE_M_PSYBEAM, SOUND_PAN_TARGET
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 13, RGB(22, 10, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 13, 0, RGB(22, 10, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 4, RGB(22, 10, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 4, 8, RGB(22, 10, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 8, 12, RGB(22, 10, 19)
+	waitforvisualfinish
+	delay 6
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 12, 0, RGB(22, 10, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 9, 0, RGB(22, 10, 19)
+	waitforvisualfinish
+	end
+.endif
 @ genanims: AFFLICT (T-134, vision.md 9.24) approved.
 Move_POISON_GAS:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(10, 11, 6)
@@ -5630,8 +9183,43 @@ Move_POISON_GAS:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 12, 0, RGB(10, 11, 6)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_BIND:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_BIND, SOUND_PAN_TARGET
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 0, 8, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 0, 1, 2, 2
+	delay 8
+	playsewithpan SE_M_BIND, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 0, 1, 2, 2
+	delay 8
+	playsewithpan SE_M_BIND, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 0, 1, 2, 2
+	delay 8
+	playsewithpan SE_M_BIND, SOUND_PAN_TARGET
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 8, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.else
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
@@ -5664,8 +9252,23 @@ BindWrapSqueezeTarget:
 	delay 16
 	return
 
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+.endif
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_WRAP:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
@@ -5686,8 +9289,44 @@ Move_WRAP:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 8, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
-@ genanims: CONTEXT (T-134, vision.md 9.24) approved.
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 0, 8, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 0, 1, 2, 2
+	delay 8
+	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 0, 1, 2, 2
+	delay 8
+	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 0, 1, 2, 2
+	delay 8
+	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 8, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.endif
+@ genanims: CONTEXT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_PSYBEAM:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(22, 10, 19)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 0, 9, RGB(22, 10, 19)
 	waitforvisualfinish
 	playsewithpan SE_M_PSYBEAM, SOUND_PAN_TARGET
@@ -5700,6 +9339,20 @@ Move_PSYBEAM:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 9, 0, RGB(22, 10, 19)
 	waitforvisualfinish
 	end
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 0, 9, RGB(22, 10, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_PSYBEAM, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 5, 2
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 0, 11, RGB(22, 10, 19)
+	waitforvisualfinish
+	delay 8
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 11, 0, RGB(22, 10, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 9, 0, RGB(22, 10, 19)
+	waitforvisualfinish
+	end
+.endif
 @ genanims: AFFLICT (T-134, vision.md 9.24) approved.
 Move_HYPNOSIS:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(22, 10, 19)
@@ -5717,8 +9370,22 @@ Move_HYPNOSIS:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 2, 12, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
-@ genanims: CONTEXT (T-134, vision.md 9.24) approved.
+@ genanims: CONTEXT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_PSYWAVE:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(22, 10, 19)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(22, 10, 19)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(22, 10, 19)
@@ -5742,6 +9409,31 @@ Move_PSYWAVE:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 9, 0, RGB(22, 10, 19)
 	waitforvisualfinish
 	end
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(22, 10, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(22, 10, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 0, 9, RGB(22, 10, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_PSYBEAM, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 5, 2
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 0, 5, RGB(22, 10, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 5, 0, RGB(22, 10, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 0, 13, RGB(22, 10, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 13, 0, RGB(22, 10, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 0, 8, RGB(22, 10, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 8, 0, RGB(22, 10, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 9, 0, RGB(22, 10, 19)
+	waitforvisualfinish
+	end
+.endif
 @ genanims: SIGNAL (T-134, vision.md 9.24) approved.
 Move_ZAP_CANNON:
 	playsewithpan SE_M_THUNDER_WAVE, SOUND_PAN_TARGET
@@ -5901,8 +9593,22 @@ Move_METAL_CLAW:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 0, RGB(24, 21, 12)
 	waitforvisualfinish
 	end
-@ genanims: LATENT (T-134, vision.md 9.24) approved.
+@ genanims: LATENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_NIGHT_SHADE:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(11, 8, 14)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 3, 0, 4, RGB(11, 8, 14)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 3, 4, 0, RGB(11, 8, 14)
@@ -5916,8 +9622,37 @@ Move_NIGHT_SHADE:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 11, 0, RGB(11, 8, 14)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 3, 0, 4, RGB(11, 8, 14)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 3, 4, 0, RGB(11, 8, 14)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 4, 0, 3, RGB(11, 8, 14)
+	waitforvisualfinish
+	playsewithpan SE_M_PSYBEAM, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 5, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 3, 11, RGB(11, 8, 14)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 11, 0, RGB(11, 8, 14)
+	waitforvisualfinish
+	end
+.endif
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_EGG_BOMB:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
@@ -5929,8 +9664,35 @@ Move_EGG_BOMB:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 13, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
-@ genanims: LATENT (T-134, vision.md 9.24) approved.
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_TAIL_WHIP, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 4, 0, 6, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 13, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 13, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.endif
+@ genanims: LATENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_SHADOW_BALL:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(11, 8, 14)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 3, 0, 4, RGB(11, 8, 14)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 3, 4, 0, RGB(11, 8, 14)
@@ -5948,8 +9710,41 @@ Move_SHADOW_BALL:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 7, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
-@ genanims: LATENT (T-134, vision.md 9.24) approved.
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 3, 0, 4, RGB(11, 8, 14)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 3, 4, 0, RGB(11, 8, 14)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 4, 0, 3, RGB(11, 8, 14)
+	waitforvisualfinish
+	playsewithpan SE_M_MIST, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 4, 0, 5, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 3, 12, RGB(11, 8, 14)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 12, 0, RGB(11, 8, 14)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 7, RGB(13, 13, 13)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 7, 0, RGB(13, 13, 13)
+	waitforvisualfinish
+	end
+.endif
+@ genanims: LATENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_LICK:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(11, 8, 14)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 2, 0, 3, RGB(11, 8, 14)
 	waitforvisualfinish
 	playsewithpan SE_M_LICK, SOUND_PAN_TARGET
@@ -5963,6 +9758,21 @@ Move_LICK:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 6, 0, RGB(11, 8, 14)
 	waitforvisualfinish
 	end
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 2, 0, 3, RGB(11, 8, 14)
+	waitforvisualfinish
+	playsewithpan SE_M_LICK, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 3, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 3, 8, RGB(11, 8, 14)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(11, 8, 14)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 6, RGB(11, 8, 14)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 6, 0, RGB(11, 8, 14)
+	waitforvisualfinish
+	end
+.endif
 @ genanims: FIELD (T-134, vision.md 9.24) approved.
 Move_FOCUS_ENERGY:
 	playsewithpan SE_M_DRAGON_RAGE, SOUND_PAN_ATTACKER
@@ -5973,8 +9783,22 @@ Move_FOCUS_ENERGY:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 6, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_BIDE:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	choosetwoturnanim DaemonsBideLoad, DaemonsBideRun
 DaemonsBideDone:
 	end
@@ -5998,6 +9822,31 @@ DaemonsBideRun:
 	waitforvisualfinish
 	goto DaemonsBideDone
 	end
+.else
+	choosetwoturnanim DaemonsBideLoad, DaemonsBideRun
+DaemonsBideDone:
+	end
+DaemonsBideLoad:
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 0, 10, RGB(24, 23, 21)
+	waitforvisualfinish
+	delay 12
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 10, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	goto DaemonsBideDone
+DaemonsBideRun:
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 10, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 10, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_TAKE_DOWN, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 3, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 8, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	goto DaemonsBideDone
+	end
+.endif
 @ genanims: LOWER (T-134, vision.md 9.24) approved.
 Move_STRING_SHOT:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(16, 18, 9)
@@ -6034,8 +9883,22 @@ Move_SPIDER_WEB:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 12, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_RAZOR_WIND:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	choosetwoturnanim DaemonsRazorWindLoad, DaemonsRazorWindRun
 DaemonsRazorWindDone:
 	end
@@ -6059,6 +9922,31 @@ DaemonsRazorWindRun:
 	waitforvisualfinish
 	goto DaemonsRazorWindDone
 	end
+.else
+	choosetwoturnanim DaemonsRazorWindLoad, DaemonsRazorWindRun
+DaemonsRazorWindDone:
+	end
+DaemonsRazorWindLoad:
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 0, 10, RGB(24, 23, 21)
+	waitforvisualfinish
+	delay 12
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 10, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	goto DaemonsRazorWindDone
+DaemonsRazorWindRun:
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 10, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 10, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_GUST, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 4, 0, 5, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 12, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 12, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	goto DaemonsRazorWindDone
+	end
+.endif
 @ genanims: FIELD (T-134, vision.md 9.24) approved.
 Move_DISABLE:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
@@ -6140,8 +10028,22 @@ Move_MIMIC:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 10, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_CONSTRICT:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
@@ -6162,6 +10064,28 @@ Move_CONSTRICT:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 8, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_SCRATCH, SOUND_PAN_TARGET
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 0, 8, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 0, 1, 2, 2
+	delay 8
+	playsewithpan SE_M_SCRATCH, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 0, 1, 2, 2
+	delay 8
+	playsewithpan SE_M_SCRATCH, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 0, 1, 2, 2
+	delay 8
+	playsewithpan SE_M_SCRATCH, SOUND_PAN_TARGET
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 8, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.endif
 @ genanims: FIELD (T-134, vision.md 9.24) approved.
 Move_CURSE:
 	choosetwoturnanim DaemonsCurseLatent, DaemonsCurseStats
@@ -6252,8 +10176,22 @@ HealBellRing:
 	playsewithpan SE_M_HEAL_BELL, SOUND_PAN_ATTACKER
 	return
 
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_FAKE_OUT:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	playsewithpan SE_M_FLATTER, SOUND_PAN_TARGET
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 4, 1
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 9, RGB(24, 23, 21)
@@ -6261,6 +10199,15 @@ Move_FAKE_OUT:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 9, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
+.else
+	playsewithpan SE_M_FLATTER, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 4, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 9, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 9, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.endif
 @ genanims: LOWER (T-134, vision.md 9.24) approved.
 Move_SCARY_FACE:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
@@ -6332,8 +10279,22 @@ Move_LOVELY_KISS:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 2, 12, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_FURY_SWIPES:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	playsewithpan SE_M_SCRATCH, SOUND_PAN_TARGET
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 3, 1
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 8, RGB(24, 23, 21)
@@ -6341,6 +10302,15 @@ Move_FURY_SWIPES:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
+.else
+	playsewithpan SE_M_SCRATCH, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 3, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 8, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.endif
 @ DAEMONS -- ROOT -- the process pinned where it runs: three downward jolts as it fixes in place, its colour held toward
 @ GROWTH while it does, and released slowly. It will not be moved; that is the point.
 @ T-139, approved 2026-09-17 under vision.md 9.24.
@@ -6363,8 +10333,22 @@ Move_INGRAIN:
 	clearmonbg ANIM_ATTACKER
 	end
 
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_PRESENT:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
@@ -6376,6 +10360,19 @@ Move_PRESENT:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_TAIL_WHIP, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 3, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 8, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.endif
 @ genanims: FIELD (T-134, vision.md 9.24) approved.
 Move_BATON_PASS:
 	loadspritegfx ANIM_TAG_POKEBALL
@@ -6434,8 +10431,22 @@ Move_SLEEP_TALK:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 10, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_HYPER_FANG:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
@@ -6451,8 +10462,39 @@ Move_HYPER_FANG:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 12, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_BITE, SOUND_PAN_TARGET
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 12, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 12, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_BITE, SOUND_PAN_TARGET
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 12, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 12, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.endif
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_TRI_ATTACK:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	playsewithpan SE_M_TRI_ATTACK, SOUND_PAN_TARGET
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 4, 0, 5, 1
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 12, RGB(24, 23, 21)
@@ -6472,6 +10514,27 @@ Move_TRI_ATTACK:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 12, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
+.else
+	playsewithpan SE_M_TRI_ATTACK, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 4, 0, 5, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 12, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 12, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_TRI_ATTACK, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 4, 0, 5, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 12, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 12, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_TRI_ATTACK, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 4, 0, 5, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 12, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 12, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.endif
 @ genanims: AFFLICT (T-134, vision.md 9.24) approved.
 Move_WILL_O_WISP:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(27, 19, 5)
@@ -6580,8 +10643,22 @@ StockpileAbsorb:
 	delay 1
 	return
 
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_SPIT_UP:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 10, RGB(13, 13, 13)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 10, 0, RGB(13, 13, 13)
@@ -6593,6 +10670,19 @@ Move_SPIT_UP:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 13, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 10, RGB(13, 13, 13)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 10, 0, RGB(13, 13, 13)
+	waitforvisualfinish
+	playsewithpan SE_M_TAKE_DOWN, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 4, 0, 6, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 13, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 13, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.endif
 @ DAEMONS -- DEQUEUE -- what ENQUEUE stored comes back out: the colour drains, and returns in as many ticked steps as
 @ there were items queued (the move turn is the stockpile count, as vanilla's own branches read it).
 @ T-139, approved 2026-09-17 under vision.md 9.24.
@@ -6689,8 +10779,22 @@ Move_SWEET_SCENT:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 5, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_HYPER_BEAM:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 0, 12, RGB(24, 23, 21)
 	waitforvisualfinish
 	playsewithpan SE_M_HYPER_BEAM, SOUND_PAN_ATTACKER
@@ -6704,6 +10808,21 @@ Move_HYPER_BEAM:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 12, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 0, 12, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_HYPER_BEAM, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 0, 6, RGB(24, 23, 21)
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 5, 0, 10, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 14, RGB(24, 23, 21)
+	waitforvisualfinish
+	delay 16
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 14, 0, RGB(24, 23, 21)
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 6, 0, RGB(24, 23, 21)
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 12, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.endif
 @ genanims: AFFLICT (T-134, vision.md 9.24) approved.
 Move_FLATTER:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(5, 5, 5)
@@ -6776,8 +10895,22 @@ Move_REFRESH:
 	clearmonbg ANIM_ATTACKER
 	end
 
-@ genanims: ENTROPY (T-134, vision.md 9.24) approved.
+@ genanims: ENTROPY (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_BLAZE_KICK:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(27, 19, 5)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(27, 19, 5)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(27, 19, 5)
@@ -6805,8 +10938,51 @@ Move_BLAZE_KICK:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 6, 0, RGB(27, 19, 5)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(27, 19, 5)
+	waitforvisualfinish
+	playsewithpan SE_M_FLAME_WHEEL, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 8, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 12, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 12, 3, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 3, 9, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 9, 1, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 1, 7, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 7, 4, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 4, 10, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 10, 2, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 2, 6, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 6, 0, RGB(27, 19, 5)
+	waitforvisualfinish
+	end
+.endif
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_HYPER_VOICE:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_DEF_SIDE, 0, 0, 8, RGB(24, 23, 21)
 	waitforvisualfinish
@@ -6820,8 +10996,58 @@ Move_HYPER_VOICE:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_DEF_SIDE, 0, 8, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
-@ genanims: STRATUM (T-134, vision.md 9.24) approved.
+.else
+	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_DEF_SIDE, 0, 0, 8, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 3, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_DEF_SIDE, 0, 8, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_DEF_SIDE, 0, 0, 8, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 3, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_DEF_SIDE, 0, 8, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.endif
+@ genanims: STRATUM (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_SAND_TOMB:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(19, 15, 9)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 0, 6, RGB(19, 15, 9)
+	waitforvisualfinish
+	playsewithpan SE_M_SAND_TOMB, SOUND_PAN_TARGET
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 0, 8, RGB(19, 15, 9)
+	waitforvisualfinish
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 0, 1, 2, 2
+	delay 8
+	playsewithpan SE_M_SAND_TOMB, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 0, 1, 2, 2
+	delay 8
+	playsewithpan SE_M_SAND_TOMB, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 0, 1, 2, 2
+	delay 8
+	playsewithpan SE_M_SAND_TOMB, SOUND_PAN_TARGET
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 8, 0, RGB(19, 15, 9)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 6, 0, RGB(19, 15, 9)
+	waitforvisualfinish
+	end
+.else
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 0, 6, RGB(19, 15, 9)
 	waitforvisualfinish
 	playsewithpan SE_M_SAND_TOMB, SOUND_PAN_TARGET
@@ -6857,6 +11083,7 @@ SandTombSwirlingDirt:
 	delay 2
 	return
 
+.endif
 @ genanims: FROZEN (T-134, vision.md 9.24) approved.
 Move_SHEER_COLD:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(20, 25, 27)
@@ -6872,8 +11099,35 @@ Move_SHEER_COLD:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 7, 0, RGB(20, 25, 27)
 	waitforvisualfinish
 	end
-@ genanims: LOGIC (T-134, vision.md 9.24) approved.
+@ genanims: LOGIC (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_ARM_THRUST:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(12, 15, 19)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 4, RGB(12, 15, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 4, 8, RGB(12, 15, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 3, 1
+	delay 4
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(12, 15, 19)
+	waitforvisualfinish
+	end
+.else
 	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 4, RGB(12, 15, 19)
 	waitforvisualfinish
@@ -6886,6 +11140,7 @@ Move_ARM_THRUST:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(12, 15, 19)
 	waitforvisualfinish
 	end
+.endif
 @ genanims: FLOW (T-134, vision.md 9.24) approved.
 Move_MUDDY_WATER:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(8, 13, 22)
@@ -6945,8 +11200,22 @@ Move_DRAGON_CLAW:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 12, 0, RGB(6, 15, 13)
 	waitforvisualfinish
 	end
-@ genanims: STRATUM (T-134, vision.md 9.24) approved.
+@ genanims: STRATUM (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_MUD_SHOT:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(19, 15, 9)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(19, 15, 9)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(19, 15, 9)
@@ -6968,6 +11237,29 @@ Move_MUD_SHOT:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 7, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(19, 15, 9)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(19, 15, 9)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 0, 8, RGB(19, 15, 9)
+	waitforvisualfinish
+	playsewithpan SE_M_WHIRLPOOL, SOUND_PAN_TARGET
+	createvisualtask AnimTask_HorizontalShake, 5, (MAX_BATTLERS_COUNT + 1), 2, 8
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 0, 3, 4, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 10, RGB(19, 15, 9)
+	waitforvisualfinish
+	delay 2
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 10, 0, RGB(19, 15, 9)
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 8, 0, RGB(19, 15, 9)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 7, RGB(13, 13, 13)
+	waitforvisualfinish
+	delay 6
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 7, 0, RGB(13, 13, 13)
+	waitforvisualfinish
+	end
+.endif
 @ genanims: HARDENED (T-134, vision.md 9.24) approved.
 Move_METEOR_MASH:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 9, 9, RGB(24, 21, 12)
@@ -6990,8 +11282,46 @@ Move_METEOR_MASH:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 6, 0, RGB(24, 21, 12)
 	waitforvisualfinish
 	end
-@ genanims: LOGIC (T-134, vision.md 9.24) approved.
+@ genanims: LOGIC (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_REVENGE:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(12, 15, 19)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 5, RGB(12, 15, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 5, 10, RGB(12, 15, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 10, 0, RGB(12, 15, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 3, RGB(12, 15, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 3, 6, RGB(12, 15, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 6, 9, RGB(12, 15, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 5, 1
+	delay 4
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 9, 0, RGB(12, 15, 19)
+	waitforvisualfinish
+	end
+.else
 	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 5, RGB(12, 15, 19)
 	waitforvisualfinish
@@ -7015,6 +11345,7 @@ Move_REVENGE:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 9, 0, RGB(12, 15, 19)
 	waitforvisualfinish
 	end
+.endif
 @ genanims: CORRUPT (T-134, vision.md 9.24) approved.
 Move_POISON_FANG:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(10, 11, 6)
@@ -7106,8 +11437,45 @@ Move_METAL_SOUND:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 10, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
-@ genanims: LOGIC (T-134, vision.md 9.24) approved.
+@ genanims: LOGIC (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_FOCUS_PUNCH:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(12, 15, 19)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(12, 15, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(12, 15, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 4, RGB(12, 15, 19)
+	waitforvisualfinish
+	delay 2
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 4, 8, RGB(12, 15, 19)
+	waitforvisualfinish
+	delay 2
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 12, RGB(12, 15, 19)
+	waitforvisualfinish
+	delay 2
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 5, 0, 7, 1
+	delay 4
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 12, 0, RGB(12, 15, 19)
+	waitforvisualfinish
+	end
+.else
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(12, 15, 19)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(12, 15, 19)
@@ -7130,8 +11498,23 @@ Move_FOCUS_PUNCH:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 12, 0, RGB(12, 15, 19)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+.endif
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_RETURN:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
@@ -7143,6 +11526,19 @@ Move_RETURN:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_TAIL_WHIP, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 3, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 8, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.endif
 @ genanims: RAISE (T-134, vision.md 9.24) approved.
 Move_COSMIC_POWER:
 	playsewithpan SE_M_COSMIC_POWER, SOUND_PAN_ATTACKER
@@ -7159,8 +11555,22 @@ Move_COSMIC_POWER:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 6, 0, RGB(22, 10, 19)
 	waitforvisualfinish
 	end
-@ genanims: ENTROPY (T-134, vision.md 9.24) approved.
+@ genanims: ENTROPY (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_BLAST_BURN:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(27, 19, 5)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(27, 19, 5)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(27, 19, 5)
@@ -7203,8 +11613,66 @@ Move_BLAST_BURN:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 8, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
-@ genanims: LEGACY (T-134, vision.md 9.24) approved.
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(27, 19, 5)
+	waitforvisualfinish
+	playsewithpan SE_M_SACRED_FIRE, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 4, 0, 10, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 14, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 14, 4, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 4, 11, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 11, 2, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 2, 8, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 4, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 4, 12, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 12, 2, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 2, 7, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 7, 0, RGB(27, 19, 5)
+	waitforvisualfinish
+	playsewithpan SE_M_SACRED_FIRE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_BATTLERS, 0, 0, 12, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_BATTLERS, 2, 12, 0, RGB(27, 19, 5)
+	waitforvisualfinish
+	delay 4
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 8, RGB(13, 13, 13)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 8, 0, RGB(13, 13, 13)
+	waitforvisualfinish
+	delay 4
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 8, RGB(13, 13, 13)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 8, 0, RGB(13, 13, 13)
+	waitforvisualfinish
+	end
+.endif
+@ genanims: LEGACY (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_ROCK_TOMB:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(26, 26, 26)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 0, 7, RGB(26, 26, 26)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 7, 0, RGB(26, 26, 26)
@@ -7229,6 +11697,32 @@ Move_ROCK_TOMB:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 3, 8, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 0, 7, RGB(26, 26, 26)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 7, 0, RGB(26, 26, 26)
+	waitforvisualfinish
+	delay 6
+	playsewithpan SE_M_STRENGTH, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 4, 2
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 10, RGB(26, 26, 26)
+	waitforvisualfinish
+	delay 5
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 10, 6, RGB(26, 26, 26)
+	waitforvisualfinish
+	delay 5
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 6, 3, RGB(26, 26, 26)
+	waitforvisualfinish
+	delay 5
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 3, 0, RGB(26, 26, 26)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 0, 8, RGB(13, 13, 13)
+	waitforvisualfinish
+	delay 12
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 3, 8, 0, RGB(13, 13, 13)
+	waitforvisualfinish
+	end
+.endif
 @ genanims: SWARM (T-134, vision.md 9.24) approved.
 Move_SILVER_WIND:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(16, 18, 9)
@@ -7307,8 +11801,22 @@ DaemonsDescendSurface:
 	waitforvisualfinish
 	goto DaemonsDescendDone
 	end
-@ genanims: LEGACY (T-134, vision.md 9.24) approved.
+@ genanims: LEGACY (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_ROCK_BLAST:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(26, 26, 26)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	playsewithpan SE_M_SWAGGER, SOUND_PAN_TARGET
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 3, 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 8, RGB(26, 26, 26)
@@ -7323,8 +11831,38 @@ Move_ROCK_BLAST:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 2, 0, RGB(26, 26, 26)
 	waitforvisualfinish
 	end
-@ genanims: ENTROPY (T-134, vision.md 9.24) approved.
+.else
+	playsewithpan SE_M_SWAGGER, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 3, 2
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 8, RGB(26, 26, 26)
+	waitforvisualfinish
+	delay 5
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 5, RGB(26, 26, 26)
+	waitforvisualfinish
+	delay 5
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 5, 2, RGB(26, 26, 26)
+	waitforvisualfinish
+	delay 5
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 2, 0, RGB(26, 26, 26)
+	waitforvisualfinish
+	end
+.endif
+@ genanims: ENTROPY (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_OVERHEAT:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(27, 19, 5)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(27, 19, 5)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(27, 19, 5)
@@ -7374,6 +11912,57 @@ Move_OVERHEAT:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 8, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(27, 19, 5)
+	waitforvisualfinish
+	playsewithpan SE_M_DRAGON_RAGE, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 4, 0, 10, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 14, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 14, 4, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 4, 11, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 11, 2, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 2, 8, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 4, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 4, 12, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 12, 2, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 2, 7, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 0, 6, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 6, 2, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 2, 5, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 5, 1, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 1, 4, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 4, 0, RGB(27, 19, 5)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 7, 0, RGB(27, 19, 5)
+	waitforvisualfinish
+	delay 4
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 8, RGB(13, 13, 13)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 8, 0, RGB(13, 13, 13)
+	waitforvisualfinish
+	delay 4
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 8, RGB(13, 13, 13)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 8, 0, RGB(13, 13, 13)
+	waitforvisualfinish
+	end
+.endif
 @ genanims: FLOW (T-134, vision.md 9.24) approved.
 Move_HYDRO_CANNON:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(8, 13, 22)
@@ -7400,8 +11989,22 @@ Move_HYDRO_CANNON:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 8, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
-@ genanims: LATENT (T-134, vision.md 9.24) approved.
+@ genanims: LATENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_ASTONISH:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(11, 8, 14)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 0, 3, RGB(11, 8, 14)
 	waitforvisualfinish
 	playsewithpan SE_M_ENCORE, SOUND_PAN_TARGET
@@ -7411,8 +12014,56 @@ Move_ASTONISH:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 9, 0, RGB(11, 8, 14)
 	waitforvisualfinish
 	end
-@ genanims: LOGIC (T-134, vision.md 9.24) approved.
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 0, 3, RGB(11, 8, 14)
+	waitforvisualfinish
+	playsewithpan SE_M_ENCORE, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 4, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 3, 9, RGB(11, 8, 14)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 9, 0, RGB(11, 8, 14)
+	waitforvisualfinish
+	end
+.endif
+@ genanims: LOGIC (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_SEISMIC_TOSS:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(12, 15, 19)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(12, 15, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(12, 15, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 4, RGB(12, 15, 19)
+	waitforvisualfinish
+	delay 2
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 4, 8, RGB(12, 15, 19)
+	waitforvisualfinish
+	delay 2
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 12, RGB(12, 15, 19)
+	waitforvisualfinish
+	delay 2
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 4, 0, 5, 1
+	delay 4
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 12, 0, RGB(12, 15, 19)
+	waitforvisualfinish
+	end
+.else
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(12, 15, 19)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(12, 15, 19)
@@ -7435,6 +12086,7 @@ Move_SEISMIC_TOSS:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 12, 0, RGB(12, 15, 19)
 	waitforvisualfinish
 	end
+.endif
 @ genanims: PROTECT (T-134, vision.md 9.24) approved.
 Move_MAGIC_COAT:
 	playsewithpan SE_M_BARRIER, SOUND_PAN_ATTACKER
@@ -7593,8 +12245,22 @@ DaemonsRecursion4:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 0, RGB(6, 15, 13)
 	waitforvisualfinish
 	end
-@ genanims: CONTEXT (T-134, vision.md 9.24) approved.
+@ genanims: CONTEXT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_PSYCHO_BOOST:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(22, 10, 19)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(22, 10, 19)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(22, 10, 19)
@@ -7616,6 +12282,29 @@ Move_PSYCHO_BOOST:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 8, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(22, 10, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(22, 10, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 0, 9, RGB(22, 10, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_PSYBEAM2, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 4, 0, 7, 2
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 0, 14, RGB(22, 10, 19)
+	waitforvisualfinish
+	delay 8
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 14, 0, RGB(22, 10, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 9, 0, RGB(22, 10, 19)
+	waitforvisualfinish
+	delay 4
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 8, RGB(13, 13, 13)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 8, 0, RGB(13, 13, 13)
+	waitforvisualfinish
+	end
+.endif
 @ genanims: OPAQUE (T-134, vision.md 9.24) approved.
 Move_KNOCK_OFF:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(5, 5, 5)
@@ -7649,8 +12338,45 @@ Move_DOOM_DESIRE:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 0, RGB(24, 21, 12)
 	waitforvisualfinish
 	end
-@ genanims: LOGIC (T-134, vision.md 9.24) approved.
+@ genanims: LOGIC (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_SKY_UPPERCUT:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(12, 15, 19)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(12, 15, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(12, 15, 19)
+	waitforvisualfinish
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 4, RGB(12, 15, 19)
+	waitforvisualfinish
+	delay 2
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 4, 8, RGB(12, 15, 19)
+	waitforvisualfinish
+	delay 2
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 12, RGB(12, 15, 19)
+	waitforvisualfinish
+	delay 2
+	playsewithpan SE_M_MINIMIZE, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 4, 0, 5, 1
+	delay 4
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 12, 0, RGB(12, 15, 19)
+	waitforvisualfinish
+	end
+.else
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(12, 15, 19)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(12, 15, 19)
@@ -7673,8 +12399,23 @@ Move_SKY_UPPERCUT:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 12, 0, RGB(12, 15, 19)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+.endif
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_SECRET_POWER:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
@@ -7686,6 +12427,19 @@ Move_SECRET_POWER:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 11, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 5, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 11, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 11, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.endif
 @ genanims: EMERGENT (T-134, vision.md 9.24) approved.
 Move_TWISTER:
 	playsewithpan SE_M_TWISTER, SOUND_PAN_ATTACKER
@@ -7722,8 +12476,22 @@ Move_ICE_BALL:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 9, 0, RGB(20, 25, 27)
 	waitforvisualfinish
 	end
-@ genanims: CONTENT (T-134, vision.md 9.24) approved.
+@ genanims: CONTENT (T-134, vision.md 9.24) DRAFT, debug ROMs only until approved.
 Move_WEATHER_BALL:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	loadspritegfx ANIM_TAG_DAEMONS_INK
+	createvisualtask AnimTask_DaemonsInk, 5, RGB(24, 23, 21)
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3, 0
+	delay 2
+	createsprite gDaemonsGlyphInkSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3, 0
+	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
@@ -7735,6 +12503,19 @@ Move_WEATHER_BALL:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 10, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
+.else
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	playsewithpan SE_M_SWAGGER, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 4, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 10, RGB(24, 23, 21)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 10, 0, RGB(24, 23, 21)
+	waitforvisualfinish
+	end
+.endif
 Move_COUNT:
 	loadspritegfx ANIM_TAG_IMPACT
 	monbg ANIM_TARGET
@@ -8699,3 +13480,290 @@ Special_SubstituteToMon:
 Special_MonToSubstitute:
 	createvisualtask AnimTask_SwapMonSpriteToFromSubstitute, 2, FALSE
 	end
+
+@ T-392 (vision.md 9.24 as amended, bible 0.7 Wisdom): the seven union routines, each with an effect of its own and
+@ the splash's bits and notes in the splash's OWN colours -- the one exception to clause 3, as PERSPECTIVE's flash is
+@ in Halftone. DRAFT: the debug ROMs play them until the user approves; the release ROMs play their type's script.
+
+@ FLUENCY -- LEGACY, CAIRN and the SCHOOL: one straight line of bits, sent, then sent again exactly the same -- a record that reads the same twice -- and the notes it was for rise where it lands.
+Move_FLUENCY:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	playsewithpan SE_M_SWIFT, SOUND_PAN_ATTACKER
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 0
+	delay 2
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 0
+	delay 2
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 0
+	delay 2
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 0
+	delay 2
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 0
+	delay 2
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 0
+	delay 2
+	waitforvisualfinish
+	playsewithpan SE_M_SWIFT, SOUND_PAN_ATTACKER
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 0
+	delay 2
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 0
+	delay 2
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 0
+	delay 2
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 0
+	delay 2
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 0
+	delay 2
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 0
+	delay 2
+	waitforvisualfinish
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_TARGET, 2, DAEMONS_GLYPH_RISE, DAEMONS_GLYPH_NOTES, 30, 1, 3, ANIM_TARGET
+	delay 4
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_TARGET, 2, DAEMONS_GLYPH_RISE, DAEMONS_GLYPH_NOTES, 30, 3, 3, ANIM_TARGET
+	delay 4
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_TARGET, 2, DAEMONS_GLYPH_RISE, DAEMONS_GLYPH_NOTES, 30, 5, 3, ANIM_TARGET
+	playsewithpan SE_M_ROCK_THROW, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 6, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 0, 12, RGB(26, 26, 26)
+	waitforvisualfinish
+	delay 6
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 12, 0, RGB(26, 26, 26)
+	waitforvisualfinish
+	waitforvisualfinish
+	end
+.else
+	goto Move_ROCK_TOMB
+.endif
+
+@ STILLPOINT -- FLOW, BASIN and the FIRST: the bits ripple out round them in a ring and the notes follow in a second, slower one -- the water going still -- and only then the strike.
+Move_STILLPOINT:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	playsewithpan SE_M_BUBBLE, SOUND_PAN_TARGET
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_TARGET, 2, DAEMONS_GLYPH_RING, DAEMONS_GLYPH_BITS, 28, 0, 0
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_TARGET, 2, DAEMONS_GLYPH_RING, DAEMONS_GLYPH_BITS, 28, 1, 0
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_TARGET, 2, DAEMONS_GLYPH_RING, DAEMONS_GLYPH_BITS, 28, 2, 0
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_TARGET, 2, DAEMONS_GLYPH_RING, DAEMONS_GLYPH_BITS, 28, 3, 0
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_TARGET, 2, DAEMONS_GLYPH_RING, DAEMONS_GLYPH_BITS, 28, 4, 0
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_TARGET, 2, DAEMONS_GLYPH_RING, DAEMONS_GLYPH_BITS, 28, 5, 0
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_TARGET, 2, DAEMONS_GLYPH_RING, DAEMONS_GLYPH_BITS, 28, 6, 0
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_TARGET, 2, DAEMONS_GLYPH_RING, DAEMONS_GLYPH_BITS, 28, 7, 0
+	delay 10
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_TARGET, 2, DAEMONS_GLYPH_RING, DAEMONS_GLYPH_NOTES, 40, 0, 0
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_TARGET, 2, DAEMONS_GLYPH_RING, DAEMONS_GLYPH_NOTES, 40, 2, 0
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_TARGET, 2, DAEMONS_GLYPH_RING, DAEMONS_GLYPH_NOTES, 40, 4, 0
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_TARGET, 2, DAEMONS_GLYPH_RING, DAEMONS_GLYPH_NOTES, 40, 6, 0
+	waitforvisualfinish
+	delay 12
+	playsewithpan SE_M_WATERFALL, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 6, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 0, 12, RGB(8, 13, 22)
+	waitforvisualfinish
+	delay 6
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 12, 0, RGB(8, 13, 22)
+	waitforvisualfinish
+	end
+.else
+	goto Move_WATER_PULSE
+.endif
+
+@ RECONNECT -- SIGNAL, GAUGE and the RETURN: a line of bits that goes dead after four -- a long gap -- then reaches out again and gets through, the notes riding along it.
+Move_RECONNECT:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	playsewithpan SE_M_THUNDER_WAVE, SOUND_PAN_ATTACKER
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 20, 0, 4
+	delay 2
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 20, 1, 4
+	delay 2
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 20, 2, 4
+	delay 2
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 20, 3, 4
+	delay 2
+	delay 18
+	playsewithpan SE_M_SWIFT, SOUND_PAN_ATTACKER
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 20, 0, 4
+	delay 1
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 20, 4, 6
+	delay 2
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 20, 1, 4
+	delay 1
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 20, 5, 6
+	delay 2
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 20, 2, 4
+	delay 1
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 20, 6, 6
+	delay 2
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 20, 3, 4
+	delay 1
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 20, 7, 6
+	delay 2
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 20, 4, 4
+	delay 1
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 20, 8, 6
+	delay 2
+	waitforvisualfinish
+	playsewithpan SE_M_THUNDERBOLT, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 6, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 0, 12, RGB(10, 23, 23)
+	waitforvisualfinish
+	delay 6
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 12, 0, RGB(10, 23, 23)
+	waitforvisualfinish
+	end
+.else
+	goto Move_SHOCK_WAVE
+.endif
+
+@ PRAXIS -- GROWTH, TRELLIS and the GUIDE: notes rise from the user -- what it read -- then bits carry it across and land; its colour comes up afterwards, ATTACK rising by doing.
+Move_PRAXIS:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	playsewithpan SE_M_SING, SOUND_PAN_ATTACKER
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_RISE, DAEMONS_GLYPH_NOTES, 26, 0, 2, ANIM_ATTACKER
+	delay 3
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_RISE, DAEMONS_GLYPH_NOTES, 26, 1, 2, ANIM_ATTACKER
+	delay 3
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_RISE, DAEMONS_GLYPH_NOTES, 26, 2, 2, ANIM_ATTACKER
+	delay 3
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_RISE, DAEMONS_GLYPH_NOTES, 26, 3, 2, ANIM_ATTACKER
+	delay 3
+	waitforvisualfinish
+	playsewithpan SE_M_SWIFT, SOUND_PAN_ATTACKER
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 3
+	delay 2
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 1, 3
+	delay 2
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 2, 3
+	delay 2
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 3, 3
+	delay 2
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 4, 3
+	delay 2
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 5, 3
+	delay 2
+	waitforvisualfinish
+	playsewithpan SE_M_ABSORB, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 6, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 0, 12, RGB(11, 19, 12)
+	waitforvisualfinish
+	delay 6
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 12, 0, RGB(11, 19, 12)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 0, 8, RGB(11, 19, 12)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 8, 0, RGB(11, 19, 12)
+	waitforvisualfinish
+	end
+.else
+	goto Move_GIGA_DRAIN
+.endif
+
+@ MEDIAN -- CORRUPT, TILT and SCORN: bits come in from above and from below at once and meet in their middle, the notes after them -- the peak and the floor both ignored.
+Move_MEDIAN:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	playsewithpan SE_M_POISON_POWDER, SOUND_PAN_TARGET
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_TARGET, 2, DAEMONS_GLYPH_CONVERGE, DAEMONS_GLYPH_BITS, 20, 0, 2
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_TARGET, 2, DAEMONS_GLYPH_CONVERGE, DAEMONS_GLYPH_BITS, 20, 1, 2
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_TARGET, 2, DAEMONS_GLYPH_CONVERGE, DAEMONS_GLYPH_BITS, 20, 2, 2
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_TARGET, 2, DAEMONS_GLYPH_CONVERGE, DAEMONS_GLYPH_BITS, 20, 3, 2
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_TARGET, 2, DAEMONS_GLYPH_CONVERGE, DAEMONS_GLYPH_BITS, 20, 4, 2
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_TARGET, 2, DAEMONS_GLYPH_CONVERGE, DAEMONS_GLYPH_BITS, 20, 5, 2
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_TARGET, 2, DAEMONS_GLYPH_CONVERGE, DAEMONS_GLYPH_BITS, 20, 6, 2
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_TARGET, 2, DAEMONS_GLYPH_CONVERGE, DAEMONS_GLYPH_BITS, 20, 7, 2
+	delay 8
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_TARGET, 2, DAEMONS_GLYPH_CONVERGE, DAEMONS_GLYPH_NOTES, 24, 0, 3
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_TARGET, 2, DAEMONS_GLYPH_CONVERGE, DAEMONS_GLYPH_NOTES, 24, 1, 3
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_TARGET, 2, DAEMONS_GLYPH_CONVERGE, DAEMONS_GLYPH_NOTES, 24, 2, 3
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_TARGET, 2, DAEMONS_GLYPH_CONVERGE, DAEMONS_GLYPH_NOTES, 24, 3, 3
+	waitforvisualfinish
+	playsewithpan SE_M_TOXIC, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 6, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 0, 12, RGB(10, 11, 6)
+	waitforvisualfinish
+	delay 6
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 12, 0, RGB(10, 11, 6)
+	waitforvisualfinish
+	end
+.else
+	goto Move_SLUDGE_BOMB
+.endif
+
+@ PANORAMA -- CONTEXT, MATTE and the READING ROOM: lanes of bits and notes sweep across the whole of their side, past the frame on both edges.
+Move_PANORAMA:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	playsewithpan SE_M_PSYBEAM, SOUND_PAN_TARGET
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_TARGET, 2, DAEMONS_GLYPH_SWEEP, DAEMONS_GLYPH_BITS, 26, 0, 3
+	delay 2
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_TARGET, 2, DAEMONS_GLYPH_SWEEP, DAEMONS_GLYPH_NOTES, 26, 1, 3
+	delay 2
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_TARGET, 2, DAEMONS_GLYPH_SWEEP, DAEMONS_GLYPH_BITS, 26, 2, 3
+	delay 2
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_TARGET, 2, DAEMONS_GLYPH_SWEEP, DAEMONS_GLYPH_NOTES, 26, 3, 3
+	delay 2
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_TARGET, 2, DAEMONS_GLYPH_SWEEP, DAEMONS_GLYPH_BITS, 26, 4, 3
+	delay 2
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_TARGET, 2, DAEMONS_GLYPH_SWEEP, DAEMONS_GLYPH_NOTES, 26, 5, 3
+	delay 2
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_TARGET, 2, DAEMONS_GLYPH_SWEEP, DAEMONS_GLYPH_BITS, 26, 6, 3
+	delay 2
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_TARGET, 2, DAEMONS_GLYPH_SWEEP, DAEMONS_GLYPH_NOTES, 26, 7, 3
+	delay 2
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_TARGET, 2, DAEMONS_GLYPH_SWEEP, DAEMONS_GLYPH_BITS, 26, 8, 3
+	delay 2
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_TARGET, 2, DAEMONS_GLYPH_SWEEP, DAEMONS_GLYPH_NOTES, 26, 9, 3
+	delay 2
+	waitforvisualfinish
+	playsewithpan SE_M_SUPERSONIC, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 6, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_DEF_SIDE, 1, 0, 12, RGB(22, 10, 19)
+	waitforvisualfinish
+	delay 6
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_DEF_SIDE, 1, 12, 0, RGB(22, 10, 19)
+	waitforvisualfinish
+	end
+.else
+	goto Move_PSYCHIC
+.endif
+
+@ HINDSIGHT -- ENTROPY, ANNEAL and the NOTES: the bits go BACK first, from them to the user -- looking at the last strike -- and then the notes go forward, built on it.
+Move_HINDSIGHT:
+.if DAEMONS_DEBUG
+	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
+	playsewithpan SE_M_DETECT, SOUND_PAN_TARGET
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_TARGET, 2, DAEMONS_GLYPH_RETURN, DAEMONS_GLYPH_BITS, 18, 0, 3
+	delay 2
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_TARGET, 2, DAEMONS_GLYPH_RETURN, DAEMONS_GLYPH_BITS, 18, 1, 3
+	delay 2
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_TARGET, 2, DAEMONS_GLYPH_RETURN, DAEMONS_GLYPH_BITS, 18, 2, 3
+	delay 2
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_TARGET, 2, DAEMONS_GLYPH_RETURN, DAEMONS_GLYPH_BITS, 18, 3, 3
+	delay 2
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_TARGET, 2, DAEMONS_GLYPH_RETURN, DAEMONS_GLYPH_BITS, 18, 4, 3
+	delay 2
+	waitforvisualfinish
+	playsewithpan SE_M_EMBER, SOUND_PAN_ATTACKER
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 0, 4
+	delay 2
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 1, 4
+	delay 2
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 2, 4
+	delay 2
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 3, 4
+	delay 2
+	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_NOTES, 18, 4, 4
+	delay 2
+	waitforvisualfinish
+	playsewithpan SE_M_FLAMETHROWER, SOUND_PAN_TARGET
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 6, 1
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 0, 12, RGB(27, 19, 5)
+	waitforvisualfinish
+	delay 6
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 12, 0, RGB(27, 19, 5)
+	waitforvisualfinish
+	end
+.else
+	goto Move_FLAMETHROWER
+.endif

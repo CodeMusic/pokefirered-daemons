@@ -5493,3 +5493,191 @@ static void AnimTask_SlackOffSquish_Step(u8 taskId)
     if (!RunAffineAnimFromTaskData(&gTasks[taskId]))
         DestroyAnimVisualTask(taskId);
 }
+
+// T-392 (vision.md 9.24, amended 2026-10-08): THE GAME'S OWN SIGNATURE. The splash's 0 and 1 and its two notes
+// (graphics/intro/game_freak/sparkles_small: the presents scene's code becoming music) as battle particles. Two
+// palettes on one sheet: ANIM_TAG_DAEMONS_GLYPHS wears the splash's own colours -- the seven union routines' alone
+// (bible 0.7, Wisdom) -- and ANIM_TAG_DAEMONS_INK is grey, shaded at the start of a routine by AnimTask_DaemonsInk into
+// the routine's own type colour, so an ordinary routine adds no colour but its type's (clause 3).
+//
+// One sprite, gBattleAnimArgs:
+//   0 PATH   DAEMONS_GLYPH_STREAM (attacker to target), _RISE (up from arg 5's battler), _FALL (onto the target),
+//            _RING (outward round the target), _CONVERGE (from above and below to the target's middle), _SWEEP
+//            (across the target's side), _RETURN (target back to attacker)
+//   1 KIND   DAEMONS_GLYPH_BITS (0s and 1s, flickering) or DAEMONS_GLYPH_NOTES (the two notes, alternating)
+//   2 FRAMES how long it flies
+//   3 PHASE  where in its wave it starts, or its angle on a RING, or its lane on a SWEEP / CONVERGE
+//   4 WAVE   how far it ripples off its path, in pixels
+//   5 BATTLER for RISE: ANIM_ATTACKER or ANIM_TARGET
+#define sTimer  data[0]
+#define sFrames data[1]
+#define sX0     data[2]
+#define sY0     data[3]
+#define sX1     data[4]
+#define sY1     data[5]
+#define sPhase  data[6]
+#define sShape  data[7]   // kind | path << 4 | wave << 8
+
+static const struct OamData sOam_DaemonsGlyph =
+{
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .shape = SPRITE_SHAPE(8x8),
+    .size = SPRITE_SIZE(8x8),
+    .priority = 1,
+};
+
+static const union AnimCmd sAnim_DaemonsGlyph0[] = {ANIMCMD_FRAME(0, 1), ANIMCMD_END};
+static const union AnimCmd sAnim_DaemonsGlyph1[] = {ANIMCMD_FRAME(1, 1), ANIMCMD_END};
+static const union AnimCmd sAnim_DaemonsGlyph2[] = {ANIMCMD_FRAME(2, 1), ANIMCMD_END};
+static const union AnimCmd sAnim_DaemonsGlyph3[] = {ANIMCMD_FRAME(3, 1), ANIMCMD_END};
+static const union AnimCmd *const sAnims_DaemonsGlyph[] =
+{
+    sAnim_DaemonsGlyph0, sAnim_DaemonsGlyph1, sAnim_DaemonsGlyph2, sAnim_DaemonsGlyph3,
+};
+
+static void AnimDaemonsGlyph(struct Sprite *sprite);
+
+const struct SpriteTemplate gDaemonsGlyphInkSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_DAEMONS_GLYPHS,
+    .paletteTag = ANIM_TAG_DAEMONS_INK,
+    .oam = &sOam_DaemonsGlyph,
+    .anims = sAnims_DaemonsGlyph,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimDaemonsGlyph,
+};
+
+const struct SpriteTemplate gDaemonsGlyphSplashSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_DAEMONS_GLYPHS,
+    .paletteTag = ANIM_TAG_DAEMONS_GLYPHS,
+    .oam = &sOam_DaemonsGlyph,
+    .anims = sAnims_DaemonsGlyph,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimDaemonsGlyph,
+};
+
+static void AnimDaemonsGlyph_Step(struct Sprite *sprite)
+{
+    u8 kind = sprite->sShape & 0xF, path = (sprite->sShape >> 4) & 0xF, wave = (sprite->sShape >> 8) & 0xFF;
+    s32 t = sprite->sTimer, n = sprite->sFrames;
+    s16 x, y;
+
+    if (t > n)
+    {
+        DestroyAnimSprite(sprite);
+        return;
+    }
+    if (kind == DAEMONS_GLYPH_BITS)
+    {
+        if ((t & 3) == 0)
+            StartSpriteAnim(sprite, Random() & 1);           // the 0s and 1s flicker
+        sprite->invisible = (Random() % 6) == 0;
+    }
+    else if ((t & 7) == 0)
+    {
+        StartSpriteAnim(sprite, 2 + ((t >> 3) & 1));         // the notes, note to note lit
+    }
+    if (path == DAEMONS_GLYPH_RING)
+    {
+        s16 r = 4 + 36 * t / n;
+        x = sprite->sX0 + Cos((u8)sprite->sPhase, r);
+        y = sprite->sY0 + Sin((u8)sprite->sPhase, r) / 2;
+    }
+    else
+    {
+        x = sprite->sX0 + (sprite->sX1 - sprite->sX0) * t / n;
+        y = sprite->sY0 + (sprite->sY1 - sprite->sY0) * t / n;
+        if (path == DAEMONS_GLYPH_SWEEP || path == DAEMONS_GLYPH_CONVERGE)
+            x += Sin((u8)(sprite->sPhase + t * 12), wave);
+        else
+            y += Sin((u8)(sprite->sPhase + t * 12), wave);   // the ripple of a sound, as on GOTO's ribbon (T-387)
+    }
+    sprite->x = x;
+    sprite->y = y;
+    sprite->sTimer++;
+}
+
+static void AnimDaemonsGlyph(struct Sprite *sprite)
+{
+    u8 path = gBattleAnimArgs[0], kind = gBattleAnimArgs[1];
+    s16 ax = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
+    s16 ay = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
+    s16 tx = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
+    s16 ty = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
+    s16 lane = gBattleAnimArgs[3];
+
+    sprite->sFrames = gBattleAnimArgs[2] > 0 ? gBattleAnimArgs[2] : 24;
+    sprite->sPhase = gBattleAnimArgs[3] * 24;
+    sprite->sShape = (kind & 0xF) | ((path & 0xF) << 4) | ((gBattleAnimArgs[4] & 0xFF) << 8);
+    switch (path)
+    {
+    case DAEMONS_GLYPH_STREAM:
+    default:
+        sprite->sX0 = ax; sprite->sY0 = ay; sprite->sX1 = tx; sprite->sY1 = ty;
+        break;
+    case DAEMONS_GLYPH_RETURN:
+        sprite->sX0 = tx; sprite->sY0 = ty; sprite->sX1 = ax; sprite->sY1 = ay;
+        break;
+    case DAEMONS_GLYPH_RISE:
+        if (gBattleAnimArgs[5] == ANIM_TARGET)
+            ax = tx, ay = ty;
+        sprite->sX0 = ax + (lane % 5) * 6 - 12; sprite->sY0 = ay + 12;
+        sprite->sX1 = sprite->sX0 + (lane & 1 ? 8 : -8); sprite->sY1 = ay - 36;
+        break;
+    case DAEMONS_GLYPH_FALL:
+        sprite->sX0 = tx + (lane % 5) * 8 - 16; sprite->sY0 = ty - 56;
+        sprite->sX1 = sprite->sX0; sprite->sY1 = ty + 8;
+        break;
+    case DAEMONS_GLYPH_RING:
+        sprite->sX0 = tx; sprite->sY0 = ty;
+        sprite->sPhase = (u8)(lane * 32);
+        break;
+    case DAEMONS_GLYPH_CONVERGE:
+        sprite->sX0 = tx + (lane % 4) * 8 - 12; sprite->sY0 = (lane & 1) ? ty - 40 : ty + 32;
+        sprite->sX1 = sprite->sX0; sprite->sY1 = ty;
+        break;
+    case DAEMONS_GLYPH_SWEEP:
+        sprite->sX0 = tx - 56; sprite->sY0 = ty + (lane % 5) * 6 - 12;
+        sprite->sX1 = tx + 56; sprite->sY1 = sprite->sY0;
+        break;
+    }
+    sprite->x = sprite->sX0;
+    sprite->y = sprite->sY0;
+    sprite->sTimer = 0;
+    StartSpriteAnim(sprite, kind == DAEMONS_GLYPH_BITS ? (Random() & 1) : 2);
+    sprite->callback = AnimDaemonsGlyph_Step;
+}
+
+#undef sTimer
+#undef sFrames
+#undef sX0
+#undef sY0
+#undef sX1
+#undef sY1
+#undef sPhase
+#undef sShape
+
+// The ink, shaded into the routine's type colour: each grey of ANIM_TAG_DAEMONS_INK times the colour (args 0), so its
+// darks stay dark and its lights become the type's own -- the only colour an ordinary routine may add (9.24 clause 3).
+// Written to both palette buffers, so a fade in the same routine fades the shaded ink, not the grey.
+void AnimTask_DaemonsInk(u8 taskId)
+{
+    u8 slot = IndexOfSpritePaletteTag(ANIM_TAG_DAEMONS_INK);
+    u16 colour = gBattleAnimArgs[0];
+
+    if (slot != 0xFF)
+    {
+        u16 i, base = OBJ_PLTT_ID(slot);
+        for (i = 1; i < 16; i++)
+        {
+            u16 grey = gPlttBufferUnfaded[base + i] & 0x1F;
+            u16 r = (colour & 0x1F) * grey / 31, g = ((colour >> 5) & 0x1F) * grey / 31, b = ((colour >> 10) & 0x1F) * grey / 31;
+            gPlttBufferUnfaded[base + i] = gPlttBufferFaded[base + i] = RGB(r, g, b);
+        }
+    }
+    DestroyAnimVisualTask(taskId);
+}
