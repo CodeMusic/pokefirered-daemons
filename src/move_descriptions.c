@@ -361,6 +361,15 @@ const u8 gMoveDescription_PsychoBoost[] = _("Goes over it far\ntoo long. Lands\n
 const u8 gMoveDescription_Consensus[] = _("A swarm strikes as\none. It is not\nclever, but it\nkeeps showing up.");
 const u8 gMoveDescription_Recursion[] = _("Builds on its own\nlast result, each\ntime harder. Any\ninterruption: gone.");
 
+// T-389 (bible 0.7, Wisdom): the seven union routines. DRAFT.
+const u8 gMoveDescription_Fluency[] = _("Says the same thing\nevery time: damage\nequal to its level.");
+const u8 gMoveDescription_Stillpoint[] = _("Waits where the\nwater is calm. Twice\nas hard if it was\nhit first.");
+const u8 gMoveDescription_Reconnect[] = _("Reaches out again\nwhere the line went\ndead. It never\nmisses.");
+const u8 gMoveDescription_Praxis[] = _("Does what it read,\nand grows by doing\nit. Raises its\nATTACK.");
+const u8 gMoveDescription_Median[] = _("Ignores the highest\nand the lowest. Cuts\ntheir HP to the\nmiddle.");
+const u8 gMoveDescription_Panorama[] = _("Takes in all around\nthe frame. Hits both\nof them; never\nmisses.");
+const u8 gMoveDescription_Hindsight[] = _("Builds on its last\nstrike: twice as\nhard each turn in a\nrow.");
+
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_POUND         - 1] = gMoveDescription_Pound,
     [MOVE_KARATE_CHOP   - 1] = gMoveDescription_KarateChop,
@@ -718,4 +727,11 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_PSYCHO_BOOST  - 1] = gMoveDescription_PsychoBoost,
     [MOVE_CONSENSUS     - 1] = gMoveDescription_Consensus,
     [MOVE_RECURSION     - 1] = gMoveDescription_Recursion,
+    [MOVE_FLUENCY        - 1] = gMoveDescription_Fluency,
+    [MOVE_STILLPOINT     - 1] = gMoveDescription_Stillpoint,
+    [MOVE_RECONNECT      - 1] = gMoveDescription_Reconnect,
+    [MOVE_PRAXIS         - 1] = gMoveDescription_Praxis,
+    [MOVE_MEDIAN         - 1] = gMoveDescription_Median,
+    [MOVE_PANORAMA       - 1] = gMoveDescription_Panorama,
+    [MOVE_HINDSIGHT      - 1] = gMoveDescription_Hindsight,
 };

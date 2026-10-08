@@ -5832,12 +5832,25 @@ bool8 TryIncrementMonLevel(struct Pokemon *mon)
     }
 }
 
+//  T-389 (bible 0.7, Wisdom): the seven union routines' PLUGINs teach any daemon, as the READING ROOM's lectures do.
+//  Their bits were taken out of every learnset when the PLUGINs were repointed, so this is the only rule for them.
+static bool8 IsUnionPlugin(u8 tm)
+{
+    return tm == ITEM_TM05 - ITEM_TM01 || tm == ITEM_TM10 - ITEM_TM01 || tm == ITEM_TM21 - ITEM_TM01
+        || tm == ITEM_TM32 - ITEM_TM01 || tm == ITEM_TM37 - ITEM_TM01 || tm == ITEM_TM43 - ITEM_TM01
+        || tm == ITEM_TM45 - ITEM_TM01;
+}
+
 u32 CanMonLearnTMHM(struct Pokemon *mon, u8 tm)
 {
     u16 species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG, NULL);
     if (species == SPECIES_EGG)
     {
         return 0;
+    }
+    else if (IsUnionPlugin(tm))
+    {
+        return species != SPECIES_NONE;
     }
     else if (tm < 32)
     {

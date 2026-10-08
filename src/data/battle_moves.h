@@ -4648,4 +4648,100 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
     },
+
+    // T-389 (bible 0.7, Wisdom): the seven union routines, one per MARK and its understanding. Each runs on an effect
+    // vanilla already has, chosen for what the pair means; each takes its leader's type. invariant 6: only the
+    // STRINGS are ours (LEGACY is ROCK, FLOW WATER, SIGNAL ELECTRIC, GROWTH GRASS, CORRUPT POISON, CONTEXT PSYCHIC,
+    // ENTROPY FIRE).
+    // FLUENCY -- CAIRN, the SLATE MARK and the SCHOOL: says the same thing every time (damage equal to its level).
+    [MOVE_FLUENCY] =
+    {
+        .effect = EFFECT_LEVEL_DAMAGE,
+        .power = 1,
+        .type = TYPE_ROCK,
+        .accuracy = 100,
+        .pp = 15,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+    },
+    // STILLPOINT -- BASIN, the SLOPE MARK and the FIRST: waits where the water is calm (REVENGE: last, and twice as hard if hit).
+    [MOVE_STILLPOINT] =
+    {
+        .effect = EFFECT_REVENGE,
+        .power = 60,
+        .type = TYPE_WATER,
+        .accuracy = 100,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = -4,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+    },
+    // RECONNECT -- GAUGE, the SENSE MARK and the RETURN: reaches out again where the line went dead, and gets through.
+    [MOVE_RECONNECT] =
+    {
+        .effect = EFFECT_ALWAYS_HIT,
+        .power = 80,
+        .type = TYPE_ELECTRIC,
+        .accuracy = 0,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+    },
+    // PRAXIS -- TRELLIS, the FIT MARK and the GUIDE: does what it read, and grows by doing it (ATTACK up, every hit).
+    [MOVE_PRAXIS] =
+    {
+        .effect = EFFECT_ATTACK_UP_HIT,
+        .power = 60,
+        .type = TYPE_GRASS,
+        .accuracy = 100,
+        .pp = 10,
+        .secondaryEffectChance = 100,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+    },
+    // MEDIAN -- TILT, the SKEW MARK and SCORN: ignores the highest and the lowest, and strikes the middle (half their HP).
+    [MOVE_MEDIAN] =
+    {
+        .effect = EFFECT_SUPER_FANG,
+        .power = 1,
+        .type = TYPE_POISON,
+        .accuracy = 90,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+    },
+    // PANORAMA -- MATTE, the FRAME MARK and the READING ROOM: takes in everything around the frame (both foes, never misses).
+    [MOVE_PANORAMA] =
+    {
+        .effect = EFFECT_ALWAYS_HIT,
+        .power = 75,
+        .type = TYPE_PSYCHIC,
+        .accuracy = 0,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_BOTH,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+    },
+    // HINDSIGHT -- ANNEAL, the HEAT MARK and the NOTES: builds on its last strike (FURY CUTTER's doubling, in a row).
+    [MOVE_HINDSIGHT] =
+    {
+        .effect = EFFECT_FURY_CUTTER,
+        .power = 40,
+        .type = TYPE_FIRE,
+        .accuracy = 95,
+        .pp = 20,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+    },
 };

@@ -360,5 +360,12 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] = {
     [MOVE_DOOM_DESIRE]   = _("PROMISE"),
     [MOVE_PSYCHO_BOOST]  = _("OVERTHINK"),
     [MOVE_CONSENSUS]     = _("CONSENSUS"),
-    [MOVE_RECURSION]     = _("RECURSION")
+    [MOVE_RECURSION]     = _("RECURSION"),
+    [MOVE_FLUENCY]       = _("FLUENCY"),
+    [MOVE_STILLPOINT]    = _("STILLPOINT"),
+    [MOVE_RECONNECT]     = _("RECONNECT"),
+    [MOVE_PRAXIS]        = _("PRAXIS"),
+    [MOVE_MEDIAN]        = _("MEDIAN"),
+    [MOVE_PANORAMA]      = _("PANORAMA"),
+    [MOVE_HINDSIGHT]     = _("HINDSIGHT")
 };

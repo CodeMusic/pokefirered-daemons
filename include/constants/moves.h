@@ -367,8 +367,17 @@
 // RECURSION (vision.md 4.7): S.T.A.R.R.'s signature, and given to nothing else.
 // Appended the way CONSENSUS was, so no existing ID moves.
 #define MOVE_RECURSION 356
+// T-389 (bible 0.7, Wisdom): the seven union routines, each a MARK's intelligence joined to its understanding, taught
+// by the PLUGINs the leaders hand over (05, 10, 21, 32, 37, 43, 45 -- party_menu.h). Appended, so no existing ID moves.
+#define MOVE_FLUENCY 357
+#define MOVE_STILLPOINT 358
+#define MOVE_RECONNECT 359
+#define MOVE_PRAXIS 360
+#define MOVE_MEDIAN 361
+#define MOVE_PANORAMA 362
+#define MOVE_HINDSIGHT 363
 
-#define MOVES_COUNT 357
+#define MOVES_COUNT 364
 
 // Used for checks for moves affected by Disable, Mimic, etc.
 #define MOVE_UNAVAILABLE 0xFFFF

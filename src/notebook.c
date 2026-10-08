@@ -15,6 +15,7 @@
 #include "pokedex.h"   // T-257
 #include "data.h"   // T-257: gSpeciesNames
 #include "book_reader.h"
+#include "notebook.h"
 #include "constants/songs.h"
 #include "data/notebook_documents.h"   // T-224: the documents tools/gbadocs.py has placed
 
@@ -46,6 +47,7 @@ enum
     NB_THE_FILE,
     NB_PROSPECTUS,
     NB_PEER_REVIEW,
+    NB_INSIGHT,            // T-390: what a MARK and its understanding make together, in the player's own words
     NB_SECTION_COUNT
 };
 
@@ -77,6 +79,7 @@ static const u8 sSection_Correspondence[] = _("CORRESPONDENCE");
 static const u8 sSection_TheFile[]        = _("THE FILE");
 static const u8 sSection_Prospectus[]     = _("PROSPECTUS");
 static const u8 sSection_PeerReview[]     = _("PEER REVIEW");
+static const u8 sSection_Insight[]        = _("INSIGHT");
 
 static const u8 *const sSectionNames[NB_SECTION_COUNT] =
 {
@@ -88,6 +91,7 @@ static const u8 *const sSectionNames[NB_SECTION_COUNT] =
     [NB_THE_FILE]        = sSection_TheFile,
     [NB_PROSPECTUS]      = sSection_Prospectus,
     [NB_PEER_REVIEW]     = sSection_PeerReview,
+    [NB_INSIGHT]         = sSection_Insight,
 };
 
 static const u8 sText_Close[] = _("CLOSE");
@@ -339,6 +343,8 @@ static const u8 sTitle_Review_Transcript[] = _("TRANSCRIPT");
 static const u8 sTitle_Review_Sealed[]     = _("SEALED");
 static const u8 sTitle_Prospectus_Scores[]  = _("REVIEW SCORES");
 
+#include "data/wisdom.h"   // T-390: the seven insights, written by DAEMONS tools/gbawisdom.py
+
 //  THE AUTHORED ORDER. A new entry goes where it belongs in the finished file, not at the end.
 static const struct NotebookEntry sEntries[] =
 {
@@ -400,7 +406,30 @@ static const struct NotebookEntry sEntries[] =
     { NB_PEER_REVIEW,  NB_KIND_TEXT,  0, FLAG_NOTEBOOK_REVIEW_TRANSCRIPT, 0, sTitle_Review_Transcript, SaffronCity_MrPsychicsHouse_Text_OwlConcession },
     //  4.34 rule 1: a cover sheet, and the notebook refuses the rest -- which says it louder than no entry at all.
     { NB_PEER_REVIEW,  NB_KIND_TEXT,  0, FLAG_NOTEBOOK_REVIEW_SEALED,   0, sTitle_Review_Sealed,       SaffronCity_MrPsychicsHouse_Text_NotMineToDeliver },
+    //  T-390 (bible 0.7, Wisdom; rule 2 amended): INSIGHT grows one line a pair and is never numbered.
+    NB_INSIGHT_ENTRIES
 };
+
+//  T-390: the first step after a MARK and its understanding are both held (and the NOTEBOOK is there to write in),
+//  an insight arrives -- once each. field_control_avatar.c's step hook asks, as it asks for OPUS's one beat; the
+//  line is left in gStringVar4 for Daemons_EventScript_Insight to say.
+bool8 Daemons_TryInsightArrives(void)
+{
+    u32 i;
+
+    if (!FlagGet(FLAG_GOT_NOTEBOOK))
+        return FALSE;
+    for (i = 0; i < ARRAY_COUNT(sWisdomPairs); i++)
+    {
+        if (FlagGet(sWisdomPairs[i].mark) && FlagGet(sWisdomPairs[i].root) && !FlagGet(sWisdomPairs[i].insight))
+        {
+            FlagSet(sWisdomPairs[i].insight);
+            StringExpandPlaceholders(gStringVar4, sWisdomPairs[i].arrival);
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
 
 static EWRAM_DATA struct ListMenuItem *sItems = NULL;
 static EWRAM_DATA u16 sArrowScroll = 0;

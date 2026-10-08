@@ -377,6 +377,13 @@ gBattleAnims_Moves::
 	.4byte Move_PSYCHO_BOOST
 	.4byte Move_PIN_MISSILE      @ CONSENSUS: converging projectiles
 	.4byte Move_RECURSION        @ RECURSION: its own script since T-161 (it played PSYCHO BOOST's)
+	.4byte Move_ROCK_TOMB          @ FLUENCY (T-389): its type's script until T-392 gives it its own
+	.4byte Move_WATER_PULSE        @ STILLPOINT (T-389): its type's script until T-392 gives it its own
+	.4byte Move_SHOCK_WAVE         @ RECONNECT (T-389): its type's script until T-392 gives it its own
+	.4byte Move_GIGA_DRAIN         @ PRAXIS (T-389): its type's script until T-392 gives it its own
+	.4byte Move_SLUDGE_BOMB        @ MEDIAN (T-389): its type's script until T-392 gives it its own
+	.4byte Move_PSYCHIC            @ PANORAMA (T-389): its type's script until T-392 gives it its own
+	.4byte Move_FLAMETHROWER       @ HINDSIGHT (T-389): its type's script until T-392 gives it its own
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2

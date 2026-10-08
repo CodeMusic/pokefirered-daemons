@@ -4698,7 +4698,7 @@
       "price": 1000,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "Forces them out and\\nan ally in. In the\\nwild, the battle ends.",
+      "description_english": "Says the same thing every time:\\ndamage equal to its level.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_TM_CASE",
@@ -4707,7 +4707,7 @@
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0,
-      "moveId": "Roar"
+      "moveId": "Fluency"
     },
     {
       "english": "PLUGIN06",
@@ -4783,7 +4783,7 @@
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "Its type and force are\\nset by traits the user was\\nmade with, never shown.",
+      "description_english": "Waits where the water is calm.\\nTwice as hard if it was hit first.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_TM_CASE",
@@ -4792,7 +4792,7 @@
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0,
-      "moveId": "HiddenPower"
+      "moveId": "Stillpoint"
     },
     {
       "english": "PLUGIN11",
@@ -4970,7 +4970,7 @@
       "price": 1000,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "This attack move grows\\nmore powerful the less\\nthe user likes its USER.",
+      "description_english": "Reaches out again where the line\\nwent dead. It never misses.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_TM_CASE",
@@ -4979,7 +4979,7 @@
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0,
-      "moveId": "Frustration"
+      "moveId": "Reconnect"
     },
     {
       "english": "PLUGIN22",
@@ -5157,7 +5157,7 @@
       "price": 2000,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "More than one of it\\nis running at once.\\nRaises evasiveness.",
+      "description_english": "Does what it read, and grows by\\ndoing it. Raises its ATTACK.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_TM_CASE",
@@ -5166,7 +5166,7 @@
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0,
-      "moveId": "DoubleTeam"
+      "moveId": "Praxis"
     },
     {
       "english": "PLUGIN33",
@@ -5242,7 +5242,7 @@
       "price": 2000,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "Everything degrades\\na little each turn.\\nSome types resist.",
+      "description_english": "Ignores the highest and the lowest.\\nCuts their HP to the middle.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_TM_CASE",
@@ -5251,7 +5251,7 @@
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0,
-      "moveId": "Sandstorm"
+      "moveId": "Median"
     },
     {
       "english": "PLUGIN38",
@@ -5344,7 +5344,7 @@
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "An attack that may have\\nan additional effect that\\nvaries with the terrain.",
+      "description_english": "Takes in all around the frame. Hits\\nboth of them; never misses.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_TM_CASE",
@@ -5353,7 +5353,7 @@
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0,
-      "moveId": "SecretPower"
+      "moveId": "Panorama"
     },
     {
       "english": "PLUGIN44",
@@ -5378,7 +5378,7 @@
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "Binds their attention to\\nthe user, which may leave\\nthem unable to act.",
+      "description_english": "Builds on its last strike: twice as\\nhard each turn in a row.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_TM_CASE",
@@ -5387,7 +5387,7 @@
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0,
-      "moveId": "Attract"
+      "moveId": "Hindsight"
     },
     {
       "english": "PLUGIN46",

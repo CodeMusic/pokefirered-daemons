@@ -1633,6 +1633,23 @@
 //  brought home without the app; the app's next SYNC settles its side and clears it, and SEND waits until then.
 #define FLAG_COMPANION_LINKED         (DAEMONS_FLAGS_START + 0x70)
 #define FLAG_COMPANION_RECALLED       (DAEMONS_FLAGS_START + 0x71)
+//  T-389 (bible 0.7, Wisdom; the user, 2026-10-08): the leader has handed over the union routine's PLUGIN -- given once,
+//  when the player comes back to the BENCHMARK holding the MARK's paired understanding.
+#define FLAG_GOT_UNION_CAIRN          (DAEMONS_FLAGS_START + 0x80)
+#define FLAG_GOT_UNION_BASIN          (DAEMONS_FLAGS_START + 0x81)
+#define FLAG_GOT_UNION_GAUGE          (DAEMONS_FLAGS_START + 0x82)
+#define FLAG_GOT_UNION_TRELLIS        (DAEMONS_FLAGS_START + 0x83)
+#define FLAG_GOT_UNION_TILT           (DAEMONS_FLAGS_START + 0x84)
+#define FLAG_GOT_UNION_MATTE          (DAEMONS_FLAGS_START + 0x85)
+#define FLAG_GOT_UNION_ANNEAL         (DAEMONS_FLAGS_START + 0x86)
+//  T-390: an insight has arrived -- a MARK and its understanding both held -- and is filed in the NOTEBOOK's INSIGHT.
+#define FLAG_INSIGHT_DILIGENCE        (DAEMONS_FLAGS_START + 0x88)
+#define FLAG_INSIGHT_CHASTITY         (DAEMONS_FLAGS_START + 0x89)
+#define FLAG_INSIGHT_CHARITY          (DAEMONS_FLAGS_START + 0x8A)
+#define FLAG_INSIGHT_KINDNESS         (DAEMONS_FLAGS_START + 0x8B)
+#define FLAG_INSIGHT_TEMPERANCE       (DAEMONS_FLAGS_START + 0x8C)
+#define FLAG_INSIGHT_PATIENCE         (DAEMONS_FLAGS_START + 0x8D)
+#define FLAG_INSIGHT_HUMILITY         (DAEMONS_FLAGS_START + 0x8E)
 
 //  T-19. Two beats of one scene, five islands and a sea apart.
 #define FLAG_TY_GAVE_PAYLOAD          (DAEMONS_FLAGS_START + 0x20)

@@ -51,15 +51,15 @@ MtMoon_B2F_EventScript_ItemTM46::
 	end
 
 Route4_EventScript_ItemTM05::
-	finditem ITEM_TM05
+	finditem ITEM_ETHER   @ T-389: PLUGIN05 teaches a union routine now, handed over by a leader
 	end
 
 Route24_EventScript_ItemTM45::
-	finditem ITEM_TM45
+	finditem ITEM_PP_UP   @ T-389: PLUGIN45 teaches a union routine now, handed over by a leader
 	end
 
 Route25_EventScript_ItemTM43::
-	finditem ITEM_TM43
+	finditem ITEM_RARE_CANDY   @ T-389: PLUGIN43 teaches a union routine now, handed over by a leader
 	end
 
 SSAnne_1F_Room2_EventScript_ItemTM31::
@@ -123,7 +123,7 @@ RocketHideout_B3F_EventScript_ItemRareCandy::
 	end
 
 RocketHideout_B3F_EventScript_ItemTM21::
-	finditem ITEM_TM21
+	finditem ITEM_MAX_ETHER   @ T-389: PLUGIN21 teaches a union routine now, handed over by a leader
 	end
 
 RocketHideout_B4F_EventScript_ItemTM49::
@@ -207,7 +207,7 @@ SafariZone_North_EventScript_ItemTM47::
 	end
 
 SafariZone_West_EventScript_ItemTM32::
-	finditem ITEM_TM32
+	finditem ITEM_PP_UP   @ T-389: PLUGIN32 teaches a union routine now, handed over by a leader
 	end
 
 SafariZone_West_EventScript_ItemGoldTeeth::
@@ -355,7 +355,7 @@ VictoryRoad_2F_EventScript_ItemFullHeal::
 	end
 
 VictoryRoad_2F_EventScript_ItemTM37::
-	finditem ITEM_TM37
+	finditem ITEM_FULL_RESTORE   @ T-389: PLUGIN37 teaches a union routine now, handed over by a leader
 	end
 
 VictoryRoad_3F_EventScript_ItemMaxRevive::

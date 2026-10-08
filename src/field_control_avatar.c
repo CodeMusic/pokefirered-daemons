@@ -26,6 +26,7 @@
 #include "field_message_box.h"
 #include "map_name_popup.h"
 #include "pokedex_screen.h"   // T-203
+#include "notebook.h"         // T-390: an insight arrives, in every build
 #include "school_lift.h"
 
 // T-196: the label the popup carries while an echo is on screen.
@@ -912,6 +913,12 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
             {
                 FlagSet(FLAG_OPUS_ANNOUNCED);
                 ScriptContext_SetupScript(Daemons_EventScript_OpusWrote);
+                return TRUE;
+            }
+            //  T-390. And again: a MARK and its understanding both held, and an insight arrives -- once each.
+            if (Daemons_TryInsightArrives())
+            {
+                ScriptContext_SetupScript(Daemons_EventScript_Insight);
                 return TRUE;
             }
         }

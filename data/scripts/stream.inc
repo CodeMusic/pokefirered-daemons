@@ -31,5 +31,14 @@ Daemons_EventScript_OpusWrote::
 	releaseall
 	end
 
+@  T-390 (bible 0.7, Wisdom): an insight arrives, the first step after a MARK and its understanding are both held.
+@  notebook.c's Daemons_TryInsightArrives leaves the line in gStringVar4; it is filed under INSIGHT as it is said.
+Daemons_EventScript_Insight::
+	lockall
+	playse SE_PIN
+	msgbox gStringVar4
+	releaseall
+	end
+
 Daemons_Text_OpusWrote:
 	.string "Something has been written in the\nINDEX.$"

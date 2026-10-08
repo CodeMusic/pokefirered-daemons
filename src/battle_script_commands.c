@@ -781,7 +781,7 @@ static const struct PickupItem sPickupItems[] =
     { ITEM_RAWST_BERRY, 55 },
     { ITEM_ASPEAR_BERRY, 65 },
     { ITEM_PERSIM_BERRY, 75 },
-    { ITEM_TM10, 80 },
+    { ITEM_ETHER, 80 },       // T-389: PLUGIN10 teaches STILLPOINT now, and only BASIN hands it over
     { ITEM_PP_UP, 85 },
     { ITEM_RARE_CANDY, 90 },
     { ITEM_NUGGET, 95 },
