@@ -18,6 +18,7 @@
 #include "overworld.h"
 #include "party_menu.h"
 #include "quest_log.h"
+#include "random.h"
 #include "script.h"
 #include "special_field_anim.h"
 #include "task.h"
@@ -3224,42 +3225,360 @@ static void SpriteCB_NPCFlyOut(struct Sprite *sprite)
     }
 }
 
-// Task data for Task_FlyOut / Task_FlyIn
-#define tState        data[0]
-#define tMonPartyId   data[1]
-#define tBirdSpriteId data[1] // re-used
-#define tTimer        data[2]
-#define tAvatarFlags  data[15]
+// T-387: GOTO is not a bird (the user, 2026-10-08). Going, the player comes apart into the splash's own 0s and 1s
+// (graphics/intro/game_freak: the presents scene's code becoming music), a ribbon of its notes comes down the swoop the
+// bird flew, and the code goes off with the music along it. The ribbon rides a travelling wave -- the ripple of a
+// sound, not the glide of a wing -- so the path is the bird's ellipse but the flight is not. Arriving is the same run
+// backwards: the ribbon brings the code down, it settles where the player stands and flickers back into them, and the
+// notes go on.
+#define tState       data[0]
+#define tMonPartyId  data[1]
+#define tTimer       data[2]
+#define tFrame       data[3] // frames since the ribbon's head set out (negative while the player comes apart)
+#define tCenterX     data[4] // the player, on screen
+#define tCenterY     data[5]
+#define tLanding     data[6]
+#define tReform      data[7] // arriving: frames since the code began turning back into the player
+#define tAvatarFlags data[15]
+
+#define GOTO_TAG_GLYPHS 0x1030 // the splash's 8x8 sheet: 0, 1, a note, a note lit -- and the palette both share
+#define GOTO_TAG_NOTES  0x1031 // its 32x32 sheet: four notes in four colours
+#define GOTO_NUM_BITS   12
+#define GOTO_NUM_NOTES  12     // every third one big
+#define GOTO_DISSOLVE   40     // frames the player takes to come apart, or back
+#define GOTO_OUT_MEET   16     // the ribbon's frame at the player, going ...
+#define GOTO_IN_MEET    32     // ... and arriving
+#define GOTO_WAVE       6      // the ripple's depth, in pixels
+
+enum {
+    GLYPH_ON_PLAYER,
+    GLYPH_RIBBON,
+    GLYPH_GONE,
+};
+
+static const u16 sGoto_Pal[]        = INCBIN_U16("graphics/intro/game_freak/sparkles.gbapal");
+static const u32 sGoto_Glyphs_Gfx[] = INCBIN_U32("graphics/intro/game_freak/sparkles_small.4bpp.lz");
+static const u32 sGoto_Notes_Gfx[]  = INCBIN_U32("graphics/intro/game_freak/sparkles_big.4bpp.lz");
+
+static const struct CompressedSpriteSheet sGoto_SpriteSheets[] =
+{
+    {sGoto_Glyphs_Gfx, 0x80,  GOTO_TAG_GLYPHS},
+    {sGoto_Notes_Gfx,  0x800, GOTO_TAG_NOTES},
+};
+
+static const struct SpritePalette sGoto_SpritePalette = {sGoto_Pal, GOTO_TAG_GLYPHS};
+
+static const struct OamData sGoto_Oam_Glyph =
+{
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .shape = SPRITE_SHAPE(8x8),
+    .size = SPRITE_SIZE(8x8),
+    .priority = 1,
+};
+
+static const struct OamData sGoto_Oam_Note =
+{
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .shape = SPRITE_SHAPE(32x32),
+    .size = SPRITE_SIZE(32x32),
+    .priority = 1,
+};
+
+// One still frame each; the callback chooses between them
+static const union AnimCmd sGoto_Anim_Frame0[] = {ANIMCMD_FRAME(0, 1), ANIMCMD_END};
+static const union AnimCmd sGoto_Anim_Frame1[] = {ANIMCMD_FRAME(1, 1), ANIMCMD_END};
+static const union AnimCmd sGoto_Anim_Frame2[] = {ANIMCMD_FRAME(2, 1), ANIMCMD_END};
+static const union AnimCmd sGoto_Anim_Frame3[] = {ANIMCMD_FRAME(3, 1), ANIMCMD_END};
+static const union AnimCmd sGoto_Anim_Note0[]  = {ANIMCMD_FRAME(0, 1), ANIMCMD_END};
+static const union AnimCmd sGoto_Anim_Note1[]  = {ANIMCMD_FRAME(16, 1), ANIMCMD_END};
+static const union AnimCmd sGoto_Anim_Note2[]  = {ANIMCMD_FRAME(32, 1), ANIMCMD_END};
+static const union AnimCmd sGoto_Anim_Note3[]  = {ANIMCMD_FRAME(48, 1), ANIMCMD_END};
+
+static const union AnimCmd *const sGoto_Anims_Glyph[] =
+{
+    sGoto_Anim_Frame0, // 0
+    sGoto_Anim_Frame1, // 1
+    sGoto_Anim_Frame2, // a note
+    sGoto_Anim_Frame3, // a note lit
+};
+
+static const union AnimCmd *const sGoto_Anims_Note[] =
+{
+    sGoto_Anim_Note0,
+    sGoto_Anim_Note1,
+    sGoto_Anim_Note2,
+    sGoto_Anim_Note3,
+};
+
+static void SpriteCB_GotoGlyph(struct Sprite *sprite);
+
+static const struct SpriteTemplate sGoto_SpriteTemplate_Glyph =
+{
+    .tileTag = GOTO_TAG_GLYPHS,
+    .paletteTag = GOTO_TAG_GLYPHS,
+    .oam = &sGoto_Oam_Glyph,
+    .anims = sGoto_Anims_Glyph,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_GotoGlyph,
+};
+
+static const struct SpriteTemplate sGoto_SpriteTemplate_Note =
+{
+    .tileTag = GOTO_TAG_NOTES,
+    .paletteTag = GOTO_TAG_GLYPHS,
+    .oam = &sGoto_Oam_Note,
+    .anims = sGoto_Anims_Note,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_GotoGlyph,
+};
+
+// Sprite data for a glyph
+#define sTaskId data[0]
+#define sDelay  data[1] // frames behind the ribbon's head
+#define sOffX   data[2] // where on the player a bit sits, or how far off the ribbon a note rides
+#define sOffY   data[3]
+#define sIsBit  data[4]
+#define sMode   data[5]
+#define sAppear data[6] // going: the frame a bit shows on the player; arriving: the reform frame it goes out
+#define sAge    data[7]
+
+// Where the ribbon is f frames after its head set out. Not the bird's ellipse: a parabola, steep where it falls from
+// above the screen's corner and flat where it meets the player -- going, it drops from the top right in GOTO_OUT_MEET
+// frames and climbs away to the top left in twice that, carrying; arriving, the other way round -- with a wave along it
+// `amp` pixels deep. Each glyph's phase is its place in the ribbon, so the ripple runs down it.
+static bool8 GotoRibbonAt(struct Task *task, s16 f, s16 phase, s16 amp, s16 *x, s16 *y)
+{
+    s32 n, k, w, h, meet = task->tLanding ? GOTO_IN_MEET : GOTO_OUT_MEET;
+    if (f < 0)
+        return FALSE;
+    if (f < meet) // coming down to the player, from the right
+    {
+        n = meet;
+        k = meet - f;
+        w = task->tLanding ? 180 : 140;
+        h = 120;
+    }
+    else          // and away from them, to the left
+    {
+        n = task->tLanding ? GOTO_OUT_MEET : GOTO_IN_MEET;
+        k = f - meet;
+        if (k > n)
+            return FALSE;
+        w = task->tLanding ? -140 : -180;
+        h = 120;
+    }
+    *x = task->tCenterX + w * k / n;
+    *y = task->tCenterY - h * k * k / (n * n) + Sin((u8)phase, amp);
+    return TRUE;
+}
+
+static void SpriteCB_GotoGlyph(struct Sprite *sprite)
+{
+    struct Task *task = &gTasks[sprite->sTaskId];
+    s16 f = task->tFrame - sprite->sDelay;
+    s16 x, y, amp, offX, offY;
+
+    sprite->sAge++;
+    if (sprite->sIsBit)
+    {
+        if ((Random() & 3) == 0)
+            StartSpriteAnim(sprite, Random() & 1); // the 0s and 1s flicker
+    }
+    else if (sprite->template == &sGoto_SpriteTemplate_Glyph && (sprite->sAge & 7) == 0)
+    {
+        StartSpriteAnim(sprite, sprite->animNum ^ 1); // the small notes twinkle, note to note lit
+    }
+
+    switch (sprite->sMode)
+    {
+    case GLYPH_ON_PLAYER:
+        sprite->x = task->tCenterX + sprite->sOffX;
+        sprite->y = task->tCenterY + sprite->sOffY;
+        if (!task->tLanding)
+        {
+            sprite->invisible = task->tFrame < sprite->sAppear || (Random() & 3) == 0;
+            if (f >= GOTO_OUT_MEET) // the ribbon has reached it: it goes with the music
+            {
+                sprite->sMode = GLYPH_RIBBON;
+                sprite->sAge = 0;
+            }
+        }
+        else
+        {
+            sprite->invisible = (Random() & 3) == 0;
+            if (task->tReform > sprite->sAppear) // it is the player again
+            {
+                sprite->sMode = GLYPH_GONE;
+                sprite->invisible = TRUE;
+            }
+        }
+        break;
+    case GLYPH_RIBBON:
+        offX = sprite->sOffX;
+        offY = sprite->sOffY;
+        amp = GOTO_WAVE;
+        if (sprite->sIsBit && !task->tLanding)
+        {
+            // leaving the player it is still where it was on them, and closes on the ribbon as the wave takes it
+            s16 closing = 16 + max(0, 16 - sprite->sAge);
+            offX = offX * closing / 32;
+            offY = offY * closing / 32;
+            amp = GOTO_WAVE * min(f - GOTO_OUT_MEET, 16) / 16;
+        }
+        else if (sprite->sIsBit && task->tLanding)
+        {
+            if (f >= GOTO_IN_MEET) // down: it settles where it will be part of the player
+            {
+                sprite->sMode = GLYPH_ON_PLAYER;
+                sprite->x = task->tCenterX + offX;
+                sprite->y = task->tCenterY + offY;
+                break;
+            }
+            offX = offX * max(0, f) / GOTO_IN_MEET;
+            offY = offY * max(0, f) / GOTO_IN_MEET;
+            amp = GOTO_WAVE * (GOTO_IN_MEET - max(0, f)) / GOTO_IN_MEET;
+        }
+        if (!GotoRibbonAt(task, f, task->tFrame * 8 + sprite->sDelay * 24, amp, &x, &y))
+        {
+            sprite->invisible = TRUE;
+            if (f > 0)
+                sprite->sMode = GLYPH_GONE;
+            break;
+        }
+        sprite->x = x + offX;
+        sprite->y = y + offY;
+        sprite->invisible = x < -32 || x > DISPLAY_WIDTH + 32 || y < -32 || y > DISPLAY_HEIGHT + 32
+                         || (sprite->sIsBit && (Random() & 7) == 0);
+        break;
+    case GLYPH_GONE:
+        sprite->invisible = TRUE;
+        break;
+    }
+}
+
+// The splash's sheets and palette, faded to the weather like any field effect's; FALSE when there was no room for them
+static bool8 GotoLoadGlyphs(void)
+{
+    u8 paletteNum;
+    LoadCompressedSpriteSheet(&sGoto_SpriteSheets[0]);
+    LoadCompressedSpriteSheet(&sGoto_SpriteSheets[1]);
+    paletteNum = LoadSpritePalette(&sGoto_SpritePalette);
+    if (paletteNum == 0xFF)
+        return FALSE;
+    UpdateSpritePaletteWithWeather(paletteNum);
+    return TRUE;
+}
+
+static void GotoSpawnGlyphs(u8 taskId)
+{
+    bool8 landing = gTasks[taskId].tLanding;
+    u8 i, spriteId;
+    struct Sprite *sprite;
+
+    for (i = 0; i < GOTO_NUM_NOTES; i++)
+    {
+        bool8 big = (i % 3) == 0;
+        spriteId = CreateSprite(big ? &sGoto_SpriteTemplate_Note : &sGoto_SpriteTemplate_Glyph, 0, -64, 0);
+        if (spriteId == MAX_SPRITES)
+            return;
+        sprite = &gSprites[spriteId];
+        sprite->sTaskId = taskId;
+        sprite->sDelay = i * 2;
+        sprite->sOffX = (Random() % 13) - 6;
+        sprite->sOffY = (Random() % 13) - 6;
+        sprite->sIsBit = FALSE;
+        sprite->sMode = GLYPH_RIBBON;
+        sprite->invisible = TRUE;
+        StartSpriteAnim(sprite, big ? (i / 3) % 4 : 2 + (i & 1));
+    }
+    for (i = 0; i < GOTO_NUM_BITS; i++)
+    {
+        spriteId = CreateSprite(&sGoto_SpriteTemplate_Glyph, 0, -64, 0);
+        if (spriteId == MAX_SPRITES)
+            return;
+        sprite = &gSprites[spriteId];
+        sprite->sTaskId = taskId;
+        sprite->sOffX = (Random() % 13) - 6;
+        sprite->sOffY = (Random() % 25) - 10;
+        sprite->sIsBit = TRUE;
+        sprite->invisible = TRUE;
+        StartSpriteAnim(sprite, Random() & 1);
+        if (!landing)
+        {
+            sprite->sDelay = Random() % 11;
+            sprite->sAppear = GOTO_OUT_MEET - GOTO_DISSOLVE + i * 2 + Random() % 3;
+            sprite->sMode = GLYPH_ON_PLAYER;
+        }
+        else
+        {
+            sprite->sDelay = 4 + Random() % 13;
+            sprite->sAppear = 1 + Random() % (GOTO_DISSOLVE - 1);
+            sprite->sMode = GLYPH_RIBBON;
+        }
+    }
+}
+
+// Whether any glyph is still to be seen
+static bool8 GotoGlyphsLeft(void)
+{
+    u8 i;
+    for (i = 0; i < MAX_SPRITES; i++)
+        if (gSprites[i].inUse && gSprites[i].callback == SpriteCB_GotoGlyph && gSprites[i].sMode != GLYPH_GONE)
+            return TRUE;
+    return FALSE;
+}
+
+static void GotoClearGlyphs(void)
+{
+    u8 i;
+    for (i = 0; i < MAX_SPRITES; i++)
+        if (gSprites[i].inUse && gSprites[i].callback == SpriteCB_GotoGlyph)
+            DestroySprite(&gSprites[i]);
+    FreeSpriteTilesByTag(GOTO_TAG_GLYPHS);
+    FreeSpriteTilesByTag(GOTO_TAG_NOTES);
+    FreeSpritePaletteByTag(GOTO_TAG_GLYPHS);
+}
+
+#undef sTaskId
+#undef sDelay
+#undef sOffX
+#undef sOffY
+#undef sIsBit
+#undef sMode
+#undef sAppear
+#undef sAge
+
+// The player, on screen: where the code comes apart from and settles back into
+static void GotoFindPlayer(struct Task *task)
+{
+    struct Sprite *sprite = &gSprites[gPlayerAvatar.spriteId];
+    task->tCenterX = sprite->x + sprite->x2 + gSpriteCoordOffsetX;
+    task->tCenterY = sprite->y + sprite->y2 + gSpriteCoordOffsetY;
+}
+
+// Some of the player's frames shown, more of them as `shown` runs from 0 to GOTO_DISSOLVE
+static void GotoFlickerPlayer(s16 shown)
+{
+    gObjectEvents[gPlayerAvatar.objectEventId].invisible = (s16)(Random() % GOTO_DISSOLVE) >= shown;
+}
 
 static void Task_FlyOut(u8 taskId);
 static void FlyOutFieldEffect_FieldMovePose(struct Task *task);
 static void FlyOutFieldEffect_ShowMon(struct Task *task);
-static void FlyOutFieldEffect_BirdLeaveBall(struct Task *task);
-static void FlyOutFieldEffect_WaitBirdLeave(struct Task *task);
-static void FlyOutFieldEffect_BirdSwoopDown(struct Task *task);
-static void FlyOutFieldEffect_JumpOnBird(struct Task *task);
-static void FlyOutFieldEffect_FlyOffWithBird(struct Task *task);
-static void FlyOutFieldEffect_WaitFlyOff(struct Task *task);
+static void FlyOutFieldEffect_ComeApart(struct Task *task);
+static void FlyOutFieldEffect_Ribbon(struct Task *task);
 static void FlyOutFieldEffect_End(struct Task *task);
-static u8 CreateFlyBirdSprite(void);
-static bool8 GetFlyBirdAnimCompleted(u8 flyBlobSpriteId);
-static void StartFlyBirdSwoopDown(u8 flyBlobSpriteId);
-static void SetFlyBirdPlayerSpriteId(u8 flyBlobSpriteId, u8 playerSpriteId);
-static void SpriteCB_FlyBirdLeaveBall(struct Sprite *sprite);
-static void SpriteCB_FlyBirdSwoopDown(struct Sprite *sprite);
-static void DoBirdSpriteWithPlayerAffineAnim(struct Sprite *sprite, u8 affineAnimId);
-static void SpriteCB_FlyBirdWithPlayer(struct Sprite *sprite);
 
 static void (*const sFlyOutFieldEffectFuncs[])(struct Task *) =
 {
     FlyOutFieldEffect_FieldMovePose,
     FlyOutFieldEffect_ShowMon,
-    FlyOutFieldEffect_BirdLeaveBall,
-    FlyOutFieldEffect_WaitBirdLeave,
-    FlyOutFieldEffect_BirdSwoopDown,
-    FlyOutFieldEffect_JumpOnBird,
-    FlyOutFieldEffect_FlyOffWithBird,
-    FlyOutFieldEffect_WaitFlyOff,
+    FlyOutFieldEffect_ComeApart,
+    FlyOutFieldEffect_Ribbon,
     FlyOutFieldEffect_End
 };
 
@@ -3300,7 +3619,8 @@ static void FlyOutFieldEffect_ShowMon(struct Task *task)
     }
 }
 
-static void FlyOutFieldEffect_BirdLeaveBall(struct Task *task)
+// The daemon has been shown: the player begins to come apart into code
+static void FlyOutFieldEffect_ComeApart(struct Task *task)
 {
     if (!FieldEffectActiveListContains(FLDEFF_FIELD_MOVE_SHOW_MON))
     {
@@ -3310,67 +3630,34 @@ static void FlyOutFieldEffect_BirdLeaveBall(struct Task *task)
             SetSurfBlob_BobState(objectEvent->fieldEffectSpriteId, BOB_MON_ONLY);
             SetSurfBlob_DontSyncAnim(objectEvent->fieldEffectSpriteId, FALSE);
         }
-        task->tBirdSpriteId = CreateFlyBirdSprite();
-        task->tState++;
-    }
-}
-
-static void FlyOutFieldEffect_WaitBirdLeave(struct Task *task)
-{
-    if (GetFlyBirdAnimCompleted(task->tBirdSpriteId))
-    {
-        task->tState++;
-        task->tTimer = 16;
         SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_ON_FOOT);
-        ObjectEventSetHeldMovement(&gObjectEvents[gPlayerAvatar.objectEventId], MOVEMENT_ACTION_FACE_LEFT);
+        GotoFindPlayer(task);
+        task->tLanding = FALSE;
+        task->tFrame = GOTO_OUT_MEET - GOTO_DISSOLVE;
+        if (GotoLoadGlyphs())
+            GotoSpawnGlyphs(FindTaskIdByFunc(Task_FlyOut));
+        PlaySE(SE_M_TELEPORT);
+        task->tState++;
     }
 }
 
-static void FlyOutFieldEffect_BirdSwoopDown(struct Task *task)
+// The notes come down the swoop; where they meet the player there is only code left, and it goes with them
+static void FlyOutFieldEffect_Ribbon(struct Task *task)
 {
     struct ObjectEvent *objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
-    if ((task->tTimer == 0 || (--task->tTimer) == 0) && ObjectEventClearHeldMovementIfFinished(objectEvent))
+    task->tFrame++;
+    if (task->tFrame == 0)
+        PlaySE(SE_M_HEAL_BELL);
+    if (task->tFrame < GOTO_OUT_MEET)
     {
-        task->tState++;
-        PlaySE(SE_M_FLY);
-        StartFlyBirdSwoopDown(task->tBirdSpriteId);
+        GotoFlickerPlayer(GOTO_OUT_MEET - task->tFrame);
     }
-}
-
-static void FlyOutFieldEffect_JumpOnBird(struct Task *task)
-{
-    if ((++task->tTimer) >= 8)
+    else if (task->tFrame == GOTO_OUT_MEET)
     {
-        struct ObjectEvent *objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
-        ObjectEventSetGraphicsId(objectEvent, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_GFX_RIDE));
-        StartSpriteAnim(&gSprites[objectEvent->spriteId], ANIM_GET_ON_OFF_POKEMON_WEST);
-        objectEvent->inanimate = TRUE;
-        ObjectEventSetHeldMovement(objectEvent, MOVEMENT_ACTION_JUMP_IN_PLACE_LEFT);
-        task->tState++;
-        task->tTimer = 0;
-    }
-}
-
-static void FlyOutFieldEffect_FlyOffWithBird(struct Task *task)
-{
-    if ((++task->tTimer) >= 10)
-    {
-        struct ObjectEvent *objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
-        ObjectEventClearHeldMovementIfActive(objectEvent);
-        objectEvent->inanimate = FALSE;
+        objectEvent->invisible = TRUE;
         objectEvent->hasShadow = FALSE;
-        SetFlyBirdPlayerSpriteId(task->tBirdSpriteId, objectEvent->spriteId);
-        StartSpriteAnim(&gSprites[task->tBirdSpriteId], gSaveBlock2Ptr->playerGender * 2 + 1);
-        DoBirdSpriteWithPlayerAffineAnim(&gSprites[task->tBirdSpriteId], 0);
-        gSprites[task->tBirdSpriteId].callback = SpriteCB_FlyBirdWithPlayer;
-        CameraObjectReset2();
-        task->tState++;
     }
-}
-
-static void FlyOutFieldEffect_WaitFlyOff(struct Task *task)
-{
-    if (GetFlyBirdAnimCompleted(task->tBirdSpriteId))
+    else if (task->tFrame >= GOTO_OUT_MEET + 40 || !GotoGlyphsLeft())
     {
         WarpFadeOutScreen();
         task->tState++;
@@ -3379,190 +3666,26 @@ static void FlyOutFieldEffect_WaitFlyOff(struct Task *task)
 
 static void FlyOutFieldEffect_End(struct Task *task)
 {
+    task->tFrame++;
     if (!gPaletteFade.active)
     {
+        GotoClearGlyphs();
         FieldEffectActiveListRemove(FLDEFF_FLY_OUT);
         DestroyTask(FindTaskIdByFunc(Task_FlyOut));
     }
 }
 
-static u8 CreateFlyBirdSprite(void)
-{
-    u8 spriteId;
-    struct Sprite *sprite;
-    spriteId = CreateSprite(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_BIRD], 255, 180, 1);
-    sprite = &gSprites[spriteId];
-    sprite->oam.paletteNum = 0;
-    sprite->oam.priority = 1;
-    sprite->callback = SpriteCB_FlyBirdLeaveBall;
-    return spriteId;
-}
-
-// Sprite data for the bird sprite
-#define sInitData       data[0]
-#define sPlayerSpriteId data[6]
-#define sAnimCompleted  data[7]
-
-static bool8 GetFlyBirdAnimCompleted(u8 spriteId)
-{
-    return gSprites[spriteId].sAnimCompleted;
-}
-
-static void StartFlyBirdSwoopDown(u8 spriteId)
-{
-    struct Sprite *sprite;
-    sprite = &gSprites[spriteId];
-    sprite->callback = SpriteCB_FlyBirdSwoopDown;
-    sprite->x = 120;
-    sprite->y = 0;
-    sprite->x2 = 0;
-    sprite->y2 = 0;
-    memset(&sprite->data[0], 0, 8 * sizeof(u16) /* zero all data cells */);
-    sprite->data[6] = MAX_SPRITES;
-}
-
-static void SetFlyBirdPlayerSpriteId(u8 flyBlobSpriteId, u8 playerSpriteId)
-{
-    gSprites[flyBlobSpriteId].sPlayerSpriteId = playerSpriteId;
-}
-
-static const union AffineAnimCmd sAffineAnim_FlyBirdLeaveBall[] =
-{
-    AFFINEANIMCMD_FRAME( 8,  8, -30,  0),
-    AFFINEANIMCMD_FRAME(28, 28,   0, 30),
-    AFFINEANIMCMD_END
-};
-
-static const union AffineAnimCmd sAffineAnim_FlyBirdReturnToBall[] =
-{
-    AFFINEANIMCMD_FRAME(256, 256, 64,  0),
-    AFFINEANIMCMD_FRAME(-10, -10,  0, 22),
-    AFFINEANIMCMD_END
-};
-
-static const union AffineAnimCmd *const sAffineAnims_FlyBirdBall[] =
-{
-    sAffineAnim_FlyBirdLeaveBall,
-    sAffineAnim_FlyBirdReturnToBall
-};
-
-static void SpriteCB_FlyBirdLeaveBall(struct Sprite *sprite)
-{
-    if (sprite->sAnimCompleted == FALSE)
-    {
-        if (sprite->sInitData == FALSE)
-        {
-            sprite->oam.affineMode = ST_OAM_AFFINE_DOUBLE;
-            sprite->affineAnims = sAffineAnims_FlyBirdBall;
-            InitSpriteAffineAnim(sprite);
-            StartSpriteAffineAnim(sprite, 0);
-            if (gSaveBlock2Ptr->playerGender == MALE)
-                sprite->x = 128;
-            else
-                sprite->x = 118;
-            sprite->y = -48;
-            sprite->sInitData++;
-            sprite->data[1] = 64;
-            sprite->data[2] = 256;
-        }
-        sprite->data[1] += (sprite->data[2] >> 8);
-        sprite->x2 = Cos(sprite->data[1], 120);
-        sprite->y2 = Sin(sprite->data[1], 120);
-        if (sprite->data[2] < 2048)
-            sprite->data[2] += 96;
-        if (sprite->data[1] > 129)
-        {
-            sprite->sAnimCompleted++;
-            sprite->oam.affineMode = ST_OAM_AFFINE_OFF;
-            FreeOamMatrix(sprite->oam.matrixNum);
-            CalcCenterToCornerVec(sprite, sprite->oam.shape, sprite->oam.size, ST_OAM_AFFINE_OFF);
-        }
-    }
-}
-
-static void SpriteCB_FlyBirdSwoopDown(struct Sprite *sprite)
-{
-    sprite->x2 = Cos(sprite->data[2], 140);
-    sprite->y2 = Sin(sprite->data[2], 72);
-    sprite->data[2] = (sprite->data[2] + 4) & 0xFF;
-    if (sprite->sPlayerSpriteId != MAX_SPRITES)
-    {
-        struct Sprite *playerSprite = &gSprites[sprite->sPlayerSpriteId];
-        playerSprite->coordOffsetEnabled = FALSE;
-        playerSprite->x = sprite->x + sprite->x2;
-        playerSprite->y = sprite->y + sprite->y2 - 8;
-        playerSprite->x2 = 0;
-        playerSprite->y2 = 0;
-    }
-    if (sprite->data[2] >= 128)
-        sprite->sAnimCompleted = TRUE;
-}
-
-static void SpriteCB_FlyBirdReturnToBall(struct Sprite *sprite)
-{
-    if (sprite->sAnimCompleted == FALSE)
-    {
-        if (sprite->sInitData == FALSE)
-        {
-            sprite->oam.affineMode = ST_OAM_AFFINE_DOUBLE;
-            sprite->affineAnims = sAffineAnims_FlyBirdBall;
-            InitSpriteAffineAnim(sprite);
-            StartSpriteAffineAnim(sprite, 1);
-            if (gSaveBlock2Ptr->playerGender == MALE)
-                sprite->x = 112;
-            else
-                sprite->x = 100;
-            sprite->y = -32;
-            sprite->sInitData++;
-            sprite->data[1] = 240;
-            sprite->data[2] = 2048;
-            sprite->data[4] = 128;
-        }
-        sprite->data[1] += sprite->data[2] >> 8;
-        sprite->data[3] += sprite->data[2] >> 8;
-        sprite->data[1] &= 0xFF;
-        sprite->x2 = Cos(sprite->data[1], 32);
-        sprite->y2 = Sin(sprite->data[1], 120);
-        if (sprite->data[2] > 256)
-            sprite->data[2] -= sprite->data[4];
-        if (sprite->data[4] < 256)
-            sprite->data[4] += 24;
-        if (sprite->data[2] < 256)
-            sprite->data[2] = 256;
-        if (sprite->data[3] >= 60)
-        {
-            sprite->sAnimCompleted++;
-            sprite->oam.affineMode = ST_OAM_AFFINE_OFF;
-            FreeOamMatrix(sprite->oam.matrixNum);
-            sprite->invisible = TRUE;
-        }
-    }
-}
-
-static void StartFlyBirdReturnToBall(u8 spriteId)
-{
-    StartFlyBirdSwoopDown(spriteId);
-    gSprites[spriteId].callback = SpriteCB_FlyBirdReturnToBall;
-}
-
 static void Task_FlyIn(u8 taskId);
-static void FlyInFieldEffect_BirdSwoopDown(struct Task *task);
-static void FlyInFieldEffect_FlyInWithBird(struct Task *task);
-static void FlyInFieldEffect_JumpOffBird(struct Task *task);
-static void FlyInFieldEffect_FieldMovePose(struct Task *task);
-static void FlyInFieldEffect_BirdReturnToBall(struct Task *task);
-static void FlyInFieldEffect_WaitBirdReturn(struct Task *task);
+static void FlyInFieldEffect_Begin(struct Task *task);
+static void FlyInFieldEffect_Ribbon(struct Task *task);
+static void FlyInFieldEffect_Reform(struct Task *task);
 static void FlyInFieldEffect_End(struct Task *task);
-static void TryChangeBirdSprite(struct Sprite *sprite);
 
 static void (*const sFlyInFieldEffectFuncs[])(struct Task *task) =
 {
-    FlyInFieldEffect_BirdSwoopDown,
-    FlyInFieldEffect_FlyInWithBird,
-    FlyInFieldEffect_JumpOffBird,
-    FlyInFieldEffect_FieldMovePose,
-    FlyInFieldEffect_BirdReturnToBall,
-    FlyInFieldEffect_WaitBirdReturn,
+    FlyInFieldEffect_Begin,
+    FlyInFieldEffect_Ribbon,
+    FlyInFieldEffect_Reform,
     FlyInFieldEffect_End
 };
 
@@ -3577,96 +3700,51 @@ static void Task_FlyIn(u8 taskId)
     sFlyInFieldEffectFuncs[gTasks[taskId].tState](&gTasks[taskId]);
 }
 
-static void FlyInFieldEffect_BirdSwoopDown(struct Task *task)
+// The ribbon sets out for where the player will stand; the player is not there yet
+static void FlyInFieldEffect_Begin(struct Task *task)
 {
-    struct ObjectEvent *playerObj;
-    playerObj = &gObjectEvents[gPlayerAvatar.objectEventId];
+    struct ObjectEvent *playerObj = &gObjectEvents[gPlayerAvatar.objectEventId];
     if (!ObjectEventIsMovementOverridden(playerObj) || ObjectEventClearHeldMovementIfFinished(playerObj))
     {
-        task->tState++;
-        task->tTimer = 33;
         task->tAvatarFlags = gPlayerAvatar.flags;
         gPlayerAvatar.preventStep = TRUE;
         SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_ON_FOOT);
         if (task->tAvatarFlags & PLAYER_AVATAR_FLAG_SURFING)
             SetSurfBlob_BobState(playerObj->fieldEffectSpriteId, BOB_NONE);
-        ObjectEventSetGraphicsId(playerObj, GetPlayerAvatarGraphicsIdByStateId(PLAYER_AVATAR_GFX_RIDE));
-        CameraObjectReset2();
-        ObjectEventTurn(playerObj, DIR_WEST);
-        StartSpriteAnim(&gSprites[playerObj->spriteId], ANIM_GET_ON_OFF_POKEMON_WEST);
-        playerObj->invisible = FALSE;
-        task->tBirdSpriteId = CreateFlyBirdSprite();
-        StartFlyBirdSwoopDown(task->tBirdSpriteId);
-        SetFlyBirdPlayerSpriteId(task->tBirdSpriteId, playerObj->spriteId);
-        StartSpriteAnim(&gSprites[task->tBirdSpriteId], gSaveBlock2Ptr->playerGender * 2 + 2);
-        DoBirdSpriteWithPlayerAffineAnim(&gSprites[task->tBirdSpriteId], 1);
-        gSprites[task->tBirdSpriteId].callback = SpriteCB_FlyBirdWithPlayer;
-    }
-}
-
-static void FlyInFieldEffect_FlyInWithBird(struct Task *task)
-{
-    struct ObjectEvent *playerObj;
-    struct Sprite *playerSprite;
-    TryChangeBirdSprite(&gSprites[task->tBirdSpriteId]);
-    if (task->tTimer == 0 || (--task->tTimer) == 0)
-    {
-        playerObj= &gObjectEvents[gPlayerAvatar.objectEventId];
-        playerSprite = &gSprites[playerObj->spriteId];
-        SetFlyBirdPlayerSpriteId(task->tBirdSpriteId, MAX_SPRITES);
-        playerSprite->x += playerSprite->x2;
-        playerSprite->y += playerSprite->y2;
-        playerSprite->x2 = 0;
-        playerSprite->y2 = 0;
-        task->tState++;
-        task->tTimer = 0;
-    }
-}
-
-static void FlyInFieldEffect_JumpOffBird(struct Task *task)
-{
-    s16 yOffsets[18] = {-2, -4, -5, -6, -7, -8, -8, -8, -7, -7, -6, -5, -3, -2, 0, 2, 4, 8};
-    struct Sprite *sprite = &gSprites[gPlayerAvatar.spriteId];
-    sprite->y2 = yOffsets[task->tTimer];
-    if ((++task->tTimer) >= 18)
-        task->tState++;
-}
-
-static void FlyInFieldEffect_FieldMovePose(struct Task *task)
-{
-    struct ObjectEvent *playerObj;
-    struct Sprite *playerSprite;
-    if (GetFlyBirdAnimCompleted(task->tBirdSpriteId))
-    {
-        playerObj= &gObjectEvents[gPlayerAvatar.objectEventId];
-        playerSprite = &gSprites[playerObj->spriteId];
-        playerObj->inanimate = FALSE;
-        MoveObjectEventToMapCoords(playerObj, playerObj->currentCoords.x, playerObj->currentCoords.y);
-        playerSprite->x2 = 0;
-        playerSprite->y2 = 0;
-        playerSprite->coordOffsetEnabled = TRUE;
-        StartPlayerAvatarSummonMonForFieldMoveAnim();
-        ObjectEventSetHeldMovement(playerObj, MOVEMENT_ACTION_START_ANIM_IN_DIRECTION);
+        ObjectEventTurn(playerObj, DIR_SOUTH);
+        playerObj->invisible = TRUE;
+        GotoFindPlayer(task);
+        task->tLanding = TRUE;
+        task->tFrame = 0;
+        task->tReform = 0;
+        if (GotoLoadGlyphs())
+            GotoSpawnGlyphs(FindTaskIdByFunc(Task_FlyIn));
+        PlaySE(SE_M_HEAL_BELL);
         task->tState++;
     }
 }
 
-static void FlyInFieldEffect_BirdReturnToBall(struct Task *task)
+// The code comes down with the music and settles where the player stands
+static void FlyInFieldEffect_Ribbon(struct Task *task)
 {
-    if (ObjectEventClearHeldMovementIfFinished(&gObjectEvents[gPlayerAvatar.objectEventId]))
+    task->tFrame++;
+    if (task->tFrame >= GOTO_IN_MEET + 16) // every bit is down (the last set out 16 frames behind the head)
     {
+        PlaySE(SE_M_TELEPORT);
         task->tState++;
-        StartFlyBirdReturnToBall(task->tBirdSpriteId);
     }
 }
 
-static void FlyInFieldEffect_WaitBirdReturn(struct Task *task)
+// ... and flickers back into them, while the notes go on
+static void FlyInFieldEffect_Reform(struct Task *task)
 {
-    if (GetFlyBirdAnimCompleted(task->tBirdSpriteId))
+    task->tFrame++;
+    task->tReform++;
+    GotoFlickerPlayer(task->tReform);
+    if (task->tReform >= GOTO_DISSOLVE)
     {
-        DestroySprite(&gSprites[task->tBirdSpriteId]);
+        gObjectEvents[gPlayerAvatar.objectEventId].invisible = FALSE;
         task->tState++;
-        task->data[1] = 16;
     }
 }
 
@@ -3674,8 +3752,10 @@ static void FlyInFieldEffect_End(struct Task *task)
 {
     struct ObjectEvent *playerObj;
     u8 state;
-    if ((--task->data[1]) == 0)
+    task->tFrame++;
+    if (!GotoGlyphsLeft())
     {
+        GotoClearGlyphs();
         playerObj = &gObjectEvents[gPlayerAvatar.objectEventId];
         state = PLAYER_AVATAR_GFX_NORMAL;
         if (task->tAvatarFlags & PLAYER_AVATAR_FLAG_SURFING)
@@ -3694,79 +3774,13 @@ static void FlyInFieldEffect_End(struct Task *task)
 
 #undef tState
 #undef tMonPartyId
-#undef tBirdSpriteId
 #undef tTimer
+#undef tFrame
+#undef tCenterX
+#undef tCenterY
+#undef tLanding
+#undef tReform
 #undef tAvatarFlags
-
-static const union AffineAnimCmd sAffineAnim_FlyBirdOutOfMap[] =
-{
-    AFFINEANIMCMD_FRAME(24, 24, 0, 1),
-    AFFINEANIMCMD_JUMP(0)
-};
-
-static const union AffineAnimCmd sAffineAnim_FlyBirdIntoMap[] =
-{
-    AFFINEANIMCMD_FRAME(512, 512, 0, 1),
-    AFFINEANIMCMD_FRAME(-16, -16, 0, 1),
-    AFFINEANIMCMD_JUMP(1)
-};
-
-static const union AffineAnimCmd *const sAffineAnims_FlyBirdWithPlayer[] =
-{
-    sAffineAnim_FlyBirdOutOfMap,
-    sAffineAnim_FlyBirdIntoMap
-};
-
-static void DoBirdSpriteWithPlayerAffineAnim(struct Sprite *sprite, u8 affineAnimId)
-{
-    sprite->oam.affineMode = ST_OAM_AFFINE_DOUBLE;
-    sprite->affineAnims = sAffineAnims_FlyBirdWithPlayer;
-    InitSpriteAffineAnim(sprite);
-    StartSpriteAffineAnim(sprite, affineAnimId);
-}
-
-static void SpriteCB_FlyBirdWithPlayer(struct Sprite *sprite)
-{
-    sprite->x2 = Cos(sprite->data[2], 180);
-    sprite->y2 = Sin(sprite->data[2], 72);
-    sprite->data[2] = (sprite->data[2] + 2) & 0xFF;
-    if (sprite->sPlayerSpriteId != MAX_SPRITES)
-    {
-        struct Sprite *playerSprite;
-        playerSprite = &gSprites[sprite->sPlayerSpriteId];
-        playerSprite->coordOffsetEnabled = FALSE;
-        playerSprite->x = sprite->x + sprite->x2;
-        playerSprite->y = sprite->y + sprite->y2 - 8;
-        playerSprite->x2 = 0;
-        playerSprite->y2 = 0;
-    }
-    if (sprite->data[2] >= 128)
-    {
-        sprite->sAnimCompleted = TRUE;
-        sprite->oam.affineMode = ST_OAM_AFFINE_OFF;
-        FreeOamMatrix(sprite->oam.matrixNum);
-        CalcCenterToCornerVec(sprite, sprite->oam.shape, sprite->oam.size, ST_OAM_AFFINE_OFF);
-    }
-}
-
-#undef sInitData
-#undef sPlayerSpriteId
-#undef sAnimCompleted
-
-static void TryChangeBirdSprite(struct Sprite *sprite)
-{
-    if (sprite->oam.affineMode != ST_OAM_AFFINE_OFF)
-    {
-        if (gOamMatrices[sprite->oam.matrixNum].a == 0x100 || gOamMatrices[sprite->oam.matrixNum].d == 0x100)
-        {
-            sprite->oam.affineMode = ST_OAM_AFFINE_OFF;
-            FreeOamMatrix(sprite->oam.matrixNum);
-            CalcCenterToCornerVec(sprite, sprite->oam.shape, sprite->oam.size, ST_OAM_AFFINE_OFF);
-            StartSpriteAnim(sprite, 0);
-            sprite->callback = SpriteCB_FlyBirdSwoopDown;
-        }
-    }
-}
 
 static void Task_MoveDeoxysRock_Step(u8 taskId);
 
