@@ -512,7 +512,7 @@ Route19_Text_ReeceRematchIntro::
 
 Route19_Text_MatthewRematchIntro::
 	.string "I love swimming!\n"
-	.string "I guess you're the surfing type.$"
+	.string "I guess you'd rather ride than swim.$"
 
 Route19_Text_DouglasRematchIntro::
 	.string "What's beyond the horizon?\n"

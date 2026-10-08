@@ -803,11 +803,11 @@ Help_Text_HowToUseHM::
 
 Help_Text_HowToUseMoveOutsideOfBattle::
 	.string "{CIRCLE_1} Open the MENU. {CIRCLE_2} Select “DAEMON.”\n"
-	.string "{CIRCLE_3} Select a DAEMON that knows a DRIVER\l"
-	.string "ROUTINE. The usable DRIVER ROUTINE(s)\l"
-	.string "will be shown in blue. Select and\l"
-	.string "invoke the desired ROUTINE destroy an\l"
-	.string "obstacle, fly, surf, etc.$"
+	.string "{CIRCLE_3} Select any DAEMON. Each DRIVER\l"
+	.string "in your TOOLKIT whose MARK you hold\l"
+	.string "is shown in blue. Select one to PRUNE\l"
+	.string "a tree, GOTO a town, TRAVERSE water,\l"
+	.string "and so on.$"
 
 Help_Text_HowToRideBicycle::
 	.string "{CIRCLE_1} Open the MENU. Open the\n"
