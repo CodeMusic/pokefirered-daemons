@@ -74,6 +74,8 @@ enum StartMenuOption
     STARTMENU_HELP,        // T-179: the Help System lives here now, not on L and R
 #if DAEMONS_DEBUG
     STARTMENU_DEBUG,
+    STARTMENU_DBG_EVENTS,    // T-394
+    STARTMENU_DBG_SOUND,     // T-394: SONG and SFX, on a page of their own to make room
     STARTMENU_DBG_HEAL,
     STARTMENU_DBG_MART,
     STARTMENU_DBG_ADD,
@@ -165,6 +167,8 @@ static bool8 DbgRemoveCallback(void);
 static bool8 DbgRecordCallback(void);
 static bool8 DbgIslandsCallback(void);
 static bool8 DbgDiplomaCallback(void);
+static bool8 DbgEventsCallback(void);   // T-394
+static bool8 DbgSoundCallback(void);
 static bool8 DbgDoldrumCallback(void);
 static bool8 DbgArtsaiCallback(void);
 static bool8 DbgCrystalCallback(void);
@@ -226,6 +230,8 @@ static const struct MenuAction sStartMenuActionTable[] = {
     [STARTMENU_HELP]    = { gText_MenuHelp,    {.u8_void = StartMenuHelpCallback} },
 #if DAEMONS_DEBUG
     [STARTMENU_DEBUG]    = { gText_MenuDebug,   {.u8_void = StartMenuDaemonsDebugCallback} },
+    [STARTMENU_DBG_EVENTS] = { gText_DbgMenuEvents, {.u8_void = DbgEventsCallback} },
+    [STARTMENU_DBG_SOUND]  = { gText_DbgMenuSound,  {.u8_void = DbgSoundCallback} },
     [STARTMENU_DBG_HEAL] = { gText_DbgMenuHeal, {.u8_void = DbgHealCallback} },
     [STARTMENU_DBG_MART] = { gText_DbgMenuMart, {.u8_void = DbgMartCallback} },
     [STARTMENU_DBG_ADD]    = { gText_DbgMenuAdd,    {.u8_void = DbgAddCallback} },
@@ -287,6 +293,8 @@ static const u8 *const sStartMenuDescPointers[] = {
     // into the help window is what blacked out the screen. One omission, two
     // symptoms.
     gStartMenuDesc_Debug,
+    gStartMenuDesc_DbgEvents,   // T-394
+    gStartMenuDesc_DbgSound,
     gStartMenuDesc_DbgHeal,
     gStartMenuDesc_DbgMart,
     gStartMenuDesc_DbgAdd,
@@ -374,6 +382,7 @@ enum {
     DBG_PAGE_ITEMS,
     DBG_PAGE_JUMP,
     DBG_PAGE_JUMP2,   // MORE: seven rows is all the JUMP page has room for (2026-09-27)
+    DBG_PAGE_SOUND,   // T-394
 };
 static EWRAM_DATA u8 sDbgPage = 0;
 #define DBG_FIRST_SONG MUS_HEAL   // 256; everything below it is a sound effect
@@ -440,15 +449,23 @@ static void SetUpStartMenu(void)
         AppendToStartMenuItems(STARTMENU_DBG_WITNESS);
         return;
     }
+    if (sDbgPage == DBG_PAGE_SOUND)
+    {
+        AppendToStartMenuItems(STARTMENU_DBG_SONG);
+        AppendToStartMenuItems(STARTMENU_DBG_SFX);
+        AppendToStartMenuItems(STARTMENU_DBG_BACK);
+        return;
+    }
     if (sDbgPage == DBG_PAGE_MAIN)
     {
+        //  T-394: GAME EVENTS first -- a debug game starts as a normal one does, and this is where its kit is now.
+        AppendToStartMenuItems(STARTMENU_DBG_EVENTS);
         AppendToStartMenuItems(STARTMENU_DBG_HEAL);
         AppendToStartMenuItems(STARTMENU_DBG_MART);
         AppendToStartMenuItems(STARTMENU_DBG_JUMP);
         AppendToStartMenuItems(STARTMENU_DBG_ENCOUNTER);
         AppendToStartMenuItems(STARTMENU_DBG_WATCH);
-        AppendToStartMenuItems(STARTMENU_DBG_SONG);
-        AppendToStartMenuItems(STARTMENU_DBG_SFX);
+        AppendToStartMenuItems(STARTMENU_DBG_SOUND);
         //  No BACK row: WATCH took the seventh (T-268), an eighth sits under the description box, and B goes back.
         return;
     }
@@ -1014,6 +1031,8 @@ static bool8 IsDaemonsDebugCallback(void)
         || sStartMenuCallback == DbgSongCallback
         || sStartMenuCallback == DbgWatchCallback
         || sStartMenuCallback == DbgSfxCallback
+        || sStartMenuCallback == DbgEventsCallback   // T-394: GAME EVENTS opens over the map
+        || sStartMenuCallback == DbgSoundCallback
         || sStartMenuCallback == DbgBackCallback;
 }
 
@@ -1431,6 +1450,19 @@ static bool8 DbgDiplomaCallback(void)
     return DbgLeaveMenuForScript(DaemonsDebug_EventScript_TheDiploma);
 }
 
+//  T-394: GAME EVENTS -- the kit, a piece at a time (daemons_debug_events.c).
+static bool8 DbgEventsCallback(void)
+{
+    return DbgLeaveMenuForScript(DaemonsDebug_EventScript_GameEvents);
+}
+
+static bool8 DbgSoundCallback(void)
+{
+    sDbgPage = DBG_PAGE_SOUND;
+    sStartMenuCursorPos = 0;
+    return DbgRedraw();
+}
+
 static bool8 DbgDoldrumCallback(void)
 {
     return DbgLeaveMenuForScript(DaemonsDebug_EventScript_Doldrum);
@@ -1636,7 +1668,7 @@ static bool8 DbgBackCallback(void)
         sStartMenuCursorPos = 0;
         return DbgRedraw();
     }
-    if (sDbgPage == DBG_PAGE_ENCOUNTER || sDbgPage == DBG_PAGE_ITEMS || sDbgPage == DBG_PAGE_JUMP)
+    if (sDbgPage == DBG_PAGE_ENCOUNTER || sDbgPage == DBG_PAGE_ITEMS || sDbgPage == DBG_PAGE_JUMP || sDbgPage == DBG_PAGE_SOUND)
     {
         sDbgPage = DBG_PAGE_MAIN;
         sStartMenuCursorPos = 0;

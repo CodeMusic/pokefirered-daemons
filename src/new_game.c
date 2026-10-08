@@ -129,14 +129,15 @@ void ResetMenuAndMonGlobals(void)
 // of each KIND of item rather than a pile of one kind -- a ball, a medicine, a
 // berry, a held item, a TM -- because the thing being evaluated is the
 // description window, which Gen 1 does not have at all.
-static void DaemonsDebug_GrantTestKit(void)
+//
+// T-394 (the user, 2026-10-08): "Debug mode starts with lots of things so you can't test some things." A new debug
+// game now starts as a normal one does, and the kit is in pieces the DEBUG menu's GAME EVENTS hands out one at a time
+// (daemons_debug_events.c). DaemonsDebug_GrantTestKit is all of them at once -- GAME EVENTS' EVERYTHING -- and does
+// exactly what a new debug game used to.
+
+// THE ROSTER: the kit's six, at level 50.
+void DaemonsDebug_GiveRoster(void)
 {
-    // Every one of these is a species we have RENAMED. The first version picked
-    // six for their abilities and four of them still read as vanilla on the
-    // party screen, which made the debug build look like it contained none of
-    // our work. Abilities are still the point -- Flash Fire, Water Absorb,
-    // Volt Absorb, Synchronize, Pressure, Thick Fat -- but a test kit that
-    // shows nothing we changed is not a test kit.
     static const u16 sParty[] = {
         SPECIES_FLAREON,    // CODEMUSAI  -- Flash Fire
         SPECIES_VAPOREON,   // CAREMUSAI  -- Water Absorb
@@ -148,6 +149,93 @@ static void DaemonsDebug_GrantTestKit(void)
         SPECIES_JOLTEON,    // SEEKMUSAI  -- Volt Absorb
         SPECIES_SNORLAX,    // DEADLOCK   -- Immunity / Thick Fat
     };
+    struct Pokemon mon;
+    u32 i;
+
+    static const u16 sFieldMoves[] = {
+        MOVE_CUT, MOVE_SWEET_SCENT, MOVE_SURF, MOVE_STRENGTH,
+        MOVE_ROCK_SMASH, MOVE_WATERFALL, MOVE_FLASH, MOVE_DIVE,
+    };
+    u32 m;
+
+    for (i = 0; i < ARRAY_COUNT(sParty); i++)
+    {
+        u8 fateful = TRUE;
+
+        CreateMon(&mon, sParty[i], 50, 31, FALSE, 0, OT_ID_PLAYER_ID, 0);
+        // WHY ARTSAI WOULD NOT OBEY. Gen 3 makes a player's Mew or Deoxys ignore
+        // every command unless it carries the official-event flag, whatever the
+        // badges (IsBattlerModernFatefulEncounter), and CreateMon does not set it.
+        SetMonData(&mon, MON_DATA_MODERN_FATEFUL_ENCOUNTER, &fateful);
+        // T-258: and the first of them carries a MEME, so its pill and the CHECKPOINT's one explanation of it
+        // can be seen without waiting on a one-in-several-thousand encounter.
+        if (i == 0)
+        {
+            u8 meme = 0x12;     // strain 1, two days left
+
+            SetMonData(&mon, MON_DATA_POKERUS, &meme);
+        }
+        // S.T.A.R.R. learns RECURSION and GOTO at 70 and the kit is level 50.
+        if (sParty[i] == SPECIES_MEWTWO)
+        {
+            DeleteFirstMoveAndGiveMoveToMon(&mon, MOVE_RECURSION);
+            DeleteFirstMoveAndGiveMoveToMon(&mon, MOVE_FLY);
+        }
+        if (i >= ARRAY_COUNT(sParty) - 2)
+        {
+            u32 base = (i == ARRAY_COUNT(sParty) - 2) ? 0 : 4;
+            for (m = 0; m < 4; m++)
+                SetMonMoveSlot(&mon, sFieldMoves[base + m], m);
+        }
+        GiveMonToPlayer(&mon);
+    }
+
+    FlagSet(FLAG_SYS_POKEMON_GET);
+}
+
+// EVERY DAEMON: the INDEX all seen and bound, and all 386 in the PORT.
+void DaemonsDebug_FillIndexAndPort(void)
+{
+    struct Pokemon mon;
+    u32 i, boxed = 0;
+
+    // The Index is the thing most worth testing, and it opens empty without
+    // these. Every entry marked seen and caught, so every one can be read.
+    for (i = 1; i <= NATIONAL_DEX_COUNT; i++)
+    {
+        GetSetPokedexFlag(i, FLAG_SET_SEEN);
+        GetSetPokedexFlag(i, FLAG_SET_CAUGHT);
+    }
+    //  T-205: EVERY DAEMON, IN THE BOXES. The Index above marks all 386 seen and caught, but OPUS's margins
+    //  (T-197) need a daemon you actually OWN -- so a debug save owning six of them showed exactly one
+    //  margin, and the user could not tell a working feature from a broken one. The boxes hold 420.
+    //
+    //  The MET LEVEL alternates on purpose. The margin reads CARRIED when a daemon has gained five levels
+    //  since you met it and NEGLECTED when it has gained none, so the odd ones are given a met level ten
+    //  below and the even ones their own: both halves of the writing are then one page-turn apart on
+    //  consecutive entries. A debug convenience, and it is only in this build.
+    for (i = 1; i <= NATIONAL_DEX_COUNT; i++)
+    {
+        u16 species = NationalPokedexNumToSpecies(i);
+        u8 met = (i & 1) ? 40 : 50;
+
+        if (species == SPECIES_NONE)
+            continue;
+        //  T-237: built straight into the record and encrypted once (pokemon.c says how). CreateMon made each of
+        //  these through thirty-odd decrypt-and-re-encrypt writes and a level-50 moveset of more: a 39-second
+        //  black screen, measured, that on the user's phone never came back.
+        DaemonsDebug_CreateBoxMonFast(&mon.box, species, 50, met);
+        //  Straight into the next slot. GiveMonToPlayer searched the boxes from the start for every one of the 386,
+        //  decrypting each daemon it passed -- quadratic, and part of why a debug game sat black for a minute and a half.
+        CopyMon(GetBoxedMonPtr(boxed / IN_BOX_COUNT, boxed % IN_BOX_COUNT), &mon.box, sizeof(mon.box));
+        boxed++;
+    }
+
+}
+
+// THE STOCK: the kit's bag, and the money.
+void DaemonsDebug_GiveStock(void)
+{
     static const u16 sBag[][2] = {
         { ITEM_ULTRA_BALL,   20 },
         { ITEM_HYPER_POTION, 20 },
@@ -185,90 +273,67 @@ static void DaemonsDebug_GrantTestKit(void)
         // margins are now written in two voices, so a debug game started as INSTINCT has to be able to read them.
         { ITEM_OPUS,          1 },
     };
-    // No TM CASE or BERRY POUCH here on purpose: item.c grants each of them
-    // the moment a TM or a berry is added, so listing them would be listing a
-    // thing the engine already does.
-    struct Pokemon mon;
     u32 i;
-
-    // The last two carry the HMs between them. The Game Boy debug build had a
-    // party member who could move you around the map, and losing that on the
-    // port made testing much slower: four move slots each, eight field moves,
-    // so it takes two daemons and there is no room for anything else on them.
-    // GOTO is S.T.A.R.R.'s now. Its old slot holds ADVERTISE (Sweet Scent),
-    // which is also a field move: it calls a wild encounter where you stand.
-    static const u16 sFieldMoves[] = {
-        MOVE_CUT, MOVE_SWEET_SCENT, MOVE_SURF, MOVE_STRENGTH,
-        MOVE_ROCK_SMASH, MOVE_WATERFALL, MOVE_FLASH, MOVE_DIVE,
-    };
-    u32 m, boxed = 0;
-
-    for (i = 0; i < ARRAY_COUNT(sParty); i++)
-    {
-        u8 fateful = TRUE;
-
-        CreateMon(&mon, sParty[i], 50, 31, FALSE, 0, OT_ID_PLAYER_ID, 0);
-        // WHY ARTSAI WOULD NOT OBEY. Gen 3 makes a player's Mew or Deoxys ignore
-        // every command unless it carries the official-event flag, whatever the
-        // badges (IsBattlerModernFatefulEncounter), and CreateMon does not set it.
-        SetMonData(&mon, MON_DATA_MODERN_FATEFUL_ENCOUNTER, &fateful);
-        // T-258: and the first of them carries a MEME, so its pill and the CHECKPOINT's one explanation of it
-        // can be seen without waiting on a one-in-several-thousand encounter.
-        if (i == 0)
-        {
-            u8 meme = 0x12;     // strain 1, two days left
-
-            SetMonData(&mon, MON_DATA_POKERUS, &meme);
-        }
-        // S.T.A.R.R. learns RECURSION and GOTO at 70 and the kit is level 50.
-        if (sParty[i] == SPECIES_MEWTWO)
-        {
-            DeleteFirstMoveAndGiveMoveToMon(&mon, MOVE_RECURSION);
-            DeleteFirstMoveAndGiveMoveToMon(&mon, MOVE_FLY);
-        }
-        if (i >= ARRAY_COUNT(sParty) - 2)
-        {
-            u32 base = (i == ARRAY_COUNT(sParty) - 2) ? 0 : 4;
-            for (m = 0; m < 4; m++)
-                SetMonMoveSlot(&mon, sFieldMoves[base + m], m);
-        }
-        GiveMonToPlayer(&mon);
-    }
-
-    // The Index is the thing most worth testing, and it opens empty without
-    // these. Every entry marked seen and caught, so every one can be read.
-    for (i = 1; i <= NATIONAL_DEX_COUNT; i++)
-    {
-        GetSetPokedexFlag(i, FLAG_SET_SEEN);
-        GetSetPokedexFlag(i, FLAG_SET_CAUGHT);
-    }
-    //  T-205: EVERY DAEMON, IN THE BOXES. The Index above marks all 386 seen and caught, but OPUS's margins
-    //  (T-197) need a daemon you actually OWN -- so a debug save owning six of them showed exactly one
-    //  margin, and the user could not tell a working feature from a broken one. The boxes hold 420.
-    //
-    //  The MET LEVEL alternates on purpose. The margin reads CARRIED when a daemon has gained five levels
-    //  since you met it and NEGLECTED when it has gained none, so the odd ones are given a met level ten
-    //  below and the even ones their own: both halves of the writing are then one page-turn apart on
-    //  consecutive entries. A debug convenience, and it is only in this build.
-    for (i = 1; i <= NATIONAL_DEX_COUNT; i++)
-    {
-        u16 species = NationalPokedexNumToSpecies(i);
-        u8 met = (i & 1) ? 40 : 50;
-
-        if (species == SPECIES_NONE)
-            continue;
-        //  T-237: built straight into the record and encrypted once (pokemon.c says how). CreateMon made each of
-        //  these through thirty-odd decrypt-and-re-encrypt writes and a level-50 moveset of more: a 39-second
-        //  black screen, measured, that on the user's phone never came back.
-        DaemonsDebug_CreateBoxMonFast(&mon.box, species, 50, met);
-        //  Straight into the next slot. GiveMonToPlayer searched the boxes from the start for every one of the 386,
-        //  decrypting each daemon it passed -- quadratic, and part of why a debug game sat black for a minute and a half.
-        CopyMon(GetBoxedMonPtr(boxed / IN_BOX_COUNT, boxed % IN_BOX_COUNT), &mon.box, sizeof(mon.box));
-        boxed++;
-    }
 
     for (i = 0; i < ARRAY_COUNT(sBag); i++)
         AddBagItem(sBag[i][0], sBag[i][1]);
+    SetMoney(&gSaveBlock1Ptr->money, 999999);
+}
+
+// THE OPENING, already over: no starter scene, no parcel, no gym guide, the gate guards' tea, MOM's shoes.
+void DaemonsDebug_FinishOpening(void)
+{
+    // And CRYSTAL CLEAR is hidden in her own lab until the starter scene puts
+    // her there -- so a debug save has an empty lab and nobody to hand over
+    // the upgraded INDEX. The DEBUG submenu's RECORD entry exists to reach
+    // that scene; the flag is what makes there be somebody in the room.
+    FlagClear(FLAG_HIDE_OAK_IN_HIS_LAB);
+    // And CALLOW's old man still lay across the north road, waiting for a parcel no debug game delivers -- so
+    // a debug save could not walk to Route 2, THE UNDERTONE or its grove (found walking to T-221's tree).
+    VarSet(VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 2);
+    // And the rest of the opening, which the kit's six daemons and eight MARKS say is long over. Walking a brand-new
+    // debug game north out of BLANCHE (2026-09-23), CRYSTAL came running and the whole starter scene played on a save
+    // that already had a full party. Every trigger here fires at 0, so a finished opening is just these values:
+    VarSet(VAR_MAP_SCENE_PALLET_TOWN_OAK, 1);                   // the escort is done; 2 would start the rating scene
+    VarSet(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 6);    // starter, rival, parcel and INDEX all handed over
+    FlagSet(FLAG_HIDE_RIVAL_IN_LAB);
+    VarSet(VAR_MAP_SCENE_VIRIDIAN_CITY_MART, 2);                // the parcel delivered, as the lab sets it: 1 left the clerk on "Tell CRYSTAL"
+    VarSet(VAR_MAP_SCENE_PEWTER_CITY, 2);                       // nobody marches you back to SLATE's BENCHMARK
+    FlagSet(FLAG_HIDE_PEWTER_CITY_GYM_GUIDE);
+}
+
+// The gate guards have had their tea: BRAZEN on foot.
+void DaemonsDebug_OpenBrazenGates(void)
+{
+    VarSet(VAR_MAP_SCENE_ROUTE5_ROUTE6_ROUTE7_ROUTE8_GATES, 1);
+}
+
+// EVERY GOTO POINT. Fly opens the map but every destination is dead until it has been
+// visited: region_map.c returns MAPSECTYPE_NOT_VISITED for any mapsec whose
+// FLAG_WORLD_MAP_* is clear, and the cursor will not settle on one of
+// those. The block is contiguous, PALLET_TOWN through BIRTH_ISLAND, so mark
+// the whole world seen -- a debug build that can reach one town is not a
+// debug build.
+void DaemonsDebug_EveryGotoPoint(bool8 on)
+{
+    u32 i;
+
+    for (i = FLAG_WORLD_MAP_PALLET_TOWN; i <= FLAG_WORLD_MAP_BIRTH_ISLAND_EXTERIOR; i++)
+    {
+        if (on)
+            FlagSet(i);
+        else
+            FlagClear(i);
+    }
+}
+
+void DaemonsDebug_GrantTestKit(void)
+{
+    u32 i;
+
+    DaemonsDebug_GiveRoster();
+    DaemonsDebug_FillIndexAndPort();
+    DaemonsDebug_GiveStock();
 
     for (i = FLAG_BADGE01_GET; i <= FLAG_BADGE08_GET; i++)
         FlagSet(i);
@@ -290,10 +355,6 @@ static void DaemonsDebug_GrantTestKit(void)
     //     goto_if_unset FLAG_GOT_SS_TICKET, ...DontHaveSSTicket
     // so he checks a FLAG and never looks in the bag at all. A debug save with
     // the ticket in hand was still turned away at the gangway.
-    //
-    // Both are set, deliberately. The flag is what opens the ship; the item is
-    // what the player can read a description of, which is what 9.3 is here to
-    // evaluate.
     FlagSet(FLAG_GOT_SS_TICKET);
     // T-216: the notebook, with both of its first two entries, so it opens on two sections.
     FlagSet(FLAG_GOT_NOTEBOOK);
@@ -303,44 +364,13 @@ static void DaemonsDebug_GrantTestKit(void)
     // read FLAG_GOT_OPUS, not the bag. Without it the shelf offered OPUS twice and no clerk ever noticed it.
     FlagSet(FLAG_GOT_OPUS);
     FlagSet(FLAG_COMPANION_LINKED);     // T-370: as if the companion app had synced this save, so SEND is offered
-
-    // Without these the party is in memory and unreachable: start_menu.c only
-    // draws the POKeMON entry when FLAG_SYS_POKEMON_GET is set, and the DEX
-    // entry when FLAG_SYS_POKEDEX_GET is. Handing someone six daemons and no
-    // way to open the menu is worse than handing them none, because it looks
-    // like the kit did not run.
-    FlagSet(FLAG_SYS_POKEMON_GET);
+    FlagSet(FLAG_GOT_GUIDE);            // the GUIDE is in the stock; ONE ISLAND's shelf reads the flag
+    // Without this the INDEX entry is not drawn on the START menu (start_menu.c reads FLAG_SYS_POKEDEX_GET).
     FlagSet(FLAG_SYS_POKEDEX_GET);
-    // And CRYSTAL CLEAR is hidden in her own lab until the starter scene puts
-    // her there -- so a debug save has an empty lab and nobody to hand over
-    // the upgraded INDEX. The DEBUG submenu's RECORD entry exists to reach
-    // that scene; the flag is what makes there be somebody in the room.
-    FlagClear(FLAG_HIDE_OAK_IN_HIS_LAB);
-    // And CALLOW's old man still lay across the north road, waiting for a parcel no debug game delivers -- so
-    // a debug save could not walk to Route 2, THE UNDERTONE or its grove (found walking to T-221's tree).
-    VarSet(VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 2);
-    // And the rest of the opening, which the kit's six daemons and eight MARKS say is long over. Walking a brand-new
-    // debug game north out of BLANCHE (2026-09-23), CRYSTAL came running and the whole starter scene played on a save
-    // that already had a full party. Every trigger here fires at 0, so a finished opening is just these values:
-    VarSet(VAR_MAP_SCENE_PALLET_TOWN_OAK, 1);                   // the escort is done; 2 would start the rating scene
-    VarSet(VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 6);    // starter, rival, parcel and INDEX all handed over
-    FlagSet(FLAG_HIDE_RIVAL_IN_LAB);
-    VarSet(VAR_MAP_SCENE_VIRIDIAN_CITY_MART, 2);                // the parcel delivered, as the lab sets it: 1 left the clerk on "Tell CRYSTAL"
-    VarSet(VAR_MAP_SCENE_PEWTER_CITY, 2);                       // nobody marches you back to SLATE's BENCHMARK
-    FlagSet(FLAG_HIDE_PEWTER_CITY_GYM_GUIDE);
-    VarSet(VAR_MAP_SCENE_ROUTE5_ROUTE6_ROUTE7_ROUTE8_GATES, 1); // the gate guards have had their tea: BRAZEN on foot
-    FlagSet(FLAG_SYS_B_DASH);                                   // MOM's RUNNING SHOES (T-67), which a debug game walks past
-
-    // Fly opens the map but every destination is dead until it has been
-    // visited: region_map.c returns MAPSECTYPE_NOT_VISITED for any mapsec whose
-    // FLAG_WORLD_MAP_* is clear, and the cursor will not settle on one of
-    // those. The block is contiguous, PALLET_TOWN through BIRTH_ISLAND, so mark
-    // the whole world seen -- a debug build that can reach one town is not a
-    // debug build.
-    for (i = FLAG_WORLD_MAP_PALLET_TOWN; i <= FLAG_WORLD_MAP_BIRTH_ISLAND_EXTERIOR; i++)
-        FlagSet(i);
-
-    SetMoney(&gSaveBlock1Ptr->money, 999999);
+    DaemonsDebug_FinishOpening();
+    DaemonsDebug_OpenBrazenGates();
+    FlagSet(FLAG_SYS_B_DASH);           // MOM's RUNNING SHOES (T-67), which a debug game walks past
+    DaemonsDebug_EveryGotoPoint(TRUE);
 }
 #endif
 
@@ -429,9 +459,7 @@ void NewGameInitData(void)
     StringCopy(gSaveBlock1Ptr->rivalName, rivalName);
     ResetTrainerTowerResults();
     DaemonsDeriveTrainerId();
-#if DAEMONS_DEBUG
-    DaemonsDebug_GrantTestKit();
-#endif
+    //  T-394: a debug game starts as a normal one does; the kit is GAME EVENTS' EVERYTHING (DEBUG menu).
 }
 
 static void ResetMiniGamesResults(void)

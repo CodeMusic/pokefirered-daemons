@@ -180,6 +180,8 @@ const u8 gText_MenuSave[] = _("SAVE");
 const u8 gText_MenuOption[] = _("OPTION");
 #if DAEMONS_DEBUG  // the DEBUG menu's text stays out of a release build (9.17)
 const u8 gText_MenuDebug[] = _("DEBUG");
+const u8 gText_DbgMenuEvents[] = _("GAME EVENTS");   // T-394
+const u8 gText_DbgMenuSound[] = _("SOUND");
 const u8 gText_DbgMenuHeal[] = _("HEAL");
 const u8 gText_DbgMenuMart[] = _("MART");
 const u8 gText_DbgMenuRecord[] = _("RECORD");
@@ -1037,6 +1039,8 @@ const u8 gStartMenuDesc_DbgWarden[] = _("The WARDEN's TOKEN, and his\nhouse in L
 const u8 gStartMenuDesc_DbgMore[] = _("WARDEN, the singing FIR and\nthe WITNESSES' reward.");
 const u8 gStartMenuDesc_DbgFir[] = _("The singing fir on the empty\npier, with or without the key.");
 const u8 gStartMenuDesc_DbgWitness[] = _("Every understanding held, and\nthe MANSION, near the reward.");
+const u8 gStartMenuDesc_DbgEvents[] = _("Give or take anything, in story order.");   // T-394
+const u8 gStartMenuDesc_DbgSound[] = _("Play any song or sound effect.");
 const u8 gStartMenuDesc_DbgJump[] = _("RECORD, THE MARGINS or the DIPLOMA.");
 const u8 gStartMenuDesc_DbgEncounter[] = _("Invoke any daemon, at any level.");
 const u8 gStartMenuDesc_DbgDaemon[] = _("{DPAD_LEFTRIGHT} steps, L and R step by ten.");

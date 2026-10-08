@@ -13,6 +13,25 @@
 @  RECORD puts your name in, EventScript_SetDefeatedEliteFourFlagsVars sets
 @  FLAG_SYS_GAME_CLEAR, the respawn moves to BLANCHE, and EnterHallOfFame runs
 @  the credits and wakes you at home. Nothing here reimplements any of that.
+@  T-394: GAME EVENTS. src/daemons_debug_events.c puts each page up and does the row chosen; this only loops, showing
+@  what was done above the next list, until B closes it.
+DaemonsDebug_EventScript_GameEvents::
+	lockall
+	special DaemonsDebug_EventsStart
+DaemonsDebug_EventScript_GameEventsLoop::
+	message gStringVar4
+	waitmessage
+	special DaemonsDebug_EventsChoose
+	waitstate
+	goto_if_eq VAR_RESULT, 0x7F, DaemonsDebug_EventScript_GameEventsEnd
+	special DaemonsDebug_EventsDo
+	goto DaemonsDebug_EventScript_GameEventsLoop
+
+DaemonsDebug_EventScript_GameEventsEnd::
+	closemessage
+	releaseall
+	end
+
 DaemonsDebug_EventScript_TheRecord::
 	lockall
 	msgbox DaemonsDebug_Text_TheRecord, MSGBOX_YESNO

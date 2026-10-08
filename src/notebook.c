@@ -410,6 +410,25 @@ static const struct NotebookEntry sEntries[] =
     NB_INSIGHT_ENTRIES
 };
 
+#if DAEMONS_DEBUG
+//  T-394: GAME EVENTS' NOTEBOOK, EVERY PAGE -- every document's flags set, so the NOTEBOOK opens full. Not the paper's
+//  record (it is written from the exam), not the INDEX's page (its flag is the story's ending) and not INSIGHT (its
+//  arrival is a thing to test): those come the way they come.
+void Notebook_DebugFillAll(void)
+{
+    u32 i;
+
+    for (i = 0; i < ARRAY_COUNT(sEntries); i++)
+    {
+        if (sEntries[i].kind != NB_KIND_TEXT || sEntries[i].section == NB_INSIGHT)
+            continue;
+        FlagSet(sEntries[i].flag);
+        if (sEntries[i].flag2 != 0)
+            FlagSet(sEntries[i].flag2);
+    }
+}
+#endif
+
 //  T-390: the first step after a MARK and its understanding are both held (and the NOTEBOOK is there to write in),
 //  an insight arrives -- once each. field_control_avatar.c's step hook asks, as it asks for OPUS's one beat; the
 //  line is left in gStringVar4 for Daemons_EventScript_Insight to say.

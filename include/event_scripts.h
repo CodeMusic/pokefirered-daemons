@@ -1214,6 +1214,7 @@ extern const u8 EventScript_StreamHasANewShow[];
 extern const u8 DaemonsDebug_EventScript_TheRecord[];
 extern const u8 DaemonsDebug_EventScript_TheIslands[];
 extern const u8 DaemonsDebug_EventScript_TheDiploma[];
+extern const u8 DaemonsDebug_EventScript_GameEvents[];   // T-394
 extern const u8 DaemonsDebug_EventScript_Doldrum[];
 extern const u8 DaemonsDebug_EventScript_Artsai[];
 extern const u8 DaemonsDebug_EventScript_Crystal[];

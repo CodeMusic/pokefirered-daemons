@@ -674,6 +674,8 @@ extern const u8 gStartMenuDesc_Help[];
 
 #if DAEMONS_DEBUG  // declared only where they are defined
 extern const u8 gText_MenuDebug[];
+extern const u8 gText_DbgMenuEvents[];   // T-394
+extern const u8 gText_DbgMenuSound[];
 extern const u8 gText_DbgMenuHeal[];
 extern const u8 gText_DbgMenuMart[];
 extern const u8 gText_DbgMenuAdd[];
@@ -731,6 +733,8 @@ extern const u8 gStartMenuDesc_DbgWarden[];
 extern const u8 gStartMenuDesc_DbgMore[];
 extern const u8 gStartMenuDesc_DbgFir[];
 extern const u8 gStartMenuDesc_DbgWitness[];
+extern const u8 gStartMenuDesc_DbgEvents[];   // T-394
+extern const u8 gStartMenuDesc_DbgSound[];
 extern const u8 gStartMenuDesc_DbgJump[];
 extern const u8 gStartMenuDesc_DbgEncounter[];
 extern const u8 gStartMenuDesc_DbgDaemon[];

@@ -272,6 +272,7 @@ SECTIONS {
         src/quest_log_battle.o(.text);
         src/fame_checker.o(.text);
         src/notebook.o(.text);
+        src/daemons_debug_events.o(.text);
         src/school_exam.o(.text);
         src/book_reader.o(.text);
         src/reveal.o(.text);
@@ -575,6 +576,7 @@ SECTIONS {
         src/help_system.o(.rodata);
         src/fame_checker.o(.rodata);
         src/notebook.o(.rodata);
+        src/daemons_debug_events.o(.rodata);
         src/school_exam.o(.rodata);
         src/book_reader.o(.rodata);
         src/reveal.o(.rodata);
