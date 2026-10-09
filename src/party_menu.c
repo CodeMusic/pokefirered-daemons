@@ -441,8 +441,8 @@ static const u8 sText_AwaySavedCallHome[]  = _("Saved. Open your save in the\nap
 static const u8 sText_AwaySavedStay[]      = _("Saved. {STR_VAR_1} stays where\nit is.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_AwaySaveFailed[]     = _("The game could not save, so\nnothing was asked.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_AwayCantBattle[]     = _("{STR_VAR_1} is AWAY on your\ndevice.{PAUSE_UNTIL_PRESS}");
-//  T-370 (the user, 2026-10-04): one at a time, and an emergency way home. DRAFT, every word.
-static const u8 sText_AwayOneAtATime[]     = _("One at a time: {STR_VAR_2}\nis with your device now.{PAUSE_UNTIL_PRESS}");
+//  T-370 (the user, 2026-10-04): an emergency way home. DRAFT, every word. T-396 (the user, 2026-10-09): no longer
+//  one at a time -- any number may be AWAY, one daemon to a device, and the companion says which device carries which.
 static const u8 sText_AwayNotSynced[]      = _("Your device has not seen the last\none come home. SYNC in the app.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_AwayAskBringHome[]   = _("Your device will still think\n{STR_VAR_1} is there.\pBring {STR_VAR_1} home without\nthe app? The game will save.");
 static const u8 sText_AwaySavedBringHome[] = _("Saved. {STR_VAR_1} is home. SYNC\nin the app before sending more.{PAUSE_UNTIL_PRESS}");
@@ -6458,7 +6458,8 @@ static bool8 AnotherCanBattle(u8 slot)
          && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE
          && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG)
          && GetMonData(&gPlayerParty[i], MON_DATA_HP) != 0
-         && !DaemonIsAway(&gPlayerParty[i]))
+         && !DaemonIsAway(&gPlayerParty[i])
+         && !DaemonIsAsked(&gPlayerParty[i]))     // T-396: several may be asked for at once; each is as good as gone
             return TRUE;
     }
     return FALSE;
@@ -6483,8 +6484,8 @@ static void CursorCB_Away(u8 taskId)
     }
     else
     {
-        //  T-370: the app must see an emergency return first; then one at a time (the PORT's boxes scanned ONCE, here,
-        //  only when SEND is chosen). T-374: then only a daemon in full health, nothing ailing it -- which also keeps a
+        //  T-370: the app must see an emergency return first. T-396: any number may go, each to a device of its own.
+        //  T-374: then only a daemon in full health, nothing ailing it -- which also keeps a
         //  fainted one home. Then never the last who can battle.
         const u8 *refuse = NULL;
         bool8 healthy = GetMonData(mon, MON_DATA_HP) == GetMonData(mon, MON_DATA_MAX_HP)
@@ -6492,8 +6493,6 @@ static void CursorCB_Away(u8 taskId)
 
         if (FlagGet(FLAG_COMPANION_RECALLED))
             refuse = sText_AwayNotSynced;
-        else if (DaemonsOtherOnDevice(gPartyMenu.slotId, gStringVar2))
-            refuse = sText_AwayOneAtATime;
         else if (!healthy)
             refuse = sText_AwayRestoreFirst;
         else if (!AnotherCanBattle(gPartyMenu.slotId))
