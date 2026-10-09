@@ -162,7 +162,8 @@ u8 CountPartyAliveNonEggMonsExcept(u8 slotToIgnore)
                 && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE
                 && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG)
                 && GetMonData(&gPlayerParty[i], MON_DATA_HP) != 0
-                && !DaemonIsAway(&gPlayerParty[i]))    // T-358: the PORT and the DAY-CARE keep one who can battle
+                && !DaemonIsAway(&gPlayerParty[i])     // T-358: the PORT and the DAY-CARE keep one who can battle
+                && !DaemonIsAsked(&gPlayerParty[i]))   // T-397: and one asked for is as good as gone -- the next SYNC sends it
             count++;
     }
 
