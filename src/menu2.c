@@ -636,6 +636,19 @@ static void Task_SmoothBlendLayers(u8 taskId)
     }
 }
 
+// BEGIN gbanexus -- T-395, the NEXUS residents (tools/gbanexus.py writes this)
+static const u16 sNexusPosModel[] = {
+    [SPECIES_REFLECTION - SPECIES_OLD_UNOWN_C] = SPECIES_ABSOL,
+    [SPECIES_LODESTAR - SPECIES_OLD_UNOWN_C] = SPECIES_JIRACHI,
+    [SPECIES_PERIHELION - SPECIES_OLD_UNOWN_C] = SPECIES_RAIKOU,
+    [SPECIES_LYUBOV - SPECIES_OLD_UNOWN_C] = SPECIES_ENTEI,
+    [SPECIES_MULTIMAL - SPECIES_OLD_UNOWN_C] = SPECIES_FEEBAS,
+    [SPECIES_ILLUMINED - SPECIES_OLD_UNOWN_C] = SPECIES_MILOTIC,
+    [SPECIES_LYNX - SPECIES_OLD_UNOWN_C] = SPECIES_SKITTY,
+    [SPECIES_BASTET - SPECIES_OLD_UNOWN_C] = SPECIES_DELCATTY,
+};
+
+// END gbanexus
 u8 Menu2_GetMonPosAttribute(u16 species, u32 personality, u8 attributeId)
 {
     if (species == SPECIES_UNOWN)
@@ -656,6 +669,8 @@ u8 Menu2_GetMonPosAttribute(u16 species, u32 personality, u8 attributeId)
             break;
         }
     }
+    else if (species >= SPECIES_OLD_UNOWN_C && species <= SPECIES_OLD_UNOWN_J)   // T-395
+        species = sNexusPosModel[species - SPECIES_OLD_UNOWN_C];
     if (species != SPECIES_NONE && attributeId < PSA_MON_ATTR_COUNT)
     {
         species--;

@@ -5031,6 +5031,104 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 2,
     },
 
+// BEGIN gbanexus -- T-395, the NEXUS residents (tools/gbanexus.py writes this)
+    [NATIONAL_DEX_REFLECTION] =
+    {
+        .categoryName = _("CANVAS"),
+        .height = 12,
+        .weight = 470,
+        .description = gReflectionPokedexText,
+        .unusedDescription = gReflectionPokedexText,
+        .pokemonScale = 301,
+        .pokemonOffset = 1,
+        .trainerScale = 256,
+        .trainerOffset = -2,
+    },
+    [NATIONAL_DEX_LODESTAR] =
+    {
+        .categoryName = _("GUIDESTAR"),
+        .height = 3,
+        .weight = 11,
+        .description = gLodestarPokedexText,
+        .unusedDescription = gLodestarPokedexText,
+        .pokemonScale = 608,
+        .pokemonOffset = -8,
+        .trainerScale = 256,
+        .trainerOffset = -2,
+    },
+    [NATIONAL_DEX_PERIHELION] =
+    {
+        .categoryName = _("COMET"),
+        .height = 19,
+        .weight = 1780,
+        .description = gPerihelionPokedexText,
+        .unusedDescription = gPerihelionPokedexText,
+        .pokemonScale = 283,
+        .pokemonOffset = 0,
+        .trainerScale = 359,
+        .trainerOffset = 6,
+    },
+    [NATIONAL_DEX_LYUBOV] =
+    {
+        .categoryName = _("DEVOTION"),
+        .height = 21,
+        .weight = 1980,
+        .description = gLyubovPokedexText,
+        .unusedDescription = gLyubovPokedexText,
+        .pokemonScale = 283,
+        .pokemonOffset = 0,
+        .trainerScale = 370,
+        .trainerOffset = 7,
+    },
+    [NATIONAL_DEX_MULTIMAL] =
+    {
+        .categoryName = _("SHADOWS"),
+        .height = 6,
+        .weight = 74,
+        .description = gMultimalPokedexText,
+        .unusedDescription = gMultimalPokedexText,
+        .pokemonScale = 423,
+        .pokemonOffset = 3,
+        .trainerScale = 256,
+        .trainerOffset = -2,
+    },
+    [NATIONAL_DEX_ILLUMINED] =
+    {
+        .categoryName = _("RADIANT"),
+        .height = 62,
+        .weight = 1620,
+        .description = gIlluminedPokedexText,
+        .unusedDescription = gIlluminedPokedexText,
+        .pokemonScale = 282,
+        .pokemonOffset = -1,
+        .trainerScale = 382,
+        .trainerOffset = 7,
+    },
+    [NATIONAL_DEX_LYNX] =
+    {
+        .categoryName = _("FAMILIAR"),
+        .height = 6,
+        .weight = 110,
+        .description = gLynxPokedexText,
+        .unusedDescription = gLynxPokedexText,
+        .pokemonScale = 492,
+        .pokemonOffset = 18,
+        .trainerScale = 256,
+        .trainerOffset = -2,
+    },
+    [NATIONAL_DEX_BASTET] =
+    {
+        .categoryName = _("BOUNDLESS"),
+        .height = 11,
+        .weight = 326,
+        .description = gBastetPokedexText,
+        .unusedDescription = gBastetPokedexText,
+        .pokemonScale = 322,
+        .pokemonOffset = 9,
+        .trainerScale = 256,
+        .trainerOffset = -2,
+    },
+// END gbanexus
     //  8.9 -- the entry the register does not hold. NATIONAL_DEX_OLD_UNOWN_B is
     //  387 and NATIONAL_DEX_COUNT is 386, so every list in the Index is bounded
     //  one short of it and the counter never counts it. This entry exists only

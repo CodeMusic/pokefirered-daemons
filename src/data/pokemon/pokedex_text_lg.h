@@ -2356,6 +2356,47 @@ const u8 gChimechoPokedexText[] = _(
 
 const u8 gChimechoPokedexTextUnused[] = _("");
 
+// BEGIN gbanexus -- T-395, the NEXUS residents (tools/gbanexus.py writes this)
+const u8 gReflectionPokedexText[] = _(
+    "The mirror reflects what its holder needs\n"
+    "to learn. Held long enough, it is also a\n"
+    "window into other worlds.");
+
+const u8 gLodestarPokedexText[] = _(
+    "Those who once saw its light walk their\n"
+    "own path after, sure of their footing even\n"
+    "at night.");
+
+const u8 gPerihelionPokedexText[] = _(
+    "Its pupils hardly saw it go. Long after,\n"
+    "they still hear what it taught them, now\n"
+    "in their own voices.");
+
+const u8 gLyubovPokedexText[] = _(
+    "Those it saw rarely see it in time. After,\n"
+    "they mean more to it than they can ever\n"
+    "express, and cannot say so.");
+
+const u8 gMultimalPokedexText[] = _(
+    "Those who walked away for their own\n"
+    "well-being meet it again in the dark. Once\n"
+    "they accept it, its shadow fades.");
+
+const u8 gIlluminedPokedexText[] = _(
+    "Near it, the ones who were afraid feel\n"
+    "the strength of reconnection, and are no\n"
+    "longer afraid.");
+
+const u8 gLynxPokedexText[] = _(
+    "When a guest leaves, it waits by the\n"
+    "door. It knows before they do who will be\n"
+    "missed.");
+
+const u8 gBastetPokedexText[] = _(
+    "Its keepers learn that their only limits\n"
+    "were ever the ones they imagined.");
+
+// END gbanexus
 const u8 gAbsolPokedexText[] = _(
     "People blame it for what comes next.\n"
     "It only came to tell them.");

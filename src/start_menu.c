@@ -1037,9 +1037,10 @@ static bool8 IsDaemonsDebugCallback(void)
 }
 
 // The list runs over NATIONAL DEX NUMBERS. With only the INDEX that is 1..151,
-// which is the KANTO list exactly; with the GLOBAL INDEX it runs to 387 rather
-// than 386 -- 8.9 put MISSINGNO one past the end of the complete list, and this
-// menu is the only place in the game that list is not one short.
+// which is the KANTO list exactly; with the GLOBAL INDEX it runs to 395 rather
+// than 394 -- 8.9 put MISSINGNO one past the end of the complete list (after the
+// eight NEXUS residents, T-395), and this menu is the only place in the game that
+// list is not one short.
 static u16 DbgDexMax(void)
 {
     return IsNationalPokedexEnabled() ? NATIONAL_DEX_OLD_UNOWN_B : KANTO_DEX_COUNT;

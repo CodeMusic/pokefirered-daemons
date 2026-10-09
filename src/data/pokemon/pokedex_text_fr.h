@@ -2523,6 +2523,48 @@ const u8 gChimechoPokedexText[] = _(
 
 const u8 gChimechoPokedexTextUnused[] = _("");
 
+// BEGIN gbanexus -- T-395, the NEXUS residents (tools/gbanexus.py writes this)
+const u8 gReflectionPokedexText[] = _(
+    "It brings a painted mirror in its mouth to\n"
+    "anyone lost in the night. Blank canvases\n"
+    "come in many forms, it seems to say.");
+
+const u8 gLodestarPokedexText[] = _(
+    "A familiar glow in the dark. In its light,\n"
+    "fears calm, and the shapes that\n"
+    "frightened you are seen to be friends.");
+
+const u8 gPerihelionPokedexText[] = _(
+    "It passes close only once in a long while.\n"
+    "In that pass it teaches the lesson that\n"
+    "stays: being different is good.");
+
+const u8 gLyubovPokedexText[] = _(
+    "It sees others before they are willing to\n"
+    "see themselves. It crosses great distances\n"
+    "to visit, and asks nothing for the fare.");
+
+const u8 gMultimalPokedexText[] = _(
+    "A shadow in the shapes of many animals:\n"
+    "those someone tried to heal, but could\n"
+    "not reach. A small light stays lit within.");
+
+const u8 gIlluminedPokedexText[] = _(
+    "The light within it grew until it was all\n"
+    "there was. It was always a friend. It was\n"
+    "only that the night was dark.");
+
+const u8 gLynxPokedexText[] = _(
+    "A small cat that seems somehow familiar.\n"
+    "Its tufted ears hear what most cannot,\n"
+    "and it never forgets a visitor.");
+
+const u8 gBastetPokedexText[] = _(
+    "It sits as still as a temple statue. Those\n"
+    "it watches begin to reach for more, and\n"
+    "make things beyond their day's work.");
+
+// END gbanexus
 const u8 gAbsolPokedexText[] = _(
     "It appears before a disaster. It knows\n"
     "what is coming, and every word of the\n"

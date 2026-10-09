@@ -1322,6 +1322,30 @@ static const u8 sOpusMargin_Elpis_Neglected[] = _("Asleep at the bottom of somet
 static const u8 sOpusMargin_Elpis_InstinctCarried[] = _("It listened to everything. You said more\nthan you meant to.");
 static const u8 sOpusMargin_Elpis_InstinctNeglected[] = _("Everything else got out. It is still here.");
 
+static const u8 sOpusMargin_Reflection_Carried[] = _("You have looked into the mirror it\ncarries. You looked for a long time.");
+static const u8 sOpusMargin_Reflection_Neglected[] = _("It is still holding the mirror out. Nobody\nhas taken it.");
+
+static const u8 sOpusMargin_Lodestar_Carried[] = _("You have walked a long way by its light.\nYou have not once looked lost.");
+static const u8 sOpusMargin_Lodestar_Neglected[] = _("It is still shining where it was left.\nSomebody, somewhere, is walking toward it.");
+
+static const u8 sOpusMargin_Perihelion_Carried[] = _("It has stayed close to you a long while\nnow. That is not like it.");
+static const u8 sOpusMargin_Perihelion_Neglected[] = _("It has gone round again. It will be back.");
+
+static const u8 sOpusMargin_Lyubov_Carried[] = _("You saw it in time.");
+static const u8 sOpusMargin_Lyubov_Neglected[] = _("It came all this way. You put it away.");
+
+static const u8 sOpusMargin_Multimal_Carried[] = _("You did not walk away from this one.");
+static const u8 sOpusMargin_Multimal_Neglected[] = _("You walked away. It understands. Its\nlight is still on.");
+
+static const u8 sOpusMargin_Illumined_Carried[] = _("You stayed until it was all light.");
+static const u8 sOpusMargin_Illumined_Neglected[] = _("Even put away, it is not dark in there.");
+
+static const u8 sOpusMargin_Lynx_Carried[] = _("It follows you from room to room now.");
+static const u8 sOpusMargin_Lynx_Neglected[] = _("It is waiting by the door.");
+
+static const u8 sOpusMargin_Bastet_Carried[] = _("You have made more since you started\ncarrying it.");
+static const u8 sOpusMargin_Bastet_Neglected[] = _("It is sitting very still. It is waiting for\nyou to begin.");
+
 static const struct OpusMargin sOpusMargins[] = {
     { SPECIES_BULBASAUR,     sOpusMargin_Rovercub_Carried, sOpusMargin_Rovercub_Neglected, sOpusMargin_Rovercub_InstinctCarried, sOpusMargin_Rovercub_InstinctNeglected },
     { SPECIES_CHARMANDER,    sOpusMargin_Label_Carried, sOpusMargin_Label_Neglected, sOpusMargin_Label_InstinctCarried, sOpusMargin_Label_InstinctNeglected },
@@ -1673,4 +1697,12 @@ static const struct OpusMargin sOpusMargins[] = {
     { SPECIES_LATIAS,        sOpusMargin_Polydeuces_Carried, sOpusMargin_Polydeuces_Neglected, sOpusMargin_Polydeuces_InstinctCarried, sOpusMargin_Polydeuces_InstinctNeglected },
     { SPECIES_CELEBI,        sOpusMargin_Kairos_Carried, sOpusMargin_Kairos_Neglected, sOpusMargin_Kairos_InstinctCarried, sOpusMargin_Kairos_InstinctNeglected },
     { SPECIES_JIRACHI,       sOpusMargin_Elpis_Carried, sOpusMargin_Elpis_Neglected, sOpusMargin_Elpis_InstinctCarried, sOpusMargin_Elpis_InstinctNeglected },
+    { SPECIES_OLD_UNOWN_C,   sOpusMargin_Reflection_Carried, sOpusMargin_Reflection_Neglected, NULL, NULL },
+    { SPECIES_OLD_UNOWN_D,   sOpusMargin_Lodestar_Carried, sOpusMargin_Lodestar_Neglected, NULL, NULL },
+    { SPECIES_OLD_UNOWN_E,   sOpusMargin_Perihelion_Carried, sOpusMargin_Perihelion_Neglected, NULL, NULL },
+    { SPECIES_OLD_UNOWN_F,   sOpusMargin_Lyubov_Carried, sOpusMargin_Lyubov_Neglected, NULL, NULL },
+    { SPECIES_OLD_UNOWN_G,   sOpusMargin_Multimal_Carried, sOpusMargin_Multimal_Neglected, NULL, NULL },
+    { SPECIES_OLD_UNOWN_H,   sOpusMargin_Illumined_Carried, sOpusMargin_Illumined_Neglected, NULL, NULL },
+    { SPECIES_OLD_UNOWN_I,   sOpusMargin_Lynx_Carried, sOpusMargin_Lynx_Neglected, NULL, NULL },
+    { SPECIES_OLD_UNOWN_J,   sOpusMargin_Bastet_Carried, sOpusMargin_Bastet_Neglected, NULL, NULL },
 };

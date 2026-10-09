@@ -1267,43 +1267,43 @@ const struct MonCoords gMonFrontPicCoords[] =
     },
     [SPECIES_OLD_UNOWN_C] =
     {
-        .size = MON_COORDS_SIZE(64, 64),
-        .y_offset = 6,
+        .size = MON_COORDS_SIZE(40, 64),
+        .y_offset = 3,
     },
     [SPECIES_OLD_UNOWN_D] =
     {
-        .size = MON_COORDS_SIZE(64, 64),
-        .y_offset = 6,
+        .size = MON_COORDS_SIZE(56, 64),
+        .y_offset = 2,
     },
     [SPECIES_OLD_UNOWN_E] =
     {
         .size = MON_COORDS_SIZE(64, 64),
-        .y_offset = 6,
+        .y_offset = 3,
     },
     [SPECIES_OLD_UNOWN_F] =
     {
-        .size = MON_COORDS_SIZE(64, 64),
-        .y_offset = 6,
+        .size = MON_COORDS_SIZE(56, 64),
+        .y_offset = 4,
     },
     [SPECIES_OLD_UNOWN_G] =
     {
-        .size = MON_COORDS_SIZE(64, 64),
-        .y_offset = 6,
+        .size = MON_COORDS_SIZE(56, 56),
+        .y_offset = 7,
     },
     [SPECIES_OLD_UNOWN_H] =
     {
-        .size = MON_COORDS_SIZE(64, 64),
-        .y_offset = 6,
+        .size = MON_COORDS_SIZE(56, 56),
+        .y_offset = 5,
     },
     [SPECIES_OLD_UNOWN_I] =
     {
-        .size = MON_COORDS_SIZE(64, 64),
-        .y_offset = 6,
+        .size = MON_COORDS_SIZE(48, 64),
+        .y_offset = 2,
     },
     [SPECIES_OLD_UNOWN_J] =
     {
         .size = MON_COORDS_SIZE(64, 64),
-        .y_offset = 6,
+        .y_offset = 2,
     },
     [SPECIES_OLD_UNOWN_K] =
     {
