@@ -63,7 +63,7 @@ Nexus_Text_HunterFirst::
     .string "And frankly, I never was\n"
     .string "to begin with.\p"
     .string "How could anyone hurt these\n"
-    .string "animals? They are precious.\p"
+    .string "DAEMONS? They are precious.\p"
     .string "…Now why would you turn back?\n"
     .string "Why would my tone make you buckle?\p"
     .string "Charm must be balanced with\n"
@@ -73,7 +73,7 @@ Nexus_Text_HunterFirst::
     .string "be placed where doors should be.$"
 
 Nexus_Text_Hunter::
-    .string "These animals are precious.\n"
+    .string "These DAEMONS are precious.\n"
     .string "Mind how you walk among them.$"
 
 Nexus_Text_HunterAll::
