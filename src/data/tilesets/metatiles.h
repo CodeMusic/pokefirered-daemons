@@ -245,3 +245,5 @@ const u16 gMetatiles_VerdigrisLecture[] = INCBIN_U16("data/tilesets/secondary/ve
 const u32 gMetatileAttributes_VerdigrisLecture[] = INCBIN_U32("data/tilesets/secondary/verdigris_lecture/metatile_attributes.bin");
 const u16 gMetatiles_ReadingRoom[] = INCBIN_U16("data/tilesets/secondary/reading_room/metatiles.bin");
 const u32 gMetatileAttributes_ReadingRoom[] = INCBIN_U32("data/tilesets/secondary/reading_room/metatile_attributes.bin");
+const u16 gMetatiles_Nexus[] = INCBIN_U16("data/tilesets/secondary/nexus/metatiles.bin");
+const u32 gMetatileAttributes_Nexus[] = INCBIN_U32("data/tilesets/secondary/nexus/metatile_attributes.bin");

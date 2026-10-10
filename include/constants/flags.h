@@ -1599,6 +1599,13 @@
 //  the key is still the user's); and the singing fir on the pier, once it has been heard in its key.
 #define FLAG_NOTEBOOK_LOOSE_KEY       (DAEMONS_FLAGS_START + 0x57)
 #define FLAG_FIR_IN_KEY               (DAEMONS_FLAGS_START + 0x58)
+//  T-395: THE NEXUS (docs/nexus.md). Every fir is flat until the key; this hides the bright one meanwhile, and every
+//  fir's map sets it from FLAG_FIR_IN_KEY on arrival (EventScript_FirKeyFlags). The NEXUS once reached, and its
+//  (not a) HUNTER once met. The groves' FOUND flags are 0x110 up (tools/gbagrove.py's block, below).
+#define FLAG_HIDE_FIR_UNKEYED         (DAEMONS_FLAGS_START + 0x100)
+#define FLAG_NEXUS_VISITED            (DAEMONS_FLAGS_START + 0x101)
+#define FLAG_NEXUS_HUNTER_MET         (DAEMONS_FLAGS_START + 0x102)
+#define FLAG_NEXUS_PHOENIX_GONE       (DAEMONS_FLAGS_START + 0x103)
 
 //  T-300. THE PROGRAMMER'S GUIDE TO THE HUMAN MIND, taken from the bookshelf in ONE ISLAND's second house. 0x60 up is
 //  the Guide's, so the clock session's next flags after 0x55 do not meet it.
@@ -1662,6 +1669,24 @@
 #define FLAG_DOCTRINE_STEP6           (DAEMONS_FLAGS_START + 0x15)
 #define FLAG_DOCTRINE_STEP7           (DAEMONS_FLAGS_START + 0x16)
 #define FLAG_DOCTRINE_STEP8           (DAEMONS_FLAGS_START + 0x17)
+//  BEGIN gbagrove -- T-395: each grove once arrived in, so its tree in THE NEXUS is an ordinary one
+//  (tools/gbagrove.py writes this block; tools/gbanexusmap.py reads it).
+#define FLAG_VIRIDIAN_FOREST_GROVE_FOUND         (DAEMONS_FLAGS_START + 0x110)
+#define FLAG_ROUTE25_GROVE_FOUND                 (DAEMONS_FLAGS_START + 0x111)
+#define FLAG_ROUTE1_GROVE_FOUND                  (DAEMONS_FLAGS_START + 0x112)
+#define FLAG_ROUTE24_GROVE_FOUND                 (DAEMONS_FLAGS_START + 0x113)
+#define FLAG_ROUTE8_GROVE_FOUND                  (DAEMONS_FLAGS_START + 0x114)
+#define FLAG_ROUTE11_GROVE_FOUND                 (DAEMONS_FLAGS_START + 0x115)
+#define FLAG_ROUTE13_GROVE_FOUND                 (DAEMONS_FLAGS_START + 0x116)
+#define FLAG_FIVE_ISLAND_MEADOW_GROVE_FOUND      (DAEMONS_FLAGS_START + 0x117)
+#define FLAG_SIX_ISLAND_WATER_PATH_GROVE_FOUND   (DAEMONS_FLAGS_START + 0x118)
+#define FLAG_THREE_ISLAND_BERRY_FOREST_GROVE_FOUND (DAEMONS_FLAGS_START + 0x119)
+#define FLAG_ONE_ISLAND_GROVE_FOUND              (DAEMONS_FLAGS_START + 0x11A)
+#define FLAG_TWO_ISLAND_GROVE_FOUND              (DAEMONS_FLAGS_START + 0x11B)
+#define FLAG_FOUR_ISLAND_GROVE_FOUND             (DAEMONS_FLAGS_START + 0x11C)
+#define FLAG_SEVEN_ISLAND_GROVE_FOUND            (DAEMONS_FLAGS_START + 0x11D)
+//  END gbagrove
+
 #define DAEMONS_FLAGS_COUNT           0x400
 #define DAEMONS_FLAGS_END             (DAEMONS_FLAGS_START + DAEMONS_FLAGS_COUNT - 1)
 #define DAEMONS_FLAGS_SIZE            (DAEMONS_FLAGS_COUNT / 8)

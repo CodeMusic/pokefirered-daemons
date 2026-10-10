@@ -62,6 +62,8 @@ const u16 gObjectEventPal_DaemonSpearow[] = INCBIN_U16("graphics/object_events/p
 const u16 gObjectEventPal_NpcClears[] = INCBIN_U16("graphics/object_events/palettes/npc_clears.gbapal");
 const u16 gObjectEventPal_NpcOwl[] = INCBIN_U16("graphics/object_events/palettes/npc_owl.gbapal");
 const u16 gObjectEventPal_NpcTownUmbra[] = INCBIN_U16("graphics/object_events/palettes/npc_town_umbra.gbapal");
+//  T-395: the singing fir before the key -- the same pixels, washed out (tools/gensingingfir.py).
+const u16 gObjectEventPal_FirDim[] = INCBIN_U16("graphics/object_events/palettes/fir_dim.gbapal");
 const u16 gObjectEventPal_NpcTownQuicksilver[] = INCBIN_U16("graphics/object_events/palettes/npc_town_quicksilver.gbapal");
 const u16 gObjectEventPal_NpcTownBrazen[] = INCBIN_U16("graphics/object_events/palettes/npc_town_brazen.gbapal");
 const u16 gObjectEventPal_NpcTownLurid[] = INCBIN_U16("graphics/object_events/palettes/npc_town_lurid.gbapal");
@@ -160,6 +162,8 @@ const u16 gObjectEventPic_Burglar[] = INCBIN_U16("graphics/object_events/pics/pe
 const u16 gObjectEventPic_AlDoldrum[] = INCBIN_U16("graphics/object_events/pics/people/al_doldrum.4bpp");
 const u16 gObjectEventPic_Ty[] = INCBIN_U16("graphics/object_events/pics/people/ty.4bpp");
 const u16 gObjectEventPic_David[] = INCBIN_U16("graphics/object_events/pics/people/david.4bpp");
+//  T-395: THE (NOT A) HUNTER of THE NEXUS, a bear in red plaid (tools/genhunter.py, the DAEMONS repo).
+const u16 gObjectEventPic_NexusHunter[] = INCBIN_U16("graphics/object_events/pics/people/nexus_hunter.4bpp");
 const u16 gObjectEventPic_SingingFir[] = INCBIN_U16("graphics/object_events/pics/misc/singing_fir.4bpp");
 const u16 gObjectEventPic_TownUmbraAdult[] = INCBIN_U16("graphics/object_events/pics/people/town_umbra_adult.4bpp");
 const u16 gObjectEventPic_TownQuicksilverElder[] = INCBIN_U16("graphics/object_events/pics/people/town_quicksilver_elder.4bpp");

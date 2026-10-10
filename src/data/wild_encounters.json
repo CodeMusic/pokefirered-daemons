@@ -27985,6 +27985,144 @@
               }
             ]
           }
+        },
+        {
+          "map": "MAP_NEXUS",
+          "base_label": "sNexus_FireRed",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_REFLECTION"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_LYNX"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_MULTIMAL"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SPHEAL"
+              },
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_REFLECTION"
+              },
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_LYNX"
+              },
+              {
+                "min_level": 25,
+                "max_level": 28,
+                "species": "SPECIES_LODESTAR"
+              },
+              {
+                "min_level": 25,
+                "max_level": 28,
+                "species": "SPECIES_MULTIMAL"
+              },
+              {
+                "min_level": 25,
+                "max_level": 28,
+                "species": "SPECIES_SPHEAL"
+              },
+              {
+                "min_level": 27,
+                "max_level": 30,
+                "species": "SPECIES_LODESTAR"
+              },
+              {
+                "min_level": 30,
+                "max_level": 30,
+                "species": "SPECIES_PERIHELION"
+              },
+              {
+                "min_level": 30,
+                "max_level": 30,
+                "species": "SPECIES_LYUBOV"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_NEXUS",
+          "base_label": "sNexus_LeafGreen",
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_REFLECTION"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_LYNX"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_MULTIMAL"
+              },
+              {
+                "min_level": 22,
+                "max_level": 26,
+                "species": "SPECIES_SPHEAL"
+              },
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_REFLECTION"
+              },
+              {
+                "min_level": 24,
+                "max_level": 28,
+                "species": "SPECIES_LYNX"
+              },
+              {
+                "min_level": 25,
+                "max_level": 28,
+                "species": "SPECIES_LODESTAR"
+              },
+              {
+                "min_level": 25,
+                "max_level": 28,
+                "species": "SPECIES_MULTIMAL"
+              },
+              {
+                "min_level": 25,
+                "max_level": 28,
+                "species": "SPECIES_SPHEAL"
+              },
+              {
+                "min_level": 27,
+                "max_level": 30,
+                "species": "SPECIES_LODESTAR"
+              },
+              {
+                "min_level": 30,
+                "max_level": 30,
+                "species": "SPECIES_PERIHELION"
+              },
+              {
+                "min_level": 30,
+                "max_level": 30,
+                "species": "SPECIES_LYUBOV"
+              }
+            ]
+          }
         }
       ]
     }

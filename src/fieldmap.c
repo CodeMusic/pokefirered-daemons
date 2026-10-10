@@ -15,6 +15,7 @@
 #include "school_lift.h"
 
 extern const struct Tileset gTileset_General;   // T-275: the CHECKPOINT's tileset
+extern const struct Tileset gTileset_Nexus;     // T-395: THE NEXUS, made of paint
 #include "overworld.h"
 
 struct ConnectionFlags
@@ -1038,12 +1039,15 @@ static void DaemonsPaleEntries(u16 offset, u16 count)
 // to three are, 18%; once all are held, as painted. Only the TILES -- people and daemons are sprites, so they keep
 // their full colour and stand a little clearer than the world until it catches up. Done as the palettes LOAD, as
 // Blanche's wash is, so a fade or a reload can never compound it; HALFTONE's grey outranks it, and the watch's light
-// falls on top of it.
+// falls on top of it. T-395: and never in THE NEXUS, which is made entirely of paint -- the one place that is not
+// waiting to be understood before its colours show.
 static u8 DaemonsClarityFade(void)
 {
     u8 missing;
 
     if (DaemonsIsHalftone())
+        return 0;
+    if (gMapHeader.mapLayout != NULL && gMapHeader.mapLayout->secondaryTileset == &gTileset_Nexus)
         return 0;
     missing = DaemonsUnderstandingsMissing();
     return missing >= 4 ? 102 : missing != 0 ? 46 : 0;     // of 256

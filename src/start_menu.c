@@ -91,6 +91,7 @@ enum StartMenuOption
     STARTMENU_DBG_MORE,      // the JUMP page's second page
     STARTMENU_DBG_FIR,       // T-10
     STARTMENU_DBG_WITNESS,   // T-235
+    STARTMENU_DBG_NEXUS,     // T-395
     STARTMENU_DBG_ENCOUNTER,
     STARTMENU_DBG_WATCH,     // T-268
     STARTMENU_DBG_DAEMON,
@@ -176,6 +177,7 @@ static bool8 DbgWardenCallback(void);
 static bool8 DbgMoreCallback(void);
 static bool8 DbgFirCallback(void);
 static bool8 DbgWitnessCallback(void);
+static bool8 DbgNexusCallback(void);
 static bool8 DbgJumpCallback(void);
 static bool8 DbgEncounterCallback(void);
 static bool8 DbgStepCallback(void);
@@ -247,6 +249,7 @@ static const struct MenuAction sStartMenuActionTable[] = {
     [STARTMENU_DBG_MORE]    = { gText_DbgMenuMore,    {.u8_void = DbgMoreCallback} },
     [STARTMENU_DBG_FIR]     = { gText_DbgMenuFir,     {.u8_void = DbgFirCallback} },
     [STARTMENU_DBG_WITNESS] = { gText_DbgMenuWitness, {.u8_void = DbgWitnessCallback} },
+    [STARTMENU_DBG_NEXUS]   = { gText_DbgMenuNexus,   {.u8_void = DbgNexusCallback} },
     [STARTMENU_DBG_ENCOUNTER] = { gText_DbgMenuEncounter, {.u8_void = DbgEncounterCallback} },
     // DAEMON and LEVEL are adjusted with LEFT/RIGHT, so A on either does
     // nothing but redraw -- which is also what makes A safe to lean on.
@@ -310,6 +313,7 @@ static const u8 *const sStartMenuDescPointers[] = {
     gStartMenuDesc_DbgMore,
     gStartMenuDesc_DbgFir,
     gStartMenuDesc_DbgWitness,
+    gStartMenuDesc_DbgNexus,
     gStartMenuDesc_DbgEncounter,
     gStartMenuDesc_DbgWatch,
     gStartMenuDesc_DbgDaemon,
@@ -447,6 +451,7 @@ static void SetUpStartMenu(void)
         AppendToStartMenuItems(STARTMENU_DBG_WARDEN);
         AppendToStartMenuItems(STARTMENU_DBG_FIR);
         AppendToStartMenuItems(STARTMENU_DBG_WITNESS);
+        AppendToStartMenuItems(STARTMENU_DBG_NEXUS);
         return;
     }
     if (sDbgPage == DBG_PAGE_SOUND)
@@ -1024,6 +1029,7 @@ static bool8 IsDaemonsDebugCallback(void)
         || sStartMenuCallback == DbgMoreCallback
         || sStartMenuCallback == DbgFirCallback
         || sStartMenuCallback == DbgWitnessCallback
+        || sStartMenuCallback == DbgNexusCallback
         || sStartMenuCallback == DbgJumpCallback
         || sStartMenuCallback == DbgEncounterCallback
         || sStartMenuCallback == DbgStepCallback
@@ -1501,6 +1507,12 @@ static bool8 DbgFirCallback(void)
 static bool8 DbgWitnessCallback(void)
 {
     return DbgLeaveMenuForScript(DaemonsDebug_EventScript_Witness);
+}
+
+//  T-395: THE NEXUS is behind the fir in its key, and its doors open only to groves already found.
+static bool8 DbgNexusCallback(void)
+{
+    return DbgLeaveMenuForScript(DaemonsDebug_EventScript_Nexus);
 }
 
 static bool8 DbgEncounterCallback(void)

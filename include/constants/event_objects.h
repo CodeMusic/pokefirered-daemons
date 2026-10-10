@@ -290,7 +290,13 @@
 //  T-10: the singing fir on the S.S. ANNE's pier, drawn by tools/gensingingfir.py (the DAEMONS repo).
 #define OBJ_EVENT_GFX_SINGING_FIR 225
 
-#define NUM_OBJ_EVENT_GFX     226
+//  T-395: the same fir before the key: flat, washed out (docs/nexus.md).
+#define OBJ_EVENT_GFX_SINGING_FIR_DIM 226
+
+//  T-395: THE (NOT A) HUNTER of THE NEXUS, a bear in red plaid (tools/genhunter.py).
+#define OBJ_EVENT_GFX_NEXUS_HUNTER 227
+
+#define NUM_OBJ_EVENT_GFX     228
 
 // These are dynamic object gfx ids.
 // They correspond with the values of the VAR_OBJ_GFX_ID_X vars.

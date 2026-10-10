@@ -243,6 +243,66 @@ DaemonsDebug_Text_Fir::
 DaemonsDebug_Text_FirSheet::
 	.string "Hold the band's sheet?$"
 
+@  NEXUS (T-395). The band's sheet held and the fir in its key, every grove found or none, and THE NEXUS, in front of
+@  its Christmas tree.
+DaemonsDebug_EventScript_Nexus::
+	lockall
+	msgbox DaemonsDebug_Text_Nexus, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, DaemonsDebug_EventScript_Cancel
+	setflag FLAG_NOTEBOOK_LOOSE_KEY
+	setflag FLAG_FIR_IN_KEY
+	clearflag FLAG_HIDE_FIR_UNKEYED
+	msgbox DaemonsDebug_Text_NexusGroves, MSGBOX_YESNO
+	call_if_eq VAR_RESULT, YES, DaemonsDebug_EventScript_NexusGroves
+	call_if_eq VAR_RESULT, NO, DaemonsDebug_EventScript_NexusNoGroves
+	closemessage
+	warp MAP_NEXUS, 12, 5
+	waitstate
+	releaseall
+	end
+
+DaemonsDebug_EventScript_NexusGroves::
+	setflag FLAG_VIRIDIAN_FOREST_GROVE_FOUND
+	setflag FLAG_ROUTE25_GROVE_FOUND
+	setflag FLAG_ROUTE1_GROVE_FOUND
+	setflag FLAG_ROUTE24_GROVE_FOUND
+	setflag FLAG_ROUTE8_GROVE_FOUND
+	setflag FLAG_ROUTE11_GROVE_FOUND
+	setflag FLAG_ROUTE13_GROVE_FOUND
+	setflag FLAG_FIVE_ISLAND_MEADOW_GROVE_FOUND
+	setflag FLAG_SIX_ISLAND_WATER_PATH_GROVE_FOUND
+	setflag FLAG_THREE_ISLAND_BERRY_FOREST_GROVE_FOUND
+	setflag FLAG_ONE_ISLAND_GROVE_FOUND
+	setflag FLAG_TWO_ISLAND_GROVE_FOUND
+	setflag FLAG_FOUR_ISLAND_GROVE_FOUND
+	setflag FLAG_SEVEN_ISLAND_GROVE_FOUND
+	return
+
+DaemonsDebug_EventScript_NexusNoGroves::
+	clearflag FLAG_VIRIDIAN_FOREST_GROVE_FOUND
+	clearflag FLAG_ROUTE25_GROVE_FOUND
+	clearflag FLAG_ROUTE1_GROVE_FOUND
+	clearflag FLAG_ROUTE24_GROVE_FOUND
+	clearflag FLAG_ROUTE8_GROVE_FOUND
+	clearflag FLAG_ROUTE11_GROVE_FOUND
+	clearflag FLAG_ROUTE13_GROVE_FOUND
+	clearflag FLAG_FIVE_ISLAND_MEADOW_GROVE_FOUND
+	clearflag FLAG_SIX_ISLAND_WATER_PATH_GROVE_FOUND
+	clearflag FLAG_THREE_ISLAND_BERRY_FOREST_GROVE_FOUND
+	clearflag FLAG_ONE_ISLAND_GROVE_FOUND
+	clearflag FLAG_TWO_ISLAND_GROVE_FOUND
+	clearflag FLAG_FOUR_ISLAND_GROVE_FOUND
+	clearflag FLAG_SEVEN_ISLAND_GROVE_FOUND
+	return
+
+DaemonsDebug_Text_Nexus::
+	.string "DEBUG: THE NEXUS?\p"
+	.string "The band's sheet held, and the\n"
+	.string "fir in its key.$"
+
+DaemonsDebug_Text_NexusGroves::
+	.string "Every grove found?$"
+
 DaemonsDebug_Text_Witness::
 	.string "DEBUG: the WITNESSES' reward?\p"
 	.string "Every understanding is set, and the\n"

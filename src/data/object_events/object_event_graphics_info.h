@@ -2926,6 +2926,26 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Dad = {
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
+// T-395: THE (NOT A) HUNTER, npc_white like DAD.
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_NexusHunter = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = PALSLOT_NPC_4,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gObjectEventBaseOam_16x32,
+    .subspriteTables = gObjectEventSpriteOamTables_16x32,
+    .anims = sAnimTable_Standard,
+    .images = sPicTable_NexusHunter,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Seagallop = {
     .tileTag = TAG_NONE,
     .paletteTag = OBJ_EVENT_PAL_TAG_SEAGALLOP,
@@ -4358,6 +4378,26 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SingingFir = {
     .width = 16,
     .height = 32,
     .paletteSlot = PALSLOT_NPC_3,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gObjectEventBaseOam_16x32,
+    .subspriteTables = gObjectEventSpriteOamTables_16x32,
+    .anims = sAnimTable_SingingFir,
+    .images = sPicTable_SingingFir,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+// T-395: the fir before the key -- flat and washed out, the same frames.
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SingingFirDim = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_FIR_DIM,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = PALSLOT_NPC_1,
     .shadowSize = SHADOW_SIZE_M,
     .inanimate = TRUE,
     .disableReflectionPaletteLoad = FALSE,

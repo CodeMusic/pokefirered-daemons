@@ -691,6 +691,7 @@ extern const u8 gText_DbgMenuCrystal[];
 extern const u8 gText_DbgMenuWarden[];
 extern const u8 gText_DbgMenuMore[];
 extern const u8 gText_DbgMenuFir[];
+extern const u8 gText_DbgMenuNexus[];
 extern const u8 gText_DbgMenuWitness[];
 extern const u8 gText_DbgMenuJump[];
 extern const u8 gText_DbgMenuEncounter[];
@@ -733,6 +734,7 @@ extern const u8 gStartMenuDesc_DbgWarden[];
 extern const u8 gStartMenuDesc_DbgMore[];
 extern const u8 gStartMenuDesc_DbgFir[];
 extern const u8 gStartMenuDesc_DbgWitness[];
+extern const u8 gStartMenuDesc_DbgNexus[];
 extern const u8 gStartMenuDesc_DbgEvents[];   // T-394
 extern const u8 gStartMenuDesc_DbgSound[];
 extern const u8 gStartMenuDesc_DbgJump[];

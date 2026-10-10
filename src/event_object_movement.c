@@ -480,6 +480,9 @@ static const u8 gInitialMovementTypeFacingDirections[MOVEMENT_TYPES_COUNT] = {
 #define OBJ_EVENT_PAL_TAG_NPC_OWL                     0x111F
 //  UMBRA's locals share one palette of the town's own (T-119).
 #define OBJ_EVENT_PAL_TAG_NPC_TOWN_UMBRA              0x1129
+//  T-395: every singing fir is flat until the key -- NPC_GREEN washed out. It rides the OWL's patch-at-spawn in
+//  PALSLOT_NPC_1: the pier's special slot is the S.S. ANNE's, and no grove or the pier holds anyone blue.
+#define OBJ_EVENT_PAL_TAG_FIR_DIM                     0x112A
 //  QUICKSILVER's locals share one palette of the town's own (T-119).
 #define OBJ_EVENT_PAL_TAG_NPC_TOWN_QUICKSILVER        0x1128
 //  BRAZEN's locals share one palette of the town's own (T-119).
@@ -571,6 +574,7 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_NpcClears,               OBJ_EVENT_PAL_TAG_NPC_CLEARS},
     {gObjectEventPal_NpcOwl,                  OBJ_EVENT_PAL_TAG_NPC_OWL},
     {gObjectEventPal_NpcTownUmbra,             OBJ_EVENT_PAL_TAG_NPC_TOWN_UMBRA},
+    {gObjectEventPal_FirDim,                   OBJ_EVENT_PAL_TAG_FIR_DIM},
     {gObjectEventPal_NpcTownQuicksilver,       OBJ_EVENT_PAL_TAG_NPC_TOWN_QUICKSILVER},
     {gObjectEventPal_NpcTownBrazen,            OBJ_EVENT_PAL_TAG_NPC_TOWN_BRAZEN},
     {gObjectEventPal_NpcTownLurid,             OBJ_EVENT_PAL_TAG_NPC_TOWN_LURID},
@@ -1631,12 +1635,13 @@ void Unref_RemoveAllObjectEventsExceptPlayer(void)
 
 // T-133: a daemon's overworld object carries its TYPE's palette (tools/gbaowslots.py), in a slot that map left free.
 // The map's generic palettes are laid down before objects spawn; this patches the type's over its slot as it does.
-// T-365: the OWL rides the same patch, in a generic slot neither of his maps uses.
+// T-365: the OWL rides the same patch, in a generic slot neither of his maps uses. T-395: so does the fir before its key.
 static void TryPatchDaemonTypePalette(const struct ObjectEventGraphicsInfo *graphicsInfo)
 {
     if ((graphicsInfo->paletteTag >= OBJ_EVENT_PAL_TAG_DAEMON_TYPE_BASE
       && graphicsInfo->paletteTag < OBJ_EVENT_PAL_TAG_DAEMON_TYPE_BASE + NUMBER_OF_MON_TYPES)
-     || graphicsInfo->paletteTag == OBJ_EVENT_PAL_TAG_NPC_OWL)
+     || graphicsInfo->paletteTag == OBJ_EVENT_PAL_TAG_NPC_OWL
+     || graphicsInfo->paletteTag == OBJ_EVENT_PAL_TAG_FIR_DIM)
         PatchObjectPalette(graphicsInfo->paletteTag, graphicsInfo->paletteSlot);
 }
 

@@ -989,3 +989,14 @@ const struct Tileset gTileset_ReadingRoom =
     .metatileAttributes = gMetatileAttributes_ReadingRoom,
     .callback = NULL,
 };
+// T-395: THE NEXUS (tools/gbanexusmap.py).
+const struct Tileset gTileset_Nexus =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_Nexus,
+    .palettes = gTilesetPalettes_Nexus,
+    .metatiles = gMetatiles_Nexus,
+    .metatileAttributes = gMetatileAttributes_Nexus,
+    .callback = NULL,
+};

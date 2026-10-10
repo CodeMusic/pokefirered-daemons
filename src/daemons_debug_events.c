@@ -36,7 +36,7 @@ enum { R_PAGE, R_GIVE, R_TOGGLE };
 enum
 {
     EV_EVERYTHING, EV_ROSTER, EV_EVERY_DAEMON, EV_STOCK,
-    EV_OPENING, EV_SHOES, EV_INDEX, EV_OPUS, EV_SCHOOL, EV_TICKET, EV_TEA, EV_GATES, EV_REVEAL, EV_RESOLVER,
+    EV_OPENING, EV_SHOES, EV_INDEX, EV_OPUS, EV_SCHOOL, EV_TICKET, EV_FIR_KEY, EV_GROVES, EV_TEA, EV_GATES, EV_REVEAL, EV_RESOLVER,
     EV_INTERRUPT, EV_GOTO_POINTS, EV_GUIDE, EV_GLOBAL_INDEX, EV_STREAM, EV_COMPANION,
     EV_MARKS_ALL, EV_MARK1, EV_MARK8 = EV_MARK1 + 7,
     EV_NOTEBOOK, EV_NOTEBOOK_FULL,
@@ -45,6 +45,24 @@ enum
 };
 
 struct DbgRow { const u8 *name; u8 kind; u8 arg; };
+
+//  T-395: each grove once arrived in (tools/gbagrove.py's FOUND flags), which opens its door in THE NEXUS.
+static const u16 sGroveFound[] = {
+    FLAG_ROUTE1_GROVE_FOUND,
+    FLAG_VIRIDIAN_FOREST_GROVE_FOUND,
+    FLAG_ROUTE24_GROVE_FOUND,
+    FLAG_ROUTE25_GROVE_FOUND,
+    FLAG_ROUTE11_GROVE_FOUND,
+    FLAG_ROUTE8_GROVE_FOUND,
+    FLAG_ROUTE13_GROVE_FOUND,
+    FLAG_ONE_ISLAND_GROVE_FOUND,
+    FLAG_TWO_ISLAND_GROVE_FOUND,
+    FLAG_THREE_ISLAND_BERRY_FOREST_GROVE_FOUND,
+    FLAG_FOUR_ISLAND_GROVE_FOUND,
+    FLAG_FIVE_ISLAND_MEADOW_GROVE_FOUND,
+    FLAG_SIX_ISLAND_WATER_PATH_GROVE_FOUND,
+    FLAG_SEVEN_ISLAND_GROVE_FOUND,
+};
 
 static const u8 sName_Everything[]   = _("EVERYTHING (THE OLD KIT)");
 static const u8 sName_Roster[]       = _("THE ROSTER (SIX, LV50)");
@@ -58,6 +76,8 @@ static const u8 sName_Marks[]        = _("MARKS >");
 static const u8 sName_Notebook[]     = _("NOTEBOOK >");
 static const u8 sName_School[]       = _("TEXTBOOK AND DIPLOMA");
 static const u8 sName_Ticket[]       = _("S.S. ANNE TICKET");
+static const u8 sName_FirKey[]       = _("THE FIR IN ITS KEY");     // T-395
+static const u8 sName_Groves[]       = _("EVERY GROVE FOUND");      // T-395: THE NEXUS's doors
 static const u8 sName_Drivers[]      = _("DRIVERS >");
 static const u8 sName_Tea[]          = _("TEA, FOR BRAZEN'S GUARDS");
 static const u8 sName_Gates[]        = _("BRAZEN'S GATES OPEN");
@@ -114,6 +134,8 @@ static const struct DbgRow sRows_Events[] = {
     { sName_Notebook,    R_PAGE,   PG_NOTEBOOK },
     { sName_School,      R_TOGGLE, EV_SCHOOL },
     { sName_Ticket,      R_TOGGLE, EV_TICKET },
+    { sName_FirKey,      R_TOGGLE, EV_FIR_KEY },
+    { sName_Groves,      R_TOGGLE, EV_GROVES },
     { sName_Drivers,     R_PAGE,   PG_DRIVERS },
     { sName_Tea,         R_TOGGLE, EV_TEA },
     { sName_Gates,       R_TOGGLE, EV_GATES },
@@ -280,6 +302,12 @@ static bool8 IsHeld(u8 ev)
     case EV_OPUS:         return FlagGet(FLAG_GOT_OPUS);
     case EV_SCHOOL:       return FlagGet(FLAG_GOT_DIPLOMA);
     case EV_TICKET:       return FlagGet(FLAG_GOT_SS_TICKET);
+    case EV_FIR_KEY:      return FlagGet(FLAG_FIR_IN_KEY);
+    case EV_GROVES:
+        for (i = 0; i < ARRAY_COUNT(sGroveFound); i++)
+            if (!FlagGet(sGroveFound[i]))
+                return FALSE;
+        return TRUE;
     case EV_TEA:          return CheckBagHasItem(ITEM_TEA, 1);
     case EV_GATES:        return VarGet(VAR_MAP_SCENE_ROUTE5_ROUTE6_ROUTE7_ROUTE8_GATES) != 0;
     case EV_REVEAL:       return FlagGet(FLAG_GOT_REVEAL);
@@ -334,6 +362,13 @@ static void Apply(u8 ev, bool8 on)
         SetItem(ITEM_TEXTBOOK, on); SetItem(ITEM_DIPLOMA, on);
         return;
     case EV_TICKET:       SetFlag(FLAG_GOT_SS_TICKET, on); SetItem(ITEM_SS_TICKET, on); return;
+    case EV_FIR_KEY:
+        SetFlag(FLAG_NOTEBOOK_LOOSE_KEY, on); SetFlag(FLAG_FIR_IN_KEY, on); SetFlag(FLAG_HIDE_FIR_UNKEYED, !on);
+        return;
+    case EV_GROVES:
+        for (i = 0; i < ARRAY_COUNT(sGroveFound); i++)
+            SetFlag(sGroveFound[i], on);
+        return;
     case EV_TEA:          SetItem(ITEM_TEA, on); return;
     case EV_GATES:
         if (on)

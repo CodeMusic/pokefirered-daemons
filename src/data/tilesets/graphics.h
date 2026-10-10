@@ -1893,3 +1893,25 @@ const u16 gTilesetPalettes_ReadingRoom[][16] =
 	INCBIN_U16("data/tilesets/secondary/reading_room/palettes/14.gbapal"),
 	INCBIN_U16("data/tilesets/secondary/reading_room/palettes/15.gbapal"),
 };
+// T-395: THE NEXUS, made entirely of paint (tools/gbanexusmap.py, the DAEMONS repo).
+const u32 gTilesetTiles_Nexus[] = INCBIN_U32("data/tilesets/secondary/nexus/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_Nexus[][16] =
+{
+	INCBIN_U16("data/tilesets/secondary/nexus/palettes/00.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/nexus/palettes/01.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/nexus/palettes/02.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/nexus/palettes/03.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/nexus/palettes/04.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/nexus/palettes/05.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/nexus/palettes/06.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/nexus/palettes/07.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/nexus/palettes/08.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/nexus/palettes/09.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/nexus/palettes/10.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/nexus/palettes/11.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/nexus/palettes/12.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/nexus/palettes/13.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/nexus/palettes/14.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/nexus/palettes/15.gbapal"),
+};

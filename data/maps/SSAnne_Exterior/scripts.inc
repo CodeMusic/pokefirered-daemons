@@ -42,6 +42,7 @@ SSAnne_Exterior_EventScript_PierEnd::
 
 SSAnne_Exterior_OnTransition::
 	setworldmapflag FLAG_WORLD_MAP_SSANNE_EXTERIOR
+	call EventScript_FirKeyFlags
 	call_if_ge VAR_MAP_SCENE_VERMILION_CITY, 2, SSAnne_Exterior_EventScript_ShipGone
 	end
 
@@ -108,53 +109,5 @@ SSAnne_Exterior_Movement_WalkDown::
 	walk_down
 	step_end
 
-@ T-10: THE SINGING FIR (the user, 2026-09-26/27; DRAFT wording). Where the old legend's truck stood, reached by SURF
-@ from the empty pier. It sings O CHRISTMAS TREE without its key signature -- the yellow and purple notes of the
-@ source painting a semitone sharp -- and, given the key (the band's sheet, LOOSE PAGES 8), sings it right. The
-@ first time with the sheet it sings both, one after the other; after that, only the right one.
-SSAnne_Exterior_EventScript_SingingFir::
-	lock
-	goto_if_set FLAG_FIR_IN_KEY, SSAnne_Exterior_EventScript_FirInKey
-	msgbox SSAnne_Exterior_Text_FirHums
-	setvar VAR_0x8004, FALSE
-	special SingingFir_Sing
-	waitstate
-	goto_if_set FLAG_NOTEBOOK_LOOSE_KEY, SSAnne_Exterior_EventScript_FirGivenKey
-	msgbox SSAnne_Exterior_Text_FirOff
-	release
-	end
-
-SSAnne_Exterior_EventScript_FirGivenKey::
-	msgbox SSAnne_Exterior_Text_HoldUpSheet
-	setvar VAR_0x8004, TRUE
-	special SingingFir_Sing
-	waitstate
-	setflag FLAG_FIR_IN_KEY
-	msgbox SSAnne_Exterior_Text_FirRight
-	release
-	end
-
-SSAnne_Exterior_EventScript_FirInKey::
-	msgbox SSAnne_Exterior_Text_FirHums
-	setvar VAR_0x8004, TRUE
-	special SingingFir_Sing
-	waitstate
-	release
-	end
-
-@  DRAFT (T-10). This map has no text.inc of its own; its few lines live here.
-SSAnne_Exterior_Text_FirHums::
-    .string "The fir's branches stir.\n"
-    .string "It hums an old tune.$"
-
-SSAnne_Exterior_Text_FirOff::
-    .string "Close to right, all the way\n"
-    .string "through. Something is missing.$"
-
-SSAnne_Exterior_Text_HoldUpSheet::
-    .string "{PLAYER} held up the band's sheet.\p"
-    .string "The fir hums the tune again.$"
-
-SSAnne_Exterior_Text_FirRight::
-    .string "The same notes.\n"
-    .string "This time, every one is home.$"
+@ T-10: THE SINGING FIR. Where the old legend's truck stood. Its script and words are every fir's now, in every grove as
+@ well as here (T-395, docs/nexus.md): EventScript_SingingFir, in data/maps/Nexus/scripts.inc.

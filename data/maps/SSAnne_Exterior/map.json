@@ -32,6 +32,20 @@
     },
     {
       "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_SINGING_FIR_DIM",
+      "x": 57,
+      "y": 28,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EventScript_SingingFir",
+      "flag": "FLAG_FIR_IN_KEY"
+    },
+    {
+      "type": "object",
       "graphics_id": "OBJ_EVENT_GFX_SINGING_FIR",
       "x": 57,
       "y": 28,
@@ -41,8 +55,8 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SSAnne_Exterior_EventScript_SingingFir",
-      "flag": "0"
+      "script": "EventScript_SingingFir",
+      "flag": "FLAG_HIDE_FIR_UNKEYED"
     }
   ],
   "warp_events": [

@@ -2444,6 +2444,18 @@ static const struct SpriteFrameImage sPicTable_Dad[] = {
     overworld_frame(gObjectEventPic_Dad, 2, 4, 2),
 };
 
+static const struct SpriteFrameImage sPicTable_NexusHunter[] = {    // T-395: nine frames, walks and all
+    overworld_frame(gObjectEventPic_NexusHunter, 2, 4, 0),
+    overworld_frame(gObjectEventPic_NexusHunter, 2, 4, 1),
+    overworld_frame(gObjectEventPic_NexusHunter, 2, 4, 2),
+    overworld_frame(gObjectEventPic_NexusHunter, 2, 4, 3),
+    overworld_frame(gObjectEventPic_NexusHunter, 2, 4, 4),
+    overworld_frame(gObjectEventPic_NexusHunter, 2, 4, 5),
+    overworld_frame(gObjectEventPic_NexusHunter, 2, 4, 6),
+    overworld_frame(gObjectEventPic_NexusHunter, 2, 4, 7),
+    overworld_frame(gObjectEventPic_NexusHunter, 2, 4, 8),
+};
+
 static const struct SpriteFrameImage sPicTable_David[] = {
     overworld_frame(gObjectEventPic_David, 2, 4, 0),
     overworld_frame(gObjectEventPic_David, 2, 4, 1),

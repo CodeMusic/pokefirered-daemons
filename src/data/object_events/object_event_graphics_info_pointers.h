@@ -199,6 +199,8 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_AlDoldrum;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Ty;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_David;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SingingFir;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SingingFirDim;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_NexusHunter;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TownUmbraAdult;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TownQuicksilverElder;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TownQuicksilverAdult;
@@ -423,6 +425,8 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_TY]                         = &gObjectEventGraphicsInfo_Ty,
     [OBJ_EVENT_GFX_DAVID]                      = &gObjectEventGraphicsInfo_David,
     [OBJ_EVENT_GFX_SINGING_FIR]                = &gObjectEventGraphicsInfo_SingingFir,
+    [OBJ_EVENT_GFX_SINGING_FIR_DIM]            = &gObjectEventGraphicsInfo_SingingFirDim,
+    [OBJ_EVENT_GFX_NEXUS_HUNTER]               = &gObjectEventGraphicsInfo_NexusHunter,
     [OBJ_EVENT_GFX_BURGLAR]                    = &gObjectEventGraphicsInfo_Burglar,
     [OBJ_EVENT_GFX_JUGGLER]                    = &gObjectEventGraphicsInfo_Juggler,
     [OBJ_EVENT_GFX_POKEMON_BREEDER]            = &gObjectEventGraphicsInfo_PokemonBreeder,
