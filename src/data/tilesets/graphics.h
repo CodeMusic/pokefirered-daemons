@@ -1915,3 +1915,25 @@ const u16 gTilesetPalettes_Nexus[][16] =
 	INCBIN_U16("data/tilesets/secondary/nexus/palettes/14.gbapal"),
 	INCBIN_U16("data/tilesets/secondary/nexus/palettes/15.gbapal"),
 };
+// T-395: THE NEXUS's primary half -- the landscape painted whole (tools/gbanexusmap.py).
+const u32 gTilesetTiles_NexusPaint[] = INCBIN_U32("data/tilesets/primary/nexus_paint/tiles.4bpp.lz");
+
+const u16 gTilesetPalettes_NexusPaint[][16] =
+{
+	INCBIN_U16("data/tilesets/primary/nexus_paint/palettes/00.gbapal"),
+	INCBIN_U16("data/tilesets/primary/nexus_paint/palettes/01.gbapal"),
+	INCBIN_U16("data/tilesets/primary/nexus_paint/palettes/02.gbapal"),
+	INCBIN_U16("data/tilesets/primary/nexus_paint/palettes/03.gbapal"),
+	INCBIN_U16("data/tilesets/primary/nexus_paint/palettes/04.gbapal"),
+	INCBIN_U16("data/tilesets/primary/nexus_paint/palettes/05.gbapal"),
+	INCBIN_U16("data/tilesets/primary/nexus_paint/palettes/06.gbapal"),
+	INCBIN_U16("data/tilesets/primary/nexus_paint/palettes/07.gbapal"),
+	INCBIN_U16("data/tilesets/primary/nexus_paint/palettes/08.gbapal"),
+	INCBIN_U16("data/tilesets/primary/nexus_paint/palettes/09.gbapal"),
+	INCBIN_U16("data/tilesets/primary/nexus_paint/palettes/10.gbapal"),
+	INCBIN_U16("data/tilesets/primary/nexus_paint/palettes/11.gbapal"),
+	INCBIN_U16("data/tilesets/primary/nexus_paint/palettes/12.gbapal"),
+	INCBIN_U16("data/tilesets/primary/nexus_paint/palettes/13.gbapal"),
+	INCBIN_U16("data/tilesets/primary/nexus_paint/palettes/14.gbapal"),
+	INCBIN_U16("data/tilesets/primary/nexus_paint/palettes/15.gbapal"),
+};

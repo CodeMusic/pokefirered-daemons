@@ -28,101 +28,101 @@ Nexus_OnLoad::
 	end
 
 Nexus_EventScript_Found0::
-	setmetatile 3, 3, 0x2AF, TRUE
-	setmetatile 4, 3, 0x2B0, TRUE
-	setmetatile 3, 4, 0x2B1, TRUE
-	setmetatile 4, 4, 0x2B2, TRUE
+	setmetatile 3, 3, 0x1DB, TRUE
+	setmetatile 4, 3, 0x1DC, TRUE
+	setmetatile 3, 4, 0x1DD, TRUE
+	setmetatile 4, 4, 0x1DE, TRUE
 	return
 
 Nexus_EventScript_Found1::
-	setmetatile 7, 5, 0x2BF, TRUE
-	setmetatile 8, 5, 0x2C0, TRUE
-	setmetatile 7, 6, 0x2C1, TRUE
-	setmetatile 8, 6, 0x2C2, TRUE
+	setmetatile 7, 5, 0x1EB, TRUE
+	setmetatile 8, 5, 0x1EC, TRUE
+	setmetatile 7, 6, 0x1ED, TRUE
+	setmetatile 8, 6, 0x1EE, TRUE
 	return
 
 Nexus_EventScript_Found2::
-	setmetatile 3, 8, 0x2CF, TRUE
-	setmetatile 4, 8, 0x2D0, TRUE
-	setmetatile 3, 9, 0x2D1, TRUE
-	setmetatile 4, 9, 0x2D2, TRUE
+	setmetatile 3, 8, 0x1FB, TRUE
+	setmetatile 4, 8, 0x1FC, TRUE
+	setmetatile 3, 9, 0x1FD, TRUE
+	setmetatile 4, 9, 0x1FE, TRUE
 	return
 
 Nexus_EventScript_Found3::
-	setmetatile 7, 10, 0x2DF, TRUE
-	setmetatile 8, 10, 0x2E0, TRUE
-	setmetatile 7, 11, 0x2E1, TRUE
-	setmetatile 8, 11, 0x2E2, TRUE
+	setmetatile 7, 10, 0x20B, TRUE
+	setmetatile 8, 10, 0x20C, TRUE
+	setmetatile 7, 11, 0x20D, TRUE
+	setmetatile 8, 11, 0x20E, TRUE
 	return
 
 Nexus_EventScript_Found4::
-	setmetatile 3, 13, 0x2BF, TRUE
-	setmetatile 4, 13, 0x2C0, TRUE
-	setmetatile 3, 14, 0x2C1, TRUE
-	setmetatile 4, 14, 0x2C2, TRUE
+	setmetatile 3, 13, 0x21B, TRUE
+	setmetatile 4, 13, 0x21C, TRUE
+	setmetatile 3, 14, 0x21D, TRUE
+	setmetatile 4, 14, 0x21E, TRUE
 	return
 
 Nexus_EventScript_Found5::
-	setmetatile 7, 15, 0x2AF, TRUE
-	setmetatile 8, 15, 0x2B0, TRUE
-	setmetatile 7, 16, 0x2B1, TRUE
-	setmetatile 8, 16, 0x2B2, TRUE
+	setmetatile 7, 15, 0x22B, TRUE
+	setmetatile 8, 15, 0x22C, TRUE
+	setmetatile 7, 16, 0x22D, TRUE
+	setmetatile 8, 16, 0x22E, TRUE
 	return
 
 Nexus_EventScript_Found6::
-	setmetatile 4, 18, 0x2EF, TRUE
-	setmetatile 5, 18, 0x2F0, TRUE
-	setmetatile 4, 19, 0x2F1, TRUE
-	setmetatile 5, 19, 0x2F2, TRUE
+	setmetatile 4, 18, 0x23B, TRUE
+	setmetatile 5, 18, 0x23C, TRUE
+	setmetatile 4, 19, 0x23D, TRUE
+	setmetatile 5, 19, 0x23E, TRUE
 	return
 
 Nexus_EventScript_Found7::
-	setmetatile 21, 3, 0x2FF, TRUE
-	setmetatile 22, 3, 0x300, TRUE
-	setmetatile 21, 4, 0x301, TRUE
-	setmetatile 22, 4, 0x302, TRUE
+	setmetatile 21, 3, 0x24B, TRUE
+	setmetatile 22, 3, 0x24C, TRUE
+	setmetatile 21, 4, 0x24D, TRUE
+	setmetatile 22, 4, 0x24E, TRUE
 	return
 
 Nexus_EventScript_Found8::
-	setmetatile 17, 5, 0x30F, TRUE
-	setmetatile 18, 5, 0x310, TRUE
-	setmetatile 17, 6, 0x311, TRUE
-	setmetatile 18, 6, 0x312, TRUE
+	setmetatile 17, 5, 0x25B, TRUE
+	setmetatile 18, 5, 0x25C, TRUE
+	setmetatile 17, 6, 0x25D, TRUE
+	setmetatile 18, 6, 0x25E, TRUE
 	return
 
 Nexus_EventScript_Found9::
-	setmetatile 21, 8, 0x31F, TRUE
-	setmetatile 22, 8, 0x320, TRUE
-	setmetatile 21, 9, 0x321, TRUE
-	setmetatile 22, 9, 0x322, TRUE
+	setmetatile 21, 8, 0x26B, TRUE
+	setmetatile 22, 8, 0x26C, TRUE
+	setmetatile 21, 9, 0x26D, TRUE
+	setmetatile 22, 9, 0x26E, TRUE
 	return
 
 Nexus_EventScript_Found10::
-	setmetatile 17, 10, 0x32F, TRUE
-	setmetatile 18, 10, 0x330, TRUE
-	setmetatile 17, 11, 0x331, TRUE
-	setmetatile 18, 11, 0x332, TRUE
+	setmetatile 17, 10, 0x27B, TRUE
+	setmetatile 18, 10, 0x27C, TRUE
+	setmetatile 17, 11, 0x27D, TRUE
+	setmetatile 18, 11, 0x27E, TRUE
 	return
 
 Nexus_EventScript_Found11::
-	setmetatile 21, 13, 0x30F, TRUE
-	setmetatile 22, 13, 0x310, TRUE
-	setmetatile 21, 14, 0x311, TRUE
-	setmetatile 22, 14, 0x312, TRUE
+	setmetatile 21, 13, 0x28B, TRUE
+	setmetatile 22, 13, 0x28C, TRUE
+	setmetatile 21, 14, 0x28D, TRUE
+	setmetatile 22, 14, 0x28E, TRUE
 	return
 
 Nexus_EventScript_Found12::
-	setmetatile 17, 15, 0x2FF, TRUE
-	setmetatile 18, 15, 0x300, TRUE
-	setmetatile 17, 16, 0x301, TRUE
-	setmetatile 18, 16, 0x302, TRUE
+	setmetatile 17, 15, 0x29B, TRUE
+	setmetatile 18, 15, 0x29C, TRUE
+	setmetatile 17, 16, 0x29D, TRUE
+	setmetatile 18, 16, 0x29E, TRUE
 	return
 
 Nexus_EventScript_Found13::
-	setmetatile 20, 18, 0x2EF, TRUE
-	setmetatile 21, 18, 0x2F0, TRUE
-	setmetatile 20, 19, 0x2F1, TRUE
-	setmetatile 21, 19, 0x2F2, TRUE
+	setmetatile 20, 18, 0x2AB, TRUE
+	setmetatile 21, 18, 0x2AC, TRUE
+	setmetatile 20, 19, 0x2AD, TRUE
+	setmetatile 21, 19, 0x2AE, TRUE
 	return
 
 @ Route1_Grove
@@ -148,10 +148,10 @@ Nexus_EventScript_Locked0::
 	end
 
 Nexus_EventScript_Smudge0::
-	setmetatile 3, 3, 0x2B7, TRUE
-	setmetatile 4, 3, 0x2B8, TRUE
-	setmetatile 3, 4, 0x2B9, TRUE
-	setmetatile 4, 4, 0x2BA, TRUE
+	setmetatile 3, 3, 0x1E3, TRUE
+	setmetatile 4, 3, 0x1E4, TRUE
+	setmetatile 3, 4, 0x1E5, TRUE
+	setmetatile 4, 4, 0x1E6, TRUE
 	special DrawWholeMapView
 	setvar VAR_TEMP_1, 1
 	msgbox Nexus_Text_Locked1
@@ -159,10 +159,10 @@ Nexus_EventScript_Smudge0::
 	end
 
 Nexus_EventScript_Lines0::
-	setmetatile 3, 3, 0x2B3, TRUE
-	setmetatile 4, 3, 0x2B4, TRUE
-	setmetatile 3, 4, 0x2B5, TRUE
-	setmetatile 4, 4, 0x2B6, TRUE
+	setmetatile 3, 3, 0x1DF, TRUE
+	setmetatile 4, 3, 0x1E0, TRUE
+	setmetatile 3, 4, 0x1E1, TRUE
+	setmetatile 4, 4, 0x1E2, TRUE
 	special DrawWholeMapView
 	setvar VAR_TEMP_1, 2
 	msgbox Nexus_Text_Locked2
@@ -192,10 +192,10 @@ Nexus_EventScript_Locked1::
 	end
 
 Nexus_EventScript_Smudge1::
-	setmetatile 7, 5, 0x2C7, TRUE
-	setmetatile 8, 5, 0x2C8, TRUE
-	setmetatile 7, 6, 0x2C9, TRUE
-	setmetatile 8, 6, 0x2CA, TRUE
+	setmetatile 7, 5, 0x1F3, TRUE
+	setmetatile 8, 5, 0x1F4, TRUE
+	setmetatile 7, 6, 0x1F5, TRUE
+	setmetatile 8, 6, 0x1F6, TRUE
 	special DrawWholeMapView
 	setvar VAR_TEMP_2, 1
 	msgbox Nexus_Text_Locked1
@@ -203,10 +203,10 @@ Nexus_EventScript_Smudge1::
 	end
 
 Nexus_EventScript_Lines1::
-	setmetatile 7, 5, 0x2C3, TRUE
-	setmetatile 8, 5, 0x2C4, TRUE
-	setmetatile 7, 6, 0x2C5, TRUE
-	setmetatile 8, 6, 0x2C6, TRUE
+	setmetatile 7, 5, 0x1EF, TRUE
+	setmetatile 8, 5, 0x1F0, TRUE
+	setmetatile 7, 6, 0x1F1, TRUE
+	setmetatile 8, 6, 0x1F2, TRUE
 	special DrawWholeMapView
 	setvar VAR_TEMP_2, 2
 	msgbox Nexus_Text_Locked2
@@ -236,10 +236,10 @@ Nexus_EventScript_Locked2::
 	end
 
 Nexus_EventScript_Smudge2::
-	setmetatile 3, 8, 0x2D7, TRUE
-	setmetatile 4, 8, 0x2D8, TRUE
-	setmetatile 3, 9, 0x2D9, TRUE
-	setmetatile 4, 9, 0x2DA, TRUE
+	setmetatile 3, 8, 0x203, TRUE
+	setmetatile 4, 8, 0x204, TRUE
+	setmetatile 3, 9, 0x205, TRUE
+	setmetatile 4, 9, 0x206, TRUE
 	special DrawWholeMapView
 	setvar VAR_TEMP_3, 1
 	msgbox Nexus_Text_Locked1
@@ -247,10 +247,10 @@ Nexus_EventScript_Smudge2::
 	end
 
 Nexus_EventScript_Lines2::
-	setmetatile 3, 8, 0x2D3, TRUE
-	setmetatile 4, 8, 0x2D4, TRUE
-	setmetatile 3, 9, 0x2D5, TRUE
-	setmetatile 4, 9, 0x2D6, TRUE
+	setmetatile 3, 8, 0x1FF, TRUE
+	setmetatile 4, 8, 0x200, TRUE
+	setmetatile 3, 9, 0x201, TRUE
+	setmetatile 4, 9, 0x202, TRUE
 	special DrawWholeMapView
 	setvar VAR_TEMP_3, 2
 	msgbox Nexus_Text_Locked2
@@ -280,10 +280,10 @@ Nexus_EventScript_Locked3::
 	end
 
 Nexus_EventScript_Smudge3::
-	setmetatile 7, 10, 0x2E7, TRUE
-	setmetatile 8, 10, 0x2E8, TRUE
-	setmetatile 7, 11, 0x2E9, TRUE
-	setmetatile 8, 11, 0x2EA, TRUE
+	setmetatile 7, 10, 0x213, TRUE
+	setmetatile 8, 10, 0x214, TRUE
+	setmetatile 7, 11, 0x215, TRUE
+	setmetatile 8, 11, 0x216, TRUE
 	special DrawWholeMapView
 	setvar VAR_TEMP_4, 1
 	msgbox Nexus_Text_Locked1
@@ -291,10 +291,10 @@ Nexus_EventScript_Smudge3::
 	end
 
 Nexus_EventScript_Lines3::
-	setmetatile 7, 10, 0x2E3, TRUE
-	setmetatile 8, 10, 0x2E4, TRUE
-	setmetatile 7, 11, 0x2E5, TRUE
-	setmetatile 8, 11, 0x2E6, TRUE
+	setmetatile 7, 10, 0x20F, TRUE
+	setmetatile 8, 10, 0x210, TRUE
+	setmetatile 7, 11, 0x211, TRUE
+	setmetatile 8, 11, 0x212, TRUE
 	special DrawWholeMapView
 	setvar VAR_TEMP_4, 2
 	msgbox Nexus_Text_Locked2
@@ -324,10 +324,10 @@ Nexus_EventScript_Locked4::
 	end
 
 Nexus_EventScript_Smudge4::
-	setmetatile 3, 13, 0x2C7, TRUE
-	setmetatile 4, 13, 0x2C8, TRUE
-	setmetatile 3, 14, 0x2C9, TRUE
-	setmetatile 4, 14, 0x2CA, TRUE
+	setmetatile 3, 13, 0x223, TRUE
+	setmetatile 4, 13, 0x224, TRUE
+	setmetatile 3, 14, 0x225, TRUE
+	setmetatile 4, 14, 0x226, TRUE
 	special DrawWholeMapView
 	setvar VAR_TEMP_5, 1
 	msgbox Nexus_Text_Locked1
@@ -335,10 +335,10 @@ Nexus_EventScript_Smudge4::
 	end
 
 Nexus_EventScript_Lines4::
-	setmetatile 3, 13, 0x2C3, TRUE
-	setmetatile 4, 13, 0x2C4, TRUE
-	setmetatile 3, 14, 0x2C5, TRUE
-	setmetatile 4, 14, 0x2C6, TRUE
+	setmetatile 3, 13, 0x21F, TRUE
+	setmetatile 4, 13, 0x220, TRUE
+	setmetatile 3, 14, 0x221, TRUE
+	setmetatile 4, 14, 0x222, TRUE
 	special DrawWholeMapView
 	setvar VAR_TEMP_5, 2
 	msgbox Nexus_Text_Locked2
@@ -368,10 +368,10 @@ Nexus_EventScript_Locked5::
 	end
 
 Nexus_EventScript_Smudge5::
-	setmetatile 7, 15, 0x2B7, TRUE
-	setmetatile 8, 15, 0x2B8, TRUE
-	setmetatile 7, 16, 0x2B9, TRUE
-	setmetatile 8, 16, 0x2BA, TRUE
+	setmetatile 7, 15, 0x233, TRUE
+	setmetatile 8, 15, 0x234, TRUE
+	setmetatile 7, 16, 0x235, TRUE
+	setmetatile 8, 16, 0x236, TRUE
 	special DrawWholeMapView
 	setvar VAR_TEMP_6, 1
 	msgbox Nexus_Text_Locked1
@@ -379,10 +379,10 @@ Nexus_EventScript_Smudge5::
 	end
 
 Nexus_EventScript_Lines5::
-	setmetatile 7, 15, 0x2B3, TRUE
-	setmetatile 8, 15, 0x2B4, TRUE
-	setmetatile 7, 16, 0x2B5, TRUE
-	setmetatile 8, 16, 0x2B6, TRUE
+	setmetatile 7, 15, 0x22F, TRUE
+	setmetatile 8, 15, 0x230, TRUE
+	setmetatile 7, 16, 0x231, TRUE
+	setmetatile 8, 16, 0x232, TRUE
 	special DrawWholeMapView
 	setvar VAR_TEMP_6, 2
 	msgbox Nexus_Text_Locked2
@@ -412,10 +412,10 @@ Nexus_EventScript_Locked6::
 	end
 
 Nexus_EventScript_Smudge6::
-	setmetatile 4, 18, 0x2F7, TRUE
-	setmetatile 5, 18, 0x2F8, TRUE
-	setmetatile 4, 19, 0x2F9, TRUE
-	setmetatile 5, 19, 0x2FA, TRUE
+	setmetatile 4, 18, 0x243, TRUE
+	setmetatile 5, 18, 0x244, TRUE
+	setmetatile 4, 19, 0x245, TRUE
+	setmetatile 5, 19, 0x246, TRUE
 	special DrawWholeMapView
 	setvar VAR_TEMP_7, 1
 	msgbox Nexus_Text_Locked1
@@ -423,10 +423,10 @@ Nexus_EventScript_Smudge6::
 	end
 
 Nexus_EventScript_Lines6::
-	setmetatile 4, 18, 0x2F3, TRUE
-	setmetatile 5, 18, 0x2F4, TRUE
-	setmetatile 4, 19, 0x2F5, TRUE
-	setmetatile 5, 19, 0x2F6, TRUE
+	setmetatile 4, 18, 0x23F, TRUE
+	setmetatile 5, 18, 0x240, TRUE
+	setmetatile 4, 19, 0x241, TRUE
+	setmetatile 5, 19, 0x242, TRUE
 	special DrawWholeMapView
 	setvar VAR_TEMP_7, 2
 	msgbox Nexus_Text_Locked2
@@ -456,10 +456,10 @@ Nexus_EventScript_Locked7::
 	end
 
 Nexus_EventScript_Smudge7::
-	setmetatile 21, 3, 0x307, TRUE
-	setmetatile 22, 3, 0x308, TRUE
-	setmetatile 21, 4, 0x309, TRUE
-	setmetatile 22, 4, 0x30A, TRUE
+	setmetatile 21, 3, 0x253, TRUE
+	setmetatile 22, 3, 0x254, TRUE
+	setmetatile 21, 4, 0x255, TRUE
+	setmetatile 22, 4, 0x256, TRUE
 	special DrawWholeMapView
 	setvar VAR_TEMP_8, 1
 	msgbox Nexus_Text_Locked1
@@ -467,10 +467,10 @@ Nexus_EventScript_Smudge7::
 	end
 
 Nexus_EventScript_Lines7::
-	setmetatile 21, 3, 0x303, TRUE
-	setmetatile 22, 3, 0x304, TRUE
-	setmetatile 21, 4, 0x305, TRUE
-	setmetatile 22, 4, 0x306, TRUE
+	setmetatile 21, 3, 0x24F, TRUE
+	setmetatile 22, 3, 0x250, TRUE
+	setmetatile 21, 4, 0x251, TRUE
+	setmetatile 22, 4, 0x252, TRUE
 	special DrawWholeMapView
 	setvar VAR_TEMP_8, 2
 	msgbox Nexus_Text_Locked2
@@ -500,10 +500,10 @@ Nexus_EventScript_Locked8::
 	end
 
 Nexus_EventScript_Smudge8::
-	setmetatile 17, 5, 0x317, TRUE
-	setmetatile 18, 5, 0x318, TRUE
-	setmetatile 17, 6, 0x319, TRUE
-	setmetatile 18, 6, 0x31A, TRUE
+	setmetatile 17, 5, 0x263, TRUE
+	setmetatile 18, 5, 0x264, TRUE
+	setmetatile 17, 6, 0x265, TRUE
+	setmetatile 18, 6, 0x266, TRUE
 	special DrawWholeMapView
 	setvar VAR_TEMP_9, 1
 	msgbox Nexus_Text_Locked1
@@ -511,10 +511,10 @@ Nexus_EventScript_Smudge8::
 	end
 
 Nexus_EventScript_Lines8::
-	setmetatile 17, 5, 0x313, TRUE
-	setmetatile 18, 5, 0x314, TRUE
-	setmetatile 17, 6, 0x315, TRUE
-	setmetatile 18, 6, 0x316, TRUE
+	setmetatile 17, 5, 0x25F, TRUE
+	setmetatile 18, 5, 0x260, TRUE
+	setmetatile 17, 6, 0x261, TRUE
+	setmetatile 18, 6, 0x262, TRUE
 	special DrawWholeMapView
 	setvar VAR_TEMP_9, 2
 	msgbox Nexus_Text_Locked2
@@ -544,10 +544,10 @@ Nexus_EventScript_Locked9::
 	end
 
 Nexus_EventScript_Smudge9::
-	setmetatile 21, 8, 0x327, TRUE
-	setmetatile 22, 8, 0x328, TRUE
-	setmetatile 21, 9, 0x329, TRUE
-	setmetatile 22, 9, 0x32A, TRUE
+	setmetatile 21, 8, 0x273, TRUE
+	setmetatile 22, 8, 0x274, TRUE
+	setmetatile 21, 9, 0x275, TRUE
+	setmetatile 22, 9, 0x276, TRUE
 	special DrawWholeMapView
 	setvar VAR_TEMP_A, 1
 	msgbox Nexus_Text_Locked1
@@ -555,10 +555,10 @@ Nexus_EventScript_Smudge9::
 	end
 
 Nexus_EventScript_Lines9::
-	setmetatile 21, 8, 0x323, TRUE
-	setmetatile 22, 8, 0x324, TRUE
-	setmetatile 21, 9, 0x325, TRUE
-	setmetatile 22, 9, 0x326, TRUE
+	setmetatile 21, 8, 0x26F, TRUE
+	setmetatile 22, 8, 0x270, TRUE
+	setmetatile 21, 9, 0x271, TRUE
+	setmetatile 22, 9, 0x272, TRUE
 	special DrawWholeMapView
 	setvar VAR_TEMP_A, 2
 	msgbox Nexus_Text_Locked2
@@ -588,10 +588,10 @@ Nexus_EventScript_Locked10::
 	end
 
 Nexus_EventScript_Smudge10::
-	setmetatile 17, 10, 0x337, TRUE
-	setmetatile 18, 10, 0x338, TRUE
-	setmetatile 17, 11, 0x339, TRUE
-	setmetatile 18, 11, 0x33A, TRUE
+	setmetatile 17, 10, 0x283, TRUE
+	setmetatile 18, 10, 0x284, TRUE
+	setmetatile 17, 11, 0x285, TRUE
+	setmetatile 18, 11, 0x286, TRUE
 	special DrawWholeMapView
 	setvar VAR_TEMP_B, 1
 	msgbox Nexus_Text_Locked1
@@ -599,10 +599,10 @@ Nexus_EventScript_Smudge10::
 	end
 
 Nexus_EventScript_Lines10::
-	setmetatile 17, 10, 0x333, TRUE
-	setmetatile 18, 10, 0x334, TRUE
-	setmetatile 17, 11, 0x335, TRUE
-	setmetatile 18, 11, 0x336, TRUE
+	setmetatile 17, 10, 0x27F, TRUE
+	setmetatile 18, 10, 0x280, TRUE
+	setmetatile 17, 11, 0x281, TRUE
+	setmetatile 18, 11, 0x282, TRUE
 	special DrawWholeMapView
 	setvar VAR_TEMP_B, 2
 	msgbox Nexus_Text_Locked2
@@ -632,10 +632,10 @@ Nexus_EventScript_Locked11::
 	end
 
 Nexus_EventScript_Smudge11::
-	setmetatile 21, 13, 0x317, TRUE
-	setmetatile 22, 13, 0x318, TRUE
-	setmetatile 21, 14, 0x319, TRUE
-	setmetatile 22, 14, 0x31A, TRUE
+	setmetatile 21, 13, 0x293, TRUE
+	setmetatile 22, 13, 0x294, TRUE
+	setmetatile 21, 14, 0x295, TRUE
+	setmetatile 22, 14, 0x296, TRUE
 	special DrawWholeMapView
 	setvar VAR_TEMP_C, 1
 	msgbox Nexus_Text_Locked1
@@ -643,10 +643,10 @@ Nexus_EventScript_Smudge11::
 	end
 
 Nexus_EventScript_Lines11::
-	setmetatile 21, 13, 0x313, TRUE
-	setmetatile 22, 13, 0x314, TRUE
-	setmetatile 21, 14, 0x315, TRUE
-	setmetatile 22, 14, 0x316, TRUE
+	setmetatile 21, 13, 0x28F, TRUE
+	setmetatile 22, 13, 0x290, TRUE
+	setmetatile 21, 14, 0x291, TRUE
+	setmetatile 22, 14, 0x292, TRUE
 	special DrawWholeMapView
 	setvar VAR_TEMP_C, 2
 	msgbox Nexus_Text_Locked2
@@ -676,10 +676,10 @@ Nexus_EventScript_Locked12::
 	end
 
 Nexus_EventScript_Smudge12::
-	setmetatile 17, 15, 0x307, TRUE
-	setmetatile 18, 15, 0x308, TRUE
-	setmetatile 17, 16, 0x309, TRUE
-	setmetatile 18, 16, 0x30A, TRUE
+	setmetatile 17, 15, 0x2A3, TRUE
+	setmetatile 18, 15, 0x2A4, TRUE
+	setmetatile 17, 16, 0x2A5, TRUE
+	setmetatile 18, 16, 0x2A6, TRUE
 	special DrawWholeMapView
 	setvar VAR_TEMP_D, 1
 	msgbox Nexus_Text_Locked1
@@ -687,10 +687,10 @@ Nexus_EventScript_Smudge12::
 	end
 
 Nexus_EventScript_Lines12::
-	setmetatile 17, 15, 0x303, TRUE
-	setmetatile 18, 15, 0x304, TRUE
-	setmetatile 17, 16, 0x305, TRUE
-	setmetatile 18, 16, 0x306, TRUE
+	setmetatile 17, 15, 0x29F, TRUE
+	setmetatile 18, 15, 0x2A0, TRUE
+	setmetatile 17, 16, 0x2A1, TRUE
+	setmetatile 18, 16, 0x2A2, TRUE
 	special DrawWholeMapView
 	setvar VAR_TEMP_D, 2
 	msgbox Nexus_Text_Locked2
@@ -720,10 +720,10 @@ Nexus_EventScript_Locked13::
 	end
 
 Nexus_EventScript_Smudge13::
-	setmetatile 20, 18, 0x2F7, TRUE
-	setmetatile 21, 18, 0x2F8, TRUE
-	setmetatile 20, 19, 0x2F9, TRUE
-	setmetatile 21, 19, 0x2FA, TRUE
+	setmetatile 20, 18, 0x2B3, TRUE
+	setmetatile 21, 18, 0x2B4, TRUE
+	setmetatile 20, 19, 0x2B5, TRUE
+	setmetatile 21, 19, 0x2B6, TRUE
 	special DrawWholeMapView
 	setvar VAR_TEMP_E, 1
 	msgbox Nexus_Text_Locked1
@@ -731,10 +731,10 @@ Nexus_EventScript_Smudge13::
 	end
 
 Nexus_EventScript_Lines13::
-	setmetatile 20, 18, 0x2F3, TRUE
-	setmetatile 21, 18, 0x2F4, TRUE
-	setmetatile 20, 19, 0x2F5, TRUE
-	setmetatile 21, 19, 0x2F6, TRUE
+	setmetatile 20, 18, 0x2AF, TRUE
+	setmetatile 21, 18, 0x2B0, TRUE
+	setmetatile 20, 19, 0x2B1, TRUE
+	setmetatile 21, 19, 0x2B2, TRUE
 	special DrawWholeMapView
 	setvar VAR_TEMP_E, 2
 	msgbox Nexus_Text_Locked2

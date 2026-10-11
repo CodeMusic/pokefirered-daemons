@@ -4658,7 +4658,7 @@
       "height": 23,
       "border_width": 2,
       "border_height": 2,
-      "primary_tileset": "gTileset_General",
+      "primary_tileset": "gTileset_NexusPaint",
       "secondary_tileset": "gTileset_Nexus",
       "border_filepath": "data/layouts/Nexus/border.bin",
       "blockdata_filepath": "data/layouts/Nexus/map.bin"

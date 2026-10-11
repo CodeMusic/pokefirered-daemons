@@ -1000,3 +1000,14 @@ const struct Tileset gTileset_Nexus =
     .metatileAttributes = gMetatileAttributes_Nexus,
     .callback = NULL,
 };
+// T-395: THE NEXUS's primary half (tools/gbanexusmap.py), as interiors have gTileset_Building.
+const struct Tileset gTileset_NexusPaint =
+{
+    .isCompressed = TRUE,
+    .isSecondary = FALSE,
+    .tiles = gTilesetTiles_NexusPaint,
+    .palettes = gTilesetPalettes_NexusPaint,
+    .metatiles = gMetatiles_NexusPaint,
+    .metatileAttributes = gMetatileAttributes_NexusPaint,
+    .callback = NULL,
+};
