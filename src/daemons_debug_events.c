@@ -22,7 +22,11 @@
 //  game starts as a normal one does, and DEBUG -> GAME EVENTS hands the kit out one piece at a time, in the order the
 //  story gives each piece. A row marked + is held, a row marked · is not; A on it gives or takes it away (rows without
 //  a mark only give). MARKS, the NOTEBOOK, the DRIVERS and the UNDERSTANDINGS are pages of their own, each with ALL.
-//  EVERYTHING is the old kit, exactly (new_game.c).
+//  EVERYTHING is the old kit, exactly (new_game.c), and asks first: it cannot be taken back, and a debug run that
+//  did not want it would have to start again.
+//
+//  The list waits for A and B to be let go before it reads a press (the user, 2026-10-11): the A that hurries the
+//  message above it is still down when the list goes up, and it was giving the first row.
 //
 //  A script drives it (data/scripts/daemons_debug.inc), as the NOTEBOOK's lists are driven: DaemonsDebug_EventsChoose
 //  puts the page up and hands the row back in VAR_RESULT, DaemonsDebug_EventsDo does it and leaves what it did in
@@ -31,7 +35,7 @@
 #if DAEMONS_DEBUG
 
 enum { PG_EVENTS, PG_MARKS, PG_NOTEBOOK, PG_DRIVERS, PG_ROOTS, PG_COUNT };
-enum { R_PAGE, R_GIVE, R_TOGGLE };
+enum { R_PAGE, R_GIVE, R_TOGGLE, R_ASK };   // R_ASK gives, after a YES
 
 enum
 {
@@ -122,7 +126,7 @@ static const u8 sName_InsightsAgain[] = _("LET INSIGHTS ARRIVE AGAIN");
 //  the school, the ship, the DRIVERS, BRAZEN's tea and REVEAL, HALFTONE, the sleeper, the GUIDE, and last what only
 //  the end of the game gives.
 static const struct DbgRow sRows_Events[] = {
-    { sName_Everything,  R_GIVE,   EV_EVERYTHING },
+    { sName_Everything,  R_ASK,    EV_EVERYTHING },
     { sName_Roster,      R_GIVE,   EV_ROSTER },
     { sName_EveryDaemon, R_GIVE,   EV_EVERY_DAEMON },
     { sName_Stock,       R_GIVE,   EV_STOCK },
@@ -194,6 +198,8 @@ static const u8 *const sTitles[PG_COUNT] = {
 };
 static const u8 sText_Given[] = _("{STR_VAR_1}: given.");
 static const u8 sText_Taken[] = _("{STR_VAR_1}: taken away.");
+static const u8 sText_Ask[] = _("{STR_VAR_1}:\nit cannot be taken back. Give it?");
+static const u8 sText_NotGiven[] = _("{STR_VAR_1}: not given.");
 static const u8 sMark_Held[] = _("+ ");
 static const u8 sMark_Not[]  = _("· ");
 static const u8 sMark_Give[] = _("  ");
@@ -433,6 +439,7 @@ static void Task_DbgEventsList(u8 taskId);
 #define tShown    data[3]
 #define tArrows   data[4]
 #define tWidth    data[5]
+#define tArmed    data[6]
 
 static void MoveCursor_DbgEvents(s32 itemIndex, bool8 onInit, struct ListMenu *list)
 {
@@ -543,8 +550,15 @@ static void DestroyDbgEventsList(u8 taskId)
 
 static void Task_DbgEventsList(u8 taskId)
 {
-    s32 input = ListMenu_ProcessInput(gTasks[taskId].tListId);
+    s32 input;
 
+    if (!gTasks[taskId].tArmed)
+    {
+        if (JOY_HELD(A_BUTTON | B_BUTTON))
+            return;
+        gTasks[taskId].tArmed = TRUE;
+    }
+    input = ListMenu_ProcessInput(gTasks[taskId].tListId);
     if (input == LIST_NOTHING_CHOSEN)
         return;
     gSpecialVar_Result = input == LIST_CANCEL ? (sPage == PG_EVENTS ? DBG_CLOSE : DBG_BACK) : input;
@@ -572,10 +586,29 @@ void DaemonsDebug_EventsDo(void)
         StringCopy(gStringVar4, sTitles[sPage]);
         return;
     }
-    on = row->kind == R_GIVE ? TRUE : !IsHeld(row->arg);
+    on = row->kind == R_TOGGLE ? !IsHeld(row->arg) : TRUE;
     Apply(row->arg, on);
     StringCopy(gStringVar1, row->name);
     StringExpandPlaceholders(gStringVar4, on ? sText_Given : sText_Taken);
+}
+
+//  After DaemonsDebug_EventsChoose: VAR_0x8004 is TRUE when the row chosen asks first, and gStringVar4 the question.
+void DaemonsDebug_EventsAsk(void)
+{
+    gSpecialVar_0x8004 = FALSE;
+    if (gSpecialVar_Result == DBG_BACK || gSpecialVar_Result == DBG_CLOSE)
+        return;
+    if (sPages[sPage].rows[gSpecialVar_Result].kind != R_ASK)
+        return;
+    gSpecialVar_0x8004 = TRUE;
+    StringCopy(gStringVar1, sPages[sPage].rows[gSpecialVar_Result].name);
+    StringExpandPlaceholders(gStringVar4, sText_Ask);
+}
+
+//  NO to the question: nothing is done, and the list comes back saying so.
+void DaemonsDebug_EventsNotDone(void)
+{
+    StringExpandPlaceholders(gStringVar4, sText_NotGiven);
 }
 
 #undef tListId
@@ -584,6 +617,7 @@ void DaemonsDebug_EventsDo(void)
 #undef tShown
 #undef tArrows
 #undef tWidth
+#undef tArmed
 
 #else
 
@@ -591,5 +625,7 @@ void DaemonsDebug_EventsDo(void)
 void DaemonsDebug_EventsStart(void) {}
 void DaemonsDebug_EventsChoose(void) {}
 void DaemonsDebug_EventsDo(void) {}
+void DaemonsDebug_EventsAsk(void) {}
+void DaemonsDebug_EventsNotDone(void) {}
 
 #endif

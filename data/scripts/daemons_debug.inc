@@ -24,7 +24,23 @@ DaemonsDebug_EventScript_GameEventsLoop::
 	special DaemonsDebug_EventsChoose
 	waitstate
 	goto_if_eq VAR_RESULT, 0x7F, DaemonsDebug_EventScript_GameEventsEnd
+	special DaemonsDebug_EventsAsk
+	goto_if_eq VAR_0x8004, TRUE, DaemonsDebug_EventScript_GameEventsAsk
+DaemonsDebug_EventScript_GameEventsDo::
 	special DaemonsDebug_EventsDo
+	goto DaemonsDebug_EventScript_GameEventsLoop
+
+@  A row that cannot be taken back (EVERYTHING) asks first. The row waits in VAR_0x8005 while the YES/NO has
+@  VAR_RESULT.
+DaemonsDebug_EventScript_GameEventsAsk::
+	copyvar VAR_0x8005, VAR_RESULT
+	msgbox gStringVar4, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, DaemonsDebug_EventScript_GameEventsNotDone
+	copyvar VAR_RESULT, VAR_0x8005
+	goto DaemonsDebug_EventScript_GameEventsDo
+
+DaemonsDebug_EventScript_GameEventsNotDone::
+	special DaemonsDebug_EventsNotDone
 	goto DaemonsDebug_EventScript_GameEventsLoop
 
 DaemonsDebug_EventScript_GameEventsEnd::

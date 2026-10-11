@@ -483,4 +483,6 @@ gSpecials::
 	def_special DaemonsDebug_EventsStart   @ T-394
 	def_special DaemonsDebug_EventsChoose
 	def_special DaemonsDebug_EventsDo
+	def_special DaemonsDebug_EventsAsk
+	def_special DaemonsDebug_EventsNotDone
 gSpecialsEnd::
