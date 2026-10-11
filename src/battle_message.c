@@ -377,13 +377,15 @@ static const u8 sText_BellChimed[] = _("A bell chimed!");
 static const u8 sText_FaintInThree[] = _("All affected DAEMON will HALT in\nthree turns!");
 static const u8 sText_NoPPLeft[] = _("There's no MP left\nfor this move!\p");
 static const u8 sText_ButNoPPLeft[] = _("But there was no MP\nleft for the move!");
-static const u8 sText_PkmnIgnoresAsleep[] = _("{B_ATK_NAME_WITH_PREFIX} ignored\norders while suspended!");
-static const u8 sText_PkmnIgnoredOrders[] = _("{B_ATK_NAME_WITH_PREFIX} ignored\norders!");
-static const u8 sText_PkmnBeganToNap[] = _("{B_ATK_NAME_WITH_PREFIX} idled!");
+//  T-380 (the user, 2026-10-06, approved 2026-10-11; bible 0.7): a daemon BOUND BY someone else still obeys only as
+//  far as your MARKS; its refusals now read as a daemon that does not know whose it is yet, not a lazy one.
+static const u8 sText_PkmnIgnoresAsleep[] = _("{B_ATK_NAME_WITH_PREFIX} stayed suspended.\nYour voice is new to it!");
+static const u8 sText_PkmnIgnoredOrders[] = _("{B_ATK_NAME_WITH_PREFIX} did it the way\nit was taught!");
+static const u8 sText_PkmnBeganToNap[] = _("{B_ATK_NAME_WITH_PREFIX} idled, waiting\nfor its own USER!");
 static const u8 sText_PkmnLoafing[] = _("{B_ATK_NAME_WITH_PREFIX} is\nloafing around!");
-static const u8 sText_PkmnWontObey[] = _("{B_ATK_NAME_WITH_PREFIX} won't\nobey!");
-static const u8 sText_PkmnTurnedAway[] = _("{B_ATK_NAME_WITH_PREFIX} turned away!");
-static const u8 sText_PkmnPretendNotNotice[] = _("{B_ATK_NAME_WITH_PREFIX} pretended\nnot to notice!");
+static const u8 sText_PkmnWontObey[] = _("{B_ATK_NAME_WITH_PREFIX} doesn't\nknow you yet!");
+static const u8 sText_PkmnTurnedAway[] = _("{B_ATK_NAME_WITH_PREFIX} looked around\nfor its own USER!");
+static const u8 sText_PkmnPretendNotNotice[] = _("{B_ATK_NAME_WITH_PREFIX} heard the order,\nnot who gave it!");
 static const u8 sText_EnemyAboutToSwitchPkmn[] = _("{B_TRAINER1_CLASS} {B_TRAINER1_NAME} is about to use {B_BUFF2}.\pWill {B_PLAYER_NAME} change DAEMON?");
 static const u8 sText_PkmnLearnedMove2[] = _("{B_ATK_NAME_WITH_PREFIX} learned\n{B_BUFF1}!");
 //  THE PLAYER'S NAME, not the word "Player": this closes every trainer battle a player wins (STRINGID_PLAYERDEFEATEDTRAINER1),
