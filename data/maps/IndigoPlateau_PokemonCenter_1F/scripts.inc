@@ -84,3 +84,24 @@ IndigoPlateau_PokemonCenter_1F_EventScript_BoardsGuide::
 IndigoPlateau_PokemonCenter_1F_EventScript_BoardsGuideLeft::
 	releaseall
 	end
+
+@ T-382 (the user, 2026-10-06, approved 2026-10-11; bible 0.7): THE FACT COLLECTOR. He holds every MARK and recites
+@ what each certifies, word for word -- the USER card's own lines. Asked again, he nearly notices (craft rule 2), and
+@ stays wrong in the right direction. The young trainer beside him says the rest.
+IndigoPlateau_PokemonCenter_1F_EventScript_FactCollector::
+	lock
+	faceplayer
+	goto_if_set FLAG_FACT_COLLECTOR_ASKED, IndigoPlateau_PokemonCenter_1F_EventScript_FactCollectorAgain
+	setflag FLAG_FACT_COLLECTOR_ASKED
+	msgbox IndigoPlateau_PokemonCenter_1F_Text_FactCollector
+	release
+	end
+
+IndigoPlateau_PokemonCenter_1F_EventScript_FactCollectorAgain::
+	msgbox IndigoPlateau_PokemonCenter_1F_Text_FactCollectorAgain
+	release
+	end
+
+IndigoPlateau_PokemonCenter_1F_EventScript_BesideCollector::
+	msgbox IndigoPlateau_PokemonCenter_1F_Text_BesideCollector, MSGBOX_NPC
+	end

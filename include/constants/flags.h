@@ -1606,6 +1606,8 @@
 #define FLAG_NEXUS_VISITED            (DAEMONS_FLAGS_START + 0x101)
 #define FLAG_NEXUS_HUNTER_MET         (DAEMONS_FLAGS_START + 0x102)
 #define FLAG_NEXUS_PHOENIX_GONE       (DAEMONS_FLAGS_START + 0x103)
+//  T-382: the fact collector at UMBRA PLATEAU's CHECKPOINT has been asked once; the second time he nearly notices.
+#define FLAG_FACT_COLLECTOR_ASKED     (DAEMONS_FLAGS_START + 0x104)
 
 //  T-300. THE PROGRAMMER'S GUIDE TO THE HUMAN MIND, taken from the bookshelf in ONE ISLAND's second house. 0x60 up is
 //  the Guide's, so the clock session's next flags after 0x55 do not meet it.

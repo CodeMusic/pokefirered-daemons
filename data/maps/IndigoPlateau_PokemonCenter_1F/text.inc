@@ -42,3 +42,21 @@ IndigoPlateau_PokemonCenter_1F_Text_BoardsGuide::
     .string "REVIEW BOARD.\p"
     .string "One has a circuit board for a\n"
     .string "cover. Read it?$"
+
+@ T-382: the fact collector and the young trainer beside him.
+IndigoPlateau_PokemonCenter_1F_Text_FactCollector::
+    .string "Eight MARKS, and what each\n"
+    .string "one certifies, word for word.\p"
+    .string "SLOPE MARK: better by small\n"
+    .string "steps, downhill.\p"
+    .string "Ask me any of them.$"
+
+IndigoPlateau_PokemonCenter_1F_Text_FactCollectorAgain::
+    .string "Why downhill? Because that\n"
+    .string "is what it certifies.\p"
+    .string "I knew it better this\n"
+    .string "morning. I must be tired.$"
+
+IndigoPlateau_PokemonCenter_1F_Text_BesideCollector::
+    .string "I asked him why downhill.\n"
+    .string "He said it again, slower.$"
