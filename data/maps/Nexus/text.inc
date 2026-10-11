@@ -1,4 +1,4 @@
-@ T-395: THE NEXUS's words, and the singing fir's (tools/gbanexusmap.py). Every word is DRAFT.
+@ T-395: THE NEXUS's words, and the singing fir's (tools/gbanexusmap.py). Every word approved by the user, 2026-10-10.
 
 Text_SingingFir_Hums::
     .string "The fir's branches stir.\n"

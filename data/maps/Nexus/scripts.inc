@@ -1,4 +1,4 @@
-@ T-395: THE NEXUS (docs/nexus.md) -- tools/gbanexusmap.py writes this file. Every word is DRAFT.
+@ T-395: THE NEXUS (docs/nexus.md) -- tools/gbanexusmap.py writes this file. Every word approved by the user, 2026-10-10.
 
 Nexus_MapScripts::
 	map_script MAP_SCRIPT_ON_LOAD, Nexus_OnLoad
