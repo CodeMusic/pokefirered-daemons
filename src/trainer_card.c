@@ -1211,6 +1211,30 @@ static void LoadBrainLobeColors(void)
         LoadPalette(&sBrainLobes[i].color, BG_PLTT_ID(BRAIN_PAL) + sBrainLobes[i].slot, PLTT_SIZEOF(1));
 }
 
+//  T-379 (the user, 2026-10-06, approved 2026-10-11; bible 0.7): THE CARD NAMES BOTH HALVES. The MARKS row is labelled
+//  in the card's own small bold letters; the brain above it is labelled ROOTS in the same letters (4x5, the left stroke
+//  doubled, the MARKS label's R and S), centred under it. A word and never a count: no number, no list, no tab.
+static const char sRootsLetters[4][5][5] = {
+    { "####", "##.#", "####", "##.#", "##.#" },     // R
+    { "####", "##.#", "##.#", "##.#", "####" },     // O
+    { "####", ".##.", ".##.", ".##.", ".##." },     // T
+    { "####", "##..", "####", "..##", "####" },     // S
+};
+static const u8 sRootsWord[] = { 0, 1, 1, 2, 3 };   // R O O T S
+#define ROOTS_X (BRAIN_X + (BRAIN_W - 24) / 2)
+#define ROOTS_Y (BRAIN_Y + BRAIN_H + 2)
+
+static void DrawRootsLabel(void)
+{
+    u8 i, x, y;
+
+    for (i = 0; i < ARRAY_COUNT(sRootsWord); i++)
+        for (y = 0; y < 5; y++)
+            for (x = 0; x < 4; x++)
+                if (sRootsLetters[sRootsWord[i]][y][x] == '#')
+                    FillWindowPixelRect(1, PIXEL_FILL(TEXT_COLOR_DARK_GRAY), ROOTS_X + i * 5 + x, ROOTS_Y + y, 1, 1);
+}
+
 static void DrawUnderstandingBrain(void)
 {
     bool8 all = TRUE;
@@ -1239,6 +1263,7 @@ static void DrawUnderstandingBrain(void)
             FillWindowPixelRect(1, PIXEL_FILL(color), BRAIN_X + x, BRAIN_Y + y, 1, 1);
         }
     }
+    DrawRootsLabel();
 }
 
 static bool8 PrintAllOnCardBack(void)
