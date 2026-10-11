@@ -17,6 +17,7 @@
 #include "field_fadetransition.h"
 #include "scanline_effect.h"
 #include "item_menu_icons.h"
+#include "item_use.h"
 #include "decompress.h"
 #include "menu_indicators.h"
 #include "field_player_avatar.h"
@@ -78,6 +79,61 @@ EWRAM_DATA u16 (*gShopTilemapBuffer3)[0x400] = {0};
 EWRAM_DATA u16 (*gShopTilemapBuffer4)[0x400] = {0};
 EWRAM_DATA struct ListMenuItem *sShopMenuListMenu = {0};
 static EWRAM_DATA u8 (*sShopMenuItemStrings)[13] = {0};
+
+//  T-399 (the user, 2026-10-11): BUY opens on the kinds of thing the counter sells -- ALL first, then each kind it
+//  has -- and a kind opens on its own name over its items. BACK at the foot of each goes up one: from a kind to the
+//  kinds, from the kinds to BUY / SELL / QUIT. B does the same. A kind is read from the item's own data (its pocket,
+//  what it does in the field and in battle), so a mart's list in its script needs nothing new.
+enum
+{
+    SHOP_CAT_ALL,
+    SHOP_CAT_REPAIRS,
+    SHOP_CAT_UPGRADES,
+    SHOP_CAT_TUNING,
+    SHOP_CAT_FIELD,
+    SHOP_CAT_FORMS,
+    SHOP_CAT_BOXES,
+    SHOP_CAT_TOOLKIT,
+    SHOP_CAT_OTHER,
+    SHOP_CAT_COUNT,
+    SHOP_CAT_PICKING = 0xFF,    // the list of kinds is up
+};
+#define INDEX_CATEGORY 0x4000   // a row on the list of kinds is INDEX_CATEGORY + its kind; an item is its id
+
+static EWRAM_DATA u8 sShopCategory = 0;
+static EWRAM_DATA u16 sShopRowCount = 0;
+static EWRAM_DATA u16 sShopCategoryScroll = 0;
+static EWRAM_DATA u16 sShopCategoryRow = 0;
+
+//  DRAFT WORDING (T-399): the kinds, what each says in the box below, and BACK's two lines.
+static const u8 sText_CatAll[]      = _("ALL");
+static const u8 sText_CatRepairs[]  = _("REPAIRS");
+static const u8 sText_CatUpgrades[] = _("UPGRADES");
+static const u8 sText_CatTuning[]   = _("TUNING");
+static const u8 sText_CatField[]    = _("FIELD");
+static const u8 sText_CatForms[]    = _("NEW FORMS");
+static const u8 sText_CatBoxes[]    = _("BOXES");
+static const u8 sText_CatToolkit[]  = _("TOOLKIT");
+static const u8 sText_CatOther[]    = _("OTHER");
+static const u8 *const sShopCategoryNames[SHOP_CAT_COUNT] = {
+    sText_CatAll, sText_CatRepairs, sText_CatUpgrades, sText_CatTuning, sText_CatField,
+    sText_CatForms, sText_CatBoxes, sText_CatToolkit, sText_CatOther,
+};
+static const u8 sText_CatAllDesc[]      = _("Everything on this counter.");
+static const u8 sText_CatRepairsDesc[]  = _("Gets a daemon running again,\nin battle or out of it.");
+static const u8 sText_CatUpgradesDesc[] = _("Lasting changes to one\ndaemon's numbers.");
+static const u8 sText_CatTuningDesc[]   = _("Turned up for one battle\nonly.");
+static const u8 sText_CatFieldDesc[]    = _("For the road: keeping wild\ndaemons off, and the way out.");
+static const u8 sText_CatFormsDesc[]    = _("Things a daemon may take a\nnew form from.");
+static const u8 sText_CatBoxesDesc[]    = _("Hosts to offer a wild daemon.");
+static const u8 sText_CatToolkitDesc[]  = _("PLUGINS, each teaching a\ndaemon a routine.");
+static const u8 sText_CatOtherDesc[]    = _("Everything else.");
+static const u8 *const sShopCategoryDescs[SHOP_CAT_COUNT] = {
+    sText_CatAllDesc, sText_CatRepairsDesc, sText_CatUpgradesDesc, sText_CatTuningDesc, sText_CatFieldDesc,
+    sText_CatFormsDesc, sText_CatBoxesDesc, sText_CatToolkitDesc, sText_CatOtherDesc,
+};
+static const u8 sText_ShopBack[] = _("BACK");
+static const u8 sText_BackToCategories[] = _("Back to the kinds of thing\non this counter.");
 EWRAM_DATA struct QuestLogEvent_Shop sHistory[2] = {0};
 
 //Function Declarations
@@ -106,6 +162,8 @@ static void BuyMenuDrawGraphics(void);
 static bool8 BuyMenuBuildListMenuTemplate(void);
 static void PokeMartWriteNameAndIdAt(struct ListMenuItem *list, u16 index, u8 *dst);
 static void BuyMenuPrintItemDescriptionAndShowItemIcon(s32 item, bool8 onInit, struct ListMenu *list);
+static void BuyMenuFillList(void);
+static void BuyMenuShowList(u8 taskId, u8 category);
 static void BuyMenuPrintPriceInList(u8 windowId, u32 itemId, u8 y);
 static void LoadTmHmNameInMart(s32 item);
 static void BuyMenuPrintCursor(u8 listTaskId, u8 a1);
@@ -369,6 +427,8 @@ static void CB2_InitBuyMenu(void)
         ResetTasks();
         ClearScheduledBgCopiesToVram();
         ResetItemMenuIconState();
+        sShopCategory = SHOP_CAT_PICKING;
+        sShopCategoryScroll = sShopCategoryRow = 0;
         if (!(InitShopData()) || !(BuyMenuBuildListMenuTemplate()))
             return;
         BuyMenuInitBgs();
@@ -507,26 +567,19 @@ static void BuyMenuDrawGraphics(void)
 
 bool8 BuyMenuBuildListMenuTemplate(void)
 {
-    u16 i, v;
+    // The most rows either list can have: a kind's name, every item, BACK -- or every kind and BACK.
+    u16 rows = sShopData.itemCount + 2 > SHOP_CAT_COUNT + 1 ? sShopData.itemCount + 2 : SHOP_CAT_COUNT + 1;
 
-    sShopMenuListMenu = Alloc((sShopData.itemCount + 1) * sizeof(*sShopMenuListMenu));
+    sShopMenuListMenu = Alloc(rows * sizeof(*sShopMenuListMenu));
     if (sShopMenuListMenu == NULL
-     || (sShopMenuItemStrings = Alloc((sShopData.itemCount + 1) * sizeof(*sShopMenuItemStrings))) == NULL)
+     || (sShopMenuItemStrings = Alloc(rows * sizeof(*sShopMenuItemStrings))) == NULL)
     {
         BuyMenuFreeMemory();
         SetShopExitCallback();
         return FALSE;
     }
 
-    for (i = 0; i < sShopData.itemCount; i++)
-    {
-        PokeMartWriteNameAndIdAt(&sShopMenuListMenu[i], sShopData.itemList[i], sShopMenuItemStrings[i]);
-    }
-    StringCopy(sShopMenuItemStrings[i], gFameCheckerText_Cancel);
-    sShopMenuListMenu[i].label = sShopMenuItemStrings[i];
-    sShopMenuListMenu[i].index = -2;
     gMultiuseListMenuTemplate.items = sShopMenuListMenu;
-    gMultiuseListMenuTemplate.totalItems = sShopData.itemCount + 1;
     gMultiuseListMenuTemplate.windowId = 4;
     gMultiuseListMenuTemplate.header_X = 0;
     gMultiuseListMenuTemplate.item_X = 9;
@@ -542,19 +595,115 @@ bool8 BuyMenuBuildListMenuTemplate(void)
     gMultiuseListMenuTemplate.itemPrintFunc = BuyMenuPrintPriceInList;
     gMultiuseListMenuTemplate.scrollMultiple = 0;
     gMultiuseListMenuTemplate.cursorKind = 0;
-
-    if (sShopData.martType == MART_TYPE_TMHM)
-        v = 5;
-    else
-        v = 6;
-
-    if ((sShopData.itemCount + 1) > v)
-        gMultiuseListMenuTemplate.maxShowed = v;
-    else
-        gMultiuseListMenuTemplate.maxShowed = sShopData.itemCount + 1;
-
-    sShopData.itemsShowed = gMultiuseListMenuTemplate.maxShowed;
+    BuyMenuFillList();
     return TRUE;
+}
+
+static u8 ShopItemCategory(u16 item)
+{
+    ItemUseFunc use = ItemId_GetFieldFunc(item);
+
+    if (ItemId_GetPocket(item) == POCKET_POKE_BALLS)
+        return SHOP_CAT_BOXES;
+    if (ItemId_GetPocket(item) == POCKET_TM_CASE)
+        return SHOP_CAT_TOOLKIT;
+    if (use == FieldUseFunc_Medicine)
+        return ItemId_GetBattleUsage(item) ? SHOP_CAT_REPAIRS : SHOP_CAT_UPGRADES;
+    if (use == FieldUseFunc_EvoItem)
+        return SHOP_CAT_FORMS;
+    if (use == FieldUseFunc_Repel || use == ItemUseOutOfBattle_EscapeRope)
+        return SHOP_CAT_FIELD;
+    if (ItemId_GetBattleUsage(item))
+        return SHOP_CAT_TUNING;
+    return SHOP_CAT_OTHER;
+}
+
+static bool8 ShopItemIsIn(u16 item, u8 category)
+{
+    return category == SHOP_CAT_ALL || ShopItemCategory(item) == category;
+}
+
+//  The first item of a kind, whose icon stands for it on the list of kinds.
+static u16 ShopFirstItemIn(u8 category)
+{
+    u16 i;
+
+    for (i = 0; i < sShopData.itemCount; i++)
+    {
+        if (ShopItemIsIn(sShopData.itemList[i], category))
+            return sShopData.itemList[i];
+    }
+    return ITEM_NONE;
+}
+
+//  The list for sShopCategory: the kinds this counter has, or one kind's name over its items; BACK last on both.
+static void BuyMenuFillList(void)
+{
+    u16 i, n = 0, shown;
+
+    if (sShopCategory == SHOP_CAT_PICKING)
+    {
+        for (i = 0; i < SHOP_CAT_COUNT; i++)
+        {
+            if (ShopFirstItemIn(i) == ITEM_NONE)
+                continue;
+            sShopMenuListMenu[n].label = sShopCategoryNames[i];
+            sShopMenuListMenu[n].index = INDEX_CATEGORY + i;
+            n++;
+        }
+    }
+    else
+    {
+        sShopMenuListMenu[n].label = sShopCategoryNames[sShopCategory];
+        sShopMenuListMenu[n].index = LIST_HEADER;
+        n++;
+        for (i = 0; i < sShopData.itemCount; i++)
+        {
+            if (!ShopItemIsIn(sShopData.itemList[i], sShopCategory))
+                continue;
+            PokeMartWriteNameAndIdAt(&sShopMenuListMenu[n], sShopData.itemList[i], sShopMenuItemStrings[n]);
+            n++;
+        }
+    }
+    sShopMenuListMenu[n].label = sText_ShopBack;
+    sShopMenuListMenu[n].index = INDEX_CANCEL;
+    n++;
+
+    shown = sShopData.martType == MART_TYPE_TMHM ? 5 : 6;
+    if (n < shown)
+        shown = n;
+    gMultiuseListMenuTemplate.totalItems = n;
+    gMultiuseListMenuTemplate.maxShowed = shown;
+    sShopRowCount = n;
+    sShopData.itemsShowed = shown;
+}
+
+//  Puts up another list in the same window: a kind's items (its name the top row, the cursor on its first item), or
+//  the kinds again, the cursor where it was left.
+static void BuyMenuShowList(u8 taskId, u8 category)
+{
+    s16 *data = gTasks[taskId].data;
+    u16 scroll = 0, row = 0;
+
+    BuyMenuRemoveScrollIndicatorArrows();
+    DestroyListMenuTask(tListTaskId, NULL, NULL);
+    if (sShopCategory == SHOP_CAT_PICKING)
+    {
+        sShopCategoryScroll = sShopData.scrollOffset;
+        sShopCategoryRow = sShopData.selectedRow;
+        row = 1;
+    }
+    else
+    {
+        scroll = sShopCategoryScroll;
+        row = sShopCategoryRow;
+    }
+    sShopCategory = category;
+    BuyMenuFillList();
+    sShopData.scrollOffset = scroll;
+    sShopData.selectedRow = row;
+    tListTaskId = ListMenuInit(&gMultiuseListMenuTemplate, scroll, row);
+    BuyMenuAddScrollIndicatorArrows();
 }
 
 static void PokeMartWriteNameAndIdAt(struct ListMenuItem *list, u16 index, u8 *dst)
@@ -567,23 +716,32 @@ static void PokeMartWriteNameAndIdAt(struct ListMenuItem *list, u16 index, u8 *d
 static void BuyMenuPrintItemDescriptionAndShowItemIcon(s32 item, bool8 onInit, struct ListMenu *list)
 {
     const u8 *description;
+    u16 icon;
 
     if (onInit != TRUE)
         PlaySE(SE_SELECT);
 
-    if (item != INDEX_CANCEL)
+    if (item >= INDEX_CATEGORY)
+    {
+        description = sShopCategoryDescs[item - INDEX_CATEGORY];
+        icon = ShopFirstItemIn(item - INDEX_CATEGORY);
+    }
+    else if (item != INDEX_CANCEL)
+    {
         description = ItemId_GetDescription(item);
+        icon = item;
+    }
     else
-        description = gText_QuitShopping;
+    {
+        description = sShopCategory == SHOP_CAT_PICKING ? gText_QuitShopping : sText_BackToCategories;
+        icon = ITEMS_COUNT;
+    }
 
     FillWindowPixelBuffer(5, PIXEL_FILL(0));
     if (sShopData.martType != MART_TYPE_TMHM)
     {
         DestroyItemMenuIcon(sShopData.itemSlot ^ 1);
-        if (item != INDEX_CANCEL)
-            CreateItemMenuIcon(item, sShopData.itemSlot);
-        else
-            CreateItemMenuIcon(ITEMS_COUNT, sShopData.itemSlot);
+        CreateItemMenuIcon(icon, sShopData.itemSlot);
 
         sShopData.itemSlot ^= 1;
         BuyMenuPrint(5, FONT_NORMAL, description, 0, 3, 2, 1, 0, 0);
@@ -601,7 +759,7 @@ static void BuyMenuPrintPriceInList(u8 windowId, u32 item, u8 y)
     s32 x;
     u8 *loc;
 
-    if (item != INDEX_CANCEL)
+    if ((s32)item >= 0 && item < INDEX_CATEGORY)   // not a kind's name, a kind, or BACK
     {
         ConvertIntToDecimalStringN(gStringVar1, ItemId_GetPrice(item), 0, 4);
         x = 4 - StringLength(gStringVar1);
@@ -615,7 +773,7 @@ static void BuyMenuPrintPriceInList(u8 windowId, u32 item, u8 y)
 
 static void LoadTmHmNameInMart(s32 item)
 {
-    if (item != INDEX_CANCEL)
+    if (item >= 0 && item < INDEX_CATEGORY && ItemId_GetPocket(item) == POCKET_TM_CASE)
     {
         ConvertIntToDecimalStringN(gStringVar1, item - ITEM_DEVON_SCOPE, 2, 2);
         StringCopy(gStringVar4, gText_NumberClear01);
@@ -689,12 +847,12 @@ static void BuyMenuAddScrollIndicatorArrows(void)
     if (sShopData.martType != MART_TYPE_TMHM)
     {
         sShopData.unk16_11 = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 160, 8, 104,
-            (sShopData.itemCount - sShopData.itemsShowed) + 1, 110, 110, &sShopData.scrollOffset);
+            sShopRowCount - sShopData.itemsShowed, 110, 110, &sShopData.scrollOffset);
     }
     else
     {
         sShopData.unk16_11 = AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP, 160, 8, 88,
-            (sShopData.itemCount - sShopData.itemsShowed) + 1, 110, 110, &sShopData.scrollOffset);
+            sShopRowCount - sShopData.itemsShowed, 110, 110, &sShopData.scrollOffset);
     }
 }
 
@@ -880,12 +1038,20 @@ static void Task_BuyMenu(u8 taskId)
         {
         case LIST_NOTHING_CHOSEN:
             break;
-        case LIST_CANCEL:
+        case LIST_CANCEL:   // B, or BACK: up one list
             PlaySE(SE_SELECT);
-            ExitBuyMenu(taskId);
+            if (sShopCategory == SHOP_CAT_PICKING)
+                ExitBuyMenu(taskId);
+            else
+                BuyMenuShowList(taskId, SHOP_CAT_PICKING);
             break;
         default:
             PlaySE(SE_SELECT);
+            if (itemId >= INDEX_CATEGORY)
+            {
+                BuyMenuShowList(taskId, itemId - INDEX_CATEGORY);
+                break;
+            }
             tItemId = itemId;
             ClearWindowTilemap(5);
             BuyMenuRemoveScrollIndicatorArrows();
