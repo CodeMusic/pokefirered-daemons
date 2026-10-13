@@ -1949,8 +1949,8 @@ static u16 GetTutorMove(u8 tutor)
     case TUTOR_MOVE_HYDRO_CANNON:
         return MOVE_HYDRO_CANNON;
     //  T-218: the Reading Room's lecturers -- ATTENTION, CATEGORIES, ERROR.
-    case TUTOR_MOVE_LOCK_ON:
-        return MOVE_MIND_READER;        // our LOCK ON: the next routine cannot miss
+    case TUTOR_MOVE_ANTICIPATE:
+        return MOVE_MIND_READER;        // our ANTICIPATE (T-393: was LOCK ON, beside vanilla's LOCK-ON): the next routine cannot miss
     case TUTOR_MOVE_BLEND:
         return MOVE_CAMOUFLAGE;         // our BLEND: its kind becomes the ground's
     case TUTOR_MOVE_REBUT:
@@ -1965,7 +1965,7 @@ static bool8 CanLearnTutorMove(u16 species, u8 tutor)
     switch (tutor)
     {
     //  T-218: a lecture is open to anyone, so no table says who may learn these -- every daemon may.
-    case TUTOR_MOVE_LOCK_ON:
+    case TUTOR_MOVE_ANTICIPATE:
     case TUTOR_MOVE_BLEND:
     case TUTOR_MOVE_REBUT:
         return TRUE;
