@@ -390,6 +390,7 @@ enum {
 };
 static EWRAM_DATA u8 sDbgPage = 0;
 #define DBG_FIRST_SONG MUS_HEAL   // 256; everything below it is a sound effect
+#define DBG_LAST_SONG  MUS_CALLOW // the last song appended (songs.h); was MUS_BRAZEN, which never reached SLATE's or CALLOW's
 // Nine tiles, because the widest of the 412 species names is 60px and a row at
 // seven tiles has 48. Measured; see CreateStartMenuWindow.
 //  14, not 9: the ENCOUNTER row reads "001 ROVERCUB" now, and the longest species name is ten
@@ -1100,8 +1101,8 @@ static bool8 DbgRedraw(void)
 
 static bool8 StartMenuDaemonsDebugCallback(void)
 {
-    if (sDbgSong < DBG_FIRST_SONG || sDbgSong > MUS_BRAZEN)
-        sDbgSong = MUS_BRAZEN;
+    if (sDbgSong < DBG_FIRST_SONG || sDbgSong > DBG_LAST_SONG)
+        sDbgSong = DBG_LAST_SONG;
     if (sDbgSfx == 0)
         sDbgSfx = 1;
     sDbgPage = DBG_PAGE_MAIN;
@@ -1645,13 +1646,13 @@ static bool8 DbgWatchCallback(void)
 
 // The two halves of the song table are not interleaved: SE_USE_ITEM is 1 and
 // SE_POKE_JUMP_FAILURE is 255, then MUS_HEAL opens the music at 256 and ours
-// close it at MUS_BRAZEN. So SONG walks 256..347 and SFX walks 1..255, and
+// close it at DBG_LAST_SONG. So SONG walks 256..349 and SFX walks 1..255, and
 // neither wraps into the other -- an earlier version wrapped SONG to 1, which
 // pushed sound effects through the BGM player and would have taken 255 presses
 // to reach the first actual track.
 static bool8 DbgSongCallback(void)
 {
-    if (++sDbgSong > MUS_BRAZEN || sDbgSong < DBG_FIRST_SONG)
+    if (++sDbgSong > DBG_LAST_SONG || sDbgSong < DBG_FIRST_SONG)
         sDbgSong = DBG_FIRST_SONG;
     // PlayBGM, not PlayNewMapMusic. The latter only sets sCurrentMapMusic and
     // arms the map-music state machine, which next runs on a map transition --
