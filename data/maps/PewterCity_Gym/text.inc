@@ -125,8 +125,9 @@ PewterCity_Gym_Text_ExplainNotebook::
     .string "I have never found a thing in it.$"
 
 @ T-346, DRAFT: the MARK's virtue, said aloud as it is given (T-318's pairing).
+@ T-401: was "One more thing, for the record." -- he says "One more thing" again at the NOTEBOOK.
 PewterCity_Gym_Text_MarkVirtue::
-    .string "One more thing, for the record.\p"
+    .string "For the record.\p"
     .string "That MARK carries a virtue.\n"
     .string "DILIGENCE, over SLOTH.\p"
     .string "It comes first. Nothing else gets\n"

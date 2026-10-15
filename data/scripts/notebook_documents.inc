@@ -7,6 +7,13 @@ NotebookDoc_LOOSE_PAGES_2::
 	call EventScript_NotebookCopied
 	return
 
+NotebookDoc_LOOSE_PAGES_2_Quiet::
+	goto_if_set FLAG_NOTEBOOK_DOC_LOOSE_PAGES_2, NotebookDoc_LOOSE_PAGES_2_Again
+	setflag FLAG_NOTEBOOK_DOC_LOOSE_PAGES_2
+	call NotebookDoc_LOOSE_PAGES_2_Read
+	addvar VAR_0x8007, 1
+	return
+
 NotebookDoc_LOOSE_PAGES_2_Again::
 	call NotebookDoc_LOOSE_PAGES_2_Read
 	return
@@ -23,6 +30,13 @@ NotebookDoc_LOOSE_PAGES_4::
 	setflag FLAG_NOTEBOOK_DOC_LOOSE_PAGES_4
 	call NotebookDoc_LOOSE_PAGES_4_Read
 	call EventScript_NotebookCopied
+	return
+
+NotebookDoc_LOOSE_PAGES_4_Quiet::
+	goto_if_set FLAG_NOTEBOOK_DOC_LOOSE_PAGES_4, NotebookDoc_LOOSE_PAGES_4_Again
+	setflag FLAG_NOTEBOOK_DOC_LOOSE_PAGES_4
+	call NotebookDoc_LOOSE_PAGES_4_Read
+	addvar VAR_0x8007, 1
 	return
 
 NotebookDoc_LOOSE_PAGES_4_Again::
@@ -43,6 +57,13 @@ NotebookDoc_LAB_NOTES_1::
 	call EventScript_NotebookCopied
 	return
 
+NotebookDoc_LAB_NOTES_1_Quiet::
+	goto_if_set FLAG_NOTEBOOK_DOC_LAB_NOTES_1, NotebookDoc_LAB_NOTES_1_Again
+	setflag FLAG_NOTEBOOK_DOC_LAB_NOTES_1
+	call NotebookDoc_LAB_NOTES_1_Read
+	addvar VAR_0x8007, 1
+	return
+
 NotebookDoc_LAB_NOTES_1_Again::
 	call NotebookDoc_LAB_NOTES_1_Read
 	return
@@ -61,8 +82,14 @@ NotebookDoc_LAB_NOTES_4::
 	call EventScript_NotebookCopied
 	return
 
-NotebookDoc_LAB_NOTES_4_Again::
+NotebookDoc_LAB_NOTES_4_Quiet::
+	goto_if_set FLAG_NOTEBOOK_DOC_LAB_NOTES_4, NotebookDoc_LAB_NOTES_4_Again
+	setflag FLAG_NOTEBOOK_DOC_LAB_NOTES_4
 	call NotebookDoc_LAB_NOTES_4_Read
+	addvar VAR_0x8007, 1
+	return
+
+NotebookDoc_LAB_NOTES_4_Again::
 	return
 
 NotebookDoc_LAB_NOTES_4_Read::
@@ -77,6 +104,13 @@ NotebookDoc_LAB_NOTES_6::
 	setflag FLAG_NOTEBOOK_DOC_LAB_NOTES_6
 	call NotebookDoc_LAB_NOTES_6_Read
 	call EventScript_NotebookCopied
+	return
+
+NotebookDoc_LAB_NOTES_6_Quiet::
+	goto_if_set FLAG_NOTEBOOK_DOC_LAB_NOTES_6, NotebookDoc_LAB_NOTES_6_Again
+	setflag FLAG_NOTEBOOK_DOC_LAB_NOTES_6
+	call NotebookDoc_LAB_NOTES_6_Read
+	addvar VAR_0x8007, 1
 	return
 
 NotebookDoc_LAB_NOTES_6_Again::
@@ -97,6 +131,13 @@ NotebookDoc_CORRESPONDENCE_1::
 	call EventScript_NotebookCopied
 	return
 
+NotebookDoc_CORRESPONDENCE_1_Quiet::
+	goto_if_set FLAG_NOTEBOOK_DOC_CORRESPONDENCE_1, NotebookDoc_CORRESPONDENCE_1_Again
+	setflag FLAG_NOTEBOOK_DOC_CORRESPONDENCE_1
+	call NotebookDoc_CORRESPONDENCE_1_Read
+	addvar VAR_0x8007, 1
+	return
+
 NotebookDoc_CORRESPONDENCE_1_Again::
 	call NotebookDoc_CORRESPONDENCE_1_Read
 	return
@@ -113,6 +154,13 @@ NotebookDoc_CORRESPONDENCE_2::
 	setflag FLAG_NOTEBOOK_DOC_CORRESPONDENCE_2
 	call NotebookDoc_CORRESPONDENCE_2_Read
 	call EventScript_NotebookCopied
+	return
+
+NotebookDoc_CORRESPONDENCE_2_Quiet::
+	goto_if_set FLAG_NOTEBOOK_DOC_CORRESPONDENCE_2, NotebookDoc_CORRESPONDENCE_2_Again
+	setflag FLAG_NOTEBOOK_DOC_CORRESPONDENCE_2
+	call NotebookDoc_CORRESPONDENCE_2_Read
+	addvar VAR_0x8007, 1
 	return
 
 NotebookDoc_CORRESPONDENCE_2_Again::
@@ -133,6 +181,13 @@ NotebookDoc_CORRESPONDENCE_3::
 	call EventScript_NotebookCopied
 	return
 
+NotebookDoc_CORRESPONDENCE_3_Quiet::
+	goto_if_set FLAG_NOTEBOOK_DOC_CORRESPONDENCE_3, NotebookDoc_CORRESPONDENCE_3_Again
+	setflag FLAG_NOTEBOOK_DOC_CORRESPONDENCE_3
+	call NotebookDoc_CORRESPONDENCE_3_Read
+	addvar VAR_0x8007, 1
+	return
+
 NotebookDoc_CORRESPONDENCE_3_Again::
 	call NotebookDoc_CORRESPONDENCE_3_Read
 	return
@@ -149,6 +204,13 @@ NotebookDoc_CORRESPONDENCE_4::
 	setflag FLAG_NOTEBOOK_DOC_CORRESPONDENCE_4
 	call NotebookDoc_CORRESPONDENCE_4_Read
 	call EventScript_NotebookCopied
+	return
+
+NotebookDoc_CORRESPONDENCE_4_Quiet::
+	goto_if_set FLAG_NOTEBOOK_DOC_CORRESPONDENCE_4, NotebookDoc_CORRESPONDENCE_4_Again
+	setflag FLAG_NOTEBOOK_DOC_CORRESPONDENCE_4
+	call NotebookDoc_CORRESPONDENCE_4_Read
+	addvar VAR_0x8007, 1
 	return
 
 NotebookDoc_CORRESPONDENCE_4_Again::
@@ -169,6 +231,13 @@ NotebookDoc_CORRESPONDENCE_6::
 	call EventScript_NotebookCopied
 	return
 
+NotebookDoc_CORRESPONDENCE_6_Quiet::
+	goto_if_set FLAG_NOTEBOOK_DOC_CORRESPONDENCE_6, NotebookDoc_CORRESPONDENCE_6_Again
+	setflag FLAG_NOTEBOOK_DOC_CORRESPONDENCE_6
+	call NotebookDoc_CORRESPONDENCE_6_Read
+	addvar VAR_0x8007, 1
+	return
+
 NotebookDoc_CORRESPONDENCE_6_Again::
 	call NotebookDoc_CORRESPONDENCE_6_Read
 	return
@@ -185,6 +254,13 @@ NotebookDoc_THE_FILE_4::
 	setflag FLAG_NOTEBOOK_DOC_THE_FILE_4
 	call NotebookDoc_THE_FILE_4_Read
 	call EventScript_NotebookCopied
+	return
+
+NotebookDoc_THE_FILE_4_Quiet::
+	goto_if_set FLAG_NOTEBOOK_DOC_THE_FILE_4, NotebookDoc_THE_FILE_4_Again
+	setflag FLAG_NOTEBOOK_DOC_THE_FILE_4
+	call NotebookDoc_THE_FILE_4_Read
+	addvar VAR_0x8007, 1
 	return
 
 NotebookDoc_THE_FILE_4_Again::
@@ -205,6 +281,13 @@ NotebookDoc_THE_FILE_5::
 	call EventScript_NotebookCopied
 	return
 
+NotebookDoc_THE_FILE_5_Quiet::
+	goto_if_set FLAG_NOTEBOOK_DOC_THE_FILE_5, NotebookDoc_THE_FILE_5_Again
+	setflag FLAG_NOTEBOOK_DOC_THE_FILE_5
+	call NotebookDoc_THE_FILE_5_Read
+	addvar VAR_0x8007, 1
+	return
+
 NotebookDoc_THE_FILE_5_Again::
 	call NotebookDoc_THE_FILE_5_Read
 	return
@@ -221,6 +304,13 @@ NotebookDoc_THE_FILE_6::
 	setflag FLAG_NOTEBOOK_DOC_THE_FILE_6
 	call NotebookDoc_THE_FILE_6_Read
 	call EventScript_NotebookCopied
+	return
+
+NotebookDoc_THE_FILE_6_Quiet::
+	goto_if_set FLAG_NOTEBOOK_DOC_THE_FILE_6, NotebookDoc_THE_FILE_6_Again
+	setflag FLAG_NOTEBOOK_DOC_THE_FILE_6
+	call NotebookDoc_THE_FILE_6_Read
+	addvar VAR_0x8007, 1
 	return
 
 NotebookDoc_THE_FILE_6_Again::
@@ -241,6 +331,13 @@ NotebookDoc_PROSPECTUS_1::
 	call EventScript_NotebookCopied
 	return
 
+NotebookDoc_PROSPECTUS_1_Quiet::
+	goto_if_set FLAG_NOTEBOOK_DOC_PROSPECTUS_1, NotebookDoc_PROSPECTUS_1_Again
+	setflag FLAG_NOTEBOOK_DOC_PROSPECTUS_1
+	call NotebookDoc_PROSPECTUS_1_Read
+	addvar VAR_0x8007, 1
+	return
+
 NotebookDoc_PROSPECTUS_1_Again::
 	call NotebookDoc_PROSPECTUS_1_Read
 	return
@@ -257,6 +354,13 @@ NotebookDoc_PROSPECTUS_3::
 	setflag FLAG_NOTEBOOK_DOC_PROSPECTUS_3
 	call NotebookDoc_PROSPECTUS_3_Read
 	call EventScript_NotebookCopied
+	return
+
+NotebookDoc_PROSPECTUS_3_Quiet::
+	goto_if_set FLAG_NOTEBOOK_DOC_PROSPECTUS_3, NotebookDoc_PROSPECTUS_3_Again
+	setflag FLAG_NOTEBOOK_DOC_PROSPECTUS_3
+	call NotebookDoc_PROSPECTUS_3_Read
+	addvar VAR_0x8007, 1
 	return
 
 NotebookDoc_PROSPECTUS_3_Again::
@@ -277,6 +381,13 @@ NotebookDoc_PROSPECTUS_5::
 	call EventScript_NotebookCopied
 	return
 
+NotebookDoc_PROSPECTUS_5_Quiet::
+	goto_if_set FLAG_NOTEBOOK_DOC_PROSPECTUS_5, NotebookDoc_PROSPECTUS_5_Again
+	setflag FLAG_NOTEBOOK_DOC_PROSPECTUS_5
+	call NotebookDoc_PROSPECTUS_5_Read
+	addvar VAR_0x8007, 1
+	return
+
 NotebookDoc_PROSPECTUS_5_Again::
 	call NotebookDoc_PROSPECTUS_5_Read
 	return
@@ -293,6 +404,13 @@ NotebookDoc_PROSPECTUS_6::
 	setflag FLAG_NOTEBOOK_DOC_PROSPECTUS_6
 	call NotebookDoc_PROSPECTUS_6_Read
 	call EventScript_NotebookCopied
+	return
+
+NotebookDoc_PROSPECTUS_6_Quiet::
+	goto_if_set FLAG_NOTEBOOK_DOC_PROSPECTUS_6, NotebookDoc_PROSPECTUS_6_Again
+	setflag FLAG_NOTEBOOK_DOC_PROSPECTUS_6
+	call NotebookDoc_PROSPECTUS_6_Read
+	addvar VAR_0x8007, 1
 	return
 
 NotebookDoc_PROSPECTUS_6_Again::
@@ -313,6 +431,13 @@ NotebookDoc_PEER_REVIEW_3::
 	call EventScript_NotebookCopied
 	return
 
+NotebookDoc_PEER_REVIEW_3_Quiet::
+	goto_if_set FLAG_NOTEBOOK_DOC_PEER_REVIEW_3, NotebookDoc_PEER_REVIEW_3_Again
+	setflag FLAG_NOTEBOOK_DOC_PEER_REVIEW_3
+	call NotebookDoc_PEER_REVIEW_3_Read
+	addvar VAR_0x8007, 1
+	return
+
 NotebookDoc_PEER_REVIEW_3_Again::
 	call NotebookDoc_PEER_REVIEW_3_Read
 	return
@@ -329,6 +454,13 @@ NotebookDoc_PEER_REVIEW_4::
 	setflag FLAG_NOTEBOOK_DOC_PEER_REVIEW_4
 	call NotebookDoc_PEER_REVIEW_4_Read
 	call EventScript_NotebookCopied
+	return
+
+NotebookDoc_PEER_REVIEW_4_Quiet::
+	goto_if_set FLAG_NOTEBOOK_DOC_PEER_REVIEW_4, NotebookDoc_PEER_REVIEW_4_Again
+	setflag FLAG_NOTEBOOK_DOC_PEER_REVIEW_4
+	call NotebookDoc_PEER_REVIEW_4_Read
+	addvar VAR_0x8007, 1
 	return
 
 NotebookDoc_PEER_REVIEW_4_Again::
@@ -421,15 +553,19 @@ NotebookDoc_SaffronCity_Gym_14_9_0::
 
 NotebookDoc_SaffronCity_MrPsychicsHouse_5_5::
 	lockall
+	setvar VAR_0x8007, 0
 	goto_if_unset FLAG_OWL_CONCEDED, NotebookDoc_SaffronCity_MrPsychicsHouse_5_5_0
-	call NotebookDoc_CORRESPONDENCE_6
+	call NotebookDoc_CORRESPONDENCE_6_Quiet
 NotebookDoc_SaffronCity_MrPsychicsHouse_5_5_0::
 	goto_if_set FLAG_OWL_CONCEDED, NotebookDoc_SaffronCity_MrPsychicsHouse_5_5_1
-	call NotebookDoc_PEER_REVIEW_3
+	call NotebookDoc_PEER_REVIEW_3_Quiet
 NotebookDoc_SaffronCity_MrPsychicsHouse_5_5_1::
 	goto_if_unset FLAG_OWL_CONCEDED, NotebookDoc_SaffronCity_MrPsychicsHouse_5_5_2
-	call NotebookDoc_PEER_REVIEW_4
+	call NotebookDoc_PEER_REVIEW_4_Quiet
 NotebookDoc_SaffronCity_MrPsychicsHouse_5_5_2::
+	goto_if_eq VAR_0x8007, 0, NotebookDoc_SaffronCity_MrPsychicsHouse_5_5_Done
+	call EventScript_NotebookCopied
+NotebookDoc_SaffronCity_MrPsychicsHouse_5_5_Done::
 	releaseall
 	end
 

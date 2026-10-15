@@ -116,10 +116,14 @@ ReadingRoom_EventScript_KeeperAfter::
 	release
 	end
 
-@ ---- the shelves: a short look here, the whole page in the NOTEBOOK
+@ ---- the shelves: the page itself, full screen, as every other found page opens (T-401, 2026-10-15: the short look
+@ lines restated each page's own first line; they are kept below, unused). Read again, the page opens again.
 ReadingRoom_EventScript_ShelfFields::
 	lockall
-	msgbox ReadingRoom_Text_ShelfFields
+	setvar VAR_0x8004, FLAG_NOTEBOOK_LOOSE_FIELDS
+	fadescreen FADE_TO_BLACK
+	special Notebook_ReadFlagEntry
+	waitstate
 	goto_if_set FLAG_NOTEBOOK_LOOSE_FIELDS, ReadingRoom_EventScript_ShelfDone
 	setflag FLAG_NOTEBOOK_LOOSE_FIELDS
 	call EventScript_NotebookCopied
@@ -128,7 +132,10 @@ ReadingRoom_EventScript_ShelfFields::
 
 ReadingRoom_EventScript_ShelfUnsent::
 	lockall
-	msgbox ReadingRoom_Text_ShelfUnsent
+	setvar VAR_0x8004, FLAG_NOTEBOOK_LOOSE_UNSENT
+	fadescreen FADE_TO_BLACK
+	special Notebook_ReadFlagEntry
+	waitstate
 	goto_if_set FLAG_NOTEBOOK_LOOSE_UNSENT, ReadingRoom_EventScript_ShelfDone
 	setflag FLAG_NOTEBOOK_LOOSE_UNSENT
 	call EventScript_NotebookCopied
@@ -137,7 +144,10 @@ ReadingRoom_EventScript_ShelfUnsent::
 
 ReadingRoom_EventScript_ShelfObserver::
 	lockall
-	msgbox ReadingRoom_Text_ShelfObserver
+	setvar VAR_0x8004, FLAG_NOTEBOOK_LAB_OBSERVER
+	fadescreen FADE_TO_BLACK
+	special Notebook_ReadFlagEntry
+	waitstate
 	goto_if_set FLAG_NOTEBOOK_LAB_OBSERVER, ReadingRoom_EventScript_ShelfDone
 	setflag FLAG_NOTEBOOK_LAB_OBSERVER
 	call EventScript_NotebookCopied
@@ -146,7 +156,10 @@ ReadingRoom_EventScript_ShelfObserver::
 
 ReadingRoom_EventScript_ShelfBox::
 	lockall
-	msgbox ReadingRoom_Text_ShelfBox
+	setvar VAR_0x8004, FLAG_NOTEBOOK_LAB_BOX
+	fadescreen FADE_TO_BLACK
+	special Notebook_ReadFlagEntry
+	waitstate
 	goto_if_set FLAG_NOTEBOOK_LAB_BOX, ReadingRoom_EventScript_ShelfDone
 	setflag FLAG_NOTEBOOK_LAB_BOX
 	call EventScript_NotebookCopied
@@ -155,7 +168,10 @@ ReadingRoom_EventScript_ShelfBox::
 
 ReadingRoom_EventScript_ShelfPosition::
 	lockall
-	msgbox ReadingRoom_Text_ShelfPosition
+	setvar VAR_0x8004, FLAG_NOTEBOOK_REVIEW_POSITION
+	fadescreen FADE_TO_BLACK
+	special Notebook_ReadFlagEntry
+	waitstate
 	goto_if_set FLAG_NOTEBOOK_REVIEW_POSITION, ReadingRoom_EventScript_ShelfDone
 	setflag FLAG_NOTEBOOK_REVIEW_POSITION
 	call EventScript_NotebookCopied
@@ -164,7 +180,10 @@ ReadingRoom_EventScript_ShelfPosition::
 
 ReadingRoom_EventScript_ShelfDraft::
 	lockall
-	msgbox ReadingRoom_Text_ShelfDraft
+	setvar VAR_0x8004, FLAG_NOTEBOOK_REVIEW_DRAFT
+	fadescreen FADE_TO_BLACK
+	special Notebook_ReadFlagEntry
+	waitstate
 	goto_if_set FLAG_NOTEBOOK_REVIEW_DRAFT, ReadingRoom_EventScript_ShelfDone
 	setflag FLAG_NOTEBOOK_REVIEW_DRAFT
 	call EventScript_NotebookCopied

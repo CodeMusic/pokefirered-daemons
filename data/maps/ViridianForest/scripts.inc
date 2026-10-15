@@ -33,7 +33,10 @@ ViridianForest_EventScript_TrainerTips4::
 	msgbox ViridianForest_Text_CantCatchOwnedMons
 	goto_if_set FLAG_NOTEBOOK_LOOSE_STONE, ViridianForest_EventScript_CarvingDone
 	setflag FLAG_NOTEBOOK_LOOSE_STONE
-	msgbox ViridianForest_Text_PageUnderStone
+	setvar VAR_0x8004, FLAG_NOTEBOOK_LOOSE_STONE   @ T-401: the page itself, full screen; its first line already says what it is
+	fadescreen FADE_TO_BLACK
+	special Notebook_ReadFlagEntry
+	waitstate
 	goto_if_unset FLAG_GOT_NOTEBOOK, ViridianForest_EventScript_KeptPage
 	msgbox ViridianForest_Text_PageIntoNotebook
 	goto ViridianForest_EventScript_CarvingDone

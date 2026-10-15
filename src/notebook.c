@@ -392,7 +392,7 @@ static const struct NotebookEntry sEntries[] =
     NB_DOC_CORRESPONDENCE_4
     NB_DOC_CORRESPONDENCE_5
     NB_DOC_CORRESPONDENCE_6
-    { NB_THE_FILE,     NB_KIND_TEXT,  1, FLAG_NOTEBOOK_FILE_MINUTES,    0, sTitle_File_Minutes,        CinnabarIsland_PokemonLab_Entrance_Text_MeetingRoomSign },
+    { NB_THE_FILE,     NB_KIND_TEXT,  0, FLAG_NOTEBOOK_FILE_MINUTES,    0, sTitle_File_Minutes,           CinnabarIsland_PokemonLab_Entrance_Text_MeetingRoomSign },
     { NB_THE_FILE,     NB_KIND_TEXT,  1, FLAG_NOTEBOOK_FILE_REQUISITION, 0, sTitle_File_Requisition,   CinnabarIsland_PokemonLab_Entrance_Text_RAndDRoomSign },
     { NB_THE_FILE,     NB_KIND_TEXT,  0, FLAG_NOTEBOOK_FILE_COMPLETE,   0, sTitle_File_Complete,       CinnabarIsland_PokemonLab_Entrance_Text_PhotoOfLabFounderDrFuji },
     NB_DOC_THE_FILE_4

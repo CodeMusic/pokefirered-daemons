@@ -31,9 +31,9 @@ PokemonMansion_1F_Text_IterLog::
     .string "come back the same.\p"
     .string "The log ends there.$"
 
-@  DRAFT (T-235).
+@  DRAFT (T-235). T-401: "a sheaf", not "pages", so the line after ("copied it") agrees.
 PokemonMansion_1F_Text_WitnessTile::
     .string "A floorboard here sits loose.\p"
-    .string "Under it, pages folded small and\n"
+    .string "Under it, a sheaf folded small and\n"
     .string "kept dry. A session, written down\l"
     .string "by the one being asked.$"
