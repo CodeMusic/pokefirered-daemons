@@ -212,7 +212,7 @@ static const u8 sText_Loose_Key[] = _(
         "each one a clef and four flats.\p"
         "Not one note after them.\p"
         "Pencilled along the bottom: THE\n"
-        "KEY. THE TUNE KNOWS THE IDLE.");
+        "KEY. THE TUNE KNOWS THE REST.");   // T-401: restored -- the REST->IDLE move sweep had reached it (bc7cba35f)
 
 //  LAB NOTES 2 -- *Quantum Translations*, the first verse: what counts as an observer.
 static const u8 sTitle_Lab_Observer[] = _("THE OBSERVER");

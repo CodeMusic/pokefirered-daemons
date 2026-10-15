@@ -1,5 +1,5 @@
 SafariZone_West_Text_RestHouse::
-    .string "IDLE HOUSE$"
+    .string "REST HOUSE$"  @ T-401, DRAFT: the REST->IDLE move sweep (5baafcbcd) had reached the sign
 
 @  T-324, DRAFT.
 SafariZone_West_Text_PleaseFindWardensLostTeeth::

@@ -1,5 +1,5 @@
 SafariZone_East_Text_RestHouse::
-    .string "IDLE HOUSE$"
+    .string "REST HOUSE$"  @ T-401, DRAFT: the REST->IDLE move sweep (5baafcbcd) had reached the sign
 
 @  T-324, DRAFT.
 SafariZone_East_Text_TimeDeclinesOnlyWhileYouWalk::
