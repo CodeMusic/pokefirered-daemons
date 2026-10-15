@@ -26,9 +26,9 @@ PewterCity_Gym_Text_BrockDefeat::
     .string "Of course, a daemon must know the\n"
     .string "ROUTINE VERBOSE to use it.$"
 
+@ T-401, DRAFT (the user, 2026-10-15): he is mid-speech, so not "Wait!".
 PewterCity_Gym_Text_TakeThisWithYou::
-    .string "Wait!\n"
-    .string "Take this with you.$"
+    .string "And take this with you.$"
 
 PewterCity_Gym_Text_ReceivedTM39FromBrock::
     .string "{PLAYER} received PLUGIN39 from\n"

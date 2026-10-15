@@ -80,6 +80,8 @@ FiveIsland_RocketWarehouse_EventScript_DefeatedGideon::
 	giveitem_msg FiveIsland_RocketWarehouse_Text_ReceivedPayload, ITEM_LETTER
 	setflag FLAG_TY_GAVE_PAYLOAD
 	setflag FLAG_NOTEBOOK_DOC_CORRESPONDENCE_5   @ gbadocs: filed without a word
+	msgbox FiveIsland_RocketWarehouse_Text_HotelPaper   @ T-401 (the user, 2026-10-15): a line says it came, then the filing line
+	call EventScript_NotebookCopied
 	msgbox FiveIsland_RocketWarehouse_Text_TyNotComing
 	release
 	end

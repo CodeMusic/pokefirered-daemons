@@ -76,9 +76,10 @@ ViridianCity_School_Text_TookSyllabus::
     .string "{PLAYER} took a copy of\n"
     .string "the syllabus.$"
 
+@ T-401 (the user, 2026-10-15): every page is filed in the same words.
 ViridianCity_School_Text_SyllabusIntoNotebook::
-    .string "It went into the NOTEBOOK, under\n"
-    .string "SCHOOL NOTES.$"
+    .string "{PLAYER} copied it into the\n"
+    .string "NOTEBOOK.$"
 
 ViridianCity_School_Text_Spelling::
     .string "SPELLING.\p"

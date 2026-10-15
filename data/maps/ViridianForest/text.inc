@@ -110,9 +110,10 @@ ViridianForest_Text_PageUnderStone::
     .string "Tucked under the edge of the stone:\n"
     .string "a page torn from an exercise book.$"
 
+@ T-401 (the user, 2026-10-15): every page is filed in the same words.
 ViridianForest_Text_PageIntoNotebook::
-    .string "{PLAYER} put it in the NOTEBOOK,\n"
-    .string "under LOOSE PAGES.$"
+    .string "{PLAYER} copied it into the\n"
+    .string "NOTEBOOK.$"
 
 ViridianForest_Text_KeptPage::
     .string "{PLAYER} kept it.$"

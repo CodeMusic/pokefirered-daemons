@@ -57,6 +57,7 @@ SSAnne_CaptainsOffice_Text_BandsSheet::
     .string "I've never found it.\n"
     .string "Maybe you will.$"
 
+@ T-401 (the user, 2026-10-15): every page is filed in the same words.
 SSAnne_CaptainsOffice_Text_SheetIntoNotebook::
-    .string "{PLAYER} put it in the NOTEBOOK,\n"
-    .string "under LOOSE PAGES.$"
+    .string "{PLAYER} copied it into the\n"
+    .string "NOTEBOOK.$"

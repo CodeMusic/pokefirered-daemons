@@ -176,3 +176,8 @@ FiveIsland_RocketWarehouse_Text_ScornHasNoticed::
 FiveIsland_RocketWarehouse_Text_ScornStillChecking::
     .string "…it has never said otherwise.\p"
     .string "No. Still correct.$"
+
+@ T-401, DRAFT (the user, 2026-10-15): NO ADDRESS came with the package; this says so, and nothing more.
+FiveIsland_RocketWarehouse_Text_HotelPaper::
+    .string "A sheet of hotel paper came\n"
+    .string "with it.$"
