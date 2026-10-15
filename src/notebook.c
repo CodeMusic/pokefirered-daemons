@@ -119,7 +119,7 @@ static const u8 sTitle_Syllabus_Learning[] = _("5F LEARNING");
 static const u8 sTitle_Syllabus_Bias[]     = _("6F BIAS");
 static const u8 sTitle_Syllabus_Error[]    = _("7F ERROR");
 
-//  LOOSE PAGES 1 -- DRAFT WORDING, awaiting the user's approval. A child's page, copied at the carving in
+//  LOOSE PAGES 1 -- approved with T-401's clearer close (the user, 2026-10-15). A child's page, copied at the carving in
 //  THE UNDERTONE (4.20, *Poly and Fields*): the rows are a type chart and the page never says so, and the
 //  process word arrives as homework.
 static const u8 sText_Loose_Stone[] = _(
@@ -133,8 +133,10 @@ static const u8 sText_Loose_Stone[] = _(
     "Some do nothing at all.\p"
     "It is the same rule everywhere on\n"
     "the stone. I checked every corner.\p"
-    "At home nobody sees it.\n"
-    "Here it sat still long enough.\p"
+    "At home they say I see things\n"
+    "that are not there.\p"
+    "Here the rule sat still long\n"
+    "enough to copy down.\p"
     "Tomorrow: integrating, page 40.\n"
     "I think I already know how.");
 
@@ -152,9 +154,10 @@ static const u8 sText_Loose_Fields[] = _(
     "Fields, the way the maths means it:\n"
     "one surface, one set of rules.\p"
     "Nobody here believes the second.\n"
-    "They walk between the buildings\p"
+    "They walk between the buildings\n"
     "with their coats on.\p"
-    "I keep not needing a coat.");
+    "I keep not needing a coat. To me\n"
+    "it is all one room.");
 
 //  LOOSE PAGES 5 -- *Love Persists*: a letter that waits instead of arguing.
 static const u8 sTitle_Loose_Unsent[] = _("UNSENT");
@@ -167,33 +170,36 @@ static const u8 sText_Loose_Unsent[] = _(
     "argue.\p"
     "I am going to be one of them.");
 
-//  LOOSE PAGES 7 -- approved by the user 2026-09-26 (T-285). *The Folds of Awareness* (Seeing Sharp, 2025):
-//  six folds of one sheet, and a half-fold between the third and fourth. Every step is only paper -- a fold, a
-//  crease, a corner -- and it never says what it is a diagram of (craft rule 1). It is not the GREEN PATH
-//  scientist's (4.33 rules that nothing may prove he was there), so a player who has heard him is the only one
-//  who will see it as anything but instructions.
+//  LOOSE PAGES 7 -- approved by the user 2026-09-26 (T-285), re-approved 2026-10-15 (T-401). *The Folds of
+//  Awareness* (Seeing Sharp, 2025): six folds of one sheet, and a half-fold between the third and fourth. It
+//  read as paper and nothing else (the user: "it isnt clear that it is talking about awareness"), so each step
+//  now carries the essay's own word for its fold. The essay's conclusions (love, spirit, unity) stay out (craft
+//  rule 1), and it is still not the GREEN PATH scientist's (4.33).
 static const u8 sTitle_Loose_Folds[] = _("FOLDS");
 static const u8 sText_Loose_Folds[] = _(
     "Instructions in pencil, pinned to\n"
-    "the wall. No pictures.\p"
-    "1. Start with the sheet flat.\n"
-    "Nothing on it yet.\p"
-    "2. Fold it once. Now one side has\n"
-    "moved, and one side was met.\p"
-    "3. Open it. Fold across the first\n"
-    "crease. Where there was one line,\n"
-    "squares, side by side.\p"
+    "the wall. No pictures. One word\n"
+    "beside each step.\p"
+    "1. AWARENESS. Start with the sheet\n"
+    "flat. Nothing on it yet.\p"
+    "2. CHANGE. Fold it once. Now one\n"
+    "side has moved, and one side was\n"
+    "met. There is a before.\p"
+    "3. SPACE. Open it. Fold across the\n"
+    "first crease. Where there was one\n"
+    "line, squares, side by side.\p"
     "Between three and four: press it\n"
     "flat with your palm. It keeps\n"
     "trying to be one sheet again.\p"
-    "4. Fold it corner to corner. Each\n"
-    "half lies on the other, the wrong\n"
-    "way round.\p"
-    "5. The same fold again, smaller,\n"
-    "and again, until your hands know\n"
-    "it.\p"
-    "6. Unfold it all the way. The same\n"
-    "sheet. Every crease still in it.\p"
+    "4. MIRROR. Fold it corner to\n"
+    "corner. Each half lies on the\n"
+    "other, the wrong way round.\p"
+    "5. PATTERN. The same fold again,\n"
+    "smaller, and again, until your\n"
+    "hands know it.\p"
+    "6. RETURN. Unfold it all the way.\n"
+    "The same sheet. Every crease\n"
+    "still in it.\p"
     "Do not cut.");
 
 //  LOOSE PAGES 8 -- T-10, DRAFT WORDING. The S.S. ANNE band's sheet, from DAVID: a key signature and not one note.
