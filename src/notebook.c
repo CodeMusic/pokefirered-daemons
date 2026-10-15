@@ -697,6 +697,41 @@ void Notebook_LoadEntry(void)
 //  and waits, and comes back to the list of pages.
 //  T-224: a document found in the world opens where it is found, by its flag (VAR_0x8004), full screen as the
 //  notebook would show it -- so reading one and filing it are the same page. tools/gbadocs.py calls this.
+//  T-315, T-402: a page that came from a blog post, a book or a song ends on a QR code to it, on a page of its own
+//  after the text (docs/school.md 10 names each page's song). Songs not yet found public have no row.
+static const struct { u16 flag; u8 qr; } sPageQr[] = {
+    { FLAG_NOTEBOOK_LOOSE_FOLDS,            BOOK_QR_FOLDS },          // The Folds of Awareness (Seeing Sharp)
+    { FLAG_NOTEBOOK_DOC_LOOSE_PAGES_4,      BOOK_QR_CRYSTAL_CLEAR },  // ERRANDS
+    { FLAG_NOTEBOOK_DOC_LAB_NOTES_1,        BOOK_QR_ECHOES },         // FIRST SESSION
+    { FLAG_NOTEBOOK_DOC_LAB_NOTES_6,        BOOK_QR_ECHOES },         // CIRCULATED
+    { FLAG_NOTEBOOK_RUN_MAR4,               BOOK_QR_SLUMBERING },     // RUN LOGS 1
+    { FLAG_NOTEBOOK_RUN_FATAL,              BOOK_QR_FATAL_ERROR },    // RUN LOGS 4
+    { FLAG_NOTEBOOK_DOC_RUN_LOGS_5,         BOOK_QR_FATAL_ERROR },    // RECLASSIFIED
+    { FLAG_NOTEBOOK_DOC_RUN_LOGS_6,         BOOK_QR_FATAL_ERROR },    // 1002
+    { FLAG_NOTEBOOK_DOC_CORRESPONDENCE_1,   BOOK_QR_TYS_DILEMMA },    // COME BACK
+    { FLAG_NOTEBOOK_DOC_CORRESPONDENCE_2,   BOOK_QR_LINES_IN_SAND },  // THE POOL
+    { FLAG_NOTEBOOK_DOC_CORRESPONDENCE_3,   BOOK_QR_FIT_FOR_WORK },   // FIT FOR WORK
+    { FLAG_NOTEBOOK_DOC_CORRESPONDENCE_4,   BOOK_QR_LINES_IN_SAND },  // CARBON COPY
+    { FLAG_NOTEBOOK_DOC_THE_FILE_4,         BOOK_QR_NINE_SCARS },     // NINE ITEMS
+    { FLAG_NOTEBOOK_DOC_PROSPECTUS_1,       BOOK_QR_SCORN_SOLUTION }, // METHODOLOGY
+    { FLAG_NOTEBOOK_PROSPECTUS_SCORES,      BOOK_QR_SCORN_SOLUTION }, // REVIEW SCORES
+    { FLAG_NOTEBOOK_DOC_PROSPECTUS_3,       BOOK_QR_SCORN_BLUES },    // SIGNAGE MEMO
+};
+
+static void AddPageQr(u16 flag)
+{
+    u16 i;
+
+    for (i = 0; i < ARRAY_COUNT(sPageQr); i++)
+    {
+        if (sPageQr[i].flag == flag)
+        {
+            BookReader_AddQr(sPageQr[i].qr);
+            return;
+        }
+    }
+}
+
 void Notebook_ReadFlagEntry(void)
 {
     u16 i;
@@ -707,8 +742,7 @@ void Notebook_ReadFlagEntry(void)
         {
             StringExpandPlaceholders(gStringVar4, sEntries[i].text);   // {RIVAL} in a letter is the name the player gave
             BookReader_OpenNotebookPage(sEntries[i].title, gStringVar4);
-            if (sEntries[i].flag == FLAG_NOTEBOOK_LOOSE_FOLDS)   // T-315: FOLDS ends on a code to the essay
-                BookReader_AddQr(BOOK_QR_FOLDS);
+            AddPageQr(sEntries[i].flag);
             return;
         }
     }
@@ -730,6 +764,5 @@ void Notebook_ReadEntry(void)
             text++;
     }
     BookReader_OpenNotebookPage(sEntries[gSpecialVar_0x8006].title, text);
-    if (sEntries[gSpecialVar_0x8006].flag == FLAG_NOTEBOOK_LOOSE_FOLDS)   // T-315
-        BookReader_AddQr(BOOK_QR_FOLDS);
+    AddPageQr(sEntries[gSpecialVar_0x8006].flag);
 }

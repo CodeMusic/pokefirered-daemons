@@ -270,7 +270,6 @@ static void Rect(u8 color, s16 x, s16 y, s16 w, s16 h)
 //  four modules in the page's light colour. The codes are tools/gbaqr.py's; nothing on the page says what one is.
 #define QR_MODULE 2
 #define QR_QUIET  4
-static const u8 *const sQrCodes[] = { NULL, sQr_Folds, sQr_Guide };
 
 static void DrawQr(const u8 *qr, s16 cx, s16 cy, u8 light, u8 dark)
 {
