@@ -18,6 +18,11 @@
 #include "notebook.h"
 #include "constants/songs.h"
 #include "data/notebook_documents.h"   // T-224: the documents tools/gbadocs.py has placed
+#include "overworld.h"   // T-403: a page's map, for the TOWN MAP
+#include "region_map.h"
+#include "quest_log.h"
+#include "constants/maps.h"
+#include "constants/region_map_sections.h"
 
 //  T-216: THE RESEARCH NOTEBOOK (docs/school.md 9-10).
 //
@@ -52,6 +57,7 @@ enum
 };
 
 #define NB_CLOSE      0x7F
+#define NB_SHOW_MAP   0x7E   // T-403: R on a page -- the script opens the TOWN MAP where it was found
 #define NB_MAX_SHOWN  6
 
 //  An entry is held when FLAG is set and, if it has one, FLAG2 as well. KIND says where its words come from:
@@ -351,6 +357,17 @@ static const u8 sTitle_Prospectus_Scores[]  = _("REVIEW SCORES");
 
 #include "data/wisdom.h"   // T-390: the seven insights, written by DAEMONS tools/gbawisdom.py
 
+//  T-403 (the user, 2026-10-15): where each entry was found, what it is, and its SEEN flag -- DAEMONS
+//  docs/notebook_notes.json, written in by tools/gbanotebook.py.
+struct NotebookNote
+{
+    u16 flag;
+    u8 seen;
+    u16 map;
+    const u8 *about;
+};
+#include "data/notebook_notes.h"
+
 //  THE AUTHORED ORDER. A new entry goes where it belongs in the finished file, not at the end.
 static const struct NotebookEntry sEntries[] =
 {
@@ -432,6 +449,7 @@ void Notebook_DebugFillAll(void)
         if (sEntries[i].flag2 != 0)
             FlagSet(sEntries[i].flag2);
     }
+    FlagSet(FLAG_NOTEBOOK_SEEN_MIGRATED);   // T-403: every page filed now and unread, so the marks can be seen
 }
 #endif
 
@@ -462,6 +480,7 @@ static EWRAM_DATA u16 sSectionScroll = 0;
 static EWRAM_DATA u16 sSectionRow = 0;
 static EWRAM_DATA u16 sEntryScroll = 0;
 static EWRAM_DATA u16 sEntryRow = 0;
+static EWRAM_DATA bool8 sListIsEntries = FALSE;   // T-403: which list the print and cursor hooks are drawing
 
 #define tMaxShown  data[0]
 #define tCount     data[1]
@@ -479,6 +498,47 @@ static bool8 EntryHeld(u32 i)
     return FlagGet(sEntries[i].flag) && (sEntries[i].flag2 == 0 || FlagGet(sEntries[i].flag2));
 }
 
+//  T-403: an entry's note, by the flag that files it -- NULL for one the table does not know (none, by gbanotebook).
+static const struct NotebookNote *FindNote(u16 flag)
+{
+    u32 i;
+
+    for (i = 0; i < ARRAY_COUNT(sNotebookNotes); i++)
+    {
+        if (sNotebookNotes[i].flag == flag)
+            return &sNotebookNotes[i];
+    }
+    return NULL;
+}
+
+static void MarkSeen(u16 flag)
+{
+    const struct NotebookNote *note = FindNote(flag);
+
+    if (note != NULL)
+        FlagSet(FLAG_NOTEBOOK_SEEN_0 + note->seen);
+}
+
+//  Unread: in the NOTEBOOK and never opened -- from the list, or full screen where it was found.
+static bool8 EntryUnread(u32 i)
+{
+    const struct NotebookNote *note = FindNote(sEntries[i].flag);
+
+    return note != NULL && EntryHeld(i) && !FlagGet(FLAG_NOTEBOOK_SEEN_0 + note->seen);
+}
+
+static bool8 SectionHasUnread(u8 section)
+{
+    u32 i;
+
+    for (i = 0; i < ARRAY_COUNT(sEntries); i++)
+    {
+        if (sEntries[i].section == section && EntryUnread(i))
+            return TRUE;
+    }
+    return FALSE;
+}
+
 static bool8 SectionHasEntry(u8 section)
 {
     u32 i;
@@ -491,11 +551,52 @@ static bool8 SectionHasEntry(u8 section)
     return FALSE;
 }
 
+static const u8 sText_WhichPage[] = _("Which page?");
+static const u8 sText_WhereFound[] = _("{R_BUTTON} WHERE IT WAS FOUND");   // T-403, DRAFT
+static const u8 sText_UnreadMark[] = _("·");
+
+//  T-403: the line under the list (the field's message box, which says "Which page?") says what the page under the
+//  cursor IS, and that R shows where it was found. BACK, or a page with no note, says "Which page?" again.
+static void PrintPageNote(s32 itemIndex)
+{
+    const struct NotebookNote *note = NULL;
+
+    if (itemIndex != NB_CLOSE && itemIndex < (s32)ARRAY_COUNT(sEntries))
+        note = FindNote(sEntries[itemIndex].flag);
+    FillWindowPixelBuffer(0, PIXEL_FILL(1));
+    if (note == NULL || note->about == NULL)
+    {
+        AddTextPrinterParameterized(0, FONT_NORMAL, sText_WhichPage, 0, 1, TEXT_SKIP_DRAW, NULL);
+    }
+    else
+    {
+        AddTextPrinterParameterized(0, FONT_NORMAL, note->about, 0, 1, TEXT_SKIP_DRAW, NULL);
+        if (note->map != MAP_UNDEFINED)
+            AddTextPrinterParameterized(0, FONT_NORMAL, sText_WhereFound, 0, 17, TEXT_SKIP_DRAW, NULL);
+    }
+    CopyWindowToVram(0, COPYWIN_GFX);
+}
+
 static void MoveCursor_Notebook(s32 itemIndex, bool8 onInit, struct ListMenu *list)
 {
     if (!onInit)
         PlaySE(SE_SELECT);
     sArrowScroll = list->itemsAbove;
+    if (sListIsEntries)
+        PrintPageNote(itemIndex);
+}
+
+//  T-403: a dot in the right-hand gutter -- an entry not yet opened, or a section holding one.
+static void PrintUnreadMark(u8 windowId, u32 itemId, u8 y)
+{
+    bool8 unread;
+
+    if (itemId == NB_CLOSE)
+        return;
+    unread = sListIsEntries ? EntryUnread(itemId) : SectionHasUnread(itemId);
+    if (unread)
+        AddTextPrinterParameterized(windowId, FONT_NORMAL, sText_UnreadMark,
+                                    GetWindowAttribute(windowId, WINDOW_WIDTH) * 8 - 6, y, TEXT_SKIP_DRAW, NULL);
 }
 
 static void CreateNotebookList(u8 count, bool8 isEntries, u16 scroll, u16 row)
@@ -515,6 +616,15 @@ static void CreateNotebookList(u8 count, bool8 isEntries, u16 scroll, u16 row)
     task->tCount = count;
     task->tMaxShown = count < NB_MAX_SHOWN ? count : NB_MAX_SHOWN;
     task->tWidth = (widest + 9) / 8 + 1;
+    sListIsEntries = isEntries;
+    for (i = 0; i < count; i++)   // T-403: a tile of gutter for the unread dot, when there is one to draw
+    {
+        if (sItems[i].index != NB_CLOSE && (isEntries ? EntryUnread(sItems[i].index) : SectionHasUnread(sItems[i].index)))
+        {
+            task->tWidth++;
+            break;
+        }
+    }
     task->tHeight = task->tMaxShown * 2;
     task->tIsEntries = isEntries;
 
@@ -524,7 +634,7 @@ static void CreateNotebookList(u8 count, bool8 isEntries, u16 scroll, u16 row)
 
     template.items = sItems;
     template.moveCursorFunc = MoveCursor_Notebook;
-    template.itemPrintFunc = NULL;
+    template.itemPrintFunc = PrintUnreadMark;
     template.totalItems = count;
     template.maxShowed = task->tMaxShown;
     template.windowId = task->tWindowId;
@@ -597,6 +707,25 @@ static void Task_NotebookList(u8 taskId)
 {
     s32 input = ListMenu_ProcessInput(gTasks[taskId].tListId);
 
+    //  T-403: R on a page that was found somewhere -- the script opens the TOWN MAP there, then comes back here.
+    if (input == LIST_NOTHING_CHOSEN && gTasks[taskId].tIsEntries && JOY_NEW(R_BUTTON))
+    {
+        u16 scroll, row;
+        const struct NotebookNote *note;
+        s32 index;
+
+        ListMenuGetScrollAndRow(gTasks[taskId].tListId, &scroll, &row);
+        index = sItems[scroll + row].index;
+        note = (index != NB_CLOSE) ? FindNote(sEntries[index].flag) : NULL;
+        if (note != NULL && note->map != MAP_UNDEFINED)
+        {
+            gSpecialVar_0x8006 = index;
+            gSpecialVar_Result = NB_SHOW_MAP;
+            PlaySE(SE_SELECT);
+            DestroyNotebookList(taskId);
+            return;
+        }
+    }
     switch (input)
     {
     case LIST_NOTHING_CHOSEN:
@@ -626,6 +755,16 @@ void Notebook_HasEntries(void)
     {
         if (EntryHeld(i))
             gSpecialVar_Result = TRUE;
+    }
+    //  T-403: a save from before the marks -- everything already in it counts as read, once.
+    if (!FlagGet(FLAG_NOTEBOOK_SEEN_MIGRATED))
+    {
+        for (i = 0; i < ARRAY_COUNT(sEntries); i++)
+        {
+            if (EntryHeld(i))
+                MarkSeen(sEntries[i].flag);
+        }
+        FlagSet(FLAG_NOTEBOOK_SEEN_MIGRATED);
     }
     sSectionScroll = sSectionRow = 0;
 }
@@ -743,6 +882,7 @@ void Notebook_ReadFlagEntry(void)
             StringExpandPlaceholders(gStringVar4, sEntries[i].text);   // {RIVAL} in a letter is the name the player gave
             BookReader_OpenNotebookPage(sEntries[i].title, gStringVar4);
             AddPageQr(sEntries[i].flag);
+            MarkSeen(sEntries[i].flag);   // T-403: read where it was found is read
             return;
         }
     }
@@ -765,4 +905,20 @@ void Notebook_ReadEntry(void)
     }
     BookReader_OpenNotebookPage(sEntries[gSpecialVar_0x8006].title, text);
     AddPageQr(sEntries[gSpecialVar_0x8006].flag);
+    MarkSeen(sEntries[gSpecialVar_0x8006].flag);   // T-403
+}
+
+//  T-403: VAR_0x8006 is the entry; the TOWN MAP opens with its cursor on the place the page was found, and the
+//  script carries on (back to the list) when it closes.
+void Notebook_ShowOnMap(void)
+{
+    const struct NotebookNote *note = NULL;
+    u8 mapsec = MAPSEC_NONE;
+
+    if (gSpecialVar_0x8006 < ARRAY_COUNT(sEntries))
+        note = FindNote(sEntries[gSpecialVar_0x8006].flag);
+    if (note != NULL && note->map != MAP_UNDEFINED)
+        mapsec = Overworld_GetMapHeaderByGroupAndId(note->map >> 8, note->map & 0xFF)->regionMapSectionId;
+    QuestLog_CutRecording();
+    InitRegionMapFocusedWithExitCB(REGIONMAP_TYPE_WALL, mapsec, CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }

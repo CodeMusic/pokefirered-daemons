@@ -110,7 +110,8 @@ struct RegionMap
     u16 dungeonWinTop;    // Never read
     u16 dungeonWinRight;  // Never read
     u16 dungeonWinBottom; // Never read
-    u8 filler[6]; 
+    u8 focusMapsec;   // T-403: the NOTEBOOK's "where it was found" -- the cursor and region start here (0: the player)
+    u8 filler[5];
     TaskFunc mainTask;
     MainCallback savedCallback;
 }; // size = 0x47C0
@@ -289,6 +290,7 @@ static EWRAM_DATA struct RegionMapGpuRegs * sRegionMapGpuRegs[3] = {};
 static EWRAM_DATA struct FlyMap * sFlyMap = NULL;
 
 static void InitRegionMapType(void);
+static u8 RegionOfMapsec(u8 mapsec);
 static void CB2_OpenRegionMap(void);
 static bool8 LoadRegionMapGfx(void);
 static void CreateMainMapTask(void);
@@ -987,6 +989,13 @@ static void InitRegionMap(u8 type)
 
 void InitRegionMapWithExitCB(u8 type, MainCallback cb)
 {
+    InitRegionMapFocusedWithExitCB(type, MAPSEC_NONE, cb);
+}
+
+//  T-403: the same map, opened on a place other than where the player stands (the NOTEBOOK's R). The player's
+//  icon stays where the player is; only the cursor, and the region shown first, move.
+void InitRegionMapFocusedWithExitCB(u8 type, u8 mapsec, MainCallback cb)
+{
     sRegionMap = AllocZeroed(sizeof(struct RegionMap));
     if (sRegionMap == NULL)
     {
@@ -995,6 +1004,8 @@ void InitRegionMapWithExitCB(u8 type, MainCallback cb)
     else
     {
         gExitStairsMovementDisabled = TRUE;
+        if (mapsec != MAPSEC_NONE)
+            sRegionMap->focusMapsec = mapsec;
         sRegionMap->type = type;
         sRegionMap->mainState = 0;
         sRegionMap->openState = 0;
@@ -1028,16 +1039,27 @@ static void InitRegionMapType(void)
     }
     if (!FlagGet(FLAG_SYS_SEVII_MAP_123))
         sRegionMap->permissions[MAPPERM_HAS_SWITCH_BUTTON] = FALSE;
+    region = RegionOfMapsec(gMapHeader.regionMapSectionId);
+    sRegionMap->playersRegion = region;
+    sRegionMap->selectedRegion = sRegionMap->focusMapsec ? RegionOfMapsec(sRegionMap->focusMapsec) : region;   // T-403
+}
+
+static u8 RegionOfMapsec(u8 mapsec)
+{
+    u8 i;
+    u8 j;
+    u8 region;
+
     region = REGIONMAP_KANTO;
     j = REGIONMAP_KANTO;
-    if (gMapHeader.regionMapSectionId >= SEVII_MAPSEC_START)
+    if (mapsec >= SEVII_MAPSEC_START)
     {
         // Mapsec is in Sevii Islands, determine which map to use
-        while (region == REGIONMAP_KANTO)
+        while (region == REGIONMAP_KANTO && j < REGIONMAP_COUNT - 1)
         {
             for (i = 0; sSeviiMapsecs[j][i] != MAPSEC_NONE; i++)
             {
-                if (gMapHeader.regionMapSectionId == sSeviiMapsecs[j][i])
+                if (mapsec == sSeviiMapsecs[j][i])
                 {
                     region = j + 1;
                     break;
@@ -1046,8 +1068,7 @@ static void InitRegionMapType(void)
             j++;
         }
     }
-    sRegionMap->selectedRegion = region;
-    sRegionMap->playersRegion = region;
+    return region;
 }
 
 static void CB2_OpenRegionMap(void)
@@ -3126,6 +3147,13 @@ static void GetPlayerPositionOnRegionMap(void)
     const struct MapHeader * mapHeader;
     struct WarpData * warp;
 
+    if (sRegionMap->focusMapsec)   // T-403: the middle of the place the page was found
+    {
+        u8 m = sRegionMap->focusMapsec - KANTO_MAPSEC_START;
+        sMapCursor->x = sMapSectionTopLeftCorners[m][0] + sMapSectionDimensions[m][0] / 2;
+        sMapCursor->y = sMapSectionTopLeftCorners[m][1] + sMapSectionDimensions[m][1] / 2;
+        return;
+    }
     switch (GetMapTypeByGroupAndId(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum))
     {
     default:
@@ -3195,7 +3223,7 @@ static void GetPlayerPositionOnRegionMap(void)
 
 static void GetPlayerPositionOnRegionMap_HandleOverrides(void)
 {
-    switch (GetPlayerCurrentMapSectionId())
+    switch (sRegionMap->focusMapsec ? sRegionMap->focusMapsec : GetPlayerCurrentMapSectionId())   // T-403
     {
     case MAPSEC_KANTO_SAFARI_ZONE:
         sMapCursor->x = 12;

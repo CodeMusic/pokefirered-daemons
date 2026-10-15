@@ -361,6 +361,7 @@ gSpecials::
 	def_special Notebook_LoadEntry
 	def_special Notebook_ReadEntry
 	def_special Notebook_ReadFlagEntry
+	def_special Notebook_ShowOnMap
 	def_special Textbook_Open
 	def_special Guide_Open
 	def_special Guide_OpenBoardCopy

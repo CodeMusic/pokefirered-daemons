@@ -1689,6 +1689,12 @@
 #define FLAG_SEVEN_ISLAND_GROVE_FOUND            (DAEMONS_FLAGS_START + 0x11D)
 //  END gbagrove
 
+//  T-403 (the user, 2026-10-15): a NOTEBOOK entry not yet opened is marked. One SEEN flag per entry, numbered in
+//  DAEMONS docs/notebook_notes.json (tools/gbanotebook.py) and never reused. MIGRATED: the first time a save opens the
+//  NOTEBOOK after T-403, everything already in it counts as read, so an old save does not light up everywhere.
+#define FLAG_NOTEBOOK_SEEN_0          (DAEMONS_FLAGS_START + 0x200)   // .. + 0x23F: 64
+#define FLAG_NOTEBOOK_SEEN_MIGRATED   (DAEMONS_FLAGS_START + 0x240)
+
 #define DAEMONS_FLAGS_COUNT           0x400
 #define DAEMONS_FLAGS_END             (DAEMONS_FLAGS_START + DAEMONS_FLAGS_COUNT - 1)
 #define DAEMONS_FLAGS_SIZE            (DAEMONS_FLAGS_COUNT / 8)

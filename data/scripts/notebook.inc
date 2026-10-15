@@ -19,10 +19,19 @@ EventScript_NotebookEntries::
 	special Notebook_ChooseEntry
 	waitstate
 	goto_if_eq VAR_RESULT, 0x7F, EventScript_NotebookSections
+	goto_if_eq VAR_RESULT, 0x7E, EventScript_NotebookShowMap   @ T-403: R -- where the page was found
 	copyvar VAR_0x8006, VAR_RESULT
 	closemessage
 	fadescreen FADE_TO_BLACK
 	special Notebook_ReadEntry
+	waitstate
+	goto EventScript_NotebookEntries
+
+@ T-403: the TOWN MAP, its cursor on the place the page in VAR_0x8006 was found; closing it comes back to the list.
+EventScript_NotebookShowMap::
+	closemessage
+	fadescreen FADE_TO_BLACK
+	special Notebook_ShowOnMap
 	waitstate
 	goto EventScript_NotebookEntries
 
