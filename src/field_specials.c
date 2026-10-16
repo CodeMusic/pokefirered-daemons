@@ -1805,6 +1805,7 @@ static const u16 sFirColour[][2] = { // without the key, in it
 #define FIR_MAP_PALETTES 0x1FFF // the map's thirteen; 13-15 are the message box's
 #define FIR_MAP_PEAK     5
 #define FIR_TREE_PEAK    11
+#define FIR_NEXUS_TREE_PALETTE 12 // THE NEXUS's Christmas tree is map tiles, on a palette of its own (tools/gbanexusmap.py)
 
 static const struct FirNote sFirTune[] =
 {
@@ -1828,7 +1829,7 @@ static const struct FirNote sFirTune[] =
 #define tNote    data[0]
 #define tTimer   data[1]
 #define tInKey   data[2]
-#define tTreePal data[3] // the fir's sprite palette, or -1
+#define tTreePal data[3] // the fir's palette, 0-15 the map's and 16-31 the sprites', or -1
 
 // The light of the note now sounding, fading as it is held; 0 frames left puts the palettes back.
 static void SingingFir_Light(s16 *data)
@@ -1842,14 +1843,14 @@ static void SingingFir_Light(s16 *data)
     {
         BlendPalettes(FIR_MAP_PALETTES, 0, RGB_BLACK);
         if (tTreePal >= 0)
-            BlendPalettes(1 << (16 + tTreePal), 0, RGB_BLACK);
+            BlendPalettes(1 << tTreePal, 0, RGB_BLACK);
         return;
     }
     note = &sFirTune[tNote - 1];
     colour = sFirColour[note->colour][tInKey ? 1 : 0];
     BlendPalettes(FIR_MAP_PALETTES, FIR_MAP_PEAK * tTimer / note->frames, colour);
     if (tTreePal >= 0)
-        BlendPalettes(1 << (16 + tTreePal), (FIR_TREE_PEAK * tTimer + note->frames - 1) / note->frames, colour);
+        BlendPalettes(1 << tTreePal, (FIR_TREE_PEAK * tTimer + note->frames - 1) / note->frames, colour);
 }
 
 static void Task_SingingFir(u8 taskId)
@@ -1887,9 +1888,11 @@ void SingingFir_Sing(void)
     gTasks[taskId].tInKey = gSpecialVar_0x8004;
     gTasks[taskId].tTimer = 16;
     gTasks[taskId].tTreePal = -1;
-    if (!TryGetObjectEventIdByLocalIdAndMap(gSpecialVar_LastTalked, gSaveBlock1Ptr->location.mapNum,
-                                            gSaveBlock1Ptr->location.mapGroup, &objectEventId))
-        gTasks[taskId].tTreePal = gSprites[gObjectEvents[objectEventId].spriteId].oam.paletteNum;
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_NEXUS) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_NEXUS))
+        gTasks[taskId].tTreePal = FIR_NEXUS_TREE_PALETTE;
+    else if (!TryGetObjectEventIdByLocalIdAndMap(gSpecialVar_LastTalked, gSaveBlock1Ptr->location.mapNum,
+                                                 gSaveBlock1Ptr->location.mapGroup, &objectEventId))
+        gTasks[taskId].tTreePal = 16 + gSprites[gObjectEvents[objectEventId].spriteId].oam.paletteNum;
 }
 
 #undef tNote
