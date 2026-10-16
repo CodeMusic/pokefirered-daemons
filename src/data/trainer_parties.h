@@ -4140,36 +4140,41 @@ static const struct TrainerMonNoItemDefaultMoves sParty_BossGiovanni2[] = {
     },
 };
 
+// 5.3 benchmark 8 -- SCORN. Five bodies, one specification: every daemon knows the same four
+// routines in the same slots, so all five wear the same four streaks (9.4). The four answer
+// every colour that can hit his bodies for double -- except the two his specification never
+// weighed. Every routine is 100% accurate, so with the fixed roll nothing in this fight rolls
+// on his side at all. Never said in the game (craft rule 1). Chosen by the user 2026-10-16 ("the stack").
 static const struct TrainerMonNoItemCustomMoves sParty_LeaderGiovanni[] = {
     {
-        .iv = 0,
-        .lvl = 45,
-        .species = SPECIES_RHYHORN,
-        .moves = {MOVE_TAKE_DOWN, MOVE_ROCK_BLAST, MOVE_SCARY_FACE, MOVE_EARTHQUAKE},
+        .iv = 255,
+        .lvl = 47,
+        .species = SPECIES_NIDOQUEEN,   // SCHEDULER
+        .moves = {MOVE_EARTHQUAKE, MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_FLAMETHROWER},
     },
     {
-        .iv = 0,
-        .lvl = 42,
-        .species = SPECIES_DUGTRIO,
-        .moves = {MOVE_SLASH, MOVE_SAND_TOMB, MOVE_MUD_SLAP, MOVE_EARTHQUAKE},
+        .iv = 255,
+        .lvl = 47,
+        .species = SPECIES_KANGASKHAN,  // KEEPER
+        .moves = {MOVE_EARTHQUAKE, MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_FLAMETHROWER},
     },
     {
-        .iv = 0,
-        .lvl = 44,
-        .species = SPECIES_NIDOQUEEN,
-        .moves = {MOVE_BODY_SLAM, MOVE_DOUBLE_KICK, MOVE_POISON_STING, MOVE_EARTHQUAKE},
+        .iv = 255,
+        .lvl = 48,
+        .species = SPECIES_TAUROS,      // STAMPEDE
+        .moves = {MOVE_EARTHQUAKE, MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_FLAMETHROWER},
     },
     {
-        .iv = 0,
-        .lvl = 45,
-        .species = SPECIES_NIDOKING,
-        .moves = {MOVE_THRASH, MOVE_DOUBLE_KICK, MOVE_POISON_STING, MOVE_EARTHQUAKE},
+        .iv = 255,
+        .lvl = 48,
+        .species = SPECIES_GYARADOS,    // ESCALATE
+        .moves = {MOVE_EARTHQUAKE, MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_FLAMETHROWER},
     },
     {
-        .iv = 0,
+        .iv = 255,
         .lvl = 50,
-        .species = SPECIES_RHYHORN,
-        .moves = {MOVE_TAKE_DOWN, MOVE_ROCK_BLAST, MOVE_SCARY_FACE, MOVE_EARTHQUAKE},
+        .species = SPECIES_RHYDON,      // MIGRATE
+        .moves = {MOVE_EARTHQUAKE, MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_FLAMETHROWER},
     },
 };
 
