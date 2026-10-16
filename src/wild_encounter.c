@@ -46,6 +46,7 @@ static void AddToWildEncounterRateBuff(u8 encouterRate);
 
 #include "data/wild_encounters.h"
 #include "daemons_time.h"
+#include "data/wild_shifts.h"
 
 static const u8 sUnownLetterSlots[][LAND_WILD_COUNT] = {
   //  A   A   A   A   A   A   A   A   A   A   A   ?
@@ -67,6 +68,41 @@ static const u8 sUnownLetterSlots[][LAND_WILD_COUNT] = {
 void DisableWildEncounters(bool8 state)
 {
     sWildEncountersDisabled = state;
+}
+
+// T-407 (the user, 2026-10-16): season and hour homes on the early roads (tools/gbashifts.py). A row of
+// sWildShifts gives a land slot of this map to another daemon in some seasons and watches; the first row whose
+// season bit and watch bit are both set wins. Only the species moves -- the slot keeps its level and odds, and it
+// applies on top of whichever header was chosen, the day's or the night's.
+static u16 WildShiftSpecies(u16 species, u8 slot)
+{
+    u32 i;
+    u8 seasonBit = WS_SEASON(DaemonsSeason());
+    u8 watchBit = WS_WATCH(DaemonsWatch());
+
+    for (i = 0; i < ARRAY_COUNT(sWildShifts); i++)
+    {
+        if (sWildShifts[i].mapGroup == gSaveBlock1Ptr->location.mapGroup
+         && sWildShifts[i].mapNum == gSaveBlock1Ptr->location.mapNum
+         && sWildShifts[i].slot == slot
+         && (sWildShifts[i].when & seasonBit)
+         && (sWildShifts[i].when & watchBit))
+            return sWildShifts[i].species;
+    }
+    return species;
+}
+
+// T-407: so the INDEX's area map marks a road for a daemon met there in any season or watch.
+bool8 WildShiftsPlaceSpeciesOnMap(u8 mapGroup, u8 mapNum, u16 species)
+{
+    u32 i;
+
+    for (i = 0; i < ARRAY_COUNT(sWildShifts); i++)
+    {
+        if (sWildShifts[i].mapGroup == mapGroup && sWildShifts[i].mapNum == mapNum && sWildShifts[i].species == species)
+            return TRUE;
+    }
+    return FALSE;
 }
 
 static u8 ChooseWildMonIndex_Land(void)
@@ -295,7 +331,10 @@ static bool8 TryGenerateWildMon(const struct WildPokemonInfo * info, u8 area, u8
     {
         return FALSE;
     }
-    GenerateWildMon(info->wildPokemon[slot].species, level, slot);
+    if (area == WILD_AREA_LAND)
+        GenerateWildMon(WildShiftSpecies(info->wildPokemon[slot].species, slot), level, slot);   // T-407
+    else
+        GenerateWildMon(info->wildPokemon[slot].species, level, slot);
     return TRUE;
 }
 
@@ -531,6 +570,12 @@ void FishingWildEncounter(u8 rod)
     StartWildBattle();
 }
 
+static u16 GetLocalLandMon(const struct WildPokemonInfo * landMonsInfo)
+{
+    u8 slot = ChooseWildMonIndex_Land();
+    return WildShiftSpecies(landMonsInfo->wildPokemon[slot].species, slot);
+}
+
 u16 GetLocalWildMon(bool8 *isWaterMon)
 {
     u16 headerId;
@@ -548,7 +593,7 @@ u16 GetLocalWildMon(bool8 *isWaterMon)
         return SPECIES_NONE;
         // Land Pokemon
     else if (landMonsInfo != NULL && waterMonsInfo == NULL)
-        return landMonsInfo->wildPokemon[ChooseWildMonIndex_Land()].species;
+        return GetLocalLandMon(landMonsInfo);   // T-407: the season and the hour, as an encounter would
         // Water Pokemon
     else if (landMonsInfo == NULL && waterMonsInfo != NULL)
     {
@@ -558,7 +603,7 @@ u16 GetLocalWildMon(bool8 *isWaterMon)
     // Either land or water Pokemon
     if ((Random() % 100) < 80)
     {
-        return landMonsInfo->wildPokemon[ChooseWildMonIndex_Land()].species;
+        return GetLocalLandMon(landMonsInfo);   // T-407: the season and the hour, as an encounter would
     }
     else
     {

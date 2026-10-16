@@ -263,6 +263,9 @@ static bool32 IsSpeciesOnMap(const struct WildPokemonHeader * data, s32 species)
 {
     if (IsSpeciesInEncounterTable(data->landMonsInfo, species, LAND_WILD_COUNT))
         return TRUE;
+    // T-407 (the user, 2026-10-16): a daemon met here in some season or watch is marked here in any of them.
+    if (data->landMonsInfo != NULL && WildShiftsPlaceSpeciesOnMap(data->mapGroup, data->mapNum, species))
+        return TRUE;
     if (IsSpeciesInEncounterTable(data->waterMonsInfo, species, WATER_WILD_COUNT))
         return TRUE;
 // When searching the fishing encounters, this incorrectly uses the size of the land encounters.
