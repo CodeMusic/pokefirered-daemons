@@ -28,6 +28,8 @@
 #include "constants/sound.h"
 #include "pokedex_area_markers.h"
 #include "field_specials.h"
+#include "daemons_time.h"
+#include "data/daemons_native.h"   // T-407: tools/gbanative.py
 
 #define TAG_AREA_MARKERS 2001
 
@@ -675,6 +677,17 @@ const struct WindowTemplate sWindowTemplate_AreaMap_Size = {
     .height = 2,
     .paletteNum = 0,
     .baseBlock = 0x01d0
+};
+
+//  T-407: NATIVE, in the frame vanilla drew around the size comparison (tiles 1..12 x 9..16; this is its inside).
+static const struct WindowTemplate sWindowTemplate_AreaMap_Native = {
+    .bg = 2,
+    .tilemapLeft = 2,
+    .tilemapTop = 10,
+    .width = 10,
+    .height = 6,
+    .paletteNum = 0,
+    .baseBlock = 0x02d8
 };
 
 const struct WindowTemplate sWindowTemplate_AreaMap_Area = {
@@ -3597,6 +3610,100 @@ u8 RemoveDexPageWindows(void)
     return 0;
 }
 
+//  T-407 (the user, 2026-10-16): the box vanilla used for the size comparison says what a daemon is NATIVE to -- its
+//  region, and its edition, hours and seasons when it keeps to some -- read from every wild table and the season and
+//  hour rows (tools/gbanative.py). A grove's daemon names its universe once seen, "A GROVE" before.
+static const u8 sText_Native[] = _("NATIVE");                       // T-407, DRAFT
+static const u8 sText_NativeGamut[] = _("GAMUT");                   // T-407, DRAFT
+static const u8 sText_NativeMargins[] = _("THE MARGINS");           // T-407, DRAFT
+static const u8 sText_NativeBoth[] = _("GAMUT, MARGINS");           // T-407, DRAFT
+static const u8 sText_NativeContent[] = _("CONTENT ONLY");          // T-407, DRAFT
+static const u8 sText_NativeContext[] = _("CONTEXT ONLY");          // T-407, DRAFT
+static const u8 sText_NativeGrove[] = _("A GROVE");                 // T-407, DRAFT
+static const u8 sText_NativeNotWild[] = _("NOT IN THE WILD");       // T-407, DRAFT
+static const u8 sText_NativeComma[] = _(", ");
+static const u8 sText_NativeNot[] = _("NOT ");                      // T-407, DRAFT: "NOT AT NIGHT", "NOT IN WINTER"
+static const u8 sText_NativeAt[] = _("AT ");
+static const u8 sText_NativeIn[] = _("IN ");
+static const u8 sText_NativeWinter[] = _("WINTER");                // T-407, DRAFT
+static const u8 sText_NativeSpring[] = _("SPRING");                // T-407, DRAFT
+static const u8 sText_NativeSummer[] = _("SUMMER");                // T-407, DRAFT
+static const u8 sText_NativeAutumn[] = _("AUTUMN");                // T-407, DRAFT
+static const u8 sText_NativeDay[] = _("DAY");                      // T-407, DRAFT
+static const u8 sText_NativeDusk[] = _("DUSK");                    // T-407, DRAFT
+static const u8 sText_NativeNight[] = _("NIGHT");                  // T-407, DRAFT
+static const u8 sText_NativeDawn[] = _("DAWN");                    // T-407, DRAFT
+static const u8 *const sNativeSeason[SEASON_COUNT] = { sText_NativeWinter, sText_NativeSpring, sText_NativeSummer, sText_NativeAutumn };
+static const u8 *const sNativeWatch[WATCH_COUNT] = { sText_NativeDay, sText_NativeDusk, sText_NativeNight, sText_NativeDawn };
+
+//  Names the set bits of a four-bit field into dst: all four say nothing (FALSE); three say "NOT <the missing one>",
+//  with AT or IN before it; one or two are listed.
+static bool8 DexScreen_NativeList(u8 *dst, u8 bits, const u8 *const *names, const u8 *prep)
+{
+    u8 i, count = 0;
+
+    for (i = 0; i < 4; i++)
+        count += (bits >> i) & 1;
+    *dst = EOS;
+    if (count == 4 || count == 0)
+        return FALSE;
+    if (count == 3)
+    {
+        for (i = 0; i < 4; i++)
+            if (!((bits >> i) & 1))
+                break;
+        StringAppend(StringAppend(StringCopy(dst, sText_NativeNot), prep), names[i]);
+        return TRUE;
+    }
+    for (i = 0; i < 4; i++)
+    {
+        if (!((bits >> i) & 1))
+            continue;
+        if (*dst != EOS)
+            StringAppend(dst, sText_NativeComma);
+        StringAppend(dst, names[i]);
+    }
+    return TRUE;
+}
+
+static void DexScreen_PrintNative(u16 species)
+{
+    u8 win = sPokedexScreenData->windowIds[13] = AddWindow(&sWindowTemplate_AreaMap_Native);
+    u16 native = species < NUM_SPECIES ? sDaemonsNative[species] : 0;
+    u8 line[32];
+    u8 y = 0;
+
+    FillWindowPixelBuffer(win, PIXEL_FILL(0));
+    if (native == 0)
+    {
+        DexScreen_AddTextPrinterParameterized(win, FONT_SMALL, sText_NativeNotWild, 0, y, 0);
+    }
+    else
+    {
+        if (native >> 12)
+            DexScreen_AddTextPrinterParameterized(win, FONT_SMALL,
+                DexScreen_GetSetPokedexFlag(species, FLAG_GET_SEEN, TRUE) ? sDaemonsNativeGrove[native >> 12] : sText_NativeGrove, 0, y, 0);
+        else
+            DexScreen_AddTextPrinterParameterized(win, FONT_SMALL,
+                (native & 3) == 3 ? sText_NativeBoth : (native & 2) ? sText_NativeMargins : sText_NativeGamut, 0, y, 0);
+        y += 12;
+        if (((native >> 2) & 3) != 3)
+        {
+            DexScreen_AddTextPrinterParameterized(win, FONT_SMALL, (native & 4) ? sText_NativeContent : sText_NativeContext, 0, y, 0);
+            y += 12;
+        }
+        if (DexScreen_NativeList(line, (native >> 8) & 15, sNativeWatch, sText_NativeAt))
+        {
+            DexScreen_AddTextPrinterParameterized(win, FONT_SMALL, line, 0, y, 0);
+            y += 12;
+        }
+        if (DexScreen_NativeList(line, (native >> 4) & 15, sNativeSeason, sText_NativeIn))
+            DexScreen_AddTextPrinterParameterized(win, FONT_SMALL, line, 0, y, 0);
+    }
+    PutWindowTilemap(win);
+    CopyWindowToVram(win, COPYWIN_GFX);
+}
+
 u8 DexScreen_DrawMonAreaPage(void)
 {
     int i;
@@ -3679,8 +3786,8 @@ u8 DexScreen_DrawMonAreaPage(void)
     // Print "Size"
     FillWindowPixelBuffer(sPokedexScreenData->windowIds[9], PIXEL_FILL(0));
     {
-        s32 strWidth = GetStringWidth(FONT_SMALL, gText_Size, 0);
-        DexScreen_AddTextPrinterParameterized(sPokedexScreenData->windowIds[9], FONT_SMALL, gText_Size, (sWindowTemplate_AreaMap_Size.width * 8 - strWidth) / 2, 4, 0);
+        s32 strWidth = GetStringWidth(FONT_SMALL, sText_Native, 0);   // T-407: was SIZE
+        DexScreen_AddTextPrinterParameterized(sPokedexScreenData->windowIds[9], FONT_SMALL, sText_Native, (sWindowTemplate_AreaMap_Size.width * 8 - strWidth) / 2, 4, 0);
     }
     PutWindowTilemap(sPokedexScreenData->windowIds[9]);
     CopyWindowToVram(sPokedexScreenData->windowIds[9], COPYWIN_GFX);
@@ -3715,32 +3822,10 @@ u8 DexScreen_DrawMonAreaPage(void)
     PutWindowTilemap(sPokedexScreenData->windowIds[12]);
     CopyWindowToVram(sPokedexScreenData->windowIds[12], COPYWIN_GFX);
 
-    // Show size comparison
-    ResetAllPicSprites();
-    LoadPalette(sPalette_Silhouette, OBJ_PLTT_ID(2), PLTT_SIZE_4BPP);
-
-    if (monIsCaught)
-    {
-        sPokedexScreenData->windowIds[14] = CreateMonPicSprite_HandleDeoxys(species, SHINY_ODDS, DexScreen_GetDefaultPersonality(species), TRUE, 40, 104, 0, 0xFFFF);
-        gSprites[sPokedexScreenData->windowIds[14]].oam.paletteNum = 2;
-        gSprites[sPokedexScreenData->windowIds[14]].oam.affineMode = ST_OAM_AFFINE_NORMAL;
-        gSprites[sPokedexScreenData->windowIds[14]].oam.matrixNum = 2;
-        gSprites[sPokedexScreenData->windowIds[14]].oam.priority = 1;
-        gSprites[sPokedexScreenData->windowIds[14]].y2 = gPokedexEntries[speciesId].pokemonOffset;
-        SetOamMatrix(2, gPokedexEntries[speciesId].pokemonScale, 0, 0, gPokedexEntries[speciesId].pokemonScale);
-        sPokedexScreenData->windowIds[15] = CreateTrainerPicSprite(PlayerGenderToFrontTrainerPicId(gSaveBlock2Ptr->playerGender, TRUE), 1, 80, 104, 0, 0xFFFF);
-        gSprites[sPokedexScreenData->windowIds[15]].oam.paletteNum = 2;
-        gSprites[sPokedexScreenData->windowIds[15]].oam.affineMode = ST_OAM_AFFINE_NORMAL;
-        gSprites[sPokedexScreenData->windowIds[15]].oam.matrixNum = 1;
-        gSprites[sPokedexScreenData->windowIds[15]].oam.priority = 1;
-        gSprites[sPokedexScreenData->windowIds[15]].y2 = gPokedexEntries[speciesId].trainerOffset;
-        SetOamMatrix(1, gPokedexEntries[speciesId].trainerScale, 0, 0, gPokedexEntries[speciesId].trainerScale);
-    }
-    else
-    {
-        sPokedexScreenData->windowIds[14] = 0xff;
-        sPokedexScreenData->windowIds[15] = 0xff;
-    }
+    // T-407: NATIVE in place of the size comparison -- no silhouettes
+    sPokedexScreenData->windowIds[14] = 0xff;
+    sPokedexScreenData->windowIds[15] = 0xff;
+    DexScreen_PrintNative(species);
 
     // Create the area markers
     sPokedexScreenData->areaMarkersTaskId = CreatePokedexAreaMarkers(species, TAG_AREA_MARKERS, 3, kantoMapVoff * 8);
@@ -3772,7 +3857,7 @@ u8 DexScreen_DestroyAreaScreenResources(void)
 
     DestroyPokedexAreaMarkers(sPokedexScreenData->areaMarkersTaskId);
 
-    for (i = 0; i < 13; i++)
+    for (i = 0; i < 14; i++)   // T-407: 13 is NATIVE
         DexScreen_RemoveWindow(&sPokedexScreenData->windowIds[i]);
     if (sPokedexScreenData->windowIds[15] != 0xff)
         FreeAndDestroyTrainerPicSprite(sPokedexScreenData->windowIds[15]);
