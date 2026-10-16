@@ -2960,7 +2960,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_TamerJason),
+        .party = NO_ITEM_CUSTOM_MOVES(sParty_TamerJason),
     },
     [TRAINER_TAMER_COLE] = {
         .trainerClass = TRAINER_CLASS_TAMER,
@@ -2970,7 +2970,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_TamerCole),
+        .party = NO_ITEM_CUSTOM_MOVES(sParty_TamerCole),
     },
     [TRAINER_TAMER_VINCENT] = {
         .trainerClass = TRAINER_CLASS_TAMER,
@@ -3220,7 +3220,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .party = ITEM_DEFAULT_MOVES(sParty_BlackBeltAtsushi),
+        .party = ITEM_CUSTOM_MOVES(sParty_BlackBeltAtsushi),
     },
     [TRAINER_BLACK_BELT_KIYO] = {
         .trainerClass = TRAINER_CLASS_BLACK_BELT,
@@ -3230,7 +3230,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .party = ITEM_DEFAULT_MOVES(sParty_BlackBeltKiyo),
+        .party = ITEM_CUSTOM_MOVES(sParty_BlackBeltKiyo),
     },
     [TRAINER_BLACK_BELT_TAKASHI] = {
         .trainerClass = TRAINER_CLASS_BLACK_BELT,
@@ -3240,7 +3240,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .party = ITEM_DEFAULT_MOVES(sParty_BlackBeltTakashi),
+        .party = ITEM_CUSTOM_MOVES(sParty_BlackBeltTakashi),
     },
     [TRAINER_BLACK_BELT_DAISUKE] = {
         .trainerClass = TRAINER_CLASS_BLACK_BELT,

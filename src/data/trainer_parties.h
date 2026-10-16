@@ -3217,24 +3217,30 @@ static const struct TrainerMonNoItemDefaultMoves sParty_TamerEdgar[] = {
     },
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_TamerJason[] = {
+// SCORN's gym echoes him (the user, 2026-10-16): every daemon of its eight trainers -- the three BLACK BELTs, the three
+// COOLTRAINERs and both TAMERs -- carries his four routines in his order (T-413), so the whole building wears one
+// streak, with his hole, before the leader. Species, levels and held items are vanilla's.
+static const struct TrainerMonNoItemCustomMoves sParty_TamerJason[] = {
     {
         .iv = 40,
         .lvl = 43,
         .species = SPECIES_RHYHORN,
+        .moves = {MOVE_EARTHQUAKE, MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_FLAMETHROWER},
     },
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_TamerCole[] = {
+static const struct TrainerMonNoItemCustomMoves sParty_TamerCole[] = {
     {
         .iv = 40,
         .lvl = 39,
         .species = SPECIES_ARBOK,
+        .moves = {MOVE_EARTHQUAKE, MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_FLAMETHROWER},
     },
     {
         .iv = 40,
         .lvl = 39,
         .species = SPECIES_TAUROS,
+        .moves = {MOVE_EARTHQUAKE, MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_FLAMETHROWER},
     },
 };
 
@@ -3651,48 +3657,54 @@ static const struct TrainerMonItemDefaultMoves sParty_BlackBeltHitoshi[] = {
     },
 };
 
-static const struct TrainerMonItemDefaultMoves sParty_BlackBeltAtsushi[] = {
+static const struct TrainerMonItemCustomMoves sParty_BlackBeltAtsushi[] = {
     {
         .iv = 100,
         .lvl = 40,
         .species = SPECIES_MACHOP,
         .heldItem = ITEM_BLACK_BELT,
+        .moves = {MOVE_EARTHQUAKE, MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_FLAMETHROWER},
     },
     {
         .iv = 100,
         .lvl = 40,
         .species = SPECIES_MACHOKE,
         .heldItem = ITEM_BLACK_BELT,
+        .moves = {MOVE_EARTHQUAKE, MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_FLAMETHROWER},
     },
 };
 
-static const struct TrainerMonItemDefaultMoves sParty_BlackBeltKiyo[] = {
+static const struct TrainerMonItemCustomMoves sParty_BlackBeltKiyo[] = {
     {
         .iv = 100,
         .lvl = 43,
         .species = SPECIES_MACHOKE,
         .heldItem = ITEM_BLACK_BELT,
+        .moves = {MOVE_EARTHQUAKE, MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_FLAMETHROWER},
     },
 };
 
-static const struct TrainerMonItemDefaultMoves sParty_BlackBeltTakashi[] = {
+static const struct TrainerMonItemCustomMoves sParty_BlackBeltTakashi[] = {
     {
         .iv = 100,
         .lvl = 38,
         .species = SPECIES_MACHOKE,
         .heldItem = ITEM_BLACK_BELT,
+        .moves = {MOVE_EARTHQUAKE, MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_FLAMETHROWER},
     },
     {
         .iv = 100,
         .lvl = 38,
         .species = SPECIES_MACHOP,
         .heldItem = ITEM_BLACK_BELT,
+        .moves = {MOVE_EARTHQUAKE, MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_FLAMETHROWER},
     },
     {
         .iv = 100,
         .lvl = 38,
         .species = SPECIES_MACHOKE,
         .heldItem = ITEM_BLACK_BELT,
+        .moves = {MOVE_EARTHQUAKE, MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_FLAMETHROWER},
     },
 };
 
@@ -4865,31 +4877,31 @@ static const struct TrainerMonNoItemCustomMoves sParty_CooltrainerSamuel[] = {
         .iv = 100,
         .lvl = 37,
         .species = SPECIES_SANDSLASH,
-        .moves = {MOVE_SLASH, MOVE_SWIFT, MOVE_SAND_ATTACK, MOVE_POISON_STING},
+        .moves = {MOVE_EARTHQUAKE, MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_FLAMETHROWER},
     },
     {
         .iv = 100,
         .lvl = 37,
         .species = SPECIES_SANDSLASH,
-        .moves = {MOVE_SLASH, MOVE_SWIFT, MOVE_SAND_ATTACK, MOVE_POISON_STING},
+        .moves = {MOVE_EARTHQUAKE, MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_FLAMETHROWER},
     },
     {
         .iv = 100,
         .lvl = 38,
         .species = SPECIES_RHYHORN,
-        .moves = {MOVE_TAKE_DOWN, MOVE_ROCK_BLAST, MOVE_FURY_ATTACK, MOVE_SCARY_FACE},
+        .moves = {MOVE_EARTHQUAKE, MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_FLAMETHROWER},
     },
     {
         .iv = 100,
         .lvl = 39,
         .species = SPECIES_NIDORINO,
-        .moves = {MOVE_FURY_ATTACK, MOVE_HORN_ATTACK, MOVE_POISON_STING, MOVE_DOUBLE_KICK},
+        .moves = {MOVE_EARTHQUAKE, MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_FLAMETHROWER},
     },
     {
         .iv = 100,
         .lvl = 39,
         .species = SPECIES_NIDOKING,
-        .moves = {MOVE_THRASH, MOVE_DOUBLE_KICK, MOVE_POISON_STING, MOVE_FOCUS_ENERGY},
+        .moves = {MOVE_EARTHQUAKE, MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_FLAMETHROWER},
     },
 };
 
@@ -5129,31 +5141,31 @@ static const struct TrainerMonNoItemCustomMoves sParty_CooltrainerYuji[] = {
         .iv = 100,
         .lvl = 38,
         .species = SPECIES_SANDSLASH,
-        .moves = {MOVE_SLASH, MOVE_SWIFT, MOVE_SAND_ATTACK, MOVE_POISON_STING},
+        .moves = {MOVE_EARTHQUAKE, MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_FLAMETHROWER},
     },
     {
         .iv = 100,
         .lvl = 38,
         .species = SPECIES_GRAVELER,
-        .moves = {MOVE_ROCK_BLAST, MOVE_MAGNITUDE, MOVE_MUD_SPORT, MOVE_DEFENSE_CURL},
+        .moves = {MOVE_EARTHQUAKE, MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_FLAMETHROWER},
     },
     {
         .iv = 100,
         .lvl = 38,
         .species = SPECIES_ONIX,
-        .moves = {MOVE_DRAGON_BREATH, MOVE_SANDSTORM, MOVE_ROCK_THROW, MOVE_BIND},
+        .moves = {MOVE_EARTHQUAKE, MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_FLAMETHROWER},
     },
     {
         .iv = 100,
         .lvl = 38,
         .species = SPECIES_GRAVELER,
-        .moves = {MOVE_ROCK_BLAST, MOVE_MAGNITUDE, MOVE_ROLLOUT, MOVE_DEFENSE_CURL},
+        .moves = {MOVE_EARTHQUAKE, MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_FLAMETHROWER},
     },
     {
         .iv = 100,
         .lvl = 38,
         .species = SPECIES_MAROWAK,
-        .moves = {MOVE_BONEMERANG, MOVE_HEADBUTT, MOVE_LEER, MOVE_GROWL},
+        .moves = {MOVE_EARTHQUAKE, MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_FLAMETHROWER},
     },
 };
 
@@ -5162,31 +5174,31 @@ static const struct TrainerMonNoItemCustomMoves sParty_CooltrainerWarren[] = {
         .iv = 100,
         .lvl = 37,
         .species = SPECIES_MAROWAK,
-        .moves = {MOVE_BONEMERANG, MOVE_HEADBUTT, MOVE_LEER, MOVE_GROWL},
+        .moves = {MOVE_EARTHQUAKE, MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_FLAMETHROWER},
     },
     {
         .iv = 100,
         .lvl = 37,
         .species = SPECIES_MAROWAK,
-        .moves = {MOVE_BONEMERANG, MOVE_HEADBUTT, MOVE_LEER, MOVE_GROWL},
+        .moves = {MOVE_EARTHQUAKE, MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_FLAMETHROWER},
     },
     {
         .iv = 100,
         .lvl = 38,
         .species = SPECIES_RHYHORN,
-        .moves = {MOVE_TAKE_DOWN, MOVE_ROCK_BLAST, MOVE_FURY_ATTACK, MOVE_SCARY_FACE},
+        .moves = {MOVE_EARTHQUAKE, MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_FLAMETHROWER},
     },
     {
         .iv = 100,
         .lvl = 39,
         .species = SPECIES_NIDORINA,
-        .moves = {MOVE_FURY_SWIPES, MOVE_BITE, MOVE_POISON_STING, MOVE_DOUBLE_KICK},
+        .moves = {MOVE_EARTHQUAKE, MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_FLAMETHROWER},
     },
     {
         .iv = 100,
         .lvl = 39,
         .species = SPECIES_NIDOQUEEN,
-        .moves = {MOVE_BODY_SLAM, MOVE_BITE, MOVE_POISON_STING, MOVE_DOUBLE_KICK},
+        .moves = {MOVE_EARTHQUAKE, MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_FLAMETHROWER},
     },
 };
 
