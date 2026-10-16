@@ -44,6 +44,7 @@
 #include "daemons_time.h"
 #include "constants/event_objects.h"
 #include "constants/metatile_labels.h"
+#include "scanline_effect.h"
 
 static EWRAM_DATA u8 sElevatorCurrentFloorWindowId = 0;
 static EWRAM_DATA u16 sElevatorScroll = 0;
@@ -1899,6 +1900,79 @@ void SingingFir_Sing(void)
 #undef tTimer
 #undef tInKey
 #undef tTreePal
+
+// GOAL B (the user, 2026-09-24: "too bad we couldn't simulate a glitch effect -- there are a lot of places where it
+// would fit"). A few frames of the picture tearing: bands of the map's middle layer slide sideways while the others
+// hold still, and the map's palettes flicker toward a wrong colour, then everything settles back. DRAFT, and placed
+// nowhere yet -- the user's caution stands (vision.md: a glitch reads as the world breaking), so where it goes is
+// theirs; DEBUG -> SOUND -> GLITCH plays it. `special DaemonsGlitch` then `waitstate`; VAR_0x8004 is how many
+// frames (0: 40). Not under FLASH, whose darkness is the same HBlank DMA.
+#define tFrames data[0]
+#define tTimer  data[1]
+#define tTorn   data[2] // the HBlank DMA is ours to stop
+
+static void Task_DaemonsGlitch(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    u16 *lines, base;
+    s16 shift;
+    u8 y, i, band;
+
+    if (tTimer >= tFrames)
+    {
+        if (tTorn)
+            ScanlineEffect_Stop();
+        BlendPalettes(FIR_MAP_PALETTES, 0, RGB_BLACK);
+        DestroyTask(taskId);
+        ScriptContext_Enable();
+        return;
+    }
+    lines = gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer];
+    base = GetGpuReg(REG_OFFSET_BG2HOFS);
+    for (y = 0; y < DISPLAY_HEIGHT;)
+    {
+        band = 2 + Random() % 14;
+        //  Heavier in the middle of the run, a flicker at either end.
+        if (Random() % 4 == 0 || (tTimer > tFrames / 4 && tTimer < tFrames * 3 / 4 && Random() % 2))
+            shift = (s16)(Random() % 49) - 24;
+        else
+            shift = 0;
+        for (i = 0; i < band && y < DISPLAY_HEIGHT; i++, y++)
+            lines[y] = base + shift;
+    }
+    if (!gPaletteFade.active)
+    {
+        if (Random() % 3 == 0)
+            BlendPalettes(FIR_MAP_PALETTES, 4 + Random() % 8, RGB(Random() % 32, Random() % 32, Random() % 32));
+        else
+            BlendPalettes(FIR_MAP_PALETTES, 0, RGB_BLACK);
+    }
+    tTimer++;
+}
+
+void DaemonsGlitch(void)
+{
+    u8 taskId = CreateTask(Task_DaemonsGlitch, 80);
+
+    gTasks[taskId].tFrames = gSpecialVar_0x8004 ? gSpecialVar_0x8004 : 40;
+    if (Overworld_GetFlashLevel() != 0)
+    {
+        gTasks[taskId].tFrames = 0; // the dark is already this DMA's
+        return;
+    }
+    gTasks[taskId].tTorn = TRUE;
+    ScanlineEffect_Clear();
+    ScanlineEffect_SetParams((struct ScanlineEffectParams){
+        .dmaDest = &REG_BG2HOFS,
+        .dmaControl = SCANLINE_EFFECT_DMACNT_16BIT,
+        .initState = 1,
+        .unused9 = 0
+    });
+}
+
+#undef tFrames
+#undef tTimer
+#undef tTorn
 
 // T-264: THE TERMINAL NEVER SAYS THE SAME THING TWICE RUNNING (the user, 2026-09-25: typing HELP in the emulator kept
 // giving the same answer). VAR_0x8004 is how many answers there are, VAR_0x8005 the var that remembers the last one,

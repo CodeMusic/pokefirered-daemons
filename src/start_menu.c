@@ -101,6 +101,7 @@ enum StartMenuOption
     STARTMENU_DBG_SEASON,    // T-359
     STARTMENU_DBG_SONG,
     STARTMENU_DBG_SFX,
+    STARTMENU_DBG_GLITCH,    // goal B: the glitch, placed nowhere yet
     STARTMENU_DBG_BACK,
 #endif
     MAX_STARTMENU_ITEMS
@@ -187,6 +188,7 @@ static bool8 DbgSeasonCallback(void);
 static bool8 DbgHandleStepInput(void);
 static bool8 DbgSongCallback(void);
 static bool8 DbgWatchCallback(void);
+static bool8 DbgGlitchCallback(void);
 static void DbgRelight(void);
 static bool8 DbgSfxCallback(void);
 static bool8 DbgBackCallback(void);
@@ -264,6 +266,7 @@ static const struct MenuAction sStartMenuActionTable[] = {
     [STARTMENU_DBG_WATCH] = { gText_DbgMenuWatch, {.u8_void = DbgWatchCallback} },
     [STARTMENU_DBG_SONG] = { gText_DbgMenuSong, {.u8_void = DbgSongCallback} },
     [STARTMENU_DBG_SFX]  = { gText_DbgMenuSfx,  {.u8_void = DbgSfxCallback} },
+    [STARTMENU_DBG_GLITCH] = { gText_DbgMenuGlitch, {.u8_void = DbgGlitchCallback} },
     [STARTMENU_DBG_BACK] = { gText_DbgMenuBack, {.u8_void = DbgBackCallback} }
 #endif
 };
@@ -323,6 +326,7 @@ static const u8 *const sStartMenuDescPointers[] = {
     gStartMenuDesc_DbgSeason,
     gStartMenuDesc_DbgSong,
     gStartMenuDesc_DbgSfx,
+    gStartMenuDesc_DbgGlitch,
     gStartMenuDesc_DbgBack,
 #endif
 };
@@ -459,6 +463,7 @@ static void SetUpStartMenu(void)
     {
         AppendToStartMenuItems(STARTMENU_DBG_SONG);
         AppendToStartMenuItems(STARTMENU_DBG_SFX);
+        AppendToStartMenuItems(STARTMENU_DBG_GLITCH);
         AppendToStartMenuItems(STARTMENU_DBG_BACK);
         return;
     }
@@ -1038,6 +1043,7 @@ static bool8 IsDaemonsDebugCallback(void)
         || sStartMenuCallback == DbgSongCallback
         || sStartMenuCallback == DbgWatchCallback
         || sStartMenuCallback == DbgSfxCallback
+        || sStartMenuCallback == DbgGlitchCallback // stays on the map: no fade to black behind it
         || sStartMenuCallback == DbgEventsCallback   // T-394: GAME EVENTS opens over the map
         || sStartMenuCallback == DbgSoundCallback
         || sStartMenuCallback == DbgBackCallback;
@@ -1503,6 +1509,11 @@ static bool8 DbgMoreCallback(void)
 static bool8 DbgFirCallback(void)
 {
     return DbgLeaveMenuForScript(DaemonsDebug_EventScript_Fir);
+}
+
+static bool8 DbgGlitchCallback(void)
+{
+    return DbgLeaveMenuForScript(DaemonsDebug_EventScript_Glitch);
 }
 
 static bool8 DbgWitnessCallback(void)

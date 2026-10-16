@@ -707,6 +707,7 @@ extern const u8 gText_DbgAutumn[];
 extern const u8 gText_DbgMenuSong[];
 extern const u8 gText_DbgMenuSfx[];
 extern const u8 gText_DbgMenuWatch[];
+extern const u8 gText_DbgMenuGlitch[];
 extern const u8 gText_DbgSun[];
 extern const u8 gText_DbgMon[];
 extern const u8 gText_DbgTue[];
@@ -747,6 +748,7 @@ extern const u8 gStartMenuDesc_DbgSeason[];
 extern const u8 gStartMenuDesc_DbgSong[];
 extern const u8 gStartMenuDesc_DbgSfx[];
 extern const u8 gStartMenuDesc_DbgWatch[];
+extern const u8 gStartMenuDesc_DbgGlitch[];
 extern const u8 gStartMenuDesc_DbgBack[];
 #endif
 extern const u8 gText_MenuExit[];

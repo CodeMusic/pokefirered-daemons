@@ -182,6 +182,7 @@ const u8 gText_MenuOption[] = _("OPTION");
 const u8 gText_MenuDebug[] = _("DEBUG");
 const u8 gText_DbgMenuEvents[] = _("GAME EVENTS");   // T-394
 const u8 gText_DbgMenuSound[] = _("SOUND");
+const u8 gText_DbgMenuGlitch[] = _("GLITCH");
 const u8 gText_DbgMenuHeal[] = _("HEAL");
 const u8 gText_DbgMenuMart[] = _("MART");
 const u8 gText_DbgMenuRecord[] = _("RECORD");
@@ -1052,6 +1053,7 @@ const u8 gStartMenuDesc_DbgDevice[] = _("Answer the party's AWAY requests,\nas t
 const u8 gStartMenuDesc_DbgSeason[] = _("A: the season. AUTO follows the clock,\nor play time. Flowers on the next map.");
 const u8 gStartMenuDesc_DbgSong[] = _("Play the next track in the table.");
 const u8 gStartMenuDesc_DbgSfx[] = _("Play the next sound effect.");
+const u8 gStartMenuDesc_DbgGlitch[] = _("The glitch effect, on this map.\nPlaced nowhere in the game yet.");
 const u8 gStartMenuDesc_DbgWatch[] = _("A: time of day. LEFT/RIGHT: weekday.\nAUTO follows the clock, or play time.");
 const u8 gStartMenuDesc_DbgBack[] = _("Back, and restore this map's music.");
 #endif

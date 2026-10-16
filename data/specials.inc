@@ -367,6 +367,7 @@ gSpecials::
 	def_special Guide_OpenBoardCopy
 	def_special DaemonsRepaintPlayerShoes
 	def_special SingingFir_Sing
+	def_special DaemonsGlitch
 	def_special DaemonsHoldsEveryUnderstanding
 	def_special DaemonsDreamCountHeal
 	def_special DaemonsDreamTell

@@ -207,6 +207,15 @@ DaemonsDebug_EventScript_Warden::
 
 @  FIR (T-10). The S.S. ANNE sailed (so her voyage is over, as ISLANDS warns), the fir not yet heard in its key, the
 @  band's sheet in the NOTEBOOK or not, and the pier's far strip beside the fir -- which otherwise takes SURF.
+@ Goal B: the glitch, on whatever map you are on.
+DaemonsDebug_EventScript_Glitch::
+	lockall
+	setvar VAR_0x8004, 0
+	special DaemonsGlitch
+	waitstate
+	releaseall
+	end
+
 DaemonsDebug_EventScript_Fir::
 	lockall
 	msgbox DaemonsDebug_Text_Fir, MSGBOX_YESNO
