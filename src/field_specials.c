@@ -1785,30 +1785,72 @@ struct FirNote
     s8 inKey;       // semitones from that natural, in the key
     s8 withoutKey;  // and without it
     u8 frames;
+    u8 colour;      // T-409: the painting's colour, FIR_* below
 };
+
+// T-409: THE NOTES SEEN (the user, 2026-10-16, from THE PAINTED MIRROR's fourth episode: the tree sparkles a different
+// colour as each note sounds). The painting's colours are the user's seven -- C red, D orange, E yellow, F green, G blue,
+// A indigo, B violet -- and read that way it is the tune in B-flat, its two flats "the purple B and the yellow E"; the
+// fir sings it a step lower. A flat is a blend of its natural and the note below, so in the key the yellow and purple
+// notes warm and deepen, and without it they are the plain naturals: right to look at, wrong to hear. Subtle, but also
+// not: the map takes a little of each note and the fir a lot, fading over the note.
+enum { FIR_RED, FIR_ORANGE, FIR_YELLOW, FIR_BLUE, FIR_PURPLE };
+static const u16 sFirColour[][2] = { // without the key, in it
+    [FIR_RED]    = { RGB(31,  0,  0), RGB(31,  0,  0) },
+    [FIR_ORANGE] = { RGB(31, 16,  0), RGB(31, 16,  0) },
+    [FIR_YELLOW] = { RGB(31, 31,  0), RGB(31, 24,  0) }, // E, E-flat (yellow into orange)
+    [FIR_BLUE]   = { RGB( 0,  0, 31), RGB( 0,  0, 31) },
+    [FIR_PURPLE] = { RGB(24,  0, 31), RGB(16,  0, 24) }, // B, B-flat (violet into indigo)
+};
+#define FIR_MAP_PALETTES 0x1FFF // the map's thirteen; 13-15 are the message box's
+#define FIR_MAP_PEAK     5
+#define FIR_TREE_PEAK    11
 
 static const struct FirNote sFirTune[] =
 {
-    { 2, -1,  0, 30 },  // yellow  E-flat   O
-    { 5, -1,  0, 22 },  // purple  A-flat   Christ-
-    { 5, -1,  0,  8 },  // purple  A-flat   -mas
-    { 5, -1,  0, 40 },  // purple  A-flat   tree,
-    { 6, -1, -1, 18 },  // red     B-flat   O
-    { 7,  0,  0, 22 },  // orange  C        Christ-
-    { 7,  0,  0,  8 },  // orange  C        -mas
-    { 7,  0,  0, 40 },  // orange  C        tree,
-    { 7,  0,  0, 18 },  // orange  C        how
-    { 6, -1, -1, 18 },  // red     B-flat   love-
-    { 7,  0,  0, 18 },  // orange  C        -ly
-    { 7,  1,  2, 36 },  // yellow  D-flat   are
-    { 4,  0,  0, 30 },  // blue    G        your
-    { 6, -1, -1, 30 },  // red     B-flat   bran-
-    { 5, -1,  0, 72 },  // purple  A-flat   -ches.
+    { 2, -1,  0, 30, FIR_YELLOW },  // yellow  E-flat   O
+    { 5, -1,  0, 22, FIR_PURPLE },  // purple  A-flat   Christ-
+    { 5, -1,  0,  8, FIR_PURPLE },  // purple  A-flat   -mas
+    { 5, -1,  0, 40, FIR_PURPLE },  // purple  A-flat   tree,
+    { 6, -1, -1, 18, FIR_RED },  // red     B-flat   O
+    { 7,  0,  0, 22, FIR_ORANGE },  // orange  C        Christ-
+    { 7,  0,  0,  8, FIR_ORANGE },  // orange  C        -mas
+    { 7,  0,  0, 40, FIR_ORANGE },  // orange  C        tree,
+    { 7,  0,  0, 18, FIR_ORANGE },  // orange  C        how
+    { 6, -1, -1, 18, FIR_RED },  // red     B-flat   love-
+    { 7,  0,  0, 18, FIR_ORANGE },  // orange  C        -ly
+    { 7,  1,  2, 36, FIR_YELLOW },  // yellow  D-flat   are
+    { 4,  0,  0, 30, FIR_BLUE },  // blue    G        your
+    { 6, -1, -1, 30, FIR_RED },  // red     B-flat   bran-
+    { 5, -1,  0, 72, FIR_PURPLE },  // purple  A-flat   -ches.
 };
 
 #define tNote    data[0]
 #define tTimer   data[1]
 #define tInKey   data[2]
+#define tTreePal data[3] // the fir's sprite palette, or -1
+
+// The light of the note now sounding, fading as it is held; 0 frames left puts the palettes back.
+static void SingingFir_Light(s16 *data)
+{
+    const struct FirNote *note;
+    u16 colour;
+
+    if (gPaletteFade.active)
+        return;
+    if (tNote == 0 || tTimer == 0)
+    {
+        BlendPalettes(FIR_MAP_PALETTES, 0, RGB_BLACK);
+        if (tTreePal >= 0)
+            BlendPalettes(1 << (16 + tTreePal), 0, RGB_BLACK);
+        return;
+    }
+    note = &sFirTune[tNote - 1];
+    colour = sFirColour[note->colour][tInKey ? 1 : 0];
+    BlendPalettes(FIR_MAP_PALETTES, FIR_MAP_PEAK * tTimer / note->frames, colour);
+    if (tTreePal >= 0)
+        BlendPalettes(1 << (16 + tTreePal), (FIR_TREE_PEAK * tTimer + note->frames - 1) / note->frames, colour);
+}
 
 static void Task_SingingFir(u8 taskId)
 {
@@ -1818,10 +1860,12 @@ static void Task_SingingFir(u8 taskId)
     if (tTimer != 0)
     {
         tTimer--;
+        SingingFir_Light(data);
         return;
     }
     if (tNote >= (s16)ARRAY_COUNT(sFirTune))
     {
+        SingingFir_Light(data);
         DestroyTask(taskId);
         ScriptContext_Enable();
         return;
@@ -1832,18 +1876,26 @@ static void Task_SingingFir(u8 taskId)
     m4aMPlayImmInit(&gMPlayInfo_SE2);
     m4aMPlayPitchControl(&gMPlayInfo_SE2, TRACKS_ALL, (tInKey ? note->inKey : note->withoutKey) * 256);
     tTimer = note->frames;
+    SingingFir_Light(data);
 }
 
 void SingingFir_Sing(void)
 {
     u8 taskId = CreateTask(Task_SingingFir, 80);
+    u8 objectEventId;
+
     gTasks[taskId].tInKey = gSpecialVar_0x8004;
     gTasks[taskId].tTimer = 16;
+    gTasks[taskId].tTreePal = -1;
+    if (!TryGetObjectEventIdByLocalIdAndMap(gSpecialVar_LastTalked, gSaveBlock1Ptr->location.mapNum,
+                                            gSaveBlock1Ptr->location.mapGroup, &objectEventId))
+        gTasks[taskId].tTreePal = gSprites[gObjectEvents[objectEventId].spriteId].oam.paletteNum;
 }
 
 #undef tNote
 #undef tTimer
 #undef tInKey
+#undef tTreePal
 
 // T-264: THE TERMINAL NEVER SAYS THE SAME THING TWICE RUNNING (the user, 2026-09-25: typing HELP in the emulator kept
 // giving the same answer). VAR_0x8004 is how many answers there are, VAR_0x8005 the var that remembers the last one,

@@ -349,6 +349,7 @@ gSongTable::
 	song mus_brazen, 0, 0
 	song mus_slate, 0, 0
 	song mus_callow, 0, 0
+	song mus_nexus, 0, 0
 
 dummy_song_header:
 	.byte 0, 0, 0, 0

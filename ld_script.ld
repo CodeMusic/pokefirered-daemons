@@ -986,6 +986,7 @@ SECTIONS {
         sound/songs/midi/mus_brazen.o(.rodata);
         sound/songs/midi/mus_slate.o(.rodata);
         sound/songs/midi/mus_callow.o(.rodata);
+        sound/songs/midi/mus_nexus.o(.rodata);
     } > ROM =0
 
     lib_rodata :

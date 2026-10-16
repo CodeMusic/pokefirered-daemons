@@ -2,7 +2,7 @@
   "id": "MAP_NEXUS",
   "name": "Nexus",
   "layout": "LAYOUT_NEXUS",
-  "music": "MUS_SLOW_PALLET",
+  "music": "MUS_NEXUS",
   "region_map_section": "MAPSEC_S_S_ANNE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
