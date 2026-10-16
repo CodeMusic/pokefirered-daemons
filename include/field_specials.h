@@ -31,4 +31,7 @@ void Terminal_OpenCodeScreen(void);
 void Terminal_CheckCode(void);
 void Terminal_BufferPlayTime(void);
 
+void DaemonsGlitch_Start(u16 frames, bool8 fromScript);
+bool8 DaemonsGlitch_IsRunning(void);
+
 #endif // GUARD_FIELD_SPECIALS_H

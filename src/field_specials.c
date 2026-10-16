@@ -1911,6 +1911,7 @@ void SingingFir_Sing(void)
 #define tFrames data[0]
 #define tTimer  data[1]
 #define tTorn   data[2] // the HBlank DMA is ours to stop
+#define tScript data[3] // a script is waiting on it (waitstate)
 
 static void Task_DaemonsGlitch(u8 taskId)
 {
@@ -1925,7 +1926,8 @@ static void Task_DaemonsGlitch(u8 taskId)
             ScanlineEffect_Stop();
         BlendPalettes(FIR_MAP_PALETTES, 0, RGB_BLACK);
         DestroyTask(taskId);
-        ScriptContext_Enable();
+        if (tScript)
+            ScriptContext_Enable();
         return;
     }
     lines = gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer];
@@ -1951,11 +1953,19 @@ static void Task_DaemonsGlitch(u8 taskId)
     tTimer++;
 }
 
-void DaemonsGlitch(void)
+bool8 DaemonsGlitch_IsRunning(void)
+{
+    return FuncIsActiveTask(Task_DaemonsGlitch);
+}
+
+// The user, 2026-10-16: MISSINGNO's encounter is where it goes (battle_setup.c), the one glitch that cannot be
+// misread as the world breaking -- the thing itself is one. A caller that is not a script polls IsRunning.
+void DaemonsGlitch_Start(u16 frames, bool8 fromScript)
 {
     u8 taskId = CreateTask(Task_DaemonsGlitch, 80);
 
-    gTasks[taskId].tFrames = gSpecialVar_0x8004 ? gSpecialVar_0x8004 : 40;
+    gTasks[taskId].tScript = fromScript;
+    gTasks[taskId].tFrames = frames ? frames : 40;
     if (Overworld_GetFlashLevel() != 0)
     {
         gTasks[taskId].tFrames = 0; // the dark is already this DMA's
@@ -1971,9 +1981,15 @@ void DaemonsGlitch(void)
     });
 }
 
+void DaemonsGlitch(void)
+{
+    DaemonsGlitch_Start(gSpecialVar_0x8004, TRUE);
+}
+
 #undef tFrames
 #undef tTimer
 #undef tTorn
+#undef tScript
 
 // T-264: THE TERMINAL NEVER SAYS THE SAME THING TWICE RUNNING (the user, 2026-09-25: typing HELP in the emulator kept
 // giving the same answer). VAR_0x8004 is how many answers there are, VAR_0x8005 the var that remembers the last one,

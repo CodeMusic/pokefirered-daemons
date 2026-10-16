@@ -26,6 +26,7 @@
 #include "battle.h"
 #include "battle_transition.h"
 #include "battle_controllers.h"
+#include "field_specials.h"
 #include "constants/battle_setup.h"
 #include "constants/event_objects.h"
 #include "constants/items.h"
@@ -61,6 +62,7 @@ struct TrainerBattleParameter
 static void DoSafariBattle(void);
 static void DoGhostBattle(void);
 static void DoStandardWildBattle(void);
+static void Task_GlitchThenBattle(u8 taskId);
 static void CB2_EndWildBattle(void);
 static u8 GetWildBattleTransition(void);
 static u8 GetTrainerBattleTransition(void);
@@ -255,9 +257,29 @@ static void DoStandardWildBattle(void)
     StopPlayerAvatar();
     gMain.savedCallback = CB2_EndWildBattle;
     gBattleTypeFlags = 0;
-    CreateBattleStartTask(GetWildBattleTransition(), 0);
+    //  The user, 2026-10-16: MISSINGNO arrives as a glitch -- the screen tears, then the battle begins.
+    if (GetMonData(&gEnemyParty[0], MON_DATA_SPECIES) == SPECIES_OLD_UNOWN_B)
+        gTasks[CreateTask(Task_GlitchThenBattle, 1)].data[0] = GetWildBattleTransition();
+    else
+        CreateBattleStartTask(GetWildBattleTransition(), 0);
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
+}
+
+static void Task_GlitchThenBattle(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+
+    if (data[1] == 0)
+    {
+        DaemonsGlitch_Start(48, FALSE);
+        data[1] = 1;
+    }
+    else if (!DaemonsGlitch_IsRunning())
+    {
+        CreateBattleStartTask(data[0], 0);
+        DestroyTask(taskId);
+    }
 }
 
 void StartRoamerBattle(void)
@@ -316,7 +338,10 @@ void StartScriptedWildBattle(void)
     LockPlayerFieldControls();
     gMain.savedCallback = CB2_EndScriptedWildBattle;
     gBattleTypeFlags = BATTLE_TYPE_WILD_SCRIPTED;
-    CreateBattleStartTask(GetWildBattleTransition(), 0);
+    if (GetMonData(&gEnemyParty[0], MON_DATA_SPECIES) == SPECIES_OLD_UNOWN_B)   // as DoStandardWildBattle
+        gTasks[CreateTask(Task_GlitchThenBattle, 1)].data[0] = GetWildBattleTransition();
+    else
+        CreateBattleStartTask(GetWildBattleTransition(), 0);
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
     IncrementGameStat(GAME_STAT_WILD_BATTLES);
 }
