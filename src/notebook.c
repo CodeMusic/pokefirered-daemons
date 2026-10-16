@@ -871,6 +871,7 @@ static const struct { u16 flag; u8 qr; } sPageQr[] = {
     { FLAG_NOTEBOOK_DOC_PROSPECTUS_6,       BOOK_QR_EMPIRE_OF_SCORN },   // THE PLAN
     { FLAG_NOTEBOOK_REVIEW_POSITION,        BOOK_QR_OWL_AND_CODE },   // POSITION PAPER
     { FLAG_NOTEBOOK_REVIEW_DRAFT,           BOOK_QR_OWL_AND_CODE },   // SECOND DRAFT
+    { FLAG_NOTEBOOK_LOOSE_KEY,              BOOK_QR_PAINTED_MIRROR }, // THE BAND'S SHEET (The Painted Mirror, episode 4)
 };
 
 static void AddPageQr(u16 flag)

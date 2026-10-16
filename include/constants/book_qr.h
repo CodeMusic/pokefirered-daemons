@@ -25,5 +25,6 @@
 #define BOOK_QR_BETRAYALS_STING  19
 #define BOOK_QR_EMPIRE_OF_SCORN  20
 #define BOOK_QR_OWL_AND_CODE     21
+#define BOOK_QR_PAINTED_MIRROR   22
 
 #endif
