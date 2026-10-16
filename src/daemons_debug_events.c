@@ -113,13 +113,14 @@ static const u8 sName_Driver5[] = _("VERBOSE");
 static const u8 sName_Driver6[] = _("CRACK");
 static const u8 sName_Driver7[] = _("ASCEND");
 static const u8 sName_Driver8[] = _("DESCEND");
-static const u8 sName_Root1[] = _("FIRST (TANOBY)");
-static const u8 sName_Root2[] = _("THE SCHOOL");
-static const u8 sName_Root3[] = _("THE READING ROOM");
-static const u8 sName_Root4[] = _("THE NOTES");
-static const u8 sName_Root5[] = _("SCORN");
-static const u8 sName_Root6[] = _("THE RETURN");
-static const u8 sName_Root7[] = _("THE GUIDE, READ");
+//  T-252: the understandings' names (the user, 2026-10-16), each with where it is arrived at.
+static const u8 sName_Root1[] = _("STILL (TANOBY)");
+static const u8 sName_Root2[] = _("NAMING (SCHOOL)");
+static const u8 sName_Root3[] = _("NOTICE (READING)");
+static const u8 sName_Root4[] = _("REFLECT (NOTES)");
+static const u8 sName_Root5[] = _("STANCE (SCORN)");
+static const u8 sName_Root6[] = _("MEND (RETURN)");
+static const u8 sName_Root7[] = _("PRACTICE (GUIDE)");
 static const u8 sName_InsightsAgain[] = _("LET INSIGHTS ARRIVE AGAIN");
 
 //  THE STORY'S ORDER: the opening, the shoes and the INDEX, OPUS on THE REPO's shelf, then CAIRN's MARK and NOTEBOOK,
