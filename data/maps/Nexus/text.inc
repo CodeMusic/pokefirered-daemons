@@ -138,3 +138,73 @@ Nexus_Text_Guardian12::
 Nexus_Text_Guardian13::
     .string "“Shed those fears, and ask them now.\n"
     .string "I promise it will mean a ton.”$"
+
+Nexus_Text_Sign0::
+    .string "THE PULSEVERSE\p"
+    .string "Before you knew the way, your feet\n"
+    .string "knew the first road out of town.$"
+
+Nexus_Text_Sign1::
+    .string "THE BACKDROPVERSE\p"
+    .string "Where everyone walks past first,\n"
+    .string "one tree is not part of the forest.$"
+
+Nexus_Text_Sign2::
+    .string "THE INWARDVERSE\p"
+    .string "Past the bridge everyone dares,\n"
+    .string "the one who stops to look inside.$"
+
+Nexus_Text_Sign3::
+    .string "THE EMPATHVERSE\p"
+    .string "On the long road to the far cottage,\n"
+    .string "a bush stands where no one asked it.$"
+
+Nexus_Text_Sign4::
+    .string "THE DRIFTVERSE\p"
+    .string "East of the harbour, a tree is\n"
+    .string "resting where the road forgot it.$"
+
+Nexus_Text_Sign5::
+    .string "THE HAZEVERSE\p"
+    .string "Between two towns, a little before\n"
+    .string "the tower, something is fading.$"
+
+Nexus_Text_Sign6::
+    .string "THE HUSHVERSE\p"
+    .string "In the copse by the fences, one\n"
+    .string "corner tree has not said a word.$"
+
+Nexus_Text_Sign7::
+    .string "THE SEEDVERSE\p"
+    .string "On the first island, one bush is\n"
+    .string "holding a value nobody can see.$"
+
+Nexus_Text_Sign8::
+    .string "THE WEATHERVERSE\p"
+    .string "On the second island, a tree is\n"
+    .string "waiting to see what the sky does.$"
+
+Nexus_Text_Sign9::
+    .string "THE HUNGERVERSE\p"
+    .string "In the third island's berries,\n"
+    .string "something has eaten all the paths.$"
+
+Nexus_Text_Sign10::
+    .string "THE HUSKVERSE\p"
+    .string "On the cold fourth island, a tree\n"
+    .string "has left its old shell behind.$"
+
+Nexus_Text_Sign11::
+    .string "THE MECHAVERSE\p"
+    .string "In the fifth island's meadow, four\n"
+    .string "minds are learning to be one.$"
+
+Nexus_Text_Sign12::
+    .string "THE COMPASSVERSE\p"
+    .string "Along the sixth island's water,\n"
+    .string "a rock points the same way always.$"
+
+Nexus_Text_Sign13::
+    .string "THE CLAYVERSE\p"
+    .string "At the end of the seventh island,\n"
+    .string "a bush hides a figure of clay.$"

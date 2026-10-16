@@ -892,3 +892,59 @@ EventScript_FirKeyFlags::
 EventScript_FirKeyFlags_Keyed::
 	clearflag FLAG_HIDE_FIR_UNKEYED
 	return
+
+Nexus_EventScript_Sign0::
+	msgbox Nexus_Text_Sign0, MSGBOX_SIGN
+	end
+
+Nexus_EventScript_Sign1::
+	msgbox Nexus_Text_Sign1, MSGBOX_SIGN
+	end
+
+Nexus_EventScript_Sign2::
+	msgbox Nexus_Text_Sign2, MSGBOX_SIGN
+	end
+
+Nexus_EventScript_Sign3::
+	msgbox Nexus_Text_Sign3, MSGBOX_SIGN
+	end
+
+Nexus_EventScript_Sign4::
+	msgbox Nexus_Text_Sign4, MSGBOX_SIGN
+	end
+
+Nexus_EventScript_Sign5::
+	msgbox Nexus_Text_Sign5, MSGBOX_SIGN
+	end
+
+Nexus_EventScript_Sign6::
+	msgbox Nexus_Text_Sign6, MSGBOX_SIGN
+	end
+
+Nexus_EventScript_Sign7::
+	msgbox Nexus_Text_Sign7, MSGBOX_SIGN
+	end
+
+Nexus_EventScript_Sign8::
+	msgbox Nexus_Text_Sign8, MSGBOX_SIGN
+	end
+
+Nexus_EventScript_Sign9::
+	msgbox Nexus_Text_Sign9, MSGBOX_SIGN
+	end
+
+Nexus_EventScript_Sign10::
+	msgbox Nexus_Text_Sign10, MSGBOX_SIGN
+	end
+
+Nexus_EventScript_Sign11::
+	msgbox Nexus_Text_Sign11, MSGBOX_SIGN
+	end
+
+Nexus_EventScript_Sign12::
+	msgbox Nexus_Text_Sign12, MSGBOX_SIGN
+	end
+
+Nexus_EventScript_Sign13::
+	msgbox Nexus_Text_Sign13, MSGBOX_SIGN
+	end
