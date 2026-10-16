@@ -1774,12 +1774,12 @@ void Terminal_PlayDayNote(void)
     PlaySE(SE_NOTE_C + DaemonsWeekday());
 }
 
-// T-10: THE SINGING FIR (the user, 2026-09-26). O CHRISTMAS TREE's first phrase, in A-flat, as the source painting's
-// fifteen coloured notes: yellow, purple x3, red, orange x4, red, orange, yellow, blue, red, purple. The painting's
+// T-10: THE SINGING FIR (the user, 2026-09-26). O CHRISTMAS TREE's first phrase, in B-flat, as the source painting's
+// fifteen coloured notes: green, purple x3, red, orange x4, red, orange, yellow, blue, red, purple. The painting's
 // yellow and purple flats -- its key signature -- were missing, so the tune came out wrong until the key was added.
 // The toy piano has eight naturals (SE_NOTE_C..C_HIGH, on SE2); a flat is its natural bent a semitone down with
-// m4aMPlayPitchControl, 256 to the semitone. Without the key, the yellow and purple notes lose their flats; red's
-// B-flat was never missing. VAR_0x8004 TRUE sings it in the key.
+// m4aMPlayPitchControl, 256 to the semitone. Without the key, the yellow and purple notes lose their flats. The
+// top notes are the high C bent up (D two, E-flat three). VAR_0x8004 TRUE sings it in the key.
 struct FirNote
 {
     u8 se;          // offset from SE_NOTE_C
@@ -1791,15 +1791,16 @@ struct FirNote
 
 // T-409: THE NOTES SEEN (the user, 2026-10-16, from THE PAINTED MIRROR's fourth episode: the tree sparkles a different
 // colour as each note sounds). The painting's colours are the user's seven -- C red, D orange, E yellow, F green, G blue,
-// A indigo, B violet -- and read that way it is the tune in B-flat, its two flats "the purple B and the yellow E"; the
-// fir sings it a step lower. A flat is a blend of its natural and the note below, so in the key the yellow and purple
+// A indigo, B violet -- and read that way it is the tune in B-flat, its two flats "the purple B and the yellow E", and
+// the fir sings it there (the user, 2026-10-16). A flat is a blend of its natural and the note below, so in the key the yellow and purple
 // notes warm and deepen, and without it they are the plain naturals: right to look at, wrong to hear. Subtle, but also
 // not: the map takes a little of each note and the fir a lot, fading over the note.
-enum { FIR_RED, FIR_ORANGE, FIR_YELLOW, FIR_BLUE, FIR_PURPLE };
+enum { FIR_RED, FIR_ORANGE, FIR_YELLOW, FIR_GREEN, FIR_BLUE, FIR_PURPLE };
 static const u16 sFirColour[][2] = { // without the key, in it
     [FIR_RED]    = { RGB(31,  0,  0), RGB(31,  0,  0) },
     [FIR_ORANGE] = { RGB(31, 16,  0), RGB(31, 16,  0) },
     [FIR_YELLOW] = { RGB(31, 31,  0), RGB(31, 24,  0) }, // E, E-flat (yellow into orange)
+    [FIR_GREEN]  = { RGB( 0, 31,  0), RGB( 0, 31,  0) },
     [FIR_BLUE]   = { RGB( 0,  0, 31), RGB( 0,  0, 31) },
     [FIR_PURPLE] = { RGB(24,  0, 31), RGB(16,  0, 24) }, // B, B-flat (violet into indigo)
 };
@@ -1809,22 +1810,22 @@ static const u16 sFirColour[][2] = { // without the key, in it
 #define FIR_NEXUS_TREE_PALETTE 12 // THE NEXUS's Christmas tree is map tiles, on a palette of its own (tools/gbanexusmap.py)
 
 static const struct FirNote sFirTune[] =
-{
-    { 2, -1,  0, 30, FIR_YELLOW },  // yellow  E-flat   O
-    { 5, -1,  0, 22, FIR_PURPLE },  // purple  A-flat   Christ-
-    { 5, -1,  0,  8, FIR_PURPLE },  // purple  A-flat   -mas
-    { 5, -1,  0, 40, FIR_PURPLE },  // purple  A-flat   tree,
-    { 6, -1, -1, 18, FIR_RED },  // red     B-flat   O
-    { 7,  0,  0, 22, FIR_ORANGE },  // orange  C        Christ-
-    { 7,  0,  0,  8, FIR_ORANGE },  // orange  C        -mas
-    { 7,  0,  0, 40, FIR_ORANGE },  // orange  C        tree,
-    { 7,  0,  0, 18, FIR_ORANGE },  // orange  C        how
-    { 6, -1, -1, 18, FIR_RED },  // red     B-flat   love-
-    { 7,  0,  0, 18, FIR_ORANGE },  // orange  C        -ly
-    { 7,  1,  2, 36, FIR_YELLOW },  // yellow  D-flat   are
-    { 4,  0,  0, 30, FIR_BLUE },  // blue    G        your
-    { 6, -1, -1, 30, FIR_RED },  // red     B-flat   bran-
-    { 5, -1,  0, 72, FIR_PURPLE },  // purple  A-flat   -ches.
+{   // T-409 (the user, 2026-10-16): in B-flat, the painting's own key -- its colours are the notes.
+    { 3,  0,  0, 30, FIR_GREEN  },  // F        O
+    { 6, -1,  0, 22, FIR_PURPLE },  // B-flat   Christ-
+    { 6, -1,  0,  8, FIR_PURPLE },  // B-flat   -mas
+    { 6, -1,  0, 40, FIR_PURPLE },  // B-flat   tree,
+    { 7,  0,  0, 18, FIR_RED    },  // C        O
+    { 7,  2,  2, 22, FIR_ORANGE },  // D        Christ-
+    { 7,  2,  2,  8, FIR_ORANGE },  // D        -mas
+    { 7,  2,  2, 40, FIR_ORANGE },  // D        tree,
+    { 7,  2,  2, 18, FIR_ORANGE },  // D        how
+    { 7,  0,  0, 18, FIR_RED    },  // C        love-
+    { 7,  2,  2, 18, FIR_ORANGE },  // D        -ly
+    { 7,  3,  4, 36, FIR_YELLOW },  // E-flat   are
+    { 5,  0,  0, 30, FIR_BLUE   },  // A        your
+    { 7,  0,  0, 30, FIR_RED    },  // C        bran-
+    { 6, -1,  0, 72, FIR_PURPLE },  // B-flat   -ches.
 };
 
 #define tNote    data[0]
