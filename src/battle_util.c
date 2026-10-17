@@ -1722,15 +1722,8 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                         effect++;
                     }
                     break;
-                case WEATHER_SANDSTORM:
-                    if (!(gBattleWeather & B_WEATHER_SANDSTORM))
-                    {
-                        gBattleWeather = B_WEATHER_SANDSTORM;
-                        gBattleScripting.animArg1 = B_ANIM_SANDSTORM_CONTINUES;
-                        gBattleScripting.battler = battler;
-                        effect++;
-                    }
-                    break;
+                // T-415 (the user, 2026-10-17): WEATHER_SANDSTORM is the overworld's WIND, and wind is no sandstorm in
+                // battle -- no chip damage. It lifts VECTOR's routines instead (pokemon.c, CalculateBaseDamage).
                 case WEATHER_SNOW:   // T-415: the overworld's snow is hail in battle, for as long as the battle lasts
                     if (!(gBattleWeather & B_WEATHER_HAIL))
                     {

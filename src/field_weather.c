@@ -10,6 +10,9 @@
 #include "constants/field_weather.h"
 #include "constants/weather.h"
 #include "constants/songs.h"
+#include "overworld.h"
+#include "fieldmap.h"
+#include "daemons_time.h"
 
 #define DROUGHT_COLOR_INDEX(color) ((((color) >> 1) & 0xF) | (((color) >> 2) & 0xF0) | (((color) >> 3) & 0xF00))
 
@@ -600,6 +603,25 @@ static void ApplyDroughtGammaShiftWithBlend(s8 gammaIndex, u8 blendCoeff, u16 bl
     }
 }
 
+// T-415 (the user, 2026-10-17): outdoors, fog is a LIGHT HAZE -- about a third of Ruby's, the map clearly seen -- and its
+// colour is put under the watch's light like everything else, so it darkens at night instead of glowing. Caves and
+// interiors that vanilla gave fog keep Ruby's thick white.
+bool8 DaemonsFogIsHaze(void)
+{
+    return IsMapTypeOutdoors(gMapHeader.mapType);
+}
+
+static u16 FogHazeColor(void)
+{
+    u16 color = RGB(28, 31, 28);
+
+    if (DaemonsFogIsHaze() && DaemonsFieldTint() == DAEMONS_TINT_WATCH)
+        DaemonsTintForWatch(&color, 1);
+    return color;
+}
+
+#define FOG_SPRITE_LIGHTEN (DaemonsFogIsHaze() ? 4 : 12)   // of 16, toward FogHazeColor
+
 static void ApplyFogBlend(u8 blendCoeff, u16 blendColor)
 {
     struct RGBColor color;
@@ -607,6 +629,7 @@ static void ApplyFogBlend(u8 blendCoeff, u16 blendColor)
     u8 gBlend;
     u8 bBlend;
     u16 curPalIndex;
+    u16 hazeColor = FogHazeColor();
 
     BlendPalette(0, 256, blendCoeff, blendColor);
     color = *(struct RGBColor *)&blendColor;
@@ -628,9 +651,19 @@ static void ApplyFogBlend(u8 blendCoeff, u16 blendColor)
                 u8 g = color.g;
                 u8 b = color.b;
 
-                r += ((28 - r) * 3) >> 2;
-                g += ((31 - g) * 3) >> 2;
-                b += ((28 - b) * 3) >> 2;
+                if (DaemonsFogIsHaze())   // T-415: a quarter toward the haze, under the watch's light
+                {
+                    struct RGBColor haze = *(struct RGBColor *)&hazeColor;
+                    r += ((haze.r - r) * 4) >> 4;
+                    g += ((haze.g - g) * 4) >> 4;
+                    b += ((haze.b - b) * 4) >> 4;
+                }
+                else
+                {
+                    r += ((28 - r) * 3) >> 2;
+                    g += ((31 - g) * 3) >> 2;
+                    b += ((28 - b) * 3) >> 2;
+                }
 
                 r += ((rBlend - r) * blendCoeff) >> 4;
                 g += ((gBlend - g) * blendCoeff) >> 4;
@@ -865,7 +898,7 @@ void UpdateSpritePaletteWithWeather(u8 spritePaletteIndex)
         else
         {
             paletteIndex = PLTT_ID(paletteIndex);
-            BlendPalette(paletteIndex, 16, 12, RGB(28, 31, 28));
+            BlendPalette(paletteIndex, 16, FOG_SPRITE_LIGHTEN, FogHazeColor());   // T-415
         }
         break;
     }

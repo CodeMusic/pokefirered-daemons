@@ -21,6 +21,8 @@
 #include "pokedex.h"
 #include "strings.h"
 #include "overworld.h"
+#include "field_weather.h"
+#include "constants/weather.h"
 #include "party_menu.h"
 #include "field_specials.h"
 #include "berry.h"
@@ -2736,6 +2738,11 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
             // Any weather except sun weakens solar beam
             if ((gBattleWeather & (B_WEATHER_RAIN | B_WEATHER_SANDSTORM | B_WEATHER_HAIL_TEMPORARY)) && gCurrentMove == MOVE_SOLAR_BEAM)
                 damage /= 2;
+
+            // T-415 (the user, 2026-10-17): WIND outdoors (the overworld's sandstorm, field_weather) lifts VECTOR's
+            // routines by a quarter while it lasts. A field weather, not a battle one: nothing in battle starts or ends it.
+            if (type == TYPE_FLYING && GetCurrentWeather() == WEATHER_SANDSTORM)
+                damage = (125 * damage) / 100;
 
             // Sun boosts Fire, weakens Water
             if (gBattleWeather & B_WEATHER_SUN)

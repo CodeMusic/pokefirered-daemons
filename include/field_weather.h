@@ -151,6 +151,7 @@ void Weather_SetTargetBlendCoeffs(u8 eva, u8 evb, int delay);
 bool8 Weather_UpdateBlend(void);
 void LoadCustomWeatherSpritePalette(const u16 *palette);
 void DaemonsRetintWeatherSpritePalette(void);   // T-415
+bool8 DaemonsFogIsHaze(void);                  // T-415: outdoor fog is a light haze
 void ResetDroughtWeatherPaletteLoading(void);
 bool8 LoadDroughtWeatherPalettes(void);
 void DroughtStateInit(void);

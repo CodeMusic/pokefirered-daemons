@@ -439,9 +439,9 @@ void Rain_InitVars(void)
     gWeatherPtr->initStep = 0;
     gWeatherPtr->weatherGfxLoaded = FALSE;
     gWeatherPtr->rainSpriteVisibleCounter = 0;
-    gWeatherPtr->rainSpriteVisibleDelay = 8;
+    gWeatherPtr->rainSpriteVisibleDelay = 4;
     gWeatherPtr->isDownpour = FALSE;
-    gWeatherPtr->targetRainSpriteCount = 10;
+    gWeatherPtr->targetRainSpriteCount = 20;   // T-415 (the user, 2026-10-17): twice Ruby's 10 -- rain you notice
     gWeatherPtr->gammaTargetIndex = 3;
     gWeatherPtr->gammaStepDelay = 20;
     SetRainStrengthFromSoundEffect(SE_RAIN);
@@ -1004,7 +1004,7 @@ void Thunderstorm_InitVars(void)
     gWeatherPtr->rainSpriteVisibleCounter = 0;
     gWeatherPtr->rainSpriteVisibleDelay = 4;
     gWeatherPtr->isDownpour = FALSE;
-    gWeatherPtr->targetRainSpriteCount = 16;
+    gWeatherPtr->targetRainSpriteCount = MAX_RAIN_SPRITES;   // T-415: 24, heavier than the rain (was 16)
     gWeatherPtr->gammaTargetIndex = 3;
     gWeatherPtr->gammaStepDelay = 20;
     gWeatherPtr->weatherGfxLoaded = FALSE;  // duplicate assignment
@@ -1342,7 +1342,10 @@ void FogHorizontal_Main(void)
     {
     case 0:
         CreateFogHorizontalSprites();
-        if (gWeatherPtr->currWeather == WEATHER_FOG_HORIZONTAL)
+        if (gWeatherPtr->currWeather == WEATHER_FOG_HORIZONTAL && DaemonsFogIsHaze())
+            Weather_SetTargetBlendCoeffs(4, 12, 3);   // T-415: a light haze outdoors, a quarter of the view -- not added
+                                                      // to it, so it never brightens the map past the haze's colour
+        else if (gWeatherPtr->currWeather == WEATHER_FOG_HORIZONTAL)
             Weather_SetTargetBlendCoeffs(12, 8, 3);
         else
             Weather_SetTargetBlendCoeffs(4, 16, 0);
