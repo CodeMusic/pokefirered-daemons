@@ -1695,6 +1695,10 @@
 #define FLAG_NOTEBOOK_SEEN_0          (DAEMONS_FLAGS_START + 0x200)   // .. + 0x23F: 64
 #define FLAG_NOTEBOOK_SEEN_MIGRATED   (DAEMONS_FLAGS_START + 0x240)
 
+//  T-405 (the user, 2026-10-16): an understanding's STREAM lecture, once watched. Never announced -- an understanding
+//  arrives silently (T-252) -- so there is no TOLD flag beside it.
+#define FLAG_STREAM_SEEN_ROOT1        (DAEMONS_FLAGS_START + 0x250)   // .. + 0x256: 7
+
 #define DAEMONS_FLAGS_COUNT           0x400
 #define DAEMONS_FLAGS_END             (DAEMONS_FLAGS_START + DAEMONS_FLAGS_COUNT - 1)
 #define DAEMONS_FLAGS_SIZE            (DAEMONS_FLAGS_COUNT / 8)

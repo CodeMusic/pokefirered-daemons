@@ -177,12 +177,20 @@ static const struct WindowTemplate sWindowTemplates[] =
 #define FLAG_STREAM_SEEN_HOSTING  FLAG_UNUSED_0x4A7
 #define FLAG_STREAM_SEEN_MARK1    FLAG_UNUSED_0x4A8
 
+//  T-405: an understanding's lecture is offered once the understanding is held, in sBrainLobes' order.
+static const u16 sRootShowFlags[TTVSCR_COUNT - TTVSCR_ROOT1] = {
+    FLAG_UNDERSTANDING_FIRST, FLAG_UNDERSTANDING_SCHOOL, FLAG_UNDERSTANDING_READING, FLAG_UNDERSTANDING_NOTES,
+    FLAG_UNDERSTANDING_SCORN, FLAG_UNDERSTANDING_RETURN, FLAG_UNDERSTANDING_GUIDE,
+};
+
 static bool8 TeachyTvShowIsUnlocked(u8 script)
 {
     if (script < TTVSCR_FIRST_TALK)
         return TRUE;
     if (script == TTVSCR_HOSTING)
         return TRUE;
+    if (script >= TTVSCR_ROOT1)
+        return FlagGet(sRootShowFlags[script - TTVSCR_ROOT1]);
     return FlagGet(FLAG_BADGE01_GET + (script - TTVSCR_MARK1));
 }
 
@@ -190,6 +198,8 @@ static u16 TeachyTvSeenFlag(u8 script)
 {
     if (script == TTVSCR_HOSTING)
         return FLAG_STREAM_SEEN_HOSTING;
+    if (script >= TTVSCR_ROOT1)
+        return FLAG_STREAM_SEEN_ROOT1 + (script - TTVSCR_ROOT1);
     return FLAG_STREAM_SEEN_MARK1 + (script - TTVSCR_MARK1);
 }
 
@@ -211,7 +221,7 @@ s8 TeachyTvFirstUntoldShow(void)
 
     if (!CheckBagHasItem(ITEM_TEACHY_TV, 1))
         return -1;
-    for (i = TTVSCR_FIRST_TALK; i < TTVSCR_COUNT; ++i)
+    for (i = TTVSCR_FIRST_TALK; i < TTVSCR_ROOT1; ++i)   // T-405: the understandings' lectures are never announced
     {
         if (TeachyTvShowIsUnlocked(i) && !FlagGet(TeachyTvToldFlag(i)))
             return i;
@@ -236,7 +246,7 @@ void TeachyTvMarkEveryUnlockedShowAsTold(void)
 {
     u8 i;
 
-    for (i = TTVSCR_FIRST_TALK; i < TTVSCR_COUNT; ++i)
+    for (i = TTVSCR_FIRST_TALK; i < TTVSCR_ROOT1; ++i)   // T-405: the understandings' lectures are never announced
     {
         if (TeachyTvShowIsUnlocked(i))
             FlagSet(TeachyTvToldFlag(i));
@@ -247,7 +257,7 @@ static bool8 TeachyTvHasUnseenShow(void)
 {
     u8 i;
 
-    for (i = TTVSCR_FIRST_TALK; i < TTVSCR_COUNT; ++i)
+    for (i = TTVSCR_FIRST_TALK; i < TTVSCR_ROOT1; ++i)   // T-405: the understandings' lectures are never announced
     {
         if (TeachyTvShowIsUnlocked(i) && !FlagGet(TeachyTvSeenFlag(i)))
             return TRUE;
@@ -272,6 +282,13 @@ static const struct ListMenuItem sAllShows[] =
     { gTeachyTvString_Mark6,          TTVSCR_MARK6    },
     { gTeachyTvString_Mark7,          TTVSCR_MARK7    },
     { gTeachyTvString_Mark8,          TTVSCR_MARK8    },
+    { gTeachyTvString_Root1,          TTVSCR_ROOT1    },
+    { gTeachyTvString_Root2,          TTVSCR_ROOT2    },
+    { gTeachyTvString_Root3,          TTVSCR_ROOT3    },
+    { gTeachyTvString_Root4,          TTVSCR_ROOT4    },
+    { gTeachyTvString_Root5,          TTVSCR_ROOT5    },
+    { gTeachyTvString_Root6,          TTVSCR_ROOT6    },
+    { gTeachyTvString_Root7,          TTVSCR_ROOT7    },
 };
 
 static const struct ListMenuTemplate sListMenuTemplate = 
@@ -951,6 +968,13 @@ static void TeachyTvRenderMsgAndSwitchClusterFuncs(u8 taskId)
             [TTVSCR_MARK6]    = sTalkScript,
             [TTVSCR_MARK7]    = sTalkScript,
             [TTVSCR_MARK8]    = sTalkScript,
+            [TTVSCR_ROOT1]    = sTalkScript,
+            [TTVSCR_ROOT2]    = sTalkScript,
+            [TTVSCR_ROOT3]    = sTalkScript,
+            [TTVSCR_ROOT4]    = sTalkScript,
+            [TTVSCR_ROOT5]    = sTalkScript,
+            [TTVSCR_ROOT6]    = sTalkScript,
+            [TTVSCR_ROOT7]    = sTalkScript,
         };
         void (*const *cluster)(u8) = array[sStaticResources.whichScript];
         cluster[data[3]](taskId);
@@ -976,6 +1000,13 @@ static void TTVcmd_TextPrinterSwitchStringByOptionChosen(u8 taskId)
         [TTVSCR_MARK6]    = gTeachyTvText_Mark6Script1,
         [TTVSCR_MARK7]    = gTeachyTvText_Mark7Script1,
         [TTVSCR_MARK8]    = gTeachyTvText_Mark8Script1,
+        [TTVSCR_ROOT1]    = gTeachyTvText_Root1Script1,
+        [TTVSCR_ROOT2]    = gTeachyTvText_Root2Script1,
+        [TTVSCR_ROOT3]    = gTeachyTvText_Root3Script1,
+        [TTVSCR_ROOT4]    = gTeachyTvText_Root4Script1,
+        [TTVSCR_ROOT5]    = gTeachyTvText_Root5Script1,
+        [TTVSCR_ROOT6]    = gTeachyTvText_Root6Script1,
+        [TTVSCR_ROOT7]    = gTeachyTvText_Root7Script1,
     };
     TeachyTvInitTextPrinter(texts[sStaticResources.whichScript]);
     ++data[3];
@@ -1001,6 +1032,13 @@ static void TTVcmd_TextPrinterSwitchStringByOptionChosen2(u8 taskId)
         [TTVSCR_MARK6]    = gTeachyTvText_Mark6Script2,
         [TTVSCR_MARK7]    = gTeachyTvText_Mark7Script2,
         [TTVSCR_MARK8]    = gTeachyTvText_Mark8Script2,
+        [TTVSCR_ROOT1]    = gTeachyTvText_Root1Script2,
+        [TTVSCR_ROOT2]    = gTeachyTvText_Root2Script2,
+        [TTVSCR_ROOT3]    = gTeachyTvText_Root3Script2,
+        [TTVSCR_ROOT4]    = gTeachyTvText_Root4Script2,
+        [TTVSCR_ROOT5]    = gTeachyTvText_Root5Script2,
+        [TTVSCR_ROOT6]    = gTeachyTvText_Root6Script2,
+        [TTVSCR_ROOT7]    = gTeachyTvText_Root7Script2,
     };
     TeachyTvInitTextPrinter(texts[sStaticResources.whichScript]);
     ++data[3];

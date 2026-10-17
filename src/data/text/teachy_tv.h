@@ -315,3 +315,148 @@ const u8 gTeachyTvText_Mark8Script2[] = _(
         "That is the whole of it.\p"
         "That was the last lecture. There\n"
         "were to be more.$");
+
+// --------------------------------------------------------------------------
+// T-405 (approved by the user 2026-10-16): the understandings' lectures, the
+// psychology to the MARKS' computing. Each is offered once its understanding
+// is held, and never announced -- an understanding arrives silently (T-252).
+// --------------------------------------------------------------------------
+
+const u8 gTeachyTvString_Root1[] = _("STILL");
+const u8 gTeachyTvString_Root2[] = _("NAMING");
+const u8 gTeachyTvString_Root3[] = _("NOTICE");
+const u8 gTeachyTvString_Root4[] = _("REFLECT");
+const u8 gTeachyTvString_Root5[] = _("STANCE");
+const u8 gTeachyTvString_Root6[] = _("MEND");
+const u8 gTeachyTvString_Root7[] = _("PRACTICE");
+
+const u8 gTeachyTvText_Root1Script1[] = _(
+        "STILL.\p"
+        "Before you think, something in you\n"
+        "has already decided to go on.\p"
+        "It counts your breaths. It holds\n"
+        "you upright. It never asks.\p"
+        "Most of what keeps you here is not\n"
+        "a decision.$");
+
+const u8 gTeachyTvText_Root1Script2[] = _(
+        "So when a battle goes badly, stop\n"
+        "for one breath before you choose.\p"
+        "Not to plan. Only to notice that\n"
+        "you are still here.\p"
+        "A choice made from there is a\n"
+        "different choice.\p"
+        "That is the lecture.$");
+
+const u8 gTeachyTvText_Root2Script1[] = _(
+        "NAMING.\p"
+        "A word is a small box you put a\n"
+        "thing in, so you can carry it.\p"
+        "Name a thing and you will see it\n"
+        "faster the next time.\p"
+        "You will also see it where it is\n"
+        "not.$");
+
+const u8 gTeachyTvText_Root2Script2[] = _(
+        "A name you were taught is a\n"
+        "borrowed one. It holds until it is\l"
+        "tested.\p"
+        "So say the type before the screen\n"
+        "does. Then check.\p"
+        "When the name is wrong, the thing\n"
+        "was right. Change the name.\p"
+        "That is the lecture.$");
+
+const u8 gTeachyTvText_Root3Script1[] = _(
+        "NOTICE.\p"
+        "Your eyes take in far more than\n"
+        "you see.\p"
+        "What reaches you is what you were\n"
+        "already looking for.\p"
+        "The rest was there. It was only\n"
+        "not chosen.$");
+
+const u8 gTeachyTvText_Root3Script2[] = _(
+        "So look for something you were not\n"
+        "looking for.\p"
+        "Walk a route you know well. Find\n"
+        "one thing on it you never saw.\p"
+        "There is always one.\p"
+        "That is the lecture.$");
+
+const u8 gTeachyTvText_Root4Script1[] = _(
+        "REFLECT.\p"
+        "Inside a habit, every step makes\n"
+        "sense. That is how it lasts.\p"
+        "From the inside, a loop looks like\n"
+        "a straight road.\p"
+        "You need a second place to stand,\n"
+        "a little apart, watching yourself\l"
+        "walk.$");
+
+const u8 gTeachyTvText_Root4Script2[] = _(
+        "After a battle you lost, do not\n"
+        "ask what went wrong.\p"
+        "Ask what you did a few turns\n"
+        "earlier that felt right.\p"
+        "That is usually where it was.\p"
+        "Then do it again, and watch\n"
+        "yourself doing it.\p"
+        "That is the lecture.$");
+
+const u8 gTeachyTvText_Root5Script1[] = _(
+        "STANCE.\p"
+        "Part of you always keeps track of\n"
+        "where you are.\p"
+        "Not the place. Where you are in\n"
+        "it: your feet, the floor, how far\l"
+        "the wall is.\p"
+        "Lose that, and everything you read\n"
+        "is about somebody else.$");
+
+const u8 gTeachyTvText_Root5Script2[] = _(
+        "Being ahead tells you who is\n"
+        "behind you. It does not tell you\l"
+        "where you are standing.\p"
+        "Before you compare your DAEMON to\n"
+        "a stronger one, find your feet.\p"
+        "Then ask if that was where you\n"
+        "were going.\p"
+        "That is the lecture.$");
+
+const u8 gTeachyTvText_Root6Script1[] = _(
+        "MEND.\p"
+        "Something breaks between you and\n"
+        "someone. It always does.\p"
+        "What comes after is not decided by\n"
+        "the break.\p"
+        "It is decided by whether anyone\n"
+        "comes back.$");
+
+const u8 gTeachyTvText_Root6Script2[] = _(
+        "When someone comes back, meet the\n"
+        "one who arrives.\p"
+        "Not the one you remember. They\n"
+        "have been somewhere.\p"
+        "So have you.\p"
+        "Go back first, when you can. It\n"
+        "costs less than it feels.\p"
+        "That is the lecture.$");
+
+const u8 gTeachyTvText_Root7Script1[] = _(
+        "PRACTICE.\p"
+        "Knowing how is not kept where\n"
+        "knowing that is kept.\p"
+        "You can read every page about a\n"
+        "thing and still not do it.\p"
+        "The doing is learned somewhere\n"
+        "quieter, and only by doing.$");
+
+const u8 gTeachyTvText_Root7Script2[] = _(
+        "So do it badly, and often.\p"
+        "The first hundred times are not\n"
+        "failures. They are the lesson.\p"
+        "One day your hands will move\n"
+        "before you have decided.\p"
+        "Then you know it.\p"
+        "That is the lecture.$");

@@ -25,6 +25,14 @@ enum TeachyTvScript
     TTVSCR_MARK6,
     TTVSCR_MARK7,
     TTVSCR_MARK8,
+    // T-405: the understandings' lectures, gated on the understanding, never announced.
+    TTVSCR_ROOT1,
+    TTVSCR_ROOT2,
+    TTVSCR_ROOT3,
+    TTVSCR_ROOT4,
+    TTVSCR_ROOT5,
+    TTVSCR_ROOT6,
+    TTVSCR_ROOT7,
     TTVSCR_COUNT
 };
 
