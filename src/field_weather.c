@@ -194,6 +194,7 @@ void SetCurrentAndNextWeather(u8 weather)
     PlayRainStoppingSoundEffect();
     gWeatherPtr->currWeather = weather;
     gWeatherPtr->nextWeather = weather;
+    DaemonsRetintWeatherSpritePalette();   // T-415: nor did a door lead from sand to snow
 }
 
 static void SetCurrentAndNextWeatherNoDelay(u8 weather)
@@ -229,6 +230,8 @@ static void Task_WeatherMain(u8 taskId)
             gWeatherPtr->palProcessingState = WEATHER_PAL_STATE_CHANGING_WEATHER;
             gWeatherPtr->currWeather = gWeatherPtr->nextWeather;
             gWeatherPtr->weatherChangeComplete = TRUE;
+            // T-415: Ruby never changed sandstorm into snow on one map; we do, and the snow fell in sand's colours
+            DaemonsRetintWeatherSpritePalette();
         }
     }
     else
@@ -884,7 +887,27 @@ static u8 IsWeatherFadingIn(void)
 void LoadCustomWeatherSpritePalette(const u16 *palette)
 {
     LoadPalette(palette, OBJ_PLTT_ID(gWeatherPtr->weatherPicSpritePalIndex), PLTT_SIZE_4BPP);
+    ApplyGlobalFieldPaletteTint(gWeatherPtr->weatherPicSpritePalIndex);   // T-415: sand at night is night's sand
     UpdateSpritePaletteWithWeather(gWeatherPtr->weatherPicSpritePalIndex);
+}
+
+// T-415: the weather's sprite palette is tinted once, as the weather starts on a map (StartWeather); when the watch
+// turns while the player stands outside (DaemonsRelightField), the rain and snow are put under the new light with
+// everything else.
+void DaemonsRetintWeatherSpritePalette(void)
+{
+    u8 index = IndexOfSpritePaletteTag(PALTAG_WEATHER);
+
+    if (index == 0xFF)
+        return;
+    if (gWeatherPtr->currWeather == WEATHER_SANDSTORM)
+        LoadPalette(gSandstormWeatherPalette, OBJ_PLTT_ID(index), PLTT_SIZE_4BPP);
+    else if (gWeatherPtr->currWeather == WEATHER_SUNNY_CLOUDS)
+        LoadPalette(gCloudsWeatherPalette, OBJ_PLTT_ID(index), PLTT_SIZE_4BPP);
+    else
+        LoadPalette(gDefaultWeatherSpritePalette, OBJ_PLTT_ID(index), PLTT_SIZE_4BPP);
+    ApplyGlobalFieldPaletteTint(index);
+    UpdateSpritePaletteWithWeather(index);
 }
 
 static void LoadDroughtWeatherPalette(u8 *gammaIndexPtr, u8 *a1)

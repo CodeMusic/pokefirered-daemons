@@ -1490,6 +1490,7 @@ void DaemonsRelightField(void)
         ApplyWeatherGammaShiftToPal(i);
     DaemonsRetintObjectEventPalettes();
     DaemonsRetintFieldEffectPalettes();   // T-279
+    DaemonsRetintWeatherSpritePalette();  // T-415
 }
 
 static EWRAM_DATA u8 sRelightTimer = 0;
@@ -1502,6 +1503,8 @@ static void RelightIfTheLightChanged(void)
     if (!IsMapTypeOutdoors(gMapHeader.mapType) || gPaletteFade.active
      || gWeatherPtr->palProcessingState != WEATHER_PAL_STATE_IDLE || ArePlayerFieldControlsLocked())
         return;
+    if (DaemonsSettleWeather())   // T-415: an event starting or ending changes the sky in front of the player
+        return;                   // and the light is looked at again a second later, once the weather has settled
     if (DaemonsPrimarySignature() != DaemonsPaletteSignature())
         DaemonsRelightField();
 }

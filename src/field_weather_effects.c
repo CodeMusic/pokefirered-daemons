@@ -755,6 +755,9 @@ void Snow_InitAll(void)
 
 void Snow_Main(void)
 {
+    // T-415: Ruby's snow never counted this, so a flake that had fallen once waited for ever and the sky emptied
+    // after its first fall (pokeemerald notes the same bug). It counts now: one flake back every nineteen frames.
+    gWeatherPtr->snowflakeTimer++;
     if (gWeatherPtr->initStep == 0 && !UpdateVisibleSnowflakeSprites())
     {
         gWeatherPtr->weatherGfxLoaded = TRUE;
@@ -900,7 +903,7 @@ static void InitSnowflakeSpriteMovement(struct Sprite *sprite)
 
 static void WaitSnowflakeSprite(struct Sprite *sprite)
 {
-    // Timer is never incremented
+    // Timer is never incremented -- T-415: it is now, in Snow_Main
     if (gWeatherPtr->snowflakeTimer > 18)
     {
         sprite->invisible = FALSE;

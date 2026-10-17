@@ -725,6 +725,13 @@ extern const u8 gText_DbgWinter[];
 extern const u8 gText_DbgSpring[];
 extern const u8 gText_DbgSummer[];
 extern const u8 gText_DbgAutumn[];
+extern const u8 gText_DbgMenuWeather[];   // T-415
+extern const u8 gText_DbgSkyClear[];
+extern const u8 gText_DbgSkyRain[];
+extern const u8 gText_DbgSkyStorm[];
+extern const u8 gText_DbgSkySnow[];
+extern const u8 gText_DbgSkyFog[];
+extern const u8 gText_DbgSkyWind[];
 extern const u8 gText_DbgMenuSong[];
 extern const u8 gText_DbgMenuSfx[];
 extern const u8 gText_DbgMenuWatch[];
@@ -766,6 +773,7 @@ extern const u8 gStartMenuDesc_DbgLevel[];
 extern const u8 gStartMenuDesc_DbgInvoke[];
 extern const u8 gStartMenuDesc_DbgDevice[];
 extern const u8 gStartMenuDesc_DbgSeason[];
+extern const u8 gStartMenuDesc_DbgWeather[];   // T-415
 extern const u8 gStartMenuDesc_DbgSong[];
 extern const u8 gStartMenuDesc_DbgSfx[];
 extern const u8 gStartMenuDesc_DbgWatch[];

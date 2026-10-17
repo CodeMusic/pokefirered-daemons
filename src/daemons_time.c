@@ -23,6 +23,8 @@ static EWRAM_DATA u8 sSeason = SEASON_SUMMER;
 static EWRAM_DATA bool8 sWatchFromClock = FALSE;
 static EWRAM_DATA u32 sWatchReadAt = 0;
 static EWRAM_DATA bool8 sWatchRead = FALSE;
+static EWRAM_DATA u16 sDayNumber = 0;      // T-415: the date as a count of days, for the weather's seed
+static EWRAM_DATA u16 sMinuteOfDay = 0;    // T-415: 0-1439
 
 // The clock's hours: dawn 5-7, day 7-18, dusk 18-20, night 20-5.
 static u8 WatchFromHour(u8 hour)
@@ -65,6 +67,18 @@ static u8 EditionSeason(u8 north)
 #endif
 }
 
+// T-415: days since 2000-01-01 (the clock's years run 2020-2049, so a u16 holds them all).
+static u16 DayNumber(u16 year, u8 month, u8 day)
+{
+    static const u16 sDaysBeforeMonth[12] = { 0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334 };
+    u16 y = year - 2000;
+    u16 days = y * 365 + (y + 3) / 4 + sDaysBeforeMonth[(month - 1) % 12] + day - 1;
+
+    if (month > 2 && (y % 4) == 0)
+        days++;
+    return days;
+}
+
 // Asked on every step through grass and every palette load, and a clock read is a few thousand cycles of
 // bit-banging, so the answer is kept for a second. T-273: the weekday is read in the same pass -- the clock's own
 // weekday register, or, from play time, one day per hour of play (so a week is seven hours, and the watches turn
@@ -81,12 +95,17 @@ static void ReadClock(void)
         sWatch = WatchFromHour(clock.hour);
         sWeekday = clock.weekday;
         sSeason = EditionSeason(NorthSeason(clock.month, clock.day));
+        sDayNumber = DayNumber(clock.year, clock.month, clock.day);
+        sMinuteOfDay = clock.hour * 60 + clock.minute;
     }
     else
     {
         sWatch = sPlayTimeWatches[(gSaveBlock2Ptr->playTimeMinutes / 15) % WATCH_COUNT];
         sWeekday = gSaveBlock2Ptr->playTimeHours % WEEKDAY_COUNT;
         sSeason = EditionSeason((SEASON_SUMMER + gSaveBlock2Ptr->playTimeHours / 7) % SEASON_COUNT);
+        // An hour of play is a day (T-273), so a real minute is 24 of its minutes.
+        sDayNumber = gSaveBlock2Ptr->playTimeHours;
+        sMinuteOfDay = gSaveBlock2Ptr->playTimeMinutes * 24 + gSaveBlock2Ptr->playTimeSeconds * 24 / 60;
     }
     sWatchReadAt = gMain.vblankCounter2;
     sWatchRead = TRUE;
@@ -114,6 +133,14 @@ u8 DaemonsSeason(void)
         return (gDaemonsSeasonOverride - 1) % SEASON_COUNT;
     ReadClock();
     return sSeason;
+}
+
+// T-415: the day and the minute in it, from the same clock (or play time) the watch and the season follow.
+void DaemonsDayAndMinute(u16 *day, u16 *minute)
+{
+    ReadClock();
+    *day = sDayNumber;
+    *minute = sMinuteOfDay;
 }
 
 bool8 DaemonsWatchIsFromClock(void)

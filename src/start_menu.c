@@ -56,6 +56,7 @@
 #include "constants/field_weather.h"
 #include "sloopsvc.h"
 #include "daemons_time.h"
+#include "daemons_weather.h"
 #include "fieldmap.h"
 #include "field_weather.h"
 #include "event_object_movement.h"
@@ -99,6 +100,7 @@ enum StartMenuOption
     STARTMENU_DBG_INVOKE,
     STARTMENU_DBG_DEVICE,    // T-358
     STARTMENU_DBG_SEASON,    // T-359
+    STARTMENU_DBG_WEATHER,   // T-415
     STARTMENU_DBG_SONG,
     STARTMENU_DBG_SFX,
     STARTMENU_DBG_GLITCH,    // goal B: the glitch, placed nowhere yet
@@ -185,6 +187,8 @@ static bool8 DbgStepCallback(void);
 static bool8 DbgInvokeCallback(void);
 static bool8 DbgDeviceCallback(void);
 static bool8 DbgSeasonCallback(void);
+static bool8 DbgWeatherCallback(void);
+static void DbgVarsForRow(u8 row);
 static bool8 DbgHandleStepInput(void);
 static bool8 DbgSongCallback(void);
 static bool8 DbgWatchCallback(void);
@@ -260,6 +264,7 @@ static const struct MenuAction sStartMenuActionTable[] = {
     [STARTMENU_DBG_INVOKE]  = { gText_DbgMenuInvoke, {.u8_void = DbgInvokeCallback} },
     [STARTMENU_DBG_DEVICE]  = { gText_DbgMenuDevice, {.u8_void = DbgDeviceCallback} },
     [STARTMENU_DBG_SEASON]  = { gText_DbgMenuSeason, {.u8_void = DbgSeasonCallback} },
+    [STARTMENU_DBG_WEATHER] = { gText_DbgMenuWeather, {.u8_void = DbgWeatherCallback} },   // T-415
     // These two labels carry {STR_VAR_1} and {STR_VAR_2}. PrintStartMenuItems
     // runs every entry through StringExpandPlaceholders, so the current song
     // and sound effect can live in the menu itself -- no second window.
@@ -324,6 +329,7 @@ static const u8 *const sStartMenuDescPointers[] = {
     gStartMenuDesc_DbgInvoke,
     gStartMenuDesc_DbgDevice,
     gStartMenuDesc_DbgSeason,
+    gStartMenuDesc_DbgWeather,   // T-415
     gStartMenuDesc_DbgSong,
     gStartMenuDesc_DbgSfx,
     gStartMenuDesc_DbgGlitch,
@@ -403,6 +409,7 @@ static EWRAM_DATA u8 sDbgPage = 0;
 
 static EWRAM_DATA u16 sDbgSong = 0;
 static const u8 *const sDbgSeasonNames[] = { gText_DbgWatchAuto, gText_DbgWinter, gText_DbgSpring, gText_DbgSummer, gText_DbgAutumn };   // T-359, by gDaemonsSeasonOverride
+static const u8 *const sDbgWeatherNames[] = { gText_DbgWatchAuto, gText_DbgSkyClear, gText_DbgSkyRain, gText_DbgSkyStorm, gText_DbgSkySnow, gText_DbgSkyFog, gText_DbgSkyWind };   // T-415, by gDaemonsWeatherOverride
 static const u8 *const sDbgWatchNames[] = { gText_DbgWatchAuto, gText_DbgWatchDay, gText_DbgWatchDusk, gText_DbgWatchNight, gText_DbgWatchDawn };   // T-268, by gDaemonsWatchOverride
 static const u8 *const sDbgWeekdayNames[] = { gText_DbgWatchAuto, gText_DbgSun, gText_DbgMon, gText_DbgTue, gText_DbgWed, gText_DbgThu, gText_DbgFri, gText_DbgSat };   // T-273, by gDaemonsWeekdayOverride
 static EWRAM_DATA u16 sDbgSfx = 0;
@@ -427,6 +434,7 @@ static void SetUpStartMenu(void)
         AppendToStartMenuItems(STARTMENU_DBG_INVOKE);
         AppendToStartMenuItems(STARTMENU_DBG_DEVICE);
         AppendToStartMenuItems(STARTMENU_DBG_SEASON);
+        AppendToStartMenuItems(STARTMENU_DBG_WEATHER);   // T-415: the seventh row, as WATCH is the main page's
         AppendToStartMenuItems(STARTMENU_DBG_BACK);
         return;
     }
@@ -672,6 +680,9 @@ static s8 PrintStartMenuItems(s8 *cursor_p, u8 nitems)
         }
         else
         {
+#if DAEMONS_DEBUG
+            DbgVarsForRow(sStartMenuOrder[i]);
+#endif
             StringExpandPlaceholders(gStringVar4, sStartMenuActionTable[sStartMenuOrder[i]].text);
             AddTextPrinterParameterized(GetStartMenuWindowId(), FONT_NORMAL, gStringVar4, x + 8, y, 0xFF, NULL);
         }
@@ -1042,6 +1053,8 @@ static bool8 IsDaemonsDebugCallback(void)
         || sStartMenuCallback == DbgInvokeCallback
         || sStartMenuCallback == DbgSongCallback
         || sStartMenuCallback == DbgWatchCallback
+        || sStartMenuCallback == DbgSeasonCallback    // T-415: it relights the map behind the menu, as WATCH does
+        || sStartMenuCallback == DbgWeatherCallback   // T-415
         || sStartMenuCallback == DbgSfxCallback
         || sStartMenuCallback == DbgGlitchCallback // stays on the map: no fade to black behind it
         || sStartMenuCallback == DbgEventsCallback   // T-394: GAME EVENTS opens over the map
@@ -1646,6 +1659,25 @@ static bool8 DbgSeasonCallback(void)
     gDaemonsSeasonOverride = (gDaemonsSeasonOverride + 1) % ARRAY_COUNT(sDbgSeasonNames);
     DbgRelight();
     return DbgRedraw();
+}
+
+//  T-415: WEATHER steps AUTO (the date's events) -> CLEAR -> RAIN -> STORM -> SNOW -> FOG -> WIND, on any ordinary
+//  outdoor map, and the sky moves over at once. Nothing is saved; a reset goes back to AUTO.
+static bool8 DbgWeatherCallback(void)
+{
+    gDaemonsWeatherOverride = (gDaemonsWeatherOverride + 1) % ARRAY_COUNT(sDbgWeatherNames);
+    DaemonsSettleWeather();
+    return DbgRedraw();
+}
+
+//  The ENCOUNTER page has three {STR_VAR}s spoken for (DAEMON, LEVEL, SEASON), so the rows that share STR_VAR_3 fill it
+//  as each is printed -- the page prints top to bottom, and DbgSetVars puts SEASON's back on every redraw.
+static void DbgVarsForRow(u8 row)
+{
+    if (row == STARTMENU_DBG_SEASON)
+        StringCopy(gStringVar3, sDbgSeasonNames[gDaemonsSeasonOverride]);
+    else if (row == STARTMENU_DBG_WEATHER)
+        StringCopy(gStringVar3, sDbgWeatherNames[gDaemonsWeatherOverride]);
 }
 
 static bool8 DbgWatchCallback(void)

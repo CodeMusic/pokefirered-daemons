@@ -29,6 +29,7 @@ u8 DaemonsSeason(void);
 u8 DaemonsWatch(void);
 u8 DaemonsWeekday(void);           // 0-6, Sunday first
 bool8 DaemonsWatchIsFromClock(void);
+void DaemonsDayAndMinute(u16 *day, u16 *minute);   // T-415
 void DaemonsTintForWatch(u16 *palette, u16 count);
 
 #endif // GUARD_DAEMONS_TIME_H

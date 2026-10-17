@@ -1,5 +1,6 @@
 #include "global.h"
 #include "field_weather.h"
+#include "daemons_weather.h"
 #include "overworld.h"
 #include "constants/weather.h"
 
@@ -18,11 +19,30 @@ u8 GetSav1Weather(void)
     return gSaveBlock1Ptr->weather;
 }
 
+// T-415: an ordinary outdoor map's weather is the day's (src/daemons_weather.c); every other map keeps its header's.
+static u8 WeatherForCurrMap(void)
+{
+    return DaemonsWeatherForMap(TranslateWeatherNum(gMapHeader.weather), gMapHeader.mapType, gMapHeader.regionMapSectionId);
+}
+
 void SetSavedWeatherFromCurrMapHeader(void)
 {
     u8 oldWeather = gSaveBlock1Ptr->weather;
-    gSaveBlock1Ptr->weather = TranslateWeatherNum(gMapHeader.weather);
+    gSaveBlock1Ptr->weather = WeatherForCurrMap();
     UpdateRainCounter(gSaveBlock1Ptr->weather, oldWeather);
+}
+
+// T-415: once a second outdoors (overworld.c), and at once from DEBUG's WEATHER row: if the day's weather here is
+// no longer what the map shows, change it -- SetNextWeather, so it moves over as Ruby's route weather did.
+bool8 DaemonsSettleWeather(void)
+{
+    u8 weather = WeatherForCurrMap();
+
+    if (weather == gSaveBlock1Ptr->weather)
+        return FALSE;
+    SetSavedWeather(weather);
+    SetNextWeather(weather);
+    return TRUE;
 }
 
 void SetWeather(u32 weather)

@@ -1071,6 +1071,25 @@ static u8 RegionOfMapsec(u8 mapsec)
     return region;
 }
 
+// T-415: where a map section sits, for the weather -- its sheet (0 the mainland, 1-3 the islands' three) and its
+// rectangle in region-map cells. FALSE for a section the map does not draw (an interior, a cave: corner 0,0).
+bool8 DaemonsMapsecPlace(u8 mapsec, u8 *sheet, u8 *x, u8 *y, u8 *w, u8 *h)
+{
+    u8 i;
+
+    if (mapsec < KANTO_MAPSEC_START || mapsec >= MAPSEC_SPECIAL_AREA)
+        return FALSE;
+    i = mapsec - KANTO_MAPSEC_START;
+    if (sMapSectionTopLeftCorners[i][0] == 0 && sMapSectionTopLeftCorners[i][1] == 0)
+        return FALSE;
+    *sheet = RegionOfMapsec(mapsec);
+    *x = sMapSectionTopLeftCorners[i][0];
+    *y = sMapSectionTopLeftCorners[i][1];
+    *w = sMapSectionDimensions[i][0];
+    *h = sMapSectionDimensions[i][1];
+    return TRUE;
+}
+
 static void CB2_OpenRegionMap(void)
 {
     switch (sRegionMap->openState)

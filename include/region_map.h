@@ -17,5 +17,6 @@ u8 *GetMapNameGeneric_(u8 *dest, u16 mapsec);
 void InitRegionMapWithExitCB(u8 type, void (*callback)(void));
 void InitRegionMapFocusedWithExitCB(u8 type, u8 mapsec, void (*callback)(void));   // T-403
 void CB2_OpenFlyMap(void);
+bool8 DaemonsMapsecPlace(u8 mapsec, u8 *sheet, u8 *x, u8 *y, u8 *w, u8 *h);   // T-415
 
 #endif // GUARD_REGION_MAP_H

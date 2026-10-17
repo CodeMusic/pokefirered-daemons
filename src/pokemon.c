@@ -2718,16 +2718,17 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         // Are effects of weather negated with cloud nine or air lock
         if (WEATHER_HAS_EFFECT2)
         {
-            // Rain weakens Fire, boosts Water
+            // Rain weakens Fire, boosts Water. T-415 (the user, 2026-10-17): by a quarter either way, not Gen 3's half --
+            // weather is special, not the fight's whole shape. The type chart is untouched (invariant 3).
             if (gBattleWeather & B_WEATHER_RAIN_TEMPORARY)
             {
                 switch (type)
                 {
                 case TYPE_FIRE:
-                    damage /= 2;
+                    damage = (75 * damage) / 100;
                     break;
                 case TYPE_WATER:
-                    damage = (15 * damage) / 10;
+                    damage = (125 * damage) / 100;
                     break;
                 }
             }
@@ -2742,10 +2743,10 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
                 switch (type)
                 {
                 case TYPE_FIRE:
-                    damage = (15 * damage) / 10;
+                    damage = (125 * damage) / 100;   // T-415: a quarter, as rain's
                     break;
                 case TYPE_WATER:
-                    damage /= 2;
+                    damage = (75 * damage) / 100;
                     break;
                 }
             }

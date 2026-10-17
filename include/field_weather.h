@@ -132,6 +132,7 @@ u8 GetSav1Weather(void);
 
 void DoCurrentWeather(void);
 void SetSavedWeatherFromCurrMapHeader(void);
+bool8 DaemonsSettleWeather(void);   // T-415: TRUE if it changed the weather
 void SlightlyDarkenPalsInWeather(u16 *, u16 *, u32);
 void PlayRainStoppingSoundEffect(void);
 bool8 IsWeatherNotFadingIn(void);
@@ -149,6 +150,7 @@ void Weather_SetBlendCoeffs(u8 eva, u8 evb);
 void Weather_SetTargetBlendCoeffs(u8 eva, u8 evb, int delay);
 bool8 Weather_UpdateBlend(void);
 void LoadCustomWeatherSpritePalette(const u16 *palette);
+void DaemonsRetintWeatherSpritePalette(void);   // T-415
 void ResetDroughtWeatherPaletteLoading(void);
 bool8 LoadDroughtWeatherPalettes(void);
 void DroughtStateInit(void);
