@@ -4,6 +4,7 @@
 void BookReader_OpenNotebookPage(const u8 *title, const u8 *text);
 void Textbook_Open(void);
 void Guide_Open(void);
+void Subtle_Open(void);   // T-423
 void Guide_OpenBoardCopy(void);
 
 //  T-315: a QR code on the last page

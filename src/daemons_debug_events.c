@@ -44,7 +44,7 @@ enum
 {
     EV_EVERYTHING, EV_ROSTER, EV_EVERY_DAEMON, EV_STOCK,
     EV_OPENING, EV_SHOES, EV_INDEX, EV_OPUS, EV_SCHOOL, EV_TICKET, EV_FIR_KEY, EV_GROVES, EV_TEA, EV_GATES, EV_REVEAL, EV_RESOLVER,
-    EV_INTERRUPT, EV_GOTO_POINTS, EV_GUIDE, EV_GLOBAL_INDEX, EV_STREAM, EV_COMPANION, EV_INSTRUMENT,
+    EV_INTERRUPT, EV_GOTO_POINTS, EV_GUIDE, EV_SUBTLE, EV_GLOBAL_INDEX, EV_STREAM, EV_COMPANION, EV_INSTRUMENT,
     EV_MARKS_ALL, EV_MARK1, EV_MARK8 = EV_MARK1 + 7,
     EV_NOTEBOOK, EV_NOTEBOOK_FULL,
     EV_DRIVERS_ALL, EV_DRIVER1, EV_DRIVER8 = EV_DRIVER1 + 7,
@@ -100,6 +100,7 @@ static const u8 sName_Resolver[]     = _("RESOLVER (HALFTONE)");
 static const u8 sName_Interrupt[]    = _("INTERRUPT");
 static const u8 sName_GotoPoints[]   = _("EVERY GOTO POINT");
 static const u8 sName_Guide[]        = _("THE GUIDE");
+static const u8 sName_Subtle[]       = _("THE SUBTLE LAYER");   // T-423
 static const u8 sName_GlobalIndex[]  = _("GLOBAL INDEX");
 static const u8 sName_Roots[]        = _("UNDERSTANDINGS >");
 static const u8 sName_Stream[]       = _("STREAM AND HEARSAY");
@@ -175,6 +176,7 @@ static const struct DbgRow sRows_Events[] = {
     { sName_Interrupt,   R_TOGGLE, EV_INTERRUPT },
     { sName_GotoPoints,  R_TOGGLE, EV_GOTO_POINTS },
     { sName_Guide,       R_TOGGLE, EV_GUIDE },
+    { sName_Subtle,      R_TOGGLE, EV_SUBTLE },
     { sName_GlobalIndex, R_TOGGLE, EV_GLOBAL_INDEX },
     { sName_Roots,       R_PAGE,   PG_ROOTS },
     { sName_Year,        R_PAGE,   PG_YEAR },         // T-416
@@ -374,6 +376,7 @@ static bool8 IsHeld(u8 ev)
     case EV_INTERRUPT:    return CheckBagHasItem(ITEM_POKE_FLUTE, 1);
     case EV_GOTO_POINTS:  return FlagGet(FLAG_WORLD_MAP_BIRTH_ISLAND_EXTERIOR);
     case EV_GUIDE:        return FlagGet(FLAG_GOT_GUIDE);
+    case EV_SUBTLE:       return FlagGet(FLAG_GOT_SUBTLE_LAYER);
 #ifdef FIRERED
     case EV_INSTRUMENT:   return CheckBagHasItem(ITEM_HARP, 1);    // T-417: the edition's instrument
 #else
@@ -460,6 +463,7 @@ static void Apply(u8 ev, bool8 on)
     case EV_INTERRUPT:    SetFlag(FLAG_GOT_POKE_FLUTE, on); SetItem(ITEM_POKE_FLUTE, on); return;
     case EV_GOTO_POINTS:  DaemonsDebug_EveryGotoPoint(on); return;
     case EV_GUIDE:        SetFlag(FLAG_GOT_GUIDE, on); SetItem(ITEM_GUIDE, on); return;
+    case EV_SUBTLE:       SetFlag(FLAG_GOT_SUBTLE_LAYER, on); SetItem(ITEM_SUBTLE_LAYER, on); return;
     case EV_INSTRUMENT:   SetFlag(FLAG_GOT_INSTRUMENT, on); SetItem(PLAY_ITEM, on); return;   // T-417 P3: and the LYREBIRD / palm
     case EV_GLOBAL_INDEX:
         if (on)

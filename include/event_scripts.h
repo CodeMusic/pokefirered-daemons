@@ -1244,6 +1244,7 @@ extern const u8 EventScript_HolidayArrives_Halftone[];   // T-416 P4
 extern const u8 EventScript_HolidayArrives_Dawn[];
 extern const u8 EventScript_Textbook[];   // T-219
 extern const u8 EventScript_Guide[];      // T-300
+extern const u8 EventScript_SubtleLayer[];   // T-423
 extern const u8 EventScript_Diploma[];    // T-218
 extern const u8 Daemons_EventScript_OpusWrote[];   // T-203
 extern const u8 Daemons_EventScript_Insight[];     // T-390

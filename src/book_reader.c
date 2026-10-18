@@ -42,8 +42,9 @@
 //  text is printed with a transparent background, so the rules show through it as they would through ink.
 //  Everything lives on the HEAP; EWRAM has under a kilobyte free.
 
-enum { BOOK_NOTEBOOK, BOOK_TEXTBOOK, BOOK_GUIDE };
-enum { VIEW_PAGE, VIEW_CONTENTS, VIEW_CHAPTER, VIEW_TOPIC, VIEW_COVER, VIEW_GUIDE_CONTENTS, VIEW_GUIDE_ENTRY };
+enum { BOOK_NOTEBOOK, BOOK_TEXTBOOK, BOOK_GUIDE, BOOK_SUBTLE };   // T-423: THE SUBTLE LAYER
+enum { VIEW_PAGE, VIEW_CONTENTS, VIEW_CHAPTER, VIEW_TOPIC, VIEW_COVER, VIEW_GUIDE_CONTENTS, VIEW_GUIDE_ENTRY,
+       VIEW_SUBTLE_CONTENTS, VIEW_SUBTLE_ENTRY };
 
 #define WIN_BOOK        0
 #define BR_MAX_LINES    96      // T-300: a Guide entry runs to three spreads
@@ -105,6 +106,9 @@ struct BookReader
     u8 *blank;              // the empty sheet or spread, drawn once: filling it per pixel costs a quarter second
     u8 *blankPage;          // GUIDE: its reading page, which is not the contents' spread, so it is kept apart
     u16 lineStart[BR_MAX_LINES];
+    u8 linePara[BR_MAX_LINES];  // T-423: each line's paragraph, for the asking voice
+    bool8 voices;               // T-423: an entry with two voices, whose paragraphs are not indented
+    u8 picEntry, picFrame, picTimer;   // T-423: the open picture, and which of its frames
     u8 title[40];
     u8 text[BR_TEXT_SIZE];
     u8 lines[BR_LINES_SIZE];
@@ -250,6 +254,7 @@ static const u8 *const sTopics[TB_CHAPTERS + 1][TB_TOPICS] =
 struct GuideSection { const u8 *label; const u8 *heading; u8 first; u8 count; };
 struct GuideEntry { const u8 *shortTitle; const u8 *title; const u8 *text; };
 #include "data/guide.h"
+#include "data/subtle_layer.h"   // T-423: tools/gensubtle.py
 
 static const u16 sGuidePal[] = INCBIN_U16("graphics/book/guide_cover.gbapal");
 static const u32 sGuideCover[] = INCBIN_U32("graphics/book/guide_cover.4bpp");
@@ -346,7 +351,7 @@ static u8 Reflow(const u8 *src, u16 width, u8 font)
     u8 word[64];
     u8 *out = sBook->lines, *end = sBook->lines + BR_LINES_SIZE - 70;
     u16 lineW = 0, w, spaceW, indentW;
-    u8 n, len, count = 0;
+    u8 n, len, count = 0, para = 0;
     bool8 started = FALSE, indent = FALSE;
     static const u8 sSpace[] = _(" ");
     static const u8 sIndent[] = _("   ");
@@ -366,7 +371,9 @@ static u8 Reflow(const u8 *src, u16 width, u8 font)
                 lineW = 0;
                 started = FALSE;
             }
-            indent = (sBook->book == BOOK_GUIDE);   // the Guide's wide page: a paragraph opens indented
+            para++;
+            indent = (sBook->book == BOOK_GUIDE)    // the Guide's wide page: a paragraph opens indented
+                  || (sBook->book == BOOK_SUBTLE && !sBook->voices);   // and THE SUBTLE LAYER's, but not two voices
             continue;
         }
         if (*src == CHAR_SPACE || *src == CHAR_NEWLINE || *src == CHAR_PROMPT_SCROLL)
@@ -396,6 +403,8 @@ static u8 Reflow(const u8 *src, u16 width, u8 font)
             lineW = 0;
             started = FALSE;
         }
+        if (!started)
+            sBook->linePara[count] = para;
         if (started)
         {
             *out++ = CHAR_SPACE;
@@ -1037,6 +1046,179 @@ static void DrawGuideEntry(void)
     CopyWindowToVram(WIN_BOOK, COPYWIN_GFX);
 }
 
+
+//  ---------------------------------------------------------------- T-423: THE SUBTLE LAYER, an open book with pictures
+//
+//  The user's psychic book, rewritten as a trainer's handbook (docs/subtle-layer.md, tools/gensubtle.py). It reads
+//  as an open book (the user, 2026-10-18): a cover, a contents spread like the Guide's, then each entry opens with
+//  its picture on the left page and its text on the right, continuing over both pages. The page is CONTEXT's hue on
+//  purpose -- this book's colour carries the argument -- and the seven centres are never coloured. In TWO VOICES the
+//  asking voice is printed faint: the generator marks which paragraphs ask, and Reflow notes each line's paragraph.
+
+#define SB_PIC_X     (TB_LEFT_X + TB_TEXT_INSET + (TB_TEXT_W - 96) / 2)
+#define SB_PIC_Y     13
+#define SB_CAP_Y     103
+#define SB_TOP       14
+#define SB_BOTTOM    135
+#define SB_PER_PAGE  ((SB_BOTTOM - SB_TOP) / TB_PITCH)
+#define SB_ANIM      40          // frames between a picture's frames (SHADOWS, WHICH PATH)
+
+static u8 SubtleSectionOf(u8 entry)
+{
+    u8 k;
+
+    for (k = SUBTLE_SECTIONS - 1; k > 0; k--)
+    {
+        if (entry >= sSubtleSections[k].first)
+            break;
+    }
+    return k;
+}
+
+static void DrawSubtleCover(void)
+{
+    CpuFastCopy(sSubtleCover, gWindows[WIN_BOOK].tileData, BR_WIN_BYTES);
+    CopyWindowToVram(WIN_BOOK, COPYWIN_GFX);
+}
+
+static void DrawSubtleContents(void)
+{
+    const struct SubtleSection *sec = &sSubtleSections[sBook->section];
+    u8 k, n;
+    s16 x = TB_LEFT_X + TB_TEXT_INSET, rx = TB_RIGHT_X + TB_TEXT_INSET, y;
+
+    Background(DrawGuideBook);
+    Print(BR_FONT, sInk, TB_LEFT_X + (TB_PAGE_W - Width(BR_FONT, sText_GuideContents)) / 2, 10, sText_GuideContents);
+    Rect(C_RULE, x, 26, TB_TEXT_W, 1);
+    for (k = 0; k < SUBTLE_SECTIONS; k++)
+    {
+        y = GC_SECTION_TOP + k * GC_SECTION_PITCH;
+        if (k == sBook->section)
+        {
+            if (sBook->focusRight)
+                Rect(C_MARGIN, x - 5, y + 4, 2, 3);
+            else
+                Rect(C_HIGHLIGHT, x - 3, y - 1, TB_TEXT_W + 4, GC_SECTION_PITCH);
+        }
+        Print(BR_FONT, sInk, x, y - 2, sSubtleSections[k].label);
+    }
+    n = Reflow(sec->heading, TB_TEXT_W, BR_SMALL);
+    for (k = 0; k < n && k < 2; k++)
+        Print(BR_SMALL, sFaint, rx, 9 + k * 9, Line(k));
+    Rect(C_RULE, rx, 31, TB_TEXT_W, 1);
+    for (k = 0; k < sec->count; k++)
+    {
+        y = GC_ENTRY_TOP + k * GC_ENTRY_PITCH;
+        if (sBook->focusRight && k == sBook->cursor)
+            Rect(C_HIGHLIGHT, rx - 3, y - 1, TB_TEXT_W + 4, GC_ENTRY_PITCH - 2);
+        Print(BR_FONT, sInk, rx, y, sSubtleEntries[sec->first + k].shortTitle);
+    }
+    CopyWindowToVram(WIN_BOOK, COPYWIN_GFX);
+}
+
+static void DrawSubtlePicture(void)
+{
+    const struct SubtlePicture *p = &sSubtlePictures[sSubtleEntries[sBook->entry].picture];
+
+    BlitBitmapRectToWindow(WIN_BOOK, (const u8 *)p->frame[sBook->picFrame % p->frames], 0, 0, p->w, p->h,
+                           SB_PIC_X, SB_PIC_Y, p->w, p->h);
+}
+
+//  The entry's title, then its text, reflowed; returns where the text starts on the opening page. The text's lines
+//  are left in sBook->lines, and the spread count is set.
+static u8 SubtleLayout(u8 *titleLines, u8 *firstLines)
+{
+    const struct SubtleEntry *e = &sSubtleEntries[sBook->entry];
+    u8 start, n;
+
+    *titleLines = Reflow(e->title, TB_TEXT_W, BR_SMALL);
+    start = 19 + *titleLines * 10 + 9;
+    *firstLines = (SB_BOTTOM - start) / TB_PITCH;
+    sBook->voices = (e->faint != 0);
+    n = Reflow(e->text, TB_TEXT_W, BR_FONT);
+    sBook->voices = FALSE;
+    sBook->spreadCount = 1;
+    if (n > *firstLines)
+        sBook->spreadCount += ((n - *firstLines + SB_PER_PAGE - 1) / SB_PER_PAGE + 1) / 2;
+    if (sBook->spread >= sBook->spreadCount)
+        sBook->spread = sBook->spreadCount - 1;
+    return start;
+}
+
+static void PrintSubtleLines(u8 from, u8 count, s16 x, s16 y)
+{
+    const struct SubtleEntry *e = &sSubtleEntries[sBook->entry];
+    u8 i;
+
+    for (i = 0; i < count && from + i < sBook->lineCount; i++)
+        Print(BR_FONT, (e->faint >> sBook->linePara[from + i]) & 1 ? sFaint : sInk, x, y + i * TB_PITCH, Line(from + i));
+}
+
+static void DrawSubtleEntry(void)
+{
+    const struct SubtleEntry *e = &sSubtleEntries[sBook->entry];
+    u8 buf[6], titleLines, firstLines, i, n, from;
+    s16 x = TB_LEFT_X + TB_TEXT_INSET, rx = TB_RIGHT_X + TB_TEXT_INSET, start;
+    u16 folio = e->folio + 2 * sBook->spread;
+
+    if (sBook->picEntry != sBook->entry)
+    {
+        sBook->picEntry = sBook->entry;
+        sBook->picFrame = 0;
+        sBook->picTimer = 0;
+    }
+    Background(DrawGuideBook);
+    ConvertIntToDecimalStringN(buf, folio, STR_CONV_MODE_LEFT_ALIGN, 3);
+    Print(BR_SMALL, sFaint, TB_LEFT_X + (TB_PAGE_W - Width(BR_SMALL, buf)) / 2, TB_FOLIO_Y, buf);
+    ConvertIntToDecimalStringN(buf, folio + 1, STR_CONV_MODE_LEFT_ALIGN, 3);
+    Print(BR_SMALL, sFaint, TB_RIGHT_X + (TB_PAGE_W - Width(BR_SMALL, buf)) / 2, TB_FOLIO_Y, buf);
+    if (sBook->spread == 0)
+    {
+        DrawSubtlePicture();
+        n = Reflow(e->caption, TB_TEXT_W, BR_SMALL);
+        for (i = 0; i < n && i < 3; i++)
+            Print(BR_SMALL, sFaint, x + (TB_TEXT_W - Width(BR_SMALL, Line(i))) / 2, SB_CAP_Y + i * 10, Line(i));
+        Print(BR_SMALL, sFaint, rx, 9, sSubtleSections[SubtleSectionOf(sBook->entry)].label);
+        n = Reflow(e->title, TB_TEXT_W, BR_SMALL);
+        for (i = 0; i < n; i++)
+            Print(BR_SMALL, sInk, rx, 19 + i * 10, Line(i));
+    }
+    start = SubtleLayout(&titleLines, &firstLines);
+    if (sBook->spread == 0)
+    {
+        Rect(C_RULE, rx, start - 5, TB_TEXT_W, 1);
+        PrintSubtleLines(0, firstLines, rx, start);
+    }
+    else
+    {
+        from = firstLines + (2 * sBook->spread - 2) * SB_PER_PAGE;
+        PrintSubtleLines(from, SB_PER_PAGE, x, SB_TOP);
+        PrintSubtleLines(from + SB_PER_PAGE, SB_PER_PAGE, rx, SB_TOP);
+    }
+    if (sBook->spread + 1 < sBook->spreadCount)                             // more to come: the corner, lit
+    {
+        for (i = 0; i < 5; i++)
+            Rect(C_MARGIN, TB_RIGHT_X + TB_PAGE_W - 8 + (4 - i), 145 + i, i + 1, 1);
+    }
+    CopyWindowToVram(WIN_BOOK, COPYWIN_GFX);
+}
+
+//  A picture with frames turns over while its spread is open.
+static void AnimateSubtlePicture(void)
+{
+    const struct SubtlePicture *p;
+
+    if (sBook->book != BOOK_SUBTLE || sBook->view != VIEW_SUBTLE_ENTRY || sBook->spread != 0)
+        return;
+    p = &sSubtlePictures[sSubtleEntries[sBook->entry].picture];
+    if (p->frames < 2 || ++sBook->picTimer < SB_ANIM)
+        return;
+    sBook->picTimer = 0;
+    sBook->picFrame++;
+    DrawSubtlePicture();
+    CopyWindowToVram(WIN_BOOK, COPYWIN_GFX);
+}
+
 static void Draw(void)
 {
     switch (sBook->view)
@@ -1045,7 +1227,9 @@ static void Draw(void)
     case VIEW_CONTENTS:       DrawContents();      break;
     case VIEW_CHAPTER:        DrawChapter();       break;
     case VIEW_TOPIC:          DrawTopic();         break;
-    case VIEW_COVER:          DrawGuideCover();    break;
+    case VIEW_COVER:          if (sBook->book == BOOK_SUBTLE) DrawSubtleCover(); else DrawGuideCover(); break;
+    case VIEW_SUBTLE_CONTENTS: DrawSubtleContents(); break;
+    case VIEW_SUBTLE_ENTRY:    DrawSubtleEntry();    break;
     case VIEW_GUIDE_CONTENTS: DrawGuideContents(); break;
     case VIEW_GUIDE_ENTRY:    DrawGuideEntry();    break;
     }
@@ -1212,7 +1396,7 @@ static void Input_Cover(void)
     }
     else if (JOY_NEW(A_BUTTON))
     {
-        sBook->view = VIEW_GUIDE_CONTENTS;
+        sBook->view = (sBook->book == BOOK_SUBTLE) ? VIEW_SUBTLE_CONTENTS : VIEW_GUIDE_CONTENTS;
         Turn();
     }
 }
@@ -1320,6 +1504,109 @@ static void Input_GuideEntry(void)
     }
 }
 
+
+static void Input_SubtleContents(void)
+{
+    u8 count = sSubtleSections[sBook->section].count;
+
+    if (!sBook->focusRight)
+    {
+        if (JOY_NEW(B_BUTTON))
+        {
+            sBook->view = VIEW_COVER;
+            Turn();
+        }
+        else if (JOY_NEW(A_BUTTON | DPAD_RIGHT))
+        {
+            sBook->focusRight = TRUE;
+            sBook->cursor = 0;
+            Move();
+        }
+        else if (JOY_NEW(DPAD_UP) && sBook->section != 0)
+        {
+            sBook->section--;
+            Move();
+        }
+        else if (JOY_NEW(DPAD_DOWN) && sBook->section + 1 < SUBTLE_SECTIONS)
+        {
+            sBook->section++;
+            Move();
+        }
+        return;
+    }
+    if (JOY_NEW(B_BUTTON | DPAD_LEFT))
+    {
+        sBook->focusRight = FALSE;
+        Move();
+    }
+    else if (JOY_NEW(A_BUTTON))
+    {
+        sBook->entry = sSubtleSections[sBook->section].first + sBook->cursor;
+        sBook->spread = 0;
+        sBook->view = VIEW_SUBTLE_ENTRY;
+        Turn();
+    }
+    else if (JOY_NEW(DPAD_UP) && sBook->cursor != 0)
+    {
+        sBook->cursor--;
+        Move();
+    }
+    else if (JOY_NEW(DPAD_DOWN) && sBook->cursor + 1 < count)
+    {
+        sBook->cursor++;
+        Move();
+    }
+}
+
+static void SubtleBackToContents(void)
+{
+    sBook->section = SubtleSectionOf(sBook->entry);
+    sBook->cursor = sBook->entry - sSubtleSections[sBook->section].first;
+    sBook->focusRight = TRUE;
+    sBook->view = VIEW_SUBTLE_CONTENTS;
+    Turn();
+}
+
+static void Input_SubtleEntry(void)
+{
+    if (JOY_NEW(B_BUTTON))
+    {
+        SubtleBackToContents();
+    }
+    else if (JOY_NEW(A_BUTTON | DPAD_RIGHT | R_BUTTON))
+    {
+        if (sBook->spread + 1 < sBook->spreadCount)
+        {
+            sBook->spread++;
+            Turn();
+        }
+        else if (JOY_NEW(A_BUTTON))
+        {
+            SubtleBackToContents();
+        }
+        else if (sBook->entry + 1 < SUBTLE_ENTRIES)
+        {
+            sBook->entry++;
+            sBook->spread = 0;
+            Turn();
+        }
+    }
+    else if (JOY_NEW(DPAD_LEFT | L_BUTTON))
+    {
+        if (sBook->spread != 0)
+        {
+            sBook->spread--;
+            Turn();
+        }
+        else if (sBook->entry != 0)
+        {
+            sBook->entry--;
+            sBook->spread = 0;
+            Turn();
+        }
+    }
+}
+
 static void Task_BookInput(u8 taskId)
 {
     if (sBook->leaving)
@@ -1350,7 +1637,11 @@ static void Task_BookInput(u8 taskId)
     case VIEW_COVER:          Input_Cover();         break;
     case VIEW_GUIDE_CONTENTS: Input_GuideContents(); break;
     case VIEW_GUIDE_ENTRY:    Input_GuideEntry();    break;
+    case VIEW_SUBTLE_CONTENTS: Input_SubtleContents(); break;
+    case VIEW_SUBTLE_ENTRY:    Input_SubtleEntry();    break;
     }
+    if (sBook != NULL && !sBook->leaving)
+        AnimateSubtlePicture();
 }
 
 //  ---------------------------------------------------------------- the screen
@@ -1374,6 +1665,7 @@ static void Task_BookInit(u8 taskId)
 {
     const u16 *pal = (sBook->book == BOOK_NOTEBOOK) ? sNotebookPal
                    : (sBook->book == BOOK_GUIDE)    ? sGuidePal
+                   : (sBook->book == BOOK_SUBTLE)   ? sSubtlePal
                    : sTextbookPal;
 
     switch (sBook->initState)
@@ -1486,6 +1778,13 @@ void Textbook_Open(void)
 void Guide_Open(void)
 {
     OpenBook(BOOK_GUIDE, VIEW_COVER);
+}
+
+//  T-423: THE SUBTLE LAYER, open at its cover. The script fades first.
+void Subtle_Open(void)
+{
+    OpenBook(BOOK_SUBTLE, VIEW_COVER);
+    sBook->picEntry = 0xFF;
 }
 
 //  T-315: a NOTEBOOK page that ends on a QR code -- one more page, after the text. Called just after it is opened.

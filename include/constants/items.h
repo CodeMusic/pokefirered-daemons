@@ -239,7 +239,7 @@
 #define ITEM_GUIDE 228 // T-300: THE PROGRAMMER'S GUIDE TO THE HUMAN MIND, from ONE ISLAND. Was ITEM_0E4, unused
 #define ITEM_HARP 229  // T-417: CONTENT's instrument (PLAY). Was ITEM_0E5, unused
 #define ITEM_FLUTE 230 // T-417: CONTEXT's instrument (PLAY). Was ITEM_0E6, unused
-#define ITEM_0E7 231
+#define ITEM_SUBTLE_LAYER 231 // T-423: THE SUBTLE LAYER, the trainer's handbook. Was ITEM_0E7, unused
 #define ITEM_0E8 232
 #define ITEM_0E9 233
 #define ITEM_0EA 234
