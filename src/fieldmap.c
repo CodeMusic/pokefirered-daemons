@@ -1064,10 +1064,18 @@ static u8 DaemonsClarityFade(void)
 // Summer is the palette as drawn. The tables are tools/gbaseasons.py's, from the approved mock-ups.
 #include "data/season_palettes.h"
 
+// T-417 (the user, 2026-10-18): BREATHVERSE stays timeless -- no season and no watch's light on the islet. Its weather
+// is left as the day draws it (only the tints were ruled out).
+static bool8 DaemonsIsTimeless(void)
+{
+    return gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_BREATHVERSE)
+        && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_BREATHVERSE);
+}
+
 static bool8 DaemonsSeasonShows(void)
 {
     return gMapHeader.mapLayout != NULL && gMapHeader.mapLayout->primaryTileset == &gTileset_General
-        && IsMapTypeOutdoors(gMapHeader.mapType) && !DaemonsIsBlancheOutdoors();
+        && IsMapTypeOutdoors(gMapHeader.mapType) && !DaemonsIsBlancheOutdoors() && !DaemonsIsTimeless();
 }
 
 static u8 DaemonsSeasonHere(void)
@@ -1126,7 +1134,7 @@ u8 DaemonsFieldTint(void)
     if (DaemonsIsHalftone())
         return QL_TINT_GRAYSCALE;
     // T-268: the watch's light, outdoors only -- and after HALFTONE, because grey outranks time.
-    if (IsMapTypeOutdoors(gMapHeader.mapType) && DaemonsWatch() != WATCH_DAY)
+    if (IsMapTypeOutdoors(gMapHeader.mapType) && DaemonsWatch() != WATCH_DAY && !DaemonsIsTimeless())
         return DAEMONS_TINT_WATCH;
     return QL_TINT_NONE;
 }
