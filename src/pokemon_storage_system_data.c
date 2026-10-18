@@ -1027,6 +1027,7 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
 
     gStorage->displayMonItemId = ITEM_NONE;
     gStorage->displayMonIsAway = FALSE;
+    gStorage->displayMonFriendship = 0;
     gender = MON_MALE;
     sanityIsBagEgg = FALSE;
     if (mode == MODE_PARTY)
@@ -1052,6 +1053,7 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
             gender = GetMonGender(mon);
             gStorage->displayMonItemId = GetMonData(mon, MON_DATA_HELD_ITEM);
             gStorage->displayMonIsAway = DaemonIsAway(mon);
+            gStorage->displayMonFriendship = GetMonData(mon, MON_DATA_FRIENDSHIP);
         }
     }
     else if (mode == MODE_BOX)
@@ -1078,6 +1080,7 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
             gender = GetGenderFromSpeciesAndPersonality(gStorage->displayMonSpecies, gStorage->displayMonPersonality);
             gStorage->displayMonItemId = GetBoxMonData(boxMon, MON_DATA_HELD_ITEM);
             gStorage->displayMonIsAway = DaemonBoxIsAway(boxMon);
+            gStorage->displayMonFriendship = GetBoxMonData(boxMon, MON_DATA_FRIENDSHIP);
         }
     }
     else

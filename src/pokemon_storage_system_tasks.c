@@ -27,6 +27,7 @@
 #include "constants/help_system.h"
 #include "constants/songs.h"
 #include "daemon_streaks.h"
+#include "daemon_saturation.h"
 
 EWRAM_DATA struct PokemonStorageSystemData *gStorage = NULL;
 static EWRAM_DATA bool8 sInPartyMenu = 0;
@@ -2341,6 +2342,8 @@ static void LoadDisplayMonGfx(u16 species, u32 personality)
         HandleLoadSpecialPokePic(&gMonFrontPicTable[species], gStorage->tileBuffer, species, personality);
         LZ77UnCompWram(gStorage->displayMonPalette, gStorage->displayMonPalBuffer);
         Streaks_ApplyToBuffer(gStorage->displayMonPalBuffer, species, gStorage->displayMonMoves);
+        if (!gStorage->displayMonIsEgg)     // T-424: its friendship's saturation (an egg's friendship is its steps)
+            Saturation_ApplyToBuffer(gStorage->displayMonPalBuffer, gStorage->displayMonFriendship);
         if (gStorage->displayMonIsAway)     // T-358: on the player's device, so drawn paler
             DaemonsWashAway(gStorage->displayMonPalBuffer, 16);
         CpuCopy32(gStorage->tileBuffer, gStorage->displayMonTilePtr, 0x800);

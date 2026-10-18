@@ -83,6 +83,7 @@ EWRAM_DATA static u16 sHatchedEggMotherMoves[4] = {0};
 
 #include "data/pokemon/egg_moves.h"
 #include "daemon_streaks.h"
+#include "daemon_saturation.h"
 
 static const struct WindowTemplate sDaycareLevelMenuWindowTemplate =
 {
@@ -1732,6 +1733,7 @@ static u8 EggHatchCreateMonSprite(u8 a0, u8 switchID, u8 pokeID, u16 *speciesLoc
 
             Streaks_MovesOfMon(mon, moves);
             Streaks_ApplyToLoaded(OBJ_PLTT_ID(IndexOfSpritePaletteTag(GetMonSpritePalStruct(mon)->tag)), species, moves);
+            Saturation_ApplyToLoaded(OBJ_PLTT_ID(IndexOfSpritePaletteTag(GetMonSpritePalStruct(mon)->tag)), GetMonData(mon, MON_DATA_FRIENDSHIP));   // T-424: hatched, at 120
         }
         *speciesLoc = species;
     }

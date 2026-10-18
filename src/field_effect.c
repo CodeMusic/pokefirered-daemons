@@ -30,6 +30,7 @@
 #include "constants/songs.h"
 #include "constants/sound.h"
 #include "daemon_streaks.h"
+#include "daemon_saturation.h"
 #include "daemons_time.h"
 
 extern struct CompressedSpritePalette gMonPaletteTable[]; // Intentionally declared (incorrectly) without const in order to match
@@ -667,6 +668,7 @@ static u8 CreateMonSprite_FieldMove(u16 species, u32 otId, u32 personality, s16 
 
                 Streaks_MovesOfMon(&gPlayerParty[i], moves);
                 Streaks_ApplyToLoaded(OBJ_PLTT_ID(IndexOfSpritePaletteTag(spritePalette->tag)), species, moves);
+                Saturation_ApplyToLoaded(OBJ_PLTT_ID(IndexOfSpritePaletteTag(spritePalette->tag)), GetMonData(&gPlayerParty[i], MON_DATA_FRIENDSHIP));   // T-424
                 break;
             }
         }

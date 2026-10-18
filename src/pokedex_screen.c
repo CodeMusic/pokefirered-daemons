@@ -1,4 +1,5 @@
 #include "global.h"
+#include "daemon_saturation.h"
 #include "book_reader.h"
 #include "gflib.h"
 #include "graphics.h"
@@ -2693,6 +2694,8 @@ static void DexScreen_LoadMonPicInWindow(u8 windowId, u16 species, u16 paletteOf
     DaemonsClarity(&gDexPicMosaicW, &gDexPicMosaicH);   // T-317 (trainer_pokemon_sprites.c)
     LoadMonPicInWindow(species, SHINY_ODDS, DexScreen_GetDefaultPersonality(species), TRUE, paletteOffset >> 4, windowId);
     gDexPicMosaicW = gDexPicMosaicH = 0;
+    // T-424: the INDEX has no friendship, so it shows every daemon grey -- the player can see what the record cannot
+    Saturation_ApplyToLoaded(paletteOffset, SATURATION_INDEX);
 }
 
 static void DexScreen_PrintMonDexNo(u8 windowId, u8 fontId, u16 species, u8 x, u8 y)

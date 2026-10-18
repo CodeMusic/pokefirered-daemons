@@ -9,6 +9,7 @@
 #include "util.h"
 #include "constants/battle_anim.h"
 #include "daemon_streaks.h"
+#include "daemon_saturation.h"
 
 #define IS_DOUBLE_BATTLE() (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
 
@@ -1959,6 +1960,7 @@ u8 CreateAdditionalMonSpriteForMoveAnim(u16 species, bool8 isBackpic, u8 templat
 
             Streaks_MovesOfBattler(battlerId, moves);
             Streaks_ApplyToLoaded(OBJ_PLTT_ID(palette), species, moves);
+            Saturation_ApplyToLoaded(OBJ_PLTT_ID(palette), Saturation_OfBattler(battlerId));   // T-424
         }
         if (ignoreDeoxys == TRUE || ShouldIgnoreDeoxysForm(DEOXYS_CHECK_BATTLE_ANIM, battlerId) == TRUE || gBattleSpritesDataPtr->battlerData[battlerId].transformSpecies != 0)
             LoadSpecialPokePic_DontHandleDeoxys(&gMonFrontPicTable[species],
@@ -1981,6 +1983,7 @@ u8 CreateAdditionalMonSpriteForMoveAnim(u16 species, bool8 isBackpic, u8 templat
 
             Streaks_MovesOfBattler(battlerId, moves);
             Streaks_ApplyToLoaded(OBJ_PLTT_ID(palette), species, moves);
+            Saturation_ApplyToLoaded(OBJ_PLTT_ID(palette), Saturation_OfBattler(battlerId));   // T-424
         }
         if (ignoreDeoxys == TRUE || ShouldIgnoreDeoxysForm(DEOXYS_CHECK_BATTLE_ANIM, battlerId) == TRUE || gBattleSpritesDataPtr->battlerData[battlerId].transformSpecies != 0)
             LoadSpecialPokePic_DontHandleDeoxys(&gMonBackPicTable[species],

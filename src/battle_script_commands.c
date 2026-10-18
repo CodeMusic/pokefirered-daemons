@@ -1,4 +1,5 @@
 #include "global.h"
+#include "daemon_saturation.h"
 #include "gflib.h"
 #include "item.h"
 #include "util.h"
@@ -9753,6 +9754,7 @@ static void Cmd_displaydexinfo(void)
                                             64,
                                             0,
                                             0xFFFF);
+            Saturation_ApplyToLoaded(OBJ_PLTT_ID(0), GetMonData(&gEnemyParty[0], MON_DATA_FRIENDSHIP));   // T-424: back from the INDEX, the caught daemon at its own
             CpuFill32(0, gPlttBufferFaded, BG_PLTT_SIZE);
             BeginNormalPaletteFade(0x1FFFF, 0, 16, 0, RGB_BLACK);
             ShowBg(0);

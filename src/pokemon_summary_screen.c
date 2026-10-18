@@ -626,6 +626,7 @@ static const u32 sBgTilemap_MovesPage[] = INCBIN_U32( "graphics/summary_screen/m
 
 #include "data/text/nature_names.h"
 #include "daemon_streaks.h"
+#include "daemon_saturation.h"
 
 static const u8 *const sEggHatchTimeTexts[] = {
     gText_PokeSum_EggHatch_LongTime,
@@ -4041,6 +4042,10 @@ static void PokeSum_CreateMonPicSprite(void)
         Streaks_MovesOfMon(&sMonSummaryScreen->currentMon, moves);
         Streaks_ApplyToLoaded(OBJ_PLTT_ID(gSprites[spriteId].oam.paletteNum), species, moves);
     }
+    // T-424: its saturation, its friendship's (an egg's friendship counts its steps: an egg keeps its colours)
+    if (species != SPECIES_EGG)
+        Saturation_ApplyToLoaded(OBJ_PLTT_ID(gSprites[spriteId].oam.paletteNum),
+                                 GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_FRIENDSHIP));
     // T-358: a daemon AWAY on the player's device is drawn paler here too, its picture and its icon
     if (DaemonIsAway(&sMonSummaryScreen->currentMon))
         DaemonsWashAwayLoaded(OBJ_PLTT_ID(gSprites[spriteId].oam.paletteNum), 16);

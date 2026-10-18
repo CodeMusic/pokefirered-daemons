@@ -27,6 +27,7 @@
 #include "constants/pokemon.h"
 #include "constants/items.h"
 #include "daemon_streaks.h"
+#include "daemon_saturation.h"
 
 extern struct Evolution gEvolutionTable[][EVOS_PER_MON];
 
@@ -271,6 +272,7 @@ void EvolutionScene(struct Pokemon* mon, u16 postEvoSpecies, bool8 canStopEvo, u
 
         Streaks_MovesOfMon(mon, moves);
         Streaks_ApplyToLoaded(OBJ_PLTT_ID(1), currSpecies, moves);
+        Saturation_ApplyToLoaded(OBJ_PLTT_ID(1), GetMonData(mon, MON_DATA_FRIENDSHIP));   // T-424
     }
 
     SetMultiuseSpriteTemplateToPokemon(currSpecies, B_POSITION_OPPONENT_LEFT);
@@ -292,6 +294,7 @@ void EvolutionScene(struct Pokemon* mon, u16 postEvoSpecies, bool8 canStopEvo, u
 
         Streaks_MovesOfMon(mon, moves);
         Streaks_ApplyToLoaded(OBJ_PLTT_ID(2), postEvoSpecies, moves);
+        Saturation_ApplyToLoaded(OBJ_PLTT_ID(2), GetMonData(mon, MON_DATA_FRIENDSHIP));   // T-424
     }
 
     SetMultiuseSpriteTemplateToPokemon(postEvoSpecies, B_POSITION_OPPONENT_RIGHT);
@@ -377,6 +380,7 @@ static void CB2_EvolutionSceneLoadGraphics(void)
 
         Streaks_MovesOfMon(mon, moves);
         Streaks_ApplyToLoaded(OBJ_PLTT_ID(2), postEvoSpecies, moves);
+        Saturation_ApplyToLoaded(OBJ_PLTT_ID(2), GetMonData(mon, MON_DATA_FRIENDSHIP));   // T-424
     }
 
     SetMultiuseSpriteTemplateToPokemon(postEvoSpecies, B_POSITION_OPPONENT_RIGHT);
@@ -454,6 +458,7 @@ static void CB2_TradeEvolutionSceneLoadGraphics(void)
 
                 Streaks_MovesOfMon(mon, moves);
                 Streaks_ApplyToLoaded(OBJ_PLTT_ID(2), postEvoSpecies, moves);
+                Saturation_ApplyToLoaded(OBJ_PLTT_ID(2), GetMonData(mon, MON_DATA_FRIENDSHIP));   // T-424
             }
             gMain.state++;
         }
@@ -525,6 +530,7 @@ void TradeEvolutionScene(struct Pokemon* mon, u16 postEvoSpecies, u8 preEvoSprit
 
         Streaks_MovesOfMon(mon, moves);
         Streaks_ApplyToLoaded(OBJ_PLTT_ID(2), postEvoSpecies, moves);
+        Saturation_ApplyToLoaded(OBJ_PLTT_ID(2), GetMonData(mon, MON_DATA_FRIENDSHIP));   // T-424
     }
 
     SetMultiuseSpriteTemplateToPokemon(postEvoSpecies, B_POSITION_OPPONENT_LEFT);

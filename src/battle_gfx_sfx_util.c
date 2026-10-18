@@ -19,6 +19,7 @@
 #include "constants/moves.h"
 #include "constants/songs.h"
 #include "daemon_streaks.h"
+#include "daemon_saturation.h"
 
 static bool8 ShouldAnimBeDoneRegardlessOfSubsitute(u8 animId);
 static void Task_ClearBitWhenBattleTableAnimDone(u8 taskId);
@@ -362,6 +363,8 @@ void BattleLoadOpponentMonSpriteGfx(struct Pokemon *mon, u8 battlerId)
             Streaks_MovesOfBattler(battlerId, moves);
         Streaks_ApplyToBuffer(buffer, species, moves);
     }
+    // T-424: then its saturation, its friendship's -- the daemon's own, PERSPECTIVE-changed or not
+    Saturation_ApplyToBuffer(buffer, GetMonData(mon, MON_DATA_FRIENDSHIP));
     LoadPalette(buffer, paletteOffset, PLTT_SIZE_4BPP);
     LoadPalette(buffer, BG_PLTT_ID(8) + BG_PLTT_ID(battlerId), PLTT_SIZE_4BPP);
     Free(buffer);
@@ -370,6 +373,7 @@ void BattleLoadOpponentMonSpriteGfx(struct Pokemon *mon, u8 battlerId)
         paletteOffset = OBJ_PLTT_ID(battlerId);
         LZDecompressWram(lzPaletteData, gBattleStruct->castformPalette[0]);
         LoadPalette(gBattleStruct->castformPalette[gBattleMonForms[battlerId]], paletteOffset, PLTT_SIZE_4BPP);
+        Saturation_ApplyToLoaded(paletteOffset, GetMonData(mon, MON_DATA_FRIENDSHIP));
     }
     // transform's pink color
     if (gBattleSpritesDataPtr->battlerData[battlerId].transformSpecies != SPECIES_NONE)
@@ -427,6 +431,8 @@ void BattleLoadPlayerMonSpriteGfx(struct Pokemon *mon, u8 battlerId)
             Streaks_MovesOfBattler(battlerId, moves);
         Streaks_ApplyToBuffer(buffer, species, moves);
     }
+    // T-424: then its saturation, its friendship's -- the daemon's own, PERSPECTIVE-changed or not
+    Saturation_ApplyToBuffer(buffer, GetMonData(mon, MON_DATA_FRIENDSHIP));
     LoadPalette(buffer, paletteOffset, PLTT_SIZE_4BPP);
     LoadPalette(buffer, BG_PLTT_ID(8) + BG_PLTT_ID(battlerId), PLTT_SIZE_4BPP);
     Free(buffer);
@@ -435,6 +441,7 @@ void BattleLoadPlayerMonSpriteGfx(struct Pokemon *mon, u8 battlerId)
         paletteOffset = OBJ_PLTT_ID(battlerId);
         LZDecompressWram(lzPaletteData, gBattleStruct->castformPalette[0]);
         LoadPalette(gBattleStruct->castformPalette[gBattleMonForms[battlerId]], paletteOffset, PLTT_SIZE_4BPP);
+        Saturation_ApplyToLoaded(paletteOffset, GetMonData(mon, MON_DATA_FRIENDSHIP));
     }
     // transform's pink color
     if (gBattleSpritesDataPtr->battlerData[battlerId].transformSpecies != SPECIES_NONE)
@@ -764,6 +771,7 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, u8 transformType)
             Streaks_MovesOfMon(&gEnemyParty[gBattlerPartyIndexes[battlerAtk]], moves);
             Streaks_ApplyToBuffer(buffer, targetSpecies, moves);
         }
+        Saturation_ApplyToBuffer(buffer, Saturation_OfBattler(battlerAtk));   // T-424
         LoadPalette(buffer, paletteOffset, PLTT_SIZE_4BPP);
         Free(buffer);
         gSprites[gBattlerSpriteIds[battlerAtk]].y = GetBattlerSpriteDefault_Y(battlerAtk);
@@ -777,6 +785,7 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, u8 transformType)
         StartSpriteAnim(&gSprites[gBattlerSpriteIds[battlerAtk]], gBattleSpritesDataPtr->animationData->animArg);
         paletteOffset = OBJ_PLTT_ID(battlerAtk);
         LoadPalette(gBattleStruct->castformPalette[gBattleSpritesDataPtr->animationData->animArg], paletteOffset, PLTT_SIZE_4BPP);
+        Saturation_ApplyToLoaded(paletteOffset, Saturation_OfBattler(battlerAtk));   // T-424
         gBattleMonForms[battlerAtk] = gBattleSpritesDataPtr->animationData->animArg;
         if (gBattleSpritesDataPtr->battlerData[battlerAtk].transformSpecies != SPECIES_NONE)
         {
@@ -829,12 +838,15 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, u8 transformType)
             Streaks_MovesOfBattler(battlerDef, moves);
             Streaks_ApplyToBuffer(buffer, targetSpecies, moves);
         }
+        // T-424: PERSPECTIVE takes the target's look, at the taker's own friendship
+        Saturation_ApplyToBuffer(buffer, Saturation_OfBattler(battlerAtk));
         LoadPalette(buffer, paletteOffset, PLTT_SIZE_4BPP);
         Free(buffer);
         if (targetSpecies == SPECIES_CASTFORM)
         {
             LZDecompressWram(lzPaletteData, gBattleStruct->castformPalette[0]);
             LoadPalette(gBattleStruct->castformPalette[0] + gBattleMonForms[battlerDef] * 16, paletteOffset, PLTT_SIZE_4BPP);
+            Saturation_ApplyToLoaded(paletteOffset, Saturation_OfBattler(battlerAtk));
         }
         BlendPalette(paletteOffset, 16, 6, RGB_WHITE);
         CpuCopy32(&gPlttBufferFaded[paletteOffset], &gPlttBufferUnfaded[paletteOffset], PLTT_SIZE_4BPP);

@@ -16,6 +16,7 @@
 #include "constants/pokemon_special_anim.h"
 #include "constants/songs.h"
 #include "daemon_streaks.h"
+#include "daemon_saturation.h"
 
 static void LoadBgGfxByAnimType(u16 animType);
 static void Task_ZoomAnim(u8 taskId);
@@ -680,6 +681,7 @@ void PSA_CreateMonSpriteAtCloseness(u8 closeness)
             Streaks_MovesOfMon(pokemon, moves);
             Streaks_ApplyToBuffer(monPalBuffer, species, moves);
         }
+        Saturation_ApplyToBuffer(monPalBuffer, GetMonData(pokemon, MON_DATA_FRIENDSHIP));   // T-424
         LoadMonSpriteGraphics(monPicBuffer, monPalBuffer);
         spriteId = CreateSprite(&sSpriteTemplate_MonSprite, 120, scene->monSpriteY1, 4);
         if (spriteId != MAX_SPRITES)

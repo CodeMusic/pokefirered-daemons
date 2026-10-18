@@ -1853,6 +1853,17 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
             }
         }
 
+        // T-424 (vision.md 8.5, "Saturation is friendship"): the Corpus fields its daemons at friendship 0, so every
+        // one is drawn grey (src/daemon_saturation.c) -- its people, CORPUS STAFF and their BOSS, stay in colour.
+        if (gTrainers[trainerNum].trainerClass == TRAINER_CLASS_TEAM_ROCKET
+         || gTrainers[trainerNum].trainerClass == TRAINER_CLASS_BOSS)
+        {
+            u8 none = 0;
+
+            for (i = 0; i < gTrainers[trainerNum].partySize; i++)
+                SetMonData(&party[i], MON_DATA_FRIENDSHIP, &none);
+        }
+
         gBattleTypeFlags |= gTrainers[trainerNum].doubleBattle;
     }
 

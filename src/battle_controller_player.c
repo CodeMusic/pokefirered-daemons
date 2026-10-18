@@ -1,4 +1,5 @@
 #include "global.h"
+#include "daemon_saturation.h"
 #include "gflib.h"
 #include "data.h"
 #include "item.h"
@@ -527,6 +528,8 @@ static void PerspectiveInBattle(void)
             sPerspectiveSprites[1] = CreateMonPicSprite_HandleDeoxys(gBattleMons[me].species,
                 gBattleMons[me].otId, gBattleMons[me].personality, TRUE, tx, ty,
                 sPerspectivePals[1], TAG_NONE);
+            Saturation_ApplyToLoaded(OBJ_PLTT_ID(sPerspectivePals[0]), Saturation_OfBattler(them));   // T-424
+            Saturation_ApplyToLoaded(OBJ_PLTT_ID(sPerspectivePals[1]), Saturation_OfBattler(me));
 
             //  T-190: the action menu's cursor is a SPRITE and survived into the look, sitting on a window
             //  that now holds prose -- the user read it as an arrow that ought to do something, and nothing
@@ -3545,6 +3548,9 @@ static void DbgTheatre_Teach(void)
     Streaks_MovesOfMon(mon, moves);
     Streaks_ApplyToLoaded(OBJ_PLTT_ID(gSprites[gBattlerSpriteIds[battler]].oam.paletteNum), species, moves);
     Streaks_ApplyToLoaded(BG_PLTT_ID(8) + BG_PLTT_ID(battler), species, moves);
+    // T-424: the streaks were written at full colour over a palette already at its friendship's saturation
+    Saturation_ApplyToLoadedRange(OBJ_PLTT_ID(gSprites[gBattlerSpriteIds[battler]].oam.paletteNum), STREAK_FIRST_INDEX, MAX_MON_MOVES, GetMonData(mon, MON_DATA_FRIENDSHIP));
+    Saturation_ApplyToLoadedRange(BG_PLTT_ID(8) + BG_PLTT_ID(battler), STREAK_FIRST_INDEX, MAX_MON_MOVES, GetMonData(mon, MON_DATA_FRIENDSHIP));
     PlaySE(SE_EXP_MAX);
     sTheatreSlot = (sTheatreSlot + 1) % MAX_MON_MOVES;
 }
