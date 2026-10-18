@@ -29,6 +29,11 @@
 // destroyed with DestroySprite, never DestroyAnimSprite, and Holds() destroys any still flying before it says done.
 // The notes go on SE3 (PLAY's own path, Play_SoundNote), which `end` neither waits for nor stops: the harp rings out.
 // SE3 is also the low-HP alarm's player, so a signature never sounds over a song of anyone else's (risk 2).
+//
+// T-392 P2 (the user, 2026-10-18): ALL 363 routines play their row in the release ROMs too (every family APPROVED in
+// the generated table), and every glyph wears a true-black outline (graphics/battle_anims/sprites/daemons_glyphs.png,
+// index 1 black in both the ink and the splash palette), so its type's colour reads on any picture -- MISREAD's magenta
+// had been lost on its own pink. The union routines' own scripts are still debug-only; the release ROMs play their row.
 
 #include "data/daemons_signatures.h"
 

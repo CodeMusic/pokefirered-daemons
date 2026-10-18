@@ -535,8 +535,10 @@ const u32 gBattleAnimSpritePal_GoldRing[] = INCBIN_U32("graphics/battle_anims/sp
 
 const u32 gBattleAnimSpritePal_BlueRing2[] = INCBIN_U32("graphics/battle_anims/sprites/blue_ring_2.gbapal.lz");
 // T-392: the splash's glyphs (the presents scene's own sheet and palette), and their grey ink
-const u32 gBattleAnimSpriteGfx_DaemonsGlyphs[] = INCBIN_U32("graphics/intro/game_freak/sparkles_small.4bpp.lz");
-const u32 gBattleAnimSpritePal_DaemonsGlyphs[] = INCBIN_U32("graphics/intro/game_freak/sparkles.gbapal.lz");
+// T-392 P2: the battle's own glyph sheet -- the splash's 0, 1 and note, each ringed in a true-black outline so its
+// colour reads on any picture (DAEMONS tools/gensignature.py writes the sheet and both palettes; never hand-edited).
+const u32 gBattleAnimSpriteGfx_DaemonsGlyphs[] = INCBIN_U32("graphics/battle_anims/sprites/daemons_glyphs.4bpp.lz");
+const u32 gBattleAnimSpritePal_DaemonsGlyphs[] = INCBIN_U32("graphics/battle_anims/sprites/daemons_glyphs.gbapal.lz");
 const u32 gBattleAnimSpritePal_DaemonsInk[] = INCBIN_U32("graphics/battle_anims/sprites/daemons_ink.gbapal.lz");
 const u32 gBattleAnimSpritePal_PurpleRing[] = INCBIN_U32("graphics/battle_anims/sprites/purple_ring.gbapal.lz");
 const u32 gBattleAnimSpritePal_BlueRing[] = INCBIN_U32("graphics/battle_anims/sprites/blue_ring.gbapal.lz");
