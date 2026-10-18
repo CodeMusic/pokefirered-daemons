@@ -50,6 +50,7 @@ EventScript_Play_NexusLit::
 	special SingingFir_Sing
 	waitstate
 	setflag FLAG_NEXUS_LIT
+	special Play_LightNexus
 	msgbox Text_Play_ThankYou
 	releaseall
 	end

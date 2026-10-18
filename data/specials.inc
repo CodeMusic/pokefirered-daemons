@@ -373,6 +373,7 @@ gSpecials::
 	def_special Play_Bell
 	def_special Play_ShowDayBanner
 	def_special Play_NoteFled
+	def_special Play_LightNexus
 	def_special DaemonsGlitch
 	def_special DaemonsHoldsEveryUnderstanding
 	def_special DaemonsDreamCountHeal

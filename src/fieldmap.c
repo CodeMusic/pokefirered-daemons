@@ -1238,6 +1238,8 @@ static void LoadTilesetPalette(struct Tileset const *tileset, u16 destOffset, u1
         else if (tileset->isSecondary == TRUE)
         {
             LoadPalette(tileset->palettes[NUM_PALS_IN_PRIMARY], destOffset, size);
+            Play_OnTilesetPalettesLoaded();   // T-417 P5: THE NEXUS's tree, lit -- before the tint, so the watch and
+                                              // the recap's grey (and the copy it puts back after) fall on the lit tree
             DaemonsClarityEntries(destOffset, size >> 1);
             ApplyGlobalTintToPaletteEntries(destOffset, size >> 1);
         }

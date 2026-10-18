@@ -32,6 +32,9 @@ void Play_BufferSongKey(void);   // STR_VAR_1: its key
 void Play_Bell(void);            // the LYREBIRD's bell, on the HARP (waitstate)
 void Play_ShowDayBanner(void);
 void Play_NoteFled(void);        // EventScript_MonFlewAway
+// T-417 P5: THE NEXUS's tree, lit and kept lit (FLAG_NEXUS_LIT).
+void Play_OnTilesetPalettesLoaded(void);   // fieldmap.c, as the secondary tileset's palettes load
+void Play_LightNexus(void);                 // the special, as it is lit
 // A note: `semitone` from the instrument's middle C (negative, and past 12, are octaves by bend), on SE2 or SE3.
 void Play_SoundNote(u8 instrument, s16 semitone, bool8 onSe3);
 #if DAEMONS_DEBUG
