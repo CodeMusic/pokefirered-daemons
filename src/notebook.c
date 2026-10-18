@@ -360,9 +360,9 @@ static const u8 sTitle_Review_Transcript[] = _("TRANSCRIPT");
 static const u8 sTitle_Review_Sealed[]     = _("SEALED");
 static const u8 sTitle_Prospectus_Scores[]  = _("REVIEW SCORES");
 
-//  T-417: the SONGBOOK's titles, DRAFT. The seven are the user's starting pairings (TODO T-417), one per ROOT/MARK.
+//  T-417: the SONGBOOK's titles, DRAFT -- one per ROOT/MARK pair, as DAEMONS docs/play_songs.json names them
+//  (tools/genplaysongs.py fails if the two disagree).
 static const u8 sTitle_Song_Fir[]          = _("O CHRISTMAS TREE");
-#if DAEMONS_DEBUG
 static const u8 sTitle_Song_1[]            = _("TWELVE DAYS OF DECEMBER");   // SLATE / NAMING
 static const u8 sTitle_Song_2[]            = _("THE REALIZATION");           // SLOPE / STILL
 static const u8 sTitle_Song_3[]            = _("FORGIVENESS OFFERED");       // SENSE / MEND
@@ -370,7 +370,6 @@ static const u8 sTitle_Song_4[]            = _("SEQUEL THE GUARDIAN");       // 
 static const u8 sTitle_Song_5[]            = _("HARMONY IN BALANCE");        // SKEW / STANCE
 static const u8 sTitle_Song_6[]            = _("THE SHIMMERING CANVAS");     // FRAME / NOTICE
 static const u8 sTitle_Song_7[]            = _("REFLECTIONS WITHIN");        // HEAT / REFLECT
-#endif
 
 #include "data/wisdom.h"   // T-390: the seven insights, written by DAEMONS tools/gbawisdom.py
 
@@ -448,18 +447,16 @@ static const struct NotebookEntry sEntries[] =
     { NB_PEER_REVIEW,  NB_KIND_TEXT,  0, FLAG_NOTEBOOK_REVIEW_SEALED,   0, sTitle_Review_Sealed,       SaffronCity_MrPsychicsHouse_Text_NotMineToDeliver },
     //  T-390 (bible 0.7, Wisdom; rule 2 amended): INSIGHT grows one line a pair and is never numbered.
     NB_INSIGHT_ENTRIES
-    //  T-417: the SONGBOOK. O CHRISTMAS TREE, then the seven -- whose melodies are still to come from the user, so their
-    //  rows are the DEBUG build's only (P4 brings each one when its motif is chosen). Titles DRAFT.
-    { NB_SONGBOOK,     NB_KIND_SONG,  PLAY_SONG_FIR, FLAG_SONG_FIR,    0, sTitle_Song_Fir,            NULL },
-#if DAEMONS_DEBUG
-    { NB_SONGBOOK,     NB_KIND_SONG,  PLAY_SONG_1 + 0, FLAG_SONG_1 + 0, 0, sTitle_Song_1,             NULL },
-    { NB_SONGBOOK,     NB_KIND_SONG,  PLAY_SONG_1 + 1, FLAG_SONG_1 + 1, 0, sTitle_Song_2,             NULL },
-    { NB_SONGBOOK,     NB_KIND_SONG,  PLAY_SONG_1 + 2, FLAG_SONG_1 + 2, 0, sTitle_Song_3,             NULL },
-    { NB_SONGBOOK,     NB_KIND_SONG,  PLAY_SONG_1 + 3, FLAG_SONG_1 + 3, 0, sTitle_Song_4,             NULL },
-    { NB_SONGBOOK,     NB_KIND_SONG,  PLAY_SONG_1 + 4, FLAG_SONG_1 + 4, 0, sTitle_Song_5,             NULL },
-    { NB_SONGBOOK,     NB_KIND_SONG,  PLAY_SONG_1 + 5, FLAG_SONG_1 + 5, 0, sTitle_Song_6,             NULL },
-    { NB_SONGBOOK,     NB_KIND_SONG,  PLAY_SONG_1 + 6, FLAG_SONG_1 + 6, 0, sTitle_Song_7,             NULL },
-#endif
+    //  T-417: the SONGBOOK. O CHRISTMAS TREE, then the seven (P4: their motifs chosen by the user by ear), each
+    //  written in once it is heard in its ROOT's place and played back.
+    { NB_SONGBOOK,     NB_KIND_SONG,  PLAY_SONG_FIR,      FLAG_SONG_FIR, 0, sTitle_Song_Fir,         NULL },
+    { NB_SONGBOOK,     NB_KIND_SONG,  PLAY_SONG_NAMING,   FLAG_SONG_1,   0, sTitle_Song_1,           NULL },
+    { NB_SONGBOOK,     NB_KIND_SONG,  PLAY_SONG_STILL,    FLAG_SONG_2,   0, sTitle_Song_2,           NULL },
+    { NB_SONGBOOK,     NB_KIND_SONG,  PLAY_SONG_MEND,     FLAG_SONG_3,   0, sTitle_Song_3,           NULL },
+    { NB_SONGBOOK,     NB_KIND_SONG,  PLAY_SONG_PRACTICE, FLAG_SONG_4,   0, sTitle_Song_4,           NULL },
+    { NB_SONGBOOK,     NB_KIND_SONG,  PLAY_SONG_STANCE,   FLAG_SONG_5,   0, sTitle_Song_5,           NULL },
+    { NB_SONGBOOK,     NB_KIND_SONG,  PLAY_SONG_NOTICE,   FLAG_SONG_6,   0, sTitle_Song_6,           NULL },
+    { NB_SONGBOOK,     NB_KIND_SONG,  PLAY_SONG_REFLECT,  FLAG_SONG_7,   0, sTitle_Song_7,           NULL },
 };
 
 #if DAEMONS_DEBUG

@@ -101,5 +101,7 @@ ViridianCity_Gym_EventScript_GymStatue::
 
 ViridianCity_Gym_EventScript_GymStatuePostVictory::
 	msgbox ViridianCity_Gym_Text_GymStatuePlayerWon
+	setvar VAR_0x8004, PLAY_SONG_STANCE   @ T-417 P4: once STANCE is held, HARMONY IN BALANCE
+	call EventScript_Play_Hear
 	releaseall
 	end

@@ -1,5 +1,6 @@
 #include "constants/global.h"
 #include "constants/flags.h"
+#include "constants/play.h"
 #include "constants/event_objects.h"
 #include "constants/event_object_movement.h"
 #include "constants/decorations.h"

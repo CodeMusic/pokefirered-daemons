@@ -133,6 +133,7 @@ u8 GetSav1Weather(void);
 void DoCurrentWeather(void);
 void SetSavedWeatherFromCurrMapHeader(void);
 bool8 DaemonsSettleWeather(void);   // T-415: TRUE if it changed the weather
+bool8 DaemonsPlaySongSky(void);     // T-417 P4: HARMONY IN BALANCE turns the sky here for the watch
 void SlightlyDarkenPalsInWeather(u16 *, u16 *, u32);
 void PlayRainStoppingSoundEffect(void);
 bool8 IsWeatherNotFadingIn(void);

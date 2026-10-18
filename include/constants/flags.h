@@ -1716,6 +1716,14 @@
 #define FLAG_SONG_6                   (DAEMONS_FLAGS_START + 0x267)
 #define FLAG_SONG_7                   (DAEMONS_FLAGS_START + 0x268)
 #define FLAG_NEXUS_LIT                (DAEMONS_FLAGS_START + 0x269)
+//  T-417 P4: a song HEARD in its ROOT's place with the instrument in hand -- now it can be played back, and learned.
+#define FLAG_SONG_HEARD_1             (DAEMONS_FLAGS_START + 0x26B)   // .. + 0x271: the seven, in FLAG_SONG_1's order
+#define FLAG_SONG_HEARD_2             (DAEMONS_FLAGS_START + 0x26C)
+#define FLAG_SONG_HEARD_3             (DAEMONS_FLAGS_START + 0x26D)
+#define FLAG_SONG_HEARD_4             (DAEMONS_FLAGS_START + 0x26E)
+#define FLAG_SONG_HEARD_5             (DAEMONS_FLAGS_START + 0x26F)
+#define FLAG_SONG_HEARD_6             (DAEMONS_FLAGS_START + 0x270)
+#define FLAG_SONG_HEARD_7             (DAEMONS_FLAGS_START + 0x271)
 //  T-417 P2: the NOTEBOOK's second block of SEEN flags -- seen 64 and up (tools/gbanotebook.py spills into it).
 #define FLAG_NOTEBOOK_SEEN_64         (DAEMONS_FLAGS_START + 0x280)   // .. + 0x2BF: 64
 

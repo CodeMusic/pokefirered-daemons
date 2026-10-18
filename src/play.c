@@ -4,6 +4,12 @@
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "event_scripts.h"
+#include "field_specials.h"
+#include "field_weather.h"
+#include "daemons_time.h"
+#include "metatile_behavior.h"
+#include "overworld.h"
+#include "region_map.h"
 #include "field_player_avatar.h"
 #include "fieldmap.h"
 #include "map_name_popup.h"
@@ -18,10 +24,13 @@
 #include "task.h"
 #include "text_window.h"
 #include "trig.h"
+#include "constants/event_bg.h"
 #include "constants/event_objects.h"
 #include "constants/flags.h"
 #include "constants/items.h"
 #include "constants/maps.h"
+#include "constants/region_map_sections.h"
+#include "constants/vars.h"
 #include "constants/songs.h"
 
 // T-417: PLAY (the user, 2026-10-17; docs/private/draft-play-2026-10-17.md). The edition's instrument -- CONTENT's
@@ -50,7 +59,18 @@
 // listened for from the start, sheet or no sheet (the user: the band's sheet is the hint, not the lock). The other
 // seven are listened for once learned, and their melodies are still to come (P4).
 //
-// Not yet (P3-P5): ghost notes, the giver and the palm, the last key used. Every word here is DRAFT.
+// P4 (the user, 2026-10-17): THE SEVEN, one per MARK/ROOT pair, their motifs chosen by the user by ear from their own
+// recordings (DAEMONS docs/play_songs.json -> src/data/play_songs.h, tools/genplaysongs.py, which also fails the build
+// check if any song's shape sits inside another's). A song is HEARD in its ROOT's place once that understanding is
+// held -- the game plays it, its notes drifting up in their colours (Play_Hear, data/scripts/play.inc) -- and then
+// PLAYED BACK in its key, anywhere, to be learned: the notes join, the echo, and it is written into the SONGBOOK.
+// Once learned, each does something when played where it belongs (AfterEcho): TWELVE DAYS sings the calendar (the day
+// banner), THE REALIZATION stills the grass for 200 steps, FORGIVENESS OFFERED calls back a daemon that flew away from
+// here, SEQUEL THE GUARDIAN sends its notes toward the nearest grove not yet found (and in THE NEXUS the GUARDIAN
+// answers), HARMONY IN BALANCE turns the sky here for the watch, THE SHIMMERING CANVAS lights what is buried nearby,
+// and REFLECTIONS WITHIN raises a REFLECTION from the water in front of the player, once a day.
+//
+// Not yet (P5): ghost notes, the last key used. Every word here is DRAFT.
 
 #define PLAY_TAG_NOTES 0x1040   // 16x16 x 12, a note of each key's colour
 #define PLAY_TAG_SMALL 0x1041   // 8x8 x 24: twelve wheel dots, then twelve staff heads
@@ -71,14 +91,18 @@
 #define KEY_MARK_Y     22
 #define KEY_NAME_X     26
 #define RING_MAX       16       // the last sixteen notes, listened in
-#define MOTIF_MAX      8
+#define MOTIF_MAX      12       // the longest song (tools/genplaysongs.py holds it to this)
 #define JOIN_GAP       18       // between the joined notes
 #define JOIN_BELOW     36       // the joined line's lowest note, below the player (above is the staff's)
 #define ECHO_DELAY     8        // SE3 answers SE2 this many frames late
 #define ECHO_SOFT      102      // ...at two-fifths
 #define ECHO_TAIL      24       // frames held after the last echo note
 
-enum { STATE_WAIT, STATE_WHEEL, STATE_FOLD, STATE_PLAY, STATE_JOINED };
+#define AFTER_FRAMES   96       // P4: how long a song's notes go on doing something after the echo
+#define HEAR_TAIL      40       // frames a heard tune's last notes are left to drift
+
+enum { STATE_WAIT, STATE_WHEEL, STATE_FOLD, STATE_PLAY, STATE_JOINED, STATE_AFTER };
+enum { AFTER_DRIFT, AFTER_SPARKLE };
 enum { TARGET_NONE, TARGET_FIR, TARGET_NEXUS_TREE };
 
 struct Play
@@ -111,41 +135,31 @@ struct Play
     u8 joined[MOTIF_MAX];
     u8 joinDots[2 * (MOTIF_MAX - 1)];
     u8 pulse[MOTIF_MAX];
+    bool8 learning;          // P4: the song matched was only heard -- now it is learned
+    u8 after;                // AFTER_*
+    s8 afterDx, afterDy;     // AFTER_DRIFT: which way the notes go
 };
 
 // ------------------------------------------------------------------------------------------------------------ songs
 
-// A song: its key, its motif as pitch classes (C 0 .. B 11) and as staff steps for the SONGBOOK (letters from middle
-// C, so it reads as pitch), and how long each note is held when it echoes. A motif of no notes is still to come.
+// A song: what learns it and what lets it be heard, its key, and its motif four ways -- as the game plays it when it
+// is heard (semitones from middle C), as pitch classes (C 0 .. B 11, what is listened for), as staff steps for the
+// SONGBOOK (letters from middle C, so it reads as pitch), and how long each note is held when it is heard or echoes.
 struct PlaySong
 {
     u16 flag;                // learned
+    u16 heardFlag;           // heard in its ROOT's place with the instrument in hand (none for the fir)
+    u16 understanding;       // its place plays it once this is held
     u8 key;
     u8 count;
+    const s8 *notes;
     const u8 *pcs;
-    const u8 *steps;
+    const s8 *steps;
     const u8 *frames;
+    const u8 *page;          // the SONGBOOK's line of where it was heard
 };
 
-// O CHRISTMAS TREE's opening, in B-flat: F Bb Bb Bb C D D D -- on the buttons B, DOWN x3, LEFT, UP x3. The fir's own
-// sFirTune (field_specials.c) is the reference; the echo keeps its first eight notes' lengths.
-static const u8 sFir_Pcs[]    = {5, 10, 10, 10, 0, 2, 2, 2};
-static const u8 sFir_Steps[]  = {3, 6, 6, 6, 7, 8, 8, 8};      // F4 B4 B4 B4 C5 D5 D5 D5, on the staff
-static const u8 sFir_Frames[] = {30, 22, 8, 40, 18, 22, 8, 40};
-
-// The seven (the user's starting pairings, TODO T-417): their motifs come from the user's albums (P4). Until then each
-// is a row with no notes -- never listened for, and in the SONGBOOK only in the DEBUG build.
-static const struct PlaySong sSongs[PLAY_SONG_COUNT] =
-{
-    [PLAY_SONG_FIR] = {FLAG_SONG_FIR, 10, ARRAY_COUNT(sFir_Pcs), sFir_Pcs, sFir_Steps, sFir_Frames},
-    [PLAY_SONG_1 + 0] = {FLAG_SONG_1 + 0},   // TWELVE DAYS OF DECEMBER   SLATE / NAMING      TBD
-    [PLAY_SONG_1 + 1] = {FLAG_SONG_1 + 1},   // THE REALIZATION           SLOPE / STILL       TBD
-    [PLAY_SONG_1 + 2] = {FLAG_SONG_1 + 2},   // 1001 / FORGIVENESS        SENSE / MEND        TBD
-    [PLAY_SONG_1 + 3] = {FLAG_SONG_1 + 3},   // SEQUEL THE GUARDIAN       FIT / PRACTICE      TBD
-    [PLAY_SONG_1 + 4] = {FLAG_SONG_1 + 4},   // HARMONY IN BALANCE        SKEW / STANCE       TBD
-    [PLAY_SONG_1 + 5] = {FLAG_SONG_1 + 5},   // THE SHIMMERING CANVAS     FRAME / NOTICE      TBD
-    [PLAY_SONG_1 + 6] = {FLAG_SONG_1 + 6},   // REFLECTIONS WITHIN        HEAT / REFLECT      TBD
-};
+#include "data/play_songs.h"   // DAEMONS tools/genplaysongs.py, from docs/play_songs.json
 
 static const u16 sKeyColours_Pal[] = INCBIN_U16("graphics/play/key_colours.gbapal");
 static const u32 sNotes_Gfx[]      = INCBIN_U32("graphics/play/notes.4bpp");
@@ -300,15 +314,20 @@ static bool8 PlayBreath(struct MusicPlayerInfo *mp, u8 *breath, bool8 fading)
 
 // ---------------------------------------------------------------------------------------------------------- sprites
 
-static u8 MakeSprite(struct Play *play, const struct SpriteTemplate *template, s16 x, s16 y, u8 anim)
+static u8 MakeSpriteIn(u8 palSlot, const struct SpriteTemplate *template, s16 x, s16 y, u8 anim)
 {
     u8 spriteId = CreateSprite(template, x, y, 0);
 
     if (spriteId == MAX_SPRITES)
         return MAX_SPRITES;
-    gSprites[spriteId].oam.paletteNum = play->palSlot;
+    gSprites[spriteId].oam.paletteNum = palSlot;
     StartSpriteAnim(&gSprites[spriteId], anim);
     return spriteId;
+}
+
+static u8 MakeSprite(struct Play *play, const struct SpriteTemplate *template, s16 x, s16 y, u8 anim)
+{
+    return MakeSpriteIn(play->palSlot, template, x, y, anim);
 }
 
 static void DestroyIf(u8 *spriteId)
@@ -343,24 +362,30 @@ static void SpriteCB_Drift(struct Sprite *sprite)
         sprite->invisible = sprite->sAge & 1;
 }
 
-static void SpawnDrift(struct Play *play, u8 key)
+// A note of colour `key` drifting up from (cx, cy) into one of eight slots, the oldest recycled.
+static void SpawnDriftAt(u8 palSlot, u8 *drift, u8 *next, u8 instrument, s16 cx, s16 cy, u8 key)
 {
-    u8 *slot = &play->drift[play->nextDrift];
-    s16 x = play->cx + (Random() % 9) - 4;
-    s16 y = play->cy - 8;
+    u8 *slot = &drift[*next];
+    s16 x = cx + (Random() % 9) - 4;
+    s16 y = cy - 8;
 
     DestroyIf(slot);   // eight in the air at most: the oldest goes
-    *slot = MakeSprite(play, &sTemplate_Drift, x, y, key);
+    *slot = MakeSpriteIn(palSlot, &sTemplate_Drift, x, y, key);
     if (*slot != MAX_SPRITES)
     {
         struct Sprite *s = &gSprites[*slot];
         s->sX0 = x;
         s->sY0 = y;
-        s->sLife = play->instrument == PLAY_FLUTE ? 48 : 32;
-        s->sRise = play->instrument == PLAY_FLUTE ? 48 : 24;
-        s->sSway = play->instrument == PLAY_FLUTE;
+        s->sLife = instrument == PLAY_FLUTE ? 48 : 32;
+        s->sRise = instrument == PLAY_FLUTE ? 48 : 24;
+        s->sSway = instrument == PLAY_FLUTE;
     }
-    play->nextDrift = (play->nextDrift + 1) % DRIFT_MAX;
+    *next = (*next + 1) % DRIFT_MAX;
+}
+
+static void SpawnDrift(struct Play *play, u8 key)
+{
+    SpawnDriftAt(play->palSlot, play->drift, &play->nextDrift, play->instrument, play->cx, play->cy, key);
 }
 
 #undef sAge
@@ -414,10 +439,13 @@ static void CloseStaff(struct Play *play)
     play->windowId = WINDOW_NONE;
 }
 
-// A head for degree d (0-6) in the key, `octave` -1/0/+1: placed by its letter, so the staff reads as pitch.
+// A head for degree d (0-6) in the key, `octave` -1/0/+1: placed by its letter, so the staff reads as pitch. Keys from
+// G up sound their middle octave below middle C (sKeyTonic), but are WRITTEN an octave up, as the other keys are, so
+// every key's middle octave sits on the lines (P4: B-flat's heads fell below them).
 static void WriteHead(struct Play *play, u8 degree, s8 octave, u8 pc)
 {
-    s16 step = sKeyLetter[play->key] + degree + 7 * octave;
+    s16 letter = sKeyLetter[play->key] < 0 ? sKeyLetter[play->key] + 7 : sKeyLetter[play->key];
+    s16 step = letter + degree + 7 * octave;
     u8 i;
 
     if (play->headCount == STAFF_HEADS)
@@ -497,6 +525,33 @@ static void Shine(struct Play *play)
         CpuCopy16(sKeyColours_Pal, &gPlttBufferFaded[OBJ_PLTT_ID(play->palSlot)], PLTT_SIZE_4BPP);
 }
 
+// The sheets and the one palette: a slot of its own if one is free, or else the player's reflection slot is lent --
+// idle unless the player stands on reflective water, and the player stands still while playing or listening.
+static void LoadArt(u8 *palSlot, bool8 *borrowed, u16 *lent)
+{
+    LoadSpriteSheet(&sPlaySheets[0]);
+    LoadSpriteSheet(&sPlaySheets[1]);
+    *borrowed = FALSE;
+    *palSlot = LoadSpritePalette(&sKeyColoursPalette);
+    if (*palSlot == 0xFF)
+    {
+        *borrowed = TRUE;
+        *palSlot = PALSLOT_PLAYER_REFLECTION;
+        CpuCopy16(&gPlttBufferUnfaded[OBJ_PLTT_ID(*palSlot)], lent, PLTT_SIZE_4BPP);
+        LoadPalette(sKeyColours_Pal, OBJ_PLTT_ID(*palSlot), PLTT_SIZE_4BPP);
+    }
+}
+
+static void FreeArt(u8 palSlot, bool8 borrowed, const u16 *lent)
+{
+    FreeSpriteTilesByTag(PLAY_TAG_NOTES);
+    FreeSpriteTilesByTag(PLAY_TAG_SMALL);
+    if (borrowed)
+        LoadPalette(lent, OBJ_PLTT_ID(palSlot), PLTT_SIZE_4BPP);
+    else
+        FreeSpritePaletteByTag(PALTAG_KEY_COLOURS);
+}
+
 static bool8 TakeOut(struct Play *play)
 {
     struct Sprite *avatar = &gSprites[gPlayerAvatar.spriteId];
@@ -517,18 +572,7 @@ static bool8 TakeOut(struct Play *play)
     for (i = 0; i < ARRAY_COUNT(play->joinDots); i++)
         play->joinDots[i] = MAX_SPRITES;
 
-    LoadSpriteSheet(&sPlaySheets[0]);
-    LoadSpriteSheet(&sPlaySheets[1]);
-    play->palSlot = LoadSpritePalette(&sKeyColoursPalette);
-    if (play->palSlot == 0xFF)
-    {
-        //  Four dynamic slots taken (weather, two field effects, a fourth): borrow the player's reflection slot --
-        //  idle unless the player stands on reflective water, and the player stands still while playing.
-        play->borrowed = TRUE;
-        play->palSlot = PALSLOT_PLAYER_REFLECTION;
-        CpuCopy16(&gPlttBufferUnfaded[OBJ_PLTT_ID(play->palSlot)], play->lentColours, PLTT_SIZE_4BPP);
-        LoadPalette(sKeyColours_Pal, OBJ_PLTT_ID(play->palSlot), PLTT_SIZE_4BPP);
-    }
+    LoadArt(&play->palSlot, &play->borrowed, play->lentColours);
     OpenStaff(play);
     OpenWheel(play);
     return TRUE;
@@ -561,16 +605,7 @@ static void Teardown(u8 taskId, const u8 *script)
     for (i = 0; i < DRIFT_MAX; i++)
         DestroyIf(&play->drift[i]);
     ClearJoined(play);
-    FreeSpriteTilesByTag(PLAY_TAG_NOTES);
-    FreeSpriteTilesByTag(PLAY_TAG_SMALL);
-    if (play->borrowed)
-    {
-        LoadPalette(play->lentColours, OBJ_PLTT_ID(play->palSlot), PLTT_SIZE_4BPP);
-    }
-    else
-    {
-        FreeSpritePaletteByTag(PALTAG_KEY_COLOURS);
-    }
+    FreeArt(play->palSlot, play->borrowed, play->lentColours);
     CloseStaff(play);
     Free(play);
     DestroyTask(taskId);
@@ -654,6 +689,7 @@ static void Join(struct Play *play, u8 song)
     play->fading = TRUE;
     play->breath = 0;
     play->song = song;
+    play->learning = song != PLAY_SONG_FIR && !FlagGet(tune->flag);
     play->clock = 0;
     play->ringCount = 0;
     play->state = STATE_JOINED;
@@ -700,7 +736,7 @@ static bool8 Echo(struct Play *play)
 
 // After every note: is the end of what has been played a song? In its own key, it is; the right shape in any other
 // key (or the right notes, in a key that is not the song's) is ALMOST. A known song: O CHRISTMAS TREE always, the
-// seven once learned. TRUE if the task has been handed on.
+// seven once heard in their places. TRUE if the task has been handed on.
 static bool8 Listen(u8 taskId)
 {
     struct Play *play = GetPlay(taskId);
@@ -714,8 +750,8 @@ static bool8 Listen(u8 taskId)
         tune = &sSongs[song];
         if (tune->count == 0 || play->ringCount < tune->count)
             continue;
-        if (song != PLAY_SONG_FIR && !FlagGet(tune->flag))
-            continue;
+        if (song != PLAY_SONG_FIR && !FlagGet(tune->flag) && !(tune->heardFlag && FlagGet(tune->heardFlag)))
+            continue;   // listened for once heard in its place (to be learned) or learned
         tail = &play->ring[play->ringCount - tune->count];
         shift = (PitchClass(tail[0]) + 12 - tune->pcs[0]) % 12;
         same = TRUE;
@@ -736,20 +772,266 @@ static bool8 Listen(u8 taskId)
     return FALSE;
 }
 
-// The echo has died away: what the song opens, if it was played to something -- or the line lets go, and play goes on.
+// ------------------------------------------------------------------------------------------- what the seven do (P4)
+
+// SEQUEL THE GUARDIAN: the groves, each by the section its door is in (tools/gbagrove.py's fourteen).
+static const struct { u16 flag; u8 mapsec; } sGroves[] = {
+    { FLAG_VIRIDIAN_FOREST_GROVE_FOUND,           MAPSEC_VIRIDIAN_FOREST },
+    { FLAG_ROUTE25_GROVE_FOUND,                   MAPSEC_ROUTE_25 },
+    { FLAG_ROUTE1_GROVE_FOUND,                    MAPSEC_ROUTE_1 },
+    { FLAG_ROUTE24_GROVE_FOUND,                   MAPSEC_ROUTE_24 },
+    { FLAG_ROUTE8_GROVE_FOUND,                    MAPSEC_ROUTE_8 },
+    { FLAG_ROUTE11_GROVE_FOUND,                   MAPSEC_ROUTE_11 },
+    { FLAG_ROUTE13_GROVE_FOUND,                   MAPSEC_ROUTE_13 },
+    { FLAG_FIVE_ISLAND_MEADOW_GROVE_FOUND,        MAPSEC_FIVE_ISLE_MEADOW },
+    { FLAG_SIX_ISLAND_WATER_PATH_GROVE_FOUND,     MAPSEC_WATER_PATH },
+    { FLAG_THREE_ISLAND_BERRY_FOREST_GROVE_FOUND, MAPSEC_BERRY_FOREST },
+    { FLAG_ONE_ISLAND_GROVE_FOUND,                MAPSEC_ONE_ISLAND },
+    { FLAG_TWO_ISLAND_GROVE_FOUND,                MAPSEC_TWO_ISLAND },
+    { FLAG_FOUR_ISLAND_GROVE_FOUND,               MAPSEC_FOUR_ISLAND },
+    { FLAG_SEVEN_ISLAND_GROVE_FOUND,              MAPSEC_SEVEN_ISLAND },
+};
+
+static s8 Sign(s16 v)
+{
+    return v > 0 ? 1 : (v < 0 ? -1 : 0);
+}
+
+// Which way the nearest grove not yet found lies, on the region map: on this sheet if one is left on it (nearest by
+// the larger of the two distances, as the weather measures), else toward the sheet that has one -- the islands lie
+// south of the mainland, and each island sheet south of the one before. FALSE when every grove is found, or here.
+static bool8 GroveDirection(s8 *dx, s8 *dy)
+{
+    u8 sheet, x, y, w, h, gs, gx, gy, gw, gh, i, best = 0xFF;
+    s16 cx, cy, d, bestD = 0x7FFF, ex = 0, ey = 0, otherSheet = -1;
+
+    if (!DaemonsMapsecPlace(gMapHeader.regionMapSectionId, &sheet, &x, &y, &w, &h))
+        return FALSE;
+    cx = 2 * x + w;   // doubled, so a centre is a whole number
+    cy = 2 * y + h;
+    for (i = 0; i < ARRAY_COUNT(sGroves); i++)
+    {
+        if (FlagGet(sGroves[i].flag) || !DaemonsMapsecPlace(sGroves[i].mapsec, &gs, &gx, &gy, &gw, &gh))
+            continue;
+        if (gs != sheet)
+        {
+            if (otherSheet < 0)
+                otherSheet = gs;
+            continue;
+        }
+        d = max(abs(2 * gx + gw - cx), abs(2 * gy + gh - cy));
+        if (d < bestD)
+        {
+            bestD = d;
+            best = i;
+            ex = 2 * gx + gw - cx;
+            ey = 2 * gy + gh - cy;
+        }
+    }
+    if (best == 0xFF)
+    {
+        if (otherSheet < 0)
+            return FALSE;
+        *dx = 0;
+        *dy = Sign(otherSheet - sheet);
+        return TRUE;
+    }
+    if (bestD == 0)
+        return FALSE;   // it is here, somewhere
+    //  Eight ways: a direction counts if it is at least half the larger one.
+    *dx = (abs(ex) * 2 >= abs(ey)) ? Sign(ex) : 0;
+    *dy = (abs(ey) * 2 >= abs(ex)) ? Sign(ey) : 0;
+    return TRUE;
+}
+
+// FORGIVENESS OFFERED: the daemon that last flew away (VAR_PLAY_FLED holds its hide flag, EventScript_MonFlewAway), if
+// it flew from this map. Its flag is cleared and VAR_0x8005 names it for the script to bring back.
+static bool8 FindFled(void)
+{
+    u16 flag = VarGet(VAR_PLAY_FLED);
+    u8 i;
+
+    if (flag == 0 || !FlagGet(flag))
+        return FALSE;
+    for (i = 0; i < gMapHeader.events->objectEventCount; i++)
+    {
+        if (gMapHeader.events->objectEvents[i].flagId == flag)
+        {
+            FlagClear(flag);
+            VarSet(VAR_PLAY_FLED, 0);
+            gSpecialVar_0x8005 = gMapHeader.events->objectEvents[i].localId;
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+// REFLECTIONS WITHIN: water in front of the player (or under them, surfing), and not yet today.
+static bool8 ReflectionRises(void)
+{
+    s16 x, y;
+    u16 day, minute;
+
+    GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
+    if (!MetatileBehavior_IsSurfable(MapGridGetMetatileBehaviorAt(x, y)))
+        return FALSE;
+    DaemonsDayAndMinute(&day, &minute);
+    if (VarGet(VAR_PLAY_DAY) == day + 1)
+        return FALSE;
+    VarSet(VAR_PLAY_DAY, day + 1);
+    return TRUE;
+}
+
+// THE SHIMMERING CANVAS: a note of colour over each thing buried within sight (the GREP's own range), eight at most.
+static void SparkleHidden(struct Play *play)
+{
+    const struct MapEvents *events = gMapHeader.events;
+    s16 px, py, dx, dy;
+    u8 i, n = 0;
+
+    PlayerGetDestCoords(&px, &py);
+    for (i = 0; i < events->bgEventCount && n < DRIFT_MAX; i++)
+    {
+        if (events->bgEvents[i].kind != BG_EVENT_HIDDEN_ITEM
+         || FlagGet(GetHiddenItemAttr(events->bgEvents[i].bgUnion.hiddenItem, HIDDEN_ITEM_FLAG)))
+            continue;
+        dx = events->bgEvents[i].x + MAP_OFFSET - px;
+        dy = events->bgEvents[i].y + MAP_OFFSET - py;
+        if (dx < -7 || dx > 7 || dy < -5 || dy > 5)
+            continue;
+        play->drift[n] = MakeSprite(play, &sTemplate_Small, play->cx + 16 * dx, play->cy + 8 + 16 * dy, 12 + (n * 5) % 12);
+        n++;
+    }
+}
+
+static void StartAfter(struct Play *play, u8 after)
+{
+    u8 i;
+
+    play->after = after;
+    play->timer = 0;
+    play->state = STATE_AFTER;
+    if (after == AFTER_SPARKLE)
+    {
+        ClearJoined(play);
+        for (i = 0; i < DRIFT_MAX; i++)
+            DestroyIf(&play->drift[i]);
+        SparkleHidden(play);
+    }
+}
+
+// A frame of what a song goes on doing: SEQUEL THE GUARDIAN's notes travel off together the way the grove lies; THE
+// SHIMMERING CANVAS's twinkle, a colour at a time, over what is buried. Both flicker out. TRUE when done.
+static bool8 After(struct Play *play)
+{
+    u8 i, t = ++play->timer;
+    bool8 flicker = (AFTER_FRAMES - t < 12) && (t & 1);
+
+    if (play->after == AFTER_DRIFT)
+    {
+        for (i = 0; i < MOTIF_MAX; i++)
+        {
+            if (play->joined[i] == MAX_SPRITES)
+                continue;
+            gSprites[play->joined[i]].x2 = play->afterDx * t;
+            gSprites[play->joined[i]].y2 = play->afterDy * t;
+            gSprites[play->joined[i]].invisible = flicker;
+        }
+        for (i = 0; i < ARRAY_COUNT(play->joinDots); i++)
+        {
+            if (play->joinDots[i] == MAX_SPRITES)
+                continue;
+            gSprites[play->joinDots[i]].x2 = play->afterDx * t;
+            gSprites[play->joinDots[i]].y2 = play->afterDy * t;
+            gSprites[play->joinDots[i]].invisible = flicker;
+        }
+    }
+    else
+    {
+        for (i = 0; i < DRIFT_MAX; i++)
+        {
+            if (play->drift[i] == MAX_SPRITES)
+                continue;
+            if (t % 6 == 0)
+                StartSpriteAnim(&gSprites[play->drift[i]], 12 + (gSprites[play->drift[i]].animNum + 1 - 12) % 12);
+            gSprites[play->drift[i]].invisible = flicker || ((t + i * 3) % 16 < 3);
+        }
+    }
+    if (t < AFTER_FRAMES)
+        return FALSE;
+    ClearJoined(play);
+    for (i = 0; i < DRIFT_MAX; i++)
+        DestroyIf(&play->drift[i]);
+    return TRUE;
+}
+
+// The echo has died away. A song only heard is learned now, and written into the SONGBOOK. A song already known does
+// what it does where it belongs -- or, played anywhere else, only echoes, and play goes on.
 static bool8 AfterEcho(u8 taskId)
 {
     struct Play *play = GetPlay(taskId);
+    s8 dx, dy;
 
-    if (play->song == PLAY_SONG_FIR && play->target == TARGET_FIR)
+    if (play->learning)
     {
-        Teardown(taskId, EventScript_Play_FirOpened);
+        FlagSet(sSongs[play->song].flag);
+        Teardown(taskId, EventScript_Play_Learned);
         return TRUE;
     }
-    if (play->song == PLAY_SONG_FIR && play->target == TARGET_NEXUS_TREE)
+    switch (play->song)
     {
-        Teardown(taskId, EventScript_Play_NexusLit);
+    case PLAY_SONG_FIR:
+        if (play->target == TARGET_FIR)
+        {
+            Teardown(taskId, EventScript_Play_FirOpened);
+            return TRUE;
+        }
+        if (play->target == TARGET_NEXUS_TREE)
+        {
+            Teardown(taskId, EventScript_Play_NexusLit);
+            return TRUE;
+        }
+        break;
+    case PLAY_SONG_NAMING:     // the calendar, sung
+        Teardown(taskId, EventScript_Play_Calendar);
         return TRUE;
+    case PLAY_SONG_STILL:      // the grass goes still
+        Teardown(taskId, EventScript_Play_Still);
+        return TRUE;
+    case PLAY_SONG_MEND:       // what flew away from here comes back
+        if (FindFled())
+        {
+            Teardown(taskId, EventScript_Play_CallBack);
+            return TRUE;
+        }
+        break;
+    case PLAY_SONG_PRACTICE:   // the way to a grove; in THE NEXUS, the GUARDIAN answers
+        if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_NEXUS) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_NEXUS))
+        {
+            Teardown(taskId, EventScript_Play_Guardian);
+            return TRUE;
+        }
+        if (GroveDirection(&dx, &dy))
+        {
+            play->afterDx = dx;
+            play->afterDy = dy;
+            StartAfter(play, AFTER_DRIFT);
+            return FALSE;
+        }
+        break;
+    case PLAY_SONG_STANCE:     // the sky here turns, for the watch
+        DaemonsPlaySongSky();
+        break;
+    case PLAY_SONG_NOTICE:     // what is buried within sight shows
+        StartAfter(play, AFTER_SPARKLE);
+        return FALSE;
+    case PLAY_SONG_REFLECT:    // beside water, once a day: a REFLECTION rises
+        if (ReflectionRises())
+        {
+            Teardown(taskId, EventScript_Play_Reflection);
+            return TRUE;
+        }
+        break;
     }
     ClearJoined(play);
     play->state = STATE_PLAY;
@@ -857,6 +1139,10 @@ static void Task_Play(u8 taskId)
         if (Echo(play) && AfterEcho(taskId))
             return;
         break;
+    case STATE_AFTER:    // P4: a song's notes go on doing something; the buttons wait
+        if (After(play))
+            play->state = STATE_PLAY;
+        break;
     }
     //  A breath ends when its button is let go.
     if (play->instrument == PLAY_FLUTE && play->heldButton && !play->fading && !JOY_HELD(play->heldButton))
@@ -865,7 +1151,7 @@ static void Task_Play(u8 taskId)
         play->breath = play->breath < 5 ? play->breath : 5;
         play->heldButton = 0;
     }
-    if (play->instrument == PLAY_FLUTE && play->state != STATE_WAIT && play->state != STATE_JOINED)
+    if (play->instrument == PLAY_FLUTE && play->state != STATE_WAIT && play->state != STATE_JOINED && play->state != STATE_AFTER)
         PlayBreath(&gMPlayInfo_SE2, &play->breath, play->fading);
     if (play->state != STATE_WAIT)
         Shine(play);
@@ -900,13 +1186,164 @@ void Play_Start(void)
     SetWordTaskArg(taskId, tPlay, (u32)play);
 }
 
+// ---------------------------------------------------------------------------------------------------- hearing (P4)
+
+// A tune the game plays by itself -- a song heard in its ROOT's place, or the LYREBIRD's bell -- on the edition's
+// instrument (the bell on the HARP, whose bird it is), each note drifting up in its colour from what is singing: the
+// thing in front of the player. The script waits (waitstate) until the last note has drifted away.
+struct Hear
+{
+    u8 instrument;
+    u8 palSlot;
+    bool8 borrowed;
+    u8 index;
+    u8 count;
+    u8 nextDrift;
+    bool8 onSe3;
+    u8 wait;
+    s16 x, y;
+    const s8 *notes;
+    const u8 *frames;
+    u8 drift[DRIFT_MAX];
+    u16 lent[16];
+};
+
+// The school's bell, as the LYREBIRD sings it back (vanilla's DING-DONG is D#4 then B3, and again, softer).
+static const s8 sBell_Notes[]  = {3, -1, 3, -1};
+static const u8 sBell_Frames[] = {24, 36, 24, 48};
+
+static void Task_Hear(u8 taskId)
+{
+    struct Hear *hear = (struct Hear *)GetWordTaskArg(taskId, 0);
+    struct MusicPlayerInfo *mp;
+    u8 i;
+
+    if (!gPaletteFade.active)
+        CpuCopy16(sKeyColours_Pal, &gPlttBufferFaded[OBJ_PLTT_ID(hear->palSlot)], PLTT_SIZE_4BPP);   // they shine
+    if (hear->wait != 0)
+    {
+        hear->wait--;
+        if (hear->wait == 0 && hear->instrument == PLAY_FLUTE && hear->index < hear->count)
+            m4aMPlayStop(&gMPlayInfo_SE2);   // a breath between notes
+        return;
+    }
+    if (hear->index < hear->count)
+    {
+        mp = (hear->instrument == PLAY_HARP && hear->onSe3) ? &gMPlayInfo_SE3 : &gMPlayInfo_SE2;
+        Play_SoundNote(hear->instrument, hear->notes[hear->index], mp == &gMPlayInfo_SE3);
+        m4aMPlayVolumeControl(mp, TRACKS_ALL, (hear->notes == sBell_Notes && hear->index >= 2) ? ECHO_SOFT : 256);
+        hear->onSe3 ^= 1;
+        SpawnDriftAt(hear->palSlot, hear->drift, &hear->nextDrift, hear->instrument, hear->x, hear->y,
+                     PitchClass(hear->notes[hear->index]));
+        hear->wait = hear->frames[hear->index];
+        if (hear->instrument == PLAY_FLUTE && hear->wait > 4)
+            hear->wait -= 2;   // the breath before the next note is taken from this one
+        hear->index++;
+        if (hear->index == hear->count)
+            hear->wait = HEAR_TAIL;
+        return;
+    }
+    if (hear->instrument == PLAY_FLUTE)
+        m4aMPlayStop(&gMPlayInfo_SE2);
+    for (i = 0; i < DRIFT_MAX; i++)
+        DestroyIf(&hear->drift[i]);
+    FreeArt(hear->palSlot, hear->borrowed, hear->lent);
+    Free(hear);
+    DestroyTask(taskId);
+    ScriptContext_Enable();
+}
+
+static void StartHearing(u8 instrument, const s8 *notes, const u8 *frames, u8 count)
+{
+    struct Sprite *avatar = &gSprites[gPlayerAvatar.spriteId];
+    struct Hear *hear = AllocZeroed(sizeof(*hear));
+    u8 i, taskId;
+
+    if (hear == NULL)
+    {
+        ScriptContext_Enable();
+        return;
+    }
+    hear->instrument = instrument;
+    hear->notes = notes;
+    hear->frames = frames;
+    hear->count = count;
+    //  From the thing in front of the player: a step that way from the player's own tile, and up off the ground.
+    hear->x = avatar->x + avatar->x2 + gSpriteCoordOffsetX;
+    hear->y = avatar->y + avatar->y2 + gSpriteCoordOffsetY;
+    switch (GetPlayerFacingDirection())
+    {
+    case DIR_NORTH: hear->y -= 16; break;
+    case DIR_SOUTH: hear->y += 16; break;
+    case DIR_WEST:  hear->x -= 16; break;
+    case DIR_EAST:  hear->x += 16; break;
+    }
+    for (i = 0; i < DRIFT_MAX; i++)
+        hear->drift[i] = MAX_SPRITES;
+    LoadArt(&hear->palSlot, &hear->borrowed, hear->lent);
+    taskId = CreateTask(Task_Hear, 90);
+    SetWordTaskArg(taskId, 0, (u32)hear);
+}
+
+// Scripts (data/scripts/play.inc): VAR_0x8004 is the song. TRUE while its place should play it -- its understanding
+// held, and the song not yet learned.
+bool8 Play_ShouldHear(void)
+{
+    const struct PlaySong *tune;
+
+    if (gSpecialVar_0x8004 <= PLAY_SONG_FIR || gSpecialVar_0x8004 >= PLAY_SONG_COUNT)
+        return FALSE;
+    tune = &sSongs[gSpecialVar_0x8004];
+    return FlagGet(tune->understanding) && !FlagGet(tune->flag);
+}
+
+// The song played by its place. Heard with the instrument in hand, it can now be played back and learned; without one
+// it is only a tune, and waits.
+void Play_Hear(void)
+{
+    const struct PlaySong *tune = &sSongs[gSpecialVar_0x8004 < PLAY_SONG_COUNT ? gSpecialVar_0x8004 : PLAY_SONG_FIR];
+
+    if (tune->heardFlag && FlagGet(FLAG_GOT_INSTRUMENT))
+        FlagSet(tune->heardFlag);
+    StartHearing(PLAY_INSTRUMENT, tune->notes, tune->frames, tune->count);
+}
+
+// The key the song was heard in, for the line after it.
+void Play_BufferSongKey(void)
+{
+    StringCopy(gStringVar1, sKeyNames[sSongs[gSpecialVar_0x8004 < PLAY_SONG_COUNT ? gSpecialVar_0x8004 : PLAY_SONG_FIR].key]);
+}
+
+// The LYREBIRD sings the school's bell back on the HARP's own notes (the user, 2026-10-17), not the chime.
+void Play_Bell(void)
+{
+    StartHearing(PLAY_HARP, sBell_Notes, sBell_Frames, ARRAY_COUNT(sBell_Notes));
+}
+
+// TWELVE DAYS OF DECEMBER, played: the day sung -- the day banner, as on stepping out of a door.
+void Play_ShowDayBanner(void)
+{
+    MapNamePopup_QueueDayBanner(FALSE, FALSE);
+}
+
+// EventScript_MonFlewAway: remember what flew away (its hide flag), for FORGIVENESS OFFERED to call back.
+void Play_NoteFled(void)
+{
+    u8 i;
+
+    for (i = 0; i < gMapHeader.events->objectEventCount; i++)
+        if (gMapHeader.events->objectEvents[i].localId == gSpecialVar_LastTalked)
+            VarSet(VAR_PLAY_FLED, gMapHeader.events->objectEvents[i].flagId);
+}
+
 // ------------------------------------------------------------------------------------------------- the SONGBOOK
 
-// DRAFT, every word. Until the key is known (the band's sheet held, or a fir keyed) the page says only what the fir
-// hums, and its notes are the plain naturals -- the yellow E and violet B; once it is, they are written with their flats.
+// DRAFT, every word. Until the key is known (the band's sheet held, or a fir keyed) the fir's page says only what the
+// fir hums, and its notes are the plain naturals -- the yellow E and violet B; once it is, they are written with their
+// flats. The seven say where each was heard, and its key.
 static const u8 sSongPage_FirFlat[] = _("Hummed by the singing firs.\pClose to right, all the way through. Something is missing.");
 static const u8 sSongPage_FirKeyed[] = _("Hummed by the singing firs.\pIn the key of {STR_VAR_1}.");
-static const u8 sSongPage_ToCome[] = _("The melody is still to come.");
+static const u8 sSongPage_Key[] = _("In the key of {STR_VAR_1}.");
 
 static bool8 SongKeyKnown(u8 song)
 {
@@ -917,18 +1354,22 @@ static bool8 SongKeyKnown(u8 song)
 
 void Play_WriteSongPage(u8 song, u8 *dest)
 {
-    if (song >= PLAY_SONG_COUNT || sSongs[song].count == 0)
-    {
-        StringCopy(dest, sSongPage_ToCome);
-        return;
-    }
+    if (song >= PLAY_SONG_COUNT)
+        song = PLAY_SONG_FIR;
     if (!SongKeyKnown(song))
     {
         StringCopy(dest, sSongPage_FirFlat);
         return;
     }
     StringCopy(gStringVar1, sKeyNames[sSongs[song].key]);
-    StringExpandPlaceholders(dest, sSongPage_FirKeyed);
+    if (sSongs[song].page == NULL)
+    {
+        StringExpandPlaceholders(dest, sSongPage_FirKeyed);
+        return;
+    }
+    dest = StringCopy(dest, sSongs[song].page);
+    *dest++ = CHAR_PROMPT_CLEAR;
+    StringExpandPlaceholders(dest, sSongPage_Key);
 }
 
 // The NOTEBOOK's page has the screen to itself (book_reader.c resets the sprites when it opens and the field when it
@@ -939,11 +1380,12 @@ void Play_BookSong(u8 song, s16 left, s16 middleC)
     const struct PlaySong *tune;
     struct Play paint = {0};   // only its palette slot is read
     bool8 known;
-    u8 i, pc, spriteId;
+    u8 i, pc, spriteId, gap;
 
     if (song >= PLAY_SONG_COUNT || sSongs[song].count == 0)
         return;
     tune = &sSongs[song];
+    gap = tune->count > 1 ? min(20, (226 - left - 40) / (tune->count - 1)) : 20;   // the longest must fit the page
     known = SongKeyKnown(song);
     LoadSpriteSheet(&sPlaySheets[0]);
     LoadSpriteSheet(&sPlaySheets[1]);
@@ -954,8 +1396,8 @@ void Play_BookSong(u8 song, s16 left, s16 middleC)
         gSprites[spriteId].oam.priority = 0;   // over the page
     for (i = 0; i < tune->count; i++)
     {
-        pc = known ? tune->pcs[i] : sNaturalSemi[tune->steps[i] % 7];
-        MakeSprite(&paint, &sTemplate_Small, left + 32 + 20 * i, middleC - (tune->steps[i] * 3) / 2, 12 + pc);
+        pc = known ? tune->pcs[i] : sNaturalSemi[(tune->steps[i] % 7 + 7) % 7];
+        MakeSprite(&paint, &sTemplate_Small, left + 32 + gap * i, middleC - (tune->steps[i] * 3) / 2, 12 + pc);
     }
 }
 

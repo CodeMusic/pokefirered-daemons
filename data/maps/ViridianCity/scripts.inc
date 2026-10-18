@@ -273,8 +273,8 @@ ViridianCity_EventScript_DoTutorialBattle::
 ViridianCity_EventScript_Lyrebird::
 	lock
 	faceplayer
-	playse SE_DING_DONG
-	waitse
+	special Play_Bell   @ T-417 P4 (the user): the bell on the HARP's own notes, not the chime
+	waitstate
 	goto_if_set FLAG_GOT_INSTRUMENT, ViridianCity_EventScript_LyrebirdAfter
 	msgbox ViridianCity_Text_LyrebirdGives
 	giveitem_msg ViridianCity_Text_ReceivedHarp, ITEM_HARP, 1, MUS_OBTAIN_KEY_ITEM
@@ -285,5 +285,7 @@ ViridianCity_EventScript_Lyrebird::
 
 ViridianCity_EventScript_LyrebirdAfter::
 	msgbox ViridianCity_Text_LyrebirdAfter
+	setvar VAR_0x8004, PLAY_SONG_NAMING   @ T-417 P4: once NAMING is held, it sings what came after the bell
+	call EventScript_Play_Hear
 	release
 	end

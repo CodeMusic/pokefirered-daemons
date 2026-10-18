@@ -45,6 +45,15 @@ bool8 DaemonsSettleWeather(void)
     return TRUE;
 }
 
+// T-417 P4: HARMONY IN BALANCE, played here -- the sky turns for the rest of the watch (daemons_weather.c), at once.
+bool8 DaemonsPlaySongSky(void)
+{
+    if (!DaemonsSongSky(TranslateWeatherNum(gMapHeader.weather), gMapHeader.mapType, gMapHeader.regionMapSectionId))
+        return FALSE;
+    DaemonsSettleWeather();
+    return TRUE;
+}
+
 void SetWeather(u32 weather)
 {
     SetSavedWeather(weather);

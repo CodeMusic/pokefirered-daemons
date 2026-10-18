@@ -6,6 +6,7 @@ EventScript_RemoveStaticMon::
     end
 
 EventScript_MonFlewAway::
+    special Play_NoteFled   @ T-417 P4: FORGIVENESS OFFERED can call it back
     fadescreen FADE_TO_BLACK
     removeobject VAR_LAST_TALKED
     fadescreen FADE_FROM_BLACK

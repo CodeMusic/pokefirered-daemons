@@ -36,5 +36,9 @@ OneIsland_House2_EventScript_Guide::
 	end
 
 OneIsland_House2_EventScript_ShelfWithAGap::
-	msgbox OneIsland_House2_Text_ShelfWithAGap, MSGBOX_SIGN
+	lockall
+	msgbox OneIsland_House2_Text_ShelfWithAGap
+	setvar VAR_0x8004, PLAY_SONG_PRACTICE   @ T-417 P4: once PRACTICE is held, SEQUEL THE GUARDIAN
+	call EventScript_Play_Hear
+	releaseall
 	end

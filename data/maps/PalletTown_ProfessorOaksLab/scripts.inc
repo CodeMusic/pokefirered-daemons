@@ -583,6 +583,8 @@ PalletTown_ProfessorOaksLab_EventScript_ProfOak::
 	@  T-257: the first time she is spoken to after the payload, she lets the INDEX write
 	goto_if_unset FLAG_CRYSTAL_READ_PAYLOAD, PalletTown_ProfessorOaksLab_EventScript_ProfOakAsBefore
 	goto_if_unset FLAG_INDEX_WRITES, PalletTown_ProfessorOaksLab_EventScript_TheIndexWrites
+	setvar VAR_0x8004, PLAY_SONG_MEND   @ T-417 P4: once MEND is held, she hums FORGIVENESS OFFERED
+	call EventScript_Play_Hear
 PalletTown_ProfessorOaksLab_EventScript_ProfOakAsBefore::
 	goto_if_set SHOWED_OAK_COMPLETE_DEX, PalletTown_ProfessorOaksLab_EventScript_OakJustShownCompleteDex
 	goto_if_eq VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 9, PalletTown_ProfessorOaksLab_EventScript_RatePokedex

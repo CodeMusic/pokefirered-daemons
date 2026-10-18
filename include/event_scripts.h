@@ -1233,6 +1233,12 @@ extern const u8 EventScript_Play_FirOpened[];    // T-417 P2: data/scripts/play.
 extern const u8 EventScript_Play_FirAlmost[];
 extern const u8 EventScript_Play_Almost[];
 extern const u8 EventScript_Play_NexusLit[];
+extern const u8 EventScript_Play_Learned[];      // T-417 P4: the seven
+extern const u8 EventScript_Play_Calendar[];
+extern const u8 EventScript_Play_Still[];
+extern const u8 EventScript_Play_CallBack[];
+extern const u8 EventScript_Play_Guardian[];
+extern const u8 EventScript_Play_Reflection[];
 extern const u8 EventScript_Textbook[];   // T-219
 extern const u8 EventScript_Guide[];      // T-300
 extern const u8 EventScript_Diploma[];    // T-218

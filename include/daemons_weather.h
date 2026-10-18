@@ -19,5 +19,7 @@ extern u8 gDaemonsWeatherOverride;
 // The weather a map shows: its header's own unless it is an ordinary outdoor map (header SUNNY, outdoor map type),
 // where the day's events decide. `headerWeather` is already translated (field_weather_util.c).
 u8 DaemonsWeatherForMap(u8 headerWeather, u8 mapType, u8 mapsec);
+// T-417 P4: HARMONY IN BALANCE turns this section's sky for the rest of the watch. FALSE where the day decides nothing.
+bool8 DaemonsSongSky(u8 headerWeather, u8 mapType, u8 mapsec);
 
 #endif // GUARD_DAEMONS_WEATHER_H

@@ -129,7 +129,7 @@ static const u8 sName_Root5[] = _("STANCE (SCORN)");
 static const u8 sName_Root6[] = _("MEND (RETURN)");
 static const u8 sName_Root7[] = _("PRACTICE (GUIDE)");
 static const u8 sName_InsightsAgain[] = _("LET INSIGHTS ARRIVE AGAIN");
-//  T-417 P2: the SONGBOOK, each song learned or not (the seven have no melody yet), and THE NEXUS's tree lit.
+//  T-417 P2: the SONGBOOK, each song learned or not (P4: taking one also forgets it was heard), and THE NEXUS's tree lit.
 static const u8 sName_Songs[]    = _("SONGBOOK >");
 static const u8 sName_Song0[]    = _("O CHRISTMAS TREE");
 static const u8 sName_Song1[]    = _("TWELVE DAYS (SLATE)");
@@ -470,11 +470,17 @@ static void Apply(u8 ev, bool8 on)
     case EV_SONGS_ALL:
         for (i = 0; i < PLAY_SONG_COUNT; i++)
             SetFlag(FLAG_SONG_FIR + i, on);
+        for (i = 0; i < PLAY_SONG_COUNT - 1 && !on; i++)
+            FlagClear(FLAG_SONG_HEARD_1 + i);   // P4: taken away, a song must be heard again to be learned
         return;
     case EV_NEXUS_LIT:    SetFlag(FLAG_NEXUS_LIT, on); return;
     }
     if (ev >= EV_SONG1 && ev <= EV_SONG8)
+    {
         SetFlag(FLAG_SONG_FIR + (ev - EV_SONG1), on);
+        if (!on && ev > EV_SONG1)
+            FlagClear(FLAG_SONG_HEARD_1 + (ev - EV_SONG1 - 1));   // P4: heard again before it is learned again
+    }
     if (ev >= EV_MARK1 && ev <= EV_MARK8)
         SetMark(ev - EV_MARK1, on);
     else if (ev >= EV_DRIVER1 && ev <= EV_DRIVER8)

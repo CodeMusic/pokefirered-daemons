@@ -55,7 +55,11 @@ ViridianCity_School_EventScript_Speller::
 	end
 
 ViridianCity_School_EventScript_Placard::
-	msgbox ViridianCity_School_Text_Placard, MSGBOX_SIGN
+	lockall
+	msgbox ViridianCity_School_Text_Placard
+	setvar VAR_0x8004, PLAY_SONG_NAMING   @ T-417 P4: once NAMING is held, TWELVE DAYS (CONTEXT's only place for it)
+	call EventScript_Play_Hear
+	releaseall
 	end
 
 @ The pass mark is on the syllabus, before the exam exists. Taking it sets a flag, not an item: the RESEARCH

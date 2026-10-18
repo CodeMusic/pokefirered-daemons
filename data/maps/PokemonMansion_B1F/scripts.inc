@@ -19,6 +19,8 @@ PokemonMansion_B1F_EventScript_Statue::
 PokemonMansion_B1F_EventScript_DiarySep1st::
 	lockall
 	msgbox PokemonMansion_B1F_Text_MewtwoIsFarTooPowerful
+	setvar VAR_0x8004, PLAY_SONG_REFLECT   @ T-417 P4: once REFLECT is held, REFLECTIONS WITHIN
+	call EventScript_Play_Hear
 	goto_if_set FLAG_NOTEBOOK_RUN_FATAL, EventScript_NotebookAlreadyFiled
 	setflag FLAG_NOTEBOOK_RUN_FATAL
 	call EventScript_NotebookCopied

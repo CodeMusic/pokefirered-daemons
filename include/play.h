@@ -16,14 +16,22 @@ enum { PLAY_HARP, PLAY_FLUTE };
 #define PLAY_ITEM       ITEM_FLUTE
 #endif
 
-// T-417 P2: the songs PLAY listens for (src/play.c's sSongs), and the SONGBOOK's pages of them.
-enum { PLAY_SONG_FIR, PLAY_SONG_1, PLAY_SONG_COUNT = PLAY_SONG_1 + 7 };
+// T-417 P2: the songs PLAY listens for (src/play.c's sSongs), and the SONGBOOK's pages of them. P4: their ids are
+// constants, so scripts can name them.
+#include "constants/play.h"
 
 void Play_Start(void);
 void Play_WriteSongPage(u8 song, u8 *dest);
 void Play_BookSong(u8 song, s16 left, s16 middleC);   // its notes as sprites on the NOTEBOOK's page (book_reader.c)
 void Play_BookSongFree(void);
 bool8 Play_IsActive(void);
+// T-417 P4: specials (data/scripts/play.inc). VAR_0x8004 is the song.
+bool8 Play_ShouldHear(void);     // its understanding held and the song not yet learned
+void Play_Hear(void);            // its place plays it (waitstate)
+void Play_BufferSongKey(void);   // STR_VAR_1: its key
+void Play_Bell(void);            // the LYREBIRD's bell, on the HARP (waitstate)
+void Play_ShowDayBanner(void);
+void Play_NoteFled(void);        // EventScript_MonFlewAway
 // A note: `semitone` from the instrument's middle C (negative, and past 12, are octaves by bend), on SE2 or SE3.
 void Play_SoundNote(u8 instrument, s16 semitone, bool8 onSe3);
 #if DAEMONS_DEBUG

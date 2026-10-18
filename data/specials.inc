@@ -367,6 +367,12 @@ gSpecials::
 	def_special Guide_OpenBoardCopy
 	def_special DaemonsRepaintPlayerShoes
 	def_special SingingFir_Sing
+	def_special Play_ShouldHear
+	def_special Play_Hear
+	def_special Play_BufferSongKey
+	def_special Play_Bell
+	def_special Play_ShowDayBanner
+	def_special Play_NoteFled
 	def_special DaemonsGlitch
 	def_special DaemonsHoldsEveryUnderstanding
 	def_special DaemonsDreamCountHeal

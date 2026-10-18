@@ -113,6 +113,8 @@ ReadingRoom_EventScript_Keeper::
 
 ReadingRoom_EventScript_KeeperAfter::
 	msgbox ReadingRoom_Text_KeeperAfter
+	setvar VAR_0x8004, PLAY_SONG_NOTICE   @ T-417 P4: once NOTICE is held, THE SHIMMERING CANVAS
+	call EventScript_Play_Hear
 	release
 	end
 

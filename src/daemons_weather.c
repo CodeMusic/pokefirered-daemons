@@ -28,6 +28,13 @@
 
 EWRAM_DATA u8 gDaemonsWeatherOverride = 0;
 
+// T-417 P4: HARMONY IN BALANCE, played on an ordinary outdoor map, turns this section's sky for the rest of the watch:
+// a clear sky brings the season's own weather, any weather clears. Not saved -- a watch is a few hours at most.
+static EWRAM_DATA u8 sSongSky = 0;          // DAEMONS_SKY_* + 1, or 0 for none
+static EWRAM_DATA u8 sSongSkyMapsec = 0;
+static EWRAM_DATA u8 sSongSkyWatch = 0;
+static EWRAM_DATA u16 sSongSkyDay = 0;
+
 #define SKY_MAX_EVENTS   2
 #define SKY_SIZE_REGION  254   // the whole of the centre's region (GAMUT, or every island)
 #define SKY_SIZE_BOTH    255   // both regions
@@ -239,6 +246,17 @@ static u8 SkyHere(u8 mapsec)
     return DAEMONS_SKY_CLEAR;
 }
 
+// T-417 P4: the song's sky holds in its own section, until the watch turns or the day does.
+static bool8 SongSkyHolds(u8 mapsec)
+{
+    u16 day, minute;
+
+    if (sSongSky == 0 || mapsec != sSongSkyMapsec || DaemonsWatch() != sSongSkyWatch)
+        return FALSE;
+    DaemonsDayAndMinute(&day, &minute);
+    return day == sSongSkyDay;
+}
+
 u8 DaemonsWeatherForMap(u8 headerWeather, u8 mapType, u8 mapsec)
 {
     u8 sky;
@@ -247,7 +265,37 @@ u8 DaemonsWeatherForMap(u8 headerWeather, u8 mapType, u8 mapsec)
         return headerWeather;
     if (gDaemonsWeatherOverride)
         sky = (gDaemonsWeatherOverride - 1) % DAEMONS_SKY_COUNT;
+    else if (SongSkyHolds(mapsec))
+        sky = sSongSky - 1;
     else
         sky = SkyHere(mapsec);
     return sSkyWeather[sky];
+}
+
+// T-417 P4: HARMONY IN BALANCE (src/play.c). TRUE if the sky here was turned; FALSE where the day decides nothing (a
+// cave, a forest, indoors), and nothing changes.
+bool8 DaemonsSongSky(u8 headerWeather, u8 mapType, u8 mapsec)
+{
+    u16 minute;
+    u8 season, sky, k;
+
+    if (headerWeather != WEATHER_SUNNY || !IsMapTypeOutdoors(mapType))
+        return FALSE;
+    sky = SongSkyHolds(mapsec) ? sSongSky - 1 : SkyHere(mapsec);
+    if (sky == DAEMONS_SKY_CLEAR)
+    {
+        season = DaemonsSeason();   // the season's own: the kind it brings most often
+        for (k = 1; k < DAEMONS_SKY_COUNT; k++)
+            if (sSkyKinds[season][k] > sSkyKinds[season][sky])
+                sky = k;
+    }
+    else
+    {
+        sky = DAEMONS_SKY_CLEAR;
+    }
+    sSongSky = sky + 1;
+    sSongSkyMapsec = mapsec;
+    sSongSkyWatch = DaemonsWatch();
+    DaemonsDayAndMinute(&sSongSkyDay, &minute);
+    return TRUE;
 }
