@@ -1907,3 +1907,11 @@ DirectSoundWaveData_sd90_classical_detuned_ep1_high::
 	.align 2
 DirectSoundWaveData_sd90_enhanced_delay_shaku::
 	.incbin "sound/direct_sound_samples/sd90_enhanced_delay_shaku.bin"
+
+	.align 2
+@ T-425: our own HARP and FLUTE (DAEMONS tools/geninstruments.py)
+DirectSoundWaveData_daemons_harp::
+	.incbin "sound/direct_sound_samples/daemons_harp.bin"
+	.align 2
+DirectSoundWaveData_daemons_flute::
+	.incbin "sound/direct_sound_samples/daemons_flute.bin"

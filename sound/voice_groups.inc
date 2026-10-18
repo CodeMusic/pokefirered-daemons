@@ -8283,3 +8283,8 @@ voicegroup192::
 	voice_square_1_alt 60, 0, 0, 1, 1, 2, 3, 1
 	voice_square_1_alt 60, 0, 0, 1, 1, 2, 3, 1
 	voice_noise_alt 60, 0, 0, 0, 2, 4, 0
+
+	.align 2
+voicegroup193::  @ T-425: PLAY's HARP (0) and FLUTE (1), our own (DAEMONS tools/geninstruments.py)
+	voice_directsound 60, 0, DirectSoundWaveData_daemons_harp, 255, 0, 255, 177
+	voice_directsound 60, 0, DirectSoundWaveData_daemons_flute, 54, 0, 255, 138
