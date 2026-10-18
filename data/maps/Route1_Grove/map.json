@@ -2,7 +2,7 @@
   "id": "MAP_ROUTE1_GROVE",
   "name": "Route1_Grove",
   "layout": "LAYOUT_ROUTE1_GROVE",
-  "music": "MUS_ROUTE1",
+  "music": "MUS_GROVE_PULSE",
   "region_map_section": "MAPSEC_ROUTE_1",
   "requires_flash": false,
   "weather": "WEATHER_SUNNY",

@@ -1007,6 +1007,20 @@ SECTIONS {
         sound/songs/midi/se_flute_a.o(.rodata);
         sound/songs/midi/se_flute_b.o(.rodata);
         sound/songs/midi/se_flute_c_high.o(.rodata);
+        sound/songs/midi/mus_grove_backdrop.o(.rodata);
+        sound/songs/midi/mus_grove_pulse.o(.rodata);
+        sound/songs/midi/mus_grove_inward.o(.rodata);
+        sound/songs/midi/mus_grove_empath.o(.rodata);
+        sound/songs/midi/mus_grove_drift.o(.rodata);
+        sound/songs/midi/mus_grove_haze.o(.rodata);
+        sound/songs/midi/mus_grove_hush.o(.rodata);
+        sound/songs/midi/mus_grove_seed.o(.rodata);
+        sound/songs/midi/mus_grove_weather.o(.rodata);
+        sound/songs/midi/mus_grove_hunger.o(.rodata);
+        sound/songs/midi/mus_grove_husk.o(.rodata);
+        sound/songs/midi/mus_grove_mecha.o(.rodata);
+        sound/songs/midi/mus_grove_compass.o(.rodata);
+        sound/songs/midi/mus_grove_clay.o(.rodata);
     } > ROM =0
 
     lib_rodata :

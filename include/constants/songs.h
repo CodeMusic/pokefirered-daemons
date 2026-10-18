@@ -375,6 +375,20 @@
 #define SE_FLUTE_A                364
 #define SE_FLUTE_B                365
 #define SE_FLUTE_C_HIGH           366
+#define MUS_GROVE_BACKDROP        367   // T-408: the groves' music (tools/gengrovemusic.py)
+#define MUS_GROVE_PULSE           368
+#define MUS_GROVE_INWARD          369
+#define MUS_GROVE_EMPATH          370
+#define MUS_GROVE_DRIFT           371
+#define MUS_GROVE_HAZE            372
+#define MUS_GROVE_HUSH            373
+#define MUS_GROVE_SEED            374
+#define MUS_GROVE_WEATHER         375
+#define MUS_GROVE_HUNGER          376
+#define MUS_GROVE_HUSK            377
+#define MUS_GROVE_MECHA           378
+#define MUS_GROVE_COMPASS         379
+#define MUS_GROVE_CLAY            380
 
 #define MUS_NONE                    0xFFFF
 

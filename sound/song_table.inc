@@ -366,6 +366,20 @@ gSongTable::
 	song se_flute_a, 2, 2
 	song se_flute_b, 2, 2
 	song se_flute_c_high, 2, 2
+	song mus_grove_backdrop, 0, 0
+	song mus_grove_pulse, 0, 0
+	song mus_grove_inward, 0, 0
+	song mus_grove_empath, 0, 0
+	song mus_grove_drift, 0, 0
+	song mus_grove_haze, 0, 0
+	song mus_grove_hush, 0, 0
+	song mus_grove_seed, 0, 0
+	song mus_grove_weather, 0, 0
+	song mus_grove_hunger, 0, 0
+	song mus_grove_husk, 0, 0
+	song mus_grove_mecha, 0, 0
+	song mus_grove_compass, 0, 0
+	song mus_grove_clay, 0, 0
 
 dummy_song_header:
 	.byte 0, 0, 0, 0
