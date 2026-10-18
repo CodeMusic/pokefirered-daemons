@@ -3672,6 +3672,13 @@ static bool8 DexScreen_NativeList(u8 *dst, u8 bits, const u8 *const *names, cons
     return TRUE;
 }
 
+// T-422: what a daemon is native to (tools/gbanative.py's u32), for the GAME CORNER's reels: at home in this season or
+// this watch first.
+u32 DaemonsNativeOf(u16 species)
+{
+    return species < NUM_SPECIES ? sDaemonsNative[species] : 0;
+}
+
 static void DexScreen_PrintNative(u16 species)
 {
     u8 win = sPokedexScreenData->windowIds[13] = AddWindow(&sWindowTemplate_AreaMap_Native);

@@ -12,9 +12,20 @@
 #include "trig.h"
 #include "strings.h"
 #include "constants/songs.h"
+#include "daemons_casino.h"
+#include "pokemon_icon.h"
+
+// T-422 (the user, 2026-10-18, confirmed by phone): THE GAME CORNER PLAYS AS THE COMPANION'S CASINO. The reels carry
+// daemons -- the lead's (three of it the jackpot), three from the INDEX seen, at home in the season or the hour first --
+// a coin and the season's piece (or the holiday's, or the weather's), with the holiday's hats on the daemons and the
+// season falling over the reels. The result is decided at the pull from the companion's own table (src/daemons_casino.c,
+// its numbers carried in by DAEMONS tools/gencasino.py): between 90 and 100 back of every 100 bet as the GAME's world
+// has it, the cat and the string shaping when wins come, and a loss often falling NEAR. Each reel then slips on to its
+// piece as the button stops it -- stopping is the fun of it, not a skill. It pays on the middle line only, the bet
+// times what slots.ts pays. Its sounds are the companion's TUNE_SLOTS_*, on the day's note. Every new word DRAFT.
 
 #define NUM_REELS 3
-#define REEL_LENGTH 21 // Total number of icons per reel
+#define REEL_LENGTH CASINO_STRIP_LENGTH // each piece twice round a reel (T-422: was 21)
 
 // Only 4 icons are actually visible per reel at a single
 // time, with 1 on deck. Only 3 visible when not spinning.
@@ -36,6 +47,7 @@ enum {
     GFXTAG_REEL_ICONS,
     GFXTAG_CLEFAIRY,
     GFXTAG_DIGITS,
+    GFXTAG_BITS,        // T-422: the season falling over the reels
 };
 
 enum {
@@ -46,6 +58,7 @@ enum {
     PALTAG_REEL_ICONS_4,
     PALTAG_CLEFAIRY,
     PALTAG_DIGITS,
+    PALTAG_BITS,
 };
 
 enum {
@@ -58,16 +71,7 @@ enum {
     ICON_SHELLDER,  // Shellder in FR, Staryu in LG
 };
 
-enum {
-    PAYOUT_NONE,
-    PAYOUT_CHERRIES2,
-    PAYOUT_CHERRIES3,
-    PAYOUT_MAGSHELL,
-    PAYOUT_PIKAPSY,
-    PAYOUT_ROCKET,
-    PAYOUT_7,
-    NUM_PAYOUT_TYPES
-};
+#define MIDDLE_LINE 2   // sLineStateTileIdxs' middle row: the one line the CASINO pays on
 
 enum {
     ROWATTR_COL1POS,
@@ -97,12 +101,23 @@ enum {
 
 struct SlotMachineState
 {
+    // T-422: the CASINO, first so a check can read it (sSlotMachineState): the day, the string, the pull
+    struct DaemonsCasinoDay day;
+    struct DaemonsCasinoCat cat;
+    u16 pullReturn;                 // this pull's, ten-thousandths
+    u8 outcome;                     // CASINO_*
+    u8 nearWanted;                  // the piece shown one place off the line on the third reel, or 0xFF
+    u8 want[NUM_REELS];             // the piece each reel stops on
+    u8 note;                        // a word under the reels after the result: 0 none, 1 SO CLOSE, 2 ALMOST, 3 BET BACK
+    u8 reels[NUM_REELS][REEL_LENGTH];
+    u8 piecePal[CASINO_PIECE_COUNT];
+    u16 species[4];
+    u32 personality[4];
+    u16 artPals[2][16];
     MainCallback savedCallback;
     u16 machineIdx;
     u16 currentReel;
-    u16 machineBias;
     u16 slotRewardClass;
-    u16 biasCooldown;
     u16 bet;
     u8 taskId;
     u8 spinReelsTaskId;
@@ -111,7 +126,6 @@ struct SlotMachineState
     s16 reelSubpixel[NUM_REELS];
     s16 destReelPos[NUM_REELS];
     s16 reelStopOrder[NUM_REELS];
-    u32 reel2BiasInPlay;
     bool32 winFlags[NUM_MATCH_LINES];
     u16 payout;
 };
@@ -159,6 +173,8 @@ static EWRAM_DATA struct SlotMachineState * sSlotMachineState = NULL;
 static EWRAM_DATA struct SlotMachineGfxManager * sSlotMachineGfxManager = NULL;
 
 static void InitSlotMachineState(struct SlotMachineState * ptr);
+static void InitCasino(struct SlotMachineState * ptr);
+static s16 GetNextReelPosition(u16 whichReel);
 static void CB2_InitSlotMachine(void);
 static void CleanSupSlotMachineState(void);
 static void CB2_RunSlotMachine(void);
@@ -172,16 +188,9 @@ static void MainTask_ExitSlots(u8 taskId);
 static void SetMainTask(TaskFunc taskFunc);
 static void Task_SpinReels(u8 taskId);
 static void StartReels(void);
-static void StopCurrentReel(u16 whichReel, u16 whichReel2);
+static void CasinoSay(const u8 *str);
+static void CreateCasinoBits(void);
 static bool32 IsReelSpinning(u16);
-static void StopReel1(u16 whichReel);
-static void StopReel2(u16 whichReel);
-static void StopReel3(u16 whichReel);
-static bool32 TwoReelBiasCheck(s32 reel0id, s32 reel0pos, s32 reel1id, s32 reel1pos, s32 icon);
-static bool32 OneReelBiasCheck(s32, s32, s32);
-static bool32 TestReelIconAttribute(s32 attr, s32 icon);
-static void CalcSlotBias(void);
-static void ResetMachineBias(void);
 static u16 CalcPayout(void);
 static void InitGfxManager(struct SlotMachineGfxManager * manager);
 static void UpdateReelIconSprites(const s16 *, const s16 *);
@@ -220,189 +229,10 @@ static void SetReelButtonPressed(u8 reel);
 static void ReleaseReelButtons(void);
 static void PressReelButton(u8 reel, u8 taskId);
 
-static const u8 sSecondReelBiasCheckIndices[][2] = {
-    {0x00, 0x03},
-    {0x00, 0x06},
-    {0x03, 0x06},
-
-    {0x01, 0x04},
-    {0x01, 0x07},
-    {0x04, 0x07},
-
-    {0x02, 0x05},
-    {0x02, 0x08},
-    {0x05, 0x08},
-
-    {0x00, 0x04},
-    {0x00, 0x08},
-    {0x04, 0x08},
-
-    {0x02, 0x04},
-    {0x02, 0x06},
-    {0x04, 0x06}
-};
-
-static const u8 sThirdReelBiasCheckIndices[NUM_MATCH_LINES][3] = {
-    {0x00, 0x03, 0x06}, // top row
-    {0x01, 0x04, 0x07}, // middle row
-    {0x02, 0x05, 0x08}, // bottom row
-    {0x00, 0x04, 0x08}, // tl-br
-    {0x02, 0x04, 0x06}  // bl-tr
-};
-
-static const u8 sRowAttributes[NUM_MATCH_LINES][4] = {
-    {0x00, 0x04, 0x08, 0x03}, // tl-br
-    {0x00, 0x03, 0x06, 0x02}, // top row
-    {0x01, 0x04, 0x07, 0x01}, // middle row
-    {0x02, 0x05, 0x08, 0x02}, // bottom row
-    {0x02, 0x04, 0x06, 0x03}  // bl-tr
-};
-
-static const u16 sReelBiasChances[][NUM_PAYOUT_TYPES] = {
-    {
-        [PAYOUT_NONE]      = 0x1fa1,
-        [PAYOUT_CHERRIES2] = 0x2eab,
-        [PAYOUT_CHERRIES3] = 0x3630,
-        [PAYOUT_MAGSHELL]  = 0x39f3,
-        [PAYOUT_PIKAPSY]   = 0x3bd4,
-        [PAYOUT_ROCKET]    = 0x3bfc,
-        [PAYOUT_7]         = 0x0049,
-    },
-    {
-        [PAYOUT_NONE]      = 0x1f97,
-        [PAYOUT_CHERRIES2] = 0x2ea2,
-        [PAYOUT_CHERRIES3] = 0x3627,
-        [PAYOUT_MAGSHELL]  = 0x39e9,
-        [PAYOUT_PIKAPSY]   = 0x3bca,
-        [PAYOUT_ROCKET]    = 0x3bf8,
-        [PAYOUT_7]         = 0x0049,
-    },
-    {
-        [PAYOUT_NONE]      = 0x1f91,
-        [PAYOUT_CHERRIES2] = 0x2e9b,
-        [PAYOUT_CHERRIES3] = 0x3620,
-        [PAYOUT_MAGSHELL]  = 0x39e3,
-        [PAYOUT_PIKAPSY]   = 0x3bc4,
-        [PAYOUT_ROCKET]    = 0x3bf4,
-        [PAYOUT_7]         = 0x0049,
-    },
-    {
-        [PAYOUT_NONE]      = 0x1f87,
-        [PAYOUT_CHERRIES2] = 0x2e92,
-        [PAYOUT_CHERRIES3] = 0x3617,
-        [PAYOUT_MAGSHELL]  = 0x39d9,
-        [PAYOUT_PIKAPSY]   = 0x3bba,
-        [PAYOUT_ROCKET]    = 0x3bef,
-        [PAYOUT_7]         = 0x0050,
-    },
-    {
-        [PAYOUT_NONE]      = 0x1f7f,
-        [PAYOUT_CHERRIES2] = 0x2e89,
-        [PAYOUT_CHERRIES3] = 0x360e,
-        [PAYOUT_MAGSHELL]  = 0x39d1,
-        [PAYOUT_PIKAPSY]   = 0x3bb2,
-        [PAYOUT_ROCKET]    = 0x3bea,
-        [PAYOUT_7]         = 0x0050,
-    },
-    {
-        [PAYOUT_NONE]      = 0x1fc9,
-        [PAYOUT_CHERRIES2] = 0x2efc,
-        [PAYOUT_CHERRIES3] = 0x3696,
-        [PAYOUT_MAGSHELL]  = 0x3a63,
-        [PAYOUT_PIKAPSY]   = 0x3c49,
-        [PAYOUT_ROCKET]    = 0x3c8b,
-        [PAYOUT_7]         = 0x0073,
-    },
-};
-
-static const u8 sReelIconAnimByReelAndPos[NUM_REELS][REEL_LENGTH] = {
-    {
-        ICON_7,
-        ICON_PSYDUCK,
-        ICON_CHERRIES,
-        ICON_ROCKET,
-        ICON_PIKACHU,
-        ICON_SHELLDER,
-        ICON_PIKACHU,
-        ICON_MAGNEMITE,
-        ICON_7,
-        ICON_SHELLDER,
-        ICON_PSYDUCK,
-        ICON_ROCKET,
-        ICON_CHERRIES,
-        ICON_PIKACHU,
-        ICON_SHELLDER,
-        ICON_7,
-        ICON_MAGNEMITE,
-        ICON_PIKACHU,
-        ICON_ROCKET,
-        ICON_SHELLDER,
-        ICON_PIKACHU
-    }, {
-        ICON_7,
-        ICON_MAGNEMITE,
-        ICON_CHERRIES,
-        ICON_PSYDUCK,
-        ICON_ROCKET,
-        ICON_MAGNEMITE,
-        ICON_CHERRIES,
-        ICON_PSYDUCK,
-        ICON_PIKACHU,
-        ICON_MAGNEMITE,
-        ICON_CHERRIES,
-        ICON_PSYDUCK,
-        ICON_7,
-        ICON_MAGNEMITE,
-        ICON_CHERRIES,
-        ICON_ROCKET,
-        ICON_PSYDUCK,
-        ICON_SHELLDER,
-        ICON_MAGNEMITE,
-        ICON_PSYDUCK,
-        ICON_CHERRIES
-    }, {
-        ICON_7,
-        ICON_PSYDUCK,
-        ICON_SHELLDER,
-        ICON_MAGNEMITE,
-        ICON_PIKACHU,
-        ICON_PSYDUCK,
-        ICON_SHELLDER,
-        ICON_MAGNEMITE,
-        ICON_PIKACHU,
-        ICON_PSYDUCK,
-        ICON_MAGNEMITE,
-        ICON_SHELLDER,
-        ICON_PIKACHU,
-        ICON_PSYDUCK,
-        ICON_MAGNEMITE,
-        ICON_SHELLDER,
-        ICON_PIKACHU,
-        ICON_PSYDUCK,
-        ICON_MAGNEMITE,
-        ICON_SHELLDER,
-        ICON_ROCKET
-    },
-};
-
-static const u16 sPayoutTable[] = {
-    [PAYOUT_NONE]      =   0,
-    [PAYOUT_CHERRIES2] =   2,
-    [PAYOUT_CHERRIES3] =   6,
-    [PAYOUT_MAGSHELL]  =   8,
-    [PAYOUT_PIKAPSY]   =  15,
-    [PAYOUT_ROCKET]    = 100,
-    [PAYOUT_7]         = 300
-};
-
 #if defined(FIRERED)
-static const u16 sReelIcons_Pal[][16] = INCBIN_U16("graphics/slot_machine/firered/reel_icons.gbapal");
-static const u32 sReelIcons_Tiles[]   = INCBIN_U32("graphics/slot_machine/firered/reel_icons.4bpp.lz");
 static const u16 sClefairy_Pal[]      = INCBIN_U16("graphics/slot_machine/firered/clefairy.gbapal");
 static const u32 sClefairy_Tiles[]    = INCBIN_U32("graphics/slot_machine/firered/clefairy.4bpp.lz");
 #elif defined(LEAFGREEN)
-static const u16 sReelIcons_Pal[][16] = INCBIN_U16("graphics/slot_machine/leafgreen/reel_icons.gbapal");
-static const u32 sReelIcons_Tiles[]   = INCBIN_U32("graphics/slot_machine/leafgreen/reel_icons.4bpp.lz");
 static const u16 sClefairy_Pal[]      = INCBIN_U16("graphics/slot_machine/leafgreen/clefairy.gbapal");
 static const u32 sClefairy_Tiles[]    = INCBIN_U32("graphics/slot_machine/leafgreen/clefairy.4bpp.lz");
 #endif
@@ -410,40 +240,14 @@ static const u16 sDigits_Pal[]        = INCBIN_U16("graphics/slot_machine/digits
 static const u32 sDigits_Tiles[]      = INCBIN_U32("graphics/slot_machine/digits.4bpp.lz");
 
 static const struct CompressedSpriteSheet sSpriteSheets[] = {
-    {.data = sReelIcons_Tiles, .size = 0xe00, .tag = GFXTAG_REEL_ICONS},
     {.data = sClefairy_Tiles,  .size = 0xc00, .tag = GFXTAG_CLEFAIRY},
     {.data = sDigits_Tiles,    .size = 0x280, .tag = GFXTAG_DIGITS},
 };
 
 static const struct SpritePalette sSpritePalettes[] = {
-    {.data = sReelIcons_Pal[0], .tag = PALTAG_REEL_ICONS_0},
-    {.data = sReelIcons_Pal[1], .tag = PALTAG_REEL_ICONS_1},
-    {.data = sReelIcons_Pal[2], .tag = PALTAG_REEL_ICONS_2},
-    {.data = sReelIcons_Pal[3], .tag = PALTAG_REEL_ICONS_3},
-    {.data = sReelIcons_Pal[4], .tag = PALTAG_REEL_ICONS_4},
     {.data = sClefairy_Pal,     .tag = PALTAG_CLEFAIRY},
     {.data = sDigits_Pal,       .tag = PALTAG_DIGITS},
     {}
-};
-
-static const u16 sReelIconPaletteTags[] = {
-#if defined(FIRERED)
-    [ICON_7]         = PALTAG_REEL_ICONS_2,
-    [ICON_ROCKET]    = PALTAG_REEL_ICONS_2,
-    [ICON_PIKACHU]   = PALTAG_REEL_ICONS_0,
-    [ICON_PSYDUCK]   = PALTAG_REEL_ICONS_0,
-    [ICON_CHERRIES]  = PALTAG_REEL_ICONS_2,
-    [ICON_MAGNEMITE] = PALTAG_REEL_ICONS_4,
-    [ICON_SHELLDER]  = PALTAG_REEL_ICONS_3,
-#elif defined(LEAFGREEN)
-    [ICON_7]         = PALTAG_REEL_ICONS_2,
-    [ICON_ROCKET]    = PALTAG_REEL_ICONS_2,
-    [ICON_PIKACHU]   = PALTAG_REEL_ICONS_0,
-    [ICON_PSYDUCK]   = PALTAG_REEL_ICONS_3,
-    [ICON_CHERRIES]  = PALTAG_REEL_ICONS_2,
-    [ICON_MAGNEMITE] = PALTAG_REEL_ICONS_1,
-    [ICON_SHELLDER]  = PALTAG_REEL_ICONS_1,
-#endif
 };
 
 static const u16 sReelIconAffineParams[] = {
@@ -810,6 +614,15 @@ static const struct WindowTemplate sWindowTemplates[] = {
         .height = 2,
         .paletteNum = 14,
         .baseBlock = 0x013
+    }, {
+        // T-422: what the reels pay, and why today is as it is (where vanilla slid in its COMBOS card)
+        .bg = 0,
+        .tilemapLeft = 2,
+        .tilemapTop = 3,     // its frame clear of the bar over the machine (window 1, rows 0-1)
+        .width = 26,
+        .height = 15,
+        .paletteNum = 15,
+        .baseBlock = 0x04F   // window 0's and the YES/NO's tiles: neither shows while this does
     },
     DUMMY_WIN_TEMPLATE
 };
@@ -868,13 +681,103 @@ void PlaySlotMachine(u16 machineIdx, MainCallback savedCallback)
         SetMainCallback2(savedCallback);
     else
     {
-        if (machineIdx >= ARRAY_COUNT(sReelBiasChances))
-            machineIdx = 0;
         sSlotMachineState->machineIdx = machineIdx;
         sSlotMachineState->savedCallback = savedCallback;
         InitSlotMachineState(sSlotMachineState);
+        InitCasino(sSlotMachineState);
         SetMainCallback2(CB2_InitSlotMachine);
     }
+}
+
+// T-422: the day, the daemons, the reels -- each piece twice round each reel, shuffled -- and the string at rest
+static void InitCasino(struct SlotMachineState * ptr)
+{
+    s32 i, j, k;
+    u8 t;
+
+    DaemonsCasino_ReadDay(&ptr->day);
+    DaemonsCasino_ReelSpecies(&ptr->day, ptr->species, ptr->personality);
+    ptr->cat.reach = 0;
+    ptr->cat.dry = ptr->cat.streak = ptr->cat.pulls = 0;
+    ptr->pullReturn = DaemonsCasino_PullReturn(&ptr->day, &ptr->cat);
+    ptr->outcome = CASINO_LOSE;
+    ptr->nearWanted = 0xFF;
+    ptr->note = 0;
+    for (i = 0; i < NUM_REELS; i++)
+    {
+        for (j = 0; j < REEL_LENGTH; j++)
+            ptr->reels[i][j] = j % CASINO_PIECE_COUNT;
+        for (j = REEL_LENGTH - 1; j > 0; j--)
+        {
+            k = Random() % (j + 1);
+            t = ptr->reels[i][j], ptr->reels[i][j] = ptr->reels[i][k], ptr->reels[i][k] = t;
+        }
+        ptr->reelPositions[i] = Random() % REEL_LENGTH;
+    }
+}
+
+// The pull (slots.ts, casino.cpp pull()): the day's luck and the string's reach decide this pull's table; a loss may
+// fall near, and two JACKs show a third one place off the line -- almost the jackpot
+static void CasinoPull(void)
+{
+    struct SlotMachineState *st = sSlotMachineState;
+    u8 p[3], wanted, third;
+
+    st->pullReturn = DaemonsCasino_PullReturn(&st->day, &st->cat);
+    st->outcome = DaemonsCasino_Draw(st->pullReturn);
+    DaemonsCasino_PiecesFor(st->outcome, st->want);
+    st->nearWanted = 0xFF;
+    st->note = 0;
+    if (st->outcome == CASINO_LOSE && Random() % 10000 < DaemonsCasino_NearChance(&st->cat))
+    {
+        if (DaemonsCasino_NearPieces(st->reels[2], p, &wanted))
+        {
+            st->want[0] = p[0], st->want[1] = p[1], st->want[2] = p[2];
+            st->nearWanted = wanted;
+        }
+    }
+    else if (st->outcome == CASINO_JACK2 && DaemonsCasino_AlmostThird(st->reels[2], &third))
+    {
+        st->want[2] = third;
+        st->nearWanted = CASINO_JACK;
+    }
+    DaemonsCasino_PlayTune(CASINO_TUNE_PULL, st->day.dayNote);
+}
+
+static u8 PieceAt(u16 reel, s32 pos)
+{
+    return sSlotMachineState->reels[reel][((pos % REEL_LENGTH) + REEL_LENGTH) % REEL_LENGTH];
+}
+
+// A reel stops on its piece: on (never back) to the first place its piece shows on the middle line -- and the third
+// reel of a near miss where the piece it wanted sits beside it, one place off the line, if such a place comes round
+static void StopCasinoReel(u16 reel)
+{
+    struct SlotMachineState *st = sSlotMachineState;
+    s16 next = GetNextReelPosition(reel);
+    s32 i, pos;
+
+    st->reelStopOrder[0] = reel;
+    if (reel == 2 && st->nearWanted != 0xFF)
+    {
+        for (i = 0; i < REEL_LENGTH; i++)
+        {
+            pos = next - i;
+            if (PieceAt(reel, pos + 2) == st->want[reel]
+             && (PieceAt(reel, pos + 1) == st->nearWanted || PieceAt(reel, pos + 3) == st->nearWanted))
+            {
+                st->destReelPos[reel] = ((pos % REEL_LENGTH) + REEL_LENGTH) % REEL_LENGTH;
+                return;
+            }
+        }
+    }
+    for (i = 0; i < REEL_LENGTH; i++)
+    {
+        pos = next - i;
+        if (PieceAt(reel, pos + 2) == st->want[reel])
+            break;
+    }
+    st->destReelPos[reel] = (((next - i) % REEL_LENGTH) + REEL_LENGTH) % REEL_LENGTH;
 }
 
 static void InitSlotMachineState(struct SlotMachineState * ptr)
@@ -1006,7 +909,7 @@ static void MainTask_SlotsGameLoop(u8 taskId)
         break;
     case 2:
         SetQLPlayedTheSlots();
-        CalcSlotBias();
+        CasinoPull();
         StartReels();
         sSlotMachineState->currentReel = 0;
         SetSlotMachineSetupTask(SLOTTASK_CLEFAIRY_BOUNCE, 0);
@@ -1018,7 +921,7 @@ static void MainTask_SlotsGameLoop(u8 taskId)
             if (JOY_NEW(A_BUTTON))
             {
                 PlaySE(SE_CONTEST_PLACE);
-                StopCurrentReel(sSlotMachineState->currentReel, sSlotMachineState->currentReel);
+                StopCasinoReel(sSlotMachineState->currentReel);
                 PressReelButton(sSlotMachineState->currentReel, 0);
                 data[0] = 4;
             }
@@ -1033,13 +936,13 @@ static void MainTask_SlotsGameLoop(u8 taskId)
                 sSlotMachineState->slotRewardClass = CalcPayout();
                 sSlotMachineState->bet = 0;
                 sSlotMachineState->currentReel = 0;
-                if (sSlotMachineState->slotRewardClass == PAYOUT_NONE)
+                DaemonsCasino_Learn(&sSlotMachineState->cat, sSlotMachineState->outcome);   // the string learns
+                if (sSlotMachineState->slotRewardClass == CASINO_LOSE)
                     SetMainTask(MainTask_DarnNoPayout);
                 else
                 {
-                    if (sSlotMachineState->slotRewardClass == PAYOUT_7)
+                    if (sSlotMachineState->slotRewardClass == CASINO_JACK3)
                         IncrementGameStat(GAME_STAT_SLOT_JACKPOTS);
-                    ResetMachineBias();
                     SetMainTask(MainTask_WinHandlePayout);
                 }
             }
@@ -1147,6 +1050,9 @@ static void MainTask_DarnNoPayout(u8 taskId)
     {
     case 0:
         SetSlotMachineSetupTask(SLOTTASK_ANIM_LOSE, 0);
+        DaemonsCasino_PlayTune(CASINO_TUNE_LOSE, sSlotMachineState->day.dayNote);
+        if (sSlotMachineState->nearWanted != 0xFF)
+            CasinoSay(gText_CasinoSoClose);
         data[1] = 0;
         data[0]++;
         break;
@@ -1154,6 +1060,7 @@ static void MainTask_DarnNoPayout(u8 taskId)
         data[1]++;
         if (data[1] > 60)
         {
+            CasinoSay(NULL);
             SetSlotMachineSetupTask(SLOTTASK_ANIM_BETTING, 0);
             SetSlotMachineSetupTask(SLOTTASK_UPDATE_LINE_LIGHTS, 1);
             SetSlotMachineSetupTask(SLOTTASK_RELEASE_BUTTONS, 2);
@@ -1174,10 +1081,14 @@ static void MainTask_WinHandlePayout(u8 taskId)
     switch (data[0])
     {
     case 0:
-        if (sSlotMachineState->slotRewardClass == PAYOUT_ROCKET || sSlotMachineState->slotRewardClass == PAYOUT_7)
-            PlayFanfare(MUS_SLOTS_JACKPOT);
-        else
-            PlayFanfare(MUS_SLOTS_WIN);
+        // casino.cpp: the bet back is counted out in coins; a win plays its tune, a big one a holiday's own
+        if (DaemonsCasino_Pays(sSlotMachineState->outcome) > 1)
+            DaemonsCasino_PlayTune(DaemonsCasino_WinTune(sSlotMachineState->outcome, sSlotMachineState->day.look),
+                                   sSlotMachineState->day.dayNote);
+        if (sSlotMachineState->outcome == CASINO_JACK2 && sSlotMachineState->nearWanted == CASINO_JACK)
+            CasinoSay(gText_CasinoAlmost);
+        else if (DaemonsCasino_Pays(sSlotMachineState->outcome) == 1)
+            CasinoSay(gText_CasinoBetBack);
         SetSlotMachineSetupTask(SLOTTASK_SHOW_AMOUNTS, 0);
         SetSlotMachineSetupTask(SLOTTASK_ANIM_WIN, 1);
         data[1] = 8;
@@ -1196,7 +1107,7 @@ static void MainTask_WinHandlePayout(u8 taskId)
     case 2:
         if (!IsSlotMachineSetupTaskActive(0))
         {
-            if (IsFanfareTaskInactive() && JOY_NEW(START_BUTTON))
+            if (!DaemonsCasino_TunePlaying() && JOY_NEW(START_BUTTON))
             {
                 AddCoins(sSlotMachineState->payout);
                 sSlotMachineState->payout = 0;
@@ -1206,7 +1117,7 @@ static void MainTask_WinHandlePayout(u8 taskId)
                 data[1]--;
                 if (data[1] == 0)
                 {
-                    if (IsFanfareTaskInactive())
+                    if (!DaemonsCasino_TunePlaying())
                         PlaySE(SE_PIN);
                     if (sSlotMachineState->payout != 0)
                     {
@@ -1224,7 +1135,7 @@ static void MainTask_WinHandlePayout(u8 taskId)
         }
         break;
     case 3:
-        if (IsFanfareTaskInactive() && !IsSlotMachineSetupTaskActive(0))
+        if (!DaemonsCasino_TunePlaying() && !IsSlotMachineSetupTaskActive(0))
         {
             SetSlotMachineSetupTask(SLOTTASK_END_ANIM_WIN, 0);
             data[0]++;
@@ -1233,6 +1144,7 @@ static void MainTask_WinHandlePayout(u8 taskId)
     case 4:
         if (!IsSlotMachineSetupTaskActive(0))
         {
+            CasinoSay(NULL);
             SetSlotMachineSetupTask(SLOTTASK_UPDATE_LINE_LIGHTS, 0);
             SetSlotMachineSetupTask(SLOTTASK_RELEASE_BUTTONS, 1);
             data[0]++;
@@ -1252,6 +1164,7 @@ static void MainTask_ExitSlots(u8 taskId)
     switch (data[0])
     {
     case 0:
+        DaemonsCasino_StopTune();
         SetSlotMachineSetupTask(SLOTTASK_FADEOUT_EXIT, 0);
         data[0]++;
         break;
@@ -1309,22 +1222,6 @@ static void StartReels(void)
         sSlotMachineState->reelIsSpinning[i] = TRUE;
 }
 
-static void StopCurrentReel(u16 whichReel, u16 whichReel2)
-{
-    switch (whichReel2)
-    {
-    case 0:
-        StopReel1(whichReel);
-        break;
-    case 1:
-        StopReel2(whichReel);
-        break;
-    case 2:
-        StopReel3(whichReel);
-        break;
-    }
-}
-
 static bool32 IsReelSpinning(u16 whichReel)
 {
     return sSlotMachineState->reelIsSpinning[whichReel];
@@ -1342,425 +1239,17 @@ static s16 GetNextReelPosition(u16 whichReel)
     return position;
 }
 
-static void StopReel1(u16 whichReel)
-{
-    s32 i, j;
-    s16 destPos;
-    u8 posToSample[5];
-    s16 nextPos = GetNextReelPosition(whichReel);
-    s32 numPosToSample = 0;
-
-    if (sSlotMachineState->machineBias == 0 && whichReel == 0)
-    {
-        for (i = 0; i < 5; i++)
-        {
-            for (j = 0, destPos = nextPos - i + 1; j < 3; j++, destPos++)
-            {
-                if (destPos >= REEL_LENGTH)
-                    destPos = 0;
-                if (TestReelIconAttribute(1, sReelIconAnimByReelAndPos[whichReel][destPos]))
-                    break;
-            }
-            if (j == 3)
-            {
-                posToSample[numPosToSample] = i;
-                numPosToSample++;
-            }
-        }
-    }
-    else if (sSlotMachineState->machineBias != 1 || whichReel == 0)
-    {
-        for (i = 0, destPos = nextPos + 1; i < 3; i++, destPos++)
-        {
-            if (destPos >= REEL_LENGTH)
-                destPos = 0;
-            if (TestReelIconAttribute(sSlotMachineState->machineBias, sReelIconAnimByReelAndPos[whichReel][destPos]))
-            {
-                posToSample[0] = 0;
-                numPosToSample = 1;
-                break;
-            }
-        }
-        for (i = 0, destPos = nextPos; i < 4; i++, destPos--)
-        {
-            if (destPos < 0)
-                destPos = REEL_LENGTH - 1;
-            if (TestReelIconAttribute(sSlotMachineState->machineBias, sReelIconAnimByReelAndPos[whichReel][destPos]))
-            {
-                posToSample[numPosToSample] = i + 1;
-                numPosToSample++;
-            }
-        }
-    }
-    if (numPosToSample == 0)
-    {
-        destPos = Random() % 5;
-    }
-    else
-    {
-        destPos = posToSample[Random() % numPosToSample];
-    }
-    destPos = nextPos - destPos;
-    if (destPos < 0)
-        destPos += REEL_LENGTH;
-    sSlotMachineState->reelStopOrder[0] = whichReel;
-    sSlotMachineState->destReelPos[whichReel] = destPos;
-}
-
-static void StopReel2(u16 whichReel)
-{
-    s16 pos, firstStoppedReelPos, firstStoppedReelId, nextPos;
-    s32 i;
-    s32 numPossiblePositions;
-    u8 possiblePositions[5];
-
-    firstStoppedReelId = sSlotMachineState->reelStopOrder[0];
-    firstStoppedReelPos = sSlotMachineState->reelPositions[firstStoppedReelId] + 1;
-    if (firstStoppedReelPos >= REEL_LENGTH)
-        firstStoppedReelPos = 0;
-    nextPos = GetNextReelPosition(whichReel);
-    pos = nextPos + 1;
-    if (pos >= REEL_LENGTH)
-        pos = 0;
-    numPossiblePositions = 0;
-    for (i = 0; i < 5; i++)
-    {
-        if (TwoReelBiasCheck(firstStoppedReelId, firstStoppedReelPos, whichReel, pos, sSlotMachineState->machineBias))
-        {
-            possiblePositions[numPossiblePositions] = i;
-            numPossiblePositions++;
-        }
-        pos--;
-        if (pos < 0)
-            pos = REEL_LENGTH - 1;
-    }
-    if (numPossiblePositions == 0)
-    {
-        sSlotMachineState->reel2BiasInPlay = 0;
-        if (sSlotMachineState->machineBias == PAYOUT_ROCKET || sSlotMachineState->machineBias == PAYOUT_7)
-            pos = 4;
-        else
-            pos = 0;
-    }
-    else
-    {
-        sSlotMachineState->reel2BiasInPlay = 1;
-        pos = possiblePositions[0];
-    }
-    pos = nextPos - pos;
-    if (pos < 0)
-        pos += REEL_LENGTH;
-    sSlotMachineState->reelStopOrder[1] = whichReel;
-    sSlotMachineState->destReelPos[whichReel] = pos;
-}
-
-static void StopReel3(u16 whichReel)
-{
-    s32 i;
-    s32 numPossiblePositions;
-    s32 nextPos;
-    s32 testPos;
-    s32 pos;
-    u8 possiblePositions[5];
-
-    nextPos = GetNextReelPosition(whichReel);
-    testPos = nextPos;
-    numPossiblePositions = 0;
-    for (i = 0; i < 5; i++)
-    {
-        if (OneReelBiasCheck(whichReel, testPos, sSlotMachineState->machineBias))
-        {
-            possiblePositions[numPossiblePositions] = i;
-            numPossiblePositions++;
-        }
-        testPos--;
-        if (testPos < 0)
-            testPos = 20;
-    }
-    if (numPossiblePositions == 0)
-    {
-        if (sSlotMachineState->machineBias == PAYOUT_ROCKET || sSlotMachineState->machineBias == PAYOUT_7)
-            pos = 4;
-        else
-            pos = 0;
-    }
-    else
-        pos = possiblePositions[0];
-    pos = nextPos - pos;
-    if (pos < 0)
-        pos += REEL_LENGTH;
-    sSlotMachineState->destReelPos[whichReel] = pos;
-}
-
-static bool32 TwoReelBiasCheck(s32 reel0id, s32 reel0pos, s32 reel1id, s32 reel1pos, s32 icon)
-{
-    s32 i;
-    u8 icons[9] = {};
-
-    for (i = 0; i < 9; i++)
-        icons[i] = 7;
-
-    for (i = 0; i < 3; i++)
-    {
-        icons[3 * reel0id + i] = sReelIconAnimByReelAndPos[reel0id][reel0pos];
-        icons[3 * reel1id + i] = sReelIconAnimByReelAndPos[reel1id][reel1pos];
-        reel0pos++;
-        if (reel0pos >= REEL_LENGTH)
-            reel0pos = 0;
-        reel1pos++;
-        if (reel1pos >= REEL_LENGTH)
-            reel1pos = 0;
-    }
-
-    switch (icon)
-    {
-    case 0:
-        for (i = 0; i < 3; i++)
-        {
-            if (TestReelIconAttribute(1, icons[i]))
-                return FALSE;
-        }
-        for (i = 0; i < 15; i++)
-        {
-            if (icons[sSecondReelBiasCheckIndices[i][0]] == icons[sSecondReelBiasCheckIndices[i][1]])
-                return TRUE;
-        }
-        return FALSE;
-    case 1:
-        if (reel0id == 0 || reel1id == 0)
-        {
-            if (reel0id == 1 || reel1id == 1)
-            {
-                for (i = 0; i < 15; i += 3)
-                {
-                    if (icons[sSecondReelBiasCheckIndices[i][0]] == icons[sSecondReelBiasCheckIndices[i][1]])
-                        return FALSE;
-                }
-            }
-            for (i = 0; i < 3; i++)
-            {
-                if (TestReelIconAttribute(icon, icons[i]))
-                    return TRUE;
-            }
-            return FALSE;
-        }
-        else
-            return TRUE;
-    case 2:
-        if (reel0id == 2 || reel1id == 2)
-        {
-            for (i = 0; i < 9; i++)
-            {
-                if (TestReelIconAttribute(icon, icons[i]))
-                    return TRUE;
-            }
-            return FALSE; // wrong level
-        }
-    }
-    for (i = 0; i < 15; i++)
-    {
-        if (icons[sSecondReelBiasCheckIndices[i][0]] == icons[sSecondReelBiasCheckIndices[i][1]] && TestReelIconAttribute(icon, icons[sSecondReelBiasCheckIndices[i][0]]))
-            return TRUE;
-    }
-    return FALSE;
-}
-
-static bool32 OneReelBiasCheck(s32 reelId, s32 reelPos, s32 biasIcon)
-{
-    u8 icons[9];
-    s32 secondStoppedPos, firstStoppedPos;
-    s32 i;
-
-    firstStoppedPos++; firstStoppedPos--;
-    firstStoppedPos = sSlotMachineState->reelPositions[sSlotMachineState->reelStopOrder[0]] + 1;
-    secondStoppedPos = sSlotMachineState->reelPositions[sSlotMachineState->reelStopOrder[1]] + 1;
-    reelPos++;
-    if (firstStoppedPos >= REEL_LENGTH)
-        firstStoppedPos = 0;
-    if (secondStoppedPos >= REEL_LENGTH)
-        secondStoppedPos = 0;
-    if (reelPos >= REEL_LENGTH)
-        reelPos = 0;
-    for (i = 0; i < 3; i++)
-    {
-        icons[sSlotMachineState->reelStopOrder[0] * 3 + i] = sReelIconAnimByReelAndPos[sSlotMachineState->reelStopOrder[0]][firstStoppedPos];
-        icons[sSlotMachineState->reelStopOrder[1] * 3 + i] = sReelIconAnimByReelAndPos[sSlotMachineState->reelStopOrder[1]][secondStoppedPos];
-        icons[reelId * 3 + i] = sReelIconAnimByReelAndPos[reelId][reelPos];
-        if (++firstStoppedPos >= REEL_LENGTH)
-            firstStoppedPos = 0;
-        if (++secondStoppedPos >= REEL_LENGTH)
-            secondStoppedPos = 0;
-        if (++reelPos >= REEL_LENGTH)
-            reelPos = 0;
-    }
-    switch (biasIcon)
-    {
-    case PAYOUT_NONE:
-        for (i = 0; i < 3; i++)
-        {
-            if (TestReelIconAttribute(1, icons[i]))
-                return FALSE;
-        }
-        for (i = 0; i < NUM_MATCH_LINES; i++)
-        {
-            if (icons[sThirdReelBiasCheckIndices[i][0]] == icons[sThirdReelBiasCheckIndices[i][1]] && icons[sThirdReelBiasCheckIndices[i][0]] == icons[sThirdReelBiasCheckIndices[i][2]])
-                return FALSE;
-        }
-        return TRUE;
-    case PAYOUT_CHERRIES2:
-        for (i = 0; i < NUM_MATCH_LINES; i++)
-        {
-            if (icons[sThirdReelBiasCheckIndices[i][0]] == icons[sThirdReelBiasCheckIndices[i][1]] && TestReelIconAttribute(biasIcon, icons[sThirdReelBiasCheckIndices[i][0]]))
-                return FALSE;
-        }
-        for (i = 0; i < 3; i++)
-        {
-            if (TestReelIconAttribute(biasIcon, icons[i]))
-                return TRUE;
-        }
-        return FALSE;
-    case PAYOUT_CHERRIES3:
-        for (i = 0; i < NUM_MATCH_LINES; i++)
-        {
-            if (icons[sThirdReelBiasCheckIndices[i][0]] == icons[sThirdReelBiasCheckIndices[i][1]] && TestReelIconAttribute(biasIcon, icons[sThirdReelBiasCheckIndices[i][0]]))
-                return TRUE;
-        }
-        return FALSE;
-    }
-    for (i = 0; i < NUM_MATCH_LINES; i++)
-    {
-        if (icons[sThirdReelBiasCheckIndices[i][0]] == icons[sThirdReelBiasCheckIndices[i][1]] && icons[sThirdReelBiasCheckIndices[i][0]] == icons[sThirdReelBiasCheckIndices[i][2]] && TestReelIconAttribute(biasIcon, icons[sThirdReelBiasCheckIndices[i][0]]))
-            return TRUE;
-    }
-    return FALSE;
-}
-
-static bool32 TestReelIconAttribute(s32 attr, s32 icon)
-{
-    switch (attr)
-    {
-    case PAYOUT_NONE:
-        return icon ^ 4 ? TRUE : FALSE;
-    case PAYOUT_CHERRIES2:
-    case PAYOUT_CHERRIES3:
-        return icon == ICON_CHERRIES ? TRUE : FALSE;
-    case PAYOUT_MAGSHELL:
-        return icon == ICON_MAGNEMITE || icon == ICON_SHELLDER ? TRUE : FALSE;
-    case PAYOUT_PIKAPSY:
-        return icon == ICON_PIKACHU || icon == ICON_PSYDUCK ? TRUE : FALSE;
-    case PAYOUT_ROCKET:
-        return icon == ICON_ROCKET ? TRUE : FALSE;
-    case PAYOUT_7:
-        return icon == ICON_7 ? TRUE : FALSE;
-    default:
-        return FALSE;
-    }
-}
-
-static u8 ReelIconToPayoutRank(s32 iconId)
-{
-    switch (iconId)
-    {
-    default:
-    case ICON_CHERRIES:
-        return PAYOUT_CHERRIES2;
-    case ICON_MAGNEMITE:
-    case ICON_SHELLDER:
-        return PAYOUT_MAGSHELL;
-    case ICON_PIKACHU:
-    case ICON_PSYDUCK:
-        return PAYOUT_PIKAPSY;
-    case ICON_ROCKET:
-        return PAYOUT_ROCKET;
-    case ICON_7:
-        return PAYOUT_7;
-    }
-}
-
-static void CalcSlotBias(void)
-{
-    u16 rval = Random() / 4;
-    s32 i;
-    const u16 * biasChances = sReelBiasChances[sSlotMachineState->machineIdx];
-    for (i = 0; i < NUM_PAYOUT_TYPES - 1; i++)
-    {
-        if (rval < biasChances[i])
-            break;
-    }
-    if (sSlotMachineState->machineBias < PAYOUT_ROCKET)
-    {
-        if (sSlotMachineState->biasCooldown == 0)
-        {
-            if ((Random() & 0x3FFF) < biasChances[PAYOUT_7])
-                sSlotMachineState->biasCooldown = (Random() & 1) ? 5 : 60;
-        }
-        if (sSlotMachineState->biasCooldown != 0)
-        {
-            if (i == 0 && (Random() & 0x3FFF) < (int)(0.7 * 0x3FFF)) // 70%
-                sSlotMachineState->biasCooldown = (Random() & 1) ? 5 : 60;
-            sSlotMachineState->biasCooldown--;
-        }
-        sSlotMachineState->machineBias = i;
-    }
-}
-
-static void ResetMachineBias(void)
-{
-    sSlotMachineState->machineBias = 0;
-}
-
+// What the pull came to: the bet times what slots.ts pays, on the middle line
 static u16 CalcPayout(void)
 {
-    u8 visibleIcons[9] = {};
     s32 i;
-    s32 reel1pos, reel2pos, reel3pos;
-    s32 bestMatch;
 
     for (i = 0; i < NUM_MATCH_LINES; i++)
         sSlotMachineState->winFlags[i] = FALSE;
-
-    bestMatch = 0;
-    reel1pos = sSlotMachineState->reelPositions[0];
-    reel2pos = sSlotMachineState->reelPositions[1];
-    reel3pos = sSlotMachineState->reelPositions[2];
-
-    for (i = 0; i < 3; i++)
-    {
-        reel1pos++;
-        if (reel1pos >= REEL_LENGTH)
-            reel1pos = 0;
-        reel2pos++;
-        if (reel2pos >= REEL_LENGTH)
-            reel2pos = 0;
-        reel3pos++;
-        if (reel3pos >= REEL_LENGTH)
-            reel3pos = 0;
-        visibleIcons[0 * 3 + i] = sReelIconAnimByReelAndPos[0][reel1pos];
-        visibleIcons[1 * 3 + i] = sReelIconAnimByReelAndPos[1][reel2pos];
-        visibleIcons[2 * 3 + i] = sReelIconAnimByReelAndPos[2][reel3pos];
-    }
-    sSlotMachineState->payout = 0;
-    for (i = 0; i < NUM_MATCH_LINES; i++)
-    {
-        if (sSlotMachineState->bet >= sRowAttributes[i][ROWATTR_MINBET])
-        {
-            int curMatch;
-            if (TestReelIconAttribute(1, visibleIcons[sRowAttributes[i][ROWATTR_COL1POS]]))
-                curMatch = TestReelIconAttribute(2, visibleIcons[sRowAttributes[i][ROWATTR_COL2POS]]) ? 2 : 1;
-            else if (visibleIcons[sRowAttributes[i][ROWATTR_COL1POS]] == visibleIcons[sRowAttributes[i][ROWATTR_COL2POS]] && visibleIcons[sRowAttributes[i][ROWATTR_COL1POS]] == visibleIcons[sRowAttributes[i][ROWATTR_COL3POS]])
-                curMatch = ReelIconToPayoutRank(visibleIcons[sRowAttributes[i][ROWATTR_COL1POS]]);
-            else
-                curMatch = 0;
-            if (curMatch != 0)
-            {
-                sSlotMachineState->winFlags[i] = TRUE;
-                sSlotMachineState->payout += sPayoutTable[curMatch];
-            }
-            if (curMatch > bestMatch)
-                bestMatch = curMatch;
-        }
-    }
-    return bestMatch;
+    sSlotMachineState->payout = sSlotMachineState->bet * DaemonsCasino_Pays(sSlotMachineState->outcome);
+    if (sSlotMachineState->outcome != CASINO_LOSE)
+        sSlotMachineState->winFlags[MIDDLE_LINE] = TRUE;
+    return sSlotMachineState->outcome;
 }
 
 static u16 GetPayout(void)
@@ -1778,12 +1267,52 @@ static bool32 GetWinFlagByLine(int lineId)
     return sSlotMachineState->winFlags[lineId];
 }
 
+// T-422: the six pieces, built for this sitting -- the daemons' icons (a holiday's hat on each), the coin, the season's
+// piece -- and the falling season's tiles and palettes
+static void LoadCasinoGraphics(void)
+{
+    struct SlotMachineState *st = sSlotMachineState;
+    struct SpriteSheet sheet;
+    struct SpritePalette pal;
+    u16 bitsPal[16];
+    u32 size, i;
+    u8 *tiles = Alloc(CASINO_PIECE_COUNT * 0x200);
+
+    if (tiles != NULL)
+    {
+        DaemonsCasino_BuildPieces(&st->day, st->species, st->personality, tiles, st->piecePal, st->artPals);
+        sheet.data = tiles;
+        sheet.size = CASINO_PIECE_COUNT * 0x200;
+        sheet.tag = GFXTAG_REEL_ICONS;
+        LoadSpriteSheet(&sheet);
+        Free(tiles);
+    }
+    for (i = 0; i < 3; i++)
+    {
+        pal.data = gMonIconPalettes[i];
+        pal.tag = PALTAG_REEL_ICONS_0 + i;
+        LoadSpritePalette(&pal);
+    }
+    pal.data = st->artPals[0], pal.tag = PALTAG_REEL_ICONS_3;
+    LoadSpritePalette(&pal);
+    pal.data = st->artPals[1], pal.tag = PALTAG_REEL_ICONS_4;
+    LoadSpritePalette(&pal);
+    sheet.data = DaemonsCasino_BitTiles(&size);
+    sheet.size = size;
+    sheet.tag = GFXTAG_BITS;
+    LoadSpriteSheet(&sheet);
+    DaemonsCasino_BitsPalette(&st->day, bitsPal);
+    pal.data = bitsPal, pal.tag = PALTAG_BITS;
+    LoadSpritePalette(&pal);
+}
+
 static bool32 LoadSpriteGraphicsAndAllocateManager(void)
 {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(sSpriteSheets); i++)
         LoadCompressedSpriteSheet(&sSpriteSheets[i]);
+    LoadCasinoGraphics();
     LoadSpritePalettes(sSpritePalettes);
     sSlotMachineGfxManager = Alloc(sizeof(*sSlotMachineGfxManager));
     if (sSlotMachineGfxManager == NULL)
@@ -1824,10 +1353,10 @@ static void CreateReelIconSprites(void)
         for (j = 0; j < REEL_LOAD_LENGTH; j++)
         {
             spriteId = CreateSprite(&sSpriteTemplate_ReelIcons, 80 + 40 * i, 44 + 24 * j, 2);
-            animId =  sReelIconAnimByReelAndPos[i][j];
+            animId = PieceAt(i, sSlotMachineState->reelPositions[i] + j);
             sprite = &gSprites[spriteId];
             StartSpriteAnim(sprite, animId);
-            sprite->oam.paletteNum = IndexOfSpritePaletteTag(sReelIconPaletteTags[animId]);
+            sprite->oam.paletteNum = IndexOfSpritePaletteTag(PALTAG_REEL_ICONS_0 + sSlotMachineState->piecePal[animId]);
             sprite->data[0] = i;
             sprite->data[1] = j;
             sprite->data[2] = j;
@@ -1852,16 +1381,12 @@ static void UpdateReelIconSprites(const s16 * reelPosPtr, const s16 * yposPtr)
         {
             sSlotMachineGfxManager->reelIconSprites[i][j]->y2 = ypos;
             {
-                s32 animId = sReelIconAnimByReelAndPos[i][reelPos];
+                s32 animId = PieceAt(i, reelPos);
                 struct Sprite *sprite = sSlotMachineGfxManager->reelIconSprites[i][j];
-                StartSpriteAnim(sprite, animId);
+                if (sprite->animNum != animId)
+                    StartSpriteAnim(sprite, animId);
+                sprite->oam.paletteNum = IndexOfSpritePaletteTag(PALTAG_REEL_ICONS_0 + sSlotMachineState->piecePal[animId]);
             }
-            {
-                s32 animId = sReelIconAnimByReelAndPos[i][reelPos];
-                struct Sprite *sprite = sSlotMachineGfxManager->reelIconSprites[i][j];
-                StartSpriteAnim(sprite, animId);
-            }
-            sSlotMachineGfxManager->reelIconSprites[i][j]->oam.paletteNum = IndexOfSpritePaletteTag(sReelIconPaletteTags[sReelIconAnimByReelAndPos[i][reelPos]]);
             reelPos++;
             if (reelPos >= REEL_LENGTH)
                 reelPos = 0;
@@ -2067,6 +1592,7 @@ static bool8 SlotsTask_GraphicsInit(u8 * state, struct SlotMachineSetupTaskData 
         SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT1_BG3 | BLDCNT_TGT1_OBJ | BLDCNT_TGT1_BD | BLDCNT_EFFECT_DARKEN);
         LoadSpriteGraphicsAndAllocateManager();
         CreateReelIconSprites();
+        CreateCasinoBits();
         CreateScoreDigitSprites();
         CreateClefairySprites();
         UpdateCoinsDisplay();
@@ -2268,33 +1794,45 @@ static bool8 SlotsTask_ReleaseReelButtons(u8 * state, struct SlotMachineSetupTas
     return TRUE;
 }
 
+// T-422: the pays, in words (vanilla's COMBOS card showed its own seven icons), and the day's biggest reason
+static const u8 sText_CasinoPays[] = _("On the middle line, for each coin bet:\n"
+                                       "Three of your lead{CLEAR_TO 160}50\n"
+                                       "Three of a friend{CLEAR_TO 160}12\n"
+                                       "Three coins{CLEAR_TO 160}6\n"
+                                       "Three of the season{CLEAR_TO 160}4\n"
+                                       "Two of your lead{CLEAR_TO 160}2");   // DRAFT
+static const u8 sText_CasinoSeasonFirst[] = _("The season first: your bet back.");   // DRAFT
+static const u8 sText_CasinoToday[] = _("Today:");   // DRAFT
+
+#define WIN_HELP 2
+
 static bool8 SlotsTask_ShowHelp(u8 * state, struct SlotMachineSetupTaskData * ptr)
 {
+    u8 line[64];
+    u8 *p;
+
     switch (*state)
     {
     case 0:
-        SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
-        SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_BG3 | WININ_WIN0_OBJ | WININ_WIN0_CLR);
-        SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG0 | WINOUT_WIN01_BG2 | WINOUT_WIN01_BG3 | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR);
-        SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(0,   0));
-        SetGpuReg(REG_OFFSET_WIN1H, WIN_RANGE(0, 160));
-        ShowBg(1);
+        FillWindowPixelBuffer(WIN_HELP, PIXEL_FILL(1));
+        PutWindowTilemap(WIN_HELP);
+        DrawTextBorderOuter(WIN_HELP, 0x001, 15);
+        AddTextPrinterParameterized5(WIN_HELP, FONT_SMALL, sText_CasinoPays, 2, 1, TEXT_SKIP_DRAW, NULL, 0, 0);
+        AddTextPrinterParameterized5(WIN_HELP, FONT_SMALL, sText_CasinoSeasonFirst, 2, 1 + 13 * 6, TEXT_SKIP_DRAW, NULL, 0, 0);
+        AddTextPrinterParameterized5(WIN_HELP, FONT_SMALL, sText_CasinoToday, 2, 1 + 13 * 7, TEXT_SKIP_DRAW, NULL, 0, 0);
+        if (sSlotMachineState->day.why != NULL)
+        {
+            p = StringCopy(line, sSlotMachineState->day.why);
+            AddTextPrinterParameterized5(WIN_HELP, FONT_SMALL, line, 10, 1 + 13 * 8, TEXT_SKIP_DRAW, NULL, 0, 0);
+        }
+        CopyWindowToVram(WIN_HELP, COPYWIN_FULL);
         PlaySE(SE_WIN_OPEN);
-        ptr->bg1X = 0;
         (*state)++;
         break;
     case 1:
-        ptr->bg1X += 16;
-        if (ptr->bg1X >= 256)
-        {
-            ptr->bg1X = 256;
-            (*state)++;
-        }
-        ChangeBgX(1, 256 * (256 - ptr->bg1X), 0);
-        SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(0, ptr->bg1X));
+        if (!IsDma3ManagerBusyWithBgCopy())
+            return FALSE;
         break;
-    case 2:
-        return FALSE;
     }
     return TRUE;
 }
@@ -2305,28 +1843,136 @@ static bool8 SlotsTask_HideHelp(u8 * state, struct SlotMachineSetupTaskData * pt
     {
     case 0:
         PlaySE(SE_WIN_OPEN);
+        rbox_fill_rectangle(WIN_HELP);
+        CopyWindowToVram(WIN_HELP, COPYWIN_MAP);
         (*state)++;
-        // fallthrough
+        break;
     case 1:
-        ptr->bg1X -= 16;
-        if (ptr->bg1X <= 0)
-        {
-            ptr->bg1X = 0;
-            (*state)++;
-        }
-        ChangeBgX(1, 256 * (256 - ptr->bg1X), 0);
-        SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(0, ptr->bg1X));
+        if (!IsDma3ManagerBusyWithBgCopy())
+            return FALSE;
         break;
-    case 2:
-        HideBg(1);
-        ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
-        (*state)++;
-        break;
-    case 3:
-        return FALSE;
     }
     return TRUE;
 }
+
+// T-422: a word under the reels after the result -- SO CLOSE, ALMOST THE JACKPOT, BET BACK (the phone's and the
+// boards' own, C-158); NULL takes it away
+static void PrintTopBar(const u8 *str)
+{
+    u8 textColor[3] = {TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY};
+
+    FillWindowPixelBuffer(1, 0xFF);
+    AddTextPrinterParameterized3(1, FONT_SMALL, DISPLAY_WIDTH - 4 - GetStringWidth(FONT_SMALL, str, 0), 0, textColor, 0, str);
+    CopyWindowToVram(1, COPYWIN_GFX);
+}
+
+static void CasinoSay(const u8 *str)
+{
+    if (str == NULL)
+    {
+        if (sSlotMachineState->note)
+            PrintTopBar(gString_SlotMachineControls);
+        sSlotMachineState->note = 0;
+        return;
+    }
+    PrintTopBar(str);   // in the bar over the machine, so the reels it is about stay in sight
+    sSlotMachineState->note = 1;
+}
+
+// T-422: THE SEASON FALLING OVER THE REELS (casino.cpp's bits): a dozen small pieces drifting down -- or rising, hearts
+// and sparks -- or twinkling where they are, behind the machine's face so only the reels' windows show them
+#define NUM_BITS 12
+#define BITS_LEFT   60
+#define BITS_RIGHT  180
+#define BITS_TOP    40
+#define BITS_BOTTOM 132
+
+#define sTile   data[0]
+#define sMotion data[1]
+#define sVy     data[2]
+#define sY16    data[3]
+#define sPhase  data[4]
+#define sX      data[5]
+#define sTime   data[6]
+
+static const struct OamData sOamData_CasinoBit = {
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
+    .shape = ST_OAM_SQUARE,
+    .size = ST_OAM_SIZE_0,
+    .priority = 3,
+};
+
+static void SpriteCB_CasinoBit(struct Sprite *sprite);
+
+static const struct SpriteTemplate sSpriteTemplate_CasinoBit = {
+    .tileTag = GFXTAG_BITS,
+    .paletteTag = PALTAG_BITS,
+    .oam = &sOamData_CasinoBit,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_CasinoBit
+};
+
+static void ResetCasinoBit(struct Sprite *sprite, bool8 anywhere)
+{
+    u8 motion;
+
+    sprite->sTile = DaemonsCasino_BitTile(sSlotMachineState->day.look, &motion);
+    sprite->sMotion = motion;
+    sprite->sX = BITS_LEFT + Random() % (BITS_RIGHT - BITS_LEFT);
+    sprite->sVy = motion == 2 ? 0 : 4 + Random() % 6;        // 14 to 35 a second, in sixteenths a frame
+    if (anywhere || motion == 2)
+        sprite->sY16 = (BITS_TOP + Random() % (BITS_BOTTOM - BITS_TOP)) * 16;
+    else
+        sprite->sY16 = (motion == 1 ? BITS_BOTTOM : BITS_TOP - 6) * 16;
+    sprite->sPhase = Random() & 0xFF;
+    sprite->oam.tileNum = GetSpriteTileStartByTag(GFXTAG_BITS) + sprite->sTile;
+}
+
+static void SpriteCB_CasinoBit(struct Sprite *sprite)
+{
+    sprite->sTime++;
+    if (sprite->sMotion == 1)
+        sprite->sY16 -= sprite->sVy;
+    else
+        sprite->sY16 += sprite->sVy;
+    if (sprite->sY16 > BITS_BOTTOM * 16 || sprite->sY16 < (BITS_TOP - 8) * 16)
+        ResetCasinoBit(sprite, FALSE);
+    sprite->x = sprite->sX + Sin((sprite->sPhase + sprite->sTime) & 0xFF, 4);
+    sprite->y = sprite->sY16 / 16;
+    if (sprite->sMotion == 2)   // a twinkle: its four sizes, as a sine
+        sprite->oam.tileNum = GetSpriteTileStartByTag(GFXTAG_BITS) + sprite->sTile
+                            + ((Sin((sprite->sPhase + sprite->sTime * 3) & 0xFF, 256) + 256) * 4 / 513);
+}
+
+static void CreateCasinoBits(void)
+{
+    u32 i;
+    u8 spriteId;
+
+    if (sSlotMachineState->day.look == 0xFF)
+        return;
+    for (i = 0; i < NUM_BITS; i++)
+    {
+        spriteId = CreateSprite(&sSpriteTemplate_CasinoBit, BITS_LEFT, BITS_TOP, 1);
+        if (spriteId != MAX_SPRITES)
+        {
+            ResetCasinoBit(&gSprites[spriteId], TRUE);
+            SpriteCB_CasinoBit(&gSprites[spriteId]);
+        }
+    }
+}
+
+#undef sTile
+#undef sMotion
+#undef sVy
+#undef sY16
+#undef sPhase
+#undef sX
+#undef sTime
 
 static void Slot_PrintOnWindow0(const u8 * str)
 {
@@ -2352,14 +1998,8 @@ static void SetLineStatesByBet(u16 * bgTilemapBuffer)
         SetLineState(bgTilemapBuffer, 3, PALSLOT_LINE_NORMAL);
         SetLineState(bgTilemapBuffer, 4, PALSLOT_LINE_NORMAL);
         break;
-    case 3:
-        SetLineState(bgTilemapBuffer, 0, PALSLOT_LINE_BET);
-        SetLineState(bgTilemapBuffer, 4, PALSLOT_LINE_BET);
-    case 2:
-        SetLineState(bgTilemapBuffer, 1, PALSLOT_LINE_BET);
-        SetLineState(bgTilemapBuffer, 3, PALSLOT_LINE_BET);
-    case 1:
-        SetLineState(bgTilemapBuffer, 2, PALSLOT_LINE_BET);
+    default:   // T-422: every bet is on the middle line -- the coins only raise what it pays
+        SetLineState(bgTilemapBuffer, MIDDLE_LINE, PALSLOT_LINE_BET);
         break;
     }
 }

@@ -1,7 +1,14 @@
+@  T-422 (the user, 2026-10-18), DRAFT: the GAME CORNER's people tell of the companion -- a DAEMON sent to a phone or
+@  a device plays these same reels there.
 CeladonCity_GameCorner_Text_CanExchangeCoinsNextDoor::
     .string "Welcome!\p"
     .string "You can exchange your COINS for\n"
-    .string "fabulous prizes next door.$"
+    .string "fabulous prizes next door.\p"
+    .string "And the reels go home with you.\n"
+    .string "Send a DAEMON to your phone, or to\l"
+    .string "any small machine you keep,\p"
+    .string "and it plays these same reels there,\n"
+    .string "on the same luck and the same tunes.$"
 
 CeladonCity_GameCorner_Text_WelcomeBuySomeCoins::
     .string "Welcome to CORPUS GAME CORNER!\p"
@@ -32,9 +39,12 @@ CeladonCity_GameCorner_Text_RumoredTeamRocketRunsThisPlace::
     .string "It's rumored that this place is run\n"
     .string "by TEAM CORPUS.$"
 
+@  T-422, DRAFT: the odds move with the game's day, not the machine.
 CeladonCity_GameCorner_Text_ThinkMachinesHaveDifferentOdds::
-    .string "I think these machines have\n"
-    .string "different odds.$"
+    .string "The reels are kinder some days.\n"
+    .string "A holiday, a clear sky, the hour…\p"
+    .string "My whiskers say it's the day that\n"
+    .string "turns lucky, never the machine.$"
 
 CeladonCity_GameCorner_Text_DoYouWantToPlay::
     .string "Kid, do you want to play?$"
@@ -69,9 +79,13 @@ CeladonCity_GameCorner_Text_RareMonsForCoins::
     .string "be exchanged for your COINS.\p"
     .string "But, I just can't seem to win!$"
 
+@  T-422, DRAFT.
 CeladonCity_GameCorner_Text_SoEasyToGetHooked::
     .string "Games are scary!\n"
-    .string "It's so easy to get hooked!$"
+    .string "It's so easy to get hooked!\p"
+    .string "My grandkits sent their DAEMON to\n"
+    .string "a phone. Now it pulls the lever in\l"
+    .string "their burrow, every night. Hmph!$"
 
 CeladonCity_GameCorner_Text_WantSomeCoins::
     .string "What's up?\n"

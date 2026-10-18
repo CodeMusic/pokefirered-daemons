@@ -26,6 +26,7 @@
 extern const struct PokedexEntry gPokedexEntries[];
 
 void CB2_OpenPokedexFromStartMenu(void);
+u32 DaemonsNativeOf(u16 species);   // T-422: tools/gbanative.py's bits (seasons 4-7, watches 8-11)
 s8 DexScreen_GetSetPokedexFlag(u16 nationalDexNo, u8 caseId, bool8 indexIsSpecies);
 
 bool8 OpusMarginAvailableInParty(void);   // T-203
