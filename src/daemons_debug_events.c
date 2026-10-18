@@ -493,6 +493,7 @@ static void Apply(u8 ev, bool8 on)
     case EV_INSIGHTS_AGAIN:
         for (i = 0; i < ARRAY_COUNT(sInsights); i++)
             FlagClear(sInsights[i]);
+        FlagClear(FLAG_INSIGHT_LAST);   // T-411: and the last note after them
         return;
     case EV_SONGS_ALL:
         for (i = 0; i < PLAY_SONG_COUNT; i++)

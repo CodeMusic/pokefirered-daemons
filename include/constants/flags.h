@@ -1671,6 +1671,9 @@
 #define FLAG_INSIGHT_TEMPERANCE       (DAEMONS_FLAGS_START + 0x8C)
 #define FLAG_INSIGHT_PATIENCE         (DAEMONS_FLAGS_START + 0x8D)
 #define FLAG_INSIGHT_HUMILITY         (DAEMONS_FLAGS_START + 0x8E)
+//  T-411 (the user, 2026-10-16; approved 2026-10-18): the last note has arrived -- once every insight above has -- and is
+//  filed last under INSIGHT.
+#define FLAG_INSIGHT_LAST             (DAEMONS_FLAGS_START + 0x8F)
 
 //  T-19. Two beats of one scene, five islands and a sea apart.
 #define FLAG_TY_GAVE_PAYLOAD          (DAEMONS_FLAGS_START + 0x20)
@@ -1806,6 +1809,31 @@
 #define FLAG_STREAM_SEEN_MARK7        (DAEMONS_FLAGS_START + 0x387)
 #define FLAG_STREAM_SEEN_MARK8        (DAEMONS_FLAGS_START + 0x388)
 #define FLAG_STREAM_MOVED             (DAEMONS_FLAGS_START + 0x389)
+
+//  T-412 (the user, 2026-10-16; approved 2026-10-18): the DREAM LOG -- each of YOUR DREAMS once dreamt, and so filed in the
+//  NOTEBOOK. Named in DAEMONS docs/dream_log.json (tools/gbadreamlog.py); notebook.c says each at the first dawn after
+//  its milestone, or on the first load on a later day (VAR_DREAM_LOG_STAMP).
+#define FLAG_DREAM_LOG_CAIRN          (DAEMONS_FLAGS_START + 0x3A0)   // to 0x3B4: twenty-one, in the draft's order
+#define FLAG_DREAM_LOG_BASIN          (DAEMONS_FLAGS_START + 0x3A1)
+#define FLAG_DREAM_LOG_GAUGE          (DAEMONS_FLAGS_START + 0x3A2)
+#define FLAG_DREAM_LOG_TRELLIS        (DAEMONS_FLAGS_START + 0x3A3)
+#define FLAG_DREAM_LOG_TILT           (DAEMONS_FLAGS_START + 0x3A4)
+#define FLAG_DREAM_LOG_MATTE          (DAEMONS_FLAGS_START + 0x3A5)
+#define FLAG_DREAM_LOG_ANNEAL         (DAEMONS_FLAGS_START + 0x3A6)
+#define FLAG_DREAM_LOG_SCORN          (DAEMONS_FLAGS_START + 0x3A7)
+#define FLAG_DREAM_LOG_STILL          (DAEMONS_FLAGS_START + 0x3A8)
+#define FLAG_DREAM_LOG_NAMING         (DAEMONS_FLAGS_START + 0x3A9)
+#define FLAG_DREAM_LOG_NOTICE         (DAEMONS_FLAGS_START + 0x3AA)
+#define FLAG_DREAM_LOG_REFLECT        (DAEMONS_FLAGS_START + 0x3AB)
+#define FLAG_DREAM_LOG_STANCE         (DAEMONS_FLAGS_START + 0x3AC)
+#define FLAG_DREAM_LOG_MEND           (DAEMONS_FLAGS_START + 0x3AD)
+#define FLAG_DREAM_LOG_PRACTICE       (DAEMONS_FLAGS_START + 0x3AE)
+#define FLAG_DREAM_LOG_BOARD          (DAEMONS_FLAGS_START + 0x3AF)
+#define FLAG_DREAM_LOG_GONE           (DAEMONS_FLAGS_START + 0x3B0)
+#define FLAG_DREAM_LOG_PARCEL         (DAEMONS_FLAGS_START + 0x3B1)
+#define FLAG_DREAM_LOG_STARR          (DAEMONS_FLAGS_START + 0x3B2)
+#define FLAG_DREAM_LOG_OWL            (DAEMONS_FLAGS_START + 0x3B3)
+#define FLAG_DREAM_LOG_HOME           (DAEMONS_FLAGS_START + 0x3B4)
 
 #define DAEMONS_FLAGS_COUNT           0x400
 #define DAEMONS_FLAGS_END             (DAEMONS_FLAGS_START + DAEMONS_FLAGS_COUNT - 1)

@@ -10,6 +10,7 @@
 #include "string_util.h"
 #include "task.h"
 #include "book_reader.h"
+#include "notebook.h"   // T-410: the ROOT's balance
 #include "play.h"   // T-417: a SONGBOOK page's notes
 #include "constants/songs.h"
 
@@ -875,15 +876,33 @@ static const u8 *GuideMarginNote(u8 entry)
     return NULL;
 }
 
-//  How many lines the entry fills: its text, then -- when it has a margin note -- a blank line and the note.
+//  T-410 (the user, 2026-10-16; approved 2026-10-18): once the understanding's MARK is held too, how the MARK balances
+//  it -- in the same hand, after one more blank line under the note (notebook.c holds the words, DRAFT).
+static const u8 *GuideBalanceNote(u8 entry)
+{
+    u8 i;
+
+    if (sBook->torn)
+        return NULL;
+    for (i = 0; i < ARRAY_COUNT(sGuideMarginNotes); i++)
+        if (sGuideMarginNotes[i].entry == entry && FlagGet(sGuideMarginNotes[i].flag))
+            return Daemons_RootBalance(sGuideMarginNotes[i].flag);
+    return NULL;
+}
+
+//  How many lines the entry fills: its text, then -- when it has a margin note -- a blank line and the note, and
+//  (T-410) another blank line and the balance.
 static u8 GuideTextLines(const struct GuideEntry *e, u8 *textLines)
 {
     const u8 *note = GuideMarginNote(sBook->entry);
+    const u8 *balance = GuideBalanceNote(sBook->entry);
     u8 n = Reflow(e->text, GP_TEXT_W, BR_FONT);
 
     *textLines = n;
     if (note != NULL)
         n += 1 + Reflow(note, GP_TEXT_W - GM_INDENT, BR_FONT);
+    if (note != NULL && balance != NULL)
+        n += 1 + Reflow(balance, GP_TEXT_W - GM_INDENT, BR_FONT);
     return n;
 }
 
@@ -995,6 +1014,18 @@ static void DrawGuideEntry(void)
             u8 at = textLines + 1 + k;                                      // its line in the whole entry
             if (at >= start && at < start + lines)
                 Print(BR_FONT, sPen, GP_TEXT_X + GM_INDENT, top + (at - start) * GP_PITCH, Line(k));
+        }
+        if (GuideBalanceNote(sBook->entry) != NULL)                         // T-410: the balance, after one more
+        {
+            u8 noteEnd = textLines + 1 + n;
+
+            n = Reflow(GuideBalanceNote(sBook->entry), GP_TEXT_W - GM_INDENT, BR_FONT);
+            for (k = 0; k < n; k++)
+            {
+                u8 at = noteEnd + 1 + k;
+                if (at >= start && at < start + lines)
+                    Print(BR_FONT, sPen, GP_TEXT_X + GM_INDENT, top + (at - start) * GP_PITCH, Line(k));
+            }
         }
     }
 

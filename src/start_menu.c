@@ -57,6 +57,7 @@
 #include "constants/field_weather.h"
 #include "sloopsvc.h"
 #include "daemons_time.h"
+#include "notebook.h"   // T-412: DEBUG WATCH to DAWN lets a waiting dream come
 #include "daemons_weather.h"
 #include "daemons_holidays.h"   // T-416
 #include "fieldmap.h"
@@ -1748,6 +1749,8 @@ static void DbgVarsForRow(u8 row)
 static bool8 DbgWatchCallback(void)
 {
     gDaemonsWatchOverride = (gDaemonsWatchOverride + 1) % ARRAY_COUNT(sDbgWatchNames);
+    if (gDaemonsWatchOverride == WATCH_DAWN + 1)
+        DaemonsDreamLog_DebugDawn();   // T-412: a dawn has come, so a dream waiting comes on the next step
     DbgRelight();
     return DbgRedraw();
 }

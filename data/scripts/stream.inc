@@ -40,5 +40,13 @@ Daemons_EventScript_Insight::
 	releaseall
 	end
 
+@  T-412: a dream, the first step after the first dawn after a milestone (or after a load on a later day). notebook.c's
+@  Daemons_TryDreamArrives leaves its line and the dream in gStringVar4; it is filed in the DREAM LOG as it is said.
+Daemons_EventScript_Dream::
+	lockall
+	msgbox gStringVar4
+	releaseall
+	end
+
 Daemons_Text_OpusWrote:
 	.string "Something has been written in the\nINDEX.$"

@@ -246,7 +246,7 @@
 #define VAR_PLAY_DAY               0x40BE // T-417 P4: the day REFLECT's song last raised a REFLECTION, + 1
 #define VAR_0x40BF                 0x40BF
 #define VAR_HOLIDAY_YEAR           0x40C0 // T-416: the year the holiday gifts were last given in (real year - 2000; play-time years have bit 15)
-#define VAR_0x40C1                 0x40C1
+#define VAR_DREAM_LOG_STAMP        0x40C1 // T-412: when a dream began to wait -- 2 x its day + 1 if past dawn, + 1 (0 none waiting)
 #define VAR_0x40C2                 0x40C2
 #define VAR_0x40C3                 0x40C3
 #define VAR_0x40C4                 0x40C4

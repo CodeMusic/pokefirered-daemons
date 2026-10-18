@@ -24,6 +24,7 @@
 #include "quest_log.h"
 #include "constants/maps.h"
 #include "constants/region_map_sections.h"
+#include "daemons_time.h"   // T-412: the dawn a dream waits for
 
 //  T-216: THE RESEARCH NOTEBOOK (docs/school.md 9-10).
 //
@@ -56,6 +57,7 @@ enum
     NB_INSIGHT,            // T-390: what a MARK and its understanding make together, in the player's own words
     NB_SONGBOOK,           // T-417: the songs PLAY knows, written as coloured notes
     NB_THE_YEAR,           // T-416: a line for a day of the year, as it arrives (DRAFT)
+    NB_DREAM_LOG,          // T-412: YOUR DREAMS, each the first dawn after a milestone (DRAFT)
     NB_SECTION_COUNT
 };
 
@@ -94,6 +96,8 @@ static const u8 sSection_Songbook[]       = _("SONGBOOK");   // T-417, DRAFT
 
 extern const u8 gText_YearSection[];   // T-416: THE YEAR, src/daemons_holidays.c
 
+#include "data/dream_log.h"   // T-412: the DREAM LOG's words and milestones, written by DAEMONS tools/gbadreamlog.py
+
 static const u8 *const sSectionNames[NB_SECTION_COUNT] =
 {
     [NB_SCHOOL_NOTES]    = sSection_SchoolNotes,
@@ -107,6 +111,7 @@ static const u8 *const sSectionNames[NB_SECTION_COUNT] =
     [NB_INSIGHT]         = sSection_Insight,
     [NB_SONGBOOK]        = sSection_Songbook,
     [NB_THE_YEAR]        = gText_YearSection,   // T-416, src/daemons_holidays.c (DAEMONS tools/genholidays.py)
+    [NB_DREAM_LOG]       = sSection_DreamLog,   // T-412, DRAFT (data/dream_log.h)
 };
 
 static const u8 sText_Close[] = _("CLOSE");
@@ -465,19 +470,22 @@ static const struct NotebookEntry sEntries[] =
     { NB_SONGBOOK,     NB_KIND_SONG,  PLAY_SONG_REFLECT,  FLAG_SONG_7,   0, sTitle_Song_7,           NULL },
     //  T-416: THE YEAR, in the order of the year -- each line once it has arrived on its day.
     NB_YEAR_ENTRIES
+    //  T-412: the DREAM LOG -- YOUR DREAMS, in the draft's order, each once it has been dreamt.
+    NB_DREAM_ENTRIES
 };
 
 #if DAEMONS_DEBUG
 //  T-394: GAME EVENTS' NOTEBOOK, EVERY PAGE -- every document's flags set, so the NOTEBOOK opens full. Not the paper's
 //  record (it is written from the exam), not the INDEX's page (its flag is the story's ending) and not INSIGHT (its
-//  arrival is a thing to test), nor THE YEAR (T-416, the same): those come the way they come.
+//  arrival is a thing to test), nor THE YEAR (T-416, the same), nor the DREAM LOG (T-412): those come the way they come.
 void Notebook_DebugFillAll(void)
 {
     u32 i;
 
     for (i = 0; i < ARRAY_COUNT(sEntries); i++)
     {
-        if (sEntries[i].kind != NB_KIND_TEXT || sEntries[i].section == NB_INSIGHT || sEntries[i].section == NB_THE_YEAR)
+        if (sEntries[i].kind != NB_KIND_TEXT || sEntries[i].section == NB_INSIGHT || sEntries[i].section == NB_THE_YEAR
+         || sEntries[i].section == NB_DREAM_LOG)
             continue;
         FlagSet(sEntries[i].flag);
         if (sEntries[i].flag2 != 0)
@@ -505,7 +513,134 @@ bool8 Daemons_TryInsightArrives(void)
             return TRUE;
         }
     }
-    return FALSE;
+    //  T-411 (the user, 2026-10-16; option A approved 2026-10-18): once every insight has arrived -- every MARK held with
+    //  its ROOT -- the last note arrives the same way, on the next step, and is filed last under INSIGHT. DRAFT.
+    for (i = 0; i < ARRAY_COUNT(sWisdomPairs); i++)
+    {
+        if (!FlagGet(sWisdomPairs[i].insight))
+            return FALSE;
+    }
+    if (FlagGet(WISDOM_LAST_FLAG))
+        return FALSE;
+    FlagSet(WISDOM_LAST_FLAG);
+    StringExpandPlaceholders(gStringVar4, WISDOM_LAST_ARRIVAL);
+    return TRUE;
+}
+
+//  T-410 (the user, 2026-10-16; approved 2026-10-18): A MARK AND ITS ROOT, EACH SAYING HOW THE OTHER BALANCES IT. Shown
+//  once both are held -- the MARK's on the USER card's BENCHMARKS page (trainer_card.c), the ROOT's in its
+//  understanding's GUIDE margin (book_reader.c). SCORN's MARK pairs with none. DRAFT.
+const u8 *Daemons_MarkBalance(u8 mark)
+{
+    u32 i;
+
+    for (i = 0; i < ARRAY_COUNT(sWisdomPairs); i++)
+    {
+        if (sWisdomPairs[i].mark == FLAG_BADGE01_GET + mark)
+            return (FlagGet(sWisdomPairs[i].mark) && FlagGet(sWisdomPairs[i].root)) ? sWisdomPairs[i].markBalance : NULL;
+    }
+    return NULL;
+}
+
+const u8 *Daemons_RootBalance(u16 root)
+{
+    u32 i;
+
+    for (i = 0; i < ARRAY_COUNT(sWisdomPairs); i++)
+    {
+        if (sWisdomPairs[i].root == root)
+            return (FlagGet(sWisdomPairs[i].mark) && FlagGet(sWisdomPairs[i].root)) ? sWisdomPairs[i].rootBalance : NULL;
+    }
+    return NULL;
+}
+
+//  T-412 (the user, 2026-10-16; the twenty-one approved 2026-10-18): THE DREAM LOG. After a milestone -- a MARK, an
+//  understanding, a turn of the story -- the player has a dream at the first dawn after it (the watch), or on the first
+//  load on a later day; it is said, and filed in the NOTEBOOK's DREAM LOG. One a night: when several wait, the next
+//  waits for the next dawn, in data/dream_log.h's order. VAR_DREAM_LOG_STAMP holds when the one waiting began to wait,
+//  as 2 x its day + 1 once past that day's dawn, + 1 -- so a dawn has come since when (now + 1) / 2 has moved on, and a
+//  later day when now / 2 has. Days are the clock's, or play time's (an hour of play a day, its dawn the hour's last
+//  quarter), as the watch's are (daemons_time.c).
+#define DREAM_DAWN_CAME 0xFFFF   // DEBUG's WATCH turned to DAWN: whatever waits is dreamt on the next step
+static const u8 sDreamBreak[] = _("\p");
+
+static EWRAM_DATA bool8 sDreamLoaded = FALSE;    // a saved game has just been continued, and no step taken since
+
+static u16 DreamNow(void)
+{
+    u16 day, minute;
+
+    DaemonsDayAndMinute(&day, &minute);
+    return day * 2 + (minute >= (DaemonsWatchIsFromClock() ? 5 * 60 : 45 * 24));
+}
+
+static s32 DreamWaiting(void)
+{
+    u32 i;
+
+    for (i = 0; i < ARRAY_COUNT(sDreamMilestones); i++)
+    {
+        if (!FlagGet(sDreamMilestones[i].dreamt)
+         && FlagGet(sDreamMilestones[i].needs[0]) && FlagGet(sDreamMilestones[i].needs[1]))
+            return i;
+    }
+    return -1;
+}
+
+//  On every map load (overworld.c), beside the understandings: a milestone just reached starts its dream waiting, so
+//  leaving the BENCHMARK and saving before a step still counts from the win.
+void DaemonsDreamLog_Notice(void)
+{
+    if (VarGet(VAR_DREAM_LOG_STAMP) == 0 && DreamWaiting() >= 0)
+        VarSet(VAR_DREAM_LOG_STAMP, DreamNow() + 1);
+}
+
+void DaemonsDreamLog_Loaded(void)
+{
+    sDreamLoaded = TRUE;
+}
+
+#if DAEMONS_DEBUG
+void DaemonsDreamLog_DebugDawn(void)
+{
+    if (DreamWaiting() >= 0)
+        VarSet(VAR_DREAM_LOG_STAMP, DREAM_DAWN_CAME);
+}
+#endif
+
+//  The step hook (field_control_avatar.c), after the insights: the dream goes into gStringVar4, after its line, for
+//  Daemons_EventScript_Dream to say. Its flag files it.
+bool8 Daemons_TryDreamArrives(void)
+{
+    u16 stamp = VarGet(VAR_DREAM_LOG_STAMP), now;
+    bool8 loaded = sDreamLoaded;
+    s32 i = DreamWaiting();
+
+    sDreamLoaded = FALSE;
+    if (i < 0)
+    {
+        if (stamp != 0)
+            VarSet(VAR_DREAM_LOG_STAMP, 0);
+        return FALSE;
+    }
+    now = DreamNow();
+    if (stamp != DREAM_DAWN_CAME)
+    {
+        if (stamp == 0 || now < stamp - 1)          // nothing was waiting yet -- or the clock was set back
+        {
+            VarSet(VAR_DREAM_LOG_STAMP, now + 1);
+            return FALSE;
+        }
+        stamp--;
+        if ((now + 1) / 2 <= (stamp + 1) / 2 && !(loaded && now / 2 > stamp / 2))
+            return FALSE;
+    }
+    FlagSet(sDreamMilestones[i].dreamt);
+    VarSet(VAR_DREAM_LOG_STAMP, 0);                  // the next one starts waiting from now, on the next step
+    StringCopy(gStringVar4, sDreamLine);
+    StringAppend(gStringVar4, sDreamBreak);
+    StringAppend(gStringVar4, sDreamMilestones[i].text);
+    return TRUE;
 }
 
 static EWRAM_DATA struct ListMenuItem *sItems = NULL;

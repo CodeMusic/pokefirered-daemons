@@ -921,6 +921,12 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
                 ScriptContext_SetupScript(Daemons_EventScript_Insight);
                 return TRUE;
             }
+            //  T-412. And again: a dream, the first dawn after a milestone (or the first load on a later day).
+            if (Daemons_TryDreamArrives())
+            {
+                ScriptContext_SetupScript(Daemons_EventScript_Dream);
+                return TRUE;
+            }
         }
     }
     if (SafariZoneTakeStep() == TRUE)

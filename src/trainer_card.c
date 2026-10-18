@@ -22,6 +22,7 @@
 #include "constants/trainers.h"
 #include "data/understanding_brain.h"
 #include "daemons_holidays.h"   // T-416: the month's colour on the card
+#include "notebook.h"           // T-410: a MARK's balance, once its ROOT is held
 #define CARD_MONTH_INDEX 8           // palette 0: the title band's lettering
 
 // Trainer Card Strings
@@ -114,8 +115,10 @@ static bool8 PrintAllOnCardFront(void);
 static bool8 PrintAllOnCardBack(void);
 static void DrawUnderstandingBrain(void);
 static void DrawBenchmarksView(void);
+static u8 MarksBalancePages(void);
 static void RedrawCardFront(void);
 static EWRAM_DATA u8 sMarksCursor = 0;
+static EWRAM_DATA u8 sMarksBalance = 0;   // T-410: 0 the MARK; 1.. the page of its balance turned to
 static void BufferTextForCardBack(void);
 static void PrintNameOnCardFront(void);
 static void PrintIdOnCard(void);
@@ -573,6 +576,7 @@ static void Task_TrainerCard(u8 taskId)
         {
             PlaySE(SE_SELECT);
             sMarksCursor = 0;
+            sMarksBalance = 0;
             DrawBenchmarksView();
             sTrainerCardDataPtr->mainState = STATE_HANDLE_INPUT_MARKS;
         }
@@ -600,6 +604,21 @@ static void Task_TrainerCard(u8 taskId)
         if (JOY_NEW(DPAD_RIGHT) || JOY_NEW(DPAD_LEFT))
         {
             sMarksCursor = (sMarksCursor + (JOY_NEW(DPAD_RIGHT) ? 1 : NUM_BADGES - 1)) % NUM_BADGES;
+            sMarksBalance = 0;
+            PlaySE(SE_SELECT);
+            DrawBenchmarksView();
+        }
+        //  T-410: A turns to the MARK's balance once its ROOT is held, on through its pages and back to the MARK;
+        //  B from a page goes back to the MARK.
+        else if (JOY_NEW(A_BUTTON) && (sMarksBalance != 0 || MarksBalancePages() != 0))
+        {
+            sMarksBalance = (sMarksBalance < MarksBalancePages()) ? sMarksBalance + 1 : 0;
+            PlaySE(SE_SELECT);
+            DrawBenchmarksView();
+        }
+        else if (sMarksBalance != 0 && JOY_NEW(B_BUTTON))
+        {
+            sMarksBalance = 0;
             PlaySE(SE_SELECT);
             DrawBenchmarksView();
         }
@@ -1153,6 +1172,40 @@ static const u8 *const sMarkNames[NUM_BADGES] = {
 #define MARKS_TEXT_W 134   // the figures' side of the card, clear of the brain and the player
 #define MARKS_ROW_Y  137   // just under the MARKS row, in window 1's pixels
 #define MARKS_TEXT_X 20    // past the card's bullet points
+static const u8 sText_MarksMore[] = _("{A_BUTTON}");
+
+//  T-410 (the user, 2026-10-16; approved 2026-10-18): THE MARK'S BALANCE -- how its understanding balances it, in the
+//  NOTEBOOK's first person, once the MARK's ROOT is held. The page had one line to spare, so the paragraph is PAGED in
+//  the four lines what-it-certifies and the virtue use, under the same heading: A turns to it and on through it, and
+//  back to the MARK; B back at once. DAEMONS tools/gbawisdom.py wraps each to the certify lines' width, four lines a
+//  page and two pages at most. The A button's own mark, at the heading's right, says there is a page to turn to --
+//  and no word. sMarksBalance: 0 the MARK, 1.. the page. DRAFT.
+static u8 MarksBalancePages(void)
+{
+    const u8 *s = Daemons_MarkBalance(sMarksCursor);
+    u8 pages = 1;
+
+    if (s == NULL)
+        return 0;
+    for (; *s != EOS; s++)
+        if (*s == CHAR_PROMPT_CLEAR)
+            pages++;
+    return pages;
+}
+
+static void PrintMarksBalancePage(u8 page)
+{
+    const u8 *s = Daemons_MarkBalance(sMarksCursor);
+    u8 *out = gStringVar4;
+
+    for (; *s != EOS && page != 0; s++)
+        if (*s == CHAR_PROMPT_CLEAR)
+            page--;
+    while (*s != EOS && *s != CHAR_PROMPT_CLEAR)
+        *out++ = *s++;
+    *out = EOS;
+    AddTextPrinterParameterized3(1, FONT_NORMAL, MARKS_TEXT_X, 58, sTrainerCardTextColors, TEXT_SKIP_DRAW, gStringVar4);
+}
 
 static void DrawBenchmarksView(void)
 {
@@ -1166,11 +1219,21 @@ static void DrawBenchmarksView(void)
     //  bullet points, which are its tiles and stay.
     AddTextPrinterParameterized3(1, FONT_NORMAL, MARKS_TEXT_X, 22, sTrainerCardTextColors, TEXT_SKIP_DRAW, sText_Benchmarks);
     AddTextPrinterParameterized3(1, FONT_NORMAL, MARKS_TEXT_X, 40, sTrainerCardTextColors, TEXT_SKIP_DRAW, sMarkNames[sMarksCursor]);
-    AddTextPrinterParameterized3(1, FONT_NORMAL, MARKS_TEXT_X, 58, sTrainerCardTextColors, TEXT_SKIP_DRAW, sMarkCertifies[sMarksCursor]);
-    if (!sTrainerCardDataPtr->hasBadge[sMarksCursor])
-        AddTextPrinterParameterized3(1, FONT_NORMAL, MARKS_TEXT_X, 100, sTrainerCardTextColors, TEXT_SKIP_DRAW, sText_NotYetHeld);
-    else if (sMarksCursor < NUM_VIRTUES)
-        AddTextPrinterParameterized3(1, FONT_NORMAL, MARKS_TEXT_X, 86, sTrainerCardTextColors, TEXT_SKIP_DRAW, sMarkVirtues[sMarksCursor]);
+    if (sMarksBalance != 0)
+    {
+        PrintMarksBalancePage(sMarksBalance - 1);                       // T-410
+    }
+    else
+    {
+        AddTextPrinterParameterized3(1, FONT_NORMAL, MARKS_TEXT_X, 58, sTrainerCardTextColors, TEXT_SKIP_DRAW, sMarkCertifies[sMarksCursor]);
+        if (!sTrainerCardDataPtr->hasBadge[sMarksCursor])
+            AddTextPrinterParameterized3(1, FONT_NORMAL, MARKS_TEXT_X, 100, sTrainerCardTextColors, TEXT_SKIP_DRAW, sText_NotYetHeld);
+        else if (sMarksCursor < NUM_VIRTUES)
+            AddTextPrinterParameterized3(1, FONT_NORMAL, MARKS_TEXT_X, 86, sTrainerCardTextColors, TEXT_SKIP_DRAW, sMarkVirtues[sMarksCursor]);
+    }
+    if (sMarksBalance < MarksBalancePages())                            // T-410: a page to turn to
+        AddTextPrinterParameterized3(1, FONT_NORMAL, MARKS_TEXT_W - GetStringWidth(FONT_NORMAL, sText_MarksMore, 0),
+                                     22, sTrainerCardTextColors, TEXT_SKIP_DRAW, sText_MarksMore);
     i = sMarksCursor;
     FillWindowPixelRect(1, PIXEL_FILL(TEXT_COLOR_DARK_GRAY), 24 + 24 * i, MARKS_ROW_Y, 16, 2);
     DrawTrainerCardWindow(1);
