@@ -237,8 +237,8 @@
 #define ITEM_TEXTBOOK 226 // T-219: from 7F. Was ITEM_0E2, unused -- clear of the HM range REVEAL will need
 #define ITEM_DIPLOMA 227 // T-218: from CALLOW SCHOOL, at 80 or better. Was ITEM_0E3, unused
 #define ITEM_GUIDE 228 // T-300: THE PROGRAMMER'S GUIDE TO THE HUMAN MIND, from ONE ISLAND. Was ITEM_0E4, unused
-#define ITEM_0E5 229
-#define ITEM_0E6 230
+#define ITEM_HARP 229  // T-417: CONTENT's instrument (PLAY). Was ITEM_0E5, unused
+#define ITEM_FLUTE 230 // T-417: CONTEXT's instrument (PLAY). Was ITEM_0E6, unused
 #define ITEM_0E7 231
 #define ITEM_0E8 232
 #define ITEM_0E9 233

@@ -39,6 +39,7 @@
 #include "berry_powder.h"
 #include "pokemon_jump.h"
 #include "event_scripts.h"
+#include "play.h"
 
 // this file's functions
 static void ResetMiniGamesResults(void);
@@ -269,6 +270,7 @@ void DaemonsDebug_GiveStock(void)
         { ITEM_FAME_CHECKER,  1 },
         { ITEM_NOTEBOOK,      1 },   // T-216: and a screen of its own
         { ITEM_GUIDE,         1 },   // T-300: and the Guide, which is otherwise ONE ISLAND's
+        { PLAY_ITEM,          1 },   // T-417: and the edition's instrument, HARP or FLUTE
         // T-188: and OPUS, without which the 386 daemons in the boxes (T-205) show no margin at all -- and the
         // margins are now written in two voices, so a debug game started as INSTINCT has to be able to read them.
         { ITEM_OPUS,          1 },

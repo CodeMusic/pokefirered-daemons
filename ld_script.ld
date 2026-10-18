@@ -277,6 +277,7 @@ SECTIONS {
         src/school_exam.o(.text);
         src/book_reader.o(.text);
         src/reveal.o(.text);
+        src/play.o(.text);
         src/menu2.o(.text);
         src/oak_speech.o(.text);
         src/tm_case.o(.text);
@@ -582,6 +583,7 @@ SECTIONS {
         src/school_exam.o(.rodata);
         src/book_reader.o(.rodata);
         src/reveal.o(.rodata);
+        src/play.o(.rodata);
         src/menu2.o(.rodata);
         src/oak_speech.o(.rodata);
         src/tm_case.o(.rodata);
@@ -989,6 +991,22 @@ SECTIONS {
         sound/songs/midi/mus_slate.o(.rodata);
         sound/songs/midi/mus_callow.o(.rodata);
         sound/songs/midi/mus_nexus.o(.rodata);
+        sound/songs/midi/se_harp_c.o(.rodata);
+        sound/songs/midi/se_harp_d.o(.rodata);
+        sound/songs/midi/se_harp_e.o(.rodata);
+        sound/songs/midi/se_harp_f.o(.rodata);
+        sound/songs/midi/se_harp_g.o(.rodata);
+        sound/songs/midi/se_harp_a.o(.rodata);
+        sound/songs/midi/se_harp_b.o(.rodata);
+        sound/songs/midi/se_harp_c_high.o(.rodata);
+        sound/songs/midi/se_flute_c.o(.rodata);
+        sound/songs/midi/se_flute_d.o(.rodata);
+        sound/songs/midi/se_flute_e.o(.rodata);
+        sound/songs/midi/se_flute_f.o(.rodata);
+        sound/songs/midi/se_flute_g.o(.rodata);
+        sound/songs/midi/se_flute_a.o(.rodata);
+        sound/songs/midi/se_flute_b.o(.rodata);
+        sound/songs/midi/se_flute_c_high.o(.rodata);
     } > ROM =0
 
     lib_rodata :

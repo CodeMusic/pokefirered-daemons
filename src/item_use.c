@@ -16,6 +16,7 @@
 #include "item.h"
 #include "item_menu.h"
 #include "item_use.h"
+#include "play.h"
 #include "itemfinder.h"
 #include "mail.h"
 #include "event_object_lock.h"
@@ -733,6 +734,25 @@ static void ItemUseOnFieldCB_Guide(u8 taskId)
 void FieldUseFunc_Guide(u8 taskId)
 {
     sItemUseOnFieldCB = ItemUseOnFieldCB_Guide;
+    SetUpItemUseOnFieldCallback(taskId);
+}
+
+//  T-417: the HARP (CONTENT) or the FLUTE (CONTEXT). The bag closes and the field comes back, then the instrument comes
+//  out where the player stands (src/play.c) -- on foot or on the water, never on the bicycle.
+static void ItemUseOnFieldCB_Play(u8 taskId)
+{
+    DestroyTask(taskId);
+    Play_Start();
+}
+
+void FieldUseFunc_Play(u8 taskId)
+{
+    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
+    {
+        PrintNotTheTimeToUseThat(taskId, gTasks[taskId].data[3]);
+        return;
+    }
+    sItemUseOnFieldCB = ItemUseOnFieldCB_Play;
     SetUpItemUseOnFieldCallback(taskId);
 }
 

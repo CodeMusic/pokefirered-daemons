@@ -350,6 +350,22 @@ gSongTable::
 	song mus_slate, 0, 0
 	song mus_callow, 0, 0
 	song mus_nexus, 0, 0
+	song se_harp_c, 2, 2
+	song se_harp_d, 2, 2
+	song se_harp_e, 2, 2
+	song se_harp_f, 2, 2
+	song se_harp_g, 2, 2
+	song se_harp_a, 2, 2
+	song se_harp_b, 2, 2
+	song se_harp_c_high, 2, 2
+	song se_flute_c, 2, 2
+	song se_flute_d, 2, 2
+	song se_flute_e, 2, 2
+	song se_flute_f, 2, 2
+	song se_flute_g, 2, 2
+	song se_flute_a, 2, 2
+	song se_flute_b, 2, 2
+	song se_flute_c_high, 2, 2
 
 dummy_song_header:
 	.byte 0, 0, 0, 0

@@ -9,6 +9,7 @@
 #include "new_game.h"
 #include "new_menu_helpers.h"
 #include "notebook.h"
+#include "play.h"
 #include "script.h"
 #include "string_util.h"
 #include "task.h"
@@ -41,7 +42,7 @@ enum
 {
     EV_EVERYTHING, EV_ROSTER, EV_EVERY_DAEMON, EV_STOCK,
     EV_OPENING, EV_SHOES, EV_INDEX, EV_OPUS, EV_SCHOOL, EV_TICKET, EV_FIR_KEY, EV_GROVES, EV_TEA, EV_GATES, EV_REVEAL, EV_RESOLVER,
-    EV_INTERRUPT, EV_GOTO_POINTS, EV_GUIDE, EV_GLOBAL_INDEX, EV_STREAM, EV_COMPANION,
+    EV_INTERRUPT, EV_GOTO_POINTS, EV_GUIDE, EV_GLOBAL_INDEX, EV_STREAM, EV_COMPANION, EV_INSTRUMENT,
     EV_MARKS_ALL, EV_MARK1, EV_MARK8 = EV_MARK1 + 7,
     EV_NOTEBOOK, EV_NOTEBOOK_FULL,
     EV_DRIVERS_ALL, EV_DRIVER1, EV_DRIVER8 = EV_DRIVER1 + 7,
@@ -79,6 +80,11 @@ static const u8 sName_Opus[]         = _("OPUS");
 static const u8 sName_Marks[]        = _("MARKS >");
 static const u8 sName_Notebook[]     = _("NOTEBOOK >");
 static const u8 sName_School[]       = _("TEXTBOOK AND DIPLOMA");
+#ifdef FIRERED
+static const u8 sName_Instrument[]   = _("THE HARP");               // T-417: the edition's instrument
+#else
+static const u8 sName_Instrument[]   = _("THE FLUTE");
+#endif
 static const u8 sName_Ticket[]       = _("S.S. ANNE TICKET");
 static const u8 sName_FirKey[]       = _("THE FIR IN ITS KEY");     // T-395
 static const u8 sName_Groves[]       = _("EVERY GROVE FOUND");      // T-395: THE NEXUS's doors
@@ -138,6 +144,7 @@ static const struct DbgRow sRows_Events[] = {
     { sName_Marks,       R_PAGE,   PG_MARKS },
     { sName_Notebook,    R_PAGE,   PG_NOTEBOOK },
     { sName_School,      R_TOGGLE, EV_SCHOOL },
+    { sName_Instrument,  R_TOGGLE, EV_INSTRUMENT },   // T-417: CONTENT's HARP comes at the school
     { sName_Ticket,      R_TOGGLE, EV_TICKET },
     { sName_FirKey,      R_TOGGLE, EV_FIR_KEY },
     { sName_Groves,      R_TOGGLE, EV_GROVES },
@@ -322,6 +329,11 @@ static bool8 IsHeld(u8 ev)
     case EV_INTERRUPT:    return CheckBagHasItem(ITEM_POKE_FLUTE, 1);
     case EV_GOTO_POINTS:  return FlagGet(FLAG_WORLD_MAP_BIRTH_ISLAND_EXTERIOR);
     case EV_GUIDE:        return FlagGet(FLAG_GOT_GUIDE);
+#ifdef FIRERED
+    case EV_INSTRUMENT:   return CheckBagHasItem(ITEM_HARP, 1);    // T-417: the edition's instrument
+#else
+    case EV_INSTRUMENT:   return CheckBagHasItem(ITEM_FLUTE, 1);
+#endif
     case EV_GLOBAL_INDEX: return IsNationalPokedexEnabled();
     case EV_COMPANION:    return FlagGet(FLAG_COMPANION_LINKED);
     case EV_NOTEBOOK:     return FlagGet(FLAG_GOT_NOTEBOOK);
@@ -388,6 +400,7 @@ static void Apply(u8 ev, bool8 on)
     case EV_INTERRUPT:    SetFlag(FLAG_GOT_POKE_FLUTE, on); SetItem(ITEM_POKE_FLUTE, on); return;
     case EV_GOTO_POINTS:  DaemonsDebug_EveryGotoPoint(on); return;
     case EV_GUIDE:        SetFlag(FLAG_GOT_GUIDE, on); SetItem(ITEM_GUIDE, on); return;
+    case EV_INSTRUMENT:   SetItem(PLAY_ITEM, on); return;
     case EV_GLOBAL_INDEX:
         if (on)
             EnableNationalPokedex();

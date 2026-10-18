@@ -40,6 +40,7 @@
 #include "field_player_avatar.h"
 #include "new_menu_helpers.h"
 #include "event_object_movement.h"
+#include "play.h"
 #include "event_object_lock.h"
 #include "script.h"
 #include "quest_log.h"
@@ -104,6 +105,8 @@ enum StartMenuOption
     STARTMENU_DBG_SONG,
     STARTMENU_DBG_SFX,
     STARTMENU_DBG_GLITCH,    // goal B: the glitch, placed nowhere yet
+    STARTMENU_DBG_HARP,      // T-417: the instruments' notes, three octaves of bend
+    STARTMENU_DBG_FLUTE,
     STARTMENU_DBG_BACK,
 #endif
     MAX_STARTMENU_ITEMS
@@ -193,6 +196,8 @@ static bool8 DbgHandleStepInput(void);
 static bool8 DbgSongCallback(void);
 static bool8 DbgWatchCallback(void);
 static bool8 DbgGlitchCallback(void);
+static bool8 DbgHarpCallback(void);    // T-417
+static bool8 DbgFluteCallback(void);
 static void DbgRelight(void);
 static bool8 DbgSfxCallback(void);
 static bool8 DbgBackCallback(void);
@@ -272,6 +277,8 @@ static const struct MenuAction sStartMenuActionTable[] = {
     [STARTMENU_DBG_SONG] = { gText_DbgMenuSong, {.u8_void = DbgSongCallback} },
     [STARTMENU_DBG_SFX]  = { gText_DbgMenuSfx,  {.u8_void = DbgSfxCallback} },
     [STARTMENU_DBG_GLITCH] = { gText_DbgMenuGlitch, {.u8_void = DbgGlitchCallback} },
+    [STARTMENU_DBG_HARP]   = { gText_DbgMenuHarp,   {.u8_void = DbgHarpCallback} },    // T-417
+    [STARTMENU_DBG_FLUTE]  = { gText_DbgMenuFlute,  {.u8_void = DbgFluteCallback} },
     [STARTMENU_DBG_BACK] = { gText_DbgMenuBack, {.u8_void = DbgBackCallback} }
 #endif
 };
@@ -333,6 +340,8 @@ static const u8 *const sStartMenuDescPointers[] = {
     gStartMenuDesc_DbgSong,
     gStartMenuDesc_DbgSfx,
     gStartMenuDesc_DbgGlitch,
+    gStartMenuDesc_DbgHarp,     // T-417
+    gStartMenuDesc_DbgFlute,
     gStartMenuDesc_DbgBack,
 #endif
 };
@@ -472,6 +481,8 @@ static void SetUpStartMenu(void)
         AppendToStartMenuItems(STARTMENU_DBG_SONG);
         AppendToStartMenuItems(STARTMENU_DBG_SFX);
         AppendToStartMenuItems(STARTMENU_DBG_GLITCH);
+        AppendToStartMenuItems(STARTMENU_DBG_HARP);    // T-417
+        AppendToStartMenuItems(STARTMENU_DBG_FLUTE);
         AppendToStartMenuItems(STARTMENU_DBG_BACK);
         return;
     }
@@ -1057,6 +1068,8 @@ static bool8 IsDaemonsDebugCallback(void)
         || sStartMenuCallback == DbgWeatherCallback   // T-415
         || sStartMenuCallback == DbgSfxCallback
         || sStartMenuCallback == DbgGlitchCallback // stays on the map: no fade to black behind it
+        || sStartMenuCallback == DbgHarpCallback     // T-417: the menu stays up while the scale plays
+        || sStartMenuCallback == DbgFluteCallback
         || sStartMenuCallback == DbgEventsCallback   // T-394: GAME EVENTS opens over the map
         || sStartMenuCallback == DbgSoundCallback
         || sStartMenuCallback == DbgBackCallback;
@@ -1711,6 +1724,20 @@ static bool8 DbgSfxCallback(void)
     if (++sDbgSfx >= DBG_FIRST_SONG)
         sDbgSfx = 1;
     PlaySE(sDbgSfx);
+    return DbgRedraw();
+}
+
+//  T-417: C major up three octaves of bend -- an octave down, the middle, an octave up, and the top C -- on the HARP
+//  (voice 46 of voicegroup128) or the FLUTE (voice 73 of voicegroup132), to hear how far the bend holds up.
+static bool8 DbgHarpCallback(void)
+{
+    Play_DebugScale(PLAY_HARP);
+    return DbgRedraw();
+}
+
+static bool8 DbgFluteCallback(void)
+{
+    Play_DebugScale(PLAY_FLUTE);
     return DbgRedraw();
 }
 

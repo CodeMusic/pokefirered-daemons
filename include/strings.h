@@ -736,6 +736,8 @@ extern const u8 gText_DbgMenuSong[];
 extern const u8 gText_DbgMenuSfx[];
 extern const u8 gText_DbgMenuWatch[];
 extern const u8 gText_DbgMenuGlitch[];
+extern const u8 gText_DbgMenuHarp[];
+extern const u8 gText_DbgMenuFlute[];
 extern const u8 gText_DbgSun[];
 extern const u8 gText_DbgMon[];
 extern const u8 gText_DbgTue[];
@@ -778,6 +780,8 @@ extern const u8 gStartMenuDesc_DbgSong[];
 extern const u8 gStartMenuDesc_DbgSfx[];
 extern const u8 gStartMenuDesc_DbgWatch[];
 extern const u8 gStartMenuDesc_DbgGlitch[];
+extern const u8 gStartMenuDesc_DbgHarp[];
+extern const u8 gStartMenuDesc_DbgFlute[];
 extern const u8 gStartMenuDesc_DbgBack[];
 #endif
 extern const u8 gText_MenuExit[];

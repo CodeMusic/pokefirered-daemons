@@ -13,6 +13,7 @@
 #include "constants/metatile_behaviors.h"
 #include "data/day_trims.h"
 #include "school_lift.h"
+#include "play.h"
 
 extern const struct Tileset gTileset_General;   // T-275: the CHECKPOINT's tileset
 extern const struct Tileset gTileset_Nexus;     // T-395: THE NEXUS, made of paint
@@ -970,12 +971,13 @@ static void DaemonsDrawingTone(u16 *colour)
 void DaemonsGreyHalftoneFrame(void)
 {
     u16 *colour;
-    s32 i, keep;
+    s32 i, keep, shine;
     bool8 drawing;
 
     if (sDaemonsHalftoneInColour || !DaemonsIsHalftone())
         return;
     keep = DaemonsLatentAbstractionBattler();
+    shine = IndexOfSpritePaletteTag(PALTAG_KEY_COLOURS);   // T-417: PLAY's notes always shine (the user, 2026-10-17)
     drawing = DaemonsCaveUnperceived();
     colour = gPlttBufferFaded;
     for (i = 0; i < (s32)PLTT_BUFFER_SIZE; i++, colour++)
@@ -985,6 +987,8 @@ void DaemonsGreyHalftoneFrame(void)
         // is the opponent battler's, and its copy for the battle animations is BG palette 8 + that battler.
         if (keep >= 0 && ((i >= OBJ_PLTT_ID(keep) && i < OBJ_PLTT_ID(keep + 1))
                        || (i >= BG_PLTT_ID(8 + keep) && i < BG_PLTT_ID(9 + keep))))
+            continue;
+        if (shine != 0xFF && i >= OBJ_PLTT_ID(shine) && i < OBJ_PLTT_ID(shine + 1))
             continue;
         if (drawing)
             DaemonsDrawingTone(colour);

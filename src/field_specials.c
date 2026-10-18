@@ -1795,13 +1795,14 @@ struct FirNote
 // the fir sings it there (the user, 2026-10-16). A flat is a blend of its natural and the note below, so in the key the yellow and purple
 // notes warm and deepen, and without it they are the plain naturals: right to look at, wrong to hear. Subtle, but also
 // not: the map takes a little of each note and the fir a lot, fading over the note.
-enum { FIR_RED, FIR_ORANGE, FIR_YELLOW, FIR_GREEN, FIR_BLUE, FIR_PURPLE };
+enum { FIR_RED, FIR_ORANGE, FIR_YELLOW, FIR_GREEN, FIR_BLUE, FIR_INDIGO, FIR_PURPLE };
 static const u16 sFirColour[][2] = { // without the key, in it
     [FIR_RED]    = { RGB(31,  0,  0), RGB(31,  0,  0) },
     [FIR_ORANGE] = { RGB(31, 16,  0), RGB(31, 16,  0) },
     [FIR_YELLOW] = { RGB(31, 31,  0), RGB(31, 24,  0) }, // E, E-flat (yellow into orange)
     [FIR_GREEN]  = { RGB( 0, 31,  0), RGB( 0, 31,  0) },
     [FIR_BLUE]   = { RGB( 0,  0, 31), RGB( 0,  0, 31) },
+    [FIR_INDIGO] = { RGB(12,  0, 31), RGB(12,  0, 31) }, // T-417 (the user, 2026-10-17): A is INDIGO everywhere -- PLAY's key wheel too
     [FIR_PURPLE] = { RGB(24,  0, 31), RGB(16,  0, 24) }, // B, B-flat (violet into indigo)
 };
 #define FIR_MAP_PALETTES 0x1FFF // the map's thirteen; 13-15 are the message box's
@@ -1823,7 +1824,7 @@ static const struct FirNote sFirTune[] =
     { 7,  0,  0, 18, FIR_RED    },  // C        love-
     { 7,  2,  2, 18, FIR_ORANGE },  // D        -ly
     { 7,  3,  4, 36, FIR_YELLOW },  // E-flat   are
-    { 5,  0,  0, 30, FIR_BLUE   },  // A        your
+    { 5,  0,  0, 30, FIR_INDIGO },  // A        your
     { 7,  0,  0, 30, FIR_RED    },  // C        bran-
     { 6, -1,  0, 72, FIR_PURPLE },  // B-flat   -ches.
 };
