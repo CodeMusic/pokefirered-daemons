@@ -22,6 +22,7 @@
 #include "strings.h"
 #include "overworld.h"
 #include "field_weather.h"
+#include "daemons_weather.h"   // T-415 P2
 #include "constants/weather.h"
 #include "party_menu.h"
 #include "field_specials.h"
@@ -2666,6 +2667,12 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && gBattleMoves[move].target == MOVE_TARGET_BOTH && CountAliveMonsInBattle(BATTLE_ALIVE_DEF_SIDE) == 2)
             damage /= 2;
 
+        // T-415 phase 2: the sky's boosts reach the physical types too -- VECTOR in wind, LATENT in fog (DRAFT).
+        // Phase 1 put wind's only in the special branch below, where a physical type never arrives (Gen 3 splits by
+        // type), so VECTOR was never lifted; found by measuring it in the theatre, 2026-10-18.
+        if (WEATHER_HAS_EFFECT2 && DaemonsSkyBoostsType(type))
+            damage = (125 * damage) / 100;
+
         // Moves always do at least 1 damage.
         if (damage == 0)
             damage = 1;
@@ -2739,9 +2746,10 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
             if ((gBattleWeather & (B_WEATHER_RAIN | B_WEATHER_SANDSTORM | B_WEATHER_HAIL_TEMPORARY)) && gCurrentMove == MOVE_SOLAR_BEAM)
                 damage /= 2;
 
-            // T-415 (the user, 2026-10-17): WIND outdoors (the overworld's sandstorm, field_weather) lifts VECTOR's
-            // routines by a quarter while it lasts. A field weather, not a battle one: nothing in battle starts or ends it.
-            if (type == TYPE_FLYING && GetCurrentWeather() == WEATHER_SANDSTORM)
+            // T-415 (the user, 2026-10-17): the sky's own boosts, by a quarter while it lasts -- here the special types',
+            // a THUNDERSTORM's SIGNAL (phase 2); VECTOR in wind and LATENT in fog are physical and lifted above. Field
+            // weathers, not battle ones: nothing in battle starts or ends them (daemons_weather.c, DaemonsSkyBoostsType).
+            if (DaemonsSkyBoostsType(type))
                 damage = (125 * damage) / 100;
 
             // Sun boosts Fire, weakens Water

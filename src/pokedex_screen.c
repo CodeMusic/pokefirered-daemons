@@ -3633,6 +3633,12 @@ static const u8 sText_NativeDay[] = _("DAY");                      // T-407, DRA
 static const u8 sText_NativeDusk[] = _("DUSK");                    // T-407, DRAFT
 static const u8 sText_NativeNight[] = _("NIGHT");                  // T-407, DRAFT
 static const u8 sText_NativeDawn[] = _("DAWN");                    // T-407, DRAFT
+static const u8 sText_NativeRain[] = _("RAIN");                    // T-415 phase 2, DRAFT: "IN RAIN"
+static const u8 sText_NativeStorm[] = _("STORMS");                 // T-415 phase 2, DRAFT
+static const u8 sText_NativeSnow[] = _("SNOW");                    // T-415 phase 2, DRAFT
+static const u8 sText_NativeFog[] = _("FOG");                      // T-415 phase 2, DRAFT
+static const u8 sText_NativeWind[] = _("WIND");                    // T-415 phase 2, DRAFT
+static const u8 *const sNativeSky[] = { sText_NativeRain, sText_NativeStorm, sText_NativeSnow, sText_NativeFog, sText_NativeWind };
 static const u8 *const sNativeSeason[SEASON_COUNT] = { sText_NativeWinter, sText_NativeSpring, sText_NativeSummer, sText_NativeAutumn };
 static const u8 *const sNativeWatch[WATCH_COUNT] = { sText_NativeDay, sText_NativeDusk, sText_NativeNight, sText_NativeDawn };
 
@@ -3669,7 +3675,7 @@ static bool8 DexScreen_NativeList(u8 *dst, u8 bits, const u8 *const *names, cons
 static void DexScreen_PrintNative(u16 species)
 {
     u8 win = sPokedexScreenData->windowIds[13] = AddWindow(&sWindowTemplate_AreaMap_Native);
-    u16 native = species < NUM_SPECIES ? sDaemonsNative[species] : 0;
+    u32 native = species < NUM_SPECIES ? sDaemonsNative[species] : 0;
     u8 line[32];
     u8 y = 0;
 
@@ -3680,9 +3686,9 @@ static void DexScreen_PrintNative(u16 species)
     }
     else
     {
-        if (native >> 12)
+        if ((native >> 12) & 15)
             DexScreen_AddTextPrinterParameterized(win, FONT_SMALL,
-                DexScreen_GetSetPokedexFlag(species, FLAG_GET_SEEN, TRUE) ? sDaemonsNativeGrove[native >> 12] : sText_NativeGrove, 0, y, 0);
+                DexScreen_GetSetPokedexFlag(species, FLAG_GET_SEEN, TRUE) ? sDaemonsNativeGrove[(native >> 12) & 15] : sText_NativeGrove, 0, y, 0);
         else
             DexScreen_AddTextPrinterParameterized(win, FONT_SMALL,
                 (native & 3) == 3 ? sText_NativeBoth : (native & 2) ? sText_NativeMargins : sText_NativeGamut, 0, y, 0);
@@ -3698,7 +3704,27 @@ static void DexScreen_PrintNative(u16 species)
             y += 12;
         }
         if (DexScreen_NativeList(line, (native >> 4) & 15, sNativeSeason, sText_NativeIn))
+        {
             DexScreen_AddTextPrinterParameterized(win, FONT_SMALL, line, 0, y, 0);
+            y += 12;
+        }
+        //  T-415 phase 2: met only in a weather -- "IN RAIN", "IN RAIN, STORMS" (bits 16-20; tools/gbanative.py).
+        //  The box holds four lines; a weather daemon keeps no hours or seasons of its own, so it never needs a fifth.
+        if ((native >> 16) && y <= 36)
+        {
+            u8 i;
+
+            StringCopy(line, sText_NativeIn);
+            for (i = 0; i < ARRAY_COUNT(sNativeSky); i++)
+            {
+                if (!((native >> (16 + i)) & 1))
+                    continue;
+                if (line[3] != EOS)
+                    StringAppend(line, sText_NativeComma);
+                StringAppend(line, sNativeSky[i]);
+            }
+            DexScreen_AddTextPrinterParameterized(win, FONT_SMALL, line, 0, y, 0);
+        }
     }
     PutWindowTilemap(win);
     CopyWindowToVram(win, COPYWIN_GFX);

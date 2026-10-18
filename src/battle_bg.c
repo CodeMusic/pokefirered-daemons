@@ -1,4 +1,5 @@
 #include "global.h"
+#include "daemons_weather.h"   // T-415 P2
 #include "gflib.h"
 #include "fieldmap.h"
 #include "battle.h"
@@ -722,6 +723,7 @@ static void LoadBattleTerrainGfx(u16 terrain)
     LZDecompressVram(sBattleTerrainTable[terrain].tileset, (void *)BG_CHAR_ADDR(2));
     LZDecompressVram(sBattleTerrainTable[terrain].tilemap, (void *)BG_SCREEN_ADDR(26));
     LoadCompressedPalette(sBattleTerrainTable[terrain].palette, BG_PLTT_ID(2), 3 * PLTT_SIZE_4BPP);
+    DaemonsTintBattleTerrain();   // T-415 P2: the weather outside, a light wash
 }
 
 static void LoadBattleTerrainEntryGfx(u16 terrain)
@@ -1199,6 +1201,7 @@ bool8 LoadChosenBattleElement(u8 caseId)
     case 5:
         battleScene = GetBattleTerrainOverride();
         LoadCompressedPalette(sBattleTerrainTable[battleScene].palette, BG_PLTT_ID(2), 3 * PLTT_SIZE_4BPP);
+        DaemonsTintBattleTerrain();   // T-415 P2
         break;
     case 6:
         LoadBattleMenuWindowGfx();

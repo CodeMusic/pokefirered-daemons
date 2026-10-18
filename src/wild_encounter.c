@@ -47,6 +47,7 @@ static void AddToWildEncounterRateBuff(u8 encouterRate);
 #include "data/wild_encounters.h"
 #include "daemons_time.h"
 #include "daemons_holidays.h"
+#include "daemons_weather.h"   // T-415 P2: DAEMONS_SKY_*, for the weather rows
 #include "data/wild_shifts.h"
 
 static const u8 sUnownLetterSlots[][LAND_WILD_COUNT] = {
@@ -74,12 +75,15 @@ void DisableWildEncounters(bool8 state)
 // T-407 (the user, 2026-10-16): season and hour homes on the early roads (tools/gbashifts.py). A row of
 // sWildShifts gives a land slot of this map to another daemon in some seasons and watches; the first row whose
 // season bit and watch bit are both set wins. Only the species moves -- the slot keeps its level and odds, and it
-// applies on top of whichever header was chosen, the day's or the night's.
+// applies on top of whichever header was chosen, the day's or the night's. T-415 phase 2: a row may also name
+// weathers (bits 8-15, DAEMONS_SKY_*), and then fires only under one of them; those rows come first, so a weather
+// daemon wins its slot from the season's while the weather lasts.
 static u16 WildShiftSpecies(u16 species, u8 slot)
 {
     u32 i;
     u8 seasonBit = WS_SEASON(DaemonsSeason());
     u8 watchBit = WS_WATCH(DaemonsWatch());
+    u16 skyBit = WS_SKY(DaemonsSkyNow());   // T-415 P2: a weather row fires only in its weather
     u16 holiday = DaemonsHolidayShiftSpecies(species, HOLIDAY_AREA_LAND, slot);   // T-416 P3: a holiday wins its slot
 
     if (holiday != species)
@@ -90,7 +94,8 @@ static u16 WildShiftSpecies(u16 species, u8 slot)
          && sWildShifts[i].mapNum == gSaveBlock1Ptr->location.mapNum
          && sWildShifts[i].slot == slot
          && (sWildShifts[i].when & seasonBit)
-         && (sWildShifts[i].when & watchBit))
+         && (sWildShifts[i].when & watchBit)
+         && (!(sWildShifts[i].when & WS_ANY_SKY) || (sWildShifts[i].when & skyBit)))
             return sWildShifts[i].species;
     }
     return species;

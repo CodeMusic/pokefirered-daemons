@@ -6,6 +6,11 @@
 #include "daemons_holidays.h"   // T-416 P4
 #include "constants/weather.h"
 #include "constants/region_map_sections.h"
+#include "constants/pokemon.h"   // T-415 P2
+#include "field_weather.h"         // T-415 P2
+#include "fieldmap.h"
+#include "palette.h"
+#include "blend_palette.h"
 
 // T-415: WEATHER, BY SEASON (decided by the user, 2026-10-17). Ruby and Sapphire's overworld weather, which FireRed
 // ships and never uses, brought back by the season: spring rain and sometimes a thunderstorm, summer clear and
@@ -356,4 +361,78 @@ bool8 DaemonsSongSky(u8 headerWeather, u8 mapType, u8 mapsec)
     sSongSkyWatch = DaemonsWatch();
     DaemonsDayAndMinute(&sSongSkyDay, &minute);
     return TRUE;
+}
+
+// ---- T-415 PHASE 2 (the user, 2026-10-17): what the weather does outside the sky ------------------------------------
+
+// The sky a field weather is, whatever put it there -- the day's draw, a song, DEBUG, or a map's own header (FIVE
+// ISLAND's LOST CAVE keeps vanilla's fog, and is fog for all of this). Anything else is CLEAR.
+u8 DaemonsSkyOfWeather(u8 weather)
+{
+    switch (weather)
+    {
+    case WEATHER_RAIN:
+    case WEATHER_DOWNPOUR:
+        return DAEMONS_SKY_RAIN;
+    case WEATHER_RAIN_THUNDERSTORM:
+        return DAEMONS_SKY_STORM;
+    case WEATHER_SNOW:
+        return DAEMONS_SKY_SNOW;
+    case WEATHER_FOG_HORIZONTAL:
+    case WEATHER_FOG_DIAGONAL:
+        return DAEMONS_SKY_FOG;
+    case WEATHER_SANDSTORM:
+        return DAEMONS_SKY_WIND;
+    }
+    return DAEMONS_SKY_CLEAR;
+}
+
+u8 DaemonsSkyNow(void)
+{
+    return DaemonsSkyOfWeather(GetCurrentWeather());
+}
+
+// The field weathers' own boosts, x1.25 while they last (pokemon.c's CalculateBaseDamage, inside Cloud Nine's check).
+// Rain's FLOW and ENTROPY are the battle's rain, which a thunderstorm brings too; these are the sky's: a thunderstorm
+// lifts SIGNAL, fog LATENT (DRAFT, 2026-10-18: what runs unobserved, in weather that hides things), wind VECTOR. None
+// has a weakened side of its own -- the storm's is rain's ENTROPY. The type chart is untouched (invariant 3).
+bool8 DaemonsSkyBoostsType(u8 type)
+{
+    switch (DaemonsSkyNow())
+    {
+    case DAEMONS_SKY_STORM:
+        return type == TYPE_ELECTRIC;
+    case DAEMONS_SKY_FOG:
+        return type == TYPE_GHOST;
+    case DAEMONS_SKY_WIND:
+        return type == TYPE_FLYING;
+    }
+    return FALSE;
+}
+
+// THE BATTLE TINT: the weather outside carried into the battle as a light wash over the terrain's three palettes
+// (BG 2-4), in the unfaded buffer so every fade and every redrawn background starts from it. Subtle -- a few
+// sixteenths. Never in HALFTONE (grey) or BREATHVERSE (timeless). Called after each load of the terrain's palette.
+static const struct { u16 color; u8 coeff; } sSkyBattleTint[DAEMONS_SKY_COUNT] = {
+    [DAEMONS_SKY_RAIN]  = { RGB( 8, 12, 20), 3 },
+    [DAEMONS_SKY_STORM] = { RGB( 5,  7, 15), 4 },
+    [DAEMONS_SKY_SNOW]  = { RGB(28, 30, 31), 3 },
+    [DAEMONS_SKY_FOG]   = { RGB(24, 25, 27), 4 },
+    [DAEMONS_SKY_WIND]  = { RGB(28, 21, 12), 2 },
+};
+
+void DaemonsTintBattleTerrain(void)
+{
+    u8 sky = DaemonsSkyNow();
+
+    if (sky == DAEMONS_SKY_CLEAR || DaemonsIsHalftone() || DaemonsIsTimeless())
+        return;
+    BlendPalette(BG_PLTT_ID(2), 3 * 16, sSkyBattleTint[sky].coeff, sSkyBattleTint[sky].color);
+    CpuCopy16(&gPlttBufferFaded[BG_PLTT_ID(2)], &gPlttBufferUnfaded[BG_PLTT_ID(2)], PLTT_SIZEOF(3 * 16));
+}
+
+// THE GLINT: may a boosted routine's name glint here? Not in HALFTONE or BREATHVERSE, as the tint.
+bool8 DaemonsSkyGlintAllowed(void)
+{
+    return !DaemonsIsHalftone() && !DaemonsIsTimeless();
 }

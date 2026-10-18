@@ -27,6 +27,8 @@
 #include "constants/songs.h"
 #include "constants/sound.h"
 #include "data/battle_move_menu.h"
+#include "daemons_weather.h"   // T-415 P2: the glint (outside the DEBUG block -- trap 29)
+#include "battle_util.h"
 #if DAEMONS_DEBUG
 #include "battle_main.h"
 #include "daemon_streaks.h"
@@ -115,6 +117,7 @@ static void MoveSelectionDisplayPpNumber(void);
 static void MoveSelectionDisplayPpString(void);
 static void MoveSelectionDisplayMoveType(void);
 static void MoveSelectionDisplayMoveNames(void);
+static void MoveMenuWeatherGlint(void);   // T-415 P2
 static void HandleMoveSwitching(void);
 static void WaitForMonSelection(void);
 static void CompleteWhenChoseItem(void);
@@ -857,6 +860,7 @@ void HandleInputChooseMove(void)
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleBufferA[gActiveBattler][4]);
 
     PreviewDeterminativeMoveTargets();
+    MoveMenuWeatherGlint();   // T-415 P2
     if (JOY_NEW(A_BUTTON))
     {
         u8 moveTarget;
@@ -1800,6 +1804,57 @@ static void SetMoveMenuTypeColor(u8 slot, u16 move)
 
     gPlttBufferUnfaded[BG_PLTT_ID(5) + MOVE_MENU_COLOR(slot)] = color;
     gPlttBufferFaded[BG_PLTT_ID(5) + MOVE_MENU_COLOR(slot)] = color;
+}
+
+// T-415 PHASE 2: THE GLINT. A routine the weather boosts right now -- FLOW in rain, ENTROPY in sun (the battle's
+// weather), SIGNAL in a thunderstorm, LATENT in fog, VECTOR in wind (the sky's) -- has its name catch the light once
+// a second: its slot's type colour runs a few sixteenths toward white and back over a quarter-second. The info box's
+// type line shares the slot's colour, so the selected routine's type glints with it. Nothing in HALFTONE or
+// BREATHVERSE; not while Cloud Nine or Air Lock holds the weather off, since nothing is boosted then.
+#define GLINT_PERIOD_MASK 63   // once every 64 frames
+#define GLINT_FRAMES      16   // up for 8, down for 8
+#define GLINT_PEAK        6    // sixteenths toward white at the top
+
+static bool8 MoveMenuWeatherBoosts(u16 move, bool8 weatherHolds)
+{
+    u8 type = gBattleMoves[move].type;
+
+    if (move == MOVE_NONE || gBattleMoves[move].power == 0 || !weatherHolds)
+        return FALSE;
+    if ((gBattleWeather & B_WEATHER_RAIN_TEMPORARY) && type == TYPE_WATER)
+        return TRUE;
+    if ((gBattleWeather & B_WEATHER_SUN) && type == TYPE_FIRE)
+        return TRUE;
+    return DaemonsSkyBoostsType(type);
+}
+
+static void MoveMenuWeatherGlint(void)
+{
+    struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleBufferA[gActiveBattler][4]);
+    u32 t = gMain.vblankCounter2 & GLINT_PERIOD_MASK;
+    bool8 weatherHolds;
+    u8 i, k;
+
+    if (!DaemonsSkyGlintAllowed())
+        return;
+    weatherHolds = WEATHER_HAS_EFFECT2;
+    k = t >= GLINT_FRAMES ? 0 : (t < GLINT_FRAMES / 2 ? t : GLINT_FRAMES - t) * GLINT_PEAK / (GLINT_FRAMES / 2);
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        u16 move = moveInfo->moves[i];
+        u16 base, color;
+        u8 r, g, b;
+
+        if (!MoveMenuWeatherBoosts(move, weatherHolds))
+            continue;
+        base = sTypeTextColor[gBattleMoves[move].type];
+        r = GET_R(base);
+        g = GET_G(base);
+        b = GET_B(base);
+        color = RGB(r + (((31 - r) * k) >> 4), g + (((31 - g) * k) >> 4), b + (((31 - b) * k) >> 4));
+        gPlttBufferUnfaded[BG_PLTT_ID(5) + MOVE_MENU_COLOR(i)] = color;
+        gPlttBufferFaded[BG_PLTT_ID(5) + MOVE_MENU_COLOR(i)] = color;
+    }
 }
 
 static void MoveSelectionDisplayMoveNames(void)

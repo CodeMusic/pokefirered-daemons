@@ -25,4 +25,13 @@ bool8 DaemonsSongSky(u8 headerWeather, u8 mapType, u8 mapsec);
 u8 DaemonsSkyAt(u8 mapsec);
 bool8 DaemonsStormOnIslandsToday(void);
 
+// T-415 phase 2: the sky a field weather is (DAEMONS_SKY_*), and the sky over the player now.
+u8 DaemonsSkyOfWeather(u8 weather);
+u8 DaemonsSkyNow(void);
+// The sky's own boosts (x1.25): a thunderstorm SIGNAL, fog LATENT, wind VECTOR.
+bool8 DaemonsSkyBoostsType(u8 type);
+// The battle's light weather tint over the terrain's palettes, and whether a boosted routine may glint here.
+void DaemonsTintBattleTerrain(void);
+bool8 DaemonsSkyGlintAllowed(void);
+
 #endif // GUARD_DAEMONS_WEATHER_H
