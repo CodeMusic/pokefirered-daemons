@@ -253,6 +253,18 @@
       "border_filepath": "data/layouts/House5/border.bin",
       "blockdata_filepath": "data/layouts/House5/map.bin"
     },
+    {
+      "id": "LAYOUT_HOUSE5_INTERPRETER",
+      "name": "House5Interpreter_Layout",
+      "width": 11,
+      "height": 9,
+      "border_width": 2,
+      "border_height": 2,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_GenericBuilding1",
+      "border_filepath": "data/layouts/House5Interpreter/border.bin",
+      "blockdata_filepath": "data/layouts/House5Interpreter/map.bin"
+    },
     {},
     {},
     {
