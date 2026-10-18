@@ -209,9 +209,22 @@ static const u8 sWatchTint[WATCH_COUNT][3][2] = {
     [WATCH_DAWN]  = { { 232, 1 }, { 226, 1 }, { 240, 3 } },
 };
 
+// T-416 P4: a holiday's light, on top of the watch's (src/daemons_holidays.c says when): LANTERN NIGHTS' warm lift at
+// dusk and night, FIRST FROST's pale dawn, the snow-light of a snowing solstice night, BEACH DAY's bright islands.
+// Each is a step toward a colour, by sixteenths -- a lift, never a new light.
+static const u8 sHolidayLift[HOLIDAY_LIFT_COUNT][4] = {
+    //                         r   g   b  sixteenths
+    [HOLIDAY_LIFT_NONE]    = {  0,  0,  0, 0 },
+    [HOLIDAY_LIFT_LANTERN] = { 31, 18,  6, 3 },
+    [HOLIDAY_LIFT_FROST]   = { 28, 30, 31, 4 },
+    [HOLIDAY_LIFT_SNOW]    = { 24, 26, 31, 3 },
+    [HOLIDAY_LIFT_BRIGHT]  = { 31, 31, 28, 2 },
+};
+
 void DaemonsTintForWatch(u16 *palette, u16 count)
 {
     const u8 (*t)[2] = sWatchTint[DaemonsWatch()];
+    const u8 *lift = sHolidayLift[DaemonsHolidayLift()];
     u16 i;
     s32 r, g, b;
 
@@ -220,6 +233,15 @@ void DaemonsTintForWatch(u16 *palette, u16 count)
         r = ((palette[i] & 0x1F) * t[0][0] >> 8) + t[0][1];
         g = (((palette[i] >> 5) & 0x1F) * t[1][0] >> 8) + t[1][1];
         b = (((palette[i] >> 10) & 0x1F) * t[2][0] >> 8) + t[2][1];
-        palette[i] = RGB2(min(r, 31), min(g, 31), min(b, 31));
+        r = min(r, 31);
+        g = min(g, 31);
+        b = min(b, 31);
+        if (lift[3] != 0)
+        {
+            r += (lift[0] - r) * lift[3] / 16;
+            g += (lift[1] - g) * lift[3] / 16;
+            b += (lift[2] - b) * lift[3] / 16;
+        }
+        palette[i] = RGB2(r, g, b);
     }
 }

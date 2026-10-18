@@ -3,6 +3,7 @@
 #include "region_map.h"
 #include "daemons_time.h"
 #include "daemons_weather.h"
+#include "daemons_holidays.h"   // T-416 P4
 #include "constants/weather.h"
 #include "constants/region_map_sections.h"
 
@@ -248,6 +249,33 @@ static u8 SkyHere(u8 mapsec)
     return DAEMONS_SKY_CLEAR;
 }
 
+// T-416 P4: A HOLIDAY'S SKY, over the day's draw (src/data/daemons_holidays.h's sHolidaySkies): BEACH DAY holds the
+// islands clear whatever the draw said; SNOW CARVING snows on SLATE CITY at night and MASK NIGHT hazes HALFTONE and
+// its roads, each only where the draw left the sky clear. Centred on the row's section, covering as an event would.
+// tools/skyodds.py does not count them (holidays are not in its odds).
+static u8 HolidaySky(u8 mapsec, u8 sky)
+{
+    struct SkyEvent e;
+    u8 k, kind, centre, radius, sheet, x, y, w, h, cx, cy, cw, chh;
+    bool8 onlyIfClear;
+
+    if (!DaemonsMapsecPlace(mapsec, &sheet, &x, &y, &w, &h))
+        return sky;
+    for (k = 0; DaemonsHolidaySkyRow(k, &kind, &centre, &radius, &onlyIfClear); k++)
+    {
+        if (onlyIfClear && sky != DAEMONS_SKY_CLEAR)
+            continue;
+        if (!DaemonsMapsecPlace(centre, &e.sheet, &cx, &cy, &cw, &chh))
+            continue;
+        e.cx = cx + cw / 2;
+        e.cy = cy + chh / 2;
+        e.radius = radius;
+        if (SkyCovers(&e, sheet, x, y, w, h))
+            return kind;
+    }
+    return sky;
+}
+
 // T-417 P4: the song's sky holds in its own section, until the watch turns or the day does.
 static bool8 SongSkyHolds(u8 mapsec)
 {
@@ -270,7 +298,7 @@ u8 DaemonsWeatherForMap(u8 headerWeather, u8 mapType, u8 mapsec)
     else if (SongSkyHolds(mapsec))
         sky = sSongSky - 1;
     else
-        sky = SkyHere(mapsec);
+        sky = HolidaySky(mapsec, SkyHere(mapsec));
     return sSkyWeather[sky];
 }
 
@@ -282,7 +310,7 @@ u8 DaemonsSkyAt(u8 mapsec)
         return (gDaemonsWeatherOverride - 1) % DAEMONS_SKY_COUNT;
     if (SongSkyHolds(mapsec))
         return sSongSky - 1;
-    return SkyHere(mapsec);
+    return HolidaySky(mapsec, SkyHere(mapsec));
 }
 
 // T-416: BEACH DAY's BIG PEARL -- did a thunderstorm touch the islands today (any hour, any of their sheets)?
@@ -311,7 +339,7 @@ bool8 DaemonsSongSky(u8 headerWeather, u8 mapType, u8 mapsec)
 
     if (headerWeather != WEATHER_SUNNY || !IsMapTypeOutdoors(mapType))
         return FALSE;
-    sky = SongSkyHolds(mapsec) ? sSongSky - 1 : SkyHere(mapsec);
+    sky = SongSkyHolds(mapsec) ? sSongSky - 1 : HolidaySky(mapsec, SkyHere(mapsec));
     if (sky == DAEMONS_SKY_CLEAR)
     {
         season = DaemonsSeason();   // the season's own: the kind it brings most often

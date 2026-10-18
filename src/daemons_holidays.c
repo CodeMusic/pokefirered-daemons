@@ -10,6 +10,15 @@
 #include "daemons_weather.h"
 #include "daemons_holidays.h"
 #include "play.h"
+#include "event_scripts.h"
+#include "field_weather.h"
+#include "fieldmap.h"
+#include "map_name_popup.h"
+#include "quest_log.h"
+#include "random.h"
+#include "region_map.h"
+#include "script.h"
+#include "constants/weather.h"
 #include "constants/flags.h"
 #include "constants/items.h"
 #include "constants/maps.h"
@@ -304,6 +313,228 @@ void DaemonsPlayMonthNote(u8 month, bool8 soft)
 #undef tTimer
 #undef tSoft
 
+// ----------------------------------------------------------------------------------------------------- the daemons
+
+// T-416 P3: A HOLIDAY'S DAEMONS. A row of sHolidayShifts gives one wild slot of one map to another daemon while its
+// holiday holds, in the watches it names -- on land (wild_encounter.c's WildShiftSpecies asks this first, so a holiday
+// wins over the season's or the hour's row on that slot, that day) or on a rod (STREAMERS' in DOLDRUM CITY). Only the
+// species moves: the slot keeps its level and its odds. PAIRING DAY and FIR LIGHTS bring the other edition's daemons in
+// with ordinary rows -- those two days are the only ones they come. Both of the day's holidays count (the edition's and
+// the COMMON one under it). The INDEX's area map does not learn them: it shows homes, not holidays.
+u16 DaemonsHolidayShiftSpecies(u16 species, u8 area, u8 slot)
+{
+    u32 i;
+    u8 h, common, watchBit;
+
+    h = DaemonsHoliday();
+    common = sHolidayCommon;
+    if (h == HOLIDAY_NONE)
+        return species;
+    watchBit = 1 << DaemonsWatch();
+    for (i = 0; i < ARRAY_COUNT(sHolidayShifts); i++)
+    {
+        if ((sHolidayShifts[i].holiday == h || (common != HOLIDAY_NONE && sHolidayShifts[i].holiday == common))
+         && sHolidayShifts[i].area == area
+         && sHolidayShifts[i].slot == slot
+         && (sHolidayShifts[i].watches & watchBit)
+         && sHolidayShifts[i].mapGroup == gSaveBlock1Ptr->location.mapGroup
+         && sHolidayShifts[i].mapNum == gSaveBlock1Ptr->location.mapNum)
+            return sHolidayShifts[i].species;
+    }
+    return species;
+}
+
+// ---------------------------------------------------------------------------------------------------- the overlays
+
+// T-416 P4: WHAT A HOLIDAY DOES TO THE FIELD. Only the holiday that shows (the edition's, when two hold) dresses it;
+// only what its row's HF_* name, so a QUIET day is quiet -- no colour, no fireworks -- save LANTERN NIGHTS' own lantern.
+// Outdoors only, never in HALFTONE (grey outranks everything) or BREATHVERSE (timeless): the callers rule those out.
+u8 DaemonsHolidayLift(void)
+{
+    u16 flags = DaemonsHolidayFlags(DaemonsHoliday());
+    u8 watch, sheet, x, y, w, h;
+
+    if (!(flags & (HF_LANTERN | HF_FROST | HF_SNOW_LIGHT | HF_BRIGHT_DAY)))
+        return HOLIDAY_LIFT_NONE;
+    watch = DaemonsWatch();
+    if ((flags & HF_LANTERN) && (watch == WATCH_DUSK || watch == WATCH_NIGHT))
+        return HOLIDAY_LIFT_LANTERN;
+    if ((flags & HF_FROST) && watch == WATCH_DAWN)
+        return HOLIDAY_LIFT_FROST;
+    if ((flags & HF_SNOW_LIGHT) && watch == WATCH_NIGHT && DaemonsSkyAt(gMapHeader.regionMapSectionId) == DAEMONS_SKY_SNOW)
+        return HOLIDAY_LIFT_SNOW;
+    if ((flags & HF_BRIGHT_DAY) && watch == WATCH_DAY
+     && DaemonsMapsecPlace(gMapHeader.regionMapSectionId, &sheet, &x, &y, &w, &h) && sheet != 0)
+        return HOLIDAY_LIFT_BRIGHT;
+    return HOLIDAY_LIFT_NONE;
+}
+
+// VIOLET BLOOM: the month's own purple (NOV's) for the darkest petal, and two steps of it toward white for the others.
+u16 DaemonsHolidayBloomColour(u8 shade)
+{
+    u16 c = sMonthColours[10];
+    s32 r = GET_R(c), g = GET_G(c), b = GET_B(c), toward = shade == 0 ? 9 : shade == 1 ? 5 : 0;   // sixteenths
+
+    r += (31 - r) * toward / 16;
+    g += (31 - g) * toward / 16;
+    b += (31 - b) * toward / 16;
+    return RGB(r, g, b);
+}
+
+bool8 DaemonsHolidayFirGlow(void)
+{
+    return (DaemonsHolidayFlags(DaemonsHoliday()) & HF_FIR_GLOW) != 0;
+}
+
+// The found fir's palette (NPC_GREEN, its own slot), a step brighter and a touch warmer -- before the watch's tint, so
+// the night still falls on it.
+void DaemonsHolidayGlow(u16 *unfaded, u16 *faded)
+{
+    u8 i;
+    s32 r, g, b;
+
+    for (i = 1; i < 16; i++)
+    {
+        r = GET_R(unfaded[i]);
+        g = GET_G(unfaded[i]);
+        b = GET_B(unfaded[i]);
+        r += (31 - r) * 5 / 16;
+        g += (30 - g) * 4 / 16;
+        b += (18 - b) * 2 / 16;
+        unfaded[i] = RGB(r, g, b);
+        faded[i] = unfaded[i];
+    }
+}
+
+bool8 DaemonsHolidaySkyRow(u8 k, u8 *sky, u8 *mapsec, u8 *radius, bool8 *onlyIfClear)
+{
+    u32 i;
+    u8 h = DaemonsHoliday(), common = sHolidayCommon, watchBit;
+
+    if (h == HOLIDAY_NONE)
+        return FALSE;
+    watchBit = 1 << DaemonsWatch();
+    for (i = 0; i < ARRAY_COUNT(sHolidaySkies); i++)
+    {
+        if (sHolidaySkies[i].holiday != h && (common == HOLIDAY_NONE || sHolidaySkies[i].holiday != common))
+            continue;
+        if (!(sHolidaySkies[i].watches & watchBit))
+            continue;
+        if (k-- != 0)
+            continue;
+        *sky = sHolidaySkies[i].sky;
+        *mapsec = sHolidaySkies[i].mapsec;
+        *radius = sHolidaySkies[i].radius;
+        *onlyIfClear = sHolidaySkies[i].onlyIfClear;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+// THE LINES THAT ARRIVE ON THEIR OWN: LANTERN NIGHTS' in HALFTONE TOWN after dusk, DAWN VIGIL's anywhere outdoors at
+// dawn. Asked once a second while the player has the field (overworld.c), after the day's banner has gone; the gift
+// walk decides (the line once ever, only with the NOTEBOOK, only in the watches its row names).
+const u8 *DaemonsHolidayArrival(void)
+{
+    u8 stage, h, giver;
+
+    if (!IsMapTypeOutdoors(gMapHeader.mapType) || IsMapNamePopupTaskActive() || Play_IsActive())
+        return NULL;
+    DaemonsTimeRefresh();
+    for (stage = 0; stage < 2; stage++)
+    {
+        h = stage == 0 ? sHoliday : sHolidayCommon;
+        if (h == HOLIDAY_NONE)
+            continue;
+        giver = sHolidays[h - 1].giver;
+        if (giver == GIVER_HALFTONE && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_LAVENDER_TOWN)
+         && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_LAVENDER_TOWN))
+        {
+            gSpecialVar_0x8006 = GIVER_HALFTONE;
+            if (DaemonsHolidayGiftWaits())
+                return EventScript_HolidayArrives_Halftone;
+        }
+        else if (giver == GIVER_DAWN_OUTDOORS)
+        {
+            gSpecialVar_0x8006 = GIVER_DAWN_OUTDOORS;
+            if (DaemonsHolidayGiftWaits())
+                return EventScript_HolidayArrives_Dawn;
+        }
+    }
+    return NULL;
+}
+
+// MARIGOLD DAYS' visitor at the stones (DAEMON TOWER 2F): a special for the floor's transition.
+bool8 DaemonsHolidayVisitorComes(void)
+{
+    return DaemonsHoliday() == HOLIDAY_MARIGOLD_DAYS || DaemonsHolidayCommon() == HOLIDAY_MARIGOLD_DAYS;
+}
+
+// THE FIREWORKS (ROLLOVER, SUMMER LIGHTS): outdoors, at night, under a clear sky, never in HALFTONE or BREATHVERSE,
+// never while the player is held (a message, a menu, a script) or the instrument is out. A task keeps the sky: it is
+// made when they may begin (once a second at most) and ends the moment they may not. PLAY draws them (src/play.c).
+#define tPalSlot data[0]
+#define tWait    data[1]
+
+static bool8 FireworksAllowed(void)
+{
+    u8 weather;
+
+    if (!(DaemonsHolidayFlags(DaemonsHoliday()) & HF_FIREWORKS) || DaemonsWatch() != WATCH_NIGHT)
+        return FALSE;
+    if (!IsMapTypeOutdoors(gMapHeader.mapType) || DaemonsIsHalftone() || DaemonsIsTimeless())
+        return FALSE;
+    weather = GetCurrentWeather();
+    if (weather != WEATHER_SUNNY && weather != WEATHER_NONE)
+        return FALSE;
+    return !ArePlayerFieldControlsLocked() && !Play_IsActive() && gQuestLogState != QL_STATE_PLAYBACK;
+}
+
+static void Task_Fireworks(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+
+    Play_FireworksShine(tPalSlot);
+    if (gPaletteFade.active || --tWait > 0)
+        return;
+    tWait = 18 + Random() % 48;
+    if (Play_FireworksRockets() < 4)
+        Play_FireworksLaunch(tPalSlot, 24 + Random() % (DISPLAY_WIDTH - 48), 20 + Random() % 52, Random() % 12);
+}
+
+void DaemonsFireworks_Stop(void)
+{
+    u8 taskId = FindTaskIdByFunc(Task_Fireworks);
+
+    if (taskId == TASK_NONE)
+        return;
+    Play_FireworksEnd();
+    DestroyTask(taskId);
+}
+
+void DaemonsFireworks_Update(void)
+{
+    u8 taskId = FindTaskIdByFunc(Task_Fireworks), palSlot;
+
+    if (taskId != TASK_NONE)
+    {
+        if (!FireworksAllowed())
+            DaemonsFireworks_Stop();
+        return;
+    }
+    if ((gMain.vblankCounter2 % 60) != 0 || !FireworksAllowed())
+        return;
+    palSlot = Play_FireworksBegin();
+    if (palSlot == 0xFF)
+        return;
+    taskId = CreateTask(Task_Fireworks, 91);
+    gTasks[taskId].tPalSlot = palSlot;
+    gTasks[taskId].tWait = 1;
+}
+
+#undef tPalSlot
+#undef tWait
+
 // ------------------------------------------------------------------------------------------------------- the gifts
 
 static u16 GiftFlag(u8 holiday)
@@ -353,7 +584,8 @@ void DaemonsHolidayGiftBegin(void)
     }
 }
 
-// DEN DAY: the GAIN item of the lead's first type; an ORACLE lead has none (ITEM_NONE), and its list reads on.
+// DEN DAY: the GAIN item of the lead's first type. A lead that is ORACLE as EITHER type has none (ITEM_NONE), and its
+// list reads on to THE YEAR's line (the user, 2026-10-18: no daemon is ORACLE first; OLD_UNOWN_B is ORACLE second).
 static u16 LeadTypeGain(void)
 {
     u32 i;
@@ -367,6 +599,8 @@ static u16 LeadTypeGain(void)
             break;
         if (GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
             continue;
+        if (gSpeciesInfo[species].types[0] == TYPE_MYSTERY || gSpeciesInfo[species].types[1] == TYPE_MYSTERY)
+            return ITEM_NONE;
         type = gSpeciesInfo[species].types[0];
         return type < NUMBER_OF_MON_TYPES ? sHolidayTypeGain[type] : ITEM_NONE;
     }

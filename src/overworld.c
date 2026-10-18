@@ -1,4 +1,5 @@
 #include "global.h"
+#include "daemons_holidays.h"   // T-416 P4
 #include "book_reader.h"
 #include "gflib.h"
 #include "bg_regs.h"
@@ -1498,6 +1499,8 @@ static EWRAM_DATA u8 sRelightTimer = 0;
 
 static void RelightIfTheLightChanged(void)
 {
+    const u8 *script;
+
     if (++sRelightTimer < 60)
         return;
     sRelightTimer = 0;
@@ -1507,7 +1510,14 @@ static void RelightIfTheLightChanged(void)
     if (DaemonsSettleWeather())   // T-415: an event starting or ending changes the sky in front of the player
         return;                   // and the light is looked at again a second later, once the weather has settled
     if (DaemonsPrimarySignature() != DaemonsPaletteSignature())
+    {
         DaemonsRelightField();
+        return;
+    }
+    // T-416 P4: a holiday's line that arrives on its own (HALFTONE after dusk, DAWN VIGIL at dawn)
+    script = DaemonsHolidayArrival();
+    if (script != NULL)
+        ScriptContext_SetupScript(script);
 }
 
 #if DAEMONS_DEBUG
@@ -1545,6 +1555,7 @@ static void OverworldBasic(void)
 #if DAEMONS_DEBUG
     WarpIfTheTheatreAsks();
 #endif
+    DaemonsFireworks_Update();   // T-416 P4
     RunTasks();
     AnimateSprites();
     CameraUpdate();

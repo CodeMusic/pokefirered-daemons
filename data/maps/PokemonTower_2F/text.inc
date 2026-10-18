@@ -31,3 +31,8 @@ PokemonTower_2F_Text_SilphScopeCouldUnmaskGhosts::
     .string "A RESOLVER might be able to unmask\n"
     .string "them.$"
 
+
+@ T-416 P4 (DRAFT): MARIGOLD DAYS' visitor at the stones.
+PokemonTower_2F_Text_HolidayVisitor::
+    .string "Someone kneels at the stones,\n"
+    .string "saying names, one at a time.$"

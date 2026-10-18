@@ -10,6 +10,7 @@
 #include "constants/region_map_sections.h"
 #include "constants/maps.h"
 #include "daemons_time.h"
+#include "daemons_holidays.h"
 #include "constants/metatile_behaviors.h"
 #include "data/day_trims.h"
 #include "school_lift.h"
@@ -1066,7 +1067,7 @@ static u8 DaemonsClarityFade(void)
 
 // T-417 (the user, 2026-10-18): BREATHVERSE stays timeless -- no season and no watch's light on the islet. Its weather
 // is left as the day draws it (only the tints were ruled out).
-static bool8 DaemonsIsTimeless(void)
+bool8 DaemonsIsTimeless(void)
 {
     return gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_BREATHVERSE)
         && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_BREATHVERSE);
@@ -1083,10 +1084,20 @@ static u8 DaemonsSeasonHere(void)
     return DaemonsSeasonShows() ? DaemonsSeason() : SEASON_SUMMER;
 }
 
-static u16 DaemonsSeasonColour(u16 index, u16 colour, u8 season)
+// T-416 P4: VIOLET BLOOM -- for the day, the petal slots (palette 0's 9-11) wear the month's purple, light to dark,
+// whatever the season has made of them. Where the season shows, and only there.
+static bool8 DaemonsBloomHere(u16 offset)
+{
+    return offset < BG_PLTT_ID(NUM_PALS_IN_PRIMARY) && DaemonsSeasonShows()
+        && (DaemonsHolidayFlags(DaemonsHoliday()) & HF_VIOLET_BLOOM);
+}
+
+static u16 DaemonsSeasonColour(u16 index, u16 colour, u8 season, bool8 bloom)
 {
     u32 i;
 
+    if (bloom && index >= 9 && index <= 11)
+        return DaemonsHolidayBloomColour(index - 9);
     if (season == SEASON_SUMMER)
         return colour;
     if (index < 16)
@@ -1104,12 +1115,13 @@ static void DaemonsClarityEntries(u16 offset, u16 count)
     s32 amount = DaemonsClarityFade(), r, g, b, grey;
     u16 i, c;
     u8 season = offset < BG_PLTT_ID(NUM_PALS_IN_PRIMARY) ? DaemonsSeasonHere() : SEASON_SUMMER;
+    bool8 bloom = DaemonsBloomHere(offset);
 
-    if (amount == 0 && season == SEASON_SUMMER)
+    if (amount == 0 && season == SEASON_SUMMER && !bloom)
         return;
     for (i = 0; i < count; i++)
     {
-        c = DaemonsSeasonColour(offset + i, gPlttBufferUnfaded[offset + i], season);
+        c = DaemonsSeasonColour(offset + i, gPlttBufferUnfaded[offset + i], season, bloom);
         if (amount == 0)
         {
             gPlttBufferUnfaded[offset + i] = c;
@@ -1133,8 +1145,10 @@ u8 DaemonsFieldTint(void)
         return gGlobalFieldTintMode;
     if (DaemonsIsHalftone())
         return QL_TINT_GRAYSCALE;
-    // T-268: the watch's light, outdoors only -- and after HALFTONE, because grey outranks time.
-    if (IsMapTypeOutdoors(gMapHeader.mapType) && DaemonsWatch() != WATCH_DAY && !DaemonsIsTimeless())
+    // T-268: the watch's light, outdoors only -- and after HALFTONE, because grey outranks time. T-416 P4: and by
+    // day too while a holiday lifts the light (BEACH DAY's bright day on the islands).
+    if (IsMapTypeOutdoors(gMapHeader.mapType) && !DaemonsIsTimeless()
+     && (DaemonsWatch() != WATCH_DAY || DaemonsHolidayLift() != HOLIDAY_LIFT_NONE))
         return DAEMONS_TINT_WATCH;
     return QL_TINT_NONE;
 }
@@ -1149,7 +1163,14 @@ u16 DaemonsPaletteSignature(void)
     // T-275: and the weekday, whose colour is on the CHECKPOINT's trim in the primary rows
     // T-317: and the clarity, so a connection crossed after an understanding arrives reloads the faded rows
     // T-359: and the season, so a connection crossed as the season turns reloads the rows it repaints
-    return (DaemonsClarityFade() != 0 ? (DaemonsClarityFade() > 46 ? 0x2000 : 0x1000) : 0)
+    // T-416 P4: and the holiday's light (bits 6, 14, 15: a lift, or VIOLET BLOOM's petals), or a map crossed as a
+    // holiday begins keeps the old palette
+    u8 look = DaemonsFieldTint() == DAEMONS_TINT_WATCH ? DaemonsHolidayLift() : HOLIDAY_LIFT_NONE;
+
+    if (look == HOLIDAY_LIFT_NONE && DaemonsBloomHere(0))
+        look = HOLIDAY_LIFT_COUNT;
+    return ((look & 1) << 6) | ((look >> 1) << 14)
+         | (DaemonsClarityFade() != 0 ? (DaemonsClarityFade() > 46 ? 0x2000 : 0x1000) : 0)
          | (DaemonsSeasonHere() << 10) | (DaemonsFieldTint() << 7) | (DaemonsWeekday() << 3) | (DaemonsWatch() << 1) | DaemonsIsBlancheOutdoors();
 }
 

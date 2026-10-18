@@ -1,5 +1,24 @@
 PokemonTower_2F_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, PokemonTower_2F_OnTransition
 	.byte 0
+
+@ T-416 P4: MARIGOLD DAYS' visitor at the stones (src/daemons_holidays.c). Hidden every other day.
+PokemonTower_2F_OnTransition::
+	setflag FLAG_HIDE_HOLIDAY_VISITOR
+	specialvar VAR_RESULT, DaemonsHolidayVisitorComes
+	goto_if_eq VAR_RESULT, FALSE, PokemonTower_2F_OnTransition_End
+	clearflag FLAG_HIDE_HOLIDAY_VISITOR
+PokemonTower_2F_OnTransition_End::
+	end
+
+@ Every word DRAFT. They do not turn round; MARIGOLD DAYS' line arrives after them, once, into the NOTEBOOK.
+PokemonTower_2F_EventScript_HolidayVisitor::
+	lock
+	msgbox PokemonTower_2F_Text_HolidayVisitor
+	setvar VAR_0x8006, GIVER_TOWER
+	call EventScript_HolidayGifts
+	release
+	end
 
 PokemonTower_2F_EventScript_Channeler::
 	msgbox PokemonTower_2F_Text_SilphScopeCouldUnmaskGhosts, MSGBOX_NPC

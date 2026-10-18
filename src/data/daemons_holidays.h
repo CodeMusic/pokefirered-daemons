@@ -22,7 +22,7 @@ struct HolidayRow
 
 #define HG_GO_ON           (1 << 0)   // gives and reads on
 #define HG_LINE            (1 << 1)   // a line for THE YEAR (arg: its index), not an item
-#define HG_LEAD_TYPE_GAIN  (1 << 2)   // the party lead's type's GAIN (sHolidayTypeGain); ITEM_NONE (ORACLE) reads on
+#define HG_LEAD_TYPE_GAIN  (1 << 2)   // the lead's first type's GAIN (sHolidayTypeGain); ORACLE as either type reads on
 #define HG_YEAR_DRAW       (1 << 3)   // sHolidayPresents[(year + edition) % 4]
 #define HG_STORM_ISLANDS   (1 << 4)   // only if a thunderstorm touched the islands today
 
@@ -94,7 +94,8 @@ static const u8 sEasterAfterMar21[] = {10, 30, 15, 7, 26, 11, 31, 23, 7, 27, 19,
 // The Mid-Autumn Festival, 2024-2040, as days after September 1 (the 15th of the 8th lunar month, as published).
 static const u8 sMidAutumnAfterSep1[] = {16, 35, 24, 14, 32, 21, 11, 30, 18, 7, 26, 15, 33, 23, 12, 31, 19};
 
-// DEN DAY: the GAIN item of the party lead's type (ITEM_NONE: ORACLE has none -- its gift reads on to THE YEAR's line).
+// DEN DAY: the GAIN item of the party lead's first type. A lead that is ORACLE as EITHER type gets none -- its gift reads on to
+// THE YEAR's line (the user, 2026-10-18).
 static const u16 sHolidayTypeGain[NUMBER_OF_MON_TYPES] = {
     [TYPE_NORMAL] = ITEM_SILK_SCARF,
     [TYPE_FIGHTING] = ITEM_BLACK_BELT,

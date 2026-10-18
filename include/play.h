@@ -37,6 +37,12 @@ void Play_OnTilesetPalettesLoaded(void);   // fieldmap.c, as the secondary tiles
 void Play_LightNexus(void);                 // the special, as it is lit
 // A note: `semitone` from the instrument's middle C (negative, and past 12, are octaves by bend), on SE2 or SE3.
 void Play_SoundNote(u8 instrument, s16 semitone, bool8 onSe3);
+// T-416 P4: ROLLOVER's and SUMMER LIGHTS' fireworks, from PLAY's art (src/daemons_holidays.c runs them).
+u8 Play_FireworksBegin(void);    // the palette slot, or 0xFF: nothing loaded
+u8 Play_FireworksRockets(void);
+void Play_FireworksLaunch(u8 palSlot, s16 x, s16 top, u8 colour);
+void Play_FireworksShine(u8 palSlot);
+void Play_FireworksEnd(void);
 #if DAEMONS_DEBUG
 void Play_DebugScale(u8 instrument);   // DEBUG -> SOUND: C major up three octaves
 #endif

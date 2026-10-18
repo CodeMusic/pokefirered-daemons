@@ -30,3 +30,19 @@ EventScript_HolidayGifts_Line::
 	msgbox gStringVar4
 	copyvar VAR_TEXT_COLOR, VAR_PREV_TEXT_COLOR
 	goto EventScript_HolidayGifts_Next
+
+@ T-416 P4: the lines that arrive on their own, outdoors (src/daemons_holidays.c's DaemonsHolidayArrival, asked once a
+@ second by overworld.c): LANTERN NIGHTS' in HALFTONE TOWN after dusk, DAWN VIGIL's at dawn.
+EventScript_HolidayArrives_Halftone::
+	lockall
+	setvar VAR_0x8006, GIVER_HALFTONE
+	call EventScript_HolidayGifts
+	releaseall
+	end
+
+EventScript_HolidayArrives_Dawn::
+	lockall
+	setvar VAR_0x8006, GIVER_DAWN_OUTDOORS
+	call EventScript_HolidayGifts
+	releaseall
+	end

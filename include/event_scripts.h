@@ -1240,6 +1240,8 @@ extern const u8 EventScript_Play_Still[];
 extern const u8 EventScript_Play_CallBack[];
 extern const u8 EventScript_Play_Guardian[];
 extern const u8 EventScript_Play_Reflection[];
+extern const u8 EventScript_HolidayArrives_Halftone[];   // T-416 P4
+extern const u8 EventScript_HolidayArrives_Dawn[];
 extern const u8 EventScript_Textbook[];   // T-219
 extern const u8 EventScript_Guide[];      // T-300
 extern const u8 EventScript_Diploma[];    // T-218

@@ -46,6 +46,7 @@ static void AddToWildEncounterRateBuff(u8 encouterRate);
 
 #include "data/wild_encounters.h"
 #include "daemons_time.h"
+#include "daemons_holidays.h"
 #include "data/wild_shifts.h"
 
 static const u8 sUnownLetterSlots[][LAND_WILD_COUNT] = {
@@ -79,7 +80,10 @@ static u16 WildShiftSpecies(u16 species, u8 slot)
     u32 i;
     u8 seasonBit = WS_SEASON(DaemonsSeason());
     u8 watchBit = WS_WATCH(DaemonsWatch());
+    u16 holiday = DaemonsHolidayShiftSpecies(species, HOLIDAY_AREA_LAND, slot);   // T-416 P3: a holiday wins its slot
 
+    if (holiday != species)
+        return holiday;
     for (i = 0; i < ARRAY_COUNT(sWildShifts); i++)
     {
         if (sWildShifts[i].mapGroup == gSaveBlock1Ptr->location.mapGroup
@@ -342,8 +346,10 @@ static u16 GenerateFishingEncounter(const struct WildPokemonInfo * info, u8 rod)
 {
     u8 slot = ChooseWildMonIndex_Fishing(rod);
     u8 level = ChooseWildMonLevel(&info->wildPokemon[slot]);
-    GenerateWildMon(info->wildPokemon[slot].species, level, slot);
-    return info->wildPokemon[slot].species;
+    u16 species = DaemonsHolidayShiftSpecies(info->wildPokemon[slot].species, HOLIDAY_AREA_FISH, slot);   // T-416 P3
+
+    GenerateWildMon(species, level, slot);
+    return species;
 }
 
 static bool8 DoWildEncounterRateDiceRoll(u16 encounterRate)

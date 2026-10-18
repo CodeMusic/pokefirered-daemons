@@ -498,4 +498,5 @@ gSpecials::
 	def_special DaemonsHolidayGift
 	def_special DaemonsHolidayGiftTaken
 	def_special DaemonsHolidayGiftWaits
+	def_special DaemonsHolidayVisitorComes   @ T-416 P4
 gSpecialsEnd::

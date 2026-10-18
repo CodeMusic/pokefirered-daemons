@@ -16,6 +16,7 @@
 #include "script.h"
 #include "trainer_see.h"
 #include "trig.h"
+#include "daemons_holidays.h"
 #include "constants/maps.h"
 #include "constants/event_object_movement.h"
 #include "constants/event_objects.h"
@@ -483,6 +484,9 @@ static const u8 gInitialMovementTypeFacingDirections[MOVEMENT_TYPES_COUNT] = {
 //  T-395: every singing fir is flat until the key -- NPC_GREEN washed out. It rides the OWL's patch-at-spawn in
 //  PALSLOT_NPC_1: the pier's special slot is the S.S. ANNE's, and no grove or the pier holds anyone blue.
 #define OBJ_EVENT_PAL_TAG_FIR_DIM                     0x112A
+//  T-416 P4: WINTER FIR and FIR LIGHTS -- a found fir glows a step brighter: NPC_GREEN lifted, in the dim fir's slot
+//  (PALSLOT_NPC_1, which no grove or the pier uses otherwise), so nobody else dressed in green glows with it.
+#define OBJ_EVENT_PAL_TAG_FIR_GLOW                    0x112B
 //  QUICKSILVER's locals share one palette of the town's own (T-119).
 #define OBJ_EVENT_PAL_TAG_NPC_TOWN_QUICKSILVER        0x1128
 //  BRAZEN's locals share one palette of the town's own (T-119).
@@ -540,6 +544,26 @@ static const u8 gInitialMovementTypeFacingDirections[MOVEMENT_TYPES_COUNT] = {
 #include "data/object_events/object_event_subsprites.h"
 #include "data/object_events/object_event_graphics_info.h"
 
+// T-416 P4: the found fir on a glowing day -- the same frames, in the glow's own slot (GetObjectEventGraphicsInfo).
+static const struct ObjectEventGraphicsInfo sObjectEventGraphicsInfo_SingingFirGlow = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_FIR_GLOW,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = PALSLOT_NPC_1,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gObjectEventBaseOam_16x32,
+    .subspriteTables = gObjectEventSpriteOamTables_16x32,
+    .anims = sAnimTable_SingingFir,
+    .images = sPicTable_SingingFir,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
 static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_NpcBlue,                 OBJ_EVENT_PAL_TAG_NPC_BLUE},
     {gObjectEventPal_NpcPink,                 OBJ_EVENT_PAL_TAG_NPC_PINK},
@@ -575,6 +599,7 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_NpcOwl,                  OBJ_EVENT_PAL_TAG_NPC_OWL},
     {gObjectEventPal_NpcTownUmbra,             OBJ_EVENT_PAL_TAG_NPC_TOWN_UMBRA},
     {gObjectEventPal_FirDim,                   OBJ_EVENT_PAL_TAG_FIR_DIM},
+    {gObjectEventPal_NpcGreen,                 OBJ_EVENT_PAL_TAG_FIR_GLOW},   // T-416: lifted as it loads (PatchObjectPalette)
     {gObjectEventPal_NpcTownQuicksilver,       OBJ_EVENT_PAL_TAG_NPC_TOWN_QUICKSILVER},
     {gObjectEventPal_NpcTownBrazen,            OBJ_EVENT_PAL_TAG_NPC_TOWN_BRAZEN},
     {gObjectEventPal_NpcTownLurid,             OBJ_EVENT_PAL_TAG_NPC_TOWN_LURID},
@@ -1641,7 +1666,8 @@ static void TryPatchDaemonTypePalette(const struct ObjectEventGraphicsInfo *grap
     if ((graphicsInfo->paletteTag >= OBJ_EVENT_PAL_TAG_DAEMON_TYPE_BASE
       && graphicsInfo->paletteTag < OBJ_EVENT_PAL_TAG_DAEMON_TYPE_BASE + NUMBER_OF_MON_TYPES)
      || graphicsInfo->paletteTag == OBJ_EVENT_PAL_TAG_NPC_OWL
-     || graphicsInfo->paletteTag == OBJ_EVENT_PAL_TAG_FIR_DIM)
+     || graphicsInfo->paletteTag == OBJ_EVENT_PAL_TAG_FIR_DIM
+     || graphicsInfo->paletteTag == OBJ_EVENT_PAL_TAG_FIR_GLOW)
         PatchObjectPalette(graphicsInfo->paletteTag, graphicsInfo->paletteSlot);
 }
 
@@ -2148,7 +2174,9 @@ const struct ObjectEventGraphicsInfo *GetObjectEventGraphicsInfo(u8 graphicsId)
     
     if (graphicsId >= NUM_OBJ_EVENT_GFX)
         graphicsId = OBJ_EVENT_GFX_LITTLE_BOY;
-    
+
+    if (graphicsId == OBJ_EVENT_GFX_SINGING_FIR && DaemonsHolidayFirGlow())   // T-416 P4
+        return &sObjectEventGraphicsInfo_SingingFirGlow;
     return gObjectEventGraphicsInfoPointers[graphicsId];
 }
 
@@ -2304,6 +2332,8 @@ void PatchObjectPalette(u16 paletteTag, u8 paletteSlot)
     u8 paletteIndex = FindObjectEventPaletteIndexByTag(paletteTag);
 
     LoadPalette(sObjectEventSpritePalettes[paletteIndex].data, OBJ_PLTT_ID(paletteSlot), PLTT_SIZE_4BPP);
+    if (paletteTag == OBJ_EVENT_PAL_TAG_FIR_GLOW)
+        DaemonsHolidayGlow(&gPlttBufferUnfaded[OBJ_PLTT_ID(paletteSlot)], &gPlttBufferFaded[OBJ_PLTT_ID(paletteSlot)]);
     DaemonsPaintShoes(paletteTag, paletteSlot);
     ApplyGlobalFieldPaletteTint(paletteSlot);
 }

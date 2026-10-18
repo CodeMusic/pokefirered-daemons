@@ -7,6 +7,7 @@
 #include "field_specials.h"
 #include "field_weather.h"
 #include "daemons_time.h"
+#include "daemons_holidays.h"
 #include "metatile_behavior.h"
 #include "overworld.h"
 #include "region_map.h"
@@ -1365,6 +1366,7 @@ void Play_Start(void)
     struct Play *play;
     u8 taskId;
 
+    DaemonsFireworks_Stop();   // T-416 P4: the fireworks are PLAY's art; the instrument takes it back
     ClearPlayerHeldMovementAndUnfreezeObjectEvents();   // people keep walking
     LockPlayerFieldControls();
     QuestLog_CutRecording();   // the Quest Log neither records nor replays a performance
@@ -1380,6 +1382,147 @@ void Play_Start(void)
     play->fading = TRUE;
     taskId = CreateTask(Task_Play, 90);
     SetWordTaskArg(taskId, tPlay, (u32)play);
+}
+
+// --------------------------------------------------------------------------------------------- fireworks (T-416 P4)
+
+// ROLLOVER's and SUMMER LIGHTS' fireworks are PLAY's own art (src/daemons_holidays.c decides when): a note of a key's
+// colour rises from below the screen and bursts into six of the wheel's dots, each a month's colour, which drift out,
+// fall a little and flicker away. They share PALTAG_KEY_COLOURS by tag and shine as the notes do -- untinted, the
+// night does not dim them. Never while the instrument is out (the sheets are its), and only into a slot that leaves
+// another free: the fireworks never take the last one from something that needs it.
+#define ROCKET_RISE   3
+#define SPARK_LIFE    34
+#define SPARK_FLICKER 12
+
+static void SpriteCB_Rocket(struct Sprite *sprite);
+static void SpriteCB_Spark(struct Sprite *sprite);
+
+static const struct SpriteTemplate sTemplate_Rocket = {
+    .tileTag = PLAY_TAG_NOTES, .paletteTag = TAG_NONE, .oam = &sOam_Note, .anims = sAnims_Note,
+    .images = NULL, .affineAnims = gDummySpriteAffineAnimTable, .callback = SpriteCB_Rocket,
+};
+static const struct SpriteTemplate sTemplate_Spark = {
+    .tileTag = PLAY_TAG_SMALL, .paletteTag = TAG_NONE, .oam = &sOam_Small, .anims = sAnims_Small,
+    .images = NULL, .affineAnims = gDummySpriteAffineAnimTable, .callback = SpriteCB_Spark,
+};
+
+// Six ways out, in sixteenths of a pixel a frame.
+static const s8 sSparkWays[6][2] = { {24, 0}, {12, 21}, {-12, 21}, {-24, 0}, {-12, -21}, {12, -21} };
+
+#define sTop    data[0]
+#define sColour data[1]
+#define sDx     data[0]
+#define sDy     data[1]
+#define sFx     data[2]
+#define sFy     data[3]
+#define sAge    data[4]
+
+static void SpriteCB_Rocket(struct Sprite *sprite)
+{
+    u8 i, spriteId;
+
+    sprite->y -= ROCKET_RISE;
+    sprite->x2 = (sprite->y / 8) % 2;   // a little shiver as it climbs
+    if (sprite->y > sprite->sTop)
+        return;
+    for (i = 0; i < 6; i++)
+    {
+        spriteId = CreateSprite(&sTemplate_Spark, sprite->x, sprite->y, 0);
+        if (spriteId == MAX_SPRITES)
+            break;
+        gSprites[spriteId].oam.paletteNum = sprite->oam.paletteNum;
+        StartSpriteAnim(&gSprites[spriteId], (sprite->sColour + 2 * i) % 12);
+        gSprites[spriteId].sDx = sSparkWays[i][0];
+        gSprites[spriteId].sDy = sSparkWays[i][1];
+    }
+    DestroySprite(sprite);
+}
+
+static void SpriteCB_Spark(struct Sprite *sprite)
+{
+    sprite->sFx += sprite->sDx;
+    sprite->sFy += sprite->sDy;
+    if ((sprite->sAge & 3) == 3)
+        sprite->sDy++;   // a little fall
+    sprite->x2 = sprite->sFx / 16;
+    sprite->y2 = sprite->sFy / 16;
+    if (++sprite->sAge >= SPARK_LIFE)
+        DestroySprite(sprite);
+    else if (sprite->sAge > SPARK_LIFE - SPARK_FLICKER)
+        sprite->invisible = sprite->sAge & 1;
+}
+
+#undef sTop
+#undef sColour
+#undef sDx
+#undef sDy
+#undef sFx
+#undef sFy
+#undef sAge
+
+u8 Play_FireworksBegin(void)
+{
+    u8 palSlot;
+
+    if (Play_IsActive() || IndexOfSpritePaletteTag(PALTAG_KEY_COLOURS) != 0xFF)
+        return 0xFF;
+    palSlot = LoadSpritePalette(&sKeyColoursPalette);
+    if (palSlot == 0xFF)
+        return 0xFF;
+    if (IndexOfSpritePaletteTag(TAG_NONE) == 0xFF)   // that was the last slot: leave it to whoever needs it
+    {
+        FreeSpritePaletteByTag(PALTAG_KEY_COLOURS);
+        return 0xFF;
+    }
+    LoadSpriteSheet(&sPlaySheets[0]);
+    LoadSpriteSheet(&sPlaySheets[1]);
+    return palSlot;
+}
+
+static bool8 IsFirework(struct Sprite *sprite)
+{
+    return sprite->inUse && (sprite->callback == SpriteCB_Rocket || sprite->callback == SpriteCB_Spark);
+}
+
+u8 Play_FireworksRockets(void)
+{
+    u8 i, n = 0;
+
+    for (i = 0; i < MAX_SPRITES; i++)
+        if (gSprites[i].inUse && gSprites[i].callback == SpriteCB_Rocket)
+            n++;
+    return n;
+}
+
+void Play_FireworksLaunch(u8 palSlot, s16 x, s16 top, u8 colour)
+{
+    u8 spriteId = MakeSpriteIn(palSlot, &sTemplate_Rocket, x, DISPLAY_HEIGHT + 8, colour % 12);
+
+    if (spriteId == MAX_SPRITES)
+        return;
+    gSprites[spriteId].data[0] = top;
+    gSprites[spriteId].data[1] = colour % 12;
+}
+
+// The notes' shine, for the fireworks' slot.
+void Play_FireworksShine(u8 palSlot)
+{
+    if (!gPaletteFade.active)
+        CpuCopy16(sKeyColours_Pal, &gPlttBufferFaded[OBJ_PLTT_ID(palSlot)], PLTT_SIZE_4BPP);
+}
+
+// Everything in the sky gone and the art given back -- called only by the fireworks' own task, which loaded it.
+void Play_FireworksEnd(void)
+{
+    u8 i;
+
+    for (i = 0; i < MAX_SPRITES; i++)
+        if (IsFirework(&gSprites[i]))
+            DestroySprite(&gSprites[i]);
+    FreeSpriteTilesByTag(PLAY_TAG_NOTES);
+    FreeSpriteTilesByTag(PLAY_TAG_SMALL);
+    FreeSpritePaletteByTag(PALTAG_KEY_COLOURS);
 }
 
 // ------------------------------------------------------------------------------------------------ THE NEXUS, lit (P5)
