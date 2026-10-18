@@ -5,7 +5,7 @@
 #define GUARD_DATA_DREAM_LOG_H
 
 static const u8 sSection_DreamLog[] = _("DREAM LOG");
-static const u8 sDreamLine[] = _("You had a dream.");
+static const u8 sDreamLine[] = _("I had a dream.");
 
 static const u8 sDreamTitle_Cairn[] = _("A TORTOISE CARVES");
 static const u8 sDreamText_Cairn[] = _("A tortoise carves my name into a\nstone, slowly, and gets it right.\pThe rain comes. The letters fill\nwith water and stay letters.");
