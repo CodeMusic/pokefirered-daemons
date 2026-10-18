@@ -31,5 +31,9 @@ u8 DaemonsWeekday(void);           // 0-6, Sunday first
 bool8 DaemonsWatchIsFromClock(void);
 void DaemonsDayAndMinute(u16 *day, u16 *minute);   // T-415
 void DaemonsTintForWatch(u16 *palette, u16 count);
+// T-416: a fresh read for the holidays' lookups, a forced one for DEBUG's DATE, and the date as a day number.
+void DaemonsTimeRefresh(void);
+void DaemonsTimeInvalidate(void);
+u16 DaemonsDayNumber(u16 year, u8 month, u8 day);
 
 #endif // GUARD_DAEMONS_TIME_H

@@ -21,5 +21,8 @@ extern u8 gDaemonsWeatherOverride;
 u8 DaemonsWeatherForMap(u8 headerWeather, u8 mapType, u8 mapsec);
 // T-417 P4: HARMONY IN BALANCE turns this section's sky for the rest of the watch. FALSE where the day decides nothing.
 bool8 DaemonsSongSky(u8 headerWeather, u8 mapType, u8 mapsec);
+// T-416: the sky over a section now (DAEMONS_SKY_*), and whether a thunderstorm touched the islands today.
+u8 DaemonsSkyAt(u8 mapsec);
+bool8 DaemonsStormOnIslandsToday(void);
 
 #endif // GUARD_DAEMONS_WEATHER_H

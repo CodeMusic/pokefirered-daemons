@@ -1,6 +1,7 @@
 #include "constants/global.h"
 #include "constants/flags.h"
 #include "constants/play.h"
+#include "constants/holidays.h"   @ T-416
 #include "constants/event_objects.h"
 #include "constants/event_object_movement.h"
 #include "constants/decorations.h"
@@ -1436,6 +1437,7 @@ Text_TestMsg::
 	.include "data/scripts/stream.inc"
 	.include "data/scripts/notebook.inc"
 	.include "data/scripts/play.inc"   @ T-417 P2: what a song played opens
+	.include "data/scripts/holidays.inc"   @ T-416: a holiday's gifts
 	.include "data/scripts/notebook_documents.inc"   @ T-224, tools/gbadocs.py
 	.include "data/scripts/school.inc"
 	.include "data/scripts/companion.inc"   @ T-371

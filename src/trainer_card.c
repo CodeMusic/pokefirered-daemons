@@ -21,6 +21,8 @@
 #include "constants/game_stat.h"
 #include "constants/trainers.h"
 #include "data/understanding_brain.h"
+#include "daemons_holidays.h"   // T-416: the month's colour on the card
+#define CARD_MONTH_INDEX 8           // palette 0: the title band's lettering
 
 // Trainer Card Strings
 enum
@@ -1721,6 +1723,13 @@ static bool8 SetTrainerCardBgsAndPals(void)
             LoadPalette(sHoennTrainerCardPals[sTrainerCardDataPtr->trainerCard.rse.stars], BG_PLTT_ID(0), 3 * PLTT_SIZE_4BPP);
         else
             LoadPalette(sKantoTrainerCardPals[sTrainerCardDataPtr->trainerCard.rse.stars], BG_PLTT_ID(0), 3 * PLTT_SIZE_4BPP);
+        //  T-416 (the user, 2026-10-17): THE MONTH'S COLOUR on your own card -- the title band's lettering (USER ...
+        //  CARD), palette 0's index 8, which nothing else on the card draws with. Every card colour (the stars) alike.
+        if (sTrainerCardDataPtr->cardType == CARD_TYPE_FRLG && sTrainerCardDataPtr->isOwnCard)
+        {
+            u16 colour = DaemonsMonthColour(DaemonsMonth());
+            LoadPalette(&colour, BG_PLTT_ID(0) + CARD_MONTH_INDEX, PLTT_SIZEOF(1));
+        }
         break;
     case 3:
         if (sTrainerCardDataPtr->cardType == CARD_TYPE_RSE)

@@ -58,6 +58,7 @@
 #include "sloopsvc.h"
 #include "daemons_time.h"
 #include "daemons_weather.h"
+#include "daemons_holidays.h"   // T-416
 #include "fieldmap.h"
 #include "field_weather.h"
 #include "event_object_movement.h"
@@ -103,6 +104,7 @@ enum StartMenuOption
     STARTMENU_DBG_DEVICE,    // T-358
     STARTMENU_DBG_SEASON,    // T-359
     STARTMENU_DBG_WEATHER,   // T-415
+    STARTMENU_DBG_DATE,      // T-416: a holiday's date, a 1st, a quiet day
     STARTMENU_DBG_SONG,
     STARTMENU_DBG_SFX,
     STARTMENU_DBG_GLITCH,    // goal B: the glitch, placed nowhere yet
@@ -193,6 +195,7 @@ static bool8 DbgInvokeCallback(void);
 static bool8 DbgDeviceCallback(void);
 static bool8 DbgSeasonCallback(void);
 static bool8 DbgWeatherCallback(void);
+static bool8 DbgDateCallback(void);
 static void DbgVarsForRow(u8 row);
 static bool8 DbgHandleStepInput(void);
 static bool8 DbgSongCallback(void);
@@ -273,6 +276,7 @@ static const struct MenuAction sStartMenuActionTable[] = {
     [STARTMENU_DBG_DEVICE]  = { gText_DbgMenuDevice, {.u8_void = DbgDeviceCallback} },
     [STARTMENU_DBG_SEASON]  = { gText_DbgMenuSeason, {.u8_void = DbgSeasonCallback} },
     [STARTMENU_DBG_WEATHER] = { gText_DbgMenuWeather, {.u8_void = DbgWeatherCallback} },   // T-415
+    [STARTMENU_DBG_DATE]    = { gText_DbgMenuDate, {.u8_void = DbgDateCallback} },         // T-416
     // These two labels carry {STR_VAR_1} and {STR_VAR_2}. PrintStartMenuItems
     // runs every entry through StringExpandPlaceholders, so the current song
     // and sound effect can live in the menu itself -- no second window.
@@ -341,6 +345,7 @@ static const u8 *const sStartMenuDescPointers[] = {
     gStartMenuDesc_DbgDevice,
     gStartMenuDesc_DbgSeason,
     gStartMenuDesc_DbgWeather,   // T-415
+    gStartMenuDesc_DbgDate,      // T-416
     gStartMenuDesc_DbgSong,
     gStartMenuDesc_DbgSfx,
     gStartMenuDesc_DbgGlitch,
@@ -447,8 +452,8 @@ static void SetUpStartMenu(void)
         AppendToStartMenuItems(STARTMENU_DBG_INVOKE);
         AppendToStartMenuItems(STARTMENU_DBG_DEVICE);
         AppendToStartMenuItems(STARTMENU_DBG_SEASON);
-        AppendToStartMenuItems(STARTMENU_DBG_WEATHER);   // T-415: the seventh row, as WATCH is the main page's
-        AppendToStartMenuItems(STARTMENU_DBG_BACK);
+        AppendToStartMenuItems(STARTMENU_DBG_WEATHER);   // T-415
+        AppendToStartMenuItems(STARTMENU_DBG_DATE);      // T-416: the seventh row now; B goes back, as on JUMP
         return;
     }
     if (sDbgPage == DBG_PAGE_ITEMS)
@@ -1072,6 +1077,7 @@ static bool8 IsDaemonsDebugCallback(void)
         || sStartMenuCallback == DbgWatchCallback
         || sStartMenuCallback == DbgSeasonCallback    // T-415: it relights the map behind the menu, as WATCH does
         || sStartMenuCallback == DbgWeatherCallback   // T-415
+        || sStartMenuCallback == DbgDateCallback      // T-416
         || sStartMenuCallback == DbgSfxCallback
         || sStartMenuCallback == DbgGlitchCallback // stays on the map: no fade to black behind it
         || sStartMenuCallback == DbgHarpCallback     // T-417: the menu stays up while the scale plays
@@ -1640,6 +1646,30 @@ static bool8 DbgStepWeekday(s32 delta)
     return TRUE;
 }
 
+// T-416: DATE steps AUTO (the clock, or play time) -> each holiday's own date (in a year where its known double falls)
+// -> the 1st of each month -> a quiet day. The weekday, the season and the day's sky follow the date; the map relights
+// (LONGEST DAY and NIGHT move the clock's watches). The banner shows on the next door. Nothing is saved.
+static bool8 DbgStepDate(s32 delta)
+{
+    s32 v = (s32)gDaemonsDateOverride + delta;
+    while (v >= DAEMONS_DEBUG_DATE_COUNT) v -= DAEMONS_DEBUG_DATE_COUNT;
+    while (v < 0)                         v += DAEMONS_DEBUG_DATE_COUNT;
+    gDaemonsDateOverride = v;
+    DaemonsTimeInvalidate();
+    PlaySE(SE_SELECT);
+    DbgRelight();
+    DbgRedraw();
+    return TRUE;
+}
+
+static bool8 DbgDateCallback(void)
+{
+    gDaemonsDateOverride = (gDaemonsDateOverride + 1) % DAEMONS_DEBUG_DATE_COUNT;
+    DaemonsTimeInvalidate();
+    DbgRelight();
+    return DbgRedraw();
+}
+
 static bool8 DbgHandleStepInput(void)
 {
     u8 row;
@@ -1655,6 +1685,14 @@ static bool8 DbgHandleStepInput(void)
     if (sDbgPage != DBG_PAGE_ENCOUNTER)
         return FALSE;
     row = sStartMenuOrder[sStartMenuCursorPos];
+    if (row == STARTMENU_DBG_DATE)    // T-416: LEFT and RIGHT step the date both ways
+    {
+        if (JOY_NEW(DPAD_LEFT))
+            return DbgStepDate(-1);
+        if (JOY_NEW(DPAD_RIGHT))
+            return DbgStepDate(+1);
+        return FALSE;
+    }
     if (row != STARTMENU_DBG_DAEMON && row != STARTMENU_DBG_LEVEL)
         return FALSE;
 
@@ -1703,6 +1741,8 @@ static void DbgVarsForRow(u8 row)
         StringCopy(gStringVar3, sDbgSeasonNames[gDaemonsSeasonOverride]);
     else if (row == STARTMENU_DBG_WEATHER)
         StringCopy(gStringVar3, sDbgWeatherNames[gDaemonsWeatherOverride]);
+    else if (row == STARTMENU_DBG_DATE)
+        DaemonsHolidays_DebugDateName(gStringVar3);   // T-416
 }
 
 static bool8 DbgWatchCallback(void)

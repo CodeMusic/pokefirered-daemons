@@ -274,6 +274,34 @@ u8 DaemonsWeatherForMap(u8 headerWeather, u8 mapType, u8 mapsec)
     return sSkyWeather[sky];
 }
 
+// T-416: the sky over a section now, as an ordinary outdoor map there would show it (DAEMONS_SKY_*) -- a holiday gift
+// asks it of the CHECKPOINT's own section, whatever the interior's header says.
+u8 DaemonsSkyAt(u8 mapsec)
+{
+    if (gDaemonsWeatherOverride)
+        return (gDaemonsWeatherOverride - 1) % DAEMONS_SKY_COUNT;
+    if (SongSkyHolds(mapsec))
+        return sSongSky - 1;
+    return SkyHere(mapsec);
+}
+
+// T-416: BEACH DAY's BIG PEARL -- did a thunderstorm touch the islands today (any hour, any of their sheets)?
+bool8 DaemonsStormOnIslandsToday(void)
+{
+    struct SkyEvent events[SKY_MAX_EVENTS];
+    u16 day, minute;
+    u8 n, i;
+
+    DaemonsDayAndMinute(&day, &minute);
+    n = SkyDayEvents(day, DaemonsSeason(), events);
+    for (i = 0; i < n; i++)
+    {
+        if (events[i].sky == DAEMONS_SKY_STORM && (events[i].sheet != 0 || events[i].radius == SKY_SIZE_BOTH))
+            return TRUE;
+    }
+    return FALSE;
+}
+
 // T-417 P4: HARMONY IN BALANCE (src/play.c). TRUE if the sky here was turned; FALSE where the day decides nothing (a
 // cave, a forest, indoors), and nothing changes.
 bool8 DaemonsSongSky(u8 headerWeather, u8 mapType, u8 mapsec)

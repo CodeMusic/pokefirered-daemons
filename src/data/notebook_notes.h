@@ -69,6 +69,18 @@ static const u8 sNoteAbout_SONG_4[] = _("Heard where PRACTICE is learned.");
 static const u8 sNoteAbout_SONG_5[] = _("Heard where STANCE is learned.");
 static const u8 sNoteAbout_SONG_6[] = _("Heard where NOTICE is learned.");
 static const u8 sNoteAbout_SONG_7[] = _("Heard where REFLECT is learned.");
+static const u8 sNoteAbout_YEAR_LINE_ROLLOVER[] = _("In your own words, on its day.");
+static const u8 sNoteAbout_YEAR_LINE_EVEN_LIGHT_SPRING[] = _("In your own words, on its day.");
+static const u8 sNoteAbout_YEAR_LINE_EVEN_LIGHT_AUTUMN[] = _("In your own words, on its day.");
+static const u8 sNoteAbout_YEAR_LINE_DAWN_VIGIL[] = _("In your own words, on its day.");
+static const u8 sNoteAbout_YEAR_LINE_FIRST_FROST[] = _("In your own words, on its day.");
+static const u8 sNoteAbout_YEAR_LINE_DEN_DAY[] = _("In your own words, on its day.");
+static const u8 sNoteAbout_YEAR_LINE_FLEDGLING_DAY[] = _("In your own words, on its day.");
+static const u8 sNoteAbout_YEAR_LINE_LANTERN_NIGHTS[] = _("In your own words, on its day.");
+static const u8 sNoteAbout_YEAR_LINE_SCIENCE_FAIR[] = _("In your own words, on its day.");
+static const u8 sNoteAbout_YEAR_LINE_TRUCE_DAY[] = _("In your own words, on its day.");
+static const u8 sNoteAbout_YEAR_LINE_MARIGOLD_DAYS[] = _("In your own words, on its day.");
+static const u8 sNoteAbout_YEAR_LINE_GIVING_THANKS[] = _("In your own words, on its day.");
 
 static const struct NotebookNote sNotebookNotes[] =
 {
@@ -141,4 +153,16 @@ static const struct NotebookNote sNotebookNotes[] =
     { FLAG_SONG_5, 66, MAP_UNDEFINED, sNoteAbout_SONG_5 },
     { FLAG_SONG_6, 67, MAP_UNDEFINED, sNoteAbout_SONG_6 },
     { FLAG_SONG_7, 68, MAP_UNDEFINED, sNoteAbout_SONG_7 },
+    { FLAG_YEAR_LINE_ROLLOVER, 69, MAP_UNDEFINED, sNoteAbout_YEAR_LINE_ROLLOVER },
+    { FLAG_YEAR_LINE_EVEN_LIGHT_SPRING, 70, MAP_UNDEFINED, sNoteAbout_YEAR_LINE_EVEN_LIGHT_SPRING },
+    { FLAG_YEAR_LINE_EVEN_LIGHT_AUTUMN, 71, MAP_UNDEFINED, sNoteAbout_YEAR_LINE_EVEN_LIGHT_AUTUMN },
+    { FLAG_YEAR_LINE_DAWN_VIGIL, 72, MAP_UNDEFINED, sNoteAbout_YEAR_LINE_DAWN_VIGIL },
+    { FLAG_YEAR_LINE_FIRST_FROST, 73, MAP_UNDEFINED, sNoteAbout_YEAR_LINE_FIRST_FROST },
+    { FLAG_YEAR_LINE_DEN_DAY, 74, MAP_UNDEFINED, sNoteAbout_YEAR_LINE_DEN_DAY },
+    { FLAG_YEAR_LINE_FLEDGLING_DAY, 75, MAP_UNDEFINED, sNoteAbout_YEAR_LINE_FLEDGLING_DAY },
+    { FLAG_YEAR_LINE_LANTERN_NIGHTS, 76, MAP_UNDEFINED, sNoteAbout_YEAR_LINE_LANTERN_NIGHTS },
+    { FLAG_YEAR_LINE_SCIENCE_FAIR, 77, MAP_UNDEFINED, sNoteAbout_YEAR_LINE_SCIENCE_FAIR },
+    { FLAG_YEAR_LINE_TRUCE_DAY, 78, MAP_UNDEFINED, sNoteAbout_YEAR_LINE_TRUCE_DAY },
+    { FLAG_YEAR_LINE_MARIGOLD_DAYS, 79, MAP_UNDEFINED, sNoteAbout_YEAR_LINE_MARIGOLD_DAYS },
+    { FLAG_YEAR_LINE_GIVING_THANKS, 80, MAP_UNDEFINED, sNoteAbout_YEAR_LINE_GIVING_THANKS },
 };

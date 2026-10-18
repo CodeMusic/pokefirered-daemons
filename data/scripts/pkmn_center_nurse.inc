@@ -44,6 +44,8 @@ EventScript_PkmnCenterNurse_ReturnPkmn::
 	waitmovement 0
 	call EventScript_PkmnCenterNurse_CheckMeme
 	call EventScript_PkmnCenterNurse_CheckDream
+	setvar VAR_0x8006, GIVER_CHECKPOINT   @ T-416: a holiday's gift, once the party is restored
+	call EventScript_HolidayGifts
 	msgbox Text_WeHopeToSeeYouAgain
 	return
 

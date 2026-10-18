@@ -99,6 +99,8 @@ PalletTown_PlayersHouse_1F_EventScript_MomHeal::
 	msgbox PalletTown_PlayersHouse_1F_Text_YouShouldTakeQuickRest
 	closemessage
 	call EventScript_OutOfCenterPartyHeal
+	setvar VAR_0x8006, GIVER_MOM   @ T-416: NEST DAY's gift, kept for you
+	call EventScript_HolidayGifts
 @  T-326 (the user, 2026-10-01): home after the eighth MARK, she asks how it looks now; holding the ticket, the ship;
 @  the first time home after the lab, her own years at sea -- then the old line.
 	goto_if_set FLAG_BADGE08_GET, PalletTown_PlayersHouse_1F_EventScript_MomHowDoesItLook

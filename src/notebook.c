@@ -55,6 +55,7 @@ enum
     NB_PEER_REVIEW,
     NB_INSIGHT,            // T-390: what a MARK and its understanding make together, in the player's own words
     NB_SONGBOOK,           // T-417: the songs PLAY knows, written as coloured notes
+    NB_THE_YEAR,           // T-416: a line for a day of the year, as it arrives (DRAFT)
     NB_SECTION_COUNT
 };
 
@@ -91,6 +92,8 @@ static const u8 sSection_PeerReview[]     = _("PEER REVIEW");
 static const u8 sSection_Insight[]        = _("INSIGHT");
 static const u8 sSection_Songbook[]       = _("SONGBOOK");   // T-417, DRAFT
 
+extern const u8 gText_YearSection[];   // T-416: THE YEAR, src/daemons_holidays.c
+
 static const u8 *const sSectionNames[NB_SECTION_COUNT] =
 {
     [NB_SCHOOL_NOTES]    = sSection_SchoolNotes,
@@ -103,6 +106,7 @@ static const u8 *const sSectionNames[NB_SECTION_COUNT] =
     [NB_PEER_REVIEW]     = sSection_PeerReview,
     [NB_INSIGHT]         = sSection_Insight,
     [NB_SONGBOOK]        = sSection_Songbook,
+    [NB_THE_YEAR]        = gText_YearSection,   // T-416, src/daemons_holidays.c (DAEMONS tools/genholidays.py)
 };
 
 static const u8 sText_Close[] = _("CLOSE");
@@ -383,6 +387,8 @@ struct NotebookNote
     const u8 *about;
 };
 #include "data/notebook_notes.h"
+#include "constants/holidays.h"
+#include "data/holiday_lines.h"   // T-416: THE YEAR's entries (DAEMONS tools/genholidays.py)
 
 //  THE AUTHORED ORDER. A new entry goes where it belongs in the finished file, not at the end.
 static const struct NotebookEntry sEntries[] =
@@ -457,19 +463,21 @@ static const struct NotebookEntry sEntries[] =
     { NB_SONGBOOK,     NB_KIND_SONG,  PLAY_SONG_STANCE,   FLAG_SONG_5,   0, sTitle_Song_5,           NULL },
     { NB_SONGBOOK,     NB_KIND_SONG,  PLAY_SONG_NOTICE,   FLAG_SONG_6,   0, sTitle_Song_6,           NULL },
     { NB_SONGBOOK,     NB_KIND_SONG,  PLAY_SONG_REFLECT,  FLAG_SONG_7,   0, sTitle_Song_7,           NULL },
+    //  T-416: THE YEAR, in the order of the year -- each line once it has arrived on its day.
+    NB_YEAR_ENTRIES
 };
 
 #if DAEMONS_DEBUG
 //  T-394: GAME EVENTS' NOTEBOOK, EVERY PAGE -- every document's flags set, so the NOTEBOOK opens full. Not the paper's
 //  record (it is written from the exam), not the INDEX's page (its flag is the story's ending) and not INSIGHT (its
-//  arrival is a thing to test): those come the way they come.
+//  arrival is a thing to test), nor THE YEAR (T-416, the same): those come the way they come.
 void Notebook_DebugFillAll(void)
 {
     u32 i;
 
     for (i = 0; i < ARRAY_COUNT(sEntries); i++)
     {
-        if (sEntries[i].kind != NB_KIND_TEXT || sEntries[i].section == NB_INSIGHT)
+        if (sEntries[i].kind != NB_KIND_TEXT || sEntries[i].section == NB_INSIGHT || sEntries[i].section == NB_THE_YEAR)
             continue;
         FlagSet(sEntries[i].flag);
         if (sEntries[i].flag2 != 0)

@@ -9,8 +9,11 @@
 #include "map_name_popup.h"
 #include "constants/maps.h"
 #include "daemons_time.h"
+#include "daemons_holidays.h"   // T-416
+#include "menu.h"
 
 #define FLOOR_ROOFTOP 127
+#define WIN_PAL_NUM  13
 
 static void Task_MapNamePopup(u8 taskId);
 static u16 MapNamePopupCreateWindow(bool32 palIntoFadedBuffer);
@@ -64,15 +67,75 @@ static const u8 *const sWatchNames[WATCH_COUNT] = {
     [WATCH_DAWN] = gText_WatchDawn,
 };
 
+//  T-416 (the user, 2026-10-17/18): THE MONTH'S NOTE AND COLOUR. On the 1st of a month the banner's mark is the
+//  month's note instead of the day's ("Db · WEDNESDAY · NIGHT"), and under a holiday the banner is the month's note and
+//  the holiday's name ("Bb · LANTERN NIGHTS", the holiday's own month, so ROLLOVER's eve wears January's C). The mark is
+//  printed in the month's colour -- a spare index of the popup's palette row (10: the std window palette's unused
+//  magenta, which the frame and the text never draw) -- and the note plays on the edition's instrument. A QUIET day's
+//  mark stays ink, and its note is soft. Every other day is as it was. Names DRAFT (genholidays.py measures them).
+#define BANNER_MARK_INDEX 10
+static EWRAM_DATA u8 sDayBannerMarkLen = 0;     // the mark's bytes at the front of sDayBanner, printed in colour
+static EWRAM_DATA u8 sDayBannerMonth = 0;       // 1-12 when the mark is coloured; 0 ink
+
 static const u8 *DayBannerText(void)
 {
     u8 day = DaemonsWeekday();
-    u8 *p = StringCopy(sDayBanner, sDayNotes[day]);
-    p = StringCopy(p, gText_DayBannerDot);
+    u8 holiday = DaemonsHolidayForBanner();
+    u8 month = DaemonsHolidayMonth(holiday);
+    bool8 quiet = (DaemonsHolidayFlags(holiday) & HF_QUIET) != 0;
+    const u8 *mark;
+    u8 *p;
+
+    sDayBannerMarkLen = 0;
+    sDayBannerMonth = 0;
+    if (holiday != HOLIDAY_NONE || DaemonsIsFirstOfMonth())
+    {
+        mark = DaemonsMonthNote(month);
+        p = StringCopy(sDayBanner, mark);
+        sDayBannerMarkLen = p - sDayBanner;
+        if (!quiet)
+            sDayBannerMonth = month + 1;
+        DaemonsPlayMonthNote(month, quiet);
+        p = StringCopy(p, gText_DayBannerDot);
+        if (holiday != HOLIDAY_NONE)
+        {
+            StringCopy(p, DaemonsHolidayName(holiday));
+            return sDayBanner;
+        }
+    }
+    else
+    {
+        p = StringCopy(sDayBanner, sDayNotes[day]);
+        p = StringCopy(p, gText_DayBannerDot);
+    }
     p = StringCopy(p, sDayNames[day]);
     p = StringCopy(p, gText_DayBannerDot);
     StringCopy(p, sWatchNames[DaemonsWatch()]);
     return sDayBanner;
+}
+
+//  T-416: the day banner, its mark in the month's colour. Text colours: paper 1, ink (the colour) 10, shadow 3.
+static void PrintDayBanner(u16 windowId, u32 xpos)
+{
+    u8 mark[4];
+    u8 colours[3] = {1, BANNER_MARK_INDEX, 3};
+    u16 colour, *slot;
+
+    if (sDayBannerMonth == 0 || sDayBannerMarkLen == 0 || sDayBannerMarkLen >= sizeof(mark))
+    {
+        AddTextPrinterParameterized(windowId, FONT_NORMAL, sDayBanner, xpos, 2, TEXT_SKIP_DRAW, NULL);
+        return;
+    }
+    colour = DaemonsMonthColour(sDayBannerMonth - 1);
+    slot = &gPlttBufferUnfaded[BG_PLTT_ID(WIN_PAL_NUM) + BANNER_MARK_INDEX];
+    *slot = colour;
+    if (!gPaletteFade.active)
+        gPlttBufferFaded[BG_PLTT_ID(WIN_PAL_NUM) + BANNER_MARK_INDEX] = colour;
+    memcpy(mark, sDayBanner, sDayBannerMarkLen);
+    mark[sDayBannerMarkLen] = EOS;
+    AddTextPrinterParameterized3(windowId, FONT_NORMAL, xpos, 2, colours, TEXT_SKIP_DRAW, mark);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, sDayBanner + sDayBannerMarkLen,
+                                xpos + GetStringWidth(FONT_NORMAL, mark, 0), 2, TEXT_SKIP_DRAW, NULL);
 }
 
 //  Asked for when the player comes out of a door (overworld.c). The popup that shows the town's name then shows
@@ -277,8 +340,6 @@ bool32 IsMapNamePopupTaskActive(void)
     return FindTaskIdByFunc(Task_MapNamePopup) != TASK_NONE ? TRUE : FALSE;
 }
 
-#define WIN_PAL_NUM  13
-
 static u16 MapNamePopupCreateWindow(bool32 palintoFadedBuffer)
 {
     struct WindowTemplate windowTemplate = {
@@ -335,7 +396,10 @@ static void MapNamePopupPrintMapNameOnWindow(u16 windowId)
             maxWidth = 152;
         xpos = (maxWidth - GetStringWidth(FONT_NORMAL, sPopupOverride, -1)) / 2;
         FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
-        AddTextPrinterParameterized(windowId, FONT_NORMAL, sPopupOverride, xpos, 2, TEXT_SKIP_DRAW, NULL);
+        if (sPopupOverride == sDayBanner)
+            PrintDayBanner(windowId, xpos);   // T-416: its mark in the month's colour
+        else
+            AddTextPrinterParameterized(windowId, FONT_NORMAL, sPopupOverride, xpos, 2, TEXT_SKIP_DRAW, NULL);
         sPopupOverride = NULL;
         return;
     }

@@ -2,6 +2,7 @@
 #include "main.h"
 #include "daemons_rtc.h"
 #include "daemons_time.h"
+#include "daemons_holidays.h"   // T-416
 
 // T-268: DAY AND NIGHT (vision.md 9.21; decided by the user, 2026-09-25).
 //
@@ -37,6 +38,11 @@ static u8 WatchFromHour(u8 hour)
         return WATCH_DUSK;
     return WATCH_NIGHT;
 }
+
+// T-416: the hour a play-time watch stands for, where a holiday asks (ROLLOVER's eve begins at dusk).
+#if DAEMONS_DEBUG
+static const u8 sWatchHour[WATCH_COUNT] = { [WATCH_DAY] = 12, [WATCH_DUSK] = 18, [WATCH_NIGHT] = 22, [WATCH_DAWN] = 6 };
+#endif
 
 // Play time's: day, dusk, night, dawn, fifteen minutes each -- day first, so the opening is in daylight.
 static const u8 sPlayTimeWatches[WATCH_COUNT] = { WATCH_DAY, WATCH_DUSK, WATCH_NIGHT, WATCH_DAWN };
@@ -86,6 +92,11 @@ static u16 DayNumber(u16 year, u8 month, u8 day)
 static void ReadClock(void)
 {
     struct DaemonsClock clock;
+    u16 holidayFlags;
+#if DAEMONS_DEBUG
+    u16 year;
+    u8 month, day;
+#endif
 
     if (sWatchRead && gMain.vblankCounter2 - sWatchReadAt < 60)
         return;
@@ -107,8 +118,48 @@ static void ReadClock(void)
         sDayNumber = gSaveBlock2Ptr->playTimeHours;
         sMinuteOfDay = gSaveBlock2Ptr->playTimeMinutes * 24 + gSaveBlock2Ptr->playTimeSeconds * 24 / 60;
     }
+    // T-416: the month, the 1st and the holiday, from the same read. LONGEST DAY and LONGEST NIGHT move the clock's
+    // watches; play time's are not moved.
+#if DAEMONS_DEBUG
+    // DEBUG's DATE: the date is overridden, not the answer -- the weekday, the season and the day's sky follow it.
+    if (DaemonsHolidays_DebugDate(&year, &month, &day))
+    {
+        sDayNumber = DayNumber(year, month, day);
+        sWeekday = (sDayNumber + 6) % WEEKDAY_COUNT;    // 2000-01-01 was a Saturday
+        sSeason = EditionSeason(NorthSeason(month, day));
+        holidayFlags = DaemonsHolidays_FromDate(year, month, day, sWatchFromClock ? clock.hour : sWatchHour[sWatch], sDayNumber);
+        if (sWatchFromClock)
+            sWatch = DaemonsHolidays_WatchFromHour(clock.hour, holidayFlags);
+    }
+    else
+#endif
+    if (sWatchFromClock)
+    {
+        holidayFlags = DaemonsHolidays_FromDate(clock.year, clock.month, clock.day, clock.hour, sDayNumber);
+        sWatch = DaemonsHolidays_WatchFromHour(clock.hour, holidayFlags);
+    }
+    else
+    {
+        DaemonsHolidays_FromPlay((u32)gSaveBlock2Ptr->playTimeHours * 60 + gSaveBlock2Ptr->playTimeMinutes);
+    }
     sWatchReadAt = gMain.vblankCounter2;
     sWatchRead = TRUE;
+}
+
+// T-416: the holidays' lookups ask for a fresh read the way the watch does; DEBUG's DATE asks for one at once.
+void DaemonsTimeRefresh(void)
+{
+    ReadClock();
+}
+
+void DaemonsTimeInvalidate(void)
+{
+    sWatchRead = FALSE;
+}
+
+u16 DaemonsDayNumber(u16 year, u8 month, u8 day)
+{
+    return DayNumber(year, month, day);
 }
 
 u8 DaemonsWatch(void)

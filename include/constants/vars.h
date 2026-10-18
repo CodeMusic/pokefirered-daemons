@@ -245,7 +245,7 @@
 #define VAR_PLAY_FLED              0x40BD // T-417 P4: the hide flag of the last daemon that flew away, for MEND's song to call back
 #define VAR_PLAY_DAY               0x40BE // T-417 P4: the day REFLECT's song last raised a REFLECTION, + 1
 #define VAR_0x40BF                 0x40BF
-#define VAR_0x40C0                 0x40C0
+#define VAR_HOLIDAY_YEAR           0x40C0 // T-416: the year the holiday gifts were last given in (real year - 2000; play-time years have bit 15)
 #define VAR_0x40C1                 0x40C1
 #define VAR_0x40C2                 0x40C2
 #define VAR_0x40C3                 0x40C3

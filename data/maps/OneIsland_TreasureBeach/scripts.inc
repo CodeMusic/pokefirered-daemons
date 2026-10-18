@@ -10,6 +10,14 @@ OneIsland_TreasureBeach_EventScript_Boy::
 @ this is only a palm, scenery. Its line DRAFT.
 OneIsland_TreasureBeach_EventScript_Palm::
 	lock
+	setvar VAR_0x8006, GIVER_BEACH   @ T-416: BEACH DAY (CONTEXT), something in the sand by the palm
+	specialvar VAR_RESULT, DaemonsHolidayGiftWaits
+	goto_if_eq VAR_RESULT, TRUE, OneIsland_TreasureBeach_EventScript_PalmGift
 	msgbox OneIsland_TreasureBeach_Text_JustAPalm
+	release
+	end
+
+OneIsland_TreasureBeach_EventScript_PalmGift::
+	call EventScript_HolidayGifts
 	release
 	end

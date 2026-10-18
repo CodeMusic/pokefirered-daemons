@@ -231,6 +231,7 @@ const u8 gText_DbgSummer[] = _("SUMMER");
 const u8 gText_DbgAutumn[] = _("AUTUMN");
 // T-415 (DEBUG only): five letters at most, so "WEATHER STORM" fits the 14-wide window.
 const u8 gText_DbgMenuWeather[] = _("WEATHER {STR_VAR_3}");
+const u8 gText_DbgMenuDate[] = _("{STR_VAR_3}");   // T-416: the date's name -- a holiday, a 1st, AUTO DATE
 const u8 gText_DbgSkyClear[] = _("CLEAR");
 const u8 gText_DbgSkyRain[] = _("RAIN");
 const u8 gText_DbgSkyStorm[] = _("STORM");
@@ -1063,6 +1064,7 @@ const u8 gStartMenuDesc_DbgLevel[] = _("{DPAD_LEFTRIGHT} steps, L and R step by 
 const u8 gStartMenuDesc_DbgInvoke[] = _("Start the encounter.");
 const u8 gStartMenuDesc_DbgDevice[] = _("Answer the party's AWAY requests,\nas the companion app will.");
 const u8 gStartMenuDesc_DbgSeason[] = _("A: the season. AUTO follows the clock,\nor play time. Flowers on the next map.");
+const u8 gStartMenuDesc_DbgDate[] = _("A, LEFT, RIGHT: the date. A holiday,\na 1st, a quiet day; AUTO, the clock.");   // T-416
 const u8 gStartMenuDesc_DbgWeather[] = _("A: the weather outdoors. AUTO follows\nthe date, by season. Battles carry it.");   // T-415
 const u8 gStartMenuDesc_DbgSong[] = _("Play the next track in the table.");
 const u8 gStartMenuDesc_DbgSfx[] = _("Play the next sound effect.");

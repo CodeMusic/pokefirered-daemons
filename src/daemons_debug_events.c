@@ -18,6 +18,8 @@
 #include "constants/items.h"
 #include "constants/opponents.h"
 #include "constants/songs.h"
+#include "daemons_holidays.h"        // T-416
+#include "data/holiday_lines.h"      // T-416: THE YEAR's titles
 
 //  T-394 (the user, 2026-10-08): "Debug mode starts with lots of things so you can't test some things." A new debug
 //  game starts as a normal one does, and DEBUG -> GAME EVENTS hands the kit out one piece at a time, in the order the
@@ -35,7 +37,7 @@
 
 #if DAEMONS_DEBUG
 
-enum { PG_EVENTS, PG_MARKS, PG_NOTEBOOK, PG_DRIVERS, PG_ROOTS, PG_SONGS, PG_COUNT };
+enum { PG_EVENTS, PG_MARKS, PG_NOTEBOOK, PG_DRIVERS, PG_ROOTS, PG_SONGS, PG_YEAR, PG_COUNT };
 enum { R_PAGE, R_GIVE, R_TOGGLE, R_ASK };   // R_ASK gives, after a YES
 
 enum
@@ -48,6 +50,7 @@ enum
     EV_DRIVERS_ALL, EV_DRIVER1, EV_DRIVER8 = EV_DRIVER1 + 7,
     EV_ROOTS_ALL, EV_ROOT1, EV_ROOT7 = EV_ROOT1 + 6, EV_INSIGHTS_AGAIN,
     EV_SONGS_ALL, EV_SONG1, EV_SONG8 = EV_SONG1 + PLAY_SONG_COUNT - 1, EV_NEXUS_LIT,   // T-417 P2
+    EV_YEAR_ALL, EV_YEAR1, EV_YEAR12 = EV_YEAR1 + HOLIDAY_YEAR_LINE_COUNT - 1, EV_GIFTS_AGAIN,   // T-416
 };
 
 struct DbgRow { const u8 *name; u8 kind; u8 arg; };
@@ -140,6 +143,9 @@ static const u8 sName_Song5[]    = _("HARMONY (SKEW)");
 static const u8 sName_Song6[]    = _("CANVAS (FRAME)");
 static const u8 sName_Song7[]    = _("REFLECTIONS (HEAT)");
 static const u8 sName_NexusLit[] = _("THE NEXUS LIT");
+//  T-416: THE YEAR, each line held or not, and the holidays' items to be given again (a new year, as far as they know).
+static const u8 sName_Year[]       = _("THE YEAR >");
+static const u8 sName_GiftsAgain[] = _("HOLIDAY GIFTS AGAIN");
 
 //  THE STORY'S ORDER: the opening, the shoes and the INDEX, OPUS on THE REPO's shelf, then CAIRN's MARK and NOTEBOOK,
 //  the school, the ship, the DRIVERS, BRAZEN's tea and REVEAL, HALFTONE, the sleeper, the GUIDE, and last what only
@@ -171,6 +177,7 @@ static const struct DbgRow sRows_Events[] = {
     { sName_Guide,       R_TOGGLE, EV_GUIDE },
     { sName_GlobalIndex, R_TOGGLE, EV_GLOBAL_INDEX },
     { sName_Roots,       R_PAGE,   PG_ROOTS },
+    { sName_Year,        R_PAGE,   PG_YEAR },         // T-416
     { sName_Stream,      R_GIVE,   EV_STREAM },
     { sName_Companion,   R_TOGGLE, EV_COMPANION },
 };
@@ -210,6 +217,17 @@ static const struct DbgRow sRows_Songs[] = {
     { sName_NexusLit, R_TOGGLE, EV_NEXUS_LIT },
 };
 
+static const struct DbgRow sRows_Year[] = {
+    { sName_All, R_TOGGLE, EV_YEAR_ALL },
+    { gYearTitle_Rollover,        R_TOGGLE, EV_YEAR1 + 0 },  { gYearTitle_EvenLightSpring, R_TOGGLE, EV_YEAR1 + 1 },
+    { gYearTitle_EvenLightAutumn, R_TOGGLE, EV_YEAR1 + 2 },  { gYearTitle_DawnVigil,       R_TOGGLE, EV_YEAR1 + 3 },
+    { gYearTitle_FirstFrost,      R_TOGGLE, EV_YEAR1 + 4 },  { gYearTitle_DenDay,          R_TOGGLE, EV_YEAR1 + 5 },
+    { gYearTitle_FledglingDay,    R_TOGGLE, EV_YEAR1 + 6 },  { gYearTitle_LanternNights,   R_TOGGLE, EV_YEAR1 + 7 },
+    { gYearTitle_ScienceFair,     R_TOGGLE, EV_YEAR1 + 8 },  { gYearTitle_TruceDay,        R_TOGGLE, EV_YEAR1 + 9 },
+    { gYearTitle_MarigoldDays,    R_TOGGLE, EV_YEAR1 + 10 }, { gYearTitle_GivingThanks,    R_TOGGLE, EV_YEAR1 + 11 },
+    { sName_GiftsAgain, R_GIVE, EV_GIFTS_AGAIN },
+};
+
 static const struct { const struct DbgRow *rows; u8 count; } sPages[PG_COUNT] = {
     [PG_EVENTS]   = { sRows_Events,   ARRAY_COUNT(sRows_Events) },
     [PG_MARKS]    = { sRows_Marks,    ARRAY_COUNT(sRows_Marks) },
@@ -217,6 +235,7 @@ static const struct { const struct DbgRow *rows; u8 count; } sPages[PG_COUNT] = 
     [PG_DRIVERS]  = { sRows_Drivers,  ARRAY_COUNT(sRows_Drivers) },
     [PG_ROOTS]    = { sRows_Roots,    ARRAY_COUNT(sRows_Roots) },
     [PG_SONGS]    = { sRows_Songs,    ARRAY_COUNT(sRows_Songs) },
+    [PG_YEAR]     = { sRows_Year,     ARRAY_COUNT(sRows_Year) },
 };
 
 static const u8 sText_Title_Events[] = _("GAME EVENTS, in story order.\nA gives or takes. + held, · not.");
@@ -225,9 +244,10 @@ static const u8 sText_Title_Notebook[] = _("NOTEBOOK: empty, or every page.\nB g
 static const u8 sText_Title_Drivers[] = _("DRIVERS: held in the TOOLKIT,\nwhich is enough. B goes back.");
 static const u8 sText_Title_Roots[] = _("UNDERSTANDINGS, each with what\nit needs. B goes back.");
 static const u8 sText_Title_Songs[] = _("SONGBOOK: each song learned.\nB goes back.");
+static const u8 sText_Title_Year[] = _("THE YEAR: each line arrived.\nB goes back.");
 static const u8 *const sTitles[PG_COUNT] = {
     sText_Title_Events, sText_Title_Marks, sText_Title_Notebook, sText_Title_Drivers, sText_Title_Roots,
-    sText_Title_Songs,
+    sText_Title_Songs, sText_Title_Year,
 };
 static const u8 sText_Given[] = _("{STR_VAR_1}: given.");
 static const u8 sText_Taken[] = _("{STR_VAR_1}: taken away.");
@@ -383,7 +403,14 @@ static bool8 IsHeld(u8 ev)
                 return FALSE;
         return TRUE;
     case EV_NEXUS_LIT:    return FlagGet(FLAG_NEXUS_LIT);
+    case EV_YEAR_ALL:
+        for (i = 0; i < HOLIDAY_YEAR_LINE_COUNT; i++)
+            if (!DaemonsHolidays_DebugLineHeld(i))
+                return FALSE;
+        return TRUE;
     }
+    if (ev >= EV_YEAR1 && ev <= EV_YEAR12)
+        return DaemonsHolidays_DebugLineHeld(ev - EV_YEAR1);
     if (ev >= EV_SONG1 && ev <= EV_SONG8)
         return FlagGet(FLAG_SONG_FIR + (ev - EV_SONG1));
     if (ev >= EV_MARK1 && ev <= EV_MARK8)
@@ -474,6 +501,16 @@ static void Apply(u8 ev, bool8 on)
             FlagClear(FLAG_SONG_HEARD_1 + i);   // P4: taken away, a song must be heard again to be learned
         return;
     case EV_NEXUS_LIT:    SetFlag(FLAG_NEXUS_LIT, on); return;
+    case EV_YEAR_ALL:
+        for (i = 0; i < HOLIDAY_YEAR_LINE_COUNT; i++)
+            DaemonsHolidays_DebugSetLine(i, on);
+        return;
+    case EV_GIFTS_AGAIN:  DaemonsHolidays_DebugGiftsAgain(); return;
+    }
+    if (ev >= EV_YEAR1 && ev <= EV_YEAR12)
+    {
+        DaemonsHolidays_DebugSetLine(ev - EV_YEAR1, on);
+        return;
     }
     if (ev >= EV_SONG1 && ev <= EV_SONG8)
     {

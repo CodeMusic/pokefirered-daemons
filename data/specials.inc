@@ -494,4 +494,8 @@ gSpecials::
 	def_special DaemonsDebug_EventsDo
 	def_special DaemonsDebug_EventsAsk
 	def_special DaemonsDebug_EventsNotDone
+	def_special DaemonsHolidayGiftBegin   @ T-416
+	def_special DaemonsHolidayGift
+	def_special DaemonsHolidayGiftTaken
+	def_special DaemonsHolidayGiftWaits
 gSpecialsEnd::
