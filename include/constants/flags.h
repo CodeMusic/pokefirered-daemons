@@ -1703,6 +1703,10 @@
 //  SONGBOOK (a NOTEBOOK section) and is listened for as it is played: O CHRISTMAS TREE the first time any fir hums it
 //  (field_specials.c), the seven when each is heard in its ROOT's place (P4). 0x260 is kept for FLAG_GOT_INSTRUMENT.
 //  NEXUS_LIT: O CHRISTMAS TREE has been played to THE NEXUS's Christmas tree.
+//  T-417 P3: the edition's instrument found -- CONTENT's HARP from the LYREBIRD outside CALLOW SCHOOL, CONTEXT's FLUTE
+//  under the palm on FINDERS BEACH. HIDE_LYREBIRD keeps the LYREBIRD out of CONTEXT (set on CALLOW's transition there).
+#define FLAG_GOT_INSTRUMENT           (DAEMONS_FLAGS_START + 0x260)
+#define FLAG_HIDE_LYREBIRD            (DAEMONS_FLAGS_START + 0x26A)
 #define FLAG_SONG_FIR                 (DAEMONS_FLAGS_START + 0x261)
 #define FLAG_SONG_1                   (DAEMONS_FLAGS_START + 0x262)   // the seven, in src/play.c's order (PLAY_SONG_1 ..)
 #define FLAG_SONG_2                   (DAEMONS_FLAGS_START + 0x263)

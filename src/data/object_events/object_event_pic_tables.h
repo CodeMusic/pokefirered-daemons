@@ -2473,3 +2473,19 @@ static const struct SpriteFrameImage sPicTable_SingingFir[] = {    // T-337: the
     overworld_frame(gObjectEventPic_SingingFir, 2, 4, 1),
     overworld_frame(gObjectEventPic_SingingFir, 2, 4, 2),
 };
+
+static const struct SpriteFrameImage sPicTable_TownCallowLyrebird[] = {   // T-417 P3: three drawn, the walks repeat them
+    overworld_frame(gObjectEventPic_TownCallowLyrebird, 2, 4, 0),
+    overworld_frame(gObjectEventPic_TownCallowLyrebird, 2, 4, 1),
+    overworld_frame(gObjectEventPic_TownCallowLyrebird, 2, 4, 2),
+    overworld_frame(gObjectEventPic_TownCallowLyrebird, 2, 4, 3),
+    overworld_frame(gObjectEventPic_TownCallowLyrebird, 2, 4, 4),
+    overworld_frame(gObjectEventPic_TownCallowLyrebird, 2, 4, 5),
+    overworld_frame(gObjectEventPic_TownCallowLyrebird, 2, 4, 6),
+    overworld_frame(gObjectEventPic_TownCallowLyrebird, 2, 4, 7),
+    overworld_frame(gObjectEventPic_TownCallowLyrebird, 2, 4, 8),
+};
+
+static const struct SpriteFrameImage sPicTable_BeachPalm[] = {           // T-417 P3: one 32x32 frame
+    overworld_frame(gObjectEventPic_BeachPalm, 4, 4, 0),
+};

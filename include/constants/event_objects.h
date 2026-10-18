@@ -296,7 +296,13 @@
 //  T-395: THE (NOT A) HUNTER of THE NEXUS, a bear in red plaid (tools/genhunter.py).
 #define OBJ_EVENT_GFX_NEXUS_HUNTER 227
 
-#define NUM_OBJ_EVENT_GFX     228
+//  T-417 P3: the LYREBIRD outside CALLOW SCHOOL, who gives CONTENT its HARP (tools/genlyrebird.py), in CALLOW's palette.
+#define OBJ_EVENT_GFX_TOWN_CALLOW_LYREBIRD 228
+
+//  T-417 P3: the palm on FINDERS BEACH, the FLUTE in its shade (tools/genpalm.py), 32x32 in NPC_GREEN.
+#define OBJ_EVENT_GFX_BEACH_PALM 229
+
+#define NUM_OBJ_EVENT_GFX     230
 
 // These are dynamic object gfx ids.
 // They correspond with the values of the VAR_OBJ_GFX_ID_X vars.

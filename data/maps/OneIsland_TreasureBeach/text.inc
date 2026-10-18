@@ -16,3 +16,17 @@ OneIsland_TreasureBeach_Text_GoodThingsWashUpOnBeach::
     .string "That's why I often come here for\n"
     .string "some beachcombing.$"
 
+@ T-417 P3, DRAFT: the palm on FINDERS BEACH, and CONTEXT's FLUTE in its shade.
+OneIsland_TreasureBeach_Text_PalmShade::
+    .string "Something lies in the palm's shade,\n"
+    .string "half in the sand.\p"
+    .string "A FLUTE. The sea has been\n"
+    .string "playing it.$"
+
+OneIsland_TreasureBeach_Text_FoundFlute::
+    .string "{PLAYER} found the FLUTE!$"
+
+OneIsland_TreasureBeach_Text_JustAPalm::
+    .string "A palm, leaning out to sea.\n"
+    .string "Its shade moves with the wind.$"
+

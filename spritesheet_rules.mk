@@ -576,3 +576,9 @@ $(OBJEVENTGFXDIR)/people/cue_ball.4bpp: %.4bpp: %.png
 
 $(OBJEVENTGFXDIR)/people/nexus_hunter.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OBJEVENTGFXDIR)/misc/beach_palm.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 4
+
+$(OBJEVENTGFXDIR)/people/town_callow_lyrebird.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4

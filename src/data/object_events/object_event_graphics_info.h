@@ -4408,3 +4408,43 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_SingingFirDim = {
     .images = sPicTable_SingingFir,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
+
+//  T-417 P3: the LYREBIRD outside CALLOW SCHOOL -- CALLOW's own tag in the special slot, beside the town's people.
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TownCallowLyrebird = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_TOWN_CALLOW,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = PALSLOT_NPC_SPECIAL,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gObjectEventBaseOam_16x32,
+    .subspriteTables = gObjectEventSpriteOamTables_16x32,
+    .anims = sAnimTable_Standard,
+    .images = sPicTable_TownCallowLyrebird,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+//  T-417 P3: the palm on FINDERS BEACH -- inanimate, 32x32, in NPC_GREEN's colours, so no palette of its own.
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BeachPalm = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_GREEN,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = PALSLOT_NPC_3,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gObjectEventBaseOam_32x32,
+    .subspriteTables = gObjectEventSpriteOamTables_32x32,
+    .anims = sAnimTable_Inanimate,
+    .images = sPicTable_BeachPalm,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};

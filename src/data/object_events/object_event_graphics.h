@@ -165,6 +165,8 @@ const u16 gObjectEventPic_David[] = INCBIN_U16("graphics/object_events/pics/peop
 //  T-395: THE (NOT A) HUNTER of THE NEXUS, a bear in red plaid (tools/genhunter.py, the DAEMONS repo).
 const u16 gObjectEventPic_NexusHunter[] = INCBIN_U16("graphics/object_events/pics/people/nexus_hunter.4bpp");
 const u16 gObjectEventPic_SingingFir[] = INCBIN_U16("graphics/object_events/pics/misc/singing_fir.4bpp");
+const u16 gObjectEventPic_TownCallowLyrebird[] = INCBIN_U16("graphics/object_events/pics/people/town_callow_lyrebird.4bpp");   // T-417 P3
+const u16 gObjectEventPic_BeachPalm[] = INCBIN_U16("graphics/object_events/pics/misc/beach_palm.4bpp");                       // T-417 P3
 const u16 gObjectEventPic_TownUmbraAdult[] = INCBIN_U16("graphics/object_events/pics/people/town_umbra_adult.4bpp");
 const u16 gObjectEventPic_TownQuicksilverElder[] = INCBIN_U16("graphics/object_events/pics/people/town_quicksilver_elder.4bpp");
 const u16 gObjectEventPic_TownQuicksilverAdult[] = INCBIN_U16("graphics/object_events/pics/people/town_quicksilver_adult.4bpp");

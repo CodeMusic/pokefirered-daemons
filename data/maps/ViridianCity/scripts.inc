@@ -10,6 +10,9 @@ ViridianCity_OnTransition::
 	call_if_ge VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 2, ViridianCity_EventScript_SetOldManNormal
 	call_if_eq VAR_MAP_SCENE_VIRIDIAN_CITY_GYM_DOOR, 0, ViridianCity_EventScript_TryUnlockGym
 	call_if_eq VAR_MAP_SCENE_VIRIDIAN_CITY_GYM_DOOR, 1, ViridianCity_EventScript_TryHearDoor
+	.ifdef LEAFGREEN
+	setflag FLAG_HIDE_LYREBIRD
+	.endif
 	end
 
 @ T-346: vanilla unlocked this door in silence, and the eighth MARK waits behind it. The first time the player
@@ -262,3 +265,25 @@ ViridianCity_EventScript_DoTutorialBattle::
 	giveitem ITEM_TEACHY_TV
 	msgbox ViridianCity_Text_WatchThatToLearnBasics
 	return
+
+@ T-417 P3 (the user, 2026-10-17): CONTENT's HARP, from a LYREBIRD two tiles right of CALLOW SCHOOL's door -- the bird
+@ that learns every sound it hears, as the SONGBOOK does. Talked to, it sings the school's bell back; the first time it
+@ gives the HARP (FLAG_GOT_INSTRUMENT). CONTEXT has no LYREBIRD (FLAG_HIDE_LYREBIRD, set on the transition above);
+@ its FLUTE lies under FINDERS BEACH's palm. Every word DRAFT.
+ViridianCity_EventScript_Lyrebird::
+	lock
+	faceplayer
+	playse SE_DING_DONG
+	waitse
+	goto_if_set FLAG_GOT_INSTRUMENT, ViridianCity_EventScript_LyrebirdAfter
+	msgbox ViridianCity_Text_LyrebirdGives
+	giveitem_msg ViridianCity_Text_ReceivedHarp, ITEM_HARP, 1, MUS_OBTAIN_KEY_ITEM
+	setflag FLAG_GOT_INSTRUMENT
+	msgbox ViridianCity_Text_LyrebirdPlay
+	release
+	end
+
+ViridianCity_EventScript_LyrebirdAfter::
+	msgbox ViridianCity_Text_LyrebirdAfter
+	release
+	end

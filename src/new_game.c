@@ -367,6 +367,7 @@ void DaemonsDebug_GrantTestKit(void)
     FlagSet(FLAG_GOT_OPUS);
     FlagSet(FLAG_COMPANION_LINKED);     // T-370: as if the companion app had synced this save, so SEND is offered
     FlagSet(FLAG_GOT_GUIDE);            // the GUIDE is in the stock; ONE ISLAND's shelf reads the flag
+    FlagSet(FLAG_GOT_INSTRUMENT);       // T-417 P3: the instrument is in the stock; the LYREBIRD and the palm read the flag
     // Without this the INDEX entry is not drawn on the START menu (start_menu.c reads FLAG_SYS_POKEDEX_GET).
     FlagSet(FLAG_SYS_POKEDEX_GET);
     DaemonsDebug_FinishOpening();

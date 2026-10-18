@@ -112,3 +112,24 @@ ViridianCity_Text_DoorGivesWay::
     .string "Across CALLOW, from the BENCHMARK\n"
     .string "that has been locked so long,\p"
     .string "the sound of a lock giving way.$"
+
+@ T-417 P3, DRAFT: the LYREBIRD outside CALLOW SCHOOL (CONTENT only).
+ViridianCity_Text_LyrebirdGives::
+    .string "The LYREBIRD sings the school's\n"
+    .string "bell back, note for note.\p"
+    .string "Every class lets out to that bell.\n"
+    .string "You are the first to stop and listen.\p"
+    .string "Take the HARP.\n"
+    .string "I know its songs by now.$"
+
+ViridianCity_Text_ReceivedHarp::
+    .string "{PLAYER} received the HARP!$"
+
+ViridianCity_Text_LyrebirdPlay::
+    .string "Pick any of the twelve keys.\n"
+    .string "Then play what you hear.$"
+
+ViridianCity_Text_LyrebirdAfter::
+    .string "The LYREBIRD sings the bell again.\p"
+    .string "A bell knows one song.\n"
+    .string "Play me one it doesn't.$"
