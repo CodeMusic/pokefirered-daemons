@@ -16,8 +16,8 @@ Game Boy build, [**CodeMusic/pokered-daemons**][gb], is where the vertical slice
 was built; it is kept as a reference and is not updated further.
 
 **No ROM is distributed.** Releases are BPS patches for a cartridge you own,
-published on the [DAEMONS releases page][releases] (latest: **v11.302.3**,
-2026-10-17).
+published on the [DAEMONS releases page][releases] (latest: **v11.304.6**,
+2026-10-18).
 
 ## Why this fork exists
 
@@ -121,29 +121,50 @@ in-game word is still a **DRAFT** until it is approved.
   USER card, and the seasons repaint the world — CONTENT keeps a northern year
   and CONTEXT a southern one. On fifteen early roads, one grass slot belongs to
   the season and one to the hour.
-- **Weather by season** (new in v11.302.1): rain and storms in spring, storms
-  in summer, fog and WIND in autumn, snow in winter, drawn from the date, so it
-  costs no save space. WIND lifts VECTOR routines; snow is hail in battle.
-- **PLAY** (new in v11.302.3): an instrument in each edition — the **HARP**
-  in CONTENT, the **FLUTE** in CONTEXT — played note by note on a STAFF, in any
-  of twelve keys, each note in its own colour. Some things in the world listen.
-  What you play is written in the **SONGBOOK**.
+- **Weather by season**: rain and storms in spring, storms in summer, fog and
+  WIND in autumn, snow in winter, drawn from the date, so it costs no save
+  space. Each weather lifts its own routines — SIGNAL in a storm, LATENT in
+  fog, VECTOR in wind — tints the battle, and brings out daemons of its own;
+  snow is hail. The chart itself never changes.
+- **Holidays.** Three a month on the real calendar — one shared, one for each
+  edition's hemisphere — 36 in all, under the world's own names. Each month has
+  a colour and a note, on the day's banner and the USER card; a holiday brings
+  its own light, sky and daemons, and a gift once a year. On two days a year
+  the other edition's daemons are let in. THE YEAR keeps them in the NOTEBOOK.
+- **PLAY**: an instrument in each edition — the **HARP** in CONTENT, the
+  **FLUTE** in CONTEXT — played note by note on a STAFF, in any of twelve keys,
+  each note in its own colour. Some things in the world listen. Seven songs are
+  heard in the world and can be learned by playing them back, and each does
+  something; the **SONGBOOK** keeps what you have played.
+- **Music of its own**: four towns' themes, and each of the fourteen hidden
+  groves its own loop.
+- **Colour is friendship.** A daemon's colours fill as its friendship grows:
+  nearly grey at first, the full ramp at the most. People stay in colour.
+- **The GAME CORNER** plays as the companion's CASINO: reels of the daemons
+  you have seen, and luck from the game's own day — a holiday, the sky, the
+  hour, the season.
 - **The NOTEBOOK**: the pages the player finds and writes, in sections, each
-  saying where it was found.
+  saying where it was found — among them a DREAM LOG, opened with "I had a
+  dream." at the dawn after a milestone.
+- **The MARKS and what they pair with.** Each of the eight MARKS prints a
+  virtue over its shadow; a MARK and what it pairs with, held together, each
+  say how the other balances it, and when every pair is held a last note
+  arrives.
 - **CALLOW SCHOOL**: a TEXTBOOK, an EXAM that can be resumed, and a DIPLOMA.
 - **NATIVE** on the INDEX's area page, in place of the size comparison: where
-  a daemon belongs, and the hours and seasons it keeps.
+  a daemon belongs, and the hours, seasons and weathers it keeps.
 - **SEND and AWAY**: a party daemon can be sent to the
   [companion][companion] — a phone or a board hosts it — and comes home with
   what it learned.
 
-What is decided and **not built yet** is in the DAEMONS
-[TODO list][todo]: the holidays, the groves' own music, the weather's second
-phase, and PLAY's songbook of seven.
+What is decided and **not built yet** is in the DAEMONS [TODO list][todo] —
+among it routine animations that carry the game's own signature, its binary
+and its notes, and the HARP and FLUTE taking the project's own voices, as the
+companion already plays them.
 
 ## How much of it is ours
 
-Measured against `upstream/master` at the v11.302.3 release:
+Measured against `upstream/master` (v11.302.3; music re-counted at v11.304.6):
 
 | | |
 |---|---|
@@ -156,7 +177,7 @@ Measured against `upstream/master` at the v11.302.3 release:
 | Trainers | 68 of 107 classes renamed; 99 trainers renamed |
 | Places | 57 region-map names; Kanto's towns are words that mean both a colour and a feeling |
 | Maps | 329 of 425 maps changed, 23 new |
-| Music | 4 new songs and 12 vanilla slots rewritten, plus the HARP's and FLUTE's notes |
+| Music | 18 new songs — four towns' and the fourteen groves' — and 12 vanilla slots rewritten, plus the HARP's and FLUTE's notes |
 
 **Colour is by type**, which makes it information rather than decoration — a
 daemon is coloured by what it *is*, so the palette is another way of reading the
@@ -182,7 +203,7 @@ tested. **START → DEBUG** opens the menu:
 | **GAME EVENTS** | the kit a piece at a time, in story order, each row `+` held or `·` not, A giving or taking it. Its first row, EVERYTHING, is the old kit: six daemons picked for their abilities, one of each kind of item, all eight MARKS, 999999 |
 | **HEAL**, **MART** | a full restore; 999999 and any item, added or taken away |
 | **JUMP** | places, without playing to them; **MORE** has a second page |
-| **ENCOUNTER** | a daemon at a level, the season, the weather |
+| **ENCOUNTER** | a daemon at a level, the season, the weather, and the date — a holiday, or a month's 1st |
 | **TIME** | AUTO, or force dawn, day, dusk or night — the map relights at once |
 | **SOUND** | any song or sound effect, the glitch, and the HARP's and FLUTE's scales |
 
