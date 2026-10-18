@@ -737,6 +737,20 @@ void FieldUseFunc_Guide(u8 taskId)
     SetUpItemUseOnFieldCallback(taskId);
 }
 
+//  T-423: THE SUBTLE LAYER opens on its cover, in the same reader.
+static void ItemUseOnFieldCB_SubtleLayer(u8 taskId)
+{
+    LockPlayerFieldControls();
+    ScriptContext_SetupScript(EventScript_SubtleLayer);
+    DestroyTask(taskId);
+}
+
+void FieldUseFunc_SubtleLayer(u8 taskId)
+{
+    sItemUseOnFieldCB = ItemUseOnFieldCB_SubtleLayer;
+    SetUpItemUseOnFieldCallback(taskId);
+}
+
 //  T-417: the HARP (CONTENT) or the FLUTE (CONTEXT). The bag closes and the field comes back, then the instrument comes
 //  out where the player stands (src/play.c) -- on foot or on the water, never on the bicycle.
 static void ItemUseOnFieldCB_Play(u8 taskId)

@@ -48,6 +48,7 @@ static const struct { const u8 *script; u16 foundFlag; } sFinds[] = {
     { OneIsland_House2_EventScript_Guide,             FLAG_GOT_GUIDE },
     { CeladonCity_Condominiums_3F_EventScript_Folds,  FLAG_NOTEBOOK_LOOSE_FOLDS },
     { ViridianCity_Mart_EventScript_ShelfEnd,          FLAG_GOT_OPUS },
+    { SaffronCity_House_EventScript_SubtleLayer,       FLAG_GOT_SUBTLE_LAYER },   // T-423
 };
 
 //  T-323: THE BEACONS. A few things sparkle from the very start, REVEAL or not, until they have been read -- the
@@ -57,6 +58,7 @@ static const struct { const u8 *script; u16 foundFlag; } sFinds[] = {
 static const struct { const u8 *script; u16 readFlag; } sBeacons[] = {
     { PalletTown_PlayersHouse_2F_EventScript_Sign, FLAG_POSTER_READ },
     { OneIsland_House2_EventScript_Guide,          FLAG_GOT_GUIDE },
+    { SaffronCity_House_EventScript_SubtleLayer,   FLAG_GOT_SUBTLE_LAYER },   // T-423 (the user: quiet without REVEAL, clear with)
 };
 
 //  T-343 (the user, 2026-10-01): A SPARKLE SEEN WITHOUT REVEAL IS QUIETER. Before REVEAL is installed a beacon catches

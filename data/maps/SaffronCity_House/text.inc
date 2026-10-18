@@ -11,6 +11,22 @@ SaffronCity_House_Text_GettingCopycatPokeDoll::
     .string "The COPYCAT is cute! I'm getting\n"
     .string "her a DECOY!$"
 
+@  T-423, DRAFT.
+SaffronCity_House_Text_ReadItOrDont::
+    .string "Read it, or don't.\n"
+    .string "It will wait.$"
+
+@  T-423, DRAFT.
+SaffronCity_House_Text_SubtleOnTheShelf::
+    .string "Small books, worn soft at the\n"
+    .string "corners.\p"
+    .string "One is called THE SUBTLE LAYER.$"
+
+@  T-423, DRAFT.
+SaffronCity_House_Text_ShelfWithAGap::
+    .string "Small books, worn soft.\n"
+    .string "There is a gap where one was.$"
+
 @  T-324, DRAFT.
 SaffronCity_House_Text_ExplainPPUp::
     .string "I was given an MP UP.\p"
