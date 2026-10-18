@@ -220,6 +220,7 @@ static void Slot_PrintOnWindow0(const u8 * str);
 static void Slot_ClearWindow0(void);
 static void SetLineStatesByBet(u16 * bgTilemapBuffer);
 static void SetLineState(u16 * bgTilemapBuffer, u16 lineId, u16 paletteNo);
+static void ClearUnpaidLines(u16 * bgTilemapBuffer);
 static void Task_FlashWinningLine(u8 taskId);
 static void SignalStopWinningLineFlashTask(void);
 static void Slot_CreateYesNoMenu(u8 cursorPos);
@@ -229,23 +230,17 @@ static void SetReelButtonPressed(u8 reel);
 static void ReleaseReelButtons(void);
 static void PressReelButton(u8 reel, u8 taskId);
 
-#if defined(FIRERED)
-static const u16 sClefairy_Pal[]      = INCBIN_U16("graphics/slot_machine/firered/clefairy.gbapal");
-static const u32 sClefairy_Tiles[]    = INCBIN_U32("graphics/slot_machine/firered/clefairy.4bpp.lz");
-#elif defined(LEAFGREEN)
-static const u16 sClefairy_Pal[]      = INCBIN_U16("graphics/slot_machine/leafgreen/clefairy.gbapal");
-static const u32 sClefairy_Tiles[]    = INCBIN_U32("graphics/slot_machine/leafgreen/clefairy.4bpp.lz");
-#endif
+// T-422's surround (the user, 2026-10-18): vanilla's Clefairy dancers are gone -- the lead daemon dances in their
+// places, drawn from the reels' own sheet (its JACK piece and its icon's second frame), in its icon palette: no tiles
+// or palette of their own (vanilla's took 0xC00 bytes of OBJ tiles and an OBJ palette).
 static const u16 sDigits_Pal[]        = INCBIN_U16("graphics/slot_machine/digits.gbapal");
 static const u32 sDigits_Tiles[]      = INCBIN_U32("graphics/slot_machine/digits.4bpp.lz");
 
 static const struct CompressedSpriteSheet sSpriteSheets[] = {
-    {.data = sClefairy_Tiles,  .size = 0xc00, .tag = GFXTAG_CLEFAIRY},
     {.data = sDigits_Tiles,    .size = 0x280, .tag = GFXTAG_DIGITS},
 };
 
 static const struct SpritePalette sSpritePalettes[] = {
-    {.data = sClefairy_Pal,     .tag = PALTAG_CLEFAIRY},
     {.data = sDigits_Pal,       .tag = PALTAG_DIGITS},
     {}
 };
@@ -480,27 +475,35 @@ static const struct OamData sOamData_Clefairy = {
     .affineParam = 0
 };
 
+// the dancers' frames in the reels' sheet: the JACK piece (the lead's icon, its hat on) and the icon's second frame
+#define DANCER_FRAME_A (CASINO_JACK * 16)
+#define DANCER_FRAME_B (CASINO_PIECE_COUNT * 16)
+
 static const union AnimCmd sAnimCmd_Clefairy_Neutral[] = {
-    ANIMCMD_FRAME(0, 4),
+    ANIMCMD_FRAME(DANCER_FRAME_A, 4),
     ANIMCMD_END
 };
 
+// the reels turning: the icon's own two steps, as in the party
 static const union AnimCmd sAnimCmd_Clefairy_Spinning[] = {
-    ANIMCMD_FRAME( 0, 24),
-    ANIMCMD_FRAME(16, 24),
+    ANIMCMD_FRAME(DANCER_FRAME_A, 16),
+    ANIMCMD_FRAME(DANCER_FRAME_B, 16),
     ANIMCMD_JUMP(0)
 };
 
+// a win: the steps quicker, turning about
 static const union AnimCmd sAnimCmd_Clefairy_Payout[] = {
-    ANIMCMD_FRAME(32, 28),
-    ANIMCMD_FRAME(48, 28),
+    ANIMCMD_FRAME(DANCER_FRAME_A, 8),
+    ANIMCMD_FRAME(DANCER_FRAME_B, 8),
+    ANIMCMD_FRAME(DANCER_FRAME_A, 8, .hFlip = TRUE),
+    ANIMCMD_FRAME(DANCER_FRAME_B, 8, .hFlip = TRUE),
     ANIMCMD_JUMP(0)
 };
 
+// a loss: it stands and looks on
 static const union AnimCmd sAnimCmd_Clefairy_Lose[] = {
-    ANIMCMD_FRAME(64, 12),
-    ANIMCMD_FRAME(80, 12),
-    ANIMCMD_JUMP(0)
+    ANIMCMD_FRAME(DANCER_FRAME_A, 12),
+    ANIMCMD_END
 };
 
 static const union AnimCmd *const sAnimTable_Clefairy[] = {
@@ -511,8 +514,8 @@ static const union AnimCmd *const sAnimTable_Clefairy[] = {
 };
 
 static const struct SpriteTemplate sSpriteTemplate_Clefairy = {
-    .tileTag = GFXTAG_CLEFAIRY,
-    .paletteTag = PALTAG_CLEFAIRY,
+    .tileTag = GFXTAG_REEL_ICONS,
+    .paletteTag = PALTAG_REEL_ICONS_0,   // set to the lead's own as it is made (CreateClefairySprites)
     .oam = &sOamData_Clefairy,
     .anims = sAnimTable_Clefairy,
     .images = NULL,
@@ -1276,13 +1279,14 @@ static void LoadCasinoGraphics(void)
     struct SpritePalette pal;
     u16 bitsPal[16];
     u32 size, i;
-    u8 *tiles = Alloc(CASINO_PIECE_COUNT * 0x200);
+    u8 *tiles = Alloc((CASINO_PIECE_COUNT + 1) * 0x200);
 
     if (tiles != NULL)
     {
         DaemonsCasino_BuildPieces(&st->day, st->species, st->personality, tiles, st->piecePal, st->artPals);
+        DaemonsCasino_BuildDancer(&st->day, st->species[0], st->personality[0], tiles + CASINO_PIECE_COUNT * 0x200);
         sheet.data = tiles;
-        sheet.size = CASINO_PIECE_COUNT * 0x200;
+        sheet.size = (CASINO_PIECE_COUNT + 1) * 0x200;   // the six pieces and the dancers' second frame
         sheet.tag = GFXTAG_REEL_ICONS;
         LoadSpriteSheet(&sheet);
         Free(tiles);
@@ -1445,13 +1449,17 @@ static void UpdateCoinsDisplay(void)
     }
 }
 
+// T-422's surround: the lead daemon in both places, each turned to face the reels (an icon faces left)
 static void CreateClefairySprites(void)
 {
+    u8 palNum = IndexOfSpritePaletteTag(PALTAG_REEL_ICONS_0 + sSlotMachineState->piecePal[CASINO_JACK]);
     s32 spriteId = CreateSprite(&sSpriteTemplate_Clefairy, 16, 136, 1);
     sSlotMachineGfxManager->clefairySprites[0] = &gSprites[spriteId];
+    sSlotMachineGfxManager->clefairySprites[0]->hFlip = TRUE;
+    sSlotMachineGfxManager->clefairySprites[0]->oam.paletteNum = palNum;
     spriteId = CreateSprite(&sSpriteTemplate_Clefairy, DISPLAY_WIDTH - 16, 136, 1);
     sSlotMachineGfxManager->clefairySprites[1] = &gSprites[spriteId];
-    sSlotMachineGfxManager->clefairySprites[1]->hFlip = TRUE;
+    sSlotMachineGfxManager->clefairySprites[1]->oam.paletteNum = palNum;
 }
 
 static void SetClefairySpriteAnim(u8 animId)
@@ -1563,6 +1571,7 @@ static bool8 SlotsTask_GraphicsInit(u8 * state, struct SlotMachineSetupTaskData 
         DecompressAndCopyTileDataToVram(2, sButtonPressed_Tiles, 0, 0xC0, 0);
         SetBgTilemapBuffer(2, ptr->bg2TilemapBuffer);
         CopyToBgTilemapBuffer(2, sBg_Tilemap, 0, 0x00);
+        ClearUnpaidLines(GetBgTilemapBuffer(2));
         CopyBgTilemapBufferToVram(2);
         LoadPalette(sBg_Pal, BG_PLTT_ID(0), sizeof(sBg_Pal));
         LoadPalette(sBgPal_MatchLines, BG_PLTT_ID(PALSLOT_LINE_BET), sizeof(sBgPal_MatchLines));
@@ -1794,22 +1803,61 @@ static bool8 SlotsTask_ReleaseReelButtons(u8 * state, struct SlotMachineSetupTas
     return TRUE;
 }
 
-// T-422: the pays, in words (vanilla's COMBOS card showed its own seven icons), and the day's biggest reason
-static const u8 sText_CasinoPays[] = _("On the middle line, for each coin bet:\n"
-                                       "Three of your lead{CLEAR_TO 160}50\n"
-                                       "Three of a friend{CLEAR_TO 160}12\n"
-                                       "Three coins{CLEAR_TO 160}6\n"
-                                       "Three of the season{CLEAR_TO 160}4\n"
-                                       "Two of your lead{CLEAR_TO 160}2");   // DRAFT
+// T-422: the pays, in words (vanilla's COMBOS card showed its own seven icons), and the day's biggest reason. One line
+// each at a fixed 13px -- FONT_SMALL's own newline was wider and pushed the fifth pay line under "The season first"
+// (the fix, 2026-10-18) -- nine rows in the card's 120px.
+static const u8 sText_CasinoPaysHead[] = _("On the middle line, for each coin bet:");   // DRAFT
+static const u8 sText_CasinoPayLead3[] = _("Three of your lead{CLEAR_TO 160}50");      // DRAFT
+static const u8 sText_CasinoPayFriend3[] = _("Three of a friend{CLEAR_TO 160}12");    // DRAFT
+static const u8 sText_CasinoPayCoin3[] = _("Three coins{CLEAR_TO 160}6");             // DRAFT
+static const u8 sText_CasinoPaySeason3[] = _("Three of the season{CLEAR_TO 160}4");   // DRAFT
+static const u8 sText_CasinoPayLead2[] = _("Two of your lead{CLEAR_TO 160}2");        // DRAFT
 static const u8 sText_CasinoSeasonFirst[] = _("The season first: your bet back.");   // DRAFT
-static const u8 sText_CasinoToday[] = _("Today:");   // DRAFT
+static const u8 sText_CasinoToday[] = _("Today: ");   // DRAFT
+
+static const u8 *const sCasinoHelpLines[] = {
+    sText_CasinoPaysHead, sText_CasinoPayLead3, sText_CasinoPayFriend3, sText_CasinoPayCoin3, sText_CasinoPaySeason3,
+    sText_CasinoPayLead2, sText_CasinoSeasonFirst,
+};
 
 #define WIN_HELP 2
+#define HELP_ROW(n) (1 + 13 * (n))
+#define HELP_TEXT_WIDTH (26 * 8 - 4)
+
+// "Today: " and the reason on row 7 (context.ts's words in full), what does not fit carried to row 8 at a word
+static void PrintCasinoToday(void)
+{
+    u8 line[96], rest[96];
+    u16 i, cut = 0;
+
+    StringCopy(line, sText_CasinoToday);
+    DaemonsCasino_WhyText(&sSlotMachineState->day, line + StringLength(line));
+    rest[0] = EOS;
+    if (GetStringWidth(FONT_SMALL, line, 0) > HELP_TEXT_WIDTH)
+    {
+        for (i = 0; line[i] != EOS; i++)
+        {
+            if (line[i] != CHAR_SPACE)
+                continue;
+            line[i] = EOS;
+            if (GetStringWidth(FONT_SMALL, line, 0) <= HELP_TEXT_WIDTH)
+                cut = i;
+            line[i] = CHAR_SPACE;
+        }
+        if (cut)
+        {
+            StringCopy(rest, line + cut + 1);
+            line[cut] = EOS;
+        }
+    }
+    AddTextPrinterParameterized5(WIN_HELP, FONT_SMALL, line, 2, HELP_ROW(7), TEXT_SKIP_DRAW, NULL, 0, 0);
+    if (rest[0] != EOS)
+        AddTextPrinterParameterized5(WIN_HELP, FONT_SMALL, rest, 10, HELP_ROW(8), TEXT_SKIP_DRAW, NULL, 0, 0);
+}
 
 static bool8 SlotsTask_ShowHelp(u8 * state, struct SlotMachineSetupTaskData * ptr)
 {
-    u8 line[64];
-    u8 *p;
+    u32 i;
 
     switch (*state)
     {
@@ -1817,14 +1865,9 @@ static bool8 SlotsTask_ShowHelp(u8 * state, struct SlotMachineSetupTaskData * pt
         FillWindowPixelBuffer(WIN_HELP, PIXEL_FILL(1));
         PutWindowTilemap(WIN_HELP);
         DrawTextBorderOuter(WIN_HELP, 0x001, 15);
-        AddTextPrinterParameterized5(WIN_HELP, FONT_SMALL, sText_CasinoPays, 2, 1, TEXT_SKIP_DRAW, NULL, 0, 0);
-        AddTextPrinterParameterized5(WIN_HELP, FONT_SMALL, sText_CasinoSeasonFirst, 2, 1 + 13 * 6, TEXT_SKIP_DRAW, NULL, 0, 0);
-        AddTextPrinterParameterized5(WIN_HELP, FONT_SMALL, sText_CasinoToday, 2, 1 + 13 * 7, TEXT_SKIP_DRAW, NULL, 0, 0);
-        if (sSlotMachineState->day.why != NULL)
-        {
-            p = StringCopy(line, sSlotMachineState->day.why);
-            AddTextPrinterParameterized5(WIN_HELP, FONT_SMALL, line, 10, 1 + 13 * 8, TEXT_SKIP_DRAW, NULL, 0, 0);
-        }
+        for (i = 0; i < ARRAY_COUNT(sCasinoHelpLines); i++)
+            AddTextPrinterParameterized5(WIN_HELP, FONT_SMALL, sCasinoHelpLines[i], 2, HELP_ROW(i), TEXT_SKIP_DRAW, NULL, 0, 0);
+        PrintCasinoToday();
         CopyWindowToVram(WIN_HELP, COPYWIN_FULL);
         PlaySE(SE_WIN_OPEN);
         (*state)++;
@@ -2010,11 +2053,49 @@ static void SetLineState(u16 * bgTilemapBuffer, u16 whichLine, u16 paletteNum)
     const u16 * tileIdxs = sLineStateTileIdxs[whichLine].tiles;
     u16 palMask = (paletteNum & 0xF) << 12;
 
+    if (whichLine != MIDDLE_LINE)
+        return;   // T-422's surround: the other four lines are gone from the machine (ClearUnpaidLines)
     for (i = 0; i < sLineStateTileIdxs[whichLine].count; i++)
     {
         bgTilemapBuffer[*tileIdxs] &= 0x0FFF;
         bgTilemapBuffer[*tileIdxs] |= palMask;
         tileIdxs++;
+    }
+}
+
+// T-422's surround (the user, 2026-10-18): only the middle line pays, so the 2 and 3 lamps and the four other lines'
+// marks between the reels go. Every tile the four unpaid lines own is painted over with what lies around it: the plain
+// orange beside the lamp rail, the rail itself (one tile of its own colour, loaded after the machine's 138 tiles), the
+// reel window's plain edge (as on row 9) and the plain gap between the reels (as on row 7). Both editions' machines
+// share these places (graphics/slot_machine/{firered,leafgreen}/bg.bin).
+#define RAIL_TILE 0x8A
+#define RAIL_PAL  PALSLOT_LINE_NORMAL
+
+static void ClearUnpaidLines(u16 * bgTilemapBuffer)
+{
+    static const u32 sRail[8] = {0x22222222, 0x22222222, 0x22222222, 0x22222222, 0x22222222, 0x22222222, 0x22222222, 0x22222222};
+    u32 line, i;
+    u16 pos, col, hflip;
+
+    LoadBgTiles(2, sRail, sizeof(sRail), RAIL_TILE);
+    for (line = 0; line < NUM_MATCH_LINES; line++)
+    {
+        if (line == MIDDLE_LINE)
+            continue;
+        for (i = 0; i < sLineStateTileIdxs[line].count; i++)
+        {
+            pos = sLineStateTileIdxs[line].tiles[i];
+            col = pos % 32;
+            hflip = bgTilemapBuffer[pos] & 0x0400;
+            if (col == 4 || col == 6 || col == 23 || col == 25)
+                bgTilemapBuffer[pos] = 0x0001;                              // the plain orange (green), palette 0
+            else if (col == 5 || col == 24)
+                bgTilemapBuffer[pos] = (RAIL_PAL << 12) | hflip | RAIL_TILE;   // the lamp rail, unbroken
+            else if (col == 7 || col == 22)
+                bgTilemapBuffer[pos] = bgTilemapBuffer[9 * 32 + col];       // the reel window's plain edge
+            else if (col == 12 || col == 17)
+                bgTilemapBuffer[pos] = bgTilemapBuffer[7 * 32 + col];       // the plain gap between the reels
+        }
     }
 }
 

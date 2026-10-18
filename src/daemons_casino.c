@@ -13,6 +13,9 @@
 #include "daemons_weather.h"
 #include "daemons_holidays.h"
 #include "constants/holidays.h"
+#include "region_map.h"
+#include "string_util.h"
+#include "event_data.h"
 
 // T-422 THE CASINO, IN THE GAME (the user, 2026-10-18, confirmed by phone): the GAME CORNER's reels are the companion's
 // -- three reels of daemons (the lead the jackpot; the others from the INDEX seen, at home in the season or the hour
@@ -55,6 +58,7 @@ void DaemonsCasino_ReadDay(struct DaemonsCasinoDay *day)
     day->dayNote = sDayNotes[DaemonsWeekday() % WEEKDAY_COUNT];
     day->luck = 0;
     day->why = NULL;
+    day->whyFrom = CASINO_WHY_NONE;
 
     // the holiday (context.ts: the lucky one is luck itself, any other a festive table, a quiet day left as it is)
     if (day->holiday != HOLIDAY_NONE && day->holiday <= HOLIDAY_COUNT)
@@ -67,6 +71,7 @@ void DaemonsCasino_ReadDay(struct DaemonsCasinoDay *day)
             day->luck += effect;
             best = effect;
             day->why = h->lucky ? sCasinoWhyLucky : sCasinoWhyFestive;
+            day->whyFrom = CASINO_WHY_HOLIDAY;
         }
     }
     // the sky, the watch, the season -- and the biggest of them says why
@@ -74,17 +79,17 @@ void DaemonsCasino_ReadDay(struct DaemonsCasinoDay *day)
     day->luck += effect;
     abs = effect < 0 ? -effect : effect;
     if (abs > best)
-        best = abs, day->why = sCasinoWhySky[day->sky % DAEMONS_SKY_COUNT];
+        best = abs, day->why = sCasinoWhySky[day->sky % DAEMONS_SKY_COUNT], day->whyFrom = CASINO_WHY_SKY;
     effect = sCasinoLuckWatch[day->watch % WATCH_COUNT];
     day->luck += effect;
     abs = effect < 0 ? -effect : effect;
     if (abs > best)
-        best = abs, day->why = sCasinoWhyWatch[day->watch % WATCH_COUNT];
+        best = abs, day->why = sCasinoWhyWatch[day->watch % WATCH_COUNT], day->whyFrom = CASINO_WHY_WATCH;
     effect = sCasinoLuckSeason[day->season % SEASON_COUNT];
     day->luck += effect;
     abs = effect < 0 ? -effect : effect;
     if (abs > best)
-        best = abs, day->why = sCasinoWhySeason[day->season % SEASON_COUNT];
+        best = abs, day->why = sCasinoWhySeason[day->season % SEASON_COUNT], day->whyFrom = CASINO_WHY_SEASON;
     day->luck = Clamp(day->luck, -100, 100);
     day->ret = ReturnAt(day->luck);
 
@@ -107,6 +112,44 @@ void DaemonsCasino_ReadDay(struct DaemonsCasinoDay *day)
     day->colourA = dressed && h->a ? h->a : sCasinoSeasonColours[day->season % SEASON_COUNT][0];
     day->colourB = dressed && h->b ? h->b : sCasinoSeasonColours[day->season % SEASON_COUNT][1];
     day->hat = dressed ? h->hat : CASINO_HAT_NONE;
+}
+
+// context.ts's reasons in full: the holiday's name before its words, the city after the sky's, the edition's year
+// after the season's (T-422's fix, 2026-10-18: CLOVER DAY's card said only "the luck of the day"). DRAFT.
+#if defined(FIRERED)
+static const u8 sText_CasinoYear[] = _(" (CONTENT's year)");   // DRAFT
+#else
+static const u8 sText_CasinoYear[] = _(" (CONTEXT's year)");   // DRAFT
+#endif
+static const u8 sText_CasinoIn[] = _(" in ");                  // DRAFT
+static const u8 sText_CasinoColon[] = _(": ");
+
+void DaemonsCasino_WhyText(const struct DaemonsCasinoDay *day, u8 *dest)
+{
+    const u8 *name;
+
+    *dest = EOS;
+    if (day->why == NULL)
+        return;
+    switch (day->whyFrom)
+    {
+    case CASINO_WHY_HOLIDAY:
+        name = DaemonsHolidayName(day->holiday);
+        if (name != NULL)
+            dest = StringAppend(StringCopy(dest, name), sText_CasinoColon);
+        StringCopy(dest, day->why);
+        break;
+    case CASINO_WHY_SKY:
+        dest = StringAppend(StringCopy(dest, day->why), sText_CasinoIn);
+        GetMapNameGeneric(dest, gMapHeader.regionMapSectionId);
+        break;
+    case CASINO_WHY_SEASON:
+        StringAppend(StringCopy(dest, day->why), sText_CasinoYear);
+        break;
+    default:
+        StringCopy(dest, day->why);
+        break;
+    }
 }
 
 // ---------------------------------------------------------------------------------------------------------- the pull
@@ -581,6 +624,20 @@ void DaemonsCasino_BuildPieces(const struct DaemonsCasinoDay *day, const u16 spe
         CpuCopy16(sCasinoArtPals[CASINO_ART_MARK], artPals[1], 32);
         FillDayColours(artPals[1], day);
     }
+}
+
+// T-422's surround (the user, 2026-10-18): the machine's dancers are the lead -- the JACK piece is one frame, its icon's
+// second frame the other, a holiday's hat on it too. With no daemon to lead, the MARK the JACK shows stands still.
+void DaemonsCasino_BuildDancer(const struct DaemonsCasinoDay *day, u16 species, u32 personality, u8 *frame)
+{
+    if (species == SPECIES_NONE)
+    {
+        CpuCopy16(sCasinoPieceTiles + CASINO_ART_MARK * FRAME_BYTES, frame, FRAME_BYTES);
+        return;
+    }
+    CpuCopy16(GetMonIconPtr(species, personality, FALSE) + FRAME_BYTES, frame, FRAME_BYTES);   // an icon is two frames, 512 bytes each
+    if (day->hat != CASINO_HAT_NONE)
+        PutHat(frame, GetValidMonIconPalIndex(species), day);
 }
 
 // ---------------------------------------------------------------------------------------- the season over the reels

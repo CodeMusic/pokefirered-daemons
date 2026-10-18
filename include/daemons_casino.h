@@ -20,10 +20,16 @@ struct DaemonsCasinoDay
     u8 look;          // CASINO_LOOK_*: the season's piece, and what falls over the reels
     u8 hat;           // CASINO_HAT_*
     u8 dayNote;       // 0-11: the day's note, C (Sunday) .. B (Saturday)
-    u8 filler;
+    u8 whyFrom;       // CASINO_WHY_*: which part of the day `why` is, so the help card can name it as the companion does
     u32 colourA, colourB;   // 0xRRGGBB
     const u8 *why;    // the biggest reason, in words (DRAFT)
 };
+
+enum { CASINO_WHY_NONE, CASINO_WHY_HOLIDAY, CASINO_WHY_SKY, CASINO_WHY_WATCH, CASINO_WHY_SEASON };
+
+// The day's biggest reason in full, as the companion's context.ts words it: "CLOVER DAY: the luck of the day", "rain on
+// the windows in CELADON CITY", "spring: things growing (CONTENT's year)" (T-422's fix, 2026-10-18). DRAFT.
+void DaemonsCasino_WhyText(const struct DaemonsCasinoDay *day, u8 *dest);
 
 // The string the cat plays with (slots.ts Cat), the player's own: kept while the player sits at the machine.
 struct DaemonsCasinoCat
@@ -68,6 +74,9 @@ u8 DaemonsCasino_WinTune(u8 outcome, u8 look);           // the tune a win plays
 // The pieces and the season over the reels (src/slot_machine.c draws them).
 void DaemonsCasino_BuildPieces(const struct DaemonsCasinoDay *day, const u16 species[4], const u32 personality[4],
                                u8 *tiles, u8 pal[6], u16 artPals[2][16]);
+// The machine's dancers (vanilla's Clefairy, T-422's surround): the lead's icon's second frame, its hat on, into
+// `frame` (512 bytes) -- the first is the JACK piece itself, so the pair dance the icon's own two steps.
+void DaemonsCasino_BuildDancer(const struct DaemonsCasinoDay *day, u16 species, u32 personality, u8 *frame);
 const u8 *DaemonsCasino_BitTiles(u32 *size);
 void DaemonsCasino_BitsPalette(const struct DaemonsCasinoDay *day, u16 pal[16]);
 u8 DaemonsCasino_BitTile(u8 look, u8 *motion);          // motion: 0 falls, 1 rises, 2 twinkles (its tile + 0..3)
