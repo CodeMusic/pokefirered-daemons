@@ -4448,3 +4448,23 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BeachPalm = {
     .images = sPicTable_BeachPalm,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
+
+//  T-417 (the user, 2026-10-18): CONTEXT's FLUTE on BREATHVERSE's sand -- inanimate, 16x16, in the palm's NPC_GREEN.
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BreathFlute = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_GREEN,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = PALSLOT_NPC_3,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gObjectEventBaseOam_16x16,
+    .subspriteTables = gObjectEventSpriteOamTables_16x16,
+    .anims = sAnimTable_Inanimate,
+    .images = sPicTable_BreathFlute,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};

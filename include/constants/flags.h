@@ -1716,6 +1716,8 @@
 #define FLAG_SONG_6                   (DAEMONS_FLAGS_START + 0x267)
 #define FLAG_SONG_7                   (DAEMONS_FLAGS_START + 0x268)
 #define FLAG_NEXUS_LIT                (DAEMONS_FLAGS_START + 0x269)
+//  T-417 (the user, 2026-10-18): the FLUTE on BREATHVERSE's sand, hidden in CONTENT and once taken (its transition).
+#define FLAG_HIDE_BREATHVERSE_FLUTE   (DAEMONS_FLAGS_START + 0x272)
 //  T-417 P4: a song HEARD in its ROOT's place with the instrument in hand -- now it can be played back, and learned.
 #define FLAG_SONG_HEARD_1             (DAEMONS_FLAGS_START + 0x26B)   // .. + 0x271: the seven, in FLAG_SONG_1's order
 #define FLAG_SONG_HEARD_2             (DAEMONS_FLAGS_START + 0x26C)

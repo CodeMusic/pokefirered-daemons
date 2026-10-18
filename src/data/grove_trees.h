@@ -33,6 +33,8 @@ extern const u8 FourIsland_EventScript_Grove[];
 extern const u8 FourIsland_Grove_EventScript_Leave[];
 extern const u8 SevenIsland_EventScript_Grove[];
 extern const u8 SevenIsland_Grove_EventScript_Leave[];
+extern const u8 Route2_EventScript_Breathverse[];
+extern const u8 Breathverse_EventScript_Leave[];
 
 static const u8 *const sGroveTrees[] =
 {
@@ -64,6 +66,8 @@ static const u8 *const sGroveTrees[] =
     FourIsland_Grove_EventScript_Leave,
     SevenIsland_EventScript_Grove,
     SevenIsland_Grove_EventScript_Leave,
+    Route2_EventScript_Breathverse,
+    Breathverse_EventScript_Leave,
 };
 
 #endif // GUARD_DATA_GROVE_TREES_H

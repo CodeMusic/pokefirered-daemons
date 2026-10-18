@@ -117,6 +117,20 @@
       "y": 85,
       "target_local_id": "LOCALID_VIRIDIAN_BORDER_TREE",
       "target_map": "MAP_VIRIDIAN_CITY"
+    },
+    {
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_BEACH_PALM",
+      "x": 12,
+      "y": 75,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route2_EventScript_Breathverse",
+      "flag": "0"
     }
   ],
   "warp_events": [
@@ -208,6 +222,14 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Route2_EventScript_RouteSign"
+    },
+    {
+      "type": "sign",
+      "x": 12,
+      "y": 75,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "Route2_EventScript_Breathverse"
     }
   ]
 }

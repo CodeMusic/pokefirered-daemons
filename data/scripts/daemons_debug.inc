@@ -320,6 +320,31 @@ DaemonsDebug_EventScript_NexusNoGroves::
 	clearflag FLAG_SEVEN_ISLAND_GROVE_FOUND
 	return
 
+@  BREATHVERSE (T-417, the user 2026-10-18). The islet through ROUTE 2's palm, arriving beside its palm as the palm takes
+@  you; YES to the second question puts CONTEXT's FLUTE back in the sand (CONTENT's islet has none either way).
+DaemonsDebug_EventScript_Breathverse::
+	lockall
+	msgbox DaemonsDebug_Text_Breath, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, DaemonsDebug_EventScript_Cancel
+	msgbox DaemonsDebug_Text_BreathFlute, MSGBOX_YESNO
+	call_if_eq VAR_RESULT, YES, DaemonsDebug_EventScript_BreathFlute
+	closemessage
+	warp MAP_BREATHVERSE, 13, 12
+	waitstate
+	releaseall
+	end
+
+DaemonsDebug_EventScript_BreathFlute::
+	clearflag FLAG_GOT_INSTRUMENT
+	removeitem ITEM_FLUTE
+	return
+
+DaemonsDebug_Text_Breath::
+	.string "DEBUG: BREATHVERSE?$"
+
+DaemonsDebug_Text_BreathFlute::
+	.string "Put the FLUTE back in the sand?$"
+
 DaemonsDebug_Text_Nexus::
 	.string "DEBUG: THE NEXUS?\p"
 	.string "The band's sheet held, and the\n"

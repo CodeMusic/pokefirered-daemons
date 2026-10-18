@@ -1223,6 +1223,7 @@ extern const u8 DaemonsDebug_EventScript_Fir[];
 extern const u8 DaemonsDebug_EventScript_Glitch[];
 extern const u8 DaemonsDebug_EventScript_Witness[];
 extern const u8 DaemonsDebug_EventScript_Nexus[];
+extern const u8 DaemonsDebug_EventScript_Breathverse[];
 extern const u8 DaemonsDebug_EventScript_Invoke[];
 #endif
 //  T-179's R = AGAIN ships in every build, so its script is declared outside the debug guard.

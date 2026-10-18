@@ -173,7 +173,9 @@ static void SkyCentre(struct SkyEvent *e, u32 *state)
 
     for (tries = 0; tries < 48; tries++)
     {
-        mapsec = KANTO_MAPSEC_START + SkyNext(state) % (MAPSEC_SPECIAL_AREA - KANTO_MAPSEC_START);
+        //  MAPSEC_NEXUS, not MAPSEC_SPECIAL_AREA: THE NEXUS's own section (2026-10-18) came after the sky was drawn, and
+        //  the draw must not move every day's centre. It is drawn on no sheet, so it could never be picked anyway.
+        mapsec = KANTO_MAPSEC_START + SkyNext(state) % (MAPSEC_NEXUS - KANTO_MAPSEC_START);
         if (DaemonsMapsecPlace(mapsec, &sheet, &x, &y, &w, &h) && (sheet != 0) == islands)
             break;
     }

@@ -4662,6 +4662,18 @@
       "secondary_tileset": "gTileset_Nexus",
       "border_filepath": "data/layouts/Nexus/border.bin",
       "blockdata_filepath": "data/layouts/Nexus/map.bin"
+    },
+    {
+      "id": "LAYOUT_BREATHVERSE",
+      "name": "Breathverse_Layout",
+      "width": 28,
+      "height": 24,
+      "border_width": 2,
+      "border_height": 2,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_SeviiIslands123",
+      "border_filepath": "data/layouts/Breathverse/border.bin",
+      "blockdata_filepath": "data/layouts/Breathverse/map.bin"
     }
   ]
 }

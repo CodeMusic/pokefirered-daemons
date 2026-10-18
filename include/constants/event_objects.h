@@ -302,7 +302,11 @@
 //  T-417 P3: the palm on FINDERS BEACH, the FLUTE in its shade (tools/genpalm.py), 32x32 in NPC_GREEN.
 #define OBJ_EVENT_GFX_BEACH_PALM 229
 
-#define NUM_OBJ_EVENT_GFX     230
+//  T-417 (the user, 2026-10-18): CONTEXT's FLUTE on BREATHVERSE's sand, beside the palm (tools/genflute.py), 16x16 in
+//  NPC_GREEN, the palm's colours.
+#define OBJ_EVENT_GFX_BREATH_FLUTE 230
+
+#define NUM_OBJ_EVENT_GFX     231
 
 // These are dynamic object gfx ids.
 // They correspond with the values of the VAR_OBJ_GFX_ID_X vars.

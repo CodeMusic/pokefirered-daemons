@@ -2489,3 +2489,7 @@ static const struct SpriteFrameImage sPicTable_TownCallowLyrebird[] = {   // T-4
 static const struct SpriteFrameImage sPicTable_BeachPalm[] = {           // T-417 P3: one 32x32 frame
     overworld_frame(gObjectEventPic_BeachPalm, 4, 4, 0),
 };
+
+static const struct SpriteFrameImage sPicTable_BreathFlute[] = {         // T-417 BREATHVERSE: one 16x16 frame
+    overworld_frame(gObjectEventPic_BreathFlute, 2, 2, 0),
+};

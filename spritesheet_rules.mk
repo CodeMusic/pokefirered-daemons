@@ -582,3 +582,6 @@ $(OBJEVENTGFXDIR)/misc/beach_palm.4bpp: %.4bpp: %.png
 
 $(OBJEVENTGFXDIR)/people/town_callow_lyrebird.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OBJEVENTGFXDIR)/misc/breath_flute.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 2

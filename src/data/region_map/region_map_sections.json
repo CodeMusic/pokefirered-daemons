@@ -1133,6 +1133,14 @@
       "height": 1
     },
     {
+      "id": "MAPSEC_NEXUS",
+      "name": "THE NEXUS",
+      "x": 0,
+      "y": 0,
+      "width": 1,
+      "height": 1
+    },
+    {
       "id": "MAPSEC_SPECIAL_AREA",
       "name": "VERDIGRIS DEPT.",
       "x": 0,
