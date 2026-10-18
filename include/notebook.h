@@ -10,6 +10,8 @@ const u8 *Daemons_RootBalance(u16 root);
 void DaemonsDreamLog_Notice(void);
 void DaemonsDreamLog_Loaded(void);
 bool8 Daemons_TryDreamArrives(void);
+//  T-412: HER DREAMS -- where the attendant's dream for a step led, once the step is done (daemons_dreams.c); NULL till then.
+const u8 *DaemonsDream_Led(u8 step);
 #if DAEMONS_DEBUG
 void DaemonsDreamLog_DebugDawn(void);
 #endif

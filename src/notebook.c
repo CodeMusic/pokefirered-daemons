@@ -70,7 +70,9 @@ enum
 //  page's title already carries -- the syllabus's COURSE SYLLABUS / 1F LANGUAGE -- and the page leaves it off. The floors' boards were filed here once (batch 5); since
 //  T-223 they are the TEXTBOOK's own chapters, and a book does not need a copy of itself in the notebook.
 //  T-417: SONG is a SONGBOOK page -- ARG is its song (PLAY_SONG_*), and play.c writes it and its notes.
-enum { NB_KIND_TEXT, NB_KIND_EXAM, NB_KIND_CHOICES, NB_KIND_SONG };
+//  T-412: HER_DREAM is one of the attendant's dreams in the DREAM LOG -- ARG is its step, and where it led is written
+//  under its words once the step is done.
+enum { NB_KIND_TEXT, NB_KIND_EXAM, NB_KIND_CHOICES, NB_KIND_SONG, NB_KIND_HER_DREAM };
 
 struct NotebookEntry
 {
@@ -97,6 +99,9 @@ static const u8 sSection_Songbook[]       = _("SONGBOOK");   // T-417, DRAFT
 extern const u8 gText_YearSection[];   // T-416: THE YEAR, src/daemons_holidays.c
 
 #include "data/dream_log.h"   // T-412: the DREAM LOG's words and milestones, written by DAEMONS tools/gbadreamlog.py
+#define ATTENDANT_DREAMS_NOTEBOOK     // T-412: HER DREAMS' pages; their words live in daemons_dreams.c (tools/gbadreams.py)
+#include "data/attendant_dreams.h"
+#undef ATTENDANT_DREAMS_NOTEBOOK
 
 static const u8 *const sSectionNames[NB_SECTION_COUNT] =
 {
@@ -472,6 +477,8 @@ static const struct NotebookEntry sEntries[] =
     NB_YEAR_ENTRIES
     //  T-412: the DREAM LOG -- YOUR DREAMS, in the draft's order, each once it has been dreamt.
     NB_DREAM_ENTRIES
+    //  T-412: then HER DREAMS, in step order, each once the attendant has told it.
+    NB_HER_DREAM_ENTRIES
 };
 
 #if DAEMONS_DEBUG
@@ -742,7 +749,7 @@ static void PrintPageNote(s32 itemIndex)
 {
     const struct NotebookNote *note = NULL;
 
-    if (itemIndex != NB_CLOSE && itemIndex < (s32)ARRAY_COUNT(sEntries))
+    if (itemIndex >= 0 && itemIndex != NB_CLOSE && itemIndex < (s32)ARRAY_COUNT(sEntries))
         note = FindNote(sEntries[itemIndex].flag);
     FillWindowPixelBuffer(0, PIXEL_FILL(1));
     if (note == NULL || note->about == NULL)
@@ -772,7 +779,7 @@ static void PrintUnreadMark(u8 windowId, u32 itemId, u8 y)
 {
     bool8 unread;
 
-    if (itemId == NB_CLOSE)
+    if (itemId == NB_CLOSE || (s32)itemId == LIST_HEADER)   // T-412: a heading has no page
         return;
     unread = sListIsEntries ? EntryUnread(itemId) : SectionHasUnread(itemId);
     if (unread)
@@ -800,7 +807,7 @@ static void CreateNotebookList(u8 count, bool8 isEntries, u16 scroll, u16 row)
     sListIsEntries = isEntries;
     for (i = 0; i < count; i++)   // T-403: a tile of gutter for the unread dot, when there is one to draw
     {
-        if (sItems[i].index != NB_CLOSE && (isEntries ? EntryUnread(sItems[i].index) : SectionHasUnread(sItems[i].index)))
+        if (sItems[i].index != NB_CLOSE && sItems[i].index != LIST_HEADER && (isEntries ? EntryUnread(sItems[i].index) : SectionHasUnread(sItems[i].index)))
         {
             task->tWidth++;
             break;
@@ -976,16 +983,46 @@ void Notebook_ChooseSection(void)
 
 //  VAR_0x8005 is the section. The entries held in it, in AUTHORED order, then BACK.
 //  VAR_RESULT: the entry's index in sEntries, or 0x7F.
+//  T-412: in the DREAM LOG, once the attendant has told one of her dreams, the list is headed in two -- YOUR DREAMS,
+//  then HER DREAMS -- headings the cursor passes over. A player she never dreamt for sees it unheaded.
+static bool8 HerDreamsHeld(void)
+{
+    u32 i;
+
+    for (i = 0; i < ARRAY_COUNT(sEntries); i++)
+    {
+        if (sEntries[i].kind == NB_KIND_HER_DREAM && EntryHeld(i))
+            return TRUE;
+    }
+    return FALSE;
+}
+
 void Notebook_ChooseEntry(void)
 {
     u32 i;
     u8 n = 0;
+    bool8 headed = (gSpecialVar_0x8005 == NB_DREAM_LOG && HerDreamsHeld());
+    bool8 yours = FALSE, hers = FALSE;
 
-    sItems = AllocZeroed((ARRAY_COUNT(sEntries) + 1) * sizeof(struct ListMenuItem));
+    sItems = AllocZeroed((ARRAY_COUNT(sEntries) + 3) * sizeof(struct ListMenuItem));
     for (i = 0; i < ARRAY_COUNT(sEntries); i++)
     {
         if (sEntries[i].section == gSpecialVar_0x8005 && EntryHeld(i))
         {
+            if (headed && sEntries[i].kind == NB_KIND_TEXT && !yours)
+            {
+                sItems[n].label = sDreamHeading_Yours;
+                sItems[n].index = LIST_HEADER;
+                n++;
+                yours = TRUE;
+            }
+            if (headed && sEntries[i].kind == NB_KIND_HER_DREAM && !hers)
+            {
+                sItems[n].label = sDreamHeading_Hers;
+                sItems[n].index = LIST_HEADER;
+                n++;
+                hers = TRUE;
+            }
             sItems[n].label = sEntries[i].title;
             sItems[n].index = i;
             n++;
@@ -996,6 +1033,13 @@ void Notebook_ChooseEntry(void)
     n++;
     if (sEntryRow + sEntryScroll >= n)
         sEntryScroll = sEntryRow = 0;
+    if (sItems[sEntryScroll + sEntryRow].index == LIST_HEADER)   // T-412: never open on a heading
+    {
+        if (sEntryRow + 1 < NB_MAX_SHOWN && sEntryRow + 1 < n)
+            sEntryRow++;
+        else
+            sEntryScroll++;
+    }
     CreateNotebookList(n, TRUE, sEntryScroll, sEntryRow);
 }
 
@@ -1011,6 +1055,17 @@ void Notebook_LoadEntry(void)
         Notebook_WriteChoices(gStringVar4);
     else if (sEntries[gSpecialVar_0x8006].kind == NB_KIND_SONG)
         Play_WriteSongPage(sEntries[gSpecialVar_0x8006].arg, gStringVar4);   // T-417
+    else if (sEntries[gSpecialVar_0x8006].kind == NB_KIND_HER_DREAM)          // T-412: her dream, and where it led
+    {
+        const u8 *led = DaemonsDream_Led(sEntries[gSpecialVar_0x8006].arg);
+        u8 *end = StringExpandPlaceholders(gStringVar4, sEntries[gSpecialVar_0x8006].text);
+
+        if (led != NULL)
+        {
+            *end++ = CHAR_PROMPT_CLEAR;
+            StringExpandPlaceholders(end, led);
+        }
+    }
     else
         StringExpandPlaceholders(gStringVar4, sEntries[gSpecialVar_0x8006].text);
 }

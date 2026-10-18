@@ -82,6 +82,10 @@ EventScript_PkmnCenterNurse_CheckMemeEnd::
 @ T-347: after three heals with no main-path progress, she offers a dream about the next step (src/daemons_dreams.c,
 @ the words from tools/gbadreams.py). YES tells it; NO waits another three heals. DRAFT wording.
 EventScript_PkmnCenterNurse_CheckDream::
+	special DaemonsDreamSayLed   @ T-412: where her last dream led, once its step is done -- said once
+	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_CountHeal
+	msgbox gStringVar4
+EventScript_PkmnCenterNurse_CountHeal::
 	special DaemonsDreamCountHeal
 	goto_if_eq VAR_RESULT, FALSE, EventScript_PkmnCenterNurse_CheckDreamEnd
 	msgbox Text_AttendantHadADream, MSGBOX_YESNO

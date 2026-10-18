@@ -379,6 +379,7 @@ gSpecials::
 	def_special DaemonsDreamCountHeal
 	def_special DaemonsDreamTell
 	def_special DaemonsDreamDeclined
+	def_special DaemonsDreamSayLed
 	def_special School_OpenExam
 	def_special School_ExamInProgress
 	def_special School_BufferExamResult

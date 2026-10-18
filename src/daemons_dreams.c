@@ -15,6 +15,13 @@
 //
 //  VAR_DREAM_PROGRESS: steps done + 1 (0 never seen), and DREAM_TOLD_FIRST once the first dream for this stretch
 //  has been told. VAR_DREAM_HEALS: heals since progress last moved, or since she last offered.
+//
+//  T-412 (the user, 2026-10-18): HER DREAMS. The first time she tells a step's FIRST dream it is filed in the NOTEBOOK's
+//  DREAM LOG (its FLAG_ATTENDANT_DREAM_*), and once the step is done, where it led is written under it there
+//  (DaemonsDream_Led). She says where it led aloud once, at the next heal after the step is done: VAR_DREAM_LED holds
+//  the step + 1 of the last FIRST dream she told, until then. One var, not one per step -- she only ever dreams the
+//  current stretch's step, so at most one is owed; a stretch that moves on to another step's dream before this one's is
+//  done leaves the earlier one unsaid (its NOTEBOOK page still shows it). DRAFT wording.
 
 #include "data/attendant_dreams.h"
 
@@ -75,6 +82,11 @@ void DaemonsDreamTell(void)
     }
     StringExpandPlaceholders(gStringVar4, (progress & DREAM_TOLD_FIRST) ? sAttendantDreams[step].second
                                                                          : sAttendantDreams[step].first);
+    if (!(progress & DREAM_TOLD_FIRST))                                 // T-412: filed, and where it led is owed
+    {
+        FlagSet(sAttendantDreams[step].told);
+        VarSet(VAR_DREAM_LED, step + 1);
+    }
     VarSet(VAR_DREAM_PROGRESS, progress | DREAM_TOLD_FIRST);
     VarSet(VAR_DREAM_HEALS, 0);
 }
@@ -83,4 +95,26 @@ void DaemonsDreamTell(void)
 void DaemonsDreamDeclined(void)
 {
     VarSet(VAR_DREAM_HEALS, 0);
+}
+
+//  T-412: after a heal, before anything else she says. VAR_RESULT TRUE, and where it led in gStringVar4, when the step
+//  of the last FIRST dream she told is now done -- once.
+void DaemonsDreamSayLed(void)
+{
+    u16 owed = VarGet(VAR_DREAM_LED);
+
+    gSpecialVar_Result = FALSE;
+    if (owed == 0 || owed > ARRAY_COUNT(sAttendantDreams) || !FlagGet(sAttendantDreams[owed - 1].flag))
+        return;
+    StringExpandPlaceholders(gStringVar4, sAttendantDreams[owed - 1].led);
+    VarSet(VAR_DREAM_LED, 0);
+    gSpecialVar_Result = TRUE;
+}
+
+//  T-412: the NOTEBOOK's page for her dream (notebook.c) -- where it led, once its step is done; NULL until then.
+const u8 *DaemonsDream_Led(u8 step)
+{
+    if (step >= ARRAY_COUNT(sAttendantDreams) || !FlagGet(sAttendantDreams[step].flag))
+        return NULL;
+    return sAttendantDreams[step].led;
 }
