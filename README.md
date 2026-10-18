@@ -8,10 +8,16 @@ older sense underneath it. The type chart is not a balance table; it is an
 argument about how a mind resolves what it is given. Everything else follows
 from that.
 
-**This repository is the engine.** The design lives next door in
-[**CodeMusic/DAEMONS**][daemons] — a design bible, a changelog, the lineage of
-the ideas. The Game Boy build, [**CodeMusic/pokered-daemons**][gb], is where the
-vertical slice was built; it is kept as a reference and is not updated further.
+**This repository is the engine, and the game is here.** The design lives next
+door in [**CodeMusic/DAEMONS**][daemons] — a design bible, a changelog, the
+lineage of the ideas, and every tool that writes into this tree. How to play,
+how to build and how a release is made are on the [**DAEMONS wiki**][wiki]. The
+Game Boy build, [**CodeMusic/pokered-daemons**][gb], is where the vertical slice
+was built; it is kept as a reference and is not updated further.
+
+**No ROM is distributed.** Releases are BPS patches for a cartridge you own,
+published on the [DAEMONS releases page][releases] (latest: **v11.302.3**,
+2026-10-17).
 
 ## Why this fork exists
 
@@ -42,26 +48,38 @@ is a preference. And **the chart goes from 15 types to 17**, in a design whose
 **Neither engine is deleted.** The Game Boy build still compiles and still runs
 the slice; it is a reference, not a casualty.
 
-## It builds two ROMs
+## It builds two editions
 
 | Target | Output | Edition |
 |---|---|---|
-| `make firered` | `pokefirered.gba` | **CONTENT** |
-| `make leafgreen` | `pokeleafgreen.gba` | **CONTEXT** |
+| `make firered` | `daemonsContent.gba` | **CONTENT** |
+| `make leafgreen` | `daemonsContext.gba` | **CONTEXT** |
+| `make firered_debug` | `daemonsContent_debug.gba` | CONTENT, the testing build |
+| `make leafgreen_debug` | `daemonsContext_debug.gba` | CONTEXT, the testing build |
+
+The ROMs are named for the editions, and the `.elf`, `.map`, `.sym` and mGBA's
+`.sav` follow the same name, so every build keeps its own save.
 
 The edition split survived the port unchanged, which was the first good sign:
 `firered` / `leafgreen` maps onto the Game Boy build's `_RED` / `_BLUE` with no
 design work at all. Both disassemblies ship the same game twice and differ by a
-build flag.
+build flag. **The type chart is byte-identical in both** — it is the argument,
+and an argument that changes by cartridge is not one.
+
+From the DAEMONS repo, `./bindDaemons.sh` builds and launches either edition
+(`context`, `--debug`); `--classic` reaches the Game Boy build instead.
+
+**Check the exit code, never grep for `error:`.** agbcc prints its diagnostics
+as `warning:` lines and then fails with a bare `Error 1`, so a filtered build
+looks clean while the ROM silently keeps the previous binary:
 
 ```sh
-make firered           # build CONTENT
-make leafgreen         # build CONTEXT
-# shasum -c firered.sha1 -- only meaningful on a pristine checkout; see below
+make firered -j8 >/dev/null 2>&1; echo "exit=$?"
 ```
 
-From the DAEMONS repo, `./bindDaemons.sh` builds and launches either edition;
-`--classic` reaches the Game Boy build instead.
+*`shasum -c firered.sha1` fails by design* — the ROM carries our content. It
+proves the toolchain on a pristine `pret/pokefirered` checkout and is not a
+regression check for this fork.
 
 ### Toolchain
 
@@ -76,42 +94,109 @@ cd /tmp/agbcc && ./build.sh && ./install.sh /path/to/pokefirered-daemons
 ```
 
 `agbcc` installs **into this checkout**, so it does not survive a fresh clone.
-`DAEMONS/setup.sh` rebuilds it for you.
+`DAEMONS/setup.sh` clones this fork beside the design repo and rebuilds it for
+you.
 
-### Debug mode
+**Edit the source, never the artifact.** `json_data_rules.mk` generates several
+headers (`items.h`, the region map's strings, the wild encounters …) and every
+one is gitignored. A change written into a generated header exists only in one
+working build; write the `.json`.
+
+## What a player meets
+
+Everything below is in both editions unless it says otherwise. Every new
+in-game word is still a **DRAFT** until it is approved.
+
+- **Every daemon is ours.** All 386 species are renamed, plus nine new ones in
+  slots vanilla left unused; the INDEX's 395 entries are rewritten, and each
+  edition says something different about every one of them.
+- **Seventeen types**: the fifteen names of the chart, plus `HARDENED` and
+  `OPAQUE` in the Steel and Dark slots. The matchup table's one change from
+  vanilla is `CONTEXT ↔ LATENT`, mutual 2×. All 77 abilities are renamed.
+- **The vocabulary of the world**: USERS, BINDING, the USERBOX up to the
+  ROOTBOX, ROUTINES, BENCHMARKS and their MARKS, CHECKPOINTS, the POOL, DRIVERS
+  in place of HMs, HALTED in place of fainted, RECOMPILE in place of evolution.
+- **A clock that matters.** The cartridge's clock if it has one, play time if
+  not: dawn, day, dusk and night tint the outdoor maps, the weekday is on the
+  USER card, and the seasons repaint the world — CONTENT keeps a northern year
+  and CONTEXT a southern one. On fifteen early roads, one grass slot belongs to
+  the season and one to the hour.
+- **Weather by season** (new in v11.302.1): rain and storms in spring, storms
+  in summer, fog and WIND in autumn, snow in winter, drawn from the date, so it
+  costs no save space. WIND lifts VECTOR routines; snow is hail in battle.
+- **PLAY** (new in v11.302.3): an instrument in each edition — the **HARP**
+  in CONTENT, the **FLUTE** in CONTEXT — played note by note on a STAFF, in any
+  of twelve keys, each note in its own colour. Some things in the world listen.
+  What you play is written in the **SONGBOOK**.
+- **The NOTEBOOK**: the pages the player finds and writes, in sections, each
+  saying where it was found.
+- **CALLOW SCHOOL**: a TEXTBOOK, an EXAM that can be resumed, and a DIPLOMA.
+- **NATIVE** on the INDEX's area page, in place of the size comparison: where
+  a daemon belongs, and the hours and seasons it keeps.
+- **SEND and AWAY**: a party daemon can be sent to the
+  [companion][companion] — a phone or a board hosts it — and comes home with
+  what it learned.
+
+What is decided and **not built yet** is in the DAEMONS
+[TODO list][todo]: the holidays, the groves' own music, the weather's second
+phase, and PLAY's songbook of seven.
+
+## How much of it is ours
+
+Measured against `upstream/master` at the v11.302.3 release:
+
+| | |
+|---|---|
+| Species names | **all 386** renamed, plus 9 new in unused slots |
+| INDEX | **395 entries** per edition, all rewritten, every one different between the two |
+| Sprites | **1464 of 1469** vanilla sprites redrawn, plus about 100 new — daemons **coloured by type** |
+| Moves | 335 of 354 renamed, plus 9 new, among them **CONSENSUS** |
+| Abilities | all 77 renamed |
+| Items | 216 renamed, **251 descriptions** rewritten, 7 new key items |
+| Trainers | 68 of 107 classes renamed; 99 trainers renamed |
+| Places | 57 region-map names; Kanto's towns are words that mean both a colour and a feeling |
+| Maps | 329 of 425 maps changed, 23 new |
+| Music | 4 new songs and 12 vanilla slots rewritten, plus the HARP's and FLUTE's notes |
+
+**Colour is by type**, which makes it information rather than decoration — a
+daemon is coloured by what it *is*, so the palette is another way of reading the
+chart.
+
+**The tools that write into this tree live in `DAEMONS/tools/`**, not here:
+the names, the INDEX, the sprites, the music, the maps and the dialogue all
+come through one, and each takes `--write` and only reports without it.
+
+## The debug build
 
 **pokefirered ships no debug build** — unlike pokeemerald there is no menu to
-port — so this one is ours:
+port — so this one is ours. `DAEMONS_DEBUG=1` suffixes `BUILD_NAME`, so it is a
+**separate ROM with its own save** and a debug run never touches a real
+playthrough. It began as scaffolding for the spike and has grown into the field
+test's way of reaching things without playing to them.
 
-```sh
-make firered_debug     # -> pokefirered_debug.gba
-make leafgreen_debug   # -> pokeleafgreen_debug.gba
-```
+**A new debug game starts as a normal one does**, so the opening can still be
+tested. **START → DEBUG** opens the menu:
 
-A new game starts with six daemons chosen for their **abilities**, one of each
-**kind** of item so the description window can be read, all eight badges, and
-999999. **Hold B** to walk through grass unmolested.
+| | |
+|---|---|
+| **GAME EVENTS** | the kit a piece at a time, in story order, each row `+` held or `·` not, A giving or taking it. Its first row, EVERYTHING, is the old kit: six daemons picked for their abilities, one of each kind of item, all eight MARKS, 999999 |
+| **HEAL**, **MART** | a full restore; 999999 and any item, added or taken away |
+| **JUMP** | places, without playing to them; **MORE** has a second page |
+| **ENCOUNTER** | a daemon at a level, the season, the weather |
+| **TIME** | AUTO, or force dawn, day, dusk or night — the map relights at once |
+| **SOUND** | any song or sound effect, the glitch, and the HARP's and FLUTE's scales |
 
-**START → DEBUG** does the two things you want most: **full restore and a full
-bag**, from somewhere you can find without being told.
-
-The rest are field hotkeys, held with **SELECT**:
+**Hold B** to walk through grass and past trainers. And a few field hotkeys,
+held with **SELECT**:
 
 | GBA | mGBA default keys | |
 |---|---|---|
-| **SELECT + A** | hold `Backspace`, press `X` | heal the party — the POKéCENTER jingle, and a message |
-| **SELECT + B** | hold `Backspace`, press `Z` | restock items and money — the item fanfare, and a message |
-| **SELECT + UP** | hold `Backspace`, press `↑` | next song, and its number on screen |
+| **SELECT + A** | hold `Backspace`, press `X` | heal the party |
+| **SELECT + B** | hold `Backspace`, press `Z` | restock items and money |
+| **SELECT + UP** | hold `Backspace`, press `↑` | next song, and its number on screen (SOUND reaches every song) |
 | **SELECT + DOWN** | hold `Backspace`, press `↓` | put the map's own song back |
 
-The message stays while SELECT is held and goes when it is released — which is
-also how it is dismissed. `ShowFieldMessage` opens a box and there is no script
-running to close it again, so something has to.
-
-**SELECT is the modifier because L and R are not available:** FireRed opens its
-Help System on either of them, so every combo built on L fought the game and
-lost. SELECT uses the registered key item, and nothing is registered in a fresh
-save.
+The message stays while SELECT is held and goes when it is released.
 
 mGBA's stock keyboard map is worth writing down, because **`L` is the keyboard
 `A`, which is not the GBA A button**:
@@ -123,68 +208,9 @@ mGBA's stock keyboard map is worth writing down, because **`L` is the keyboard
 | Start | `Enter` | | Select | `Backspace` |
 | D-pad | arrow keys | | | |
 
-Rebind under **Settings → Controls**.
-
-A nested DEBUG menu — HEAL, MART, MUSIC by name, SFX — is the right shape and is
-not built yet. It needs another window template, another task, another input
-loop and a 348-song list to page through, and it goes into the menu the player
-opens most.
-
-It is scaffolding for the question above rather than a general debug menu.
-`DAEMONS_DEBUG=1` suffixes `BUILD_NAME`, so it is a **separate ROM with its own
-save** and a debug run never touches a real playthrough. It is deliberately not
-part of `make all`, and **with `DAEMONS_DEBUG=0` both retail builds still match
-their `.sha1` byte for byte** — that was the proof the scaffolding is inert when
-it is off, and it was taken on 2026-09-02 while this fork was still vanilla.
-
-**It no longer holds, and it should not:** the ROM now carries the type chart,
-the names, the Index, the sprites and the music, so `shasum -c firered.sha1`
-fails by design. It is a check for a *pristine* checkout — run it after cloning
-`pret/pokefirered` to prove the toolchain, not against this fork.
-
-## What is ported so far
-
-| | |
-|---|---|
-| The chart's vocabulary | all fifteen type names, plus `HARDENED` and `OPAQUE` |
-| The chart's one change | `CONTEXT ↔ LATENT`, mutual 2× |
-| 33 daemon names | every rename carried across |
-| 12 item names | the box ladder, the four inputs, `INTERRUPT`, `RESOLVER`, `CC-7` |
-| 12 item descriptions | **new writing** — Gen 1 had nowhere to put them |
-| 30 Index categories and entries | reflowed from six short lines to three long ones, then expanded into the room |
-| 14 town names | Blanche, Slate, Doldrum, Halftone, Ardor, Verdigris… |
-| 66 sprites | front and back, **coloured by type** |
-| 4 music tracks | re-emitted as MIDI, because nothing can be copied |
-| The copyright screen | three lines, in the Game Boy screen's own font |
-| The eight MARKS | as badge names, which is where Gen 3 keeps them |
-| The 17 type badges | pixel art, six characters each, vowels dropped as vanilla does |
-| Player and rival names | PIP / CONTENT / CODE against AL / CONTEXT / LUCID |
-| The intro, and Crystal's speech | including the question that used to ask your gender |
-| The ID number | derived from the choices you made, not rolled |
-
-**Colour is by type**, which makes it information rather than decoration — a
-daemon is coloured by what it *is*, so the palette is another way of reading the
-chart. Four of the anchors come from the Review Board's humours; the rest are
-claims the bible now makes.
-
-Everything else — the maps, the dialogue, the intro, the title screen, the
-trainers — is untouched upstream. **The tools that did the porting live in
-`DAEMONS/tools/`**, not here.
-
-## What is not ported, and why
-
-- **`CONSENSUS`.** §2.5 added it as a move on the Game Boy, where it had to be
-  *inserted* before STRUGGLE because the AI treats any ID above STRUGGLE as
-  "not a move". Gen 3 has 355 moves to Gen 1's 166 and no such assert, so here
-  it is an append — but it still needs a slot, a name, an animation and a
-  battle script, and none of that is a rename.
-- **Item descriptions for anything we did not rename.** Twelve are written. The
-  rest are still upstream's.
-
-The MARKS *are* ported now. An earlier version of this file said they were not:
-badges have no bag slot and no description in Gen 3, which is true, but they do
-have **names**, as individual symbols in `src/strings.c`. "Not an item" is not
-the same as "has no name".
+L and R are the game's now: the default BUTTON MODE is `LR`, with HELP moved
+into the START menu, so R says the last line again on the map, R is
+PERSPECTIVE in battle, and L and R choose PLAY's octave.
 
 ## Branches
 
@@ -211,4 +237,8 @@ to pret and its contributors.
 
 [pret]: https://github.com/pret/pokefirered
 [daemons]: https://github.com/CodeMusic/DAEMONS
+[wiki]: https://github.com/CodeMusic/DAEMONS/wiki
+[releases]: https://github.com/CodeMusic/DAEMONS/releases
+[todo]: https://github.com/CodeMusic/DAEMONS/blob/main/docs/TODO.md
+[companion]: https://github.com/CodeMusic/daemons-companion
 [gb]: https://github.com/CodeMusic/pokered-daemons
