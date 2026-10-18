@@ -5,6 +5,7 @@
 #include "battle_controllers.h"
 #include "battle_interface.h"
 #include "battle_bg.h"
+#include "daemons_signature.h"
 #include "decompress.h"
 #include "graphics.h"
 #include "m4a.h"
@@ -43,6 +44,8 @@ EWRAM_DATA u16 gAnimBattlerSpecies[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u8 gAnimCustomPanning = 0;
 
 static void AddSpriteIndex(u16 index);
+static bool8 LoadSignatureTag(u16 tilesTag, u16 paletteTag);
+static void AddSignatureIndex(u16 index);
 static void ClearSpriteIndex(u16 index);
 static void WaitAnimFrameCount(void);
 static void RunAnimScriptCommand(void);
@@ -245,6 +248,47 @@ void LaunchBattleAnimation(const u8 *const animsTable[], u16 tableId, bool8 isMo
     gBattle_WIN0V = 0;
     gBattle_WIN1H = 0;
     gBattle_WIN1V = 0;
+
+    // T-392 P1: the routine's own signature, on top of its picture (src/daemons_signature.c). Its glyph sheet and
+    // ink are loaded and registered here as loadspritegfx does, so `end` frees them; a tag the script itself loads
+    // later is a second copy `end` frees too (no release script loads either: the 2026-10-08 drafts are withdrawn).
+    if (isMoveAnim && DaemonsSignature_Wants(tableId))
+    {
+        bool8 loaded = LoadSignatureTag(ANIM_TAG_DAEMONS_GLYPHS, 0)
+                    && LoadSignatureTag(0, DaemonsSignature_WantsSplash(tableId) ? ANIM_TAG_DAEMONS_GLYPHS : ANIM_TAG_DAEMONS_INK);
+        if (loaded)
+            DaemonsSignature_Start(tableId);
+    }
+}
+
+// The tiles of one battle-anim tag and/or the palette of another, loaded once and registered for `end` to free.
+static bool8 LoadSignatureTag(u16 tilesTag, u16 paletteTag)
+{
+    if (tilesTag != 0 && GetSpriteTileStartByTag(tilesTag) == 0xFFFF)
+    {
+        LoadCompressedSpriteSheetUsingHeap(&gBattleAnimPicTable[GET_TRUE_SPRITE_INDEX(tilesTag)]);
+        if (GetSpriteTileStartByTag(tilesTag) == 0xFFFF)
+            return FALSE;
+        AddSignatureIndex(GET_TRUE_SPRITE_INDEX(tilesTag));
+    }
+    if (paletteTag != 0 && IndexOfSpritePaletteTag(paletteTag) == 0xFF)
+    {
+        LoadCompressedSpritePaletteUsingHeap(&gBattleAnimPaletteTable[GET_TRUE_SPRITE_INDEX(paletteTag)]);
+        if (IndexOfSpritePaletteTag(paletteTag) == 0xFF)
+            return FALSE;
+        AddSignatureIndex(GET_TRUE_SPRITE_INDEX(paletteTag));
+    }
+    return TRUE;
+}
+
+static void AddSignatureIndex(u16 index)
+{
+    s32 i;
+
+    for (i = 0; i < ANIM_SPRITE_INDEX_COUNT; i++)
+        if (sAnimSpriteIndexArray[i] == index)
+            return;
+    AddSpriteIndex(index);
 }
 
 void DestroyAnimSprite(struct Sprite *sprite)
@@ -471,6 +515,13 @@ static void Cmd_end(void)
      || sMonAnimTaskIdArray[0] != TASK_NONE || sMonAnimTaskIdArray[1] != TASK_NONE)
     {
         sSoundAnimFramesToWait = 0;
+        sAnimFramesToWait = 1;
+        return;
+    }
+
+    // T-392 P1: the routine's signature may run up to 12 frames past its picture, and is cut there.
+    if (DaemonsSignature_Holds())
+    {
         sAnimFramesToWait = 1;
         return;
     }

@@ -308,6 +308,10 @@
 #define DAEMONS_GLYPH_CONVERGE 4
 #define DAEMONS_GLYPH_SWEEP    5
 #define DAEMONS_GLYPH_RETURN   6
+// T-392 P1: the signature's three new paths (src/daemons_signature.c) -- FROZEN holds, LOGIC steps, ENTROPY scatters
+#define DAEMONS_GLYPH_HOLD     7
+#define DAEMONS_GLYPH_STEP     8
+#define DAEMONS_GLYPH_SCATTER  9
 #define DAEMONS_GLYPH_BITS     0
 #define DAEMONS_GLYPH_NOTES    1
 
