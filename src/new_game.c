@@ -462,6 +462,7 @@ void NewGameInitData(void)
     StringCopy(gSaveBlock1Ptr->rivalName, rivalName);
     ResetTrainerTowerResults();
     DaemonsDeriveTrainerId();
+    FlagSet(FLAG_STREAM_MOVED);   // T-420: a new game has no old STREAM bits to carry across
     //  T-394: a debug game starts as a normal one does; the kit is GAME EVENTS' EVERYTHING (DEBUG menu).
 }
 

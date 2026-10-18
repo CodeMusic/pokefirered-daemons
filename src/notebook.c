@@ -546,9 +546,15 @@ static const struct NotebookNote *FindNote(u16 flag)
 }
 
 //  T-417: sixty-four SEEN flags to a block; the second block takes seen 64 and up.
+//  T-420: neither block may run into the flag after it. A `seen` past the second block is DAEMONS check_lexicon's to
+//  catch (and gbanotebook.py's), since a table's contents cannot be asserted on here.
+STATIC_ASSERT(FLAG_NOTEBOOK_SEEN_0 + NOTEBOOK_SEEN_BLOCK <= FLAG_NOTEBOOK_SEEN_MIGRATED, NotebookSeenBlock0Fits)
+STATIC_ASSERT(FLAG_NOTEBOOK_SEEN_64 == FLAG_NOTEBOOK_SEEN_0 + 0x80 && FLAG_NOTEBOOK_SEEN_64 > FLAG_SONG_HEARD_7
+           && FLAG_NOTEBOOK_SEEN_64 + NOTEBOOK_SEEN_BLOCK <= FLAG_HOLIDAY_GIFT_COMMON_JAN, NotebookSeenBlock64Fits)
 static u16 SeenFlag(const struct NotebookNote *note)
 {
-    return note->seen < 64 ? FLAG_NOTEBOOK_SEEN_0 + note->seen : FLAG_NOTEBOOK_SEEN_64 + (note->seen - 64);
+    return note->seen < NOTEBOOK_SEEN_BLOCK ? FLAG_NOTEBOOK_SEEN_0 + note->seen
+                                            : FLAG_NOTEBOOK_SEEN_64 + (note->seen - NOTEBOOK_SEEN_BLOCK);
 }
 
 static void MarkSeen(u16 flag)

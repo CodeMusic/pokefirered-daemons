@@ -5,6 +5,7 @@
 #include "cable_club.h"
 #include "credits.h"
 #include "event_data.h"
+#include "teachy_tv.h"   // T-420: TeachyTvRepairOldSave
 #include "event_object_movement.h"
 #include "event_scripts.h"
 #include "field_camera.h"
@@ -1807,6 +1808,8 @@ void CB2_ContinueSavedGame(void)
     //  selectable in OPTIONS for anyone who wants it; it is simply no longer what a save wakes up in.
     if (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_HELP)
         gSaveBlock2Ptr->optionsButtonMode = OPTIONS_BUTTON_MODE_LR;
+    //  T-420: a save made before the STREAM's flags moved out from under OPUS's, carried across once.
+    TeachyTvRepairOldSave();
     FieldClearVBlankHBlankCallbacks();
     StopMapMusic();
     ResetSafariZoneFlag_();
@@ -2448,6 +2451,9 @@ static bool32 LoadMap_QLPlayback(u8 *state)
 
 void CB2_EnterFieldFromQuestLog(void)
 {
+    //  T-420: a CONTINUE with a recap ("Previously on your quest") comes in here, after the save is loaded again,
+    //  and never through CB2_ContinueSavedGame -- so the one-time repair is made on both doors.
+    TeachyTvRepairOldSave();
     FieldClearVBlankHBlankCallbacks();
     StopMapMusic();
     gGlobalFieldTintMode = QL_TINT_BACKUP_GRAYSCALE;

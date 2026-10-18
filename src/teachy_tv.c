@@ -172,10 +172,87 @@ static const struct WindowTemplate sWindowTemplates[] =
 // the first half, says the second half, and walks off. Nothing else about a
 // show was ever per-lesson art -- see 9.16.
 // A MARK show is offered only once its mark is held, and the seen flag is what
-// lets the host say a new one is up. Nine unused vanilla flags, 0x4A7-0x4AF,
-// referenced nowhere in the base game.
-#define FLAG_STREAM_SEEN_HOSTING  FLAG_UNUSED_0x4A7
-#define FLAG_STREAM_SEEN_MARK1    FLAG_UNUSED_0x4A8
+// lets the host say a new one is up. T-420: these were vanilla's spare 0x4A7 + a
+// computed nine, unnamed, and OPUS's two flags were later put on MARK2's and
+// MARK3's. They are named one by one in flags.h now, in the DAEMONS block, and the
+// computed ranges below are held to the names at compile time.
+#define STREAM_MARKS (TTVSCR_MARK8 - TTVSCR_MARK1 + 1)
+STATIC_ASSERT(STREAM_MARKS == 8, StreamHasEightMarks)
+STATIC_ASSERT(FLAG_STREAM_SEEN_MARK1 + 7 == FLAG_STREAM_SEEN_MARK8
+           && FLAG_STREAM_SEEN_MARK2 == FLAG_STREAM_SEEN_MARK1 + 1 && FLAG_STREAM_SEEN_MARK3 == FLAG_STREAM_SEEN_MARK1 + 2
+           && FLAG_STREAM_SEEN_MARK4 == FLAG_STREAM_SEEN_MARK1 + 3 && FLAG_STREAM_SEEN_MARK5 == FLAG_STREAM_SEEN_MARK1 + 4
+           && FLAG_STREAM_SEEN_MARK6 == FLAG_STREAM_SEEN_MARK1 + 5 && FLAG_STREAM_SEEN_MARK7 == FLAG_STREAM_SEEN_MARK1 + 6,
+              StreamSeenMarksAreTheirNames)
+STATIC_ASSERT(FLAG_STREAM_TOLD_MARK1 + 7 == FLAG_STREAM_TOLD_MARK8
+           && FLAG_STREAM_TOLD_MARK2 == FLAG_STREAM_TOLD_MARK1 + 1 && FLAG_STREAM_TOLD_MARK3 == FLAG_STREAM_TOLD_MARK1 + 2
+           && FLAG_STREAM_TOLD_MARK4 == FLAG_STREAM_TOLD_MARK1 + 3 && FLAG_STREAM_TOLD_MARK5 == FLAG_STREAM_TOLD_MARK1 + 4
+           && FLAG_STREAM_TOLD_MARK6 == FLAG_STREAM_TOLD_MARK1 + 5 && FLAG_STREAM_TOLD_MARK7 == FLAG_STREAM_TOLD_MARK1 + 6,
+              StreamToldMarksAreTheirNames)
+STATIC_ASSERT(TTVSCR_ROOT7 == TTVSCR_COUNT - 1 && FLAG_STREAM_SEEN_ROOT1 + 6 == FLAG_STREAM_SEEN_ROOT7
+           && FLAG_STREAM_SEEN_ROOT2 == FLAG_STREAM_SEEN_ROOT1 + 1 && FLAG_STREAM_SEEN_ROOT3 == FLAG_STREAM_SEEN_ROOT1 + 2
+           && FLAG_STREAM_SEEN_ROOT4 == FLAG_STREAM_SEEN_ROOT1 + 3 && FLAG_STREAM_SEEN_ROOT5 == FLAG_STREAM_SEEN_ROOT1 + 4
+           && FLAG_STREAM_SEEN_ROOT6 == FLAG_STREAM_SEEN_ROOT1 + 5, StreamSeenRootsAreTheirNames)
+//  and every one of them is in the DAEMONS block, where nothing of vanilla's lives
+STATIC_ASSERT(FLAG_STREAM_SEEN_HOSTING >= DAEMONS_FLAGS_START && FLAG_STREAM_MOVED <= DAEMONS_FLAGS_END
+           && FLAG_STREAM_TOLD_HOSTING >= DAEMONS_FLAGS_START && FLAG_STREAM_SEEN_ROOT7 <= DAEMONS_FLAGS_END,
+              StreamFlagsAreOurs)
+
+//  T-420: where a save made before the move kept them. HOSTING, MARK1, then MARK2..8 -- but MARK2's bit was also
+//  FLAG_GOT_OPUS and MARK3's FLAG_OPUS_ANNOUNCED, so those two are read from the bag below, never from here.
+#define OLD_STREAM_SEEN_HOSTING  0x4A7
+#define OLD_STREAM_SEEN_MARK1    0x4A8
+#define OLD_STREAM_SEEN_MARK4    0x4AB   // .. 0x4AF: MARK4..MARK8
+STATIC_ASSERT(OLD_STREAM_SEEN_MARK1 + 1 == FLAG_GOT_OPUS && OLD_STREAM_SEEN_MARK1 + 2 == FLAG_OPUS_ANNOUNCED,
+              OldStreamBitsSharedWithOpus)
+
+//  T-420. Once per save, on CONTINUE (overworld.c), before the map loads -- CALLOW's REPO reads FLAG_GOT_OPUS to lay
+//  out its shelf. A new game sets FLAG_STREAM_MOVED, so only a save made before the move ever gets here.
+//    - HOSTING, MARK1 and MARK4..8: their old bits meant only "seen", so they carry straight across.
+//    - OPUS: FLAG_GOT_OPUS is whether OPUS is held, in the bag or the PC (a KEY ITEM cannot be sold or tossed), so a
+//      MARK2 show that set it without the shelf puts OPUS back on the shelf. FLAG_OPUS_ANNOUNCED fires only with OPUS
+//      in the bag, so it is kept only while OPUS is held.
+//    - MARK2 and MARK3: a bit set while OPUS is NOT held can only have come from the show, so it carries across;
+//      with OPUS held it cannot be told from OPUS, and the show is left unseen -- it offers itself as new, harmlessly.
+//    - Then the seven old bits are cleared, so vanilla's spares are spare again.
+void TeachyTvRepairOldSave(void)
+{
+    u8 i;
+    bool8 heldOpus, oldMark2, oldMark3;
+
+    if (FlagGet(FLAG_STREAM_MOVED))
+        return;
+    heldOpus = CheckBagHasItem(ITEM_OPUS, 1) || CheckPCHasItem(ITEM_OPUS, 1);
+    oldMark2 = FlagGet(FLAG_GOT_OPUS);
+    oldMark3 = FlagGet(FLAG_OPUS_ANNOUNCED);
+
+    if (FlagGet(OLD_STREAM_SEEN_HOSTING))
+        FlagSet(FLAG_STREAM_SEEN_HOSTING);
+    if (FlagGet(OLD_STREAM_SEEN_MARK1))
+        FlagSet(FLAG_STREAM_SEEN_MARK1);
+    if (oldMark2 && !heldOpus)
+        FlagSet(FLAG_STREAM_SEEN_MARK2);
+    if (oldMark3 && !heldOpus)
+        FlagSet(FLAG_STREAM_SEEN_MARK3);
+    for (i = 0; i < 5; i++)
+    {
+        if (FlagGet(OLD_STREAM_SEEN_MARK4 + i))
+            FlagSet(FLAG_STREAM_SEEN_MARK4 + i);
+        FlagClear(OLD_STREAM_SEEN_MARK4 + i);
+    }
+    FlagClear(OLD_STREAM_SEEN_HOSTING);
+    FlagClear(OLD_STREAM_SEEN_MARK1);
+
+    if (heldOpus)
+    {
+        FlagSet(FLAG_GOT_OPUS);
+    }
+    else
+    {
+        FlagClear(FLAG_GOT_OPUS);
+        FlagClear(FLAG_OPUS_ANNOUNCED);
+    }
+    FlagSet(FLAG_STREAM_MOVED);
+}
 
 //  T-405: an understanding's lecture is offered once the understanding is held, in sBrainLobes' order.
 static const u16 sRootShowFlags[TTVSCR_COUNT - TTVSCR_ROOT1] = {

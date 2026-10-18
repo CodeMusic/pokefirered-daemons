@@ -691,6 +691,14 @@ static const struct ExamQuestion sQuestions_Error[] =
 
 static const u8 sSection_Error[] = _("ERROR");
 
+//  T-420: the answers take a var per five questions from VAR_SCHOOL_EXAM_ANSWERS, and the var after the last one is
+//  VAR_SCHOOL_SEASON. A section added below must be added to this sum too -- the second assert holds the count.
+#define EXAM_QUESTIONS (ARRAY_COUNT(sQuestions_Language) + ARRAY_COUNT(sQuestions_Attention) + ARRAY_COUNT(sQuestions_Memory) \
+                      + ARRAY_COUNT(sQuestions_Categories) + ARRAY_COUNT(sQuestions_Learning) + ARRAY_COUNT(sQuestions_Bias) \
+                      + ARRAY_COUNT(sQuestions_Error))
+STATIC_ASSERT(VAR_SCHOOL_EXAM_ANSWERS + (EXAM_QUESTIONS + QS_PER_VAR - 1) / QS_PER_VAR <= VAR_SCHOOL_SEASON,
+              ExamAnswersStopBeforeSeason)
+
 //  One row per floor. A section added here is a section on the paper; nothing else changes.
 static const struct ExamSection sSections[] =
 {
@@ -702,6 +710,7 @@ static const struct ExamSection sSections[] =
     { sSection_Bias, sQuestions_Bias, ARRAY_COUNT(sQuestions_Bias) },
     { sSection_Error, sQuestions_Error, ARRAY_COUNT(sQuestions_Error) },
 };
+STATIC_ASSERT(ARRAY_COUNT(sSections) == 7, ExamQuestionsCountsEverySection)   // T-420: see EXAM_QUESTIONS
 
 //  ---- the screen's words
 static const u8 sText_Finish[]     = _("FINISH EXAM");

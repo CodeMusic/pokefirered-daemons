@@ -1225,10 +1225,13 @@
 #define FLAG_HIDDEN_ITEM_SSANNE_EXTERIOR_LAVA_COOKIE                       (FLAG_HIDDEN_ITEMS_START + 190)
 
 // Unused hidden item flags
+//  T-420 (2026-10-18): 0x4A7, 0x4A8 and 0x4AB-0x4AF are free again. The STREAM's HOSTING and MARK shows kept their
+//  SEEN flags here as 0x4A7 + a computed nine, unnamed, so T-197 and T-203 took 0x4A9 and 0x4AA for OPUS on top of
+//  MARK2's and MARK3's shows. Those flags are now FLAG_STREAM_SEEN_* in the DAEMONS block, and TeachyTvRepairOldSave
+//  (teachy_tv.c) carries a save made before that across once, then clears these seven -- so a new use is safe.
 #define FLAG_UNUSED_0x4A7               0x4A7 // Unused Flag
 #define FLAG_UNUSED_0x4A8               0x4A8 // Unused Flag
-//  T-197: OPUS has been taken off the shelf. Spends one of the nine spare vanilla flags 0x4A7-0x4AF,
-//  two of which teachy_tv.c already uses.
+//  T-197: OPUS has been taken off the shelf.
 #define FLAG_GOT_OPUS                   0x4A9
 //  T-203: the one beat OPUS gets, and it gets it once.
 #define FLAG_OPUS_ANNOUNCED             0x4AA
@@ -1531,8 +1534,9 @@
 
 #define FLAGS_COUNT (FLAG_0x8FF + 1)
 
-//  OURS. T-17: vanilla had nine free flags and the STREAM took all nine, so
-//  the next feature that wants one has nowhere to put it.
+//  OURS. T-17: vanilla had nine free flags (0x4A7-0x4AF), so the next feature that
+//  wants one had nowhere to put it. (T-17 believed the STREAM had taken all nine; it had,
+//  and OPUS took two of them again -- T-420 moved the STREAM's here and freed seven.)
 //
 //  The vanilla block ends at 0x8FF and its array ends with it -- flags[] runs
 //  0x0EE0 to 0x1000 in SaveBlock1 and vars[] begins immediately after, so it
@@ -1550,8 +1554,16 @@
 //  flag cannot be right: it has to re-arm when a NEW show unlocks and not
 //  when an old one is still unwatched, and there is no free VAR to hold a
 //  count in. Nine flags out of a thousand is the cheaper answer.
+//  Named one by one (T-420): teachy_tv.c computes MARK1 + n, and its STATIC_ASSERTs hold the names to that.
 #define FLAG_STREAM_TOLD_HOSTING      (DAEMONS_FLAGS_START + 0x0)
 #define FLAG_STREAM_TOLD_MARK1        (DAEMONS_FLAGS_START + 0x1)
+#define FLAG_STREAM_TOLD_MARK2        (DAEMONS_FLAGS_START + 0x2)
+#define FLAG_STREAM_TOLD_MARK3        (DAEMONS_FLAGS_START + 0x3)
+#define FLAG_STREAM_TOLD_MARK4        (DAEMONS_FLAGS_START + 0x4)
+#define FLAG_STREAM_TOLD_MARK5        (DAEMONS_FLAGS_START + 0x5)
+#define FLAG_STREAM_TOLD_MARK6        (DAEMONS_FLAGS_START + 0x6)
+#define FLAG_STREAM_TOLD_MARK7        (DAEMONS_FLAGS_START + 0x7)
+#define FLAG_STREAM_TOLD_MARK8        (DAEMONS_FLAGS_START + 0x8)
 //  T-22. 4.33's scene is eight steps and he works up through them, so the
 //  game has to remember which one he has reached. One flag per step, and the
 //  ninth talk clears all eight -- he goes round again, because nobody checks
@@ -1693,11 +1705,18 @@
 //  DAEMONS docs/notebook_notes.json (tools/gbanotebook.py) and never reused. MIGRATED: the first time a save opens the
 //  NOTEBOOK after T-403, everything already in it counts as read, so an old save does not light up everywhere.
 #define FLAG_NOTEBOOK_SEEN_0          (DAEMONS_FLAGS_START + 0x200)   // .. + 0x23F: 64
+#define NOTEBOOK_SEEN_BLOCK           64    // each block's size (notebook.c's SeenFlag); two blocks, so seen < 128
 #define FLAG_NOTEBOOK_SEEN_MIGRATED   (DAEMONS_FLAGS_START + 0x240)
 
 //  T-405 (the user, 2026-10-16): an understanding's STREAM lecture, once watched. Never announced -- an understanding
 //  arrives silently (T-252) -- so there is no TOLD flag beside it.
-#define FLAG_STREAM_SEEN_ROOT1        (DAEMONS_FLAGS_START + 0x250)   // .. + 0x256: 7
+#define FLAG_STREAM_SEEN_ROOT1        (DAEMONS_FLAGS_START + 0x250)
+#define FLAG_STREAM_SEEN_ROOT2        (DAEMONS_FLAGS_START + 0x251)
+#define FLAG_STREAM_SEEN_ROOT3        (DAEMONS_FLAGS_START + 0x252)
+#define FLAG_STREAM_SEEN_ROOT4        (DAEMONS_FLAGS_START + 0x253)
+#define FLAG_STREAM_SEEN_ROOT5        (DAEMONS_FLAGS_START + 0x254)
+#define FLAG_STREAM_SEEN_ROOT6        (DAEMONS_FLAGS_START + 0x255)
+#define FLAG_STREAM_SEEN_ROOT7        (DAEMONS_FLAGS_START + 0x256)
 
 //  T-417 P2 (the user, 2026-10-17; docs/private/draft-play-2026-10-17.md 9, 11): PLAY's songs. A song LEARNED is in the
 //  SONGBOOK (a NOTEBOOK section) and is listened for as it is played: O CHRISTMAS TREE the first time any fir hums it
@@ -1773,6 +1792,20 @@
 #define FLAG_HIDE_HOLIDAY_VISITOR            (DAEMONS_FLAGS_START + 0x324)
 #define HOLIDAY_GIFT_FLAG_COUNT              24   // from FLAG_HOLIDAY_GIFT_COMMON_JAN
 //  END genholidays
+
+//  T-420 (2026-10-18): the STREAM's HOSTING and MARK shows, once watched. They were vanilla's 0x4A7 + nine, computed and
+//  unnamed, and OPUS's two flags landed on MARK2's and MARK3's. teachy_tv.c computes MARK1 + n; its STATIC_ASSERTs hold
+//  these names to that. STREAM_MOVED: TeachyTvRepairOldSave has carried this save's old bits across (set on a new game).
+#define FLAG_STREAM_SEEN_HOSTING      (DAEMONS_FLAGS_START + 0x380)
+#define FLAG_STREAM_SEEN_MARK1        (DAEMONS_FLAGS_START + 0x381)
+#define FLAG_STREAM_SEEN_MARK2        (DAEMONS_FLAGS_START + 0x382)
+#define FLAG_STREAM_SEEN_MARK3        (DAEMONS_FLAGS_START + 0x383)
+#define FLAG_STREAM_SEEN_MARK4        (DAEMONS_FLAGS_START + 0x384)
+#define FLAG_STREAM_SEEN_MARK5        (DAEMONS_FLAGS_START + 0x385)
+#define FLAG_STREAM_SEEN_MARK6        (DAEMONS_FLAGS_START + 0x386)
+#define FLAG_STREAM_SEEN_MARK7        (DAEMONS_FLAGS_START + 0x387)
+#define FLAG_STREAM_SEEN_MARK8        (DAEMONS_FLAGS_START + 0x388)
+#define FLAG_STREAM_MOVED             (DAEMONS_FLAGS_START + 0x389)
 
 #define DAEMONS_FLAGS_COUNT           0x400
 #define DAEMONS_FLAGS_END             (DAEMONS_FLAGS_START + DAEMONS_FLAGS_COUNT - 1)

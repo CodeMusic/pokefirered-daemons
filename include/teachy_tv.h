@@ -49,3 +49,4 @@ void SetTeachyTvControllerModeToResume(void);
 s8 TeachyTvFirstUntoldShow(void);
 void TeachyTvMarkShowAsTold(u8 script);
 void TeachyTvMarkEveryUnlockedShowAsTold(void);
+void TeachyTvRepairOldSave(void);   // T-420
