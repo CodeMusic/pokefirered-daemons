@@ -103,6 +103,7 @@
 #define HEAD_GAP       12
 #define KEY_MARK_X     12       // the key's note, at the staff's left
 #define KEY_MARK_Y     22
+#define SHEET_KEY      10       // B FLAT: the BAND'S SHEET's key (O CHRISTMAS TREE's), SELECT on the wheel once it is held
 #define KEY_NAME_X     26
 #define RING_MAX       16       // the last sixteen notes, listened in
 #define MOTIF_MAX      12       // the longest song (tools/genplaysongs.py holds it to this)
@@ -891,6 +892,13 @@ static u16 EchoLength(const struct PlaySong *tune)
     return t + ECHO_DELAY + ECHO_TAIL;
 }
 
+// T-417: a note drifting north (SEQUEL THE GUARDIAN's, toward a grove that way) would cross the staff, and sprites draw
+// over BG0 -- so while the staff is up, a drifting note that reaches it goes under it: it is not drawn.
+static bool8 UnderStaff(struct Play *play, u8 spriteId)
+{
+    return play->windowId != WINDOW_NONE && gSprites[spriteId].y + gSprites[spriteId].y2 < STAFF_H * 8 + 4;
+}
+
 // The echo, a frame at a time: each note on SE2 when its time comes (and its joined note leaps), and again on SE3,
 // softer, ECHO_DELAY frames on. While it sounds, what the song does goes on with it: SEQUEL THE GUARDIAN's notes
 // travel off together the way the grove lies, and THE SHIMMERING CANVAS twinkles, a colour at a time, over what is
@@ -929,7 +937,7 @@ static bool8 Echo(struct Play *play)
             continue;
         gSprites[play->joined[i]].x2 = ox;
         gSprites[play->joined[i]].y2 = oy + (play->pulse[i] ? -3 : 0);
-        gSprites[play->joined[i]].invisible = flicker && play->after == AFTER_DRIFT;
+        gSprites[play->joined[i]].invisible = play->after == AFTER_DRIFT && (flicker || UnderStaff(play, play->joined[i]));
         if (play->pulse[i])
             play->pulse[i]--;
     }
@@ -941,7 +949,7 @@ static bool8 Echo(struct Play *play)
                 continue;
             gSprites[play->joinDots[i]].x2 = ox;
             gSprites[play->joinDots[i]].y2 = oy;
-            gSprites[play->joinDots[i]].invisible = flicker;
+            gSprites[play->joinDots[i]].invisible = flicker || UnderStaff(play, play->joinDots[i]);
         }
     }
     else if (play->after == AFTER_SPARKLE)
@@ -1276,19 +1284,24 @@ static void Task_Play(u8 taskId)
         if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
+            VarSet(VAR_PLAY_KEY, play->key);   // the wheel opens here next time
             play->timer = 0;
             play->state = STATE_FOLD;
             break;
         }
-        if (JOY_REPT(DPAD_RIGHT) || JOY_REPT(DPAD_LEFT))
+        if (JOY_REPT(DPAD_RIGHT) || JOY_REPT(DPAD_LEFT)
+         || (JOY_NEW(SELECT_BUTTON) && FlagGet(FLAG_NOTEBOOK_LOOSE_KEY) && play->key != SHEET_KEY))
         {
-            play->key = (play->key + (JOY_REPT(DPAD_RIGHT) ? 1 : 11)) % 12;
+            if (JOY_NEW(SELECT_BUTTON))
+                play->key = SHEET_KEY;   // the BAND'S SHEET's key, once it is held
+            else
+                play->key = (play->key + (JOY_REPT(DPAD_RIGHT) ? 1 : 11)) % 12;
             PlaceWheel(play);
             PrintKeyName(play);
             Play_SoundNote(play->instrument, sKeyTonic[play->key], FALSE);   // the key's own note, as it turns
             play->breath = 0;
             play->fading = FALSE;
-            play->heldButton = JOY_HELD(DPAD_RIGHT) ? DPAD_RIGHT : DPAD_LEFT;
+            play->heldButton = JOY_HELD(DPAD_RIGHT) ? DPAD_RIGHT : JOY_HELD(DPAD_LEFT) ? DPAD_LEFT : SELECT_BUTTON;
         }
         break;
     case STATE_FOLD:
@@ -1378,6 +1391,7 @@ void Play_Start(void)
         return;
     }
     play->instrument = PLAY_INSTRUMENT;
+    play->key = VarGet(VAR_PLAY_KEY) % 12;   // the last key chosen (C, the first time)
     play->state = STATE_WAIT;
     play->fading = TRUE;
     taskId = CreateTask(Task_Play, 90);

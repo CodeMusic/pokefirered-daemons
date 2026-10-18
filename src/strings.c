@@ -1151,7 +1151,7 @@ const u8 gText_HatchedFromEgg[] = _("{STR_VAR_1} hatched from the EGG!");
 const u8 gText_NickHatchPrompt[] = _("Would you like to nickname the newly\nhatched {STR_VAR_1}?");
 const u8 gString_OutOfCoins[] = _("You've run out of COINS.\nGame over!");
 const u8 gString_QuitPlaying[] = _("Quit playing?");
-const u8 gString_SlotMachineControls[] = _("{DPAD_LEFTRIGHT}COMBOS {DPAD_DOWN}WAGER {A_BUTTON}STOP {B_BUTTON}EXIT");
+const u8 gString_SlotMachineControls[] = _("{DPAD_LEFTRIGHT}PAYS {DPAD_DOWN}WAGER {A_BUTTON}STOP {B_BUTTON}EXIT");   // T-422: the card shows the pays and the day's reason now (DRAFT)
 const u8 gText_TeachyTV[] = _("おしえテレビ");
 const u8 gText_End[] = _("おしまい");
 

@@ -3224,6 +3224,10 @@ extern const u32 gItemIcon_Diploma[];
 extern const u32 gItemIconPalette_Diploma[];
 extern const u32 gItemIcon_Guide[];          // T-302
 extern const u32 gItemIconPalette_Guide[];
+extern const u32 gItemIcon_Harp[];   // T-417
+extern const u32 gItemIconPalette_Harp[];
+extern const u32 gItemIcon_PlayFlute[];   // T-417
+extern const u32 gItemIconPalette_PlayFlute[];
 extern const u32 gItemIconPalette_UpGrade[];
 extern const u32 gItemIcon_ShellBell[];
 extern const u32 gItemIconPalette_Shell[];
