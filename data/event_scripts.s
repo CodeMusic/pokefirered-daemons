@@ -1432,6 +1432,7 @@ Text_TestMsg::
 	.include "data/scripts/daemons_debug.inc"
 	.include "data/scripts/stream.inc"
 	.include "data/scripts/notebook.inc"
+	.include "data/scripts/play.inc"   @ T-417 P2: what a song played opens
 	.include "data/scripts/notebook_documents.inc"   @ T-224, tools/gbadocs.py
 	.include "data/scripts/school.inc"
 	.include "data/scripts/companion.inc"   @ T-371

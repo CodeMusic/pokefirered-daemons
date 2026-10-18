@@ -1699,6 +1699,22 @@
 //  arrives silently (T-252) -- so there is no TOLD flag beside it.
 #define FLAG_STREAM_SEEN_ROOT1        (DAEMONS_FLAGS_START + 0x250)   // .. + 0x256: 7
 
+//  T-417 P2 (the user, 2026-10-17; docs/private/draft-play-2026-10-17.md 9, 11): PLAY's songs. A song LEARNED is in the
+//  SONGBOOK (a NOTEBOOK section) and is listened for as it is played: O CHRISTMAS TREE the first time any fir hums it
+//  (field_specials.c), the seven when each is heard in its ROOT's place (P4). 0x260 is kept for FLAG_GOT_INSTRUMENT.
+//  NEXUS_LIT: O CHRISTMAS TREE has been played to THE NEXUS's Christmas tree.
+#define FLAG_SONG_FIR                 (DAEMONS_FLAGS_START + 0x261)
+#define FLAG_SONG_1                   (DAEMONS_FLAGS_START + 0x262)   // the seven, in src/play.c's order (PLAY_SONG_1 ..)
+#define FLAG_SONG_2                   (DAEMONS_FLAGS_START + 0x263)
+#define FLAG_SONG_3                   (DAEMONS_FLAGS_START + 0x264)
+#define FLAG_SONG_4                   (DAEMONS_FLAGS_START + 0x265)
+#define FLAG_SONG_5                   (DAEMONS_FLAGS_START + 0x266)
+#define FLAG_SONG_6                   (DAEMONS_FLAGS_START + 0x267)
+#define FLAG_SONG_7                   (DAEMONS_FLAGS_START + 0x268)
+#define FLAG_NEXUS_LIT                (DAEMONS_FLAGS_START + 0x269)
+//  T-417 P2: the NOTEBOOK's second block of SEEN flags -- seen 64 and up (tools/gbanotebook.py spills into it).
+#define FLAG_NOTEBOOK_SEEN_64         (DAEMONS_FLAGS_START + 0x280)   // .. + 0x2BF: 64
+
 #define DAEMONS_FLAGS_COUNT           0x400
 #define DAEMONS_FLAGS_END             (DAEMONS_FLAGS_START + DAEMONS_FLAGS_COUNT - 1)
 #define DAEMONS_FLAGS_SIZE            (DAEMONS_FLAGS_COUNT / 8)

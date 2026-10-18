@@ -10,6 +10,7 @@
 #include "string_util.h"
 #include "task.h"
 #include "book_reader.h"
+#include "play.h"   // T-417: a SONGBOOK page's notes
 #include "constants/songs.h"
 
 //  T-223: THE NOTEBOOK AND THE TEXTBOOK, READ LIKE BOOKS (docs/school.md 9, 6).
@@ -59,6 +60,7 @@ enum { VIEW_PAGE, VIEW_CONTENTS, VIEW_CHAPTER, VIEW_TOPIC, VIEW_COVER, VIEW_GUID
 #define NB_TOP          20
 #define NB_PITCH        13
 #define NB_LINES        10
+#define SB_MIDDLE_C     112     // T-417: the SONGBOOK's staff -- step 0's y; a line every three pixels, E4 to F5
 
 //  The textbook spread
 #define TB_LEFT_X       8
@@ -98,6 +100,7 @@ struct BookReader
     bool8 focusRight;       // GUIDE contents: the cursor is in the chapters, not the sections
     bool8 torn;             // GUIDE: the REVIEW BOARD's copy (T-311)
     u8 qr;                  // T-315: a QR code on the last page (BOOK_QR_*), or none
+    u8 song;                // T-417: a SONGBOOK page -- its song (PLAY_SONG_*) plus one, or 0
     u8 *blank;              // the empty sheet or spread, drawn once: filling it per pixel costs a quarter second
     u8 *blankPage;          // GUIDE: its reading page, which is not the contents' spread, so it is kept apart
     u16 lineStart[BR_MAX_LINES];
@@ -475,6 +478,12 @@ static void DrawNotebook(void)
         Print(BR_FONT, sInk, NB_TEXT_X, NB_TOP + i * NB_PITCH - 1, Line(first + i));
     if (sBook->qr != BOOK_QR_NONE && sBook->page + 1 == sBook->pageCount)       // T-315: the last page is the code
         DrawQr(sQrCodes[sBook->qr], (NB_MARGIN_X + 234) / 2, 86, C_PAPER, C_INK);
+    if (sBook->song != 0 && sBook->page == 0)                                   // T-417: the song's staff
+    {
+        Rect(C_PAPER, NB_TEXT_X, SB_MIDDLE_C - 22, 226 - NB_TEXT_X, 30);
+        for (i = 0; i < 5; i++)
+            Rect(C_INK, NB_TEXT_X, SB_MIDDLE_C - 3 * (i + 1), 226 - NB_TEXT_X, 1);
+    }
 
     if (sBook->page + 1 < sBook->pageCount)                                 // a dog-ear: there is more
     {
@@ -1288,6 +1297,11 @@ static void Task_BookInput(u8 taskId)
             return;
         DestroyTask(taskId);
         FreeAllWindowBuffers();
+        if (sBook->song != 0)
+        {
+            ResetSpriteData();   // T-417: the song's notes (the field loads its own on return)
+            Play_BookSongFree();
+        }
         if (sBook->blank != NULL)
             Free(sBook->blank);
         if (sBook->blankPage != NULL)
@@ -1358,6 +1372,8 @@ static void Task_BookInit(u8 taskId)
         Draw();
         PutWindowTilemap(WIN_BOOK);
         CopyBgTilemapBufferToVram(0);
+        if (sBook->song != 0)
+            Play_BookSong(sBook->song - 1, NB_TEXT_X, SB_MIDDLE_C);   // T-417: its notes, in their colours
         break;
     case 4:
         BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
@@ -1446,6 +1462,12 @@ void BookReader_AddQr(u8 which)
 {
     sBook->qr = which;
     sBook->pageCount++;
+}
+
+//  T-417: a SONGBOOK page -- its notes on a staff under the words, and the key's note at its left once known.
+void BookReader_AddSong(u8 song)
+{
+    sBook->song = song + 1;
 }
 
 //  T-311: the REVIEW BOARD's copy, on the shelf in its lobby.

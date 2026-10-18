@@ -1888,6 +1888,8 @@ void SingingFir_Sing(void)
     u8 taskId = CreateTask(Task_SingingFir, 80);
     u8 objectEventId;
 
+    FlagSet(FLAG_SONG_FIR);   // T-417 P2: heard once, from any fir or the NEXUS's tree, it is in the SONGBOOK
+
     gTasks[taskId].tInKey = gSpecialVar_0x8004;
     gTasks[taskId].tTimer = 16;
     gTasks[taskId].tTreePal = -1;

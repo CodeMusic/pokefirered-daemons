@@ -1,8 +1,11 @@
 #include "global.h"
 #include "gflib.h"
 #include "event_object_lock.h"
+#include "event_data.h"
 #include "event_object_movement.h"
+#include "event_scripts.h"
 #include "field_player_avatar.h"
+#include "fieldmap.h"
 #include "map_name_popup.h"
 #include "menu.h"
 #include "play.h"
@@ -11,10 +14,14 @@
 #include "random.h"
 #include "script.h"
 #include "sound.h"
+#include "string_util.h"
 #include "task.h"
 #include "text_window.h"
 #include "trig.h"
+#include "constants/event_objects.h"
+#include "constants/flags.h"
 #include "constants/items.h"
+#include "constants/maps.h"
 #include "constants/songs.h"
 
 // T-417: PLAY (the user, 2026-10-17; docs/private/draft-play-2026-10-17.md). The edition's instrument -- CONTENT's
@@ -34,8 +41,16 @@
 // draft's sec. 11). The notes ALWAYS SHINE (the user, 2026-10-17): their palette is put back untinted every frame, and
 // HALFTONE's grey passes it by (fieldmap.c).
 //
-// Not yet (P2-P5): recognising a song, the echo, the SONGBOOK, ghost notes, the giver and the palm, the last key used.
-// Every word here is DRAFT.
+// P2 (the user, 2026-10-17): every note goes into a ring of the last sixteen, and after each one the songs PLAY knows
+// are listened for in it -- ORDER ONLY: tempo and octave do not count, and THE KEY DOES. A song played in its own key
+// is MATCHED: its notes rise and hold, a line of dots in their colours joins them, and the song comes back in ECHO --
+// on SE2, and eight frames later on SE3 at two-fifths -- before what it opens happens. The right shape in another key
+// is ALMOST: something answers that it sits wrong. O CHRISTMAS TREE in B-flat, played facing any singing fir, keys it
+// and opens its door (no YES/NO -- it was played open); played to THE NEXUS's Christmas tree, the tree lights. It is
+// listened for from the start, sheet or no sheet (the user: the band's sheet is the hint, not the lock). The other
+// seven are listened for once learned, and their melodies are still to come (P4).
+//
+// Not yet (P3-P5): ghost notes, the giver and the palm, the last key used. Every word here is DRAFT.
 
 #define PLAY_TAG_NOTES 0x1040   // 16x16 x 12, a note of each key's colour
 #define PLAY_TAG_SMALL 0x1041   // 8x8 x 24: twelve wheel dots, then twelve staff heads
@@ -55,8 +70,16 @@
 #define KEY_MARK_X     12       // the key's note, at the staff's left
 #define KEY_MARK_Y     22
 #define KEY_NAME_X     26
+#define RING_MAX       16       // the last sixteen notes, listened in
+#define MOTIF_MAX      8
+#define JOIN_GAP       18       // between the joined notes
+#define JOIN_BELOW     36       // the joined line's lowest note, below the player (above is the staff's)
+#define ECHO_DELAY     8        // SE3 answers SE2 this many frames late
+#define ECHO_SOFT      102      // ...at two-fifths
+#define ECHO_TAIL      24       // frames held after the last echo note
 
-enum { STATE_WAIT, STATE_WHEEL, STATE_FOLD, STATE_PLAY };
+enum { STATE_WAIT, STATE_WHEEL, STATE_FOLD, STATE_PLAY, STATE_JOINED };
+enum { TARGET_NONE, TARGET_FIR, TARGET_NEXUS_TREE };
 
 struct Play
 {
@@ -79,6 +102,49 @@ struct Play
     u8 heads[STAFF_HEADS];
     u8 drift[DRIFT_MAX];
     u16 lentColours[16];
+    s8 ring[RING_MAX];       // P2: the notes played, as semitones from middle C, oldest first
+    u8 ringCount;
+    u8 song;                 // the song matched
+    u8 target;               // what it was played to (TARGET_*)
+    u16 clock;               // frames into the echo
+    s8 echo[MOTIF_MAX];      // the matched notes, as they were played
+    u8 joined[MOTIF_MAX];
+    u8 joinDots[2 * (MOTIF_MAX - 1)];
+    u8 pulse[MOTIF_MAX];
+};
+
+// ------------------------------------------------------------------------------------------------------------ songs
+
+// A song: its key, its motif as pitch classes (C 0 .. B 11) and as staff steps for the SONGBOOK (letters from middle
+// C, so it reads as pitch), and how long each note is held when it echoes. A motif of no notes is still to come.
+struct PlaySong
+{
+    u16 flag;                // learned
+    u8 key;
+    u8 count;
+    const u8 *pcs;
+    const u8 *steps;
+    const u8 *frames;
+};
+
+// O CHRISTMAS TREE's opening, in B-flat: F Bb Bb Bb C D D D -- on the buttons B, DOWN x3, LEFT, UP x3. The fir's own
+// sFirTune (field_specials.c) is the reference; the echo keeps its first eight notes' lengths.
+static const u8 sFir_Pcs[]    = {5, 10, 10, 10, 0, 2, 2, 2};
+static const u8 sFir_Steps[]  = {3, 6, 6, 6, 7, 8, 8, 8};      // F4 B4 B4 B4 C5 D5 D5 D5, on the staff
+static const u8 sFir_Frames[] = {30, 22, 8, 40, 18, 22, 8, 40};
+
+// The seven (the user's starting pairings, TODO T-417): their motifs come from the user's albums (P4). Until then each
+// is a row with no notes -- never listened for, and in the SONGBOOK only in the DEBUG build.
+static const struct PlaySong sSongs[PLAY_SONG_COUNT] =
+{
+    [PLAY_SONG_FIR] = {FLAG_SONG_FIR, 10, ARRAY_COUNT(sFir_Pcs), sFir_Pcs, sFir_Steps, sFir_Frames},
+    [PLAY_SONG_1 + 0] = {FLAG_SONG_1 + 0},   // TWELVE DAYS OF DECEMBER   SLATE / NAMING      TBD
+    [PLAY_SONG_1 + 1] = {FLAG_SONG_1 + 1},   // THE REALIZATION           SLOPE / STILL       TBD
+    [PLAY_SONG_1 + 2] = {FLAG_SONG_1 + 2},   // 1001 / FORGIVENESS        SENSE / MEND        TBD
+    [PLAY_SONG_1 + 3] = {FLAG_SONG_1 + 3},   // SEQUEL THE GUARDIAN       FIT / PRACTICE      TBD
+    [PLAY_SONG_1 + 4] = {FLAG_SONG_1 + 4},   // HARMONY IN BALANCE        SKEW / STANCE       TBD
+    [PLAY_SONG_1 + 5] = {FLAG_SONG_1 + 5},   // THE SHIMMERING CANVAS     FRAME / NOTICE      TBD
+    [PLAY_SONG_1 + 6] = {FLAG_SONG_1 + 6},   // REFLECTIONS WITHIN        HEAT / REFLECT      TBD
 };
 
 static const u16 sKeyColours_Pal[] = INCBIN_U16("graphics/play/key_colours.gbapal");
@@ -446,6 +512,10 @@ static bool8 TakeOut(struct Play *play)
         play->heads[i] = MAX_SPRITES;
     for (i = 0; i < DRIFT_MAX; i++)
         play->drift[i] = MAX_SPRITES;
+    for (i = 0; i < MOTIF_MAX; i++)
+        play->joined[i] = MAX_SPRITES;
+    for (i = 0; i < ARRAY_COUNT(play->joinDots); i++)
+        play->joinDots[i] = MAX_SPRITES;
 
     LoadSpriteSheet(&sPlaySheets[0]);
     LoadSpriteSheet(&sPlaySheets[1]);
@@ -464,7 +534,19 @@ static bool8 TakeOut(struct Play *play)
     return TRUE;
 }
 
-static void PutAway(u8 taskId)
+static void ClearJoined(struct Play *play)
+{
+    u8 i;
+
+    for (i = 0; i < MOTIF_MAX; i++)
+        DestroyIf(&play->joined[i]);
+    for (i = 0; i < ARRAY_COUNT(play->joinDots); i++)
+        DestroyIf(&play->joinDots[i]);
+}
+
+// Everything freed, and the field given back -- or, when a song has opened something, handed to that script instead
+// (it locks what it needs, and the field comes back when it ends: script.c).
+static void Teardown(u8 taskId, const u8 *script)
 {
     struct Play *play = GetPlay(taskId);
     u8 i;
@@ -478,6 +560,7 @@ static void PutAway(u8 taskId)
         DestroyIf(&play->heads[i]);
     for (i = 0; i < DRIFT_MAX; i++)
         DestroyIf(&play->drift[i]);
+    ClearJoined(play);
     FreeSpriteTilesByTag(PLAY_TAG_NOTES);
     FreeSpriteTilesByTag(PLAY_TAG_SMALL);
     if (play->borrowed)
@@ -492,13 +575,192 @@ static void PutAway(u8 taskId)
     Free(play);
     DestroyTask(taskId);
     ClearPlayerHeldMovementAndUnfreezeObjectEvents();
-    UnlockPlayerFieldControls();
+    if (script != NULL)
+        ScriptContext_SetupScript(script);
+    else
+        UnlockPlayerFieldControls();
+}
+
+static void PutAway(u8 taskId)
+{
+    Teardown(taskId, NULL);
+}
+
+// ---------------------------------------------------------------------------------------------- listening (P2)
+
+static u8 PitchClass(s8 semitone)
+{
+    return (semitone + 36) % 12;
+}
+
+// What the player faces: a singing fir (any grove's, or the pier's -- the object in front runs EventScript_SingingFir,
+// and it becomes the one talked to, as A would make it), or THE NEXUS's Christmas tree (map tiles, so its two tiles).
+static u8 FacingTarget(void)
+{
+    s16 x, y;
+    u8 objectEventId;
+
+    GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_NEXUS) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_NEXUS)
+     && GetPlayerFacingDirection() == DIR_NORTH && y - MAP_OFFSET == 4 && (x - MAP_OFFSET == 12 || x - MAP_OFFSET == 13))
+        return TARGET_NEXUS_TREE;
+    objectEventId = GetObjectEventIdByPosition(x, y, PlayerGetElevation());
+    if (objectEventId == OBJECT_EVENTS_COUNT || gObjectEvents[objectEventId].localId == LOCALID_PLAYER)
+        return TARGET_NONE;
+    if (GetObjectEventScriptPointerByObjectEventId(objectEventId) != EventScript_SingingFir)
+        return TARGET_NONE;
+    gSelectedObjectEvent = objectEventId;
+    gSpecialVar_LastTalked = gObjectEvents[objectEventId].localId;
+    gSpecialVar_Facing = GetPlayerFacingDirection();
+    return TARGET_FIR;
+}
+
+// The matched notes come back and hold under the player (above is the staff), in the order played, higher for higher; between each two, two dots
+// -- the first in the colour of the note before, the second in the note after's -- so the line blends as it joins.
+static void Join(struct Play *play, u8 song)
+{
+    const struct PlaySong *tune = &sSongs[song];
+    u8 n = tune->count, i, d = 0;
+    s16 x0, low = 127, xs[MOTIF_MAX], ys[MOTIF_MAX];
+
+    for (i = 0; i < DRIFT_MAX; i++)
+        DestroyIf(&play->drift[i]);
+    for (i = 0; i < n; i++)
+    {
+        play->echo[i] = play->ring[play->ringCount - n + i];
+        if (play->echo[i] < low)
+            low = play->echo[i];
+    }
+    x0 = play->cx - (JOIN_GAP * (n - 1)) / 2;
+    if (x0 < 12)
+        x0 = 12;
+    if (x0 + JOIN_GAP * (n - 1) > 228)
+        x0 = 228 - JOIN_GAP * (n - 1);
+    for (i = 0; i < n; i++)
+    {
+        xs[i] = x0 + JOIN_GAP * i;
+        ys[i] = play->cy + JOIN_BELOW - ((play->echo[i] - low) * 3) / 2;
+        play->joined[i] = MakeSprite(play, &sTemplate_Note, xs[i], ys[i], PitchClass(play->echo[i]));
+        play->pulse[i] = 0;
+    }
+    for (i = 0; i + 1 < n; i++)
+    {
+        play->joinDots[d++] = MakeSprite(play, &sTemplate_Small, xs[i] + JOIN_GAP / 3, ys[i] + (ys[i + 1] - ys[i]) / 3,
+                                         PitchClass(play->echo[i]));
+        play->joinDots[d++] = MakeSprite(play, &sTemplate_Small, xs[i] + 2 * JOIN_GAP / 3, ys[i] + 2 * (ys[i + 1] - ys[i]) / 3,
+                                         PitchClass(play->echo[i + 1]));
+    }
+    play->heldButton = 0;    // a breath held into the last note lets go: the echo is the song's now
+    play->fading = TRUE;
+    play->breath = 0;
+    play->song = song;
+    play->clock = 0;
+    play->ringCount = 0;
+    play->state = STATE_JOINED;
+}
+
+// The echo, a frame at a time: each note on SE2 when its time comes (and its joined note leaps), and again on SE3,
+// softer, ECHO_DELAY frames on. TRUE when it has died away.
+static bool8 Echo(struct Play *play)
+{
+    const struct PlaySong *tune = &sSongs[play->song];
+    u16 t = 0;
+    u8 i;
+
+    for (i = 0; i < tune->count; i++)
+    {
+        if (play->clock == t)
+        {
+            Play_SoundNote(play->instrument, play->echo[i], FALSE);
+            m4aMPlayVolumeControl(&gMPlayInfo_SE2, TRACKS_ALL, 256);
+            play->pulse[i] = 6;
+        }
+        if (play->clock == t + ECHO_DELAY)
+        {
+            Play_SoundNote(play->instrument, play->echo[i], TRUE);
+            m4aMPlayVolumeControl(&gMPlayInfo_SE3, TRACKS_ALL, ECHO_SOFT);
+        }
+        t += tune->frames[i];
+    }
+    for (i = 0; i < tune->count; i++)
+    {
+        if (play->joined[i] == MAX_SPRITES)
+            continue;
+        gSprites[play->joined[i]].y2 = play->pulse[i] ? -3 : 0;
+        if (play->pulse[i])
+            play->pulse[i]--;
+    }
+    if (play->clock == t + ECHO_DELAY && play->instrument == PLAY_FLUTE)
+    {
+        m4aMPlayStop(&gMPlayInfo_SE2);   // a breath does not ring on by itself
+        m4aMPlayStop(&gMPlayInfo_SE3);
+    }
+    return ++play->clock > t + ECHO_DELAY + ECHO_TAIL;
+}
+
+// After every note: is the end of what has been played a song? In its own key, it is; the right shape in any other
+// key (or the right notes, in a key that is not the song's) is ALMOST. A known song: O CHRISTMAS TREE always, the
+// seven once learned. TRUE if the task has been handed on.
+static bool8 Listen(u8 taskId)
+{
+    struct Play *play = GetPlay(taskId);
+    const struct PlaySong *tune;
+    const s8 *tail;
+    u8 song, i, shift;
+    bool8 same;
+
+    for (song = 0; song < PLAY_SONG_COUNT; song++)
+    {
+        tune = &sSongs[song];
+        if (tune->count == 0 || play->ringCount < tune->count)
+            continue;
+        if (song != PLAY_SONG_FIR && !FlagGet(tune->flag))
+            continue;
+        tail = &play->ring[play->ringCount - tune->count];
+        shift = (PitchClass(tail[0]) + 12 - tune->pcs[0]) % 12;
+        same = TRUE;
+        for (i = 1; i < tune->count && same; i++)
+            same = ((PitchClass(tail[i]) + 12 - tune->pcs[i]) % 12 == shift);
+        if (!same)
+            continue;
+        play->target = FacingTarget();
+        if (shift == 0 && play->key == tune->key)
+        {
+            Join(play, song);
+            return FALSE;
+        }
+        //  ALMOST: the fir hums its flat version back; anywhere else, a line says so. The instrument goes away for it.
+        Teardown(taskId, play->target == TARGET_FIR ? EventScript_Play_FirAlmost : EventScript_Play_Almost);
+        return TRUE;
+    }
+    return FALSE;
+}
+
+// The echo has died away: what the song opens, if it was played to something -- or the line lets go, and play goes on.
+static bool8 AfterEcho(u8 taskId)
+{
+    struct Play *play = GetPlay(taskId);
+
+    if (play->song == PLAY_SONG_FIR && play->target == TARGET_FIR)
+    {
+        Teardown(taskId, EventScript_Play_FirOpened);
+        return TRUE;
+    }
+    if (play->song == PLAY_SONG_FIR && play->target == TARGET_NEXUS_TREE)
+    {
+        Teardown(taskId, EventScript_Play_NexusLit);
+        return TRUE;
+    }
+    ClearJoined(play);
+    play->state = STATE_PLAY;
+    return FALSE;
 }
 
 // ------------------------------------------------------------------------------------------------------- the task
 
 static void PlayNote(struct Play *play, u8 degree)
 {
+    u8 i;
     s8 octave = 0;
     s16 semitone;
     u8 pc;
@@ -523,6 +785,13 @@ static void PlayNote(struct Play *play, u8 degree)
     }
     WriteHead(play, degree, octave, pc);
     SpawnDrift(play, pc);
+    if (play->ringCount == RING_MAX)
+    {
+        for (i = 1; i < RING_MAX; i++)
+            play->ring[i - 1] = play->ring[i];
+        play->ringCount--;
+    }
+    play->ring[play->ringCount++] = semitone;
 }
 
 static void Task_Play(u8 taskId)
@@ -578,9 +847,15 @@ static void Task_Play(u8 taskId)
             if (JOY_NEW(sNoteButtons[d]))
             {
                 PlayNote(play, d);
+                if (Listen(taskId))
+                    return;
                 break;
             }
         }
+        break;
+    case STATE_JOINED:   // the notes hold, joined, while the song comes back in echo; the buttons wait
+        if (Echo(play) && AfterEcho(taskId))
+            return;
         break;
     }
     //  A breath ends when its button is let go.
@@ -590,7 +865,7 @@ static void Task_Play(u8 taskId)
         play->breath = play->breath < 5 ? play->breath : 5;
         play->heldButton = 0;
     }
-    if (play->instrument == PLAY_FLUTE && play->state != STATE_WAIT)
+    if (play->instrument == PLAY_FLUTE && play->state != STATE_WAIT && play->state != STATE_JOINED)
         PlayBreath(&gMPlayInfo_SE2, &play->breath, play->fading);
     if (play->state != STATE_WAIT)
         Shine(play);
@@ -623,6 +898,72 @@ void Play_Start(void)
     play->fading = TRUE;
     taskId = CreateTask(Task_Play, 90);
     SetWordTaskArg(taskId, tPlay, (u32)play);
+}
+
+// ------------------------------------------------------------------------------------------------- the SONGBOOK
+
+// DRAFT, every word. Until the key is known (the band's sheet held, or a fir keyed) the page says only what the fir
+// hums, and its notes are the plain naturals -- the yellow E and violet B; once it is, they are written with their flats.
+static const u8 sSongPage_FirFlat[] = _("Hummed by the singing firs.\pClose to right, all the way through. Something is missing.");
+static const u8 sSongPage_FirKeyed[] = _("Hummed by the singing firs.\pIn the key of {STR_VAR_1}.");
+static const u8 sSongPage_ToCome[] = _("The melody is still to come.");
+
+static bool8 SongKeyKnown(u8 song)
+{
+    if (song == PLAY_SONG_FIR)
+        return FlagGet(FLAG_NOTEBOOK_LOOSE_KEY) || FlagGet(FLAG_FIR_IN_KEY);
+    return TRUE;
+}
+
+void Play_WriteSongPage(u8 song, u8 *dest)
+{
+    if (song >= PLAY_SONG_COUNT || sSongs[song].count == 0)
+    {
+        StringCopy(dest, sSongPage_ToCome);
+        return;
+    }
+    if (!SongKeyKnown(song))
+    {
+        StringCopy(dest, sSongPage_FirFlat);
+        return;
+    }
+    StringCopy(gStringVar1, sKeyNames[sSongs[song].key]);
+    StringExpandPlaceholders(dest, sSongPage_FirKeyed);
+}
+
+// The NOTEBOOK's page has the screen to itself (book_reader.c resets the sprites when it opens and the field when it
+// closes), so the heads are drawn as the staff's are: the same 8x8 heads, the same three pixels a line. The key's own
+// note stands at the staff's left once the key is known. `middleC` is the y of step 0; book_reader draws the lines.
+void Play_BookSong(u8 song, s16 left, s16 middleC)
+{
+    const struct PlaySong *tune;
+    struct Play paint = {0};   // only its palette slot is read
+    bool8 known;
+    u8 i, pc, spriteId;
+
+    if (song >= PLAY_SONG_COUNT || sSongs[song].count == 0)
+        return;
+    tune = &sSongs[song];
+    known = SongKeyKnown(song);
+    LoadSpriteSheet(&sPlaySheets[0]);
+    LoadSpriteSheet(&sPlaySheets[1]);
+    paint.palSlot = LoadSpritePalette(&sKeyColoursPalette);
+    if (paint.palSlot == 0xFF)
+        return;
+    if (known && (spriteId = MakeSprite(&paint, &sTemplate_Note, left + 8, middleC - 9, tune->key)) != MAX_SPRITES)
+        gSprites[spriteId].oam.priority = 0;   // over the page
+    for (i = 0; i < tune->count; i++)
+    {
+        pc = known ? tune->pcs[i] : sNaturalSemi[tune->steps[i] % 7];
+        MakeSprite(&paint, &sTemplate_Small, left + 32 + 20 * i, middleC - (tune->steps[i] * 3) / 2, 12 + pc);
+    }
+}
+
+void Play_BookSongFree(void)
+{
+    FreeSpriteTilesByTag(PLAY_TAG_NOTES);
+    FreeSpriteTilesByTag(PLAY_TAG_SMALL);
+    FreeSpritePaletteByTag(PALTAG_KEY_COLOURS);
 }
 
 // -------------------------------------------------------------------------------------------------------- DEBUG

@@ -15,6 +15,7 @@
 #include "pokedex.h"   // T-257
 #include "data.h"   // T-257: gSpeciesNames
 #include "book_reader.h"
+#include "play.h"   // T-417: the SONGBOOK
 #include "notebook.h"
 #include "constants/songs.h"
 #include "data/notebook_documents.h"   // T-224: the documents tools/gbadocs.py has placed
@@ -53,6 +54,7 @@ enum
     NB_PROSPECTUS,
     NB_PEER_REVIEW,
     NB_INSIGHT,            // T-390: what a MARK and its understanding make together, in the player's own words
+    NB_SONGBOOK,           // T-417: the songs PLAY knows, written as coloured notes
     NB_SECTION_COUNT
 };
 
@@ -64,7 +66,8 @@ enum
 //  stored, or the exam's record written on demand. ARG 1 means the text's first paragraph is a heading the
 //  page's title already carries -- the syllabus's COURSE SYLLABUS / 1F LANGUAGE -- and the page leaves it off. The floors' boards were filed here once (batch 5); since
 //  T-223 they are the TEXTBOOK's own chapters, and a book does not need a copy of itself in the notebook.
-enum { NB_KIND_TEXT, NB_KIND_EXAM, NB_KIND_CHOICES };
+//  T-417: SONG is a SONGBOOK page -- ARG is its song (PLAY_SONG_*), and play.c writes it and its notes.
+enum { NB_KIND_TEXT, NB_KIND_EXAM, NB_KIND_CHOICES, NB_KIND_SONG };
 
 struct NotebookEntry
 {
@@ -86,6 +89,7 @@ static const u8 sSection_TheFile[]        = _("THE FILE");
 static const u8 sSection_Prospectus[]     = _("PROSPECTUS");
 static const u8 sSection_PeerReview[]     = _("PEER REVIEW");
 static const u8 sSection_Insight[]        = _("INSIGHT");
+static const u8 sSection_Songbook[]       = _("SONGBOOK");   // T-417, DRAFT
 
 static const u8 *const sSectionNames[NB_SECTION_COUNT] =
 {
@@ -98,6 +102,7 @@ static const u8 *const sSectionNames[NB_SECTION_COUNT] =
     [NB_PROSPECTUS]      = sSection_Prospectus,
     [NB_PEER_REVIEW]     = sSection_PeerReview,
     [NB_INSIGHT]         = sSection_Insight,
+    [NB_SONGBOOK]        = sSection_Songbook,
 };
 
 static const u8 sText_Close[] = _("CLOSE");
@@ -355,6 +360,18 @@ static const u8 sTitle_Review_Transcript[] = _("TRANSCRIPT");
 static const u8 sTitle_Review_Sealed[]     = _("SEALED");
 static const u8 sTitle_Prospectus_Scores[]  = _("REVIEW SCORES");
 
+//  T-417: the SONGBOOK's titles, DRAFT. The seven are the user's starting pairings (TODO T-417), one per ROOT/MARK.
+static const u8 sTitle_Song_Fir[]          = _("O CHRISTMAS TREE");
+#if DAEMONS_DEBUG
+static const u8 sTitle_Song_1[]            = _("TWELVE DAYS OF DECEMBER");   // SLATE / NAMING
+static const u8 sTitle_Song_2[]            = _("THE REALIZATION");           // SLOPE / STILL
+static const u8 sTitle_Song_3[]            = _("FORGIVENESS OFFERED");       // SENSE / MEND
+static const u8 sTitle_Song_4[]            = _("SEQUEL THE GUARDIAN");       // FIT / PRACTICE
+static const u8 sTitle_Song_5[]            = _("HARMONY IN BALANCE");        // SKEW / STANCE
+static const u8 sTitle_Song_6[]            = _("THE SHIMMERING CANVAS");     // FRAME / NOTICE
+static const u8 sTitle_Song_7[]            = _("REFLECTIONS WITHIN");        // HEAT / REFLECT
+#endif
+
 #include "data/wisdom.h"   // T-390: the seven insights, written by DAEMONS tools/gbawisdom.py
 
 //  T-403 (the user, 2026-10-15): where each entry was found, what it is, and its SEEN flag -- DAEMONS
@@ -431,6 +448,18 @@ static const struct NotebookEntry sEntries[] =
     { NB_PEER_REVIEW,  NB_KIND_TEXT,  0, FLAG_NOTEBOOK_REVIEW_SEALED,   0, sTitle_Review_Sealed,       SaffronCity_MrPsychicsHouse_Text_NotMineToDeliver },
     //  T-390 (bible 0.7, Wisdom; rule 2 amended): INSIGHT grows one line a pair and is never numbered.
     NB_INSIGHT_ENTRIES
+    //  T-417: the SONGBOOK. O CHRISTMAS TREE, then the seven -- whose melodies are still to come from the user, so their
+    //  rows are the DEBUG build's only (P4 brings each one when its motif is chosen). Titles DRAFT.
+    { NB_SONGBOOK,     NB_KIND_SONG,  PLAY_SONG_FIR, FLAG_SONG_FIR,    0, sTitle_Song_Fir,            NULL },
+#if DAEMONS_DEBUG
+    { NB_SONGBOOK,     NB_KIND_SONG,  PLAY_SONG_1 + 0, FLAG_SONG_1 + 0, 0, sTitle_Song_1,             NULL },
+    { NB_SONGBOOK,     NB_KIND_SONG,  PLAY_SONG_1 + 1, FLAG_SONG_1 + 1, 0, sTitle_Song_2,             NULL },
+    { NB_SONGBOOK,     NB_KIND_SONG,  PLAY_SONG_1 + 2, FLAG_SONG_1 + 2, 0, sTitle_Song_3,             NULL },
+    { NB_SONGBOOK,     NB_KIND_SONG,  PLAY_SONG_1 + 3, FLAG_SONG_1 + 3, 0, sTitle_Song_4,             NULL },
+    { NB_SONGBOOK,     NB_KIND_SONG,  PLAY_SONG_1 + 4, FLAG_SONG_1 + 4, 0, sTitle_Song_5,             NULL },
+    { NB_SONGBOOK,     NB_KIND_SONG,  PLAY_SONG_1 + 5, FLAG_SONG_1 + 5, 0, sTitle_Song_6,             NULL },
+    { NB_SONGBOOK,     NB_KIND_SONG,  PLAY_SONG_1 + 6, FLAG_SONG_1 + 6, 0, sTitle_Song_7,             NULL },
+#endif
 };
 
 #if DAEMONS_DEBUG
@@ -511,12 +540,18 @@ static const struct NotebookNote *FindNote(u16 flag)
     return NULL;
 }
 
+//  T-417: sixty-four SEEN flags to a block; the second block takes seen 64 and up.
+static u16 SeenFlag(const struct NotebookNote *note)
+{
+    return note->seen < 64 ? FLAG_NOTEBOOK_SEEN_0 + note->seen : FLAG_NOTEBOOK_SEEN_64 + (note->seen - 64);
+}
+
 static void MarkSeen(u16 flag)
 {
     const struct NotebookNote *note = FindNote(flag);
 
     if (note != NULL)
-        FlagSet(FLAG_NOTEBOOK_SEEN_0 + note->seen);
+        FlagSet(SeenFlag(note));
 }
 
 //  Unread: in the NOTEBOOK and never opened -- from the list, or full screen where it was found.
@@ -524,7 +559,7 @@ static bool8 EntryUnread(u32 i)
 {
     const struct NotebookNote *note = FindNote(sEntries[i].flag);
 
-    return note != NULL && EntryHeld(i) && !FlagGet(FLAG_NOTEBOOK_SEEN_0 + note->seen);
+    return note != NULL && EntryHeld(i) && !FlagGet(SeenFlag(note));
 }
 
 static bool8 SectionHasUnread(u8 section)
@@ -828,6 +863,8 @@ void Notebook_LoadEntry(void)
         School_WriteExamRecord(gStringVar4);
     else if (sEntries[gSpecialVar_0x8006].kind == NB_KIND_CHOICES)
         Notebook_WriteChoices(gStringVar4);
+    else if (sEntries[gSpecialVar_0x8006].kind == NB_KIND_SONG)
+        Play_WriteSongPage(sEntries[gSpecialVar_0x8006].arg, gStringVar4);   // T-417
     else
         StringExpandPlaceholders(gStringVar4, sEntries[gSpecialVar_0x8006].text);
 }
@@ -913,7 +950,7 @@ void Notebook_ReadEntry(void)
     if (gSpecialVar_0x8006 >= ARRAY_COUNT(sEntries))
         gSpecialVar_0x8006 = 0;
     Notebook_LoadEntry();
-    if (sEntries[gSpecialVar_0x8006].arg == 1)
+    if (sEntries[gSpecialVar_0x8006].kind == NB_KIND_TEXT && sEntries[gSpecialVar_0x8006].arg == 1)
     {
         while (*text != EOS && *text != CHAR_PROMPT_CLEAR)
             text++;
@@ -921,6 +958,8 @@ void Notebook_ReadEntry(void)
             text++;
     }
     BookReader_OpenNotebookPage(sEntries[gSpecialVar_0x8006].title, text);
+    if (sEntries[gSpecialVar_0x8006].kind == NB_KIND_SONG)
+        BookReader_AddSong(sEntries[gSpecialVar_0x8006].arg);   // T-417: its notes, on a staff under the words
     AddPageQr(sEntries[gSpecialVar_0x8006].flag);
     MarkSeen(sEntries[gSpecialVar_0x8006].flag);   // T-403
 }

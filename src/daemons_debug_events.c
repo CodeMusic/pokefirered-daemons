@@ -35,7 +35,7 @@
 
 #if DAEMONS_DEBUG
 
-enum { PG_EVENTS, PG_MARKS, PG_NOTEBOOK, PG_DRIVERS, PG_ROOTS, PG_COUNT };
+enum { PG_EVENTS, PG_MARKS, PG_NOTEBOOK, PG_DRIVERS, PG_ROOTS, PG_SONGS, PG_COUNT };
 enum { R_PAGE, R_GIVE, R_TOGGLE, R_ASK };   // R_ASK gives, after a YES
 
 enum
@@ -47,6 +47,7 @@ enum
     EV_NOTEBOOK, EV_NOTEBOOK_FULL,
     EV_DRIVERS_ALL, EV_DRIVER1, EV_DRIVER8 = EV_DRIVER1 + 7,
     EV_ROOTS_ALL, EV_ROOT1, EV_ROOT7 = EV_ROOT1 + 6, EV_INSIGHTS_AGAIN,
+    EV_SONGS_ALL, EV_SONG1, EV_SONG8 = EV_SONG1 + PLAY_SONG_COUNT - 1, EV_NEXUS_LIT,   // T-417 P2
 };
 
 struct DbgRow { const u8 *name; u8 kind; u8 arg; };
@@ -128,6 +129,17 @@ static const u8 sName_Root5[] = _("STANCE (SCORN)");
 static const u8 sName_Root6[] = _("MEND (RETURN)");
 static const u8 sName_Root7[] = _("PRACTICE (GUIDE)");
 static const u8 sName_InsightsAgain[] = _("LET INSIGHTS ARRIVE AGAIN");
+//  T-417 P2: the SONGBOOK, each song learned or not (the seven have no melody yet), and THE NEXUS's tree lit.
+static const u8 sName_Songs[]    = _("SONGBOOK >");
+static const u8 sName_Song0[]    = _("O CHRISTMAS TREE");
+static const u8 sName_Song1[]    = _("TWELVE DAYS (SLATE)");
+static const u8 sName_Song2[]    = _("REALIZATION (SLOPE)");
+static const u8 sName_Song3[]    = _("FORGIVENESS (SENSE)");
+static const u8 sName_Song4[]    = _("GUARDIAN (FIT)");
+static const u8 sName_Song5[]    = _("HARMONY (SKEW)");
+static const u8 sName_Song6[]    = _("CANVAS (FRAME)");
+static const u8 sName_Song7[]    = _("REFLECTIONS (HEAT)");
+static const u8 sName_NexusLit[] = _("THE NEXUS LIT");
 
 //  THE STORY'S ORDER: the opening, the shoes and the INDEX, OPUS on THE REPO's shelf, then CAIRN's MARK and NOTEBOOK,
 //  the school, the ship, the DRIVERS, BRAZEN's tea and REVEAL, HALFTONE, the sleeper, the GUIDE, and last what only
@@ -145,6 +157,7 @@ static const struct DbgRow sRows_Events[] = {
     { sName_Notebook,    R_PAGE,   PG_NOTEBOOK },
     { sName_School,      R_TOGGLE, EV_SCHOOL },
     { sName_Instrument,  R_TOGGLE, EV_INSTRUMENT },   // T-417: CONTENT's HARP comes at the school
+    { sName_Songs,       R_PAGE,   PG_SONGS },        // T-417 P2
     { sName_Ticket,      R_TOGGLE, EV_TICKET },
     { sName_FirKey,      R_TOGGLE, EV_FIR_KEY },
     { sName_Groves,      R_TOGGLE, EV_GROVES },
@@ -188,12 +201,22 @@ static const struct DbgRow sRows_Roots[] = {
     { sName_InsightsAgain, R_GIVE, EV_INSIGHTS_AGAIN },
 };
 
+static const struct DbgRow sRows_Songs[] = {
+    { sName_All, R_TOGGLE, EV_SONGS_ALL },
+    { sName_Song0, R_TOGGLE, EV_SONG1 + 0 }, { sName_Song1, R_TOGGLE, EV_SONG1 + 1 },
+    { sName_Song2, R_TOGGLE, EV_SONG1 + 2 }, { sName_Song3, R_TOGGLE, EV_SONG1 + 3 },
+    { sName_Song4, R_TOGGLE, EV_SONG1 + 4 }, { sName_Song5, R_TOGGLE, EV_SONG1 + 5 },
+    { sName_Song6, R_TOGGLE, EV_SONG1 + 6 }, { sName_Song7, R_TOGGLE, EV_SONG1 + 7 },
+    { sName_NexusLit, R_TOGGLE, EV_NEXUS_LIT },
+};
+
 static const struct { const struct DbgRow *rows; u8 count; } sPages[PG_COUNT] = {
     [PG_EVENTS]   = { sRows_Events,   ARRAY_COUNT(sRows_Events) },
     [PG_MARKS]    = { sRows_Marks,    ARRAY_COUNT(sRows_Marks) },
     [PG_NOTEBOOK] = { sRows_Notebook, ARRAY_COUNT(sRows_Notebook) },
     [PG_DRIVERS]  = { sRows_Drivers,  ARRAY_COUNT(sRows_Drivers) },
     [PG_ROOTS]    = { sRows_Roots,    ARRAY_COUNT(sRows_Roots) },
+    [PG_SONGS]    = { sRows_Songs,    ARRAY_COUNT(sRows_Songs) },
 };
 
 static const u8 sText_Title_Events[] = _("GAME EVENTS, in story order.\nA gives or takes. + held, · not.");
@@ -201,8 +224,10 @@ static const u8 sText_Title_Marks[] = _("MARKS: each leader beaten, its\nMARK he
 static const u8 sText_Title_Notebook[] = _("NOTEBOOK: empty, or every page.\nB goes back.");
 static const u8 sText_Title_Drivers[] = _("DRIVERS: held in the TOOLKIT,\nwhich is enough. B goes back.");
 static const u8 sText_Title_Roots[] = _("UNDERSTANDINGS, each with what\nit needs. B goes back.");
+static const u8 sText_Title_Songs[] = _("SONGBOOK: each song learned.\nB goes back.");
 static const u8 *const sTitles[PG_COUNT] = {
     sText_Title_Events, sText_Title_Marks, sText_Title_Notebook, sText_Title_Drivers, sText_Title_Roots,
+    sText_Title_Songs,
 };
 static const u8 sText_Given[] = _("{STR_VAR_1}: given.");
 static const u8 sText_Taken[] = _("{STR_VAR_1}: taken away.");
@@ -352,7 +377,15 @@ static bool8 IsHeld(u8 ev)
             if (!FlagGet(sRoots[i][0]))
                 return FALSE;
         return TRUE;
+    case EV_SONGS_ALL:
+        for (i = 0; i < PLAY_SONG_COUNT; i++)
+            if (!FlagGet(FLAG_SONG_FIR + i))
+                return FALSE;
+        return TRUE;
+    case EV_NEXUS_LIT:    return FlagGet(FLAG_NEXUS_LIT);
     }
+    if (ev >= EV_SONG1 && ev <= EV_SONG8)
+        return FlagGet(FLAG_SONG_FIR + (ev - EV_SONG1));
     if (ev >= EV_MARK1 && ev <= EV_MARK8)
         return MarkHeld(ev - EV_MARK1);
     if (ev >= EV_DRIVER1 && ev <= EV_DRIVER8)
@@ -434,7 +467,14 @@ static void Apply(u8 ev, bool8 on)
         for (i = 0; i < ARRAY_COUNT(sInsights); i++)
             FlagClear(sInsights[i]);
         return;
+    case EV_SONGS_ALL:
+        for (i = 0; i < PLAY_SONG_COUNT; i++)
+            SetFlag(FLAG_SONG_FIR + i, on);
+        return;
+    case EV_NEXUS_LIT:    SetFlag(FLAG_NEXUS_LIT, on); return;
     }
+    if (ev >= EV_SONG1 && ev <= EV_SONG8)
+        SetFlag(FLAG_SONG_FIR + (ev - EV_SONG1), on);
     if (ev >= EV_MARK1 && ev <= EV_MARK8)
         SetMark(ev - EV_MARK1, on);
     else if (ev >= EV_DRIVER1 && ev <= EV_DRIVER8)

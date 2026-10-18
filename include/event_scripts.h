@@ -1228,6 +1228,11 @@ extern const u8 DaemonsDebug_EventScript_Invoke[];
 //  T-179's R = AGAIN ships in every build, so its script is declared outside the debug guard.
 extern const u8 Daemons_EventScript_Again[];
 extern const u8 EventScript_Notebook[];   // T-216
+extern const u8 EventScript_SingingFir[];        // T-417 P2: PLAY knows a fir by its script
+extern const u8 EventScript_Play_FirOpened[];    // T-417 P2: data/scripts/play.inc
+extern const u8 EventScript_Play_FirAlmost[];
+extern const u8 EventScript_Play_Almost[];
+extern const u8 EventScript_Play_NexusLit[];
 extern const u8 EventScript_Textbook[];   // T-219
 extern const u8 EventScript_Guide[];      // T-300
 extern const u8 EventScript_Diploma[];    // T-218
