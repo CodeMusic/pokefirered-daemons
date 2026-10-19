@@ -1110,18 +1110,65 @@ static u16 DaemonsSeasonColour(u16 index, u16 colour, u8 season, bool8 bloom)
     return colour;
 }
 
+// T-408 (the user, 2026-10-19): EACH GROVE'S UNIVERSE IN ITS OWN LIGHT -- the same trees and ground recoloured to the
+// universe's mood (DRAFT). Only the grove's own map, only its BG rows as they load (the dialogue rows are never loaded
+// here), on top of the season and under the faded print and the watch's light, so dusk still falls in every universe.
+// People, daemons and the fir are sprites and keep their colours. HALFTONE's grey outranks it; BREATHVERSE is no grove.
+// The table and the shift are DAEMONS tools/gbagrovemood.py's, which reports how near each mood sits to a type.
+#include "data/grove_moods.h"
+
+static const struct DaemonsGroveMood *DaemonsGroveMoodHere(void)
+{
+    u16 here = gSaveBlock1Ptr->location.mapNum | (gSaveBlock1Ptr->location.mapGroup << 8);
+    u32 i;
+
+    if (DaemonsIsHalftone() || DaemonsIsTimeless())
+        return NULL;
+    for (i = 0; i < ARRAY_COUNT(sGroveMoods); i++)
+    {
+        if (sGroveMoods[i].map == here)
+            return &sGroveMoods[i];
+    }
+    return NULL;
+}
+
+static u16 DaemonsGroveColour(u16 colour, const struct DaemonsGroveMood *mood)
+{
+    s32 ch[3], grey, v, t;
+    u32 i;
+
+    ch[0] = colour & 0x1F;
+    ch[1] = (colour >> 5) & 0x1F;
+    ch[2] = (colour >> 10) & 0x1F;
+    grey = (ch[0] * 77 + ch[1] * 150 + ch[2] * 29) >> 8;
+    for (i = 0; i < 3; i++)
+    {
+        v = grey + ((ch[i] - grey) * mood->sat) / 256;
+        t = (mood->target[i] * grey) / mood->targetGrey;     // the mood's colour at this colour's own lightness
+        if (t > 31)
+            t = 31;
+        v += ((t - v) * mood->amount) / 256;
+        v = 16 + ((v - 16) * mood->contrast) / 256 + mood->lift;
+        ch[i] = v < 0 ? 0 : v > 31 ? 31 : v;
+    }
+    return RGB2(ch[0], ch[1], ch[2]);
+}
+
 static void DaemonsClarityEntries(u16 offset, u16 count)
 {
     s32 amount = DaemonsClarityFade(), r, g, b, grey;
     u16 i, c;
     u8 season = offset < BG_PLTT_ID(NUM_PALS_IN_PRIMARY) ? DaemonsSeasonHere() : SEASON_SUMMER;
     bool8 bloom = DaemonsBloomHere(offset);
+    const struct DaemonsGroveMood *mood = DaemonsGroveMoodHere();
 
-    if (amount == 0 && season == SEASON_SUMMER && !bloom)
+    if (amount == 0 && season == SEASON_SUMMER && !bloom && mood == NULL)
         return;
     for (i = 0; i < count; i++)
     {
         c = DaemonsSeasonColour(offset + i, gPlttBufferUnfaded[offset + i], season, bloom);
+        if (mood != NULL)
+            c = DaemonsGroveColour(c, mood);
         if (amount == 0)
         {
             gPlttBufferUnfaded[offset + i] = c;
