@@ -626,7 +626,7 @@ const struct WindowTemplate sWindowTemplate_DexEntry_SpeciesStats = {
     .tilemapTop = 3,
     .width = 13,
     .height = 8,
-    .paletteNum = 0,
+    .paletteNum = 1,     // T-421: the entry's palette, for the type label now printed here
     .baseBlock = 0x01e8
 };
 
@@ -1965,6 +1965,7 @@ void DexScreen_PrintMonFlavorText(u8 windowId, u16 species, u8 x, u8 y);   // de
 #define DEX_PLTT_TYPE1 12
 #define DEX_PLTT_TYPE2 13
 #define DEX_TYPE_GAP    6
+#define DEX_STATS_DROP  3   // T-421: the stats window's rows under the type label
 
 static void DexScreen_PrintMonType(u8 windowId, u16 species);             // defined below
 static void DexScreen_LoadEntryPalette(u16 species);                      // defined below
@@ -2282,7 +2283,6 @@ static void DexScreen_DrawMarginOrEntry(u16 species)
 
     FillWindowPixelBuffer(sPokedexScreenData->windowIds[2], PIXEL_FILL(0));
     DexScreen_LoadEntryPalette(species);
-    DexScreen_PrintMonType(sPokedexScreenData->windowIds[2], species);
     if (sWorkingsPage != 0)
     {
         sMarginShown = FALSE;
@@ -3488,6 +3488,9 @@ void DexScreen_DrawMonFootprint(u8 windowId, u16 species, u8 x, u8 y)
 //  The entry box does: it is 240 wide and its text starts at y=8, so the strip above it is empty on every
 //  entry in the game. The label sits there, which also puts it beside the entry it belongs to rather than
 //  among the measurements. Drawn from DexScreen_DrawMarginOrEntry so it survives the page being turned over.
+//  T-421 (2026-10-19): and that strip was not empty enough -- the small font's letters reach row 10 and the entry's
+//  first line starts at 8, so the label sat over every entry's top line. It is printed above the NAME now, in the
+//  stats window, which a page turn never redraws (DexScreen_DrawMonDexPage).
 //  T-200. 9.4 says a daemon is coloured by what it IS, and the field test asked the obvious question back:
 //  where does the player LEARN that? The TOOLKIT teaches the chart (T-211); this is where they read it off
 //  the daemon itself. The type is named in the type's own colour, so the word and the body agree.
@@ -3520,10 +3523,10 @@ static void DexScreen_PrintMonType(u8 windowId, u16 species)
     type1 = gSpeciesInfo[species].types[0];
     type2 = gSpeciesInfo[species].types[1];
 
-    DexScreen_AddTextPrinterParameterized(windowId, FONT_SMALL, gTypeNames[type1], 4, 0, 5);
+    DexScreen_AddTextPrinterParameterized(windowId, FONT_SMALL, gTypeNames[type1], 0, 0, 5);   // T-421: flush with the No. under it
     if (type2 != type1)
     {
-        x = 4 + GetStringWidth(FONT_SMALL, gTypeNames[type1], 0) + DEX_TYPE_GAP;
+        x = GetStringWidth(FONT_SMALL, gTypeNames[type1], 0) + DEX_TYPE_GAP;
         DexScreen_AddTextPrinterParameterized(windowId, FONT_SMALL, gTypeNames[type2], x, 0, 6);
     }
 }
@@ -3546,13 +3549,20 @@ static u8 DexScreen_DrawMonDexPage(bool8 justRegistered)
     CopyWindowToVram(sPokedexScreenData->windowIds[0], COPYWIN_GFX);
 
     // Species stats
+    //  T-421 (the user, 2026-10-19): the type label moved here, ABOVE THE NAME, from the top of the entry window,
+    //  where its small-font letters (rows 3-10 of their cell) ran into the entry's first line (y=8) and the panel's
+    //  dividing rule on every entry. The stats window's own top rows were empty; everything under the label drops
+    //  DEX_STATS_DROP pixels to leave a clear row between them, and WT still ends inside the window's 64px. The
+    //  window takes palette 1 (the entry's: palette 0 plus the two type slots) so the words keep their colours.
     FillWindowPixelBuffer(sPokedexScreenData->windowIds[1], PIXEL_FILL(0));
-    DexScreen_PrintMonDexNo(sPokedexScreenData->windowIds[1], FONT_SMALL, sPokedexScreenData->dexSpecies, 0, 8);
-    DexScreen_AddTextPrinterParameterized(sPokedexScreenData->windowIds[1], FONT_NORMAL, gSpeciesNames[sPokedexScreenData->dexSpecies], 28, 8, 0);
-    DexScreen_PrintMonCategory(sPokedexScreenData->windowIds[1], sPokedexScreenData->dexSpecies, 0, 24);
-    DexScreen_PrintMonHeight(sPokedexScreenData->windowIds[1], sPokedexScreenData->dexSpecies, 0, 36);
-    DexScreen_PrintMonWeight(sPokedexScreenData->windowIds[1], sPokedexScreenData->dexSpecies, 0, 48);
-    DexScreen_DrawMonFootprint(sPokedexScreenData->windowIds[1], sPokedexScreenData->dexSpecies, 88, 40);
+    DexScreen_LoadEntryPalette(sPokedexScreenData->dexSpecies);
+    DexScreen_PrintMonType(sPokedexScreenData->windowIds[1], sPokedexScreenData->dexSpecies);
+    DexScreen_PrintMonDexNo(sPokedexScreenData->windowIds[1], FONT_SMALL, sPokedexScreenData->dexSpecies, 0, 8 + DEX_STATS_DROP);
+    DexScreen_AddTextPrinterParameterized(sPokedexScreenData->windowIds[1], FONT_NORMAL, gSpeciesNames[sPokedexScreenData->dexSpecies], 28, 8 + DEX_STATS_DROP, 0);
+    DexScreen_PrintMonCategory(sPokedexScreenData->windowIds[1], sPokedexScreenData->dexSpecies, 0, 24 + DEX_STATS_DROP);
+    DexScreen_PrintMonHeight(sPokedexScreenData->windowIds[1], sPokedexScreenData->dexSpecies, 0, 36 + DEX_STATS_DROP);
+    DexScreen_PrintMonWeight(sPokedexScreenData->windowIds[1], sPokedexScreenData->dexSpecies, 0, 48 + DEX_STATS_DROP);
+    DexScreen_DrawMonFootprint(sPokedexScreenData->windowIds[1], sPokedexScreenData->dexSpecies, 88, 40 + DEX_STATS_DROP);
     PutWindowTilemap(sPokedexScreenData->windowIds[1]);
     CopyWindowToVram(sPokedexScreenData->windowIds[1], COPYWIN_GFX);
 
