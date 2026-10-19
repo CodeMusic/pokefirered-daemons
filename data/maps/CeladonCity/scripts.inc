@@ -17,7 +17,24 @@ CeladonCity_EventScript_OldMan1::
 	end
 
 CeladonCity_EventScript_Woman::
+	goto_if_set FLAG_HIDE_MISC_KANTO_ROCKETS, CeladonCity_EventScript_WomanTakingsBack
 	msgbox CeladonCity_Text_GameCornerIsBadForCitysImage, MSGBOX_NPC
+	end
+
+@ T-427 (the user, 2026-10-19): once CORPUS falls, what the house kept comes back to VERDIGRIS -- with its amount when
+@ there is one
+CeladonCity_EventScript_WomanTakingsBack::
+	lock
+	faceplayer
+	special DaemonsHouse_ReadTake
+	goto_if_eq VAR_RESULT, HOUSE_TAKE_KEPT, CeladonCity_EventScript_WomanTakingsBackAmount
+	msgbox CeladonCity_Text_TakingsCameBack
+	release
+	end
+
+CeladonCity_EventScript_WomanTakingsBackAmount::
+	msgbox CeladonCity_Text_TakingsCameBackAmount
+	release
 	end
 
 CeladonCity_EventScript_OldMan2::

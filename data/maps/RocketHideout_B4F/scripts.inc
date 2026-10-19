@@ -5,6 +5,7 @@ RocketHideout_B4F_MapScripts::
 	.byte 0
 
 RocketHideout_B4F_OnLoad::
+	special DaemonsHouse_PlacePlants   @ T-427
 	setvar NUM_DOOR_GRUNTS_DEFEATED, 0
 	call_if_defeated TRAINER_TEAM_ROCKET_GRUNT_16, RocketHideout_B4F_EventScript_CountGruntDefeated
 	call_if_defeated TRAINER_TEAM_ROCKET_GRUNT_17, RocketHideout_B4F_EventScript_CountGruntDefeated

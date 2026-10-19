@@ -4,6 +4,7 @@ RocketHideout_B1F_MapScripts::
 	.byte 0
 
 RocketHideout_B1F_OnLoad::
+	special DaemonsHouse_PlacePlants   @ T-427
 	call_if_not_defeated TRAINER_TEAM_ROCKET_GRUNT_12 RocketHideout_B1F_EventScript_SetBarrier
 	end
 

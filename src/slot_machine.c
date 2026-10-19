@@ -13,6 +13,7 @@
 #include "strings.h"
 #include "constants/songs.h"
 #include "daemons_casino.h"
+#include "daemons_house.h"
 #include "pokemon_icon.h"
 
 // T-422 (the user, 2026-10-18, confirmed by phone): THE GAME CORNER PLAYS AS THE COMPANION'S CASINO. The reels carry
@@ -1250,6 +1251,7 @@ static u16 CalcPayout(void)
     for (i = 0; i < NUM_MATCH_LINES; i++)
         sSlotMachineState->winFlags[i] = FALSE;
     sSlotMachineState->payout = sSlotMachineState->bet * DaemonsCasino_Pays(sSlotMachineState->outcome);
+    DaemonsHouse_AddPull(sSlotMachineState->bet, sSlotMachineState->payout);   // T-427: what the house keeps
     if (sSlotMachineState->outcome != CASINO_LOSE)
         sSlotMachineState->winFlags[MIDDLE_LINE] = TRUE;
     return sSlotMachineState->outcome;

@@ -354,7 +354,11 @@ struct SaveBlock2
     /*0xAF0*/ struct BerryCrush berryCrush;
     /*0xB00*/ struct PokemonJumpRecords pokeJump;
     /*0xB10*/ struct BerryPickingResults berryPick;
-    /*0xB20*/ u8 filler_B20[0x400 - DAEMONS_FLAGS_SIZE];
+    /*0xB20*/ u8 filler_B20[0x400 - DAEMONS_FLAGS_SIZE - 4];
+    //  T-427: the house's take -- what the GAME CORNER (and the companion's CASINO, at SYNC) kept, in money: bets less
+    //  payouts, negative while the player is ahead. Plain, not XORed as money is; only ever added to. Taken out of the
+    //  filler like the flags below it, so nothing after it moves.
+    /*0xE9C*/ s32 houseTake;
     //  T-17. Taken out of the filler above rather than added after it, so the
     //  struct is exactly the size it was and encryptionKey stays at 0xF20.
     /*0xEA0*/ u8 daemonsFlags[DAEMONS_FLAGS_SIZE];

@@ -15,6 +15,21 @@ CeladonCity_Text_GameCornerIsBadForCitysImage::
     .string "That's why the new GAME CORNER is\n"
     .string "bad for our city's image.$"
 
+@  T-427, DRAFT.
+CeladonCity_Text_TakingsCameBack::
+    .string "Did you hear? Whatever the GAME\n"
+    .string "CORNER kept has come back to\l"
+    .string "VERDIGRIS.\p"
+    .string "It's going on the parks!$"
+
+@  T-427, DRAFT.
+CeladonCity_Text_TakingsCameBackAmount::
+    .string "Did you hear? Whatever the GAME\n"
+    .string "CORNER kept has come back to\l"
+    .string "VERDIGRIS.\p"
+    .string "¥{STR_VAR_1}, to the last coin!\n"
+    .string "It's going on the parks!$"
+
 CeladonCity_Text_BlewItAllAtSlots::
     .string "Moan…\n"
     .string "I blew it all at the slots!\p"

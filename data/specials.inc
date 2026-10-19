@@ -501,4 +501,7 @@ gSpecials::
 	def_special DaemonsHolidayGiftTaken
 	def_special DaemonsHolidayGiftWaits
 	def_special DaemonsHolidayVisitorComes   @ T-416 P4
+	def_special DaemonsHouse_ReadTake   @ T-427
+	def_special DaemonsHouse_PlacePlants
+	def_special DaemonsHouse_PlantHere
 gSpecialsEnd::
