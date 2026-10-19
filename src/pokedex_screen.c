@@ -3224,11 +3224,10 @@ void DexScreen_PrintMonCategory(u8 windowId, u16 species, u8 x, u8 y)
     index = 0;
     if (DexScreen_CanRead(species, FALSE))
     {
-#if REVISION == 0
-        while ((categoryName[index] != CHAR_SPACE) && (index < 11))
-#else
+        //  T-210: the whole category, both words. Rev 0 stopped at the first space, so FIRST PAGE printed as
+        //  "FIRST DAEMON"; every category (84 of them two words) measures 90px or less with the suffix, inside
+        //  the 104px field, and the check below drops the suffix rather than clip should a longer one arrive.
         while ((categoryName[index] != EOS) && (index < 11))
-#endif
         {
             categoryStr[index] = categoryName[index];
             index++;
@@ -3247,7 +3246,8 @@ void DexScreen_PrintMonCategory(u8 windowId, u16 species, u8 x, u8 y)
 
     DexScreen_AddTextPrinterParameterized(windowId, FONT_SMALL, categoryStr, x, y, 0);
     x += GetStringWidth(FONT_SMALL, categoryStr, 0);
-    DexScreen_AddTextPrinterParameterized(windowId, FONT_SMALL, gText_PokedexPokemon, x, y, 0);
+    if (x + GetStringWidth(FONT_SMALL, gText_PokedexPokemon, 0) <= GetWindowAttribute(windowId, WINDOW_WIDTH) * 8)
+        DexScreen_AddTextPrinterParameterized(windowId, FONT_SMALL, gText_PokedexPokemon, x, y, 0);
 }
 
 void DexScreen_PrintMonHeight(u8 windowId, u16 species, u8 x, u8 y)
