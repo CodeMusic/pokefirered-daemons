@@ -54,7 +54,12 @@ VermilionCity_EventScript_FerrySailor::
 	release
 	end
 
+@  T-334 (approved 2026-10-19): with the GLOBAL INDEX held the ferry sails to
+@  NAVEL ROCK with no ticket, as it does to THE ANNEX -- vanilla gated it on the
+@  MYSTIC TICKET, which no ordinary cartridge was ever given, so LUGIA and HO-OH
+@  stood where nothing could reach them.
 VermilionCity_EventScript_CheckHasMysticTicket::
+	goto_if_set FLAG_SYS_NATIONAL_DEX, VermilionCity_EventScript_NavelRockIsOpen
 	goto_if_unset FLAG_ENABLE_SHIP_NAVEL_ROCK, EventScript_SetResultFalse
 	checkitem ITEM_MYSTIC_TICKET
 	goto_if_eq VAR_RESULT, FALSE, EventScript_SetResultFalse
@@ -73,6 +78,11 @@ VermilionCity_EventScript_CheckHasAuroraTicket::
 	goto_if_unset FLAG_ENABLE_SHIP_BIRTH_ISLAND, EventScript_SetResultFalse
 	checkitem ITEM_AURORA_TICKET
 	goto_if_eq VAR_RESULT, FALSE, EventScript_SetResultFalse
+	goto EventScript_SetResultTrue
+	end
+
+VermilionCity_EventScript_NavelRockIsOpen::
+	setflag FLAG_SHOWN_MYSTIC_TICKET
 	goto EventScript_SetResultTrue
 	end
 

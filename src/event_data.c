@@ -105,6 +105,30 @@ void EnableNationalPokedex(void)
     gSaveBlock2Ptr->pokedex.nationalMagic = 0xB9;
     *nationalDexVar = 0x6258;
     FlagSet(FLAG_SYS_NATIONAL_DEX);
+    //  T-334: the three beasts may stand now (DaemonsGlobalIndexLegendFlags kept them hidden until this)
+    FlagClear(FLAG_HIDE_GLOBAL_ENTEI);
+    FlagClear(FLAG_HIDE_GLOBAL_RAIKOU);
+    FlagClear(FLAG_HIDE_GLOBAL_SUICUNE);
+}
+
+//  T-334: the GLOBAL INDEX's fixed encounters that may not stand yet (tools/gbaglobalindex.py places them). Run on
+//  every map load, before the map's objects are read: the three beasts stay hidden until the GLOBAL INDEX is held,
+//  and each edition's own legend stands only in its edition. It only ever SETS a flag -- one that is gone stays gone,
+//  and EnableNationalPokedex is what lets the beasts stand.
+void DaemonsGlobalIndexLegendFlags(void)
+{
+    if (!IsNationalPokedexEnabled())
+    {
+        FlagSet(FLAG_HIDE_GLOBAL_ENTEI);
+        FlagSet(FLAG_HIDE_GLOBAL_RAIKOU);
+        FlagSet(FLAG_HIDE_GLOBAL_SUICUNE);
+    }
+#ifdef FIRERED
+    FlagSet(FLAG_HIDE_GLOBAL_KYOGRE);
+#else
+    FlagSet(FLAG_HIDE_GLOBAL_REGIROCK);
+    FlagSet(FLAG_HIDE_GLOBAL_GROUDON);
+#endif
 }
 
 bool32 IsNationalPokedexEnabled(void)

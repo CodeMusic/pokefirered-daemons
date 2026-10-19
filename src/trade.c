@@ -2759,8 +2759,10 @@ static u32 CanTradeSelectedMon(struct Pokemon * playerParty, int partyCount, int
     if (DaemonIsAway(&playerParty[monIdx]))
         return CANT_TRADE_INVALID_MON;
 
-    // Cant trade Eggs or non-Kanto mons if player doesn't have National Dex
-    if (!IsNationalPokedexEnabled())
+    // Cant trade Eggs or non-Kanto mons if player doesn't have National Dex.
+    // T-334 (approved 2026-10-19): DAEMONS has no GLOBAL INDEX gate on trading either, as T-329 lifted it from
+    // pages, numbers and evolution -- every daemon trades from the start, the ones met on the islands included.
+    if (!DAEMONS_TRADES_EVERY_DAEMON && !IsNationalPokedexEnabled())
     {
         // See comment below
     #ifdef BUGFIX

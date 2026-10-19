@@ -29,6 +29,10 @@ void ClearUpperFlags(void);
 void DisableNationalPokedex(void);
 void EnableNationalPokedex(void);
 bool32 IsNationalPokedexEnabled(void);
+//  T-334: DAEMONS trades every daemon from the start -- the GLOBAL INDEX gates none of it (trade.c, link.c,
+//  link_rfu_3.c). One switch, so the vanilla gate stays readable beside it.
+#define DAEMONS_TRADES_EVERY_DAEMON TRUE
+void DaemonsGlobalIndexLegendFlags(void);   // T-334
 void DisableMysteryEvent(void);
 void EnableMysteryEvent(void);
 bool32 IsMysteryEventEnabled(void);

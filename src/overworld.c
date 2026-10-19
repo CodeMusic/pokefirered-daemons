@@ -774,6 +774,7 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
     Overworld_ClearSavedMusic();
     DaemonsArriveAtUnderstandings();   // T-252: arrived at, never announced
     DaemonsDreamLog_Notice();          // T-412: a milestone just reached starts its dream waiting
+    DaemonsGlobalIndexLegendFlags();   // T-334: the legends that may not stand yet stay hidden
     RunOnTransitionMapScript();
     TryRegenerateRenewableHiddenItems();
     InitMap();
@@ -825,6 +826,7 @@ static void LoadMapFromWarp(bool32 unused)
     Overworld_ClearSavedMusic();
     DaemonsArriveAtUnderstandings();   // T-252: arrived at, never announced
     DaemonsDreamLog_Notice();          // T-412: a milestone just reached starts its dream waiting
+    DaemonsGlobalIndexLegendFlags();   // T-334: the legends that may not stand yet stay hidden
     RunOnTransitionMapScript();
     TryRegenerateRenewableHiddenItems();
     UpdateLocationHistoryForRoamer();

@@ -1865,6 +1865,23 @@
 #define FLAG_GOT_SUBTLE_LAYER                 (DAEMONS_FLAGS_START + 0x3E0)   // T-423: the game lane's block 0x3E0-0x3EF
 #define FLAG_HOUSE_TAKE_FROZEN                (DAEMONS_FLAGS_START + 0x3E1)   // T-427: houseTakeAtFall is recorded
 
+//  BEGIN gbaglobalindex -- T-334: each fixed encounter of the GLOBAL INDEX, once gone (removeobject sets it). The beasts'
+//  and the edition daemons' are also set on every map load while they may not stand (event_data.c,
+//  DaemonsGlobalIndexLegendFlags). Block + 0x140 .. + 0x14F is this tool's.
+#define FLAG_HIDE_GLOBAL_ENTEI               (DAEMONS_FLAGS_START + 0x140)
+#define FLAG_HIDE_GLOBAL_RAIKOU              (DAEMONS_FLAGS_START + 0x141)
+#define FLAG_HIDE_GLOBAL_SUICUNE             (DAEMONS_FLAGS_START + 0x142)
+#define FLAG_HIDE_GLOBAL_CELEBI              (DAEMONS_FLAGS_START + 0x143)
+#define FLAG_HIDE_GLOBAL_JIRACHI             (DAEMONS_FLAGS_START + 0x144)
+#define FLAG_HIDE_GLOBAL_REGIROCK            (DAEMONS_FLAGS_START + 0x145)
+#define FLAG_HIDE_GLOBAL_REGICE              (DAEMONS_FLAGS_START + 0x146)
+#define FLAG_HIDE_GLOBAL_REGISTEEL           (DAEMONS_FLAGS_START + 0x147)
+#define FLAG_HIDE_GLOBAL_LATIOS              (DAEMONS_FLAGS_START + 0x148)
+#define FLAG_HIDE_GLOBAL_GROUDON             (DAEMONS_FLAGS_START + 0x149)
+#define FLAG_HIDE_GLOBAL_KYOGRE              (DAEMONS_FLAGS_START + 0x14A)
+#define FLAG_HIDE_GLOBAL_RAYQUAZA            (DAEMONS_FLAGS_START + 0x14B)
+//  END gbaglobalindex
+
 #define DAEMONS_FLAGS_COUNT           0x400
 #define DAEMONS_FLAGS_END             (DAEMONS_FLAGS_START + DAEMONS_FLAGS_COUNT - 1)
 #define DAEMONS_FLAGS_SIZE            (DAEMONS_FLAGS_COUNT / 8)

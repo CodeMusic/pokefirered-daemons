@@ -349,7 +349,9 @@ static void InitLocalLinkPlayer(void)
     gLocalLinkPlayer.language = gGameLanguage;
     gLocalLinkPlayer.version = gGameVersion + 0x4000;
     gLocalLinkPlayer.lp_field_2 = 0x8000;
-    gLocalLinkPlayer.progressFlags = IsNationalPokedexEnabled();
+    //  T-334: a DAEMONS cart tells its partner it holds the GLOBAL INDEX, so the partner's own trade check
+    //  (trade.c, "Does partner not have National Dex") never refuses a daemon past the first 151.
+    gLocalLinkPlayer.progressFlags = DAEMONS_TRADES_EVERY_DAEMON || IsNationalPokedexEnabled();
     if (FlagGet(FLAG_SYS_CAN_LINK_WITH_RS))
     {
         gLocalLinkPlayer.progressFlags |= 0x10;
