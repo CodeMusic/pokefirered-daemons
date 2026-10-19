@@ -1534,9 +1534,31 @@
 
 #define FLAGS_COUNT (FLAG_0x8FF + 1)
 
-//  OURS. T-17: vanilla had nine free flags (0x4A7-0x4AF), so the next feature that
-//  wants one had nowhere to put it. (T-17 believed the STREAM had taken all nine; it had,
-//  and OPUS took two of them again -- T-420 moved the STREAM's here and freed seven.)
+//  OURS. T-17 made this block believing vanilla had only nine free flags -- the nine it
+//  NAMED unused, 0x4A7-0x4AF (the STREAM had taken all nine, then OPUS two of them again;
+//  T-420 moved the STREAM's here and freed seven). That was never the whole truth.
+//
+//  WHAT IS FREE (T-421, checked 2026-10-19): every FLAG_0x... and FLAG_*UNUSED* constant
+//  above, each name grepped across src/, data/, include/ and asm/ (.c .h .inc .s .json),
+//  every other name with the same value too, every computed flag (BASE + n: TRAINER_FLAGS_START,
+//  FLAG_HIDDEN_ITEMS_START, FLAG_BADGE01_GET, FLAG_HIDE_UNION_ROOM_PLAYER_1, the STREAM's
+//  old bits, the NOTEBOOK's SEEN blocks, the holidays' gifts) and every numeric flag in a
+//  script or a map's json. 599 such constants; 18 are in use -- FLAG_0x838 (the ROM
+//  header's pokedexFlag, set and never read) and FLAG_WONDER_CARD_UNUSED_1..17 (MYSTERY
+//  GIFT's table) -- so 581 vanilla flags are unused, not nine:
+//    0x020-0x027, and 220 among the hide/show flags (0x077-0x22F) -- below STORY_FLAGS_START,
+//      so the QUEST LOG does not record them changing;
+//    23 in the story flags' gaps (0x23E-0x2EB); 0x340-0x3D7, 152; 8 FLAG_HIDDEN_ITEM_UNUSED_
+//      (0x3EF .. 0x464); 0x4A7-0x4A8 and 0x4AB-0x4AF (TeachyTvRepairOldSave reads and clears
+//      them once, on an old save's first CONTINUE); 0x4BD-0x4FF, 67;
+//    0x809-0x81F, 23 before PERMA_SYS_FLAGS_START (the QUEST LOG skips those too); 11 between the
+//      badges and 0x83F; 0x8C3-0x8FF, 61.
+//  NOT 0x33F: it closes the SCHOOL's reserved 0x300-0x33F, and tools/gbadocs.py numbers its
+//  documents from 0x327 up, so its 25th document takes it.
+//  WHERE TO TAKE A NEW ONE: from this DAEMONS block first (about 680 of its 0x400 are unnamed
+//  -- read its comments for a tool's reserved run, and check_lexicon's check_flag_ranges holds
+//  its ranges apart). A vanilla FLAG_0x... only when a flag must live in SaveBlock1: rename
+//  it in place, never add a second name for it, and re-run the grep above first.
 //
 //  The vanilla block ends at 0x8FF and its array ends with it -- flags[] runs
 //  0x0EE0 to 0x1000 in SaveBlock1 and vars[] begins immediately after, so it
