@@ -20,7 +20,7 @@ struct DaemonsSignature
 };
 
 #define SIG_APPROVED    (1 << 0)   // plays in the release ROMs (the debug ROMs play every row)
-#define SIG_OWN_SCRIPT  (1 << 1)   // a union routine: its own script carries the signature where that script plays
+#define SIG_OWN_SCRIPT  (1 << 1)   // a union routine: its own script carries the signature (every ROM, 2026-10-18)
 #define SIG_UNION       (1 << 2)   // the splash's own colours, and the harp and flute both
 #define SIG_NOTES_LEAD  (1 << 3)   // the notes first, then the bits (the CONTEXT side); otherwise bits first
 
@@ -35,10 +35,11 @@ struct DaemonsSignature
 
 // battle_anim.c: does this move's signature play here (and, if so, which glyph palettes it needs loaded)?
 bool8 DaemonsSignature_Wants(u16 move);
-bool8 DaemonsSignature_WantsSplash(u16 move);
+// The tags it needs loaded: the glyph sheet and its ink (or the splash's colours), or on a holiday look the lanes.
+void DaemonsSignature_Tags(u16 move, u16 *tiles, u16 *palette);
 // battle_anim.c, after the tags are loaded and registered: start it.
 void DaemonsSignature_Start(u16 move);
-// battle_anim.c's `end`: TRUE while it still plays, up to 12 frames past the picture; then it is cut.
+// battle_anim.c's `end`: TRUE while it still plays -- in full (the user, 2026-10-18: no cap).
 bool8 DaemonsSignature_Holds(void);
 
 #endif // GUARD_DAEMONS_SIGNATURE_H

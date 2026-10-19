@@ -73,6 +73,21 @@
 #define GIVER_TOWER            4
 #define GIVER_DAWN_OUTDOORS    5
 
+// T-392 P3: a routine's holiday look (sHolidayRoutineLooks; src/daemons_signature.c plays it). The lanes are a
+// mask of the twelve months (bit 0 JAN) and HRL_LANE_BLACK; glyph k wears the (k mod n)-th lane set.
+#define HRL_SHAPE_KEEP     0
+#define HRL_SHAPE_RING     1
+#define HRL_SHAPE_HEART    2
+#define HRL_SHAPE_STARS    3
+#define HRL_SHAPE_SCATTER  4
+#define HRL_SHAPE_SWEEP    5
+#define HRL_SHAPE_FALL     6
+#define HRL_SHAPE_ORBIT    7
+#define HRL_LANE_BLACK     12
+#define HRL_BLEACH         (1 << 0)   // the type's own ink, paled (white, silver, frost: no month)
+#define HRL_TWINKLE        (1 << 1)   // the glyphs blink
+#define HRL_NOTES          (1 << 2)   // every glyph a note
+
 #define HOLIDAY_AREA_LAND  0
 #define HOLIDAY_AREA_FISH  1
 

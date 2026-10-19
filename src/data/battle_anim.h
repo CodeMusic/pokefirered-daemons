@@ -1300,6 +1300,7 @@ const struct CompressedSpriteSheet gBattleAnimPicTable[] =
     {gBattleAnimSpriteGfx_GoldRing, 0x0100, ANIM_TAG_BLUE_RING_2},
     {gBattleAnimSpriteGfx_DaemonsGlyphs, 0x0080, ANIM_TAG_DAEMONS_GLYPHS},   // T-392
     {gBattleAnimSpriteGfx_DaemonsGlyphs, 0x0080, ANIM_TAG_DAEMONS_INK},
+    {gBattleAnimSpriteGfx_DaemonsLanes, 0x0680, ANIM_TAG_DAEMONS_LANES},   // T-392 P3: 13 lanes x 4 glyphs
 };
 
 const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
@@ -1595,6 +1596,7 @@ const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
     {gBattleAnimSpritePal_BlueRing2, ANIM_TAG_BLUE_RING_2},
     {gBattleAnimSpritePal_DaemonsGlyphs, ANIM_TAG_DAEMONS_GLYPHS},   // T-392: the splash's own colours
     {gBattleAnimSpritePal_DaemonsInk, ANIM_TAG_DAEMONS_INK},         // grey, shaded into a type by AnimTask_DaemonsInk
+    {gBattleAnimSpritePal_DaemonsLanes, ANIM_TAG_DAEMONS_LANES},     // T-392 P3: true black and the twelve month colours
 };
 
 const struct BattleAnimBackground gBattleAnimBackgroundTable[] =

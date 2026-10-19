@@ -299,6 +299,8 @@
 // T-392: the splash's 0, 1 and notes, on one sheet with two palettes -- the splash's own, and grey ink for a type
 #define ANIM_TAG_DAEMONS_GLYPHS             (ANIM_SPRITES_START + 289)
 #define ANIM_TAG_DAEMONS_INK                (ANIM_SPRITES_START + 290)
+// T-392 P3: the same glyphs in thirteen lanes -- the twelve month colours and black -- for a routine's holiday look
+#define ANIM_TAG_DAEMONS_LANES              (ANIM_SPRITES_START + 291)
 
 // T-392: the glyph sprite's paths and kinds (gDaemonsGlyph*SpriteTemplate, battle_anim_effects_3.c)
 #define DAEMONS_GLYPH_STREAM   0

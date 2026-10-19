@@ -254,9 +254,10 @@ void LaunchBattleAnimation(const u8 *const animsTable[], u16 tableId, bool8 isMo
     // later is a second copy `end` frees too (no release script loads either: the 2026-10-08 drafts are withdrawn).
     if (isMoveAnim && DaemonsSignature_Wants(tableId))
     {
-        bool8 loaded = LoadSignatureTag(ANIM_TAG_DAEMONS_GLYPHS, 0)
-                    && LoadSignatureTag(0, DaemonsSignature_WantsSplash(tableId) ? ANIM_TAG_DAEMONS_GLYPHS : ANIM_TAG_DAEMONS_INK);
-        if (loaded)
+        u16 tiles, palette;
+
+        DaemonsSignature_Tags(tableId, &tiles, &palette);   // P3: a holiday look's lanes instead of the ink
+        if (LoadSignatureTag(tiles, 0) && LoadSignatureTag(0, palette))
             DaemonsSignature_Start(tableId);
     }
 }
@@ -519,7 +520,7 @@ static void Cmd_end(void)
         return;
     }
 
-    // T-392 P1: the routine's signature may run up to 12 frames past its picture, and is cut there.
+    // T-392: the routine's signature runs in full, however far past its picture (the user, 2026-10-18: no cap).
     if (DaemonsSignature_Holds())
     {
         sAnimFramesToWait = 1;

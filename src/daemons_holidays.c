@@ -22,6 +22,7 @@
 #include "constants/flags.h"
 #include "constants/items.h"
 #include "constants/maps.h"
+#include "constants/moves.h"
 #include "constants/region_map_sections.h"
 #include "constants/species.h"
 #include "constants/vars.h"
@@ -342,6 +343,30 @@ u16 DaemonsHolidayShiftSpecies(u16 species, u8 area, u8 slot)
             return sHolidayShifts[i].species;
     }
     return species;
+}
+
+// ---------------------------------------------------------------------------------------------------- the routines
+
+// T-392 P3: A HOLIDAY'S ROUTINES. On its day a routine's signature takes the look its row names (daemons_signature.c
+// plays it): the holiday that shows and the COMMON one under it both count, as for the daemons. A QUIET day dresses
+// none -- its signatures keep their ink and play soft.
+const struct HolidayRoutineLook *DaemonsHolidayRoutineLook(u16 move)
+{
+    u32 i;
+    u8 h = DaemonsHoliday(), common = sHolidayCommon;
+
+    if (h == HOLIDAY_NONE || (DaemonsHolidayFlags(h) & HF_QUIET))
+        return NULL;
+    for (i = 0; i < ARRAY_COUNT(sHolidayRoutineLooks); i++)
+        if (sHolidayRoutineLooks[i].move == move
+         && (sHolidayRoutineLooks[i].holiday == h || (common != HOLIDAY_NONE && sHolidayRoutineLooks[i].holiday == common)))
+            return &sHolidayRoutineLooks[i];
+    return NULL;
+}
+
+bool8 DaemonsHolidayIsQuiet(void)
+{
+    return (DaemonsHolidayFlags(DaemonsHoliday()) & HF_QUIET) != 0;
 }
 
 // ---------------------------------------------------------------------------------------------------- the overlays

@@ -8702,11 +8702,11 @@ Special_MonToSubstitute:
 
 @ T-392 (vision.md 9.24 as amended, bible 0.7 Wisdom): the seven union routines, each with an effect of its own and
 @ the splash's bits and notes in the splash's OWN colours -- the one exception to clause 3, as PERSPECTIVE's flash is
-@ in Halftone. DRAFT: the debug ROMs play them until the user approves; the release ROMs play their type's script.
+@ in Halftone. RELEASED (the user, 2026-10-18, T-392): every ROM plays them, and the signature hook stands aside for
+@ them (their row is SIG_OWN_SCRIPT), so the signature they carry is their own. DRAFT.
 
 @ FLUENCY -- LEGACY, CAIRN and the SCHOOL: one straight line of bits, sent, then sent again exactly the same -- a record that reads the same twice -- and the notes it was for rise where it lands.
 Move_FLUENCY:
-.if DAEMONS_DEBUG
 	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
 	playsewithpan SE_M_SWIFT, SOUND_PAN_ATTACKER
 	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 18, 0, 0
@@ -8750,13 +8750,9 @@ Move_FLUENCY:
 	waitforvisualfinish
 	waitforvisualfinish
 	end
-.else
-	goto Move_ROCK_TOMB
-.endif
 
 @ STILLPOINT -- FLOW, BASIN and the FIRST: the bits ripple out round them in a ring and the notes follow in a second, slower one -- the water going still -- and only then the strike.
 Move_STILLPOINT:
-.if DAEMONS_DEBUG
 	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
 	playsewithpan SE_M_BUBBLE, SOUND_PAN_TARGET
 	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_TARGET, 2, DAEMONS_GLYPH_RING, DAEMONS_GLYPH_BITS, 28, 0, 0
@@ -8782,13 +8778,9 @@ Move_STILLPOINT:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 12, 0, RGB(8, 13, 22)
 	waitforvisualfinish
 	end
-.else
-	goto Move_WATER_PULSE
-.endif
 
 @ RECONNECT -- SIGNAL, GAUGE and the RETURN: a line of bits that goes dead after four -- a long gap -- then reaches out again and gets through, the notes riding along it.
 Move_RECONNECT:
-.if DAEMONS_DEBUG
 	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
 	playsewithpan SE_M_THUNDER_WAVE, SOUND_PAN_ATTACKER
 	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_STREAM, DAEMONS_GLYPH_BITS, 20, 0, 4
@@ -8830,13 +8822,9 @@ Move_RECONNECT:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 12, 0, RGB(10, 23, 23)
 	waitforvisualfinish
 	end
-.else
-	goto Move_SHOCK_WAVE
-.endif
 
 @ PRAXIS -- GROWTH, TRELLIS and the GUIDE: notes rise from the user -- what it read -- then bits carry it across and land; its colour comes up afterwards, ATTACK rising by doing.
 Move_PRAXIS:
-.if DAEMONS_DEBUG
 	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
 	playsewithpan SE_M_SING, SOUND_PAN_ATTACKER
 	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_ATTACKER, 2, DAEMONS_GLYPH_RISE, DAEMONS_GLYPH_NOTES, 26, 0, 2, ANIM_ATTACKER
@@ -8874,13 +8862,9 @@ Move_PRAXIS:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 8, 0, RGB(11, 19, 12)
 	waitforvisualfinish
 	end
-.else
-	goto Move_GIGA_DRAIN
-.endif
 
 @ MEDIAN -- CORRUPT, TILT and SCORN: bits come in from above and from below at once and meet in their middle, the notes after them -- the peak and the floor both ignored.
 Move_MEDIAN:
-.if DAEMONS_DEBUG
 	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
 	playsewithpan SE_M_POISON_POWDER, SOUND_PAN_TARGET
 	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_TARGET, 2, DAEMONS_GLYPH_CONVERGE, DAEMONS_GLYPH_BITS, 20, 0, 2
@@ -8905,13 +8889,9 @@ Move_MEDIAN:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 12, 0, RGB(10, 11, 6)
 	waitforvisualfinish
 	end
-.else
-	goto Move_SLUDGE_BOMB
-.endif
 
 @ PANORAMA -- CONTEXT, MATTE and the READING ROOM: lanes of bits and notes sweep across the whole of their side, past the frame on both edges.
 Move_PANORAMA:
-.if DAEMONS_DEBUG
 	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
 	playsewithpan SE_M_PSYBEAM, SOUND_PAN_TARGET
 	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_TARGET, 2, DAEMONS_GLYPH_SWEEP, DAEMONS_GLYPH_BITS, 26, 0, 3
@@ -8943,13 +8923,9 @@ Move_PANORAMA:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_DEF_SIDE, 1, 12, 0, RGB(22, 10, 19)
 	waitforvisualfinish
 	end
-.else
-	goto Move_PSYCHIC
-.endif
 
 @ HINDSIGHT -- ENTROPY, ANNEAL and the NOTES: the bits go BACK first, from them to the user -- looking at the last strike -- and then the notes go forward, built on it.
 Move_HINDSIGHT:
-.if DAEMONS_DEBUG
 	loadspritegfx ANIM_TAG_DAEMONS_GLYPHS
 	playsewithpan SE_M_DETECT, SOUND_PAN_TARGET
 	createsprite gDaemonsGlyphSplashSpriteTemplate, ANIM_TARGET, 2, DAEMONS_GLYPH_RETURN, DAEMONS_GLYPH_BITS, 18, 0, 3
@@ -8983,6 +8959,3 @@ Move_HINDSIGHT:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 12, 0, RGB(27, 19, 5)
 	waitforvisualfinish
 	end
-.else
-	goto Move_FLAMETHROWER
-.endif

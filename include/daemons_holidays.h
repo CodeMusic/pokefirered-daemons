@@ -26,6 +26,21 @@ void DaemonsPlayMonthNote(u8 month, bool8 soft);
 // P3: a holiday's daemons -- the slot's species, or the one a holiday gives that slot of this map now (wild_encounter.c)
 u16 DaemonsHolidayShiftSpecies(u16 species, u8 area, u8 slot);   // area: HOLIDAY_AREA_*
 
+// T-392 P3: A ROUTINE'S HOLIDAY LOOK -- its signature dressed for the day (sHolidayRoutineLooks, written by DAEMONS
+// tools/genholidays.py from docs/holidays.json's routine_looks). Keyed on the move, never on a sprite tag, and never
+// the daemon: colours only from the twelve month colours (lanes: bit 0 JAN .. bit 11 DEC, HRL_LANE_BLACK).
+struct HolidayRoutineLook
+{
+    u16 move;
+    u8 holiday;
+    u8 shape;      // HRL_SHAPE_*
+    u16 lanes;
+    u8 flags;      // HRL_*
+};
+// The look the day gives this move: the shown holiday's, or the COMMON one's under it; NULL on an ordinary or QUIET day.
+const struct HolidayRoutineLook *DaemonsHolidayRoutineLook(u16 move);
+bool8 DaemonsHolidayIsQuiet(void);   // the holiday that shows is a QUIET one
+
 // P4: the overlays. The light a holiday puts over the watch's, outdoors (daemons_time.c's DaemonsTintForWatch); the
 // caller has already ruled out indoors, HALFTONE's grey and BREATHVERSE.
 enum {

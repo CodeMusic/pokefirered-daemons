@@ -328,6 +328,33 @@ static const struct HolidaySky sHolidaySkies[] = {
     { HOLIDAY_MASK_NIGHT, DAEMONS_SKY_FOG, MAPSEC_LAVENDER_TOWN, 1, 0x4, TRUE },   // MASK NIGHT
     { HOLIDAY_SNOW_CARVING, DAEMONS_SKY_SNOW, MAPSEC_PEWTER_CITY, 0, 0x4, TRUE },   // SNOW CARVING
 };
+// T-392 P3: the routines a holiday dresses -- their signature's look, never the daemon (struct in daemons_holidays.h).
+static const struct HolidayRoutineLook sHolidayRoutineLooks[] = {
+    { MOVE_EXPLOSION, HOLIDAY_ROLLOVER, HRL_SHAPE_RING, 0x0FFF, 0 },   // CORE DUMP on ROLLOVER: burst in the twelve month colours (the twelve)
+    { MOVE_SELF_DESTRUCT, HOLIDAY_ROLLOVER, HRL_SHAPE_RING, 0x0FFF, 0 },   // PANIC on ROLLOVER: burst in the twelve month colours (the twelve)
+    { MOVE_ATTRACT, HOLIDAY_PAIRING_DAY, HRL_SHAPE_HEART, 0x0002, 0 },   // PAIR on PAIRING DAY: hearts in the month colour (FEB)
+    { MOVE_LEECH_SEED, HOLIDAY_CLOVER_DAY, HRL_SHAPE_KEEP, 0x0020, 0 },   // SEED on CLOVER DAY: clover green (#3cb043 as JUN)
+    { MOVE_GROWTH, HOLIDAY_CLOVER_DAY, HRL_SHAPE_KEEP, 0x0020, 0 },   // SCALE UP on CLOVER DAY: clover green (#3cb043 as JUN)
+    { MOVE_SPLASH, HOLIDAY_FOOLS_DAY, HRL_SHAPE_SCATTER, 0x0FFF, 0 },   // NO-OP on FOOLS' DAY: does nothing, in confetti (the twelve)
+    { MOVE_SING, HOLIDAY_NEST_DAY, HRL_SHAPE_KEEP, 0x0010, HRL_NOTES },   // LULLABY on NEST DAY: notes in the month yellow (MAY)
+    { MOVE_RETURN, HOLIDAY_RAPPORT_DAY, HRL_SHAPE_KEEP, 0x0004, 0 },   // RAPPORT on RAPPORT DAY: glows warm (#ffa040 as MAR)
+    { MOVE_SAFEGUARD, HOLIDAY_TRUCE_DAY, HRL_SHAPE_KEEP, 0x0000, HRL_BLEACH },   // SAFEGUARD on TRUCE DAY: white (its own ink, paled)
+    { MOVE_SHADOW_BALL, HOLIDAY_MASK_NIGHT, HRL_SHAPE_KEEP, 0x1004, 0 },   // SHADOW on MASK NIGHT: orange and black (MAR, black)
+    { MOVE_ASTONISH, HOLIDAY_MASK_NIGHT, HRL_SHAPE_KEEP, 0x1004, 0 },   // SURFACE on MASK NIGHT: orange and black (MAR, black)
+    { MOVE_PRESENT, HOLIDAY_FIR_LIGHTS, HRL_SHAPE_KEEP, 0x0021, 0 },   // PRESENT on FIR LIGHTS: red and green (JAN, JUN)
+    { MOVE_HAIL, HOLIDAY_SNOW_CARVING, HRL_SHAPE_KEEP, 0x0000, HRL_BLEACH | HRL_TWINKLE },   // FROST on SNOW CARVING: sparkle white (its own ink, paled)
+    { MOVE_POWDER_SNOW, HOLIDAY_SNOW_CARVING, HRL_SHAPE_KEEP, 0x0000, HRL_BLEACH | HRL_TWINKLE },   // STALE on SNOW CARVING: sparkle white (its own ink, paled)
+    { MOVE_EGG_BOMB, HOLIDAY_EGG_HUNT, HRL_SHAPE_FALL, 0x00A9, 0 },   // DROP on EGG HUNT: eggs in pastels (#ffb6c1 as JAN, #fff3a0 as APR, #b4f0c8 as JUN, #a8d8ff as AUG)
+    { MOVE_GUST, HOLIDAY_STREAMERS, HRL_SHAPE_SWEEP, 0x0FFF, 0 },   // DRIFT on STREAMERS: carries coloured streamers (the twelve)
+    { MOVE_MORNING_SUN, HOLIDAY_LONGEST_DAY_N, HRL_SHAPE_KEEP, 0x0008, 0 },   // WARM BOOT on LONGEST DAY: gold (#d4af37 as APR)
+    { MOVE_SUNNY_DAY, HOLIDAY_LONGEST_DAY_N, HRL_SHAPE_KEEP, 0x0008, 0 },   // HEATSOAK on LONGEST DAY: gold (#d4af37 as APR)
+    { MOVE_SOLAR_BEAM, HOLIDAY_LONGEST_DAY_N, HRL_SHAPE_KEEP, 0x0008, 0 },   // BATCH on LONGEST DAY: gold (#d4af37 as APR)
+    { MOVE_SPARK, HOLIDAY_SUMMER_LIGHTS, HRL_SHAPE_KEEP, 0x0FFF, 0 },   // ARC on SUMMER LIGHTS: many colours (the twelve)
+    { MOVE_MOONLIGHT, HOLIDAY_ROUND_MOON, HRL_SHAPE_ORBIT, 0x0008, 0 },   // NIGHT REPAIR on ROUND MOON: a round gold (#d4af37 as APR)
+    { MOVE_SYNTHESIS, HOLIDAY_HARVEST_DAY, HRL_SHAPE_KEEP, 0x0008, 0 },   // REGROW on HARVEST DAY: gold (#d4af37 as APR)
+    { MOVE_HELPING_HAND, HOLIDAY_GIVING_THANKS, HRL_SHAPE_KEEP, 0x0004, 0 },   // DELEGATE on GIVING THANKS: warm (#ffa040 as MAR)
+    { MOVE_MOONLIGHT, HOLIDAY_LONGEST_NIGHT_N, HRL_SHAPE_KEEP, 0x0000, HRL_BLEACH },   // NIGHT REPAIR on LONGEST NIGHT: silver (its own ink, paled)
+};
 #elif defined(LEAFGREEN)   // CONTEXT
 #define HOLIDAY_EDITION 1
 static const u8 sHolidayName_Rollover[] = _("ROLLOVER");
@@ -483,5 +510,30 @@ static const struct HolidayShift sHolidayShifts[] = {
 static const struct HolidaySky sHolidaySkies[] = {
     { HOLIDAY_MASK_NIGHT, DAEMONS_SKY_FOG, MAPSEC_LAVENDER_TOWN, 1, 0x4, TRUE },   // MASK NIGHT
     { HOLIDAY_BEACH_DAY, DAEMONS_SKY_CLEAR, MAPSEC_ONE_ISLAND, 254, 0xF, FALSE },   // BEACH DAY
+};
+// T-392 P3: the routines a holiday dresses -- their signature's look, never the daemon (struct in daemons_holidays.h).
+static const struct HolidayRoutineLook sHolidayRoutineLooks[] = {
+    { MOVE_EXPLOSION, HOLIDAY_ROLLOVER, HRL_SHAPE_RING, 0x0FFF, 0 },   // CORE DUMP on ROLLOVER: burst in the twelve month colours (the twelve)
+    { MOVE_SELF_DESTRUCT, HOLIDAY_ROLLOVER, HRL_SHAPE_RING, 0x0FFF, 0 },   // PANIC on ROLLOVER: burst in the twelve month colours (the twelve)
+    { MOVE_ATTRACT, HOLIDAY_PAIRING_DAY, HRL_SHAPE_HEART, 0x0002, 0 },   // PAIR on PAIRING DAY: hearts in the month colour (FEB)
+    { MOVE_LEECH_SEED, HOLIDAY_CLOVER_DAY, HRL_SHAPE_KEEP, 0x0020, 0 },   // SEED on CLOVER DAY: clover green (#3cb043 as JUN)
+    { MOVE_GROWTH, HOLIDAY_CLOVER_DAY, HRL_SHAPE_KEEP, 0x0020, 0 },   // SCALE UP on CLOVER DAY: clover green (#3cb043 as JUN)
+    { MOVE_SPLASH, HOLIDAY_FOOLS_DAY, HRL_SHAPE_SCATTER, 0x0FFF, 0 },   // NO-OP on FOOLS' DAY: does nothing, in confetti (the twelve)
+    { MOVE_SING, HOLIDAY_NEST_DAY, HRL_SHAPE_KEEP, 0x0010, HRL_NOTES },   // LULLABY on NEST DAY: notes in the month yellow (MAY)
+    { MOVE_RETURN, HOLIDAY_RAPPORT_DAY, HRL_SHAPE_KEEP, 0x0004, 0 },   // RAPPORT on RAPPORT DAY: glows warm (#ffa040 as MAR)
+    { MOVE_SAFEGUARD, HOLIDAY_TRUCE_DAY, HRL_SHAPE_KEEP, 0x0000, HRL_BLEACH },   // SAFEGUARD on TRUCE DAY: white (its own ink, paled)
+    { MOVE_SHADOW_BALL, HOLIDAY_MASK_NIGHT, HRL_SHAPE_KEEP, 0x1004, 0 },   // SHADOW on MASK NIGHT: orange and black (MAR, black)
+    { MOVE_ASTONISH, HOLIDAY_MASK_NIGHT, HRL_SHAPE_KEEP, 0x1004, 0 },   // SURFACE on MASK NIGHT: orange and black (MAR, black)
+    { MOVE_PRESENT, HOLIDAY_FIR_LIGHTS, HRL_SHAPE_KEEP, 0x0021, 0 },   // PRESENT on FIR LIGHTS: red and green (JAN, JUN)
+    { MOVE_TEETER_DANCE, HOLIDAY_PARADE_DAYS, HRL_SHAPE_SCATTER, 0x0FFF, 0 },   // RANDOMWALK on PARADE DAYS: throws confetti (the twelve)
+    { MOVE_ICY_WIND, HOLIDAY_FIRST_FROST, HRL_SHAPE_KEEP, 0x0000, HRL_BLEACH | HRL_TWINKLE },   // CHILL on FIRST FROST: frosted (its own ink, paled)
+    { MOVE_MOONLIGHT, HOLIDAY_LONGEST_NIGHT_S, HRL_SHAPE_KEEP, 0x0000, HRL_BLEACH },   // NIGHT REPAIR on LONGEST NIGHT: silver (its own ink, paled)
+    { MOVE_PRESENT, HOLIDAY_WINTER_FIR, HRL_SHAPE_KEEP, 0x0021, 0 },   // PRESENT on WINTER FIR: red and green (JAN, JUN)
+    { MOVE_COSMIC_POWER, HOLIDAY_SCIENCE_FAIR, HRL_SHAPE_STARS, 0x0080, HRL_TWINKLE },   // ZOOM OUT on SCIENCE FAIR: drawn as a star chart (AUG)
+    { MOVE_PETAL_DANCE, HOLIDAY_FLOWER_SHOW, HRL_SHAPE_FALL, 0x0001, 0 },   // OVERTRAIN on FLOWER SHOW: petals pink (#ff9ec8 as JAN)
+    { MOVE_PETAL_DANCE, HOLIDAY_VIOLET_BLOOM, HRL_SHAPE_FALL, 0x0400, 0 },   // OVERTRAIN on VIOLET BLOOM: petals violet (NOV)
+    { MOVE_MORNING_SUN, HOLIDAY_LONGEST_DAY_S, HRL_SHAPE_KEEP, 0x0008, 0 },   // WARM BOOT on LONGEST DAY: gold (#d4af37 as APR)
+    { MOVE_SUNNY_DAY, HOLIDAY_LONGEST_DAY_S, HRL_SHAPE_KEEP, 0x0008, 0 },   // HEATSOAK on LONGEST DAY: gold (#d4af37 as APR)
+    { MOVE_SOLAR_BEAM, HOLIDAY_LONGEST_DAY_S, HRL_SHAPE_KEEP, 0x0008, 0 },   // BATCH on LONGEST DAY: gold (#d4af37 as APR)
 };
 #endif

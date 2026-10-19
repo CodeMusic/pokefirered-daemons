@@ -3921,6 +3921,8 @@ extern const u32 gBattleAnimSpritePal_BlueRing2[];
 extern const u32 gBattleAnimSpriteGfx_DaemonsGlyphs[];   // T-392
 extern const u32 gBattleAnimSpritePal_DaemonsGlyphs[];
 extern const u32 gBattleAnimSpritePal_DaemonsInk[];
+extern const u32 gBattleAnimSpriteGfx_DaemonsLanes[];   // T-392 P3
+extern const u32 gBattleAnimSpritePal_DaemonsLanes[];
 
 // battle anim task
 extern const u32 gUnusedLevelupAnimationGfx[];

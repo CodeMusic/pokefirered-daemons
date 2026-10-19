@@ -33,13 +33,29 @@
 // T-392 P2 (the user, 2026-10-18): ALL 363 routines play their row in the release ROMs too (every family APPROVED in
 // the generated table), and every glyph wears a true-black outline (graphics/battle_anims/sprites/daemons_glyphs.png,
 // index 1 black in both the ink and the splash palette), so its type's colour reads on any picture -- MISREAD's magenta
-// had been lost on its own pink. The union routines' own scripts are still debug-only; the release ROMs play their row.
+// had been lost on its own pink.
+//
+// The user, 2026-10-18 (P2's release): NO CAP. A signature runs in full -- `end` waits for it, however far past its
+// picture (the longest, SHIFT's, is 98 frames from the launch; gensignature.py reports it) -- and the seven union
+// routines' own scripts are released into every ROM, so the hook stands aside for them everywhere (SIG_OWN_SCRIPT).
+// Nothing else in battle moves while it plays: the HP bar, the next line and the next hit all wait on the animation,
+// and the notes keep off SE3 while the low-HP alarm holds it.
+//
+// T-392 P3 (the user, 2026-10-18): THE HOLIDAY LOOKS. On a holiday a routine its row names wears the day's look
+// (sHolidayRoutineLooks, tools/genholidays.py from docs/holidays.json): colours ONLY from the twelve month colours
+// (ANIM_TAG_DAEMONS_LANES: the same 0, 1 and note in thirteen lanes -- each month's bright colour, and black), a shape
+// (a burst, a heart of bits -- never vanilla's heart sprite -- held stars, confetti, streamers, falling petals, an
+// orbit), every glyph a note, or the type's own ink paled (white, silver, frost: no month has them). The figure is in
+// the month's note, as on every holiday. Never the daemon: only the signature's own palette is touched. A QUIET day
+// dresses nothing: the ink as ever, the notes soft.
 
 #include "data/daemons_signatures.h"
 
 #define SIG_BIT_STEP  2    // frames between the word's glyphs
 #define SIG_LAG       12   // frames the second kind waits for the first
-#define SIG_OVERRUN   12   // frames it may run past the picture (CLEAR)
+#define SIG_FUSE      255  // frames past the picture after which `end` stops waiting: a guard against a hang, never
+                           // reached (a whole signature is at most ~100 frames from its launch) -- not a cap
+#define SIG_VOL_SOFT  96   // a QUIET holiday's notes (the day banner's soft note)
 #define SIG_FLUTE_HOLD 10  // frames the last FLUTE note is held before it breathes out over five
 #define SIG_NOTE_LANE 9    // lanes 0-8 are the word's glyphs, 9-11 the figure's notes
 
@@ -90,6 +106,53 @@ static const struct SpriteTemplate sSignatureSplashTemplate =
     .callback = SpriteCB_SignatureGlyph,
 };
 
+// P3: thirteen lanes of the four glyphs (frame = lane * 4 + glyph), for a holiday look.
+static const union AnimCmd sAnim_SignatureLanes[52][2] =
+{
+    {ANIMCMD_FRAME(0, 1), ANIMCMD_END}, {ANIMCMD_FRAME(1, 1), ANIMCMD_END}, {ANIMCMD_FRAME(2, 1), ANIMCMD_END}, {ANIMCMD_FRAME(3, 1), ANIMCMD_END},
+    {ANIMCMD_FRAME(4, 1), ANIMCMD_END}, {ANIMCMD_FRAME(5, 1), ANIMCMD_END}, {ANIMCMD_FRAME(6, 1), ANIMCMD_END}, {ANIMCMD_FRAME(7, 1), ANIMCMD_END},
+    {ANIMCMD_FRAME(8, 1), ANIMCMD_END}, {ANIMCMD_FRAME(9, 1), ANIMCMD_END}, {ANIMCMD_FRAME(10, 1), ANIMCMD_END}, {ANIMCMD_FRAME(11, 1), ANIMCMD_END},
+    {ANIMCMD_FRAME(12, 1), ANIMCMD_END}, {ANIMCMD_FRAME(13, 1), ANIMCMD_END}, {ANIMCMD_FRAME(14, 1), ANIMCMD_END}, {ANIMCMD_FRAME(15, 1), ANIMCMD_END},
+    {ANIMCMD_FRAME(16, 1), ANIMCMD_END}, {ANIMCMD_FRAME(17, 1), ANIMCMD_END}, {ANIMCMD_FRAME(18, 1), ANIMCMD_END}, {ANIMCMD_FRAME(19, 1), ANIMCMD_END},
+    {ANIMCMD_FRAME(20, 1), ANIMCMD_END}, {ANIMCMD_FRAME(21, 1), ANIMCMD_END}, {ANIMCMD_FRAME(22, 1), ANIMCMD_END}, {ANIMCMD_FRAME(23, 1), ANIMCMD_END},
+    {ANIMCMD_FRAME(24, 1), ANIMCMD_END}, {ANIMCMD_FRAME(25, 1), ANIMCMD_END}, {ANIMCMD_FRAME(26, 1), ANIMCMD_END}, {ANIMCMD_FRAME(27, 1), ANIMCMD_END},
+    {ANIMCMD_FRAME(28, 1), ANIMCMD_END}, {ANIMCMD_FRAME(29, 1), ANIMCMD_END}, {ANIMCMD_FRAME(30, 1), ANIMCMD_END}, {ANIMCMD_FRAME(31, 1), ANIMCMD_END},
+    {ANIMCMD_FRAME(32, 1), ANIMCMD_END}, {ANIMCMD_FRAME(33, 1), ANIMCMD_END}, {ANIMCMD_FRAME(34, 1), ANIMCMD_END}, {ANIMCMD_FRAME(35, 1), ANIMCMD_END},
+    {ANIMCMD_FRAME(36, 1), ANIMCMD_END}, {ANIMCMD_FRAME(37, 1), ANIMCMD_END}, {ANIMCMD_FRAME(38, 1), ANIMCMD_END}, {ANIMCMD_FRAME(39, 1), ANIMCMD_END},
+    {ANIMCMD_FRAME(40, 1), ANIMCMD_END}, {ANIMCMD_FRAME(41, 1), ANIMCMD_END}, {ANIMCMD_FRAME(42, 1), ANIMCMD_END}, {ANIMCMD_FRAME(43, 1), ANIMCMD_END},
+    {ANIMCMD_FRAME(44, 1), ANIMCMD_END}, {ANIMCMD_FRAME(45, 1), ANIMCMD_END}, {ANIMCMD_FRAME(46, 1), ANIMCMD_END}, {ANIMCMD_FRAME(47, 1), ANIMCMD_END},
+    {ANIMCMD_FRAME(48, 1), ANIMCMD_END}, {ANIMCMD_FRAME(49, 1), ANIMCMD_END}, {ANIMCMD_FRAME(50, 1), ANIMCMD_END}, {ANIMCMD_FRAME(51, 1), ANIMCMD_END},
+};
+static const union AnimCmd *const sAnims_SignatureLanes[52] =
+{
+    sAnim_SignatureLanes[0], sAnim_SignatureLanes[1], sAnim_SignatureLanes[2], sAnim_SignatureLanes[3], sAnim_SignatureLanes[4], sAnim_SignatureLanes[5], sAnim_SignatureLanes[6], sAnim_SignatureLanes[7],
+    sAnim_SignatureLanes[8], sAnim_SignatureLanes[9], sAnim_SignatureLanes[10], sAnim_SignatureLanes[11], sAnim_SignatureLanes[12], sAnim_SignatureLanes[13], sAnim_SignatureLanes[14], sAnim_SignatureLanes[15],
+    sAnim_SignatureLanes[16], sAnim_SignatureLanes[17], sAnim_SignatureLanes[18], sAnim_SignatureLanes[19], sAnim_SignatureLanes[20], sAnim_SignatureLanes[21], sAnim_SignatureLanes[22], sAnim_SignatureLanes[23],
+    sAnim_SignatureLanes[24], sAnim_SignatureLanes[25], sAnim_SignatureLanes[26], sAnim_SignatureLanes[27], sAnim_SignatureLanes[28], sAnim_SignatureLanes[29], sAnim_SignatureLanes[30], sAnim_SignatureLanes[31],
+    sAnim_SignatureLanes[32], sAnim_SignatureLanes[33], sAnim_SignatureLanes[34], sAnim_SignatureLanes[35], sAnim_SignatureLanes[36], sAnim_SignatureLanes[37], sAnim_SignatureLanes[38], sAnim_SignatureLanes[39],
+    sAnim_SignatureLanes[40], sAnim_SignatureLanes[41], sAnim_SignatureLanes[42], sAnim_SignatureLanes[43], sAnim_SignatureLanes[44], sAnim_SignatureLanes[45], sAnim_SignatureLanes[46], sAnim_SignatureLanes[47],
+    sAnim_SignatureLanes[48], sAnim_SignatureLanes[49], sAnim_SignatureLanes[50], sAnim_SignatureLanes[51],
+};
+
+static const struct SpriteTemplate sSignatureLanesTemplate =
+{
+    .tileTag = ANIM_TAG_DAEMONS_LANES,
+    .paletteTag = ANIM_TAG_DAEMONS_LANES,
+    .oam = &sOam_SignatureGlyph,
+    .anims = sAnims_SignatureLanes,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_SignatureGlyph,
+};
+
+#define LANE_RING_INDEX 14   // the BLACK lane's ring (daemons_lanes.pal): the look's first month, set at the start
+
+// A heart, of the word's bits and its notes (PAIRING DAY): twelve points round it, from the cleft, clockwise.
+static const s8 sHeart[12][2] =
+{
+    {0, -12}, {3, -20}, {18, -24}, {27, -11}, {18, 5}, {3, 19}, {0, 25}, {-3, 19}, {-18, 5}, {-27, -11}, {-18, -24}, {-3, -20},
+};
+
 // ---------------------------------------------------------------------------------------------------------- which
 
 bool8 DaemonsSignature_Wants(u16 move)
@@ -101,18 +164,37 @@ bool8 DaemonsSignature_Wants(u16 move)
     sig = &sDaemonsSignatures[move];
     if (sig->word == 0 && sig->rhythm == 0)
         return FALSE;
-#if DAEMONS_DEBUG
     if (sig->flags & SIG_OWN_SCRIPT)
-        return FALSE;   // a union routine's own script carries its signature, and it plays in these ROMs
+        return FALSE;   // a union routine's own script carries its signature, in every ROM (the user, 2026-10-18)
+#if DAEMONS_DEBUG
     return TRUE;
 #else
-    return (sig->flags & SIG_APPROVED) != 0;   // a union routine's own script is debug-only: its row plays here
+    return (sig->flags & SIG_APPROVED) != 0;
 #endif
 }
 
-bool8 DaemonsSignature_WantsSplash(u16 move)
+// The look the day gives a routine (P3): none for a union routine, which wears the splash's colours on any day.
+static const struct HolidayRoutineLook *LookFor(u16 move)
 {
-    return (sDaemonsSignatures[move].flags & SIG_UNION) != 0;
+    if (sDaemonsSignatures[move].flags & SIG_UNION)
+        return NULL;
+    return DaemonsHolidayRoutineLook(move);
+}
+
+static bool8 LookHasLanes(const struct HolidayRoutineLook *look)
+{
+    return look != NULL && (look->lanes & ((2 << HRL_LANE_BLACK) - 1)) != 0;   // a month, or black
+}
+
+void DaemonsSignature_Tags(u16 move, u16 *tiles, u16 *palette)
+{
+    if (LookHasLanes(LookFor(move)))
+    {
+        *tiles = *palette = ANIM_TAG_DAEMONS_LANES;
+        return;
+    }
+    *tiles = ANIM_TAG_DAEMONS_GLYPHS;
+    *palette = (sDaemonsSignatures[move].flags & SIG_UNION) ? ANIM_TAG_DAEMONS_GLYPHS : ANIM_TAG_DAEMONS_INK;
 }
 
 // ---------------------------------------------------------------------------------------------------------- glyphs
@@ -125,12 +207,13 @@ bool8 DaemonsSignature_WantsSplash(u16 move)
 #define sX1     data[4]
 #define sY1     data[5]
 #define sPhase  data[6]   // phase | wave << 8
-#define sShape  data[7]   // path | mods << 4 | notes << 12 | the bit << 13
+#define sShape  data[7]   // path | mods << 4 | notes << 12 | the bit << 13 | twinkle << 14
 
 #define SHAPE_PATH(s)  ((s) & 0xF)
 #define SHAPE_MODS(s)  (((s) >> 4) & 0xFF)
 #define SHAPE_NOTES    (1 << 12)
 #define SHAPE_BIT      (1 << 13)
+#define SHAPE_TWINKLE  (1 << 14)
 
 static void SpriteCB_SignatureGlyph(struct Sprite *sprite)
 {
@@ -150,6 +233,8 @@ static void SpriteCB_SignatureGlyph(struct Sprite *sprite)
         sprite->sShape ^= SHAPE_BIT;            // CORRUPT: each bit flips as it flies
         StartSpriteAnim(sprite, (sprite->sShape & SHAPE_BIT) ? 1 : 0);
     }
+    if (shape & SHAPE_TWINKLE)
+        sprite->invisible = ((t + phase) & 7) < 2;   // P3: a holiday's sparkle and its stars
     if ((mods & SIG_MOD_FADE) && t > n / 2)
         sprite->invisible = TRUE;                 // OPAQUE: gone halfway
     if ((mods & SIG_MOD_BACK))
@@ -207,22 +292,77 @@ static void SpriteCB_SignatureGlyph(struct Sprite *sprite)
     sprite->sTimer++;
 }
 
-static void LaunchGlyph(const struct DaemonsSignature *sig, bool8 splash, u8 lane, bool8 notes, u8 frame, u8 frames)
+// P3: the month (or black) the k-th glyph of a look wears -- the (k mod n)-th lane of the look's set.
+static u8 LaneOf(const struct HolidayRoutineLook *look, u8 k)
+{
+    u8 bit, n = 0, i;
+
+    for (bit = 0; bit <= HRL_LANE_BLACK; bit++)
+        if (look->lanes & (1 << bit))
+            n++;
+    k %= n;
+    for (bit = 0, i = 0; bit <= HRL_LANE_BLACK; bit++)
+    {
+        if (look->lanes & (1 << bit))
+        {
+            if (i == k)
+                return bit;
+            i++;
+        }
+    }
+    return 0;
+}
+
+static void LaunchGlyph(const struct DaemonsSignature *sig, const struct HolidayRoutineLook *look, bool8 splash, u8 lane,
+                        bool8 notes, u8 frame, u8 frames)
 {
     const struct SpriteTemplate *template = splash ? &sSignatureSplashTemplate : &sSignatureInkTemplate;
-    u8 self = (sig->mods & SIG_MOD_SELF) != 0;
+    u8 path = sig->path, mods = sig->mods, shape = HRL_SHAPE_KEEP;
+    u16 extra = 0;
+    u8 self;
     s16 ax = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
     s16 ay = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
     s16 tx = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2);
     s16 ty = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET);
-    s16 cx = self ? ax : tx, cy = self ? ay : ty;
-    s16 x0 = ax, y0 = ay, x1 = tx, y1 = ty;
+    s16 cx, cy, x0, y0, x1, y1;
     u8 phase = ((sig->word >> (lane % 9)) & 7) * 24 + lane * 24;   // the lane order, from the word
     s16 sub = GetBattlerSpriteSubpriority(gBattleAnimAttacker) - 2;
     u8 spriteId;
     struct Sprite *sprite;
 
-    switch (sig->path)
+    // P3: the day's look moves the glyphs onto its shape and into its lanes; the word, the figure and its timing stay.
+    if (look != NULL)
+    {
+        shape = look->shape;
+        if (shape != HRL_SHAPE_KEEP)
+            mods &= SIG_MOD_SLOW | SIG_MOD_FAST | SIG_MOD_SELF;
+        switch (shape)
+        {
+        case HRL_SHAPE_RING:    path = DAEMONS_GLYPH_RING; break;
+        case HRL_SHAPE_HEART:
+        case HRL_SHAPE_STARS:   path = DAEMONS_GLYPH_HOLD; break;
+        case HRL_SHAPE_SCATTER: path = DAEMONS_GLYPH_SCATTER; break;
+        case HRL_SHAPE_SWEEP:   path = DAEMONS_GLYPH_SWEEP; break;
+        case HRL_SHAPE_FALL:    path = DAEMONS_GLYPH_FALL; break;
+        case HRL_SHAPE_ORBIT:   path = DAEMONS_GLYPH_RING; mods |= SIG_MOD_ORBIT; break;
+        }
+        if ((look->flags & HRL_NOTES) && !notes)
+            frame = 2 + (frame & 1);              // NEST DAY's lullaby: every glyph a note
+        if (look->flags & HRL_TWINKLE)
+            extra |= SHAPE_TWINKLE;
+        if (LookHasLanes(look))
+        {
+            template = &sSignatureLanesTemplate;
+            mods &= ~SIG_MOD_FLIP;                // a flip would leave the lane
+            frame += LaneOf(look, lane) * 4;
+        }
+    }
+    self = (mods & SIG_MOD_SELF) != 0;
+    cx = self ? ax : tx;
+    cy = self ? ay : ty;
+    x0 = ax; y0 = ay; x1 = tx; y1 = ty;
+
+    switch (path)
     {
     case DAEMONS_GLYPH_RETURN:
         x0 = tx; y0 = ty; x1 = ax; y1 = ay;
@@ -238,7 +378,7 @@ static void LaunchGlyph(const struct DaemonsSignature *sig, bool8 splash, u8 lan
     case DAEMONS_GLYPH_RING:
     case DAEMONS_GLYPH_SCATTER:
         x0 = cx; y0 = cy;
-        phase = lane * 28 + (sig->word & 0x1F);
+        phase = lane * (look != NULL ? 21 : 28) + (sig->word & 0x1F);   // a look's twelve go all the way round
         break;
     case DAEMONS_GLYPH_CONVERGE:
         x0 = cx + (lane % 4) * 8 - 12; y0 = (lane & 1) ? cy - 40 : cy + 32;
@@ -261,6 +401,18 @@ static void LaunchGlyph(const struct DaemonsSignature *sig, bool8 splash, u8 lan
         }
         break;
     }
+    if (shape == HRL_SHAPE_HEART)
+    {
+        x0 = cx + sHeart[lane % 12][0];           // PAIRING DAY: a heart of bits -- never vanilla's heart sprite
+        y0 = cy - 10 + sHeart[lane % 12][1];
+    }
+    else if (shape == HRL_SHAPE_STARS)
+    {
+        u8 a = lane * 21 + (sig->word & 0x1F);    // SCIENCE FAIR: a ring frozen into points, a star chart
+        s16 r = 14 + ((sig->word >> (lane % 7)) & 3) * 7;
+        x0 = cx + Cos(a, r);
+        y0 = cy + Sin(a, r) / 2 - 6;
+    }
     if (sub < 3)
         sub = 3;
     spriteId = CreateSprite(template, x0, y0, sub);
@@ -274,7 +426,7 @@ static void LaunchGlyph(const struct DaemonsSignature *sig, bool8 splash, u8 lan
     sprite->sX1 = x1;
     sprite->sY1 = y1;
     sprite->sPhase = phase | ((sig->wave & 0xFF) << 8);
-    sprite->sShape = (sig->path & 0xF) | (sig->mods << 4) | (notes ? SHAPE_NOTES : 0) | (frame == 1 ? SHAPE_BIT : 0);
+    sprite->sShape = (path & 0xF) | (mods << 4) | (notes ? SHAPE_NOTES : 0) | (frame == 1 ? SHAPE_BIT : 0) | extra;
     StartSpriteAnim(sprite, frame);
 }
 
@@ -302,6 +454,8 @@ static void LaunchGlyph(const struct DaemonsSignature *sig, bool8 splash, u8 lan
 #define tStopAt  data[10]
 #define tHit     data[11]
 #define tFlight  data[12]
+#define tLook    13        // data[13] and [14]: the holiday look (a word: SetWordTaskArg), or NULL
+#define tVolume  data[15]  // the notes' volume: 256, or a QUIET day's soft
 
 static u8 NoteStep(const struct DaemonsSignature *sig)
 {
@@ -344,8 +498,8 @@ static void Pluck(s16 *data, const struct DaemonsSignature *sig, u8 k)
         return;
     Play_SoundNote(instrument, tTonic + sMajor8[degree], TRUE);
     tFlute = (instrument == PLAY_FLUTE);
-    if (tFlute)
-        m4aMPlayVolumeControl(&gMPlayInfo_SE3, TRACKS_ALL, 256);   // at SE volume, not PLAY's breath
+    if (tFlute || tVolume != 256)
+        m4aMPlayVolumeControl(&gMPlayInfo_SE3, TRACKS_ALL, tVolume);   // at SE volume, not PLAY's breath (soft when QUIET)
 }
 
 static void KillGlyphs(void)
@@ -370,6 +524,7 @@ static void Stop(u8 taskId)
 void DaemonsSignature_Start(u16 move)
 {
     const struct DaemonsSignature *sig = &sDaemonsSignatures[move];
+    const struct HolidayRoutineLook *look = LookFor(move);
     u8 taskId = FindTaskIdByFunc(Task_DaemonsSignature);
     s16 *data;
     u8 holiday, last, k;
@@ -380,11 +535,29 @@ void DaemonsSignature_Start(u16 move)
         Stop(taskId);
 
     // The ink: each grey of ANIM_TAG_DAEMONS_INK times the type's colour, as AnimTask_DaemonsInk shades it (clause 3).
-    if (!(sig->flags & SIG_UNION))
+    // P3: a look in white, silver or frost wears that colour paled, as LEGACY's is -- no month has them, so no colour
+    // is added. A look in lanes needs no ink: its BLACK lane is ringed in the look's first month.
+    if (LookHasLanes(look))
+    {
+        u8 slot = IndexOfSpritePaletteTag(ANIM_TAG_DAEMONS_LANES);
+
+        if (slot != 0xFF && (look->lanes & (1 << HRL_LANE_BLACK)))
+        {
+            u16 base = OBJ_PLTT_ID(slot);
+            u16 ring = gPlttBufferUnfaded[base + 2 + LaneOf(look, 0)];
+            gPlttBufferUnfaded[base + LANE_RING_INDEX] = gPlttBufferFaded[base + LANE_RING_INDEX] = ring;
+        }
+    }
+    else if (!(sig->flags & SIG_UNION))
     {
         u8 slot = IndexOfSpritePaletteTag(ANIM_TAG_DAEMONS_INK);
         u16 colour = sDaemonsSignatureInk[gBattleMoves[move].type];
 
+        if (look != NULL && (look->flags & HRL_BLEACH))
+        {
+            u16 r = colour & 0x1F, g = (colour >> 5) & 0x1F, b = (colour >> 10) & 0x1F;
+            colour = RGB(r + (31 - r) * 7 / 10, g + (31 - g) * 7 / 10, b + (31 - b) * 7 / 10);
+        }
         if (slot != 0xFF)
         {
             u16 i, base = OBJ_PLTT_ID(slot);
@@ -407,6 +580,8 @@ void DaemonsSignature_Start(u16 move)
     tFlute = FALSE;
     tSound = MaySound();
     tFlight = Flight(sig);
+    SetWordTaskArg(taskId, tLook, (u32)look);
+    tVolume = DaemonsHolidayIsQuiet() ? SIG_VOL_SOFT : 256;
 
     // The key: the type's, or on a holiday the month's note, in the type's register (an achromatic type's octave).
     tTonic = sig->tonic;
@@ -459,16 +634,20 @@ static void Task_DaemonsSignature(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     const struct DaemonsSignature *sig = &sDaemonsSignatures[tMove];
+    const struct HolidayRoutineLook *look = (const struct HolidayRoutineLook *)GetWordTaskArg(taskId, tLook);
     bool8 splash = (sig->flags & SIG_UNION) != 0;
     s16 t = tTimer, i;
     u8 step = NoteStep(sig);
+    // P3: a heart or a star chart is built glyph by glyph and held whole to the end; anything else flies its flight.
+    u8 flight = (look != NULL && (look->shape == HRL_SHAPE_HEART || look->shape == HRL_SHAPE_STARS) && tEnd > t)
+              ? tEnd - t : tFlight;
 
     if (tMode == SIG_MODE_ONE_NOTE)
     {
         if (t == 0)
         {
             Pluck(data, sig, tHit);
-            LaunchGlyph(sig, splash, SIG_NOTE_LANE + tHit % 3, TRUE, 2 + (tHit & 1), tFlight);
+            LaunchGlyph(sig, look, splash, SIG_NOTE_LANE + tHit % 3, TRUE, 2 + (tHit & 1), flight);
         }
     }
     else
@@ -480,7 +659,7 @@ static void Task_DaemonsSignature(u8 taskId)
         if (tMode == SIG_MODE_FULL && i >= 0 && i % SIG_BIT_STEP == 0 && i / SIG_BIT_STEP < 9)
         {
             u8 lane = i / SIG_BIT_STEP;
-            LaunchGlyph(sig, splash, lane, FALSE, (sig->word >> (8 - lane)) & 1, tFlight);
+            LaunchGlyph(sig, look, splash, lane, FALSE, (sig->word >> (8 - lane)) & 1, flight);
         }
         i = t - noteStart;
         if (i >= 0 && i % step == 0 && i / step < 9 && ((sig->rhythm >> (8 - i / step)) & 1))
@@ -488,7 +667,7 @@ static void Task_DaemonsSignature(u8 taskId)
             Pluck(data, sig, tPlucks);
             if (tNotes < 3)
             {
-                LaunchGlyph(sig, splash, SIG_NOTE_LANE + tNotes, TRUE, 2 + (tNotes & 1), tFlight);
+                LaunchGlyph(sig, look, splash, SIG_NOTE_LANE + tNotes, TRUE, 2 + (tNotes & 1), flight);
                 tNotes++;
             }
             tPlucks++;
@@ -506,7 +685,7 @@ static void Task_DaemonsSignature(u8 taskId)
         }
         else
         {
-            m4aMPlayVolumeControl(&gMPlayInfo_SE3, TRACKS_ALL, 256 * (5 - f) / 5);
+            m4aMPlayVolumeControl(&gMPlayInfo_SE3, TRACKS_ALL, tVolume * (5 - f) / 5);
         }
     }
 
@@ -520,10 +699,10 @@ bool8 DaemonsSignature_Holds(void)
 
     if (taskId == TASK_NONE)
         return FALSE;
-    if (++gTasks[taskId].tOver > SIG_OVERRUN)
+    if (++gTasks[taskId].tOver > SIG_FUSE)
     {
-        Stop(taskId);   // CLEAR: up to 12 frames past the picture, and no further
+        Stop(taskId);   // never in play: the task ends itself (tEnd) long before this
         return FALSE;
     }
-    return TRUE;
+    return TRUE;   // NO CAP (the user, 2026-10-18): the signature runs in full, and `end` waits for it
 }

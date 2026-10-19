@@ -540,6 +540,8 @@ const u32 gBattleAnimSpritePal_BlueRing2[] = INCBIN_U32("graphics/battle_anims/s
 const u32 gBattleAnimSpriteGfx_DaemonsGlyphs[] = INCBIN_U32("graphics/battle_anims/sprites/daemons_glyphs.4bpp.lz");
 const u32 gBattleAnimSpritePal_DaemonsGlyphs[] = INCBIN_U32("graphics/battle_anims/sprites/daemons_glyphs.gbapal.lz");
 const u32 gBattleAnimSpritePal_DaemonsInk[] = INCBIN_U32("graphics/battle_anims/sprites/daemons_ink.gbapal.lz");
+const u32 gBattleAnimSpriteGfx_DaemonsLanes[] = INCBIN_U32("graphics/battle_anims/sprites/daemons_lanes.4bpp.lz");
+const u32 gBattleAnimSpritePal_DaemonsLanes[] = INCBIN_U32("graphics/battle_anims/sprites/daemons_lanes.gbapal.lz");
 const u32 gBattleAnimSpritePal_PurpleRing[] = INCBIN_U32("graphics/battle_anims/sprites/purple_ring.gbapal.lz");
 const u32 gBattleAnimSpritePal_BlueRing[] = INCBIN_U32("graphics/battle_anims/sprites/blue_ring.gbapal.lz");
 
