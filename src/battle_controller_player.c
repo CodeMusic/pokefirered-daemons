@@ -273,12 +273,13 @@ static EWRAM_DATA u8 sIndexReadTask = 0;
 static EWRAM_DATA bool8 sIndexReadMine = FALSE;
 static EWRAM_DATA bool8 sIndexReadToPerspective = FALSE;
 
-//  T-280: before the national INDEX, an entry past the first 151 cannot be opened at all (DexScreen_ShowEntryOnly
-//  declines it), and the read used to fade to black and come back with nothing. Now L simply refuses, with the
-//  game's own "cannot" sound, and nothing moves.
+//  T-280: before the national INDEX, an entry past the first 151 could not be opened at all (DexScreen_ShowEntryOnly
+//  declined it), and the read used to fade to black and come back with nothing, so L refused, with the game's own
+//  "cannot" sound. T-329 lifted the decline, and T-334 (the user, 2026-10-19) lifts this gate with it: L reads every
+//  daemon's entry mid-battle, past 151 or not, before the GLOBAL INDEX. The refusal stays for whatever else asks it.
 static bool8 CanReadInBattle(u16 species)
 {
-    return IsNationalPokedexEnabled() || SpeciesToNationalPokedexNum(species) <= KANTO_DEX_COUNT;
+    return TRUE;
 }
 
 static void ReadIndexEntryInBattle(void)

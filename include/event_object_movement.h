@@ -159,6 +159,7 @@ u8 DoJumpSpriteMovement(struct Sprite *);
 u8 DoJumpSpecialSpriteMovement(struct Sprite *);
 void TurnVirtualObject(u8 virtualObjId, u8 direction);
 const u8 *GetObjectEventScriptPointerByObjectEventId(u8 objectEventId);
+u16 GetObjectEventFlagId(u8 objectEventId);   // T-334: the flag that hides it (its template's)
 u8 GetFirstInactiveObjectEventId(void);
 u8 GetCollisionFlagsAtCoords(struct ObjectEvent * objectEvent, s16 x, s16 y, u8 direction);
 void OverrideTemplateCoordsForObjectEvent(const struct ObjectEvent *objectEvent);

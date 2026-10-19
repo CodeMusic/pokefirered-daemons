@@ -2723,6 +2723,12 @@ static u16 GetObjectEventFlagIdByObjectEventId(u8 objectEventId)
     return GetObjectEventFlagIdByLocalIdAndMap(gObjectEvents[objectEventId].localId, gObjectEvents[objectEventId].mapNum, gObjectEvents[objectEventId].mapGroup);
 }
 
+//  T-334: an object's hiding flag, read from outside (field_control_avatar.c's unseen legends)
+u16 GetObjectEventFlagId(u8 objectEventId)
+{
+    return GetObjectEventFlagIdByObjectEventId(objectEventId);
+}
+
 // Unused
 u8 GetObjectTrainerTypeByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
 {

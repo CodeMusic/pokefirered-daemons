@@ -5414,13 +5414,11 @@ static void CB2_UseEvolutionStone(void)
     RemoveBagItem(gSpecialVar_ItemId, 1);
 }
 
+//  T-334 (the user, 2026-10-19): no GLOBAL INDEX gate on a stone either -- a daemon past the first 151 evolves by its
+//  stone from the start, as T-329 let every other evolution. Vanilla refused a stone whose result was past 151.
 static bool8 MonCanEvolve(void)
 {
-    if (!IsNationalPokedexEnabled()
-     && GetEvolutionTargetSpecies(&gPlayerParty[gPartyMenu.slotId], EVO_MODE_ITEM_USE, gSpecialVar_ItemId) > KANTO_DEX_COUNT)
-        return FALSE;
-    else
-        return TRUE;
+    return TRUE;
 }
 
 u8 GetItemEffectType(u16 item)

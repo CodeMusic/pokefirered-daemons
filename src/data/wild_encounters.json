@@ -4683,9 +4683,9 @@
                 "species": "SPECIES_GLOOM"
               },
               {
-                "min_level": 36,
-                "max_level": 36,
-                "species": "SPECIES_SCEPTILE",
+                "min_level": 32,
+                "max_level": 32,
+                "species": "SPECIES_TREECKO",
                 "t334_was": {
                   "min_level": 32,
                   "max_level": 32,
@@ -4693,9 +4693,9 @@
                 }
               },
               {
-                "min_level": 30,
-                "max_level": 30,
-                "species": "SPECIES_SHIFTRY",
+                "min_level": 36,
+                "max_level": 36,
+                "species": "SPECIES_SCEPTILE",
                 "t334_was": {
                   "min_level": 30,
                   "max_level": 30,
@@ -4705,7 +4705,12 @@
               {
                 "min_level": 34,
                 "max_level": 34,
-                "species": "SPECIES_VENONAT"
+                "species": "SPECIES_SHIFTRY",
+                "t334_was": {
+                  "min_level": 34,
+                  "max_level": 34,
+                  "species": "SPECIES_VENONAT"
+                }
               },
               {
                 "min_level": 34,
@@ -4720,7 +4725,7 @@
               {
                 "min_level": 31,
                 "max_level": 31,
-                "species": "SPECIES_TREECKO",
+                "species": "SPECIES_BELLOSSOM",
                 "t334_was": {
                   "min_level": 31,
                   "max_level": 31,
@@ -18108,7 +18113,7 @@
               {
                 "min_level": 37,
                 "max_level": 37,
-                "species": "SPECIES_MASQUERAIN",
+                "species": "SPECIES_SHEDINJA",
                 "t334_was": {
                   "min_level": 37,
                   "max_level": 37,
@@ -18118,7 +18123,7 @@
               {
                 "min_level": 35,
                 "max_level": 35,
-                "species": "SPECIES_SHEDINJA",
+                "species": "SPECIES_SHIFTRY",
                 "t334_was": {
                   "min_level": 35,
                   "max_level": 35,
@@ -18128,7 +18133,7 @@
               {
                 "min_level": 32,
                 "max_level": 32,
-                "species": "SPECIES_TREECKO",
+                "species": "SPECIES_BELLOSSOM",
                 "t334_was": {
                   "min_level": 32,
                   "max_level": 32,
@@ -18136,9 +18141,9 @@
                 }
               },
               {
-                "min_level": 36,
-                "max_level": 36,
-                "species": "SPECIES_SCEPTILE",
+                "min_level": 30,
+                "max_level": 30,
+                "species": "SPECIES_TREECKO",
                 "t334_was": {
                   "min_level": 30,
                   "max_level": 30,
@@ -18146,9 +18151,9 @@
                 }
               },
               {
-                "min_level": 34,
-                "max_level": 34,
-                "species": "SPECIES_SHIFTRY",
+                "min_level": 36,
+                "max_level": 36,
+                "species": "SPECIES_SCEPTILE",
                 "t334_was": {
                   "min_level": 34,
                   "max_level": 34,
@@ -18158,7 +18163,7 @@
               {
                 "min_level": 34,
                 "max_level": 34,
-                "species": "SPECIES_TROPIUS",
+                "species": "SPECIES_CACTURNE",
                 "t334_was": {
                   "min_level": 34,
                   "max_level": 34,
@@ -18168,7 +18173,7 @@
               {
                 "min_level": 35,
                 "max_level": 35,
-                "species": "SPECIES_CACTURNE",
+                "species": "SPECIES_MASQUERAIN",
                 "t334_was": {
                   "min_level": 35,
                   "max_level": 35,
@@ -18188,7 +18193,12 @@
               {
                 "min_level": 37,
                 "max_level": 37,
-                "species": "SPECIES_VENOMOTH"
+                "species": "SPECIES_TROPIUS",
+                "t334_was": {
+                  "min_level": 37,
+                  "max_level": 37,
+                  "species": "SPECIES_VENOMOTH"
+                }
               },
               {
                 "min_level": 37,

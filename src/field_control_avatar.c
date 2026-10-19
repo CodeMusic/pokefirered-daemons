@@ -6,6 +6,7 @@
 #include "daycare.h"
 #include "event_data.h"
 #include "event_object_movement.h"
+#include "constants/event_object_movement.h"   // T-334: MOVEMENT_TYPE_INVISIBLE
 #include "event_scripts.h"
 #include "fieldmap.h"
 #include "random.h"
@@ -83,6 +84,7 @@ static void UpdateHappinessStepCounter(void);
 static bool8 UpdatePoisonStepCounter(void);
 static bool8 CheckStandardWildEncounter(u32 metatileAttributes);
 static bool8 TrySetUpWalkIntoSignpostScript(struct MapPosition * position, u16 metatileBehavior, u8 playerDirection);
+static bool8 TryWalkIntoUnseenLegend(struct MapPosition * position, u8 playerDirection);   // T-334
 static void SetUpWalkIntoSignScript(const u8 *script, u8 playerDirection);
 static u8 GetFacingSignpostType(u16 metatileBehvaior, u8 direction);
 static const u8 *GetSignpostScriptAtMapPosition(struct MapPosition * position);
@@ -433,6 +435,11 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     if (input->heldDirection && input->dpadDirection == playerDirection)
     {
         if (TrySetUpWalkIntoSignpostScript(&position, metatileBehavior, playerDirection) == TRUE)
+        {
+            gFieldInputRecord.heldDirection = TRUE;
+            return TRUE;
+        }
+        if (TryWalkIntoUnseenLegend(&position, playerDirection) == TRUE)
         {
             gFieldInputRecord.heldDirection = TRUE;
             return TRUE;
@@ -995,6 +1002,32 @@ void RestartWildEncounterImmunitySteps(void)
 static bool8 CheckStandardWildEncounter(u32 metatileAttributes)
 {
     return TryStandardWildEncounter(metatileAttributes);
+}
+
+//  T-334 (the user, 2026-10-19): a GLOBAL INDEX legend with no overworld art stands unseen, and is FOUND BY WALKING
+//  INTO ITS PLACE -- the cry and the battle are the meeting (A still works too). Only the GLOBAL INDEX's own block of
+//  hiding flags counts, so vanilla's unseen JOURNALS on the PC counters still wait for A.
+static bool8 TryWalkIntoUnseenLegend(struct MapPosition *position, u8 playerDirection)
+{
+    u8 objectEventId = GetObjectEventIdByPosition(position->x, position->y, position->elevation);
+    u16 flagId;
+    const u8 *script;
+
+    if (objectEventId == OBJECT_EVENTS_COUNT || gObjectEvents[objectEventId].localId == LOCALID_PLAYER)
+        return FALSE;
+    if (gObjectEvents[objectEventId].movementType != MOVEMENT_TYPE_INVISIBLE)
+        return FALSE;
+    flagId = GetObjectEventFlagId(objectEventId);
+    if (flagId < FLAG_HIDE_GLOBAL_ENTEI || flagId > FLAG_HIDE_GLOBAL_RAYQUAZA)
+        return FALSE;
+    script = GetObjectEventScriptPointerByObjectEventId(objectEventId);
+    if (script == NULL)
+        return FALSE;
+    gSelectedObjectEvent = objectEventId;
+    gSpecialVar_LastTalked = gObjectEvents[objectEventId].localId;
+    gSpecialVar_Facing = playerDirection;
+    ScriptContext_SetupScript(script);
+    return TRUE;
 }
 
 static bool8 TrySetUpWalkIntoSignpostScript(struct MapPosition * position, u16 metatileBehavior, u8 playerDirection)
