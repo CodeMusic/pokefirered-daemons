@@ -7,6 +7,8 @@
 void DaemonsHouse_Add(s32 money);
 void DaemonsHouse_AddPull(u16 bet, u16 payout);
 void DaemonsHouse_ReadTake(void);
+void DaemonsHouse_RecordFall(void);
+void DaemonsHouse_ReadTakeAtFall(void);
 void DaemonsHouse_PlacePlants(void);
 void DaemonsHouse_PlantHere(void);
 

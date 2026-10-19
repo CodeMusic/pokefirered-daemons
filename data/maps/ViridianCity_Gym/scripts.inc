@@ -16,6 +16,7 @@ ViridianCity_Gym_EventScript_Giovanni::
 ViridianCity_Gym_EventScript_DefeatedGiovanni::
 	famechecker FAMECHECKER_GIOVANNI, 3
 	setflag FLAG_HIDE_MISC_KANTO_ROCKETS
+	special DaemonsHouse_RecordFall   @ T-427: what the house kept, frozen as CORPUS falls
 	setflag FLAG_DEFEATED_LEADER_GIOVANNI
 	setflag FLAG_BADGE08_GET
 	setvar VAR_MAP_SCENE_ROUTE22, 3

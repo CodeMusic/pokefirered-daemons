@@ -22,11 +22,11 @@ CeladonCity_EventScript_Woman::
 	end
 
 @ T-427 (the user, 2026-10-19): once CORPUS falls, what the house kept comes back to VERDIGRIS -- with its amount when
-@ there is one
+@ there is one: the take as CORPUS fell, frozen there (the user, 2026-10-19), not what it has grown to since
 CeladonCity_EventScript_WomanTakingsBack::
 	lock
 	faceplayer
-	special DaemonsHouse_ReadTake
+	special DaemonsHouse_ReadTakeAtFall
 	goto_if_eq VAR_RESULT, HOUSE_TAKE_KEPT, CeladonCity_EventScript_WomanTakingsBackAmount
 	msgbox CeladonCity_Text_TakingsCameBack
 	release

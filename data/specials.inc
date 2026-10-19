@@ -504,4 +504,6 @@ gSpecials::
 	def_special DaemonsHouse_ReadTake   @ T-427
 	def_special DaemonsHouse_PlacePlants
 	def_special DaemonsHouse_PlantHere
+	def_special DaemonsHouse_RecordFall   @ T-427: the take freezes at the fall
+	def_special DaemonsHouse_ReadTakeAtFall
 gSpecialsEnd::

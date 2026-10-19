@@ -4,6 +4,7 @@
 #include "field_player_avatar.h"
 #include "string_util.h"
 #include "daemons_house.h"
+#include "constants/flags.h"
 #include "constants/maps.h"
 
 // T-427 WHAT THE HOUSE KEEPS GOES TO CORPUS (the user, 2026-10-18; confirmed by phone 2026-10-19). One number, the
@@ -33,16 +34,42 @@ void DaemonsHouse_AddPull(u16 bet, u16 payout)
     DaemonsHouse_Add(((s32)bet - (s32)payout) * HOUSE_COIN_PRICE);
 }
 
-// special: gStringVar1 = the take's size; VAR_RESULT = HOUSE_TAKE_NONE (zero), HOUSE_TAKE_KEPT, HOUSE_TAKE_OWED
-void DaemonsHouse_ReadTake(void)
+// gStringVar1 = the size of a take; VAR_RESULT = HOUSE_TAKE_NONE (zero), HOUSE_TAKE_KEPT, HOUSE_TAKE_OWED
+static void ReadAmount(s32 take)
 {
-    s32 take = gSaveBlock2Ptr->houseTake;
     s32 size = take < 0 ? -(take + 1) : take;   // -INT_MIN would not fit an s32
 
     if (take < 0 && size < 0x7FFFFFFF)
         size++;
     ConvertIntToDecimalStringN(gStringVar1, size, STR_CONV_MODE_LEFT_ALIGN, 10);
     gSpecialVar_Result = take > 0 ? HOUSE_TAKE_KEPT : take < 0 ? HOUSE_TAKE_OWED : HOUSE_TAKE_NONE;
+}
+
+// special: the live take, for the ledger
+void DaemonsHouse_ReadTake(void)
+{
+    ReadAmount(gSaveBlock2Ptr->houseTake);
+}
+
+// special, as CORPUS falls (SCORN beaten at VIRIDIAN's BENCHMARK, the script that sets FLAG_HIDE_MISC_KANTO_ROCKETS):
+// the take freezes there, for VERDIGRIS (the user, 2026-10-19). Once only.
+void DaemonsHouse_RecordFall(void)
+{
+    if (FlagGet(FLAG_HOUSE_TAKE_FROZEN))
+        return;
+    gSaveBlock2Ptr->houseTakeAtFall = gSaveBlock2Ptr->houseTake;
+    FlagSet(FLAG_HOUSE_TAKE_FROZEN);
+}
+
+// special, VERDIGRIS after the fall: the take as it stood when CORPUS fell -- never what it has grown to since. A save
+// that saw the fall before this was recorded freezes it now, the first time she says it: the best it can do.
+// VAR_RESULT = HOUSE_TAKE_KEPT with the amount, else HOUSE_TAKE_NONE (no specifics when the house was not ahead).
+void DaemonsHouse_ReadTakeAtFall(void)
+{
+    DaemonsHouse_RecordFall();
+    ReadAmount(gSaveBlock2Ptr->houseTakeAtFall);
+    if (gSpecialVar_Result != HOUSE_TAKE_KEPT)
+        gSpecialVar_Result = HOUSE_TAKE_NONE;
 }
 
 // ------------------------------------------------------------------------------------------------------- the plants

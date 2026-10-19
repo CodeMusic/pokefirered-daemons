@@ -354,7 +354,10 @@ struct SaveBlock2
     /*0xAF0*/ struct BerryCrush berryCrush;
     /*0xB00*/ struct PokemonJumpRecords pokeJump;
     /*0xB10*/ struct BerryPickingResults berryPick;
-    /*0xB20*/ u8 filler_B20[0x400 - DAEMONS_FLAGS_SIZE - 4];
+    /*0xB20*/ u8 filler_B20[0x400 - DAEMONS_FLAGS_SIZE - 8];
+    //  T-427 (the user, 2026-10-19): the take as it stood when CORPUS fell -- what VERDIGRIS names afterwards, frozen
+    //  there while houseTake goes on counting. Recorded once (FLAG_HOUSE_TAKE_FROZEN). Plain, like the take below it.
+    /*0xE98*/ s32 houseTakeAtFall;
     //  T-427: the house's take -- what the GAME CORNER (and the companion's CASINO, at SYNC) kept, in money: bets less
     //  payouts, negative while the player is ahead. Plain, not XORed as money is; only ever added to. Taken out of the
     //  filler like the flags below it, so nothing after it moves.

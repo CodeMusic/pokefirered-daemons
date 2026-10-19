@@ -1863,6 +1863,7 @@
 #define FLAG_ATTENDANT_DREAM_ELITE_FOUR       (DAEMONS_FLAGS_START + 0x3CB)
 #define FLAG_ATTENDANT_DREAM_CHAMPION         (DAEMONS_FLAGS_START + 0x3CC)
 #define FLAG_GOT_SUBTLE_LAYER                 (DAEMONS_FLAGS_START + 0x3E0)   // T-423: the game lane's block 0x3E0-0x3EF
+#define FLAG_HOUSE_TAKE_FROZEN                (DAEMONS_FLAGS_START + 0x3E1)   // T-427: houseTakeAtFall is recorded
 
 #define DAEMONS_FLAGS_COUNT           0x400
 #define DAEMONS_FLAGS_END             (DAEMONS_FLAGS_START + DAEMONS_FLAGS_COUNT - 1)

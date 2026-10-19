@@ -260,13 +260,15 @@ u8 VarGetObjectEventGraphicsId(u8 idx)
 //  T-17, both halves of it. The first says the new block came OUT of the
 //  filler rather than after it; the second says the field below it did not
 //  move, which is the whole reason an existing save still loads.
-STATIC_ASSERT(sizeof(((struct SaveBlock2 *)0)->filler_B20) + 4 + DAEMONS_FLAGS_SIZE == 0x400,
+STATIC_ASSERT(sizeof(((struct SaveBlock2 *)0)->filler_B20) + 8 + DAEMONS_FLAGS_SIZE == 0x400,
               DaemonsFlagsCameOutOfTheFiller);
 STATIC_ASSERT(offsetof(struct SaveBlock2, encryptionKey) == 0xF20,
               DaemonsFlagsMovedNothing);
 //  T-427: the house's take sits just below the flags, at the offset the companion reads (companion_export.py).
 STATIC_ASSERT(offsetof(struct SaveBlock2, houseTake) == 0xE9C, DaemonsHouseTakeCameOutOfTheFiller);
 STATIC_ASSERT(offsetof(struct SaveBlock2, daemonsFlags) == 0xEA0, DaemonsHouseTakeMovedNothing);
+//  T-427: the take at CORPUS's fall, just below the take; the companion reads it too (profile_layout's house_take_at_fall).
+STATIC_ASSERT(offsetof(struct SaveBlock2, houseTakeAtFall) == 0xE98, DaemonsHouseTakeAtFallCameOutOfTheFiller);
 
 u8 *GetFlagAddr(u16 idx)
 {
