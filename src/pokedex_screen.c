@@ -4020,7 +4020,11 @@ static u8 DexScreen_LookUpCategoryBySpecies(u16 species)
                     sPokedexScreenData->categoryCursorPosInPage = posInPage;
                     return FALSE;
                 }
-                if (DexScreen_CanShowMonInDex(dexSpecies) == TRUE && DexScreen_GetSetPokedexFlag(dexSpecies, FLAG_GET_SEEN, TRUE))
+                //  2026-10-19 (the field test's CONTEXT run): T-185 keeps an unseen daemon on its page, as a
+                //  silhouette, so the cursor counts EVERY daemon before this one -- as DexScreen_CreateCategoryPage-
+                //  SpeciesList places them. Vanilla counted only the seen, and the page no longer closes the gap:
+                //  GOLDSET read in battle, with SPRAWL and BADSEED unseen, opened SKEW's page instead.
+                if (DexScreen_CanShowMonInDex(dexSpecies) == TRUE)
                     posInPage++;
             }
         }
