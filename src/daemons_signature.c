@@ -152,6 +152,8 @@ static const s8 sHeart[12][2] =
 {
     {0, -12}, {3, -20}, {18, -24}, {27, -11}, {18, 5}, {3, 19}, {0, 25}, {-3, 19}, {-18, 5}, {-27, -11}, {-18, -24}, {-3, -20},
 };
+#define HEART_ABOVE 16   // its top (-24) and its point (+25) at two-thirds size: how far it reaches above and below
+#define HEART_BELOW 17
 
 // ---------------------------------------------------------------------------------------------------------- which
 
@@ -403,8 +405,15 @@ static void LaunchGlyph(const struct DaemonsSignature *sig, const struct Holiday
     }
     if (shape == HRL_SHAPE_HEART)
     {
-        x0 = cx + sHeart[lane % 12][0];           // PAIRING DAY: a heart of bits -- never vanilla's heart sprite
-        y0 = cy - 10 + sHeart[lane % 12][1];
+        // PAIRING DAY: a heart of bits -- never vanilla's heart sprite -- floating ABOVE the daemon, not over it (the
+        // user, 2026-10-18). Two-thirds size (DRAFT), its point 2px over the top of the picture, held on the screen:
+        // a foe stands near the top, so its heart can come down onto its crown, never off the edge.
+        s16 hy = GetBattlerSpriteCoordAttr(self ? gBattleAnimAttacker : gBattleAnimTarget, BATTLER_COORD_ATTR_TOP)
+               - 2 - HEART_BELOW;
+        if (hy < HEART_ABOVE + 4)
+            hy = HEART_ABOVE + 4;
+        x0 = cx + sHeart[lane % 12][0] * 2 / 3;
+        y0 = hy + sHeart[lane % 12][1] * 2 / 3;
     }
     else if (shape == HRL_SHAPE_STARS)
     {
@@ -428,6 +437,13 @@ static void LaunchGlyph(const struct DaemonsSignature *sig, const struct Holiday
     sprite->sPhase = phase | ((sig->wave & 0xFF) << 8);
     sprite->sShape = (path & 0xF) | (mods << 4) | (notes ? SHAPE_NOTES : 0) | (frame == 1 ? SHAPE_BIT : 0) | extra;
     StartSpriteAnim(sprite, frame);
+    if (shape == HRL_SHAPE_HEART)
+    {
+        // above my daemon is under the foe's HP box, which an animation raises to priority 0 (battle_anim.c): the
+        // heart floats in front of it
+        sprite->oam.priority = 0;
+        sprite->subpriority = 0;
+    }
 }
 
 #undef sTimer
