@@ -35,7 +35,7 @@
 #include "daemon_streaks.h"
 #include "palette.h"
 
-// THE THEATRE (T-136, debug ROM only). At "What will X do?", SELECT opens it: any routine's animation, played on
+// THE THEATRE (T-136, debug ROM only). At "What will X do?", START opens it (SELECT is the stats, T-190): any routine's animation, played on
 // demand between the two daemons already on the field, so T-134's families can be reviewed as a sequence rather
 // than by grinding into the fight that happens to use the move. It is also T-132's acceptance test: SELECT teaches
 // the shown routine into a move slot and re-patches the streaks on the spot.

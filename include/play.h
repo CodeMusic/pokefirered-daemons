@@ -8,6 +8,10 @@ enum { PLAY_HARP, PLAY_FLUTE };
 // The one OBJ palette every colour of a note is drawn from (tools/genplaynotes.py): 1-12 the twelve keys, C to B.
 #define PALTAG_KEY_COLOURS 0x1042
 
+// THE NEXUS's Christmas tree is map tiles, on a BG palette of its own (tools/gbanexusmap.py): PLAY warms it when lit,
+// the fir's song flashes it (field_specials.c). One definition for both (T-421).
+#define NEXUS_TREE_PALETTE 12
+
 #ifdef FIRERED
 #define PLAY_INSTRUMENT PLAY_HARP    // CONTENT's
 #define PLAY_ITEM       ITEM_HARP

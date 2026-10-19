@@ -1814,7 +1814,10 @@ static void FieldCB_ShowMapNameOnContinue(void)
     FieldCB_WarpExitFadeFromBlack();
 }
 
-void CB2_ContinueSavedGame(void)
+//  What a loaded save is given on the way in. A CONTINUE comes through ONE of two doors: CB2_ContinueSavedGame, or --
+//  with a recap ("Previously on your quest") -- CB2_EnterFieldFromQuestLog, after the save is loaded again. Both call
+//  this, so nothing here is skipped by the second (T-421: T-179's fix was).
+static void ContinueLoadedSave(void)
 {
     //  T-179. A save made before the Help System moved into the menu still says HELP, and in that mode
     //  L and R open a help tab instead of paging the Index, the summary screen and the boxes -- so the
@@ -1825,6 +1828,11 @@ void CB2_ContinueSavedGame(void)
     //  T-420: a save made before the STREAM's flags moved out from under OPUS's, carried across once.
     TeachyTvRepairOldSave();
     DaemonsDreamLog_Loaded();   // T-412: a continue is a load -- on a later day, a waiting dream comes on the first step
+}
+
+void CB2_ContinueSavedGame(void)
+{
+    ContinueLoadedSave();
     FieldClearVBlankHBlankCallbacks();
     StopMapMusic();
     ResetSafariZoneFlag_();
@@ -2467,9 +2475,8 @@ static bool32 LoadMap_QLPlayback(u8 *state)
 void CB2_EnterFieldFromQuestLog(void)
 {
     //  T-420: a CONTINUE with a recap ("Previously on your quest") comes in here, after the save is loaded again,
-    //  and never through CB2_ContinueSavedGame -- so the one-time repair is made on both doors.
-    TeachyTvRepairOldSave();
-    DaemonsDreamLog_Loaded();   // T-412: a continue is a load -- on a later day, a waiting dream comes on the first step
+    //  and never through CB2_ContinueSavedGame -- so what a loaded save is given is given on both doors.
+    ContinueLoadedSave();
     FieldClearVBlankHBlankCallbacks();
     StopMapMusic();
     gGlobalFieldTintMode = QL_TINT_BACKUP_GRAYSCALE;

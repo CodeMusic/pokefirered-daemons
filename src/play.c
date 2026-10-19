@@ -1541,7 +1541,6 @@ void Play_FireworksEnd(void)
 
 // ------------------------------------------------------------------------------------------------ THE NEXUS, lit (P5)
 
-#define NEXUS_TREE_PALETTE 12           // its own (tools/gbanexusmap.py; field_specials.c's FIR_NEXUS_TREE_PALETTE)
 #define NEXUS_GOLD         RGB(31, 24, 6)
 #define NEXUS_WARMTH       6            // sixteenths of the way to gold
 

@@ -460,7 +460,8 @@ static void Background(void (*draw)(void))
     {
         draw();
         sBook->blank = Alloc(BR_WIN_BYTES);
-        CpuFastCopy(gWindows[WIN_BOOK].tileData, sBook->blank, BR_WIN_BYTES);
+        if (sBook->blank != NULL)   // T-421: no room to keep it -- draw it again next time
+            CpuFastCopy(gWindows[WIN_BOOK].tileData, sBook->blank, BR_WIN_BYTES);
     }
     else
     {
@@ -776,7 +777,8 @@ static void GuidePageBackground(void)
     {
         DrawGuidePage();
         sBook->blankPage = Alloc(BR_WIN_BYTES);
-        CpuFastCopy(gWindows[WIN_BOOK].tileData, sBook->blankPage, BR_WIN_BYTES);
+        if (sBook->blankPage != NULL)   // T-421: no room to keep it -- draw it again next time
+            CpuFastCopy(gWindows[WIN_BOOK].tileData, sBook->blankPage, BR_WIN_BYTES);
     }
     else
     {
@@ -1724,14 +1726,22 @@ static void CB2_OpenBook(void)
     SetMainCallback2(CB2_Book);
 }
 
-static void OpenBook(u8 book, u8 view)
+//  T-421: FALSE when there is no room for the book -- the field comes back (the script waits on it, already faded, as
+//  it would for a book closed) and the caller opens nothing, as play.c's Play_Start does.
+static bool8 OpenBook(u8 book, u8 view)
 {
     sBook = AllocZeroed(sizeof(*sBook));
+    if (sBook == NULL)
+    {
+        SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
+        return FALSE;
+    }
     sBook->book = book;
     sBook->view = view;
     QuestLog_CutRecording();
     SetMainCallback2(CB2_OpenBook);
     LockPlayerFieldControls();
+    return TRUE;
 }
 
 //  ---------------------------------------------------------------- the ways in
@@ -1749,7 +1759,8 @@ static void CopyBounded(u8 *dest, const u8 *src, u16 size)
 //  A NOTEBOOK page: TITLE over TEXT, already expanded. The script fades to black first and waits.
 void BookReader_OpenNotebookPage(const u8 *title, const u8 *text)
 {
-    OpenBook(BOOK_NOTEBOOK, VIEW_PAGE);
+    if (!OpenBook(BOOK_NOTEBOOK, VIEW_PAGE))
+        return;
     CopyBounded(sBook->title, title, sizeof(sBook->title));
     CopyBounded(sBook->text, text, BR_TEXT_SIZE);
     Reflow(sBook->text, NB_TEXT_W, BR_FONT);
@@ -1763,7 +1774,8 @@ void Textbook_Open(void)
 {
     u8 k;
 
-    OpenBook(BOOK_TEXTBOOK, VIEW_CONTENTS);
+    if (!OpenBook(BOOK_TEXTBOOK, VIEW_CONTENTS))
+        return;
     for (k = 1; k <= TB_CHAPTERS; k++)
     {
         if (ChapterOpen(k))
@@ -1783,13 +1795,15 @@ void Guide_Open(void)
 //  T-423: THE SUBTLE LAYER, open at its cover. The script fades first.
 void Subtle_Open(void)
 {
-    OpenBook(BOOK_SUBTLE, VIEW_COVER);
-    sBook->picEntry = 0xFF;
+    if (OpenBook(BOOK_SUBTLE, VIEW_COVER))
+        sBook->picEntry = 0xFF;
 }
 
 //  T-315: a NOTEBOOK page that ends on a QR code -- one more page, after the text. Called just after it is opened.
 void BookReader_AddQr(u8 which)
 {
+    if (sBook == NULL)   // T-421: the book could not be opened
+        return;
     sBook->qr = which;
     sBook->pageCount++;
 }
@@ -1797,12 +1811,14 @@ void BookReader_AddQr(u8 which)
 //  T-417: a SONGBOOK page -- its notes on a staff under the words, and the key's note at its left once known.
 void BookReader_AddSong(u8 song)
 {
+    if (sBook == NULL)   // T-421: the book could not be opened
+        return;
     sBook->song = song + 1;
 }
 
 //  T-311: the REVIEW BOARD's copy, on the shelf in its lobby.
 void Guide_OpenBoardCopy(void)
 {
-    OpenBook(BOOK_GUIDE, VIEW_COVER);
-    sBook->torn = TRUE;
+    if (OpenBook(BOOK_GUIDE, VIEW_COVER))
+        sBook->torn = TRUE;
 }

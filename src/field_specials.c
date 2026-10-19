@@ -45,6 +45,7 @@
 #include "constants/event_objects.h"
 #include "constants/metatile_labels.h"
 #include "scanline_effect.h"
+#include "play.h"   // NEXUS_TREE_PALETTE (T-421)
 
 static EWRAM_DATA u8 sElevatorCurrentFloorWindowId = 0;
 static EWRAM_DATA u16 sElevatorScroll = 0;
@@ -1808,7 +1809,6 @@ static const u16 sFirColour[][2] = { // without the key, in it
 #define FIR_MAP_PALETTES 0x1FFF // the map's thirteen; 13-15 are the message box's
 #define FIR_MAP_PEAK     5
 #define FIR_TREE_PEAK    11
-#define FIR_NEXUS_TREE_PALETTE 12 // THE NEXUS's Christmas tree is map tiles, on a palette of its own (tools/gbanexusmap.py)
 
 static const struct FirNote sFirTune[] =
 {   // T-409 (the user, 2026-10-16): in B-flat, the painting's own key -- its colours are the notes.
@@ -1894,7 +1894,7 @@ void SingingFir_Sing(void)
     gTasks[taskId].tTimer = 16;
     gTasks[taskId].tTreePal = -1;
     if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_NEXUS) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_NEXUS))
-        gTasks[taskId].tTreePal = FIR_NEXUS_TREE_PALETTE;
+        gTasks[taskId].tTreePal = NEXUS_TREE_PALETTE;   // play.h
     else if (!TryGetObjectEventIdByLocalIdAndMap(gSpecialVar_LastTalked, gSaveBlock1Ptr->location.mapNum,
                                                  gSaveBlock1Ptr->location.mapGroup, &objectEventId))
         gTasks[taskId].tTreePal = 16 + gSprites[gObjectEvents[objectEventId].spriteId].oam.paletteNum;
@@ -2001,7 +2001,9 @@ void Terminal_RandomNoRepeat(void)
 {
     u16 count = gSpecialVar_0x8004, last = VarGet(gSpecialVar_0x8005), pick;
 
-    if (last == 0 || last > count)
+    if (count <= 1)                       // T-421: one answer (or none) has nothing to step over -- and % 0 is undefined
+        pick = 0;
+    else if (last == 0 || last > count)
         pick = Random() % count;
     else if ((pick = Random() % (count - 1)) >= last - 1)
         pick++;

@@ -769,7 +769,7 @@ static void MoveCursor_Notebook(s32 itemIndex, bool8 onInit, struct ListMenu *li
 {
     if (!onInit)
         PlaySE(SE_SELECT);
-    sArrowScroll = list->itemsAbove;
+    sArrowScroll = list->cursorPos;   // T-421: the scroll (cursorPos is the top item), not the cursor's row
     if (sListIsEntries)
         PrintPageNote(itemIndex);
 }
