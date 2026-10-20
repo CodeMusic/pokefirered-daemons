@@ -9,6 +9,7 @@
 // (the results and the pieces, CASINO_LOSE.. and CASINO_JACK.., are include/daemons_casino.h's, slots.ts's order)
 static const u16 sCasinoWeights[CASINO_OUTCOME_COUNT] = {694, 180, 40, 40, 30, 12, 4};
 static const u8 sCasinoPays[CASINO_OUTCOME_COUNT] = {0, 1, 2, 4, 6, 12, 50};
+#define CASINO_CHEER_PAYS   12      // tableAct: a pay this big (or the JACKPOT) is cheered by the other machines
 #define CASINO_STRIP        12      // each piece twice round a reel
 STATIC_ASSERT(CASINO_STRIP == CASINO_STRIP_LENGTH, CasinoStripIsTheCompanions);
 #define CASINO_FINE         10000   // a table for any return is kept in ten thousand

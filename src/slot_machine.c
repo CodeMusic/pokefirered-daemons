@@ -1096,6 +1096,7 @@ static void MainTask_WinHandlePayout(u8 taskId)
         SetSlotMachineSetupTask(SLOTTASK_SHOW_AMOUNTS, 0);
         SetSlotMachineSetupTask(SLOTTASK_ANIM_WIN, 1);
         data[1] = 8;
+        data[2] = 0;   // T-422: not yet cheered
         data[0]++;
         break;
     case 1:
@@ -1141,6 +1142,20 @@ static void MainTask_WinHandlePayout(u8 taskId)
     case 3:
         if (!DaemonsCasino_TunePlaying() && !IsSlotMachineSetupTaskActive(0))
         {
+            // T-422: a big win, and the crowd at the other machines cheers it -- the companion's cheer from the table
+            if (!data[2] && DaemonsCasino_TableCheers(sSlotMachineState->outcome))
+            {
+                data[2] = 1;
+                data[1] = 90;   // the words stay a moment and a half after the cheer, to be read
+                DaemonsCasino_PlayTune(CASINO_TUNE_CHEER, sSlotMachineState->day.dayNote);
+                CasinoSay(gText_CasinoCheer);
+                break;
+            }
+            if (data[2] && data[1] > 0)
+            {
+                data[1]--;
+                break;
+            }
             SetSlotMachineSetupTask(SLOTTASK_END_ANIM_WIN, 0);
             data[0]++;
         }

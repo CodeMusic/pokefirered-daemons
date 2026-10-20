@@ -476,6 +476,13 @@ u8 DaemonsCasino_WinTune(u8 outcome, u8 look)
     return CASINO_TUNE_WIN;
 }
 
+// C-151 / T-422 (the user, 2026-10-19): a win as big as slots.ts's tableAct calls to the table -- the JACKPOT, or a pay
+// of CASINO_CHEER_PAYS and up -- is cheered by the crowd at the GAME CORNER's other machines (TUNE_SLOTS_CHEER)
+bool8 DaemonsCasino_TableCheers(u8 outcome)
+{
+    return outcome == CASINO_JACK3 || sCasinoPays[outcome] >= CASINO_CHEER_PAYS;
+}
+
 // ------------------------------------------------------------------------------------------------------- the pieces
 
 // The coin and the season's pieces, half the companion's size and outlined (gencasino.py), and what falls.
@@ -706,3 +713,5 @@ u8 DaemonsCasino_BitTile(u8 look, u8 *motion)
 const u8 gText_CasinoSoClose[]    = _("SO CLOSE");
 const u8 gText_CasinoAlmost[]     = _("ALMOST THE JACKPOT");
 const u8 gText_CasinoBetBack[]    = _("BET BACK");
+// T-422: the other machines' crowd, cheering a big win -- every one of them an animal (DRAFT; 198px in the small font)
+const u8 gText_CasinoCheer[]      = _("THE OTHER MACHINES CHEER: HOOT! YIP! MOO!");

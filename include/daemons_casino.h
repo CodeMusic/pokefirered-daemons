@@ -70,6 +70,7 @@ enum {
 void DaemonsCasino_PlayTune(u8 tune, u8 dayNote);
 bool8 DaemonsCasino_TunePlaying(void);
 void DaemonsCasino_StopTune(void);
+bool8 DaemonsCasino_TableCheers(u8 outcome);             // a big win (tableAct): the other machines cheer it
 u8 DaemonsCasino_WinTune(u8 outcome, u8 look);           // the tune a win plays, a holiday's own on a big one
 
 // The pieces and the season over the reels (src/slot_machine.c draws them).
@@ -84,5 +85,6 @@ u8 DaemonsCasino_BitTile(u8 look, u8 *motion);          // motion: 0 falls, 1 ri
 extern const u8 gText_CasinoSoClose[];
 extern const u8 gText_CasinoAlmost[];
 extern const u8 gText_CasinoBetBack[];
+extern const u8 gText_CasinoCheer[];
 
 #endif // GUARD_DAEMONS_CASINO_H
