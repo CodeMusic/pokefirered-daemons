@@ -357,7 +357,7 @@
 // 278 and MUS_TITLE is 278 -- so a row added at the END shifts nothing.
 #define MUS_BRAZEN                347
 #define MUS_SLATE                 348   // SLATE's own; MUS_PEWTER is vanilla's again (tools/port_music.py)
-#define MUS_CALLOW                349   // T-05: Desperate Shadows, transcribed from the user's recording (tools/mp3midi.py)
+#define MUS_CALLOW                349   // T-05: CALLOW's theme, The Christmas Cloak of Self on the SCHOOLBELL band (tools/gengrovemusic.py); was Desperate Shadows (mp3midi.py)
 #define MUS_NEXUS                 350   // T-409: THE NEXUS's own, on the singing fir's notes (tools/gennexustheme.py)
 #define SE_HARP_C                 351   // T-417: PLAY's notes (tools/genplaysounds.py)
 #define SE_HARP_D                 352
