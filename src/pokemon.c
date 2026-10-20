@@ -3369,6 +3369,9 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
     case MON_DATA_MODERN_FATEFUL_ENCOUNTER:
         retVal = substruct3->modernFatefulEncounter;
         break;
+    case MON_DATA_DAEMONS_GIFT:   // T-406: the INDEX's BOUND line says A GIFT
+        retVal = substruct0->filler & 1;
+        break;
     case MON_DATA_SPECIES_OR_EGG:
         retVal = substruct0->species;
         if (substruct0->species && (substruct3->isEgg || boxMon->isBadEgg))
@@ -3778,6 +3781,9 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
         break;
     case MON_DATA_MODERN_FATEFUL_ENCOUNTER:
         SET8(substruct3->modernFatefulEncounter);
+        break;
+    case MON_DATA_DAEMONS_GIFT:   // T-406
+        substruct0->filler = (substruct0->filler & ~1) | (*data & 1);
         break;
     case MON_DATA_IVS:
     {

@@ -33,6 +33,7 @@
 #include "data/daemons_native.h"   // T-407: tools/gbanative.py
 #include "daemons_first_seen.h"      // T-406
 #include "region_map.h"             // T-406: GetMapName
+#include "constants/region_map_sections.h"   // T-406: the BOUND line
 
 #define TAG_AREA_MARKERS 2001
 
@@ -2204,6 +2205,63 @@ static void Workings_Step(struct WorkingsLayout *w, const struct Evolution *evo,
     Workings_Add(w, unit);
 }
 
+//  T-406 (the user, 2026-10-16/19): BOUND -- how the daemon you hold came to you, the first line of the workings
+//  (the INDEX's area page ends with FIRST MET; its box is full). The first held one is read: the party in order, then
+//  the boxes in order. Every daemon already carries it: its met location, METLOC_IN_GAME_TRADE, a met level of 0
+//  (hatched), METLOC_FATEFUL_ENCOUNTER, and an OT that is not you; a gift (givemon) is marked by ScriptGiveMon in
+//  substruct0's spare bits (MON_DATA_DAEMONS_GIFT), so one given before this build reads as bound where it was given.
+//  None held, or reading in a battle (the daemon in front of you is not yours): no line.
+static const u8 sText_Bound[] = _("BOUND: ");                      // T-406, DRAFT
+static const u8 sText_BoundTrade[] = _("BY TRADE");                // T-406, DRAFT
+static const u8 sText_BoundGift[] = _("A GIFT");                   // T-406, DRAFT
+static const u8 sText_BoundEgg[] = _("FROM AN EGG");               // T-406, DRAFT
+
+static struct BoxPokemon *DexScreen_FirstHeld(u16 species)
+{
+    u32 i, j;
+    struct BoxPokemon *mon;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        mon = &gPlayerParty[i].box;
+        if (GetBoxMonData(mon, MON_DATA_SPECIES, NULL) == species && !GetBoxMonData(mon, MON_DATA_IS_EGG, NULL))
+            return mon;
+    }
+    for (i = 0; i < TOTAL_BOXES_COUNT; i++)
+        for (j = 0; j < IN_BOX_COUNT; j++)
+        {
+            mon = GetBoxedMonPtr(i, j);
+            if (GetBoxMonData(mon, MON_DATA_SPECIES, NULL) == species && !GetBoxMonData(mon, MON_DATA_IS_EGG, NULL))
+                return mon;
+        }
+    return NULL;
+}
+
+static bool8 DexScreen_BoundLine(u16 species, u8 *out)
+{
+    struct BoxPokemon *mon;
+    u8 otName[PLAYER_NAME_LENGTH + 1];
+    u8 metLocation;
+    u8 *p;
+
+    if (sReadingInBattle || (mon = DexScreen_FirstHeld(species)) == NULL)
+        return FALSE;
+    metLocation = GetBoxMonData(mon, MON_DATA_MET_LOCATION, NULL);
+    GetBoxMonData(mon, MON_DATA_OT_NAME, otName);
+    p = StringCopy(out, sText_Bound);
+    if (metLocation == METLOC_IN_GAME_TRADE || IsOtherTrainer(GetBoxMonData(mon, MON_DATA_OT_ID, NULL), otName))
+        StringCopy(p, sText_BoundTrade);
+    else if (GetBoxMonData(mon, MON_DATA_MET_LEVEL, NULL) == 0 || metLocation == METLOC_SPECIAL_EGG)
+        StringCopy(p, sText_BoundEgg);
+    else if (GetBoxMonData(mon, MON_DATA_DAEMONS_GIFT, NULL) || metLocation == METLOC_FATEFUL_ENCOUNTER)
+        StringCopy(p, sText_BoundGift);
+    else if (metLocation >= KANTO_MAPSEC_START && metLocation < MAPSEC_NONE)
+        GetMapName(p, metLocation, 0);
+    else
+        return FALSE;
+    return TRUE;
+}
+
 //  Lays the workings out and returns how many pages they take; `out` gets page `page` (0-based).
 static u8 DexScreen_Workings(u16 species, u8 page, u8 *out)
 {
@@ -2218,6 +2276,13 @@ static u8 DexScreen_Workings(u16 species, u8 page, u8 *out)
     w.line[0] = EOS;
     w.lineNo = 0;
     w.page = page;
+
+    //  T-406: how the one you hold came to you
+    if (DexScreen_BoundLine(species, unit))
+    {
+        Workings_Add(&w, unit);
+        Workings_EndLine(&w);
+    }
 
     //  the line, from its root: children after their parent, a sibling after a slash
     for (i = 0; i < 3 && (pre = DexScreen_PreEvolution(root)) != SPECIES_NONE; i++)

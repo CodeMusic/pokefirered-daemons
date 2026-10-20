@@ -50,9 +50,11 @@ u8 ScriptGiveMon(u16 species, u8 level, u16 item, u32 unused1, u32 unused2, u8 u
     u16 nationalDexNum;
     int sentToPc;
     u8 heldItem[2];
+    u8 gift = TRUE;
     struct Pokemon *mon = AllocZeroed(sizeof(struct Pokemon));
 
     CreateMon(mon, species, level, 32, 0, 0, OT_ID_PLAYER_ID, 0);
+    SetMonData(mon, MON_DATA_DAEMONS_GIFT, &gift);   // T-406: the INDEX's BOUND line says A GIFT
     heldItem[0] = item;
     heldItem[1] = item >> 8;
     SetMonData(mon, MON_DATA_HELD_ITEM, heldItem);

@@ -91,6 +91,7 @@
 #define MON_DATA_SPEED2                   86
 #define MON_DATA_SPATK2                   87
 #define MON_DATA_SPDEF2                   88
+#define MON_DATA_DAEMONS_GIFT             89   // T-406: substruct0's spare u16, bit 0 -- given by a script (givemon), not bound
 
 // Pokemon types
 #define TYPE_NONE           255
