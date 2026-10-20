@@ -112,6 +112,7 @@ void DaemonsCasino_ReadDay(struct DaemonsCasinoDay *day)
     day->colourA = dressed && h->a ? h->a : sCasinoSeasonColours[day->season % SEASON_COUNT][0];
     day->colourB = dressed && h->b ? h->b : sCasinoSeasonColours[day->season % SEASON_COUNT][1];
     day->hat = dressed ? h->hat : CASINO_HAT_NONE;
+    day->flip = dressed && h->flip;
 }
 
 // context.ts's reasons in full: the holiday's name before its words, the city after the sky's, the edition's year
@@ -586,6 +587,21 @@ static void PutHat(u8 *frame, u8 palIndex, const struct DaemonsCasinoDay *day)
     }
 }
 
+// FOOLS' DAY (casino.cpp drawPicture: "upside down on April Fools' Day"): a daemon's frame turned over top to bottom,
+// so it stands on its head -- the daemons only; the coin and the season's piece stay as they are
+static void FlipFrame(u8 *frame)
+{
+    u8 x, y, a;
+
+    for (y = 0; y < 16; y++)
+        for (x = 0; x < 32; x++)
+        {
+            a = GetPix(frame, x, y);
+            SetPix(frame, x, y, GetPix(frame, x, 31 - y));
+            SetPix(frame, x, 31 - y, a);
+        }
+}
+
 // The six pieces' frames into `tiles` (6 x 512 bytes, slots.ts's order), and each one's palette: pal[k] 0-2 an icon
 // palette (gMonIconPalettes), 3 the coin's and 4 the season's (artPals[0], artPals[1], their day's colours filled in).
 void DaemonsCasino_BuildPieces(const struct DaemonsCasinoDay *day, const u16 species[4], const u32 personality[4],
@@ -603,6 +619,8 @@ void DaemonsCasino_BuildPieces(const struct DaemonsCasinoDay *day, const u16 spe
             pal[k] = GetValidMonIconPalIndex(species[k]);
             if (day->hat != CASINO_HAT_NONE)
                 PutHat(frame, pal[k], day);
+            if (day->flip)
+                FlipFrame(frame);
         }
         else
         {
@@ -638,6 +656,8 @@ void DaemonsCasino_BuildDancer(const struct DaemonsCasinoDay *day, u16 species, 
     CpuCopy16(GetMonIconPtr(species, personality, FALSE) + FRAME_BYTES, frame, FRAME_BYTES);   // an icon is two frames, 512 bytes each
     if (day->hat != CASINO_HAT_NONE)
         PutHat(frame, GetValidMonIconPalIndex(species), day);
+    if (day->flip)
+        FlipFrame(frame);   // the dancer is the lead, and on FOOLS' DAY it dances on its head too
 }
 
 // ---------------------------------------------------------------------------------------- the season over the reels

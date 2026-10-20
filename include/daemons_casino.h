@@ -19,6 +19,7 @@ struct DaemonsCasinoDay
     u8 sky, watch, season;
     u8 look;          // CASINO_LOOK_*: the season's piece, and what falls over the reels
     u8 hat;           // CASINO_HAT_*
+    bool8 flip;       // the daemons stand on their heads (FOOLS' DAY; casino.cpp drawPicture)
     u8 dayNote;       // 0-11: the day's note, C (Sunday) .. B (Saturday)
     u8 whyFrom;       // CASINO_WHY_*: which part of the day `why` is, so the help card can name it as the companion does
     u32 colourA, colourB;   // 0xRRGGBB
