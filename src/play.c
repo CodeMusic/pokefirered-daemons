@@ -81,13 +81,14 @@
 // battle would end the task). THE NEXUS's light is kept: its tree's palette is warmed to gold whenever the map's
 // palettes load while FLAG_NEXUS_LIT is set (Play_OnTilesetPalettesLoaded).
 //
-// Not yet: the last key used. Every word here is DRAFT.
+// The last key chosen is kept (VAR_PLAY_KEY). Every word here is DRAFT.
 
 #define PLAY_TAG_NOTES 0x1040   // 16x16 x 12, a note of each key's colour
-#define PLAY_TAG_SMALL 0x1041   // 8x8 x 37: twelve wheel dots, twelve staff heads, twelve hollow heads, one gold
+#define PLAY_TAG_SMALL 0x1041   // 8x8 x 38: twelve wheel dots, twelve staff heads, twelve hollow heads, one gold, the sheet
 #define SMALL_HEAD     12
 #define SMALL_HOLLOW   24       // P5: the ghosts
 #define SMALL_GOLD     36       // P5: a joined song's heads
+#define SMALL_SHEET    37       // the BAND'S SHEET's glyph, beside B FLAT on the wheel once the sheet is held
 
 #define WHEEL_RADIUS   28
 #define FOLD_FRAMES    16
@@ -141,6 +142,7 @@ struct Play
     s16 cx, cy;              // the instrument, on screen
     u8 dots[12];
     u8 keyNote;
+    u8 sheetMark;            // the BAND'S SHEET's glyph beside B FLAT, while the wheel is open
     u8 heads[STAFF_HEADS];
     u8 drift[DRIFT_MAX];
     u16 lentColours[16];
@@ -211,27 +213,27 @@ static const union AnimCmd sAnim_Note[12][2] = {
     NOTE_FRAME(0), NOTE_FRAME(1), NOTE_FRAME(2), NOTE_FRAME(3), NOTE_FRAME(4), NOTE_FRAME(5),
     NOTE_FRAME(6), NOTE_FRAME(7), NOTE_FRAME(8), NOTE_FRAME(9), NOTE_FRAME(10), NOTE_FRAME(11),
 };
-static const union AnimCmd sAnim_Small[37][2] = {
+static const union AnimCmd sAnim_Small[38][2] = {
     SMALL_FRAME(0), SMALL_FRAME(1), SMALL_FRAME(2), SMALL_FRAME(3), SMALL_FRAME(4), SMALL_FRAME(5),
     SMALL_FRAME(6), SMALL_FRAME(7), SMALL_FRAME(8), SMALL_FRAME(9), SMALL_FRAME(10), SMALL_FRAME(11),
     SMALL_FRAME(12), SMALL_FRAME(13), SMALL_FRAME(14), SMALL_FRAME(15), SMALL_FRAME(16), SMALL_FRAME(17),
     SMALL_FRAME(18), SMALL_FRAME(19), SMALL_FRAME(20), SMALL_FRAME(21), SMALL_FRAME(22), SMALL_FRAME(23),
     SMALL_FRAME(24), SMALL_FRAME(25), SMALL_FRAME(26), SMALL_FRAME(27), SMALL_FRAME(28), SMALL_FRAME(29),
     SMALL_FRAME(30), SMALL_FRAME(31), SMALL_FRAME(32), SMALL_FRAME(33), SMALL_FRAME(34), SMALL_FRAME(35),
-    SMALL_FRAME(36),
+    SMALL_FRAME(36), SMALL_FRAME(37),
 };
 static const union AnimCmd *const sAnims_Note[12] = {
     sAnim_Note[0], sAnim_Note[1], sAnim_Note[2], sAnim_Note[3], sAnim_Note[4], sAnim_Note[5],
     sAnim_Note[6], sAnim_Note[7], sAnim_Note[8], sAnim_Note[9], sAnim_Note[10], sAnim_Note[11],
 };
-static const union AnimCmd *const sAnims_Small[37] = {
+static const union AnimCmd *const sAnims_Small[38] = {
     sAnim_Small[0], sAnim_Small[1], sAnim_Small[2], sAnim_Small[3], sAnim_Small[4], sAnim_Small[5],
     sAnim_Small[6], sAnim_Small[7], sAnim_Small[8], sAnim_Small[9], sAnim_Small[10], sAnim_Small[11],
     sAnim_Small[12], sAnim_Small[13], sAnim_Small[14], sAnim_Small[15], sAnim_Small[16], sAnim_Small[17],
     sAnim_Small[18], sAnim_Small[19], sAnim_Small[20], sAnim_Small[21], sAnim_Small[22], sAnim_Small[23],
     sAnim_Small[24], sAnim_Small[25], sAnim_Small[26], sAnim_Small[27], sAnim_Small[28], sAnim_Small[29],
     sAnim_Small[30], sAnim_Small[31], sAnim_Small[32], sAnim_Small[33], sAnim_Small[34], sAnim_Small[35],
-    sAnim_Small[36],
+    sAnim_Small[36], sAnim_Small[37],
 };
 
 static void SpriteCB_Drift(struct Sprite *sprite);
@@ -630,6 +632,11 @@ static void OpenWheel(struct Play *play)
     play->keyNote = MakeSprite(play, &sTemplate_Note, play->cx, play->cy, play->key);
     if (play->keyNote != MAX_SPRITES)
         gSprites[play->keyNote].oam.priority = 0;
+    // the design's sec. 4: with the BAND'S SHEET held, B FLAT carries the sheet's glyph -- just outside the ring,
+    // so it is seen whether the dot or the chosen note sits there
+    if (FlagGet(FLAG_NOTEBOOK_LOOSE_KEY))
+        play->sheetMark = MakeSprite(play, &sTemplate_Small, play->cx + sWheel[SHEET_KEY][0] * 3 / 2,
+                                     play->cy + sWheel[SHEET_KEY][1] * 3 / 2, SMALL_SHEET);
     PlaceWheel(play);
 }
 
@@ -638,6 +645,7 @@ static bool8 FoldWheel(struct Play *play)
 {
     u8 k, t = ++play->timer;
 
+    DestroyIf(&play->sheetMark);   // the sheet stays on the wheel; it does not fold into the staff
     for (k = 0; k < 12; k++)
     {
         if (play->dots[k] == MAX_SPRITES)
@@ -704,6 +712,7 @@ static bool8 TakeOut(struct Play *play)
     play->cy = avatar->y + avatar->y2 + gSpriteCoordOffsetY;
     play->windowId = WINDOW_NONE;
     play->keyNote = MAX_SPRITES;
+    play->sheetMark = MAX_SPRITES;
     for (i = 0; i < 12; i++)
         play->dots[i] = MAX_SPRITES;
     for (i = 0; i < STAFF_HEADS; i++)
@@ -745,6 +754,7 @@ static void Teardown(u8 taskId, const u8 *script)
     for (i = 0; i < 12; i++)
         DestroyIf(&play->dots[i]);
     DestroyIf(&play->keyNote);
+    DestroyIf(&play->sheetMark);
     for (i = 0; i < STAFF_HEADS; i++)
         DestroyIf(&play->heads[i]);
     for (i = 0; i < DRIFT_MAX; i++)
@@ -777,6 +787,7 @@ static void HandOff(u8 taskId)
     for (i = 0; i < 12; i++)
         DestroyIf(&play->dots[i]);
     DestroyIf(&play->keyNote);
+    DestroyIf(&play->sheetMark);
     for (i = 0; i < STAFF_HEADS; i++)
         DestroyIf(&play->heads[i]);
     for (i = 0; i < DRIFT_MAX; i++)
