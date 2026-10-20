@@ -31,6 +31,8 @@
 #include "field_specials.h"
 #include "daemons_time.h"
 #include "data/daemons_native.h"   // T-407: tools/gbanative.py
+#include "daemons_first_seen.h"      // T-406
+#include "region_map.h"             // T-406: GetMapName
 
 #define TAG_AREA_MARKERS 2001
 
@@ -2742,6 +2744,9 @@ s8 DexScreen_GetSetPokedexFlag(u16 nationalDexNo, u8 caseId, bool8 indexIsSpecie
         }
         break;
     case FLAG_SET_SEEN:
+        //  T-406: the first time it is seen, where -- before the bit is set, so only a first sighting is kept
+        if (!(gSaveBlock2Ptr->pokedex.seen[index] & mask))
+            DaemonsFirstSeen_Record(nationalDexNo + 1);
         gSaveBlock2Ptr->pokedex.seen[index] |= mask;
         // Anticheat
         gSaveBlock1Ptr->seen1[index] |= mask;
@@ -3651,6 +3656,12 @@ static const u8 sText_NativeStorm[] = _("STORMS");                 // T-415 phas
 static const u8 sText_NativeSnow[] = _("SNOW");                    // T-415 phase 2, DRAFT
 static const u8 sText_NativeFog[] = _("FOG");                      // T-415 phase 2, DRAFT
 static const u8 sText_NativeWind[] = _("WIND");                    // T-415 phase 2, DRAFT
+//  T-406 (the user, 2026-10-19): where it was first met, at the foot of the same box -- "FIRST MET" over the place, or
+//  BEFORE RECORDS for a daemon seen before the build that began keeping them. Every place name fits the box's 80px
+//  (the widest, CORPUS WAREHOUSE, is 80).
+static const u8 sText_FirstMet[] = _("FIRST MET");                 // T-406, DRAFT
+static const u8 sText_FirstMetShort[] = _("MET ");                 // T-406, DRAFT: "MET ROUTE 1" when the box is full
+static const u8 sText_FirstMetBefore[] = _("BEFORE RECORDS");      // T-406, DRAFT
 static const u8 *const sNativeSky[] = { sText_NativeRain, sText_NativeStorm, sText_NativeSnow, sText_NativeFog, sText_NativeWind };
 static const u8 *const sNativeSeason[SEASON_COUNT] = { sText_NativeWinter, sText_NativeSpring, sText_NativeSummer, sText_NativeAutumn };
 static const u8 *const sNativeWatch[WATCH_COUNT] = { sText_NativeDay, sText_NativeDusk, sText_NativeNight, sText_NativeDawn };
@@ -3690,6 +3701,32 @@ static bool8 DexScreen_NativeList(u8 *dst, u8 bits, const u8 *const *names, cons
 u32 DaemonsNativeOf(u16 species)
 {
     return species < NUM_SPECIES ? sDaemonsNative[species] : 0;
+}
+
+//  T-406: the last two of the box's four lines, "FIRST MET" over the place; when NATIVE has taken three, the one left
+//  says "MET <place>" -- or the place alone when that is wider than the box
+static void DexScreen_PrintFirstMet(u8 win, u16 species, u8 used)
+{
+    u8 place[32];
+    u8 line[40];
+    u8 mapsec;
+
+    if (!DexScreen_GetSetPokedexFlag(species, FLAG_GET_SEEN, TRUE) || used > 36)
+        return;
+    mapsec = DaemonsFirstSeen_Get(SpeciesToNationalPokedexNum(species));
+    if (mapsec != 0)
+        GetMapName(place, mapsec, 0);
+    else
+        StringCopy(place, sText_FirstMetBefore);
+    if (used <= 24)
+    {
+        DexScreen_AddTextPrinterParameterized(win, FONT_SMALL, sText_FirstMet, 0, 24, 0);
+        DexScreen_AddTextPrinterParameterized(win, FONT_SMALL, place, 0, 36, 0);
+        return;
+    }
+    StringAppend(StringCopy(line, sText_FirstMetShort), place);
+    DexScreen_AddTextPrinterParameterized(win, FONT_SMALL,
+        GetStringWidth(FONT_SMALL, line, 0) <= sWindowTemplate_AreaMap_Native.width * 8 ? line : place, 0, 36, 0);
 }
 
 static void DexScreen_PrintNative(u16 species)
@@ -3744,8 +3781,10 @@ static void DexScreen_PrintNative(u16 species)
                 StringAppend(line, sNativeSky[i]);
             }
             DexScreen_AddTextPrinterParameterized(win, FONT_SMALL, line, 0, y, 0);
+            y += 12;
         }
     }
+    DexScreen_PrintFirstMet(win, species, native == 0 ? 12 : y);
     PutWindowTilemap(win);
     CopyWindowToVram(win, COPYWIN_GFX);
 }

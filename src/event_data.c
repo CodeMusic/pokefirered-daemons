@@ -294,6 +294,12 @@ STATIC_ASSERT(offsetof(struct SaveBlock2, daemonsFlags) == 0xEA0, DaemonsHouseTa
 //  T-427: the take at CORPUS's fall, just below the take; the companion reads it too (profile_layout's house_take_at_fall).
 STATIC_ASSERT(offsetof(struct SaveBlock2, houseTakeAtFall) == 0xE98, DaemonsHouseTakeAtFallCameOutOfTheFiller);
 
+//  T-406: the INDEX's first-met places came out of the recap's fourth scene, and nothing after them moved.
+STATIC_ASSERT(offsetof(struct SaveBlock1, daemonsFirstSeenMagic) == 0x2638, DaemonsFirstSeenIsTheFourthScene);
+STATIC_ASSERT(offsetof(struct SaveBlock1, daemonsFirstSeen) == 0x263C, DaemonsFirstSeenAtItsOffset);
+STATIC_ASSERT(offsetof(struct SaveBlock1, easyChatProfile) == 0x2CA0, DaemonsFirstSeenMovedNothing);
+STATIC_ASSERT(NATIONAL_DEX_COUNT <= DAEMONS_FIRST_SEEN_COUNT, DaemonsFirstSeenHoldsEveryDaemon);
+
 u8 *GetFlagAddr(u16 idx)
 {
     u8 *ptr;

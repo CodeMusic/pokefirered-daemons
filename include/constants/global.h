@@ -78,7 +78,11 @@
 #define PARTY_SIZE 6
 #define MULTI_PARTY_SIZE (PARTY_SIZE / 2)
 
-#define QUEST_LOG_SCENE_COUNT 4
+//  T-406 (the user, 2026-10-19): the recap holds three scenes, not four; the fourth's space keeps where each daemon was
+//  first met (SaveBlock1.daemonsFirstSeen, include/global.h). The save does not grow.
+#define QUEST_LOG_SCENE_COUNT 3
+#define QUEST_LOG_SCENE_COUNT_VANILLA 4
+#define DAEMONS_FIRST_SEEN_COUNT 512      // a byte per national INDEX number (NATIONAL_DEX_COUNT is 394): its MAPSEC
 
 #define NUM_TOWER_CHALLENGE_TYPES 4
 

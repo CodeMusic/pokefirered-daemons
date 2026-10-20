@@ -801,6 +801,11 @@ struct SaveBlock1
     /*0x1000*/ u16 vars[VARS_COUNT];
     /*0x1200*/ u32 gameStats[NUM_GAME_STATS];
     /*0x1300*/ struct QuestLogScene questLog[QUEST_LOG_SCENE_COUNT];
+    //  T-406: the recap's fourth scene, given to the INDEX -- where each daemon was first SEEN, a map section a byte by
+    //  national number (0: not recorded). The magic marks the bytes as ours: an older save holds a recap scene here.
+    /*0x2638*/ u32 daemonsFirstSeenMagic;
+    /*0x263C*/ u8 daemonsFirstSeen[DAEMONS_FIRST_SEEN_COUNT];
+    /*0x283C*/ u8 questLogFreed[sizeof(struct QuestLogScene) * (QUEST_LOG_SCENE_COUNT_VANILLA - QUEST_LOG_SCENE_COUNT) - 4 - DAEMONS_FIRST_SEEN_COUNT];
     /*0x2CA0*/ u16 easyChatProfile[EASY_CHAT_BATTLE_WORDS_COUNT];
     /*0x2CAC*/ u16 easyChatBattleStart[EASY_CHAT_BATTLE_WORDS_COUNT];
     /*0x2CB8*/ u16 easyChatBattleWon[EASY_CHAT_BATTLE_WORDS_COUNT];
