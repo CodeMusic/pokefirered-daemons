@@ -14,6 +14,7 @@ EventScript_PkmnCenterNurse_HealPkmn::
 	message Text_TakeYourPkmnForFewSeconds
 	waitmessage
 	call EventScript_PkmnCenterNurse_TakeAndHealPkmn
+	special Feelings_CheckpointHeal   @ T-431: a heal the player chose -- not the white-out's (white_out.inc)
 	special SetUsedPkmnCenterQuestLogEvent
 	goto EventScript_PkmnCenterNurse_CheckTrainerTowerAndUnionRoom
 	end
@@ -28,7 +29,6 @@ EventScript_PkmnCenterNurse_TakeAndHealPkmn::
 	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	special HealPlayerParty
-	special Feelings_CheckpointHeal   @ T-431: the whole party, calmer
 	showfollower
 	return
 

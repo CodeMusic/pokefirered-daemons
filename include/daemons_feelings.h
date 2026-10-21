@@ -33,7 +33,7 @@
 #define FEEL_FAINT_HARD_MAD     6       // ... to a foe 30 or more levels above it (vanilla's FAINT_LARGE)
 #define FEEL_POISON_SAD         12      // fainted from poison, walking
 #define FEEL_POISON_CALM        (-10)
-#define FEEL_HEAL_CALM          20      // the CHECKPOINT's machine
+#define FEEL_HEAL_CALM          20      // the CHECKPOINT's machine, chosen (never after a white-out)
 #define FEEL_WALK_GLAD          3       // every 128 steps, the daemon that follows
 #define FEEL_WALK_CALM          2
 #define FEEL_LEVEL_GLAD         6       // a level, in battle or from a candy

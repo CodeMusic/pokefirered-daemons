@@ -57,7 +57,7 @@ enum
     EV_FOLLOWER, EV_FRIEND_0, EV_FRIEND_70, EV_FRIEND_150, EV_FRIEND_255,   // T-18
     EV_LEAD_SHINY,                                                          // T-18 P3
     EV_FEEL_SLOT1, EV_FEEL_SLOT6 = EV_FEEL_SLOT1 + PARTY_SIZE - 1,            // T-431
-    EV_FEEL_3H, EV_FEEL_DAY, EV_FEEL_GLAD, EV_FEEL_MAD, EV_FEEL_SAD, EV_FEEL_AFRAID,
+    EV_FEEL_3H, EV_FEEL_12H, EV_FEEL_DAY, EV_FEEL_GLAD, EV_FEEL_MAD, EV_FEEL_SAD, EV_FEEL_AFRAID,
 };
 
 struct DbgRow { const u8 *name; u8 kind; u8 arg; };
@@ -165,6 +165,7 @@ static const u8 sName_LeadShiny[]   = _("LEAD SHINY");
 
 static const u8 sName_Feelings[]    = _("FEELINGS >");               // T-431
 static const u8 sName_Feel3H[]      = _("+3 HOURS (EVERY STAMP)");
+static const u8 sName_Feel12H[]     = _("+12 HOURS (EVERY STAMP)");
 static const u8 sName_FeelDay[]     = _("+1 DAY (EVERY STAMP)");
 static const u8 sName_FeelGlad[]    = _("PUSH GLAD +30");
 static const u8 sName_FeelMad[]     = _("PUSH MAD +30");
@@ -269,6 +270,7 @@ static const struct DbgRow sRows_Feelings[] = {
     { NULL, R_VIEW, EV_FEEL_SLOT1 + 0 }, { NULL, R_VIEW, EV_FEEL_SLOT1 + 1 }, { NULL, R_VIEW, EV_FEEL_SLOT1 + 2 },
     { NULL, R_VIEW, EV_FEEL_SLOT1 + 3 }, { NULL, R_VIEW, EV_FEEL_SLOT1 + 4 }, { NULL, R_VIEW, EV_FEEL_SLOT1 + 5 },
     { sName_Feel3H,     R_GIVE, EV_FEEL_3H },
+    { sName_Feel12H,    R_GIVE, EV_FEEL_12H },
     { sName_FeelDay,    R_GIVE, EV_FEEL_DAY },
     { sName_FeelGlad,   R_GIVE, EV_FEEL_GLAD },
     { sName_FeelMad,    R_GIVE, EV_FEEL_MAD },
@@ -604,6 +606,7 @@ static void Apply(u8 ev, bool8 on)
     case EV_FRIEND_255:   SetLeadFriendship(255); return;
     case EV_LEAD_SHINY:   SetLeadShiny(on); return;
     case EV_FEEL_3H:      Feelings_DebugAge(FEELINGS_HALF_LIFE); return;          // T-431
+    case EV_FEEL_12H:     Feelings_DebugAge(FEELINGS_HALF_LIFE * 4); return;
     case EV_FEEL_DAY:     Feelings_DebugAge(FEELINGS_LOOK_BACK + 1); return;
     case EV_FEEL_GLAD:    Feelings_DebugPushLead(FEEL_GLAD); return;
     case EV_FEEL_MAD:     Feelings_DebugPushLead(FEEL_MAD); return;

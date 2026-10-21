@@ -287,7 +287,9 @@ void Feelings_OnWithdraw(struct Pokemon *mon)
         Feelings_Push(&mon->box, 0, 0, FEEL_BOX_HOURS_SAD, 0);
 }
 
-// The CHECKPOINT's machine (data/scripts/pkmn_center_nurse.inc, after HealPlayerParty): the whole party, calmer.
+// The CHECKPOINT's machine, when the player asked for it (EventScript_PkmnCenterNurse_HealPkmn): the whole party,
+// calmer. The white-out's heal goes through the same machine (white_out.inc calls TakeAndHealPkmn directly) and pushes
+// nothing -- the user, 2026-10-21: only a heal the player chooses calms.
 void Feelings_CheckpointHeal(void)
 {
     u8 i;
