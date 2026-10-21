@@ -6,6 +6,8 @@
 #include "battle_interface.h"
 #include "battle_bg.h"
 #include "daemons_signature.h"
+#include "data/type_colours.h"   // T-430: the splash is the attacker's type colour
+#include "fieldmap.h"         // T-430: DaemonsHalftoneSplash
 #include "decompress.h"
 #include "graphics.h"
 #include "m4a.h"
@@ -193,6 +195,94 @@ void ClearBattleAnimationVars(void)
     gAnimCustomPanning = 0;
 }
 
+//  T-430 (vision.md 8.6a, revised 2026-10-21): WHAT YOU BRING KEEPS ITS COLOUR IN HALFTONE -- and so do your own
+//  routines' effects, which lose it on the way across and splash a little onto the grey daemon they reach. These
+//  say which OBJ palette slots carry the player side's routine and how much colour each keeps, by how far its
+//  sprites have gone from the attacker toward the target; DaemonsHalftoneTick asks once a frame (fieldmap.c).
+static bool8 sHalftoneArmed;
+static bool8 sHalftoneLeft;   // a sprite of it was seen near you: it crossed, rather than appeared on them
+
+void DaemonsHalftoneLanded(void)
+{
+    if (!sHalftoneArmed || sAnimMoveIndex == 0)
+        return;
+    sHalftoneArmed = FALSE;
+    if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER && GetBattlerSide(gBattleAnimTarget) != B_SIDE_PLAYER)
+    {
+        // The type's colour (the move menu's own table), brightened until its strongest channel is full.
+        u8 type = gBattleMons[gBattleAnimAttacker].type1;
+        u16 c = type < ARRAY_COUNT(sTypeTextColor) ? sTypeTextColor[type] : RGB(9, 9, 9);
+        s32 r = GET_R(c), g = GET_G(c), b = GET_B(c), top = max(r, max(g, b));
+
+        if (top == 0)
+            top = 1;
+        DaemonsHalftoneSplash(gBattleAnimTarget, RGB2(r * 31 / top, g * 31 / top, b * 31 / top));
+    }
+}
+
+u16 DaemonsHalftoneRoutineSlots(u16 *keep)
+{
+    s32 i, slot, ax, ay, dx, dy, d2, t, far;
+    s32 sum[16];
+    u8 count[16];
+    u16 mask = 0;
+
+    if (!gAnimScriptActive || sAnimMoveIndex == 0 || GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
+        return 0;
+    for (i = 0; i < ANIM_SPRITE_INDEX_COUNT; i++)
+    {
+        if (sAnimSpriteIndexArray[i] == 0xFFFF)
+            continue;
+        slot = IndexOfSpritePaletteTag(gBattleAnimPaletteTable[sAnimSpriteIndexArray[i]].tag);
+        if (slot < 16)
+        {
+            mask |= 1 << slot;
+            sum[slot] = 0;
+            count[slot] = 0;
+        }
+    }
+    if (mask == 0)
+        return 0;
+    ax = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_X_2);
+    ay = GetBattlerSpriteCoord(gBattleAnimAttacker, BATTLER_COORD_Y_PIC_OFFSET);
+    dx = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_X_2) - ax;
+    dy = GetBattlerSpriteCoord(gBattleAnimTarget, BATTLER_COORD_Y_PIC_OFFSET) - ay;
+    d2 = dx * dx + dy * dy;
+    for (i = 0; i < MAX_SPRITES; i++)
+    {
+        struct Sprite *sprite = &gSprites[i];
+
+        if (!sprite->inUse || sprite->invisible || !(mask & (1 << sprite->oam.paletteNum)))
+            continue;
+        t = 0;
+        if (d2 != 0)
+        {
+            t = (((sprite->x + sprite->x2 - ax) * dx + (sprite->y + sprite->y2 - ay) * dy) * 256) / d2;
+            if (t < 0)
+                t = 0;
+            if (t > 256)
+                t = 256;
+        }
+        if (t < 128)
+            sHalftoneLeft = TRUE;
+        sum[sprite->oam.paletteNum] += t;
+        count[sprite->oam.paletteNum]++;
+    }
+    far = 0;
+    for (slot = 0; slot < 16; slot++)
+    {
+        if (!(mask & (1 << slot)))
+            continue;
+        t = count[slot] != 0 ? sum[slot] / count[slot] : 0;
+        if (t > far)
+            far = t;
+        keep[slot] = 256 - (t * 7) / 8;   // all of it at you, an eighth at them
+    }
+    if (far >= 208 && sHalftoneLeft)   // it crossed and arrived; otherwise the target's shake, or the end, lands it
+        DaemonsHalftoneLanded();
+    return mask;
+}
+
 void DoMoveAnim(u16 move)
 {
     gBattleAnimAttacker = gBattlerAttacker;
@@ -218,6 +308,8 @@ void LaunchBattleAnimation(const u8 *const animsTable[], u16 tableId, bool8 isMo
         sAnimMoveIndex = 0;
     else
         sAnimMoveIndex = tableId;
+    sHalftoneArmed = isMoveAnim;   // T-430: one splash a routine
+    sHalftoneLeft = FALSE;
 
     for (i = 0; i < ANIM_ARGS_COUNT; i++)
         gBattleAnimArgs[i] = 0;
@@ -558,6 +650,7 @@ static void Cmd_end(void)
     if (!continuousAnim)
     {
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
+        DaemonsHalftoneLanded();   // T-430: a routine that never crossed visibly still touches them as it ends
         InitPrioritiesForVisibleBattlers();
         UpdateOamPriorityInAllHealthboxes(1);
         gAnimScriptActive = FALSE;

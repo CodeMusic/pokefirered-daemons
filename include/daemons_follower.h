@@ -19,4 +19,7 @@ void Follower_SceneHide(void);
 void Follower_SceneShow(void);
 void Follower_OnContinue(void);
 
+// T-430: the OBJ palette slot it is drawn in, or 0xFF; HALFTONE leaves that slot in colour.
+u8 Follower_PaletteSlot(void);
+
 #endif // GUARD_DAEMONS_FOLLOWER_H

@@ -215,6 +215,7 @@ void AgbMain()
 
         PlayTimeCounter_Update();
         MapMusicMain();
+        DaemonsHalftoneTick();       // T-430: the first sight, a tower floor's return, a splash
         DaemonsGreyHalftoneFrame();
         WaitForVBlank();
     }

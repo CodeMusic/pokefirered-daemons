@@ -100,6 +100,8 @@ void AnimTask_ShakeMon(u8 taskId)
         DestroyAnimVisualTask(taskId);
         return;
     }
+    if (gBattleAnimArgs[0] == ANIM_TARGET)
+        DaemonsHalftoneLanded();   // T-430: the target shakes -- the routine has hit; in HALFTONE, its colour splashes
     gSprites[spriteId].x2 = gBattleAnimArgs[1];
     gSprites[spriteId].y2 = gBattleAnimArgs[2];
     gTasks[taskId].data[0] = spriteId;

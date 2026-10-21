@@ -444,6 +444,12 @@ static void CheckLead(s8 slot)
     }
 }
 
+//  T-430: its palette slot, or 0xFF -- HALFTONE's grey leaves the follower in colour (DaemonsGreyHalftoneFrame).
+u8 Follower_PaletteSlot(void)
+{
+    return IndexOfSpritePaletteTag(FOLLOWER_TAG);
+}
+
 void Follower_RetintPalette(void)
 {
     if (IsOurs())

@@ -18,7 +18,9 @@ EventScript_PkmnCenterNurse_HealPkmn::
 	goto EventScript_PkmnCenterNurse_CheckTrainerTowerAndUnionRoom
 	end
 
+@ T-18 follow-up (the user, 2026-10-21): the follower goes into the machine with the rest, and comes back out after.
 EventScript_PkmnCenterNurse_TakeAndHealPkmn::
+	hidefollower
 	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	dofieldeffect FLDEFF_POKECENTER_HEAL
@@ -26,6 +28,7 @@ EventScript_PkmnCenterNurse_TakeAndHealPkmn::
 	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	special HealPlayerParty
+	showfollower
 	return
 
 EventScript_PkmnCenterNurse_CheckTrainerTowerAndUnionRoom::

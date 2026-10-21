@@ -1470,6 +1470,12 @@ static void DoCB1_Overworld_QuestLogPlayback(void)
     FieldClearPlayerInput(&gQuestLogFieldInput);
 }
 
+//  T-430: the field is what is on screen (a START menu over it counts; the BAG or a battle does not).
+bool8 DaemonsFieldOnScreen(void)
+{
+    return gMain.callback2 == CB2_Overworld;
+}
+
 void CB1_Overworld(void)
 {
     if (gMain.callback2 == CB2_Overworld)

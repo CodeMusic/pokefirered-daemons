@@ -64,6 +64,9 @@ bool8 DaemonsIsBlancheOutdoors(void);
 void DaemonsReloadPrimaryTilesetPalette(const struct MapLayout *mapLayout);
 void DaemonsSetHalftoneColour(bool8 inColour);
 void DaemonsGreyHalftoneFrame(void);
+void DaemonsHalftoneTick(void);                       // T-430: once a frame, main.c
+void DaemonsHalftoneSplash(u8 battler, u16 colour);   // T-430: a routine of yours reached that foe
+bool8 DaemonsHalftoneGreysByFrame(void);
 u8 DaemonsFieldTint(void);
 u16 DaemonsPaletteSignature(void);
 u16 DaemonsPrimarySignature(void);

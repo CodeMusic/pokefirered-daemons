@@ -12,6 +12,7 @@
 #include "field_player_avatar.h"
 #include "field_weather.h"
 #include "fieldmap.h"
+#include "daemons_follower.h"   // T-430
 #include "help_system.h"
 #include "metatile_behavior.h"
 #include "new_menu_helpers.h"
@@ -443,6 +444,13 @@ void ApplyGlobalFieldPaletteTint(u8 paletteIdx)
 {
     // Object palettes ask the same question the tilesets do, or the town greys
     // and every person standing in it does not.
+    // T-430: in HALFTONE that question is DaemonsGreyHalftoneFrame's now, which leaves the player and the follower
+    // in colour; in the unread cave their slots are left as they load, and the rest is drawn from grey as before.
+    if (DaemonsHalftoneGreysByFrame())
+        return;
+    if (DaemonsIsHalftone() && gGlobalFieldTintMode == QL_TINT_NONE
+     && (paletteIdx == PALSLOT_PLAYER || paletteIdx == PALSLOT_PLAYER_REFLECTION || paletteIdx == Follower_PaletteSlot()))
+        return;
     switch (DaemonsFieldTint())
     {
     case 0:

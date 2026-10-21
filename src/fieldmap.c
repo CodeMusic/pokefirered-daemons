@@ -15,6 +15,12 @@
 #include "data/day_trims.h"
 #include "school_lift.h"
 #include "play.h"
+#include "battle.h"            // T-430: the player side's battlers
+#include "battle_main.h"
+#include "battle_anim.h"
+#include "daemons_follower.h"
+#include "event_object_movement.h"
+#include "constants/flags.h"
 
 extern const struct Tileset gTileset_General;   // T-275: the CHECKPOINT's tileset
 extern const struct Tileset gTileset_Nexus;     // T-395: THE NEXUS, made of paint
@@ -918,10 +924,27 @@ static void CopyTilesetToVramUsingHeap(struct Tileset const *tileset, u16 numTil
 // tower is where Halftone's lesson lives: something the Index cannot name, and
 // an instrument needed to see it. Battles ask this too, so the scene stays
 // grey when a fight starts.
+// T-430: THE TOWER IS THE EXCEPTION THAT ENDS. Once INIT is rescued each floor comes back into colour the first time
+// you stand on it after (DaemonsHalftoneTick fades it in and sets its flag); the town stays grey.
+static u16 DaemonsTowerFloorFlag(void)
+{
+    if (gSaveBlock1Ptr->location.mapGroup != MAP_GROUP(MAP_POKEMON_TOWER_1F)
+     || gSaveBlock1Ptr->location.mapNum < MAP_NUM(MAP_POKEMON_TOWER_1F)
+     || gSaveBlock1Ptr->location.mapNum > MAP_NUM(MAP_POKEMON_TOWER_7F))
+        return 0;
+    return FLAG_TOWER_COLOUR_1F + gSaveBlock1Ptr->location.mapNum - MAP_NUM(MAP_POKEMON_TOWER_1F);
+}
+
 bool8 DaemonsIsHalftone(void)
 {
+    u16 floor;
+
+    if (gMapHeader.regionMapSectionId == MAPSEC_POKEMON_TOWER)
+    {
+        floor = DaemonsTowerFloorFlag();
+        return floor == 0 || !FlagGet(floor);
+    }
     return gMapHeader.regionMapSectionId == MAPSEC_LAVENDER_TOWN
-        || gMapHeader.regionMapSectionId == MAPSEC_POKEMON_TOWER
         || DaemonsCaveUnperceived();
 }
 
@@ -969,32 +992,264 @@ static void DaemonsDrawingTone(u16 *colour)
     *colour = sDrawingTones[lum < 7 ? 0 : lum < 14 ? 1 : lum < 23 ? 2 : 3];
 }
 
+// T-430 (vision.md 8.6a, revised by the user 2026-10-21): WHAT YOU BRING KEEPS ITS COLOUR. The grey is still one pass
+// over the one buffer, and the exemptions are still PALETTE SLOTS, never loaders: in the field the player's own slot
+// and its reflection's and the follower's; in a battle each of the player side's battlers (its OBJ slot and its BG
+// copy for the animations, so your daemons and your back sprite), and the slots the player side's routine loaded,
+// which keep less colour the further their sprites have gone toward the target. Everything else -- menus, windows,
+// banners, healthboxes, the town, its people and the other side -- is grey as before.
+// The colour a slot shows is taken from gPlttBufferUnfaded, so a partial share never compounds frame on frame; the
+// field's tint therefore no longer greys a palette as it loads in HALFTONE (the unread cave's drawing still does).
+#define HT_OBJ(slot) (1u << (16 + (slot)))
+#define HT_BG(slot)  (1u << (slot))
+#define HT_FLICKER_WAIT   24     // settled field frames before the first sight tries
+#define HT_FLOOR_WAIT     40     // a tower floor waits this long, then comes back over HT_FLOOR_FADE
+#define HT_FLOOR_FADE     96
+#define HT_SPLASH_FRAMES  40
+
+// The first sight of HALFTONE: how much colour (of 256) the screen reaches, a frame at a time, before it fails.
+static const u8 sHalftoneFlicker[] = {
+    40, 96, 150, 120, 60, 0, 0, 0, 30, 80, 104, 64, 0, 0, 0, 0, 0, 24, 48, 20, 0,
+};
+
+static struct {
+    u8 wait;          // settled field frames (the first sight, a tower floor)
+    u8 flicker;       // frames into the first sight, 0 when not running
+    u8 floorFade;     // frames into a tower floor's return
+    u8 splash;        // frames left of a splash
+    u8 splashSlot;    // the OBJ slot it lands on, or 0xFF
+    u8 share;         // the whole field's share of colour this frame (the flicker, a floor's return)
+    u16 splashColour;
+    u16 routineMask;  // OBJ slots the player side's routine is drawn in (battle_anim.c), this frame
+    u16 routineKeep[16];
+} sHalftone;
+
+static u16 DaemonsHalftoneMix(u16 c, s32 share)
+{
+    s32 r = GET_R(c), g = GET_G(c), b = GET_B(c);
+    s32 grey = (r * Q_8_8(0.3) + g * Q_8_8(0.59) + b * Q_8_8(0.1133)) >> 8;
+
+    if (share <= 0)
+        return RGB2(grey, grey, grey);
+    r = grey + (((r - grey) * share) >> 8);
+    g = grey + (((g - grey) * share) >> 8);
+    b = grey + (((b - grey) * share) >> 8);
+    return RGB2(r, g, b);
+}
+
+static s32 DaemonsHalftoneLum(u16 c)
+{
+    return (GET_R(c) * Q_8_8(0.3) + GET_G(c) * Q_8_8(0.59) + GET_B(c) * Q_8_8(0.1133)) >> 8;
+}
+
+static u16 DaemonsHalftoneLightOnly(u16 own, u16 now)
+{
+    s32 shift = DaemonsHalftoneLum(now) - DaemonsHalftoneLum(own);
+    s32 r = GET_R(own) + shift, g = GET_G(own) + shift, b = GET_B(own) + shift;
+
+    if (shift == 0)
+        return own;
+    r = r < 0 ? 0 : r > 31 ? 31 : r;
+    g = g < 0 ? 0 : g > 31 ? 31 : g;
+    b = b < 0 ? 0 : b > 31 ? 31 : b;
+    return RGB2(r, g, b);
+}
+
+static s32 DaemonsSplashChannel(s32 grey, s32 channel, s32 amount)
+{
+    s32 tint = (grey * channel) / 31 + grey / 4;
+
+    if (tint > 31)
+        tint = 31;
+    return grey + (((tint - grey) * amount) >> 8);
+}
+
+// A grey, multiplied by the splash's colour (and lifted a quarter, so the dark of it still shows), by amount of 256.
+static u16 DaemonsHalftoneSplashTint(u16 grey, s32 amount)
+{
+    s32 g = GET_R(grey);
+    u16 c = sHalftone.splashColour;
+
+    return RGB2(DaemonsSplashChannel(g, GET_R(c), amount), DaemonsSplashChannel(g, GET_G(c), amount),
+                DaemonsSplashChannel(g, GET_B(c), amount));
+}
+
+// Called by battle_anim.c when the player side's routine reaches a foe: its grey takes the attacker's type colour,
+// shaded by its own light, and lets it go over HT_SPLASH_FRAMES.
+void DaemonsHalftoneSplash(u8 battler, u16 colour)
+{
+    if (!DaemonsIsHalftone() || sDaemonsHalftoneInColour || DaemonsLatentAbstractionBattler() == battler)
+        return;
+    sHalftone.splash = HT_SPLASH_FRAMES;
+    sHalftone.splashSlot = battler;
+    sHalftone.splashColour = colour;
+}
+
+static bool8 DaemonsHalftoneFieldSettled(void)
+{
+    return DaemonsFieldOnScreen() && !gMain.inBattle && !gPaletteFade.active;
+}
+
+// Once a frame, from main.c only (the grey itself also runs at the vblank's copy and a fade's, so it must not count).
+void DaemonsHalftoneTick(void)
+{
+    u16 floor;
+
+    sHalftone.share = 0;
+    sHalftone.routineMask = 0;
+    if (sHalftone.splash != 0)
+        sHalftone.splash--;
+    if (!DaemonsIsHalftone() || sDaemonsHalftoneInColour)
+    {
+        sHalftone.wait = sHalftone.flicker = sHalftone.floorFade = sHalftone.splash = 0;
+        sHalftone.splashSlot = 0xFF;
+        return;
+    }
+    if (gMain.inBattle)
+    {
+        sHalftone.wait = sHalftone.flicker = sHalftone.floorFade = 0;
+        if (gMain.callback2 == BattleMainCB2)
+            sHalftone.routineMask = DaemonsHalftoneRoutineSlots(sHalftone.routineKeep);
+        return;
+    }
+    sHalftone.splashSlot = 0xFF;
+    if (!DaemonsHalftoneFieldSettled())
+    {
+        sHalftone.wait = sHalftone.flicker = sHalftone.floorFade = 0;
+        return;
+    }
+    if (sHalftone.wait < 0xFF)
+        sHalftone.wait++;
+    // The first time you see it, the screen tries to come into colour and fails. Once.
+    if (!FlagGet(FLAG_HALFTONE_TRIED_COLOUR) && !DaemonsCaveUnperceived())
+    {
+        if (sHalftone.wait < HT_FLICKER_WAIT)
+            return;
+        if (sHalftone.flicker >= ARRAY_COUNT(sHalftoneFlicker))
+        {
+            FlagSet(FLAG_HALFTONE_TRIED_COLOUR);
+            sHalftone.flicker = 0;
+            sHalftone.wait = 0;
+            return;
+        }
+        sHalftone.share = sHalftoneFlicker[sHalftone.flicker++];
+        return;
+    }
+    // A tower floor after INIT is rescued: grey as you arrive, then it comes back, and stays.
+    floor = DaemonsTowerFloorFlag();
+    if (floor != 0 && FlagGet(FLAG_RESCUED_MR_FUJI) && sHalftone.wait >= HT_FLOOR_WAIT)
+    {
+        if (++sHalftone.floorFade >= HT_FLOOR_FADE)
+        {
+            FlagSet(floor);
+            sHalftone.floorFade = 0;
+            CpuCopy16(gPlttBufferUnfaded, gPlttBufferFaded, PLTT_SIZE);
+            return;
+        }
+        sHalftone.share = (sHalftone.floorFade * 256) / HT_FLOOR_FADE;
+    }
+}
+
 void DaemonsGreyHalftoneFrame(void)
 {
-    u16 *colour;
-    s32 i, keep, shine;
+    u16 *colour, *source;
+    s32 p, e, keep, shine, splash;
+    u32 skip, routine, lightOnly;
     bool8 drawing;
 
     if (sDaemonsHalftoneInColour || !DaemonsIsHalftone())
         return;
+    skip = 0;
+    routine = 0;
+    lightOnly = 0;
     keep = DaemonsLatentAbstractionBattler();
+    // T-251: the one thing in the unread cave that keeps its colour is the thing you cannot read -- the LATENT
+    // abstraction, whose palette is different every time (battle_gfx_sfx_util.c). Its sprite palette is the opponent
+    // battler's, and its copy for the battle animations is BG palette 8 + that battler.
+    if (keep >= 0)
+        skip |= HT_OBJ(keep) | HT_BG(8 + keep);
     shine = IndexOfSpritePaletteTag(PALTAG_KEY_COLOURS);   // T-417: PLAY's notes always shine (the user, 2026-10-17)
+    if (shine != 0xFF)
+        skip |= HT_OBJ(shine);
+    if (gMain.inBattle)
+    {
+        if (gMain.callback2 == BattleMainCB2)
+        {
+            // BG 8 and 9 are also the animations' own backdrops (battle_anim_mons.c's BG_ANIM_PAL_1/2), so while the
+            // other side's routine plays, they are left grey: its SURF must not come in colour.
+            bool8 foeAnim = gAnimScriptActive && GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER;
+
+            for (p = 0; p < gBattlersCount; p++)
+            {
+                if (GetBattlerSide(p) != B_SIDE_PLAYER)
+                    continue;
+                if (!foeAnim)
+                    skip |= HT_OBJ(p) | HT_BG(8 + p);
+                else if (!gPaletteFade.active)
+                    lightOnly |= HT_OBJ(p);    // their routine on you: its light, not its colour
+                else
+                    skip |= HT_OBJ(p);
+            }
+            if (!gPaletteFade.active)
+                routine = (u32)sHalftone.routineMask << 16;
+        }
+    }
+    else if (DaemonsFieldOnScreen())
+    {
+        u8 follower = Follower_PaletteSlot();
+
+        skip |= HT_OBJ(PALSLOT_PLAYER) | HT_OBJ(PALSLOT_PLAYER_REFLECTION);
+        if (follower < 16)
+            skip |= HT_OBJ(follower);
+    }
+    splash = -1;
+    if (gMain.inBattle && sHalftone.splashSlot < 16 && !gPaletteFade.active)
+        splash = 16 + sHalftone.splashSlot;
     drawing = DaemonsCaveUnperceived();
     colour = gPlttBufferFaded;
-    for (i = 0; i < (s32)PLTT_BUFFER_SIZE; i++, colour++)
+    source = gPlttBufferUnfaded;
+    for (p = 0; p < 32; p++, colour += 16, source += 16)
     {
-        // T-251: the one thing in the unread cave that keeps its colour is the thing you cannot read -- the
-        // LATENT abstraction, whose palette is different every time (battle_gfx_sfx_util.c). Its sprite palette
-        // is the opponent battler's, and its copy for the battle animations is BG palette 8 + that battler.
-        if (keep >= 0 && ((i >= OBJ_PLTT_ID(keep) && i < OBJ_PLTT_ID(keep + 1))
-                       || (i >= BG_PLTT_ID(8 + keep) && i < BG_PLTT_ID(9 + keep))))
+        if (skip & (1u << p))
             continue;
-        if (shine != 0xFF && i >= OBJ_PLTT_ID(shine) && i < OBJ_PLTT_ID(shine + 1))
+        if (lightOnly & (1u << p))
+        {
+            // The other side's routine blending your daemon: your colour, moved only as far as its grey moved.
+            for (e = 0; e < 16; e++)
+                colour[e] = DaemonsHalftoneLightOnly(source[e], colour[e]);
             continue;
-        if (drawing)
-            DaemonsDrawingTone(colour);
-        else if (*colour != (*colour & 0x1F) * 0x421)
-            TintPalette_GrayScale(colour, 1);
+        }
+        if (routine & (1u << p))
+        {
+            keep = sHalftone.routineKeep[p - 16];
+            for (e = 0; e < 16; e++)
+                colour[e] = DaemonsHalftoneMix(source[e], keep);
+            continue;
+        }
+        if (p == splash)
+        {
+            // The foe's grey, multiplied by the colour that reached it, fading back to its grey; on the frame after
+            // it ends, its grey from the colour copy again, so the tint's light is not kept.
+            keep = (sHalftone.splash * 176) / HT_SPLASH_FRAMES;
+            for (e = 0; e < 16; e++)
+                colour[e] = DaemonsHalftoneSplashTint(DaemonsHalftoneMix(source[e], 0), keep);
+            if (sHalftone.splash == 0)
+                sHalftone.splashSlot = 0xFF;
+            continue;
+        }
+        if (sHalftone.share != 0 && !drawing)
+        {
+            for (e = 0; e < 16; e++)
+                colour[e] = DaemonsHalftoneMix(source[e], sHalftone.share);
+            continue;
+        }
+        for (e = 0; e < 16; e++)
+        {
+            if (drawing)
+                DaemonsDrawingTone(&colour[e]);
+            else if (colour[e] != (colour[e] & 0x1F) * 0x421)
+                TintPalette_GrayScale(&colour[e], 1);
+        }
     }
 }
 
@@ -1226,8 +1481,17 @@ u16 DaemonsPrimarySignature(void)
     return sPrimarySignature;
 }
 
+// T-430: in HALFTONE (not the unread cave, whose drawing still starts from grey) the grey is DaemonsGreyHalftoneFrame's
+// alone, so the colour copy keeps the colour it shows the player and the follower, and the first sight flickers into.
+bool8 DaemonsHalftoneGreysByFrame(void)
+{
+    return gGlobalFieldTintMode == QL_TINT_NONE && DaemonsIsHalftone() && !DaemonsCaveUnperceived();
+}
+
 static void ApplyGlobalTintToPaletteEntries(u16 offset, u16 size)
 {
+    if (DaemonsHalftoneGreysByFrame())
+        return;
     switch (DaemonsFieldTint())
     {
     case QL_TINT_NONE:
@@ -1262,6 +1526,8 @@ void DaemonsWashTileColour(u16 offset)
 
 void ApplyGlobalTintToPaletteSlot(u8 slot, u8 count)
 {
+    if (DaemonsHalftoneGreysByFrame())
+        return;
     switch (DaemonsFieldTint())
     {
     case QL_TINT_NONE:

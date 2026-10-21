@@ -1887,6 +1887,14 @@
 #define FLAG_GOT_SUBTLE_LAYER                 (DAEMONS_FLAGS_START + 0x3E0)   // T-423: the game lane's block 0x3E0-0x3EF
 #define FLAG_HOUSE_TAKE_FROZEN                (DAEMONS_FLAGS_START + 0x3E1)   // T-427: houseTakeAtFall is recorded
 #define FLAG_FOLLOWER_OFF                     (DAEMONS_FLAGS_START + 0x3E2)   // T-18: OPTIONS -> FOLLOWER OFF (set: no follower)
+#define FLAG_HALFTONE_TRIED_COLOUR            (DAEMONS_FLAGS_START + 0x3E3)   // T-430: the first sight of HALFTONE has flickered
+#define FLAG_TOWER_COLOUR_1F                  (DAEMONS_FLAGS_START + 0x3E4)   // T-430: to 0x3EA, each floor of DAEMON TOWER
+#define FLAG_TOWER_COLOUR_2F                  (DAEMONS_FLAGS_START + 0x3E5)   //   back in colour (after INIT is rescued);
+#define FLAG_TOWER_COLOUR_3F                  (DAEMONS_FLAGS_START + 0x3E6)   //   fieldmap.c counts 1F + floor
+#define FLAG_TOWER_COLOUR_4F                  (DAEMONS_FLAGS_START + 0x3E7)
+#define FLAG_TOWER_COLOUR_5F                  (DAEMONS_FLAGS_START + 0x3E8)
+#define FLAG_TOWER_COLOUR_6F                  (DAEMONS_FLAGS_START + 0x3E9)
+#define FLAG_TOWER_COLOUR_7F                  (DAEMONS_FLAGS_START + 0x3EA)
 
 //  BEGIN gbaglobalindex -- T-334: each fixed encounter of the GLOBAL INDEX, once gone (removeobject sets it). The beasts'
 //  and the edition daemons' are also set on every map load while they may not stand (event_data.c,
