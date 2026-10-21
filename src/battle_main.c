@@ -1,4 +1,5 @@
 #include "global.h"
+#include "daemons_feelings.h"   // T-431
 #include "gflib.h"
 #include "battle.h"
 #include "battle_anim.h"
@@ -4096,6 +4097,7 @@ static void HandleEndTurn_FinishBattle(void)
             }
         }
         TrySetQuestLogBattleEvent();
+        Feelings_OnBattleEnd();   // T-431: won, each who took part; lost, the whole party
         if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
             ClearRematchStateByTrainerId();
         BeginFastPaletteFade(DaemonsRemnantDream() ? 2 : 3);   // T-254: the dream ends in white

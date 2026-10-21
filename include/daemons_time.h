@@ -35,5 +35,6 @@ void DaemonsTintForWatch(u16 *palette, u16 count);
 void DaemonsTimeRefresh(void);
 void DaemonsTimeInvalidate(void);
 u16 DaemonsDayNumber(u16 year, u8 month, u8 day);
+u16 DaemonsFeelingsNow(bool8 *fromClock);   // T-431: 10-minute ticks, from the clock or play time
 
 #endif // GUARD_DAEMONS_TIME_H

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "daemons_feelings.h"   // T-431
 #include "daemons_follower.h"   // T-18 P2
 #include "daemons_time.h"
 #include "gflib.h"
@@ -966,6 +967,7 @@ static void UpdateHappinessStepCounter(void)
             AdjustFriendship(mon, FRIENDSHIP_EVENT_WALKING);
             mon++;
         }
+        Feelings_OnWalk();   // T-431: the daemon behind you
     }
 }
 

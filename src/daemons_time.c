@@ -194,6 +194,23 @@ void DaemonsDayAndMinute(u16 *day, u16 *minute)
     *minute = sMinuteOfDay;
 }
 
+// T-431: the feelings' clock, in 10-minute ticks (a u16, so it comes round every 455 days, and a fade only looks a day
+// back). With the cartridge's clock: the day number * 1440 + the minute, / 10 -- read fresh, and never DEBUG's DATE,
+// which moves the sky, not time. Without one: play time (the user, 2026-10-21: "3 hours of play"), hours * 60 +
+// minutes, / 10. *fromClock says which, so a daemon stamped by one clock and read by the other can read as faded.
+u16 DaemonsFeelingsNow(bool8 *fromClock)
+{
+    struct DaemonsClock clock;
+
+    if (DaemonsRtc_Read(&clock))
+    {
+        *fromClock = TRUE;
+        return ((u32)DayNumber(clock.year, clock.month, clock.day) * 1440 + clock.hour * 60 + clock.minute) / 10;
+    }
+    *fromClock = FALSE;
+    return ((u32)gSaveBlock2Ptr->playTimeHours * 60 + gSaveBlock2Ptr->playTimeMinutes) / 10;
+}
+
 bool8 DaemonsWatchIsFromClock(void)
 {
     ReadClock();

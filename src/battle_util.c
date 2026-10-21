@@ -1,4 +1,5 @@
 #include "global.h"
+#include "daemons_feelings.h"   // T-431
 #include "item.h"
 #include "text.h"
 #include "util.h"
@@ -279,6 +280,7 @@ void UpdateSentPokesToOpponentValue(u8 battler)
     else
     {
         s32 i;
+        gBattleStruct->feelingsTookPart |= 1 << gBattlerPartyIndexes[battler];   // T-431
         for (i = 1; i < gBattlersCount; i++)
             gSentPokesToOpponent[(i & BIT_FLANK) >> 1] |= gBitTable[gBattlerPartyIndexes[battler]];
     }

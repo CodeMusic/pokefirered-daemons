@@ -28,6 +28,7 @@ EventScript_PkmnCenterNurse_TakeAndHealPkmn::
 	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterDown
 	waitmovement 0
 	special HealPlayerParty
+	special Feelings_CheckpointHeal   @ T-431: the whole party, calmer
 	showfollower
 	return
 

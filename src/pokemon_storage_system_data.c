@@ -1,4 +1,5 @@
 #include "global.h"
+#include "daemons_feelings.h"   // T-431
 #include "gflib.h"
 #include "data.h"
 #include "item.h"
@@ -623,12 +624,20 @@ static void SetMovedMonData(u8 boxId, u8 position)
     sMovingMonOrigBoxPos = position;
 }
 
+// T-431: a daemon taken out of a box (into the party) is pushed by how long it was in there, and one put into a box
+// from the party is restamped, so its stamp says when it went in. Party to party and box to box change nothing.
 static void SetPlacedMonData(u8 boxId, u8 position)
 {
     if (boxId == TOTAL_BOXES_COUNT)
+    {
+        if (sMovingMonOrigBoxId != TOTAL_BOXES_COUNT)
+            Feelings_OnWithdraw(&gStorage->movingMon);
         gPlayerParty[position] = gStorage->movingMon;
+    }
     else
     {
+        if (sMovingMonOrigBoxId == TOTAL_BOXES_COUNT)
+            Feelings_OnDeposit(&gStorage->movingMon.box);
         BoxMonRestorePP(&gStorage->movingMon.box);
         SetBoxMonAt(boxId, position, &gStorage->movingMon.box);
     }

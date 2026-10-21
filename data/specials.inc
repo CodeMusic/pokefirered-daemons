@@ -509,4 +509,5 @@ gSpecials::
 	def_special Follower_Talk   @ T-18 P2
 	def_special Follower_SceneHide   @ T-18 P3: hidefollower
 	def_special Follower_SceneShow   @ T-18 P3: showfollower
+	def_special Feelings_CheckpointHeal   @ T-431: after HealPlayerParty at a CHECKPOINT
 gSpecialsEnd::

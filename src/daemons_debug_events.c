@@ -20,6 +20,7 @@
 #include "constants/songs.h"
 #include "daemons_holidays.h"        // T-416
 #include "daemons_follower.h"        // T-18
+#include "daemons_feelings.h"        // T-431
 #include "pokemon.h"
 #include "data/holiday_lines.h"      // T-416: THE YEAR's titles
 
@@ -39,8 +40,8 @@
 
 #if DAEMONS_DEBUG
 
-enum { PG_EVENTS, PG_MARKS, PG_NOTEBOOK, PG_DRIVERS, PG_ROOTS, PG_SONGS, PG_YEAR, PG_FOLLOWER, PG_COUNT };
-enum { R_PAGE, R_GIVE, R_TOGGLE, R_ASK };   // R_ASK gives, after a YES
+enum { PG_EVENTS, PG_MARKS, PG_NOTEBOOK, PG_DRIVERS, PG_ROOTS, PG_SONGS, PG_YEAR, PG_FOLLOWER, PG_FEELINGS, PG_COUNT };
+enum { R_PAGE, R_GIVE, R_TOGGLE, R_ASK, R_VIEW };   // R_ASK gives, after a YES; R_VIEW only shows (T-431)
 
 enum
 {
@@ -55,6 +56,8 @@ enum
     EV_YEAR_ALL, EV_YEAR1, EV_YEAR12 = EV_YEAR1 + HOLIDAY_YEAR_LINE_COUNT - 1, EV_GIFTS_AGAIN,   // T-416
     EV_FOLLOWER, EV_FRIEND_0, EV_FRIEND_70, EV_FRIEND_150, EV_FRIEND_255,   // T-18
     EV_LEAD_SHINY,                                                          // T-18 P3
+    EV_FEEL_SLOT1, EV_FEEL_SLOT6 = EV_FEEL_SLOT1 + PARTY_SIZE - 1,            // T-431
+    EV_FEEL_3H, EV_FEEL_DAY, EV_FEEL_GLAD, EV_FEEL_MAD, EV_FEEL_SAD, EV_FEEL_AFRAID,
 };
 
 struct DbgRow { const u8 *name; u8 kind; u8 arg; };
@@ -160,6 +163,14 @@ static const u8 sName_Friend150[]   = _("LEAD FRIENDSHIP 150");
 static const u8 sName_Friend255[]   = _("LEAD FRIENDSHIP 255");
 static const u8 sName_LeadShiny[]   = _("LEAD SHINY");
 
+static const u8 sName_Feelings[]    = _("FEELINGS >");               // T-431
+static const u8 sName_Feel3H[]      = _("+3 HOURS (EVERY STAMP)");
+static const u8 sName_FeelDay[]     = _("+1 DAY (EVERY STAMP)");
+static const u8 sName_FeelGlad[]    = _("PUSH GLAD +30");
+static const u8 sName_FeelMad[]     = _("PUSH MAD +30");
+static const u8 sName_FeelSad[]     = _("PUSH SAD +30");
+static const u8 sName_FeelAfraid[]  = _("PUSH AFRAID (CALM -30)");
+
 //  THE STORY'S ORDER: the opening, the shoes and the INDEX, OPUS on THE REPO's shelf, then CAIRN's MARK and NOTEBOOK,
 //  the school, the ship, the DRIVERS, BRAZEN's tea and REVEAL, HALFTONE, the sleeper, the GUIDE, and last what only
 //  the end of the game gives.
@@ -193,6 +204,7 @@ static const struct DbgRow sRows_Events[] = {
     { sName_Roots,       R_PAGE,   PG_ROOTS },
     { sName_Year,        R_PAGE,   PG_YEAR },         // T-416
     { sName_Follower,    R_PAGE,   PG_FOLLOWER },     // T-18
+    { sName_Feelings,    R_PAGE,   PG_FEELINGS },     // T-431
     { sName_Stream,      R_GIVE,   EV_STREAM },
     { sName_Companion,   R_TOGGLE, EV_COMPANION },
 };
@@ -252,6 +264,18 @@ static const struct DbgRow sRows_Follower[] = {
     { sName_LeadShiny,  R_TOGGLE, EV_LEAD_SHINY },
 };
 
+//  T-431 P1: each party daemon's feelings as they are now (faded), friendship beside them, and the clock pushed on.
+static const struct DbgRow sRows_Feelings[] = {
+    { NULL, R_VIEW, EV_FEEL_SLOT1 + 0 }, { NULL, R_VIEW, EV_FEEL_SLOT1 + 1 }, { NULL, R_VIEW, EV_FEEL_SLOT1 + 2 },
+    { NULL, R_VIEW, EV_FEEL_SLOT1 + 3 }, { NULL, R_VIEW, EV_FEEL_SLOT1 + 4 }, { NULL, R_VIEW, EV_FEEL_SLOT1 + 5 },
+    { sName_Feel3H,     R_GIVE, EV_FEEL_3H },
+    { sName_FeelDay,    R_GIVE, EV_FEEL_DAY },
+    { sName_FeelGlad,   R_GIVE, EV_FEEL_GLAD },
+    { sName_FeelMad,    R_GIVE, EV_FEEL_MAD },
+    { sName_FeelSad,    R_GIVE, EV_FEEL_SAD },
+    { sName_FeelAfraid, R_GIVE, EV_FEEL_AFRAID },
+};
+
 static const struct { const struct DbgRow *rows; u8 count; } sPages[PG_COUNT] = {
     [PG_EVENTS]   = { sRows_Events,   ARRAY_COUNT(sRows_Events) },
     [PG_MARKS]    = { sRows_Marks,    ARRAY_COUNT(sRows_Marks) },
@@ -261,6 +285,7 @@ static const struct { const struct DbgRow *rows; u8 count; } sPages[PG_COUNT] = 
     [PG_SONGS]    = { sRows_Songs,    ARRAY_COUNT(sRows_Songs) },
     [PG_YEAR]     = { sRows_Year,     ARRAY_COUNT(sRows_Year) },
     [PG_FOLLOWER] = { sRows_Follower, ARRAY_COUNT(sRows_Follower) },
+    [PG_FEELINGS] = { sRows_Feelings, ARRAY_COUNT(sRows_Feelings) },
 };
 
 static const u8 sText_Title_Events[] = _("GAME EVENTS, in story order.\nA gives or takes. + held, · not.");
@@ -271,9 +296,10 @@ static const u8 sText_Title_Roots[] = _("UNDERSTANDINGS, each with what\nit need
 static const u8 sText_Title_Songs[] = _("SONGBOOK: each song learned.\nB goes back.");
 static const u8 sText_Title_Year[] = _("THE YEAR: each line arrived.\nB goes back.");
 static const u8 sText_Title_Follower[] = _("FOLLOWER: on or off, and the\nlead's friendship. B goes back.");
+static const u8 sText_Title_Feelings[] = _("FEELINGS now: G M S C, F friend-\nship. · never set. B goes back.");
 static const u8 *const sTitles[PG_COUNT] = {
     sText_Title_Events, sText_Title_Marks, sText_Title_Notebook, sText_Title_Drivers, sText_Title_Roots,
-    sText_Title_Songs, sText_Title_Year, sText_Title_Follower,
+    sText_Title_Songs, sText_Title_Year, sText_Title_Follower, sText_Title_Feelings,
 };
 static const u8 sText_Given[] = _("{STR_VAR_1}: given.");
 static const u8 sText_Taken[] = _("{STR_VAR_1}: taken away.");
@@ -577,6 +603,12 @@ static void Apply(u8 ev, bool8 on)
     case EV_FRIEND_150:   SetLeadFriendship(150); return;
     case EV_FRIEND_255:   SetLeadFriendship(255); return;
     case EV_LEAD_SHINY:   SetLeadShiny(on); return;
+    case EV_FEEL_3H:      Feelings_DebugAge(FEELINGS_HALF_LIFE); return;          // T-431
+    case EV_FEEL_DAY:     Feelings_DebugAge(FEELINGS_LOOK_BACK + 1); return;
+    case EV_FEEL_GLAD:    Feelings_DebugPushLead(FEEL_GLAD); return;
+    case EV_FEEL_MAD:     Feelings_DebugPushLead(FEEL_MAD); return;
+    case EV_FEEL_SAD:     Feelings_DebugPushLead(FEEL_SAD); return;
+    case EV_FEEL_AFRAID:  Feelings_DebugPushLead(FEEL_CALM); return;
     }
     if (ev >= EV_YEAR1 && ev <= EV_YEAR12)
     {
@@ -616,6 +648,56 @@ static void MoveCursor_DbgEvents(s32 itemIndex, bool8 onInit, struct ListMenu *l
     sArrowScroll = list->cursorPos;   // T-421: the scroll (cursorPos is the top item), not the cursor's row
 }
 
+//  T-431: "1 G 12 M 0 S 30 C-15 F 70" -- a party slot's feelings now, and its friendship; "·" before one never pushed
+//  (an old save's, a trade's), EGG and - for an egg and an empty slot, AWAY after one the companion carries.
+static u8 *FeelNumber(u8 *dst, u8 letter, s16 value)
+{
+    *dst++ = letter;
+    if (value < 0)
+    {
+        *dst++ = CHAR_HYPHEN;
+        value = -value;
+    }
+    dst = ConvertIntToDecimalStringN(dst, value, STR_CONV_MODE_LEFT_ALIGN, 3);
+    *dst++ = CHAR_SPACE;
+    *dst = EOS;
+    return dst;
+}
+
+static void FeelingsLabel(u8 *label, u8 slot)
+{
+    static const u8 sEgg[] = _("EGG");
+    static const u8 sAway[] = _("AWAY");
+    struct Pokemon *mon = &gPlayerParty[slot];
+    struct DaemonFeelings f;
+    u8 *p = label;
+
+    *p++ = CHAR_1 + slot;
+    *p++ = CHAR_SPACE;
+    *p = EOS;
+    if (!GetMonData(mon, MON_DATA_SANITY_HAS_SPECIES))
+    {
+        *p++ = CHAR_HYPHEN;
+        *p = EOS;
+        return;
+    }
+    if (GetMonData(mon, MON_DATA_IS_EGG))
+    {
+        StringCopy(p, sEgg);
+        return;
+    }
+    if (!Feelings_IsSet(&mon->box))
+        p = StringCopy(p, sMark_Not);
+    Feelings_Get(&mon->box, &f);
+    p = FeelNumber(p, CHAR_G, f.glad);
+    p = FeelNumber(p, CHAR_M, f.mad);
+    p = FeelNumber(p, CHAR_S, f.sad);
+    p = FeelNumber(p, CHAR_C, f.calm);
+    p = FeelNumber(p, CHAR_F, GetMonData(mon, MON_DATA_FRIENDSHIP));
+    if (DaemonIsAway(mon))
+        StringCopy(p, sAway);
+}
+
 static void BuildLabels(void)
 {
     const struct DbgRow *rows = sPages[sPage].rows;
@@ -628,7 +710,10 @@ static void BuildLabels(void)
         u8 *label = sLabels + i * DBG_LABEL;
         const u8 *mark = rows[i].kind == R_TOGGLE ? (IsHeld(rows[i].arg) ? sMark_Held : sMark_Not) : sMark_Give;
 
-        StringCopy(StringCopy(label, mark), rows[i].name);
+        if (rows[i].kind == R_VIEW)
+            FeelingsLabel(label, rows[i].arg - EV_FEEL_SLOT1);
+        else
+            StringCopy(StringCopy(label, mark), rows[i].name);
         sItems[i].label = label;
         sItems[i].index = i;
     }
@@ -748,6 +833,11 @@ void DaemonsDebug_EventsDo(void)
         return;
     }
     row = &sPages[sPage].rows[gSpecialVar_Result];
+    if (row->kind == R_VIEW)
+    {
+        StringCopy(gStringVar4, sTitles[sPage]);
+        return;
+    }
     if (row->kind == R_PAGE)
     {
         sPage = row->arg;

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "daemons_feelings.h"   // T-431
 #include "daemons_away.h"
 #include "event_scripts.h"
 #include "new_game.h"
@@ -1678,6 +1679,7 @@ static void GiveItemToMon(struct Pokemon *mon, u16 item)
     itemBytes[0] = item;
     itemBytes[1] = item >> 8;
     SetMonData(mon, MON_DATA_HELD_ITEM, itemBytes);
+    Feelings_OnHeldItemGiven(mon);   // T-431
 }
 
 static u8 TryTakeMonItem(struct Pokemon *mon)

@@ -23,6 +23,7 @@
 #include "overworld.h"
 #include "field_weather.h"
 #include "daemons_weather.h"   // T-415 P2
+#include "daemons_feelings.h"  // T-431
 #include "constants/weather.h"
 #include "party_menu.h"
 #include "field_specials.h"
@@ -4129,6 +4130,7 @@ bool8 ExecuteTableBasedItemEffect(struct Pokemon *mon, u16 item, u8 partyIndex, 
         if (friendship > MAX_FRIENDSHIP)                                                                \
             friendship = MAX_FRIENDSHIP;                                                                \
         SetMonData(mon, MON_DATA_FRIENDSHIP, &friendship);                                              \
+        Feelings_OnItemFriendship(mon, item);   /* T-431 */                                             \
     }                                                                                                   \
 }
 
@@ -5655,6 +5657,7 @@ void AdjustFriendship(struct Pokemon *mon, u8 event)
             friendship = MAX_FRIENDSHIP;
 
         SetMonData(mon, MON_DATA_FRIENDSHIP, &friendship);
+        Feelings_OnFriendshipEvent(mon, event);   // T-431: a level, a TM, the massage, a faint
     }
 }
 
