@@ -11,7 +11,7 @@
 //
 // They fade as the companion's do (C-120): half gone in 3 hours (18 ticks), nothing left after a day. A push stores
 // the faded values plus the push, clamped, and stamps them now. Friendship is the fifth value, and stays where it is.
-// Eggs and AWAY daemons are never pushed. Nothing here is shown to the player: P2 draws them, P3 makes the emoji.
+// Eggs and AWAY daemons are never pushed. P2 draws them on the SUMMARY's fourth page (below), P3 makes the emoji.
 
 #define FEELINGS_TICK_MINUTES   10
 #define FEELINGS_HALF_LIFE      18      // ticks: 3 hours
@@ -79,9 +79,30 @@ void Feelings_OnDeposit(struct BoxPokemon *boxMon);                // into a box
 void Feelings_OnWithdraw(struct Pokemon *mon);                     // out of one: a small sad push, by how long
 void Feelings_CheckpointHeal(void);                                // special, after HealPlayerParty at a CHECKPOINT
 
+// T-431 P2 and P4: what the SUMMARY's fourth page shows (docs/private/plan-feelings-2026-10-21.md sections 3 and 5).
+#define FEELINGS_GRID           9       // cells a side
+#define FEELINGS_LEAN           20      // GLAD - SAD or CALM this far from 0 leaves the middle of the grid's 3x3 reading
+#define FEELINGS_MAD_LINE       40      // MAD this high speaks first
+#define FEELINGS_QUIET          20      // every value under this is "all near zero"
+#define FEELINGS_FRIEND_LOW     100     // the plan's friendship variants: under this the wary line...
+#define FEELINGS_FRIEND_HIGH    150     // ... at or over this the close one (between them: the nearer, split at 125)
+#define FEELINGS_FRIEND_EVER    220     // all near zero and this friendly: "It goes where you go, as ever."
+
+// The dot's cell, 0..8 each way: across by GLAD - SAD (right is glad), down from CALM (row 0 calm, row 8 afraid).
+void Feelings_GridCell(const struct DaemonFeelings *f, u8 *col, u8 *row);
+// The dot's colour: its hue from MAD (a cool slate at 0 to an ember at 100), then greyed by friendship as the
+// daemon's own picture is (T-424).
+u16 Feelings_DotColour(u8 mad, u8 friendship);
+// The line of behaviour under the grid -- one of the sixteen approved lines (DRAFT in the game). A daemon never
+// stamped reads the quiet line for its friendship.
+const u8 *Feelings_BehaviourLine(struct BoxPokemon *boxMon, u8 friendship);
+
 #if DAEMONS_DEBUG
 void Feelings_DebugAge(u16 ticks);                                 // every stamp, party and boxes, made older
 void Feelings_DebugPushLead(u8 which);                             // FEEL_GLAD, MAD, SAD, or FEEL_CALM for AFRAID
+// What the SUMMARY's fourth page last drew, for the theatre (tools/theatre_route.py's `summary`): [0] the line's
+// address, [1] its cell (col | row << 8) and the dot's colour << 16. 8 bytes, the DEBUG build only.
+extern u32 gFeelingsDebugShown[2];
 #endif
 
 #endif // GUARD_DAEMONS_FEELINGS_H

@@ -690,7 +690,12 @@ static void FeelingsLabel(u8 *label, u8 slot)
         return;
     }
     if (!Feelings_IsSet(&mon->box))
+    {
+        bool8 fromClock;
+
         p = StringCopy(p, sMark_Not);
+        Feelings_Now(&fromClock);   // T-431 P2: the clock read even so, for the theatre's `feel` (gFeelingsDebugNow)
+    }
     Feelings_Get(&mon->box, &f);
     p = FeelNumber(p, CHAR_G, f.glad);
     p = FeelNumber(p, CHAR_M, f.mad);

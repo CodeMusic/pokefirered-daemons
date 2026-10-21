@@ -1,5 +1,6 @@
 #include "global.h"
 #include "daemons_away.h"
+#include "daemons_feelings.h"
 #include "gflib.h"
 #include "pokemon.h"
 #include "pokemon_summary_screen.h"
@@ -140,6 +141,10 @@ static void PokeSum_DestroyMonMarkingsSprite(void);
 static void PokeSum_UpdateMonMarkingsAnim(void);
 static s8 SeekToNextMonInSingleParty(s8 direction);
 static s8 SeekToNextMonInMultiParty(s8 direction);
+static bool8 PokeSum_CanShowFeelings(void);
+static void Task_PokeSum_FeelingsPage(u8 taskId);
+static void PokeSum_PrintFeelingsGrid(void);
+static void PokeSum_PrintFeelingsLine(void);
 
 struct PokemonSummaryScreenData
 {
@@ -243,6 +248,9 @@ struct PokemonSummaryScreenData
 
     u8 ALIGNED(4) lastPageFlipDirection; /* 0x3300 */
     u8 ALIGNED(4) unk3304; /* 0x3304 */
+
+    // T-431 P2: while the fourth page shows, BG1's and BG2's tilemaps as KNOWN ROUTINES left them (heap, 4 KB).
+    u16 *feelingsBgBackup;
 };
 
 struct Struct203B144
@@ -333,6 +341,7 @@ extern const u32 gSummaryScreen_PageMoves_Tilemap[];
 extern const u32 gSummaryScreen_PageInfo_Tilemap[];
 extern const u32 gSummaryScreen_PageMovesInfo_Tilemap[];
 extern const u32 gSummaryScreen_PageEgg_Tilemap[];
+extern const u32 gSummaryScreen_PageFeelings_Tilemap[];   // T-431 P2: tools/gbafeelingspage.py
 extern const u16 gSummaryScreen_Bg_Pal[];
 extern const u32 gSummaryScreen_Bg_Gfx[];
 extern const u16 gSummaryScreen_HpExpBar_Pal[];
@@ -342,6 +351,12 @@ extern const u32 gSummaryScreen_HpBar_Gfx[];
 extern const u32 gSummaryScreen_ExpBar_Gfx[];
 
 static const u32 sTextHeaderPalette[] = INCBIN_U32("graphics/summary_screen/text_header.gbapal");
+// T-431 P2 (tools/gbafeelingspage.py): the fourth page's frame (BG palette 5) and its grid and line (BG palette 9,
+// entry 15 the dot, rewritten for each daemon).
+static const u16 sFeelingsFramePalette[] = INCBIN_U16("graphics/summary_screen/page_feelings.gbapal");
+static const u16 sFeelingsGridPalette[] = INCBIN_U16("graphics/summary_screen/feelings_grid.gbapal");
+#define FEELINGS_FRAME_PAL      5
+#define FEELINGS_GRID_PAL       9
 static const u16 sMonMarkingSpritePalette[] = INCBIN_U16("graphics/summary_screen/marking.gbapal");
 static const u32 sTextMovesPalette[] = INCBIN_U32("graphics/summary_screen/text_moves.gbapal");
 static const u16 sMoveSelectionCursorPals[] = INCBIN_U16("graphics/summary_screen/move_selection_cursor.gbapal");
@@ -895,6 +910,57 @@ static const struct WindowTemplate sWindowTemplates_Moves[] =
     },
 };
 
+// T-431 P2: the fourth page. The grid in the right pane (an 80px box, its 72px grid of 9x9 cells), the line of
+// behaviour in the bottom one (224px, the line at most 208); nothing else, and no title.
+#define FEELINGS_GRID_X         8       // the grid's corner in its window
+#define FEELINGS_GRID_Y         4
+#define FEELINGS_CELL           8
+#define FEELINGS_LINE_W         224
+#define FEELINGS_LINE_H         32
+
+static const struct WindowTemplate sWindowTemplates_Feelings[] =
+{
+    [POKESUM_WIN_RIGHT_PANE - 3] = {
+        .bg = 0,
+        .tilemapLeft = 17,
+        .tilemapTop = 3,
+        .width = 11,
+        .height = 10,
+        .paletteNum = FEELINGS_GRID_PAL,
+        .baseBlock = 0x0001
+    },
+    [POKESUM_WIN_TRAINER_MEMO - 3] = {
+        .bg = 0,
+        .tilemapLeft = 1,
+        .tilemapTop = 14,
+        .width = 28,
+        .height = 4,
+        .paletteNum = FEELINGS_GRID_PAL,
+        .baseBlock = 0x006F
+    },
+    [5 - 3] = {
+        .bg = 0,
+        .tilemapLeft = 0,
+        .tilemapTop = 0,
+        .width = 0,
+        .height = 0,
+        .paletteNum = 0,
+        .baseBlock = 0x0000
+    },
+    [6 - 3] = {
+        .bg = 0,
+        .tilemapLeft = 0,
+        .tilemapTop = 0,
+        .width = 0,
+        .height = 0,
+        .paletteNum = 0,
+        .baseBlock = 0x0000
+    },
+};
+
+// paper behind, ink, shadow -- feelings_grid.pal's 1, 5 and 6
+static const u8 sFeelingsLineColors[3] = {1, 5, 6};
+
 static const struct WindowTemplate sWindowTemplates_Dummy[] = 
 {
     {
@@ -1125,6 +1191,8 @@ static void Task_InputHandler_Info(u8 taskId)
             return;
         else if (FuncIsActiveTask(Task_PokeSum_SwitchDisplayedPokemon))
             return;
+        else if (FuncIsActiveTask(Task_PokeSum_FeelingsPage))
+            return;
 
         if (sMonSummaryScreen->curPageIndex != PSS_PAGE_MOVES_INFO)
         {
@@ -1134,6 +1202,12 @@ static void Task_InputHandler_Info(u8 taskId)
                 {
                     sMonSummaryScreen->lastPageFlipDirection = 1;
                     return;
+                }
+                else if (sMonSummaryScreen->curPageIndex == PSS_PAGE_MOVES && PokeSum_CanShowFeelings())
+                {
+                    // T-431 P2: KNOWN ROUTINES -> the fourth page, drawn in place (Task_PokeSum_FeelingsPage)
+                    PlaySE(SE_SELECT);
+                    gTasks[CreateTask(Task_PokeSum_FeelingsPage, 0)].data[1] = TRUE;
                 }
                 else if (sMonSummaryScreen->curPageIndex < PSS_PAGE_MOVES)
                 {
@@ -1152,6 +1226,12 @@ static void Task_InputHandler_Info(u8 taskId)
                 {
                     sMonSummaryScreen->lastPageFlipDirection = 0;
                     return;
+                }
+                else if (sMonSummaryScreen->curPageIndex == PSS_PAGE_FEELINGS)
+                {
+                    // T-431 P2: and back to KNOWN ROUTINES, as it was
+                    PlaySE(SE_SELECT);
+                    gTasks[CreateTask(Task_PokeSum_FeelingsPage, 0)].data[1] = FALSE;
                 }
                 else if (sMonSummaryScreen->curPageIndex > PSS_PAGE_INFO)
                 {
@@ -2025,6 +2105,8 @@ static u8 PokeSum_HandleLoadBgGfx(void)
     case 1:
         ListMenuLoadStdPalAt(BG_PLTT_ID(6), 1);
         LoadPalette(sTextHeaderPalette, BG_PLTT_ID(7), PLTT_SIZE_4BPP);
+        LoadPalette(sFeelingsFramePalette, BG_PLTT_ID(FEELINGS_FRAME_PAL), PLTT_SIZE_4BPP);   // T-431 P2
+        LoadPalette(sFeelingsGridPalette, BG_PLTT_ID(FEELINGS_GRID_PAL), PLTT_SIZE_4BPP);
         break;
     case 2:
         ResetTempTileDataBuffers();
@@ -2460,6 +2542,9 @@ static void PokeSum_PrintRightPaneText(void)
     case PSS_PAGE_MOVES_INFO:
         PrintMovesPage();
         break;
+    case PSS_PAGE_FEELINGS:
+        PokeSum_PrintFeelingsGrid();
+        break;
     }
 
     PutWindowTilemap(sMonSummaryScreen->windowIds[POKESUM_WIN_RIGHT_PANE]);
@@ -2596,6 +2681,9 @@ static void PokeSum_PrintBottomPaneText(void)
         PokeSum_PrintSelectedMoveStats();
         break;
     case PSS_PAGE_MOVES:
+        break;
+    case PSS_PAGE_FEELINGS:
+        PokeSum_PrintFeelingsLine();
         break;
     }
 
@@ -2965,6 +3053,13 @@ static void PokeSum_PrintPageHeaderText(u8 curPageIndex)
         PokeSum_PrintControlsString(gText_PokeSum_Controls_PickDelete);
         PrintMonLevelNickOnWindow2(gText_PokeSum_NoData);
         break;
+    case PSS_PAGE_FEELINGS:
+        // T-431 P2: no title -- nothing on this page is named (the user, 2026-10-21)
+        FillWindowPixelBuffer(sMonSummaryScreen->windowIds[POKESUM_WIN_PAGE_NAME], 0);
+        PutWindowTilemap(sMonSummaryScreen->windowIds[POKESUM_WIN_PAGE_NAME]);
+        PokeSum_PrintControlsString(gText_PokeSum_Controls_Page);
+        PrintMonLevelNickOnWindow2(gText_PokeSum_NoData);
+        break;
     default:
         break;
     }
@@ -2992,6 +3087,7 @@ static void Task_DestroyResourcesOnExit(u8 taskId)
 
     sLastViewedMonIndex = GetLastViewedMonIndex();
 
+    FREE_AND_SET_NULL_IF_SET(sMonSummaryScreen->feelingsBgBackup);   // T-431 P2: left from the fourth page
     FREE_AND_SET_NULL_IF_SET(sMonSummaryScreen);
     FREE_AND_SET_NULL_IF_SET(sMonSkillsPrinterXpos);
 }
@@ -3276,84 +3372,61 @@ static u8 PokeSum_BufferOtName_IsEqualToCurrentOwner(struct Pokemon * mon)
 
 #define PAGE_PROGRESS_BASE_TILE_NUM (345)
 
+// T-431 P2: the dots under the title bar count FOUR pages now, so they sit one tile further left (columns 12-19,
+// two tiles a dot: a dot, then what follows it) -- tan for a page behind you, white for this one, blue for one ahead.
+// Each entry is a tile of the top row; the row under it is the same tile + 16, except the tan field (1 -> 19) and the
+// blue (2 -> 2), as vanilla's own pairs are. The egg's page and the learning screen's are vanilla's, moved over.
+#define PROGRESS_DOTS 8
+static const u8 sPageProgress_Info[PROGRESS_DOTS]      = {17, 16, 18, 20, 18, 20, 18, 21};
+static const u8 sPageProgress_InfoEgg[PROGRESS_DOTS]   = {17, 48,  2,  2,  2,  2,  2,  2};
+static const u8 sPageProgress_Skills[PROGRESS_DOTS]    = {49,  1, 17, 16, 18, 20, 18, 21};
+static const u8 sPageProgress_Moves[PROGRESS_DOTS]     = {49,  1, 49,  1, 17, 16, 18, 21};
+static const u8 sPageProgress_MovesInfo[PROGRESS_DOTS] = {49,  1, 49,  1, 50, 16, 18, 21};
+static const u8 sPageProgress_Feelings[PROGRESS_DOTS]  = {49,  1, 49,  1, 49,  1, 17, 48};
+
+static void PokeSum_DrawPageProgressRow(const u8 *tiles)
+{
+    u8 i;
+
+    for (i = 0; i < PROGRESS_DOTS; i++)
+    {
+        u8 top = tiles[i];
+        u8 under = top == 1 ? 19 : top == 2 ? 2 : top + 16;
+
+        FillBgTilemapBufferRect(3, top + PAGE_PROGRESS_BASE_TILE_NUM, 12 + i, 0, 1, 1, 0);
+        FillBgTilemapBufferRect(3, under + PAGE_PROGRESS_BASE_TILE_NUM, 12 + i, 1, 1, 1, 0);
+    }
+}
+
 static void PokeSum_DrawPageProgressTiles(void)
 {
     switch (sMonSummaryScreen->curPageIndex)
     {
     case PSS_PAGE_INFO:
-        if (!sMonSummaryScreen->isEgg)
-        {
-            FillBgTilemapBufferRect(3, 17 + PAGE_PROGRESS_BASE_TILE_NUM, 13, 0, 1, 1, 0);
-            FillBgTilemapBufferRect(3, 33 + PAGE_PROGRESS_BASE_TILE_NUM, 13, 1, 1, 1, 0);
-            FillBgTilemapBufferRect(3, 16 + PAGE_PROGRESS_BASE_TILE_NUM, 14, 0, 1, 1, 0);
-            FillBgTilemapBufferRect(3, 32 + PAGE_PROGRESS_BASE_TILE_NUM, 14, 1, 1, 1, 0);
-            FillBgTilemapBufferRect(3, 18 + PAGE_PROGRESS_BASE_TILE_NUM, 15, 0, 1, 1, 0);
-            FillBgTilemapBufferRect(3, 34 + PAGE_PROGRESS_BASE_TILE_NUM, 15, 1, 1, 1, 0);
-            FillBgTilemapBufferRect(3, 20 + PAGE_PROGRESS_BASE_TILE_NUM, 16, 0, 1, 1, 0);
-            FillBgTilemapBufferRect(3, 36 + PAGE_PROGRESS_BASE_TILE_NUM, 16, 1, 1, 1, 0);
-            FillBgTilemapBufferRect(3, 18 + PAGE_PROGRESS_BASE_TILE_NUM, 17, 0, 1, 1, 0);
-            FillBgTilemapBufferRect(3, 34 + PAGE_PROGRESS_BASE_TILE_NUM, 17, 1, 1, 1, 0);
-            FillBgTilemapBufferRect(3, 21 + PAGE_PROGRESS_BASE_TILE_NUM, 18, 0, 1, 1, 0);
-            FillBgTilemapBufferRect(3, 37 + PAGE_PROGRESS_BASE_TILE_NUM, 18, 1, 1, 1, 0);
-        }
-        else
-        {
-            FillBgTilemapBufferRect(3, 17 + PAGE_PROGRESS_BASE_TILE_NUM, 13, 0, 1, 1, 0);
-            FillBgTilemapBufferRect(3, 33 + PAGE_PROGRESS_BASE_TILE_NUM, 13, 1, 1, 1, 0);
-            FillBgTilemapBufferRect(3, 48 + PAGE_PROGRESS_BASE_TILE_NUM, 14, 0, 1, 1, 0);
-            FillBgTilemapBufferRect(3, 64 + PAGE_PROGRESS_BASE_TILE_NUM, 14, 1, 1, 1, 0);
-            FillBgTilemapBufferRect(3,  2 + PAGE_PROGRESS_BASE_TILE_NUM, 15, 0, 4, 2, 0);
-        }
+        PokeSum_DrawPageProgressRow(sMonSummaryScreen->isEgg ? sPageProgress_InfoEgg : sPageProgress_Info);
         break;
     case PSS_PAGE_SKILLS:
-        FillBgTilemapBufferRect(3, 49 + PAGE_PROGRESS_BASE_TILE_NUM, 13, 0, 1, 1, 0);
-        FillBgTilemapBufferRect(3, 65 + PAGE_PROGRESS_BASE_TILE_NUM, 13, 1, 1, 1, 0);
-        FillBgTilemapBufferRect(3,  1 + PAGE_PROGRESS_BASE_TILE_NUM, 14, 0, 1, 1, 0);
-        FillBgTilemapBufferRect(3, 19 + PAGE_PROGRESS_BASE_TILE_NUM, 14, 1, 1, 1, 0);
-        FillBgTilemapBufferRect(3, 17 + PAGE_PROGRESS_BASE_TILE_NUM, 15, 0, 1, 1, 0);
-        FillBgTilemapBufferRect(3, 33 + PAGE_PROGRESS_BASE_TILE_NUM, 15, 1, 1, 1, 0);
-        FillBgTilemapBufferRect(3, 16 + PAGE_PROGRESS_BASE_TILE_NUM, 16, 0, 1, 1, 0);
-        FillBgTilemapBufferRect(3, 32 + PAGE_PROGRESS_BASE_TILE_NUM, 16, 1, 1, 1, 0);
-        FillBgTilemapBufferRect(3, 18 + PAGE_PROGRESS_BASE_TILE_NUM, 17, 0, 1, 1, 0);
-        FillBgTilemapBufferRect(3, 34 + PAGE_PROGRESS_BASE_TILE_NUM, 17, 1, 1, 1, 0);
-        FillBgTilemapBufferRect(3, 21 + PAGE_PROGRESS_BASE_TILE_NUM, 18, 0, 1, 1, 0);
-        FillBgTilemapBufferRect(3, 37 + PAGE_PROGRESS_BASE_TILE_NUM, 18, 1, 1, 1, 0);
+        PokeSum_DrawPageProgressRow(sPageProgress_Skills);
         break;
     case PSS_PAGE_MOVES:
-        FillBgTilemapBufferRect(3, 49 + PAGE_PROGRESS_BASE_TILE_NUM, 13, 0, 1, 1, 0);
-        FillBgTilemapBufferRect(3, 65 + PAGE_PROGRESS_BASE_TILE_NUM, 13, 1, 1, 1, 0);
-        FillBgTilemapBufferRect(3,  1 + PAGE_PROGRESS_BASE_TILE_NUM, 14, 0, 1, 1, 0);
-        FillBgTilemapBufferRect(3, 19 + PAGE_PROGRESS_BASE_TILE_NUM, 14, 1, 1, 1, 0);
-        FillBgTilemapBufferRect(3, 49 + PAGE_PROGRESS_BASE_TILE_NUM, 15, 0, 1, 1, 0);
-        FillBgTilemapBufferRect(3, 65 + PAGE_PROGRESS_BASE_TILE_NUM, 15, 1, 1, 1, 0);
-        FillBgTilemapBufferRect(3,  1 + PAGE_PROGRESS_BASE_TILE_NUM, 16, 0, 1, 1, 0);
-        FillBgTilemapBufferRect(3, 19 + PAGE_PROGRESS_BASE_TILE_NUM, 16, 1, 1, 1, 0);
-        FillBgTilemapBufferRect(3, 17 + PAGE_PROGRESS_BASE_TILE_NUM, 17, 0, 1, 1, 0);
-        FillBgTilemapBufferRect(3, 33 + PAGE_PROGRESS_BASE_TILE_NUM, 17, 1, 1, 1, 0);
-        FillBgTilemapBufferRect(3, 48 + PAGE_PROGRESS_BASE_TILE_NUM, 18, 0, 1, 1, 0);
-        FillBgTilemapBufferRect(3, 64 + PAGE_PROGRESS_BASE_TILE_NUM, 18, 1, 1, 1, 0);
+        PokeSum_DrawPageProgressRow(sPageProgress_Moves);
+        break;
+    case PSS_PAGE_FEELINGS:
+        PokeSum_DrawPageProgressRow(sPageProgress_Feelings);
         break;
     case PSS_PAGE_MOVES_INFO:
         if (sMonSummaryScreen->mode == PSS_MODE_SELECT_MOVE)
         {
+            // learning a routine: one screen of its own, vanilla's single dot
             FillBgTilemapBufferRect(3,  1 + PAGE_PROGRESS_BASE_TILE_NUM, 13, 0, 4, 1, 0);
             FillBgTilemapBufferRect(3, 19 + PAGE_PROGRESS_BASE_TILE_NUM, 13, 1, 4, 1, 0);
+            FillBgTilemapBufferRect(3, 50 + PAGE_PROGRESS_BASE_TILE_NUM, 17, 0, 1, 1, 0);
+            FillBgTilemapBufferRect(3, 66 + PAGE_PROGRESS_BASE_TILE_NUM, 17, 1, 1, 1, 0);
+            FillBgTilemapBufferRect(3, 48 + PAGE_PROGRESS_BASE_TILE_NUM, 18, 0, 1, 1, 0);
+            FillBgTilemapBufferRect(3, 64 + PAGE_PROGRESS_BASE_TILE_NUM, 18, 1, 1, 1, 0);
         }
         else
-        {
-            FillBgTilemapBufferRect(3, 49 + PAGE_PROGRESS_BASE_TILE_NUM, 13, 0, 1, 1, 0);
-            FillBgTilemapBufferRect(3, 65 + PAGE_PROGRESS_BASE_TILE_NUM, 13, 1, 1, 1, 0);
-            FillBgTilemapBufferRect(3,  1 + PAGE_PROGRESS_BASE_TILE_NUM, 14, 0, 1, 1, 0);
-            FillBgTilemapBufferRect(3, 19 + PAGE_PROGRESS_BASE_TILE_NUM, 14, 1, 1, 1, 0);
-            FillBgTilemapBufferRect(3, 49 + PAGE_PROGRESS_BASE_TILE_NUM, 15, 0, 1, 1, 0);
-            FillBgTilemapBufferRect(3, 65 + PAGE_PROGRESS_BASE_TILE_NUM, 15, 1, 1, 1, 0);
-            FillBgTilemapBufferRect(3,  1 + PAGE_PROGRESS_BASE_TILE_NUM, 16, 0, 1, 1, 0);
-            FillBgTilemapBufferRect(3, 19 + PAGE_PROGRESS_BASE_TILE_NUM, 16, 1, 1, 1, 0);
-        }
-        FillBgTilemapBufferRect(3, 50 + PAGE_PROGRESS_BASE_TILE_NUM, 17, 0, 1, 1, 0);
-        FillBgTilemapBufferRect(3, 66 + PAGE_PROGRESS_BASE_TILE_NUM, 17, 1, 1, 1, 0);
-        FillBgTilemapBufferRect(3, 48 + PAGE_PROGRESS_BASE_TILE_NUM, 18, 0, 1, 1, 0);
-        FillBgTilemapBufferRect(3, 64 + PAGE_PROGRESS_BASE_TILE_NUM, 18, 1, 1, 1, 0);
+            PokeSum_DrawPageProgressRow(sPageProgress_MovesInfo);
         break;
     }
 }
@@ -5191,6 +5264,7 @@ static void PokeSum_UpdateWin1ActiveFlag(u8 curPageIndex)
     case PSS_PAGE_INFO:
     case PSS_PAGE_SKILLS:
     case PSS_PAGE_MOVES:
+    case PSS_PAGE_FEELINGS:
         SetGpuReg(REG_OFFSET_DISPCNT, GetGpuReg(REG_OFFSET_DISPCNT) | DISPCNT_WIN1_ON);
         break;
     default:
@@ -5242,4 +5316,161 @@ static bool32 MapSecIsInKantoOrSevii(u8 mapSec)
 static void ShowPokemonSummaryScreen_NullParty(void)
 {
     ShowPokemonSummaryScreen(NULL, 0, 0, CB2_ReturnToField, PSS_MODE_NORMAL);
+}
+
+// ---- T-431 P2: the fourth page -- a daemon's feelings, named nowhere ------------------------------------------------
+//
+// R from KNOWN ROUTINES, L back (bible 4.9; docs/private/plan-feelings-2026-10-21.md section 3). The page is drawn IN
+// PLACE rather than slid in: vanilla's flip alternates BG1 and BG2 between neighbouring pages and works out the page it
+// leaves as curPageIndex -/+ 1, which a page appended after PSS_PAGE_MOVE_DELETER is not. So BG1's and BG2's tilemaps
+// are kept as KNOWN ROUTINES left them (4 KB of heap while the page shows) and given back on the way out, and the
+// flip's state -- which layer is on top, which one slides next -- is never touched. The picture, its markings, its
+// ball and its status stay where KNOWN ROUTINES had them.
+
+#define FEELINGS_TILEMAP_ENTRIES (32 * 32)
+
+static bool8 PokeSum_CanShowFeelings(void)
+{
+    return !sMonSummaryScreen->isEgg
+        && (sMonSummaryScreen->mode == PSS_MODE_NORMAL || sMonSummaryScreen->mode == PSS_MODE_BOX);
+}
+
+static void Task_PokeSum_FeelingsPage(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;     // data[0] the step, data[1] TRUE going to the page, data[2] the title's BG
+    u8 i;
+
+    switch (data[0])
+    {
+    case 0:
+        if (data[1] && sMonSummaryScreen->feelingsBgBackup == NULL)
+        {
+            sMonSummaryScreen->feelingsBgBackup = Alloc(2 * FEELINGS_TILEMAP_ENTRIES * sizeof(u16));
+            if (sMonSummaryScreen->feelingsBgBackup == NULL)
+            {
+                DestroyTask(taskId);     // no room: stay on KNOWN ROUTINES
+                return;
+            }
+            CpuCopy16(sMonSummaryScreen->bg1TilemapBuffer, sMonSummaryScreen->feelingsBgBackup, FEELINGS_TILEMAP_ENTRIES * sizeof(u16));
+            CpuCopy16(sMonSummaryScreen->bg2TilemapBuffer, sMonSummaryScreen->feelingsBgBackup + FEELINGS_TILEMAP_ENTRIES, FEELINGS_TILEMAP_ENTRIES * sizeof(u16));
+        }
+        data[2] = GetWindowAttribute(sMonSummaryScreen->windowIds[POKESUM_WIN_PAGE_NAME], WINDOW_BG);
+        PokeSum_RemoveWindows(sMonSummaryScreen->curPageIndex);
+        FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 30, 20);
+        if (data[1])
+        {
+            CopyToBgTilemapBuffer(1, gSummaryScreen_PageFeelings_Tilemap, 0, 0);
+            CopyToBgTilemapBuffer(2, gSummaryScreen_PageFeelings_Tilemap, 0, 0);
+            sMonSummaryScreen->curPageIndex = PSS_PAGE_FEELINGS;
+        }
+        else
+        {
+            if (sMonSummaryScreen->feelingsBgBackup != NULL)
+            {
+                CpuCopy16(sMonSummaryScreen->feelingsBgBackup, sMonSummaryScreen->bg1TilemapBuffer, FEELINGS_TILEMAP_ENTRIES * sizeof(u16));
+                CpuCopy16(sMonSummaryScreen->feelingsBgBackup + FEELINGS_TILEMAP_ENTRIES, sMonSummaryScreen->bg2TilemapBuffer, FEELINGS_TILEMAP_ENTRIES * sizeof(u16));
+                FREE_AND_SET_NULL_IF_SET(sMonSummaryScreen->feelingsBgBackup);
+            }
+            sMonSummaryScreen->curPageIndex = PSS_PAGE_MOVES;
+        }
+        break;
+    case 1:
+        for (i = 0; i < 3; i++)
+            sMonSummaryScreen->windowIds[i] = AddWindow(data[2] == 2 ? &sWindowTemplates_Permanent_Bg2[i] : &sWindowTemplates_Permanent_Bg1[i]);
+        for (i = 0; i < 4; i++)
+            sMonSummaryScreen->windowIds[i + 3] = AddWindow(sMonSummaryScreen->curPageIndex == PSS_PAGE_FEELINGS
+                                                            ? &sWindowTemplates_Feelings[i] : &sWindowTemplates_Moves[i]);
+        break;
+    case 2:
+        PokeSum_PrintPageHeaderText(sMonSummaryScreen->curPageIndex);
+        PokeSum_PrintRightPaneText();
+        PokeSum_PrintBottomPaneText();
+        PokeSum_PrintAbilityDataOrMoveTypes();
+        PokeSum_PrintMonTypeIcons();
+        PokeSum_DrawPageProgressTiles();
+        break;
+    case 3:
+        for (i = 0; i < 7; i++)
+            CopyWindowToVram(sMonSummaryScreen->windowIds[i], 2);
+        break;
+    case 4:
+        if (IsDma3ManagerBusyWithBgCopy())
+            return;
+        CopyBgTilemapBufferToVram(0);
+        CopyBgTilemapBufferToVram(1);
+        CopyBgTilemapBufferToVram(2);
+        CopyBgTilemapBufferToVram(3);
+        break;
+    default:
+        PokeSum_SetHelpContext();
+        DestroyTask(taskId);
+        return;
+    }
+    data[0]++;
+}
+
+// The grid: an 80px box of paper, a 9x9 lattice of 8px cells drawn faint, a cross through the middle cell a little
+// less faint, and the dot -- a rounded 7px square in its cell. Across is GLAD - SAD (right is glad), up is CALM, down
+// AFRAID; the dot's colour is MAD's, greyed by friendship. Nothing is labelled. Every fill is a single 4-bit value, so
+// FillWindowPixelRect writes it exactly at any x (engine.md trap 36 is a PIXEL_FILL byte at an odd edge).
+static void PokeSum_PrintFeelingsGrid(void)
+{
+    u8 win = sMonSummaryScreen->windowIds[POKESUM_WIN_RIGHT_PANE];
+    struct DaemonFeelings f;
+    u8 friendship = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_FRIENDSHIP);
+    u8 col, row, k;
+    u16 dot;
+    s32 x0, y0, span = FEELINGS_GRID * FEELINGS_CELL;
+
+    Feelings_Get(&sMonSummaryScreen->currentMon.box, &f);
+    Feelings_GridCell(&f, &col, &row);
+    dot = Feelings_DotColour(f.mad, friendship);
+    LoadPalette(&dot, BG_PLTT_ID(FEELINGS_GRID_PAL) + 15, sizeof(dot));
+
+    // the box: a border, paper inside, its corners cut
+    FillWindowPixelRect(win, 4, FEELINGS_GRID_X - 4, FEELINGS_GRID_Y - 4, span + 8, span + 8);
+    FillWindowPixelRect(win, 1, FEELINGS_GRID_X - 3, FEELINGS_GRID_Y - 3, span + 6, span + 6);
+    FillWindowPixelRect(win, 0, FEELINGS_GRID_X - 4, FEELINGS_GRID_Y - 4, 1, 1);
+    FillWindowPixelRect(win, 0, FEELINGS_GRID_X + span + 3, FEELINGS_GRID_Y - 4, 1, 1);
+    FillWindowPixelRect(win, 0, FEELINGS_GRID_X - 4, FEELINGS_GRID_Y + span + 3, 1, 1);
+    FillWindowPixelRect(win, 0, FEELINGS_GRID_X + span + 3, FEELINGS_GRID_Y + span + 3, 1, 1);
+
+    // the cells
+    for (k = 0; k <= FEELINGS_GRID; k++)
+    {
+        FillWindowPixelRect(win, 2, FEELINGS_GRID_X + k * FEELINGS_CELL, FEELINGS_GRID_Y, 1, span + 1);
+        FillWindowPixelRect(win, 2, FEELINGS_GRID_X, FEELINGS_GRID_Y + k * FEELINGS_CELL, span + 1, 1);
+    }
+    // the middle, faintly: a cross through the centre of the centre cell
+    FillWindowPixelRect(win, 3, FEELINGS_GRID_X + span / 2, FEELINGS_GRID_Y, 1, span + 1);
+    FillWindowPixelRect(win, 3, FEELINGS_GRID_X, FEELINGS_GRID_Y + span / 2, span + 1, 1);
+
+    // the dot
+    x0 = FEELINGS_GRID_X + col * FEELINGS_CELL;
+    y0 = FEELINGS_GRID_Y + row * FEELINGS_CELL;
+    FillWindowPixelRect(win, 15, x0 + 2, y0 + 1, FEELINGS_CELL - 3, FEELINGS_CELL - 1);
+    FillWindowPixelRect(win, 15, x0 + 1, y0 + 2, FEELINGS_CELL - 1, FEELINGS_CELL - 3);
+#if DAEMONS_DEBUG
+    gFeelingsDebugShown[1] = col | (row << 8) | ((u32)dot << 16);
+#endif
+}
+
+// The line of behaviour, centred in a paper box in the bottom pane (one of the sixteen, Feelings_BehaviourLine).
+static void PokeSum_PrintFeelingsLine(void)
+{
+    u8 win = sMonSummaryScreen->windowIds[POKESUM_WIN_TRAINER_MEMO];
+    u8 friendship = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_FRIENDSHIP);
+    const u8 *line = Feelings_BehaviourLine(&sMonSummaryScreen->currentMon.box, friendship);
+    s32 width = GetStringWidth(FONT_NORMAL, line, 0);
+
+    FillWindowPixelRect(win, 4, 0, 0, FEELINGS_LINE_W, FEELINGS_LINE_H);
+    FillWindowPixelRect(win, 1, 1, 1, FEELINGS_LINE_W - 2, FEELINGS_LINE_H - 2);
+    FillWindowPixelRect(win, 0, 0, 0, 1, 1);
+    FillWindowPixelRect(win, 0, FEELINGS_LINE_W - 1, 0, 1, 1);
+    FillWindowPixelRect(win, 0, 0, FEELINGS_LINE_H - 1, 1, 1);
+    FillWindowPixelRect(win, 0, FEELINGS_LINE_W - 1, FEELINGS_LINE_H - 1, 1, 1);
+    AddTextPrinterParameterized3(win, FONT_NORMAL, (FEELINGS_LINE_W - width) / 2, 9, sFeelingsLineColors, TEXT_SKIP_DRAW, line);
+#if DAEMONS_DEBUG
+    gFeelingsDebugShown[0] = (u32)line;
+#endif
 }

@@ -1339,8 +1339,8 @@ Help_Text_DefineFNT::
 	.string "CHECKPOINT, or use an item.$"
 
 Help_Text_DefineItems::
-	.string "Ordinary items bought at any DAEMON\n"
-	.string "MART are placed in the ITEMS POCKET.\l"
+	.string "Ordinary items bought at any REPO are\n"
+	.string "placed in the ITEMS POCKET.\l"
 	.string "Items may be used, given to a DAEMON\l"
 	.string "to hold, or tossed out as garbage.$"
 

@@ -5,6 +5,7 @@
 #include "pokemon.h"
 #include "pokemon_storage_system.h"
 #include "daemons_feelings.h"
+#include "daemon_saturation.h"
 #include "daemons_follower.h"
 #include "daemons_time.h"
 #include "constants/battle.h"
@@ -29,10 +30,117 @@ static const u8 sFade[FEELINGS_LOOK_BACK + 1] = {
       1,
 };
 
+// ---- T-431 P2 and P4: the SUMMARY's fourth page (src/pokemon_summary_screen.c draws it) ---------------------------
+
+// The sixteen lines of behaviour (the plan's section 5), ALL APPROVED BY THE USER 2026-10-21 AND STILL DRAFT IN THE
+// GAME. Each says what the daemon does, never what it feels (craft rule 3), and each is one line of at most 208px
+// (tools/check_lexicon.py measures them). Chosen by Feelings_BehaviourLine below.
+static const u8 sFeelingsLine_GladCalm[]      = _("It walks at your pace, unhurried.");       // DRAFT
+static const u8 sFeelingsLine_GladMiddle[]    = _("It hums through its routines.");           // DRAFT
+static const u8 sFeelingsLine_GladAfraid[]    = _("It bounds ahead, then darts back.");       // DRAFT
+static const u8 sFeelingsLine_MiddleCalm[]    = _("It dozes the moment you stop.");           // DRAFT
+static const u8 sFeelingsLine_MiddleWary[]    = _("It keeps a careful step away.");           // DRAFT
+static const u8 sFeelingsLine_MiddleClose[]   = _("It leans on you whenever you stop.");      // DRAFT
+static const u8 sFeelingsLine_MiddleAfraid[]  = _("It checks behind you at each turn.");      // DRAFT
+static const u8 sFeelingsLine_SadCalm[]       = _("It trails a step behind, quiet.");         // DRAFT
+static const u8 sFeelingsLine_SadWary[]       = _("It stops often, looking back.");           // DRAFT
+static const u8 sFeelingsLine_SadClose[]      = _("It stays close, but will not play.");      // DRAFT
+static const u8 sFeelingsLine_SadAfraidWary[] = _("It hides behind whatever is near.");       // DRAFT
+static const u8 sFeelingsLine_SadAfraidClose[]= _("It presses close at every noise.");        // DRAFT
+static const u8 sFeelingsLine_MadAfraid[]     = _("It snaps at the air when you turn.");      // DRAFT
+static const u8 sFeelingsLine_MadSad[]        = _("It turns its back when you look.");        // DRAFT
+static const u8 sFeelingsLine_Mad[]           = _("It glares back at the last fight.");       // DRAFT
+static const u8 sFeelingsLine_Ever[]          = _("It goes where you go, as ever.");          // DRAFT
+
+void Feelings_GridCell(const struct DaemonFeelings *f, u8 *col, u8 *row)
+{
+    s32 x = (s32)f->glad - (s32)f->sad;     // -100 .. 100, right is glad
+    s32 y = f->calm;                        // -100 .. 100, up is calm
+
+    *col = (x + 100) * FEELINGS_GRID / 201;
+    *row = (100 - y) * FEELINGS_GRID / 201;
+}
+
+// MAD 0 is a cool slate (88, 120, 168), MAD 100 an ember (232, 88, 40); between, the straight line. Then friendship
+// takes its colour toward grey by the rule the daemon's own picture follows (src/daemon_saturation.c).
+#define DOT_COOL_R 11
+#define DOT_COOL_G 15
+#define DOT_COOL_B 21
+#define DOT_HOT_R  29
+#define DOT_HOT_G  11
+#define DOT_HOT_B   5
+
+u16 Feelings_DotColour(u8 mad, u8 friendship)
+{
+    u16 buf[16];
+    s32 m = mad > FEELINGS_MAX ? FEELINGS_MAX : mad;
+
+    buf[0] = 0;
+    buf[1] = RGB(DOT_COOL_R + (DOT_HOT_R - DOT_COOL_R) * m / FEELINGS_MAX,
+                 DOT_COOL_G + (DOT_HOT_G - DOT_COOL_G) * m / FEELINGS_MAX,
+                 DOT_COOL_B + (DOT_HOT_B - DOT_COOL_B) * m / FEELINGS_MAX);
+    Saturation_ApplyToBuffer(buf, friendship);
+    return buf[1];
+}
+
+// The plan's scheme: MAD 40 or more speaks first; then the 3x3 reading of GLAD - SAD against CALM (20 either side of
+// 0 is the middle); then, where the plan gives two lines, friendship picks (under 100 the wary one, 150 and over the
+// close one; between them the nearer, split at 125 -- a choice the plan left open). All near zero and friendship 220
+// or more is "It goes where you go, as ever." A daemon never stamped (an old save's, an in-game trade's) has no
+// history to read: it takes that line at 220 and over, and otherwise "It dozes the moment you stop."
+const u8 *Feelings_BehaviourLine(struct BoxPokemon *boxMon, u8 friendship)
+{
+    struct DaemonFeelings f;
+    s32 x, quiet;
+    bool8 close = friendship >= (FEELINGS_FRIEND_LOW + FEELINGS_FRIEND_HIGH) / 2;
+
+    if (!Feelings_IsSet(boxMon))
+        return friendship >= FEELINGS_FRIEND_EVER ? sFeelingsLine_Ever : sFeelingsLine_MiddleCalm;
+
+    Feelings_Get(boxMon, &f);
+    x = (s32)f.glad - (s32)f.sad;
+    quiet = f.glad < FEELINGS_QUIET && f.mad < FEELINGS_QUIET && f.sad < FEELINGS_QUIET
+         && f.calm < FEELINGS_QUIET && f.calm > -FEELINGS_QUIET;
+
+    if (f.mad >= FEELINGS_MAD_LINE)
+    {
+        if (f.calm <= -FEELINGS_LEAN)
+            return sFeelingsLine_MadAfraid;
+        if (x <= -FEELINGS_LEAN)
+            return sFeelingsLine_MadSad;
+        return sFeelingsLine_Mad;
+    }
+    if (quiet && friendship >= FEELINGS_FRIEND_EVER)
+        return sFeelingsLine_Ever;
+
+    if (x >= FEELINGS_LEAN)
+    {
+        if (f.calm >= FEELINGS_LEAN)
+            return sFeelingsLine_GladCalm;
+        if (f.calm <= -FEELINGS_LEAN)
+            return sFeelingsLine_GladAfraid;
+        return sFeelingsLine_GladMiddle;
+    }
+    if (x <= -FEELINGS_LEAN)
+    {
+        if (f.calm >= FEELINGS_LEAN)
+            return sFeelingsLine_SadCalm;
+        if (f.calm <= -FEELINGS_LEAN)
+            return close ? sFeelingsLine_SadAfraidClose : sFeelingsLine_SadAfraidWary;
+        return close ? sFeelingsLine_SadClose : sFeelingsLine_SadWary;
+    }
+    if (f.calm >= FEELINGS_LEAN)
+        return sFeelingsLine_MiddleCalm;
+    if (f.calm <= -FEELINGS_LEAN)
+        return sFeelingsLine_MiddleAfraid;
+    return close ? sFeelingsLine_MiddleClose : sFeelingsLine_MiddleWary;
+}
+
 #if DAEMONS_DEBUG
 // The theatre's route reads the clock the game last read (tools/theatre_route.py's `feelings`): now, and 1 for the
 // cartridge's clock or 0 for play time. 4 bytes, the DEBUG build only.
 EWRAM_DATA u16 gFeelingsDebugNow[2] = {0};
+EWRAM_DATA u32 gFeelingsDebugShown[2] = {0};   // T-431 P2: the fourth page's line, cell and dot
 #endif
 
 u16 Feelings_Now(bool8 *fromClock)

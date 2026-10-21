@@ -34,6 +34,7 @@ enum PokemonSummaryScreenPage
     PSS_PAGE_MOVES_INFO,
     PSS_PAGE_UNK4,
     PSS_PAGE_MOVE_DELETER,
+    PSS_PAGE_FEELINGS,      // T-431 P2: R from KNOWN ROUTINES, L back; appended, so no vanilla page renumbers
 };
 
 enum PokemonSummaryScreenState3270

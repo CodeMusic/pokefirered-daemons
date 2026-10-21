@@ -63,8 +63,8 @@ CinnabarIsland_Text_IllBeWaitingInPokeCenter::
     .string "What, are you too busy?\p"
     .string "Well, all right. The boat hasn't\n"
     .string "arrived yet anyway.\p"
-    .string "I'll be waiting at the DAEMON\n"
-    .string "CENTER over there.\p"
+    .string "I'll be waiting at the\n"
+    .string "CHECKPOINT over there.\p"
     .string "Come see me when you're done with\n"
     .string "your business here.$"
 
