@@ -1446,6 +1446,7 @@ Text_TestMsg::
 	.include "data/scripts/tower_stones.inc"   @ T-249
 	.include "data/scripts/plants.inc"   @ T-381, tools/gbaplants.py
 	.include "data/scripts/daemons_house.inc"   @ T-427
+	.include "data/scripts/follower.inc"   @ T-18 P2: A on the follower
 	.include "data/text/save.inc"
 	.include "data/text/new_game_intro.inc"
 	.include "data/text/pokedude.inc"

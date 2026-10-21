@@ -9,6 +9,16 @@
 #include "pokemon_icon.h"
 #include "quest_log.h"
 #include "script.h"
+#include "string_util.h"
+#include "field_player_avatar.h"
+#include "event_scripts.h"
+#include "fieldmap.h"
+#include "field_specials.h"
+#include "trainer_see.h"
+#include "daemons_time.h"
+#include "daemons_weather.h"
+#include "constants/event_bg.h"
+#include "constants/region_map_sections.h"
 #include "daemon_saturation.h"
 #include "daemons_follower.h"
 #include "constants/event_object_movement.h"
@@ -76,6 +86,7 @@ static struct
     s16 restX, restY;      // the player's tile when it was stored
     u32 personality;
     bool8 half;            // in the air, a pixel waits for its pair (see Step)
+    u8 talks;              // T-18 P2: times it has been spoken to, so a mood's two lines take turns
 } sFollower;
 
 static void SpriteCB_Follower(struct Sprite *sprite)
@@ -471,4 +482,182 @@ void Follower_Update(void)
         return;
     }
     Place(sprite, player, playerObj);
+}
+
+//  ---------------------------------------------------------------- A on it (T-18 P2)
+//
+//  The plan's P2: A on the follower gives the line for its friendship (the five readings of the ladder -- observation,
+//  never a feeling named), then one mood when one holds, in this order: it noticed something (an unfound hidden item
+//  within two tiles), the place (THE NEXUS; HALFTONE, which DOLDRUM CAVE unread is too), and, outdoors and not in a
+//  timeless place, the sky, the watch (the day has no line) and last the season. A mood's two lines take turns. A
+//  bubble rises over it -- the trainers' own -- and it turns to face the player. Every line is DRAFT
+//  (data/scripts/follower.inc). Friendship's readings: 0-49, 50-99, 100-149, 150-219, 220-255.
+
+enum
+{
+    MOOD_NONE, MOOD_NOTICE, MOOD_NEXUS, MOOD_HALFTONE,
+    MOOD_RAIN, MOOD_STORM, MOOD_SNOW, MOOD_FOG, MOOD_WIND,
+    MOOD_NIGHT, MOOD_DUSK, MOOD_DAWN,
+    MOOD_WINTER, MOOD_SPRING, MOOD_SUMMER, MOOD_AUTUMN,   // SEASON_* order
+    MOOD_COUNT
+};
+
+static const u8 sTierFloor[] = { 0, 50, 100, 150, 220 };
+static const u8 *const sTierLines[] = {
+    Follower_Text_Tier0, Follower_Text_Tier1, Follower_Text_Tier2, Follower_Text_Tier3, Follower_Text_Tier4,
+};
+//  The bubble by reading: a question while it keeps its distance, a mark once it stays, the smile at the top.
+static const u8 sTierEmote[] = {
+    EMOTICON_QUESTION, EMOTICON_QUESTION, EMOTICON_EXCLAMATION, EMOTICON_EXCLAMATION, EMOTICON_SMILEY,
+};
+
+static const u8 *const sMoodLines[MOOD_COUNT][2] = {
+    [MOOD_NOTICE]   = { Follower_Text_Notice,    Follower_Text_Notice },
+    [MOOD_NEXUS]    = { Follower_Text_Nexus0,    Follower_Text_Nexus1 },
+    [MOOD_HALFTONE] = { Follower_Text_Halftone0, Follower_Text_Halftone1 },
+    [MOOD_RAIN]     = { Follower_Text_Rain0,     Follower_Text_Rain1 },
+    [MOOD_STORM]    = { Follower_Text_Storm0,    Follower_Text_Storm1 },
+    [MOOD_SNOW]     = { Follower_Text_Snow0,     Follower_Text_Snow1 },
+    [MOOD_FOG]      = { Follower_Text_Fog0,      Follower_Text_Fog1 },
+    [MOOD_WIND]     = { Follower_Text_Wind0,     Follower_Text_Wind1 },
+    [MOOD_NIGHT]    = { Follower_Text_Night0,    Follower_Text_Night1 },
+    [MOOD_DUSK]     = { Follower_Text_Dusk0,     Follower_Text_Dusk1 },
+    [MOOD_DAWN]     = { Follower_Text_Dawn0,     Follower_Text_Dawn1 },
+    [MOOD_WINTER]   = { Follower_Text_Winter0,   Follower_Text_Winter1 },
+    [MOOD_SPRING]   = { Follower_Text_Spring0,   Follower_Text_Spring1 },
+    [MOOD_SUMMER]   = { Follower_Text_Summer0,   Follower_Text_Summer1 },
+    [MOOD_AUTUMN]   = { Follower_Text_Autumn0,   Follower_Text_Autumn1 },
+};
+
+#define NOTICE_TILES 2
+
+//  Where it stands, in map coordinates (MAP_OFFSET included, as the player's): only when drawn and a whole tile off.
+static bool8 StandsAt(s16 x, s16 y)
+{
+    struct ObjectEvent *playerObj = &gObjectEvents[gPlayerAvatar.objectEventId];
+
+    if (!IsOurs() || gSprites[sFollower.spriteId].invisible)
+        return FALSE;
+    if (sFollower.sumX % TRAIL != 0 || sFollower.sumY % TRAIL != 0)
+        return FALSE;
+    return playerObj->currentCoords.x - sFollower.sumX / TRAIL == x
+        && playerObj->currentCoords.y - sFollower.sumY / TRAIL == y;
+}
+
+const u8 *Follower_GetInteractionScript(struct MapPosition *position)
+{
+    if (!StandsAt(position->x, position->y))
+        return NULL;
+    return EventScript_Follower;
+}
+
+//  An unfound hidden item (not one underfoot: those are the ITEMFINDER's alone) within NOTICE_TILES of the player.
+static bool8 HiddenItemNear(void)
+{
+    const struct MapEvents *events = gMapHeader.events;
+    s16 x, y, dx, dy;
+    s32 i;
+
+    PlayerGetDestCoords(&x, &y);
+    for (i = 0; i < events->bgEventCount; i++)
+    {
+        const struct BgEvent *bg = &events->bgEvents[i];
+
+        if (bg->kind != BG_EVENT_HIDDEN_ITEM
+         || FlagGet(GetHiddenItemAttr(bg->bgUnion.hiddenItem, HIDDEN_ITEM_FLAG))
+         || GetHiddenItemAttr(bg->bgUnion.hiddenItem, HIDDEN_ITEM_UNDERFOOT))
+            continue;
+        dx = bg->x + MAP_OFFSET - x;
+        dy = bg->y + MAP_OFFSET - y;
+        if (dx >= -NOTICE_TILES && dx <= NOTICE_TILES && dy >= -NOTICE_TILES && dy <= NOTICE_TILES)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+static u8 PickMood(void)
+{
+    if (HiddenItemNear())
+        return MOOD_NOTICE;
+    if (gMapHeader.regionMapSectionId == MAPSEC_NEXUS)
+        return MOOD_NEXUS;
+    if (DaemonsIsHalftone())
+        return MOOD_HALFTONE;
+    if (!IsMapTypeOutdoors(gMapHeader.mapType) || DaemonsIsTimeless())
+        return MOOD_NONE;
+    switch (DaemonsSkyNow())
+    {
+    case DAEMONS_SKY_RAIN:  return MOOD_RAIN;
+    case DAEMONS_SKY_STORM: return MOOD_STORM;
+    case DAEMONS_SKY_SNOW:  return MOOD_SNOW;
+    case DAEMONS_SKY_FOG:   return MOOD_FOG;
+    case DAEMONS_SKY_WIND:  return MOOD_WIND;
+    }
+    switch (DaemonsWatch())
+    {
+    case WATCH_NIGHT: return MOOD_NIGHT;
+    case WATCH_DUSK:  return MOOD_DUSK;
+    case WATCH_DAWN:  return MOOD_DAWN;
+    }
+    return MOOD_WINTER + DaemonsSeason() % SEASON_COUNT;
+}
+
+//  The bubble rides it as the trainers' rides an object event: a small hop up, then held until its animation ends.
+static void SpriteCB_FollowerEmote(struct Sprite *sprite)
+{
+    struct Sprite *follower;
+
+    if (sprite->animEnded || !IsOurs())
+    {
+        DestroySprite(sprite);
+        return;
+    }
+    follower = &gSprites[sFollower.spriteId];
+    sprite->data[4] += sprite->data[3];
+    if (sprite->data[4])
+        sprite->data[3]++;
+    else
+        sprite->data[3] = 0;
+    sprite->x = follower->x;
+    sprite->y = follower->y - 16;   // over the icon's body, which sits low in its 32x32 cell
+    sprite->x2 = 0;
+    sprite->y2 = follower->y2 + sprite->data[4];
+    sprite->invisible = follower->invisible;
+}
+
+void Follower_Talk(void)
+{
+    s8 slot = Follower_LeadSlot();
+    struct Pokemon *mon;
+    u8 friendship, band, mood, spriteId;
+    u8 *end;
+
+    gStringVar4[0] = EOS;
+    if (slot < 0)
+        return;
+    mon = &gPlayerParty[slot];
+    GetMonData(mon, MON_DATA_NICKNAME, gStringVar1);
+    StringGet_Nickname(gStringVar1);
+    friendship = GetMonData(mon, MON_DATA_FRIENDSHIP);
+    for (band = ARRAY_COUNT(sTierFloor) - 1; band > 0 && friendship < sTierFloor[band]; band--)
+        ;
+    mood = PickMood();
+
+    end = StringExpandPlaceholders(gStringVar4, sTierLines[band]);
+    if (mood != MOOD_NONE)
+    {
+        *end++ = CHAR_PROMPT_CLEAR;
+        StringExpandPlaceholders(end, sMoodLines[mood][sFollower.talks & 1]);
+    }
+    sFollower.talks++;
+
+    // It turns to the player (icons face left; east is the same picture flipped). Above or below, it keeps its side.
+    if (sFollower.sumX > 0)
+        sFollower.facing = DIR_EAST;
+    else if (sFollower.sumX < 0)
+        sFollower.facing = DIR_WEST;
+
+    spriteId = CreateEmoticonSprite(mood == MOOD_NOTICE ? EMOTICON_DOUBLE_EXCL : sTierEmote[band], SpriteCB_FollowerEmote);
+    if (spriteId != MAX_SPRITES)
+        gSprites[spriteId].data[3] = -5;
 }

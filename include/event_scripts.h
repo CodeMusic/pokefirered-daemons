@@ -1326,4 +1326,41 @@ extern const u8 ViridianCity_Mart_EventScript_ShelfEnd[];
 
 extern const u8 EventScript_TowerStone[];   // T-249
 
+// T-18 P2: A on the follower (data/scripts/follower.inc; every line DRAFT)
+extern const u8 EventScript_Follower[];
+extern const u8 Follower_Text_Tier0[];
+extern const u8 Follower_Text_Tier1[];
+extern const u8 Follower_Text_Tier2[];
+extern const u8 Follower_Text_Tier3[];
+extern const u8 Follower_Text_Tier4[];
+extern const u8 Follower_Text_Notice[];
+extern const u8 Follower_Text_Nexus0[];
+extern const u8 Follower_Text_Nexus1[];
+extern const u8 Follower_Text_Halftone0[];
+extern const u8 Follower_Text_Halftone1[];
+extern const u8 Follower_Text_Rain0[];
+extern const u8 Follower_Text_Rain1[];
+extern const u8 Follower_Text_Storm0[];
+extern const u8 Follower_Text_Storm1[];
+extern const u8 Follower_Text_Snow0[];
+extern const u8 Follower_Text_Snow1[];
+extern const u8 Follower_Text_Fog0[];
+extern const u8 Follower_Text_Fog1[];
+extern const u8 Follower_Text_Wind0[];
+extern const u8 Follower_Text_Wind1[];
+extern const u8 Follower_Text_Night0[];
+extern const u8 Follower_Text_Night1[];
+extern const u8 Follower_Text_Dusk0[];
+extern const u8 Follower_Text_Dusk1[];
+extern const u8 Follower_Text_Dawn0[];
+extern const u8 Follower_Text_Dawn1[];
+extern const u8 Follower_Text_Winter0[];
+extern const u8 Follower_Text_Winter1[];
+extern const u8 Follower_Text_Spring0[];
+extern const u8 Follower_Text_Spring1[];
+extern const u8 Follower_Text_Summer0[];
+extern const u8 Follower_Text_Summer1[];
+extern const u8 Follower_Text_Autumn0[];
+extern const u8 Follower_Text_Autumn1[];
+
 #endif //GUARD_EVENT_SCRIPTS_H

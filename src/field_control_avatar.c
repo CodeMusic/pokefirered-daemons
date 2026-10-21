@@ -1,4 +1,5 @@
 #include "global.h"
+#include "daemons_follower.h"   // T-18 P2
 #include "daemons_time.h"
 #include "gflib.h"
 #include "bike.h"
@@ -584,6 +585,10 @@ static bool8 TryStartInteractionScript(struct MapPosition *position, u16 metatil
 static const u8 *GetInteractionScript(struct MapPosition *position, u8 metatileBehavior, u8 direction)
 {
     const u8 *script = GetInteractedObjectEventScript(position, metatileBehavior, direction);
+    if (script != NULL)
+        return script;
+
+    script = Follower_GetInteractionScript(position);   // T-18 P2: a sprite, not an object; people first
     if (script != NULL)
         return script;
 

@@ -9,4 +9,9 @@ void Follower_Update(void);          // once a frame in the field, after the spr
 void Follower_RetintPalette(void);   // the light changed (DaemonsRetintObjectEventPalettes)
 s8 Follower_LeadSlot(void);          // the party slot that follows, or -1: not an egg, not HALTED, not AWAY
 
+// T-18 P2: A on it. The script when the tile the player faces is where it stands (field_control_avatar.c, after the
+// people), and the special that script runs: its lines into gStringVar4, a bubble over it.
+const u8 *Follower_GetInteractionScript(struct MapPosition *position);
+void Follower_Talk(void);
+
 #endif // GUARD_DAEMONS_FOLLOWER_H

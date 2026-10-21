@@ -704,6 +704,23 @@ u8 FldEff_QuestionMarkIcon(void)
     return 0;
 }
 
+//  T-18 P2: a bubble over the follower, which is a sprite and not an object event, so SpriteCB_TrainerIcons cannot
+//  find it: the caller's callback places it and destroys it when its animation ends. MAX_SPRITES if none was free.
+u8 CreateEmoticonSprite(u8 animNum, void (*callback)(struct Sprite *))
+{
+    u8 spriteId = CreateSpriteAtEnd(&sSpriteTemplate_Emoticons, 0, 0, 0x52);
+
+    if (spriteId != MAX_SPRITES)
+    {
+        gSprites[spriteId].oam.priority = 1;
+        gSprites[spriteId].coordOffsetEnabled = TRUE;
+        gSprites[spriteId].invisible = TRUE;   // until the callback has placed it
+        gSprites[spriteId].callback = callback;
+        StartSpriteAnim(&gSprites[spriteId], animNum);
+    }
+    return spriteId;
+}
+
 static void SetIconSpriteData(struct Sprite *sprite, u16 fldEffId, u8 spriteAnimNum)
 {
     sprite->oam.priority = 1;
