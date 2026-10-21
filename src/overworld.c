@@ -36,6 +36,7 @@
 #include "new_game.h"
 #include "new_menu_helpers.h"
 #include "overworld.h"
+#include "daemons_follower.h"
 #include "play_time.h"
 #include "quest_log.h"
 #include "quest_log_objects.h"
@@ -1563,6 +1564,7 @@ static void OverworldBasic(void)
     DaemonsFireworks_Update();   // T-416 P4
     RunTasks();
     AnimateSprites();
+    Follower_Update();   // T-18: after the player's sprite has moved
     CameraUpdate();
     SetQuestLogEvent_Arrived();
     UpdateCameraPanning();

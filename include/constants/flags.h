@@ -1886,6 +1886,7 @@
 #define FLAG_ATTENDANT_DREAM_CHAMPION         (DAEMONS_FLAGS_START + 0x3CC)
 #define FLAG_GOT_SUBTLE_LAYER                 (DAEMONS_FLAGS_START + 0x3E0)   // T-423: the game lane's block 0x3E0-0x3EF
 #define FLAG_HOUSE_TAKE_FROZEN                (DAEMONS_FLAGS_START + 0x3E1)   // T-427: houseTakeAtFall is recorded
+#define FLAG_FOLLOWER_OFF                     (DAEMONS_FLAGS_START + 0x3E2)   // T-18: OPTIONS -> FOLLOWER OFF (set: no follower)
 
 //  BEGIN gbaglobalindex -- T-334: each fixed encounter of the GLOBAL INDEX, once gone (removeobject sets it). The beasts'
 //  and the edition daemons' are also set on every map load while they may not stand (event_data.c,

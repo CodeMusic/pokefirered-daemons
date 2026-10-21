@@ -1,0 +1,12 @@
+#ifndef GUARD_DAEMONS_FOLLOWER_H
+#define GUARD_DAEMONS_FOLLOWER_H
+
+// T-18 P1 (planned and decided 2026-10-20, docs/private/plan-follower-2026-10-20.md): THE FOLLOWER. The lead daemon
+// walks one tile behind the player, drawn as its own party icon in its own type colours, greyed by its friendship.
+// It is a SPRITE, not an object event: it takes no object slot, blocks nothing, is never saved and never recorded.
+
+void Follower_Update(void);          // once a frame in the field, after the sprites have moved (overworld.c)
+void Follower_RetintPalette(void);   // the light changed (DaemonsRetintObjectEventPalettes)
+s8 Follower_LeadSlot(void);          // the party slot that follows, or -1: not an egg, not HALTED, not AWAY
+
+#endif // GUARD_DAEMONS_FOLLOWER_H

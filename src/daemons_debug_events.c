@@ -19,6 +19,8 @@
 #include "constants/opponents.h"
 #include "constants/songs.h"
 #include "daemons_holidays.h"        // T-416
+#include "daemons_follower.h"        // T-18
+#include "pokemon.h"
 #include "data/holiday_lines.h"      // T-416: THE YEAR's titles
 
 //  T-394 (the user, 2026-10-08): "Debug mode starts with lots of things so you can't test some things." A new debug
@@ -37,7 +39,7 @@
 
 #if DAEMONS_DEBUG
 
-enum { PG_EVENTS, PG_MARKS, PG_NOTEBOOK, PG_DRIVERS, PG_ROOTS, PG_SONGS, PG_YEAR, PG_COUNT };
+enum { PG_EVENTS, PG_MARKS, PG_NOTEBOOK, PG_DRIVERS, PG_ROOTS, PG_SONGS, PG_YEAR, PG_FOLLOWER, PG_COUNT };
 enum { R_PAGE, R_GIVE, R_TOGGLE, R_ASK };   // R_ASK gives, after a YES
 
 enum
@@ -51,6 +53,7 @@ enum
     EV_ROOTS_ALL, EV_ROOT1, EV_ROOT7 = EV_ROOT1 + 6, EV_INSIGHTS_AGAIN,
     EV_SONGS_ALL, EV_SONG1, EV_SONG8 = EV_SONG1 + PLAY_SONG_COUNT - 1, EV_NEXUS_LIT,   // T-417 P2
     EV_YEAR_ALL, EV_YEAR1, EV_YEAR12 = EV_YEAR1 + HOLIDAY_YEAR_LINE_COUNT - 1, EV_GIFTS_AGAIN,   // T-416
+    EV_FOLLOWER, EV_FRIEND_0, EV_FRIEND_70, EV_FRIEND_150, EV_FRIEND_255,   // T-18
 };
 
 struct DbgRow { const u8 *name; u8 kind; u8 arg; };
@@ -147,6 +150,13 @@ static const u8 sName_NexusLit[] = _("THE NEXUS LIT");
 //  T-416: THE YEAR, each line held or not, and the holidays' items to be given again (a new year, as far as they know).
 static const u8 sName_Year[]       = _("THE YEAR >");
 static const u8 sName_GiftsAgain[] = _("HOLIDAY GIFTS AGAIN");
+//  T-18: the follower, and its lead's friendship set, to see the greying (T-424's curve).
+static const u8 sName_Follower[]    = _("FOLLOWER >");
+static const u8 sName_FollowerOn[]  = _("THE FOLLOWER (OPTIONS)");
+static const u8 sName_Friend0[]     = _("LEAD FRIENDSHIP 0");
+static const u8 sName_Friend70[]    = _("LEAD FRIENDSHIP 70");
+static const u8 sName_Friend150[]   = _("LEAD FRIENDSHIP 150");
+static const u8 sName_Friend255[]   = _("LEAD FRIENDSHIP 255");
 
 //  THE STORY'S ORDER: the opening, the shoes and the INDEX, OPUS on THE REPO's shelf, then CAIRN's MARK and NOTEBOOK,
 //  the school, the ship, the DRIVERS, BRAZEN's tea and REVEAL, HALFTONE, the sleeper, the GUIDE, and last what only
@@ -180,6 +190,7 @@ static const struct DbgRow sRows_Events[] = {
     { sName_GlobalIndex, R_TOGGLE, EV_GLOBAL_INDEX },
     { sName_Roots,       R_PAGE,   PG_ROOTS },
     { sName_Year,        R_PAGE,   PG_YEAR },         // T-416
+    { sName_Follower,    R_PAGE,   PG_FOLLOWER },     // T-18
     { sName_Stream,      R_GIVE,   EV_STREAM },
     { sName_Companion,   R_TOGGLE, EV_COMPANION },
 };
@@ -230,6 +241,14 @@ static const struct DbgRow sRows_Year[] = {
     { sName_GiftsAgain, R_GIVE, EV_GIFTS_AGAIN },
 };
 
+static const struct DbgRow sRows_Follower[] = {
+    { sName_FollowerOn, R_TOGGLE, EV_FOLLOWER },
+    { sName_Friend0,    R_GIVE,   EV_FRIEND_0 },
+    { sName_Friend70,   R_GIVE,   EV_FRIEND_70 },
+    { sName_Friend150,  R_GIVE,   EV_FRIEND_150 },
+    { sName_Friend255,  R_GIVE,   EV_FRIEND_255 },
+};
+
 static const struct { const struct DbgRow *rows; u8 count; } sPages[PG_COUNT] = {
     [PG_EVENTS]   = { sRows_Events,   ARRAY_COUNT(sRows_Events) },
     [PG_MARKS]    = { sRows_Marks,    ARRAY_COUNT(sRows_Marks) },
@@ -238,6 +257,7 @@ static const struct { const struct DbgRow *rows; u8 count; } sPages[PG_COUNT] = 
     [PG_ROOTS]    = { sRows_Roots,    ARRAY_COUNT(sRows_Roots) },
     [PG_SONGS]    = { sRows_Songs,    ARRAY_COUNT(sRows_Songs) },
     [PG_YEAR]     = { sRows_Year,     ARRAY_COUNT(sRows_Year) },
+    [PG_FOLLOWER] = { sRows_Follower, ARRAY_COUNT(sRows_Follower) },
 };
 
 static const u8 sText_Title_Events[] = _("GAME EVENTS, in story order.\nA gives or takes. + held, · not.");
@@ -247,9 +267,10 @@ static const u8 sText_Title_Drivers[] = _("DRIVERS: held in the TOOLKIT,\nwhich 
 static const u8 sText_Title_Roots[] = _("UNDERSTANDINGS, each with what\nit needs. B goes back.");
 static const u8 sText_Title_Songs[] = _("SONGBOOK: each song learned.\nB goes back.");
 static const u8 sText_Title_Year[] = _("THE YEAR: each line arrived.\nB goes back.");
+static const u8 sText_Title_Follower[] = _("FOLLOWER: on or off, and the\nlead's friendship. B goes back.");
 static const u8 *const sTitles[PG_COUNT] = {
     sText_Title_Events, sText_Title_Marks, sText_Title_Notebook, sText_Title_Drivers, sText_Title_Roots,
-    sText_Title_Songs, sText_Title_Year,
+    sText_Title_Songs, sText_Title_Year, sText_Title_Follower,
 };
 static const u8 sText_Given[] = _("{STR_VAR_1}: given.");
 static const u8 sText_Taken[] = _("{STR_VAR_1}: taken away.");
@@ -352,6 +373,15 @@ static void SetRoot(u8 i, bool8 on)
     SetFlag(sRoots[i][0], on);
 }
 
+//  T-18: the daemon that follows (the first not an egg, HALTED or AWAY), or nobody.
+static void SetLeadFriendship(u8 value)
+{
+    s8 slot = Follower_LeadSlot();
+
+    if (slot >= 0)
+        SetMonData(&gPlayerParty[slot], MON_DATA_FRIENDSHIP, &value);
+}
+
 static bool8 IsHeld(u8 ev)
 {
     u32 i;
@@ -384,6 +414,7 @@ static bool8 IsHeld(u8 ev)
 #endif
     case EV_GLOBAL_INDEX: return IsNationalPokedexEnabled();
     case EV_COMPANION:    return FlagGet(FLAG_COMPANION_LINKED);
+    case EV_FOLLOWER:     return !FlagGet(FLAG_FOLLOWER_OFF);
     case EV_NOTEBOOK:     return FlagGet(FLAG_GOT_NOTEBOOK);
     case EV_MARKS_ALL:
         for (i = 0; i < 8; i++)
@@ -511,6 +542,11 @@ static void Apply(u8 ev, bool8 on)
             DaemonsHolidays_DebugSetLine(i, on);
         return;
     case EV_GIFTS_AGAIN:  DaemonsHolidays_DebugGiftsAgain(); return;
+    case EV_FOLLOWER:     SetFlag(FLAG_FOLLOWER_OFF, !on); return;
+    case EV_FRIEND_0:     SetLeadFriendship(0); return;
+    case EV_FRIEND_70:    SetLeadFriendship(70); return;
+    case EV_FRIEND_150:   SetLeadFriendship(150); return;
+    case EV_FRIEND_255:   SetLeadFriendship(255); return;
     }
     if (ev >= EV_YEAR1 && ev <= EV_YEAR12)
     {

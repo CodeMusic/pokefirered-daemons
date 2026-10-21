@@ -2,6 +2,7 @@
 #include "gflib.h"
 #include "event_data.h"
 #include "event_object_movement.h"
+#include "daemons_follower.h"
 #include "field_camera.h"
 #include "field_control_avatar.h"
 #include "field_effect.h"
@@ -2365,6 +2366,7 @@ void DaemonsRetintObjectEventPalettes(void)
             UpdateSpritePaletteWithWeather(info->paletteSlot);
         }
     }
+    Follower_RetintPalette();   // T-18: the follower stands in the same light
 }
 
 void PatchObjectPaletteRange(const u16 *paletteTags, u8 minSlot, u8 maxSlot)

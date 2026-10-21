@@ -10,6 +10,7 @@
 #include "strings.h"
 #include "field_fadetransition.h"
 #include "gba/m4a_internal.h"
+#include "event_data.h"
 
 // can't include the one in menu_helpers.h since Task_OptionMenu needs bool32 for matching
 bool32 IsActiveOverworldLinkBusy(void);
@@ -23,6 +24,7 @@ enum
     MENUITEM_SOUND,
     MENUITEM_BUTTONMODE,
     MENUITEM_FRAMETYPE,
+    MENUITEM_FOLLOWER,   // T-18: the daemon walking behind you, ON or OFF
     MENUITEM_CANCEL,
     MENUITEM_COUNT
 };
@@ -81,9 +83,9 @@ static const struct WindowTemplate sOptionMenuWinTemplates[] =
     {
         .bg = 0,
         .tilemapLeft = 2,
-        .tilemapTop = 7,
+        .tilemapTop = 6,     // T-18: a row up and a row taller, for an eighth row (FOLLOWER)
         .width = 26,
-        .height = 12,
+        .height = 13,
         .paletteNum = 1,
         .baseBlock = 0x36
     },
@@ -94,7 +96,7 @@ static const struct WindowTemplate sOptionMenuWinTemplates[] =
         .width = 30,
         .height = 2,
         .paletteNum = 15,
-        .baseBlock = 0x16e
+        .baseBlock = 0x1BC   // T-18: past the taller panel (0x36 + 26 x 13 = 0x188) and the frames (0x1AA-0x1BB)
     },
     DUMMY_WIN_TEMPLATE
 };
@@ -131,7 +133,13 @@ static const struct BgTemplate sOptionMenuBgTemplates[] =
 };
 
 static const u16 sOptionMenuPalette[] = INCBIN_U16("graphics/misc/option_menu.gbapal");
-static const u16 sOptionMenuItemCounts[MENUITEM_COUNT] = {3, 2, 2, 2, 2, 10, 0};   // BUTTON MODE: LR, L=A
+static const u16 sOptionMenuItemCounts[MENUITEM_COUNT] = {3, 2, 2, 2, 2, 10, 2, 0};   // BUTTON MODE: LR, L=A; FOLLOWER: ON, OFF
+
+//  T-18 (DRAFT WORDING): the follower's row. ON is the default (the flag is FLAG_FOLLOWER_OFF, clear in every save).
+static const u8 sText_Follower[] = _("FOLLOWER");
+
+//  T-18: eight rows where vanilla had seven, so each is 12px apart, not 13, in a window a row taller.
+#define OPTION_ROW_STEP 12
 
 static const u8 *const sOptionMenuItemsNames[MENUITEM_COUNT] =
 {
@@ -141,6 +149,7 @@ static const u8 *const sOptionMenuItemsNames[MENUITEM_COUNT] =
     [MENUITEM_SOUND]       = gText_Sound,
     [MENUITEM_BUTTONMODE]  = gText_ButtonMode,
     [MENUITEM_FRAMETYPE]   = gText_Frame,
+    [MENUITEM_FOLLOWER]    = sText_Follower,
     [MENUITEM_CANCEL]      = gText_OptionMenuCancel,
 };
 
@@ -173,6 +182,12 @@ static const u8 *const sSoundOptions[] =
 //  whose whole content was "L and R open a help tab" would now mean "L and R do nothing". The stored
 //  values are unchanged (the save format is not ours to renumber); only the two that mean something
 //  are offered, and DbgOptionToButtonMode maps between them.
+static const u8 *const sFollowerOptions[] =
+{
+    gText_BattleSceneOn,
+    gText_BattleSceneOff
+};
+
 static const u8 *const sButtonTypeOptions[] =
 {
 	gText_ButtonTypeLR,
@@ -216,6 +231,7 @@ void CB2_OptionsMenuFromStartMenu(void)
     sOptionMenuPtr->option[MENUITEM_BUTTONMODE] =
         (gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A) ? 1 : 0;   // HELP reads as LR
     sOptionMenuPtr->option[MENUITEM_FRAMETYPE] = gSaveBlock2Ptr->optionsWindowFrameType;
+    sOptionMenuPtr->option[MENUITEM_FOLLOWER] = FlagGet(FLAG_FOLLOWER_OFF) ? 1 : 0;
     
     for (i = 0; i < MENUITEM_COUNT - 1; i++)
     {
@@ -476,8 +492,8 @@ static void BufferOptionMenuString(u8 selection)
     
     memcpy(dst, sOptionMenuTextColor, 3);
     x = 0x82;
-    y = ((GetFontAttribute(FONT_NORMAL, FONTATTR_MAX_LETTER_HEIGHT) - 1) * selection) + 2;
-    FillWindowPixelRect(1, 1, x, y, 0x46, GetFontAttribute(FONT_NORMAL, FONTATTR_MAX_LETTER_HEIGHT));
+    y = (OPTION_ROW_STEP * selection) + 2;
+    FillWindowPixelRect(1, 1, x, y, 0x46, OPTION_ROW_STEP);   // T-18: a row's height, not the font's, or it clips the next
 
     switch (selection)
     {
@@ -495,6 +511,9 @@ static void BufferOptionMenuString(u8 selection)
         break;
     case MENUITEM_BUTTONMODE:
         AddTextPrinterParameterized3(1, FONT_NORMAL, x, y, dst, -1, sButtonTypeOptions[sOptionMenuPtr->option[selection]]);
+        break;
+    case MENUITEM_FOLLOWER:
+        AddTextPrinterParameterized3(1, FONT_NORMAL, x, y, dst, -1, sFollowerOptions[sOptionMenuPtr->option[selection]]);
         break;
     case MENUITEM_FRAMETYPE:
         StringCopy(str, gText_FrameType);
@@ -521,6 +540,10 @@ static void CloseAndSaveOptionMenu(u8 taskId)
     gSaveBlock2Ptr->optionsButtonMode = sOptionMenuPtr->option[MENUITEM_BUTTONMODE]
                                      ? OPTIONS_BUTTON_MODE_L_EQUALS_A : OPTIONS_BUTTON_MODE_LR;
     gSaveBlock2Ptr->optionsWindowFrameType = sOptionMenuPtr->option[MENUITEM_FRAMETYPE];
+    if (sOptionMenuPtr->option[MENUITEM_FOLLOWER])
+        FlagSet(FLAG_FOLLOWER_OFF);
+    else
+        FlagClear(FLAG_FOLLOWER_OFF);
     SetPokemonCryStereo(gSaveBlock2Ptr->optionsSound);
     FREE_AND_SET_NULL(sOptionMenuPtr);
     DestroyTask(taskId);
@@ -547,11 +570,10 @@ static void DrawOptionMenuBg(void)
     FillBgTilemapBufferRect(1, 0x1B9, 1, 5, 1, 1, 3);
     FillBgTilemapBufferRect(1, 0x1BA, 2, 5, 0x1B, 1, 3);
     FillBgTilemapBufferRect(1, 0x1BB, 0x1C, 5, 1, 1, 3);
-    FillBgTilemapBufferRect(1, 0x1AA, 1, 6, 1, 1, h);
-    FillBgTilemapBufferRect(1, 0x1AB, 2, 6, 0x1A, 1, h);
-    FillBgTilemapBufferRect(1, 0x1AC, 0x1C, 6, 1, 1, h);
-    FillBgTilemapBufferRect(1, 0x1AD, 1, 7, 1, 0x10, h);
-    FillBgTilemapBufferRect(1, 0x1AF, 0x1C, 7, 1, 0x10, h);
+    // T-18: the panel is a row taller and starts a row higher, so it has no top edge of its own: the header's
+    // bottom edge (row 5) closes it.
+    FillBgTilemapBufferRect(1, 0x1AD, 1, 6, 1, 0x11, h);
+    FillBgTilemapBufferRect(1, 0x1AF, 0x1C, 6, 1, 0x11, h);
     FillBgTilemapBufferRect(1, 0x1B0, 1, 0x13, 1, 1, h);
     FillBgTilemapBufferRect(1, 0x1B1, 2, 0x13, 0x1A, 1, h);
     FillBgTilemapBufferRect(1, 0x1B2, 0x1C, 0x13, 1, 1, h);
@@ -565,7 +587,7 @@ static void LoadOptionMenuItemNames(void)
     FillWindowPixelBuffer(1, PIXEL_FILL(1));
     for (i = 0; i < MENUITEM_COUNT; i++)
     {
-        AddTextPrinterParameterized(WIN_OPTIONS, FONT_NORMAL, sOptionMenuItemsNames[i], 8, (u8)((i * (GetFontAttribute(FONT_NORMAL, FONTATTR_MAX_LETTER_HEIGHT))) + 2) - i, TEXT_SKIP_DRAW, NULL);    
+        AddTextPrinterParameterized(WIN_OPTIONS, FONT_NORMAL, sOptionMenuItemsNames[i], 8, i * OPTION_ROW_STEP + 2, TEXT_SKIP_DRAW, NULL);    
     }
 }
 
@@ -574,7 +596,7 @@ static void UpdateSettingSelectionDisplay(u16 selection)
     u16 maxLetterHeight, y;
     
     maxLetterHeight = GetFontAttribute(FONT_NORMAL, FONTATTR_MAX_LETTER_HEIGHT);
-    y = selection * (maxLetterHeight - 1) + 0x3A;
+    y = selection * OPTION_ROW_STEP + 0x32;   // T-18: the window starts a row higher
     SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(y, y + maxLetterHeight));
     SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(0x10, 0xE0));
 }
