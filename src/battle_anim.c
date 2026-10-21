@@ -6,6 +6,7 @@
 #include "battle_interface.h"
 #include "battle_bg.h"
 #include "daemons_signature.h"
+#include "constants/moves.h"
 #include "data/type_colours.h"   // T-430: the splash is the attacker's type colour
 #include "fieldmap.h"         // T-430: DaemonsHalftoneSplash
 #include "decompress.h"
@@ -202,33 +203,52 @@ void ClearBattleAnimationVars(void)
 static bool8 sHalftoneArmed;
 static bool8 sHalftoneLeft;   // a sprite of it was seen near you: it crossed, rather than appeared on them
 
+// The routine's type colour (the move menu's own table), brightened until its strongest channel is full (the user,
+// 2026-10-21: the ROUTINE's type, not the attacker's).
+static u16 HalftoneRoutineColour(void)
+{
+    u8 type = sAnimMoveIndex < MOVES_COUNT ? gBattleMoves[sAnimMoveIndex].type : TYPE_MYSTERY;
+    u16 c = type < ARRAY_COUNT(sTypeTextColor) ? sTypeTextColor[type] : RGB(9, 9, 9);
+    s32 r = GET_R(c), g = GET_G(c), b = GET_B(c), top = max(r, max(g, b));
+
+    if (top == 0)
+        top = 1;
+    return RGB2(r * 31 / top, g * 31 / top, b * 31 / top);
+}
+
 void DaemonsHalftoneLanded(void)
 {
     if (!sHalftoneArmed || sAnimMoveIndex == 0)
         return;
     sHalftoneArmed = FALSE;
     if (GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER && GetBattlerSide(gBattleAnimTarget) != B_SIDE_PLAYER)
-    {
-        // The type's colour (the move menu's own table), brightened until its strongest channel is full.
-        u8 type = gBattleMons[gBattleAnimAttacker].type1;
-        u16 c = type < ARRAY_COUNT(sTypeTextColor) ? sTypeTextColor[type] : RGB(9, 9, 9);
-        s32 r = GET_R(c), g = GET_G(c), b = GET_B(c), top = max(r, max(g, b));
-
-        if (top == 0)
-            top = 1;
-        DaemonsHalftoneSplash(gBattleAnimTarget, RGB2(r * 31 / top, g * 31 / top, b * 31 / top));
-    }
+        DaemonsHalftoneSplash(gBattleAnimTarget, HalftoneRoutineColour());
 }
 
-u16 DaemonsHalftoneRoutineSlots(u16 *keep)
+// T-430 (the user, 2026-10-21): while your routine plays, the foe it washes shows a faint share of that wash's colour.
+// AnimTask_BlendBattleAnimPal tells us the wash when it touches the target; until it does, the routine's type colour.
+void DaemonsHalftoneNoteWash(u16 selector, u16 colour)
+{
+    if (gAnimScriptActive && sAnimMoveIndex != 0 && (selector & F_PAL_TARGET)
+     && GetBattlerSide(gBattleAnimAttacker) == B_SIDE_PLAYER)
+        DaemonsHalftoneWash(colour);
+}
+
+u16 DaemonsHalftoneRoutineSlots(u16 *keep, u8 *target)
 {
     s32 i, slot, ax, ay, dx, dy, d2, t, far;
     s32 sum[16];
     u8 count[16];
     u16 mask = 0;
 
+    *target = 0xFF;
     if (!gAnimScriptActive || sAnimMoveIndex == 0 || GetBattlerSide(gBattleAnimAttacker) != B_SIDE_PLAYER)
         return 0;
+    if (GetBattlerSide(gBattleAnimTarget) != B_SIDE_PLAYER)
+    {
+        *target = gBattleAnimTarget;
+        DaemonsHalftoneWashDefault(HalftoneRoutineColour());
+    }
     for (i = 0; i < ANIM_SPRITE_INDEX_COUNT; i++)
     {
         if (sAnimSpriteIndexArray[i] == 0xFFFF)
@@ -310,6 +330,8 @@ void LaunchBattleAnimation(const u8 *const animsTable[], u16 tableId, bool8 isMo
         sAnimMoveIndex = tableId;
     sHalftoneArmed = isMoveAnim;   // T-430: one splash a routine
     sHalftoneLeft = FALSE;
+    if (isMoveAnim)
+        DaemonsHalftoneWash(0);    // no wash seen yet
 
     for (i = 0; i < ANIM_ARGS_COUNT; i++)
         gBattleAnimArgs[i] = 0;

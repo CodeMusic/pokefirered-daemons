@@ -21,6 +21,7 @@
 #include "daemons_follower.h"
 #include "event_object_movement.h"
 #include "constants/flags.h"
+#include "field_message_box.h"   // T-430: the first sight waits for no box
 
 extern const struct Tileset gTileset_General;   // T-275: the CHECKPOINT's tileset
 extern const struct Tileset gTileset_Nexus;     // T-395: THE NEXUS, made of paint
@@ -1003,8 +1004,8 @@ static void DaemonsDrawingTone(u16 *colour)
 #define HT_OBJ(slot) (1u << (16 + (slot)))
 #define HT_BG(slot)  (1u << (slot))
 #define HT_FLICKER_WAIT   24     // settled field frames before the first sight tries
-#define HT_FLOOR_WAIT     40     // a tower floor waits this long, then comes back over HT_FLOOR_FADE
-#define HT_FLOOR_FADE     96
+#define HT_FLOOR_WAIT     150    // a tower floor stays grey this long as you arrive, then comes back over HT_FLOOR_FADE
+#define HT_FLOOR_FADE     120
 #define HT_SPLASH_FRAMES  40
 
 // The first sight of HALFTONE: how much colour (of 256) the screen reaches, a frame at a time, before it fails.
@@ -1022,7 +1023,31 @@ static struct {
     u16 splashColour;
     u16 routineMask;  // OBJ slots the player side's routine is drawn in (battle_anim.c), this frame
     u16 routineKeep[16];
+    u8 washTarget;    // the foe your routine is playing on, or 0xFF
+    u8 washDirty;     // the slot the wash was last drawn on, greyed afresh from the colour copy once it ends
+    bool8 washSeen;   // the routine has washed it (AnimTask_BlendBattleAnimPal), so wash is that colour
+    u16 wash;         // the colour a share of which the foe shows while your routine plays
+    u16 washTrue[16]; // the foe's palette as the animation last wrote it ...
+    u16 washOut[16];  // ... and as the grey last wrote it over that, so a frame the animation skips is told apart
 } sHalftone;
+
+#define HT_WASH_SHARE 80   // of 256, at the wash's full strength: faint
+
+void DaemonsHalftoneWash(u16 colour)
+{
+    s32 e;
+
+    sHalftone.washSeen = colour != 0;
+    sHalftone.wash = colour;
+    for (e = 0; e < 16; e++)
+        sHalftone.washOut[e] = 0x8000;   // no colour is this: the first frame always reads the animation's
+}
+
+void DaemonsHalftoneWashDefault(u16 colour)
+{
+    if (!sHalftone.washSeen)
+        sHalftone.wash = colour;
+}
 
 static u16 DaemonsHalftoneMix(u16 c, s32 share)
 {
@@ -1074,6 +1099,41 @@ static u16 DaemonsHalftoneSplashTint(u16 grey, s32 amount)
                 DaemonsSplashChannel(g, GET_B(c), amount));
 }
 
+static s32 DaemonsColourDistance(u16 a, u16 b)
+{
+    s32 r = (s32)GET_R(a) - GET_R(b), g = (s32)GET_G(a) - GET_G(b), bl = (s32)GET_B(a) - GET_B(b);
+
+    return (r < 0 ? -r : r) + (g < 0 ? -g : g) + (bl < 0 ? -bl : bl);
+}
+
+// The foe your routine is playing on: its grey, and over it a faint share of the wash -- as much as the animation has
+// moved the foe toward that wash (HT_WASH_SHARE at all of it). The palette the animation wrote is kept beside what we
+// wrote, so a frame the animation leaves alone is read from the animation's, never from our own (no compounding).
+static void DaemonsHalftoneWashFoe(u16 *colour, const u16 *source)
+{
+    s32 e, moved = 0, room = 0, share;
+    u16 saved = sHalftone.splashColour;
+
+    for (e = 0; e < 16; e++)
+    {
+        if (colour[e] != sHalftone.washOut[e])
+            sHalftone.washTrue[e] = colour[e];
+        moved += DaemonsColourDistance(sHalftone.washTrue[e], source[e]);
+        room += DaemonsColourDistance(sHalftone.wash, source[e]);
+    }
+    share = room != 0 ? (moved * HT_WASH_SHARE) / room : 0;
+    if (share > HT_WASH_SHARE)
+        share = HT_WASH_SHARE;
+    sHalftone.splashColour = sHalftone.wash;
+    for (e = 0; e < 16; e++)
+    {
+        colour[e] = share != 0 ? DaemonsHalftoneSplashTint(DaemonsHalftoneMix(sHalftone.washTrue[e], 0), share)
+                               : DaemonsHalftoneMix(sHalftone.washTrue[e], 0);
+        sHalftone.washOut[e] = colour[e];
+    }
+    sHalftone.splashColour = saved;
+}
+
 // Called by battle_anim.c when the player side's routine reaches a foe: its grey takes the attacker's type colour,
 // shaded by its own light, and lets it go over HT_SPLASH_FRAMES.
 void DaemonsHalftoneSplash(u8 battler, u16 colour)
@@ -1108,8 +1168,9 @@ void DaemonsHalftoneTick(void)
     if (gMain.inBattle)
     {
         sHalftone.wait = sHalftone.flicker = sHalftone.floorFade = 0;
+        sHalftone.washTarget = 0xFF;
         if (gMain.callback2 == BattleMainCB2)
-            sHalftone.routineMask = DaemonsHalftoneRoutineSlots(sHalftone.routineKeep);
+            sHalftone.routineMask = DaemonsHalftoneRoutineSlots(sHalftone.routineKeep, &sHalftone.washTarget);
         return;
     }
     sHalftone.splashSlot = 0xFF;
@@ -1123,6 +1184,12 @@ void DaemonsHalftoneTick(void)
     // The first time you see it, the screen tries to come into colour and fails. Once.
     if (!FlagGet(FLAG_HALFTONE_TRIED_COLOUR) && !DaemonsCaveUnperceived())
     {
+        // Only while you are walking in it freely: never over a box or a scene (the user, 2026-10-21).
+        if (sHalftone.flicker == 0 && (ArePlayerFieldControlsLocked() || ScriptContext_IsEnabled() || !IsFieldMessageBoxHidden()))
+        {
+            sHalftone.wait = 0;
+            return;
+        }
         if (sHalftone.wait < HT_FLICKER_WAIT)
             return;
         if (sHalftone.flicker >= ARRAY_COUNT(sHalftoneFlicker))
@@ -1153,7 +1220,7 @@ void DaemonsHalftoneTick(void)
 void DaemonsGreyHalftoneFrame(void)
 {
     u16 *colour, *source;
-    s32 p, e, keep, shine, splash;
+    s32 p, e, keep, shine, splash, washed;
     u32 skip, routine, lightOnly;
     bool8 drawing;
 
@@ -1203,8 +1270,11 @@ void DaemonsGreyHalftoneFrame(void)
             skip |= HT_OBJ(follower);
     }
     splash = -1;
+    washed = -1;
     if (gMain.inBattle && sHalftone.splashSlot < 16 && !gPaletteFade.active)
         splash = 16 + sHalftone.splashSlot;
+    else if (gMain.inBattle && gMain.callback2 == BattleMainCB2 && sHalftone.washTarget < 16 && !gPaletteFade.active)
+        washed = 16 + sHalftone.washTarget;
     drawing = DaemonsCaveUnperceived();
     colour = gPlttBufferFaded;
     source = gPlttBufferUnfaded;
@@ -1230,11 +1300,24 @@ void DaemonsGreyHalftoneFrame(void)
         {
             // The foe's grey, multiplied by the colour that reached it, fading back to its grey; on the frame after
             // it ends, its grey from the colour copy again, so the tint's light is not kept.
-            keep = (sHalftone.splash * 176) / HT_SPLASH_FRAMES;
+            keep = (sHalftone.splash * 120) / HT_SPLASH_FRAMES;   // a little colour: under half, at its height
             for (e = 0; e < 16; e++)
                 colour[e] = DaemonsHalftoneSplashTint(DaemonsHalftoneMix(source[e], 0), keep);
             if (sHalftone.splash == 0)
                 sHalftone.splashSlot = 0xFF;
+            continue;
+        }
+        if (p == washed)
+        {
+            DaemonsHalftoneWashFoe(colour, source);
+            sHalftone.washDirty = p;
+            continue;
+        }
+        if (sHalftone.washDirty >= 16 && p == sHalftone.washDirty && p != splash && !gPaletteFade.active)
+        {
+            for (e = 0; e < 16; e++)
+                colour[e] = DaemonsHalftoneMix(source[e], 0);
+            sHalftone.washDirty = 0;
             continue;
         }
         if (sHalftone.share != 0 && !drawing)

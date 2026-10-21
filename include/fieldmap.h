@@ -67,6 +67,8 @@ void DaemonsGreyHalftoneFrame(void);
 void DaemonsHalftoneTick(void);                       // T-430: once a frame, main.c
 void DaemonsHalftoneSplash(u8 battler, u16 colour);   // T-430: a routine of yours reached that foe
 bool8 DaemonsHalftoneGreysByFrame(void);
+void DaemonsHalftoneWash(u16 colour);          // T-430: your routine's wash on the foe (0: none yet)
+void DaemonsHalftoneWashDefault(u16 colour);   // T-430: ...the routine's type colour, until one is seen
 u8 DaemonsFieldTint(void);
 u16 DaemonsPaletteSignature(void);
 u16 DaemonsPrimarySignature(void);

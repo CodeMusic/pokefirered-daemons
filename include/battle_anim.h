@@ -189,7 +189,8 @@ void MoveBattlerSpriteToBG(u8 battlerId, u8);
 void ResetBattleAnimBg(u8);
 void ClearBattleAnimationVars(void);
 void DoMoveAnim(u16 move);
-u16 DaemonsHalftoneRoutineSlots(u16 *keep);   // T-430
+u16 DaemonsHalftoneRoutineSlots(u16 *keep, u8 *target);   // T-430
+void DaemonsHalftoneNoteWash(u16 selector, u16 colour);   // T-430
 void DaemonsHalftoneLanded(void);                     // T-430: the player's routine reached its target (a splash)
 void LaunchBattleAnimation(const u8 *const animsTable[], u16 tableId, bool8 isMoveAnim);
 void DestroyAnimSprite(struct Sprite *sprite);

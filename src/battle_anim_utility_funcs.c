@@ -53,6 +53,8 @@ const u8 gBattleIntroRegOffsBgCnt[] = { REG_OFFSET_BG0CNT, REG_OFFSET_BG1CNT, RE
 void AnimTask_BlendBattleAnimPal(u8 taskId)
 {
     u32 selectedPalettes = UnpackSelectedBattlePalettes(gBattleAnimArgs[0]);
+
+    DaemonsHalftoneNoteWash(gBattleAnimArgs[0], gBattleAnimArgs[4]);   // T-430: HALFTONE shows a share of it on the foe
     
     selectedPalettes |= GetBattleMonSpritePalettesMask(
         (gBattleAnimArgs[0] >>  7) & 1,
