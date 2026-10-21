@@ -1832,6 +1832,7 @@ static void ContinueLoadedSave(void)
     //  T-420: a save made before the STREAM's flags moved out from under OPUS's, carried across once.
     TeachyTvRepairOldSave();
     DaemonsDreamLog_Loaded();   // T-412: a continue is a load -- on a later day, a waiting dream comes on the first step
+    Follower_OnContinue();      // T-18 P3: back a tile behind the player, not out of them
 }
 
 void CB2_ContinueSavedGame(void)

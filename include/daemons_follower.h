@@ -14,4 +14,9 @@ s8 Follower_LeadSlot(void);          // the party slot that follows, or -1: not 
 const u8 *Follower_GetInteractionScript(struct MapPosition *position);
 void Follower_Talk(void);
 
+// T-18 P3: hidefollower / showfollower (specials, for a scene that reads wrong with it there), and Continue.
+void Follower_SceneHide(void);
+void Follower_SceneShow(void);
+void Follower_OnContinue(void);
+
 #endif // GUARD_DAEMONS_FOLLOWER_H

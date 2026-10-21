@@ -1856,3 +1856,14 @@
 	setvar VAR_0x8006, \item
 	special CreateEnemyEventMon
 	.endm
+
+	@ T-18 P3: the follower is not drawn for the rest of this scene (it still follows) -- for a scene that would read
+	@ wrong with the daemon standing in it. It comes back at showfollower or when the script lets go.
+	.macro hidefollower
+	special Follower_SceneHide
+	.endm
+
+	@ T-18 P3: the follower is drawn again (after hidefollower).
+	.macro showfollower
+	special Follower_SceneShow
+	.endm

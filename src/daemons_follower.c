@@ -3,6 +3,11 @@
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "field_effect.h"
+#include "field_effect_helpers.h"
+#include "field_camera.h"
+#include "metatile_behavior.h"
+#include "constants/field_effects.h"
+#include "constants/event_objects.h"
 #include "field_weather.h"
 #include "overworld.h"
 #include "pokemon.h"
@@ -86,7 +91,14 @@ static struct
     s16 restX, restY;      // the player's tile when it was stored
     u32 personality;
     bool8 half;            // in the air, a pixel waits for its pair (see Step)
-    u8 talks;              // T-18 P2: times it has been spoken to, so a mood's two lines take turns
+    u8 talks;              // T-18 P3: presses since it last moved -- even, its friendship; odd, a mood
+    u8 moodTurn;           // T-18 P2: a mood's two lines take turns
+    bool8 shiny;           // T-18 P3: the lead is shiny -- its shiny colours
+    bool8 sceneHidden;     // T-18 P3: hidefollower, until showfollower or the script lets go
+    bool8 continued;       // T-18 P3: the game was just continued -- stand behind the player, not inside them
+    u8 reflSpriteId;       // T-18 P3: its reflection, while it stands above water or ice
+    s16 tileX, tileY;      // T-18 P3: the map tile it stands in (nearest), for grass, water and the people
+    s16 grassX, grassY;    // ... and the tile its last tall grass was raised on
 } sFollower;
 
 static void SpriteCB_Follower(struct Sprite *sprite)
@@ -206,6 +218,7 @@ static void Push(u8 dir, s8 y2)
         sFollower.facing = old & STEP_DIR;
         sFollower.steps += then;
         sFollower.idle = 0;
+        sFollower.talks = 0;
     }
     sFollower.y2 = sFollower.ringY2[sFollower.head];
     sFollower.sumX += sDirX[dir & STEP_DIR] * now - sDirX[old & STEP_DIR] * then;
@@ -263,8 +276,16 @@ static void Track(struct Sprite *player, struct ObjectEvent *playerObj)
 static void BuildPalette(u16 *buf)
 {
     u16 species = sFollower.species < ARRAY_COUNT(sFollowerPalettes) ? sFollower.species : SPECIES_NONE;
+    const u16 *pal = sFollowerPalettes[species];
+    u32 i;
 
-    CpuCopy16(sFollowerPalettes[species], buf, PLTT_SIZE_4BPP);
+    // T-18 P3: a shiny lead follows in its shiny colours (the user, 2026-10-20) -- the same remap, from shiny.pal.
+    // The shiny set holds only the species whose shiny colours differ; every other shiny looks as its normal self.
+    if (sFollower.shiny)
+        for (i = 0; i < ARRAY_COUNT(sFollowerShinySpecies); i++)
+            if (sFollowerShinySpecies[i] == species)
+                pal = sFollowerShinyPalettes[i];
+    CpuCopy16(pal, buf, PLTT_SIZE_4BPP);
     Saturation_ApplyToBuffer(buf, sFollower.friendship);   // T-424: greyed by friendship
 }
 
@@ -291,8 +312,27 @@ static bool8 IsOurs(void)
     return sFollower.spriteId < MAX_SPRITES && sprite->inUse && sprite->callback == SpriteCB_Follower;
 }
 
+static void SpriteCB_FollowerReflection(struct Sprite *sprite)
+{
+}
+
+static bool8 ReflectionIsOurs(void)
+{
+    struct Sprite *sprite = &gSprites[sFollower.reflSpriteId];
+
+    return sFollower.reflSpriteId < MAX_SPRITES && sprite->inUse && sprite->callback == SpriteCB_FollowerReflection;
+}
+
+static void DropReflection(void)
+{
+    if (ReflectionIsOurs())
+        DestroySprite(&gSprites[sFollower.reflSpriteId]);   // it shares the follower's tiles and palette: nothing to free
+    sFollower.reflSpriteId = MAX_SPRITES;
+}
+
 static void Despawn(void)
 {
+    DropReflection();
     if (IsOurs())
         DestroySprite(&gSprites[sFollower.spriteId]);
     sFollower.spriteId = MAX_SPRITES;
@@ -300,13 +340,37 @@ static void Despawn(void)
     FreeSpritePaletteByTag(FOLLOWER_TAG);
 }
 
-static void ReadLead(s8 slot, u16 *species, u32 *personality, u8 *friendship)
+static void ReadLead(s8 slot, u16 *species, u32 *personality, u8 *friendship, bool8 *shiny)
 {
     struct Pokemon *mon = &gPlayerParty[slot];
 
     *personality = GetMonData(mon, MON_DATA_PERSONALITY);
     *species = GetIconSpecies(GetMonData(mon, MON_DATA_SPECIES), *personality);
     *friendship = GetMonData(mon, MON_DATA_FRIENDSHIP);
+    *shiny = IsMonShiny(mon);
+}
+
+//  T-18 P3: after Continue it stands a tile behind the player, as if they had just walked out of it -- when that tile
+//  is one the player could walk onto (no wall, no water, no ledge, nobody standing there); else it walks out of them.
+static bool8 StandBehind(struct ObjectEvent *playerObj)
+{
+    u8 facing = playerObj->facingDirection;
+    u8 behavior;
+    s16 x, y;
+
+    if (facing < DIR_SOUTH || facing > DIR_EAST)
+        return FALSE;
+    x = playerObj->currentCoords.x - sDirX[facing];
+    y = playerObj->currentCoords.y - sDirY[facing];
+    if (GetCollisionAtCoords(playerObj, x, y, GetOppositeDirection(facing)) != COLLISION_NONE)
+        return FALSE;
+    behavior = MapGridGetMetatileBehaviorAt(x, y);
+    if (MetatileBehavior_IsSurfable(behavior) || MetatileBehavior_IsForcedMovementTile(behavior)
+     || MetatileBehavior_IsJumpEast(behavior) || MetatileBehavior_IsJumpWest(behavior)
+     || MetatileBehavior_IsJumpNorth(behavior) || MetatileBehavior_IsJumpSouth(behavior))
+        return FALSE;
+    StandAt(-sDirX[facing], -sDirY[facing]);
+    return TRUE;
 }
 
 static void Spawn(s8 slot, struct Sprite *player, struct ObjectEvent *playerObj)
@@ -314,7 +378,7 @@ static void Spawn(s8 slot, struct Sprite *player, struct ObjectEvent *playerObj)
     struct SpriteSheet sheet;
     u8 idx;
 
-    ReadLead(slot, &sFollower.species, &sFollower.personality, &sFollower.friendship);
+    ReadLead(slot, &sFollower.species, &sFollower.personality, &sFollower.friendship, &sFollower.shiny);
     FreeSpriteTilesByTag(FOLLOWER_TAG);
     sheet.data = GetMonIconTiles(sFollower.species, FALSE);
     sheet.size = 0x400;   // both frames
@@ -345,12 +409,14 @@ static void Spawn(s8 slot, struct Sprite *player, struct ObjectEvent *playerObj)
     sFollower.lastY = player->y;
     sFollower.scriptHidden = FALSE;
     sFollower.check = CHECK_FRAMES;
+    sFollower.reflSpriteId = MAX_SPRITES;
+    sFollower.grassX = sFollower.grassY = -1;
     if (sFollower.restValid
      && sFollower.restGroup == gSaveBlock1Ptr->location.mapGroup && sFollower.restNum == gSaveBlock1Ptr->location.mapNum
      && sFollower.restX == playerObj->currentCoords.x && sFollower.restY == playerObj->currentCoords.y)
         StandAt(sFollower.restDX, sFollower.restDY);
     else
-        Snap();
+        Snap();   // after Continue, Follower_Update stands it behind the player once it may be drawn
 }
 
 //  The lead may have changed (a swap in the party, a HALT in battle) or its friendship moved.
@@ -360,9 +426,11 @@ static void CheckLead(s8 slot)
     u32 personality;
     u8 friendship;
     u8 idx;
+    bool8 shiny;
 
-    ReadLead(slot, &species, &personality, &friendship);
-    if (species != sFollower.species || personality != sFollower.personality)
+    // A swap in the party, a trade, an evolution, a HALT in battle, a daemon gone AWAY: another picture
+    ReadLead(slot, &species, &personality, &friendship, &shiny);
+    if (species != sFollower.species || personality != sFollower.personality || shiny != sFollower.shiny)
     {
         Despawn();   // made again next frame, from the same path
         return;
@@ -382,6 +450,140 @@ void Follower_RetintPalette(void)
         LoadFollowerPalette();
 }
 
+//  ---------------------------------------------------------------- what it stands on (T-18 P3)
+
+//  Only to mark its tall grass apart from the people's (it is not an object event). Under 128: the grass keeps
+//  localId << 8 in an s16 and reads it back with >> 8, so 254 would come back as -2 and never be found.
+#define LOCALID_FOLLOWER 126
+
+//  The map tile it stands in, from where its sprite is: the inverse of SetSpritePosToMapCoords (an object standing on
+//  (x, y) is drawn at that position + 8 across, + 0 down for a 32-high sprite). Rounded to the NEAREST tile, so a pixel
+//  of camera lag never moves it, and so it is in a tile once it is halfway into it.
+static void FindTile(s16 baseX, s16 baseY)
+{
+    s16 ox, oy, rx, ry;
+
+    SetSpritePosToMapCoords(gSaveBlock1Ptr->pos.x, gSaveBlock1Ptr->pos.y, &ox, &oy);
+    rx = baseX - 8 - ox + 8;
+    ry = baseY - oy + 8;
+    sFollower.tileX = gSaveBlock1Ptr->pos.x + (rx >= 0 ? rx / 16 : -((15 - rx) / 16));
+    sFollower.tileY = gSaveBlock1Ptr->pos.y + (ry >= 0 ? ry / 16 : -((15 - ry) / 16));
+}
+
+//  Somebody else stands in (or is walking through) its tile: a person a script walks past it, a trainer walking up to
+//  the player, someone who wandered into the tile behind the player. It is not an object, so nothing stopped them --
+//  it gives way by not being drawn until they have gone (the plan's "hide", not "step aside").
+static bool8 SomeoneInItsTile(void)
+{
+    s32 i;
+
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
+    {
+        struct ObjectEvent *obj = &gObjectEvents[i];
+
+        if (!obj->active || obj->isPlayer || obj->invisible || obj->localId == LOCALID_CAMERA)
+            continue;
+        if ((obj->currentCoords.x == sFollower.tileX && obj->currentCoords.y == sFollower.tileY)
+         || (obj->previousCoords.x == sFollower.tileX && obj->previousCoords.y == sFollower.tileY))
+            return TRUE;
+    }
+    return FALSE;
+}
+
+//  Tall grass over its feet: the people's own field effect (the rustle as it steps in, then the blades in front of
+//  it), its sprite kept for as long as the follower stands in the tile. The grass is 16 wide and the icon's body
+//  about 20, so a pixel or two of it shows either side -- as it does for a 16-wide person, near enough.
+static void SpriteCB_FollowerGrass(struct Sprite *sprite)
+{
+    u8 mapNum = sprite->data[5] >> 8, mapGroup = sprite->data[5];
+    struct Sprite *follower;
+
+    // across a seam the map's coordinates shift under it, as UpdateTallGrassFieldEffect allows for
+    if (gCamera.active && (gSaveBlock1Ptr->location.mapNum != mapNum || gSaveBlock1Ptr->location.mapGroup != mapGroup))
+    {
+        sprite->data[1] -= gCamera.x;
+        sprite->data[2] -= gCamera.y;
+        sprite->data[5] = ((u8)gSaveBlock1Ptr->location.mapNum << 8) | (u8)gSaveBlock1Ptr->location.mapGroup;
+    }
+    if (!IsOurs() || gSprites[sFollower.spriteId].invisible
+     || sFollower.tileX != sprite->data[1] || sFollower.tileY != sprite->data[2])
+        sprite->data[7] = TRUE;   // it has gone: finish the rustle, then go
+    if (!MetatileBehavior_IsTallGrass(MapGridGetMetatileBehaviorAt(sprite->data[1], sprite->data[2]))
+     || (sprite->data[7] && sprite->animEnded))
+    {
+        FieldEffectStop(sprite, FLDEFF_TALL_GRASS);
+        return;
+    }
+    UpdateObjectEventSpriteInvisibility(sprite, FALSE);
+    if (IsOurs())
+    {
+        follower = &gSprites[sFollower.spriteId];
+        sprite->oam.priority = follower->oam.priority;
+        sprite->subpriority = follower->subpriority ? follower->subpriority - 1 : 0;   // in front of it
+    }
+}
+
+static void RaiseGrass(struct ObjectEvent *playerObj, struct Sprite *follower, bool8 moving)
+{
+    u8 spriteId;
+
+    if (sFollower.tileX == sFollower.grassX && sFollower.tileY == sFollower.grassY)
+        return;
+    sFollower.grassX = sFollower.tileX;
+    sFollower.grassY = sFollower.tileY;
+    if (!MetatileBehavior_IsTallGrass(MapGridGetMetatileBehaviorAt(sFollower.tileX, sFollower.tileY)))
+        return;
+    gFieldEffectArguments[0] = sFollower.tileX;
+    gFieldEffectArguments[1] = sFollower.tileY;
+    gFieldEffectArguments[2] = playerObj->previousElevation;
+    gFieldEffectArguments[3] = follower->oam.priority;
+    gFieldEffectArguments[4] = LOCALID_FOLLOWER << 8 | gSaveBlock1Ptr->location.mapNum;
+    gFieldEffectArguments[5] = gSaveBlock1Ptr->location.mapGroup;
+    gFieldEffectArguments[6] = (u8)gSaveBlock1Ptr->location.mapNum << 8 | (u8)gSaveBlock1Ptr->location.mapGroup;
+    gFieldEffectArguments[7] = !moving;   // standing there already (back from a battle): no rustle
+    FieldEffectStart(FLDEFF_TALL_GRASS);
+    spriteId = FindTallGrassFieldEffectSpriteId(LOCALID_FOLLOWER, gSaveBlock1Ptr->location.mapNum,
+                                                gSaveBlock1Ptr->location.mapGroup, sFollower.tileX, sFollower.tileY);
+    if (spriteId != MAX_SPRITES)
+        gSprites[spriteId].callback = SpriteCB_FollowerGrass;
+    else
+        FieldEffectActiveListRemove(FLDEFF_TALL_GRASS);   // no sprite was free: the grass is simply not drawn
+}
+
+//  Above still water or ice it is reflected, as the people are: the same tiles and the same palette (a person's
+//  reflection in FRLG is drawn in their own palette too), upside down and behind the ground. Its own sprite, made
+//  only while it is needed; if none is free there is no reflection, and nothing else changes.
+static void Reflect(struct Sprite *follower)
+{
+    struct Sprite *refl;
+
+    if (follower->invisible
+     || !MetatileBehavior_IsReflective(MapGridGetMetatileBehaviorAt(sFollower.tileX, sFollower.tileY + 1)))
+    {
+        DropReflection();
+        return;
+    }
+    if (!ReflectionIsOurs())
+    {
+        sFollower.reflSpriteId = CreateSprite(&sSpriteTemplate_Follower, follower->x, follower->y, 0xFF);
+        if (sFollower.reflSpriteId == MAX_SPRITES)
+            return;
+        refl = &gSprites[sFollower.reflSpriteId];
+        refl->callback = SpriteCB_FollowerReflection;
+        refl->coordOffsetEnabled = TRUE;
+        refl->animPaused = TRUE;
+        refl->oam.priority = 3;
+    }
+    refl = &gSprites[sFollower.reflSpriteId];
+    refl->oam.paletteNum = follower->oam.paletteNum;
+    refl->oam.tileNum = follower->oam.tileNum;
+    refl->oam.matrixNum = follower->oam.matrixNum | ST_OAM_VFLIP;
+    refl->x = follower->x;
+    refl->y = follower->y + 26;   // mirrored about its feet: the body ends three rows above the cell's foot
+    refl->y2 = -follower->y2;
+    refl->invisible = FALSE;
+}
+
 //  ---------------------------------------------------------------- once a frame
 
 static void Place(struct Sprite *sprite, struct Sprite *player, struct ObjectEvent *playerObj)
@@ -399,6 +601,14 @@ static void Place(struct Sprite *sprite, struct Sprite *player, struct ObjectEve
     sprite->oam.matrixNum = sFollower.facing == DIR_EAST ? ST_OAM_HFLIP : 0;   // icons face left
     sprite->oam.tileNum = sprite->sheetTileStart + ((sFollower.steps / TRAIL) & 1) * 16;   // its two frames
     sprite->invisible = dist < TRAIL / 2;   // still inside the player: walking out of them
+    FindTile(sprite->x, player->y - sFollower.sumY);
+    if (sFollower.sceneHidden || SomeoneInItsTile())
+        sprite->invisible = TRUE;            // not snapped: it is there again the moment they have gone
+    if (!sprite->invisible)
+        RaiseGrass(playerObj, sprite, moving);
+    else
+        sFollower.grassX = sFollower.grassY = -1;
+    Reflect(sprite);
 
     // Where it stands, kept for the next field entry (a battle, a menu) -- only when it stands a whole tile off.
     if (!moving && dist == TRAIL && !sprite->invisible)
@@ -475,11 +685,23 @@ void Follower_Update(void)
     Track(player, playerObj);
     if (!ArePlayerFieldControlsLocked())
         sFollower.scriptHidden = FALSE;
+    if (!ArePlayerFieldControlsLocked())
+        sFollower.sceneHidden = FALSE;      // hidefollower lasts the scene, at most
     if (FollowerIsHidden(player))
     {
         Snap();
         sprite->invisible = TRUE;
+        sFollower.grassX = sFollower.grassY = -1;
+        DropReflection();
         return;
+    }
+    // After Continue: the first frame it may be drawn (the field has faded in, the recap is over), and while it is
+    // still on the player's own tile, it stands a tile behind them instead of walking out of them.
+    if (sFollower.continued)
+    {
+        if (sFollower.sumX == 0 && sFollower.sumY == 0)
+            StandBehind(playerObj);
+        sFollower.continued = FALSE;
     }
     Place(sprite, player, playerObj);
 }
@@ -630,7 +852,6 @@ void Follower_Talk(void)
     s8 slot = Follower_LeadSlot();
     struct Pokemon *mon;
     u8 friendship, band, mood, spriteId;
-    u8 *end;
 
     gStringVar4[0] = EOS;
     if (slot < 0)
@@ -643,12 +864,14 @@ void Follower_Talk(void)
         ;
     mood = PickMood();
 
-    end = StringExpandPlaceholders(gStringVar4, sTierLines[band]);
+    // T-18 P3, the user 2026-10-21: ONE box a press, friendship and mood in turn -- the friendship line first, the
+    // mood on the next press (when none holds, the friendship line again). Walking on starts it over.
+    if (!(sFollower.talks & 1))
+        mood = MOOD_NONE;
     if (mood != MOOD_NONE)
-    {
-        *end++ = CHAR_PROMPT_CLEAR;
-        StringExpandPlaceholders(end, sMoodLines[mood][sFollower.talks & 1]);
-    }
+        StringExpandPlaceholders(gStringVar4, sMoodLines[mood][sFollower.moodTurn++ & 1]);
+    else
+        StringExpandPlaceholders(gStringVar4, sTierLines[band]);
     sFollower.talks++;
 
     // It turns to the player (icons face left; east is the same picture flipped). Above or below, it keeps its side.
@@ -660,4 +883,27 @@ void Follower_Talk(void)
     spriteId = CreateEmoticonSprite(mood == MOOD_NOTICE ? EMOTICON_DOUBLE_EXCL : sTierEmote[band], SpriteCB_FollowerEmote);
     if (spriteId != MAX_SPRITES)
         gSprites[spriteId].data[3] = -5;
+}
+
+//  ---------------------------------------------------------------- scenes and Continue (T-18 P3)
+
+//  hidefollower / showfollower (asm/macros/event.inc): a scene that would read wrong with the daemon standing in it.
+//  It is still there and still follows the player's path; it is only not drawn, and the hide lasts until showfollower
+//  or the end of the script, whichever comes first -- a scene cannot leave it hidden by forgetting to show it.
+void Follower_SceneHide(void)
+{
+    sFollower.sceneHidden = TRUE;
+}
+
+void Follower_SceneShow(void)
+{
+    sFollower.sceneHidden = FALSE;
+}
+
+//  ContinueLoadedSave (both of Continue's doors, the recap's too): nothing of it was saved, so it comes back a tile behind the player (if that tile can be
+//  stood on), not out of the player's own tile as it does through a door.
+void Follower_OnContinue(void)
+{
+    sFollower.continued = TRUE;
+    sFollower.restValid = FALSE;
 }

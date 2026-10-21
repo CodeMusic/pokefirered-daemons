@@ -507,4 +507,6 @@ gSpecials::
 	def_special DaemonsHouse_RecordFall   @ T-427: the take freezes at the fall
 	def_special DaemonsHouse_ReadTakeAtFall
 	def_special Follower_Talk   @ T-18 P2
+	def_special Follower_SceneHide   @ T-18 P3: hidefollower
+	def_special Follower_SceneShow   @ T-18 P3: showfollower
 gSpecialsEnd::

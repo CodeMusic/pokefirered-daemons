@@ -54,6 +54,7 @@ enum
     EV_SONGS_ALL, EV_SONG1, EV_SONG8 = EV_SONG1 + PLAY_SONG_COUNT - 1, EV_NEXUS_LIT,   // T-417 P2
     EV_YEAR_ALL, EV_YEAR1, EV_YEAR12 = EV_YEAR1 + HOLIDAY_YEAR_LINE_COUNT - 1, EV_GIFTS_AGAIN,   // T-416
     EV_FOLLOWER, EV_FRIEND_0, EV_FRIEND_70, EV_FRIEND_150, EV_FRIEND_255,   // T-18
+    EV_LEAD_SHINY,                                                          // T-18 P3
 };
 
 struct DbgRow { const u8 *name; u8 kind; u8 arg; };
@@ -157,6 +158,7 @@ static const u8 sName_Friend0[]     = _("LEAD FRIENDSHIP 0");
 static const u8 sName_Friend70[]    = _("LEAD FRIENDSHIP 70");
 static const u8 sName_Friend150[]   = _("LEAD FRIENDSHIP 150");
 static const u8 sName_Friend255[]   = _("LEAD FRIENDSHIP 255");
+static const u8 sName_LeadShiny[]   = _("LEAD SHINY");
 
 //  THE STORY'S ORDER: the opening, the shoes and the INDEX, OPUS on THE REPO's shelf, then CAIRN's MARK and NOTEBOOK,
 //  the school, the ship, the DRIVERS, BRAZEN's tea and REVEAL, HALFTONE, the sleeper, the GUIDE, and last what only
@@ -247,6 +249,7 @@ static const struct DbgRow sRows_Follower[] = {
     { sName_Friend70,   R_GIVE,   EV_FRIEND_70 },
     { sName_Friend150,  R_GIVE,   EV_FRIEND_150 },
     { sName_Friend255,  R_GIVE,   EV_FRIEND_255 },
+    { sName_LeadShiny,  R_TOGGLE, EV_LEAD_SHINY },
 };
 
 static const struct { const struct DbgRow *rows; u8 count; } sPages[PG_COUNT] = {
@@ -382,6 +385,31 @@ static void SetLeadFriendship(u8 value)
         SetMonData(&gPlayerParty[slot], MON_DATA_FRIENDSHIP, &value);
 }
 
+//  T-18 P3: the lead made shiny (or not) by its OT ID, which is half of what decides it: the secret id set so the four
+//  halves XOR to 0, or the player's own id back. (A shiny made here reads as traded to the BOUND line: DEBUG only.)
+static void SetLeadShiny(bool8 on)
+{
+    s8 slot = Follower_LeadSlot();
+    struct BoxPokemon *box;
+    u32 pid, otId, i;
+
+    if (slot < 0)
+        return;
+    pid = GetMonData(&gPlayerParty[slot], MON_DATA_PERSONALITY);
+    otId = gSaveBlock2Ptr->playerTrainerId[0] | (gSaveBlock2Ptr->playerTrainerId[1] << 8)
+         | (gSaveBlock2Ptr->playerTrainerId[2] << 16) | (gSaveBlock2Ptr->playerTrainerId[3] << 24);
+    if (on)
+        otId = (otId & 0xFFFF) | (((otId & 0xFFFF) ^ (pid >> 16) ^ (pid & 0xFFFF)) << 16);
+    else if ((((otId >> 16) ^ (otId & 0xFFFF) ^ (pid >> 16) ^ (pid & 0xFFFF)) & 0xFFFF) < SHINY_ODDS)
+        otId ^= 0x80000;   // the player's own id would be shiny for this one: not any more
+    // The OT ID is half the key the daemon is encrypted with, and SetMonData does not re-encrypt for it: so swap the
+    // key on the twelve secure words by hand (the checksum is over the plain words, so it holds).
+    box = &gPlayerParty[slot].box;
+    for (i = 0; i < ARRAY_COUNT(box->secure.raw); i++)
+        box->secure.raw[i] ^= box->otId ^ otId;
+    box->otId = otId;
+}
+
 static bool8 IsHeld(u8 ev)
 {
     u32 i;
@@ -415,6 +443,7 @@ static bool8 IsHeld(u8 ev)
     case EV_GLOBAL_INDEX: return IsNationalPokedexEnabled();
     case EV_COMPANION:    return FlagGet(FLAG_COMPANION_LINKED);
     case EV_FOLLOWER:     return !FlagGet(FLAG_FOLLOWER_OFF);
+    case EV_LEAD_SHINY:   return Follower_LeadSlot() >= 0 && IsMonShiny(&gPlayerParty[Follower_LeadSlot()]);
     case EV_NOTEBOOK:     return FlagGet(FLAG_GOT_NOTEBOOK);
     case EV_MARKS_ALL:
         for (i = 0; i < 8; i++)
@@ -547,6 +576,7 @@ static void Apply(u8 ev, bool8 on)
     case EV_FRIEND_70:    SetLeadFriendship(70); return;
     case EV_FRIEND_150:   SetLeadFriendship(150); return;
     case EV_FRIEND_255:   SetLeadFriendship(255); return;
+    case EV_LEAD_SHINY:   SetLeadShiny(on); return;
     }
     if (ev >= EV_YEAR1 && ev <= EV_YEAR12)
     {
