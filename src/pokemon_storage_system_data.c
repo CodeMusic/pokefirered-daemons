@@ -729,7 +729,10 @@ void ReleaseMon(void)
 
     DestroyReleaseMonIcon();
     if (sIsMonBeingMoved)
+    {
         sIsMonBeingMoved = FALSE;
+        boxId = sMovingMonOrigBoxId;   // T-433: held on the cursor, it came from where it was picked up
+    }
     else
     {
         if (sCursorArea == CURSOR_AREA_IN_PARTY)
@@ -739,7 +742,8 @@ void ReleaseMon(void)
 
         PurgeMonOrBoxMon(boxId, sCursorPosition);
     }
-    Feelings_OnRelease();   // T-433: the party sees one go
+    if (boxId == TOTAL_BOXES_COUNT)
+        Feelings_OnRelease();   // T-433: the party sees one of its own go (the user, 2026-10-22: never one from a box)
     TrySetDisplayMonData();
 }
 

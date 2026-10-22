@@ -115,7 +115,7 @@ void Feelings_RemnantCalmed(void);                                 // special: D
 void Feelings_OnRoutineForgotten(struct Pokemon *mon);             // a PLUGIN's routine took an old one's place
 void Feelings_OnEvolved(struct Pokemon *mon);
 void Feelings_OnEvolutionStopped(struct Pokemon *mon);
-void Feelings_OnRelease(void);                                     // a daemon released from the PC
+void Feelings_OnRelease(void);                                     // a daemon released from the party, in the PC
 void Feelings_OnHallOfFame(void);
 void Feelings_OnTradeReceived(struct Pokemon *mon);                // an in-game trade's daemon, just arrived
 void Feelings_OnPlayed(void);                                      // the instrument, played to the lead

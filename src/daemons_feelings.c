@@ -353,7 +353,7 @@ static const struct ItemFeelings sItemFeelings[] = {
     { ITEM_AWAKENING,       0, 0, 0, 2, 0 },    // RESUME: woken gently
     { ITEM_PARALYZE_HEAL,   1, 0, 0, 3, 0 },    // PRIORITY
     { ITEM_FULL_HEAL,       2, 0, 0, 5, 0 },    // ROLLBACK
-    { ITEM_HEAL_POWDER,     0, 3, 0, 3, 0 },    // HOTFIX: cured, and bitter
+    { ITEM_HEAL_POWDER,     0, 3, 0, 0, 0 },    // HOTFIX: it rankles, like the other bitter herbs (the user, 2026-10-22)
     { ITEM_LAVA_COOKIE,     5, 0, 0, 2, 1 },    // LAVA COOKIE
     { ITEM_BLUE_FLUTE,      0, 0, 0, 3, 0 },    // WAKE TONE
     { ITEM_YELLOW_FLUTE,    0, 0, 0, 6, 0 },    // CALM TONE
@@ -437,7 +437,8 @@ static void AddFriendship(struct Pokemon *mon, s8 delta)
 }
 
 // PokemonUseItemEffects worked on the player's own daemon (the AI's items never come here). The INTERRUPT in the
-// field wakes your party through AWAKENING's effect, and pushes nothing: it plays for the sleeper, not for yours.
+// field wakes your party through AWAKENING's effect, which comes here only for a daemon it woke -- and that one is
+// woken with a jolt, as in battle (the user, 2026-10-22: MAD +4, CALM -4), not gently as RESUME wakes it.
 void Feelings_OnItemUsed(struct Pokemon *mon, u16 item)
 {
     const struct ItemFeelings *row;
@@ -445,7 +446,10 @@ void Feelings_OnItemUsed(struct Pokemon *mon, u16 item)
     if (!IsPlayerPartyMon(mon))
         return;
     if (item == ITEM_AWAKENING && gSpecialVar_ItemId == ITEM_POKE_FLUTE)
+    {
+        PushMon(mon, 0, FEEL_INTERRUPT_MAD, 0, FEEL_INTERRUPT_CALM);
         return;
+    }
     row = FindItemFeelings(item);
     if (row == NULL)
         return;
@@ -573,7 +577,8 @@ void Feelings_OnEvolutionStopped(struct Pokemon *mon)
     PushMon(mon, 0, FEEL_EVO_STOPPED_MAD, 0, 0);
 }
 
-// A daemon released from the PC (ReleaseMon, after it is gone): the party sees one go.
+// A daemon released from the party, in the PC (ReleaseMon, after it is gone): the party sees one go. One released from
+// a box was never with them, and saddens no one (the user, 2026-10-22) -- ReleaseMon only calls this for the party.
 void Feelings_OnRelease(void)
 {
     PushParty(0, 0, FEEL_RELEASED_SAD, 0);
