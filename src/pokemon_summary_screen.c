@@ -142,7 +142,7 @@ static void PokeSum_UpdateMonMarkingsAnim(void);
 static s8 SeekToNextMonInSingleParty(s8 direction);
 static s8 SeekToNextMonInMultiParty(s8 direction);
 static bool8 PokeSum_CanShowFeelings(void);
-static void Task_PokeSum_FeelingsPage(u8 taskId);
+static u8 PokeSum_PageLeft(void);
 static void PokeSum_PrintFeelingsGrid(void);
 static void PokeSum_PrintFeelingsLine(void);
 
@@ -249,8 +249,8 @@ struct PokemonSummaryScreenData
     u8 ALIGNED(4) lastPageFlipDirection; /* 0x3300 */
     u8 ALIGNED(4) unk3304; /* 0x3304 */
 
-    // T-431 P2: while the fourth page shows, BG1's and BG2's tilemaps as KNOWN ROUTINES left them (heap, 4 KB).
-    u16 *feelingsBgBackup;
+    // T-431 P2: TRUE while a flip runs back from the fourth page to KNOWN ROUTINES (PokeSum_PageLeft)
+    u8 ALIGNED(4) flipFromFeelings;
 };
 
 struct Struct203B144
@@ -1191,8 +1191,6 @@ static void Task_InputHandler_Info(u8 taskId)
             return;
         else if (FuncIsActiveTask(Task_PokeSum_SwitchDisplayedPokemon))
             return;
-        else if (FuncIsActiveTask(Task_PokeSum_FeelingsPage))
-            return;
 
         if (sMonSummaryScreen->curPageIndex != PSS_PAGE_MOVES_INFO)
         {
@@ -1205,9 +1203,14 @@ static void Task_InputHandler_Info(u8 taskId)
                 }
                 else if (sMonSummaryScreen->curPageIndex == PSS_PAGE_MOVES && PokeSum_CanShowFeelings())
                 {
-                    // T-431 P2: KNOWN ROUTINES -> the fourth page, drawn in place (Task_PokeSum_FeelingsPage)
+                    // T-431 P2: KNOWN ROUTINES -> the fourth page, slid in as the others are (PokeSum_PageLeft)
                     PlaySE(SE_SELECT);
-                    gTasks[CreateTask(Task_PokeSum_FeelingsPage, 0)].data[1] = TRUE;
+                    HideBg(0);
+                    sMonSummaryScreen->pageFlipDirection = 1;
+                    sMonSummaryScreen->flipFromFeelings = FALSE;
+                    PokeSum_RemoveWindows(sMonSummaryScreen->curPageIndex);
+                    sMonSummaryScreen->curPageIndex = PSS_PAGE_FEELINGS;
+                    sMonSummaryScreen->state3270 = PSS_STATE3270_FLIPPAGES;
                 }
                 else if (sMonSummaryScreen->curPageIndex < PSS_PAGE_MOVES)
                 {
@@ -1229,9 +1232,14 @@ static void Task_InputHandler_Info(u8 taskId)
                 }
                 else if (sMonSummaryScreen->curPageIndex == PSS_PAGE_FEELINGS)
                 {
-                    // T-431 P2: and back to KNOWN ROUTINES, as it was
+                    // T-431 P2: and back to KNOWN ROUTINES, slid out
                     PlaySE(SE_SELECT);
-                    gTasks[CreateTask(Task_PokeSum_FeelingsPage, 0)].data[1] = FALSE;
+                    HideBg(0);
+                    sMonSummaryScreen->pageFlipDirection = 0;
+                    sMonSummaryScreen->flipFromFeelings = TRUE;
+                    PokeSum_RemoveWindows(sMonSummaryScreen->curPageIndex);
+                    sMonSummaryScreen->curPageIndex = PSS_PAGE_MOVES;
+                    sMonSummaryScreen->state3270 = PSS_STATE3270_FLIPPAGES;
                 }
                 else if (sMonSummaryScreen->curPageIndex > PSS_PAGE_INFO)
                 {
@@ -1330,7 +1338,8 @@ static void Task_PokeSum_FlipPages(u8 taskId)
     case 1:
         if (sMonSummaryScreen->curPageIndex != PSS_PAGE_MOVES_INFO)
         {
-            if (!(sMonSummaryScreen->curPageIndex == PSS_PAGE_MOVES && sMonSummaryScreen->pageFlipDirection == 0))
+            if (!(sMonSummaryScreen->curPageIndex == PSS_PAGE_MOVES && sMonSummaryScreen->pageFlipDirection == 0)
+             || sMonSummaryScreen->flipFromFeelings)
             {
                 FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 30, 20);
                 CopyBgTilemapBufferToVram(0);
@@ -1404,6 +1413,7 @@ static void Task_PokeSum_FlipPages(u8 taskId)
 
         DestroyTask(taskId);
         data[0] = 0;
+        sMonSummaryScreen->flipFromFeelings = FALSE;
         sMonSummaryScreen->lockMovesFlag = FALSE;
         sMonSummaryScreen->inhibitPageFlipInput = FALSE;
         return;
@@ -1640,18 +1650,13 @@ static void PokeSum_SetHpExpBarCoordsFullLeft(void)
 
 static void PokeSum_InitBgCoordsBeforePageFlips(void)
 {
-    s8 pageDelta = 1;
-
-    if (sMonSummaryScreen->pageFlipDirection == 1)
-        pageDelta = -1;
-
     if (sMonSummaryScreen->curPageIndex == PSS_PAGE_MOVES_INFO)
     {
         sMonSummaryScreen->flipPagesBgHofs = 240;
         return;
     }
 
-    if ((sMonSummaryScreen->curPageIndex + pageDelta) == PSS_PAGE_MOVES_INFO)
+    if (PokeSum_PageLeft() == PSS_PAGE_MOVES_INFO)
     {
         PokeSum_UpdateBgPriorityForPageFlip(0, 0);
         sMonSummaryScreen->flipPagesBgHofs = 0;
@@ -1697,13 +1702,10 @@ static void PokeSum_InitBgCoordsBeforePageFlips(void)
 
 static void PokeSum_HideSpritesBeforePageFlip(void)
 {
-    u8 newPage;
+    u8 newPage = PokeSum_PageLeft();   // the page being left (vanilla's name; T-431 P2 knows the fourth page's)
 
-    if (sMonSummaryScreen->pageFlipDirection == 1)
-        newPage = sMonSummaryScreen->curPageIndex - 1;
-    else
-        newPage = sMonSummaryScreen->curPageIndex + 1;
-
+    if (newPage == PSS_PAGE_FEELINGS || sMonSummaryScreen->curPageIndex == PSS_PAGE_FEELINGS)
+        return;   // T-431 P2: KNOWN ROUTINES' sprites stay as they are on the fourth page
     switch (newPage)
     {
     case PSS_PAGE_INFO:
@@ -1736,13 +1738,10 @@ static void PokeSum_HideSpritesBeforePageFlip(void)
 
 static void PokeSum_ShowSpritesBeforePageFlip(void)
 {
-    u8 newPage;
+    u8 newPage = PokeSum_PageLeft();   // the page being left (vanilla's name; T-431 P2 knows the fourth page's)
 
-    if (sMonSummaryScreen->pageFlipDirection == 1)
-        newPage = sMonSummaryScreen->curPageIndex - 1;
-    else
-        newPage = sMonSummaryScreen->curPageIndex + 1;
-
+    if (newPage == PSS_PAGE_FEELINGS || sMonSummaryScreen->curPageIndex == PSS_PAGE_FEELINGS)
+        return;
     switch (newPage)
     {
     case PSS_PAGE_INFO:
@@ -1779,11 +1778,6 @@ static void PokeSum_ShowSpritesBeforePageFlip(void)
 
 static u8 PokeSum_IsPageFlipFinished(u8 a0)
 {
-    s8 pageDelta = 1;
-
-    if (sMonSummaryScreen->pageFlipDirection == 1)
-        pageDelta = -1;
-
     if (sMonSummaryScreen->curPageIndex == PSS_PAGE_MOVES_INFO)
         if (sMonSummaryScreen->flipPagesBgHofs <= 0)
         {
@@ -1794,7 +1788,7 @@ static u8 PokeSum_IsPageFlipFinished(u8 a0)
             return TRUE;
         }
 
-    if ((sMonSummaryScreen->curPageIndex + pageDelta) == PSS_PAGE_MOVES_INFO)
+    if (PokeSum_PageLeft() == PSS_PAGE_MOVES_INFO)
         if (sMonSummaryScreen->flipPagesBgHofs >= 240)
         {
             sMonSummaryScreen->flipPagesBgHofs = 240;
@@ -1910,12 +1904,7 @@ static void PokeSum_UpdateBgPriorityForPageFlip(u8 setBg0Priority, u8 keepBg1Bg2
 
 static void PokeSum_CopyNewBgTilemapBeforePageFlip_2(void)
 {
-    u8 newPage;
-
-    if (sMonSummaryScreen->pageFlipDirection == 1)
-        newPage = sMonSummaryScreen->curPageIndex - 1;
-    else
-        newPage = sMonSummaryScreen->curPageIndex + 1;
+    u8 newPage = PokeSum_PageLeft();   // the page being left (vanilla's name; T-431 P2 knows the fourth page's)
 
     switch (newPage)
     {
@@ -1930,7 +1919,10 @@ static void PokeSum_CopyNewBgTilemapBeforePageFlip_2(void)
 
         break;
     case PSS_PAGE_MOVES:
-        if (sMonSummaryScreen->pageFlipDirection == 1)
+        if (sMonSummaryScreen->curPageIndex == PSS_PAGE_FEELINGS)
+            // T-431 P2: KNOWN ROUTINES is on the layer INFO uses, so the fourth page goes where SKILLS would
+            CopyToBgTilemapBuffer(sMonSummaryScreen->infoAndMovesPageBgNum, gSummaryScreen_PageFeelings_Tilemap, 0, 0);
+        else if (sMonSummaryScreen->pageFlipDirection == 1)
             CopyToBgTilemapBuffer(sMonSummaryScreen->infoAndMovesPageBgNum, gSummaryScreen_PageMovesInfo_Tilemap, 0, 0);
         else
             CopyToBgTilemapBuffer(sMonSummaryScreen->infoAndMovesPageBgNum, gSummaryScreen_PageSkills_Tilemap, 0, 0);
@@ -1939,17 +1931,16 @@ static void PokeSum_CopyNewBgTilemapBeforePageFlip_2(void)
     case PSS_PAGE_MOVES_INFO:
         CopyToBgTilemapBuffer(sMonSummaryScreen->skillsPageBgNum, gSummaryScreen_PageMoves_Tilemap, 0, 0);
         break;
+    case PSS_PAGE_FEELINGS:
+        // and back: KNOWN ROUTINES slides in over it on the other layer, as INFO does over SKILLS
+        CopyToBgTilemapBuffer(sMonSummaryScreen->skillsPageBgNum, gSummaryScreen_PageMoves_Tilemap, 0, 0);
+        break;
     }
 }
 
 static void PokeSum_CopyNewBgTilemapBeforePageFlip(void)
 {
-    u8 newPage;
-
-    if (sMonSummaryScreen->pageFlipDirection == 1)
-        newPage = sMonSummaryScreen->curPageIndex - 1;
-    else
-        newPage = sMonSummaryScreen->curPageIndex + 1;
+    u8 newPage = PokeSum_PageLeft();   // the page being left (vanilla's name; T-431 P2 knows the fourth page's)
 
     switch (newPage)
     {
@@ -1968,6 +1959,8 @@ static void PokeSum_CopyNewBgTilemapBeforePageFlip(void)
     case PSS_PAGE_MOVES_INFO:
         CopyToBgTilemapBuffer(3, sBgTilemap_MovesInfoPage, 0, 0);
         break;
+    case PSS_PAGE_FEELINGS:
+        break;   // T-431 P2: BG3 stays as KNOWN ROUTINES has it, under both
     }
 }
 
@@ -3087,7 +3080,6 @@ static void Task_DestroyResourcesOnExit(u8 taskId)
 
     sLastViewedMonIndex = GetLastViewedMonIndex();
 
-    FREE_AND_SET_NULL_IF_SET(sMonSummaryScreen->feelingsBgBackup);   // T-431 P2: left from the fourth page
     FREE_AND_SET_NULL_IF_SET(sMonSummaryScreen);
     FREE_AND_SET_NULL_IF_SET(sMonSkillsPrinterXpos);
 }
@@ -3198,8 +3190,8 @@ static void PokeSum_FlipPages_HandleBgHofs(void)
     }
     else
     {
-        if (sMonSummaryScreen->curPageIndex != PSS_PAGE_MOVES)
-            PokeSum_FlipPages_SlideLayeRight();
+        if (sMonSummaryScreen->curPageIndex != PSS_PAGE_MOVES || sMonSummaryScreen->flipFromFeelings)
+            PokeSum_FlipPages_SlideLayeRight();   // T-431 P2: back from the fourth page, KNOWN ROUTINES slides in
         else
             PokeSum_FlipPages_SlideLayerLeft();
     }
@@ -3277,7 +3269,8 @@ static void PokeSum_AddWindows(u8 curPageIndex)
         sMonSummaryScreen->windowIds[i] = 0xff;
 
     if ((sMonSummaryScreen->pageFlipDirection == 1 && sMonSummaryScreen->curPageIndex != PSS_PAGE_MOVES_INFO)
-        || (sMonSummaryScreen->pageFlipDirection == 0 && sMonSummaryScreen->curPageIndex == PSS_PAGE_MOVES))
+        || (sMonSummaryScreen->pageFlipDirection == 0 && sMonSummaryScreen->curPageIndex == PSS_PAGE_MOVES
+            && !sMonSummaryScreen->flipFromFeelings))
     {
         if (bgPriority2 > bgPriority1)
             for (i = 0; i < 3; i++)
@@ -3309,6 +3302,9 @@ static void PokeSum_AddWindows(u8 curPageIndex)
         case PSS_PAGE_MOVES:
         case PSS_PAGE_MOVES_INFO:
             sMonSummaryScreen->windowIds[i + 3] = AddWindow(&sWindowTemplates_Moves[i]);
+            break;
+        case PSS_PAGE_FEELINGS:
+            sMonSummaryScreen->windowIds[i + 3] = AddWindow(&sWindowTemplates_Feelings[i]);
             break;
         }
 }
@@ -5320,14 +5316,12 @@ static void ShowPokemonSummaryScreen_NullParty(void)
 
 // ---- T-431 P2: the fourth page -- a daemon's feelings, named nowhere ------------------------------------------------
 //
-// R from KNOWN ROUTINES, L back (bible 4.9; docs/private/plan-feelings-2026-10-21.md section 3). The page is drawn IN
-// PLACE rather than slid in: vanilla's flip alternates BG1 and BG2 between neighbouring pages and works out the page it
-// leaves as curPageIndex -/+ 1, which a page appended after PSS_PAGE_MOVE_DELETER is not. So BG1's and BG2's tilemaps
-// are kept as KNOWN ROUTINES left them (4 KB of heap while the page shows) and given back on the way out, and the
-// flip's state -- which layer is on top, which one slides next -- is never touched. The picture, its markings, its
-// ball and its status stay where KNOWN ROUTINES had them.
-
-#define FEELINGS_TILEMAP_ENTRIES (32 * 32)
+// R from KNOWN ROUTINES, L back (bible 4.9; docs/private/plan-feelings-2026-10-21.md section 3). It SLIDES in and out
+// as the vanilla pages do (the user, 2026-10-21). Vanilla's flip alternates BG1 and BG2 between neighbouring pages and
+// worked out the page it leaves as curPageIndex -/+ 1, which a page appended after PSS_PAGE_MOVE_DELETER is not; so the
+// flip asks PokeSum_PageLeft instead, and the fourth page takes the layer SKILLS would (KNOWN ROUTINES sits on INFO's),
+// so the layers' parity is vanilla's. The picture, its markings, its ball and its status stay where KNOWN ROUTINES had
+// them; BG3 is left as KNOWN ROUTINES drew it.
 
 static bool8 PokeSum_CanShowFeelings(void)
 {
@@ -5335,78 +5329,15 @@ static bool8 PokeSum_CanShowFeelings(void)
         && (sMonSummaryScreen->mode == PSS_MODE_NORMAL || sMonSummaryScreen->mode == PSS_MODE_BOX);
 }
 
-static void Task_PokeSum_FeelingsPage(u8 taskId)
+//  The page being left by the flip now running (vanilla worked it out as curPageIndex -/+ 1, which the appended fourth
+//  page is not): to the fourth page it is KNOWN ROUTINES, and back from it, the fourth page.
+static u8 PokeSum_PageLeft(void)
 {
-    s16 *data = gTasks[taskId].data;     // data[0] the step, data[1] TRUE going to the page, data[2] the title's BG
-    u8 i;
-
-    switch (data[0])
-    {
-    case 0:
-        if (data[1] && sMonSummaryScreen->feelingsBgBackup == NULL)
-        {
-            sMonSummaryScreen->feelingsBgBackup = Alloc(2 * FEELINGS_TILEMAP_ENTRIES * sizeof(u16));
-            if (sMonSummaryScreen->feelingsBgBackup == NULL)
-            {
-                DestroyTask(taskId);     // no room: stay on KNOWN ROUTINES
-                return;
-            }
-            CpuCopy16(sMonSummaryScreen->bg1TilemapBuffer, sMonSummaryScreen->feelingsBgBackup, FEELINGS_TILEMAP_ENTRIES * sizeof(u16));
-            CpuCopy16(sMonSummaryScreen->bg2TilemapBuffer, sMonSummaryScreen->feelingsBgBackup + FEELINGS_TILEMAP_ENTRIES, FEELINGS_TILEMAP_ENTRIES * sizeof(u16));
-        }
-        data[2] = GetWindowAttribute(sMonSummaryScreen->windowIds[POKESUM_WIN_PAGE_NAME], WINDOW_BG);
-        PokeSum_RemoveWindows(sMonSummaryScreen->curPageIndex);
-        FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 30, 20);
-        if (data[1])
-        {
-            CopyToBgTilemapBuffer(1, gSummaryScreen_PageFeelings_Tilemap, 0, 0);
-            CopyToBgTilemapBuffer(2, gSummaryScreen_PageFeelings_Tilemap, 0, 0);
-            sMonSummaryScreen->curPageIndex = PSS_PAGE_FEELINGS;
-        }
-        else
-        {
-            if (sMonSummaryScreen->feelingsBgBackup != NULL)
-            {
-                CpuCopy16(sMonSummaryScreen->feelingsBgBackup, sMonSummaryScreen->bg1TilemapBuffer, FEELINGS_TILEMAP_ENTRIES * sizeof(u16));
-                CpuCopy16(sMonSummaryScreen->feelingsBgBackup + FEELINGS_TILEMAP_ENTRIES, sMonSummaryScreen->bg2TilemapBuffer, FEELINGS_TILEMAP_ENTRIES * sizeof(u16));
-                FREE_AND_SET_NULL_IF_SET(sMonSummaryScreen->feelingsBgBackup);
-            }
-            sMonSummaryScreen->curPageIndex = PSS_PAGE_MOVES;
-        }
-        break;
-    case 1:
-        for (i = 0; i < 3; i++)
-            sMonSummaryScreen->windowIds[i] = AddWindow(data[2] == 2 ? &sWindowTemplates_Permanent_Bg2[i] : &sWindowTemplates_Permanent_Bg1[i]);
-        for (i = 0; i < 4; i++)
-            sMonSummaryScreen->windowIds[i + 3] = AddWindow(sMonSummaryScreen->curPageIndex == PSS_PAGE_FEELINGS
-                                                            ? &sWindowTemplates_Feelings[i] : &sWindowTemplates_Moves[i]);
-        break;
-    case 2:
-        PokeSum_PrintPageHeaderText(sMonSummaryScreen->curPageIndex);
-        PokeSum_PrintRightPaneText();
-        PokeSum_PrintBottomPaneText();
-        PokeSum_PrintAbilityDataOrMoveTypes();
-        PokeSum_PrintMonTypeIcons();
-        PokeSum_DrawPageProgressTiles();
-        break;
-    case 3:
-        for (i = 0; i < 7; i++)
-            CopyWindowToVram(sMonSummaryScreen->windowIds[i], 2);
-        break;
-    case 4:
-        if (IsDma3ManagerBusyWithBgCopy())
-            return;
-        CopyBgTilemapBufferToVram(0);
-        CopyBgTilemapBufferToVram(1);
-        CopyBgTilemapBufferToVram(2);
-        CopyBgTilemapBufferToVram(3);
-        break;
-    default:
-        PokeSum_SetHelpContext();
-        DestroyTask(taskId);
-        return;
-    }
-    data[0]++;
+    if (sMonSummaryScreen->pageFlipDirection == 1)
+        return sMonSummaryScreen->curPageIndex == PSS_PAGE_FEELINGS ? PSS_PAGE_MOVES : sMonSummaryScreen->curPageIndex - 1;
+    if (sMonSummaryScreen->flipFromFeelings)
+        return PSS_PAGE_FEELINGS;
+    return sMonSummaryScreen->curPageIndex + 1;
 }
 
 // The grid: an 80px box of paper, a 9x9 lattice of 8px cells drawn faint, a cross through the middle cell a little
