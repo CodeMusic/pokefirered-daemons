@@ -1451,6 +1451,66 @@ static u16 DaemonsSeasonColour(u16 index, u16 colour, u8 season, bool8 bloom)
     return colour;
 }
 
+// T-441 (the user, 2026-10-22): THE GRASS YOU WALK THROUGH WEARS THE SEASON TOO. The blades that close round your feet
+// are a SPRITE on general_1, whose greens are General palette 0's own slots -- so where the season repaints those
+// slots, a summer-green rustle walked across white or russet grass. As the sprite palette LOADS (never per frame), each
+// entry that is one of palette 0's seasonal greens takes that slot's season colour; an entry close to one (the blades'
+// darkest outline) moves by the same step. Where the season shows, and only there -- the same rule as the tiles.
+// Only general_1 is passed here: general_0's dust and sand are the path's and the beach's colours, which no season
+// repaints, and its water and general_1's ripple blues sit far from every seasonal slot, so prints, dust and ripples
+// already match the ground they land on.
+bool8 DaemonsSeasonSpritePalette(u16 *pal)
+{
+    u8 season = DaemonsSeasonHere();
+    const u16 *summer = gTileset_General.palettes[0];
+    bool8 changed = FALSE;
+    u32 i, j, best, bestDist, dist;
+    s32 c[3], s[3], w[3], k;
+
+    if (season == SEASON_SUMMER)
+        return FALSE;
+    for (i = 1; i < 16; i++)
+    {
+        best = 16;
+        bestDist = 7;   // in 5-bit steps, summed over the three channels: near enough to be the same green's shade
+        for (j = 1; j < 16; j++)
+        {
+            if (!((SEASON_SLOT_MASK >> j) & 1))
+                continue;
+            dist = 0;
+            for (k = 0; k < 3; k++)
+            {
+                s32 d = (s32)((pal[i] >> (5 * k)) & 0x1F) - (s32)((summer[j] >> (5 * k)) & 0x1F);
+                dist += d < 0 ? -d : d;
+            }
+            if (dist < bestDist)
+            {
+                bestDist = dist;
+                best = j;
+            }
+        }
+        if (best == 16)
+            continue;
+        if (bestDist == 0)
+        {
+            pal[i] = sSeasonRow0[season][best];
+            changed = TRUE;
+            continue;
+        }
+        for (k = 0; k < 3; k++)
+        {
+            c[k] = (pal[i] >> (5 * k)) & 0x1F;
+            s[k] = (summer[best] >> (5 * k)) & 0x1F;
+            w[k] = (sSeasonRow0[season][best] >> (5 * k)) & 0x1F;
+            c[k] += w[k] - s[k];
+            c[k] = c[k] < 0 ? 0 : c[k] > 31 ? 31 : c[k];
+        }
+        pal[i] = RGB2(c[0], c[1], c[2]);
+        changed = TRUE;
+    }
+    return changed;
+}
+
 // T-408 (the user, 2026-10-19): EACH GROVE'S UNIVERSE IN ITS OWN LIGHT -- the same trees and ground recoloured to the
 // universe's mood (DRAFT). Only the grove's own map, only its BG rows as they load (the dialogue rows are never loaded
 // here), on top of the season and under the faded print and the watch's light, so dusk still falls in every universe.

@@ -475,13 +475,26 @@ void ApplyGlobalFieldPaletteTint(u8 paletteIdx)
     CpuFastCopy(&gPlttBufferUnfaded[OBJ_PLTT_ID2(paletteIdx)], &gPlttBufferFaded[OBJ_PLTT_ID2(paletteIdx)], PLTT_SIZE_4BPP);
 }
 
+//  T-441: the grass's palette in the season, as it loads -- before the light and the weather fall on it, as the tiles'
+//  season goes in before theirs. Only FLDEFF_PAL_TAG_GENERAL_1 (BLANCHE's grass has no seasons).
+static void DaemonsSeasonFieldEffectPalette(u8 paletteIdx)
+{
+    if (paletteIdx == 0xFF || GetSpritePaletteTagByPaletteNum(paletteIdx) != FLDEFF_PAL_TAG_GENERAL_1)
+        return;
+    if (DaemonsSeasonSpritePalette(&gPlttBufferUnfaded[OBJ_PLTT_ID(paletteIdx)]))
+        CpuFastCopy(&gPlttBufferUnfaded[OBJ_PLTT_ID(paletteIdx)], &gPlttBufferFaded[OBJ_PLTT_ID(paletteIdx)], PLTT_SIZE_4BPP);
+}
+
 static void FieldEffectScript_LoadFadedPal(const u8 **script)
 {
     const struct SpritePalette * spritePalette = (const struct SpritePalette * )FieldEffectScript_ReadWord(script);
     u8 idx = IndexOfSpritePaletteTag(spritePalette->tag);
     LoadSpritePalette(spritePalette);
     if (idx == 0xFF)
+    {
+        DaemonsSeasonFieldEffectPalette(IndexOfSpritePaletteTag(spritePalette->tag));
         ApplyGlobalFieldPaletteTint(IndexOfSpritePaletteTag(spritePalette->tag));
+    }
     UpdateSpritePaletteWithWeather(IndexOfSpritePaletteTag(spritePalette->tag));
     *script += sizeof(u32);
 }
@@ -495,7 +508,10 @@ static void FieldEffectScript_LoadPal(const u8 **script)
     //  first load went untinted and every reuse tinted again. The Quest Log's grey never showed it (grey of grey is
     //  grey); the watch's tint is not idempotent, so it would have darkened the ball's trail each time it was thrown.
     if (idx == 0xFF)
+    {
+        DaemonsSeasonFieldEffectPalette(IndexOfSpritePaletteTag(spritePalette->tag));
         ApplyGlobalFieldPaletteTint(IndexOfSpritePaletteTag(spritePalette->tag));
+    }
     *script += sizeof(u32);
 }
 
@@ -518,6 +534,7 @@ void DaemonsRetintFieldEffectPalettes(void)
         if (idx == 0xFF)
             continue;
         LoadPalette(sRelitFieldEffectPalettes[i]->data, OBJ_PLTT_ID(idx), PLTT_SIZE_4BPP);
+        DaemonsSeasonFieldEffectPalette(idx);
         ApplyGlobalFieldPaletteTint(idx);
         UpdateSpritePaletteWithWeather(idx);
     }
