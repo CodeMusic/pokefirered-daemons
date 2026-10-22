@@ -263,6 +263,9 @@ graphics/pokemon/heracross/unk_icon.4bpp: %.4bpp: %.png
 graphics/misc/emoticons.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
 
+graphics/misc/daemon_emoji.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 2
+
 $(ITEMMENUGFXDIR)/bg.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 55 -Wnum_tiles
 

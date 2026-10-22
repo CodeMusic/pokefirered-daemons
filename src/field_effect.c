@@ -449,7 +449,8 @@ void ApplyGlobalFieldPaletteTint(u8 paletteIdx)
     if (DaemonsHalftoneGreysByFrame())
         return;
     if (DaemonsIsHalftone() && gGlobalFieldTintMode == QL_TINT_NONE
-     && (paletteIdx == PALSLOT_PLAYER || paletteIdx == PALSLOT_PLAYER_REFLECTION || paletteIdx == Follower_PaletteSlot()))
+     && (paletteIdx == PALSLOT_PLAYER || paletteIdx == PALSLOT_PLAYER_REFLECTION || paletteIdx == Follower_PaletteSlot()
+         || paletteIdx == Follower_EmojiPaletteSlot()))
         return;
     switch (DaemonsFieldTint())
     {

@@ -29,6 +29,7 @@
 #include "constants/event_object_movement.h"
 #include "constants/quest_log.h"
 #include "data/follower_palettes.h"
+#include "daemons_feelings.h"
 
 //  T-18 P1: THE FOLLOWER -- it walks and hides (the user decided the plan 2026-10-20; every rule below is the plan's).
 //
@@ -61,6 +62,7 @@
 //  (a warp) it starts on the player's tile. State is in IWRAM and nothing of it is saved.
 
 #define FOLLOWER_TAG     0x5418   // its tiles and its palette (T-18)
+#define EMOJI_TAG        0x5419   // the daemon-emoji's palette, only while it shows (T-431 P3)
 #define TRAIL            16       // pixels behind the player: one tile
 #define FOLLOWER_Y       2        // the icon's body ends two rows above its cell; this puts it on the ground
 #define MAX_JUMP         32       // a move bigger than this in one frame is a warp, not a step
@@ -450,10 +452,20 @@ u8 Follower_PaletteSlot(void)
     return IndexOfSpritePaletteTag(FOLLOWER_TAG);
 }
 
+//  T-431 P3: the daemon-emoji's slot while it shows, or 0xFF -- it keeps its colour in HALFTONE as the follower does.
+u8 Follower_EmojiPaletteSlot(void)
+{
+    return IndexOfSpritePaletteTag(EMOJI_TAG);
+}
+
+static u8 LoadEmojiPalette(void);
+
 void Follower_RetintPalette(void)
 {
     if (IsOurs())
         LoadFollowerPalette();
+    if (Follower_EmojiPaletteSlot() != 0xFF)
+        LoadEmojiPalette();
 }
 
 //  ---------------------------------------------------------------- what it stands on (T-18 P3)
@@ -853,6 +865,139 @@ static void SpriteCB_FollowerEmote(struct Sprite *sprite)
     sprite->invisible = follower->invisible;
 }
 
+//  ---------------------------------------------------------------- the daemon-emoji (T-431 P3)
+//
+//  The bubble over it is a small screen with a tail, and on the glass a face built from three of its feelings, none of
+//  them named (DAEMONS tools/genemoji.py, graphics/misc/daemon_emoji.png: 27 frames of 16x16, three a row, frame
+//  mad * 9 + eyes * 3 + mouth). EYES from CALM: half-lidded at +20 or more, wide at -20 or less, open between. MOUTH
+//  from GLAD - SAD: up at +20, down at -20, flat between. TINT from MAD: none under 20, warm from 20, hot from 40 --
+//  the SUMMARY page's own lines (FEELINGS_LEAN, FEELINGS_QUIET, FEELINGS_MAD_LINE), so a face and its dot agree. A
+//  daemon never stamped feels nothing yet: open, flat, cool. It has its OWN palette (the trainers' bubbles share OBJ
+//  palette 0), loaded while it shows and freed after, greyed by friendship exactly as the follower is, and in HALFTONE
+//  left in colour with the follower (DaemonsGreyHalftoneFrame, ApplyGlobalFieldPaletteTint). With no slot free it
+//  is not drawn in another's colours: the caller falls back to the friendship bubble. One frame for the trainers'
+//  whole 60 (their bubble's 4 + 4 + 52), with the same hop.
+
+static const u16 sEmojiGfx[] = INCBIN_U16("graphics/misc/daemon_emoji.4bpp");
+static const u16 sEmojiPal[] = INCBIN_U16("graphics/misc/daemon_emoji.gbapal");
+
+#define EMOJI_FRAME(n) overworld_frame(sEmojiGfx, 2, 2, n)
+static const struct SpriteFrameImage sEmojiImages[27] = {
+    EMOJI_FRAME(0),  EMOJI_FRAME(1),  EMOJI_FRAME(2),  EMOJI_FRAME(3),  EMOJI_FRAME(4),  EMOJI_FRAME(5),
+    EMOJI_FRAME(6),  EMOJI_FRAME(7),  EMOJI_FRAME(8),  EMOJI_FRAME(9),  EMOJI_FRAME(10), EMOJI_FRAME(11),
+    EMOJI_FRAME(12), EMOJI_FRAME(13), EMOJI_FRAME(14), EMOJI_FRAME(15), EMOJI_FRAME(16), EMOJI_FRAME(17),
+    EMOJI_FRAME(18), EMOJI_FRAME(19), EMOJI_FRAME(20), EMOJI_FRAME(21), EMOJI_FRAME(22), EMOJI_FRAME(23),
+    EMOJI_FRAME(24), EMOJI_FRAME(25), EMOJI_FRAME(26),
+};
+
+static const struct OamData sEmojiOam = {
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(16x16),
+    .size = SPRITE_SIZE(16x16),
+    .priority = 1,
+};
+
+static const union AnimCmd sEmojiAnim[] = {
+    ANIMCMD_FRAME(0, 60),
+    ANIMCMD_END
+};
+static const union AnimCmd *const sEmojiAnims[] = { sEmojiAnim };
+
+static void SpriteCB_FollowerEmoji(struct Sprite *sprite);
+
+static const struct SpriteTemplate sEmojiTemplate = {
+    .tileTag = TAG_NONE,
+    .paletteTag = EMOJI_TAG,
+    .oam = &sEmojiOam,
+    .anims = sEmojiAnims,
+    .images = sEmojiImages,   // replaced by the one face before its first frame (CreateEmojiSprite)
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_FollowerEmoji,
+};
+
+static u8 LoadEmojiPalette(void)
+{
+    u16 buf[16];
+    u8 idx = IndexOfSpritePaletteTag(EMOJI_TAG);
+
+    if (idx == 0xFF)
+        idx = AllocSpritePalette(EMOJI_TAG);
+    if (idx == 0xFF)
+        return 0xFF;
+    CpuCopy16(sEmojiPal, buf, PLTT_SIZE_4BPP);
+    Saturation_ApplyToBuffer(buf, sFollower.friendship);   // T-424: greyed by friendship, as the follower is
+    LoadPalette(buf, OBJ_PLTT_ID(idx), PLTT_SIZE_4BPP);
+    ApplyGlobalFieldPaletteTint(idx);
+    UpdateSpritePaletteWithWeather(idx);
+    return idx;
+}
+
+static void SpriteCB_FollowerEmoji(struct Sprite *sprite)
+{
+    if (sprite->animEnded || !IsOurs())
+    {
+        DestroySprite(sprite);
+        FreeSpritePaletteByTag(EMOJI_TAG);
+        return;
+    }
+    SpriteCB_FollowerEmote(sprite);
+}
+
+//  The face for these feelings: frame mad * 9 + eyes * 3 + mouth.
+static u8 EmojiFrame(struct Pokemon *mon)
+{
+    struct DaemonFeelings f;
+    s16 lean;
+    u8 eyes, mouth, tint;
+
+    if (!Feelings_IsSet(&mon->box))
+        return 0 * 9 + 1 * 3 + 1;   // never stamped: open, flat, cool
+    Feelings_Get(&mon->box, &f);
+    eyes = f.calm >= FEELINGS_LEAN ? 0 : f.calm <= -FEELINGS_LEAN ? 2 : 1;
+    lean = (s16)f.glad - f.sad;
+    mouth = lean >= FEELINGS_LEAN ? 2 : lean <= -FEELINGS_LEAN ? 0 : 1;
+    tint = f.mad >= FEELINGS_MAD_LINE ? 2 : f.mad >= FEELINGS_QUIET ? 1 : 0;
+    return tint * 9 + eyes * 3 + mouth;
+}
+
+#if DAEMONS_DEBUG
+EWRAM_DATA u8 gFollowerDebugEmoji = 0;   // the last face drawn + 1 (0: none yet, 0xFF: the fallback bubble), for the theatre
+#endif
+
+static u8 CreateEmojiSprite(struct Pokemon *mon)
+{
+    u8 i, spriteId, frame;
+
+    // A second press before the first face has gone: the old one goes now, so the palette is never freed under a
+    // face still showing.
+    for (i = 0; i < MAX_SPRITES; i++)
+        if (gSprites[i].inUse && gSprites[i].callback == SpriteCB_FollowerEmoji)
+            DestroySprite(&gSprites[i]);
+    if (LoadEmojiPalette() == 0xFF)
+    {
+#if DAEMONS_DEBUG
+        gFollowerDebugEmoji = 0xFF;
+#endif
+        return MAX_SPRITES;
+    }
+    frame = EmojiFrame(mon);
+    spriteId = CreateSpriteAtEnd(&sEmojiTemplate, 0, 0, 0x52);
+    if (spriteId == MAX_SPRITES)
+    {
+        FreeSpritePaletteByTag(EMOJI_TAG);
+        return MAX_SPRITES;
+    }
+    gSprites[spriteId].images = &sEmojiImages[frame];   // the anim's frame 0 is this face
+    gSprites[spriteId].coordOffsetEnabled = TRUE;
+    gSprites[spriteId].invisible = TRUE;                 // until the callback has placed it
+#if DAEMONS_DEBUG
+    gFollowerDebugEmoji = frame + 1;
+#endif
+    return spriteId;
+}
+
 void Follower_Talk(void)
 {
     s8 slot = Follower_LeadSlot();
@@ -886,7 +1031,13 @@ void Follower_Talk(void)
     else if (sFollower.sumX < 0)
         sFollower.facing = DIR_WEST;
 
-    spriteId = CreateEmoticonSprite(mood == MOOD_NOTICE ? EMOTICON_DOUBLE_EXCL : sTierEmote[band], SpriteCB_FollowerEmote);
+    // T-431 P3: its own face, from what it feels -- unless it is noticing something (the hidden item's !! stays), or
+    // there is no palette slot for the face, when the friendship bubble of T-18 P2 shows in the trainers' colours.
+    spriteId = MAX_SPRITES;
+    if (mood != MOOD_NOTICE)
+        spriteId = CreateEmojiSprite(mon);
+    if (spriteId == MAX_SPRITES)
+        spriteId = CreateEmoticonSprite(mood == MOOD_NOTICE ? EMOTICON_DOUBLE_EXCL : sTierEmote[band], SpriteCB_FollowerEmote);
     if (spriteId != MAX_SPRITES)
         gSprites[spriteId].data[3] = -5;
 }

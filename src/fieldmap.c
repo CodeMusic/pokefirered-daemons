@@ -1268,6 +1268,9 @@ void DaemonsGreyHalftoneFrame(void)
         skip |= HT_OBJ(PALSLOT_PLAYER) | HT_OBJ(PALSLOT_PLAYER_REFLECTION);
         if (follower < 16)
             skip |= HT_OBJ(follower);
+        follower = Follower_EmojiPaletteSlot();   // T-431 P3: its face keeps its colour too (the user, 2026-10-21)
+        if (follower < 16)
+            skip |= HT_OBJ(follower);
     }
     splash = -1;
     washed = -1;
