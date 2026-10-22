@@ -1,4 +1,5 @@
 #include "global.h"
+#include "daemons_feelings.h"   // T-433
 #include "gflib.h"
 #include "decompress.h"
 #include "scanline_effect.h"
@@ -424,6 +425,7 @@ static void Task_Hof_InitTeamSaveData(u8 taskId)
     u16 i;
     struct HallofFameTeam* lastSavedTeam = (struct HallofFameTeam *)(gDecompressionBuffer);
 
+    Feelings_OnHallOfFame();   // T-433: the whole party, before the save below keeps it
     SaveQuestLogData();
     if (!gHasHallOfFameRecords)
     {

@@ -510,4 +510,5 @@ gSpecials::
 	def_special Follower_SceneHide   @ T-18 P3: hidefollower
 	def_special Follower_SceneShow   @ T-18 P3: showfollower
 	def_special Feelings_CheckpointHeal   @ T-431: after HealPlayerParty at a CHECKPOINT
+	def_special Feelings_RemnantCalmed    @ T-433: DAEMON TOWER 6F, the REMNANT's spirit calmed
 gSpecialsEnd::

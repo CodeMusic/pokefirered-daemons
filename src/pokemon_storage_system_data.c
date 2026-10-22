@@ -739,6 +739,7 @@ void ReleaseMon(void)
 
         PurgeMonOrBoxMon(boxId, sCursorPosition);
     }
+    Feelings_OnRelease();   // T-433: the party sees one go
     TrySetDisplayMonData();
 }
 

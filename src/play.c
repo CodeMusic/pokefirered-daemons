@@ -1,4 +1,5 @@
 #include "global.h"
+#include "daemons_feelings.h"   // T-433
 #include "gflib.h"
 #include "event_object_lock.h"
 #include "event_data.h"
@@ -749,6 +750,9 @@ static void Teardown(u8 taskId, const u8 *script)
     struct Play *play = GetPlay(taskId);
     u8 i;
 
+    if (play->ringCount >= FEEL_PLAYED_NOTES)
+        Feelings_OnPlayed();   // T-433: eight notes or more, played to the lead
+
     if (play->instrument == PLAY_FLUTE)
         m4aMPlayStop(&gMPlayInfo_SE2);   // the HARP's last note rings on; a breath stops with the player
     for (i = 0; i < 12; i++)
@@ -890,6 +894,7 @@ static void Join(struct Play *play, u8 song)
     play->clock = 0;
     play->ringCount = 0;
     play->state = STATE_JOINED;
+    Feelings_OnPlayed();   // T-433: a song matched, played to the lead
     Decide(play);
 }
 

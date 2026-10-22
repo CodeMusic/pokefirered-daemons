@@ -2968,6 +2968,7 @@ static void BattleIntroPrintWildMonAttacked(void)
     {
         gBattleMainFunc = BattleIntroPrintPlayerSendsOut;
         PrepareStringBattle(STRINGID_INTROMSG, 0);
+        Feelings_OnGhostBattleIntro();   // T-433: a REMNANT unveiled (once a game), masked, or dreamt
         if (IS_BATTLE_TYPE_GHOST_WITH_SCOPE(gBattleTypeFlags))
         {
             gBattleScripting.battler = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
@@ -4494,6 +4495,7 @@ bool8 TryRunFromBattle(u8 battler)
     {
         gLastUsedItem = gBattleMons[battler].item;
         gProtectStructs[battler].fleeType = FLEE_ITEM;
+        Feelings_OnHeldItemActed(battler, gLastUsedItem);   // T-433: ESCAPE HATCH, out safely
         effect++;
     }
     else if (gBattleMons[battler].ability == ABILITY_RUN_AWAY)

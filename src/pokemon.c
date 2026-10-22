@@ -4130,7 +4130,6 @@ bool8 ExecuteTableBasedItemEffect(struct Pokemon *mon, u16 item, u8 partyIndex, 
         if (friendship > MAX_FRIENDSHIP)                                                                \
             friendship = MAX_FRIENDSHIP;                                                                \
         SetMonData(mon, MON_DATA_FRIENDSHIP, &friendship);                                              \
-        Feelings_OnItemFriendship(mon, item);   /* T-431 */                                             \
     }                                                                                                   \
 }
 
@@ -4641,6 +4640,8 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
             break;
         }
     }
+    if (retVal == FALSE && !usedByAI)
+        Feelings_OnItemUsed(mon, item);   // T-433: what the item pushes, and any friendship it adds
     return retVal;
 }
 

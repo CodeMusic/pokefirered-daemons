@@ -24,6 +24,7 @@ PokemonTower_6F_EventScript_DefeatedMarowakGhost::
 	waitbuttonpress
 	waitmoncry
 	msgbox PokemonTower_6F_Text_MothersSpiritWasCalmed
+	special Feelings_RemnantCalmed  @ T-433: the party, calmer and a little sad
 	setvar VAR_MAP_SCENE_POKEMON_TOWER_6F, 1
 	releaseall
 	end

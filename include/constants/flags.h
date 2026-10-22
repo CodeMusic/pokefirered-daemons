@@ -1895,6 +1895,7 @@
 #define FLAG_TOWER_COLOUR_5F                  (DAEMONS_FLAGS_START + 0x3E8)
 #define FLAG_TOWER_COLOUR_6F                  (DAEMONS_FLAGS_START + 0x3E9)
 #define FLAG_TOWER_COLOUR_7F                  (DAEMONS_FLAGS_START + 0x3EA)
+#define FLAG_FEELINGS_REMNANT_UNVEILED        (DAEMONS_FLAGS_START + 0x3EB)   // T-433: the RESOLVER's reveal has frightened the party (once)
 
 //  BEGIN gbaglobalindex -- T-334: each fixed encounter of the GLOBAL INDEX, once gone (removeobject sets it). The beasts'
 //  and the edition daemons' are also set on every map load while they may not stand (event_data.c,

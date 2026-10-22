@@ -36,7 +36,7 @@
 #define FEEL_HEAL_CALM          20      // the CHECKPOINT's machine, chosen (never after a white-out)
 #define FEEL_WALK_GLAD          3       // every 128 steps, the daemon that follows
 #define FEEL_WALK_CALM          2
-#define FEEL_LEVEL_GLAD         6       // a level, in battle or from a candy
+#define FEEL_LEVEL_GLAD         6       // a level earned in battle (T-433: a candy's level earns none)
 #define FEEL_VITAMIN_GLAD       5
 #define FEEL_BATTLE_ITEM_GLAD   3
 #define FEEL_TM_GLAD            3       // taught a routine from a TM or a DRIVER
@@ -47,6 +47,34 @@
 #define FEEL_BOX_DAY_SAD        10      // back after more than a day
 #define FEEL_BOX_DAY_CALM       (-5)
 #define FEEL_BOX_HOURS_FROM     6       // ticks: an hour, under which coming back pushes nothing
+
+// T-433 (planned and answered 2026-10-21, docs/private/plan-items-feelings-2026-10-21.md; bible 4.9): items and moments.
+// What each item pushes is the table sItemFeelings in src/daemons_feelings.c; these are the moments. ALL DRAFT.
+#define FEEL_FLAVOUR_LIKED_GLAD     2   // a flavour TRAP eaten in battle that it likes...
+#define FEEL_FLAVOUR_DISLIKED_MAD   3   // ... or hates (vanilla confuses it; now it minds)
+#define FEEL_TM_FORGOT_SAD          2   // a routine forgotten to make room for a PLUGIN's
+#define FEEL_INTERRUPT_MAD          4   // woken by the INTERRUPT in battle: each sleeping daemon of yours
+#define FEEL_INTERRUPT_CALM         (-4)
+#define FEEL_UNVEILED_CALM          (-12)   // the RESOLVER unveils the REMNANT (DAEMON TOWER 6F): the party, once a game
+#define FEEL_MASKED_CALM            (-4)    // a masked REMNANT met without the RESOLVER: the party
+#define FEEL_REMNANT_DREAM_CALM     (-6)    // the REMNANT dream in DOLDRUM CAVE (T-254): the party
+#define FEEL_SPIRIT_CALMED_CALM     10      // the REMNANT's spirit calmed (6F): the party
+#define FEEL_SPIRIT_CALMED_SAD      4
+#define FEEL_LEADER_GLAD            10      // a LEADER, the four or the champion beaten: the party (on top of a win's)
+#define FEEL_EVOLVED_GLAD           8
+#define FEEL_EVOLVED_CALM           (-5)
+#define FEEL_EVO_STOPPED_MAD        3       // an evolution stopped with B
+#define FEEL_RELEASED_SAD           6       // a partner released: the rest of the party
+#define FEEL_HOF_GLAD               15      // the HALL OF FAME: the party
+#define FEEL_HOF_CALM               10
+#define FEEL_HOF_FRIENDSHIP         2
+#define FEEL_TRADED_CALM            (-15)   // arriving by an in-game trade: a stranger's hands
+#define FEEL_TRADED_SAD             4
+#define FEEL_PLAYED_GLAD            3       // your instrument played to the lead (eight notes, or a song matched)...
+#define FEEL_PLAYED_CALM            4
+#define FEEL_PLAYED_EVERY           6       // ... at most once in this many ticks (an hour)
+#define FEEL_PLAYED_NOTES           8       // notes in one playing that count, without a song
+#define FEEL_WEIGHT_SHARE_GLAD      3       // WEIGHT SHARE held through a win it sat out
 
 enum { FEEL_GLAD, FEEL_MAD, FEEL_SAD, FEEL_CALM, FEEL_COUNT };
 
@@ -71,13 +99,26 @@ u16 Feelings_Now(bool8 *fromClock);
 
 // The events (each a no-op on a daemon that is not the player's own).
 void Feelings_OnFriendshipEvent(struct Pokemon *mon, u8 event);   // the end of AdjustFriendship
-void Feelings_OnItemFriendship(struct Pokemon *mon, u16 item);     // a vitamin, a battle item, a candy
+void Feelings_OnItemUsed(struct Pokemon *mon, u16 item);           // T-433: the end of PokemonUseItemEffects, when it worked
 void Feelings_OnBattleEnd(void);                                   // HandleEndTurn_FinishBattle
 void Feelings_OnWalk(void);                                        // every 128 steps
 void Feelings_OnHeldItemGiven(struct Pokemon *mon);
 void Feelings_OnDeposit(struct BoxPokemon *boxMon);                // into a box: restamped
 void Feelings_OnWithdraw(struct Pokemon *mon);                     // out of one: a small sad push, by how long
 void Feelings_CheckpointHeal(void);                                // special, after HealPlayerParty at a CHECKPOINT
+
+// T-433: the moments (each a no-op outside the player's own party, and on an egg or an AWAY daemon).
+void Feelings_OnHeldItemActed(u8 battler, u16 item);               // a held item did its work in battle (once a battle)
+void Feelings_OnPokeFluteInBattle(void);                           // the INTERRUPT, before it wakes anyone
+void Feelings_OnGhostBattleIntro(void);                            // a REMNANT met: unveiled, masked, or the dream
+void Feelings_RemnantCalmed(void);                                 // special: DAEMON TOWER 6F, the spirit calmed
+void Feelings_OnRoutineForgotten(struct Pokemon *mon);             // a PLUGIN's routine took an old one's place
+void Feelings_OnEvolved(struct Pokemon *mon);
+void Feelings_OnEvolutionStopped(struct Pokemon *mon);
+void Feelings_OnRelease(void);                                     // a daemon released from the PC
+void Feelings_OnHallOfFame(void);
+void Feelings_OnTradeReceived(struct Pokemon *mon);                // an in-game trade's daemon, just arrived
+void Feelings_OnPlayed(void);                                      // the instrument, played to the lead
 
 // T-431 P2 and P4: what the SUMMARY's fourth page shows (docs/private/plan-feelings-2026-10-21.md sections 3 and 5).
 #define FEELINGS_GRID           9       // cells a side
@@ -100,6 +141,7 @@ const u8 *Feelings_BehaviourLine(struct BoxPokemon *boxMon, u8 friendship);
 #if DAEMONS_DEBUG
 void Feelings_DebugAge(u16 ticks);                                 // every stamp, party and boxes, made older
 void Feelings_DebugPushLead(u8 which);                             // FEEL_GLAD, MAD, SAD, or FEEL_CALM for AFRAID
+void Feelings_DebugUseItem(void);                                  // T-433: gSpecialVar_ItemId used on party slot 1
 // What the SUMMARY's fourth page last drew, for the theatre (tools/theatre_route.py's `summary`): [0] the line's
 // address, [1] its cell (col | row << 8) and the dot's colour << 16. 8 bytes, the DEBUG build only.
 extern u32 gFeelingsDebugShown[2];

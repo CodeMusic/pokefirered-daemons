@@ -1,4 +1,5 @@
 #include "global.h"
+#include "daemons_feelings.h"   // T-433
 #include "gflib.h"
 #include "task.h"
 #include "util.h"
@@ -1784,6 +1785,7 @@ static bool8 DoTradeAnim_Cable(void)
         break;
     case STATE_TRY_EVOLUTION: // Only if in-game trade, link trades use CB2_TryLinkTradeEvolution
         TradeMons(gSpecialVar_0x8005, 0);
+        Feelings_OnTradeReceived(&gPlayerParty[gSpecialVar_0x8005]);   // T-433: a stranger's hands
         gCB2_AfterEvolution = CB2_InGameTrade;
         evoTarget = GetEvolutionTargetSpecies(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PLAYER]], EVO_MODE_TRADE, ITEM_NONE);
         if (evoTarget != SPECIES_NONE)
@@ -2284,6 +2286,7 @@ static bool8 DoTradeAnim_Wireless(void)
         break;
     case STATE_TRY_EVOLUTION: // Only if in-game trade, link trades use CB2_TryLinkTradeEvolution
         TradeMons(gSpecialVar_0x8005, 0);
+        Feelings_OnTradeReceived(&gPlayerParty[gSpecialVar_0x8005]);   // T-433: a stranger's hands
         gCB2_AfterEvolution = CB2_InGameTrade;
         evoTarget = GetEvolutionTargetSpecies(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PLAYER]], EVO_MODE_TRADE, ITEM_NONE);
         if (evoTarget != SPECIES_NONE)

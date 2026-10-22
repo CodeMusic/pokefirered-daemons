@@ -58,6 +58,7 @@ enum
     EV_LEAD_SHINY,                                                          // T-18 P3
     EV_FEEL_SLOT1, EV_FEEL_SLOT6 = EV_FEEL_SLOT1 + PARTY_SIZE - 1,            // T-431
     EV_FEEL_3H, EV_FEEL_12H, EV_FEEL_DAY, EV_FEEL_GLAD, EV_FEEL_MAD, EV_FEEL_SAD, EV_FEEL_AFRAID,
+    EV_FEEL_USE_ITEM,                                                       // T-433
 };
 
 struct DbgRow { const u8 *name; u8 kind; u8 arg; };
@@ -171,6 +172,7 @@ static const u8 sName_FeelGlad[]    = _("PUSH GLAD +30");
 static const u8 sName_FeelMad[]     = _("PUSH MAD +30");
 static const u8 sName_FeelSad[]     = _("PUSH SAD +30");
 static const u8 sName_FeelAfraid[]  = _("PUSH AFRAID (CALM -30)");
+static const u8 sName_FeelUseItem[] = _("USE THE ITEM ON SLOT 1");   // T-433: gSpecialVar_ItemId, poked by the theatre
 
 //  THE STORY'S ORDER: the opening, the shoes and the INDEX, OPUS on THE REPO's shelf, then CAIRN's MARK and NOTEBOOK,
 //  the school, the ship, the DRIVERS, BRAZEN's tea and REVEAL, HALFTONE, the sleeper, the GUIDE, and last what only
@@ -276,6 +278,7 @@ static const struct DbgRow sRows_Feelings[] = {
     { sName_FeelMad,    R_GIVE, EV_FEEL_MAD },
     { sName_FeelSad,    R_GIVE, EV_FEEL_SAD },
     { sName_FeelAfraid, R_GIVE, EV_FEEL_AFRAID },
+    { sName_FeelUseItem, R_GIVE, EV_FEEL_USE_ITEM },
 };
 
 static const struct { const struct DbgRow *rows; u8 count; } sPages[PG_COUNT] = {
@@ -612,6 +615,7 @@ static void Apply(u8 ev, bool8 on)
     case EV_FEEL_MAD:     Feelings_DebugPushLead(FEEL_MAD); return;
     case EV_FEEL_SAD:     Feelings_DebugPushLead(FEEL_SAD); return;
     case EV_FEEL_AFRAID:  Feelings_DebugPushLead(FEEL_CALM); return;
+    case EV_FEEL_USE_ITEM: Feelings_DebugUseItem(); return;                     // T-433
     }
     if (ev >= EV_YEAR1 && ev <= EV_YEAR12)
     {

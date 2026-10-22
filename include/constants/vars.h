@@ -248,7 +248,7 @@
 #define VAR_HOLIDAY_YEAR           0x40C0 // T-416: the year the holiday gifts were last given in (real year - 2000; play-time years have bit 15)
 #define VAR_DREAM_LOG_STAMP        0x40C1 // T-412: when a dream began to wait -- 2 x its day + 1 if past dawn, + 1 (0 none waiting)
 #define VAR_DREAM_LED              0x40C2 // T-412: the step + 1 of the attendant's last FIRST dream told, until where it led is said (0 none)
-#define VAR_0x40C3                 0x40C3
+#define VAR_FEELINGS_PLAYED        0x40C3 // T-433: when the instrument last gladdened the lead (feelings ticks + 1; 0 never)
 #define VAR_0x40C4                 0x40C4
 #define VAR_0x40C5                 0x40C5
 #define VAR_0x40C6                 0x40C6

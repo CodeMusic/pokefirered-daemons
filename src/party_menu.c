@@ -1670,6 +1670,7 @@ static void DisplaySwitchedHeldItemMessage(u16 item, u16 item2, bool8 keepOpen)
 static void GiveItemToMon(struct Pokemon *mon, u16 item)
 {
     u8 itemBytes[2];
+    bool8 wasEmpty = (GetMonData(mon, MON_DATA_HELD_ITEM) == ITEM_NONE);   // T-433
 
     if (ItemIsMail(item) == TRUE)
     {
@@ -1679,7 +1680,8 @@ static void GiveItemToMon(struct Pokemon *mon, u16 item)
     itemBytes[0] = item;
     itemBytes[1] = item >> 8;
     SetMonData(mon, MON_DATA_HELD_ITEM, itemBytes);
-    Feelings_OnHeldItemGiven(mon);   // T-431
+    if (wasEmpty)
+        Feelings_OnHeldItemGiven(mon);   // T-431; T-433: only into an empty hand
 }
 
 static u8 TryTakeMonItem(struct Pokemon *mon)
@@ -5029,6 +5031,7 @@ static void Task_ReplaceMoveWithTMHM(u8 taskId)
     StringCopy(gStringVar2, gMoveNames[move]);
     RemoveMonPPBonus(mon, moveIdx);
     SetMonMoveSlot(mon, gPartyMenu.learnMoveId, moveIdx);
+    Feelings_OnRoutineForgotten(mon);   // T-433: something given up for it
     Task_LearnedMove(taskId);
 }
 

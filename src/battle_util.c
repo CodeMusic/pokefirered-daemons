@@ -2487,7 +2487,20 @@ enum
         effect = ITEM_STATS_CHANGE;                                                         \
     }
 
+static u8 ItemBattleEffects_(u8 caseID, u8 battlerId, bool8 moveTurn);
+
+// T-433: vanilla's, then -- when a held item acted -- what it pushes (Feelings_OnHeldItemActed: the player's side, once
+// a battle). Every branch that acts leaves the battler in gBattleScripting.battler and the item in gLastUsedItem.
 u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
+{
+    u8 effect = ItemBattleEffects_(caseID, battlerId, moveTurn);
+
+    if (effect != 0 && caseID != ITEMEFFECT_KINGSROCK_SHELLBELL)
+        Feelings_OnHeldItemActed(gBattleScripting.battler, gLastUsedItem);
+    return effect;
+}
+
+static u8 ItemBattleEffects_(u8 caseID, u8 battlerId, bool8 moveTurn)
 {
     int i = 0;
     u8 effect = ITEM_NO_EFFECT;

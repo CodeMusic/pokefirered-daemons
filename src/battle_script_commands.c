@@ -1,4 +1,5 @@
 #include "global.h"
+#include "daemons_feelings.h"   // T-433
 #include "daemon_saturation.h"
 #include "gflib.h"
 #include "item.h"
@@ -1636,6 +1637,7 @@ static void Cmd_adjustnormaldamage(void)
         {
             gMoveResultFlags |= MOVE_RESULT_FOE_HUNG_ON;
             gLastUsedItem = gBattleMons[gBattlerTarget].item;
+            Feelings_OnHeldItemActed(gBattlerTarget, gLastUsedItem);   // T-433: FAILSAFE held on
         }
     }
     gBattlescriptCurrInstr++;
@@ -1679,6 +1681,7 @@ static void Cmd_adjustnormaldamage2(void)
         {
             gMoveResultFlags |= MOVE_RESULT_FOE_HUNG_ON;
             gLastUsedItem = gBattleMons[gBattlerTarget].item;
+            Feelings_OnHeldItemActed(gBattlerTarget, gLastUsedItem);   // T-433: FAILSAFE held on
         }
     }
     gBattlescriptCurrInstr++;
@@ -5664,6 +5667,7 @@ static void Cmd_adjustsetdamage(void)
         {
             gMoveResultFlags |= MOVE_RESULT_FOE_HUNG_ON;
             gLastUsedItem = gBattleMons[gBattlerTarget].item;
+            Feelings_OnHeldItemActed(gBattlerTarget, gLastUsedItem);   // T-433: FAILSAFE held on
         }
     }
     gBattlescriptCurrInstr++;
@@ -6185,6 +6189,7 @@ static void Cmd_various(void)
         }
         break;
     case VARIOUS_CHECK_POKEFLUTE:
+        Feelings_OnPokeFluteInBattle();   // T-433: each of yours asleep, woken with a jolt
         gBattleCommunication[MULTISTRING_CHOOSER] = 0;
         monToCheck = 0;
         for (i = 0; i < gBattlersCount; i++)
@@ -7200,6 +7205,7 @@ static void Cmd_tryKO(void)
                 gBattleMoveDamage = gBattleMons[gBattlerTarget].hp - 1;
                 gMoveResultFlags |= MOVE_RESULT_FOE_HUNG_ON;
                 gLastUsedItem = gBattleMons[gBattlerTarget].item;
+                Feelings_OnHeldItemActed(gBattlerTarget, gLastUsedItem);   // T-433
             }
             else
             {

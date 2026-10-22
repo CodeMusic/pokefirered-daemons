@@ -412,7 +412,7 @@ struct BattleStruct
     u8 chosenMovePositions[MAX_BATTLERS_COUNT];
     u8 stateIdAfterSelScript[MAX_BATTLERS_COUNT];
     u8 feelingsTookPart; // T-431: a bit a party slot, each daemon sent out this battle (was field_88, unused)
-    u8 field_89; // unused
+    u8 feelingsHeldActed; // T-433: a bit a party slot, its held item has pushed a feeling this battle (was field_89, unused)
     u8 field_8A; // unused
     u8 playerPartyIdx;
     u8 field_8C; // unused

@@ -197,12 +197,16 @@ static const u8 sItemEffect_Calcium[10] = {
     VITAMIN_FRIENDSHIP_CHANGE(7),
 };
 
+// T-433 (the user, 2026-10-21): the INCREMENT robs a daemon of its natural growth. Vanilla's +5/+3/+2 friendship is
+// cut to +1/+1/0, and it pushes MAD +5 (src/daemons_feelings.c), not a level's GLAD.
 static const u8 sItemEffect_RareCandy[10] = {
     [3] = ITEM3_LEVEL_UP,
     [4] = ITEM4_REVIVE | ITEM4_HEAL_HP,
     [5] = ITEM5_FRIENDSHIP_ALL,
     [6] = ITEM6_HEAL_HP_LVL_UP,
-    VITAMIN_FRIENDSHIP_CHANGE(7),
+    [7] = 1, // Friendship change, low
+    [8] = 1, // Friendship change, mid
+    [9] = 0, // Friendship change, high
 };
 
 static const u8 sItemEffect_PPUp[9] = {
