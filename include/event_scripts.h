@@ -1220,6 +1220,7 @@ extern const u8 DaemonsDebug_EventScript_Artsai[];
 extern const u8 DaemonsDebug_EventScript_Crystal[];
 extern const u8 DaemonsDebug_EventScript_Warden[];
 extern const u8 DaemonsDebug_EventScript_Fir[];
+extern const u8 DaemonsDebug_EventScript_FirPort[];
 extern const u8 DaemonsDebug_EventScript_Glitch[];
 extern const u8 DaemonsDebug_EventScript_Witness[];
 extern const u8 DaemonsDebug_EventScript_Nexus[];

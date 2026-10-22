@@ -205,8 +205,6 @@ DaemonsDebug_EventScript_Warden::
 	releaseall
 	end
 
-@  FIR (T-10). The S.S. ANNE sailed (so her voyage is over, as ISLANDS warns), the fir not yet heard in its key, the
-@  band's sheet in the NOTEBOOK or not, and the pier's far strip beside the fir -- which otherwise takes SURF.
 @ Goal B: the glitch, on whatever map you are on.
 DaemonsDebug_EventScript_Glitch::
 	lockall
@@ -216,6 +214,9 @@ DaemonsDebug_EventScript_Glitch::
 	releaseall
 	end
 
+@  FIR (T-10). The S.S. ANNE sailed (so her voyage is over, as ISLANDS warns), the fir not yet heard in its key, the
+@  band's sheet in the NOTEBOOK or not, and the pier's far strip beside the fir -- walked to along the boardwalk since
+@  T-435, so this saves the walk, not SURF.
 DaemonsDebug_EventScript_Fir::
 	lockall
 	msgbox DaemonsDebug_Text_Fir, MSGBOX_YESNO
@@ -225,6 +226,27 @@ DaemonsDebug_EventScript_Fir::
 	msgbox DaemonsDebug_Text_FirSheet, MSGBOX_YESNO
 	call_if_eq VAR_RESULT, YES, DaemonsDebug_EventScript_FirSheet
 	call_if_lt VAR_MAP_SCENE_VERMILION_CITY, 3, DaemonsDebug_EventScript_FirSail
+	closemessage
+	warp MAP_SSANNE_EXTERIOR, 57, 27
+	waitstate
+	releaseall
+	end
+
+@  FIR IN PORT (T-435, the user, 2026-10-21). The same, with the S.S. ANNE still in port (her scene back below 2, the
+@  ship shown, the S.S. TICKET held so the pier's gate lets you by): the boardwalk is the way to the fir before she
+@  sails, and the walk back to VERMILION is the test.
+DaemonsDebug_EventScript_FirPort::
+	lockall
+	msgbox DaemonsDebug_Text_FirPort, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, DaemonsDebug_EventScript_Cancel
+	clearflag FLAG_FIR_IN_KEY
+	clearflag FLAG_NOTEBOOK_LOOSE_KEY
+	msgbox DaemonsDebug_Text_FirSheet, MSGBOX_YESNO
+	call_if_eq VAR_RESULT, YES, DaemonsDebug_EventScript_FirSheet
+	setvar VAR_MAP_SCENE_VERMILION_CITY, 0
+	setvar VAR_VERMILION_CITY_TICKET_CHECK_TRIGGER, 0
+	clearflag FLAG_HIDE_SS_ANNE
+	setflag FLAG_GOT_SS_TICKET
 	closemessage
 	warp MAP_SSANNE_EXTERIOR, 57, 27
 	waitstate
@@ -264,6 +286,12 @@ DaemonsDebug_Text_Fir::
 	.string "DEBUG: the singing fir?\p"
 	.string "The S.S. ANNE will have sailed,\n"
 	.string "and you stand beside the fir.$"
+
+DaemonsDebug_Text_FirPort::
+	.string "DEBUG: the singing fir, with the\n"
+	.string "S.S. ANNE still in port?\p"
+	.string "You stand beside the fir; the\n"
+	.string "boardwalk leads back to the pier.$"
 
 DaemonsDebug_Text_FirSheet::
 	.string "Hold the band's sheet?$"

@@ -94,6 +94,7 @@ enum StartMenuOption
     STARTMENU_DBG_WARDEN,    // T-260
     STARTMENU_DBG_MORE,      // the JUMP page's second page
     STARTMENU_DBG_FIR,       // T-10
+    STARTMENU_DBG_FIR_PORT,  // T-435: the fir with the S.S. ANNE still in port
     STARTMENU_DBG_WITNESS,   // T-235
     STARTMENU_DBG_NEXUS,     // T-395
     STARTMENU_DBG_BREATH,    // T-417: BREATHVERSE
@@ -186,6 +187,7 @@ static bool8 DbgCrystalCallback(void);
 static bool8 DbgWardenCallback(void);
 static bool8 DbgMoreCallback(void);
 static bool8 DbgFirCallback(void);
+static bool8 DbgFirPortCallback(void);
 static bool8 DbgWitnessCallback(void);
 static bool8 DbgNexusCallback(void);
 static bool8 DbgBreathCallback(void);
@@ -265,6 +267,7 @@ static const struct MenuAction sStartMenuActionTable[] = {
     [STARTMENU_DBG_WARDEN]  = { gText_DbgMenuWarden,  {.u8_void = DbgWardenCallback} },
     [STARTMENU_DBG_MORE]    = { gText_DbgMenuMore,    {.u8_void = DbgMoreCallback} },
     [STARTMENU_DBG_FIR]     = { gText_DbgMenuFir,     {.u8_void = DbgFirCallback} },
+    [STARTMENU_DBG_FIR_PORT] = { gText_DbgMenuFirPort, {.u8_void = DbgFirPortCallback} },   // T-435
     [STARTMENU_DBG_WITNESS] = { gText_DbgMenuWitness, {.u8_void = DbgWitnessCallback} },
     [STARTMENU_DBG_NEXUS]   = { gText_DbgMenuNexus,   {.u8_void = DbgNexusCallback} },
     [STARTMENU_DBG_BREATH]  = { gText_DbgMenuBreath,  {.u8_void = DbgBreathCallback} },
@@ -335,6 +338,7 @@ static const u8 *const sStartMenuDescPointers[] = {
     gStartMenuDesc_DbgWarden,
     gStartMenuDesc_DbgMore,
     gStartMenuDesc_DbgFir,
+    gStartMenuDesc_DbgFirPort,   // T-435
     gStartMenuDesc_DbgWitness,
     gStartMenuDesc_DbgNexus,
     gStartMenuDesc_DbgBreath,
@@ -482,6 +486,7 @@ static void SetUpStartMenu(void)
     {
         AppendToStartMenuItems(STARTMENU_DBG_WARDEN);
         AppendToStartMenuItems(STARTMENU_DBG_FIR);
+        AppendToStartMenuItems(STARTMENU_DBG_FIR_PORT);   // T-435
         AppendToStartMenuItems(STARTMENU_DBG_WITNESS);
         AppendToStartMenuItems(STARTMENU_DBG_NEXUS);
         AppendToStartMenuItems(STARTMENU_DBG_BREATH);   // T-417
@@ -1067,6 +1072,7 @@ static bool8 IsDaemonsDebugCallback(void)
         || sStartMenuCallback == DbgWardenCallback
         || sStartMenuCallback == DbgMoreCallback
         || sStartMenuCallback == DbgFirCallback
+        || sStartMenuCallback == DbgFirPortCallback
         || sStartMenuCallback == DbgWitnessCallback
         || sStartMenuCallback == DbgNexusCallback
         || sStartMenuCallback == DbgBreathCallback
@@ -1543,11 +1549,17 @@ static bool8 DbgMoreCallback(void)
     return DbgRedraw();
 }
 
-//  T-10: the fir needs SURF and a ship that has sailed; T-235's tile needs every understanding. Both are the end of
-//  a long road, so a field test on a phone could never reach them without these.
+//  T-10: the fir needs a ship that has sailed (and, before T-435's boardwalk, SURF); T-235's tile needs every
+//  understanding. Both are the end of a long road, so a field test on a phone could never reach them without these.
 static bool8 DbgFirCallback(void)
 {
     return DbgLeaveMenuForScript(DaemonsDebug_EventScript_Fir);
+}
+
+//  T-435: the fir with the S.S. ANNE still in port, so the boardwalk is walked before she sails as well as after.
+static bool8 DbgFirPortCallback(void)
+{
+    return DbgLeaveMenuForScript(DaemonsDebug_EventScript_FirPort);
 }
 
 static bool8 DbgGlitchCallback(void)
