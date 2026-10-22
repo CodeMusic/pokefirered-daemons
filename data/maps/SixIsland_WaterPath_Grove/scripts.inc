@@ -13,7 +13,7 @@ SixIsland_WaterPath_Grove_OnTransition::
 SixIsland_WaterPath_Grove_EventScript_Leave::
 	lockall
 	playse SE_M_CUT
-	warp MAP_SIX_ISLAND_WATER_PATH, 21, 34
+	warp MAP_SIX_ISLAND_WATER_PATH, 11, 39
 	waitstate
 	releaseall
 	end
