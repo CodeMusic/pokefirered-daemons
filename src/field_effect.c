@@ -2706,7 +2706,10 @@ static void ShowMonEffect_Outdoors_2(struct Task *task)
     u16 screenbase = ((GetGpuReg(REG_OFFSET_BG0CNT) >> 8) << 11);
     CpuCopy16(sFieldMoveStreaksOutdoors_Gfx, (void *)(VRAM + charbase), 0x200);
     CpuFill32(0, (void *)(VRAM + screenbase), 0x800);
-    LoadPalette(sFieldMoveStreaksOutdoors_Pal, BG_PLTT_ID(15), sizeof(sFieldMoveStreaksOutdoors_Pal));
+    // T-442: ONE palette, never sizeof. T-438 batch B's streaks were written with a 256-colour palette, so the .gbapal
+    // was 512 bytes and this load ran on past BG 15 into OBJ 0..14 with zeros: every person and the follower went black
+    // behind the banner, and only the player (whose sprite changes back) was ever repainted.
+    LoadPalette(sFieldMoveStreaksOutdoors_Pal, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
     LoadFieldMoveStreaksTilemapToVram(screenbase);
     task->data[0]++;
 }
@@ -2797,6 +2800,7 @@ static void ShowMonEffect_Outdoors_7(struct Task *task)
     ChangeBgY(0, 0, 0);
     Menu_LoadStdPal();
     FreeResourcesAndDestroySprite(&gSprites[task->data[15]], task->data[15]);
+    Follower_RetintPalette();   // T-442: and the follower's own (and its face's), whatever the banner borrowed
     FieldEffectActiveListRemove(FLDEFF_FIELD_MOVE_SHOW_MON);
     DestroyTask(FindTaskIdByFunc(Task_ShowMon_Outdoors));
 }
@@ -2857,7 +2861,7 @@ static void ShowMonEffect_Indoors_2(struct Task *task)
     task->data[12] = screenbase;
     CpuCopy16(sFieldMoveStreaksIndoors_Gfx, (void *)(VRAM + charbase), 0x80);
     CpuFill32(0, (void *)(VRAM + screenbase), 0x800);
-    LoadPalette(sFieldMoveStreaksIndoors_Pal, BG_PLTT_ID(15), sizeof(sFieldMoveStreaksIndoors_Pal));
+    LoadPalette(sFieldMoveStreaksIndoors_Pal, BG_PLTT_ID(15), PLTT_SIZE_4BPP);   // T-442: one palette, as outdoors
     task->data[0]++;
 }
 
@@ -2916,6 +2920,7 @@ static void ShowMonEffect_Indoors_7(struct Task *task)
     ChangeBgY(0, 0, 0);
     Menu_LoadStdPal();
     FreeResourcesAndDestroySprite(&gSprites[task->data[15]], task->data[15]);
+    Follower_RetintPalette();   // T-442
     FieldEffectActiveListRemove(FLDEFF_FIELD_MOVE_SHOW_MON);
     DestroyTask(FindTaskIdByFunc(Task_ShowMon_Indoors));
 }
