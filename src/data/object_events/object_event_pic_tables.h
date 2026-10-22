@@ -2490,6 +2490,66 @@ static const struct SpriteFrameImage sPicTable_BeachPalm[] = {           // T-41
     overworld_frame(gObjectEventPic_BeachPalm, 4, 4, 0),
 };
 
+static const struct SpriteFrameImage sPicTable_Cameraman[] = {   // T-439: the KINGFISHER, nine frames
+    overworld_frame(gObjectEventPic_Cameraman, 2, 4, 0),
+    overworld_frame(gObjectEventPic_Cameraman, 2, 4, 1),
+    overworld_frame(gObjectEventPic_Cameraman, 2, 4, 2),
+    overworld_frame(gObjectEventPic_Cameraman, 2, 4, 3),
+    overworld_frame(gObjectEventPic_Cameraman, 2, 4, 4),
+    overworld_frame(gObjectEventPic_Cameraman, 2, 4, 5),
+    overworld_frame(gObjectEventPic_Cameraman, 2, 4, 6),
+    overworld_frame(gObjectEventPic_Cameraman, 2, 4, 7),
+    overworld_frame(gObjectEventPic_Cameraman, 2, 4, 8),
+};
+
+static const struct SpriteFrameImage sPicTable_RichBoy[] = {   // T-439: the ERMINE, nine frames
+    overworld_frame(gObjectEventPic_RichBoy, 2, 4, 0),
+    overworld_frame(gObjectEventPic_RichBoy, 2, 4, 1),
+    overworld_frame(gObjectEventPic_RichBoy, 2, 4, 2),
+    overworld_frame(gObjectEventPic_RichBoy, 2, 4, 3),
+    overworld_frame(gObjectEventPic_RichBoy, 2, 4, 4),
+    overworld_frame(gObjectEventPic_RichBoy, 2, 4, 5),
+    overworld_frame(gObjectEventPic_RichBoy, 2, 4, 6),
+    overworld_frame(gObjectEventPic_RichBoy, 2, 4, 7),
+    overworld_frame(gObjectEventPic_RichBoy, 2, 4, 8),
+};
+
+static const struct SpriteFrameImage sPicTable_UnusedMan[] = {   // T-439: the PTARMIGAN stands: S, N, W
+    overworld_frame(gObjectEventPic_UnusedMan, 2, 4, 0),
+    overworld_frame(gObjectEventPic_UnusedMan, 2, 4, 1),
+    overworld_frame(gObjectEventPic_UnusedMan, 2, 4, 2),
+    overworld_frame(gObjectEventPic_UnusedMan, 2, 4, 0),
+    overworld_frame(gObjectEventPic_UnusedMan, 2, 4, 0),
+    overworld_frame(gObjectEventPic_UnusedMan, 2, 4, 1),
+    overworld_frame(gObjectEventPic_UnusedMan, 2, 4, 1),
+    overworld_frame(gObjectEventPic_UnusedMan, 2, 4, 2),
+    overworld_frame(gObjectEventPic_UnusedMan, 2, 4, 2),
+};
+
+static const struct SpriteFrameImage sPicTable_CastMuskrat[] = {   // T-439: the MUSKRAT, at rest in every frame
+    overworld_frame(gObjectEventPic_RedSurf, 4, 4, 6),
+    overworld_frame(gObjectEventPic_RedSurf, 4, 4, 7),
+    overworld_frame(gObjectEventPic_RedSurf, 4, 4, 8),
+    overworld_frame(gObjectEventPic_RedSurf, 4, 4, 6),
+    overworld_frame(gObjectEventPic_RedSurf, 4, 4, 6),
+    overworld_frame(gObjectEventPic_RedSurf, 4, 4, 7),
+    overworld_frame(gObjectEventPic_RedSurf, 4, 4, 7),
+    overworld_frame(gObjectEventPic_RedSurf, 4, 4, 8),
+    overworld_frame(gObjectEventPic_RedSurf, 4, 4, 8),
+};
+
+static const struct SpriteFrameImage sPicTable_CastGrebe[] = {   // T-439: the GREBE: faces at rest, swims with the bob
+    overworld_frame(gObjectEventPic_GreenSurf, 4, 4, 6),
+    overworld_frame(gObjectEventPic_GreenSurf, 4, 4, 7),
+    overworld_frame(gObjectEventPic_GreenSurf, 4, 4, 8),
+    overworld_frame(gObjectEventPic_GreenSurf, 4, 4, 0),
+    overworld_frame(gObjectEventPic_GreenSurf, 4, 4, 1),
+    overworld_frame(gObjectEventPic_GreenSurf, 4, 4, 2),
+    overworld_frame(gObjectEventPic_GreenSurf, 4, 4, 3),
+    overworld_frame(gObjectEventPic_GreenSurf, 4, 4, 4),
+    overworld_frame(gObjectEventPic_GreenSurf, 4, 4, 5),
+};
+
 static const struct SpriteFrameImage sPicTable_BreathFlute[] = {         // T-417 BREATHVERSE: one 16x16 frame
     overworld_frame(gObjectEventPic_BreathFlute, 2, 2, 0),
 };

@@ -14,6 +14,7 @@ bool8 CreatePCMenu(void);
 void ScriptMenu_DisplayPCStartupPrompt(void);
 
 bool8 (*ScriptMenu_HidePokemonPic(void))(void);
+u8 ScriptMenu_ShownPokemonPicPaletteSlot(void);   // T-439
 void QL_DestroyAbortedDisplay(void);
 void PicboxCancel(void);
 

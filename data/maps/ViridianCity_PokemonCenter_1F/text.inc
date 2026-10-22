@@ -14,3 +14,16 @@ ViridianCity_PokemonCenter_1F_Text_PokeCentersHealMons::
     .string "that HALTED.\p"
     .string "It comes back the way it went in.$"
 
+
+@  T-439, DRAFT: the MYNAH. "That is the lecture." is CRYSTAL's own sign-off (src/data/text/teachy_tv.h).
+ViridianCity_PokemonCenter_1F_Text_MynahEveryStream::
+    .string "I've seen every STREAM. Twice.$"
+
+ViridianCity_PokemonCenter_1F_Text_MynahTip::
+    .string "I've seen every STREAM. Twice.\p"
+    .string "You haven't seen the one\n"
+    .string "about {STR_VAR_1}. My favourite.$"
+
+ViridianCity_PokemonCenter_1F_Text_MynahSignOff::
+    .string "I've seen every STREAM. Twice.\p"
+    .string "That is the lecture.$"

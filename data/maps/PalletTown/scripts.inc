@@ -447,3 +447,21 @@ PalletTown_EventScript_SignLadyStartShowSign::
 	call PalletTown_EventScript_SignLadyShowSign
 	release
 	end
+
+@  T-439 (the user, 2026-10-22; DAEMONS docs/private/plan-cast-2026-10-22.md, tools/gencast.py): a PTARMIGAN whitewasher --
+@  the bird that turns white for winter and back again. He whitewashes the town's sign every spring and has never
+@  looked at what was under it. In winter (his coat: PatchObjectPalette) he is white himself, and says so.
+@  Every word DRAFT.
+PalletTown_EventScript_Ptarmigan::
+	lock
+	faceplayer
+	special DaemonsCast_Season
+	goto_if_eq VAR_RESULT, 0, PalletTown_EventScript_PtarmiganWinter   @ SEASON_WINTER
+	msgbox PalletTown_Text_Ptarmigan
+	release
+	end
+
+PalletTown_EventScript_PtarmiganWinter::
+	msgbox PalletTown_Text_PtarmiganWinter
+	release
+	end

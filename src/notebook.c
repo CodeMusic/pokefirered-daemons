@@ -239,6 +239,13 @@ static const u8 sText_Loose_Key[] = _(
         "Pencilled along the bottom: THE\n"
         "KEY. THE TUNE KNOWS THE REST.");   // T-401: restored -- the REST->IDLE move sweep had reached it (bc7cba35f)
 
+//  LOOSE PAGES -- T-439 (DRAFT): the KINGFISHER's photograph of the follower, taken in HALFTONE.
+static const u8 sTitle_Loose_Photo[] = _("THE PHOTO");
+static const u8 sText_Loose_Photo[] = _(
+        "A photograph, taken in HALFTONE\n"
+        "by the KINGFISHER.\p"
+        "It came out in colour.");
+
 //  LAB NOTES 2 -- *Quantum Translations*, the first verse: what counts as an observer.
 static const u8 sTitle_Lab_Observer[] = _("THE OBSERVER");
 static const u8 sText_Lab_Observer[] = _(
@@ -421,6 +428,7 @@ static const struct NotebookEntry sEntries[] =
     NB_DOC_LOOSE_PAGES_6
     { NB_LOOSE_PAGES,  NB_KIND_TEXT,  0, FLAG_NOTEBOOK_LOOSE_FOLDS,     0, sTitle_Loose_Folds,         sText_Loose_Folds },
     { NB_LOOSE_PAGES,  NB_KIND_TEXT,  0, FLAG_NOTEBOOK_LOOSE_KEY,       0, sTitle_Loose_Key,           sText_Loose_Key },
+    { NB_LOOSE_PAGES,  NB_KIND_TEXT,  0, FLAG_NOTEBOOK_LOOSE_PHOTO,     0, sTitle_Loose_Photo,         sText_Loose_Photo },   // T-439
     NB_DOC_LAB_NOTES_1
     { NB_LAB_NOTES,    NB_KIND_TEXT,  0, FLAG_NOTEBOOK_LAB_OBSERVER,    0, sTitle_Lab_Observer,        sText_Lab_Observer },
     { NB_LAB_NOTES,    NB_KIND_TEXT,  0, FLAG_NOTEBOOK_LAB_BOX,         0, sTitle_Lab_Box,             sText_Lab_Box },

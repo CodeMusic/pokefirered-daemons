@@ -60,3 +60,13 @@ IndigoPlateau_PokemonCenter_1F_Text_FactCollectorAgain::
 IndigoPlateau_PokemonCenter_1F_Text_BesideCollector::
     .string "I asked him why downhill.\n"
     .string "He said it again, slower.$"
+
+@  T-439, DRAFT: the SECRETARY BIRD.
+IndigoPlateau_PokemonCenter_1F_Text_SecretaryReceived::
+    .string "Your submission is received.$"
+
+IndigoPlateau_PokemonCenter_1F_Text_SecretaryRevise::
+    .string "Lost? Revise and resubmit.$"
+
+IndigoPlateau_PokemonCenter_1F_Text_SecretaryAccepted::
+    .string "Accepted. Minor revisions.$"

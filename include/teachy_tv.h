@@ -50,3 +50,5 @@ s8 TeachyTvFirstUntoldShow(void);
 void TeachyTvMarkShowAsTold(u8 script);
 void TeachyTvMarkEveryUnlockedShowAsTold(void);
 void TeachyTvRepairOldSave(void);   // T-420
+s8 TeachyTvFirstUnwatchedLecture(void);        // T-439: the MYNAH's tip
+const u8 *TeachyTvLectureTitle(u8 script);

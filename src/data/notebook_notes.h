@@ -81,6 +81,7 @@ static const u8 sNoteAbout_YEAR_LINE_SCIENCE_FAIR[] = _("In your own words, on i
 static const u8 sNoteAbout_YEAR_LINE_TRUCE_DAY[] = _("In your own words, on its day.");
 static const u8 sNoteAbout_YEAR_LINE_MARIGOLD_DAYS[] = _("In your own words, on its day.");
 static const u8 sNoteAbout_YEAR_LINE_GIVING_THANKS[] = _("In your own words, on its day.");
+static const u8 sNoteAbout_NOTEBOOK_LOOSE_PHOTO[] = _("A photo of my daemon, in colour.");
 
 static const struct NotebookNote sNotebookNotes[] =
 {
@@ -187,4 +188,5 @@ static const struct NotebookNote sNotebookNotes[] =
     { FLAG_DREAM_LOG_STARR, 100, MAP_UNDEFINED, NULL },
     { FLAG_DREAM_LOG_OWL, 101, MAP_UNDEFINED, NULL },
     { FLAG_DREAM_LOG_HOME, 102, MAP_UNDEFINED, NULL },
+    { FLAG_NOTEBOOK_LOOSE_PHOTO, 103, MAP_LAVENDER_TOWN, sNoteAbout_NOTEBOOK_LOOSE_PHOTO },
 };

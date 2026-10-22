@@ -42,3 +42,33 @@ FiveIsland_ResortGorgeous_Movement_SelphyEnterHome::
 FiveIsland_ResortGorgeous_EventScript_SelphysHouseSign::
 	msgbox FiveIsland_ResortGorgeous_Text_SelphysHouse, MSGBOX_SIGN
 	end
+
+@  T-439 (the user, 2026-10-22; DAEMONS docs/private/plan-cast-2026-10-22.md, tools/gencast.py): a young ERMINE -- the
+@  fur of kings, and a coat the season changes, not he (white in winter: PatchObjectPalette). He has hired the
+@  PAINTERS to paint the sea. Once a season he asks to see a daemon of the season's type and pays for the look
+@  (src/daemons_cast.c; VAR_ERMINE_SEASON). Every word DRAFT.
+FiveIsland_ResortGorgeous_EventScript_Ermine::
+	lock
+	faceplayer
+	msgbox FiveIsland_ResortGorgeous_Text_ErmineSea
+	special DaemonsCast_ErmineAsks
+	goto_if_eq VAR_RESULT, 0, FiveIsland_ResortGorgeous_EventScript_ErmineNextSeason
+	msgbox FiveIsland_ResortGorgeous_Text_ErmineThisSeason
+	goto_if_eq VAR_RESULT, 2, FiveIsland_ResortGorgeous_EventScript_ErmineNone
+	msgbox FiveIsland_ResortGorgeous_Text_ErmineThatOne
+	addmoney 1000
+	special DaemonsCast_ErminePaid
+	playse SE_SHOP
+	msgbox FiveIsland_ResortGorgeous_Text_ErminePaid
+	release
+	end
+
+FiveIsland_ResortGorgeous_EventScript_ErmineNone::
+	msgbox FiveIsland_ResortGorgeous_Text_ErmineNone
+	release
+	end
+
+FiveIsland_ResortGorgeous_EventScript_ErmineNextSeason::
+	msgbox FiveIsland_ResortGorgeous_Text_ErmineNextSeason
+	release
+	end

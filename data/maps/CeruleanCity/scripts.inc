@@ -6,7 +6,13 @@ CeruleanCity_OnTransition::
 	setworldmapflag FLAG_WORLD_MAP_CERULEAN_CITY
 	call_if_unset FLAG_GOT_SS_TICKET, CeruleanCity_EventScript_BlockExits
 	call_if_set FLAG_SYS_GAME_CLEAR, CeruleanCity_EventScript_CaveGuardStandsAside
+	call_if_set FLAG_BADGE02_GET, CeruleanCity_EventScript_MuskratDrifts   @ T-439
 	end
+
+@  T-439: becalmed until DOLDRUM's MARK, and then drifting -- slowly, the wrong way, still not paddling.
+CeruleanCity_EventScript_MuskratDrifts::
+	setobjectmovementtype LOCALID_CERULEAN_MUSKRAT, MOVEMENT_TYPE_WANDER_UP_AND_DOWN
+	return
 
 @  T-251: THE FIRST OF DOLDRUM CAVE'S TWO GATES IS PERMISSION. The guard's own line already says only the champion
 @  may go in, so once the REVIEW BOARD is beaten he stands aside. The second gate -- whether the player can read
@@ -363,4 +369,34 @@ CeruleanCity_EventScript_GymSign::
 	famechecker FAMECHECKER_MISTY, 0
 	msgbox CeruleanCity_Text_GymSign
 	releaseall
+	end
+
+@  T-439 (the user, 2026-10-22; DAEMONS docs/private/plan-cast-2026-10-22.md, tools/gencast.py): a young SLOTH, seated on the
+@  pier -- the animal that is still on purpose. He never explains the gym; he only sits. A third line once DOLDRUM's
+@  MARK is held. Every word DRAFT.
+CeruleanCity_EventScript_Sloth::
+	lock
+	goto_if_set FLAG_BADGE02_GET, CeruleanCity_EventScript_SlothMostly
+	msgbox CeruleanCity_Text_SlothStill
+	release
+	end
+
+CeruleanCity_EventScript_SlothMostly::
+	msgbox CeruleanCity_Text_SlothStillMostly
+	release
+	end
+
+@  T-439 (the user, 2026-10-22; DAEMONS docs/private/plan-cast-2026-10-22.md, tools/gencast.py): a MUSKRAT in a reed boat on
+@  DOLDRUM's river, becalmed (red_surf.png's frames at rest). He drifts after the MARK (OnTransition). Every word DRAFT.
+CeruleanCity_EventScript_Muskrat::
+	lock
+	faceplayer
+	goto_if_set FLAG_BADGE02_GET, CeruleanCity_EventScript_MuskratMoving
+	msgbox CeruleanCity_Text_MuskratBecalmed
+	release
+	end
+
+CeruleanCity_EventScript_MuskratMoving::
+	msgbox CeruleanCity_Text_MuskratMoving
+	release
 	end

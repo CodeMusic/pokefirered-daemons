@@ -41,3 +41,24 @@ LavenderTown_Text_PokemonTowerSign::
     .string "For the ones that halted.\l"
     .string "Please keep your voice down.$"
 
+
+@  T-439, DRAFT: the KINGFISHER.
+LavenderTown_Text_KingfisherHoldStill::
+    .string "Hold still.$"
+
+LavenderTown_Text_KingfisherInColour::
+    .string "...Huh. It came out in colour.\p"
+    .string "Nothing here ever does.$"
+
+LavenderTown_Text_KingfisherNothingEver::
+    .string "Nothing here ever does.$"
+
+@  T-439, DRAFT (not in the plan: nothing follows you).
+LavenderTown_Text_KingfisherNothingToShoot::
+    .string "Hold still. ...Nothing to shoot.$"
+
+@  T-439, DRAFT: the PEPPERED MOTH.
+LavenderTown_Text_PepperedMoth::
+    .string "Gran was pale. Then the soot.\n"
+    .string "We went dark. Soot went.\p"
+    .string "We're pale again. Fashion.$"

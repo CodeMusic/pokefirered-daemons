@@ -18,6 +18,7 @@
 #include "trainer_see.h"
 #include "trig.h"
 #include "daemons_holidays.h"
+#include "daemons_time.h"      // T-439: DaemonsSeason, for the coats
 #include "constants/maps.h"
 #include "constants/event_object_movement.h"
 #include "constants/event_objects.h"
@@ -488,6 +489,11 @@ static const u8 gInitialMovementTypeFacingDirections[MOVEMENT_TYPES_COUNT] = {
 //  T-416 P4: WINTER FIR and FIR LIGHTS -- a found fir glows a step brighter: NPC_GREEN lifted, in the dim fir's slot
 //  (PALSLOT_NPC_1, which no grove or the pier uses otherwise), so nobody else dressed in green glows with it.
 #define OBJ_EVENT_PAL_TAG_FIR_GLOW                    0x112B
+//  T-439: the ERMINE (RESORT SUBLIME) and the PTARMIGAN (BLANCHE), whose coats the season changes. Each rides the OWL's
+//  patch-at-spawn in PALSLOT_NPC_2, which neither of their maps uses, and PatchObjectPalette lays the WINTER coat in
+//  when DaemonsSeason() says so -- the only object palettes that follow the season.
+#define OBJ_EVENT_PAL_TAG_CAST_ERMINE                 0x112C
+#define OBJ_EVENT_PAL_TAG_CAST_PTARMIGAN              0x112D
 //  QUICKSILVER's locals share one palette of the town's own (T-119).
 #define OBJ_EVENT_PAL_TAG_NPC_TOWN_QUICKSILVER        0x1128
 //  BRAZEN's locals share one palette of the town's own (T-119).
@@ -610,6 +616,8 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_NpcTownDoldrum,           OBJ_EVENT_PAL_TAG_NPC_TOWN_DOLDRUM},
     {gObjectEventPal_NpcTownSlate,             OBJ_EVENT_PAL_TAG_NPC_TOWN_SLATE},
     {gObjectEventPal_NpcTownCallow,            OBJ_EVENT_PAL_TAG_NPC_TOWN_CALLOW},
+    {gObjectEventPal_CastErmine,               OBJ_EVENT_PAL_TAG_CAST_ERMINE},      // T-439: winter in PatchObjectPalette
+    {gObjectEventPal_CastPtarmigan,            OBJ_EVENT_PAL_TAG_CAST_PTARMIGAN},
     {},
 };
 
@@ -1668,7 +1676,9 @@ static void TryPatchDaemonTypePalette(const struct ObjectEventGraphicsInfo *grap
       && graphicsInfo->paletteTag < OBJ_EVENT_PAL_TAG_DAEMON_TYPE_BASE + NUMBER_OF_MON_TYPES)
      || graphicsInfo->paletteTag == OBJ_EVENT_PAL_TAG_NPC_OWL
      || graphicsInfo->paletteTag == OBJ_EVENT_PAL_TAG_FIR_DIM
-     || graphicsInfo->paletteTag == OBJ_EVENT_PAL_TAG_FIR_GLOW)
+     || graphicsInfo->paletteTag == OBJ_EVENT_PAL_TAG_FIR_GLOW
+     || graphicsInfo->paletteTag == OBJ_EVENT_PAL_TAG_CAST_ERMINE      // T-439: and the two coats the season changes
+     || graphicsInfo->paletteTag == OBJ_EVENT_PAL_TAG_CAST_PTARMIGAN)
         PatchObjectPalette(graphicsInfo->paletteTag, graphicsInfo->paletteSlot);
 }
 
@@ -2333,6 +2343,11 @@ void PatchObjectPalette(u16 paletteTag, u8 paletteSlot)
     u8 paletteIndex = FindObjectEventPaletteIndexByTag(paletteTag);
 
     LoadPalette(sObjectEventSpritePalettes[paletteIndex].data, OBJ_PLTT_ID(paletteSlot), PLTT_SIZE_4BPP);
+    // T-439: the ERMINE and the PTARMIGAN are white in winter -- the same sheet, the coat's own palette.
+    if (paletteTag == OBJ_EVENT_PAL_TAG_CAST_ERMINE && DaemonsSeason() == SEASON_WINTER)
+        LoadPalette(gObjectEventPal_CastErmineWinter, OBJ_PLTT_ID(paletteSlot), PLTT_SIZE_4BPP);
+    else if (paletteTag == OBJ_EVENT_PAL_TAG_CAST_PTARMIGAN && DaemonsSeason() == SEASON_WINTER)
+        LoadPalette(gObjectEventPal_CastPtarmiganWinter, OBJ_PLTT_ID(paletteSlot), PLTT_SIZE_4BPP);
     if (paletteTag == OBJ_EVENT_PAL_TAG_FIR_GLOW)
         DaemonsHolidayGlow(&gPlttBufferUnfaded[OBJ_PLTT_ID(paletteSlot)], &gPlttBufferFaded[OBJ_PLTT_ID(paletteSlot)]);
     DaemonsPaintShoes(paletteTag, paletteSlot);

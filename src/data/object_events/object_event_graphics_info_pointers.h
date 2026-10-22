@@ -204,6 +204,12 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_NexusHunter;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TownCallowLyrebird;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BeachPalm;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BreathFlute;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CastKingfisher;   // T-439
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CastErmine;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CastPtarmigan;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CastMuskrat;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CastGrebe;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_UnusedWoman;   // T-439: the PEPPERED MOTH
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TownUmbraAdult;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TownQuicksilverElder;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TownQuicksilverAdult;
@@ -433,6 +439,12 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_TOWN_CALLOW_LYREBIRD]       = &gObjectEventGraphicsInfo_TownCallowLyrebird,
     [OBJ_EVENT_GFX_BEACH_PALM]                 = &gObjectEventGraphicsInfo_BeachPalm,
     [OBJ_EVENT_GFX_BREATH_FLUTE]               = &gObjectEventGraphicsInfo_BreathFlute,
+    [OBJ_EVENT_GFX_CAST_KINGFISHER]            = &gObjectEventGraphicsInfo_CastKingfisher,   // T-439
+    [OBJ_EVENT_GFX_CAST_ERMINE]                = &gObjectEventGraphicsInfo_CastErmine,
+    [OBJ_EVENT_GFX_CAST_PTARMIGAN]             = &gObjectEventGraphicsInfo_CastPtarmigan,
+    [OBJ_EVENT_GFX_CAST_MUSKRAT]               = &gObjectEventGraphicsInfo_CastMuskrat,
+    [OBJ_EVENT_GFX_CAST_GREBE]                 = &gObjectEventGraphicsInfo_CastGrebe,
+    [OBJ_EVENT_GFX_CAST_MOTH]                  = &gObjectEventGraphicsInfo_UnusedWoman,
     [OBJ_EVENT_GFX_BURGLAR]                    = &gObjectEventGraphicsInfo_Burglar,
     [OBJ_EVENT_GFX_JUGGLER]                    = &gObjectEventGraphicsInfo_Juggler,
     [OBJ_EVENT_GFX_POKEMON_BREEDER]            = &gObjectEventGraphicsInfo_PokemonBreeder,

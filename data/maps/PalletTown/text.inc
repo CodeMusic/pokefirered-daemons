@@ -59,3 +59,15 @@ PalletTown_Text_OakYouEnjoyingTraveling::
     .string "You will go further than I did.\p"
     .string "I mean that kindly.$"
 
+
+@  T-439, DRAFT: the PTARMIGAN. The winter line is not in the plan's lines (it said only "says so").
+PalletTown_Text_Ptarmigan::
+    .string "Whitewash, every spring.\n"
+    .string "Folk ask what was under it.\p"
+    .string "Never looked. Not my job.$"
+
+PalletTown_Text_PtarmiganWinter::
+    .string "Whitewash, every spring.\n"
+    .string "Folk ask what was under it.\p"
+    .string "Never looked. Not my job.\p"
+    .string "Come winter, I'm white too.$"

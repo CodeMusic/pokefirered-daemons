@@ -111,3 +111,9 @@ Route20_Text_MistyTrainsHere::
 	.string "route, every morning, for years.\p"
 	.string "She says she is getting faster.\n"
 	.string "I have timed her. She is not.$"
+
+@  T-439, DRAFT: the GREBE.
+Route20_Text_Grebe::
+    .string "Hush, he's asleep.\p"
+    .string "He'll swim on his own\n"
+    .string "when he's ready. Not yet.$"

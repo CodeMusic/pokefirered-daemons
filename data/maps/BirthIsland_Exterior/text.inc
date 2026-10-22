@@ -31,3 +31,13 @@ BirthIsland_Exterior_Text_CrystalTakesTheReview::
 	.string "too.\p"
 	.string "She read who it was addressed\n"
 	.string "to, and kept it closed.$"
+
+@  T-439, DRAFT: PROTEUS shifting, three touches.
+BirthIsland_Exterior_Text_ProteusEdges::
+    .string "PROTEUS turns all edges.$"
+
+BirthIsland_Exterior_Text_ProteusShell::
+    .string "PROTEUS curls into a shell.$"
+
+BirthIsland_Exterior_Text_ProteusHolds::
+    .string "PROTEUS holds still.$"

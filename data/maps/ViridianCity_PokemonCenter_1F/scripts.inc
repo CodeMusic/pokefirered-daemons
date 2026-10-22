@@ -25,3 +25,26 @@ ViridianCity_PokemonCenter_1F_EventScript_Gentleman::
 ViridianCity_PokemonCenter_1F_EventScript_Youngster::
 	msgbox ViridianCity_PokemonCenter_1F_Text_PokeCentersHealMons, MSGBOX_NPC
 	end
+
+@  T-439 (the user, 2026-10-22; DAEMONS docs/private/plan-cast-2026-10-22.md, tools/gencast.py): a MYNAH, the STREAM's
+@  superfan -- the bird that repeats every word it hears. He names one lecture you hold and have not watched (a MARK's
+@  or an understanding's, src/daemons_cast.c); with none left he recites CRYSTAL's sign-off. Every word DRAFT.
+ViridianCity_PokemonCenter_1F_EventScript_Mynah::
+	lock
+	faceplayer
+	special DaemonsCast_MynahTip
+	goto_if_eq VAR_RESULT, 1, ViridianCity_PokemonCenter_1F_EventScript_MynahTip
+	goto_if_eq VAR_RESULT, 2, ViridianCity_PokemonCenter_1F_EventScript_MynahSignOff
+	msgbox ViridianCity_PokemonCenter_1F_Text_MynahEveryStream
+	release
+	end
+
+ViridianCity_PokemonCenter_1F_EventScript_MynahTip::
+	msgbox ViridianCity_PokemonCenter_1F_Text_MynahTip
+	release
+	end
+
+ViridianCity_PokemonCenter_1F_EventScript_MynahSignOff::
+	msgbox ViridianCity_PokemonCenter_1F_Text_MynahSignOff
+	release
+	end

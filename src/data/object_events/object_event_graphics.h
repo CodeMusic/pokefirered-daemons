@@ -69,6 +69,11 @@ const u16 gObjectEventPal_NpcTownBrazen[] = INCBIN_U16("graphics/object_events/p
 const u16 gObjectEventPal_NpcTownLurid[] = INCBIN_U16("graphics/object_events/palettes/npc_town_lurid.gbapal");
 const u16 gObjectEventPal_NpcTownVerdigris[] = INCBIN_U16("graphics/object_events/palettes/npc_town_verdigris.gbapal");
 const u16 gObjectEventPal_NpcTownHalftone[] = INCBIN_U16("graphics/object_events/palettes/npc_town_halftone.gbapal");
+//  T-439: the ERMINE's and the PTARMIGAN's coats, summer and winter (DAEMONS tools/gencast.py; PatchObjectPalette picks).
+const u16 gObjectEventPal_CastErmine[] = INCBIN_U16("graphics/object_events/palettes/cast_ermine.gbapal");
+const u16 gObjectEventPal_CastErmineWinter[] = INCBIN_U16("graphics/object_events/palettes/cast_ermine_winter.gbapal");
+const u16 gObjectEventPal_CastPtarmigan[] = INCBIN_U16("graphics/object_events/palettes/cast_ptarmigan.gbapal");
+const u16 gObjectEventPal_CastPtarmiganWinter[] = INCBIN_U16("graphics/object_events/palettes/cast_ptarmigan_winter.gbapal");
 const u16 gObjectEventPal_NpcTownArdor[] = INCBIN_U16("graphics/object_events/palettes/npc_town_ardor.gbapal");
 const u16 gObjectEventPal_NpcTownDoldrum[] = INCBIN_U16("graphics/object_events/palettes/npc_town_doldrum.gbapal");
 const u16 gObjectEventPal_NpcTownSlate[] = INCBIN_U16("graphics/object_events/palettes/npc_town_slate.gbapal");

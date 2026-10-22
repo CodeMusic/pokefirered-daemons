@@ -1225,6 +1225,17 @@ bool8 ScriptMenu_ShowPokemonPic(u16 species, u8 x, u8 y)
     return TRUE;
 }
 
+//  T-439: the OBJ palette slot of the picture a script is showing, or 0xFF -- HALFTONE leaves it in colour, as it
+//  leaves the follower (fieldmap.c's DaemonsGreyHalftoneFrame): the KINGFISHER's photograph comes out in colour.
+u8 ScriptMenu_ShownPokemonPicPaletteSlot(void)
+{
+    u8 taskId = FindTaskIdByFunc(Task_ScriptShowMonPic);
+
+    if (taskId == TASK_NONE || gTasks[taskId].tState >= 2)
+        return 0xFF;
+    return gSprites[gTasks[taskId].tSpriteId].oam.paletteNum;
+}
+
 bool8 (*ScriptMenu_HidePokemonPic(void))(void)
 {
     u8 taskId = FindTaskIdByFunc(Task_ScriptShowMonPic);

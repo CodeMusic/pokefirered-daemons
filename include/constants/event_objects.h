@@ -306,7 +306,16 @@
 //  NPC_GREEN, the palm's colours.
 #define OBJ_EVENT_GFX_BREATH_FLUTE 230
 
-#define NUM_OBJ_EVENT_GFX     231
+//  T-439 (the user, 2026-10-22): the unused sprites repurposed (DAEMONS tools/gencast.py). Three sheets had no graphics
+//  info at all (cameraman, rich_boy, unused_man) and the two 32x32 riders (red_surf, green_surf) had none of their own.
+#define OBJ_EVENT_GFX_CAST_KINGFISHER 231   // HALFTONE's photographer, npc_pink
+#define OBJ_EVENT_GFX_CAST_ERMINE 232       // RESORT SUBLIME, its own palette (a winter coat, patched at spawn)
+#define OBJ_EVENT_GFX_CAST_PTARMIGAN 233    // BLANCHE's whitewasher, its own palette (likewise)
+#define OBJ_EVENT_GFX_CAST_MUSKRAT 234      // DOLDRUM's river, a reed boat, DOLDRUM's palette
+#define OBJ_EVENT_GFX_CAST_GREBE 235        // ROUTE 20 in spring, npc_white
+#define OBJ_EVENT_GFX_CAST_MOTH 236         // HALFTONE's PEPPERED MOTH: vanilla's UnusedWoman info, which no id reached
+
+#define NUM_OBJ_EVENT_GFX     237
 
 // These are dynamic object gfx ids.
 // They correspond with the values of the VAR_OBJ_GFX_ID_X vars.

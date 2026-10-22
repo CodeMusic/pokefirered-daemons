@@ -22,6 +22,7 @@
 #include "event_object_movement.h"
 #include "constants/flags.h"
 #include "field_message_box.h"   // T-430: the first sight waits for no box
+#include "script_menu.h"         // T-439: the photograph keeps its colour
 
 extern const struct Tileset gTileset_General;   // T-275: the CHECKPOINT's tileset
 extern const struct Tileset gTileset_Nexus;     // T-395: THE NEXUS, made of paint
@@ -1269,6 +1270,9 @@ void DaemonsGreyHalftoneFrame(void)
         if (follower < 16)
             skip |= HT_OBJ(follower);
         follower = Follower_EmojiPaletteSlot();   // T-431 P3: its face keeps its colour too (the user, 2026-10-21)
+        if (follower < 16)
+            skip |= HT_OBJ(follower);
+        follower = ScriptMenu_ShownPokemonPicPaletteSlot();   // T-439: the KINGFISHER's photograph of it, too
         if (follower < 16)
             skip |= HT_OBJ(follower);
     }

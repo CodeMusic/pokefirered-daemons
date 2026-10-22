@@ -368,6 +368,32 @@ static const struct ListMenuItem sAllShows[] =
     { gTeachyTvString_Root7,          TTVSCR_ROOT7    },
 };
 
+//  T-439: the MYNAH in CALLOW's CHECKPOINT names one lecture you hold and have not watched -- a MARK's or an
+//  understanding's, the first in the list's order -- or -1 when every one you hold has been watched.
+s8 TeachyTvFirstUnwatchedLecture(void)
+{
+    u8 i;
+
+    for (i = TTVSCR_MARK1; i < TTVSCR_COUNT; ++i)
+    {
+        if (TeachyTvShowIsUnlocked(i) && !FlagGet(TeachyTvSeenFlag(i)))
+            return i;
+    }
+    return -1;
+}
+
+const u8 *TeachyTvLectureTitle(u8 script)
+{
+    u8 i;
+
+    for (i = 0; i < ARRAY_COUNT(sAllShows); ++i)
+    {
+        if (sAllShows[i].index == script)
+            return sAllShows[i].label;
+    }
+    return gText_EmptyString3;
+}
+
 static const struct ListMenuTemplate sListMenuTemplate = 
 {
     .items = NULL,      // filled in per open, from sAllShows

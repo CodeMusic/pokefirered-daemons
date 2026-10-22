@@ -105,3 +105,26 @@ IndigoPlateau_PokemonCenter_1F_EventScript_FactCollectorAgain::
 IndigoPlateau_PokemonCenter_1F_EventScript_BesideCollector::
 	msgbox IndigoPlateau_PokemonCenter_1F_Text_BesideCollector, MSGBOX_NPC
 	end
+
+@  T-439 (the user, 2026-10-22; DAEMONS docs/private/plan-cast-2026-10-22.md, tools/gencast.py): a SECRETARY BIRD -- a
+@  receptionist by name, a long-legged bird that takes everything down. He logs your submission; his line follows the
+@  result (the first seat's room once entered and the game not cleared is a loss), and never remarks on the order the
+@  seats are met in (vision.md section 6). Every word DRAFT.
+IndigoPlateau_PokemonCenter_1F_EventScript_SecretaryBird::
+	lock
+	faceplayer
+	goto_if_set FLAG_SYS_GAME_CLEAR, IndigoPlateau_PokemonCenter_1F_EventScript_SecretaryAccepted
+	goto_if_set FLAG_WORLD_MAP_POKEMON_LEAGUE_LORELEIS_ROOM, IndigoPlateau_PokemonCenter_1F_EventScript_SecretaryRevise
+	msgbox IndigoPlateau_PokemonCenter_1F_Text_SecretaryReceived
+	release
+	end
+
+IndigoPlateau_PokemonCenter_1F_EventScript_SecretaryRevise::
+	msgbox IndigoPlateau_PokemonCenter_1F_Text_SecretaryRevise
+	release
+	end
+
+IndigoPlateau_PokemonCenter_1F_EventScript_SecretaryAccepted::
+	msgbox IndigoPlateau_PokemonCenter_1F_Text_SecretaryAccepted
+	release
+	end

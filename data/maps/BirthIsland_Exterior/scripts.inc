@@ -24,7 +24,9 @@ BirthIsland_Exterior_OnTransition::
 	@  The place where a woman was left, and afterwards something else is
 	@  standing on it. Nobody remarks on that either.
 	setworldmapflag FLAG_WORLD_MAP_BIRTH_ISLAND_EXTERIOR
-	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_DEOXYS_N
+	@  T-439: each edition shows PROTEUS in its own shape -- CONTENT's all edges, CONTEXT's a shell (src/daemons_cast.c).
+	special DaemonsCast_ProteusShape
+	setvar VAR_TEMP_2, 0
 	setvar VAR_DEOXYS_INTERACTION_STEP_COUNTER, 0
 	setvar VAR_DEOXYS_INTERACTION_NUM, 0
 	call_if_set FLAG_FOUGHT_DEOXYS, BirthIsland_Exterior_EventScript_HideDeoxysAndPuzzle
@@ -96,6 +98,35 @@ BirthIsland_Exterior_EventScript_Deoxys::
 	playmoncry SPECIES_DEOXYS, CRY_MODE_ENCOUNTER
 	delay 40
 	waitmoncry
+	@  T-439 (the user, 2026-10-22): it does not fight yet. Talked to, it shifts shape -- and on the third touch it
+	@  holds still, and the battle starts (BirthIsland_Exterior_EventScript_Proteus). PROTEUS answers whoever holds on.
+	setvar VAR_TEMP_2, 0
+	release
+	end
+
+@  T-439: a touch shifts PROTEUS to the other shape; the third holds it still in its own (DEOXYS_N) and the battle
+@  starts. Every word DRAFT -- a daemon says nothing, so the box says what it does.
+BirthIsland_Exterior_EventScript_Proteus::
+	lock
+	addvar VAR_TEMP_2, 1
+	copyvar VAR_0x8004, VAR_TEMP_2
+	setvar VAR_0x8005, LOCALID_BIRTH_ISLAND_DEOXYS
+	special DaemonsCast_ProteusShift
+	playse SE_M_TELEPORT
+	goto_if_eq VAR_RESULT, 2, BirthIsland_Exterior_EventScript_ProteusHolds
+	goto_if_eq VAR_RESULT, 1, BirthIsland_Exterior_EventScript_ProteusShell
+	msgbox BirthIsland_Exterior_Text_ProteusEdges
+	release
+	end
+
+BirthIsland_Exterior_EventScript_ProteusShell::
+	msgbox BirthIsland_Exterior_Text_ProteusShell
+	release
+	end
+
+BirthIsland_Exterior_EventScript_ProteusHolds::
+	msgbox BirthIsland_Exterior_Text_ProteusHolds
+	closemessage
 	setvar VAR_LAST_TALKED, LOCALID_BIRTH_ISLAND_DEOXYS
 	seteventmon SPECIES_DEOXYS, 30
 	setflag FLAG_SYS_SPECIAL_WILD_BATTLE

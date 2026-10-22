@@ -91,3 +91,27 @@ FiveIsland_ResortGorgeous_Text_SelphyThanksYouMayGoNow::
 FiveIsland_ResortGorgeous_Text_SelphysHouse::
     .string "SELPHY'S HOUSE$"
 
+
+@  T-439, DRAFT: the ERMINE. His ask and its answers are not in the plan's lines (it named only the job).
+FiveIsland_ResortGorgeous_Text_ErmineSea::
+    .string "I paid them to paint the sea.\n"
+    .string "They keep painting it the\l"
+    .string "colour it IS. I said BLUE.$"
+
+FiveIsland_ResortGorgeous_Text_ErmineThisSeason::
+    .string "This season: {STR_VAR_1} DAEMONS.\n"
+    .string "Show me one. I'll pay.$"
+
+FiveIsland_ResortGorgeous_Text_ErmineThatOne::
+    .string "Ooh. That one. Here, for looking.$"
+
+FiveIsland_ResortGorgeous_Text_ErminePaid::
+    .string "{PLAYER} was paid ¥1000.$"
+
+FiveIsland_ResortGorgeous_Text_ErmineNone::
+    .string "None of yours is {STR_VAR_1}.\n"
+    .string "Come back with one.$"
+
+FiveIsland_ResortGorgeous_Text_ErmineNextSeason::
+    .string "Come back next season.\n"
+    .string "I'll want something else.$"

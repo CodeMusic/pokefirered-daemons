@@ -176,3 +176,21 @@ CeruleanCity_Text_GymSign::
 	.string "LEADER: BASIN\p"
 	.string "Keep Going Down And You Arrive$"
 
+
+@  T-439, DRAFT: the SLOTH.
+CeruleanCity_Text_SlothStill::
+    .string "I'm not stuck.\n"
+    .string "I'm being still.$"
+
+CeruleanCity_Text_SlothStillMostly::
+    .string "I'm not stuck.\n"
+    .string "I'm being still.\p"
+    .string "It's different. Mostly.$"
+
+@  T-439, DRAFT: the MUSKRAT.
+CeruleanCity_Text_MuskratBecalmed::
+    .string "Wind's due any day.\n"
+    .string "Been due since spring.$"
+
+CeruleanCity_Text_MuskratMoving::
+    .string "I'm moving! Wrong way.$"
