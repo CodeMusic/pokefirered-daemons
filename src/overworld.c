@@ -794,6 +794,7 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
         for (paletteIndex = 0; paletteIndex < 7; paletteIndex++)
             ApplyWeatherGammaShiftToPal(paletteIndex);
         DaemonsRetintObjectEventPalettes();
+        DaemonsRetintFieldEffectPalettes();   // T-443: and the grass round your feet, if it is still on screen
     }
     InitSecondaryTilesetAnimation();
     UpdateLocationHistoryForRoamer();

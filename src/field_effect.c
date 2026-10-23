@@ -476,12 +476,18 @@ void ApplyGlobalFieldPaletteTint(u8 paletteIdx)
 }
 
 //  T-441: the grass's palette in the season, as it loads -- before the light and the weather fall on it, as the tiles'
-//  season goes in before theirs. Only FLDEFF_PAL_TAG_GENERAL_1 (BLANCHE's grass has no seasons).
+//  season goes in before theirs. T-443: and the grove's mood and the faded print, as the tiles take them -- on
+//  FLDEFF_PAL_TAG_GENERAL_1 and on BLANCHE's pale grass, whose town fades early in the game too (it has no season).
 static void DaemonsSeasonFieldEffectPalette(u8 paletteIdx)
 {
-    if (paletteIdx == 0xFF || GetSpritePaletteTagByPaletteNum(paletteIdx) != FLDEFF_PAL_TAG_GENERAL_1)
+    u16 tag;
+
+    if (paletteIdx == 0xFF)
         return;
-    if (DaemonsSeasonSpritePalette(&gPlttBufferUnfaded[OBJ_PLTT_ID(paletteIdx)]))
+    tag = GetSpritePaletteTagByPaletteNum(paletteIdx);
+    if (tag != FLDEFF_PAL_TAG_GENERAL_1 && tag != FLDEFF_PAL_TAG_BLANCHE_GRASS)
+        return;
+    if (DaemonsGroundSpritePalette(&gPlttBufferUnfaded[OBJ_PLTT_ID(paletteIdx)], tag == FLDEFF_PAL_TAG_GENERAL_1))
         CpuFastCopy(&gPlttBufferUnfaded[OBJ_PLTT_ID(paletteIdx)], &gPlttBufferFaded[OBJ_PLTT_ID(paletteIdx)], PLTT_SIZE_4BPP);
 }
 

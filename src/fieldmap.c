@@ -1463,7 +1463,14 @@ static u16 DaemonsSeasonColour(u16 index, u16 colour, u8 season, bool8 bloom)
 // Only general_1 is passed here: general_0's dust and sand are the path's and the beach's colours, which no season
 // repaints, and its water and general_1's ripple blues sit far from every seasonal slot, so prints, dust and ripples
 // already match the ground they land on.
-bool8 DaemonsSeasonSpritePalette(u16 *pal)
+// T-443 (the user, 2026-10-22): AND IN WINTER THE BLADES STILL SHOW. Snow's greens sit so close to the white ground that
+// the blades closing round your feet all but vanished. In winter each entry that takes slot 3, 13, 14 or 15 (the blades'
+// shading and outline, tall_grass.png's 3, D, E and F) is drawn a step further toward a cold frost shadow -- a faint
+// outline a touch darker than the snow, the fill (1, 2) left the ground's own so the tile does not show a block.
+#define WINTER_FROST RGB(12, 16, 19)
+static const u8 sWinterBladeLine[16] = { [3] = 40, [13] = 26, [14] = 90, [15] = 90 };   // of 256
+
+static bool8 DaemonsSeasonSpritePalette(u16 *pal)
 {
     u8 season = DaemonsSeasonHere();
     const u16 *summer = gTileset_General.palettes[0];
@@ -1498,18 +1505,28 @@ bool8 DaemonsSeasonSpritePalette(u16 *pal)
         if (bestDist == 0)
         {
             pal[i] = sSeasonRow0[season][best];
-            changed = TRUE;
-            continue;
         }
-        for (k = 0; k < 3; k++)
+        else
         {
-            c[k] = (pal[i] >> (5 * k)) & 0x1F;
-            s[k] = (summer[best] >> (5 * k)) & 0x1F;
-            w[k] = (sSeasonRow0[season][best] >> (5 * k)) & 0x1F;
-            c[k] += w[k] - s[k];
-            c[k] = c[k] < 0 ? 0 : c[k] > 31 ? 31 : c[k];
+            for (k = 0; k < 3; k++)
+            {
+                c[k] = (pal[i] >> (5 * k)) & 0x1F;
+                s[k] = (summer[best] >> (5 * k)) & 0x1F;
+                w[k] = (sSeasonRow0[season][best] >> (5 * k)) & 0x1F;
+                c[k] += w[k] - s[k];
+                c[k] = c[k] < 0 ? 0 : c[k] > 31 ? 31 : c[k];
+            }
+            pal[i] = RGB2(c[0], c[1], c[2]);
         }
-        pal[i] = RGB2(c[0], c[1], c[2]);
+        if (season == SEASON_WINTER && sWinterBladeLine[best] != 0)
+        {
+            for (k = 0; k < 3; k++)
+            {
+                c[k] = (pal[i] >> (5 * k)) & 0x1F;
+                c[k] += (((WINTER_FROST >> (5 * k)) & 0x1F) - c[k]) * sWinterBladeLine[best] / 256;
+            }
+            pal[i] = RGB2(c[0], c[1], c[2]);
+        }
         changed = TRUE;
     }
     return changed;
@@ -1589,6 +1606,42 @@ static void DaemonsClarityEntries(u16 offset, u16 count)
         gPlttBufferUnfaded[offset + i] = RGB2(r, g, b);
     }
     CpuCopy16(&gPlttBufferUnfaded[offset], &gPlttBufferFaded[offset], PLTT_SIZEOF(count));
+}
+
+// T-443 (the user, 2026-10-22): THE WALKED-ON GRASS TAKES EVERY TINT THE GROUND DOES. The grass sprite (general_1) took
+// the season (T-441) but not the grove's mood (T-408) or the faded print (T-317), so in a grove, or early in the game,
+// a full-colour rustle closed round your feet in a recoloured or 40%-grey field. As it loads (and as the field is
+// relit), the same three in the same order as DaemonsClarityEntries gives the tiles: the season, the mood, the print.
+// The watch's light and HALFTONE's grey are ApplyGlobalFieldPaletteTint's, after, as for every field effect.
+bool8 DaemonsGroundSpritePalette(u16 *pal, bool8 seasonal)
+{
+    s32 amount = DaemonsClarityFade(), r, g, b, grey;
+    const struct DaemonsGroveMood *mood = DaemonsGroveMoodHere();
+    bool8 changed = seasonal ? DaemonsSeasonSpritePalette(pal) : FALSE;
+    u32 i;
+
+    if (amount == 0 && mood == NULL)
+        return changed;
+    for (i = 1; i < 16; i++)
+    {
+        u16 c = pal[i];
+
+        if (mood != NULL)
+            c = DaemonsGroveColour(c, mood);
+        if (amount != 0)
+        {
+            r = c & 0x1F;
+            g = (c >> 5) & 0x1F;
+            b = (c >> 10) & 0x1F;
+            grey = (r * 77 + g * 150 + b * 29) >> 8;
+            r += ((grey - r) * amount + 128) / 256;
+            g += ((grey - g) * amount + 128) / 256;
+            b += ((grey - b) * amount + 128) / 256;
+            c = RGB2(r, g, b);
+        }
+        pal[i] = c;
+    }
+    return TRUE;
 }
 
 u8 DaemonsFieldTint(void)
