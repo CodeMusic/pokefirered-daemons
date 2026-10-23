@@ -342,9 +342,17 @@ void BattleLoadOpponentMonSpriteGfx(struct Pokemon *mon, u8 battlerId)
     }
     otId = GetMonData(mon, MON_DATA_OT_ID);
     position = GetBattlerPosition(battlerId);
-    HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonFrontPicTable[species],
-                                              gMonSpritesGfxPtr->sprites[position],
-                                              species, currentPersonality);
+    // T-440 (the user, 2026-10-23): a foe PROTEUS battles in its edition's own shape -- CONTENT's all edges, CONTEXT's
+    // shell -- as THE ANNEX shows it, so the foe's front takes the form half (the bottom), as an owned one's does.
+    // Transformed, it stays vanilla's (the top), as the player's side does.
+    if (gBattleSpritesDataPtr->battlerData[battlerId].transformSpecies == SPECIES_NONE)
+        HandleLoadSpecialPokePic(&gMonFrontPicTable[species],
+                                 gMonSpritesGfxPtr->sprites[position],
+                                 species, currentPersonality);
+    else
+        HandleLoadSpecialPokePic_DontHandleDeoxys(&gMonFrontPicTable[species],
+                                                  gMonSpritesGfxPtr->sprites[position],
+                                                  species, currentPersonality);
     paletteOffset = OBJ_PLTT_ID(battlerId);
     if (gBattleSpritesDataPtr->battlerData[battlerId].transformSpecies == SPECIES_NONE)
         lzPaletteData = GetMonFrontSpritePal(mon);

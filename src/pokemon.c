@@ -6314,10 +6314,9 @@ bool8 ShouldIgnoreDeoxysForm(u8 caseId, u8 battlerId)
         }
         else
         {
-            if (!gMain.inBattle)
-                return FALSE;
-            if (GetBattlerSide(battlerId) == B_SIDE_PLAYER)
-                return FALSE;
+            // T-440: off the link, every PROTEUS in a move's animation shows its form, the foe's too -- it battles in
+            // its edition's own shape (BattleLoadOpponentMonSpriteGfx)
+            return FALSE;
         }
         break;
     }

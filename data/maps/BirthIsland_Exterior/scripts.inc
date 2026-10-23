@@ -104,8 +104,8 @@ BirthIsland_Exterior_EventScript_Deoxys::
 	release
 	end
 
-@  T-439: a touch shifts PROTEUS to the other shape; the third holds it still in its own (DEOXYS_N) and the battle
-@  starts. Every word DRAFT -- a daemon says nothing, so the box says what it does.
+@  T-439: a touch shifts PROTEUS to the other shape; the third holds it still in its own (T-440: the edition's, the
+@  shape it battles in) and the battle starts. Every word DRAFT -- a daemon says nothing, so the box says what it does.
 BirthIsland_Exterior_EventScript_Proteus::
 	lock
 	addvar VAR_TEMP_2, 1

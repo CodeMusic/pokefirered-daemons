@@ -114,7 +114,8 @@ void DaemonsCast_ErminePaid(void)
 }
 
 // THE ANNEX: PROTEUS shows each edition its own shape -- CONTENT's all edges, CONTEXT's a shell -- and talking to it
-// shifts it to the other, until on the third touch it holds still (DEOXYS_N) and the battle starts.
+// shifts it to the other, until on the third touch it holds still in its own shape and the battle starts -- in that
+// shape (T-440, the user 2026-10-23: a wild PROTEUS battles in its edition's own shape, matching the overworld).
 // DaemonsCast_ProteusShape sets VAR_OBJ_GFX_ID_0 to the edition's shape (OnTransition). DaemonsCast_ProteusShift takes
 // the touch in VAR_0x8004 (1, 2, 3) and the object's local id in VAR_0x8005, redraws it, and returns VAR_RESULT:
 // 0 it turned all edges, 1 it curled into a shell, 2 it holds still.
@@ -136,7 +137,7 @@ void DaemonsCast_ProteusShift(void)
     u8 gfx, objectEventId;
 
     if (gSpecialVar_0x8004 >= 3)
-        gfx = OBJ_EVENT_GFX_DEOXYS_N;
+        gfx = PROTEUS_OWN;          // T-440: it holds still in its own shape, the one it battles in
     else if (gSpecialVar_0x8004 & 1)
         gfx = PROTEUS_OTHER;
     else
@@ -148,7 +149,7 @@ void DaemonsCast_ProteusShift(void)
         ObjectEventSetGraphicsId(&gObjectEvents[objectEventId], gfx);
         ObjectEventTurn(&gObjectEvents[objectEventId], gObjectEvents[objectEventId].facingDirection);
     }
-    if (gfx == OBJ_EVENT_GFX_DEOXYS_N)
+    if (gSpecialVar_0x8004 >= 3)
         gSpecialVar_Result = 2;
     else
         gSpecialVar_Result = gfx == OBJ_EVENT_GFX_DEOXYS_D;
