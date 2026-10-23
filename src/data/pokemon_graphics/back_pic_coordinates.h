@@ -2053,7 +2053,10 @@ const struct MonCoords gMonBackPicCoords[] =
     [SPECIES_DEOXYS] =
     {
         .size = MON_COORDS_SIZE(64, 56),
-        .y_offset = 7,
+        // DAEMONS T-440: PROTEUS's owned backs (the sheet's bottom half: CONTENT's edges, CONTEXT's shell) leave
+        // 12-13 blank rows below them where vanilla's left 4, so 7 sat them ~6px high; 13 puts their lowest row
+        // where a back's usually is (y_offset + 64 - blank rows ~ 64)
+        .y_offset = 13,
     },
     [SPECIES_CHIMECHO] =
     {
