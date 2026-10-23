@@ -1343,6 +1343,9 @@ static void SpriteCB_FCSpinningPokeball(struct Sprite *sprite)
 }
 
 #define PERSON_PAL_NUM 6
+//  T-444: each portrait loads ONE palette. They were 256-colour PNGs (T-177), so sizeof() of their .gbapal was 512
+//  bytes -- sixteen palettes from OBJ 6 on, over every sprite palette after it. Re-saved 16-colour as well; the
+//  size is fixed here so a re-save can never reach past OBJ 6 again (DAEMONS tools/check_palettes.py).
 #define PERSON_X  148
 #define PERSON_Y   66
 
@@ -1352,25 +1355,25 @@ static u8 CreatePersonPicSprite(u8 fcPersonIdx)
     if (fcPersonIdx == FAMECHECKER_DAISY)
     {
         spriteId = CreateSprite(&sDaisySpriteTemplate, PERSON_X, PERSON_Y, 0);
-        LoadPalette(sDaisySpritePalette, OBJ_PLTT_ID(PERSON_PAL_NUM), sizeof(sDaisySpritePalette));
+        LoadPalette(sDaisySpritePalette, OBJ_PLTT_ID(PERSON_PAL_NUM), PLTT_SIZE_4BPP);
         gSprites[spriteId].oam.paletteNum = PERSON_PAL_NUM;
     }
     else if (fcPersonIdx == FAMECHECKER_MRFUJI)
     {
         spriteId = CreateSprite(&sFujiSpriteTemplate, PERSON_X, PERSON_Y, 0);
-        LoadPalette(sFujiSpritePalette, OBJ_PLTT_ID(PERSON_PAL_NUM), sizeof(sFujiSpritePalette));
+        LoadPalette(sFujiSpritePalette, OBJ_PLTT_ID(PERSON_PAL_NUM), PLTT_SIZE_4BPP);
         gSprites[spriteId].oam.paletteNum = PERSON_PAL_NUM;
     }
     else if (fcPersonIdx == FAMECHECKER_OAK)
     {
         spriteId = CreateSprite(&sOakSpriteTemplate, PERSON_X, PERSON_Y, 0);
-        LoadPalette(sOakSpritePalette, OBJ_PLTT_ID(PERSON_PAL_NUM), sizeof(sOakSpritePalette));
+        LoadPalette(sOakSpritePalette, OBJ_PLTT_ID(PERSON_PAL_NUM), PLTT_SIZE_4BPP);
         gSprites[spriteId].oam.paletteNum = PERSON_PAL_NUM;
     }
     else if (fcPersonIdx == FAMECHECKER_BILL)
     {
         spriteId = CreateSprite(&sBillSpriteTemplate, PERSON_X, PERSON_Y, 0);
-        LoadPalette(sBillSpritePalette, OBJ_PLTT_ID(PERSON_PAL_NUM), sizeof(sBillSpritePalette));
+        LoadPalette(sBillSpritePalette, OBJ_PLTT_ID(PERSON_PAL_NUM), PLTT_SIZE_4BPP);
         gSprites[spriteId].oam.paletteNum = PERSON_PAL_NUM;
     }
     else
