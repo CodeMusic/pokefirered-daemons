@@ -2000,3 +2000,32 @@ const u16 gTilesetPalettes_OtherCave[][16] =
 	INCBIN_U16("data/tilesets/secondary/rock_tunnel/palettes/14.gbapal"),
 	INCBIN_U16("data/tilesets/secondary/rock_tunnel/palettes/15.gbapal"),
 };
+// OTHER CAVE's other three lights, rows 7..12 only (fieldmap.c lays one over light 0 by VAR_OTHER_CAVE_LIGHT):
+// amber, chrysoprase, rose quartz.
+const u16 gTilesetPalettes_OtherCaveLights[][6][16] =
+{
+	{
+		INCBIN_U16("data/tilesets/secondary/rock_tunnel/palettes_other_1/07.gbapal"),
+		INCBIN_U16("data/tilesets/secondary/rock_tunnel/palettes_other_1/08.gbapal"),
+		INCBIN_U16("data/tilesets/secondary/rock_tunnel/palettes_other_1/09.gbapal"),
+		INCBIN_U16("data/tilesets/secondary/rock_tunnel/palettes_other_1/10.gbapal"),
+		INCBIN_U16("data/tilesets/secondary/rock_tunnel/palettes_other_1/11.gbapal"),
+		INCBIN_U16("data/tilesets/secondary/rock_tunnel/palettes_other_1/12.gbapal"),
+	},
+	{
+		INCBIN_U16("data/tilesets/secondary/rock_tunnel/palettes_other_2/07.gbapal"),
+		INCBIN_U16("data/tilesets/secondary/rock_tunnel/palettes_other_2/08.gbapal"),
+		INCBIN_U16("data/tilesets/secondary/rock_tunnel/palettes_other_2/09.gbapal"),
+		INCBIN_U16("data/tilesets/secondary/rock_tunnel/palettes_other_2/10.gbapal"),
+		INCBIN_U16("data/tilesets/secondary/rock_tunnel/palettes_other_2/11.gbapal"),
+		INCBIN_U16("data/tilesets/secondary/rock_tunnel/palettes_other_2/12.gbapal"),
+	},
+	{
+		INCBIN_U16("data/tilesets/secondary/rock_tunnel/palettes_other_3/07.gbapal"),
+		INCBIN_U16("data/tilesets/secondary/rock_tunnel/palettes_other_3/08.gbapal"),
+		INCBIN_U16("data/tilesets/secondary/rock_tunnel/palettes_other_3/09.gbapal"),
+		INCBIN_U16("data/tilesets/secondary/rock_tunnel/palettes_other_3/10.gbapal"),
+		INCBIN_U16("data/tilesets/secondary/rock_tunnel/palettes_other_3/11.gbapal"),
+		INCBIN_U16("data/tilesets/secondary/rock_tunnel/palettes_other_3/12.gbapal"),
+	},
+};

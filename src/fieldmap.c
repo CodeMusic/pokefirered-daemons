@@ -26,6 +26,8 @@
 
 extern const struct Tileset gTileset_General;   // T-275: the CHECKPOINT's tileset
 extern const struct Tileset gTileset_Nexus;     // T-395: THE NEXUS, made of paint
+extern const struct Tileset gTileset_OtherCave;  // T-438: OTHER CAVE, whose light changes each visit
+extern const u16 gTilesetPalettes_OtherCaveLights[][6][16];
 #include "overworld.h"
 
 struct ConnectionFlags
@@ -1783,6 +1785,18 @@ static void LoadTilesetPalette(struct Tileset const *tileset, u16 destOffset, u1
         else if (tileset->isSecondary == TRUE)
         {
             LoadPalette(tileset->palettes[NUM_PALS_IN_PRIMARY], destOffset, size);
+            // T-438: OTHER CAVE "never holds the same thing twice" (2.10) -- a cycle of four lights, one a visit, the
+            // teal in its header and three more laid over rows 7..12. The map's ON_TRANSITION steps the visit count
+            // once per entry; every load in between (a battle, the bag, a banner, a load from the save) reads the
+            // same light here, so the cave never snaps back mid-visit. Its wild set follows (the same script).
+            if (tileset == &gTileset_OtherCave)
+            {
+                u16 visit = VarGet(VAR_OTHER_CAVE_LIGHT);
+                u16 light = visit != 0 ? (visit - 1) % 4 : 0;
+
+                if (light != 0)
+                    LoadPalette(gTilesetPalettes_OtherCaveLights[light - 1], destOffset, 6 * PLTT_SIZE_4BPP);
+            }
             Play_OnTilesetPalettesLoaded();   // T-417 P5: THE NEXUS's tree, lit -- before the tint, so the watch and
                                               // the recap's grey (and the copy it puts back after) fall on the lit tree
             DaemonsClarityEntries(destOffset, size >> 1);

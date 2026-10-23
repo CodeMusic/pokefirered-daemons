@@ -250,7 +250,7 @@
 #define VAR_DREAM_LED              0x40C2 // T-412: the step + 1 of the attendant's last FIRST dream told, until where it led is said (0 none)
 #define VAR_FEELINGS_PLAYED        0x40C3 // T-433: when the instrument last gladdened the lead (feelings ticks + 1; 0 never)
 #define VAR_ERMINE_SEASON          0x40C4 // T-439: the season + 1 the ERMINE at RESORT SUBLIME last paid in (0 never)
-#define VAR_0x40C5                 0x40C5
+#define VAR_OTHER_CAVE_LIGHT       0x40C5 // T-438: OTHER CAVE's visits, 1..4 round again -- its light (n - 1) and its wild set (0 never entered)
 #define VAR_0x40C6                 0x40C6
 #define VAR_0x40C7                 0x40C7
 #define VAR_0x40C8                 0x40C8
