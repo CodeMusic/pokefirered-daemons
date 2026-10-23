@@ -1937,3 +1937,66 @@ const u16 gTilesetPalettes_NexusPaint[][16] =
 	INCBIN_U16("data/tilesets/primary/nexus_paint/palettes/14.gbapal"),
 	INCBIN_U16("data/tilesets/primary/nexus_paint/palettes/15.gbapal"),
 };
+
+// T-438 batch E: PALETTE SPLITS -- a cave that shares its base's tiles and metatiles with rows 7..12 of its own
+// (DAEMONS tools/gbacaves.py writes them). Rows 0..6 and 13..15 are the base's.
+// UMBRAL ASCENT: the stack, at dusk (over gTileset_Cave).
+const u16 gTilesetPalettes_CaveUmbral[][16] =
+{
+	INCBIN_U16("data/tilesets/secondary/cave/palettes/00.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/cave/palettes/01.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/cave/palettes/02.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/cave/palettes/03.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/cave/palettes/04.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/cave/palettes/05.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/cave/palettes/06.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/cave/palettes_umbral/07.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/cave/palettes_umbral/08.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/cave/palettes_umbral/09.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/cave/palettes_umbral/10.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/cave/palettes_umbral/11.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/cave/palettes_umbral/12.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/cave/palettes/13.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/cave/palettes/14.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/cave/palettes/15.gbapal"),
+};
+// STILLFALL CAVE: the bloom, gone glassy (over gTileset_SeafoamIslands).
+const u16 gTilesetPalettes_Stillfall[][16] =
+{
+	INCBIN_U16("data/tilesets/secondary/seafoam_islands/palettes/00.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/seafoam_islands/palettes/01.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/seafoam_islands/palettes/02.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/seafoam_islands/palettes/03.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/seafoam_islands/palettes/04.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/seafoam_islands/palettes/05.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/seafoam_islands/palettes/06.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/seafoam_islands/palettes_stillfall/07.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/seafoam_islands/palettes_stillfall/08.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/seafoam_islands/palettes_stillfall/09.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/seafoam_islands/palettes_stillfall/10.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/seafoam_islands/palettes_stillfall/11.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/seafoam_islands/palettes_stillfall/12.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/seafoam_islands/palettes/13.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/seafoam_islands/palettes/14.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/seafoam_islands/palettes/15.gbapal"),
+};
+// OTHER CAVE: the outage in mineral light -- light 0, the teal (over gTileset_RockTunnel).
+const u16 gTilesetPalettes_OtherCave[][16] =
+{
+	INCBIN_U16("data/tilesets/secondary/rock_tunnel/palettes/00.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/rock_tunnel/palettes/01.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/rock_tunnel/palettes/02.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/rock_tunnel/palettes/03.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/rock_tunnel/palettes/04.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/rock_tunnel/palettes/05.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/rock_tunnel/palettes/06.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/rock_tunnel/palettes_other/07.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/rock_tunnel/palettes_other/08.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/rock_tunnel/palettes_other/09.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/rock_tunnel/palettes_other/10.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/rock_tunnel/palettes_other/11.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/rock_tunnel/palettes_other/12.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/rock_tunnel/palettes/13.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/rock_tunnel/palettes/14.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/rock_tunnel/palettes/15.gbapal"),
+};

@@ -1011,3 +1011,36 @@ const struct Tileset gTileset_NexusPaint =
     .metatileAttributes = gMetatileAttributes_NexusPaint,
     .callback = NULL,
 };
+// T-438 batch E: UMBRAL ASCENT, a palette split over gTileset_Cave (DAEMONS tools/gbacaves.py).
+const struct Tileset gTileset_CaveUmbral =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_Cave,
+    .palettes = gTilesetPalettes_CaveUmbral,
+    .metatiles = gMetatiles_Cave,
+    .metatileAttributes = gMetatileAttributes_Cave,
+    .callback = NULL,
+};
+// T-438 batch E: STILLFALL CAVE, a palette split over gTileset_SeafoamIslands.
+const struct Tileset gTileset_Stillfall =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_SeafoamIslands,
+    .palettes = gTilesetPalettes_Stillfall,
+    .metatiles = gMetatiles_SeafoamIslands,
+    .metatileAttributes = gMetatileAttributes_SeafoamIslands,
+    .callback = NULL,
+};
+// T-438 batch E: OTHER CAVE, a palette split over gTileset_RockTunnel; its light changes each visit (fieldmap.c).
+const struct Tileset gTileset_OtherCave =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_RockTunnel,
+    .palettes = gTilesetPalettes_OtherCave,
+    .metatiles = gMetatiles_RockTunnel,
+    .metatileAttributes = gMetatileAttributes_RockTunnel,
+    .callback = NULL,
+};

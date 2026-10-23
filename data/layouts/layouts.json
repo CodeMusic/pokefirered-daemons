@@ -1310,7 +1310,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Cave",
+      "secondary_tileset": "gTileset_CaveUmbral",
       "border_filepath": "data/layouts/VictoryRoad_1F/border.bin",
       "blockdata_filepath": "data/layouts/VictoryRoad_1F/map.bin"
     },
@@ -1322,7 +1322,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Cave",
+      "secondary_tileset": "gTileset_CaveUmbral",
       "border_filepath": "data/layouts/VictoryRoad_2F/border.bin",
       "blockdata_filepath": "data/layouts/VictoryRoad_2F/map.bin"
     },
@@ -1334,7 +1334,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Cave",
+      "secondary_tileset": "gTileset_CaveUmbral",
       "border_filepath": "data/layouts/VictoryRoad_3F/border.bin",
       "blockdata_filepath": "data/layouts/VictoryRoad_3F/map.bin"
     },
@@ -3387,7 +3387,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_SeafoamIslands",
+      "secondary_tileset": "gTileset_Stillfall",
       "border_filepath": "data/layouts/FourIsland_IcefallCave_Entrance/border.bin",
       "blockdata_filepath": "data/layouts/FourIsland_IcefallCave_Entrance/map.bin"
     },
@@ -3399,7 +3399,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_SeafoamIslands",
+      "secondary_tileset": "gTileset_Stillfall",
       "border_filepath": "data/layouts/FourIsland_IcefallCave_1F/border.bin",
       "blockdata_filepath": "data/layouts/FourIsland_IcefallCave_1F/map.bin"
     },
@@ -3411,7 +3411,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_SeafoamIslands",
+      "secondary_tileset": "gTileset_Stillfall",
       "border_filepath": "data/layouts/FourIsland_IcefallCave_B1F/border.bin",
       "blockdata_filepath": "data/layouts/FourIsland_IcefallCave_B1F/map.bin"
     },
@@ -3423,7 +3423,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_SeafoamIslands",
+      "secondary_tileset": "gTileset_Stillfall",
       "border_filepath": "data/layouts/FourIsland_IcefallCave_Back/border.bin",
       "blockdata_filepath": "data/layouts/FourIsland_IcefallCave_Back/map.bin"
     },
@@ -3951,7 +3951,7 @@
       "border_width": 2,
       "border_height": 2,
       "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_RockTunnel",
+      "secondary_tileset": "gTileset_OtherCave",
       "border_filepath": "data/layouts/SixIsland_AlteringCave/border.bin",
       "blockdata_filepath": "data/layouts/SixIsland_AlteringCave/map.bin"
     },
