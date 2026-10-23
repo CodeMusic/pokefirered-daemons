@@ -80,6 +80,13 @@ static const u8 sIcefallCaveMapPreviewTilemap[] = INCBIN_U8("graphics/map_previe
 static const u8 sAlteringCaveMapPreviewPalette[] = INCBIN_U8("graphics/map_preview/altering_cave/tiles.gbapal");
 static const u8 sAlteringCaveMapPreviewTiles[] = INCBIN_U8("graphics/map_preview/altering_cave/tiles.4bpp.lz");
 static const u8 sAlteringCaveMapPreviewTilemap[] = INCBIN_U8("graphics/map_preview/altering_cave/tilemap.bin.lz");
+// T-445: OTHER CAVE's preview follows its light -- one picture, and palette 13 in each of the three lights after the
+// teal (DAEMONS tools/gbapreviews.py writes them), laid over the picture's own by MapPreview_LoadGfx
+static const u16 sAlteringCaveMapPreviewLights[][16] = {
+    INCBIN_U16("graphics/map_preview/altering_cave/light1.gbapal"),
+    INCBIN_U16("graphics/map_preview/altering_cave/light2.gbapal"),
+    INCBIN_U16("graphics/map_preview/altering_cave/light3.gbapal"),
+};
 
 static const struct MapPreviewScreen sMapPreviewScreenData[MPS_COUNT] = {
     [MPS_VIRIDIAN_FOREST] = {
@@ -387,6 +394,16 @@ void MapPreview_LoadGfx(u8 mapsec)
     {
        ResetTempTileDataBuffers();
        LoadPalette(sMapPreviewScreenData[idx].palptr, BG_PLTT_ID(13), 3 * PLTT_SIZE_4BPP);
+       // T-445: the preview is shown before the cave's ON_TRANSITION steps VAR_OTHER_CAVE_LIGHT (CB2_DoChangeMap,
+       // then CB2_LoadMap2's LoadMapFromWarp), so the light coming is the next visit's: the count so far, mod 4 --
+       // where fieldmap.c, reading the stepped count inside, takes (visit - 1) % 4. 0 is the teal already loaded.
+       if (mapsec == MAPSEC_ALTERING_CAVE)
+       {
+           u16 light = VarGet(VAR_OTHER_CAVE_LIGHT) % 4;
+
+           if (light != 0)
+               LoadPalette(sAlteringCaveMapPreviewLights[light - 1], BG_PLTT_ID(13), PLTT_SIZE_4BPP);
+       }
        DecompressAndCopyTileDataToVram(0, sMapPreviewScreenData[idx].tilesptr, 0, 0, 0);
        if (GetBgTilemapBuffer(0) == NULL)
        {

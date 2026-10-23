@@ -336,19 +336,19 @@ $(TILESETGFXDIR)/primary/general/anim/water_current_landwatersedge/7.4bpp: %.4bp
 	$(GFX) $< $@ -num_tiles 47 -Wnum_tiles
 
 $(MAPPREVIEWGFXDIR)/altering_cave/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 391 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 376 -Wnum_tiles
 
 $(MAPPREVIEWGFXDIR)/berry_forest/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 395 -Wnum_tiles
 
 $(MAPPREVIEWGFXDIR)/digletts_cave/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 398 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 410 -Wnum_tiles
 
 $(MAPPREVIEWGFXDIR)/dotted_hole/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 317 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 377 -Wnum_tiles
 
 $(MAPPREVIEWGFXDIR)/icefall_cave/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 399 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 390 -Wnum_tiles
 
 $(MAPPREVIEWGFXDIR)/lost_cave/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 404 -Wnum_tiles
@@ -357,10 +357,10 @@ $(MAPPREVIEWGFXDIR)/monean_chamber/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 326 -Wnum_tiles
 
 $(MAPPREVIEWGFXDIR)/mt_ember/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 355 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 361 -Wnum_tiles
 
 $(MAPPREVIEWGFXDIR)/mt_moon/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 364 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 402 -Wnum_tiles
 
 $(MAPPREVIEWGFXDIR)/pokemon_mansion/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 388 -Wnum_tiles
@@ -369,10 +369,10 @@ $(MAPPREVIEWGFXDIR)/pokemon_tower/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 290 -Wnum_tiles
 
 $(MAPPREVIEWGFXDIR)/power_plant/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 368 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 414 -Wnum_tiles
 
 $(MAPPREVIEWGFXDIR)/rock_tunnel/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 407 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 417 -Wnum_tiles
 
 $(MAPPREVIEWGFXDIR)/rocket_hideout/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 194 -Wnum_tiles
@@ -384,13 +384,13 @@ $(MAPPREVIEWGFXDIR)/safari_zone/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 330 -Wnum_tiles
 
 $(MAPPREVIEWGFXDIR)/seafoam_islands/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 408 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 410 -Wnum_tiles
 
 $(MAPPREVIEWGFXDIR)/silph_co/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 355 -Wnum_tiles
 
 $(MAPPREVIEWGFXDIR)/victory_road/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 375 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 395 -Wnum_tiles
 
 $(MAPPREVIEWGFXDIR)/viridian_forest/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 389 -Wnum_tiles
