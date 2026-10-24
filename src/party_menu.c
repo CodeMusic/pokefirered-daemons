@@ -5267,11 +5267,63 @@ static void Task_TryLearningNextMove(u8 taskId)
     }
 }
 
+//  T-455 (the user, 2026-10-24): a daemon the companion evolved is offered its new species' routines at its level the
+//  first time the player has it in hand (daemons_carried.c finds it and leaves its slot in VAR_0x8004). The party menu's
+//  own level-up flow does the asking -- "X learned Y!", or the replace-a-routine question and the summary screen, as a
+//  RARE CANDY's does -- entered at Task_TryLearnNewMoves's switch with no level-up window, and left WITHOUT trying an
+//  evolution: the companion has already done the growing.
+static EWRAM_DATA bool8 sDaemonsCarriedLearn = FALSE;
+
+static void Task_DaemonsCarriedLearn(u8 taskId)
+{
+    u16 learnMove;
+
+    if (gPaletteFade.active)
+        return;
+    sDaemonsCarriedLearn = TRUE;
+    learnMove = MonTryLearningNewMove(&gPlayerParty[gPartyMenu.slotId], TRUE);
+    gPartyMenu.learnMoveMethod = LEARN_VIA_LEVEL_UP;
+    switch (learnMove)
+    {
+    case MOVE_NONE:
+        PartyMenuTryEvolution(taskId);
+        break;
+    case MON_HAS_MAX_MOVES:
+        DisplayMonNeedsToReplaceMove(taskId);
+        break;
+    case MON_ALREADY_KNOWS_MOVE:
+        gTasks[taskId].func = Task_TryLearningNextMove;
+        break;
+    default:
+        DisplayMonLearnedMove(taskId, learnMove);
+        break;
+    }
+}
+
+void Daemons_OfferCarriedMoves(void)
+{
+    InitPartyMenu(PARTY_MENU_TYPE_FIELD,
+                  PARTY_LAYOUT_SINGLE,
+                  PARTY_ACTION_CHOOSE_MON,
+                  FALSE,
+                  PARTY_MSG_NONE,
+                  Task_DaemonsCarriedLearn,
+                  CB2_ReturnToFieldContinueScriptPlayMapMusic);
+    gPartyMenu.slotId = gSpecialVar_0x8004;
+}
+
 static void PartyMenuTryEvolution(u8 taskId)
 {
     struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
-    u16 targetSpecies = GetEvolutionTargetSpecies(mon, EVO_MODE_NORMAL, ITEM_NONE);
+    u16 targetSpecies;
 
+    if (sDaemonsCarriedLearn)
+    {
+        sDaemonsCarriedLearn = FALSE;
+        gTasks[taskId].func = Task_ClosePartyMenuAfterText;
+        return;
+    }
+    targetSpecies = GetEvolutionTargetSpecies(mon, EVO_MODE_NORMAL, ITEM_NONE);
     if (targetSpecies != SPECIES_NONE)
     {
         FreePartyPointers();

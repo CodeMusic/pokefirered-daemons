@@ -48,5 +48,28 @@ Daemons_EventScript_Dream::
 	releaseall
 	end
 
+@  T-448 / T-455: the line on the first step after a load that finished a daemon the companion grew or delivered
+@  (daemons_carried.c leaves it in gStringVar4); then, if a party daemon came home evolved and its level teaches its new
+@  species a routine, the party menu offers it as a level-up does.
+Daemons_EventScript_CarriedArrives::
+	lockall
+	msgbox gStringVar4
+	specialvar VAR_RESULT, Daemons_TryCarriedMoves
+	goto_if_eq VAR_RESULT, FALSE, Daemons_EventScript_CarriedDone
+	closemessage
+	special Daemons_OfferCarriedMoves
+	waitstate
+Daemons_EventScript_CarriedDone:
+	releaseall
+	end
+
+@  T-455: one that waited in a box, offered on the first step after it is withdrawn (or a second in the party).
+Daemons_EventScript_CarriedMoves::
+	lockall
+	special Daemons_OfferCarriedMoves
+	waitstate
+	releaseall
+	end
+
 Daemons_Text_OpusWrote:
 	.string "Something has been written in the\nINDEX.$"

@@ -944,7 +944,13 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
             //  T-448. And again: the first step after a load that finished a daemon the companion grew or delivered.
             if (Daemons_TryCarriedArrives())
             {
-                ScriptContext_SetupScript(Daemons_EventScript_Dream);
+                ScriptContext_SetupScript(Daemons_EventScript_CarriedArrives);
+                return TRUE;
+            }
+            //  T-455. And again: a daemon that came home evolved, now in the party, offered its new routines.
+            if (Daemons_TryCarriedMoves())
+            {
+                ScriptContext_SetupScript(Daemons_EventScript_CarriedMoves);
                 return TRUE;
             }
         }

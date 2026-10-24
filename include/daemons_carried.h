@@ -5,5 +5,6 @@
 void DaemonsCarried_OnLoad(void);        // ContinueLoadedSave: walk the party and every box for the marker
 void DaemonsCarried_NewGame(void);       // new_game.c: nothing to carry across
 bool8 Daemons_TryCarriedArrives(void);   // the first step after: the one line, in gStringVar4
+bool8 Daemons_TryCarriedMoves(void);     // T-455: a party daemon owed its new species' routines, in VAR_0x8004
 
 #endif // GUARD_DAEMONS_CARRIED_H

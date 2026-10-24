@@ -57,6 +57,7 @@ void ItemUseCB_PPUp(u8 taskId, TaskFunc func);
 u16 ItemIdToBattleMoveId(u16 item);
 bool8 IsMoveHm(u16 move);
 bool8 MonKnowsMove(struct Pokemon *mon, u16 move);
+void Daemons_OfferCarriedMoves(void);   // T-455: the party menu's level-up asking, for VAR_0x8004's daemon
 void ItemUseCB_TMHM(u8 taskId, TaskFunc func);
 void ItemUseCB_RareCandy(u8 taskId, TaskFunc func);
 void ItemUseCB_SacredAsh(u8 taskId, TaskFunc func);

@@ -518,4 +518,6 @@ gSpecials::
 	def_special DaemonsCast_ErminePaid
 	def_special DaemonsCast_ProteusShape
 	def_special DaemonsCast_ProteusShift
+	def_special Daemons_TryCarriedMoves      @ T-455
+	def_special Daemons_OfferCarriedMoves    @ T-455
 gSpecialsEnd::

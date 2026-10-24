@@ -3,6 +3,7 @@
 #include "daemons_first_seen.h"
 #include "event_data.h"
 #include "overworld.h"
+#include "party_menu.h"
 #include "pokedex.h"
 #include "pokemon.h"
 #include "pokemon_storage_system.h"
@@ -27,6 +28,12 @@
 //  recomputed -- and the marker cleared, so it happens once. A boxed daemon has no stored stats; the box computes them
 //  when it is withdrawn.
 //
+//  T-455 (the user, 2026-10-24): a daemon that comes home EVOLVED with routines of its own is offered the routines its
+//  new species learns at its level, as the evolution scene offers them (MonTryLearningNewMove, the replace-a-routine
+//  flow) -- the first time the player has it in hand: in the party, on the first step after the line (the same script),
+//  or, if it waits in a box, on the first step after it is withdrawn. unusedRibbons bit 3 says the offer is owed and is
+//  cleared when it is made (or when its level teaches nothing new), so it is made once.
+//
 //  The first one finished is remembered (in RAM: nothing is saved) and said on the first step after the load, in one
 //  line (Daemons_TryCarriedArrives, field_control_avatar.c, after the dreams). DRAFT words, for the user.
 //
@@ -34,6 +41,7 @@
 //  carries MISSINGNO's seen and caught bits (and its FIRST MET byte) across. A new game sets the flag (new_game.c).
 
 #define CARRIED_RIBBON_MARK     (1 << 2)
+#define CARRIED_RIBBON_MOVES    (1 << 3)    // T-455: its new species' routines are still to be offered
 
 #define CARRIED_OLD_MISSINGNO   395
 #define CARRIED_NEW_MISSINGNO   398
@@ -47,6 +55,7 @@ enum {
 
 static EWRAM_DATA u8 sCarriedKind = 0;
 static EWRAM_DATA u8 sCarriedName[POKEMON_NAME_LENGTH + 1] = {0};
+static EWRAM_DATA bool8 sCarriedMovesOwed = FALSE;    // some daemon, party or box, still has bit 3: look at the party
 
 STATIC_ASSERT(NATIONAL_DEX_OLD_UNOWN_B == CARRIED_NEW_MISSINGNO, MissingnoIsWhereTheMoveSaysItIs);
 
@@ -94,6 +103,8 @@ static u8 FinishOne(struct BoxPokemon *boxMon, struct Pokemon *partyMon)
     if (!GetBoxMonData(boxMon, MON_DATA_SANITY_HAS_SPECIES, NULL))
         return CARRIED_NONE;
     ribbons = GetBoxMonData(boxMon, MON_DATA_UNUSED_RIBBONS, NULL);
+    if (ribbons & CARRIED_RIBBON_MOVES)
+        sCarriedMovesOwed = TRUE;                   // owed from an earlier load (it waited in a box)
     if (!(ribbons & CARRIED_RIBBON_MARK))
         return CARRIED_NONE;
     ribbons &= ~CARRIED_RIBBON_MARK;
@@ -107,6 +118,13 @@ static u8 FinishOne(struct BoxPokemon *boxMon, struct Pokemon *partyMon)
     {
         DaemonsGiveBoxMonInitialMoveset(boxMon);
         kind = partyMon != NULL ? CARRIED_DELIVERED_PARTY : CARRIED_DELIVERED_BOX;
+    }
+    else
+    {
+        //  T-455: it came home evolved, with routines of its own -- the new species' are offered when it is in hand
+        ribbons |= CARRIED_RIBBON_MOVES;
+        SetBoxMonData(boxMon, MON_DATA_UNUSED_RIBBONS, &ribbons);
+        sCarriedMovesOwed = TRUE;
     }
     //  the ability is read from the species by abilityNum: a second slot the species does not have reads as none
     abilityNum = GetBoxMonData(boxMon, MON_DATA_ABILITY_NUM, NULL);
@@ -139,6 +157,7 @@ void DaemonsCarried_OnLoad(void)
     u32 i, j;
 
     sCarriedKind = CARRIED_NONE;
+    sCarriedMovesOwed = FALSE;
     MoveMissingno();
     for (i = 0; i < PARTY_SIZE; i++)
         FinishOne(&gPlayerParty[i].box, &gPlayerParty[i]);
@@ -151,6 +170,7 @@ void DaemonsCarried_NewGame(void)
 {
     FlagSet(FLAG_CARRIED_DEX_MOVED);   // a new game has no MISSINGNO at 395 to carry across
     sCarriedKind = CARRIED_NONE;
+    sCarriedMovesOwed = FALSE;
 }
 
 //  The step hook: the line goes into gStringVar4 for Daemons_EventScript_Dream (a msgbox of gStringVar4) to say.
@@ -176,4 +196,49 @@ bool8 Daemons_TryCarriedArrives(void)
     StringCopy(gStringVar1, sCarriedName);
     StringExpandPlaceholders(gStringVar4, text);
     return TRUE;
+}
+
+//  T-455: does its species learn, at exactly its level, a routine it does not know? (MonTryLearningNewMove's question,
+//  asked first so the party menu never opens on nothing.)
+static bool8 LearnsSomethingAtItsLevel(struct Pokemon *mon)
+{
+    u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
+    u8 level = GetMonData(mon, MON_DATA_LEVEL, NULL);
+    const u16 *learnset = gLevelUpLearnsets[species];
+    u32 i;
+
+    for (i = 0; learnset[i] != LEVEL_UP_END; i++)
+        if ((learnset[i] & LEVEL_UP_MOVE_LV) == (level << 9) && !MonKnowsMove(mon, learnset[i] & LEVEL_UP_MOVE_ID))
+            return TRUE;
+    return FALSE;
+}
+
+//  T-455, the step hook and the line's script (specialvar): the first party daemon whose offer is owed, in VAR_0x8004
+//  for Daemons_OfferCarriedMoves. Its bit is cleared here, whether its level teaches it anything or not.
+bool8 Daemons_TryCarriedMoves(void)
+{
+    u32 i;
+    u8 ribbons;
+    struct Pokemon *mon;
+
+    if (!sCarriedMovesOwed)
+        return FALSE;
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        mon = &gPlayerParty[i];
+        if (!GetMonData(mon, MON_DATA_SANITY_HAS_SPECIES, NULL) || GetMonData(mon, MON_DATA_IS_EGG, NULL))
+            continue;
+        ribbons = GetMonData(mon, MON_DATA_UNUSED_RIBBONS, NULL);
+        if (!(ribbons & CARRIED_RIBBON_MOVES))
+            continue;
+        ribbons &= ~CARRIED_RIBBON_MOVES;
+        SetMonData(mon, MON_DATA_UNUSED_RIBBONS, &ribbons);
+        if (LearnsSomethingAtItsLevel(mon))
+        {
+            gSpecialVar_0x8004 = i;
+            return TRUE;
+        }
+    }
+    //  sCarriedMovesOwed stays set: one still in a box is offered on the first step after it is withdrawn
+    return FALSE;
 }

@@ -1251,6 +1251,8 @@ extern const u8 EventScript_Diploma[];    // T-218
 extern const u8 Daemons_EventScript_OpusWrote[];   // T-203
 extern const u8 Daemons_EventScript_Insight[];     // T-390
 extern const u8 Daemons_EventScript_Dream[];       // T-412
+extern const u8 Daemons_EventScript_CarriedArrives[];   // T-448 / T-455
+extern const u8 Daemons_EventScript_CarriedMoves[];     // T-455
 extern const u8 PalletTown_PlayersHouse_2F_EventScript_PC[];
 extern const u8 EventScript_HiddenItemScript[];
 extern const u8 EventScript_PC[];
