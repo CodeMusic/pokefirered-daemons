@@ -5129,6 +5129,44 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = -2,
     },
 // END gbanexus
+// BEGIN gbacarried -- T-450, the carried line (tools/gbacarried.py writes this)
+    [NATIONAL_DEX_HANDSHAKE] =
+    {
+        .categoryName = _("GREETING"),   // T-450, DRAFT
+        .height = 2,
+        .weight = 10,
+        .description = gHandshakePokedexText,
+        .unusedDescription = gHandshakePokedexText,
+        .pokemonScale = 508,
+        .pokemonOffset = 17,
+        .trainerScale = 256,
+        .trainerOffset = -2,
+    },
+    [NATIONAL_DEX_TETHERING] =
+    {
+        .categoryName = _("CARRIED"),   // T-450, DRAFT
+        .height = 3,
+        .weight = 25,
+        .description = gTetheringPokedexText,
+        .unusedDescription = gTetheringPokedexText,
+        .pokemonScale = 479,
+        .pokemonOffset = 16,
+        .trainerScale = 256,
+        .trainerOffset = -2,
+    },
+    [NATIONAL_DEX_COROUTINE] =
+    {
+        .categoryName = _("TURNTAKER"),   // T-450, DRAFT
+        .height = 6,
+        .weight = 60,
+        .description = gCoroutinePokedexText,
+        .unusedDescription = gCoroutinePokedexText,
+        .pokemonScale = 426,
+        .pokemonOffset = 10,
+        .trainerScale = 256,
+        .trainerOffset = -2,
+    },
+// END gbacarried
     //  8.9 -- the entry the register does not hold. NATIONAL_DEX_OLD_UNOWN_B is
     //  387 and NATIONAL_DEX_COUNT is 386, so every list in the Index is bounded
     //  one short of it and the counter never counts it. This entry exists only

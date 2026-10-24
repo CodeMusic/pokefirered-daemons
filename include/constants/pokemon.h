@@ -279,6 +279,7 @@
 #define EVO_LEVEL_NINJASK    13 // Pokémon reaches the specified level (special value for Ninjask)
 #define EVO_LEVEL_SHEDINJA   14 // Pokémon reaches the specified level (special value for Shedinja)
 #define EVO_BEAUTY           15 // Pokémon levels up with beauty ≥ specified value
+#define EVO_CARRIED          16 // T-450: grows on the companion (the bond, as param); never met on the cart
 
 #define EVOS_PER_MON 5
 

@@ -1307,18 +1307,18 @@ const struct MonCoords gMonFrontPicCoords[] =
     },
     [SPECIES_OLD_UNOWN_K] =
     {
-        .size = MON_COORDS_SIZE(64, 64),
-        .y_offset = 6,
+        .size = MON_COORDS_SIZE(56, 48),
+        .y_offset = 9,
     },
     [SPECIES_OLD_UNOWN_L] =
     {
-        .size = MON_COORDS_SIZE(64, 64),
-        .y_offset = 6,
+        .size = MON_COORDS_SIZE(56, 64),
+        .y_offset = 2,
     },
     [SPECIES_OLD_UNOWN_M] =
     {
-        .size = MON_COORDS_SIZE(64, 64),
-        .y_offset = 6,
+        .size = MON_COORDS_SIZE(56, 64),
+        .y_offset = 3,
     },
     [SPECIES_OLD_UNOWN_N] =
     {

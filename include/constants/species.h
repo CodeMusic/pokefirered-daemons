@@ -282,6 +282,11 @@
 #define SPECIES_OLD_UNOWN_X 274
 #define SPECIES_OLD_UNOWN_Y 275
 #define SPECIES_OLD_UNOWN_Z 276
+// BEGIN gbacarried -- T-450, the carried line (tools/gbacarried.py writes this)
+#define SPECIES_HANDSHAKE SPECIES_OLD_UNOWN_K
+#define SPECIES_TETHERING SPECIES_OLD_UNOWN_L
+#define SPECIES_COROUTINE SPECIES_OLD_UNOWN_M
+// END gbacarried
 // BEGIN gbanexus -- T-395, the NEXUS residents (tools/gbanexus.py writes this)
 #define SPECIES_REFLECTION SPECIES_OLD_UNOWN_C
 #define SPECIES_LODESTAR SPECIES_OLD_UNOWN_D

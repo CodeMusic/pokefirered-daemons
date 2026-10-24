@@ -782,9 +782,9 @@ static const u16 sSpeciesToNationalPokedexNum[NUM_SPECIES - 1] =
     NATIONAL_DEX_ILLUMINED,
     NATIONAL_DEX_LYNX,
     NATIONAL_DEX_BASTET,
-    SPECIES_TO_NATIONAL(OLD_UNOWN_K),
-    SPECIES_TO_NATIONAL(OLD_UNOWN_L),
-    SPECIES_TO_NATIONAL(OLD_UNOWN_M),
+    NATIONAL_DEX_HANDSHAKE,
+    NATIONAL_DEX_TETHERING,
+    NATIONAL_DEX_COROUTINE,
     SPECIES_TO_NATIONAL(OLD_UNOWN_N),
     SPECIES_TO_NATIONAL(OLD_UNOWN_O),
     SPECIES_TO_NATIONAL(OLD_UNOWN_P),
@@ -1333,9 +1333,9 @@ static const u16 sHoennToNationalOrder[NUM_SPECIES - 1] =
     HOENN_TO_NATIONAL(OLD_UNOWN_H),
     HOENN_TO_NATIONAL(OLD_UNOWN_I),
     HOENN_TO_NATIONAL(OLD_UNOWN_J),
-    HOENN_TO_NATIONAL(OLD_UNOWN_K),
-    HOENN_TO_NATIONAL(OLD_UNOWN_L),
-    HOENN_TO_NATIONAL(OLD_UNOWN_M),
+    [HOENN_DEX_OLD_UNOWN_K - 1] = NATIONAL_DEX_HANDSHAKE,
+    [HOENN_DEX_OLD_UNOWN_L - 1] = NATIONAL_DEX_TETHERING,
+    [HOENN_DEX_OLD_UNOWN_M - 1] = NATIONAL_DEX_COROUTINE,
     HOENN_TO_NATIONAL(OLD_UNOWN_N),
     HOENN_TO_NATIONAL(OLD_UNOWN_O),
     HOENN_TO_NATIONAL(OLD_UNOWN_P),
@@ -2370,6 +2370,13 @@ static void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon)
         if (GiveMoveToBoxMon(boxMon, move) == MON_HAS_MAX_MOVES)
             DeleteFirstMoveAndGiveMoveToBoxMon(boxMon, move);
     }
+}
+
+//  T-448: a daemon the companion delivered with no routines learns what its level would have taught it, with PP
+//  (src/daemons_carried.c, on load).
+void DaemonsGiveBoxMonInitialMoveset(struct BoxPokemon *boxMon)
+{
+    GiveBoxMonInitialMoveset(boxMon);
 }
 
 //  T-234: a daemon that has just become PENPHIN is offered RESONANCE, through the evolution scene's own "learn a new
@@ -5187,6 +5194,8 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem)
         level = GetMonData(mon, MON_DATA_LEVEL, NULL);
         friendship = GetMonData(mon, MON_DATA_FRIENDSHIP, NULL);
 
+        //  T-450: EVO_CARRIED has no case here, deliberately -- the companion judges it, and SYNC brings the
+        //  grown daemon home already grown (src/daemons_carried.c). Nothing on the cart may meet it.
         for (i = 0; i < EVOS_PER_MON; i++)
         {
             switch (gEvolutionTable[species][i].method)
@@ -5381,6 +5390,13 @@ static const u16 sNexusCries[] = {
     [SPECIES_BASTET - SPECIES_OLD_UNOWN_C] = SPECIES_PERSIAN,
 };
 // END gbanexus
+// BEGIN gbacarried -- T-450, the carried line (tools/gbacarried.py writes this)
+static const u16 sCarriedCries[] = {
+    [SPECIES_HANDSHAKE - SPECIES_OLD_UNOWN_K] = SPECIES_PICHU,
+    [SPECIES_TETHERING - SPECIES_OLD_UNOWN_K] = SPECIES_PIKACHU,
+    [SPECIES_COROUTINE - SPECIES_OLD_UNOWN_K] = SPECIES_RAICHU,
+};
+// END gbacarried
 u16 SpeciesToCryId(u16 species)
 {
     if (species < SPECIES_OLD_UNOWN_B - 1)
@@ -5388,6 +5404,8 @@ u16 SpeciesToCryId(u16 species)
 
     if (species >= SPECIES_OLD_UNOWN_C - 1 && species <= SPECIES_OLD_UNOWN_J - 1)   // T-395
         return SpeciesToCryId(sNexusCries[species - (SPECIES_OLD_UNOWN_C - 1)] - 1);
+    if (species >= SPECIES_OLD_UNOWN_K - 1 && species <= SPECIES_OLD_UNOWN_M - 1)   // T-450
+        return SpeciesToCryId(sCarriedCries[species - (SPECIES_OLD_UNOWN_K - 1)] - 1);
     if (species <= SPECIES_OLD_UNOWN_Z - 1)
         return SPECIES_UNOWN - 1;
 

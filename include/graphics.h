@@ -2180,6 +2180,26 @@ extern const u32 gMonShinyPalette_Bastet[];
 extern const u8 gMonIcon_Bastet[];
 extern const u8 gMonFootprint_Bastet[];
 // END gbanexus
+// BEGIN gbacarried -- T-450, the carried line (tools/gbacarried.py writes this)
+extern const u32 gMonFrontPic_Handshake[];
+extern const u32 gMonBackPic_Handshake[];
+extern const u32 gMonPalette_Handshake[];
+extern const u32 gMonShinyPalette_Handshake[];
+extern const u8 gMonIcon_Handshake[];
+extern const u8 gMonFootprint_Handshake[];
+extern const u32 gMonFrontPic_Tethering[];
+extern const u32 gMonBackPic_Tethering[];
+extern const u32 gMonPalette_Tethering[];
+extern const u32 gMonShinyPalette_Tethering[];
+extern const u8 gMonIcon_Tethering[];
+extern const u8 gMonFootprint_Tethering[];
+extern const u32 gMonFrontPic_Coroutine[];
+extern const u32 gMonBackPic_Coroutine[];
+extern const u32 gMonPalette_Coroutine[];
+extern const u32 gMonShinyPalette_Coroutine[];
+extern const u8 gMonIcon_Coroutine[];
+extern const u8 gMonFootprint_Coroutine[];
+// END gbacarried
 extern const u32 gMonFrontPic_Absol[];
 extern const u32 gMonPalette_Absol[];
 extern const u32 gMonBackPic_Absol[];

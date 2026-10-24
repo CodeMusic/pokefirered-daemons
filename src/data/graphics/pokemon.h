@@ -2514,6 +2514,26 @@ const u32 gMonShinyPalette_Bastet[] = INCBIN_U32("graphics/pokemon/nexus_bastet/
 const u8 gMonIcon_Bastet[] = INCBIN_U8("graphics/pokemon/nexus_bastet/icon.4bpp");
 const u8 gMonFootprint_Bastet[] = INCBIN_U8("graphics/pokemon/nexus_bastet/footprint.1bpp");
 // END gbanexus
+// BEGIN gbacarried -- T-450, the carried line (tools/gbacarried.py writes this)
+const u32 gMonFrontPic_Handshake[] = INCBIN_U32("graphics/pokemon/old_unown_k/front.4bpp.lz");
+const u32 gMonBackPic_Handshake[] = INCBIN_U32("graphics/pokemon/old_unown_k/back.4bpp.lz");
+const u32 gMonPalette_Handshake[] = INCBIN_U32("graphics/pokemon/old_unown_k/normal.gbapal.lz");
+const u32 gMonShinyPalette_Handshake[] = INCBIN_U32("graphics/pokemon/old_unown_k/shiny.gbapal.lz");
+const u8 gMonIcon_Handshake[] = INCBIN_U8("graphics/pokemon/old_unown_k/icon.4bpp");
+const u8 gMonFootprint_Handshake[] = INCBIN_U8("graphics/pokemon/old_unown_k/footprint.1bpp");
+const u32 gMonFrontPic_Tethering[] = INCBIN_U32("graphics/pokemon/old_unown_l/front.4bpp.lz");
+const u32 gMonBackPic_Tethering[] = INCBIN_U32("graphics/pokemon/old_unown_l/back.4bpp.lz");
+const u32 gMonPalette_Tethering[] = INCBIN_U32("graphics/pokemon/old_unown_l/normal.gbapal.lz");
+const u32 gMonShinyPalette_Tethering[] = INCBIN_U32("graphics/pokemon/old_unown_l/shiny.gbapal.lz");
+const u8 gMonIcon_Tethering[] = INCBIN_U8("graphics/pokemon/old_unown_l/icon.4bpp");
+const u8 gMonFootprint_Tethering[] = INCBIN_U8("graphics/pokemon/old_unown_l/footprint.1bpp");
+const u32 gMonFrontPic_Coroutine[] = INCBIN_U32("graphics/pokemon/old_unown_m/front.4bpp.lz");
+const u32 gMonBackPic_Coroutine[] = INCBIN_U32("graphics/pokemon/old_unown_m/back.4bpp.lz");
+const u32 gMonPalette_Coroutine[] = INCBIN_U32("graphics/pokemon/old_unown_m/normal.gbapal.lz");
+const u32 gMonShinyPalette_Coroutine[] = INCBIN_U32("graphics/pokemon/old_unown_m/shiny.gbapal.lz");
+const u8 gMonIcon_Coroutine[] = INCBIN_U8("graphics/pokemon/old_unown_m/icon.4bpp");
+const u8 gMonFootprint_Coroutine[] = INCBIN_U8("graphics/pokemon/old_unown_m/footprint.1bpp");
+// END gbacarried
 const u32 gMonFrontPic_Absol[] = INCBIN_U32("graphics/pokemon/absol/front.4bpp.lz");
 const u32 gMonPalette_Absol[] = INCBIN_U32("graphics/pokemon/absol/normal.gbapal.lz");
 const u32 gMonBackPic_Absol[] = INCBIN_U32("graphics/pokemon/absol/back.4bpp.lz");

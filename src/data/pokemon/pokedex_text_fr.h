@@ -2565,6 +2565,26 @@ const u8 gBastetPokedexText[] = _(
     "make things beyond their day's work.");
 
 // END gbanexus
+// BEGIN gbacarried -- T-450, the carried line (tools/gbacarried.py writes this)
+// T-450, DRAFT
+const u8 gHandshakePokedexText[] = _(
+    "It holds one paw out to whoever lifts\n"
+    "it, and keeps it out until it is taken.\n"
+    "Nobody has found one already grown.");
+
+// T-450, DRAFT
+const u8 gTetheringPokedexText[] = _(
+    "It rides along and counts the steps it\n"
+    "is carried. Left in a box it stays as it\n"
+    "was. Walked a long way, it changes.");
+
+// T-450, DRAFT
+const u8 gCoroutinePokedexText[] = _(
+    "It glides off the shoulder it rides and\n"
+    "lands on it again a few steps on. It\n"
+    "picks up exactly where it left off.");
+
+// END gbacarried
 const u8 gAbsolPokedexText[] = _(
     "It appears before a disaster. It knows\n"
     "what is coming, and every word of the\n"

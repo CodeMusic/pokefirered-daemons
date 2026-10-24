@@ -649,6 +649,14 @@ static const u16 sNexusPosModel[] = {
 };
 
 // END gbanexus
+// BEGIN gbacarried -- T-450, the carried line (tools/gbacarried.py writes this)
+static const u16 sCarriedPosModel[] = {
+    [SPECIES_HANDSHAKE - SPECIES_OLD_UNOWN_K] = SPECIES_PICHU,
+    [SPECIES_TETHERING - SPECIES_OLD_UNOWN_K] = SPECIES_PIKACHU,
+    [SPECIES_COROUTINE - SPECIES_OLD_UNOWN_K] = SPECIES_RAICHU,
+};
+
+// END gbacarried
 u8 Menu2_GetMonPosAttribute(u16 species, u32 personality, u8 attributeId)
 {
     if (species == SPECIES_UNOWN)
@@ -671,6 +679,8 @@ u8 Menu2_GetMonPosAttribute(u16 species, u32 personality, u8 attributeId)
     }
     else if (species >= SPECIES_OLD_UNOWN_C && species <= SPECIES_OLD_UNOWN_J)   // T-395
         species = sNexusPosModel[species - SPECIES_OLD_UNOWN_C];
+    else if (species >= SPECIES_OLD_UNOWN_K && species <= SPECIES_OLD_UNOWN_M)   // T-450
+        species = sCarriedPosModel[species - SPECIES_OLD_UNOWN_K];
     if (species != SPECIES_NONE && attributeId < PSA_MON_ATTR_COUNT)
     {
         species--;

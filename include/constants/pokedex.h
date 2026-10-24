@@ -403,6 +403,11 @@ enum {
     NATIONAL_DEX_LYNX,
     NATIONAL_DEX_BASTET,
 // END gbanexus
+// BEGIN gbacarried -- T-450, the carried line (tools/gbacarried.py writes this)
+    NATIONAL_DEX_HANDSHAKE,
+    NATIONAL_DEX_TETHERING,
+    NATIONAL_DEX_COROUTINE,
+// END gbacarried
     // Old Unown
     NATIONAL_DEX_OLD_UNOWN_B,
     NATIONAL_DEX_OLD_UNOWN_C,
@@ -433,7 +438,7 @@ enum {
 
 #define KANTO_DEX_COUNT     NATIONAL_DEX_MEW
 #define JOHTO_DEX_COUNT     NATIONAL_DEX_CELEBI
-#define NATIONAL_DEX_COUNT  NATIONAL_DEX_BASTET
+#define NATIONAL_DEX_COUNT  NATIONAL_DEX_COROUTINE
 
 // Hoenn Pokedex order
 enum {

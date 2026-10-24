@@ -4927,11 +4927,57 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM05_FLASH)
                                         | TMHM(HM06_ROCK_SMASH)),
 
-    [SPECIES_OLD_UNOWN_K] = TMHM_LEARNSET(0),
+    [SPECIES_OLD_UNOWN_K] = TMHM_LEARNSET(TMHM(TM06_TOXIC)
+                                        | TMHM(TM16_LIGHT_SCREEN)
+                                        | TMHM(TM17_PROTECT)
+                                        | TMHM(TM18_RAIN_DANCE)
+                                        | TMHM(TM23_IRON_TAIL)
+                                        | TMHM(TM24_THUNDERBOLT)
+                                        | TMHM(TM25_THUNDER)
+                                        | TMHM(TM27_RETURN)
+                                        | TMHM(TM34_SHOCK_WAVE)
+                                        | TMHM(TM42_FACADE)
+                                        | TMHM(TM44_REST)
+                                        | TMHM(HM05_FLASH)),
 
-    [SPECIES_OLD_UNOWN_L] = TMHM_LEARNSET(0),
+    [SPECIES_OLD_UNOWN_L] = TMHM_LEARNSET(TMHM(TM01_FOCUS_PUNCH)
+                                        | TMHM(TM06_TOXIC)
+                                        | TMHM(TM16_LIGHT_SCREEN)
+                                        | TMHM(TM17_PROTECT)
+                                        | TMHM(TM18_RAIN_DANCE)
+                                        | TMHM(TM23_IRON_TAIL)
+                                        | TMHM(TM24_THUNDERBOLT)
+                                        | TMHM(TM25_THUNDER)
+                                        | TMHM(TM27_RETURN)
+                                        | TMHM(TM28_DIG)
+                                        | TMHM(TM31_BRICK_BREAK)
+                                        | TMHM(TM34_SHOCK_WAVE)
+                                        | TMHM(TM42_FACADE)
+                                        | TMHM(TM44_REST)
+                                        | TMHM(HM04_STRENGTH)
+                                        | TMHM(HM05_FLASH)
+                                        | TMHM(HM06_ROCK_SMASH)),
 
-    [SPECIES_OLD_UNOWN_M] = TMHM_LEARNSET(0),
+    [SPECIES_OLD_UNOWN_M] = TMHM_LEARNSET(TMHM(TM01_FOCUS_PUNCH)
+                                        | TMHM(TM06_TOXIC)
+                                        | TMHM(TM15_HYPER_BEAM)
+                                        | TMHM(TM16_LIGHT_SCREEN)
+                                        | TMHM(TM17_PROTECT)
+                                        | TMHM(TM18_RAIN_DANCE)
+                                        | TMHM(TM23_IRON_TAIL)
+                                        | TMHM(TM24_THUNDERBOLT)
+                                        | TMHM(TM25_THUNDER)
+                                        | TMHM(TM27_RETURN)
+                                        | TMHM(TM28_DIG)
+                                        | TMHM(TM31_BRICK_BREAK)
+                                        | TMHM(TM34_SHOCK_WAVE)
+                                        | TMHM(TM42_FACADE)
+                                        | TMHM(TM44_REST)
+                                        | TMHM(TM46_THIEF)
+                                        | TMHM(HM04_STRENGTH)
+                                        | TMHM(HM05_FLASH)
+                                        | TMHM(HM06_ROCK_SMASH)
+                                        | TMHM(TM26_EARTHQUAKE)),
 
     [SPECIES_OLD_UNOWN_N] = TMHM_LEARNSET(0),
 

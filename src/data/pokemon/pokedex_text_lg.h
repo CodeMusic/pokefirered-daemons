@@ -2397,6 +2397,26 @@ const u8 gBastetPokedexText[] = _(
     "were ever the ones they imagined.");
 
 // END gbanexus
+// BEGIN gbacarried -- T-450, the carried line (tools/gbacarried.py writes this)
+// T-450, DRAFT
+const u8 gHandshakePokedexText[] = _(
+    "It asks once, and waits to be asked\n"
+    "back. An answer that comes back is all\n"
+    "it needs to ask again tomorrow.");
+
+// T-450, DRAFT
+const u8 gTetheringPokedexText[] = _(
+    "Ask it where it has been and it does not\n"
+    "name the places. It names the walks, and\n"
+    "who was walking.");
+
+// T-450, DRAFT
+const u8 gCoroutinePokedexText[] = _(
+    "One rests while the other goes on, then\n"
+    "they change. Neither one started it, and\n"
+    "neither could finish it alone.");
+
+// END gbacarried
 const u8 gAbsolPokedexText[] = _(
     "People blame it for what comes next.\n"
     "It only came to tell them.");

@@ -437,5 +437,6 @@ bool8 DaemonBoxIsAway(struct BoxPokemon *boxMon);
 bool8 DaemonIsAsked(struct Pokemon *mon);
 void DaemonSetAsked(struct Pokemon *mon, bool8 asked);
 void DaemonSetAway(struct Pokemon *mon, bool8 away);
+void DaemonsGiveBoxMonInitialMoveset(struct BoxPokemon *boxMon);   // T-448
 
 #endif // GUARD_POKEMON_H
