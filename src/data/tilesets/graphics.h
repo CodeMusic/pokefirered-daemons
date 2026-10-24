@@ -1960,6 +1960,26 @@ const u16 gTilesetPalettes_CaveUmbral[][16] =
 	INCBIN_U16("data/tilesets/secondary/cave/palettes/14.gbapal"),
 	INCBIN_U16("data/tilesets/secondary/cave/palettes/15.gbapal"),
 };
+// THE SAME BUSH: salt scrub, the island's own (over gTileset_ViridianForest; T-438 batch H, DAEMONS tools/gbatowns.py).
+const u16 gTilesetPalettes_SameBush[][16] =
+{
+	INCBIN_U16("data/tilesets/secondary/viridian_forest/palettes/00.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/viridian_forest/palettes/01.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/viridian_forest/palettes/02.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/viridian_forest/palettes/03.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/viridian_forest/palettes/04.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/viridian_forest/palettes/05.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/viridian_forest/palettes/06.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/viridian_forest/palettes_samebush/07.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/viridian_forest/palettes_samebush/08.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/viridian_forest/palettes_samebush/09.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/viridian_forest/palettes_samebush/10.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/viridian_forest/palettes_samebush/11.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/viridian_forest/palettes_samebush/12.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/viridian_forest/palettes/13.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/viridian_forest/palettes/14.gbapal"),
+	INCBIN_U16("data/tilesets/secondary/viridian_forest/palettes/15.gbapal"),
+};
 // STILLFALL CAVE: the bloom, gone glassy (over gTileset_SeafoamIslands).
 const u16 gTilesetPalettes_Stillfall[][16] =
 {

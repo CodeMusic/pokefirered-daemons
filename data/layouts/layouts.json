@@ -3675,7 +3675,7 @@
       "border_width": 3,
       "border_height": 2,
       "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_ViridianForest",
+      "secondary_tileset": "gTileset_SameBush",
       "border_filepath": "data/layouts/SixIsland_PatternBush/border.bin",
       "blockdata_filepath": "data/layouts/SixIsland_PatternBush/map.bin"
     },

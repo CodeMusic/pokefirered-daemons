@@ -1022,6 +1022,18 @@ const struct Tileset gTileset_CaveUmbral =
     .metatileAttributes = gMetatileAttributes_Cave,
     .callback = NULL,
 };
+// T-438 batch H: THE SAME BUSH (SixIsland_PatternBush), a palette split over gTileset_ViridianForest: THE
+// UNDERTONE's tiles and metatiles, its row 8 in salt scrub (DAEMONS tools/gbatowns.py).
+const struct Tileset gTileset_SameBush =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_ViridianForest,
+    .palettes = gTilesetPalettes_SameBush,
+    .metatiles = gMetatiles_ViridianForest,
+    .metatileAttributes = gMetatileAttributes_ViridianForest,
+    .callback = NULL,
+};
 // T-438 batch E: STILLFALL CAVE, a palette split over gTileset_SeafoamIslands.
 const struct Tileset gTileset_Stillfall =
 {
