@@ -1897,6 +1897,7 @@
 #define FLAG_TOWER_COLOUR_7F                  (DAEMONS_FLAGS_START + 0x3EA)
 #define FLAG_FEELINGS_REMNANT_UNVEILED        (DAEMONS_FLAGS_START + 0x3EB)   // T-433: the RESOLVER's reveal has frightened the party (once)
 #define FLAG_NOTEBOOK_LOOSE_PHOTO             (DAEMONS_FLAGS_START + 0x3EC)   // T-439: HALFTONE's KINGFISHER photographed the follower (once; LOOSE PAGES)
+#define FLAG_CARRIED_DEX_MOVED                (DAEMONS_FLAGS_START + 0x3ED)   // T-450: MISSINGNO's INDEX bits carried from 395 to 398 (once)
 
 //  BEGIN gbaglobalindex -- T-334: each fixed encounter of the GLOBAL INDEX, once gone (removeobject sets it). The beasts'
 //  and the edition daemons' are also set on every map load while they may not stand (event_data.c,

@@ -8,6 +8,7 @@
 #include "event_data.h"
 #include "teachy_tv.h"   // T-420: TeachyTvRepairOldSave
 #include "notebook.h"    // T-412: the DREAM LOG
+#include "daemons_carried.h"   // T-448: the load-time finish
 #include "event_object_movement.h"
 #include "event_scripts.h"
 #include "field_camera.h"
@@ -1838,6 +1839,7 @@ static void ContinueLoadedSave(void)
         gSaveBlock2Ptr->optionsButtonMode = OPTIONS_BUTTON_MODE_LR;
     //  T-420: a save made before the STREAM's flags moved out from under OPUS's, carried across once.
     TeachyTvRepairOldSave();
+    DaemonsCarried_OnLoad();    // T-448/T-450: what the companion grew or delivered is finished here, once
     DaemonsDreamLog_Loaded();   // T-412: a continue is a load -- on a later day, a waiting dream comes on the first step
     Follower_OnContinue();      // T-18 P3: back a tile behind the player, not out of them
 }

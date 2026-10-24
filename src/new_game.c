@@ -33,6 +33,7 @@
 #include "pokedex.h"
 #include "teachy_tv.h"
 #endif
+#include "daemons_carried.h"   // T-450: every build, not only DEBUG (trap 29)
 #include "renewable_hidden_items.h"
 #include "trainer_tower.h"
 #include "script.h"
@@ -463,6 +464,7 @@ void NewGameInitData(void)
     ResetTrainerTowerResults();
     DaemonsDeriveTrainerId();
     FlagSet(FLAG_STREAM_MOVED);   // T-420: a new game has no old STREAM bits to carry across
+    DaemonsCarried_NewGame();     // T-450: nor MISSINGNO at its old INDEX number
     //  T-394: a debug game starts as a normal one does; the kit is GAME EVENTS' EVERYTHING (DEBUG menu).
 }
 

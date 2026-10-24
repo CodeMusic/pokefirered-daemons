@@ -30,6 +30,7 @@
 #include "map_name_popup.h"
 #include "pokedex_screen.h"   // T-203
 #include "notebook.h"         // T-390: an insight arrives, in every build
+#include "daemons_carried.h"  // T-448: what the companion brought, said once
 #include "school_lift.h"
 
 // T-196: the label the popup carries while an echo is on screen.
@@ -936,6 +937,12 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
             }
             //  T-412. And again: a dream, the first dawn after a milestone (or the first load on a later day).
             if (Daemons_TryDreamArrives())
+            {
+                ScriptContext_SetupScript(Daemons_EventScript_Dream);
+                return TRUE;
+            }
+            //  T-448. And again: the first step after a load that finished a daemon the companion grew or delivered.
+            if (Daemons_TryCarriedArrives())
             {
                 ScriptContext_SetupScript(Daemons_EventScript_Dream);
                 return TRUE;

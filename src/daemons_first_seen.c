@@ -46,3 +46,38 @@ u8 DaemonsFirstSeen_Get(u16 nationalNum)
     mapsec = gSaveBlock1Ptr->daemonsFirstSeen[nationalNum - 1];
     return (mapsec >= KANTO_MAPSEC_START && mapsec < MAPSEC_NONE) ? mapsec : 0;
 }
+
+//  T-448: a daemon the companion delivered (metLocation METLOC_FATEFUL_ENCOUNTER) was first met there, not on a map; the
+//  byte keeps 0xFF for it, which no MAPSEC is, so DaemonsFirstSeen_Get still reads it as no place.
+#define FIRST_SEEN_COMPANION METLOC_FATEFUL_ENCOUNTER
+
+void DaemonsFirstSeen_RecordAt(u16 nationalNum, u8 mapsec)
+{
+    FirstSeenClaim();
+    if (nationalNum == 0 || nationalNum > DAEMONS_FIRST_SEEN_COUNT)
+        return;
+    if (mapsec != FIRST_SEEN_COMPANION && (mapsec < KANTO_MAPSEC_START || mapsec >= MAPSEC_NONE))
+        return;
+    if (gSaveBlock1Ptr->daemonsFirstSeen[nationalNum - 1] == 0)
+        gSaveBlock1Ptr->daemonsFirstSeen[nationalNum - 1] = mapsec;
+}
+
+void DaemonsFirstSeen_RecordCompanion(u16 nationalNum)
+{
+    DaemonsFirstSeen_RecordAt(nationalNum, FIRST_SEEN_COMPANION);
+}
+
+bool8 DaemonsFirstSeen_IsCompanion(u16 nationalNum)
+{
+    if (!FirstSeenIsOurs() || nationalNum == 0 || nationalNum > DAEMONS_FIRST_SEEN_COUNT)
+        return FALSE;
+    return gSaveBlock1Ptr->daemonsFirstSeen[nationalNum - 1] == FIRST_SEEN_COMPANION;
+}
+
+void DaemonsFirstSeen_Move(u16 from, u16 to)
+{
+    if (!FirstSeenIsOurs() || from == 0 || to == 0 || from > DAEMONS_FIRST_SEEN_COUNT || to > DAEMONS_FIRST_SEEN_COUNT)
+        return;
+    gSaveBlock1Ptr->daemonsFirstSeen[to - 1] = gSaveBlock1Ptr->daemonsFirstSeen[from - 1];
+    gSaveBlock1Ptr->daemonsFirstSeen[from - 1] = 0;
+}

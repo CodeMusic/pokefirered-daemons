@@ -2746,13 +2746,8 @@ static void PokeSum_PrintTrainerMemo_Mon_HeldByOT(void)
     }
     else
     {
-        if (metLocation == METLOC_FATEFUL_ENCOUNTER)
-        {
-            if (PokeSum_IsMonBoldOrGentle(nature))
-                DynamicPlaceholderTextUtil_ExpandPlaceholders(natureMetOrHatchedAtLevelStr, gText_PokeSum_FatefulEncounterMet_BoldGentleGrammar);
-            else
-                DynamicPlaceholderTextUtil_ExpandPlaceholders(natureMetOrHatchedAtLevelStr, gText_PokeSum_FatefulEncounterMet);
-        }
+        if (metLocation == METLOC_FATEFUL_ENCOUNTER)   // T-448: the companion delivered it
+            DynamicPlaceholderTextUtil_ExpandPlaceholders(natureMetOrHatchedAtLevelStr, gText_PokeSum_CompanionMet);
         else
         {
             if (PokeSum_IsMonBoldOrGentle(nature))
@@ -2796,13 +2791,8 @@ static void PokeSum_PrintTrainerMemo_Mon_NotHeldByOT(void)
             return;
         }
 
-        if (metLocation == METLOC_FATEFUL_ENCOUNTER)
-        {
-            if (PokeSum_IsMonBoldOrGentle(nature))
-                DynamicPlaceholderTextUtil_ExpandPlaceholders(natureMetOrHatchedAtLevelStr, gText_PokeSum_FatefulEncounterMet_BoldGentleGrammar);
-            else
-                DynamicPlaceholderTextUtil_ExpandPlaceholders(natureMetOrHatchedAtLevelStr, gText_PokeSum_FatefulEncounterMet);
-        }
+        if (metLocation == METLOC_FATEFUL_ENCOUNTER)   // T-448: the companion delivered it
+            DynamicPlaceholderTextUtil_ExpandPlaceholders(natureMetOrHatchedAtLevelStr, gText_PokeSum_CompanionMet);
         else
         {
             if (PokeSum_IsMonBoldOrGentle(nature))
@@ -2843,13 +2833,8 @@ static void PokeSum_PrintTrainerMemo_Mon_NotHeldByOT(void)
     }
     else
     {
-        if (metLocation == METLOC_FATEFUL_ENCOUNTER)
-        {
-            if (PokeSum_IsMonBoldOrGentle(nature))
-                DynamicPlaceholderTextUtil_ExpandPlaceholders(natureMetOrHatchedAtLevelStr, gText_PokeSum_FatefulEncounterMet_BoldGentleGrammar);
-            else
-                DynamicPlaceholderTextUtil_ExpandPlaceholders(natureMetOrHatchedAtLevelStr, gText_PokeSum_FatefulEncounterMet);
-        }
+        if (metLocation == METLOC_FATEFUL_ENCOUNTER)   // T-448: the companion delivered it
+            DynamicPlaceholderTextUtil_ExpandPlaceholders(natureMetOrHatchedAtLevelStr, gText_PokeSum_CompanionMet);
         else
         {
             if (PokeSum_IsMonBoldOrGentle(nature))

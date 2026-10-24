@@ -927,6 +927,8 @@ const u8 gText_PokeSum_MetInATrade[] = _("{DYNAMIC 0x00} nature.\nMet in a trade
 const u8 gText_PokeSum_MetInATrade_BoldGentleGrammar[] = _("{DYNAMIC 0x00} nature.\nMet in a trade.");
 const u8 gText_PokeSum_FatefulEncounterMet[] = _("{DYNAMIC 0x00} nature.\nMet in a fateful encounter when\nat {LV_2} {DYNAMIC 0x01}.");
 const u8 gText_PokeSum_FatefulEncounterMet_BoldGentleGrammar[] = _("{DYNAMIC 0x00} nature.\nMet in a fateful encounter when\nat {LV_2} {DYNAMIC 0x01}.");
+//  T-448, DRAFT: metLocation 0xFF is a daemon the companion delivered through SYNC (T-450's HANDSHAKE)
+const u8 gText_PokeSum_CompanionMet[] = _("{DYNAMIC 0x00} nature.\nMet through THE COMPANION\nat {LV_2} {DYNAMIC 0x01}.");
 const u8 gText_PokeSum_Met[] = _("{DYNAMIC 0x00} nature.\nMet in {DYNAMIC 0x02} at {LV_2} {DYNAMIC 0x01}.");
 const u8 gText_PokeSum_Met_BoldGentleGrammar[] = _("{DYNAMIC 0x00} nature.\nMet in {DYNAMIC 0x02} at {LV_2} {DYNAMIC 0x01}.");
 const u8 gText_PokeSum_ApparentlyMet[] = _("{DYNAMIC 0x00} nature.\nApparently met in {DYNAMIC 0x02}\nat {LV_2} {DYNAMIC 0x01}.");

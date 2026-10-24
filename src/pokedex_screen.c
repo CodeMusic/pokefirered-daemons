@@ -2215,6 +2215,7 @@ static const u8 sText_Bound[] = _("BOUND: ");                      // T-406, DRA
 static const u8 sText_BoundTrade[] = _("BY TRADE");                // T-406, DRAFT
 static const u8 sText_BoundGift[] = _("A GIFT");                   // T-406, DRAFT
 static const u8 sText_BoundEgg[] = _("FROM AN EGG");               // T-406, DRAFT
+static const u8 sText_BoundCompanion[] = _("THE COMPANION");       // T-448, DRAFT: metLocation 0xFF, a SYNC delivery
 
 static struct BoxPokemon *DexScreen_FirstHeld(u16 species)
 {
@@ -2253,7 +2254,9 @@ static bool8 DexScreen_BoundLine(u16 species, u8 *out)
         StringCopy(p, sText_BoundTrade);
     else if (GetBoxMonData(mon, MON_DATA_MET_LEVEL, NULL) == 0 || metLocation == METLOC_SPECIAL_EGG)
         StringCopy(p, sText_BoundEgg);
-    else if (GetBoxMonData(mon, MON_DATA_DAEMONS_GIFT, NULL) || metLocation == METLOC_FATEFUL_ENCOUNTER)
+    else if (metLocation == METLOC_FATEFUL_ENCOUNTER)    // T-448: the companion delivered it (T-450's HANDSHAKE)
+        StringCopy(p, sText_BoundCompanion);
+    else if (GetBoxMonData(mon, MON_DATA_DAEMONS_GIFT, NULL))
         StringCopy(p, sText_BoundGift);
     else if (metLocation >= KANTO_MAPSEC_START && metLocation < MAPSEC_NONE)
         GetMapName(p, metLocation, 0);
@@ -3727,6 +3730,7 @@ static const u8 sText_NativeWind[] = _("WIND");                    // T-415 phas
 static const u8 sText_FirstMet[] = _("FIRST MET");                 // T-406, DRAFT
 static const u8 sText_FirstMetShort[] = _("MET ");                 // T-406, DRAFT: "MET ROUTE 1" when the box is full
 static const u8 sText_FirstMetBefore[] = _("BEFORE RECORDS");      // T-406, DRAFT
+static const u8 sText_FirstMetCompanion[] = _("THE COMPANION");    // T-448, DRAFT: first met through a SYNC delivery
 static const u8 *const sNativeSky[] = { sText_NativeRain, sText_NativeStorm, sText_NativeSnow, sText_NativeFog, sText_NativeWind };
 static const u8 *const sNativeSeason[SEASON_COUNT] = { sText_NativeWinter, sText_NativeSpring, sText_NativeSummer, sText_NativeAutumn };
 static const u8 *const sNativeWatch[WATCH_COUNT] = { sText_NativeDay, sText_NativeDusk, sText_NativeNight, sText_NativeDawn };
@@ -3781,6 +3785,8 @@ static void DexScreen_PrintFirstMet(u8 win, u16 species, u8 used)
     mapsec = DaemonsFirstSeen_Get(SpeciesToNationalPokedexNum(species));
     if (mapsec != 0)
         GetMapName(place, mapsec, 0);
+    else if (DaemonsFirstSeen_IsCompanion(SpeciesToNationalPokedexNum(species)))
+        StringCopy(place, sText_FirstMetCompanion);
     else
         StringCopy(place, sText_FirstMetBefore);
     if (used <= 24)

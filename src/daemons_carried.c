@@ -1,0 +1,179 @@
+#include "global.h"
+#include "daemons_carried.h"
+#include "daemons_first_seen.h"
+#include "event_data.h"
+#include "overworld.h"
+#include "pokedex.h"
+#include "pokemon.h"
+#include "pokemon_storage_system.h"
+#include "string_util.h"
+#include "constants/abilities.h"
+#include "constants/flags.h"
+#include "constants/moves.h"
+#include "constants/region_map_sections.h"
+#include "constants/species.h"
+
+//  T-448 / T-450 (the user, 2026-10-24): THE LOAD-TIME FINISH. The companion (daemons-companion) writes into a save
+//  while a daemon is carried, and leaves the rest for the game to do when the save is next continued:
+//
+//    * C-184: a carried daemon that evolved there comes home as its new species (and a default nickname renamed);
+//    * T-450: one new HANDSHAKE per save -- a BoxPokemon in the PC's first empty slot with the save's trainer id and
+//      name, level 5, metLocation METLOC_FATEFUL_ENCOUNTER (0xFF), and NO routines.
+//
+//  Either way it sets a MARKER, unusedRibbons bit 2 (bits 0-1 are the FEELINGS', daemons_feelings.h; bit 3 stays
+//  free). On load (overworld.c, ContinueLoadedSave) every party slot and every box slot is walked, and a marked daemon
+//  is finished the way EvolutionScene would have: routines for its level if it has none (with PP), its ability made
+//  one its species has, the INDEX's seen and caught set (FIRST MET: THE COMPANION for a delivery), the party's stats
+//  recomputed -- and the marker cleared, so it happens once. A boxed daemon has no stored stats; the box computes them
+//  when it is withdrawn.
+//
+//  The first one finished is remembered (in RAM: nothing is saved) and said on the first step after the load, in one
+//  line (Daemons_TryCarriedArrives, field_control_avatar.c, after the dreams). DRAFT words, for the user.
+//
+//  ALSO ONCE: T-450 put the carried line at INDEX 395-397 and moved MISSINGNO from 395 to 398, so a save from before
+//  carries MISSINGNO's seen and caught bits (and its FIRST MET byte) across. A new game sets the flag (new_game.c).
+
+#define CARRIED_RIBBON_MARK     (1 << 2)
+
+#define CARRIED_OLD_MISSINGNO   395
+#define CARRIED_NEW_MISSINGNO   398
+
+enum {
+    CARRIED_NONE,
+    CARRIED_DELIVERED_BOX,
+    CARRIED_DELIVERED_PARTY,
+    CARRIED_CHANGED,
+};
+
+static EWRAM_DATA u8 sCarriedKind = 0;
+static EWRAM_DATA u8 sCarriedName[POKEMON_NAME_LENGTH + 1] = {0};
+
+STATIC_ASSERT(NATIONAL_DEX_OLD_UNOWN_B == CARRIED_NEW_MISSINGNO, MissingnoIsWhereTheMoveSaysItIs);
+
+//  DRAFT (T-448): the one line on return
+static const u8 sText_CarriedDeliveredBox[] = _("Something followed you home from the\nwalk. {STR_VAR_1} waits in the PC.");
+static const u8 sText_CarriedDeliveredParty[] = _("Something followed you home from the\nwalk. {STR_VAR_1} is with you.");
+static const u8 sText_CarriedChanged[] = _("{STR_VAR_1} changed while it was\ncarried.");
+
+static bool8 DexBitGet(const u8 *flags, u16 nationalNum)
+{
+    return (flags[(nationalNum - 1) / 8] >> ((nationalNum - 1) % 8)) & 1;
+}
+
+static void DexBitMove(u8 *flags, u16 from, u16 to)
+{
+    if (DexBitGet(flags, from))
+        flags[(to - 1) / 8] |= 1 << ((to - 1) % 8);
+    flags[(from - 1) / 8] &= ~(1 << ((from - 1) % 8));
+}
+
+static void MoveMissingno(void)
+{
+    if (FlagGet(FLAG_CARRIED_DEX_MOVED))
+        return;
+    DexBitMove(gSaveBlock2Ptr->pokedex.seen, CARRIED_OLD_MISSINGNO, CARRIED_NEW_MISSINGNO);
+    DexBitMove(gSaveBlock2Ptr->pokedex.owned, CARRIED_OLD_MISSINGNO, CARRIED_NEW_MISSINGNO);
+    DexBitMove(gSaveBlock1Ptr->seen1, CARRIED_OLD_MISSINGNO, CARRIED_NEW_MISSINGNO);
+    DexBitMove(gSaveBlock1Ptr->seen2, CARRIED_OLD_MISSINGNO, CARRIED_NEW_MISSINGNO);
+    DaemonsFirstSeen_Move(CARRIED_OLD_MISSINGNO, CARRIED_NEW_MISSINGNO);
+    FlagSet(FLAG_CARRIED_DEX_MOVED);
+}
+
+//  Where the save stands: the load has not read the map header yet, so FIRST MET is asked for by the save's own place.
+static u8 SavedMapsec(void)
+{
+    return Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum)->regionMapSectionId;
+}
+
+static u8 FinishOne(struct BoxPokemon *boxMon, struct Pokemon *partyMon)
+{
+    u8 ribbons, abilityNum, kind;
+    u16 species, nationalNum;
+    u32 personality;
+
+    if (!GetBoxMonData(boxMon, MON_DATA_SANITY_HAS_SPECIES, NULL))
+        return CARRIED_NONE;
+    ribbons = GetBoxMonData(boxMon, MON_DATA_UNUSED_RIBBONS, NULL);
+    if (!(ribbons & CARRIED_RIBBON_MARK))
+        return CARRIED_NONE;
+    ribbons &= ~CARRIED_RIBBON_MARK;
+    SetBoxMonData(boxMon, MON_DATA_UNUSED_RIBBONS, &ribbons);
+    if (GetBoxMonData(boxMon, MON_DATA_IS_EGG, NULL) || GetBoxMonData(boxMon, MON_DATA_SANITY_IS_BAD_EGG, NULL))
+        return CARRIED_NONE;
+
+    species = GetBoxMonData(boxMon, MON_DATA_SPECIES, NULL);
+    kind = CARRIED_CHANGED;
+    if (GetBoxMonData(boxMon, MON_DATA_MOVE1, NULL) == MOVE_NONE)
+    {
+        DaemonsGiveBoxMonInitialMoveset(boxMon);
+        kind = partyMon != NULL ? CARRIED_DELIVERED_PARTY : CARRIED_DELIVERED_BOX;
+    }
+    //  the ability is read from the species by abilityNum: a second slot the species does not have reads as none
+    abilityNum = GetBoxMonData(boxMon, MON_DATA_ABILITY_NUM, NULL);
+    if (abilityNum && gSpeciesInfo[species].abilities[1] == ABILITY_NONE)
+    {
+        abilityNum = 0;
+        SetBoxMonData(boxMon, MON_DATA_ABILITY_NUM, &abilityNum);
+    }
+    nationalNum = SpeciesToNationalPokedexNum(species);
+    personality = GetBoxMonData(boxMon, MON_DATA_PERSONALITY, NULL);
+    if (GetBoxMonData(boxMon, MON_DATA_MET_LOCATION, NULL) == METLOC_FATEFUL_ENCOUNTER)
+        DaemonsFirstSeen_RecordCompanion(nationalNum);
+    else
+        DaemonsFirstSeen_RecordAt(nationalNum, SavedMapsec());
+    HandleSetPokedexFlag(nationalNum, FLAG_SET_SEEN, personality);
+    HandleSetPokedexFlag(nationalNum, FLAG_SET_CAUGHT, personality);
+    if (partyMon != NULL)
+        CalculateMonStats(partyMon);
+    if (sCarriedKind == CARRIED_NONE)
+    {
+        sCarriedKind = kind;
+        GetBoxMonData(boxMon, MON_DATA_NICKNAME, sCarriedName);
+        StringGet_Nickname(sCarriedName);
+    }
+    return kind;
+}
+
+void DaemonsCarried_OnLoad(void)
+{
+    u32 i, j;
+
+    sCarriedKind = CARRIED_NONE;
+    MoveMissingno();
+    for (i = 0; i < PARTY_SIZE; i++)
+        FinishOne(&gPlayerParty[i].box, &gPlayerParty[i]);
+    for (i = 0; i < TOTAL_BOXES_COUNT; i++)
+        for (j = 0; j < IN_BOX_COUNT; j++)
+            FinishOne(GetBoxedMonPtr(i, j), NULL);
+}
+
+void DaemonsCarried_NewGame(void)
+{
+    FlagSet(FLAG_CARRIED_DEX_MOVED);   // a new game has no MISSINGNO at 395 to carry across
+    sCarriedKind = CARRIED_NONE;
+}
+
+//  The step hook: the line goes into gStringVar4 for Daemons_EventScript_Dream (a msgbox of gStringVar4) to say.
+bool8 Daemons_TryCarriedArrives(void)
+{
+    const u8 *text;
+
+    switch (sCarriedKind)
+    {
+    case CARRIED_DELIVERED_BOX:
+        text = sText_CarriedDeliveredBox;
+        break;
+    case CARRIED_DELIVERED_PARTY:
+        text = sText_CarriedDeliveredParty;
+        break;
+    case CARRIED_CHANGED:
+        text = sText_CarriedChanged;
+        break;
+    default:
+        return FALSE;
+    }
+    sCarriedKind = CARRIED_NONE;
+    StringCopy(gStringVar1, sCarriedName);
+    StringExpandPlaceholders(gStringVar4, text);
+    return TRUE;
+}
