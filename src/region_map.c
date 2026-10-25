@@ -399,6 +399,7 @@ static const u16 sPlayerIcon_RedPal[] = INCBIN_U16("graphics/region_map/player_i
 static const u16 sPlayerIcon_LeafPal[] = INCBIN_U16("graphics/region_map/player_icon_leaf.gbapal");
 static const u16 sMiscIcon_Pal[] = INCBIN_U16("graphics/region_map/misc_icon.gbapal"); // For dungeon and fly icons
 static const u16 sRegionMap_Pal[] = INCBIN_U16("graphics/region_map/region_map.gbapal");
+static const u16 sSea_Pal[] = INCBIN_U16("graphics/region_map/sea.gbapal"); // T-449: the open sea, row 5 (tools/gbaregionmap.py)
 static const u16 sUnusedPalette[] = { RGB(0, 0, 31), RGB(0, 12, 31), RGB_WHITE, RGB_WHITE };
 static const u16 sSwitchMapCursor_Pal[] = INCBIN_U16("graphics/region_map/switch_map_cursor.gbapal");
 static const u16 sMapEdge_Pal[] = INCBIN_U16("graphics/region_map/map_edge.gbapal");
@@ -969,6 +970,61 @@ static void TintMapEdgesPalette(void)
     LoadPalette(&sRegionMap_Pal[0x2F], BG_PLTT_ID(2) + 15, PLTT_SIZEOF(1));
 }
 
+//  T-449 (the user, 2026-10-24): THE SEA IS A SHUFFLE OF BITS AND NOTES. Every tile of open sea sits in BG palette
+//  row 5 and may carry a glyph -- a 0, a 1 or a note -- drawn as two shapes, A and B, in one of four groups (entries
+//  3..14: each group's A, B, and the pixels both share). This cycles their colours, each group on its own period, so
+//  the glyphs turn into one another and no tile changes. It writes the UNFADED buffer, so a fade carries on over it,
+//  and the faded one only while it is settled (the water's own colour, entry 1, is never cycled: faded == unfaded
+//  there means no fade is holding the palette). KEEP IN STEP with SEA_STEPS / SEA_PERIODS in tools/gbaregionmap.py.
+static const u8 sSeaSteps[4][8] = {
+    {1, 1, 0, 2, 2, 0, 1, 2}, {2, 0, 1, 1, 0, 2, 2, 1}, {0, 1, 2, 0, 1, 1, 2, 0}, {1, 2, 2, 0, 0, 1, 0, 2},
+};
+static const u8 sSeaPeriods[4] = {18, 26, 22, 30};
+
+#define tSeaTimer(g) data[(g)]
+#define tSeaStep(g)  data[4 + (g)]
+
+static void Task_RegionMapSea(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    u16 base = sSea_Pal[1], on = sSea_Pal[15], col;
+    u8 g, i, s;
+    bool8 settled;
+
+    if (sRegionMap == NULL)
+    {
+        DestroyTask(taskId);
+        return;
+    }
+    settled = !gPaletteFade.active && gPlttBufferFaded[BG_PLTT_ID(5) + 1] == gPlttBufferUnfaded[BG_PLTT_ID(5) + 1];
+    for (g = 0; g < 4; g++)
+    {
+        if (++tSeaTimer(g) >= sSeaPeriods[g])
+        {
+            tSeaTimer(g) = 0;
+            tSeaStep(g) = (tSeaStep(g) + 1) % 8;
+        }
+        s = sSeaSteps[g][tSeaStep(g)];
+        for (i = 0; i < 3; i++)
+        {
+            col = ((i == 0 && s == 1) || (i == 1 && s == 2) || (i == 2 && s != 0)) ? on : base;
+            gPlttBufferUnfaded[BG_PLTT_ID(5) + 3 + 3 * g + i] = col;
+            if (settled)
+                gPlttBufferFaded[BG_PLTT_ID(5) + 3 + 3 * g + i] = col;
+        }
+    }
+}
+
+#undef tSeaTimer
+#undef tSeaStep
+
+static void StartRegionMapSea(void)
+{
+    LoadPalette(sSea_Pal, BG_PLTT_ID(5), sizeof(sSea_Pal));
+    if (!FuncIsActiveTask(Task_RegionMapSea))
+        CreateTask(Task_RegionMapSea, 80);
+}
+
 static void InitRegionMap(u8 type)
 {
     sRegionMap = AllocZeroed(sizeof(struct RegionMap));
@@ -1152,6 +1208,7 @@ static bool8 LoadRegionMapGfx(void)
     case 1:
         LoadPalette(sRegionMap_Pal, 0, sizeof(sRegionMap_Pal));
         TintMapEdgesPalette();
+        StartRegionMapSea();   // T-449
         if (sRegionMap->type != REGIONMAP_TYPE_NORMAL)
         {
             LoadPalette(&sTopBar_Pal[15], BG_PLTT_ID(0), sizeof(sTopBar_Pal[15]));
@@ -1159,6 +1216,7 @@ static bool8 LoadRegionMapGfx(void)
             LoadPalette(&sTopBar_Pal[15], BG_PLTT_ID(2), sizeof(sTopBar_Pal[15]));
             LoadPalette(&sTopBar_Pal[15], BG_PLTT_ID(3), sizeof(sTopBar_Pal[15]));
             LoadPalette(&sTopBar_Pal[15], BG_PLTT_ID(4), sizeof(sTopBar_Pal[15]));
+            LoadPalette(&sTopBar_Pal[15], BG_PLTT_ID(5), sizeof(sTopBar_Pal[15]));   // T-449: the sea's row too
         }
         break;
     case 2:
@@ -2484,6 +2542,7 @@ static void Task_MapOpenAnim(u8 taskId)
         LoadPalette(&sTopBar_Pal[15], BG_PLTT_ID(2), sizeof(sTopBar_Pal[15]));
         LoadPalette(&sTopBar_Pal[15], BG_PLTT_ID(3), sizeof(sTopBar_Pal[15]));
         LoadPalette(&sTopBar_Pal[15], BG_PLTT_ID(4), sizeof(sTopBar_Pal[15]));
+        LoadPalette(&sTopBar_Pal[15], BG_PLTT_ID(5), sizeof(sTopBar_Pal[15]));   // T-449: the sea's row too
         sMapOpenCloseAnim->openState++;
         break;
     case 11:
