@@ -454,3 +454,15 @@ PalletTown_ProfessorOaksLab_Text_OakOpusFound::
     .string "them I am still working on.\p"
     .string "The other, I think, you have found\n"
     .string "already. It was never for sale.$"
+
+@  T-457, DRAFT (placeholder; the user is writing this line): CRYSTAL's one line as she hands over the GLOBAL INDEX,
+@  about something else.
+PalletTown_ProfessorOaksLab_Text_CrystalSomethingElse::
+    .string "It is raining on the islands, I\n"
+    .string "hear. (DRAFT)$"
+
+@  T-457, DRAFT (placeholder): the receiver on her desk.
+PalletTown_ProfessorOaksLab_Text_Receiver::
+    .string "A receiver. It is picking up one\n"
+    .string "daemon, far away, on an island.\p"
+    .string "It is doing fine. (DRAFT)$"

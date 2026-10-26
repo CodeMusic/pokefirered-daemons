@@ -585,6 +585,9 @@ PalletTown_ProfessorOaksLab_EventScript_ProfOak::
 	@  T-257: the first time she is spoken to after the payload, she lets the INDEX write
 	goto_if_unset FLAG_CRYSTAL_READ_PAYLOAD, PalletTown_ProfessorOaksLab_EventScript_ProfOakAsBefore
 	goto_if_unset FLAG_INDEX_WRITES, PalletTown_ProfessorOaksLab_EventScript_TheIndexWrites
+	@  T-457: home, and the GLOBAL INDEX not yet given -- she gives it herself (only a debug order reaches this)
+	specialvar VAR_RESULT, IsNationalPokedexEnabled
+	goto_if_eq VAR_RESULT, FALSE, PalletTown_ProfessorOaksLab_EventScript_CrystalGivesGlobalIndex
 	setvar VAR_0x8004, PLAY_SONG_MEND   @ T-417 P4: once MEND is held, she hums FORGIVENESS OFFERED
 	call EventScript_Play_Hear
 PalletTown_ProfessorOaksLab_EventScript_ProfOakAsBefore::
@@ -967,9 +970,31 @@ PalletTown_ProfessorOaksLab_EventScript_TryStartNationalDexScene::
 	goto_if_lt VAR_0x8009, 60, PalletTown_ProfessorOaksLab_EventScript_DontStartNationalDexScene
 	goto_if_unset FLAG_WORLD_MAP_ONE_ISLAND, PalletTown_ProfessorOaksLab_EventScript_DontStartNationalDexScene
 .endif
-	delay 30
-	msgbox PalletTown_ProfessorOaksLab_Text_OakFavorToAskYouPlayer
-	goto PalletTown_ProfessorOaksLab_EventScript_NationalDexScene
+	@  T-457 (4.37): she hands it over almost silently, one line about something else. Vanilla's scene -- the
+	@  rival brought in, the speech -- is left below and no longer reached from here; TY is not in this (4.17).
+	goto PalletTown_ProfessorOaksLab_EventScript_CrystalGivesGlobalIndex
+	end
+
+@  T-457 (bible 4.37, the second joining). The merger is on the papers and the signs, never in her mouth: one line,
+@  about something else, then the INDEX. In play the GLOBAL INDEX comes from her aide while she is away (below), so
+@  this is reached only by a debug order or from TryStartNationalDexScene. DRAFT wording.
+PalletTown_ProfessorOaksLab_EventScript_CrystalGivesGlobalIndex::
+	msgbox PalletTown_ProfessorOaksLab_Text_CrystalSomethingElse
+	closemessage
+	textcolor NPC_TEXT_COLOR_NEUTRAL
+	playfanfare MUS_OBTAIN_KEY_ITEM
+	message PalletTown_ProfessorOaksLab_Text_PlayersPokedexWasUpgraded
+	waitmessage
+	waitfanfare
+	call EventScript_RestorePrevTextColor
+	special EnableNationalPokedex
+	release
+	end
+
+@  T-457 (4.37): the receiver on her desk, there once she is home and the GLOBAL INDEX is held (FLAG_HIDE_CRYSTAL_RECEIVER,
+@  event_data.c DaemonsSecondJoining). It picks up one daemon far away, doing fine. She does not explain it. DRAFT.
+PalletTown_ProfessorOaksLab_EventScript_Receiver::
+	msgbox PalletTown_ProfessorOaksLab_Text_Receiver, MSGBOX_SIGN
 	end
 
 PalletTown_ProfessorOaksLab_EventScript_DontStartNationalDexScene::

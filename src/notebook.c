@@ -462,6 +462,9 @@ static const struct NotebookEntry sEntries[] =
     NB_DOC_PROSPECTUS_4
     NB_DOC_PROSPECTUS_5
     NB_DOC_PROSPECTUS_6
+    //  T-457 (bible 4.37): two undated papers after the second joining -- her new work, then the joining.
+    NB_DOC_PROSPECTUS_7
+    NB_DOC_PROSPECTUS_8
     { NB_PEER_REVIEW,  NB_KIND_TEXT,  0, FLAG_NOTEBOOK_REVIEW_POSITION, 0, sTitle_Review_Position,     sText_Review_Position },
     { NB_PEER_REVIEW,  NB_KIND_TEXT,  0, FLAG_NOTEBOOK_REVIEW_DRAFT,    0, sTitle_Review_Draft,        sText_Review_Draft },
     NB_DOC_PEER_REVIEW_3

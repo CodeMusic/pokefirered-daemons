@@ -777,6 +777,7 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
     DaemonsArriveAtUnderstandings();   // T-252: arrived at, never announced
     DaemonsDreamLog_Notice();          // T-412: a milestone just reached starts its dream waiting
     DaemonsGlobalIndexLegendFlags();   // T-334: the legends that may not stand yet stay hidden
+    DaemonsSecondJoining();            // T-457: the receiver, the papers, the board, the keepers
     RunOnTransitionMapScript();
     TryRegenerateRenewableHiddenItems();
     InitMap();
@@ -830,6 +831,7 @@ static void LoadMapFromWarp(bool32 unused)
     DaemonsArriveAtUnderstandings();   // T-252: arrived at, never announced
     DaemonsDreamLog_Notice();          // T-412: a milestone just reached starts its dream waiting
     DaemonsGlobalIndexLegendFlags();   // T-334: the legends that may not stand yet stay hidden
+    DaemonsSecondJoining();            // T-457: the receiver, the papers, the board, the keepers
     RunOnTransitionMapScript();
     TryRegenerateRenewableHiddenItems();
     UpdateLocationHistoryForRoamer();

@@ -131,6 +131,21 @@ void DaemonsGlobalIndexLegendFlags(void)
 #endif
 }
 
+//  T-457 (bible 4.37, the second joining): once CRYSTAL is home from THE ANNEX and the GLOBAL INDEX is held, the two
+//  halves have met -- her receiver stands on her desk, the papers are on her shelf, BRAZEN's board loses its scores
+//  and the CHECKPOINT keepers listen. In play the GLOBAL INDEX always comes first (CELIO's RUBY waits on it) and the
+//  flag is set on the walk home from THE ANNEX; a debug save may hold the two in either order. Run on every map
+//  load, before the map's objects are read, like DaemonsGlobalIndexLegendFlags. Once set it stays set.
+void DaemonsSecondJoining(void)
+{
+    if (!FlagGet(FLAG_SECOND_JOINING) && FlagGet(FLAG_CRYSTAL_READ_PAYLOAD) && IsNationalPokedexEnabled())
+        FlagSet(FLAG_SECOND_JOINING);
+    if (FlagGet(FLAG_SECOND_JOINING))
+        FlagClear(FLAG_HIDE_CRYSTAL_RECEIVER);
+    else
+        FlagSet(FLAG_HIDE_CRYSTAL_RECEIVER);
+}
+
 bool32 IsNationalPokedexEnabled(void)
 {
     if (gSaveBlock2Ptr->pokedex.nationalMagic == 0xB9

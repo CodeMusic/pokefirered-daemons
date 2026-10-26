@@ -11,6 +11,7 @@ extern const u8 NotebookDoc_CinnabarIsland_PokemonLab_ResearchRoom_3_6[];
 extern const u8 NotebookDoc_CinnabarIsland_PokemonLab_ResearchRoom_8_6[];
 extern const u8 NotebookDoc_FiveIsland_RocketWarehouse_25_4[];
 extern const u8 NotebookDoc_MtMoon_B2F_30_11[];
+extern const u8 NotebookDoc_PalletTown_ProfessorOaksLab_9_1[];
 extern const u8 NotebookDoc_PokemonTower_2F_15_10[];
 extern const u8 NotebookDoc_PokemonTower_3F_11_10[];
 extern const u8 NotebookDoc_PokemonTower_5F_14_11[];
@@ -44,6 +45,8 @@ static const struct { const u8 *script; u16 readFlag; u16 gateFlag; bool8 gateSe
     { NotebookDoc_SaffronCity_Gym_14_9, FLAG_NOTEBOOK_DOC_PROSPECTUS_6, FLAG_DEFEATED_SABRINA, TRUE },
     { NotebookDoc_SaffronCity_MrPsychicsHouse_5_5, FLAG_NOTEBOOK_DOC_PEER_REVIEW_3, FLAG_OWL_CONCEDED, FALSE },
     { NotebookDoc_SaffronCity_MrPsychicsHouse_5_5, FLAG_NOTEBOOK_DOC_PEER_REVIEW_4, FLAG_OWL_CONCEDED, TRUE },
+    { NotebookDoc_PalletTown_ProfessorOaksLab_9_1, FLAG_NOTEBOOK_DOC_PROSPECTUS_7, FLAG_SECOND_JOINING, TRUE },
+    { NotebookDoc_PalletTown_ProfessorOaksLab_9_1, FLAG_NOTEBOOK_DOC_PROSPECTUS_8, FLAG_SECOND_JOINING, TRUE },
 };
 
 #endif // GUARD_DATA_NOTEBOOK_FINDS_H

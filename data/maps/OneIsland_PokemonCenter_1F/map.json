@@ -229,6 +229,14 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "OneIsland_PokemonCenter_1F_EventScript_NetworkMachine"
+    },
+    {
+      "type": "sign",
+      "x": 18,
+      "y": 4,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_NORTH",
+      "script": "OneIsland_PokemonCenter_1F_EventScript_NetworkNotice"
     }
   ]
 }

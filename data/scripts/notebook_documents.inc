@@ -474,6 +474,56 @@ NotebookDoc_PEER_REVIEW_4_Read::
 	waitstate
 	return
 
+NotebookDoc_PROSPECTUS_7::
+	goto_if_set FLAG_NOTEBOOK_DOC_PROSPECTUS_7, NotebookDoc_PROSPECTUS_7_Again
+	setflag FLAG_NOTEBOOK_DOC_PROSPECTUS_7
+	call NotebookDoc_PROSPECTUS_7_Read
+	call EventScript_NotebookCopied
+	return
+
+NotebookDoc_PROSPECTUS_7_Quiet::
+	goto_if_set FLAG_NOTEBOOK_DOC_PROSPECTUS_7, NotebookDoc_PROSPECTUS_7_Again
+	setflag FLAG_NOTEBOOK_DOC_PROSPECTUS_7
+	call NotebookDoc_PROSPECTUS_7_Read
+	addvar VAR_0x8007, 1
+	return
+
+NotebookDoc_PROSPECTUS_7_Again::
+	call NotebookDoc_PROSPECTUS_7_Read
+	return
+
+NotebookDoc_PROSPECTUS_7_Read::
+	setvar VAR_0x8004, FLAG_NOTEBOOK_DOC_PROSPECTUS_7
+	fadescreen FADE_TO_BLACK
+	special Notebook_ReadFlagEntry
+	waitstate
+	return
+
+NotebookDoc_PROSPECTUS_8::
+	goto_if_set FLAG_NOTEBOOK_DOC_PROSPECTUS_8, NotebookDoc_PROSPECTUS_8_Again
+	setflag FLAG_NOTEBOOK_DOC_PROSPECTUS_8
+	call NotebookDoc_PROSPECTUS_8_Read
+	call EventScript_NotebookCopied
+	return
+
+NotebookDoc_PROSPECTUS_8_Quiet::
+	goto_if_set FLAG_NOTEBOOK_DOC_PROSPECTUS_8, NotebookDoc_PROSPECTUS_8_Again
+	setflag FLAG_NOTEBOOK_DOC_PROSPECTUS_8
+	call NotebookDoc_PROSPECTUS_8_Read
+	addvar VAR_0x8007, 1
+	return
+
+NotebookDoc_PROSPECTUS_8_Again::
+	call NotebookDoc_PROSPECTUS_8_Read
+	return
+
+NotebookDoc_PROSPECTUS_8_Read::
+	setvar VAR_0x8004, FLAG_NOTEBOOK_DOC_PROSPECTUS_8
+	fadescreen FADE_TO_BLACK
+	special Notebook_ReadFlagEntry
+	waitstate
+	return
+
 NotebookDoc_LAB_NOTES_4_Card::
 	lockall
 	call NotebookDoc_LAB_NOTES_4
@@ -519,6 +569,21 @@ NotebookDoc_MtMoon_B2F_30_11::
 	lockall
 	call NotebookDoc_PROSPECTUS_1
 NotebookDoc_MtMoon_B2F_30_11_0::
+	releaseall
+	end
+
+NotebookDoc_PalletTown_ProfessorOaksLab_9_1::
+	lockall
+	setvar VAR_0x8007, 0
+	goto_if_unset FLAG_SECOND_JOINING, NotebookDoc_PalletTown_ProfessorOaksLab_9_1_0
+	call NotebookDoc_PROSPECTUS_7_Quiet
+NotebookDoc_PalletTown_ProfessorOaksLab_9_1_0::
+	goto_if_unset FLAG_SECOND_JOINING, NotebookDoc_PalletTown_ProfessorOaksLab_9_1_1
+	call NotebookDoc_PROSPECTUS_8_Quiet
+NotebookDoc_PalletTown_ProfessorOaksLab_9_1_1::
+	goto_if_eq VAR_0x8007, 0, NotebookDoc_PalletTown_ProfessorOaksLab_9_1_Done
+	call EventScript_NotebookCopied
+NotebookDoc_PalletTown_ProfessorOaksLab_9_1_Done::
 	releaseall
 	end
 

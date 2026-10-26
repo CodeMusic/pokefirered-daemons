@@ -402,4 +402,21 @@ static const u8 sDocText_PEER_REVIEW_4[] = _(
     "mark.");
 #define NB_DOC_PEER_REVIEW_4 { NB_PEER_REVIEW, NB_KIND_TEXT, 0, FLAG_NOTEBOOK_DOC_PEER_REVIEW_4, 0, sDocTitle_PEER_REVIEW_4, sDocText_PEER_REVIEW_4 },
 
+static const u8 sDocTitle_PROSPECTUS_7[] = _("HER WORK (DRAFT)");
+static const u8 sDocText_PROSPECTUS_7[] = _(
+    "HER WORK (DRAFT)\p"
+    "A network in THE MARGINS, listening\n"
+    "for daemons far away.\p"
+    "DRAFT: the words are still being\n"
+    "written.");
+#define NB_DOC_PROSPECTUS_7 { NB_PROSPECTUS, NB_KIND_TEXT, 0, FLAG_NOTEBOOK_DOC_PROSPECTUS_7, 0, sDocTitle_PROSPECTUS_7, sDocText_PROSPECTUS_7 },
+
+static const u8 sDocTitle_PROSPECTUS_8[] = _("JOINING (DRAFT)");
+static const u8 sDocText_PROSPECTUS_8[] = _(
+    "JOINING (DRAFT)\p"
+    "THE INDEX / CELIO'S MACHINE\p"
+    "DRAFT: the words are still being\n"
+    "written.");
+#define NB_DOC_PROSPECTUS_8 { NB_PROSPECTUS, NB_KIND_TEXT, 0, FLAG_NOTEBOOK_DOC_PROSPECTUS_8, 0, sDocTitle_PROSPECTUS_8, sDocText_PROSPECTUS_8 },
+
 #endif // GUARD_DATA_NOTEBOOK_DOCUMENTS_H

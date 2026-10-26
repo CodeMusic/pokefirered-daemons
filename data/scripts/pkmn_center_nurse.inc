@@ -48,6 +48,7 @@ EventScript_PkmnCenterNurse_ReturnPkmn::
 	waitmovement 0
 	call EventScript_PkmnCenterNurse_CheckMeme
 	call EventScript_PkmnCenterNurse_CheckDream
+	call EventScript_PkmnCenterNurse_CheckListening
 	setvar VAR_0x8006, GIVER_CHECKPOINT   @ T-416: a holiday's gift, once the party is restored
 	call EventScript_HolidayGifts
 	msgbox Text_WeHopeToSeeYouAgain
@@ -103,3 +104,20 @@ EventScript_PkmnCenterNurse_DreamDeclined::
 	msgbox Text_AttendantDreamKeeps
 EventScript_PkmnCenterNurse_CheckDreamEnd::
 	return
+
+@ T-457 (bible 4.37): once the two halves have met, a keeper now and then answers someone who is not in the room --
+@ tending between the fights where you are judged. A check-in, never a reading. One heal in three. DRAFT wording.
+EventScript_PkmnCenterNurse_CheckListening::
+	goto_if_unset FLAG_SECOND_JOINING, EventScript_PkmnCenterNurse_CheckListeningEnd
+	random 3
+	goto_if_ne VAR_RESULT, 0, EventScript_PkmnCenterNurse_CheckListeningEnd
+	msgbox Text_KeeperListening
+EventScript_PkmnCenterNurse_CheckListeningEnd::
+	return
+
+@ T-457, DRAFT (placeholder): a CHECKPOINT keeper, to someone on the network.
+Text_KeeperListening::
+	.string "One moment. Someone on the islands\n"
+	.string "is checking in.\p"
+	.string "Yes, I hear you. Good to hear\n"
+	.string "from you. (DRAFT)$"

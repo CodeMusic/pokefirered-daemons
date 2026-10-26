@@ -106,6 +106,13 @@ SaffronCity_Text_SilphsLatestProduct::
     .string "Congratulations to our top\n"
     .string "performer!$"
 
+@  T-457, DRAFT (placeholder): the posting that replaces the scores, once the two halves have met. No scores.
+SaffronCity_Text_PostingNoScores::
+    .string "CORPUS NOTICE (DRAFT)\n"
+    .string "REVIEWS\p"
+    .string "Four candidates reviewed.\n"
+    .string "Notes are with each of them.$"
+
 SaffronCity_Text_TrainerFanClubSign::
     .string "THE READING ROOM\p"
     .string "GRADUATES ONLY. QUIET, PLEASE.$"

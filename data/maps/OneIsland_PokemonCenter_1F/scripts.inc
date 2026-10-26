@@ -411,6 +411,20 @@ OneIsland_PokemonCenter_1F_EventScript_NetworkMachine::
 	releaseall
 	end
 
+@  T-457 (bible 4.37): the seed. A notice beside CELIO's machine -- the network carries signals once its two halves
+@  (the RUBY and the SAPPHIRE, 8.2a's key pair) have met. Nobody says what it is for. DRAFT wording.
+OneIsland_PokemonCenter_1F_EventScript_NetworkNotice::
+	lockall
+	goto_if_set FLAG_SYS_CAN_LINK_WITH_RS, OneIsland_PokemonCenter_1F_EventScript_NetworkNoticeCarrying
+	msgbox OneIsland_PokemonCenter_1F_Text_NetworkNoticeWaiting
+	releaseall
+	end
+
+OneIsland_PokemonCenter_1F_EventScript_NetworkNoticeCarrying::
+	msgbox OneIsland_PokemonCenter_1F_Text_NetworkNoticeCarrying
+	releaseall
+	end
+
 OneIsland_PokemonCenter_1F_EventScript_NetworkMachineLinkedWithKanto::
 	msgbox OneIsland_PokemonCenter_1F_Text_MachineLinkedWithKanto
 	releaseall

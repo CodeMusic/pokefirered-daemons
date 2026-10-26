@@ -123,10 +123,23 @@ SaffronCity_EventScript_MrPsychicsHouseSign::
 
 SaffronCity_EventScript_SilphProductSign::
 	lockall
+	goto_if_set FLAG_SECOND_JOINING, SaffronCity_EventScript_SilphProductSignNoScores
 	msgbox SaffronCity_Text_SilphsLatestProduct
 	goto_if_set FLAG_NOTEBOOK_PROSPECTUS_SCORES, EventScript_NotebookAlreadyFiled
 	setflag FLAG_NOTEBOOK_PROSPECTUS_SCORES
 	call EventScript_NotebookCopied
+	releaseall
+	end
+
+@  T-457 (bible 4.37): after the second joining the same board carries a posting with no scores. One sign, one flag.
+@  The scores are still behind it for a player who never read them, so PROSPECTUS 2 can still be filed. DRAFT.
+SaffronCity_EventScript_SilphProductSignNoScores::
+	msgbox SaffronCity_Text_PostingNoScores
+	goto_if_set FLAG_NOTEBOOK_PROSPECTUS_SCORES, SaffronCity_EventScript_SilphProductSignDone
+	msgbox SaffronCity_Text_SilphsLatestProduct
+	setflag FLAG_NOTEBOOK_PROSPECTUS_SCORES
+	call EventScript_NotebookCopied
+SaffronCity_EventScript_SilphProductSignDone::
 	releaseall
 	end
 
