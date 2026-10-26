@@ -64,7 +64,7 @@ $(TILESETGFXDIR)/secondary/vermilion_city/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 334 -Wnum_tiles
 
 $(TILESETGFXDIR)/secondary/indigo_plateau/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 247 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 300 -Wnum_tiles
 
 $(TILESETGFXDIR)/secondary/cave/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 256 -Wnum_tiles
@@ -109,7 +109,7 @@ $(TILESETGFXDIR)/secondary/hall_of_fame/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 208 -Wnum_tiles
 
 $(TILESETGFXDIR)/secondary/pewter_city/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 312 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 376 -Wnum_tiles
 
 $(TILESETGFXDIR)/secondary/celadon_city/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 343 -Wnum_tiles
