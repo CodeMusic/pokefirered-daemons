@@ -363,10 +363,10 @@ $(MAPPREVIEWGFXDIR)/mt_moon/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 402 -Wnum_tiles
 
 $(MAPPREVIEWGFXDIR)/pokemon_mansion/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 388 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 315 -Wnum_tiles
 
 $(MAPPREVIEWGFXDIR)/pokemon_tower/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 290 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 350 -Wnum_tiles
 
 $(MAPPREVIEWGFXDIR)/power_plant/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 414 -Wnum_tiles
@@ -387,7 +387,7 @@ $(MAPPREVIEWGFXDIR)/seafoam_islands/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 410 -Wnum_tiles
 
 $(MAPPREVIEWGFXDIR)/silph_co/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 355 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 295 -Wnum_tiles
 
 $(MAPPREVIEWGFXDIR)/victory_road/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 395 -Wnum_tiles
