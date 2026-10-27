@@ -455,7 +455,9 @@ struct BattleStruct
         struct LinkBattlerHeader linkBattlerHeader;
         struct MultiBattlePokemonTx multiBattleMons[3];
     } multiBuffer;
-    u8 padding_1E4[0x1C];
+    u8 threeOn;                         // T-454: THE THREE, carried in this battle (src/daemons_three.c)
+    u8 three[PARTY_SIZE][3];            // T-454: CLOSURE, ATTUNEMENT, VOLTAGE per player party slot; never saved
+    u8 padding_1F7[0x9];
 }; // size == 0x200 bytes
 
 extern struct BattleStruct *gBattleStruct;

@@ -1,5 +1,6 @@
 #include "global.h"
 #include "daemons_feelings.h"   // T-433
+#include "daemons_three.h"      // T-454
 #include "daemon_saturation.h"
 #include "gflib.h"
 #include "item.h"
@@ -1094,6 +1095,8 @@ static void Cmd_accuracycheck(void)
         if (holdEffect == HOLD_EFFECT_EVASION_UP)
             calc = (calc * (100 - param)) / 100;
 
+        calc = Three_AdjustAccuracy(gBattlerAttacker, type, calc);   // T-454: a READ, for a CONTEXT routine
+
         // final calculation
         if ((Random() % 100 + 1) > calc)
         {
@@ -1157,6 +1160,8 @@ static void Cmd_ppreduce(void)
             gBattleMons[gBattlerAttacker].pp[gCurrMovePos] -= ppToDeduct;
         else
             gBattleMons[gBattlerAttacker].pp[gCurrMovePos] = 0;
+
+        Three_OnMoveUsed(gBattlerAttacker, gCurrentMove);   // T-454: stillness
 
         if (MOVE_IS_PERMANENT(gBattlerAttacker, gCurrMovePos))
         {
@@ -1224,6 +1229,14 @@ static void Cmd_damagecalc(void)
         gBattleMoveDamage *= 2;
     if (gProtectStructs[gBattlerAttacker].helpingHand)
         gBattleMoveDamage = gBattleMoveDamage * 15 / 10;
+
+    {
+        u8 type;
+
+        GET_MOVE_TYPE(gCurrentMove, type);
+        gBattleMoveDamage = Three_AdjustDamage(gBattlerAttacker, type, gBattleMoveDamage);   // T-454: a WRITE, or a leak
+        Three_OnHit(gBattlerTarget, gCritMultiplier);
+    }
 
     gBattlescriptCurrInstr++;
 }
@@ -2899,6 +2912,7 @@ static void Cmd_tryfaintmon(void)
             gHitMarker |= HITMARKER_FAINTED(gActiveBattler);
             BattleScriptPush(gBattlescriptCurrInstr + 7);
             gBattlescriptCurrInstr = BS_ptr;
+            Three_OnFaint(gActiveBattler, gBattlerAttacker);   // T-454: grief, or joy
             if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
             {
                 gHitMarker |= HITMARKER_PLAYER_FAINTED;
@@ -8611,6 +8625,8 @@ static void Cmd_trysetfutureattack(void)
 
         if (gProtectStructs[gBattlerAttacker].helpingHand)
             gWishFutureKnock.futureSightDmg[gBattlerTarget] = gWishFutureKnock.futureSightDmg[gBattlerTarget] * 15 / 10;
+        gWishFutureKnock.futureSightDmg[gBattlerTarget] = Three_AdjustDamage(gBattlerAttacker,   // T-454: FUTURE SIGHT
+            gBattleMoves[gCurrentMove].type, gWishFutureKnock.futureSightDmg[gBattlerTarget]);
 
         if (gCurrentMove == MOVE_DOOM_DESIRE)
             gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_DOOM_DESIRE;

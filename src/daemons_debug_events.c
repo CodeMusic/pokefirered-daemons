@@ -21,6 +21,7 @@
 #include "daemons_holidays.h"        // T-416
 #include "daemons_follower.h"        // T-18
 #include "daemons_feelings.h"        // T-431
+#include "daemons_three.h"           // T-454
 #include "pokemon.h"
 #include "data/holiday_lines.h"      // T-416: THE YEAR's titles
 
@@ -40,8 +41,9 @@
 
 #if DAEMONS_DEBUG
 
-enum { PG_EVENTS, PG_MARKS, PG_NOTEBOOK, PG_DRIVERS, PG_ROOTS, PG_SONGS, PG_YEAR, PG_FOLLOWER, PG_FEELINGS, PG_COUNT };
-enum { R_PAGE, R_GIVE, R_TOGGLE, R_ASK, R_VIEW };   // R_ASK gives, after a YES; R_VIEW only shows (T-431)
+enum { PG_EVENTS, PG_MARKS, PG_NOTEBOOK, PG_DRIVERS, PG_ROOTS, PG_SONGS, PG_YEAR, PG_FOLLOWER, PG_FEELINGS, PG_THREE, PG_COUNT };
+enum { R_PAGE, R_GIVE, R_TOGGLE, R_ASK, R_VIEW, R_PICK };   // R_ASK gives, after a YES; R_VIEW only shows (T-431);
+                                                            // R_PICK shows a party slot's THREE and picks it (T-454)
 
 enum
 {
@@ -61,6 +63,8 @@ enum
     EV_FEEL_USE_ITEM,                                                       // T-433
     EV_CRYSTAL_AGAIN,                                                       // T-457
     EV_SOUNDING,                                                            // T-458
+    EV_THREE_SLOT1, EV_THREE_SLOT6 = EV_THREE_SLOT1 + PARTY_SIZE - 1,         // T-454
+    EV_THREE_CLOSURE, EV_THREE_ATTUNEMENT, EV_THREE_VOLTAGE, EV_THREE_AUTO,
 };
 
 struct DbgRow { const u8 *name; u8 kind; u8 arg; };
@@ -177,7 +181,13 @@ static const u8 sName_FeelGlad[]    = _("PUSH GLAD +30");
 static const u8 sName_FeelMad[]     = _("PUSH MAD +30");
 static const u8 sName_FeelSad[]     = _("PUSH SAD +30");
 static const u8 sName_FeelAfraid[]  = _("PUSH AFRAID (CALM -30)");
-static const u8 sName_FeelUseItem[] = _("USE THE ITEM ON SLOT 1");   // T-433: gSpecialVar_ItemId, poked by the theatre
+static const u8 sName_FeelUseItem[] = _("USE THE ITEM ON SLOT 1");
+
+static const u8 sName_Three[]        = _("THE THREE >");             // T-454
+static const u8 sName_ThreeC[]       = _("> CLOSURE: AUTO, 0-4");
+static const u8 sName_ThreeA[]       = _("> ATTUNEMENT: AUTO, 0-4");
+static const u8 sName_ThreeV[]       = _("> VOLTAGE: AUTO, 0-4");
+static const u8 sName_ThreeAuto[]    = _("EVERY ONE AUTO AGAIN");   // T-433: gSpecialVar_ItemId, poked by the theatre
 
 //  THE STORY'S ORDER: the opening, the shoes and the INDEX, OPUS on THE REPO's shelf, then CAIRN's MARK and NOTEBOOK,
 //  the school, the ship, the DRIVERS, BRAZEN's tea and REVEAL, HALFTONE, the sleeper, the GUIDE, and last what only
@@ -215,6 +225,7 @@ static const struct DbgRow sRows_Events[] = {
     { sName_Year,        R_PAGE,   PG_YEAR },         // T-416
     { sName_Follower,    R_PAGE,   PG_FOLLOWER },     // T-18
     { sName_Feelings,    R_PAGE,   PG_FEELINGS },     // T-431
+    { sName_Three,       R_PAGE,   PG_THREE },        // T-454
     { sName_Stream,      R_GIVE,   EV_STREAM },
     { sName_Companion,   R_TOGGLE, EV_COMPANION },
 };
@@ -288,6 +299,17 @@ static const struct DbgRow sRows_Feelings[] = {
     { sName_FeelUseItem, R_GIVE, EV_FEEL_USE_ITEM },
 };
 
+//  T-454: each party slot's THREE as the next battle would start them (A picks the slot, marked >), and the picked
+//  slot's three set by hand for the battles after (AUTO, 0..4, AUTO). In a battle they move from there.
+static const struct DbgRow sRows_Three[] = {
+    { NULL, R_PICK, EV_THREE_SLOT1 + 0 }, { NULL, R_PICK, EV_THREE_SLOT1 + 1 }, { NULL, R_PICK, EV_THREE_SLOT1 + 2 },
+    { NULL, R_PICK, EV_THREE_SLOT1 + 3 }, { NULL, R_PICK, EV_THREE_SLOT1 + 4 }, { NULL, R_PICK, EV_THREE_SLOT1 + 5 },
+    { sName_ThreeC,     R_GIVE, EV_THREE_CLOSURE },
+    { sName_ThreeA,     R_GIVE, EV_THREE_ATTUNEMENT },
+    { sName_ThreeV,     R_GIVE, EV_THREE_VOLTAGE },
+    { sName_ThreeAuto,  R_GIVE, EV_THREE_AUTO },
+};
+
 static const struct { const struct DbgRow *rows; u8 count; } sPages[PG_COUNT] = {
     [PG_EVENTS]   = { sRows_Events,   ARRAY_COUNT(sRows_Events) },
     [PG_MARKS]    = { sRows_Marks,    ARRAY_COUNT(sRows_Marks) },
@@ -298,6 +320,7 @@ static const struct { const struct DbgRow *rows; u8 count; } sPages[PG_COUNT] = 
     [PG_YEAR]     = { sRows_Year,     ARRAY_COUNT(sRows_Year) },
     [PG_FOLLOWER] = { sRows_Follower, ARRAY_COUNT(sRows_Follower) },
     [PG_FEELINGS] = { sRows_Feelings, ARRAY_COUNT(sRows_Feelings) },
+    [PG_THREE]    = { sRows_Three,    ARRAY_COUNT(sRows_Three) },
 };
 
 static const u8 sText_Title_Events[] = _("GAME EVENTS, in story order.\nA gives or takes. + held, · not.");
@@ -309,9 +332,10 @@ static const u8 sText_Title_Songs[] = _("SONGBOOK: each song learned.\nB goes ba
 static const u8 sText_Title_Year[] = _("THE YEAR: each line arrived.\nB goes back.");
 static const u8 sText_Title_Follower[] = _("FOLLOWER: on or off, and the\nlead's friendship. B goes back.");
 static const u8 sText_Title_Feelings[] = _("FEELINGS now: G M S C, F friend-\nship. · never set. B goes back.");
+static const u8 sText_Title_Three[] = _("THE THREE, as a battle starts. A\npicks; ! set by hand. B goes back.");
 static const u8 *const sTitles[PG_COUNT] = {
     sText_Title_Events, sText_Title_Marks, sText_Title_Notebook, sText_Title_Drivers, sText_Title_Roots,
-    sText_Title_Songs, sText_Title_Year, sText_Title_Follower, sText_Title_Feelings,
+    sText_Title_Songs, sText_Title_Year, sText_Title_Follower, sText_Title_Feelings, sText_Title_Three,
 };
 static const u8 sText_Given[] = _("{STR_VAR_1}: given.");
 static const u8 sText_Taken[] = _("{STR_VAR_1}: taken away.");
@@ -624,6 +648,10 @@ static void Apply(u8 ev, bool8 on)
     case EV_FEEL_AFRAID:  Feelings_DebugPushLead(FEEL_CALM); return;
     case EV_FEEL_USE_ITEM: Feelings_DebugUseItem(); return;                     // T-433
     case EV_CRYSTAL_AGAIN: FlagClear(FLAG_HEARD_CRYSTAL_AT_RECEIVER); return;   // T-457: her line, heard again at the receiver
+    case EV_THREE_CLOSURE:    Three_DebugCycle(THREE_CLOSURE); return;          // T-454
+    case EV_THREE_ATTUNEMENT: Three_DebugCycle(THREE_ATTUNEMENT); return;
+    case EV_THREE_VOLTAGE:    Three_DebugCycle(THREE_VOLTAGE); return;
+    case EV_THREE_AUTO:       Three_DebugAllAuto(); return;
     case EV_SOUNDING:                                                           // T-458: what a SYNC would write
     {
         struct BoxPokemon *away = DaemonFirstAway();
@@ -740,6 +768,8 @@ static void BuildLabels(void)
 
         if (rows[i].kind == R_VIEW)
             FeelingsLabel(label, rows[i].arg - EV_FEEL_SLOT1);
+        else if (rows[i].kind == R_PICK)                                  // T-454
+            Three_DebugLabel(label, rows[i].arg - EV_THREE_SLOT1);
         else if (rows[i].arg == EV_SOUNDING && rows[i].kind == R_GIVE)     // T-458: the level it holds now
         {
             struct BoxPokemon *away = DaemonFirstAway();
@@ -872,6 +902,12 @@ void DaemonsDebug_EventsDo(void)
     row = &sPages[sPage].rows[gSpecialVar_Result];
     if (row->kind == R_VIEW)
     {
+        StringCopy(gStringVar4, sTitles[sPage]);
+        return;
+    }
+    if (row->kind == R_PICK)   // T-454
+    {
+        Three_DebugPick(row->arg - EV_THREE_SLOT1);
         StringCopy(gStringVar4, sTitles[sPage]);
         return;
     }

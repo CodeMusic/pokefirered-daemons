@@ -5,6 +5,7 @@
 #include "malloc.h"
 #include "pokemon.h"
 #include "trainer_tower.h"
+#include "daemons_three.h"   // T-454
 
 void AllocateBattleResources(void)
 {
@@ -19,6 +20,7 @@ void AllocateBattleResources(void)
     }
 
     gBattleStruct = AllocZeroed(sizeof(*gBattleStruct));
+    Three_BattleStart();   // T-454: the three, derived for this battle
 
     gBattleResources = AllocZeroed(sizeof(*gBattleResources));
     gBattleResources->secretBase = AllocZeroed(sizeof(*gBattleResources->secretBase));
