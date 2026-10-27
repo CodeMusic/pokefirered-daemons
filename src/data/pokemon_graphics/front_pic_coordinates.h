@@ -222,113 +222,113 @@ const struct MonCoords gMonFrontPicCoords[] =
     },
     [SPECIES_GLOOM] =
     {
-        .size = MON_COORDS_SIZE(48, 48),
-        .y_offset = 8,
+        .size = MON_COORDS_SIZE(32, 64),
+        .y_offset = 4,
     },
     [SPECIES_VILEPLUME] =
     {
-        .size = MON_COORDS_SIZE(56, 48),
-        .y_offset = 10,
+        .size = MON_COORDS_SIZE(56, 56),
+        .y_offset = 5,
     },
     [SPECIES_PARAS] =
     {
-        .size = MON_COORDS_SIZE(48, 32),
-        .y_offset = 18,
+        .size = MON_COORDS_SIZE(56, 64),
+        .y_offset = 3,
     },
     [SPECIES_PARASECT] =
     {
-        .size = MON_COORDS_SIZE(64, 48),
-        .y_offset = 8,
+        .size = MON_COORDS_SIZE(48, 40),
+        .y_offset = 15,
     },
     [SPECIES_VENONAT] =
-    {
-        .size = MON_COORDS_SIZE(40, 56),
-        .y_offset = 11,
-    },
-    [SPECIES_VENOMOTH] =
-    {
-        .size = MON_COORDS_SIZE(64, 56),
-        .y_offset = 8,
-    },
-    [SPECIES_DIGLETT] =
-    {
-        .size = MON_COORDS_SIZE(40, 32),
-        .y_offset = 17,
-    },
-    [SPECIES_DUGTRIO] =
-    {
-        .size = MON_COORDS_SIZE(56, 40),
-        .y_offset = 12,
-    },
-    [SPECIES_MEOWTH] =
     {
         .size = MON_COORDS_SIZE(40, 40),
         .y_offset = 12,
     },
-    [SPECIES_PERSIAN] =
+    [SPECIES_VENOMOTH] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 3,
+    },
+    [SPECIES_DIGLETT] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 1,
+    },
+    [SPECIES_DUGTRIO] =
     {
         .size = MON_COORDS_SIZE(56, 48),
-        .y_offset = 10,
-    },
-    [SPECIES_PSYDUCK] =
-    {
-        .size = MON_COORDS_SIZE(40, 48),
         .y_offset = 9,
     },
-    [SPECIES_GOLDUCK] =
+    [SPECIES_MEOWTH] =
     {
-        .size = MON_COORDS_SIZE(56, 56),
-        .y_offset = 6,
+        .size = MON_COORDS_SIZE(40, 56),
+        .y_offset = 5,
     },
-    [SPECIES_MANKEY] =
-    {
-        .size = MON_COORDS_SIZE(48, 48),
-        .y_offset = 14,
-    },
-    [SPECIES_PRIMEAPE] =
-    {
-        .size = MON_COORDS_SIZE(56, 56),
-        .y_offset = 6,
-    },
-    [SPECIES_GROWLITHE] =
-    {
-        .size = MON_COORDS_SIZE(48, 40),
-        .y_offset = 12,
-    },
-    [SPECIES_ARCANINE] =
+    [SPECIES_PERSIAN] =
     {
         .size = MON_COORDS_SIZE(64, 64),
         .y_offset = 2,
     },
-    [SPECIES_POLIWAG] =
+    [SPECIES_PSYDUCK] =
     {
-        .size = MON_COORDS_SIZE(56, 32),
-        .y_offset = 16,
+        .size = MON_COORDS_SIZE(56, 56),
+        .y_offset = 6,
     },
-    [SPECIES_POLIWHIRL] =
+    [SPECIES_GOLDUCK] =
     {
-        .size = MON_COORDS_SIZE(56, 48),
-        .y_offset = 11,
+        .size = MON_COORDS_SIZE(56, 64),
+        .y_offset = 3,
     },
-    [SPECIES_POLIWRATH] =
+    [SPECIES_MANKEY] =
     {
         .size = MON_COORDS_SIZE(56, 56),
         .y_offset = 7,
     },
+    [SPECIES_PRIMEAPE] =
+    {
+        .size = MON_COORDS_SIZE(56, 64),
+        .y_offset = 3,
+    },
+    [SPECIES_GROWLITHE] =
+    {
+        .size = MON_COORDS_SIZE(48, 64),
+        .y_offset = 3,
+    },
+    [SPECIES_ARCANINE] =
+    {
+        .size = MON_COORDS_SIZE(48, 56),
+        .y_offset = 4,
+    },
+    [SPECIES_POLIWAG] =
+    {
+        .size = MON_COORDS_SIZE(40, 48),
+        .y_offset = 8,
+    },
+    [SPECIES_POLIWHIRL] =
+    {
+        .size = MON_COORDS_SIZE(56, 56),
+        .y_offset = 6,
+    },
+    [SPECIES_POLIWRATH] =
+    {
+        .size = MON_COORDS_SIZE(56, 56),
+        .y_offset = 5,
+    },
     [SPECIES_ABRA] =
     {
-        .size = MON_COORDS_SIZE(48, 48),
-        .y_offset = 11,
+        .size = MON_COORDS_SIZE(56, 56),
+        .y_offset = 5,
     },
     [SPECIES_KADABRA] =
     {
-        .size = MON_COORDS_SIZE(64, 56),
-        .y_offset = 4,
+        .size = MON_COORDS_SIZE(40, 48),
+        .y_offset = 11,
     },
     [SPECIES_ALAKAZAM] =
     {
-        .size = MON_COORDS_SIZE(64, 64),
-        .y_offset = 1,
+        .size = MON_COORDS_SIZE(56, 48),
+        .y_offset = 9,
     },
     [SPECIES_MACHOP] =
     {
