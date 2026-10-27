@@ -371,6 +371,9 @@ $(MAPPREVIEWGFXDIR)/pokemon_tower/tiles.4bpp: %.4bpp: %.png
 $(MAPPREVIEWGFXDIR)/power_plant/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 414 -Wnum_tiles
 
+$(MAPPREVIEWGFXDIR)/review_board/tiles.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 316 -Wnum_tiles
+
 $(MAPPREVIEWGFXDIR)/rock_tunnel/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 417 -Wnum_tiles
 

@@ -31,6 +31,7 @@ enum MapPreviewScreenId
     MPS_SCUFIB_CHAMBER,
     MPS_RIXY_CHAMBER,
     MPS_VIAPOIS_CHAMBER,
+    MPS_INDIGO_PLATEAU,     // T-456: the REVIEW BOARD's card (UMBRA PLATEAU), new -- vanilla has none
     MPS_COUNT
 };
 

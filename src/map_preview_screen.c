@@ -77,6 +77,10 @@ static const u8 sBerryForestMapPreviewTilemap[] = INCBIN_U8("graphics/map_previe
 static const u8 sIcefallCaveMapPreviewPalette[] = INCBIN_U8("graphics/map_preview/icefall_cave/tiles.gbapal");
 static const u8 sIcefallCaveMapPreviewTiles[] = INCBIN_U8("graphics/map_preview/icefall_cave/tiles.4bpp.lz");
 static const u8 sIcefallCaveMapPreviewTilemap[] = INCBIN_U8("graphics/map_preview/icefall_cave/tilemap.bin.lz");
+// T-456: UMBRA PLATEAU's card, the REVIEW BOARD (DAEMONS tools/gbapreviews.py --landmarks writes it)
+static const u8 sIndigoPlateauMapPreviewPalette[] = INCBIN_U8("graphics/map_preview/review_board/tiles.gbapal");
+static const u8 sIndigoPlateauMapPreviewTiles[] = INCBIN_U8("graphics/map_preview/review_board/tiles.4bpp.lz");
+static const u8 sIndigoPlateauMapPreviewTilemap[] = INCBIN_U8("graphics/map_preview/review_board/tilemap.bin.lz");
 static const u8 sAlteringCaveMapPreviewPalette[] = INCBIN_U8("graphics/map_preview/altering_cave/tiles.gbapal");
 static const u8 sAlteringCaveMapPreviewTiles[] = INCBIN_U8("graphics/map_preview/altering_cave/tiles.4bpp.lz");
 static const u8 sAlteringCaveMapPreviewTilemap[] = INCBIN_U8("graphics/map_preview/altering_cave/tilemap.bin.lz");
@@ -312,6 +316,16 @@ static const struct MapPreviewScreen sMapPreviewScreenData[MPS_COUNT] = {
         .tilesptr = sMoneanChamberMapPreviewTiles,
         .tilemapptr = sMoneanChamberMapPreviewTilemap,
         .palptr = sMoneanChamberMapPreviewPalette
+    },
+    // T-456: shown on arriving by a warp (GOTO, teleport, whiteout); ROUTE 23's walk-up is a map connection, which
+    // never runs a preview, so it keeps the name popup
+    [MPS_INDIGO_PLATEAU] = {
+        .mapsec = MAPSEC_INDIGO_PLATEAU,
+        .type = MPS_TYPE_CAVE,
+        .flagId = FLAG_WORLD_MAP_INDIGO_PLATEAU_EXTERIOR,
+        .tilesptr = sIndigoPlateauMapPreviewTiles,
+        .tilemapptr = sIndigoPlateauMapPreviewTilemap,
+        .palptr = sIndigoPlateauMapPreviewPalette
     }
 };
 
@@ -370,6 +384,11 @@ bool8 MapHasPreviewScreen(u8 mapsec, u8 type)
 bool32 MapHasPreviewScreen_HandleQLState2(u8 mapsec, u8 type)
 {
     if (gQuestLogState == QL_STATE_PLAYBACK)
+    {
+        return FALSE;
+    }
+    // T-456: the Hall of Fame warps into UMBRA PLATEAU for the credits with the popup flag set -- no card there
+    else if (mapsec == MAPSEC_INDIGO_PLATEAU && FlagGet(FLAG_DONT_SHOW_MAP_NAME_POPUP))
     {
         return FALSE;
     }
