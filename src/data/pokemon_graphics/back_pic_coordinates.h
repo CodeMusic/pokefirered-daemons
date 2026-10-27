@@ -377,8 +377,8 @@ const struct MonCoords gMonBackPicCoords[] =
     },
     [SPECIES_GRAVELER] =
     {
-        .size = MON_COORDS_SIZE(56, 56),
-        .y_offset = 4,
+        .size = MON_COORDS_SIZE(56, 48),
+        .y_offset = 9,
     },
     [SPECIES_GOLEM] =
     {
@@ -412,8 +412,8 @@ const struct MonCoords gMonBackPicCoords[] =
     },
     [SPECIES_MAGNETON] =
     {
-        .size = MON_COORDS_SIZE(56, 56),
-        .y_offset = 8,
+        .size = MON_COORDS_SIZE(48, 48),
+        .y_offset = 11,
     },
     [SPECIES_FARFETCHD] =
     {
