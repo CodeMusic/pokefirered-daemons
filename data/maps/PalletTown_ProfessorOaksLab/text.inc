@@ -467,3 +467,29 @@ PalletTown_ProfessorOaksLab_Text_Receiver::
     .string "One daemon, far away,\n"
     .string "on an island.\p"
     .string "It is doing fine.$"
+
+@  T-458, DRAFT (the user's words, 2026-10-27): the receiver while a daemon is AWAY; its last line by the signal
+@  (0 no signal yet, 1 quiet, 2 fine, 3 well). STR_VAR_1 is the daemon's name (DaemonsSounding).
+PalletTown_ProfessorOaksLab_Text_ReceiverSignal0::
+    .string "A receiver, turned low.\p"
+    .string "It is picking up {STR_VAR_1},\n"
+    .string "far away.\p"
+    .string "No signal yet.$"
+
+PalletTown_ProfessorOaksLab_Text_ReceiverSignal1::
+    .string "A receiver, turned low.\p"
+    .string "It is picking up {STR_VAR_1},\n"
+    .string "far away.\p"
+    .string "It is quiet today.$"
+
+PalletTown_ProfessorOaksLab_Text_ReceiverSignal2::
+    .string "A receiver, turned low.\p"
+    .string "It is picking up {STR_VAR_1},\n"
+    .string "far away.\p"
+    .string "It is doing fine.$"
+
+PalletTown_ProfessorOaksLab_Text_ReceiverSignal3::
+    .string "A receiver, turned low.\p"
+    .string "It is picking up {STR_VAR_1},\n"
+    .string "far away.\p"
+    .string "It is doing well.$"

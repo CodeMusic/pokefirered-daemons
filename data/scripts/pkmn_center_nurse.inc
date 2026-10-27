@@ -111,8 +111,29 @@ EventScript_PkmnCenterNurse_CheckListening::
 	goto_if_unset FLAG_SECOND_JOINING, EventScript_PkmnCenterNurse_CheckListeningEnd
 	random 3
 	goto_if_ne VAR_RESULT, 0, EventScript_PkmnCenterNurse_CheckListeningEnd
+	special DaemonsSounding    @ T-458: an AWAY daemon is named (STR_VAR_1), by its signal (VAR_RESULT; 4: none)
+	goto_if_eq VAR_RESULT, 0, EventScript_PkmnCenterNurse_ListeningSignal0
+	goto_if_eq VAR_RESULT, 1, EventScript_PkmnCenterNurse_ListeningSignal1
+	goto_if_eq VAR_RESULT, 2, EventScript_PkmnCenterNurse_ListeningSignal2
+	goto_if_eq VAR_RESULT, 3, EventScript_PkmnCenterNurse_ListeningSignal3
 	msgbox Text_KeeperListening
 EventScript_PkmnCenterNurse_CheckListeningEnd::
+	return
+
+EventScript_PkmnCenterNurse_ListeningSignal0::
+	msgbox Text_KeeperListeningSignal0
+	return
+
+EventScript_PkmnCenterNurse_ListeningSignal1::
+	msgbox Text_KeeperListeningSignal1
+	return
+
+EventScript_PkmnCenterNurse_ListeningSignal2::
+	msgbox Text_KeeperListeningSignal2
+	return
+
+EventScript_PkmnCenterNurse_ListeningSignal3::
+	msgbox Text_KeeperListeningSignal3
 	return
 
 @ T-457, DRAFT (the user's words, 2026-10-27): a CHECKPOINT keeper, to someone on the network.
@@ -120,3 +141,25 @@ Text_KeeperListening::
 	.string "Excuse me, one moment.\p"
 	.string "…Yes, I hear you.\n"
 	.string "Good to hear from you.$"
+
+@ T-458, DRAFT (the user's words, 2026-10-27): the same check-in while a daemon is AWAY, naming it (STR_VAR_1), its
+@ last line by the companion's signal: 0 no signal yet, 1 quiet, 2 fine, 3 well.
+Text_KeeperListeningSignal0::
+	.string "Excuse me, one moment.\p"
+	.string "…Yes, I hear you.\n"
+	.string "No signal from {STR_VAR_1} yet.$"
+
+Text_KeeperListeningSignal1::
+	.string "Excuse me, one moment.\p"
+	.string "…Yes, I hear you.\n"
+	.string "{STR_VAR_1} is quiet today.$"
+
+Text_KeeperListeningSignal2::
+	.string "Excuse me, one moment.\p"
+	.string "…Yes, I hear you.\n"
+	.string "{STR_VAR_1} is doing fine.$"
+
+Text_KeeperListeningSignal3::
+	.string "Excuse me, one moment.\p"
+	.string "…Yes, I hear you.\n"
+	.string "{STR_VAR_1} is doing well.$"

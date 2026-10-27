@@ -996,7 +996,13 @@ PalletTown_ProfessorOaksLab_EventScript_CrystalGivesGlobalIndex::
 PalletTown_ProfessorOaksLab_EventScript_Receiver::
 	lockall
 	textcolor NPC_TEXT_COLOR_NEUTRAL
+	special DaemonsSounding    @ T-458: the first AWAY daemon's name in STR_VAR_1, its signal in VAR_RESULT (4: none)
+	goto_if_eq VAR_RESULT, 0, PalletTown_ProfessorOaksLab_EventScript_ReceiverSignal0
+	goto_if_eq VAR_RESULT, 1, PalletTown_ProfessorOaksLab_EventScript_ReceiverSignal1
+	goto_if_eq VAR_RESULT, 2, PalletTown_ProfessorOaksLab_EventScript_ReceiverSignal2
+	goto_if_eq VAR_RESULT, 3, PalletTown_ProfessorOaksLab_EventScript_ReceiverSignal3
 	msgbox PalletTown_ProfessorOaksLab_Text_Receiver
+PalletTown_ProfessorOaksLab_EventScript_ReceiverCrystal::
 	goto_if_set FLAG_HEARD_CRYSTAL_AT_RECEIVER, PalletTown_ProfessorOaksLab_EventScript_ReceiverDone
 	textcolor NPC_TEXT_COLOR_MALE   @ her voice everywhere (OBJ_EVENT_GFX_PROF_OAK's colour)
 	msgbox PalletTown_ProfessorOaksLab_Text_CrystalSomethingElse
@@ -1005,6 +1011,24 @@ PalletTown_ProfessorOaksLab_EventScript_ReceiverDone::
 	call EventScript_RestorePrevTextColor
 	releaseall
 	end
+
+@  T-458 (SOUNDINGS): while a daemon is AWAY on the companion, the receiver names it, and its last line follows the
+@  signal the companion wrote at its last SYNC. The worst is quiet; nothing alarms.
+PalletTown_ProfessorOaksLab_EventScript_ReceiverSignal0::
+	msgbox PalletTown_ProfessorOaksLab_Text_ReceiverSignal0
+	goto PalletTown_ProfessorOaksLab_EventScript_ReceiverCrystal
+
+PalletTown_ProfessorOaksLab_EventScript_ReceiverSignal1::
+	msgbox PalletTown_ProfessorOaksLab_Text_ReceiverSignal1
+	goto PalletTown_ProfessorOaksLab_EventScript_ReceiverCrystal
+
+PalletTown_ProfessorOaksLab_EventScript_ReceiverSignal2::
+	msgbox PalletTown_ProfessorOaksLab_Text_ReceiverSignal2
+	goto PalletTown_ProfessorOaksLab_EventScript_ReceiverCrystal
+
+PalletTown_ProfessorOaksLab_EventScript_ReceiverSignal3::
+	msgbox PalletTown_ProfessorOaksLab_Text_ReceiverSignal3
+	goto PalletTown_ProfessorOaksLab_EventScript_ReceiverCrystal
 
 PalletTown_ProfessorOaksLab_EventScript_DontStartNationalDexScene::
 	release

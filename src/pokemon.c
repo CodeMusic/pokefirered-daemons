@@ -6667,3 +6667,59 @@ void DaemonSetAway(struct Pokemon *mon, bool8 away)
 {
     mon->box.away = away ? 1 : 0;
 }
+
+//  T-458 (SOUNDINGS): the companion's signal, two bits after AWAY and ASKED in the same unchecksummed byte. The
+//  companion writes it at each SYNC; the game only reads it. 0 no signal yet, 1 quiet, 2 fine, 3 well.
+u8 DaemonBoxGetSignal(struct BoxPokemon *boxMon)
+{
+    return boxMon->signal;
+}
+
+u8 DaemonGetSignal(struct Pokemon *mon)
+{
+    return mon->box.signal;
+}
+
+//  T-458: the daemon the receiver and the keepers hear -- the first AWAY one, the party in order, then the PORT box by
+//  box. NULL when nothing is AWAY.
+struct BoxPokemon *DaemonFirstAway(void)
+{
+    u8 i, j;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        struct BoxPokemon *boxMon = &gPlayerParty[i].box;
+
+        if (GetBoxMonData(boxMon, MON_DATA_SPECIES) != SPECIES_NONE && !GetBoxMonData(boxMon, MON_DATA_IS_EGG)
+         && DaemonBoxIsAway(boxMon))
+            return boxMon;
+    }
+    for (i = 0; i < TOTAL_BOXES_COUNT; i++)
+    {
+        for (j = 0; j < IN_BOX_COUNT; j++)
+        {
+            struct BoxPokemon *boxMon = GetBoxedMonPtr(i, j);
+
+            if (GetBoxMonData(boxMon, MON_DATA_SPECIES) != SPECIES_NONE && !GetBoxMonData(boxMon, MON_DATA_IS_EGG)
+             && DaemonBoxIsAway(boxMon))
+                return boxMon;
+        }
+    }
+    return NULL;
+}
+
+//  T-458, a special: VAR_RESULT is the first AWAY daemon's signal (0-3), its name already in STR_VAR_1 before
+//  anything prints it (engine.md trap 43); 4 when nothing is AWAY, and STR_VAR_1 is left alone.
+void DaemonsSounding(void)
+{
+    struct BoxPokemon *boxMon = DaemonFirstAway();
+
+    if (boxMon == NULL)
+    {
+        gSpecialVar_Result = 4;
+        return;
+    }
+    GetBoxMonData(boxMon, MON_DATA_NICKNAME, gStringVar1);
+    StringGet_Nickname(gStringVar1);
+    gSpecialVar_Result = DaemonBoxGetSignal(boxMon);
+}

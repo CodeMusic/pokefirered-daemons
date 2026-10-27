@@ -1176,6 +1176,8 @@ static bool8 DbgDeviceCallback(void)
         if (GetMonData(mon, MON_DATA_SPECIES) == SPECIES_NONE || !DaemonIsAsked(mon))
             continue;
         mon->box.away ^= 1;
+        if (!mon->box.away)
+            mon->box.signal = 0;    // T-458: as the companion does on a return -- home has no signal
         DaemonSetAsked(mon, FALSE);
         answered++;
     }

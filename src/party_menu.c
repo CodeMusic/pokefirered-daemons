@@ -451,6 +451,7 @@ static const u8 sText_AwaySavedBringHome[] = _("Saved. {STR_VAR_1} is home. SYNC
 static const u8 sText_AwayRestoreFirst[]   = _("Restore {STR_VAR_1} before it goes:\nfull health, and nothing ailing it.{PAUSE_UNTIL_PRESS}");
 //  Which question the YES/NO answers: the app's way (the request), or the emergency way home.
 static bool8 sAwayAskingBringHome;
+static u8 sAwaySignalBefore;   // T-458: the signal it had, put back if the save fails
 
 #include "data/party_menu.h"
 
@@ -6583,7 +6584,11 @@ static void Task_HandleAwayYesNoInput(u8 taskId)
     {
     case 0:
         if (sAwayAskingBringHome)
+        {
             DaemonSetAway(mon, FALSE);                  // T-370: home now; the app is told by FLAG_COMPANION_RECALLED
+            sAwaySignalBefore = mon->box.signal;        // T-458: home has no signal -- what the companion does on a
+            mon->box.signal = 0;                        // return, so a later send starts at "No signal yet"
+        }
         else
             DaemonSetAsked(mon, !DaemonIsAsked(mon));
         DisplayPartyMenuMessage(gText_SavingDontTurnOffThePower, TRUE);
@@ -6642,6 +6647,7 @@ static void Task_AwaySave(u8 taskId)
         if (sAwayAskingBringHome)                     // put it back as it was: the file never saw it come home
         {
             DaemonSetAway(mon, TRUE);
+            mon->box.signal = sAwaySignalBefore;        // T-458
             FlagClear(FLAG_COMPANION_RECALLED);
         }
         else

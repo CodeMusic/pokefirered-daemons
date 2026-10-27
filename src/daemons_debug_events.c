@@ -60,6 +60,7 @@ enum
     EV_FEEL_3H, EV_FEEL_12H, EV_FEEL_DAY, EV_FEEL_GLAD, EV_FEEL_MAD, EV_FEEL_SAD, EV_FEEL_AFRAID,
     EV_FEEL_USE_ITEM,                                                       // T-433
     EV_CRYSTAL_AGAIN,                                                       // T-457
+    EV_SOUNDING,                                                            // T-458
 };
 
 struct DbgRow { const u8 *name; u8 kind; u8 arg; };
@@ -112,6 +113,8 @@ static const u8 sName_Guide[]        = _("THE GUIDE");
 static const u8 sName_Subtle[]       = _("THE SUBTLE LAYER");   // T-423
 static const u8 sName_GlobalIndex[]  = _("GLOBAL INDEX");
 static const u8 sName_CrystalAgain[] = _("CRYSTAL'S LINE AGAIN");   // T-457: at the receiver, once more
+static const u8 sName_Sounding[]     = _("AWAY'S SIGNAL ");         // T-458: + the first AWAY daemon's, 0-3
+static const u8 sName_SoundingNone[] = _("AWAY'S SIGNAL (NONE AWAY)");
 static const u8 sName_Roots[]        = _("UNDERSTANDINGS >");
 static const u8 sName_Stream[]       = _("STREAM AND HEARSAY");
 static const u8 sName_Companion[]    = _("COMPANION LINKED");
@@ -207,6 +210,7 @@ static const struct DbgRow sRows_Events[] = {
     { sName_Subtle,      R_TOGGLE, EV_SUBTLE },
     { sName_GlobalIndex, R_TOGGLE, EV_GLOBAL_INDEX },
     { sName_CrystalAgain, R_GIVE,  EV_CRYSTAL_AGAIN },   // T-457
+    { sName_Sounding,    R_GIVE,   EV_SOUNDING },     // T-458: A steps it 0, 1, 2, 3, 0 (the companion's job, faked)
     { sName_Roots,       R_PAGE,   PG_ROOTS },
     { sName_Year,        R_PAGE,   PG_YEAR },         // T-416
     { sName_Follower,    R_PAGE,   PG_FOLLOWER },     // T-18
@@ -620,6 +624,14 @@ static void Apply(u8 ev, bool8 on)
     case EV_FEEL_AFRAID:  Feelings_DebugPushLead(FEEL_CALM); return;
     case EV_FEEL_USE_ITEM: Feelings_DebugUseItem(); return;                     // T-433
     case EV_CRYSTAL_AGAIN: FlagClear(FLAG_HEARD_CRYSTAL_AT_RECEIVER); return;   // T-457: her line, heard again at the receiver
+    case EV_SOUNDING:                                                           // T-458: what a SYNC would write
+    {
+        struct BoxPokemon *away = DaemonFirstAway();
+
+        if (away != NULL)
+            away->signal = (away->signal + 1) & 3;
+        return;
+    }
     }
     if (ev >= EV_YEAR1 && ev <= EV_YEAR12)
     {
@@ -728,6 +740,15 @@ static void BuildLabels(void)
 
         if (rows[i].kind == R_VIEW)
             FeelingsLabel(label, rows[i].arg - EV_FEEL_SLOT1);
+        else if (rows[i].arg == EV_SOUNDING && rows[i].kind == R_GIVE)     // T-458: the level it holds now
+        {
+            struct BoxPokemon *away = DaemonFirstAway();
+
+            if (away == NULL)
+                StringCopy(StringCopy(label, mark), sName_SoundingNone);
+            else
+                ConvertIntToDecimalStringN(StringCopy(StringCopy(label, mark), rows[i].name), DaemonBoxGetSignal(away), STR_CONV_MODE_LEFT_ALIGN, 1);
+        }
         else
             StringCopy(StringCopy(label, mark), rows[i].name);
         sItems[i].label = label;
