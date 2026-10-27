@@ -165,7 +165,7 @@ static const u8 sSubtleText_4[] = _("Every routine in the craft is one of three 
 static const u8 sSubtleCaption_4[] = _("Read, write, link.");
 static const u8 sSubtleShort_5[] = _("THE THREE");
 static const u8 sSubtleTitle_5[] = _("Closure, Attunement and Voltage");
-static const u8 sSubtleText_5[] = _("Every daemon carries three values that set what its seam can do. Closure is how whole it is: whether there is one point of view. It rises with virtues over shadows. Attunement is how thin the seam is. It rises with stillness: breath, rest, silence. Voltage is feeling in the moment. It rises with ritual, music, grief and joy.\pReads rise with Attunement and fall with Voltage. Writes need Attunement and Voltage at once, and only while Closure holds. A flooded system with low Closure does not write. It leaks.\pA daemon, they say, carries them as numbers it cannot see. You carry them as a log.");
+static const u8 sSubtleText_5[] = _("Every daemon carries three values that set what its seam can do. Closure is how whole it is: whether there is one point of view. It rises with virtues over shadows. Attunement is how thin the seam is. It rises with stillness: breath, rest, silence. Voltage is feeling in the moment. It rises with ritual, music, grief and joy.\pReads rise with Attunement and fall with Voltage. Writes need Attunement and Voltage at once, and only while Closure holds. A flooded system with low Closure does not write. It leaks.\pA daemon carries them as numbers it cannot see. You carry them as a log.");
 static const u8 sSubtleCaption_5[] = _("Closure, Attunement, Voltage.");
 
 static const u8 sSubtleLabel_1[] = _("THE CLAIRS");
