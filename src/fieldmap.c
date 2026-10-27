@@ -1274,6 +1274,9 @@ void DaemonsGreyHalftoneFrame(void)
         follower = Follower_EmojiPaletteSlot();   // T-431 P3: its face keeps its colour too (the user, 2026-10-21)
         if (follower < 16)
             skip |= HT_OBJ(follower);
+        follower = Follower_SensePaletteSlot();   // T-459: and its noticing, in the book's purple
+        if (follower < 16)
+            skip |= HT_OBJ(follower);
         follower = ScriptMenu_ShownPokemonPicPaletteSlot();   // T-439: the KINGFISHER's photograph of it, too
         if (follower < 16)
             skip |= HT_OBJ(follower);

@@ -157,3 +157,61 @@ void Reveal_Update(void)
         FieldEffectStart(FLDEFF_SPARKLE);
     }
 }
+
+//  T-459 (the user, 2026-10-27): ONCE THE SUBTLE LAYER IS HELD, THE FOLLOWER NOTICES FIRST. This is what it notices: the
+//  nearest thing still unfound within a screen of the player (the player's own tile aside), in map coordinates with
+//  MAP_OFFSET as the player's are. The same set the lens shows -- every find is findable blind first, and so is this --
+//  with two differences. A hidden item underfoot is left out: those are the ITEMFINDER's alone, as the follower's own
+//  NOTICE mood leaves them (daemons_follower.c HiddenItemNear). And a grove's tree counts only on the way IN and only
+//  while that grove is unfound: the k-th grove's way in is sGroveTrees[2k] and its flag FLAG_VIRIDIAN_FOREST_GROVE_FOUND
+//  + k, both written by DAEMONS tools/gbagrove.py in its GROVES order; the way out, and the doors after the fourteen,
+//  are never news.
+#define GROVES_WITH_FLAGS (FLAG_SEVEN_ISLAND_GROVE_FOUND - FLAG_VIRIDIAN_FOREST_GROVE_FOUND + 1)
+#define SENSE_REACH_X     7
+#define SENSE_REACH_Y     5
+
+static bool8 IsUnfound(const struct BgEvent *e)
+{
+    u32 i;
+
+    if (e->kind == BG_KIND_HIDDEN_ITEM && GetHiddenItemAttr(e->bgUnion.hiddenItem, HIDDEN_ITEM_UNDERFOOT))
+        return FALSE;
+    if (e->kind <= BG_KIND_SIGN_LAST)
+    {
+        for (i = 0; i < ARRAY_COUNT(sGroveTrees); i++)
+        {
+            if (e->bgUnion.script == sGroveTrees[i])
+                return (i % 2) == 0 && i / 2 < GROVES_WITH_FLAGS && !FlagGet(FLAG_VIRIDIAN_FOREST_GROVE_FOUND + i / 2);
+        }
+    }
+    return IsShown(e);
+}
+
+bool8 Reveal_NearestUnfound(s16 *x, s16 *y)
+{
+    const struct MapEvents *events = gMapHeader.events;
+    s16 px, py, dx, dy;
+    s32 best = 0x7FFF, d;
+    u32 i;
+
+    PlayerGetDestCoords(&px, &py);
+    for (i = 0; i < events->bgEventCount; i++)
+    {
+        const struct BgEvent *e = &events->bgEvents[i];
+
+        dx = e->x + MAP_OFFSET - px;
+        dy = e->y + MAP_OFFSET - py;
+        if (dx < -SENSE_REACH_X || dx > SENSE_REACH_X || dy < -SENSE_REACH_Y || dy > SENSE_REACH_Y || (dx == 0 && dy == 0))
+            continue;
+        if (!IsUnfound(e))
+            continue;
+        d = (dx < 0 ? -dx : dx) + (dy < 0 ? -dy : dy);
+        if (d < best)
+        {
+            best = d;
+            *x = e->x + MAP_OFFSET;
+            *y = e->y + MAP_OFFSET;
+        }
+    }
+    return best != 0x7FFF;
+}

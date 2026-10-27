@@ -258,6 +258,7 @@
 #define TEXT_COLOR_BLUE         0x8
 #define TEXT_COLOR_LIGHT_BLUE   0x9
 #define TEXT_DYNAMIC_COLOR_1    0xA // Usually white
+#define TEXT_COLOR_PURPLE       0xA // T-459: THE SUBTLE LAYER's purple, in the field's dialogue box only (sSubtlePurple)
 #define TEXT_DYNAMIC_COLOR_2    0xB // Usually white w/ tinge of green
 #define TEXT_DYNAMIC_COLOR_3    0xC // Usually white
 #define TEXT_DYNAMIC_COLOR_4    0xD // Usually aquamarine

@@ -461,6 +461,7 @@ GREEN = 06
 LIGHT_GREEN = 07
 BLUE = 08
 LIGHT_BLUE = 09
+PURPLE = 0A @ T-459: THE SUBTLE LAYER's purple -- the field's dialogue box only (new_menu_helpers.c sSubtlePurple)
 @ these next colors can be set to anything arbitrary at runtime
 @ usually though they'll have the textbox border colors as described below
 DYNAMIC_COLOR1 = 0A @ white

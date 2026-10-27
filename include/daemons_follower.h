@@ -23,5 +23,7 @@ void Follower_OnContinue(void);
 u8 Follower_PaletteSlot(void);
 // T-431 P3: the daemon-emoji's slot while it shows over the follower, or 0xFF; HALFTONE leaves it in colour too.
 u8 Follower_EmojiPaletteSlot(void);
+// T-459: the subtle layer's ripple and glint's slot while they show, or 0xFF; HALFTONE leaves it in colour too.
+u8 Follower_SensePaletteSlot(void);
 
 #endif // GUARD_DAEMONS_FOLLOWER_H

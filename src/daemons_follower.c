@@ -30,6 +30,7 @@
 #include "constants/quest_log.h"
 #include "data/follower_palettes.h"
 #include "daemons_feelings.h"
+#include "reveal.h"
 
 //  T-18 P1: THE FOLLOWER -- it walks and hides (the user decided the plan 2026-10-20; every rule below is the plan's).
 //
@@ -63,11 +64,16 @@
 
 #define FOLLOWER_TAG     0x5418   // its tiles and its palette (T-18)
 #define EMOJI_TAG        0x5419   // the daemon-emoji's palette, only while it shows (T-431 P3)
+#define SENSE_TAG        0x541A   // the subtle layer's ripple and glint: their palette, only while they show (T-459)
 #define TRAIL            16       // pixels behind the player: one tile
 #define FOLLOWER_Y       2        // the icon's body ends two rows above its cell; this puts it on the ground
 #define MAX_JUMP         32       // a move bigger than this in one frame is a warp, not a step
 #define RETRY_FRAMES     30       // after a failed spawn (no palette slot, no sprite), try again this often
 #define CHECK_FRAMES     8        // the lead and its friendship are read this often
+#define SENSE_FIRST      180      // T-459: after it is made (a map, a battle, a menu), three seconds before it may notice
+#define SENSE_STILL      45       // ... and it notices only once it has stood still this long
+#define SENSE_AGAIN      1200     // ... and then not again for twenty seconds: now and then, never a beacon
+#define SENSE_LOOK       60       // with nothing unfound in sight, it looks again a second later
 
 static struct
 {
@@ -101,6 +107,7 @@ static struct
     u8 reflSpriteId;       // T-18 P3: its reflection, while it stands above water or ice
     s16 tileX, tileY;      // T-18 P3: the map tile it stands in (nearest), for grass, water and the people
     s16 grassX, grassY;    // ... and the tile its last tall grass was raised on
+    u16 senseWait;         // T-459: frames until it may notice something again
 } sFollower;
 
 static void SpriteCB_Follower(struct Sprite *sprite)
@@ -413,6 +420,7 @@ static void Spawn(s8 slot, struct Sprite *player, struct ObjectEvent *playerObj)
     sFollower.check = CHECK_FRAMES;
     sFollower.reflSpriteId = MAX_SPRITES;
     sFollower.grassX = sFollower.grassY = -1;
+    sFollower.senseWait = SENSE_FIRST;   // T-459: a moment in a new place (or back from a battle) before it notices
     if (sFollower.restValid
      && sFollower.restGroup == gSaveBlock1Ptr->location.mapGroup && sFollower.restNum == gSaveBlock1Ptr->location.mapNum
      && sFollower.restX == playerObj->currentCoords.x && sFollower.restY == playerObj->currentCoords.y)
@@ -458,7 +466,14 @@ u8 Follower_EmojiPaletteSlot(void)
     return IndexOfSpritePaletteTag(EMOJI_TAG);
 }
 
+//  T-459: the ripple's and the glint's slot while they show, or 0xFF -- the follower's noticing keeps its colour too.
+u8 Follower_SensePaletteSlot(void)
+{
+    return IndexOfSpritePaletteTag(SENSE_TAG);
+}
+
 static u8 LoadEmojiPalette(void);
+static u8 LoadSensePalette(void);
 
 void Follower_RetintPalette(void)
 {
@@ -466,6 +481,8 @@ void Follower_RetintPalette(void)
         LoadFollowerPalette();
     if (Follower_EmojiPaletteSlot() != 0xFF)
         LoadEmojiPalette();
+    if (Follower_SensePaletteSlot() != 0xFF)
+        LoadSensePalette();
 }
 
 //  ---------------------------------------------------------------- what it stands on (T-18 P3)
@@ -602,6 +619,197 @@ static void Reflect(struct Sprite *follower)
     refl->invisible = FALSE;
 }
 
+//  ---------------------------------------------------------------- it notices first (T-459 A)
+//
+//  The user, 2026-10-27: once THE SUBTLE LAYER is held, the player starts to notice -- and first through the daemon
+//  beside them, the book's practice of reading your daemon. Now and then, once it has stood still a moment, the follower
+//  turns toward the nearest thing still unfound within a screen (src/reveal.c Reveal_NearestUnfound: a hidden item, a
+//  find, the way into a grove not yet found), a small ripple rises from it, and a faint glint shows where it looks. In
+//  the book's own hue, CONTEXT's purple (the user's choice over a violet of its own): DAEMONS tools/gensense.py draws
+//  both from gensubtle.py's colours, graphics/misc/subtle_sense.png, frames 0-3 the ripple and 4-6 the glint.
+//
+//  WHAT IT IS NOT. A colour beside a feeling (craft rule 1): the purple marks the noticing, and the daemon-emoji keeps
+//  its own colours. A lens: it points at one thing at a time, every twenty seconds at most, and only at what is really
+//  there and findable blind -- REVEAL still shows them all. Nothing is saved: the wait is IWRAM, and a new place (or a
+//  battle) starts it again.
+//
+//  ITS COLOURS, as the face's: its own palette, loaded while either shows and freed when both are gone, in the field's
+//  light and weather, and left in colour in HALFTONE as the follower is (Follower_SensePaletteSlot). Not greyed by
+//  friendship -- the hue is the book's, not the daemon's. With no slot or sprite free it simply does not show.
+
+static const u16 sSenseGfx[] = INCBIN_U16("graphics/misc/subtle_sense.4bpp");
+static const u16 sSensePal[] = INCBIN_U16("graphics/misc/subtle_sense.gbapal");
+
+static const struct SpriteFrameImage sSenseImages[] = {
+    overworld_frame(sSenseGfx, 2, 2, 0), overworld_frame(sSenseGfx, 2, 2, 1), overworld_frame(sSenseGfx, 2, 2, 2),
+    overworld_frame(sSenseGfx, 2, 2, 3), overworld_frame(sSenseGfx, 2, 2, 4), overworld_frame(sSenseGfx, 2, 2, 5),
+    overworld_frame(sSenseGfx, 2, 2, 6),
+};
+
+static const struct OamData sSenseOam = {
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(16x16),
+    .size = SPRITE_SIZE(16x16),
+    .priority = 1,
+};
+
+//  The ripple widens twice; the glint catches the light twice, as a sparkle does. About a second each.
+static const union AnimCmd sSenseAnim_Ripple[] = {
+    ANIMCMD_FRAME(0, 8), ANIMCMD_FRAME(1, 8), ANIMCMD_FRAME(2, 8), ANIMCMD_FRAME(3, 8),
+    ANIMCMD_FRAME(0, 8), ANIMCMD_FRAME(1, 8), ANIMCMD_FRAME(2, 8), ANIMCMD_FRAME(3, 10),
+    ANIMCMD_END
+};
+static const union AnimCmd sSenseAnim_Glint[] = {
+    ANIMCMD_FRAME(4, 6), ANIMCMD_FRAME(5, 6), ANIMCMD_FRAME(6, 8), ANIMCMD_FRAME(5, 6), ANIMCMD_FRAME(4, 6),
+    ANIMCMD_FRAME(4, 6), ANIMCMD_FRAME(5, 6), ANIMCMD_FRAME(6, 8), ANIMCMD_FRAME(5, 6), ANIMCMD_FRAME(4, 6),
+    ANIMCMD_END
+};
+static const union AnimCmd *const sSenseAnims_Ripple[] = { sSenseAnim_Ripple };
+static const union AnimCmd *const sSenseAnims_Glint[] = { sSenseAnim_Glint };
+
+static void SpriteCB_SenseRipple(struct Sprite *sprite);
+static void SpriteCB_SenseGlint(struct Sprite *sprite);
+
+static const struct SpriteTemplate sSenseTemplate_Ripple = {
+    .tileTag = TAG_NONE,
+    .paletteTag = SENSE_TAG,
+    .oam = &sSenseOam,
+    .anims = sSenseAnims_Ripple,
+    .images = sSenseImages,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_SenseRipple,
+};
+
+static const struct SpriteTemplate sSenseTemplate_Glint = {
+    .tileTag = TAG_NONE,
+    .paletteTag = SENSE_TAG,
+    .oam = &sSenseOam,
+    .anims = sSenseAnims_Glint,
+    .images = sSenseImages,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_SenseGlint,
+};
+
+#if DAEMONS_DEBUG
+EWRAM_DATA u8 gFollowerDebugSense = 0;   // noticings since the game started (wraps), for the theatre
+#endif
+
+static u8 LoadSensePalette(void)
+{
+    u8 idx = IndexOfSpritePaletteTag(SENSE_TAG);
+
+    if (idx == 0xFF)
+        idx = AllocSpritePalette(SENSE_TAG);
+    if (idx == 0xFF)
+        return 0xFF;
+    LoadPalette(sSensePal, OBJ_PLTT_ID(idx), PLTT_SIZE_4BPP);
+    ApplyGlobalFieldPaletteTint(idx);
+    UpdateSpritePaletteWithWeather(idx);
+    return idx;
+}
+
+static bool8 SenseShowing(void)
+{
+    u8 i;
+
+    for (i = 0; i < MAX_SPRITES; i++)
+        if (gSprites[i].inUse && (gSprites[i].callback == SpriteCB_SenseRipple || gSprites[i].callback == SpriteCB_SenseGlint))
+            return TRUE;
+    return FALSE;
+}
+
+static void SenseEnd(struct Sprite *sprite)
+{
+    DestroySprite(sprite);
+    if (!SenseShowing())
+        FreeSpritePaletteByTag(SENSE_TAG);   // the last of the two gives the palette back
+}
+
+//  It rides the follower as its face does, rising a pixel every ten frames as it widens.
+static void SpriteCB_SenseRipple(struct Sprite *sprite)
+{
+    struct Sprite *follower;
+
+    if (sprite->animEnded || !IsOurs())
+    {
+        SenseEnd(sprite);
+        return;
+    }
+    follower = &gSprites[sFollower.spriteId];
+    sprite->x = follower->x;
+    sprite->y = follower->y - 10;   // just over its head: the icon's body sits low in its 32x32 cell
+    sprite->x2 = 0;
+    sprite->y2 = follower->y2 - (sprite->data[0]++ / 10);
+    sprite->invisible = follower->invisible;
+}
+
+//  It stays where it was seen: the map scrolls under it (coordOffsetEnabled), as a sparkle does.
+static void SpriteCB_SenseGlint(struct Sprite *sprite)
+{
+    if (sprite->animEnded)
+        SenseEnd(sprite);
+}
+
+//  The ripple over it and the glint at (x, y), in map coordinates. FALSE when there is no palette slot or sprite for
+//  them, and then nothing shows at all -- never one without the other, and never in another's colours.
+static bool8 ShowSense(s16 x, s16 y)
+{
+    u8 ripple, glint;
+
+    if (SenseShowing() || LoadSensePalette() == 0xFF)
+        return FALSE;
+    ripple = CreateSpriteAtEnd(&sSenseTemplate_Ripple, 0, 0, 0x52);
+    if (ripple == MAX_SPRITES)
+    {
+        FreeSpritePaletteByTag(SENSE_TAG);
+        return FALSE;
+    }
+    SetSpritePosToOffsetMapCoords(&x, &y, 8, 8);
+    glint = CreateSpriteAtEnd(&sSenseTemplate_Glint, x, y, 0x52);
+    if (glint == MAX_SPRITES)
+    {
+        DestroySprite(&gSprites[ripple]);
+        FreeSpritePaletteByTag(SENSE_TAG);
+        return FALSE;
+    }
+    gSprites[ripple].coordOffsetEnabled = TRUE;
+    gSprites[ripple].invisible = TRUE;                 // until the callback has placed it
+    gSprites[glint].coordOffsetEnabled = TRUE;
+    return TRUE;
+}
+
+static void Sense(struct Sprite *sprite, struct ObjectEvent *playerObj)
+{
+    s16 x, y, at;
+
+    if (!FlagGet(FLAG_GOT_SUBTLE_LAYER) || sprite->invisible || ArePlayerFieldControlsLocked())
+        return;
+    if (sFollower.senseWait)
+    {
+        sFollower.senseWait--;
+        return;
+    }
+    if (sFollower.idle < SENSE_STILL)
+        return;
+    if (!Reveal_NearestUnfound(&x, &y) || !ShowSense(x, y))
+    {
+        sFollower.senseWait = SENSE_LOOK;
+        return;
+    }
+    // It turns toward it (icons face left; east is the same picture flipped). Straight above or below, it keeps its side.
+    at = playerObj->currentCoords.x - sFollower.sumX / TRAIL;
+    if (x < at)
+        sFollower.facing = DIR_WEST;
+    else if (x > at)
+        sFollower.facing = DIR_EAST;
+    sFollower.senseWait = SENSE_AGAIN;
+#if DAEMONS_DEBUG
+    gFollowerDebugSense++;
+#endif
+}
+
 //  ---------------------------------------------------------------- once a frame
 
 static void Place(struct Sprite *sprite, struct Sprite *player, struct ObjectEvent *playerObj)
@@ -722,6 +930,7 @@ void Follower_Update(void)
         sFollower.continued = FALSE;
     }
     Place(sprite, player, playerObj);
+    Sense(sprite, playerObj);   // T-459
 }
 
 //  ---------------------------------------------------------------- A on it (T-18 P2)
@@ -1019,7 +1228,17 @@ void Follower_Talk(void)
     // mood on the next press (when none holds, the friendship line again). Walking on starts it over.
     if (!(sFollower.talks & 1))
         mood = MOOD_NONE;
-    if (mood != MOOD_NONE)
+    if (mood == MOOD_NOTICE && FlagGet(FLAG_GOT_SUBTLE_LAYER))
+    {
+        // T-459: once THE SUBTLE LAYER is held, its noticing is said in the book's purple (the words are T-18's own),
+        // on the dialogue box's grey shadow: {COLOR PURPLE}{SHADOW LIGHT_GRAY}, then the line.
+        static const u8 sPurple[] = {
+            EXT_CTRL_CODE_BEGIN, EXT_CTRL_CODE_COLOR, TEXT_COLOR_PURPLE,
+            EXT_CTRL_CODE_BEGIN, EXT_CTRL_CODE_SHADOW, TEXT_COLOR_LIGHT_GRAY, EOS,
+        };
+        StringExpandPlaceholders(StringCopy(gStringVar4, sPurple), sMoodLines[mood][sFollower.moodTurn++ & 1]);
+    }
+    else if (mood != MOOD_NONE)
         StringExpandPlaceholders(gStringVar4, sMoodLines[mood][sFollower.moodTurn++ & 1]);
     else
         StringExpandPlaceholders(gStringVar4, sTierLines[band]);

@@ -14,6 +14,12 @@
 #define STD_WINDOW_PALETTE_NUM 14
 #define STD_WINDOW_BASE_TILE_NUM 0x214
 
+//  T-459: THE SUBTLE LAYER's purple, {COLOR PURPLE} in the field's dialogue (DAEMONS tools/gensense.py checks it is
+//  gensubtle.py's C_RULE, CONTEXT's hue -- the book's own). It goes in slot 10, which stdpal_0 holds as a second white;
+//  the frame was redrawn to draw that white from slot 1, so it gives nothing up. Only here, after the frame's palette
+//  is loaded: stdpal_0 itself keeps its white, because the MAIL prints in slots 10 and 11 of it.
+static const u16 sSubtlePurple[] = { RGB(22, 10, 19) };
+
 static EWRAM_DATA bool8 sScheduledBgCopiesToVram[4] = {FALSE};
 static EWRAM_DATA u16 sTempTileDataBufferCursor = {0};
 static EWRAM_DATA void *sTempTileDataBuffers[0x20] = {NULL};
@@ -458,6 +464,7 @@ void LoadStdWindowFrameGfx(void)
     {
         Menu_LoadStdPal();
         LoadMenuMessageWindowGfx(0, DLG_WINDOW_BASE_TILE_NUM, BG_PLTT_ID(DLG_WINDOW_PALETTE_NUM));
+        LoadPalette(sSubtlePurple, BG_PLTT_ID(DLG_WINDOW_PALETTE_NUM) + TEXT_COLOR_PURPLE, PLTT_SIZEOF(1));   // T-459
     }
     LoadUserWindowGfx(0, STD_WINDOW_BASE_TILE_NUM, BG_PLTT_ID(STD_WINDOW_PALETTE_NUM));
 }
