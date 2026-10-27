@@ -115,9 +115,8 @@ EventScript_PkmnCenterNurse_CheckListening::
 EventScript_PkmnCenterNurse_CheckListeningEnd::
 	return
 
-@ T-457, DRAFT (placeholder): a CHECKPOINT keeper, to someone on the network.
+@ T-457, DRAFT (the user's words, 2026-10-27): a CHECKPOINT keeper, to someone on the network.
 Text_KeeperListening::
-	.string "One moment. Someone on the islands\n"
-	.string "is checking in.\p"
-	.string "Yes, I hear you. Good to hear\n"
-	.string "from you. (DRAFT)$"
+	.string "Excuse me, one moment.\p"
+	.string "…Yes, I hear you.\n"
+	.string "Good to hear from you.$"

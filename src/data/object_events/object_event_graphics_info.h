@@ -4469,6 +4469,27 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BreathFlute = {
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
+//  T-457 (the user, 2026-10-27): the receiver on CRYSTAL's desk -- inanimate, 16x16, in the INDEX unit's NPC_BLUE and
+//  slot, so the lab's palettes are as they were.
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CrystalReceiver = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_BLUE,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = PALSLOT_NPC_1,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gObjectEventBaseOam_16x16,
+    .subspriteTables = gObjectEventSpriteOamTables_16x16,
+    .anims = sAnimTable_Inanimate,
+    .images = sPicTable_CrystalReceiver,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
 // T-439: the KINGFISHER photographer (cameraman.png), npc_pink as the sheet is drawn.
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CastKingfisher = {
     .tileTag = TAG_NONE,

@@ -204,6 +204,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_NexusHunter;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TownCallowLyrebird;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BeachPalm;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BreathFlute;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CrystalReceiver;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CastKingfisher;   // T-439
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CastErmine;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CastPtarmigan;
@@ -445,6 +446,7 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_CAST_MUSKRAT]               = &gObjectEventGraphicsInfo_CastMuskrat,
     [OBJ_EVENT_GFX_CAST_GREBE]                 = &gObjectEventGraphicsInfo_CastGrebe,
     [OBJ_EVENT_GFX_CAST_MOTH]                  = &gObjectEventGraphicsInfo_UnusedWoman,
+    [OBJ_EVENT_GFX_CRYSTAL_RECEIVER]           = &gObjectEventGraphicsInfo_CrystalReceiver,   // T-457
     [OBJ_EVENT_GFX_BURGLAR]                    = &gObjectEventGraphicsInfo_Burglar,
     [OBJ_EVENT_GFX_JUGGLER]                    = &gObjectEventGraphicsInfo_Juggler,
     [OBJ_EVENT_GFX_POKEMON_BREEDER]            = &gObjectEventGraphicsInfo_PokemonBreeder,

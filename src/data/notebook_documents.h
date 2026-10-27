@@ -402,21 +402,34 @@ static const u8 sDocText_PEER_REVIEW_4[] = _(
     "mark.");
 #define NB_DOC_PEER_REVIEW_4 { NB_PEER_REVIEW, NB_KIND_TEXT, 0, FLAG_NOTEBOOK_DOC_PEER_REVIEW_4, 0, sDocTitle_PEER_REVIEW_4, sDocText_PEER_REVIEW_4 },
 
-static const u8 sDocTitle_PROSPECTUS_7[] = _("HER WORK (DRAFT)");
+static const u8 sDocTitle_PROSPECTUS_7[] = _("SOUNDINGS");
 static const u8 sDocText_PROSPECTUS_7[] = _(
-    "HER WORK (DRAFT)\p"
-    "A network in THE MARGINS, listening\n"
-    "for daemons far away.\p"
-    "DRAFT: the words are still being\n"
-    "written.");
+    "A page, typed, signed C. CLEAR. The\n"
+    "heading reads SOUNDINGS.\p"
+    "A daemon is seen at a CHECKPOINT for\n"
+    "a few minutes. Then it goes home,\n"
+    "and the rest of its life happens out\n"
+    "of sight.\p"
+    "Proposal: listen in between.\p"
+    "CELIO's machine already carries the\n"
+    "islands' signals. Nothing new needs\n"
+    "to be built. It needs someone at the\n"
+    "other end.\p"
+    "Cost: one desk.\p"
+    "There is no date anywhere on it.");
 #define NB_DOC_PROSPECTUS_7 { NB_PROSPECTUS, NB_KIND_TEXT, 0, FLAG_NOTEBOOK_DOC_PROSPECTUS_7, 0, sDocTitle_PROSPECTUS_7, sDocText_PROSPECTUS_7 },
 
-static const u8 sDocTitle_PROSPECTUS_8[] = _("JOINING (DRAFT)");
+static const u8 sDocTitle_PROSPECTUS_8[] = _("SIGNAGE, AGAIN");
 static const u8 sDocText_PROSPECTUS_8[] = _(
-    "JOINING (DRAFT)\p"
-    "THE INDEX / CELIO'S MACHINE\p"
-    "DRAFT: the words are still being\n"
-    "written.");
+    "Two letterheads, side by side:\n"
+    "SOUNDINGS and CELIO'S MACHINE.\n"
+    "Neither sits above the other.\p"
+    "RE: SIGNAGE.\p"
+    "Both names stay up as they are.\n"
+    "Nothing is laid over anything.\p"
+    "Approved: (blank). Goes up: (blank).\p"
+    "Two signatures at the foot. Both are\n"
+    "careful.");
 #define NB_DOC_PROSPECTUS_8 { NB_PROSPECTUS, NB_KIND_TEXT, 0, FLAG_NOTEBOOK_DOC_PROSPECTUS_8, 0, sDocTitle_PROSPECTUS_8, sDocText_PROSPECTUS_8 },
 
 #endif // GUARD_DATA_NOTEBOOK_DOCUMENTS_H

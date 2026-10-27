@@ -59,6 +59,7 @@ enum
     EV_FEEL_SLOT1, EV_FEEL_SLOT6 = EV_FEEL_SLOT1 + PARTY_SIZE - 1,            // T-431
     EV_FEEL_3H, EV_FEEL_12H, EV_FEEL_DAY, EV_FEEL_GLAD, EV_FEEL_MAD, EV_FEEL_SAD, EV_FEEL_AFRAID,
     EV_FEEL_USE_ITEM,                                                       // T-433
+    EV_CRYSTAL_AGAIN,                                                       // T-457
 };
 
 struct DbgRow { const u8 *name; u8 kind; u8 arg; };
@@ -110,6 +111,7 @@ static const u8 sName_GotoPoints[]   = _("EVERY GOTO POINT");
 static const u8 sName_Guide[]        = _("THE GUIDE");
 static const u8 sName_Subtle[]       = _("THE SUBTLE LAYER");   // T-423
 static const u8 sName_GlobalIndex[]  = _("GLOBAL INDEX");
+static const u8 sName_CrystalAgain[] = _("CRYSTAL'S LINE AGAIN");   // T-457: at the receiver, once more
 static const u8 sName_Roots[]        = _("UNDERSTANDINGS >");
 static const u8 sName_Stream[]       = _("STREAM AND HEARSAY");
 static const u8 sName_Companion[]    = _("COMPANION LINKED");
@@ -204,6 +206,7 @@ static const struct DbgRow sRows_Events[] = {
     { sName_Guide,       R_TOGGLE, EV_GUIDE },
     { sName_Subtle,      R_TOGGLE, EV_SUBTLE },
     { sName_GlobalIndex, R_TOGGLE, EV_GLOBAL_INDEX },
+    { sName_CrystalAgain, R_GIVE,  EV_CRYSTAL_AGAIN },   // T-457
     { sName_Roots,       R_PAGE,   PG_ROOTS },
     { sName_Year,        R_PAGE,   PG_YEAR },         // T-416
     { sName_Follower,    R_PAGE,   PG_FOLLOWER },     // T-18
@@ -616,6 +619,7 @@ static void Apply(u8 ev, bool8 on)
     case EV_FEEL_SAD:     Feelings_DebugPushLead(FEEL_SAD); return;
     case EV_FEEL_AFRAID:  Feelings_DebugPushLead(FEEL_CALM); return;
     case EV_FEEL_USE_ITEM: Feelings_DebugUseItem(); return;                     // T-433
+    case EV_CRYSTAL_AGAIN: FlagClear(FLAG_HEARD_CRYSTAL_AT_RECEIVER); return;   // T-457: her line, heard again at the receiver
     }
     if (ev >= EV_YEAR1 && ev <= EV_YEAR12)
     {

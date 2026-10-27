@@ -455,14 +455,15 @@ PalletTown_ProfessorOaksLab_Text_OakOpusFound::
     .string "The other, I think, you have found\n"
     .string "already. It was never for sale.$"
 
-@  T-457, DRAFT (placeholder; the user is writing this line): CRYSTAL's one line, about something else, the first
-@  time the receiver is read (no longer at the GLOBAL INDEX handover).
+@  T-457, DRAFT (the user's words, 2026-10-27): CRYSTAL's one line, about something else, the first time the
+@  receiver is read (no longer at the GLOBAL INDEX handover).
 PalletTown_ProfessorOaksLab_Text_CrystalSomethingElse::
     .string "CRYSTAL: It is raining on the\n"
-    .string "islands, I hear. (DRAFT)$"
+    .string "islands, I hear.$"
 
-@  T-457, DRAFT (placeholder): the receiver on her desk.
+@  T-457, DRAFT (the user's words, 2026-10-27): the receiver on her desk.
 PalletTown_ProfessorOaksLab_Text_Receiver::
-    .string "A receiver. It is picking up one\n"
-    .string "daemon, far away, on an island.\p"
-    .string "It is doing fine. (DRAFT)$"
+    .string "A receiver, turned low.\p"
+    .string "One daemon, far away,\n"
+    .string "on an island.\p"
+    .string "It is doing fine.$"

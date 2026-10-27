@@ -2553,3 +2553,7 @@ static const struct SpriteFrameImage sPicTable_CastGrebe[] = {   // T-439: the G
 static const struct SpriteFrameImage sPicTable_BreathFlute[] = {         // T-417 BREATHVERSE: one 16x16 frame
     overworld_frame(gObjectEventPic_BreathFlute, 2, 2, 0),
 };
+
+static const struct SpriteFrameImage sPicTable_CrystalReceiver[] = {     // T-457: one 16x16 frame
+    overworld_frame(gObjectEventPic_CrystalReceiver, 2, 2, 0),
+};

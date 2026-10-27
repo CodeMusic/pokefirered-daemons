@@ -355,14 +355,14 @@ OneIsland_PokemonCenter_1F_Text_SomethingElseAnswered::
     .string "on any of these islands.\p"
     .string "The log gives one word. DOLDRUM.$"
 
-@  T-457, DRAFT (placeholder): the notice beside CELIO's machine, before its two halves have met.
+@  T-457, DRAFT (the user's words, 2026-10-27): the notice beside CELIO's machine, before its two halves have met.
 OneIsland_PokemonCenter_1F_Text_NetworkNoticeWaiting::
-	.string "NETWORK NOTICE (DRAFT)\p"
-	.string "One half in place. Waiting for\n"
-	.string "the other.$"
+	.string "NETWORK NOTICE\p"
+	.string "One half in place.\n"
+	.string "Waiting on the other.$"
 
-@  T-457, DRAFT (placeholder): the same notice, once they have.
+@  T-457, DRAFT (the user's words, 2026-10-27): the same notice, once they have.
 OneIsland_PokemonCenter_1F_Text_NetworkNoticeCarrying::
-	.string "NETWORK NOTICE (DRAFT)\p"
-	.string "Both halves in place. Carrying\n"
-	.string "signals.$"
+	.string "NETWORK NOTICE\p"
+	.string "Both halves in place.\n"
+	.string "Signals are coming in.$"

@@ -315,7 +315,11 @@
 #define OBJ_EVENT_GFX_CAST_GREBE 235        // ROUTE 20 in spring, npc_white
 #define OBJ_EVENT_GFX_CAST_MOTH 236         // HALFTONE's PEPPERED MOTH: vanilla's UnusedWoman info, which no id reached
 
-#define NUM_OBJ_EVENT_GFX     237
+//  T-457 (the user, 2026-10-27, sheet A): the receiver on CRYSTAL's desk, its own 16x16 in indigo, NPC_BLUE as the
+//  INDEX unit it used to wear (DAEMONS gfx/drafts/t457/receiver_a_indigo). Past the text-colour table's end, so NEUTRAL.
+#define OBJ_EVENT_GFX_CRYSTAL_RECEIVER 237
+
+#define NUM_OBJ_EVENT_GFX     238
 
 // These are dynamic object gfx ids.
 // They correspond with the values of the VAR_OBJ_GFX_ID_X vars.
