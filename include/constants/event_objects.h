@@ -66,7 +66,7 @@
 #define OBJ_EVENT_GFX_POLICEMAN 60
 #define OBJ_EVENT_GFX_GENTLEMAN 61
 #define OBJ_EVENT_GFX_SAILOR 62
-#define OBJ_EVENT_GFX_CAPTAIN 63
+#define OBJ_EVENT_GFX_FREE_63 63 // T-461 FREE: was CAPTAIN, off the map since DAVID took the office (T-313)
 #define OBJ_EVENT_GFX_NURSE 64
 #define OBJ_EVENT_GFX_CABLE_CLUB_RECEPTIONIST 65
 #define OBJ_EVENT_GFX_UNION_ROOM_RECEPTIONIST 66
@@ -107,7 +107,7 @@
 #define OBJ_EVENT_GFX_OLD_AMBER 101
 #define OBJ_EVENT_GFX_GYM_SIGN 102
 #define OBJ_EVENT_GFX_SIGN 103
-#define OBJ_EVENT_GFX_TRAINER_TIPS 104
+#define OBJ_EVENT_GFX_FREE_104 104 // T-461 FREE: was TRAINER_TIPS, which no map ever placed
 #define OBJ_EVENT_GFX_CLIPBOARD 105
 #define OBJ_EVENT_GFX_METEORITE 106
 #define OBJ_EVENT_GFX_LAPRAS_DOLL 107
@@ -143,7 +143,7 @@
 #define OBJ_EVENT_GFX_MOLTRES 137
 #define OBJ_EVENT_GFX_ARTICUNO 138
 #define OBJ_EVENT_GFX_MEWTWO 139
-#define OBJ_EVENT_GFX_MEW 140
+#define OBJ_EVENT_GFX_FREE_140 140 // T-461 FREE: was MEW, which no map ever placed
 #define OBJ_EVENT_GFX_ENTEI 141
 #define OBJ_EVENT_GFX_SUICUNE 142
 #define OBJ_EVENT_GFX_RAIKOU 143
@@ -272,7 +272,7 @@
 #define OBJ_EVENT_GFX_DAEMON_SLOWPOKE_S3 219
 #define OBJ_EVENT_GFX_DAEMON_SNORLAX_SSPECIAL 220
 
-//  T-208: a PLUGIN or DRIVER on the ground. 221-239 are free between the daemon slots and the VARS.
+//  T-208: a PLUGIN or DRIVER on the ground.
 #define OBJ_EVENT_GFX_PLUGIN_DISC 221
 
 //  T-208: 222 now, because the PLUGIN DISC is id 221 and this bounds the pointer table. Adding a
@@ -322,9 +322,28 @@
 //  the lab's aides and its clipboard. Past the text-colour table's end, so NEUTRAL.
 #define OBJ_EVENT_GFX_DESK_FLOWERS 238
 //  T-460: the card AT THE DOOR -- the CLIPBOARD's art drawn 8px up, as the receiver and the flowers are (the user,
-//  2026-10-27: the desk's props stay visible above the player's head). The LAST id before OBJ_EVENT_GFX_VARS (240):
-//  a new one after this needs graphicsId wider than a u8.
+//  2026-10-27: the desk's props stay visible above the player's head). The LAST id before OBJ_EVENT_GFX_VARS (240).
 #define OBJ_EVENT_GFX_DESK_CARD 239
+
+//  T-461: graphicsId is a u8 (object event templates, live object events and the recap's object events, all three
+//  kept in the save), and 240-255 are the sixteen VAR graphics below, every one in use. So the table cannot grow:
+//  NUM_OBJ_EVENT_GFX stays 240 and a new sprite takes a FREE id instead.
+//
+//  A FREE id (OBJ_EVENT_GFX_FREE_<n>) is a number vanilla defined that nothing in DAEMONS places on a map, spawns,
+//  sets a VAR_OBJ_GFX_ID to or reads in src/ -- and that none of the 19 saves on the development machine holds (the
+//  engine's and the theatre's, read 2026-10-27). Its slot in gObjectEventGraphicsInfoPointers still points at
+//  vanilla's art, so nothing changes until one is taken. Every id in use keeps its number, so saves (which store
+//  numbers) are untouched.
+//
+//  Take one with DAEMONS tools/gentowns.py register_one(): it takes the lowest, renames its define and repoints its
+//  slot. Its row in dynamic_placeholder_text_util.c's sTextColorTable is shared with its pair and is already there.
+//  DAEMONS tools/check_objgfx.py (run by check_lexicon.py) fails if anything uses a FREE id, if two ids share a
+//  number, or if this list and the defines disagree.
+//
+//  Not free, though nothing places them: 14-15 (Ruby/Sapphire link partners), 38 (TRAINER TOWER), 102 (FAME CHECKER),
+//  148-149 (PROTEUS's two shapes, daemons_cast.c), 150 (DEOXYS_N: tools/gbaowslots.py draws PROTEUS's object into it).
+//
+//  FREE: 63 104 140
 
 #define NUM_OBJ_EVENT_GFX     240
 
