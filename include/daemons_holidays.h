@@ -19,6 +19,7 @@ const u8 *DaemonsHolidayName(u8 holiday);
 u8 DaemonsHolidayMonth(u8 holiday);  // 0-11: the month whose note and colour it wears
 u8 DaemonsMonth(void);               // 0-11
 bool8 DaemonsIsFirstOfMonth(void);
+bool8 DaemonsIsCalendarDay(u8 month, u8 day);   // T-460: month 1-12 -- today by the calendar the holidays read
 u16 DaemonsMonthColour(u8 month);    // 0-11
 const u8 *DaemonsMonthNote(u8 month);
 void DaemonsPlayMonthNote(u8 month, bool8 soft);
@@ -75,7 +76,8 @@ bool8 DaemonsHolidayGiftWaits(void); // specialvar: this giver (VAR_0x8006) has 
 // an ordinary day. It overrides the DATE, not the answer -- the lookup still runs.
 #define DAEMONS_DEBUG_DATE_FIRSTS  (HOLIDAY_COUNT + 1)
 #define DAEMONS_DEBUG_DATE_QUIET   (DAEMONS_DEBUG_DATE_FIRSTS + 12)
-#define DAEMONS_DEBUG_DATE_COUNT   (DAEMONS_DEBUG_DATE_QUIET + 1)
+#define DAEMONS_DEBUG_DATE_OCT3    (DAEMONS_DEBUG_DATE_QUIET + 1)   // T-460: the flowers on CRYSTAL's desk
+#define DAEMONS_DEBUG_DATE_COUNT   (DAEMONS_DEBUG_DATE_OCT3 + 1)
 extern u8 gDaemonsDateOverride;
 bool8 DaemonsHolidays_DebugDate(u16 *year, u8 *month, u8 *day);
 void DaemonsHolidays_DebugDateName(u8 *dest);

@@ -2,6 +2,7 @@
 #include "event_data.h"
 #include "item_menu.h"
 #include "quest_log.h"
+#include "daemons_holidays.h"
 
 static bool8 IsFlagOrVarStoredInQuestLog(u16 idx, u8 a1);
 
@@ -144,6 +145,11 @@ void DaemonsSecondJoining(void)
         FlagClear(FLAG_HIDE_CRYSTAL_RECEIVER);
     else
         FlagSet(FLAG_HIDE_CRYSTAL_RECEIVER);
+    //  T-460: one day a year, after the joining, there are flowers on her desk. Nobody says why, or names the day.
+    if (FlagGet(FLAG_SECOND_JOINING) && DaemonsIsCalendarDay(10, 3))
+        FlagClear(FLAG_HIDE_CRYSTAL_FLOWERS);
+    else
+        FlagSet(FLAG_HIDE_CRYSTAL_FLOWERS);
 }
 
 bool32 IsNationalPokedexEnabled(void)

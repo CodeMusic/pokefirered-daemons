@@ -262,6 +262,14 @@ bool8 DaemonsIsFirstOfMonth(void)
     return sMonthDay == 1;
 }
 
+//  T-460: one day of the year by the calendar the holidays read -- the cartridge clock, the play-time year without
+//  one, or the DEBUG date. FALSE before the first read.
+bool8 DaemonsIsCalendarDay(u8 month, u8 day)
+{
+    DaemonsTimeRefresh();
+    return sMonth == month && sMonthDay == day;
+}
+
 u16 DaemonsMonthColour(u8 month)
 {
     return sMonthColours[month % 12];
@@ -746,6 +754,7 @@ EWRAM_DATA u8 gDaemonsDateOverride = 0;
 static const u8 sDbgDateAuto[] = _("AUTO DATE");
 static const u8 sDbgDateQuiet[] = _("A QUIET DAY");
 static const u8 sDbgDateFirst[] = _("1ST ");
+static const u8 sDbgDateOct3[] = _("3RD OCT");   // T-460
 static const u8 sDbgMonth_Jan[] = _("JAN");
 static const u8 sDbgMonth_Feb[] = _("FEB");
 static const u8 sDbgMonth_Mar[] = _("MAR");
@@ -793,6 +802,12 @@ bool8 DaemonsHolidays_DebugDate(u16 *year, u8 *month, u8 *day)
         *month = o - DAEMONS_DEBUG_DATE_FIRSTS + 1;
         *day = 1;
     }
+    else if (o == DAEMONS_DEBUG_DATE_OCT3)
+    {
+        *year = 2026;     // T-460: the flowers on CRYSTAL's desk
+        *month = 10;
+        *day = 3;
+    }
     else
     {
         *year = 2026;     // a Tuesday in March: no holiday in either edition
@@ -812,6 +827,8 @@ void DaemonsHolidays_DebugDateName(u8 *dest)
         StringCopy(dest, sHolidays[o - 1].name);
     else if (o < DAEMONS_DEBUG_DATE_QUIET)
         StringCopy(StringCopy(dest, sDbgDateFirst), sDbgMonths[o - DAEMONS_DEBUG_DATE_FIRSTS]);
+    else if (o == DAEMONS_DEBUG_DATE_OCT3)
+        StringCopy(dest, sDbgDateOct3);
     else
         StringCopy(dest, sDbgDateQuiet);
 }

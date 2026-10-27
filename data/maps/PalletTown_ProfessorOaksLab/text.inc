@@ -461,9 +461,22 @@ PalletTown_ProfessorOaksLab_Text_CrystalSomethingElse::
     .string "CRYSTAL: It is raining on the\n"
     .string "islands, I hear.$"
 
-@  T-457, DRAFT (the user's words, 2026-10-27): the receiver on her desk.
+@  T-457, DRAFT (the user's words, 2026-10-27): the receiver on her desk. Its first line is its own box since T-460,
+@  so the tag can follow it.
+PalletTown_ProfessorOaksLab_Text_ReceiverTurnedLow::
+    .string "A receiver, turned low.$"
+
+@  T-460, DRAFT (the user's words, 2026-10-27): after "A receiver, turned low.", once THE FILE 4 has been read.
+PalletTown_ProfessorOaksLab_Text_ReceiverTag::
+    .string "An old evidence tag\n"
+    .string "is still tied to it.$"
+
+@  T-460, DRAFT (the user's words, 2026-10-27): flowers on her desk, one day a year.
+PalletTown_ProfessorOaksLab_Text_Flowers::
+    .string "Flowers.\p"
+    .string "There is no card.$"
+
 PalletTown_ProfessorOaksLab_Text_Receiver::
-    .string "A receiver, turned low.\p"
     .string "One daemon, far away,\n"
     .string "on an island.\p"
     .string "It is doing fine.$"
@@ -471,25 +484,21 @@ PalletTown_ProfessorOaksLab_Text_Receiver::
 @  T-458, DRAFT (the user's words, 2026-10-27): the receiver while a daemon is AWAY; its last line by the signal
 @  (0 no signal yet, 1 quiet, 2 fine, 3 well). STR_VAR_1 is the daemon's name (DaemonsSounding).
 PalletTown_ProfessorOaksLab_Text_ReceiverSignal0::
-    .string "A receiver, turned low.\p"
     .string "It is picking up {STR_VAR_1},\n"
     .string "far away.\p"
     .string "No signal yet.$"
 
 PalletTown_ProfessorOaksLab_Text_ReceiverSignal1::
-    .string "A receiver, turned low.\p"
     .string "It is picking up {STR_VAR_1},\n"
     .string "far away.\p"
     .string "It is quiet today.$"
 
 PalletTown_ProfessorOaksLab_Text_ReceiverSignal2::
-    .string "A receiver, turned low.\p"
     .string "It is picking up {STR_VAR_1},\n"
     .string "far away.\p"
     .string "It is doing fine.$"
 
 PalletTown_ProfessorOaksLab_Text_ReceiverSignal3::
-    .string "A receiver, turned low.\p"
     .string "It is picking up {STR_VAR_1},\n"
     .string "far away.\p"
     .string "It is doing well.$"

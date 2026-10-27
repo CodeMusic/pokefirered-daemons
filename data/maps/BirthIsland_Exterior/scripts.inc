@@ -34,6 +34,19 @@ BirthIsland_Exterior_OnTransition::
 	@  ...and OURS runs LAST, because TryShowDeoxysPuzzle above CLEARS the
 	@  meteorite's hide flag. Gating before it ran was silently undone.
 	call_if_unset FLAG_CRYSTAL_READ_PAYLOAD, BirthIsland_Exterior_EventScript_HideDeoxysAndPuzzle
+	@  T-460: the year between. Once she has gone home, a half-built receiver is left on the island; while she is
+	@  here it is bare, as above.
+	setflag FLAG_HIDE_ANNEX_WORKBENCH
+	call_if_set FLAG_CRYSTAL_READ_PAYLOAD, BirthIsland_Exterior_EventScript_ShowWorkbench
+	end
+
+BirthIsland_Exterior_EventScript_ShowWorkbench::
+	clearflag FLAG_HIDE_ANNEX_WORKBENCH
+	return
+
+@  T-460: a workbench with a rough receiver on it (it wears the receiver's own sprite). No page; nobody explains it.
+BirthIsland_Exterior_EventScript_Workbench::
+	msgbox BirthIsland_Exterior_Text_Workbench, MSGBOX_SIGN
 	end
 
 BirthIsland_Exterior_EventScript_HideDeoxysAndPuzzle::

@@ -449,6 +449,7 @@ static const struct NotebookEntry sEntries[] =
     NB_DOC_CORRESPONDENCE_4
     NB_DOC_CORRESPONDENCE_5
     NB_DOC_CORRESPONDENCE_6
+    NB_DOC_CORRESPONDENCE_7   // T-460: the card on CRYSTAL's desk, after the joining
     { NB_THE_FILE,     NB_KIND_TEXT,  0, FLAG_NOTEBOOK_FILE_MINUTES,    0, sTitle_File_Minutes,           CinnabarIsland_PokemonLab_Entrance_Text_MeetingRoomSign },
     { NB_THE_FILE,     NB_KIND_TEXT,  1, FLAG_NOTEBOOK_FILE_REQUISITION, 0, sTitle_File_Requisition,   CinnabarIsland_PokemonLab_Entrance_Text_RAndDRoomSign },
     { NB_THE_FILE,     NB_KIND_TEXT,  0, FLAG_NOTEBOOK_FILE_COMPLETE,   0, sTitle_File_Complete,       CinnabarIsland_PokemonLab_Entrance_Text_PhotoOfLabFounderDrFuji },

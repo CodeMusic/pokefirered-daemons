@@ -524,6 +524,31 @@ NotebookDoc_PROSPECTUS_8_Read::
 	waitstate
 	return
 
+NotebookDoc_CORRESPONDENCE_7::
+	goto_if_set FLAG_NOTEBOOK_DOC_CORRESPONDENCE_7, NotebookDoc_CORRESPONDENCE_7_Again
+	setflag FLAG_NOTEBOOK_DOC_CORRESPONDENCE_7
+	call NotebookDoc_CORRESPONDENCE_7_Read
+	call EventScript_NotebookCopied
+	return
+
+NotebookDoc_CORRESPONDENCE_7_Quiet::
+	goto_if_set FLAG_NOTEBOOK_DOC_CORRESPONDENCE_7, NotebookDoc_CORRESPONDENCE_7_Again
+	setflag FLAG_NOTEBOOK_DOC_CORRESPONDENCE_7
+	call NotebookDoc_CORRESPONDENCE_7_Read
+	addvar VAR_0x8007, 1
+	return
+
+NotebookDoc_CORRESPONDENCE_7_Again::
+	call NotebookDoc_CORRESPONDENCE_7_Read
+	return
+
+NotebookDoc_CORRESPONDENCE_7_Read::
+	setvar VAR_0x8004, FLAG_NOTEBOOK_DOC_CORRESPONDENCE_7
+	fadescreen FADE_TO_BLACK
+	special Notebook_ReadFlagEntry
+	waitstate
+	return
+
 NotebookDoc_LAB_NOTES_4_Card::
 	lockall
 	call NotebookDoc_LAB_NOTES_4
@@ -569,6 +594,14 @@ NotebookDoc_MtMoon_B2F_30_11::
 	lockall
 	call NotebookDoc_PROSPECTUS_1
 NotebookDoc_MtMoon_B2F_30_11_0::
+	releaseall
+	end
+
+NotebookDoc_PalletTown_ProfessorOaksLab_4_1::
+	lockall
+	goto_if_unset FLAG_SECOND_JOINING, NotebookDoc_PalletTown_ProfessorOaksLab_4_1_0
+	call NotebookDoc_CORRESPONDENCE_7
+NotebookDoc_PalletTown_ProfessorOaksLab_4_1_0::
 	releaseall
 	end
 

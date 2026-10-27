@@ -4490,6 +4490,27 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CrystalReceiver = 
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
+//  T-460: flowers on CRYSTAL's desk, one day a year -- inanimate, 16x16, npc_white in slot 4 as the lab's aides and
+//  its clipboard wear, so the lab's palettes are as they were.
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_DeskFlowers = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = PALSLOT_NPC_4,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gObjectEventBaseOam_16x16,
+    .subspriteTables = gObjectEventSpriteOamTables_16x16,
+    .anims = sAnimTable_Inanimate,
+    .images = sPicTable_DeskFlowers,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
 // T-439: the KINGFISHER photographer (cameraman.png), npc_pink as the sheet is drawn.
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CastKingfisher = {
     .tileTag = TAG_NONE,

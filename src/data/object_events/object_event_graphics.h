@@ -174,6 +174,7 @@ const u16 gObjectEventPic_TownCallowLyrebird[] = INCBIN_U16("graphics/object_eve
 const u16 gObjectEventPic_BeachPalm[] = INCBIN_U16("graphics/object_events/pics/misc/beach_palm.4bpp");                       // T-417 P3
 const u16 gObjectEventPic_BreathFlute[] = INCBIN_U16("graphics/object_events/pics/misc/breath_flute.4bpp");                   // T-417 BREATHVERSE
 const u16 gObjectEventPic_CrystalReceiver[] = INCBIN_U16("graphics/object_events/pics/misc/crystal_receiver.4bpp");           // T-457
+const u16 gObjectEventPic_DeskFlowers[] = INCBIN_U16("graphics/object_events/pics/misc/desk_flowers.4bpp");                   // T-460
 const u16 gObjectEventPic_TownUmbraAdult[] = INCBIN_U16("graphics/object_events/pics/people/town_umbra_adult.4bpp");
 const u16 gObjectEventPic_TownQuicksilverElder[] = INCBIN_U16("graphics/object_events/pics/people/town_quicksilver_elder.4bpp");
 const u16 gObjectEventPic_TownQuicksilverAdult[] = INCBIN_U16("graphics/object_events/pics/people/town_quicksilver_adult.4bpp");

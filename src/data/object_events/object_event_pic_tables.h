@@ -2557,3 +2557,7 @@ static const struct SpriteFrameImage sPicTable_BreathFlute[] = {         // T-41
 static const struct SpriteFrameImage sPicTable_CrystalReceiver[] = {     // T-457: one 16x16 frame
     overworld_frame(gObjectEventPic_CrystalReceiver, 2, 2, 0),
 };
+
+static const struct SpriteFrameImage sPicTable_DeskFlowers[] = {         // T-460: one 16x16 frame
+    overworld_frame(gObjectEventPic_DeskFlowers, 2, 2, 0),
+};

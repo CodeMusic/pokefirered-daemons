@@ -862,7 +862,7 @@
 #define FLAG_NOTEBOOK_DOC_PEER_REVIEW_4          0x33E   // T-224, tools/gbadocs.py
 #define FLAG_NOTEBOOK_DOC_PROSPECTUS_7           0x33F   // T-224, tools/gbadocs.py
 #define FLAG_NOTEBOOK_DOC_PROSPECTUS_8           0x340   // T-224, tools/gbadocs.py
-#define FLAG_0x341               0x341
+#define FLAG_NOTEBOOK_DOC_CORRESPONDENCE_7       0x341   // T-224, tools/gbadocs.py
 #define FLAG_0x342               0x342
 #define FLAG_0x343               0x343
 #define FLAG_0x344               0x344
@@ -1548,13 +1548,13 @@
 //  GIFT's table) -- so 581 vanilla flags are unused, not nine:
 //    0x020-0x027, and 220 among the hide/show flags (0x077-0x22F) -- below STORY_FLAGS_START,
 //      so the QUEST LOG does not record them changing;
-//    23 in the story flags' gaps (0x23E-0x2EB); 0x341-0x3D7, 151; 8 FLAG_HIDDEN_ITEM_UNUSED_
+//    23 in the story flags' gaps (0x23E-0x2EB); 0x342-0x3D7, 150; 8 FLAG_HIDDEN_ITEM_UNUSED_
 //      (0x3EF .. 0x464); 0x4A7-0x4A8 and 0x4AB-0x4AF (TeachyTvRepairOldSave reads and clears
 //      them once, on an old save's first CONTINUE); 0x4BD-0x4FF, 67;
 //    0x809-0x81F, 23 before PERMA_SYS_FLAGS_START (the QUEST LOG skips those too); 11 between the
 //      badges and 0x83F; 0x8C3-0x8FF, 61.
-//  NOT 0x33F or 0x340: tools/gbadocs.py numbers its documents from 0x327 up, and its 25th and 26th
-//  (T-457's two PROSPECTUS papers) took them.
+//  NOT 0x33F, 0x340 or 0x341: tools/gbadocs.py numbers its documents from 0x327 up, and its 25th and
+//  26th (T-457's two PROSPECTUS papers) and 27th (T-460's CORRESPONDENCE 7) took them.
 //  WHERE TO TAKE A NEW ONE: from this DAEMONS block first (about 680 of its 0x400 are unnamed
 //  -- read its comments for a tool's reserved run, and check_lexicon's check_flag_ranges holds
 //  its ranges apart). A vanilla FLAG_0x... only when a flag must live in SaveBlock1: rename
@@ -1903,6 +1903,10 @@
                                                                                 //   on every map load, event_data.c DaemonsSecondJoining)
 #define FLAG_HEARD_CRYSTAL_AT_RECEIVER        (DAEMONS_FLAGS_START + 0x3F0)   // T-457: the game lane's next block 0x3F0-0x3FF; her one line
                                                                                 //   at the receiver has been heard (once)
+#define FLAG_HIDE_CRYSTAL_FLOWERS             (DAEMONS_FLAGS_START + 0x3F1)   // T-460: flowers on her desk, shown only on OCT 3 by the
+                                                                                //   HOLIDAYS' calendar after the joining (DaemonsSecondJoining)
+#define FLAG_HIDE_ANNEX_WORKBENCH             (DAEMONS_FLAGS_START + 0x3F2)   // T-460: THE ANNEX's half-built receiver, hidden until CRYSTAL
+                                                                                //   has gone home (BirthIsland_Exterior_OnTransition)
 
 //  BEGIN gbaglobalindex -- T-334: each fixed encounter of the GLOBAL INDEX, once gone (removeobject sets it). The beasts'
 //  and the edition daemons' are also set on every map load while they may not stand (event_data.c,

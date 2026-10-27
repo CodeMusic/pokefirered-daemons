@@ -41,3 +41,9 @@ BirthIsland_Exterior_Text_ProteusShell::
 
 BirthIsland_Exterior_Text_ProteusHolds::
     .string "PROTEUS holds still.$"
+
+@  T-460, DRAFT (the user's words, 2026-10-27): the workbench, once CRYSTAL has gone home.
+BirthIsland_Exterior_Text_Workbench::
+    .string "A receiver, half built,\n"
+    .string "from whatever was to hand.\p"
+    .string "It is listening anyway.$"

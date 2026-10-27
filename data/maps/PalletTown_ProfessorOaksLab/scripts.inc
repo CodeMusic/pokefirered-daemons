@@ -997,10 +997,14 @@ PalletTown_ProfessorOaksLab_EventScript_Receiver::
 	lockall
 	textcolor NPC_TEXT_COLOR_NEUTRAL
 	special DaemonsSounding    @ T-458: the first AWAY daemon's name in STR_VAR_1, its signal in VAR_RESULT (4: none)
-	goto_if_eq VAR_RESULT, 0, PalletTown_ProfessorOaksLab_EventScript_ReceiverSignal0
-	goto_if_eq VAR_RESULT, 1, PalletTown_ProfessorOaksLab_EventScript_ReceiverSignal1
-	goto_if_eq VAR_RESULT, 2, PalletTown_ProfessorOaksLab_EventScript_ReceiverSignal2
-	goto_if_eq VAR_RESULT, 3, PalletTown_ProfessorOaksLab_EventScript_ReceiverSignal3
+	copyvar VAR_0x8008, VAR_RESULT   @ T-460: kept across the lines read before it
+	msgbox PalletTown_ProfessorOaksLab_Text_ReceiverTurnedLow
+	@  T-460: once THE FILE 4 (NINE ITEMS) has been read, the tag on it. Nobody explains it.
+	call_if_set FLAG_NOTEBOOK_DOC_THE_FILE_4, PalletTown_ProfessorOaksLab_EventScript_ReceiverTag
+	goto_if_eq VAR_0x8008, 0, PalletTown_ProfessorOaksLab_EventScript_ReceiverSignal0
+	goto_if_eq VAR_0x8008, 1, PalletTown_ProfessorOaksLab_EventScript_ReceiverSignal1
+	goto_if_eq VAR_0x8008, 2, PalletTown_ProfessorOaksLab_EventScript_ReceiverSignal2
+	goto_if_eq VAR_0x8008, 3, PalletTown_ProfessorOaksLab_EventScript_ReceiverSignal3
 	msgbox PalletTown_ProfessorOaksLab_Text_Receiver
 PalletTown_ProfessorOaksLab_EventScript_ReceiverCrystal::
 	goto_if_set FLAG_HEARD_CRYSTAL_AT_RECEIVER, PalletTown_ProfessorOaksLab_EventScript_ReceiverDone
@@ -1029,6 +1033,16 @@ PalletTown_ProfessorOaksLab_EventScript_ReceiverSignal2::
 PalletTown_ProfessorOaksLab_EventScript_ReceiverSignal3::
 	msgbox PalletTown_ProfessorOaksLab_Text_ReceiverSignal3
 	goto PalletTown_ProfessorOaksLab_EventScript_ReceiverCrystal
+
+PalletTown_ProfessorOaksLab_EventScript_ReceiverTag::
+	msgbox PalletTown_ProfessorOaksLab_Text_ReceiverTag
+	return
+
+@  T-460: flowers on her desk, one day a year after the joining (FLAG_HIDE_CRYSTAL_FLOWERS, event_data.c
+@  DaemonsSecondJoining). Nobody says why, and nothing names the day.
+PalletTown_ProfessorOaksLab_EventScript_Flowers::
+	msgbox PalletTown_ProfessorOaksLab_Text_Flowers, MSGBOX_SIGN
+	end
 
 PalletTown_ProfessorOaksLab_EventScript_DontStartNationalDexScene::
 	release

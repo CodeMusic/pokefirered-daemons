@@ -432,4 +432,16 @@ static const u8 sDocText_PROSPECTUS_8[] = _(
     "careful.");
 #define NB_DOC_PROSPECTUS_8 { NB_PROSPECTUS, NB_KIND_TEXT, 0, FLAG_NOTEBOOK_DOC_PROSPECTUS_8, 0, sDocTitle_PROSPECTUS_8, sDocText_PROSPECTUS_8 },
 
+static const u8 sDocTitle_CORRESPONDENCE_7[] = _("AT THE DOOR");
+static const u8 sDocText_CORRESPONDENCE_7[] = _(
+    "A card, crowded to the edges with\n"
+    "signatures. Some are careful. Most\n"
+    "are not.\p"
+    "In the middle, in a hand you do not\n"
+    "know, one line:\p"
+    "“We never got to say it at the\n"
+    "door.”\p"
+    "There is no date on it.");
+#define NB_DOC_CORRESPONDENCE_7 { NB_CORRESPONDENCE, NB_KIND_TEXT, 0, FLAG_NOTEBOOK_DOC_CORRESPONDENCE_7, 0, sDocTitle_CORRESPONDENCE_7, sDocText_CORRESPONDENCE_7 },
+
 #endif // GUARD_DATA_NOTEBOOK_DOCUMENTS_H

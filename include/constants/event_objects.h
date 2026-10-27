@@ -318,8 +318,12 @@
 //  T-457 (the user, 2026-10-27, sheet A): the receiver on CRYSTAL's desk, its own 16x16 in indigo, NPC_BLUE as the
 //  INDEX unit it used to wear (DAEMONS gfx/drafts/t457/receiver_a_indigo). Past the text-colour table's end, so NEUTRAL.
 #define OBJ_EVENT_GFX_CRYSTAL_RECEIVER 237
+//  T-460: flowers on CRYSTAL's desk, one day a year (event_data.c DaemonsSecondJoining). 16x16 in npc_white, slot 4 as
+//  the lab's aides and its clipboard. Past the text-colour table's end, so NEUTRAL. 239 is the last id before
+//  OBJ_EVENT_GFX_VARS (240).
+#define OBJ_EVENT_GFX_DESK_FLOWERS 238
 
-#define NUM_OBJ_EVENT_GFX     238
+#define NUM_OBJ_EVENT_GFX     239
 
 // These are dynamic object gfx ids.
 // They correspond with the values of the VAR_OBJ_GFX_ID_X vars.
