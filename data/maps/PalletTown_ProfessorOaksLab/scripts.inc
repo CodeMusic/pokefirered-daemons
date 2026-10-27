@@ -992,7 +992,7 @@ PalletTown_ProfessorOaksLab_EventScript_CrystalGivesGlobalIndex::
 
 @  T-457 (4.37): the receiver on her desk, there once she is home and the GLOBAL INDEX is held (FLAG_HIDE_CRYSTAL_RECEIVER,
 @  event_data.c DaemonsSecondJoining). It picks up one daemon far away, doing fine. She does not explain it: the first
-@  time it is read she says her one line, about something else, and never again (the user, 2026-10-26). DRAFT.
+@  time it is read she says her one line, about something else, and never again (the user, 2026-10-26). Approved 2026-10-27.
 PalletTown_ProfessorOaksLab_EventScript_Receiver::
 	lockall
 	textcolor NPC_TEXT_COLOR_NEUTRAL

@@ -106,7 +106,7 @@ EventScript_PkmnCenterNurse_CheckDreamEnd::
 	return
 
 @ T-457 (bible 4.37): once the two halves have met, a keeper now and then answers someone who is not in the room --
-@ tending between the fights where you are judged. A check-in, never a reading. One heal in three. DRAFT wording.
+@ tending between the fights where you are judged. A check-in, never a reading. One heal in three. Approved 2026-10-27.
 EventScript_PkmnCenterNurse_CheckListening::
 	goto_if_unset FLAG_SECOND_JOINING, EventScript_PkmnCenterNurse_CheckListeningEnd
 	random 3
@@ -136,13 +136,13 @@ EventScript_PkmnCenterNurse_ListeningSignal3::
 	msgbox Text_KeeperListeningSignal3
 	return
 
-@ T-457, DRAFT (the user's words, 2026-10-27): a CHECKPOINT keeper, to someone on the network.
+@ T-457 (the user's words, approved 2026-10-27): a CHECKPOINT keeper, to someone on the network.
 Text_KeeperListening::
 	.string "Excuse me, one moment.\p"
 	.string "…Yes, I hear you.\n"
 	.string "Good to hear from you.$"
 
-@ T-458, DRAFT (the user's words, 2026-10-27): the same check-in while a daemon is AWAY, naming it (STR_VAR_1), its
+@ T-458 (the user's words, approved 2026-10-27): the same check-in while a daemon is AWAY, naming it (STR_VAR_1), its
 @ last line by the companion's signal: 0 no signal yet, 1 quiet, 2 fine, 3 well.
 Text_KeeperListeningSignal0::
 	.string "Excuse me, one moment.\p"

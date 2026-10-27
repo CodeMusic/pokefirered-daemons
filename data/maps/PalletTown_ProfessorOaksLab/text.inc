@@ -455,23 +455,23 @@ PalletTown_ProfessorOaksLab_Text_OakOpusFound::
     .string "The other, I think, you have found\n"
     .string "already. It was never for sale.$"
 
-@  T-457, DRAFT (the user's words, 2026-10-27): CRYSTAL's one line, about something else, the first time the
+@  T-457 (the user's words, approved 2026-10-27): CRYSTAL's one line, about something else, the first time the
 @  receiver is read (no longer at the GLOBAL INDEX handover).
 PalletTown_ProfessorOaksLab_Text_CrystalSomethingElse::
     .string "CRYSTAL: It is raining on the\n"
     .string "islands, I hear.$"
 
-@  T-457, DRAFT (the user's words, 2026-10-27): the receiver on her desk. Its first line is its own box since T-460,
+@  T-457 (the user's words, approved 2026-10-27): the receiver on her desk. Its first line is its own box since T-460,
 @  so the tag can follow it.
 PalletTown_ProfessorOaksLab_Text_ReceiverTurnedLow::
     .string "A receiver, turned low.$"
 
-@  T-460, DRAFT (the user's words, 2026-10-27): after "A receiver, turned low.", once THE FILE 4 has been read.
+@  T-460 (the user's words, approved 2026-10-27): after "A receiver, turned low.", once THE FILE 4 has been read.
 PalletTown_ProfessorOaksLab_Text_ReceiverTag::
     .string "An old evidence tag\n"
     .string "is still tied to it.$"
 
-@  T-460, DRAFT (the user's words, 2026-10-27): flowers on her desk, one day a year.
+@  T-460 (the user's words, approved 2026-10-27): flowers on her desk, one day a year.
 PalletTown_ProfessorOaksLab_Text_Flowers::
     .string "Flowers.\p"
     .string "There is no card.$"
@@ -481,7 +481,7 @@ PalletTown_ProfessorOaksLab_Text_Receiver::
     .string "on an island.\p"
     .string "It is doing fine.$"
 
-@  T-458, DRAFT (the user's words, 2026-10-27): the receiver while a daemon is AWAY; its last line by the signal
+@  T-458 (the user's words, approved 2026-10-27): the receiver while a daemon is AWAY; its last line by the signal
 @  (0 no signal yet, 1 quiet, 2 fine, 3 well). STR_VAR_1 is the daemon's name (DaemonsSounding).
 PalletTown_ProfessorOaksLab_Text_ReceiverSignal0::
     .string "It is picking up {STR_VAR_1},\n"

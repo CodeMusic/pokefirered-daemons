@@ -132,7 +132,7 @@ SaffronCity_EventScript_SilphProductSign::
 	end
 
 @  T-457 (bible 4.37): after the second joining the same board carries a posting with no scores. One sign, one flag.
-@  The scores are still behind it for a player who never read them, so PROSPECTUS 2 can still be filed. DRAFT.
+@  The scores are still behind it for a player who never read them, so PROSPECTUS 2 can still be filed. Approved 2026-10-27.
 SaffronCity_EventScript_SilphProductSignNoScores::
 	msgbox SaffronCity_Text_PostingNoScores
 	goto_if_set FLAG_NOTEBOOK_PROSPECTUS_SCORES, SaffronCity_EventScript_SilphProductSignDone

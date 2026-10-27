@@ -106,7 +106,7 @@ SaffronCity_Text_SilphsLatestProduct::
     .string "Congratulations to our top\n"
     .string "performer!$"
 
-@  T-457, DRAFT (the user's words, 2026-10-27): the posting that replaces the scores, once the two halves have met.
+@  T-457 (the user's words, approved 2026-10-27): the posting that replaces the scores, once the two halves have met.
 @  No scores.
 SaffronCity_Text_PostingNoScores::
     .string "CORPUS NOTICE: REVIEWS\p"
