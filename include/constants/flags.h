@@ -1901,6 +1901,8 @@
 #define FLAG_SECOND_JOINING                   (DAEMONS_FLAGS_START + 0x3EE)   // T-457: CRYSTAL back from THE ANNEX and the GLOBAL INDEX held
 #define FLAG_HIDE_CRYSTAL_RECEIVER            (DAEMONS_FLAGS_START + 0x3EF)   // T-457: the receiver on her desk, hidden until then (both set
                                                                                 //   on every map load, event_data.c DaemonsSecondJoining)
+#define FLAG_HEARD_CRYSTAL_AT_RECEIVER        (DAEMONS_FLAGS_START + 0x3F0)   // T-457: the game lane's next block 0x3F0-0x3FF; her one line
+                                                                                //   at the receiver has been heard (once)
 
 //  BEGIN gbaglobalindex -- T-334: each fixed encounter of the GLOBAL INDEX, once gone (removeobject sets it). The beasts'
 //  and the edition daemons' are also set on every map load while they may not stand (event_data.c,

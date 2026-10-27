@@ -975,12 +975,11 @@ PalletTown_ProfessorOaksLab_EventScript_TryStartNationalDexScene::
 	goto PalletTown_ProfessorOaksLab_EventScript_CrystalGivesGlobalIndex
 	end
 
-@  T-457 (bible 4.37, the second joining). The merger is on the papers and the signs, never in her mouth: one line,
-@  about something else, then the INDEX. In play the GLOBAL INDEX comes from her aide while she is away (below), so
-@  this is reached only by a debug order or from TryStartNationalDexScene. DRAFT wording.
+@  T-457 (bible 4.37, the second joining). The merger is on the papers and the signs, never in her mouth: she gives
+@  the INDEX and says nothing (the user, 2026-10-26 -- her one line is at the receiver now, below). In play the GLOBAL
+@  INDEX comes from her aide while she is away (below), so this is reached only by a debug order or from
+@  TryStartNationalDexScene.
 PalletTown_ProfessorOaksLab_EventScript_CrystalGivesGlobalIndex::
-	msgbox PalletTown_ProfessorOaksLab_Text_CrystalSomethingElse
-	closemessage
 	textcolor NPC_TEXT_COLOR_NEUTRAL
 	playfanfare MUS_OBTAIN_KEY_ITEM
 	message PalletTown_ProfessorOaksLab_Text_PlayersPokedexWasUpgraded
@@ -992,9 +991,19 @@ PalletTown_ProfessorOaksLab_EventScript_CrystalGivesGlobalIndex::
 	end
 
 @  T-457 (4.37): the receiver on her desk, there once she is home and the GLOBAL INDEX is held (FLAG_HIDE_CRYSTAL_RECEIVER,
-@  event_data.c DaemonsSecondJoining). It picks up one daemon far away, doing fine. She does not explain it. DRAFT.
+@  event_data.c DaemonsSecondJoining). It picks up one daemon far away, doing fine. She does not explain it: the first
+@  time it is read she says her one line, about something else, and never again (the user, 2026-10-26). DRAFT.
 PalletTown_ProfessorOaksLab_EventScript_Receiver::
-	msgbox PalletTown_ProfessorOaksLab_Text_Receiver, MSGBOX_SIGN
+	lockall
+	textcolor NPC_TEXT_COLOR_NEUTRAL
+	msgbox PalletTown_ProfessorOaksLab_Text_Receiver
+	goto_if_set FLAG_HEARD_CRYSTAL_AT_RECEIVER, PalletTown_ProfessorOaksLab_EventScript_ReceiverDone
+	textcolor NPC_TEXT_COLOR_MALE   @ her voice everywhere (OBJ_EVENT_GFX_PROF_OAK's colour)
+	msgbox PalletTown_ProfessorOaksLab_Text_CrystalSomethingElse
+	setflag FLAG_HEARD_CRYSTAL_AT_RECEIVER
+PalletTown_ProfessorOaksLab_EventScript_ReceiverDone::
+	call EventScript_RestorePrevTextColor
+	releaseall
 	end
 
 PalletTown_ProfessorOaksLab_EventScript_DontStartNationalDexScene::
