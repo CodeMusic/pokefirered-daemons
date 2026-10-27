@@ -86,6 +86,99 @@ const struct SubspriteTable gObjectEventSpriteOamTables_16x16[] = {
     {2, gObjectEventSpriteOamTable_16x16_4},
 };
 
+//  T-460 (the user, 2026-10-27, after the SOUNDINGS theatre run): a thing standing on a desk is drawn 8px higher than its
+//  tile, so its foot sits mid-desk rather than on the desk's front edge. Read from the tile below, a 16x16 prop on the
+//  row above is where the player's head is drawn (the player's top 9 rows are empty, so the head covers the prop's
+//  bottom 7); 8px up clears it whole. Its tile, its collision and who reads it from where are unchanged.
+//  The same five elevation variants as gObjectEventSpriteOamTables_16x16, every y 8 less.
+const struct Subsprite gObjectEventSpriteOamTable_16x16Raised_0[] = {
+    {
+        .x = -8,
+        .y = -16,
+        .shape = SPRITE_SHAPE(16x16),
+        .size = SPRITE_SIZE(16x16),
+        .tileOffset = 0,
+        .priority = 2
+    }
+};
+
+const struct Subsprite gObjectEventSpriteOamTable_16x16Raised_1[] = {
+    {
+        .x = -8,
+        .y = -16,
+        .shape = SPRITE_SHAPE(16x16),
+        .size = SPRITE_SIZE(16x16),
+        .tileOffset = 0,
+        .priority = 1
+    }
+};
+
+const struct Subsprite gObjectEventSpriteOamTable_16x16Raised_2[] = {
+    {
+        .x = -8,
+        .y = -16,
+        .shape = SPRITE_SHAPE(16x8),
+        .size = SPRITE_SIZE(16x8),
+        .tileOffset = 0,
+        .priority = 2
+    },
+    {
+        .x = -8,
+        .y = -8,
+        .shape = SPRITE_SHAPE(16x8),
+        .size = SPRITE_SIZE(16x8),
+        .tileOffset = 2,
+        .priority = 3
+    }
+};
+
+const struct Subsprite gObjectEventSpriteOamTable_16x16Raised_3[] = {
+    {
+        .x = -8,
+        .y = -16,
+        .shape = SPRITE_SHAPE(16x16),
+        .size = SPRITE_SIZE(16x16),
+        .tileOffset = 0,
+        .priority = 2
+    },
+    {
+        .x = -8,
+        .y = -16,
+        .shape = SPRITE_SHAPE(16x16),
+        .size = SPRITE_SIZE(16x16),
+        .tileOffset = 0,
+        .priority = 3
+    }
+};
+
+const struct Subsprite gObjectEventSpriteOamTable_16x16Raised_4[] = {
+    {
+        .x = -8,
+        .y = -16,
+        .shape = SPRITE_SHAPE(16x16),
+        .size = SPRITE_SIZE(16x16),
+        .tileOffset = 0,
+        .priority = 1
+    },
+    {
+        .x = -8,
+        .y = -16,
+        .shape = SPRITE_SHAPE(16x16),
+        .size = SPRITE_SIZE(16x16),
+        .tileOffset = 0,
+        .priority = 3
+    }
+};
+
+const struct SubspriteTable gObjectEventSpriteOamTables_16x16Raised[] = {
+    {0, NULL},
+    {1, gObjectEventSpriteOamTable_16x16Raised_0},
+    {1, gObjectEventSpriteOamTable_16x16Raised_1},
+    {2, gObjectEventSpriteOamTable_16x16Raised_2},
+    {2, gObjectEventSpriteOamTable_16x16Raised_3},
+    {2, gObjectEventSpriteOamTable_16x16Raised_4},
+};
+
 const struct Subsprite gObjectEventSpriteOamTable_16x32_0[] = {
     {
         .x = -8,

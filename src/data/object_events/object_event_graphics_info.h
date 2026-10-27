@@ -4484,7 +4484,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CrystalReceiver = 
     .disableReflectionPaletteLoad = FALSE,
     .tracks = TRACKS_NONE,
     .oam = &gObjectEventBaseOam_16x16,
-    .subspriteTables = gObjectEventSpriteOamTables_16x16,
+    .subspriteTables = gObjectEventSpriteOamTables_16x16Raised,   // T-460: drawn 8px up
     .anims = sAnimTable_Inanimate,
     .images = sPicTable_CrystalReceiver,
     .affineAnims = gDummySpriteAffineAnimTable,
@@ -4505,9 +4505,30 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_DeskFlowers = {
     .disableReflectionPaletteLoad = FALSE,
     .tracks = TRACKS_NONE,
     .oam = &gObjectEventBaseOam_16x16,
-    .subspriteTables = gObjectEventSpriteOamTables_16x16,
+    .subspriteTables = gObjectEventSpriteOamTables_16x16Raised,   // T-460: drawn 8px up
     .anims = sAnimTable_Inanimate,
     .images = sPicTable_DeskFlowers,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+//  T-460: the card AT THE DOOR on CRYSTAL's desk -- the CLIPBOARD's own art and palette, drawn 8px up as the desk's
+//  other props are. Its own id only so the three vanilla clipboards on other maps stay where they were drawn.
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_DeskCard = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = PALSLOT_NPC_4,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gObjectEventBaseOam_16x16,
+    .subspriteTables = gObjectEventSpriteOamTables_16x16Raised,
+    .anims = sAnimTable_Inanimate,
+    .images = sPicTable_Clipboard,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
 
