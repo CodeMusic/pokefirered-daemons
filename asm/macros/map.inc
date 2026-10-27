@@ -22,9 +22,12 @@
 	@ Defines an object event template for map data, to be used by a normal object. Mirrors the struct layout of ObjectEventTemplate in include/global.fieldmap.h
 	.macro object_event index:req, gfx:req, x:req, y:req, elevation:req, movement_type:req, x_radius:req, y_radius:req, trainer_type:req, sight_radius_tree_etc:req, script:req, event_flag:req
 	.byte \index
-	.byte \gfx
+	.if (\gfx) >= OBJ_EVENT_GFX_ID_LIMIT
+	.error "object graphics id past OBJ_EVENT_GFX_ID_LIMIT (T-461)"
+	.endif
+	.byte (\gfx) & 0xFF  @ T-461: graphicsIdLo
 	.byte OBJ_KIND_NORMAL
-	.space 1  @ Padding
+	.byte (\gfx) >> 8    @ T-461: graphicsIdHi, was padding (0 for every id below 256)
 	.2byte \x, \y
 	.byte \elevation
 	.byte \movement_type
@@ -41,9 +44,12 @@
 	@ Defines an object event template for map data, to be used by a clone object. Mirrors the struct layout of ObjectEventTemplate in include/global.fieldmap.h
 	.macro clone_event index:req, gfx:req, x:req, y:req, target_local_id:req, target_map_id:req
 	.byte \index
-	.byte \gfx
+	.if (\gfx) >= OBJ_EVENT_GFX_ID_LIMIT
+	.error "object graphics id past OBJ_EVENT_GFX_ID_LIMIT (T-461)"
+	.endif
+	.byte (\gfx) & 0xFF  @ T-461: graphicsIdLo
 	.byte OBJ_KIND_CLONE
-	.space 1  @ Padding
+	.byte (\gfx) >> 8    @ T-461: graphicsIdHi, was padding (0 for every id below 256)
 	.2byte \x, \y
 	.byte \target_local_id
 	.space 3  @ Padding

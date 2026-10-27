@@ -325,9 +325,17 @@
 //  2026-10-27: the desk's props stay visible above the player's head). The LAST id before OBJ_EVENT_GFX_VARS (240).
 #define OBJ_EVENT_GFX_DESK_CARD 239
 
-//  T-461: graphicsId is a u8 (object event templates, live object events and the recap's object events, all three
-//  kept in the save), and 240-255 are the sixteen VAR graphics below, every one in use. So the table cannot grow:
-//  NUM_OBJ_EVENT_GFX stays 240 and a new sprite takes a FREE id instead.
+//  T-461: an object's graphics id is 12 bits (0 to OBJ_EVENT_GFX_ID_LIMIT - 1), widened 2026-10-27 into bytes the save
+//  already had and every save held as 0 (global.fieldmap.h's OBJ_GFX_ID), so every id below 256 keeps its number and
+//  every save reads as it did. The numbers:
+//     0 .. 239   vanilla's table and ours, as before;
+//   240 .. 255   the sixteen VAR graphics below, read through VAR_OBJ_GFX_ID_0..F -- reserved, never a sprite;
+//   256 ..       new sprites (OBJ_EVENT_GFX_WIDE_START). NUM_OBJ_EVENT_GFX is the table's length, so once one is
+//                added it jumps past the VARs and the table's 240-255 slots stay empty (never read: the VARs are
+//                resolved first).
+//  The recap (quest log) still stores a u8, so an id from 256 up is recorded as a STAND-IN below 240:
+//  quest_log_objects.c's sQuestLogGfxStandIns names one per wide id (a like-shaped sprite), defaulting to
+//  OBJ_EVENT_GFX_QL_STAND_IN. Add a row there for each new wide id.
 //
 //  A FREE id (OBJ_EVENT_GFX_FREE_<n>) is a number vanilla defined that nothing in DAEMONS places on a map, spawns,
 //  sets a VAR_OBJ_GFX_ID to or reads in src/ -- and that none of the 19 saves on the development machine holds (the
@@ -335,15 +343,20 @@
 //  vanilla's art, so nothing changes until one is taken. Every id in use keeps its number, so saves (which store
 //  numbers) are untouched.
 //
-//  Take one with DAEMONS tools/gentowns.py register_one(): it takes the lowest, renames its define and repoints its
-//  slot. Its row in dynamic_placeholder_text_util.c's sTextColorTable is shared with its pair and is already there.
+//  Take one with DAEMONS tools/gentowns.py register_one(): it takes the lowest FREE id, then the next wide id, renames
+//  its define and repoints (or adds) its slot. A FREE id's row in dynamic_placeholder_text_util.c's sTextColorTable is
+//  shared with its pair and is already there; a wide id past the table's end reads NEUTRAL.
 //  DAEMONS tools/check_objgfx.py (run by check_lexicon.py) fails if anything uses a FREE id, if two ids share a
-//  number, or if this list and the defines disagree.
+//  number, if an id sits in the VAR range or past the limit, or if this list and the defines disagree.
 //
 //  Not free, though nothing places them: 14-15 (Ruby/Sapphire link partners), 38 (TRAINER TOWER), 102 (FAME CHECKER),
 //  148-149 (PROTEUS's two shapes, daemons_cast.c), 150 (DEOXYS_N: tools/gbaowslots.py draws PROTEUS's object into it).
 //
 //  FREE: 63 104 140
+
+#define OBJ_EVENT_GFX_WIDE_START  256
+#define OBJ_EVENT_GFX_ID_LIMIT    4096
+#define OBJ_EVENT_GFX_QL_STAND_IN OBJ_EVENT_GFX_LITTLE_BOY   // the recap's stand-in for a wide id with no row
 
 #define NUM_OBJ_EVENT_GFX     240
 

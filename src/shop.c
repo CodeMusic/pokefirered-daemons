@@ -990,9 +990,9 @@ static void BuyMenuDrawObjectEvents(void)
         if (sViewportObjectEvents[i][OBJECT_EVENT_ID] == OBJECT_EVENTS_COUNT)
             continue;
 
-        graphicsInfo = GetObjectEventGraphicsInfo(gObjectEvents[sViewportObjectEvents[i][OBJECT_EVENT_ID]].graphicsId);
+        graphicsInfo = GetObjectEventGraphicsInfo(OBJ_GFX_ID(&gObjectEvents[sViewportObjectEvents[i][OBJECT_EVENT_ID]]));
         spriteId = CreateObjectGraphicsSprite(
-            gObjectEvents[sViewportObjectEvents[i][OBJECT_EVENT_ID]].graphicsId,
+            OBJ_GFX_ID(&gObjectEvents[sViewportObjectEvents[i][OBJECT_EVENT_ID]]),
             SpriteCallbackDummy,
             (u16)sViewportObjectEvents[i][X_COORD] * 16 - 8,
             (u16)sViewportObjectEvents[i][Y_COORD] * 16 + 48 - graphicsInfo->height / 2,

@@ -55,7 +55,7 @@ void SetUpReflection(struct ObjectEvent * objectEvent, struct Sprite *sprite, bo
 
 static s16 GetReflectionVerticalOffset(struct ObjectEvent * objectEvent)
 {
-    return GetObjectEventGraphicsInfo(objectEvent->graphicsId)->height - 2;
+    return GetObjectEventGraphicsInfo(OBJ_GFX_ID(objectEvent))->height - 2;
 }
 
 static void LoadObjectReflectionPalette(struct ObjectEvent * objectEvent, struct Sprite *sprite)
@@ -63,7 +63,7 @@ static void LoadObjectReflectionPalette(struct ObjectEvent * objectEvent, struct
     u8 bridgeType;
     u16 bridgeReflectionVerticalOffsets[] = { 12, 28, 44 };
     sprite->data[2] = 0;
-    if (!GetObjectEventGraphicsInfo(objectEvent->graphicsId)->disableReflectionPaletteLoad && ((bridgeType = MetatileBehavior_GetBridgeType(objectEvent->previousMetatileBehavior)) || (bridgeType = MetatileBehavior_GetBridgeType(objectEvent->currentMetatileBehavior))))
+    if (!GetObjectEventGraphicsInfo(OBJ_GFX_ID(objectEvent))->disableReflectionPaletteLoad && ((bridgeType = MetatileBehavior_GetBridgeType(objectEvent->previousMetatileBehavior)) || (bridgeType = MetatileBehavior_GetBridgeType(objectEvent->currentMetatileBehavior))))
     {
         sprite->data[2] = bridgeReflectionVerticalOffsets[bridgeType - 1];
         LoadObjectHighBridgeReflectionPalette(objectEvent, sprite->oam.paletteNum);
@@ -78,7 +78,7 @@ static void LoadObjectRegularReflectionPalette(struct ObjectEvent * objectEvent,
 {
     const struct ObjectEventGraphicsInfo * graphicsInfo;
 
-    graphicsInfo = GetObjectEventGraphicsInfo(objectEvent->graphicsId);
+    graphicsInfo = GetObjectEventGraphicsInfo(OBJ_GFX_ID(objectEvent));
     if (graphicsInfo->reflectionPaletteTag != OBJ_EVENT_PAL_TAG_NONE)
     {
         if (graphicsInfo->paletteSlot == PALSLOT_PLAYER)
@@ -97,7 +97,7 @@ static void LoadObjectHighBridgeReflectionPalette(struct ObjectEvent * objectEve
 {
     const struct ObjectEventGraphicsInfo * graphicsInfo;
 
-    graphicsInfo = GetObjectEventGraphicsInfo(objectEvent->graphicsId);
+    graphicsInfo = GetObjectEventGraphicsInfo(OBJ_GFX_ID(objectEvent));
     if (graphicsInfo->reflectionPaletteTag != OBJ_EVENT_PAL_TAG_NONE)
     {
         PatchObjectPalette(graphicsInfo->reflectionPaletteTag, paletteNum);
@@ -248,7 +248,7 @@ u32 FldEff_Shadow(void)
     u8 spriteId;
 
     objectEventId = GetObjectEventIdByLocalIdAndMap(gFieldEffectArguments[0], gFieldEffectArguments[1], gFieldEffectArguments[2]);
-    graphicsInfo = GetObjectEventGraphicsInfo(gObjectEvents[objectEventId].graphicsId);
+    graphicsInfo = GetObjectEventGraphicsInfo(OBJ_GFX_ID(&gObjectEvents[objectEventId]));
     spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[gShadowEffectTemplateIds[graphicsInfo->shadowSize]], 0, 0, 0x94);
     if (spriteId != MAX_SPRITES)
     {
@@ -524,7 +524,7 @@ void UpdateShortGrassFieldEffect(struct Sprite *sprite)
     }
     else
     {
-        graphicsInfo = GetObjectEventGraphicsInfo(gObjectEvents[objectEventId].graphicsId);
+        graphicsInfo = GetObjectEventGraphicsInfo(OBJ_GFX_ID(&gObjectEvents[objectEventId]));
         linkedSprite = &gSprites[gObjectEvents[objectEventId].spriteId];
         y = linkedSprite->y;
         x = linkedSprite->x;
@@ -644,7 +644,7 @@ u32 FldEff_Splash(void)
     spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_SPLASH], 0, 0, 0);
     if (spriteId != MAX_SPRITES)
     {
-        graphicsInfo = GetObjectEventGraphicsInfo(objectEvent->graphicsId);
+        graphicsInfo = GetObjectEventGraphicsInfo(OBJ_GFX_ID(objectEvent));
         sprite = &gSprites[spriteId];
         sprite->coordOffsetEnabled = TRUE;
         linkedSprite = &gSprites[objectEvent->spriteId];
@@ -723,7 +723,7 @@ u32 FldEff_FeetInFlowingWater(void)
     spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_SPLASH], 0, 0, 0);
     if (spriteId != MAX_SPRITES)
     {
-        graphicsInfo = GetObjectEventGraphicsInfo(objectEvent->graphicsId);
+        graphicsInfo = GetObjectEventGraphicsInfo(OBJ_GFX_ID(objectEvent));
         sprite = &gSprites[spriteId];
         sprite->callback = UpdateFeetInFlowingWaterFieldEffect;
         sprite->coordOffsetEnabled = TRUE;
@@ -821,7 +821,7 @@ void UpdateHotSpringsWaterFieldEffect(struct Sprite *sprite)
     }
     else
     {
-        graphicsInfo = GetObjectEventGraphicsInfo(gObjectEvents[objectEventId].graphicsId);
+        graphicsInfo = GetObjectEventGraphicsInfo(OBJ_GFX_ID(&gObjectEvents[objectEventId]));
         linkedSprite = &gSprites[gObjectEvents[objectEventId].spriteId];
         sprite->x = linkedSprite->x;
         sprite->y = (graphicsInfo->height >> 1) + linkedSprite->y - 8;
@@ -1175,7 +1175,7 @@ u32 FldEff_SandPile(void)
     spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_SAND_PILE], 0, 0, 0);
     if (spriteId != MAX_SPRITES)
     {
-        graphicsInfo = GetObjectEventGraphicsInfo(objectEvent->graphicsId);
+        graphicsInfo = GetObjectEventGraphicsInfo(OBJ_GFX_ID(objectEvent));
         sprite = &gSprites[spriteId];
         sprite->coordOffsetEnabled = TRUE;
         sprite->oam.priority = gSprites[objectEvent->spriteId].oam.priority;
@@ -1316,7 +1316,7 @@ void UpdateDisguiseFieldEffect(struct Sprite *sprite)
         FieldEffectStop(sprite, sprite->data[1]);
     }
 
-    graphicsInfo = GetObjectEventGraphicsInfo(gObjectEvents[objectEventId].graphicsId);
+    graphicsInfo = GetObjectEventGraphicsInfo(OBJ_GFX_ID(&gObjectEvents[objectEventId]));
     linkedSprite = &gSprites[gObjectEvents[objectEventId].spriteId];
     sprite->invisible = linkedSprite->invisible;
     sprite->x = linkedSprite->x;
@@ -1435,7 +1435,7 @@ static void UpdateGrassFieldEffectSubpriority(struct Sprite *sprite, u8 z, u8 of
         struct ObjectEvent * objectEvent = &gObjectEvents[i];
         if (objectEvent->active)
         {
-            graphicsInfo = GetObjectEventGraphicsInfo(objectEvent->graphicsId);
+            graphicsInfo = GetObjectEventGraphicsInfo(OBJ_GFX_ID(objectEvent));
             linkedSprite = &gSprites[objectEvent->spriteId];
             xhi = sprite->x + sprite->centerToCornerVecX;
             var = sprite->x - sprite->centerToCornerVecX;

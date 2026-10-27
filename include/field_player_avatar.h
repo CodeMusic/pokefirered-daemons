@@ -4,8 +4,8 @@
 #include "global.h"
 
 void ClearPlayerAvatarInfo(void);
-void SetPlayerAvatarExtraStateTransition(u8, u8);
-u8 GetPlayerAvatarGenderByGraphicsId(u8);
+void SetPlayerAvatarExtraStateTransition(u16, u8);
+u8 GetPlayerAvatarGenderByGraphicsId(u16);
 bool8 TestPlayerAvatarFlags(u8);
 void PlayerGetDestCoords(s16 *, s16 *);
 u8 GetPlayerFacingDirection(void);

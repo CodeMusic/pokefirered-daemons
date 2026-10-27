@@ -1571,7 +1571,7 @@ void ResetContextNpcTextColor(void)
 
 u8 ContextNpcGetTextColor(void)
 {
-    u8 gfxId;
+    u16 gfxId;
     if (gSpecialVar_TextColor != NPC_TEXT_COLOR_DEFAULT)
     {
         // A text color has been specified, use that
@@ -1586,8 +1586,8 @@ u8 ContextNpcGetTextColor(void)
     {
         // An object is selected and no color has been specified.
         // Use the text color normally associated with this object's sprite.
-        gfxId = gObjectEvents[gSelectedObjectEvent].graphicsId;
-        if (gfxId >= OBJ_EVENT_GFX_VAR_0)
+        gfxId = OBJ_GFX_ID(&gObjectEvents[gSelectedObjectEvent]);   // T-461
+        if (gfxId >= OBJ_EVENT_GFX_VAR_0 && gfxId <= OBJ_EVENT_GFX_VAR_F)
             gfxId = VarGetObjectEventGraphicsId(gfxId - OBJ_EVENT_GFX_VAR_0);
         return GetColorFromTextColorTable(gfxId);
     }

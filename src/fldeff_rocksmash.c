@@ -23,14 +23,14 @@ static void StartRockSmashFieldEffect(void);
 
 EWRAM_DATA struct MapPosition gPlayerFacingPosition = {};
 
-bool8 CheckObjectGraphicsInFrontOfPlayer(u8 graphicsId)
+bool8 CheckObjectGraphicsInFrontOfPlayer(u16 graphicsId)
 {
     u8 mapObjId;
 
     GetXYCoordsOneStepInFrontOfPlayer(&gPlayerFacingPosition.x, &gPlayerFacingPosition.y);
     gPlayerFacingPosition.elevation = PlayerGetElevation();
     mapObjId = GetObjectEventIdByPosition(gPlayerFacingPosition.x, gPlayerFacingPosition.y, gPlayerFacingPosition.elevation);
-    if (gObjectEvents[mapObjId].graphicsId != graphicsId)
+    if (OBJ_GFX_ID(&gObjectEvents[mapObjId]) != graphicsId)
         return FALSE;
     gSpecialVar_LastTalked = gObjectEvents[mapObjId].localId;
     return TRUE;

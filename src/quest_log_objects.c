@@ -3,6 +3,30 @@
 #include "fieldmap.h"
 #include "field_player_avatar.h"
 #include "metatile_behavior.h"
+#include "constants/event_objects.h"
+
+//  T-461: the recap keeps an object's graphics id in a u8 (QuestLogObjectEvent has no spare bits; its three `unused`
+//  bits hold data in real saves), so an id from OBJ_EVENT_GFX_WIDE_START (256) up is RECORDED as a stand-in: a
+//  narrow id of the same shape and feel, which the recap replays in its place. One row per wide id, [id - 256];
+//  a wide id with no row (or a row left 0) records OBJ_EVENT_GFX_QL_STAND_IN, a generic person. The real id is never
+//  lost: the save's live objects and templates keep it, and the recap is only a memory.
+#if NUM_OBJ_EVENT_GFX > OBJ_EVENT_GFX_WIDE_START
+static const u8 sQuestLogGfxStandIns[NUM_OBJ_EVENT_GFX - OBJ_EVENT_GFX_WIDE_START] =
+{
+    // [OBJ_EVENT_GFX_<NEW> - OBJ_EVENT_GFX_WIDE_START] = OBJ_EVENT_GFX_<a like-shaped narrow id>,
+};
+#endif
+
+static u8 QL_GfxStandIn(u16 graphicsId)
+{
+    if (graphicsId < OBJ_EVENT_GFX_WIDE_START)
+        return graphicsId;
+#if NUM_OBJ_EVENT_GFX > OBJ_EVENT_GFX_WIDE_START
+    if (graphicsId < NUM_OBJ_EVENT_GFX && sQuestLogGfxStandIns[graphicsId - OBJ_EVENT_GFX_WIDE_START] != 0)
+        return sQuestLogGfxStandIns[graphicsId - OBJ_EVENT_GFX_WIDE_START];
+#endif
+    return OBJ_EVENT_GFX_QL_STAND_IN;
+}
 
 void QL_RecordObjects(struct QuestLogScene * questLog)
 {
@@ -30,7 +54,7 @@ void QL_RecordObjects(struct QuestLogScene * questLog)
         questLog->objectEvents[i].facingDirection                = gObjectEvents[i].facingDirection;
         questLog->objectEvents[i].currentElevation               = gObjectEvents[i].currentElevation;
         questLog->objectEvents[i].previousElevation              = gObjectEvents[i].previousElevation;
-        questLog->objectEvents[i].graphicsId                     = gObjectEvents[i].graphicsId;
+        questLog->objectEvents[i].graphicsId                     = QL_GfxStandIn(OBJ_GFX_ID(&gObjectEvents[i]));   // T-461
         questLog->objectEvents[i].movementType                   = gObjectEvents[i].movementType;
         questLog->objectEvents[i].trainerType                    = gObjectEvents[i].trainerType;
         questLog->objectEvents[i].localId                        = gObjectEvents[i].localId;
@@ -74,7 +98,7 @@ void QL_LoadObjects(const struct QuestLogScene * questLog, const struct ObjectEv
         gObjectEvents[i].facingDirection                = questLogObjectEvents[i].facingDirection;
         gObjectEvents[i].currentElevation               = questLogObjectEvents[i].currentElevation;
         gObjectEvents[i].previousElevation              = questLogObjectEvents[i].previousElevation;
-        gObjectEvents[i].graphicsId                     = questLogObjectEvents[i].graphicsId;
+        SET_OBJ_GFX_ID(&gObjectEvents[i], questLogObjectEvents[i].graphicsId);   // T-461: always narrow here
         gObjectEvents[i].movementType                   = questLogObjectEvents[i].movementType;
         gObjectEvents[i].trainerType                    = questLogObjectEvents[i].trainerType;
         gObjectEvents[i].localId                        = questLogObjectEvents[i].localId;

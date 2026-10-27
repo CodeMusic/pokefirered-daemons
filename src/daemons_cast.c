@@ -134,7 +134,8 @@ void DaemonsCast_ProteusShape(void)
 
 void DaemonsCast_ProteusShift(void)
 {
-    u8 gfx, objectEventId;
+    u16 gfx;
+    u8 objectEventId;
 
     if (gSpecialVar_0x8004 >= 3)
         gfx = PROTEUS_OWN;          // T-440: it holds still in its own shape, the one it battles in

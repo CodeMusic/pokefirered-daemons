@@ -1170,7 +1170,7 @@ bool8 ScrCmd_setobjectmovementtype(struct ScriptContext * ctx)
 
 bool8 ScrCmd_createvobject(struct ScriptContext * ctx)
 {
-    u8 graphicsId = ScriptReadByte(ctx);
+    u16 graphicsId = ScriptReadHalfword(ctx);   // T-461: a halfword, as object graphics ids now are
     u8 virtualObjId = ScriptReadByte(ctx);
     u16 x = VarGet(ScriptReadHalfword(ctx));
     u32 y = VarGet(ScriptReadHalfword(ctx));

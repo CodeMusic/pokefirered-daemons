@@ -107,11 +107,18 @@ struct BackupMapLayout
     u16 *map;
 };
 
+//  T-461 phase 2 (the user, 2026-10-27): an object's graphics id is 12 bits (0-4095), kept in bytes that were already
+//  there, so no struct the save holds moves. The low byte is where the u8 graphicsId always was; the high bits are the
+//  template's padding byte at +3 and ObjectEvent's free bits 28-31, which every save read before the change held as 0
+//  -- so every existing id, and every existing save, reads the same number. Never touch the halves directly: read with
+//  OBJ_GFX_ID(p) and write with SET_OBJ_GFX_ID(p, id); both take a template or an object event.
+//  The recap (QuestLogObjectEvent) still keeps a u8: an id above 255 is recorded as its stand-in (quest_log_objects.c).
 struct ObjectEventTemplate
 {
     u8 localId;
-    u8 graphicsId;
+    u8 graphicsIdLo;   // T-461: OBJ_GFX_ID()
     u8 kind; // The "kind" field determines how to access objUnion union below.
+    u8 graphicsIdHi;   // T-461: was padding (0 in every save, and in every template map data builds)
     s16 x, y;
     union {
         struct {
@@ -239,8 +246,9 @@ struct ObjectEvent
              /*25*/ u32 disableJumpLandingGroundEffect:1;
              /*26*/ u32 fixedPriority:1;
              /*27*/ u32 hideReflection:1;
+             /*28*/ u32 graphicsIdHi:4;   // T-461: bits 28-31 were free (0 in every save); OBJ_GFX_ID()
     /*0x04*/        u8 spriteId;
-    /*0x05*/        u8 graphicsId;
+    /*0x05*/        u8 graphicsIdLo;      // T-461: OBJ_GFX_ID()
     /*0x06*/        u8 movementType;
     /*0x07*/        u8 trainerType;
     /*0x08*/        u8 localId;
@@ -390,6 +398,24 @@ struct Camera
     s32 x;
     s32 y;
 };
+
+//  T-461: an object's graphics id, from a struct ObjectEventTemplate * or a struct ObjectEvent * (both name the halves
+//  alike). An object event's high half is 4 bits, so ids stop at OBJ_EVENT_GFX_ID_LIMIT (4096).
+#define OBJ_GFX_ID(p) ((u16)((p)->graphicsIdLo | ((p)->graphicsIdHi << 8)))
+#define SET_OBJ_GFX_ID(p, id)                  \
+    do {                                       \
+        u16 gfxId_ = (id);                     \
+        (p)->graphicsIdLo = gfxId_ & 0xFF;     \
+        (p)->graphicsIdHi = gfxId_ >> 8;       \
+    } while (0)
+
+//  T-461: the save holds both structs; the widening must not move a byte of either.
+STATIC_ASSERT(sizeof(struct ObjectEventTemplate) == 0x18, ObjectEventTemplateSizeUnchanged);
+STATIC_ASSERT(sizeof(struct ObjectEvent) == 0x24, ObjectEventSizeUnchanged);
+STATIC_ASSERT(offsetof(struct ObjectEventTemplate, graphicsIdLo) == 1 && offsetof(struct ObjectEventTemplate, graphicsIdHi) == 3
+              && offsetof(struct ObjectEventTemplate, x) == 4, ObjectEventTemplateGfxIdBytes);
+STATIC_ASSERT(offsetof(struct ObjectEvent, spriteId) == 4 && offsetof(struct ObjectEvent, graphicsIdLo) == 5,
+              ObjectEventGfxIdByte);
 
 extern struct ObjectEvent gObjectEvents[OBJECT_EVENTS_COUNT];
 extern u8 gSelectedObjectEvent;

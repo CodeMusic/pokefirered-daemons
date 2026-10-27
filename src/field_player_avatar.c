@@ -629,7 +629,7 @@ static bool8 TryPushBoulder(s16 x, s16 y, u8 direction)
     if (objectEventId == OBJECT_EVENTS_COUNT)
         return FALSE;
 
-    if (gObjectEvents[objectEventId].graphicsId != OBJ_EVENT_GFX_PUSHABLE_BOULDER)
+    if (OBJ_GFX_ID(&gObjectEvents[objectEventId]) != OBJ_EVENT_GFX_PUSHABLE_BOULDER)
         return FALSE;
 
     x = gObjectEvents[objectEventId].currentCoords.x;
@@ -1166,7 +1166,7 @@ u8 GetPlayerAvatarGraphicsIdByStateId(u8 state)
     return GetPlayerAvatarGraphicsIdByStateIdAndGender(state, gPlayerAvatar.gender);
 }
 
-u8 GetPlayerAvatarGenderByGraphicsId(u8 gfxId)
+u8 GetPlayerAvatarGenderByGraphicsId(u16 gfxId)
 {
     switch (gfxId)
     {
@@ -1250,7 +1250,7 @@ static const u8 sPlayerAvatarGfxToStateFlag[][3][GENDER_COUNT] = {
     }
 };
 
-u8 GetPlayerAvatarStateTransitionByGraphicsId(u8 graphicsId, u8 gender)
+u8 GetPlayerAvatarStateTransitionByGraphicsId(u16 graphicsId, u8 gender)
 {
     u8 i;
 
@@ -1275,7 +1275,7 @@ u8 GetPlayerAvatarGraphicsIdByCurrentState(void)
     return 0;
 }
 
-void SetPlayerAvatarExtraStateTransition(u8 graphicsId, u8 extras)
+void SetPlayerAvatarExtraStateTransition(u16 graphicsId, u8 extras)
 {
     u8 unk = GetPlayerAvatarStateTransitionByGraphicsId(graphicsId, gPlayerAvatar.gender);
 
@@ -1290,7 +1290,7 @@ void InitPlayerAvatar(s16 x, s16 y, u8 direction, u8 gender)
     struct ObjectEvent *objectEvent;
 
     playerObjEventTemplate.localId = LOCALID_PLAYER;
-    playerObjEventTemplate.graphicsId = GetPlayerAvatarGraphicsIdByStateIdAndGender(PLAYER_AVATAR_GFX_NORMAL, gender);
+    SET_OBJ_GFX_ID(&playerObjEventTemplate, GetPlayerAvatarGraphicsIdByStateIdAndGender(PLAYER_AVATAR_GFX_NORMAL, gender));   // T-461
     playerObjEventTemplate.x = x - 7;
     playerObjEventTemplate.y = y - 7;
     playerObjEventTemplate.objUnion.normal.elevation = 0;
@@ -1709,7 +1709,7 @@ static bool8 Fishing2(struct Task *task)
 
     task->tRoundsPlayed = 0;
     task->tMinRoundsRequired = arr1[task->tFishingRod] + (Random() % arr2[task->tFishingRod]);
-    task->tPlayerGfxId = gObjectEvents[gPlayerAvatar.objectEventId].graphicsId;
+    task->tPlayerGfxId = OBJ_GFX_ID(&gObjectEvents[gPlayerAvatar.objectEventId]);
     playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
     ObjectEventClearHeldMovementIfActive(playerObjEvent);
     playerObjEvent->enableAnim = 1;
