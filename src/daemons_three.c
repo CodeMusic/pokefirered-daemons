@@ -6,10 +6,13 @@
 #include "characters.h"
 #include "daemons_feelings.h"
 #include "daemons_three.h"
+#include "event_data.h"
 #include "constants/battle.h"
+#include "constants/flags.h"
 #include "constants/pokemon.h"
 
-// T-454: see include/daemons_three.h -- the rules, where the values live (nowhere saved), and the DRAFT table.
+// T-454: see include/daemons_three.h -- the rules, where the values live (nowhere saved), and the table
+// (approved 2026-10-27). In effect only once THE SUBTLE LAYER is held (FLAG_GOT_SUBTLE_LAYER).
 
 #define NOT_CARRIED (BATTLE_TYPE_LINK | BATTLE_TYPE_MULTI | BATTLE_TYPE_POKEDUDE | BATTLE_TYPE_OLD_MAN_TUTORIAL \
                    | BATTLE_TYPE_SAFARI)
@@ -79,7 +82,9 @@ void Three_BattleStart(void)
 {
     u8 i;
 
-    gBattleStruct->threeOn = !(gBattleTypeFlags & NOT_CARRIED);
+    // The user, 2026-10-27: they wake with THE SUBTLE LAYER. Before the book is held a battle is vanilla's -- threeOn
+    // stays FALSE, so nothing is derived and every hook below is a no-op: no read, no write, no leak.
+    gBattleStruct->threeOn = !(gBattleTypeFlags & NOT_CARRIED) && FlagGet(FLAG_GOT_SUBTLE_LAYER);
     if (!gBattleStruct->threeOn)
         return;
     for (i = 0; i < PARTY_SIZE; i++)

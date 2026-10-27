@@ -16,9 +16,10 @@
 // write, it leaks. In battle: a READ is how well a CONTEXT routine finds its mark (its accuracy); a WRITE is how hard it
 // lands (its damage). Only the player's own daemons carry them in effect -- a foe's routines are vanilla -- and never in
 // a link battle (each cartridge would read its own player's feelings, and the two would disagree), the POKEDUDE's or
-// the old man's.
+// the old man's. And only once the player holds THE SUBTLE LAYER (FLAG_GOT_SUBTLE_LAYER; the user, 2026-10-27):
+// before the book, every battle is vanilla's.
 
-// ---- THE DRAFT TABLE: every number the user tunes, in one place ------------------------------------------------
+// ---- THE TABLE (approved 2026-10-27): every number the user tunes, in one place ------------------------------------------------
 // Each value is a level, 0..THREE_MAX.
 #define THREE_MAX                   4
 

@@ -187,6 +187,9 @@ static const u8 sName_Three[]        = _("THE THREE >");             // T-454
 static const u8 sName_ThreeC[]       = _("> CLOSURE: AUTO, 0-4");
 static const u8 sName_ThreeA[]       = _("> ATTUNEMENT: AUTO, 0-4");
 static const u8 sName_ThreeV[]       = _("> VOLTAGE: AUTO, 0-4");
+static const u8 sName_ThreeBook[]    = _("THE BOOK");                // T-454: the gate (FLAG_GOT_SUBTLE_LAYER)
+static const u8 sName_ThreeBookHeld[] = _("+ THE BOOK HELD: IN EFFECT");
+static const u8 sName_ThreeNotYet[]  = _("· NOT YET: THE BOOK");
 static const u8 sName_ThreeAuto[]    = _("EVERY ONE AUTO AGAIN");   // T-433: gSpecialVar_ItemId, poked by the theatre
 
 //  THE STORY'S ORDER: the opening, the shoes and the INDEX, OPUS on THE REPO's shelf, then CAIRN's MARK and NOTEBOOK,
@@ -300,8 +303,10 @@ static const struct DbgRow sRows_Feelings[] = {
 };
 
 //  T-454: each party slot's THREE as the next battle would start them (A picks the slot, marked >), and the picked
-//  slot's three set by hand for the battles after (AUTO, 0..4, AUTO). In a battle they move from there.
+//  slot's three set by hand for the battles after (AUTO, 0..4, AUTO). In a battle they move from there. The first
+//  row is the gate: NOT YET until THE SUBTLE LAYER is held (A gives or takes the book), the values shown either way.
 static const struct DbgRow sRows_Three[] = {
+    { sName_ThreeBook,  R_TOGGLE, EV_SUBTLE },
     { NULL, R_PICK, EV_THREE_SLOT1 + 0 }, { NULL, R_PICK, EV_THREE_SLOT1 + 1 }, { NULL, R_PICK, EV_THREE_SLOT1 + 2 },
     { NULL, R_PICK, EV_THREE_SLOT1 + 3 }, { NULL, R_PICK, EV_THREE_SLOT1 + 4 }, { NULL, R_PICK, EV_THREE_SLOT1 + 5 },
     { sName_ThreeC,     R_GIVE, EV_THREE_CLOSURE },
@@ -770,6 +775,8 @@ static void BuildLabels(void)
             FeelingsLabel(label, rows[i].arg - EV_FEEL_SLOT1);
         else if (rows[i].kind == R_PICK)                                  // T-454
             Three_DebugLabel(label, rows[i].arg - EV_THREE_SLOT1);
+        else if (sPage == PG_THREE && rows[i].arg == EV_SUBTLE)            // T-454: the gate, open or not
+            StringCopy(label, IsHeld(EV_SUBTLE) ? sName_ThreeBookHeld : sName_ThreeNotYet);
         else if (rows[i].arg == EV_SOUNDING && rows[i].kind == R_GIVE)     // T-458: the level it holds now
         {
             struct BoxPokemon *away = DaemonFirstAway();
