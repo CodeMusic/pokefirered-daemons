@@ -2052,11 +2052,11 @@ const struct MonCoords gMonBackPicCoords[] =
     },
     [SPECIES_DEOXYS] =
     {
-        .size = MON_COORDS_SIZE(64, 56),
-        // DAEMONS T-440: PROTEUS's owned backs (the sheet's bottom half: CONTENT's edges, CONTEXT's shell) leave
-        // 12-13 blank rows below them where vanilla's left 4, so 7 sat them ~6px high; 13 puts their lowest row
-        // where a back's usually is (y_offset + 64 - blank rows ~ 64)
-        .y_offset = 13,
+        .size = MON_COORDS_SIZE(56, 48),
+        // DAEMONS T-452 forms: PROTEUS's owned backs are the sheet's BOTTOM half (CONTENT's ALL EDGES, CONTEXT's
+        // SHELL), one row for both editions: edges want 9, the shell 14 -- 11 between them (the user, 2026-10-28;
+        // T-440's 13 was measured off the old drawings). Not ground.py's: it reads the top half and would write 5.
+        .y_offset = 11,
     },
     [SPECIES_CHIMECHO] =
     {

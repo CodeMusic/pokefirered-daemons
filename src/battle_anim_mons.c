@@ -47,12 +47,15 @@ static const struct UCoords8 sBattlerCoords[][MAX_BATTLERS_COUNT] =
 };
 
 // One entry for each of the four Castform forms.
+// DAEMONS T-452: OVERLOADED's four bodies (tools/gencastform.py), measured as every redrawn daemon's rows are: the
+// opaque box rounded up to 8, and y_offset = 63 - the lowest opaque row, so each form stands on the frame's bottom row.
+// Battle reads these, not gMonFrontPicCoords[SPECIES_CASTFORM]; vanilla's (17, 9, 9, 8) sat the new normal form ~10px low.
 const struct MonCoords gCastformFrontSpriteCoords[NUM_CASTFORM_FORMS] =
 {
-    [CASTFORM_NORMAL] = { .size = MON_COORDS_SIZE(32, 32), .y_offset = 17 },
-    [CASTFORM_FIRE]   = { .size = MON_COORDS_SIZE(48, 48), .y_offset =  9 },
-    [CASTFORM_WATER]  = { .size = MON_COORDS_SIZE(32, 48), .y_offset =  9 },
-    [CASTFORM_ICE]    = { .size = MON_COORDS_SIZE(64, 48), .y_offset =  8 },
+    [CASTFORM_NORMAL] = { .size = MON_COORDS_SIZE(64, 56), .y_offset =  7 },
+    [CASTFORM_FIRE]   = { .size = MON_COORDS_SIZE(56, 48), .y_offset = 10 },
+    [CASTFORM_WATER]  = { .size = MON_COORDS_SIZE(48, 48), .y_offset =  9 },
+    [CASTFORM_ICE]    = { .size = MON_COORDS_SIZE(56, 48), .y_offset =  8 },
 };
 
 static const u8 sCastformElevations[NUM_CASTFORM_FORMS] =
@@ -64,12 +67,13 @@ static const u8 sCastformElevations[NUM_CASTFORM_FORMS] =
 };
 
 // Y position of the backsprite for each of the four Castform forms.
+// DAEMONS T-452: each back's 63 - its lowest opaque row, as the fronts above (vanilla's backs filled the frame: 0).
 static const u8 sCastformBackSpriteYCoords[NUM_CASTFORM_FORMS] =
 {
-    [CASTFORM_NORMAL] = 0,
-    [CASTFORM_FIRE]   = 0,
-    [CASTFORM_WATER]  = 0,
-    [CASTFORM_ICE]    = 0,
+    [CASTFORM_NORMAL] = 7,
+    [CASTFORM_FIRE]   = 10,
+    [CASTFORM_WATER]  = 9,
+    [CASTFORM_ICE]    = 8,
 };
 
 // Placeholders for pokemon sprites to be created for a move animation effect (e.g. Role Play / Snatch)

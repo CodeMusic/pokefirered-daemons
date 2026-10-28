@@ -2052,8 +2052,11 @@ const struct MonCoords gMonFrontPicCoords[] =
     },
     [SPECIES_DEOXYS] =
     {
-        .size = MON_COORDS_SIZE(64, 64),
-        .y_offset = 1,
+        // DAEMONS T-452 forms: battle shows the sheet's BOTTOM half (CONTENT's ALL EDGES, CONTEXT's SHELL; T-440),
+        // and both editions share this row: edges want 9, the shell 14 -- 11 between them (the user, 2026-10-28).
+        // Not tools' ground.py's to measure: it reads the top half, the hooded form, and would write 5.
+        .size = MON_COORDS_SIZE(56, 48),
+        .y_offset = 11,
     },
     [SPECIES_CHIMECHO] =
     {
