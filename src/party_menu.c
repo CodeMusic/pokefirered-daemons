@@ -437,6 +437,7 @@ static const u8 sText_AwayAskSend[]        = _("Send {STR_VAR_1} to your device?
 static const u8 sText_AwayAskCallHome[]    = _("Call {STR_VAR_1} home from your\ndevice? The game will save.");
 static const u8 sText_AwayAskStay[]        = _("Take back the request for\n{STR_VAR_1}? The game will save.");
 static const u8 sText_AwayOnlyOne[]        = _("{STR_VAR_1} is the only one here\nwho can battle. It stays.{PAUSE_UNTIL_PRESS}");
+static const u8 sText_AwayInTrade[]        = _("{STR_VAR_1} is in a trade. It\nstays AWAY until it is done.{PAUSE_UNTIL_PRESS}");   // T-473, DRAFT
 static const u8 sText_AwaySavedSend[]      = _("Saved. Open your save in the\napp to send {STR_VAR_1}.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_AwaySavedCallHome[]  = _("Saved. Open your save in the\napp to bring {STR_VAR_1} home.{PAUSE_UNTIL_PRESS}");
 static const u8 sText_AwaySavedStay[]      = _("Saved. {STR_VAR_1} stays where\nit is.{PAUSE_UNTIL_PRESS}");
@@ -6530,6 +6531,15 @@ static void CursorCB_Away(u8 taskId)
     PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[1]);
     GetMonNickname(mon, gStringVar1);
     sAwayAskingBringHome = FALSE;
+    //  T-473 (C-219): in a trade on the companion, it is not the game's to call home -- by the app or the emergency way
+    if (DaemonIsAway(mon) && DaemonIsTrading(mon) && !DaemonIsAsked(mon))
+    {
+        PlaySE(SE_FAILURE);
+        StringExpandPlaceholders(gStringVar4, sText_AwayInTrade);
+        DisplayPartyMenuMessage(gStringVar4, FALSE);
+        gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+        return;
+    }
     if (DaemonIsAsked(mon))
     {
         StringExpandPlaceholders(gStringVar4, sText_AwayAskStay);

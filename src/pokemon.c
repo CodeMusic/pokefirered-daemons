@@ -3213,7 +3213,7 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
         retVal = boxMon->checksum;
         break;
     case MON_DATA_ENCRYPT_SEPARATOR:
-        retVal = boxMon->unknown;
+        retVal = boxMon->daemonsLoan | (boxMon->daemonsTradedIn << 1) | (boxMon->unknown << 2);   // T-473: all sixteen bits
         break;
     case MON_DATA_SPECIES:
         retVal = boxMon->isBadEgg ? SPECIES_EGG : substruct0->species;
@@ -3610,8 +3610,13 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
         SET16(boxMon->checksum);
         break;
     case MON_DATA_ENCRYPT_SEPARATOR:
-        SET16(boxMon->unknown);
+    {
+        u16 bits = data[0] + (data[1] << 8);    // T-473: all sixteen bits, LOAN and TRADED_IN with them
+        boxMon->daemonsLoan = bits & 1;
+        boxMon->daemonsTradedIn = (bits >> 1) & 1;
+        boxMon->unknown = bits >> 2;
         break;
+    }
     case MON_DATA_SPECIES:
     {
         SET16(substruct0->species);
@@ -6666,6 +6671,28 @@ void DaemonSetAsked(struct Pokemon *mon, bool8 asked)
 void DaemonSetAway(struct Pokemon *mon, bool8 away)
 {
     mon->box.away = away ? 1 : 0;
+}
+
+//  T-473 (C-219): the companion's trade bits -- TRADING in the flags byte beside AWAY, LOAN at 0x1E (pokemon.h). Read
+//  only: the companion sets and clears them.
+bool8 DaemonBoxIsTrading(struct BoxPokemon *boxMon)
+{
+    return boxMon->trading;
+}
+
+bool8 DaemonIsTrading(struct Pokemon *mon)
+{
+    return mon->box.trading;
+}
+
+bool8 DaemonBoxIsLoan(struct BoxPokemon *boxMon)
+{
+    return boxMon->daemonsLoan;
+}
+
+bool8 DaemonIsLoan(struct Pokemon *mon)
+{
+    return mon->box.daemonsLoan;
 }
 
 //  T-458 (SOUNDINGS): the companion's signal, two bits after AWAY and ASKED in the same unchecksummed byte. The

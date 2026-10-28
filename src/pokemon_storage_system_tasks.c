@@ -157,6 +157,7 @@ enum
     MSG_CHANGED_TO_ITEM,
     MSG_CANT_STORE_MAIL,
     MSG_CANT_RELEASE_AWAY,  // T-358
+    MSG_CANT_RELEASE_LOAN,  // T-473
 };
 
 enum
@@ -279,6 +280,7 @@ static const struct SpriteTemplate sSpriteTemplate_DisplayMon = {
 
 // T-358 (vision 9.25): an AWAY daemon cannot be released while it is on the player's device. DRAFT.
 static const u8 sText_CantReleaseAway[] = _("{DYNAMIC 0x00} is AWAY.");
+static const u8 sText_CantReleaseLoan[] = _("{DYNAMIC 0x00} is borrowed.");   // T-473, DRAFT
 
 static const struct StorageMessage sMessages[] = {
     [MSG_EXIT_BOX]             = {gText_ExitFromBox,             MSG_FMT_NONE},
@@ -313,6 +315,7 @@ static const struct StorageMessage sMessages[] = {
     [MSG_CHANGED_TO_ITEM]      = {gText_ChangedToNewItem,        MSG_FMT_ITEM_NAME},
     [MSG_CANT_STORE_MAIL]      = {gText_MailCantBeStored,        MSG_FMT_NONE},
     [MSG_CANT_RELEASE_AWAY]    = {sText_CantReleaseAway,         MSG_FMT_MON_NAME_1},
+    [MSG_CANT_RELEASE_LOAN]    = {sText_CantReleaseLoan,         MSG_FMT_MON_NAME_1},
 };
 
 static const struct WindowTemplate sYesNoWindowTemplate = {
@@ -1022,6 +1025,8 @@ static void Task_OnSelectedMon(u8 taskId)
                 gStorage->state = 5;
             else if (gStorage->displayMonIsAway)
                 gStorage->state = 7;    // T-358
+            else if (gStorage->displayMonIsLoan)
+                gStorage->state = 8;    // T-473: a borrowed daemon goes back to its player, never into the wild
             else if (ItemIsMail(gStorage->displayMonItemId))
                 gStorage->state = 4;
             else
@@ -1098,6 +1103,11 @@ static void Task_OnSelectedMon(u8 taskId)
     case 4:
         PlaySE(SE_FAILURE);
         PrintStorageMessage(MSG_PLEASE_REMOVE_MAIL);
+        gStorage->state = 6;
+        break;
+    case 8:
+        PlaySE(SE_FAILURE);
+        PrintStorageMessage(MSG_CANT_RELEASE_LOAN);
         gStorage->state = 6;
         break;
     case 6:

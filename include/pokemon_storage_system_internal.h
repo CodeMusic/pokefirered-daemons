@@ -382,6 +382,7 @@ struct PokemonStorageSystemData
     u8 displayMonLevel;
     bool8 displayMonIsEgg;
     bool8 displayMonIsAway;     // T-358: on the player's device -- washed, and cannot be released
+    bool8 displayMonIsLoan;     // T-473: borrowed from another player -- cannot be released
     u8 displayMonFriendship;    // T-424: its picture's saturation
     u8 displayMonNickname[POKEMON_NAME_LENGTH + 1];
     u8 displayMonTexts[4][36]; // nickname, species name, gender and level, item name

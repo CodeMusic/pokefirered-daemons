@@ -3731,6 +3731,7 @@ static const u8 sText_FirstMet[] = _("FIRST MET");                 // T-406, DRA
 static const u8 sText_FirstMetShort[] = _("MET ");                 // T-406, DRAFT: "MET ROUTE 1" when the box is full
 static const u8 sText_FirstMetBefore[] = _("BEFORE RECORDS");      // T-406, DRAFT
 static const u8 sText_FirstMetCompanion[] = _("THE COMPANION");    // T-448, DRAFT: first met through a SYNC delivery
+static const u8 sText_FirstMetTrade[] = _("A TRADE");              // T-473, DRAFT: first met by a trade with another player
 static const u8 *const sNativeSky[] = { sText_NativeRain, sText_NativeStorm, sText_NativeSnow, sText_NativeFog, sText_NativeWind };
 static const u8 *const sNativeSeason[SEASON_COUNT] = { sText_NativeWinter, sText_NativeSpring, sText_NativeSummer, sText_NativeAutumn };
 static const u8 *const sNativeWatch[WATCH_COUNT] = { sText_NativeDay, sText_NativeDusk, sText_NativeNight, sText_NativeDawn };
@@ -3787,6 +3788,8 @@ static void DexScreen_PrintFirstMet(u8 win, u16 species, u8 used)
         GetMapName(place, mapsec, 0);
     else if (DaemonsFirstSeen_IsCompanion(SpeciesToNationalPokedexNum(species)))
         StringCopy(place, sText_FirstMetCompanion);
+    else if (DaemonsFirstSeen_IsTrade(SpeciesToNationalPokedexNum(species)))
+        StringCopy(place, sText_FirstMetTrade);
     else
         StringCopy(place, sText_FirstMetBefore);
     if (used <= 24)

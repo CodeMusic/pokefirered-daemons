@@ -111,7 +111,9 @@ struct BoxPokemon
     u8 isBadEgg:1;
     u8 hasSpecies:1;
     u8 isEgg:1;
-    u8 blockBoxRS:1; // Unused, but Pokémon Box Ruby & Sapphire will refuse to deposit a Pokémon with this flag set
+    u8 trading:1;    // T-473 (C-219): in a trade on the companion's exchange -- set and cleared by the companion at each
+                     // SYNC, the game only reads it: it stays AWAY (no CALL HOME, no ask, no release). Bit 3 of byte
+                     // 0x13, pokefirered's blockBoxRS, which only Pokemon Box RS ever read
     u8 away:1;       // T-358 (vision 9.25): on the player's device. Set and cleared by the companion app, never here
     u8 asked:1;      // T-358: the player asked, in the party menu, for it to go or come home; the app answers
     u8 signal:2;     // T-458: SOUNDINGS, 0-3, written by the companion at each SYNC (daemons-companion), the game only
@@ -119,7 +121,13 @@ struct BoxPokemon
     u8 otName[PLAYER_NAME_LENGTH];
     u8 markings;
     u16 checksum;
-    u16 unknown;
+    // T-473 (C-219): the u16 at 0x1E, outside the encrypted substructs and the checksum, so the companion writes it
+    // without resealing. Advisory: the game reads it and never trusts it past what it guards. Everything that copies a
+    // BoxPokemon carries it; MON_DATA_ENCRYPT_SEPARATOR reads and writes all sixteen bits, so evolution_scene.c's
+    // SHEDINJA (a new daemon, not a copy) is zeroed whole.
+    u16 daemonsLoan:1;      // bit 0: borrowed from another player -- used freely, never released, traded on or trade-evolved
+    u16 daemonsTradedIn:1;  // bit 1: one-shot, just arrived by trade; the load-time finish clears it (daemons_carried.c)
+    u16 unknown:14;         // bits 2-15: reserved
 
     union
     {
@@ -438,6 +446,10 @@ bool8 DaemonBoxIsAway(struct BoxPokemon *boxMon);
 bool8 DaemonIsAsked(struct Pokemon *mon);
 void DaemonSetAsked(struct Pokemon *mon, bool8 asked);
 void DaemonSetAway(struct Pokemon *mon, bool8 away);
+bool8 DaemonBoxIsTrading(struct BoxPokemon *boxMon);   // T-473
+bool8 DaemonIsTrading(struct Pokemon *mon);
+bool8 DaemonBoxIsLoan(struct BoxPokemon *boxMon);
+bool8 DaemonIsLoan(struct Pokemon *mon);
 u8 DaemonBoxGetSignal(struct BoxPokemon *boxMon);   // T-458
 u8 DaemonGetSignal(struct Pokemon *mon);
 struct BoxPokemon *DaemonFirstAway(void);

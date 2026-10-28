@@ -23,6 +23,9 @@
 #include "daemons_feelings.h"        // T-431
 #include "daemons_three.h"           // T-454
 #include "pokemon.h"
+#include "pokemon_storage_system.h"   // T-473
+#include "daemons_carried.h"         // T-473
+#include "constants/species.h"
 #include "data/holiday_lines.h"      // T-416: THE YEAR's titles
 
 //  T-394 (the user, 2026-10-08): "Debug mode starts with lots of things so you can't test some things." A new debug
@@ -64,6 +67,7 @@ enum
     EV_CRYSTAL_AGAIN,                                                       // T-457
     EV_SOUNDING,                                                            // T-458
     EV_ITS_DREAM,                                                           // T-462
+    EV_TRADE_IN, EV_LOAN_IN,                                                // T-473
     EV_THREE_SLOT1, EV_THREE_SLOT6 = EV_THREE_SLOT1 + PARTY_SIZE - 1,         // T-454
     EV_THREE_CLOSURE, EV_THREE_ATTUNEMENT, EV_THREE_VOLTAGE, EV_THREE_AUTO,
 };
@@ -122,6 +126,9 @@ static const u8 sName_Sounding[]     = _("AWAY'S SIGNAL ");         // T-458: + 
 static const u8 sName_SoundingNone[] = _("AWAY'S SIGNAL (NONE AWAY)");
 static const u8 sName_ItsDream[]     = _("ITS DREAM ");             // T-462: + the image and night the next one fakes
 static const u8 sName_ItsBroken[]    = _(", BROKEN");
+static void DbgTradeArrives(u16 species, bool8 loan);   // T-473
+static const u8 sName_TradeIn[]      = _("A TRADE ARRIVES");      // T-473: HAUNTER from another player, as a SYNC writes it
+static const u8 sName_LoanIn[]       = _("A LOAN ARRIVES");       // T-473: KADABRA, borrowed -- it must not evolve
 static const u8 sName_ItsQuiet[]     = _(", QUIET");
 static const u8 sName_ItsVivid[]     = _(", VIVID");
 static const u8 sName_Roots[]        = _("UNDERSTANDINGS >");
@@ -231,6 +238,8 @@ static const struct DbgRow sRows_Events[] = {
     { sName_Sounding,    R_GIVE,   EV_SOUNDING },     // T-458: A steps it 0, 1, 2, 3, 0 (the companion's job, faked)
     { sName_ItsDream,    R_GIVE,   EV_ITS_DREAM },    // T-462: a SYNC's new dream (the companion's job, faked); it
                                                       //   arrives on the next step, and A again brings the next one
+    { sName_TradeIn,     R_GIVE,   EV_TRADE_IN },     // T-473: a trade the companion wrote, finished at once (the
+    { sName_LoanIn,      R_GIVE,   EV_LOAN_IN },      //   line on the next step); a TRADE CENTER-free way to test it
     { sName_Roots,       R_PAGE,   PG_ROOTS },
     { sName_Year,        R_PAGE,   PG_YEAR },         // T-416
     { sName_Follower,    R_PAGE,   PG_FOLLOWER },     // T-18
@@ -665,6 +674,8 @@ static void Apply(u8 ev, bool8 on)
     case EV_THREE_VOLTAGE:    Three_DebugCycle(THREE_VOLTAGE); return;
     case EV_THREE_AUTO:       Three_DebugAllAuto(); return;
     case EV_ITS_DREAM:    DaemonsItsDream_DebugReceive(); return;               // T-462: what a SYNC would write
+    case EV_TRADE_IN:     DbgTradeArrives(SPECIES_HAUNTER, FALSE); return;      // T-473: what a SYNC would write
+    case EV_LOAN_IN:      DbgTradeArrives(SPECIES_KADABRA, TRUE); return;
     case EV_SOUNDING:                                                           // T-458: what a SYNC would write
     {
         struct BoxPokemon *away = DaemonFirstAway();
@@ -691,6 +702,42 @@ static void Apply(u8 ev, bool8 on)
         SetItem(ITEM_HM01 + (ev - EV_DRIVER1), on);
     else if (ev >= EV_ROOT1 && ev <= EV_ROOT7)
         SetRoot(ev - EV_ROOT1, on);
+}
+
+//  T-473 (C-219): a daemon arriving from another player, as the companion's SYNC writes it -- its own trainer (made here:
+//  TRADER, an id that is not the player's), TRADED_IN, LOAN for a loan, the C-184 marker -- into the party, or the PC
+//  when the party is full; then the load-time finish runs at once, as Continue would run it.
+static const u8 sText_DbgTrader[] = _("TRADER");
+
+static void DbgTradeArrives(u16 species, bool8 loan)
+{
+    struct Pokemon mon;
+    struct BoxPokemon *box = NULL;
+    u8 ribbons = 1 << 2;
+    u32 otId = 0x5EED1234;
+    s32 i, j;
+
+    CreateMon(&mon, species, 30, USE_RANDOM_IVS, FALSE, 0, OT_ID_PRESET, otId);
+    SetMonData(&mon, MON_DATA_OT_NAME, sText_DbgTrader);
+    SetMonData(&mon, MON_DATA_UNUSED_RIBBONS, &ribbons);
+    mon.box.daemonsTradedIn = 1;
+    mon.box.daemonsLoan = loan;
+    if (gPlayerPartyCount < PARTY_SIZE)
+    {
+        CopyMon(&gPlayerParty[gPlayerPartyCount], &mon, sizeof(mon));
+        gPlayerPartyCount++;
+    }
+    else
+    {
+        for (i = 0; i < TOTAL_BOXES_COUNT && box == NULL; i++)
+            for (j = 0; j < IN_BOX_COUNT && box == NULL; j++)
+                if (GetBoxMonData(GetBoxedMonPtr(i, j), MON_DATA_SPECIES, NULL) == SPECIES_NONE)
+                    box = GetBoxedMonPtr(i, j);
+        if (box == NULL)
+            return;
+        CopyMon(box, &mon.box, sizeof(mon.box));
+    }
+    DaemonsCarried_OnLoad();
 }
 
 //  ---------------------------------------------------------------- the list

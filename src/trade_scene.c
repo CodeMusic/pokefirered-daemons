@@ -2527,7 +2527,9 @@ static void GetInGameTradeMail(struct Mail * mail, const struct InGameTrade * in
 u16 GetTradeSpecies(void)
 {
     //  T-358: an AWAY daemon is refused as an egg is -- it cannot be traded while it is on the player's device
-    if (GetMonData(&gPlayerParty[gSpecialVar_0x8005], MON_DATA_IS_EGG) || DaemonIsAway(&gPlayerParty[gSpecialVar_0x8005]))
+    //  T-473: nor one borrowed from another player, which goes back to them
+    if (GetMonData(&gPlayerParty[gSpecialVar_0x8005], MON_DATA_IS_EGG) || DaemonIsAway(&gPlayerParty[gSpecialVar_0x8005])
+     || DaemonIsLoan(&gPlayerParty[gSpecialVar_0x8005]))
         return SPECIES_NONE;
     else
         return GetMonData(&gPlayerParty[gSpecialVar_0x8005], MON_DATA_SPECIES);

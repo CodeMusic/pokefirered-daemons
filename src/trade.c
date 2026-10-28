@@ -2758,6 +2758,9 @@ static u32 CanTradeSelectedMon(struct Pokemon * playerParty, int partyCount, int
     // T-358: a daemon AWAY on the player's device is not here to trade
     if (DaemonIsAway(&playerParty[monIdx]))
         return CANT_TRADE_INVALID_MON;
+    // T-473: nor one borrowed from another player through the companion -- it goes back to them
+    if (DaemonIsLoan(&playerParty[monIdx]))
+        return CANT_TRADE_INVALID_MON;
 
     // Cant trade Eggs or non-Kanto mons if player doesn't have National Dex.
     // T-334 (approved 2026-10-19): DAEMONS has no GLOBAL INDEX gate on trading either, as T-329 lifted it from

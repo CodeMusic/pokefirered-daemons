@@ -8,8 +8,10 @@
 #include "pokemon.h"
 #include "pokemon_storage_system.h"
 #include "string_util.h"
+#include "data.h"
 #include "constants/abilities.h"
 #include "constants/flags.h"
+#include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/region_map_sections.h"
 #include "constants/species.h"
@@ -51,6 +53,7 @@ enum {
     CARRIED_DELIVERED_BOX,
     CARRIED_DELIVERED_PARTY,
     CARRIED_CHANGED,
+    CARRIED_TRADED,     // T-473
 };
 
 static EWRAM_DATA u8 sCarriedKind = 0;
@@ -58,11 +61,14 @@ static EWRAM_DATA u8 sCarriedName[POKEMON_NAME_LENGTH + 1] = {0};
 static EWRAM_DATA bool8 sCarriedMovesOwed = FALSE;    // some daemon, party or box, still has bit 3: look at the party
 
 STATIC_ASSERT(NATIONAL_DEX_OLD_UNOWN_B == CARRIED_NEW_MISSINGNO, MissingnoIsWhereTheMoveSaysItIs);
+//  T-473: LOAN and TRADED_IN took bits of the u16 at 0x1E -- the record the companion reads and writes is still 80 bytes
+STATIC_ASSERT(sizeof(struct BoxPokemon) == 80, BoxPokemonIsStillEightyBytes);
 
 //  DRAFT (T-448): the one line on return
 static const u8 sText_CarriedDeliveredBox[] = _("Something followed you home from the\nwalk. {STR_VAR_1} waits in the PC.");
 static const u8 sText_CarriedDeliveredParty[] = _("Something followed you home from the\nwalk. {STR_VAR_1} is with you.");
 static const u8 sText_CarriedChanged[] = _("{STR_VAR_1} changed while it was\ncarried.");
+static const u8 sText_CarriedTraded[] = _("{STR_VAR_1} arrived in a trade.");   // T-473, DRAFT
 
 static bool8 DexBitGet(const u8 *flags, u16 nationalNum)
 {
@@ -94,9 +100,81 @@ static u8 SavedMapsec(void)
     return Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum)->regionMapSectionId;
 }
 
+//  the ability is read from the species by abilityNum: a second slot the species does not have reads as none
+static void FitAbility(struct BoxPokemon *boxMon, u16 species)
+{
+    u8 abilityNum = GetBoxMonData(boxMon, MON_DATA_ABILITY_NUM, NULL);
+
+    if (abilityNum && gSpeciesInfo[species].abilities[1] == ABILITY_NONE)
+    {
+        abilityNum = 0;
+        SetBoxMonData(boxMon, MON_DATA_ABILITY_NUM, &abilityNum);
+    }
+}
+
+//  T-473 (C-219): a daemon another player traded, as the companion wrote it -- TRADED_IN set (one-shot, cleared here
+//  whatever happens, so it is never left set), its own trainer and routines. The INDEX takes it, FIRST MET: A TRADE, and
+//  it evolves as a trade evolves it in FireRed: GetEvolutionTargetSpecies(EVO_MODE_TRADE) on a copy, so an EVERSTONE
+//  holds it and EVO_TRADE_ITEM's item is spent; only a default name follows the species; its new routines are owed
+//  (T-455). LOAN wins: a borrowed daemon is never trade-evolved.
+static u8 FinishTrade(struct BoxPokemon *boxMon, struct Pokemon *partyMon, u8 ribbons)
+{
+    struct Pokemon copy;
+    u8 nickname[POKEMON_NAME_LENGTH + 1];
+    u16 species, target, item;
+    u32 personality;
+    bool8 loan = DaemonBoxIsLoan(boxMon);
+
+    boxMon->daemonsTradedIn = 0;
+    ribbons &= ~CARRIED_RIBBON_MARK;
+    SetBoxMonData(boxMon, MON_DATA_UNUSED_RIBBONS, &ribbons);
+    species = GetBoxMonData(boxMon, MON_DATA_SPECIES, NULL);
+    if (species == SPECIES_NONE || species >= NUM_SPECIES
+     || GetBoxMonData(boxMon, MON_DATA_IS_EGG, NULL) || GetBoxMonData(boxMon, MON_DATA_SANITY_IS_BAD_EGG, NULL))
+    {
+        DebugPrintf("T-473: TRADED_IN cleared on species %d, not finished", species);
+        return CARRIED_NONE;
+    }
+    personality = GetBoxMonData(boxMon, MON_DATA_PERSONALITY, NULL);
+    DaemonsFirstSeen_RecordTrade(SpeciesToNationalPokedexNum(species));
+    HandleSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_SET_SEEN, personality);
+    HandleSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_SET_CAUGHT, personality);
+    if (!loan)
+    {
+        BoxMonToMon(boxMon, &copy);
+        target = GetEvolutionTargetSpecies(&copy, EVO_MODE_TRADE, ITEM_NONE);
+        if (target != SPECIES_NONE && target < NUM_SPECIES)
+        {
+            item = GetMonData(&copy, MON_DATA_HELD_ITEM, NULL);
+            SetBoxMonData(boxMon, MON_DATA_HELD_ITEM, &item);
+            GetBoxMonData(boxMon, MON_DATA_NICKNAME, nickname);
+            if (StringCompare(nickname, gSpeciesNames[species]) == 0)
+                SetBoxMonData(boxMon, MON_DATA_NICKNAME, gSpeciesNames[target]);
+            SetBoxMonData(boxMon, MON_DATA_SPECIES, &target);
+            DaemonsFirstSeen_RecordTrade(SpeciesToNationalPokedexNum(target));
+            HandleSetPokedexFlag(SpeciesToNationalPokedexNum(target), FLAG_SET_SEEN, personality);
+            HandleSetPokedexFlag(SpeciesToNationalPokedexNum(target), FLAG_SET_CAUGHT, personality);
+            ribbons |= CARRIED_RIBBON_MOVES;
+            SetBoxMonData(boxMon, MON_DATA_UNUSED_RIBBONS, &ribbons);
+            sCarriedMovesOwed = TRUE;
+            species = target;
+        }
+    }
+    FitAbility(boxMon, species);
+    if (partyMon != NULL)
+        CalculateMonStats(partyMon);
+    if (sCarriedKind == CARRIED_NONE)
+    {
+        sCarriedKind = CARRIED_TRADED;
+        GetBoxMonData(boxMon, MON_DATA_NICKNAME, sCarriedName);
+        StringGet_Nickname(sCarriedName);
+    }
+    return CARRIED_TRADED;
+}
+
 static u8 FinishOne(struct BoxPokemon *boxMon, struct Pokemon *partyMon)
 {
-    u8 ribbons, abilityNum, kind;
+    u8 ribbons, kind;
     u16 species, nationalNum;
     u32 personality;
 
@@ -105,6 +183,8 @@ static u8 FinishOne(struct BoxPokemon *boxMon, struct Pokemon *partyMon)
     ribbons = GetBoxMonData(boxMon, MON_DATA_UNUSED_RIBBONS, NULL);
     if (ribbons & CARRIED_RIBBON_MOVES)
         sCarriedMovesOwed = TRUE;                   // owed from an earlier load (it waited in a box)
+    if (boxMon->daemonsTradedIn)                    // T-473: by trade, finished its own way (marked or not)
+        return FinishTrade(boxMon, partyMon, ribbons);
     if (!(ribbons & CARRIED_RIBBON_MARK))
         return CARRIED_NONE;
     ribbons &= ~CARRIED_RIBBON_MARK;
@@ -126,13 +206,7 @@ static u8 FinishOne(struct BoxPokemon *boxMon, struct Pokemon *partyMon)
         SetBoxMonData(boxMon, MON_DATA_UNUSED_RIBBONS, &ribbons);
         sCarriedMovesOwed = TRUE;
     }
-    //  the ability is read from the species by abilityNum: a second slot the species does not have reads as none
-    abilityNum = GetBoxMonData(boxMon, MON_DATA_ABILITY_NUM, NULL);
-    if (abilityNum && gSpeciesInfo[species].abilities[1] == ABILITY_NONE)
-    {
-        abilityNum = 0;
-        SetBoxMonData(boxMon, MON_DATA_ABILITY_NUM, &abilityNum);
-    }
+    FitAbility(boxMon, species);
     nationalNum = SpeciesToNationalPokedexNum(species);
     personality = GetBoxMonData(boxMon, MON_DATA_PERSONALITY, NULL);
     if (GetBoxMonData(boxMon, MON_DATA_MET_LOCATION, NULL) == METLOC_FATEFUL_ENCOUNTER)
@@ -188,6 +262,9 @@ bool8 Daemons_TryCarriedArrives(void)
         break;
     case CARRIED_CHANGED:
         text = sText_CarriedChanged;
+        break;
+    case CARRIED_TRADED:
+        text = sText_CarriedTraded;
         break;
     default:
         return FALSE;
