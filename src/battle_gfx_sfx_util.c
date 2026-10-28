@@ -378,9 +378,17 @@ void BattleLoadOpponentMonSpriteGfx(struct Pokemon *mon, u8 battlerId)
     Free(buffer);
     if (species == SPECIES_CASTFORM)
     {
+        u16 moves[MAX_MON_MOVES];
+
         paletteOffset = OBJ_PLTT_ID(battlerId);
         LZDecompressWram(lzPaletteData, gBattleStruct->castformPalette[0]);
         LoadPalette(gBattleStruct->castformPalette[gBattleMonForms[battlerId]], paletteOffset, PLTT_SIZE_4BPP);
+        // T-4xx: the form's palette replaced the streaked one, so its streaks go on again -- the same moves as above
+        if (gBattleSpritesDataPtr->battlerData[battlerId].transformSpecies == SPECIES_NONE)
+            Streaks_MovesOfMon(mon, moves);
+        else
+            Streaks_MovesOfBattler(battlerId, moves);
+        Streaks_ApplyToCastform(paletteOffset, gBattleMonForms[battlerId], moves);
         Saturation_ApplyToLoaded(paletteOffset, GetMonData(mon, MON_DATA_FRIENDSHIP));
     }
     // transform's pink color
@@ -446,9 +454,17 @@ void BattleLoadPlayerMonSpriteGfx(struct Pokemon *mon, u8 battlerId)
     Free(buffer);
     if (species == SPECIES_CASTFORM)
     {
+        u16 moves[MAX_MON_MOVES];
+
         paletteOffset = OBJ_PLTT_ID(battlerId);
         LZDecompressWram(lzPaletteData, gBattleStruct->castformPalette[0]);
         LoadPalette(gBattleStruct->castformPalette[gBattleMonForms[battlerId]], paletteOffset, PLTT_SIZE_4BPP);
+        // T-4xx: the form's palette replaced the streaked one, so its streaks go on again -- the same moves as above
+        if (gBattleSpritesDataPtr->battlerData[battlerId].transformSpecies == SPECIES_NONE)
+            Streaks_MovesOfMon(mon, moves);
+        else
+            Streaks_MovesOfBattler(battlerId, moves);
+        Streaks_ApplyToCastform(paletteOffset, gBattleMonForms[battlerId], moves);
         Saturation_ApplyToLoaded(paletteOffset, GetMonData(mon, MON_DATA_FRIENDSHIP));
     }
     // transform's pink color
@@ -793,6 +809,12 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, u8 transformType)
         StartSpriteAnim(&gSprites[gBattlerSpriteIds[battlerAtk]], gBattleSpritesDataPtr->animationData->animArg);
         paletteOffset = OBJ_PLTT_ID(battlerAtk);
         LoadPalette(gBattleStruct->castformPalette[gBattleSpritesDataPtr->animationData->animArg], paletteOffset, PLTT_SIZE_4BPP);
+        {
+            u16 moves[MAX_MON_MOVES];   // T-4xx: the new form's body under the same streaks
+
+            Streaks_MovesOfBattler(battlerAtk, moves);
+            Streaks_ApplyToCastform(paletteOffset, gBattleSpritesDataPtr->animationData->animArg, moves);
+        }
         Saturation_ApplyToLoaded(paletteOffset, Saturation_OfBattler(battlerAtk));   // T-424
         gBattleMonForms[battlerAtk] = gBattleSpritesDataPtr->animationData->animArg;
         if (gBattleSpritesDataPtr->battlerData[battlerAtk].transformSpecies != SPECIES_NONE)
@@ -854,6 +876,12 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, u8 transformType)
         {
             LZDecompressWram(lzPaletteData, gBattleStruct->castformPalette[0]);
             LoadPalette(gBattleStruct->castformPalette[0] + gBattleMonForms[battlerDef] * 16, paletteOffset, PLTT_SIZE_4BPP);
+            {
+                u16 moves[MAX_MON_MOVES];   // T-4xx: PERSPECTIVE takes the target's moves, so its streaks (9.4)
+
+                Streaks_MovesOfBattler(battlerDef, moves);
+                Streaks_ApplyToCastform(paletteOffset, gBattleMonForms[battlerDef], moves);
+            }
             Saturation_ApplyToLoaded(paletteOffset, Saturation_OfBattler(battlerAtk));
         }
         BlendPalette(paletteOffset, 16, 6, RGB_WHITE);

@@ -19,17 +19,21 @@
 // A move type's streak depends on the BODY it is drawn on: its light step, or its dark step where the
 // light one would vanish into that body. genstreaks.py measured every pair; the body is the species'
 // first type, which is the type its ramp was built from.
-static u16 StreakColour(const u16 *palette, u16 species, u16 move)
+static u16 StreakColourOnBody(const u16 *palette, u8 body, u16 move)
 {
-    u8 body, type;
+    u8 type;
 
     if (move == MOVE_NONE || move >= MOVES_COUNT)
         return palette[BODY_MID_INDEX];
-    body = gSpeciesInfo[species].types[0];
     type = gBattleMoves[move].type;
     if (body >= NUMBER_OF_MON_TYPES || type >= NUMBER_OF_MON_TYPES)
         return gStreakBlank;
     return gStreakColours[body][type];
+}
+
+static u16 StreakColour(const u16 *palette, u16 species, u16 move)
+{
+    return StreakColourOnBody(palette, gSpeciesInfo[species].types[0], move);
 }
 
 u16 Streaks_TypeColour(u8 type)
@@ -62,6 +66,38 @@ void Streaks_ApplyToLoaded(u16 paletteOffset, u16 species, const u16 *moves)
         gPlttBufferUnfaded[paletteOffset + STREAK_FIRST_INDEX + i] = colour;
         gPlttBufferFaded[paletteOffset + STREAK_FIRST_INDEX + i] = colour;
     }
+}
+
+void Streaks_ApplyToLoadedOnBody(u16 paletteOffset, u16 species, u8 body, const u16 *moves)
+{
+    s32 i;
+
+    if (species >= NUM_SPECIES || !gSpeciesHasStreaks[species] || moves == NULL)
+        return;
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        u16 colour = StreakColourOnBody(&gPlttBufferUnfaded[paletteOffset], body, moves[i]);
+
+        gPlttBufferUnfaded[paletteOffset + STREAK_FIRST_INDEX + i] = colour;
+        gPlttBufferFaded[paletteOffset + STREAK_FIRST_INDEX + i] = colour;
+    }
+}
+
+// The type each CASTFORM form is drawn in (tools/gencastform.py), which is the type Forecast gives it
+// (CastformDataTypeChange): the body its streaks sit on.
+static const u8 sCastformBodies[NUM_CASTFORM_FORMS] =
+{
+    [CASTFORM_NORMAL] = TYPE_NORMAL,
+    [CASTFORM_FIRE]   = TYPE_FIRE,
+    [CASTFORM_WATER]  = TYPE_WATER,
+    [CASTFORM_ICE]    = TYPE_ICE,
+};
+
+void Streaks_ApplyToCastform(u16 paletteOffset, u8 form, const u16 *moves)
+{
+    if (form >= NUM_CASTFORM_FORMS)
+        form = CASTFORM_NORMAL;
+    Streaks_ApplyToLoadedOnBody(paletteOffset, SPECIES_CASTFORM, sCastformBodies[form], moves);
 }
 
 void Streaks_MovesOfMon(struct Pokemon *mon, u16 *moves)

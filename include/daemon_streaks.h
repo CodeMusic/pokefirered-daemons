@@ -12,6 +12,12 @@
 void Streaks_ApplyToBuffer(u16 *palette, u16 species, const u16 *moves);
 // Write the streaks into a palette already loaded at paletteOffset (both palette buffers).
 void Streaks_ApplyToLoaded(u16 paletteOffset, u16 species, const u16 *moves);
+// The same, on a body that is not the species' first type: CASTFORM's form palettes, each drawn in the type Forecast
+// gives that form (tools/gencastform.py). The streak colour depends on the body it sits on.
+void Streaks_ApplyToLoadedOnBody(u16 paletteOffset, u16 species, u8 body, const u16 *moves);
+// The battle's CASTFORM palette: castformPalette[form] loaded whole, then its streaks on that form's body. The species
+// palette the buffer path streaked is loaded first and then overwritten, so the streaks must be written again here.
+void Streaks_ApplyToCastform(u16 paletteOffset, u8 form, const u16 *moves);
 
 // The four moves of a daemon, wherever it lives. A battler's are its CURRENT moves, which
 // PERSPECTIVE and CLONE change mid-battle; a party daemon's are its own.
