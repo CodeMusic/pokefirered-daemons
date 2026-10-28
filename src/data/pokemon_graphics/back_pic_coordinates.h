@@ -1662,48 +1662,48 @@ const struct MonCoords gMonBackPicCoords[] =
     },
     [SPECIES_TRAPINCH] =
     {
-        .size = MON_COORDS_SIZE(56, 40),
-        .y_offset = 14,
-    },
-    [SPECIES_VIBRAVA] =
-    {
-        .size = MON_COORDS_SIZE(56, 32),
-        .y_offset = 17,
-    },
-    [SPECIES_FLYGON] =
-    {
-        .size = MON_COORDS_SIZE(64, 64),
-        .y_offset = 2,
-    },
-    [SPECIES_MAKUHITA] =
-    {
-        .size = MON_COORDS_SIZE(56, 48),
-        .y_offset = 11,
-    },
-    [SPECIES_HARIYAMA] =
-    {
-        .size = MON_COORDS_SIZE(64, 56),
-        .y_offset = 7,
-    },
-    [SPECIES_ELECTRIKE] =
-    {
-        .size = MON_COORDS_SIZE(64, 32),
-        .y_offset = 16,
-    },
-    [SPECIES_MANECTRIC] =
-    {
-        .size = MON_COORDS_SIZE(64, 56),
-        .y_offset = 4,
-    },
-    [SPECIES_NUMEL] =
-    {
         .size = MON_COORDS_SIZE(64, 48),
         .y_offset = 11,
     },
+    [SPECIES_VIBRAVA] =
+    {
+        .size = MON_COORDS_SIZE(56, 48),
+        .y_offset = 12,
+    },
+    [SPECIES_FLYGON] =
+    {
+        .size = MON_COORDS_SIZE(48, 56),
+        .y_offset = 5,
+    },
+    [SPECIES_MAKUHITA] =
+    {
+        .size = MON_COORDS_SIZE(32, 56),
+        .y_offset = 6,
+    },
+    [SPECIES_HARIYAMA] =
+    {
+        .size = MON_COORDS_SIZE(48, 56),
+        .y_offset = 5,
+    },
+    [SPECIES_ELECTRIKE] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 3,
+    },
+    [SPECIES_MANECTRIC] =
+    {
+        .size = MON_COORDS_SIZE(56, 64),
+        .y_offset = 2,
+    },
+    [SPECIES_NUMEL] =
+    {
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 3,
+    },
     [SPECIES_CAMERUPT] =
     {
-        .size = MON_COORDS_SIZE(64, 32),
-        .y_offset = 19,
+        .size = MON_COORDS_SIZE(56, 48),
+        .y_offset = 9,
     },
     [SPECIES_SPHEAL] =
     {
@@ -1712,43 +1712,43 @@ const struct MonCoords gMonBackPicCoords[] =
     },
     [SPECIES_SEALEO] =
     {
-        .size = MON_COORDS_SIZE(64, 48),
-        .y_offset = 10,
+        .size = MON_COORDS_SIZE(56, 56),
+        .y_offset = 5,
     },
     [SPECIES_WALREIN] =
     {
-        .size = MON_COORDS_SIZE(64, 56),
-        .y_offset = 6,
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 3,
     },
     [SPECIES_CACNEA] =
     {
-        .size = MON_COORDS_SIZE(64, 40),
-        .y_offset = 15,
+        .size = MON_COORDS_SIZE(56, 56),
+        .y_offset = 8,
     },
     [SPECIES_CACTURNE] =
     {
-        .size = MON_COORDS_SIZE(64, 56),
-        .y_offset = 7,
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 4,
     },
     [SPECIES_SNORUNT] =
     {
-        .size = MON_COORDS_SIZE(56, 48),
-        .y_offset = 10,
+        .size = MON_COORDS_SIZE(48, 56),
+        .y_offset = 4,
     },
     [SPECIES_GLALIE] =
     {
-        .size = MON_COORDS_SIZE(64, 40),
-        .y_offset = 12,
+        .size = MON_COORDS_SIZE(48, 56),
+        .y_offset = 7,
     },
     [SPECIES_LUNATONE] =
     {
-        .size = MON_COORDS_SIZE(64, 56),
-        .y_offset = 5,
+        .size = MON_COORDS_SIZE(48, 56),
+        .y_offset = 6,
     },
     [SPECIES_SOLROCK] =
     {
-        .size = MON_COORDS_SIZE(64, 56),
-        .y_offset = 5,
+        .size = MON_COORDS_SIZE(32, 56),
+        .y_offset = 6,
     },
     [SPECIES_AZURILL] =
     {
@@ -1757,23 +1757,23 @@ const struct MonCoords gMonBackPicCoords[] =
     },
     [SPECIES_SPOINK] =
     {
-        .size = MON_COORDS_SIZE(40, 48),
-        .y_offset = 11,
+        .size = MON_COORDS_SIZE(56, 64),
+        .y_offset = 4,
     },
     [SPECIES_GRUMPIG] =
     {
-        .size = MON_COORDS_SIZE(64, 56),
-        .y_offset = 4,
+        .size = MON_COORDS_SIZE(48, 56),
+        .y_offset = 5,
     },
     [SPECIES_PLUSLE] =
     {
-        .size = MON_COORDS_SIZE(56, 48),
-        .y_offset = 8,
+        .size = MON_COORDS_SIZE(40, 48),
+        .y_offset = 9,
     },
     [SPECIES_MINUN] =
     {
-        .size = MON_COORDS_SIZE(56, 48),
-        .y_offset = 8,
+        .size = MON_COORDS_SIZE(32, 40),
+        .y_offset = 12,
     },
     [SPECIES_MAWILE] =
     {
