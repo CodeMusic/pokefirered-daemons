@@ -45,6 +45,7 @@
 #include "constants/songs.h"
 #include "fieldmap.h"
 #include "constants/trainers.h"
+#include "daemons_three.h"   // T-459 C: the lean
 
 static void SpriteCB_UnusedDebugSprite(struct Sprite *sprite);
 static void HandleAction_UseMove(void);
@@ -3347,6 +3348,13 @@ enum
     STATE_WAIT_SET_BEFORE_ACTION,
 };
 
+// T-459 C: whether a battler's action for this turn is settled -- the player's lean waits on the foe's.
+bool8 BattleMain_ActionSettled(u8 battler)
+{
+    return gBattleCommunication[battler] == STATE_WAIT_ACTION_CONFIRMED_STANDBY
+        || gBattleCommunication[battler] == STATE_WAIT_ACTION_CONFIRMED;
+}
+
 static void HandleTurnActionSelectionState(void)
 {
     s32 i;
@@ -3959,10 +3967,13 @@ static void RunTurnActionsFunctions(void)
     if (gBattleOutcome != 0)
         gCurrentActionFuncId = B_ACTION_FINISHED;
     *(&gBattleStruct->savedTurnActionNumber) = gCurrentTurnActionNumber;
+    if (gCurrentTurnActionNumber < gBattlersCount)
+        Three_LeanOnAction(gBattlerByTurnOrder[gCurrentTurnActionNumber], gCurrentActionFuncId);   // T-459 C
     sTurnActionsFuncsTable[gCurrentActionFuncId]();
 
     if (gCurrentTurnActionNumber >= gBattlersCount) // everyone did their actions, turn finished
     {
+        Three_LeanTurnEnds();   // T-459 C: counted, if the foe's turn came
         gHitMarker &= ~(HITMARKER_PASSIVE_DAMAGE);
         gBattleMainFunc = sEndTurnFuncsTable[gBattleOutcome & 0x7F];
     }

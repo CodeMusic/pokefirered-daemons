@@ -102,5 +102,6 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves);
 void RunBattleScriptCommands_PopCallbacksStack(void);
 void RunBattleScriptCommands(void);
 bool8 TryRunFromBattle(u8 battler);
+bool8 BattleMain_ActionSettled(u8 battler);   // T-459 C
 
 #endif // GUARD_BATTLE_MAIN_H

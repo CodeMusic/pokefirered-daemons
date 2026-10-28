@@ -30,6 +30,7 @@
 #include "data/battle_move_menu.h"
 #include "daemons_weather.h"   // T-415 P2: the glint (outside the DEBUG block -- trap 29)
 #include "battle_util.h"
+#include "daemons_three.h"   // T-459 C: the lean (outside the DEBUG block -- trap 29)
 #if DAEMONS_DEBUG
 #include "battle_main.h"
 #include "daemon_streaks.h"
@@ -73,6 +74,7 @@ static void PlayerHandleMoveAnimation(void);
 static void PlayerHandlePrintString(void);
 static void PlayerHandlePrintSelectionString(void);
 static void PlayerHandleChooseAction(void);
+static void PrintActionPrompt(void);   // T-459 C
 static void PlayerHandleUnknownYesNoBox(void);
 static void PlayerHandleChooseMove(void);
 static void PlayerHandleChooseItem(void);
@@ -591,10 +593,7 @@ static void HandleInputChooseAction(void)
     DoBounceEffect(gActiveBattler, BOUNCE_HEALTHBOX, 7, 1);
     DoBounceEffect(gActiveBattler, BOUNCE_MON, 7, 1);
     if (sHintFrames != 0 && --sHintFrames == 0 && !sStatsShown)   // the hint's two seconds are up; ask the question
-    {
-        BattleStringExpandPlaceholdersToDisplayedString(gText_WhatWillPkmnDo);
-        BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_ACTION_PROMPT);
-    }
+        PrintActionPrompt();
 #if DAEMONS_DEBUG
     //  T-190 took SELECT for the stat readout, so the theatre's door moved to START, which nothing in a
     //  battle uses. It is a debug build only either way.
@@ -2930,7 +2929,39 @@ static void HandleChooseActionAfterDma3(void)
     }
 }
 
+// T-459 C: the question, or this turn's lean in its place -- in the book's purple, there while the player chooses.
+static void PrintActionPrompt(void)
+{
+    const u8 *lean = Three_LeanText();
+
+    if (lean != NULL)
+    {
+        BattlePutTextOnWindow(lean, B_WIN_ACTION_PROMPT);
+        return;
+    }
+    BattleStringExpandPlaceholdersToDisplayedString(gText_WhatWillPkmnDo);
+    BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_ACTION_PROMPT);
+}
+
+static void ShowChooseAction(void);
+
+// T-459 C: a lean is read from what the foe has chosen, and the foe chooses in the frame or two after the player's
+// menu is asked for (battle_main.c emits both at once), so when one comes the menu waits for it.
+static void WaitForLean(void)
+{
+    if (Three_LeanReady())
+        ShowChooseAction();
+}
+
 static void PlayerHandleChooseAction(void)
+{
+    if (Three_LeanWanted(gActiveBattler))
+        gBattlerControllerFuncs[gActiveBattler] = WaitForLean;
+    else
+        ShowChooseAction();
+}
+
+static void ShowChooseAction(void)
 {
     s32 i;
 
@@ -2942,14 +2973,9 @@ static void PlayerHandleChooseAction(void)
         ActionSelectionDestroyCursorAt(i);
     ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBattler], 0);
     if (sHintFrames != 0)
-    {
         BattlePutTextOnWindow(sText_ButtonHint, B_WIN_ACTION_PROMPT);
-    }
     else
-    {
-        BattleStringExpandPlaceholdersToDisplayedString(gText_WhatWillPkmnDo);
-        BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_ACTION_PROMPT);
-    }
+        PrintActionPrompt();
 }
 
 static void PlayerHandleUnknownYesNoBox(void)

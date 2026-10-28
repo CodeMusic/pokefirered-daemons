@@ -251,8 +251,8 @@
 #define VAR_FEELINGS_PLAYED        0x40C3 // T-433: when the instrument last gladdened the lead (feelings ticks + 1; 0 never)
 #define VAR_ERMINE_SEASON          0x40C4 // T-439: the season + 1 the ERMINE at RESORT SUBLIME last paid in (0 never)
 #define VAR_OTHER_CAVE_LIGHT       0x40C5 // T-438: OTHER CAVE's visits, 1..4 round again -- its light (n - 1) and its wild set (0 never entered)
-#define VAR_0x40C6                 0x40C6
-#define VAR_0x40C7                 0x40C7
+#define VAR_LEANS_TOLD             0x40C6 // T-459 C: leans in battle whose turn came (the NOTEBOOK's count)
+#define VAR_LEANS_LANDED           0x40C7 // T-459 C: ... and of those, the ones that landed
 #define VAR_0x40C8                 0x40C8
 #define VAR_0x40C9                 0x40C9
 #define VAR_0x40CA                 0x40CA

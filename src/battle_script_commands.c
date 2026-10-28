@@ -1122,6 +1122,7 @@ static void Cmd_attackstring(void)
     {
         PrepareStringBattle(STRINGID_USEDMOVE, gBattlerAttacker);
         gHitMarker |= HITMARKER_ATTACKSTRING_PRINTED;
+        Three_LeanOnAttackString(gBattlerAttacker, gCurrentMove);   // T-459 C: the foe struck, or held back
     }
     gBattlescriptCurrInstr++;
     gBattleCommunication[MSG_DISPLAY] = 0;

@@ -457,7 +457,10 @@ struct BattleStruct
     } multiBuffer;
     u8 threeOn;                         // T-454: THE THREE, carried in this battle (src/daemons_three.c)
     u8 three[PARTY_SIZE][3];            // T-454: CLOSURE, ATTUNEMENT, VOLTAGE per player party slot; never saved
-    u8 padding_1F7[0x9];
+    u8 lean;                            // T-459 C: this turn's lean (LEAN_*), 0 none
+    u8 leanState;                       // T-459 C: LEAN_DECIDED and what the foe did this turn
+    u8 leanWait;                        // T-459 C: frames waited on the foe's choice this turn
+    u8 padding_1FA[0x6];
 }; // size == 0x200 bytes
 
 extern struct BattleStruct *gBattleStruct;

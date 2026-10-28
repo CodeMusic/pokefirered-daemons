@@ -61,6 +61,15 @@
 // THREE_LEAK_STEP percent (3: -5%, 4: -10%).
 #define THREE_LEAK_VOLTAGE          3
 #define THREE_LEAK_STEP             5
+
+// T-459 C, THE LEAN (DRAFT, the user tunes): before some turns, where "What will X do?" stood, a purple line about what
+// the foe will do -- STRIKE (a routine with power), HOLD BACK (one without, an item, or nothing) or TURN AWAY (a switch,
+// or a wild daemon fleeing). It is read from what the foe has really chosen, and is that more often as READ rises:
+#define THREE_LEAN_CHANCE           33      // percent of turns a lean comes; never two turns running
+#define THREE_LEAN_RIGHT            65      // percent it says the foe's real intent at READ 0 ...
+#define THREE_LEAN_RIGHT_STEP       7       // ... and this much more per step of READ: 37% at -4, 93% at +4
+// The NOTEBOOK keeps the count (VAR_LEANS_TOLD, VAR_LEANS_LANDED): a lean is counted once the foe's turn has come,
+// landed by what it did, not what it meant -- a STRIKE lean on a foe that sleeps through the turn did not land.
 // ----------------------------------------------------------------------------------------------------------------
 
 enum { THREE_CLOSURE, THREE_ATTUNEMENT, THREE_VOLTAGE, THREE_COUNT };
@@ -77,6 +86,15 @@ void Three_OnMoveUsed(u8 attacker, u16 move);                   // Cmd_ppreduce,
 void Three_OnHit(u8 target, u8 critMultiplier);                 // Cmd_damagecalc
 void Three_OnFaint(u8 fainted, u8 attacker);                    // Cmd_tryfaintmon
 
+// T-459 C: THE LEAN. The player's controller asks once a turn whether one comes (Three_LeanWanted), waits for the foe
+// to settle (Three_LeanReady, a frame at a time), then prints Three_LeanText() in place of the question.
+bool8 Three_LeanWanted(u8 battler);                             // PlayerHandleChooseAction, each time it opens
+bool8 Three_LeanReady(void);                                    // TRUE once decided (or given up)
+const u8 *Three_LeanText(void);                                 // this turn's lean, or NULL
+void Three_LeanOnAction(u8 battler, u8 action);                 // RunTurnActionsFunctions, as each action begins
+void Three_LeanOnAttackString(u8 attacker, u16 move);           // Cmd_attackstring
+void Three_LeanTurnEnds(void);                                  // RunTurnActionsFunctions, the turn's actions done
+
 #if DAEMONS_DEBUG
 // DEBUG -> GAME EVENTS -> THE THREE: a party slot's three as the next battle would start them ("!" before one set
 // here), the slot picked, and each value set by hand (AUTO, then 0..4, then AUTO again) for the next battles.
@@ -85,6 +103,7 @@ void Three_DebugPick(u8 slot);
 u8 Three_DebugPicked(void);
 void Three_DebugCycle(u8 which);
 void Three_DebugAllAuto(void);
+extern u8 gThreeDebugLean;   // T-459 C: 1, a lean every turn (the theatre pokes it)
 #endif
 
 #endif // GUARD_DAEMONS_THREE_H

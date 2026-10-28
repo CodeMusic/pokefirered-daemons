@@ -7,6 +7,11 @@
 #include "daemons_feelings.h"
 #include "daemons_three.h"
 #include "event_data.h"
+#include "battle_main.h"
+#include "palette.h"
+#include "random.h"
+#include "util.h"
+#include "constants/vars.h"
 #include "constants/battle.h"
 #include "constants/flags.h"
 #include "constants/pokemon.h"
@@ -179,6 +184,187 @@ void Three_OnHit(u8 target, u8 critMultiplier)
 
     if (three != NULL && critMultiplier > 1)
         three[THREE_VOLTAGE] = Up(three[THREE_VOLTAGE], THREE_VOLTAGE_JOLT);
+}
+
+// ---- T-459 C: THE LEAN ------------------------------------------------------------------------------------------------
+// Before some turns, where "What will X do?" stood, a purple line: what the foe will do this turn. It is read from what
+// the foe has really chosen -- the AI chooses without seeing the player's choice, in the frame or two after the menu is
+// asked for, so the menu waits for it -- and it is that more often as READ (ATTUNEMENT - VOLTAGE) rises; otherwise it
+// is something else the foe could have done. Counted in the NOTEBOOK's log once the foe's turn comes, and landed by what
+// the foe DID, not what it meant: the log decides, and the game never vouches (bible 4.33). Singles only.
+
+enum { LEAN_NONE, LEAN_STRIKE, LEAN_HOLD_BACK, LEAN_TURN_AWAY };
+
+#define LEAN_DECIDED    (1 << 0)    // this turn's roll is made (the menu opens again after a B, the lean with it)
+#define LEAN_WAITING    (1 << 1)    // the roll said yes: waiting on the foe's choice
+#define LEAN_LAST_TURN  (1 << 2)    // a lean came last turn, so none this one
+#define LEAN_FOE_ACTED  (1 << 3)    // the foe's turn came, and it was standing
+#define LEAN_FOE_STRUCK (1 << 4)    // ... it used a routine with power
+#define LEAN_FOE_AWAY   (1 << 5)    // ... it switched out, or fled
+
+#define LEAN_GIVE_UP    30          // frames to wait on the foe before letting this turn's lean go
+
+// The book's purple on the battle's dark box: gensubtle.py's C_MARGIN, the hue lit (C_RULE, its ink, reads at 1.8:1 on
+// it), the shadow the box's own. BG palette 0's slot 12 is a magenta placeholder in textbox.gbapal that nothing draws.
+#define LEAN_SLOT       12
+static const u16 sLeanPurple[] = { RGB(29, 17, 26) };
+static const u8 sText_LeanStrike[]   = _("{COLOR 12}{SHADOW 6}A lean: this turn,\nit will strike.");      // DRAFT
+static const u8 sText_LeanHoldBack[] = _("{COLOR 12}{SHADOW 6}A lean: this turn,\nit will hold back.");   // DRAFT
+static const u8 sText_LeanTurnAway[] = _("{COLOR 12}{SHADOW 6}A lean: this turn,\nit will turn away.");   // DRAFT
+static const u8 *const sLeans[] = { NULL, sText_LeanStrike, sText_LeanHoldBack, sText_LeanTurnAway };
+
+#if DAEMONS_DEBUG
+EWRAM_DATA u8 gThreeDebugLean = 0;
+#endif
+
+static u8 Foe(void)
+{
+    return GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
+}
+
+bool8 Three_LeanWanted(u8 battler)
+{
+    bool8 want;
+
+    if (gBattleStruct == NULL || !gBattleStruct->threeOn || gBattleStruct->leanState & LEAN_DECIDED)
+        return FALSE;
+    gBattleStruct->leanState |= LEAN_DECIDED;
+    gBattleStruct->lean = LEAN_NONE;
+    gBattleStruct->leanWait = 0;
+    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE || battler != GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)
+     || Slot(battler) == NULL)
+        return FALSE;
+    want = !(gBattleStruct->leanState & LEAN_LAST_TURN) && Random() % 100 < THREE_LEAN_CHANCE;
+#if DAEMONS_DEBUG
+    if (gThreeDebugLean)
+        want = TRUE;
+#endif
+    if (want)
+        gBattleStruct->leanState |= LEAN_WAITING;
+    return want;
+}
+
+// A trainer's daemon with another able to come in, or a wild one that flees: whether TURN AWAY could be a wrong lean.
+static bool8 CanTurnAway(u8 foe)
+{
+    u8 i;
+    u16 species;
+
+    if (gBattleTypeFlags & BATTLE_TYPE_ROAMER)
+        return TRUE;
+    if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER))
+        return FALSE;
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        species = GetMonData(&gEnemyParty[i], MON_DATA_SPECIES_OR_EGG);
+        if (i != gBattlerPartyIndexes[foe] && species != SPECIES_NONE && species != SPECIES_EGG
+         && GetMonData(&gEnemyParty[i], MON_DATA_HP) != 0)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+// What the foe has really chosen this turn.
+static u8 Intent(u8 foe)
+{
+    u16 move;
+
+    switch (gChosenActionByBattler[foe])
+    {
+    case B_ACTION_SWITCH:
+    case B_ACTION_RUN:
+        return LEAN_TURN_AWAY;
+    case B_ACTION_USE_MOVE:
+        break;
+    default:
+        return LEAN_HOLD_BACK;          // an item, or watching
+    }
+    if (gBattleMons[foe].status2 & STATUS2_RECHARGE)
+        return LEAN_HOLD_BACK;
+    if (gBattleMons[foe].status2 & STATUS2_MULTIPLETURNS)
+        move = gLockedMoves[foe];
+    else if (gProtectStructs[foe].noValidMoves)
+        return LEAN_STRIKE;             // STRUGGLE
+    else
+        move = gChosenMoveByBattler[foe];
+    return gBattleMoves[move].power != 0 ? LEAN_STRIKE : LEAN_HOLD_BACK;
+}
+
+bool8 Three_LeanReady(void)
+{
+    u8 foe = Foe(), truth, others[LEAN_TURN_AWAY], n = 0, k;
+    s16 right;
+
+    if (!(gBattleStruct->leanState & LEAN_WAITING))
+        return TRUE;
+    if (!BattleMain_ActionSettled(foe) && ++gBattleStruct->leanWait < LEAN_GIVE_UP)
+        return FALSE;
+    gBattleStruct->leanState &= ~LEAN_WAITING;
+    if (!BattleMain_ActionSettled(foe))
+        return TRUE;                    // the foe never settled: no lean this turn
+    truth = Intent(foe);
+    right = THREE_LEAN_RIGHT + Three_ReadScore(GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)) * THREE_LEAN_RIGHT_STEP;
+    if (Random() % 100 < right)
+    {
+        gBattleStruct->lean = truth;
+        return TRUE;
+    }
+    for (k = LEAN_STRIKE; k <= LEAN_TURN_AWAY; k++)
+        if (k != truth && (k != LEAN_TURN_AWAY || CanTurnAway(foe)))
+            others[n++] = k;
+    gBattleStruct->lean = others[Random() % n];
+    return TRUE;
+}
+
+const u8 *Three_LeanText(void)
+{
+    if (gBattleStruct == NULL || gBattleStruct->lean == LEAN_NONE)
+        return NULL;
+    LoadPalette(sLeanPurple, BG_PLTT_ID(0) + LEAN_SLOT, PLTT_SIZEOF(1));   // every time: a menu's return reloads 0
+    return sLeans[gBattleStruct->lean];
+}
+
+void Three_LeanOnAction(u8 battler, u8 action)
+{
+    if (gBattleStruct == NULL || gBattleStruct->lean == LEAN_NONE || battler != Foe()
+     || gBattleMons[battler].hp == 0 || gAbsentBattlerFlags & gBitTable[battler])
+        return;
+    if (action == B_ACTION_USE_MOVE || action == B_ACTION_USE_ITEM)
+        gBattleStruct->leanState |= LEAN_FOE_ACTED;
+    else if (action == B_ACTION_SWITCH || action == B_ACTION_RUN)
+        gBattleStruct->leanState |= LEAN_FOE_ACTED | LEAN_FOE_AWAY;
+}
+
+void Three_LeanOnAttackString(u8 attacker, u16 move)
+{
+    if (gBattleStruct != NULL && gBattleStruct->lean != LEAN_NONE && attacker == Foe() && gBattleMoves[move].power != 0)
+        gBattleStruct->leanState |= LEAN_FOE_STRUCK;
+}
+
+static void Count(u16 var)
+{
+    u16 n = VarGet(var);
+
+    if (n < 9999)
+        VarSet(var, n + 1);
+}
+
+void Three_LeanTurnEnds(void)
+{
+    u8 lean, state, did;
+
+    if (gBattleStruct == NULL)
+        return;
+    lean = gBattleStruct->lean;
+    state = gBattleStruct->leanState;
+    gBattleStruct->lean = LEAN_NONE;
+    gBattleStruct->leanState = lean != LEAN_NONE ? LEAN_LAST_TURN : 0;
+    if (lean == LEAN_NONE || !(state & LEAN_FOE_ACTED))
+        return;                         // no lean, or the foe's turn never came: nothing to count
+    did = state & LEAN_FOE_AWAY ? LEAN_TURN_AWAY : state & LEAN_FOE_STRUCK ? LEAN_STRIKE : LEAN_HOLD_BACK;
+    Count(VAR_LEANS_TOLD);
+    if (did == lean)
+        Count(VAR_LEANS_LANDED);
 }
 
 void Three_OnFaint(u8 fainted, u8 attacker)
