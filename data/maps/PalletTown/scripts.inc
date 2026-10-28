@@ -93,8 +93,15 @@ PalletTown_EventScript_NotEnoughMonsForNationalDex::
 
 PalletTown_EventScript_NotBeenToOneIslandYet::
 	msgbox PalletTown_Text_OakYouEnjoyingTraveling
+	call_if_set FLAG_GOT_SUBTLE_LAYER, PalletTown_EventScript_UnderFurther
 	goto PalletTown_EventScript_EndOakRatingScene
 	end
+
+@  T-459 D: words under words -- once THE SUBTLE LAYER is held, what is meant under what is said, in the book's purple.
+@  The user chose the line, 2026-10-28.
+PalletTown_EventScript_UnderFurther::
+	msgbox PalletTown_Text_UnderFurther
+	return
 
 PalletTown_Movement_OakWalkToPlayersDoor::
 	walk_left

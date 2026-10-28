@@ -93,6 +93,11 @@ PalletTown_PlayersHouse_1F_Text_MomTheShip::
     .string "And your brother has the ship now.\n"
     .string "Tell him to call his mother.$"
 
+@  T-459 D: words under words -- once THE SUBTLE LAYER is held, what is meant under what is said, in the book's purple.
+@  The user chose the line, 2026-10-28.
+PalletTown_PlayersHouse_1F_Text_UnderTheShip::
+    .string "{COLOR PURPLE}{SHADOW LIGHT_GRAY}Come back.$"
+
 PalletTown_PlayersHouse_1F_Text_DadTheInitials::
     .string "DAD: The post still comes for\n"
     .string "DOCTOR.\p"

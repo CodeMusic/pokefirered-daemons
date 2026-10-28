@@ -125,8 +125,15 @@ PalletTown_PlayersHouse_1F_EventScript_MomHowDoesItLook::
 @  the player's brother. Only once the player holds a ticket for it.
 PalletTown_PlayersHouse_1F_EventScript_MomTheShip::
 	msgbox PalletTown_PlayersHouse_1F_Text_MomTheShip
+	call_if_set FLAG_GOT_SUBTLE_LAYER, PalletTown_PlayersHouse_1F_EventScript_UnderTheShip
 	release
 	end
+
+@  T-459 D: words under words -- once THE SUBTLE LAYER is held, what is meant under what is said, in the book's purple.
+@  The user chose the line, 2026-10-28.
+PalletTown_PlayersHouse_1F_EventScript_UnderTheShip::
+	msgbox PalletTown_PlayersHouse_1F_Text_UnderTheShip
+	return
 
 @  T-313, DRAFT: the player's brother is never home -- the house is full -- so he is a note on the wall.
 PalletTown_PlayersHouse_1F_EventScript_DavidsNote::

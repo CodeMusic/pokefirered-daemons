@@ -1,6 +1,13 @@
 PokemonLeague_ChampionsRoom_Text_Intro::
     .string "{RIVAL}: {PLAYER}.\p"
-    .string "I thought it would be you.\p"
+    .string "I thought it would be you.$"
+
+@  T-459 D: words under words -- once THE SUBTLE LAYER is held, what is meant under what is said, in the book's purple.
+@  The user chose the line, 2026-10-28.
+PokemonLeague_ChampionsRoom_Text_UnderIntro::
+    .string "{COLOR PURPLE}{SHADOW LIGHT_GRAY}Before you can.$"
+
+PokemonLeague_ChampionsRoom_Text_IntroGoesOn::
     .string "A rival keeps me sharp. That is\n"
     .string "what you are for.\p"
     .string "I went through the whole INDEX for\n"

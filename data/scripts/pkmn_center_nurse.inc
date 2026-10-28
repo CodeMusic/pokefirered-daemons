@@ -52,6 +52,7 @@ EventScript_PkmnCenterNurse_ReturnPkmn::
 	setvar VAR_0x8006, GIVER_CHECKPOINT   @ T-416: a holiday's gift, once the party is restored
 	call EventScript_HolidayGifts
 	msgbox Text_WeHopeToSeeYouAgain
+	call_if_set FLAG_GOT_SUBTLE_LAYER, EventScript_PkmnCenterNurse_Under
 	return
 
 EventScript_PkmnCenterNurse_PlayerWaitingInUnionRoom::
@@ -63,10 +64,12 @@ EventScript_PkmnCenterNurse_PlayerWaitingInUnionRoom::
 	applymovement VAR_LAST_TALKED, Movement_Bow
 	waitmovement 0
 	msgbox Text_WeHopeToSeeYouAgain
+	call_if_set FLAG_GOT_SUBTLE_LAYER, EventScript_PkmnCenterNurse_Under
 	return
 
 EventScript_PkmnCenterNurse_Goodbye::
 	msgbox Text_WeHopeToSeeYouAgain
+	call_if_set FLAG_GOT_SUBTLE_LAYER, EventScript_PkmnCenterNurse_Under
 	return
 
 Movement_Bow::
@@ -163,3 +166,12 @@ Text_KeeperListeningSignal3::
 	.string "Excuse me, one moment.\p"
 	.string "…Yes, I hear you.\n"
 	.string "{STR_VAR_1} is doing well.$"
+
+@  T-459 D: words under words -- once THE SUBTLE LAYER is held, what is meant under what is said, in the book's purple.
+@  The user chose the line, 2026-10-28.
+EventScript_PkmnCenterNurse_Under::
+	msgbox Text_PkmnCenterNurse_Under
+	return
+
+Text_PkmnCenterNurse_Under::
+	.string "{COLOR PURPLE}{SHADOW LIGHT_GRAY}Not too soon.$"

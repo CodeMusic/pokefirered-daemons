@@ -114,6 +114,15 @@ PokemonLeague_ChampionsRoom_EventScript_Rematch::
 
 PokemonLeague_ChampionsRoom_EventScript_Intro::
 	msgbox PokemonLeague_ChampionsRoom_Text_Intro
+	call_if_set FLAG_GOT_SUBTLE_LAYER, PokemonLeague_ChampionsRoom_EventScript_UnderIntro
+	msgbox PokemonLeague_ChampionsRoom_Text_IntroGoesOn
+	return
+
+@  T-459 D: words under words -- once THE SUBTLE LAYER is held, what is meant under what is said, in the book's purple.
+@  The user chose the line, 2026-10-28.
+@  The intro is split after "I thought it would be you." so the line sits under it; the rest goes on unchanged.
+PokemonLeague_ChampionsRoom_EventScript_UnderIntro::
+	msgbox PokemonLeague_ChampionsRoom_Text_UnderIntro
 	return
 
 PokemonLeague_ChampionsRoom_EventScript_RematchIntro::
