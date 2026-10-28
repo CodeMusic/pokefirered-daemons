@@ -1449,7 +1449,10 @@ static u16 DexScreen_CountMonsInOrderedList(u8 orderIdx)
         }
         break;
     case DEX_ORDER_ATOZ:
-        for (i = 0; i < NUM_SPECIES - 1; i++)
+        //  T-470: every sort is bounded by its own table, never by a count it happens to match. A-Z ran to
+        //  NUM_SPECIES - 1 (411) over 422 names, so the last eleven alphabetically never showed. The tables may
+        //  hold numbers past max_n (the old UNOWN letters); the max_n test below skips them.
+        for (i = 0; i < ARRAY_COUNT(gPokedexOrder_Alphabetical); i++)
         {
             ndex_num = gPokedexOrder_Alphabetical[i];
             if (ndex_num <= max_n)
@@ -1466,7 +1469,7 @@ static u16 DexScreen_CountMonsInOrderedList(u8 orderIdx)
         }
         break;
     case DEX_ORDER_TYPE:
-        for (i = 0; i < NUM_SPECIES - 1; i++)
+        for (i = 0; i < ARRAY_COUNT(gPokedexOrder_Type); i++)
         {
             ndex_num = SpeciesToNationalPokedexNum(gPokedexOrder_Type[i]);
             if (ndex_num <= max_n)
@@ -1483,7 +1486,7 @@ static u16 DexScreen_CountMonsInOrderedList(u8 orderIdx)
         }
         break;
     case DEX_ORDER_LIGHTEST:
-        for (i = 0; i < NATIONAL_DEX_COUNT; i++)
+        for (i = 0; i < ARRAY_COUNT(gPokedexOrder_Weight); i++)
         {
             ndex_num = gPokedexOrder_Weight[i];
             if (ndex_num <= max_n)
@@ -1500,7 +1503,7 @@ static u16 DexScreen_CountMonsInOrderedList(u8 orderIdx)
         }
         break;
     case DEX_ORDER_SMALLEST:
-        for (i = 0; i < NATIONAL_DEX_COUNT; i++)
+        for (i = 0; i < ARRAY_COUNT(gPokedexOrder_Height); i++)
         {
             ndex_num = gPokedexOrder_Height[i];
             if (ndex_num <= max_n)
