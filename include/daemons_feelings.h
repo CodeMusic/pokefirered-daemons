@@ -19,6 +19,13 @@
 #define FEELINGS_MAX            100
 #define FEELINGS_CALM_MIN       (-100)
 
+// T-471: MAD shares the BEAUTY byte with vanilla's EVO_BEAUTY (FEEBAS, 170 or more). MAD never passes 100, so its top
+// bit is free: when the feelings first take the byte from a daemon whose BEAUTY was already high enough (one traded
+// in from a cartridge with POKeBLOCKS), that bit keeps it, and the evolution reads the bit (Feelings_EvolutionBeauty).
+#define FEELINGS_MAD_MASK       0x7F
+#define FEELINGS_BEAUTY_KEPT    0x80
+#define FEELINGS_BEAUTY_KEPT_AT 170     // FEEBAS's EVO_BEAUTY, src/data/pokemon/evolution.h
+
 #define FEELINGS_RIBBON_INIT    (1 << 0)
 #define FEELINGS_RIBBON_CLOCK   (1 << 1)
 
@@ -92,6 +99,7 @@ struct BoxPokemon;
 // Now, faded. A daemon never pushed (an old save, a trade, an egg) reads as zero.
 void Feelings_Get(struct BoxPokemon *boxMon, struct DaemonFeelings *out);
 bool8 Feelings_IsSet(struct BoxPokemon *boxMon);
+u8 Feelings_EvolutionBeauty(struct BoxPokemon *boxMon);    // T-471: what EVO_BEAUTY reads
 // A push: skipped for an empty slot, an egg or an AWAY daemon.
 void Feelings_Push(struct BoxPokemon *boxMon, s8 glad, s8 mad, s8 sad, s8 calm);
 // The clock, in ticks, and which one it is (DaemonsFeelingsNow, src/daemons_time.c).

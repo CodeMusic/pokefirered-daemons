@@ -223,9 +223,20 @@ void Feelings_Get(struct BoxPokemon *boxMon, struct DaemonFeelings *out)
         return;
     ticks = TicksSince(boxMon);
     out->glad = Faded(GetBoxMonData(boxMon, MON_DATA_COOL), ticks);
-    out->mad = Faded(GetBoxMonData(boxMon, MON_DATA_BEAUTY), ticks);
+    out->mad = Faded(GetBoxMonData(boxMon, MON_DATA_BEAUTY) & FEELINGS_MAD_MASK, ticks);
     out->sad = Faded(GetBoxMonData(boxMon, MON_DATA_CUTE), ticks);
     out->calm = FadedSigned((s8)GetBoxMonData(boxMon, MON_DATA_SMART), ticks);
+}
+
+// T-471: EVO_BEAUTY's reading. Before the first push the byte is still the daemon's own BEAUTY; after, MAD lives in
+// it and only the kept bit speaks for BEAUTY -- so a feeling can neither evolve a FEEBAS nor stop one evolving.
+u8 Feelings_EvolutionBeauty(struct BoxPokemon *boxMon)
+{
+    u8 byte = GetBoxMonData(boxMon, MON_DATA_BEAUTY);
+
+    if (!Feelings_IsSet(boxMon))
+        return byte;
+    return (byte & FEELINGS_BEAUTY_KEPT) ? FEELINGS_BEAUTY_KEPT_AT : 0;
 }
 
 static u8 Clamp(s16 v)
@@ -245,8 +256,14 @@ static void Store(struct BoxPokemon *boxMon, s16 glad, s16 mad, s16 sad, s16 cal
     u16 now = Feelings_Now(&fromClock);
     u8 g = Clamp(glad), m = Clamp(mad), s = Clamp(sad);
     s8 c = ClampCalm(calm);
+    u8 beauty = GetBoxMonData(boxMon, MON_DATA_BEAUTY);
     u8 ribbons = (GetBoxMonData(boxMon, MON_DATA_UNUSED_RIBBONS) & ~FEELINGS_RIBBON_CLOCK) | FEELINGS_RIBBON_INIT;
 
+    //  T-471: the byte is BEAUTY until the first push and MAD after; a BEAUTY that would already evolve is kept.
+    if (Feelings_IsSet(boxMon))
+        m |= beauty & FEELINGS_BEAUTY_KEPT;
+    else if (beauty >= FEELINGS_BEAUTY_KEPT_AT)
+        m |= FEELINGS_BEAUTY_KEPT;
     if (fromClock)
         ribbons |= FEELINGS_RIBBON_CLOCK;
     SetBoxMonData(boxMon, MON_DATA_COOL, &g);

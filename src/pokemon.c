@@ -5180,7 +5180,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem)
     u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, NULL);
     u8 level;
     u16 friendship;
-    u8 beauty = GetMonData(mon, MON_DATA_BEAUTY, NULL);
+    u8 beauty = Feelings_EvolutionBeauty(&mon->box);   // T-471: MAD shares the byte (src/daemons_feelings.c)
     u16 upperPersonality = personality >> 16;
     u8 holdEffect;
 
