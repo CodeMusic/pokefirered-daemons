@@ -627,78 +627,78 @@ const struct MonCoords gMonFrontPicCoords[] =
     },
     [SPECIES_ELECTABUZZ] =
     {
-        .size = MON_COORDS_SIZE(64, 64),
-        .y_offset = 4,
+        .size = MON_COORDS_SIZE(40, 56),
+        .y_offset = 6,
     },
     [SPECIES_MAGMAR] =
     {
-        .size = MON_COORDS_SIZE(64, 56),
-        .y_offset = 4,
+        .size = MON_COORDS_SIZE(32, 40),
+        .y_offset = 14,
     },
     [SPECIES_PINSIR] =
     {
-        .size = MON_COORDS_SIZE(56, 56),
-        .y_offset = 4,
+        .size = MON_COORDS_SIZE(40, 56),
+        .y_offset = 7,
     },
     [SPECIES_TAUROS] =
     {
-        .size = MON_COORDS_SIZE(64, 64),
-        .y_offset = 5,
+        .size = MON_COORDS_SIZE(56, 64),
+        .y_offset = 4,
     },
     [SPECIES_MAGIKARP] =
     {
-        .size = MON_COORDS_SIZE(56, 56),
-        .y_offset = 11,
-    },
-    [SPECIES_GYARADOS] =
-    {
-        .size = MON_COORDS_SIZE(64, 64),
-        .y_offset = 0,
-    },
-    [SPECIES_LAPRAS] =
-    {
-        .size = MON_COORDS_SIZE(64, 56),
-        .y_offset = 4,
-    },
-    [SPECIES_DITTO] =
-    {
-        .size = MON_COORDS_SIZE(40, 32),
-        .y_offset = 17,
-    },
-    [SPECIES_EEVEE] =
-    {
-        .size = MON_COORDS_SIZE(40, 48),
+        .size = MON_COORDS_SIZE(56, 40),
         .y_offset = 13,
     },
-    [SPECIES_VAPOREON] =
+    [SPECIES_GYARADOS] =
     {
         .size = MON_COORDS_SIZE(48, 56),
         .y_offset = 6,
     },
-    [SPECIES_JOLTEON] =
+    [SPECIES_LAPRAS] =
+    {
+        .size = MON_COORDS_SIZE(56, 40),
+        .y_offset = 13,
+    },
+    [SPECIES_DITTO] =
     {
         .size = MON_COORDS_SIZE(48, 48),
         .y_offset = 10,
     },
+    [SPECIES_EEVEE] =
+    {
+        .size = MON_COORDS_SIZE(32, 48),
+        .y_offset = 11,
+    },
+    [SPECIES_VAPOREON] =
+    {
+        .size = MON_COORDS_SIZE(48, 48),
+        .y_offset = 11,
+    },
+    [SPECIES_JOLTEON] =
+    {
+        .size = MON_COORDS_SIZE(56, 48),
+        .y_offset = 9,
+    },
     [SPECIES_FLAREON] =
+    {
+        .size = MON_COORDS_SIZE(40, 40),
+        .y_offset = 13,
+    },
+    [SPECIES_PORYGON] =
+    {
+        .size = MON_COORDS_SIZE(40, 40),
+        .y_offset = 13,
+    },
+    [SPECIES_OMANYTE] =
     {
         .size = MON_COORDS_SIZE(56, 48),
         .y_offset = 11,
     },
-    [SPECIES_PORYGON] =
-    {
-        .size = MON_COORDS_SIZE(40, 48),
-        .y_offset = 11,
-    },
-    [SPECIES_OMANYTE] =
-    {
-        .size = MON_COORDS_SIZE(32, 40),
-        .y_offset = 15,
-    },
     [SPECIES_OMASTAR] =
     {
-        .size = MON_COORDS_SIZE(48, 56),
-        .y_offset = 7,
+        .size = MON_COORDS_SIZE(56, 64),
+        .y_offset = 2,
     },
     [SPECIES_KABUTO] =
     {
@@ -982,13 +982,13 @@ const struct MonCoords gMonFrontPicCoords[] =
     },
     [SPECIES_ESPEON] =
     {
-        .size = MON_COORDS_SIZE(48, 48),
-        .y_offset = 8,
+        .size = MON_COORDS_SIZE(32, 40),
+        .y_offset = 13,
     },
     [SPECIES_UMBREON] =
     {
-        .size = MON_COORDS_SIZE(48, 56),
-        .y_offset = 8,
+        .size = MON_COORDS_SIZE(40, 56),
+        .y_offset = 5,
     },
     [SPECIES_MURKROW] =
     {
@@ -1167,8 +1167,8 @@ const struct MonCoords gMonFrontPicCoords[] =
     },
     [SPECIES_PORYGON2] =
     {
-        .size = MON_COORDS_SIZE(40, 40),
-        .y_offset = 15,
+        .size = MON_COORDS_SIZE(48, 32),
+        .y_offset = 17,
     },
     [SPECIES_STANTLER] =
     {
@@ -1197,13 +1197,13 @@ const struct MonCoords gMonFrontPicCoords[] =
     },
     [SPECIES_ELEKID] =
     {
-        .size = MON_COORDS_SIZE(56, 48),
-        .y_offset = 10,
+        .size = MON_COORDS_SIZE(48, 40),
+        .y_offset = 14,
     },
     [SPECIES_MAGBY] =
     {
-        .size = MON_COORDS_SIZE(32, 40),
-        .y_offset = 13,
+        .size = MON_COORDS_SIZE(32, 48),
+        .y_offset = 10,
     },
     [SPECIES_MILTANK] =
     {
