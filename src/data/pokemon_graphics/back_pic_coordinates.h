@@ -1007,8 +1007,8 @@ const struct MonCoords gMonBackPicCoords[] =
     },
     [SPECIES_UNOWN] =
     {
-        .size = MON_COORDS_SIZE(24, 48),
-        .y_offset = 8,
+        .size = MON_COORDS_SIZE(40, 48),
+        .y_offset = 10,
     },
     [SPECIES_WOBBUFFET] =
     {
@@ -2071,52 +2071,52 @@ const struct MonCoords gMonBackPicCoords[] =
     [SPECIES_UNOWN_B] =
     {
         .size = MON_COORDS_SIZE(40, 48),
-        .y_offset = 9,
+        .y_offset = 10,
     },
     [SPECIES_UNOWN_C] =
     {
-        .size = MON_COORDS_SIZE(48, 56),
-        .y_offset = 6,
+        .size = MON_COORDS_SIZE(40, 48),
+        .y_offset = 10,
     },
     [SPECIES_UNOWN_D] =
     {
         .size = MON_COORDS_SIZE(40, 48),
-        .y_offset = 8,
+        .y_offset = 11,
     },
     [SPECIES_UNOWN_E] =
     {
         .size = MON_COORDS_SIZE(40, 48),
-        .y_offset = 10,
+        .y_offset = 11,
     },
     [SPECIES_UNOWN_F] =
     {
-        .size = MON_COORDS_SIZE(48, 48),
+        .size = MON_COORDS_SIZE(32, 48),
         .y_offset = 10,
     },
     [SPECIES_UNOWN_G] =
     {
-        .size = MON_COORDS_SIZE(40, 56),
-        .y_offset = 5,
+        .size = MON_COORDS_SIZE(40, 48),
+        .y_offset = 10,
     },
     [SPECIES_UNOWN_H] =
     {
-        .size = MON_COORDS_SIZE(48, 48),
-        .y_offset = 8,
+        .size = MON_COORDS_SIZE(40, 48),
+        .y_offset = 10,
     },
     [SPECIES_UNOWN_I] =
     {
-        .size = MON_COORDS_SIZE(24, 56),
-        .y_offset = 7,
+        .size = MON_COORDS_SIZE(16, 48),
+        .y_offset = 10,
     },
     [SPECIES_UNOWN_J] =
     {
         .size = MON_COORDS_SIZE(32, 48),
-        .y_offset = 9,
+        .y_offset = 10,
     },
     [SPECIES_UNOWN_K] =
     {
-        .size = MON_COORDS_SIZE(40, 56),
-        .y_offset = 7,
+        .size = MON_COORDS_SIZE(40, 48),
+        .y_offset = 9,
     },
     [SPECIES_UNOWN_L] =
     {
@@ -2125,18 +2125,18 @@ const struct MonCoords gMonBackPicCoords[] =
     },
     [SPECIES_UNOWN_M] =
     {
-        .size = MON_COORDS_SIZE(48, 40),
-        .y_offset = 13,
+        .size = MON_COORDS_SIZE(40, 48),
+        .y_offset = 10,
     },
     [SPECIES_UNOWN_N] =
     {
-        .size = MON_COORDS_SIZE(48, 40),
-        .y_offset = 13,
+        .size = MON_COORDS_SIZE(40, 48),
+        .y_offset = 10,
     },
     [SPECIES_UNOWN_O] =
     {
-        .size = MON_COORDS_SIZE(48, 48),
-        .y_offset = 8,
+        .size = MON_COORDS_SIZE(40, 48),
+        .y_offset = 10,
     },
     [SPECIES_UNOWN_P] =
     {
@@ -2145,63 +2145,63 @@ const struct MonCoords gMonBackPicCoords[] =
     },
     [SPECIES_UNOWN_Q] =
     {
-        .size = MON_COORDS_SIZE(40, 40),
-        .y_offset = 15,
+        .size = MON_COORDS_SIZE(48, 48),
+        .y_offset = 9,
     },
     [SPECIES_UNOWN_R] =
     {
-        .size = MON_COORDS_SIZE(32, 40),
-        .y_offset = 12,
+        .size = MON_COORDS_SIZE(40, 48),
+        .y_offset = 10,
     },
     [SPECIES_UNOWN_S] =
     {
-        .size = MON_COORDS_SIZE(40, 56),
-        .y_offset = 4,
+        .size = MON_COORDS_SIZE(40, 48),
+        .y_offset = 10,
     },
     [SPECIES_UNOWN_T] =
     {
-        .size = MON_COORDS_SIZE(32, 40),
-        .y_offset = 13,
+        .size = MON_COORDS_SIZE(40, 48),
+        .y_offset = 10,
     },
     [SPECIES_UNOWN_U] =
     {
-        .size = MON_COORDS_SIZE(48, 40),
-        .y_offset = 13,
+        .size = MON_COORDS_SIZE(40, 48),
+        .y_offset = 9,
     },
     [SPECIES_UNOWN_V] =
     {
         .size = MON_COORDS_SIZE(40, 48),
-        .y_offset = 11,
+        .y_offset = 10,
     },
     [SPECIES_UNOWN_W] =
     {
-        .size = MON_COORDS_SIZE(40, 40),
-        .y_offset = 13,
+        .size = MON_COORDS_SIZE(56, 48),
+        .y_offset = 10,
     },
     [SPECIES_UNOWN_X] =
     {
-        .size = MON_COORDS_SIZE(40, 40),
-        .y_offset = 15,
+        .size = MON_COORDS_SIZE(40, 48),
+        .y_offset = 10,
     },
     [SPECIES_UNOWN_Y] =
     {
-        .size = MON_COORDS_SIZE(32, 48),
+        .size = MON_COORDS_SIZE(40, 48),
         .y_offset = 10,
     },
     [SPECIES_UNOWN_Z] =
     {
-        .size = MON_COORDS_SIZE(32, 48),
-        .y_offset = 10,
+        .size = MON_COORDS_SIZE(40, 48),
+        .y_offset = 11,
     },
     [SPECIES_UNOWN_EMARK] =
     {
-        .size = MON_COORDS_SIZE(24, 56),
-        .y_offset = 6,
+        .size = MON_COORDS_SIZE(16, 48),
+        .y_offset = 10,
     },
     [SPECIES_UNOWN_QMARK] =
     {
-        .size = MON_COORDS_SIZE(32, 56),
-        .y_offset = 6,
+        .size = MON_COORDS_SIZE(32, 48),
+        .y_offset = 10,
     },
 };
 
