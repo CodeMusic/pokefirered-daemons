@@ -29,17 +29,22 @@
 #include "constants/event_object_movement.h"
 #include "constants/quest_log.h"
 #include "data/follower_palettes.h"
+#include "data/follower_gfx.h"
 #include "daemons_feelings.h"
 #include "reveal.h"
 
 //  T-18 P1: THE FOLLOWER -- it walks and hides (the user decided the plan 2026-10-20; every rule below is the plan's).
 //
-//  WHAT IT IS. The first party daemon that is not an egg, not HALTED (0 HP) and not AWAY, drawn as its own party icon
-//  (no new art: graphics/pokemon/*/icon.png, two 32x32 frames) at 1x, one tile behind the player. Its colours are its
+//  WHAT IT IS. The first party daemon that is not an egg, not HALTED (0 HP) and not AWAY, drawn at 1x one tile behind
+//  the player as its FOLLOWER PICTURE: one 32x32 frame, the creature at most 20 tall and 22 wide on row 28
+//  (src/data/follower_gfx.h, DAEMONS tools/gbafollower.py -- T-464: the party icons became 28px busts, and the
+//  follower walked larger than the player's 16x22). A species with no picture there has an icon that already fits,
+//  and walks as its icon's first frame. Its colours are its
 //  TYPE's (src/data/follower_palettes.h, DAEMONS tools/gbafollowerpal.py: the icon's shared palette remapped to the
 //  nearest colours of its front palette, so invariant 5 holds), greyed by friendship with T-424's own curve, then put
 //  in the field's light and weather as every person is. Icons face left; facing right is the same frame flipped. A
-//  1 px hop in the middle of each tile it walks is its step (387 of 396 icons have two identical frames).
+//  1 px hop in the middle of each tile it walks is its step (387 of 396 icons have two identical frames, so the
+//  picture is one).
 //
 //  HOW IT FOLLOWS. Not an object event: one SPRITE, which takes no object slot (so no map is too full for it), blocks
 //  nothing and nobody (so the player, a trainer walking up or a scripted path never stops at it), is never saved and
@@ -66,7 +71,7 @@
 #define EMOJI_TAG        0x5419   // the daemon-emoji's palette, only while it shows (T-431 P3)
 #define SENSE_TAG        0x541A   // the subtle layer's ripple and glint: their palette, only while they show (T-459)
 #define TRAIL            16       // pixels behind the player: one tile
-#define FOLLOWER_Y       2        // the icon's body ends two rows above its cell; this puts it on the ground
+#define FOLLOWER_Y       2        // its picture's lowest row is row 28 (gbafollower.py); this puts it on the player's feet
 #define MAX_JUMP         32       // a move bigger than this in one frame is a warp, not a step
 #define RETRY_FRAMES     30       // after a failed spawn (no palette slot, no sprite), try again this often
 #define CHECK_FRAMES     8        // the lead and its friendship are read this often
@@ -382,6 +387,14 @@ static bool8 StandBehind(struct ObjectEvent *playerObj)
     return TRUE;
 }
 
+// T-464: its own picture when its icon is too big to walk beside the player, else its icon's first frame.
+static const u8 *FollowerPic(u16 species)
+{
+    if (species < ARRAY_COUNT(sFollowerPics) && sFollowerPics[species] != NULL)
+        return sFollowerPics[species];
+    return GetMonIconTiles(species, FALSE);
+}
+
 static void Spawn(s8 slot, struct Sprite *player, struct ObjectEvent *playerObj)
 {
     struct SpriteSheet sheet;
@@ -389,8 +402,8 @@ static void Spawn(s8 slot, struct Sprite *player, struct ObjectEvent *playerObj)
 
     ReadLead(slot, &sFollower.species, &sFollower.personality, &sFollower.friendship, &sFollower.shiny);
     FreeSpriteTilesByTag(FOLLOWER_TAG);
-    sheet.data = GetMonIconTiles(sFollower.species, FALSE);
-    sheet.size = 0x400;   // both frames
+    sheet.data = FollowerPic(sFollower.species);
+    sheet.size = 0x200;   // one 32x32 frame
     sheet.tag = FOLLOWER_TAG;
     LoadSpriteSheet(&sheet);
     idx = LoadFollowerPalette();
@@ -825,7 +838,7 @@ static void Place(struct Sprite *sprite, struct Sprite *player, struct ObjectEve
     sprite->y2 = sFollower.y2 - (moving && inTile >= 4 && inTile < 12 ? 1 : 0);   // its step: a 1 px hop
     sprite->oam.priority = player->oam.priority;
     sprite->oam.matrixNum = sFollower.facing == DIR_EAST ? ST_OAM_HFLIP : 0;   // icons face left
-    sprite->oam.tileNum = sprite->sheetTileStart + ((sFollower.steps / TRAIL) & 1) * 16;   // its two frames
+    sprite->oam.tileNum = sprite->sheetTileStart;   // one frame; the hop above is its step
     sprite->invisible = dist < TRAIL / 2;   // still inside the player: walking out of them
     FindTile(sprite->x, player->y - sFollower.sumY);
     if (sFollower.sceneHidden || SomeoneInItsTile())
