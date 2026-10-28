@@ -437,8 +437,8 @@ const struct MonCoords gMonFrontPicCoords[] =
     },
     [SPECIES_DEWGONG] =
     {
-        .size = MON_COORDS_SIZE(56, 48),
-        .y_offset = 11,
+        .size = MON_COORDS_SIZE(64, 56),
+        .y_offset = 7,
     },
     [SPECIES_GRIMER] =
     {
@@ -492,7 +492,7 @@ const struct MonCoords gMonFrontPicCoords[] =
     },
     [SPECIES_KRABBY] =
     {
-        .size = MON_COORDS_SIZE(64, 48),
+        .size = MON_COORDS_SIZE(64, 56),
         .y_offset = 8,
     },
     [SPECIES_KINGLER] =
@@ -507,8 +507,8 @@ const struct MonCoords gMonFrontPicCoords[] =
     },
     [SPECIES_ELECTRODE] =
     {
-        .size = MON_COORDS_SIZE(48, 48),
-        .y_offset = 9,
+        .size = MON_COORDS_SIZE(64, 56),
+        .y_offset = 5,
     },
     [SPECIES_EXEGGCUTE] =
     {
@@ -1187,8 +1187,8 @@ const struct MonCoords gMonFrontPicCoords[] =
     },
     [SPECIES_HITMONTOP] =
     {
-        .size = MON_COORDS_SIZE(40, 56),
-        .y_offset = 7,
+        .size = MON_COORDS_SIZE(40, 48),
+        .y_offset = 8,
     },
     [SPECIES_SMOOCHUM] =
     {
