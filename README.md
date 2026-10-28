@@ -10,14 +10,20 @@ from that.
 
 **This repository is the engine, and the game is here.** The design lives next
 door in [**CodeMusic/DAEMONS**][daemons] — a design bible, a changelog, the
-lineage of the ideas, and every tool that writes into this tree. How to play,
-how to build and how a release is made are on the [**DAEMONS wiki**][wiki]. The
+lineage of the ideas, and every tool that writes into this tree. **This
+engine's own [wiki][enginewiki]** covers the fork: what it is, building it, the
+debug build and where things live in the tree. How to play, the world, the
+companion and how a release is made are on the [**DAEMONS wiki**][wiki]. The
 Game Boy build, [**CodeMusic/pokered-daemons**][gb], is where the vertical slice
 was built; it is kept as a reference and is not updated further.
 
 **No ROM is distributed.** Releases are BPS patches for a cartridge you own,
-published on the [DAEMONS releases page][releases] (latest: **v11.304.6**,
-2026-10-18).
+published on the [DAEMONS releases page][releases] (latest: **v11.315.4**,
+2026-10-28), four to a release: CONTENT for *FireRed* 1.0 and Rev 1, CONTEXT
+for *LeafGreen* 1.0 and Rev 1. The game also plays in a browser on
+[**daemons-playground**][playground] (a private network only), and in the
+companion's [one app][oneapp] on an iPhone or iPad, which patches the player's
+own ROM on the device.
 
 ## Why this fork exists
 
@@ -107,9 +113,25 @@ working build; write the `.json`.
 Everything below is in both editions unless it says otherwise. Every new
 in-game word is still a **DRAFT** until it is approved.
 
-- **Every daemon is ours.** All 386 species are renamed, plus nine new ones in
-  slots vanilla left unused; the INDEX's 395 entries are rewritten, and each
-  edition says something different about every one of them.
+- **Every daemon is ours.** All 386 species are renamed, plus twelve new ones
+  in slots vanilla left unused; the INDEX's 398 entries are rewritten, and each
+  edition says something different about every one of them. Three of the new
+  ones are a line that grows **only while carried** on the companion.
+- **Drawn again, in a style of their own** (T-452): the daemons are being
+  redrawn as big, readable pixel portraits — front, back and a party icon,
+  coloured by type — in batches of about twenty, each built after a sheet and
+  a yes. About two hundred are in so far; the rest are in progress.
+- **A follower at the player's size** (T-464): the lead daemon walks behind
+  you as its own small picture, at most 20 pixels tall, in its icon's palette.
+  348 species have one; `tools/gbafollower.py` writes them and fails on any
+  that grows too large.
+- **Feelings, never named**: the game reads GLAD, MAD, SAD and CALM from play
+  as the companion does, shown on the follower and a SUMMARY page, never as a
+  status.
+- **Landmarks drawn from the story** (T-447): the buildings the story turns
+  on get art of their own, a pair at a time (three pairs so far), and **a
+  region map in the game's own look** (T-449): paper and ink, the sea a
+  shuffle of bits and notes, the same shape so navigation is unchanged.
 - **Seventeen types**: the fifteen names of the chart, plus `HARDENED` and
   `OPAQUE` in the Steel and Dark slots. The matchup table's one change from
   vanilla is `CONTEXT ↔ LATENT`, mutual 2×. All 77 abilities are renamed.
@@ -145,7 +167,13 @@ in-game word is still a **DRAFT** until it is approved.
   hour, the season.
 - **The NOTEBOOK**: the pages the player finds and writes, in sections, each
   saying where it was found — among them a DREAM LOG, opened with "I had a
-  dream." at the dawn after a milestone.
+  dream." at the dawn after a milestone. **ITS DREAMS** (T-462, DRAFT) files
+  the dreams a daemon had while carried on the companion, written into the
+  save at SYNC.
+- **Two books to find**, THE GUIDE and THE SUBTLE LAYER. Once the second is
+  held, the player starts to notice things, marked in its purple, and the
+  NOTEBOOK keeps an honest log of what landed; three values it describes
+  quietly tune a daemon's CONTEXT routines in battle, and are never saved.
 - **The MARKS and what they pair with.** Each of the eight MARKS prints a
   virtue over its shadow; a MARK and what it pairs with, held together, each
   say how the other balances it, and when every pair is held a last note
@@ -154,13 +182,17 @@ in-game word is still a **DRAFT** until it is approved.
 - **NATIVE** on the INDEX's area page, in place of the size comparison: where
   a daemon belongs, and the hours, seasons and weathers it keeps.
 - **SEND and AWAY**: a party daemon can be sent to the
-  [companion][companion] — a phone or a board hosts it — and comes home with
-  what it learned.
+  [companion][companion] — a phone, a watch or a board hosts it — and comes
+  home with what it learned. While it is away the game can hear how it is
+  doing (SOUNDINGS, written by the companion into two spare bits of the
+  daemon's record), and a daemon can even come home evolved.
+- **Every routine signed**: each of the 363 routines carries a signature of
+  its own in battle — nine glyphs of bits and a three-note figure in its
+  type's key.
 
 What is decided and **not built yet** is in the DAEMONS [TODO list][todo] —
-among it routine animations that carry the game's own signature, its binary
-and its notes, and the HARP and FLUTE taking the project's own voices, as the
-companion already plays them.
+among it the rest of the daemons' new art, the rest of the landmarks, and the
+cave preview screens, still vanilla's.
 
 ## How much of it is ours
 
@@ -262,4 +294,7 @@ to pret and its contributors.
 [releases]: https://github.com/CodeMusic/DAEMONS/releases
 [todo]: https://github.com/CodeMusic/DAEMONS/blob/main/docs/TODO.md
 [companion]: https://github.com/CodeMusic/daemons-companion
+[enginewiki]: https://github.com/CodeMusic/pokefirered-daemons/wiki
+[playground]: https://github.com/CodeMusic/daemons-playground
+[oneapp]: https://github.com/CodeMusic/daemons-companion/wiki/The-one-app
 [gb]: https://github.com/CodeMusic/pokered-daemons
