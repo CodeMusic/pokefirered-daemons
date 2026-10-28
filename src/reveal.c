@@ -187,6 +187,61 @@ static bool8 IsUnfound(const struct BgEvent *e)
     return IsShown(e);
 }
 
+//  T-459 B: the flag that says E has been found, while it is still unfound (IsUnfound's set); 0 otherwise.
+static u16 FoundFlag(const struct BgEvent *e)
+{
+    u32 i;
+
+    if (!IsUnfound(e))
+        return 0;
+    if (e->kind == BG_KIND_HIDDEN_ITEM)
+        return GetHiddenItemAttr(e->bgUnion.hiddenItem, HIDDEN_ITEM_FLAG);
+    for (i = 0; i < ARRAY_COUNT(sFinds); i++)
+        if (e->bgUnion.script == sFinds[i].script)
+            return sFinds[i].foundFlag;
+    for (i = 0; i < ARRAY_COUNT(sNotebookFinds); i++)
+        if (e->bgUnion.script == sNotebookFinds[i].script && !FlagGet(sNotebookFinds[i].readFlag))
+            return sNotebookFinds[i].readFlag;
+    if (e->bgUnion.script == Route21_North_Station_EventScript_VisitorLog)
+        return FLAG_ARTSAI_BOUND;
+    for (i = 0; i < ARRAY_COUNT(sGroveTrees); i++)
+        if (e->bgUnion.script == sGroveTrees[i])
+            return FLAG_VIRIDIAN_FOREST_GROVE_FOUND + i / 2;
+    return 0;
+}
+
+//  T-459 B: what a read can be about -- every thing still unfound anywhere on this map, in bg_event order.
+u8 Reveal_UnfoundCount(void)
+{
+    const struct MapEvents *events = gMapHeader.events;
+    u8 n = 0;
+    u32 i;
+
+    for (i = 0; i < events->bgEventCount; i++)
+        if (FoundFlag(&events->bgEvents[i]) != 0)
+            n++;
+    return n;
+}
+
+u16 Reveal_UnfoundNth(u8 n, s16 *x, s16 *y)
+{
+    const struct MapEvents *events = gMapHeader.events;
+    u16 flag;
+    u32 i;
+
+    for (i = 0; i < events->bgEventCount; i++)
+    {
+        flag = FoundFlag(&events->bgEvents[i]);
+        if (flag != 0 && n-- == 0)
+        {
+            *x = events->bgEvents[i].x;
+            *y = events->bgEvents[i].y;
+            return flag;
+        }
+    }
+    return 0;
+}
+
 bool8 Reveal_NearestUnfound(s16 *x, s16 *y)
 {
     const struct MapEvents *events = gMapHeader.events;

@@ -40,6 +40,14 @@ Daemons_EventScript_Insight::
 	releaseall
 	end
 
+@  T-459 B: a read, the first step on a map, now and then, once THE SUBTLE LAYER is held. daemons_reads.c's
+@  Daemons_TryReadArrives leaves it in gStringVar4, in the book's purple; it is written in the NOTEBOOK's log as it is said.
+Daemons_EventScript_Read::
+	lockall
+	msgbox gStringVar4
+	releaseall
+	end
+
 @  T-412: a dream, the first step after the first dawn after a milestone (or after a load on a later day). notebook.c's
 @  Daemons_TryDreamArrives leaves its line and the dream in gStringVar4; it is filed in the DREAM LOG as it is said.
 Daemons_EventScript_Dream::

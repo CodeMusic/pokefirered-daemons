@@ -1,4 +1,5 @@
 #include "global.h"
+#include "daemons_reads.h"   // T-459 B: THE LOG
 #include "gflib.h"
 #include "event_data.h"
 #include "list_menu.h"
@@ -58,6 +59,7 @@ enum
     NB_SONGBOOK,           // T-417: the songs PLAY knows, written as coloured notes
     NB_THE_YEAR,           // T-416: a line for a day of the year, as it arrives (DRAFT)
     NB_DREAM_LOG,          // T-412: YOUR DREAMS, each the first dawn after a milestone (DRAFT)
+    NB_READS,              // T-459 B: THE LOG -- reads on arrival and leans in battle, counted (DRAFT)
     NB_SECTION_COUNT
 };
 
@@ -72,7 +74,8 @@ enum
 //  T-417: SONG is a SONGBOOK page -- ARG is its song (PLAY_SONG_*), and play.c writes it and its notes.
 //  T-412: HER_DREAM is one of the attendant's dreams in the DREAM LOG -- ARG is its step, and where it led is written
 //  under its words once the step is done.
-enum { NB_KIND_TEXT, NB_KIND_EXAM, NB_KIND_CHOICES, NB_KIND_SONG, NB_KIND_HER_DREAM };
+//  T-459 B: READS is THE LOG, written on demand from the vars daemons_reads.c and daemons_three.c keep.
+enum { NB_KIND_TEXT, NB_KIND_EXAM, NB_KIND_CHOICES, NB_KIND_SONG, NB_KIND_HER_DREAM, NB_KIND_READS };
 
 struct NotebookEntry
 {
@@ -95,6 +98,8 @@ static const u8 sSection_Prospectus[]     = _("PROSPECTUS");
 static const u8 sSection_PeerReview[]     = _("PEER REVIEW");
 static const u8 sSection_Insight[]        = _("INSIGHT");
 static const u8 sSection_Songbook[]       = _("SONGBOOK");   // T-417, DRAFT
+static const u8 sSection_Reads[]          = _("READS");      // T-459 B, DRAFT
+static const u8 sTitle_Reads_Log[]        = _("THE LOG");    // T-459 B, DRAFT
 
 extern const u8 gText_YearSection[];   // T-416: THE YEAR, src/daemons_holidays.c
 
@@ -117,6 +122,7 @@ static const u8 *const sSectionNames[NB_SECTION_COUNT] =
     [NB_SONGBOOK]        = sSection_Songbook,
     [NB_THE_YEAR]        = gText_YearSection,   // T-416, src/daemons_holidays.c (DAEMONS tools/genholidays.py)
     [NB_DREAM_LOG]       = sSection_DreamLog,   // T-412, DRAFT (data/dream_log.h)
+    [NB_READS]           = sSection_Reads,      // T-459 B
 };
 
 static const u8 sText_Close[] = _("CLOSE");
@@ -491,6 +497,8 @@ static const struct NotebookEntry sEntries[] =
     NB_DREAM_ENTRIES
     //  T-412: then HER DREAMS, in step order, each once the attendant has told it.
     NB_HER_DREAM_ENTRIES
+    //  T-459 B: THE LOG, once THE SUBTLE LAYER is held -- the reads and the leans, counted, and the last few reads.
+    { NB_READS,        NB_KIND_READS, 0, FLAG_GOT_SUBTLE_LAYER,        0, sTitle_Reads_Log,           NULL },
 };
 
 #if DAEMONS_DEBUG
@@ -1065,6 +1073,8 @@ void Notebook_LoadEntry(void)
         School_WriteExamRecord(gStringVar4);
     else if (sEntries[gSpecialVar_0x8006].kind == NB_KIND_CHOICES)
         Notebook_WriteChoices(gStringVar4);
+    else if (sEntries[gSpecialVar_0x8006].kind == NB_KIND_READS)
+        Daemons_WriteReadsLog(gStringVar4);   // T-459 B
     else if (sEntries[gSpecialVar_0x8006].kind == NB_KIND_SONG)
         Play_WriteSongPage(sEntries[gSpecialVar_0x8006].arg, gStringVar4);   // T-417
     else if (sEntries[gSpecialVar_0x8006].kind == NB_KIND_HER_DREAM)          // T-412: her dream, and where it led

@@ -6,5 +6,7 @@ void Reveal_Update(void);      // every overworld frame
 void Reveal_OnMapLoad(void);   // on arrival: shimmer soon, then keep on
 // T-459: the nearest unfound thing within a screen -- what the follower notices once THE SUBTLE LAYER is held.
 bool8 Reveal_NearestUnfound(s16 *x, s16 *y);
+u8 Reveal_UnfoundCount(void);                       // T-459 B: things still unfound anywhere on this map
+u16 Reveal_UnfoundNth(u8 n, s16 *x, s16 *y);        // T-459 B: the Nth, where (no MAP_OFFSET), and its found flag
 
 #endif // GUARD_REVEAL_H

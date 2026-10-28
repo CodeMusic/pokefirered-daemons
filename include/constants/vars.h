@@ -253,18 +253,18 @@
 #define VAR_OTHER_CAVE_LIGHT       0x40C5 // T-438: OTHER CAVE's visits, 1..4 round again -- its light (n - 1) and its wild set (0 never entered)
 #define VAR_LEANS_TOLD             0x40C6 // T-459 C: leans in battle whose turn came (the NOTEBOOK's count)
 #define VAR_LEANS_LANDED           0x40C7 // T-459 C: ... and of those, the ones that landed
-#define VAR_0x40C8                 0x40C8
-#define VAR_0x40C9                 0x40C9
-#define VAR_0x40CA                 0x40CA
-#define VAR_0x40CB                 0x40CB
-#define VAR_0x40CC                 0x40CC
-#define VAR_0x40CD                 0x40CD
+#define VAR_READS_GIVEN            0x40C8 // T-459 B: reads given on arrival (the NOTEBOOK's count)
+#define VAR_READS_LANDED           0x40C9 // T-459 B: ... and of those, the ones whose thing was found
+#define VAR_READ_LOG_WHERE         0x40CA // T-459 B: THE LOG's newest read -- its mapsec, phrase, LANDED (daemons_reads.c)
+#define VAR_READ_LOG_WHERE_1       0x40CB // T-459 B: VAR_READ_LOG_WHERE + 1, the next newest
+#define VAR_READ_LOG_WHERE_2       0x40CC // T-459 B: + 2
+#define VAR_READ_LOG_WHERE_3       0x40CD // T-459 B: + 3, the oldest kept (READ_LOG 4)
 #define VAR_0x40CE                 0x40CE
 #define VAR_FRONTIER_FACILITY      0x40CF
-#define VAR_0x40D0                 0x40D0
-#define VAR_0x40D1                 0x40D1
-#define VAR_0x40D2                 0x40D2
-#define VAR_0x40D3                 0x40D3
+#define VAR_READ_LOG_THING         0x40D0 // T-459 B: the flag that says the newest read's thing was found, 0 none
+#define VAR_READ_LOG_THING_1       0x40D1 // T-459 B: VAR_READ_LOG_THING + 1
+#define VAR_READ_LOG_THING_2       0x40D2 // T-459 B: + 2
+#define VAR_READ_LOG_THING_3       0x40D3 // T-459 B: + 3
 #define VAR_0x40D4                 0x40D4
 #define VAR_0x40D5                 0x40D5
 #define VAR_0x40D6                 0x40D6

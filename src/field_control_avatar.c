@@ -31,6 +31,7 @@
 #include "pokedex_screen.h"   // T-203
 #include "notebook.h"         // T-390: an insight arrives, in every build
 #include "daemons_carried.h"  // T-448: what the companion brought, said once
+#include "daemons_reads.h"   // T-459 B: a read
 #include "school_lift.h"
 
 // T-196: the label the popup carries while an echo is on screen.
@@ -951,6 +952,12 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
             if (Daemons_TryCarriedMoves())
             {
                 ScriptContext_SetupScript(Daemons_EventScript_CarriedMoves);
+                return TRUE;
+            }
+            //  T-459 B. And last: the first step on a map, now and then, once THE SUBTLE LAYER is held -- a read.
+            if (Daemons_TryReadArrives())
+            {
+                ScriptContext_SetupScript(Daemons_EventScript_Read);
                 return TRUE;
             }
         }
