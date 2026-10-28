@@ -18,7 +18,7 @@ Game Boy build, [**CodeMusic/pokered-daemons**][gb], is where the vertical slice
 was built; it is kept as a reference and is not updated further.
 
 **No ROM is distributed.** Releases are BPS patches for a cartridge you own,
-published on the [DAEMONS releases page][releases] (latest: **v11.315.4**,
+published on the [DAEMONS releases page][releases] (latest: **v11.315.5**,
 2026-10-28), four to a release: CONTENT for *FireRed* 1.0 and Rev 1, CONTEXT
 for *LeafGreen* 1.0 and Rev 1. The game also plays in a browser on
 [**daemons-playground**][playground] (a private network only), and in the
@@ -119,8 +119,8 @@ in-game word is still a **DRAFT** until it is approved.
   ones are a line that grows **only while carried** on the companion.
 - **Drawn again, in a style of their own** (T-452): the daemons are being
   redrawn as big, readable pixel portraits — front, back and a party icon,
-  coloured by type — in batches of about twenty, each built after a sheet and
-  a yes. About two hundred are in so far; the rest are in progress.
+  coloured by type — in batches of about twenty, each built after a sheet of
+  choices. About 265 are in so far; the rest are in progress.
 - **A follower at the player's size** (T-464): the lead daemon walks behind
   you as its own small picture, at most 20 pixels tall, in its icon's palette.
   348 species have one; `tools/gbafollower.py` writes them and fails on any
