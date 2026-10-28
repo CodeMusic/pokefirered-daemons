@@ -7,7 +7,8 @@ type chart is an argument about consciousness; this tree is the GBA game that ma
 This wiki is about **the fork**: what it is, how to build it, the debug build, and where DAEMONS' own code lives in the
 tree. Everything about the game itself -- playing it, the world, the editions, the companion, the releases -- is on
 **[the DAEMONS wiki](https://github.com/CodeMusic/DAEMONS/wiki)**, and the design is in
-[`docs/vision.md`](https://github.com/CodeMusic/DAEMONS/blob/main/docs/vision.md) there.
+[`docs/vision.md`](https://github.com/CodeMusic/DAEMONS/blob/main/docs/vision.md) there. To play it, start with
+**[the player's manual](https://github.com/CodeMusic/DAEMONS/blob/main/docs/DAEMONS-manual.pdf)** (PDF).
 
 ## Pages
 

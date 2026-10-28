@@ -17,8 +17,11 @@ companion and how a release is made are on the [**DAEMONS wiki**][wiki]. The
 Game Boy build, [**CodeMusic/pokered-daemons**][gb], is where the vertical slice
 was built; it is kept as a reference and is not updated further.
 
+**To play it, read [the player's manual][manual]** (a PDF in the design repo): every way to play, the world, the
+daemons and the seventeen types, the BENCHMARKS, the INDEX, the NOTEBOOK, PLAY and the companion, and a glossary.
+
 **No ROM is distributed.** Releases are BPS patches for a cartridge you own,
-published on the [DAEMONS releases page][releases] (latest: **v11.315.5**,
+published on the [DAEMONS releases page][releases] (latest: **v11.316.5**,
 2026-10-28), four to a release: CONTENT for *FireRed* 1.0 and Rev 1, CONTEXT
 for *LeafGreen* 1.0 and Rev 1. The game also plays in a browser on
 [**daemons-playground**][playground] (a private network only), and in the
@@ -120,7 +123,7 @@ in-game word is still a **DRAFT** until it is approved.
 - **Drawn again, in a style of their own** (T-452): the daemons are being
   redrawn as big, readable pixel portraits — front, back and a party icon,
   coloured by type — in batches of about twenty, each built after a sheet of
-  choices. About 265 are in so far; the rest are in progress.
+  choices. About 349 are in so far; the rest are in progress.
 - **A follower at the player's size** (T-464): the lead daemon walks behind
   you as its own small picture, at most 20 pixels tall, in its icon's palette.
   348 species have one; `tools/gbafollower.py` writes them and fails on any
@@ -291,6 +294,7 @@ to pret and its contributors.
 [pret]: https://github.com/pret/pokefirered
 [daemons]: https://github.com/CodeMusic/DAEMONS
 [wiki]: https://github.com/CodeMusic/DAEMONS/wiki
+[manual]: https://github.com/CodeMusic/DAEMONS/blob/main/docs/DAEMONS-manual.pdf
 [releases]: https://github.com/CodeMusic/DAEMONS/releases
 [todo]: https://github.com/CodeMusic/DAEMONS/blob/main/docs/TODO.md
 [companion]: https://github.com/CodeMusic/daemons-companion

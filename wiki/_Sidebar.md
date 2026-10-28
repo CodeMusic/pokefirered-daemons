@@ -6,6 +6,7 @@
 - [Branches and upstream](Branches-and-upstream)
 
 **Elsewhere**
+- [The player's manual](https://github.com/CodeMusic/DAEMONS/blob/main/docs/DAEMONS-manual.pdf) (PDF)
 - [README](https://github.com/CodeMusic/pokefirered-daemons#readme)
 - [DAEMONS wiki](https://github.com/CodeMusic/DAEMONS/wiki) -- playing, the world, releases
 - [Design bible](https://github.com/CodeMusic/DAEMONS/blob/main/docs/vision.md)
