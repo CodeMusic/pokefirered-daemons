@@ -75,7 +75,9 @@ enum
 //  T-412: HER_DREAM is one of the attendant's dreams in the DREAM LOG -- ARG is its step, and where it led is written
 //  under its words once the step is done.
 //  T-459 B: READS is THE LOG, written on demand from the vars daemons_reads.c and daemons_three.c keep.
-enum { NB_KIND_TEXT, NB_KIND_EXAM, NB_KIND_CHOICES, NB_KIND_SONG, NB_KIND_HER_DREAM, NB_KIND_READS };
+//  T-462: ITS_DREAM is one of the carried daemon's dreams in the DREAM LOG -- ARG is its image, and its page ends the
+//  way the night last received for it did (broken, quiet or vivid).
+enum { NB_KIND_TEXT, NB_KIND_EXAM, NB_KIND_CHOICES, NB_KIND_SONG, NB_KIND_HER_DREAM, NB_KIND_READS, NB_KIND_ITS_DREAM };
 
 struct NotebookEntry
 {
@@ -107,6 +109,7 @@ extern const u8 gText_YearSection[];   // T-416: THE YEAR, src/daemons_holidays.
 #define ATTENDANT_DREAMS_NOTEBOOK     // T-412: HER DREAMS' pages; their words live in daemons_dreams.c (tools/gbadreams.py)
 #include "data/attendant_dreams.h"
 #undef ATTENDANT_DREAMS_NOTEBOOK
+#include "data/its_dreams.h"   // T-462: ITS DREAMS' words, written by DAEMONS tools/gbaitsdreams.py
 
 static const u8 *const sSectionNames[NB_SECTION_COUNT] =
 {
@@ -497,6 +500,8 @@ static const struct NotebookEntry sEntries[] =
     NB_DREAM_ENTRIES
     //  T-412: then HER DREAMS, in step order, each once the attendant has told it.
     NB_HER_DREAM_ENTRIES
+    //  T-462: then ITS DREAMS, in image order, each once the companion has brought it and a dawn has come.
+    NB_ITS_DREAM_ENTRIES
     //  T-459 B: THE LOG, once THE SUBTLE LAYER is held -- the reads and the leans, counted, and the last few reads.
     { NB_READS,        NB_KIND_READS, 0, FLAG_GOT_SUBTLE_LAYER,        0, sTitle_Reads_Log,           NULL },
 };
@@ -590,6 +595,7 @@ const u8 *Daemons_RootBalance(u16 root)
 //  quarter), as the watch's are (daemons_time.c).
 #define DREAM_DAWN_CAME 0xFFFF   // DEBUG's WATCH turned to DAWN: whatever waits is dreamt on the next step
 static const u8 sDreamBreak[] = _("\p");
+static bool8 ItsDreamWaiting(void);   // T-462, below
 
 static EWRAM_DATA bool8 sDreamLoaded = FALSE;    // a saved game has just been continued, and no step taken since
 
@@ -620,6 +626,8 @@ void DaemonsDreamLog_Notice(void)
 {
     if (VarGet(VAR_DREAM_LOG_STAMP) == 0 && DreamWaiting() >= 0)
         VarSet(VAR_DREAM_LOG_STAMP, DreamNow() + 1);
+    if (VarGet(VAR_ITS_DREAM_STAMP) == 0 && ItsDreamWaiting())   // T-462: a dream the companion brought starts waiting
+        VarSet(VAR_ITS_DREAM_STAMP, DreamNow() + 1);
 }
 
 void DaemonsDreamLog_Loaded(void)
@@ -632,43 +640,167 @@ void DaemonsDreamLog_DebugDawn(void)
 {
     if (DreamWaiting() >= 0)
         VarSet(VAR_DREAM_LOG_STAMP, DREAM_DAWN_CAME);
+    if (ItsDreamWaiting())
+        VarSet(VAR_ITS_DREAM_STAMP, DREAM_DAWN_CAME);   // T-462
 }
 #endif
 
+//  Has a dawn come since what STAMPVAR holds began to wait (or, LOADED, is this the first step of a later day)? A stamp
+//  of 0 -- nothing was waiting yet -- or one the clock has been set back past starts the wait now.
+static bool8 DreamDawnCame(u16 stampVar, bool8 loaded)
+{
+    u16 stamp = VarGet(stampVar), now;
+
+    if (stamp == DREAM_DAWN_CAME)
+        return TRUE;
+    now = DreamNow();
+    if (stamp == 0 || now < stamp - 1)
+    {
+        VarSet(stampVar, now + 1);
+        return FALSE;
+    }
+    stamp--;
+    return !((now + 1) / 2 <= (stamp + 1) / 2 && !(loaded && now / 2 > stamp / 2));
+}
+
+//  T-462 (C-200, agreed with the companion 2026-10-28): ITS DREAMS. The companion judges the carried daemon's night and,
+//  at a SYNC, writes VAR_ITS_DREAM (the quality, 1 broken, 2 quiet, 3 vivid, and the image above it) and the day it was
+//  had (VAR_ITS_DREAM_DAY). A day the game has not filed is a new dream: it waits, as YOUR DREAMS do, for the first
+//  dawn after the game sees it (or the first load on a later day), and is said and filed then -- its flag set, and the
+//  quality kept for its page's ending. The same image again is filed again, with the newer night's ending.
+#define ITS_DREAM_QUALITY(v)  ((v) & 3)
+#define ITS_DREAM_IMAGE(v)    (((v) >> 8) & (ITS_DREAM_COUNT - 1))
+STATIC_ASSERT(FLAG_ITS_DREAM_MAP == FLAG_ITS_DREAM_GRASS + ITS_DREAM_COUNT - 1, ItsDreamFlagsAreConsecutive)
+
+static bool8 ItsDreamWaiting(void)
+{
+    return ITS_DREAM_QUALITY(VarGet(VAR_ITS_DREAM)) != 0
+        && VarGet(VAR_ITS_DREAM_DAY) + 1 != VarGet(VAR_ITS_DREAM_FILED);
+}
+
+//  The quality last filed for IMAGE, 1-3 (0 never filed): two bits each, images 0-7 in VAR_ITS_DREAM_KINDS.
+static u8 ItsDreamKind(u8 image)
+{
+    u16 kinds = VarGet(image < 8 ? VAR_ITS_DREAM_KINDS : VAR_ITS_DREAM_KINDS_2);
+
+    return (kinds >> ((image % 8) * 2)) & 3;
+}
+
+static void SetItsDreamKind(u8 image, u8 quality)
+{
+    u16 var = image < 8 ? VAR_ITS_DREAM_KINDS : VAR_ITS_DREAM_KINDS_2;
+    u8 shift = (image % 8) * 2;
+
+    VarSet(var, (VarGet(var) & ~(3 << shift)) | ((quality & 3) << shift));
+}
+
+//  The opening, then the ending of QUALITY (a quiet one when there is none to go by), after DEST's end.
+static u8 *WriteItsDream(u8 *dest, u8 image, u8 quality)
+{
+    u32 i;
+
+    for (i = 0; i < ARRAY_COUNT(sEntries); i++)
+    {
+        if (sEntries[i].kind == NB_KIND_ITS_DREAM && sEntries[i].arg == image)
+            break;
+    }
+    if (i == ARRAY_COUNT(sEntries))
+        return dest;
+    if (quality == 0)
+        quality = 2;
+    dest = StringCopy(dest, sEntries[i].text);
+    *dest++ = CHAR_PROMPT_CLEAR;
+    return StringCopy(dest, sItsDreamEndings[image][quality - 1]);
+}
+
+static bool8 TryItsDreamArrives(bool8 loaded)
+{
+    struct BoxPokemon *carried;
+    u16 dream = VarGet(VAR_ITS_DREAM);
+    u8 image = ITS_DREAM_IMAGE(dream), quality = ITS_DREAM_QUALITY(dream);
+
+    if (!ItsDreamWaiting())
+    {
+        if (VarGet(VAR_ITS_DREAM_STAMP) != 0)
+            VarSet(VAR_ITS_DREAM_STAMP, 0);
+        return FALSE;
+    }
+    if (!DreamDawnCame(VAR_ITS_DREAM_STAMP, loaded))
+        return FALSE;
+    FlagSet(FLAG_ITS_DREAM_GRASS + image);
+    SetItsDreamKind(image, quality);
+    VarSet(VAR_ITS_DREAM_FILED, VarGet(VAR_ITS_DREAM_DAY) + 1);
+    VarSet(VAR_ITS_DREAM_STAMP, 0);
+    //  the line names the daemon carried -- the first AWAY -- as the game knows it; with none away, the unnamed line
+    carried = DaemonFirstAway();
+    if (carried != NULL)
+    {
+        GetBoxMonData(carried, MON_DATA_NICKNAME, gStringVar1);
+        StringGet_Nickname(gStringVar1);
+        StringExpandPlaceholders(gStringVar4, sItsDreamLine_Named);
+    }
+    else
+    {
+        StringCopy(gStringVar4, sItsDreamLine_Unnamed);
+    }
+    StringAppend(gStringVar4, sDreamBreak);
+    WriteItsDream(gStringVar4 + StringLength(gStringVar4), image, quality);
+    return TRUE;
+}
+
 //  The step hook (field_control_avatar.c), after the insights: the dream goes into gStringVar4, after its line, for
-//  Daemons_EventScript_Dream to say. Its flag files it.
+//  Daemons_EventScript_Dream to say. Its flag files it. YOUR DREAMS first; then ITS DREAMS (T-462), on the next step
+//  when both come at one dawn -- the load that brought both counts for both.
 bool8 Daemons_TryDreamArrives(void)
 {
-    u16 stamp = VarGet(VAR_DREAM_LOG_STAMP), now;
     bool8 loaded = sDreamLoaded;
     s32 i = DreamWaiting();
 
     sDreamLoaded = FALSE;
     if (i < 0)
     {
-        if (stamp != 0)
+        if (VarGet(VAR_DREAM_LOG_STAMP) != 0)
             VarSet(VAR_DREAM_LOG_STAMP, 0);
-        return FALSE;
     }
-    now = DreamNow();
-    if (stamp != DREAM_DAWN_CAME)
+    else if (DreamDawnCame(VAR_DREAM_LOG_STAMP, loaded))
     {
-        if (stamp == 0 || now < stamp - 1)          // nothing was waiting yet -- or the clock was set back
-        {
-            VarSet(VAR_DREAM_LOG_STAMP, now + 1);
-            return FALSE;
-        }
-        stamp--;
-        if ((now + 1) / 2 <= (stamp + 1) / 2 && !(loaded && now / 2 > stamp / 2))
-            return FALSE;
+        FlagSet(sDreamMilestones[i].dreamt);
+        VarSet(VAR_DREAM_LOG_STAMP, 0);                  // the next one starts waiting from now, on the next step
+        if (ItsDreamWaiting() && DreamDawnCame(VAR_ITS_DREAM_STAMP, loaded))
+            VarSet(VAR_ITS_DREAM_STAMP, DREAM_DAWN_CAME);    // T-462: its dream came at this dawn too
+        StringCopy(gStringVar4, sDreamLine);
+        StringAppend(gStringVar4, sDreamBreak);
+        StringAppend(gStringVar4, sDreamMilestones[i].text);
+        return TRUE;
     }
-    FlagSet(sDreamMilestones[i].dreamt);
-    VarSet(VAR_DREAM_LOG_STAMP, 0);                  // the next one starts waiting from now, on the next step
-    StringCopy(gStringVar4, sDreamLine);
-    StringAppend(gStringVar4, sDreamBreak);
-    StringAppend(gStringVar4, sDreamMilestones[i].text);
-    return TRUE;
+    return TryItsDreamArrives(loaded);
 }
+
+#if DAEMONS_DEBUG
+//  T-462: GAME EVENTS' ITS DREAM -- what a SYNC with a new dream writes, faked: the next image and the next quality round
+//  from the last one received, a day the game has not filed, and the dawn come, so it arrives on the next step.
+void DaemonsItsDream_DebugReceive(void)
+{
+    u16 dream = VarGet(VAR_ITS_DREAM);
+    u8 image = ITS_DREAM_QUALITY(dream) == 0 ? 0 : (ITS_DREAM_IMAGE(dream) + 1) % ITS_DREAM_COUNT;
+    u8 quality = ITS_DREAM_QUALITY(dream) % 3 + 1;
+
+    VarSet(VAR_ITS_DREAM, (image << 8) | quality);
+    VarSet(VAR_ITS_DREAM_HOURS, quality == 1 ? 40 : quality == 2 ? 65 : 85);
+    VarSet(VAR_ITS_DREAM_NIGHTS, quality == 1 ? 1 : 0x101);
+    VarSet(VAR_ITS_DREAM_DAY, VarGet(VAR_ITS_DREAM_FILED));   // the day after the last filed (FILED is that day + 1)
+    VarSet(VAR_ITS_DREAM_STAMP, DREAM_DAWN_CAME);
+}
+
+//  The image and quality the next ITS DREAM row will fake, for its label.
+void DaemonsItsDream_DebugNext(u8 *image, u8 *quality)
+{
+    u16 dream = VarGet(VAR_ITS_DREAM);
+
+    *image = ITS_DREAM_QUALITY(dream) == 0 ? 0 : (ITS_DREAM_IMAGE(dream) + 1) % ITS_DREAM_COUNT;
+    *quality = ITS_DREAM_QUALITY(dream) % 3 + 1;
+}
+#endif
 
 static EWRAM_DATA struct ListMenuItem *sItems = NULL;
 static EWRAM_DATA u16 sArrowScroll = 0;
@@ -1005,13 +1137,14 @@ void Notebook_ChooseSection(void)
 //  VAR_RESULT: the entry's index in sEntries, or 0x7F.
 //  T-412: in the DREAM LOG, once the attendant has told one of her dreams, the list is headed in two -- YOUR DREAMS,
 //  then HER DREAMS -- headings the cursor passes over. A player she never dreamt for sees it unheaded.
-static bool8 HerDreamsHeld(void)
+//  T-462: and ITS DREAMS, a third part, headed the same way -- once there is one, or one of hers, the list is headed.
+static bool8 DreamKindHeld(u8 kind)
 {
     u32 i;
 
     for (i = 0; i < ARRAY_COUNT(sEntries); i++)
     {
-        if (sEntries[i].kind == NB_KIND_HER_DREAM && EntryHeld(i))
+        if (sEntries[i].kind == kind && EntryHeld(i))
             return TRUE;
     }
     return FALSE;
@@ -1021,10 +1154,11 @@ void Notebook_ChooseEntry(void)
 {
     u32 i;
     u8 n = 0;
-    bool8 headed = (gSpecialVar_0x8005 == NB_DREAM_LOG && HerDreamsHeld());
-    bool8 yours = FALSE, hers = FALSE;
+    bool8 headed = (gSpecialVar_0x8005 == NB_DREAM_LOG
+                 && (DreamKindHeld(NB_KIND_HER_DREAM) || DreamKindHeld(NB_KIND_ITS_DREAM)));
+    bool8 yours = FALSE, hers = FALSE, its = FALSE;
 
-    sItems = AllocZeroed((ARRAY_COUNT(sEntries) + 3) * sizeof(struct ListMenuItem));
+    sItems = AllocZeroed((ARRAY_COUNT(sEntries) + 4) * sizeof(struct ListMenuItem));
     for (i = 0; i < ARRAY_COUNT(sEntries); i++)
     {
         if (sEntries[i].section == gSpecialVar_0x8005 && EntryHeld(i))
@@ -1042,6 +1176,13 @@ void Notebook_ChooseEntry(void)
                 sItems[n].index = LIST_HEADER;
                 n++;
                 hers = TRUE;
+            }
+            if (headed && sEntries[i].kind == NB_KIND_ITS_DREAM && !its)   // T-462
+            {
+                sItems[n].label = sDreamHeading_Its;
+                sItems[n].index = LIST_HEADER;
+                n++;
+                its = TRUE;
             }
             sItems[n].label = sEntries[i].title;
             sItems[n].index = i;
@@ -1077,6 +1218,8 @@ void Notebook_LoadEntry(void)
         Daemons_WriteReadsLog(gStringVar4);   // T-459 B
     else if (sEntries[gSpecialVar_0x8006].kind == NB_KIND_SONG)
         Play_WriteSongPage(sEntries[gSpecialVar_0x8006].arg, gStringVar4);   // T-417
+    else if (sEntries[gSpecialVar_0x8006].kind == NB_KIND_ITS_DREAM)          // T-462: its dream, as its last night ended it
+        WriteItsDream(gStringVar4, sEntries[gSpecialVar_0x8006].arg, ItsDreamKind(sEntries[gSpecialVar_0x8006].arg));
     else if (sEntries[gSpecialVar_0x8006].kind == NB_KIND_HER_DREAM)          // T-412: her dream, and where it led
     {
         const u8 *led = DaemonsDream_Led(sEntries[gSpecialVar_0x8006].arg);

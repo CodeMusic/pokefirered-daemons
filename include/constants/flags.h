@@ -1884,6 +1884,25 @@
 #define FLAG_ATTENDANT_DREAM_VICTORY_ROAD     (DAEMONS_FLAGS_START + 0x3CA)
 #define FLAG_ATTENDANT_DREAM_ELITE_FOUR       (DAEMONS_FLAGS_START + 0x3CB)
 #define FLAG_ATTENDANT_DREAM_CHAMPION         (DAEMONS_FLAGS_START + 0x3CC)
+//  T-462 (C-200, 2026-10-28): ITS DREAMS -- each of the carried daemon's sixteen dream images once filed in the DREAM
+//  LOG (notebook.c files FLAG_ITS_DREAM_GRASS + image, at the first dawn after the companion writes VAR_ITS_DREAM).
+//  In image order, DAEMONS docs/its_dreams.json (tools/gbaitsdreams.py checks them).
+#define FLAG_ITS_DREAM_GRASS                  (DAEMONS_FLAGS_START + 0x3D0)   // to 0x3DF: sixteen, in image order
+#define FLAG_ITS_DREAM_CITY                   (DAEMONS_FLAGS_START + 0x3D1)
+#define FLAG_ITS_DREAM_WAVES                  (DAEMONS_FLAGS_START + 0x3D2)
+#define FLAG_ITS_DREAM_BOOKS                  (DAEMONS_FLAGS_START + 0x3D3)
+#define FLAG_ITS_DREAM_DOOR                   (DAEMONS_FLAGS_START + 0x3D4)
+#define FLAG_ITS_DREAM_UPWARD                 (DAEMONS_FLAGS_START + 0x3D5)
+#define FLAG_ITS_DREAM_TREE                   (DAEMONS_FLAGS_START + 0x3D6)
+#define FLAG_ITS_DREAM_NAME                   (DAEMONS_FLAGS_START + 0x3D7)
+#define FLAG_ITS_DREAM_SHELF                  (DAEMONS_FLAGS_START + 0x3D8)
+#define FLAG_ITS_DREAM_WALK                   (DAEMONS_FLAGS_START + 0x3D9)
+#define FLAG_ITS_DREAM_RAIN                   (DAEMONS_FLAGS_START + 0x3DA)
+#define FLAG_ITS_DREAM_BRIDGE                 (DAEMONS_FLAGS_START + 0x3DB)
+#define FLAG_ITS_DREAM_WAVING                 (DAEMONS_FLAGS_START + 0x3DC)
+#define FLAG_ITS_DREAM_GARDEN                 (DAEMONS_FLAGS_START + 0x3DD)
+#define FLAG_ITS_DREAM_HOUSE                  (DAEMONS_FLAGS_START + 0x3DE)
+#define FLAG_ITS_DREAM_MAP                    (DAEMONS_FLAGS_START + 0x3DF)
 #define FLAG_GOT_SUBTLE_LAYER                 (DAEMONS_FLAGS_START + 0x3E0)   // T-423: the game lane's block 0x3E0-0x3EF
 #define FLAG_HOUSE_TAKE_FROZEN                (DAEMONS_FLAGS_START + 0x3E1)   // T-427: houseTakeAtFall is recorded
 #define FLAG_FOLLOWER_OFF                     (DAEMONS_FLAGS_START + 0x3E2)   // T-18: OPTIONS -> FOLLOWER OFF (set: no follower)

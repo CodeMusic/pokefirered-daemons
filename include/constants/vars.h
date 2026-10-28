@@ -265,14 +265,18 @@
 #define VAR_READ_LOG_THING_1       0x40D1 // T-459 B: VAR_READ_LOG_THING + 1
 #define VAR_READ_LOG_THING_2       0x40D2 // T-459 B: + 2
 #define VAR_READ_LOG_THING_3       0x40D3 // T-459 B: + 3
-#define VAR_0x40D4                 0x40D4
-#define VAR_0x40D5                 0x40D5
-#define VAR_0x40D6                 0x40D6
-#define VAR_0x40D7                 0x40D7
-#define VAR_0x40D8                 0x40D8
-#define VAR_0x40D9                 0x40D9
-#define VAR_0x40DA                 0x40DA
-#define VAR_0x40DB                 0x40DB
+//  T-462 (C-200, agreed with the companion 2026-10-28): ITS DREAMS. 0x40D4-0x40D7 are the COMPANION's -- written at a
+//  SYNC that brings a new dream (the game closed), left as they are when there is none; the game only reads them.
+#define VAR_ITS_DREAM              0x40D4 // low byte: the night's quality (0 none, 1 broken, 2 quiet, 3 vivid; bit 2 tucked
+                                          //   in); high byte: the dream's image, 0-15 (DAEMONS docs/its_dreams.json)
+#define VAR_ITS_DREAM_HOURS        0x40D5 // the night's length, in tenths of an hour
+#define VAR_ITS_DREAM_NIGHTS       0x40D6 // low byte: nights since the last SYNC; high byte: rested nights (each capped 255)
+#define VAR_ITS_DREAM_DAY          0x40D7 // the day the dream was had, counted from 2026-01-01 -- a new value is a new dream
+//  ... and these are the GAME's (notebook.c), so a dream is filed once:
+#define VAR_ITS_DREAM_FILED        0x40D8 // VAR_ITS_DREAM_DAY + 1 of the last dream filed (0 none yet)
+#define VAR_ITS_DREAM_STAMP        0x40D9 // when the dream waiting began to wait, as VAR_DREAM_LOG_STAMP (0 none waiting)
+#define VAR_ITS_DREAM_KINDS        0x40DA // the quality last filed for images 0-7, two bits each (image 0 lowest; 0 never)
+#define VAR_ITS_DREAM_KINDS_2      0x40DB // ... and for images 8-15
 #define VAR_0x40DC                 0x40DC
 #define VAR_0x40DD                 0x40DD
 #define VAR_0x40DE                 0x40DE

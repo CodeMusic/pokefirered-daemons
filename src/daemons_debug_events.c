@@ -63,6 +63,7 @@ enum
     EV_FEEL_USE_ITEM,                                                       // T-433
     EV_CRYSTAL_AGAIN,                                                       // T-457
     EV_SOUNDING,                                                            // T-458
+    EV_ITS_DREAM,                                                           // T-462
     EV_THREE_SLOT1, EV_THREE_SLOT6 = EV_THREE_SLOT1 + PARTY_SIZE - 1,         // T-454
     EV_THREE_CLOSURE, EV_THREE_ATTUNEMENT, EV_THREE_VOLTAGE, EV_THREE_AUTO,
 };
@@ -119,6 +120,10 @@ static const u8 sName_GlobalIndex[]  = _("GLOBAL INDEX");
 static const u8 sName_CrystalAgain[] = _("CRYSTAL'S LINE AGAIN");   // T-457: at the receiver, once more
 static const u8 sName_Sounding[]     = _("AWAY'S SIGNAL ");         // T-458: + the first AWAY daemon's, 0-3
 static const u8 sName_SoundingNone[] = _("AWAY'S SIGNAL (NONE AWAY)");
+static const u8 sName_ItsDream[]     = _("ITS DREAM ");             // T-462: + the image and night the next one fakes
+static const u8 sName_ItsBroken[]    = _(", BROKEN");
+static const u8 sName_ItsQuiet[]     = _(", QUIET");
+static const u8 sName_ItsVivid[]     = _(", VIVID");
 static const u8 sName_Roots[]        = _("UNDERSTANDINGS >");
 static const u8 sName_Stream[]       = _("STREAM AND HEARSAY");
 static const u8 sName_Companion[]    = _("COMPANION LINKED");
@@ -224,6 +229,8 @@ static const struct DbgRow sRows_Events[] = {
     { sName_GlobalIndex, R_TOGGLE, EV_GLOBAL_INDEX },
     { sName_CrystalAgain, R_GIVE,  EV_CRYSTAL_AGAIN },   // T-457
     { sName_Sounding,    R_GIVE,   EV_SOUNDING },     // T-458: A steps it 0, 1, 2, 3, 0 (the companion's job, faked)
+    { sName_ItsDream,    R_GIVE,   EV_ITS_DREAM },    // T-462: a SYNC's new dream (the companion's job, faked); it
+                                                      //   arrives on the next step, and A again brings the next one
     { sName_Roots,       R_PAGE,   PG_ROOTS },
     { sName_Year,        R_PAGE,   PG_YEAR },         // T-416
     { sName_Follower,    R_PAGE,   PG_FOLLOWER },     // T-18
@@ -657,6 +664,7 @@ static void Apply(u8 ev, bool8 on)
     case EV_THREE_ATTUNEMENT: Three_DebugCycle(THREE_ATTUNEMENT); return;
     case EV_THREE_VOLTAGE:    Three_DebugCycle(THREE_VOLTAGE); return;
     case EV_THREE_AUTO:       Three_DebugAllAuto(); return;
+    case EV_ITS_DREAM:    DaemonsItsDream_DebugReceive(); return;               // T-462: what a SYNC would write
     case EV_SOUNDING:                                                           // T-458: what a SYNC would write
     {
         struct BoxPokemon *away = DaemonFirstAway();
@@ -785,6 +793,16 @@ static void BuildLabels(void)
                 StringCopy(StringCopy(label, mark), sName_SoundingNone);
             else
                 ConvertIntToDecimalStringN(StringCopy(StringCopy(label, mark), rows[i].name), DaemonBoxGetSignal(away), STR_CONV_MODE_LEFT_ALIGN, 1);
+        }
+        else if (rows[i].arg == EV_ITS_DREAM && rows[i].kind == R_GIVE)    // T-462: the image and night it will fake
+        {
+            static const u8 *const nights[] = { sName_ItsBroken, sName_ItsQuiet, sName_ItsVivid };
+            u8 image, quality;
+            u8 *end;
+
+            DaemonsItsDream_DebugNext(&image, &quality);
+            end = ConvertIntToDecimalStringN(StringCopy(StringCopy(label, mark), rows[i].name), image, STR_CONV_MODE_LEFT_ALIGN, 2);
+            StringCopy(end, nights[quality - 1]);
         }
         else
             StringCopy(StringCopy(label, mark), rows[i].name);

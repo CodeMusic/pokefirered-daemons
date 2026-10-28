@@ -14,6 +14,8 @@ bool8 Daemons_TryDreamArrives(void);
 const u8 *DaemonsDream_Led(u8 step);
 #if DAEMONS_DEBUG
 void DaemonsDreamLog_DebugDawn(void);
+void DaemonsItsDream_DebugReceive(void);                 // T-462: a SYNC's new dream, faked
+void DaemonsItsDream_DebugNext(u8 *image, u8 *quality);  // T-462: what the next one faked will be
 #endif
 #if DAEMONS_DEBUG
 void Notebook_DebugFillAll(void);   // T-394
