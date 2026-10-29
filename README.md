@@ -21,7 +21,7 @@ was built; it is kept as a reference and is not updated further.
 daemons and the seventeen types, the BENCHMARKS, the INDEX, the NOTEBOOK, PLAY and the companion, and a glossary.
 
 **No ROM is distributed.** Releases are BPS patches for a cartridge you own,
-published on the [DAEMONS releases page][releases] (latest: **v11.319.1**,
+published on the [DAEMONS releases page][releases] (latest: **v11.322.1**,
 2026-10-28), four to a release: CONTENT for *FireRed* 1.0 and Rev 1, CONTEXT
 for *LeafGreen* 1.0 and Rev 1. The game also plays in a browser on
 [**daemons-playground**][playground] (a private network only), and in the
@@ -177,6 +177,8 @@ in-game word is still a **DRAFT** until it is approved.
   held, the player starts to notice things, marked in its purple, and the
   NOTEBOOK keeps an honest log of what landed; three values it describes
   quietly tune a daemon's CONTEXT routines in battle, and are never saved.
+  There is talk of a third, a grimoire
+  ([THE HERMETIC LAYER](https://github.com/CodeMusic/DAEMONS/wiki/The-Hermetic-Layer)).
 - **The MARKS and what they pair with.** Each of the eight MARKS prints a
   virtue over its shadow; a MARK and what it pairs with, held together, each
   say how the other balances it, and when every pair is held a last note
@@ -194,8 +196,8 @@ in-game word is still a **DRAFT** until it is approved.
   type's key.
 
 What is decided and **not built yet** is in the DAEMONS [TODO list][todo] —
-among it the rest of the landmarks, the cave preview screens, still vanilla's,
-and a pair of daemons that evolve only when traded for each other.
+among it the rest of the landmarks and the cave preview screens, still
+vanilla's.
 
 ## How much of it is ours
 
