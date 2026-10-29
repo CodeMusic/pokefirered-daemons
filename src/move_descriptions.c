@@ -60,7 +60,8 @@ const u8 gMoveDescription_HydroPump[] = _("A high volume of\nwater is blasted at
 const u8 gMoveDescription_Surf[] = _("Crosses the surface\nrather than going\nalong it. Used for\ntravelling on water.");
 const u8 gMoveDescription_IceBeam[] = _("Stops the weights\nupdating. They may\nend up HUNG.");
 const u8 gMoveDescription_Blizzard[] = _("Everything stops\nupdating at once.\nMay leave them\nHUNG.");
-const u8 gMoveDescription_Psybeam[] = _("A peculiar ray is\nshot at them. It\nmay leave them\nthrashing.");
+// T-491, DRAFT: SLANT grows with how far the party's streaks diverge (pokemon.c, DaemonsPartyOverlap).
+const u8 gMoveDescription_Psybeam[] = _("Its own angle: hits\nharder the more its\nparty differs. Can\ncause THRASHING.");
 const u8 gMoveDescription_BubbleBeam[] = _("A spray of bubbles\nstrikes them. It may\nlower their SPEED\nstat.");
 const u8 gMoveDescription_AuroraBeam[] = _("Narrows what they\nare allowed to do.\nLowers ATTACK.");
 const u8 gMoveDescription_HyperBeam[] = _("Commits everything\nin one write. The\nuser must idle on\nthe next turn.");
@@ -358,7 +359,8 @@ const u8 gMoveDescription_ShockWave[] = _("A signal carried on\na wave that alwa
 const u8 gMoveDescription_WaterPulse[] = _("One disturbance,\nspreading out in\nrings. It may leave\nthem THRASHING.");
 const u8 gMoveDescription_DoomDesire[] = _("Makes a promise that\nis kept two turns\nlater, whatever\nhappens between.");
 const u8 gMoveDescription_PsychoBoost[] = _("Goes over it far\ntoo long. Lands\nhard, and sharply\nlowers SP. ATK.");
-const u8 gMoveDescription_Consensus[] = _("A swarm strikes as\none. It is not\nclever, but it\nkeeps showing up.");
+// T-491, DRAFT: CONSENSUS grows with how far the party's streaks overlap (pokemon.c, DaemonsPartyOverlap).
+const u8 gMoveDescription_Consensus[] = _("A swarm strikes as\none. Harder the\nmore its party runs\nroutines of a kind.");
 const u8 gMoveDescription_Recursion[] = _("Builds on its own\nlast result, each\ntime harder. Any\ninterruption: gone.");
 
 // T-389 (bible 0.7, Wisdom): the seven union routines. DRAFT.

@@ -2495,6 +2495,82 @@ static void DeleteFirstMoveAndGiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 mo
     (!(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_EREADER_TRAINER)) && FlagGet(flag) && GetBattlerSide(battler) == B_SIDE_PLAYER)
 
 
+//  T-491 (bible 2.12 and 10's Open log; the user, 2026-10-29), DRAFT: convergence and divergence as a mechanic, read
+//  off the streaks (9.4) -- a daemon's four routines' types, the colours it already wears. For the daemon in battle
+//  (its CURRENT routines, so a copied one counts), every other daemon of its party that is still standing and not an
+//  egg is read the same way, as a set of types:
+//    SHARED    -- for each of them, how many of the user's types it also carries;
+//    DIFFERING -- for each of them, how many of its types the user does not carry.
+//  A daemon alone in its party has neither, and both routines stay at their base power.
+#define DAEMONS_STREAK_BONUS_MAX 30
+
+static u32 DaemonsStreakTypes(const u16 *moves)
+{
+    u32 types = 0;
+    s32 i;
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        if (moves[i] != MOVE_NONE && moves[i] < MOVES_COUNT)
+            types |= 1 << gBattleMoves[moves[i]].type;
+    }
+    return types;
+}
+
+static u8 DaemonsCountTypes(u32 types)
+{
+    u8 n = 0;
+
+    for (; types != 0; types >>= 1)
+        n += types & 1;
+    return n;
+}
+
+static void DaemonsPartyOverlap(u8 battlerId, u16 *shared, u16 *differing)
+{
+    struct Pokemon *party = GetBattlerSide(battlerId) == B_SIDE_PLAYER ? gPlayerParty : gEnemyParty;
+    u16 moves[MAX_MON_MOVES];
+    u32 mine, theirs;
+    s32 i, j;
+
+    *shared = 0;
+    *differing = 0;
+    for (j = 0; j < MAX_MON_MOVES; j++)
+        moves[j] = gBattleMons[battlerId].moves[j];
+    mine = DaemonsStreakTypes(moves);
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        u16 species = GetMonData(&party[i], MON_DATA_SPECIES_OR_EGG, NULL);
+
+        if (i == gBattlerPartyIndexes[battlerId] || species == SPECIES_NONE || species == SPECIES_EGG
+         || GetMonData(&party[i], MON_DATA_HP, NULL) == 0)
+            continue;
+        for (j = 0; j < MAX_MON_MOVES; j++)
+            moves[j] = GetMonData(&party[i], MON_DATA_MOVE1 + j, NULL);
+        theirs = DaemonsStreakTypes(moves);
+        *shared += DaemonsCountTypes(mine & theirs);
+        *differing += DaemonsCountTypes(theirs & ~mine);
+    }
+}
+
+//  The two routines it moves, one on each side of the same count, so neither wins (2.12):
+//    CONSENSUS (SWARM, base 90): + 30 x SHARED / (SHARED + DIFFERING)     -- 90 to 120
+//    SLANT     (CONTEXT, base 65): + 30 x DIFFERING / (SHARED + DIFFERING) -- 65 to 95
+//  A share, not a count, so a party of two that agrees completely moves CONSENSUS as far as a party of six does.
+static u16 DaemonsStreakPower(u16 move, u16 power, u8 battlerId)
+{
+    u16 shared, differing;
+
+    if (move != MOVE_CONSENSUS && move != MOVE_PSYBEAM)
+        return power;
+    DaemonsPartyOverlap(battlerId, &shared, &differing);
+    if (shared + differing == 0)
+        return power;
+    if (move == MOVE_CONSENSUS)
+        return power + DAEMONS_STREAK_BONUS_MAX * shared / (shared + differing);
+    return power + DAEMONS_STREAK_BONUS_MAX * differing / (shared + differing);
+}
+
 s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *defender, u32 move, u16 sideStatus, u16 powerOverride, u8 typeOverride, u8 battlerIdAtk, u8 battlerIdDef)
 {
     u32 i;
@@ -2509,7 +2585,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     u8 attackerHoldEffectParam;
 
     if (!powerOverride)
-        gBattleMovePower = gBattleMoves[move].power;
+        gBattleMovePower = DaemonsStreakPower(move, gBattleMoves[move].power, battlerIdAtk);   // T-491
     else
         gBattleMovePower = powerOverride;
 
