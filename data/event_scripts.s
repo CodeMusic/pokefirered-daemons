@@ -447,6 +447,7 @@ gStdScriptsEnd::
 	.include "data/maps/CinnabarIsland_PokemonCenter_1F/scripts.inc"
 	.include "data/maps/CinnabarIsland_PokemonCenter_2F/scripts.inc"
 	.include "data/maps/CinnabarIsland_Mart/scripts.inc"
+	.include "data/maps/CinnabarIsland_HattersHouse/scripts.inc"   @ T-485
 	.include "data/maps/IndigoPlateau_PokemonCenter_1F/scripts.inc"
 	.include "data/maps/IndigoPlateau_PokemonCenter_2F/scripts.inc"
 	.include "data/maps/SaffronCity_CopycatsHouse_1F/scripts.inc"
@@ -791,6 +792,7 @@ gStdScriptsEnd::
 	.include "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom/text.inc"
 	.include "data/maps/CinnabarIsland_PokemonCenter_1F/text.inc"
 	.include "data/maps/CinnabarIsland_Mart/text.inc"
+	.include "data/maps/CinnabarIsland_HattersHouse/text.inc"
 	.include "data/maps/IndigoPlateau_PokemonCenter_1F/text.inc"
 	.include "data/maps/SaffronCity_CopycatsHouse_1F/text.inc"
 	.include "data/maps/SaffronCity_CopycatsHouse_2F/text.inc"

@@ -591,3 +591,6 @@ $(OBJEVENTGFXDIR)/misc/crystal_receiver.4bpp: %.4bpp: %.png
 
 $(OBJEVENTGFXDIR)/misc/desk_flowers.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2
+
+$(OBJEVENTGFXDIR)/people/osric_hatter.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4

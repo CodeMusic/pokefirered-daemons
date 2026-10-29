@@ -523,4 +523,6 @@ gSpecials::
 	def_special Daemons_TryCarriedMoves      @ T-455
 	def_special Daemons_OfferCarriedMoves    @ T-455
 	def_special DaemonsSounding              @ T-458
+	def_special Hatter_ClocksAreRight        @ T-485: OSRIC HATTER's clocks are right, 3:30-3:59 (specialvar)
+	def_special Hatter_Glitch                @ T-486: the house's glitch, 3:00-3:59, by the minute (specialvar: TRUE if it began)
 gSpecialsEnd::

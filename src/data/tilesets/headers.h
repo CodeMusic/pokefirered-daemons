@@ -1056,3 +1056,14 @@ const struct Tileset gTileset_OtherCave =
     .metatileAttributes = gMetatileAttributes_RockTunnel,
     .callback = NULL,
 };
+// T-103: HattersHouse, rethemed and replanned.
+const struct Tileset gTileset_HattersHouse =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_HattersHouse,
+    .palettes = gTilesetPalettes_HattersHouse,
+    .metatiles = gMetatiles_HattersHouse,
+    .metatileAttributes = gMetatileAttributes_HattersHouse,
+    .callback = NULL,
+};

@@ -66,7 +66,7 @@
 #define OBJ_EVENT_GFX_POLICEMAN 60
 #define OBJ_EVENT_GFX_GENTLEMAN 61
 #define OBJ_EVENT_GFX_SAILOR 62
-#define OBJ_EVENT_GFX_FREE_63 63 // T-461 FREE: was CAPTAIN, off the map since DAVID took the office (T-313)
+#define OBJ_EVENT_GFX_OSRIC_HATTER 63 // T-461: took FREE id 63
 #define OBJ_EVENT_GFX_NURSE 64
 #define OBJ_EVENT_GFX_CABLE_CLUB_RECEPTIONIST 65
 #define OBJ_EVENT_GFX_UNION_ROOM_RECEPTIONIST 66
@@ -352,7 +352,7 @@
 //  Not free, though nothing places them: 14-15 (Ruby/Sapphire link partners), 38 (TRAINER TOWER), 102 (FAME CHECKER),
 //  148-149 (PROTEUS's two shapes, daemons_cast.c), 150 (DEOXYS_N: tools/gbaowslots.py draws PROTEUS's object into it).
 //
-//  FREE: 63 104 140
+//  FREE: 104 140
 
 #define OBJ_EVENT_GFX_WIDE_START  256
 #define OBJ_EVENT_GFX_ID_LIMIT    4096

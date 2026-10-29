@@ -249,3 +249,5 @@ const u16 gMetatiles_Nexus[] = INCBIN_U16("data/tilesets/secondary/nexus/metatil
 const u32 gMetatileAttributes_Nexus[] = INCBIN_U32("data/tilesets/secondary/nexus/metatile_attributes.bin");
 const u16 gMetatiles_NexusPaint[] = INCBIN_U16("data/tilesets/primary/nexus_paint/metatiles.bin");
 const u32 gMetatileAttributes_NexusPaint[] = INCBIN_U32("data/tilesets/primary/nexus_paint/metatile_attributes.bin");
+const u16 gMetatiles_HattersHouse[] = INCBIN_U16("data/tilesets/secondary/hatters_house/metatiles.bin");
+const u32 gMetatileAttributes_HattersHouse[] = INCBIN_U32("data/tilesets/secondary/hatters_house/metatile_attributes.bin");

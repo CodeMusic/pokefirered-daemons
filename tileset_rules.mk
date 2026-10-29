@@ -13,7 +13,7 @@ $(TILESETGFXDIR)/secondary/lavender_town/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 336 -Wnum_tiles
 
 $(TILESETGFXDIR)/secondary/cinnabar_island/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 346 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 374 -Wnum_tiles
 
 $(TILESETGFXDIR)/secondary/pokemon_center/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 376 -Wnum_tiles
@@ -272,3 +272,6 @@ $(TILESETGFXDIR)/primary/nexus_paint/tiles.4bpp: %.4bpp: %.png
 
 $(TILESETGFXDIR)/secondary/nexus/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 366 -Wnum_tiles
+
+$(TILESETGFXDIR)/secondary/hatters_house/tiles.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 166 -Wnum_tiles

@@ -277,8 +277,8 @@
 #define VAR_ITS_DREAM_STAMP        0x40D9 // when the dream waiting began to wait, as VAR_DREAM_LOG_STAMP (0 none waiting)
 #define VAR_ITS_DREAM_KINDS        0x40DA // the quality last filed for images 0-7, two bits each (image 0 lowest; 0 never)
 #define VAR_ITS_DREAM_KINDS_2      0x40DB // ... and for images 8-15
-#define VAR_0x40DC                 0x40DC
-#define VAR_0x40DD                 0x40DD
+#define VAR_OSRIC_RIDDLE           0x40DC // T-485: OSRIC HATTER's next riddle, A1-A4 as 0-3 (moved on as a visit's talk is told)
+#define VAR_OSRIC_BOOK_RIDDLE      0x40DD // T-485: ... and his next book riddle, B1-B3 as 0-2, with THE HERMETIC LAYER held
 #define VAR_0x40DE                 0x40DE
 #define VAR_0x40DF                 0x40DF
 #define VAR_0x40E0                 0x40E0

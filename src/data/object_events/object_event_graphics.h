@@ -78,6 +78,8 @@ const u16 gObjectEventPal_NpcTownArdor[] = INCBIN_U16("graphics/object_events/pa
 const u16 gObjectEventPal_NpcTownDoldrum[] = INCBIN_U16("graphics/object_events/palettes/npc_town_doldrum.gbapal");
 const u16 gObjectEventPal_NpcTownSlate[] = INCBIN_U16("graphics/object_events/palettes/npc_town_slate.gbapal");
 const u16 gObjectEventPal_NpcTownCallow[] = INCBIN_U16("graphics/object_events/palettes/npc_town_callow.gbapal");
+//  T-485: OSRIC HATTER's own sixteen (DAEMONS tools/genhatter.py).
+const u16 gObjectEventPal_NpcOsricHatter[] = INCBIN_U16("graphics/object_events/palettes/npc_osric_hatter.gbapal");
 const u16 gObjectEventPal_NpcPink[] = INCBIN_U16("graphics/object_events/palettes/npc_pink.gbapal");
 const u16 gObjectEventPal_NpcGreen[] = INCBIN_U16("graphics/object_events/palettes/npc_green.gbapal");
 const u16 gObjectEventPal_NpcWhite[] = INCBIN_U16("graphics/object_events/palettes/npc_white.gbapal");
@@ -147,6 +149,7 @@ const u16 gObjectEventPic_StaffBrazen[] = INCBIN_U16("graphics/object_events/pic
 const u16 gObjectEventPic_StaffQuicksilver[] = INCBIN_U16("graphics/object_events/pics/people/staff_quicksilver.4bpp");
 const u16 gObjectEventPic_StaffCallow[] = INCBIN_U16("graphics/object_events/pics/people/staff_callow.4bpp");
 const u16 gObjectEventPic_BenchmarkGuide[] = INCBIN_U16("graphics/object_events/pics/people/benchmark_guide.4bpp");
+const u16 gObjectEventPic_OsricHatter[] = INCBIN_U16("graphics/object_events/pics/people/osric_hatter.4bpp");
 const u16 gObjectEventPic_CueBall[] = INCBIN_U16("graphics/object_events/pics/people/cue_ball.4bpp");
 const u16 gObjectEventPic_PsychicM[] = INCBIN_U16("graphics/object_events/pics/people/psychic_m.4bpp");
 const u16 gObjectEventPic_Tamer[] = INCBIN_U16("graphics/object_events/pics/people/tamer.4bpp");

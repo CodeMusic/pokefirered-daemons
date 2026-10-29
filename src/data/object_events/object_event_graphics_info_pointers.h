@@ -178,6 +178,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_StaffBrazen;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_StaffQuicksilver;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_StaffCallow;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BenchmarkGuide;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_OsricHatter;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CueBall;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PsychicM;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Tamer;
@@ -305,7 +306,7 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_POLICEMAN]                = &gObjectEventGraphicsInfo_Policeman,
     [OBJ_EVENT_GFX_GENTLEMAN]                = &gObjectEventGraphicsInfo_Gentleman,
     [OBJ_EVENT_GFX_SAILOR]                   = &gObjectEventGraphicsInfo_Sailor,
-    [OBJ_EVENT_GFX_FREE_63]                  = &gObjectEventGraphicsInfo_Captain,
+    [OBJ_EVENT_GFX_OSRIC_HATTER]               = &gObjectEventGraphicsInfo_OsricHatter,
     [OBJ_EVENT_GFX_NURSE]                    = &gObjectEventGraphicsInfo_Nurse,
     [OBJ_EVENT_GFX_CABLE_CLUB_RECEPTIONIST]  = &gObjectEventGraphicsInfo_CableClubReceptionist,
     [OBJ_EVENT_GFX_UNION_ROOM_RECEPTIONIST]  = &gObjectEventGraphicsInfo_UnionRoomReceptionist,

@@ -494,6 +494,8 @@ static const u8 gInitialMovementTypeFacingDirections[MOVEMENT_TYPES_COUNT] = {
 //  when DaemonsSeason() says so -- the only object palettes that follow the season.
 #define OBJ_EVENT_PAL_TAG_CAST_ERMINE                 0x112C
 #define OBJ_EVENT_PAL_TAG_CAST_PTARMIGAN              0x112D
+//  T-485: OSRIC HATTER, in his own palette in PALSLOT_NPC_SPECIAL; he stands only in his house.
+#define OBJ_EVENT_PAL_TAG_NPC_OSRIC_HATTER            0x112E
 //  QUICKSILVER's locals share one palette of the town's own (T-119).
 #define OBJ_EVENT_PAL_TAG_NPC_TOWN_QUICKSILVER        0x1128
 //  BRAZEN's locals share one palette of the town's own (T-119).
@@ -618,6 +620,7 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_NpcTownCallow,            OBJ_EVENT_PAL_TAG_NPC_TOWN_CALLOW},
     {gObjectEventPal_CastErmine,               OBJ_EVENT_PAL_TAG_CAST_ERMINE},      // T-439: winter in PatchObjectPalette
     {gObjectEventPal_CastPtarmigan,            OBJ_EVENT_PAL_TAG_CAST_PTARMIGAN},
+    {gObjectEventPal_NpcOsricHatter,           OBJ_EVENT_PAL_TAG_NPC_OSRIC_HATTER},   // T-485
     {},
 };
 

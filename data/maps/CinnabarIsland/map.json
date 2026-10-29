@@ -120,6 +120,13 @@
       "elevation": 0,
       "dest_map": "MAP_CINNABAR_ISLAND_MART",
       "dest_warp_id": "1"
+    },
+    {
+      "x": 10,
+      "y": 13,
+      "elevation": 0,
+      "dest_map": "MAP_CINNABAR_ISLAND_HATTERS_HOUSE",
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [

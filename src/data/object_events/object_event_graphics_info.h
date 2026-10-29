@@ -4631,3 +4631,23 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CastGrebe = {
     .images = sPicTable_CastGrebe,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
+
+// T-485: OSRIC HATTER, the Hatter of QUICKSILVER -- a stoat in a top hat, his own palette
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_OsricHatter = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_OSRIC_HATTER,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = PALSLOT_NPC_SPECIAL,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gObjectEventBaseOam_16x32,
+    .subspriteTables = gObjectEventSpriteOamTables_16x32,
+    .anims = sAnimTable_Standard,
+    .images = sPicTable_OsricHatter,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
