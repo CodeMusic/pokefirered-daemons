@@ -1932,6 +1932,8 @@
                                                                                 //   day; cleared on any other day, daemons_hermetic.c)
 #define FLAG_HERMETIC_GLITCHED                (DAEMONS_FLAGS_START + 0x3F5)   // T-486: the page turned past OSRIC HATTER's warning has
                                                                                 //   glitched (once a save; book_reader.c)
+#define FLAG_AL_CRACKED                       (DAEMONS_FLAGS_START + 0x3F6)   // T-487: AL has said his one crack, the first time he
+                                                                                //   speaks after the GLOBAL INDEX is held (once)
 
 //  BEGIN gbaglobalindex -- T-334: each fixed encounter of the GLOBAL INDEX, once gone (removeobject sets it). The beasts'
 //  and the edition daemons' are also set on every map load while they may not stand (event_data.c,

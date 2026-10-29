@@ -37,6 +37,7 @@ FourIsland_EventScript_RivalScene::
 	applymovement LOCALID_FOUR_ISLAND_RIVAL, FourIsland_Movement_RivalApproach
 	waitmovement 0
 	msgbox FourIsland_Text_RivalAlreadyGotEggBeSmellingYa
+	call EventScript_AlsCrack   @ T-487: once, the first time he speaks after the GLOBAL INDEX
 	closemessage
 	applymovement LOCALID_PLAYER, FourIsland_Movement_PlayerWatchRivalExit
 	applymovement LOCALID_FOUR_ISLAND_RIVAL, FourIsland_Movement_RivalExit
