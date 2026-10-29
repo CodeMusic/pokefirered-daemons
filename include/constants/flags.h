@@ -1928,6 +1928,8 @@
                                                                                 //   has gone home (BirthIsland_Exterior_OnTransition)
 #define FLAG_GOT_HERMETIC_LAYER               (DAEMONS_FLAGS_START + 0x3F3)   // T-483: THE HERMETIC LAYER held (SPELLCRAFT); set in the game
                                                                                 //   or written by the companion at a sync (C-238)
+#define FLAG_HERMETIC_UNMASKED                (DAEMONS_FLAGS_START + 0x3F4)   // T-483: Halloween's mask taken off the follower (for the
+                                                                                //   day; cleared on any other day, daemons_hermetic.c)
 
 //  BEGIN gbaglobalindex -- T-334: each fixed encounter of the GLOBAL INDEX, once gone (removeobject sets it). The beasts'
 //  and the edition daemons' are also set on every map load while they may not stand (event_data.c,

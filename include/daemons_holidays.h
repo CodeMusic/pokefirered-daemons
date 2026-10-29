@@ -20,6 +20,7 @@ u8 DaemonsHolidayMonth(u8 holiday);  // 0-11: the month whose note and colour it
 u8 DaemonsMonth(void);               // 0-11
 bool8 DaemonsIsFirstOfMonth(void);
 bool8 DaemonsIsCalendarDay(u8 month, u8 day);   // T-460: month 1-12 -- today by the calendar the holidays read
+void DaemonsDateOf(u16 dayNumber, u16 *year, u8 *month, u8 *day);   // T-483: a day number as a date
 u16 DaemonsMonthColour(u8 month);    // 0-11
 const u8 *DaemonsMonthNote(u8 month);
 void DaemonsPlayMonthNote(u8 month, bool8 soft);

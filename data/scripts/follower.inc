@@ -152,3 +152,10 @@ Follower_Text_Autumn0::
 Follower_Text_Autumn1::
 	.string "{STR_VAR_1} is listening to\n"
 	.string "the leaves under its feet.$"
+
+@ ---- T-483, DRAFT: Halloween, with THE HERMETIC LAYER held -- A takes the costume's mask off for the rest of the day.
+Follower_Text_Unmask::
+	.string "{STR_VAR_1} takes off the\n"
+	.string "{STR_VAR_2} mask.\p"
+	.string "It goes as itself for the\n"
+	.string "rest of the day.$"

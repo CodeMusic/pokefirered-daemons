@@ -1248,6 +1248,7 @@ extern const u8 EventScript_Guide[];      // T-300
 extern const u8 EventScript_SubtleLayer[];   // T-423
 extern const u8 EventScript_HermeticLayer[];    // T-483
 extern const u8 EventScript_HermeticArrives[];  // T-483: the book arrives in the bag
+extern const u8 Follower_Text_Unmask[];         // T-483: Halloween's mask, taken off
 extern const u8 SaffronCity_House_EventScript_SubtleLayer[];   // T-423: its shelf, for reveal.c
 extern const u8 EventScript_Diploma[];    // T-218
 extern const u8 Daemons_EventScript_OpusWrote[];   // T-203

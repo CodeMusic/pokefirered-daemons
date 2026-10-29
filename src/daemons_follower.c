@@ -2,6 +2,8 @@
 #include "main.h"
 #include "palette.h"
 #include "daemons_witching.h"   // T-480
+#include "daemons_hermetic.h"   // T-483: Halloween's costume
+#include "data.h"               // T-483: gSpeciesNames
 #include "gflib.h"
 #include "event_data.h"
 #include "event_object_movement.h"
@@ -117,6 +119,8 @@ static struct
     s16 grassX, grassY;    // ... and the tile its last tall grass was raised on
     u16 senseWait;         // T-459: frames until it may notice something again
     u8 shimmer;            // T-480: the witching hour's shimmer is on its palette (put back when the hour ends)
+    u16 costume;           // T-483: Halloween, with THE HERMETIC LAYER held -- the species it goes as, or SPECIES_NONE
+    u16 shown;             // T-483: the icon species whose picture and colours it wears (its own, or the costume's)
 } sFollower;
 
 static void Shimmer(void);   // T-480
@@ -295,7 +299,7 @@ static void Track(struct Sprite *player, struct ObjectEvent *playerObj)
 
 static void BuildPalette(u16 *buf)
 {
-    u16 species = sFollower.species < ARRAY_COUNT(sFollowerPalettes) ? sFollower.species : SPECIES_NONE;
+    u16 species = sFollower.shown < ARRAY_COUNT(sFollowerPalettes) ? sFollower.shown : SPECIES_NONE;   // T-483
     const u16 *pal = sFollowerPalettes[species];
     u32 i;
 
@@ -393,6 +397,12 @@ static bool8 StandBehind(struct ObjectEvent *playerObj)
     return TRUE;
 }
 
+// T-483: Halloween's costume for the daemon in SLOT (src/daemons_hermetic.c), or SPECIES_NONE.
+static u16 CostumeFor(s8 slot)
+{
+    return Hermetic_Costume(GetMonData(&gPlayerParty[slot], MON_DATA_SPECIES));
+}
+
 // T-464: its own picture when its icon is too big to walk beside the player, else its icon's first frame.
 static const u8 *FollowerPic(u16 species)
 {
@@ -407,8 +417,10 @@ static void Spawn(s8 slot, struct Sprite *player, struct ObjectEvent *playerObj)
     u8 idx;
 
     ReadLead(slot, &sFollower.species, &sFollower.personality, &sFollower.friendship, &sFollower.shiny);
+    sFollower.costume = CostumeFor(slot);   // T-483: in a costume it wears the other daemon's picture and colours
+    sFollower.shown = sFollower.costume != SPECIES_NONE ? GetIconSpecies(sFollower.costume, 0) : sFollower.species;
     FreeSpriteTilesByTag(FOLLOWER_TAG);
-    sheet.data = FollowerPic(sFollower.species);
+    sheet.data = FollowerPic(sFollower.shown);
     sheet.size = 0x200;   // one 32x32 frame
     sheet.tag = FOLLOWER_TAG;
     LoadSpriteSheet(&sheet);
@@ -459,7 +471,8 @@ static void CheckLead(s8 slot)
 
     // A swap in the party, a trade, an evolution, a HALT in battle, a daemon gone AWAY: another picture
     ReadLead(slot, &species, &personality, &friendship, &shiny);
-    if (species != sFollower.species || personality != sFollower.personality || shiny != sFollower.shiny)
+    if (species != sFollower.species || personality != sFollower.personality || shiny != sFollower.shiny
+     || CostumeFor(slot) != sFollower.costume)   // T-483: the mask put on (Halloween came) or taken off
     {
         Despawn();   // made again next frame, from the same path
         return;
@@ -1268,6 +1281,15 @@ void Follower_Talk(void)
     mon = &gPlayerParty[slot];
     GetMonData(mon, MON_DATA_NICKNAME, gStringVar1);
     StringGet_Nickname(gStringVar1);
+    // T-483: Halloween -- the first A takes the costume's mask off, for the rest of the day.
+    if (sFollower.costume != SPECIES_NONE && IsOurs())
+    {
+        StringCopy(gStringVar2, gSpeciesNames[sFollower.costume]);
+        Hermetic_Unmask();
+        StringExpandPlaceholders(gStringVar4, Follower_Text_Unmask);
+        Despawn();   // made again next frame, as itself
+        return;
+    }
     friendship = GetMonData(mon, MON_DATA_FRIENDSHIP);
     for (band = ARRAY_COUNT(sTierFloor) - 1; band > 0 && friendship < sTierFloor[band]; band--)
         ;

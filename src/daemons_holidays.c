@@ -264,6 +264,12 @@ bool8 DaemonsIsFirstOfMonth(void)
 
 //  T-460: one day of the year by the calendar the holidays read -- the cartridge clock, the play-time year without
 //  one, or the DEBUG date. FALSE before the first read.
+// T-483: a day number (daemons_time.c's, from 2000-01-01) as a date -- Halloween's costume hashes the date.
+void DaemonsDateOf(u16 dayNumber, u16 *year, u8 *month, u8 *day)
+{
+    DateOf(dayNumber, year, month, day);
+}
+
 bool8 DaemonsIsCalendarDay(u8 month, u8 day)
 {
     DaemonsTimeRefresh();

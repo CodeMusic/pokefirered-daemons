@@ -46,6 +46,7 @@
 #include "constants/metatile_labels.h"
 #include "scanline_effect.h"
 #include "play.h"   // NEXUS_TREE_PALETTE (T-421)
+#include "daemons_hermetic.h"   // T-483: the handless clock
 
 static EWRAM_DATA u8 sElevatorCurrentFloorWindowId = 0;
 static EWRAM_DATA u16 sElevatorScroll = 0;
@@ -1759,6 +1760,14 @@ void Terminal_BufferPlayTime(void)
         *s++ = CHAR_HYPHEN;
         s = ConvertIntToDecimalStringN(s, clock.day, STR_CONV_MODE_LEADING_ZEROS, 2);
         *s++ = CHAR_SPACE;
+        if (Hermetic_HandlessClock())
+        {
+            // T-483: THE HANDLESS CLOCK. The game's one clock face is this reading; with THE HERMETIC LAYER held,
+            // from 3 to 4 AM and all Halloween, it keeps the date and loses its hands. Nothing says why.
+            static const u8 sNoHands[] = _("--:--");
+            StringCopy(s, sNoHands);
+            return;
+        }
         s = ConvertIntToDecimalStringN(s, clock.hour, STR_CONV_MODE_LEADING_ZEROS, 2);
         *s++ = CHAR_COLON;
         ConvertIntToDecimalStringN(s, clock.minute, STR_CONV_MODE_LEADING_ZEROS, 2);
