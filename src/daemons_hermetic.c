@@ -150,7 +150,9 @@ static u8 NthByName(u32 set, u8 k)
 
 static bool8 CostumeCandidate(u16 s, u8 type, u16 own)
 {
-    if (s == own || (s >= SPECIES_OLD_UNOWN_B && s <= SPECIES_OLD_UNOWN_Z))
+    // The companion's costumeOf skips only the empty slots, the ones with no picture (OLD_UNOWN_N..Z, 264-276):
+    // MISSINGNO, REFLECTION, HANDSHAKE and the rest of 252-263 are daemons and may be worn.
+    if (s == own || (s >= SPECIES_OLD_UNOWN_N && s <= SPECIES_OLD_UNOWN_Z))
         return FALSE;
     return gSpeciesInfo[s].types[0] == type;
 }
