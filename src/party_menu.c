@@ -500,7 +500,7 @@ static void PartyMenuWitchingShimmer(void)
     u32 done = 0;
     u8 i, spriteId, pal;
 
-    if (sPartyMenuBoxes == NULL || gPaletteFade.active || !Witching_IsHour())
+    if (sPartyMenuBoxes == NULL || gPaletteFade.active || !Witching_ShimmerNow())
         return;
     for (i = 0; i < PARTY_SIZE; i++)
     {

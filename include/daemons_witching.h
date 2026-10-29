@@ -8,6 +8,7 @@
 #define WITCHING_PP         5      // uses a battle, per party slot
 
 bool8 Witching_IsHour(void);
+bool8 Witching_ShimmerNow(void);   // T-483: the hour, or Halloween with THE HERMETIC LAYER held
 u16 Witching_MoveForSpecies(u16 species);
 
 // The shimmer.

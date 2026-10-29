@@ -146,6 +146,12 @@ void Pulse_Tick(void)
         if (Hermetic_WorldPulses() && !DaemonsIsHalftone())
             mask = BG_ROWS(0, 12);
     }
+    else if (gMain.inBattle && gMain.callback2 == BattleMainCB2)
+    {
+        // T-482: the battle's ground (battle_bg.c loads the terrain into BG palettes 2-4); the battlers keep theirs.
+        if (Hermetic_BattlePulses() && !(gBattleTypeFlags & BATTLE_TYPE_LINK) && !DaemonsIsHalftone())
+            mask = BG_ROWS(2, 4);
+    }
     sPulseMask = mask;
     if (mask == 0)
         return;

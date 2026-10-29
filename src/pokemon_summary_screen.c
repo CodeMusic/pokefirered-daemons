@@ -3077,7 +3077,7 @@ static void CB2_RunPokemonSummaryScreen(void)
     BuildOamBuffer();
     UpdatePaletteFade();
     // T-480: in the witching hour the daemon's picture wears the shimmer (src/daemons_witching.c) -- not an egg's
-    if (sMonSummaryScreen != NULL && !sMonSummaryScreen->isEgg && !gPaletteFade.active && Witching_IsHour()
+    if (sMonSummaryScreen != NULL && !sMonSummaryScreen->isEgg && !gPaletteFade.active && Witching_ShimmerNow()
      && sMonSummaryScreen->monPicSpriteId < MAX_SPRITES && gSprites[sMonSummaryScreen->monPicSpriteId].inUse)
         Witching_ShimmerFromUnfaded(OBJ_PLTT_ID(gSprites[sMonSummaryScreen->monPicSpriteId].oam.paletteNum));
 }

@@ -612,7 +612,7 @@ static void Reflect(struct Sprite *follower)
     struct Sprite *refl;
 
     if (follower->invisible
-     || DaemonsIsWitchingHour()   // T-480: in the witching hour it casts no reflection
+     || Witching_ShimmerNow()   // T-480: in the witching hour it casts no reflection (T-483: all Halloween, with the book)
      || !MetatileBehavior_IsReflective(MapGridGetMetatileBehaviorAt(sFollower.tileX, sFollower.tileY + 1)))
     {
         DropReflection();
@@ -964,7 +964,7 @@ static void Shimmer(void)
 
     if (gPaletteFade.active)
         return;
-    if (!DaemonsIsWitchingHour())
+    if (!Witching_ShimmerNow())
     {
         if (sFollower.shimmer)
         {

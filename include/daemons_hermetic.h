@@ -7,6 +7,7 @@
 bool8 Hermetic_Held(void);
 bool8 Hermetic_IsHalloween(void);       // 31 October, by the calendar the holidays read (MASK NIGHT)
 bool8 Hermetic_WorldPulses(void);       // the book held, and 3-4 AM on the clock or all Halloween
+bool8 Hermetic_BattlePulses(void);      // T-482: the hour with THE SUBTLE LAYER held, or the world's pulse
 bool8 Hermetic_IsNight(void);           // specialvar: the book is read only at night
 
 void Hermetic_OnWitchingRoutine(void);  // a daemon has used its hour's routine (daemons_witching.c)

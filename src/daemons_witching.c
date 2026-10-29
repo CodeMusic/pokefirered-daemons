@@ -11,6 +11,7 @@
 #include "daemons_three.h"
 #include "daemons_time.h"
 #include "daemons_witching.h"
+#include "daemons_pulse.h"      // T-483: the shimmer breathes on the pulse
 #include "daemons_hermetic.h"   // T-483
 #include "constants/battle.h"
 #include "constants/flags.h"
@@ -44,7 +45,10 @@
 #define NOT_CARRIED (BATTLE_TYPE_LINK | BATTLE_TYPE_MULTI | BATTLE_TYPE_POKEDUDE | BATTLE_TYPE_OLD_MAN_TUTORIAL \
                    | BATTLE_TYPE_SAFARI)
 
-#define SHIMMER_COLOR RGB(29, 17, 26)   // gensubtle.py C_MARGIN: CONTEXT's hue, lit
+// T-483: THE SHIMMER BREATHES. Its colour is the pulse's (src/daemons_pulse.c) -- red to blue through the book's
+// purple, one breath every eight seconds on the clock -- so it matches the companion's (Witching.tsx WitchShimmer,
+// the boards' pulse565), and the flicker below stays its own. It was the book's lit purple, RGB(29, 17, 26).
+#define SHIMMER_COLOR Pulse_Now()
 
 // Sixteenths of the purple, a step every four frames: faint, and now and then a flicker up or down.
 static const u8 sShimmerWeights[16] = { 3, 4, 3, 3, 5, 3, 4, 2, 3, 4, 6, 3, 3, 4, 3, 1 };
@@ -52,6 +56,13 @@ static const u8 sShimmerWeights[16] = { 3, 4, 3, 3, 5, 3, 4, 2, 3, 4, 6, 3, 3, 4
 bool8 Witching_IsHour(void)
 {
     return DaemonsIsWitchingHour();
+}
+
+// T-483: when the party shimmers -- the hour, to anyone awake; and all of Halloween once THE HERMETIC LAYER is held
+// (the companion's shimmerNow). The routine stays the hour's alone.
+bool8 Witching_ShimmerNow(void)
+{
+    return DaemonsIsWitchingHour() || (Hermetic_Held() && Hermetic_IsHalloween());
 }
 
 u16 Witching_MoveForSpecies(u16 species)
@@ -76,7 +87,8 @@ u8 Witching_ShimmerWeight(void)
 void Witching_ShimmerFadedInPlace(u16 palOffset, u8 weight)
 {
     s32 i;
-    s32 tr = GET_R(SHIMMER_COLOR), tg = GET_G(SHIMMER_COLOR), tb = GET_B(SHIMMER_COLOR);
+    u16 colour = SHIMMER_COLOR;
+    s32 tr = GET_R(colour), tg = GET_G(colour), tb = GET_B(colour);
 
     for (i = 1; i < 16; i++)   // 0 is the transparent colour
     {
@@ -124,13 +136,13 @@ void Witching_BattleShimmer(void)
 
     if (gBattleStruct == NULL || gBattleSpritesDataPtr == NULL || gPaletteFade.active || gAnimScriptActive)
         return;
-    if ((gBattleTypeFlags & BATTLE_TYPE_LINK) || !Witching_IsHour())
+    if ((gBattleTypeFlags & BATTLE_TYPE_LINK) || !Witching_ShimmerNow())
     {
         if (gBattleStruct->witchFlags & WITCH_SHIMMERING)
         {
             for (b = 0; b < gBattlersCount; b++)
                 if (ShimmerCanTouch(b))
-                    BlendPalette(OBJ_PLTT_ID(gSprites[gBattlerSpriteIds[b]].oam.paletteNum), 16, 0, SHIMMER_COLOR);
+                    BlendPalette(OBJ_PLTT_ID(gSprites[gBattlerSpriteIds[b]].oam.paletteNum), 16, 0, RGB_BLACK);
             gBattleStruct->witchFlags &= ~WITCH_SHIMMERING;
         }
         return;

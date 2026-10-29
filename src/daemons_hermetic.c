@@ -52,6 +52,13 @@ bool8 Hermetic_WorldPulses(void)
     return Hermetic_Held() && (DaemonsIsWitchingHour() || Hermetic_IsHalloween());
 }
 
+// T-482: in battle the ground breathes in the hour once THE SUBTLE LAYER is held, as the hour's routine is offered;
+// and whenever the world itself is pulsing.
+bool8 Hermetic_BattlePulses(void)
+{
+    return (DaemonsIsWitchingHour() && FlagGet(FLAG_GOT_SUBTLE_LAYER)) || Hermetic_WorldPulses();
+}
+
 bool8 Hermetic_IsNight(void)
 {
     return DaemonsWatch() == WATCH_NIGHT;
