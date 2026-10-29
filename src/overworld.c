@@ -60,6 +60,7 @@
 #include "constants/region_map_sections.h"
 #include "constants/songs.h"
 #include "constants/sound.h"
+#include "daemons_hermetic.h"   // T-483: the book arrives
 
 #define PLAYER_LINK_STATE_IDLE 0x80
 #define PLAYER_LINK_STATE_BUSY 0x81
@@ -1520,6 +1521,12 @@ static void RelightIfTheLightChanged(void)
     if (++sRelightTimer < 60)
         return;
     sRelightTimer = 0;
+    // T-483: THE HERMETIC LAYER arrives in the bag, indoors or out, once its flag is set (in battle, or by a SYNC).
+    if (!gPaletteFade.active && !ArePlayerFieldControlsLocked() && (script = Hermetic_Arrival()) != NULL)
+    {
+        ScriptContext_SetupScript(script);
+        return;
+    }
     if (!IsMapTypeOutdoors(gMapHeader.mapType) || gPaletteFade.active
      || gWeatherPtr->palProcessingState != WEATHER_PAL_STATE_IDLE || ArePlayerFieldControlsLocked())
         return;

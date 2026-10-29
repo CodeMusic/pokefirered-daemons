@@ -751,6 +751,20 @@ void FieldUseFunc_SubtleLayer(u8 taskId)
     SetUpItemUseOnFieldCallback(taskId);
 }
 
+//  T-483: THE HERMETIC LAYER -- by night it opens on its cover; by day its script says it will not (EventScript_HermeticLayer).
+static void ItemUseOnFieldCB_HermeticLayer(u8 taskId)
+{
+    LockPlayerFieldControls();
+    ScriptContext_SetupScript(EventScript_HermeticLayer);
+    DestroyTask(taskId);
+}
+
+void FieldUseFunc_HermeticLayer(u8 taskId)
+{
+    sItemUseOnFieldCB = ItemUseOnFieldCB_HermeticLayer;
+    SetUpItemUseOnFieldCallback(taskId);
+}
+
 //  T-417: the HARP (CONTENT) or the FLUTE (CONTEXT). The bag closes and the field comes back, then the instrument comes
 //  out where the player stands (src/play.c) -- on foot or on the water, never on the bicycle.
 static void ItemUseOnFieldCB_Play(u8 taskId)

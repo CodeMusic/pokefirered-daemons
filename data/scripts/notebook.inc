@@ -62,6 +62,40 @@ EventScript_SubtleLayer::
 	releaseall
 	end
 
+@ T-483: THE HERMETIC LAYER, opened at its cover -- only at night (src/daemons_hermetic.c). DRAFT, every word.
+EventScript_HermeticLayer::
+	lockall
+	specialvar VAR_RESULT, Hermetic_IsNight
+	goto_if_eq VAR_RESULT, FALSE, EventScript_HermeticByDay
+	fadescreen FADE_TO_BLACK
+	special Hermetic_Open
+	waitstate
+	releaseall
+	end
+
+EventScript_HermeticByDay::
+	msgbox Text_HermeticByDay
+	releaseall
+	end
+
+@ T-483: the book arrives -- the first daemon to use its hour's routine with both other books held, or a SYNC from the
+@ companion. Said once, in the field, the next second the player has the controls.
+EventScript_HermeticArrives::
+	lockall
+	msgbox Text_HermeticArrives
+	releaseall
+	end
+
+Text_HermeticByDay::
+	.string "The pages will not part. It is still\n"
+	.string "light, and this book reads by night.$"
+
+Text_HermeticArrives::
+	.string "There is a book in the bag that was\n"
+	.string "not there before.\p"
+	.string "THE HERMETIC LAYER. Its pages are\n"
+	.string "cool, and it opens only at night.$"
+
 @ T-218/T-219: a document the player has just read is filed. Said once, and only if the NOTEBOOK is held --
 @ before CAIRN hands it over, the page is still copied out (every entry is a flag), just not into anything.
 EventScript_NotebookCopied::

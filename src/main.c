@@ -18,6 +18,7 @@
 #include "quest_log.h"
 #include "sloopsvc.h"
 #include "daemons_rtc.h"
+#include "daemons_pulse.h"   // T-483
 
 extern u32 intr_main[];
 
@@ -217,6 +218,7 @@ void AgbMain()
         MapMusicMain();
         DaemonsHalftoneTick();       // T-430: the first sight, a tower floor's return, a splash
         DaemonsGreyHalftoneFrame();
+        Pulse_Tick();                // T-483: whether the world is breathing this frame, and in what colour
         WaitForVBlank();
     }
 }

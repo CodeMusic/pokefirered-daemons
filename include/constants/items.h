@@ -240,7 +240,7 @@
 #define ITEM_HARP 229  // T-417: CONTENT's instrument (PLAY). Was ITEM_0E5, unused
 #define ITEM_FLUTE 230 // T-417: CONTEXT's instrument (PLAY). Was ITEM_0E6, unused
 #define ITEM_SUBTLE_LAYER 231 // T-423: THE SUBTLE LAYER, the trainer's handbook. Was ITEM_0E7, unused
-#define ITEM_0E8 232
+#define ITEM_HERMETIC_LAYER 232 // T-483: THE HERMETIC LAYER, read only at night. Was ITEM_0E8, unused
 #define ITEM_0E9 233
 #define ITEM_0EA 234
 #define ITEM_0EB 235

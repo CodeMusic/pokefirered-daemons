@@ -12,6 +12,7 @@
 #include "book_reader.h"
 #include "notebook.h"   // T-410: the ROOT's balance
 #include "play.h"   // T-417: a SONGBOOK page's notes
+#include "daemons_pulse.h"   // T-483: THE HERMETIC LAYER breathes
 #include "constants/songs.h"
 
 //  T-223: THE NOTEBOOK AND THE TEXTBOOK, READ LIKE BOOKS (docs/school.md 9, 6).
@@ -42,7 +43,7 @@
 //  text is printed with a transparent background, so the rules show through it as they would through ink.
 //  Everything lives on the HEAP; EWRAM has under a kilobyte free.
 
-enum { BOOK_NOTEBOOK, BOOK_TEXTBOOK, BOOK_GUIDE, BOOK_SUBTLE };   // T-423: THE SUBTLE LAYER
+enum { BOOK_NOTEBOOK, BOOK_TEXTBOOK, BOOK_GUIDE, BOOK_SUBTLE, BOOK_HERMETIC };   // T-423: THE SUBTLE LAYER; T-483
 enum { VIEW_PAGE, VIEW_CONTENTS, VIEW_CHAPTER, VIEW_TOPIC, VIEW_COVER, VIEW_GUIDE_CONTENTS, VIEW_GUIDE_ENTRY,
        VIEW_SUBTLE_CONTENTS, VIEW_SUBTLE_ENTRY };
 
@@ -255,6 +256,26 @@ struct GuideSection { const u8 *label; const u8 *heading; u8 first; u8 count; };
 struct GuideEntry { const u8 *shortTitle; const u8 *title; const u8 *text; };
 #include "data/guide.h"
 #include "data/subtle_layer.h"   // T-423: tools/gensubtle.py
+#include "data/hermetic_layer.h" // T-483: the same tool, the same types
+
+//  T-483: THE LAYER BOOKS. THE SUBTLE LAYER and THE HERMETIC LAYER are one kind of book -- a cover, a contents spread,
+//  then each entry's picture on the left and its text on the right -- written by one tool, so the reader keeps one
+//  set of views for both and asks which book's tables to read.
+struct LayerBook
+{
+    const struct SubtleSection *sections;
+    const struct SubtleEntry *entries;
+    const struct SubtlePicture *pictures;
+    const u32 *cover;
+    u8 sectionCount;
+    u8 entryCount;
+};
+
+static const struct LayerBook sLayerBooks[2] =
+{
+    { sSubtleSections, sSubtleEntries, sSubtlePictures, sSubtleCover, SUBTLE_SECTIONS, SUBTLE_ENTRIES },
+    { sHermeticSections, sHermeticEntries, sHermeticPictures, sHermeticCover, HERMETIC_SECTIONS, HERMETIC_ENTRIES },
+};
 
 static const u16 sGuidePal[] = INCBIN_U16("graphics/book/guide_cover.gbapal");
 static const u32 sGuideCover[] = INCBIN_U32("graphics/book/guide_cover.4bpp");
@@ -264,6 +285,7 @@ static const u8 sText_GuideContents[] = _("CONTENTS");
 
 static void Task_BookInit(u8 taskId);
 static void Task_BookInput(u8 taskId);
+static bool8 IsLayerBook(void);
 
 #include "data/qr_codes.h"
 
@@ -373,7 +395,7 @@ static u8 Reflow(const u8 *src, u16 width, u8 font)
             }
             para++;
             indent = (sBook->book == BOOK_GUIDE)    // the Guide's wide page: a paragraph opens indented
-                  || (sBook->book == BOOK_SUBTLE && !sBook->voices);   // and THE SUBTLE LAYER's, but not two voices
+                  || (IsLayerBook() && !sBook->voices);   // and THE SUBTLE LAYER's, but not two voices
             continue;
         }
         if (*src == CHAR_SPACE || *src == CHAR_NEWLINE || *src == CHAR_PROMPT_SCROLL)
@@ -1065,13 +1087,27 @@ static void DrawGuideEntry(void)
 #define SB_PER_PAGE  ((SB_BOTTOM - SB_TOP) / TB_PITCH)
 #define SB_ANIM      40          // frames between a picture's frames (SHADOWS, WHICH PATH)
 
+static bool8 IsLayerBook(void)
+{
+    return sBook->book == BOOK_SUBTLE || sBook->book == BOOK_HERMETIC;
+}
+
+static const struct LayerBook *Layer(void)
+{
+    return &sLayerBooks[sBook->book == BOOK_HERMETIC];
+}
+
+//  T-483: an INSCRIPTION ('^ ' in docs/hermetic-layer.md) is printed in the tablet's emerald -- C_RING, which
+//  BreatheHermetic moves with the pulse -- over the page's own shadow.
+static const u8 sInscribed[3] = { C_NONE, C_RING, C_SHADOW };
+
 static u8 SubtleSectionOf(u8 entry)
 {
     u8 k;
 
-    for (k = SUBTLE_SECTIONS - 1; k > 0; k--)
+    for (k = Layer()->sectionCount - 1; k > 0; k--)
     {
-        if (entry >= sSubtleSections[k].first)
+        if (entry >= Layer()->sections[k].first)
             break;
     }
     return k;
@@ -1079,20 +1115,20 @@ static u8 SubtleSectionOf(u8 entry)
 
 static void DrawSubtleCover(void)
 {
-    CpuFastCopy(sSubtleCover, gWindows[WIN_BOOK].tileData, BR_WIN_BYTES);
+    CpuFastCopy(Layer()->cover, gWindows[WIN_BOOK].tileData, BR_WIN_BYTES);
     CopyWindowToVram(WIN_BOOK, COPYWIN_GFX);
 }
 
 static void DrawSubtleContents(void)
 {
-    const struct SubtleSection *sec = &sSubtleSections[sBook->section];
+    const struct SubtleSection *sec = &Layer()->sections[sBook->section];
     u8 k, n;
     s16 x = TB_LEFT_X + TB_TEXT_INSET, rx = TB_RIGHT_X + TB_TEXT_INSET, y;
 
     Background(DrawGuideBook);
     Print(BR_FONT, sInk, TB_LEFT_X + (TB_PAGE_W - Width(BR_FONT, sText_GuideContents)) / 2, 10, sText_GuideContents);
     Rect(C_RULE, x, 26, TB_TEXT_W, 1);
-    for (k = 0; k < SUBTLE_SECTIONS; k++)
+    for (k = 0; k < Layer()->sectionCount; k++)
     {
         y = GC_SECTION_TOP + k * GC_SECTION_PITCH;
         if (k == sBook->section)
@@ -1102,7 +1138,7 @@ static void DrawSubtleContents(void)
             else
                 Rect(C_HIGHLIGHT, x - 3, y - 1, TB_TEXT_W + 4, GC_SECTION_PITCH);
         }
-        Print(BR_FONT, sInk, x, y - 2, sSubtleSections[k].label);
+        Print(BR_FONT, sInk, x, y - 2, Layer()->sections[k].label);
     }
     n = Reflow(sec->heading, TB_TEXT_W, BR_SMALL);
     for (k = 0; k < n && k < 2; k++)
@@ -1113,14 +1149,14 @@ static void DrawSubtleContents(void)
         y = GC_ENTRY_TOP + k * GC_ENTRY_PITCH;
         if (sBook->focusRight && k == sBook->cursor)
             Rect(C_HIGHLIGHT, rx - 3, y - 1, TB_TEXT_W + 4, GC_ENTRY_PITCH - 2);
-        Print(BR_FONT, sInk, rx, y, sSubtleEntries[sec->first + k].shortTitle);
+        Print(BR_FONT, sInk, rx, y, Layer()->entries[sec->first + k].shortTitle);
     }
     CopyWindowToVram(WIN_BOOK, COPYWIN_GFX);
 }
 
 static void DrawSubtlePicture(void)
 {
-    const struct SubtlePicture *p = &sSubtlePictures[sSubtleEntries[sBook->entry].picture];
+    const struct SubtlePicture *p = &Layer()->pictures[Layer()->entries[sBook->entry].picture];
 
     BlitBitmapRectToWindow(WIN_BOOK, (const u8 *)p->frame[sBook->picFrame % p->frames], 0, 0, p->w, p->h,
                            SB_PIC_X, SB_PIC_Y, p->w, p->h);
@@ -1130,13 +1166,13 @@ static void DrawSubtlePicture(void)
 //  are left in sBook->lines, and the spread count is set.
 static u8 SubtleLayout(u8 *titleLines, u8 *firstLines)
 {
-    const struct SubtleEntry *e = &sSubtleEntries[sBook->entry];
+    const struct SubtleEntry *e = &Layer()->entries[sBook->entry];
     u8 start, n;
 
     *titleLines = Reflow(e->title, TB_TEXT_W, BR_SMALL);
     start = 19 + *titleLines * 10 + 9;
     *firstLines = (SB_BOTTOM - start) / TB_PITCH;
-    sBook->voices = (e->faint != 0);
+    sBook->voices = (e->faint | e->inscribed) != 0;   // T-483: an inscription starts its own line, as a voice does
     n = Reflow(e->text, TB_TEXT_W, BR_FONT);
     sBook->voices = FALSE;
     sBook->spreadCount = 1;
@@ -1149,16 +1185,17 @@ static u8 SubtleLayout(u8 *titleLines, u8 *firstLines)
 
 static void PrintSubtleLines(u8 from, u8 count, s16 x, s16 y)
 {
-    const struct SubtleEntry *e = &sSubtleEntries[sBook->entry];
+    const struct SubtleEntry *e = &Layer()->entries[sBook->entry];
     u8 i;
 
     for (i = 0; i < count && from + i < sBook->lineCount; i++)
-        Print(BR_FONT, (e->faint >> sBook->linePara[from + i]) & 1 ? sFaint : sInk, x, y + i * TB_PITCH, Line(from + i));
+        Print(BR_FONT, (e->faint >> sBook->linePara[from + i]) & 1 ? sFaint
+                     : (e->inscribed >> sBook->linePara[from + i]) & 1 ? sInscribed : sInk, x, y + i * TB_PITCH, Line(from + i));
 }
 
 static void DrawSubtleEntry(void)
 {
-    const struct SubtleEntry *e = &sSubtleEntries[sBook->entry];
+    const struct SubtleEntry *e = &Layer()->entries[sBook->entry];
     u8 buf[6], titleLines, firstLines, i, n, from;
     s16 x = TB_LEFT_X + TB_TEXT_INSET, rx = TB_RIGHT_X + TB_TEXT_INSET, start;
     u16 folio = e->folio + 2 * sBook->spread;
@@ -1180,7 +1217,7 @@ static void DrawSubtleEntry(void)
         n = Reflow(e->caption, TB_TEXT_W, BR_SMALL);
         for (i = 0; i < n && i < 3; i++)
             Print(BR_SMALL, sFaint, x + (TB_TEXT_W - Width(BR_SMALL, Line(i))) / 2, SB_CAP_Y + i * 10, Line(i));
-        Print(BR_SMALL, sFaint, rx, 9, sSubtleSections[SubtleSectionOf(sBook->entry)].label);
+        Print(BR_SMALL, sFaint, rx, 9, Layer()->sections[SubtleSectionOf(sBook->entry)].label);
         n = Reflow(e->title, TB_TEXT_W, BR_SMALL);
         for (i = 0; i < n; i++)
             Print(BR_SMALL, sInk, rx, 19 + i * 10, Line(i));
@@ -1210,9 +1247,9 @@ static void AnimateSubtlePicture(void)
 {
     const struct SubtlePicture *p;
 
-    if (sBook->book != BOOK_SUBTLE || sBook->view != VIEW_SUBTLE_ENTRY || sBook->spread != 0)
+    if (!IsLayerBook() || sBook->view != VIEW_SUBTLE_ENTRY || sBook->spread != 0)
         return;
-    p = &sSubtlePictures[sSubtleEntries[sBook->entry].picture];
+    p = &Layer()->pictures[Layer()->entries[sBook->entry].picture];
     if (p->frames < 2 || ++sBook->picTimer < SB_ANIM)
         return;
     sBook->picTimer = 0;
@@ -1229,7 +1266,7 @@ static void Draw(void)
     case VIEW_CONTENTS:       DrawContents();      break;
     case VIEW_CHAPTER:        DrawChapter();       break;
     case VIEW_TOPIC:          DrawTopic();         break;
-    case VIEW_COVER:          if (sBook->book == BOOK_SUBTLE) DrawSubtleCover(); else DrawGuideCover(); break;
+    case VIEW_COVER:          if (IsLayerBook()) DrawSubtleCover(); else DrawGuideCover(); break;
     case VIEW_SUBTLE_CONTENTS: DrawSubtleContents(); break;
     case VIEW_SUBTLE_ENTRY:    DrawSubtleEntry();    break;
     case VIEW_GUIDE_CONTENTS: DrawGuideContents(); break;
@@ -1396,9 +1433,17 @@ static void Input_Cover(void)
     {
         Leave();
     }
+    else if (JOY_NEW(A_BUTTON) && sBook->book == BOOK_HERMETIC)
+    {
+        // T-483: THE HERMETIC LAYER opens with its warning, as written, every time; its contents come after.
+        sBook->entry = 0;
+        sBook->spread = 0;
+        sBook->view = VIEW_SUBTLE_ENTRY;
+        Turn();
+    }
     else if (JOY_NEW(A_BUTTON))
     {
-        sBook->view = (sBook->book == BOOK_SUBTLE) ? VIEW_SUBTLE_CONTENTS : VIEW_GUIDE_CONTENTS;
+        sBook->view = IsLayerBook() ? VIEW_SUBTLE_CONTENTS : VIEW_GUIDE_CONTENTS;
         Turn();
     }
 }
@@ -1509,7 +1554,7 @@ static void Input_GuideEntry(void)
 
 static void Input_SubtleContents(void)
 {
-    u8 count = sSubtleSections[sBook->section].count;
+    u8 count = Layer()->sections[sBook->section].count;
 
     if (!sBook->focusRight)
     {
@@ -1529,7 +1574,7 @@ static void Input_SubtleContents(void)
             sBook->section--;
             Move();
         }
-        else if (JOY_NEW(DPAD_DOWN) && sBook->section + 1 < SUBTLE_SECTIONS)
+        else if (JOY_NEW(DPAD_DOWN) && sBook->section + 1 < Layer()->sectionCount)
         {
             sBook->section++;
             Move();
@@ -1543,7 +1588,7 @@ static void Input_SubtleContents(void)
     }
     else if (JOY_NEW(A_BUTTON))
     {
-        sBook->entry = sSubtleSections[sBook->section].first + sBook->cursor;
+        sBook->entry = Layer()->sections[sBook->section].first + sBook->cursor;
         sBook->spread = 0;
         sBook->view = VIEW_SUBTLE_ENTRY;
         Turn();
@@ -1563,7 +1608,7 @@ static void Input_SubtleContents(void)
 static void SubtleBackToContents(void)
 {
     sBook->section = SubtleSectionOf(sBook->entry);
-    sBook->cursor = sBook->entry - sSubtleSections[sBook->section].first;
+    sBook->cursor = sBook->entry - Layer()->sections[sBook->section].first;
     sBook->focusRight = TRUE;
     sBook->view = VIEW_SUBTLE_CONTENTS;
     Turn();
@@ -1586,7 +1631,7 @@ static void Input_SubtleEntry(void)
         {
             SubtleBackToContents();
         }
-        else if (sBook->entry + 1 < SUBTLE_ENTRIES)
+        else if (sBook->entry + 1 < Layer()->entryCount)
         {
             sBook->entry++;
             sBook->spread = 0;
@@ -1607,6 +1652,23 @@ static void Input_SubtleEntry(void)
             Turn();
         }
     }
+}
+
+//  T-483: THE HERMETIC LAYER BREATHES -- the backdrop round the open book takes about 30% of the pulse, and every
+//  INSCRIPTION's emerald rises and falls with it (src/daemons_pulse.c, the app's and the watches' breath). Both are
+//  worked out from the book's own palette each frame and written whole, so nothing compounds; never during a fade.
+static void BreatheHermetic(void)
+{
+    u8 phase;
+    u16 backdrop;
+
+    if (sBook->book != BOOK_HERMETIC || gPaletteFade.active)
+        return;
+    phase = Pulse_Phase();
+    backdrop = Pulse_Blend(sHermeticPal[C_COVER], Pulse_Colour(phase), PULSE_BG_WEIGHT);
+    gPlttBufferUnfaded[0] = gPlttBufferFaded[0] = backdrop;
+    gPlttBufferUnfaded[BG_PLTT_ID(15) + C_COVER] = gPlttBufferFaded[BG_PLTT_ID(15) + C_COVER] = backdrop;
+    gPlttBufferUnfaded[BG_PLTT_ID(15) + C_RING] = gPlttBufferFaded[BG_PLTT_ID(15) + C_RING] = Pulse_Emerald(phase);
 }
 
 static void Task_BookInput(u8 taskId)
@@ -1643,7 +1705,10 @@ static void Task_BookInput(u8 taskId)
     case VIEW_SUBTLE_ENTRY:    Input_SubtleEntry();    break;
     }
     if (sBook != NULL && !sBook->leaving)
+    {
         AnimateSubtlePicture();
+        BreatheHermetic();
+    }
 }
 
 //  ---------------------------------------------------------------- the screen
@@ -1668,6 +1733,7 @@ static void Task_BookInit(u8 taskId)
     const u16 *pal = (sBook->book == BOOK_NOTEBOOK) ? sNotebookPal
                    : (sBook->book == BOOK_GUIDE)    ? sGuidePal
                    : (sBook->book == BOOK_SUBTLE)   ? sSubtlePal
+                   : (sBook->book == BOOK_HERMETIC) ? sHermeticPal
                    : sTextbookPal;
 
     switch (sBook->initState)
@@ -1796,6 +1862,13 @@ void Guide_Open(void)
 void Subtle_Open(void)
 {
     if (OpenBook(BOOK_SUBTLE, VIEW_COVER))
+        sBook->picEntry = 0xFF;
+}
+
+//  T-483: THE HERMETIC LAYER, open at its cover -- only ever at night (its script asks Hermetic_IsNight first).
+void Hermetic_Open(void)
+{
+    if (OpenBook(BOOK_HERMETIC, VIEW_COVER))
         sBook->picEntry = 0xFF;
 }
 

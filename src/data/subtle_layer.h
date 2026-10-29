@@ -6,9 +6,12 @@
 #define SUBTLE_ENTRIES  51
 #define SUBTLE_PICTURES 51
 
+#ifndef GUARD_LAYER_BOOK_TYPES   // one set of types for every book this tool writes (T-483)
+#define GUARD_LAYER_BOOK_TYPES
 struct SubtleSection { const u8 *label; const u8 *heading; u8 first; u8 count; };
-struct SubtleEntry { const u8 *shortTitle; const u8 *title; const u8 *text; const u8 *caption; u8 picture; u16 faint; u16 folio; };
+struct SubtleEntry { const u8 *shortTitle; const u8 *title; const u8 *text; const u8 *caption; u8 picture; u16 faint; u16 folio; u16 inscribed; };
 struct SubtlePicture { const u32 *frame[3]; u8 w; u8 h; u8 frames; };
+#endif
 
 static const u16 sSubtlePal[16] =
 {

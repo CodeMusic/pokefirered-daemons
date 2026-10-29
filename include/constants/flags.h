@@ -1927,7 +1927,7 @@
 #define FLAG_HIDE_ANNEX_WORKBENCH             (DAEMONS_FLAGS_START + 0x3F2)   // T-460: THE ANNEX's half-built receiver, hidden until CRYSTAL
                                                                                 //   has gone home (BirthIsland_Exterior_OnTransition)
 #define FLAG_GOT_HERMETIC_LAYER               (DAEMONS_FLAGS_START + 0x3F3)   // T-483: THE HERMETIC LAYER held (SPELLCRAFT); set in the game
-                                                                                //   or written by the companion at a sync (C-237)
+                                                                                //   or written by the companion at a sync (C-238)
 
 //  BEGIN gbaglobalindex -- T-334: each fixed encounter of the GLOBAL INDEX, once gone (removeobject sets it). The beasts'
 //  and the edition daemons' are also set on every map load while they may not stand (event_data.c,

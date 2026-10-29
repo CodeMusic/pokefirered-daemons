@@ -366,6 +366,8 @@ gSpecials::
 	def_special Guide_Open
 	def_special Guide_OpenBoardCopy
 	def_special Subtle_Open
+	def_special Hermetic_Open
+	def_special Hermetic_IsNight
 	def_special DaemonsRepaintPlayerShoes
 	def_special SingingFir_Sing
 	def_special Play_ShouldHear

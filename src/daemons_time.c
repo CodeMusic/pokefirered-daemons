@@ -26,6 +26,7 @@ static EWRAM_DATA u32 sWatchReadAt = 0;
 static EWRAM_DATA bool8 sWatchRead = FALSE;
 static EWRAM_DATA u16 sDayNumber = 0;      // T-415: the date as a count of days, for the weather's seed
 static EWRAM_DATA u16 sMinuteOfDay = 0;    // T-415: 0-1439
+static u8 sSecond;                         // T-483: the clock's second, for the pulse (IWRAM)
 
 // The clock's hours: dawn 5-7, day 7-18, dusk 18-20, night 20-5.
 static u8 WatchFromHour(u8 hour)
@@ -108,6 +109,7 @@ static void ReadClock(void)
         sSeason = EditionSeason(NorthSeason(clock.month, clock.day));
         sDayNumber = DayNumber(clock.year, clock.month, clock.day);
         sMinuteOfDay = clock.hour * 60 + clock.minute;
+        sSecond = clock.second;
     }
     else
     {
@@ -222,6 +224,16 @@ bool8 DaemonsIsWitchingHour(void)
         return gDaemonsWatchOverride == WATCH_OVERRIDE_WITCHING;
     ReadClock();
     return sWatchFromClock && sMinuteOfDay / 60 == 3;
+}
+
+// T-483: the pulse's clock -- the second of the day the cartridge's clock last said, and the frame it was read on;
+// FALSE when there is no clock (the pulse then breathes on play time). Never DEBUG's DATE, which moves the sky.
+bool8 DaemonsPulseClock(u32 *second, u32 *readAt)
+{
+    ReadClock();
+    *second = (u32)(sMinuteOfDay % 1440) * 60 + sSecond;
+    *readAt = sWatchReadAt;
+    return sWatchFromClock;
 }
 
 bool8 DaemonsWatchIsFromClock(void)

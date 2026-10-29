@@ -3,6 +3,7 @@
 #include "util.h"
 #include "decompress.h"
 #include "fieldmap.h"   // T-254: DaemonsGreyHalftoneFrame
+#include "daemons_pulse.h"   // T-483: the pulse, laid on at every copy to PLTT
 #include "task.h"
 
 enum
@@ -110,6 +111,7 @@ void TransferPlttBuffer(void)
         //  closes the other door.) A buffer main.c already settled costs a compare an entry.
         DaemonsGreyHalftoneFrame();
         DmaCopy16(3, src, dest, PLTT_SIZE);
+        Pulse_ApplyToPltt();   // T-483: the pulsing rows again, blended from the buffer, which it never touches
         sPlttBufferTransferPending = FALSE;
         if (gPaletteFade.mode == HARDWARE_FADE && gPaletteFade.active)
             UpdateBlendRegisters();
@@ -192,6 +194,7 @@ bool8 BeginNormalPaletteFade(u32 selectedPalettes, s8 delay, u8 startY, u8 targe
         //  with the theatre's pburst, which dumps palette RAM beside each frame.
         DaemonsGreyHalftoneFrame();
         CpuCopy32(gPlttBufferFaded, (void *)PLTT, PLTT_SIZE);
+        Pulse_ApplyToPltt();   // T-483
         sPlttBufferTransferPending = FALSE;
         if (gPaletteFade.mode == HARDWARE_FADE && gPaletteFade.active)
             UpdateBlendRegisters();
