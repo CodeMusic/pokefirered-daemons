@@ -1250,7 +1250,7 @@ static const u16 sTMHMMoves[] =
     MOVE_THIEF,
     MOVE_STEEL_WING,
     MOVE_SKILL_SWAP,
-    MOVE_SNATCH,
+    MOVE_ALIGN, // T-489: PLUGIN49 was SNATCH
     MOVE_OVERHEAT,
     MOVE_CUT,
     MOVE_FLY,

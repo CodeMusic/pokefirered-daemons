@@ -5446,7 +5446,7 @@
       "price": 3000,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "Takes their repair\\nor state change for\\nitself instead.",
+      "description_english": "The foe takes on the user's type,\\nand every weakness that comes\\nwith it.",
       "importance": 0,
       "registrability": 0,
       "pocket": "POCKET_TM_CASE",
@@ -5455,7 +5455,7 @@
       "battleUsage": 0,
       "battleUseFunc": "NULL",
       "secondaryId": 0,
-      "moveId": "Snatch"
+      "moveId": "Align"
     },
     {
       "english": "PLUGIN50",

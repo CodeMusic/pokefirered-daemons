@@ -211,6 +211,7 @@ AI_CheckBadMove_CheckEffect::
 	if_effect EFFECT_WATER_SPORT, AI_CBM_WaterSport
 	if_effect EFFECT_CALM_MIND, AI_CBM_CalmMind
 	if_effect EFFECT_DRAGON_DANCE, AI_CBM_DragonDance
+	if_effect EFFECT_ALIGN, AI_CBM_Align
 	end
 
 AI_CBM_Sleep::
@@ -563,6 +564,16 @@ AI_CBM_Recycle::
 AI_CBM_Imprison::
 	if_status3 AI_USER, STATUS3_IMPRISONED_OTHERS, Score_Minus10
 	end
+
+@ T-489: ALIGN fails on a foe already of the user's type, which is what it leaves behind; so not twice running.
+AI_CBM_Align::
+	get_last_used_move AI_USER
+	if_in_hwords AI_CBM_Align_Moves, Score_Minus10
+	end
+
+AI_CBM_Align_Moves::
+	.2byte MOVE_ALIGN
+	.2byte -1
 
 AI_CBM_Refresh::
 	if_not_status AI_USER, STATUS1_POISON | STATUS1_BURN | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON, Score_Minus10
@@ -2855,6 +2866,7 @@ AI_SetupFirstTurn_SetupEffectsToEncourage::
 	.byte EFFECT_BULK_UP
 	.byte EFFECT_CALM_MIND
 	.byte EFFECT_CAMOUFLAGE
+	.byte EFFECT_ALIGN   @ T-489
 	.byte -1
 
 AI_PreferStrongestMove::

@@ -235,6 +235,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectCalmMind               @ EFFECT_CALM_MIND
 	.4byte BattleScript_EffectDragonDance            @ EFFECT_DRAGON_DANCE
 	.4byte BattleScript_EffectCamouflage             @ EFFECT_CAMOUFLAGE
+	.4byte BattleScript_EffectAlign                  @ EFFECT_ALIGN (T-489)
 
 BattleScript_EffectHit::
 	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler
@@ -2795,6 +2796,21 @@ BattleScript_EffectCamouflage::
 	attackanimation
 	waitanimation
 	printstring STRINGID_PKMNCHANGEDTYPE
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
+@ T-489, DRAFT: ALIGN. CAST's change of type (tryconversiontypechange), done to the TARGET, in the user's own first
+@ type. A status routine aimed at the foe, so a SUBSTITUTE stops it and TURNABOUT (MAGIC COAT) sends it back.
+BattleScript_EffectAlign::
+	attackcanceler
+	attackstring
+	ppreduce
+	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_ButItFailed
+	accuracycheck BattleScript_ButItFailed, ACC_CURR_MOVE
+	tryconversiontypechange BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	printstring STRINGID_PKMNALIGNED
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 

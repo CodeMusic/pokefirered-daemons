@@ -38,6 +38,7 @@ static const u8 sMoveClass[MOVES_COUNT] =
 {
     [MOVE_ACID_ARMOR      ] = MOVE_CLASS_RAISE,  // PASSIVATE
     [MOVE_AGILITY         ] = MOVE_CLASS_RAISE,  // REFRAME
+    [MOVE_ALIGN           ] = MOVE_CLASS_OTHER,  // ALIGN
     [MOVE_AMNESIA         ] = MOVE_CLASS_RAISE,  // UNLEARN
     [MOVE_AROMATHERAPY    ] = MOVE_CLASS_MEND,   // RETRAIN
     [MOVE_ASSIST          ] = MOVE_CLASS_OTHER,  // BORROW

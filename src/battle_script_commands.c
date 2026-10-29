@@ -7064,6 +7064,27 @@ static void Cmd_tryconversiontypechange(void)
     u8 moveChecked;
     u8 moveType;
 
+    //  T-489 (bible 2.12 and 10's Open log; the user, 2026-10-29), DRAFT: ALIGN, the frame family's reverse. CAST
+    //  turns the user into one of its own routines' types; ALIGN turns the TARGET into the user's own first type --
+    //  the same change, the same one type in both slots, done to the other side. It fails on a foe already wholly
+    //  that type, and on a user whose type is the ??? one, which has no frame to hand over.
+    if (gBattleMoves[gCurrentMove].effect == EFFECT_ALIGN)
+    {
+        moveType = gBattleMons[gBattlerAttacker].type1;
+        if (moveType == TYPE_MYSTERY
+            || (gBattleMons[gBattlerTarget].type1 == moveType && gBattleMons[gBattlerTarget].type2 == moveType))
+        {
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 1);
+        }
+        else
+        {
+            SET_BATTLER_TYPE(gBattlerTarget, moveType);
+            PREPARE_TYPE_BUFFER(gBattleTextBuff1, moveType);
+            gBattlescriptCurrInstr += 5;
+        }
+        return;
+    }
+
     while (validMoves < MAX_MON_MOVES)
     {
         if (gBattleMons[gBattlerAttacker].moves[validMoves] == MOVE_NONE)

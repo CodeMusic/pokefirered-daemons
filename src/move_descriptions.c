@@ -391,6 +391,8 @@ const u8 gMoveDescription_ThinSeam[] = _("Reaches through\nwhere the layers\nwea
 const u8 gMoveDescription_BlackIce[] = _("Ice no one sees\nuntil it is under\nthem.\nGone by four.");   // T-480, DRAFT
 const u8 gMoveDescription_BeforeDawn[] = _("Something new,\nalmost here. It\nbreaks through.\nGone by four.");   // T-480, DRAFT
 const u8 gMoveDescription_Veil[] = _("Strikes from\nbehind a veil no\none can lift.\nGone by four.");   // T-480, DRAFT
+// T-489, DRAFT: ALIGN, and PLUGIN49's words too (engine.md trap 27).
+const u8 gMoveDescription_Align[] = _("The foe takes on\nthe user's type,\nand every weakness\nthat comes with it.");
 
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_POUND         - 1] = gMoveDescription_Pound,
@@ -774,4 +776,5 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_BLACK_ICE    - 1] = gMoveDescription_BlackIce,   // T-480, DRAFT
     [MOVE_BEFORE_DAWN  - 1] = gMoveDescription_BeforeDawn,   // T-480, DRAFT
     [MOVE_VEIL         - 1] = gMoveDescription_Veil,   // T-480, DRAFT
+    [MOVE_ALIGN        - 1] = gMoveDescription_Align,   // T-489, DRAFT
 };

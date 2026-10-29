@@ -401,7 +401,12 @@
 #define MOVE_WITCHING_LAST   381
 #define IS_WITCHING_MOVE(move) ((move) >= MOVE_WITCHING_FIRST && (move) <= MOVE_WITCHING_LAST)
 
-#define MOVES_COUNT 382
+// T-489 (bible 2.12 and 10's Open log, the user 2026-10-29): ALIGN, the frame family's reverse -- PERSPECTIVE is
+// "I take yours", ALIGN is "you take mine": the foe takes the user's type. CONTEXT. SCORN's own, and PLUGIN49's, found
+// in the CORPUS HIDEOUT. Appended, so no existing ID moves. DRAFT.
+#define MOVE_ALIGN 382
+
+#define MOVES_COUNT 383
 
 // Used for checks for moves affected by Disable, Mimic, etc.
 #define MOVE_UNAVAILABLE 0xFFFF

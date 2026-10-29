@@ -3480,7 +3480,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_BossGiovanni),
+        .party = NO_ITEM_CUSTOM_MOVES(sParty_BossGiovanni),   // T-489: the ace knows ALIGN
     },
     [TRAINER_BOSS_GIOVANNI_2] = {
         .trainerClass = TRAINER_CLASS_BOSS,
@@ -3490,7 +3490,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_BossGiovanni2),
+        .party = NO_ITEM_CUSTOM_MOVES(sParty_BossGiovanni2),   // T-489: the ace knows ALIGN
     },
     [TRAINER_LEADER_GIOVANNI] = {
         .trainerClass = TRAINER_CLASS_LEADER,

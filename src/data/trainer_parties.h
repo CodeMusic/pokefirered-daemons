@@ -4111,44 +4111,55 @@ static const struct TrainerMonNoItemDefaultMoves sParty_ScientistIvan[] = {
     },
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_BossGiovanni[] = {
+// T-489, DRAFT: SCORN's ace knows ALIGN in both of CORPUS's battles -- the HIDEOUT's B4F, where PLUGIN49 lies, and
+// SCORN SOLUTIONS. Custom moves now so the ace can carry it: every other daemon keeps its default moves, written out
+// (the last four its learnset gives at that level), and the ace's TAIL WHIP -- a status routine -- gives way to it.
+// His Benchmark 8 party is T-413's and stays as built.
+static const struct TrainerMonNoItemCustomMoves sParty_BossGiovanni[] = {
     {
         .iv = 250,
         .lvl = 25,
         .species = SPECIES_ONIX,
+        .moves = {MOVE_BIND, MOVE_ROCK_THROW, MOVE_HARDEN, MOVE_RAGE},
     },
     {
         .iv = 250,
         .lvl = 24,
         .species = SPECIES_RHYHORN,
+        .moves = {MOVE_TAIL_WHIP, MOVE_MAGNITUDE, MOVE_FURY_ATTACK, MOVE_SCARY_FACE},
     },
     {
         .iv = 250,
         .lvl = 29,
         .species = SPECIES_KANGASKHAN,
+        .moves = {MOVE_BITE, MOVE_ALIGN, MOVE_FAKE_OUT, MOVE_MEGA_PUNCH},
     },
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_BossGiovanni2[] = {
+static const struct TrainerMonNoItemCustomMoves sParty_BossGiovanni2[] = {
     {
         .iv = 250,
         .lvl = 37,
         .species = SPECIES_NIDORINO,
+        .moves = {MOVE_POISON_STING, MOVE_HORN_ATTACK, MOVE_HELPING_HAND, MOVE_FURY_ATTACK},
     },
     {
         .iv = 250,
         .lvl = 35,
         .species = SPECIES_KANGASKHAN,
+        .moves = {MOVE_TAIL_WHIP, MOVE_FAKE_OUT, MOVE_MEGA_PUNCH, MOVE_RAGE},
     },
     {
         .iv = 250,
         .lvl = 37,
         .species = SPECIES_RHYHORN,
+        .moves = {MOVE_MAGNITUDE, MOVE_FURY_ATTACK, MOVE_SCARY_FACE, MOVE_ROCK_BLAST},
     },
     {
         .iv = 250,
         .lvl = 41,
         .species = SPECIES_NIDOQUEEN,
+        .moves = {MOVE_ALIGN, MOVE_MUD_SHOT, MOVE_POISON_STING, MOVE_BODY_SLAM},
     },
 };
 

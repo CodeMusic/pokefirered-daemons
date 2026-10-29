@@ -6002,6 +6002,12 @@ u32 CanMonLearnTMHM(struct Pokemon *mon, u8 tm)
     {
         return species != SPECIES_NONE;
     }
+    //  T-489: PLUGIN49 teaches ALIGN now, and a daemon runs it if it can run CONSTRUE's PLUGIN29 -- CONTEXT's own
+    //  plugin decides who can impose a frame. SNATCH's bits were taken out of every learnset when it was repointed.
+    else if (tm == ITEM_TM49 - ITEM_TM01)
+    {
+        return sTMHMLearnsets[species][0] & (1 << (ITEM_TM29 - ITEM_TM01));
+    }
     else if (tm < 32)
     {
         u32 mask = 1 << tm;

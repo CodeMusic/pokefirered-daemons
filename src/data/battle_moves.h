@@ -4982,4 +4982,21 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
     },
+
+    // T-489 (bible 2.12 and 10's Open log; the user, 2026-10-29), DRAFT: ALIGN, the frame family's reverse. PERSPECTIVE
+    // (TRANSFORM) is CONTENT, "I take yours"; ALIGN is CONTEXT, "you take mine" -- the foe becomes the user's first
+    // type, and has that type's weaknesses from then on. A status routine aimed at the foe: PROTECT and TURNABOUT
+    // (MAGIC COAT) answer it. invariant 6: only the STRING is CONTEXT.
+    [MOVE_ALIGN] =
+    {
+        .effect = EFFECT_ALIGN,
+        .power = 0,
+        .type = TYPE_PSYCHIC,
+        .accuracy = 100,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+    },
 };

@@ -215,5 +215,7 @@
 #define EFFECT_CALM_MIND 211
 #define EFFECT_DRAGON_DANCE 212
 #define EFFECT_CAMOUFLAGE 213
+// T-489: ALIGN -- CAST's (CONVERSION's) change of type, done to the target, in the user's own types. DRAFT.
+#define EFFECT_ALIGN 214
 
 #endif  // GUARD_CONSTANTS_BATTLE_MOVE_EFFECTS_H

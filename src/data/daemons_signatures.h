@@ -386,6 +386,7 @@ static const struct DaemonsSignature sDaemonsSignatures[MOVES_COUNT] =
     [MOVE_BLACK_ICE] = {0x0FC, 0x0FC, 0374, 6, DAEMONS_GLYPH_HOLD, 0, 0, 24, SIG_APPROVED | SIG_NOTES_LEAD},   // BLACK ICE
     [MOVE_BEFORE_DAWN] = {0x131, 0x131, 0461, 6, DAEMONS_GLYPH_RING, 0, 6, 20, SIG_APPROVED | SIG_NOTES_LEAD},   // BEFORE DAWN
     [MOVE_VEIL] = {0x06A, 0x06A, 0152, -24, DAEMONS_GLYPH_STREAM, SIG_MOD_FADE, 5, 20, SIG_APPROVED | SIG_NOTES_LEAD},   // VEIL
+    [MOVE_ALIGN] = {0x0AF, 0x0AF, 0257, 11, DAEMONS_GLYPH_STREAM, SIG_MOD_BACK, 1, 24, SIG_APPROVED | SIG_NOTES_LEAD},   // ALIGN
 };
 
 // Each type's ink (vision 9.24 clause 3: gbasprite.py's TYPE_COLOR; LEGACY bleached as genanims draws it).

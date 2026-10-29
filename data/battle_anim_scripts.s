@@ -402,6 +402,7 @@ gBattleAnims_Moves::
 	.4byte Move_BLACK_ICE       @ T-480, DRAFT: the hour's light, then ICE_BEAM's
 	.4byte Move_BEFORE_DAWN     @ T-480, DRAFT: the hour's light, then DRAGON_CLAW's
 	.4byte Move_VEIL            @ T-480, DRAFT: the hour's light, then FAINT_ATTACK's
+	.4byte Move_IMPRISON        @ ALIGN (T-489, DRAFT): SCOPE's -- the user's purple, then the foe's, then the foe drained to grey
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2

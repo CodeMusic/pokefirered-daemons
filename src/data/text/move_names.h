@@ -386,4 +386,5 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] = {
     [MOVE_BLACK_ICE]  = _("BLACK ICE"),   // T-480, DRAFT
     [MOVE_BEFORE_DAWN] = _("BEFORE DAWN"),   // T-480, DRAFT
     [MOVE_VEIL]       = _("VEIL"),   // T-480, DRAFT
+    [MOVE_ALIGN]      = _("ALIGN"),   // T-489, DRAFT
 };
