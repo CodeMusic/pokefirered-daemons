@@ -21,7 +21,7 @@ was built; it is kept as a reference and is not updated further.
 daemons and the seventeen types, the BENCHMARKS, the INDEX, the NOTEBOOK, PLAY and the companion, and a glossary.
 
 **No ROM is distributed.** Releases are BPS patches for a cartridge you own,
-published on the [DAEMONS releases page][releases] (latest: **v11.316.5**,
+published on the [DAEMONS releases page][releases] (latest: **v11.319.1**,
 2026-10-28), four to a release: CONTENT for *FireRed* 1.0 and Rev 1, CONTEXT
 for *LeafGreen* 1.0 and Rev 1. The game also plays in a browser on
 [**daemons-playground**][playground] (a private network only), and in the
@@ -120,10 +120,10 @@ in-game word is still a **DRAFT** until it is approved.
   in slots vanilla left unused; the INDEX's 398 entries are rewritten, and each
   edition says something different about every one of them. Three of the new
   ones are a line that grows **only while carried** on the companion.
-- **Drawn again, in a style of their own** (T-452): the daemons are being
-  redrawn as big, readable pixel portraits — front, back and a party icon,
-  coloured by type — in batches of about twenty, each built after a sheet of
-  choices. About 349 are in so far; the rest are in progress.
+- **Drawn again, in a style of their own** (T-452): every daemon has been
+  redrawn as a big, readable pixel portrait — front, back and a party icon,
+  coloured by type — a daemon's other forms too, in batches of about twenty,
+  each built after a sheet of choices (all in since v11.316.7).
 - **A follower at the player's size** (T-464): the lead daemon walks behind
   you as its own small picture, at most 20 pixels tall, in its icon's palette.
   348 species have one; `tools/gbafollower.py` writes them and fails on any
@@ -194,8 +194,8 @@ in-game word is still a **DRAFT** until it is approved.
   type's key.
 
 What is decided and **not built yet** is in the DAEMONS [TODO list][todo] —
-among it the rest of the daemons' new art, the rest of the landmarks, and the
-cave preview screens, still vanilla's.
+among it the rest of the landmarks, the cave preview screens, still vanilla's,
+and a pair of daemons that evolve only when traded for each other.
 
 ## How much of it is ours
 
