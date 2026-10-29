@@ -129,7 +129,9 @@ struct BoxPokemon
     u16 daemonsTradedIn:1;  // bit 1: one-shot, just arrived by trade; the load-time finish clears it (daemons_carried.c)
     u16 daemonsTradePartner:9;  // bits 2-10 (T-474): the species it was traded FOR, written by the companion with
                             // TRADED_IN and cleared with it; 0 when not given. EVO_TRADE_PARTNER judges it (PENPHIN)
-    u16 unknown:5;          // bits 11-15: reserved
+    u16 daemonsGifted:1;    // bit 11 (T-492, C-223): it was GIVEN, nothing back -- written by the companion with TRADED_IN
+                            // (partner 0) and cleared with it; the arrival says "a gift" and FIRST MET says A GIFT
+    u16 unknown:4;          // bits 12-15: reserved
 
     union
     {
@@ -452,6 +454,7 @@ bool8 DaemonBoxIsTrading(struct BoxPokemon *boxMon);   // T-473
 bool8 DaemonIsTrading(struct Pokemon *mon);
 bool8 DaemonBoxIsLoan(struct BoxPokemon *boxMon);
 bool8 DaemonIsLoan(struct Pokemon *mon);
+bool8 DaemonBoxIsGifted(struct BoxPokemon *boxMon);   // T-492
 u8 DaemonBoxGetSignal(struct BoxPokemon *boxMon);   // T-458
 u8 DaemonGetSignal(struct Pokemon *mon);
 struct BoxPokemon *DaemonFirstAway(void);

@@ -11,6 +11,8 @@ void DaemonsFirstSeen_RecordCompanion(u16 nationalNum);       // T-448: first me
 bool8 DaemonsFirstSeen_IsCompanion(u16 nationalNum);
 void DaemonsFirstSeen_RecordTrade(u16 nationalNum);           // T-473: first met by a trade with another player (C-219)
 bool8 DaemonsFirstSeen_IsTrade(u16 nationalNum);
+void DaemonsFirstSeen_RecordGift(u16 nationalNum);            // T-492: first met as a gift from another player (C-223)
+bool8 DaemonsFirstSeen_IsGift(u16 nationalNum);
 void DaemonsFirstSeen_Move(u16 from, u16 to);                 // T-450: an INDEX number that moved (MISSINGNO, 395 -> 398)
 
 #endif // GUARD_DAEMONS_FIRST_SEEN_H

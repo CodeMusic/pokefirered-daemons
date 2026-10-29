@@ -54,6 +54,7 @@ enum {
     CARRIED_DELIVERED_PARTY,
     CARRIED_CHANGED,
     CARRIED_TRADED,     // T-473
+    CARRIED_GIFTED,     // T-492
 };
 
 static EWRAM_DATA u8 sCarriedKind = 0;
@@ -71,6 +72,7 @@ static const u8 sText_CarriedDeliveredBox[] = _("Something followed you home fro
 static const u8 sText_CarriedDeliveredParty[] = _("Something followed you home from the\nwalk. {STR_VAR_1} is with you.");
 static const u8 sText_CarriedChanged[] = _("{STR_VAR_1} changed while it was\ncarried.");
 static const u8 sText_CarriedTraded[] = _("{STR_VAR_1} arrived in a trade.");   // T-473, DRAFT
+static const u8 sText_CarriedGifted[] = _("{STR_VAR_1} arrived as a gift.");     // T-492, DRAFT
 
 static bool8 DexBitGet(const u8 *flags, u16 nationalNum)
 {
@@ -117,9 +119,14 @@ static void FitAbility(struct BoxPokemon *boxMon, u16 species)
 //  T-479: FIRST MET is the first sighting, as FLAG_SET_SEEN keeps it (pokedex_screen.c) -- so a trade names it only
 //  when the species had never been seen. A species seen before T-406's records has an empty byte that means BEFORE
 //  RECORDS, not "never met", and a trade arriving later must not write A TRADE over it.
-static void FirstMetByTrade(u16 nationalNum)
+//  T-492: a GIFT (given, nothing back) is told apart from a trade -- FIRST MET: A GIFT -- under the same rule.
+static void FirstMetByTrade(u16 nationalNum, bool8 gifted)
 {
-    if (!GetSetPokedexFlag(nationalNum, FLAG_GET_SEEN))
+    if (GetSetPokedexFlag(nationalNum, FLAG_GET_SEEN))
+        return;
+    if (gifted)
+        DaemonsFirstSeen_RecordGift(nationalNum);
+    else
         DaemonsFirstSeen_RecordTrade(nationalNum);
 }
 
@@ -137,9 +144,11 @@ static u8 FinishTrade(struct BoxPokemon *boxMon, struct Pokemon *partyMon, u8 ri
     u32 personality;
     bool8 loan = DaemonBoxIsLoan(boxMon);
     u16 partner = boxMon->daemonsTradePartner;   // T-474
+    bool8 gifted = DaemonBoxIsGifted(boxMon);    // T-492: given, nothing back -- it still trade-evolves (the user)
 
     boxMon->daemonsTradedIn = 0;
     boxMon->daemonsTradePartner = 0;
+    boxMon->daemonsGifted = 0;
     if (partner >= NUM_SPECIES)
         partner = SPECIES_NONE;
     ribbons &= ~CARRIED_RIBBON_MARK;
@@ -152,7 +161,7 @@ static u8 FinishTrade(struct BoxPokemon *boxMon, struct Pokemon *partyMon, u8 ri
         return CARRIED_NONE;
     }
     personality = GetBoxMonData(boxMon, MON_DATA_PERSONALITY, NULL);
-    FirstMetByTrade(SpeciesToNationalPokedexNum(species));
+    FirstMetByTrade(SpeciesToNationalPokedexNum(species), gifted);
     HandleSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_SET_SEEN, personality);
     HandleSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_SET_CAUGHT, personality);
     if (!loan)
@@ -167,7 +176,7 @@ static u8 FinishTrade(struct BoxPokemon *boxMon, struct Pokemon *partyMon, u8 ri
             if (StringCompare(nickname, gSpeciesNames[species]) == 0)
                 SetBoxMonData(boxMon, MON_DATA_NICKNAME, gSpeciesNames[target]);
             SetBoxMonData(boxMon, MON_DATA_SPECIES, &target);
-            FirstMetByTrade(SpeciesToNationalPokedexNum(target));
+            FirstMetByTrade(SpeciesToNationalPokedexNum(target), gifted);
             HandleSetPokedexFlag(SpeciesToNationalPokedexNum(target), FLAG_SET_SEEN, personality);
             HandleSetPokedexFlag(SpeciesToNationalPokedexNum(target), FLAG_SET_CAUGHT, personality);
             ribbons |= CARRIED_RIBBON_MOVES;
@@ -181,11 +190,11 @@ static u8 FinishTrade(struct BoxPokemon *boxMon, struct Pokemon *partyMon, u8 ri
         CalculateMonStats(partyMon);
     if (sCarriedKind == CARRIED_NONE)
     {
-        sCarriedKind = CARRIED_TRADED;
+        sCarriedKind = gifted ? CARRIED_GIFTED : CARRIED_TRADED;
         GetBoxMonData(boxMon, MON_DATA_NICKNAME, sCarriedName);
         StringGet_Nickname(sCarriedName);
     }
-    return CARRIED_TRADED;
+    return gifted ? CARRIED_GIFTED : CARRIED_TRADED;
 }
 
 static u8 FinishOne(struct BoxPokemon *boxMon, struct Pokemon *partyMon)
@@ -199,7 +208,7 @@ static u8 FinishOne(struct BoxPokemon *boxMon, struct Pokemon *partyMon)
     ribbons = GetBoxMonData(boxMon, MON_DATA_UNUSED_RIBBONS, NULL);
     if (ribbons & CARRIED_RIBBON_MOVES)
         sCarriedMovesOwed = TRUE;                   // owed from an earlier load (it waited in a box)
-    if (boxMon->daemonsTradedIn)                    // T-473: by trade, finished its own way (marked or not)
+    if (boxMon->daemonsTradedIn || boxMon->daemonsGifted)   // T-473: by trade (T-492: or a gift), finished its own way
         return FinishTrade(boxMon, partyMon, ribbons);
     if (!(ribbons & CARRIED_RIBBON_MARK))
         return CARRIED_NONE;
@@ -283,6 +292,9 @@ bool8 Daemons_TryCarriedArrives(void)
         break;
     case CARRIED_TRADED:
         text = sText_CarriedTraded;
+        break;
+    case CARRIED_GIFTED:
+        text = sText_CarriedGifted;
         break;
     default:
         return FALSE;

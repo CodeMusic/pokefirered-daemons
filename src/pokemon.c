@@ -3290,7 +3290,7 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
         break;
     case MON_DATA_ENCRYPT_SEPARATOR:
         retVal = boxMon->daemonsLoan | (boxMon->daemonsTradedIn << 1) | (boxMon->daemonsTradePartner << 2)
-               | (boxMon->unknown << 11);   // T-473, T-474: all sixteen bits
+               | (boxMon->daemonsGifted << 11) | (boxMon->unknown << 12);   // T-473, T-474, T-492: all sixteen bits
         break;
     case MON_DATA_SPECIES:
         retVal = boxMon->isBadEgg ? SPECIES_EGG : substruct0->species;
@@ -3692,7 +3692,8 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
         boxMon->daemonsLoan = bits & 1;
         boxMon->daemonsTradedIn = (bits >> 1) & 1;
         boxMon->daemonsTradePartner = (bits >> 2) & 0x1FF;   // T-474
-        boxMon->unknown = bits >> 11;
+        boxMon->daemonsGifted = (bits >> 11) & 1;            // T-492
+        boxMon->unknown = bits >> 12;
         break;
     }
     case MON_DATA_SPECIES:
@@ -6786,6 +6787,12 @@ bool8 DaemonBoxIsLoan(struct BoxPokemon *boxMon)
 bool8 DaemonIsLoan(struct Pokemon *mon)
 {
     return mon->box.daemonsLoan;
+}
+
+//  T-492 (C-223): given, nothing back -- the companion sets it with TRADED_IN; FinishTrade reads it and clears both
+bool8 DaemonBoxIsGifted(struct BoxPokemon *boxMon)
+{
+    return boxMon->daemonsGifted;
 }
 
 //  T-458 (SOUNDINGS): the companion's signal, two bits after AWAY and ASKED in the same unchecksummed byte. The

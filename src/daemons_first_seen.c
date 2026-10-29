@@ -52,13 +52,17 @@ u8 DaemonsFirstSeen_Get(u16 nationalNum)
 #define FIRST_SEEN_COMPANION METLOC_FATEFUL_ENCOUNTER
 //  T-473: one that arrived by a trade with another player (C-219), the same way -- 0xFE, no MAPSEC either
 #define FIRST_SEEN_TRADE METLOC_IN_GAME_TRADE
+//  T-492: one GIVEN by another player, nothing back (C-223) -- 0xFD, METLOC_SPECIAL_EGG's number, which FIRST MET never
+//  recorded (an egg is first seen where it hatches); no MAPSEC either
+#define FIRST_SEEN_GIFT METLOC_SPECIAL_EGG
 
 void DaemonsFirstSeen_RecordAt(u16 nationalNum, u8 mapsec)
 {
     FirstSeenClaim();
     if (nationalNum == 0 || nationalNum > DAEMONS_FIRST_SEEN_COUNT)
         return;
-    if (mapsec != FIRST_SEEN_COMPANION && mapsec != FIRST_SEEN_TRADE && (mapsec < KANTO_MAPSEC_START || mapsec >= MAPSEC_NONE))
+    if (mapsec != FIRST_SEEN_COMPANION && mapsec != FIRST_SEEN_TRADE && mapsec != FIRST_SEEN_GIFT
+     && (mapsec < KANTO_MAPSEC_START || mapsec >= MAPSEC_NONE))
         return;
     if (gSaveBlock1Ptr->daemonsFirstSeen[nationalNum - 1] == 0)
         gSaveBlock1Ptr->daemonsFirstSeen[nationalNum - 1] = mapsec;
@@ -79,6 +83,18 @@ bool8 DaemonsFirstSeen_IsTrade(u16 nationalNum)
     if (!FirstSeenIsOurs() || nationalNum == 0 || nationalNum > DAEMONS_FIRST_SEEN_COUNT)
         return FALSE;
     return gSaveBlock1Ptr->daemonsFirstSeen[nationalNum - 1] == FIRST_SEEN_TRADE;
+}
+
+void DaemonsFirstSeen_RecordGift(u16 nationalNum)
+{
+    DaemonsFirstSeen_RecordAt(nationalNum, FIRST_SEEN_GIFT);
+}
+
+bool8 DaemonsFirstSeen_IsGift(u16 nationalNum)
+{
+    if (!FirstSeenIsOurs() || nationalNum == 0 || nationalNum > DAEMONS_FIRST_SEEN_COUNT)
+        return FALSE;
+    return gSaveBlock1Ptr->daemonsFirstSeen[nationalNum - 1] == FIRST_SEEN_GIFT;
 }
 
 bool8 DaemonsFirstSeen_IsCompanion(u16 nationalNum)
