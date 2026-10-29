@@ -433,7 +433,7 @@ static EWRAM_DATA u8 sDbgPage = 0;
 static EWRAM_DATA u16 sDbgSong = 0;
 static const u8 *const sDbgSeasonNames[] = { gText_DbgWatchAuto, gText_DbgWinter, gText_DbgSpring, gText_DbgSummer, gText_DbgAutumn };   // T-359, by gDaemonsSeasonOverride
 static const u8 *const sDbgWeatherNames[] = { gText_DbgWatchAuto, gText_DbgSkyClear, gText_DbgSkyRain, gText_DbgSkyStorm, gText_DbgSkySnow, gText_DbgSkyFog, gText_DbgSkyWind };   // T-415, by gDaemonsWeatherOverride
-static const u8 *const sDbgWatchNames[] = { gText_DbgWatchAuto, gText_DbgWatchDay, gText_DbgWatchDusk, gText_DbgWatchNight, gText_DbgWatchDawn };   // T-268, by gDaemonsWatchOverride
+static const u8 *const sDbgWatchNames[] = { gText_DbgWatchAuto, gText_DbgWatchDay, gText_DbgWatchDusk, gText_DbgWatchNight, gText_DbgWatchDawn, gText_DbgWatchWitching };   // T-268, by gDaemonsWatchOverride; T-480 the witching hour last (WATCH_OVERRIDE_WITCHING)
 static const u8 *const sDbgWeekdayNames[] = { gText_DbgWatchAuto, gText_DbgSun, gText_DbgMon, gText_DbgTue, gText_DbgWed, gText_DbgThu, gText_DbgFri, gText_DbgSat };   // T-273, by gDaemonsWeekdayOverride
 static EWRAM_DATA u16 sDbgSfx = 0;
 // A NATIONAL DEX NUMBER, not a species id -- so the twenty-five dummy slots
@@ -1722,7 +1722,8 @@ static bool8 DbgHandleStepInput(void)
     return FALSE;
 }
 
-// T-268: WATCH steps AUTO (the clock, or play time) -> DAY -> DUSK -> NIGHT -> DAWN, and puts the new light on the
+// T-268: WATCH steps AUTO (the clock, or play time) -> DAY -> DUSK -> NIGHT -> DAWN (-> 3 AM, T-480: night and the
+// witching hour, its shimmer and, with THE SUBTLE LAYER held, its routines), and puts the new light on the
 // map at once: the tileset rows and every person on it loaded again, and the weather's gamma back over them. So night
 // can be checked on a cartridge at noon. Nothing is saved; a reset goes back to AUTO.
 static void DbgRelight(void)

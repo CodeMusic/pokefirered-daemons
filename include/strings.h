@@ -753,6 +753,7 @@ extern const u8 gText_DbgWatchDay[];
 extern const u8 gText_DbgWatchDusk[];
 extern const u8 gText_DbgWatchNight[];
 extern const u8 gText_DbgWatchDawn[];
+extern const u8 gText_DbgWatchWitching[];
 extern const u8 gText_DbgMenuBack[];
 extern const u8 gStartMenuDesc_DbgHeal[];
 extern const u8 gStartMenuDesc_DbgMart[];

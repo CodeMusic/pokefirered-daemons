@@ -384,6 +384,24 @@ gBattleAnims_Moves::
 	.4byte Move_MEDIAN             @ MEDIAN (T-389, T-392): its own, with the splash's bits and notes
 	.4byte Move_PANORAMA           @ PANORAMA (T-389, T-392): its own, with the splash's bits and notes
 	.4byte Move_HINDSIGHT          @ HINDSIGHT (T-389, T-392): its own, with the splash's bits and notes
+	.4byte Move_BLANK_PAGE      @ T-480, DRAFT: the hour's light, then HYPER_VOICE's
+	.4byte Move_LAST_PROOF      @ T-480, DRAFT: the hour's light, then CROSS_CHOP's
+	.4byte Move_NIGHT_COURSE    @ T-480, DRAFT: the hour's light, then AERIAL_ACE's
+	.4byte Move_BITROT_MOON     @ T-480, DRAFT: the hour's light, then SLUDGE_BOMB's
+	.4byte Move_UNDERLAYER      @ T-480, DRAFT: the hour's light, then EARTHQUAKE's
+	.4byte Move_OLD_GHOSTS      @ T-480, DRAFT: the hour's light, then ANCIENT_POWER's
+	.4byte Move_QUIET_HIVE      @ T-480, DRAFT: the hour's light, then SIGNAL_BEAM's
+	.4byte Move_WHAT_SLEEPS     @ T-480, DRAFT: the hour's light, then SHADOW_BALL's
+	.4byte Move_NIGHT_WATCH     @ T-480, DRAFT: the hour's light, then IRON_TAIL's
+	.4byte Move_SECOND_SIGHT    @ T-480, DRAFT: the hour's light, then EXTRASENSORY's
+	.4byte Move_EMBER_HOUR      @ T-480, DRAFT: the hour's light, then FLAMETHROWER's
+	.4byte Move_UNDERTOW        @ T-480, DRAFT: the hour's light, then SURF's
+	.4byte Move_DARK_ROOTS      @ T-480, DRAFT: the hour's light, then FRENZY_PLANT's
+	.4byte Move_DEAD_AIR        @ T-480, DRAFT: the hour's light, then THUNDERBOLT's
+	.4byte Move_THIN_SEAM       @ T-480, DRAFT: the hour's light, then PSYCHIC's
+	.4byte Move_BLACK_ICE       @ T-480, DRAFT: the hour's light, then ICE_BEAM's
+	.4byte Move_BEFORE_DAWN     @ T-480, DRAFT: the hour's light, then DRAGON_CLAW's
+	.4byte Move_VEIL            @ T-480, DRAFT: the hour's light, then FAINT_ATTACK's
 	.4byte Move_COUNT @ cannot be reached, because last move is Psycho Boost
 
 	.align 2
@@ -7735,6 +7753,71 @@ Move_WEATHER_BALL:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 10, 0, RGB(24, 23, 21)
 	waitforvisualfinish
 	end
+@ T-480 (the user, 2026-10-29): the witching hour's routines. Each opens on the hour's own light -- the attacker
+@ lit in the book's purple (gensubtle.py C_RULE, RGB(22, 10, 19)) to a moonlit chime -- and then plays a distinct
+@ existing strike of its type; its signature (src/data/daemons_signatures.h) is its own tune over the top. DRAFT.
+Move_WITCHING_HOUR_LIGHT:
+	playsewithpan SE_M_MOONLIGHT, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 0, 10, RGB(22, 10, 19)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 10, 0, RGB(22, 10, 19)
+	waitforvisualfinish
+	return
+Move_BLANK_PAGE:
+	call Move_WITCHING_HOUR_LIGHT
+	goto Move_HYPER_VOICE
+Move_LAST_PROOF:
+	call Move_WITCHING_HOUR_LIGHT
+	goto Move_CROSS_CHOP
+Move_NIGHT_COURSE:
+	call Move_WITCHING_HOUR_LIGHT
+	goto Move_AERIAL_ACE
+Move_BITROT_MOON:
+	call Move_WITCHING_HOUR_LIGHT
+	goto Move_SLUDGE_BOMB
+Move_UNDERLAYER:
+	call Move_WITCHING_HOUR_LIGHT
+	goto Move_EARTHQUAKE
+Move_OLD_GHOSTS:
+	call Move_WITCHING_HOUR_LIGHT
+	goto Move_ANCIENT_POWER
+Move_QUIET_HIVE:
+	call Move_WITCHING_HOUR_LIGHT
+	goto Move_SIGNAL_BEAM
+Move_WHAT_SLEEPS:
+	call Move_WITCHING_HOUR_LIGHT
+	goto Move_SHADOW_BALL
+Move_NIGHT_WATCH:
+	call Move_WITCHING_HOUR_LIGHT
+	goto Move_IRON_TAIL
+Move_SECOND_SIGHT:
+	call Move_WITCHING_HOUR_LIGHT
+	goto Move_EXTRASENSORY
+Move_EMBER_HOUR:
+	call Move_WITCHING_HOUR_LIGHT
+	goto Move_FLAMETHROWER
+Move_UNDERTOW:
+	call Move_WITCHING_HOUR_LIGHT
+	goto Move_SURF
+Move_DARK_ROOTS:
+	call Move_WITCHING_HOUR_LIGHT
+	goto Move_FRENZY_PLANT
+Move_DEAD_AIR:
+	call Move_WITCHING_HOUR_LIGHT
+	goto Move_THUNDERBOLT
+Move_THIN_SEAM:
+	call Move_WITCHING_HOUR_LIGHT
+	goto Move_PSYCHIC
+Move_BLACK_ICE:
+	call Move_WITCHING_HOUR_LIGHT
+	goto Move_ICE_BEAM
+Move_BEFORE_DAWN:
+	call Move_WITCHING_HOUR_LIGHT
+	goto Move_DRAGON_CLAW
+Move_VEIL:
+	call Move_WITCHING_HOUR_LIGHT
+	goto Move_FAINT_ATTACK
+
 Move_COUNT:
 	loadspritegfx ANIM_TAG_IMPACT
 	monbg ANIM_TARGET

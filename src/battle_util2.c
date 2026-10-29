@@ -1,4 +1,5 @@
 #include "global.h"
+#include "daemons_witching.h"
 #include "bg.h"
 #include "battle.h"
 #include "battle_anim.h"
@@ -21,6 +22,7 @@ void AllocateBattleResources(void)
 
     gBattleStruct = AllocZeroed(sizeof(*gBattleStruct));
     Three_BattleStart();   // T-454: the three, derived for this battle
+    Witching_BattleStart();   // T-480: the hour's uses, none spent
 
     gBattleResources = AllocZeroed(sizeof(*gBattleResources));
     gBattleResources->secretBase = AllocZeroed(sizeof(*gBattleResources->secretBase));

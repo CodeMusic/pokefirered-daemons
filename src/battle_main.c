@@ -1,4 +1,5 @@
 #include "global.h"
+#include "daemons_witching.h"   // T-480
 #include "daemons_feelings.h"   // T-431
 #include "gflib.h"
 #include "battle.h"
@@ -1655,6 +1656,7 @@ void BattleMainCB2(void)
 #endif
     RunTextPrinters();
     UpdatePaletteFade();
+    Witching_BattleShimmer();   // T-480: after the fade, so a fade is never undone
     RunTasks();
 
     if (JOY_HELD(B_BUTTON) && gBattleTypeFlags & BATTLE_TYPE_POKEDUDE)
@@ -3155,6 +3157,7 @@ static void TryDoEventsBeforeFirstTurn(void)
         gChosenActionByBattler[i] = B_ACTION_NONE;
         gChosenMoveByBattler[i] = MOVE_NONE;
     }
+    Witching_TurnStart();   // T-480
     TurnValuesCleanUp(FALSE);
     SpecialStatusesClear();
     *(&gBattleStruct->absentBattlerFlags) = gAbsentBattlerFlags;
@@ -3241,6 +3244,7 @@ void BattleTurnPassed(void)
         gChosenActionByBattler[i] = B_ACTION_NONE;
         gChosenMoveByBattler[i] = MOVE_NONE;
     }
+    Witching_TurnStart();   // T-480
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
         *(gBattleStruct->monToSwitchIntoId + i) = PARTY_SIZE;
     *(&gBattleStruct->absentBattlerFlags) = gAbsentBattlerFlags;
@@ -3415,6 +3419,7 @@ static void HandleTurnActionSelectionState(void)
                     }
                     else if (gDisableStructs[gActiveBattler].encoredMove != MOVE_NONE)
                     {
+                        Witching_SetChosen(gActiveBattler, FALSE);   // T-480
                         gChosenMoveByBattler[gActiveBattler] = gDisableStructs[gActiveBattler].encoredMove;
                         *(gBattleStruct->chosenMovePositions + gActiveBattler) = gDisableStructs[gActiveBattler].encoredMovePos;
                         gBattleCommunication[gActiveBattler] = STATE_WAIT_ACTION_CONFIRMED_STANDBY;
@@ -3535,6 +3540,24 @@ static void HandleTurnActionSelectionState(void)
                         {
                             gBattleCommunication[gActiveBattler] = STATE_BEFORE_ACTION_CHOSEN;
                         }
+                        else if (gBattleBufferB[gActiveBattler][2] == WITCHING_MENU_SLOT)
+                        {
+                            // T-480: the hour's routine, from the menu's second page. It is no slot: the position
+                            // stays on slot 0 (a real one), and HandleAction_UseMove and Cmd_ppreduce ask
+                            // Witching_IsChosen instead. Checked again here, in case the hour or a lock moved on.
+                            if (!Witching_CanChoose(gActiveBattler))
+                            {
+                                gBattleCommunication[gActiveBattler] = STATE_BEFORE_ACTION_CHOSEN;
+                            }
+                            else
+                            {
+                                Witching_SetChosen(gActiveBattler, TRUE);
+                                *(gBattleStruct->chosenMovePositions + gActiveBattler) = 0;
+                                gChosenMoveByBattler[gActiveBattler] = Witching_MoveFor(gActiveBattler);
+                                *(gBattleStruct->moveTarget + gActiveBattler) = gBattleBufferB[gActiveBattler][3];
+                                gBattleCommunication[gActiveBattler]++;
+                            }
+                        }
                         else if (TrySetCantSelectMoveBattleScript())
                         {
                             gBattleCommunication[gActiveBattler] = STATE_SELECTION_SCRIPT;
@@ -3545,6 +3568,7 @@ static void HandleTurnActionSelectionState(void)
                         }
                         else
                         {
+                            Witching_SetChosen(gActiveBattler, FALSE);   // T-480
                             *(gBattleStruct->chosenMovePositions + gActiveBattler) = gBattleBufferB[gActiveBattler][2];
                             gChosenMoveByBattler[gActiveBattler] = gBattleMons[gActiveBattler].moves[*(gBattleStruct->chosenMovePositions + gActiveBattler)];
                             *(gBattleStruct->moveTarget + gActiveBattler) = gBattleBufferB[gActiveBattler][3];
@@ -3747,6 +3771,8 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
         {
             if (gProtectStructs[battler1].noValidMoves)
                 moveBattler1 = MOVE_STRUGGLE;
+            else if (Witching_IsChosen(battler1))
+                moveBattler1 = gChosenMoveByBattler[battler1];   // T-480
             else
                 moveBattler1 = gBattleMons[battler1].moves[*(gBattleStruct->chosenMovePositions + battler1)];
         }
@@ -3756,6 +3782,8 @@ u8 GetWhoStrikesFirst(u8 battler1, u8 battler2, bool8 ignoreChosenMoves)
         {
             if (gProtectStructs[battler2].noValidMoves)
                 moveBattler2 = MOVE_STRUGGLE;
+            else if (Witching_IsChosen(battler2))
+                moveBattler2 = gChosenMoveByBattler[battler2];   // T-480
             else
                 moveBattler2 = gBattleMons[battler2].moves[*(gBattleStruct->chosenMovePositions + battler2)];
         }
@@ -4254,6 +4282,12 @@ static void HandleAction_UseMove(void)
     else if (gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS || gBattleMons[gBattlerAttacker].status2 & STATUS2_RECHARGE)
     {
         gCurrentMove = gChosenMove = gLockedMoves[gBattlerAttacker];
+    }
+    // T-480: the hour's routine. Its own uses were checked when it was chosen, so slot 0's PP is not asked.
+    else if (Witching_IsChosen(gBattlerAttacker) && IS_WITCHING_MOVE(gChosenMoveByBattler[gBattlerAttacker]))
+    {
+        gCurrentMove = gChosenMove = gChosenMoveByBattler[gBattlerAttacker];
+        gHitMarker |= HITMARKER_ALLOW_NO_PP;
     }
     // encore forces you to use the same move
     else if (gDisableStructs[gBattlerAttacker].encoredMove != MOVE_NONE

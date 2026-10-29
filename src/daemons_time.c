@@ -164,6 +164,8 @@ u16 DaemonsDayNumber(u16 year, u8 month, u8 day)
 
 u8 DaemonsWatch(void)
 {
+    if (gDaemonsWatchOverride == WATCH_OVERRIDE_WITCHING)
+        return WATCH_NIGHT;                 // T-480: 3 AM is night
     if (gDaemonsWatchOverride)
         return (gDaemonsWatchOverride - 1) % WATCH_COUNT;
     ReadClock();
@@ -209,6 +211,17 @@ u16 DaemonsFeelingsNow(bool8 *fromClock)
     }
     *fromClock = FALSE;
     return ((u32)gSaveBlock2Ptr->playTimeHours * 60 + gSaveBlock2Ptr->playTimeMinutes) / 10;
+}
+
+// T-480: THE WITCHING HOUR, 3:00 to 4:00 AM on the cartridge's own clock (the user, 2026-10-29) -- never play time's,
+// whose "night" is fifteen minutes of every hour. DEBUG's WATCH can force it (WATCH_OVERRIDE_WITCHING, "3 AM"); any
+// other forced watch holds it off, as it holds the clock's watch off.
+bool8 DaemonsIsWitchingHour(void)
+{
+    if (gDaemonsWatchOverride)
+        return gDaemonsWatchOverride == WATCH_OVERRIDE_WITCHING;
+    ReadClock();
+    return sWatchFromClock && sMinuteOfDay / 60 == 3;
 }
 
 bool8 DaemonsWatchIsFromClock(void)

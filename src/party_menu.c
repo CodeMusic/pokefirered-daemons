@@ -1,4 +1,5 @@
 #include "global.h"
+#include "daemons_witching.h"   // T-480
 #include "daemons_feelings.h"   // T-431
 #include "daemons_away.h"
 #include "event_scripts.h"
@@ -493,6 +494,29 @@ void InitPartyMenu(u8 menuType, u8 layout, u8 partyAction, bool8 keepCursorPos, 
     }
 }
 
+//  T-480: in the witching hour the party's icons wear the shimmer (src/daemons_witching.c), each icon palette once.
+static void PartyMenuWitchingShimmer(void)
+{
+    u32 done = 0;
+    u8 i, spriteId, pal;
+
+    if (sPartyMenuBoxes == NULL || gPaletteFade.active || !Witching_IsHour())
+        return;
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) == SPECIES_NONE || GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
+            continue;
+        spriteId = sPartyMenuBoxes[i].monSpriteId;
+        if (spriteId >= MAX_SPRITES || !gSprites[spriteId].inUse)
+            continue;
+        pal = gSprites[spriteId].oam.paletteNum;
+        if (done & (1 << pal))
+            continue;
+        done |= 1 << pal;
+        Witching_ShimmerFromUnfaded(OBJ_PLTT_ID(pal));
+    }
+}
+
 static void CB2_UpdatePartyMenu(void)
 {
     RunTasks();
@@ -500,6 +524,7 @@ static void CB2_UpdatePartyMenu(void)
     BuildOamBuffer();
     DoScheduledBgTilemapCopiesToVram();
     UpdatePaletteFade();
+    PartyMenuWitchingShimmer();   // T-480
 }
 
 static void VBlankCB_PartyMenu(void)

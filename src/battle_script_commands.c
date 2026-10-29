@@ -1,4 +1,5 @@
 #include "global.h"
+#include "daemons_witching.h"   // T-480
 #include "daemons_feelings.h"   // T-433
 #include "daemons_three.h"      // T-454
 #include "daemon_saturation.h"
@@ -1152,6 +1153,9 @@ static void Cmd_ppreduce(void)
             break;
         }
     }
+
+    if (Witching_PpReduce(ppToDeduct))   // T-480: the hour's routine spends its own uses, never a slot's PP
+        return;
 
     if (!(gHitMarker & (HITMARKER_NO_PPDEDUCT | HITMARKER_NO_ATTACKSTRING)) && gBattleMons[gBattlerAttacker].pp[gCurrMovePos])
     {
@@ -2939,7 +2943,8 @@ static void Cmd_tryfaintmon(void)
              && !(gHitMarker & HITMARKER_GRUDGE)
              && GetBattlerSide(gBattlerAttacker) != GetBattlerSide(gBattlerTarget)
              && gBattleMons[gBattlerAttacker].hp != 0
-             && gCurrentMove != MOVE_STRUGGLE)
+             && gCurrentMove != MOVE_STRUGGLE
+             && !Witching_IsChosen(gBattlerAttacker))   // T-480: the hour's routine has no slot to empty
             {
                 u8 moveIndex = *(gBattleStruct->chosenMovePositions + gBattlerAttacker);
 
@@ -7526,7 +7531,7 @@ static bool8 IsMoveUncopyableByMimic(u16 move)
     for (i = 0; sMovesForbiddenToCopy[i] != MIMIC_FORBIDDEN_END
                 && sMovesForbiddenToCopy[i] != move; i++);
 
-    return (sMovesForbiddenToCopy[i] != MIMIC_FORBIDDEN_END);
+    return (sMovesForbiddenToCopy[i] != MIMIC_FORBIDDEN_END) || IS_WITCHING_MOVE(move);   // T-480: the hour's alone
 }
 
 static void Cmd_mimicattackcopy(void)
@@ -7577,7 +7582,7 @@ static void Cmd_metronome(void)
         s32 i;
 
         gCurrentMove = (Random() & 0x1FF) + 1;
-        if (gCurrentMove >= MOVES_COUNT)
+        if (gCurrentMove >= MOVES_COUNT || IS_WITCHING_MOVE(gCurrentMove))   // T-480: known only in the hour
             continue;
 
         for (i = 0; i < MAX_MON_MOVES; i++); // ?
@@ -7827,7 +7832,8 @@ static void Cmd_copymovepermanently(void)
         && gLastPrintedMoves[gBattlerTarget] != MOVE_STRUGGLE
         && gLastPrintedMoves[gBattlerTarget] != MOVE_NONE
         && gLastPrintedMoves[gBattlerTarget] != MOVE_UNAVAILABLE
-        && gLastPrintedMoves[gBattlerTarget] != MOVE_SKETCH)
+        && gLastPrintedMoves[gBattlerTarget] != MOVE_SKETCH
+        && !IS_WITCHING_MOVE(gLastPrintedMoves[gBattlerTarget]))   // T-480: never written into a moveset
     {
         s32 i;
 

@@ -216,6 +216,7 @@ const u8 gText_DbgWatchDay[] = _("DAY");
 const u8 gText_DbgWatchDusk[] = _("DUSK");
 const u8 gText_DbgWatchNight[] = _("NIGHT");
 const u8 gText_DbgWatchDawn[] = _("DAWN");
+const u8 gText_DbgWatchWitching[] = _("3 AM");   // T-480: night, and the witching hour
 // The ENCOUNTER page. DAEMON prints the species NAME on the row and nothing
 // else, which is why the debug pages widen the window -- see CreateStartMenuWindow.
 const u8 gText_DbgMenuEncounter[] = _("ENCOUNTER");

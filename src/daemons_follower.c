@@ -1,4 +1,7 @@
 #include "global.h"
+#include "main.h"
+#include "palette.h"
+#include "daemons_witching.h"   // T-480
 #include "gflib.h"
 #include "event_data.h"
 #include "event_object_movement.h"
@@ -113,7 +116,10 @@ static struct
     s16 tileX, tileY;      // T-18 P3: the map tile it stands in (nearest), for grass, water and the people
     s16 grassX, grassY;    // ... and the tile its last tall grass was raised on
     u16 senseWait;         // T-459: frames until it may notice something again
+    u8 shimmer;            // T-480: the witching hour's shimmer is on its palette (put back when the hour ends)
 } sFollower;
+
+static void Shimmer(void);   // T-480
 
 static void SpriteCB_Follower(struct Sprite *sprite)
 {
@@ -606,6 +612,7 @@ static void Reflect(struct Sprite *follower)
     struct Sprite *refl;
 
     if (follower->invisible
+     || DaemonsIsWitchingHour()   // T-480: in the witching hour it casts no reflection
      || !MetatileBehavior_IsReflective(MapGridGetMetatileBehaviorAt(sFollower.tileX, sFollower.tileY + 1)))
     {
         DropReflection();
@@ -944,6 +951,35 @@ void Follower_Update(void)
     }
     Place(sprite, player, playerObj);
     Sense(sprite, playerObj);   // T-459
+    Shimmer();                  // T-480
+}
+
+//  T-480: THE WITCHING HOUR's shimmer (src/daemons_witching.c). Every fourth frame of the hour its palette is loaded
+//  again -- friendship's saturation, the field's light, the weather -- and a few sixteenths of the book's purple laid
+//  over it where it stands, so nothing compounds and a flicker is only the weight moving. Never during a fade (a load
+//  writes the faded colours too, and would pull it out of the fade). When the hour ends it is loaded clean once.
+static void Shimmer(void)
+{
+    u8 idx;
+
+    if (gPaletteFade.active)
+        return;
+    if (!DaemonsIsWitchingHour())
+    {
+        if (sFollower.shimmer)
+        {
+            sFollower.shimmer = FALSE;
+            LoadFollowerPalette();
+        }
+        return;
+    }
+    if ((gMain.vblankCounter2 & 3) != 0 && sFollower.shimmer)
+        return;
+    idx = LoadFollowerPalette();
+    if (idx == 0xFF)
+        return;
+    Witching_ShimmerFadedInPlace(OBJ_PLTT_ID(idx), Witching_ShimmerWeight());
+    sFollower.shimmer = TRUE;
 }
 
 //  ---------------------------------------------------------------- A on it (T-18 P2)

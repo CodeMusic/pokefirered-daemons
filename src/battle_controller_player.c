@@ -1,4 +1,5 @@
 #include "global.h"
+#include "daemons_witching.h"   // T-480
 #include "daemon_saturation.h"
 #include "gflib.h"
 #include "data.h"
@@ -20,6 +21,7 @@
 #include "battle_controllers.h"
 #include "battle_interface.h"
 #include "battle_message.h"
+#include "graphics.h"   // T-480: gPPTextPalette
 #include "battle_script_commands.h"
 #include "reshow_battle_screen.h"
 #include "constants/battle_anim.h"
@@ -762,7 +764,10 @@ static void HandleInputChooseTarget(void)
     {
         PlaySE(SE_SELECT);
         gSprites[gBattlerSpriteIds[gMultiUsePlayerCursor]].callback = SpriteCB_HideAsMoveTarget;
-        BtlController_EmitTwoReturnValues(1, 10, gMoveSelectionCursor[gActiveBattler] | (gMultiUsePlayerCursor << 8));
+        // T-480: from the hour's page the answer is its "slot", which is no slot of the moveset
+        BtlController_EmitTwoReturnValues(1, 10, (Witching_MenuPage() ? WITCHING_MENU_SLOT : gMoveSelectionCursor[gActiveBattler])
+                                                 | (gMultiUsePlayerCursor << 8));
+        Witching_SetMenuPage(FALSE);
         EndBounceEffect(gMultiUsePlayerCursor, BOUNCE_HEALTHBOX);
         PlayerBufferExecCompleted();
     }
@@ -857,11 +862,135 @@ static void HandleInputChooseTarget(void)
     }
 }
 
+//  T-480: THE HOUR'S PAGE. During the witching hour, with THE SUBTLE LAYER held, the move menu has a second page --
+//  DOWN past the bottom row, or R -- with the daemon's hour routine alone in the first slot, its uses (five a battle)
+//  where the PP goes, and its type. UP or R goes back to the moveset; A and B do what they do on the first page. The
+//  routine is never written into the moveset: the page answers WITCHING_MENU_SLOT, and battle_main.c does the rest.
+#define MOVE_MENU_COLOR(slot) (1 + (slot))   // as below, where the move menu's colours are explained
+static void SetMoveMenuTypeColor(u8 slot, u16 move);
+static void DisplayMoveTypeFor(u8 slot, u16 move);
+
+static void HourPage_Draw(void)
+{
+    u16 move = Witching_MoveFor(gActiveBattler);
+    u8 left = Witching_PpLeft(gActiveBattler);
+    u8 i, state;
+    u8 *txtPtr;
+
+    for (i = 0; i < MAX_MON_MOVES; ++i)
+    {
+        MoveSelectionDestroyCursorAt(i);
+        txtPtr = StringCopy(gDisplayedStringBattle, gText_MoveInterfaceDynamicColors);
+        *txtPtr++ = sMoveClassGlyph[sMoveClass[i == 0 ? move : MOVE_NONE]];
+        if (i == 0)
+        {
+            SetMoveMenuTypeColor(0, move);
+            *txtPtr++ = EXT_CTRL_CODE_BEGIN;
+            *txtPtr++ = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
+            *txtPtr++ = MOVE_MENU_COLOR(0);
+            *txtPtr++ = 14;
+            *txtPtr++ = 15;
+            StringCopy(txtPtr, gMoveNames[move]);
+        }
+        else
+        {
+            *txtPtr = EOS;
+        }
+        BattlePutTextOnWindow(gDisplayedStringBattle, i + 3);
+    }
+    MoveSelectionCreateCursorAt(0, 0);
+    state = GetCurrentPpToMaxPpState(left, WITCHING_PP);
+    gPlttBufferUnfaded[BG_PLTT_ID(5) + 12] = gPPTextPalette[(state * 2) + 0];
+    gPlttBufferUnfaded[BG_PLTT_ID(5) + 11] = gPPTextPalette[(state * 2) + 1];
+    CpuCopy16(&gPlttBufferUnfaded[BG_PLTT_ID(5) + 11], &gPlttBufferFaded[BG_PLTT_ID(5) + 11], PLTT_SIZEOF(2));
+    txtPtr = ConvertIntToDecimalStringN(gDisplayedStringBattle, left, STR_CONV_MODE_RIGHT_ALIGN, 2);
+    *txtPtr = CHAR_SLASH;
+    ConvertIntToDecimalStringN(++txtPtr, WITCHING_PP, STR_CONV_MODE_RIGHT_ALIGN, 2);
+    BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP_REMAINING);
+    DisplayMoveTypeFor(0, move);
+}
+
+static void HourPage_Leave(void)
+{
+    Witching_SetMenuPage(FALSE);
+    MoveSelectionDisplayMoveNames();
+    MoveSelectionCreateCursorAt(gMoveSelectionCursor[gActiveBattler], 0);
+    MoveSelectionDisplayPpNumber();
+    MoveSelectionDisplayMoveType();
+}
+
+static void HandleInputHourPage(void)
+{
+    u16 move = Witching_MoveFor(gActiveBattler);
+    bool32 canSelectTarget = FALSE;
+
+    if (move == MOVE_NONE)   // four o'clock came while the page was open
+    {
+        HourPage_Leave();
+        return;
+    }
+    if (JOY_NEW(A_BUTTON))
+    {
+        if (!Witching_CanChoose(gActiveBattler))
+        {
+            PlaySE(SE_FAILURE);   // no use left, or held to another routine
+            return;
+        }
+        PlaySE(SE_SELECT);
+        gMultiUsePlayerCursor = GetBattlerAtPosition((GetBattlerPosition(gActiveBattler) & BIT_SIDE) ^ BIT_SIDE);
+        if (gBattleBufferA[gActiveBattler][1]) // a double battle: a single foe is chosen, unless only one stands
+        {
+            canSelectTarget = TRUE;
+            if (CountAliveMonsInBattle(BATTLE_ALIVE_EXCEPT_ACTIVE) <= 1)
+            {
+                gMultiUsePlayerCursor = GetDefaultMoveTarget(gActiveBattler);
+                canSelectTarget = FALSE;
+            }
+        }
+        ResetPaletteFadeControl();
+        BeginNormalPaletteFade(0xF0000, 0, 0, 0, RGB_WHITE);
+        if (!canSelectTarget)
+        {
+            BtlController_EmitTwoReturnValues(1, 10, WITCHING_MENU_SLOT | (gMultiUsePlayerCursor << 8));
+            Witching_SetMenuPage(FALSE);
+            PlayerBufferExecCompleted();
+        }
+        else
+        {
+            gBattlerControllerFuncs[gActiveBattler] = HandleInputChooseTarget;
+            if (gAbsentBattlerFlags & gBitTable[GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT)])
+                gMultiUsePlayerCursor = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
+            else
+                gMultiUsePlayerCursor = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
+            gSprites[gBattlerSpriteIds[gMultiUsePlayerCursor]].callback = SpriteCB_ShowAsMoveTarget;
+        }
+    }
+    else if (JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        Witching_SetMenuPage(FALSE);
+        BtlController_EmitTwoReturnValues(1, 10, 0xFFFF);
+        PlayerBufferExecCompleted();
+        ResetPaletteFadeControl();
+        BeginNormalPaletteFade(0xF0000, 0, 0, 0, RGB_WHITE);
+    }
+    else if (JOY_NEW(DPAD_UP | R_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        HourPage_Leave();
+    }
+}
+
 void HandleInputChooseMove(void)
 {
     bool32 canSelectTarget = FALSE;
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleBufferA[gActiveBattler][4]);
 
+    if (Witching_MenuPage())   // T-480: the hour's page has its own buttons
+    {
+        HandleInputHourPage();
+        return;
+    }
     PreviewDeterminativeMoveTargets();
     MoveMenuWeatherGlint();   // T-415 P2
     if (JOY_NEW(A_BUTTON))
@@ -971,6 +1100,15 @@ void HandleInputChooseMove(void)
             MoveSelectionDisplayMoveType();
             BeginNormalPaletteFade(0xF0000, 0, 0, 0, RGB_WHITE);
         }
+    }
+    else if (JOY_NEW(DPAD_DOWN | R_BUTTON) && Witching_MoveFor(gActiveBattler) != MOVE_NONE
+          && (JOY_NEW(R_BUTTON) || (gMoveSelectionCursor[gActiveBattler] & 2)
+              || (gMoveSelectionCursor[gActiveBattler] ^ 2) >= gNumberOfMovesToChoose))
+    {
+        // T-480: past the bottom row (or R), the hour's page -- only while the hour lasts and the book is held
+        PlaySE(SE_SELECT);
+        Witching_SetMenuPage(TRUE);
+        HourPage_Draw();
     }
     else if (JOY_NEW(DPAD_DOWN))
     {
@@ -1913,12 +2051,19 @@ static void MoveSelectionDisplayPpNumber(void)
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP_REMAINING);
 }
 
+static void DisplayMoveTypeFor(u8 slot, u16 move);
+
 static void MoveSelectionDisplayMoveType(void)
 {
-    u8 *txtPtr;
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleBufferA[gActiveBattler][4]);
     u8 slot = gMoveSelectionCursor[gActiveBattler];
-    u16 move = moveInfo->moves[slot];
+
+    DisplayMoveTypeFor(slot, moveInfo->moves[slot]);
+}
+
+static void DisplayMoveTypeFor(u8 slot, u16 move)
+{
+    u8 *txtPtr;
 
     // NO "TYPE/" LABEL. The name is written in its type's colour, so it plainly
     // is a type -- and the label was 23px, which pushed EMERGENT and HARDENED
@@ -2994,6 +3139,7 @@ static void HandleChooseMoveAfterDma3(void)
 
 static void PlayerHandleChooseMove(void)
 {
+    Witching_SetMenuPage(FALSE);   // T-480: the menu always opens on the moveset
     InitMoveSelectionsVarsAndStrings();
     gBattlerControllerFuncs[gActiveBattler] = HandleChooseMoveAfterDma3;
 }

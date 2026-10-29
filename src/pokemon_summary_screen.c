@@ -1,4 +1,5 @@
 #include "global.h"
+#include "daemons_witching.h"   // T-480
 #include "daemons_away.h"
 #include "daemons_feelings.h"
 #include "gflib.h"
@@ -3075,6 +3076,10 @@ static void CB2_RunPokemonSummaryScreen(void)
     AnimateSprites();
     BuildOamBuffer();
     UpdatePaletteFade();
+    // T-480: in the witching hour the daemon's picture wears the shimmer (src/daemons_witching.c) -- not an egg's
+    if (sMonSummaryScreen != NULL && !sMonSummaryScreen->isEgg && !gPaletteFade.active && Witching_IsHour()
+     && sMonSummaryScreen->monPicSpriteId < MAX_SPRITES && gSprites[sMonSummaryScreen->monPicSpriteId].inUse)
+        Witching_ShimmerFromUnfaded(OBJ_PLTT_ID(gSprites[sMonSummaryScreen->monPicSpriteId].oam.paletteNum));
 }
 
 static void PokeSum_FlipPages_SlideHpExpBarsOut(void)

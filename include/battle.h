@@ -460,8 +460,14 @@ struct BattleStruct
     u8 lean;                            // T-459 C: this turn's lean (LEAN_*), 0 none
     u8 leanState;                       // T-459 C: LEAN_DECIDED and what the foe did this turn
     u8 leanWait;                        // T-459 C: frames waited on the foe's choice this turn
-    u8 padding_1FA[0x6];
+    u8 witchFlags;                      // T-480: WITCH_* below, and bits 0-3 the battlers who chose the hour's routine
+    u8 witchPpUsed[PARTY_SIZE / 2];     // T-480: the hour's uses spent, a nibble per player party slot; never saved
+    u8 padding_1FE[0x2];
 }; // size == 0x200 bytes
+
+#define WITCH_SHIMMERING  (1 << 7)      // T-480: the player's battlers wear the shimmer now (put back when it stops)
+#define WITCH_MENU_PAGE   (1 << 6)      // T-480: the move menu shows the hour's page
+#define WITCH_CHOSEN_MASK 0x0F
 
 extern struct BattleStruct *gBattleStruct;
 

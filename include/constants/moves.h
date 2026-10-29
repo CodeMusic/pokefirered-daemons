@@ -376,8 +376,32 @@
 #define MOVE_MEDIAN 361
 #define MOVE_PANORAMA 362
 #define MOVE_HINDSIGHT 363
+// T-480 (the user, 2026-10-29): the witching hour's routines, one per type, known only from 3:00 to 4:00 AM on the
+// cartridge's clock and only once THE SUBTLE LAYER is held -- never in a moveset, never saved (src/daemons_witching.c).
+// Appended, so no existing ID moves. In TYPE_* order, so MOVE_WITCHING_FIRST + type is the type's routine.
+#define MOVE_WITCHING_FIRST  364
+#define MOVE_BLANK_PAGE      364   // CONTENT   T-480, DRAFT
+#define MOVE_LAST_PROOF      365   // LOGIC     T-480, DRAFT
+#define MOVE_NIGHT_COURSE    366   // VECTOR    T-480, DRAFT
+#define MOVE_BITROT_MOON     367   // CORRUPT   T-480, DRAFT
+#define MOVE_UNDERLAYER      368   // STRATUM   T-480, DRAFT
+#define MOVE_OLD_GHOSTS      369   // LEGACY    T-480, DRAFT
+#define MOVE_QUIET_HIVE      370   // SWARM     T-480, DRAFT
+#define MOVE_WHAT_SLEEPS     371   // LATENT    T-480, DRAFT
+#define MOVE_NIGHT_WATCH     372   // HARDENED  T-480, DRAFT
+#define MOVE_SECOND_SIGHT    373   // ORACLE    T-480, DRAFT
+#define MOVE_EMBER_HOUR      374   // ENTROPY   T-480, DRAFT
+#define MOVE_UNDERTOW        375   // FLOW      T-480, DRAFT
+#define MOVE_DARK_ROOTS      376   // GROWTH    T-480, DRAFT
+#define MOVE_DEAD_AIR        377   // SIGNAL    T-480, DRAFT
+#define MOVE_THIN_SEAM       378   // CONTEXT   T-480, DRAFT
+#define MOVE_BLACK_ICE       379   // FROZEN    T-480, DRAFT
+#define MOVE_BEFORE_DAWN     380   // EMERGENT  T-480, DRAFT
+#define MOVE_VEIL            381   // OPAQUE    T-480, DRAFT
+#define MOVE_WITCHING_LAST   381
+#define IS_WITCHING_MOVE(move) ((move) >= MOVE_WITCHING_FIRST && (move) <= MOVE_WITCHING_LAST)
 
-#define MOVES_COUNT 364
+#define MOVES_COUNT 382
 
 // Used for checks for moves affected by Disable, Mimic, etc.
 #define MOVE_UNAVAILABLE 0xFFFF
