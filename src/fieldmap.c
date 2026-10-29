@@ -1436,18 +1436,37 @@ static u8 DaemonsSeasonHere(void)
 
 // T-416 P4: VIOLET BLOOM -- for the day, the petal slots (palette 0's 9-11) wear the month's purple, light to dark,
 // whatever the season has made of them. Where the season shows, and only there.
-static bool8 DaemonsBloomHere(u16 offset)
+// T-481 C (the user, 2026-10-29, by multiple choice): and on every other holiday that is not QUIET and has no field
+// look of its own, the petal's own colour (11) takes the holiday's month colour itself, its light parts kept.
+#define BLOOM_NONE    0
+#define BLOOM_VIOLET  1
+#define BLOOM_MONTH   2
+#define HF_FIELD_LOOKS (HF_LANTERN | HF_FROST | HF_SNOW_LIGHT | HF_BRIGHT_DAY | HF_FIR_GLOW | HF_VIOLET_BLOOM)
+
+static u8 DaemonsBloomHere(u16 offset)
 {
-    return offset < BG_PLTT_ID(NUM_PALS_IN_PRIMARY) && DaemonsSeasonShows()
-        && (DaemonsHolidayFlags(DaemonsHoliday()) & HF_VIOLET_BLOOM);
+    u8 holiday;
+    u16 flags;
+
+    if (offset >= BG_PLTT_ID(NUM_PALS_IN_PRIMARY) || !DaemonsSeasonShows())
+        return BLOOM_NONE;
+    holiday = DaemonsHoliday();
+    flags = DaemonsHolidayFlags(holiday);
+    if (flags & HF_VIOLET_BLOOM)
+        return BLOOM_VIOLET;
+    if (holiday != HOLIDAY_NONE && !(flags & (HF_QUIET | HF_FIELD_LOOKS)))
+        return BLOOM_MONTH;
+    return BLOOM_NONE;
 }
 
-static u16 DaemonsSeasonColour(u16 index, u16 colour, u8 season, bool8 bloom)
+static u16 DaemonsSeasonColour(u16 index, u16 colour, u8 season, u8 bloom)
 {
     u32 i;
 
-    if (bloom && index >= 9 && index <= 11)
+    if (bloom == BLOOM_VIOLET && index >= 9 && index <= 11)
         return DaemonsHolidayBloomColour(index - 9);
+    if (bloom == BLOOM_MONTH && index == 11)
+        return DaemonsMonthColour(DaemonsHolidayMonth(DaemonsHoliday()));
     if (season == SEASON_SUMMER)
         return colour;
     if (index < 16)
@@ -1586,10 +1605,10 @@ static void DaemonsClarityEntries(u16 offset, u16 count)
     s32 amount = DaemonsClarityFade(), r, g, b, grey;
     u16 i, c;
     u8 season = offset < BG_PLTT_ID(NUM_PALS_IN_PRIMARY) ? DaemonsSeasonHere() : SEASON_SUMMER;
-    bool8 bloom = DaemonsBloomHere(offset);
+    u8 bloom = DaemonsBloomHere(offset);
     const struct DaemonsGroveMood *mood = DaemonsGroveMoodHere();
 
-    if (amount == 0 && season == SEASON_SUMMER && !bloom && mood == NULL)
+    if (amount == 0 && season == SEASON_SUMMER && bloom == BLOOM_NONE && mood == NULL)
         return;
     for (i = 0; i < count; i++)
     {
@@ -1674,11 +1693,11 @@ u16 DaemonsPaletteSignature(void)
     // T-317: and the clarity, so a connection crossed after an understanding arrives reloads the faded rows
     // T-359: and the season, so a connection crossed as the season turns reloads the rows it repaints
     // T-416 P4: and the holiday's light (bits 6, 14, 15: a lift, or VIOLET BLOOM's petals), or a map crossed as a
-    // holiday begins keeps the old palette
+    // holiday begins keeps the old palette. T-481 C: and the month's petal (one past VIOLET BLOOM's look).
     u8 look = DaemonsFieldTint() == DAEMONS_TINT_WATCH ? DaemonsHolidayLift() : HOLIDAY_LIFT_NONE;
 
-    if (look == HOLIDAY_LIFT_NONE && DaemonsBloomHere(0))
-        look = HOLIDAY_LIFT_COUNT;
+    if (look == HOLIDAY_LIFT_NONE && DaemonsBloomHere(0) != BLOOM_NONE)
+        look = HOLIDAY_LIFT_COUNT - 1 + DaemonsBloomHere(0);
     return ((look & 1) << 6) | ((look >> 1) << 14)
          | (DaemonsClarityFade() != 0 ? (DaemonsClarityFade() > 46 ? 0x2000 : 0x1000) : 0)
          | (DaemonsSeasonHere() << 10) | (DaemonsFieldTint() << 7) | (DaemonsWeekday() << 3) | (DaemonsWatch() << 1) | DaemonsIsBlancheOutdoors();
@@ -1773,10 +1792,19 @@ static void LoadTilesetPalette(struct Tileset const *tileset, u16 destOffset, u1
             // dome, the courses, the canopy -- in the General tileset's row 2, index 8, which nothing else draws
             // (DAEMONS tools/gbacivic.py). The day's colour goes there before the watch's tint, so dusk and night
             // fall on it too. Sunday first; every colour 22+ from each type's hue (tools/gbadaytrim.py). Unnamed.
+            // T-481 C (the user, 2026-10-29, by multiple choice: option W): and beyond the towns, the water's crest --
+            // the brightest glint on sea and pond, General rows 4 and 6 index 1 -- in the same colour. Here, before the
+            // faded print and the watch, so T-483's pulse, the weather and the fades stay on top and nothing compounds.
             if (tileset == &gTileset_General)
             {
-                gPlttBufferUnfaded[destOffset + BG_PLTT_ID(2) + 8] = sDayTrims[DaemonsWeekday()];
-                gPlttBufferFaded[destOffset + BG_PLTT_ID(2) + 8] = sDayTrims[DaemonsWeekday()];
+                u16 trim = sDayTrims[DaemonsWeekday()];
+
+                gPlttBufferUnfaded[destOffset + BG_PLTT_ID(2) + 8] = trim;
+                gPlttBufferFaded[destOffset + BG_PLTT_ID(2) + 8] = trim;
+                gPlttBufferUnfaded[destOffset + BG_PLTT_ID(4) + 1] = trim;
+                gPlttBufferFaded[destOffset + BG_PLTT_ID(4) + 1] = trim;
+                gPlttBufferUnfaded[destOffset + BG_PLTT_ID(6) + 1] = trim;
+                gPlttBufferFaded[destOffset + BG_PLTT_ID(6) + 1] = trim;
             }
             // T-268: Blanche's wash first and the tint over it, or night would be washed back toward white.
             if (DaemonsIsBlancheOutdoors())

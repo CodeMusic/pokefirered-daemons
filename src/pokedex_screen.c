@@ -34,6 +34,7 @@
 #include "daemons_first_seen.h"      // T-406
 #include "region_map.h"             // T-406: GetMapName
 #include "constants/region_map_sections.h"   // T-406: the BOUND line
+#include "daemons_calendar_pane.h"   // T-481 B
 
 #define TAG_AREA_MARKERS 2001
 
@@ -965,6 +966,7 @@ void DexScreen_LoadResources(void)
         LoadPalette(sNationalDexPalette, BG_PLTT_ID(0), sizeof(sNationalDexPalette));
     else
         LoadPalette(sKantoDexPalette, BG_PLTT_ID(0), sizeof(sKantoDexPalette));
+    DaemonsCalendarPane(0, CALENDAR_PANE_INDEX);   // T-481 B: the box's corners take the day (a holiday's month), the hour
     FillBgTilemapBufferRect(3, 0x001, 0,  0, 32, 32, 0);
     FillBgTilemapBufferRect(2, 0x000, 0,  0, 32, 32, 17);
     FillBgTilemapBufferRect(1, 0x000, 0,  0, 32, 32, 17);
@@ -3152,11 +3154,7 @@ bool8 DexScreen_TurnCategoryPage_BgEffect(u8 page)
  */
 static bool8 DexScreen_FlipCategoryPageInDirection(u8 direction)
 {
-    u16 color;
-    if (IsNationalPokedexEnabled())
-        color = sNationalDexPalette[7];
-    else
-        color = sKantoDexPalette[7];
+    u16 color = gPlttBufferUnfaded[BG_PLTT_ID(0) + 7];   // T-481 B: the backdrop as the hour left it, not as drawn
     switch (sPokedexScreenData->data[0])
     {
     case 0:

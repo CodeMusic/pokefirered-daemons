@@ -643,6 +643,7 @@ static const u32 sBgTilemap_MovesPage[] = INCBIN_U32( "graphics/summary_screen/m
 #include "data/text/nature_names.h"
 #include "daemon_streaks.h"
 #include "daemon_saturation.h"
+#include "daemons_calendar_pane.h"
 
 static const u8 *const sEggHatchTimeTexts[] = {
     gText_PokeSum_EggHatch_LongTime,
@@ -2094,6 +2095,7 @@ static u8 PokeSum_HandleLoadBgGfx(void)
             LoadPalette(&gSummaryScreen_Bg_Pal[16 * 0], BG_PLTT_ID(0), PLTT_SIZE_4BPP);
             LoadPalette(&gSummaryScreen_Bg_Pal[16 * 1], BG_PLTT_ID(1), PLTT_SIZE_4BPP);
         }
+        DaemonsCalendarPane(0, CALENDAR_PANE_SUMMARY);   // T-481 B: the day's line, a holiday, the hour
 
         break;
     case 1:
@@ -5166,6 +5168,7 @@ static void Task_PokeSum_SwitchDisplayedPokemon(u8 taskId)
             LoadPalette(&gSummaryScreen_Bg_Pal[16 * 0], BG_PLTT_ID(0), PLTT_SIZE_4BPP);
             LoadPalette(&gSummaryScreen_Bg_Pal[16 * 1], BG_PLTT_ID(1), PLTT_SIZE_4BPP);
         }
+        DaemonsCalendarPane(0, CALENDAR_PANE_SUMMARY);   // T-481 B: the day's line, a holiday, the hour
 
         sMonSummaryScreen->switchMonTaskState++;
         break;

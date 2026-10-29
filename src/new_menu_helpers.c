@@ -8,6 +8,7 @@
 #include "field_specials.h"
 #include "text_window.h"
 #include "script.h"
+#include "daemons_calendar_pane.h"
 
 #define DLG_WINDOW_PALETTE_NUM 15
 #define DLG_WINDOW_BASE_TILE_NUM 0x200
@@ -465,8 +466,20 @@ void LoadStdWindowFrameGfx(void)
         Menu_LoadStdPal();
         LoadMenuMessageWindowGfx(0, DLG_WINDOW_BASE_TILE_NUM, BG_PLTT_ID(DLG_WINDOW_PALETTE_NUM));
         LoadPalette(sSubtlePurple, BG_PLTT_ID(DLG_WINDOW_PALETTE_NUM) + TEXT_COLOR_PURPLE, PLTT_SIZEOF(1));   // T-459
+        DaemonsCalendarPane(DLG_WINDOW_PALETTE_NUM, CALENDAR_PANE_TEXT_BOX);   // T-481 B: the day, a holiday, the hour
     }
     LoadUserWindowGfx(0, STD_WINDOW_BASE_TILE_NUM, BG_PLTT_ID(STD_WINDOW_PALETTE_NUM));
+}
+
+// T-481 B: the text box relit with the field (overworld.c DaemonsRelightField), so dusk falling on a route reaches its
+// frame too: the dialogue palette loaded again from the drawing, then the calendar once -- never on top of itself.
+void DaemonsRelightTextBox(void)
+{
+    if (gQuestLogState == QL_STATE_PLAYBACK)
+        return;
+    LoadPalette(GetTextWindowPalette(0), BG_PLTT_ID(DLG_WINDOW_PALETTE_NUM), PLTT_SIZE_4BPP);
+    LoadPalette(sSubtlePurple, BG_PLTT_ID(DLG_WINDOW_PALETTE_NUM) + TEXT_COLOR_PURPLE, PLTT_SIZEOF(1));   // T-459
+    DaemonsCalendarPane(DLG_WINDOW_PALETTE_NUM, CALENDAR_PANE_TEXT_BOX);
 }
 
 void DrawDialogueFrame(u8 windowId, bool8 copyToVram)

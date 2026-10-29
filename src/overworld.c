@@ -1510,6 +1510,7 @@ void DaemonsRelightField(void)
     DaemonsRetintObjectEventPalettes();
     DaemonsRetintFieldEffectPalettes();   // T-279
     DaemonsRetintWeatherSpritePalette();  // T-415
+    DaemonsRelightTextBox();              // T-481 B: the text box's frame takes the new hour and day
 }
 
 static EWRAM_DATA u8 sRelightTimer = 0;

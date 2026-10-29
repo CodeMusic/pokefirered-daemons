@@ -29,6 +29,7 @@ void AddTextPrinterDiffStyle(bool8 allowSkippingDelayWithButtonPress);
 void AddTextPrinterForMessage(bool8 allowSkippingDelayWithButtonPress);
 void AddTextPrinterWithCustomSpeedForMessage(bool8 allowSkippingDelayWithButtonPress, u8 speed);
 void LoadStdWindowFrameGfx(void);
+void DaemonsRelightTextBox(void);   // T-481 B: the text box's frame relit with the field
 void DrawDialogueFrame(u8 windowId, bool8 transfer);
 void DrawStdWindowFrame(u8 windowId, bool8 copyNow);
 void ClearDialogWindowAndFrame(u8 windowId, bool8 copyToVram);
