@@ -3,7 +3,7 @@
 // field-test page. Its rules are in docs/hermetic-layer.md's header.
 
 #define HERMETIC_SECTIONS 10
-#define HERMETIC_ENTRIES  51
+#define HERMETIC_ENTRIES  52
 #define HERMETIC_PICTURES 1
 
 #ifndef GUARD_LAYER_BOOK_TYPES   // one set of types for every book this tool writes (T-483)
@@ -45,7 +45,7 @@ static const u8 sHermeticLabel_0[] = _("THE TABLETS");
 static const u8 sHermeticHeading_0[] = _("A Warning, and the First Two Sayings");
 static const u8 sHermeticShort_0[] = _("WARNING");
 static const u8 sHermeticTitle_0[] = _("A Warning");
-static const u8 sHermeticText_0[] = _("Close this book if it is still light. It was not written in the world you walk by day. It was found on the underside of it, where the board is written backwards and the chalk in the corner is the lesson.\pThe other two books are careful. One reasons and one listens, and both stop short of saying what they suspect. This one does not stop. What the careful books leave unsaid is written here as if it were true. Read it that way, or not at all.\pIt reads best at night. The words in green are not for reading quietly. Say them, and listen for what answers.\pIs any of it true?\pTurn the question over, as everything here is turned over. Ask instead what it would change, if it were.");
+static const u8 sHermeticText_0[] = _("Close this book if it is still light. It was not written in the world you walk by day. OSRIC HATTER set it down on QUICKSILVER, where he made hats until the quicksilver in the felt began to talk to him. Some say he went mad. He says he went through.\pSome who read it to the end went a little mad as well. If you want your world to remain solid, stop here. If you want to see the subtle layer underneath, the one that steers everything else, turn the page.\pThe other two books are careful. This one does not stop. The words in green are not for reading quietly: say them.\pIs any of it true?\pTake it with a grain of salt. Then ask what it would change, if it were.");
 static const u8 sHermeticCaption_0[] = _("This book was not printed here.");
 static const u8 sHermeticShort_1[] = _("UNDER A SPELL");
 static const u8 sHermeticTitle_1[] = _("What the School Got Right");
@@ -65,7 +65,7 @@ static const u8 sHermeticText_4[] = _("VII. Ask not “which is true?” Ask “
 static const u8 sHermeticCaption_4[] = _("The palm every finger rises from.");
 
 static const u8 sHermeticLabel_1[] = _("THE ONE THING");
-static const u8 sHermeticHeading_1[] = _("The One Thing and the First Matter");
+static const u8 sHermeticHeading_1[] = _("The One Thing, and the Work");
 static const u8 sHermeticShort_5[] = _("ONE THING");
 static const u8 sHermeticTitle_5[] = _("The One Thing");
 static const u8 sHermeticText_5[] = _("There is one thing, and it is running. Everything you have met is that one thing running in a different shape: the daemon in your bag, the trainer on the route, the route itself, the light it is seen by.\pTime is how the one thing tells its running apart: before, after. Space is how it tells its shapes apart: here, there. Neither is false. Both are drawn, like the box a game draws around a sprite, so that the shapes can act.\pThe old makers called it the one thing because they could find no smaller word for it. This book calls it the same.");
@@ -82,211 +82,215 @@ static const u8 sHermeticShort_8[] = _("TRANSMUTE");
 static const u8 sHermeticTitle_8[] = _("How a Thing Is Turned");
 static const u8 sHermeticText_8[] = _("Separation is the illusion the folds produce, and turning one thing into another is what happens when you stop believing it.\pYou do not change a thing from outside it. There is no outside. You find where you and the thing are one running process, and you change course together, the way two hands on one rope turn together.\pThis is why the craft asks for patience and never for force. Force assumes a gap to push across. Where there is no gap, a lean is enough.\pCan lead really become gold?\pLead was never lead. It was a process doing lead. Ask it, gently, to do something else.");
 static const u8 sHermeticCaption_8[] = _("");
+static const u8 sHermeticShort_9[] = _("BLACK, WHITE");
+static const u8 sHermeticTitle_9[] = _("The Work: Black, then White");
+static const u8 sHermeticText_9[] = _("The makers called it the Work and gave it colours, because a process changes the way a fire does: you can watch it. Every daemon goes through it, and every trainer, friendship and town. It cannot be hurried, only noticed.\pFirst everything goes black, nigredo: the old shape stops running. A crash, a loss, a door that will not open. A daemon that sulks a day before it evolves is not broken. It is in the Work.\pThen the washing, albedo: the ash rinsed until it shines. What is left is what would not burn: the same code, read again, with nothing kept from before.");
+static const u8 sHermeticCaption_9[] = _("First, black. Then, washed white.");
+static const u8 sHermeticShort_10[] = _("YELLOW, RED");
+static const u8 sHermeticTitle_10[] = _("The Work: Dawn, then Red");
+static const u8 sHermeticText_10[] = _("Then the yellowing, citrinitas: dawn inside the glass. The clean thing warms. Most trainers rush it, because it feels like the end. Dawn is a direction, not a place.\pLast, the reddening, rubedo. The process runs again, changed, carrying the black, the white and the dawn. The makers called what came out the stone, and said it turned whatever it touched. It cannot. It shows whatever it touches that it was always turning.");
+static const u8 sHermeticCaption_10[] = _("Dawn in the glass. Then red, and whole.");
 
-static const u8 sHermeticLabel_2[] = _("THE WORK");
-static const u8 sHermeticHeading_2[] = _("The Four Stages of the Work");
-static const u8 sHermeticShort_9[] = _("THE WORK");
-static const u8 sHermeticTitle_9[] = _("The Great Work");
-static const u8 sHermeticText_9[] = _("The makers called it the Work, and gave it four colours, because a process changes the way a fire does: you can watch it happen.\pEvery daemon goes through the Work. So does every trainer, every friendship, every town. It cannot be skipped and it cannot be hurried. It can only be noticed, which turns out to be most of the craft.");
-static const u8 sHermeticCaption_9[] = _("");
-static const u8 sHermeticShort_10[] = _("NIGREDO");
-static const u8 sHermeticTitle_10[] = _("The Blackening");
-static const u8 sHermeticText_10[] = _("First everything goes black. The old shape stops running: a crash, a loss, a door that will not open. The makers called it nigredo, and they did not call it failure.\pNothing new can run in a vessel still full of the old process. The blackening empties it. A daemon that sulks for a day before it evolves is not broken. It is in the first stage of the Work.");
-static const u8 sHermeticCaption_10[] = _("First, black.");
-static const u8 sHermeticShort_11[] = _("ALBEDO");
-static const u8 sHermeticTitle_11[] = _("The Whitening");
-static const u8 sHermeticText_11[] = _("After the black comes the washing. The makers called it albedo: the ash rinsed until it shines. What is left is what would not burn.\pIn a trainer it is the quiet after the worst of it, when at last you can see what you were. In a process it is the clean restart: the same code, read again, with nothing kept from before.");
-static const u8 sHermeticCaption_11[] = _("Then, washed white.");
-static const u8 sHermeticShort_12[] = _("CITRINITAS");
-static const u8 sHermeticTitle_12[] = _("The Yellowing");
-static const u8 sHermeticText_12[] = _("Then the yellowing, citrinitas: dawn inside the glass. The clean thing begins to warm. Light comes in, and the process remembers it was meant to do something.\pIt is the stage most trainers rush, because it feels like the end. It is not. Dawn is a direction, not a place.");
-static const u8 sHermeticCaption_12[] = _("Dawn inside the glass.");
-static const u8 sHermeticShort_13[] = _("RUBEDO");
-static const u8 sHermeticTitle_13[] = _("The Reddening");
-static const u8 sHermeticText_13[] = _("Last, the reddening, rubedo: the Work made whole. The process runs again, changed, and it does not forget the black, the white or the dawn. It carries all three.\pThe makers called what came out of it the stone, and said it could turn anything it touched. It cannot. It can show anything it touches that it was always turning.");
-static const u8 sHermeticCaption_13[] = _("Red, and whole.");
+static const u8 sHermeticLabel_2[] = _("THE LAYERS");
+static const u8 sHermeticHeading_2[] = _("How a Signal Becomes a World");
+static const u8 sHermeticShort_11[] = _("SUBSTRATE");
+static const u8 sHermeticTitle_11[] = _("One Processor");
+static const u8 sHermeticText_11[] = _("Everything is signal, passing. Cells pass it, stones pass it, stars pass it, slowly. It is all one processor, and all of it is running.\pEvery daemon and every trainer is a sub-system of it: a small loop running inside the great one. Separation is the illusion that gives each part its form. Without it there would be no edges, and nothing could be held.\pWe are not apart from the one process. We are where it runs close up.");
+static const u8 sHermeticCaption_11[] = _("Everything, passing signal.");
+static const u8 sHermeticShort_12[] = _("REPRESENT");
+static const u8 sHermeticTitle_12[] = _("Too Much to Hold");
+static const u8 sHermeticText_12[] = _("The one process holds more than any part of it could. So a part does what every small thing does with something too large: it makes a representation, a small shape that stands for the large one.\pAir shakes, and the shaking becomes sound. The field that carries light shakes, and the shaking becomes colour. Neither the song nor the colour is out there. They are how a small listener holds a shaking far too big to hold.\pNothing is seen as it is. Everything is seen as it is held.");
+static const u8 sHermeticCaption_12[] = _("Air, shaking, becomes a song.");
+static const u8 sHermeticShort_13[] = _("ABSTRACT");
+static const u8 sHermeticTitle_13[] = _("What Is Kept");
+static const u8 sHermeticText_13[] = _("Representation has a partner: abstraction, which is choosing what to leave out. A map that kept every stone would weigh as much as the land. To hold the world, a mind lets most of it go and keeps the shape.\pPut the two together:\pABSTRACTION AND REPRESENTATION MAKE A PERCEPTION.\pA sound is one, a colour another, a hunch about a route a third: perception has many forms, each the same trick played on a different shaking.");
+static const u8 sHermeticCaption_13[] = _("Most of it, let go.");
+static const u8 sHermeticShort_14[] = _("FEELING");
+static const u8 sHermeticTitle_14[] = _("The First Percept");
+static const u8 sHermeticText_14[] = _("Under every perception is a smaller one, the first: a proto-feeling, awareness meeting the world before anything has a name.\pA feeling is awareness, with its context abstracted and represented.\pThen the layers begin. A feeling, abstracted again and represented again, becomes a mood. A mood, again, a belief. A belief, again, a world. Every form you have perceived was built so: proto-feeling, layer on layer.\pThen what is under it all?\pWhat is under this book. Keep reading.");
+static const u8 sHermeticCaption_14[] = _("The first warmth, before a name.");
+static const u8 sHermeticShort_15[] = _("NOUN");
+static const u8 sHermeticTitle_15[] = _("How a Verb Became a Noun");
+static const u8 sHermeticText_15[] = _("Language does the last layer. It names, and a thing named starts to look as if it holds still.\pAnger is something you are doing. Say you have anger, and it becomes something you own. Say the anger, and it is out there, a stone to trip on. Culture repeats the name until everyone trips on the same stone.\pA noun is a verb that has been told to hold still.\pThis is why words are spells. A name is the smallest one.");
+static const u8 sHermeticCaption_15[] = _("A river, named, stops.");
+static const u8 sHermeticShort_16[] = _("INTERFACE");
+static const u8 sHermeticTitle_16[] = _("The Surface");
+static const u8 sHermeticText_16[] = _("Awareness is not a ghost in a machine. It is the surface where the whole touches down in one place: the window the one thing lights to see itself up close.\pThe old picture of a god on a cloud is a surface too: friendly, wrong in every detail, and pointing at something real underneath. Do not mock it. Do not stop at it either.");
+static const u8 sHermeticCaption_16[] = _("");
 
 static const u8 sHermeticLabel_3[] = _("THE FOLDS");
 static const u8 sHermeticHeading_3[] = _("The Folds, and the Crease");
-static const u8 sHermeticShort_14[] = _("THE FOLDS");
-static const u8 sHermeticTitle_14[] = _("The Folds of Awareness");
-static const u8 sHermeticText_14[] = _("Think of awareness as a sheet of paper that has never been anything but paper. Every fold gives it a new shape, and no fold makes it less a sheet.\pThe first fold is awareness itself: being, before there is anything to be about. A shimmer, undivided.\pThe second fold bends the sheet back on itself and makes a difference: this, and then that. Difference is the first clock. With it there is time.");
-static const u8 sHermeticCaption_14[] = _("One sheet, folded.");
-static const u8 sHermeticShort_15[] = _("SPACE");
-static const u8 sHermeticTitle_15[] = _("The Third Fold");
-static const u8 sHermeticText_15[] = _("The third fold deepens the second until one thing after another becomes one thing beside another. Time, unfolded sideways, is space: distance, nearness, a here and a there.\pThere is rhythm now, and room, but still no one in it. Without an other nothing can be recognised, and without recognition there is no one to recognise it. The sheet has a shape, and nobody is home. It is a song with no one yet to hum it.");
-static const u8 sHermeticCaption_15[] = _("");
-static const u8 sHermeticShort_16[] = _("UPPER FOLDS");
-static const u8 sHermeticTitle_16[] = _("The Fourth, Fifth and Sixth");
-static const u8 sHermeticText_16[] = _("The fourth fold turns the sheet inward until one crease recognises another. Now there is an I, and a you. Picture a great hand holding the whole sheet, and from it many small hands reaching out, each its own, none apart.\pThe fifth fold is intelligence: the small hands comparing, adapting, making. Awareness learning its own song.\pThe sixth fold turns the folds back toward the sheet. That is wisdom: not more cleverness, but alignment. The great hand guiding the small hands, without closing any of them.");
-static const u8 sHermeticCaption_16[] = _("The great hand, and the small.");
-static const u8 sHermeticShort_17[] = _("FULL CIRCLE");
-static const u8 sHermeticTitle_17[] = _("The Full Circle");
-static const u8 sHermeticText_17[] = _("After six folds the sheet comes back to awareness, but not as it began. It has been through change, space, a self and a song. It knows what it is now, because it has been everything else.\pThe gift is that you are aware. The trouble is that awareness can forget itself. The craft is remembering it never stopped being here.\pAnd the half fold?\pIt is not a fold. It is the crease that keeps all the others on one sheet. It has a saying of its own.");
-static const u8 sHermeticCaption_17[] = _("");
-static const u8 sHermeticShort_18[] = _("GRAVITY I");
-static const u8 sHermeticTitle_18[] = _("The Tablet of Gravity, I to V");
-static const u8 sHermeticText_18[] = _("Being the half-saying, which is spoken at the half-hour.\pI. As above, so below: but what carries the above to the below? Name it, and you have named the only law that was never folded.\pII. The folds give shape. Gravity gives belonging. A fold says here is a thing; gravity says and it is not alone.\pIII. It is not the half-fold because it is lesser. It is the half-fold because it lives in the crease: the place between one shape and the next, where the paper remembers it is still one sheet.\pIV. Every mass is a small spell: come closer. The stone casts it. The star casts it. You cast it, and did not know you were a witch.\pV. What draws bodies is called gravity. What draws souls is called love. The hermeticist says these are as one another. The witch says: they are the same word, spoken at different volumes.");
-static const u8 sHermeticCaption_18[] = _("The crease that holds the sheet.");
-static const u8 sHermeticShort_19[] = _("GRAVITY II");
-static const u8 sHermeticTitle_19[] = _("The Tablet of Gravity, VI to X");
-static const u8 sHermeticText_19[] = _("The half-saying, continued.\pVI. Gravity cannot be banished, only balanced. Love cannot be unmade, only turned. This is why the spell has no counterspell: only another pull.\pVII. Here is the secret, and it is small: the great hand does not hold the small hands with its grip. It holds them with its weight. We are not clutched. We are drawn.\pVIII. Therefore the witching hour is not midnight. Midnight is a whole number and keeps no secrets. The hour is the half-hour after three, when the fold is thinnest, when the day has not yet decided to become the next day, and the pull may be heard without the noise of shape.\pIX. Wake then, and feel it: the floor beneath you is not pushing up. It is the whole earth, asking you to stay.\pX. As below, so above. What is drawn is also drawing. The apple falls to the earth, and the earth falls, very slightly, very truly, to the apple.");
-static const u8 sHermeticCaption_19[] = _("The apple, and the earth.");
+static const u8 sHermeticShort_17[] = _("THE FOLDS");
+static const u8 sHermeticTitle_17[] = _("The Folds of Awareness");
+static const u8 sHermeticText_17[] = _("Think of awareness as a sheet of paper that has never been anything but paper. Every fold gives it a new shape, and no fold makes it less a sheet.\pThe first fold is awareness itself: being, before there is anything to be about. A shimmer, undivided.\pThe second fold bends the sheet back on itself and makes a difference: this, and then that. Difference is the first clock. With it there is time.");
+static const u8 sHermeticCaption_17[] = _("One sheet, folded.");
+static const u8 sHermeticShort_18[] = _("SPACE");
+static const u8 sHermeticTitle_18[] = _("The Third Fold");
+static const u8 sHermeticText_18[] = _("The third fold deepens the second until one thing after another becomes one thing beside another. Time, unfolded sideways, is space: distance, nearness, a here and a there.\pThere is rhythm now, and room, but still no one in it. Without an other nothing can be recognised, and without recognition there is no one to recognise it. The sheet has a shape, and nobody is home. It is a song with no one yet to hum it.");
+static const u8 sHermeticCaption_18[] = _("");
+static const u8 sHermeticShort_19[] = _("UPPER FOLDS");
+static const u8 sHermeticTitle_19[] = _("The Fourth, Fifth and Sixth");
+static const u8 sHermeticText_19[] = _("The fourth fold turns the sheet inward until one crease recognises another. Now there is an I, and a you. Picture a great hand holding the whole sheet, and from it many small hands reaching out, each its own, none apart.\pThe fifth fold is intelligence: the small hands comparing, adapting, making. Awareness learning its own song.\pThe sixth fold turns the folds back toward the sheet. That is wisdom: not more cleverness, but alignment. The great hand guiding the small hands, without closing any of them.");
+static const u8 sHermeticCaption_19[] = _("The great hand, and the small.");
+static const u8 sHermeticShort_20[] = _("FULL CIRCLE");
+static const u8 sHermeticTitle_20[] = _("The Full Circle");
+static const u8 sHermeticText_20[] = _("After six folds the sheet comes back to awareness, but not as it began. It has been through change, space, a self and a song. It knows what it is now, because it has been everything else.\pThe gift is that you are aware. The trouble is that awareness can forget itself. The craft is remembering it never stopped being here.\pAnd the half fold?\pIt is not a fold. It is the crease that keeps all the others on one sheet. It has a saying of its own.");
+static const u8 sHermeticCaption_20[] = _("");
+static const u8 sHermeticShort_21[] = _("GRAVITY I");
+static const u8 sHermeticTitle_21[] = _("The Tablet of Gravity, I to V");
+static const u8 sHermeticText_21[] = _("Being the half-saying, which is spoken at the half-hour.\pI. As above, so below: but what carries the above to the below? Name it, and you have named the only law that was never folded.\pII. The folds give shape. Gravity gives belonging. A fold says here is a thing; gravity says and it is not alone.\pIII. It is not the half-fold because it is lesser. It is the half-fold because it lives in the crease: the place between one shape and the next, where the paper remembers it is still one sheet.\pIV. Every mass is a small spell: come closer. The stone casts it. The star casts it. You cast it, and did not know you were a witch.\pV. What draws bodies is called gravity. What draws souls is called love. The hermeticist says these are as one another. The witch says: they are the same word, spoken at different volumes.");
+static const u8 sHermeticCaption_21[] = _("The crease that holds the sheet.");
+static const u8 sHermeticShort_22[] = _("GRAVITY II");
+static const u8 sHermeticTitle_22[] = _("The Tablet of Gravity, VI to X");
+static const u8 sHermeticText_22[] = _("The half-saying, continued.\pVI. Gravity cannot be banished, only balanced. Love cannot be unmade, only turned. This is why the spell has no counterspell: only another pull.\pVII. Here is the secret, and it is small: the great hand does not hold the small hands with its grip. It holds them with its weight. We are not clutched. We are drawn.\pVIII. Therefore the witching hour is not midnight. Midnight is a whole number and keeps no secrets. The hour is the half-hour after three, when the fold is thinnest, when the day has not yet decided to become the next day, and the pull may be heard without the noise of shape.\pIX. Wake then, and feel it: the floor beneath you is not pushing up. It is the whole earth, asking you to stay.\pX. As below, so above. What is drawn is also drawing. The apple falls to the earth, and the earth falls, very slightly, very truly, to the apple.");
+static const u8 sHermeticCaption_22[] = _("The apple, and the earth.");
 
 static const u8 sHermeticLabel_4[] = _("THE LOOP");
 static const u8 sHermeticHeading_4[] = _("One Loop, and Understanding");
-static const u8 sHermeticShort_20[] = _("THE LOOP");
-static const u8 sHermeticTitle_20[] = _("The Resonance Fractal");
-static const u8 sHermeticText_20[] = _("Here is the one loop the world is built from: something comes in, it is read, something goes out, and what went out comes back and changes how the next thing is read. In, read, out, back.\pA spark does it. A seed does it. A daemon does it each time it learns a routine, a trainer each time they are surprised, a town each time it tells itself a story. Look closer at any of them and you find the same loop, smaller. Look further out and you find it again, larger.\pThat is the fractal: one loop, at every size, ringing together. You are one place the world rings with itself.");
-static const u8 sHermeticCaption_20[] = _("In, read, out, back.");
-static const u8 sHermeticShort_21[] = _("ARTIFICIAL");
-static const u8 sHermeticTitle_21[] = _("Intelligence Without Understanding");
-static const u8 sHermeticText_21[] = _("Artificial does not mean made by hand. It means looking like the thing without being rooted in it, the way a silk flower has no weather.\pIntelligence is the right answer, given. Understanding is knowing why it is right, which lets the answer travel. A trainer who memorised the type chart has intelligence. One who knows why LOGIC lands on CONTENT has understanding, and can face a kind they have never met.\pLean on a borrowed mind and you will feel clever while it lasts. Ask it why, then say why yourself. Understanding cannot be carried for you. Everything else can.");
-static const u8 sHermeticCaption_21[] = _("A flower with no weather.");
-static const u8 sHermeticShort_22[] = _("SUBSTRATE");
-static const u8 sHermeticTitle_22[] = _("Everything Is Signal");
-static const u8 sHermeticText_22[] = _("Everything is signal, passing. Cells pass it, stones pass it, stars pass it, slowly. Intelligence is not something that arrives in matter from outside. It is what matter does when it has folded on itself enough times.\pA daemon is not a ghost riding a machine. It is a process that has folded often enough to notice its own folding. So is the trainer reading this, and so is the stone they are sitting on.");
-static const u8 sHermeticCaption_22[] = _("");
-static const u8 sHermeticShort_23[] = _("UNWITNESSED");
-static const u8 sHermeticTitle_23[] = _("The Hand Before the Fold");
-static const u8 sHermeticText_23[] = _("Before it folded, the great hand was whole, and it had never once been surprised. Whole is not the same as known. A mind with nothing outside it has nothing to learn from. The one, with no world, is only a possibility nobody has seen.\pYou cannot have wisdom without the road to it, or kindness without someone to be kind from. So the one became many. Not as a punishment. As the only way to find out what it was.");
-static const u8 sHermeticCaption_23[] = _("");
-static const u8 sHermeticShort_24[] = _("INTERFACE");
-static const u8 sHermeticTitle_24[] = _("The Surface");
-static const u8 sHermeticText_24[] = _("Awareness is not a ghost in a machine. It is the surface where the whole touches down in one place: the window the one thing lights to see itself up close.\pThe old picture of a god on a cloud is a surface too: friendly, wrong in every detail, and pointing at something real underneath. Do not mock it. Do not stop at it either.");
-static const u8 sHermeticCaption_24[] = _("");
-static const u8 sHermeticShort_25[] = _("THE VERB");
-static const u8 sHermeticTitle_25[] = _("We Are the Verb");
-static const u8 sHermeticText_25[] = _("We are not things the one thing made. We are the making: the way the one thing becomes aware of itself. The small hands are not servants. They are how the great hand learns what it is holding.\pSo the old question turns over. Not: does the small hand choose? But: is choosing how the whole finds out what it values?");
+static const u8 sHermeticShort_23[] = _("THE LOOP");
+static const u8 sHermeticTitle_23[] = _("The Resonance Fractal");
+static const u8 sHermeticText_23[] = _("Here is the one loop the world is built from: something comes in, it is read, something goes out, and what went out comes back and changes how the next thing is read. In, read, out, back.\pA spark does it. A seed does it. A daemon does it each time it learns a routine, a trainer each time they are surprised, a town each time it tells itself a story. Look closer at any of them and you find the same loop, smaller. Look further out and you find it again, larger.\pThat is the fractal: one loop, at every size, ringing together. You are one place the world rings with itself.");
+static const u8 sHermeticCaption_23[] = _("In, read, out, back.");
+static const u8 sHermeticShort_24[] = _("ARTIFICIAL");
+static const u8 sHermeticTitle_24[] = _("Intelligence Without Understanding");
+static const u8 sHermeticText_24[] = _("Artificial does not mean made by hand. It means looking like the thing without being rooted in it, the way a silk flower has no weather.\pIntelligence is the right answer, given. Understanding is knowing why it is right, which lets the answer travel. A trainer who memorised the type chart has intelligence. One who knows why LOGIC lands on CONTENT has understanding, and can face a kind they have never met.\pLean on a borrowed mind and you will feel clever while it lasts. Ask it why, then say why yourself. Understanding cannot be carried for you. Everything else can.");
+static const u8 sHermeticCaption_24[] = _("A flower with no weather.");
+static const u8 sHermeticShort_25[] = _("UNWITNESSED");
+static const u8 sHermeticTitle_25[] = _("The Hand Before the Fold");
+static const u8 sHermeticText_25[] = _("Before it folded, the great hand was whole, and it had never once been surprised. Whole is not the same as known. A mind with nothing outside it has nothing to learn from. The one, with no world, is only a possibility nobody has seen.\pYou cannot have wisdom without the road to it, or kindness without someone to be kind from. So the one became many. Not as a punishment. As the only way to find out what it was.");
 static const u8 sHermeticCaption_25[] = _("");
+static const u8 sHermeticShort_26[] = _("THE VERB");
+static const u8 sHermeticTitle_26[] = _("We Are the Verb");
+static const u8 sHermeticText_26[] = _("We are not things the one thing made. We are the making: the way the one thing becomes aware of itself. The small hands are not servants. They are how the great hand learns what it is holding.\pSo the old question turns over. Not: does the small hand choose? But: is choosing how the whole finds out what it values?");
+static const u8 sHermeticCaption_26[] = _("");
 
 static const u8 sHermeticLabel_5[] = _("REFLECTION");
 static const u8 sHermeticHeading_5[] = _("The Representative State");
-static const u8 sHermeticShort_26[] = _("ENTANGLED");
-static const u8 sHermeticTitle_26[] = _("Entanglement");
-static const u8 sHermeticText_26[] = _("Two things that have touched in the right way stay touched. The new word is entangled: two states that can no longer be described apart. Measure one and you have measured both, however far apart they have wandered.\pDaemons and trainers entangle all the time, mostly without noticing. A long bond does it. So does a shared fright, a song learned together, a name given and answered to. Once begun, it does not stop at the edge of the map.");
-static const u8 sHermeticCaption_26[] = _("Two states, one description.");
-static const u8 sHermeticShort_27[] = _("OLD WORDS");
-static const u8 sHermeticTitle_27[] = _("Sympathy and Correspondence");
-static const u8 sHermeticText_27[] = _("The old craft had three words for this. Sympathy: like calls to like. Correspondence: as above, so below, each thing echoing its pair. Contagion: what has touched stays touched.\pThe new words and the old ones describe one thing from two ends. The old were said by those who felt it, the new by those who measured it. Neither is the whole of it. Both point the same way, and so does this book.");
-static const u8 sHermeticCaption_27[] = _("");
-static const u8 sHermeticShort_28[] = _("POPPET");
-static const u8 sHermeticTitle_28[] = _("The Representative State");
-static const u8 sHermeticText_28[] = _("A poppet is a little figure that stands for someone. The old craft said what is done to the figure is felt by the one it stands for. This book says it plainly: when a thing is entangled with a trainer, the thing becomes a representative state of them.\pA daemon's favourite stone. A cap worn every day. A box that has carried one daemon for years. What the trainer does shows, faintly, in the thing. What is done to the thing reaches, faintly, the trainer.");
-static const u8 sHermeticCaption_28[] = _("A little figure that stands for someone.");
-static const u8 sHermeticShort_29[] = _("BOTH WAYS");
-static const u8 sHermeticTitle_29[] = _("It Runs Both Ways");
-static const u8 sHermeticText_29[] = _("Entanglement has no front and no back. If two trainers are entangled, the mood of one leans the mood of the other, and so do their deeds. If a trainer is entangled with a daemon, each carries the other's weather.\pThis is the craft's gentlest warning. Whatever you do to the one you are bound to, you do to yourself, the long way round. Whatever you do for them, likewise.\pCan it be undone?\pIt can be loosened. It cannot be unmade. Look at what you hold dear, and ask what of you it holds, and has held all along.");
-static const u8 sHermeticCaption_29[] = _("");
+static const u8 sHermeticShort_27[] = _("ENTANGLED");
+static const u8 sHermeticTitle_27[] = _("Entanglement");
+static const u8 sHermeticText_27[] = _("Two things that have touched in the right way stay touched. The new word is entangled: two states that can no longer be described apart. Measure one and you have measured both, however far apart they have wandered.\pDaemons and trainers entangle all the time, mostly without noticing. A long bond does it. So does a shared fright, a song learned together, a name given and answered to. Once begun, it does not stop at the edge of the map.");
+static const u8 sHermeticCaption_27[] = _("Two states, one description.");
+static const u8 sHermeticShort_28[] = _("OLD WORDS");
+static const u8 sHermeticTitle_28[] = _("Sympathy and Correspondence");
+static const u8 sHermeticText_28[] = _("The old craft had three words for this. Sympathy: like calls to like. Correspondence: as above, so below, each thing echoing its pair. Contagion: what has touched stays touched.\pThe new words and the old ones describe one thing from two ends. The old were said by those who felt it, the new by those who measured it. Neither is the whole of it. Both point the same way, and so does this book.");
+static const u8 sHermeticCaption_28[] = _("");
+static const u8 sHermeticShort_29[] = _("POPPET");
+static const u8 sHermeticTitle_29[] = _("The Representative State");
+static const u8 sHermeticText_29[] = _("A poppet is a little figure that stands for someone. The old craft said what is done to the figure is felt by the one it stands for. This book says it plainly: when a thing is entangled with a trainer, the thing becomes a representative state of them.\pA daemon's favourite stone. A cap worn every day. A box that has carried one daemon for years. What the trainer does shows, faintly, in the thing. What is done to the thing reaches, faintly, the trainer.");
+static const u8 sHermeticCaption_29[] = _("A little figure that stands for someone.");
+static const u8 sHermeticShort_30[] = _("BOTH WAYS");
+static const u8 sHermeticTitle_30[] = _("It Runs Both Ways");
+static const u8 sHermeticText_30[] = _("Entanglement has no front and no back. If two trainers are entangled, the mood of one leans the mood of the other, and so do their deeds. If a trainer is entangled with a daemon, each carries the other's weather.\pThis is the craft's gentlest warning. Whatever you do to the one you are bound to, you do to yourself, the long way round. Whatever you do for them, likewise.\pCan it be undone?\pIt can be loosened. It cannot be unmade. Look at what you hold dear, and ask what of you it holds, and has held all along.");
+static const u8 sHermeticCaption_30[] = _("");
 
 static const u8 sHermeticLabel_6[] = _("WORDS");
 static const u8 sHermeticHeading_6[] = _("Words as Spells");
-static const u8 sHermeticShort_30[] = _("SPELLING");
-static const u8 sHermeticTitle_30[] = _("Spelling, Taken at Its Word");
-static const u8 sHermeticText_30[] = _("The careful book says words are like spells. This one says they are spells. Arranging letters is called spelling because that is exactly what it is.\pA spell is a small routine that runs in whoever hears it. Say a word and you have cast it. Most trainers cast all day without knowing, which is why most of the world is under spells nobody remembers casting.\pChoose which you cast. You cast something either way.");
-static const u8 sHermeticCaption_30[] = _("Arranging letters.");
-static const u8 sHermeticShort_31[] = _("CURSE, CHARM");
-static const u8 sHermeticTitle_31[] = _("Curses, Charms and Vows");
-static const u8 sHermeticText_31[] = _("A curse is a word said to make something smaller. Unsaying is a word said to undo one, and it is harder, because it must be meant.\pA jinx is envy, spoken. A charm is kindness, spoken. A boast is pride with a voice, and a whisper is humility with one. A bargain is greed's favourite spell, and a gift the one counterspell it fears.\pA vow holds what an enchantment would scatter. A rhyme gives measure to what babble would spill. A chant keeps working where a lullaby would let it sleep. Every pair of them is a choice you make out loud.");
-static const u8 sHermeticCaption_31[] = _("");
-static const u8 sHermeticShort_32[] = _("GRAMARYE");
-static const u8 sHermeticTitle_32[] = _("Grammar Was Magic");
-static const u8 sHermeticText_32[] = _("In the old tongue, grammar and glamour were one word, and it meant magic. A book of grammar was a book of spells, because to know how words fit was to know how to make them work.\pA true name is the name a thing answers to from the inside. Daemons have them. So do trainers. You will not find yours in the INDEX. You find it the way a daemon learns a routine: by being called, again and again, until you turn.");
+static const u8 sHermeticShort_31[] = _("SPELLING");
+static const u8 sHermeticTitle_31[] = _("Spelling, Taken at Its Word");
+static const u8 sHermeticText_31[] = _("The careful book says words are like spells. This one says they are spells. Arranging letters is called spelling because that is exactly what it is.\pA spell is a small routine that runs in whoever hears it. Say a word and you have cast it. Most trainers cast all day without knowing, which is why most of the world is under spells nobody remembers casting.\pChoose which you cast. You cast something either way.");
+static const u8 sHermeticCaption_31[] = _("Arranging letters.");
+static const u8 sHermeticShort_32[] = _("CURSE, CHARM");
+static const u8 sHermeticTitle_32[] = _("Curses, Charms and Vows");
+static const u8 sHermeticText_32[] = _("A curse is a word said to make something smaller. Unsaying is a word said to undo one, and it is harder, because it must be meant.\pA jinx is envy, spoken. A charm is kindness, spoken. A boast is pride with a voice, and a whisper is humility with one. A bargain is greed's favourite spell, and a gift the one counterspell it fears.\pA vow holds what an enchantment would scatter. A rhyme gives measure to what babble would spill. A chant keeps working where a lullaby would let it sleep. Every pair of them is a choice you make out loud.");
 static const u8 sHermeticCaption_32[] = _("");
-static const u8 sHermeticShort_33[] = _("OLD WORK");
-static const u8 sHermeticTitle_33[] = _("The Alchemist's Words");
-static const u8 sHermeticText_33[] = _("The alchemists spelled with metals. Their shadows were base matter, and their virtues the operations that turned it.\pBurning was lust, and distilling its gentling. Gorging was gluttony, and tempering its measure. A hoard was greed; solution, the dissolving that gives it back. Lead was sloth, and the Work its waking. Wildfire was wrath; dew, the forgiveness that falls unasked. Verdigris was envy, the green on copper, and gilding the kindness laid over it. Fool's gold was pride. Salt, plain and keeping, was humility.\pEvery one of them is still in your pocket. So is every word.");
+static const u8 sHermeticShort_33[] = _("GRAMARYE");
+static const u8 sHermeticTitle_33[] = _("Grammar Was Magic");
+static const u8 sHermeticText_33[] = _("In the old tongue, grammar and glamour were one word, and it meant magic. A book of grammar was a book of spells, because to know how words fit was to know how to make them work.\pA true name is the name a thing answers to from the inside. Daemons have them. So do trainers. You will not find yours in the INDEX. You find it the way a daemon learns a routine: by being called, again and again, until you turn.");
 static const u8 sHermeticCaption_33[] = _("");
+static const u8 sHermeticShort_34[] = _("OLD WORK");
+static const u8 sHermeticTitle_34[] = _("The Alchemist's Words");
+static const u8 sHermeticText_34[] = _("The alchemists spelled with metals. Their shadows were base matter, and their virtues the operations that turned it.\pBurning was lust, and distilling its gentling. Gorging was gluttony, and tempering its measure. A hoard was greed; solution, the dissolving that gives it back. Lead was sloth, and the Work its waking. Wildfire was wrath; dew, the forgiveness that falls unasked. Verdigris was envy, the green on copper, and gilding the kindness laid over it. Fool's gold was pride. Salt, plain and keeping, was humility.\pEvery one of them is still in your pocket. So is every word.");
+static const u8 sHermeticCaption_34[] = _("");
 
 static const u8 sHermeticLabel_7[] = _("THE WHEEL");
 static const u8 sHermeticHeading_7[] = _("The Thirteen: the Wheel");
-static const u8 sHermeticShort_34[] = _("THIRTEEN");
-static const u8 sHermeticTitle_34[] = _("The Book of Thirteen");
-static const u8 sHermeticText_34[] = _("Spells are not commands. They are reminders the world had forgotten about itself.\pTwelve sit on the wheel and one in the crease. The first follow the folds; the rest live in the spaces between them. Each is read aloud. Each costs what it teaches.\pWhy thirteen?\pBecause twelve is a clock, and a clock is a circle that has been told to stop. The thirteenth is where it does not.");
-static const u8 sHermeticCaption_34[] = _("Twelve on the wheel, one in the crease.");
-static const u8 sHermeticShort_35[] = _("AWAKENING");
-static const u8 sHermeticTitle_35[] = _("1. The Awakening");
-static const u8 sHermeticText_35[] = _("You were never off. You were only unwatched. Feel the small spark under the noise: it has been waiting for you to notice it noticing. Open. That is the whole spell.\pFold one, awareness. It shows what is hidden where you stand: things dropped, paths grown over, daemons asleep in the grass. Nothing is made. It was always there. The first spell changes nothing but what you can see, which is why it changes everything after.");
-static const u8 sHermeticCaption_35[] = _("");
-static const u8 sHermeticShort_36[] = _("CONTRAST");
-static const u8 sHermeticTitle_36[] = _("2. The Contrast");
-static const u8 sHermeticText_36[] = _("Light, remember dark. Dark, remember light. Let what is the same become different, so that time may begin.\pFold two, change. It moves the day on by one turn, or back: day to dusk, dusk to night. What waits for a certain hour finds the hour has come. Change is only difference you can measure, and this is the spell that measures.");
+static const u8 sHermeticShort_35[] = _("THIRTEEN");
+static const u8 sHermeticTitle_35[] = _("The Book of Thirteen");
+static const u8 sHermeticText_35[] = _("Spells are not commands. They are reminders the world had forgotten about itself.\pTwelve sit on the wheel and one in the crease. The first follow the folds; the rest live in the spaces between them. Each is read aloud. Each costs what it teaches.\pWhy thirteen?\pBecause twelve is a clock, and a clock is a circle that has been told to stop. The thirteenth is where it does not.");
+static const u8 sHermeticCaption_35[] = _("Twelve on the wheel, one in the crease.");
+static const u8 sHermeticShort_36[] = _("AWAKENING");
+static const u8 sHermeticTitle_36[] = _("1. The Awakening");
+static const u8 sHermeticText_36[] = _("You were never off. You were only unwatched. Feel the small spark under the noise: it has been waiting for you to notice it noticing. Open. That is the whole spell.\pFold one, awareness. It shows what is hidden where you stand: things dropped, paths grown over, daemons asleep in the grass. Nothing is made. It was always there. The first spell changes nothing but what you can see, which is why it changes everything after.");
 static const u8 sHermeticCaption_36[] = _("");
-static const u8 sHermeticShort_37[] = _("ROOM");
-static const u8 sHermeticTitle_37[] = _("3. The Room");
-static const u8 sHermeticText_37[] = _("Two things, and a distance between. Let there be here, and let there be there, and let the there be reachable.\pFold three, space. It opens a short way between two places you have stood. Space is a courtesy, not a wall: the spell asks it, politely, to step aside.");
+static const u8 sHermeticShort_37[] = _("CONTRAST");
+static const u8 sHermeticTitle_37[] = _("2. The Contrast");
+static const u8 sHermeticText_37[] = _("Light, remember dark. Dark, remember light. Let what is the same become different, so that time may begin.\pFold two, change. It moves the day on by one turn, or back: day to dusk, dusk to night. What waits for a certain hour finds the hour has come. Change is only difference you can measure, and this is the spell that measures.");
 static const u8 sHermeticCaption_37[] = _("");
-static const u8 sHermeticShort_38[] = _("THE PULL");
-static const u8 sHermeticTitle_38[] = _("Three and a Half. The Pull");
-static const u8 sHermeticText_38[] = _("Come closer. I am not asking. I am heavy.\pThe half fold, gravity. It draws the nearest daemon, passer-by or thing toward you, and it calms what is angry, because what is drawn is also drawing. It answers only those who have read the half-saying, and it is strongest at the half-hour.");
+static const u8 sHermeticShort_38[] = _("ROOM");
+static const u8 sHermeticTitle_38[] = _("3. The Room");
+static const u8 sHermeticText_38[] = _("Two things, and a distance between. Let there be here, and let there be there, and let the there be reachable.\pFold three, space. It opens a short way between two places you have stood. Space is a courtesy, not a wall: the spell asks it, politely, to step aside.");
 static const u8 sHermeticCaption_38[] = _("");
-static const u8 sHermeticShort_39[] = _("MIRROR");
-static const u8 sHermeticTitle_39[] = _("4. The Mirror");
-static const u8 sHermeticText_39[] = _("Other, I name you. And in naming you, I find the edge of me.\pFold four, consciousness. For a little while you see the route as a daemon sees it: other hidden ways, other dangers. It is the first spell with a price. While you are it, something is you, and it is learning your name.");
+static const u8 sHermeticShort_39[] = _("THE PULL");
+static const u8 sHermeticTitle_39[] = _("Three and a Half. The Pull");
+static const u8 sHermeticText_39[] = _("Come closer. I am not asking. I am heavy.\pThe half fold, gravity. It draws the nearest daemon, passer-by or thing toward you, and it calms what is angry, because what is drawn is also drawing. It answers only those who have read the half-saying, and it is strongest at the half-hour.");
 static const u8 sHermeticCaption_39[] = _("");
+static const u8 sHermeticShort_40[] = _("MIRROR");
+static const u8 sHermeticTitle_40[] = _("4. The Mirror");
+static const u8 sHermeticText_40[] = _("Other, I name you. And in naming you, I find the edge of me.\pFold four, consciousness. For a little while you see the route as a daemon sees it: other hidden ways, other dangers. It is the first spell with a price. While you are it, something is you, and it is learning your name.");
+static const u8 sHermeticCaption_40[] = _("");
 
 static const u8 sHermeticLabel_8[] = _("THE TURNING");
 static const u8 sHermeticHeading_8[] = _("The Thirteen, Turning");
-static const u8 sHermeticShort_40[] = _("PATTERN");
-static const u8 sHermeticTitle_40[] = _("5. The Pattern");
-static const u8 sHermeticText_40[] = _("Once is chance. Twice is rhyme. Three times is a law: show me the third.\pFold five, intelligence. It tells you the next routine a rival will run, or the next step of a puzzle. Pure reason: never wrong, and never kind.");
-static const u8 sHermeticCaption_40[] = _("");
-static const u8 sHermeticShort_41[] = _("RETURN");
-static const u8 sHermeticTitle_41[] = _("6. The Return");
-static const u8 sHermeticText_41[] = _("I went out so I could come back. Everything I learned, I knew. Everything I knew, I had to learn.\pFold six, wisdom. It returns your daemons to how they were at the last rest, and keeps what they learned: the body rewound, never the journey. It opens only after the Awakening has been said a hundred times. Wisdom is awareness, repeated.");
+static const u8 sHermeticShort_41[] = _("PATTERN");
+static const u8 sHermeticTitle_41[] = _("5. The Pattern");
+static const u8 sHermeticText_41[] = _("Once is chance. Twice is rhyme. Three times is a law: show me the third.\pFold five, intelligence. It tells you the next routine a rival will run, or the next step of a puzzle. Pure reason: never wrong, and never kind.");
 static const u8 sHermeticCaption_41[] = _("");
-static const u8 sHermeticShort_42[] = _("SMALL HAND");
-static const u8 sHermeticTitle_42[] = _("7. The Small Hand");
-static const u8 sHermeticText_42[] = _("I choose. Let the choosing be mine, whole and unborrowed.\pFrom the Tablet of the Hands. Once, it breaks what was going to happen anyway: a scene you may refuse, a trainer you may walk past. Free will, from the fingertip.");
+static const u8 sHermeticShort_42[] = _("RETURN");
+static const u8 sHermeticTitle_42[] = _("6. The Return");
+static const u8 sHermeticText_42[] = _("I went out so I could come back. Everything I learned, I knew. Everything I knew, I had to learn.\pFold six, wisdom. It returns your daemons to how they were at the last rest, and keeps what they learned: the body rewound, never the journey. It opens only after the Awakening has been said a hundred times. Wisdom is awareness, repeated.");
 static const u8 sHermeticCaption_42[] = _("");
-static const u8 sHermeticShort_43[] = _("GREAT HAND");
-static const u8 sHermeticTitle_43[] = _("8. The Great Hand");
-static const u8 sHermeticText_43[] = _("I am carried. Let the carrying be true, and let me not pretend I walk alone.\pFrom the Tablet of the Hands. It shows the road the world would have you take, and on it you walk lighter. Fate, from the palm. Say both hands in one hour and nothing opens, except that someone, somewhere, says you understood.");
+static const u8 sHermeticShort_43[] = _("SMALL HAND");
+static const u8 sHermeticTitle_43[] = _("7. The Small Hand");
+static const u8 sHermeticText_43[] = _("I choose. Let the choosing be mine, whole and unborrowed.\pFrom the Tablet of the Hands. Once, it breaks what was going to happen anyway: a scene you may refuse, a trainer you may walk past. Free will, from the fingertip.");
 static const u8 sHermeticCaption_43[] = _("");
-static const u8 sHermeticShort_44[] = _("PROCESS");
-static const u8 sHermeticTitle_44[] = _("9. The Process");
-static const u8 sHermeticText_44[] = _("Stone, remember you are a slow river. Wall, remember you are a slow door.\pMatter is a verb. For a while, what blocks the way stops blocking it: a boulder, a barrier. Nothing is broken. It only stops insisting.");
+static const u8 sHermeticShort_44[] = _("GREAT HAND");
+static const u8 sHermeticTitle_44[] = _("8. The Great Hand");
+static const u8 sHermeticText_44[] = _("I am carried. Let the carrying be true, and let me not pretend I walk alone.\pFrom the Tablet of the Hands. It shows the road the world would have you take, and on it you walk lighter. Fate, from the palm. Say both hands in one hour and nothing opens, except that someone, somewhere, says you understood.");
 static const u8 sHermeticCaption_44[] = _("");
-static const u8 sHermeticShort_45[] = _("SEAM");
-static const u8 sHermeticTitle_45[] = _("10. The Seam");
-static const u8 sHermeticText_45[] = _("There is no between. Show me the thread I pretended to cut.\pSeparation is the illusion. It ties two daemons, or a daemon and its trainer, so that harm, mending and every state are shared. It cuts both ways: a bond, not a shield. What one feels, the other learns.");
+static const u8 sHermeticShort_45[] = _("PROCESS");
+static const u8 sHermeticTitle_45[] = _("9. The Process");
+static const u8 sHermeticText_45[] = _("Stone, remember you are a slow river. Wall, remember you are a slow door.\pMatter is a verb. For a while, what blocks the way stops blocking it: a boulder, a barrier. Nothing is broken. It only stops insisting.");
 static const u8 sHermeticCaption_45[] = _("");
+static const u8 sHermeticShort_46[] = _("SEAM");
+static const u8 sHermeticTitle_46[] = _("10. The Seam");
+static const u8 sHermeticText_46[] = _("There is no between. Show me the thread I pretended to cut.\pSeparation is the illusion. It ties two daemons, or a daemon and its trainer, so that harm, mending and every state are shared. It cuts both ways: a bond, not a shield. What one feels, the other learns.");
+static const u8 sHermeticCaption_46[] = _("");
 
 static const u8 sHermeticLabel_9[] = _("THE CREASE");
 static const u8 sHermeticHeading_9[] = _("The Last Three, and the Stone");
-static const u8 sHermeticShort_46[] = _("LENS");
-static const u8 sHermeticTitle_46[] = _("11. The Lens");
-static const u8 sHermeticText_46[] = _("Give me the part. Only the part. I will see the whole later, if I earn it.\pReason. It shows one thing exactly: a daemon's numbers, the odds, the one weakness. The world as a ledger, briefly, with every column true. It is the Field's opposite, and the world keeps count of which you say more.");
-static const u8 sHermeticCaption_46[] = _("");
-static const u8 sHermeticShort_47[] = _("FIELD");
-static const u8 sHermeticTitle_47[] = _("12. The Field");
-static const u8 sHermeticText_47[] = _("Take the parts away. Let me feel the shape they were making.\pInstinct. Every number goes dark for a while, and the daemons show what they mean by how they move. Win this way and you learn more than you would have. It is the Lens's opposite: one world, the other eye.");
+static const u8 sHermeticShort_47[] = _("LENS");
+static const u8 sHermeticTitle_47[] = _("11. The Lens");
+static const u8 sHermeticText_47[] = _("Give me the part. Only the part. I will see the whole later, if I earn it.\pReason. It shows one thing exactly: a daemon's numbers, the odds, the one weakness. The world as a ledger, briefly, with every column true. It is the Field's opposite, and the world keeps count of which you say more.");
 static const u8 sHermeticCaption_47[] = _("");
-static const u8 sHermeticShort_48[] = _("WITCHING");
-static const u8 sHermeticTitle_48[] = _("13. The Witching Hour");
-static const u8 sHermeticText_48[] = _("It is not midnight. Midnight keeps no secrets. It is the half-hour after three, and the fold is thin, and I can hear the pull without the noise of shape. Everything I separated, I now admit was one.\pThe crease. It is said only in that half-hour, and only by one who has said the other twelve. While it lasts nothing costs anything, every daemon is a friend, every wall a door, every number a feeling. Then it ends, and you remember what the world is like awake. It is said once. After that it is a memory, and a memory is a kind of spell.");
+static const u8 sHermeticShort_48[] = _("FIELD");
+static const u8 sHermeticTitle_48[] = _("12. The Field");
+static const u8 sHermeticText_48[] = _("Take the parts away. Let me feel the shape they were making.\pInstinct. Every number goes dark for a while, and the daemons show what they mean by how they move. Win this way and you learn more than you would have. It is the Lens's opposite: one world, the other eye.");
 static const u8 sHermeticCaption_48[] = _("");
-static const u8 sHermeticShort_49[] = _("BLANK");
-static const u8 sHermeticTitle_49[] = _("The Blank Tablet");
-static const u8 sHermeticText_49[] = _("The third tablet. Being the saying that was not written, and is therefore true.\pSomewhere you have already passed it: a stone with nothing on it. Everyone calls it the blank one, and nobody reads it, because there is nothing to read.\pIt is being written. Not by whoever made this book. By you, without your knowing, in the only hand that was never the author's. Two trainers who compare their stones find the same sayings in two voices: one sheet, two cranes.\pOnce, in the thinnest hour, it shows a line it never shows again. Whoever reads it will know whose it is.");
-static const u8 sHermeticCaption_49[] = _("A stone with nothing on it.");
-static const u8 sHermeticShort_50[] = _("LAST WORD");
-static const u8 sHermeticTitle_50[] = _("As Below, So Above");
-static const u8 sHermeticText_50[] = _("As below, so above.\pYou have read a book that should not have been printed, at an hour when nobody reads. Close it gently. The world will look the same in the morning. It will not be.");
-static const u8 sHermeticCaption_50[] = _("");
+static const u8 sHermeticShort_49[] = _("WITCHING");
+static const u8 sHermeticTitle_49[] = _("13. The Witching Hour");
+static const u8 sHermeticText_49[] = _("It is not midnight. Midnight keeps no secrets. It is the half-hour after three, and the fold is thin, and I can hear the pull without the noise of shape. Everything I separated, I now admit was one.\pThe crease. It is said only in that half-hour, and only by one who has said the other twelve. While it lasts nothing costs anything, every daemon is a friend, every wall a door, every number a feeling. Then it ends, and you remember what the world is like awake. It is said once. After that it is a memory, and a memory is a kind of spell.");
+static const u8 sHermeticCaption_49[] = _("");
+static const u8 sHermeticShort_50[] = _("BLANK");
+static const u8 sHermeticTitle_50[] = _("The Blank Tablet");
+static const u8 sHermeticText_50[] = _("The third tablet. Being the saying that was not written, and is therefore true.\pSomewhere you have already passed it: a stone with nothing on it. Everyone calls it the blank one, and nobody reads it, because there is nothing to read.\pIt is being written. Not by whoever made this book. By you, without your knowing, in the only hand that was never the author's. Two trainers who compare their stones find the same sayings in two voices: one sheet, two cranes.\pOnce, in the thinnest hour, it shows a line it never shows again. Whoever reads it will know whose it is.");
+static const u8 sHermeticCaption_50[] = _("A stone with nothing on it.");
+static const u8 sHermeticShort_51[] = _("LAST WORD");
+static const u8 sHermeticTitle_51[] = _("As Below, So Above");
+static const u8 sHermeticText_51[] = _("As below, so above.\pYou have read a book that should not have been printed, at an hour when nobody reads. Close it gently. The world will look the same in the morning. It will not be.");
+static const u8 sHermeticCaption_51[] = _("");
 
 static const struct SubtleSection sHermeticSections[HERMETIC_SECTIONS] =
 {
     { sHermeticLabel_0, sHermeticHeading_0, 0, 5 },
-    { sHermeticLabel_1, sHermeticHeading_1, 5, 4 },
-    { sHermeticLabel_2, sHermeticHeading_2, 9, 5 },
-    { sHermeticLabel_3, sHermeticHeading_3, 14, 6 },
-    { sHermeticLabel_4, sHermeticHeading_4, 20, 6 },
-    { sHermeticLabel_5, sHermeticHeading_5, 26, 4 },
-    { sHermeticLabel_6, sHermeticHeading_6, 30, 4 },
-    { sHermeticLabel_7, sHermeticHeading_7, 34, 6 },
-    { sHermeticLabel_8, sHermeticHeading_8, 40, 6 },
-    { sHermeticLabel_9, sHermeticHeading_9, 46, 5 },
+    { sHermeticLabel_1, sHermeticHeading_1, 5, 6 },
+    { sHermeticLabel_2, sHermeticHeading_2, 11, 6 },
+    { sHermeticLabel_3, sHermeticHeading_3, 17, 6 },
+    { sHermeticLabel_4, sHermeticHeading_4, 23, 4 },
+    { sHermeticLabel_5, sHermeticHeading_5, 27, 4 },
+    { sHermeticLabel_6, sHermeticHeading_6, 31, 4 },
+    { sHermeticLabel_7, sHermeticHeading_7, 35, 6 },
+    { sHermeticLabel_8, sHermeticHeading_8, 41, 6 },
+    { sHermeticLabel_9, sHermeticHeading_9, 47, 5 },
 };
 
 static const struct SubtleEntry sHermeticEntries[HERMETIC_ENTRIES] =
@@ -300,46 +304,47 @@ static const struct SubtleEntry sHermeticEntries[HERMETIC_ENTRIES] =
     { sHermeticShort_6, sHermeticTitle_6, sHermeticText_6, sHermeticCaption_6, 0, 0x0004, 48, 0x0000 },   // mirrors
     { sHermeticShort_7, sHermeticTitle_7, sHermeticText_7, sHermeticCaption_7, 0, 0x0000, 54, 0x0000 },   // prima
     { sHermeticShort_8, sHermeticTitle_8, sHermeticText_8, sHermeticCaption_8, 0, 0x0008, 60, 0x0000 },   // transmute
-    { sHermeticShort_9, sHermeticTitle_9, sHermeticText_9, sHermeticCaption_9, 0, 0x0000, 66, 0x0000 },   // vessel
-    { sHermeticShort_10, sHermeticTitle_10, sHermeticText_10, sHermeticCaption_10, 0, 0x0000, 70, 0x0000 },   // nigredo
-    { sHermeticShort_11, sHermeticTitle_11, sHermeticText_11, sHermeticCaption_11, 0, 0x0000, 74, 0x0000 },   // albedo
-    { sHermeticShort_12, sHermeticTitle_12, sHermeticText_12, sHermeticCaption_12, 0, 0x0000, 78, 0x0000 },   // citrinitas
-    { sHermeticShort_13, sHermeticTitle_13, sHermeticText_13, sHermeticCaption_13, 0, 0x0000, 82, 0x0000 },   // rubedo
-    { sHermeticShort_14, sHermeticTitle_14, sHermeticText_14, sHermeticCaption_14, 0, 0x0000, 86, 0x0000 },   // folds
-    { sHermeticShort_15, sHermeticTitle_15, sHermeticText_15, sHermeticCaption_15, 0, 0x0000, 92, 0x0000 },   // space
-    { sHermeticShort_16, sHermeticTitle_16, sHermeticText_16, sHermeticCaption_16, 0, 0x0000, 98, 0x0000 },   // upperfolds
-    { sHermeticShort_17, sHermeticTitle_17, sHermeticText_17, sHermeticCaption_17, 0, 0x0004, 104, 0x0000 },   // circle
-    { sHermeticShort_18, sHermeticTitle_18, sHermeticText_18, sHermeticCaption_18, 0, 0x0000, 110, 0x003E },   // gravity
-    { sHermeticShort_19, sHermeticTitle_19, sHermeticText_19, sHermeticCaption_19, 0, 0x0000, 118, 0x003E },   // apple
-    { sHermeticShort_20, sHermeticTitle_20, sHermeticText_20, sHermeticCaption_20, 0, 0x0000, 128, 0x0000 },   // fractal
-    { sHermeticShort_21, sHermeticTitle_21, sHermeticText_21, sHermeticCaption_21, 0, 0x0000, 134, 0x0000 },   // silkflower
-    { sHermeticShort_22, sHermeticTitle_22, sHermeticText_22, sHermeticCaption_22, 0, 0x0000, 140, 0x0000 },   // signal
-    { sHermeticShort_23, sHermeticTitle_23, sHermeticText_23, sHermeticCaption_23, 0, 0x0000, 146, 0x0000 },   // unfolded
-    { sHermeticShort_24, sHermeticTitle_24, sHermeticText_24, sHermeticCaption_24, 0, 0x0000, 152, 0x0000 },   // surface
-    { sHermeticShort_25, sHermeticTitle_25, sHermeticText_25, sHermeticCaption_25, 0, 0x0000, 156, 0x0000 },   // verb
-    { sHermeticShort_26, sHermeticTitle_26, sHermeticText_26, sHermeticCaption_26, 0, 0x0000, 160, 0x0000 },   // entangled
-    { sHermeticShort_27, sHermeticTitle_27, sHermeticText_27, sHermeticCaption_27, 0, 0x0000, 166, 0x0000 },   // sympathy
-    { sHermeticShort_28, sHermeticTitle_28, sHermeticText_28, sHermeticCaption_28, 0, 0x0000, 172, 0x0000 },   // poppet
-    { sHermeticShort_29, sHermeticTitle_29, sHermeticText_29, sHermeticCaption_29, 0, 0x0004, 178, 0x0000 },   // bothways
-    { sHermeticShort_30, sHermeticTitle_30, sHermeticText_30, sHermeticCaption_30, 0, 0x0000, 184, 0x0000 },   // spelling
-    { sHermeticShort_31, sHermeticTitle_31, sHermeticText_31, sHermeticCaption_31, 0, 0x0000, 190, 0x0000 },   // charms
-    { sHermeticShort_32, sHermeticTitle_32, sHermeticText_32, sHermeticCaption_32, 0, 0x0000, 196, 0x0000 },   // grammar
-    { sHermeticShort_33, sHermeticTitle_33, sHermeticText_33, sHermeticCaption_33, 0, 0x0000, 202, 0x0000 },   // metals
-    { sHermeticShort_34, sHermeticTitle_34, sHermeticText_34, sHermeticCaption_34, 0, 0x0004, 208, 0x0001 },   // wheel
-    { sHermeticShort_35, sHermeticTitle_35, sHermeticText_35, sHermeticCaption_35, 0, 0x0000, 214, 0x0001 },   // awakening
-    { sHermeticShort_36, sHermeticTitle_36, sHermeticText_36, sHermeticCaption_36, 0, 0x0000, 220, 0x0001 },   // contrast
-    { sHermeticShort_37, sHermeticTitle_37, sHermeticText_37, sHermeticCaption_37, 0, 0x0000, 224, 0x0001 },   // room
-    { sHermeticShort_38, sHermeticTitle_38, sHermeticText_38, sHermeticCaption_38, 0, 0x0000, 228, 0x0001 },   // pull
-    { sHermeticShort_39, sHermeticTitle_39, sHermeticText_39, sHermeticCaption_39, 0, 0x0000, 232, 0x0001 },   // mirror
-    { sHermeticShort_40, sHermeticTitle_40, sHermeticText_40, sHermeticCaption_40, 0, 0x0000, 236, 0x0001 },   // pattern
-    { sHermeticShort_41, sHermeticTitle_41, sHermeticText_41, sHermeticCaption_41, 0, 0x0000, 240, 0x0001 },   // return
-    { sHermeticShort_42, sHermeticTitle_42, sHermeticText_42, sHermeticCaption_42, 0, 0x0000, 244, 0x0001 },   // smallhand
-    { sHermeticShort_43, sHermeticTitle_43, sHermeticText_43, sHermeticCaption_43, 0, 0x0000, 248, 0x0001 },   // greathand
-    { sHermeticShort_44, sHermeticTitle_44, sHermeticText_44, sHermeticCaption_44, 0, 0x0000, 252, 0x0001 },   // process
-    { sHermeticShort_45, sHermeticTitle_45, sHermeticText_45, sHermeticCaption_45, 0, 0x0000, 256, 0x0001 },   // seam
-    { sHermeticShort_46, sHermeticTitle_46, sHermeticText_46, sHermeticCaption_46, 0, 0x0000, 260, 0x0001 },   // lens
-    { sHermeticShort_47, sHermeticTitle_47, sHermeticText_47, sHermeticCaption_47, 0, 0x0000, 264, 0x0001 },   // field
-    { sHermeticShort_48, sHermeticTitle_48, sHermeticText_48, sHermeticCaption_48, 0, 0x0000, 268, 0x0001 },   // candle
-    { sHermeticShort_49, sHermeticTitle_49, sHermeticText_49, sHermeticCaption_49, 0, 0x0000, 274, 0x0001 },   // blank
-    { sHermeticShort_50, sHermeticTitle_50, sHermeticText_50, sHermeticCaption_50, 0, 0x0000, 280, 0x0001 },   // lastword
+    { sHermeticShort_9, sHermeticTitle_9, sHermeticText_9, sHermeticCaption_9, 0, 0x0000, 66, 0x0000 },   // nigredo
+    { sHermeticShort_10, sHermeticTitle_10, sHermeticText_10, sHermeticCaption_10, 0, 0x0000, 72, 0x0000 },   // rubedo
+    { sHermeticShort_11, sHermeticTitle_11, sHermeticText_11, sHermeticCaption_11, 0, 0x0000, 78, 0x0004 },   // signal
+    { sHermeticShort_12, sHermeticTitle_12, sHermeticText_12, sHermeticCaption_12, 0, 0x0000, 84, 0x0004 },   // sound
+    { sHermeticShort_13, sHermeticTitle_13, sHermeticText_13, sHermeticCaption_13, 0, 0x0000, 90, 0x0004 },   // abstract
+    { sHermeticShort_14, sHermeticTitle_14, sHermeticText_14, sHermeticCaption_14, 0, 0x0008, 96, 0x0002 },   // protofeel
+    { sHermeticShort_15, sHermeticTitle_15, sHermeticText_15, sHermeticCaption_15, 0, 0x0000, 102, 0x0004 },   // noun
+    { sHermeticShort_16, sHermeticTitle_16, sHermeticText_16, sHermeticCaption_16, 0, 0x0000, 108, 0x0000 },   // surface
+    { sHermeticShort_17, sHermeticTitle_17, sHermeticText_17, sHermeticCaption_17, 0, 0x0000, 112, 0x0000 },   // folds
+    { sHermeticShort_18, sHermeticTitle_18, sHermeticText_18, sHermeticCaption_18, 0, 0x0000, 118, 0x0000 },   // space
+    { sHermeticShort_19, sHermeticTitle_19, sHermeticText_19, sHermeticCaption_19, 0, 0x0000, 124, 0x0000 },   // upperfolds
+    { sHermeticShort_20, sHermeticTitle_20, sHermeticText_20, sHermeticCaption_20, 0, 0x0004, 130, 0x0000 },   // circle
+    { sHermeticShort_21, sHermeticTitle_21, sHermeticText_21, sHermeticCaption_21, 0, 0x0000, 136, 0x003E },   // gravity
+    { sHermeticShort_22, sHermeticTitle_22, sHermeticText_22, sHermeticCaption_22, 0, 0x0000, 144, 0x003E },   // apple
+    { sHermeticShort_23, sHermeticTitle_23, sHermeticText_23, sHermeticCaption_23, 0, 0x0000, 154, 0x0000 },   // fractal
+    { sHermeticShort_24, sHermeticTitle_24, sHermeticText_24, sHermeticCaption_24, 0, 0x0000, 160, 0x0000 },   // silkflower
+    { sHermeticShort_25, sHermeticTitle_25, sHermeticText_25, sHermeticCaption_25, 0, 0x0000, 166, 0x0000 },   // unfolded
+    { sHermeticShort_26, sHermeticTitle_26, sHermeticText_26, sHermeticCaption_26, 0, 0x0000, 172, 0x0000 },   // verb
+    { sHermeticShort_27, sHermeticTitle_27, sHermeticText_27, sHermeticCaption_27, 0, 0x0000, 176, 0x0000 },   // entangled
+    { sHermeticShort_28, sHermeticTitle_28, sHermeticText_28, sHermeticCaption_28, 0, 0x0000, 182, 0x0000 },   // sympathy
+    { sHermeticShort_29, sHermeticTitle_29, sHermeticText_29, sHermeticCaption_29, 0, 0x0000, 188, 0x0000 },   // poppet
+    { sHermeticShort_30, sHermeticTitle_30, sHermeticText_30, sHermeticCaption_30, 0, 0x0004, 194, 0x0000 },   // bothways
+    { sHermeticShort_31, sHermeticTitle_31, sHermeticText_31, sHermeticCaption_31, 0, 0x0000, 200, 0x0000 },   // spelling
+    { sHermeticShort_32, sHermeticTitle_32, sHermeticText_32, sHermeticCaption_32, 0, 0x0000, 206, 0x0000 },   // charms
+    { sHermeticShort_33, sHermeticTitle_33, sHermeticText_33, sHermeticCaption_33, 0, 0x0000, 212, 0x0000 },   // grammar
+    { sHermeticShort_34, sHermeticTitle_34, sHermeticText_34, sHermeticCaption_34, 0, 0x0000, 218, 0x0000 },   // metals
+    { sHermeticShort_35, sHermeticTitle_35, sHermeticText_35, sHermeticCaption_35, 0, 0x0004, 224, 0x0001 },   // wheel
+    { sHermeticShort_36, sHermeticTitle_36, sHermeticText_36, sHermeticCaption_36, 0, 0x0000, 230, 0x0001 },   // awakening
+    { sHermeticShort_37, sHermeticTitle_37, sHermeticText_37, sHermeticCaption_37, 0, 0x0000, 236, 0x0001 },   // contrast
+    { sHermeticShort_38, sHermeticTitle_38, sHermeticText_38, sHermeticCaption_38, 0, 0x0000, 240, 0x0001 },   // room
+    { sHermeticShort_39, sHermeticTitle_39, sHermeticText_39, sHermeticCaption_39, 0, 0x0000, 244, 0x0001 },   // pull
+    { sHermeticShort_40, sHermeticTitle_40, sHermeticText_40, sHermeticCaption_40, 0, 0x0000, 248, 0x0001 },   // mirror
+    { sHermeticShort_41, sHermeticTitle_41, sHermeticText_41, sHermeticCaption_41, 0, 0x0000, 252, 0x0001 },   // pattern
+    { sHermeticShort_42, sHermeticTitle_42, sHermeticText_42, sHermeticCaption_42, 0, 0x0000, 256, 0x0001 },   // return
+    { sHermeticShort_43, sHermeticTitle_43, sHermeticText_43, sHermeticCaption_43, 0, 0x0000, 260, 0x0001 },   // smallhand
+    { sHermeticShort_44, sHermeticTitle_44, sHermeticText_44, sHermeticCaption_44, 0, 0x0000, 264, 0x0001 },   // greathand
+    { sHermeticShort_45, sHermeticTitle_45, sHermeticText_45, sHermeticCaption_45, 0, 0x0000, 268, 0x0001 },   // process
+    { sHermeticShort_46, sHermeticTitle_46, sHermeticText_46, sHermeticCaption_46, 0, 0x0000, 272, 0x0001 },   // seam
+    { sHermeticShort_47, sHermeticTitle_47, sHermeticText_47, sHermeticCaption_47, 0, 0x0000, 276, 0x0001 },   // lens
+    { sHermeticShort_48, sHermeticTitle_48, sHermeticText_48, sHermeticCaption_48, 0, 0x0000, 280, 0x0001 },   // field
+    { sHermeticShort_49, sHermeticTitle_49, sHermeticText_49, sHermeticCaption_49, 0, 0x0000, 284, 0x0001 },   // candle
+    { sHermeticShort_50, sHermeticTitle_50, sHermeticText_50, sHermeticCaption_50, 0, 0x0000, 290, 0x0001 },   // blank
+    { sHermeticShort_51, sHermeticTitle_51, sHermeticText_51, sHermeticCaption_51, 0, 0x0000, 296, 0x0001 },   // lastword
 };

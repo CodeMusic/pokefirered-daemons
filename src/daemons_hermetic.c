@@ -33,7 +33,7 @@
 // HALLOWEEN'S COSTUME: with the book held, on 31 October the follower wears the face of a daemon whose first type
 // beats its own first type -- what it fears, read from the chart itself (gTypeEffectiveness, super effective only;
 // the chart is never touched). The same choice as the companion's server/src/halloween.ts costumeOf: the types that
-// beat it in name order, then an FNV-1a hash of "YYYY-MM-DD|<species>|costume" picks the type, and its high bits pick
+// beat it in name order, then the FNV-1a hash of "YYYY-MM-DD|<species>|costume" picks the type, and its high bits pick
 // a daemon of that first type (the same one all day, for the same daemon). A on the follower takes the mask off for
 // the rest of the day (FLAG_HERMETIC_UNMASKED, cleared the first time it is looked at on any other day).
 
