@@ -89,6 +89,14 @@ static void LoadObjectRegularReflectionPalette(struct ObjectEvent * objectEvent,
             PatchObjectPalette(GetObjectPaletteTag(paletteIndex), paletteIndex);
         UpdateSpritePaletteWithWeather(paletteIndex);
     }
+    else if (graphicsInfo->paletteSlot == PALSLOT_NPC_SPECIAL)
+    {
+        // T-484: our own people (the Clears, the towns' animals, TY...) draw in the special slot and name no
+        // reflection palette, so nothing ever filled PALSLOT_NPC_SPECIAL_REFLECTION and CRYSTAL's reflection on the
+        // HALL OF FAME's floor was drawn in an empty (black) palette. The reflection takes the object's own colours.
+        PatchObjectPalette(graphicsInfo->paletteTag, paletteIndex);
+        UpdateSpritePaletteWithWeather(paletteIndex);
+    }
 }
 
 // When walking on a bridge high above water (Route 120), the reflection is a solid dark blue color.
