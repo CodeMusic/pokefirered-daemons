@@ -287,3 +287,26 @@ void DaemonsTintForWatch(u16 *palette, u16 count)
         palette[i] = RGB2(r, g, b);
     }
 }
+
+// T-481 A: the battle's light -- sWatchTint at a strength of quarters (4 the field's own light, outdoors; 1 a quarter
+// of it, a building's, "through the windows"), with no holiday lift. DAEMONS tools/gbabattlebg.py's tint() does the
+// same sum for the sheets: out = min(31, c * mul / 256 + add), mul = 256 - (256 - m) * q / 4, add = a * q / 4.
+void DaemonsTintBattleForWatch(u16 *palette, u16 count, u8 watch, u8 quarters)
+{
+    u32 mul[3], add[3], k;
+    u16 i;
+    s32 r, g, b;
+
+    for (k = 0; k < 3; k++)
+    {
+        mul[k] = 256 - ((256 - sWatchTint[watch % WATCH_COUNT][k][0]) * quarters) / 4;
+        add[k] = (sWatchTint[watch % WATCH_COUNT][k][1] * quarters) / 4;
+    }
+    for (i = 0; i < count; i++)
+    {
+        r = min((s32)(((palette[i] & 0x1F) * mul[0] >> 8) + add[0]), 31);
+        g = min((s32)((((palette[i] >> 5) & 0x1F) * mul[1] >> 8) + add[1]), 31);
+        b = min((s32)((((palette[i] >> 10) & 0x1F) * mul[2] >> 8) + add[2]), 31);
+        palette[i] = RGB2(r, g, b);
+    }
+}

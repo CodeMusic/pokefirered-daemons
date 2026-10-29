@@ -1,5 +1,6 @@
 #include "global.h"
 #include "daemons_weather.h"   // T-415 P2
+#include "daemons_battle_bg.h" // T-481 A
 #include "gflib.h"
 #include "fieldmap.h"
 #include "battle.h"
@@ -722,7 +723,9 @@ static void LoadBattleTerrainGfx(u16 terrain)
     // Copy to bg3
     LZDecompressVram(sBattleTerrainTable[terrain].tileset, (void *)BG_CHAR_ADDR(2));
     LZDecompressVram(sBattleTerrainTable[terrain].tilemap, (void *)BG_SCREEN_ADDR(26));
+    DaemonsBattleBgHorizon(terrain);   // T-481 A: the weekday's line, moved to row 3
     LoadCompressedPalette(sBattleTerrainTable[terrain].palette, BG_PLTT_ID(2), 3 * PLTT_SIZE_4BPP);
+    DaemonsBattleBgCalendar(terrain);  // T-481 A: the season, the holiday, the weekday, the hour
     DaemonsTintBattleTerrain();   // T-415 P2: the weather outside, a light wash
 }
 
@@ -1197,10 +1200,12 @@ bool8 LoadChosenBattleElement(u8 caseId)
     case 4:
         battleScene = GetBattleTerrainOverride();
         LZDecompressVram(sBattleTerrainTable[battleScene].tilemap, (void *)BG_SCREEN_ADDR(26));
+        DaemonsBattleBgHorizon(battleScene);   // T-481 A (case 3 falls through, so the tile is patched too)
         break;
     case 5:
         battleScene = GetBattleTerrainOverride();
         LoadCompressedPalette(sBattleTerrainTable[battleScene].palette, BG_PLTT_ID(2), 3 * PLTT_SIZE_4BPP);
+        DaemonsBattleBgCalendar(battleScene);   // T-481 A
         DaemonsTintBattleTerrain();   // T-415 P2
         break;
     case 6:

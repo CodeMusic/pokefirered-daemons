@@ -33,6 +33,7 @@ u8 DaemonsWeekday(void);           // 0-6, Sunday first
 bool8 DaemonsWatchIsFromClock(void);
 void DaemonsDayAndMinute(u16 *day, u16 *minute);   // T-415
 void DaemonsTintForWatch(u16 *palette, u16 count);
+void DaemonsTintBattleForWatch(u16 *palette, u16 count, u8 watch, u8 quarters);   // T-481 A: the battle's light
 // T-416: a fresh read for the holidays' lookups, a forced one for DEBUG's DATE, and the date as a day number.
 void DaemonsTimeRefresh(void);
 void DaemonsTimeInvalidate(void);
