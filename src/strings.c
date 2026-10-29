@@ -217,6 +217,8 @@ const u8 gText_DbgWatchDusk[] = _("DUSK");
 const u8 gText_DbgWatchNight[] = _("NIGHT");
 const u8 gText_DbgWatchDawn[] = _("DAWN");
 const u8 gText_DbgWatchWitching[] = _("3 AM");   // T-480: night, and the witching hour
+const u8 gText_DbgWatchWitching15[] = _("3:15 AM");   // T-486: the witching hour, a quarter past (the glitch's middle strength)
+const u8 gText_DbgWatchWitching30[] = _("3:30 AM");   // T-486: half past, when OSRIC HATTER's clocks are right
 // The ENCOUNTER page. DAEMON prints the species NAME on the row and nothing
 // else, which is why the debug pages widen the window -- see CreateStartMenuWindow.
 const u8 gText_DbgMenuEncounter[] = _("ENCOUNTER");

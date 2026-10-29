@@ -1628,7 +1628,7 @@ static void GlitchPastTheWarning(bool8 wasWarning)
     if (sBook->view != VIEW_SUBTLE_ENTRY && !JOY_NEW(A_BUTTON))
         return;                                 // B, back out: not past it
     FlagSet(FLAG_HERMETIC_GLITCHED);
-    Glitch_Start(0, 1 << 15);
+    Glitch_Start(0, 1 << 15, Glitch_StrengthNow());   // T-486: at the night minute it is turned (the weakest outside 3-4)
 }
 
 static void Input_SubtleEntry(void)

@@ -11,8 +11,10 @@
 // The field tint that means "the watch's light" (after quest_log.h's QL_TINT_* 0-3).
 #define DAEMONS_TINT_WATCH 4
 
-extern u8 gDaemonsWatchOverride;   // DEBUG: 0 follows the clock, 1-4 is a watch + 1, 5 the witching hour
-#define WATCH_OVERRIDE_WITCHING 5  // T-480: DEBUG's "3 AM" -- night, and the witching hour
+extern u8 gDaemonsWatchOverride;   // DEBUG: 0 follows the clock, 1-4 is a watch + 1, 5-7 the witching hour
+#define WATCH_OVERRIDE_WITCHING 5  // T-480: DEBUG's "3 AM" -- night, and the witching hour (3:00)
+#define WATCH_OVERRIDE_WITCHING_15 6   // T-486: DEBUG's "3:15 AM", the witching hour at a quarter past
+#define WATCH_OVERRIDE_WITCHING_30 7   // T-486: DEBUG's "3:30 AM", when OSRIC HATTER's clocks are right
 extern u8 gDaemonsWeekdayOverride; // DEBUG (T-273): 0 follows the clock, 1-7 is Sunday..Saturday + 1
 
 #define WEEKDAY_COUNT 7
@@ -29,6 +31,7 @@ u8 DaemonsSeason(void);
 
 u8 DaemonsWatch(void);
 bool8 DaemonsIsWitchingHour(void);   // T-480
+s8 DaemonsWitchingMinute(void);      // T-486: 0-59 inside the witching hour (3:00-3:59), -1 outside it
 u8 DaemonsWeekday(void);           // 0-6, Sunday first
 bool8 DaemonsWatchIsFromClock(void);
 void DaemonsDayAndMinute(u16 *day, u16 *minute);   // T-415

@@ -166,8 +166,8 @@ u16 DaemonsDayNumber(u16 year, u8 month, u8 day)
 
 u8 DaemonsWatch(void)
 {
-    if (gDaemonsWatchOverride == WATCH_OVERRIDE_WITCHING)
-        return WATCH_NIGHT;                 // T-480: 3 AM is night
+    if (gDaemonsWatchOverride >= WATCH_OVERRIDE_WITCHING)
+        return WATCH_NIGHT;                 // T-480: 3 AM is night (and 3:15 and 3:30, T-486)
     if (gDaemonsWatchOverride)
         return (gDaemonsWatchOverride - 1) % WATCH_COUNT;
     ReadClock();
@@ -221,9 +221,25 @@ u16 DaemonsFeelingsNow(bool8 *fromClock)
 bool8 DaemonsIsWitchingHour(void)
 {
     if (gDaemonsWatchOverride)
-        return gDaemonsWatchOverride == WATCH_OVERRIDE_WITCHING;
+        return gDaemonsWatchOverride >= WATCH_OVERRIDE_WITCHING;
     ReadClock();
     return sWatchFromClock && sMinuteOfDay / 60 == 3;
+}
+
+// T-486: the minute of the witching hour, 0-59, or -1 outside it -- what the one glitch's strength follows (the user,
+// 2026-10-29: strongest at 3:30). DEBUG's three witching watches stand for 3:00, 3:15 and 3:30.
+s8 DaemonsWitchingMinute(void)
+{
+    if (gDaemonsWatchOverride)
+    {
+        if (gDaemonsWatchOverride < WATCH_OVERRIDE_WITCHING)
+            return -1;
+        return (gDaemonsWatchOverride - WATCH_OVERRIDE_WITCHING) * 15;
+    }
+    ReadClock();
+    if (!sWatchFromClock || sMinuteOfDay / 60 != 3)
+        return -1;
+    return sMinuteOfDay % 60;
 }
 
 // T-483: the pulse's clock -- the second of the day the cartridge's clock last said, and the frame it was read on;

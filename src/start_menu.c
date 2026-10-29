@@ -433,7 +433,7 @@ static EWRAM_DATA u8 sDbgPage = 0;
 static EWRAM_DATA u16 sDbgSong = 0;
 static const u8 *const sDbgSeasonNames[] = { gText_DbgWatchAuto, gText_DbgWinter, gText_DbgSpring, gText_DbgSummer, gText_DbgAutumn };   // T-359, by gDaemonsSeasonOverride
 static const u8 *const sDbgWeatherNames[] = { gText_DbgWatchAuto, gText_DbgSkyClear, gText_DbgSkyRain, gText_DbgSkyStorm, gText_DbgSkySnow, gText_DbgSkyFog, gText_DbgSkyWind };   // T-415, by gDaemonsWeatherOverride
-static const u8 *const sDbgWatchNames[] = { gText_DbgWatchAuto, gText_DbgWatchDay, gText_DbgWatchDusk, gText_DbgWatchNight, gText_DbgWatchDawn, gText_DbgWatchWitching };   // T-268, by gDaemonsWatchOverride; T-480 the witching hour last (WATCH_OVERRIDE_WITCHING)
+static const u8 *const sDbgWatchNames[] = { gText_DbgWatchAuto, gText_DbgWatchDay, gText_DbgWatchDusk, gText_DbgWatchNight, gText_DbgWatchDawn, gText_DbgWatchWitching, gText_DbgWatchWitching15, gText_DbgWatchWitching30 };   // T-268, by gDaemonsWatchOverride; T-480 the witching hour last (WATCH_OVERRIDE_WITCHING), T-486 at 3:15 and 3:30
 static const u8 *const sDbgWeekdayNames[] = { gText_DbgWatchAuto, gText_DbgSun, gText_DbgMon, gText_DbgTue, gText_DbgWed, gText_DbgThu, gText_DbgFri, gText_DbgSat };   // T-273, by gDaemonsWeekdayOverride
 static EWRAM_DATA u16 sDbgSfx = 0;
 // A NATIONAL DEX NUMBER, not a species id -- so the twenty-five dummy slots
