@@ -1075,10 +1075,10 @@
 #define FLAG_HIDDEN_ITEM_UNUSED_0x28                                       (FLAG_HIDDEN_ITEMS_START +  40)
 #define FLAG_HIDDEN_ITEM_ROUTE11_ESCAPE_ROPE                               (FLAG_HIDDEN_ITEMS_START +  41)
 #define FLAG_HIDDEN_ITEM_ROUTE12_HYPER_POTION                              (FLAG_HIDDEN_ITEMS_START +  42)
-#define FLAG_HIDDEN_ITEM_UNUSED_0x2B                                       (FLAG_HIDDEN_ITEMS_START +  43)
-#define FLAG_HIDDEN_ITEM_UNUSED_0x2C                                       (FLAG_HIDDEN_ITEMS_START +  44)
-#define FLAG_HIDDEN_ITEM_UNUSED_0x2D                                       (FLAG_HIDDEN_ITEMS_START +  45)
-#define FLAG_HIDDEN_ITEM_UNUSED_0x2E                                       (FLAG_HIDDEN_ITEMS_START +  46)
+#define FLAG_HIDDEN_ITEM_ROUTE5_LATENT_SINK                                (FLAG_HIDDEN_ITEMS_START +  43)   // T-488: was UNUSED_0x2B
+#define FLAG_HIDDEN_ITEM_ROUTE15_EMERGENT_SINK                             (FLAG_HIDDEN_ITEMS_START +  44)   // T-488: was UNUSED_0x2C
+#define FLAG_HIDDEN_ITEM_ROUTE15_OPAQUE_SINK                               (FLAG_HIDDEN_ITEMS_START +  45)   // T-488: was UNUSED_0x2D
+#define FLAG_HIDDEN_ITEM_ROUTE18_VECTOR_SINK                               (FLAG_HIDDEN_ITEMS_START +  46)   // T-488: was UNUSED_0x2E
 #define FLAG_HIDDEN_ITEM_CELADON_CITY_PP_UP                                (FLAG_HIDDEN_ITEMS_START +  47)
 #define FLAG_HIDDEN_ITEM_VERMILION_CITY_MAX_ETHER                          (FLAG_HIDDEN_ITEMS_START +  48)
 #define FLAG_HIDDEN_ITEM_CERULEAN_CITY_RARE_CANDY                          (FLAG_HIDDEN_ITEMS_START +  49)
@@ -1548,8 +1548,8 @@
 //  GIFT's table) -- so 581 vanilla flags are unused, not nine:
 //    0x020-0x027, and 220 among the hide/show flags (0x077-0x22F) -- below STORY_FLAGS_START,
 //      so the QUEST LOG does not record them changing;
-//    23 in the story flags' gaps (0x23E-0x2EB); 0x342-0x3D7, 150; 8 FLAG_HIDDEN_ITEM_UNUSED_
-//      (0x3EF .. 0x464); 0x4A7-0x4A8 and 0x4AB-0x4AF (TeachyTvRepairOldSave reads and clears
+//    23 in the story flags' gaps (0x23E-0x2EB); 0x342-0x3D7, 150; 4 FLAG_HIDDEN_ITEM_UNUSED_
+//      (0x3EF .. 0x464; T-488 took 0x2B-0x2E for the hidden * SINKs); 0x4A7-0x4A8 and 0x4AB-0x4AF (TeachyTvRepairOldSave reads and clears
 //      them once, on an old save's first CONTINUE); 0x4BD-0x4FF, 67;
 //    0x809-0x81F, 23 before PERMA_SYS_FLAGS_START (the QUEST LOG skips those too); 11 between the
 //      badges and 0x83F; 0x8C3-0x8FF, 61.

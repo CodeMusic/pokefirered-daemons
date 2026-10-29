@@ -4389,6 +4389,14 @@ BattleScript_BerryStatRaiseDoStatUp::
 	removeitem BS_ATTACKER
 	end2
 
+@ T-488: a * SINK halved a super-effective hit of its type on its holder (TrySinkTheHit), and is spent. DRAFT words.
+BattleScript_SinkTookTheHit::
+	playanimation BS_TARGET, B_ANIM_HELD_ITEM_EFFECT
+	printstring STRINGID_SINKTOOKTHEHIT
+	waitmessage B_WAIT_TIME_LONG
+	removeitem BS_TARGET
+	return
+
 BattleScript_BerryFocusEnergyEnd2::
 	playanimation BS_ATTACKER, B_ANIM_HELD_ITEM_EFFECT
 	printstring STRINGID_PKMNUSEDXTOGETPUMPED

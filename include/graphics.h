@@ -3341,6 +3341,8 @@ extern const u32 gItemIconPalette_GroundTMHM[];
 extern const u32 gItemIconPalette_GhostTMHM[];
 extern const u32 gItemIconPalette_RockTMHM[];
 extern const u32 gItemIconPalette_FlyingTMHM[];
+extern const u32 gItemIconPalette_BugTMHM[];   // T-488: no disc uses it; SWARM SINK does
+extern const u32 gItemIcon_Sink[];             // T-488: the sixteen * SINK items, coloured by the discs' type palettes
 // FireRed/LeafGreen key items
 extern const u32 gItemIcon_OaksParcel[];
 extern const u32 gItemIconPalette_OaksParcel[];

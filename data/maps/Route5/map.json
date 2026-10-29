@@ -65,6 +65,16 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Route5_EventScript_UndergroundPathSign"
+    },
+    {
+      "type": "hidden_item",
+      "x": 32,
+      "y": 33,
+      "elevation": 0,
+      "item": "ITEM_LATENT_SINK",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE5_LATENT_SINK",
+      "quantity": 1,
+      "underfoot": false
     }
   ]
 }

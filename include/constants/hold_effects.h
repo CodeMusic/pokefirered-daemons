@@ -68,5 +68,6 @@
 #define HOLD_EFFECT_METAL_POWDER   64
 #define HOLD_EFFECT_THICK_CLUB     65
 #define HOLD_EFFECT_STICK          66
+#define HOLD_EFFECT_SINK           67   // T-488: the * SINK items; param = the type whose super-effective hit it halves, once
 
 #endif // GUARD_HOLD_EFFECTS_H

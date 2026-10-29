@@ -1618,9 +1618,39 @@ static void Unused_ApplyRandomDmgMultiplier(void)
     ApplyRandomDmgMultiplier();
 }
 
+//  T-488: THE * SINK ITEMS (Gen 4's resist berries, as held items). A SINK whose param is this move's type halves the
+//  first super-effective hit of that type on its holder -- not a hit that is super-effective on one type and resisted
+//  by the other (Gen 3 sets both flags then, and the sum is neutral), not through a SUBSTITUTE, which takes the hit
+//  instead -- and is spent: BattleScript_SinkTookTheHit says so and removes it, before the hit lands. Called only by
+//  the two adjustnormaldamage commands, so a set-damage routine (SONIC BOOM, SEISMIC TOSS, SUPER FANG...), whose
+//  typecalc flags are cleared by its script, never spends one. Before FOCUS BAND, which then judges the halved hit.
+static bool8 TrySinkTheHit(u8 holdEffect, u8 param)
+{
+    u8 moveType;
+
+    if (holdEffect != HOLD_EFFECT_SINK || gBattleMoveDamage <= 0 || gBattleMons[gBattlerTarget].item == ITEM_NONE)
+        return FALSE;
+    if ((gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+     || (gMoveResultFlags & (MOVE_RESULT_SUPER_EFFECTIVE | MOVE_RESULT_NOT_VERY_EFFECTIVE)) != MOVE_RESULT_SUPER_EFFECTIVE)
+        return FALSE;
+    if (gBattleMons[gBattlerTarget].status2 & STATUS2_SUBSTITUTE)
+        return FALSE;
+    GET_MOVE_TYPE(gCurrentMove, moveType);
+    if (moveType != param)
+        return FALSE;
+    gBattleMoveDamage /= 2;
+    if (gBattleMoveDamage == 0)
+        gBattleMoveDamage = 1;
+    gLastUsedItem = gBattleMons[gBattlerTarget].item;
+    RecordItemEffectBattle(gBattlerTarget, holdEffect);
+    Feelings_OnHeldItemActed(gBattlerTarget, gLastUsedItem);   // T-433: it did its work
+    return TRUE;
+}
+
 static void Cmd_adjustnormaldamage(void)
 {
     u8 holdEffect, param;
+    bool8 sunk;
 
     ApplyRandomDmgMultiplier();
 
@@ -1637,6 +1667,7 @@ static void Cmd_adjustnormaldamage(void)
 
     gPotentialItemEffectBattler = gBattlerTarget;
 
+    sunk = TrySinkTheHit(holdEffect, param);   // T-488
     if (holdEffect == HOLD_EFFECT_FOCUS_BAND && (Random() % 100) < param)
     {
         RecordItemEffectBattle(gBattlerTarget, holdEffect);
@@ -1658,13 +1689,22 @@ static void Cmd_adjustnormaldamage(void)
             Feelings_OnHeldItemActed(gBattlerTarget, gLastUsedItem);   // T-433: FAILSAFE held on
         }
     }
-    gBattlescriptCurrInstr++;
+    if (sunk)
+    {
+        BattleScriptPush(gBattlescriptCurrInstr + 1);   // T-488: the line, the item spent, then on to the hit
+        gBattlescriptCurrInstr = BattleScript_SinkTookTheHit;
+    }
+    else
+    {
+        gBattlescriptCurrInstr++;
+    }
 }
 
 // The same as adjustnormaldamage except it doesn't check for false swipe move effect.
 static void Cmd_adjustnormaldamage2(void)
 {
     u8 holdEffect, param;
+    bool8 sunk;
 
     ApplyRandomDmgMultiplier();
 
@@ -1681,6 +1721,7 @@ static void Cmd_adjustnormaldamage2(void)
 
     gPotentialItemEffectBattler = gBattlerTarget;
 
+    sunk = TrySinkTheHit(holdEffect, param);   // T-488
     if (holdEffect == HOLD_EFFECT_FOCUS_BAND && (Random() % 100) < param)
     {
         RecordItemEffectBattle(gBattlerTarget, holdEffect);
@@ -1702,7 +1743,15 @@ static void Cmd_adjustnormaldamage2(void)
             Feelings_OnHeldItemActed(gBattlerTarget, gLastUsedItem);   // T-433: FAILSAFE held on
         }
     }
-    gBattlescriptCurrInstr++;
+    if (sunk)
+    {
+        BattleScriptPush(gBattlescriptCurrInstr + 1);   // T-488: the line, the item spent, then on to the hit
+        gBattlescriptCurrInstr = BattleScript_SinkTookTheHit;
+    }
+    else
+    {
+        gBattlescriptCurrInstr++;
+    }
 }
 
 static void Cmd_attackanimation(void)

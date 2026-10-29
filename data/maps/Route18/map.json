@@ -102,6 +102,16 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "Route18_EventScript_RouteSign"
+    },
+    {
+      "type": "hidden_item",
+      "x": 41,
+      "y": 7,
+      "elevation": 0,
+      "item": "ITEM_VECTOR_SINK",
+      "flag": "FLAG_HIDDEN_ITEM_ROUTE18_VECTOR_SINK",
+      "quantity": 1,
+      "underfoot": false
     }
   ]
 }

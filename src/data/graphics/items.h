@@ -657,6 +657,10 @@ const u32 gItemIconPalette_GroundTMHM[]   = INCBIN_U32("graphics/items/icon_pale
 const u32 gItemIconPalette_GhostTMHM[]    = INCBIN_U32("graphics/items/icon_palettes/ghost_tm_hm.gbapal.lz");
 const u32 gItemIconPalette_RockTMHM[]     = INCBIN_U32("graphics/items/icon_palettes/rock_tm_hm.gbapal.lz");
 const u32 gItemIconPalette_FlyingTMHM[]   = INCBIN_U32("graphics/items/icon_palettes/flying_tm_hm.gbapal.lz");
+//  T-488: SWARM has no disc, so this palette is SWARM SINK's alone (DAEMONS tools/genplugincolours.py keeps it)
+const u32 gItemIconPalette_BugTMHM[]     = INCBIN_U32("graphics/items/icon_palettes/bug_tm_hm.gbapal.lz");
+//  T-488: a heat sink, one drawing for all sixteen; its colour indices are the disc's, so each takes its type's palette
+const u32 gItemIcon_Sink[] = INCBIN_U32("graphics/items/icons/sink.4bpp.lz");
 
 // FireRed/LeafGreen key items
 

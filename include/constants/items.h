@@ -241,22 +241,22 @@
 #define ITEM_FLUTE 230 // T-417: CONTEXT's instrument (PLAY). Was ITEM_0E6, unused
 #define ITEM_SUBTLE_LAYER 231 // T-423: THE SUBTLE LAYER, the trainer's handbook. Was ITEM_0E7, unused
 #define ITEM_HERMETIC_LAYER 232 // T-483: THE HERMETIC LAYER, read only at night. Was ITEM_0E8, unused
-#define ITEM_0E9 233
-#define ITEM_0EA 234
-#define ITEM_0EB 235
-#define ITEM_0EC 236
-#define ITEM_0ED 237
-#define ITEM_0EE 238
-#define ITEM_0EF 239
-#define ITEM_0F0 240
-#define ITEM_0F1 241
-#define ITEM_0F2 242
-#define ITEM_0F3 243
-#define ITEM_0F4 244
-#define ITEM_0F5 245
-#define ITEM_0F6 246
-#define ITEM_0F7 247
-#define ITEM_0F8 248
+#define ITEM_LOGIC_SINK 233    // T-488: halves one super-effective LOGIC hit, then spent. Was ITEM_0E9, unused
+#define ITEM_VECTOR_SINK 234   // T-488: halves one super-effective VECTOR hit, then spent. Was ITEM_0EA, unused
+#define ITEM_CORRUPT_SINK 235  // T-488: halves one super-effective CORRUPT hit, then spent. Was ITEM_0EB, unused
+#define ITEM_STRATUM_SINK 236  // T-488: halves one super-effective STRATUM hit, then spent. Was ITEM_0EC, unused
+#define ITEM_LEGACY_SINK 237   // T-488: halves one super-effective LEGACY hit, then spent. Was ITEM_0ED, unused
+#define ITEM_SWARM_SINK 238    // T-488: halves one super-effective SWARM hit, then spent. Was ITEM_0EE, unused
+#define ITEM_LATENT_SINK 239   // T-488: halves one super-effective LATENT hit, then spent. Was ITEM_0EF, unused
+#define ITEM_HARDENED_SINK 240 // T-488: halves one super-effective HARDENED hit, then spent. Was ITEM_0F0, unused
+#define ITEM_ENTROPY_SINK 241  // T-488: halves one super-effective ENTROPY hit, then spent. Was ITEM_0F1, unused
+#define ITEM_FLOW_SINK 242     // T-488: halves one super-effective FLOW hit, then spent. Was ITEM_0F2, unused
+#define ITEM_GROWTH_SINK 243   // T-488: halves one super-effective GROWTH hit, then spent. Was ITEM_0F3, unused
+#define ITEM_SIGNAL_SINK 244   // T-488: halves one super-effective SIGNAL hit, then spent. Was ITEM_0F4, unused
+#define ITEM_CONTEXT_SINK 245  // T-488: halves one super-effective CONTEXT hit, then spent. Was ITEM_0F5, unused
+#define ITEM_FROZEN_SINK 246   // T-488: halves one super-effective FROZEN hit, then spent. Was ITEM_0F6, unused
+#define ITEM_EMERGENT_SINK 247 // T-488: halves one super-effective EMERGENT hit, then spent. Was ITEM_0F7, unused
+#define ITEM_OPAQUE_SINK 248   // T-488: halves one super-effective OPAQUE hit, then spent. Was ITEM_0F8, unused
 #define ITEM_0F9 249
 #define ITEM_0FA 250
 #define ITEM_0FB 251
