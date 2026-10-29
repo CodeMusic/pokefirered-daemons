@@ -114,6 +114,15 @@ static void FitAbility(struct BoxPokemon *boxMon, u16 species)
     }
 }
 
+//  T-479: FIRST MET is the first sighting, as FLAG_SET_SEEN keeps it (pokedex_screen.c) -- so a trade names it only
+//  when the species had never been seen. A species seen before T-406's records has an empty byte that means BEFORE
+//  RECORDS, not "never met", and a trade arriving later must not write A TRADE over it.
+static void FirstMetByTrade(u16 nationalNum)
+{
+    if (!GetSetPokedexFlag(nationalNum, FLAG_GET_SEEN))
+        DaemonsFirstSeen_RecordTrade(nationalNum);
+}
+
 //  T-473 (C-219): a daemon another player traded, as the companion wrote it -- TRADED_IN set (one-shot, cleared here
 //  whatever happens, so it is never left set), its own trainer and routines. The INDEX takes it, FIRST MET: A TRADE, and
 //  it evolves as a trade evolves it in FireRed: GetEvolutionTargetSpecies(EVO_MODE_TRADE) on a copy, so an EVERSTONE
@@ -143,7 +152,7 @@ static u8 FinishTrade(struct BoxPokemon *boxMon, struct Pokemon *partyMon, u8 ri
         return CARRIED_NONE;
     }
     personality = GetBoxMonData(boxMon, MON_DATA_PERSONALITY, NULL);
-    DaemonsFirstSeen_RecordTrade(SpeciesToNationalPokedexNum(species));
+    FirstMetByTrade(SpeciesToNationalPokedexNum(species));
     HandleSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_SET_SEEN, personality);
     HandleSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_SET_CAUGHT, personality);
     if (!loan)
@@ -158,7 +167,7 @@ static u8 FinishTrade(struct BoxPokemon *boxMon, struct Pokemon *partyMon, u8 ri
             if (StringCompare(nickname, gSpeciesNames[species]) == 0)
                 SetBoxMonData(boxMon, MON_DATA_NICKNAME, gSpeciesNames[target]);
             SetBoxMonData(boxMon, MON_DATA_SPECIES, &target);
-            DaemonsFirstSeen_RecordTrade(SpeciesToNationalPokedexNum(target));
+            FirstMetByTrade(SpeciesToNationalPokedexNum(target));
             HandleSetPokedexFlag(SpeciesToNationalPokedexNum(target), FLAG_SET_SEEN, personality);
             HandleSetPokedexFlag(SpeciesToNationalPokedexNum(target), FLAG_SET_CAUGHT, personality);
             ribbons |= CARRIED_RIBBON_MOVES;
@@ -216,7 +225,9 @@ static u8 FinishOne(struct BoxPokemon *boxMon, struct Pokemon *partyMon)
     FitAbility(boxMon, species);
     nationalNum = SpeciesToNationalPokedexNum(species);
     personality = GetBoxMonData(boxMon, MON_DATA_PERSONALITY, NULL);
-    if (GetBoxMonData(boxMon, MON_DATA_MET_LOCATION, NULL) == METLOC_FATEFUL_ENCOUNTER)
+    if (GetSetPokedexFlag(nationalNum, FLAG_GET_SEEN))
+        ;   // T-479: already met -- its FIRST MET stands, even an empty one (BEFORE RECORDS)
+    else if (GetBoxMonData(boxMon, MON_DATA_MET_LOCATION, NULL) == METLOC_FATEFUL_ENCOUNTER)
         DaemonsFirstSeen_RecordCompanion(nationalNum);
     else
         DaemonsFirstSeen_RecordAt(nationalNum, SavedMapsec());

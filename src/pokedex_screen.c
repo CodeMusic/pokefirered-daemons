@@ -2106,15 +2106,32 @@ static bool8 DexScreen_IsBound(u16 species)
     return sReadingInBattle || GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_CAUGHT);
 }
 
-static u16 DexScreen_PreEvolution(u16 species)
-{
-    u32 s, e;
+//  T-479: the roots a species' line grows from, walking back through EVERY species that evolves into it, not the
+//  first one found. One root for nearly everything; two where two lines meet in one child -- a pair trade's (T-474:
+//  PENPHIN, from DOLPHIN traded for PENGUIN or PENGUIN traded for DOLPHIN). Three steps back at most, as before.
+#define WORKINGS_MAX_ROOTS  4
 
-    for (s = 1; s < NUM_SPECIES; s++)
-        for (e = 0; e < EVOS_PER_MON; e++)
-            if (gEvolutionTable[s][e].method && gEvolutionTable[s][e].targetSpecies == species)
-                return s;
-    return SPECIES_NONE;
+static void DexScreen_AddRoots(u16 species, u16 *roots, u8 *count, u8 depth)
+{
+    u32 s, e, i;
+    bool8 hasPre = FALSE;
+
+    if (depth < 3)
+        for (s = 1; s < NUM_SPECIES; s++)
+            for (e = 0; e < EVOS_PER_MON; e++)
+                if (gEvolutionTable[s][e].method && gEvolutionTable[s][e].targetSpecies == species)
+                {
+                    hasPre = TRUE;
+                    DexScreen_AddRoots(s, roots, count, depth + 1);
+                    break;
+                }
+    if (hasPre)
+        return;
+    for (i = 0; i < *count; i++)
+        if (roots[i] == species)
+            return;
+    if (*count < WORKINGS_MAX_ROOTS)
+        roots[(*count)++] = species;
 }
 
 static bool8 DexScreen_HasEvolutions(u16 species)
@@ -2277,7 +2294,8 @@ static bool8 DexScreen_BoundLine(u16 species, u8 *out)
 static u8 DexScreen_Workings(u16 species, u8 page, u8 *out)
 {
     struct WorkingsLayout w;
-    u16 root = species, pre;
+    u16 roots[WORKINGS_MAX_ROOTS], root;
+    u8 rootCount = 0, r;
     u8 unit[48], *p;
     u32 i, j, k;
     const u16 *learnset = gLevelUpLearnsets[species];
@@ -2295,11 +2313,14 @@ static u8 DexScreen_Workings(u16 species, u8 page, u8 *out)
         Workings_EndLine(&w);
     }
 
-    //  the line, from its root: children after their parent, a sibling after a slash
-    for (i = 0; i < 3 && (pre = DexScreen_PreEvolution(root)) != SPECIES_NONE; i++)
-        root = pre;
-    if (root != species || DexScreen_HasEvolutions(species))
+    //  the line, from its root: children after their parent, a sibling after a slash -- and T-479, a line for each
+    //  root where two lines meet: "DOLPHIN →PENGUIN PENPHIN", then "PENGUIN →DOLPHIN PENPHIN" under it
+    DexScreen_AddRoots(species, roots, &rootCount, 0);
+    for (r = 0; r < rootCount; r++)
     {
+        root = roots[r];
+        if (root == species && !DexScreen_HasEvolutions(species))
+            continue;
         Workings_Name(unit, root);
         Workings_Add(&w, unit);
         for (i = 0, k = 0; i < EVOS_PER_MON; i++)
