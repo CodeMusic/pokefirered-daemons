@@ -1062,6 +1062,13 @@ static void TryEnableNationalDexFromLinkPartner(void)
         EnableNationalPokedex();*/
 }
 
+//  T-474: the species the player traded away, for EVO_TRADE_PARTNER -- after TradeMons it sits in the partner's slot of
+//  gEnemyParty (an in-game trade's is slot 0). An egg reads as SPECIES_EGG, which is no daemon's partner.
+static u16 TradePartnerSpecies(u8 partnerPartyIdx)
+{
+    return GetMonData(&gEnemyParty[partnerPartyIdx % PARTY_SIZE], MON_DATA_SPECIES_OR_EGG, NULL);
+}
+
 static void TradeMons(u8 playerPartyIdx, u8 partnerPartyIdx)
 {
     u8 friendship;
@@ -1787,7 +1794,7 @@ static bool8 DoTradeAnim_Cable(void)
         TradeMons(gSpecialVar_0x8005, 0);
         Feelings_OnTradeReceived(&gPlayerParty[gSpecialVar_0x8005]);   // T-433: a stranger's hands
         gCB2_AfterEvolution = CB2_InGameTrade;
-        evoTarget = GetEvolutionTargetSpecies(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PLAYER]], EVO_MODE_TRADE, ITEM_NONE);
+        evoTarget = GetEvolutionTargetSpecies(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PLAYER]], EVO_MODE_TRADE, TradePartnerSpecies(0));
         if (evoTarget != SPECIES_NONE)
             TradeEvolutionScene(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PLAYER]], evoTarget, sTradeAnim->monSpriteIds[1], gSelectedTradeMonPositions[TRADE_PLAYER]);
         sTradeAnim->state++;
@@ -2288,7 +2295,7 @@ static bool8 DoTradeAnim_Wireless(void)
         TradeMons(gSpecialVar_0x8005, 0);
         Feelings_OnTradeReceived(&gPlayerParty[gSpecialVar_0x8005]);   // T-433: a stranger's hands
         gCB2_AfterEvolution = CB2_InGameTrade;
-        evoTarget = GetEvolutionTargetSpecies(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PLAYER]], EVO_MODE_TRADE, ITEM_NONE);
+        evoTarget = GetEvolutionTargetSpecies(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PLAYER]], EVO_MODE_TRADE, TradePartnerSpecies(0));
         if (evoTarget != SPECIES_NONE)
             TradeEvolutionScene(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PLAYER]], evoTarget, sTradeAnim->monSpriteIds[TRADE_PARTNER], gSelectedTradeMonPositions[TRADE_PLAYER]);
         sTradeAnim->state++;
@@ -2332,7 +2339,8 @@ static void CB2_TryLinkTradeEvolution(void)
         break;
     case 4:
         gCB2_AfterEvolution = CB2_SaveAndEndTrade;
-        evoSpecies = GetEvolutionTargetSpecies(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PLAYER]], EVO_MODE_TRADE, 0);
+        evoSpecies = GetEvolutionTargetSpecies(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PLAYER]], EVO_MODE_TRADE,
+                                               TradePartnerSpecies(gSelectedTradeMonPositions[TRADE_PARTNER]));
         if (evoSpecies != SPECIES_NONE)
             TradeEvolutionScene(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PLAYER]], evoSpecies, sTradeAnim->monSpriteIds[TRADE_PARTNER], gSelectedTradeMonPositions[TRADE_PLAYER]);
         else

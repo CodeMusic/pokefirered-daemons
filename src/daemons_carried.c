@@ -63,6 +63,8 @@ static EWRAM_DATA bool8 sCarriedMovesOwed = FALSE;    // some daemon, party or b
 STATIC_ASSERT(NATIONAL_DEX_OLD_UNOWN_B == CARRIED_NEW_MISSINGNO, MissingnoIsWhereTheMoveSaysItIs);
 //  T-473: LOAN and TRADED_IN took bits of the u16 at 0x1E -- the record the companion reads and writes is still 80 bytes
 STATIC_ASSERT(sizeof(struct BoxPokemon) == 80, BoxPokemonIsStillEightyBytes);
+//  T-474: the partner species has nine bits (2-10 of 0x1E)
+STATIC_ASSERT(NUM_SPECIES <= 512, TradePartnerFitsNineBits);
 
 //  DRAFT (T-448): the one line on return
 static const u8 sText_CarriedDeliveredBox[] = _("Something followed you home from the\nwalk. {STR_VAR_1} waits in the PC.");
@@ -116,7 +118,8 @@ static void FitAbility(struct BoxPokemon *boxMon, u16 species)
 //  whatever happens, so it is never left set), its own trainer and routines. The INDEX takes it, FIRST MET: A TRADE, and
 //  it evolves as a trade evolves it in FireRed: GetEvolutionTargetSpecies(EVO_MODE_TRADE) on a copy, so an EVERSTONE
 //  holds it and EVO_TRADE_ITEM's item is spent; only a default name follows the species; its new routines are owed
-//  (T-455). LOAN wins: a borrowed daemon is never trade-evolved.
+//  (T-455). LOAN wins: a borrowed daemon is never trade-evolved. T-474: the species it was traded FOR comes with it (bits
+//  2-10 of 0x1E, cleared with TRADED_IN), so DOLPHIN and PENGUIN become PENPHIN only when traded for each other.
 static u8 FinishTrade(struct BoxPokemon *boxMon, struct Pokemon *partyMon, u8 ribbons)
 {
     struct Pokemon copy;
@@ -124,8 +127,12 @@ static u8 FinishTrade(struct BoxPokemon *boxMon, struct Pokemon *partyMon, u8 ri
     u16 species, target, item;
     u32 personality;
     bool8 loan = DaemonBoxIsLoan(boxMon);
+    u16 partner = boxMon->daemonsTradePartner;   // T-474
 
     boxMon->daemonsTradedIn = 0;
+    boxMon->daemonsTradePartner = 0;
+    if (partner >= NUM_SPECIES)
+        partner = SPECIES_NONE;
     ribbons &= ~CARRIED_RIBBON_MARK;
     SetBoxMonData(boxMon, MON_DATA_UNUSED_RIBBONS, &ribbons);
     species = GetBoxMonData(boxMon, MON_DATA_SPECIES, NULL);
@@ -142,7 +149,7 @@ static u8 FinishTrade(struct BoxPokemon *boxMon, struct Pokemon *partyMon, u8 ri
     if (!loan)
     {
         BoxMonToMon(boxMon, &copy);
-        target = GetEvolutionTargetSpecies(&copy, EVO_MODE_TRADE, ITEM_NONE);
+        target = GetEvolutionTargetSpecies(&copy, EVO_MODE_TRADE, partner);   // T-474: what it was traded for
         if (target != SPECIES_NONE && target < NUM_SPECIES)
         {
             item = GetMonData(&copy, MON_DATA_HELD_ITEM, NULL);

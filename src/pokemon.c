@@ -3213,7 +3213,8 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
         retVal = boxMon->checksum;
         break;
     case MON_DATA_ENCRYPT_SEPARATOR:
-        retVal = boxMon->daemonsLoan | (boxMon->daemonsTradedIn << 1) | (boxMon->unknown << 2);   // T-473: all sixteen bits
+        retVal = boxMon->daemonsLoan | (boxMon->daemonsTradedIn << 1) | (boxMon->daemonsTradePartner << 2)
+               | (boxMon->unknown << 11);   // T-473, T-474: all sixteen bits
         break;
     case MON_DATA_SPECIES:
         retVal = boxMon->isBadEgg ? SPECIES_EGG : substruct0->species;
@@ -3614,7 +3615,8 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
         u16 bits = data[0] + (data[1] << 8);    // T-473: all sixteen bits, LOAN and TRADED_IN with them
         boxMon->daemonsLoan = bits & 1;
         boxMon->daemonsTradedIn = (bits >> 1) & 1;
-        boxMon->unknown = bits >> 2;
+        boxMon->daemonsTradePartner = (bits >> 2) & 0x1FF;   // T-474
+        boxMon->unknown = bits >> 11;
         break;
     }
     case MON_DATA_SPECIES:
@@ -5171,6 +5173,8 @@ static u8 GetNatureFromPersonality(u32 personality)
     return personality % NUM_NATURES;
 }
 
+//  T-474: in EVO_MODE_TRADE, evolutionItem is the species it was traded FOR (the daemon that left), SPECIES_NONE when
+//  that is not known -- EVO_TRADE_PARTNER evolves only for its own partner. A borrowed daemon (LOAN) never trade-evolves.
 u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem)
 {
     int i;
@@ -5263,12 +5267,19 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem)
         }
         break;
     case EVO_MODE_TRADE:
+        if (DaemonIsLoan(mon))   // T-473, T-474: LOAN wins
+            return SPECIES_NONE;
         for (i = 0; i < EVOS_PER_MON; i++)
         {
             switch (gEvolutionTable[species][i].method)
             {
             case EVO_TRADE:
                 targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                break;
+            case EVO_TRADE_PARTNER:   // T-474: DOLPHIN for PENGUIN, PENGUIN for DOLPHIN; any other trade does nothing
+                if (evolutionItem != SPECIES_NONE && gEvolutionTable[species][i].param == evolutionItem
+                 && !GetMonData(mon, MON_DATA_IS_EGG, NULL))
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_TRADE_ITEM:
                 if (gEvolutionTable[species][i].param == heldItem)

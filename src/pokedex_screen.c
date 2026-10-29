@@ -2175,7 +2175,8 @@ static void Workings_Name(u8 *dst, u16 species)
         StringCopy(dst, gText_WorkingsUnseen);
 }
 
-//  "→16 ROVERSEER", "→LEAF STONE VILEPLUME", or a bare "→" where the way is neither a level nor an item.
+//  "→16 ROVERSEER", "→LEAF STONE VILEPLUME", "→PENGUIN PENPHIN" (T-474, the partner of a pair trade), or a bare "→"
+//  where the way is none of those.
 static void Workings_Step(struct WorkingsLayout *w, const struct Evolution *evo, bool8 sibling)
 {
     u8 unit[48], *p = unit;
@@ -2201,6 +2202,10 @@ static void Workings_Step(struct WorkingsLayout *w, const struct Evolution *evo,
     case EVO_ITEM:
     case EVO_TRADE_ITEM:
         p = StringCopy(p, ItemId_GetName(evo->param));
+        break;
+    case EVO_TRADE_PARTNER:   // T-474: the daemon it is traded for, where an item would stand -- "→PENGUIN PENPHIN"
+        Workings_Name(p, evo->param);
+        p += StringLength(p);
         break;
     }
     *p++ = CHAR_SPACE;

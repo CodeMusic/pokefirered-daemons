@@ -127,7 +127,9 @@ struct BoxPokemon
     // SHEDINJA (a new daemon, not a copy) is zeroed whole.
     u16 daemonsLoan:1;      // bit 0: borrowed from another player -- used freely, never released, traded on or trade-evolved
     u16 daemonsTradedIn:1;  // bit 1: one-shot, just arrived by trade; the load-time finish clears it (daemons_carried.c)
-    u16 unknown:14;         // bits 2-15: reserved
+    u16 daemonsTradePartner:9;  // bits 2-10 (T-474): the species it was traded FOR, written by the companion with
+                            // TRADED_IN and cleared with it; 0 when not given. EVO_TRADE_PARTNER judges it (PENPHIN)
+    u16 unknown:5;          // bits 11-15: reserved
 
     union
     {

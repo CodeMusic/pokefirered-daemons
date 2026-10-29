@@ -68,9 +68,12 @@ enum
     EV_SOUNDING,                                                            // T-458
     EV_ITS_DREAM,                                                           // T-462
     EV_TRADE_IN, EV_LOAN_IN,                                                // T-473
+    EV_PAIR_PENGUIN, EV_PAIR_DOLPHIN, EV_PAIR_OTHER, EV_PAIR_LOAN,          // T-474
     EV_THREE_SLOT1, EV_THREE_SLOT6 = EV_THREE_SLOT1 + PARTY_SIZE - 1,         // T-454
     EV_THREE_CLOSURE, EV_THREE_ATTUNEMENT, EV_THREE_VOLTAGE, EV_THREE_AUTO,
+    EV_COUNT_
 };
+STATIC_ASSERT(EV_COUNT_ <= 256, DbgRowArgIsOneByte);   // T-474: struct DbgRow's arg is a u8
 
 struct DbgRow { const u8 *name; u8 kind; u8 arg; };
 
@@ -126,9 +129,13 @@ static const u8 sName_Sounding[]     = _("AWAY'S SIGNAL ");         // T-458: + 
 static const u8 sName_SoundingNone[] = _("AWAY'S SIGNAL (NONE AWAY)");
 static const u8 sName_ItsDream[]     = _("ITS DREAM ");             // T-462: + the image and night the next one fakes
 static const u8 sName_ItsBroken[]    = _(", BROKEN");
-static void DbgTradeArrives(u16 species, bool8 loan);   // T-473
+static void DbgTradeArrives(u16 species, bool8 loan, u16 partner);   // T-473; T-474 the species it was traded for
 static const u8 sName_TradeIn[]      = _("A TRADE ARRIVES");      // T-473: HAUNTER from another player, as a SYNC writes it
 static const u8 sName_LoanIn[]       = _("A LOAN ARRIVES");       // T-473: KADABRA, borrowed -- it must not evolve
+static const u8 sName_PairPenguin[]  = _("PENGUIN FOR DOLPHIN");  // T-474, DRAFT: PENGUIN arrives traded for DOLPHIN
+static const u8 sName_PairDolphin[]  = _("DOLPHIN FOR PENGUIN");  // T-474, DRAFT: and the reverse; both become PENPHIN
+static const u8 sName_PairOther[]    = _("PENGUIN FOR ANOTHER");  // T-474, DRAFT: traded for RESPAWN -- it must not evolve
+static const u8 sName_PairLoan[]     = _("PENGUIN LENT");         // T-474, DRAFT: for DOLPHIN, but a LOAN -- it must not evolve
 static const u8 sName_ItsQuiet[]     = _(", QUIET");
 static const u8 sName_ItsVivid[]     = _(", VIVID");
 static const u8 sName_Roots[]        = _("UNDERSTANDINGS >");
@@ -240,6 +247,10 @@ static const struct DbgRow sRows_Events[] = {
                                                       //   arrives on the next step, and A again brings the next one
     { sName_TradeIn,     R_GIVE,   EV_TRADE_IN },     // T-473: a trade the companion wrote, finished at once (the
     { sName_LoanIn,      R_GIVE,   EV_LOAN_IN },      //   line on the next step); a TRADE CENTER-free way to test it
+    { sName_PairPenguin, R_GIVE,   EV_PAIR_PENGUIN }, // T-474: the pair trade, as a SYNC writes it (the partner
+    { sName_PairDolphin, R_GIVE,   EV_PAIR_DOLPHIN }, //   species in 0x1E's bits 2-10); only the pair evolves
+    { sName_PairOther,   R_GIVE,   EV_PAIR_OTHER },
+    { sName_PairLoan,    R_GIVE,   EV_PAIR_LOAN },
     { sName_Roots,       R_PAGE,   PG_ROOTS },
     { sName_Year,        R_PAGE,   PG_YEAR },         // T-416
     { sName_Follower,    R_PAGE,   PG_FOLLOWER },     // T-18
@@ -674,8 +685,12 @@ static void Apply(u8 ev, bool8 on)
     case EV_THREE_VOLTAGE:    Three_DebugCycle(THREE_VOLTAGE); return;
     case EV_THREE_AUTO:       Three_DebugAllAuto(); return;
     case EV_ITS_DREAM:    DaemonsItsDream_DebugReceive(); return;               // T-462: what a SYNC would write
-    case EV_TRADE_IN:     DbgTradeArrives(SPECIES_HAUNTER, FALSE); return;      // T-473: what a SYNC would write
-    case EV_LOAN_IN:      DbgTradeArrives(SPECIES_KADABRA, TRUE); return;
+    case EV_TRADE_IN:     DbgTradeArrives(SPECIES_HAUNTER, FALSE, SPECIES_NONE); return;   // T-473: what a SYNC would write
+    case EV_LOAN_IN:      DbgTradeArrives(SPECIES_KADABRA, TRUE, SPECIES_NONE); return;
+    case EV_PAIR_PENGUIN: DbgTradeArrives(SPECIES_SPHEAL, FALSE, SPECIES_WAILMER); return;  // T-474: PENGUIN for DOLPHIN
+    case EV_PAIR_DOLPHIN: DbgTradeArrives(SPECIES_WAILMER, FALSE, SPECIES_SPHEAL); return;  // DOLPHIN for PENGUIN
+    case EV_PAIR_OTHER:   DbgTradeArrives(SPECIES_SPHEAL, FALSE, SPECIES_HAUNTER); return;  // for anything else: none
+    case EV_PAIR_LOAN:    DbgTradeArrives(SPECIES_SPHEAL, TRUE, SPECIES_WAILMER); return;   // LOAN wins
     case EV_SOUNDING:                                                           // T-458: what a SYNC would write
     {
         struct BoxPokemon *away = DaemonFirstAway();
@@ -709,7 +724,7 @@ static void Apply(u8 ev, bool8 on)
 //  when the party is full; then the load-time finish runs at once, as Continue would run it.
 static const u8 sText_DbgTrader[] = _("TRADER");
 
-static void DbgTradeArrives(u16 species, bool8 loan)
+static void DbgTradeArrives(u16 species, bool8 loan, u16 partner)
 {
     struct Pokemon mon;
     struct BoxPokemon *box = NULL;
@@ -722,6 +737,7 @@ static void DbgTradeArrives(u16 species, bool8 loan)
     SetMonData(&mon, MON_DATA_UNUSED_RIBBONS, &ribbons);
     mon.box.daemonsTradedIn = 1;
     mon.box.daemonsLoan = loan;
+    mon.box.daemonsTradePartner = partner;   // T-474: what the companion writes beside TRADED_IN
     if (gPlayerPartyCount < PARTY_SIZE)
     {
         CopyMon(&gPlayerParty[gPlayerPartyCount], &mon, sizeof(mon));
