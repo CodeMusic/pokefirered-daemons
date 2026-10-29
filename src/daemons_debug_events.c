@@ -621,7 +621,7 @@ static void Apply(u8 ev, bool8 on)
     case EV_GOTO_POINTS:  DaemonsDebug_EveryGotoPoint(on); return;
     case EV_GUIDE:        SetFlag(FLAG_GOT_GUIDE, on); SetItem(ITEM_GUIDE, on); return;
     case EV_SUBTLE:       SetFlag(FLAG_GOT_SUBTLE_LAYER, on); SetItem(ITEM_SUBTLE_LAYER, on); return;
-    case EV_HERMETIC:     SetFlag(FLAG_GOT_HERMETIC_LAYER, on); SetItem(ITEM_HERMETIC_LAYER, on); FlagClear(FLAG_HERMETIC_UNMASKED); return;
+    case EV_HERMETIC:     SetFlag(FLAG_GOT_HERMETIC_LAYER, on); SetItem(ITEM_HERMETIC_LAYER, on); FlagClear(FLAG_HERMETIC_UNMASKED); FlagClear(FLAG_HERMETIC_GLITCHED); return;
     case EV_INSTRUMENT:   SetFlag(FLAG_GOT_INSTRUMENT, on); SetItem(PLAY_ITEM, on); return;   // T-417 P3: and the LYREBIRD / palm
     case EV_GLOBAL_INDEX:
         if (on)

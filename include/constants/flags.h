@@ -1930,6 +1930,8 @@
                                                                                 //   or written by the companion at a sync (C-238)
 #define FLAG_HERMETIC_UNMASKED                (DAEMONS_FLAGS_START + 0x3F4)   // T-483: Halloween's mask taken off the follower (for the
                                                                                 //   day; cleared on any other day, daemons_hermetic.c)
+#define FLAG_HERMETIC_GLITCHED                (DAEMONS_FLAGS_START + 0x3F5)   // T-486: the page turned past OSRIC HATTER's warning has
+                                                                                //   glitched (once a save; book_reader.c)
 
 //  BEGIN gbaglobalindex -- T-334: each fixed encounter of the GLOBAL INDEX, once gone (removeobject sets it). The beasts'
 //  and the edition daemons' are also set on every map load while they may not stand (event_data.c,

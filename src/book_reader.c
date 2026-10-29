@@ -13,6 +13,7 @@
 #include "notebook.h"   // T-410: the ROOT's balance
 #include "play.h"   // T-417: a SONGBOOK page's notes
 #include "daemons_pulse.h"   // T-483: THE HERMETIC LAYER breathes
+#include "daemons_glitch.h"  // T-486: and glitches, once
 #include "constants/songs.h"
 
 //  T-223: THE NOTEBOOK AND THE TEXTBOOK, READ LIKE BOOKS (docs/school.md 9, 6).
@@ -286,6 +287,7 @@ static const u8 sText_GuideContents[] = _("CONTENTS");
 static void Task_BookInit(u8 taskId);
 static void Task_BookInput(u8 taskId);
 static bool8 IsLayerBook(void);
+static void Input_SubtleEntryTurn(void);
 
 #include "data/qr_codes.h"
 
@@ -1614,7 +1616,30 @@ static void SubtleBackToContents(void)
     Turn();
 }
 
+//  T-486 (the user, 2026-10-29): THE HERMETIC LAYER is the one place DAEMONS glitches on purpose -- the first page
+//  turned past OSRIC HATTER's warning, once a save: a fifth of a second of thrown scanlines and shuffled colours on
+//  the book's own layer and palette (src/daemons_glitch.c), then the page as it should be.
+static void GlitchPastTheWarning(bool8 wasWarning)
+{
+    if (!wasWarning || sBook->book != BOOK_HERMETIC || FlagGet(FLAG_HERMETIC_GLITCHED))
+        return;
+    if (sBook->view == VIEW_SUBTLE_ENTRY && sBook->entry == 0)
+        return;                                 // still in the warning
+    if (sBook->view != VIEW_SUBTLE_ENTRY && !JOY_NEW(A_BUTTON))
+        return;                                 // B, back out: not past it
+    FlagSet(FLAG_HERMETIC_GLITCHED);
+    Glitch_Start(0, 1 << 15);
+}
+
 static void Input_SubtleEntry(void)
+{
+    bool8 wasWarning = (sBook->book == BOOK_HERMETIC && sBook->entry == 0);
+
+    Input_SubtleEntryTurn();
+    GlitchPastTheWarning(wasWarning);
+}
+
+static void Input_SubtleEntryTurn(void)
 {
     if (JOY_NEW(B_BUTTON))
     {
@@ -1718,6 +1743,7 @@ static void VBlankCB_Book(void)
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
+    ScanlineEffect_InitHBlankDmaTransfer();   // T-486: the glitch's scanlines (nothing, when none runs)
 }
 
 static void CB2_Book(void)
