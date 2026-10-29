@@ -4891,8 +4891,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
     },
-    // UNDERTOW, the FLOW routine. T-480, DRAFT
-    [MOVE_UNDERTOW] =
+    // UNDERCURRENT, the FLOW routine. T-480, DRAFT
+    [MOVE_UNDERCURRENT] =
     {
         .effect = EFFECT_HIT,
         .power = 90,

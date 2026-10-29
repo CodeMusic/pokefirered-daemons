@@ -391,7 +391,7 @@
 #define MOVE_NIGHT_WATCH     372   // HARDENED  T-480, DRAFT
 #define MOVE_SECOND_SIGHT    373   // ORACLE    T-480, DRAFT
 #define MOVE_EMBER_HOUR      374   // ENTROPY   T-480, DRAFT
-#define MOVE_UNDERTOW        375   // FLOW      T-480, DRAFT
+#define MOVE_UNDERCURRENT    375   // FLOW      T-480, DRAFT
 #define MOVE_DARK_ROOTS      376   // GROWTH    T-480, DRAFT
 #define MOVE_DEAD_AIR        377   // SIGNAL    T-480, DRAFT
 #define MOVE_THIN_SEAM       378   // CONTEXT   T-480, DRAFT

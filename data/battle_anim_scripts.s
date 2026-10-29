@@ -395,7 +395,7 @@ gBattleAnims_Moves::
 	.4byte Move_NIGHT_WATCH     @ T-480, DRAFT: the hour's light, then IRON_TAIL's
 	.4byte Move_SECOND_SIGHT    @ T-480, DRAFT: the hour's light, then EXTRASENSORY's
 	.4byte Move_EMBER_HOUR      @ T-480, DRAFT: the hour's light, then FLAMETHROWER's
-	.4byte Move_UNDERTOW        @ T-480, DRAFT: the hour's light, then SURF's
+	.4byte Move_UNDERCURRENT    @ T-480, DRAFT: the hour's light, then SURF's
 	.4byte Move_DARK_ROOTS      @ T-480, DRAFT: the hour's light, then FRENZY_PLANT's
 	.4byte Move_DEAD_AIR        @ T-480, DRAFT: the hour's light, then THUNDERBOLT's
 	.4byte Move_THIN_SEAM       @ T-480, DRAFT: the hour's light, then PSYCHIC's
@@ -7796,7 +7796,7 @@ Move_SECOND_SIGHT:
 Move_EMBER_HOUR:
 	call Move_WITCHING_HOUR_LIGHT
 	goto Move_FLAMETHROWER
-Move_UNDERTOW:
+Move_UNDERCURRENT:
 	call Move_WITCHING_HOUR_LIGHT
 	goto Move_SURF
 Move_DARK_ROOTS:

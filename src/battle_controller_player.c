@@ -899,6 +899,7 @@ static void HourPage_Draw(void)
         BattlePutTextOnWindow(gDisplayedStringBattle, i + 3);
     }
     MoveSelectionCreateCursorAt(0, 0);
+    MoveSelectionDisplayPpString();   // the mark turns to point back
     state = GetCurrentPpToMaxPpState(left, WITCHING_PP);
     gPlttBufferUnfaded[BG_PLTT_ID(5) + 12] = gPPTextPalette[(state * 2) + 0];
     gPlttBufferUnfaded[BG_PLTT_ID(5) + 11] = gPPTextPalette[(state * 2) + 1];
@@ -915,6 +916,7 @@ static void HourPage_Leave(void)
     Witching_SetMenuPage(FALSE);
     MoveSelectionDisplayMoveNames();
     MoveSelectionCreateCursorAt(gMoveSelectionCursor[gActiveBattler], 0);
+    MoveSelectionDisplayPpString();   // the mark points down again, or is gone with the hour
     MoveSelectionDisplayPpNumber();
     MoveSelectionDisplayMoveType();
 }
@@ -2030,9 +2032,29 @@ static void MoveSelectionDisplayMoveNames(void)
     }
 }
 
+//  T-480: THE HOUR'S MARK (the user, 2026-10-29: "a small purple mark, no words"). While the hour's page is on offer,
+//  a faint arrow in the book's purple, lit (gensubtle.py C_MARGIN), sits in the PP label's last free pixels -- "MP " is
+//  15px of its 24, and the small font's arrow is 8 -- at the inner edge of the move box: DOWN on the moveset, where
+//  the page lies past the bottom row, and UP on the page, pointing back. Palette 5's colour 5, which no battle window
+//  draws with (they use 11-15, and the move slots 1-4), so it costs no tile, window or palette of its own.
+#define HOUR_MARK_COLOR 5
+
 static void MoveSelectionDisplayPpString(void)
 {
-    StringCopy(gDisplayedStringBattle, gText_MoveInterfacePP);
+    u8 *txtPtr = StringCopy(gDisplayedStringBattle, gText_MoveInterfacePP);
+
+    if (Witching_MoveFor(gActiveBattler) != MOVE_NONE)
+    {
+        gPlttBufferUnfaded[BG_PLTT_ID(5) + HOUR_MARK_COLOR] = RGB(29, 17, 26);
+        gPlttBufferFaded[BG_PLTT_ID(5) + HOUR_MARK_COLOR] = RGB(29, 17, 26);
+        *txtPtr++ = EXT_CTRL_CODE_BEGIN;
+        *txtPtr++ = EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW;
+        *txtPtr++ = HOUR_MARK_COLOR;
+        *txtPtr++ = 14;     // the window's own fill: no shadow
+        *txtPtr++ = 14;
+        *txtPtr++ = Witching_MenuPage() ? CHAR_UP_ARROW : CHAR_DOWN_ARROW;
+        *txtPtr = EOS;
+    }
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP);
 }
 
