@@ -2776,15 +2776,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && gBattleMoves[move].target == MOVE_TARGET_BOTH && CountAliveMonsInBattle(BATTLE_ALIVE_DEF_SIDE) == 2)
             damage /= 2;
 
-        // T-415 phase 2: the sky's boosts reach the physical types too -- VECTOR in wind, LATENT in fog (DRAFT).
-        // Phase 1 put wind's only in the special branch below, where a physical type never arrives (Gen 3 splits by
-        // type), so VECTOR was never lifted; found by measuring it in the theatre, 2026-10-18.
-        if (WEATHER_HAS_EFFECT2 && DaemonsSkyBoostsType(type))
-            damage = (125 * damage) / 100;
-
-        // Moves always do at least 1 damage.
-        if (damage == 0)
-            damage = 1;
+        // T-490 step 2: the sky's boosts, rain and sun are applied below, after both sides, by the hit's TYPE.
     }
 
     if (type == TYPE_MYSTERY)
@@ -2832,54 +2824,64 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         // Moves hitting both targets do half damage in double battles
         if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE) && gBattleMoves[move].target == MOVE_TARGET_BOTH && CountAliveMonsInBattle(BATTLE_ALIVE_DEF_SIDE) == 2)
             damage /= 2;
+    }
 
-        // Are effects of weather negated with cloud nine or air lock
-        if (WEATHER_HAS_EFFECT2)
+    // T-490 step 2 (the user, 2026-10-30): the weather answers the hit's TYPE, whichever side it strikes with. Gen 3
+    // kept rain, sun and Flash Fire inside the special side, since FIRE and WATER were always special there; T-415's
+    // sky boosts sat on both sides for the same reason. Out here a FLOW routine judged PHYSICAL is still rained on.
+    // For every routine whose category is still its type's, the numbers are those of before (same order, same
+    // rounding): the physical side's only weather was the sky boost, and its floor of 1 still comes last.
+    //
+    // Are effects of weather negated with cloud nine or air lock
+    if (WEATHER_HAS_EFFECT2)
+    {
+        // Rain weakens Fire, boosts Water. T-415 (the user, 2026-10-17): by a quarter either way, not Gen 3's half --
+        // weather is special, not the fight's whole shape. The type chart is untouched (invariant 3).
+        if (gBattleWeather & B_WEATHER_RAIN_TEMPORARY)
         {
-            // Rain weakens Fire, boosts Water. T-415 (the user, 2026-10-17): by a quarter either way, not Gen 3's half --
-            // weather is special, not the fight's whole shape. The type chart is untouched (invariant 3).
-            if (gBattleWeather & B_WEATHER_RAIN_TEMPORARY)
+            switch (type)
             {
-                switch (type)
-                {
-                case TYPE_FIRE:
-                    damage = (75 * damage) / 100;
-                    break;
-                case TYPE_WATER:
-                    damage = (125 * damage) / 100;
-                    break;
-                }
-            }
-
-            // Any weather except sun weakens solar beam
-            if ((gBattleWeather & (B_WEATHER_RAIN | B_WEATHER_SANDSTORM | B_WEATHER_HAIL_TEMPORARY)) && gCurrentMove == MOVE_SOLAR_BEAM)
-                damage /= 2;
-
-            // T-415 (the user, 2026-10-17): the sky's own boosts, by a quarter while it lasts -- here the special types',
-            // a THUNDERSTORM's SIGNAL (phase 2); VECTOR in wind and LATENT in fog are physical and lifted above. Field
-            // weathers, not battle ones: nothing in battle starts or ends them (daemons_weather.c, DaemonsSkyBoostsType).
-            if (DaemonsSkyBoostsType(type))
+            case TYPE_FIRE:
+                damage = (75 * damage) / 100;
+                break;
+            case TYPE_WATER:
                 damage = (125 * damage) / 100;
-
-            // Sun boosts Fire, weakens Water
-            if (gBattleWeather & B_WEATHER_SUN)
-            {
-                switch (type)
-                {
-                case TYPE_FIRE:
-                    damage = (125 * damage) / 100;   // T-415: a quarter, as rain's
-                    break;
-                case TYPE_WATER:
-                    damage = (75 * damage) / 100;
-                    break;
-                }
+                break;
             }
         }
 
-        // Flash fire triggered
-        if ((gBattleResources->flags->flags[battlerIdAtk] & RESOURCE_FLAG_FLASH_FIRE) && type == TYPE_FIRE)
-            damage = (15 * damage) / 10;
+        // Any weather except sun weakens solar beam
+        if ((gBattleWeather & (B_WEATHER_RAIN | B_WEATHER_SANDSTORM | B_WEATHER_HAIL_TEMPORARY)) && gCurrentMove == MOVE_SOLAR_BEAM)
+            damage /= 2;
+
+        // T-415 (the user, 2026-10-17): the sky's own boosts, by a quarter while it lasts -- a THUNDERSTORM's SIGNAL,
+        // VECTOR in wind, LATENT in fog (phase 2), on either side since T-490 step 2. Field
+        // weathers, not battle ones: nothing in battle starts or ends them (daemons_weather.c, DaemonsSkyBoostsType).
+        if (DaemonsSkyBoostsType(type))
+            damage = (125 * damage) / 100;
+
+        // Sun boosts Fire, weakens Water
+        if (gBattleWeather & B_WEATHER_SUN)
+        {
+            switch (type)
+            {
+            case TYPE_FIRE:
+                damage = (125 * damage) / 100;   // T-415: a quarter, as rain's
+                break;
+            case TYPE_WATER:
+                damage = (75 * damage) / 100;
+                break;
+            }
+        }
     }
+
+    // Flash fire triggered
+    if ((gBattleResources->flags->flags[battlerIdAtk] & RESOURCE_FLAG_FLASH_FIRE) && type == TYPE_FIRE)
+        damage = (15 * damage) / 10;
+
+    // Moves always do at least 1 damage (the physical side's floor, as Gen 3 had it).
+    if (split == SPLIT_PHYSICAL && damage == 0)
+        damage = 1;
 
     return damage + 2;
 }
