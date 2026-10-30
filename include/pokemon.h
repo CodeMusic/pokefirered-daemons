@@ -261,7 +261,14 @@ struct BattleMove
     u8 target;
     s8 priority;
     u8 flags;
-    u8 split;   // T-490: SPLIT_PHYSICAL / SPECIAL / STATUS. Takes a padding byte: the struct stays 12 bytes
+    // T-490: SPLIT_PHYSICAL / SPECIAL / STATUS. Takes a padding byte: the struct stays 12 bytes.
+    // THE RULE (the user, 2026-10-30), applied as each routine is touched, never in a sweep: CONTACT IS PHYSICAL --
+    // a routine that touches the foe (fangs, tails, bodies, blades) is PHYSICAL; beams, sound, signals, data and
+    // anything thrown or spread without touching are SPECIAL. Judged so far: TAMPER and the CORRUPT row (ETCH,
+    // POLLUTE, GARBAGE, DUMP, MEDIAN, BITROT MOON), CONSENSUS, PRIOR and WEATHER BALL SPECIAL; SPOIL and FALSETAIL
+    // stay PHYSICAL; SLANT is SPECIAL. Every other routine still carries its type's old side (step 1).
+    // tools/gbamovemenu.py counts the routines that left their type's side.
+    u8 split;
 };
 
 #define SPINDA_SPOT_WIDTH 16

@@ -2572,18 +2572,17 @@ static u16 DaemonsStreakPower(u16 move, u16 power, u8 battlerId)
 }
 
 // T-490: which side a routine strikes with, as it is being used at TYPE. The routine's own category
-// (gBattleMoves[].split) decides -- except where Gen 3's type rule still answers, which is exactly where step 1
-// promised nothing would move:
-//   - a STATUS routine has no power of its own, and HUSTLE's accuracy and COUNTER's bookkeeping still ask it
-//     which side it uses, so its type answers, as it always did;
-//   - a routine used at a type that is not its own (HIDDEN POWER, WEATHER BALL: the type is rewritten as it is
-//     used) follows the type it became, as it always did.
+// (gBattleMoves[].split) decides -- except a STATUS routine, which has no power of its own: HUSTLE's accuracy and
+// COUNTER's bookkeeping still ask it which side it uses, so its type answers, as it always did.
+// The two routines whose type is rewritten as they are used, PRIOR (HIDDEN POWER) and WEATHER BALL, answer by their
+// own .split since step 2 (the user, 2026-10-30): always SPECIAL, whatever type they become. Step 1 had them follow
+// the type they became, as Gen 3 did; nothing else is retyped, so that clause is gone.
 // ORACLE (TYPE_MYSTERY) is neither side, which is the ??? rule: CalculateBaseDamage zeroes it.
 u8 GetBattleMoveSplit(u16 move, u8 type)
 {
     u8 split = gBattleMoves[move].split;
 
-    if (split == SPLIT_STATUS || type != gBattleMoves[move].type)
+    if (split == SPLIT_STATUS)
     {
         if (IS_TYPE_PHYSICAL(type))
             return SPLIT_PHYSICAL;
