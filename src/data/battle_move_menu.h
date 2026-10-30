@@ -33,6 +33,13 @@ static const u8 sMoveClassGlyph[MOVE_CLASS_COUNT] =
     [MOVE_CLASS_OTHER  ] = 0x20,
 };
 
+// T-490: the mark after the TYPE in the move info, for a routine's own category. STATUS has none.
+static const u8 sMoveSplitGlyph[] =
+{
+    [SPLIT_PHYSICAL] = 0x21,
+    [SPLIT_SPECIAL ] = 0x0D,
+};
+
 // What every move does. A move not listed hits (MOVE_CLASS_HIT is 0).
 static const u8 sMoveClass[MOVES_COUNT] =
 {

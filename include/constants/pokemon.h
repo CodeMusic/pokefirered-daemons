@@ -115,6 +115,16 @@
 #define TYPE_DARK           17
 #define NUMBER_OF_MON_TYPES 18
 
+// T-490 (bible 2.12, the user 2026-10-29): a routine's CATEGORY -- which of the user's sides it strikes with and
+// which of the target's it strikes at. Gen 3 decided this by the TYPE (below TYPE_MYSTERY physical, above it
+// special); here each routine carries its own, in gBattleMoves[].split. Step 1 gave every routine exactly what its
+// type gave it, so nothing moved; routines are re-judged one at a time as they are touched. STATUS is a routine
+// with no power of its own -- wherever the engine still asks one which side it uses (HUSTLE's accuracy, COUNTER's
+// bookkeeping) it answers by its type, as before. See GetBattleMoveSplit.
+#define SPLIT_PHYSICAL      0   // ATTACK against DEFENSE: the vitamins WATTAGE and SHIELDING
+#define SPLIT_SPECIAL       1   // SP. ATK against SP. DEF: BANDWIDTH and INSULATION
+#define SPLIT_STATUS        2
+
 // Pokemon egg groups
 #define EGG_GROUP_NONE         0
 #define EGG_GROUP_MONSTER      1

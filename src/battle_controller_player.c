@@ -2102,7 +2102,20 @@ static void DisplayMoveTypeFor(u8 slot, u16 move)
     *txtPtr++ = MOVE_MENU_COLOR(slot);
     *txtPtr++ = 14;
     *txtPtr++ = 15;
-    StringCopy(txtPtr, gTypeNames[gBattleMoves[move].type]);
+    txtPtr = StringCopy(txtPtr, gTypeNames[gBattleMoves[move].type]);
+    // T-490: the routine's own category after its type -- a strike for PHYSICAL, a channel for SPECIAL, nothing
+    // for STATUS (its class mark before the name already says what it does). The type is in the line's own font
+    // (FONT_NORMAL_COPY_1); the mark is a FONT_SMALL cell, so the font changes for it. Widest line in
+    // tools/gbamovemenu.py's report, of 64. DRAFT.
+    if (gBattleMoves[move].split != SPLIT_STATUS)
+    {
+        *txtPtr++ = CHAR_SPACE;
+        *txtPtr++ = EXT_CTRL_CODE_BEGIN;
+        *txtPtr++ = EXT_CTRL_CODE_FONT;
+        *txtPtr++ = FONT_SMALL;
+        *txtPtr++ = sMoveSplitGlyph[gBattleMoves[move].split];
+        *txtPtr = EOS;
+    }
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MOVE_TYPE);
 }
 

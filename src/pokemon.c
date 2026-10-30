@@ -2571,6 +2571,29 @@ static u16 DaemonsStreakPower(u16 move, u16 power, u8 battlerId)
     return power + DAEMONS_STREAK_BONUS_MAX * differing / (shared + differing);
 }
 
+// T-490: which side a routine strikes with, as it is being used at TYPE. The routine's own category
+// (gBattleMoves[].split) decides -- except where Gen 3's type rule still answers, which is exactly where step 1
+// promised nothing would move:
+//   - a STATUS routine has no power of its own, and HUSTLE's accuracy and COUNTER's bookkeeping still ask it
+//     which side it uses, so its type answers, as it always did;
+//   - a routine used at a type that is not its own (HIDDEN POWER, WEATHER BALL: the type is rewritten as it is
+//     used) follows the type it became, as it always did.
+// ORACLE (TYPE_MYSTERY) is neither side, which is the ??? rule: CalculateBaseDamage zeroes it.
+u8 GetBattleMoveSplit(u16 move, u8 type)
+{
+    u8 split = gBattleMoves[move].split;
+
+    if (split == SPLIT_STATUS || type != gBattleMoves[move].type)
+    {
+        if (IS_TYPE_PHYSICAL(type))
+            return SPLIT_PHYSICAL;
+        if (IS_TYPE_SPECIAL(type))
+            return SPLIT_SPECIAL;
+        return SPLIT_STATUS;
+    }
+    return split;
+}
+
 s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *defender, u32 move, u16 sideStatus, u16 powerOverride, u8 typeOverride, u8 battlerIdAtk, u8 battlerIdDef)
 {
     u32 i;
@@ -2583,6 +2606,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     u8 defenderHoldEffectParam;
     u8 attackerHoldEffect;
     u8 attackerHoldEffectParam;
+    u8 split;
 
     if (!powerOverride)
         gBattleMovePower = DaemonsStreakPower(move, gBattleMoves[move].power, battlerIdAtk);   // T-491
@@ -2593,6 +2617,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         type = gBattleMoves[move].type;
     else
         type = typeOverride & DYNAMIC_TYPE_MASK;
+    split = GetBattleMoveSplit(move, type);   // T-490: the routine's side, not its type's
 
     attack = attacker->attack;
     defense = defender->defense;
@@ -2650,7 +2675,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         if (attackerHoldEffect == sHoldEffectToType[i][0]
             && type == sHoldEffectToType[i][1])
         {
-            if (IS_TYPE_PHYSICAL(type))
+            if (split == SPLIT_PHYSICAL)
                 attack = (attack * (attackerHoldEffectParam + 100)) / 100;
             else
                 spAttack = (spAttack * (attackerHoldEffectParam + 100)) / 100;
@@ -2704,7 +2729,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     if (gBattleMoves[gCurrentMove].effect == EFFECT_EXPLOSION)
         defense /= 2;
 
-    if (IS_TYPE_PHYSICAL(type))
+    if (split == SPLIT_PHYSICAL)
     {
         if (gCritMultiplier == 2)
         {
@@ -2765,7 +2790,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     if (type == TYPE_MYSTERY)
         damage = 0; // is ??? type. does 0 damage.
 
-    if (IS_TYPE_SPECIAL(type))
+    if (split == SPLIT_SPECIAL)
     {
         if (gCritMultiplier == 2)
         {

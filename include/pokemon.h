@@ -261,6 +261,7 @@ struct BattleMove
     u8 target;
     s8 priority;
     u8 flags;
+    u8 split;   // T-490: SPLIT_PHYSICAL / SPECIAL / STATUS. Takes a padding byte: the struct stays 12 bytes
 };
 
 #define SPINDA_SPOT_WIDTH 16
@@ -339,6 +340,7 @@ void SetBattleMonMoveSlot(struct BattlePokemon *mon, u16 move, u8 slot);
 u16 MonTryLearningNewMove(struct Pokemon *mon, bool8 firstMove);
 void Daemons_OfferResonanceIfPenphin(struct Pokemon *mon);   // T-234
 void DeleteFirstMoveAndGiveMoveToMon(struct Pokemon *mon, u16 move);
+u8 GetBattleMoveSplit(u16 move, u8 type);   // T-490
 s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *defender, u32 move, u16 sideStatus, u16 powerOverride, u8 typeOverride, u8 battlerIdAtk, u8 battlerIdDef);
 
 #define BATTLE_ALIVE_EXCEPT_ACTIVE  0
