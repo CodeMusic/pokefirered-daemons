@@ -27,3 +27,11 @@ ViridianCity_PokemonCenter_1F_Text_MynahTip::
 ViridianCity_PokemonCenter_1F_Text_MynahSignOff::
     .string "I've seen every STREAM. Twice.\p"
     .string "That is the lecture.$"
+
+@ T-496, DRAFT wording, awaiting the user's.
+ViridianCity_PokemonCenter_1F_Text_Lioness::
+    .string "Oh! I only help here.\p"
+    .string "I carry the tray. The healing is\n"
+    .string "hers.\p"
+    .string "One day I'd like to know what all\n"
+    .string "the machines do.$"

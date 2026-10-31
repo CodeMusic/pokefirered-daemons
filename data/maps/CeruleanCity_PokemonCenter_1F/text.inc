@@ -24,3 +24,11 @@ CeruleanCity_PokemonCenter_1F_Text_TryTradingUpstairs::
     .string "The DAEMON you get in trades grow\n"
     .string "quickly, too.$"
 
+@ T-496, DRAFT wording, awaiting the user's.
+CeruleanCity_PokemonCenter_1F_Text_Lioness::
+    .string "You again! This place is mine to\n"
+    .string "run now.\p"
+    .string "The rota, the stock, the night\n"
+    .string "shift. I keep it all going.\p"
+    .string "The machines too. I still don't\n"
+    .string "know what's inside them.$"

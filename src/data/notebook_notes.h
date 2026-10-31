@@ -85,6 +85,8 @@ static const u8 sNoteAbout_NOTEBOOK_LOOSE_PHOTO[] = _("A photo of my daemon, in 
 static const u8 sNoteAbout_NOTEBOOK_DOC_PROSPECTUS_7[] = _("A proposal, unsigned by any date.");
 static const u8 sNoteAbout_NOTEBOOK_DOC_PROSPECTUS_8[] = _("A memo on signage, undated.");
 static const u8 sNoteAbout_NOTEBOOK_DOC_CORRESPONDENCE_7[] = _("A card, crowded with signatures.");
+static const u8 sNoteAbout_NOTEBOOK_LOOSE_PAINTING[] = _("Words from a painting, scrambled.");
+static const u8 sNoteAbout_NOTEBOOK_LOOSE_PAINTING_READ[] = _("The same words, held still.");
 
 static const struct NotebookNote sNotebookNotes[] =
 {
@@ -195,4 +197,6 @@ static const struct NotebookNote sNotebookNotes[] =
     { FLAG_NOTEBOOK_DOC_PROSPECTUS_7, 104, MAP_PALLET_TOWN_PROFESSOR_OAKS_LAB, sNoteAbout_NOTEBOOK_DOC_PROSPECTUS_7 },
     { FLAG_NOTEBOOK_DOC_PROSPECTUS_8, 105, MAP_PALLET_TOWN_PROFESSOR_OAKS_LAB, sNoteAbout_NOTEBOOK_DOC_PROSPECTUS_8 },
     { FLAG_NOTEBOOK_DOC_CORRESPONDENCE_7, 106, MAP_PALLET_TOWN_PROFESSOR_OAKS_LAB, sNoteAbout_NOTEBOOK_DOC_CORRESPONDENCE_7 },
+    { FLAG_NOTEBOOK_LOOSE_PAINTING, 107, MAP_SSANNE_1F_CORRIDOR, sNoteAbout_NOTEBOOK_LOOSE_PAINTING },
+    { FLAG_NOTEBOOK_LOOSE_PAINTING_READ, 108, MAP_NEXUS, sNoteAbout_NOTEBOOK_LOOSE_PAINTING_READ },
 };

@@ -255,6 +255,23 @@ static const u8 sText_Loose_Photo[] = _(
         "by the KINGFISHER.\p"
         "It came out in colour.");
 
+//  T-493 (DRAFT): the S.S. ANNE's painting. Its words, as copied, in letters that would not hold still -- the
+//  alphabet read in a mirror, A for Z -- and, once its twin in THE NEXUS has been stood before, the same page with
+//  the words held still. The scrambled page is cleared when the read one is filed (Nexus_EventScript_Easel).
+static const u8 sTitle_Loose_Painting[] = _("THE PAINTING");
+static const u8 sText_Loose_Painting[] = _(
+        "Along the frame of the painting on\n"
+        "the S.S. ANNE, in letters that\l"
+        "wouldn't hold still:\p"
+        "SVB, BLF! OLLP ZTZRM.");
+static const u8 sText_Loose_PaintingRead[] = _(
+        "Along the frame of the painting on\n"
+        "the S.S. ANNE:\p"
+        "SVB, BLF! OLLP ZTZRM.\p"
+        "Before its twin, the letters held\n"
+        "still:\p"
+        "HEY, YOU! LOOK AGAIN.");
+
 //  LAB NOTES 2 -- *Quantum Translations*, the first verse: what counts as an observer.
 static const u8 sTitle_Lab_Observer[] = _("THE OBSERVER");
 static const u8 sText_Lab_Observer[] = _(
@@ -438,6 +455,8 @@ static const struct NotebookEntry sEntries[] =
     { NB_LOOSE_PAGES,  NB_KIND_TEXT,  0, FLAG_NOTEBOOK_LOOSE_FOLDS,     0, sTitle_Loose_Folds,         sText_Loose_Folds },
     { NB_LOOSE_PAGES,  NB_KIND_TEXT,  0, FLAG_NOTEBOOK_LOOSE_KEY,       0, sTitle_Loose_Key,           sText_Loose_Key },
     { NB_LOOSE_PAGES,  NB_KIND_TEXT,  0, FLAG_NOTEBOOK_LOOSE_PHOTO,     0, sTitle_Loose_Photo,         sText_Loose_Photo },   // T-439
+    { NB_LOOSE_PAGES,  NB_KIND_TEXT,  0, FLAG_NOTEBOOK_LOOSE_PAINTING,  0, sTitle_Loose_Painting,      sText_Loose_Painting },      // T-493
+    { NB_LOOSE_PAGES,  NB_KIND_TEXT,  0, FLAG_NOTEBOOK_LOOSE_PAINTING_READ, 0, sTitle_Loose_Painting,  sText_Loose_PaintingRead },  // T-493
     NB_DOC_LAB_NOTES_1
     { NB_LAB_NOTES,    NB_KIND_TEXT,  0, FLAG_NOTEBOOK_LAB_OBSERVER,    0, sTitle_Lab_Observer,        sText_Lab_Observer },
     { NB_LAB_NOTES,    NB_KIND_TEXT,  0, FLAG_NOTEBOOK_LAB_BOX,         0, sTitle_Lab_Box,             sText_Lab_Box },

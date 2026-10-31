@@ -101,6 +101,7 @@ PalletTown_PlayersHouse_1F_EventScript_MomHeal::
 	call EventScript_OutOfCenterPartyHeal
 	setvar VAR_0x8006, GIVER_MOM   @ T-416: NEST DAY's gift, kept for you
 	call EventScript_HolidayGifts
+	call_if_set FLAG_LIONESS_LETTER_SENT, PalletTown_PlayersHouse_1F_EventScript_MomLetterReply   @ T-494
 @  T-326 (the user, 2026-10-01): home after the eighth MARK, she asks how it looks now; holding the ticket, the ship;
 @  the first time home after the lab, her own years at sea -- then the old line.
 	goto_if_set FLAG_BADGE08_GET, PalletTown_PlayersHouse_1F_EventScript_MomHowDoesItLook
@@ -161,4 +162,19 @@ PalletTown_PlayersHouse_1F_EventScript_TVScreenMale::
 
 PalletTown_PlayersHouse_1F_EventScript_TVScreenFemale::
 	msgbox PalletTown_PlayersHouse_1F_Text_MovieOnTVGirlOnBrickRoad
+	return
+
+@  T-494 (DRAFT): the letter posted from the S.S. ANNE has arrived, and its answer comes here -- once, after the ship has
+@  sailed (VAR_MAP_SCENE_VERMILION_CITY 3), and that visit is only the card. Nothing is said about who sent it.
+PalletTown_PlayersHouse_1F_EventScript_MomLetterReply::
+	goto_if_set FLAG_LIONESS_REPLY_GIVEN, PalletTown_PlayersHouse_1F_EventScript_MomLetterReplyNone
+	goto_if_lt VAR_MAP_SCENE_VERMILION_CITY, 3, PalletTown_PlayersHouse_1F_EventScript_MomLetterReplyNone
+	setflag FLAG_LIONESS_REPLY_GIVEN
+	msgbox PalletTown_PlayersHouse_1F_Text_MomSomethingCame
+	textcolor NPC_TEXT_COLOR_NEUTRAL
+	msgbox PalletTown_PlayersHouse_1F_Text_TheReply
+	call EventScript_RestorePrevTextColor
+	release   @ the card is the whole visit; her own lines wait for the next
+	end
+PalletTown_PlayersHouse_1F_EventScript_MomLetterReplyNone::
 	return

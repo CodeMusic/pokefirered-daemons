@@ -112,3 +112,13 @@ PalletTown_PlayersHouse_1F_Text_DavidsNote::
     .string "“Taking the ferries out to the\n"
     .string "islands this season. Back when\l"
     .string "the schedule says. -D.”$"
+
+@ T-494, DRAFT wording, awaiting the user's.
+PalletTown_PlayersHouse_1F_Text_MomSomethingCame::
+    .string "Oh, {PLAYER}! Something came for\n"
+    .string "you. It has a ship's stamp on it.$"
+
+PalletTown_PlayersHouse_1F_Text_TheReply::
+    .string "A card. One line, in a hand\n"
+    .string "{PLAYER} doesn't know:\p"
+    .string "IT ARRIVED. THANK YOU.$"

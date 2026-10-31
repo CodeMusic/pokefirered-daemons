@@ -49,12 +49,16 @@ ViridianCity_School_5F_Text_Pruning::
     .string "Growing up is losing most of them,\n"
     .string "on purpose.$"
 
+@ T-495 (DRAFT, the user 2026-10-30): its last three lines -- not hard, only unfamiliar.
 ViridianCity_School_5F_Text_Teacher::
     .string "LEARNING.\p"
     .string "Everything you have read in this\n"
     .string "building changed something small\l"
     .string "in your head.\p"
-    .string "This floor is about what.$"
+    .string "This floor is about what.\p"
+    .string "And nobody on this floor says hard.\n"
+    .string "It isn't hard. It's unfamiliar.\p"
+    .string "Do it twice, and it's less so.$"
 
 ViridianCity_School_5F_Text_Everywhere::
     .string "I learned about cells that fire\n"

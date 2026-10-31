@@ -84,6 +84,19 @@ Nexus_Text_Phoenix::
     .string "Its cry rings out, and the shadows\n"
     .string "in the paint come clear!$"
 
+Nexus_Text_Easel::
+    .string "A painting on an easel. A meadow at\n"
+    .string "night, a lone tree, a white moon.$"
+
+Nexus_Text_EaselTwin::
+    .string "The S.S. ANNE's painting, the other\n"
+    .string "way round, like a mirror.\p"
+    .string "{PLAYER} opened the NOTEBOOK beside\n"
+    .string "it. The letters held still.$"
+
+Nexus_Text_EaselWords::
+    .string "HEY, YOU! LOOK AGAIN.$"
+
 Nexus_Text_Guardian0::
     .string "“Remember what you have learned!”$"
 

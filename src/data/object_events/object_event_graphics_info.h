@@ -4651,3 +4651,43 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_OsricHatter = {
     .images = sPicTable_OsricHatter,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
+
+// T-496: the lioness, met four times before the ship (DAEMONS tools/genlioness.py), npc_blue
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Lioness = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_BLUE,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = PALSLOT_NPC_1,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gObjectEventBaseOam_16x32,
+    .subspriteTables = gObjectEventSpriteOamTables_16x32,
+    .anims = sAnimTable_Standard,
+    .images = sPicTable_Lioness,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+// T-493: the pair of paintings on their easel (DAEMONS tools/genlioness.py), npc_pink; faces west on the S.S. ANNE and east in THE NEXUS, which the engine draws mirrored
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Easel = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_PINK,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = PALSLOT_NPC_2,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gObjectEventBaseOam_16x32,
+    .subspriteTables = gObjectEventSpriteOamTables_16x32,
+    .anims = sAnimTable_Standard,
+    .images = sPicTable_Easel,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};

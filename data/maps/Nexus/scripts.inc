@@ -745,6 +745,24 @@ Nexus_EventScript_Stay::
 	releaseall
 	end
 
+@ T-493 (DRAFT): the twin of the S.S. ANNE's painting, facing east, so the engine draws it mirrored. With the
+@ painting's scrambled words in the NOTEBOOK, standing before it files the page that reads them.
+Nexus_EventScript_Easel::
+	lockall
+	msgbox Nexus_Text_Easel
+	goto_if_set FLAG_NOTEBOOK_LOOSE_PAINTING_READ, Nexus_EventScript_EaselWords
+	goto_if_unset FLAG_NOTEBOOK_LOOSE_PAINTING, Nexus_EventScript_EaselDone
+	goto_if_unset FLAG_GOT_NOTEBOOK, Nexus_EventScript_EaselDone
+	msgbox Nexus_Text_EaselTwin
+	clearflag FLAG_NOTEBOOK_LOOSE_PAINTING
+	setflag FLAG_NOTEBOOK_LOOSE_PAINTING_READ
+	playse SE_SELECT
+Nexus_EventScript_EaselWords::
+	msgbox Nexus_Text_EaselWords
+Nexus_EventScript_EaselDone::
+	releaseall
+	end
+
 @ The one Christmas tree: the way home, to the S.S. ANNE's pier.
 Nexus_EventScript_ChristmasTree::
 	lockall

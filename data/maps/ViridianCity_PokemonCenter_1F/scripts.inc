@@ -48,3 +48,8 @@ ViridianCity_PokemonCenter_1F_EventScript_MynahSignOff::
 	msgbox ViridianCity_PokemonCenter_1F_Text_MynahSignOff
 	release
 	end
+
+@ T-496 (DRAFT): the lioness, the first of four meetings -- the helper beside the NURSE. Gone once the first MARK is held.
+ViridianCity_PokemonCenter_1F_EventScript_Lioness::
+	msgbox ViridianCity_PokemonCenter_1F_Text_Lioness, MSGBOX_NPC
+	end

@@ -33,3 +33,8 @@ CeruleanCity_PokemonCenter_1F_EventScript_Youngster::
 CeruleanCity_PokemonCenter_1F_EventScript_Lass::
 	msgbox CeruleanCity_PokemonCenter_1F_Text_TryTradingUpstairs, MSGBOX_NPC
 	end
+
+@ T-496 (DRAFT): the lioness, the second meeting -- the center is hers to keep now. Gone once the S.S. TICKET is held.
+CeruleanCity_PokemonCenter_1F_EventScript_Lioness::
+	msgbox CeruleanCity_PokemonCenter_1F_Text_Lioness, MSGBOX_NPC
+	end

@@ -107,7 +107,7 @@
 #define OBJ_EVENT_GFX_OLD_AMBER 101
 #define OBJ_EVENT_GFX_GYM_SIGN 102
 #define OBJ_EVENT_GFX_SIGN 103
-#define OBJ_EVENT_GFX_FREE_104 104 // T-461 FREE: was TRAINER_TIPS, which no map ever placed
+#define OBJ_EVENT_GFX_LIONESS 104 // T-461: took FREE id 104
 #define OBJ_EVENT_GFX_CLIPBOARD 105
 #define OBJ_EVENT_GFX_METEORITE 106
 #define OBJ_EVENT_GFX_LAPRAS_DOLL 107
@@ -143,7 +143,7 @@
 #define OBJ_EVENT_GFX_MOLTRES 137
 #define OBJ_EVENT_GFX_ARTICUNO 138
 #define OBJ_EVENT_GFX_MEWTWO 139
-#define OBJ_EVENT_GFX_FREE_140 140 // T-461 FREE: was MEW, which no map ever placed
+#define OBJ_EVENT_GFX_EASEL 140 // T-461: took FREE id 140
 #define OBJ_EVENT_GFX_ENTEI 141
 #define OBJ_EVENT_GFX_SUICUNE 142
 #define OBJ_EVENT_GFX_RAIKOU 143
@@ -352,7 +352,7 @@
 //  Not free, though nothing places them: 14-15 (Ruby/Sapphire link partners), 38 (TRAINER TOWER), 102 (FAME CHECKER),
 //  148-149 (PROTEUS's two shapes, daemons_cast.c), 150 (DEOXYS_N: tools/gbaowslots.py draws PROTEUS's object into it).
 //
-//  FREE: 104 140
+//  FREE: none left -- read the numbers above before adding one
 
 #define OBJ_EVENT_GFX_WIDE_START  256
 #define OBJ_EVENT_GFX_ID_LIMIT    4096

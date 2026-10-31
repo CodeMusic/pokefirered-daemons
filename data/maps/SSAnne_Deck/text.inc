@@ -33,3 +33,29 @@ SSAnne_Deck_Text_TrevorPostBattle::
     .string "My Pa said there are 100 kinds of\n"
     .string "DAEMONS. I think there are more.$"
 
+@ T-494 and T-496, DRAFT wording, awaiting the user's.
+SSAnne_Deck_Text_LionessGame::
+    .string "Oh, it's you!\p"
+    .string "I made a game. Two players, a\n"
+    .string "colour each, and a ball.\p"
+    .string "It keeps both scores. Nobody\n"
+    .string "gave it to me. I built it.$"
+
+SSAnne_Deck_Text_LionessAsk::
+    .string "Would you post this for me?\n"
+    .string "The mail goes ashore before we sail.$"
+
+SSAnne_Deck_Text_LionessPosted::
+    .string "{PLAYER} dropped the letter in the\n"
+    .string "ship's post.$"
+
+SSAnne_Deck_Text_LionessThanks::
+    .string "Thank you.\p"
+    .string "I don't need an answer. Only to\n"
+    .string "know it got there.$"
+
+SSAnne_Deck_Text_LionessKeep::
+    .string "That's all right. It'll keep.$"
+
+SSAnne_Deck_Text_LionessAfter::
+    .string "It's better with two.$"

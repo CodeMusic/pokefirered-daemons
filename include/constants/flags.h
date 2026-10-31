@@ -1934,6 +1934,11 @@
                                                                                 //   glitched (once a save; book_reader.c)
 #define FLAG_AL_CRACKED                       (DAEMONS_FLAGS_START + 0x3F6)   // T-487: AL has said his one crack, the first time he
                                                                                 //   speaks after the GLOBAL INDEX is held (once)
+#define FLAG_NOTEBOOK_LOOSE_PAINTING          (DAEMONS_FLAGS_START + 0x3F7)   // T-493: the S.S. ANNE's painting looked at; its
+                                                                                //   words, scrambled, filed in LOOSE PAGES
+#define FLAG_NOTEBOOK_LOOSE_PAINTING_READ     (DAEMONS_FLAGS_START + 0x3F8)   // T-493: its twin seen in THE NEXUS; the page reads
+#define FLAG_LIONESS_LETTER_SENT              (DAEMONS_FLAGS_START + 0x3F9)   // T-494: the lioness's letter taken to the ship's post
+#define FLAG_LIONESS_REPLY_GIVEN              (DAEMONS_FLAGS_START + 0x3FA)   // T-494: MOM has handed over the reply (once)
 
 //  BEGIN gbaglobalindex -- T-334: each fixed encounter of the GLOBAL INDEX, once gone (removeobject sets it). The beasts'
 //  and the edition daemons' are also set on every map load while they may not stand (event_data.c,

@@ -178,6 +178,8 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_StaffBrazen;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_StaffQuicksilver;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_StaffCallow;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BenchmarkGuide;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Easel;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Lioness;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_OsricHatter;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_CueBall;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PsychicM;
@@ -349,7 +351,7 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_OLD_AMBER]                = &gObjectEventGraphicsInfo_OldAmber,
     [OBJ_EVENT_GFX_GYM_SIGN]                 = &gObjectEventGraphicsInfo_GymSign,
     [OBJ_EVENT_GFX_SIGN]                     = &gObjectEventGraphicsInfo_Sign,
-    [OBJ_EVENT_GFX_FREE_104]                 = &gObjectEventGraphicsInfo_TrainerTips,
+    [OBJ_EVENT_GFX_LIONESS]                    = &gObjectEventGraphicsInfo_Lioness,
     [OBJ_EVENT_GFX_CLIPBOARD]                = &gObjectEventGraphicsInfo_Clipboard,
     [OBJ_EVENT_GFX_METEORITE]                = &gObjectEventGraphicsInfo_Meteorite,
     [OBJ_EVENT_GFX_LAPRAS_DOLL]              = &gObjectEventGraphicsInfo_LaprasDoll,
@@ -385,7 +387,7 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_MOLTRES]                  = &gObjectEventGraphicsInfo_Moltres,
     [OBJ_EVENT_GFX_ARTICUNO]                 = &gObjectEventGraphicsInfo_Articuno,
     [OBJ_EVENT_GFX_MEWTWO]                   = &gObjectEventGraphicsInfo_Mewtwo,
-    [OBJ_EVENT_GFX_FREE_140]                 = &gObjectEventGraphicsInfo_Mew,
+    [OBJ_EVENT_GFX_EASEL]                      = &gObjectEventGraphicsInfo_Easel,
     [OBJ_EVENT_GFX_ENTEI]                    = &gObjectEventGraphicsInfo_Entei,
     [OBJ_EVENT_GFX_SUICUNE]                  = &gObjectEventGraphicsInfo_Suicune,
     [OBJ_EVENT_GFX_RAIKOU]                   = &gObjectEventGraphicsInfo_Raikou,
