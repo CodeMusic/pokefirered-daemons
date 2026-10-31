@@ -600,3 +600,6 @@ $(OBJEVENTGFXDIR)/people/lioness.4bpp: %.4bpp: %.png
 
 $(OBJEVENTGFXDIR)/people/easel.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OBJEVENTGFXDIR)/people/lioness_ball.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4

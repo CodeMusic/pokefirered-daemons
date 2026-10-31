@@ -358,7 +358,9 @@
 #define OBJ_EVENT_GFX_ID_LIMIT    4096
 #define OBJ_EVENT_GFX_QL_STAND_IN OBJ_EVENT_GFX_LITTLE_BOY   // the recap's stand-in for a wide id with no row
 
-#define NUM_OBJ_EVENT_GFX     240
+#define OBJ_EVENT_GFX_LIONESS_BALL 256
+
+#define NUM_OBJ_EVENT_GFX     257
 
 // These are dynamic object gfx ids.
 // They correspond with the values of the VAR_OBJ_GFX_ID_X vars.

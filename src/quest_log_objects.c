@@ -14,6 +14,7 @@
 static const u8 sQuestLogGfxStandIns[NUM_OBJ_EVENT_GFX - OBJ_EVENT_GFX_WIDE_START] =
 {
     // [OBJ_EVENT_GFX_<NEW> - OBJ_EVENT_GFX_WIDE_START] = OBJ_EVENT_GFX_<a like-shaped narrow id>,
+    [OBJ_EVENT_GFX_LIONESS_BALL - OBJ_EVENT_GFX_WIDE_START] = OBJ_EVENT_GFX_LIONESS,
 };
 #endif
 

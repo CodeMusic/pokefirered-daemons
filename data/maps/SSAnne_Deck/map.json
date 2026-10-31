@@ -87,7 +87,7 @@
     },
     {
       "type": "object",
-      "graphics_id": "OBJ_EVENT_GFX_LIONESS",
+      "graphics_id": "OBJ_EVENT_GFX_LIONESS_BALL",
       "x": 8,
       "y": 12,
       "elevation": 3,

@@ -940,6 +940,18 @@ static const struct SpriteFrameImage sPicTable_BenchmarkGuide[] = {
     overworld_frame(gObjectEventPic_BenchmarkGuide, 2, 4, 8),
 };
 
+static const struct SpriteFrameImage sPicTable_LionessBall[] = {
+    overworld_frame(gObjectEventPic_LionessBall, 2, 4, 0),
+    overworld_frame(gObjectEventPic_LionessBall, 2, 4, 1),
+    overworld_frame(gObjectEventPic_LionessBall, 2, 4, 2),
+    overworld_frame(gObjectEventPic_LionessBall, 2, 4, 3),
+    overworld_frame(gObjectEventPic_LionessBall, 2, 4, 4),
+    overworld_frame(gObjectEventPic_LionessBall, 2, 4, 5),
+    overworld_frame(gObjectEventPic_LionessBall, 2, 4, 6),
+    overworld_frame(gObjectEventPic_LionessBall, 2, 4, 7),
+    overworld_frame(gObjectEventPic_LionessBall, 2, 4, 8),
+};
+
 static const struct SpriteFrameImage sPicTable_Easel[] = {
     overworld_frame(gObjectEventPic_Easel, 2, 4, 0),
     overworld_frame(gObjectEventPic_Easel, 2, 4, 1),

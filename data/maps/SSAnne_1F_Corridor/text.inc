@@ -12,13 +12,17 @@ SSAnne_1F_Corridor_Text_PassengersAreRestless::
     .string "You might be challenged by the\n"
     .string "more bored ones!$"
 
-@ T-496 and T-493, DRAFT wording, awaiting the user's.
+@ T-496 and T-493, DRAFT wording, awaiting the user's. Her last three lines pass on CALLOW SCHOOL 5F's (T-495; the
+@ user, 2026-10-31: at the gangway).
 SSAnne_1F_Corridor_Text_Lioness::
     .string "Ticket? …Thank you.\p"
     .string "Everything that comes aboard, I\n"
     .string "check first.\p"
     .string "I find the mistakes nobody else\n"
-    .string "looks for. I'm good at it.$"
+    .string "looks for. I'm good at it.\p"
+    .string "Somebody told me once: it isn't\n"
+    .string "hard. It's unfamiliar.\p"
+    .string "They were right.$"
 
 SSAnne_1F_Corridor_Text_Painting::
     .string "A painting on an easel. A meadow at\n"

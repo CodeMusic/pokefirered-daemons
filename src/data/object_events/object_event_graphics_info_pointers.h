@@ -178,6 +178,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_StaffBrazen;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_StaffQuicksilver;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_StaffCallow;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BenchmarkGuide;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_LionessBall;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Easel;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Lioness;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_OsricHatter;
@@ -486,4 +487,5 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_DAEMON_SLOWBRO_S3] = &gObjectEventGraphicsInfo_Daemon_SlowbroS3,
     [OBJ_EVENT_GFX_DAEMON_SLOWPOKE_S3] = &gObjectEventGraphicsInfo_Daemon_SlowpokeS3,
     [OBJ_EVENT_GFX_DAEMON_SNORLAX_SSPECIAL] = &gObjectEventGraphicsInfo_Daemon_SnorlaxSspecial,
+    [OBJ_EVENT_GFX_LIONESS_BALL]               = &gObjectEventGraphicsInfo_LionessBall,
 };
