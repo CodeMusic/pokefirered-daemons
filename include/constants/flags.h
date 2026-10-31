@@ -1941,6 +1941,8 @@
 #define FLAG_LIONESS_REPLY_GIVEN              (DAEMONS_FLAGS_START + 0x3FA)   // T-494: MOM has handed over the reply (once)
 #define FLAG_CRYSTAL_SAID_FURTHER             (DAEMONS_FLAGS_START + 0x3FB)   // T-502: CRYSTAL's last words in the lab, once the
                                                                                 //   eighth MARK is held (once)
+#define FLAG_MOM_SAID_DAVID_CALLED            (DAEMONS_FLAGS_START + 0x3FC)   // T-504: MOM has said DAVID called, once the ship
+                                                                                //   has sailed (once)
 
 //  BEGIN gbaglobalindex -- T-334: each fixed encounter of the GLOBAL INDEX, once gone (removeobject sets it). The beasts'
 //  and the edition daemons' are also set on every map load while they may not stand (event_data.c,

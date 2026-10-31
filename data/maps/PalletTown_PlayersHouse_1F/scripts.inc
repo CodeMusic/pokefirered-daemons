@@ -104,10 +104,24 @@ PalletTown_PlayersHouse_1F_EventScript_MomHeal::
 	call_if_set FLAG_LIONESS_LETTER_SENT, PalletTown_PlayersHouse_1F_EventScript_MomLetterReply   @ T-494
 @  T-326 (the user, 2026-10-01): home after the eighth MARK, she asks how it looks now; holding the ticket, the ship;
 @  the first time home after the lab, her own years at sea -- then the old line.
+@  T-504 (the user, 2026-10-31): the ship line only while the ship is in port; once it has sailed, the first visit she
+@  says DAVID called (once), then the rest as before.
+	goto_if_ge VAR_MAP_SCENE_VERMILION_CITY, 2, PalletTown_PlayersHouse_1F_EventScript_MomDavidCalled
+PalletTown_PlayersHouse_1F_EventScript_MomAsBefore::
 	goto_if_set FLAG_BADGE08_GET, PalletTown_PlayersHouse_1F_EventScript_MomHowDoesItLook
+	goto_if_ge VAR_MAP_SCENE_VERMILION_CITY, 2, PalletTown_PlayersHouse_1F_EventScript_MomShipSailed
 	goto_if_set FLAG_GOT_SS_TICKET, PalletTown_PlayersHouse_1F_EventScript_MomTheShip
+PalletTown_PlayersHouse_1F_EventScript_MomShipSailed::
 	goto_if_unset FLAG_MOM_SAW_YOU_OFF, PalletTown_PlayersHouse_1F_EventScript_MomYearsAtSea
 	msgbox PalletTown_PlayersHouse_1F_Text_LookingGreatTakeCare
+	release
+	end
+
+@  T-504, DRAFT: DAVID asked the player to call MOM for him (SSAnne_CaptainsOffice); he called her himself.
+PalletTown_PlayersHouse_1F_EventScript_MomDavidCalled::
+	goto_if_set FLAG_MOM_SAID_DAVID_CALLED, PalletTown_PlayersHouse_1F_EventScript_MomAsBefore
+	setflag FLAG_MOM_SAID_DAVID_CALLED
+	msgbox PalletTown_PlayersHouse_1F_Text_MomDavidCalled
 	release
 	end
 

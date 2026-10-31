@@ -98,6 +98,13 @@ PalletTown_PlayersHouse_1F_Text_MomTheShip::
 PalletTown_PlayersHouse_1F_Text_UnderTheShip::
     .string "{COLOR PURPLE}{SHADOW LIGHT_GRAY}Come back.$"
 
+@  T-504, DRAFT: once, the first visit home after the ship has sailed.
+PalletTown_PlayersHouse_1F_Text_MomDavidCalled::
+    .string "MOM: Your brother called.\n"
+    .string "From the ship.\p"
+    .string "He never calls. I did not say so.\p"
+    .string "…He sounded well.$"
+
 PalletTown_PlayersHouse_1F_Text_DadTheInitials::
     .string "DAD: The post still comes for\n"
     .string "DOCTOR.\p"
