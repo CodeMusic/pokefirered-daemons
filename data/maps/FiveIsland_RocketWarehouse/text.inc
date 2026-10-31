@@ -30,11 +30,14 @@ FiveIsland_RocketWarehouse_Text_Grunt1PostBattle::
     .string "We can give you a great price.\n"
     .string "Sell us your DAEMON!$"
 
+@  T-505, DRAFT (the user, 2026-10-31): 8.2a's remnants, who do not know what happened to him. He stays where he is.
 FiveIsland_RocketWarehouse_Text_Grunt3Intro::
     .string "I got word about you from the\n"
     .string "others.\p"
-    .string "But there's no way a kid like you'd\n"
-    .string "know our BOSS SCORN!$"
+    .string "You want the BOSS? He's back\n"
+    .string "there. He doesn't give orders.\p"
+    .string "He checks something. None of us\n"
+    .string "know what.$"
 
 FiveIsland_RocketWarehouse_Text_Grunt3Defeat::
     .string "Don't…you…dare…laugh…$"
@@ -43,11 +46,14 @@ FiveIsland_RocketWarehouse_Text_Grunt3PostBattle::
     .string "Don't mess in the doings of adults,\n"
     .string "you jumped-up pip-squeak!$"
 
+@  T-505, DRAFT.
 FiveIsland_RocketWarehouse_Text_Admin1Intro::
     .string "I don't know or care if what I'm\n"
     .string "doing is right or wrong…\p"
-    .string "I just put my faith in SCORN and\n"
-    .string "do as I am told.$"
+    .string "I did as I was told. Then the\n"
+    .string "telling stopped.\p"
+    .string "He's in the back. He hasn't said\n"
+    .string "what we do now.$"
 
 FiveIsland_RocketWarehouse_Text_Admin1Defeat::
     .string "I…\n"
@@ -68,33 +74,34 @@ FiveIsland_RocketWarehouse_Text_MadeItSoYouCanComeBackThrough::
     .string "You'd better steel yourself for one\n"
     .string "harsh challenge.$"
 
+@  T-505, DRAFT.
 FiveIsland_RocketWarehouse_Text_Admin2Intro::
     .string "That's quite enough of you playing\n"
     .string "the hero, kid.\p"
-    .string "Spreading stories about how he\n"
-    .string "is different now…\p"
-    .string "It's such an obvious attempt to\n"
-    .string "cause confusion in our ranks.\p"
-    .string "Fortunately, we're not so ignorant\n"
-    .string "to fall for the lies of a child!\p"
+    .string "Look at him back there. Not one\n"
+    .string "order since he came in.\p"
+    .string "Just checking something, under\n"
+    .string "his breath. Over and over.\p"
     .string "And now, I'll show you how scary an\n"
     .string "angry adult can be!$"
 
+@  T-505, DRAFT (its last two lines).
 FiveIsland_RocketWarehouse_Text_Admin2Defeat::
     .string "Urgh… You were too strong…\p"
     .string "… Th-that's SCORN's MARK!\p"
-    .string "So you have met him. Recently.\p"
-    .string "…Is it true, what they say?\n"
-    .string "That he stopped in the middle\l"
-    .string "of a sentence?$"
+    .string "So you met him. Before he was\n"
+    .string "like this.\p"
+    .string "…What happened to him?\n"
+    .string "He won't say.$"
 
+@  T-505, DRAFT.
 FiveIsland_RocketWarehouse_Text_Admin2PostBattle::
     .string "We will abandon this WAREHOUSE…\p"
-    .string "But don't think this is over. I won't\n"
-    .string "let this be the end.\p"
-    .string "I will find SCORN. And I will\n"
-    .string "resurrect TEAM CORPUS! I will…\p"
-    .string "Until then, farewell!$"
+    .string "He can stay. He won't notice\n"
+    .string "we've gone.\p"
+    .string "I'll wait for him to finish\n"
+    .string "checking. Then TEAM CORPUS…\p"
+    .string "…Until then, farewell!$"
 
 @  T-324, DRAFT.
 FiveIsland_RocketWarehouse_Text_ReportWithGraphsAndText::
