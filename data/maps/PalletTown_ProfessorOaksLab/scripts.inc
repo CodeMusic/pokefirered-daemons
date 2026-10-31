@@ -591,6 +591,8 @@ PalletTown_ProfessorOaksLab_EventScript_ProfOak::
 	setvar VAR_0x8004, PLAY_SONG_MEND   @ T-417 P4: once MEND is held, she hums FORGIVENESS OFFERED
 	call EventScript_Play_Hear
 PalletTown_ProfessorOaksLab_EventScript_ProfOakAsBefore::
+	goto_if_set FLAG_BADGE08_GET, PalletTown_ProfessorOaksLab_EventScript_TryFurther   @ T-502
+PalletTown_ProfessorOaksLab_EventScript_ProfOakAsBeforeRest::
 	goto_if_set SHOWED_OAK_COMPLETE_DEX, PalletTown_ProfessorOaksLab_EventScript_OakJustShownCompleteDex
 	goto_if_eq VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 9, PalletTown_ProfessorOaksLab_EventScript_RatePokedex
 	goto_if_eq VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 8, PalletTown_ProfessorOaksLab_EventScript_MonsAroundWorldWait
@@ -603,6 +605,24 @@ PalletTown_ProfessorOaksLab_EventScript_ProfOakAsBefore::
 	msgbox PalletTown_ProfessorOaksLab_Text_OakWhichOneWillYouChoose
 	release
 	end
+
+@  T-502 (the user, 2026-10-31, by multiple choice): the eighth MARK held and the REVIEW BOARD not yet sat, the first
+@  time she is spoken to she says this and nothing else -- the last thing she says before she is gone (4.34), so her
+@  note's "Take it further than I did." echoes it. Once. Moved here from PALLET's rating scene, which never plays.
+PalletTown_ProfessorOaksLab_EventScript_TryFurther::
+	goto_if_set FLAG_SYS_GAME_CLEAR, PalletTown_ProfessorOaksLab_EventScript_ProfOakAsBeforeRest
+	goto_if_set FLAG_CRYSTAL_SAID_FURTHER, PalletTown_ProfessorOaksLab_EventScript_ProfOakAsBeforeRest
+	setflag FLAG_CRYSTAL_SAID_FURTHER
+	msgbox PalletTown_ProfessorOaksLab_Text_FurtherThanIDid
+	call_if_set FLAG_GOT_SUBTLE_LAYER, PalletTown_ProfessorOaksLab_EventScript_UnderFurther
+	release
+	end
+
+@  T-459 D: words under words -- once THE SUBTLE LAYER is held, what is meant under what is said, in the book's purple.
+@  The user chose the line, 2026-10-28.
+PalletTown_ProfessorOaksLab_EventScript_UnderFurther::
+	msgbox PalletTown_ProfessorOaksLab_Text_UnderFurther
+	return
 
 @  8.2a: "She reads it. That is the last scene. What is in it is not written
 @  here and may never need to be."

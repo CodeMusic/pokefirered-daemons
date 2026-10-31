@@ -53,17 +53,6 @@ PalletTown_Text_CaughtXImpressiveFollowMe::
     .string "Come through. I want to ask you\n"
     .string "something.$"
 
-PalletTown_Text_OakYouEnjoyingTraveling::
-    .string "CRYSTAL: {PLAYER}.\n"
-    .string "Still moving, I see.\p"
-    .string "You will go further than I did.\p"
-    .string "I mean that kindly.$"
-
-@  T-459 D: words under words -- once THE SUBTLE LAYER is held, what is meant under what is said, in the book's purple.
-@  The user chose the line, 2026-10-28.
-PalletTown_Text_UnderFurther::
-    .string "{COLOR PURPLE}{SHADOW LIGHT_GRAY}I cannot always be there.$"
-
 
 @  T-439, DRAFT: the PTARMIGAN. The winter line is not in the plan's lines (it said only "says so").
 PalletTown_Text_Ptarmigan::

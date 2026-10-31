@@ -118,6 +118,18 @@ PalletTown_ProfessorOaksLab_Text_ReceivedMonFromOak::
     .string "{PLAYER} received the {STR_VAR_1} from\n"
     .string "CRYSTAL CLEAR!$"
 
+@  T-502: moved from PALLET's rating scene (PalletTown_Text_OakYouEnjoyingTraveling), which never plays. DRAFT.
+PalletTown_ProfessorOaksLab_Text_FurtherThanIDid::
+    .string "CRYSTAL: {PLAYER}.\n"
+    .string "Still moving, I see.\p"
+    .string "You will go further than I did.\p"
+    .string "I mean that kindly.$"
+
+@  T-459 D: words under words -- once THE SUBTLE LAYER is held, what is meant under what is said, in the book's purple.
+@  The user chose the line, 2026-10-28.
+PalletTown_ProfessorOaksLab_Text_UnderFurther::
+    .string "{COLOR PURPLE}{SHADOW LIGHT_GRAY}I cannot always be there.$"
+
 PalletTown_ProfessorOaksLab_Text_OakCanReachNextTownWithMon::
     .string "CRYSTAL: If something unbound\n"
     .string "announces itself, yours will answer.\p"

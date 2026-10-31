@@ -1939,6 +1939,8 @@
 #define FLAG_NOTEBOOK_LOOSE_PAINTING_READ     (DAEMONS_FLAGS_START + 0x3F8)   // T-493: its twin seen in THE NEXUS; the page reads
 #define FLAG_LIONESS_LETTER_SENT              (DAEMONS_FLAGS_START + 0x3F9)   // T-494: the lioness's letter taken to the ship's post
 #define FLAG_LIONESS_REPLY_GIVEN              (DAEMONS_FLAGS_START + 0x3FA)   // T-494: MOM has handed over the reply (once)
+#define FLAG_CRYSTAL_SAID_FURTHER             (DAEMONS_FLAGS_START + 0x3FB)   // T-502: CRYSTAL's last words in the lab, once the
+                                                                                //   eighth MARK is held (once)
 
 //  BEGIN gbaglobalindex -- T-334: each fixed encounter of the GLOBAL INDEX, once gone (removeobject sets it). The beasts'
 //  and the edition daemons' are also set on every map load while they may not stand (event_data.c,
