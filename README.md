@@ -22,7 +22,7 @@ daemons and the seventeen types, the BENCHMARKS, the INDEX, the NOTEBOOK, PLAY a
 
 **No ROM is distributed.** Releases are BPS patches for a cartridge you own,
 published on the [DAEMONS releases page][releases] (latest: **v11.333.1**,
-2026-10-29), four to a release: CONTENT for *FireRed* 1.0 and Rev 1, CONTEXT
+2026-10-31), four to a release: CONTENT for *FireRed* 1.0 and Rev 1, CONTEXT
 for *LeafGreen* 1.0 and Rev 1. The game also plays in a browser on
 [**daemons-playground**][playground] (a private network only), and in the
 companion's [one app][oneapp] on an iPhone or iPad, which patches the player's
