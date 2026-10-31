@@ -1,6 +1,6 @@
 @  T-485 (the user, 2026-10-29; bible 4.39): OSRIC HATTER's house, the leaning top hat on QUICKSILVER's south sand.
 @  Every clock in it is stopped at half past three; a long tea table is laid for many, and only he sits at it, talking
-@  to the empty chairs. Anyone may visit. Every word is DRAFT (DAEMONS gfx/drafts/t485/lines.md, approved as drafted).
+@  to the empty chairs. Anyone may visit. Every word approved by the user 2026-10-31 (DAEMONS gfx/drafts/t485/lines.md).
 @
 @    - a visit's riddle, A1 -> A4 and round again: VAR_OSRIC_RIDDLE is the next one, moved on at the visit's first
 @      talk; talking again in the same visit repeats it (VAR_TEMP_2 holds this visit's, + 1);
