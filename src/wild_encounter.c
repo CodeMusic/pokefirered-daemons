@@ -48,6 +48,7 @@ static void AddToWildEncounterRateBuff(u8 encouterRate);
 #include "daemons_time.h"
 #include "daemons_holidays.h"
 #include "daemons_weather.h"   // T-415 P2: DAEMONS_SKY_*, for the weather rows
+#include "daemons_spellbook.h"  // T-483 (5): THE PULL and THE GREAT HAND
 #include "data/wild_shifts.h"
 
 static const u8 sUnownLetterSlots[][LAND_WILD_COUNT] = {
@@ -372,6 +373,7 @@ static bool8 DoWildEncounterRateTest(u32 encounterRate, bool8 ignoreAbility)
     encounterRate += sWildEncounterData.encounterRateBuff * 16 / 200;
     ApplyFluteEncounterRateMod(&encounterRate);
     ApplyCleanseTagEncounterRateMod(&encounterRate);
+    encounterRate = Spellbook_EncounterRate(encounterRate);   // T-483 (5): heavy after THE PULL, lighter carried
     if (!ignoreAbility)
     {
         switch (sWildEncounterData.abilityEffect)

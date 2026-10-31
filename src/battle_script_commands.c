@@ -1288,6 +1288,7 @@ static void Cmd_damagecalc(void)
 
         GET_MOVE_TYPE(gCurrentMove, type);
         gBattleMoveDamage = Three_AdjustDamage(gBattlerAttacker, type, gBattleMoveDamage);   // T-454: a WRITE, or a leak
+        gBattleMoveDamage = Spellbook_PullDamage(gBattlerAttacker, gBattleMoveDamage);       // T-483 (5): THE PULL's calm
         Three_OnHit(gBattlerTarget, gCritMultiplier);
     }
 
@@ -3381,6 +3382,8 @@ static void Cmd_getexp(void)
                         gBattleMoveDamage = (gBattleMoveDamage * 150) / 100;
                     if (Spellbook_FieldOn())    // T-483 (5): won blind, THE FIELD -- a fifth more
                         gBattleMoveDamage = (gBattleMoveDamage * 120) / 100;
+                    if (Spellbook_HandOn())     // T-483 (5): on THE GREAT HAND's road -- a tenth more
+                        gBattleMoveDamage = (gBattleMoveDamage * 110) / 100;
                     if (IsTradedMon(&gPlayerParty[gBattleStruct->expGetterMonId])
                      && !(gBattleTypeFlags & BATTLE_TYPE_POKEDUDE))
                     {

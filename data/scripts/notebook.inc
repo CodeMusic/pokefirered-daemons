@@ -94,6 +94,8 @@ EventScript_Spellbook::
 	goto_if_eq VAR_RESULT, 127, EventScript_SpellbookShut
 	special Spellbook_Cast
 	playse SE_M_MORNING_SUN
+	special Spellbook_Draw
+	waitstate
 	msgbox gStringVar4
 EventScript_SpellbookShut::
 	releaseall

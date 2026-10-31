@@ -12,6 +12,8 @@ void DaemonsDreamLog_Loaded(void);
 bool8 Daemons_TryDreamArrives(void);
 //  T-412: HER DREAMS -- where the attendant's dream for a step led, once the step is done (daemons_dreams.c); NULL till then.
 const u8 *DaemonsDream_Led(u8 step);
+s16 DaemonsDream_NextStep(void);                 // T-483 (5): THE GREAT HAND's road -- the earliest step undone, or -1
+const u8 *DaemonsDream_Road(u8 step);           // ... and its plain dream, the one that names the place
 #if DAEMONS_DEBUG
 void DaemonsDreamLog_DebugDawn(void);
 void DaemonsItsDream_DebugReceive(void);                 // T-462: a SYNC's new dream, faked

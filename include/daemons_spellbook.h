@@ -55,6 +55,12 @@ bool8 Spellbook_PatternReady(void);         // ... and it has come, or will not
 const u8 *Spellbook_PromptText(void);       // THE PATTERN's or THE LENS's line where "What will X do?" stood, or NULL
 bool8 Spellbook_LensMoveText(u16 move, u8 *effect, u8 *hit);   // THE LENS in the routine menu: x2, and 95%
 
+// THE PULL and THE GREAT HAND (part three): the wanderer drawn, the calm, the road and its lightness.
+void Spellbook_Draw(void);                  // special (waitstate), after every cast: THE PULL's step, if it drew one
+u32 Spellbook_EncounterRate(u32 rate);      // wild_encounter.c: heavier after THE PULL, lighter while carried
+s32 Spellbook_PullDamage(u8 attacker, s32 damage);   // Cmd_damagecalc: the calmed foe's first turn (or two), halved
+bool8 Spellbook_HandOn(void);               // the exp: THE GREAT HAND carries this battle, a tenth more
+
 #if DAEMONS_DEBUG
 void Spellbook_DebugAll(bool8 on);          // DEBUG -> GAME EVENTS: every spell known (or none)
 #endif

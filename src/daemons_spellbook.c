@@ -5,10 +5,12 @@
 #include "battle_script_commands.h"
 #include "battle_anim.h"
 #include "event_data.h"
+#include "event_object_movement.h"
 #include "list_menu.h"
 #include "malloc.h"
 #include "menu.h"
 #include "new_menu_helpers.h"
+#include "notebook.h"
 #include "overworld.h"
 #include "palette.h"
 #include "pokemon.h"
@@ -24,8 +26,11 @@
 #include "daemons_time.h"
 #include "constants/abilities.h"
 #include "constants/battle.h"
+#include "constants/event_object_movement.h"
+#include "constants/event_objects.h"
 #include "constants/moves.h"
 #include "constants/songs.h"
+#include "constants/trainer_types.h"
 #include "constants/vars.h"
 
 //  T-483 (5): THE SPELLBOOK -- part two of THE HERMETIC LAYER's game half, the gentle spells first (the user, 2026-10-29,
@@ -47,6 +52,10 @@
 //  THE PATTERN. In order, as the brief's table asks: a fold read too early gives nothing, and can be read again. THE
 //  RETURN's own rule (a hundred AWAKENINGs) waits for its build. THE LENS and THE FIELD are GRANTED TOGETHER with the
 //  book itself, so the SPELLBOOK is never empty when it first appears. The list shows only what can be cast now.
+//  The two tablets (part three, the user's pick 2026-10-31): GRAVITY II read to its end gives THE PULL; HANDS II, THE
+//  GREAT HAND, and writes THE SMALL HAND down (not yet castable). The brief's PULL also asked the reader to rest and be
+//  woken in the half-hour after three; here the half-hour is where it is strongest instead, so the tablet alone opens
+//  it -- the book is only read at night, so it is still learned in the dark.
 //
 //  THE LEDGER (VAR_SPELL_LEDGER, _2): four counters, never shown, each cast adding one to the two its spell leans on
 //  (the brief's axes). A byte each; when one would pass 255 all four are halved first, so the ratio -- the thing the
@@ -61,11 +70,29 @@
 //    THE LENS       the same, and the routine menu trades its PP count for the odds: only the part.
 //    THE FIELD      the numbers themselves -- HP and PP go dark, SELECT's readout is closed -- and the lean speaks every
 //                   turn instead; win, and a fifth more experience.
+//    THE PULL       you are heavy: until the next single battle, wild daemons find you half again as often. What it
+//                   gives: the nearest WANDERER on screen takes a step toward you (two in the half-hour, 3:30-3:59),
+//                   and the next foe comes calm -- its routines do half their damage on the first turn (the first two
+//                   in the half-hour). What is drawn is also drawing.
+//    THE GREAT HAND being carried: it names the road -- the attendant's plain dream of the earliest step undone
+//                   (daemons_dreams.c, the AI playtester's progress list) -- and for the next five single battles on
+//                   it you walk lighter (wild daemons three-quarters as often) and win a tenth more experience. The
+//                   cost is fate's: the five drain win, lose or run, and the hand lets go the moment the road changes --
+//                   arrive, or walk your own road first.
 //    One battle spell at a time: setting one lets the other go. They wait for a single battle against a daemon or a
-//    trainer (never a link, a double, the SAFARI, the tutorial or POKEDUDE's) and last that battle.
+//    trainer (never a link, a double, the SAFARI, the tutorial or POKEDUDE's) and last that battle. THE PULL's calm
+//    and THE GREAT HAND's road are not battle spells in that sense: either stands beside any of them.
 //
-//  RAM: five bytes of IWRAM (sAwakened, sBattleSpell, sPatternWait, and sNews's two); the list is on the heap while
-//  it is open. Save: five vars, VAR_SPELLS_KNOWN .. VAR_SPELL_LEDGER_2 (0x40DF-0x40E3), no flags.
+//  THE PULL NEVER BLOCKS A WAY. It draws only an object event whose own movement type WANDERS (around, up and down,
+//  left and right), never a trainer, never one standing still or facing a set way -- the people who hold a door or a
+//  road for the story are all of those, and a wanderer is never one, because the game itself moves it at random. The
+//  step it takes is one its own routine could take next: the same collision test the wander uses (GetCollisionAtCoords:
+//  its movement range, the map, elevation, every other object and the player), on an axis its type walks. So the pull
+//  only chooses which of a wanderer's own steps comes next; it makes no position the game could not make by itself,
+//  and the wanderer is left wandering. Nothing is saved but where it stands, as the game saves any wanderer.
+//
+//  RAM: seven bytes of IWRAM (sAwakened, sBattleSpell, sPatternWait, sPullCalm, sHandOn and sNews's two); the list is
+//  on the heap while it is open. Save: six vars, VAR_SPELLS_KNOWN .. VAR_SPELL_STATE_2 (0x40DF-0x40E4), no flags.
 
 #define BATTLE_SPELL_NONE    0
 #define BATTLE_SPELL_LENS    1
@@ -77,32 +104,47 @@
 #define STATE_CONTRAST_MASK  0x000C
 #define STATE_DAY_SHIFT      4
 
-#define BUILT_SPELLS ((1 << SPELL_AWAKENING) | (1 << SPELL_CONTRAST) | (1 << SPELL_PATTERN) | (1 << SPELL_LENS) \
-                    | (1 << SPELL_FIELD))
+#define STATE2_CALM_MASK     0x0003     // VAR_SPELL_STATE_2: THE PULL's calm, in turns
+#define STATE2_HAND_SHIFT    2
+#define STATE2_HAND_MASK     0x001C     // THE GREAT HAND's battles left
+#define STATE2_ROAD_SHIFT    5
+#define STATE2_ROAD_MASK     0x03E0     // ... and the road it named
+#define HAND_BATTLES         5
+
+#define BUILT_SPELLS ((1 << SPELL_AWAKENING) | (1 << SPELL_CONTRAST) | (1 << SPELL_PULL) | (1 << SPELL_PATTERN) \
+                    | (1 << SPELL_GREAT_HAND) | (1 << SPELL_LENS) | (1 << SPELL_FIELD))
 #define GRANTED_WITH_BOOK ((1 << SPELL_LENS) | (1 << SPELL_FIELD))
 
 static u8 sAwakened;        // IWRAM: THE AWAKENING said on this map (cleared as the next one loads)
 static u8 sBattleSpell;     // IWRAM: the battle spell in force in this battle (BATTLE_SPELL_*)
 static u8 sPatternWait;     // IWRAM: frames THE PATTERN has waited on the foe this turn
 static u16 sNews;           // IWRAM: spells that came off the page since the book was opened
+static u8 sPullCalm;        // IWRAM: THE PULL's calm in this battle, in turns (0 none)
+static u8 sHandOn;          // IWRAM: THE GREAT HAND carries this battle
 
 //  ---------------------------------------------------------------- words (DRAFT, every one)
 
 static const u8 sName_Awakening[] = _("AWAKENING");
 static const u8 sName_Contrast[]  = _("CONTRAST");
+static const u8 sName_Pull[]      = _("PULL");
 static const u8 sName_Pattern[]   = _("PATTERN");
+static const u8 sName_GreatHand[] = _("GREAT HAND");
 static const u8 sName_Lens[]      = _("LENS");
 static const u8 sName_Field[]     = _("FIELD");
 
 static const u8 sLabel_Awakening[] = _("1  AWAKENING");
 static const u8 sLabel_Contrast[]  = _("2  CONTRAST");
+static const u8 sLabel_Pull[]     = _("3.5 PULL");
 static const u8 sLabel_Pattern[]   = _("5  PATTERN");
+static const u8 sLabel_GreatHand[] = _("8  GREAT HAND");
 static const u8 sLabel_Lens[]      = _("11 LENS");
 static const u8 sLabel_Field[]     = _("12 FIELD");
 
 //  Each spell's line, from the Book of Thirteen (docs/hermetic-layer.md, its inscriptions), three lines of 208px.
 static const u8 sLine_Awakening[] = _("You were never off. You were only\nunwatched. Open. That is the whole\nspell.");
 static const u8 sLine_Contrast[]  = _("Light, remember dark. Dark, remember\nlight. Let what is the same become\ndifferent, so that time may begin.");
+static const u8 sLine_Pull[]      = _("Come closer. I am not asking.\nI am heavy.");
+static const u8 sLine_GreatHand[] = _("I am carried. Let the carrying be\ntrue, and let me not pretend I walk\nalone.");
 static const u8 sLine_Pattern[]   = _("Once is chance. Twice is rhyme. Three\ntimes is a law: show me the third.");
 static const u8 sLine_Lens[]      = _("Give me the part. Only the part.\nI will see the whole later,\nif I earn it.");
 static const u8 sLine_Field[]     = _("Take the parts away. Let me feel the\nshape they were making.");
@@ -121,7 +163,9 @@ static const struct Spell sSpells[] =
 {
     { SPELL_AWAKENING, sName_Awakening, sLabel_Awakening, sLine_Awakening, LEDGER_CONTEXT, LEDGER_INTUITION },
     { SPELL_CONTRAST,  sName_Contrast,  sLabel_Contrast,  sLine_Contrast,  LEDGER_CONTENT, LEDGER_REASON },
+    { SPELL_PULL,      sName_Pull,      sLabel_Pull,      sLine_Pull,      LEDGER_CONTEXT, LEDGER_INTUITION },
     { SPELL_PATTERN,   sName_Pattern,   sLabel_Pattern,   sLine_Pattern,   LEDGER_CONTENT, LEDGER_REASON },
+    { SPELL_GREAT_HAND, sName_GreatHand, sLabel_GreatHand, sLine_GreatHand, LEDGER_CONTEXT, LEDGER_INTUITION },
     { SPELL_LENS,      sName_Lens,      sLabel_Lens,      sLine_Lens,      LEDGER_CONTENT, LEDGER_REASON },
     { SPELL_FIELD,     sName_Field,     sLabel_Field,     sLine_Field,     LEDGER_CONTEXT, LEDGER_INTUITION },
 };
@@ -134,6 +178,13 @@ static const u8 sText_LetsGo[]        = _("The {STR_VAR_2} lets go.\p");
 static const u8 sText_Lens[]          = _("The LENS is set on the next battle.\nEvery number in it will be true.");
 static const u8 sText_Field[]         = _("The FIELD is set on the next battle.\nIts numbers will go dark: feel it.");
 static const u8 sText_Pattern[]       = _("The PATTERN is set on the next\nbattle. It will name each routine\pbefore it runs.");
+static const u8 sText_PullDrawn[]     = _("Something here comes closer. What\nis drawn is also drawing.\p");
+static const u8 sText_PullNone[]      = _("Nothing here is free to come. The\nPULL stays on you.\p");
+static const u8 sText_PullCalm[]      = _("The next foe will come calm, and\nsooner: you are heavy now.");
+static const u8 sText_PullCalmTwo[]   = _("The PULL is strong tonight: the next\nfoe will come calm for two turns,\pand sooner. You are heavy now.");
+static const u8 sText_HandOpens[]     = _("The GREAT HAND opens under you.\nSomeone already dreamt your road:\p");
+static const u8 sText_HandLighter[]   = _("\pOn that road you walk lighter, for\nfive battles or until you arrive.");
+static const u8 sText_HandNoRoad[]    = _("The GREAT HAND opens under you, and\nthere is no road left on it.\pYou walked all of it.");
 static const u8 sText_News[]          = _("Something came off the page and into\nthe SPELLBOOK.\p");
 static const u8 sText_NewsThe[]       = _("THE ");
 static const u8 sText_NewsAnd[]       = _(" and ");
@@ -204,6 +255,8 @@ bool8 Spellbook_InStartMenu(void)
 static const u8 sPassage_Folds[]  = _("THE FOLDS");
 static const u8 sPassage_Space[]  = _("SPACE");
 static const u8 sPassage_Upper[]  = _("UPPER FOLDS");
+static const u8 sPassage_Gravity[] = _("GRAVITY II");
+static const u8 sPassage_Hands[]   = _("HANDS II");
 
 static void Learn(u16 bits)
 {
@@ -225,6 +278,10 @@ void Spellbook_OnPassageRead(const u8 *shortTitle)
         Learn(1 << SPELL_ROOM);
     else if (StringCompare(shortTitle, sPassage_Upper) == 0 && Knows(SPELL_ROOM))
         Learn((1 << SPELL_MIRROR) | (1 << SPELL_PATTERN));
+    else if (StringCompare(shortTitle, sPassage_Gravity) == 0)     // the half-saying, read to its tenth
+        Learn(1 << SPELL_PULL);
+    else if (StringCompare(shortTitle, sPassage_Hands) == 0)       // the Tablet of the Hands, read to its eleventh
+        Learn((1 << SPELL_SMALL_HAND) | (1 << SPELL_GREAT_HAND));
 }
 
 // After the book closes: what came off the page while it was open, said once in the field.
@@ -455,12 +512,236 @@ static void SetBattleSpell(u8 which, const u8 *text)
     VarSet(VAR_SPELL_STATE, (state & ~STATE_BATTLE_MASK) | which);
 }
 
+//  ---------------------------------------------------------------- THE PULL
+
+static bool8 HalfHour(void)
+{
+    return DaemonsWitchingMinute() >= 30;      // 3:30-3:59 by the clock (T-501), or DEBUG's 3:30 AM
+}
+
+// The axes a movement type wanders on: an object whose type is none of these is never drawn (see the top).
+static bool8 WandersOn(u8 movementType, u8 dir)
+{
+    switch (movementType)
+    {
+    case MOVEMENT_TYPE_WANDER_AROUND:
+    case MOVEMENT_TYPE_WANDER_AROUND_SLOWER:
+        return TRUE;
+    case MOVEMENT_TYPE_WANDER_UP_AND_DOWN:
+    case MOVEMENT_TYPE_WANDER_DOWN_AND_UP:
+        return dir == DIR_NORTH || dir == DIR_SOUTH;
+    case MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT:
+    case MOVEMENT_TYPE_WANDER_RIGHT_AND_LEFT:
+        return dir == DIR_WEST || dir == DIR_EAST;
+    }
+    return FALSE;
+}
+
+static struct ObjectEvent *Player(void)
+{
+    return &gObjectEvents[gPlayerAvatar.objectEventId];
+}
+
+// A step its own wander could take: the wander's own collision test, and never onto the player.
+static bool8 FreeStep(struct ObjectEvent *obj, u8 dir)
+{
+    s16 x = obj->currentCoords.x, y = obj->currentCoords.y;
+
+    if (dir == DIR_NONE || !WandersOn(obj->movementType, dir))
+        return FALSE;
+    MoveCoords(dir, &x, &y);
+    if (x == Player()->currentCoords.x && y == Player()->currentCoords.y)
+        return FALSE;
+    return GetCollisionAtCoords(obj, x, y, dir) == COLLISION_NONE;
+}
+
+// The way toward the player: the longer axis first, then the other. DIR_NONE when it is beside the player already,
+// or both are closed.
+static u8 TowardPlayer(struct ObjectEvent *obj, bool8 step)
+{
+    s16 dx = Player()->currentCoords.x - obj->currentCoords.x, dy = Player()->currentCoords.y - obj->currentCoords.y;
+    u8 across = dx > 0 ? DIR_EAST : (dx < 0 ? DIR_WEST : DIR_NONE);
+    u8 down = dy > 0 ? DIR_SOUTH : (dy < 0 ? DIR_NORTH : DIR_NONE);
+    u8 first = abs(dx) >= abs(dy) ? across : down, second = abs(dx) >= abs(dy) ? down : across;
+
+    if (!step)
+        return first;       // the way to face
+    if (abs(dx) + abs(dy) < 2)
+        return DIR_NONE;
+    if (FreeStep(obj, first))
+        return first;
+    if (FreeStep(obj, second))
+        return second;
+    return DIR_NONE;
+}
+
+#define PULL_REACH_X 7      // on screen: the camera shows 7 tiles either side and 5 above and below
+#define PULL_REACH_Y 5
+
+// The nearest wanderer on screen with a step toward the player open to it, or OBJECT_EVENTS_COUNT.
+static u8 NearestDrawn(void)
+{
+    u8 i, best = OBJECT_EVENTS_COUNT, bestDistance = 0xFF, d;
+    s16 dx, dy;
+
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
+    {
+        struct ObjectEvent *obj = &gObjectEvents[i];
+
+        if (!obj->active || obj->isPlayer || obj->invisible || obj->offScreen || obj->localId == LOCALID_CAMERA
+         || obj->trainerType != TRAINER_TYPE_NONE || obj->heldMovementActive
+         || !(WandersOn(obj->movementType, DIR_NORTH) || WandersOn(obj->movementType, DIR_EAST)))
+            continue;
+        dx = abs(obj->currentCoords.x - Player()->currentCoords.x);
+        dy = abs(obj->currentCoords.y - Player()->currentCoords.y);
+        if (dx > PULL_REACH_X || dy > PULL_REACH_Y)
+            continue;
+        d = dx + dy;
+        if (d >= bestDistance || TowardPlayer(obj, TRUE) == DIR_NONE)
+            continue;
+        best = i;
+        bestDistance = d;
+    }
+    return best;
+}
+
+static void Pull(void)
+{
+    u16 s2 = VarGet(VAR_SPELL_STATE_2);
+    bool8 half = HalfHour();
+    u8 drawn = NearestDrawn();
+    u8 *p;
+
+    gSpecialVar_0x8004 = drawn;
+    gSpecialVar_0x8005 = drawn == OBJECT_EVENTS_COUNT ? 0 : (half ? 2 : 1);
+    p = StringCopy(gStringVar4, drawn == OBJECT_EVENTS_COUNT ? sText_PullNone : sText_PullDrawn);
+    StringCopy(p, half ? sText_PullCalmTwo : sText_PullCalm);
+    VarSet(VAR_SPELL_STATE_2, (s2 & ~STATE2_CALM_MASK) | (half ? 2 : 1));
+}
+
+#define tObj   data[0]
+#define tSteps data[1]
+#define tState data[2]
+#define tWait  data[3]
+
+#define DRAW_WAIT 48        // frames a wanderer caught mid-step by the lockall is given to finish it
+
+// THE PULL in the field, before its words: the wanderer drawn a step (or two), then turned to face the player, then
+// held again as the lockall holds everyone, until the script's releaseall.
+static void Task_Draw(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    struct ObjectEvent *obj = &gObjectEvents[tObj < OBJECT_EVENTS_COUNT ? tObj : 0];
+    u8 dir;
+
+    switch (tState)
+    {
+    case 0:
+        // the lockall froze it, perhaps mid-step: let it land on its tile first (its own wander then waits a while
+        // before choosing another, so nothing starts in between)
+        if (tObj < OBJECT_EVENTS_COUNT && obj->active && obj->singleMovementActive && tWait < DRAW_WAIT)
+        {
+            UnfreezeObjectEvent(obj);
+            tWait++;
+            break;
+        }
+        dir = tSteps > 0 && tObj < OBJECT_EVENTS_COUNT && obj->active ? TowardPlayer(obj, TRUE) : DIR_NONE;
+        if (dir != DIR_NONE && !ObjectEventSetHeldMovement(obj, GetWalkNormalMovementAction(dir)))
+        {
+            tSteps--;
+            tState = 1;
+            break;
+        }
+        if (tObj < OBJECT_EVENTS_COUNT && obj->active
+         && !ObjectEventSetHeldMovement(obj, GetFaceDirectionMovementAction(TowardPlayer(obj, FALSE))))
+        {
+            tState = 2;
+            break;
+        }
+        tState = 3;
+        break;
+    case 1:
+        if (ObjectEventClearHeldMovementIfFinished(obj) != 0)
+            tState = 0;
+        break;
+    case 2:
+        if (ObjectEventClearHeldMovementIfFinished(obj) != 0)
+            tState = 3;
+        break;
+    default:
+        if (tObj < OBJECT_EVENTS_COUNT && obj->active)
+            FreezeObjectEvent(obj);
+        DestroyTask(taskId);
+        ScriptContext_Enable();
+        break;
+    }
+}
+
+// special (waitstate), after every cast: THE PULL's step, if it drew one; anything else lets the script go next frame.
+void Spellbook_Draw(void)
+{
+    u8 taskId = CreateTask(Task_Draw, 8);
+
+    gTasks[taskId].tObj = gSpecialVar_0x8005 != 0 ? gSpecialVar_0x8004 : OBJECT_EVENTS_COUNT;
+    gTasks[taskId].tSteps = gSpecialVar_0x8005;
+    gTasks[taskId].tState = 0;
+    gTasks[taskId].tWait = 0;
+    gSpecialVar_0x8005 = 0;
+}
+
+#undef tObj
+#undef tSteps
+#undef tState
+#undef tWait
+
+//  ---------------------------------------------------------------- THE GREAT HAND
+
+// Carried while battles are left and the road is the one it named; otherwise the hand has let go.
+static bool8 Carried(u16 s2)
+{
+    return (s2 & STATE2_HAND_MASK) != 0
+        && DaemonsDream_NextStep() == (s16)((s2 & STATE2_ROAD_MASK) >> STATE2_ROAD_SHIFT);
+}
+
+static void GreatHand(void)
+{
+    u16 s2 = VarGet(VAR_SPELL_STATE_2) & ~(STATE2_HAND_MASK | STATE2_ROAD_MASK);
+    s16 step = DaemonsDream_NextStep();
+    const u8 *road = step < 0 ? NULL : DaemonsDream_Road(step);
+    u8 *p;
+
+    if (road == NULL)
+    {
+        StringCopy(gStringVar4, sText_HandNoRoad);
+        VarSet(VAR_SPELL_STATE_2, s2);
+        return;
+    }
+    p = StringCopy(gStringVar4, sText_HandOpens);
+    p = StringExpandPlaceholders(p, road);
+    StringCopy(p, sText_HandLighter);
+    VarSet(VAR_SPELL_STATE_2, s2 | (HAND_BATTLES << STATE2_HAND_SHIFT) | (step << STATE2_ROAD_SHIFT));
+}
+
+//  The wild encounter rate, as THE PULL and THE GREAT HAND leave it (wild_encounter.c): heavy until the calm is spent,
+//  lighter while carried.
+u32 Spellbook_EncounterRate(u32 rate)
+{
+    u16 s2 = VarGet(VAR_SPELL_STATE_2);
+
+    if (s2 & STATE2_CALM_MASK)
+        rate = rate * 3 / 2;
+    if (Carried(s2))
+        rate = rate * 3 / 4;
+    return rate;
+}
+
 void Spellbook_Cast(void)
 {
     u8 spell = gSpecialVar_Result;
     const struct Spell *s;
 
     gStringVar4[0] = EOS;
+    gSpecialVar_0x8005 = 0;         // THE PULL's steps, for Spellbook_Draw; nothing else draws
     if (spell >= SPELL_COUNT || !Knows(spell) || !((BUILT_SPELLS >> spell) & 1))
         return;
     s = SpellOf(spell);
@@ -471,6 +752,8 @@ void Spellbook_Cast(void)
     case SPELL_LENS:      SetBattleSpell(BATTLE_SPELL_LENS, sText_Lens); break;
     case SPELL_FIELD:     SetBattleSpell(BATTLE_SPELL_FIELD, sText_Field); break;
     case SPELL_PATTERN:   SetBattleSpell(BATTLE_SPELL_PATTERN, sText_Pattern); break;
+    case SPELL_PULL:      Pull(); break;
+    case SPELL_GREAT_HAND: GreatHand(); break;
     }
     VarSet(VAR_SPELLS_CAST, VarGet(VAR_SPELLS_CAST) | (1 << spell));
     LedgerAdd(s->axisA);
@@ -520,8 +803,22 @@ void Spellbook_BattleStart(void)
 
     sBattleSpell = BATTLE_SPELL_NONE;
     sPatternWait = 0;
+    sPullCalm = 0;
+    sHandOn = FALSE;
     if (gBattleTypeFlags & NOT_A_SPELL_BATTLE)
         return;             // it waits for the next single battle
+    state = VarGet(VAR_SPELL_STATE_2);
+    sPullCalm = state & STATE2_CALM_MASK;
+    if (Carried(state))
+    {
+        sHandOn = TRUE;
+        state -= 1 << STATE2_HAND_SHIFT;    // drained win, lose or run
+    }
+    else
+    {
+        state &= ~(STATE2_HAND_MASK | STATE2_ROAD_MASK);    // the road changed: the hand has let go
+    }
+    VarSet(VAR_SPELL_STATE_2, state & ~STATE2_CALM_MASK);
     state = VarGet(VAR_SPELL_STATE);
     sBattleSpell = state & STATE_BATTLE_MASK;
     if (sBattleSpell != BATTLE_SPELL_NONE)
@@ -541,6 +838,21 @@ bool8 Spellbook_FieldOn(void)
 bool8 Spellbook_PatternOn(void)
 {
     return gMain.inBattle && sBattleSpell == BATTLE_SPELL_PATTERN;
+}
+
+//  THE PULL's calm: the foe's routines do half their damage while the turns last (the first, or the first two).
+s32 Spellbook_PullDamage(u8 attacker, s32 damage)
+{
+    if (gMain.inBattle && sPullCalm != 0 && GetBattlerSide(attacker) == B_SIDE_OPPONENT
+     && gBattleResults.battleTurnCounter < sPullCalm && damage > 1)
+        damage /= 2;
+    return damage;
+}
+
+//  THE GREAT HAND: a battle on the road wins a tenth more experience.
+bool8 Spellbook_HandOn(void)
+{
+    return gMain.inBattle && sHandOn;
 }
 
 bool8 Spellbook_LeanHushed(void)
@@ -757,6 +1069,7 @@ void Spellbook_DebugAll(bool8 on)
     {
         VarSet(VAR_SPELLS_CAST, 0);
         VarSet(VAR_SPELL_STATE, 0);
+        VarSet(VAR_SPELL_STATE_2, 0);
     }
 }
 STATIC_ASSERT((1 << SPELL_COUNT) - 1 == 0x3FFF, EverySpellIsTheDebugRowsTest);   // daemons_debug_events.c IsHeld

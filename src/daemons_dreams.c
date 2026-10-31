@@ -2,6 +2,7 @@
 #include "event_data.h"
 #include "string_util.h"
 #include "characters.h"
+#include "notebook.h"
 #include "constants/flags.h"
 #include "constants/vars.h"
 
@@ -118,3 +119,18 @@ const u8 *DaemonsDream_Led(u8 step)
         return NULL;
     return sAttendantDreams[step].led;
 }
+
+//  T-483 (5): THE GREAT HAND shows the road the world would have you take -- her road, so the two always agree. Her
+//  plain dream (the SECOND, the one that names the place), for the earliest step still undone.
+s16 DaemonsDream_NextStep(void)
+{
+    return NextStep();
+}
+
+const u8 *DaemonsDream_Road(u8 step)
+{
+    if (step >= ARRAY_COUNT(sAttendantDreams))
+        return NULL;
+    return sAttendantDreams[step].second;
+}
+STATIC_ASSERT(ARRAY_COUNT(sAttendantDreams) <= 32, TheGreatHandsRoadFitsFiveBits);   // VAR_SPELL_STATE_2 bits 5-9
