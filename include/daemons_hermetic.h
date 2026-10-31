@@ -19,4 +19,10 @@ const u8 *Hermetic_Arrival(void);       // once a second in the field: the book 
 u16 Hermetic_Costume(u16 species);
 void Hermetic_Unmask(void);
 
+// T-483 (7): Halloween with the book -- trick or treat, and the Book of Thirteen's card of the day (DRAFT)
+void Hermetic_TrickOrTreat(void);       // at a battle's end: a treat waits for the field (Hermetic_Arrival)
+#define THIRTEEN_CARDS 14
+struct ThirteenCard { u8 n[6]; u8 keyword[11]; u8 phrase[40]; u8 species[11]; };
+const struct ThirteenCard *Hermetic_CardOfDay(void);
+
 #endif // GUARD_DAEMONS_HERMETIC_H

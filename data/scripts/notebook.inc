@@ -90,6 +90,18 @@ Text_HermeticByDay::
 	.string "The pages will not part. It is still\n"
 	.string "light, and this book reads by night.$"
 
+@ T-483 (7): TRICK OR TREAT -- on Halloween with THE HERMETIC LAYER, a daemon met leaves a treat (DRAFT)
+EventScript_HalloweenTreat::
+	lockall
+	playse SE_SELECT
+	msgbox Text_HalloweenTreat
+	releaseall
+	end
+
+Text_HalloweenTreat::
+	.string "{STR_VAR_1} left a treat:\n"
+	.string "{STR_VAR_2}!$"
+
 Text_HermeticArrives::
 	.string "There is a book in the bag that was\n"
 	.string "not there before.\p"

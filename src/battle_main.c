@@ -47,6 +47,7 @@
 #include "fieldmap.h"
 #include "constants/trainers.h"
 #include "daemons_three.h"   // T-459 C: the lean
+#include "daemons_hermetic.h"   // T-483 (7): trick or treat
 
 static void SpriteCB_UnusedDebugSprite(struct Sprite *sprite);
 static void HandleAction_UseMove(void);
@@ -4215,6 +4216,7 @@ static void ReturnFromBattleToOverworld(void)
     if (!(gBattleTypeFlags & BATTLE_TYPE_LINK) || !gReceivedRemoteLinkPlayers)
     {
         gSpecialVar_Result = gBattleOutcome;
+        Hermetic_TrickOrTreat();    // T-483 (7): on Halloween with the book, the daemon met leaves a treat
         gMain.inBattle = FALSE;
         gMain.callback1 = gPreBattleCallback1;
         if (gBattleTypeFlags & BATTLE_TYPE_ROAMER)

@@ -279,7 +279,7 @@
 #define VAR_ITS_DREAM_KINDS_2      0x40DB // ... and for images 8-15
 #define VAR_OSRIC_RIDDLE           0x40DC // T-485: OSRIC HATTER's next riddle, A1-A4 as 0-3 (moved on as a visit's talk is told)
 #define VAR_OSRIC_BOOK_RIDDLE      0x40DD // T-485: ... and his next book riddle, B1-B3 as 0-2, with THE HERMETIC LAYER held
-#define VAR_0x40DE                 0x40DE
+#define VAR_HALLOWEEN_TREATS       0x40DE // T-483 (7): low 12 bits the day number (mod 4096), high 4 the treats given that day (13 at most)
 #define VAR_0x40DF                 0x40DF
 #define VAR_0x40E0                 0x40E0
 #define VAR_0x40E1                 0x40E1

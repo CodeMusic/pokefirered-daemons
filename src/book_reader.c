@@ -12,6 +12,7 @@
 #include "book_reader.h"
 #include "notebook.h"   // T-410: the ROOT's balance
 #include "play.h"   // T-417: a SONGBOOK page's notes
+#include "daemons_hermetic.h"   // T-483 (7): the card of the day
 #include "daemons_pulse.h"   // T-483: THE HERMETIC LAYER breathes
 #include "daemons_glitch.h"  // T-486: and glitches, once
 #include "constants/songs.h"
@@ -46,7 +47,7 @@
 
 enum { BOOK_NOTEBOOK, BOOK_TEXTBOOK, BOOK_GUIDE, BOOK_SUBTLE, BOOK_HERMETIC };   // T-423: THE SUBTLE LAYER; T-483
 enum { VIEW_PAGE, VIEW_CONTENTS, VIEW_CHAPTER, VIEW_TOPIC, VIEW_COVER, VIEW_GUIDE_CONTENTS, VIEW_GUIDE_ENTRY,
-       VIEW_SUBTLE_CONTENTS, VIEW_SUBTLE_ENTRY };
+       VIEW_SUBTLE_CONTENTS, VIEW_SUBTLE_ENTRY, VIEW_THIRTEEN };   // T-483 (7): Halloween's card
 
 #define WIN_BOOK        0
 #define BR_MAX_LINES    96      // T-300: a Guide entry runs to three spreads
@@ -1121,6 +1122,38 @@ static void DrawSubtleCover(void)
     CopyWindowToVram(WIN_BOOK, COPYWIN_GFX);
 }
 
+//  T-483 (7): on Halloween, THE HERMETIC LAYER opens on the Book of Thirteen's card of the day (the companion's
+//  thirteenOfDay, daemons_hermetic.c) before its warning: its number and name on the left page, its line in the
+//  breathing emerald on the right, and the daemon it belongs to. Every word DRAFT.
+static const u8 sText_Thirteen[]      = _("THE THIRTEEN");     // DRAFT
+static const u8 sText_ThirteenNo[]    = _("No. ");             // DRAFT
+static const u8 sText_ThirteenNight[] = _("Tonight's card");   // DRAFT
+
+static void DrawThirteen(void)
+{
+    const struct ThirteenCard *c = Hermetic_CardOfDay();
+    s16 x = TB_LEFT_X + TB_TEXT_INSET, rx = TB_RIGHT_X + TB_TEXT_INSET;
+    u8 k, n, no[12];
+
+    Background(DrawGuideBook);
+    if (c != NULL)
+    {
+        Print(BR_SMALL, sFaint, x + (TB_TEXT_W - Width(BR_SMALL, sText_Thirteen)) / 2, 10, sText_Thirteen);
+        Rect(C_RULE, x, 26, TB_TEXT_W, 1);
+        StringCopy(no, sText_ThirteenNo);
+        StringAppend(no, c->n);
+        Print(BR_FONT, sInk, x + (TB_TEXT_W - Width(BR_FONT, no)) / 2, 52, no);
+        Print(BR_FONT, sInscribed, x + (TB_TEXT_W - Width(BR_FONT, c->keyword)) / 2, 70, c->keyword);
+        Print(BR_SMALL, sFaint, x + (TB_TEXT_W - Width(BR_SMALL, sText_ThirteenNight)) / 2, 118, sText_ThirteenNight);
+        n = Reflow(c->phrase, TB_TEXT_W, BR_FONT);
+        for (k = 0; k < n && k < 4; k++)
+            Print(BR_FONT, sInscribed, rx, 44 + k * TB_PITCH, Line(k));
+        Rect(C_RULE, rx, 104, TB_TEXT_W, 1);
+        Print(BR_SMALL, sFaint, rx + TB_TEXT_W - Width(BR_SMALL, c->species), 108, c->species);
+    }
+    CopyWindowToVram(WIN_BOOK, COPYWIN_GFX);
+}
+
 static void DrawSubtleContents(void)
 {
     const struct SubtleSection *sec = &Layer()->sections[sBook->section];
@@ -1271,6 +1304,7 @@ static void Draw(void)
     case VIEW_COVER:          if (IsLayerBook()) DrawSubtleCover(); else DrawGuideCover(); break;
     case VIEW_SUBTLE_CONTENTS: DrawSubtleContents(); break;
     case VIEW_SUBTLE_ENTRY:    DrawSubtleEntry();    break;
+    case VIEW_THIRTEEN:        DrawThirteen();       break;
     case VIEW_GUIDE_CONTENTS: DrawGuideContents(); break;
     case VIEW_GUIDE_ENTRY:    DrawGuideEntry();    break;
     }
@@ -1435,6 +1469,11 @@ static void Input_Cover(void)
     {
         Leave();
     }
+    else if (JOY_NEW(A_BUTTON) && sBook->book == BOOK_HERMETIC && Hermetic_CardOfDay() != NULL)
+    {
+        sBook->view = VIEW_THIRTEEN;     // T-483 (7): Halloween's card first
+        Turn();
+    }
     else if (JOY_NEW(A_BUTTON) && sBook->book == BOOK_HERMETIC)
     {
         // T-483: THE HERMETIC LAYER opens with its warning, as written, every time; its contents come after.
@@ -1446,6 +1485,22 @@ static void Input_Cover(void)
     else if (JOY_NEW(A_BUTTON))
     {
         sBook->view = IsLayerBook() ? VIEW_SUBTLE_CONTENTS : VIEW_GUIDE_CONTENTS;
+        Turn();
+    }
+}
+
+static void Input_Thirteen(void)
+{
+    if (JOY_NEW(B_BUTTON))
+    {
+        sBook->view = VIEW_COVER;
+        Turn();
+    }
+    else if (JOY_NEW(A_BUTTON))
+    {
+        sBook->entry = 0;               // then the warning, as written
+        sBook->spread = 0;
+        sBook->view = VIEW_SUBTLE_ENTRY;
         Turn();
     }
 }
@@ -1728,6 +1783,7 @@ static void Task_BookInput(u8 taskId)
     case VIEW_GUIDE_ENTRY:    Input_GuideEntry();    break;
     case VIEW_SUBTLE_CONTENTS: Input_SubtleContents(); break;
     case VIEW_SUBTLE_ENTRY:    Input_SubtleEntry();    break;
+    case VIEW_THIRTEEN:        Input_Thirteen();       break;
     }
     if (sBook != NULL && !sBook->leaving)
     {
