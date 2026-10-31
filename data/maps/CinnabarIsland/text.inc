@@ -32,6 +32,12 @@ CinnabarIsland_Text_PokemonLab::
     .string "letters show.\p"
     .string "CLEAR LABORATORY$"
 
+@  T-500, DRAFT: the sign on OSRIC HATTER's hat (the 10/6 card's words).
+CinnabarIsland_Text_HatterSign::
+    .string "OSRIC HATTER\n"
+    .string "HATS\p"
+    .string "In this style 10/6$"
+
 CinnabarIsland_Text_GymSign::
 	.string "QUICKSILVER BENCHMARK\n"
 	.string "LEADER: ANNEAL\p"

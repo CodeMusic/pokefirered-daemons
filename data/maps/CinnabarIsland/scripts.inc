@@ -352,6 +352,11 @@ CinnabarIsland_EventScript_PokemonLabSignGoldNotHolding::
 	msgbox CinnabarIsland_Text_PokemonLabGoldNotHolding, MSGBOX_SIGN
 	end
 
+@  T-500 (the user, 2026-10-31): OSRIC HATTER's name on his hat, so the vault's hint can be solved in the game.
+CinnabarIsland_EventScript_HatterSign::
+	msgbox CinnabarIsland_Text_HatterSign, MSGBOX_SIGN
+	end
+
 CinnabarIsland_EventScript_GymSign::
 	lockall
 	famechecker FAMECHECKER_BLAINE, 0
