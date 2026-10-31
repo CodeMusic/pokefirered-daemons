@@ -177,15 +177,11 @@ u8 DaemonsTrueWatch(void)
 }
 
 // T-483 (5): THE CONTRAST moves the watch the world is SEEN in on by a turn or more, until the clock's own watch turns
-// (daemons_spellbook.c). Only the watch: the hour, the minute, the witching hour and the date read the clock as before,
-// and DEBUG's WATCH, when it is set, outranks the spell.
+// (daemons_spellbook.c). Only the watch: the hour, the minute, the witching hour and the date read the clock as before.
+// DEBUG's WATCH counts as the clock here, so a forced night can be turned too (and forcing any other watch ends it).
 u8 DaemonsWatch(void)
 {
-    u8 watch = DaemonsTrueWatch();
-
-    if (gDaemonsWatchOverride)
-        return watch;
-    return Spellbook_ContrastWatch(watch);
+    return Spellbook_ContrastWatch(DaemonsTrueWatch());
 }
 
 u8 DaemonsWeekday(void)

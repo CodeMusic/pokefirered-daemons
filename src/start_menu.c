@@ -946,6 +946,7 @@ static void StartMenu_FadeScreenIfLeavingOverworld(void)
     if (sStartMenuCallback != StartMenuSaveCallback
      && sStartMenuCallback != StartMenuExitCallback
      && sStartMenuCallback != StartMenuHelpCallback
+     && sStartMenuCallback != StartMenuSpellbookCallback   // T-483 (5): it is said where the player stands
 #if DAEMONS_DEBUG
      && !IsDaemonsDebugCallback()
 #endif
