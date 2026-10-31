@@ -1,10 +1,11 @@
+@ T-503, DRAFT: THE SUBTLE LAYER says "Do not try to bend the spoon".
 ThreeIsland_House2_Text_CantMakeThisSpoonBend::
     .string "Urrrrrrrrgggghhhh…\n"
     .string "Kwaaaaah!\p"
-    .string "…It's useless! I can't make this\n"
-    .string "spoon bend with my mind.\p"
-    .string "Maybe I really don't have any\n"
-    .string "psychic powers.$"
+    .string "…It's useless! This spoon will\n"
+    .string "not bend for me.\p"
+    .string "Maybe it was never the spoon.\n"
+    .string "Maybe it was who was watching.$"
 
 ThreeIsland_House2_Text_IAdmireSabrina::
 	.string "Everybody over in BRAZEN says\n"

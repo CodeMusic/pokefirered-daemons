@@ -1,11 +1,13 @@
+@ T-503, DRAFT: reads and steering, not force (THE SUBTLE LAYER: "Do not try to bend the spoon").
 SaffronCity_Gym_Text_SabrinaIntro::
-    .string "I had a vision of your arrival.\p"
-    .string "I have had psychic powers since\n"
-    .string "I was a child.\p"
-    .string "It started when a spoon I\n"
-    .string "carelessly tossed, bent.\p"
+    .string "I watched you cross the floor.\n"
+    .string "You looked before you stepped.\p"
+    .string "They say I bent a spoon once, as\n"
+    .string "a child. It was a cheap spoon.\p"
+    .string "I don't move anything. I see where\n"
+    .string "people are about to look.\p"
     .string "I dislike battling, but if you wish,\n"
-    .string "I will show you my powers!{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
+    .string "I will show you what I see!{PLAY_BGM}{MUS_ENCOUNTER_GYM_LEADER}$"
 
 SaffronCity_Gym_Text_SabrinaDefeat::
     .string "I'm shocked! But, a loss is a loss.\p"
@@ -13,11 +15,12 @@ SaffronCity_Gym_Text_SabrinaDefeat::
     .string "to win!\p"
     .string "You earned the FRAME MARK!$"
 
+@ T-503, DRAFT.
 SaffronCity_Gym_Text_SabrinaPostBattle::
-    .string "Psychic power isn't something that\n"
+    .string "What I do isn't something that\n"
     .string "only a few people have.\p"
-    .string "Everyone has psychic power.\n"
-    .string "People just don't realize it.$"
+    .string "Everyone reads the room.\n"
+    .string "People just don't notice they do.$"
 
 SaffronCity_Gym_Text_ExplainMarshBadgeTakeThis::
 	.string "The FRAME MARK makes DAEMON up to\n"
@@ -51,11 +54,12 @@ SaffronCity_Gym_Text_AmandaIntro::
 SaffronCity_Gym_Text_AmandaDefeat::
     .string "Not good enough!$"
 
+@ T-503, DRAFT.
 SaffronCity_Gym_Text_AmandaPostBattle::
     .string "In a battle of equals, the one\n"
-    .string "with the stronger will wins.\p"
-    .string "If you wish to beat MATTE, focus\n"
-    .string "and will yourself to victory.$"
+    .string "who notices first wins.\p"
+    .string "If you wish to beat MATTE, watch\n"
+    .string "what she is watching.$"
 
 SaffronCity_Gym_Text_JohanIntro::
     .string "Does our unseen power scare you?$"
@@ -121,9 +125,10 @@ SaffronCity_Gym_Text_CameronPostBattle::
     .string "BENCHMARK status when we went and\l"
     .string "creamed them!$"
 
+@ T-503, DRAFT (his telepathy, after the battle, is kept: the INTERPRETERs are sure, and wrong).
 SaffronCity_Gym_Text_PrestonIntro::
     .string "BRAZEN BENCHMARK is famous for\n"
-    .string "its psychics!\p"
+    .string "its INTERPRETERS!\p"
     .string "You want to see MATTE! I can\n"
     .string "tell!$"
 
@@ -134,19 +139,21 @@ SaffronCity_Gym_Text_PrestonPostBattle::
     .string "That's right! I used telepathy to\n"
     .string "read your mind!$"
 
+@ T-503, DRAFT.
 SaffronCity_Gym_Text_GymGuyAdvice::
     .string "Yo! Champ in making!\p"
-    .string "MATTE's DAEMON use psychic power\n"
-    .string "instead of force!\p"
+    .string "MATTE's DAEMON don't use force.\n"
+    .string "They read you, and steer you!\p"
     .string "LOGIC daemons are weak against\n"
     .string "CONTEXT daemons!\p"
     .string "They get creamed before they can\n"
     .string "even aim a punch!$"
 
+@ T-503, DRAFT.
 SaffronCity_Gym_Text_GymGuyPostVictory::
-    .string "Psychic power, huh?\p"
-    .string "If I had that, I'd make a bundle\n"
-    .string "at the slots!$"
+    .string "Reading people, huh?\p"
+    .string "If I could do that, I'd make\n"
+    .string "a bundle at the slots!$"
 
 SaffronCity_Gym_Text_GymStatue::
     .string "BRAZEN BENCHMARK LEADER:\n"
