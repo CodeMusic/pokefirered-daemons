@@ -8,7 +8,7 @@ This wiki is about **the fork**: what it is, how to build it, the debug build, a
 tree. Everything about the game itself -- playing it, the world, the editions, the companion, the releases -- is on
 **[the DAEMONS wiki](https://github.com/CodeMusic/DAEMONS/wiki)**, and the design is in
 [`docs/vision.md`](https://github.com/CodeMusic/DAEMONS/blob/main/docs/vision.md) there. To play it, start with
-**[the player's manual](https://github.com/CodeMusic/DAEMONS/blob/main/docs/DAEMONS-manual.pdf)** (PDF).
+**[QUICK START](https://github.com/CodeMusic/DAEMONS/blob/main/docs/DAEMONS-quickstart.pdf)**, then **[the player's manual](https://github.com/CodeMusic/DAEMONS/blob/main/docs/DAEMONS-manual.pdf)** (both PDFs).
 
 ## Pages
 

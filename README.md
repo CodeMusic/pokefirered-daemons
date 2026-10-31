@@ -17,8 +17,9 @@ companion and how a release is made are on the [**DAEMONS wiki**][wiki]. The
 Game Boy build, [**CodeMusic/pokered-daemons**][gb], is where the vertical slice
 was built; it is kept as a reference and is not updated further.
 
-**To play it, read [the player's manual][manual]** (a PDF in the design repo): every way to play, the world, the
-daemons and the seventeen types, the BENCHMARKS, the INDEX, the NOTEBOOK, PLAY and the companion, and a glossary.
+**To play it, start with [QUICK START][quickstart]** (a short guide in large type), **then read [the player's
+manual][manual]** (both PDFs in the design repo): every way to play, the world, the daemons and the seventeen types,
+the BENCHMARKS, the INDEX, the NOTEBOOK, PLAY and the companion, and a glossary.
 
 **No ROM is distributed.** Releases are BPS patches for a cartridge you own,
 published on the [DAEMONS releases page][releases] (latest: **v11.334.1**,
@@ -297,6 +298,7 @@ to pret and its contributors.
 [daemons]: https://github.com/CodeMusic/DAEMONS
 [wiki]: https://github.com/CodeMusic/DAEMONS/wiki
 [manual]: https://github.com/CodeMusic/DAEMONS/blob/main/docs/DAEMONS-manual.pdf
+[quickstart]: https://github.com/CodeMusic/DAEMONS/blob/main/docs/DAEMONS-quickstart.pdf
 [releases]: https://github.com/CodeMusic/DAEMONS/releases
 [todo]: https://github.com/CodeMusic/DAEMONS/blob/main/docs/TODO.md
 [companion]: https://github.com/CodeMusic/daemons-companion
