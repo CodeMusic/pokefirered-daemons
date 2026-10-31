@@ -1691,7 +1691,7 @@
 #define FLAG_INSIGHT_CHARITY          (DAEMONS_FLAGS_START + 0x8A)
 #define FLAG_INSIGHT_KINDNESS         (DAEMONS_FLAGS_START + 0x8B)
 #define FLAG_INSIGHT_TEMPERANCE       (DAEMONS_FLAGS_START + 0x8C)
-#define FLAG_INSIGHT_PATIENCE         (DAEMONS_FLAGS_START + 0x8D)
+#define FLAG_INSIGHT_FORGIVENESS      (DAEMONS_FLAGS_START + 0x8D)
 #define FLAG_INSIGHT_HUMILITY         (DAEMONS_FLAGS_START + 0x8E)
 //  T-411 (the user, 2026-10-16; approved 2026-10-18): the last note has arrived -- once every insight above has -- and is
 //  filed last under INSIGHT.

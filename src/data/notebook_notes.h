@@ -59,7 +59,7 @@ static const u8 sNoteAbout_INSIGHT_CHASTITY[] = _("In your own words, after a MA
 static const u8 sNoteAbout_INSIGHT_CHARITY[] = _("In your own words, after a MARK.");
 static const u8 sNoteAbout_INSIGHT_KINDNESS[] = _("In your own words, after a MARK.");
 static const u8 sNoteAbout_INSIGHT_TEMPERANCE[] = _("In your own words, after a MARK.");
-static const u8 sNoteAbout_INSIGHT_PATIENCE[] = _("In your own words, after a MARK.");
+static const u8 sNoteAbout_INSIGHT_FORGIVENESS[] = _("In your own words, after a MARK.");
 static const u8 sNoteAbout_INSIGHT_HUMILITY[] = _("In your own words, after a MARK.");
 static const u8 sNoteAbout_SONG_FIR[] = _("Hummed by the singing firs.");
 static const u8 sNoteAbout_SONG_1[] = _("Heard where NAMING is learned.");
@@ -149,7 +149,7 @@ static const struct NotebookNote sNotebookNotes[] =
     { FLAG_INSIGHT_CHARITY, 56, MAP_UNDEFINED, sNoteAbout_INSIGHT_CHARITY },
     { FLAG_INSIGHT_KINDNESS, 57, MAP_UNDEFINED, sNoteAbout_INSIGHT_KINDNESS },
     { FLAG_INSIGHT_TEMPERANCE, 58, MAP_UNDEFINED, sNoteAbout_INSIGHT_TEMPERANCE },
-    { FLAG_INSIGHT_PATIENCE, 59, MAP_UNDEFINED, sNoteAbout_INSIGHT_PATIENCE },
+    { FLAG_INSIGHT_FORGIVENESS, 59, MAP_UNDEFINED, sNoteAbout_INSIGHT_FORGIVENESS },
     { FLAG_INSIGHT_HUMILITY, 60, MAP_UNDEFINED, sNoteAbout_INSIGHT_HUMILITY },
     { FLAG_SONG_FIR, 61, MAP_UNDEFINED, sNoteAbout_SONG_FIR },
     { FLAG_SONG_1, 62, MAP_UNDEFINED, sNoteAbout_SONG_1 },

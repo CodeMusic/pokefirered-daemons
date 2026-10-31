@@ -29,11 +29,11 @@ static const u8 sInsightText_Temperance[] = _("The score was right. It never cou
 static const u8 sInsightArrival_Temperance[] = _("An insight arrives.\p“The score was right. It never\ncounted the middle, and the middle is\lwhere I stood.”\pYou write it down in the NOTEBOOK.");
 static const u8 sMarkBalance_Temperance[] = _("The peak missing the\nmiddle is a fact\nabout numbers.\nKnowing where I\pstand makes it mine:\nthe middle is a\nplace, and I was in\nit.");
 static const u8 sRootBalance_Temperance[] = _("Knowing where I stand can turn to thinking I stand at the centre. The skew keeps it honest. Every view leans, and mine is a view.");
-static const u8 sInsightTitle_Patience[] = _("PATIENCE");
-static const u8 sInsightText_Patience[] = _("A frame shows what it holds. Patience shows what was there all along, just outside it.");
-static const u8 sInsightArrival_Patience[] = _("An insight arrives.\p“A frame shows what it holds.\nPatience shows what was there all\lalong, just outside it.”\pYou write it down in the NOTEBOOK.");
-static const u8 sMarkBalance_Patience[] = _("A frame holds what\nit holds, and holds\nit well. NOTICE\nlooks past the edge.\pIt was never all of\nit.");
-static const u8 sRootBalance_Patience[] = _("Noticing everything is noticing nothing. The frame gives attention an edge: one thing, then the next, then what is around it.");
+static const u8 sInsightTitle_Forgiveness[] = _("FORGIVENESS");
+static const u8 sInsightText_Forgiveness[] = _("A frame shows what someone did. Forgiveness sees what was there all along, just outside it.");
+static const u8 sInsightArrival_Forgiveness[] = _("An insight arrives.\p“A frame shows what someone did.\nForgiveness sees what was there all\lalong, just outside it.”\pYou write it down in the NOTEBOOK.");
+static const u8 sMarkBalance_Forgiveness[] = _("A frame holds what\nit holds, and holds\nit well. NOTICE\nlooks past the edge.\pIt was never all of\nit.");
+static const u8 sRootBalance_Forgiveness[] = _("Noticing everything is noticing nothing. The frame gives attention an edge: one thing, then the next, then what is around it.");
 static const u8 sInsightTitle_Humility[] = _("HUMILITY");
 static const u8 sInsightText_Humility[] = _("Every step made sense on its own. Knowing which to keep means stepping out of the loop.");
 static const u8 sInsightArrival_Humility[] = _("An insight arrives.\p“Every step made sense on its own.\nKnowing which to keep means stepping\lout of the loop.”\pYou write it down in the NOTEBOOK.");
@@ -51,7 +51,7 @@ static const u8 sInsightArrival_Last[] = _("An insight arrives.\p“I kept looki
     { NB_INSIGHT, NB_KIND_TEXT, 0, FLAG_INSIGHT_CHARITY, 0, sInsightTitle_Charity, sInsightText_Charity }, \
     { NB_INSIGHT, NB_KIND_TEXT, 0, FLAG_INSIGHT_KINDNESS, 0, sInsightTitle_Kindness, sInsightText_Kindness }, \
     { NB_INSIGHT, NB_KIND_TEXT, 0, FLAG_INSIGHT_TEMPERANCE, 0, sInsightTitle_Temperance, sInsightText_Temperance }, \
-    { NB_INSIGHT, NB_KIND_TEXT, 0, FLAG_INSIGHT_PATIENCE, 0, sInsightTitle_Patience, sInsightText_Patience }, \
+    { NB_INSIGHT, NB_KIND_TEXT, 0, FLAG_INSIGHT_FORGIVENESS, 0, sInsightTitle_Forgiveness, sInsightText_Forgiveness }, \
     { NB_INSIGHT, NB_KIND_TEXT, 0, FLAG_INSIGHT_HUMILITY, 0, sInsightTitle_Humility, sInsightText_Humility }, \
     { NB_INSIGHT, NB_KIND_TEXT, 0, FLAG_INSIGHT_LAST, 0, sInsightTitle_Last, sInsightText_Last }, \
 
@@ -65,7 +65,7 @@ static const struct WisdomPair sWisdomPairs[] =
     { FLAG_BADGE03_GET, FLAG_UNDERSTANDING_RETURN, FLAG_INSIGHT_CHARITY, sInsightArrival_Charity, sMarkBalance_Charity, sRootBalance_Charity },
     { FLAG_BADGE04_GET, FLAG_UNDERSTANDING_GUIDE, FLAG_INSIGHT_KINDNESS, sInsightArrival_Kindness, sMarkBalance_Kindness, sRootBalance_Kindness },
     { FLAG_BADGE05_GET, FLAG_UNDERSTANDING_SCORN, FLAG_INSIGHT_TEMPERANCE, sInsightArrival_Temperance, sMarkBalance_Temperance, sRootBalance_Temperance },
-    { FLAG_BADGE06_GET, FLAG_UNDERSTANDING_READING, FLAG_INSIGHT_PATIENCE, sInsightArrival_Patience, sMarkBalance_Patience, sRootBalance_Patience },
+    { FLAG_BADGE06_GET, FLAG_UNDERSTANDING_READING, FLAG_INSIGHT_FORGIVENESS, sInsightArrival_Forgiveness, sMarkBalance_Forgiveness, sRootBalance_Forgiveness },
     { FLAG_BADGE07_GET, FLAG_UNDERSTANDING_NOTES, FLAG_INSIGHT_HUMILITY, sInsightArrival_Humility, sMarkBalance_Humility, sRootBalance_Humility },
 };
 

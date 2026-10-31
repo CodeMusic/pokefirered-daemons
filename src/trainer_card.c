@@ -1159,7 +1159,7 @@ static const u8 sVirtue2[] = _("CHASTITY\nover LUST.");
 static const u8 sVirtue3[] = _("CHARITY\nover GREED.");
 static const u8 sVirtue4[] = _("KINDNESS\nover ENVY.");
 static const u8 sVirtue5[] = _("TEMPERANCE\nover GLUTTONY.");
-static const u8 sVirtue6[] = _("PATIENCE\nover WRATH.");
+static const u8 sVirtue6[] = _("FORGIVENESS\nover WRATH.");
 static const u8 sVirtue7[] = _("HUMILITY\nover PRIDE.");
 static const u8 *const sMarkVirtues[NUM_VIRTUES] = {
     sVirtue1, sVirtue2, sVirtue3, sVirtue4, sVirtue5, sVirtue6, sVirtue7,
