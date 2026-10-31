@@ -113,7 +113,7 @@ PalletTown_PlayersHouse_1F_Text_DavidsNote::
     .string "islands this season. Back when\l"
     .string "the schedule says. -D.”$"
 
-@ T-494, DRAFT wording, awaiting the user's.
+@ T-494, DRAFT wording; the card's line is the user's choice (2026-10-31), her own words on the deck handed back.
 PalletTown_PlayersHouse_1F_Text_MomSomethingCame::
     .string "Oh, {PLAYER}! Something came for\n"
     .string "you. It has a ship's stamp on it.$"
@@ -121,4 +121,4 @@ PalletTown_PlayersHouse_1F_Text_MomSomethingCame::
 PalletTown_PlayersHouse_1F_Text_TheReply::
     .string "A card. One line, in a hand\n"
     .string "{PLAYER} doesn't know:\p"
-    .string "IT ARRIVED. THANK YOU.$"
+    .string "IT GOT THERE.$"
