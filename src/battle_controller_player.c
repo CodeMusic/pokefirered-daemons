@@ -33,6 +33,7 @@
 #include "daemons_weather.h"   // T-415 P2: the glint (outside the DEBUG block -- trap 29)
 #include "battle_util.h"
 #include "daemons_three.h"   // T-459 C: the lean (outside the DEBUG block -- trap 29)
+#include "daemons_spellbook.h"   // T-483 (5)
 #if DAEMONS_DEBUG
 #include "battle_main.h"
 #include "daemon_streaks.h"
@@ -399,9 +400,18 @@ static void PutPerspectiveText(u8 me, u8 them)
 
     StringCopy(gDisplayedStringBattle, gBattleMons[them].nickname);
     StringAppend(gDisplayedStringBattle, sText_PerspBreak);
-    StringAppend(gDisplayedStringBattle, gStringVar2);
-    StringAppend(gDisplayedStringBattle, sText_PerspOf);
-    StringAppend(gDisplayedStringBattle, gStringVar3);
+    if (Spellbook_FieldOn())        // T-483 (5): THE FIELD -- the other side by feel too, no numbers
+    {
+        u8 theirs = (gBattleMons[them].maxHP == 0) ? 0 : (gBattleMons[them].hp * 5) / gBattleMons[them].maxHP;
+
+        StringAppend(gDisplayedStringBattle, sPerspectiveBands[theirs > 4 ? 4 : theirs]);
+    }
+    else
+    {
+        StringAppend(gDisplayedStringBattle, gStringVar2);
+        StringAppend(gDisplayedStringBattle, sText_PerspOf);
+        StringAppend(gDisplayedStringBattle, gStringVar3);
+    }
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_ACTION_PROMPT);
 
     StringCopy(gDisplayedStringBattle, gBattleMons[me].nickname);
@@ -640,7 +650,7 @@ static void HandleInputChooseAction(void)
         sIndexReadToPerspective = FALSE;
         gBattlerControllerFuncs[gActiveBattler] = ReadIndexEntryInBattle;
     }
-    else if (JOY_NEW(SELECT_BUTTON) && !(gBattleTypeFlags & BATTLE_TYPE_LINK))
+    else if (JOY_NEW(SELECT_BUTTON) && !(gBattleTypeFlags & BATTLE_TYPE_LINK) && !Spellbook_FieldOn())   // T-483 (5)
     {
         //  T-190: the numbers for the daemon opposite you, and what has moved them. The hint is cancelled
         //  rather than left running, or it would ask its question over the top two seconds later.
@@ -2041,7 +2051,11 @@ static void MoveSelectionDisplayMoveNames(void)
 
 static void MoveSelectionDisplayPpString(void)
 {
-    u8 *txtPtr = StringCopy(gDisplayedStringBattle, gText_MoveInterfacePP);
+    u8 *txtPtr;
+
+    if (Spellbook_LensOn() && !Witching_MenuPage())
+        return;                     // T-483 (5): THE LENS writes this box with the odds (MoveSelectionDisplayPpNumber)
+    txtPtr = StringCopy(gDisplayedStringBattle, gText_MoveInterfacePP);
 
     if (Witching_MoveFor(gActiveBattler) != MOVE_NONE)
     {
@@ -2067,6 +2081,20 @@ static void MoveSelectionDisplayPpNumber(void)
         return;
     SetPpNumbersPaletteInMoveSelection();
     moveInfo = (struct ChooseMoveStruct *)(&gBattleBufferA[gActiveBattler][4]);
+    //  T-483 (5): THE LENS -- the routine's multiplier on the foe where "PP" stood and its chance to land where the
+    //  count was (only the part: the count is what it costs); THE FIELD -- no count at all.
+    if (Spellbook_LensMoveText(moveInfo->moves[gMoveSelectionCursor[gActiveBattler]], gDisplayedStringBattle,
+                               gDisplayedStringBattle + 32))
+    {
+        BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP);
+        BattlePutTextOnWindow(gDisplayedStringBattle + 32, B_WIN_PP_REMAINING);
+        return;
+    }
+    if (Spellbook_FieldOn())
+    {
+        BattlePutTextOnWindow(gText_EmptyString3, B_WIN_PP_REMAINING);
+        return;
+    }
     txtPtr = ConvertIntToDecimalStringN(gDisplayedStringBattle, moveInfo->currentPp[gMoveSelectionCursor[gActiveBattler]], STR_CONV_MODE_RIGHT_ALIGN, 2);
     *txtPtr = CHAR_SLASH;
     ConvertIntToDecimalStringN(++txtPtr, moveInfo->maxPp[gMoveSelectionCursor[gActiveBattler]], STR_CONV_MODE_RIGHT_ALIGN, 2);
@@ -3112,7 +3140,14 @@ static void HandleChooseActionAfterDma3(void)
 // T-459 C: the question, or this turn's lean in its place -- in the book's purple, there while the player chooses.
 static void PrintActionPrompt(void)
 {
-    const u8 *lean = Three_LeanText();
+    const u8 *lean = Spellbook_PromptText();   // T-483 (5): THE PATTERN's routine, or THE LENS's numbers, in emerald
+
+    if (lean != NULL)
+    {
+        BattlePutTextOnWindow(lean, B_WIN_ACTION_PROMPT);
+        return;
+    }
+    lean = Three_LeanText();
 
     if (lean != NULL)
     {
@@ -3129,13 +3164,14 @@ static void ShowChooseAction(void);
 // menu is asked for (battle_main.c emits both at once), so when one comes the menu waits for it.
 static void WaitForLean(void)
 {
-    if (Three_LeanReady())
+    if (Three_LeanReady() && Spellbook_PatternReady())
         ShowChooseAction();
 }
 
 static void PlayerHandleChooseAction(void)
 {
-    if (Three_LeanWanted(gActiveBattler))
+    // T-483 (5): THE PATTERN waits on the foe's choice as the lean does, to name it (| -- both are asked)
+    if (Three_LeanWanted(gActiveBattler) | Spellbook_PatternWanted(gActiveBattler))
         gBattlerControllerFuncs[gActiveBattler] = WaitForLean;
     else
         ShowChooseAction();

@@ -3,6 +3,7 @@
 #include "battle_anim.h"
 #include "battle_interface.h"
 #include "battle_message.h"
+#include "daemons_spellbook.h"   // T-483 (5): THE FIELD
 #include "decompress.h"
 #include "graphics.h"
 #include "menu.h"
@@ -814,6 +815,8 @@ void UpdateHpTextInHealthbox(u8 healthboxSpriteId, s16 value, u8 maxOrCurrent)
         if (maxOrCurrent != HP_CURRENT) // singles, max
         {
             ConvertIntToDecimalStringN(text, value, STR_CONV_MODE_RIGHT_ALIGN, 3);
+            if (Spellbook_FieldOn())
+                text[0] = text[1] = text[2] = CHAR_SPACE;   // T-483 (5): THE FIELD -- the numbers go dark
             windowTileData = AddTextPrinterAndCreateWindowOnHealthbox(text, 0, 5, &windowId);
             spriteTileNum = gSprites[healthboxSpriteId].oam.tileNum;
             TextIntoHealthboxObject((void *)(OBJ_VRAM0) + spriteTileNum * TILE_SIZE_4BPP + 0xA40, windowTileData, 2);
@@ -823,7 +826,9 @@ void UpdateHpTextInHealthbox(u8 healthboxSpriteId, s16 value, u8 maxOrCurrent)
         {
             u8 *strptr;
             strptr = ConvertIntToDecimalStringN(text, value, STR_CONV_MODE_RIGHT_ALIGN, 3);
-            *strptr++ = CHAR_SLASH;
+            if (Spellbook_FieldOn())
+                text[0] = text[1] = text[2] = CHAR_SPACE;   // T-483 (5): THE FIELD
+            *strptr++ = Spellbook_FieldOn() ? CHAR_SPACE : CHAR_SLASH;
             *strptr++ = EOS;
             windowTileData = AddTextPrinterAndCreateWindowOnHealthbox(text, 4, 5, &windowId);
             spriteTileNum = gSprites[healthboxSpriteId].oam.tileNum;

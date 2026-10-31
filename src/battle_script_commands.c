@@ -2,6 +2,7 @@
 #include "daemons_witching.h"   // T-480
 #include "daemons_feelings.h"   // T-433
 #include "daemons_three.h"      // T-454
+#include "daemons_spellbook.h"  // T-483 (5)
 #include "daemon_saturation.h"
 #include "gflib.h"
 #include "item.h"
@@ -1005,6 +1006,53 @@ static bool8 AccuracyCalcHelper(u16 move)
     }
 
     return FALSE;
+}
+
+// T-483 (5): THE LENS -- the chance, 0-100, that ATTACKER's MOVE lands on TARGET as things stand, reckoned as
+// Cmd_accuracycheck reckons it (the stages, FORESIGHT, THUNDER in the sun, the abilities, the target's held item and
+// THE THREE's read); BATTLE_HIT_SURE for a routine that cannot miss. A target out of reach (flying, dug in, under
+// water) or behind PROTECT is this turn's chance, not the routine's, and is left out. Nothing is rolled or changed.
+u16 BattleScript_HitChance(u8 attacker, u8 target, u16 move)
+{
+    u8 type, moveAcc, holdEffect;
+    s8 buff;
+    u32 calc;
+
+    if (move == MOVE_NONE || move >= MOVES_COUNT)
+        return 0;
+    if ((gStatuses3[target] & STATUS3_ALWAYS_HITS && gDisableStructs[target].battlerWithSureHit == attacker)
+     || (WEATHER_HAS_EFFECT && (gBattleWeather & B_WEATHER_RAIN) && gBattleMoves[move].effect == EFFECT_THUNDER)
+     || gBattleMoves[move].effect == EFFECT_ALWAYS_HIT || gBattleMoves[move].effect == EFFECT_VITAL_THROW
+     || gBattleMoves[move].accuracy == 0)
+        return BATTLE_HIT_SURE;
+    type = gBattleMoves[move].type;
+    if (gBattleMons[target].status2 & STATUS2_FORESIGHT)
+        buff = gBattleMons[attacker].statStages[STAT_ACC];
+    else
+        buff = gBattleMons[attacker].statStages[STAT_ACC] + DEFAULT_STAT_STAGE - gBattleMons[target].statStages[STAT_EVASION];
+    if (buff < MIN_STAT_STAGE)
+        buff = MIN_STAT_STAGE;
+    if (buff > MAX_STAT_STAGE)
+        buff = MAX_STAT_STAGE;
+    moveAcc = gBattleMoves[move].accuracy;
+    if (WEATHER_HAS_EFFECT && gBattleWeather & B_WEATHER_SUN && gBattleMoves[move].effect == EFFECT_THUNDER)
+        moveAcc = 50;
+    calc = sAccuracyStageRatios[buff].dividend * moveAcc;
+    calc /= sAccuracyStageRatios[buff].divisor;
+    if (gBattleMons[attacker].ability == ABILITY_COMPOUND_EYES)
+        calc = (calc * 130) / 100;
+    if (WEATHER_HAS_EFFECT && gBattleMons[target].ability == ABILITY_SAND_VEIL && gBattleWeather & B_WEATHER_SANDSTORM)
+        calc = (calc * 80) / 100;
+    if (gBattleMons[attacker].ability == ABILITY_HUSTLE && GetBattleMoveSplit(move, type) == SPLIT_PHYSICAL)
+        calc = (calc * 80) / 100;
+    if (gBattleMons[target].item == ITEM_ENIGMA_BERRY)
+        holdEffect = gEnigmaBerries[target].holdEffect, moveAcc = gEnigmaBerries[target].holdEffectParam;
+    else
+        holdEffect = ItemId_GetHoldEffect(gBattleMons[target].item), moveAcc = ItemId_GetHoldEffectParam(gBattleMons[target].item);
+    if (holdEffect == HOLD_EFFECT_EVASION_UP)
+        calc = (calc * (100 - moveAcc)) / 100;
+    calc = Three_AdjustAccuracy(attacker, type, calc);
+    return calc > 100 ? 100 : calc;
 }
 
 static void Cmd_accuracycheck(void)
@@ -3331,6 +3379,8 @@ static void Cmd_getexp(void)
                         gBattleMoveDamage = (gBattleMoveDamage * 150) / 100;
                     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
                         gBattleMoveDamage = (gBattleMoveDamage * 150) / 100;
+                    if (Spellbook_FieldOn())    // T-483 (5): won blind, THE FIELD -- a fifth more
+                        gBattleMoveDamage = (gBattleMoveDamage * 120) / 100;
                     if (IsTradedMon(&gPlayerParty[gBattleStruct->expGetterMonId])
                      && !(gBattleTypeFlags & BATTLE_TYPE_POKEDUDE))
                     {

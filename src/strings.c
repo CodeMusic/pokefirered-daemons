@@ -1042,6 +1042,8 @@ const u8 gStartMenuDesc_Option[] = _("Adjust various game settings such as text\
 //  T-179: the HELP entry ships -- the Help System is reached from the menu now, not from L and R.
 const u8 gText_MenuHelp[] = _("HELP");
 const u8 gStartMenuDesc_Help[] = _("What the game will tell you about itself.");
+const u8 gText_MenuSpellbook[] = _("SPELLBOOK");                     // T-483 (5) (DRAFT)
+const u8 gStartMenuDesc_Spellbook[] = _("Spells, said at night.");   // T-483 (5) (DRAFT)
 
 #if DAEMONS_DEBUG
 const u8 gStartMenuDesc_Debug[] = _("Testing tools. Not part of the game.");

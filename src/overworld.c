@@ -31,6 +31,7 @@
 #include "m4a.h"
 #include "map_name_popup.h"
 #include "reveal.h"
+#include "daemons_spellbook.h"   // T-483 (5)
 #include "map_preview_screen.h"
 #include "metatile_behavior.h"
 #include "money.h"
@@ -2098,6 +2099,7 @@ static bool32 LoadMapInStepsLocal(u8 *state, bool32 inLink)
             ShowMapNamePopup(FALSE);
         }
         Reveal_OnMapLoad();                                  // T-220
+        Spellbook_OnMapLoad();                               // T-483 (5): THE AWAKENING lasts the map
         (*state)++;
         break;
     case 13:

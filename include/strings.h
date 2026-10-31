@@ -692,6 +692,8 @@ extern const u8 gText_MenuSave[];
 extern const u8 gText_MenuOption[];
 extern const u8 gText_MenuHelp[];
 extern const u8 gStartMenuDesc_Help[];
+extern const u8 gText_MenuSpellbook[];        // T-483 (5)
+extern const u8 gStartMenuDesc_Spellbook[];
 
 #if DAEMONS_DEBUG  // declared only where they are defined
 extern const u8 gText_MenuDebug[];

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "daemons_spellbook.h"   // T-483 (5)
 #include "gflib.h"
 #include "event_data.h"
 #include "fame_checker.h"
@@ -52,7 +53,7 @@ enum
 {
     EV_EVERYTHING, EV_ROSTER, EV_EVERY_DAEMON, EV_STOCK,
     EV_OPENING, EV_SHOES, EV_INDEX, EV_OPUS, EV_SCHOOL, EV_TICKET, EV_FIR_KEY, EV_GROVES, EV_TEA, EV_GATES, EV_REVEAL, EV_RESOLVER,
-    EV_INTERRUPT, EV_GOTO_POINTS, EV_GUIDE, EV_SUBTLE, EV_HERMETIC, EV_GLOBAL_INDEX, EV_STREAM, EV_COMPANION, EV_INSTRUMENT,
+    EV_INTERRUPT, EV_GOTO_POINTS, EV_GUIDE, EV_SUBTLE, EV_HERMETIC, EV_SPELLS, EV_GLOBAL_INDEX, EV_STREAM, EV_COMPANION, EV_INSTRUMENT,
     EV_MARKS_ALL, EV_MARK1, EV_MARK8 = EV_MARK1 + 7,
     EV_NOTEBOOK, EV_NOTEBOOK_FULL,
     EV_DRIVERS_ALL, EV_DRIVER1, EV_DRIVER8 = EV_DRIVER1 + 7,
@@ -125,6 +126,7 @@ static const u8 sName_GotoPoints[]   = _("EVERY GOTO POINT");
 static const u8 sName_Guide[]        = _("THE GUIDE");
 static const u8 sName_Subtle[]       = _("THE SUBTLE LAYER");   // T-423
 static const u8 sName_Hermetic[]     = _("THE HERMETIC LAYER"); // T-483: the flag a SYNC writes, and the book
+static const u8 sName_Spells[]       = _("EVERY SPELL READ");   // T-483 (5): every fold's spell off the page
 static const u8 sName_GlobalIndex[]  = _("GLOBAL INDEX");
 static const u8 sName_CrystalAgain[] = _("CRYSTAL'S LINE AGAIN");   // T-457: at the receiver, once more
 static const u8 sName_Sounding[]     = _("AWAY'S SIGNAL ");         // T-458: + the first AWAY daemon's, 0-3
@@ -244,6 +246,7 @@ static const struct DbgRow sRows_Events[] = {
     { sName_Guide,       R_TOGGLE, EV_GUIDE },
     { sName_Subtle,      R_TOGGLE, EV_SUBTLE },
     { sName_Hermetic,    R_TOGGLE, EV_HERMETIC },     // T-483
+    { sName_Spells,      R_TOGGLE, EV_SPELLS },       // T-483 (5): the SPELLBOOK's needs the book as well
     { sName_GlobalIndex, R_TOGGLE, EV_GLOBAL_INDEX },
     { sName_CrystalAgain, R_GIVE,  EV_CRYSTAL_AGAIN },   // T-457
     { sName_Sounding,    R_GIVE,   EV_SOUNDING },     // T-458: A steps it 0, 1, 2, 3, 0 (the companion's job, faked)
@@ -535,6 +538,7 @@ static bool8 IsHeld(u8 ev)
     case EV_GUIDE:        return FlagGet(FLAG_GOT_GUIDE);
     case EV_SUBTLE:       return FlagGet(FLAG_GOT_SUBTLE_LAYER);
     case EV_HERMETIC:     return FlagGet(FLAG_GOT_HERMETIC_LAYER);
+    case EV_SPELLS:       return VarGet(VAR_SPELLS_KNOWN) == 0x3FFF;   // every SPELL_* bit (1 << SPELL_COUNT) - 1
 #ifdef FIRERED
     case EV_INSTRUMENT:   return CheckBagHasItem(ITEM_HARP, 1);    // T-417: the edition's instrument
 #else
@@ -624,6 +628,7 @@ static void Apply(u8 ev, bool8 on)
     case EV_GOTO_POINTS:  DaemonsDebug_EveryGotoPoint(on); return;
     case EV_GUIDE:        SetFlag(FLAG_GOT_GUIDE, on); SetItem(ITEM_GUIDE, on); return;
     case EV_SUBTLE:       SetFlag(FLAG_GOT_SUBTLE_LAYER, on); SetItem(ITEM_SUBTLE_LAYER, on); return;
+    case EV_SPELLS:       Spellbook_DebugAll(on); return;
     case EV_HERMETIC:     SetFlag(FLAG_GOT_HERMETIC_LAYER, on); SetItem(ITEM_HERMETIC_LAYER, on); FlagClear(FLAG_HERMETIC_UNMASKED); FlagClear(FLAG_HERMETIC_GLITCHED); return;
     case EV_INSTRUMENT:   SetFlag(FLAG_GOT_INSTRUMENT, on); SetItem(PLAY_ITEM, on); return;   // T-417 P3: and the LYREBIRD / palm
     case EV_GLOBAL_INDEX:

@@ -525,4 +525,7 @@ gSpecials::
 	def_special DaemonsSounding              @ T-458
 	def_special Hatter_ClocksAreRight        @ T-485: OSRIC HATTER's clocks are right, 3:30-3:59 (specialvar)
 	def_special Hatter_Glitch                @ T-486: the house's glitch, 3:00-3:59, by the minute (specialvar: TRUE if it began)
+	def_special Spellbook_Choose             @ T-483 (5): the SPELLBOOK's list (waitstate); VAR_RESULT the spell, 127 for B
+	def_special Spellbook_Cast               @ T-483 (5): casts VAR_RESULT's spell; what it did in gStringVar4
+	def_special Spellbook_TakeNews           @ T-483 (5): a spell came off the page while the book was open (specialvar)
 gSpecialsEnd::

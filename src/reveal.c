@@ -7,6 +7,7 @@
 #include "fieldmap.h"
 #include "main.h"
 #include "reveal.h"
+#include "daemons_spellbook.h"
 #include "constants/field_effects.h"
 
 //  T-220: REVEAL, THE NINTH DRIVER (docs/school.md 8a; vision.md 4.35). 1001 is nine in binary.
@@ -129,7 +130,7 @@ void Reveal_Update(void)
     s16 px, py, dx, dy;
     u32 i;
 
-    bool8 installed = FlagGet(FLAG_GOT_REVEAL);
+    bool8 installed = FlagGet(FLAG_GOT_REVEAL) || Spellbook_Awakened();   // T-483 (5): THE AWAKENING, for this map
 
     if (++sRevealTimer < REVEAL_PERIOD)
         return;

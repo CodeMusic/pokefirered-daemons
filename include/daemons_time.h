@@ -29,7 +29,8 @@ extern u8 gDaemonsWeekdayOverride; // DEBUG (T-273): 0 follows the clock, 1-7 is
 extern u8 gDaemonsSeasonOverride;  // DEBUG: 0 follows the clock, 1-4 is a season + 1
 u8 DaemonsSeason(void);
 
-u8 DaemonsWatch(void);
+u8 DaemonsWatch(void);             // the watch the world is seen in (THE CONTRAST may have turned it, T-483)
+u8 DaemonsTrueWatch(void);         // T-483: the clock's own watch, before any spell
 bool8 DaemonsIsWitchingHour(void);   // T-480
 s8 DaemonsWitchingMinute(void);      // T-486: 0-59 inside the witching hour (3:00-3:59), -1 outside it
 u8 DaemonsWeekday(void);           // 0-6, Sunday first

@@ -14,6 +14,7 @@
 #include "play.h"   // T-417: a SONGBOOK page's notes
 #include "daemons_hermetic.h"   // T-483 (7): the card of the day
 #include "daemons_pulse.h"   // T-483: THE HERMETIC LAYER breathes
+#include "daemons_spellbook.h"   // T-483 (5): the folds' spells come off the page
 #include "daemons_glitch.h"  // T-486: and glitches, once
 #include "constants/songs.h"
 
@@ -1258,6 +1259,8 @@ static void DrawSubtleEntry(void)
             Print(BR_SMALL, sInk, rx, 19 + i * 10, Line(i));
     }
     start = SubtleLayout(&titleLines, &firstLines);
+    if (sBook->book == BOOK_HERMETIC && sBook->spread + 1 == sBook->spreadCount)
+        Spellbook_OnPassageRead(e->shortTitle);     // T-483 (5): a fold read to its end lets its spell off the page
     if (sBook->spread == 0)
     {
         Rect(C_RULE, rx, start - 5, TB_TEXT_W, 1);

@@ -70,6 +70,10 @@ EventScript_HermeticLayer::
 	fadescreen FADE_TO_BLACK
 	special Hermetic_Open
 	waitstate
+	specialvar VAR_RESULT, Spellbook_TakeNews
+	goto_if_eq VAR_RESULT, FALSE, EventScript_HermeticClosed
+	msgbox gStringVar4
+EventScript_HermeticClosed::
 	releaseall
 	end
 
@@ -77,6 +81,32 @@ EventScript_HermeticByDay::
 	msgbox Text_HermeticByDay
 	releaseall
 	end
+
+@ T-483 (5): THE SPELLBOOK, from the START menu once THE HERMETIC LAYER is held -- only at night, by the clock, as the
+@ book (src/daemons_spellbook.c). The list hands back the spell, or 127 for B (SPELLBOOK_CANCEL); the cast leaves what
+@ it did in gStringVar4. DRAFT, every word.
+EventScript_Spellbook::
+	lockall
+	specialvar VAR_RESULT, Hermetic_IsNight
+	goto_if_eq VAR_RESULT, FALSE, EventScript_SpellbookByDay
+	special Spellbook_Choose
+	waitstate
+	goto_if_eq VAR_RESULT, 127, EventScript_SpellbookShut
+	special Spellbook_Cast
+	playse SE_M_MORNING_SUN
+	msgbox gStringVar4
+EventScript_SpellbookShut::
+	releaseall
+	end
+
+EventScript_SpellbookByDay::
+	msgbox Text_SpellbookByDay
+	releaseall
+	end
+
+Text_SpellbookByDay::
+	.string "The SPELLBOOK's ink is dry. It is\n"
+	.string "still light, and spells wait for night.$"
 
 @ T-483: the book arrives -- the first daemon to use its hour's routine with both other books held, or a SYNC from the
 @ companion. Said once, in the field, the next second the player has the controls.

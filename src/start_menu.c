@@ -57,6 +57,7 @@
 #include "constants/field_weather.h"
 #include "sloopsvc.h"
 #include "daemons_time.h"
+#include "daemons_spellbook.h"   // T-483 (5)
 #include "notebook.h"   // T-412: DEBUG WATCH to DAWN lets a waiting dream come
 #include "daemons_weather.h"
 #include "daemons_holidays.h"   // T-416
@@ -76,6 +77,7 @@ enum StartMenuOption
     STARTMENU_RETIRE,
     STARTMENU_PLAYER2,
     STARTMENU_HELP,        // T-179: the Help System lives here now, not on L and R
+    STARTMENU_SPELLBOOK,   // T-483 (5): once THE HERMETIC LAYER is held
 #if DAEMONS_DEBUG
     STARTMENU_DEBUG,
     STARTMENU_DBG_EVENTS,    // T-394
@@ -168,6 +170,7 @@ static bool8 StartMenuHelpCallback(void)
 
 static bool8 StartMenuExitCallback(void);
 static bool8 StartMenuHelpCallback(void);
+static bool8 StartMenuSpellbookCallback(void);   // T-483 (5)
 static bool8 StartMenuSafariZoneRetireCallback(void);
 static bool8 StartMenuLinkPlayerCallback(void);
 #if DAEMONS_DEBUG
@@ -249,6 +252,7 @@ static const struct MenuAction sStartMenuActionTable[] = {
     [STARTMENU_RETIRE]  = { gText_MenuRetire,  {.u8_void = StartMenuSafariZoneRetireCallback} },
     [STARTMENU_PLAYER2] = { gText_MenuPlayer,  {.u8_void = StartMenuLinkPlayerCallback} },
     [STARTMENU_HELP]    = { gText_MenuHelp,    {.u8_void = StartMenuHelpCallback} },
+    [STARTMENU_SPELLBOOK] = { gText_MenuSpellbook, {.u8_void = StartMenuSpellbookCallback} },   // T-483 (5)
 #if DAEMONS_DEBUG
     [STARTMENU_DEBUG]    = { gText_MenuDebug,   {.u8_void = StartMenuDaemonsDebugCallback} },
     [STARTMENU_DBG_EVENTS] = { gText_DbgMenuEvents, {.u8_void = DbgEventsCallback} },
@@ -315,6 +319,7 @@ static const u8 *const sStartMenuDescPointers[] = {
     gStartMenuDesc_Retire,
     gStartMenuDesc_Player,
     gStartMenuDesc_Help,
+    gStartMenuDesc_Spellbook,   // T-483 (5)
 #if DAEMONS_DEBUG
     // This table is indexed by the SAME enum as the action table, so an entry
     // added to one and not the other reads off the end of this array. That is
@@ -551,6 +556,8 @@ static void SetUpStartMenu_NormalField(void)
     AppendToStartMenuItems(STARTMENU_DEBUG);
 #endif
     AppendToStartMenuItems(STARTMENU_HELP);
+    if (Spellbook_InStartMenu())
+        AppendToStartMenuItems(STARTMENU_SPELLBOOK);   // T-483 (5): last, so always in the right-hand column
     //  T-192: EIGHT ROWS DO NOT FIT, and the arithmetic is not close. CreateStartMenuWindow makes a window of
     //  (items * 2 - 1) tiles at tilemapTop 1, and DrawStdWindowFrame puts a border row either side -- so eight
     //  items occupy rows 0 to 16 while the description banner starts at row 15. Seven is vanilla's number and
@@ -624,6 +631,18 @@ static void DestroySafariZoneStatsWindow(void)
 //  their left and right already step values (WATCH, DAEMON, LEVEL).
 #define SM_COL_WIDTH   56                    // seven tiles, vanilla's whole menu
 #define SM_ROW_HEIGHT  15
+
+//  T-483 (5): SPELLBOOK is 54px and a column holds 48 after its cursor, so while it is in the menu the window is one
+//  tile wider. It is always the last row, in the right-hand column, where the extra tile is.
+static u8 StartMenuHasSpellbook(void)
+{
+    u8 i;
+
+    for (i = 0; i < sNumStartMenuItems; i++)
+        if (sStartMenuOrder[i] == STARTMENU_SPELLBOOK)
+            return 1;
+    return 0;
+}
 
 static bool8 StartMenuIsTwoColumns(void)
 {
@@ -745,7 +764,8 @@ static s8 DoDrawStartMenu(void)
         LoadStdWindowFrameGfx();
         DaemonsCalendarPane(MENU_FRAME_PALETTE_NUM, CALENDAR_PANE_START);   // T-481 B (T-318's wash retired)
         if (StartMenuIsTwoColumns())
-            SetStartMenuWindowWidth(2 * SM_COL_WIDTH / 8);     // T-332: two columns of seven tiles
+            SetStartMenuWindowWidth(2 * SM_COL_WIDTH / 8 + StartMenuHasSpellbook());   // T-332: two columns of seven
+                                                                                         // tiles; T-483 (5) one more
         DrawStdWindowFrame(CreateStartMenuWindow(StartMenuRows()), FALSE);
         if (StartMenuIsTwoColumns() && sNumStartMenuItems > StartMenuRows())
             StartMenuDrawDivider();
@@ -1812,6 +1832,16 @@ static bool8 StartMenuExitCallback(void)
     DestroySafariZoneStatsWindow();
     DestroyHelpMessageWindow_();
     CloseStartMenu();
+    return TRUE;
+}
+
+//  T-483 (5): THE SPELLBOOK leaves the menu for its script, as a signpost hands over (DbgLeaveMenuForScript's way).
+static bool8 StartMenuSpellbookCallback(void)
+{
+    DestroySafariZoneStatsWindow();
+    DestroyHelpMessageWindow_();
+    CloseStartMenu();
+    ScriptContext_SetupScript(EventScript_Spellbook);
     return TRUE;
 }
 

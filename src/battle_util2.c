@@ -7,6 +7,7 @@
 #include "pokemon.h"
 #include "trainer_tower.h"
 #include "daemons_three.h"   // T-454
+#include "daemons_spellbook.h"   // T-483 (5)
 
 void AllocateBattleResources(void)
 {
@@ -23,6 +24,7 @@ void AllocateBattleResources(void)
     gBattleStruct = AllocZeroed(sizeof(*gBattleStruct));
     Three_BattleStart();   // T-454: the three, derived for this battle
     Witching_BattleStart();   // T-480: the hour's uses, none spent
+    Spellbook_BattleStart();  // T-483 (5): the battle spell set on it, if any
 
     gBattleResources = AllocZeroed(sizeof(*gBattleResources));
     gBattleResources->secretBase = AllocZeroed(sizeof(*gBattleResources->secretBase));

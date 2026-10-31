@@ -3,6 +3,7 @@
 #include "daemons_rtc.h"
 #include "daemons_time.h"
 #include "daemons_holidays.h"   // T-416
+#include "daemons_spellbook.h"   // T-483 (5): THE CONTRAST
 
 // T-268: DAY AND NIGHT (vision.md 9.21; decided by the user, 2026-09-25).
 //
@@ -164,7 +165,8 @@ u16 DaemonsDayNumber(u16 year, u8 month, u8 day)
     return DayNumber(year, month, day);
 }
 
-u8 DaemonsWatch(void)
+// The watch the clock (or DEBUG's WATCH) keeps, before any spell has turned the light.
+u8 DaemonsTrueWatch(void)
 {
     if (gDaemonsWatchOverride >= WATCH_OVERRIDE_WITCHING)
         return WATCH_NIGHT;                 // T-480: 3 AM is night (and 3:15 and 3:30, T-486)
@@ -172,6 +174,18 @@ u8 DaemonsWatch(void)
         return (gDaemonsWatchOverride - 1) % WATCH_COUNT;
     ReadClock();
     return sWatch;
+}
+
+// T-483 (5): THE CONTRAST moves the watch the world is SEEN in on by a turn or more, until the clock's own watch turns
+// (daemons_spellbook.c). Only the watch: the hour, the minute, the witching hour and the date read the clock as before,
+// and DEBUG's WATCH, when it is set, outranks the spell.
+u8 DaemonsWatch(void)
+{
+    u8 watch = DaemonsTrueWatch();
+
+    if (gDaemonsWatchOverride)
+        return watch;
+    return Spellbook_ContrastWatch(watch);
 }
 
 u8 DaemonsWeekday(void)

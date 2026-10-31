@@ -69,9 +69,11 @@ bool8 Hermetic_HandlessClock(void)
     return Hermetic_WorldPulses();
 }
 
+// T-483 (5): the CLOCK's night -- THE CONTRAST turns the light, not the hour, so the book (and the SPELLBOOK) still
+// open after it has made the night look like dawn.
 bool8 Hermetic_IsNight(void)
 {
-    return DaemonsWatch() == WATCH_NIGHT;
+    return DaemonsTrueWatch() == WATCH_NIGHT;
 }
 
 void Hermetic_OnWitchingRoutine(void)

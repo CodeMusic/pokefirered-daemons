@@ -6,6 +6,7 @@
 #include "characters.h"
 #include "daemons_feelings.h"
 #include "daemons_three.h"
+#include "daemons_spellbook.h"   // T-483 (5)
 #include "event_data.h"
 #include "battle_main.h"
 #include "palette.h"
@@ -234,7 +235,11 @@ bool8 Three_LeanWanted(u8 battler)
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE || battler != GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)
      || Slot(battler) == NULL)
         return FALSE;
+    if (Spellbook_LeanHushed())
+        return FALSE;                   // T-483 (5): THE LENS or THE PATTERN is set -- reason speaks, the lean does not
     want = !(gBattleStruct->leanState & LEAN_LAST_TURN) && Random() % 100 < THREE_LEAN_CHANCE;
+    if (Spellbook_FieldOn())
+        want = TRUE;                    // T-483 (5): THE FIELD -- no numbers, so the lean comes every turn
 #if DAEMONS_DEBUG
     if (gThreeDebugLean)
         want = TRUE;
