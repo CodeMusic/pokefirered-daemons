@@ -95,7 +95,7 @@ Nexus_Text_EaselTwin::
     .string "it. The letters held still.$"
 
 Nexus_Text_EaselWords::
-    .string "HEY, YOU! LOOK AGAIN.$"
+    .string "IT'S REAL. IT'S YOURS.$"
 
 Nexus_Text_Guardian0::
     .string "“Remember what you have learned!”$"

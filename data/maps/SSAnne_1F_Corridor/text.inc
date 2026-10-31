@@ -25,7 +25,7 @@ SSAnne_1F_Corridor_Text_Painting::
     .string "night, a white moon, a lone tree.\p"
     .string "Words run along the frame. The\n"
     .string "letters won't hold still.\p"
-    .string "SVB, BLF! OLLP ZTZRM.$"
+    .string "RG'H IVZO. RG'H BLFIH.$"
 
 SSAnne_1F_Corridor_Text_PaintingIntoNotebook::
     .string "{PLAYER} copied the letters into\n"

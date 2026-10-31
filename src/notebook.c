@@ -255,7 +255,7 @@ static const u8 sText_Loose_Photo[] = _(
         "by the KINGFISHER.\p"
         "It came out in colour.");
 
-//  T-493 (DRAFT): the S.S. ANNE's painting. Its words, as copied, in letters that would not hold still -- the
+//  T-493: the S.S. ANNE's painting; its words chosen by the user, 2026-10-31 (the rest DRAFT). Its words, as copied, in letters that would not hold still -- the
 //  alphabet read in a mirror, A for Z -- and, once its twin in THE NEXUS has been stood before, the same page with
 //  the words held still. The scrambled page is cleared when the read one is filed (Nexus_EventScript_Easel).
 static const u8 sTitle_Loose_Painting[] = _("THE PAINTING");
@@ -263,14 +263,14 @@ static const u8 sText_Loose_Painting[] = _(
         "Along the frame of the painting on\n"
         "the S.S. ANNE, in letters that\l"
         "wouldn't hold still:\p"
-        "SVB, BLF! OLLP ZTZRM.");
+        "RG'H IVZO. RG'H BLFIH.");
 static const u8 sText_Loose_PaintingRead[] = _(
         "Along the frame of the painting on\n"
         "the S.S. ANNE:\p"
-        "SVB, BLF! OLLP ZTZRM.\p"
+        "RG'H IVZO. RG'H BLFIH.\p"
         "Before its twin, the letters held\n"
         "still:\p"
-        "HEY, YOU! LOOK AGAIN.");
+        "IT'S REAL. IT'S YOURS.");
 
 //  LAB NOTES 2 -- *Quantum Translations*, the first verse: what counts as an observer.
 static const u8 sTitle_Lab_Observer[] = _("THE OBSERVER");
