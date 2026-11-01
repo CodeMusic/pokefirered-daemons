@@ -31,6 +31,7 @@ enum
 enum { LEDGER_REASON, LEDGER_INTUITION, LEDGER_CONTENT, LEDGER_CONTEXT, LEDGER_COUNT };
 u8 Spellbook_Ledger(u8 axis);
 
+bool8 Spellbook_HalfHour(void);              // T-509: the thin half-hour, as the spells read it
 bool8 Spellbook_InStartMenu(void);          // the START menu shows SPELLBOOK: THE HERMETIC LAYER is held
 void Spellbook_Choose(void);                // special (waitstate): the list; VAR_RESULT the spell, or SPELLBOOK_CANCEL
 void Spellbook_Cast(void);                  // special: casts VAR_RESULT's spell; what it did is left in gStringVar4

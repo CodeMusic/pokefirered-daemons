@@ -17,6 +17,10 @@
 #include "daemons_spellbook.h"   // T-483 (5): the folds' spells come off the page
 #include "daemons_glitch.h"  // T-486: and glitches, once
 #include "constants/songs.h"
+#include "data.h"         // T-509: the cards' daemons
+#include "decompress.h"
+#include "pokemon.h"
+#include "random.h"
 
 //  T-223: THE NOTEBOOK AND THE TEXTBOOK, READ LIKE BOOKS (docs/school.md 9, 6).
 //
@@ -48,7 +52,8 @@
 
 enum { BOOK_NOTEBOOK, BOOK_TEXTBOOK, BOOK_GUIDE, BOOK_SUBTLE, BOOK_HERMETIC };   // T-423: THE SUBTLE LAYER; T-483
 enum { VIEW_PAGE, VIEW_CONTENTS, VIEW_CHAPTER, VIEW_TOPIC, VIEW_COVER, VIEW_GUIDE_CONTENTS, VIEW_GUIDE_ENTRY,
-       VIEW_SUBTLE_CONTENTS, VIEW_SUBTLE_ENTRY, VIEW_THIRTEEN };   // T-483 (7): Halloween's card
+       VIEW_SUBTLE_CONTENTS, VIEW_SUBTLE_ENTRY, VIEW_THIRTEEN,     // T-483 (7): Halloween's card
+       VIEW_CARDS, VIEW_CARDS_SELECT, VIEW_CARDS_SPREAD, VIEW_CARDS_BOARD, VIEW_CARDS_READ };   // T-509
 
 #define WIN_BOOK        0
 #define BR_MAX_LINES    96      // T-300: a Guide entry runs to three spreads
@@ -113,6 +118,8 @@ struct BookReader
     u8 linePara[BR_MAX_LINES];  // T-423: each line's paragraph, for the asking voice
     bool8 voices;               // T-423: an entry with two voices, whose paragraphs are not indented
     u8 picEntry, picFrame, picTimer;   // T-423: the open picture, and which of its frames
+    bool8 cardsFocus;                  // T-509: the cover's cursor is on the deck tile
+    struct Cards *cards;               // T-509: the CARDS section, while it is open
     u8 title[40];
     u8 text[BR_TEXT_SIZE];
     u8 lines[BR_LINES_SIZE];
@@ -123,6 +130,9 @@ static EWRAM_DATA struct BookReader *sBook = NULL;
 static const struct BgTemplate sBgTemplates[] =
 {
     { .bg = 0, .charBaseIndex = 0, .mapBaseIndex = 31, .screenSize = 0, .paletteMode = 0, .priority = 0, .baseTile = 0 },
+    // T-509: the CARDS section's two layers, hidden until it opens -- the placed cards, and the spread
+    { .bg = 1, .charBaseIndex = 2, .mapBaseIndex = 30, .screenSize = 0, .paletteMode = 0, .priority = 1, .baseTile = 0 },
+    { .bg = 2, .charBaseIndex = 0, .mapBaseIndex = 29, .screenSize = 0, .paletteMode = 0, .priority = 1, .baseTile = 0 },
 };
 
 static const struct WindowTemplate sWindowTemplates[] =
@@ -260,6 +270,7 @@ struct GuideEntry { const u8 *shortTitle; const u8 *title; const u8 *text; };
 #include "data/guide.h"
 #include "data/subtle_layer.h"   // T-423: tools/gensubtle.py
 #include "data/hermetic_layer.h" // T-483: the same tool, the same types
+#include "data/arcana_cards.h"   // T-509: DAEMONS tools/port_arcana.py
 
 //  T-483: THE LAYER BOOKS. THE SUBTLE LAYER and THE HERMETIC LAYER are one kind of book -- a cover, a contents spread,
 //  then each entry's picture on the left and its text on the right -- written by one tool, so the reader keeps one
@@ -1117,9 +1128,12 @@ static u8 SubtleSectionOf(u8 entry)
     return k;
 }
 
+static void DrawCardsTile(void);
+
 static void DrawSubtleCover(void)
 {
     CpuFastCopy(Layer()->cover, gWindows[WIN_BOOK].tileData, BR_WIN_BYTES);
+    DrawCardsTile();        // T-509: the CARDS section's tile, beside the cover
     CopyWindowToVram(WIN_BOOK, COPYWIN_GFX);
 }
 
@@ -1296,6 +1310,1133 @@ static void AnimateSubtlePicture(void)
     CopyWindowToVram(WIN_BOOK, COPYWIN_GFX);
 }
 
+static void Draw(void);
+static void Turn(void);
+static void Move(void);
+
+//  ---------------------------------------------------------------- T-509: THE CARDS
+//
+//  The user, 2026-11-01 (DAEMONS docs/TODO.md T-509, bible 4.39): each layer book ends on a CARDS section, collapsed at
+//  first -- the book opens on its cover, and beside it a tile shaped like a tarot deck; DOWN or RIGHT reaches it, A
+//  expands the section and B collapses it again. Expanded, THE CARD OF THE DAY lies face down (A turns it) beside the
+//  three ways to draw: A SINGLE DRAW, PAST / PRESENT / FUTURE and MIND / BODY / SPIRIT. Choosing one clears the last
+//  and asks which deck, the selector read down as a sentence -- THE SUBTLE LAYER's "The Deck of Reason / The Deck of
+//  Instinct / A Combined Deck", THE HERMETIC LAYER's "as The Deck Above, so The Deck Below, or Both as One" (Within
+//  and Without in the thin half-hour). Then the deck shuffles and spreads, LEFT and RIGHT run along it, A pulls the
+//  card at that place, and the deck moves away while the card lands face down on its place on the board. A on a
+//  placed card turns it; A on a turned card opens its words, larger; B goes back. The backs never say which deck.
+//  A card changes nothing in play, and nothing is saved: the day's card is the hash of the day and the trainer, the
+//  same card the companion deals (arcana.ts cardOfDay; daemons_hermetic.c Hermetic_TodayHash), and every draw is
+//  forgotten when the book closes.
+//
+//  THE SCREEN. BG0 is the book's own window, painted as the board; BG1 holds three 72x104 card windows, one per
+//  place, each on its own palette row (12-14, the frame's sixteen colours, its pulse on index 14 for the hermetic
+//  pair); BG2 is the spread, nothing but a tilemap: the back's 117 tiles once in VRAM, each card in the spread one
+//  tile column of it, the last whole -- a fan of 22 is exactly 240px -- and the chosen card lifted a tile. The daemon
+//  on a turned card is a sprite at the frame's window (4,14), its sheet decompressed through a buffer freed at once.
+//  Everything is on the heap and freed when the section collapses or the book closes. Every word DRAFT.
+
+#define CARD_W          72
+#define CARD_H          104
+#define CARD_TCOLS      9
+#define CARD_TROWS      13
+#define CARD_TILES      (CARD_TCOLS * CARD_TROWS)
+#define CARD_BYTES      (CARD_TILES * TILE_SIZE_4BPP)
+#define CARD_PLACES     3
+#define CARD_PAL        12              // BG palette rows 12, 13, 14: one per place
+#define CARD_BACK_PAL   11              // the spread's backs
+#define CARD_FAN_TILE   601             // BG2 shares BG0's character base, after the book's 600 tiles
+#define CARD_FAN_ROW    2
+#define CARD_TAG_TILE   0x5090          // the cover's deck tile (sheet and palette)
+#define CARD_TAG_PIC    0x5091          // + 0..3: the day's card, and the three places
+#define CARD_OTID       0
+#define CARD_PERSONALITY 0xFFFF0000     // never a shiny daemon: the card is what shines
+#define CARD_INK        12              // the frames' palette roles (gfx/drafts/t509_cards/draw_cards.py)
+#define CARD_PULSE      14
+#define CARD_BAND_Y     6
+#define CARD_PANEL_Y    79
+#define CARD_PANEL_H    21
+#define CARD_LINE_CHARS 15
+#define CR_TEXT_X       88              // the reading page's column: the generator measures every phrase against it
+#define CR_TEXT_W       140
+
+enum { CARDS_DAY, CARDS_SINGLE, CARDS_PAST, CARDS_MIND, CARDS_MODES };
+enum { DECK_FIRST, DECK_SECOND, DECK_BOTH };
+enum { FAN_SHUFFLE, FAN_DEAL, FAN_CHOOSE, FAN_AWAY, FAN_LAND, FAN_RETURN };
+
+struct CardDraw
+{
+    u8 n;
+    u8 side;
+    bool8 shiny;
+    bool8 used;
+    bool8 turned;
+    u8 sprite;                  // MAX_SPRITES: none
+    const struct ThirteenCard *thirteen;    // Halloween's card of the day, with THE HERMETIC LAYER
+};
+
+struct Cards
+{
+    u8 win[CARD_PLACES];
+    u16 *fanMap;
+    u8 cursor;                  // the expanded view: 0 the day's card, then the three modes
+    u8 mode;
+    u8 deck;
+    u8 phase, timer;
+    u8 place, places;           // the place being filled (the spread), or looked at (the board, the page)
+    u8 fanCount, fanCursor, dealt;
+    u8 fan[ARCANA_CARDS];
+    u8 pulseRows;               // palette rows 12-14 that breathe (bit 0 is row 12)
+    bool8 read;                 // the page is the day's card's
+    struct CardDraw day;
+    struct CardDraw drawn[CARD_PLACES];
+};
+
+static const u8 sCardsMine[3]  = { C_NONE, C_INK, C_SHADOW };
+static const u8 sCardsLit[3]   = { C_NONE, C_MARGIN, C_SHADOW };
+static const u8 sCardsDim[3]   = { C_NONE, C_FAINT, C_NONE };
+static const u8 sCardsEmer[3]  = { C_NONE, C_RING, C_SHADOW };
+
+static const u8 *const sCardsModeNames[CARDS_MODES] =
+{
+    sCardsText_CardOfDay, sCardsText_ModeSingle, sCardsText_ModePast, sCardsText_ModeMind,
+};
+static const u8 *const sCardsPlaceNames[2][CARD_PLACES] =
+{
+    { sCardsText_Past, sCardsText_Present, sCardsText_Future },
+    { sCardsText_Mind, sCardsText_Body, sCardsText_Spirit },
+};
+
+static const struct OamData sCardsOam64 =
+{
+    .shape = SPRITE_SHAPE(64x64),
+    .size = SPRITE_SIZE(64x64),
+    .priority = 0,
+};
+
+static bool8 CardsHermetic(void)
+{
+    return sBook->book == BOOK_HERMETIC;
+}
+
+//  ---- the board, the card, its letters
+
+//  The board is one 8x8 pattern, so it is built once as a tile and copied over the window.
+static void CardsBoard(void)
+{
+    u32 tile[8];
+    u8 x, y, *b = (u8 *)tile, c;
+    u16 i;
+
+    for (y = 0; y < 8; y++)
+    {
+        for (x = 0; x < 8; x += 2)
+        {
+            c = (((x / 2 + y / 2) % 2 == 0) && ((x + y) % 4 == 0)) ? C_PAPER : C_COVER;
+            b[y * 4 + x / 2] = c | ((((((x + 1) / 2 + y / 2) % 2 == 0) && ((x + 1 + y) % 4 == 0)) ? C_PAPER : C_COVER) << 4);
+        }
+    }
+    for (i = 0; i < 30 * 20; i++)
+        CpuCopy32(tile, gWindows[WIN_BOOK].tileData + i * TILE_SIZE_4BPP, TILE_SIZE_4BPP);
+}
+
+static void PrintBold(const u8 *colors, s16 x, s16 y, const u8 *str)
+{
+    Print(BR_FONT, colors, x, y, str);
+    Print(BR_FONT, colors, x + 1, y, str);
+}
+
+static s16 BoldWidth(const u8 *str)
+{
+    return Width(BR_FONT, str) + 1;     // the whole line struck again a pixel to the right
+}
+
+static void Frame(u8 color, s16 x, s16 y, s16 w, s16 h)
+{
+    Rect(color, x, y, w, 1);
+    Rect(color, x, y + h - 1, w, 1);
+    Rect(color, x, y, 1, h);
+    Rect(color, x + w - 1, y, 1, h);
+}
+
+static void CardPixel(u8 *tiles, s16 x, s16 y, u8 c)
+{
+    u8 *b;
+
+    if ((u16)x >= CARD_W || (u16)y >= CARD_H)
+        return;
+    b = tiles + ((y / 8) * CARD_TCOLS + x / 8) * TILE_SIZE_4BPP + (y % 8) * 4 + (x % 8) / 2;
+    *b = (x & 1) ? ((*b & 0x0F) | (c << 4)) : ((*b & 0xF0) | c);
+}
+
+//  LEN characters of S in the frames' 3x5 letters (lower case drawn as upper), from X.
+static void CardLetters(u8 *tiles, const u8 *s, u8 len, s16 x, s16 y)
+{
+    u8 i, r, k;
+    u16 g;
+
+    for (i = 0; i < len && s[i] != EOS; i++)
+    {
+        g = sCardGlyphs[s[i]];
+        for (r = 0; r < 5; r++)
+            for (k = 0; k < 3; k++)
+                if (g & (1 << (14 - r * 3 - k)))
+                    CardPixel(tiles, x + i * 4 + k, y + r, CARD_INK);
+    }
+}
+
+static void CardLettersCentred(u8 *tiles, const u8 *s, u8 len, s16 y)
+{
+    CardLetters(tiles, s, len, CARD_W / 2 - (len * 4 - 1) / 2, y);
+}
+
+//  The phrase, wrapped to the panel: at most three lines of fifteen (tools/port_arcana.py checks every face fits).
+static void CardPhrase(u8 *tiles, const u8 *s)
+{
+    const u8 *start[3];
+    u8 len[3], n = 0, i, w;
+    const u8 *p = s, *line = s, *lastSpace = NULL;
+
+    while (*line != EOS && n < 3)
+    {
+        lastSpace = NULL;
+        for (p = line, w = 0; *p != EOS && w <= CARD_LINE_CHARS; p++, w++)
+            if (*p == CHAR_SPACE)
+                lastSpace = p;
+        if (*p == EOS && w <= CARD_LINE_CHARS)
+        {
+            start[n] = line;
+            len[n++] = w;
+            break;
+        }
+        if (lastSpace == NULL)
+            lastSpace = line + CARD_LINE_CHARS;
+        start[n] = line;
+        len[n++] = lastSpace - line;
+        line = (*lastSpace == CHAR_SPACE) ? lastSpace + 1 : lastSpace;
+    }
+    for (i = 0; i < n; i++)
+        CardLettersCentred(tiles, start[i], len[i], CARD_PANEL_Y + (CARD_PANEL_H - (n * 6 - 1)) / 2 + i * 6);
+}
+
+static const u8 *CardKeyword(const struct CardDraw *d)
+{
+    return d->thirteen != NULL ? d->thirteen->keyword : sArcana[d->n].face[d->side].keyword;
+}
+
+static const u8 *CardWords(const struct CardDraw *d)
+{
+    return d->thirteen != NULL ? d->thirteen->phrase : sArcana[d->n].face[d->side].phrase;
+}
+
+static const u8 *CardRoman(const struct CardDraw *d)
+{
+    return d->thirteen != NULL ? d->thirteen->n : sArcana[d->n].roman;
+}
+
+static u16 CardSpecies(const struct CardDraw *d)
+{
+    u16 s;
+
+    if (d->thirteen == NULL)
+        return sArcana[d->n].face[d->side].species;
+    for (s = 1; s < NUM_SPECIES; s++)
+        if (StringCompare(gSpeciesNames[s], d->thirteen->species) == 0)
+            return s;
+    return SPECIES_NONE;
+}
+
+//  A card into place K's window: its back, or its face -- the frame, the numeral and keyword in the band (the
+//  keyword alone when both will not fit), the phrase in the panel. Its palette goes into the place's row.
+static void CardRender(u8 k, const struct CardDraw *d, bool8 face)
+{
+    u8 win = sBook->cards->win[k], *tiles = gWindows[win].tileData, band[24], *p;
+    u8 len;
+
+    if (!face)
+    {
+        CpuCopy32(sCardBack, tiles, CARD_BYTES);
+        LoadPalette(sCardBackPal, BG_PLTT_ID(CARD_PAL + k), PLTT_SIZE_4BPP);
+        sBook->cards->pulseRows &= ~(1 << k);
+    }
+    else
+    {
+        CpuCopy32(sCardFrames[d->side][d->shiny], tiles, CARD_BYTES);
+        LoadPalette(sCardPals[d->side][d->shiny], BG_PLTT_ID(CARD_PAL + k), PLTT_SIZE_4BPP);
+        if (d->side >= CARD_ABOVE)
+            sBook->cards->pulseRows |= 1 << k;
+        else
+            sBook->cards->pulseRows &= ~(1 << k);
+        p = StringCopy(band, CardRoman(d));
+        *p++ = CHAR_SPACE;
+        StringCopy(p, CardKeyword(d));
+        len = StringLength(band);
+        if (len * 4 - 1 > 60)
+            CardLettersCentred(tiles, CardKeyword(d), StringLength(CardKeyword(d)), CARD_BAND_Y);
+        else
+            CardLettersCentred(tiles, band, len, CARD_BAND_Y);
+        CardPhrase(tiles, CardWords(d));
+    }
+    CopyWindowToVram(win, COPYWIN_GFX);
+}
+
+//  ---- the daemons
+
+static void CardPicFree(struct CardDraw *d, u16 tag)
+{
+    u16 palTag;
+    u8 i;
+    struct CardDraw *other;
+
+    if (d->sprite == MAX_SPRITES)
+        return;
+    palTag = gSprites[d->sprite].template->paletteTag;
+    DestroySprite(&gSprites[d->sprite]);
+    FreeSpriteTilesByTag(tag);
+    d->sprite = MAX_SPRITES;
+    for (i = 0; i <= CARD_PLACES; i++)       // another card's daemon may share the palette
+    {
+        other = (i == CARD_PLACES) ? &sBook->cards->day : &sBook->cards->drawn[i];
+        if (other->sprite != MAX_SPRITES && gSprites[other->sprite].template->paletteTag == palTag)
+            return;
+    }
+    FreeSpritePaletteByTag(palTag);
+}
+
+static void CardPicMake(struct CardDraw *d, u16 tag)
+{
+    struct SpriteSheet sheet;
+    struct SpriteTemplate *t;
+    const struct CompressedSpritePalette *pal;
+    u16 species = CardSpecies(d);
+    u8 *buf;
+
+    if (d->sprite != MAX_SPRITES || species == SPECIES_NONE || species >= NUM_SPECIES)
+        return;
+    buf = Alloc(MON_PIC_SIZE);
+    if (buf == NULL)
+        return;
+    LoadSpecialPokePic(&gMonFrontPicTable[species], buf, species, CARD_PERSONALITY, TRUE);
+    sheet.data = buf;
+    sheet.size = MON_PIC_SIZE;
+    sheet.tag = tag;
+    LoadSpriteSheet(&sheet);
+    Free(buf);
+    pal = GetMonSpritePalStructFromOtIdPersonality(species, CARD_OTID, CARD_PERSONALITY);
+    LoadCompressedSpritePalette(pal);
+    t = Alloc(sizeof(*t));          // the template outlives this call: the sprite keeps a pointer to it
+    if (t == NULL)
+        return;
+    t->tileTag = tag;
+    t->paletteTag = pal->tag;
+    t->oam = &sCardsOam64;
+    t->anims = gDummySpriteAnimTable;
+    t->images = NULL;
+    t->affineAnims = gDummySpriteAffineAnimTable;
+    t->callback = SpriteCallbackDummy;
+    d->sprite = CreateSprite(t, 0, 0, 0);
+    if (d->sprite == MAX_SPRITES)
+        Free(t);
+    else
+        gSprites[d->sprite].invisible = TRUE;
+}
+
+static void CardPicFreeAll(void)
+{
+    u8 k;
+    struct SpriteTemplate *t;
+
+    for (k = 0; k <= CARD_PLACES; k++)
+    {
+        struct CardDraw *d = (k == 0) ? &sBook->cards->day : &sBook->cards->drawn[k - 1];
+
+        if (d->sprite == MAX_SPRITES)
+            continue;
+        t = (struct SpriteTemplate *)gSprites[d->sprite].template;
+        CardPicFree(d, CARD_TAG_PIC + k);
+        Free(t);
+    }
+}
+
+static void CardPicShow(struct CardDraw *d, s16 x, s16 y)
+{
+    if (d->sprite == MAX_SPRITES)
+        return;
+    gSprites[d->sprite].x = x + 32;
+    gSprites[d->sprite].y = y + 32;
+    gSprites[d->sprite].invisible = FALSE;
+}
+
+static void CardPicsHide(void)
+{
+    u8 k;
+
+    if (sBook->cards->day.sprite != MAX_SPRITES)
+        gSprites[sBook->cards->day.sprite].invisible = TRUE;
+    for (k = 0; k < CARD_PLACES; k++)
+        if (sBook->cards->drawn[k].sprite != MAX_SPRITES)
+            gSprites[sBook->cards->drawn[k].sprite].invisible = TRUE;
+}
+
+//  ---- the cover's tile
+
+static void CardsTileShow(bool8 show)
+{
+    u8 i;
+
+    for (i = 0; i < MAX_SPRITES; i++)
+    {
+        if (gSprites[i].inUse && gSprites[i].template->tileTag == CARD_TAG_TILE)
+        {
+            gSprites[i].invisible = !show;
+            return;
+        }
+    }
+}
+
+static const struct SpriteTemplate sCardsTileTemplate =
+{
+    .tileTag = CARD_TAG_TILE,
+    .paletteTag = CARD_TAG_TILE,
+    .oam = &sCardsOam64,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
+};
+
+#define CT_X 196                // the deck tile, right of the cover: three backs, 40x56 at half size
+#define CT_Y 86
+
+static void CardsTileMake(void)
+{
+    static const struct SpriteSheet sheet = { sCardDeckTile, 64 * 64 / 2, CARD_TAG_TILE };
+    static const struct SpritePalette pal = { sCardBackPal, CARD_TAG_TILE };
+
+    LoadSpriteSheet(&sheet);
+    LoadSpritePalette(&pal);
+    CreateSprite(&sCardsTileTemplate, CT_X + 32, CT_Y + 32, 0);
+}
+
+//  The cover, and the tile's label under it; lit when the cursor is on it.
+static void DrawCardsTile(void)
+{
+    s16 lw = Width(BR_SMALL, sCardsText_CardsTile);
+
+    if (sBook->cardsFocus)
+        Frame(C_MARGIN, CT_X - 1, CT_Y - 1, 44, 60);
+    Print(BR_SMALL, sBook->cardsFocus ? sCardsLit : sCardsDim, CT_X + 21 - lw / 2, CT_Y + 59, sCardsText_CardsTile);
+}
+
+//  ---- the section opened and closed
+
+static void CardsBgs(bool8 cards)
+{
+    if (cards)
+    {
+        SetBgAttribute(0, BG_ATTR_PRIORITY, 2);
+        ShowBg(0);                  // SetBgAttribute keeps the value; ShowBg writes BG0CNT with it
+        ShowBg(1);
+        ShowBg(2);
+    }
+    else
+    {
+        HideBg(1);
+        HideBg(2);
+        SetBgAttribute(0, BG_ATTR_PRIORITY, 0);
+        ShowBg(0);
+    }
+}
+
+static bool8 CardsOpen(void)
+{
+    struct Cards *c;
+    struct WindowTemplate t = { .bg = 1, .tilemapTop = CARD_FAN_ROW, .width = CARD_TCOLS, .height = CARD_TROWS };
+    u8 k;
+    u32 h;
+
+    c = AllocZeroed(sizeof(*c));
+    if (c == NULL)
+        return FALSE;
+    sBook->cards = c;
+    c->fanMap = AllocZeroed(BG_SCREEN_SIZE);
+    for (k = 0; k < CARD_PLACES; k++)
+    {
+        t.tilemapLeft = 10 * k;
+        t.paletteNum = CARD_PAL + k;
+        t.baseBlock = 1 + CARD_TILES * k;
+        c->win[k] = AddWindow(&t);
+        c->drawn[k].sprite = MAX_SPRITES;
+    }
+    c->day.sprite = MAX_SPRITES;
+    if (c->fanMap == NULL || c->win[0] == WINDOW_NONE || c->win[1] == WINDOW_NONE || c->win[2] == WINDOW_NONE)
+        return FALSE;           // what was made is freed with the rest
+    SetBgTilemapBuffer(2, c->fanMap);
+    LoadBgTiles(2, sCardBack, CARD_BYTES, CARD_FAN_TILE);
+    LoadPalette(sCardBackPal, BG_PLTT_ID(CARD_BACK_PAL), PLTT_SIZE_4BPP);
+    // the day's card: the companion's cardOfDay (arcana.ts; THE HERMETIC LAYER's rule agreed with it, C-273), or on
+    // Halloween with THE HERMETIC LAYER the Book of Thirteen's card instead
+    c->day.used = TRUE;
+    if (CardsHermetic() && (c->day.thirteen = Hermetic_CardOfDay()) != NULL)
+    {
+        c->day.side = CARD_ABOVE;
+    }
+    else
+    {
+        h = Hermetic_TodayHash(CardsHermetic() ? "spellcraft" : "arcana");
+        c->day.n = h % ARCANA_CARDS;
+        c->day.side = ((h >> 8) % 2) ? (CardsHermetic() ? CARD_ABOVE : CARD_INSTINCT)
+                                     : (CardsHermetic() ? CARD_BELOW : CARD_REASON);
+        c->day.shiny = ((h >> 12) % 16) == 0;
+    }
+    return TRUE;
+}
+
+static void CardsClose(void)
+{
+    struct Cards *c = sBook->cards;
+    u8 k;
+
+    if (c == NULL)
+        return;
+    CardPicFreeAll();
+    for (k = 0; k < CARD_PLACES; k++)
+        if (c->win[k] != WINDOW_NONE && c->win[k] != 0)
+            RemoveWindow(c->win[k]);
+    if (c->fanMap != NULL)
+    {
+        SetBgTilemapBuffer(2, NULL);
+        Free(c->fanMap);
+    }
+    FREE_AND_SET_NULL(sBook->cards);
+    ChangeBgX(1, 0, BG_COORD_SET);
+    ChangeBgY(1, 0, BG_COORD_SET);
+    CardsBgs(FALSE);
+}
+
+//  Which windows show, and where BG1 puts them: the windows sit at x 0, 80 and 160, y 16.
+static void CardsPlaceWindows(u8 mask, s16 dx, s16 dy)
+{
+    u8 k;
+
+    for (k = 0; k < CARD_PLACES; k++)
+    {
+        if (mask & (1 << k))
+            PutWindowTilemap(sBook->cards->win[k]);
+        else
+            ClearWindowTilemap(sBook->cards->win[k]);
+    }
+    CopyBgTilemapBufferToVram(1);
+    ChangeBgX(1, (u32)(-dx) << 8, BG_COORD_SET);
+    ChangeBgY(1, (u32)(CARD_FAN_ROW * 8 - dy) << 8, BG_COORD_SET);
+}
+
+//  ---- the spread: the backs as tile columns on BG2
+
+static void FanColumn(u8 x, u8 col, u8 top)
+{
+    u8 r;
+
+    for (r = 0; r < CARD_TROWS; r++)
+        sBook->cards->fanMap[(top + r) * 32 + x] = (CARD_FAN_TILE + r * CARD_TCOLS + col) | (CARD_BACK_PAL << 12);
+}
+
+//  DEALT cards laid out from the left, the rest still stacked on the last of them; the chosen card lifted a tile and
+//  shown whole over its neighbours, whose feet still show under it.
+static void DrawFan(bool8 lift)
+{
+    struct Cards *c = sBook->cards;
+    u8 n = c->fanCount, width = n + CARD_TCOLS - 1, x0 = (30 - width) / 2, k, col, x;
+
+    CpuFill16(0, c->fanMap, BG_SCREEN_SIZE);
+    for (k = 0; k < n; k++)
+    {
+        x = x0 + (k < c->dealt ? k : c->dealt);
+        if (k + 1 < n && k < c->dealt)
+        {
+            FanColumn(x, 0, CARD_FAN_ROW);
+        }
+        else
+        {
+            for (col = 0; col < CARD_TCOLS; col++)
+                FanColumn(x + col, col, CARD_FAN_ROW);
+            break;                                  // the last, or the undealt rest under it
+        }
+    }
+    if (lift && n != 0)
+    {
+        x = x0 + c->fanCursor;
+        c->fanMap[(CARD_FAN_ROW + CARD_TROWS - 1) * 32 + x] = c->fanCursor == 0 ? 0     // what it uncovers
+            : (CARD_FAN_TILE + (CARD_TROWS - 1) * CARD_TCOLS + 1) | (CARD_BACK_PAL << 12);
+        for (col = 0; col < CARD_TCOLS; col++)
+            FanColumn(x + col, col, CARD_FAN_ROW - 1);
+        for (col = 1; col < CARD_TCOLS && c->fanCursor + 1 == n; col++)   // the last card: nothing under it
+            c->fanMap[(CARD_FAN_ROW + CARD_TROWS - 1) * 32 + x + col] = 0;
+    }
+    ChangeBgX(2, ((30 - width) % 2) ? (u32)(-4) << 8 : 0, BG_COORD_SET);
+    CopyBgTilemapBufferToVram(2);
+}
+
+static void CardsShuffle(void)
+{
+    struct Cards *c = sBook->cards;
+    u8 k, j, t;
+
+    for (k = 0; k < ARCANA_CARDS; k++)
+        c->fan[k] = k;
+    for (k = ARCANA_CARDS - 1; k > 0; k--)
+    {
+        j = Random() % (k + 1);
+        t = c->fan[k];
+        c->fan[k] = c->fan[j];
+        c->fan[j] = t;
+    }
+    c->fanCount = ARCANA_CARDS;
+}
+
+//  The card at the cursor comes out of the spread: its number from the shuffle, its face from the deck chosen.
+static void CardsPull(void)
+{
+    struct Cards *c = sBook->cards;
+    struct CardDraw *d = &c->drawn[c->place];
+    u8 k;
+
+    d->n = c->fan[c->fanCursor];
+    if (c->deck == DECK_BOTH)
+        d->side = Random() % 2;
+    else
+        d->side = c->deck;
+    if (CardsHermetic())
+        d->side += CARD_ABOVE;
+    d->shiny = (Random() % 16) == 0;
+    d->used = TRUE;
+    d->turned = FALSE;
+    d->thirteen = NULL;
+    for (k = c->fanCursor; k + 1 < c->fanCount; k++)
+        c->fan[k] = c->fan[k + 1];
+    c->fanCount--;
+    if (c->fanCursor >= c->fanCount)
+        c->fanCursor = c->fanCount - 1;
+}
+
+//  ---- the views
+
+//  The place each card window shows at on the board: one card centred, or three in a row.
+static s16 PlaceX(u8 k)
+{
+    return 4 + 80 * k;
+}
+#define PLACE_Y 15
+
+static u8 PlaceOf(u8 i)                 // the i-th place's window: a single draw lies in the middle
+{
+    return sBook->cards->places == 1 ? 1 : i;
+}
+
+static void DrawCards(void)
+{
+    struct Cards *c = sBook->cards;
+    u8 k;
+    s16 y;
+
+    CardsBgs(TRUE);
+    CardPicsHide();
+    CpuFill16(0, c->fanMap, BG_SCREEN_SIZE);
+    CopyBgTilemapBufferToVram(2);
+    ChangeBgX(2, 0, BG_COORD_SET);
+    ChangeBgY(2, 0, BG_COORD_SET);
+    CardsBoard();
+    Print(BR_SMALL, sCardsMine, 48 - Width(BR_SMALL, sCardsText_CardOfDay) / 2, 5, sCardsText_CardOfDay);
+    if (c->cursor == CARDS_DAY)
+        Frame(C_MARGIN, 10, 18, CARD_W + 4, CARD_H + 4);
+    for (k = CARDS_SINGLE; k < CARDS_MODES; k++)
+    {
+        y = 22 + (k - 1) * 28;
+        if (k == c->cursor)
+            Rect(C_HIGHLIGHT, 94, y - 2, 142, 18);
+        Print(BR_FONT, k == c->cursor ? sCardsLit : sCardsMine, 98, y, sCardsModeNames[k]);
+    }
+    if (c->cursor == CARDS_DAY)
+        Print(BR_SMALL, sCardsDim, 120 - Width(BR_SMALL, sCardsText_TurnBack) / 2, 146, sCardsText_TurnBack);
+    else
+        Print(BR_SMALL, sCardsDim, 120 - Width(BR_SMALL, sCardsText_Draw) / 2, 146, sCardsText_Draw);
+    CopyWindowToVram(WIN_BOOK, COPYWIN_GFX);
+    CardRender(0, &c->day, c->day.turned);
+    CardsPlaceWindows(1, 12, 20);
+    if (c->day.turned)
+    {
+        CardPicMake(&c->day, CARD_TAG_PIC);
+        CardPicShow(&c->day, 12 + 4, 20 + 14);
+    }
+}
+
+//  The selector, read down as the sentence it is: the titles struck twice and selectable, the words between plain.
+static void DrawCardsSelect(void)
+{
+    struct Cards *c = sBook->cards;
+    const u8 *titles[3], *between[3] = { NULL, NULL, NULL };
+    const u8 *book = CardsHermetic() ? sCardsText_HermeticTitle : sCardsText_SubtleTitle;
+    const u8 *ink = CardsHermetic() ? sCardsEmer : sCardsMine;
+    u8 k, row = 0;
+    s16 y, gap;
+
+    CardsBgs(TRUE);
+    CardPicsHide();
+    CpuFill16(0, c->fanMap, BG_SCREEN_SIZE);
+    CopyBgTilemapBufferToVram(2);
+    CardsBoard();
+    if (CardsHermetic())
+    {
+        bool8 thin = Spellbook_HalfHour();
+
+        titles[0] = thin ? sCardsText_DeckWithin : sCardsText_DeckAbove;
+        titles[1] = thin ? sCardsText_DeckWithout : sCardsText_DeckBelow;
+        titles[2] = sCardsText_DeckBoth;
+        between[0] = sCardsText_As;
+        between[1] = sCardsText_So;
+        between[2] = sCardsText_Or;
+    }
+    else
+    {
+        titles[0] = sCardsText_DeckReason;
+        titles[1] = sCardsText_DeckInstinct;
+        titles[2] = sCardsText_DeckCombined;
+    }
+    gap = CardsHermetic() ? 16 : 24;
+    Rect(C_RULE, 86, 3, 151, CardsHermetic() ? 108 : 84);              // the menu's box
+    Rect(C_PAPER, 88, 5, 147, CardsHermetic() ? 104 : 80);
+    for (k = 0; k < 3; k++)
+    {
+        if (between[k] != NULL)
+        {
+            Print(BR_FONT, sCardsDim, 94, 6 + row * gap, between[k]);
+            row++;
+        }
+        y = 6 + row * gap;
+        if (k == c->deck)
+        {
+            Rect(ink[1], 92, y + 4, 2, 7);
+            Rect(ink[1], 94, y + 5, 1, 5);
+            Rect(ink[1], 95, y + 6, 1, 3);
+            Rect(ink[1], 96, y + 7, 1, 1);
+        }
+        PrintBold(ink, 100, y, titles[k]);
+        if (between[k] != NULL && k < 2)          // the comma after a title is one of the plain words
+            Print(BR_FONT, sCardsDim, 100 + BoldWidth(titles[k]), y, sCardsText_Comma);
+        row++;
+    }
+    Rect(C_FAINT, 8, 3, CARD_W, CARD_H);                                // the deck: two more backs under the one shown
+    Rect(C_RULE, 6, 5, CARD_W, CARD_H);
+    Rect(C_RULE, 8, 120, 224, 32);                                      // and the book it is
+    Rect(C_PAPER, 10, 122, 220, 28);
+    PrintBold(ink, 120 - BoldWidth(book) / 2, 129, book);
+    CopyWindowToVram(WIN_BOOK, COPYWIN_GFX);
+    CardRender(0, NULL, FALSE);
+    CardsPlaceWindows(1, 4, 7);
+}
+
+static void DrawCardsSpread(void)
+{
+    struct Cards *c = sBook->cards;
+    const u8 *label;
+
+    CardsBgs(TRUE);
+    CardPicsHide();
+    CardsBoard();
+    if (c->places == CARD_PLACES)
+    {
+        label = sCardsPlaceNames[c->mode == CARDS_MIND][c->place];
+        Print(BR_SMALL, sCardsLit, 120 - Width(BR_SMALL, label) / 2, 0, label);
+    }
+    if (c->phase == FAN_CHOOSE)
+        Print(BR_SMALL, sCardsDim, 120 - Width(BR_SMALL, sCardsText_Draw) / 2, 146, sCardsText_Draw);
+    CopyWindowToVram(WIN_BOOK, COPYWIN_GFX);
+    CardsPlaceWindows(0, 4, PLACE_Y);
+    DrawFan(c->phase == FAN_CHOOSE);
+}
+
+static void DrawCardsBoard(void)
+{
+    struct Cards *c = sBook->cards;
+    u8 i, k, mask = 0;
+    s16 px;
+    const u8 *label;
+
+    CardsBgs(TRUE);
+    CardPicsHide();
+    CpuFill16(0, c->fanMap, BG_SCREEN_SIZE);
+    CopyBgTilemapBufferToVram(2);
+    ChangeBgY(2, 0, BG_COORD_SET);
+    CardsBoard();
+    for (i = 0; i < c->places; i++)
+    {
+        k = PlaceOf(i);
+        px = PlaceX(k) - 3;
+        Frame(i == c->place && c->phase != FAN_LAND ? C_MARGIN : C_RULE, px, PLACE_Y - 3, 78, 110);
+        Rect(C_FAINT, px, PLACE_Y - 3, 1, 1);
+        if (c->places == CARD_PLACES)
+        {
+            label = sCardsPlaceNames[c->mode == CARDS_MIND][i];
+            Print(BR_SMALL, i == c->place && c->phase != FAN_LAND ? sCardsLit : sCardsMine,
+                  px + 39 - Width(BR_SMALL, label) / 2, 126, label);
+        }
+        if (c->drawn[i].used)
+        {
+            mask |= 1 << k;
+            CardRender(k, &c->drawn[i], c->drawn[i].turned);
+            if (c->drawn[i].turned)
+            {
+                CardPicMake(&c->drawn[i], CARD_TAG_PIC + 1 + i);
+                CardPicShow(&c->drawn[i], PlaceX(k) + 4, PLACE_Y + 14);
+            }
+        }
+    }
+    if (c->phase != FAN_LAND)
+        Print(BR_SMALL, sCardsDim, 120 - Width(BR_SMALL, sCardsText_TurnBack) / 2, 146, sCardsText_TurnBack);
+    CopyWindowToVram(WIN_BOOK, COPYWIN_GFX);
+    CardsPlaceWindows(mask, 4, PLACE_Y);
+}
+
+//  A turned card's words, larger: the daemon on the left, the numeral and keyword, the deck, the phrase.
+static void DrawCardsRead(void)
+{
+    struct Cards *c = sBook->cards;
+    struct CardDraw *d = c->read ? &c->day : &c->drawn[c->place];
+    const u8 *side;
+    bool8 thin = CardsHermetic() && Spellbook_HalfHour();
+    u8 buf[24], *p, n, i;
+    s16 cx;
+
+    CardsBgs(TRUE);
+    CardPicsHide();
+    CardsPlaceWindows(0, 0, 0);
+    CpuFill16(0, c->fanMap, BG_SCREEN_SIZE);
+    CopyBgTilemapBufferToVram(2);
+    CardsBoard();
+    Rect(C_RULE, 4, 4, 232, 134);
+    Rect(C_PAPER, 6, 6, 228, 130);
+    CardPicShow(d, 14, 30);
+    p = StringCopy(buf, CardRoman(d));
+    *p++ = CHAR_SPACE;
+    StringCopy(p, CardKeyword(d));
+    PrintBold(CardsHermetic() ? sCardsEmer : sCardsMine, CR_TEXT_X, 14, BoldWidth(buf) <= CR_TEXT_W ? buf : CardKeyword(d));
+    side = d->thirteen != NULL ? sText_Thirteen
+         : d->side == CARD_REASON ? sCardsText_SideReason
+         : d->side == CARD_INSTINCT ? sCardsText_SideInstinct
+         : d->side == CARD_ABOVE ? (thin ? sCardsText_SideWithin : sCardsText_SideAbove)
+         : (thin ? sCardsText_SideWithout : sCardsText_SideBelow);
+    Print(BR_SMALL, sCardsDim, CR_TEXT_X, 32, side);
+    if (d->shiny)
+        Print(BR_SMALL, sCardsLit, CR_TEXT_X + Width(BR_SMALL, side) + 6, 32, sCardsText_Shiny);
+    Rect(C_RULE, CR_TEXT_X, 46, CR_TEXT_W, 1);
+    n = Reflow(CardWords(d), CR_TEXT_W, BR_FONT);
+    for (i = 0; i < n && i < 4; i++)
+        Print(BR_FONT, sCardsMine, CR_TEXT_X, 54 + i * 14, Line(i));
+    if (CardSpecies(d) != SPECIES_NONE)
+        Print(BR_SMALL, sCardsDim, 46 - Width(BR_SMALL, gSpeciesNames[CardSpecies(d)]) / 2, 112,
+              gSpeciesNames[CardSpecies(d)]);
+    if (c->read)
+    {
+        Print(BR_SMALL, sCardsLit, 120 - Width(BR_SMALL, sCardsText_CardOfDay) / 2, 144, sCardsText_CardOfDay);
+    }
+    else if (c->places == CARD_PLACES)
+    {
+        for (i = 0; i < CARD_PLACES; i++)
+        {
+            cx = 40 + 80 * i;
+            Print(BR_SMALL, i == c->place ? sCardsLit : sCardsDim,
+                  cx - Width(BR_SMALL, sCardsPlaceNames[c->mode == CARDS_MIND][i]) / 2, 144,
+                  sCardsPlaceNames[c->mode == CARDS_MIND][i]);
+        }
+    }
+    CopyWindowToVram(WIN_BOOK, COPYWIN_GFX);
+}
+
+//  ---- input
+
+static void CardsCollapse(void)
+{
+    CardsClose();
+    sBook->cardsFocus = TRUE;
+    sBook->view = VIEW_COVER;
+    Turn();
+}
+
+static void CardsClear(void)
+{
+    struct Cards *c = sBook->cards;
+    u8 k;
+    struct SpriteTemplate *t;
+
+    for (k = 0; k < CARD_PLACES; k++)
+    {
+        if (c->drawn[k].sprite != MAX_SPRITES)
+        {
+            t = (struct SpriteTemplate *)gSprites[c->drawn[k].sprite].template;
+            CardPicFree(&c->drawn[k], CARD_TAG_PIC + 1 + k);
+            Free(t);
+        }
+        c->drawn[k].used = FALSE;
+        c->drawn[k].turned = FALSE;
+    }
+}
+
+static void Input_Cards(void)
+{
+    struct Cards *c = sBook->cards;
+
+    if (JOY_NEW(B_BUTTON))
+    {
+        CardsCollapse();
+    }
+    else if (JOY_NEW(DPAD_UP | DPAD_LEFT) && c->cursor != 0)
+    {
+        c->cursor--;
+        Move();
+    }
+    else if (JOY_NEW(DPAD_DOWN | DPAD_RIGHT) && c->cursor + 1 < CARDS_MODES)
+    {
+        c->cursor++;
+        Move();
+    }
+    else if (JOY_NEW(A_BUTTON) && c->cursor == CARDS_DAY)
+    {
+        if (!c->day.turned)
+        {
+            c->day.turned = TRUE;
+            PlaySE(SE_BALL_TRAY_EXIT);
+            Draw();
+        }
+        else
+        {
+            c->read = TRUE;
+            sBook->view = VIEW_CARDS_READ;
+            Turn();
+        }
+    }
+    else if (JOY_NEW(A_BUTTON))
+    {
+        CardsClear();                       // a new way to draw clears the last
+        c->mode = c->cursor;
+        c->places = (c->mode == CARDS_SINGLE) ? 1 : CARD_PLACES;
+        c->deck = DECK_FIRST;
+        sBook->view = VIEW_CARDS_SELECT;
+        Turn();
+    }
+}
+
+static void Input_CardsSelect(void)
+{
+    struct Cards *c = sBook->cards;
+
+    if (JOY_NEW(B_BUTTON))
+    {
+        sBook->view = VIEW_CARDS;
+        Turn();
+    }
+    else if (JOY_NEW(DPAD_UP | DPAD_LEFT) && c->deck != 0)
+    {
+        c->deck--;
+        Move();
+    }
+    else if (JOY_NEW(DPAD_DOWN | DPAD_RIGHT) && c->deck < DECK_BOTH)
+    {
+        c->deck++;
+        Move();
+    }
+    else if (JOY_NEW(A_BUTTON))
+    {
+        CardsShuffle();
+        c->place = 0;
+        c->phase = FAN_SHUFFLE;
+        c->timer = 0;
+        c->dealt = 0;
+        c->fanCursor = ARCANA_CARDS / 2;
+        sBook->view = VIEW_CARDS_SPREAD;
+        PlaySE(SE_SELECT);
+        Draw();
+        ChangeBgY(2, 0, BG_COORD_SET);      // BG2's scroll is still the field's until it is set
+    }
+}
+
+//  The spread runs on frames: the shuffle (the stacked deck jostled), the deal (a card a frame), the choice, then
+//  the deck away up the screen, the card landing on the board, and the deck back for the next place.
+static void Input_CardsSpread(void)
+{
+    struct Cards *c = sBook->cards;
+
+    switch (c->phase)
+    {
+    case FAN_SHUFFLE:
+        if (c->timer == 0)
+            DrawCardsSpread();
+        ChangeBgX(2, (u32)((c->timer & 4) ? 3 : -3) << 8, BG_COORD_SET);
+        if (c->timer % 8 == 0)
+            PlaySE(SE_BALL_TRAY_EXIT);
+        if (++c->timer >= 48)
+        {
+            ChangeBgX(2, 0, BG_COORD_SET);
+            c->phase = FAN_DEAL;
+            c->timer = 0;
+        }
+        break;
+    case FAN_DEAL:
+        if (++c->timer % 3 == 0)
+        {
+            c->dealt++;
+            DrawFan(FALSE);
+            if (c->dealt + 1 >= c->fanCount)
+            {
+                c->dealt = c->fanCount;
+                c->phase = FAN_CHOOSE;
+                if (c->fanCursor >= c->fanCount)
+                    c->fanCursor = c->fanCount - 1;
+                DrawCardsSpread();
+            }
+        }
+        break;
+    case FAN_CHOOSE:
+        if (JOY_NEW(B_BUTTON))
+        {
+            ChangeBgX(2, 0, BG_COORD_SET);
+            CardsClear();
+            sBook->view = VIEW_CARDS;
+            Turn();
+        }
+        else if (JOY_REPT(DPAD_LEFT) && c->fanCursor != 0)
+        {
+            c->fanCursor--;
+            PlaySE(SE_SELECT);
+            DrawFan(TRUE);
+        }
+        else if (JOY_REPT(DPAD_RIGHT) && c->fanCursor + 1 < c->fanCount)
+        {
+            c->fanCursor++;
+            PlaySE(SE_SELECT);
+            DrawFan(TRUE);
+        }
+        else if (JOY_NEW(A_BUTTON))
+        {
+            CardsPull();
+            PlaySE(SE_BALL_TRAY_EXIT);
+            c->dealt = c->fanCount;
+            DrawFan(FALSE);
+            c->phase = FAN_AWAY;
+            c->timer = 0;
+        }
+        break;
+    case FAN_AWAY:
+        c->timer++;
+        ChangeBgY(2, (u32)(c->timer * 10) << 8, BG_COORD_SET);
+        if (c->timer >= 14)
+        {
+            c->phase = FAN_LAND;
+            c->timer = 0;
+            DrawCardsBoard();
+            PlaySE(SE_BALL_TRAY_ENTER);
+        }
+        break;
+    case FAN_LAND:
+        if (++c->timer < 30)
+            break;
+        c->timer = 0;
+        if (++c->place < c->places)
+        {
+            c->phase = FAN_RETURN;
+            c->dealt = c->fanCount;
+            ChangeBgY(2, (u32)(-140) << 8, BG_COORD_SET);
+            DrawCardsSpread();
+        }
+        else
+        {
+            c->place = 0;
+            c->phase = FAN_CHOOSE;
+            sBook->view = VIEW_CARDS_BOARD;
+            DrawCardsBoard();
+        }
+        break;
+    case FAN_RETURN:
+        c->timer++;
+        ChangeBgY(2, (u32)(-140 + c->timer * 10) << 8, BG_COORD_SET);
+        if (c->timer >= 14)
+        {
+            ChangeBgY(2, 0, BG_COORD_SET);
+            c->phase = FAN_CHOOSE;
+            DrawCardsSpread();
+        }
+        break;
+    }
+}
+
+static void Input_CardsBoard(void)
+{
+    struct Cards *c = sBook->cards;
+    struct CardDraw *d = &c->drawn[c->place];
+
+    if (JOY_NEW(B_BUTTON))
+    {
+        sBook->view = VIEW_CARDS;
+        Turn();
+    }
+    else if (JOY_NEW(DPAD_LEFT) && c->place != 0)
+    {
+        c->place--;
+        Move();
+    }
+    else if (JOY_NEW(DPAD_RIGHT) && c->place + 1 < c->places)
+    {
+        c->place++;
+        Move();
+    }
+    else if (JOY_NEW(A_BUTTON) && !d->turned)
+    {
+        d->turned = TRUE;
+        PlaySE(SE_BALL_TRAY_EXIT);
+        Draw();
+    }
+    else if (JOY_NEW(A_BUTTON))
+    {
+        c->read = FALSE;
+        sBook->view = VIEW_CARDS_READ;
+        Turn();
+    }
+}
+
+static void Input_CardsRead(void)
+{
+    struct Cards *c = sBook->cards;
+
+    if (JOY_NEW(B_BUTTON | A_BUTTON))
+    {
+        sBook->view = c->read ? VIEW_CARDS : VIEW_CARDS_BOARD;
+        Turn();
+    }
+    else if (!c->read && JOY_NEW(DPAD_LEFT) && c->place != 0 && c->drawn[c->place - 1].turned)
+    {
+        c->place--;
+        Turn();
+    }
+    else if (!c->read && JOY_NEW(DPAD_RIGHT) && c->place + 1 < c->places && c->drawn[c->place + 1].turned)
+    {
+        c->place++;
+        Turn();
+    }
+}
+
+//  The hermetic pair's frames breathe on index 14, with the book.
+static void BreatheCards(u8 phase)
+{
+    u8 k;
+    u16 colour;
+
+    if (sBook->cards == NULL || sBook->cards->pulseRows == 0)
+        return;
+    colour = Pulse_Colour(phase);
+    for (k = 0; k < CARD_PLACES; k++)
+        if (sBook->cards->pulseRows & (1 << k))
+            gPlttBufferUnfaded[BG_PLTT_ID(CARD_PAL + k) + CARD_PULSE] = gPlttBufferFaded[BG_PLTT_ID(CARD_PAL + k) + CARD_PULSE] = colour;
+}
+
 static void Draw(void)
 {
     switch (sBook->view)
@@ -1305,12 +2446,19 @@ static void Draw(void)
     case VIEW_CHAPTER:        DrawChapter();       break;
     case VIEW_TOPIC:          DrawTopic();         break;
     case VIEW_COVER:          if (IsLayerBook()) DrawSubtleCover(); else DrawGuideCover(); break;
+    case VIEW_CARDS:           DrawCards();          break;
+    case VIEW_CARDS_SELECT:    DrawCardsSelect();    break;
+    case VIEW_CARDS_SPREAD:    DrawCardsSpread();    break;
+    case VIEW_CARDS_BOARD:     DrawCardsBoard();     break;
+    case VIEW_CARDS_READ:      DrawCardsRead();      break;
     case VIEW_SUBTLE_CONTENTS: DrawSubtleContents(); break;
     case VIEW_SUBTLE_ENTRY:    DrawSubtleEntry();    break;
     case VIEW_THIRTEEN:        DrawThirteen();       break;
     case VIEW_GUIDE_CONTENTS: DrawGuideContents(); break;
     case VIEW_GUIDE_ENTRY:    DrawGuideEntry();    break;
     }
+    if (IsLayerBook())
+        CardsTileShow(sBook->view == VIEW_COVER);
 }
 
 //  ---------------------------------------------------------------- input
@@ -1466,11 +2614,36 @@ static void Input_Topic(void)
     }
 }
 
+static bool8 CardsOpen(void);
+static void CardsClose(void);
+
 static void Input_Cover(void)
 {
     if (JOY_NEW(B_BUTTON))
     {
         Leave();
+    }
+    else if (IsLayerBook() && !sBook->cardsFocus && JOY_NEW(DPAD_DOWN | DPAD_RIGHT))
+    {
+        sBook->cardsFocus = TRUE;           // T-509: onto the deck tile
+        Move();
+    }
+    else if (IsLayerBook() && sBook->cardsFocus && JOY_NEW(DPAD_UP | DPAD_LEFT))
+    {
+        sBook->cardsFocus = FALSE;
+        Move();
+    }
+    else if (IsLayerBook() && sBook->cardsFocus && JOY_NEW(A_BUTTON))
+    {
+        if (!CardsOpen())
+        {
+            CardsClose();                   // no room on the heap: the section stays shut
+            PlaySE(SE_FAILURE);
+            return;
+        }
+        sBook->cards->cursor = CARDS_DAY;
+        sBook->view = VIEW_CARDS;
+        Turn();
     }
     else if (JOY_NEW(A_BUTTON) && sBook->book == BOOK_HERMETIC && Hermetic_CardOfDay() != NULL)
     {
@@ -1752,6 +2925,7 @@ static void BreatheHermetic(void)
     gPlttBufferUnfaded[0] = gPlttBufferFaded[0] = backdrop;
     gPlttBufferUnfaded[BG_PLTT_ID(15) + C_COVER] = gPlttBufferFaded[BG_PLTT_ID(15) + C_COVER] = backdrop;
     gPlttBufferUnfaded[BG_PLTT_ID(15) + C_RING] = gPlttBufferFaded[BG_PLTT_ID(15) + C_RING] = Pulse_Emerald(phase);
+    BreatheCards(phase);    // T-509: and the hermetic frames, on their index 14
 }
 
 static void Task_BookInput(u8 taskId)
@@ -1761,7 +2935,13 @@ static void Task_BookInput(u8 taskId)
         if (gPaletteFade.active)
             return;
         DestroyTask(taskId);
+        CardsClose();                       // T-509: the section's windows, map and daemons
         FreeAllWindowBuffers();
+        if (IsLayerBook())
+        {
+            ResetSpriteData();              // T-509: the deck tile (the field loads its own on return)
+            FreeAllSpritePalettes();
+        }
         if (sBook->song != 0)
         {
             ResetSpriteData();   // T-417: the song's notes (the field loads its own on return)
@@ -1787,6 +2967,11 @@ static void Task_BookInput(u8 taskId)
     case VIEW_SUBTLE_CONTENTS: Input_SubtleContents(); break;
     case VIEW_SUBTLE_ENTRY:    Input_SubtleEntry();    break;
     case VIEW_THIRTEEN:        Input_Thirteen();       break;
+    case VIEW_CARDS:           Input_Cards();          break;
+    case VIEW_CARDS_SELECT:    Input_CardsSelect();    break;
+    case VIEW_CARDS_SPREAD:    Input_CardsSpread();    break;
+    case VIEW_CARDS_BOARD:     Input_CardsBoard();     break;
+    case VIEW_CARDS_READ:      Input_CardsRead();      break;
     }
     if (sBook != NULL && !sBook->leaving)
     {
@@ -1845,6 +3030,8 @@ static void Task_BookInit(u8 taskId)
         LoadPalette(&pal[C_COVER], BG_PLTT_ID(0), PLTT_SIZEOF(1));        // the backdrop is the cover
         break;
     case 3:
+        if (IsLayerBook())
+            CardsTileMake();                // T-509: the deck tile, shown on the cover only
         Draw();
         PutWindowTilemap(WIN_BOOK);
         CopyBgTilemapBufferToVram(0);

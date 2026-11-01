@@ -402,6 +402,12 @@ static bool8 HalfHour(void)
     return DaemonsWitchingMinute() >= 30;      // 3:30-3:59 by the clock (T-501), or DEBUG's 3:30 AM
 }
 
+// T-509: THE HERMETIC LAYER's deck selector reads Within / Without in the same half-hour.
+bool8 Spellbook_HalfHour(void)
+{
+    return HalfHour();
+}
+
 static u16 Known(void)
 {
     u16 known = VarGet(VAR_SPELLS_KNOWN) & ~(1 << SPELL_WITCHING);     // never off the page: see THE WITCHING HOUR

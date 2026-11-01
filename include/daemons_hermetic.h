@@ -26,4 +26,9 @@ void Hermetic_TrickOrTreat(void);       // at a battle's end: a treat waits for 
 struct ThirteenCard { u8 n[6]; u8 keyword[11]; u8 phrase[40]; u8 species[11]; };
 const struct ThirteenCard *Hermetic_CardOfDay(void);
 
+// T-509: the hash a card of the day is drawn from (the companion's arcana.ts): FNV-1a of
+// "YYYY-MM-DD|<name><ID No.>|<tail>" over UTF-16 code units, the name decoded as the companion decodes a save.
+u32 Hermetic_HashDay(const u8 *name, u16 id, u16 year, u8 month, u8 day, const char *tail);
+u32 Hermetic_TodayHash(const char *tail);     // this save's trainer, today by the game's calendar
+
 #endif // GUARD_DAEMONS_HERMETIC_H

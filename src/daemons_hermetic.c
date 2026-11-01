@@ -370,12 +370,13 @@ static u32 FnvAscii(u32 h, const char *s)
     return h;
 }
 
-static u8 ThirteenOn(u16 year, u8 month, u8 day)
+// T-509: the hash every card of the day is drawn from, the companion's: FNV-1a over "YYYY-MM-DD|<name><ID No.>|"
+// and then TAIL ("thirteen", "arcana" for THE SUBTLE LAYER's deck, "spellcraft" for THE HERMETIC LAYER's).
+u32 Hermetic_HashDay(const u8 *name, u16 id, u16 year, u8 month, u8 day, const char *tail)
 {
     char buf[16], *p = buf;
     u32 h;
     u8 i, b;
-    u16 id = gSaveBlock2Ptr->playerTrainerId[0] | (gSaveBlock2Ptr->playerTrainerId[1] << 8);
 
     p = Digits(p, year, 4);
     *p++ = '-';
@@ -385,24 +386,32 @@ static u8 ThirteenOn(u16 year, u8 month, u8 day)
     *p++ = '|';
     *p = 0;
     h = FnvAscii(2166136261u, buf);
-    for (i = 0; i < PLAYER_NAME_LENGTH && (b = gSaveBlock2Ptr->playerName[i]) != 0xFF; i++)
+    for (i = 0; i < PLAYER_NAME_LENGTH && (b = name[i]) != 0xFF; i++)
         h = (h ^ sCodeOf[b]) * 16777619u;
     p = Digits(buf, id, 1);
+    *p++ = '|';
     *p = 0;
     h = FnvAscii(h, buf);
-    h = FnvAscii(h, "|thirteen");
-    return h % THIRTEEN_CARDS;
+    return FnvAscii(h, tail);
+}
+
+// Today's hash for TAIL, for this save's trainer, by the game's calendar.
+u32 Hermetic_TodayHash(const char *tail)
+{
+    u16 dayNumber, minute, year;
+    u8 month, mday;
+
+    DaemonsDayAndMinute(&dayNumber, &minute);
+    DaemonsDateOf(dayNumber, &year, &month, &mday);
+    return Hermetic_HashDay(gSaveBlock2Ptr->playerName,
+                            gSaveBlock2Ptr->playerTrainerId[0] | (gSaveBlock2Ptr->playerTrainerId[1] << 8),
+                            year, month, mday, tail);
 }
 
 // Today's card, or NULL when it is not Halloween or the book is not held.
 const struct ThirteenCard *Hermetic_CardOfDay(void)
 {
-    u16 dayNumber, minute, year;
-    u8 month, mday;
-
     if (!Hermetic_Held() || !Hermetic_IsHalloween())
         return NULL;
-    DaemonsDayAndMinute(&dayNumber, &minute);
-    DaemonsDateOf(dayNumber, &year, &month, &mday);
-    return &sThirteen[ThirteenOn(year, month, mday)];
+    return &sThirteen[Hermetic_TodayHash("thirteen") % THIRTEEN_CARDS];
 }
