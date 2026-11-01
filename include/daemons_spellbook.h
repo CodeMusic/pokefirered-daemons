@@ -53,6 +53,7 @@ bool8 Spellbook_PatternOn(void);
 bool8 Spellbook_LeanHushed(void);           // THE LENS and THE PATTERN are reason's: the lean (T-459 C) says nothing
 bool8 Spellbook_PatternWanted(u8 battler);  // the menu should wait for the foe's choice, to name it
 bool8 Spellbook_PatternReady(void);         // ... and it has come, or will not
+void Spellbook_FieldTell(void);             // THE FIELD: the foe shows what it has settled on, by colour and motion
 const u8 *Spellbook_PromptText(void);       // THE PATTERN's or THE LENS's line where "What will X do?" stood, or NULL
 bool8 Spellbook_LensMoveText(u16 move, u8 *effect, u8 *hit);   // THE LENS in the routine menu: x2, and 95%
 

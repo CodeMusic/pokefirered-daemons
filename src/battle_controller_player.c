@@ -3192,6 +3192,7 @@ static void ShowChooseAction(void)
         BattlePutTextOnWindow(sText_ButtonHint, B_WIN_ACTION_PROMPT);
     else
         PrintActionPrompt();
+    Spellbook_FieldTell();              // T-483 (5): THE FIELD -- the foe telegraphs its routine
 }
 
 static void PlayerHandleUnknownYesNoBox(void)

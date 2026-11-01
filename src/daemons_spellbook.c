@@ -1852,9 +1852,15 @@ static u8 Foe(void)
 
 #define PATTERN_GIVE_UP 30      // frames to wait on the foe, as the lean waits
 
+// THE FIELD waits as THE PATTERN does: its telegraph is read from the same choice (Spellbook_FieldTell, below).
+static bool8 ReadsTheFoe(void)
+{
+    return Spellbook_PatternOn() || Spellbook_FieldOn();
+}
+
 bool8 Spellbook_PatternWanted(u8 battler)
 {
-    if (!Spellbook_PatternOn() || battler != GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)
+    if (!ReadsTheFoe() || battler != GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)
      || BattleMain_ActionSettled(Foe()))
         return FALSE;
     sPatternWait = 0;
@@ -1863,10 +1869,216 @@ bool8 Spellbook_PatternWanted(u8 battler)
 
 bool8 Spellbook_PatternReady(void)
 {
-    if (!Spellbook_PatternOn() || BattleMain_ActionSettled(Foe()))
+    if (!ReadsTheFoe() || BattleMain_ActionSettled(Foe()))
         return TRUE;
     return ++sPatternWait >= PATTERN_GIVE_UP;
 }
+
+//  What the foe has settled on this turn, as THE PATTERN names it and THE FIELD shows it. *MOVE is the routine that will
+//  run (a locked one, STRUGGLE, or the chosen), or MOVE_NONE.
+#define INTENT_UNKNOWN 0    // not settled (yet), or nothing that can be read
+#define INTENT_ROUTINE 1
+#define INTENT_SWITCH  2
+#define INTENT_FLEE    3
+#define INTENT_ITEM    4
+#define INTENT_REST    5
+
+static u8 FoeIntent(u16 *move)
+{
+    u8 foe = Foe();
+    u16 m;
+
+    *move = MOVE_NONE;
+    if (!BattleMain_ActionSettled(foe))
+        return INTENT_UNKNOWN;
+    switch (gChosenActionByBattler[foe])
+    {
+    case B_ACTION_SWITCH: return INTENT_SWITCH;
+    case B_ACTION_RUN:    return INTENT_FLEE;
+    case B_ACTION_USE_MOVE: break;
+    default:              return INTENT_ITEM;
+    }
+    if (gBattleMons[foe].status2 & STATUS2_RECHARGE)
+        return INTENT_REST;
+    if (gBattleMons[foe].status2 & STATUS2_MULTIPLETURNS)
+        m = gLockedMoves[foe];
+    else if (gProtectStructs[foe].noValidMoves)
+        m = MOVE_STRUGGLE;
+    else
+        m = gChosenMoveByBattler[foe];
+    if (m == MOVE_NONE || m >= MOVES_COUNT)
+        return INTENT_UNKNOWN;
+    *move = m;
+    return INTENT_ROUTINE;
+}
+
+//  ---------------------------------------------------------------- THE FIELD's telegraph
+//
+//  T-483 (5), the brief's "creatures telegraph intent through animation and colour instead". With the numbers dark,
+//  the foe shows what it has settled on before the player chooses, without a word or a number: while the action menu
+//  and the routine menu are up, its sprite breathes toward the colour of the TYPE of the routine it will run (the
+//  streak colour, Streaks_TypeColour -- the same table the field's MIRROR and the routines' streaks use) and moves:
+//    a routine that strikes (power > 0)   draws back a pixel, then lunges toward the lead and eases home;
+//    a routine that shapes (power 0)      shimmers in place while the colour is at its height;
+//    a switch or a flight                 leans away and dims, no colour (it is leaving, not acting);
+//    an item, or a turn it must rest      only dims, slowly, and does not move.
+//  Known early, and nothing changes: battle_main.c asks the player and the foe for their actions in the same frame and
+//  the foe's AI never reads the player's choice; the menu waits (as THE PATTERN's does, at most PATTERN_GIVE_UP
+//  frames) only until the foe's choice has settled, which in the unwaited game happens in those same frames, long
+//  before any input could. The telegraph reads gChosenActionByBattler / gChosenMoveByBattler and never calls Random(),
+//  so the battle's course is the same with it or without it. It draws on the faded buffer only, blended from the
+//  unfaded every frame (nothing compounds), and on the sprite's x2/y2 by delta (whatever else moves it keeps moving);
+//  both are put back the moment the player's action settles, the screen is left (bag, party) or a fade begins.
+//  RAM: none static -- a task's own data while it runs.
+
+#define TELL_PERIOD 64      // frames a breath
+#define TELL_PEAK   10      // of 16: how far toward the type's colour at the height of the breath
+
+#define tFrame   data[0]
+#define tKind    data[1]
+#define tColour  data[2]
+#define tDx      data[3]    // the offset this task has added to the sprite, to take back
+#define tDy      data[4]
+#define tSprite  data[5]
+#define tPal     data[6]    // the OBJ palette blended, or -1
+
+#define TELL_WAIT   0
+#define TELL_STRIKE 1
+#define TELL_SHAPE  2
+#define TELL_AWAY   3
+#define TELL_STILL  4
+
+static void TellUndo(struct Task *task, bool8 palette)
+{
+    struct Sprite *sprite = &gSprites[task->tSprite];
+
+    if (sprite->inUse)
+    {
+        sprite->x2 -= task->tDx;
+        sprite->y2 -= task->tDy;
+    }
+    task->tDx = task->tDy = 0;
+    if (palette && task->tPal >= 0)
+        BlendPalettes(1u << (16 + task->tPal), 0, RGB_BLACK);    // 0: the unfaded copied back as it is
+    task->tPal = -1;
+}
+
+static void TellMove(struct Task *task, s16 dx, s16 dy)
+{
+    struct Sprite *sprite = &gSprites[task->tSprite];
+
+    if (!sprite->inUse)
+        return;
+    sprite->x2 += dx - task->tDx;
+    sprite->y2 += dy - task->tDy;
+    task->tDx = dx;
+    task->tDy = dy;
+}
+
+static void Task_FieldTell(u8 taskId)
+{
+    struct Task *task = &gTasks[taskId];
+    u8 foe = Foe();
+    u16 move;
+    s16 t, breath, dx = 0, dy = 0;
+    u8 coeff = 0;
+    u16 colour = RGB_BLACK;
+
+    if (!gMain.inBattle || !Spellbook_FieldOn() || gMain.callback2 != BattleMainCB2)
+    {
+        // the bag, the party, or the battle's end: the screen is someone else's now and is rebuilt on return
+        task->tDx = task->tDy = 0;
+        DestroyTask(taskId);
+        return;
+    }
+    if (gPaletteFade.active || BattleMain_ActionSettled(GetBattlerAtPosition(B_POSITION_PLAYER_LEFT))
+     || gBattlerSpriteIds[foe] != task->tSprite)
+    {
+        TellUndo(task, !gPaletteFade.active);   // a fade reads the unfaded itself
+        DestroyTask(taskId);
+        return;
+    }
+    if (task->tKind == TELL_WAIT)
+    {
+        switch (FoeIntent(&move))
+        {
+        case INTENT_UNKNOWN:
+            return;             // not yet; if it never settles, nothing is shown
+        case INTENT_ROUTINE:
+            task->tKind = gBattleMoves[move].power != 0 ? TELL_STRIKE : TELL_SHAPE;
+            task->tColour = Streaks_TypeColour(gBattleMoves[move].type);
+            break;
+        case INTENT_SWITCH:
+        case INTENT_FLEE:
+            task->tKind = TELL_AWAY;
+            break;
+        default:
+            task->tKind = TELL_STILL;
+            break;
+        }
+        task->tFrame = 0;
+        task->tPal = gSprites[task->tSprite].oam.paletteNum;
+    }
+    t = task->tFrame;
+    if (++task->tFrame >= TELL_PERIOD)
+        task->tFrame = 0;
+    breath = t < TELL_PERIOD / 2 ? t : TELL_PERIOD - t;    // 0 .. 32 .. 0
+    switch (task->tKind)
+    {
+    case TELL_STRIKE:
+        coeff = breath * TELL_PEAK / (TELL_PERIOD / 2);
+        colour = task->tColour;
+        if (t < 16)
+            dx = t / 8;                         // draws back
+        else if (t < 22)
+            dx = -(t - 16);                     // lunges toward the lead (down and to the left)
+        else if (t < 40)
+            dx = -5 + (t - 22) * 5 / 18;        // eases home
+        dy = -dx / 2;
+        break;
+    case TELL_SHAPE:
+        coeff = breath * TELL_PEAK / (TELL_PERIOD / 2);
+        colour = task->tColour;
+        if (breath >= 12)
+        {
+            dx = (t >> 1) & 1 ? 1 : -1;         // shimmers in place
+            if (t & 2)
+                coeff -= 3;
+        }
+        break;
+    case TELL_AWAY:
+        coeff = breath * 6 / (TELL_PERIOD / 2);
+        dx = breath / 8;                        // leans away, up and to the right
+        dy = -(breath / 16);
+        break;
+    default:
+        coeff = breath * 4 / (TELL_PERIOD / 2);
+        break;
+    }
+    BlendPalettes(1u << (16 + task->tPal), coeff, colour);
+    TellMove(task, dx, dy);
+}
+
+//  battle_controller_player.c ShowChooseAction: the action menu is up (again, after a routine menu backed out of).
+void Spellbook_FieldTell(void)
+{
+    u8 taskId;
+
+    if (!Spellbook_FieldOn() || FuncIsActiveTask(Task_FieldTell))
+        return;
+    taskId = CreateTask(Task_FieldTell, 2);
+    gTasks[taskId].tKind = TELL_WAIT;
+    gTasks[taskId].tSprite = gBattlerSpriteIds[Foe()];
+    gTasks[taskId].tPal = -1;
+}
+
+#undef tFrame
+#undef tKind
+#undef tColour
+#undef tDx
+#undef tDy
+#undef tSprite
+#undef tPal
 
 //  The book's emerald, lit, on the battle's dark box: BG palette 0's slot 12, the placeholder the lean's purple also
 //  borrows (daemons_three.c) -- never both on one turn, since reason's spells hush the lean.
@@ -1943,29 +2155,17 @@ static const u8 *TimesText(u8 q)
 
 static const u8 *PatternText(void)
 {
-    u8 foe = Foe();
     u16 move;
     u8 *p;
 
-    if (!BattleMain_ActionSettled(foe))
-        return NULL;            // it never settled: nothing to say this turn
-    switch (gChosenActionByBattler[foe])
+    switch (FoeIntent(&move))
     {
-    case B_ACTION_SWITCH: return sText_PatternSwitch;
-    case B_ACTION_RUN:    return sText_PatternFlee;
-    case B_ACTION_USE_MOVE: break;
-    default:              return sText_PatternItem;
+    case INTENT_SWITCH: return sText_PatternSwitch;
+    case INTENT_FLEE:   return sText_PatternFlee;
+    case INTENT_ITEM:   return sText_PatternItem;
+    case INTENT_REST:   return sText_PatternRest;
+    case INTENT_UNKNOWN: return NULL;  // it never settled: nothing to say this turn
     }
-    if (gBattleMons[foe].status2 & STATUS2_RECHARGE)
-        return sText_PatternRest;
-    if (gBattleMons[foe].status2 & STATUS2_MULTIPLETURNS)
-        move = gLockedMoves[foe];
-    else if (gProtectStructs[foe].noValidMoves)
-        move = MOVE_STRUGGLE;
-    else
-        move = gChosenMoveByBattler[foe];
-    if (move == MOVE_NONE || move >= MOVES_COUNT)
-        return NULL;
     p = StringCopy(gDisplayedStringBattle, sText_PatternRuns);
     p = StringCopy(p, gMoveNames[move]);
     StringCopy(p, sText_Stop);
