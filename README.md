@@ -23,7 +23,9 @@ the BENCHMARKS, the INDEX, the NOTEBOOK, PLAY and the companion, and a glossary.
 
 **No ROM is distributed.** Releases are BPS patches for a cartridge you own,
 published on the [DAEMONS releases page][releases] (latest: **v11.335.6**,
-2026-11-01), four to a release: CONTENT for *FireRed* 1.0 and Rev 1, CONTEXT
+2026-11-01; the newest thing in it that can be told about came in v11.335.1: a
+lioness, met more than once before the ship, now passes on a teacher's line and
+waits on deck with a ball), four to a release: CONTENT for *FireRed* 1.0 and Rev 1, CONTEXT
 for *LeafGreen* 1.0 and Rev 1. The game also plays in a browser on
 [**daemons-playground**][playground] (a private network only), and in the
 companion's [one app][oneapp] on an iPhone or iPad, which patches the player's
