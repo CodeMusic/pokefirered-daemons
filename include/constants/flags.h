@@ -1943,6 +1943,10 @@
                                                                                 //   eighth MARK is held (once)
 #define FLAG_MOM_SAID_DAVID_CALLED            (DAEMONS_FLAGS_START + 0x3FC)   // T-504: MOM has said DAVID called, once the ship
                                                                                 //   has sailed (once)
+#define FLAG_SPELL_SEAM                       (DAEMONS_FLAGS_START + 0x3FD)   // T-483 (5): THE SEAM set on the next single battle
+                                                                                //   (a battle spell; VAR_SPELL_STATE's two bits were full)
+#define FLAG_SPELL_MIRRORED_HIGH              (DAEMONS_FLAGS_START + 0x3FE)   // T-483 (5): bit 4 of the type THE MIRROR last saw
+                                                                                //   through, + 1 (bits 0-3 are VAR_SPELL_STATE_2's 12-15)
 
 //  BEGIN gbaglobalindex -- T-334: each fixed encounter of the GLOBAL INDEX, once gone (removeobject sets it). The beasts'
 //  and the edition daemons' are also set on every map load while they may not stand (event_data.c,

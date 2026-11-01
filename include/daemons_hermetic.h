@@ -17,6 +17,7 @@ const u8 *Hermetic_Arrival(void);       // once a second in the field: the book 
 // Halloween's costume: the species the follower goes as today, or SPECIES_NONE (no book, not Halloween, unmasked,
 // or nothing beats its first type).
 u16 Hermetic_Costume(u16 species);
+u32 Hermetic_FearsOf(u8 type);          // the types super effective on TYPE, a bit set: what it fears (the costume's rule)
 void Hermetic_Unmask(void);
 
 // T-483 (7): Halloween with the book -- trick or treat, and the Book of Thirteen's card of the day (DRAFT)

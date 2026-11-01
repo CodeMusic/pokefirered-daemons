@@ -96,10 +96,60 @@ EventScript_Spellbook::
 	playse SE_M_MORNING_SUN
 	special Spellbook_Draw
 	waitstate
+	call_if_ne VAR_0x8008, 0, EventScript_SpellbookProcess
 	msgbox gStringVar4
 EventScript_SpellbookShut::
 	releaseall
 	end
+
+@ THE PROCESS: through the stone the player faces, slowly, to the tile beyond it (VAR_0x8008 the way, DIR_*). The
+@ cast has already proved that tile a short walk away (src/daemons_spellbook.c Process).
+EventScript_SpellbookProcess::
+	call_if_eq VAR_0x8008, DIR_SOUTH, EventScript_SpellbookProcessDown
+	call_if_eq VAR_0x8008, DIR_NORTH, EventScript_SpellbookProcessUp
+	call_if_eq VAR_0x8008, DIR_WEST, EventScript_SpellbookProcessLeft
+	call_if_eq VAR_0x8008, DIR_EAST, EventScript_SpellbookProcessRight
+	return
+
+EventScript_SpellbookProcessDown::
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_ProcessDown
+	waitmovement 0
+	return
+
+EventScript_SpellbookProcessUp::
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_ProcessUp
+	waitmovement 0
+	return
+
+EventScript_SpellbookProcessLeft::
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_ProcessLeft
+	waitmovement 0
+	return
+
+EventScript_SpellbookProcessRight::
+	applymovement OBJ_EVENT_ID_PLAYER, Movement_ProcessRight
+	waitmovement 0
+	return
+
+Movement_ProcessDown:
+	walk_slow_down
+	walk_slow_down
+	step_end
+
+Movement_ProcessUp:
+	walk_slow_up
+	walk_slow_up
+	step_end
+
+Movement_ProcessLeft:
+	walk_slow_left
+	walk_slow_left
+	step_end
+
+Movement_ProcessRight:
+	walk_slow_right
+	walk_slow_right
+	step_end
 
 EventScript_SpellbookByDay::
 	msgbox Text_SpellbookByDay

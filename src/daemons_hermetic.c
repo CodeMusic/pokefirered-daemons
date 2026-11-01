@@ -123,8 +123,9 @@ static char *Digits(char *p, u32 n, u8 width)
     return p;
 }
 
-// The types whose strike on TYPE is super effective, as a bit set (the chart, after FORESIGHT's rows too).
-static u32 FearsOf(u8 type)
+// The types whose strike on TYPE is super effective, as a bit set (the chart, after FORESIGHT's rows too). The
+// costume's "what it fears", and THE MIRROR's opposed pair (daemons_spellbook.c) reads the same rule.
+u32 Hermetic_FearsOf(u8 type)
 {
     u32 set = 0;
     u16 i;
@@ -177,7 +178,7 @@ static u16 CostumeOn(u16 species, u16 year, u8 month, u8 day)
     u8 n = 0, t, type;
     u16 s, count = 0, pick;
 
-    fears = FearsOf(gSpeciesInfo[species].types[0]);
+    fears = Hermetic_FearsOf(gSpeciesInfo[species].types[0]);
     for (t = 0; t < NUMBER_OF_MON_TYPES; t++)
         if (fears & (1u << t))
             n++;

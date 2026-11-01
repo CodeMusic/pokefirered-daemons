@@ -230,6 +230,9 @@ extern const u8 BattleScript_OldMan_Pokedude_CaughtMessage[];
 extern const u8 BattleScript_SilphScopeUnveiled[];
 extern const u8 BattleScript_RemnantDream[];
 extern const u8 BattleScript_SinkTookTheHit[];   // T-488
+extern const u8 BattleScript_SeamHurts[];        // T-483 (5): THE SEAM
+extern const u8 BattleScript_SeamMends[];
+extern const u8 BattleScript_SeamCarries[];
 extern const u8 BattleScript_BattleTowerTrainerBattleWon[];
 
 extern const u8 *const gBattleScriptsForMoveEffects[];

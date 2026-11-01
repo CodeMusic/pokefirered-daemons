@@ -73,6 +73,13 @@ void Spellbook_OnRest(void);                // script_pokemon_util.c HealPlayerP
 enum { SMALL_HAND_NONE, SMALL_HAND_PASSED, SMALL_HAND_OPENS };
 u8 Spellbook_SmallHandSees(u8 objectId);    // trainer_see.c: PASSED skip this trainer; OPENS a script is running
 
+// THE PROCESS and THE SEAM (part six): a stone walked through; the lead and its foe tied for one battle.
+bool8 Spellbook_SeamOn(void);
+void Spellbook_SeamRoutineStarts(void);     // Cmd_attackcanceler
+void Spellbook_SeamFelt(u8 battler, u16 before, u16 after);    // Cmd_datahpupdate
+enum { SEAM_DONE, SEAM_SCRIPT, SEAM_WAIT };
+u8 Spellbook_SeamRoutineEnds(void);         // Cmd_moveend's MOVEEND_SEAM: SEAM_SCRIPT a script was pushed
+
 #if DAEMONS_DEBUG
 void Spellbook_DebugAll(bool8 on);          // DEBUG -> GAME EVENTS: every spell known (or none)
 #endif

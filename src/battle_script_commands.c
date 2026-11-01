@@ -833,6 +833,7 @@ static void Cmd_attackcanceler(void)
         gCurrentActionFuncId = B_ACTION_FINISHED;
         return;
     }
+    Spellbook_SeamRoutineStarts();  // T-483 (5): THE SEAM counts from here
     if (gBattleMons[gBattlerAttacker].hp == 0 && !(gHitMarker & HITMARKER_NO_ATTACKSTRING))
     {
         gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
@@ -1929,6 +1930,8 @@ static void Cmd_datahpupdate(void)
         }
         else
         {
+            u16 hpBefore = gBattleMons[gActiveBattler].hp;    // T-483 (5): THE SEAM feels the change
+
             gHitMarker &= ~HITMARKER_IGNORE_SUBSTITUTE;
             if (gBattleMoveDamage < 0) // hp goes up
             {
@@ -1998,6 +2001,7 @@ static void Cmd_datahpupdate(void)
                 }
             }
             gHitMarker &= ~HITMARKER_PASSIVE_DAMAGE;
+            Spellbook_SeamFelt(gActiveBattler, hpBefore, gBattleMons[gActiveBattler].hp);
             BtlController_EmitSetMonData(BUFFER_A, REQUEST_HP_BATTLE, 0, sizeof(gBattleMons[gActiveBattler].hp), &gBattleMons[gActiveBattler].hp);
             MarkBattlerForControllerExec(gActiveBattler);
         }
@@ -4454,6 +4458,17 @@ static void Cmd_moveend(void)
                 target = gBattlerTarget;
                 attacker = gBattlerAttacker;
                 *(attacker * 2 + target * 8 + (u8 *)(gBattleStruct->lastTakenMoveFrom) + 1) = gChosenMove >> 8;
+            }
+            gBattleScripting.moveendState++;
+            break;
+        case MOVEEND_SEAM: // T-483 (5): THE SEAM -- the lead and its foe feel half of what the other felt
+            i = Spellbook_SeamRoutineEnds();
+            if (i == SEAM_WAIT)
+                return;
+            if (i == SEAM_SCRIPT)
+            {
+                effect = TRUE;      // the state is kept: it comes back here for the other end
+                break;
             }
             gBattleScripting.moveendState++;
             break;

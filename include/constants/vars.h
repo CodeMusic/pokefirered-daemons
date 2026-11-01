@@ -289,7 +289,9 @@
 #define VAR_SPELL_LEDGER_2         0x40E3 // T-483 (5): ... low byte CONTENT, high CONTEXT (all four halved at 255)
 #define VAR_SPELL_STATE_2          0x40E4 // T-483 (5): bits 0-1 THE PULL's calm on the next single battle (turns, 0 none);
                                           //   2-4 THE GREAT HAND's battles left; 5-9 the road it named (a dream step);
-                                          //   10-11 the hand said last (1 SMALL, 2 GREAT, 0 none), for the 7+8 line
+                                          //   10-11 the hand said last (1 SMALL, 2 GREAT, 0 none), for the 7+8 line;
+                                          //   12-15 bits 0-3 of the first type THE MIRROR last saw through, + 1 (0 none;
+                                          //   bit 4 is FLAG_SPELL_MIRRORED_HIGH), for THE PROCESS and THE SEAM's door
 #define VAR_SPELL_STATE_3          0x40E5 // T-483 (5): bits 0-6 THE AWAKENINGs said (to 100, THE RETURN's door); 7 THE
                                           //   RETURN said since the last rest; 8 THE SMALL HAND held; 9-15 the clock
                                           //   hour the last hand was said in ((day * 24 + hour) mod 128)

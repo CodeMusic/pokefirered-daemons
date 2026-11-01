@@ -4411,3 +4411,28 @@ BattleScript_ActionSelectionItemsCantBeUsed::
 BattleScript_FlushMessageBox::
 	printstring STRINGID_EMPTYSTRING3
 	return
+
+@ T-483 (5): THE SEAM -- at a routine's end the thread pulls (Spellbook_SeamRoutineEnds, from moveend): the lead or its
+@ foe feels half of what the other felt, harm or mending (gBattleMoveDamage, on gEffectBattler; never the last HP), or
+@ gains the state the other gained. Passive, so COUNTER and BIDE never see it. DRAFT words.
+BattleScript_SeamHurts::
+	orword gHitMarker, HITMARKER_SKIP_DMG_TRACK | HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_DAMAGE
+	healthbarupdate BS_EFFECT_BATTLER
+	datahpupdate BS_EFFECT_BATTLER
+	printstring STRINGID_SEAMHURTS
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_SeamMends::
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE | HITMARKER_PASSIVE_DAMAGE
+	healthbarupdate BS_EFFECT_BATTLER
+	datahpupdate BS_EFFECT_BATTLER
+	printstring STRINGID_SEAMMENDS
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_SeamCarries::
+	updatestatusicon BS_EFFECT_BATTLER
+	printstring STRINGID_SEAMCARRIES
+	waitmessage B_WAIT_TIME_LONG
+	return

@@ -127,6 +127,10 @@ static const u8 sText_PkmnBlownAway[] = _("{B_DEF_NAME_WITH_PREFIX} was\nblown a
 // T-489, DRAFT: ALIGN. The foe is talked round to the user's first type.
 // T-488, DRAFT: a * SINK halved a super-effective hit, and is spent.
 static const u8 sText_SinkTookTheHit[] = _("{B_DEF_NAME_WITH_PREFIX}'s\n{B_LAST_ITEM} took the hit!");
+// T-483 (5), DRAFT: THE SEAM -- what one felt in the routine, the other feels half of; a state carried across.
+static const u8 sText_SeamHurts[] = _("{B_EFF_NAME_WITH_PREFIX}\nfelt it through the SEAM!");
+static const u8 sText_SeamMends[] = _("{B_EFF_NAME_WITH_PREFIX}\nwas mended through the SEAM!");
+static const u8 sText_SeamCarries[] = _("The SEAM carried it to\n{B_EFF_NAME_WITH_PREFIX}!");
 static const u8 sText_PkmnAligned[] = _("{B_DEF_NAME_WITH_PREFIX} came round\nto the {B_BUFF1} type!");
 static const u8 sText_PkmnChangedType[] = _("{B_ATK_NAME_WITH_PREFIX} transformed\ninto the {B_BUFF1} type!");
 static const u8 sText_PkmnFlinched[] = _("{B_ATK_NAME_WITH_PREFIX} flinched!");
@@ -928,6 +932,9 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_TRAINER1MON1AND2COMEBACK - BATTLESTRINGS_TABLE_START]      = sText_Trainer1RecallBoth,
     [STRINGID_PKMNALIGNED - BATTLESTRINGS_TABLE_START]                   = sText_PkmnAligned,   // T-489, DRAFT
     [STRINGID_SINKTOOKTHEHIT - BATTLESTRINGS_TABLE_START]                = sText_SinkTookTheHit,   // T-488, DRAFT
+    [STRINGID_SEAMHURTS - BATTLESTRINGS_TABLE_START]                     = sText_SeamHurts,        // T-483 (5), DRAFT
+    [STRINGID_SEAMMENDS - BATTLESTRINGS_TABLE_START]                     = sText_SeamMends,        // T-483 (5), DRAFT
+    [STRINGID_SEAMCARRIES - BATTLESTRINGS_TABLE_START]                   = sText_SeamCarries,      // T-483 (5), DRAFT
 };
 
 const u16 gMissStringIds[] =

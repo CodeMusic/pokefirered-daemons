@@ -4,6 +4,8 @@
 #include "battle_message.h"
 #include "battle_script_commands.h"
 #include "battle_anim.h"
+#include "battle_controllers.h"
+#include "battle_scripts.h"
 #include "battle_setup.h"
 #include "event_data.h"
 #include "event_object_movement.h"
@@ -39,6 +41,8 @@
 #include "constants/event_object_movement.h"
 #include "constants/event_objects.h"
 #include "constants/field_effects.h"
+#include "constants/flags.h"
+#include "constants/map_types.h"
 #include "constants/metatile_behaviors.h"
 #include "constants/moves.h"
 #include "constants/songs.h"
@@ -61,7 +65,12 @@
 //
 //  WHAT IS KNOWN. Spells come off the page as it is read (Spellbook_OnPassageRead, from book_reader.c, on the last
 //  spread of an entry): THE FOLDS (folds one and two) gives THE AWAKENING and THE CONTRAST; THE THIRD FOLD, read after
-//  them, THE ROOM; THE FOURTH, FIFTH AND SIXTH, read after that, THE MIRROR and THE PATTERN. In order, as the brief's table asks: a fold read too early gives nothing, and can be read again. THE
+//  them, THE ROOM; THE FOURTH, FIFTH AND SIXTH, read after that, THE MIRROR and THE PATTERN. THE PROCESS and THE SEAM
+//  come off the page together at a MIRROR, the brief's "spell 4 cast on a creature of each of two opposed types": the
+//  user's reading (2026-11-01, by multiple choice), opposed is a type and what it fears -- the Halloween costume's own
+//  rule (Hermetic_FearsOf: the chart's super-effective rows, read and never touched), on first types as the costume
+//  reads them. THE MIRROR keeps the first type of the daemon it last saw through; said through a daemon whose first
+//  type fears that one, or is feared by it (never the same type twice), both come off the page, in that cast's words. In order, as the brief's table asks: a fold read too early gives nothing, and can be read again. THE
 //  RETURN keeps its own rule, the brief's and the book's: it comes off the page as THE AWAKENING is said the hundredth
 //  time (counted from this build; the count is VAR_SPELL_STATE_3's low seven bits, and stops at a hundred), and says
 //  so in that cast's own words. THE LENS and THE FIELD are GRANTED TOGETHER with the
@@ -115,6 +124,14 @@
 //                   not built: a scene can be a story gate, and refusing one could skip it.
 //    BOTH HANDS     THE SMALL HAND and THE GREAT HAND said in the same hour of the clock (either order) open nothing;
 //                   only, after the second, someone somewhere says you understood. Each pair says it once.
+//    THE PROCESS    none but the crossing's own slowness. Facing one solid tile, the player walks slowly through it
+//                   to the tile beyond, and the stone insists again behind them: "for a time" is the crossing. It
+//                   never opens a way (see below).
+//    THE SEAM       separateness. Set on the next single battle, it ties the lead to its foe: at the end of every
+//                   routine, each takes half of the harm the other took in it and half of the mending (at least one),
+//                   and a state (sleep, poison, burn, freeze, paralysis) one gains the other gains too if it has none
+//                   and could be given it. A bond, not a shield: nothing is taken off the one first hurt, and it cuts
+//                   both ways. The thread never takes the last HP, so it never ends a battle by itself.
 //    One battle spell at a time: setting one lets the other go. They wait for a single battle against a daemon or a
 //    trainer (never a link, a double, the SAFARI, the tutorial or POKEDUDE's) and last that battle. THE PULL's calm
 //    and THE GREAT HAND's road are not battle spells in that sense: either stands beside any of them.
@@ -138,17 +155,28 @@
 //  it for the spell too. Where the search finds no way, nothing moves, and HERE becomes the tile the player stands on,
 //  so a HERE that can never be reached again (a ledge jumped, a door shut) never leaves the spell stuck.
 //
+//  THE PROCESS NEVER OPENS A WAY. It crosses one solid tile only to a tile a WALK from where the player stands could
+//  reach now in at most PROCESS_DETOUR steps -- THE ROOM's search, the same stricter-than-walking rules (this map,
+//  plain ground, same elevation, never an object, a template, a trigger or an unbeaten trainer's line). So it reaches
+//  nothing a short walk does not, and saves at most those steps. The tile crossed must be solid plain ground (MB_NORMAL
+//  with collision: a tree, a fence, a wall, a rock), never an object (a boulder or a tree to CUT is one, so neither is
+//  ever softened), never a sign or anything read, never a trigger, inside this map. Only out of doors (a town or a
+//  route): every BENCHMARK maze and every gym is indoors, so no puzzle's path is ever shortened. Never surfing.
+//
 //  RAM: twelve bytes of IWRAM (sAwakened, sBattleSpell, sPatternWait, sPullCalm, sHandOn and sNews's two; THE ROOM's
 //  sRoomX, sRoomY; THE MIRROR's sMirrorSteps, sMirrorSlot, sMirrorType) and fourteen of EWRAM (THE MIRROR's borrowed
 //  name; THE SMALL HAND's trainer let pass); the list and THE ROOM's search are on the heap while they run. Save:
 //  seven vars, VAR_SPELLS_KNOWN .. VAR_SPELL_STATE_3 (0x40DF-0x40E5), no flags -- THE ROOM and THE MIRROR keep
 //  nothing in the save; THE RETURN, THE SMALL HAND and the two hands' hour live in VAR_SPELL_STATE_3 and two spare
-//  bits of VAR_SPELL_STATE_2.
+//  bits of VAR_SPELL_STATE_2. Part six: THE SEAM's five bytes of IWRAM (sSeamFelt, sSeamState), and in the save its
+//  pending battle as FLAG_SPELL_SEAM (0x3FD) and THE MIRROR's last first type, five bits, as VAR_SPELL_STATE_2's top
+//  four and FLAG_SPELL_MIRRORED_HIGH (0x3FE). Only one type is kept, the last: the save had six bits, not seventeen.
 
 #define BATTLE_SPELL_NONE    0
 #define BATTLE_SPELL_LENS    1
 #define BATTLE_SPELL_FIELD   2
 #define BATTLE_SPELL_PATTERN 3
+#define BATTLE_SPELL_SEAM    4      // IWRAM only: in the save it is FLAG_SPELL_SEAM (VAR_SPELL_STATE's two bits are full)
 
 #define STATE_BATTLE_MASK    0x0003
 #define STATE_CONTRAST_SHIFT 2
@@ -163,6 +191,8 @@
 #define HAND_BATTLES         5
 #define STATE2_LAST_SHIFT    10
 #define STATE2_LAST_MASK     0x0C00     // the hand said last, for the 7+8 line (HAND_SMALL, HAND_GREAT)
+#define STATE2_SEEN_SHIFT    12
+#define STATE2_SEEN_MASK     0xF000     // THE MIRROR's last first type + 1, bits 0-3 (bit 4 FLAG_SPELL_MIRRORED_HIGH)
 #define HAND_SMALL           1
 #define HAND_GREAT           2
 
@@ -175,7 +205,8 @@
 
 #define BUILT_SPELLS ((1 << SPELL_AWAKENING) | (1 << SPELL_CONTRAST) | (1 << SPELL_ROOM) | (1 << SPELL_PULL) \
                     | (1 << SPELL_MIRROR) | (1 << SPELL_PATTERN) | (1 << SPELL_RETURN) | (1 << SPELL_SMALL_HAND) \
-                    | (1 << SPELL_GREAT_HAND) | (1 << SPELL_LENS) | (1 << SPELL_FIELD))
+                    | (1 << SPELL_GREAT_HAND) | (1 << SPELL_PROCESS) | (1 << SPELL_SEAM) | (1 << SPELL_LENS) \
+                    | (1 << SPELL_FIELD))
 #define GRANTED_WITH_BOOK ((1 << SPELL_LENS) | (1 << SPELL_FIELD))
 
 static u8 sAwakened;        // IWRAM: THE AWAKENING said on this map (cleared as the next one loads)
@@ -190,6 +221,8 @@ static u8 sMirrorSlot;      // IWRAM: ... the party slot it looks through
 static u8 sMirrorType;      // IWRAM: ... and that daemon's first type, for the colour
 static EWRAM_DATA u8 sMirrorName[POKEMON_NAME_LENGTH + 1] = {0};   // what {PLAYER} says while it lasts
 static EWRAM_DATA u8 sPassed[3] = {0};  // THE SMALL HAND's trainer let pass on this map: local id (0 none), map, group
+static s16 sSeamFelt[2];    // IWRAM: THE SEAM -- HP the lead (0) and its foe (1) lost in this routine (healing negative)
+static u8 sSeamState;       // IWRAM: ... SEAM_ECHOING, and which of them had a state as the routine began
 
 //  ---------------------------------------------------------------- words (DRAFT, every one)
 
@@ -202,6 +235,8 @@ static const u8 sName_Pattern[]   = _("PATTERN");
 static const u8 sName_Return[]    = _("RETURN");
 static const u8 sName_SmallHand[] = _("SMALL HAND");
 static const u8 sName_GreatHand[] = _("GREAT HAND");
+static const u8 sName_Process[]   = _("PROCESS");
+static const u8 sName_Seam[]      = _("SEAM");
 static const u8 sName_Lens[]      = _("LENS");
 static const u8 sName_Field[]     = _("FIELD");
 
@@ -214,6 +249,8 @@ static const u8 sLabel_Pattern[]   = _("5  PATTERN");
 static const u8 sLabel_Return[]    = _("6  RETURN");
 static const u8 sLabel_SmallHand[] = _("7  SMALL HAND");
 static const u8 sLabel_GreatHand[] = _("8  GREAT HAND");
+static const u8 sLabel_Process[]   = _("9  PROCESS");
+static const u8 sLabel_Seam[]      = _("10 SEAM");
 static const u8 sLabel_Lens[]      = _("11 LENS");
 static const u8 sLabel_Field[]     = _("12 FIELD");
 
@@ -226,6 +263,8 @@ static const u8 sLine_Mirror[]    = _("Other, I name you. And in naming\nyou, I 
 static const u8 sLine_Return[]    = _("I went out so I could come back.\nEverything I learned, I knew.\nEverything I knew, I had to learn.");
 static const u8 sLine_SmallHand[] = _("I choose. Let the choosing be mine,\nwhole and unborrowed.");
 static const u8 sLine_GreatHand[] = _("I am carried. Let the carrying be\ntrue, and let me not pretend I walk\nalone.");
+static const u8 sLine_Process[]   = _("Stone, remember you are a slow\nriver. Wall, remember you are a\nslow door.");
+static const u8 sLine_Seam[]      = _("There is no between. Show me the\nthread I pretended to cut.");
 static const u8 sLine_Pattern[]   = _("Once is chance. Twice is rhyme. Three\ntimes is a law: show me the third.");
 static const u8 sLine_Lens[]      = _("Give me the part. Only the part.\nI will see the whole later,\nif I earn it.");
 static const u8 sLine_Field[]     = _("Take the parts away. Let me feel the\nshape they were making.");
@@ -251,6 +290,8 @@ static const struct Spell sSpells[] =
     { SPELL_RETURN,    sName_Return,    sLabel_Return,    sLine_Return,    LEDGER_CONTEXT, LEDGER_INTUITION },
     { SPELL_SMALL_HAND, sName_SmallHand, sLabel_SmallHand, sLine_SmallHand, LEDGER_CONTENT, LEDGER_REASON },
     { SPELL_GREAT_HAND, sName_GreatHand, sLabel_GreatHand, sLine_GreatHand, LEDGER_CONTEXT, LEDGER_INTUITION },
+    { SPELL_PROCESS,   sName_Process,   sLabel_Process,   sLine_Process,   LEDGER_CONTENT, LEDGER_INTUITION },
+    { SPELL_SEAM,      sName_Seam,      sLabel_Seam,      sLine_Seam,      LEDGER_CONTEXT, LEDGER_INTUITION },
     { SPELL_LENS,      sName_Lens,      sLabel_Lens,      sLine_Lens,      LEDGER_CONTENT, LEDGER_REASON },
     { SPELL_FIELD,     sName_Field,     sLabel_Field,     sLine_Field,     LEDGER_CONTEXT, LEDGER_INTUITION },
 };
@@ -289,6 +330,13 @@ static const u8 sText_SmallHand[]     = _("The SMALL HAND is held. The next\ntra
 static const u8 sText_SmallHandHeld[] = _("The SMALL HAND is held already. The\nnext trainer who sees you will let\pyou choose.");
 static const u8 sText_SmallHandOpens[] = _("Someone sees you, and the SMALL\nHAND opens: this one is yours.\pWalk past, or speak, and choose.");
 static const u8 sText_BothHands[]     = _("\pBoth hands, in one hour. Nothing\nopens.\pBut somewhere, someone says: you\nunderstood.");
+static const u8 sText_MirrorPair[]   = _("\pA type, and what it fears: both\nseen through. Two came off the\ppage: THE PROCESS and THE SEAM.");
+static const u8 sText_Process[]      = _("The stone remembered it is a slow\nriver. It stopped insisting, and\pyou walked through. Behind you it\ninsists again. Nothing is broken.");
+static const u8 sText_ProcessNone[]  = _("Nothing ahead of you insists. The\nPROCESS needs something solid to\nsoften.");
+static const u8 sText_ProcessFar[]   = _("The stone softens, but its far side\nis no short walk from here. It\pgoes back to insisting.");
+static const u8 sText_ProcessRoof[]  = _("Under a roof the walls hold\neverything up. The PROCESS waits\nfor open air.");
+static const u8 sText_ProcessWater[] = _("Water is a river already. The\nPROCESS needs ground under you.");
+static const u8 sText_Seam[]         = _("The SEAM is set on the next battle.\nYour lead and its foe will share\pharm, mending and every state:\nboth ways. A bond, not a shield.");
 static const u8 sText_News[]          = _("Something came off the page and into\nthe SPELLBOOK.\p");
 static const u8 sText_NewsThe[]       = _("THE ");
 static const u8 sText_NewsAnd[]       = _(" and ");
@@ -617,9 +665,9 @@ static void Contrast(void)
 
 static void SetBattleSpell(u8 which, const u8 *text)
 {
-    static const u8 *const sBattleNames[] = { NULL, sName_Lens, sName_Field, sName_Pattern };
+    static const u8 *const sBattleNames[] = { NULL, sName_Lens, sName_Field, sName_Pattern, sName_Seam };
     u16 state = VarGet(VAR_SPELL_STATE);
-    u8 old = state & STATE_BATTLE_MASK;
+    u8 old = FlagGet(FLAG_SPELL_SEAM) ? BATTLE_SPELL_SEAM : (state & STATE_BATTLE_MASK);
     u8 *p = gStringVar4;
 
     if (old != BATTLE_SPELL_NONE && old != which)
@@ -629,7 +677,16 @@ static void SetBattleSpell(u8 which, const u8 *text)
         p = gStringVar4 + StringLength(gStringVar4);
     }
     StringCopy(p, text);
-    VarSet(VAR_SPELL_STATE, (state & ~STATE_BATTLE_MASK) | which);
+    if (which == BATTLE_SPELL_SEAM)
+    {
+        FlagSet(FLAG_SPELL_SEAM);
+        VarSet(VAR_SPELL_STATE, state & ~STATE_BATTLE_MASK);
+    }
+    else
+    {
+        FlagClear(FLAG_SPELL_SEAM);
+        VarSet(VAR_SPELL_STATE, (state & ~STATE_BATTLE_MASK) | which);
+    }
 }
 
 //  ---------------------------------------------------------------- THE PULL
@@ -759,6 +816,7 @@ struct RoomSearch
     s16 x0, y0;
     u8 elevation;
     u8 cell[ROOM_W * ROOM_H];
+    u8 steps[ROOM_W * ROOM_H];  // the walk's length to each cell reached (255 and over: 255)
     u16 queue[ROOM_W * ROOM_H];
 };
 
@@ -823,8 +881,9 @@ static bool8 RoomOpen(struct RoomSearch *r, s16 x, s16 y)
         && PlainGround(MapGridGetMetatileBehaviorAt(x, y));
 }
 
-// Whether a walk from where the player stands could reach (tx, ty) now, by the stricter rules at the top.
-static bool8 RoomReachable(s16 tx, s16 ty)
+// How many steps a walk from where the player stands takes to reach (tx, ty) now, by the stricter rules at the top
+// (0: it cannot; 255: that many or more).
+static u8 RoomWalk(s16 tx, s16 ty)
 {
     static const s8 sSteps[4][2] = { { 0, 1 }, { 0, -1 }, { -1, 0 }, { 1, 0 } };
     const struct MapEvents *events = gMapHeader.events;
@@ -832,14 +891,13 @@ static bool8 RoomReachable(s16 tx, s16 ty)
     s16 px = Player()->currentCoords.x, py = Player()->currentCoords.y, x, y;
     u16 head = 0, tail = 0, i;
     s32 c, n;
-    u8 d;
-    bool8 found = FALSE;
+    u8 d, found = 0;
 
     if (abs(tx - px) > ROOM_REACH_X || abs(ty - py) > ROOM_REACH_Y)
-        return FALSE;       // farther than the search reaches
+        return 0;           // farther than the search reaches
     r = AllocZeroed(sizeof(*r));
     if (r == NULL)
-        return FALSE;
+        return 0;
     r->x0 = px - ROOM_REACH_X;
     r->y0 = py - ROOM_REACH_Y;
     r->elevation = MapGridGetElevationAt(px, py);
@@ -883,9 +941,10 @@ static bool8 RoomReachable(s16 tx, s16 ty)
             if (n < 0 || (r->cell[n] & (ROOM_SHUT | ROOM_SEEN)) || !RoomOpen(r, x, y))
                 continue;
             r->cell[n] |= ROOM_SEEN;
+            r->steps[n] = r->steps[c] < 255 ? r->steps[c] + 1 : 255;
             if (x == tx && y == ty)
             {
-                found = TRUE;
+                found = r->steps[n];
                 break;
             }
             r->queue[tail++] = n;
@@ -913,7 +972,7 @@ static void Room(void)
     {
         StringCopy(gStringVar4, sText_RoomHere);
     }
-    else if (RoomReachable(sRoomX, sRoomY))
+    else if (RoomWalk(sRoomX, sRoomY) != 0)
     {
         gSpecialVar_0x8006 = DRAW_ROOM;
         gSpecialVar_0x8004 = sRoomX;        // where Spellbook_Draw puts the player
@@ -937,6 +996,75 @@ static void RoomFold(s16 tx, s16 ty)
     MoveObjectEventToMapCoords(player, tx, ty);
     player->currentMetatileBehavior = MapGridGetMetatileBehaviorAt(tx, ty);
     FreezeObjectEvents();   // the lockall's hold, on whoever came into view too
+}
+
+//  ---------------------------------------------------------------- THE PROCESS
+
+#define PROCESS_DETOUR 10   // the longest walk round the stone that THE PROCESS will save (see the top)
+
+// Anything read, or stepped on, at (x, y): a sign, a hidden thing, a trigger. THE PROCESS never softens one.
+static bool8 Marked(s16 x, s16 y)
+{
+    const struct MapEvents *events = gMapHeader.events;
+    u16 i;
+
+    x -= MAP_OFFSET;
+    y -= MAP_OFFSET;
+    for (i = 0; events != NULL && i < events->bgEventCount; i++)
+        if (events->bgEvents[i].x == x && events->bgEvents[i].y == y)
+            return TRUE;
+    for (i = 0; events != NULL && i < events->coordEventCount; i++)
+        if (events->coordEvents[i].x == x && events->coordEvents[i].y == y)
+            return TRUE;
+    for (i = 0; events != NULL && i < events->warpCount; i++)
+        if (events->warps[i].x == x && events->warps[i].y == y)
+            return TRUE;
+    return FALSE;
+}
+
+static bool8 InThisMap(s16 x, s16 y)
+{
+    return x >= MAP_OFFSET && x < MAP_OFFSET + gMapHeader.mapLayout->width
+        && y >= MAP_OFFSET && y < MAP_OFFSET + gMapHeader.mapLayout->height;
+}
+
+static void Process(void)
+{
+    struct ObjectEvent *player = Player();
+    u8 dir = player->facingDirection;
+    s16 x = player->currentCoords.x, y = player->currentCoords.y, bx, by;
+    u8 steps;
+
+    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING | PLAYER_AVATAR_FLAG_UNDERWATER))
+    {
+        StringCopy(gStringVar4, sText_ProcessWater);
+        return;
+    }
+    if (gMapHeader.mapType != MAP_TYPE_TOWN && gMapHeader.mapType != MAP_TYPE_CITY
+     && gMapHeader.mapType != MAP_TYPE_ROUTE)
+    {
+        StringCopy(gStringVar4, sText_ProcessRoof);
+        return;
+    }
+    MoveCoords(dir, &x, &y);    // the stone
+    bx = x;
+    by = y;
+    MoveCoords(dir, &bx, &by);  // and its far side
+    if (dir == DIR_NONE || !InThisMap(x, y) || !MapGridGetCollisionAt(x, y)
+     || MapGridGetMetatileBehaviorAt(x, y) != MB_NORMAL || Marked(x, y)
+     || GetObjectEventIdByXY(x, y) != OBJECT_EVENTS_COUNT)
+    {
+        StringCopy(gStringVar4, sText_ProcessNone);
+        return;
+    }
+    steps = Marked(bx, by) ? 0 : RoomWalk(bx, by);  // RoomWalk: in this map, plain ground, the same elevation, unshut
+    if (steps == 0 || steps > PROCESS_DETOUR)
+    {
+        StringCopy(gStringVar4, sText_ProcessFar);
+        return;
+    }
+    gSpecialVar_0x8008 = dir;   // data/scripts/notebook.inc walks the player through, slowly, two tiles that way
+    StringCopy(gStringVar4, sText_Process);
 }
 
 //  ---------------------------------------------------------------- THE MIRROR
@@ -974,10 +1102,39 @@ static u8 Threats(bool8 show)
     return n;
 }
 
+// The first type THE MIRROR last saw through, or TYPE_NONE: five bits, VAR_SPELL_STATE_2's top four and a flag.
+static u8 MirroredType(void)
+{
+    u8 v = (VarGet(VAR_SPELL_STATE_2) & STATE2_SEEN_MASK) >> STATE2_SEEN_SHIFT;
+
+    if (FlagGet(FLAG_SPELL_MIRRORED_HIGH))
+        v |= 0x10;
+    return v == 0 ? TYPE_NONE : v - 1;
+}
+
+static void KeepMirroredType(u8 type)
+{
+    u8 v = type + 1;
+
+    VarSet(VAR_SPELL_STATE_2, (VarGet(VAR_SPELL_STATE_2) & ~STATE2_SEEN_MASK) | ((v & 0xF) << STATE2_SEEN_SHIFT));
+    if (v & 0x10)
+        FlagSet(FLAG_SPELL_MIRRORED_HIGH);
+    else
+        FlagClear(FLAG_SPELL_MIRRORED_HIGH);
+}
+
+// A type and what it fears, either way round: the Halloween costume's rule (Hermetic_FearsOf). Two types, never one.
+static bool8 Opposed(u8 a, u8 b)
+{
+    if (a == b || a >= NUMBER_OF_MON_TYPES || b >= NUMBER_OF_MON_TYPES)
+        return FALSE;
+    return ((Hermetic_FearsOf(a) >> b) & 1) || ((Hermetic_FearsOf(b) >> a) & 1);
+}
+
 static void Mirror(void)
 {
     s8 slot = Follower_LeadSlot();
-    u8 threats;
+    u8 threats, last;
     u8 *p;
 
     if (slot < 0)
@@ -1003,8 +1160,15 @@ static void Mirror(void)
         ConvertIntToDecimalStringN(gStringVar2, threats, STR_CONV_MODE_LEFT_ALIGN, 2);
         p = StringExpandPlaceholders(p, sText_MirrorThreats);
     }
-    StringCopy(p, sText_MirrorCost);
+    p = StringCopy(p, sText_MirrorCost);
     gSpecialVar_0x8006 = DRAW_MIRROR;
+    last = MirroredType();
+    KeepMirroredType(sMirrorType);
+    if (Opposed(last, sMirrorType) && !(Knows(SPELL_PROCESS) && Knows(SPELL_SEAM)))
+    {
+        VarSet(VAR_SPELLS_KNOWN, VarGet(VAR_SPELLS_KNOWN) | (1 << SPELL_PROCESS) | (1 << SPELL_SEAM));
+        StringCopy(p, sText_MirrorPair);
+    }
 }
 
 bool8 Spellbook_Mirrored(void)
@@ -1139,6 +1303,8 @@ void Spellbook_Draw(void)
     {
         gTasks[taskId].tState = 20;
     }
+    if (gSpecialVar_0x8008 != 0)
+        PlaySE(SE_M_MINIMIZE);                      // THE PROCESS: the script walks the player through after this
     gSpecialVar_0x8005 = 0;
     gSpecialVar_0x8006 = DRAW_PULL;
 }
@@ -1324,6 +1490,7 @@ void Spellbook_Cast(void)
     gStringVar4[0] = EOS;
     gSpecialVar_0x8005 = 0;         // THE PULL's steps, for Spellbook_Draw
     gSpecialVar_0x8006 = DRAW_PULL; // ... or THE ROOM's fold, or THE MIRROR's marks
+    gSpecialVar_0x8008 = 0;         // THE PROCESS's way through (DIR_*), for the script
     if (spell >= SPELL_COUNT || !Knows(spell) || !((BUILT_SPELLS >> spell) & 1))
         return;
     s = SpellOf(spell);
@@ -1340,6 +1507,8 @@ void Spellbook_Cast(void)
     case SPELL_GREAT_HAND: GreatHand(); BothHands(HAND_GREAT); break;
     case SPELL_RETURN:    Return(); break;
     case SPELL_SMALL_HAND: SmallHand(); BothHands(HAND_SMALL); break;
+    case SPELL_PROCESS:   Process(); break;
+    case SPELL_SEAM:      SetBattleSpell(BATTLE_SPELL_SEAM, sText_Seam); break;
     }
     VarSet(VAR_SPELLS_CAST, VarGet(VAR_SPELLS_CAST) | (1 << spell));
     LedgerAdd(s->axisA);
@@ -1395,6 +1564,8 @@ void Spellbook_BattleStart(void)
     sPatternWait = 0;
     sPullCalm = 0;
     sHandOn = FALSE;
+    sSeamFelt[0] = sSeamFelt[1] = 0;
+    sSeamState = 0;
     if (gBattleTypeFlags & NOT_A_SPELL_BATTLE)
         return;             // it waits for the next single battle
     state = VarGet(VAR_SPELL_STATE_2);
@@ -1413,6 +1584,11 @@ void Spellbook_BattleStart(void)
     sBattleSpell = state & STATE_BATTLE_MASK;
     if (sBattleSpell != BATTLE_SPELL_NONE)
         VarSet(VAR_SPELL_STATE, state & ~STATE_BATTLE_MASK);
+    if (FlagGet(FLAG_SPELL_SEAM))
+    {
+        sBattleSpell = BATTLE_SPELL_SEAM;
+        FlagClear(FLAG_SPELL_SEAM);
+    }
 }
 
 bool8 Spellbook_LensOn(void)
@@ -1443,6 +1619,139 @@ s32 Spellbook_PullDamage(u8 attacker, s32 damage)
 bool8 Spellbook_HandOn(void)
 {
     return gMain.inBattle && sHandOn;
+}
+
+//  ---------------------------------------------------------------- THE SEAM in battle
+
+#define SEAM_ECHOING 0x01   // sSeamState: the thread's own HP change is running (not felt again)
+#define SEAM_HAD     0x02   // ... << i: the lead (0) or its foe (1) had a state as the routine began
+
+bool8 Spellbook_SeamOn(void)
+{
+    return gMain.inBattle && sBattleSpell == BATTLE_SPELL_SEAM;
+}
+
+// The two the thread ties: the lead, and the foe facing it. 0 or 1; 2 for anyone else.
+static u8 SeamEnd(u8 battler)
+{
+    if (battler == GetBattlerAtPosition(B_POSITION_PLAYER_LEFT))
+        return 0;
+    if (battler == GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT))
+        return 1;
+    return 2;
+}
+
+static u8 SeamBattler(u8 end)
+{
+    return GetBattlerAtPosition(end == 0 ? B_POSITION_PLAYER_LEFT : B_POSITION_OPPONENT_LEFT);
+}
+
+// Cmd_attackcanceler: a routine begins. What was felt before it (the turn's end, a switch) is not carried.
+void Spellbook_SeamRoutineStarts(void)
+{
+    u8 i;
+
+    if (!Spellbook_SeamOn())
+        return;
+    sSeamFelt[0] = sSeamFelt[1] = 0;
+    sSeamState = 0;
+    for (i = 0; i < 2; i++)
+        if (gBattleMons[SeamBattler(i)].status1 & STATUS1_ANY)
+            sSeamState |= SEAM_HAD << i;
+}
+
+// Cmd_datahpupdate: a body's HP moved from BEFORE to AFTER.
+void Spellbook_SeamFelt(u8 battler, u16 before, u16 after)
+{
+    u8 end = SeamEnd(battler);
+
+    if (!Spellbook_SeamOn() || (sSeamState & SEAM_ECHOING) || end > 1)
+        return;
+    sSeamFelt[end] += (s16)before - (s16)after;
+}
+
+// Whether a state could be given to BATTLER: the same immunities a routine's own would meet.
+static bool8 SeamCanCarry(u8 battler, u32 status)
+{
+    struct BattlePokemon *mon = &gBattleMons[battler];
+
+    if (mon->hp == 0 || (mon->status1 & STATUS1_ANY)
+     || (gSideStatuses[GetBattlerSide(battler)] & SIDE_STATUS_SAFEGUARD))
+        return FALSE;
+    if (status & (STATUS1_POISON | STATUS1_TOXIC_POISON))
+        return !IS_BATTLER_OF_TYPE(battler, TYPE_POISON) && !IS_BATTLER_OF_TYPE(battler, TYPE_STEEL)
+            && mon->ability != ABILITY_IMMUNITY;
+    if (status & STATUS1_BURN)
+        return !IS_BATTLER_OF_TYPE(battler, TYPE_FIRE) && mon->ability != ABILITY_WATER_VEIL;
+    if (status & STATUS1_FREEZE)
+        return !IS_BATTLER_OF_TYPE(battler, TYPE_ICE) && mon->ability != ABILITY_MAGMA_ARMOR;
+    if (status & STATUS1_PARALYSIS)
+        return mon->ability != ABILITY_LIMBER;
+    if (status & STATUS1_SLEEP)
+        return mon->ability != ABILITY_INSOMNIA && mon->ability != ABILITY_VITAL_SPIRIT;
+    return FALSE;
+}
+
+// Cmd_moveend, at the routine's end: the thread pulls. One change a call, each by a script that returns here.
+u8 Spellbook_SeamRoutineEnds(void)
+{
+    u8 i, b, other;
+    s32 echo;
+    u32 status;
+
+    if (!Spellbook_SeamOn())
+        return SEAM_DONE;
+    if (gBattleControllerExecFlags)
+        return SEAM_WAIT;
+    sSeamState &= ~SEAM_ECHOING;
+    for (i = 0; i < 2; i++)     // harm and mending: each takes half of what the other felt
+    {
+        other = i ^ 1;
+        if (sSeamFelt[other] == 0)
+            continue;
+        echo = sSeamFelt[other] / 2;
+        if (echo == 0)
+            echo = sSeamFelt[other] > 0 ? 1 : -1;
+        sSeamFelt[other] = 0;
+        b = SeamBattler(i);
+        if (gBattleMons[b].hp == 0 || (gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
+            continue;
+        if (echo >= gBattleMons[b].hp)
+            echo = gBattleMons[b].hp - 1;              // the thread never takes the last
+        if (echo < 0 && gBattleMons[b].hp - echo > gBattleMons[b].maxHP)
+            echo = gBattleMons[b].hp - gBattleMons[b].maxHP;
+        if (echo == 0)
+            continue;
+        gBattleMoveDamage = echo;
+        gEffectBattler = b;
+        sSeamState |= SEAM_ECHOING;
+        BattleScriptPushCursor();
+        gBattlescriptCurrInstr = echo > 0 ? BattleScript_SeamHurts : BattleScript_SeamMends;
+        return SEAM_SCRIPT;
+    }
+    for (i = 0; i < 2; i++)     // a state one gained in this routine, the other gains too
+    {
+        status = gBattleMons[SeamBattler(i)].status1 & STATUS1_ANY;
+        if ((sSeamState & (SEAM_HAD << i)) || status == 0)
+            continue;
+        sSeamState |= SEAM_HAD << i;    // carried once
+        b = SeamBattler(i ^ 1);
+        if (!SeamCanCarry(b, status))
+            continue;
+        if (status & STATUS1_TOXIC_POISON)
+            status = STATUS1_TOXIC_POISON;      // the count starts again
+        gBattleMons[b].status1 = status;
+        sSeamState |= SEAM_HAD << (i ^ 1);
+        gActiveBattler = b;
+        BtlController_EmitSetMonData(BUFFER_A, REQUEST_STATUS_BATTLE, 0, sizeof(gBattleMons[b].status1),
+                                     &gBattleMons[b].status1);
+        MarkBattlerForControllerExec(b);
+        gEffectBattler = b;
+        BattleScriptPushCursor();
+        gBattlescriptCurrInstr = BattleScript_SeamCarries;
+        return SEAM_SCRIPT;
+    }
+    return SEAM_DONE;
 }
 
 bool8 Spellbook_LeanHushed(void)
@@ -1661,6 +1970,8 @@ void Spellbook_DebugAll(bool8 on)
         VarSet(VAR_SPELL_STATE, 0);
         VarSet(VAR_SPELL_STATE_2, 0);
         VarSet(VAR_SPELL_STATE_3, 0);
+        FlagClear(FLAG_SPELL_SEAM);
+        FlagClear(FLAG_SPELL_MIRRORED_HIGH);
     }
 }
 STATIC_ASSERT((1 << SPELL_COUNT) - 1 == 0x3FFF, EverySpellIsTheDebugRowsTest);   // daemons_debug_events.c IsHeld
