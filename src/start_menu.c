@@ -550,7 +550,8 @@ static void SetUpStartMenu_NormalField(void)
         AppendToStartMenuItems(STARTMENU_POKEMON);
     AppendToStartMenuItems(STARTMENU_BAG);
     AppendToStartMenuItems(STARTMENU_PLAYER);
-    AppendToStartMenuItems(STARTMENU_SAVE);
+    if (!Spellbook_Mirrored())
+        AppendToStartMenuItems(STARTMENU_SAVE);    // T-483 (5): THE MIRROR -- while you are it, nothing writes you down
     AppendToStartMenuItems(STARTMENU_OPTION);
 #if DAEMONS_DEBUG
     AppendToStartMenuItems(STARTMENU_DEBUG);

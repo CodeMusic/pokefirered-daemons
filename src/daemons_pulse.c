@@ -8,6 +8,7 @@
 #include "daemons_time.h"
 #include "daemons_hermetic.h"
 #include "daemons_pulse.h"
+#include "daemons_spellbook.h"   // T-483 (5): THE MIRROR's colour
 
 // T-483 / T-482: THE PULSE (the user, 2026-10-29; bible 4.39). One breath for the app, the watches and the game, so
 // boards side by side and a cartridge beside them breathe together: CONTENT's red to CONTEXT's blue through THE SUBTLE
@@ -139,11 +140,16 @@ u16 Pulse_Blend(u16 base, u16 target, u8 weight)
 void Pulse_Tick(void)
 {
     u32 mask = 0;
+    u16 mirror;
+    bool8 mirrored = FALSE;
 
     if (DaemonsFieldOnScreen())
     {
         // The map's own rows (0-12); 13-15 are the windows and the text. Never HALFTONE: grey outranks the pulse.
-        if (Hermetic_WorldPulses() && !DaemonsIsHalftone())
+        // T-483 (5): THE MIRROR lays its daemon's type colour the same way, and outranks the pulse while it lasts.
+        if (!DaemonsIsHalftone() && Spellbook_MirrorWash(&mirror))
+            mask = BG_ROWS(0, 12), mirrored = TRUE;
+        else if (Hermetic_WorldPulses() && !DaemonsIsHalftone())
             mask = BG_ROWS(0, 12);
     }
     else if (gMain.inBattle && gMain.callback2 == BattleMainCB2)
@@ -155,7 +161,7 @@ void Pulse_Tick(void)
     sPulseMask = mask;
     if (mask == 0)
         return;
-    sPulseColour = Pulse_Now();
+    sPulseColour = mirrored ? mirror : Pulse_Now();
     sPulseWeight = PULSE_BG_WEIGHT;
     // A fade takes the pulse with it, so a fade to black is black and the field comes back into the breath.
     if (gPaletteFade.active || gPaletteFade.y != 0)

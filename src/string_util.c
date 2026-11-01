@@ -1,5 +1,6 @@
 #include "global.h"
 #include "gflib.h"
+#include "daemons_spellbook.h"   // T-483 (5): THE MIRROR
 
 EWRAM_DATA u8 gStringVar1[32] = {};
 EWRAM_DATA u8 gStringVar2[20] = {};
@@ -365,7 +366,9 @@ static u8 *ExpandPlaceholder_UnknownStringVar(void)
 
 static u8 *ExpandPlaceholder_PlayerName(void)
 {
-    return gSaveBlock2Ptr->playerName;
+    const u8 *mirrored = Spellbook_MirrorName();     // T-483 (5): THE MIRROR -- something is you, learning your name
+
+    return mirrored != NULL ? (u8 *)mirrored : gSaveBlock2Ptr->playerName;
 }
 
 static u8 *ExpandPlaceholder_StringVar1(void)

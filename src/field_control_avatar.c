@@ -32,6 +32,7 @@
 #include "notebook.h"         // T-390: an insight arrives, in every build
 #include "daemons_carried.h"  // T-448: what the companion brought, said once
 #include "daemons_reads.h"   // T-459 B: a read
+#include "daemons_spellbook.h"   // T-483 (5): THE MIRROR's steps
 #include "school_lift.h"
 
 // T-196: the label the popup carries while an echo is on screen.
@@ -394,6 +395,7 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     if (input->tookStep)
     {
         IncrementGameStat(GAME_STAT_STEPS);
+        Spellbook_OnStep();                 // T-483 (5): THE MIRROR's steps
         WonderNews_IncrementStepCounter();
         IncrementRenewableHiddenItemStepCounter();
         RunMassageCooldownStepCounter();

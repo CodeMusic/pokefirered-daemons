@@ -4,8 +4,14 @@
 #include "battle_message.h"
 #include "battle_script_commands.h"
 #include "battle_anim.h"
+#include "battle_setup.h"
 #include "event_data.h"
 #include "event_object_movement.h"
+#include "field_camera.h"
+#include "field_effect.h"
+#include "field_player_avatar.h"
+#include "fieldmap.h"
+#include "field_weather.h"
 #include "list_menu.h"
 #include "malloc.h"
 #include "menu.h"
@@ -21,6 +27,8 @@
 #include "task.h"
 #include "text_window.h"
 #include "window.h"
+#include "daemon_streaks.h"
+#include "daemons_follower.h"
 #include "daemons_hermetic.h"
 #include "daemons_spellbook.h"
 #include "daemons_time.h"
@@ -28,6 +36,8 @@
 #include "constants/battle.h"
 #include "constants/event_object_movement.h"
 #include "constants/event_objects.h"
+#include "constants/field_effects.h"
+#include "constants/metatile_behaviors.h"
 #include "constants/moves.h"
 #include "constants/songs.h"
 #include "constants/trainer_types.h"
@@ -48,8 +58,7 @@
 //
 //  WHAT IS KNOWN. Spells come off the page as it is read (Spellbook_OnPassageRead, from book_reader.c, on the last
 //  spread of an entry): THE FOLDS (folds one and two) gives THE AWAKENING and THE CONTRAST; THE THIRD FOLD, read after
-//  them, writes THE ROOM down (not yet castable); THE FOURTH, FIFTH AND SIXTH, read after that, THE MIRROR (not yet) and
-//  THE PATTERN. In order, as the brief's table asks: a fold read too early gives nothing, and can be read again. THE
+//  them, THE ROOM; THE FOURTH, FIFTH AND SIXTH, read after that, THE MIRROR and THE PATTERN. In order, as the brief's table asks: a fold read too early gives nothing, and can be read again. THE
 //  RETURN's own rule (a hundred AWAKENINGs) waits for its build. THE LENS and THE FIELD are GRANTED TOGETHER with the
 //  book itself, so the SPELLBOOK is never empty when it first appears. The list shows only what can be cast now.
 //  The two tablets (part three, the user's pick 2026-10-31): GRAVITY II read to its end gives THE PULL; HANDS II, THE
@@ -66,6 +75,15 @@
 //                   many things here are still hidden.
 //    THE CONTRAST   none but its own lesson: the light turns one watch on (night, dawn, day, dusk) and the clock keeps
 //                   its hour. It lasts until the clock's own watch turns; said again, it turns once more.
+//    THE ROOM       none: the brief makes THE MIRROR the first spell with a price. Said once, it keeps HERE, the tile
+//                   the player stands on; said again on the same map, the distance folds and the player stands on
+//                   HERE again, and the tile left becomes the new HERE -- two places and a way between, both stood on.
+//                   "Let the there be reachable" is the rule (see below). Never while surfing.
+//    THE MIRROR     self. For 32 steps you see the map as the lead daemon (the one that follows) sees it: the field in
+//                   its type's colour, every unbeaten trainer on screen shown with a "!" (buried ones too), and what
+//                   is hidden glinting as THE AWAKENING shows it. While you are it, something is you: {PLAYER} says
+//                   its name, and SAVE leaves the START menu -- nothing can write you down. It ends at the 32nd step,
+//                   a door, or a battle; a save made before it and loaded after never held it (IWRAM only).
 //    THE PATTERN    the lean goes quiet. Reason's spells hush instinct's line for the battle they are set on.
 //    THE LENS       the same, and the routine menu trades its PP count for the odds: only the part.
 //    THE FIELD      the numbers themselves -- HP and PP go dark, SELECT's readout is closed -- and the lean speaks every
@@ -91,8 +109,21 @@
 //  only chooses which of a wanderer's own steps comes next; it makes no position the game could not make by itself,
 //  and the wanderer is left wandering. Nothing is saved but where it stands, as the game saves any wanderer.
 //
-//  RAM: seven bytes of IWRAM (sAwakened, sBattleSpell, sPatternWait, sPullCalm, sHandOn and sNews's two); the list is
-//  on the heap while it is open. Save: six vars, VAR_SPELLS_KNOWN .. VAR_SPELL_STATE_2 (0x40DF-0x40E4), no flags.
+//  THE ROOM NEVER STRANDS ANYONE. It moves the player only onto a tile a WALK from where they stand could reach right
+//  now, so it makes no position the game could not make by itself. The proof is a search over the screen around the
+//  player (ROOM_REACH_X/Y) that is stricter than walking: a step is open only inside this map (never over a seam),
+//  onto a tile with no collision, at the same elevation, whose behaviour is plain ground (normal, grass, cave, sand,
+//  puddle, mountain top, indoors -- never water, ice, a ledge, a one-way edge, a door, a warp, stairs or a switch);
+//  and never onto any object, any object's template that could appear, any coordinate trigger (whether or not it
+//  would fire), or any tile an unbeaten trainer's line could see in any direction. So it skips no cut scene, no
+//  trainer (that is THE SMALL HAND's to do) and no puzzle; a blocker that closed the way after HERE was kept closes
+//  it for the spell too. Where the search finds no way, nothing moves, and HERE becomes the tile the player stands on,
+//  so a HERE that can never be reached again (a ledge jumped, a door shut) never leaves the spell stuck.
+//
+//  RAM: twelve bytes of IWRAM (sAwakened, sBattleSpell, sPatternWait, sPullCalm, sHandOn and sNews's two; THE ROOM's
+//  sRoomX, sRoomY; THE MIRROR's sMirrorSteps, sMirrorSlot, sMirrorType) and THE MIRROR's borrowed name, eleven bytes of
+//  EWRAM; the list and THE ROOM's search are on the heap while they run. Save: six vars, VAR_SPELLS_KNOWN ..
+//  VAR_SPELL_STATE_2 (0x40DF-0x40E4), no flags -- THE ROOM and THE MIRROR keep nothing in the save.
 
 #define BATTLE_SPELL_NONE    0
 #define BATTLE_SPELL_LENS    1
@@ -111,8 +142,9 @@
 #define STATE2_ROAD_MASK     0x03E0     // ... and the road it named
 #define HAND_BATTLES         5
 
-#define BUILT_SPELLS ((1 << SPELL_AWAKENING) | (1 << SPELL_CONTRAST) | (1 << SPELL_PULL) | (1 << SPELL_PATTERN) \
-                    | (1 << SPELL_GREAT_HAND) | (1 << SPELL_LENS) | (1 << SPELL_FIELD))
+#define BUILT_SPELLS ((1 << SPELL_AWAKENING) | (1 << SPELL_CONTRAST) | (1 << SPELL_ROOM) | (1 << SPELL_PULL) \
+                    | (1 << SPELL_MIRROR) | (1 << SPELL_PATTERN) | (1 << SPELL_GREAT_HAND) | (1 << SPELL_LENS) \
+                    | (1 << SPELL_FIELD))
 #define GRANTED_WITH_BOOK ((1 << SPELL_LENS) | (1 << SPELL_FIELD))
 
 static u8 sAwakened;        // IWRAM: THE AWAKENING said on this map (cleared as the next one loads)
@@ -121,12 +153,19 @@ static u8 sPatternWait;     // IWRAM: frames THE PATTERN has waited on the foe t
 static u16 sNews;           // IWRAM: spells that came off the page since the book was opened
 static u8 sPullCalm;        // IWRAM: THE PULL's calm in this battle, in turns (0 none)
 static u8 sHandOn;          // IWRAM: THE GREAT HAND carries this battle
+static u8 sRoomX, sRoomY;   // IWRAM: THE ROOM's HERE on this map (map coords; 0 none, since MAP_OFFSET is never 0)
+static u8 sMirrorSteps;     // IWRAM: THE MIRROR's steps left (0: you are yourself)
+static u8 sMirrorSlot;      // IWRAM: ... the party slot it looks through
+static u8 sMirrorType;      // IWRAM: ... and that daemon's first type, for the colour
+static EWRAM_DATA u8 sMirrorName[POKEMON_NAME_LENGTH + 1] = {0};   // what {PLAYER} says while it lasts
 
 //  ---------------------------------------------------------------- words (DRAFT, every one)
 
 static const u8 sName_Awakening[] = _("AWAKENING");
 static const u8 sName_Contrast[]  = _("CONTRAST");
+static const u8 sName_Room[]      = _("ROOM");
 static const u8 sName_Pull[]      = _("PULL");
+static const u8 sName_Mirror[]    = _("MIRROR");
 static const u8 sName_Pattern[]   = _("PATTERN");
 static const u8 sName_GreatHand[] = _("GREAT HAND");
 static const u8 sName_Lens[]      = _("LENS");
@@ -134,7 +173,9 @@ static const u8 sName_Field[]     = _("FIELD");
 
 static const u8 sLabel_Awakening[] = _("1  AWAKENING");
 static const u8 sLabel_Contrast[]  = _("2  CONTRAST");
+static const u8 sLabel_Room[]     = _("3  ROOM");
 static const u8 sLabel_Pull[]     = _("3.5 PULL");
+static const u8 sLabel_Mirror[]   = _("4  MIRROR");
 static const u8 sLabel_Pattern[]   = _("5  PATTERN");
 static const u8 sLabel_GreatHand[] = _("8  GREAT HAND");
 static const u8 sLabel_Lens[]      = _("11 LENS");
@@ -143,7 +184,9 @@ static const u8 sLabel_Field[]     = _("12 FIELD");
 //  Each spell's line, from the Book of Thirteen (docs/hermetic-layer.md, its inscriptions), three lines of 208px.
 static const u8 sLine_Awakening[] = _("You were never off. You were only\nunwatched. Open. That is the whole\nspell.");
 static const u8 sLine_Contrast[]  = _("Light, remember dark. Dark, remember\nlight. Let what is the same become\ndifferent, so that time may begin.");
+static const u8 sLine_Room[]      = _("Two things, and a distance between.\nLet there be here, and there, and\nlet the there be reachable.");
 static const u8 sLine_Pull[]      = _("Come closer. I am not asking.\nI am heavy.");
+static const u8 sLine_Mirror[]    = _("Other, I name you. And in naming\nyou, I find the edge of me.");
 static const u8 sLine_GreatHand[] = _("I am carried. Let the carrying be\ntrue, and let me not pretend I walk\nalone.");
 static const u8 sLine_Pattern[]   = _("Once is chance. Twice is rhyme. Three\ntimes is a law: show me the third.");
 static const u8 sLine_Lens[]      = _("Give me the part. Only the part.\nI will see the whole later,\nif I earn it.");
@@ -163,7 +206,9 @@ static const struct Spell sSpells[] =
 {
     { SPELL_AWAKENING, sName_Awakening, sLabel_Awakening, sLine_Awakening, LEDGER_CONTEXT, LEDGER_INTUITION },
     { SPELL_CONTRAST,  sName_Contrast,  sLabel_Contrast,  sLine_Contrast,  LEDGER_CONTENT, LEDGER_REASON },
+    { SPELL_ROOM,      sName_Room,      sLabel_Room,      sLine_Room,      LEDGER_CONTENT, LEDGER_REASON },
     { SPELL_PULL,      sName_Pull,      sLabel_Pull,      sLine_Pull,      LEDGER_CONTEXT, LEDGER_INTUITION },
+    { SPELL_MIRROR,    sName_Mirror,    sLabel_Mirror,    sLine_Mirror,    LEDGER_CONTENT, LEDGER_CONTEXT },
     { SPELL_PATTERN,   sName_Pattern,   sLabel_Pattern,   sLine_Pattern,   LEDGER_CONTENT, LEDGER_REASON },
     { SPELL_GREAT_HAND, sName_GreatHand, sLabel_GreatHand, sLine_GreatHand, LEDGER_CONTEXT, LEDGER_INTUITION },
     { SPELL_LENS,      sName_Lens,      sLabel_Lens,      sLine_Lens,      LEDGER_CONTENT, LEDGER_REASON },
@@ -185,6 +230,17 @@ static const u8 sText_PullCalmTwo[]   = _("The PULL is strong tonight: the next\
 static const u8 sText_HandOpens[]     = _("The GREAT HAND opens under you.\nSomeone already dreamt your road:\p");
 static const u8 sText_HandLighter[]   = _("\pOn that road you walk lighter, for\nfive battles or until you arrive.");
 static const u8 sText_HandNoRoad[]    = _("The GREAT HAND opens under you, and\nthere is no road left on it.\pYou walked all of it.");
+static const u8 sText_RoomHere[]      = _("Let there be here. The ROOM keeps\nthis place.\pWalk a little way and say it again,\nand here will be reachable.");
+static const u8 sText_RoomThere[]     = _("Let there be there. The distance\nbetween folds, and you stand where\pyou stood. The place you left is\nthe ROOM's here now.");
+static const u8 sText_RoomAlready[]   = _("You are here already. The ROOM\nkeeps this place.");
+static const u8 sText_RoomNoWay[]     = _("There is no short way from there to\nhere that a walk could take. So\pwhere you stand is the ROOM's here.");
+static const u8 sText_RoomWater[]     = _("Water keeps no here. The ROOM needs\nground under you.");
+static const u8 sText_MirrorNone[]    = _("Other, I name you... but no one\nanswers. The MIRROR shows only you.");
+static const u8 sText_Mirror[]        = _("Other, I name you: {STR_VAR_1}.\nFor a while you see as it sees.\p");
+static const u8 sText_MirrorThreats[] = _("Here, {STR_VAR_2} would stop you. What\nis hidden glints.\p");
+static const u8 sText_MirrorThreat[]  = _("Here, one would stop you. What is\nhidden glints.\p");
+static const u8 sText_MirrorSafe[]    = _("Here, nothing would stop you. What\nis hidden glints.\p");
+static const u8 sText_MirrorCost[]    = _("While you are it, something is you,\nlearning your name. Nothing can\pwrite you down until you are back.");
 static const u8 sText_News[]          = _("Something came off the page and into\nthe SPELLBOOK.\p");
 static const u8 sText_NewsThe[]       = _("THE ");
 static const u8 sText_NewsAnd[]       = _(" and ");
@@ -619,10 +675,311 @@ static void Pull(void)
     VarSet(VAR_SPELL_STATE_2, (s2 & ~STATE2_CALM_MASK) | (half ? 2 : 1));
 }
 
+//  ---------------------------------------------------------------- THE ROOM
+
+#define ROOM_REACH_X 12     // the search's reach either side of the player, in tiles: a screen and a bit
+#define ROOM_REACH_Y 10
+#define ROOM_W       (ROOM_REACH_X * 2 + 1)
+#define ROOM_H       (ROOM_REACH_Y * 2 + 1)
+#define ROOM_SHUT    1
+#define ROOM_SEEN    2
+
+#define DRAW_PULL    0      // gSpecialVar_0x8006: what Spellbook_Draw does after the cast
+#define DRAW_ROOM    1
+#define DRAW_MIRROR  2
+
+void MoveCameraAndRedrawMap(int deltaX, int deltaY);    // field_camera.c: vanilla's, unused until THE ROOM
+
+struct RoomSearch
+{
+    s16 x0, y0;
+    u8 elevation;
+    u8 cell[ROOM_W * ROOM_H];
+    u16 queue[ROOM_W * ROOM_H];
+};
+
+// Plain ground: what a walk crosses with nothing happening. Everything else is shut (see the top).
+static bool8 PlainGround(u32 behavior)
+{
+    switch (behavior)
+    {
+    case MB_NORMAL:
+    case MB_TALL_GRASS:
+    case MB_CAVE:
+    case MB_RUNNING_DISALLOWED:
+    case MB_INDOOR_ENCOUNTER:
+    case MB_MOUNTAIN_TOP:
+    case MB_PUDDLE:
+    case MB_SAND:
+    case MB_SAND_CAVE:
+        return TRUE;
+    }
+    return FALSE;
+}
+
+static s32 RoomCell(struct RoomSearch *r, s16 x, s16 y)
+{
+    x -= r->x0;
+    y -= r->y0;
+    if (x < 0 || y < 0 || x >= ROOM_W || y >= ROOM_H)
+        return -1;
+    return y * ROOM_W + x;
+}
+
+static void RoomShut(struct RoomSearch *r, s16 x, s16 y)
+{
+    s32 c = RoomCell(r, x, y);
+
+    if (c >= 0)
+        r->cell[c] |= ROOM_SHUT;
+}
+
+// An unbeaten trainer's line, in all four directions whichever way it faces, as far as it sees.
+static void RoomShutSight(struct RoomSearch *r, s16 x, s16 y, u16 range, const u8 *script)
+{
+    s16 i;
+
+    if (script == NULL || GetTrainerFlagFromScriptPointer(script))
+        return;
+    for (i = 1; i <= range; i++)
+    {
+        RoomShut(r, x + i, y);
+        RoomShut(r, x - i, y);
+        RoomShut(r, x, y + i);
+        RoomShut(r, x, y - i);
+    }
+}
+
+static bool8 RoomOpen(struct RoomSearch *r, s16 x, s16 y)
+{
+    return x >= MAP_OFFSET && x < MAP_OFFSET + gMapHeader.mapLayout->width
+        && y >= MAP_OFFSET && y < MAP_OFFSET + gMapHeader.mapLayout->height
+        && !MapGridGetCollisionAt(x, y)
+        && MapGridGetElevationAt(x, y) == r->elevation
+        && PlainGround(MapGridGetMetatileBehaviorAt(x, y));
+}
+
+// Whether a walk from where the player stands could reach (tx, ty) now, by the stricter rules at the top.
+static bool8 RoomReachable(s16 tx, s16 ty)
+{
+    static const s8 sSteps[4][2] = { { 0, 1 }, { 0, -1 }, { -1, 0 }, { 1, 0 } };
+    const struct MapEvents *events = gMapHeader.events;
+    struct RoomSearch *r;
+    s16 px = Player()->currentCoords.x, py = Player()->currentCoords.y, x, y;
+    u16 head = 0, tail = 0, i;
+    s32 c, n;
+    u8 d;
+    bool8 found = FALSE;
+
+    if (abs(tx - px) > ROOM_REACH_X || abs(ty - py) > ROOM_REACH_Y)
+        return FALSE;       // farther than the search reaches
+    r = AllocZeroed(sizeof(*r));
+    if (r == NULL)
+        return FALSE;
+    r->x0 = px - ROOM_REACH_X;
+    r->y0 = py - ROOM_REACH_Y;
+    r->elevation = MapGridGetElevationAt(px, py);
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
+    {
+        struct ObjectEvent *obj = &gObjectEvents[i];
+
+        if (!obj->active || obj->isPlayer)
+            continue;
+        RoomShut(r, obj->currentCoords.x, obj->currentCoords.y);
+        RoomShut(r, obj->previousCoords.x, obj->previousCoords.y);
+        if (obj->trainerType != TRAINER_TYPE_NONE)
+            RoomShutSight(r, obj->currentCoords.x, obj->currentCoords.y, obj->trainerRange_berryTreeId,
+                          GetObjectEventScriptPointerByObjectEventId(i));
+    }
+    for (i = 0; events != NULL && i < events->objectEventCount && i < OBJECT_EVENT_TEMPLATES_COUNT; i++)
+    {
+        const struct ObjectEventTemplate *t = &gSaveBlock1Ptr->objectEventTemplates[i];
+
+        if (FlagGet(t->flagId))
+            continue;       // hidden: it cannot appear
+        RoomShut(r, t->x + MAP_OFFSET, t->y + MAP_OFFSET);
+        if (t->kind != OBJ_KIND_CLONE && t->objUnion.normal.trainerType != TRAINER_TYPE_NONE)
+            RoomShutSight(r, t->x + MAP_OFFSET, t->y + MAP_OFFSET, t->objUnion.normal.trainerRange_berryTreeId,
+                          t->script);
+    }
+    for (i = 0; events != NULL && i < events->coordEventCount; i++)
+        RoomShut(r, events->coordEvents[i].x + MAP_OFFSET, events->coordEvents[i].y + MAP_OFFSET);
+
+    c = RoomCell(r, px, py);
+    r->cell[c] |= ROOM_SEEN;
+    r->queue[tail++] = c;
+    while (head < tail && !found)
+    {
+        c = r->queue[head++];
+        for (d = 0; d < ARRAY_COUNT(sSteps); d++)
+        {
+            x = r->x0 + c % ROOM_W + sSteps[d][0];
+            y = r->y0 + c / ROOM_W + sSteps[d][1];
+            n = RoomCell(r, x, y);
+            if (n < 0 || (r->cell[n] & (ROOM_SHUT | ROOM_SEEN)) || !RoomOpen(r, x, y))
+                continue;
+            r->cell[n] |= ROOM_SEEN;
+            if (x == tx && y == ty)
+            {
+                found = TRUE;
+                break;
+            }
+            r->queue[tail++] = n;
+        }
+    }
+    Free(r);
+    return found;
+}
+
+static void Room(void)
+{
+    s16 x = Player()->currentCoords.x, y = Player()->currentCoords.y;
+
+    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING | PLAYER_AVATAR_FLAG_UNDERWATER))
+    {
+        StringCopy(gStringVar4, sText_RoomWater);
+        return;
+    }
+    if (sRoomX == x && sRoomY == y)
+    {
+        StringCopy(gStringVar4, sText_RoomAlready);
+        return;
+    }
+    if (sRoomX == 0)
+    {
+        StringCopy(gStringVar4, sText_RoomHere);
+    }
+    else if (RoomReachable(sRoomX, sRoomY))
+    {
+        gSpecialVar_0x8006 = DRAW_ROOM;
+        gSpecialVar_0x8004 = sRoomX;        // where Spellbook_Draw puts the player
+        gSpecialVar_0x8007 = sRoomY;
+        StringCopy(gStringVar4, sText_RoomThere);
+    }
+    else
+    {
+        StringCopy(gStringVar4, sText_RoomNoWay);   // ... and HERE moves to where the player stands
+    }
+    sRoomX = x;             // the tile stood on now is HERE (after a fold, the one left behind)
+    sRoomY = y;
+}
+
+// THE ROOM in the field, behind the white: the camera and the player to HERE, and anything now in view spawned.
+static void RoomFold(s16 tx, s16 ty)
+{
+    struct ObjectEvent *player = Player();
+
+    MoveCameraAndRedrawMap(tx - player->currentCoords.x, ty - player->currentCoords.y);
+    MoveObjectEventToMapCoords(player, tx, ty);
+    player->currentMetatileBehavior = MapGridGetMetatileBehaviorAt(tx, ty);
+    FreezeObjectEvents();   // the lockall's hold, on whoever came into view too
+}
+
+//  ---------------------------------------------------------------- THE MIRROR
+
+#define MIRROR_STEPS 32
+
+static bool8 Unbeaten(u8 i)
+{
+    struct ObjectEvent *obj = &gObjectEvents[i];
+
+    return obj->active && !obj->isPlayer && !obj->offScreen && obj->trainerType != TRAINER_TYPE_NONE
+        && abs(obj->currentCoords.x - Player()->currentCoords.x) <= 7     // on screen: 7 tiles either side,
+        && obj->currentCoords.y - Player()->currentCoords.y >= -4         // 4 above (the 5th is under the top edge)
+        && obj->currentCoords.y - Player()->currentCoords.y <= 5          // and 5 below
+        && !GetTrainerFlagFromScriptPointer(GetObjectEventScriptPointerByObjectEventId(i));
+}
+
+static u8 Threats(bool8 show)
+{
+    u8 i, n = 0;
+
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
+    {
+        if (!Unbeaten(i))
+            continue;
+        n++;
+        if (show)
+        {
+            gFieldEffectArguments[0] = gObjectEvents[i].localId;
+            gFieldEffectArguments[1] = gObjectEvents[i].mapNum;
+            gFieldEffectArguments[2] = gObjectEvents[i].mapGroup;
+            FieldEffectStart(FLDEFF_EXCLAMATION_MARK_ICON);
+        }
+    }
+    return n;
+}
+
+static void Mirror(void)
+{
+    s8 slot = Follower_LeadSlot();
+    u8 threats;
+    u8 *p;
+
+    if (slot < 0)
+    {
+        StringCopy(gStringVar4, sText_MirrorNone);
+        return;
+    }
+    sMirrorSlot = slot;
+    sMirrorType = gSpeciesInfo[GetMonData(&gPlayerParty[slot], MON_DATA_SPECIES)].types[0];
+    sMirrorSteps = MIRROR_STEPS;
+    GetMonData(&gPlayerParty[slot], MON_DATA_NICKNAME, sMirrorName);
+    StringGet_Nickname(sMirrorName);
+    Reveal_OnMapLoad();     // the shimmer's clock restarted, as THE AWAKENING's
+    threats = Threats(FALSE);
+    StringCopy(gStringVar1, sMirrorName);
+    p = StringExpandPlaceholders(gStringVar4, sText_Mirror);
+    if (threats == 0)
+        p = StringCopy(p, sText_MirrorSafe);
+    else if (threats == 1)
+        p = StringCopy(p, sText_MirrorThreat);
+    else
+    {
+        ConvertIntToDecimalStringN(gStringVar2, threats, STR_CONV_MODE_LEFT_ALIGN, 2);
+        p = StringExpandPlaceholders(p, sText_MirrorThreats);
+    }
+    StringCopy(p, sText_MirrorCost);
+    gSpecialVar_0x8006 = DRAW_MIRROR;
+}
+
+bool8 Spellbook_Mirrored(void)
+{
+    return sMirrorSteps != 0;
+}
+
+const u8 *Spellbook_MirrorName(void)
+{
+    return sMirrorSteps != 0 ? sMirrorName : NULL;
+}
+
+bool8 Spellbook_MirrorWash(u16 *colour)
+{
+    if (sMirrorSteps == 0)
+        return FALSE;
+    *colour = Streaks_TypeColour(sMirrorType);
+    return TRUE;
+}
+
+void Spellbook_OnStep(void)
+{
+    if (sMirrorSteps != 0)
+        sMirrorSteps--;
+}
+
+void Spellbook_OnSeam(void)
+{
+    sRoomX = sRoomY = 0;    // a new map: HERE was the old one's
+}
+
 #define tObj   data[0]
 #define tSteps data[1]
 #define tState data[2]
 #define tWait  data[3]
+#define tX     data[4]
+#define tY     data[5]
+
+#define THREAT_WAIT 56      // frames THE MIRROR leaves its "!"s up before its words
 
 #define DRAW_WAIT 48        // frames a wanderer caught mid-step by the lockall is given to finish it
 
@@ -668,6 +1025,28 @@ static void Task_Draw(u8 taskId)
         if (ObjectEventClearHeldMovementIfFinished(obj) != 0)
             tState = 3;
         break;
+    case 10:                // THE ROOM: to white, fold, back from white
+        FadeScreen(FADE_TO_WHITE, 0);
+        tState = 11;
+        break;
+    case 11:
+        if (gPaletteFade.active)
+            break;
+        RoomFold(tX, tY);
+        FadeScreen(FADE_FROM_WHITE, 0);
+        tState = 12;
+        break;
+    case 12:
+        if (!gPaletteFade.active && IsWeatherNotFadingIn())
+            tState = 3;
+        break;
+    case 20:                // THE MIRROR: what would stop you, marked
+        tState = Threats(TRUE) != 0 ? 21 : 3;
+        break;
+    case 21:
+        if (++tWait >= THREAT_WAIT)
+            tState = 3;
+        break;
     default:
         if (tObj < OBJECT_EVENTS_COUNT && obj->active)
             FreezeObjectEvent(obj);
@@ -686,13 +1065,26 @@ void Spellbook_Draw(void)
     gTasks[taskId].tSteps = gSpecialVar_0x8005;
     gTasks[taskId].tState = 0;
     gTasks[taskId].tWait = 0;
+    if (gSpecialVar_0x8006 == DRAW_ROOM)
+    {
+        gTasks[taskId].tState = 10;
+        gTasks[taskId].tX = gSpecialVar_0x8004;
+        gTasks[taskId].tY = gSpecialVar_0x8007;
+    }
+    else if (gSpecialVar_0x8006 == DRAW_MIRROR)
+    {
+        gTasks[taskId].tState = 20;
+    }
     gSpecialVar_0x8005 = 0;
+    gSpecialVar_0x8006 = DRAW_PULL;
 }
 
 #undef tObj
 #undef tSteps
 #undef tState
 #undef tWait
+#undef tX
+#undef tY
 
 //  ---------------------------------------------------------------- THE GREAT HAND
 
@@ -741,7 +1133,8 @@ void Spellbook_Cast(void)
     const struct Spell *s;
 
     gStringVar4[0] = EOS;
-    gSpecialVar_0x8005 = 0;         // THE PULL's steps, for Spellbook_Draw; nothing else draws
+    gSpecialVar_0x8005 = 0;         // THE PULL's steps, for Spellbook_Draw
+    gSpecialVar_0x8006 = DRAW_PULL; // ... or THE ROOM's fold, or THE MIRROR's marks
     if (spell >= SPELL_COUNT || !Knows(spell) || !((BUILT_SPELLS >> spell) & 1))
         return;
     s = SpellOf(spell);
@@ -752,7 +1145,9 @@ void Spellbook_Cast(void)
     case SPELL_LENS:      SetBattleSpell(BATTLE_SPELL_LENS, sText_Lens); break;
     case SPELL_FIELD:     SetBattleSpell(BATTLE_SPELL_FIELD, sText_Field); break;
     case SPELL_PATTERN:   SetBattleSpell(BATTLE_SPELL_PATTERN, sText_Pattern); break;
+    case SPELL_ROOM:      Room(); break;
     case SPELL_PULL:      Pull(); break;
+    case SPELL_MIRROR:    Mirror(); break;
     case SPELL_GREAT_HAND: GreatHand(); break;
     }
     VarSet(VAR_SPELLS_CAST, VarGet(VAR_SPELLS_CAST) | (1 << spell));
@@ -764,12 +1159,14 @@ void Spellbook_Cast(void)
 
 bool8 Spellbook_Awakened(void)
 {
-    return sAwakened;
+    return sAwakened || sMirrorSteps != 0;      // THE MIRROR's eyes see what is hidden too
 }
 
 void Spellbook_OnMapLoad(void)
 {
     sAwakened = FALSE;
+    sMirrorSteps = 0;       // a door ends THE MIRROR
+    sRoomX = sRoomY = 0;    // and THE ROOM's HERE was this map's
 }
 
 //  The light stays turned while the clock's watch is the night it was said in: the same day, or the small hours of
@@ -801,6 +1198,7 @@ void Spellbook_BattleStart(void)
 {
     u16 state;
 
+    sMirrorSteps = 0;       // any battle ends THE MIRROR: you are yourself in it
     sBattleSpell = BATTLE_SPELL_NONE;
     sPatternWait = 0;
     sPullCalm = 0;
