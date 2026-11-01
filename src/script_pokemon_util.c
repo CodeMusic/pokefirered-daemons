@@ -2,6 +2,7 @@
 #include "gflib.h"
 #include "berry.h"
 #include "daycare.h"
+#include "daemons_spellbook.h"
 #include "event_data.h"
 #include "load_save.h"
 #include "overworld.h"
@@ -19,6 +20,8 @@ void HealPlayerParty(void)
     u8 i, j;
     u8 ppBonuses;
     u8 arg[4];
+
+    Spellbook_OnRest();     // T-483 (5): a rest -- THE RETURN may be said again
 
     // restore HP.
     for(i = 0; i < gPlayerPartyCount; i++)

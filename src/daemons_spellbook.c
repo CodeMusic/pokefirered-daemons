@@ -7,6 +7,7 @@
 #include "battle_setup.h"
 #include "event_data.h"
 #include "event_object_movement.h"
+#include "event_scripts.h"
 #include "field_camera.h"
 #include "field_effect.h"
 #include "field_player_avatar.h"
@@ -21,6 +22,7 @@
 #include "palette.h"
 #include "pokemon.h"
 #include "reveal.h"
+#include "script_pokemon_util.h"
 #include "script.h"
 #include "sound.h"
 #include "string_util.h"
@@ -40,6 +42,7 @@
 #include "constants/metatile_behaviors.h"
 #include "constants/moves.h"
 #include "constants/songs.h"
+#include "constants/species.h"
 #include "constants/trainer_types.h"
 #include "constants/vars.h"
 
@@ -59,10 +62,12 @@
 //  WHAT IS KNOWN. Spells come off the page as it is read (Spellbook_OnPassageRead, from book_reader.c, on the last
 //  spread of an entry): THE FOLDS (folds one and two) gives THE AWAKENING and THE CONTRAST; THE THIRD FOLD, read after
 //  them, THE ROOM; THE FOURTH, FIFTH AND SIXTH, read after that, THE MIRROR and THE PATTERN. In order, as the brief's table asks: a fold read too early gives nothing, and can be read again. THE
-//  RETURN's own rule (a hundred AWAKENINGs) waits for its build. THE LENS and THE FIELD are GRANTED TOGETHER with the
+//  RETURN keeps its own rule, the brief's and the book's: it comes off the page as THE AWAKENING is said the hundredth
+//  time (counted from this build; the count is VAR_SPELL_STATE_3's low seven bits, and stops at a hundred), and says
+//  so in that cast's own words. THE LENS and THE FIELD are GRANTED TOGETHER with the
 //  book itself, so the SPELLBOOK is never empty when it first appears. The list shows only what can be cast now.
 //  The two tablets (part three, the user's pick 2026-10-31): GRAVITY II read to its end gives THE PULL; HANDS II, THE
-//  GREAT HAND, and writes THE SMALL HAND down (not yet castable). The brief's PULL also asked the reader to rest and be
+//  GREAT HAND and THE SMALL HAND together (the brief's "spells 7-8: reading the Tablet of the Hands"). The brief's PULL also asked the reader to rest and be
 //  woken in the half-hour after three; here the half-hour is where it is strongest instead, so the tablet alone opens
 //  it -- the book is only read at night, so it is still learned in the dark.
 //
@@ -97,6 +102,19 @@
 //                   it you walk lighter (wild daemons three-quarters as often) and win a tenth more experience. The
 //                   cost is fate's: the five drain win, lose or run, and the hand lets go the moment the road changes --
 //                   arrive, or walk your own road first.
+//    THE RETURN     progress of body. Every daemon whose body the road has changed since the last rest (HP, PP,
+//                   status, fainted) is brought back as the rest left it -- whole, since a rest heals -- and keeps
+//                   what it learned: its level, its routines, every flag. What it pays is the body's own progress:
+//                   its experience toward the next level goes back to where that level began. A daemon the road has
+//                   not touched pays nothing. Said once between rests (any heal is a rest: a centre, home, a whiteout);
+//                   said with nothing to bring back, it is not spent. "I went out so I could come back."
+//    THE SMALL HAND none but the choice's own: held until a trainer's eyes find the player, it opens then -- a "?"
+//                   over the trainer, and no battle; that trainer lets the player pass until the next map loads. The
+//                   trainer stays unbeaten (nothing is set), so speaking to it still battles, and every gate a
+//                   trainer's win opens stays shut. The brief's other half -- "a cutscene the player can refuse" -- is
+//                   not built: a scene can be a story gate, and refusing one could skip it.
+//    BOTH HANDS     THE SMALL HAND and THE GREAT HAND said in the same hour of the clock (either order) open nothing;
+//                   only, after the second, someone somewhere says you understood. Each pair says it once.
 //    One battle spell at a time: setting one lets the other go. They wait for a single battle against a daemon or a
 //    trainer (never a link, a double, the SAFARI, the tutorial or POKEDUDE's) and last that battle. THE PULL's calm
 //    and THE GREAT HAND's road are not battle spells in that sense: either stands beside any of them.
@@ -121,9 +139,11 @@
 //  so a HERE that can never be reached again (a ledge jumped, a door shut) never leaves the spell stuck.
 //
 //  RAM: twelve bytes of IWRAM (sAwakened, sBattleSpell, sPatternWait, sPullCalm, sHandOn and sNews's two; THE ROOM's
-//  sRoomX, sRoomY; THE MIRROR's sMirrorSteps, sMirrorSlot, sMirrorType) and THE MIRROR's borrowed name, eleven bytes of
-//  EWRAM; the list and THE ROOM's search are on the heap while they run. Save: six vars, VAR_SPELLS_KNOWN ..
-//  VAR_SPELL_STATE_2 (0x40DF-0x40E4), no flags -- THE ROOM and THE MIRROR keep nothing in the save.
+//  sRoomX, sRoomY; THE MIRROR's sMirrorSteps, sMirrorSlot, sMirrorType) and fourteen of EWRAM (THE MIRROR's borrowed
+//  name; THE SMALL HAND's trainer let pass); the list and THE ROOM's search are on the heap while they run. Save:
+//  seven vars, VAR_SPELLS_KNOWN .. VAR_SPELL_STATE_3 (0x40DF-0x40E5), no flags -- THE ROOM and THE MIRROR keep
+//  nothing in the save; THE RETURN, THE SMALL HAND and the two hands' hour live in VAR_SPELL_STATE_3 and two spare
+//  bits of VAR_SPELL_STATE_2.
 
 #define BATTLE_SPELL_NONE    0
 #define BATTLE_SPELL_LENS    1
@@ -141,10 +161,21 @@
 #define STATE2_ROAD_SHIFT    5
 #define STATE2_ROAD_MASK     0x03E0     // ... and the road it named
 #define HAND_BATTLES         5
+#define STATE2_LAST_SHIFT    10
+#define STATE2_LAST_MASK     0x0C00     // the hand said last, for the 7+8 line (HAND_SMALL, HAND_GREAT)
+#define HAND_SMALL           1
+#define HAND_GREAT           2
+
+#define STATE3_AWAKE_MASK    0x007F     // VAR_SPELL_STATE_3: THE AWAKENINGs said, to a hundred
+#define STATE3_RETURNED      0x0080     // THE RETURN said since the last rest
+#define STATE3_SMALL_HAND    0x0100     // THE SMALL HAND held
+#define STATE3_HOUR_SHIFT    9
+#define STATE3_HOUR_MASK     0xFE00     // the clock hour the last hand was said in, mod 128
+#define RETURN_AWAKENINGS    100
 
 #define BUILT_SPELLS ((1 << SPELL_AWAKENING) | (1 << SPELL_CONTRAST) | (1 << SPELL_ROOM) | (1 << SPELL_PULL) \
-                    | (1 << SPELL_MIRROR) | (1 << SPELL_PATTERN) | (1 << SPELL_GREAT_HAND) | (1 << SPELL_LENS) \
-                    | (1 << SPELL_FIELD))
+                    | (1 << SPELL_MIRROR) | (1 << SPELL_PATTERN) | (1 << SPELL_RETURN) | (1 << SPELL_SMALL_HAND) \
+                    | (1 << SPELL_GREAT_HAND) | (1 << SPELL_LENS) | (1 << SPELL_FIELD))
 #define GRANTED_WITH_BOOK ((1 << SPELL_LENS) | (1 << SPELL_FIELD))
 
 static u8 sAwakened;        // IWRAM: THE AWAKENING said on this map (cleared as the next one loads)
@@ -158,6 +189,7 @@ static u8 sMirrorSteps;     // IWRAM: THE MIRROR's steps left (0: you are yourse
 static u8 sMirrorSlot;      // IWRAM: ... the party slot it looks through
 static u8 sMirrorType;      // IWRAM: ... and that daemon's first type, for the colour
 static EWRAM_DATA u8 sMirrorName[POKEMON_NAME_LENGTH + 1] = {0};   // what {PLAYER} says while it lasts
+static EWRAM_DATA u8 sPassed[3] = {0};  // THE SMALL HAND's trainer let pass on this map: local id (0 none), map, group
 
 //  ---------------------------------------------------------------- words (DRAFT, every one)
 
@@ -167,6 +199,8 @@ static const u8 sName_Room[]      = _("ROOM");
 static const u8 sName_Pull[]      = _("PULL");
 static const u8 sName_Mirror[]    = _("MIRROR");
 static const u8 sName_Pattern[]   = _("PATTERN");
+static const u8 sName_Return[]    = _("RETURN");
+static const u8 sName_SmallHand[] = _("SMALL HAND");
 static const u8 sName_GreatHand[] = _("GREAT HAND");
 static const u8 sName_Lens[]      = _("LENS");
 static const u8 sName_Field[]     = _("FIELD");
@@ -177,6 +211,8 @@ static const u8 sLabel_Room[]     = _("3  ROOM");
 static const u8 sLabel_Pull[]     = _("3.5 PULL");
 static const u8 sLabel_Mirror[]   = _("4  MIRROR");
 static const u8 sLabel_Pattern[]   = _("5  PATTERN");
+static const u8 sLabel_Return[]    = _("6  RETURN");
+static const u8 sLabel_SmallHand[] = _("7  SMALL HAND");
 static const u8 sLabel_GreatHand[] = _("8  GREAT HAND");
 static const u8 sLabel_Lens[]      = _("11 LENS");
 static const u8 sLabel_Field[]     = _("12 FIELD");
@@ -187,6 +223,8 @@ static const u8 sLine_Contrast[]  = _("Light, remember dark. Dark, remember\nlig
 static const u8 sLine_Room[]      = _("Two things, and a distance between.\nLet there be here, and there, and\nlet the there be reachable.");
 static const u8 sLine_Pull[]      = _("Come closer. I am not asking.\nI am heavy.");
 static const u8 sLine_Mirror[]    = _("Other, I name you. And in naming\nyou, I find the edge of me.");
+static const u8 sLine_Return[]    = _("I went out so I could come back.\nEverything I learned, I knew.\nEverything I knew, I had to learn.");
+static const u8 sLine_SmallHand[] = _("I choose. Let the choosing be mine,\nwhole and unborrowed.");
 static const u8 sLine_GreatHand[] = _("I am carried. Let the carrying be\ntrue, and let me not pretend I walk\nalone.");
 static const u8 sLine_Pattern[]   = _("Once is chance. Twice is rhyme. Three\ntimes is a law: show me the third.");
 static const u8 sLine_Lens[]      = _("Give me the part. Only the part.\nI will see the whole later,\nif I earn it.");
@@ -210,6 +248,8 @@ static const struct Spell sSpells[] =
     { SPELL_PULL,      sName_Pull,      sLabel_Pull,      sLine_Pull,      LEDGER_CONTEXT, LEDGER_INTUITION },
     { SPELL_MIRROR,    sName_Mirror,    sLabel_Mirror,    sLine_Mirror,    LEDGER_CONTENT, LEDGER_CONTEXT },
     { SPELL_PATTERN,   sName_Pattern,   sLabel_Pattern,   sLine_Pattern,   LEDGER_CONTENT, LEDGER_REASON },
+    { SPELL_RETURN,    sName_Return,    sLabel_Return,    sLine_Return,    LEDGER_CONTEXT, LEDGER_INTUITION },
+    { SPELL_SMALL_HAND, sName_SmallHand, sLabel_SmallHand, sLine_SmallHand, LEDGER_CONTENT, LEDGER_REASON },
     { SPELL_GREAT_HAND, sName_GreatHand, sLabel_GreatHand, sLine_GreatHand, LEDGER_CONTEXT, LEDGER_INTUITION },
     { SPELL_LENS,      sName_Lens,      sLabel_Lens,      sLine_Lens,      LEDGER_CONTENT, LEDGER_REASON },
     { SPELL_FIELD,     sName_Field,     sLabel_Field,     sLine_Field,     LEDGER_CONTEXT, LEDGER_INTUITION },
@@ -241,6 +281,14 @@ static const u8 sText_MirrorThreats[] = _("Here, {STR_VAR_2} would stop you. Wha
 static const u8 sText_MirrorThreat[]  = _("Here, one would stop you. What is\nhidden glints.\p");
 static const u8 sText_MirrorSafe[]    = _("Here, nothing would stop you. What\nis hidden glints.\p");
 static const u8 sText_MirrorCost[]    = _("While you are it, something is you,\nlearning your name. Nothing can\pwrite you down until you are back.");
+static const u8 sText_ReturnNews[]    = _("\pA hundred times open. Something came\noff the page: THE RETURN.");
+static const u8 sText_Return[]        = _("Your daemons come back as the last\nrest left them: whole.\pEvery level and routine is kept. The\nway toward the next is let go.");
+static const u8 sText_ReturnWhole[]   = _("Your daemons are as the last rest\nleft them already.\pNothing to bring back, and nothing\nlet go. The RETURN waits.");
+static const u8 sText_ReturnNotOut[]  = _("You have not gone out since the\nlast RETURN. Rest, and go out,\pand it will bring you back again.");
+static const u8 sText_SmallHand[]     = _("The SMALL HAND is held. The next\ntrainer who sees you will not stop\pyou, unless you choose it.");
+static const u8 sText_SmallHandHeld[] = _("The SMALL HAND is held already. The\nnext trainer who sees you will let\pyou choose.");
+static const u8 sText_SmallHandOpens[] = _("Someone sees you, and the SMALL\nHAND opens: this one is yours.\pWalk past, or speak, and choose.");
+static const u8 sText_BothHands[]     = _("\pBoth hands, in one hour. Nothing\nopens.\pBut somewhere, someone says: you\nunderstood.");
 static const u8 sText_News[]          = _("Something came off the page and into\nthe SPELLBOOK.\p");
 static const u8 sText_NewsThe[]       = _("THE ");
 static const u8 sText_NewsAnd[]       = _(" and ");
@@ -515,6 +563,21 @@ static void Task_Spellbook(u8 taskId)
 
 //  ---------------------------------------------------------------- casting
 
+// THE RETURN's door: a hundred AWAKENINGs. The hundredth says so in its own words, not as the book's news.
+static void AwakeningCounted(void)
+{
+    u16 s3 = VarGet(VAR_SPELL_STATE_3);
+    u8 n = s3 & STATE3_AWAKE_MASK;
+
+    if (n < RETURN_AWAKENINGS)
+        VarSet(VAR_SPELL_STATE_3, (s3 & ~STATE3_AWAKE_MASK) | ++n);
+    if (n >= RETURN_AWAKENINGS && !Knows(SPELL_RETURN))
+    {
+        VarSet(VAR_SPELLS_KNOWN, VarGet(VAR_SPELLS_KNOWN) | (1 << SPELL_RETURN));
+        StringAppend(gStringVar4, sText_ReturnNews);
+    }
+}
+
 static void Awakening(void)
 {
     u8 n = Reveal_UnfoundCount();
@@ -530,6 +593,7 @@ static void Awakening(void)
         ConvertIntToDecimalStringN(gStringVar1, n, STR_CONV_MODE_LEFT_ALIGN, 3);
         StringExpandPlaceholders(gStringVar4, sText_AwakeningMany);
     }
+    AwakeningCounted();
 }
 
 static void Contrast(void)
@@ -1114,6 +1178,131 @@ static void GreatHand(void)
     VarSet(VAR_SPELL_STATE_2, s2 | (HAND_BATTLES << STATE2_HAND_SHIFT) | (step << STATE2_ROAD_SHIFT));
 }
 
+//  ---------------------------------------------------------------- THE RETURN
+
+// A body the road has changed since the rest: hurt, fainted, statused, or a routine's PP spent.
+static bool8 BodyChanged(struct Pokemon *mon)
+{
+    u8 j, bonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
+
+    if (GetMonData(mon, MON_DATA_HP) < GetMonData(mon, MON_DATA_MAX_HP) || GetMonData(mon, MON_DATA_STATUS) != 0)
+        return TRUE;
+    for (j = 0; j < MAX_MON_MOVES; j++)
+        if (GetMonData(mon, MON_DATA_PP1 + j) < CalculatePPWithBonus(GetMonData(mon, MON_DATA_MOVE1 + j), bonuses, j))
+            return TRUE;
+    return FALSE;
+}
+
+static void Return(void)
+{
+    u16 s3 = VarGet(VAR_SPELL_STATE_3);
+    u8 i, j, bonuses, level, pp, changed = 0;
+    u16 hp, species;
+    u32 status = 0, exp, floor;
+
+    if (s3 & STATE3_RETURNED)
+    {
+        StringCopy(gStringVar4, sText_ReturnNotOut);
+        return;
+    }
+    for (i = 0; i < gPlayerPartyCount; i++)
+    {
+        struct Pokemon *mon = &gPlayerParty[i];
+
+        species = GetMonData(mon, MON_DATA_SPECIES);
+        if (species == SPECIES_NONE || GetMonData(mon, MON_DATA_IS_EGG) || !BodyChanged(mon))
+            continue;
+        changed++;
+        hp = GetMonData(mon, MON_DATA_MAX_HP);          // the body as the rest left it: whole
+        SetMonData(mon, MON_DATA_HP, &hp);
+        SetMonData(mon, MON_DATA_STATUS, &status);
+        bonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
+        for (j = 0; j < MAX_MON_MOVES; j++)
+        {
+            pp = CalculatePPWithBonus(GetMonData(mon, MON_DATA_MOVE1 + j), bonuses, j);
+            SetMonData(mon, MON_DATA_PP1 + j, &pp);
+        }
+        level = GetMonData(mon, MON_DATA_LEVEL);        // ... and its progress of body: kept the level, not the way
+        if (level < MAX_LEVEL)
+        {
+            floor = gExperienceTables[gSpeciesInfo[species].growthRate][level];
+            exp = GetMonData(mon, MON_DATA_EXP);
+            if (exp > floor)
+                SetMonData(mon, MON_DATA_EXP, &floor);
+        }
+    }
+    if (changed == 0)
+    {
+        StringCopy(gStringVar4, sText_ReturnWhole);     // nothing to bring back: not spent
+        return;
+    }
+    VarSet(VAR_SPELL_STATE_3, s3 | STATE3_RETURNED);
+    StringCopy(gStringVar4, sText_Return);
+}
+
+// script_pokemon_util.c HealPlayerParty: a rest. THE RETURN may be said again.
+void Spellbook_OnRest(void)
+{
+    u16 s3 = VarGet(VAR_SPELL_STATE_3);
+
+    if (s3 & STATE3_RETURNED)
+        VarSet(VAR_SPELL_STATE_3, s3 & ~STATE3_RETURNED);
+}
+
+//  ---------------------------------------------------------------- THE SMALL HAND, and both hands
+
+static void SmallHand(void)
+{
+    u16 s3 = VarGet(VAR_SPELL_STATE_3);
+
+    StringCopy(gStringVar4, (s3 & STATE3_SMALL_HAND) ? sText_SmallHandHeld : sText_SmallHand);
+    VarSet(VAR_SPELL_STATE_3, s3 | STATE3_SMALL_HAND);
+}
+
+// trainer_see.c CheckTrainer, once an unbeaten trainer's eyes have found the player and before the battle is set up.
+u8 Spellbook_SmallHandSees(u8 objectId)
+{
+    struct ObjectEvent *obj = &gObjectEvents[objectId];
+    u16 s3;
+
+    if (sPassed[0] != 0 && sPassed[0] == obj->localId && sPassed[1] == obj->mapNum && sPassed[2] == obj->mapGroup)
+        return SMALL_HAND_PASSED;
+    s3 = VarGet(VAR_SPELL_STATE_3);
+    if (!(s3 & STATE3_SMALL_HAND))
+        return SMALL_HAND_NONE;
+    VarSet(VAR_SPELL_STATE_3, s3 & ~STATE3_SMALL_HAND);
+    sPassed[0] = obj->localId;
+    sPassed[1] = obj->mapNum;
+    sPassed[2] = obj->mapGroup;
+    gFieldEffectArguments[0] = obj->localId;
+    gFieldEffectArguments[1] = obj->mapNum;
+    gFieldEffectArguments[2] = obj->mapGroup;
+    FieldEffectStart(FLDEFF_QUESTION_MARK_ICON);
+    StringCopy(gStringVar4, sText_SmallHandOpens);
+    ScriptContext_SetupScript(EventScript_SmallHandOpens);
+    return SMALL_HAND_OPENS;
+}
+
+// THE SMALL HAND and THE GREAT HAND in one hour of the clock, either order: the line, once a pair. HAND is the one
+// just said.
+static void BothHands(u8 hand)
+{
+    u16 s2 = VarGet(VAR_SPELL_STATE_2), s3 = VarGet(VAR_SPELL_STATE_3), day, minute;
+    u8 last = (s2 & STATE2_LAST_MASK) >> STATE2_LAST_SHIFT, hour;
+    bool8 met;
+
+    DaemonsDayAndMinute(&day, &minute);
+    hour = ((u32)day * 24 + minute / 60) & (STATE3_HOUR_MASK >> STATE3_HOUR_SHIFT);
+    met = last != 0 && last != hand && ((s3 & STATE3_HOUR_MASK) >> STATE3_HOUR_SHIFT) == hour;
+    s2 &= ~STATE2_LAST_MASK;
+    if (!met)
+        s2 |= hand << STATE2_LAST_SHIFT;
+    VarSet(VAR_SPELL_STATE_2, s2);
+    VarSet(VAR_SPELL_STATE_3, (s3 & ~STATE3_HOUR_MASK) | (hour << STATE3_HOUR_SHIFT));
+    if (met)
+        StringAppend(gStringVar4, sText_BothHands);
+}
+
 //  The wild encounter rate, as THE PULL and THE GREAT HAND leave it (wild_encounter.c): heavy until the calm is spent,
 //  lighter while carried.
 u32 Spellbook_EncounterRate(u32 rate)
@@ -1148,7 +1337,9 @@ void Spellbook_Cast(void)
     case SPELL_ROOM:      Room(); break;
     case SPELL_PULL:      Pull(); break;
     case SPELL_MIRROR:    Mirror(); break;
-    case SPELL_GREAT_HAND: GreatHand(); break;
+    case SPELL_GREAT_HAND: GreatHand(); BothHands(HAND_GREAT); break;
+    case SPELL_RETURN:    Return(); break;
+    case SPELL_SMALL_HAND: SmallHand(); BothHands(HAND_SMALL); break;
     }
     VarSet(VAR_SPELLS_CAST, VarGet(VAR_SPELLS_CAST) | (1 << spell));
     LedgerAdd(s->axisA);
@@ -1167,6 +1358,7 @@ void Spellbook_OnMapLoad(void)
     sAwakened = FALSE;
     sMirrorSteps = 0;       // a door ends THE MIRROR
     sRoomX = sRoomY = 0;    // and THE ROOM's HERE was this map's
+    sPassed[0] = 0;         // THE SMALL HAND's trainer may see you again
 }
 
 //  The light stays turned while the clock's watch is the night it was said in: the same day, or the small hours of
@@ -1468,6 +1660,7 @@ void Spellbook_DebugAll(bool8 on)
         VarSet(VAR_SPELLS_CAST, 0);
         VarSet(VAR_SPELL_STATE, 0);
         VarSet(VAR_SPELL_STATE_2, 0);
+        VarSet(VAR_SPELL_STATE_3, 0);
     }
 }
 STATIC_ASSERT((1 << SPELL_COUNT) - 1 == 0x3FFF, EverySpellIsTheDebugRowsTest);   // daemons_debug_events.c IsHeld

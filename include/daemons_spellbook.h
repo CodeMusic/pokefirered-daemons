@@ -68,6 +68,11 @@ bool8 Spellbook_MirrorWash(u16 *colour);    // daemons_pulse.c: the field in its
 void Spellbook_OnStep(void);                // field_control_avatar.c: a step taken (THE MIRROR's are counted)
 void Spellbook_OnSeam(void);                // overworld.c: a connection crossed -- HERE belonged to the last map
 
+// THE RETURN and THE SMALL HAND (part five): the body back as the last rest left it; one trainer walked past.
+void Spellbook_OnRest(void);                // script_pokemon_util.c HealPlayerParty: THE RETURN may be said again
+enum { SMALL_HAND_NONE, SMALL_HAND_PASSED, SMALL_HAND_OPENS };
+u8 Spellbook_SmallHandSees(u8 objectId);    // trainer_see.c: PASSED skip this trainer; OPENS a script is running
+
 #if DAEMONS_DEBUG
 void Spellbook_DebugAll(bool8 on);          // DEBUG -> GAME EVENTS: every spell known (or none)
 #endif

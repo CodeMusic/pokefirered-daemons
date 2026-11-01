@@ -288,8 +288,11 @@
 #define VAR_SPELL_LEDGER           0x40E2 // T-483 (5): the ledger, never shown -- low byte REASON, high INTUITION
 #define VAR_SPELL_LEDGER_2         0x40E3 // T-483 (5): ... low byte CONTENT, high CONTEXT (all four halved at 255)
 #define VAR_SPELL_STATE_2          0x40E4 // T-483 (5): bits 0-1 THE PULL's calm on the next single battle (turns, 0 none);
-                                          //   2-4 THE GREAT HAND's battles left; 5-9 the road it named (a dream step)
-#define VAR_0x40E5                 0x40E5
+                                          //   2-4 THE GREAT HAND's battles left; 5-9 the road it named (a dream step);
+                                          //   10-11 the hand said last (1 SMALL, 2 GREAT, 0 none), for the 7+8 line
+#define VAR_SPELL_STATE_3          0x40E5 // T-483 (5): bits 0-6 THE AWAKENINGs said (to 100, THE RETURN's door); 7 THE
+                                          //   RETURN said since the last rest; 8 THE SMALL HAND held; 9-15 the clock
+                                          //   hour the last hand was said in ((day * 24 + hour) mod 128)
 #define VAR_DAILY_SLOTS            0x40E6
 #define VAR_DAILY_WILDS            0x40E7
 #define VAR_DAILY_BLENDER          0x40E8

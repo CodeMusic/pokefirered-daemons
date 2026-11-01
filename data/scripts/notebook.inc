@@ -106,6 +106,16 @@ EventScript_SpellbookByDay::
 	releaseall
 	end
 
+@ T-483 (5): THE SMALL HAND opens -- a trainer's eyes found the player and let them pass (the words in gStringVar4,
+@ the "?" already over the trainer). trainer_see.c starts it in place of the battle.
+EventScript_SmallHandOpens::
+	lockall
+	playse SE_M_MORNING_SUN
+	delay 30
+	msgbox gStringVar4
+	releaseall
+	end
+
 Text_SpellbookByDay::
 	.string "The SPELLBOOK's ink is dry. It is\n"
 	.string "still light, and spells wait for night.$"

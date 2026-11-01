@@ -1,4 +1,5 @@
 #include "global.h"
+#include "daemons_spellbook.h"
 #include "battle_setup.h"
 #include "event_object_movement.h"
 #include "field_effect.h"
@@ -113,6 +114,11 @@ static bool8 CheckTrainer(u8 trainerObjId)
     {
         if (script[1] == TRAINER_BATTLE_DOUBLE && GetMonsStateToDoubles())
             return FALSE;
+        switch (Spellbook_SmallHandSees(trainerObjId))  // T-483 (5): THE SMALL HAND lets one trainer be walked past
+        {
+        case SMALL_HAND_PASSED: return FALSE;
+        case SMALL_HAND_OPENS:  return TRUE;
+        }
         ConfigureAndSetUpOneTrainerBattle(trainerObjId, script);
         TrainerApproachPlayer(&gObjectEvents[trainerObjId], approachDistance - 1);
         return TRUE;
