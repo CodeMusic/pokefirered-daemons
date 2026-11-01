@@ -3,8 +3,8 @@
 A total conversion of **Pokémon FireRed and LeafGreen**, built on
 [pret/pokefirered][pret].
 
-The creatures are **daemons** — background processes, in the Unix sense, and the
-older sense underneath it. The type chart is not a balance table; it is an
+The creatures are **daemons** (said *DAY-mons*) — background processes, in the
+Unix sense, and the older sense underneath it. The type chart is not a balance table; it is an
 argument about how a mind resolves what it is given. Everything else follows
 from that.
 
