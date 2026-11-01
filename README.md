@@ -22,8 +22,8 @@ large type), **then read [the player's manual][manual]** (all PDFs in the design
 the BENCHMARKS, the INDEX, the NOTEBOOK, PLAY and the companion, and a glossary.
 
 **No ROM is distributed.** Releases are BPS patches for a cartridge you own,
-published on the [DAEMONS releases page][releases] (latest: **v11.334.1**,
-2026-10-31), four to a release: CONTENT for *FireRed* 1.0 and Rev 1, CONTEXT
+published on the [DAEMONS releases page][releases] (latest: **v11.335.6**,
+2026-11-01), four to a release: CONTENT for *FireRed* 1.0 and Rev 1, CONTEXT
 for *LeafGreen* 1.0 and Rev 1. The game also plays in a browser on
 [**daemons-playground**][playground] (a private network only), and in the
 companion's [one app][oneapp] on an iPhone or iPad, which patches the player's
