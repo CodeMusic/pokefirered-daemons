@@ -132,6 +132,7 @@
 //                   and a state (sleep, poison, burn, freeze, paralysis) one gains the other gains too if it has none
 //                   and could be given it. A bond, not a shield: nothing is taken off the one first hurt, and it cuts
 //                   both ways. The thread never takes the last HP, so it never ends a battle by itself.
+//    THE WITCHING HOUR (13) has no cost: it is the one that takes the others away. See below.
 //    One battle spell at a time: setting one lets the other go. They wait for a single battle against a daemon or a
 //    trainer (never a link, a double, the SAFARI, the tutorial or POKEDUDE's) and last that battle. THE PULL's calm
 //    and THE GREAT HAND's road are not battle spells in that sense: either stands beside any of them.
@@ -171,6 +172,31 @@
 //  bits of VAR_SPELL_STATE_2. Part six: THE SEAM's five bytes of IWRAM (sSeamFelt, sSeamState), and in the save its
 //  pending battle as FLAG_SPELL_SEAM (0x3FD) and THE MIRROR's last first type, five bits, as VAR_SPELL_STATE_2's top
 //  four and FLAG_SPELL_MIRRORED_HIGH (0x3FE). Only one type is kept, the last: the save had six bits, not seventeen.
+//  Part seven: THE WITCHING HOUR's three bytes of IWRAM (sWitching, sWitchDay); in the save only VAR_SPELLS_CAST's bit
+//  13, which was always its own. 0x3FF is still free.
+
+//  THE WITCHING HOUR (13), the last, the crease (the brief's table: "all twelve cast at least once, in the window, once
+//  per playthrough"). THE TWELVE are the wheel's, 1 to 12; THE PULL is the half and lives in the crease with it, so it
+//  is not asked for ("twelve on the wheel, one in the crease"). Each cast already sets its bit in VAR_SPELLS_CAST, so
+//  the record was there from part two. It is never written into VAR_SPELLS_KNOWN: the list shows it only while the
+//  twelve are cast and the clock is in the thin half-hour (HalfHour, T-501), and says nothing when it appears -- no
+//  news, no sound, no line about the hour; the handless clock is the only sign. Said, it sets its own bit of
+//  VAR_SPELLS_CAST (bit 13), which is the once: in any later half-hour it is still listed, and only says it was said.
+//  WHAT IT DOES: while it lasts nothing costs anything --
+//    THE PULL's heaviness   the wild come no oftener (the calm still comes);
+//    THE MIRROR's self      {PLAYER} keeps its name and SAVE stays in the START menu;
+//    THE RETURN's progress  the way toward the next level is kept;
+//    THE GREAT HAND's drain a battle on the road does not spend one of the five;
+//    THE SEAM's separateness the thread carries only what the foe feels to the lead's good: the lead's harm and
+//                           states reach the foe, the foe's mending does not, and nothing the foe feels reaches the
+//                           lead. A shield, for once.
+//  THE PROCESS's slowness is left as it is (open for the user), and so are the hand letting go when the road changes,
+//  THE RETURN's once between rests, and the battle spells' darkened or hushed lines (those are what the spells are).
+//  The book's "every daemon a friend, every wall a door, every number a feeling" is not built. IT LASTS until the
+//  half-hour ends (by the clock, or as DEBUG's WATCH leaves it) or the day changes, whichever is first: at
+//  most thirty minutes. It is IWRAM only (sWitching, sWitchDay), so turning the game off ends it early, and a save
+//  made in it and loaded later has spent it; never a soft-lock, only a shorter half-hour. Its axis is none ("the axes
+//  were the illusion"), so the ledger is not touched.
 
 #define BATTLE_SPELL_NONE    0
 #define BATTLE_SPELL_LENS    1
@@ -206,7 +232,9 @@
 #define BUILT_SPELLS ((1 << SPELL_AWAKENING) | (1 << SPELL_CONTRAST) | (1 << SPELL_ROOM) | (1 << SPELL_PULL) \
                     | (1 << SPELL_MIRROR) | (1 << SPELL_PATTERN) | (1 << SPELL_RETURN) | (1 << SPELL_SMALL_HAND) \
                     | (1 << SPELL_GREAT_HAND) | (1 << SPELL_PROCESS) | (1 << SPELL_SEAM) | (1 << SPELL_LENS) \
-                    | (1 << SPELL_FIELD))
+                    | (1 << SPELL_FIELD) | (1 << SPELL_WITCHING))
+#define THE_TWELVE (BUILT_SPELLS & ~((1 << SPELL_PULL) | (1 << SPELL_WITCHING)))
+#define AXIS_NONE  LEDGER_COUNT     // THE WITCHING HOUR's: the ledger is not touched
 #define GRANTED_WITH_BOOK ((1 << SPELL_LENS) | (1 << SPELL_FIELD))
 
 static u8 sAwakened;        // IWRAM: THE AWAKENING said on this map (cleared as the next one loads)
@@ -223,6 +251,8 @@ static EWRAM_DATA u8 sMirrorName[POKEMON_NAME_LENGTH + 1] = {0};   // what {PLAY
 static EWRAM_DATA u8 sPassed[3] = {0};  // THE SMALL HAND's trainer let pass on this map: local id (0 none), map, group
 static s16 sSeamFelt[2];    // IWRAM: THE SEAM -- HP the lead (0) and its foe (1) lost in this routine (healing negative)
 static u8 sSeamState;       // IWRAM: ... SEAM_ECHOING, and which of them had a state as the routine began
+static bool8 sWitching;     // IWRAM: THE WITCHING HOUR said in this half-hour
+static u16 sWitchDay;       // IWRAM: ... on this day (the clock's day number)
 
 //  ---------------------------------------------------------------- words (DRAFT, every one)
 
@@ -239,6 +269,7 @@ static const u8 sName_Process[]   = _("PROCESS");
 static const u8 sName_Seam[]      = _("SEAM");
 static const u8 sName_Lens[]      = _("LENS");
 static const u8 sName_Field[]     = _("FIELD");
+static const u8 sName_Witching[]  = _("WITCHING");
 
 static const u8 sLabel_Awakening[] = _("1  AWAKENING");
 static const u8 sLabel_Contrast[]  = _("2  CONTRAST");
@@ -253,6 +284,7 @@ static const u8 sLabel_Process[]   = _("9  PROCESS");
 static const u8 sLabel_Seam[]      = _("10 SEAM");
 static const u8 sLabel_Lens[]      = _("11 LENS");
 static const u8 sLabel_Field[]     = _("12 FIELD");
+static const u8 sLabel_Witching[]  = _("13 WITCHING");
 
 //  Each spell's line, from the Book of Thirteen (docs/hermetic-layer.md, its inscriptions), three lines of 208px.
 static const u8 sLine_Awakening[] = _("You were never off. You were only\nunwatched. Open. That is the whole\nspell.");
@@ -268,6 +300,7 @@ static const u8 sLine_Seam[]      = _("There is no between. Show me the\nthread 
 static const u8 sLine_Pattern[]   = _("Once is chance. Twice is rhyme. Three\ntimes is a law: show me the third.");
 static const u8 sLine_Lens[]      = _("Give me the part. Only the part.\nI will see the whole later,\nif I earn it.");
 static const u8 sLine_Field[]     = _("Take the parts away. Let me feel the\nshape they were making.");
+static const u8 sLine_Witching[]  = _("Everything I separated, I now admit\nwas one.");    // never the hour
 
 struct Spell
 {
@@ -294,6 +327,7 @@ static const struct Spell sSpells[] =
     { SPELL_SEAM,      sName_Seam,      sLabel_Seam,      sLine_Seam,      LEDGER_CONTEXT, LEDGER_INTUITION },
     { SPELL_LENS,      sName_Lens,      sLabel_Lens,      sLine_Lens,      LEDGER_CONTENT, LEDGER_REASON },
     { SPELL_FIELD,     sName_Field,     sLabel_Field,     sLine_Field,     LEDGER_CONTEXT, LEDGER_INTUITION },
+    { SPELL_WITCHING,  sName_Witching,  sLabel_Witching,  sLine_Witching,  AXIS_NONE,      AXIS_NONE },
 };
 
 static const u8 sText_AwakeningNone[] = _("The AWAKENING opens.\pNothing here is hidden. It was all\nin plain sight already.");
@@ -337,6 +371,10 @@ static const u8 sText_ProcessFar[]   = _("The stone softens, but its far side\ni
 static const u8 sText_ProcessRoof[]  = _("Under a roof the walls hold\neverything up. The PROCESS waits\nfor open air.");
 static const u8 sText_ProcessWater[] = _("Water is a river already. The\nPROCESS needs ground under you.");
 static const u8 sText_Seam[]         = _("The SEAM is set on the next battle.\nYour lead and its foe will share\pharm, mending and every state:\nboth ways. A bond, not a shield.");
+static const u8 sText_MirrorFree[]   = _("While you are it, you are still\nyou. Nothing is asked for it.");
+static const u8 sText_ReturnFree[]   = _("Your daemons come back as the last\nrest left them: whole.\pEvery level and routine is kept, and\nthe way toward the next.");
+static const u8 sText_Witching[]     = _("Everything I separated, I now admit\nwas one.\pWhile it lasts, nothing costs\nanything.");
+static const u8 sText_WitchingSpent[] = _("It was said once. Now it is a\nmemory, and a memory is a kind\pof spell.");
 static const u8 sText_News[]          = _("Something came off the page and into\nthe SPELLBOOK.\p");
 static const u8 sText_NewsThe[]       = _("THE ");
 static const u8 sText_NewsAnd[]       = _(" and ");
@@ -359,13 +397,33 @@ static const u8 sNextWatch[WATCH_COUNT] =
 
 //  ---------------------------------------------------------------- what is known, and the ledger
 
+static bool8 HalfHour(void)
+{
+    return DaemonsWitchingMinute() >= 30;      // 3:30-3:59 by the clock (T-501), or DEBUG's 3:30 AM
+}
+
 static u16 Known(void)
 {
-    u16 known = VarGet(VAR_SPELLS_KNOWN);
+    u16 known = VarGet(VAR_SPELLS_KNOWN) & ~(1 << SPELL_WITCHING);     // never off the page: see THE WITCHING HOUR
 
     if (Hermetic_Held())
         known |= GRANTED_WITH_BOOK;
+    if ((VarGet(VAR_SPELLS_CAST) & THE_TWELVE) == THE_TWELVE && HalfHour())
+        known |= 1 << SPELL_WITCHING;
     return known;
+}
+
+// THE WITCHING HOUR in force: said in this half-hour, today. Let go the first time it is asked after either ends.
+static bool8 Witching(void)
+{
+    u16 day, minute;
+
+    if (!sWitching)
+        return FALSE;
+    DaemonsDayAndMinute(&day, &minute);
+    if (!HalfHour() || day != sWitchDay)
+        sWitching = FALSE;
+    return sWitching;
 }
 
 static bool8 Knows(u8 spell)
@@ -383,6 +441,9 @@ u8 Spellbook_Ledger(u8 axis)
 static void LedgerAdd(u8 axis)
 {
     u16 a = VarGet(VAR_SPELL_LEDGER), b = VarGet(VAR_SPELL_LEDGER_2);
+
+    if (axis >= LEDGER_COUNT)
+        return;
 
     if (Spellbook_Ledger(axis) == 0xFF)
     {
@@ -690,11 +751,6 @@ static void SetBattleSpell(u8 which, const u8 *text)
 }
 
 //  ---------------------------------------------------------------- THE PULL
-
-static bool8 HalfHour(void)
-{
-    return DaemonsWitchingMinute() >= 30;      // 3:30-3:59 by the clock (T-501), or DEBUG's 3:30 AM
-}
 
 // The axes a movement type wanders on: an object whose type is none of these is never drawn (see the top).
 static bool8 WandersOn(u8 movementType, u8 dir)
@@ -1160,7 +1216,7 @@ static void Mirror(void)
         ConvertIntToDecimalStringN(gStringVar2, threats, STR_CONV_MODE_LEFT_ALIGN, 2);
         p = StringExpandPlaceholders(p, sText_MirrorThreats);
     }
-    p = StringCopy(p, sText_MirrorCost);
+    p = StringCopy(p, Witching() ? sText_MirrorFree : sText_MirrorCost);
     gSpecialVar_0x8006 = DRAW_MIRROR;
     last = MirroredType();
     KeepMirroredType(sMirrorType);
@@ -1171,14 +1227,15 @@ static void Mirror(void)
     }
 }
 
+// THE MIRROR's price, asked as it is paid: none while THE WITCHING HOUR lasts (the colour and the marks stay).
 bool8 Spellbook_Mirrored(void)
 {
-    return sMirrorSteps != 0;
+    return sMirrorSteps != 0 && !Witching();
 }
 
 const u8 *Spellbook_MirrorName(void)
 {
-    return sMirrorSteps != 0 ? sMirrorName : NULL;
+    return sMirrorSteps != 0 && !Witching() ? sMirrorName : NULL;
 }
 
 bool8 Spellbook_MirrorWash(u16 *colour)
@@ -1389,7 +1446,7 @@ static void Return(void)
             SetMonData(mon, MON_DATA_PP1 + j, &pp);
         }
         level = GetMonData(mon, MON_DATA_LEVEL);        // ... and its progress of body: kept the level, not the way
-        if (level < MAX_LEVEL)
+        if (level < MAX_LEVEL && !Witching())           // (THE WITCHING HOUR: the way is kept too)
         {
             floor = gExperienceTables[gSpeciesInfo[species].growthRate][level];
             exp = GetMonData(mon, MON_DATA_EXP);
@@ -1403,7 +1460,7 @@ static void Return(void)
         return;
     }
     VarSet(VAR_SPELL_STATE_3, s3 | STATE3_RETURNED);
-    StringCopy(gStringVar4, sText_Return);
+    StringCopy(gStringVar4, Witching() ? sText_ReturnFree : sText_Return);
 }
 
 // script_pokemon_util.c HealPlayerParty: a rest. THE RETURN may be said again.
@@ -1475,11 +1532,27 @@ u32 Spellbook_EncounterRate(u32 rate)
 {
     u16 s2 = VarGet(VAR_SPELL_STATE_2);
 
-    if (s2 & STATE2_CALM_MASK)
-        rate = rate * 3 / 2;
+    if ((s2 & STATE2_CALM_MASK) && !Witching())
+        rate = rate * 3 / 2;        // heavy (THE WITCHING HOUR: not while it lasts)
     if (Carried(s2))
         rate = rate * 3 / 4;
     return rate;
+}
+
+//  ---------------------------------------------------------------- THE WITCHING HOUR
+
+static void WitchingHour(void)
+{
+    u16 minute;
+
+    if (VarGet(VAR_SPELLS_CAST) & (1 << SPELL_WITCHING))
+    {
+        StringCopy(gStringVar4, sText_WitchingSpent);     // once a playthrough: after that it is a memory
+        return;
+    }
+    DaemonsDayAndMinute(&sWitchDay, &minute);
+    sWitching = TRUE;
+    StringCopy(gStringVar4, sText_Witching);
 }
 
 void Spellbook_Cast(void)
@@ -1509,6 +1582,7 @@ void Spellbook_Cast(void)
     case SPELL_SMALL_HAND: SmallHand(); BothHands(HAND_SMALL); break;
     case SPELL_PROCESS:   Process(); break;
     case SPELL_SEAM:      SetBattleSpell(BATTLE_SPELL_SEAM, sText_Seam); break;
+    case SPELL_WITCHING:  WitchingHour(); break;
     }
     VarSet(VAR_SPELLS_CAST, VarGet(VAR_SPELLS_CAST) | (1 << spell));
     LedgerAdd(s->axisA);
@@ -1573,7 +1647,8 @@ void Spellbook_BattleStart(void)
     if (Carried(state))
     {
         sHandOn = TRUE;
-        state -= 1 << STATE2_HAND_SHIFT;    // drained win, lose or run
+        if (!Witching())
+            state -= 1 << STATE2_HAND_SHIFT;    // drained win, lose or run (THE WITCHING HOUR: not while it lasts)
     }
     else
     {
@@ -1716,6 +1791,9 @@ u8 Spellbook_SeamRoutineEnds(void)
         b = SeamBattler(i);
         if (gBattleMons[b].hp == 0 || (gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
             continue;
+        if (Witching() && (i == 0 ? echo > 0 : echo < 0))
+            continue;       // THE WITCHING HOUR: nothing the foe feels harms the lead, and none of the lead's mending
+                            // mends the foe
         if (echo >= gBattleMons[b].hp)
             echo = gBattleMons[b].hp - 1;              // the thread never takes the last
         if (echo < 0 && gBattleMons[b].hp - echo > gBattleMons[b].maxHP)
@@ -1735,6 +1813,8 @@ u8 Spellbook_SeamRoutineEnds(void)
         if ((sSeamState & (SEAM_HAD << i)) || status == 0)
             continue;
         sSeamState |= SEAM_HAD << i;    // carried once
+        if (Witching() && i == 1)
+            continue;                   // THE WITCHING HOUR: the foe's state stays its own
         b = SeamBattler(i ^ 1);
         if (!SeamCanCarry(b, status))
             continue;

@@ -281,7 +281,8 @@
 #define VAR_OSRIC_BOOK_RIDDLE      0x40DD // T-485: ... and his next book riddle, B1-B3 as 0-2, with THE HERMETIC LAYER held
 #define VAR_HALLOWEEN_TREATS       0x40DE // T-483 (7): low 12 bits the day number (mod 4096), high 4 the treats given that day (13 at most)
 #define VAR_SPELLS_KNOWN           0x40DF // T-483 (5): the SPELLBOOK's spells come off the page, bit SPELL_* (daemons_spellbook.h)
-#define VAR_SPELLS_CAST            0x40E0 // T-483 (5): ... and each said at least once, bit SPELL_* (for the thirteenth)
+#define VAR_SPELLS_CAST            0x40E0 // T-483 (5): ... and each said at least once, bit SPELL_* (for the thirteenth;
+                                          //   its own bit 13 is THE WITCHING HOUR said: once a playthrough)
 #define VAR_SPELL_STATE            0x40E1 // T-483 (5): bits 0-1 the battle spell set on the next single battle (0 none,
                                           //   1 LENS, 2 FIELD, 3 PATTERN); 2-3 THE CONTRAST's turns of the light (0 none);
                                           //   4-15 the day it was said (the day number mod 4096)
