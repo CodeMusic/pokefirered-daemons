@@ -248,6 +248,19 @@ static const u8 sText_Loose_Key[] = _(
         "Pencilled along the bottom: THE\n"
         "KEY. THE TUNE KNOWS THE REST.");   // T-401: restored -- the REST->IDLE move sweep had reached it (bc7cba35f)
 
+//  LOOSE PAGES -- T-515 (the user, 2026-11-01, by multiple choice; DRAFT WORDING, the card's line the user's, T-494): the
+//  card that came home from the ship, filed so it can be set beside CORRESPONDENCE 7 (AT THE DOOR), whose shape it keeps
+//  on purpose: a card, a hand you do not know, one line, and what is missing from it. Its flag is the card's own
+//  (FLAG_LIONESS_REPLY_GIVEN), so it costs no save; a save that has had the card finds the page already filed.
+static const u8 sTitle_Loose_CardHome[] = _("THE CARD HOME");
+static const u8 sText_Loose_CardHome[] = _(
+        "A card with a ship's stamp on it.\n"
+        "MOM gave it to you.\p"
+        "In a hand you do not know, one\n"
+        "line:\p"
+        "“IT GOT THERE.”\p"
+        "There is no name on it.");
+
 //  LOOSE PAGES -- T-439 (DRAFT): the KINGFISHER's photograph of the follower, taken in HALFTONE.
 static const u8 sTitle_Loose_Photo[] = _("THE PHOTO");
 static const u8 sText_Loose_Photo[] = _(
@@ -457,6 +470,7 @@ static const struct NotebookEntry sEntries[] =
     { NB_LOOSE_PAGES,  NB_KIND_TEXT,  0, FLAG_NOTEBOOK_LOOSE_PHOTO,     0, sTitle_Loose_Photo,         sText_Loose_Photo },   // T-439
     { NB_LOOSE_PAGES,  NB_KIND_TEXT,  0, FLAG_NOTEBOOK_LOOSE_PAINTING,  0, sTitle_Loose_Painting,      sText_Loose_Painting },      // T-493
     { NB_LOOSE_PAGES,  NB_KIND_TEXT,  0, FLAG_NOTEBOOK_LOOSE_PAINTING_READ, 0, sTitle_Loose_Painting,  sText_Loose_PaintingRead },  // T-493
+    { NB_LOOSE_PAGES,  NB_KIND_TEXT,  0, FLAG_LIONESS_REPLY_GIVEN,      0, sTitle_Loose_CardHome,      sText_Loose_CardHome },      // T-515
     NB_DOC_LAB_NOTES_1
     { NB_LAB_NOTES,    NB_KIND_TEXT,  0, FLAG_NOTEBOOK_LAB_OBSERVER,    0, sTitle_Lab_Observer,        sText_Lab_Observer },
     { NB_LAB_NOTES,    NB_KIND_TEXT,  0, FLAG_NOTEBOOK_LAB_BOX,         0, sTitle_Lab_Box,             sText_Lab_Box },

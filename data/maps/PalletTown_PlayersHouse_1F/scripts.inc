@@ -187,7 +187,8 @@ PalletTown_PlayersHouse_1F_EventScript_MomLetterReply::
 	msgbox PalletTown_PlayersHouse_1F_Text_MomSomethingCame
 	textcolor NPC_TEXT_COLOR_NEUTRAL
 	msgbox PalletTown_PlayersHouse_1F_Text_TheReply
-	call EventScript_RestorePrevTextColor
+	call EventScript_NotebookCopied   @ T-515: into LOOSE PAGES, beside CORRESPONDENCE 7 (its flag is the card's own);
+	call EventScript_RestorePrevTextColor   @ in the card's neutral colour, not MOM's
 	release   @ the card is the whole visit; her own lines wait for the next
 	end
 PalletTown_PlayersHouse_1F_EventScript_MomLetterReplyNone::
