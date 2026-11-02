@@ -20,6 +20,8 @@ was built; it is kept as a reference and is not updated further.
 **To play it, start with [MICRO-START][microstart]** (five pages) **or [QUICK-START][quickstart]** (25 pages of
 large type), **then read [the player's manual][manual]** (all PDFs in the design repo): every way to play, the world, the daemons and the seventeen types,
 the BENCHMARKS, the INDEX, the NOTEBOOK, PLAY and the companion, and a glossary.
+**Why the name? [THE OLD WORD][etymology]** (19 pages) tells how the Greek *daimon*
+branched, and why it is said *DAY-mons*.
 
 **No ROM is distributed.** Releases are BPS patches for a cartridge you own,
 published on the [DAEMONS releases page][releases] (latest: **v11.335.6**,
@@ -302,6 +304,7 @@ to pret and its contributors.
 [manual]: https://github.com/CodeMusic/DAEMONS/blob/main/docs/DAEMONS-manual.pdf
 [quickstart]: https://github.com/CodeMusic/DAEMONS/blob/main/docs/DAEMONS-quickstart.pdf
 [microstart]: https://github.com/CodeMusic/DAEMONS/blob/main/docs/DAEMONS-microstart.pdf
+[etymology]: https://github.com/CodeMusic/DAEMONS/blob/main/docs/DAEMONS-etymology.pdf
 [releases]: https://github.com/CodeMusic/DAEMONS/releases
 [todo]: https://github.com/CodeMusic/DAEMONS/blob/main/docs/TODO.md
 [companion]: https://github.com/CodeMusic/daemons-companion
