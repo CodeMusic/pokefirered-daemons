@@ -162,7 +162,14 @@ FiveIsland_RocketWarehouse_Text_ReceivedPayload::
 FiveIsland_RocketWarehouse_Text_TyNotComing::
     .string "The name on it is enough. She\n"
     .string "will know the hand.\p"
-    .string "…No. I am not coming.\p"
+    .string "…No. I am not coming.$"
+
+@  T-513, DRAFT: words under words (T-459's purple) under his refusal, once THE SUBTLE LAYER is held.
+@  The user chose the line, 2026-11-02, by multiple choice.
+FiveIsland_RocketWarehouse_Text_UnderNotComing::
+    .string "{COLOR PURPLE}{SHADOW LIGHT_GRAY}Not yet.$"
+
+FiveIsland_RocketWarehouse_Text_TyNotComingGoesOn::
     .string "I saw what was happening, and I\n"
     .string "looked away. I cannot undo that.\p"
     .string "I will not ask her to pretend I\n"

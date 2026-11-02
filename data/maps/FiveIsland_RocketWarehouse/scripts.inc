@@ -83,8 +83,16 @@ FiveIsland_RocketWarehouse_EventScript_DefeatedGideon::
 	msgbox FiveIsland_RocketWarehouse_Text_HotelPaper   @ T-401 (the user, 2026-10-15): a line says it came, then the filing line
 	call EventScript_NotebookCopied
 	msgbox FiveIsland_RocketWarehouse_Text_TyNotComing
+	call_if_set FLAG_GOT_SUBTLE_LAYER, FiveIsland_RocketWarehouse_EventScript_UnderNotComing
+	msgbox FiveIsland_RocketWarehouse_Text_TyNotComingGoesOn
 	release
 	end
+
+@  T-513 (the user, 2026-11-02, by multiple choice): with THE SUBTLE LAYER held, a purple line under "...No. I am not
+@  coming." the way the CHAMPION's "Before you can." sits under his intro (T-459). The rest of his speech goes on unchanged.
+FiveIsland_RocketWarehouse_EventScript_UnderNotComing::
+	msgbox FiveIsland_RocketWarehouse_Text_UnderNotComing
+	return
 
 FiveIsland_RocketWarehouse_Movement_PlayerStepsBack::
 	lock_facing_direction
