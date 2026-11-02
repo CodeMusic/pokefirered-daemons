@@ -9,6 +9,7 @@
 
 // ---- THE TABLE (DRAFT, the user tunes) -------------------------------------------------------------------------------
 #define READ_CHANCE         12      // percent of arrivals (the first step on a map that is not the last one) a read comes
+#define READ_CHANCE_FRIDAY  18      // T-511: and on a FRIDAY, "the day for reads" (the book's FRIDAY)
 #define READ_REST           4       // and never in the next this many arrivals after one
 #define READ_TRUE           75      // percent of reads about something really there, when the map has anything unfound
 #define READ_NEAR           6       // tiles (across plus down) within which a thing is "close by"

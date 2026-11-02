@@ -9,6 +9,8 @@
 #include "region_map.h"
 #include "reveal.h"
 #include "string_util.h"
+#include "strings.h"
+#include "daemons_time.h"
 #include "constants/flags.h"
 #include "constants/vars.h"
 
@@ -20,13 +22,15 @@
 // or sand near it; "in here" indoors; else close by, or the way it mostly lies from the step the read came on.
 //
 // THE LOG lives in vars, no new save bytes: two counts and READ_LOG reads, newest first. A read's WHERE var holds the
-// map's section (low byte; Kanto's start at 0x58, so 0 is an empty row), its phrase (bits 8-11) and LANDED (bit 15);
+// map's section (low byte; Kanto's start at 0x58, so 0 is an empty row), its phrase (bits 8-11), its weekday + 1 (bits
+// 12-14, T-511: 0 for a read logged before the day was kept) and LANDED (bit 15);
 // its THING var the flag that says the thing has been found, 0 for a read about nothing. A read LANDS when that flag is
 // set -- checked on each arrival and when the page is opened -- and a read that leaves the log unlanded never does.
 
 #define READ_LANDED     (1 << 15)
 #define READ_PHRASE(w)  (((w) >> 8) & 0xF)
 #define READ_MAPSEC(w)  ((w) & 0xFF)
+#define READ_DAY(w)     (((w) >> 12) & 0x7)   // T-511: the weekday + 1, 0 none
 
 enum
 {
@@ -71,8 +75,16 @@ static const u8 *const sPhrases[PHRASE_COUNT] =
 static const u8 sLog_Reads[]  = _("Reads: {STR_VAR_1} given, {STR_VAR_2} landed.\p");
 static const u8 sLog_Leans[]  = _("Leans: {STR_VAR_1} told, {STR_VAR_2} landed.\p");
 static const u8 sLog_Colon[]  = _(": ");
+static const u8 sLog_DayComma[] = _(", ");   // T-511, DRAFT: "FRIDAY, SAFFRON CITY: ..."
 static const u8 sLog_Landed[] = _(" Landed.");
 static const u8 sLog_Line[]   = _("\p");
+
+// T-511: the day's names, as the day banner writes them (strings.c).
+static const u8 *const sDayNames[WEEKDAY_COUNT] =
+{
+    gText_DaySunday, gText_DayMonday, gText_DayTuesday, gText_DayWednesday, gText_DayThursday, gText_DayFriday,
+    gText_DaySaturday,
+};
 
 static EWRAM_DATA u16 sReadLastMap = 0;     // the map the last step was on, + 1 (0: none yet since power on)
 static EWRAM_DATA u8 sReadRest = 0;         // arrivals still to pass before another read can come
@@ -188,7 +200,7 @@ bool8 Daemons_TryReadArrives(void)
             sReadRest--;
             return FALSE;
         }
-        if (Random() % 100 >= READ_CHANCE)
+        if (Random() % 100 >= (DaemonsWeekday() == 5 ? READ_CHANCE_FRIDAY : READ_CHANCE))   // T-511: FRIDAY
             return FALSE;
     }
     sReadRest = READ_REST;
@@ -203,7 +215,7 @@ bool8 Daemons_TryReadArrives(void)
         y = Random() % gMapHeader.mapLayout->height;
     }
     phrase = Describe(x + MAP_OFFSET, y + MAP_OFFSET);
-    Log(gMapHeader.regionMapSectionId | (phrase << 8), thing);
+    Log(gMapHeader.regionMapSectionId | (phrase << 8) | ((DaemonsWeekday() + 1) << 12), thing);   // T-511: the day
     StringCopy(StringCopy(gStringVar4, sText_ReadHead), sPhrases[phrase]);
     return TRUE;
 }
@@ -225,6 +237,11 @@ void Daemons_WriteReadsLog(u8 *dest)
         where = VarGet(VAR_READ_LOG_WHERE + i);
         if (where == 0)
             break;
+        if (READ_DAY(where) != 0)   // T-511: TRUE OR NOT -- "write down each read with the day"
+        {
+            dest = StringCopy(dest, sDayNames[READ_DAY(where) - 1]);
+            dest = StringCopy(dest, sLog_DayComma);
+        }
         dest = GetMapName(dest, READ_MAPSEC(where), 0);
         dest = StringCopy(dest, sLog_Colon);
         dest = StringCopy(dest, sPhrases[READ_PHRASE(where)]);
