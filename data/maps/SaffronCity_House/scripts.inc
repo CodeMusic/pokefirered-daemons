@@ -21,8 +21,14 @@ SaffronCity_House_EventScript_Pidgey::
 
 @ T-423: THE SUBTLE LAYER, an INTERPRETER's book, found on the shelf of an INTERPRETER's home (the user, 2026-10-18).
 @ The owner says little and never explains it. The shelf sparkles (reveal.c's beacons and finds) until it is taken.
+@ T-512 (the user, 2026-11-01, by multiple choice): once the book is taken, the book's own first instruction (ASK FIRST).
 SaffronCity_House_EventScript_Interpreter::
+	goto_if_set FLAG_GOT_SUBTLE_LAYER, SaffronCity_House_EventScript_InterpreterAfter
 	msgbox SaffronCity_House_Text_ReadItOrDont, MSGBOX_NPC
+	end
+
+SaffronCity_House_EventScript_InterpreterAfter::
+	msgbox SaffronCity_House_Text_AskBeforeYouRead, MSGBOX_NPC
 	end
 
 SaffronCity_House_EventScript_SubtleLayer::

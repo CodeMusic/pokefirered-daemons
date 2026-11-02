@@ -16,6 +16,10 @@ SaffronCity_House_Text_ReadItOrDont::
     .string "Read it, or don't.\n"
     .string "It will wait.$"
 
+@  T-512, DRAFT: once THE SUBTLE LAYER is taken (the book's first instruction, the user's choice 2026-11-01).
+SaffronCity_House_Text_AskBeforeYouRead::
+    .string "Ask before you read anyone.$"
+
 @  T-423, DRAFT.
 SaffronCity_House_Text_SubtleOnTheShelf::
     .string "Small books, worn soft at the\n"
