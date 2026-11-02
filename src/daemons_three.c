@@ -7,6 +7,7 @@
 #include "daemons_feelings.h"
 #include "daemons_three.h"
 #include "daemons_spellbook.h"   // T-483 (5)
+#include "daemons_time.h"        // T-510: the day, for its virtue
 #include "event_data.h"
 #include "battle_main.h"
 #include "palette.h"
@@ -35,6 +36,18 @@ static u8 Up(u8 v, u8 by)
     return v + by > THREE_MAX ? THREE_MAX : v + by;
 }
 
+// T-510: the INSIGHT of each day's virtue, by DaemonsWeekday() (Sunday first) -- the GUIDE's week (9.21, T-385).
+static const u16 sDayVirtueInsight[WEEKDAY_COUNT] =
+{
+    FLAG_INSIGHT_CHASTITY,      // SUNDAY, the root
+    FLAG_INSIGHT_TEMPERANCE,    // MONDAY, the sacral
+    FLAG_INSIGHT_CHARITY,       // TUESDAY, the solar plexus
+    FLAG_INSIGHT_DILIGENCE,     // WEDNESDAY, the heart
+    FLAG_INSIGHT_FORGIVENESS,   // THURSDAY, the throat
+    FLAG_INSIGHT_KINDNESS,      // FRIDAY, the third eye
+    FLAG_INSIGHT_HUMILITY,      // SATURDAY, the crown
+};
+
 // What a daemon carries in to a battle, read from its friendship and its feelings now.
 static void Derive(struct Pokemon *mon, u8 *out)
 {
@@ -49,6 +62,8 @@ static void Derive(struct Pokemon *mon, u8 *out)
       : friendship < THREE_CLOSURE_FRIEND_4 ? 3 : 4;
     if (f.mad >= THREE_CLOSURE_MAD_LINE)
         v--;
+    if (FlagGet(sDayVirtueInsight[DaemonsWeekday()]))   // T-510: the virtue over its shadow, today's
+        v = Up(v, THREE_CLOSURE_VIRTUE);
     out[THREE_CLOSURE] = v;
 
     v = 2;

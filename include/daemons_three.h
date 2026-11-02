@@ -30,6 +30,10 @@
 // ... and the shadow over the virtue: MAD at FEELINGS_MAD_LINE (40) or more takes one away.
 #define THREE_CLOSURE_MAD_LINE      40
 // In the battle, one away while it is confused and one while it is infatuated (two points of view), back when they end.
+// T-510 (the user, 2026-11-01, by multiple choice): the book's "it rises with virtues over shadows" -- friendship stays
+// the base, and one more while the INSIGHT of today's virtue is held (the GUIDE's week: SUNDAY chastity, MONDAY
+// temperance, TUESDAY charity, WEDNESDAY diligence, THURSDAY forgiveness, FRIDAY kindness, SATURDAY humility).
+#define THREE_CLOSURE_VIRTUE        1
 
 // ATTUNEMENT at the battle's start, from CALM (-100 afraid .. 100 calm): 2, and one more at each of the first two
 // lines, one less at each of the last two.
