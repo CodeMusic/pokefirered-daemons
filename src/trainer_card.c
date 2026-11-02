@@ -2241,12 +2241,25 @@ static void CreateTrainerCardTrainerPic(void)
         else
         {
             //  T-318: on your own card, the bands whose virtues have not arrived are in shadow (trainer_pokemon_sprites.c).
+            //  T-514 (the user, 2026-11-01, by multiple choice): band 0 is the root and band 6 the crown, and each MARK
+            //  lights the centre the GUIDE's week gives its virtue (T-385: SUNDAY's root is chastity's, MONDAY's sacral
+            //  temperance's, TUESDAY's solar plexus charity's, WEDNESDAY's heart diligence's, THURSDAY's throat
+            //  forgiveness's, FRIDAY's third eye kindness's, SATURDAY's crown humility's) -- not the band of its number.
+            static const u8 sMarkCentre[NUM_VIRTUES] = {
+                3,  // MARK 1, DILIGENCE: the heart
+                0,  // MARK 2, CHASTITY: the root
+                2,  // MARK 3, CHARITY: the solar plexus
+                5,  // MARK 4, KINDNESS: the third eye
+                1,  // MARK 5, TEMPERANCE: the sacral
+                4,  // MARK 6, FORGIVENESS: the throat
+                6,  // MARK 7, HUMILITY: the crown
+            };
             u8 i;
             gTrainerCardPicShade = 0;
             if (sTrainerCardDataPtr->isOwnCard)
                 for (i = 0; i < NUM_VIRTUES; i++)
                     if (!sTrainerCardDataPtr->hasBadge[i])
-                        gTrainerCardPicShade |= 1 << i;
+                        gTrainerCardPicShade |= 1 << sMarkCentre[i];
             CreateTrainerCardTrainerPicSprite(PlayerGenderToFrontTrainerPicId(sTrainerCardDataPtr->trainerCard.rse.gender, TRUE), TRUE,
                     sTrainerPicOffsets[sTrainerCardDataPtr->cardType][sTrainerCardDataPtr->trainerCard.rse.gender][0],
                     sTrainerPicOffsets[sTrainerCardDataPtr->cardType][sTrainerCardDataPtr->trainerCard.rse.gender][1],
