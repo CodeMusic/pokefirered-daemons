@@ -61,6 +61,9 @@
 #define THREE_CLOSURE_HOLDS         2
 #define THREE_WRITE_FROM            4
 #define THREE_WRITE_MAX             10
+// T-516 B1 (BEFORE STEERING, the user 2026-11-02 by multiple choice): no WRITE until THE LOG holds this many reads given
+// (VAR_READS_GIVEN) -- a week of the routine. The LEAK does not wait.
+#define THREE_WRITE_READS           7
 // LEAK: CLOSURE below THREE_CLOSURE_HOLDS with VOLTAGE at least THREE_LEAK_VOLTAGE: damage - (VOLTAGE - 2) x
 // THREE_LEAK_STEP percent (3: -5%, 4: -10%).
 #define THREE_LEAK_VOLTAGE          3

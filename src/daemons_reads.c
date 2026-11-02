@@ -78,6 +78,10 @@ static const u8 sLog_Colon[]  = _(": ");
 static const u8 sLog_DayComma[] = _(", ");   // T-511, DRAFT: "FRIDAY, SAFFRON CITY: ..."
 static const u8 sLog_Landed[] = _(" Landed.");
 static const u8 sLog_Line[]   = _("\p");
+// T-516 S1, DRAFT (the user, 2026-11-02, by multiple choice): SATURDAY -- "never what did I see, but who was looking".
+// The NOTEBOOK's sheet has no field purple (charmap PURPLE is the dialogue box's slot), so its own: book_reader.c's
+// C_COVER, CONTEXT's hue on the notebook's palette, over the sheet's shadow (C_SHADOW, 3).
+static const u8 sLog_Saturday[] = _("{COLOR 15}{SHADOW 3}SATURDAY. Who was looking?\p");
 
 // T-511: the day's names, as the day banner writes them (strings.c).
 static const u8 *const sDayNames[WEEKDAY_COUNT] =
@@ -226,6 +230,8 @@ void Daemons_WriteReadsLog(u8 *dest)
     u16 where;
 
     CheckLanded();
+    if (DaemonsWeekday() == 6)   // T-516 S1: a Saturday opens with one line above the counts
+        dest = StringCopy(dest, sLog_Saturday);
     ConvertIntToDecimalStringN(gStringVar1, VarGet(VAR_READS_GIVEN), STR_CONV_MODE_LEFT_ALIGN, 4);
     ConvertIntToDecimalStringN(gStringVar2, VarGet(VAR_READS_LANDED), STR_CONV_MODE_LEFT_ALIGN, 4);
     dest = StringExpandPlaceholders(dest, sLog_Reads);

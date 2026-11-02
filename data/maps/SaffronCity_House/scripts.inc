@@ -28,7 +28,13 @@ SaffronCity_House_EventScript_Interpreter::
 	end
 
 SaffronCity_House_EventScript_InterpreterAfter::
+	goto_if_ge VAR_READS_GIVEN, 10, SaffronCity_House_EventScript_InterpreterAgreed
 	msgbox SaffronCity_House_Text_AskBeforeYouRead, MSGBOX_NPC
+	end
+
+@ T-516 A3 (the user, 2026-11-02, by multiple choice): once THE LOG holds ten reads given, a second line (ASK FIRST).
+SaffronCity_House_EventScript_InterpreterAgreed::
+	msgbox SaffronCity_House_Text_DidTheyAgree, MSGBOX_NPC
 	end
 
 SaffronCity_House_EventScript_SubtleLayer::

@@ -172,6 +172,8 @@ s32 Three_AdjustDamage(u8 attacker, u8 moveType, s32 damage)
         return damage;
     if (v[THREE_CLOSURE] >= THREE_CLOSURE_HOLDS)
     {
+        if (VarGet(VAR_READS_GIVEN) < THREE_WRITE_READS)   // T-516 B1: writes wait for the habit
+            return damage;
         pct = v[THREE_ATTUNEMENT] * v[THREE_VOLTAGE] - THREE_WRITE_FROM;   // a write: both at once
         if (pct < 0)
             pct = 0;

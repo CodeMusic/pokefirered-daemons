@@ -20,6 +20,11 @@ SaffronCity_House_Text_ReadItOrDont::
 SaffronCity_House_Text_AskBeforeYouRead::
     .string "Ask before you read anyone.$"
 
+@  T-516 A3, DRAFT: and once THE LOG holds ten reads given (the user's choice 2026-11-02).
+SaffronCity_House_Text_DidTheyAgree::
+    .string "Ask before you read anyone.\p"
+    .string "Did they agree to it?$"
+
 @  T-423, DRAFT.
 SaffronCity_House_Text_SubtleOnTheShelf::
     .string "Small books, worn soft at the\n"

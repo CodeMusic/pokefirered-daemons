@@ -52,7 +52,7 @@ EventScript_PkmnCenterNurse_ReturnPkmn::
 	setvar VAR_0x8006, GIVER_CHECKPOINT   @ T-416: a holiday's gift, once the party is restored
 	call EventScript_HolidayGifts
 	msgbox Text_WeHopeToSeeYouAgain
-	call_if_set FLAG_GOT_SUBTLE_LAYER, EventScript_PkmnCenterNurse_Under
+	call_if_set FLAG_GOT_SUBTLE_LAYER, EventScript_PkmnCenterNurse_UnderHealed
 	return
 
 EventScript_PkmnCenterNurse_PlayerWaitingInUnionRoom::
@@ -64,7 +64,7 @@ EventScript_PkmnCenterNurse_PlayerWaitingInUnionRoom::
 	applymovement VAR_LAST_TALKED, Movement_Bow
 	waitmovement 0
 	msgbox Text_WeHopeToSeeYouAgain
-	call_if_set FLAG_GOT_SUBTLE_LAYER, EventScript_PkmnCenterNurse_Under
+	call_if_set FLAG_GOT_SUBTLE_LAYER, EventScript_PkmnCenterNurse_UnderHealed
 	return
 
 EventScript_PkmnCenterNurse_Goodbye::
@@ -175,3 +175,13 @@ EventScript_PkmnCenterNurse_Under::
 
 Text_PkmnCenterNurse_Under::
 	.string "{COLOR PURPLE}{SHADOW LIGHT_GRAY}Not too soon.$"
+
+@  T-516 M2 (the user, 2026-11-02, by multiple choice): MENDING -- after a heal, the same box goes on a line:
+@  "It was already mending." "Not too soon." stays first, as chosen; a goodbye with no heal keeps it alone. DRAFT.
+EventScript_PkmnCenterNurse_UnderHealed::
+	msgbox Text_PkmnCenterNurse_UnderHealed
+	return
+
+Text_PkmnCenterNurse_UnderHealed::
+	.string "{COLOR PURPLE}{SHADOW LIGHT_GRAY}Not too soon.\n"
+	.string "It was already mending.$"
