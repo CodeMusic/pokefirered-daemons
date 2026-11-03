@@ -22,6 +22,8 @@ large type), **then read [the player's manual][manual]** (all PDFs in the design
 the BENCHMARKS, the INDEX, the NOTEBOOK, PLAY and the companion, and a glossary.
 **Why the name? [THE OLD WORD][etymology]** (19 pages) tells how the Greek *daimon*
 branched, and why it is said *DAY-mons*.
+**From CALLOW SCHOOL: [PRINCIPLES OF MIND][textbook]** (82 pages), its TEXTBOOK
+written out as a university textbook -- seven floors, Language to Error.
 
 **No ROM is distributed.** Releases are BPS patches for a cartridge you own,
 published on the [DAEMONS releases page][releases] (latest: **v11.335.6**,
@@ -305,6 +307,7 @@ to pret and its contributors.
 [quickstart]: https://github.com/CodeMusic/DAEMONS/blob/main/docs/DAEMONS-quickstart.pdf
 [microstart]: https://github.com/CodeMusic/DAEMONS/blob/main/docs/DAEMONS-microstart.pdf
 [etymology]: https://github.com/CodeMusic/DAEMONS/blob/main/docs/DAEMONS-etymology.pdf
+[textbook]: https://github.com/CodeMusic/DAEMONS/blob/main/docs/DAEMONS-textbook.pdf
 [releases]: https://github.com/CodeMusic/DAEMONS/releases
 [todo]: https://github.com/CodeMusic/DAEMONS/blob/main/docs/TODO.md
 [companion]: https://github.com/CodeMusic/daemons-companion
