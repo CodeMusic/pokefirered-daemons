@@ -1,6 +1,7 @@
 #include "global.h"
 #include "daemons_witching.h"   // T-480
 #include "daemons_feelings.h"   // T-431
+#include "daemons_spirits.h"    // T-519
 #include "daemons_away.h"
 #include "event_scripts.h"
 #include "new_game.h"
@@ -4583,6 +4584,16 @@ void ItemUseCB_Medicine(u8 taskId, TaskFunc func)
         ScheduleBgCopyTilemapToVram(2);
         gTasks[taskId].func = func;
     }
+    else if (IsHPRecoveryItem(item) && Spirits_RefusesFood(mon))
+    {
+        // T-519: in low spirits it may refuse its food (outside a battle, never a revive); the item is kept
+        gPartyMenuUseExitCallback = FALSE;
+        GetMonNickname(mon, gStringVar1);
+        StringExpandPlaceholders(gStringVar4, gText_SpiritsRefusesFood);
+        DisplayPartyMenuMessage(gStringVar4, TRUE);
+        ScheduleBgCopyTilemapToVram(2);
+        gTasks[taskId].func = func;
+    }
     else
     {
         ItemUse_SetQuestLogEvent(QL_EVENT_USED_ITEM, mon, item, 0xFFFF);
@@ -4639,6 +4650,7 @@ void ItemUseCB_MedicineStep(u8 taskId, TaskFunc func)
             DisplayPartyPokemonLevelCheck(mon, &sPartyMenuBoxes[gPartyMenu.slotId], 1);
         if (canHeal == TRUE)
         {
+            Spirits_OnFed(mon);     // T-519: KEPT, fed
             if (hp == 0)
                 AnimatePartySlot(gPartyMenu.slotId, 1);
             PartyMenuModifyHP(taskId, gPartyMenu.slotId, 1, GetMonData(mon, MON_DATA_HP) - hp, Task_DisplayHPRestoredMessage);
@@ -4658,7 +4670,8 @@ void ItemUseCB_MedicineStep(u8 taskId, TaskFunc func)
 static void Task_DisplayHPRestoredMessage(u8 taskId)
 {
     GetMonNickname(&gPlayerParty[gPartyMenu.slotId], gStringVar1);
-    StringExpandPlaceholders(gStringVar4, gText_PkmnHPRestoredByVar2);
+    // T-519: in good spirits, now and then, it thanks you (outside a battle)
+    StringExpandPlaceholders(gStringVar4, Spirits_Thanks(&gPlayerParty[gPartyMenu.slotId]) ? gText_SpiritsHPRestoredThanks : gText_PkmnHPRestoredByVar2);
     DisplayPartyMenuMessage(gStringVar4, FALSE);
     ScheduleBgCopyTilemapToVram(2);
     HandleBattleLowHpMusicChange();
@@ -5180,6 +5193,7 @@ static void ItemUseCB_RareCandyStep(u8 taskId, TaskFunc func)
 
     GetMonLevelUpWindowStats(mon, arrayPtr);
     ExecuteTableBasedItemEffect_(gPartyMenu.slotId, gSpecialVar_ItemId, 0);
+    Spirits_OnRareCandy(mon);   // T-519: WORK, against -- a level it did not work for
     GetMonLevelUpWindowStats(mon, &ptr->data[NUM_STATS]);
     gPartyMenuUseExitCallback = TRUE;
     ItemUse_SetQuestLogEvent(QL_EVENT_USED_ITEM, mon, gSpecialVar_ItemId, 0xFFFF);

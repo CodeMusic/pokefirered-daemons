@@ -33,6 +33,7 @@
 #include "daemons_carried.h"  // T-448: what the companion brought, said once
 #include "daemons_reads.h"   // T-459 B: a read
 #include "daemons_spellbook.h"   // T-483 (5): THE MIRROR's steps
+#include "daemons_spirits.h"   // T-519: SPIRITS
 #include "school_lift.h"
 
 // T-196: the label the popup carries while an echo is on screen.
@@ -956,6 +957,12 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
                 ScriptContext_SetupScript(Daemons_EventScript_CarriedMoves);
                 return TRUE;
             }
+            //  T-519. And again: a party daemon crossed into (or out of) good or low spirits -- its screen.
+            if (Daemons_TrySpiritsCrossing())
+            {
+                ScriptContext_SetupScript(Daemons_EventScript_SpiritsCrossing);
+                return TRUE;
+            }
             //  T-459 B. And last: the first step on a map, now and then, once THE SUBTLE LAYER is held -- a read.
             if (Daemons_TryReadArrives())
             {
@@ -990,6 +997,7 @@ static void UpdateHappinessStepCounter(void)
             mon++;
         }
         Feelings_OnWalk();   // T-431: the daemon behind you
+        Spirits_OnWalk();    // T-519: left fainted, its friendship, and every daemon long in a box
     }
 }
 

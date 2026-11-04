@@ -26,6 +26,7 @@
 #include "pokemon.h"
 #include "pokemon_storage_system.h"   // T-473
 #include "daemons_carried.h"         // T-473
+#include "daemons_spirits.h"         // T-519
 #include "constants/species.h"
 #include "data/holiday_lines.h"      // T-416: THE YEAR's titles
 
@@ -45,7 +46,7 @@
 
 #if DAEMONS_DEBUG
 
-enum { PG_EVENTS, PG_MARKS, PG_NOTEBOOK, PG_DRIVERS, PG_ROOTS, PG_SONGS, PG_YEAR, PG_FOLLOWER, PG_FEELINGS, PG_THREE, PG_COUNT };
+enum { PG_EVENTS, PG_MARKS, PG_NOTEBOOK, PG_DRIVERS, PG_ROOTS, PG_SONGS, PG_YEAR, PG_FOLLOWER, PG_FEELINGS, PG_THREE, PG_SPIRITS, PG_COUNT };
 enum { R_PAGE, R_GIVE, R_TOGGLE, R_ASK, R_VIEW, R_PICK };   // R_ASK gives, after a YES; R_VIEW only shows (T-431);
                                                             // R_PICK shows a party slot's THREE and picks it (T-454)
 
@@ -73,6 +74,8 @@ enum
     EV_PAIR_PENGUIN, EV_PAIR_DOLPHIN, EV_PAIR_OTHER, EV_PAIR_LOAN,          // T-474
     EV_THREE_SLOT1, EV_THREE_SLOT6 = EV_THREE_SLOT1 + PARTY_SIZE - 1,         // T-454
     EV_THREE_CLOSURE, EV_THREE_ATTUNEMENT, EV_THREE_VOLTAGE, EV_THREE_AUTO,
+    EV_SPIRIT_SLOT1, EV_SPIRIT_SLOT6 = EV_SPIRIT_SLOT1 + PARTY_SIZE - 1,       // T-519
+    EV_SPIRIT_UP, EV_SPIRIT_DOWN, EV_SPIRIT_GOOD, EV_SPIRIT_MIDDLE, EV_SPIRIT_LOW, EV_SPIRIT_SURE,
     EV_COUNT_
 };
 STATIC_ASSERT(EV_COUNT_ <= 256, DbgRowArgIsOneByte);   // T-474: struct DbgRow's arg is a u8
@@ -216,6 +219,16 @@ static const u8 sName_ThreeBookHeld[] = _("+ THE BOOK HELD: IN EFFECT");
 static const u8 sName_ThreeNotYet[]  = _("· NOT YET: THE BOOK");
 static const u8 sName_ThreeAuto[]    = _("EVERY ONE AUTO AGAIN");   // T-433: gSpecialVar_ItemId, poked by the theatre
 
+//  T-519: SPIRITS, the lead's class and lean set by hand, to film a crossing (it plays on the next step), the summary's
+//  words, a refusal and a thanks (FOOD ALWAYS: the food's chances become certainties). Plain words, never the Greek.
+static const u8 sName_Spirits[]      = _("SPIRITS >");
+static const u8 sName_SpiritUp[]     = _("LEAD: ONE STEP UP");
+static const u8 sName_SpiritDown[]   = _("LEAD: ONE STEP DOWN");
+static const u8 sName_SpiritGood[]   = _("LEAD: IN GOOD SPIRITS");
+static const u8 sName_SpiritMiddle[] = _("LEAD: AS IT IS");
+static const u8 sName_SpiritLow[]    = _("LEAD: IN LOW SPIRITS");
+static const u8 sName_SpiritSure[]   = _("FOOD ALWAYS REFUSED/THANKED");
+
 //  THE STORY'S ORDER: the opening, the shoes and the INDEX, OPUS on THE REPO's shelf, then CAIRN's MARK and NOTEBOOK,
 //  the school, the ship, the DRIVERS, BRAZEN's tea and REVEAL, HALFTONE, the sleeper, the GUIDE, and last what only
 //  the end of the game gives.
@@ -264,6 +277,7 @@ static const struct DbgRow sRows_Events[] = {
     { sName_Follower,    R_PAGE,   PG_FOLLOWER },     // T-18
     { sName_Feelings,    R_PAGE,   PG_FEELINGS },     // T-431
     { sName_Three,       R_PAGE,   PG_THREE },        // T-454
+    { sName_Spirits,     R_PAGE,   PG_SPIRITS },      // T-519
     { sName_Stream,      R_GIVE,   EV_STREAM },
     { sName_Companion,   R_TOGGLE, EV_COMPANION },
 };
@@ -350,6 +364,18 @@ static const struct DbgRow sRows_Three[] = {
     { sName_ThreeAuto,  R_GIVE, EV_THREE_AUTO },
 };
 
+//  T-519: each party slot's SPIRITS (class and lean, the ladder in daemons_spirits.c), and the lead's set by hand.
+static const struct DbgRow sRows_Spirits[] = {
+    { NULL, R_VIEW, EV_SPIRIT_SLOT1 + 0 }, { NULL, R_VIEW, EV_SPIRIT_SLOT1 + 1 }, { NULL, R_VIEW, EV_SPIRIT_SLOT1 + 2 },
+    { NULL, R_VIEW, EV_SPIRIT_SLOT1 + 3 }, { NULL, R_VIEW, EV_SPIRIT_SLOT1 + 4 }, { NULL, R_VIEW, EV_SPIRIT_SLOT1 + 5 },
+    { sName_SpiritUp,     R_GIVE,   EV_SPIRIT_UP },
+    { sName_SpiritDown,   R_GIVE,   EV_SPIRIT_DOWN },
+    { sName_SpiritGood,   R_GIVE,   EV_SPIRIT_GOOD },
+    { sName_SpiritMiddle, R_GIVE,   EV_SPIRIT_MIDDLE },
+    { sName_SpiritLow,    R_GIVE,   EV_SPIRIT_LOW },
+    { sName_SpiritSure,   R_TOGGLE, EV_SPIRIT_SURE },
+};
+
 static const struct { const struct DbgRow *rows; u8 count; } sPages[PG_COUNT] = {
     [PG_EVENTS]   = { sRows_Events,   ARRAY_COUNT(sRows_Events) },
     [PG_MARKS]    = { sRows_Marks,    ARRAY_COUNT(sRows_Marks) },
@@ -361,6 +387,7 @@ static const struct { const struct DbgRow *rows; u8 count; } sPages[PG_COUNT] = 
     [PG_FOLLOWER] = { sRows_Follower, ARRAY_COUNT(sRows_Follower) },
     [PG_FEELINGS] = { sRows_Feelings, ARRAY_COUNT(sRows_Feelings) },
     [PG_THREE]    = { sRows_Three,    ARRAY_COUNT(sRows_Three) },
+    [PG_SPIRITS]  = { sRows_Spirits,  ARRAY_COUNT(sRows_Spirits) },
 };
 
 static const u8 sText_Title_Events[] = _("GAME EVENTS, in story order.\nA gives or takes. + held, · not.");
@@ -373,9 +400,11 @@ static const u8 sText_Title_Year[] = _("THE YEAR: each line arrived.\nB goes bac
 static const u8 sText_Title_Follower[] = _("FOLLOWER: on or off, and the\nlead's friendship. B goes back.");
 static const u8 sText_Title_Feelings[] = _("FEELINGS now: G M S C, F friend-\nship. · never set. B goes back.");
 static const u8 sText_Title_Three[] = _("THE THREE, as a battle starts. A\npicks; ! set by hand. B goes back.");
+static const u8 sText_Title_Spirits[] = _("SPIRITS: a crossing plays on the\nnext step. B goes back.");   // T-519
 static const u8 *const sTitles[PG_COUNT] = {
     sText_Title_Events, sText_Title_Marks, sText_Title_Notebook, sText_Title_Drivers, sText_Title_Roots,
     sText_Title_Songs, sText_Title_Year, sText_Title_Follower, sText_Title_Feelings, sText_Title_Three,
+    sText_Title_Spirits,
 };
 static const u8 sText_Given[] = _("{STR_VAR_1}: given.");
 static const u8 sText_Taken[] = _("{STR_VAR_1}: taken away.");
@@ -519,6 +548,7 @@ static bool8 IsHeld(u8 ev)
     switch (ev)
     {
     case EV_SHOES:        return FlagGet(FLAG_SYS_B_DASH);
+    case EV_SPIRIT_SURE:  return Spirits_DebugSure();   // T-519: not a flag -- the debug's own, lost at a reset
     case EV_INDEX:        return FlagGet(FLAG_SYS_POKEDEX_GET);
     case EV_OPUS:         return FlagGet(FLAG_GOT_OPUS);
     case EV_SCHOOL:       return FlagGet(FLAG_GOT_DIPLOMA);
@@ -696,6 +726,12 @@ static void Apply(u8 ev, bool8 on)
     case EV_THREE_ATTUNEMENT: Three_DebugCycle(THREE_ATTUNEMENT); return;
     case EV_THREE_VOLTAGE:    Three_DebugCycle(THREE_VOLTAGE); return;
     case EV_THREE_AUTO:       Three_DebugAllAuto(); return;
+    case EV_SPIRIT_UP:        Spirits_DebugStepLead(TRUE); return;               // T-519
+    case EV_SPIRIT_DOWN:      Spirits_DebugStepLead(FALSE); return;
+    case EV_SPIRIT_GOOD:      Spirits_DebugSetLead(SPIRITS_GOOD); return;
+    case EV_SPIRIT_MIDDLE:    Spirits_DebugSetLead(SPIRITS_AS_IT_IS); return;
+    case EV_SPIRIT_LOW:       Spirits_DebugSetLead(SPIRITS_LOW); return;
+    case EV_SPIRIT_SURE:      if (on != Spirits_DebugSure()) Spirits_DebugToggleSure(); return;
     case EV_ITS_DREAM:    DaemonsItsDream_DebugReceive(); return;               // T-462: what a SYNC would write
     case EV_TRADE_IN:     DbgTradeArrives(SPECIES_HAUNTER, FALSE, SPECIES_NONE, FALSE); return;   // T-473: what a SYNC would write
     case EV_LOAN_IN:      DbgTradeArrives(SPECIES_KADABRA, TRUE, SPECIES_NONE, FALSE); return;
@@ -856,7 +892,9 @@ static void BuildLabels(void)
         u8 *label = sLabels + i * DBG_LABEL;
         const u8 *mark = rows[i].kind == R_TOGGLE ? (IsHeld(rows[i].arg) ? sMark_Held : sMark_Not) : sMark_Give;
 
-        if (rows[i].kind == R_VIEW)
+        if (rows[i].kind == R_VIEW && rows[i].arg >= EV_SPIRIT_SLOT1 && rows[i].arg <= EV_SPIRIT_SLOT6)   // T-519
+            Spirits_DebugLabel(label, rows[i].arg - EV_SPIRIT_SLOT1);
+        else if (rows[i].kind == R_VIEW)
             FeelingsLabel(label, rows[i].arg - EV_FEEL_SLOT1);
         else if (rows[i].kind == R_PICK)                                  // T-454
             Three_DebugLabel(label, rows[i].arg - EV_THREE_SLOT1);

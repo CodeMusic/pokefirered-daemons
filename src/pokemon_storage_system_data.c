@@ -1,5 +1,6 @@
 #include "global.h"
 #include "daemons_feelings.h"   // T-431
+#include "daemons_spirits.h"     // T-519
 #include "gflib.h"
 #include "data.h"
 #include "item.h"
@@ -1043,6 +1044,7 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
     gStorage->displayMonIsAway = FALSE;
     gStorage->displayMonIsLoan = FALSE;
     gStorage->displayMonFriendship = 0;
+    gStorage->displayMonTone = 0;   // T-519
     gender = MON_MALE;
     sanityIsBagEgg = FALSE;
     if (mode == MODE_PARTY)
@@ -1070,6 +1072,7 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
             gStorage->displayMonIsAway = DaemonIsAway(mon);
             gStorage->displayMonIsLoan = DaemonIsLoan(mon);           // T-473
             gStorage->displayMonFriendship = GetMonData(mon, MON_DATA_FRIENDSHIP);
+            gStorage->displayMonTone = Spirits_ToneOf(&mon->box);       // T-519
         }
     }
     else if (mode == MODE_BOX)
@@ -1098,6 +1101,7 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
             gStorage->displayMonIsAway = DaemonBoxIsAway(boxMon);
             gStorage->displayMonIsLoan = DaemonBoxIsLoan(boxMon);     // T-473
             gStorage->displayMonFriendship = GetBoxMonData(boxMon, MON_DATA_FRIENDSHIP);
+            gStorage->displayMonTone = Spirits_ToneOf(boxMon);          // T-519
         }
     }
     else

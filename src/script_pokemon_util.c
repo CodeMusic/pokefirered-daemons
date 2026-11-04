@@ -9,6 +9,7 @@
 #include "party_menu.h"
 #include "pokedex.h"
 #include "script_pokemon_util.h"
+#include "daemons_spirits.h"   // T-519
 #include "constants/items.h"
 #include "constants/pokemon.h"
 
@@ -22,6 +23,7 @@ void HealPlayerParty(void)
     u8 arg[4];
 
     Spellbook_OnRest();     // T-483 (5): a rest -- THE RETURN may be said again
+    Spirits_OnHeal();       // T-519: KEPT -- a CHECKPOINT, a bed
 
     // restore HP.
     for(i = 0; i < gPlayerPartyCount; i++)

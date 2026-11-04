@@ -20,6 +20,7 @@
 #include "constants/songs.h"
 #include "daemon_streaks.h"
 #include "daemon_saturation.h"
+#include "daemons_spirits.h"     // T-519
 
 static bool8 ShouldAnimBeDoneRegardlessOfSubsitute(u8 animId);
 static void Task_ClearBitWhenBattleTableAnimDone(u8 taskId);
@@ -373,6 +374,7 @@ void BattleLoadOpponentMonSpriteGfx(struct Pokemon *mon, u8 battlerId)
     }
     // T-424: then its saturation, its friendship's -- the daemon's own, PERSPECTIVE-changed or not
     Saturation_ApplyToBuffer(buffer, GetMonData(mon, MON_DATA_FRIENDSHIP));
+    Spirits_ToneBuffer(buffer, Spirits_ToneOf(&mon->box));   // T-519: and its SPIRITS' tone over it
     LoadPalette(buffer, paletteOffset, PLTT_SIZE_4BPP);
     LoadPalette(buffer, BG_PLTT_ID(8) + BG_PLTT_ID(battlerId), PLTT_SIZE_4BPP);
     Free(buffer);
@@ -449,6 +451,7 @@ void BattleLoadPlayerMonSpriteGfx(struct Pokemon *mon, u8 battlerId)
     }
     // T-424: then its saturation, its friendship's -- the daemon's own, PERSPECTIVE-changed or not
     Saturation_ApplyToBuffer(buffer, GetMonData(mon, MON_DATA_FRIENDSHIP));
+    Spirits_ToneBuffer(buffer, Spirits_ToneOf(&mon->box));   // T-519: and its SPIRITS' tone over it
     LoadPalette(buffer, paletteOffset, PLTT_SIZE_4BPP);
     LoadPalette(buffer, BG_PLTT_ID(8) + BG_PLTT_ID(battlerId), PLTT_SIZE_4BPP);
     Free(buffer);

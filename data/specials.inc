@@ -529,4 +529,5 @@ gSpecials::
 	def_special Spellbook_Cast               @ T-483 (5): casts VAR_RESULT's spell; what it did in gStringVar4
 	def_special Spellbook_TakeNews           @ T-483 (5): a spell came off the page while the book was open (specialvar)
 	def_special Spellbook_Draw               @ T-483 (5): THE PULL's step, after a cast (waitstate)
+	def_special Spirits_PlayCrossing         @ T-519: SPIRITS, a crossing's screen (waitstate)
 gSpecialsEnd::

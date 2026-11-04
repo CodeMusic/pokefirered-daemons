@@ -8,6 +8,7 @@
 #include "trainer_tower.h"
 #include "daemons_three.h"   // T-454
 #include "daemons_spellbook.h"   // T-483 (5)
+#include "daemons_spirits.h"     // T-519
 
 void AllocateBattleResources(void)
 {
@@ -100,6 +101,8 @@ void AdjustFriendshipOnBattleFaint(u8 battlerId)
         opposingBattlerId = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
     }
 
+    // T-519: PORTION -- sent against far worse odds (its own draw, never Random())
+    Spirits_OnFaint(&gPlayerParty[gBattlerPartyIndexes[battlerId]], gBattleMons[opposingBattlerId].level, gBattleMons[battlerId].level);
     if (gBattleMons[opposingBattlerId].level > gBattleMons[battlerId].level)
     {
         if (gBattleMons[opposingBattlerId].level - gBattleMons[battlerId].level > 29)

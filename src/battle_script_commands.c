@@ -3,6 +3,7 @@
 #include "daemons_feelings.h"   // T-433
 #include "daemons_three.h"      // T-454
 #include "daemons_spellbook.h"  // T-483 (5)
+#include "daemons_spirits.h"    // T-519
 #include "daemon_saturation.h"
 #include "gflib.h"
 #include "item.h"
@@ -1363,6 +1364,7 @@ static void Cmd_typecalc(void)
     {
         gBattleMoveDamage = gBattleMoveDamage * 15;
         gBattleMoveDamage = gBattleMoveDamage / 10;
+        Spirits_OnOwnType(gBattlerAttacker);   // T-519: WORK, run as itself (its own draw, never Random())
     }
 
     if (gBattleMons[gBattlerTarget].ability == ABILITY_LEVITATE && moveType == TYPE_GROUND)
@@ -3424,6 +3426,8 @@ static void Cmd_getexp(void)
 
                     PrepareStringBattle(STRINGID_PKMNGAINEDEXP, gBattleStruct->expGetterBattlerId);
                     MonGainEVs(&gPlayerParty[gBattleStruct->expGetterMonId], gBattleMons[gBattlerFainted].species);
+                    if (gBattleStruct->sentInPokes & 1)     // T-519: PORTION -- it fought, and the fight was fair
+                        Spirits_OnFairFight(&gPlayerParty[gBattleStruct->expGetterMonId], gBattleMons[gBattlerFainted].level);
                 }
                 gBattleStruct->sentInPokes >>= 1;
                 gBattleScripting.getexpState++;

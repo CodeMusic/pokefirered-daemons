@@ -131,7 +131,9 @@ struct BoxPokemon
                             // TRADED_IN and cleared with it; 0 when not given. EVO_TRADE_PARTNER judges it (PENPHIN)
     u16 daemonsGifted:1;    // bit 11 (T-492, C-223): it was GIVEN, nothing back -- written by the companion with TRADED_IN
                             // (partner 0) and cleared with it; the arrival says "a gift" and FIRST MET says A GIFT
-    u16 unknown:4;          // bits 12-15: reserved
+    u16 daemonsSpirits:2;   // bits 12-13 (T-519, vision 4.40): SPIRITS -- 0 as it is, 1 in good spirits, 2 in low
+                            // spirits (3 never written, read as 0). Zero in every old save, so an old daemon is as it is
+    u16 daemonsLean:2;      // bits 14-15 (T-519): its lean, read by class (src/daemons_spirits.c has the ladder)
 
     union
     {

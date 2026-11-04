@@ -24,6 +24,7 @@
 #include "field_weather.h"
 #include "daemons_weather.h"   // T-415 P2
 #include "daemons_feelings.h"  // T-431
+#include "daemons_spirits.h"   // T-519
 #include "constants/weather.h"
 #include "party_menu.h"
 #include "field_specials.h"
@@ -3316,7 +3317,8 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
         break;
     case MON_DATA_ENCRYPT_SEPARATOR:
         retVal = boxMon->daemonsLoan | (boxMon->daemonsTradedIn << 1) | (boxMon->daemonsTradePartner << 2)
-               | (boxMon->daemonsGifted << 11) | (boxMon->unknown << 12);   // T-473, T-474, T-492: all sixteen bits
+               | (boxMon->daemonsGifted << 11) | (boxMon->daemonsSpirits << 12)
+               | (boxMon->daemonsLean << 14);   // T-473, T-474, T-492, T-519: all sixteen bits
         break;
     case MON_DATA_SPECIES:
         retVal = boxMon->isBadEgg ? SPECIES_EGG : substruct0->species;
@@ -3719,7 +3721,8 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
         boxMon->daemonsTradedIn = (bits >> 1) & 1;
         boxMon->daemonsTradePartner = (bits >> 2) & 0x1FF;   // T-474
         boxMon->daemonsGifted = (bits >> 11) & 1;            // T-492
-        boxMon->unknown = bits >> 12;
+        boxMon->daemonsSpirits = (bits >> 12) & 3;           // T-519
+        boxMon->daemonsLean = bits >> 14;
         break;
     }
     case MON_DATA_SPECIES:
@@ -5796,6 +5799,7 @@ void AdjustFriendship(struct Pokemon *mon, u8 event)
 
         SetMonData(mon, MON_DATA_FRIENDSHIP, &friendship);
         Feelings_OnFriendshipEvent(mon, event);   // T-431: a level, a TM, the massage, a faint
+        Spirits_OnFriendshipEvent(mon, event);    // T-519: a vitamin, the massage, a faint in the field, a leader
     }
 }
 

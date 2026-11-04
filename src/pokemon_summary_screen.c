@@ -2,6 +2,7 @@
 #include "daemons_witching.h"   // T-480
 #include "daemons_away.h"
 #include "daemons_feelings.h"
+#include "daemons_spirits.h"   // T-519
 #include "gflib.h"
 #include "pokemon.h"
 #include "pokemon_summary_screen.h"
@@ -4107,6 +4108,9 @@ static void PokeSum_CreateMonPicSprite(void)
     if (species != SPECIES_EGG)
         Saturation_ApplyToLoaded(OBJ_PLTT_ID(gSprites[spriteId].oam.paletteNum),
                                  GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_FRIENDSHIP));
+    // T-519: its SPIRITS' tone over that, lighter or darker, never another hue
+    if (species != SPECIES_EGG)
+        Spirits_ToneLoaded(OBJ_PLTT_ID(gSprites[spriteId].oam.paletteNum), Spirits_ToneOf(&sMonSummaryScreen->currentMon.box));
     // T-358: a daemon AWAY on the player's device is drawn paler here too, its picture and its icon
     if (DaemonIsAway(&sMonSummaryScreen->currentMon))
         DaemonsWashAwayLoaded(OBJ_PLTT_ID(gSprites[spriteId].oam.paletteNum), 16);
@@ -5386,6 +5390,7 @@ static void PokeSum_PrintFeelingsLine(void)
     u8 friendship = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_FRIENDSHIP);
     const u8 *line = Feelings_BehaviourLine(&sMonSummaryScreen->currentMon.box, friendship);
     s32 width = GetStringWidth(FONT_NORMAL, line, 0);
+    const u8 *words;
 
     FillWindowPixelRect(win, 4, 0, 0, FEELINGS_LINE_W, FEELINGS_LINE_H);
     FillWindowPixelRect(win, 1, 1, 1, FEELINGS_LINE_W - 2, FEELINGS_LINE_H - 2);
@@ -5393,7 +5398,17 @@ static void PokeSum_PrintFeelingsLine(void)
     FillWindowPixelRect(win, 0, FEELINGS_LINE_W - 1, 0, 1, 1);
     FillWindowPixelRect(win, 0, 0, FEELINGS_LINE_H - 1, 1, 1);
     FillWindowPixelRect(win, 0, FEELINGS_LINE_W - 1, FEELINGS_LINE_H - 1, 1, 1);
-    AddTextPrinterParameterized3(win, FONT_NORMAL, (FEELINGS_LINE_W - width) / 2, 9, sFeelingsLineColors, TEXT_SKIP_DRAW, line);
+    // T-519: and under it, only when it is not as it is, the axis words: in good spirits, in low spirits (DRAFT).
+    // Feelings are the weather; SPIRITS is the climate (vision 4.40), so it sits beneath the day's line.
+    words = Spirits_Words(&sMonSummaryScreen->currentMon.box);
+    if (words == NULL)
+        AddTextPrinterParameterized3(win, FONT_NORMAL, (FEELINGS_LINE_W - width) / 2, 9, sFeelingsLineColors, TEXT_SKIP_DRAW, line);
+    else
+    {
+        AddTextPrinterParameterized3(win, FONT_NORMAL, (FEELINGS_LINE_W - width) / 2, 2, sFeelingsLineColors, TEXT_SKIP_DRAW, line);
+        AddTextPrinterParameterized3(win, FONT_NORMAL, (FEELINGS_LINE_W - GetStringWidth(FONT_NORMAL, words, 0)) / 2, 16,
+                                     sFeelingsLineColors, TEXT_SKIP_DRAW, words);
+    }
 #if DAEMONS_DEBUG
     gFeelingsDebugShown[0] = (u32)line;
 #endif
