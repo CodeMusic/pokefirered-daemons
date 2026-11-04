@@ -4,6 +4,7 @@
 #include "daemons_time.h"
 #include "daemons_holidays.h"   // T-416
 #include "daemons_spellbook.h"   // T-483 (5): THE CONTRAST
+#include "daemons_hours.h"       // T-519: the dawn step
 
 // T-268: DAY AND NIGHT (vision.md 9.21; decided by the user, 2026-09-25).
 //
@@ -320,10 +321,19 @@ static const u8 sHolidayLift[HOLIDAY_LIFT_COUNT][4] = {
 
 void DaemonsTintForWatch(u16 *palette, u16 count)
 {
-    const u8 (*t)[2] = sWatchTint[DaemonsWatch()];
+    const u8 (*w)[2] = sWatchTint[DaemonsWatch()];
     const u8 *lift = sHolidayLift[DaemonsHolidayLift()];
+    u8 t[3][2], k, step = Hours_DawnStep();
     u16 i;
     s32 r, g, b;
+
+    // T-519: THE CREATOR'S HOUR eases the watch's light toward the dawn's with its level, so it reads as early dawn
+    for (k = 0; k < 3; k++)
+    {
+        t[k][0] = w[k][0] + ((s32)sWatchTint[WATCH_DAWN][k][0] - w[k][0]) * step / 8;
+        t[k][1] = w[k][1] + ((s32)sWatchTint[WATCH_DAWN][k][1] - w[k][1]) * step / 8;
+    }
+    Hours_NoteDawnStepLit(step);
 
     for (i = 0; i < count; i++)
     {

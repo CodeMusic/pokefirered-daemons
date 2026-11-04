@@ -27,7 +27,7 @@
 // THE CREATOR'S HOUR, every day on the cartridge's own clock (DaemonsCreatorSecond, daemons_time.c): a softer touch
 // than the witching hour's -- light, not noise. Nothing flickers; it rises over seven minutes, holds, and resolves over
 // the last seven, and only in the field (the overworld: never in battle, which it cannot change, and never in a save).
-//   - THE LIGHT: the hardware's brighten (BLDCNT effect 2) on the map's layers and the backdrop, BLDY 0 to 3 -- never
+//   - THE LIGHT: the hardware's brighten (BLDCNT effect 2) on the map's layers and the backdrop, BLDY 0 to 5 -- never
 //     BG0, which carries every text box and menu, so the words stay plain -- and a pale gold laid over the map's own
 //     palettes (rows 0-12; the pulse's path, so fades and weather stay underneath), breathing once every sixteen
 //     seconds on the clock, between 0.85 and 1.0 of its level. The brighten is taken only while BLDCNT is the
@@ -63,9 +63,9 @@
 // turns them on inside the windows only -- so a dark cave outside its FLASH circle stays dark.
 #define FIELD_WININ  (WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ)
 #define BLOOM_WININ  (FIELD_WININ | WININ_WIN0_CLR | WININ_WIN1_CLR)
-#define BLOOM_MAX_Y         3
+#define BLOOM_MAX_Y         5
 #define GOLD                RGB(31, 26, 15)
-#define TINT_FULL           36               // 256ths of gold at full, at the top of the breath
+#define TINT_FULL           72               // 256ths of gold at full (28%), at the top of the breath
 // The light breathes between 0.85 and 1.0 of its level: 0.85 + 0.15 x goldBreath, in 256ths (the companion's).
 #define BREATH_LOW          218
 #define BREATH_SPAN         38
@@ -172,6 +172,32 @@ bool8 Hours_CreatorTint(u16 *colour, u8 *weight)
     return *weight != 0;
 }
 
+// T-519: the field's light eased from the watch's toward the dawn's, in eighths of the hour's level (0-8) -- put on
+// the palettes as they load (DaemonsTintForWatch), so the field relights when the step moves (overworld.c).
+static EWRAM_DATA u8 sDawnStepLit = 0;
+
+u8 Hours_DawnStep(void)
+{
+    bool8 grey;
+    u16 s = FieldStrength(&grey);
+
+    if (grey || !sPlayBegan)
+        return 0;
+    if (!DaemonsFieldOnScreen())
+        s = Hours_CreatorStrength();     // a map loading: the step it will be seen in
+    return (s * 8 + 128) / 256;
+}
+
+void Hours_NoteDawnStepLit(u8 step)
+{
+    sDawnStepLit = step;
+}
+
+bool8 Hours_DawnStepMoved(void)
+{
+    return Hours_DawnStep() != sDawnStepLit;
+}
+
 u8 Hours_FollowerGlow(void)
 {
     bool8 grey;
@@ -244,12 +270,13 @@ static void Bloom(u16 s)
 //  ---------------------------------------------------------------- the motes
 
 static const u32 sMoteTiles[] = {
-    0x00000000, 0x00000000, 0x00000000, 0x00002000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00001000, 0x00013100, 0x00001000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00001000, 0x00012100, 0x00123210, 0x00012100, 0x00001000, 0x00000000, 0x00000000,
+    0x00000000, 0x00000000, 0x00000000, 0x00022000, 0x00022000, 0x00000000, 0x00000000, 0x00000000,
+    0x00000000, 0x00000000, 0x00002000, 0x00023200, 0x00002000, 0x00000000, 0x00000000, 0x00000000,
+    0x00000000, 0x00001000, 0x00022200, 0x00123210, 0x00022200, 0x00001000, 0x00000000, 0x00000000,
 };
 
-static const u16 sMotePalette[16] = { RGB(0, 0, 0), RGB(24, 18, 6), RGB(30, 25, 12), RGB(31, 30, 22) };
+// A warm gold, never the night's: written back over whatever the field's light or the weather laid on the slot.
+static const u16 sMotePalette[16] = { RGB(0, 0, 0), RGB(28, 16, 2), RGB(31, 23, 5), RGB(31, 30, 16) };
 
 static const struct SpriteSheet sMoteSheet = { sMoteTiles, sizeof(sMoteTiles), MOTE_TAG };
 static const struct SpritePalette sMoteSpritePalette = { sMotePalette, MOTE_TAG };
@@ -333,6 +360,12 @@ static void Motes(u16 s, bool8 grey)
         return;
     want = grey ? 0 : (s * MOTES_MAX + 128) / 256;
     have = CountMotes();
+    // The field's relight and the weather retint the sprites' slots; the motes' gold is put back over it.
+    if (!gPaletteFade.active && (spriteId = IndexOfSpritePaletteTag(MOTE_TAG)) != 0xFF)
+    {
+        CpuCopy16(sMotePalette, &gPlttBufferUnfaded[OBJ_PLTT_ID(spriteId)], PLTT_SIZE_4BPP);
+        CpuCopy16(sMotePalette, &gPlttBufferFaded[OBJ_PLTT_ID(spriteId)], PLTT_SIZE_4BPP);
+    }
     // A reset of the field's sprites (a battle, the BAG) takes the motes and their tiles; they are asked for again.
     // The last one gone with the hour, its tiles and palette are given back.
     if (want == 0 || have >= want)

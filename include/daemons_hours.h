@@ -22,6 +22,10 @@ void Hours_Tick(void);
 bool8 Hours_CreatorTint(u16 *colour, u8 *weight);
 // The follower's glow in the creator's hour: sixteenths of gold, 0 when there is none.
 u8 Hours_FollowerGlow(void);
+// The field's light eased toward dawn: 0-8 eighths now, the step the palettes were last tinted at, and whether it moved.
+u8 Hours_DawnStep(void);
+void Hours_NoteDawnStepLit(u8 step);
+bool8 Hours_DawnStepMoved(void);
 void Hours_GlowFadedInPlace(u16 palOffset, u8 weight);
 
 #endif // GUARD_DAEMONS_HOURS_H

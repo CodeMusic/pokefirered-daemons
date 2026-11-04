@@ -1536,9 +1536,10 @@ static void RelightIfTheLightChanged(void)
         return;
     if (DaemonsSettleWeather())   // T-415: an event starting or ending changes the sky in front of the player
         return;                   // and the light is looked at again a second later, once the weather has settled
-    if (DaemonsPrimarySignature() != DaemonsPaletteSignature())
+    if (DaemonsPrimarySignature() != DaemonsPaletteSignature() || Hours_DawnStepMoved())   // T-519: the dawn step
     {
         DaemonsRelightField();
+        Hours_NoteDawnStepLit(Hours_DawnStep());   // T-519: even where no watch light was laid, ask once
         return;
     }
     // T-416 P4: a holiday's line that arrives on its own (HALFTONE after dusk, DAWN VIGIL at dawn)
