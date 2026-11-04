@@ -84,3 +84,9 @@ LavenderTown_EventScript_KingfisherNothing::
 LavenderTown_EventScript_PepperedMoth::
 	msgbox LavenderTown_Text_PepperedMoth, MSGBOX_NPC
 	end
+
+@ T-519 (the user, 2026-11-04, by multiple choice), DRAFT: the LARK by DAEMON TOWER -- the hint, and all of it. The same
+@ LARK, later, is the one under the singing FIR (not built yet).
+LavenderTown_EventScript_Lark::
+	msgbox LavenderTown_Text_Lark, MSGBOX_NPC
+	end

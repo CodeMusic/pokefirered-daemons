@@ -62,3 +62,10 @@ LavenderTown_Text_PepperedMoth::
     .string "Gran was pale. Then the soot.\n"
     .string "We went dark. Soot went.\p"
     .string "We're pale again. Fashion.$"
+
+@ T-519, DRAFT: the LARK.
+LavenderTown_Text_Lark::
+    .string "Set your alarm early one morning.\n"
+    .string "Before the birds.\p"
+    .string "Something is awake then that isn't,\n"
+    .string "the rest of the day.$"
