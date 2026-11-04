@@ -27,13 +27,13 @@
 // THE CREATOR'S HOUR, every day on the cartridge's own clock (DaemonsCreatorSecond, daemons_time.c): a softer touch
 // than the witching hour's -- light, not noise. Nothing flickers; it rises over seven minutes, holds, and resolves over
 // the last seven, and only in the field (the overworld: never in battle, which it cannot change, and never in a save).
-//   - THE LIGHT: the hardware's brighten (BLDCNT effect 2) on the map's layers and the backdrop, BLDY 0 to 5 -- never
+//   - THE LIGHT: the hardware's brighten (BLDCNT effect 2) on the map's layers and the backdrop, BLDY 0 to 4 -- never
 //     BG0, which carries every text box and menu, so the words stay plain -- and a pale gold laid over the map's own
 //     palettes (rows 0-12; the pulse's path, so fades and weather stay underneath), breathing once every sixteen
 //     seconds on the clock, between 0.85 and 1.0 of its level. The brighten is taken only while BLDCNT is the
 //     field's own (not a fog's, a fade's, the FLASH's): it waits, and gives it back as it found it.
 //   - THE MOTES: up to six points of light rising slowly through the field like dust in a sunbeam, a few OAM sprites
-//     under BG0's priority, so a text box or a menu always covers them. They take a palette only when three are free.
+//     under BG0's priority, so a text box or a menu always covers them. They take a palette only when two are free (the field reserves twelve).
 //   - THE FOLLOWER wears a faint steady gold instead of the witching shimmer (daemons_follower.c).
 //   - THE TONE, in the middle minutes only: a choir's sustained "aah" (voicegroup191's choir, GM 52) held on one soft
 //     note, on the third sound-effect player (the weather's, one track), faded in and out over thirty seconds. It
@@ -63,9 +63,9 @@
 // turns them on inside the windows only -- so a dark cave outside its FLASH circle stays dark.
 #define FIELD_WININ  (WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ)
 #define BLOOM_WININ  (FIELD_WININ | WININ_WIN0_CLR | WININ_WIN1_CLR)
-#define BLOOM_MAX_Y         5
-#define GOLD                RGB(31, 26, 15)
-#define TINT_FULL           72               // 256ths of gold at full (28%), at the top of the breath
+#define BLOOM_MAX_Y         4                // a fifth more would wash the gold out to grey (filmed, 4 Nov)
+#define GOLD                RGB(31, 22, 8)    // a warm gold, saturated enough to read over the dawn's pale light
+#define TINT_FULL           77               // 256ths of gold at full (30%), at the top of the breath
 // The light breathes between 0.85 and 1.0 of its level: 0.85 + 0.15 x goldBreath, in 256ths (the companion's).
 #define BREATH_LOW          218
 #define BREATH_SPAN         38
@@ -74,7 +74,7 @@
 #define MOTES_MAX           6
 #define MOTE_TAG            0x5190
 #define MOTE_EVERY          40               // a new mote at most every 40 frames
-#define MOTE_PALETTES_FREE  3                // take a palette only when this many are free
+#define MOTE_PALETTES_FREE  2                // take a palette only when this many are free (the field reserves 12)
 
 static EWRAM_DATA u32 sPlayBeganAt = 0;
 static EWRAM_DATA bool8 sPlayBegan = FALSE;

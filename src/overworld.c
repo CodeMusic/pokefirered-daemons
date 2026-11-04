@@ -2518,6 +2518,7 @@ void CB2_EnterFieldFromQuestLog(void)
     Overworld_ResetStateOnContinue();
     InitMapFromSavedGame();
     PlayTimeCounter_Start();
+    Hours_PlayBegan();          // T-519: a CONTINUE with a recap is a beginning too (the theatre's stop 3, 4 Nov)
     ScriptContext_Init();
     gExitStairsMovementDisabled = TRUE;
     if (UseContinueGameWarp() == TRUE)
