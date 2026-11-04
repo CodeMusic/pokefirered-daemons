@@ -56,20 +56,26 @@ static u32 sPulseMask;      // palettes pulsing this frame: bit p is BG palette 
 static u16 sPulseColour;
 static u8 sPulseWeight;
 
+// T-519: the anchor keeps sixteen seconds, not eight, so THE CREATOR'S HOUR's sixteen-second breath (the companion's
+// goldBreath, C-237's rule) rides the same clock; eight divides sixteen, and sixteen a day, so the eight-second breath
+// is the same breath it always was.
+#define ANCHOR_MS  16000
+
 static u16 Since(u16 ms, u32 frames)
 {
-    return (ms + frames * FRAME_US / 1000) % 8000;
+    return (ms + frames * FRAME_US / 1000) % ANCHOR_MS;
 }
 
-u16 Pulse_Ms(void)
+// T-519: where in sixteen seconds it is, 0-15999, on the cartridge's clock (play time without one).
+static u16 Pulse_Ms16(void)
 {
     u32 second, readAt, now = gMain.vblankCounter2, rtc, atRead, diff;
 
     if (!DaemonsPulseClock(&second, &readAt))
-        return (gSaveBlock2Ptr->playTimeSeconds % 8) * 1000 + gSaveBlock2Ptr->playTimeVBlanks * 1000 / 60;
+        return (gSaveBlock2Ptr->playTimeSeconds % 16) * 1000 + gSaveBlock2Ptr->playTimeVBlanks * 1000 / 60;
     if (!sAnchored || readAt != sAnchorRead)
     {
-        rtc = (second % 8) * 1000;
+        rtc = (second % 16) * 1000;
         if (!sAnchored || now - sAnchorFrame > 600)
         {
             atRead = rtc + 500;                     // the first read: the middle of the second it names
@@ -77,16 +83,30 @@ u16 Pulse_Ms(void)
         else
         {
             atRead = Since(sAnchorMs, readAt - sAnchorFrame);
-            diff = (atRead + 8000 - rtc) % 8000;
+            diff = (atRead + ANCHOR_MS - rtc) % ANCHOR_MS;
             if (diff >= 1000)                       // outside the second the clock names: back to its nearer edge
-                atRead = (diff > 4500) ? rtc : rtc + 999;
+                atRead = (diff > (ANCHOR_MS + 1000) / 2) ? rtc : rtc + 999;
         }
-        sAnchorMs = atRead % 8000;
+        sAnchorMs = atRead % ANCHOR_MS;
         sAnchorFrame = readAt;
         sAnchorRead = readAt;
         sAnchored = TRUE;
     }
     return Since(sAnchorMs, now - sAnchorFrame);
+}
+
+u16 Pulse_Ms(void)
+{
+    return Pulse_Ms16() % 8000;
+}
+
+// T-519: THE CREATOR'S HOUR's gold breath, (1 - cos(2 pi t / 16000)) / 2 as 0-255, the same cosine at half the pace.
+u8 Pulse_GoldBreath(void)
+{
+    u16 ms = Pulse_Ms16();
+    u8 i = ms / 250, frac = ms % 250;
+
+    return sBreath[i] + ((s32)(sBreath[i + 1] - sBreath[i]) * frac) / 250;
 }
 
 u8 Pulse_Phase(void)

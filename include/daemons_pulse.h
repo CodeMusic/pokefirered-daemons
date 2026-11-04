@@ -6,7 +6,8 @@
 #define PULSE_BG_WEIGHT  77     // 256ths: a background takes about 30% of the pulse
 
 u16 Pulse_Ms(void);                     // where in the eight-second breath it is, 0-7999
-u8 Pulse_Phase(void);                   // (1 - cos(2 pi t / 8000)) / 2, as 0-255: 0 red, 128 purple, 255 blue
+u8 Pulse_Phase(void);
+u8 Pulse_GoldBreath(void);              // T-519: (1 - cos(2 pi t / 16000)) / 2, as 0-255, on the same clock                   // (1 - cos(2 pi t / 8000)) / 2, as 0-255: 0 red, 128 purple, 255 blue
 u16 Pulse_Colour(u8 phase);             // red -> purple -> blue, three stops, never a straight blend
 u16 Pulse_Now(void);                    // Pulse_Colour(Pulse_Phase())
 u16 Pulse_Emerald(u8 phase);            // an inscription's ink: the tablet's emerald, lit at the breath's height

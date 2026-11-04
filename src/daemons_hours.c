@@ -11,6 +11,7 @@
 #include "overworld.h"
 #include "daemons_hours.h"
 #include "daemons_time.h"
+#include "daemons_pulse.h"   // the gold breath
 #include "constants/songs.h"
 
 // T-519 item 4: THE TWO HOURS (the user, 2026-11-02 and 2026-11-04, by multiple choice).
@@ -29,8 +30,8 @@
 //   - THE LIGHT: the hardware's brighten (BLDCNT effect 2) on the map's layers and the backdrop, BLDY 0 to 3 -- never
 //     BG0, which carries every text box and menu, so the words stay plain -- and a pale gold laid over the map's own
 //     palettes (rows 0-12; the pulse's path, so fades and weather stay underneath), breathing once every sixteen
-//     seconds. The brighten is taken only while BLDCNT is the field's own (not a fog's, a fade's, the FLASH's): it
-//     waits, and gives it back as it found it.
+//     seconds on the clock, between 0.85 and 1.0 of its level. The brighten is taken only while BLDCNT is the
+//     field's own (not a fog's, a fade's, the FLASH's): it waits, and gives it back as it found it.
 //   - THE MOTES: up to six points of light rising slowly through the field like dust in a sunbeam, a few OAM sprites
 //     under BG0's priority, so a text box or a menu always covers them. They take a palette only when three are free.
 //   - THE FOLLOWER wears a faint steady gold instead of the witching shimmer (daemons_follower.c).
@@ -52,8 +53,6 @@
 #define TONE_FADE           (30 * 60)        // thirty seconds, in frames (near enough)
 #define TONE_FADE_FAST      32               // a step a frame when it must give way: about a second
 
-#define BREATH_FRAMES       956              // sixteen seconds
-
 // The field's own BLDCNT (overworld.c's InitOverworldGraphicsRegisters): no first target, its layers and the sprites
 // as the second, so a semi-transparent sprite (a reflection) blends onto the map. The bloom keeps those second targets
 // -- a semi-transparent sprite still blends, whatever the effect -- and brightens BG1-3 and the backdrop.
@@ -66,8 +65,10 @@
 #define BLOOM_WININ  (FIELD_WININ | WININ_WIN0_CLR | WININ_WIN1_CLR)
 #define BLOOM_MAX_Y         3
 #define GOLD                RGB(31, 26, 15)
-#define TINT_BASE           20               // 256ths of gold at full, plus up to TINT_BREATH with the breath
-#define TINT_BREATH         16
+#define TINT_FULL           36               // 256ths of gold at full, at the top of the breath
+// The light breathes between 0.85 and 1.0 of its level: 0.85 + 0.15 x goldBreath, in 256ths (the companion's).
+#define BREATH_LOW          218
+#define BREATH_SPAN         38
 #define GLOW_MAX            3                // the follower's sixteenths
 
 #define MOTES_MAX           6
@@ -143,14 +144,11 @@ u16 Hours_CreatorStrength(void)
     return shape * Hours_CatchUp() / 256;
 }
 
-// The breath, 0-256 and back every sixteen seconds, eased at the turns.
+// The light's share of its level now: 0.85 to 1.0 on the clock's sixteen-second gold breath (src/daemons_pulse.c,
+// the same clock as the witching pulse's eight), in 256ths.
 static u16 Breath(void)
 {
-    u32 p = gMain.vblankCounter2 % BREATH_FRAMES;
-
-    if (p >= BREATH_FRAMES / 2)
-        p = BREATH_FRAMES - p;
-    return Smooth(p, BREATH_FRAMES / 2);
+    return BREATH_LOW + BREATH_SPAN * Pulse_GoldBreath() / 255;
 }
 
 // The field, as the player sees it: the overworld itself, not HALFTONE (grey outranks every light but the bloom's).
@@ -170,7 +168,7 @@ bool8 Hours_CreatorTint(u16 *colour, u8 *weight)
     if (s == 0 || grey)
         return FALSE;
     *colour = GOLD;
-    *weight = s * (TINT_BASE + TINT_BREATH * Breath() / 256) / 256;
+    *weight = s * Breath() / 256 * TINT_FULL / 256;
     return *weight != 0;
 }
 
@@ -204,7 +202,7 @@ void Hours_GlowFadedInPlace(u16 palOffset, u8 weight)
 
 static void Bloom(u16 s)
 {
-    u16 y = (s * BLOOM_MAX_Y + 128) / 256;
+    u16 y = (s * Breath() / 256 * BLOOM_MAX_Y + 128) / 256;
     u16 now = GetGpuReg(REG_OFFSET_BLDCNT), win = GetGpuReg(REG_OFFSET_WININ);
     bool8 ours = (now == BLOOM_BLDCNT);
 
