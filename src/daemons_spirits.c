@@ -124,7 +124,8 @@ static const u8 sText_CrossIntoGood[] = _("{STR_VAR_1} is in good spirits.");   
 static const u8 sText_CrossIntoLow[]  = _("{STR_VAR_1} is in low spirits.");            // DRAFT
 static const u8 sText_CrossOutOfGood[] = _("{STR_VAR_1} is no longer\nin good spirits.");   // DRAFT
 static const u8 sText_CrossOutOfLow[]  = _("{STR_VAR_1} is no longer\nin low spirits.");    // DRAFT
-const u8 gText_SpiritsRefusesFood[] = _("{STR_VAR_1} turns away from it.\nIt will not take it now.");   // DRAFT
+const u8 gText_SpiritsRefusesFood[] = _("{STR_VAR_1} turns away from it.\nIt will not take it now.{PAUSE_UNTIL_PRESS}");   // DRAFT: held for A, as
+                                                     // vanilla's "It won't have any effect." is -- the menu closes after it
 const u8 gText_SpiritsHPRestoredThanks[] = _("{STR_VAR_1}'s HP was restored\nby {STR_VAR_2} point(s).\p"
                                              "{STR_VAR_1} thanks you, brightly.{PAUSE_UNTIL_PRESS}");   // DRAFT
 
