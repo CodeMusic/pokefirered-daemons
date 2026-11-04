@@ -9,7 +9,7 @@
 #include "daemons_hermetic.h"
 #include "daemons_pulse.h"
 #include "daemons_spellbook.h"   // T-483 (5): THE MIRROR's colour
-#include "daemons_hours.h"       // T-519: the catch-up
+#include "daemons_hours.h"       // T-519: the catch-up, and the creator's hour's gold
 
 // T-483 / T-482: THE PULSE (the user, 2026-10-29; bible 4.39). One breath for the app, the watches and the game, so
 // boards side by side and a cartridge beside them breathe together: CONTENT's red to CONTEXT's blue through THE SUBTLE
@@ -141,7 +141,8 @@ u16 Pulse_Blend(u16 base, u16 target, u8 weight)
 void Pulse_Tick(void)
 {
     u32 mask = 0;
-    u16 mirror;
+    u16 mirror, gold = 0;
+    u8 goldWeight = 0;
     bool8 mirrored = FALSE, eased = FALSE;
 
     if (DaemonsFieldOnScreen())
@@ -152,6 +153,9 @@ void Pulse_Tick(void)
             mask = BG_ROWS(0, 12), mirrored = TRUE;
         else if (Hermetic_WorldPulses() && !DaemonsIsHalftone())
             mask = BG_ROWS(0, 12), eased = TRUE;
+        // T-519: THE CREATOR'S HOUR's pale gold, on the same rows, when nothing else is laid on them.
+        else if (Hours_CreatorTint(&gold, &goldWeight))
+            mask = BG_ROWS(0, 12);
     }
     else if (gMain.inBattle && gMain.callback2 == BattleMainCB2)
     {
@@ -162,8 +166,8 @@ void Pulse_Tick(void)
     sPulseMask = mask;
     if (mask == 0)
         return;
-    sPulseColour = mirrored ? mirror : Pulse_Now();
-    sPulseWeight = PULSE_BG_WEIGHT;
+    sPulseColour = mirrored ? mirror : goldWeight ? gold : Pulse_Now();
+    sPulseWeight = goldWeight ? goldWeight : PULSE_BG_WEIGHT;
     // T-519: the witching hour's pulse eased by the catch-up when play began inside it (not all Halloween's).
     if (eased && !Hermetic_IsHalloween())
         sPulseWeight = sPulseWeight * Hours_WitchingEase() / 256;

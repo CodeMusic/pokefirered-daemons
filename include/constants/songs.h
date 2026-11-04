@@ -389,6 +389,7 @@
 #define MUS_GROVE_MECHA           378
 #define MUS_GROVE_COMPASS         379
 #define MUS_GROVE_CLAY            380
+#define SE_AAH_PAD                381   // T-519: THE CREATOR'S HOUR's tone, on the SE3 player (src/daemons_hours.c)
 
 #define MUS_NONE                    0xFFFF
 

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "daemons_hours.h"   // T-519
 #include "main.h"
 #include "palette.h"
 #include "daemons_witching.h"   // T-480
@@ -979,6 +980,19 @@ static void Shimmer(void)
         return;
     if (!Witching_ShimmerNow())
     {
+        u8 glow = Hours_FollowerGlow();   // T-519: THE CREATOR'S HOUR's faint, steady gold instead
+
+        if (glow != 0)
+        {
+            if ((gMain.vblankCounter2 & 3) != 0 && sFollower.shimmer)
+                return;
+            idx = LoadFollowerPalette();
+            if (idx == 0xFF)
+                return;
+            Hours_GlowFadedInPlace(OBJ_PLTT_ID(idx), glow);
+            sFollower.shimmer = TRUE;
+            return;
+        }
         if (sFollower.shimmer)
         {
             sFollower.shimmer = FALSE;

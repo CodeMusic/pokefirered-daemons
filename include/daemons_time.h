@@ -11,10 +11,14 @@
 // The field tint that means "the watch's light" (after quest_log.h's QL_TINT_* 0-3).
 #define DAEMONS_TINT_WATCH 4
 
-extern u8 gDaemonsWatchOverride;   // DEBUG: 0 follows the clock, 1-4 is a watch + 1, 5-7 the witching hour
+extern u8 gDaemonsWatchOverride;   // DEBUG: 0 follows the clock, 1-4 is a watch + 1, 5-7 the witching hour, 8-10 the creator's hour (T-519)
 #define WATCH_OVERRIDE_WITCHING 5  // T-480: DEBUG's "3 AM" -- night, and the witching hour (3:00)
 #define WATCH_OVERRIDE_WITCHING_15 6   // T-486: DEBUG's "3:15 AM", the witching hour at a quarter past
 #define WATCH_OVERRIDE_WITCHING_30 7   // T-486: DEBUG's "3:30 AM", when OSRIC HATTER's clocks are right
+#define WATCH_OVERRIDE_WITCHING_LAST WATCH_OVERRIDE_WITCHING_30
+#define WATCH_OVERRIDE_CREATOR_RISE  8   // T-519: DEBUG's "4:28 AM", the creator's hour rising
+#define WATCH_OVERRIDE_CREATOR_FULL  9   // T-519: DEBUG's "4:48 AM", at full, in the tone's minutes
+#define WATCH_OVERRIDE_CREATOR_FALL 10   // T-519: DEBUG's "5:08 AM", resolving (dawn by the clock)
 extern u8 gDaemonsWeekdayOverride; // DEBUG (T-273): 0 follows the clock, 1-7 is Sunday..Saturday + 1
 
 #define WEEKDAY_COUNT 7
@@ -33,6 +37,7 @@ u8 DaemonsWatch(void);             // the watch the world is seen in (THE CONTRA
 u8 DaemonsTrueWatch(void);         // T-483: the clock's own watch, before any spell
 bool8 DaemonsIsWitchingHour(void);   // T-480
 s8 DaemonsWitchingMinute(void);      // T-486: 0-59 inside the witching hour (3:00-3:59), -1 outside it
+s16 DaemonsCreatorSecond(void);      // T-519: 0-2879 inside the creator's hour (4:24-5:11:59), -1 outside it
 u8 DaemonsWeekday(void);           // 0-6, Sunday first
 bool8 DaemonsWatchIsFromClock(void);
 void DaemonsDayAndMinute(u16 *day, u16 *minute);   // T-415

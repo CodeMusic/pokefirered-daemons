@@ -380,6 +380,7 @@ gSongTable::
 	song mus_grove_mecha, 0, 0
 	song mus_grove_compass, 0, 0
 	song mus_grove_clay, 0, 0
+	song se_aah_pad, 3, 3
 
 dummy_song_header:
 	.byte 0, 0, 0, 0

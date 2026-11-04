@@ -168,8 +168,10 @@ u16 DaemonsDayNumber(u16 year, u8 month, u8 day)
 // The watch the clock (or DEBUG's WATCH) keeps, before any spell has turned the light.
 u8 DaemonsTrueWatch(void)
 {
+    if (gDaemonsWatchOverride == WATCH_OVERRIDE_CREATOR_FALL)
+        return WATCH_DAWN;                  // T-519: 5:08 is dawn by the clock's hours
     if (gDaemonsWatchOverride >= WATCH_OVERRIDE_WITCHING)
-        return WATCH_NIGHT;                 // T-480: 3 AM is night (and 3:15 and 3:30, T-486)
+        return WATCH_NIGHT;                 // T-480: 3 AM is night (and 3:15 and 3:30, T-486; 4:28 and 4:48, T-519)
     if (gDaemonsWatchOverride)
         return (gDaemonsWatchOverride - 1) % WATCH_COUNT;
     ReadClock();
@@ -231,7 +233,7 @@ u16 DaemonsFeelingsNow(bool8 *fromClock)
 bool8 DaemonsIsWitchingHour(void)
 {
     if (gDaemonsWatchOverride)
-        return gDaemonsWatchOverride >= WATCH_OVERRIDE_WITCHING;
+        return gDaemonsWatchOverride >= WATCH_OVERRIDE_WITCHING && gDaemonsWatchOverride <= WATCH_OVERRIDE_WITCHING_LAST;
     ReadClock();
     return sWatchFromClock && sMinuteOfDay / 60 == 3;
 }
@@ -242,7 +244,7 @@ s8 DaemonsWitchingMinute(void)
 {
     if (gDaemonsWatchOverride)
     {
-        if (gDaemonsWatchOverride < WATCH_OVERRIDE_WITCHING)
+        if (gDaemonsWatchOverride < WATCH_OVERRIDE_WITCHING || gDaemonsWatchOverride > WATCH_OVERRIDE_WITCHING_LAST)
             return -1;
         return (gDaemonsWatchOverride - WATCH_OVERRIDE_WITCHING) * 15;
     }
@@ -250,6 +252,33 @@ s8 DaemonsWitchingMinute(void)
     if (!sWatchFromClock || sMinuteOfDay / 60 != 3)
         return -1;
     return sMinuteOfDay % 60;
+}
+
+// T-519: THE CREATOR'S HOUR (src/daemons_hours.c), 4:24 to 5:12 AM every day on the cartridge's own clock -- the
+// second of it, 0-2879, or -1 outside it (and without a clock: play time has no such hour, as it has no witching hour).
+// DEBUG's WATCH stands for 4:28, 4:48 and 5:08; any other forced watch holds it off.
+#define CREATOR_FIRST_MINUTE (4 * 60 + 24)
+#define CREATOR_MINUTES      48
+
+s16 DaemonsCreatorSecond(void)
+{
+    s16 minute;
+
+    if (gDaemonsWatchOverride)
+    {
+        if (gDaemonsWatchOverride == WATCH_OVERRIDE_CREATOR_RISE)
+            return 4 * 60;
+        if (gDaemonsWatchOverride == WATCH_OVERRIDE_CREATOR_FULL)
+            return 24 * 60;
+        if (gDaemonsWatchOverride == WATCH_OVERRIDE_CREATOR_FALL)
+            return 44 * 60;
+        return -1;
+    }
+    ReadClock();
+    minute = (s16)sMinuteOfDay - CREATOR_FIRST_MINUTE;
+    if (!sWatchFromClock || minute < 0 || minute >= CREATOR_MINUTES)
+        return -1;
+    return minute * 60 + sSecond;
 }
 
 // T-483: the pulse's clock -- the second of the day the cartridge's clock last said, and the frame it was read on;

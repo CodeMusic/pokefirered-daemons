@@ -1,7 +1,17 @@
 #include "global.h"
+#include "gpu_regs.h"
+#include "m4a.h"
 #include "main.h"
+#include "palette.h"
+#include "random.h"
+#include "sound.h"
+#include "sprite.h"
+#include "trig.h"
+#include "fieldmap.h"
+#include "overworld.h"
 #include "daemons_hours.h"
 #include "daemons_time.h"
+#include "constants/songs.h"
 
 // T-519 item 4: THE TWO HOURS (the user, 2026-11-02 and 2026-11-04, by multiple choice).
 //
@@ -10,15 +20,67 @@
 // smoothstep over two minutes up to wherever the clock has it, and from then on the clock alone. Passing into an hour
 // while playing is not a beginning: three minutes in, the catch-up is whole and the hour's own shape applies. What it
 // eases: the witching hour's glitch (daemons_glitch.c), its pulse over the map and the battle's ground
-// (daemons_pulse.c) and the party's shimmer (daemons_witching.c). The moment play began is one EWRAM word and a byte,
-// never saved, and lost on a reset as it should be.
+// (daemons_pulse.c) and the party's shimmer (daemons_witching.c); and all of the creator's hour, below. The moment play
+// began is one EWRAM word and a byte, never saved, and lost on a reset as it should be.
+//
+// THE CREATOR'S HOUR, every day on the cartridge's own clock (DaemonsCreatorSecond, daemons_time.c): a softer touch
+// than the witching hour's -- light, not noise. Nothing flickers; it rises over seven minutes, holds, and resolves over
+// the last seven, and only in the field (the overworld: never in battle, which it cannot change, and never in a save).
+//   - THE LIGHT: the hardware's brighten (BLDCNT effect 2) on the map's layers and the backdrop, BLDY 0 to 3 -- never
+//     BG0, which carries every text box and menu, so the words stay plain -- and a pale gold laid over the map's own
+//     palettes (rows 0-12; the pulse's path, so fades and weather stay underneath), breathing once every sixteen
+//     seconds. The brighten is taken only while BLDCNT is the field's own (not a fog's, a fade's, the FLASH's): it
+//     waits, and gives it back as it found it.
+//   - THE MOTES: up to six points of light rising slowly through the field like dust in a sunbeam, a few OAM sprites
+//     under BG0's priority, so a text box or a menu always covers them. They take a palette only when three are free.
+//   - THE FOLLOWER wears a faint steady gold instead of the witching shimmer (daemons_follower.c).
+//   - THE TONE, in the middle minutes only: a choir's sustained "aah" (voicegroup191's choir, GM 52) held on one soft
+//     note, on the third sound-effect player (the weather's, one track), faded in and out over thirty seconds. It
+//     plays only while the map's own music is what is playing -- never over a battle's or a scene's: it waits -- and
+//     never over the weather's sound, which it gives way to.
 
 #define FRAMES_PER_MINUTE   3584    // 59.73 frames a second
 #define CATCHUP_QUIET       FRAMES_PER_MINUTE
 #define CATCHUP_EASE        (2 * FRAMES_PER_MINUTE)
 
+// The hour's shape, in seconds from its first: a seven-minute rise, a hold, a seven-minute resolve.
+#define CREATOR_SECONDS     (48 * 60)
+#define CREATOR_EDGE        (7 * 60)
+// The tone's minutes, the middle seven (4:44:30 to 4:51:30): fading in from the first second, out to the last.
+#define TONE_FIRST          (20 * 60 + 30)
+#define TONE_LAST           (27 * 60 + 30)
+#define TONE_FADE           (30 * 60)        // thirty seconds, in frames (near enough)
+#define TONE_FADE_FAST      32               // a step a frame when it must give way: about a second
+
+#define BREATH_FRAMES       956              // sixteen seconds
+
+// The field's own BLDCNT (overworld.c's InitOverworldGraphicsRegisters): no first target, its layers and the sprites
+// as the second, so a semi-transparent sprite (a reflection) blends onto the map. The bloom keeps those second targets
+// -- a semi-transparent sprite still blends, whatever the effect -- and brightens BG1-3 and the backdrop.
+#define FIELD_BLDCNT (BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ | BLDCNT_EFFECT_BLEND)
+#define BLOOM_BLDCNT (BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ \
+                    | BLDCNT_TGT1_BG1 | BLDCNT_TGT1_BG2 | BLDCNT_TGT1_BG3 | BLDCNT_TGT1_BD | BLDCNT_EFFECT_LIGHTEN)
+// The field's WIN0 covers the whole screen (the FLASH's circle is WIN0 too) with its colour effects off: the bloom
+// turns them on inside the windows only -- so a dark cave outside its FLASH circle stays dark.
+#define FIELD_WININ  (WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ)
+#define BLOOM_WININ  (FIELD_WININ | WININ_WIN0_CLR | WININ_WIN1_CLR)
+#define BLOOM_MAX_Y         3
+#define GOLD                RGB(31, 26, 15)
+#define TINT_BASE           20               // 256ths of gold at full, plus up to TINT_BREATH with the breath
+#define TINT_BREATH         16
+#define GLOW_MAX            3                // the follower's sixteenths
+
+#define MOTES_MAX           6
+#define MOTE_TAG            0x5190
+#define MOTE_EVERY          40               // a new mote at most every 40 frames
+#define MOTE_PALETTES_FREE  3                // take a palette only when this many are free
+
 static EWRAM_DATA u32 sPlayBeganAt = 0;
 static EWRAM_DATA bool8 sPlayBegan = FALSE;
+static EWRAM_DATA bool8 sBloomOwned = FALSE;
+static EWRAM_DATA bool8 sSe3Dirty = FALSE;
+static EWRAM_DATA u16 sToneLevel = 0;
+static EWRAM_DATA u16 sToneVolume = 0;
 
 //  ---------------------------------------------------------------- the catch-up
 
@@ -61,4 +123,338 @@ u16 Hours_WitchingEase(void)
     if (!DaemonsIsWitchingHour())
         return 256;
     return Hours_CatchUp();
+}
+
+//  ---------------------------------------------------------------- the creator's hour
+
+u16 Hours_CreatorStrength(void)
+{
+    s16 second = DaemonsCreatorSecond();
+    u16 shape;
+
+    if (second < 0)
+        return 0;
+    if (second < CREATOR_EDGE)
+        shape = Smooth(second, CREATOR_EDGE);
+    else if (second >= CREATOR_SECONDS - CREATOR_EDGE)
+        shape = Smooth(CREATOR_SECONDS - second, CREATOR_EDGE);
+    else
+        shape = 256;
+    return shape * Hours_CatchUp() / 256;
+}
+
+// The breath, 0-256 and back every sixteen seconds, eased at the turns.
+static u16 Breath(void)
+{
+    u32 p = gMain.vblankCounter2 % BREATH_FRAMES;
+
+    if (p >= BREATH_FRAMES / 2)
+        p = BREATH_FRAMES - p;
+    return Smooth(p, BREATH_FRAMES / 2);
+}
+
+// The field, as the player sees it: the overworld itself, not HALFTONE (grey outranks every light but the bloom's).
+static u16 FieldStrength(bool8 *grey)
+{
+    *grey = DaemonsIsHalftone();
+    if (!DaemonsFieldOnScreen())
+        return 0;
+    return Hours_CreatorStrength();
+}
+
+bool8 Hours_CreatorTint(u16 *colour, u8 *weight)
+{
+    bool8 grey;
+    u16 s = FieldStrength(&grey);
+
+    if (s == 0 || grey)
+        return FALSE;
+    *colour = GOLD;
+    *weight = s * (TINT_BASE + TINT_BREATH * Breath() / 256) / 256;
+    return *weight != 0;
+}
+
+u8 Hours_FollowerGlow(void)
+{
+    bool8 grey;
+    u16 s = FieldStrength(&grey);
+
+    if (grey)
+        return 0;
+    return (s * GLOW_MAX + 128) / 256;
+}
+
+void Hours_GlowFadedInPlace(u16 palOffset, u8 weight)
+{
+    s32 i, tr = GET_R(GOLD), tg = GET_G(GOLD), tb = GET_B(GOLD);
+
+    for (i = 1; i < 16; i++)   // 0 is the transparent colour
+    {
+        u16 c = gPlttBufferFaded[palOffset + i];
+        s32 r = GET_R(c), g = GET_G(c), b = GET_B(c);
+
+        r += ((tr - r) * weight) >> 4;
+        g += ((tg - g) * weight) >> 4;
+        b += ((tb - b) * weight) >> 4;
+        gPlttBufferFaded[palOffset + i] = RGB(r, g, b);
+    }
+}
+
+//  ---------------------------------------------------------------- the bloom
+
+static void Bloom(u16 s)
+{
+    u16 y = (s * BLOOM_MAX_Y + 128) / 256;
+    u16 now = GetGpuReg(REG_OFFSET_BLDCNT), win = GetGpuReg(REG_OFFSET_WININ);
+    bool8 ours = (now == BLOOM_BLDCNT);
+
+    if (gPaletteFade.active || gPaletteFade.y != 0)
+        y = 0;                                  // a fade to black stays black
+    if (!DaemonsFieldOnScreen())
+    {
+        // Left for a battle, the BAG, a screen of its own: the brighten let go at once (BLDY 0 changes nothing), and
+        // the field sets its own registers again when it comes back.
+        if (sBloomOwned && ours)
+            SetGpuReg(REG_OFFSET_BLDY, 0);
+        sBloomOwned = FALSE;
+        return;
+    }
+    if ((now != FIELD_BLDCNT && !ours) || (win != FIELD_WININ && win != BLOOM_WININ))
+    {
+        sBloomOwned = FALSE;                    // a fog, a fade, the HELP: theirs, untouched -- it waits
+        return;
+    }
+    if (y == 0)
+    {
+        if (sBloomOwned || ours)
+        {
+            SetGpuReg(REG_OFFSET_BLDCNT, FIELD_BLDCNT);
+            SetGpuReg(REG_OFFSET_WININ, FIELD_WININ);
+            SetGpuReg(REG_OFFSET_BLDY, 0);
+        }
+        sBloomOwned = FALSE;
+        return;
+    }
+    if (!ours)
+        SetGpuReg(REG_OFFSET_BLDCNT, BLOOM_BLDCNT);
+    if (win != BLOOM_WININ)
+        SetGpuReg(REG_OFFSET_WININ, BLOOM_WININ);
+    SetGpuReg(REG_OFFSET_BLDY, y);
+    sBloomOwned = TRUE;
+}
+
+//  ---------------------------------------------------------------- the motes
+
+static const u32 sMoteTiles[] = {
+    0x00000000, 0x00000000, 0x00000000, 0x00002000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
+    0x00000000, 0x00000000, 0x00001000, 0x00013100, 0x00001000, 0x00000000, 0x00000000, 0x00000000,
+    0x00000000, 0x00001000, 0x00012100, 0x00123210, 0x00012100, 0x00001000, 0x00000000, 0x00000000,
+};
+
+static const u16 sMotePalette[16] = { RGB(0, 0, 0), RGB(24, 18, 6), RGB(30, 25, 12), RGB(31, 30, 22) };
+
+static const struct SpriteSheet sMoteSheet = { sMoteTiles, sizeof(sMoteTiles), MOTE_TAG };
+static const struct SpritePalette sMoteSpritePalette = { sMotePalette, MOTE_TAG };
+
+static const struct OamData sMoteOam = {
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .shape = SPRITE_SHAPE(8x8),
+    .size = SPRITE_SIZE(8x8),
+    .priority = 1,                              // under BG0: a text box or a menu covers it
+};
+
+static void SpriteCB_Mote(struct Sprite *sprite);
+
+static const struct SpriteTemplate sMoteTemplate = {
+    .tileTag = MOTE_TAG,
+    .paletteTag = MOTE_TAG,
+    .oam = &sMoteOam,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_Mote,
+};
+
+#define mAge   data[0]
+#define mLife  data[1]
+#define mX     data[2]
+#define mPhase data[3]
+#define mY16   data[4]
+#define mTile  data[5]
+
+static void SpriteCB_Mote(struct Sprite *sprite)
+{
+    s16 age = ++sprite->mAge, left = sprite->mLife - age;
+    u8 frame;
+
+    sprite->mY16 -= 4;                          // a quarter of a pixel a frame: fifteen a second
+    sprite->mPhase = (sprite->mPhase + 1) & 0xFF;
+    sprite->x = sprite->mX + Sin(sprite->mPhase, 6);
+    sprite->y = sprite->mY16 >> 4;
+    if (left <= 0 || sprite->y < -8)
+    {
+        DestroySprite(sprite);
+        return;
+    }
+    if (age < 45 || left < 45)
+        frame = 0;
+    else if (age < 90 || left < 90)
+        frame = 1;
+    else
+        frame = 2;
+    sprite->oam.tileNum = sprite->mTile + frame;
+}
+
+static u8 CountMotes(void)
+{
+    u8 i, n = 0;
+
+    for (i = 0; i < MAX_SPRITES; i++)
+        if (gSprites[i].inUse && gSprites[i].callback == SpriteCB_Mote)
+            n++;
+    return n;
+}
+
+static u8 FreeSpritePalettes(void)
+{
+    u8 i, n = 0;
+
+    for (i = gReservedSpritePaletteCount; i < 16; i++)
+        if (GetSpritePaletteTagByPaletteNum(i) == TAG_NONE)
+            n++;
+    return n;
+}
+
+static void Motes(u16 s, bool8 grey)
+{
+    u8 want, have, spriteId;
+    struct Sprite *sprite;
+
+    if (!DaemonsFieldOnScreen() || (gMain.vblankCounter2 % MOTE_EVERY) != 0)
+        return;
+    want = grey ? 0 : (s * MOTES_MAX + 128) / 256;
+    have = CountMotes();
+    // A reset of the field's sprites (a battle, the BAG) takes the motes and their tiles; they are asked for again.
+    // The last one gone with the hour, its tiles and palette are given back.
+    if (want == 0 || have >= want)
+    {
+        if (want == 0 && have == 0)
+        {
+            if (GetSpriteTileStartByTag(MOTE_TAG) != 0xFFFF)
+                FreeSpriteTilesByTag(MOTE_TAG);
+            if (IndexOfSpritePaletteTag(MOTE_TAG) != 0xFF)
+                FreeSpritePaletteByTag(MOTE_TAG);
+        }
+        return;
+    }
+    if (gPaletteFade.active)
+        return;
+    if (IndexOfSpritePaletteTag(MOTE_TAG) == 0xFF)
+    {
+        if (FreeSpritePalettes() < MOTE_PALETTES_FREE)
+            return;
+        if (LoadSpritePalette(&sMoteSpritePalette) == 0xFF)
+            return;
+    }
+    if (GetSpriteTileStartByTag(MOTE_TAG) == 0xFFFF)
+    {
+        LoadSpriteSheet(&sMoteSheet);
+        if (GetSpriteTileStartByTag(MOTE_TAG) == 0xFFFF)
+            return;
+    }
+    spriteId = CreateSprite(&sMoteTemplate, 0, 0, 0xFF);
+    if (spriteId == MAX_SPRITES)
+        return;
+    sprite = &gSprites[spriteId];
+    sprite->mLife = 360 + Random() % 180;       // six to nine seconds
+    sprite->mX = 8 + Random() % (DISPLAY_WIDTH - 16);
+    sprite->mPhase = Random() & 0xFF;
+    sprite->mY16 = (140 + Random() % 20) << 4;  // from low on the screen, like light under a door
+    sprite->mTile = GetSpriteTileStartByTag(MOTE_TAG);
+    sprite->x = sprite->mX;
+    sprite->y = sprite->mY16 >> 4;
+    sprite->oam.tileNum = sprite->mTile;
+}
+
+//  ---------------------------------------------------------------- the tone
+
+static bool8 ToneIsPlaying(void)
+{
+    return (gMPlayInfo_SE3.status & MUSICPLAYER_STATUS_TRACK) && !(gMPlayInfo_SE3.status & MUSICPLAYER_STATUS_PAUSE)
+        && gMPlayInfo_SE3.songHeader == gSongTable[SE_AAH_PAD].header;
+}
+
+// The map's own music is what is playing: not a battle's, not a scene's.
+static bool8 MapMusicPlaying(void)
+{
+    u16 song = GetCurrentMapMusic();
+
+    if (gMain.inBattle || song == 0 || song == MUS_NONE || song > SE_AAH_PAD)
+        return FALSE;
+    return (gMPlayInfo_BGM.status & MUSICPLAYER_STATUS_TRACK) && gMPlayInfo_BGM.songHeader == gSongTable[song].header;
+}
+
+static void Tone(void)
+{
+    s16 second = DaemonsCreatorSecond();
+    bool8 allowed = MapMusicPlaying();
+    bool8 want = allowed && second >= TONE_FIRST && second < TONE_LAST - 30 && Hours_CatchUp() != 0;
+    u16 volume;
+
+    if (want)
+    {
+        if (sToneLevel < TONE_FADE)
+            sToneLevel++;
+    }
+    else if (sToneLevel != 0)
+    {
+        u16 step = allowed ? 1 : TONE_FADE_FAST;
+
+        sToneLevel = sToneLevel > step ? sToneLevel - step : 0;
+    }
+
+    if (ToneIsPlaying())
+    {
+        if (sToneLevel == 0)
+        {
+            m4aMPlayStop(&gMPlayInfo_SE3);
+            m4aMPlayVolumeControl(&gMPlayInfo_SE3, TRACKS_ALL, 256);
+            sSe3Dirty = FALSE;
+            return;
+        }
+    }
+    else
+    {
+        if (sSe3Dirty)
+        {
+            // the weather took the player: its sound at its own volume
+            m4aMPlayVolumeControl(&gMPlayInfo_SE3, TRACKS_ALL, 256);
+            sSe3Dirty = FALSE;
+        }
+        if (sToneLevel == 0 || ((gMPlayInfo_SE3.status & MUSICPLAYER_STATUS_TRACK)
+                             && !(gMPlayInfo_SE3.status & MUSICPLAYER_STATUS_PAUSE)))
+            return;                             // nothing wanted, or the weather is sounding: it waits
+        m4aSongNumStart(SE_AAH_PAD);
+        sToneVolume = 0xFFFF;
+    }
+    volume = (u32)sToneLevel * 256 / TONE_FADE * Hours_CatchUp() / 256;
+    if (volume != sToneVolume)
+    {
+        m4aMPlayVolumeControl(&gMPlayInfo_SE3, TRACKS_ALL, volume);
+        sToneVolume = volume;
+        sSe3Dirty = TRUE;
+    }
+}
+
+//  ---------------------------------------------------------------- once a frame
+
+void Hours_Tick(void)
+{
+    bool8 grey;
+    u16 s = FieldStrength(&grey);
+
+    Bloom(s);
+    Motes(s, grey);
+    Tone();
 }

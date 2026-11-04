@@ -1021,6 +1021,7 @@ SECTIONS {
         sound/songs/midi/mus_grove_mecha.o(.rodata);
         sound/songs/midi/mus_grove_compass.o(.rodata);
         sound/songs/midi/mus_grove_clay.o(.rodata);
+        sound/songs/midi/se_aah_pad.o(.rodata);
     } > ROM =0
 
     lib_rodata :

@@ -19,6 +19,7 @@
 #include "sloopsvc.h"
 #include "daemons_rtc.h"
 #include "daemons_pulse.h"   // T-483
+#include "daemons_hours.h"   // T-519
 
 extern u32 intr_main[];
 
@@ -219,6 +220,7 @@ void AgbMain()
         DaemonsHalftoneTick();       // T-430: the first sight, a tower floor's return, a splash
         DaemonsGreyHalftoneFrame();
         Pulse_Tick();                // T-483: whether the world is breathing this frame, and in what colour
+        Hours_Tick();                // T-519: the creator's hour's bloom, motes and tone
         WaitForVBlank();
     }
 }

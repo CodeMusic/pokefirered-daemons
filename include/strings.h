@@ -759,6 +759,9 @@ extern const u8 gText_DbgWatchDawn[];
 extern const u8 gText_DbgWatchWitching[];
 extern const u8 gText_DbgWatchWitching15[];   // T-486
 extern const u8 gText_DbgWatchWitching30[];
+extern const u8 gText_DbgWatchCreatorRise[];
+extern const u8 gText_DbgWatchCreatorFull[];
+extern const u8 gText_DbgWatchCreatorFall[];
 extern const u8 gText_DbgMenuBack[];
 extern const u8 gStartMenuDesc_DbgHeal[];
 extern const u8 gStartMenuDesc_DbgMart[];
