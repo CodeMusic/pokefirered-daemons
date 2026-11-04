@@ -1,6 +1,7 @@
 #include "global.h"
 #include "daemons_glitch.h"
 #include "daemons_time.h"
+#include "daemons_hours.h"   // T-519
 
 // T-485 (the user, 2026-10-29; bible 4.39): OSRIC HATTER's house on QUICKSILVER, the leaning top hat on the south
 // sand. Inside every clock is stopped at half past three, so from 3:30 to 3:59 by the cartridge's clock his clocks are
@@ -21,8 +22,8 @@ bool8 Hatter_ClocksAreRight(void)
 // (over in 12 frames at most: the script then waits 16, and does not wait at all when it is FALSE)
 bool8 Hatter_Glitch(void)
 {
-    if (DaemonsWitchingMinute() < 0)
-        return FALSE;
+    if (DaemonsWitchingMinute() < 0 || Hours_WitchingEase() == 0)
+        return FALSE;   // T-519: and not in play's first minute -- the catch-up has not begun
     Glitch_Start(2, HATTER_MAP_PALETTES, Glitch_StrengthNow());
     return Glitch_IsRunning();
 }

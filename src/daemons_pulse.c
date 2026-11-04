@@ -9,6 +9,7 @@
 #include "daemons_hermetic.h"
 #include "daemons_pulse.h"
 #include "daemons_spellbook.h"   // T-483 (5): THE MIRROR's colour
+#include "daemons_hours.h"       // T-519: the catch-up
 
 // T-483 / T-482: THE PULSE (the user, 2026-10-29; bible 4.39). One breath for the app, the watches and the game, so
 // boards side by side and a cartridge beside them breathe together: CONTENT's red to CONTEXT's blue through THE SUBTLE
@@ -141,7 +142,7 @@ void Pulse_Tick(void)
 {
     u32 mask = 0;
     u16 mirror;
-    bool8 mirrored = FALSE;
+    bool8 mirrored = FALSE, eased = FALSE;
 
     if (DaemonsFieldOnScreen())
     {
@@ -150,22 +151,25 @@ void Pulse_Tick(void)
         if (!DaemonsIsHalftone() && Spellbook_MirrorWash(&mirror))
             mask = BG_ROWS(0, 12), mirrored = TRUE;
         else if (Hermetic_WorldPulses() && !DaemonsIsHalftone())
-            mask = BG_ROWS(0, 12);
+            mask = BG_ROWS(0, 12), eased = TRUE;
     }
     else if (gMain.inBattle && gMain.callback2 == BattleMainCB2)
     {
         // T-482: the battle's ground (battle_bg.c loads the terrain into BG palettes 2-4); the battlers keep theirs.
         if (Hermetic_BattlePulses() && !(gBattleTypeFlags & BATTLE_TYPE_LINK) && !DaemonsIsHalftone())
-            mask = BG_ROWS(2, 4);
+            mask = BG_ROWS(2, 4), eased = TRUE;
     }
     sPulseMask = mask;
     if (mask == 0)
         return;
     sPulseColour = mirrored ? mirror : Pulse_Now();
     sPulseWeight = PULSE_BG_WEIGHT;
+    // T-519: the witching hour's pulse eased by the catch-up when play began inside it (not all Halloween's).
+    if (eased && !Hermetic_IsHalloween())
+        sPulseWeight = sPulseWeight * Hours_WitchingEase() / 256;
     // A fade takes the pulse with it, so a fade to black is black and the field comes back into the breath.
     if (gPaletteFade.active || gPaletteFade.y != 0)
-        sPulseWeight = PULSE_BG_WEIGHT * (16 - min(gPaletteFade.y, 16)) / 16;
+        sPulseWeight = sPulseWeight * (16 - min(gPaletteFade.y, 16)) / 16;
 }
 
 void Pulse_ApplyToPltt(void)

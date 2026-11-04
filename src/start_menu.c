@@ -112,6 +112,7 @@ enum StartMenuOption
     STARTMENU_DBG_SONG,
     STARTMENU_DBG_SFX,
     STARTMENU_DBG_GLITCH,    // goal B: the glitch, placed nowhere yet
+    STARTMENU_DBG_CATCHUP,   // T-519: as if play began now -- the hours' effects catch up again
     STARTMENU_DBG_HARP,      // T-417: the instruments' notes, three octaves of bend
     STARTMENU_DBG_FLUTE,
     STARTMENU_DBG_BACK,
@@ -207,6 +208,7 @@ static bool8 DbgHandleStepInput(void);
 static bool8 DbgSongCallback(void);
 static bool8 DbgWatchCallback(void);
 static bool8 DbgGlitchCallback(void);
+static bool8 DbgCatchUpCallback(void);   // T-519
 static bool8 DbgHarpCallback(void);    // T-417
 static bool8 DbgFluteCallback(void);
 static void DbgRelight(void);
@@ -292,6 +294,7 @@ static const struct MenuAction sStartMenuActionTable[] = {
     [STARTMENU_DBG_SONG] = { gText_DbgMenuSong, {.u8_void = DbgSongCallback} },
     [STARTMENU_DBG_SFX]  = { gText_DbgMenuSfx,  {.u8_void = DbgSfxCallback} },
     [STARTMENU_DBG_GLITCH] = { gText_DbgMenuGlitch, {.u8_void = DbgGlitchCallback} },
+    [STARTMENU_DBG_CATCHUP] = { gText_DbgMenuCatchUp, {.u8_void = DbgCatchUpCallback} },   // T-519
     [STARTMENU_DBG_HARP]   = { gText_DbgMenuHarp,   {.u8_void = DbgHarpCallback} },    // T-417
     [STARTMENU_DBG_FLUTE]  = { gText_DbgMenuFlute,  {.u8_void = DbgFluteCallback} },
     [STARTMENU_DBG_BACK] = { gText_DbgMenuBack, {.u8_void = DbgBackCallback} }
@@ -359,6 +362,7 @@ static const u8 *const sStartMenuDescPointers[] = {
     gStartMenuDesc_DbgSong,
     gStartMenuDesc_DbgSfx,
     gStartMenuDesc_DbgGlitch,
+    gStartMenuDesc_DbgCatchUp,  // T-519
     gStartMenuDesc_DbgHarp,     // T-417
     gStartMenuDesc_DbgFlute,
     gStartMenuDesc_DbgBack,
@@ -502,6 +506,7 @@ static void SetUpStartMenu(void)
         AppendToStartMenuItems(STARTMENU_DBG_SONG);
         AppendToStartMenuItems(STARTMENU_DBG_SFX);
         AppendToStartMenuItems(STARTMENU_DBG_GLITCH);
+        AppendToStartMenuItems(STARTMENU_DBG_CATCHUP);   // T-519: the seventh row
         AppendToStartMenuItems(STARTMENU_DBG_HARP);    // T-417
         AppendToStartMenuItems(STARTMENU_DBG_FLUTE);
         AppendToStartMenuItems(STARTMENU_DBG_BACK);
@@ -748,6 +753,7 @@ static s8 PrintStartMenuItems(s8 *cursor_p, u8 nitems)
 //  choice) THINNED it: the frame keeps its style's own colours, the day goes on its eight inner-corner pixels only, and
 //  the hour and a holiday join it (src/daemons_calendar_pane.c, after the frame's palette loads).
 #include "daemons_calendar_pane.h"
+#include "daemons_hours.h"   // T-519
 #define MENU_FRAME_PALETTE_NUM 14   // STD_WINDOW_PALETTE_NUM, private to new_menu_helpers.c
 
 static s8 DoDrawStartMenu(void)
@@ -1560,6 +1566,15 @@ static bool8 DbgFirPortCallback(void)
 static bool8 DbgGlitchCallback(void)
 {
     return DbgLeaveMenuForScript(DaemonsDebug_EventScript_Glitch);
+}
+
+//  T-519: play begins again, as far as the hours know -- a quiet minute, then two of easing up to the clock's level.
+//  With TIME on a witching or creator's minute, this is a load inside the hour without a load.
+static bool8 DbgCatchUpCallback(void)
+{
+    Hours_DebugRestart();
+    PlaySE(SE_SELECT);
+    return DbgRedraw();
 }
 
 static bool8 DbgWitnessCallback(void)

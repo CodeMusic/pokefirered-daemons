@@ -13,6 +13,7 @@
 #include "daemons_witching.h"
 #include "daemons_pulse.h"      // T-483: the shimmer breathes on the pulse
 #include "daemons_hermetic.h"   // T-483
+#include "daemons_hours.h"      // T-519: the catch-up
 #include "constants/battle.h"
 #include "constants/flags.h"
 #include "constants/hold_effects.h"
@@ -77,9 +78,15 @@ u16 Witching_MoveForSpecies(u16 species)
     return MOVE_WITCHING_FIRST + type;
 }
 
+// T-519: the hour's shimmer eased by the catch-up when play began inside it (all Halloween's, with the book, is not
+// the hour's, and is not eased).
 u8 Witching_ShimmerWeight(void)
 {
-    return sShimmerWeights[(gMain.vblankCounter2 >> 2) & 15];
+    u8 weight = sShimmerWeights[(gMain.vblankCounter2 >> 2) & 15];
+
+    if (Hermetic_Held() && Hermetic_IsHalloween())
+        return weight;
+    return weight * Hours_WitchingEase() / 256;
 }
 
 // The faded colours, blended toward the purple where they stand -- for the field, whose faded palette carries the

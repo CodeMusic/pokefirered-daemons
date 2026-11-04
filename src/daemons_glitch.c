@@ -6,6 +6,7 @@
 #include "task.h"
 #include "daemons_glitch.h"
 #include "daemons_time.h"
+#include "daemons_hours.h"   // T-519: the catch-up
 
 // T-486 (the user, 2026-10-29; bible 4.39): THE HERMETIC LAYER is the one place DAEMONS glitches on purpose -- the
 // first page turned past OSRIC HATTER's warning (once a save, FLAG_HERMETIC_GLITCHED; book_reader.c), and, once T-485
@@ -109,17 +110,20 @@ void Glitch_Start(u8 bg, u16 palettes, u8 strength)
 
 // T-486: the strength for now -- the witching hour's minute on the curve, and the weakest outside it (the book's
 // warning page glitches once a save, so it must still happen at any hour of the night).
+// T-519: inside the hour, eased by the catch-up -- the weakest in play's first minute, the clock's after its third.
 u8 Glitch_StrengthNow(void)
 {
     s8 minute = DaemonsWitchingMinute();
     s8 off;
+    u8 clock;
 
     if (minute < 0)
         return GLITCH_WEAKEST;
     off = minute - 30;
     if (off < 0)
         off = -off;
-    return GLITCH_STRONGEST - off * 5 / 2;                               // 100 at :30, 25 at :00, 28 at :59
+    clock = GLITCH_STRONGEST - off * 5 / 2;                              // 100 at :30, 25 at :00, 28 at :59
+    return GLITCH_WEAKEST + (clock - GLITCH_WEAKEST) * Hours_WitchingEase() / 256;
 }
 
 bool8 Glitch_IsRunning(void)

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "daemons_hours.h"   // T-519
 #include "daemons_holidays.h"   // T-416 P4
 #include "book_reader.h"
 #include "gflib.h"
@@ -1655,6 +1656,7 @@ void CB2_NewGame(void)
     NewGameInitData();
     ResetInitialPlayerAvatarState();
     PlayTimeCounter_Start();
+    Hours_PlayBegan();          // T-519: the hours' effects catch up from here
     ScriptContext_Init();
     UnlockPlayerFieldControls();
     gFieldCallback = FieldCB_WarpExitFadeFromBlack;
@@ -1868,6 +1870,7 @@ void CB2_ContinueSavedGame(void)
     Overworld_ResetStateOnContinue();
     InitMapFromSavedGame();
     PlayTimeCounter_Start();
+    Hours_PlayBegan();          // T-519: power on or a soft reset -- the hours' effects catch up from here
     ScriptContext_Init();
     UnlockPlayerFieldControls();
     gFieldCallback2 = NULL;
