@@ -256,7 +256,6 @@ bool8 Witching_PpReduce(s32 ppToDeduct)
         gBattleStruct->witchPpUsed[slot / 2] &= ~(0xF << ((slot & 1) * 4));
         gBattleStruct->witchPpUsed[slot / 2] |= used << ((slot & 1) * 4);
         Three_OnMoveUsed(b, gCurrentMove);
-        Hermetic_OnWitchingRoutine();   // T-483: the first time, with the GUIDE and THE SUBTLE LAYER held, the book comes
     }
     gHitMarker &= ~HITMARKER_NO_PPDEDUCT;
     gBattlescriptCurrInstr++;

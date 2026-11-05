@@ -76,3 +76,13 @@ CinnabarIsland_HattersHouse_Text_HalfPastThree::
 CinnabarIsland_HattersHouse_Text_NothingBroke::
     .string "There. Nothing broke.\n"
     .string "It only showed you where it bends.$"
+
+@  T-519 item 2: the night half, handed over (the brief: it is found here, needing no other book). DRAFT.
+CinnabarIsland_HattersHouse_Text_TheBook::
+    .string "(to you, for once) You came for\n"
+    .string "the book. Everyone does, at last.\p"
+    .string "I only read it. Here, at night,\n"
+    .string "with the clocks stopped. It was\l"
+    .string "never mine.\p"
+    .string "Take it. It reads only by night,\n"
+    .string "and only from the one side.$"

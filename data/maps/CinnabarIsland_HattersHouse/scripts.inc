@@ -9,6 +9,8 @@
 @    - from 3:30 to 3:59 by the clock, when his clocks are right, C instead of everything, the glitch between its
 @      second and third boxes (T-486), and no counter moves.
 @  And every entry from 3:00 to 3:59 glitches once, at that minute's strength (T-486; src/daemons_hatter.c).
+@  T-519 item 2 (the brief): THE HERMETIC LAYER, the torn book's night half, is FOUND here -- at any hour, needing no
+@  other book. Without it, every talk ends with OSRIC handing it over (after the riddle, or after 3:30's lines).
 
 CinnabarIsland_HattersHouse_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, CinnabarIsland_HattersHouse_OnFrame
@@ -53,8 +55,18 @@ CinnabarIsland_HattersHouse_EventScript_Riddles::
 	call_if_eq VAR_TEMP_3, 1, CinnabarIsland_HattersHouse_EventScript_B1
 	call_if_eq VAR_TEMP_3, 2, CinnabarIsland_HattersHouse_EventScript_B2
 	call_if_eq VAR_TEMP_3, 3, CinnabarIsland_HattersHouse_EventScript_B3
+	call CinnabarIsland_HattersHouse_EventScript_TheBook
 	release
 	end
+
+@  T-519 item 2: the night half, handed over once. DRAFT.
+CinnabarIsland_HattersHouse_EventScript_TheBook::
+	goto_if_set FLAG_GOT_HERMETIC_LAYER, CinnabarIsland_HattersHouse_EventScript_HasTheBook
+	msgbox CinnabarIsland_HattersHouse_Text_TheBook
+	giveitem ITEM_HERMETIC_LAYER
+	setflag FLAG_GOT_HERMETIC_LAYER
+CinnabarIsland_HattersHouse_EventScript_HasTheBook::
+	return
 
 CinnabarIsland_HattersHouse_EventScript_RiddlesRoundAgain::
 	setvar VAR_OSRIC_RIDDLE, 0
@@ -98,5 +110,6 @@ CinnabarIsland_HattersHouse_EventScript_HalfPastThree::
 	specialvar VAR_RESULT, Hatter_Glitch
 	call_if_eq VAR_RESULT, TRUE, CinnabarIsland_HattersHouse_EventScript_WaitForGlitch
 	msgbox CinnabarIsland_HattersHouse_Text_NothingBroke
+	call CinnabarIsland_HattersHouse_EventScript_TheBook
 	release
 	end

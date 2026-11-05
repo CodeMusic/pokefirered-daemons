@@ -180,8 +180,8 @@ Text_SpellbookByDay::
 	.string "The SPELLBOOK's ink is dry. It is\n"
 	.string "still light, and spells wait for night.$"
 
-@ T-483: the book arrives -- the first daemon to use its hour's routine with both other books held, or a SYNC from the
-@ companion. Said once, in the field, the next second the player has the controls.
+@ T-483: the book arrives -- a SYNC from the companion set its flag (T-519 item 2: OSRIC HATTER hands it over in the game;
+@ the old witching-routine unlock is gone). Said once, in the field, the next second the player has the controls.
 EventScript_HermeticArrives::
 	lockall
 	msgbox Text_HermeticArrives

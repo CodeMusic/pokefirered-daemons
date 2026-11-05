@@ -11,7 +11,6 @@ bool8 Hermetic_BattlePulses(void);      // T-482: the hour with THE SUBTLE LAYER
 bool8 Hermetic_HandlessClock(void);     // every clock face without its hands
 bool8 Hermetic_IsNight(void);           // specialvar: the book is read only at night
 
-void Hermetic_OnWitchingRoutine(void);  // a daemon has used its hour's routine (daemons_witching.c)
 const u8 *Hermetic_Arrival(void);       // once a second in the field: the book arrives in the bag, once
 
 // Halloween's costume: the species the follower goes as today, or SPECIES_NONE (no book, not Halloween, unmasked,

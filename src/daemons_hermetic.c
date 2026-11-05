@@ -25,11 +25,12 @@
 // game's night watch, whichever clock is keeping it (Hermetic_IsNight); by day the bag says so and it stays shut.
 //
 // THE UNLOCK, two ways, one flag (FLAG_GOT_HERMETIC_LAYER):
-//   - in the game, the first time a daemon uses its witching-hour routine (T-480) while the save holds the GUIDE and
-//     THE SUBTLE LAYER (Hermetic_OnWitchingRoutine, from daemons_witching.c's Witching_PpReduce);
-//   - from the companion, which writes the flag at a SYNC (C-238).
-// Either way only the flag is set; the book itself arrives in the field (Hermetic_Arrival, once a second, from
-// overworld.c), with one DRAFT line -- so the book appears however the flag came to be set, and only once.
+//   - in the game, at OSRIC HATTER's house on QUICKSILVER, at any hour: he hands it over at the end of a talk
+//     (data/maps/CinnabarIsland_HattersHouse). T-519 item 2 (the brief): no book needs another and no hour is a gate,
+//     so the old unlock -- a daemon's witching-hour routine with the GUIDE and THE SUBTLE LAYER held -- is gone;
+//   - from the companion, which writes the flag at a SYNC (C-238). Then only the flag is set, and the book arrives in
+//     the field (Hermetic_Arrival, once a second, from overworld.c) with one DRAFT line -- so it appears however the
+//     flag came to be set, and only once.
 //
 // THE PULSE (src/daemons_pulse.c): with the book held, from 3:00 to 4:00 AM on the clock (DaemonsIsWitchingHour) the
 // map breathes red to blue through purple, and all of Halloween too. THE HANDLESS CLOCK in the same window: the
@@ -74,12 +75,6 @@ bool8 Hermetic_HandlessClock(void)
 bool8 Hermetic_IsNight(void)
 {
     return DaemonsTrueWatch() == WATCH_NIGHT;
-}
-
-void Hermetic_OnWitchingRoutine(void)
-{
-    if (!Hermetic_Held() && FlagGet(FLAG_GOT_GUIDE) && FlagGet(FLAG_GOT_SUBTLE_LAYER))
-        FlagSet(FLAG_GOT_HERMETIC_LAYER);
 }
 
 static const u8 *TreatLeft(void);
