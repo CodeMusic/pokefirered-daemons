@@ -1120,10 +1120,11 @@ static const struct LayerBook *Layer(void)
 }
 
 //  T-519 item 2: THE EUDAIMON LAYER has no CARDS section of its own yet (the dawn readings of the two decks are the
-//  companion lane's), so its cover shows no deck tile.
+//  companion lane's), so its cover shows no deck tile. T-519 item 3 (vision 4.40): THE UNITY BOOK has the night half's
+//  deck, which leaves the bag at the mending, and deals it Both as One only.
 static bool8 HasCards(void)
 {
-    return sBook->book == BOOK_SUBTLE || sBook->book == BOOK_HERMETIC;
+    return sBook->book == BOOK_SUBTLE || sBook->book == BOOK_HERMETIC || sBook->book == BOOK_UNITY;
 }
 
 //  T-519 item 2: an entry's text -- and in the dawn half's BLESSING, the OBSERVER's line chosen by who is looking: the
@@ -1454,10 +1455,20 @@ static const struct OamData sCardsOam64 =
     .priority = 0,
 };
 
+//  The hermetic deck: THE HERMETIC LAYER's, and THE UNITY BOOK's (T-519 item 3) -- the same cards, the same day's card
+//  (the "spellcraft" hash and its side bit, as the companion's C-299 deals it), Above and Below.
 static bool8 CardsHermetic(void)
 {
-    return sBook->book == BOOK_HERMETIC;
+    return sBook->book == BOOK_HERMETIC || sBook->book == BOOK_UNITY;
 }
+
+//  T-519 item 3: THE UNITY BOOK deals Both as One only -- its selector holds that one entry.
+static bool8 CardsBothOnly(void)
+{
+    return sBook->book == BOOK_UNITY;
+}
+
+static const u8 sCardsText_UnityTitle[] = _("THE UNITY BOOK");   // DRAFT
 
 //  ---- the board, the card, its letters
 
@@ -2015,7 +2026,7 @@ static void DrawCardsSelect(void)
 {
     struct Cards *c = sBook->cards;
     const u8 *titles[3], *between[3] = { NULL, NULL, NULL };
-    const u8 *book = CardsHermetic() ? sCardsText_HermeticTitle : sCardsText_SubtleTitle;
+    const u8 *book = CardsBothOnly() ? sCardsText_UnityTitle : CardsHermetic() ? sCardsText_HermeticTitle : sCardsText_SubtleTitle;
     const u8 *ink = CardsHermetic() ? sCardsEmer : sCardsMine;
     u8 k, row = 0;
     s16 y, gap;
@@ -2045,9 +2056,9 @@ static void DrawCardsSelect(void)
     gap = CardsHermetic() ? 16 : 24;
     Rect(C_RULE, 86, 3, 151, CardsHermetic() ? 108 : 84);              // the menu's box
     Rect(C_PAPER, 88, 5, 147, CardsHermetic() ? 104 : 80);
-    for (k = 0; k < 3; k++)
+    for (k = CardsBothOnly() ? DECK_BOTH : 0; k < 3; k++)
     {
-        if (between[k] != NULL)
+        if (between[k] != NULL && !CardsBothOnly())
         {
             Print(BR_FONT, sCardsDim, 94, 6 + row * gap, between[k]);
             row++;
@@ -2061,7 +2072,7 @@ static void DrawCardsSelect(void)
             Rect(ink[1], 96, y + 7, 1, 1);
         }
         PrintBold(ink, 100, y, titles[k]);
-        if (between[k] != NULL && k < 2)          // the comma after a title is one of the plain words
+        if (between[k] != NULL && k < 2 && !CardsBothOnly())   // the comma after a title is one of the plain words
             Print(BR_FONT, sCardsDim, 100 + BoldWidth(titles[k]), y, sCardsText_Comma);
         row++;
     }
@@ -2259,7 +2270,7 @@ static void Input_Cards(void)
         CardsClear();                       // a new way to draw clears the last
         c->mode = c->cursor;
         c->places = (c->mode == CARDS_SINGLE) ? 1 : CARD_PLACES;
-        c->deck = DECK_FIRST;
+        c->deck = CardsBothOnly() ? DECK_BOTH : DECK_FIRST;
         sBook->view = VIEW_CARDS_SELECT;
         Turn();
     }
@@ -2274,7 +2285,7 @@ static void Input_CardsSelect(void)
         sBook->view = VIEW_CARDS;
         Turn();
     }
-    else if (JOY_NEW(DPAD_UP | DPAD_LEFT) && c->deck != 0)
+    else if (JOY_NEW(DPAD_UP | DPAD_LEFT) && c->deck != 0 && !CardsBothOnly())
     {
         c->deck--;
         Move();
