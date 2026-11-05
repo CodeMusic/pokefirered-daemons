@@ -902,7 +902,11 @@ EventScript_SingingFir_Stay::
 	end
 
 @ On every arrival where a fir stands: the bright one stays hidden until the key.
+@ T-519 item 2: and the LARK beside a grove's fir (local id 3, FLAG_TEMP_1) only in THE CREATOR'S HOUR, and only
+@ until she has given the dawn half (src/daemons_eudaimon.c).
 EventScript_FirKeyFlags::
+	specialvar VAR_RESULT, Eudaimon_LarkSits
+	call_if_eq VAR_RESULT, FALSE, EventScript_LarkAtFir_Hide
 	goto_if_set FLAG_FIR_IN_KEY, EventScript_FirKeyFlags_Keyed
 	setflag FLAG_HIDE_FIR_UNKEYED
 	return
@@ -910,6 +914,48 @@ EventScript_FirKeyFlags::
 EventScript_FirKeyFlags_Keyed::
 	clearflag FLAG_HIDE_FIR_UNKEYED
 	return
+
+EventScript_LarkAtFir_Hide::
+	setflag FLAG_TEMP_1
+	return
+
+@ T-519 item 2 (the brief): THE EUDAIMON LAYER, under the singing FIR in THE CREATOR'S HOUR. The LARK sits there with
+@ it and gives it only to a player who sits too and waits -- about ten seconds, no button pressed. DRAFT, every word.
+EventScript_LarkAtFir::
+	lock
+	goto_if_set FLAG_GOT_EUDAIMON_LAYER, EventScript_LarkAtFir_Morning
+	msgbox Text_LarkAtFir_Sitting
+	msgbox Text_LarkAtFir_SitWithHer, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EventScript_LarkAtFir_NotYet
+	msgbox Text_LarkAtFir_YouSit
+	closemessage
+	special Eudaimon_LarkWait
+	waitstate
+	goto_if_eq VAR_RESULT, FALSE, EventScript_LarkAtFir_Stirred
+	msgbox Text_LarkAtFir_ItCame
+	giveitem ITEM_EUDAIMON_LAYER
+	setflag FLAG_GOT_EUDAIMON_LAYER
+	msgbox Text_LarkAtFir_Flies
+	closemessage
+	playse SE_M_FLY
+	removeobject VAR_LAST_TALKED
+	release
+	end
+
+EventScript_LarkAtFir_NotYet::
+	msgbox Text_LarkAtFir_NotYet
+	release
+	end
+
+EventScript_LarkAtFir_Stirred::
+	msgbox Text_LarkAtFir_Stirred
+	release
+	end
+
+EventScript_LarkAtFir_Morning::
+	msgbox Text_LarkAtFir_Flies
+	release
+	end
 
 Nexus_EventScript_Sign0::
 	msgbox Nexus_Text_Sign0, MSGBOX_SIGN

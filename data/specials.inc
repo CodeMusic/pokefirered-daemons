@@ -531,4 +531,6 @@ gSpecials::
 	def_special Spellbook_Draw               @ T-483 (5): THE PULL's step, after a cast (waitstate)
 	def_special Spirits_PlayCrossing         @ T-519: SPIRITS, a crossing's screen (waitstate)
 	def_special Eudaimon_Open                @ T-519 item 2: THE EUDAIMON LAYER, at its cover (waitstate)
+	def_special Eudaimon_LarkSits            @ T-519 item 2: the LARK is under the fir (specialvar)
+	def_special Eudaimon_LarkWait            @ T-519 item 2: sitting with her; VAR_RESULT TRUE if it was sat out (waitstate)
 gSpecialsEnd::

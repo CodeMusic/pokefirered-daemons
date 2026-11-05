@@ -221,3 +221,34 @@ Nexus_Text_Sign13::
     .string "THE CLAYVERSE\p"
     .string "At the end of the seventh island,\n"
     .string "a bush hides a figure of clay.$"
+
+@ T-519 item 2: the LARK under the singing FIR, in THE CREATOR'S HOUR. DRAFT, every word.
+Text_LarkAtFir_Sitting::
+    .string "The LARK is sitting under the fir,\n"
+    .string "very still. A book lies by her.\p"
+    .string "She does not look up. She only\n"
+    .string "moves over a little, to make room.$"
+
+Text_LarkAtFir_SitWithHer::
+    .string "Sit with her?$"
+
+Text_LarkAtFir_YouSit::
+    .string "You sit down beside the LARK.$"
+
+Text_LarkAtFir_NotYet::
+    .string "The LARK keeps sitting, as if the\n"
+    .string "morning had all the time there is.$"
+
+Text_LarkAtFir_Stirred::
+    .string "You moved. The LARK did not mind.\n"
+    .string "She is still sitting.$"
+
+Text_LarkAtFir_ItCame::
+    .string "The light comes up a little.\p"
+    .string "The LARK says she did not go\n"
+    .string "anywhere. She stayed, and it came.\p"
+    .string "She pushes the book over to you.$"
+
+Text_LarkAtFir_Flies::
+    .string "The LARK flies up into the fir,\n"
+    .string "to meet the morning.$"
