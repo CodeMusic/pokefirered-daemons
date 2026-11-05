@@ -96,10 +96,45 @@ EventScript_EudaimonLayer::
 EventScript_HalfAtTower::
 	specialvar VAR_RESULT, Mending_AtTower
 	goto_if_eq VAR_RESULT, 0, EventScript_HalfAtTowerDone   @ MENDING_NOT_HERE
+	goto_if_eq VAR_RESULT, 2, EventScript_MendingFromBag    @ MENDING_BOTH_HALVES: the half opened mends them
 	special Mending_Deepen
 	waitstate
 EventScript_HalfAtTowerDone::
 	return
+
+@ T-519 item 3: THE MENDING, at DAEMON TOWER with both halves held -- the first step inside, or a half opened there
+@ (src/daemons_unity.c). The burst, then THE UNITY BOOK in the bag where the two halves were. DRAFT.
+EventScript_Mending::
+	lockall
+EventScript_MendingFromBag::
+	msgbox Text_MendingPull
+	closemessage
+	special Mending_Mend
+	waitstate
+	msgbox Text_MendingWhole
+	releaseall
+	end
+
+Text_MendingPull::
+	.string "The two halves pull toward each\n"
+	.string "other, spine to spine.$"
+
+Text_MendingWhole::
+	.string "They close. The tear is gone.\p"
+	.string "{PLAYER} holds THE UNITY BOOK.$"
+
+@ T-519 item 3: THE UNITY BOOK, opened at its cover -- at any hour.
+EventScript_UnityBook::
+	lockall
+	fadescreen FADE_TO_BLACK
+	special Unity_Open
+	waitstate
+	specialvar VAR_RESULT, Spellbook_TakeNews
+	goto_if_eq VAR_RESULT, FALSE, EventScript_UnityClosed
+	msgbox gStringVar4
+EventScript_UnityClosed::
+	releaseall
+	end
 
 @ T-519 item 2 (the brief): with the dawn half held, in the witching hour, a voice that is not your own points to
 @ the hatter's house -- once in the hour, on the first step outdoors (src/daemons_eudaimon.c). DRAFT.

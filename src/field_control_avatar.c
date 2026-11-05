@@ -35,6 +35,7 @@
 #include "daemons_spellbook.h"   // T-483 (5): THE MIRROR's steps
 #include "daemons_spirits.h"   // T-519: SPIRITS
 #include "daemons_eudaimon.h"   // T-519 item 2: the nudge
+#include "daemons_unity.h"      // T-519 item 3: the mending
 #include "school_lift.h"
 
 // T-196: the label the popup carries while an echo is on screen.
@@ -398,6 +399,7 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     {
         IncrementGameStat(GAME_STAT_STEPS);
         Spellbook_OnStep();                 // T-483 (5): THE MIRROR's steps
+        DaemonsHalftoneOnStep();            // T-519 item 3: after the mending, colour from each step
         WonderNews_IncrementStepCounter();
         IncrementRenewableHiddenItemStepCounter();
         RunMassageCooldownStepCounter();
@@ -962,6 +964,12 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
             if (Daemons_TrySpiritsCrossing())
             {
                 ScriptContext_SetupScript(Daemons_EventScript_SpiritsCrossing);
+                return TRUE;
+            }
+            //  T-519 item 3. And again: both halves held, a step inside DAEMON TOWER -- the mending.
+            if (Mending_ShouldStart())
+            {
+                ScriptContext_SetupScript(EventScript_Mending);
                 return TRUE;
             }
             //  T-519 item 2. And again: with the dawn half held, in the witching hour, a voice -- once in the hour.

@@ -258,7 +258,7 @@
 #define ITEM_EMERGENT_SINK 247 // T-488: halves one super-effective EMERGENT hit, then spent. Was ITEM_0F7, unused
 #define ITEM_OPAQUE_SINK 248   // T-488: halves one super-effective OPAQUE hit, then spent. Was ITEM_0F8, unused
 #define ITEM_EUDAIMON_LAYER 249 // T-519 item 2: THE EUDAIMON LAYER, the torn book's dawn half. Was ITEM_0F9, unused
-#define ITEM_0FA 250
+#define ITEM_UNITY_BOOK 250 // T-519 item 3: THE UNITY BOOK, the two halves mended at DAEMON TOWER. Was ITEM_0FA, unused
 #define ITEM_0FB 251
 #define ITEM_0FC 252
 #define ITEM_0FD 253

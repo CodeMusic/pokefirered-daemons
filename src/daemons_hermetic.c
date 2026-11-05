@@ -83,8 +83,8 @@ const u8 *Hermetic_Arrival(void)
 {
     if (!Hermetic_Held())
         return NULL;
-    if (CheckBagHasItem(ITEM_HERMETIC_LAYER, 1))
-        return TreatLeft();     // T-483 (7): a treat waiting from the last battle
+    if (CheckBagHasItem(ITEM_HERMETIC_LAYER, 1) || FlagGet(FLAG_UNITY_MENDED))
+        return TreatLeft();     // T-519 item 3: mended, the night half is in THE UNITY BOOK, never handed back     // T-483 (7): a treat waiting from the last battle
     if (!AddBagItem(ITEM_HERMETIC_LAYER, 1))
         return NULL;    // no room: asked again a second later
     return EventScript_HermeticArrives;

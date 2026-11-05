@@ -779,6 +779,20 @@ void FieldUseFunc_EudaimonLayer(u8 taskId)
     SetUpItemUseOnFieldCallback(taskId);
 }
 
+//  T-519 item 3: THE UNITY BOOK, the two halves mended -- it opens on its cover at any hour.
+static void ItemUseOnFieldCB_UnityBook(u8 taskId)
+{
+    LockPlayerFieldControls();
+    ScriptContext_SetupScript(EventScript_UnityBook);
+    DestroyTask(taskId);
+}
+
+void FieldUseFunc_UnityBook(u8 taskId)
+{
+    sItemUseOnFieldCB = ItemUseOnFieldCB_UnityBook;
+    SetUpItemUseOnFieldCallback(taskId);
+}
+
 //  T-417: the HARP (CONTENT) or the FLUTE (CONTEXT). The bag closes and the field comes back, then the instrument comes
 //  out where the player stands (src/play.c) -- on foot or on the water, never on the bicycle.
 static void ItemUseOnFieldCB_Play(u8 taskId)

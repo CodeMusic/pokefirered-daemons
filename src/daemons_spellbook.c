@@ -476,6 +476,11 @@ static const u8 sPassage_Space[]  = _("SPACE");
 static const u8 sPassage_Upper[]  = _("UPPER FOLDS");
 static const u8 sPassage_Gravity[] = _("GRAVITY II");
 static const u8 sPassage_Hands[]   = _("HANDS II");
+// T-519 item 3: the same folds in THE UNITY BOOK, which holds the night half now (the two tablets joined into one).
+static const u8 sPassage_Sheet[]     = _("THE SHEET");
+static const u8 sPassage_EveryFold[] = _("EVERY FOLD");
+static const u8 sPassage_Gravity1[]  = _("GRAVITY");
+static const u8 sPassage_Hand2[]     = _("HAND II");
 
 static void Learn(u16 bits)
 {
@@ -491,15 +496,16 @@ void Spellbook_OnPassageRead(const u8 *shortTitle)
 {
     if (!Hermetic_Held())
         return;
-    if (StringCompare(shortTitle, sPassage_Folds) == 0)
+    if (StringCompare(shortTitle, sPassage_Folds) == 0 || StringCompare(shortTitle, sPassage_Sheet) == 0)
         Learn((1 << SPELL_AWAKENING) | (1 << SPELL_CONTRAST));
     else if (StringCompare(shortTitle, sPassage_Space) == 0 && Knows(SPELL_CONTRAST))
         Learn(1 << SPELL_ROOM);
-    else if (StringCompare(shortTitle, sPassage_Upper) == 0 && Knows(SPELL_ROOM))
+    else if ((StringCompare(shortTitle, sPassage_Upper) == 0 || StringCompare(shortTitle, sPassage_EveryFold) == 0)
+          && Knows(SPELL_ROOM))
         Learn((1 << SPELL_MIRROR) | (1 << SPELL_PATTERN));
-    else if (StringCompare(shortTitle, sPassage_Gravity) == 0)     // the half-saying, read to its tenth
-        Learn(1 << SPELL_PULL);
-    else if (StringCompare(shortTitle, sPassage_Hands) == 0)       // the Tablet of the Hands, read to its eleventh
+    else if (StringCompare(shortTitle, sPassage_Gravity) == 0 || StringCompare(shortTitle, sPassage_Gravity1) == 0)
+        Learn(1 << SPELL_PULL);                                    // the half-saying, read to its tenth
+    else if (StringCompare(shortTitle, sPassage_Hands) == 0 || StringCompare(shortTitle, sPassage_Hand2) == 0)
         Learn((1 << SPELL_SMALL_HAND) | (1 << SPELL_GREAT_HAND));
 }
 
