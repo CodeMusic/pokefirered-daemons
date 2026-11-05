@@ -16,6 +16,7 @@
 #include "fieldmap.h"
 #include "map_name_popup.h"
 #include "menu.h"
+#include "new_menu_helpers.h"
 #include "play.h"
 #include "m4a.h"
 #include "quest_log.h"
@@ -115,6 +116,13 @@
 #define ECHO_SOFT      102      // ...at two-fifths
 #define ECHO_TAIL      24       // frames held after the last echo note
 
+#define STRIP_TOP      18       // the BUTTON STRIP: the bottom two rows of the screen
+#define STRIP_H        2
+#define STRIP_TILE     0x140    // past the YES/NO box's 0x125-0x13C, short of the dialog's 0x198 (60 tiles)
+#define STRIP_PAL      14       // the standard windows' palette (Menu_LoadStdPal): the D-pad icons' arrows are its red, 4,
+                                // which the staff's paper palette has not -- there all four D-pads drew alike
+#define STRIP_HEAD_Y   152      // a head's centre, level with its button
+
 #define GHOST_MAX      4        // P5: a learned song's next notes, shown ahead
 #define GHOST_FROM     3        // ...once this many of its opening notes have been played
 #define GHOST_FADE     12       // frames a strayed-from page takes to fade
@@ -164,6 +172,8 @@ struct Play
     u8 ghosts[GHOST_MAX];    // P5: the song's next notes, hollow, ahead on the staff
     u8 ghostCount;
     u8 ghostFade;            // frames left of their fading, or 0
+    u8 stripId;              // the BUTTON STRIP's window (WINDOW_NONE until the staff is played)
+    u8 stripHeads[7];        // ...and its seven heads, the key's notes in their colours
 };
 
 // ------------------------------------------------------------------------------------------------------------ songs
@@ -291,6 +301,28 @@ static const u8 sStaffColours[3] = {TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY, TEXT
 
 // The seven notes, in the order the hand climbs them.
 static const u16 sNoteButtons[7] = {DPAD_DOWN, DPAD_LEFT, DPAD_UP, DPAD_RIGHT, B_BUTTON, A_BUTTON, SELECT_BUTTON};
+
+// The BUTTON STRIP (the user, 2026-11-04: "make sure in-game the controls are intuitive enough to play"): along the
+// bottom while the staff is played, the key's seven notes, low to high, each a head of its colour beside the button
+// that plays it -- so a song's coloured heads (the SONGBOOK's, a ghost's) can be read as buttons in any key -- then the
+// octaves and START. DRAFT.
+static const u8 sStrip_Down[]   = _("{DPAD_DOWN}");
+static const u8 sStrip_Left[]   = _("{DPAD_LEFT}");
+static const u8 sStrip_Up[]     = _("{DPAD_UP}");
+static const u8 sStrip_Right[]  = _("{DPAD_RIGHT}");
+static const u8 sStrip_B[]      = _("{B_BUTTON}");
+static const u8 sStrip_A[]      = _("{A_BUTTON}");
+static const u8 sStrip_Select[] = _("{SELECT_BUTTON}");
+static const u8 sStrip_Low[]    = _("{L_BUTTON}-");
+static const u8 sStrip_High[]   = _("{R_BUTTON}+");
+static const u8 sStrip_Away[]   = _("{START_BUTTON}");
+static const u8 *const sStripButtons[7] = {sStrip_Down, sStrip_Left, sStrip_Up, sStrip_Right, sStrip_B, sStrip_A, sStrip_Select};
+static const u8 sStripX[7] = {3, 25, 47, 69, 91, 113, 135};   // each head's left; its button just after it, a gap before the next
+#define STRIP_BUTTON_DX 9
+static const u8 sStripColours[3] = {TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY};
+#define STRIP_LOW_X    172
+#define STRIP_HIGH_X   194
+#define STRIP_AWAY_X   216
 
 #define tPlay  0   // the state's pointer, in data[0] and data[1]
 
@@ -474,6 +506,54 @@ static void CloseStaff(struct Play *play)
     CopyWindowToVram(play->windowId, COPYWIN_MAP);
     RemoveWindow(play->windowId);
     play->windowId = WINDOW_NONE;
+}
+
+// The BUTTON STRIP: a paper like the staff's along the bottom, the buttons printed on it, and the key's seven heads as
+// sprites beside them (the staff's own small heads, so they shine as it does). Opened when the wheel has folded into
+// the staff -- the key is chosen then -- and closed with the staff.
+static void OpenStrip(struct Play *play)
+{
+    struct WindowTemplate template = {
+        .bg = 0, .tilemapLeft = 0, .tilemapTop = STRIP_TOP, .width = STAFF_W, .height = STRIP_H,
+        .paletteNum = STRIP_PAL, .baseBlock = STRIP_TILE,
+    };
+    u8 d;
+
+    if (play->stripId != WINDOW_NONE)
+        return;
+    play->stripId = AddWindow(&template);
+    if (play->stripId == WINDOW_NONE)
+        return;
+    Menu_LoadStdPal();
+    // a dark bar, as the game's own help bars are: the buttons are white with a grey edge, and vanish on white paper
+    FillWindowPixelBuffer(play->stripId, PIXEL_FILL(TEXT_COLOR_DARK_GRAY));
+    FillWindowPixelRect(play->stripId, PIXEL_FILL(TEXT_COLOR_LIGHT_GRAY), 0, 0, 240, 1);
+    for (d = 0; d < 7; d++)
+    {
+        AddTextPrinterParameterized4(play->stripId, FONT_SMALL, sStripX[d] + STRIP_BUTTON_DX, 2, 0, 0, sStripColours,
+                                     TEXT_SKIP_DRAW, sStripButtons[d]);
+        play->stripHeads[d] = MakeSprite(play, &sTemplate_Small, sStripX[d] + 4, STRIP_HEAD_Y,
+                                         SMALL_HEAD + PitchClass(sKeyTonic[play->key] + sMajor[d]));
+    }
+    AddTextPrinterParameterized4(play->stripId, FONT_SMALL, STRIP_LOW_X, 2, 0, 0, sStripColours, TEXT_SKIP_DRAW, sStrip_Low);
+    AddTextPrinterParameterized4(play->stripId, FONT_SMALL, STRIP_HIGH_X, 2, 0, 0, sStripColours, TEXT_SKIP_DRAW, sStrip_High);
+    AddTextPrinterParameterized4(play->stripId, FONT_SMALL, STRIP_AWAY_X, 2, 0, 0, sStripColours, TEXT_SKIP_DRAW, sStrip_Away);
+    PutWindowTilemap(play->stripId);
+    CopyWindowToVram(play->stripId, COPYWIN_FULL);
+}
+
+static void CloseStrip(struct Play *play)
+{
+    u8 d;
+
+    for (d = 0; d < 7; d++)
+        DestroyIf(&play->stripHeads[d]);
+    if (play->stripId == WINDOW_NONE)
+        return;
+    ClearWindowTilemap(play->stripId);
+    CopyWindowToVram(play->stripId, COPYWIN_MAP);
+    RemoveWindow(play->stripId);
+    play->stripId = WINDOW_NONE;
 }
 
 // Where a note sits on the staff, by its letter, so the staff reads as pitch: `semitone` from middle C, in the key. Keys
@@ -712,8 +792,11 @@ static bool8 TakeOut(struct Play *play)
     play->cx = avatar->x + avatar->x2 + gSpriteCoordOffsetX;
     play->cy = avatar->y + avatar->y2 + gSpriteCoordOffsetY;
     play->windowId = WINDOW_NONE;
+    play->stripId = WINDOW_NONE;
     play->keyNote = MAX_SPRITES;
     play->sheetMark = MAX_SPRITES;
+    for (i = 0; i < 7; i++)
+        play->stripHeads[i] = MAX_SPRITES;
     for (i = 0; i < 12; i++)
         play->dots[i] = MAX_SPRITES;
     for (i = 0; i < STAFF_HEADS; i++)
@@ -765,6 +848,7 @@ static void Teardown(u8 taskId, const u8 *script)
         DestroyIf(&play->drift[i]);
     ClearGhosts(play);
     ClearJoined(play);
+    CloseStrip(play);
     FreeArt(play->palSlot, play->borrowed, play->lentColours);
     CloseStaff(play);
     Free(play);
@@ -797,6 +881,7 @@ static void HandOff(u8 taskId)
     for (i = 0; i < DRIFT_MAX; i++)
         DestroyIf(&play->drift[i]);
     ClearGhosts(play);
+    CloseStrip(play);
     CloseStaff(play);   // before the script's first message: the staff is on BG0
     ClearPlayerHeldMovementAndUnfreezeObjectEvents();
     play->relocked = FALSE;
@@ -856,6 +941,7 @@ static void Join(struct Play *play, u8 song)
     for (i = 0; i < DRIFT_MAX; i++)
         DestroyIf(&play->drift[i]);
     ClearGhosts(play);
+    CloseStrip(play);   // the buttons wait while the song comes back, and the joined notes want its sprites
     LayoutHeads(play);
     for (i = 0; i < n && i < play->headCount; i++)
         if (play->heads[play->headCount - 1 - i] != MAX_SPRITES)
@@ -1234,6 +1320,7 @@ static bool8 AfterEcho(u8 taskId)
     ClearJoined(play);
     for (i = 0; i < DRIFT_MAX; i++)
         DestroyIf(&play->drift[i]);
+    OpenStrip(play);   // the buttons are back, as play goes on
     play->state = STATE_PLAY;
     return FALSE;
 }
@@ -1322,7 +1409,10 @@ static void Task_Play(u8 taskId)
         break;
     case STATE_FOLD:
         if (FoldWheel(play))
+        {
+            OpenStrip(play);
             play->state = STATE_PLAY;
+        }
         break;
     case STATE_PLAY:
         if (JOY_NEW(START_BUTTON))
