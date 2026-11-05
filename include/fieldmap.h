@@ -70,6 +70,15 @@ void DaemonsHalftoneSplash(u8 battler, u16 colour);   // T-430: a routine of you
 bool8 DaemonsHalftoneGreysByFrame(void);
 void DaemonsHalftoneWash(u16 colour);          // T-430: your routine's wash on the foe (0: none yet)
 void DaemonsHalftoneWashDefault(u16 colour);   // T-430: ...the routine's type colour, until one is seen
+void DaemonsHalftoneNoteLoaded(void);          // T-519: the map's palettes loaded (the primary tileset's path)
+void DaemonsHalftoneDeepen(bool8 dawn);        // T-519 item 2: a half opened at DAEMON TOWER, its tint deepened
+bool8 DaemonsHalftoneDeepening(void);
+void DaemonsHalftoneBurst(void);               // T-519 item 3: the mending's burst
+bool8 DaemonsHalftoneBursting(void);
+void DaemonsHalftoneOnStep(void);              // T-519 item 3: a step, the colour spreading after the mending
+#if DAEMONS_DEBUG
+void DaemonsHalftoneDebugMended(bool8 on);     // T-519: DEBUG's MENDED, at once
+#endif
 u8 DaemonsFieldTint(void);
 u16 DaemonsPaletteSignature(void);
 u16 DaemonsPrimarySignature(void);

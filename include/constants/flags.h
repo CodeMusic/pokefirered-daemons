@@ -1257,7 +1257,9 @@
 #define FLAG_DEFEATED_CHAMP           0x4BC
 
 // Unused?
-#define FLAG_0x4BD               0x4BD
+#define FLAG_UNITY_MENDED        0x4BD   // T-519 item 3: THE UNITY BOOK mended at DAEMON TOWER. Was FLAG_0x4BD, unused: the
+                                         //   game lane's DAEMONS block 0x3F0-0x3FF is full, and this is SaveBlock1's own,
+                                         //   referenced nowhere before (grepped src, data, include, asm; T-421's audit)
 #define FLAG_0x4BE               0x4BE
 #define FLAG_0x4BF               0x4BF
 #define FLAG_0x4C0               0x4C0
@@ -1550,7 +1552,7 @@
 //      so the QUEST LOG does not record them changing;
 //    23 in the story flags' gaps (0x23E-0x2EB); 0x342-0x3D7, 150; 4 FLAG_HIDDEN_ITEM_UNUSED_
 //      (0x3EF .. 0x464; T-488 took 0x2B-0x2E for the hidden * SINKs); 0x4A7-0x4A8 and 0x4AB-0x4AF (TeachyTvRepairOldSave reads and clears
-//      them once, on an old save's first CONTINUE); 0x4BD-0x4FF, 67;
+//      them once, on an old save's first CONTINUE); 0x4BE-0x4FF, 66 (T-519 took 0x4BD);
 //    0x809-0x81F, 23 before PERMA_SYS_FLAGS_START (the QUEST LOG skips those too); 11 between the
 //      badges and 0x83F; 0x8C3-0x8FF, 61.
 //  NOT 0x33F, 0x340 or 0x341: tools/gbadocs.py numbers its documents from 0x327 up, and its 25th and

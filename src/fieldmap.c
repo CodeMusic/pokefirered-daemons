@@ -23,6 +23,7 @@
 #include "constants/flags.h"
 #include "field_message_box.h"   // T-430: the first sight waits for no box
 #include "script_menu.h"         // T-439: the photograph keeps its colour
+#include "daemons_hours.h"       // T-519: THE CREATOR'S HOUR's strength, for HALFTONE mended
 
 extern const struct Tileset gTileset_General;   // T-275: the CHECKPOINT's tileset
 extern const struct Tileset gTileset_Nexus;     // T-395: THE NEXUS, made of paint
@@ -939,10 +940,28 @@ static u16 DaemonsTowerFloorFlag(void)
     return FLAG_TOWER_COLOUR_1F + gSaveBlock1Ptr->location.mapNum - MAP_NUM(MAP_POKEMON_TOWER_1F);
 }
 
+static bool8 DaemonsHalftoneSpreading(void);
+
+// T-519 item 1 (the user, 2026-11-05; vision 4.40): MENDED, HALFTONE comes back into colour -- the town and the tower,
+// every floor -- and greys again only in the witching half-hour (3:30-3:59, the brief). While the colour is still
+// spreading from the player's steps after the mending, the town is HALFTONE still, on its way back.
+static bool8 DaemonsHalftoneMendedHere(bool8 *halftone)
+{
+    u8 sec = gMapHeader.regionMapSectionId;
+
+    if (!FlagGet(FLAG_UNITY_MENDED) || (sec != MAPSEC_POKEMON_TOWER && sec != MAPSEC_LAVENDER_TOWN))
+        return FALSE;
+    *halftone = DaemonsWitchingMinute() >= 30 || (sec == MAPSEC_LAVENDER_TOWN && DaemonsHalftoneSpreading());
+    return TRUE;
+}
+
 bool8 DaemonsIsHalftone(void)
 {
     u16 floor;
+    bool8 mended;
 
+    if (DaemonsHalftoneMendedHere(&mended))
+        return mended;
     if (gMapHeader.regionMapSectionId == MAPSEC_POKEMON_TOWER)
     {
         floor = DaemonsTowerFloorFlag();
@@ -1032,9 +1051,124 @@ static struct {
     u16 wash;         // the colour a share of which the foe shows while your routine plays
     u16 washTrue[16]; // the foe's palette as the animation last wrote it ...
     u16 washOut[16];  // ... and as the grey last wrote it over that, so a frame the animation skips is told apart
+    u8 deep;          // T-519: frames into a half's deepening at DAEMON TOWER, 0 when not running
+    u8 deepTone;      // ... HT_TONE_EMERALD or HT_TONE_SAPPHIRE
+    u8 burst;         // T-519: frames into the mending's burst, 0 when not running
+    u8 burstTone;     // ... the tone the tower stood in as it began
+    u8 mendSpread;    // T-519: the colour spreading from your steps after the mending: 0 not, else 1 + steps taken
+    u8 mendPulse;     // ... frames left of the last step's splash
+    u8 loaded;        // T-519: the regime the map's palettes were loaded under (DaemonsHalftoneRegime), 0xFF none yet
 } sHalftone;
 
 #define HT_WASH_SHARE 80   // of 256, at the wash's full strength: faint
+
+// T-519 item 1 (the user, 2026-11-05, by multiple choice; vision 4.40): HALFTONE'S TONE FOLLOWS THE HALVES YOU HOLD,
+// at all times until the mending. Neither half: greyscale, as T-430 built it. The night half (THE HERMETIC LAYER):
+// EMERALD SEPIA, the tablet's green where sepia's brown would be. The dawn half (THE EUDAIMON LAYER): SAPPHIRE SEPIA,
+// like a cyanotype. Both, not yet mended: the halves take turns by the hour -- emerald at night (the night watch, the
+// clock's own, as the night half reads), sapphire by day. Mended: grey only in the witching half-hour (above).
+// Each tone is a ramp of 32 colours, one for each brightness, and every one of them has exactly that brightness by
+// DaemonsHalftoneLum -- so toning a toned colour gives it back, a settled frame costs a multiply and a compare an
+// entry as the grey does, and the hour turning from one tone to the other loses nothing. The ramps are gradient
+// maps (dark, mid, light) searched for the nearest colour of each brightness. The deep pair is the moment a half is
+// opened at DAEMON TOWER (DaemonsHalftoneDeepen).
+enum { HT_TONE_GREY, HT_TONE_EMERALD, HT_TONE_SAPPHIRE, HT_TONE_NONE };
+
+static const u16 sToneEmerald[32] = {
+    RGB(0, 0, 0), RGB(1, 1, 1), RGB(1, 3, 1), RGB(2, 4, 2), RGB(1, 6, 2), RGB(2, 7, 3), RGB(3, 8, 4), RGB(2, 10, 5),
+    RGB(3, 11, 6), RGB(4, 12, 7), RGB(5, 13, 8), RGB(5, 15, 8), RGB(5, 16, 10), RGB(6, 17, 11), RGB(7, 18, 12), RGB(8, 19, 13),
+    RGB(9, 20, 14), RGB(10, 21, 15), RGB(11, 22, 16), RGB(12, 23, 17), RGB(13, 24, 18), RGB(15, 25, 19), RGB(17, 25, 20), RGB(18, 26, 21),
+    RGB(19, 27, 22), RGB(21, 28, 23), RGB(22, 29, 24), RGB(24, 29, 25), RGB(25, 30, 27), RGB(27, 31, 28), RGB(29, 31, 29), RGB(31, 31, 31),
+};
+static const u16 sToneSapphire[32] = {
+    RGB(0, 0, 1), RGB(1, 1, 3), RGB(1, 2, 5), RGB(2, 3, 6), RGB(1, 5, 8), RGB(2, 6, 10), RGB(2, 7, 12), RGB(3, 8, 13),
+    RGB(3, 9, 16), RGB(4, 10, 17), RGB(5, 11, 18), RGB(6, 12, 19), RGB(7, 13, 20), RGB(8, 14, 21), RGB(7, 16, 22), RGB(8, 17, 24),
+    RGB(9, 18, 25), RGB(10, 19, 26), RGB(11, 20, 26), RGB(14, 20, 27), RGB(15, 21, 28), RGB(16, 22, 29), RGB(17, 23, 30), RGB(19, 24, 29),
+    RGB(20, 25, 30), RGB(21, 26, 31), RGB(23, 27, 30), RGB(24, 28, 30), RGB(25, 29, 31), RGB(27, 30, 31), RGB(28, 31, 31), RGB(31, 31, 31),
+};
+static const u16 sToneEmeraldDeep[32] = {
+    RGB(0, 1, 0), RGB(0, 2, 0), RGB(0, 4, 1), RGB(0, 5, 1), RGB(1, 6, 2), RGB(0, 8, 3), RGB(1, 9, 4), RGB(1, 11, 3),
+    RGB(2, 12, 4), RGB(1, 14, 5), RGB(2, 15, 6), RGB(1, 17, 7), RGB(2, 18, 7), RGB(3, 19, 8), RGB(2, 21, 9), RGB(3, 22, 10),
+    RGB(4, 23, 11), RGB(5, 24, 12), RGB(6, 25, 13), RGB(7, 26, 14), RGB(8, 27, 15), RGB(9, 28, 16), RGB(10, 29, 17), RGB(11, 30, 18),
+    RGB(12, 31, 19), RGB(15, 31, 20), RGB(18, 31, 22), RGB(20, 31, 25), RGB(23, 31, 26), RGB(26, 31, 27), RGB(29, 31, 28), RGB(31, 31, 31),
+};
+static const u16 sToneSapphireDeep[32] = {
+    RGB(0, 0, 2), RGB(0, 1, 4), RGB(1, 2, 7), RGB(1, 3, 9), RGB(1, 4, 12), RGB(2, 5, 14), RGB(2, 6, 17), RGB(2, 7, 21),
+    RGB(3, 8, 22), RGB(2, 10, 23), RGB(3, 11, 24), RGB(3, 12, 27), RGB(4, 13, 28), RGB(5, 14, 29), RGB(4, 16, 30), RGB(5, 17, 31),
+    RGB(7, 18, 31), RGB(8, 19, 31), RGB(8, 21, 31), RGB(9, 22, 31), RGB(10, 23, 31), RGB(12, 24, 31), RGB(13, 25, 31), RGB(14, 26, 31),
+    RGB(16, 27, 31), RGB(17, 28, 31), RGB(19, 29, 31), RGB(20, 30, 31), RGB(23, 30, 31), RGB(25, 31, 31), RGB(28, 31, 31), RGB(31, 31, 31),
+};
+// The mending's burst: every hue once round the wheel, which each colour turns through by its brightness.
+static const u16 sBurstHues[32] = {
+    RGB(31, 0, 0), RGB(31, 6, 0), RGB(31, 12, 0), RGB(31, 17, 0), RGB(31, 23, 0), RGB(31, 29, 0), RGB(27, 31, 0), RGB(21, 31, 0),
+    RGB(16, 31, 0), RGB(10, 31, 0), RGB(4, 31, 0), RGB(0, 31, 2), RGB(0, 31, 8), RGB(0, 31, 14), RGB(0, 31, 19), RGB(0, 31, 25),
+    RGB(0, 31, 31), RGB(0, 25, 31), RGB(0, 19, 31), RGB(0, 14, 31), RGB(0, 8, 31), RGB(0, 2, 31), RGB(4, 0, 31), RGB(10, 0, 31),
+    RGB(16, 0, 31), RGB(21, 0, 31), RGB(27, 0, 31), RGB(31, 0, 29), RGB(31, 0, 23), RGB(31, 0, 17), RGB(31, 0, 12), RGB(31, 0, 6),
+};
+
+#define HT_DEEP_RISE      20     // a half opened at the tower: its tint deepens over these frames,
+#define HT_DEEP_HOLD      50     // ... holds to here,
+#define HT_DEEP_FRAMES    110    // ... and settles back by here
+#define HT_BURST_RISE     24     // the mending: the tower's tone turns to every colour over these frames,
+#define HT_BURST_HOLD     100    // ... the colours turn to here,
+#define HT_BURST_FRAMES   170    // ... and settle into the tower's own colours by here
+#define HT_MEND_STEPS     20     // the town comes back into colour over this many steps after the mending,
+#define HT_MEND_PULSE     24     // ... each step a splash of this many frames,
+#define HT_MEND_SPLASH    88     // ... of this much more colour (of 256) at its height
+
+static bool8 DaemonsHalftoneSpreading(void)
+{
+    return sHalftone.mendSpread != 0;
+}
+
+static u8 DaemonsHalftoneTone(void)
+{
+    bool8 night, dawn;
+
+    if (DaemonsCaveUnperceived())
+        return HT_TONE_GREY;
+    if (FlagGet(FLAG_UNITY_MENDED) && !DaemonsHalftoneSpreading())
+        return HT_TONE_GREY;            // the witching half-hour's grey: the tints belong to before the mending
+    night = FlagGet(FLAG_GOT_HERMETIC_LAYER);
+    dawn = FlagGet(FLAG_GOT_EUDAIMON_LAYER);
+    if (night && dawn)
+        return DaemonsTrueWatch() == WATCH_NIGHT ? HT_TONE_EMERALD : HT_TONE_SAPPHIRE;
+    return night ? HT_TONE_EMERALD : dawn ? HT_TONE_SAPPHIRE : HT_TONE_GREY;
+}
+
+static s32 DaemonsHalftoneLum(u16 c)
+{
+    return (GET_R(c) * Q_8_8(0.3) + GET_G(c) * Q_8_8(0.59) + GET_B(c) * Q_8_8(0.1133)) >> 8;
+}
+
+// A colour in a tone: its brightness, on that tone's ramp (or as grey).
+static u16 DaemonsToneOf(u16 c, u8 tone)
+{
+    s32 l = DaemonsHalftoneLum(c);
+
+    switch (tone)
+    {
+    case HT_TONE_EMERALD:  return sToneEmerald[l];
+    case HT_TONE_SAPPHIRE: return sToneSapphire[l];
+    case HT_TONE_NONE:     return c;
+    }
+    return RGB2(l, l, l);
+}
+
+// From A toward B, by K of 256.
+static u16 DaemonsHalftoneLerp(u16 a, u16 b, s32 k)
+{
+    s32 r = GET_R(a), g = GET_G(a), bl = GET_B(a);
+
+    r += ((GET_R(b) - r) * k) >> 8;
+    g += ((GET_G(b) - g) * k) >> 8;
+    bl += ((GET_B(b) - bl) * k) >> 8;
+    return RGB2(r, g, bl);
+}
+
+static u8 sHalftoneTone;       // this frame's tone (DaemonsHalftoneTone), for the mixes below
+static u8 sHalftoneOverK;      // this frame's share (of 256) of a deepening's or the burst's colour
+static u8 sHalftoneBurstSettle;   // ... the burst is settling from its colours into the tower's own
 
 void DaemonsHalftoneWash(u16 colour)
 {
@@ -1052,22 +1186,34 @@ void DaemonsHalftoneWashDefault(u16 colour)
         sHalftone.wash = colour;
 }
 
+// A colour in this frame's tone, with SHARE (of 256) of its own colour back. T-519: the tone, not always grey.
 static u16 DaemonsHalftoneMix(u16 c, s32 share)
 {
-    s32 r = GET_R(c), g = GET_G(c), b = GET_B(c);
-    s32 grey = (r * Q_8_8(0.3) + g * Q_8_8(0.59) + b * Q_8_8(0.1133)) >> 8;
+    u16 toned = DaemonsToneOf(c, sHalftoneTone);
 
     if (share <= 0)
-        return RGB2(grey, grey, grey);
-    r = grey + (((r - grey) * share) >> 8);
-    g = grey + (((g - grey) * share) >> 8);
-    b = grey + (((b - grey) * share) >> 8);
-    return RGB2(r, g, b);
+        return toned;
+    return DaemonsHalftoneLerp(toned, c, share);
 }
 
-static s32 DaemonsHalftoneLum(u16 c)
+// T-519: a deepening's or the burst's colour for one entry, from the colour as loaded (never compounding).
+static u16 DaemonsHalftoneOverlay(u16 src, bool8 halftone)
 {
-    return (GET_R(c) * Q_8_8(0.3) + GET_G(c) * Q_8_8(0.59) + GET_B(c) * Q_8_8(0.1133)) >> 8;
+    s32 l = DaemonsHalftoneLum(src);
+    u16 hue;
+
+    if (sHalftone.burst != 0)
+    {
+        hue = sBurstHues[(l + (sHalftone.burst >> 1)) & 31];
+        hue = RGB2(min(31, (GET_R(hue) * (l + 6) * 7) >> 8), min(31, (GET_G(hue) * (l + 6) * 7) >> 8),
+                   min(31, (GET_B(hue) * (l + 6) * 7) >> 8));
+        if (sHalftoneBurstSettle)
+            return DaemonsHalftoneLerp(hue, src, sHalftoneOverK);
+        return DaemonsHalftoneLerp(DaemonsToneOf(src, sHalftone.burstTone), hue, sHalftoneOverK);
+    }
+    return DaemonsHalftoneLerp(halftone ? DaemonsToneOf(src, sHalftoneTone) : src,
+                               (sHalftone.deepTone == HT_TONE_EMERALD ? sToneEmeraldDeep : sToneSapphireDeep)[l],
+                               sHalftoneOverK);
 }
 
 static u16 DaemonsHalftoneLightOnly(u16 own, u16 now)
@@ -1095,7 +1241,7 @@ static s32 DaemonsSplashChannel(s32 grey, s32 channel, s32 amount)
 // A grey, multiplied by the splash's colour (and lifted a quarter, so the dark of it still shows), by amount of 256.
 static u16 DaemonsHalftoneSplashTint(u16 grey, s32 amount)
 {
-    s32 g = GET_R(grey);
+    s32 g = DaemonsHalftoneLum(grey);   // T-519: a tone's brightness, which is a grey's own channel
     u16 c = sHalftone.splashColour;
 
     return RGB2(DaemonsSplashChannel(g, GET_R(c), amount), DaemonsSplashChannel(g, GET_G(c), amount),
@@ -1153,6 +1299,102 @@ static bool8 DaemonsHalftoneFieldSettled(void)
     return DaemonsFieldOnScreen() && !gMain.inBattle && !gPaletteFade.active;
 }
 
+// T-519: what the map's palettes are loaded under that can change while you stand in it -- HALFTONE or not (mended,
+// the witching half-hour comes and goes; the colour finishes spreading) and how vivid THE CREATOR'S HOUR makes it.
+// The top bit is always set, so 0 means nothing has loaded yet.
+static s32 DaemonsHalftoneVivid(void);
+
+static u8 DaemonsHalftoneRegime(void)
+{
+    return 0x80 | DaemonsIsHalftone() | (-DaemonsHalftoneVivid() / 24) << 1;
+}
+
+void DaemonsHalftoneNoteLoaded(void)
+{
+    sHalftone.loaded = DaemonsHalftoneRegime();
+}
+
+// T-519 item 2: a half opened at DAEMON TOWER before the mending -- its tint deepens for a moment, then settles.
+void DaemonsHalftoneDeepen(bool8 dawn)
+{
+    sHalftone.deepTone = dawn ? HT_TONE_SAPPHIRE : HT_TONE_EMERALD;
+    sHalftone.deep = 1;
+}
+
+bool8 DaemonsHalftoneDeepening(void)
+{
+    return sHalftone.deep != 0;
+}
+
+// T-519 item 3: the mending's burst, at DAEMON TOWER. The tower's tone turns through every colour and settles into
+// the tower's own; then the colour waits for your steps in the town (DaemonsHalftoneOnStep).
+void DaemonsHalftoneBurst(void)
+{
+    sHalftone.burstTone = DaemonsIsHalftone() ? DaemonsHalftoneTone() : HT_TONE_NONE;
+    sHalftone.burst = 1;
+    sHalftone.mendSpread = 1;
+}
+
+bool8 DaemonsHalftoneBursting(void)
+{
+    return sHalftone.burst != 0;
+}
+
+#if DAEMONS_DEBUG
+void DaemonsHalftoneDebugMended(bool8 on)   // DEBUG -> GAME EVENTS -> MENDED: at once, no spreading
+{
+    sHalftone.mendSpread = 0;
+    sHalftone.loaded = 0x7F;                // looked at again once the field settles
+}
+#endif
+
+// A step in the town after the mending: a splash of colour, and the town a little more in colour for good.
+void DaemonsHalftoneOnStep(void)
+{
+    if (sHalftone.mendSpread == 0 || gMapHeader.regionMapSectionId != MAPSEC_LAVENDER_TOWN || !FlagGet(FLAG_UNITY_MENDED))
+        return;
+    sHalftone.mendPulse = HT_MEND_PULSE;
+    if (++sHalftone.mendSpread > HT_MEND_STEPS)
+        sHalftone.mendSpread = 0;           // in colour: the regime turns, and the field is relit (the tick)
+}
+
+// The deepening's and the burst's shares this frame, and their ends. Returns TRUE while one runs.
+static bool8 DaemonsHalftoneOverlayTick(void)
+{
+    if (sHalftone.burst != 0)
+    {
+        u8 t = sHalftone.burst++;
+
+        sHalftoneBurstSettle = t >= HT_BURST_HOLD;
+        sHalftoneOverK = t < HT_BURST_RISE ? t * 256 / HT_BURST_RISE
+                       : t < HT_BURST_HOLD ? 255
+                       : (t - HT_BURST_HOLD) * 255 / (HT_BURST_FRAMES - HT_BURST_HOLD);
+        if (t + 1 >= HT_BURST_FRAMES)
+        {
+            sHalftone.burst = 0;
+            sHalftone.loaded = 0x7F;        // relit once the field settles: the tower's palettes, in colour
+            CpuCopy16(gPlttBufferUnfaded, gPlttBufferFaded, PLTT_SIZE);
+        }
+        return TRUE;
+    }
+    if (sHalftone.deep != 0)
+    {
+        u8 t = sHalftone.deep++;
+
+        sHalftoneOverK = t < HT_DEEP_RISE ? t * 256 / HT_DEEP_RISE
+                       : t < HT_DEEP_HOLD ? 255
+                       : 255 - (t - HT_DEEP_HOLD) * 255 / (HT_DEEP_FRAMES - HT_DEEP_HOLD);
+        if (t + 1 >= HT_DEEP_FRAMES)
+        {
+            sHalftone.deep = 0;
+            if (!DaemonsIsHalftone())
+                CpuCopy16(gPlttBufferUnfaded, gPlttBufferFaded, PLTT_SIZE);
+        }
+        return TRUE;
+    }
+    return FALSE;
+}
+
 // Once a frame, from main.c only (the grey itself also runs at the vblank's copy and a fade's, so it must not count).
 void DaemonsHalftoneTick(void)
 {
@@ -1160,8 +1402,23 @@ void DaemonsHalftoneTick(void)
 
     sHalftone.share = 0;
     sHalftone.routineMask = 0;
+    sHalftoneTone = DaemonsHalftoneTone();
     if (sHalftone.splash != 0)
         sHalftone.splash--;
+    if (sHalftone.mendPulse != 0)
+        sHalftone.mendPulse--;
+    if (DaemonsHalftoneOverlayTick())
+        return;
+    // T-519: the light the map was loaded under has changed while you stand in it (mended HALFTONE's witching
+    // half-hour coming or going, the colour finishing its spread, THE CREATOR'S HOUR's vividness): relight it.
+    if (sHalftone.loaded != 0 && sHalftone.loaded != DaemonsHalftoneRegime() && DaemonsHalftoneFieldSettled()
+     && gGlobalFieldTintMode == QL_TINT_NONE && !ArePlayerFieldControlsLocked())
+    {
+        DaemonsRelightField();
+        sHalftone.loaded = DaemonsHalftoneRegime();
+        if (!DaemonsIsHalftone())
+            CpuCopy16(gPlttBufferUnfaded, gPlttBufferFaded, PLTT_SIZE);
+    }
     if (!DaemonsIsHalftone() || sDaemonsHalftoneInColour)
     {
         sHalftone.wait = sHalftone.flicker = sHalftone.floorFade = sHalftone.splash = 0;
@@ -1205,6 +1462,13 @@ void DaemonsHalftoneTick(void)
         sHalftone.share = sHalftoneFlicker[sHalftone.flicker++];
         return;
     }
+    // T-519: after the mending, the town comes back into colour step by step, each step a splash.
+    if (sHalftone.mendSpread != 0)
+    {
+        sHalftone.share = min(255, (sHalftone.mendSpread - 1) * 256 / HT_MEND_STEPS
+                                   + sHalftone.mendPulse * HT_MEND_SPLASH / HT_MEND_PULSE);
+        return;
+    }
     // A tower floor after INIT is rescued: grey as you arrive, then it comes back, and stays.
     floor = DaemonsTowerFloorFlag();
     if (floor != 0 && FlagGet(FLAG_RESCUED_MR_FUJI) && sHalftone.wait >= HT_FLOOR_WAIT)
@@ -1225,10 +1489,15 @@ void DaemonsGreyHalftoneFrame(void)
     u16 *colour, *source;
     s32 p, e, keep, shine, splash, washed;
     u32 skip, routine, lightOnly;
-    bool8 drawing;
+    bool8 drawing, halftone = DaemonsIsHalftone(), overlay = sHalftone.deep != 0 || sHalftone.burst != 0;
+    const u16 *ramp;
 
-    if (sDaemonsHalftoneInColour || !DaemonsIsHalftone())
+    if (sDaemonsHalftoneInColour || (!halftone && !overlay))
         return;
+    sHalftoneTone = DaemonsHalftoneTone();
+    ramp = sHalftoneTone == HT_TONE_EMERALD ? sToneEmerald : sToneSapphire;
+    if (gMain.inBattle)
+        overlay = FALSE;
     skip = 0;
     routine = 0;
     lightOnly = 0;
@@ -1332,6 +1601,14 @@ void DaemonsGreyHalftoneFrame(void)
             sHalftone.washDirty = 0;
             continue;
         }
+        if (overlay)
+        {
+            for (e = 0; e < 16; e++)
+                colour[e] = DaemonsHalftoneOverlay(source[e], halftone);
+            continue;
+        }
+        if (!halftone)
+            continue;
         if (sHalftone.share != 0 && !drawing)
         {
             for (e = 0; e < 16; e++)
@@ -1342,6 +1619,13 @@ void DaemonsGreyHalftoneFrame(void)
         {
             if (drawing)
                 DaemonsDrawingTone(&colour[e]);
+            else if (sHalftoneTone != HT_TONE_GREY)
+            {
+                u16 toned = ramp[DaemonsHalftoneLum(colour[e])];   // T-519: a toned colour tones to itself
+
+                if (colour[e] != toned)
+                    colour[e] = toned;
+            }
             else if (colour[e] != (colour[e] & 0x1F) * 0x421)
                 TintPalette_GrayScale(&colour[e], 1);
         }
@@ -1396,12 +1680,28 @@ static void DaemonsPaleEntries(u16 offset, u16 count)
 // Blanche's wash is, so a fade or a reload can never compound it; HALFTONE's grey outranks it, and the watch's light
 // falls on top of it. T-395: and never in THE NEXUS, which is made entirely of paint -- the one place that is not
 // waiting to be understood before its colours show.
-static u8 DaemonsClarityFade(void)
+// T-519 item 1: HALFTONE mended is EXTRA VIVID in THE CREATOR'S HOUR (4:24-5:12, the brief): its colours pushed away
+// from their own grey as the hour rises, by up to 96 of 256 at its height, in four steps (so the field is relit four
+// times on the way up, and four down), as the palettes load -- in the faded print's place, as a negative fade.
+static s32 DaemonsHalftoneVivid(void)
+{
+    u8 sec = gMapHeader.regionMapSectionId;
+    u16 strength;
+
+    if (!FlagGet(FLAG_UNITY_MENDED) || (sec != MAPSEC_LAVENDER_TOWN && sec != MAPSEC_POKEMON_TOWER) || DaemonsIsHalftone())
+        return 0;
+    strength = Hours_CreatorStrength();
+    return strength == 0 ? 0 : -24 * (s32)((strength * 4 + 128) >> 8);
+}
+
+static s32 DaemonsClarityFade(void)
 {
     u8 missing;
 
     if (DaemonsIsHalftone())
         return 0;
+    if (DaemonsHalftoneVivid() != 0)
+        return DaemonsHalftoneVivid();
     if (gMapHeader.mapLayout != NULL && gMapHeader.mapLayout->secondaryTileset == &gTileset_Nexus)
         return 0;
     missing = DaemonsUnderstandingsMissing();
@@ -1627,6 +1927,9 @@ static void DaemonsClarityEntries(u16 offset, u16 count)
         r += ((grey - r) * amount + 128) / 256;
         g += ((grey - g) * amount + 128) / 256;
         b += ((grey - b) * amount + 128) / 256;
+        r = r < 0 ? 0 : r > 31 ? 31 : r;   // T-519: a vivid (negative) fade can leave the range
+        g = g < 0 ? 0 : g > 31 ? 31 : g;
+        b = b < 0 ? 0 : b > 31 ? 31 : b;
         gPlttBufferUnfaded[offset + i] = RGB2(r, g, b);
     }
     CpuCopy16(&gPlttBufferUnfaded[offset], &gPlttBufferFaded[offset], PLTT_SIZEOF(count));
@@ -1661,6 +1964,9 @@ bool8 DaemonsGroundSpritePalette(u16 *pal, bool8 seasonal)
             r += ((grey - r) * amount + 128) / 256;
             g += ((grey - g) * amount + 128) / 256;
             b += ((grey - b) * amount + 128) / 256;
+            r = r < 0 ? 0 : r > 31 ? 31 : r;   // T-519: a vivid (negative) fade can leave the range
+            g = g < 0 ? 0 : g > 31 ? 31 : g;
+            b = b < 0 ? 0 : b > 31 ? 31 : b;
             c = RGB2(r, g, b);
         }
         pal[i] = c;
@@ -1812,6 +2118,7 @@ static void LoadTilesetPalette(struct Tileset const *tileset, u16 destOffset, u1
             DaemonsClarityEntries(destOffset + 1, (size - 2) >> 1);
             ApplyGlobalTintToPaletteEntries(destOffset + 1, (size - 2) >> 1);
             sPrimarySignature = DaemonsPaletteSignature();
+            DaemonsHalftoneNoteLoaded();   // T-519
         }
         else if (tileset->isSecondary == TRUE)
         {
