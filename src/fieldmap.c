@@ -1335,11 +1335,12 @@ static bool8 DaemonsHalftoneFieldSettled(void)
 // T-519: what the map's palettes are loaded under that can change while you stand in it -- HALFTONE or not (mended,
 // the witching half-hour comes and goes; the colour finishes spreading) and how vivid THE CREATOR'S HOUR makes it.
 // The top bit is always set, so 0 means nothing has loaded yet.
+#define HT_VIVID_STEP 48   // T-519: THE CREATOR'S HOUR's vividness, of 256, each of four steps
 static s32 DaemonsHalftoneVivid(void);
 
 static u8 DaemonsHalftoneRegime(void)
 {
-    return 0x80 | DaemonsIsHalftone() | (-DaemonsHalftoneVivid() / 24) << 1;
+    return 0x80 | DaemonsIsHalftone() | (-DaemonsHalftoneVivid() / HT_VIVID_STEP) << 1;
 }
 
 void DaemonsHalftoneNoteLoaded(void)
@@ -1727,8 +1728,9 @@ static void DaemonsPaleEntries(u16 offset, u16 count)
 // falls on top of it. T-395: and never in THE NEXUS, which is made entirely of paint -- the one place that is not
 // waiting to be understood before its colours show.
 // T-519 item 1: HALFTONE mended is EXTRA VIVID in THE CREATOR'S HOUR (4:24-5:12, the brief): its colours pushed away
-// from their own grey as the hour rises, by up to 96 of 256 at its height, in four steps (so the field is relit four
-// times on the way up, and four down), as the palettes load -- in the faded print's place, as a negative fade.
+// from their own grey as the hour rises, by up to 192 of 256 at its height, in four steps (so the field is relit four
+// times on the way up, and four down), as the palettes load -- in the faded print's place, as a negative fade. (96
+// read only as gold under the hour's light, the user 2026-11-05: raised, and the gold eased here, Hours_CreatorTint.)
 static s32 DaemonsHalftoneVivid(void)
 {
     u8 sec = gMapHeader.regionMapSectionId;
@@ -1737,7 +1739,12 @@ static s32 DaemonsHalftoneVivid(void)
     if (!FlagGet(FLAG_UNITY_MENDED) || (sec != MAPSEC_LAVENDER_TOWN && sec != MAPSEC_POKEMON_TOWER) || DaemonsIsHalftone())
         return 0;
     strength = Hours_CreatorStrength();
-    return strength == 0 ? 0 : -24 * (s32)((strength * 4 + 128) >> 8);
+    return strength == 0 ? 0 : -HT_VIVID_STEP * (s32)((strength * 4 + 128) >> 8);
+}
+
+bool8 DaemonsHalftoneVividHere(void)
+{
+    return DaemonsHalftoneVivid() != 0;
 }
 
 static s32 DaemonsClarityFade(void)

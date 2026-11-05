@@ -75,7 +75,8 @@ void DaemonsHalftoneDeepen(bool8 dawn);        // T-519 item 2: a half opened at
 bool8 DaemonsHalftoneDeepening(void);
 void DaemonsHalftoneBurst(void);               // T-519 item 3: the mending's burst
 bool8 DaemonsHalftoneBursting(void);
-void DaemonsHalftoneOnStep(void);              // T-519 item 3: a step, the colour spreading after the mending
+void DaemonsHalftoneOnStep(void);
+bool8 DaemonsHalftoneVividHere(void);          // T-519: HALFTONE mended, in THE CREATOR'S HOUR              // T-519 item 3: a step, the colour spreading after the mending
 #if DAEMONS_DEBUG
 void DaemonsHalftoneDebugMended(bool8 on);     // T-519: DEBUG's MENDED, at once
 #endif

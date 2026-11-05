@@ -169,6 +169,8 @@ bool8 Hours_CreatorTint(u16 *colour, u8 *weight)
         return FALSE;
     *colour = GOLD;
     *weight = s * Breath() / 256 * TINT_FULL / 256;
+    if (DaemonsHalftoneVividHere())
+        *weight = *weight * 2 / 5;      // T-519: HALFTONE mended, its own colours show through the gold (the user)
     return *weight != 0;
 }
 
@@ -185,6 +187,8 @@ u8 Hours_DawnStep(void)
         return 0;
     if (!DaemonsFieldOnScreen())
         s = Hours_CreatorStrength();     // a map loading: the step it will be seen in
+    if (DaemonsHalftoneVividHere())
+        return (s * 6 + 128) / 256;     // T-519: HALFTONE mended -- most of the dawn, not all, so its colours are not paled out
     return (s * 8 + 128) / 256;
 }
 
@@ -228,7 +232,7 @@ void Hours_GlowFadedInPlace(u16 palOffset, u8 weight)
 
 static void Bloom(u16 s)
 {
-    u16 y = (s * Breath() / 256 * BLOOM_MAX_Y + 128) / 256;
+    u16 y = (s * Breath() / 256 * (DaemonsHalftoneVividHere() ? BLOOM_MAX_Y / 2 : BLOOM_MAX_Y) + 128) / 256;   // T-519
     u16 now = GetGpuReg(REG_OFFSET_BLDCNT), win = GetGpuReg(REG_OFFSET_WININ);
     bool8 ours = (now == BLOOM_BLDCNT);
 
