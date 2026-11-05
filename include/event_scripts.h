@@ -1248,6 +1248,7 @@ extern const u8 EventScript_Guide[];      // T-300
 extern const u8 EventScript_SubtleLayer[];   // T-423
 extern const u8 EventScript_HermeticLayer[];    // T-483
 extern const u8 EventScript_EudaimonLayer[];    // T-519 item 2
+extern const u8 Daemons_EventScript_EudaimonNudge[];   // T-519 item 2: the voice in the witching hour
 extern const u8 EventScript_SmallHandOpens[];  // T-483 (5): THE SMALL HAND lets a trainer be walked past
 extern const u8 EventScript_Spellbook[];        // T-483 (5): the START menu's SPELLBOOK
 extern const u8 EventScript_HalloweenTreat[];   // T-483 (7): a daemon met on Halloween leaves a treat

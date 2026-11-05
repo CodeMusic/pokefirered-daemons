@@ -87,6 +87,17 @@ EventScript_EudaimonLayer::
 	releaseall
 	end
 
+@ T-519 item 2 (the brief): with the dawn half held, in the witching hour, a voice that is not your own points to
+@ the hatter's house -- once in the hour, on the first step outdoors (src/daemons_eudaimon.c). DRAFT.
+Daemons_EventScript_EudaimonNudge::
+	lockall
+	msgbox Text_EudaimonNudge
+	releaseall
+	end
+
+Text_EudaimonNudge::
+	.string "{COLOR PURPLE}{SHADOW LIGHT_GRAY}The HATTER is still up. Go to him.$"
+
 EventScript_HermeticByDay::
 	msgbox Text_HermeticByDay
 	releaseall

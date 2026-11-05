@@ -6,5 +6,6 @@
 bool8 Eudaimon_Held(void);
 bool8 Eudaimon_LarkSits(void);              // specialvar: the LARK is under the fir (a grove's arrival asks)
 void Eudaimon_LarkWait(void);               // special, then waitstate: VAR_RESULT TRUE if the player sat it out
+bool8 Daemons_TryEudaimonNudge(void);       // field_control_avatar.c's step hook: the voice, once in the hour
 
 #endif // GUARD_DAEMONS_EUDAIMON_H

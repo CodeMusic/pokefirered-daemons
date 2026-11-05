@@ -34,6 +34,7 @@
 #include "daemons_reads.h"   // T-459 B: a read
 #include "daemons_spellbook.h"   // T-483 (5): THE MIRROR's steps
 #include "daemons_spirits.h"   // T-519: SPIRITS
+#include "daemons_eudaimon.h"   // T-519 item 2: the nudge
 #include "school_lift.h"
 
 // T-196: the label the popup carries while an echo is on screen.
@@ -961,6 +962,12 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
             if (Daemons_TrySpiritsCrossing())
             {
                 ScriptContext_SetupScript(Daemons_EventScript_SpiritsCrossing);
+                return TRUE;
+            }
+            //  T-519 item 2. And again: with the dawn half held, in the witching hour, a voice -- once in the hour.
+            if (Daemons_TryEudaimonNudge())
+            {
+                ScriptContext_SetupScript(Daemons_EventScript_EudaimonNudge);
                 return TRUE;
             }
             //  T-459 B. And last: the first step on a map, now and then, once THE SUBTLE LAYER is held -- a read.

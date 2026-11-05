@@ -1,8 +1,10 @@
 #include "global.h"
 #include "event_data.h"
+#include "overworld.h"
 #include "script.h"
 #include "task.h"
 #include "daemons_eudaimon.h"
+#include "daemons_hours.h"
 #include "daemons_time.h"
 #include "constants/flags.h"
 
@@ -23,6 +25,8 @@
 // reset inside the hour may say it again), and not in play's first minute (the catch-up, daemons_hours.c).
 
 #define LARK_WAIT_FRAMES (60 * 10)
+
+static bool8 sNudged;   // IWRAM, one byte: said in this witching hour
 
 bool8 Eudaimon_Held(void)
 {
@@ -68,3 +72,18 @@ void Eudaimon_LarkWait(void)
 
 #undef tPhase
 #undef tFrames
+
+bool8 Daemons_TryEudaimonNudge(void)
+{
+    if (!DaemonsIsWitchingHour())
+    {
+        sNudged = FALSE;
+        return FALSE;
+    }
+    if (sNudged || !Eudaimon_Held() || FlagGet(FLAG_GOT_HERMETIC_LAYER))
+        return FALSE;
+    if (!IsMapTypeOutdoors(gMapHeader.mapType) || Hours_WitchingEase() == 0)
+        return FALSE;
+    sNudged = TRUE;
+    return TRUE;
+}
