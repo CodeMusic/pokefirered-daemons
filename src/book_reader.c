@@ -17,6 +17,7 @@
 #include "daemons_spellbook.h"   // T-483 (5): the folds' spells come off the page
 #include "daemons_glitch.h"  // T-486: and glitches, once
 #include "daemons_spirits.h"  // T-519 item 2: the dawn half's observer line
+#include "daemons_unity.h"    // T-519 item 3: the torn page, and the mended book
 #include "constants/songs.h"
 #include "data.h"         // T-509: the cards' daemons
 #include "decompress.h"
@@ -1128,6 +1129,11 @@ static const u8 *LayerText(const struct SubtleEntry *e)
 {
     u8 class = SPIRITS_AS_IT_IS;
 
+    // T-519 item 2: a half opened in DAEMON TOWER before the mending ends its last page torn at the spine.
+    if (sBook->book == BOOK_HERMETIC && sBook->entry == HERMETIC_TORN_ENTRY && Mending_TornHere())
+        return sHermeticTorn;
+    if (sBook->book == BOOK_EUDAIMON && sBook->entry == EUDAIMON_TORN_ENTRY && Mending_TornHere())
+        return sEudaimonTorn;
     if (sBook->book != BOOK_EUDAIMON || sBook->entry != EUDAIMON_OBSERVER_ENTRY)
         return e->text;
     if (GetMonData(&gPlayerParty[0], MON_DATA_SPECIES) != SPECIES_NONE && !GetMonData(&gPlayerParty[0], MON_DATA_IS_EGG))

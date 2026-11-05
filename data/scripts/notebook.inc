@@ -65,6 +65,8 @@ EventScript_SubtleLayer::
 @ T-483: THE HERMETIC LAYER, opened at its cover -- only at night (src/daemons_hermetic.c). DRAFT, every word.
 EventScript_HermeticLayer::
 	lockall
+	setvar VAR_0x8004, 0
+	call EventScript_HalfAtTower
 	specialvar VAR_RESULT, Hermetic_IsNight
 	goto_if_eq VAR_RESULT, FALSE, EventScript_HermeticByDay
 	fadescreen FADE_TO_BLACK
@@ -81,11 +83,23 @@ EventScript_HermeticClosed::
 @ thirteen are the night half's own spells, cast from the SPELLBOOK.
 EventScript_EudaimonLayer::
 	lockall
+	setvar VAR_0x8004, 1
+	call EventScript_HalfAtTower
 	fadescreen FADE_TO_BLACK
 	special Eudaimon_Open
 	waitstate
 	releaseall
 	end
+
+@ T-519 item 2 (the user, 2026-11-05): a half opened in DAEMON TOWER before the mending deepens its tint for a
+@ moment, then settles; its last page then ends torn at the spine (src/daemons_unity.c). VAR_0x8004 the half.
+EventScript_HalfAtTower::
+	specialvar VAR_RESULT, Mending_AtTower
+	goto_if_eq VAR_RESULT, 0, EventScript_HalfAtTowerDone   @ MENDING_NOT_HERE
+	special Mending_Deepen
+	waitstate
+EventScript_HalfAtTowerDone::
+	return
 
 @ T-519 item 2 (the brief): with the dawn half held, in the witching hour, a voice that is not your own points to
 @ the hatter's house -- once in the hour, on the first step outdoors (src/daemons_eudaimon.c). DRAFT.
