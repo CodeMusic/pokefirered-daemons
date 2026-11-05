@@ -45,7 +45,7 @@ static const u8 sHermeticLabel_0[] = _("THE TABLETS");
 static const u8 sHermeticHeading_0[] = _("A Warning, and the First Two Sayings");
 static const u8 sHermeticShort_0[] = _("WARNING");
 static const u8 sHermeticTitle_0[] = _("A Warning");
-static const u8 sHermeticText_0[] = _("Close this book if it is still light. It was not written in the world you walk by day. OSRIC HATTER set it down on QUICKSILVER, where he made hats until the quicksilver in the felt began to talk to him. Some say he went mad. He says he went through.\pSome who read it to the end went a little mad as well. If you want your world to remain solid, stop here. If you want to see the subtle layer underneath, the one that steers everything else, turn the page.\pThe other two books are careful. This one does not stop. The words in green are not for reading quietly: say them.\pIs any of it true?\pTake it with a grain of salt. Then ask what it would change, if it were.");
+static const u8 sHermeticText_0[] = _("The path ahead is fraught with shadows, and not all of them are in front of you. Close this book if it is still light. It was not written for the world you walk by day.\pOSRIC HATTER read it on QUICKSILVER, where he made hats until the quicksilver in the felt began to talk to him. Some say he went mad. He says he went through.\pSome who read it to the end went a little mad as well. If you want your world to remain solid, stop here. If you want to see the subtle layer underneath, the one that steers everything else, turn the page.\pThe other two books are careful. This one does not stop. The words in green are not for reading quietly: say them.\pThere is another way to read this. It was read in the light, by someone who sat very still. You would not trust it yet.\pIs any of it true?\pTake it with a grain of salt. Then ask what it would change, if it were.");
 static const u8 sHermeticCaption_0[] = _("This book was not printed here.");
 static const u8 sHermeticShort_1[] = _("UNDER A SPELL");
 static const u8 sHermeticTitle_1[] = _("What the School Got Right");
@@ -295,7 +295,7 @@ static const struct SubtleSection sHermeticSections[HERMETIC_SECTIONS] =
 
 static const struct SubtleEntry sHermeticEntries[HERMETIC_ENTRIES] =
 {
-    { sHermeticShort_0, sHermeticTitle_0, sHermeticText_0, sHermeticCaption_0, 0, 0x0008, 2, 0x0000 },   // warning
+    { sHermeticShort_0, sHermeticTitle_0, sHermeticText_0, sHermeticCaption_0, 0, 0x0020, 2, 0x0000 },   // warning
     { sHermeticShort_1, sHermeticTitle_1, sHermeticText_1, sHermeticCaption_1, 0, 0x0000, 10, 0x0000 },   // chalk
     { sHermeticShort_2, sHermeticTitle_2, sHermeticText_2, sHermeticCaption_2, 0, 0x0000, 18, 0x001F },   // emerald
     { sHermeticShort_3, sHermeticTitle_3, sHermeticText_3, sHermeticCaption_3, 0, 0x0000, 24, 0x007E },   // hands
