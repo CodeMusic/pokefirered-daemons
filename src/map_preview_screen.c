@@ -20,6 +20,10 @@ static void Task_RunMapPreviewScreenForest(u8 taskId);
 static const u8 sViridianForestMapPreviewPalette[] = INCBIN_U8("graphics/map_preview/viridian_forest/tiles.gbapal");
 static const u8 sViridianForestMapPreviewTiles[] = INCBIN_U8("graphics/map_preview/viridian_forest/tiles.4bpp.lz");
 static const u8 sViridianForestMapPreviewTilemap[] = INCBIN_U8("graphics/map_preview/viridian_forest/tilemap.bin.lz");
+// T-445: THE SAME BUSH's own card (salt scrub, batch H) -- it showed THE UNDERTONE's (DAEMONS tools/gbapreviews.py --places writes it)
+static const u8 sPatternBushMapPreviewPalette[] = INCBIN_U8("graphics/map_preview/pattern_bush/tiles.gbapal");
+static const u8 sPatternBushMapPreviewTiles[] = INCBIN_U8("graphics/map_preview/pattern_bush/tiles.4bpp.lz");
+static const u8 sPatternBushMapPreviewTilemap[] = INCBIN_U8("graphics/map_preview/pattern_bush/tilemap.bin.lz");
 static const u8 sRockTunnelMapPreviewPalette[] = INCBIN_U8("graphics/map_preview/rock_tunnel/tiles.gbapal");
 static const u8 sRockTunnelMapPreviewTiles[] = INCBIN_U8("graphics/map_preview/rock_tunnel/tiles.4bpp.lz");
 static const u8 sRockTunnelMapPreviewTilemap[] = INCBIN_U8("graphics/map_preview/rock_tunnel/tilemap.bin.lz");
@@ -265,9 +269,9 @@ static const struct MapPreviewScreen sMapPreviewScreenData[MPS_COUNT] = {
         .mapsec = MAPSEC_PATTERN_BUSH,
         .type = MPS_TYPE_FOREST,
         .flagId = FLAG_WORLD_MAP_SIX_ISLAND_PATTERN_BUSH,
-        .tilesptr = sViridianForestMapPreviewTiles,
-        .tilemapptr = sViridianForestMapPreviewTilemap,
-        .palptr = sViridianForestMapPreviewPalette
+        .tilesptr = sPatternBushMapPreviewTiles,
+        .tilemapptr = sPatternBushMapPreviewTilemap,
+        .palptr = sPatternBushMapPreviewPalette
     },
     [MPS_LIPTOO_CHAMBER] = {
         .mapsec = MAPSEC_LIPTOO_CHAMBER,
