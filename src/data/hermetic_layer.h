@@ -348,3 +348,7 @@ static const struct SubtleEntry sHermeticEntries[HERMETIC_ENTRIES] =
     { sHermeticShort_50, sHermeticTitle_50, sHermeticText_50, sHermeticCaption_50, 0, 0x0000, 290, 0x0001 },   // blank
     { sHermeticShort_51, sHermeticTitle_51, sHermeticText_51, sHermeticCaption_51, 0, 0x0000, 296, 0x0001 },   // lastword
 };
+
+// T-519 item 2: THE HERMETIC LAYER's last page, torn mid-sentence at the spine (DRAFT).
+#define HERMETIC_TORN_ENTRY 51
+static const u8 sHermeticTorn[] = _("As below, so above.\pYou have read a book that should not have been printed, at an hour when nobody reads. Close it gently. The world will look the same in the morning. It will not be, and it");
