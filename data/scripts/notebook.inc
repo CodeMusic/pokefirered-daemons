@@ -157,7 +157,7 @@ EventScript_HermeticByDay::
 @ it did in gStringVar4. DRAFT, every word.
 EventScript_Spellbook::
 	lockall
-	specialvar VAR_RESULT, Hermetic_IsNight
+	specialvar VAR_RESULT, Spellbook_Opens   @ T-519 item 4: at night, or in the creator's hour for THE HORIZON
 	goto_if_eq VAR_RESULT, FALSE, EventScript_SpellbookByDay
 	special Spellbook_Choose
 	waitstate

@@ -36,6 +36,7 @@
 #include "daemons_hermetic.h"
 #include "daemons_spellbook.h"
 #include "daemons_time.h"
+#include "daemons_unity.h"   // T-519 item 4: THE HORIZON is the mended book's
 #include "constants/abilities.h"
 #include "constants/battle.h"
 #include "constants/event_object_movement.h"
@@ -174,6 +175,23 @@
 //  four and FLAG_SPELL_MIRRORED_HIGH (0x3FE). Only one type is kept, the last: the save had six bits, not seventeen.
 //  Part seven: THE WITCHING HOUR's three bytes of IWRAM (sWitching, sWitchDay); in the save only VAR_SPELLS_CAST's bit
 //  13, which was always its own. 0x3FF is still free.
+//  T-519 item 4: THE HORIZON's three bytes of IWRAM (sHorizon, sHorizonDay); in the save only VAR_SPELLS_CAST's bit 14,
+//  its own value, which nothing wrote before it (the var's bits 14 and 15 were never set).
+//
+//  THE HORIZON (13, mended; the user, 2026-11-05, by multiple choice): THE UNITY BOOK's thirteenth, the two thirteenths
+//  together -- "nothing owed, nothing lost". Listed once the book is mended (FLAG_UNITY_MENDED) and the twelve are cast,
+//  in EITHER thin hour: the witching half-hour (HalfHour, 3:30-3:59) or THE CREATOR'S HOUR (4:24-5:12) -- and in the
+//  creator's hour the SPELLBOOK opens for it although the night has turned (Spellbook_Opens). Once a playthrough, as
+//  THE WITCHING HOUR is: said, it sets bit 14 and is a memory after. THE CREATOR'S HOUR as a spell of its own is not
+//  built (the dawn half is read only, and its thirteenth "is cast on the witching hour's terms" with the witching
+//  hour's effect worded as a gift: "nothing is owed"), so what the two give together is:
+//    NOTHING OWED  every cost THE WITCHING HOUR lifts is lifted (Witching() below asks for either): THE PULL's
+//                  heaviness, THE MIRROR's self, THE RETURN's progress, THE GREAT HAND's drain, THE SEAM's separateness;
+//    NOTHING LOST  THE RETURN said while it lasts is not spent -- it may be said again before the next rest;
+//    BOTH HOURS    it lasts from the cast to the end of THE CREATOR'S HOUR that morning: said at 3:30 it carries
+//                  through the gap and the whole dawn hour, "the same hour, seen from two sides of the horizon";
+//                  said in the creator's hour, to 5:12. The day changing, or a DEBUG watch outside both, ends it.
+//  RAM only, as the witching hour's: a reset ends it early, never a soft-lock.
 
 //  THE WITCHING HOUR (13), the last, the crease (the brief's table: "all twelve cast at least once, in the window, once
 //  per playthrough"). THE TWELVE are the wheel's, 1 to 12; THE PULL is the half and lives in the crease with it, so it
@@ -232,8 +250,8 @@
 #define BUILT_SPELLS ((1 << SPELL_AWAKENING) | (1 << SPELL_CONTRAST) | (1 << SPELL_ROOM) | (1 << SPELL_PULL) \
                     | (1 << SPELL_MIRROR) | (1 << SPELL_PATTERN) | (1 << SPELL_RETURN) | (1 << SPELL_SMALL_HAND) \
                     | (1 << SPELL_GREAT_HAND) | (1 << SPELL_PROCESS) | (1 << SPELL_SEAM) | (1 << SPELL_LENS) \
-                    | (1 << SPELL_FIELD) | (1 << SPELL_WITCHING))
-#define THE_TWELVE (BUILT_SPELLS & ~((1 << SPELL_PULL) | (1 << SPELL_WITCHING)))
+                    | (1 << SPELL_FIELD) | (1 << SPELL_WITCHING) | (1 << SPELL_HORIZON))
+#define THE_TWELVE (BUILT_SPELLS & ~((1 << SPELL_PULL) | (1 << SPELL_WITCHING) | (1 << SPELL_HORIZON)))
 #define AXIS_NONE  LEDGER_COUNT     // THE WITCHING HOUR's: the ledger is not touched
 #define GRANTED_WITH_BOOK ((1 << SPELL_LENS) | (1 << SPELL_FIELD))
 
@@ -253,6 +271,8 @@ static s16 sSeamFelt[2];    // IWRAM: THE SEAM -- HP the lead (0) and its foe (1
 static u8 sSeamState;       // IWRAM: ... SEAM_ECHOING, and which of them had a state as the routine began
 static bool8 sWitching;     // IWRAM: THE WITCHING HOUR said in this half-hour
 static u16 sWitchDay;       // IWRAM: ... on this day (the clock's day number)
+static bool8 sHorizon;      // IWRAM: THE HORIZON said, T-519 item 4
+static u16 sHorizonDay;     // IWRAM: ... on this day
 
 //  ---------------------------------------------------------------- words (DRAFT, every one)
 
@@ -270,6 +290,7 @@ static const u8 sName_Seam[]      = _("SEAM");
 static const u8 sName_Lens[]      = _("LENS");
 static const u8 sName_Field[]     = _("FIELD");
 static const u8 sName_Witching[]  = _("WITCHING");
+static const u8 sName_Horizon[]   = _("HORIZON");     // T-519 item 4
 
 static const u8 sLabel_Awakening[] = _("1  AWAKENING");
 static const u8 sLabel_Contrast[]  = _("2  CONTRAST");
@@ -285,6 +306,7 @@ static const u8 sLabel_Seam[]      = _("10 SEAM");
 static const u8 sLabel_Lens[]      = _("11 LENS");
 static const u8 sLabel_Field[]     = _("12 FIELD");
 static const u8 sLabel_Witching[]  = _("13 WITCHING");
+static const u8 sLabel_Horizon[]   = _("13 HORIZON");
 
 //  Each spell's line, from the Book of Thirteen (docs/hermetic-layer.md, its inscriptions), three lines of 208px.
 static const u8 sLine_Awakening[] = _("You were never off. You were only\nunwatched. Open. That is the whole\nspell.");
@@ -301,6 +323,7 @@ static const u8 sLine_Pattern[]   = _("Once is chance. Twice is rhyme. Three\nti
 static const u8 sLine_Lens[]      = _("Give me the part. Only the part.\nI will see the whole later,\nif I earn it.");
 static const u8 sLine_Field[]     = _("Take the parts away. Let me feel the\nshape they were making.");
 static const u8 sLine_Witching[]  = _("Everything I separated, I now admit\nwas one.");    // never the hour
+static const u8 sLine_Horizon[]   = _("Everything I separated was one.\nEverything I was given was one gift.\nI am standing on the line.");   // docs/unity-book.md
 
 struct Spell
 {
@@ -328,6 +351,7 @@ static const struct Spell sSpells[] =
     { SPELL_LENS,      sName_Lens,      sLabel_Lens,      sLine_Lens,      LEDGER_CONTENT, LEDGER_REASON },
     { SPELL_FIELD,     sName_Field,     sLabel_Field,     sLine_Field,     LEDGER_CONTEXT, LEDGER_INTUITION },
     { SPELL_WITCHING,  sName_Witching,  sLabel_Witching,  sLine_Witching,  AXIS_NONE,      AXIS_NONE },
+    { SPELL_HORIZON,   sName_Horizon,   sLabel_Horizon,   sLine_Horizon,   AXIS_NONE,      AXIS_NONE },
 };
 
 static const u8 sText_AwakeningNone[] = _("The AWAKENING opens.\pNothing here is hidden. It was all\nin plain sight already.");
@@ -375,6 +399,8 @@ static const u8 sText_MirrorFree[]   = _("While you are it, you are still\nyou. 
 static const u8 sText_ReturnFree[]   = _("Your daemons come back as the last\nrest left them: whole.\pEvery level and routine is kept, and\nthe way toward the next.");
 static const u8 sText_Witching[]     = _("Everything I separated, I now admit\nwas one.\pWhile it lasts, nothing costs\nanything.");
 static const u8 sText_WitchingSpent[] = _("It was said once. Now it is a\nmemory, and a memory is a kind\pof spell.");
+static const u8 sText_Horizon[]      = _("The shadows and the light are two\nhalves of the same horizon.\pWhile it lasts, nothing is owed\nand nothing is lost.");   // T-519 item 4, DRAFT
+static const u8 sText_HorizonSpent[] = _("It was said once. The day goes on,\nand you are still on the line.");   // DRAFT
 static const u8 sText_News[]          = _("Something came off the page and into\nthe SPELLBOOK.\p");
 static const u8 sText_NewsThe[]       = _("THE ");
 static const u8 sText_NewsAnd[]       = _(" and ");
@@ -408,19 +434,34 @@ bool8 Spellbook_HalfHour(void)
     return HalfHour();
 }
 
+// T-519 item 4: either thin hour -- the witching half-hour or THE CREATOR'S HOUR.
+static bool8 ThinHour(void)
+{
+    return HalfHour() || DaemonsCreatorSecond() >= 0;
+}
+
 static u16 Known(void)
 {
-    u16 known = VarGet(VAR_SPELLS_KNOWN) & ~(1 << SPELL_WITCHING);     // never off the page: see THE WITCHING HOUR
+    u16 known = VarGet(VAR_SPELLS_KNOWN) & ~((1 << SPELL_WITCHING) | (1 << SPELL_HORIZON));   // never off the page
 
     if (Hermetic_Held())
         known |= GRANTED_WITH_BOOK;
     if ((VarGet(VAR_SPELLS_CAST) & THE_TWELVE) == THE_TWELVE && HalfHour())
         known |= 1 << SPELL_WITCHING;
+    if ((VarGet(VAR_SPELLS_CAST) & THE_TWELVE) == THE_TWELVE && Unity_Mended() && ThinHour())
+        known |= 1 << SPELL_HORIZON;        // T-519 item 4: the mended book's, in either thin hour
     return known;
 }
 
+// T-519 item 4: the SPELLBOOK opens at night, as the night half did -- and in THE CREATOR'S HOUR while THE HORIZON is
+// listed, though the clock has turned to dawn.
+bool8 Spellbook_Opens(void)
+{
+    return Hermetic_IsNight() || ((Known() >> SPELL_HORIZON) & 1);
+}
+
 // THE WITCHING HOUR in force: said in this half-hour, today. Let go the first time it is asked after either ends.
-static bool8 Witching(void)
+static bool8 WitchingSaid(void)
 {
     u16 day, minute;
 
@@ -430,6 +471,28 @@ static bool8 Witching(void)
     if (!HalfHour() || day != sWitchDay)
         sWitching = FALSE;
     return sWitching;
+}
+
+// T-519 item 4: THE HORIZON in force -- said today, and the clock still in a thin hour or the gap between them (3:30 to
+// 5:12 by the clock; a DEBUG watch counts only as one of the two hours). Let go the first time it is asked after.
+static bool8 Horizon(void)
+{
+    u16 day, minute;
+
+    if (!sHorizon)
+        return FALSE;
+    DaemonsDayAndMinute(&day, &minute);
+    if (day != sHorizonDay)
+        sHorizon = FALSE;
+    else if (!ThinHour() && (gDaemonsWatchOverride || minute < 3 * 60 + 30 || minute >= 5 * 60 + 12))
+        sHorizon = FALSE;
+    return sHorizon;
+}
+
+// Nothing costs anything (THE WITCHING HOUR), or nothing is owed (THE HORIZON): every cost below asks this.
+static bool8 Witching(void)
+{
+    return WitchingSaid() || Horizon();
 }
 
 static bool8 Knows(u8 spell)
@@ -1471,7 +1534,8 @@ static void Return(void)
         StringCopy(gStringVar4, sText_ReturnWhole);     // nothing to bring back: not spent
         return;
     }
-    VarSet(VAR_SPELL_STATE_3, s3 | STATE3_RETURNED);
+    if (!Horizon())
+        VarSet(VAR_SPELL_STATE_3, s3 | STATE3_RETURNED);   // T-519 item 4: THE HORIZON -- nothing lost, not spent
     StringCopy(gStringVar4, Witching() ? sText_ReturnFree : sText_Return);
 }
 
@@ -1567,6 +1631,22 @@ static void WitchingHour(void)
     StringCopy(gStringVar4, sText_Witching);
 }
 
+//  ---------------------------------------------------------------- THE HORIZON (T-519 item 4)
+
+static void HorizonSaid(void)
+{
+    u16 minute;
+
+    if (VarGet(VAR_SPELLS_CAST) & (1 << SPELL_HORIZON))
+    {
+        StringCopy(gStringVar4, sText_HorizonSpent);      // once a playthrough, as THE WITCHING HOUR
+        return;
+    }
+    DaemonsDayAndMinute(&sHorizonDay, &minute);
+    sHorizon = TRUE;
+    StringCopy(gStringVar4, sText_Horizon);
+}
+
 void Spellbook_Cast(void)
 {
     u8 spell = gSpecialVar_Result;
@@ -1595,6 +1675,7 @@ void Spellbook_Cast(void)
     case SPELL_PROCESS:   Process(); break;
     case SPELL_SEAM:      SetBattleSpell(BATTLE_SPELL_SEAM, sText_Seam); break;
     case SPELL_WITCHING:  WitchingHour(); break;
+    case SPELL_HORIZON:   HorizonSaid(); break;
     }
     VarSet(VAR_SPELLS_CAST, VarGet(VAR_SPELLS_CAST) | (1 << spell));
     LedgerAdd(s->axisA);
@@ -2266,5 +2347,5 @@ void Spellbook_DebugAll(bool8 on)
         FlagClear(FLAG_SPELL_MIRRORED_HIGH);
     }
 }
-STATIC_ASSERT((1 << SPELL_COUNT) - 1 == 0x3FFF, EverySpellIsTheDebugRowsTest);   // daemons_debug_events.c IsHeld
+STATIC_ASSERT((1 << SPELL_COUNT) - 1 == 0x7FFF, EverySpellIsTheDebugRowsTest);   // daemons_debug_events.c IsHeld
 #endif

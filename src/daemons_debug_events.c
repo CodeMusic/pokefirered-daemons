@@ -571,7 +571,7 @@ static bool8 IsHeld(u8 ev)
     case EV_SUBTLE:       return FlagGet(FLAG_GOT_SUBTLE_LAYER);
     case EV_HERMETIC:     return FlagGet(FLAG_GOT_HERMETIC_LAYER);
     case EV_EUDAIMON:     return FlagGet(FLAG_GOT_EUDAIMON_LAYER);
-    case EV_SPELLS:       return VarGet(VAR_SPELLS_KNOWN) == 0x3FFF;   // every SPELL_* bit (1 << SPELL_COUNT) - 1
+    case EV_SPELLS:       return VarGet(VAR_SPELLS_KNOWN) == 0x7FFF;   // every SPELL_* bit (1 << SPELL_COUNT) - 1
 #ifdef FIRERED
     case EV_INSTRUMENT:   return CheckBagHasItem(ITEM_HARP, 1);    // T-417: the edition's instrument
 #else
