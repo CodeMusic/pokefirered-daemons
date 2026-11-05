@@ -100,8 +100,8 @@
 
 //  The tone: this share (of 32) of the way to white or to black. Saturation (friendship) is applied first, then this,
 //  so a daemon keeps its type's colour at its own friendship's strength and is only lighter or darker over it.
-#define TONE_LIGHT       6
-#define TONE_DARK        6
+#define TONE_LIGHT      10      // the user, 2026-11-04: plainer (was 6)
+#define TONE_DARK       10
 
 //  Each kind of event rolls on its own salt, so two in one frame are not the same draw.
 enum { SALT_HEAL = 1, SALT_FED, SALT_VITAMIN, SALT_MASSAGE, SALT_FAINTED, SALT_FIELD_FAINT, SALT_BOXED, SALT_BOND,
