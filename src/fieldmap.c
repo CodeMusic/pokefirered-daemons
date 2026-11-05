@@ -1114,7 +1114,7 @@ static const u16 sBurstHues[32] = {
 #define HT_BURST_FRAMES   170    // ... and settle into the tower's own colours by here
 #define HT_MEND_STEPS     20     // the town comes back into colour over this many steps after the mending,
 #define HT_MEND_PULSE     24     // ... each step a splash of this many frames,
-#define HT_MEND_SPLASH    88     // ... of this much more colour (of 256) at its height
+#define HT_MEND_SPLASH    150    // ... of this much more colour (of 256) at its height
 
 static bool8 DaemonsHalftoneSpreading(void)
 {
@@ -1196,24 +1196,57 @@ static u16 DaemonsHalftoneMix(u16 c, s32 share)
     return DaemonsHalftoneLerp(toned, c, share);
 }
 
-// T-519: a deepening's or the burst's colour for one entry, from the colour as loaded (never compounding).
-static u16 DaemonsHalftoneOverlay(u16 src, bool8 halftone)
-{
-    s32 l = DaemonsHalftoneLum(src);
-    u16 hue;
+// T-519: a deepening's or the burst's colour, as a table by brightness built once a frame (DaemonsHalftoneOverlayTick),
+// so each entry costs its brightness and at most one mix -- the pass also runs inside the vblank, where a per-entry
+// computation of the burst's colours overran the frame and starved the main loop (filmed 5 Nov: a frame a minute).
+// OVER_TABLE: the entry is the table's colour; OVER_TOWARD: its own colour mixed toward it by K; OVER_AWAY: the table's
+// colour mixed toward its own by K.
+enum { OVER_TABLE, OVER_TOWARD, OVER_AWAY };
+static u16 sHalftoneOver[32];
+static u8 sHalftoneOverMode;
 
-    if (sHalftone.burst != 0)
+static u16 DaemonsBurstHue(s32 l)
+{
+    u16 hue = sBurstHues[(l + (sHalftone.burst >> 1)) & 31];
+
+    return RGB2(min(31, (GET_R(hue) * (l + 6) * 7) >> 8), min(31, (GET_G(hue) * (l + 6) * 7) >> 8),
+                min(31, (GET_B(hue) * (l + 6) * 7) >> 8));
+}
+
+static void DaemonsHalftoneOverlayTable(void)
+{
+    s32 l;
+    u16 c;
+    bool8 halftone = DaemonsIsHalftone();
+
+    for (l = 0; l < 32; l++)
     {
-        hue = sBurstHues[(l + (sHalftone.burst >> 1)) & 31];
-        hue = RGB2(min(31, (GET_R(hue) * (l + 6) * 7) >> 8), min(31, (GET_G(hue) * (l + 6) * 7) >> 8),
-                   min(31, (GET_B(hue) * (l + 6) * 7) >> 8));
-        if (sHalftoneBurstSettle)
-            return DaemonsHalftoneLerp(hue, src, sHalftoneOverK);
-        return DaemonsHalftoneLerp(DaemonsToneOf(src, sHalftone.burstTone), hue, sHalftoneOverK);
+        if (sHalftone.burst != 0)
+        {
+            c = DaemonsBurstHue(l);
+            if (sHalftoneBurstSettle)
+                sHalftoneOverMode = OVER_AWAY;
+            else if (sHalftone.burstTone == HT_TONE_NONE)
+                sHalftoneOverMode = OVER_TOWARD;
+            else
+            {
+                sHalftoneOverMode = OVER_TABLE;
+                c = DaemonsHalftoneLerp(DaemonsToneOf(RGB2(l, l, l), sHalftone.burstTone), c, sHalftoneOverK);
+            }
+        }
+        else
+        {
+            c = (sHalftone.deepTone == HT_TONE_EMERALD ? sToneEmeraldDeep : sToneSapphireDeep)[l];
+            if (halftone)
+            {
+                sHalftoneOverMode = OVER_TABLE;
+                c = DaemonsHalftoneLerp(DaemonsToneOf(RGB2(l, l, l), sHalftoneTone), c, sHalftoneOverK);
+            }
+            else
+                sHalftoneOverMode = OVER_TOWARD;
+        }
+        sHalftoneOver[l] = c;
     }
-    return DaemonsHalftoneLerp(halftone ? DaemonsToneOf(src, sHalftoneTone) : src,
-                               (sHalftone.deepTone == HT_TONE_EMERALD ? sToneEmeraldDeep : sToneSapphireDeep)[l],
-                               sHalftoneOverK);
 }
 
 static u16 DaemonsHalftoneLightOnly(u16 own, u16 now)
@@ -1319,6 +1352,8 @@ void DaemonsHalftoneDeepen(bool8 dawn)
 {
     sHalftone.deepTone = dawn ? HT_TONE_SAPPHIRE : HT_TONE_EMERALD;
     sHalftone.deep = 1;
+    sHalftoneOverK = 0;
+    DaemonsHalftoneOverlayTable();      // before the next pass reads it
 }
 
 bool8 DaemonsHalftoneDeepening(void)
@@ -1333,6 +1368,9 @@ void DaemonsHalftoneBurst(void)
     sHalftone.burstTone = DaemonsIsHalftone() ? DaemonsHalftoneTone() : HT_TONE_NONE;
     sHalftone.burst = 1;
     sHalftone.mendSpread = 1;
+    sHalftoneOverK = 0;
+    sHalftoneBurstSettle = FALSE;
+    DaemonsHalftoneOverlayTable();
 }
 
 bool8 DaemonsHalftoneBursting(void)
@@ -1369,6 +1407,7 @@ static bool8 DaemonsHalftoneOverlayTick(void)
         sHalftoneOverK = t < HT_BURST_RISE ? t * 256 / HT_BURST_RISE
                        : t < HT_BURST_HOLD ? 255
                        : (t - HT_BURST_HOLD) * 255 / (HT_BURST_FRAMES - HT_BURST_HOLD);
+        DaemonsHalftoneOverlayTable();
         if (t + 1 >= HT_BURST_FRAMES)
         {
             sHalftone.burst = 0;
@@ -1384,6 +1423,7 @@ static bool8 DaemonsHalftoneOverlayTick(void)
         sHalftoneOverK = t < HT_DEEP_RISE ? t * 256 / HT_DEEP_RISE
                        : t < HT_DEEP_HOLD ? 255
                        : 255 - (t - HT_DEEP_HOLD) * 255 / (HT_DEEP_FRAMES - HT_DEEP_HOLD);
+        DaemonsHalftoneOverlayTable();
         if (t + 1 >= HT_DEEP_FRAMES)
         {
             sHalftone.deep = 0;
@@ -1604,7 +1644,13 @@ void DaemonsGreyHalftoneFrame(void)
         if (overlay)
         {
             for (e = 0; e < 16; e++)
-                colour[e] = DaemonsHalftoneOverlay(source[e], halftone);
+            {
+                u16 over = sHalftoneOver[DaemonsHalftoneLum(source[e])];
+
+                colour[e] = sHalftoneOverMode == OVER_TABLE ? over
+                          : sHalftoneOverMode == OVER_TOWARD ? DaemonsHalftoneLerp(source[e], over, sHalftoneOverK)
+                          : DaemonsHalftoneLerp(over, source[e], sHalftoneOverK);
+            }
             continue;
         }
         if (!halftone)
