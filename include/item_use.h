@@ -32,6 +32,7 @@ void FieldUseFunc_Diploma(u8 taskId);    // T-218
 void FieldUseFunc_Guide(u8 taskId);      // T-300
 void FieldUseFunc_SubtleLayer(u8 taskId);   // T-423
 void FieldUseFunc_HermeticLayer(u8 taskId);   // T-483
+void FieldUseFunc_EudaimonLayer(u8 taskId);   // T-519 item 2
 void FieldUseFunc_Play(u8 taskId);       // T-417
 void FieldUseFunc_VsSeeker(u8 taskId);
 void BattleUseFunc_PokeBallEtc(u8 taskId);

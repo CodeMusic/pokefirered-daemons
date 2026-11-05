@@ -3248,6 +3248,8 @@ extern const u32 gItemIcon_SubtleLayer[];    // T-423
 extern const u32 gItemIconPalette_SubtleLayer[];
 extern const u32 gItemIcon_HermeticLayer[];    // T-483
 extern const u32 gItemIconPalette_HermeticLayer[];
+extern const u32 gItemIcon_EudaimonLayer[];    // T-519 item 2
+extern const u32 gItemIconPalette_EudaimonLayer[];
 extern const u32 gItemIcon_Harp[];   // T-417
 extern const u32 gItemIconPalette_Harp[];
 extern const u32 gItemIcon_PlayFlute[];   // T-417

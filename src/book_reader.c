@@ -16,6 +16,7 @@
 #include "daemons_pulse.h"   // T-483: THE HERMETIC LAYER breathes
 #include "daemons_spellbook.h"   // T-483 (5): the folds' spells come off the page
 #include "daemons_glitch.h"  // T-486: and glitches, once
+#include "daemons_spirits.h"  // T-519 item 2: the dawn half's observer line
 #include "constants/songs.h"
 #include "data.h"         // T-509: the cards' daemons
 #include "decompress.h"
@@ -50,7 +51,7 @@
 //  text is printed with a transparent background, so the rules show through it as they would through ink.
 //  Everything lives on the HEAP; EWRAM has under a kilobyte free.
 
-enum { BOOK_NOTEBOOK, BOOK_TEXTBOOK, BOOK_GUIDE, BOOK_SUBTLE, BOOK_HERMETIC };   // T-423: THE SUBTLE LAYER; T-483
+enum { BOOK_NOTEBOOK, BOOK_TEXTBOOK, BOOK_GUIDE, BOOK_SUBTLE, BOOK_HERMETIC, BOOK_EUDAIMON };   // T-423: THE SUBTLE LAYER; T-483; T-519
 enum { VIEW_PAGE, VIEW_CONTENTS, VIEW_CHAPTER, VIEW_TOPIC, VIEW_COVER, VIEW_GUIDE_CONTENTS, VIEW_GUIDE_ENTRY,
        VIEW_SUBTLE_CONTENTS, VIEW_SUBTLE_ENTRY, VIEW_THIRTEEN,     // T-483 (7): Halloween's card
        VIEW_CARDS, VIEW_CARDS_SELECT, VIEW_CARDS_SPREAD, VIEW_CARDS_BOARD, VIEW_CARDS_READ };   // T-509
@@ -270,6 +271,7 @@ struct GuideEntry { const u8 *shortTitle; const u8 *title; const u8 *text; };
 #include "data/guide.h"
 #include "data/subtle_layer.h"   // T-423: tools/gensubtle.py
 #include "data/hermetic_layer.h" // T-483: the same tool, the same types
+#include "data/eudaimon_layer.h" // T-519 item 2: the torn book's dawn half, the same again
 #include "data/arcana_cards.h"   // T-509: DAEMONS tools/port_arcana.py
 
 //  T-483: THE LAYER BOOKS. THE SUBTLE LAYER and THE HERMETIC LAYER are one kind of book -- a cover, a contents spread,
@@ -285,10 +287,11 @@ struct LayerBook
     u8 entryCount;
 };
 
-static const struct LayerBook sLayerBooks[2] =
+static const struct LayerBook sLayerBooks[3] =
 {
     { sSubtleSections, sSubtleEntries, sSubtlePictures, sSubtleCover, SUBTLE_SECTIONS, SUBTLE_ENTRIES },
     { sHermeticSections, sHermeticEntries, sHermeticPictures, sHermeticCover, HERMETIC_SECTIONS, HERMETIC_ENTRIES },
+    { sEudaimonSections, sEudaimonEntries, sEudaimonPictures, sEudaimonCover, EUDAIMON_SECTIONS, EUDAIMON_ENTRIES },
 };
 
 static const u16 sGuidePal[] = INCBIN_U16("graphics/book/guide_cover.gbapal");
@@ -1104,12 +1107,32 @@ static void DrawGuideEntry(void)
 
 static bool8 IsLayerBook(void)
 {
-    return sBook->book == BOOK_SUBTLE || sBook->book == BOOK_HERMETIC;
+    return sBook->book == BOOK_SUBTLE || sBook->book == BOOK_HERMETIC || sBook->book == BOOK_EUDAIMON;
 }
 
 static const struct LayerBook *Layer(void)
 {
-    return &sLayerBooks[sBook->book == BOOK_HERMETIC];
+    return &sLayerBooks[sBook->book == BOOK_EUDAIMON ? 2 : sBook->book == BOOK_HERMETIC];
+}
+
+//  T-519 item 2: THE EUDAIMON LAYER has no CARDS section of its own yet (the dawn readings of the two decks are the
+//  companion lane's), so its cover shows no deck tile.
+static bool8 HasCards(void)
+{
+    return sBook->book == BOOK_SUBTLE || sBook->book == BOOK_HERMETIC;
+}
+
+//  T-519 item 2: an entry's text -- and in the dawn half's BLESSING, the OBSERVER's line chosen by who is looking: the
+//  lead daemon's SPIRITS (0 as it is, 1 in good spirits, 2 in low spirits; an egg, or nobody, reads as it is).
+static const u8 *LayerText(const struct SubtleEntry *e)
+{
+    u8 class = SPIRITS_AS_IT_IS;
+
+    if (sBook->book != BOOK_EUDAIMON || sBook->entry != EUDAIMON_OBSERVER_ENTRY)
+        return e->text;
+    if (GetMonData(&gPlayerParty[0], MON_DATA_SPECIES) != SPECIES_NONE && !GetMonData(&gPlayerParty[0], MON_DATA_IS_EGG))
+        class = Spirits_Class(&gPlayerParty[0].box);
+    return sEudaimonObserver[class < 3 ? class : SPIRITS_AS_IT_IS];
 }
 
 //  T-483: an INSCRIPTION ('^ ' in docs/hermetic-layer.md) is printed in the tablet's emerald -- C_RING, which
@@ -1133,7 +1156,8 @@ static void DrawCardsTile(void);
 static void DrawSubtleCover(void)
 {
     CpuFastCopy(Layer()->cover, gWindows[WIN_BOOK].tileData, BR_WIN_BYTES);
-    DrawCardsTile();        // T-509: the CARDS section's tile, beside the cover
+    if (HasCards())
+        DrawCardsTile();    // T-509: the CARDS section's tile, beside the cover
     CopyWindowToVram(WIN_BOOK, COPYWIN_GFX);
 }
 
@@ -1223,7 +1247,7 @@ static u8 SubtleLayout(u8 *titleLines, u8 *firstLines)
     start = 19 + *titleLines * 10 + 9;
     *firstLines = (SB_BOTTOM - start) / TB_PITCH;
     sBook->voices = (e->faint | e->inscribed) != 0;   // T-483: an inscription starts its own line, as a voice does
-    n = Reflow(e->text, TB_TEXT_W, BR_FONT);
+    n = Reflow(LayerText(e), TB_TEXT_W, BR_FONT);
     sBook->voices = FALSE;
     sBook->spreadCount = 1;
     if (n > *firstLines)
@@ -2457,7 +2481,7 @@ static void Draw(void)
     case VIEW_GUIDE_CONTENTS: DrawGuideContents(); break;
     case VIEW_GUIDE_ENTRY:    DrawGuideEntry();    break;
     }
-    if (IsLayerBook())
+    if (IsLayerBook() && HasCards())
         CardsTileShow(sBook->view == VIEW_COVER);
 }
 
@@ -2623,7 +2647,7 @@ static void Input_Cover(void)
     {
         Leave();
     }
-    else if (IsLayerBook() && !sBook->cardsFocus && JOY_NEW(DPAD_DOWN | DPAD_RIGHT))
+    else if (IsLayerBook() && HasCards() && !sBook->cardsFocus && JOY_NEW(DPAD_DOWN | DPAD_RIGHT))
     {
         sBook->cardsFocus = TRUE;           // T-509: onto the deck tile
         Move();
@@ -2650,9 +2674,10 @@ static void Input_Cover(void)
         sBook->view = VIEW_THIRTEEN;     // T-483 (7): Halloween's card first
         Turn();
     }
-    else if (JOY_NEW(A_BUTTON) && sBook->book == BOOK_HERMETIC)
+    else if (JOY_NEW(A_BUTTON) && (sBook->book == BOOK_HERMETIC || sBook->book == BOOK_EUDAIMON))
     {
         // T-483: THE HERMETIC LAYER opens with its warning, as written, every time; its contents come after.
+        // T-519 item 2: and THE EUDAIMON LAYER with its blessing.
         sBook->entry = 0;
         sBook->spread = 0;
         sBook->view = VIEW_SUBTLE_ENTRY;
@@ -3004,6 +3029,7 @@ static void Task_BookInit(u8 taskId)
                    : (sBook->book == BOOK_GUIDE)    ? sGuidePal
                    : (sBook->book == BOOK_SUBTLE)   ? sSubtlePal
                    : (sBook->book == BOOK_HERMETIC) ? sHermeticPal
+                   : (sBook->book == BOOK_EUDAIMON) ? sEudaimonPal
                    : sTextbookPal;
 
     switch (sBook->initState)
@@ -3030,7 +3056,7 @@ static void Task_BookInit(u8 taskId)
         LoadPalette(&pal[C_COVER], BG_PLTT_ID(0), PLTT_SIZEOF(1));        // the backdrop is the cover
         break;
     case 3:
-        if (IsLayerBook())
+        if (IsLayerBook() && HasCards())
             CardsTileMake();                // T-509: the deck tile, shown on the cover only
         Draw();
         PutWindowTilemap(WIN_BOOK);
@@ -3141,6 +3167,14 @@ void Subtle_Open(void)
 void Hermetic_Open(void)
 {
     if (OpenBook(BOOK_HERMETIC, VIEW_COVER))
+        sBook->picEntry = 0xFF;
+}
+
+//  T-519 item 2: THE EUDAIMON LAYER, open at its cover -- at any hour, and read only: its thirteen are the night
+//  half's own spells, cast from the SPELLBOOK, and this half only words them as gifts (the brief, item 5).
+void Eudaimon_Open(void)
+{
+    if (OpenBook(BOOK_EUDAIMON, VIEW_COVER))
         sBook->picEntry = 0xFF;
 }
 

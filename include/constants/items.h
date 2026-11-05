@@ -257,7 +257,7 @@
 #define ITEM_FROZEN_SINK 246   // T-488: halves one super-effective FROZEN hit, then spent. Was ITEM_0F6, unused
 #define ITEM_EMERGENT_SINK 247 // T-488: halves one super-effective EMERGENT hit, then spent. Was ITEM_0F7, unused
 #define ITEM_OPAQUE_SINK 248   // T-488: halves one super-effective OPAQUE hit, then spent. Was ITEM_0F8, unused
-#define ITEM_0F9 249
+#define ITEM_EUDAIMON_LAYER 249 // T-519 item 2: THE EUDAIMON LAYER, the torn book's dawn half. Was ITEM_0F9, unused
 #define ITEM_0FA 250
 #define ITEM_0FB 251
 #define ITEM_0FC 252

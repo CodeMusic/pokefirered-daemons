@@ -77,6 +77,16 @@ EventScript_HermeticClosed::
 	releaseall
 	end
 
+@ T-519 item 2: THE EUDAIMON LAYER, the torn book's dawn half, opened at its cover -- at any hour. Read only: its
+@ thirteen are the night half's own spells, cast from the SPELLBOOK.
+EventScript_EudaimonLayer::
+	lockall
+	fadescreen FADE_TO_BLACK
+	special Eudaimon_Open
+	waitstate
+	releaseall
+	end
+
 EventScript_HermeticByDay::
 	msgbox Text_HermeticByDay
 	releaseall

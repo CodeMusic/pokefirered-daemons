@@ -765,6 +765,20 @@ void FieldUseFunc_HermeticLayer(u8 taskId)
     SetUpItemUseOnFieldCallback(taskId);
 }
 
+//  T-519 item 2: THE EUDAIMON LAYER, the torn book's dawn half -- it opens on its cover at any hour.
+static void ItemUseOnFieldCB_EudaimonLayer(u8 taskId)
+{
+    LockPlayerFieldControls();
+    ScriptContext_SetupScript(EventScript_EudaimonLayer);
+    DestroyTask(taskId);
+}
+
+void FieldUseFunc_EudaimonLayer(u8 taskId)
+{
+    sItemUseOnFieldCB = ItemUseOnFieldCB_EudaimonLayer;
+    SetUpItemUseOnFieldCallback(taskId);
+}
+
 //  T-417: the HARP (CONTENT) or the FLUTE (CONTEXT). The bag closes and the field comes back, then the instrument comes
 //  out where the player stands (src/play.c) -- on foot or on the water, never on the bicycle.
 static void ItemUseOnFieldCB_Play(u8 taskId)

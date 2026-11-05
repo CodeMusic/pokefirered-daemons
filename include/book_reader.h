@@ -6,6 +6,7 @@ void Textbook_Open(void);
 void Guide_Open(void);
 void Subtle_Open(void);   // T-423
 void Hermetic_Open(void);   // T-483
+void Eudaimon_Open(void);   // T-519 item 2
 void Guide_OpenBoardCopy(void);
 
 //  T-315: a QR code on the last page

@@ -1947,6 +1947,8 @@
                                                                                 //   (a battle spell; VAR_SPELL_STATE's two bits were full)
 #define FLAG_SPELL_MIRRORED_HIGH              (DAEMONS_FLAGS_START + 0x3FE)   // T-483 (5): bit 4 of the type THE MIRROR last saw
                                                                                 //   through, + 1 (bits 0-3 are VAR_SPELL_STATE_2's 12-15)
+#define FLAG_GOT_EUDAIMON_LAYER               (DAEMONS_FLAGS_START + 0x3FF)   // T-519 item 2: THE EUDAIMON LAYER held (the torn book's
+                                                                                //   dawn half): the last of the game lane's block 0x3F0-0x3FF
 
 //  BEGIN gbaglobalindex -- T-334: each fixed encounter of the GLOBAL INDEX, once gone (removeobject sets it). The beasts'
 //  and the edition daemons' are also set on every map load while they may not stand (event_data.c,
