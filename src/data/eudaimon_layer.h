@@ -4,7 +4,7 @@
 
 #define EUDAIMON_SECTIONS 10
 #define EUDAIMON_ENTRIES  52
-#define EUDAIMON_PICTURES 6
+#define EUDAIMON_PICTURES 30
 
 #ifndef GUARD_LAYER_BOOK_TYPES   // one set of types for every book this tool writes (T-483)
 #define GUARD_LAYER_BOOK_TYPES
@@ -40,6 +40,30 @@ static const u32 sEudaimonPic_chalkfaint_0[] = INCBIN_U32("graphics/book/eudaimo
 static const u32 sEudaimonPic_emeraldback_0[] = INCBIN_U32("graphics/book/eudaimon/emeraldback_0.4bpp");
 static const u32 sEudaimonPic_palmup_0[] = INCBIN_U32("graphics/book/eudaimon/palmup_0.4bpp");
 static const u32 sEudaimonPic_fingers_0[] = INCBIN_U32("graphics/book/eudaimon/fingers_0.4bpp");
+static const u32 sEudaimonPic_portions_0[] = INCBIN_U32("graphics/book/eudaimon/portions_0.4bpp");
+static const u32 sEudaimonPic_windows_0[] = INCBIN_U32("graphics/book/eudaimon/windows_0.4bpp");
+static const u32 sEudaimonPic_firstlight_0[] = INCBIN_U32("graphics/book/eudaimon/firstlight_0.4bpp");
+static const u32 sEudaimonPic_letbe_0[] = INCBIN_U32("graphics/book/eudaimon/letbe_0.4bpp");
+static const u32 sEudaimonPic_rubedo_0[] = INCBIN_U32("graphics/book/eudaimon/rubedo_0.4bpp");
+static const u32 sEudaimonPic_nigredo_0[] = INCBIN_U32("graphics/book/eudaimon/nigredo_0.4bpp");
+static const u32 sEudaimonPic_rooms_0[] = INCBIN_U32("graphics/book/eudaimon/rooms_0.4bpp");
+static const u32 sEudaimonPic_song_0[] = INCBIN_U32("graphics/book/eudaimon/song_0.4bpp");
+static const u32 sEudaimonPic_setdown_0[] = INCBIN_U32("graphics/book/eudaimon/setdown_0.4bpp");
+static const u32 sEudaimonPic_lastwarmth_0[] = INCBIN_U32("graphics/book/eudaimon/lastwarmth_0.4bpp");
+static const u32 sEudaimonPic_river_0[] = INCBIN_U32("graphics/book/eudaimon/river_0.4bpp");
+static const u32 sEudaimonPic_depth_0[] = INCBIN_U32("graphics/book/eudaimon/depth_0.4bpp");
+static const u32 sEudaimonPic_opening_0[] = INCBIN_U32("graphics/book/eudaimon/opening_0.4bpp");
+static const u32 sEudaimonPic_space_0[] = INCBIN_U32("graphics/book/eudaimon/space_0.4bpp");
+static const u32 sEudaimonPic_upperopen_0[] = INCBIN_U32("graphics/book/eudaimon/upperopen_0.4bpp");
+static const u32 sEudaimonPic_appleup_0[] = INCBIN_U32("graphics/book/eudaimon/appleup_0.4bpp");
+static const u32 sEudaimonPic_earth_0[] = INCBIN_U32("graphics/book/eudaimon/earth_0.4bpp");
+static const u32 sEudaimonPic_fractalheard_0[] = INCBIN_U32("graphics/book/eudaimon/fractalheard_0.4bpp");
+static const u32 sEudaimonPic_wildflower_0[] = INCBIN_U32("graphics/book/eudaimon/wildflower_0.4bpp");
+static const u32 sEudaimonPic_belonging_0[] = INCBIN_U32("graphics/book/eudaimon/belonging_0.4bpp");
+static const u32 sEudaimonPic_goodspirit_0[] = INCBIN_U32("graphics/book/eudaimon/goodspirit_0.4bpp");
+static const u32 sEudaimonPic_goodspell_0[] = INCBIN_U32("graphics/book/eudaimon/goodspell_0.4bpp");
+static const u32 sEudaimonPic_wheel_0[] = INCBIN_U32("graphics/book/eudaimon/wheel_0.4bpp");
+static const u32 sEudaimonPic_blankback_0[] = INCBIN_U32("graphics/book/eudaimon/blankback_0.4bpp");
 
 static const struct SubtlePicture sEudaimonPictures[EUDAIMON_PICTURES] =
 {
@@ -49,6 +73,30 @@ static const struct SubtlePicture sEudaimonPictures[EUDAIMON_PICTURES] =
     { { sEudaimonPic_emeraldback_0, NULL, NULL }, 96, 88, 1 },   // emeraldback
     { { sEudaimonPic_palmup_0, NULL, NULL }, 96, 88, 1 },   // palmup
     { { sEudaimonPic_fingers_0, NULL, NULL }, 96, 88, 1 },   // fingers
+    { { sEudaimonPic_portions_0, NULL, NULL }, 96, 88, 1 },   // portions
+    { { sEudaimonPic_windows_0, NULL, NULL }, 96, 88, 1 },   // windows
+    { { sEudaimonPic_firstlight_0, NULL, NULL }, 96, 88, 1 },   // firstlight
+    { { sEudaimonPic_letbe_0, NULL, NULL }, 96, 88, 1 },   // letbe
+    { { sEudaimonPic_rubedo_0, NULL, NULL }, 96, 88, 1 },   // rubedo
+    { { sEudaimonPic_nigredo_0, NULL, NULL }, 96, 88, 1 },   // nigredo
+    { { sEudaimonPic_rooms_0, NULL, NULL }, 96, 88, 1 },   // rooms
+    { { sEudaimonPic_song_0, NULL, NULL }, 96, 88, 1 },   // song
+    { { sEudaimonPic_setdown_0, NULL, NULL }, 96, 88, 1 },   // setdown
+    { { sEudaimonPic_lastwarmth_0, NULL, NULL }, 96, 88, 1 },   // lastwarmth
+    { { sEudaimonPic_river_0, NULL, NULL }, 96, 88, 1 },   // river
+    { { sEudaimonPic_depth_0, NULL, NULL }, 96, 88, 1 },   // depth
+    { { sEudaimonPic_opening_0, NULL, NULL }, 96, 88, 1 },   // opening
+    { { sEudaimonPic_space_0, NULL, NULL }, 96, 88, 1 },   // space
+    { { sEudaimonPic_upperopen_0, NULL, NULL }, 96, 88, 1 },   // upperopen
+    { { sEudaimonPic_appleup_0, NULL, NULL }, 96, 88, 1 },   // appleup
+    { { sEudaimonPic_earth_0, NULL, NULL }, 96, 88, 1 },   // earth
+    { { sEudaimonPic_fractalheard_0, NULL, NULL }, 96, 88, 1 },   // fractalheard
+    { { sEudaimonPic_wildflower_0, NULL, NULL }, 96, 88, 1 },   // wildflower
+    { { sEudaimonPic_belonging_0, NULL, NULL }, 96, 88, 1 },   // belonging
+    { { sEudaimonPic_goodspirit_0, NULL, NULL }, 96, 88, 1 },   // goodspirit
+    { { sEudaimonPic_goodspell_0, NULL, NULL }, 96, 88, 1 },   // goodspell
+    { { sEudaimonPic_wheel_0, NULL, NULL }, 96, 88, 1 },   // wheel
+    { { sEudaimonPic_blankback_0, NULL, NULL }, 96, 88, 1 },   // blankback
 };
 
 static const u8 sEudaimonLabel_0[] = _("THE TABLETS");
@@ -310,37 +358,37 @@ static const struct SubtleEntry sEudaimonEntries[EUDAIMON_ENTRIES] =
     { sEudaimonShort_2, sEudaimonTitle_2, sEudaimonText_2, sEudaimonCaption_2, 3, 0x0000, 18, 0x001F },   // emeraldback
     { sEudaimonShort_3, sEudaimonTitle_3, sEudaimonText_3, sEudaimonCaption_3, 4, 0x0000, 24, 0x007E },   // palmup
     { sEudaimonShort_4, sEudaimonTitle_4, sEudaimonText_4, sEudaimonCaption_4, 5, 0x0000, 34, 0x001F },   // fingers
-    { sEudaimonShort_5, sEudaimonTitle_5, sEudaimonText_5, sEudaimonCaption_5, 0, 0x0000, 42, 0x0000 },   // portions
-    { sEudaimonShort_6, sEudaimonTitle_6, sEudaimonText_6, sEudaimonCaption_6, 0, 0x0004, 48, 0x0000 },   // windows
-    { sEudaimonShort_7, sEudaimonTitle_7, sEudaimonText_7, sEudaimonCaption_7, 0, 0x0000, 54, 0x0000 },   // firstlight
-    { sEudaimonShort_8, sEudaimonTitle_8, sEudaimonText_8, sEudaimonCaption_8, 0, 0x0008, 60, 0x0000 },   // letbe
-    { sEudaimonShort_9, sEudaimonTitle_9, sEudaimonText_9, sEudaimonCaption_9, 0, 0x0000, 66, 0x0000 },   // rubedo
-    { sEudaimonShort_10, sEudaimonTitle_10, sEudaimonText_10, sEudaimonCaption_10, 0, 0x0000, 72, 0x0000 },   // nigredo
-    { sEudaimonShort_11, sEudaimonTitle_11, sEudaimonText_11, sEudaimonCaption_11, 0, 0x0000, 78, 0x0004 },   // rooms
-    { sEudaimonShort_12, sEudaimonTitle_12, sEudaimonText_12, sEudaimonCaption_12, 0, 0x0000, 84, 0x0004 },   // song
-    { sEudaimonShort_13, sEudaimonTitle_13, sEudaimonText_13, sEudaimonCaption_13, 0, 0x0000, 90, 0x0004 },   // setdown
-    { sEudaimonShort_14, sEudaimonTitle_14, sEudaimonText_14, sEudaimonCaption_14, 0, 0x0008, 96, 0x0002 },   // lastwarmth
-    { sEudaimonShort_15, sEudaimonTitle_15, sEudaimonText_15, sEudaimonCaption_15, 0, 0x0000, 102, 0x0004 },   // river
-    { sEudaimonShort_16, sEudaimonTitle_16, sEudaimonText_16, sEudaimonCaption_16, 0, 0x0000, 108, 0x0000 },   // depth
-    { sEudaimonShort_17, sEudaimonTitle_17, sEudaimonText_17, sEudaimonCaption_17, 0, 0x0000, 114, 0x0000 },   // opening
-    { sEudaimonShort_18, sEudaimonTitle_18, sEudaimonText_18, sEudaimonCaption_18, 0, 0x0000, 120, 0x0000 },   // room
-    { sEudaimonShort_19, sEudaimonTitle_19, sEudaimonText_19, sEudaimonCaption_19, 0, 0x0000, 126, 0x0000 },   // upperopen
+    { sEudaimonShort_5, sEudaimonTitle_5, sEudaimonText_5, sEudaimonCaption_5, 6, 0x0000, 42, 0x0000 },   // portions
+    { sEudaimonShort_6, sEudaimonTitle_6, sEudaimonText_6, sEudaimonCaption_6, 7, 0x0004, 48, 0x0000 },   // windows
+    { sEudaimonShort_7, sEudaimonTitle_7, sEudaimonText_7, sEudaimonCaption_7, 8, 0x0000, 54, 0x0000 },   // firstlight
+    { sEudaimonShort_8, sEudaimonTitle_8, sEudaimonText_8, sEudaimonCaption_8, 9, 0x0008, 60, 0x0000 },   // letbe
+    { sEudaimonShort_9, sEudaimonTitle_9, sEudaimonText_9, sEudaimonCaption_9, 10, 0x0000, 66, 0x0000 },   // rubedo
+    { sEudaimonShort_10, sEudaimonTitle_10, sEudaimonText_10, sEudaimonCaption_10, 11, 0x0000, 72, 0x0000 },   // nigredo
+    { sEudaimonShort_11, sEudaimonTitle_11, sEudaimonText_11, sEudaimonCaption_11, 12, 0x0000, 78, 0x0004 },   // rooms
+    { sEudaimonShort_12, sEudaimonTitle_12, sEudaimonText_12, sEudaimonCaption_12, 13, 0x0000, 84, 0x0004 },   // song
+    { sEudaimonShort_13, sEudaimonTitle_13, sEudaimonText_13, sEudaimonCaption_13, 14, 0x0000, 90, 0x0004 },   // setdown
+    { sEudaimonShort_14, sEudaimonTitle_14, sEudaimonText_14, sEudaimonCaption_14, 15, 0x0008, 96, 0x0002 },   // lastwarmth
+    { sEudaimonShort_15, sEudaimonTitle_15, sEudaimonText_15, sEudaimonCaption_15, 16, 0x0000, 102, 0x0004 },   // river
+    { sEudaimonShort_16, sEudaimonTitle_16, sEudaimonText_16, sEudaimonCaption_16, 17, 0x0000, 108, 0x0000 },   // depth
+    { sEudaimonShort_17, sEudaimonTitle_17, sEudaimonText_17, sEudaimonCaption_17, 18, 0x0000, 114, 0x0000 },   // opening
+    { sEudaimonShort_18, sEudaimonTitle_18, sEudaimonText_18, sEudaimonCaption_18, 19, 0x0000, 120, 0x0000 },   // space
+    { sEudaimonShort_19, sEudaimonTitle_19, sEudaimonText_19, sEudaimonCaption_19, 20, 0x0000, 126, 0x0000 },   // upperopen
     { sEudaimonShort_20, sEudaimonTitle_20, sEudaimonText_20, sEudaimonCaption_20, 0, 0x0004, 132, 0x0000 },   // circleback
-    { sEudaimonShort_21, sEudaimonTitle_21, sEudaimonText_21, sEudaimonCaption_21, 0, 0x0000, 138, 0x003E },   // appleup
-    { sEudaimonShort_22, sEudaimonTitle_22, sEudaimonText_22, sEudaimonCaption_22, 0, 0x0000, 146, 0x003E },   // earth
-    { sEudaimonShort_23, sEudaimonTitle_23, sEudaimonText_23, sEudaimonCaption_23, 0, 0x0000, 154, 0x0000 },   // fractalheard
-    { sEudaimonShort_24, sEudaimonTitle_24, sEudaimonText_24, sEudaimonCaption_24, 0, 0x0000, 160, 0x0000 },   // wildflower
+    { sEudaimonShort_21, sEudaimonTitle_21, sEudaimonText_21, sEudaimonCaption_21, 21, 0x0000, 138, 0x003E },   // appleup
+    { sEudaimonShort_22, sEudaimonTitle_22, sEudaimonText_22, sEudaimonCaption_22, 22, 0x0000, 146, 0x003E },   // earth
+    { sEudaimonShort_23, sEudaimonTitle_23, sEudaimonText_23, sEudaimonCaption_23, 23, 0x0000, 154, 0x0000 },   // fractalheard
+    { sEudaimonShort_24, sEudaimonTitle_24, sEudaimonText_24, sEudaimonCaption_24, 24, 0x0000, 160, 0x0000 },   // wildflower
     { sEudaimonShort_25, sEudaimonTitle_25, sEudaimonText_25, sEudaimonCaption_25, 0, 0x0000, 166, 0x0000 },   // refolded
     { sEudaimonShort_26, sEudaimonTitle_26, sEudaimonText_26, sEudaimonCaption_26, 0, 0x0000, 172, 0x0000 },   // keeping
-    { sEudaimonShort_27, sEudaimonTitle_27, sEudaimonText_27, sEudaimonCaption_27, 0, 0x0000, 176, 0x0000 },   // belonging
+    { sEudaimonShort_27, sEudaimonTitle_27, sEudaimonText_27, sEudaimonCaption_27, 25, 0x0000, 176, 0x0000 },   // belonging
     { sEudaimonShort_28, sEudaimonTitle_28, sEudaimonText_28, sEudaimonCaption_28, 0, 0x0000, 182, 0x0000 },   // kinship
-    { sEudaimonShort_29, sEudaimonTitle_29, sEudaimonText_29, sEudaimonCaption_29, 0, 0x0000, 188, 0x0000 },   // goodspirit
+    { sEudaimonShort_29, sEudaimonTitle_29, sEudaimonText_29, sEudaimonCaption_29, 26, 0x0000, 188, 0x0000 },   // goodspirit
     { sEudaimonShort_30, sEudaimonTitle_30, sEudaimonText_30, sEudaimonCaption_30, 0, 0x0004, 194, 0x0000 },   // bothways
-    { sEudaimonShort_31, sEudaimonTitle_31, sEudaimonText_31, sEudaimonCaption_31, 0, 0x0000, 200, 0x0000 },   // goodspell
+    { sEudaimonShort_31, sEudaimonTitle_31, sEudaimonText_31, sEudaimonCaption_31, 27, 0x0000, 200, 0x0000 },   // goodspell
     { sEudaimonShort_32, sEudaimonTitle_32, sEudaimonText_32, sEudaimonCaption_32, 0, 0x0000, 206, 0x0000 },   // graces
     { sEudaimonShort_33, sEudaimonTitle_33, sEudaimonText_33, sEudaimonCaption_33, 0, 0x0000, 212, 0x0000 },   // grammarkind
     { sEudaimonShort_34, sEudaimonTitle_34, sEudaimonText_34, sEudaimonCaption_34, 0, 0x0000, 218, 0x0000 },   // virtues
-    { sEudaimonShort_35, sEudaimonTitle_35, sEudaimonText_35, sEudaimonCaption_35, 0, 0x0004, 224, 0x0001 },   // wheel
+    { sEudaimonShort_35, sEudaimonTitle_35, sEudaimonText_35, sEudaimonCaption_35, 28, 0x0004, 224, 0x0001 },   // wheel
     { sEudaimonShort_36, sEudaimonTitle_36, sEudaimonText_36, sEudaimonCaption_36, 0, 0x0000, 230, 0x0001 },   // awakening
     { sEudaimonShort_37, sEudaimonTitle_37, sEudaimonText_37, sEudaimonCaption_37, 0, 0x0000, 236, 0x0001 },   // contrast
     { sEudaimonShort_38, sEudaimonTitle_38, sEudaimonText_38, sEudaimonCaption_38, 0, 0x0000, 240, 0x0001 },   // room
@@ -355,7 +403,7 @@ static const struct SubtleEntry sEudaimonEntries[EUDAIMON_ENTRIES] =
     { sEudaimonShort_47, sEudaimonTitle_47, sEudaimonText_47, sEudaimonCaption_47, 0, 0x0000, 276, 0x0001 },   // lens
     { sEudaimonShort_48, sEudaimonTitle_48, sEudaimonText_48, sEudaimonCaption_48, 0, 0x0000, 280, 0x0001 },   // field
     { sEudaimonShort_49, sEudaimonTitle_49, sEudaimonText_49, sEudaimonCaption_49, 0, 0x0000, 284, 0x0001 },   // dawnstar
-    { sEudaimonShort_50, sEudaimonTitle_50, sEudaimonText_50, sEudaimonCaption_50, 0, 0x0000, 290, 0x0001 },   // blankback
+    { sEudaimonShort_50, sEudaimonTitle_50, sEudaimonText_50, sEudaimonCaption_50, 29, 0x0000, 290, 0x0001 },   // blankback
     { sEudaimonShort_51, sEudaimonTitle_51, sEudaimonText_51, sEudaimonCaption_51, 0, 0x0000, 296, 0x0001 },   // lastwordup
 };
 

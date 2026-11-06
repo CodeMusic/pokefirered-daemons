@@ -4,7 +4,7 @@
 
 #define HERMETIC_SECTIONS 10
 #define HERMETIC_ENTRIES  52
-#define HERMETIC_PICTURES 6
+#define HERMETIC_PICTURES 30
 
 #ifndef GUARD_LAYER_BOOK_TYPES   // one set of types for every book this tool writes (T-483)
 #define GUARD_LAYER_BOOK_TYPES
@@ -40,6 +40,30 @@ static const u32 sHermeticPic_chalk_0[] = INCBIN_U32("graphics/book/hermetic/cha
 static const u32 sHermeticPic_emerald_0[] = INCBIN_U32("graphics/book/hermetic/emerald_0.4bpp");
 static const u32 sHermeticPic_hands_0[] = INCBIN_U32("graphics/book/hermetic/hands_0.4bpp");
 static const u32 sHermeticPic_palm_0[] = INCBIN_U32("graphics/book/hermetic/palm_0.4bpp");
+static const u32 sHermeticPic_onething_0[] = INCBIN_U32("graphics/book/hermetic/onething_0.4bpp");
+static const u32 sHermeticPic_mirrors_0[] = INCBIN_U32("graphics/book/hermetic/mirrors_0.4bpp");
+static const u32 sHermeticPic_prima_0[] = INCBIN_U32("graphics/book/hermetic/prima_0.4bpp");
+static const u32 sHermeticPic_transmute_0[] = INCBIN_U32("graphics/book/hermetic/transmute_0.4bpp");
+static const u32 sHermeticPic_nigredo_0[] = INCBIN_U32("graphics/book/hermetic/nigredo_0.4bpp");
+static const u32 sHermeticPic_rubedo_0[] = INCBIN_U32("graphics/book/hermetic/rubedo_0.4bpp");
+static const u32 sHermeticPic_signal_0[] = INCBIN_U32("graphics/book/hermetic/signal_0.4bpp");
+static const u32 sHermeticPic_sound_0[] = INCBIN_U32("graphics/book/hermetic/sound_0.4bpp");
+static const u32 sHermeticPic_abstract_0[] = INCBIN_U32("graphics/book/hermetic/abstract_0.4bpp");
+static const u32 sHermeticPic_protofeel_0[] = INCBIN_U32("graphics/book/hermetic/protofeel_0.4bpp");
+static const u32 sHermeticPic_noun_0[] = INCBIN_U32("graphics/book/hermetic/noun_0.4bpp");
+static const u32 sHermeticPic_surface_0[] = INCBIN_U32("graphics/book/hermetic/surface_0.4bpp");
+static const u32 sHermeticPic_folds_0[] = INCBIN_U32("graphics/book/hermetic/folds_0.4bpp");
+static const u32 sHermeticPic_space_0[] = INCBIN_U32("graphics/book/hermetic/space_0.4bpp");
+static const u32 sHermeticPic_upperfolds_0[] = INCBIN_U32("graphics/book/hermetic/upperfolds_0.4bpp");
+static const u32 sHermeticPic_gravity_0[] = INCBIN_U32("graphics/book/hermetic/gravity_0.4bpp");
+static const u32 sHermeticPic_apple_0[] = INCBIN_U32("graphics/book/hermetic/apple_0.4bpp");
+static const u32 sHermeticPic_fractal_0[] = INCBIN_U32("graphics/book/hermetic/fractal_0.4bpp");
+static const u32 sHermeticPic_silkflower_0[] = INCBIN_U32("graphics/book/hermetic/silkflower_0.4bpp");
+static const u32 sHermeticPic_entangled_0[] = INCBIN_U32("graphics/book/hermetic/entangled_0.4bpp");
+static const u32 sHermeticPic_poppet_0[] = INCBIN_U32("graphics/book/hermetic/poppet_0.4bpp");
+static const u32 sHermeticPic_spelling_0[] = INCBIN_U32("graphics/book/hermetic/spelling_0.4bpp");
+static const u32 sHermeticPic_wheel_0[] = INCBIN_U32("graphics/book/hermetic/wheel_0.4bpp");
+static const u32 sHermeticPic_blank_0[] = INCBIN_U32("graphics/book/hermetic/blank_0.4bpp");
 
 static const struct SubtlePicture sHermeticPictures[HERMETIC_PICTURES] =
 {
@@ -49,6 +73,30 @@ static const struct SubtlePicture sHermeticPictures[HERMETIC_PICTURES] =
     { { sHermeticPic_emerald_0, NULL, NULL }, 96, 88, 1 },   // emerald
     { { sHermeticPic_hands_0, NULL, NULL }, 96, 88, 1 },   // hands
     { { sHermeticPic_palm_0, NULL, NULL }, 96, 88, 1 },   // palm
+    { { sHermeticPic_onething_0, NULL, NULL }, 96, 88, 1 },   // onething
+    { { sHermeticPic_mirrors_0, NULL, NULL }, 96, 88, 1 },   // mirrors
+    { { sHermeticPic_prima_0, NULL, NULL }, 96, 88, 1 },   // prima
+    { { sHermeticPic_transmute_0, NULL, NULL }, 96, 88, 1 },   // transmute
+    { { sHermeticPic_nigredo_0, NULL, NULL }, 96, 88, 1 },   // nigredo
+    { { sHermeticPic_rubedo_0, NULL, NULL }, 96, 88, 1 },   // rubedo
+    { { sHermeticPic_signal_0, NULL, NULL }, 96, 88, 1 },   // signal
+    { { sHermeticPic_sound_0, NULL, NULL }, 96, 88, 1 },   // sound
+    { { sHermeticPic_abstract_0, NULL, NULL }, 96, 88, 1 },   // abstract
+    { { sHermeticPic_protofeel_0, NULL, NULL }, 96, 88, 1 },   // protofeel
+    { { sHermeticPic_noun_0, NULL, NULL }, 96, 88, 1 },   // noun
+    { { sHermeticPic_surface_0, NULL, NULL }, 96, 88, 1 },   // surface
+    { { sHermeticPic_folds_0, NULL, NULL }, 96, 88, 1 },   // folds
+    { { sHermeticPic_space_0, NULL, NULL }, 96, 88, 1 },   // space
+    { { sHermeticPic_upperfolds_0, NULL, NULL }, 96, 88, 1 },   // upperfolds
+    { { sHermeticPic_gravity_0, NULL, NULL }, 96, 88, 1 },   // gravity
+    { { sHermeticPic_apple_0, NULL, NULL }, 96, 88, 1 },   // apple
+    { { sHermeticPic_fractal_0, NULL, NULL }, 96, 88, 1 },   // fractal
+    { { sHermeticPic_silkflower_0, NULL, NULL }, 96, 88, 1 },   // silkflower
+    { { sHermeticPic_entangled_0, NULL, NULL }, 96, 88, 1 },   // entangled
+    { { sHermeticPic_poppet_0, NULL, NULL }, 96, 88, 1 },   // poppet
+    { { sHermeticPic_spelling_0, NULL, NULL }, 96, 88, 1 },   // spelling
+    { { sHermeticPic_wheel_0, NULL, NULL }, 96, 88, 1 },   // wheel
+    { { sHermeticPic_blank_0, NULL, NULL }, 96, 88, 1 },   // blank
 };
 
 static const u8 sHermeticLabel_0[] = _("THE TABLETS");
@@ -310,37 +358,37 @@ static const struct SubtleEntry sHermeticEntries[HERMETIC_ENTRIES] =
     { sHermeticShort_2, sHermeticTitle_2, sHermeticText_2, sHermeticCaption_2, 3, 0x0000, 18, 0x001F },   // emerald
     { sHermeticShort_3, sHermeticTitle_3, sHermeticText_3, sHermeticCaption_3, 4, 0x0000, 24, 0x007E },   // hands
     { sHermeticShort_4, sHermeticTitle_4, sHermeticText_4, sHermeticCaption_4, 5, 0x0000, 34, 0x001F },   // palm
-    { sHermeticShort_5, sHermeticTitle_5, sHermeticText_5, sHermeticCaption_5, 0, 0x0000, 42, 0x0000 },   // onething
-    { sHermeticShort_6, sHermeticTitle_6, sHermeticText_6, sHermeticCaption_6, 0, 0x0004, 48, 0x0000 },   // mirrors
-    { sHermeticShort_7, sHermeticTitle_7, sHermeticText_7, sHermeticCaption_7, 0, 0x0000, 54, 0x0000 },   // prima
-    { sHermeticShort_8, sHermeticTitle_8, sHermeticText_8, sHermeticCaption_8, 0, 0x0008, 60, 0x0000 },   // transmute
-    { sHermeticShort_9, sHermeticTitle_9, sHermeticText_9, sHermeticCaption_9, 0, 0x0000, 66, 0x0000 },   // nigredo
-    { sHermeticShort_10, sHermeticTitle_10, sHermeticText_10, sHermeticCaption_10, 0, 0x0000, 72, 0x0000 },   // rubedo
-    { sHermeticShort_11, sHermeticTitle_11, sHermeticText_11, sHermeticCaption_11, 0, 0x0000, 78, 0x0004 },   // signal
-    { sHermeticShort_12, sHermeticTitle_12, sHermeticText_12, sHermeticCaption_12, 0, 0x0000, 84, 0x0004 },   // sound
-    { sHermeticShort_13, sHermeticTitle_13, sHermeticText_13, sHermeticCaption_13, 0, 0x0000, 90, 0x0004 },   // abstract
-    { sHermeticShort_14, sHermeticTitle_14, sHermeticText_14, sHermeticCaption_14, 0, 0x0008, 96, 0x0002 },   // protofeel
-    { sHermeticShort_15, sHermeticTitle_15, sHermeticText_15, sHermeticCaption_15, 0, 0x0000, 102, 0x0004 },   // noun
-    { sHermeticShort_16, sHermeticTitle_16, sHermeticText_16, sHermeticCaption_16, 0, 0x0000, 108, 0x0000 },   // surface
-    { sHermeticShort_17, sHermeticTitle_17, sHermeticText_17, sHermeticCaption_17, 0, 0x0000, 112, 0x0000 },   // folds
-    { sHermeticShort_18, sHermeticTitle_18, sHermeticText_18, sHermeticCaption_18, 0, 0x0000, 118, 0x0000 },   // space
-    { sHermeticShort_19, sHermeticTitle_19, sHermeticText_19, sHermeticCaption_19, 0, 0x0000, 124, 0x0000 },   // upperfolds
+    { sHermeticShort_5, sHermeticTitle_5, sHermeticText_5, sHermeticCaption_5, 6, 0x0000, 42, 0x0000 },   // onething
+    { sHermeticShort_6, sHermeticTitle_6, sHermeticText_6, sHermeticCaption_6, 7, 0x0004, 48, 0x0000 },   // mirrors
+    { sHermeticShort_7, sHermeticTitle_7, sHermeticText_7, sHermeticCaption_7, 8, 0x0000, 54, 0x0000 },   // prima
+    { sHermeticShort_8, sHermeticTitle_8, sHermeticText_8, sHermeticCaption_8, 9, 0x0008, 60, 0x0000 },   // transmute
+    { sHermeticShort_9, sHermeticTitle_9, sHermeticText_9, sHermeticCaption_9, 10, 0x0000, 66, 0x0000 },   // nigredo
+    { sHermeticShort_10, sHermeticTitle_10, sHermeticText_10, sHermeticCaption_10, 11, 0x0000, 72, 0x0000 },   // rubedo
+    { sHermeticShort_11, sHermeticTitle_11, sHermeticText_11, sHermeticCaption_11, 12, 0x0000, 78, 0x0004 },   // signal
+    { sHermeticShort_12, sHermeticTitle_12, sHermeticText_12, sHermeticCaption_12, 13, 0x0000, 84, 0x0004 },   // sound
+    { sHermeticShort_13, sHermeticTitle_13, sHermeticText_13, sHermeticCaption_13, 14, 0x0000, 90, 0x0004 },   // abstract
+    { sHermeticShort_14, sHermeticTitle_14, sHermeticText_14, sHermeticCaption_14, 15, 0x0008, 96, 0x0002 },   // protofeel
+    { sHermeticShort_15, sHermeticTitle_15, sHermeticText_15, sHermeticCaption_15, 16, 0x0000, 102, 0x0004 },   // noun
+    { sHermeticShort_16, sHermeticTitle_16, sHermeticText_16, sHermeticCaption_16, 17, 0x0000, 108, 0x0000 },   // surface
+    { sHermeticShort_17, sHermeticTitle_17, sHermeticText_17, sHermeticCaption_17, 18, 0x0000, 112, 0x0000 },   // folds
+    { sHermeticShort_18, sHermeticTitle_18, sHermeticText_18, sHermeticCaption_18, 19, 0x0000, 118, 0x0000 },   // space
+    { sHermeticShort_19, sHermeticTitle_19, sHermeticText_19, sHermeticCaption_19, 20, 0x0000, 124, 0x0000 },   // upperfolds
     { sHermeticShort_20, sHermeticTitle_20, sHermeticText_20, sHermeticCaption_20, 0, 0x0004, 130, 0x0000 },   // circle
-    { sHermeticShort_21, sHermeticTitle_21, sHermeticText_21, sHermeticCaption_21, 0, 0x0000, 136, 0x003E },   // gravity
-    { sHermeticShort_22, sHermeticTitle_22, sHermeticText_22, sHermeticCaption_22, 0, 0x0000, 144, 0x003E },   // apple
-    { sHermeticShort_23, sHermeticTitle_23, sHermeticText_23, sHermeticCaption_23, 0, 0x0000, 154, 0x0000 },   // fractal
-    { sHermeticShort_24, sHermeticTitle_24, sHermeticText_24, sHermeticCaption_24, 0, 0x0000, 160, 0x0000 },   // silkflower
+    { sHermeticShort_21, sHermeticTitle_21, sHermeticText_21, sHermeticCaption_21, 21, 0x0000, 136, 0x003E },   // gravity
+    { sHermeticShort_22, sHermeticTitle_22, sHermeticText_22, sHermeticCaption_22, 22, 0x0000, 144, 0x003E },   // apple
+    { sHermeticShort_23, sHermeticTitle_23, sHermeticText_23, sHermeticCaption_23, 23, 0x0000, 154, 0x0000 },   // fractal
+    { sHermeticShort_24, sHermeticTitle_24, sHermeticText_24, sHermeticCaption_24, 24, 0x0000, 160, 0x0000 },   // silkflower
     { sHermeticShort_25, sHermeticTitle_25, sHermeticText_25, sHermeticCaption_25, 0, 0x0000, 166, 0x0000 },   // unfolded
     { sHermeticShort_26, sHermeticTitle_26, sHermeticText_26, sHermeticCaption_26, 0, 0x0000, 172, 0x0000 },   // verb
-    { sHermeticShort_27, sHermeticTitle_27, sHermeticText_27, sHermeticCaption_27, 0, 0x0000, 176, 0x0000 },   // entangled
+    { sHermeticShort_27, sHermeticTitle_27, sHermeticText_27, sHermeticCaption_27, 25, 0x0000, 176, 0x0000 },   // entangled
     { sHermeticShort_28, sHermeticTitle_28, sHermeticText_28, sHermeticCaption_28, 0, 0x0000, 182, 0x0000 },   // sympathy
-    { sHermeticShort_29, sHermeticTitle_29, sHermeticText_29, sHermeticCaption_29, 0, 0x0000, 188, 0x0000 },   // poppet
+    { sHermeticShort_29, sHermeticTitle_29, sHermeticText_29, sHermeticCaption_29, 26, 0x0000, 188, 0x0000 },   // poppet
     { sHermeticShort_30, sHermeticTitle_30, sHermeticText_30, sHermeticCaption_30, 0, 0x0004, 194, 0x0000 },   // bothways
-    { sHermeticShort_31, sHermeticTitle_31, sHermeticText_31, sHermeticCaption_31, 0, 0x0000, 200, 0x0000 },   // spelling
+    { sHermeticShort_31, sHermeticTitle_31, sHermeticText_31, sHermeticCaption_31, 27, 0x0000, 200, 0x0000 },   // spelling
     { sHermeticShort_32, sHermeticTitle_32, sHermeticText_32, sHermeticCaption_32, 0, 0x0000, 206, 0x0000 },   // charms
     { sHermeticShort_33, sHermeticTitle_33, sHermeticText_33, sHermeticCaption_33, 0, 0x0000, 212, 0x0000 },   // grammar
     { sHermeticShort_34, sHermeticTitle_34, sHermeticText_34, sHermeticCaption_34, 0, 0x0000, 218, 0x0000 },   // metals
-    { sHermeticShort_35, sHermeticTitle_35, sHermeticText_35, sHermeticCaption_35, 0, 0x0004, 224, 0x0001 },   // wheel
+    { sHermeticShort_35, sHermeticTitle_35, sHermeticText_35, sHermeticCaption_35, 28, 0x0004, 224, 0x0001 },   // wheel
     { sHermeticShort_36, sHermeticTitle_36, sHermeticText_36, sHermeticCaption_36, 0, 0x0000, 230, 0x0001 },   // awakening
     { sHermeticShort_37, sHermeticTitle_37, sHermeticText_37, sHermeticCaption_37, 0, 0x0000, 236, 0x0001 },   // contrast
     { sHermeticShort_38, sHermeticTitle_38, sHermeticText_38, sHermeticCaption_38, 0, 0x0000, 240, 0x0001 },   // room
@@ -355,7 +403,7 @@ static const struct SubtleEntry sHermeticEntries[HERMETIC_ENTRIES] =
     { sHermeticShort_47, sHermeticTitle_47, sHermeticText_47, sHermeticCaption_47, 0, 0x0000, 276, 0x0001 },   // lens
     { sHermeticShort_48, sHermeticTitle_48, sHermeticText_48, sHermeticCaption_48, 0, 0x0000, 280, 0x0001 },   // field
     { sHermeticShort_49, sHermeticTitle_49, sHermeticText_49, sHermeticCaption_49, 0, 0x0000, 284, 0x0001 },   // candle
-    { sHermeticShort_50, sHermeticTitle_50, sHermeticText_50, sHermeticCaption_50, 0, 0x0000, 290, 0x0001 },   // blank
+    { sHermeticShort_50, sHermeticTitle_50, sHermeticText_50, sHermeticCaption_50, 29, 0x0000, 290, 0x0001 },   // blank
     { sHermeticShort_51, sHermeticTitle_51, sHermeticText_51, sHermeticCaption_51, 0, 0x0000, 296, 0x0001 },   // lastword
 };
 
