@@ -4,7 +4,7 @@
 
 #define HERMETIC_SECTIONS 10
 #define HERMETIC_ENTRIES  52
-#define HERMETIC_PICTURES 1
+#define HERMETIC_PICTURES 6
 
 #ifndef GUARD_LAYER_BOOK_TYPES   // one set of types for every book this tool writes (T-483)
 #define GUARD_LAYER_BOOK_TYPES
@@ -34,11 +34,21 @@ static const u16 sHermeticPal[16] =
 };
 
 static const u32 sHermeticCover[] = INCBIN_U32("graphics/book/hermetic/cover.4bpp");
-static const u32 sHermeticPic_placeholder_0[] = INCBIN_U32("graphics/book/hermetic/placeholder_0.4bpp");
+static const u32 sHermeticPic_frontis_0[] = INCBIN_U32("graphics/book/hermetic/frontis_0.4bpp");
+static const u32 sHermeticPic_warning_0[] = INCBIN_U32("graphics/book/hermetic/warning_0.4bpp");
+static const u32 sHermeticPic_chalk_0[] = INCBIN_U32("graphics/book/hermetic/chalk_0.4bpp");
+static const u32 sHermeticPic_emerald_0[] = INCBIN_U32("graphics/book/hermetic/emerald_0.4bpp");
+static const u32 sHermeticPic_hands_0[] = INCBIN_U32("graphics/book/hermetic/hands_0.4bpp");
+static const u32 sHermeticPic_palm_0[] = INCBIN_U32("graphics/book/hermetic/palm_0.4bpp");
 
 static const struct SubtlePicture sHermeticPictures[HERMETIC_PICTURES] =
 {
-    { { sHermeticPic_placeholder_0, NULL, NULL }, 96, 88, 1 },   // placeholder
+    { { sHermeticPic_frontis_0, NULL, NULL }, 96, 88, 1 },   // frontis
+    { { sHermeticPic_warning_0, NULL, NULL }, 96, 88, 1 },   // warning
+    { { sHermeticPic_chalk_0, NULL, NULL }, 96, 88, 1 },   // chalk
+    { { sHermeticPic_emerald_0, NULL, NULL }, 96, 88, 1 },   // emerald
+    { { sHermeticPic_hands_0, NULL, NULL }, 96, 88, 1 },   // hands
+    { { sHermeticPic_palm_0, NULL, NULL }, 96, 88, 1 },   // palm
 };
 
 static const u8 sHermeticLabel_0[] = _("THE TABLETS");
@@ -295,11 +305,11 @@ static const struct SubtleSection sHermeticSections[HERMETIC_SECTIONS] =
 
 static const struct SubtleEntry sHermeticEntries[HERMETIC_ENTRIES] =
 {
-    { sHermeticShort_0, sHermeticTitle_0, sHermeticText_0, sHermeticCaption_0, 0, 0x0020, 2, 0x0000 },   // warning
-    { sHermeticShort_1, sHermeticTitle_1, sHermeticText_1, sHermeticCaption_1, 0, 0x0000, 10, 0x0000 },   // chalk
-    { sHermeticShort_2, sHermeticTitle_2, sHermeticText_2, sHermeticCaption_2, 0, 0x0000, 18, 0x001F },   // emerald
-    { sHermeticShort_3, sHermeticTitle_3, sHermeticText_3, sHermeticCaption_3, 0, 0x0000, 24, 0x007E },   // hands
-    { sHermeticShort_4, sHermeticTitle_4, sHermeticText_4, sHermeticCaption_4, 0, 0x0000, 34, 0x001F },   // palm
+    { sHermeticShort_0, sHermeticTitle_0, sHermeticText_0, sHermeticCaption_0, 1, 0x0020, 2, 0x0000 },   // warning
+    { sHermeticShort_1, sHermeticTitle_1, sHermeticText_1, sHermeticCaption_1, 2, 0x0000, 10, 0x0000 },   // chalk
+    { sHermeticShort_2, sHermeticTitle_2, sHermeticText_2, sHermeticCaption_2, 3, 0x0000, 18, 0x001F },   // emerald
+    { sHermeticShort_3, sHermeticTitle_3, sHermeticText_3, sHermeticCaption_3, 4, 0x0000, 24, 0x007E },   // hands
+    { sHermeticShort_4, sHermeticTitle_4, sHermeticText_4, sHermeticCaption_4, 5, 0x0000, 34, 0x001F },   // palm
     { sHermeticShort_5, sHermeticTitle_5, sHermeticText_5, sHermeticCaption_5, 0, 0x0000, 42, 0x0000 },   // onething
     { sHermeticShort_6, sHermeticTitle_6, sHermeticText_6, sHermeticCaption_6, 0, 0x0004, 48, 0x0000 },   // mirrors
     { sHermeticShort_7, sHermeticTitle_7, sHermeticText_7, sHermeticCaption_7, 0, 0x0000, 54, 0x0000 },   // prima

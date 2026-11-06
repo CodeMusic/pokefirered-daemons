@@ -4,7 +4,7 @@
 
 #define EUDAIMON_SECTIONS 10
 #define EUDAIMON_ENTRIES  52
-#define EUDAIMON_PICTURES 1
+#define EUDAIMON_PICTURES 6
 
 #ifndef GUARD_LAYER_BOOK_TYPES   // one set of types for every book this tool writes (T-483)
 #define GUARD_LAYER_BOOK_TYPES
@@ -27,18 +27,28 @@ static const u16 sEudaimonPal[16] =
     [C_HIGHLIGHT] = RGB(13, 8, 7),
     [C_RING] = RGB(12, 24, 15),
     [C_FRAME] = RGB(1, 1, 1),
-    [C_SLATE] = RGB(12, 7, 6),
+    [C_SLATE] = RGB(5, 8, 17),
     [C_CHALK] = RGB(31, 30, 27),
-    [C_CHALK_FAINT] = RGB(24, 18, 14),
+    [C_CHALK_FAINT] = RGB(17, 21, 29),
     [C_COVER] = RGB(9, 5, 5),
 };
 
 static const u32 sEudaimonCover[] = INCBIN_U32("graphics/book/eudaimon/cover.4bpp");
-static const u32 sEudaimonPic_placeholder_0[] = INCBIN_U32("graphics/book/eudaimon/placeholder_0.4bpp");
+static const u32 sEudaimonPic_frontis_0[] = INCBIN_U32("graphics/book/eudaimon/frontis_0.4bpp");
+static const u32 sEudaimonPic_blessing_0[] = INCBIN_U32("graphics/book/eudaimon/blessing_0.4bpp");
+static const u32 sEudaimonPic_chalkfaint_0[] = INCBIN_U32("graphics/book/eudaimon/chalkfaint_0.4bpp");
+static const u32 sEudaimonPic_emeraldback_0[] = INCBIN_U32("graphics/book/eudaimon/emeraldback_0.4bpp");
+static const u32 sEudaimonPic_palmup_0[] = INCBIN_U32("graphics/book/eudaimon/palmup_0.4bpp");
+static const u32 sEudaimonPic_fingers_0[] = INCBIN_U32("graphics/book/eudaimon/fingers_0.4bpp");
 
 static const struct SubtlePicture sEudaimonPictures[EUDAIMON_PICTURES] =
 {
-    { { sEudaimonPic_placeholder_0, NULL, NULL }, 96, 88, 1 },   // placeholder
+    { { sEudaimonPic_frontis_0, NULL, NULL }, 96, 88, 1 },   // frontis
+    { { sEudaimonPic_blessing_0, NULL, NULL }, 96, 88, 1 },   // blessing
+    { { sEudaimonPic_chalkfaint_0, NULL, NULL }, 96, 88, 1 },   // chalkfaint
+    { { sEudaimonPic_emeraldback_0, NULL, NULL }, 96, 88, 1 },   // emeraldback
+    { { sEudaimonPic_palmup_0, NULL, NULL }, 96, 88, 1 },   // palmup
+    { { sEudaimonPic_fingers_0, NULL, NULL }, 96, 88, 1 },   // fingers
 };
 
 static const u8 sEudaimonLabel_0[] = _("THE TABLETS");
@@ -295,11 +305,11 @@ static const struct SubtleSection sEudaimonSections[EUDAIMON_SECTIONS] =
 
 static const struct SubtleEntry sEudaimonEntries[EUDAIMON_ENTRIES] =
 {
-    { sEudaimonShort_0, sEudaimonTitle_0, sEudaimonText_0, sEudaimonCaption_0, 0, 0x0010, 2, 0x0000 },   // blessing
-    { sEudaimonShort_1, sEudaimonTitle_1, sEudaimonText_1, sEudaimonCaption_1, 0, 0x0008, 10, 0x0000 },   // chalkfaint
-    { sEudaimonShort_2, sEudaimonTitle_2, sEudaimonText_2, sEudaimonCaption_2, 0, 0x0000, 18, 0x001F },   // emeraldback
-    { sEudaimonShort_3, sEudaimonTitle_3, sEudaimonText_3, sEudaimonCaption_3, 0, 0x0000, 24, 0x007E },   // palmup
-    { sEudaimonShort_4, sEudaimonTitle_4, sEudaimonText_4, sEudaimonCaption_4, 0, 0x0000, 34, 0x001F },   // fingers
+    { sEudaimonShort_0, sEudaimonTitle_0, sEudaimonText_0, sEudaimonCaption_0, 1, 0x0010, 2, 0x0000 },   // blessing
+    { sEudaimonShort_1, sEudaimonTitle_1, sEudaimonText_1, sEudaimonCaption_1, 2, 0x0008, 10, 0x0000 },   // chalkfaint
+    { sEudaimonShort_2, sEudaimonTitle_2, sEudaimonText_2, sEudaimonCaption_2, 3, 0x0000, 18, 0x001F },   // emeraldback
+    { sEudaimonShort_3, sEudaimonTitle_3, sEudaimonText_3, sEudaimonCaption_3, 4, 0x0000, 24, 0x007E },   // palmup
+    { sEudaimonShort_4, sEudaimonTitle_4, sEudaimonText_4, sEudaimonCaption_4, 5, 0x0000, 34, 0x001F },   // fingers
     { sEudaimonShort_5, sEudaimonTitle_5, sEudaimonText_5, sEudaimonCaption_5, 0, 0x0000, 42, 0x0000 },   // portions
     { sEudaimonShort_6, sEudaimonTitle_6, sEudaimonText_6, sEudaimonCaption_6, 0, 0x0004, 48, 0x0000 },   // windows
     { sEudaimonShort_7, sEudaimonTitle_7, sEudaimonText_7, sEudaimonCaption_7, 0, 0x0000, 54, 0x0000 },   // firstlight

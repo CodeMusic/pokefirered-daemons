@@ -4,7 +4,7 @@
 
 #define UNITY_SECTIONS 11
 #define UNITY_ENTRIES  55
-#define UNITY_PICTURES 1
+#define UNITY_PICTURES 6
 
 #ifndef GUARD_LAYER_BOOK_TYPES   // one set of types for every book this tool writes (T-483)
 #define GUARD_LAYER_BOOK_TYPES
@@ -34,11 +34,22 @@ static const u16 sUnityPal[16] =
 };
 
 static const u32 sUnityCover[] = INCBIN_U32("graphics/book/unity/cover.4bpp");
-static const u32 sUnityPic_placeholder_0[] = INCBIN_U32("graphics/book/unity/placeholder_0.4bpp");
+static const u32 sUnityPic_frontis_0[] = INCBIN_U32("graphics/book/unity/frontis_0.4bpp");
+static const u32 sUnityPic_attestation_0[] = INCBIN_U32("graphics/book/unity/attestation_0.4bpp");
+static const u32 sUnityPic_chalkboth_0[] = INCBIN_U32("graphics/book/unity/chalkboth_0.4bpp");
+static const u32 sUnityPic_emeraldwhole_0[] = INCBIN_U32("graphics/book/unity/emeraldwhole_0.4bpp");
+static const u32 sUnityPic_wholehand_0[] = INCBIN_U32("graphics/book/unity/wholehand_0.4bpp");
+static const u32 sUnityPic_handturning_0[] = INCBIN_U32("graphics/book/unity/handturning_0.4bpp");
+static const u32 sUnityPic_handturning_1[] = INCBIN_U32("graphics/book/unity/handturning_1.4bpp");
 
 static const struct SubtlePicture sUnityPictures[UNITY_PICTURES] =
 {
-    { { sUnityPic_placeholder_0, NULL, NULL }, 96, 88, 1 },   // placeholder
+    { { sUnityPic_frontis_0, NULL, NULL }, 96, 88, 1 },   // frontis
+    { { sUnityPic_attestation_0, NULL, NULL }, 96, 88, 1 },   // attestation
+    { { sUnityPic_chalkboth_0, NULL, NULL }, 96, 88, 1 },   // chalkboth
+    { { sUnityPic_emeraldwhole_0, NULL, NULL }, 96, 88, 1 },   // emeraldwhole
+    { { sUnityPic_wholehand_0, NULL, NULL }, 96, 88, 1 },   // wholehand
+    { { sUnityPic_handturning_0, sUnityPic_handturning_1, NULL }, 96, 88, 2 },   // handturning
 };
 
 static const u8 sUnityLabel_0[] = _("THE TABLETS");
@@ -311,11 +322,11 @@ static const struct SubtleSection sUnitySections[UNITY_SECTIONS] =
 
 static const struct SubtleEntry sUnityEntries[UNITY_ENTRIES] =
 {
-    { sUnityShort_0, sUnityTitle_0, sUnityText_0, sUnityCaption_0, 0, 0x0008, 2, 0x0000 },   // attestation
-    { sUnityShort_1, sUnityTitle_1, sUnityText_1, sUnityCaption_1, 0, 0x0000, 10, 0x0000 },   // chalkboth
-    { sUnityShort_2, sUnityTitle_2, sUnityText_2, sUnityCaption_2, 0, 0x0000, 16, 0x001F },   // emeraldwhole
-    { sUnityShort_3, sUnityTitle_3, sUnityText_3, sUnityCaption_3, 0, 0x0000, 22, 0x007E },   // wholehand
-    { sUnityShort_4, sUnityTitle_4, sUnityText_4, sUnityCaption_4, 0, 0x0000, 30, 0x001F },   // handturning
+    { sUnityShort_0, sUnityTitle_0, sUnityText_0, sUnityCaption_0, 1, 0x0008, 2, 0x0000 },   // attestation
+    { sUnityShort_1, sUnityTitle_1, sUnityText_1, sUnityCaption_1, 2, 0x0000, 10, 0x0000 },   // chalkboth
+    { sUnityShort_2, sUnityTitle_2, sUnityText_2, sUnityCaption_2, 3, 0x0000, 16, 0x001F },   // emeraldwhole
+    { sUnityShort_3, sUnityTitle_3, sUnityText_3, sUnityCaption_3, 4, 0x0000, 22, 0x007E },   // wholehand
+    { sUnityShort_4, sUnityTitle_4, sUnityText_4, sUnityCaption_4, 5, 0x0000, 30, 0x001F },   // handturning
     { sUnityShort_5, sUnityTitle_5, sUnityText_5, sUnityCaption_5, 0, 0x0000, 36, 0x0000 },   // onething
     { sUnityShort_6, sUnityTitle_6, sUnityText_6, sUnityCaption_6, 0, 0x0004, 42, 0x0000 },   // glass
     { sUnityShort_7, sUnityTitle_7, sUnityText_7, sUnityCaption_7, 0, 0x0000, 48, 0x0000 },   // light
