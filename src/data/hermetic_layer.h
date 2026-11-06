@@ -4,7 +4,7 @@
 
 #define HERMETIC_SECTIONS 10
 #define HERMETIC_ENTRIES  52
-#define HERMETIC_PICTURES 30
+#define HERMETIC_PICTURES 53
 
 #ifndef GUARD_LAYER_BOOK_TYPES   // one set of types for every book this tool writes (T-483)
 #define GUARD_LAYER_BOOK_TYPES
@@ -55,15 +55,38 @@ static const u32 sHermeticPic_surface_0[] = INCBIN_U32("graphics/book/hermetic/s
 static const u32 sHermeticPic_folds_0[] = INCBIN_U32("graphics/book/hermetic/folds_0.4bpp");
 static const u32 sHermeticPic_space_0[] = INCBIN_U32("graphics/book/hermetic/space_0.4bpp");
 static const u32 sHermeticPic_upperfolds_0[] = INCBIN_U32("graphics/book/hermetic/upperfolds_0.4bpp");
+static const u32 sHermeticPic_circle_0[] = INCBIN_U32("graphics/book/hermetic/circle_0.4bpp");
 static const u32 sHermeticPic_gravity_0[] = INCBIN_U32("graphics/book/hermetic/gravity_0.4bpp");
 static const u32 sHermeticPic_apple_0[] = INCBIN_U32("graphics/book/hermetic/apple_0.4bpp");
 static const u32 sHermeticPic_fractal_0[] = INCBIN_U32("graphics/book/hermetic/fractal_0.4bpp");
 static const u32 sHermeticPic_silkflower_0[] = INCBIN_U32("graphics/book/hermetic/silkflower_0.4bpp");
+static const u32 sHermeticPic_unfolded_0[] = INCBIN_U32("graphics/book/hermetic/unfolded_0.4bpp");
+static const u32 sHermeticPic_verb_0[] = INCBIN_U32("graphics/book/hermetic/verb_0.4bpp");
 static const u32 sHermeticPic_entangled_0[] = INCBIN_U32("graphics/book/hermetic/entangled_0.4bpp");
+static const u32 sHermeticPic_sympathy_0[] = INCBIN_U32("graphics/book/hermetic/sympathy_0.4bpp");
 static const u32 sHermeticPic_poppet_0[] = INCBIN_U32("graphics/book/hermetic/poppet_0.4bpp");
+static const u32 sHermeticPic_bothways_0[] = INCBIN_U32("graphics/book/hermetic/bothways_0.4bpp");
 static const u32 sHermeticPic_spelling_0[] = INCBIN_U32("graphics/book/hermetic/spelling_0.4bpp");
+static const u32 sHermeticPic_charms_0[] = INCBIN_U32("graphics/book/hermetic/charms_0.4bpp");
+static const u32 sHermeticPic_grammar_0[] = INCBIN_U32("graphics/book/hermetic/grammar_0.4bpp");
+static const u32 sHermeticPic_metals_0[] = INCBIN_U32("graphics/book/hermetic/metals_0.4bpp");
 static const u32 sHermeticPic_wheel_0[] = INCBIN_U32("graphics/book/hermetic/wheel_0.4bpp");
+static const u32 sHermeticPic_awakening_0[] = INCBIN_U32("graphics/book/hermetic/awakening_0.4bpp");
+static const u32 sHermeticPic_contrast_0[] = INCBIN_U32("graphics/book/hermetic/contrast_0.4bpp");
+static const u32 sHermeticPic_room_0[] = INCBIN_U32("graphics/book/hermetic/room_0.4bpp");
+static const u32 sHermeticPic_pull_0[] = INCBIN_U32("graphics/book/hermetic/pull_0.4bpp");
+static const u32 sHermeticPic_mirror_0[] = INCBIN_U32("graphics/book/hermetic/mirror_0.4bpp");
+static const u32 sHermeticPic_pattern_0[] = INCBIN_U32("graphics/book/hermetic/pattern_0.4bpp");
+static const u32 sHermeticPic_return_0[] = INCBIN_U32("graphics/book/hermetic/return_0.4bpp");
+static const u32 sHermeticPic_smallhand_0[] = INCBIN_U32("graphics/book/hermetic/smallhand_0.4bpp");
+static const u32 sHermeticPic_greathand_0[] = INCBIN_U32("graphics/book/hermetic/greathand_0.4bpp");
+static const u32 sHermeticPic_process_0[] = INCBIN_U32("graphics/book/hermetic/process_0.4bpp");
+static const u32 sHermeticPic_seam_0[] = INCBIN_U32("graphics/book/hermetic/seam_0.4bpp");
+static const u32 sHermeticPic_lens_0[] = INCBIN_U32("graphics/book/hermetic/lens_0.4bpp");
+static const u32 sHermeticPic_field_0[] = INCBIN_U32("graphics/book/hermetic/field_0.4bpp");
+static const u32 sHermeticPic_candle_0[] = INCBIN_U32("graphics/book/hermetic/candle_0.4bpp");
 static const u32 sHermeticPic_blank_0[] = INCBIN_U32("graphics/book/hermetic/blank_0.4bpp");
+static const u32 sHermeticPic_lastword_0[] = INCBIN_U32("graphics/book/hermetic/lastword_0.4bpp");
 
 static const struct SubtlePicture sHermeticPictures[HERMETIC_PICTURES] =
 {
@@ -88,15 +111,38 @@ static const struct SubtlePicture sHermeticPictures[HERMETIC_PICTURES] =
     { { sHermeticPic_folds_0, NULL, NULL }, 96, 88, 1 },   // folds
     { { sHermeticPic_space_0, NULL, NULL }, 96, 88, 1 },   // space
     { { sHermeticPic_upperfolds_0, NULL, NULL }, 96, 88, 1 },   // upperfolds
+    { { sHermeticPic_circle_0, NULL, NULL }, 96, 88, 1 },   // circle
     { { sHermeticPic_gravity_0, NULL, NULL }, 96, 88, 1 },   // gravity
     { { sHermeticPic_apple_0, NULL, NULL }, 96, 88, 1 },   // apple
     { { sHermeticPic_fractal_0, NULL, NULL }, 96, 88, 1 },   // fractal
     { { sHermeticPic_silkflower_0, NULL, NULL }, 96, 88, 1 },   // silkflower
+    { { sHermeticPic_unfolded_0, NULL, NULL }, 96, 88, 1 },   // unfolded
+    { { sHermeticPic_verb_0, NULL, NULL }, 96, 88, 1 },   // verb
     { { sHermeticPic_entangled_0, NULL, NULL }, 96, 88, 1 },   // entangled
+    { { sHermeticPic_sympathy_0, NULL, NULL }, 96, 88, 1 },   // sympathy
     { { sHermeticPic_poppet_0, NULL, NULL }, 96, 88, 1 },   // poppet
+    { { sHermeticPic_bothways_0, NULL, NULL }, 96, 88, 1 },   // bothways
     { { sHermeticPic_spelling_0, NULL, NULL }, 96, 88, 1 },   // spelling
+    { { sHermeticPic_charms_0, NULL, NULL }, 96, 88, 1 },   // charms
+    { { sHermeticPic_grammar_0, NULL, NULL }, 96, 88, 1 },   // grammar
+    { { sHermeticPic_metals_0, NULL, NULL }, 96, 88, 1 },   // metals
     { { sHermeticPic_wheel_0, NULL, NULL }, 96, 88, 1 },   // wheel
+    { { sHermeticPic_awakening_0, NULL, NULL }, 96, 88, 1 },   // awakening
+    { { sHermeticPic_contrast_0, NULL, NULL }, 96, 88, 1 },   // contrast
+    { { sHermeticPic_room_0, NULL, NULL }, 96, 88, 1 },   // room
+    { { sHermeticPic_pull_0, NULL, NULL }, 96, 88, 1 },   // pull
+    { { sHermeticPic_mirror_0, NULL, NULL }, 96, 88, 1 },   // mirror
+    { { sHermeticPic_pattern_0, NULL, NULL }, 96, 88, 1 },   // pattern
+    { { sHermeticPic_return_0, NULL, NULL }, 96, 88, 1 },   // return
+    { { sHermeticPic_smallhand_0, NULL, NULL }, 96, 88, 1 },   // smallhand
+    { { sHermeticPic_greathand_0, NULL, NULL }, 96, 88, 1 },   // greathand
+    { { sHermeticPic_process_0, NULL, NULL }, 96, 88, 1 },   // process
+    { { sHermeticPic_seam_0, NULL, NULL }, 96, 88, 1 },   // seam
+    { { sHermeticPic_lens_0, NULL, NULL }, 96, 88, 1 },   // lens
+    { { sHermeticPic_field_0, NULL, NULL }, 96, 88, 1 },   // field
+    { { sHermeticPic_candle_0, NULL, NULL }, 96, 88, 1 },   // candle
     { { sHermeticPic_blank_0, NULL, NULL }, 96, 88, 1 },   // blank
+    { { sHermeticPic_lastword_0, NULL, NULL }, 96, 88, 1 },   // lastword
 };
 
 static const u8 sHermeticLabel_0[] = _("THE TABLETS");
@@ -373,38 +419,38 @@ static const struct SubtleEntry sHermeticEntries[HERMETIC_ENTRIES] =
     { sHermeticShort_17, sHermeticTitle_17, sHermeticText_17, sHermeticCaption_17, 18, 0x0000, 112, 0x0000 },   // folds
     { sHermeticShort_18, sHermeticTitle_18, sHermeticText_18, sHermeticCaption_18, 19, 0x0000, 118, 0x0000 },   // space
     { sHermeticShort_19, sHermeticTitle_19, sHermeticText_19, sHermeticCaption_19, 20, 0x0000, 124, 0x0000 },   // upperfolds
-    { sHermeticShort_20, sHermeticTitle_20, sHermeticText_20, sHermeticCaption_20, 0, 0x0004, 130, 0x0000 },   // circle
-    { sHermeticShort_21, sHermeticTitle_21, sHermeticText_21, sHermeticCaption_21, 21, 0x0000, 136, 0x003E },   // gravity
-    { sHermeticShort_22, sHermeticTitle_22, sHermeticText_22, sHermeticCaption_22, 22, 0x0000, 144, 0x003E },   // apple
-    { sHermeticShort_23, sHermeticTitle_23, sHermeticText_23, sHermeticCaption_23, 23, 0x0000, 154, 0x0000 },   // fractal
-    { sHermeticShort_24, sHermeticTitle_24, sHermeticText_24, sHermeticCaption_24, 24, 0x0000, 160, 0x0000 },   // silkflower
-    { sHermeticShort_25, sHermeticTitle_25, sHermeticText_25, sHermeticCaption_25, 0, 0x0000, 166, 0x0000 },   // unfolded
-    { sHermeticShort_26, sHermeticTitle_26, sHermeticText_26, sHermeticCaption_26, 0, 0x0000, 172, 0x0000 },   // verb
-    { sHermeticShort_27, sHermeticTitle_27, sHermeticText_27, sHermeticCaption_27, 25, 0x0000, 176, 0x0000 },   // entangled
-    { sHermeticShort_28, sHermeticTitle_28, sHermeticText_28, sHermeticCaption_28, 0, 0x0000, 182, 0x0000 },   // sympathy
-    { sHermeticShort_29, sHermeticTitle_29, sHermeticText_29, sHermeticCaption_29, 26, 0x0000, 188, 0x0000 },   // poppet
-    { sHermeticShort_30, sHermeticTitle_30, sHermeticText_30, sHermeticCaption_30, 0, 0x0004, 194, 0x0000 },   // bothways
-    { sHermeticShort_31, sHermeticTitle_31, sHermeticText_31, sHermeticCaption_31, 27, 0x0000, 200, 0x0000 },   // spelling
-    { sHermeticShort_32, sHermeticTitle_32, sHermeticText_32, sHermeticCaption_32, 0, 0x0000, 206, 0x0000 },   // charms
-    { sHermeticShort_33, sHermeticTitle_33, sHermeticText_33, sHermeticCaption_33, 0, 0x0000, 212, 0x0000 },   // grammar
-    { sHermeticShort_34, sHermeticTitle_34, sHermeticText_34, sHermeticCaption_34, 0, 0x0000, 218, 0x0000 },   // metals
-    { sHermeticShort_35, sHermeticTitle_35, sHermeticText_35, sHermeticCaption_35, 28, 0x0004, 224, 0x0001 },   // wheel
-    { sHermeticShort_36, sHermeticTitle_36, sHermeticText_36, sHermeticCaption_36, 0, 0x0000, 230, 0x0001 },   // awakening
-    { sHermeticShort_37, sHermeticTitle_37, sHermeticText_37, sHermeticCaption_37, 0, 0x0000, 236, 0x0001 },   // contrast
-    { sHermeticShort_38, sHermeticTitle_38, sHermeticText_38, sHermeticCaption_38, 0, 0x0000, 240, 0x0001 },   // room
-    { sHermeticShort_39, sHermeticTitle_39, sHermeticText_39, sHermeticCaption_39, 0, 0x0000, 244, 0x0001 },   // pull
-    { sHermeticShort_40, sHermeticTitle_40, sHermeticText_40, sHermeticCaption_40, 0, 0x0000, 248, 0x0001 },   // mirror
-    { sHermeticShort_41, sHermeticTitle_41, sHermeticText_41, sHermeticCaption_41, 0, 0x0000, 252, 0x0001 },   // pattern
-    { sHermeticShort_42, sHermeticTitle_42, sHermeticText_42, sHermeticCaption_42, 0, 0x0000, 256, 0x0001 },   // return
-    { sHermeticShort_43, sHermeticTitle_43, sHermeticText_43, sHermeticCaption_43, 0, 0x0000, 260, 0x0001 },   // smallhand
-    { sHermeticShort_44, sHermeticTitle_44, sHermeticText_44, sHermeticCaption_44, 0, 0x0000, 264, 0x0001 },   // greathand
-    { sHermeticShort_45, sHermeticTitle_45, sHermeticText_45, sHermeticCaption_45, 0, 0x0000, 268, 0x0001 },   // process
-    { sHermeticShort_46, sHermeticTitle_46, sHermeticText_46, sHermeticCaption_46, 0, 0x0000, 272, 0x0001 },   // seam
-    { sHermeticShort_47, sHermeticTitle_47, sHermeticText_47, sHermeticCaption_47, 0, 0x0000, 276, 0x0001 },   // lens
-    { sHermeticShort_48, sHermeticTitle_48, sHermeticText_48, sHermeticCaption_48, 0, 0x0000, 280, 0x0001 },   // field
-    { sHermeticShort_49, sHermeticTitle_49, sHermeticText_49, sHermeticCaption_49, 0, 0x0000, 284, 0x0001 },   // candle
-    { sHermeticShort_50, sHermeticTitle_50, sHermeticText_50, sHermeticCaption_50, 29, 0x0000, 290, 0x0001 },   // blank
-    { sHermeticShort_51, sHermeticTitle_51, sHermeticText_51, sHermeticCaption_51, 0, 0x0000, 296, 0x0001 },   // lastword
+    { sHermeticShort_20, sHermeticTitle_20, sHermeticText_20, sHermeticCaption_20, 21, 0x0004, 130, 0x0000 },   // circle
+    { sHermeticShort_21, sHermeticTitle_21, sHermeticText_21, sHermeticCaption_21, 22, 0x0000, 136, 0x003E },   // gravity
+    { sHermeticShort_22, sHermeticTitle_22, sHermeticText_22, sHermeticCaption_22, 23, 0x0000, 144, 0x003E },   // apple
+    { sHermeticShort_23, sHermeticTitle_23, sHermeticText_23, sHermeticCaption_23, 24, 0x0000, 154, 0x0000 },   // fractal
+    { sHermeticShort_24, sHermeticTitle_24, sHermeticText_24, sHermeticCaption_24, 25, 0x0000, 160, 0x0000 },   // silkflower
+    { sHermeticShort_25, sHermeticTitle_25, sHermeticText_25, sHermeticCaption_25, 26, 0x0000, 166, 0x0000 },   // unfolded
+    { sHermeticShort_26, sHermeticTitle_26, sHermeticText_26, sHermeticCaption_26, 27, 0x0000, 172, 0x0000 },   // verb
+    { sHermeticShort_27, sHermeticTitle_27, sHermeticText_27, sHermeticCaption_27, 28, 0x0000, 176, 0x0000 },   // entangled
+    { sHermeticShort_28, sHermeticTitle_28, sHermeticText_28, sHermeticCaption_28, 29, 0x0000, 182, 0x0000 },   // sympathy
+    { sHermeticShort_29, sHermeticTitle_29, sHermeticText_29, sHermeticCaption_29, 30, 0x0000, 188, 0x0000 },   // poppet
+    { sHermeticShort_30, sHermeticTitle_30, sHermeticText_30, sHermeticCaption_30, 31, 0x0004, 194, 0x0000 },   // bothways
+    { sHermeticShort_31, sHermeticTitle_31, sHermeticText_31, sHermeticCaption_31, 32, 0x0000, 200, 0x0000 },   // spelling
+    { sHermeticShort_32, sHermeticTitle_32, sHermeticText_32, sHermeticCaption_32, 33, 0x0000, 206, 0x0000 },   // charms
+    { sHermeticShort_33, sHermeticTitle_33, sHermeticText_33, sHermeticCaption_33, 34, 0x0000, 212, 0x0000 },   // grammar
+    { sHermeticShort_34, sHermeticTitle_34, sHermeticText_34, sHermeticCaption_34, 35, 0x0000, 218, 0x0000 },   // metals
+    { sHermeticShort_35, sHermeticTitle_35, sHermeticText_35, sHermeticCaption_35, 36, 0x0004, 224, 0x0001 },   // wheel
+    { sHermeticShort_36, sHermeticTitle_36, sHermeticText_36, sHermeticCaption_36, 37, 0x0000, 230, 0x0001 },   // awakening
+    { sHermeticShort_37, sHermeticTitle_37, sHermeticText_37, sHermeticCaption_37, 38, 0x0000, 236, 0x0001 },   // contrast
+    { sHermeticShort_38, sHermeticTitle_38, sHermeticText_38, sHermeticCaption_38, 39, 0x0000, 240, 0x0001 },   // room
+    { sHermeticShort_39, sHermeticTitle_39, sHermeticText_39, sHermeticCaption_39, 40, 0x0000, 244, 0x0001 },   // pull
+    { sHermeticShort_40, sHermeticTitle_40, sHermeticText_40, sHermeticCaption_40, 41, 0x0000, 248, 0x0001 },   // mirror
+    { sHermeticShort_41, sHermeticTitle_41, sHermeticText_41, sHermeticCaption_41, 42, 0x0000, 252, 0x0001 },   // pattern
+    { sHermeticShort_42, sHermeticTitle_42, sHermeticText_42, sHermeticCaption_42, 43, 0x0000, 256, 0x0001 },   // return
+    { sHermeticShort_43, sHermeticTitle_43, sHermeticText_43, sHermeticCaption_43, 44, 0x0000, 260, 0x0001 },   // smallhand
+    { sHermeticShort_44, sHermeticTitle_44, sHermeticText_44, sHermeticCaption_44, 45, 0x0000, 264, 0x0001 },   // greathand
+    { sHermeticShort_45, sHermeticTitle_45, sHermeticText_45, sHermeticCaption_45, 46, 0x0000, 268, 0x0001 },   // process
+    { sHermeticShort_46, sHermeticTitle_46, sHermeticText_46, sHermeticCaption_46, 47, 0x0000, 272, 0x0001 },   // seam
+    { sHermeticShort_47, sHermeticTitle_47, sHermeticText_47, sHermeticCaption_47, 48, 0x0000, 276, 0x0001 },   // lens
+    { sHermeticShort_48, sHermeticTitle_48, sHermeticText_48, sHermeticCaption_48, 49, 0x0000, 280, 0x0001 },   // field
+    { sHermeticShort_49, sHermeticTitle_49, sHermeticText_49, sHermeticCaption_49, 50, 0x0000, 284, 0x0001 },   // candle
+    { sHermeticShort_50, sHermeticTitle_50, sHermeticText_50, sHermeticCaption_50, 51, 0x0000, 290, 0x0001 },   // blank
+    { sHermeticShort_51, sHermeticTitle_51, sHermeticText_51, sHermeticCaption_51, 52, 0x0000, 296, 0x0001 },   // lastword
 };
 
 // T-519 item 2: THE HERMETIC LAYER's last page, torn mid-sentence at the spine (DRAFT).

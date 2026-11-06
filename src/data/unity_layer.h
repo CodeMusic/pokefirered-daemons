@@ -4,7 +4,7 @@
 
 #define UNITY_SECTIONS 11
 #define UNITY_ENTRIES  55
-#define UNITY_PICTURES 34
+#define UNITY_PICTURES 56
 
 #ifndef GUARD_LAYER_BOOK_TYPES   // one set of types for every book this tool writes (T-483)
 #define GUARD_LAYER_BOOK_TYPES
@@ -50,10 +50,12 @@ static const u32 sUnityPic_signal_0[] = INCBIN_U32("graphics/book/unity/signal_0
 static const u32 sUnityPic_sound_0[] = INCBIN_U32("graphics/book/unity/sound_0.4bpp");
 static const u32 sUnityPic_remains_0[] = INCBIN_U32("graphics/book/unity/remains_0.4bpp");
 static const u32 sUnityPic_warmth_0[] = INCBIN_U32("graphics/book/unity/warmth_0.4bpp");
+static const u32 sUnityPic_verb_0[] = INCBIN_U32("graphics/book/unity/verb_0.4bpp");
 static const u32 sUnityPic_surface_0[] = INCBIN_U32("graphics/book/unity/surface_0.4bpp");
 static const u32 sUnityPic_sheet_0[] = INCBIN_U32("graphics/book/unity/sheet_0.4bpp");
 static const u32 sUnityPic_space_0[] = INCBIN_U32("graphics/book/unity/space_0.4bpp");
 static const u32 sUnityPic_everyfold_0[] = INCBIN_U32("graphics/book/unity/everyfold_0.4bpp");
+static const u32 sUnityPic_circle_0[] = INCBIN_U32("graphics/book/unity/circle_0.4bpp");
 static const u32 sUnityPic_gravity_0[] = INCBIN_U32("graphics/book/unity/gravity_0.4bpp");
 static const u32 sUnityPic_twomirrors_0[] = INCBIN_U32("graphics/book/unity/twomirrors_0.4bpp");
 static const u32 sUnityPic_pair_0[] = INCBIN_U32("graphics/book/unity/pair_0.4bpp");
@@ -63,12 +65,32 @@ static const u32 sUnityPic_weektwo_0[] = INCBIN_U32("graphics/book/unity/weektwo
 static const u32 sUnityPic_twobooks_0[] = INCBIN_U32("graphics/book/unity/twobooks_0.4bpp");
 static const u32 sUnityPic_fractal_0[] = INCBIN_U32("graphics/book/unity/fractal_0.4bpp");
 static const u32 sUnityPic_twoflowers_0[] = INCBIN_U32("graphics/book/unity/twoflowers_0.4bpp");
+static const u32 sUnityPic_hand_0[] = INCBIN_U32("graphics/book/unity/hand_0.4bpp");
 static const u32 sUnityPic_entangled_0[] = INCBIN_U32("graphics/book/unity/entangled_0.4bpp");
+static const u32 sUnityPic_sympathy_0[] = INCBIN_U32("graphics/book/unity/sympathy_0.4bpp");
 static const u32 sUnityPic_keeper_0[] = INCBIN_U32("graphics/book/unity/keeper_0.4bpp");
+static const u32 sUnityPic_bothways_0[] = INCBIN_U32("graphics/book/unity/bothways_0.4bpp");
 static const u32 sUnityPic_spelling_0[] = INCBIN_U32("graphics/book/unity/spelling_0.4bpp");
+static const u32 sUnityPic_vows_0[] = INCBIN_U32("graphics/book/unity/vows_0.4bpp");
+static const u32 sUnityPic_grammar_0[] = INCBIN_U32("graphics/book/unity/grammar_0.4bpp");
+static const u32 sUnityPic_metals_0[] = INCBIN_U32("graphics/book/unity/metals_0.4bpp");
 static const u32 sUnityPic_wheel_0[] = INCBIN_U32("graphics/book/unity/wheel_0.4bpp");
+static const u32 sUnityPic_awakening_0[] = INCBIN_U32("graphics/book/unity/awakening_0.4bpp");
+static const u32 sUnityPic_contrast_0[] = INCBIN_U32("graphics/book/unity/contrast_0.4bpp");
+static const u32 sUnityPic_room_0[] = INCBIN_U32("graphics/book/unity/room_0.4bpp");
+static const u32 sUnityPic_pull_0[] = INCBIN_U32("graphics/book/unity/pull_0.4bpp");
+static const u32 sUnityPic_mirror_0[] = INCBIN_U32("graphics/book/unity/mirror_0.4bpp");
+static const u32 sUnityPic_pattern_0[] = INCBIN_U32("graphics/book/unity/pattern_0.4bpp");
+static const u32 sUnityPic_return_0[] = INCBIN_U32("graphics/book/unity/return_0.4bpp");
+static const u32 sUnityPic_smallhand_0[] = INCBIN_U32("graphics/book/unity/smallhand_0.4bpp");
+static const u32 sUnityPic_greathand_0[] = INCBIN_U32("graphics/book/unity/greathand_0.4bpp");
+static const u32 sUnityPic_process_0[] = INCBIN_U32("graphics/book/unity/process_0.4bpp");
+static const u32 sUnityPic_seam_0[] = INCBIN_U32("graphics/book/unity/seam_0.4bpp");
+static const u32 sUnityPic_lens_0[] = INCBIN_U32("graphics/book/unity/lens_0.4bpp");
+static const u32 sUnityPic_field_0[] = INCBIN_U32("graphics/book/unity/field_0.4bpp");
 static const u32 sUnityPic_horizon_0[] = INCBIN_U32("graphics/book/unity/horizon_0.4bpp");
 static const u32 sUnityPic_blankboth_0[] = INCBIN_U32("graphics/book/unity/blankboth_0.4bpp");
+static const u32 sUnityPic_lastwordone_0[] = INCBIN_U32("graphics/book/unity/lastwordone_0.4bpp");
 
 static const struct SubtlePicture sUnityPictures[UNITY_PICTURES] =
 {
@@ -87,10 +109,12 @@ static const struct SubtlePicture sUnityPictures[UNITY_PICTURES] =
     { { sUnityPic_sound_0, NULL, NULL }, 96, 88, 1 },   // sound
     { { sUnityPic_remains_0, NULL, NULL }, 96, 88, 1 },   // remains
     { { sUnityPic_warmth_0, NULL, NULL }, 96, 88, 1 },   // warmth
+    { { sUnityPic_verb_0, NULL, NULL }, 96, 88, 1 },   // verb
     { { sUnityPic_surface_0, NULL, NULL }, 96, 88, 1 },   // surface
     { { sUnityPic_sheet_0, NULL, NULL }, 96, 88, 1 },   // sheet
     { { sUnityPic_space_0, NULL, NULL }, 96, 88, 1 },   // space
     { { sUnityPic_everyfold_0, NULL, NULL }, 96, 88, 1 },   // everyfold
+    { { sUnityPic_circle_0, NULL, NULL }, 96, 88, 1 },   // circle
     { { sUnityPic_gravity_0, NULL, NULL }, 96, 88, 1 },   // gravity
     { { sUnityPic_twomirrors_0, NULL, NULL }, 96, 88, 1 },   // twomirrors
     { { sUnityPic_pair_0, NULL, NULL }, 96, 88, 1 },   // pair
@@ -100,12 +124,32 @@ static const struct SubtlePicture sUnityPictures[UNITY_PICTURES] =
     { { sUnityPic_twobooks_0, NULL, NULL }, 96, 88, 1 },   // twobooks
     { { sUnityPic_fractal_0, NULL, NULL }, 96, 88, 1 },   // fractal
     { { sUnityPic_twoflowers_0, NULL, NULL }, 96, 88, 1 },   // twoflowers
+    { { sUnityPic_hand_0, NULL, NULL }, 96, 88, 1 },   // hand
     { { sUnityPic_entangled_0, NULL, NULL }, 96, 88, 1 },   // entangled
+    { { sUnityPic_sympathy_0, NULL, NULL }, 96, 88, 1 },   // sympathy
     { { sUnityPic_keeper_0, NULL, NULL }, 96, 88, 1 },   // keeper
+    { { sUnityPic_bothways_0, NULL, NULL }, 96, 88, 1 },   // bothways
     { { sUnityPic_spelling_0, NULL, NULL }, 96, 88, 1 },   // spelling
+    { { sUnityPic_vows_0, NULL, NULL }, 96, 88, 1 },   // vows
+    { { sUnityPic_grammar_0, NULL, NULL }, 96, 88, 1 },   // grammar
+    { { sUnityPic_metals_0, NULL, NULL }, 96, 88, 1 },   // metals
     { { sUnityPic_wheel_0, NULL, NULL }, 96, 88, 1 },   // wheel
+    { { sUnityPic_awakening_0, NULL, NULL }, 96, 88, 1 },   // awakening
+    { { sUnityPic_contrast_0, NULL, NULL }, 96, 88, 1 },   // contrast
+    { { sUnityPic_room_0, NULL, NULL }, 96, 88, 1 },   // room
+    { { sUnityPic_pull_0, NULL, NULL }, 96, 88, 1 },   // pull
+    { { sUnityPic_mirror_0, NULL, NULL }, 96, 88, 1 },   // mirror
+    { { sUnityPic_pattern_0, NULL, NULL }, 96, 88, 1 },   // pattern
+    { { sUnityPic_return_0, NULL, NULL }, 96, 88, 1 },   // return
+    { { sUnityPic_smallhand_0, NULL, NULL }, 96, 88, 1 },   // smallhand
+    { { sUnityPic_greathand_0, NULL, NULL }, 96, 88, 1 },   // greathand
+    { { sUnityPic_process_0, NULL, NULL }, 96, 88, 1 },   // process
+    { { sUnityPic_seam_0, NULL, NULL }, 96, 88, 1 },   // seam
+    { { sUnityPic_lens_0, NULL, NULL }, 96, 88, 1 },   // lens
+    { { sUnityPic_field_0, NULL, NULL }, 96, 88, 1 },   // field
     { { sUnityPic_horizon_0, NULL, NULL }, 96, 88, 1 },   // horizon
     { { sUnityPic_blankboth_0, NULL, NULL }, 96, 88, 1 },   // blankboth
+    { { sUnityPic_lastwordone_0, NULL, NULL }, 96, 88, 1 },   // lastwordone
 };
 
 static const u8 sUnityLabel_0[] = _("THE TABLETS");
@@ -392,47 +436,47 @@ static const struct SubtleEntry sUnityEntries[UNITY_ENTRIES] =
     { sUnityShort_11, sUnityTitle_11, sUnityText_11, sUnityCaption_11, 12, 0x0000, 72, 0x0004 },   // sound
     { sUnityShort_12, sUnityTitle_12, sUnityText_12, sUnityCaption_12, 13, 0x0000, 78, 0x0002 },   // remains
     { sUnityShort_13, sUnityTitle_13, sUnityText_13, sUnityCaption_13, 14, 0x0000, 84, 0x0002 },   // warmth
-    { sUnityShort_14, sUnityTitle_14, sUnityText_14, sUnityCaption_14, 0, 0x0000, 90, 0x0004 },   // verb
-    { sUnityShort_15, sUnityTitle_15, sUnityText_15, sUnityCaption_15, 15, 0x0000, 94, 0x0000 },   // surface
-    { sUnityShort_16, sUnityTitle_16, sUnityText_16, sUnityCaption_16, 16, 0x0000, 100, 0x0000 },   // sheet
-    { sUnityShort_17, sUnityTitle_17, sUnityText_17, sUnityCaption_17, 17, 0x0000, 106, 0x0000 },   // space
-    { sUnityShort_18, sUnityTitle_18, sUnityText_18, sUnityCaption_18, 18, 0x0000, 110, 0x0000 },   // everyfold
-    { sUnityShort_19, sUnityTitle_19, sUnityText_19, sUnityCaption_19, 0, 0x0004, 116, 0x0000 },   // circle
-    { sUnityShort_20, sUnityTitle_20, sUnityText_20, sUnityCaption_20, 19, 0x0000, 122, 0x07FE },   // gravity
-    { sUnityShort_21, sUnityTitle_21, sUnityText_21, sUnityCaption_21, 20, 0x0000, 130, 0x0000 },   // twomirrors
-    { sUnityShort_22, sUnityTitle_22, sUnityText_22, sUnityCaption_22, 21, 0x0000, 134, 0x0000 },   // pair
-    { sUnityShort_23, sUnityTitle_23, sUnityText_23, sUnityCaption_23, 22, 0x0000, 140, 0x0000 },   // twosides
-    { sUnityShort_24, sUnityTitle_24, sUnityText_24, sUnityCaption_24, 23, 0x0000, 146, 0x0000 },   // weekone
-    { sUnityShort_25, sUnityTitle_25, sUnityText_25, sUnityCaption_25, 24, 0x0000, 152, 0x0000 },   // weektwo
-    { sUnityShort_26, sUnityTitle_26, sUnityText_26, sUnityCaption_26, 25, 0x0000, 156, 0x0000 },   // twobooks
-    { sUnityShort_27, sUnityTitle_27, sUnityText_27, sUnityCaption_27, 26, 0x0000, 162, 0x0000 },   // fractal
-    { sUnityShort_28, sUnityTitle_28, sUnityText_28, sUnityCaption_28, 27, 0x0000, 168, 0x0000 },   // twoflowers
-    { sUnityShort_29, sUnityTitle_29, sUnityText_29, sUnityCaption_29, 0, 0x0000, 174, 0x0000 },   // hand
-    { sUnityShort_30, sUnityTitle_30, sUnityText_30, sUnityCaption_30, 28, 0x0000, 180, 0x0000 },   // entangled
-    { sUnityShort_31, sUnityTitle_31, sUnityText_31, sUnityCaption_31, 0, 0x0000, 186, 0x0000 },   // sympathy
-    { sUnityShort_32, sUnityTitle_32, sUnityText_32, sUnityCaption_32, 29, 0x0000, 192, 0x0000 },   // keeper
-    { sUnityShort_33, sUnityTitle_33, sUnityText_33, sUnityCaption_33, 0, 0x0004, 198, 0x0000 },   // bothways
-    { sUnityShort_34, sUnityTitle_34, sUnityText_34, sUnityCaption_34, 30, 0x0000, 204, 0x0000 },   // spelling
-    { sUnityShort_35, sUnityTitle_35, sUnityText_35, sUnityCaption_35, 0, 0x0000, 210, 0x0000 },   // vows
-    { sUnityShort_36, sUnityTitle_36, sUnityText_36, sUnityCaption_36, 0, 0x0000, 216, 0x0000 },   // grammar
-    { sUnityShort_37, sUnityTitle_37, sUnityText_37, sUnityCaption_37, 0, 0x0000, 220, 0x0000 },   // metals
-    { sUnityShort_38, sUnityTitle_38, sUnityText_38, sUnityCaption_38, 31, 0x0004, 226, 0x0001 },   // wheel
-    { sUnityShort_39, sUnityTitle_39, sUnityText_39, sUnityCaption_39, 0, 0x0000, 232, 0x0001 },   // awakening
-    { sUnityShort_40, sUnityTitle_40, sUnityText_40, sUnityCaption_40, 0, 0x0000, 236, 0x0001 },   // contrast
-    { sUnityShort_41, sUnityTitle_41, sUnityText_41, sUnityCaption_41, 0, 0x0000, 240, 0x0001 },   // room
-    { sUnityShort_42, sUnityTitle_42, sUnityText_42, sUnityCaption_42, 0, 0x0000, 244, 0x0001 },   // pull
-    { sUnityShort_43, sUnityTitle_43, sUnityText_43, sUnityCaption_43, 0, 0x0000, 248, 0x0001 },   // mirror
-    { sUnityShort_44, sUnityTitle_44, sUnityText_44, sUnityCaption_44, 0, 0x0000, 252, 0x0001 },   // pattern
-    { sUnityShort_45, sUnityTitle_45, sUnityText_45, sUnityCaption_45, 0, 0x0000, 256, 0x0001 },   // return
-    { sUnityShort_46, sUnityTitle_46, sUnityText_46, sUnityCaption_46, 0, 0x0000, 260, 0x0001 },   // smallhand
-    { sUnityShort_47, sUnityTitle_47, sUnityText_47, sUnityCaption_47, 0, 0x0000, 264, 0x0001 },   // greathand
-    { sUnityShort_48, sUnityTitle_48, sUnityText_48, sUnityCaption_48, 0, 0x0000, 268, 0x0001 },   // process
-    { sUnityShort_49, sUnityTitle_49, sUnityText_49, sUnityCaption_49, 0, 0x0000, 272, 0x0001 },   // seam
-    { sUnityShort_50, sUnityTitle_50, sUnityText_50, sUnityCaption_50, 0, 0x0000, 276, 0x0001 },   // lens
-    { sUnityShort_51, sUnityTitle_51, sUnityText_51, sUnityCaption_51, 0, 0x0000, 280, 0x0001 },   // field
-    { sUnityShort_52, sUnityTitle_52, sUnityText_52, sUnityCaption_52, 32, 0x0000, 284, 0x0001 },   // horizon
-    { sUnityShort_53, sUnityTitle_53, sUnityText_53, sUnityCaption_53, 33, 0x0000, 290, 0x0001 },   // blankboth
-    { sUnityShort_54, sUnityTitle_54, sUnityText_54, sUnityCaption_54, 0, 0x0000, 296, 0x0001 },   // lastwordone
+    { sUnityShort_14, sUnityTitle_14, sUnityText_14, sUnityCaption_14, 15, 0x0000, 90, 0x0004 },   // verb
+    { sUnityShort_15, sUnityTitle_15, sUnityText_15, sUnityCaption_15, 16, 0x0000, 94, 0x0000 },   // surface
+    { sUnityShort_16, sUnityTitle_16, sUnityText_16, sUnityCaption_16, 17, 0x0000, 100, 0x0000 },   // sheet
+    { sUnityShort_17, sUnityTitle_17, sUnityText_17, sUnityCaption_17, 18, 0x0000, 106, 0x0000 },   // space
+    { sUnityShort_18, sUnityTitle_18, sUnityText_18, sUnityCaption_18, 19, 0x0000, 110, 0x0000 },   // everyfold
+    { sUnityShort_19, sUnityTitle_19, sUnityText_19, sUnityCaption_19, 20, 0x0004, 116, 0x0000 },   // circle
+    { sUnityShort_20, sUnityTitle_20, sUnityText_20, sUnityCaption_20, 21, 0x0000, 122, 0x07FE },   // gravity
+    { sUnityShort_21, sUnityTitle_21, sUnityText_21, sUnityCaption_21, 22, 0x0000, 130, 0x0000 },   // twomirrors
+    { sUnityShort_22, sUnityTitle_22, sUnityText_22, sUnityCaption_22, 23, 0x0000, 134, 0x0000 },   // pair
+    { sUnityShort_23, sUnityTitle_23, sUnityText_23, sUnityCaption_23, 24, 0x0000, 140, 0x0000 },   // twosides
+    { sUnityShort_24, sUnityTitle_24, sUnityText_24, sUnityCaption_24, 25, 0x0000, 146, 0x0000 },   // weekone
+    { sUnityShort_25, sUnityTitle_25, sUnityText_25, sUnityCaption_25, 26, 0x0000, 152, 0x0000 },   // weektwo
+    { sUnityShort_26, sUnityTitle_26, sUnityText_26, sUnityCaption_26, 27, 0x0000, 156, 0x0000 },   // twobooks
+    { sUnityShort_27, sUnityTitle_27, sUnityText_27, sUnityCaption_27, 28, 0x0000, 162, 0x0000 },   // fractal
+    { sUnityShort_28, sUnityTitle_28, sUnityText_28, sUnityCaption_28, 29, 0x0000, 168, 0x0000 },   // twoflowers
+    { sUnityShort_29, sUnityTitle_29, sUnityText_29, sUnityCaption_29, 30, 0x0000, 174, 0x0000 },   // hand
+    { sUnityShort_30, sUnityTitle_30, sUnityText_30, sUnityCaption_30, 31, 0x0000, 180, 0x0000 },   // entangled
+    { sUnityShort_31, sUnityTitle_31, sUnityText_31, sUnityCaption_31, 32, 0x0000, 186, 0x0000 },   // sympathy
+    { sUnityShort_32, sUnityTitle_32, sUnityText_32, sUnityCaption_32, 33, 0x0000, 192, 0x0000 },   // keeper
+    { sUnityShort_33, sUnityTitle_33, sUnityText_33, sUnityCaption_33, 34, 0x0004, 198, 0x0000 },   // bothways
+    { sUnityShort_34, sUnityTitle_34, sUnityText_34, sUnityCaption_34, 35, 0x0000, 204, 0x0000 },   // spelling
+    { sUnityShort_35, sUnityTitle_35, sUnityText_35, sUnityCaption_35, 36, 0x0000, 210, 0x0000 },   // vows
+    { sUnityShort_36, sUnityTitle_36, sUnityText_36, sUnityCaption_36, 37, 0x0000, 216, 0x0000 },   // grammar
+    { sUnityShort_37, sUnityTitle_37, sUnityText_37, sUnityCaption_37, 38, 0x0000, 220, 0x0000 },   // metals
+    { sUnityShort_38, sUnityTitle_38, sUnityText_38, sUnityCaption_38, 39, 0x0004, 226, 0x0001 },   // wheel
+    { sUnityShort_39, sUnityTitle_39, sUnityText_39, sUnityCaption_39, 40, 0x0000, 232, 0x0001 },   // awakening
+    { sUnityShort_40, sUnityTitle_40, sUnityText_40, sUnityCaption_40, 41, 0x0000, 236, 0x0001 },   // contrast
+    { sUnityShort_41, sUnityTitle_41, sUnityText_41, sUnityCaption_41, 42, 0x0000, 240, 0x0001 },   // room
+    { sUnityShort_42, sUnityTitle_42, sUnityText_42, sUnityCaption_42, 43, 0x0000, 244, 0x0001 },   // pull
+    { sUnityShort_43, sUnityTitle_43, sUnityText_43, sUnityCaption_43, 44, 0x0000, 248, 0x0001 },   // mirror
+    { sUnityShort_44, sUnityTitle_44, sUnityText_44, sUnityCaption_44, 45, 0x0000, 252, 0x0001 },   // pattern
+    { sUnityShort_45, sUnityTitle_45, sUnityText_45, sUnityCaption_45, 46, 0x0000, 256, 0x0001 },   // return
+    { sUnityShort_46, sUnityTitle_46, sUnityText_46, sUnityCaption_46, 47, 0x0000, 260, 0x0001 },   // smallhand
+    { sUnityShort_47, sUnityTitle_47, sUnityText_47, sUnityCaption_47, 48, 0x0000, 264, 0x0001 },   // greathand
+    { sUnityShort_48, sUnityTitle_48, sUnityText_48, sUnityCaption_48, 49, 0x0000, 268, 0x0001 },   // process
+    { sUnityShort_49, sUnityTitle_49, sUnityText_49, sUnityCaption_49, 50, 0x0000, 272, 0x0001 },   // seam
+    { sUnityShort_50, sUnityTitle_50, sUnityText_50, sUnityCaption_50, 51, 0x0000, 276, 0x0001 },   // lens
+    { sUnityShort_51, sUnityTitle_51, sUnityText_51, sUnityCaption_51, 52, 0x0000, 280, 0x0001 },   // field
+    { sUnityShort_52, sUnityTitle_52, sUnityText_52, sUnityCaption_52, 53, 0x0000, 284, 0x0001 },   // horizon
+    { sUnityShort_53, sUnityTitle_53, sUnityText_53, sUnityCaption_53, 54, 0x0000, 290, 0x0001 },   // blankboth
+    { sUnityShort_54, sUnityTitle_54, sUnityText_54, sUnityCaption_54, 55, 0x0000, 296, 0x0001 },   // lastwordone
 };
 
 // T-519 item 2: the OBSERVER's line in ATTESTATION (paragraph 5): the entry's whole text by the lead daemon's
