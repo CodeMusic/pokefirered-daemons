@@ -2751,6 +2751,8 @@ static void CreatePartyMonIconSprite(struct Pokemon *mon, struct PartyMenuBox *m
     CreatePartyMonIconSpriteParameterized(species2, GetMonData(mon, MON_DATA_PERSONALITY), menuBox, 1, handleDeoxys);
     if (species2 != SPECIES_NONE && DaemonIsAway(mon))     // T-358: on the player's device, drawn paler
         DaemonsWashAwayIcon(&gSprites[menuBox->monSpriteId], species2);
+    else if (species2 != SPECIES_NONE && species2 != SPECIES_EGG)   // T-519: lighter in good spirits, darker in low
+        Spirits_ToneIcon(&gSprites[menuBox->monSpriteId], species2, Spirits_ToneOf(&mon->box));
     UpdatePartyMonHPBar(menuBox->monSpriteId, mon);
 }
 
@@ -6708,6 +6710,8 @@ static void Task_AwaySave(u8 taskId)
         //  Drawn as home at once: its level where AWAY was, and its icon in its own colours.
         DisplayPartyPokemonData(gPartyMenu.slotId);
         DaemonsUnwashAwayIcon(&gSprites[sPartyMenuBoxes[gPartyMenu.slotId].monSpriteId], GetMonData(mon, MON_DATA_SPECIES_OR_EGG));
+        if (GetMonData(mon, MON_DATA_SPECIES_OR_EGG) != SPECIES_EGG)    // T-519: and in its spirits' tone again
+            Spirits_ToneIcon(&gSprites[sPartyMenuBoxes[gPartyMenu.slotId].monSpriteId], GetMonData(mon, MON_DATA_SPECIES_OR_EGG), Spirits_ToneOf(&mon->box));
         GetMonNickname(mon, gStringVar1);       // the redraw spent gStringVar1 on the HP figures
         StringExpandPlaceholders(gStringVar4, sText_AwaySavedBringHome);
     }

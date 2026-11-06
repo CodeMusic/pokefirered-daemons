@@ -1,6 +1,7 @@
 #include "global.h"
 #include "daemons_hours.h"   // T-519
 #include "main.h"
+#include "daemons_spirits.h"   // T-519: its tone
 #include "palette.h"
 #include "daemons_witching.h"   // T-480
 #include "daemons_hermetic.h"   // T-483: Halloween's costume
@@ -47,7 +48,8 @@
 //  follower walked larger than the player's 16x22). A species with no picture there has an icon that already fits,
 //  and walks as its icon's first frame. Its colours are its
 //  TYPE's (src/data/follower_palettes.h, DAEMONS tools/gbafollowerpal.py: the icon's shared palette remapped to the
-//  nearest colours of its front palette, so invariant 5 holds), greyed by friendship with T-424's own curve, then put
+//  nearest colours of its front palette, so invariant 5 holds), greyed by friendship with T-424's own curve, lighter or
+//  darker by its SPIRITS (T-519, as the summary draws it), then put
 //  in the field's light and weather as every person is. Icons face left; facing right is the same frame flipped. A
 //  1 px hop in the middle of each tile it walks is its step (387 of 396 icons have two identical frames, so the
 //  picture is one).
@@ -122,6 +124,7 @@ static struct
     u8 shimmer;            // T-480: the witching hour's shimmer is on its palette (put back when the hour ends)
     u16 costume;           // T-483: Halloween, with THE HERMETIC LAYER held -- the species it goes as, or SPECIES_NONE
     u16 shown;             // T-483: the icon species whose picture and colours it wears (its own, or the costume's)
+    u8 tone;               // T-519: its SPIRITS' tone, lighter or darker over its colours (Spirits_ToneOf)
 } sFollower;
 
 static void Shimmer(void);   // T-480
@@ -312,6 +315,8 @@ static void BuildPalette(u16 *buf)
                 pal = sFollowerShinyPalettes[i];
     CpuCopy16(pal, buf, PLTT_SIZE_4BPP);
     Saturation_ApplyToBuffer(buf, sFollower.friendship);   // T-424: greyed by friendship
+    Spirits_ToneBuffer(buf, sFollower.tone);               // T-519: then lighter or darker by its spirits, as the
+                                                           // summary draws it; the hours' gold and shimmer go over this
 }
 
 static u8 LoadFollowerPalette(void)
@@ -418,6 +423,7 @@ static void Spawn(s8 slot, struct Sprite *player, struct ObjectEvent *playerObj)
     u8 idx;
 
     ReadLead(slot, &sFollower.species, &sFollower.personality, &sFollower.friendship, &sFollower.shiny);
+    sFollower.tone = Spirits_ToneOf(&gPlayerParty[slot].box);   // T-519
     sFollower.costume = CostumeFor(slot);   // T-483: in a costume it wears the other daemon's picture and colours
     sFollower.shown = sFollower.costume != SPECIES_NONE ? GetIconSpecies(sFollower.costume, 0) : sFollower.species;
     FreeSpriteTilesByTag(FOLLOWER_TAG);
@@ -478,9 +484,10 @@ static void CheckLead(s8 slot)
         Despawn();   // made again next frame, from the same path
         return;
     }
-    if (friendship != sFollower.friendship)
+    if (friendship != sFollower.friendship || Spirits_ToneOf(&gPlayerParty[slot].box) != sFollower.tone)   // T-519
     {
         sFollower.friendship = friendship;
+        sFollower.tone = Spirits_ToneOf(&gPlayerParty[slot].box);
         idx = LoadFollowerPalette();
         if (idx != 0xFF)
             gSprites[sFollower.spriteId].oam.paletteNum = idx;

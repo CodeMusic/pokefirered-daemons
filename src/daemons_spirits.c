@@ -12,6 +12,7 @@
 #include "palette.h"
 #include "party_menu.h"
 #include "pokemon.h"
+#include "pokemon_icon.h"
 #include "pokemon_storage_system.h"
 #include "script.h"
 #include "sound.h"
@@ -463,6 +464,35 @@ void Spirits_ToneLoaded(u16 paletteOffset, u8 tone)
         gPlttBufferUnfaded[paletteOffset + i] = colour;
         gPlttBufferFaded[paletteOffset + i] = colour;
     }
+}
+
+//  An icon shares its palette with every icon of its colour group, so it cannot be toned in place: as T-358's AWAY
+//  wash does, it is pointed at a toned copy of its group's palette -- one per group and tone, loaded the first time
+//  one is needed and freed with the rest of the screen's palettes. With no palette slot free it keeps its colour.
+#define TONE_ICON_PAL_TAG 56032     // + group * 2 + tone - 1: beside AWAY's 56016 + group (daemons_away.c)
+
+void Spirits_ToneIcon(struct Sprite *sprite, u16 species, u8 tone)
+{
+    u8 group, slot;
+    u16 tag;
+
+    if (sprite == NULL || tone == SPIRITS_TONE_NONE)
+        return;
+    group = gMonIconPaletteIndices[species > NUM_SPECIES ? SPECIES_NONE : species];
+    tag = TONE_ICON_PAL_TAG + group * 2 + tone - 1;
+    slot = IndexOfSpritePaletteTag(tag);
+    if (slot == 0xFF)
+    {
+        u16 toned[16];
+        struct SpritePalette palette = { toned, tag };
+
+        CpuCopy16(gMonIconPalettes[group], toned, sizeof(toned));
+        Spirits_ToneBuffer(toned, tone);
+        slot = LoadSpritePalette(&palette);
+        if (slot == 0xFF)
+            return;
+    }
+    sprite->oam.paletteNum = slot;
 }
 
 //  ---------------------------------------------------------------- the crossing

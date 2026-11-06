@@ -19,6 +19,8 @@ enum {
     SPIRITS_TONE_DARK,      // low spirits: darker over them
 };
 
+struct Sprite;
+
 u8 Spirits_Class(const struct BoxPokemon *boxMon);
 u8 Spirits_Lean(const struct BoxPokemon *boxMon);
 u8 Spirits_ToneOf(const struct BoxPokemon *boxMon);
@@ -27,6 +29,7 @@ const u8 *Spirits_Words(const struct BoxPokemon *boxMon);   // "In good spirits.
 //  Tone, never hue: each colour moves toward white or black, the same share of the way in each channel.
 void Spirits_ToneBuffer(u16 *palette, u8 tone);                 // a 16-colour palette before it is loaded
 void Spirits_ToneLoaded(u16 paletteOffset, u8 tone);            // one already loaded (both buffers)
+void Spirits_ToneIcon(struct Sprite *sprite, u16 species, u8 tone);   // an icon: pointed at a toned copy of its group
 
 //  What moves it (each a chance of one step; src/daemons_spirits.c has the weights).
 void Spirits_OnHeal(void);                                      // KEPT: a CHECKPOINT, a bed (HealPlayerParty)
