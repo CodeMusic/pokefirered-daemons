@@ -65,6 +65,10 @@ enum
 static EWRAM_DATA struct BerryPouchStruct_203F36C *sResources = NULL;
 static EWRAM_DATA struct BerryPouchStruct_203F370 sStaticCnt = {};
 static EWRAM_DATA struct ListMenuItem *sListMenuItems = NULL;
+//  T-526 (the user, 2026-11-07): each row is FONT_SMALL (3) + {NO}{CLEAR 0x01} (2 + 3) + two digits + a space + FONT_NORMAL
+//  (3) + a name of up to ITEM_NAME_LENGTH - 1 (13) + EOS = 28 bytes -- vanilla's 27-byte slot was one short for a 13-letter
+//  name (THROTTLE TRAP), whose EOS spilled into the next row ("THROTTLE TRAP№02 SU", its x2 lost) or past the buffer.
+#define BERRY_ROW_LEN 32
 static EWRAM_DATA u8 * sListMenuStrbuf = NULL;
 static EWRAM_DATA const u8 * sContextMenuOptions = NULL;
 static EWRAM_DATA u8 sContextMenuNumOptions = 0;
@@ -642,7 +646,7 @@ static bool8 AllocateListMenuBuffers(void)
     sListMenuItems = Alloc(NUM_BERRIES * sizeof(struct ListMenuItem));
     if (sListMenuItems == NULL)
         return FALSE;
-    sListMenuStrbuf = Alloc(sResources->listMenuNumItems * 27);
+    sListMenuStrbuf = Alloc(sResources->listMenuNumItems * BERRY_ROW_LEN);
     if (sListMenuStrbuf == NULL)
         return FALSE;
     return TRUE;
@@ -654,8 +658,8 @@ static void SetUpListMenuTemplate(void)
     struct BagPocket *pocket = &gBagPockets[POCKET_BERRY_POUCH - 1];
     for (i = 0; i < sResources->listMenuNumItems; i++)
     {
-        GetBerryNameAndIndexForMenu(&sListMenuStrbuf[i * 27], pocket->itemSlots[i].itemId);
-        sListMenuItems[i].label = &sListMenuStrbuf[i * 27];
+        GetBerryNameAndIndexForMenu(&sListMenuStrbuf[i * BERRY_ROW_LEN], pocket->itemSlots[i].itemId);
+        sListMenuItems[i].label = &sListMenuStrbuf[i * BERRY_ROW_LEN];
         sListMenuItems[i].index = i;
     }
     sListMenuItems[i].label = gText_Close;
@@ -698,7 +702,7 @@ static void GetBerryNameAndIndexForMenu(u8 * dest, u16 itemId)
 
 static void CopySelectedListMenuItemName(s16 itemIdx, u8 * dest)
 {
-    StringCopy(dest, &sListMenuStrbuf[itemIdx * 27]);
+    StringCopy(dest, &sListMenuStrbuf[itemIdx * BERRY_ROW_LEN]);
 }
 
 static void BerryPouchMoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMenu *list)
