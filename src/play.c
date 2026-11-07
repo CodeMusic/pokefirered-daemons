@@ -1,5 +1,6 @@
 #include "global.h"
 #include "daemons_feelings.h"   // T-433
+#include "daemons_aurora.h"     // T-528 (f): the conjugate light, under which the SONGBOOK has its DUET
 #include "gflib.h"
 #include "event_object_lock.h"
 #include "event_data.h"
@@ -115,6 +116,7 @@
 #define ECHO_DELAY     8        // SE3 answers SE2 this many frames late
 #define ECHO_SOFT      102      // ...at two-fifths
 #define ECHO_TAIL      24       // frames held after the last echo note
+#define DUET_FAINT     64       // T-528 (f): the other edition's part, a quarter as loud as the instrument held
 
 #define STRIP_TOP      18       // the BUTTON STRIP: the bottom two rows of the screen
 #define STRIP_H        2
@@ -193,6 +195,12 @@ struct PlaySong
     const s8 *steps;
     const u8 *frames;
     const u8 *page;          // the SONGBOOK's line of where it was heard
+    // T-528 (f): a SLOT (the DUET) -- held only while `shown` says TRUE, and never learned -- and the other
+    // edition's part, played faintly under the instrument held as the song echoes. NULL and 0 for the eight.
+    bool8 (*shown)(void);
+    u8 partCount;
+    const s8 *partNotes;     // semitones from middle C, as written over the tune's own notes
+    const u8 *partFrames;
 };
 
 #include "data/play_songs.h"   // DAEMONS tools/genplaysongs.py, from docs/play_songs.json
@@ -632,7 +640,7 @@ static void UpdateGhosts(struct Play *play)
     for (song = 0; song < PLAY_SONG_COUNT; song++)
     {
         tune = &sSongs[song];
-        if (tune->count == 0 || tune->key != play->key || !FlagGet(tune->flag))
+        if (tune->count == 0 || tune->key != play->key || !Play_SongHeld(song))
             continue;
         for (m = min(tune->count - 1, play->ringCount); m >= GHOST_FROM && m > bestM; m--)
         {
@@ -986,12 +994,40 @@ static void Join(struct Play *play, u8 song)
 
 static u16 EchoLength(const struct PlaySong *tune)
 {
-    u16 t = 0;
+    u16 t = 0, p = 0;
     u8 i;
 
     for (i = 0; i < tune->count; i++)
         t += tune->frames[i];
-    return t + ECHO_DELAY + ECHO_TAIL;
+    for (i = 0; i < tune->partCount; i++)   // T-528 (f): the DUET's other part may run past the tune
+        p += tune->partFrames[i];
+    return max(t, p) + ECHO_DELAY + ECHO_TAIL;
+}
+
+// T-528 (f): the DUET's other part -- the other edition's instrument, faint on SE3 in place of the echo's answer,
+// from the first note, each note on its own time. It is written over the tune's notes; the player may have played
+// the tune an octave or two away, so it moves with them (the first note's octave), kept to what the instruments bend.
+static void SoundPart(struct Play *play, const struct PlaySong *tune, u16 c)
+{
+    u8 other = play->instrument == PLAY_HARP ? PLAY_FLUTE : PLAY_HARP;
+    s16 shift = play->echo[0] - tune->notes[0], semitone;
+    u16 t = 0;
+    u8 i;
+
+    for (i = 0; i < tune->partCount; i++)
+    {
+        if (c == t)
+        {
+            semitone = tune->partNotes[i] + shift;
+            while (semitone > 24)
+                semitone -= 12;
+            while (semitone < -12)
+                semitone += 12;
+            Play_SoundNote(other, semitone, TRUE);
+            m4aMPlayVolumeControl(&gMPlayInfo_SE3, TRACKS_ALL, DUET_FAINT);
+        }
+        t += tune->partFrames[i];
+    }
 }
 
 // T-417: a note drifting north (SEQUEL THE GUARDIAN's, toward a grove that way) would cross the staff, and sprites draw
@@ -1021,13 +1057,15 @@ static bool8 Echo(struct Play *play)
             m4aMPlayVolumeControl(&gMPlayInfo_SE2, TRACKS_ALL, 256);
             play->pulse[i] = 6;
         }
-        if (c == t + ECHO_DELAY)
+        if (c == t + ECHO_DELAY && tune->partCount == 0)   // the DUET's answer is its other part (SoundPart)
         {
             Play_SoundNote(play->instrument, play->echo[i], TRUE);
             m4aMPlayVolumeControl(&gMPlayInfo_SE3, TRACKS_ALL, ECHO_SOFT);
         }
         t += tune->frames[i];
     }
+    if (tune->partCount != 0)
+        SoundPart(play, tune, c);
     if (play->after == AFTER_DRIFT)
     {
         ox = play->afterDx * c / 2;
@@ -1070,6 +1108,10 @@ static bool8 Echo(struct Play *play)
         m4aMPlayStop(&gMPlayInfo_SE2);   // a breath does not ring on by itself
         m4aMPlayStop(&gMPlayInfo_SE3);
     }
+    else if (c == length - ECHO_TAIL && tune->partCount != 0)
+    {
+        m4aMPlayStop(&gMPlayInfo_SE3);   // T-528 (f): nor does the FLUTE's part under the HARP
+    }
     return ++play->clock > length;
 }
 
@@ -1089,8 +1131,8 @@ static bool8 Listen(u8 taskId)
         tune = &sSongs[song];
         if (tune->count == 0 || play->ringCount < tune->count)
             continue;
-        if (song != PLAY_SONG_FIR && !FlagGet(tune->flag) && !(tune->heardFlag && FlagGet(tune->heardFlag)))
-            continue;   // listened for once heard in its place (to be learned) or learned
+        if (song != PLAY_SONG_FIR && !Play_SongHeld(song) && !(tune->heardFlag && FlagGet(tune->heardFlag)))
+            continue;   // listened for once heard in its place (to be learned) or learned -- or, the DUET, shown
         tail = &play->ring[play->ringCount - tune->count];
         shift = (PitchClass(tail[0]) + 12 - tune->pcs[0]) % 12;
         same = TRUE;
@@ -1254,7 +1296,7 @@ static void Decide(struct Play *play)
     play->script = NULL;
     play->scriptAfter = FALSE;
     play->after = AFTER_NONE;
-    if (play->song != PLAY_SONG_FIR && !FlagGet(sSongs[play->song].flag))
+    if (play->song != PLAY_SONG_FIR && sSongs[play->song].shown == NULL && !FlagGet(sSongs[play->song].flag))
     {
         FlagSet(sSongs[play->song].flag);
         play->script = EventScript_Play_Learned;
@@ -1302,6 +1344,8 @@ static void Decide(struct Play *play)
             play->script = EventScript_Play_Reflection;
             play->scriptAfter = TRUE;
         }
+        break;
+    case PLAY_SONG_DUET:       // T-528 (f): only echoes -- with the other side's part under it (Echo)
         break;
     }
 }
@@ -1787,7 +1831,7 @@ bool8 Play_ShouldHear(void)
 {
     const struct PlaySong *tune;
 
-    if (gSpecialVar_0x8004 <= PLAY_SONG_FIR || gSpecialVar_0x8004 >= PLAY_SONG_COUNT)
+    if (gSpecialVar_0x8004 <= PLAY_SONG_FIR || gSpecialVar_0x8004 >= PLAY_SONG_LEARNED_COUNT)
         return FALSE;
     tune = &sSongs[gSpecialVar_0x8004];
     return FlagGet(tune->understanding) && !FlagGet(tune->flag);
@@ -1797,7 +1841,7 @@ bool8 Play_ShouldHear(void)
 // it is only a tune, and waits.
 void Play_Hear(void)
 {
-    const struct PlaySong *tune = &sSongs[gSpecialVar_0x8004 < PLAY_SONG_COUNT ? gSpecialVar_0x8004 : PLAY_SONG_FIR];
+    const struct PlaySong *tune = &sSongs[gSpecialVar_0x8004 < PLAY_SONG_LEARNED_COUNT ? gSpecialVar_0x8004 : PLAY_SONG_FIR];
 
     if (tune->heardFlag && FlagGet(FLAG_GOT_INSTRUMENT))
         FlagSet(tune->heardFlag);
@@ -1840,6 +1884,24 @@ void Play_NoteFled(void)
 static const u8 sSongPage_FirFlat[] = _("Hummed by the singing firs.\pClose to right, all the way through. Something is missing.");
 static const u8 sSongPage_FirKeyed[] = _("Hummed by the singing firs.\pIn the key of {STR_VAR_1}.");
 static const u8 sSongPage_Key[] = _("In the key of {STR_VAR_1}.");
+
+// The SONGBOOK holds a song, and PLAY knows it, once it is learned -- or, a slot (T-528 f, the DUET), while it has a
+// tune and its light is up. The first time it shows, its flag files it, so its page can be marked read.
+bool8 Play_SongHeld(u8 song)
+{
+    const struct PlaySong *tune;
+
+    if (song >= PLAY_SONG_COUNT)
+        return FALSE;
+    tune = &sSongs[song];
+    if (tune->shown == NULL)
+        return FlagGet(tune->flag);
+    if (tune->count == 0 || !tune->shown())
+        return FALSE;
+    if (!FlagGet(tune->flag))
+        FlagSet(tune->flag);
+    return TRUE;
+}
 
 static bool8 SongKeyKnown(u8 song)
 {

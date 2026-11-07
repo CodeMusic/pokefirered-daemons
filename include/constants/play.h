@@ -11,7 +11,9 @@
 #define PLAY_SONG_STANCE    5   // SKEW / STANCE       HARMONY IN BALANCE
 #define PLAY_SONG_NOTICE    6   // FRAME / NOTICE      THE SHIMMERING CANVAS
 #define PLAY_SONG_REFLECT   7   // HEAT / REFLECT      REFLECTIONS WITHIN
-#define PLAY_SONG_COUNT     8
+#define PLAY_SONG_DUET      8   // T-528 (f): a slot -- shown only under the conjugate light; its tune is the user's
+#define PLAY_SONG_COUNT     9
+#define PLAY_SONG_LEARNED_COUNT 8   // the fir and the seven, learned by hearing (FLAG_SONG_FIR + n); the duet never is
 #define PLAY_SONG_1         PLAY_SONG_NAMING   // the first of the seven
 
 #endif // GUARD_CONSTANTS_PLAY_H

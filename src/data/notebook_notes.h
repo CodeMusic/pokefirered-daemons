@@ -69,6 +69,7 @@ static const u8 sNoteAbout_SONG_4[] = _("Heard where PRACTICE is learned.");
 static const u8 sNoteAbout_SONG_5[] = _("Heard where STANCE is learned.");
 static const u8 sNoteAbout_SONG_6[] = _("Heard where NOTICE is learned.");
 static const u8 sNoteAbout_SONG_7[] = _("Heard where REFLECT is learned.");
+static const u8 sNoteAbout_SONG_DUET[] = _("A tune for two instruments.");
 static const u8 sNoteAbout_YEAR_LINE_ROLLOVER[] = _("In your own words, on its day.");
 static const u8 sNoteAbout_YEAR_LINE_EVEN_LIGHT_SPRING[] = _("In your own words, on its day.");
 static const u8 sNoteAbout_YEAR_LINE_EVEN_LIGHT_AUTUMN[] = _("In your own words, on its day.");
@@ -160,6 +161,7 @@ static const struct NotebookNote sNotebookNotes[] =
     { FLAG_SONG_5, 66, MAP_UNDEFINED, sNoteAbout_SONG_5 },
     { FLAG_SONG_6, 67, MAP_UNDEFINED, sNoteAbout_SONG_6 },
     { FLAG_SONG_7, 68, MAP_UNDEFINED, sNoteAbout_SONG_7 },
+    { FLAG_SONG_DUET, 110, MAP_UNDEFINED, sNoteAbout_SONG_DUET },
     { FLAG_YEAR_LINE_ROLLOVER, 69, MAP_UNDEFINED, sNoteAbout_YEAR_LINE_ROLLOVER },
     { FLAG_YEAR_LINE_EVEN_LIGHT_SPRING, 70, MAP_UNDEFINED, sNoteAbout_YEAR_LINE_EVEN_LIGHT_SPRING },
     { FLAG_YEAR_LINE_EVEN_LIGHT_AUTUMN, 71, MAP_UNDEFINED, sNoteAbout_YEAR_LINE_EVEN_LIGHT_AUTUMN },

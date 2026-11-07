@@ -25,6 +25,9 @@ enum { PLAY_HARP, PLAY_FLUTE };
 #include "constants/play.h"
 
 void Play_Start(void);
+// Whether the SONGBOOK holds the song and PLAY listens for it as one known: learned, or (T-528 f, the DUET) shown --
+// a tune to show, and its test TRUE (the conjugate light). notebook.c's SONGBOOK pages are held by this.
+bool8 Play_SongHeld(u8 song);
 void Play_WriteSongPage(u8 song, u8 *dest);
 void Play_BookSong(u8 song, s16 left, s16 middleC);   // its notes as sprites on the NOTEBOOK's page (book_reader.c)
 void Play_BookSongFree(void);

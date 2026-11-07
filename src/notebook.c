@@ -430,6 +430,7 @@ static const u8 sTitle_Song_4[]            = _("SEQUEL THE GUARDIAN");       // 
 static const u8 sTitle_Song_5[]            = _("HARMONY IN BALANCE");        // SKEW / STANCE
 static const u8 sTitle_Song_6[]            = _("THE SHIMMERING CANVAS");     // FRAME / NOTICE
 static const u8 sTitle_Song_7[]            = _("REFLECTIONS WITHIN");        // HEAT / REFLECT
+static const u8 sTitle_Song_Duet[]         = _("DUET");   // T-528 (f), DRAFT: the conjugate light's; its tune the user's
 
 #include "data/wisdom.h"   // T-390: the seven insights, written by DAEMONS tools/gbawisdom.py
 
@@ -527,6 +528,7 @@ static const struct NotebookEntry sEntries[] =
     { NB_SONGBOOK,     NB_KIND_SONG,  PLAY_SONG_STANCE,   FLAG_SONG_5,   0, sTitle_Song_5,           NULL },
     { NB_SONGBOOK,     NB_KIND_SONG,  PLAY_SONG_NOTICE,   FLAG_SONG_6,   0, sTitle_Song_6,           NULL },
     { NB_SONGBOOK,     NB_KIND_SONG,  PLAY_SONG_REFLECT,  FLAG_SONG_7,   0, sTitle_Song_7,           NULL },
+    { NB_SONGBOOK,     NB_KIND_SONG,  PLAY_SONG_DUET,     FLAG_SONG_DUET, 0, sTitle_Song_Duet,       NULL },   // T-528 (f)
     //  T-416: THE YEAR, in the order of the year -- each line once it has arrived on its day.
     NB_YEAR_ENTRIES
     //  T-412: the DREAM LOG -- YOUR DREAMS, in the draft's order, each once it has been dreamt.
@@ -856,6 +858,8 @@ static void Task_NotebookList(u8 taskId);
 
 static bool8 EntryHeld(u32 i)
 {
+    if (sEntries[i].kind == NB_KIND_SONG)   // T-528 (f): play.c says -- the DUET is held only under the conjugate light
+        return Play_SongHeld(sEntries[i].arg);
     return FlagGet(sEntries[i].flag) && (sEntries[i].flag2 == 0 || FlagGet(sEntries[i].flag2));
 }
 

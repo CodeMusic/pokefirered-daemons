@@ -62,7 +62,7 @@ enum
     EV_NOTEBOOK, EV_NOTEBOOK_FULL,
     EV_DRIVERS_ALL, EV_DRIVER1, EV_DRIVER8 = EV_DRIVER1 + 7,
     EV_ROOTS_ALL, EV_ROOT1, EV_ROOT7 = EV_ROOT1 + 6, EV_INSIGHTS_AGAIN,
-    EV_SONGS_ALL, EV_SONG1, EV_SONG8 = EV_SONG1 + PLAY_SONG_COUNT - 1, EV_NEXUS_LIT,   // T-417 P2
+    EV_SONGS_ALL, EV_SONG1, EV_SONG8 = EV_SONG1 + PLAY_SONG_LEARNED_COUNT - 1, EV_NEXUS_LIT,   // T-417 P2
     EV_YEAR_ALL, EV_YEAR1, EV_YEAR12 = EV_YEAR1 + HOLIDAY_YEAR_LINE_COUNT - 1, EV_GIFTS_AGAIN,   // T-416
     EV_FOLLOWER, EV_FRIEND_0, EV_FRIEND_70, EV_FRIEND_150, EV_FRIEND_255,   // T-18
     EV_LEAD_SHINY,                                                          // T-18 P3
@@ -615,7 +615,7 @@ static bool8 IsHeld(u8 ev)
                 return FALSE;
         return TRUE;
     case EV_SONGS_ALL:
-        for (i = 0; i < PLAY_SONG_COUNT; i++)
+        for (i = 0; i < PLAY_SONG_LEARNED_COUNT; i++)
             if (!FlagGet(FLAG_SONG_FIR + i))
                 return FALSE;
         return TRUE;
@@ -723,9 +723,9 @@ static void Apply(u8 ev, bool8 on)
         FlagClear(FLAG_INSIGHT_LAST);   // T-411: and the last note after them
         return;
     case EV_SONGS_ALL:
-        for (i = 0; i < PLAY_SONG_COUNT; i++)
+        for (i = 0; i < PLAY_SONG_LEARNED_COUNT; i++)
             SetFlag(FLAG_SONG_FIR + i, on);
-        for (i = 0; i < PLAY_SONG_COUNT - 1 && !on; i++)
+        for (i = 0; i < PLAY_SONG_LEARNED_COUNT - 1 && !on; i++)
             FlagClear(FLAG_SONG_HEARD_1 + i);   // P4: taken away, a song must be heard again to be learned
         return;
     case EV_NEXUS_LIT:    SetFlag(FLAG_NEXUS_LIT, on); return;
