@@ -953,7 +953,15 @@ EventScript_LarkAtFir_Stirred::
 	end
 
 EventScript_LarkAtFir_Morning::
+	specialvar VAR_RESULT, Aurora_DawnChorus
+	goto_if_eq VAR_RESULT, TRUE, EventScript_LarkAtFir_Chorus
 	msgbox Text_LarkAtFir_Flies
+	release
+	end
+
+@ T-528 (d): the dawn chorus, the morning after a night of light -- the LARK back at the fir, singing along. DRAFT.
+EventScript_LarkAtFir_Chorus::
+	msgbox Text_LarkAtFir_Chorus
 	release
 	end
 

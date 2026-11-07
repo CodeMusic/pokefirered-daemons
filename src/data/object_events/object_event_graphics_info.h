@@ -4711,3 +4711,23 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_LionessBall = {
     .images = sPicTable_LionessBall,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
+
+// T-528 (e): TULIKKO, the arctic fox sweeping snow by STILLFALL CAVE (DAEMONS tools/gentulikko.py), npc_white; 32x32, its walk frames the sweep
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Tulikko = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 512,
+    .width = 32,
+    .height = 32,
+    .paletteSlot = PALSLOT_NPC_4,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_BIKE_TIRE,
+    .oam = &gObjectEventBaseOam_32x32,
+    .subspriteTables = gObjectEventSpriteOamTables_32x32,
+    .anims = sAnimTable_Standard,
+    .images = sPicTable_Tulikko,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};

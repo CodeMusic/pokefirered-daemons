@@ -22,11 +22,18 @@ void Aurora_ApplyToPltt(void);
 // version byte every mon carries) is the other edition -- by trade, or the companion's trade. Both lines show at once,
 // green below and red crowning it; PLAY's SONGBOOK duet (play.c, the Musical Instruments lane) waits on it.
 bool8 Aurora_ConjugateLight(void);
+// The half of it that is the party's: a daemon whose met game is the other edition (eggs never count).
+bool8 Aurora_PartyFromOtherEdition(void);
+// T-528 (d) THE DAWN CHORUS: a lit grove, THE CREATOR'S HOUR, the morning after a night of light (daemons_hours.c).
+bool8 Aurora_DawnChorus(void);
+// T-528 (e) TULIKKO (specialvar): 0 before the mending, 1 after, 2 a night of light, 3 the conjugate light at night.
+u16 Aurora_FoxSays(void);
 
 #if DAEMONS_DEBUG
 extern u8 gAuroraDebugNights;      // DEBUG -> GAME EVENTS: 0 the date's rule, 1 every night a light one, 2 none
 void Aurora_DebugLightAll(bool8 on);
 bool8 Aurora_DebugAllLit(void);
+void Aurora_DebugOtherEdition(bool8 on);
 #endif
 
 #endif // GUARD_DAEMONS_AURORA_H

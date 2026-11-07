@@ -152,7 +152,41 @@ FourIsland_EventScript_LittleGirl::
 	end
 
 FourIsland_EventScript_FatMan::
+	goto_if_set FLAG_UNITY_MENDED, FourIsland_EventScript_FatManSouthWind   @ T-528: once the book is mended
 	msgbox FourIsland_Text_MadeSlushieUsingIcefallCaveIce, MSGBOX_NPC
+	end
+
+@ T-528 (vision 4.40), DRAFT: what the islands call the light -- never the Latin.
+FourIsland_EventScript_FatManSouthWind::
+	msgbox FourIsland_Text_SouthWindDawn, MSGBOX_NPC
+	end
+
+@ T-528 (e), DRAFT: TULIKKO, the arctic fox sweeping snow by STILLFALL CAVE (vision 4.40; revontulet, "fox fires").
+FourIsland_EventScript_Tulikko::
+	lock
+	faceplayer
+	specialvar VAR_RESULT, Aurora_FoxSays
+	switch VAR_RESULT
+	case 1, FourIsland_EventScript_TulikkoMended
+	case 2, FourIsland_EventScript_TulikkoLightNight
+	case 3, FourIsland_EventScript_TulikkoConjugate
+	msgbox FourIsland_Text_TulikkoSweep
+	release
+	end
+
+FourIsland_EventScript_TulikkoMended::
+	msgbox FourIsland_Text_TulikkoMended
+	release
+	end
+
+FourIsland_EventScript_TulikkoLightNight::
+	msgbox FourIsland_Text_TulikkoLightNight
+	release
+	end
+
+FourIsland_EventScript_TulikkoConjugate::
+	msgbox FourIsland_Text_TulikkoConjugate
+	release
 	end
 
 FourIsland_EventScript_IslandSign::

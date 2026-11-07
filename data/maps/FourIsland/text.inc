@@ -48,3 +48,27 @@ FourIsland_Text_MadeSlushieUsingIcefallCaveIce::
 FourIsland_Text_LoreleisHouse::
     .string "PHLEGMATIC'S HOUSE$"
 
+@ T-528, DRAFT: what the islands call the light (the south wind's side).
+FourIsland_Text_SouthWindDawn::
+    .string "Down here it's the dawn the\n"
+    .string "south wind brings.\p"
+    .string "Up north they think it's theirs.$"
+
+@ T-528 (e), DRAFT: TULIKKO, every word (vision 4.40).
+FourIsland_Text_TulikkoSweep::
+    .string "Sweep, sweep. Snow likes to go\n"
+    .string "back where it came from.$"
+
+FourIsland_Text_TulikkoMended::
+    .string "Somebody mended something old.\n"
+    .string "Look up. The sky noticed.$"
+
+FourIsland_Text_TulikkoLightNight::
+    .string "Every flick of my tail goes up\n"
+    .string "and stays up.\p"
+    .string "Don't tell anyone. They think\n"
+    .string "it's the wind.$"
+
+FourIsland_Text_TulikkoConjugate::
+    .string "Both colours! My cousin's sweeping\n"
+    .string "on the other side tonight, too.$"

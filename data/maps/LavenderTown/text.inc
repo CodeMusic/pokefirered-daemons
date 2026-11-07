@@ -63,6 +63,11 @@ LavenderTown_Text_PepperedMoth::
     .string "We went dark. Soot went.\p"
     .string "We're pale again. Fashion.$"
 
+@ T-528, DRAFT: what the mainland calls the light (the north wind's side).
+LavenderTown_Text_NorthWindDawn::
+    .string "My gran called it the dawn\n"
+    .string "the north wind brings.$"
+
 @ T-519, DRAFT: the LARK.
 LavenderTown_Text_Lark::
     .string "Set your alarm early one morning.\n"

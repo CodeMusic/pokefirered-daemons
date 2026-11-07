@@ -6,6 +6,7 @@
 #include "daemons_eudaimon.h"
 #include "daemons_hours.h"
 #include "daemons_time.h"
+#include "daemons_aurora.h"     // T-528 (d): she sits again for the dawn chorus
 #include "constants/flags.h"
 
 // T-519 item 2 (the user, 2026-11-02, by multiple choice; the brief and vision 4.40, private detail in
@@ -33,9 +34,10 @@ bool8 Eudaimon_Held(void)
     return FlagGet(FLAG_GOT_EUDAIMON_LAYER);
 }
 
+// T-528 (d): and once the dawn half is given, she comes back to the fir only for the dawn chorus, to sing along.
 bool8 Eudaimon_LarkSits(void)
 {
-    return !Eudaimon_Held() && DaemonsCreatorSecond() >= 0;
+    return DaemonsCreatorSecond() >= 0 && (!Eudaimon_Held() || Aurora_DawnChorus());
 }
 
 #define tPhase  data[0]

@@ -360,7 +360,9 @@
 
 #define OBJ_EVENT_GFX_LIONESS_BALL 256
 
-#define NUM_OBJ_EVENT_GFX     257
+#define OBJ_EVENT_GFX_TULIKKO 257
+
+#define NUM_OBJ_EVENT_GFX     258
 
 // These are dynamic object gfx ids.
 // They correspond with the values of the VAR_OBJ_GFX_ID_X vars.

@@ -390,6 +390,7 @@
 #define MUS_GROVE_COMPASS         379
 #define MUS_GROVE_CLAY            380
 #define SE_AAH_PAD                381   // T-519: THE CREATOR'S HOUR's tone, on the SE3 player (src/daemons_hours.c)
+#define SE_DAWN_CHORUS            382   // T-528 (d): the pad and the dawn chorus's rising whistles, in its place (DAEMONS tools/genchorus.py)
 
 #define MUS_NONE                    0xFFFF
 

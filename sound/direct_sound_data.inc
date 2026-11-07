@@ -1909,6 +1909,11 @@ DirectSoundWaveData_sd90_enhanced_delay_shaku::
 	.incbin "sound/direct_sound_samples/sd90_enhanced_delay_shaku.bin"
 
 	.align 2
+@ T-528: the dawn chorus's chirp (DAEMONS tools/genchorus.py)
+DirectSoundWaveData_daemons_chorus::
+	.incbin "sound/direct_sound_samples/daemons_chorus.bin"
+
+	.align 2
 @ T-425: our own HARP and FLUTE (DAEMONS tools/geninstruments.py)
 DirectSoundWaveData_daemons_harp::
 	.incbin "sound/direct_sound_samples/daemons_harp.bin"

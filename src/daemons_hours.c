@@ -10,6 +10,7 @@
 #include "fieldmap.h"
 #include "overworld.h"
 #include "daemons_hours.h"
+#include "daemons_aurora.h"     // T-528 (d): the dawn chorus
 #include "daemons_time.h"
 #include "daemons_pulse.h"   // the gold breath
 #include "constants/songs.h"
@@ -414,10 +415,18 @@ static void Motes(u16 s, bool8 grey)
 
 //  ---------------------------------------------------------------- the tone
 
+// T-528 (d): in a lit grove on the morning after a night of light, the tone is SE_DAWN_CHORUS -- the same pad, with
+// the rising whistles under it (DAEMONS tools/genchorus.py) -- faded exactly as the pad is.
+static u16 ToneSong(void)
+{
+    return Aurora_DawnChorus() ? SE_DAWN_CHORUS : SE_AAH_PAD;
+}
+
 static bool8 ToneIsPlaying(void)
 {
     return (gMPlayInfo_SE3.status & MUSICPLAYER_STATUS_TRACK) && !(gMPlayInfo_SE3.status & MUSICPLAYER_STATUS_PAUSE)
-        && gMPlayInfo_SE3.songHeader == gSongTable[SE_AAH_PAD].header;
+        && (gMPlayInfo_SE3.songHeader == gSongTable[SE_AAH_PAD].header
+         || gMPlayInfo_SE3.songHeader == gSongTable[SE_DAWN_CHORUS].header);
 }
 
 // The map's own music is what is playing: not a battle's, not a scene's.
@@ -458,6 +467,11 @@ static void Tone(void)
             sSe3Dirty = FALSE;
             return;
         }
+        if (gMPlayInfo_SE3.songHeader != gSongTable[ToneSong()].header)
+        {
+            m4aSongNumStart(ToneSong());        // the chorus joins the pad, or leaves it, at the level the tone is at
+            sToneVolume = 0xFFFF;
+        }
     }
     else
     {
@@ -470,7 +484,7 @@ static void Tone(void)
         if (sToneLevel == 0 || ((gMPlayInfo_SE3.status & MUSICPLAYER_STATUS_TRACK)
                              && !(gMPlayInfo_SE3.status & MUSICPLAYER_STATUS_PAUSE)))
             return;                             // nothing wanted, or the weather is sounding: it waits
-        m4aSongNumStart(SE_AAH_PAD);
+        m4aSongNumStart(ToneSong());
         sToneVolume = 0xFFFF;
     }
     volume = (u32)sToneLevel * 256 / TONE_FADE * Hours_CatchUp() / 256;

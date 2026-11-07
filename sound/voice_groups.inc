@@ -8285,6 +8285,11 @@ voicegroup192::
 	voice_noise_alt 60, 0, 0, 0, 2, 4, 0
 
 	.align 2
+voicegroup194::  @ T-528: the dawn chorus -- the choir (0, voicegroup191's 52) and the chirp (1) (DAEMONS tools/genchorus.py)
+	voice_directsound 60, 0, DirectSoundWaveData_classical_choir_voice_ahhs, 255, 0, 255, 0
+	voice_directsound 60, 0, DirectSoundWaveData_daemons_chorus, 255, 0, 255, 0
+
+	.align 2
 voicegroup193::  @ T-425: PLAY's HARP (0) and FLUTE (1), our own (DAEMONS tools/geninstruments.py)
 	voice_directsound 60, 0, DirectSoundWaveData_daemons_harp, 255, 0, 255, 177
 	voice_directsound 60, 0, DirectSoundWaveData_daemons_flute, 54, 0, 255, 138

@@ -23,7 +23,13 @@ LavenderTown_EventScript_LittleGirlBelieve::
 	end
 
 LavenderTown_EventScript_WorkerM::
+	goto_if_set FLAG_UNITY_MENDED, LavenderTown_EventScript_WorkerMNorthWind   @ T-528: once the light is over the tower
 	msgbox LavenderTown_Text_TownKnownAsMonGraveSite, MSGBOX_NPC
+	end
+
+@ T-528 (vision 4.40), DRAFT: what the mainland calls the light -- never the Latin.
+LavenderTown_EventScript_WorkerMNorthWind::
+	msgbox LavenderTown_Text_NorthWindDawn, MSGBOX_NPC
 	end
 
 LavenderTown_EventScript_Boy::

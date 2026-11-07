@@ -42,11 +42,22 @@
 // pulse. Link battles keep their own light.
 //
 // COST: EWRAM 0 (1 in DEBUG), IWRAM 24, save 14 flags (FLAG_*_GROVE_LIT, the DAEMONS block 0x120-0x12D).
+//
+// PART 2 (T-528 (d), (e), (f)):
+//   (d) THE DAWN CHORUS (Aurora_DawnChorus): the creator's hour's tone becomes SE_DAWN_CHORUS in a lit grove after a
+//       night of light (daemons_hours.c); the LARK sits at the fir and sings along (daemons_eudaimon.c).
+//   (e) TULIKKO, the arctic fox sweeping snow at STILLFALL CAVE (Aurora_FoxSays), and the two lines that name the
+//       light: the mainland's at LAVENDER, the islands' at FOUR ISLAND.
+//   (f) THE CONJUGATE LIGHT (Aurora_ConjugateLight): the book mended and a daemon from the other edition in the party.
+//       (a), (b) and (c) then show both lines: green below, red crowning it. PLAY's duet waits on it (play.c).
+// Part 2's cost: IWRAM 13 more (each entry's line, and the red over the rows).
 
+#define RED_LINE   RGB(30, 7, 9)           // oxygen's red line, 630.0 nm: CONTENT's
+#define GREEN_LINE RGB(10, 30, 15)          // oxygen's green line, 557.7 nm: CONTEXT's
 #ifdef FIRERED
-static const u16 sLine = RGB(30, 7, 9);        // CONTENT: oxygen's red line, 630.0 nm
+#define OWN_LINE RED_LINE
 #else
-static const u16 sLine = RGB(10, 30, 15);      // CONTEXT: oxygen's green line, 557.7 nm
+#define OWN_LINE GREEN_LINE
 #endif
 
 // THE GROVES AND THEIR PAIRS: each mainland grove (the north wind's side, psychology's residents) lit with an island
@@ -90,18 +101,27 @@ static const u8 sBand[SKY_MAX] = { 255, 160, 64, 16, 0, 0 };
 #else
 static const u8 sBand[SKY_MAX] = { 96, 255, 160, 48, 16, 0 };
 #endif
+// (f) under the conjugate light, both lines in the same sky as a real aurora hangs them: the red crowning it in the top
+// band, the green below in the next three (a grove's trees stand in front of the lower bands, so the green begins
+// high enough to be seen). Each band takes one line, never a mix (the two mixed are olive).
+static const u8 sBandConjugate[SKY_MAX] = { 255, 255, 176, 64, 16, 0 };
+#define CONJUGATE_RED_BANDS 1
 
 // (a) DAEMON TOWER's pale stones in LAVENDER's row 7 (the tower is the only thing in the town that draws the row),
-// and each one's share of the light.
+// and each one's share of the light. Under the conjugate light the palest, the lit faces, takes the red that crowns
+// it and the other three the green below.
 #define TOWER_ROW 7
 static const u8 sTowerStones[][2] = { { 1, 255 }, { 9, 255 }, { 2, 192 }, { 6, 128 } };
+#define CONJUGATE_RED_STONES 1
 
 // IWRAM, uninitialised: what this frame lays on PLTT.
 static u32 sRowMask;            // (c): BG rows washed whole, colours 1-15
 static u8 sRowWeight;
-static u8 sCount;               // (a) and (b): single colours, each with its own weight
+static u8 sRowRedWeight;        // (f): and the red over the green, under the conjugate light
+static u8 sCount;               // (a) and (b): single colours, each with its own weight and line
 static u16 sEntry[SKY_MAX];
 static u8 sWeight[SKY_MAX];
+static u16 sColour[SKY_MAX];
 
 #if DAEMONS_DEBUG
 EWRAM_DATA u8 gAuroraDebugNights = 0;
@@ -143,12 +163,10 @@ bool8 Aurora_IsLightNight(void)
 #define OTHER_EDITION VERSION_FIRE_RED
 #endif
 
-bool8 Aurora_ConjugateLight(void)
+bool8 Aurora_PartyFromOtherEdition(void)
 {
     u32 i;
 
-    if (!FlagGet(FLAG_UNITY_MENDED))
-        return FALSE;
     for (i = 0; i < gPlayerPartyCount && i < PARTY_SIZE; i++)
     {
         if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE
@@ -157,6 +175,11 @@ bool8 Aurora_ConjugateLight(void)
             return TRUE;
     }
     return FALSE;
+}
+
+bool8 Aurora_ConjugateLight(void)
+{
+    return FlagGet(FLAG_UNITY_MENDED) && Aurora_PartyFromOtherEdition();
 }
 
 static u16 MapHere(void)
@@ -187,6 +210,31 @@ void Aurora_OnArrive(void)
     FlagSet(sGroves[sGroves[grove].pair].lit);
 }
 
+// (d) THE DAWN CHORUS: in a lit grove, in THE CREATOR'S HOUR, on the morning after a night of light (before noon the
+// night asked about is the evening before's, so the hour asks about the night just gone). daemons_hours.c plays
+// SE_DAWN_CHORUS for its tone then, the pad with the rising whistles under it, and the LARK sits at the fir and sings.
+bool8 Aurora_DawnChorus(void)
+{
+    s8 grove;
+
+    return FlagGet(FLAG_UNITY_MENDED) && DaemonsCreatorSecond() >= 0 && (grove = GroveHere()) >= 0
+        && FlagGet(sGroves[grove].lit) && Aurora_IsLightNight();
+}
+
+// (e) TULIKKO at STILLFALL CAVE (specialvar): 0 before the mending, 1 after, 2 a night of light (the night watch, so
+// the sparks are up), 3 the conjugate light at night. The islands' line (FOUR ISLAND) and the mainland's (LAVENDER)
+// ask the mending alone.
+u16 Aurora_FoxSays(void)
+{
+    if (!FlagGet(FLAG_UNITY_MENDED))
+        return 0;
+    if (DaemonsWatch() == WATCH_NIGHT && Aurora_ConjugateLight())
+        return 3;
+    if (DaemonsWatch() == WATCH_NIGHT && Aurora_IsLightNight())
+        return 2;
+    return 1;
+}
+
 // (c)'s gate: every grove found is lit, and at least one is.
 static bool8 EveryFoundGroveLit(void)
 {
@@ -203,12 +251,13 @@ static bool8 EveryFoundGroveLit(void)
     return any;
 }
 
-static void AddEntry(u16 entry, u32 weight)
+static void AddEntry(u16 entry, u32 weight, u16 colour)
 {
     if (sCount < SKY_MAX && weight != 0)
     {
         sEntry[sCount] = entry;
         sWeight[sCount] = min(weight, 255);
+        sColour[sCount] = colour;
         sCount++;
     }
 }
@@ -218,25 +267,33 @@ void Aurora_Tick(void)
     const u8 *sky;
     u32 breath, fade, i, n;
     s8 grove;
+    bool8 both;
 
     sRowMask = 0;
+    sRowRedWeight = 0;
     sCount = 0;
     if (!FlagGet(FLAG_UNITY_MENDED) || DaemonsIsHalftone() || DaemonsWatch() != WATCH_NIGHT)
         return;
     breath = Pulse_GoldBreath();
+    both = Aurora_ConjugateLight();
     if (DaemonsFieldOnScreen())
     {
         // (a) over the tower, every night
         if (MapHere() == MAP_LAVENDER_TOWN)
         {
             for (i = 0; i < ARRAY_COUNT(sTowerStones); i++)
-                AddEntry(BG_PLTT_ID(TOWER_ROW) + sTowerStones[i][0], (64 + breath * 112 / 255) * sTowerStones[i][1] / 255);
+                AddEntry(BG_PLTT_ID(TOWER_ROW) + sTowerStones[i][0], (64 + breath * 112 / 255) * sTowerStones[i][1] / 255,
+                         !both ? OWN_LINE : i < CONJUGATE_RED_STONES ? RED_LINE : GREEN_LINE);
         }
         // (c) outdoors, on the light's nights, once every grove found is lit
         if (IsMapTypeOutdoors(gMapHeader.mapType) && !DaemonsIsTimeless() && EveryFoundGroveLit() && Aurora_IsLightNight())
         {
             sRowMask = (1 << 13) - 1;       // the map's own rows, 0-12; 13-15 are the windows and the text
             sRowWeight = 10 + breath * 22 / 255;
+            // (f) a palette row has no height, so the two lines cannot hang one over the other here: the green holds
+            // the night and the red rises over it at the top of each breath
+            if (both)
+                sRowRedWeight = breath * 14 / 255;
         }
     }
     else if (gMain.inBattle && gMain.callback2 == BattleMainCB2 && !(gBattleTypeFlags & BATTLE_TYPE_LINK))
@@ -247,7 +304,13 @@ void Aurora_Tick(void)
          && (n = DaemonsBattleBgSkySlots(&sky)) != 0)
         {
             for (i = 0; i < n; i++)
-                AddEntry(BG_PLTT_ID(2) + sky[i], (72 + breath * 96 / 255) * sBand[i] / 255);
+            {
+                if (both)
+                    AddEntry(BG_PLTT_ID(2) + sky[i], (72 + breath * 96 / 255) * sBandConjugate[i] / 255,
+                             i < CONJUGATE_RED_BANDS ? RED_LINE : GREEN_LINE);
+                else
+                    AddEntry(BG_PLTT_ID(2) + sky[i], (72 + breath * 96 / 255) * sBand[i] / 255, OWN_LINE);
+            }
         }
     }
     // A fade takes the light with it, as it takes the pulse.
@@ -255,19 +318,20 @@ void Aurora_Tick(void)
     {
         fade = 16 - min(gPaletteFade.y, 16);
         sRowWeight = sRowWeight * fade / 16;
+        sRowRedWeight = sRowRedWeight * fade / 16;
         for (i = 0; i < sCount; i++)
             sWeight[i] = sWeight[i] * fade / 16;
     }
 }
 
-static void Lay(u16 *pltt, u32 e, s32 w)
+static void Lay(u16 *pltt, u32 e, s32 w, u16 line)
 {
     u16 c = pltt[e];
     s32 r = GET_R(c), g = GET_G(c), b = GET_B(c);
 
-    r += ((GET_R(sLine) - r) * w) >> 8;
-    g += ((GET_G(sLine) - g) * w) >> 8;
-    b += ((GET_B(sLine) - b) * w) >> 8;
+    r += ((GET_R(line) - r) * w) >> 8;
+    g += ((GET_G(line) - g) * w) >> 8;
+    b += ((GET_B(line) - b) * w) >> 8;
     pltt[e] = RGB(r, g, b);
 }
 
@@ -283,12 +347,20 @@ void Aurora_ApplyToPltt(void)
             if (mask & 1)
             {
                 for (e = p * 16 + 1; e < p * 16 + 16; e++)
-                    Lay(pltt, e, sRowWeight);
+                {
+                    if (sRowRedWeight == 0)
+                        Lay(pltt, e, sRowWeight, OWN_LINE);
+                    else
+                    {
+                        Lay(pltt, e, sRowWeight, GREEN_LINE);
+                        Lay(pltt, e, sRowRedWeight, RED_LINE);
+                    }
+                }
             }
         }
     }
     for (i = 0; i < sCount; i++)
-        Lay(pltt, sEntry[i], sWeight[i]);
+        Lay(pltt, sEntry[i], sWeight[i], sColour[i]);
 }
 
 #if DAEMONS_DEBUG
@@ -302,6 +374,31 @@ void Aurora_DebugLightAll(bool8 on)    // DEBUG -> GAME EVENTS -> EVERY GROVE LI
             FlagSet(sGroves[i].lit);
         else
             FlagClear(sGroves[i].lit);
+    }
+}
+
+void Aurora_DebugOtherEdition(bool8 on)    // DEBUG -> GAME EVENTS -> THE OTHER SIDE'S DAEMON
+{
+    // on: the lead becomes the other edition's (its met game, the very byte the rule reads); off: every daemon the
+    // party holds from the other edition is this one's again
+    u8 version;
+    u32 i;
+
+    for (i = 0; i < gPlayerPartyCount && i < PARTY_SIZE; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) == SPECIES_NONE || GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG))
+            continue;
+        if (on)
+        {
+            version = OTHER_EDITION;
+            SetMonData(&gPlayerParty[i], MON_DATA_MET_GAME, &version);
+            return;
+        }
+        if (GetMonData(&gPlayerParty[i], MON_DATA_MET_GAME) == OTHER_EDITION)
+        {
+            version = GAME_VERSION;
+            SetMonData(&gPlayerParty[i], MON_DATA_MET_GAME, &version);
+        }
     }
 }
 
