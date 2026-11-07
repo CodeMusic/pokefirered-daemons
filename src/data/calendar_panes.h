@@ -17,7 +17,7 @@ static const struct CalendarPane sCalendarPanes[CALENDAR_PANE_COUNT] =
     // palette 15: paper 1, ink 2/3 kept; the weekday on 14 (the outer corner flecks); the hour on the frame 12, 13, 15; a holiday on 11 (the inner corner flecks)
     [CALENDAR_PANE_TEXT_BOX] = { 14, 11, 0xF800, 0xFFFF },
     // palette 14: paper 1, ink 2/3 kept; thinned, the weekday on 12 (the eight inner-corner pixels); the hour on the frame 10, 11, 13, 14, 15; a holiday on 11 (the inner bevel)
-    [CALENDAR_PANE_START] = { 12, 11, 0xFC00, 0x001D },
+    [CALENDAR_PANE_START] = { 12, 11, 0xFC00, 0x03FF },
     // BG row 0: the weekday on 6 (the 1px line under the title bar); the hour on the lavender backdrop 3, 8, 10 and the title bar 2; a holiday on 14 (the title bar's white pip); the panes' paper (rows 2-4, 5/6) kept
     [CALENDAR_PANE_SUMMARY] = { 6, 14, 0x454C, 0xFFFF },
     // BG row 0: the weekday on 8 (the box's corners); the hour on the backdrop 7; on a holiday the corners take the month instead (the page has no other free colour); no season (the box paper 5 is also an ink)
