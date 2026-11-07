@@ -4932,4 +4932,175 @@ extern const u32 gItemIconPalette_DPrivateKey[];
 extern const u32 gItemIcon_DReserve[];   // T-525
 extern const u32 gItemIconPalette_DReserve[];
 
+extern const u32 gItemIcon_DDither[];   // T-525
+extern const u32 gItemIconPalette_DDither[];
+
+extern const u32 gItemIcon_DRevert[];   // T-525
+extern const u32 gItemIconPalette_DRevert[];
+
+extern const u32 gItemIcon_DDebugBuild[];   // T-525
+extern const u32 gItemIconPalette_DDebugBuild[];
+
+extern const u32 gItemIcon_DWeightShare[];   // T-525
+extern const u32 gItemIconPalette_DWeightShare[];
+
+extern const u32 gItemIcon_DQueueJump[];   // T-525
+extern const u32 gItemIconPalette_DQueueJump[];
+
+extern const u32 gItemIcon_DAffinity[];   // T-525
+extern const u32 gItemIconPalette_DAffinity[];
+
+extern const u32 gItemIcon_DUnpair[];   // T-525
+extern const u32 gItemIconPalette_DUnpair[];
+
+extern const u32 gItemIcon_DHardCoded[];   // T-525
+extern const u32 gItemIconPalette_DHardCoded[];
+
+extern const u32 gItemIcon_DBubble[];   // T-525
+extern const u32 gItemIconPalette_DBubble[];
+
+extern const u32 gItemIcon_DSurcharge[];   // T-525
+extern const u32 gItemIconPalette_DSurcharge[];
+
+extern const u32 gItemIcon_DMute[];   // T-525
+extern const u32 gItemIconPalette_DMute[];
+
+extern const u32 gItemIcon_DEscapeHatch[];   // T-525
+extern const u32 gItemIconPalette_DEscapeHatch[];
+
+extern const u32 gItemIcon_DVersionLock[];   // T-525
+extern const u32 gItemIconPalette_DVersionLock[];
+
+extern const u32 gItemIcon_DFailsafe[];   // T-525
+extern const u32 gItemIconPalette_DFailsafe[];
+
+extern const u32 gItemIcon_DLearningRate[];   // T-525
+extern const u32 gItemIconPalette_DLearningRate[];
+
+extern const u32 gItemIcon_DLongTail[];   // T-525
+extern const u32 gItemIconPalette_DLongTail[];
+
+extern const u32 gItemIcon_DHeadroom[];   // T-525
+extern const u32 gItemIconPalette_DHeadroom[];
+
+extern const u32 gItemIcon_DScalingLaw[];   // T-525
+extern const u32 gItemIconPalette_DScalingLaw[];
+
+extern const u32 gItemIcon_DServicePack[];   // T-525
+extern const u32 gItemIconPalette_DServicePack[];
+
+extern const u32 gItemIcon_DFlowTrim[];   // T-525
+extern const u32 gItemIconPalette_DFlowTrim[];
+
+extern const u32 gItemIcon_DDitherTrim[];   // T-525
+extern const u32 gItemIconPalette_DDitherTrim[];
+
+extern const u32 gItemIcon_DFluke[];   // T-525
+extern const u32 gItemIconPalette_DFluke[];
+
+extern const u32 gItemIcon_DStrictMode[];   // T-525
+extern const u32 gItemIconPalette_DStrictMode[];
+
+extern const u32 gItemIcon_DBareMetal[];   // T-525
+extern const u32 gItemIconPalette_DBareMetal[];
+
+extern const u32 gItemIcon_DOffByOne[];   // T-525
+extern const u32 gItemIconPalette_DOffByOne[];
+
+extern const u32 gItemIcon_DSwarmGain[];   // T-525
+extern const u32 gItemIconPalette_DSwarmGain[];
+
+extern const u32 gItemIcon_DHardenedGain[];   // T-525
+extern const u32 gItemIconPalette_DHardenedGain[];
+
+extern const u32 gItemIcon_DStratumGain[];   // T-525
+extern const u32 gItemIconPalette_DStratumGain[];
+
+extern const u32 gItemIcon_DLegacyGain[];   // T-525
+extern const u32 gItemIconPalette_DLegacyGain[];
+
+extern const u32 gItemIcon_DGrowthGain[];   // T-525
+extern const u32 gItemIconPalette_DGrowthGain[];
+
+extern const u32 gItemIcon_DOpaqueGain[];   // T-525
+extern const u32 gItemIconPalette_DOpaqueGain[];
+
+extern const u32 gItemIcon_DLogicGain[];   // T-525
+extern const u32 gItemIconPalette_DLogicGain[];
+
+extern const u32 gItemIcon_DSignalGain[];   // T-525
+extern const u32 gItemIconPalette_DSignalGain[];
+
+extern const u32 gItemIcon_DFlowGain[];   // T-525
+extern const u32 gItemIconPalette_DFlowGain[];
+
+extern const u32 gItemIcon_DVectorGain[];   // T-525
+extern const u32 gItemIconPalette_DVectorGain[];
+
+extern const u32 gItemIcon_DCorruptGain[];   // T-525
+extern const u32 gItemIconPalette_DCorruptGain[];
+
+extern const u32 gItemIcon_DFrozenGain[];   // T-525
+extern const u32 gItemIconPalette_DFrozenGain[];
+
+extern const u32 gItemIcon_DLatentGain[];   // T-525
+extern const u32 gItemIconPalette_DLatentGain[];
+
+extern const u32 gItemIcon_DContextGain[];   // T-525
+extern const u32 gItemIconPalette_DContextGain[];
+
+extern const u32 gItemIcon_DEntropyGain[];   // T-525
+extern const u32 gItemIconPalette_DEntropyGain[];
+
+extern const u32 gItemIcon_DEmergentGain[];   // T-525
+extern const u32 gItemIconPalette_DEmergentGain[];
+
+extern const u32 gItemIcon_DContentGain[];   // T-525
+extern const u32 gItemIconPalette_DContentGain[];
+
+extern const u32 gItemIcon_DThrottleTrap[];   // T-525
+extern const u32 gItemIconPalette_DThrottleTrap[];
+
+extern const u32 gItemIcon_DSuspendTrap[];   // T-525
+extern const u32 gItemIconPalette_DSuspendTrap[];
+
+extern const u32 gItemIcon_DLeakTrap[];   // T-525
+extern const u32 gItemIconPalette_DLeakTrap[];
+
+extern const u32 gItemIcon_DHeatTrap[];   // T-525
+extern const u32 gItemIconPalette_DHeatTrap[];
+
+extern const u32 gItemIcon_DHangTrap[];   // T-525
+extern const u32 gItemIconPalette_DHangTrap[];
+
+extern const u32 gItemIcon_DExhaustTrap[];   // T-525
+extern const u32 gItemIconPalette_DExhaustTrap[];
+
+extern const u32 gItemIcon_DLowMark[];   // T-525
+extern const u32 gItemIconPalette_DLowMark[];
+
+extern const u32 gItemIcon_DThrashTrap[];   // T-525
+extern const u32 gItemIconPalette_DThrashTrap[];
+
+extern const u32 gItemIcon_DCatchAll[];   // T-525
+extern const u32 gItemIconPalette_DCatchAll[];
+
+extern const u32 gItemIcon_DHighMark[];   // T-525
+extern const u32 gItemIconPalette_DHighMark[];
+
+extern const u32 gItemIcon_DSpicyTrap[];   // T-525
+extern const u32 gItemIconPalette_DSpicyTrap[];
+
+extern const u32 gItemIcon_DDryTrap[];   // T-525
+extern const u32 gItemIconPalette_DDryTrap[];
+
+extern const u32 gItemIcon_DSweetTrap[];   // T-525
+extern const u32 gItemIconPalette_DSweetTrap[];
+
+extern const u32 gItemIcon_DBitterTrap[];   // T-525
+extern const u32 gItemIconPalette_DBitterTrap[];
+
+extern const u32 gItemIcon_DSourTrap[];   // T-525
+extern const u32 gItemIconPalette_DSourTrap[];
+
 #endif //GUARD_GRAPHICS_H
