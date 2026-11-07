@@ -18,6 +18,7 @@
 #include "daemons_glitch.h"  // T-486: and glitches, once
 #include "daemons_spirits.h"  // T-519 item 2: the dawn half's observer line
 #include "daemons_unity.h"    // T-519 item 3: the torn page, and the mended book
+#include "fieldmap.h"         // T-529: the halves' tones, for the mended book's lens
 #include "constants/songs.h"
 #include "data.h"         // T-509: the cards' daemons
 #include "decompress.h"
@@ -122,6 +123,8 @@ struct BookReader
     u8 picEntry, picFrame, picTimer;   // T-423: the open picture, and which of its frames
     bool8 cardsFocus;                  // T-509: the cover's cursor is on the deck tile
     struct Cards *cards;               // T-509: the CARDS section, while it is open
+    struct UnityLens *lens;            // T-529: THE UNITY BOOK's lens, while it is open
+    u8 lensEntry, lensS, lensJ;        // T-529: the place kept across a turn of the lens (lensEntry 0xFF: look again)
     u8 title[40];
     u8 text[BR_TEXT_SIZE];
     u8 lines[BR_LINES_SIZE];
@@ -296,6 +299,105 @@ static const struct LayerBook sLayerBooks[4] =
     { sEudaimonSections, sEudaimonEntries, sEudaimonPictures, sEudaimonCover, EUDAIMON_SECTIONS, EUDAIMON_ENTRIES },
     { sUnitySections, sUnityEntries, sUnityPictures, sUnityCover, UNITY_SECTIONS, UNITY_ENTRIES },
 };
+
+//  T-529 (the user, 2026-11-07, by multiple choice; vision 4.40, DAEMONS docs/TODO.md T-529): THE UNITY BOOK'S LENS.
+//  Once the book is mended the reader holds only THE UNITY BOOK, and every page in it turns IN PLACE between three
+//  readings: NIGHT, as the night half words it (THE HERMETIC LAYER), in the emerald sepia; WHOLE, the mended book's
+//  own words, in full colour; and DAWN, as the dawn half words it (THE EUDAIMON LAYER), in the sapphire cyanotype --
+//  the tints HALFTONE wears for each half (fieldmap.c DaemonsBookTone). L and R turn it, a switch of three settings
+//  rather than a wheel (L toward the night, R toward the dawn); in this book the D-pad and A turn the pages, as in
+//  every other. The rules are the companion's (C-304, server/src/unity.ts and app/screens/shared/Unity.tsx):
+//    PAIRING  a section of the mended book whose label the night half does not have (BALANCE, written at the crease)
+//             has no other reading; the other ten pair in order with each half's ten, so THE FOLDS meets the dawn
+//             half's THE UNFOLDING.
+//    PLACE    the page kept is a section and a place in it, clamped where the other reading's section is shorter;
+//             turning the lens back returns to the same entry, unless a page was turned in between.
+//    TONE     each page takes the tone of the reading it shows, with the half's own palette (its pictures were drawn
+//             in it), so BALANCE stays in full colour with NIGHT or DAWN set: the tone always says which side is read.
+//  The setting is kept for the session (sUnityLens, one byte of IWRAM), not in the save. The reading is built as a
+//  book of its own on the heap -- the eleven sections, each from the book it is read from, and their entries and
+//  pictures -- so every view the reader already has reads it unchanged. Every word DRAFT.
+enum { LENS_WHOLE, LENS_NIGHT, LENS_DAWN };
+#define LENS_MAX_ENTRIES 64
+#define LAYER_HERMETIC   1      // sLayerBooks' order
+#define LAYER_EUDAIMON   2
+#define LAYER_UNITY      3
+
+struct UnityLens
+{
+    struct LayerBook book;
+    struct SubtleSection sections[UNITY_SECTIONS];
+    struct SubtleEntry entries[LENS_MAX_ENTRIES];
+    struct SubtlePicture pictures[LENS_MAX_ENTRIES];
+    u8 from[UNITY_SECTIONS];            // which of sLayerBooks each section is read from
+    u8 origin[LENS_MAX_ENTRIES];        // each entry's place in its own book
+};
+
+static u8 sUnityLens;                   // the session's setting: LENS_WHOLE until L or R turns it
+
+static const u8 sText_LensNight[] = _("NIGHT");   // DRAFT
+static const u8 sText_LensWhole[] = _("WHOLE");   // DRAFT
+static const u8 sText_LensDawn[]  = _("DAWN");    // DRAFT
+static const u8 *const sLensNames[] = { [LENS_WHOLE] = sText_LensWhole, [LENS_NIGHT] = sText_LensNight, [LENS_DAWN] = sText_LensDawn };
+
+static bool8 LensOn(void)
+{
+    return sBook->book == BOOK_UNITY && sBook->lens != NULL && sUnityLens != LENS_WHOLE;
+}
+
+//  BALANCE: a section of the mended book the night half has no label for
+static bool8 LensWholeOnly(const u8 *label)
+{
+    u8 k;
+
+    for (k = 0; k < sLayerBooks[LAYER_HERMETIC].sectionCount; k++)
+        if (StringCompare(sLayerBooks[LAYER_HERMETIC].sections[k].label, label) == 0)
+            return FALSE;
+    return TRUE;
+}
+
+static void LensBuild(void)
+{
+    struct UnityLens *l = sBook->lens;
+    const struct LayerBook *whole = &sLayerBooks[LAYER_UNITY], *from;
+    const struct SubtleSection *src;
+    u8 halfIndex = sUnityLens == LENS_NIGHT ? LAYER_HERMETIC : LAYER_EUDAIMON;
+    const struct LayerBook *half = &sLayerBooks[halfIndex];
+    u8 s, j, k = 0, n = 0;
+
+    for (s = 0; s < whole->sectionCount; s++)
+    {
+        if (!LensWholeOnly(whole->sections[s].label) && k < half->sectionCount)
+        {
+            from = half;
+            src = &half->sections[k++];
+            l->from[s] = halfIndex;
+        }
+        else
+        {
+            from = whole;
+            src = &whole->sections[s];
+            l->from[s] = LAYER_UNITY;
+        }
+        l->sections[s].label = src->label;
+        l->sections[s].heading = src->heading;
+        l->sections[s].first = n;
+        for (j = 0; j < src->count && n < LENS_MAX_ENTRIES; j++, n++)
+        {
+            l->entries[n] = from->entries[src->first + j];
+            l->pictures[n] = from->pictures[l->entries[n].picture];
+            l->entries[n].picture = n;
+            l->origin[n] = src->first + j;
+        }
+        l->sections[s].count = n - l->sections[s].first;
+    }
+    l->book.sections = l->sections;
+    l->book.entries = l->entries;
+    l->book.pictures = l->pictures;
+    l->book.cover = whole->cover;
+    l->book.sectionCount = whole->sectionCount;
+    l->book.entryCount = n;
+}
 
 static const u16 sGuidePal[] = INCBIN_U16("graphics/book/guide_cover.gbapal");
 static const u32 sGuideCover[] = INCBIN_U32("graphics/book/guide_cover.4bpp");
@@ -1116,6 +1218,8 @@ static bool8 IsLayerBook(void)
 
 static const struct LayerBook *Layer(void)
 {
+    if (LensOn())
+        return &sBook->lens->book;      // T-529: the reading the lens is turned to
     return &sLayerBooks[sBook->book == BOOK_UNITY ? 3 : sBook->book == BOOK_EUDAIMON ? 2 : sBook->book == BOOK_HERMETIC];
 }
 
@@ -1127,25 +1231,69 @@ static bool8 HasCards(void)
     return sBook->book == BOOK_SUBTLE || sBook->book == BOOK_HERMETIC || sBook->book == BOOK_UNITY;
 }
 
+static u8 SubtleSectionOf(u8 entry);
+
+//  T-529: the book and entry the open page is read from -- through the lens, the half's own (its observer line, its
+//  spells); otherwise the reader's.
+static void LensOrigin(u8 *book, u8 *entry)
+{
+    u8 from;
+
+    *book = sBook->book;
+    *entry = sBook->entry;
+    if (!LensOn())
+        return;
+    from = sBook->lens->from[SubtleSectionOf(sBook->entry)];
+    *book = from == LAYER_HERMETIC ? BOOK_HERMETIC : from == LAYER_EUDAIMON ? BOOK_EUDAIMON : BOOK_UNITY;
+    *entry = sBook->lens->origin[sBook->entry];
+}
+
+//  T-529: the page's palette -- the book's own, or through the lens the half's own in its tone (the contents in the
+//  setting's). Only the cover, the contents and the pages: the CARDS keep theirs.
+static void LensPalette(void)
+{
+    const u16 *src = sUnityPal;
+    u16 pal[16];
+    u8 i, from = LAYER_UNITY;
+
+    if (sBook->book != BOOK_UNITY)
+        return;
+    if (sBook->view != VIEW_COVER && sBook->view != VIEW_SUBTLE_CONTENTS && sBook->view != VIEW_SUBTLE_ENTRY)
+        return;
+    if (LensOn() && sBook->view == VIEW_SUBTLE_ENTRY)
+        from = sBook->lens->from[SubtleSectionOf(sBook->entry)];
+    else if (LensOn() && sBook->view == VIEW_SUBTLE_CONTENTS)
+        from = sUnityLens == LENS_NIGHT ? LAYER_HERMETIC : LAYER_EUDAIMON;
+    if (from == LAYER_HERMETIC)
+        src = sHermeticPal;
+    else if (from == LAYER_EUDAIMON)
+        src = sEudaimonPal;
+    for (i = 0; i < 16; i++)
+        pal[i] = from == LAYER_UNITY ? src[i] : DaemonsBookTone(src[i], from == LAYER_EUDAIMON);
+    LoadPalette(pal, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
+    LoadPalette(&pal[C_COVER], BG_PLTT_ID(0), PLTT_SIZEOF(1));          // the backdrop is the cover
+}
+
 //  T-519 item 2: an entry's text -- and in the dawn half's BLESSING, the OBSERVER's line chosen by who is looking: the
 //  lead daemon's SPIRITS (0 as it is, 1 in good spirits, 2 in low spirits; an egg, or nobody, reads as it is).
 static const u8 *LayerText(const struct SubtleEntry *e)
 {
-    u8 class = SPIRITS_AS_IT_IS;
+    u8 class = SPIRITS_AS_IT_IS, book, entry;
 
+    LensOrigin(&book, &entry);   // T-529: through the lens, the book and entry the page is read from
     // T-519 item 2: a half opened in DAEMON TOWER before the mending ends its last page torn at the spine.
-    if (sBook->book == BOOK_HERMETIC && sBook->entry == HERMETIC_TORN_ENTRY && Mending_TornHere())
+    if (book == BOOK_HERMETIC && entry == HERMETIC_TORN_ENTRY && Mending_TornHere())
         return sHermeticTorn;
-    if (sBook->book == BOOK_EUDAIMON && sBook->entry == EUDAIMON_TORN_ENTRY && Mending_TornHere())
+    if (book == BOOK_EUDAIMON && entry == EUDAIMON_TORN_ENTRY && Mending_TornHere())
         return sEudaimonTorn;
-    if (!(sBook->book == BOOK_EUDAIMON && sBook->entry == EUDAIMON_OBSERVER_ENTRY)
-     && !(sBook->book == BOOK_UNITY && sBook->entry == UNITY_OBSERVER_ENTRY))   // T-519 item 3: the ATTESTATION's
+    if (!(book == BOOK_EUDAIMON && entry == EUDAIMON_OBSERVER_ENTRY)
+     && !(book == BOOK_UNITY && entry == UNITY_OBSERVER_ENTRY))   // T-519 item 3: the ATTESTATION's
         return e->text;
     if (GetMonData(&gPlayerParty[0], MON_DATA_SPECIES) != SPECIES_NONE && !GetMonData(&gPlayerParty[0], MON_DATA_IS_EGG))
         class = Spirits_Class(&gPlayerParty[0].box);
     if (class >= 3)
         class = SPIRITS_AS_IT_IS;
-    return sBook->book == BOOK_UNITY ? sUnityObserver[class] : sEudaimonObserver[class];
+    return book == BOOK_UNITY ? sUnityObserver[class] : sEudaimonObserver[class];
 }
 
 //  T-483: an INSCRIPTION ('^ ' in docs/hermetic-layer.md) is printed in the tablet's emerald -- C_RING, which
@@ -1314,8 +1462,11 @@ static void DrawSubtleEntry(void)
             Print(BR_SMALL, sInk, rx, 19 + i * 10, Line(i));
     }
     start = SubtleLayout(&titleLines, &firstLines);
-    if ((sBook->book == BOOK_HERMETIC || sBook->book == BOOK_UNITY) && sBook->spread + 1 == sBook->spreadCount)
+    LensOrigin(&from, &i);                          // T-529: the dawn half only words the spells, as it does alone
+    if ((from == BOOK_HERMETIC || from == BOOK_UNITY) && sBook->spread + 1 == sBook->spreadCount)
         Spellbook_OnPassageRead(e->shortTitle);     // T-483 (5): a fold read to its end lets its spell off the page
+    if (sBook->book == BOOK_UNITY && sBook->lens != NULL)   // T-529: the lens's setting, under the picture's page
+        Print(BR_SMALL, sFaint, TB_LEFT_X + TB_TEXT_INSET, TB_FOLIO_Y, sLensNames[sUnityLens]);
     if (sBook->spread == 0)
     {
         Rect(C_RULE, rx, start - 5, TB_TEXT_W, 1);
@@ -2510,6 +2661,7 @@ static void Draw(void)
     }
     if (IsLayerBook() && HasCards())
         CardsTileShow(sBook->view == VIEW_COVER);
+    LensPalette();                      // T-529
 }
 
 //  ---------------------------------------------------------------- input
@@ -2837,9 +2989,51 @@ static void Input_GuideEntry(void)
 }
 
 
+//  T-529: L and R turn THE UNITY BOOK's lens, on its contents and its pages; TRUE when they did (or met the end).
+static bool8 LensInput(void)
+{
+    u8 to = sUnityLens, s, count;
+
+    if (sBook->book != BOOK_UNITY || sBook->lens == NULL || !JOY_NEW(L_BUTTON | R_BUTTON))
+        return FALSE;
+    if (JOY_NEW(L_BUTTON))
+        to = to == LENS_DAWN ? LENS_WHOLE : LENS_NIGHT;
+    else
+        to = to == LENS_NIGHT ? LENS_WHOLE : LENS_DAWN;
+    if (to == sUnityLens)
+        return TRUE;                    // a switch, not a wheel: already at that end
+    if (sBook->view == VIEW_SUBTLE_ENTRY && sBook->entry != sBook->lensEntry)
+    {
+        sBook->lensS = SubtleSectionOf(sBook->entry);       // the place: a section, and a place in it
+        sBook->lensJ = sBook->entry - Layer()->sections[sBook->lensS].first;
+    }
+    sUnityLens = to;
+    if (to != LENS_WHOLE)
+        LensBuild();
+    if (sBook->view == VIEW_SUBTLE_ENTRY)
+    {
+        s = sBook->lensS;
+        count = Layer()->sections[s].count;
+        sBook->entry = Layer()->sections[s].first + (sBook->lensJ < count ? sBook->lensJ : count - 1);
+        sBook->lensEntry = sBook->entry;
+        sBook->picEntry = 0xFF;
+    }
+    else
+    {
+        count = Layer()->sections[sBook->section].count;
+        if (sBook->cursor >= count)
+            sBook->cursor = count - 1;
+    }
+    Turn();
+    return TRUE;
+}
+
 static void Input_SubtleContents(void)
 {
     u8 count = Layer()->sections[sBook->section].count;
+
+    if (LensInput())
+        return;
 
     if (!sBook->focusRight)
     {
@@ -2917,18 +3111,25 @@ static void GlitchPastTheWarning(bool8 wasWarning)
 static void Input_SubtleEntry(void)
 {
     bool8 wasWarning = (sBook->book == BOOK_HERMETIC && sBook->entry == 0);
+    u8 entry = sBook->entry;
 
+    if (LensInput())
+        return;
     Input_SubtleEntryTurn();
+    if (sBook->entry != entry || sBook->view != VIEW_SUBTLE_ENTRY)
+        sBook->lensEntry = 0xFF;        // T-529: a page turned, so the lens keeps this place now
     GlitchPastTheWarning(wasWarning);
 }
 
 static void Input_SubtleEntryTurn(void)
 {
+    u16 lr = sBook->book == BOOK_UNITY && sBook->lens != NULL ? 0 : (L_BUTTON | R_BUTTON);   // T-529: the lens's
+
     if (JOY_NEW(B_BUTTON))
     {
         SubtleBackToContents();
     }
-    else if (JOY_NEW(A_BUTTON | DPAD_RIGHT | R_BUTTON))
+    else if (JOY_NEW(A_BUTTON | DPAD_RIGHT | (lr & R_BUTTON)))
     {
         if (sBook->spread + 1 < sBook->spreadCount)
         {
@@ -2946,7 +3147,7 @@ static void Input_SubtleEntryTurn(void)
             Turn();
         }
     }
-    else if (JOY_NEW(DPAD_LEFT | L_BUTTON))
+    else if (JOY_NEW(DPAD_LEFT | (lr & L_BUTTON)))
     {
         if (sBook->spread != 0)
         {
@@ -3003,6 +3204,8 @@ static void Task_BookInput(u8 taskId)
             Free(sBook->blank);
         if (sBook->blankPage != NULL)
             Free(sBook->blankPage);
+        if (sBook->lens != NULL)
+            Free(sBook->lens);              // T-529
         FREE_AND_SET_NULL(sBook);
         SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
         return;
@@ -3211,8 +3414,13 @@ void Eudaimon_Open(void)
 //  is in it now.
 void Unity_Open(void)
 {
-    if (OpenBook(BOOK_UNITY, VIEW_COVER))
-        sBook->picEntry = 0xFF;
+    if (!OpenBook(BOOK_UNITY, VIEW_COVER))
+        return;
+    sBook->picEntry = 0xFF;
+    sBook->lensEntry = 0xFF;
+    sBook->lens = AllocZeroed(sizeof(*sBook->lens));   // T-529: no room, no lens -- the book reads whole
+    if (sBook->lens != NULL && sUnityLens != LENS_WHOLE)
+        LensBuild();                    // the session's setting, kept from the last time it was open
 }
 
 //  T-315: a NOTEBOOK page that ends on a QR code -- one more page, after the text. Called just after it is opened.

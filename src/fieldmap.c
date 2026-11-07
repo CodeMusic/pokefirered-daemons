@@ -1155,6 +1155,18 @@ static u16 DaemonsToneOf(u16 c, u8 tone)
     return RGB2(l, l, l);
 }
 
+// T-529 (the user, 2026-11-07, by multiple choice; vision 4.40): THE UNITY BOOK's lens reads a page in the night
+// half's tone (emerald sepia) or the dawn half's (sapphire cyanotype), the same ramps HALFTONE wears for each half. The
+// brightest step is held at 30, one short of white, so a page in a tone shows it (the companion's toneHex, C-304).
+u16 DaemonsBookTone(u16 c, bool8 dawn)
+{
+    s32 l = DaemonsHalftoneLum(c);
+
+    if (l > 30)
+        l = 30;
+    return (dawn ? sToneSapphire : sToneEmerald)[l];
+}
+
 // From A toward B, by K of 256.
 static u16 DaemonsHalftoneLerp(u16 a, u16 b, s32 k)
 {

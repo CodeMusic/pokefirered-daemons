@@ -64,6 +64,7 @@ bool8 DaemonsRemnantDream(void);
 bool8 DaemonsIsBlancheOutdoors(void);
 void DaemonsReloadPrimaryTilesetPalette(const struct MapLayout *mapLayout);
 void DaemonsSetHalftoneColour(bool8 inColour);
+u16 DaemonsBookTone(u16 c, bool8 dawn);   // T-529: THE UNITY BOOK's lens, a colour in a half's tone
 void DaemonsGreyHalftoneFrame(void);
 void DaemonsHalftoneTick(void);                       // T-430: once a frame, main.c
 void DaemonsHalftoneSplash(u8 battler, u16 colour);   // T-430: a routine of yours reached that foe
