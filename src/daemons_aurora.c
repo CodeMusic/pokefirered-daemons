@@ -9,6 +9,7 @@
 #include "constants/maps.h"
 #include "constants/map_types.h"
 #include "constants/flags.h"
+#include "pokemon.h"
 #include "daemons_time.h"
 #include "daemons_pulse.h"
 #include "daemons_battle_bg.h"
@@ -132,6 +133,30 @@ bool8 Aurora_IsLightNight(void)
     x ^= x >> 7;
     x = (x * 40503) & 0xFFFF;
     return ((x >> 8) % 3) == 0;
+}
+
+// (f) THE CONJUGATE LIGHT. The other edition is the one this cartridge is not: CONTENT (FireRed's version byte) sees
+// CONTEXT's (LeafGreen's) and the other way round; a daemon from Ruby, Sapphire, Emerald or Colosseum is from neither.
+#if GAME_VERSION == VERSION_FIRE_RED
+#define OTHER_EDITION VERSION_LEAF_GREEN
+#else
+#define OTHER_EDITION VERSION_FIRE_RED
+#endif
+
+bool8 Aurora_ConjugateLight(void)
+{
+    u32 i;
+
+    if (!FlagGet(FLAG_UNITY_MENDED))
+        return FALSE;
+    for (i = 0; i < gPlayerPartyCount && i < PARTY_SIZE; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) != SPECIES_NONE
+         && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG)
+         && GetMonData(&gPlayerParty[i], MON_DATA_MET_GAME) == OTHER_EDITION)
+            return TRUE;
+    }
+    return FALSE;
 }
 
 static u16 MapHere(void)
