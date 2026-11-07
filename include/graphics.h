@@ -4672,4 +4672,123 @@ extern const u16 gPokeStorageInterface_NoDisplayMon_Pal[];
 extern const u16 gDexScreen_TopMenuIconPals_AtoZ[];
 extern const u32 gDexScreen_TopMenuIconTiles_AtoZ[];
 
+extern const u32 gItemIcon_DRecover[];   // T-525
+extern const u32 gItemIconPalette_DRecover[];
+
+extern const u32 gItemIcon_DDeepRecover[];   // T-525
+extern const u32 gItemIconPalette_DDeepRecover[];
+
+extern const u32 gItemIcon_DFullRecover[];   // T-525
+extern const u32 gItemIconPalette_DFullRecover[];
+
+extern const u32 gItemIcon_DRebuild[];   // T-525
+extern const u32 gItemIconPalette_DRebuild[];
+
+extern const u32 gItemIcon_DSnapshot[];   // T-525
+extern const u32 gItemIconPalette_DSnapshot[];
+
+extern const u32 gItemIcon_DPatch[];   // T-525
+extern const u32 gItemIconPalette_DPatch[];
+
+extern const u32 gItemIcon_DCoolant[];   // T-525
+extern const u32 gItemIconPalette_DCoolant[];
+
+extern const u32 gItemIcon_DWatchdog[];   // T-525
+extern const u32 gItemIconPalette_DWatchdog[];
+
+extern const u32 gItemIcon_DResume[];   // T-525
+extern const u32 gItemIconPalette_DResume[];
+
+extern const u32 gItemIcon_DPriority[];   // T-525
+extern const u32 gItemIconPalette_DPriority[];
+
+extern const u32 gItemIcon_DRollback[];   // T-525
+extern const u32 gItemIconPalette_DRollback[];
+
+extern const u32 gItemIcon_DRestart[];   // T-525
+extern const u32 gItemIconPalette_DRestart[];
+
+extern const u32 gItemIcon_DReboot[];   // T-525
+extern const u32 gItemIconPalette_DReboot[];
+
+extern const u32 gItemIcon_DHotfix[];   // T-525
+extern const u32 gItemIconPalette_DHotfix[];
+
+extern const u32 gItemIcon_DFieldPatch[];   // T-525
+extern const u32 gItemIconPalette_DFieldPatch[];
+
+extern const u32 gItemIcon_DWorkaround[];   // T-525
+extern const u32 gItemIconPalette_DWorkaround[];
+
+extern const u32 gItemIcon_DColdStart[];   // T-525
+extern const u32 gItemIconPalette_DColdStart[];
+
+extern const u32 gItemIcon_DRestartAll[];   // T-525
+extern const u32 gItemIconPalette_DRestartAll[];
+
+extern const u32 gItemIcon_DCharge[];   // T-525
+extern const u32 gItemIconPalette_DCharge[];
+
+extern const u32 gItemIcon_DFullCharge[];   // T-525
+extern const u32 gItemIconPalette_DFullCharge[];
+
+extern const u32 gItemIcon_DSuppress[];   // T-525
+extern const u32 gItemIconPalette_DSuppress[];
+
+extern const u32 gItemIcon_DLongSuppress[];   // T-525
+extern const u32 gItemIconPalette_DLongSuppress[];
+
+extern const u32 gItemIcon_DMaxSuppress[];   // T-525
+extern const u32 gItemIconPalette_DMaxSuppress[];
+
+extern const u32 gItemIcon_DEject[];   // T-525
+extern const u32 gItemIconPalette_DEject[];
+
+extern const u32 gItemIcon_DDecoy[];   // T-525
+extern const u32 gItemIconPalette_DDecoy[];
+
+extern const u32 gItemIcon_DBicycle[];   // T-525
+extern const u32 gItemIconPalette_DBicycle[];
+
+extern const u32 gItemIcon_DSitemap[];   // T-525
+extern const u32 gItemIconPalette_DSitemap[];
+
+extern const u32 gItemIcon_DRollCall[];   // T-525
+extern const u32 gItemIconPalette_DRollCall[];
+
+extern const u32 gItemIcon_DQuery[];   // T-525
+extern const u32 gItemIconPalette_DQuery[];
+
+extern const u32 gItemIcon_DDeepQuery[];   // T-525
+extern const u32 gItemIconPalette_DDeepQuery[];
+
+extern const u32 gItemIcon_DFullScan[];   // T-525
+extern const u32 gItemIconPalette_DFullScan[];
+
+extern const u32 gItemIcon_DTea[];   // T-525
+extern const u32 gItemIconPalette_DTea[];
+
+extern const u32 gItemIcon_DCc7[];   // T-525
+extern const u32 gItemIconPalette_DCc7[];
+
+extern const u32 gItemIcon_DInterrupt[];   // T-525
+extern const u32 gItemIconPalette_DInterrupt[];
+
+extern const u32 gItemIcon_DToolkit[];   // T-525
+extern const u32 gItemIconPalette_DToolkit[];
+
+extern const u32 gItemIcon_DHearsay[];   // T-525
+extern const u32 gItemIconPalette_DHearsay[];
+
+extern const u32 gItemIcon_DStream[];   // T-525
+extern const u32 gItemIconPalette_DStream[];
+
+extern const u32 gItemIcon_DGrep[];   // T-525
+extern const u32 gItemIconPalette_DGrep[];
+
+extern const u32 gItemIcon_DCardKey[];   // T-525
+extern const u32 gItemIconPalette_DCardKey[];
+
+extern const u32 gItemIcon_DDriver[];   // T-525
+
 #endif //GUARD_GRAPHICS_H
