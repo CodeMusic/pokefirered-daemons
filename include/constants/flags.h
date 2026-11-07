@@ -1728,6 +1728,24 @@
 #define FLAG_SEVEN_ISLAND_GROVE_FOUND            (DAEMONS_FLAGS_START + 0x11D)
 //  END gbagrove
 
+//  T-528 part 1 (vision 4.40): each grove has taken the aurora's light -- entered at night after THE UNITY BOOK was
+//  mended, or lit by its conjugate pair across the sea (src/daemons_aurora.c's table). Each sits 0x10 after its FOUND
+//  flag, in the same order, so the companion reads LIT = FOUND + 0x10.
+#define FLAG_VIRIDIAN_FOREST_GROVE_LIT             (DAEMONS_FLAGS_START + 0x120)
+#define FLAG_ROUTE25_GROVE_LIT                     (DAEMONS_FLAGS_START + 0x121)
+#define FLAG_ROUTE1_GROVE_LIT                      (DAEMONS_FLAGS_START + 0x122)
+#define FLAG_ROUTE24_GROVE_LIT                     (DAEMONS_FLAGS_START + 0x123)
+#define FLAG_ROUTE8_GROVE_LIT                      (DAEMONS_FLAGS_START + 0x124)
+#define FLAG_ROUTE11_GROVE_LIT                     (DAEMONS_FLAGS_START + 0x125)
+#define FLAG_ROUTE13_GROVE_LIT                     (DAEMONS_FLAGS_START + 0x126)
+#define FLAG_FIVE_ISLAND_MEADOW_GROVE_LIT          (DAEMONS_FLAGS_START + 0x127)
+#define FLAG_SIX_ISLAND_WATER_PATH_GROVE_LIT       (DAEMONS_FLAGS_START + 0x128)
+#define FLAG_THREE_ISLAND_BERRY_FOREST_GROVE_LIT   (DAEMONS_FLAGS_START + 0x129)
+#define FLAG_ONE_ISLAND_GROVE_LIT                  (DAEMONS_FLAGS_START + 0x12A)
+#define FLAG_TWO_ISLAND_GROVE_LIT                  (DAEMONS_FLAGS_START + 0x12B)
+#define FLAG_FOUR_ISLAND_GROVE_LIT                 (DAEMONS_FLAGS_START + 0x12C)
+#define FLAG_SEVEN_ISLAND_GROVE_LIT                (DAEMONS_FLAGS_START + 0x12D)
+
 //  T-403 (the user, 2026-10-15): a NOTEBOOK entry not yet opened is marked. One SEEN flag per entry, numbered in
 //  DAEMONS docs/notebook_notes.json (tools/gbanotebook.py) and never reused. MIGRATED: the first time a save opens the
 //  NOTEBOOK after T-403, everything already in it counts as read, so an old save does not light up everywhere.

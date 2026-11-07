@@ -2,6 +2,7 @@
 #include "palette.h"
 #include "fieldmap.h"
 #include "overworld.h"
+#include "battle.h"
 #include "constants/battle.h"
 #include "constants/map_types.h"
 #include "daemons_time.h"
@@ -136,4 +137,24 @@ void DaemonsBattleBgCalendar(u16 terrain)
         }
     }
     CpuCopy16(pal, &gPlttBufferFaded[BG_PLTT_ID(2)], PLTT_SIZEOF(3 * 16));
+}
+
+// T-528 part 1: the sky bands the aurora breathes in (src/daemons_aurora.c), top first, and how many -- the outdoor
+// terrains' only, the bands the hour above steps toward navy. 0 where the calendar leaves the sky alone: a cave, a
+// room, a timeless place, or an outdoor terrain met underground. The light is laid on PLTT, after the weather's wash
+// and the pulse, so the bands' own colours, the weekday's line and the glints are as this file left them.
+u8 DaemonsBattleBgSkySlots(const u8 **slots)
+{
+    const struct BattleCalendarTerrain *t;
+    u8 n;
+
+    if (gBattleTerrain >= NELEMS(sBattleCalendar))
+        return 0;
+    t = &sBattleCalendar[gBattleTerrain];
+    if (Reach(t) != BATTLE_CAL_FULL || t->index == BATTLE_CAL_NO_SEASON)
+        return 0;
+    for (n = 0; n < NELEMS(t->sky) && t->sky[n] != 0; n++)
+        ;
+    *slots = t->sky;
+    return n;
 }

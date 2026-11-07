@@ -63,6 +63,7 @@
 #include "constants/songs.h"
 #include "constants/sound.h"
 #include "daemons_hermetic.h"   // T-483: the book arrives
+#include "daemons_aurora.h"     // T-528: a grove takes the light
 
 #define PLAYER_LINK_STATE_IDLE 0x80
 #define PLAYER_LINK_STATE_BUSY 0x81
@@ -782,6 +783,7 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
     DaemonsDreamLog_Notice();          // T-412: a milestone just reached starts its dream waiting
     DaemonsGlobalIndexLegendFlags();   // T-334: the legends that may not stand yet stay hidden
     DaemonsSecondJoining();            // T-457: the receiver, the papers, the board, the keepers
+    Aurora_OnArrive();                 // T-528: a grove entered at night after the mending takes the light
     RunOnTransitionMapScript();
     TryRegenerateRenewableHiddenItems();
     InitMap();
@@ -836,6 +838,7 @@ static void LoadMapFromWarp(bool32 unused)
     DaemonsDreamLog_Notice();          // T-412: a milestone just reached starts its dream waiting
     DaemonsGlobalIndexLegendFlags();   // T-334: the legends that may not stand yet stay hidden
     DaemonsSecondJoining();            // T-457: the receiver, the papers, the board, the keepers
+    Aurora_OnArrive();                 // T-528: a grove entered at night after the mending takes the light
     RunOnTransitionMapScript();
     TryRegenerateRenewableHiddenItems();
     UpdateLocationHistoryForRoamer();

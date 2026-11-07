@@ -1,0 +1,28 @@
+#ifndef GUARD_DAEMONS_AURORA_H
+#define GUARD_DAEMONS_AURORA_H
+
+// T-528 part 1: THE AURORA, the dawn that comes at night (vision.md 4.40; src/daemons_aurora.c). Once THE UNITY BOOK
+// is mended: over DAEMON TOWER every night, in the lit groves' battle skies on the light's nights, and outdoors on
+// those nights once every grove found is lit. CONTENT in oxygen's red line, CONTEXT in its green.
+
+#define AURORA_GROVE_COUNT 14
+
+// The light's nights: about one in three, from the date by the rule the companion copies (DAEMONS docs/TODO.md T-528).
+bool8 Aurora_IsLightNight(void);
+// The night the date rule is asked about: days since 2000-01-01 (play hours without a clock), the evening's date.
+u16 Aurora_NightNumber(void);
+// On every arrival on a map (overworld.c): a grove entered at night after the mending takes the light, and its pair.
+void Aurora_OnArrive(void);
+// Once a frame from main.c, after Pulse_Tick: whether the light shows this frame, where, and how strongly.
+void Aurora_Tick(void);
+// After every copy of the faded palette to PLTT, after the pulse (daemons_pulse.c): the light laid on PLTT, read from
+// what is already there, so the buffers are never touched and nothing compounds.
+void Aurora_ApplyToPltt(void);
+
+#if DAEMONS_DEBUG
+extern u8 gAuroraDebugNights;      // DEBUG -> GAME EVENTS: 0 the date's rule, 1 every night a light one, 2 none
+void Aurora_DebugLightAll(bool8 on);
+bool8 Aurora_DebugAllLit(void);
+#endif
+
+#endif // GUARD_DAEMONS_AURORA_H

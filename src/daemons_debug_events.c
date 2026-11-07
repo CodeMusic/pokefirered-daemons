@@ -1,6 +1,7 @@
 #include "global.h"
 #include "daemons_spellbook.h"   // T-483 (5)
 #include "daemons_unity.h"      // T-519 item 3: MENDED
+#include "daemons_aurora.h"     // T-528: the groves lit, and the light's nights
 #include "gflib.h"
 #include "event_data.h"
 #include "fame_checker.h"
@@ -56,6 +57,7 @@ enum
     EV_EVERYTHING, EV_ROSTER, EV_EVERY_DAEMON, EV_STOCK,
     EV_OPENING, EV_SHOES, EV_INDEX, EV_OPUS, EV_SCHOOL, EV_TICKET, EV_FIR_KEY, EV_GROVES, EV_TEA, EV_GATES, EV_REVEAL, EV_RESOLVER,
     EV_INTERRUPT, EV_GOTO_POINTS, EV_GUIDE, EV_SUBTLE, EV_HERMETIC, EV_EUDAIMON, EV_SPELLS, EV_MENDED, EV_HORIZON, EV_GLOBAL_INDEX, EV_STREAM, EV_COMPANION, EV_INSTRUMENT,
+    EV_GROVES_LIT, EV_LIGHT_NIGHTS,                                         // T-528
     EV_MARKS_ALL, EV_MARK1, EV_MARK8 = EV_MARK1 + 7,
     EV_NOTEBOOK, EV_NOTEBOOK_FULL,
     EV_DRIVERS_ALL, EV_DRIVER1, EV_DRIVER8 = EV_DRIVER1 + 7,
@@ -133,6 +135,11 @@ static const u8 sName_Hermetic[]     = _("THE HERMETIC LAYER"); // T-483: the fl
 static const u8 sName_Eudaimon[]     = _("THE EUDAIMON LAYER"); // T-519 item 2: the dawn half, its flag and the book
 static const u8 sName_Mended[]       = _("MENDED");             // T-519 item 3: THE UNITY BOOK, at once (or the halves back)
 static const u8 sName_Horizon[]      = _("THE HORIZON SAID");   // T-519 item 4: its once; off = unsaid, the twelve cast
+static const u8 sName_GrovesLit[]    = _("EVERY GROVE LIT");    // T-528: the aurora taken, in all fourteen
+static const u8 sName_LightNights[]  = _("NIGHTS OF LIGHT: ");  // T-528: + which -- A steps it
+static const u8 sName_LightByDate[]  = _("BY THE DATE");
+static const u8 sName_LightEvery[]   = _("EVERY NIGHT");
+static const u8 sName_LightNone[]    = _("NONE");
 static const u8 sName_Spells[]       = _("EVERY SPELL READ");   // T-483 (5): every fold's spell off the page
 static const u8 sName_GlobalIndex[]  = _("GLOBAL INDEX");
 static const u8 sName_CrystalAgain[] = _("CRYSTAL'S LINE AGAIN");   // T-457: at the receiver, once more
@@ -267,6 +274,8 @@ static const struct DbgRow sRows_Events[] = {
     { sName_Spells,      R_TOGGLE, EV_SPELLS },       // T-483 (5): the SPELLBOOK's needs the book as well
     { sName_Mended,      R_TOGGLE, EV_MENDED },       // T-519 item 3: both halves found and mended, or unmended
     { sName_Horizon,     R_TOGGLE, EV_HORIZON },      // T-519 item 4
+    { sName_GrovesLit,   R_TOGGLE, EV_GROVES_LIT },   // T-528: every grove has taken the aurora's light
+    { sName_LightNights, R_GIVE,   EV_LIGHT_NIGHTS }, // T-528: A steps it -- by the date, every night, none
     { sName_GlobalIndex, R_TOGGLE, EV_GLOBAL_INDEX },
     { sName_CrystalAgain, R_GIVE,  EV_CRYSTAL_AGAIN },   // T-457
     { sName_Sounding,    R_GIVE,   EV_SOUNDING },     // T-458: A steps it 0, 1, 2, 3, 0 (the companion's job, faked)
@@ -578,6 +587,7 @@ static bool8 IsHeld(u8 ev)
     case EV_EUDAIMON:     return FlagGet(FLAG_GOT_EUDAIMON_LAYER);
     case EV_SPELLS:       return VarGet(VAR_SPELLS_KNOWN) == 0x7FFF;   // every SPELL_* bit (1 << SPELL_COUNT) - 1
     case EV_MENDED:       return FlagGet(FLAG_UNITY_MENDED);
+    case EV_GROVES_LIT:   return Aurora_DebugAllLit();
     case EV_HORIZON:      return (VarGet(VAR_SPELLS_CAST) >> SPELL_HORIZON) & 1;
 #ifdef FIRERED
     case EV_INSTRUMENT:   return CheckBagHasItem(ITEM_HARP, 1);    // T-417: the edition's instrument
@@ -670,6 +680,8 @@ static void Apply(u8 ev, bool8 on)
     case EV_SUBTLE:       SetFlag(FLAG_GOT_SUBTLE_LAYER, on); SetItem(ITEM_SUBTLE_LAYER, on); return;
     case EV_SPELLS:       Spellbook_DebugAll(on); return;
     case EV_MENDED:       Mending_DebugSet(on); return;
+    case EV_GROVES_LIT:   Aurora_DebugLightAll(on); return;
+    case EV_LIGHT_NIGHTS: gAuroraDebugNights = (gAuroraDebugNights + 1) % 3; return;
     case EV_HORIZON:      // said, or unsaid with the twelve (and the witching hour) marked cast, so it can be said again
         VarSet(VAR_SPELLS_CAST, on ? VarGet(VAR_SPELLS_CAST) | (1 << SPELL_HORIZON) : (1 << SPELL_HORIZON) - 1);
         return;
@@ -923,6 +935,12 @@ static void BuildLabels(void)
                 StringCopy(StringCopy(label, mark), sName_SoundingNone);
             else
                 ConvertIntToDecimalStringN(StringCopy(StringCopy(label, mark), rows[i].name), DaemonBoxGetSignal(away), STR_CONV_MODE_LEFT_ALIGN, 1);
+        }
+        else if (rows[i].arg == EV_LIGHT_NIGHTS)                          // T-528: which nights the light shows
+        {
+            static const u8 *const which[] = { sName_LightByDate, sName_LightEvery, sName_LightNone };
+
+            StringCopy(StringCopy(StringCopy(label, mark), rows[i].name), which[gAuroraDebugNights % 3]);
         }
         else if (rows[i].arg == EV_ITS_DREAM && rows[i].kind == R_GIVE)    // T-462: the image and night it will fake
         {

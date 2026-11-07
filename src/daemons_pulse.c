@@ -10,6 +10,7 @@
 #include "daemons_pulse.h"
 #include "daemons_spellbook.h"   // T-483 (5): THE MIRROR's colour
 #include "daemons_hours.h"       // T-519: the catch-up, and the creator's hour's gold
+#include "daemons_aurora.h"      // T-528: the aurora, laid after the pulse
 
 // T-483 / T-482: THE PULSE (the user, 2026-10-29; bible 4.39). One breath for the app, the watches and the game, so
 // boards side by side and a cartridge beside them breathe together: CONTENT's red to CONTEXT's blue through THE SUBTLE
@@ -196,7 +197,7 @@ void Pulse_Tick(void)
         sPulseWeight = sPulseWeight * (16 - min(gPaletteFade.y, 16)) / 16;
 }
 
-void Pulse_ApplyToPltt(void)
+static void PulseRowsToPltt(void)
 {
     u32 mask = sPulseMask, p, e;
     u16 *pltt = (u16 *)PLTT;
@@ -223,4 +224,11 @@ void Pulse_ApplyToPltt(void)
             pltt[e] = RGB(r, g, b);
         }
     }
+}
+
+// T-528: the aurora after the pulse, on what the pulse left (src/daemons_aurora.c), at every copy to PLTT.
+void Pulse_ApplyToPltt(void)
+{
+    PulseRowsToPltt();
+    Aurora_ApplyToPltt();
 }

@@ -20,6 +20,7 @@
 #include "daemons_rtc.h"
 #include "daemons_pulse.h"   // T-483
 #include "daemons_hours.h"   // T-519
+#include "daemons_aurora.h"  // T-528
 
 extern u32 intr_main[];
 
@@ -221,6 +222,7 @@ void AgbMain()
         DaemonsGreyHalftoneFrame();
         Pulse_Tick();                // T-483: whether the world is breathing this frame, and in what colour
         Hours_Tick();                // T-519: the creator's hour's bloom, motes and tone
+        Aurora_Tick();               // T-528: the aurora -- over the tower, a lit grove's sky, the night outdoors
         WaitForVBlank();
     }
 }

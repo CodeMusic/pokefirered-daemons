@@ -8,5 +8,7 @@ void DaemonsBattleBgHorizon(u16 terrain);
 // After the terrain's palette loads and BEFORE the weather's wash (DaemonsTintBattleTerrain): the season, the holiday,
 // the weekday and the hour, in that order, into both palette buffers.
 void DaemonsBattleBgCalendar(u16 terrain);
+// T-528 part 1: the current terrain's sky bands (row 2, top first) and their count; 0 where the sky keeps its light.
+u8 DaemonsBattleBgSkySlots(const u8 **slots);
 
 #endif // GUARD_DAEMONS_BATTLE_BG_H
