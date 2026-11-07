@@ -4791,4 +4791,145 @@ extern const u32 gItemIconPalette_DCardKey[];
 
 extern const u32 gItemIcon_DDriver[];   // T-525
 
+extern const u32 gItemIcon_DTuneAttack[];   // T-525
+extern const u32 gItemIconPalette_DTuneAttack[];
+
+extern const u32 gItemIcon_DTuneDefense[];   // T-525
+extern const u32 gItemIconPalette_DTuneDefense[];
+
+extern const u32 gItemIcon_DTuneSpeed[];   // T-525
+extern const u32 gItemIconPalette_DTuneSpeed[];
+
+extern const u32 gItemIcon_DTuneAim[];   // T-525
+extern const u32 gItemIconPalette_DTuneAim[];
+
+extern const u32 gItemIcon_DTuneSpAtk[];   // T-525
+extern const u32 gItemIconPalette_DTuneSpAtk[];
+
+extern const u32 gItemIcon_DTuneCrit[];   // T-525
+extern const u32 gItemIconPalette_DTuneCrit[];
+
+extern const u32 gItemIcon_DLockStats[];   // T-525
+extern const u32 gItemIconPalette_DLockStats[];
+
+extern const u32 gItemIcon_DMemory[];   // T-525
+extern const u32 gItemIconPalette_DMemory[];
+
+extern const u32 gItemIcon_DWattage[];   // T-525
+extern const u32 gItemIconPalette_DWattage[];
+
+extern const u32 gItemIcon_DShielding[];   // T-525
+extern const u32 gItemIconPalette_DShielding[];
+
+extern const u32 gItemIcon_DClockRate[];   // T-525
+extern const u32 gItemIconPalette_DClockRate[];
+
+extern const u32 gItemIcon_DBandwidth[];   // T-525
+extern const u32 gItemIconPalette_DBandwidth[];
+
+extern const u32 gItemIcon_DInsulation[];   // T-525
+extern const u32 gItemIconPalette_DInsulation[];
+
+extern const u32 gItemIcon_DIncrement[];   // T-525
+extern const u32 gItemIconPalette_DIncrement[];
+
+extern const u32 gItemIcon_DMpUp[];   // T-525
+extern const u32 gItemIconPalette_DMpUp[];
+
+extern const u32 gItemIcon_DMpMax[];   // T-525
+extern const u32 gItemIconPalette_DMpMax[];
+
+extern const u32 gItemIcon_DAxiom[];   // T-525
+extern const u32 gItemIconPalette_DAxiom[];
+
+extern const u32 gItemIcon_DEmbedding[];   // T-525
+extern const u32 gItemIconPalette_DEmbedding[];
+
+extern const u32 gItemIcon_DAffect[];   // T-525
+extern const u32 gItemIconPalette_DAffect[];
+
+extern const u32 gItemIcon_DReward[];   // T-525
+extern const u32 gItemIconPalette_DReward[];
+
+extern const u32 gItemIcon_DReflection[];   // T-525
+extern const u32 gItemIconPalette_DReflection[];
+
+extern const u32 gItemIcon_DExposure[];   // T-525
+extern const u32 gItemIconPalette_DExposure[];
+
+extern const u32 gItemIcon_DWakeTone[];   // T-525
+extern const u32 gItemIconPalette_DWakeTone[];
+
+extern const u32 gItemIcon_DCalmTone[];   // T-525
+extern const u32 gItemIconPalette_DCalmTone[];
+
+extern const u32 gItemIcon_DClearTone[];   // T-525
+extern const u32 gItemIconPalette_DClearTone[];
+
+extern const u32 gItemIcon_DLowTone[];   // T-525
+extern const u32 gItemIconPalette_DLowTone[];
+
+extern const u32 gItemIcon_DHighTone[];   // T-525
+extern const u32 gItemIconPalette_DHighTone[];
+
+extern const u32 gItemIcon_DChargeAll[];   // T-525
+extern const u32 gItemIconPalette_DChargeAll[];
+
+extern const u32 gItemIcon_DFullRecharge[];   // T-525
+extern const u32 gItemIconPalette_DFullRecharge[];
+
+extern const u32 gItemIcon_DFreshWater[];   // T-525
+extern const u32 gItemIconPalette_DFreshWater[];
+
+extern const u32 gItemIcon_DSodaPop[];   // T-525
+extern const u32 gItemIconPalette_DSodaPop[];
+
+extern const u32 gItemIcon_DLemonade[];   // T-525
+extern const u32 gItemIconPalette_DLemonade[];
+
+extern const u32 gItemIcon_DTokenCase[];   // T-525
+extern const u32 gItemIconPalette_DTokenCase[];
+
+extern const u32 gItemIcon_DLiftKey[];   // T-525
+extern const u32 gItemIconPalette_DLiftKey[];
+
+extern const u32 gItemIcon_DResolver[];   // T-525
+extern const u32 gItemIconPalette_DResolver[];
+
+extern const u32 gItemIcon_DTrapTable[];   // T-525
+extern const u32 gItemIconPalette_DTrapTable[];
+
+extern const u32 gItemIcon_DSsTicket[];   // T-525
+extern const u32 gItemIconPalette_DSsTicket[];
+
+extern const u32 gItemIcon_DBikeVoucher[];   // T-525
+extern const u32 gItemIconPalette_DBikeVoucher[];
+
+extern const u32 gItemIcon_DTriPass[];   // T-525
+extern const u32 gItemIconPalette_DTriPass[];
+
+extern const u32 gItemIcon_DRainbowPass[];   // T-525
+extern const u32 gItemIconPalette_DRainbowPass[];
+
+extern const u32 gItemIcon_DSecretKey[];   // T-525
+extern const u32 gItemIconPalette_DSecretKey[];
+
+extern const u32 gItemIcon_DOldCore[];   // T-525
+extern const u32 gItemIconPalette_DOldCore[];
+
+extern const u32 gItemIcon_DDrumCore[];   // T-525
+extern const u32 gItemIconPalette_DDrumCore[];
+
+extern const u32 gItemIcon_DHelixCore[];   // T-525
+extern const u32 gItemIconPalette_DHelixCore[];
+
+extern const u32 gItemIcon_DPublicKey[];   // T-525
+extern const u32 gItemIconPalette_DPublicKey[];
+
+extern const u32 gItemIcon_DPrivateKey[];   // T-525
+extern const u32 gItemIconPalette_DPrivateKey[];
+
+extern const u32 gItemIcon_DReserve[];   // T-525
+extern const u32 gItemIconPalette_DReserve[];
+
 #endif //GUARD_GRAPHICS_H
