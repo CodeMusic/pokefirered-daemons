@@ -29,6 +29,7 @@
 #include "trade.h"
 #include "constants/daycare.h"
 #include "constants/region_map_sections.h"
+#include "daemons_seasons.h"   // T-532: DaemonsSeasonalSpecies() for the coordinates rows
 
 // Combination of RSE's Day-Care (re-used on Four Island), FRLG's Day-Care, and egg_hatch.c
 
@@ -2056,7 +2057,7 @@ static void SpriteCB_Egg_2(struct Sprite* sprite)
             sprite->data[0] = 0;
             species = GetMonData(&gPlayerParty[sEggHatchData->eggPartyID], MON_DATA_SPECIES);
             gSprites[sEggHatchData->pokeSpriteID].x2 = 0;
-            gSprites[sEggHatchData->pokeSpriteID].y2 = gMonFrontPicCoords[species].y_offset;
+            gSprites[sEggHatchData->pokeSpriteID].y2 = gMonFrontPicCoords[DaemonsSeasonalSpecies(species)].y_offset;
         }
         else
         {

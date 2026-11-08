@@ -10,6 +10,7 @@
 #include "constants/battle_anim.h"
 #include "daemon_streaks.h"
 #include "daemon_saturation.h"
+#include "daemons_seasons.h"   // T-532: DaemonsSeasonalSpecies() for the coordinates rows
 
 #define IS_DOUBLE_BATTLE() (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
 
@@ -185,7 +186,7 @@ static u8 GetBattlerYDelta(u8 battlerId, u16 species)
         }
         else
         {
-            ret = gMonBackPicCoords[species].y_offset;
+            ret = gMonBackPicCoords[DaemonsSeasonalSpecies(species)].y_offset;
         }
     }
     else
@@ -214,7 +215,7 @@ static u8 GetBattlerYDelta(u8 battlerId, u16 species)
         }
         else
         {
-            ret = gMonFrontPicCoords[species].y_offset;
+            ret = gMonFrontPicCoords[DaemonsSeasonalSpecies(species)].y_offset;
         }
     }
     return ret;
@@ -1807,7 +1808,7 @@ static u16 GetBattlerYDeltaFromSpriteId(u8 spriteId)
                     species = GetMonData(&gPlayerParty[gBattlerPartyIndexes[i]], MON_DATA_SPECIES);
                 else
                     species = spriteInfo[battlerId].transformSpecies;
-                return gMonBackPicCoords[species].y_offset;
+                return gMonBackPicCoords[DaemonsSeasonalSpecies(species)].y_offset;
             }
             else
             {
@@ -1816,7 +1817,7 @@ static u16 GetBattlerYDeltaFromSpriteId(u8 spriteId)
                     species = GetMonData(&gEnemyParty[gBattlerPartyIndexes[i]], MON_DATA_SPECIES);
                 else
                     species = spriteInfo[battlerId].transformSpecies;
-                return gMonFrontPicCoords[species].y_offset;
+                return gMonFrontPicCoords[DaemonsSeasonalSpecies(species)].y_offset;
             }
         }
     }
@@ -2005,9 +2006,9 @@ u8 CreateAdditionalMonSpriteForMoveAnim(u16 species, bool8 isBackpic, u8 templat
     RequestDma3Copy(gMonSpritesGfxPtr->multiUseBuffer, (void *)(OBJ_VRAM0 + (sheet * 0x20)), 0x800, 1);
     FREE_AND_SET_NULL(gMonSpritesGfxPtr->multiUseBuffer);
     if (!isBackpic)
-        spriteId = CreateSprite(&sSpriteTemplates_MoveEffectMons[templateId], x, y + gMonFrontPicCoords[species].y_offset, subpriority);
+        spriteId = CreateSprite(&sSpriteTemplates_MoveEffectMons[templateId], x, y + gMonFrontPicCoords[DaemonsSeasonalSpecies(species)].y_offset, subpriority);
     else
-        spriteId = CreateSprite(&sSpriteTemplates_MoveEffectMons[templateId], x, y + gMonBackPicCoords[species].y_offset, subpriority);
+        spriteId = CreateSprite(&sSpriteTemplates_MoveEffectMons[templateId], x, y + gMonBackPicCoords[DaemonsSeasonalSpecies(species)].y_offset, subpriority);
     return spriteId;
 }
 
@@ -2054,7 +2055,7 @@ s16 GetBattlerSpriteCoordAttr(u8 battlerId, u8 attr)
         }
         else
         {
-            coords = &gMonBackPicCoords[species];
+            coords = &gMonBackPicCoords[DaemonsSeasonalSpecies(species)];
         }
     }
     else
@@ -2090,7 +2091,7 @@ s16 GetBattlerSpriteCoordAttr(u8 battlerId, u8 attr)
         }
         else
         {
-            coords = &gMonFrontPicCoords[species];
+            coords = &gMonFrontPicCoords[DaemonsSeasonalSpecies(species)];
         }
     }
     switch (attr)

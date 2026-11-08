@@ -35,6 +35,7 @@
 #include "constants/region_map_sections.h"
 #include "constants/moves.h"
 #include "sloopsvc.h"
+#include "daemons_seasons.h"   // T-532: DaemonsSeasonalSpecies() for the coordinates rows
 
 // Values for signaling to/from the link partner
 enum {
@@ -1361,7 +1362,7 @@ static bool8 DoTradeAnim_Cable(void)
     case STATE_START:
         gSprites[sTradeAnim->monSpriteIds[TRADE_PLAYER]].invisible = FALSE;
         gSprites[sTradeAnim->monSpriteIds[TRADE_PLAYER]].x2 = -180;
-        gSprites[sTradeAnim->monSpriteIds[TRADE_PLAYER]].y2 = gMonFrontPicCoords[sTradeAnim->monSpecies[TRADE_PLAYER]].y_offset;
+        gSprites[sTradeAnim->monSpriteIds[TRADE_PLAYER]].y2 = gMonFrontPicCoords[DaemonsSeasonalSpecies(sTradeAnim->monSpecies[TRADE_PLAYER])].y_offset;
         sTradeAnim->state++;
         sTradeAnim->cachedMapMusic = GetCurrentMapMusic();
         PlayNewMapMusic(MUS_EVOLUTION);
@@ -1731,7 +1732,7 @@ static bool8 DoTradeAnim_Cable(void)
         break;
     case STATE_SHOW_NEW_MON:
         gSprites[sTradeAnim->monSpriteIds[TRADE_PARTNER]].x = 120;
-        gSprites[sTradeAnim->monSpriteIds[TRADE_PARTNER]].y = gMonFrontPicCoords[sTradeAnim->monSpecies[TRADE_PARTNER]].y_offset + 60;
+        gSprites[sTradeAnim->monSpriteIds[TRADE_PARTNER]].y = gMonFrontPicCoords[DaemonsSeasonalSpecies(sTradeAnim->monSpecies[TRADE_PARTNER])].y_offset + 60;
         gSprites[sTradeAnim->monSpriteIds[TRADE_PARTNER]].x2 = 0;
         gSprites[sTradeAnim->monSpriteIds[TRADE_PARTNER]].y2 = 0;
         StartSpriteAnim(&gSprites[sTradeAnim->monSpriteIds[TRADE_PARTNER]], 0);
@@ -1839,7 +1840,7 @@ static bool8 DoTradeAnim_Wireless(void)
     case STATE_START:
         gSprites[sTradeAnim->monSpriteIds[TRADE_PLAYER]].invisible = FALSE;
         gSprites[sTradeAnim->monSpriteIds[TRADE_PLAYER]].x2 = -180;
-        gSprites[sTradeAnim->monSpriteIds[TRADE_PLAYER]].y2 = gMonFrontPicCoords[sTradeAnim->monSpecies[TRADE_PLAYER]].y_offset;
+        gSprites[sTradeAnim->monSpriteIds[TRADE_PLAYER]].y2 = gMonFrontPicCoords[DaemonsSeasonalSpecies(sTradeAnim->monSpecies[TRADE_PLAYER])].y_offset;
         sTradeAnim->state++;
         sTradeAnim->cachedMapMusic = GetCurrentMapMusic();
         PlayNewMapMusic(MUS_EVOLUTION);
@@ -2232,7 +2233,7 @@ static bool8 DoTradeAnim_Wireless(void)
         break;
     case STATE_SHOW_NEW_MON:
         gSprites[sTradeAnim->monSpriteIds[TRADE_PARTNER]].x = 120;
-        gSprites[sTradeAnim->monSpriteIds[TRADE_PARTNER]].y = gMonFrontPicCoords[sTradeAnim->monSpecies[TRADE_PARTNER]].y_offset + 60;
+        gSprites[sTradeAnim->monSpriteIds[TRADE_PARTNER]].y = gMonFrontPicCoords[DaemonsSeasonalSpecies(sTradeAnim->monSpecies[TRADE_PARTNER])].y_offset + 60;
         gSprites[sTradeAnim->monSpriteIds[TRADE_PARTNER]].x2 = 0;
         gSprites[sTradeAnim->monSpriteIds[TRADE_PARTNER]].y2 = 0;
         StartSpriteAnim(&gSprites[sTradeAnim->monSpriteIds[TRADE_PARTNER]], 0);

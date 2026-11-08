@@ -7,6 +7,8 @@
 u8 DaemonsDisplaySeason(void);
 // A MUSAI-branch species -> its picture-only id for the season (summer is its own); every other species, itself.
 // Called by the pic loaders (decompress.c), the two sprite-palette look-ups (pokemon.c) and GetIconSpecies.
+// And by every gMonFrontPicCoords / gMonBackPicCoords look-up (battle, trade, hatching, the jump game): each form
+// has its own rows (tools/genmusaiseasons.py), since a vehicle makes it taller and its feet sit lower in the frame.
 u16 DaemonsSeasonalSpecies(u16 species);
 bool8 DaemonsIsMusaiBranch(u16 species);
 // The INDEX entry for the season's form of SPECIES, or NULL for a species with one entry.

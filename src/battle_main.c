@@ -48,6 +48,7 @@
 #include "constants/trainers.h"
 #include "daemons_three.h"   // T-459 C: the lean
 #include "daemons_hermetic.h"   // T-483 (7): trick or treat
+#include "daemons_seasons.h"   // T-532: DaemonsSeasonalSpecies() for the coordinates rows
 
 static void SpriteCB_UnusedDebugSprite(struct Sprite *sprite);
 static void HandleAction_UseMove(void);
@@ -2222,7 +2223,7 @@ void SpriteCB_FaintOpponentMon(struct Sprite *sprite)
     }
     else
     {
-        yOffset = gMonFrontPicCoords[species].y_offset;
+        yOffset = gMonFrontPicCoords[DaemonsSeasonalSpecies(species)].y_offset;
     }
 
     sprite->data[3] = 8 - yOffset / 8;

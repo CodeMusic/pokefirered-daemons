@@ -21,6 +21,7 @@
 #include "trig.h"
 #include "constants/items.h"
 #include "constants/songs.h"
+#include "daemons_seasons.h"   // T-532: DaemonsSeasonalSpecies() for the coordinates rows
 
 #define MAX_JUMP_SCORE 99990
 #define MAX_JUMPS 9999
@@ -3588,7 +3589,7 @@ static void CreateJumpMonSprites(void)
     {
         struct PokemonJump_MonInfo *info = GetMonInfoByMultiplayerId(i);
 
-        y = gMonFrontPicCoords[info->species].y_offset;
+        y = gMonFrontPicCoords[DaemonsSeasonalSpecies(info->species)].y_offset;
         CreateJumpMonSprite(sPokemonJumpGfx, info, *xCoords, y + 112, i);
         CreateStarSprite(sPokemonJumpGfx, *xCoords, 112, i);
         xCoords++;
