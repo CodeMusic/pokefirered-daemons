@@ -43,6 +43,7 @@
 #include "constants/pokemon.h"
 #include "constants/maps.h"
 #include "constants/opponents.h"
+#include "daemons_seasons.h"   // T-532: CRYPTOPHASIA's power
 
 extern const u8 *const gBattleScriptsForMoveEffects[];
 
@@ -1275,6 +1276,8 @@ static void Cmd_critcalc(void)
 static void Cmd_damagecalc(void)
 {
     u16 sideStatus = gSideStatuses[GET_BATTLER_SIDE(gBattlerTarget)];
+    if (gBattleMoves[gCurrentMove].effect == EFFECT_CRYPTOPHASIA)
+        gDynamicBasePower = Cryptophasia_Power(gBattlerAttacker);   // T-532: 40, +20 for each sibling able to fight
     gBattleMoveDamage = CalculateBaseDamage(&gBattleMons[gBattlerAttacker], &gBattleMons[gBattlerTarget], gCurrentMove,
                                             sideStatus, gDynamicBasePower,
                                             gBattleStruct->dynamicMoveType, gBattlerAttacker, gBattlerTarget);
@@ -1300,6 +1303,8 @@ static void Cmd_damagecalc(void)
 void AI_CalcDmg(u8 attacker, u8 defender)
 {
     u16 sideStatus = gSideStatuses[GET_BATTLER_SIDE(defender)];
+    if (gBattleMoves[gCurrentMove].effect == EFFECT_CRYPTOPHASIA)
+        gDynamicBasePower = Cryptophasia_Power(attacker);   // T-532: the AI sees CRYPTOPHASIA's real power
     gBattleMoveDamage = CalculateBaseDamage(&gBattleMons[attacker], &gBattleMons[defender], gCurrentMove,
                                             sideStatus, gDynamicBasePower,
                                             gBattleStruct->dynamicMoveType, attacker, defender);

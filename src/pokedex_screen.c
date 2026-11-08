@@ -1,6 +1,7 @@
 #include "global.h"
 #include "daemon_saturation.h"
 #include "book_reader.h"
+#include "daemons_seasons.h"   // T-532: a MUSAI's page in its season
 #include "gflib.h"
 #include "graphics.h"
 #include "m4a.h"
@@ -3504,12 +3505,13 @@ void DexScreen_PrintMonFlavorText(u8 windowId, u16 species, u8 x, u8 y)
     struct TextPrinterTemplate printerTemplate;
     u16 length;
     s32 xCenter;
+    const u8 *seasonal = DaemonsSeasonalIndexText(species);   // T-532: a MUSAI's page is its season's form's
 
     species = SpeciesToNationalPokedexNum(species);
 
     if (DexScreen_CanRead(species, FALSE))
     {
-        printerTemplate.currentChar = gPokedexEntries[species].description;
+        printerTemplate.currentChar = seasonal != NULL ? seasonal : gPokedexEntries[species].description;
         printerTemplate.windowId = windowId;
         printerTemplate.fontId = FONT_NORMAL;
         printerTemplate.letterSpacing = 1;
@@ -3519,7 +3521,7 @@ void DexScreen_PrintMonFlavorText(u8 windowId, u16 species, u8 x, u8 y)
         printerTemplate.bgColor = 0;
         printerTemplate.shadowColor = 2;
 
-        length = GetStringWidth(FONT_NORMAL, gPokedexEntries[species].description, 0);
+        length = GetStringWidth(FONT_NORMAL, printerTemplate.currentChar, 0);
         xCenter = x + (240 - length) / 2;
 
         if (xCenter > 0)

@@ -406,7 +406,13 @@
 // in the CORPUS HIDEOUT. Appended, so no existing ID moves. DRAFT.
 #define MOVE_ALIGN 382
 
-#define MOVES_COUNT 383
+// T-532 (the user, 2026-11-08): CRYPTOPHASIA, CODEMUSAI's own -- the MUSAI branch's shared tongue. A LOGIC special hit
+// whose power grows by 20 for each OTHER MUSAI-branch daemon in the user's party still able to fight (40 to 140;
+// Cryptophasia_Power, src/daemons_seasons.c). Learned by CODEMUSAI at 30 and by nothing else. Appended, so no existing
+// ID moves. DRAFT.
+#define MOVE_CRYPTOPHASIA 383
+
+#define MOVES_COUNT 384
 
 // Used for checks for moves affected by Disable, Mimic, etc.
 #define MOVE_UNAVAILABLE 0xFFFF

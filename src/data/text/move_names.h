@@ -387,4 +387,5 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] = {
     [MOVE_BEFORE_DAWN] = _("BEFORE DAWN"),   // T-480, DRAFT
     [MOVE_VEIL]       = _("VEIL"),   // T-480, DRAFT
     [MOVE_ALIGN]      = _("ALIGN"),   // T-489, DRAFT
+    [MOVE_CRYPTOPHASIA] = _("CRYPTOPHASIA"),   // T-532, DRAFT
 };

@@ -393,6 +393,8 @@ const u8 gMoveDescription_BeforeDawn[] = _("Something new,\nalmost here. It\nbre
 const u8 gMoveDescription_Veil[] = _("Strikes from\nbehind a veil no\none can lift.\nGone by four.");   // T-480, DRAFT
 // T-489, DRAFT: ALIGN, and PLUGIN49's words too (engine.md trap 27).
 const u8 gMoveDescription_Align[] = _("The foe takes on\nthe user's type,\nand every weakness\nthat comes with it.");
+// T-532, DRAFT: CRYPTOPHASIA (the draft's option A, 99/99/99/103 px of the pane's 113).
+const u8 gMoveDescription_Cryptophasia[] = _("Words only its own\nfamily can follow.\nIt hits harder for\neach of them near.");
 
 const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_POUND         - 1] = gMoveDescription_Pound,
@@ -777,4 +779,5 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_BEFORE_DAWN  - 1] = gMoveDescription_BeforeDawn,   // T-480, DRAFT
     [MOVE_VEIL         - 1] = gMoveDescription_Veil,   // T-480, DRAFT
     [MOVE_ALIGN        - 1] = gMoveDescription_Align,   // T-489, DRAFT
+    [MOVE_CRYPTOPHASIA - 1] = gMoveDescription_Cryptophasia,   // T-532, DRAFT
 };

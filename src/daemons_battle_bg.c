@@ -8,6 +8,7 @@
 #include "daemons_time.h"
 #include "daemons_holidays.h"
 #include "daemons_battle_bg.h"
+#include "daemons_seasons.h"   // T-532: the season the battle began in
 
 // T-481 A: THE BATTLE BACKGROUNDS THAT KEEP THE CALENDAR (the user, 2026-10-29, by multiple choice; drafted on sheets
 // by DAEMONS tools/gbabattlebg.py, which writes the tables below and draws what this does).
@@ -97,7 +98,7 @@ void DaemonsBattleBgCalendar(u16 terrain)
 
     // 1. the season
     if (reach == BATTLE_CAL_FULL && t->index != BATTLE_CAL_NO_SEASON)
-        CpuCopy16(sBattleSeasonPals[t->index][DaemonsSeason()], pal, PLTT_SIZEOF(3 * 16));
+        CpuCopy16(sBattleSeasonPals[t->index][DaemonsDisplaySeason()], pal, PLTT_SIZEOF(3 * 16));   // T-532: the battle's own
 
     // 2. the holiday
     holiday = DaemonsHoliday();

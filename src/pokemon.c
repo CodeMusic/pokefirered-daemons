@@ -2,6 +2,7 @@
 
 #include "global.h"
 #include "gflib.h"
+#include "daemons_seasons.h"   // T-532: the MUSAI branch's seasonal colours
 #include "random.h"
 #include "text.h"
 #include "data.h"
@@ -6220,6 +6221,7 @@ const u32 *GetMonSpritePalFromSpeciesAndPersonality(u16 species, u32 otId, u32 p
     if (species > SPECIES_EGG)
         return gMonPaletteTable[0].data;
 
+    species = DaemonsSeasonalSpecies(species);   // T-532: a MUSAI wears its season's colours (rows 11-14 the streaks')
     shinyValue = GET_SHINY_VALUE(otId, personality);
     if (shinyValue < SHINY_ODDS)
         return gMonShinyPaletteTable[species].data;
@@ -6239,6 +6241,8 @@ const struct CompressedSpritePalette *GetMonSpritePalStructFromOtIdPersonality(u
 {
     u32 shinyValue;
 
+    if (species <= NUM_SPECIES)
+        species = DaemonsSeasonalSpecies(species);   // T-532: the form's palette, under its species' own tag
     shinyValue = GET_SHINY_VALUE(otId, personality);
     if (shinyValue < SHINY_ODDS)
         return &gMonShinyPaletteTable[species];

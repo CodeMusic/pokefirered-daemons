@@ -236,6 +236,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectDragonDance            @ EFFECT_DRAGON_DANCE
 	.4byte BattleScript_EffectCamouflage             @ EFFECT_CAMOUFLAGE
 	.4byte BattleScript_EffectAlign                  @ EFFECT_ALIGN (T-489)
+	.4byte BattleScript_EffectHit                    @ EFFECT_CRYPTOPHASIA (T-532): the power is the effect (Cmd_damagecalc)
 
 BattleScript_EffectHit::
 	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler

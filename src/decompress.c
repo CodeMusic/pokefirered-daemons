@@ -1,12 +1,32 @@
 #include "global.h"
 #include "gflib.h"
 #include "decompress.h"
+#include "daemons_seasons.h"   // T-532: the MUSAI branch's seasonal pictures
 #include "pokemon.h"
 
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 extern const struct CompressedSpriteSheet gMonBackPicTable[];
 
 static void DuplicateDeoxysTiles(void *pointer, s32 species);
+
+// T-532 (vision 9.34): a MUSAI-branch species draws its season's picture -- the same view (front or back) of the form
+// DaemonsSeasonalSpecies() names. Every daemon picture goes through these four loaders (battle, summary, INDEX, trade,
+// evolution, Hall of Fame, the PC), so this is the one place the swap is made for pictures.
+static const u32 *SeasonalPic(const struct CompressedSpriteSheet *src, s32 species)
+{
+    u16 form;
+
+    if (species <= SPECIES_NONE || species > NUM_SPECIES)
+        return src->data;
+    form = DaemonsSeasonalSpecies(species);
+    if (form == species)
+        return src->data;
+    if (src == &gMonFrontPicTable[species])
+        return gMonFrontPicTable[form].data;
+    if (src == &gMonBackPicTable[species])
+        return gMonBackPicTable[form].data;
+    return src->data;
+}
 
 void LZDecompressWram(const void *src, void *dest)
 {
@@ -65,7 +85,7 @@ void DecompressPicFromTable(const struct CompressedSpriteSheet *src, void *buffe
     if (species > NUM_SPECIES)
         LZ77UnCompWram(gMonFrontPicTable[0].data, buffer);
     else
-        LZ77UnCompWram(src->data, buffer);
+        LZ77UnCompWram(SeasonalPic(src, species), buffer);
     DuplicateDeoxysTiles(buffer, species);
 }
 
@@ -99,7 +119,7 @@ void LoadSpecialPokePic(const struct CompressedSpriteSheet *src, void *dest, s32
     else if (species > NUM_SPECIES) // is species unknown? draw the ? icon
         LZ77UnCompWram(gMonFrontPicTable[0].data, dest);
     else
-        LZ77UnCompWram(src->data, dest);
+        LZ77UnCompWram(SeasonalPic(src, species), dest);
 
     DuplicateDeoxysTiles(dest, species);
     DrawSpindaSpots(species, personality, dest, isFrontPic);
@@ -310,7 +330,7 @@ void DecompressPicFromTable_DontHandleDeoxys(const struct CompressedSpriteSheet 
     if (species > NUM_SPECIES)
         LZ77UnCompWram(gMonFrontPicTable[0].data, buffer);
     else
-        LZ77UnCompWram(src->data, buffer);
+        LZ77UnCompWram(SeasonalPic(src, species), buffer);
 }
 
 void HandleLoadSpecialPokePic_DontHandleDeoxys(const struct CompressedSpriteSheet *src, void *dest, s32 species, u32 personality)
@@ -346,7 +366,7 @@ void LoadSpecialPokePic_DontHandleDeoxys(const struct CompressedSpriteSheet *src
     }
     else
     {
-        LZ77UnCompWram(src->data, dest);
+        LZ77UnCompWram(SeasonalPic(src, species), dest);
     }
     DrawSpindaSpots(species, personality, dest, isFrontPic);
 }

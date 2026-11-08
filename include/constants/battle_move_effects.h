@@ -217,5 +217,7 @@
 #define EFFECT_CAMOUFLAGE 213
 // T-489: ALIGN -- CAST's (CONVERSION's) change of type, done to the target, in the user's own types. DRAFT.
 #define EFFECT_ALIGN 214
+// T-532: CRYPTOPHASIA -- an ordinary hit whose power Cmd_damagecalc (and AI_CalcDmg) set from the user's party. DRAFT.
+#define EFFECT_CRYPTOPHASIA 215
 
 #endif  // GUARD_CONSTANTS_BATTLE_MOVE_EFFECTS_H
