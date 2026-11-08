@@ -415,49 +415,49 @@ $(NAMINGGFXDIR)/cursor_filled.4bpp: %.4bpp: %.png
 
 
 $(WALLPAPERGFXDIR)/beach/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 60 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 39 -Wnum_tiles
 
 $(WALLPAPERGFXDIR)/cave/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 61 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 55 -Wnum_tiles
 
 $(WALLPAPERGFXDIR)/city/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 40 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 35 -Wnum_tiles
 
 $(WALLPAPERGFXDIR)/crag/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 54 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 55 -Wnum_tiles
 
 $(WALLPAPERGFXDIR)/desert/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 52 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 37 -Wnum_tiles
 
 $(WALLPAPERGFXDIR)/forest/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 53 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 35 -Wnum_tiles
 
 $(WALLPAPERGFXDIR)/pokecenter/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 57 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 39 -Wnum_tiles
 
 $(WALLPAPERGFXDIR)/river/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 63 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 69 -Wnum_tiles
 
 $(WALLPAPERGFXDIR)/savanna/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 45 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 37 -Wnum_tiles
 
 $(WALLPAPERGFXDIR)/seafloor/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 53 -Wnum_tiles
 
 $(WALLPAPERGFXDIR)/simple/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 25 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 28 -Wnum_tiles
 
 $(WALLPAPERGFXDIR)/sky/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 52 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 35 -Wnum_tiles
 
 $(WALLPAPERGFXDIR)/snow/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 51 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 34 -Wnum_tiles
 
 $(WALLPAPERGFXDIR)/stars/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 37 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 41 -Wnum_tiles
 
 $(WALLPAPERGFXDIR)/tiles/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 31 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 35 -Wnum_tiles
 
 $(WALLPAPERGFXDIR)/volcano/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 57 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 43 -Wnum_tiles
