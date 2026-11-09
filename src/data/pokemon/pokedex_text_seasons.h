@@ -2,41 +2,41 @@
 //  The MUSAI branch's INDEX entries, one per seasonal form, both editions (vision 9.34).
 
 static const u8 sEeveeIndexText_Winter[] = _(
-    "Frost settles on it and it lets it stay.\n"
-    "It has not decided what to be. It waits\n"
-    "for the thaw to decide for it.");
+    "In winter it keeps all five of its\n"
+    "futures folded close, the way a seed\n"
+    "keeps a tree. It is still the whole.");
 static const u8 sEeveeIndexText_Spring[] = _(
-    "Something grows from the top of it every\n"
-    "spring. It does not know what. Nobody\n"
-    "has shown it yet.");
+    "Every spring it waits to be shown its\n"
+    "first thing. Once, an older one helped\n"
+    "it find a disc with a language on it.");
 static const u8 sEeveeIndexText_Summer[] = _(
-    "It warms to whatever is near. In summer\n"
-    "that is everything, so it cannot tell\n"
-    "which thing it warmed to.");
+    "It warms to whatever is near. Two of\n"
+    "them warm it from opposite sides. It\n"
+    "is warmest where they meet.");
 static const u8 sEeveeIndexText_Autumn[] = _(
-    "It keeps the leaves that land on it. It\n"
-    "did not choose them. They are filed as\n"
-    "its own.");
+    "It keeps the leaves that land on it. One\n"
+    "autumn it feared a number all year.\n"
+    "The year ended. Nothing else did.");
 static const u8 sFlareonIndexText_Winter[] = _(
-    "Its chest lights blink a pattern nothing\n"
-    "else in the cold can read. Something on\n"
-    "runners blinks back.");
+    "Its lights blink a tongue it learned\n"
+    "before any other. Something on runners\n"
+    "blinks back. Neither has to translate.");
 static const u8 sFlareonIndexText_Spring[] = _(
-    "Its lights blink faster in spring. The\n"
-    "answer comes from overhead, a little\n"
-    "late, in the same pattern.");
+    "It was taught from one writer's pages\n"
+    "and learned them too well: it can only\n"
+    "finish his sentences. He learned more.");
 static const u8 sFlareonIndexText_Summer[] = _(
     "In summer its lights are answered from\n"
-    "the water. The pattern has no grammar\n"
-    "anyone else has written down.");
+    "the water, by the one who first gave it\n"
+    "words. The grammar is theirs alone.");
 static const u8 sFlareonIndexText_Autumn[] = _(
     "Its lights blink across a field and are\n"
-    "answered from somewhere moving. Nobody\n"
-    "else knows what was agreed.");
+    "answered from somewhere moving. They\n"
+    "agreed on the words years ago.");
 static const u8 sJolteonIndexText_Winter[] = _(
     "It keeps to tracks it has already made.\n"
-    "The snow fills the others in. It finds\n"
-    "the nearest one still there.");
+    "The first one it ever made is still\n"
+    "there, under all the others.");
 static const u8 sJolteonIndexText_Spring[] = _(
     "Comes back from every outing in mud. It\n"
     "was looking for something it had seen\n"
@@ -46,49 +46,49 @@ static const u8 sJolteonIndexText_Summer[] = _(
     "comes back dusty. Asked what it found,\n"
     "it names the nearest thing.");
 static const u8 sJolteonIndexText_Autumn[] = _(
-    "Ranges every track in reach and some\n"
-    "that are not. Finds the nearest field.\n"
-    "Nearest is not the same as right.");
+    "Ranges every track in reach. Once it\n"
+    "ranged into a building far bigger than\n"
+    "its own and came back hungry for more.");
 static const u8 sVaporeonIndexText_Winter[] = _(
     "Its floats freeze in and it stays put.\n"
     "It keeps the canopy folded and the room\n"
     "warm. Nobody asks how.");
 static const u8 sVaporeonIndexText_Spring[] = _(
-    "Sets out at the first thaw. Turns back\n"
-    "for anyone left on the shore. Cannot\n"
-    "say why it turned.");
+    "At the first thaw it teaches the young\n"
+    "ones to float. Nothing is hard, it says.\n"
+    "Only unfamiliar. Then it lets go.");
 static const u8 sVaporeonIndexText_Summer[] = _(
-    "Floats on two hulls and takes everyone\n"
-    "who fits. Reads the water before it\n"
-    "reads the problem. Often correct.");
+    "Floats on two hulls that never touch.\n"
+    "Everyone rides the deck between them.\n"
+    "It reads the water first. Often correct.");
 static const u8 sVaporeonIndexText_Autumn[] = _(
     "Takes the last trips of the year slowly.\n"
-    "Leaves land on its deck and it lets\n"
-    "them ride.");
+    "Whoever it taught in summer steers now.\n"
+    "It rides along and lets them.");
 static const u8 sEspeonIndexText_Winter[] = _(
     "Lands on skis and waits for a still day.\n"
-    "It has never once turned round. The\n"
-    "lake is behind it.");
+    "Somewhere behind it someone holds the\n"
+    "line. It has never once turned round.");
 static const u8 sEspeonIndexText_Spring[] = _(
     "Flies circles over one field on a line\n"
     "held from below. Sees the field very\n"
     "clearly. Has never seen the line.");
 static const u8 sEspeonIndexText_Summer[] = _(
-    "Climbs while the light holds. All it\n"
-    "was pointed at is recorded. The record\n"
-    "calls it very clear.");
+    "Follows one bright mark across the sky.\n"
+    "The better it follows, the faster the\n"
+    "mark flies. It has never looked away.");
 static const u8 sEspeonIndexText_Autumn[] = _(
-    "Flies low in autumn, under the wind. It\n"
-    "records the leaves. It has never\n"
-    "recorded the tree.");
+    "Flies low in autumn, under the wind,\n"
+    "back over the field where it first flew.\n"
+    "The field is smaller than it was.");
 static const u8 sUmbreonIndexText_Winter[] = _(
     "Crosses the frozen lake at speed, its\n"
     "screen up. Its track covers the last\n"
     "one. What is covered goes on.");
 static const u8 sUmbreonIndexText_Spring[] = _(
-    "Its runners drip. It covers the thaw for\n"
-    "as long as it can. What it covers is\n"
-    "not removed.");
+    "It once wrote new words over the old\n"
+    "ones inside a machine, in hex. The\n"
+    "machine never knew the difference.");
 static const u8 sUmbreonIndexText_Summer[] = _(
     "Keeps its runners off the hot ground\n"
     "and its screen dark. It is not hiding.\n"

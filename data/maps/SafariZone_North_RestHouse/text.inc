@@ -8,8 +8,11 @@ SafariZone_East_Text_PrizeInDeepestPartOfSafariZone::
     .string "Go to the deepest part of the\n"
     .string "SAFARI ZONE. You will win a prize!$"
 
+@  T-534, DRAFT.
 SafariZone_East_Text_MyEeveeEvolvedIntoFlareon::
-    .string "My MUSAI evolved into CODEMUSAI.\p"
-    .string "But, a friend's MUSAI turned into a\n"
-    .string "CAREMUSAI. I wonder why?$"
+    .string "My MUSAI became a CODEMUSAI.\p"
+    .string "My friend's became a CAREMUSAI.\n"
+    .string "Mine reasons. Theirs just knows.\p"
+    .string "Side by side, they argue,\n"
+    .string "and then they agree.$"
 

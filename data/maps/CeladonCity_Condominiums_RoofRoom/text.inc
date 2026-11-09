@@ -49,3 +49,8 @@ CeladonCity_Condominiums_RoofRoom_Text_PamphletOnTMs::
     .string "DRIVERS install again\n"
     .string "and again.$"
 
+@  T-534, DRAFT. The user's pick said "ball"; the game's word for it is BOX (port_vocab, vision 89).
+CeladonCity_Condominiums_RoofRoom_Text_NoteUnderBall::
+    .string "There is a note under the box.\p"
+    .string "FOR WHOEVER SHOWS IT\n"
+    .string "SOMETHING FIRST.$"

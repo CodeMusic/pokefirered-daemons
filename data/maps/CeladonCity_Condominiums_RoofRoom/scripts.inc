@@ -53,6 +53,12 @@ CeladonCity_Condominiums_RoofRoom_EventScript_SetGotEevee::
 	release
 	end
 
+@  T-534: the note under MUSAI's box, on the same table -- the box takes the press while it is there, so the note is
+@  read once the box is lifted. A sign: it blocks nothing.
+CeladonCity_Condominiums_RoofRoom_EventScript_NoteUnderBall::
+	msgbox CeladonCity_Condominiums_RoofRoom_Text_NoteUnderBall, MSGBOX_SIGN
+	end
+
 CeladonCity_Condominiums_RoofRoom_EventScript_TMsPamphlet::
 	msgbox CeladonCity_Condominiums_RoofRoom_Text_PamphletOnTMs, MSGBOX_SIGN
 	end

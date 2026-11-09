@@ -672,8 +672,8 @@ const struct MonCoords gMonFrontPicCoords[] =
     },
     [SPECIES_VAPOREON] =
     {
-        .size = MON_COORDS_SIZE(48, 56),
-        .y_offset = 6,
+        .size = MON_COORDS_SIZE(56, 56),
+        .y_offset = 7,
     },
     [SPECIES_JOLTEON] =
     {
@@ -2271,7 +2271,7 @@ const struct MonCoords gMonFrontPicCoords[] =
     },
     [SPECIES_ESPEON_SPRING] =
     {
-        .size = MON_COORDS_SIZE(56, 48),
+        .size = MON_COORDS_SIZE(64, 48),
         .y_offset = 11,
     },
     [SPECIES_ESPEON_AUTUMN] =

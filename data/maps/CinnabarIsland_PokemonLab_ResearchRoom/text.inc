@@ -1,6 +1,9 @@
+@  T-534, DRAFT.
 CinnabarIsland_PokemonLab_ResearchRoom_Text_EeveeCanEvolveIntroThreeMons::
-    .string "MUSAI can evolve into 1 of 3 kinds\n"
-    .string "of DAEMONS.$"
+    .string "MUSAI can become one of five kinds\n"
+    .string "of DAEMON.\p"
+    .string "It starts out as all of them at once.\n"
+    .string "Each kind keeps a piece of the rest.$"
 
 CinnabarIsland_PokemonLab_ResearchRoom_Text_LegendaryBirdEmail::
     .string "There's an e-mail message!\p"
