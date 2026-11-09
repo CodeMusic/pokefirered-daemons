@@ -987,8 +987,8 @@ const struct MonCoords gMonBackPicCoords[] =
     },
     [SPECIES_UMBREON] =
     {
-        .size = MON_COORDS_SIZE(40, 56),
-        .y_offset = 5,
+        .size = MON_COORDS_SIZE(56, 56),
+        .y_offset = 6,
     },
     [SPECIES_MURKROW] =
     {
@@ -2221,8 +2221,8 @@ const struct MonCoords gMonBackPicCoords[] =
     },
     [SPECIES_FLAREON_WINTER] =
     {
-        .size = MON_COORDS_SIZE(48, 48),
-        .y_offset = 10,
+        .size = MON_COORDS_SIZE(48, 56),
+        .y_offset = 5,
     },
     [SPECIES_FLAREON_SPRING] =
     {
@@ -2231,8 +2231,8 @@ const struct MonCoords gMonBackPicCoords[] =
     },
     [SPECIES_FLAREON_AUTUMN] =
     {
-        .size = MON_COORDS_SIZE(48, 48),
-        .y_offset = 10,
+        .size = MON_COORDS_SIZE(40, 56),
+        .y_offset = 6,
     },
     [SPECIES_JOLTEON_WINTER] =
     {
@@ -2246,8 +2246,8 @@ const struct MonCoords gMonBackPicCoords[] =
     },
     [SPECIES_JOLTEON_AUTUMN] =
     {
-        .size = MON_COORDS_SIZE(48, 48),
-        .y_offset = 9,
+        .size = MON_COORDS_SIZE(56, 56),
+        .y_offset = 6,
     },
     [SPECIES_VAPOREON_WINTER] =
     {
@@ -2281,18 +2281,18 @@ const struct MonCoords gMonBackPicCoords[] =
     },
     [SPECIES_UMBREON_WINTER] =
     {
-        .size = MON_COORDS_SIZE(40, 56),
-        .y_offset = 5,
+        .size = MON_COORDS_SIZE(56, 64),
+        .y_offset = 4,
     },
     [SPECIES_UMBREON_SPRING] =
     {
-        .size = MON_COORDS_SIZE(40, 56),
-        .y_offset = 5,
+        .size = MON_COORDS_SIZE(56, 64),
+        .y_offset = 2,
     },
     [SPECIES_UMBREON_AUTUMN] =
     {
-        .size = MON_COORDS_SIZE(40, 56),
-        .y_offset = 5,
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 2,
     },
     // END genmusaiseasons
 };
