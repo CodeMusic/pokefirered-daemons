@@ -5195,4 +5195,145 @@ extern const u32 gItemIconPalette_DBitterTrap[];
 extern const u32 gItemIcon_DSourTrap[];   // T-525
 extern const u32 gItemIconPalette_DSourTrap[];
 
+extern const u32 gItemIcon_DNugget[];   // T-525
+extern const u32 gItemIconPalette_DNugget[];
+
+extern const u32 gItemIcon_DPearl[];   // T-525
+extern const u32 gItemIconPalette_DPearl[];
+
+extern const u32 gItemIcon_DBigPearl[];   // T-525
+extern const u32 gItemIconPalette_DBigPearl[];
+
+extern const u32 gItemIcon_DStardust[];   // T-525
+extern const u32 gItemIconPalette_DStardust[];
+
+extern const u32 gItemIcon_DStarPiece[];   // T-525
+extern const u32 gItemIconPalette_DStarPiece[];
+
+extern const u32 gItemIcon_DTinyMushroom[];   // T-525
+extern const u32 gItemIconPalette_DTinyMushroom[];
+
+extern const u32 gItemIcon_DBigMushroom[];   // T-525
+extern const u32 gItemIconPalette_DBigMushroom[];
+
+extern const u32 gItemIcon_DHeartScale[];   // T-525
+extern const u32 gItemIconPalette_DHeartScale[];
+
+extern const u32 gItemIcon_DRedShard[];   // T-525
+extern const u32 gItemIconPalette_DRedShard[];
+
+extern const u32 gItemIcon_DBlueShard[];   // T-525
+extern const u32 gItemIconPalette_DBlueShard[];
+
+extern const u32 gItemIcon_DYellowShard[];   // T-525
+extern const u32 gItemIconPalette_DYellowShard[];
+
+extern const u32 gItemIcon_DGreenShard[];   // T-525
+extern const u32 gItemIconPalette_DGreenShard[];
+
+extern const u32 gItemIcon_DMoomooMilk[];   // T-525
+extern const u32 gItemIconPalette_DMoomooMilk[];
+
+extern const u32 gItemIcon_DLavaCookie[];   // T-525
+extern const u32 gItemIconPalette_DLavaCookie[];
+
+extern const u32 gItemIcon_DGlitterMail[];   // T-525
+extern const u32 gItemIconPalette_DGlitterMail[];
+
+extern const u32 gItemIcon_DShadowMail[];   // T-525
+extern const u32 gItemIconPalette_DShadowMail[];
+
+extern const u32 gItemIcon_DDreamMail[];   // T-525
+extern const u32 gItemIconPalette_DDreamMail[];
+
+extern const u32 gItemIcon_DFabMail[];   // T-525
+extern const u32 gItemIconPalette_DFabMail[];
+
+extern const u32 gItemIcon_DRetroMail[];   // T-525
+extern const u32 gItemIconPalette_DRetroMail[];
+
+extern const u32 gItemIcon_DRedScarf[];   // T-525
+extern const u32 gItemIconPalette_DRedScarf[];
+
+extern const u32 gItemIcon_DBlueScarf[];   // T-525
+extern const u32 gItemIconPalette_DBlueScarf[];
+
+extern const u32 gItemIcon_DGreenScarf[];   // T-525
+extern const u32 gItemIconPalette_DGreenScarf[];
+
+extern const u32 gItemIcon_DYellowScarf[];   // T-525
+extern const u32 gItemIconPalette_DYellowScarf[];
+
+extern const u32 gItemIcon_DPeerReview[];   // T-525
+extern const u32 gItemIconPalette_DPeerReview[];
+
+extern const u32 gItemIcon_DEnvelope[];   // T-525
+extern const u32 gItemIconPalette_DEnvelope[];
+
+extern const u32 gItemIcon_DMeteorite[];   // T-525
+extern const u32 gItemIconPalette_DMeteorite[];
+
+extern const u32 gItemIcon_DPowderJar[];   // T-525
+extern const u32 gItemIconPalette_DPowderJar[];
+
+extern const u32 gItemIcon_DRazzBerry[];   // T-525
+extern const u32 gItemIconPalette_DRazzBerry[];
+
+extern const u32 gItemIcon_DBlukBerry[];   // T-525
+extern const u32 gItemIconPalette_DBlukBerry[];
+
+extern const u32 gItemIcon_DNanabBerry[];   // T-525
+extern const u32 gItemIconPalette_DNanabBerry[];
+
+extern const u32 gItemIcon_DWepearBerry[];   // T-525
+extern const u32 gItemIconPalette_DWepearBerry[];
+
+extern const u32 gItemIcon_DPinapBerry[];   // T-525
+extern const u32 gItemIconPalette_DPinapBerry[];
+
+extern const u32 gItemIcon_DPomegBerry[];   // T-525
+extern const u32 gItemIconPalette_DPomegBerry[];
+
+extern const u32 gItemIcon_DKelpsyBerry[];   // T-525
+extern const u32 gItemIconPalette_DKelpsyBerry[];
+
+extern const u32 gItemIcon_DQualotBerry[];   // T-525
+extern const u32 gItemIconPalette_DQualotBerry[];
+
+extern const u32 gItemIcon_DHondewBerry[];   // T-525
+extern const u32 gItemIconPalette_DHondewBerry[];
+
+extern const u32 gItemIcon_DGrepaBerry[];   // T-525
+extern const u32 gItemIconPalette_DGrepaBerry[];
+
+extern const u32 gItemIcon_DTamatoBerry[];   // T-525
+extern const u32 gItemIconPalette_DTamatoBerry[];
+
+extern const u32 gItemIcon_DCornnBerry[];   // T-525
+extern const u32 gItemIconPalette_DCornnBerry[];
+
+extern const u32 gItemIcon_DMagostBerry[];   // T-525
+extern const u32 gItemIconPalette_DMagostBerry[];
+
+extern const u32 gItemIcon_DRabutaBerry[];   // T-525
+extern const u32 gItemIconPalette_DRabutaBerry[];
+
+extern const u32 gItemIcon_DNomelBerry[];   // T-525
+extern const u32 gItemIconPalette_DNomelBerry[];
+
+extern const u32 gItemIcon_DSpelonBerry[];   // T-525
+extern const u32 gItemIconPalette_DSpelonBerry[];
+
+extern const u32 gItemIcon_DPamtreBerry[];   // T-525
+extern const u32 gItemIconPalette_DPamtreBerry[];
+
+extern const u32 gItemIcon_DWatmelBerry[];   // T-525
+extern const u32 gItemIconPalette_DWatmelBerry[];
+
+extern const u32 gItemIcon_DDurinBerry[];   // T-525
+extern const u32 gItemIconPalette_DDurinBerry[];
+
+extern const u32 gItemIcon_DBelueBerry[];   // T-525
+extern const u32 gItemIconPalette_DBelueBerry[];
+
 #endif //GUARD_GRAPHICS_H
