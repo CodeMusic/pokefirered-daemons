@@ -234,7 +234,7 @@ u8 CreatePokedexAreaMarkers(u16 species, u16 tilesTag, u8 palIdx, u8 y)
     // Show markers
     HideBg(1);
     SetBgAttribute(1, BG_ATTR_CHARBASEINDEX, 0);
-    FillBgTilemapBufferRect_Palette0(1, 0x00F, 0, 0, 30, 20);
+    FillBgTilemapBufferRect_Palette0(1, 0x001, 0, 0, 30, 20);   // T-530: tile 1, paper white (vanilla 0x00F, slot 14)
     CopyBgTilemapBufferToVram(1);
     ShowBg(1);
     return taskId;
