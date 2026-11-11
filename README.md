@@ -26,10 +26,10 @@ branched, and why it is said *DAY-mons*.
 written out as a university textbook -- seven floors, Language to Error.
 
 **No ROM is distributed.** Releases are BPS patches for a cartridge you own,
-published on the [DAEMONS releases page][releases] (latest: **v11.335.6**,
-2026-11-01; the newest thing in it that can be told about came in v11.335.1: a
-lioness, met more than once before the ship, now passes on a teacher's line and
-waits on deck with a ball), four to a release: CONTENT for *FireRed* 1.0 and Rev 1, CONTEXT
+published on the [DAEMONS releases page][releases] (latest: **v11.350.1**,
+2026-11-11; the newest thing in it that can be told about: the ship in the
+harbour wears a livery of her own, smoke over her funnel -- every landmark but
+two is now drawn for DAEMONS), four to a release: CONTENT for *FireRed* 1.0 and Rev 1, CONTEXT
 for *LeafGreen* 1.0 and Rev 1. The game also plays in a browser on
 [**daemons-playground**][playground] (a private network only), and in the
 companion's [one app][oneapp] on an iPhone or iPad, which patches the player's
