@@ -357,7 +357,7 @@ $(MAPPREVIEWGFXDIR)/lost_cave/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 404 -Wnum_tiles
 
 $(MAPPREVIEWGFXDIR)/monean_chamber/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 325 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 331 -Wnum_tiles
 
 $(MAPPREVIEWGFXDIR)/mt_ember/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 361 -Wnum_tiles
@@ -375,7 +375,7 @@ $(MAPPREVIEWGFXDIR)/pokemon_tower/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 350 -Wnum_tiles
 
 $(MAPPREVIEWGFXDIR)/power_plant/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 414 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 426 -Wnum_tiles
 
 $(MAPPREVIEWGFXDIR)/review_board/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 316 -Wnum_tiles
