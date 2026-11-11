@@ -1704,6 +1704,27 @@ static bool8 TrySinkTheHit(u8 holdEffect, u8 param)
     return TRUE;
 }
 
+// T-551: DURABLE (vanilla STURDY) also holds a daemon at 1 HP when one hit from full HP would take it down --
+// the later generations' rule, and the first lesson in the game made true: "a record does not go down to one hit"
+// (bible 5.3). ENDURE and FAILSAFE (Focus Band) keep precedence; a SUBSTITUTE takes the hit instead; it still
+// stops the one-hit-KO routines outright (Cmd_tryKO). The AI learns the ability the way it learns any other.
+static bool8 TryDurableHold(void)
+{
+    if (gBattleMons[gBattlerTarget].ability != ABILITY_STURDY
+     || (gBattleMons[gBattlerTarget].status2 & STATUS2_SUBSTITUTE)
+     || gBattleMons[gBattlerTarget].hp != gBattleMons[gBattlerTarget].maxHP
+     || gBattleMons[gBattlerTarget].hp > gBattleMoveDamage
+     || gProtectStructs[gBattlerTarget].endured
+     || gSpecialStatuses[gBattlerTarget].focusBanded)
+        return FALSE;
+    gBattleMoveDamage = gBattleMons[gBattlerTarget].hp - 1;
+    gMoveResultFlags |= MOVE_RESULT_FOE_ENDURED;
+    gSpecialStatuses[gBattlerTarget].durableHeld = 1;
+    gLastUsedAbility = ABILITY_STURDY;
+    RecordAbilityBattle(gBattlerTarget, ABILITY_STURDY);
+    return TRUE;
+}
+
 static void Cmd_adjustnormaldamage(void)
 {
     u8 holdEffect, param;
@@ -1746,6 +1767,7 @@ static void Cmd_adjustnormaldamage(void)
             Feelings_OnHeldItemActed(gBattlerTarget, gLastUsedItem);   // T-433: FAILSAFE held on
         }
     }
+    TryDurableHold();   // T-551
     if (sunk)
     {
         BattleScriptPush(gBattlescriptCurrInstr + 1);   // T-488: the line, the item spent, then on to the hit
@@ -1800,6 +1822,7 @@ static void Cmd_adjustnormaldamage2(void)
             Feelings_OnHeldItemActed(gBattlerTarget, gLastUsedItem);   // T-433: FAILSAFE held on
         }
     }
+    TryDurableHold();   // T-551
     if (sunk)
     {
         BattleScriptPush(gBattlescriptCurrInstr + 1);   // T-488: the line, the item spent, then on to the hit
@@ -2109,7 +2132,7 @@ static void Cmd_resultmessage(void)
             stringId = STRINGID_ONEHITKO;
             break;
         case MOVE_RESULT_FOE_ENDURED:
-            stringId = STRINGID_PKMNENDUREDHIT;
+            stringId = gSpecialStatuses[gBattlerTarget].durableHeld ? STRINGID_DURABLEHELD : STRINGID_PKMNENDUREDHIT;   // T-551
             break;
         case MOVE_RESULT_FAILED:
             stringId = STRINGID_BUTITFAILED;
@@ -2142,7 +2165,7 @@ static void Cmd_resultmessage(void)
             {
                 gMoveResultFlags &= ~(MOVE_RESULT_FOE_ENDURED | MOVE_RESULT_FOE_HUNG_ON);
                 BattleScriptPushCursor();
-                gBattlescriptCurrInstr = BattleScript_EnduredMsg;
+                gBattlescriptCurrInstr = gSpecialStatuses[gBattlerTarget].durableHeld ? BattleScript_DurableHeldMsg : BattleScript_EnduredMsg;   // T-551
                 return;
             }
             else if (gMoveResultFlags & MOVE_RESULT_FOE_HUNG_ON)
@@ -5816,6 +5839,7 @@ static void Cmd_adjustsetdamage(void)
             Feelings_OnHeldItemActed(gBattlerTarget, gLastUsedItem);   // T-433: FAILSAFE held on
         }
     }
+    TryDurableHold();   // T-551
     gBattlescriptCurrInstr++;
 }
 

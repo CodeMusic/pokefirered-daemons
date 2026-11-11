@@ -222,7 +222,9 @@ struct SpecialStatus
     u8 ppNotAffectedByPressure:1;
     u8 faintedHasReplacement:1;
     u8 focusBanded:1;
-    u8 field1[3];
+    u8 durableHeld:1;             // T-551: DURABLE held a daemon at 1 HP this turn
+    u8 field1_unused:7;
+    u8 field1[2];
     s32 dmg;
     s32 physicalDmg;
     s32 specialDmg;

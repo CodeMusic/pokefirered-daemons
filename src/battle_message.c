@@ -131,6 +131,7 @@ static const u8 sText_SinkTookTheHit[] = _("{B_DEF_NAME_WITH_PREFIX}'s\n{B_LAST_
 static const u8 sText_SeamHurts[] = _("{B_EFF_NAME_WITH_PREFIX}\nfelt it through the SEAM!");
 static const u8 sText_SeamMends[] = _("{B_EFF_NAME_WITH_PREFIX}\nwas mended through the SEAM!");
 static const u8 sText_SeamCarries[] = _("The SEAM carried it to\n{B_EFF_NAME_WITH_PREFIX}!");
+static const u8 sText_DurableHeld[] = _("{B_DEF_NAME_WITH_PREFIX} did not go down\nto one hit!");   // T-551, DRAFT: 5.3's creed, "a record does not go down to one hit"
 static const u8 sText_PkmnAligned[] = _("{B_DEF_NAME_WITH_PREFIX} came round\nto the {B_BUFF1} type!");
 static const u8 sText_PkmnChangedType[] = _("{B_ATK_NAME_WITH_PREFIX} transformed\ninto the {B_BUFF1} type!");
 static const u8 sText_PkmnFlinched[] = _("{B_ATK_NAME_WITH_PREFIX} flinched!");
@@ -935,6 +936,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_SEAMHURTS - BATTLESTRINGS_TABLE_START]                     = sText_SeamHurts,        // T-483 (5), DRAFT
     [STRINGID_SEAMMENDS - BATTLESTRINGS_TABLE_START]                     = sText_SeamMends,        // T-483 (5), DRAFT
     [STRINGID_SEAMCARRIES - BATTLESTRINGS_TABLE_START]                   = sText_SeamCarries,      // T-483 (5), DRAFT
+    [STRINGID_DURABLEHELD - BATTLESTRINGS_TABLE_START]                  = sText_DurableHeld,
 };
 
 const u16 gMissStringIds[] =

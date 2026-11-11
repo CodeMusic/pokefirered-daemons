@@ -3647,6 +3647,12 @@ BattleScript_EnduredMsg::
 	waitmessage B_WAIT_TIME_LONG
 	return
 
+@ T-551: DURABLE held from full HP -- the same beat as ENDURE, in its own words
+BattleScript_DurableHeldMsg::
+	printstring STRINGID_DURABLEHELD
+	waitmessage B_WAIT_TIME_LONG
+	return
+
 BattleScript_OneHitKOMsg::
 	printstring STRINGID_ONEHITKO
 	waitmessage B_WAIT_TIME_LONG
