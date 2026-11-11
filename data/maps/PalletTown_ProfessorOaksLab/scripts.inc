@@ -979,15 +979,16 @@ PalletTown_ProfessorOaksLab_Movement_VerticalPacing:
 PalletTown_ProfessorOaksLab_EventScript_TryStartNationalDexScene::
 	call PokedexRating_EventScript_RateInPerson
 	closemessage
-@  The two preconditions the handover has besides beating the REVIEW BOARD:
-@  sixty daemons OWNED, and having been to ONE ISLAND. Both are real and both
-@  stay in the shipping build. A debug save has six daemons and has never left
-@  KANTO, so without this fence the scene can never fire there at all -- and
-@  the scene is one of the two things 9.3's scaffolding exists to let anyone
-@  look at. Assembled out of the release ROM entirely; see data/scripts/
-@  daemons_debug.inc for the other half of this mechanism.
+@  Vanilla's two preconditions besides beating the REVIEW BOARD were sixty
+@  daemons OWNED and having been to ONE ISLAND. T-552 (the user, 2026-11-11):
+@  the sixty is dropped -- a game arguing the INDEX cannot hold what matters
+@  does not gate its ending on a count -- and in play it had been dead since
+@  T-27 anyway: the aide hands the GLOBAL INDEX over on FLAG_CRYSTAL_GONE alone
+@  (Aide1CrystalIsAway, below), so this path is reached only when she is home
+@  and the INDEX not yet held, which a debug order can arrange. The ONE ISLAND
+@  fence stays for that path; the debug build drops it (data/scripts/
+@  daemons_debug.inc has the other half of this mechanism).
 .if DAEMONS_DEBUG == 0
-	goto_if_lt VAR_0x8009, 60, PalletTown_ProfessorOaksLab_EventScript_DontStartNationalDexScene
 	goto_if_unset FLAG_WORLD_MAP_ONE_ISLAND, PalletTown_ProfessorOaksLab_EventScript_DontStartNationalDexScene
 .endif
 	@  T-457 (4.37): she hands it over almost silently, one line about something else. Vanilla's scene -- the

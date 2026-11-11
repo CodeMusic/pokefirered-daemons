@@ -391,8 +391,9 @@
 #define STRINGID_SEAMMENDS 389   // T-483 (5), DRAFT
 #define STRINGID_SEAMCARRIES 390   // T-483 (5), DRAFT
 #define STRINGID_DURABLEHELD 391   // T-551, DRAFT
+#define STRINGID_DREAMSEVENTH 392   // T-552, DRAFT
 
-#define BATTLESTRINGS_COUNT     392
+#define BATTLESTRINGS_COUNT     393
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,

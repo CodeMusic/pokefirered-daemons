@@ -3845,6 +3845,10 @@ BattleScript_RemnantDream::
 	pause B_WAIT_TIME_SHORT
 	printstring STRINGID_MONTOOSCAREDTOMOVE
 	waitmessage B_WAIT_TIME_LONG
+	@ T-552: the cave's second gate, pointed at -- one line from the dark, in S.T.A.R.R.'s register, then the white
+	pause B_WAIT_TIME_SHORT
+	printstring STRINGID_DREAMSEVENTH
+	waitmessage B_WAIT_TIME_LONG
 	end2
 
 BattleScript_SilphScopeUnveiled::

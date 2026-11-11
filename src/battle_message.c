@@ -132,6 +132,10 @@ static const u8 sText_SeamHurts[] = _("{B_EFF_NAME_WITH_PREFIX}\nfelt it through
 static const u8 sText_SeamMends[] = _("{B_EFF_NAME_WITH_PREFIX}\nwas mended through the SEAM!");
 static const u8 sText_SeamCarries[] = _("The SEAM carried it to\n{B_EFF_NAME_WITH_PREFIX}!");
 static const u8 sText_DurableHeld[] = _("{B_DEF_NAME_WITH_PREFIX} did not go down\nto one hit!");   // T-551, DRAFT: 5.3's creed, "a record does not go down to one hit"
+// T-552, DRAFT: the dream in DOLDRUM CAVE (T-254) ends on one line in S.T.A.R.R.'s terminal register -- a place and a
+// fact, nothing about why (0.7: point at a place, never name the understanding). It is the cave's second gate, said once
+// per dream, so the unread cave is a signpost rather than a dead end. 172px / 179px.
+static const u8 sText_DreamSeventh[] = _("SEVEN ISLAND. SEVEN CHAMBERS.\pTHE SEVENTH HAS NOT BEEN READ.");
 static const u8 sText_PkmnAligned[] = _("{B_DEF_NAME_WITH_PREFIX} came round\nto the {B_BUFF1} type!");
 static const u8 sText_PkmnChangedType[] = _("{B_ATK_NAME_WITH_PREFIX} transformed\ninto the {B_BUFF1} type!");
 static const u8 sText_PkmnFlinched[] = _("{B_ATK_NAME_WITH_PREFIX} flinched!");
@@ -937,6 +941,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_SEAMMENDS - BATTLESTRINGS_TABLE_START]                     = sText_SeamMends,        // T-483 (5), DRAFT
     [STRINGID_SEAMCARRIES - BATTLESTRINGS_TABLE_START]                   = sText_SeamCarries,      // T-483 (5), DRAFT
     [STRINGID_DURABLEHELD - BATTLESTRINGS_TABLE_START]                  = sText_DurableHeld,
+    [STRINGID_DREAMSEVENTH - BATTLESTRINGS_TABLE_START]                 = sText_DreamSeventh,
 };
 
 const u16 gMissStringIds[] =
