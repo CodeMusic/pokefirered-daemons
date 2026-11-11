@@ -182,10 +182,15 @@ static void CreateSmokeSprite(void)
 
     TryGetObjectEventIdByLocalIdAndMap(1, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectEventId);
     boatObject = &gObjectEvents[objectEventId];
-    x = gSprites[boatObject->spriteId].x + gSprites[boatObject->spriteId].x2 + 49;
+    // T-447 pair 7 (the user, 2026-11-11: the smoke moves over the new funnel). The ship is a 128x64 object drawn
+    // from subsprites at x -32 and +32, so its picture spans x-32..x+95 and its column c sits at x + c - 32.
+    // Vanilla's +49 and y 78 put the first puff in the mouth of its FORE funnel (column 81, mouth row 9). genships'
+    // one funnel's mouth is columns 72..84 (centre 78 -> +46) and row 1, 8 rows higher, and the livery's first puff
+    // is drawn 4 rows lower in its frame than vanilla's, so y moves up 12: 78 -> 66.
+    x = gSprites[boatObject->spriteId].x + gSprites[boatObject->spriteId].x2 + 46;
     if ((s16)x >= -32)
     {
-        spriteId = CreateSprite(&sSmokeSpriteTemplate, x, 78, 8);
+        spriteId = CreateSprite(&sSmokeSpriteTemplate, x, 66, 8);
         if (spriteId != MAX_SPRITES)
             gSprites[spriteId].oam.paletteNum = 10;
     }
