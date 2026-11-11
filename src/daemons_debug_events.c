@@ -58,6 +58,7 @@ enum
     EV_OPENING, EV_SHOES, EV_INDEX, EV_OPUS, EV_SCHOOL, EV_TICKET, EV_FIR_KEY, EV_GROVES, EV_TEA, EV_GATES, EV_REVEAL, EV_RESOLVER,
     EV_INTERRUPT, EV_GOTO_POINTS, EV_GUIDE, EV_SUBTLE, EV_HERMETIC, EV_EUDAIMON, EV_SPELLS, EV_MENDED, EV_HORIZON, EV_GLOBAL_INDEX, EV_STREAM, EV_COMPANION, EV_INSTRUMENT,
     EV_GROVES_LIT, EV_LIGHT_NIGHTS, EV_OTHER_EDITION,                       // T-528
+    EV_ORIGIN,                                                              // T-533
     EV_MARKS_ALL, EV_MARK1, EV_MARK8 = EV_MARK1 + 7,
     EV_NOTEBOOK, EV_NOTEBOOK_FULL,
     EV_DRIVERS_ALL, EV_DRIVER1, EV_DRIVER8 = EV_DRIVER1 + 7,
@@ -82,6 +83,8 @@ enum
     EV_COUNT_
 };
 STATIC_ASSERT(EV_COUNT_ <= 256, DbgRowArgIsOneByte);   // T-474: struct DbgRow's arg is a u8
+STATIC_ASSERT(FLAG_ORIGIN_PAGE_1 == FLAG_ORIGIN_MOM_SAID + 1 && FLAG_ORIGIN_PAGE_9 == FLAG_ORIGIN_PAGE_1 + 8,
+              OriginToldFlagsRunOn);                    // T-533: EV_ORIGIN clears them as one run
 
 struct DbgRow { const u8 *name; u8 kind; u8 arg; };
 
@@ -108,6 +111,7 @@ static const u8 sName_Roster[]       = _("THE ROSTER (SIX, LV50)");
 static const u8 sName_EveryDaemon[]  = _("EVERY DAEMON, INDEX + PORT");
 static const u8 sName_Stock[]        = _("THE STOCK (BAG, MONEY)");
 static const u8 sName_Opening[]      = _("THE OPENING, OVER");
+static const u8 sName_Origin[]       = _("THE ORIGIN OF A DAEMON");   // T-533: the bedroom shelf's book
 static const u8 sName_Shoes[]        = _("RUNNING SHOES");
 static const u8 sName_Index[]        = _("THE INDEX");
 static const u8 sName_Opus[]         = _("OPUS");
@@ -241,15 +245,16 @@ static const u8 sName_SpiritMiddle[] = _("LEAD: AS IT IS");
 static const u8 sName_SpiritLow[]    = _("LEAD: IN LOW SPIRITS");
 static const u8 sName_SpiritSure[]   = _("FOOD ALWAYS REFUSED/THANKED");
 
-//  THE STORY'S ORDER: the opening, the shoes and the INDEX, OPUS on THE REPO's shelf, then CAIRN's MARK and NOTEBOOK,
-//  the school, the ship, the DRIVERS, BRAZEN's tea and REVEAL, HALFTONE, the sleeper, the GUIDE, and last what only
-//  the end of the game gives.
+//  THE STORY'S ORDER: the opening, the book on the bedroom shelf, the shoes and the INDEX, OPUS on THE REPO's shelf,
+//  then CAIRN's MARK and NOTEBOOK, the school, the ship, the DRIVERS, BRAZEN's tea and REVEAL, HALFTONE, the sleeper,
+//  the GUIDE, and last what only the end of the game gives.
 static const struct DbgRow sRows_Events[] = {
     { sName_Everything,  R_ASK,    EV_EVERYTHING },
     { sName_Roster,      R_GIVE,   EV_ROSTER },
     { sName_EveryDaemon, R_GIVE,   EV_EVERY_DAEMON },
     { sName_Stock,       R_GIVE,   EV_STOCK },
     { sName_Opening,     R_GIVE,   EV_OPENING },
+    { sName_Origin,      R_TOGGLE, EV_ORIGIN },       // T-533: its sections follow the UNDERSTANDINGS (and the 8th MARK)
     { sName_Shoes,       R_TOGGLE, EV_SHOES },
     { sName_Index,       R_TOGGLE, EV_INDEX },
     { sName_Opus,        R_TOGGLE, EV_OPUS },
@@ -587,6 +592,7 @@ static bool8 IsHeld(u8 ev)
     case EV_SUBTLE:       return FlagGet(FLAG_GOT_SUBTLE_LAYER);
     case EV_HERMETIC:     return FlagGet(FLAG_GOT_HERMETIC_LAYER);
     case EV_EUDAIMON:     return FlagGet(FLAG_GOT_EUDAIMON_LAYER);
+    case EV_ORIGIN:       return FlagGet(FLAG_GOT_ORIGIN_BOOK);        // T-533
     case EV_SPELLS:       return VarGet(VAR_SPELLS_KNOWN) == 0x7FFF;   // every SPELL_* bit (1 << SPELL_COUNT) - 1
     case EV_MENDED:       return FlagGet(FLAG_UNITY_MENDED);
     case EV_GROVES_LIT:   return Aurora_DebugAllLit();
@@ -690,6 +696,13 @@ static void Apply(u8 ev, bool8 on)
         VarSet(VAR_SPELLS_CAST, on ? VarGet(VAR_SPELLS_CAST) | (1 << SPELL_HORIZON) : (1 << SPELL_HORIZON) - 1);
         return;
     case EV_EUDAIMON:     SetFlag(FLAG_GOT_EUDAIMON_LAYER, on); SetItem(ITEM_EUDAIMON_LAYER, on); return;
+    case EV_ORIGIN:       // T-533: the book and its flag; taken, it forgets what it told -- MOM's line and every page
+        SetFlag(FLAG_GOT_ORIGIN_BOOK, on);   // come back -- so given again it is told as if just taken off the shelf
+        SetItem(ITEM_ORIGIN_BOOK, on);
+        if (!on)
+            for (i = FLAG_ORIGIN_MOM_SAID; i <= FLAG_ORIGIN_PAGE_9; i++)   // MOM's, then the nine pages, in a run
+                FlagClear(i);
+        return;
     case EV_HERMETIC:     SetFlag(FLAG_GOT_HERMETIC_LAYER, on); SetItem(ITEM_HERMETIC_LAYER, on); FlagClear(FLAG_HERMETIC_UNMASKED); FlagClear(FLAG_HERMETIC_GLITCHED); return;
     case EV_INSTRUMENT:   SetFlag(FLAG_GOT_INSTRUMENT, on); SetItem(PLAY_ITEM, on); return;   // T-417 P3: and the LYREBIRD / palm
     case EV_GLOBAL_INDEX:

@@ -131,6 +131,24 @@ PalletTown_PlayersHouse_2F_EventScript_Sign::
 	msgbox PalletTown_PlayersHouse_2F_Text_PressLRForHelp, MSGBOX_SIGN
 	end
 
+@  T-533 (the user, 2026-11-10; bible 9.35): THE ORIGIN OF A DAEMON is between the DAEMON books on the bedroom shelf,
+@  read from either of its two cells -- an event on the cell outranks the shelf's own "crammed full of DAEMON books".
+@  Once it is taken, the gap. Its sections come back over the game (book_reader.c Origin_OpenSections). DRAFT.
+PalletTown_PlayersHouse_2F_EventScript_OriginBook::
+	goto_if_questlog EventScript_ReleaseEnd
+	goto_if_set FLAG_GOT_ORIGIN_BOOK, PalletTown_PlayersHouse_2F_EventScript_OriginGap
+	lockall
+	msgbox PalletTown_PlayersHouse_2F_Text_OriginOnTheShelf
+	giveitem ITEM_ORIGIN_BOOK
+	goto_if_eq VAR_RESULT, FALSE, EventScript_BagIsFull   @ no room: it stays on the shelf for later
+	setflag FLAG_GOT_ORIGIN_BOOK
+	releaseall
+	end
+
+PalletTown_PlayersHouse_2F_EventScript_OriginGap::
+	msgbox PalletTown_PlayersHouse_2F_Text_OriginGap, MSGBOX_SIGN
+	end
+
 PalletTown_PlayersHouse_2F_EventScript_PC::
 	goto_if_questlog EventScript_ReleaseEnd
 	lockall

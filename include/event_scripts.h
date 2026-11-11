@@ -1250,6 +1250,9 @@ extern const u8 EventScript_HermeticLayer[];    // T-483
 extern const u8 EventScript_EudaimonLayer[];    // T-519 item 2
 extern const u8 EventScript_UnityBook[];        // T-519 item 3
 extern const u8 EventScript_Mending[];          // T-519 item 3
+extern const u8 EventScript_OriginBook[];       // T-533: THE ORIGIN OF A DAEMON, from the bag
+extern const u8 EventScript_OriginPageFills[];  // T-533: a section came back (the step hook)
+extern const u8 EventScript_OriginPagesFill[];  // T-533: more than one came back at once
 extern const u8 Daemons_EventScript_EudaimonNudge[];   // T-519 item 2: the voice in the witching hour
 extern const u8 EventScript_SmallHandOpens[];  // T-483 (5): THE SMALL HAND lets a trainer be walked past
 extern const u8 EventScript_Spellbook[];        // T-483 (5): the START menu's SPELLBOOK

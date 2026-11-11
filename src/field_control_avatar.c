@@ -36,6 +36,7 @@
 #include "daemons_spirits.h"   // T-519: SPIRITS
 #include "daemons_eudaimon.h"   // T-519 item 2: the nudge
 #include "daemons_unity.h"      // T-519 item 3: the mending
+#include "book_reader.h"        // T-533: a page of THE ORIGIN OF A DAEMON fills
 #include "school_lift.h"
 
 // T-196: the label the popup carries while an echo is on screen.
@@ -921,6 +922,7 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
             //  use, and for the same reason: the first step after the world
             //  changed is when the player is listening.
             s8 show = TeachyTvFirstUntoldShow();
+            u8 pages;   // T-533
 
             if (show >= 0)
             {
@@ -940,6 +942,14 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
             if (Daemons_TryInsightArrives())
             {
                 ScriptContext_SetupScript(Daemons_EventScript_Insight);
+                return TRUE;
+            }
+            //  T-533. And again, just after the insight, so never on its step: THE ORIGIN OF A DAEMON held, and an
+            //  understanding (or SCORN's TRUE MARK) has brought a section of it back -- a page, or pages, no longer blank.
+            pages = Origin_TryPageFills();
+            if (pages != 0)
+            {
+                ScriptContext_SetupScript(pages == 1 ? EventScript_OriginPageFills : EventScript_OriginPagesFill);
                 return TRUE;
             }
             //  T-412. And again: a dream, the first dawn after a milestone (or the first load on a later day).

@@ -540,4 +540,5 @@ gSpecials::
 	def_special Eudaimon_LarkWait            @ T-519 item 2: sitting with her; VAR_RESULT TRUE if it was sat out (waitstate)
 	def_special Aurora_DawnChorus             @ T-528 (d): the dawn chorus is singing here (specialvar)
 	def_special Aurora_FoxSays                @ T-528 (e): TULIKKO's line, 0-3 (specialvar)
+	def_special Origin_Open                  @ T-533: THE ORIGIN OF A DAEMON, at its cover (waitstate)
 gSpecialsEnd::

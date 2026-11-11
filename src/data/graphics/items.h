@@ -527,6 +527,8 @@ const u32 gItemIcon_EudaimonLayer[] = INCBIN_U32("graphics/items/icons/eudaimon_
 const u32 gItemIconPalette_EudaimonLayer[] = INCBIN_U32("graphics/items/icon_palettes/eudaimon_layer.gbapal.lz");
 const u32 gItemIcon_UnityBook[] = INCBIN_U32("graphics/items/icons/unity_book.4bpp.lz");   // T-519 item 3: DAEMONS tools/gensubtle.py
 const u32 gItemIconPalette_UnityBook[] = INCBIN_U32("graphics/items/icon_palettes/unity_book.gbapal.lz");
+const u32 gItemIcon_OriginBook[] = INCBIN_U32("graphics/items/icons/origin_book.4bpp.lz");   // T-533: DAEMONS tools/gensubtle.py
+const u32 gItemIconPalette_OriginBook[] = INCBIN_U32("graphics/items/icon_palettes/origin_book.gbapal.lz");
 
 const u32 gItemIcon_Harp[] = INCBIN_U32("graphics/items/icons/harp.4bpp.lz");   // T-417: DAEMONS tools/genplayicons.py
 const u32 gItemIconPalette_Harp[] = INCBIN_U32("graphics/items/icon_palettes/harp.gbapal.lz");

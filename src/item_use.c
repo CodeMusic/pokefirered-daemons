@@ -793,6 +793,20 @@ void FieldUseFunc_UnityBook(u8 taskId)
     SetUpItemUseOnFieldCallback(taskId);
 }
 
+//  T-533: THE ORIGIN OF A DAEMON, from the bedroom shelf -- it opens on its cover at any hour, as far as it has come back.
+static void ItemUseOnFieldCB_OriginBook(u8 taskId)
+{
+    LockPlayerFieldControls();
+    ScriptContext_SetupScript(EventScript_OriginBook);
+    DestroyTask(taskId);
+}
+
+void FieldUseFunc_OriginBook(u8 taskId)
+{
+    sItemUseOnFieldCB = ItemUseOnFieldCB_OriginBook;
+    SetUpItemUseOnFieldCallback(taskId);
+}
+
 //  T-417: the HARP (CONTENT) or the FLUTE (CONTEXT). The bag closes and the field comes back, then the instrument comes
 //  out where the player stands (src/play.c) -- on foot or on the water, never on the bicycle.
 static void ItemUseOnFieldCB_Play(u8 taskId)

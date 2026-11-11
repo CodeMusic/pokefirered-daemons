@@ -1990,6 +1990,21 @@
 #define FLAG_HIDE_GLOBAL_RAYQUAZA            (DAEMONS_FLAGS_START + 0x14B)
 //  END gbaglobalindex
 
+//  T-533: THE ORIGIN OF A DAEMON (bible 9.35). Block + 0x1C0 .. + 0x1CF is this book's. The book itself, found on the
+//  bedroom shelf; MOM's line about it, said once; and for each of the nine sections that come back after the first
+//  (III to XI, the reader's sections 1 to 9), whether its return has been told ("A page ... is no longer blank.").
+#define FLAG_GOT_ORIGIN_BOOK                 (DAEMONS_FLAGS_START + 0x1C0)
+#define FLAG_ORIGIN_MOM_SAID                 (DAEMONS_FLAGS_START + 0x1C1)
+#define FLAG_ORIGIN_PAGE_1                   (DAEMONS_FLAGS_START + 0x1C2)   // III
+#define FLAG_ORIGIN_PAGE_2                   (DAEMONS_FLAGS_START + 0x1C3)   // IV
+#define FLAG_ORIGIN_PAGE_3                   (DAEMONS_FLAGS_START + 0x1C4)   // V
+#define FLAG_ORIGIN_PAGE_4                   (DAEMONS_FLAGS_START + 0x1C5)   // VI
+#define FLAG_ORIGIN_PAGE_5                   (DAEMONS_FLAGS_START + 0x1C6)   // VII, with SCORN's TRUE MARK
+#define FLAG_ORIGIN_PAGE_6                   (DAEMONS_FLAGS_START + 0x1C7)   // VIII
+#define FLAG_ORIGIN_PAGE_7                   (DAEMONS_FLAGS_START + 0x1C8)   // IX
+#define FLAG_ORIGIN_PAGE_8                   (DAEMONS_FLAGS_START + 0x1C9)   // X
+#define FLAG_ORIGIN_PAGE_9                   (DAEMONS_FLAGS_START + 0x1CA)   // XI
+
 #define DAEMONS_FLAGS_COUNT           0x400
 #define DAEMONS_FLAGS_END             (DAEMONS_FLAGS_START + DAEMONS_FLAGS_COUNT - 1)
 #define DAEMONS_FLAGS_SIZE            (DAEMONS_FLAGS_COUNT / 8)

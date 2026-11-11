@@ -90,3 +90,14 @@ PalletTown_PlayersHouse_2F_Text_PressLRForHelp::
     .string "And under that: L or R, if you get\n"
     .string "stuck.$"
 
+@  T-533, DRAFT: THE ORIGIN OF A DAEMON, between the DAEMON books on the bedroom shelf.
+PalletTown_PlayersHouse_2F_Text_OriginOnTheShelf::
+    .string "Between the DAEMON books, one\n"
+    .string "with nothing on its spine.\p"
+    .string "THE ORIGIN OF A DAEMON.\n"
+    .string "Most of its pages are blank.$"
+
+@  T-533, DRAFT: the shelf, once it is taken.
+PalletTown_PlayersHouse_2F_Text_OriginGap::
+    .string "There is a gap where one was.$"
+

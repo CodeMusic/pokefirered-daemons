@@ -136,6 +136,16 @@ EventScript_UnityClosed::
 	releaseall
 	end
 
+@ T-533: THE ORIGIN OF A DAEMON, from the bedroom shelf, opened at its cover -- at any hour, and only as far as it has
+@ come back (book_reader.c Origin_Open).
+EventScript_OriginBook::
+	lockall
+	fadescreen FADE_TO_BLACK
+	special Origin_Open
+	waitstate
+	releaseall
+	end
+
 @ T-519 item 2 (the brief): with the dawn half held, in the witching hour, a voice that is not your own points to
 @ the hatter's house -- once in the hour, on the first step outdoors (src/daemons_eudaimon.c). DRAFT.
 Daemons_EventScript_EudaimonNudge::

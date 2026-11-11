@@ -102,6 +102,7 @@ PalletTown_PlayersHouse_1F_EventScript_MomHeal::
 	setvar VAR_0x8006, GIVER_MOM   @ T-416: NEST DAY's gift, kept for you
 	call EventScript_HolidayGifts
 	call_if_set FLAG_LIONESS_LETTER_SENT, PalletTown_PlayersHouse_1F_EventScript_MomLetterReply   @ T-494
+	call_if_unset FLAG_ORIGIN_MOM_SAID, PalletTown_PlayersHouse_1F_EventScript_MomTheOldBook   @ T-533
 @  T-326 (the user, 2026-10-01): home after the eighth MARK, she asks how it looks now; holding the ticket, the ship;
 @  the first time home after the lab, her own years at sea -- then the old line.
 @  T-504 (the user, 2026-10-31): the ship line only while the ship is in port; once it has sailed, the first visit she
@@ -135,6 +136,15 @@ PalletTown_PlayersHouse_1F_EventScript_MomHowDoesItLook::
 	msgbox PalletTown_PlayersHouse_1F_Text_MomHowDoesItLook
 	release
 	end
+
+@  T-533 (the user, 2026-11-10), DRAFT: once, the first visit home after the lab with THE ORIGIN OF A DAEMON held --
+@  after the heal (and after the S.S. ANNE's card, which is a whole visit), before her own lines, which go on as they did.
+PalletTown_PlayersHouse_1F_EventScript_MomTheOldBook::
+	goto_if_unset FLAG_GOT_ORIGIN_BOOK, PalletTown_PlayersHouse_1F_EventScript_MomTheOldBookNone
+	setflag FLAG_ORIGIN_MOM_SAID
+	msgbox PalletTown_PlayersHouse_1F_Text_MomTheOldBook
+PalletTown_PlayersHouse_1F_EventScript_MomTheOldBookNone::
+	return
 
 @  T-313, DRAFT: MOM plans cruises for a living (the user's mother, a cruise specialist), and the ship's captain is
 @  the player's brother. Only once the player holds a ticket for it.

@@ -8,6 +8,9 @@ void Subtle_Open(void);   // T-423
 void Hermetic_Open(void);   // T-483
 void Eudaimon_Open(void);   // T-519 item 2
 void Unity_Open(void);      // T-519 item 3
+void Origin_Open(void);     // T-533: THE ORIGIN OF A DAEMON
+u8 Origin_OpenSections(void);   // T-533: how many of its sections have come back (a run from the first; never shown)
+u8 Origin_TryPageFills(void);   // T-533: the step hook's -- sections come back and not yet told, now told (0: none)
 void Guide_OpenBoardCopy(void);
 
 //  T-315: a QR code on the last page

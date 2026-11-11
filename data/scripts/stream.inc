@@ -40,6 +40,33 @@ Daemons_EventScript_Insight::
 	releaseall
 	end
 
+@  T-533: a page of THE ORIGIN OF A DAEMON is no longer blank -- the first step after an understanding (or SCORN's TRUE
+@  MARK) brings a section of it back, the book held, and never on an insight's step (book_reader.c Origin_TryPageFills).
+@  It says neither which nor how many: one line for one, the other for several at once. DRAFT.
+EventScript_OriginPageFills::
+	lockall
+	playse SE_PIN
+	msgbox Text_OriginPageFills
+	releaseall
+	end
+
+EventScript_OriginPagesFill::
+	lockall
+	playse SE_PIN
+	msgbox Text_OriginPagesFill
+	releaseall
+	end
+
+@  T-533, DRAFT.
+Text_OriginPageFills::
+	.string "A page of THE ORIGIN OF A DAEMON\n"
+	.string "is no longer blank.$"
+
+@  T-533, DRAFT.
+Text_OriginPagesFill::
+	.string "Pages of THE ORIGIN OF A DAEMON\n"
+	.string "are no longer blank.$"
+
 @  T-459 B: a read, the first step on a map, now and then, once THE SUBTLE LAYER is held. daemons_reads.c's
 @  Daemons_TryReadArrives leaves it in gStringVar4, in the book's purple; it is written in the NOTEBOOK's log as it is said.
 Daemons_EventScript_Read::

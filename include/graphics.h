@@ -3344,6 +3344,8 @@ extern const u32 gItemIcon_EudaimonLayer[];    // T-519 item 2
 extern const u32 gItemIconPalette_EudaimonLayer[];
 extern const u32 gItemIcon_UnityBook[];    // T-519 item 3
 extern const u32 gItemIconPalette_UnityBook[];
+extern const u32 gItemIcon_OriginBook[];    // T-533
+extern const u32 gItemIconPalette_OriginBook[];
 extern const u32 gItemIcon_Harp[];   // T-417
 extern const u32 gItemIconPalette_Harp[];
 extern const u32 gItemIcon_PlayFlute[];   // T-417

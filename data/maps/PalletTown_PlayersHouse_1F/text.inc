@@ -105,6 +105,13 @@ PalletTown_PlayersHouse_1F_Text_MomDavidCalled::
     .string "He never calls. I did not say so.\p"
     .string "…He sounded well.$"
 
+@  T-533, DRAFT: once, the first visit home after the lab with THE ORIGIN OF A DAEMON held.
+PalletTown_PlayersHouse_1F_Text_MomTheOldBook::
+    .string "MOM: That old book from your shelf?\n"
+    .string "It was here before you were.\p"
+    .string "I could never read past the\n"
+    .string "first pages.$"
+
 PalletTown_PlayersHouse_1F_Text_DadTheInitials::
     .string "DAD: The post still comes for\n"
     .string "DOCTOR.\p"

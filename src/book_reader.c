@@ -53,7 +53,8 @@
 //  text is printed with a transparent background, so the rules show through it as they would through ink.
 //  Everything lives on the HEAP; EWRAM has under a kilobyte free.
 
-enum { BOOK_NOTEBOOK, BOOK_TEXTBOOK, BOOK_GUIDE, BOOK_SUBTLE, BOOK_HERMETIC, BOOK_EUDAIMON, BOOK_UNITY };   // T-423: THE SUBTLE LAYER; T-483; T-519
+enum { BOOK_NOTEBOOK, BOOK_TEXTBOOK, BOOK_GUIDE, BOOK_SUBTLE, BOOK_HERMETIC, BOOK_EUDAIMON, BOOK_UNITY,   // T-423: THE SUBTLE LAYER; T-483; T-519
+       BOOK_ORIGIN };   // T-533: THE ORIGIN OF A DAEMON
 enum { VIEW_PAGE, VIEW_CONTENTS, VIEW_CHAPTER, VIEW_TOPIC, VIEW_COVER, VIEW_GUIDE_CONTENTS, VIEW_GUIDE_ENTRY,
        VIEW_SUBTLE_CONTENTS, VIEW_SUBTLE_ENTRY, VIEW_THIRTEEN,     // T-483 (7): Halloween's card
        VIEW_CARDS, VIEW_CARDS_SELECT, VIEW_CARDS_SPREAD, VIEW_CARDS_BOARD, VIEW_CARDS_READ };   // T-509
@@ -94,6 +95,23 @@ enum
     C_EDGE_DARK, C_HIGHLIGHT, C_RING, C_FRAME, C_SLATE, C_CHALK, C_CHALK_FAINT, C_COVER,
 };
 
+//  T-483: THE LAYER BOOKS. THE SUBTLE LAYER and THE HERMETIC LAYER are one kind of book -- a cover, a contents spread,
+//  then each entry's picture on the left and its text on the right -- written by one tool, so the reader keeps one
+//  set of views for both and asks which book's tables to read. (T-533: declared here, ahead of the reader, which
+//  holds one -- THE ORIGIN OF A DAEMON as far as it has come back. The three types are the generated headers'.)
+struct SubtleSection;
+struct SubtleEntry;
+struct SubtlePicture;
+struct LayerBook
+{
+    const struct SubtleSection *sections;
+    const struct SubtleEntry *entries;
+    const struct SubtlePicture *pictures;
+    const u32 *cover;
+    u8 sectionCount;
+    u8 entryCount;
+};
+
 struct BookReader
 {
     u8 initState;
@@ -125,6 +143,7 @@ struct BookReader
     struct Cards *cards;               // T-509: the CARDS section, while it is open
     struct UnityLens *lens;            // T-529: THE UNITY BOOK's lens, while it is open
     u8 lensEntry, lensS, lensJ;        // T-529: the place kept across a turn of the lens (lensEntry 0xFF: look again)
+    struct LayerBook origin;           // T-533: THE ORIGIN OF A DAEMON, cut after the last section to have come back
     u8 title[40];
     u8 text[BR_TEXT_SIZE];
     u8 lines[BR_LINES_SIZE];
@@ -277,21 +296,10 @@ struct GuideEntry { const u8 *shortTitle; const u8 *title; const u8 *text; };
 #include "data/hermetic_layer.h" // T-483: the same tool, the same types
 #include "data/eudaimon_layer.h" // T-519 item 2: the torn book's dawn half, the same again
 #include "data/unity_layer.h"    // T-519 item 3: and the two mended
+#include "data/origin_book.h"    // T-533: THE ORIGIN OF A DAEMON, the same tool and types
 #include "data/arcana_cards.h"   // T-509: DAEMONS tools/port_arcana.py
 
-//  T-483: THE LAYER BOOKS. THE SUBTLE LAYER and THE HERMETIC LAYER are one kind of book -- a cover, a contents spread,
-//  then each entry's picture on the left and its text on the right -- written by one tool, so the reader keeps one
-//  set of views for both and asks which book's tables to read.
-struct LayerBook
-{
-    const struct SubtleSection *sections;
-    const struct SubtleEntry *entries;
-    const struct SubtlePicture *pictures;
-    const u32 *cover;
-    u8 sectionCount;
-    u8 entryCount;
-};
-
+//  T-483: the layer books' tables (struct LayerBook is declared above the reader).
 static const struct LayerBook sLayerBooks[4] =
 {
     { sSubtleSections, sSubtleEntries, sSubtlePictures, sSubtleCover, SUBTLE_SECTIONS, SUBTLE_ENTRIES },
@@ -299,6 +307,12 @@ static const struct LayerBook sLayerBooks[4] =
     { sEudaimonSections, sEudaimonEntries, sEudaimonPictures, sEudaimonCover, EUDAIMON_SECTIONS, EUDAIMON_ENTRIES },
     { sUnitySections, sUnityEntries, sUnityPictures, sUnityCover, UNITY_SECTIONS, UNITY_ENTRIES },
 };
+
+//  T-533: THE ORIGIN OF A DAEMON whole -- never read as it is: Origin_Open copies it into the reader cut after the
+//  last section that has come back, and Layer() reads only that copy. Its sections are in order and their entries
+//  contiguous (gensubtle writes them so), which is what lets a cut be two counts.
+static const struct LayerBook sOriginWhole =
+    { sOriginSections, sOriginEntries, sOriginPictures, sOriginCover, ORIGIN_SECTIONS, ORIGIN_ENTRIES };
 
 //  T-529 (the user, 2026-11-07, by multiple choice; vision 4.40, DAEMONS docs/TODO.md T-529): THE UNITY BOOK'S LENS.
 //  Once the book is mended the reader holds only THE UNITY BOOK, and every page in it turns IN PLACE between three
@@ -1213,22 +1227,67 @@ static void DrawGuideEntry(void)
 static bool8 IsLayerBook(void)
 {
     return sBook->book == BOOK_SUBTLE || sBook->book == BOOK_HERMETIC || sBook->book == BOOK_EUDAIMON
-        || sBook->book == BOOK_UNITY;
+        || sBook->book == BOOK_UNITY || sBook->book == BOOK_ORIGIN;
 }
 
 static const struct LayerBook *Layer(void)
 {
     if (LensOn())
         return &sBook->lens->book;      // T-529: the reading the lens is turned to
+    if (sBook->book == BOOK_ORIGIN)
+        return &sBook->origin;          // T-533: only the sections that have come back (Origin_Open)
     return &sLayerBooks[sBook->book == BOOK_UNITY ? 3 : sBook->book == BOOK_EUDAIMON ? 2 : sBook->book == BOOK_HERMETIC];
 }
 
 //  T-519 item 2: THE EUDAIMON LAYER has no CARDS section of its own yet (the dawn readings of the two decks are the
 //  companion lane's), so its cover shows no deck tile. T-519 item 3 (vision 4.40): THE UNITY BOOK has the night half's
-//  deck, which leaves the bag at the mending, and deals it Both as One only.
+//  deck, which leaves the bag at the mending, and deals it Both as One only. T-533: THE ORIGIN OF A DAEMON has none.
 static bool8 HasCards(void)
 {
     return sBook->book == BOOK_SUBTLE || sBook->book == BOOK_HERMETIC || sBook->book == BOOK_UNITY;
+}
+
+//  T-533 (the user, 2026-11-10; bible 9.35): THE ORIGIN OF A DAEMON COMES BACK A SECTION AT A TIME. Its first section
+//  (THE DISC, I and II) is there from the day it is taken off the bedroom shelf; each after it waits for a number of
+//  understandings held, some for SCORN's TRUE MARK as well (the generated header's sOriginOpensRoots and
+//  sOriginOpensMark), and for the one before it -- so what is open is always a run from the start. SCORN's own
+//  understanding follows that MARK on the next map load, so winning it can bring one section back at once and another
+//  after that load. Until a section comes back the book does not have it: no label, nothing faint, no count (the
+//  reader's cut, Origin_Open).
+u8 Origin_OpenSections(void)
+{
+    u8 held = ARRAY_COUNT(sGuideMarginNotes) - DaemonsUnderstandingsMissing();
+    bool8 mark = FlagGet(FLAG_BADGE08_GET);
+    u8 open;
+
+    for (open = 0; open < ORIGIN_SECTIONS; open++)
+        if (held < sOriginOpensRoots[open] || (sOriginOpensMark[open] && !mark))
+            break;
+    return open != 0 ? open : 1;        // the first is never held back
+}
+
+//  T-533: A PAGE FILLS. The first step after a section has come back (the book held), it is told -- once, every
+//  section that came back at once in one line, and never which or how many. field_control_avatar.c's step hook asks
+//  just after the insight's, so never on the step an insight arrives. Returns how many were told now (0, 1 or more);
+//  the hook chooses the line by it. FLAG_ORIGIN_PAGE_1 is the second section's, and the nine run on in order.
+STATIC_ASSERT(ORIGIN_SECTIONS == 10 && FLAG_ORIGIN_PAGE_9 == FLAG_ORIGIN_PAGE_1 + 8, OriginPageFlagsRunInOrder);
+
+u8 Origin_TryPageFills(void)
+{
+    u8 open, i, told = 0;
+
+    if (!FlagGet(FLAG_GOT_ORIGIN_BOOK))
+        return 0;
+    open = Origin_OpenSections();
+    for (i = 1; i < open; i++)
+    {
+        if (!FlagGet(FLAG_ORIGIN_PAGE_1 + i - 1))
+        {
+            FlagSet(FLAG_ORIGIN_PAGE_1 + i - 1);
+            told++;
+        }
+    }
+    return told;
 }
 
 static u8 SubtleSectionOf(u8 entry);
@@ -2864,6 +2923,7 @@ static void Input_Cover(void)
     }
     else if (JOY_NEW(A_BUTTON))
     {
+        // THE SUBTLE LAYER and THE ORIGIN OF A DAEMON (T-533) open on their contents, as the Guide does.
         sBook->view = IsLayerBook() ? VIEW_SUBTLE_CONTENTS : VIEW_GUIDE_CONTENTS;
         Turn();
     }
@@ -3261,6 +3321,7 @@ static void Task_BookInit(u8 taskId)
                    : (sBook->book == BOOK_HERMETIC) ? sHermeticPal
                    : (sBook->book == BOOK_EUDAIMON) ? sEudaimonPal
                    : (sBook->book == BOOK_UNITY)    ? sUnityPal
+                   : (sBook->book == BOOK_ORIGIN)   ? sOriginPal      // T-533
                    : sTextbookPal;
 
     switch (sBook->initState)
@@ -3421,6 +3482,23 @@ void Unity_Open(void)
     sBook->lens = AllocZeroed(sizeof(*sBook->lens));   // T-529: no room, no lens -- the book reads whole
     if (sBook->lens != NULL && sUnityLens != LENS_WHOLE)
         LensBuild();                    // the session's setting, kept from the last time it was open
+}
+
+//  T-533: THE ORIGIN OF A DAEMON, open at its cover -- at any hour, and only as far as it has come back. The reader
+//  is given the book cut after its last open section (Origin_OpenSections), and every view reads that copy through
+//  Layer(): the contents list only those sections, an entry's turns stop at their last entry, and the way back to the
+//  contents finds its section among them. Nothing can change while it is open, so the cut is made once, here.
+void Origin_Open(void)
+{
+    u8 open;
+
+    if (!OpenBook(BOOK_ORIGIN, VIEW_COVER))
+        return;
+    sBook->picEntry = 0xFF;
+    open = Origin_OpenSections();
+    sBook->origin = sOriginWhole;
+    sBook->origin.sectionCount = open;
+    sBook->origin.entryCount = sOriginWhole.sections[open - 1].first + sOriginWhole.sections[open - 1].count;
 }
 
 //  T-315: a NOTEBOOK page that ends on a QR code -- one more page, after the text. Called just after it is opened.
