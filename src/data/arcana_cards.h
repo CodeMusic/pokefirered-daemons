@@ -87,7 +87,7 @@ static const u8 sArcanaPh_8_instinct[] = _("Gentle holds longer than hard.");
 static const u8 sArcanaKw_8_above[] = _("SULPHUR");
 static const u8 sArcanaPh_8_above[] = _("The fire is yours. So is the leash.");
 static const u8 sArcanaKw_8_below[] = _("TEMPERING");
-static const u8 sArcanaPh_8_below[] = _("Every loss folds the blade again.");
+static const u8 sArcanaPh_8_below[] = _("A loss, seen from after, is a fold.");
 static const u8 sArcanaRoman_9[] = _("IX");
 static const u8 sArcanaKw_9_reason[] = _("DEBUG");
 static const u8 sArcanaPh_9_reason[] = _("Follow it back, one line at a time.");
@@ -103,7 +103,7 @@ static const u8 sArcanaPh_10_reason[] = _("Count the odds, then let them fall.")
 static const u8 sArcanaKw_10_instinct[] = _("CYCLE");
 static const u8 sArcanaPh_10_instinct[] = _("What turns away turns back.");
 static const u8 sArcanaKw_10_above[] = _("THE MOMENT");
-static const u8 sArcanaPh_10_above[] = _("Reach as it passes. It won't return.");
+static const u8 sArcanaPh_10_above[] = _("Reach as it passes. Rare is its gift.");
 static const u8 sArcanaKw_10_below[] = _("OUROBOROS");
 static const u8 sArcanaPh_10_below[] = _("The end eats the start, and lives.");
 static const u8 sArcanaRoman_11[] = _("XI");
@@ -123,14 +123,14 @@ static const u8 sArcanaPh_12_instinct[] = _("Hang still. The view turns over.");
 static const u8 sArcanaKw_12_above[] = _("INVERSION");
 static const u8 sArcanaPh_12_above[] = _("Hang it upside down. Now read it.");
 static const u8 sArcanaKw_12_below[] = _("STILL POINT");
-static const u8 sArcanaPh_12_below[] = _("Not stopped. Not yet pushed.");
+static const u8 sArcanaPh_12_below[] = _("Not stopped. Resting, and ready.");
 static const u8 sArcanaRoman_13[] = _("XIII");
 static const u8 sArcanaKw_13_reason[] = _("DEPRECATE");
 static const u8 sArcanaPh_13_reason[] = _("Retire it, so the rest can run.");
 static const u8 sArcanaKw_13_instinct[] = _("LETTING GO");
 static const u8 sArcanaPh_13_instinct[] = _("An ending makes room.");
 static const u8 sArcanaKw_13_above[] = _("LETHE");
-static const u8 sArcanaPh_13_above[] = _("Set it down. Don't go back for it.");
+static const u8 sArcanaPh_13_above[] = _("Set it down, and walk on lighter.");
 static const u8 sArcanaKw_13_below[] = _("NIGREDO");
 static const u8 sArcanaPh_13_below[] = _("It blackens first. Then it can turn.");
 static const u8 sArcanaRoman_14[] = _("XIV");
@@ -223,7 +223,7 @@ static const struct ArcanaCard sArcana[ARCANA_CARDS] =
             { sArcanaKw_1_reason, sArcanaPh_1_reason, SPECIES_MAGMAR },   // FORGE
             { sArcanaKw_1_instinct, sArcanaPh_1_instinct, SPECIES_ESPEON },   // LENSMUSAI
             { sArcanaKw_1_above, sArcanaPh_1_above, SPECIES_UNOWN },   // SYMBOL
-            { sArcanaKw_1_below, sArcanaPh_1_below, SPECIES_MACHAMP },   // LEMMA MIND
+            { sArcanaKw_1_below, sArcanaPh_1_below, SPECIES_HARIYAMA },   // DEDUCTION
         },
     },
     {   // II
@@ -232,7 +232,7 @@ static const struct ArcanaCard sArcana[ARCANA_CARDS] =
             { sArcanaKw_2_reason, sArcanaPh_2_reason, SPECIES_BLASTOISE },   // MANIFOLD
             { sArcanaKw_2_instinct, sArcanaPh_2_instinct, SPECIES_BANETTE },   // SUBTEXT
             { sArcanaKw_2_above, sArcanaPh_2_above, SPECIES_SHUPPET },   // UNSPOKEN
-            { sArcanaKw_2_below, sArcanaPh_2_below, SPECIES_OMANYTE },   // MAGTAPE
+            { sArcanaKw_2_below, sArcanaPh_2_below, SPECIES_PHANPY },   // RECALL
         },
     },
     {   // III
@@ -267,7 +267,7 @@ static const struct ArcanaCard sArcana[ARCANA_CARDS] =
         {
             { sArcanaKw_6_reason, sArcanaPh_6_reason, SPECIES_DODUO },   // DUALCORE
             { sArcanaKw_6_instinct, sArcanaPh_6_instinct, SPECIES_CHIMECHO },   // OVERTONE
-            { sArcanaKw_6_above, sArcanaPh_6_above, SPECIES_LATIAS },   // POLYDEUCES
+            { sArcanaKw_6_above, sArcanaPh_6_above, SPECIES_OLD_UNOWN_G },   // MULTIMAL
             { sArcanaKw_6_below, sArcanaPh_6_below, SPECIES_METANG },   // PAIRWISE
         },
     },
@@ -286,7 +286,7 @@ static const struct ArcanaCard sArcana[ARCANA_CARDS] =
             { sArcanaKw_8_reason, sArcanaPh_8_reason, SPECIES_SEEL },   // HEATSINK
             { sArcanaKw_8_instinct, sArcanaPh_8_instinct, SPECIES_MANTINE },   // BUOYANCY
             { sArcanaKw_8_above, sArcanaPh_8_above, SPECIES_OLD_UNOWN_J },   // BASTET
-            { sArcanaKw_8_below, sArcanaPh_8_below, SPECIES_SHROOMISH },   // SPARRING
+            { sArcanaKw_8_below, sArcanaPh_8_below, SPECIES_EXPLOUD },   // WRAPAROUND
         },
     },
     {   // IX
@@ -322,7 +322,7 @@ static const struct ArcanaCard sArcana[ARCANA_CARDS] =
             { sArcanaKw_12_reason, sArcanaPh_12_reason, SPECIES_JIGGLYPUFF },   // SUSPEND
             { sArcanaKw_12_instinct, sArcanaPh_12_instinct, SPECIES_SEALEO },   // STOPGRAD
             { sArcanaKw_12_above, sArcanaPh_12_above, SPECIES_OLD_UNOWN_C },   // REFLECTION
-            { sArcanaKw_12_below, sArcanaPh_12_below, SPECIES_FEEBAS },   // SADDLE
+            { sArcanaKw_12_below, sArcanaPh_12_below, SPECIES_IGGLYBUFF },   // STANDBY
         },
     },
     {   // XIII
@@ -403,7 +403,7 @@ static const struct ArcanaCard sArcana[ARCANA_CARDS] =
             { sArcanaKw_21_reason, sArcanaPh_21_reason, SPECIES_DRAGONAIR },   // EMERGENCE
             { sArcanaKw_21_instinct, sArcanaPh_21_instinct, SPECIES_SHELGON },   // GESTALT
             { sArcanaKw_21_above, sArcanaPh_21_above, SPECIES_RAYQUAZA },   // OURANOS
-            { sArcanaKw_21_below, sArcanaPh_21_below, SPECIES_MACHOKE },   // THEOREM
+            { sArcanaKw_21_below, sArcanaPh_21_below, SPECIES_MAKUHITA },   // POSTULATE
         },
     },
 };
