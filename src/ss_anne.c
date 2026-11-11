@@ -150,8 +150,12 @@ static void CreateWakeBehindBoat(void)
 
     TryGetObjectEventIdByLocalIdAndMap(1, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectEventId);
     boatObject = &gObjectEvents[objectEventId];
-    x = gSprites[boatObject->spriteId].x + gSprites[boatObject->spriteId].x2 + 80;
-    spriteId = CreateSprite(&sWakeSpriteTemplate, x, 109, 0xFF);
+    // T-447 pair 7 (the user, 2026-11-11: the wake to the waterline). Vanilla's +80, y 109 hid the wake's start behind
+    // a stern that ran to column 127 from row 24 to 52. genships' hull is lower and narrower aft (the flagstaff's notch
+    // at rows 28-36, the stern 118-126 below), so at +80, y 109 it showed through the notch over the deck. At +76,
+    // y 113 the first frames sit wholly behind the hull and the wake drifts out at her waterline, rows 36-60.
+    x = gSprites[boatObject->spriteId].x + gSprites[boatObject->spriteId].x2 + 76;
+    spriteId = CreateSprite(&sWakeSpriteTemplate, x, 113, 0xFF);
     gSprites[spriteId].oam.priority = 2;
     gSprites[spriteId].oam.paletteNum = 10;
 }
@@ -164,7 +168,7 @@ static void WakeSpriteCallback(struct Sprite *sprite)
 
     TryGetObjectEventIdByLocalIdAndMap(1, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectEventId);
     boatObject = &gObjectEvents[objectEventId];
-    x = gSprites[boatObject->spriteId].x + gSprites[boatObject->spriteId].x2 + 80;
+    x = gSprites[boatObject->spriteId].x + gSprites[boatObject->spriteId].x2 + 76;
     sprite->x = x;
     if (sprite->data[0] / 6 < 22)
         sprite->data[0]++;
