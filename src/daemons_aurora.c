@@ -10,6 +10,11 @@
 #include "constants/map_types.h"
 #include "constants/flags.h"
 #include "pokemon.h"
+#include "random.h"
+#include "sprite.h"
+#include "trig.h"
+#include "event_object_movement.h"
+#include "constants/event_objects.h"
 #include "daemons_time.h"
 #include "daemons_pulse.h"
 #include "daemons_battle_bg.h"
@@ -51,6 +56,12 @@
 //   (f) THE CONJUGATE LIGHT (Aurora_ConjugateLight): the book mended and a daemon from the other edition in the party.
 //       (a), (b) and (c) then show both lines: green below, red crowning it. PLAY's duet waits on it (play.c).
 // Part 2's cost: IWRAM 13 more (each entry's line, and the red over the rows).
+//
+// AND THE SPARKS (T-528 (e)'s last piece, 2026-11-11; Aurora_SparksTick): on a night of light, the book mended, the
+// snow TULIKKO flicks at FOUR ISLAND keeps rising -- a few sparks at a time from its tail, fading as they rise, in the
+// edition's line; under the conjugate light each one rises green and turns red as it climbs, red over green. A pool of
+// four 8x8 OAM sprites at most, six tiles and one palette (taken only while two are free), all given back off the map.
+// Cost: RAM 0 (the sprites' own data words), ~0.6 KB ROM.
 
 #define RED_LINE   RGB(30, 7, 9)           // oxygen's red line, 630.0 nm: CONTENT's
 #define GREEN_LINE RGB(10, 30, 15)          // oxygen's green line, 557.7 nm: CONTEXT's
@@ -322,6 +333,211 @@ void Aurora_Tick(void)
         for (i = 0; i < sCount; i++)
             sWeight[i] = sWeight[i] * fade / 16;
     }
+}
+
+//  ---------------------------------------------------------------- (e) THE SPARKS FROM THE FOX'S SNOW
+
+// Six tiles (DAEMONS tools/gentulikko.py): a spark young, older and nearly gone, in the red line and then the green.
+// Their colours are the sky's lines exactly, each with its core (halfway to white) and its embers (five eighths).
+#define SPARK_CORE(c) RGB((GET_R(c) + 31) / 2, (GET_G(c) + 31) / 2, (GET_B(c) + 31) / 2)
+#define SPARK_DIM(c)  RGB(GET_R(c) * 5 / 8, GET_G(c) * 5 / 8, GET_B(c) * 5 / 8)
+#define SPARK_TAG          0x5291
+#define SPARKS_MAX         4               // only a few at a time
+#define SPARK_EVERY        18              // a new spark at most every 18 frames
+#define SPARK_PALETTES_FREE 2              // take a palette only when this many are free (the motes' rule)
+#define SPARK_FRAMES       3
+#define SPARK_RED          0               // the tile of each line's first frame
+#define SPARK_GREEN        SPARK_FRAMES
+#ifdef FIRERED
+#define SPARK_OWN SPARK_RED
+#else
+#define SPARK_OWN SPARK_GREEN
+#endif
+
+static const u32 sSparkTiles[] = INCBIN_U32("graphics/field_effects/pics/tulikko_sparks.4bpp");
+static const u16 sSparkPalette[16] = {
+    RGB(0, 0, 0),
+    SPARK_CORE(RED_LINE), RED_LINE, SPARK_DIM(RED_LINE),
+    SPARK_CORE(GREEN_LINE), GREEN_LINE, SPARK_DIM(GREEN_LINE),
+};
+static const struct SpriteSheet sSparkSheet = { sSparkTiles, sizeof(sSparkTiles), SPARK_TAG };
+static const struct SpritePalette sSparkSpritePalette = { sSparkPalette, SPARK_TAG };
+
+static const struct OamData sSparkOam = {
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .shape = SPRITE_SHAPE(8x8),
+    .size = SPRITE_SIZE(8x8),
+    .priority = 1,                          // under BG0: a text box or a menu covers them
+};
+
+static void SpriteCB_Spark(struct Sprite *sprite);
+
+static const struct SpriteTemplate sSparkTemplate = {
+    .tileTag = SPARK_TAG,
+    .paletteTag = SPARK_TAG,
+    .oam = &sSparkOam,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_Spark,
+};
+
+#define sAge   data[0]
+#define sLife  data[1]
+#define sDX16  data[2]     // from the fox's centre, in sixteenths of a pixel
+#define sDY16  data[3]
+#define sPhase data[4]
+#define sDrift data[5]     // sixteenths a frame, away from the fox
+#define sFox   data[6]     // its object event, and SPARK_BOTH under the conjugate light: green rising, red above
+#define sTile  data[7]
+#define SPARK_BOTH 0x100
+
+// The fox on screen: its object event, or -1.
+static s8 FoxHere(void)
+{
+    u32 i;
+
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
+    {
+        if (gObjectEvents[i].active && OBJ_GFX_ID(&gObjectEvents[i]) == OBJ_EVENT_GFX_TULIKKO
+         && gObjectEvents[i].spriteId < MAX_SPRITES)
+            return i;
+    }
+    return -1;
+}
+
+static void SpriteCB_Spark(struct Sprite *sprite)
+{
+    struct ObjectEvent *obj = &gObjectEvents[sprite->sFox & 0xFF];
+    struct Sprite *fox;
+    s16 age = ++sprite->sAge, life = sprite->sLife;
+    u32 frame, line;
+
+    if (age >= life || !obj->active || OBJ_GFX_ID(obj) != OBJ_EVENT_GFX_TULIKKO || obj->spriteId >= MAX_SPRITES)
+    {
+        DestroySprite(sprite);
+        return;
+    }
+    fox = &gSprites[obj->spriteId];
+    sprite->sDY16 -= 7;                     // under half a pixel a frame, slowing nothing: it goes on rising
+    sprite->sDX16 += sprite->sDrift;
+    sprite->sPhase = (sprite->sPhase + 5) & 0xFF;
+    // Laid where the fox is drawn, so the camera carries them as it carries the fox.
+    sprite->coordOffsetEnabled = fox->coordOffsetEnabled;
+    sprite->x = fox->x + (sprite->sDX16 >> 4) + Sin(sprite->sPhase, 3);
+    sprite->y = fox->y + (sprite->sDY16 >> 4);
+    // Fading as it rises: the cross, the point, the speck, and the speck's last frames flickering out.
+    frame = age * 20 < life * 9 ? 0 : age * 20 < life * 15 ? 1 : 2;
+    line = !(sprite->sFox & SPARK_BOTH) ? SPARK_OWN : age * 20 < life * 8 ? SPARK_GREEN : SPARK_RED;
+    sprite->oam.tileNum = sprite->sTile + line + frame;
+    sprite->invisible = fox->invisible || (life - age < 16 && (age & 2));
+}
+
+static u8 CountSparks(bool8 destroy)
+{
+    u8 i, n = 0;
+
+    for (i = 0; i < MAX_SPRITES; i++)
+    {
+        if (gSprites[i].inUse && gSprites[i].callback == SpriteCB_Spark)
+        {
+            if (destroy)
+                DestroySprite(&gSprites[i]);
+            else
+                n++;
+        }
+    }
+    return n;
+}
+
+static void FreeSparks(void)
+{
+    if (GetSpriteTileStartByTag(SPARK_TAG) != 0xFFFF)
+        FreeSpriteTilesByTag(SPARK_TAG);
+    if (IndexOfSpritePaletteTag(SPARK_TAG) != 0xFF)
+        FreeSpritePaletteByTag(SPARK_TAG);
+}
+
+static u8 FreeSpritePaletteCount(void)
+{
+    u8 i, n = 0;
+
+    for (i = gReservedSpritePaletteCount; i < 16; i++)
+        if (GetSpritePaletteTagByPaletteNum(i) == TAG_NONE)
+            n++;
+    return n;
+}
+
+// Once a frame from main.c. On FOUR ISLAND only; anywhere else the pool is emptied and its tiles and palette given
+// back (a warp's reset takes them anyway; a walk off the map's edge does not).
+void Aurora_SparksTick(void)
+{
+    struct ObjectEvent *obj;
+    struct Sprite *sprite;
+    u8 have, slot, spriteId;
+    s8 fox;
+    s16 side;
+
+    if (!DaemonsFieldOnScreen())
+        return;
+    if (MapHere() != MAP_FOUR_ISLAND)
+    {
+        if (CountSparks(TRUE) == 0)
+            FreeSparks();
+        return;
+    }
+    have = CountSparks(FALSE);
+    // The night's relight and the weather retint the sprites' slots: the sparks keep the sky's colours.
+    if (have != 0 && !gPaletteFade.active && (slot = IndexOfSpritePaletteTag(SPARK_TAG)) != 0xFF)
+    {
+        CpuCopy16(sSparkPalette, &gPlttBufferUnfaded[OBJ_PLTT_ID(slot)], 7 * sizeof(u16));
+        CpuCopy16(sSparkPalette, &gPlttBufferFaded[OBJ_PLTT_ID(slot)], 7 * sizeof(u16));
+    }
+    if (!FlagGet(FLAG_UNITY_MENDED) || DaemonsIsHalftone() || DaemonsWatch() != WATCH_NIGHT || !Aurora_IsLightNight()
+     || (fox = FoxHere()) < 0)
+    {
+        if (have == 0)
+            FreeSparks();               // the last one gone: its tiles and palette given back
+        return;
+    }
+    obj = &gObjectEvents[fox];
+    if (have >= SPARKS_MAX || gPaletteFade.active || (gMain.vblankCounter2 % SPARK_EVERY) != 0
+     || gSprites[obj->spriteId].invisible)
+        return;
+    if (IndexOfSpritePaletteTag(SPARK_TAG) == 0xFF)
+    {
+        if (FreeSpritePaletteCount() < SPARK_PALETTES_FREE || LoadSpritePalette(&sSparkSpritePalette) == 0xFF)
+            return;
+    }
+    if (GetSpriteTileStartByTag(SPARK_TAG) == 0xFFFF)
+    {
+        LoadSpriteSheet(&sSparkSheet);
+        if (GetSpriteTileStartByTag(SPARK_TAG) == 0xFFFF)
+            return;
+    }
+    spriteId = CreateSprite(&sSparkTemplate, 0, 0, gSprites[obj->spriteId].subpriority);
+    if (spriteId == MAX_SPRITES)
+        return;
+    sprite = &gSprites[spriteId];
+    // From the tail: it sweeps behind the fox (to the east when it faces west, its work), or to one side or the other
+    // when it has turned to talk.
+    if (obj->facingDirection == DIR_WEST)
+        side = 1;
+    else if (obj->facingDirection == DIR_EAST)
+        side = -1;
+    else
+        side = (Random() & 1) ? 1 : -1;
+    sprite->sAge = 0;
+    sprite->sLife = 64 + Random() % 40;                         // a second to nearly two
+    sprite->sDX16 = (side * (11 + Random() % 5)) << 4;
+    sprite->sDY16 = (5 + Random() % 4) << 4;
+    sprite->sPhase = Random() & 0xFF;
+    sprite->sDrift = side * (Random() % 3);
+    sprite->sFox = fox | (Aurora_ConjugateLight() ? SPARK_BOTH : 0);
+    sprite->sTile = GetSpriteTileStartByTag(SPARK_TAG);
+    SpriteCB_Spark(sprite);
+    sprite->sAge = 0;
 }
 
 static void Lay(u16 *pltt, u32 e, s32 w, u16 line)

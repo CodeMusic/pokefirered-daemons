@@ -223,6 +223,7 @@ void AgbMain()
         Pulse_Tick();                // T-483: whether the world is breathing this frame, and in what colour
         Hours_Tick();                // T-519: the creator's hour's bloom, motes and tone
         Aurora_Tick();               // T-528: the aurora -- over the tower, a lit grove's sky, the night outdoors
+        Aurora_SparksTick();         // T-528 (e): the sparks from TULIKKO's snow on a night of light
         WaitForVBlank();
     }
 }

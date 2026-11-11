@@ -28,6 +28,9 @@ bool8 Aurora_PartyFromOtherEdition(void);
 bool8 Aurora_DawnChorus(void);
 // T-528 (e) TULIKKO (specialvar): 0 before the mending, 1 after, 2 a night of light, 3 the conjugate light at night.
 u16 Aurora_FoxSays(void);
+// T-528 (e) THE SPARKS: once a frame from main.c, after Aurora_Tick -- on a night of light with the book mended, the
+// snow TULIKKO flicks at FOUR ISLAND keeps rising as a few sparks (both lines under the conjugate light).
+void Aurora_SparksTick(void);
 
 #if DAEMONS_DEBUG
 extern u8 gAuroraDebugNights;      // DEBUG -> GAME EVENTS: 0 the date's rule, 1 every night a light one, 2 none
