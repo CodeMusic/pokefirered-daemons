@@ -56,7 +56,13 @@ static const s8 sSong_Reflect_Steps[] = {8, 9, 9, 8, 6, 5, 4, 5, 6, 6};
 static const u8 sSong_Reflect_Frames[] = {14, 14, 43, 21, 7, 7, 7, 14, 14, 29};
 static const u8 sSong_Reflect_Page[] = _("Heard on QUICKSILVER IS.");
 
-// DUET -- the conjugate light: a slot, its tune the user's to choose by ear; shown only while Aurora_ConjugateLight() (T-528 f)
+// DUET -- the conjugate light, in C major (motif DUET-1, chosen by the user by ear)
+static const s8 sSong_Duet_Notes[] = {4, 2, 2, 0, 2, 4};
+static const u8 sSong_Duet_Pcs[] = {4, 2, 2, 0, 2, 4};
+static const s8 sSong_Duet_Steps[] = {9, 8, 8, 7, 8, 9};
+static const u8 sSong_Duet_Frames[] = {11, 22, 22, 22, 22, 30};
+static const s8 sSong_Duet_PartNotes[] = {4, 5, 5, 7, 5, 4};
+static const u8 sSong_Duet_PartFrames[] = {11, 22, 22, 22, 22, 30};
 static const u8 sSong_Duet_Page[] = _("Played under both colours.");
 
 static const struct PlaySong sSongs[PLAY_SONG_COUNT] =
@@ -69,5 +75,5 @@ static const struct PlaySong sSongs[PLAY_SONG_COUNT] =
     [PLAY_SONG_STANCE] = {FLAG_SONG_5, FLAG_SONG_HEARD_5, FLAG_UNDERSTANDING_SCORN, 2, 10, sSong_Stance_Notes, sSong_Stance_Pcs, sSong_Stance_Steps, sSong_Stance_Frames, sSong_Stance_Page},
     [PLAY_SONG_NOTICE] = {FLAG_SONG_6, FLAG_SONG_HEARD_6, FLAG_UNDERSTANDING_READING, 2, 10, sSong_Notice_Notes, sSong_Notice_Pcs, sSong_Notice_Steps, sSong_Notice_Frames, sSong_Notice_Page},
     [PLAY_SONG_REFLECT] = {FLAG_SONG_7, FLAG_SONG_HEARD_7, FLAG_UNDERSTANDING_NOTES, 7, 10, sSong_Reflect_Notes, sSong_Reflect_Pcs, sSong_Reflect_Steps, sSong_Reflect_Frames, sSong_Reflect_Page},
-    [PLAY_SONG_DUET] = {FLAG_SONG_DUET, 0, 0, 0, 0, NULL, NULL, NULL, NULL, sSong_Duet_Page, Aurora_ConjugateLight, 0, NULL, NULL},
+    [PLAY_SONG_DUET] = {FLAG_SONG_DUET, 0, 0, 0, 6, sSong_Duet_Notes, sSong_Duet_Pcs, sSong_Duet_Steps, sSong_Duet_Frames, sSong_Duet_Page, Aurora_ConjugateLight, 6, sSong_Duet_PartNotes, sSong_Duet_PartFrames},
 };
