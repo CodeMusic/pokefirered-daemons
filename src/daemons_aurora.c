@@ -494,8 +494,8 @@ void Aurora_SparksTick(void)
         CpuCopy16(sSparkPalette, &gPlttBufferUnfaded[OBJ_PLTT_ID(slot)], 7 * sizeof(u16));
         CpuCopy16(sSparkPalette, &gPlttBufferFaded[OBJ_PLTT_ID(slot)], 7 * sizeof(u16));
     }
-    if (!FlagGet(FLAG_UNITY_MENDED) || DaemonsIsHalftone() || DaemonsWatch() != WATCH_NIGHT || !Aurora_IsLightNight()
-     || (fox = FoxHere()) < 0)
+    if (!FlagGet(FLAG_UNITY_MENDED) || DaemonsIsHalftone() || DaemonsWatch() != WATCH_NIGHT
+     || !(Aurora_IsLightNight() || Aurora_ConjugateLight()) || (fox = FoxHere()) < 0)
     {
         if (have == 0)
             FreeSparks();               // the last one gone: its tiles and palette given back
