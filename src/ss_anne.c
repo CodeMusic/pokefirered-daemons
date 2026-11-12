@@ -82,7 +82,19 @@ static const struct SpriteTemplate sSmokeSpriteTemplate = {
 void DoSSAnneDepartureCutscene(void)
 {
     u8 taskId;
+    u8 objectEventId;
 
+    // T-447 pair 7 (theatre 2026-11-12): the player stands at the pier's end, (32,14), with her picture's row 0 on the
+    // player's waist. Both sprites are priority 2 there (the ship's elevation 1 picks her all-priority-2 subsprites),
+    // so OAM order decides, and that is subpriority by screen y -- she is lower, so she was drawn over the player.
+    // Vanilla's funnels began at picture row 9 and only reached the player's shoes; the livery's funnel starts at row 1
+    // and covered the body. Fix her subpriority for the scene so the player (and nothing else on the pier) stays in
+    // front: 0xFE keeps her ahead of the wake (0xFF) and behind everyone. removeobject ends it.
+    if (!TryGetObjectEventIdByLocalIdAndMap(1, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectEventId))
+    {
+        gObjectEvents[objectEventId].fixedPriority = TRUE;
+        gSprites[gObjectEvents[objectEventId].spriteId].subpriority = 0xFE;
+    }
     PlaySE(SE_SS_ANNE_HORN);
     taskId = CreateTask(Task_SSAnneInit, 8);
     gTasks[taskId].data[0] = 50;
@@ -151,11 +163,15 @@ static void CreateWakeBehindBoat(void)
     TryGetObjectEventIdByLocalIdAndMap(1, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectEventId);
     boatObject = &gObjectEvents[objectEventId];
     // T-447 pair 7 (the user, 2026-11-11: the wake to the waterline). Vanilla's +80, y 109 hid the wake's start behind
-    // a stern that ran to column 127 from row 24 to 52. genships' hull is lower and narrower aft (the flagstaff's notch
-    // at rows 28-36, the stern 118-126 below), so at +80, y 109 it showed through the notch over the deck. At +76,
-    // y 113 the first frames sit wholly behind the hull and the wake drifts out at her waterline, rows 36-60.
+    // a stern that ran to column 127 from row 24 to 52. genships' hull is lower and narrower aft: deck at picture
+    // row 37, hull to 57, the waterline band 58-60, the stern 118-126; above the deck the flagstaff's notch is empty.
+    // The ship's sprite sits at y 88 (her picture's row 0 on screen line 72, read off the theatre's frames 2026-11-12),
+    // not 80, so y 113 put the wake's art (its rows 3-27) on picture rows 28-52 -- showing through the notch above the
+    // deck. It was never in front: her subsprites (priority 2, and the wake after her in OAM) cover it wherever they
+    // are opaque. y 121 lays the art on picture rows 36-60, the hull's own height, so it starts wholly behind her and
+    // drifts out of the stern from the deck line down to the waterline.
     x = gSprites[boatObject->spriteId].x + gSprites[boatObject->spriteId].x2 + 76;
-    spriteId = CreateSprite(&sWakeSpriteTemplate, x, 113, 0xFF);
+    spriteId = CreateSprite(&sWakeSpriteTemplate, x, 121, 0xFF);
     gSprites[spriteId].oam.priority = 2;
     gSprites[spriteId].oam.paletteNum = 10;
 }
