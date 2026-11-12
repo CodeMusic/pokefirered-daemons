@@ -4297,16 +4297,20 @@ static const struct TrainerMonNoItemDefaultMoves sParty_TeamRocketGrunt7[] = {
     },
 };
 
-static const struct TrainerMonNoItemDefaultMoves sParty_TeamRocketGrunt8[] = {
+// T-554 (bible 8.7, an idea taken): the first grunt met in the hideout fields a daemon holding a HARD CODED -- one
+// value written in, +50% attack, locked into one routine. CC-7 in miniature, holdable; nothing is said about it.
+static const struct TrainerMonItemDefaultMoves sParty_TeamRocketGrunt8[] = {
     {
         .iv = 0,
         .lvl = 21,
         .species = SPECIES_DROWZEE,
+        .heldItem = ITEM_CHOICE_BAND,
     },
     {
         .iv = 0,
         .lvl = 21,
         .species = SPECIES_MACHOP,
+        .heldItem = ITEM_NONE,
     },
 };
 

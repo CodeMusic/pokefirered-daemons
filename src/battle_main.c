@@ -1745,6 +1745,31 @@ static void SpriteCB_UnusedDebugSprite_Step(struct Sprite *sprite)
     }
 }
 
+// T-554: AL's friendship by fight -- 255 in the lab, then 161, 122, 92, 66, 44, 24, and 0 at the REVIEW BOARD and
+// after it. Each step takes about a twelfth of the colour (daemon_saturation.c's curve), so the fade reads as even.
+static u8 RivalFriendship(u16 trainerNum)
+{
+    switch (trainerNum)
+    {
+    case TRAINER_RIVAL_OAKS_LAB_SQUIRTLE: case TRAINER_RIVAL_OAKS_LAB_BULBASAUR: case TRAINER_RIVAL_OAKS_LAB_CHARMANDER:
+        return 255;
+    case TRAINER_RIVAL_ROUTE22_EARLY_SQUIRTLE: case TRAINER_RIVAL_ROUTE22_EARLY_BULBASAUR: case TRAINER_RIVAL_ROUTE22_EARLY_CHARMANDER:
+        return 161;
+    case TRAINER_RIVAL_CERULEAN_SQUIRTLE: case TRAINER_RIVAL_CERULEAN_BULBASAUR: case TRAINER_RIVAL_CERULEAN_CHARMANDER:
+        return 122;
+    case TRAINER_RIVAL_SS_ANNE_SQUIRTLE: case TRAINER_RIVAL_SS_ANNE_BULBASAUR: case TRAINER_RIVAL_SS_ANNE_CHARMANDER:
+        return 92;
+    case TRAINER_RIVAL_POKEMON_TOWER_SQUIRTLE: case TRAINER_RIVAL_POKEMON_TOWER_BULBASAUR: case TRAINER_RIVAL_POKEMON_TOWER_CHARMANDER:
+        return 66;
+    case TRAINER_RIVAL_SILPH_SQUIRTLE: case TRAINER_RIVAL_SILPH_BULBASAUR: case TRAINER_RIVAL_SILPH_CHARMANDER:
+        return 44;
+    case TRAINER_RIVAL_ROUTE22_LATE_SQUIRTLE: case TRAINER_RIVAL_ROUTE22_LATE_BULBASAUR: case TRAINER_RIVAL_ROUTE22_LATE_CHARMANDER:
+        return 24;
+    default:
+        return 0;   // the REVIEW BOARD, and every time after
+    }
+}
+
 static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
 {
     u32 nameHash = 0;
@@ -1868,6 +1893,18 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
 
             for (i = 0; i < gTrainers[trainerNum].partySize; i++)
                 SetMonData(&party[i], MON_DATA_FRIENDSHIP, &none);
+        }
+        // T-554 (bible 8.6a, 8.7's idea taken): AL's daemons come at full colour in the lab and lose it fight by
+        // fight -- the transmission failure visible on the one party the player meets eight times, with no line
+        // and no sneer. The steps are even on the eye (Saturation_OfFriendship's curve), not on the number.
+        else if (gTrainers[trainerNum].trainerClass == TRAINER_CLASS_RIVAL_EARLY
+              || gTrainers[trainerNum].trainerClass == TRAINER_CLASS_RIVAL_LATE
+              || gTrainers[trainerNum].trainerClass == TRAINER_CLASS_CHAMPION)
+        {
+            u8 kept = RivalFriendship(trainerNum);
+
+            for (i = 0; i < gTrainers[trainerNum].partySize; i++)
+                SetMonData(&party[i], MON_DATA_FRIENDSHIP, &kept);
         }
 
         gBattleTypeFlags |= gTrainers[trainerNum].doubleBattle;

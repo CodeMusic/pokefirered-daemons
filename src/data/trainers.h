@@ -3582,7 +3582,7 @@ const struct Trainer gTrainers[] = {
         .items = {},
         .doubleBattle = FALSE,
         .aiFlags = AI_SCRIPT_CHECK_BAD_MOVE,
-        .party = NO_ITEM_DEFAULT_MOVES(sParty_TeamRocketGrunt8),
+        .party = ITEM_DEFAULT_MOVES(sParty_TeamRocketGrunt8),   // T-554: a HARD CODED on the DROWZEE
     },
     [TRAINER_TEAM_ROCKET_GRUNT_9] = {
         .trainerClass = TRAINER_CLASS_TEAM_ROCKET,
