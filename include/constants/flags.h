@@ -2005,6 +2005,10 @@
 #define FLAG_ORIGIN_PAGE_8                   (DAEMONS_FLAGS_START + 0x1C9)   // X
 #define FLAG_ORIGIN_PAGE_9                   (DAEMONS_FLAGS_START + 0x1CA)   // XI
 
+//  T-547: THE BLANK TABLET in BLANCHE -- each face's thirteenth line, once read, never shows again (src/daemons_blank_tablet.c).
+#define FLAG_BLANK_TABLET_FRONT_READ         (DAEMONS_FLAGS_START + 0x1D0)   // the night face's, read in 3:30-3:59
+#define FLAG_BLANK_TABLET_BACK_READ          (DAEMONS_FLAGS_START + 0x1D1)   // the dawn face's, read in THE CREATOR'S HOUR
+
 #define DAEMONS_FLAGS_COUNT           0x400
 #define DAEMONS_FLAGS_END             (DAEMONS_FLAGS_START + DAEMONS_FLAGS_COUNT - 1)
 #define DAEMONS_FLAGS_SIZE            (DAEMONS_FLAGS_COUNT / 8)

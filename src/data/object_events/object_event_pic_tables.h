@@ -952,6 +952,23 @@ static const struct SpriteFrameImage sPicTable_Tulikko[] = {
     overworld_frame(gObjectEventPic_Tulikko, 4, 4, 8),
 };
 
+// T-547: the old toad (TILT's frames, S N W, walking as the toad does) and THE BLANK TABLET (one frame: a stone does not turn)
+static const struct SpriteFrameImage sPicTable_OldToad[] = {
+    overworld_frame(gObjectEventPic_OldToad, 2, 4, 0),
+    overworld_frame(gObjectEventPic_OldToad, 2, 4, 1),
+    overworld_frame(gObjectEventPic_OldToad, 2, 4, 2),
+    overworld_frame(gObjectEventPic_OldToad, 2, 4, 0),
+    overworld_frame(gObjectEventPic_OldToad, 2, 4, 0),
+    overworld_frame(gObjectEventPic_OldToad, 2, 4, 1),
+    overworld_frame(gObjectEventPic_OldToad, 2, 4, 1),
+    overworld_frame(gObjectEventPic_OldToad, 2, 4, 2),
+    overworld_frame(gObjectEventPic_OldToad, 2, 4, 2),
+};
+
+static const struct SpriteFrameImage sPicTable_BlankTablet[] = {
+    overworld_frame(gObjectEventPic_BlankTablet, 2, 4, 0),
+};
+
 static const struct SpriteFrameImage sPicTable_LionessBall[] = {
     overworld_frame(gObjectEventPic_LionessBall, 2, 4, 0),
     overworld_frame(gObjectEventPic_LionessBall, 2, 4, 1),
