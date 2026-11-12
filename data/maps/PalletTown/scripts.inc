@@ -466,3 +466,30 @@ PalletTown_EventScript_PtarmiganWinter::
 	msgbox PalletTown_Text_PtarmiganWinter
 	release
 	end
+
+@  T-547: THE BLANK TABLET, by the path north (src/daemons_blank_tablet.c). The face read is the side stood on; the
+@  stone gives its pages one at a time in gStringVar4. Every word DRAFT.
+PalletTown_EventScript_BlankTablet::
+	lock
+	special BlankTablet_Begin
+PalletTown_EventScript_BlankTabletPage::
+	specialvar VAR_RESULT, BlankTablet_Next
+	goto_if_eq VAR_RESULT, FALSE, PalletTown_EventScript_BlankTabletDone
+	msgbox gStringVar4
+	goto PalletTown_EventScript_BlankTabletPage
+PalletTown_EventScript_BlankTabletDone::
+	closemessage
+	release
+	end
+
+@  T-547: the old toad by the pond, who says only how the player has been leaning (DRAFT).
+PalletTown_EventScript_OldToad::
+	lock
+	faceplayer
+	special OldToad_Line
+	msgbox gStringVar4
+	closemessage
+	applymovement LOCALID_PALLET_OLD_TOAD, Common_Movement_FaceOriginalDirection
+	waitmovement 0
+	release
+	end

@@ -362,7 +362,10 @@
 
 #define OBJ_EVENT_GFX_TULIKKO 257
 
-#define NUM_OBJ_EVENT_GFX     258
+#define OBJ_EVENT_GFX_OLD_TOAD 258       // T-547: the old toad in BLANCHE who says the player's lean
+#define OBJ_EVENT_GFX_BLANK_TABLET 259   // T-547: THE BLANK TABLET, the stone by BLANCHE's path
+
+#define NUM_OBJ_EVENT_GFX     260
 
 // These are dynamic object gfx ids.
 // They correspond with the values of the VAR_OBJ_GFX_ID_X vars.

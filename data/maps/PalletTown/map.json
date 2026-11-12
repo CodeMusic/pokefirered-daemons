@@ -84,6 +84,36 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "PalletTown_EventScript_Ptarmigan",
       "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_PALLET_BLANK_TABLET",
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_BLANK_TABLET",
+      "x": 10,
+      "y": 3,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "PalletTown_EventScript_BlankTablet",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_PALLET_OLD_TOAD",
+      "type": "object",
+      "graphics_id": "OBJ_EVENT_GFX_OLD_TOAD",
+      "x": 11,
+      "y": 18,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "PalletTown_EventScript_OldToad",
+      "flag": "0"
     }
   ],
   "warp_events": [

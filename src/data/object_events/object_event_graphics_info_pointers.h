@@ -179,6 +179,8 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_StaffQuicksilver;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_StaffCallow;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BenchmarkGuide;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Tulikko;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_OldToad;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BlankTablet;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_LionessBall;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Easel;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Lioness;
@@ -490,4 +492,6 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_DAEMON_SNORLAX_SSPECIAL] = &gObjectEventGraphicsInfo_Daemon_SnorlaxSspecial,
     [OBJ_EVENT_GFX_LIONESS_BALL]               = &gObjectEventGraphicsInfo_LionessBall,
     [OBJ_EVENT_GFX_TULIKKO]                    = &gObjectEventGraphicsInfo_Tulikko,
+    [OBJ_EVENT_GFX_OLD_TOAD]                   = &gObjectEventGraphicsInfo_OldToad,
+    [OBJ_EVENT_GFX_BLANK_TABLET]               = &gObjectEventGraphicsInfo_BlankTablet,
 };
