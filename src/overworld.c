@@ -64,6 +64,7 @@
 #include "constants/sound.h"
 #include "daemons_hermetic.h"   // T-483: the book arrives
 #include "daemons_aurora.h"     // T-528: a grove takes the light
+#include "daemons_blackout.h"   // T-546: the map drawn outside VERBOSE's circle in THE BLACKOUT
 
 #define PLAYER_LINK_STATE_IDLE 0x80
 #define PLAYER_LINK_STATE_BUSY 0x81
@@ -2261,7 +2262,7 @@ static void InitOverworldGraphicsRegisters(void)
     ResetTempTileDataBuffers();
     SetGpuReg(REG_OFFSET_MOSAIC, 0);
     SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ);
-    SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG0 | WINOUT_WINOBJ_BG0);
+    SetGpuReg(REG_OFFSET_WINOUT, Blackout_WinOut(WINOUT_WIN01_BG0 | WINOUT_WINOBJ_BG0));   // T-546: BG1-3 in THE BLACKOUT
     SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(0, 255));
     SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(0, 255));
     SetGpuReg(REG_OFFSET_WIN1H, WIN_RANGE(255, 255));

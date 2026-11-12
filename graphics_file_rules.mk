@@ -384,7 +384,7 @@ $(MAPPREVIEWGFXDIR)/review_board/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 316 -Wnum_tiles
 
 $(MAPPREVIEWGFXDIR)/rock_tunnel/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 417 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 216 -Wnum_tiles
 
 $(MAPPREVIEWGFXDIR)/rocket_hideout/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 265 -Wnum_tiles

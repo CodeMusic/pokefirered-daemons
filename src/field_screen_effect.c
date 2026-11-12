@@ -1,6 +1,7 @@
 #include "global.h"
 #include "gflib.h"
 #include "field_screen_effect.h"
+#include "daemons_blackout.h"   // T-546
 #include "overworld.h"
 #include "scanline_effect.h"
 #include "script.h"
@@ -196,7 +197,11 @@ void AnimateFlash(u8 newFlashLevel)
     u8 curFlashLevel = Overworld_GetFlashLevel();
     bool32 fullBrightness = FALSE;
     if (newFlashLevel == 0)
+    {
         fullBrightness = TRUE;
+        // T-546: THE BLACKOUT's purple rises in step with the circle -- radius 2 every 2 frames, so one frame a pixel
+        Blackout_Illuminate(sFlashLevelToRadius[0] - sFlashLevelToRadius[curFlashLevel]);
+    }
     StartUpdateFlashLevelEffect(DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2, sFlashLevelToRadius[curFlashLevel], sFlashLevelToRadius[newFlashLevel], fullBrightness, 2);
     StartWaitForFlashUpdate();
     LockPlayerFieldControls();
