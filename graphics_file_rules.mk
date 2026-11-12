@@ -344,6 +344,9 @@ $(MAPPREVIEWGFXDIR)/altering_cave/tiles.4bpp: %.4bpp: %.png
 $(MAPPREVIEWGFXDIR)/berry_forest/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 379 -Wnum_tiles
 
+$(MAPPREVIEWGFXDIR)/cerulean_cave/tiles.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 407 -Wnum_tiles
+
 $(MAPPREVIEWGFXDIR)/digletts_cave/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 410 -Wnum_tiles
 
