@@ -4,6 +4,7 @@
 #include "overworld.h"
 #include "fieldmap.h"
 #include "daemons_pulse.h"
+#include "daemons_aurora.h"
 #include "daemons_blackout.h"
 
 // T-546 (the user, 2026-11-11): THE BLACKOUT, ROCK TUNNEL, in digital purple with threads of green. "before verbose you
@@ -54,15 +55,43 @@ static const u8 sThreadSlots[][3] = {   // row, index, share
     { 10, 3, THREAD_HALO_DIM },
 };
 
-// IWRAM: how lit it is (0 dark .. 256), how fast VERBOSE's light rises, and whether the field was here last copy.
+// IWRAM: how lit it is (0 dark .. 256), how fast VERBOSE's light rises, and whether the field was here last frame.
 static u16 sLit;
 static u16 sRise;
 static bool8 sSeen;
+
+// THE FIELD STAGE (T-546's second pass, 2026-11-12). Laying the dark by CPU after the vblank's DMA was too late: the
+// theatre filmed screen rows 0-3 of every dark frame in the LIT purples, drawn before the CPU reached them. So the
+// map's rows 0..12 are built here, OUTSIDE the vblank, at the end of the main loop (Blackout_Tick, the last thing
+// before WaitForVBlank) -- the faded buffer, then the pulse and the aurora on it as they always laid themselves, then
+// the dark or the breath -- and palette.c DMAs this stage over PLTT's first 208 entries instead of the buffer's, so
+// nothing is written while the screen draws. Built whenever the field is on screen and THE BLACKOUT, the pulse or the
+// aurora touches those rows: the pulse and the aurora wrote them by CPU after the DMA too, so they tore the same
+// way, more faintly. The rest of PLTT is as before.
+// A vblank can land while the stage is being built (a long frame: the theatre caught one in three while entering).
+// So the stage is built a ROW at a time in a 16-entry scratch on the stack -- the buffer, the pulse, the aurora, the
+// dark -- and only a finished row is copied in: whenever the vblank comes, every entry is this frame's or the last's
+// finished colour, never a raw one, and the stage is always copied once it has been built on this visit. IWRAM, 416
+// bytes (statics land there; EWRAM had 668 bytes left).
+#define STAGE_ENTRIES   (BLACKOUT_ROWS * 16)
+static u16 sStage[STAGE_ENTRIES];
+static bool8 sStageReady;
 
 bool8 Blackout_Here(void)
 {
     return DaemonsFieldOnScreen() && gMapHeader.mapLayout != NULL
         && gMapHeader.mapLayout->secondaryTileset == &gTileset_RockTunnel;
+}
+
+static void Arrive(void)
+{
+    if (!sSeen)
+    {
+        // The field has just come to (or back to) THE BLACKOUT: as dark or as lit as VERBOSE has left it.
+        sLit = Overworld_GetFlashLevel() != 0 ? 0 : BLACKOUT_LIT;
+        sRise = 0;
+        sSeen = TRUE;
+    }
 }
 
 bool8 Blackout_IsDark(void)
@@ -84,21 +113,6 @@ void Blackout_Illuminate(u16 frames)
     if (frames == 0)
         frames = 1;
     sRise = (BLACKOUT_LIT + frames - 1) / frames;
-}
-
-void Blackout_Tick(void)
-{
-    if (!Blackout_Here())
-        return;
-    if (sRise != 0)
-    {
-        sLit += sRise;
-        if (sLit >= BLACKOUT_LIT)
-        {
-            sLit = BLACKOUT_LIT;
-            sRise = 0;
-        }
-    }
 }
 
 static u16 Share(u16 c, u32 share)
@@ -135,34 +149,102 @@ static s32 ThreadShare(u32 e)
     return -1;
 }
 
+// The dark or the breath over entries lo..hi of `pal` (PLTT, or a row of the stage, indexed as PLTT is), from what is
+// already in them.
+static void Transform(u16 *pal, u32 lo, u32 hi)
+{
+    u32 e, phase = Pulse_Phase();
+
+    // lit, only the breath's rows change; dark or rising, every row of the map's
+    if (sLit >= BLACKOUT_LIT && lo < BREATH_FIRST_ROW * 16)
+        lo = BREATH_FIRST_ROW * 16;
+    for (e = lo; e < hi; e++)
+    {
+        u16 c = pal[e];
+        s32 share = ThreadShare(e);
+        u16 lit = (share < 0 && e >= BREATH_FIRST_ROW * 16 && (e & 15) != 0) ? Breathe(c, phase) : c;
+
+        if (sLit >= BLACKOUT_LIT)
+            pal[e] = lit;
+        else
+            pal[e] = Lerp(share < 0 ? 0 : Share(c, share), lit, sLit);
+    }
+}
+
+// The stage, from the faded buffer as it stands, a finished row at a time: FALSE (and not ready) when nothing lays
+// anything on these rows.
+bool8 Blackout_BuildStage(void)
+{
+    bool8 here = Blackout_Here();
+    u16 row[16];
+    u16 *at;    // `row` indexed as PLTT is, for the layers that work on PLTT's entry numbers
+    u32 p;
+
+    if (!DaemonsFieldOnScreen() || !(here || Pulse_Touches(STAGE_ENTRIES) || Aurora_Touches(STAGE_ENTRIES)))
+    {
+        sStageReady = FALSE;
+        return FALSE;
+    }
+    if (here)
+        Arrive();
+    for (p = 0; p < BLACKOUT_ROWS; p++)
+    {
+        at = row - p * 16;
+        CpuCopy16(&gPlttBufferFaded[p * 16], row, sizeof(row));
+        Pulse_LayTo(at, p * 16, p * 16 + 16);
+        Aurora_LayTo(at, p * 16, p * 16 + 16);
+        if (here)
+            Transform(at, p * 16, p * 16 + 16);
+        CpuCopy16(row, &sStage[p * 16], sizeof(row));
+    }
+    sStageReady = TRUE;
+    return TRUE;
+}
+
+void Blackout_Tick(void)
+{
+    if (!Blackout_Here())
+        sSeen = FALSE;
+    else if (sRise != 0)
+    {
+        sLit += sRise;
+        if (sLit >= BLACKOUT_LIT)
+        {
+            sLit = BLACKOUT_LIT;
+            sRise = 0;
+        }
+    }
+    Blackout_BuildStage();
+}
+
+// palette.c, both paths to PLTT: the stage over the map's rows (DMA, or a CPU copy outside the vblank), the faded buffer
+// over the rest, then the pulse and the aurora on the rest only. FALSE: the stage is not ready, the old path is taken.
+bool8 Blackout_CopyStage(bool8 dma)
+{
+    if (!sStageReady)
+        return FALSE;
+    if (dma)
+    {
+        DmaCopy16(3, sStage, (void *)PLTT, sizeof(sStage));
+        DmaCopy16(3, &gPlttBufferFaded[STAGE_ENTRIES], (void *)(PLTT + sizeof(sStage)), PLTT_SIZE - sizeof(sStage));
+    }
+    else
+    {
+        CpuCopy16(sStage, (void *)PLTT, sizeof(sStage));
+        CpuCopy16(&gPlttBufferFaded[STAGE_ENTRIES], (void *)(PLTT + sizeof(sStage)), PLTT_SIZE - sizeof(sStage));
+    }
+    Pulse_ApplyToPlttFrom(STAGE_ENTRIES);
+    return TRUE;
+}
+
+// The old path's last step, when the stage was not ready: laid by CPU on PLTT, as before.
 void Blackout_ApplyToPltt(void)
 {
-    u16 *pltt = (u16 *)PLTT;
-    u32 e, phase;
-
     if (!Blackout_Here())
     {
         sSeen = FALSE;
         return;
     }
-    if (!sSeen)
-    {
-        // The field has just come to (or back to) THE BLACKOUT: as dark or as lit as VERBOSE has left it.
-        sLit = Overworld_GetFlashLevel() != 0 ? 0 : BLACKOUT_LIT;
-        sRise = 0;
-        sSeen = TRUE;
-    }
-    phase = Pulse_Phase();
-    // lit, only the breath's rows change; dark or rising, every row of the map's
-    for (e = sLit >= BLACKOUT_LIT ? BREATH_FIRST_ROW * 16 : 0; e < BLACKOUT_ROWS * 16; e++)
-    {
-        u16 c = pltt[e];
-        s32 share = ThreadShare(e);
-        u16 lit = (share < 0 && e >= BREATH_FIRST_ROW * 16 && (e & 15) != 0) ? Breathe(c, phase) : c;
-
-        if (sLit >= BLACKOUT_LIT)
-            pltt[e] = lit;
-        else
-            pltt[e] = Lerp(share < 0 ? 0 : Share(c, share), lit, sLit);
-    }
+    Arrive();
+    Transform((u16 *)PLTT, 0, STAGE_ENTRIES);
 }

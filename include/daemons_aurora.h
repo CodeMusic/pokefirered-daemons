@@ -18,6 +18,9 @@ void Aurora_Tick(void);
 // After every copy of the faded palette to PLTT, after the pulse (daemons_pulse.c): the light laid on PLTT, read from
 // what is already there, so the buffers are never touched and nothing compounds.
 void Aurora_ApplyToPltt(void);
+// T-546: the same into any palette over entries lo..hi (THE FIELD STAGE), and whether it touches any entry below hi
+void Aurora_LayTo(u16 *pltt, u32 lo, u32 hi);
+bool8 Aurora_Touches(u32 hi);
 // T-528 (f) THE CONJUGATE LIGHT: the book mended and a daemon in the party whose origin game (its met game, the
 // version byte every mon carries) is the other edition -- by trade, or the companion's trade. Both lines show at once,
 // green below and red crowning it; PLAY's SONGBOOK duet (play.c, the Musical Instruments lane) waits on it.

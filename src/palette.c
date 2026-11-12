@@ -3,6 +3,7 @@
 #include "util.h"
 #include "decompress.h"
 #include "fieldmap.h"   // T-254: DaemonsGreyHalftoneFrame
+#include "daemons_blackout.h"   // T-546: THE FIELD STAGE
 #include "daemons_pulse.h"   // T-483: the pulse, laid on at every copy to PLTT
 #include "task.h"
 
@@ -110,8 +111,13 @@ void TransferPlttBuffer(void)
         //  reach the screen raw. (The flash that was filmed was BeginNormalPaletteFade's own copy, below; this
         //  closes the other door.) A buffer main.c already settled costs a compare an entry.
         DaemonsGreyHalftoneFrame();
-        DmaCopy16(3, src, dest, PLTT_SIZE);
-        Pulse_ApplyToPltt();   // T-483: the pulsing rows again, blended from the buffer, which it never touches
+        //  T-546: in the field, the map's rows come from THE FIELD STAGE, laid before the vblank, so nothing is
+        //  written by the CPU while the screen draws (the theatre filmed THE BLACKOUT's top rows lit, 2026-11-12)
+        if (!Blackout_CopyStage(TRUE))
+        {
+            DmaCopy16(3, src, dest, PLTT_SIZE);
+            Pulse_ApplyToPltt();   // T-483: the pulsing rows again, blended from the buffer, which it never touches
+        }
         sPlttBufferTransferPending = FALSE;
         if (gPaletteFade.mode == HARDWARE_FADE && gPaletteFade.active)
             UpdateBlendRegisters();
@@ -193,8 +199,13 @@ bool8 BeginNormalPaletteFade(u32 selectedPalettes, s8 delay, u8 startY, u8 targe
         //  cave showed its terrain in colour for one frame, from the scanline the copy landed on down. Filmed
         //  with the theatre's pburst, which dumps palette RAM beside each frame.
         DaemonsGreyHalftoneFrame();
-        CpuCopy32(gPlttBufferFaded, (void *)PLTT, PLTT_SIZE);
-        Pulse_ApplyToPltt();   // T-483
+        //  T-546: the same here, the stage built fresh for the fade's first step (this is the main loop, not the
+        //  vblank): THE BLACKOUT's dark reaches the screen with the copy, never after it
+        if (!(Blackout_BuildStage() && Blackout_CopyStage(FALSE)))
+        {
+            CpuCopy32(gPlttBufferFaded, (void *)PLTT, PLTT_SIZE);
+            Pulse_ApplyToPltt();   // T-483
+        }
         sPlttBufferTransferPending = FALSE;
         if (gPaletteFade.mode == HARDWARE_FADE && gPaletteFade.active)
             UpdateBlendRegisters();

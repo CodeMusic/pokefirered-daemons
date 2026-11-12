@@ -551,9 +551,10 @@ static void Lay(u16 *pltt, u32 e, s32 w, u16 line)
     pltt[e] = RGB(r, g, b);
 }
 
-void Aurora_ApplyToPltt(void)
+//  T-546: into any palette (PLTT, or THE FIELD STAGE daemons_blackout.c builds outside the vblank), over entries lo..hi
+//  -- so the map's rows can be laid before the vblank and DMA'd, never written by the CPU while the screen draws.
+void Aurora_LayTo(u16 *pltt, u32 lo, u32 hi)
 {
-    u16 *pltt = (u16 *)PLTT;
     u32 mask = sRowMask, p, e, i;
 
     if (mask != 0 && sRowWeight != 0)
@@ -564,6 +565,8 @@ void Aurora_ApplyToPltt(void)
             {
                 for (e = p * 16 + 1; e < p * 16 + 16; e++)
                 {
+                    if (e < lo || e >= hi)
+                        continue;
                     if (sRowRedWeight == 0)
                         Lay(pltt, e, sRowWeight, OWN_LINE);
                     else
@@ -576,7 +579,26 @@ void Aurora_ApplyToPltt(void)
         }
     }
     for (i = 0; i < sCount; i++)
-        Lay(pltt, sEntry[i], sWeight[i], sColour[i]);
+        if (sEntry[i] >= lo && sEntry[i] < hi)
+            Lay(pltt, sEntry[i], sWeight[i], sColour[i]);
+}
+
+void Aurora_ApplyToPltt(void)
+{
+    Aurora_LayTo((u16 *)PLTT, 0, PLTT_SIZE / 2);
+}
+
+//  T-546: whether the aurora lays anything on entries below `hi` this frame
+bool8 Aurora_Touches(u32 hi)
+{
+    u32 i;
+
+    if ((sRowMask & ((1u << ((hi + 15) / 16)) - 1)) != 0 && sRowWeight != 0)
+        return TRUE;
+    for (i = 0; i < sCount; i++)
+        if (sEntry[i] < hi && sWeight[i] != 0)
+            return TRUE;
+    return FALSE;
 }
 
 #if DAEMONS_DEBUG

@@ -222,10 +222,10 @@ void AgbMain()
         DaemonsHalftoneTick();       // T-430: the first sight, a tower floor's return, a splash
         DaemonsGreyHalftoneFrame();
         Pulse_Tick();                // T-483: whether the world is breathing this frame, and in what colour
-        Blackout_Tick();             // T-546: VERBOSE's light rising in THE BLACKOUT
         Hours_Tick();                // T-519: the creator's hour's bloom, motes and tone
         Aurora_Tick();               // T-528: the aurora -- over the tower, a lit grove's sky, the night outdoors
         Aurora_SparksTick();         // T-528 (e): the sparks from TULIKKO's snow on a night of light
+        Blackout_Tick();             // T-546: VERBOSE's light rising, and THE FIELD STAGE built -- last, before the vblank
         WaitForVBlank();
     }
 }

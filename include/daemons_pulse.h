@@ -18,5 +18,10 @@ void Pulse_Tick(void);
 // After every copy of the faded palette to PLTT (palette.c): the pulsing rows written again, blended from the faded
 // buffer, which is never touched -- so nothing compounds, and the weather and the fades stay underneath.
 void Pulse_ApplyToPltt(void);
+// T-546: the same into any palette over entries lo..hi; after THE FIELD STAGE, only from `first` on; and whether the
+// pulse touches any entry below hi this frame
+void Pulse_LayTo(u16 *pltt, u32 lo, u32 hi);
+void Pulse_ApplyToPlttFrom(u32 first);
+bool8 Pulse_Touches(u32 hi);
 
 #endif // GUARD_DAEMONS_PULSE_H

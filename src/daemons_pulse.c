@@ -198,10 +198,10 @@ void Pulse_Tick(void)
         sPulseWeight = sPulseWeight * (16 - min(gPaletteFade.y, 16)) / 16;
 }
 
-static void PulseRowsToPltt(void)
+//  T-546: into any palette (PLTT, or THE FIELD STAGE), from the faded buffer, over entries lo..hi
+void Pulse_LayTo(u16 *pltt, u32 lo, u32 hi)
 {
     u32 mask = sPulseMask, p, e;
-    u16 *pltt = (u16 *)PLTT;
     const u16 *faded = gPlttBufferFaded;
     s32 tr, tg, tb, w = sPulseWeight;
 
@@ -214,7 +214,7 @@ static void PulseRowsToPltt(void)
     {
         if (!(mask & 1))
             continue;
-        for (e = p * 16; e < p * 16 + 16; e++)
+        for (e = max(p * 16, lo); e < p * 16 + 16 && e < hi; e++)
         {
             u16 c = faded[e];
             s32 r = GET_R(c), g = GET_G(c), b = GET_B(c);
@@ -230,7 +230,20 @@ static void PulseRowsToPltt(void)
 // T-528: the aurora after the pulse, on what the pulse left (src/daemons_aurora.c), at every copy to PLTT.
 void Pulse_ApplyToPltt(void)
 {
-    PulseRowsToPltt();
+    Pulse_LayTo((u16 *)PLTT, 0, PLTT_SIZE / 2);
     Aurora_ApplyToPltt();
     Blackout_ApplyToPltt();   // T-546: last -- the dark outranks the pulse and the creator's tint; the breath rides on them
+}
+
+//  T-546: after THE FIELD STAGE has been DMA'd over the map's rows, the pulse and the aurora on the rest only
+void Pulse_ApplyToPlttFrom(u32 first)
+{
+    Pulse_LayTo((u16 *)PLTT, first, PLTT_SIZE / 2);
+    Aurora_LayTo((u16 *)PLTT, first, PLTT_SIZE / 2);
+}
+
+//  T-546: whether the pulse lays anything on entries below `hi` this frame
+bool8 Pulse_Touches(u32 hi)
+{
+    return (sPulseMask & ((1u << ((hi + 15) / 16)) - 1)) != 0 && sPulseWeight != 0;
 }
