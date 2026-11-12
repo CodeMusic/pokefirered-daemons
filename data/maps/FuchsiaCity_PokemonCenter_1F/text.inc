@@ -10,9 +10,10 @@ FuchsiaCity_PokemonCenter_1F_Text_PokemonLeagueWestOfViridian::
     .string "It goes to DAEMON LEAGUE HQ. The\n"
     .string "HQ governs all USERS.$"
 
+@  T-540, DRAFT.
 FuchsiaCity_PokemonCenter_1F_Text_VisitSafariZoneForPokedex::
     .string "If you're working on an INDEX, visit\n"
-    .string "the SAFARI ZONE.\p"
-    .string "All sorts of rare DAEMONS breed\n"
-    .string "there.$"
+    .string "the GARDEN.\p"
+    .string "Its DAEMONS are signed to run\n"
+    .string "nowhere else.$"
 

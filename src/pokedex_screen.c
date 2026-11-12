@@ -3758,6 +3758,7 @@ static const u8 sText_NativeWind[] = _("WIND");                    // T-415 phas
 //  (the widest, CORPUS WAREHOUSE, is 80).
 static const u8 sText_FirstMet[] = _("FIRST MET");                 // T-406, DRAFT
 static const u8 sText_FirstMetShort[] = _("MET ");                 // T-406, DRAFT: "MET ROUTE 1" when the box is full
+static const u8 sText_FirstMetThe[] = _("THE ");                  // T-540: dropped from a place too wide for the box
 static const u8 sText_FirstMetBefore[] = _("BEFORE RECORDS");      // T-406, DRAFT
 static const u8 sText_FirstMetCompanion[] = _("THE COMPANION");    // T-448, DRAFT: first met through a SYNC delivery
 static const u8 sText_FirstMetTrade[] = _("A TRADE");              // T-473, DRAFT: first met by a trade with another player
@@ -3824,6 +3825,11 @@ static void DexScreen_PrintFirstMet(u8 win, u16 species, u8 used)
         StringCopy(place, sText_FirstMetGift);
     else
         StringCopy(place, sText_FirstMetBefore);
+    //  T-540 (the user, 2026-11-10): THE WALLED GARDEN is 84px in an 80px box, so a place still too wide loses a
+    //  leading THE here, and only here -- it prints WALLED GARDEN
+    if (GetStringWidth(FONT_SMALL, place, 0) > sWindowTemplate_AreaMap_Native.width * 8
+     && StringCompareN(place, sText_FirstMetThe, 4) == 0)
+        StringCopy(place, place + 4);
     if (used <= 24)
     {
         DexScreen_AddTextPrinterParameterized(win, FONT_SMALL, sText_FirstMet, 0, 24, 0);

@@ -253,7 +253,7 @@ const u8 gText_DbgItemsNothing[] = _("NOTHING HELD");
 const u8 gText_DbgItemsPocket[] = _("{STR_VAR_1}. LEFT and RIGHT change the pocket.");
 #endif
 const u8 gText_MenuExit[] = _("EXIT");
-const u8 gText_MenuRetire[] = _("RETIRE");
+const u8 gText_MenuRetire[] = _("SIGN OUT");   // T-540, DRAFT
 const u8 gText_MenuSafariStats[] = _("{STR_VAR_1}/{STR_VAR_2}\nBOXES {STR_VAR_3}");
 const u8 gText_TimesStrVar1[] = _("×{STR_VAR_1}");
 const u8 gText_Berry[] = _(" BERRY");
@@ -916,7 +916,7 @@ const u8 gText_RegionMap_AreaDesc_MtMoon[] = _("A mystical mountain that is know
 const u8 gText_RegionMap_AreaDesc_DiglettsCave[] = _("A seemingly plain tunnel\nthat was dug by wild\nTAPPOINT. It is famous for\nconnecting ROUTES 2 and 11.");
 const u8 gText_RegionMap_AreaDesc_VictoryRoad[] = _("A tunnel situated on ROUTE 23. It\nearned its name because it must be\ntraveled by all USERS aiming for\nthe top.");
 const u8 gText_RegionMap_AreaDesc_PokemonMansion[] = _("A decrepit, burned-down mansion on\nQUICKSILVER ISLAND. It got its\nname because a famous DAEMON\nresearcher lived there.");
-const u8 gText_RegionMap_AreaDesc_SafariZone[] = _("An amusement park outside LURID\nCITY where many rare DAEMON can\nbe observed in the wild. Bind them\nin a popular game!");
+const u8 gText_RegionMap_AreaDesc_SafariZone[] = _("A platform behind a wall outside\nLURID CITY. DAEMONS that are not\nsigned run here, and only here.\nGuests may bind them.");   // T-540, DRAFT
 const u8 gText_RegionMap_AreaDesc_RockTunnel[] = _("A naturally formed underground\ntunnel. Because it has not been\ndeveloped, it is inky dark inside.\nA light is needed to get through.");
 const u8 gText_RegionMap_AreaDesc_SeafoamIslands[] = _("A pair of islands that is situated\non ROUTE 20.\nThe two islands are shaped the\nsame, as if they were twins.");
 const u8 gText_RegionMap_AreaDesc_PokemonTower[] = _("A tower that houses the graves of\ncountless DAEMON. Many people visit\nit daily to pay their respects to\nthe fallen.");
@@ -1089,7 +1089,7 @@ const u8 gStartMenuDesc_DbgWatch[] = _("A: time of day. LEFT/RIGHT: weekday.\nAU
 const u8 gStartMenuDesc_DbgBack[] = _("Back, and restore this map's music.");
 #endif
 const u8 gStartMenuDesc_Exit[] = _("Close this MENU window.");
-const u8 gStartMenuDesc_Retire[] = _("Retire from the SAFARI GAME and return to\nthe registration counter.");
+const u8 gStartMenuDesc_Retire[] = _("End your session in THE WALLED\nGARDEN and return to the gate.");   // T-540, DRAFT
 
 #include "data/text/quest_log.h"
 

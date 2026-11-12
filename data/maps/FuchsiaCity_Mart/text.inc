@@ -1,6 +1,7 @@
+@  T-540, DRAFT.
 FuchsiaCity_Mart_Text_DontTheyHaveSafariZonePennants::
     .string "Don't they have any pennants\n"
-    .string "promoting the SAFARI ZONE?\p"
+    .string "promoting THE WALLED GARDEN?\p"
     .string "How about some paper lanterns?\n"
     .string "Aren't there even any calendars?$"
 

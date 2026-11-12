@@ -1,18 +1,21 @@
 @ The text here is a copy/paste from Hoenn's Safari Zone, and any unused text was left untranslated
 
+@  T-540, DRAFT.
 SafariZone_Text_WouldYouLikeToExit::
-	.string "Would you like to exit the SAFARI\n"
-	.string "ZONE right now?$"
+	.string "Would you like to sign out of\n"
+	.string "THE WALLED GARDEN right now?$"
 
+@  T-540, DRAFT.
 SafariZone_Text_TimesUp::
 	.string "PA: Ding-dong!\p"
-	.string "Time's up!\p"
-	.string "PA: Your SAFARI GAME is over!$"
+	.string "SESSION EXPIRED.\p"
+	.string "PA: Please return to the gate!$"
 
+@  T-540, DRAFT.
 SafariZone_Text_OutOfBalls::
 	.string "PA: Ding-dong!\p"
 	.string "You are out of GUESTBOXES!\p"
-	.string "PA: Your SAFARI GAME is over!$"
+	.string "PA: Please return to the gate!$"
 
 SafariZone_Text_WelcomeToSafariZone::
 	.string "サファリゾーンへ　ようこそ！\p"

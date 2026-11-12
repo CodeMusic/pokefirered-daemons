@@ -1,8 +1,11 @@
+@  T-540, DRAFT.
 SafariZone_Center_Text_WhereDidErikGo::
-    .string "SARA: Where did my boyfriend,\n"
-    .string "ERIK, go?$"
+    .string "SARA: ERIK said he'd meet me\n"
+    .string "here. Did he sign in?$"
 
+@  T-540, DRAFT.
 SafariZone_Center_Text_CatchingMonsAsGifts::
-    .string "I'm binding DAEMON to take home as\n"
-    .string "gifts!$"
+    .string "Gifts from the GARDEN are the\n"
+    .string "safest kind. Nothing in them\l"
+    .string "surprises anybody.$"
 

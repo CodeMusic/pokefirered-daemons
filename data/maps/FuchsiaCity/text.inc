@@ -1,16 +1,19 @@
+@  T-540, DRAFT.
 FuchsiaCity_Text_DidYouTrySafariGame::
-    .string "Did you try the SAFARI GAME? Some\n"
-    .string "DAEMONS can only be bound there.$"
+    .string "Did you sign in to the GARDEN?\n"
+    .string "Some DAEMONS only run in there.$"
 
+@  T-540, DRAFT.
 FuchsiaCity_Text_SafariZoneZooInFront::
-    .string "SAFARI ZONE has a zoo in front of\n"
-    .string "the entrance.\p"
-    .string "Out back is the SAFARI GAME for\n"
-    .string "binding DAEMON.$"
+    .string "The pens out front are what\n"
+    .string "the GARDEN shows you.\p"
+    .string "What it keeps is behind the\n"
+    .string "wall.$"
 
+@  T-540, DRAFT.
 FuchsiaCity_Text_WheresSara::
-    .string "ERIK: Where's SARA?\n"
-    .string "I said I'd meet her here.$"
+    .string "ERIK: SARA's in there. I sent\n"
+    .string "her a message an hour ago.$"
 
 FuchsiaCity_Text_ItemBallInThere::
     .string "That item box in there is really a\n"
@@ -22,25 +25,27 @@ FuchsiaCity_Text_CitySign::
     .string "Brighter Than It\l"
     .string "Needs To Be$"
 
-@  T-324, DRAFT.
+@  T-540 (was T-324), DRAFT.
 FuchsiaCity_Text_SafariZoneSign::
-    .string "SAFARI ZONE\n"
+    .string "THE WALLED GARDEN\n"
     .string "Everything In Here\l"
     .string "Is UNBOUND$"
 
-@  T-324, DRAFT.
+@  T-540 (was T-324), DRAFT.
 FuchsiaCity_Text_SafariGameSign::
-    .string "SAFARI GAME\n"
+    .string "GUEST SESSIONS\n"
     .string "GUESTBOXES only. Leave\l"
     .string "your own daemons at the gate.$"
 
+@  T-540, DRAFT.
 FuchsiaCity_Text_WardensHomeSign::
-    .string "SAFARI ZONE\n"
+    .string "THE WALLED GARDEN\n"
     .string "WARDEN'S HOME$"
 
+@  T-540, DRAFT.
 FuchsiaCity_Text_SafariZoneOfficeSign::
-    .string "DAEMON PARADISE! Welcome to the\n"
-    .string "SAFARI ZONE! SAFARI ZONE OFFICE$"
+    .string "EVERYTHING HERE IS REVIEWED!\n"
+    .string "THE WALLED GARDEN OFFICE$"
 
 FuchsiaCity_Text_GymSign::
 	.string "LURID CITY BENCHMARK\n"

@@ -1,14 +1,16 @@
+@  T-540, DRAFT.
 SafariZone_North_Text_RestHouse::
-    .string "REST HOUSE$"  @ T-401, DRAFT: the REST->IDLE move sweep (5baafcbcd) had reached the sign
+    .string "WAITING ROOM$"
 
-@  T-324, DRAFT.
+@  T-540 (was T-324), DRAFT.
 SafariZone_North_Text_SecretHouseStillAhead::
     .string "USER TIPS\p"
-    .string "The SECRET HOUSE is further\n"
-    .string "in. Keep going.$"
+    .string "The SECRET HOUSE is one RING\n"
+    .string "further in. Keep going.$"
 
+@  T-540, DRAFT.
 SafariZone_North_Text_Area2::
-    .string "AREA 2$"
+    .string "RING 1$"
 
 @  T-324, DRAFT.
 SafariZone_North_Text_ZigzagThroughTallGrass::
@@ -17,9 +19,10 @@ SafariZone_North_Text_ZigzagThroughTallGrass::
     .string "Walk it back and forth to\n"
     .string "flush them out.$"
 
-@  T-324, DRAFT.
+@  T-540 (was T-324), DRAFT.
 SafariZone_North_Text_WinFreeHMFindSecretHouse::
     .string "USER TIPS\p"
-    .string "Find the SECRET HOUSE and a\n"
-    .string "DRIVER is yours to keep.$"
+    .string "Find the SECRET HOUSE. Its\n"
+    .string "DRIVER is the one thing in here\l"
+    .string "you don't have to give back.$"
 

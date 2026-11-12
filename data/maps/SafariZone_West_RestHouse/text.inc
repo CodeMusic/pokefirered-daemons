@@ -1,6 +1,7 @@
+@  T-540, DRAFT.
 SafariZone_West_Text_KogaPatrolsSafariEverySoOften::
-	.string "TILT walks the SAFARI ZONE every\n"
-	.string "so often.\p"
+	.string "TILT walks THE WALLED GARDEN\n"
+	.string "every so often.\p"
 	.string "Things go wrong less after he has\n"
 	.string "been. Nobody's seen him fix a\l"
 	.string "thing.$"
@@ -15,7 +16,8 @@ SafariZone_West_Text_BaitMakesMonStickAround::
     .string "likely to stick around if they get\l"
     .string "busy eating.$"
 
+@  T-540, DRAFT.
 SafariZone_West_Text_HikedLotsDidntSeeMonIWanted::
-    .string "I hiked a lot, but I didn't see any\n"
-    .string "DAEMON I wanted.$"
+    .string "I hiked a lot, but the DAEMON I\n"
+    .string "wanted doesn't run in here.$"
 

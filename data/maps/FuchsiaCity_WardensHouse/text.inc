@@ -1,14 +1,17 @@
+@  T-540, DRAFT.
 FuchsiaCity_WardensHouse_Text_HifFuffHefifoo::
-    .string "WARDEN: Hif fuff hefifoo!\p"
+    .string "UNSIGNED: Hif fuff hefifoo!\p"
     .string "Ha lof ha feef ee hafahi ho.\n"
     .string "Heff hee fwee!$"
 
+@  T-540, DRAFT.
 FuchsiaCity_WardensHouse_Text_AhHowheeHoHoo::
-    .string "Ah howhee ho hoo!\n"
+    .string "UNSIGNED: Ah howhee ho hoo!\n"
     .string "Eef ee hafahi ho!$"
 
+@  T-540, DRAFT.
 FuchsiaCity_WardensHouse_Text_HeOhayHeHaHoo::
-    .string "Ha?\n"
+    .string "UNSIGNED: Ha?\n"
     .string "He ohay heh ha hoo ee haheh!$"
 
 FuchsiaCity_WardensHouse_Text_GaveGoldTeethToWarden::
@@ -16,26 +19,30 @@ FuchsiaCity_WardensHouse_Text_GaveGoldTeethToWarden::
     .string "to the WARDEN.$"
 
 @ T-260: the TOKEN signs him back in, and what he says can be read again. DRAFT.
+@  T-540, DRAFT.
 FuchsiaCity_WardensHouse_Text_WardenPoppedInHisTeeth::
-    .string "The WARDEN signed in with it!$"
+    .string "The WARDEN signed in.\n"
+    .string "His words verify again!$"
 
+@  T-540, DRAFT.
 FuchsiaCity_WardensHouse_Text_ThanksSonGiveYouSomething::
     .string "WARDEN: Thanks, friend!\n"
     .string "You're a real lifesaver!\p"
-    .string "No one could understand a word\n"
-    .string "that I said, not a one!\p"
-    .string "I was too ashamed to show my face\n"
-    .string "around the OFFICE, even.\p"
+    .string "Nothing I sent would verify.\n"
+    .string "The OFFICE obeyed it anyway.\p"
+    .string "That's worse, if you think\n"
+    .string "about it. Nobody does.\p"
     .string "Let me give you something for your\n"
     .string "trouble.$"
 
+@  T-540, DRAFT.
 FuchsiaCity_WardensHouse_Text_ThanksLassieGiveYouSomething::
     .string "WARDEN: Thanks, friend!\n"
     .string "You're a real lifesaver!\p"
-    .string "No one could understand a word\n"
-    .string "that I said, not a one!\p"
-    .string "I was too ashamed to show my face\n"
-    .string "around the OFFICE, even.\p"
+    .string "Nothing I sent would verify.\n"
+    .string "The OFFICE obeyed it anyway.\p"
+    .string "That's worse, if you think\n"
+    .string "about it. Nobody does.\p"
     .string "Let me give you something for your\n"
     .string "trouble.$"
 
@@ -43,24 +50,28 @@ FuchsiaCity_WardensHouse_Text_ReceivedHM04FromWarden::
     .string "{PLAYER} received DRIVER04 from\n"
     .string "the WARDEN.$"
 
+@  T-540, DRAFT.
 FuchsiaCity_WardensHouse_Text_ExplainStrength::
     .string "WARDEN: Inside DRIVER04 you'll find\n"
     .string "DISPLACE.\p"
     .string "It lets DAEMON move boulders when\n"
     .string "you're outside of battle.\p"
-    .string "Oh yes, did you find the SECRET\n"
-    .string "HOUSE in the SAFARI ZONE?$"
+    .string "Oh yes, the SECRET HOUSE. I put\n"
+    .string "the way across in there myself.\p"
+    .string "A wall wants a door somewhere.$"
 
 @ Unused
 FuchsiaCity_WardensHouse_Text_YouHaveTooMuchStuff::
     .string "なんや　にもつ\n"
     .string "いっぱいやんけ！$"
 
+@  T-540, DRAFT.
 FuchsiaCity_WardensHouse_Text_MonPhotosFossilsOnDisplay::
-    .string "DAEMON photos and fossils are on\n"
-    .string "display.$"
+    .string "Photos of DAEMONS the GARDEN\n"
+    .string "retired are on display.$"
 
+@  T-540, DRAFT.
 FuchsiaCity_WardensHouse_Text_OldMonMerchandiseOnDisplay::
-    .string "Old DAEMON merchandise is on\n"
-    .string "display.$"
+    .string "Old merchandise is on display.\n"
+    .string "Most of it still says SAFARI ZONE.$"
 

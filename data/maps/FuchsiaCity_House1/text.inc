@@ -1,7 +1,8 @@
 @ T-260: the TOKEN, not the teeth. DRAFT.
+@  T-540, DRAFT.
 FuchsiaCity_House1_Text_WardenIsOldHasFalseTeeth::
-    .string "The SAFARI ZONE's WARDEN is old, \n"
-    .string "but he's still very much active.\p"
+    .string "The WARDEN has kept that place\n"
+    .string "since it was the SAFARI ZONE.\p"
     .string "He keeps losing his TOKEN, though.$"
 
 FuchsiaCity_House1_Text_BillIsMyGrandson::
