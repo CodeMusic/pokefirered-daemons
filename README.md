@@ -26,9 +26,10 @@ branched, and why it is said *DAY-mons*.
 written out as a university textbook -- seven floors, Language to Error.
 
 **No ROM is distributed.** Releases are BPS patches for a cartridge you own,
-published on the [DAEMONS releases page][releases] (latest: **v11.354.1**,
-2026-11-11; the newest thing in it that can be told about: the deepest cave
-has a card of its own -- still air, still water, one point of light), four to a release: CONTENT for *FireRed* 1.0 and Rev 1, CONTEXT
+published on the [DAEMONS releases page][releases] (latest: **v11.355.1**,
+2026-11-11; the newest thing in it that can be told about: THE BLACKOUT is
+black but for dim green threads until VERBOSE lights it, and then its purple
+breathes), four to a release: CONTENT for *FireRed* 1.0 and Rev 1, CONTEXT
 for *LeafGreen* 1.0 and Rev 1. The game also plays in a browser on
 [**daemons-playground**][playground] (a private network only), and in the
 companion's [one app][oneapp] on an iPhone or iPad, which patches the player's
