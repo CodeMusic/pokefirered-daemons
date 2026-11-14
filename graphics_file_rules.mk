@@ -393,7 +393,7 @@ $(MAPPREVIEWGFXDIR)/rocket_warehouse/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 288 -Wnum_tiles
 
 $(MAPPREVIEWGFXDIR)/safari_zone/tiles.4bpp: %.4bpp: %.png
-	$(GFX) $< $@ -num_tiles 321 -Wnum_tiles
+	$(GFX) $< $@ -num_tiles 310 -Wnum_tiles
 
 $(MAPPREVIEWGFXDIR)/seafoam_islands/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 410 -Wnum_tiles
