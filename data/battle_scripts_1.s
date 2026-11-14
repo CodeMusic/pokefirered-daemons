@@ -3647,7 +3647,7 @@ BattleScript_EnduredMsg::
 	waitmessage B_WAIT_TIME_LONG
 	return
 
-@ T-551: DURABLE held from full HP -- the same beat as ENDURE, in its own words
+@ T-561: DURABLE held from full HP -- the same beat as ENDURE, in its own words
 BattleScript_DurableHeldMsg::
 	printstring STRINGID_DURABLEHELD
 	waitmessage B_WAIT_TIME_LONG
@@ -3845,7 +3845,7 @@ BattleScript_RemnantDream::
 	pause B_WAIT_TIME_SHORT
 	printstring STRINGID_MONTOOSCAREDTOMOVE
 	waitmessage B_WAIT_TIME_LONG
-	@ T-552: the cave's second gate, pointed at -- one line from the dark, in S.T.A.R.R.'s register, then the white
+	@ T-562: the cave's second gate, pointed at -- one line from the dark, in S.T.A.R.R.'s register, then the white
 	pause B_WAIT_TIME_SHORT
 	printstring STRINGID_DREAMSEVENTH
 	waitmessage B_WAIT_TIME_LONG

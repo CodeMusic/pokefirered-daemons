@@ -980,7 +980,7 @@ PalletTown_ProfessorOaksLab_EventScript_TryStartNationalDexScene::
 	call PokedexRating_EventScript_RateInPerson
 	closemessage
 @  Vanilla's two preconditions besides beating the REVIEW BOARD were sixty
-@  daemons OWNED and having been to ONE ISLAND. T-552 (the user, 2026-11-11):
+@  daemons OWNED and having been to ONE ISLAND. T-562 (the user, 2026-11-11):
 @  the sixty is dropped -- a game arguing the INDEX cannot hold what matters
 @  does not gate its ending on a count -- and in play it had been dead since
 @  T-27 anyway: the aide hands the GLOBAL INDEX over on FLAG_CRYSTAL_GONE alone
