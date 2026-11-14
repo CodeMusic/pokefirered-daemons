@@ -40,7 +40,7 @@ FuchsiaCity_Text_SafariGameSign::
 @  T-540, DRAFT.
 FuchsiaCity_Text_WardensHomeSign::
     .string "THE WALLED GARDEN\n"
-    .string "WARDEN'S HOME$"
+    .string "GATEKEEPER'S HOME$"
 
 @  T-540, DRAFT.
 FuchsiaCity_Text_SafariZoneOfficeSign::

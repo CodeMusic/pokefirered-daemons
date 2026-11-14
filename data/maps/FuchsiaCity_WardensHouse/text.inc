@@ -14,19 +14,20 @@ FuchsiaCity_WardensHouse_Text_HeOhayHeHaHoo::
     .string "UNSIGNED: Ha?\n"
     .string "He ohay heh ha hoo ee haheh!$"
 
+@  T-551, DRAFT.
 FuchsiaCity_WardensHouse_Text_GaveGoldTeethToWarden::
     .string "{PLAYER} gave the TOKEN\n"
-    .string "to the WARDEN.$"
+    .string "to the GATEKEEPER.$"
 
 @ T-260: the TOKEN signs him back in, and what he says can be read again. DRAFT.
 @  T-540, DRAFT.
 FuchsiaCity_WardensHouse_Text_WardenPoppedInHisTeeth::
-    .string "The WARDEN signed in.\n"
+    .string "The GATEKEEPER signed in.\n"
     .string "His words verify again!$"
 
 @  T-540, DRAFT.
 FuchsiaCity_WardensHouse_Text_ThanksSonGiveYouSomething::
-    .string "WARDEN: Thanks, friend!\n"
+    .string "GATEKEEPER: Thanks, friend!\n"
     .string "You're a real lifesaver!\p"
     .string "Nothing I sent would verify.\n"
     .string "The OFFICE obeyed it anyway.\p"
@@ -37,7 +38,7 @@ FuchsiaCity_WardensHouse_Text_ThanksSonGiveYouSomething::
 
 @  T-540, DRAFT.
 FuchsiaCity_WardensHouse_Text_ThanksLassieGiveYouSomething::
-    .string "WARDEN: Thanks, friend!\n"
+    .string "GATEKEEPER: Thanks, friend!\n"
     .string "You're a real lifesaver!\p"
     .string "Nothing I sent would verify.\n"
     .string "The OFFICE obeyed it anyway.\p"
@@ -46,14 +47,15 @@ FuchsiaCity_WardensHouse_Text_ThanksLassieGiveYouSomething::
     .string "Let me give you something for your\n"
     .string "trouble.$"
 
+@  T-551, DRAFT.
 FuchsiaCity_WardensHouse_Text_ReceivedHM04FromWarden::
     .string "{PLAYER} received DRIVER04 from\n"
-    .string "the WARDEN.$"
+    .string "the GATEKEEPER.$"
 
 @  T-540, DRAFT.
 FuchsiaCity_WardensHouse_Text_ExplainStrength::
-    .string "WARDEN: Inside DRIVER04 you'll find\n"
-    .string "DISPLACE.\p"
+    .string "GATEKEEPER: Inside DRIVER04 you'll\n"
+    .string "find DISPLACE.\p"
     .string "It lets DAEMON move boulders when\n"
     .string "you're outside of battle.\p"
     .string "Oh yes, the SECRET HOUSE. I put\n"

@@ -5712,7 +5712,7 @@
       "price": 0,
       "holdEffect": "HOLD_EFFECT_NONE",
       "holdEffectParam": 0,
-      "description_english": "The WARDEN's key. Without it,\\nnothing he says can be read.",
+      "description_english": "The GATEKEEPER's key. Without it,\\nnothing he says can be read.",
       "importance": 1,
       "registrability": 0,
       "pocket": "POCKET_KEY_ITEMS",

@@ -5,10 +5,10 @@ SafariZone_West_Text_RestHouse::
 @  T-540 (was T-324), DRAFT.
 SafariZone_West_Text_PleaseFindWardensLostTeeth::
     .string "REQUEST NOTICE\p"
-    .string "The WARDEN has lost his TOKEN.\n"
+    .string "The GATEKEEPER has lost his TOKEN.\n"
     .string "He cannot sign this notice.\p"
     .string "Reward offered (unsigned).\n"
-    .string "Contact: WARDEN$"
+    .string "Contact: GATEKEEPER$"
 
 @  T-540 (was T-324), DRAFT.
 SafariZone_West_Text_SearchForSecretHouse::
