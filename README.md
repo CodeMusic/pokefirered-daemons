@@ -26,9 +26,9 @@ branched, and why it is said *DAY-mons*.
 written out as a university textbook -- seven floors, Language to Error.
 
 **No ROM is distributed.** Releases are BPS patches for a cartridge you own,
-published on the [DAEMONS releases page][releases] (latest: **v11.361.1**,
-2026-11-11; the newest thing in it that can be told about: the SAFARI ZONE
-is THE WALLED GARDEN now, and you sign in as a guest), four to a release: CONTENT for *FireRed* 1.0 and Rev 1, CONTEXT
+published on the [DAEMONS releases page][releases] (latest: **v11.362.1**,
+2026-11-11; the newest thing in it that can be told about: THE WALLED GARDEN's
+rooms are a glasshouse -- light comes in, and nothing is seen out), four to a release: CONTENT for *FireRed* 1.0 and Rev 1, CONTEXT
 for *LeafGreen* 1.0 and Rev 1. The game also plays in a browser on
 [**daemons-playground**][playground] (a private network only), and in the
 companion's [one app][oneapp] on an iPhone or iPad, which patches the player's
