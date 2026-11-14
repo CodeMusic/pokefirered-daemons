@@ -11,6 +11,8 @@
 #include "string_util.h"
 #include "strings.h"
 #include "daemons_time.h"
+#include "event_object_movement.h"
+#include "constants/event_objects.h"
 #include "constants/flags.h"
 #include "constants/vars.h"
 
@@ -43,6 +45,7 @@ enum
     PHRASE_SOUTH,
     PHRASE_EAST,
     PHRASE_WEST,
+    PHRASE_CHORUS,      // T-550: a crowd's read -- about no thing, so it is given and never lands
     PHRASE_COUNT
 };
 
@@ -57,6 +60,7 @@ static const u8 sPhrase_North[]  = _("something to the north.");
 static const u8 sPhrase_South[]  = _("something to the south.");
 static const u8 sPhrase_East[]   = _("something to the east.");
 static const u8 sPhrase_West[]   = _("something to the west.");
+static const u8 sPhrase_Chorus[] = _("the room is thinking one thought.");   // T-550 (the user, 2026-11-12: A), 181px
 
 static const u8 *const sPhrases[PHRASE_COUNT] =
 {
@@ -69,6 +73,7 @@ static const u8 *const sPhrases[PHRASE_COUNT] =
     [PHRASE_SOUTH]   = sPhrase_South,
     [PHRASE_EAST]    = sPhrase_East,
     [PHRASE_WEST]    = sPhrase_West,
+    [PHRASE_CHORUS]  = sPhrase_Chorus,
 };
 
 // THE LOG's page (DRAFT). Reflowed by the book reader: \p starts a line.
@@ -112,6 +117,54 @@ static void Count(u16 var)
 static s16 Abs(s16 v)
 {
     return v < 0 ? -v : v;
+}
+
+// T-550, THE SUBTLE LAYER's CHORUS: "It feels like a room thinking one thought." A crowd is READ_CROWD or more people
+// on the screen the first step shows -- counted, not listed by map, so it holds on every map there is and only while
+// the people are really there: the busy interiors (a GAME CORNER, a DEPT. STORE floor, a CENTER's upper floor) and a
+// crowded street alike, and an emptied room is not one. A person is any object drawn as somebody -- every actor is an
+// animal here, so it is easier to say what is NOT one: a thing (an item, a sign, a prop, a tree, a stone) or a daemon.
+static bool8 IsPerson(u16 gfx)
+{
+    if (gfx < OBJ_EVENT_GFX_GREEN_NORMAL)                                       // the player's own sprites
+        return FALSE;
+    if (gfx >= OBJ_EVENT_GFX_ITEM_BALL && gfx <= OBJ_EVENT_GFX_SS_ANNE)        // things, and the daemons drawn as they
+        return gfx == OBJ_EVENT_GFX_LIONESS;                                    // are -- all but T-461's LIONESS
+    if (gfx >= OBJ_EVENT_GFX_DAEMON_CHANSEY_S2 && gfx <= OBJ_EVENT_GFX_PLUGIN_DISC)   // T-438's daemons, the disc
+        return FALSE;
+    switch (gfx)
+    {
+    case OBJ_EVENT_GFX_SINGING_FIR:
+    case OBJ_EVENT_GFX_SINGING_FIR_DIM:
+    case OBJ_EVENT_GFX_BEACH_PALM:
+    case OBJ_EVENT_GFX_BREATH_FLUTE:
+    case OBJ_EVENT_GFX_CRYSTAL_RECEIVER:
+    case OBJ_EVENT_GFX_DESK_FLOWERS:
+    case OBJ_EVENT_GFX_DESK_CARD:
+    case OBJ_EVENT_GFX_LIONESS_BALL:
+    case OBJ_EVENT_GFX_BLANK_TABLET:
+        return FALSE;
+    }
+    return TRUE;
+}
+
+static bool8 InACrowd(void)
+{
+    s16 px, py;
+    u8 i, n = 0;
+    struct ObjectEvent *obj;
+
+    PlayerGetDestCoords(&px, &py);
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
+    {
+        obj = &gObjectEvents[i];
+        if (!obj->active || obj->isPlayer || obj->invisible || !IsPerson(OBJ_GFX_ID(obj)))
+            continue;
+        if (Abs(obj->currentCoords.x - px) <= READ_SCREEN_X && Abs(obj->currentCoords.y - py) <= READ_SCREEN_Y
+         && ++n >= READ_CROWD)
+            return TRUE;
+    }
+    return FALSE;
 }
 
 // What a read says about (X, Y), in map coordinates with MAP_OFFSET.
@@ -188,7 +241,8 @@ bool8 Daemons_TryReadArrives(void)
 {
     u16 here = ((gSaveBlock1Ptr->location.mapGroup << 8) | gSaveBlock1Ptr->location.mapNum) + 1;
     u16 thing = 0;
-    u8 n, phrase;
+    u8 n, phrase, chance;
+    bool8 crowd;
     s16 x, y;
 
     if (here == sReadLastMap)
@@ -197,6 +251,7 @@ bool8 Daemons_TryReadArrives(void)
     CheckLanded();
     if (!FlagGet(FLAG_GOT_SUBTLE_LAYER))
         return FALSE;
+    crowd = InACrowd();
     if (!DEBUG_ALWAYS)
     {
         if (sReadRest != 0)
@@ -204,10 +259,20 @@ bool8 Daemons_TryReadArrives(void)
             sReadRest--;
             return FALSE;
         }
-        if (Random() % 100 >= (DaemonsWeekday() == 5 ? READ_CHANCE_FRIDAY : READ_CHANCE))   // T-511: FRIDAY
+        chance = DaemonsWeekday() == 5 ? READ_CHANCE_FRIDAY : READ_CHANCE;   // T-511: FRIDAY
+        if (crowd)
+            chance /= 2;                                                    // T-550: half as often in a crowd
+        if (Random() % 100 >= chance)
             return FALSE;
     }
     sReadRest = READ_REST;
+    if (crowd)
+    {
+        // T-550: the crowd's read, about nothing found or findable -- THE LOG counts it given, and it never lands
+        Log(gMapHeader.regionMapSectionId | (PHRASE_CHORUS << 8) | ((DaemonsWeekday() + 1) << 12), 0);
+        StringCopy(StringCopy(gStringVar4, sText_ReadHead), sPhrases[PHRASE_CHORUS]);
+        return TRUE;
+    }
     n = Reveal_UnfoundCount();
     if (n != 0 && (DEBUG_ALWAYS_TRUE || Random() % 100 < READ_TRUE))
     {

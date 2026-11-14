@@ -98,6 +98,7 @@ void Three_OnFaint(u8 fainted, u8 attacker);                    // Cmd_tryfaintm
 bool8 Three_LeanWanted(u8 battler);                             // PlayerHandleChooseAction, each time it opens
 bool8 Three_LeanReady(void);                                    // TRUE once decided (or given up)
 const u8 *Three_LeanText(void);                                 // this turn's lean, or NULL
+void Three_LoadBoxPurple(u16 paletteOffset);                    // T-548, T-549: the lean's purple, into one slot
 void Three_LeanOnAction(u8 battler, u8 action);                 // RunTurnActionsFunctions, as each action begins
 void Three_LeanOnAttackString(u8 attacker, u16 move);           // Cmd_attackstring
 void Three_LeanTurnEnds(void);                                  // RunTurnActionsFunctions, the turn's actions done

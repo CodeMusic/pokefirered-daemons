@@ -15,6 +15,10 @@
 #define READ_NEAR           6       // tiles (across plus down) within which a thing is "close by"
 #define READ_LOOK           2       // tiles around a thing looked at for water, grass or sand
 #define READ_LOG            4       // the NOTEBOOK keeps the last this many reads (VAR_READ_LOG_WHERE/_THING + 0..3)
+#define READ_CROWD          4       // T-550: this many people on the screen the first step shows make a crowd, where a
+                                    // read comes half as often and is the crowd's (DRAFT)
+#define READ_SCREEN_X       7       // tiles either side of the player that are on the screen
+#define READ_SCREEN_Y       5       // and above and below
 // -----------------------------------------------------------------------------------------------------------------------
 
 bool8 Daemons_TryReadArrives(void);         // field_control_avatar.c's step hook; the line is left in gStringVar4

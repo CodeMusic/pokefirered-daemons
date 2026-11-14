@@ -29,6 +29,7 @@
 #include "constants/items.h"
 #include "daemon_streaks.h"
 #include "daemon_saturation.h"
+#include "daemons_three.h"   // T-548: the lean's purple
 
 extern struct Evolution gEvolutionTable[][EVOS_PER_MON];
 
@@ -54,6 +55,7 @@ COMMON_DATA void (*gCB2_AfterEvolution)(void) = NULL;
 // this file's functions
 static void Task_EvolutionScene(u8 taskId);
 static void Task_TradeEvolutionScene(u8 taskId);
+static void ExpandEvolvedText(void);
 static void CB2_EvolutionSceneUpdate(void);
 static void CB2_TradeEvolutionSceneUpdate(void);
 static void EvoDummyFunc(void);
@@ -811,7 +813,7 @@ static void Task_EvolutionScene(u8 taskId)
     case EVOSTATE_SET_MON_EVOLVED:
         if (IsCryFinished())
         {
-            StringExpandPlaceholders(gStringVar4, gText_CongratsPkmnEvolved);
+            ExpandEvolvedText();   // T-548
             BattlePutTextOnWindow(gStringVar4, B_WIN_MSG);
             PlayBGM(MUS_EVOLVED);
             gTasks[taskId].tState++;
@@ -1247,7 +1249,7 @@ static void Task_TradeEvolutionScene(u8 taskId)
     case T_EVOSTATE_SET_MON_EVOLVED:
         if (IsCryFinished())
         {
-            StringExpandPlaceholders(gStringVar4, gText_CongratsPkmnEvolved);
+            ExpandEvolvedText();   // T-548
             DrawTextOnTradeWindow(0, gStringVar4, 1);
             PlayFanfare(MUS_EVOLVED);
             gTasks[taskId].tState++;
@@ -1744,4 +1746,20 @@ static void RestoreBgAfterAnim(void)
     SetBgAttribute(2, BG_ATTR_PRIORITY, GetBattleBgTemplateData(2, 5));
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_BG3_ON | DISPCNT_BG0_ON | DISPCNT_OBJ_1D_MAP);
     Free(sBgAnimPal);
+}
+
+// T-548 (the user, 2026-11-12, by multiple choice: A), THE SUBTLE LAYER's CONTAINER -- "a daemon that evolves does not
+// seem to become someone else. It changes vessel." With the book held, the scene's own words, then one page under them
+// in the book's purple: the companion's line (C-357), one voice across both. Both boxes, the battle's and the trade's,
+// draw from the battle textbox palette, whose slot 12 nothing else draws (daemons_three.c's LEAN_SLOT). DRAFT.
+static const u8 sText_StillMe[] = _("{COLOR 12}{SHADOW 6}Still me.\p");   // DRAFT, 48px
+
+static void ExpandEvolvedText(void)
+{
+    StringExpandPlaceholders(gStringVar4, gText_CongratsPkmnEvolved);
+    if (FlagGet(FLAG_GOT_SUBTLE_LAYER))
+    {
+        Three_LoadBoxPurple(BG_PLTT_ID(0) + 12);
+        StringAppend(gStringVar4, sText_StillMe);
+    }
 }
