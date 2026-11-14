@@ -193,9 +193,13 @@ static const struct MapPreviewScreen sMapPreviewScreenData[MPS_COUNT] = {
         .tilemapptr = sCeruleanCaveMapPreviewTilemap,
         .palptr = sCeruleanCaveMapPreviewPalette
     },
+    // T-445 (theatre 2026-11-12): KEEPALIVE PLANT exits as the caves do, by flash and nested rectangles. Vanilla's
+    // FOREST exit cross-fades BG0 over the map already loaded, and the PLANT is entered at its door on the map's
+    // bottom edge, so a third of the screen under the card is void: the card faded dark over the void and light over
+    // the room, a rectangle seam through the picture and its name box. The forests fill the screen at their gates.
     [MPS_POWER_PLANT] = {
         .mapsec = MAPSEC_POWER_PLANT,
-        .type = MPS_TYPE_FOREST,
+        .type = MPS_TYPE_CAVE,
         .flagId = FLAG_WORLD_MAP_POWER_PLANT,
         .tilesptr = sPowerPlantMapPreviewTiles,
         .tilemapptr = sPowerPlantMapPreviewTilemap,

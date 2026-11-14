@@ -540,5 +540,8 @@ gSpecials::
 	def_special Eudaimon_LarkWait            @ T-519 item 2: sitting with her; VAR_RESULT TRUE if it was sat out (waitstate)
 	def_special Aurora_DawnChorus             @ T-528 (d): the dawn chorus is singing here (specialvar)
 	def_special Aurora_FoxSays                @ T-528 (e): TULIKKO's line, 0-3 (specialvar)
+	def_special BlankTablet_Begin             @ T-547: THE BLANK TABLET, the face by the side stood on
+	def_special BlankTablet_Next              @ T-547: the next page in gStringVar4 (specialvar), FALSE when read
+	def_special OldToad_Line                  @ T-547: the old toad's one line, in gStringVar4
 	def_special Origin_Open                  @ T-533: THE ORIGIN OF A DAEMON, at its cover (waitstate)
 gSpecialsEnd::

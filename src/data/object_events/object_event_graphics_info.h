@@ -4731,3 +4731,43 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Tulikko = {
     .images = sPicTable_Tulikko,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
+
+// T-547: the old toad in BLANCHE (DAEMONS tools/genblanktablet.py, from TILT's koga.png), npc_green as the woman she replaced
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_OldToad = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_GREEN,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = PALSLOT_NPC_3,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gObjectEventBaseOam_16x32,
+    .subspriteTables = gObjectEventSpriteOamTables_16x32,
+    .anims = sAnimTable_Standard,
+    .images = sPicTable_OldToad,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+// T-547: THE BLANK TABLET (DAEMONS tools/genblanktablet.py), npc_white as BLANCHE's other neighbour; a stone: inanimate
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BlankTablet = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 256,
+    .width = 16,
+    .height = 32,
+    .paletteSlot = PALSLOT_NPC_4,
+    .shadowSize = SHADOW_SIZE_M,
+    .inanimate = TRUE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gObjectEventBaseOam_16x32,
+    .subspriteTables = gObjectEventSpriteOamTables_16x32,
+    .anims = sAnimTable_Inanimate,
+    .images = sPicTable_BlankTablet,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};

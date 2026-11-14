@@ -1,10 +1,12 @@
+@  T-540, DRAFT.
 SafariZone_East_Text_HowManyDidYouCatch::
-    .string "How many did you bind? I'm bushed\n"
-    .string "from the work!$"
+    .string "How many did you bind? I've\n"
+    .string "walked my whole session!$"
 
+@  T-540, DRAFT.
 SafariZone_East_Text_CaughtChanseyAllWorthwhile::
     .string "I bound an UPTIME!\p"
-    .string "That makes this all worthwhile!$"
+    .string "It's been approved and everything!$"
 
 SafariZone_East_Text_TiredFromAllTheFun::
     .string "Whew!\n"

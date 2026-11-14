@@ -346,6 +346,13 @@ const u8 *Three_LeanText(void)
     return sLeans[gBattleStruct->lean];
 }
 
+// T-548, T-549: the same purple wherever a dark box carries THE SUBTLE LAYER's words outside a battle -- the evolution
+// scene's box (BG palette 0's slot 12, as above) and the naming screen's banner.
+void Three_LoadBoxPurple(u16 paletteOffset)
+{
+    LoadPalette(sLeanPurple, paletteOffset, PLTT_SIZEOF(1));
+}
+
 void Three_LeanOnAction(u8 battler, u8 action)
 {
     if (gBattleStruct == NULL || gBattleStruct->lean == LEAN_NONE || battler != Foe()

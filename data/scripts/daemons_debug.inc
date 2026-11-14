@@ -393,7 +393,7 @@ DaemonsDebug_Text_Crystal::
 	.string "her in her lab.$"
 
 DaemonsDebug_Text_Warden::
-	.string "DEBUG: the WARDEN's TOKEN?\p"
+	.string "DEBUG: the GATEKEEPER's TOKEN?\p"
 	.string "It goes in the POOL. Speak to him\n"
 	.string "to hand it back.$"
 

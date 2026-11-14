@@ -1,13 +1,15 @@
+@  T-540, DRAFT.
 SafariZone_East_Text_RestHouse::
-    .string "REST HOUSE$"  @ T-401, DRAFT: the REST->IDLE move sweep (5baafcbcd) had reached the sign
+    .string "WAITING ROOM$"
 
-@  T-324, DRAFT.
+@  T-540 (was T-324), DRAFT.
 SafariZone_East_Text_TimeDeclinesOnlyWhileYouWalk::
     .string "USER TIPS\p"
-    .string "The clock only runs while you\n"
-    .string "walk. Standing still is free.$"
+    .string "Your session is metered by the\n"
+    .string "step. Standing still is free.$"
 
+@  T-540, DRAFT.
 SafariZone_East_Text_AreaSign::
-    .string "AREA 1\n"
-    .string "WEST: CENTER AREA$"
+    .string "RING 2\n"
+    .string "WEST: RING 3$"
 

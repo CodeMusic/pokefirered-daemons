@@ -25,6 +25,7 @@
 #include "constants/songs.h"
 #include "constants/event_objects.h"
 #include "sloopsvc.h"
+#include "daemons_three.h"   // T-549: the lean's purple
 
 enum {
     INPUT_NONE,
@@ -1889,11 +1890,14 @@ static const u16 sBanner_Pal[16] =
     RGB(2, 21, 27), RGB(0, 10, 14), RGB(0, 14, 17), RGB(2, 3, 6)
 };
 
+#define BANNER_PURPLE 4   // T-549: sBanner_Pal's slot 4, a red nothing on the banner draws
+
 static void LoadPalettes(void)
 {
     LoadPalette(gNamingScreenMenu_Pal, BG_PLTT_ID(0), sizeof(gNamingScreenMenu_Pal));
     LoadPalette(gNamingScreenKeyboard_Pal, BG_PLTT_ID(10), PLTT_SIZE_4BPP);
     LoadPalette(sBanner_Pal, BG_PLTT_ID(11), PLTT_SIZE_4BPP);
+    Three_LoadBoxPurple(BG_PLTT_ID(11) + BANNER_PURPLE);   // T-549: over the banner's unused red
 }
 
 static void DecompressToBgTilemapBuffer(u8 bg, const u32 *src)
@@ -1998,13 +2002,23 @@ static void DrawKeyboardPageOnDeck(void)
     CopyBgTilemapBufferToVram(bgId_copy);
 }
 
+// T-549 (the user, 2026-11-12, by multiple choice: A), THE SUBTLE LAYER's SAY INSTEAD -- "Choose a name that is a
+// direction, not a verdict." With the book held, a daemon's naming screen (never the player's, the rival's, a box's or
+// the console's) carries it faintly on the banner's empty left, in the lean's purple with no shadow, beside the
+// controls. FONT_SMALL, 132px from x 4, so it ends at 136 -- the controls start at about 157. DRAFT.
+static const u8 sText_ADirection[] = _("A direction, not a verdict.");   // DRAFT
+
 static void PrintControls(void)
 {
     const u8 color[3] = { TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY };
+    const u8 faint[3] = { TEXT_DYNAMIC_COLOR_6, BANNER_PURPLE, TEXT_DYNAMIC_COLOR_6 };
     int strwidth = GetStringWidth(FONT_SMALL, gText_MoveOkBack, 0);
 
     FillWindowPixelBuffer(sNamingScreen->windows[WIN_BANNER], PIXEL_FILL(15));
     AddTextPrinterParameterized3(sNamingScreen->windows[WIN_BANNER], FONT_SMALL, DISPLAY_WIDTH - 4 - strwidth, 0, color, 0, gText_MoveOkBack);
+    if ((sNamingScreen->templateNum == NAMING_SCREEN_CAUGHT_MON || sNamingScreen->templateNum == NAMING_SCREEN_NICKNAME)
+     && FlagGet(FLAG_GOT_SUBTLE_LAYER))
+        AddTextPrinterParameterized3(sNamingScreen->windows[WIN_BANNER], FONT_SMALL, 4, 0, faint, 0, sText_ADirection);
     PutWindowTilemap(sNamingScreen->windows[WIN_BANNER]);
     CopyWindowToVram(sNamingScreen->windows[WIN_BANNER], COPYWIN_FULL);
 }

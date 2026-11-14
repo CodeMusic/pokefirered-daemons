@@ -13,6 +13,7 @@
 #include "daemons_aurora.h"     // T-528 (d): the dawn chorus
 #include "daemons_time.h"
 #include "daemons_pulse.h"   // the gold breath
+#include "daemons_blackout.h"   // T-546: no bloom in THE BLACKOUT's dark
 #include "constants/songs.h"
 
 // T-519 item 4: THE TWO HOURS (the user, 2026-11-02 and 2026-11-04, by multiple choice).
@@ -239,6 +240,8 @@ static void Bloom(u16 s)
 
     if (gPaletteFade.active || gPaletteFade.y != 0)
         y = 0;                                  // a fade to black stays black
+    if (Blackout_IsDark())
+        y = 0;                                  // T-546: it would lift VERBOSE's circle out of THE BLACKOUT's black
     if (!DaemonsFieldOnScreen())
     {
         // Left for a battle, the BAG, a screen of its own: the brighten let go at once (BLDY 0 changes nothing), and

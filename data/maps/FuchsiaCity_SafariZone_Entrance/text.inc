@@ -1,23 +1,29 @@
+@  T-540, DRAFT.
 FuchsiaCity_SafariZone_Entrance_Text_WelcomeToSafariZone::
-    .string "Welcome to the SAFARI ZONE!$"
+    .string "Welcome to THE WALLED GARDEN!\n"
+    .string "Please sign in as a guest.$"
 
+@  T-540, DRAFT.
 FuchsiaCity_SafariZone_Entrance_Text_PlaySafariGameFor500::
-    .string "For just ¥500, you can bind all\n"
-    .string "the DAEMON you want in the park!\p"
-    .string "Would you like to join the hunt?$"
+    .string "For just ¥500, you get a guest\n"
+    .string "session in the GARDEN.\p"
+    .string "Bind whatever runs in there!\n"
+    .string "Would you like to sign in?$"
 
+@  T-540, DRAFT.
 FuchsiaCity_SafariZone_Entrance_Text_ThatllBe500WeOnlyUseSpecialBalls::
-    .string "That'll be ¥500 please!\p"
-    .string "We only use a special GUESTBOX\n"
-    .string "here.$"
+    .string "That'll be ¥500, please!\p"
+    .string "Only our own GUESTBOXES run\n"
+    .string "past the wall.$"
 
 FuchsiaCity_SafariZone_Entrance_Text_PlayerReceived30SafariBalls::
     .string "{PLAYER} received 30 GUESTBOXES\n"
     .string "from the attendant.$"
 
+@  T-540, DRAFT.
 FuchsiaCity_SafariZone_Entrance_Text_CallYouOnPAWhenYouRunOut::
-    .string "We'll call you on the PA when you\n"
-    .string "run out of time or GUESTBOXes!$"
+    .string "We'll call you on the PA when\n"
+    .string "your session expires!$"
 
 FuchsiaCity_SafariZone_Entrance_Text_OkayPleaseComeAgain::
     .string "Okay.\n"
@@ -27,32 +33,38 @@ FuchsiaCity_SafariZone_Entrance_Text_OopsNotEnoughMoney::
     .string "Oops!\n"
     .string "Not enough money!$"
 
+@  T-540, DRAFT.
 FuchsiaCity_SafariZone_Entrance_Text_GoingToLeaveSafariZoneEarly::
-    .string "Are you going to leave the\n"
-    .string "SAFARI ZONE early?$"
+    .string "Leaving before your session\n"
+    .string "expires?$"
 
+@  T-540, DRAFT.
 FuchsiaCity_SafariZone_Entrance_Text_PleaseReturnSafariBalls::
-    .string "Please return any GUESTBOXes you\n"
-    .string "have left.$"
+    .string "Please return any GUESTBOXES you\n"
+    .string "have left. They expire here.$"
 
+@  T-540, DRAFT.
 FuchsiaCity_SafariZone_Entrance_Text_GoodLuck::
-    .string "Good luck!$"
+    .string "Enjoy your session!$"
 
+@  T-540, DRAFT.
 FuchsiaCity_SafariZone_Entrance_Text_CatchFairShareComeAgain::
-    .string "Did you bind your fair share? Come\n"
-    .string "again!$"
+    .string "Your session is closed.\n"
+    .string "Come again!$"
 
+@  T-540, DRAFT.
 FuchsiaCity_SafariZone_Entrance_Text_FirstTimeAtSafariZone::
-    .string "Hi! Is it your first time here at\n"
-    .string "the SAFARI ZONE?$"
+    .string "Hi! Is it your first time in\n"
+    .string "THE WALLED GARDEN?$"
 
+@  T-540, DRAFT.
 FuchsiaCity_SafariZone_Entrance_Text_ExplainSafariZone::
-    .string "SAFARI ZONE has 4 zones in it.\p"
-    .string "Each zone has different kinds of\n"
-    .string "DAEMONS. Use GUESTBOXes to bind\l"
+    .string "The GARDEN has four RINGS.\p"
+    .string "Each RING runs different kinds of\n"
+    .string "DAEMONS. Use GUESTBOXES to bind\l"
     .string "them!\p"
-    .string "When you run out of time or\n"
-    .string "GUESTBOXes, it's game over for you!\p"
+    .string "When your steps or GUESTBOXES\n"
+    .string "run out, your session expires!\p"
     .string "Before you go, open an unused\n"
     .string "DAEMON BOX so there's room for new\l"
     .string "DAEMON!$"

@@ -27,7 +27,7 @@ static const u16 sUnityPal[16] =
     [C_HIGHLIGHT] = RGB(11, 8, 10),
     [C_RING] = RGB(8, 22, 14),
     [C_FRAME] = RGB(1, 1, 1),
-    [C_SLATE] = RGB(8, 6, 8),
+    [C_SLATE] = RGB(8, 7, 18),
     [C_CHALK] = RGB(31, 30, 28),
     [C_CHALK_FAINT] = RGB(20, 17, 16),
     [C_COVER] = RGB(4, 3, 5),
@@ -402,7 +402,7 @@ static const u8 sUnityText_53[] = _("The third tablet, read. Being the saying th
 static const u8 sUnityCaption_53[] = _("The stone, both faces.");
 static const u8 sUnityShort_54[] = _("LAST WORD");
 static const u8 sUnityTitle_54[] = _("As Above, So Below, So One");
-static const u8 sUnityText_54[] = _("As above, so below, so one.\pYou have read a book that was torn, and mended it, and read it whole. Close it gently. The world will look the same in the morning and the same at night. It will not be, and it always was.");
+static const u8 sUnityText_54[] = _("As above, so below, so one.\pYou have read a book that was torn, and mended it, and read it whole. Close it gently. The world will look the same in the morning and the same at night. It will not be, and it always was. Look again, and you will see them both.");
 static const u8 sUnityCaption_54[] = _("");
 
 static const struct SubtleSection sUnitySections[UNITY_SECTIONS] =

@@ -606,3 +606,9 @@ $(OBJEVENTGFXDIR)/people/lioness_ball.4bpp: %.4bpp: %.png
 
 $(OBJEVENTGFXDIR)/people/tulikko.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
+
+$(OBJEVENTGFXDIR)/people/old_toad.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4
+
+$(OBJEVENTGFXDIR)/people/blank_tablet.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 2 -mheight 4

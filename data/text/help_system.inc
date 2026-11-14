@@ -174,14 +174,17 @@ Help_Text_WhatIsThatPersonLike::
 Help_Text_WhatDoesHiddenMoveDo::
 	.string "What does a HIDDEN ROUTINE do?$"
 
+@  T-540, DRAFT.
 Help_Text_WhatDoIDoInSafari::
-	.string "What do I do in a SAFARI GAME?$"
+	.string "What do I do in THE WALLED GARDEN?$"
 
+@  T-540, DRAFT.
 Help_Text_WhatAreSafariRules::
-	.string "What are the SAFARI GAME rules?$"
+	.string "What are the GARDEN's rules?$"
 
+@  T-540, DRAFT.
 Help_Text_WantToEndSafari::
-	.string "I want to end this SAFARI GAME!$"
+	.string "I want to end my guest session!$"
 
 Help_Text_WhatIsAGym::
 	.string "What is a BENCHMARK?$"
@@ -503,17 +506,19 @@ Help_Text_AnswerWhatDoIDoInSafari::
 	.string "special GUESTBOXES. You may keep any\l"
 	.string "item you find, too.$"
 
+@  T-540, DRAFT.
 Help_Text_AnswerWhatAreSafariRules::
-	.string "Your SAFARI GAME ends once you have\n"
+	.string "Your guest session ends once you have\n"
 	.string "traveled a certain distance or thrown\l"
 	.string "all your GUESTBOXES. Open the MENU to\l"
 	.string "check the remaining number of steps and\l"
 	.string "GUESTBOXES.$"
 
+@  T-540, DRAFT.
 Help_Text_AnswerWantToEndSafari::
-	.string "If you would like to cut your SAFARI\n"
-	.string "GAME short, open the MENU and select\l"
-	.string "“RETIRE” at the top of the list.$"
+	.string "If you would like to end your guest\n"
+	.string "session early, open the MENU and select\l"
+	.string "“SIGN OUT” at the top of the list.$"
 
 Help_Text_AnswerWhatIsAGym::
 	.string "BENCHMARKS are operated by the\n"
@@ -1028,23 +1033,26 @@ Help_Text_HowToRegisterKeyItem::
 	.string "{CIRCLE_2} Select the key item, then select\n"
 	.string "   “REGISTER.”$"
 
+@  T-540, DRAFT.
 Help_Text_HowToUseBall::
 	.string "{CIRCLE_1} Select to throw the special BOX\n"
-	.string "   used only in the SAFARI ZONE.\n"
+	.string "   issued at the GARDEN's gate.\n"
 	.string "When wild DAEMONS appear, throw lots\n"
 	.string "of GUESTBOXES to bind them!$"
 
+@  T-540, DRAFT.
 Help_Text_HowToUseBait::
 	.string "{CIRCLE_1} Select to throw the special food\n"
-	.string "   used only in the SAFARI ZONE.\n"
+	.string "   used only in THE WALLED GARDEN.\n"
 	.string "It is DAEMON food rolled up into\n"
 	.string "a box for easy eating. When BAIT is\n"
 	.string "thrown, the wild DAEMON may get\n"
 	.string "attracted by it, and may not DETACH!$"
 
+@  T-540, DRAFT.
 Help_Text_HowToUseRock::
 	.string "{CIRCLE_1} Select to throw a rock lying on\n"
-	.string "   the ground in the SAFARI ZONE.\n"
+	.string "   the ground in THE WALLED GARDEN.\n"
 	.string "Throwing a rock at a DAEMON may \n"
 	.string "make it run away, but it becomes easier\n"
 	.string "to bind!$"

@@ -271,10 +271,11 @@ gFameCheckerFlavorText_Koga4::
 	.string "Each is labelled with what it\n"
 	.string "cures, and what causes it.$"
 
+@  T-540, DRAFT: TILT's line, as the WEST rest house (port_hearsay.py).
 gFameCheckerFlavorText_Koga5::
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
-	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}TILT walks the SAFARI ZONE every\n"
-	.string "so often.\p"
+	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}TILT walks THE WALLED GARDEN\n"
+	.string "every so often.\p"
 	.string "Things go wrong less after he has\n"
 	.string "been. Nobody's seen him fix a\l"
 	.string "thing.$"
@@ -913,8 +914,9 @@ gFameCheckerFlavorTextOriginLocation_Koga3::
 gFameCheckerFlavorTextOriginLocation_Koga4::
 	.string "LURID CITY$"
 
+@  T-540, DRAFT: the mapsec's new name.
 gFameCheckerFlavorTextOriginLocation_Koga5::
-	.string "SAFARI ZONE$"
+	.string "THE WALLED GARDEN$"
 
 gFameCheckerFlavorTextOriginLocation_Sabrina0::
 	.string "BRAZEN CITY$"
