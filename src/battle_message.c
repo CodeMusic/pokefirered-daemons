@@ -131,8 +131,8 @@ static const u8 sText_SinkTookTheHit[] = _("{B_DEF_NAME_WITH_PREFIX}'s\n{B_LAST_
 static const u8 sText_SeamHurts[] = _("{B_EFF_NAME_WITH_PREFIX}\nfelt it through the SEAM!");
 static const u8 sText_SeamMends[] = _("{B_EFF_NAME_WITH_PREFIX}\nwas mended through the SEAM!");
 static const u8 sText_SeamCarries[] = _("The SEAM carried it to\n{B_EFF_NAME_WITH_PREFIX}!");
-static const u8 sText_DurableHeld[] = _("{B_DEF_NAME_WITH_PREFIX} did not go down\nto one hit!");   // T-561, DRAFT: 5.3's creed, "a record does not go down to one hit"
-// T-562, DRAFT: the dream in DOLDRUM CAVE (T-254) ends on one line in S.T.A.R.R.'s terminal register -- a place and a
+static const u8 sText_DurableHeld[] = _("{B_DEF_NAME_WITH_PREFIX} did not go down\nto one hit!");   // T-556, DRAFT: 5.3's creed, "a record does not go down to one hit"
+// T-557, DRAFT: the dream in DOLDRUM CAVE (T-254) ends on one line in S.T.A.R.R.'s terminal register -- a place and a
 // fact, nothing about why (0.7: point at a place, never name the understanding). It is the cave's second gate, said once
 // per dream, so the unread cave is a signpost rather than a dead end. 172px / 179px.
 static const u8 sText_DreamSeventh[] = _("SEVEN ISLAND. SEVEN CHAMBERS.\pTHE SEVENTH HAS NOT BEEN READ.");

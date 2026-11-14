@@ -1745,7 +1745,7 @@ static void SpriteCB_UnusedDebugSprite_Step(struct Sprite *sprite)
     }
 }
 
-// T-564: AL's friendship by fight -- 255 in the lab, then 161, 122, 92, 66, 44, 24, and 0 at the REVIEW BOARD and
+// T-559: AL's friendship by fight -- 255 in the lab, then 161, 122, 92, 66, 44, 24, and 0 at the REVIEW BOARD and
 // after it. Each step takes about a twelfth of the colour (daemon_saturation.c's curve), so the fade reads as even.
 static u8 RivalFriendship(u16 trainerNum)
 {
@@ -1894,7 +1894,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum)
             for (i = 0; i < gTrainers[trainerNum].partySize; i++)
                 SetMonData(&party[i], MON_DATA_FRIENDSHIP, &none);
         }
-        // T-564 (bible 8.6a, 8.7's idea taken): AL's daemons come at full colour in the lab and lose it fight by
+        // T-559 (bible 8.6a, 8.7's idea taken): AL's daemons come at full colour in the lab and lose it fight by
         // fight -- the transmission failure visible on the one party the player meets eight times, with no line
         // and no sneer. The steps are even on the eye (Saturation_OfFriendship's curve), not on the number.
         else if (gTrainers[trainerNum].trainerClass == TRAINER_CLASS_RIVAL_EARLY
