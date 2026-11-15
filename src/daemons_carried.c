@@ -68,7 +68,7 @@ STATIC_ASSERT(sizeof(struct BoxPokemon) == 80, BoxPokemonIsStillEightyBytes);
 STATIC_ASSERT(NUM_SPECIES <= 512, TradePartnerFitsNineBits);
 
 //  DRAFT (T-448): the one line on return
-static const u8 sText_CarriedDeliveredBox[] = _("Something followed you home from the\nwalk. {STR_VAR_1} waits in the PC.");
+static const u8 sText_CarriedDeliveredBox[] = _("Something followed you home from\nthe walk.\p{STR_VAR_1} waits in the PORT.");
 static const u8 sText_CarriedDeliveredParty[] = _("Something followed you home from the\nwalk. {STR_VAR_1} is with you.");
 static const u8 sText_CarriedChanged[] = _("{STR_VAR_1} changed while it was\ncarried.");
 static const u8 sText_CarriedTraded[] = _("{STR_VAR_1} arrived in a trade.");   // T-473, DRAFT

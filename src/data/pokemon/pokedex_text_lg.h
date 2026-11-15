@@ -1684,8 +1684,9 @@ const u8 gHoOhPokedexText[] = _(
 const u8 gHoOhPokedexTextUnused[] = _("");
 
 const u8 gCelebiPokedexText[] = _(
-    "Nobody has caught it twice. It does\n"
-    "not come back for the same person.");
+    "Nobody has bound it\n"
+    "twice. It does not come\n"
+    "back for the same person.");
 
 const u8 gCelebiPokedexTextUnused[] = _("");
 

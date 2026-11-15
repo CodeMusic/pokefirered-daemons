@@ -275,8 +275,8 @@ Text_HalloweenTreat::
 	.string "{STR_VAR_2}!$"
 
 Text_HermeticArrives::
-	.string "There is a book in the bag that was\n"
-	.string "not there before.\p"
+	.string "There is a book in the POOL that\n"
+	.string "was not there before.\p"
 	.string "THE HERMETIC LAYER. Its pages are\n"
 	.string "cool, and it opens only at night.$"
 
