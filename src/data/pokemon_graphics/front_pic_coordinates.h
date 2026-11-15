@@ -667,13 +667,13 @@ const struct MonCoords gMonFrontPicCoords[] =
     },
     [SPECIES_EEVEE] =
     {
-        .size = MON_COORDS_SIZE(32, 48),
+        .size = MON_COORDS_SIZE(40, 48),
         .y_offset = 11,
     },
     [SPECIES_VAPOREON] =
     {
-        .size = MON_COORDS_SIZE(56, 56),
-        .y_offset = 7,
+        .size = MON_COORDS_SIZE(40, 48),
+        .y_offset = 9,
     },
     [SPECIES_JOLTEON] =
     {
@@ -682,8 +682,8 @@ const struct MonCoords gMonFrontPicCoords[] =
     },
     [SPECIES_FLAREON] =
     {
-        .size = MON_COORDS_SIZE(48, 48),
-        .y_offset = 10,
+        .size = MON_COORDS_SIZE(40, 48),
+        .y_offset = 9,
     },
     [SPECIES_PORYGON] =
     {
@@ -982,13 +982,13 @@ const struct MonCoords gMonFrontPicCoords[] =
     },
     [SPECIES_ESPEON] =
     {
-        .size = MON_COORDS_SIZE(56, 48),
-        .y_offset = 11,
+        .size = MON_COORDS_SIZE(56, 56),
+        .y_offset = 7,
     },
     [SPECIES_UMBREON] =
     {
-        .size = MON_COORDS_SIZE(56, 56),
-        .y_offset = 4,
+        .size = MON_COORDS_SIZE(48, 48),
+        .y_offset = 9,
     },
     [SPECIES_MURKROW] =
     {
@@ -2207,92 +2207,92 @@ const struct MonCoords gMonFrontPicCoords[] =
     [SPECIES_EEVEE_WINTER] =
     {
         .size = MON_COORDS_SIZE(40, 48),
-        .y_offset = 9,
+        .y_offset = 10,
     },
     [SPECIES_EEVEE_SPRING] =
-    {
-        .size = MON_COORDS_SIZE(32, 56),
-        .y_offset = 8,
-    },
-    [SPECIES_EEVEE_AUTUMN] =
     {
         .size = MON_COORDS_SIZE(40, 48),
         .y_offset = 9,
     },
+    [SPECIES_EEVEE_AUTUMN] =
+    {
+        .size = MON_COORDS_SIZE(48, 48),
+        .y_offset = 11,
+    },
     [SPECIES_FLAREON_WINTER] =
     {
-        .size = MON_COORDS_SIZE(48, 56),
-        .y_offset = 5,
+        .size = MON_COORDS_SIZE(56, 48),
+        .y_offset = 9,
     },
     [SPECIES_FLAREON_SPRING] =
     {
-        .size = MON_COORDS_SIZE(56, 48),
-        .y_offset = 11,
+        .size = MON_COORDS_SIZE(56, 56),
+        .y_offset = 8,
     },
     [SPECIES_FLAREON_AUTUMN] =
     {
-        .size = MON_COORDS_SIZE(40, 56),
-        .y_offset = 6,
-    },
-    [SPECIES_JOLTEON_WINTER] =
-    {
-        .size = MON_COORDS_SIZE(56, 48),
+        .size = MON_COORDS_SIZE(48, 56),
         .y_offset = 8,
     },
-    [SPECIES_JOLTEON_SPRING] =
+    [SPECIES_JOLTEON_WINTER] =
     {
         .size = MON_COORDS_SIZE(48, 48),
         .y_offset = 9,
     },
+    [SPECIES_JOLTEON_SPRING] =
+    {
+        .size = MON_COORDS_SIZE(48, 56),
+        .y_offset = 6,
+    },
     [SPECIES_JOLTEON_AUTUMN] =
     {
-        .size = MON_COORDS_SIZE(56, 56),
-        .y_offset = 6,
+        .size = MON_COORDS_SIZE(48, 48),
+        .y_offset = 9,
     },
     [SPECIES_VAPOREON_WINTER] =
     {
-        .size = MON_COORDS_SIZE(48, 56),
-        .y_offset = 8,
+        .size = MON_COORDS_SIZE(40, 48),
+        .y_offset = 9,
     },
     [SPECIES_VAPOREON_SPRING] =
     {
-        .size = MON_COORDS_SIZE(40, 48),
-        .y_offset = 8,
+        .size = MON_COORDS_SIZE(40, 56),
+        .y_offset = 7,
     },
     [SPECIES_VAPOREON_AUTUMN] =
     {
-        .size = MON_COORDS_SIZE(40, 48),
-        .y_offset = 10,
+        .size = MON_COORDS_SIZE(48, 48),
+        .y_offset = 9,
     },
     [SPECIES_ESPEON_WINTER] =
     {
-        .size = MON_COORDS_SIZE(56, 48),
-        .y_offset = 11,
+        .size = MON_COORDS_SIZE(56, 56),
+        .y_offset = 7,
     },
     [SPECIES_ESPEON_SPRING] =
+    {
+        .size = MON_COORDS_SIZE(56, 48),
+        .y_offset = 8,
+    },
+    [SPECIES_ESPEON_AUTUMN] =
+    {
+        .size = MON_COORDS_SIZE(56, 56),
+        .y_offset = 8,
+    },
+    [SPECIES_UMBREON_WINTER] =
     {
         .size = MON_COORDS_SIZE(64, 48),
         .y_offset = 11,
     },
-    [SPECIES_ESPEON_AUTUMN] =
-    {
-        .size = MON_COORDS_SIZE(56, 48),
-        .y_offset = 12,
-    },
-    [SPECIES_UMBREON_WINTER] =
-    {
-        .size = MON_COORDS_SIZE(56, 64),
-        .y_offset = 4,
-    },
     [SPECIES_UMBREON_SPRING] =
     {
-        .size = MON_COORDS_SIZE(56, 64),
-        .y_offset = 3,
+        .size = MON_COORDS_SIZE(56, 56),
+        .y_offset = 6,
     },
     [SPECIES_UMBREON_AUTUMN] =
     {
-        .size = MON_COORDS_SIZE(64, 64),
-        .y_offset = 2,
+        .size = MON_COORDS_SIZE(56, 48),
+        .y_offset = 10,
     },
     // END genmusaiseasons
 };
