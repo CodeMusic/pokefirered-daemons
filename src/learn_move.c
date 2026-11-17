@@ -413,7 +413,7 @@ static void MoveRelearnerLoadBgGfx(void)
 
 static void CB2_MoveRelearner_Init(void)
 {
-    SetGpuReg(REG_OFFSET_DISPCNT, 0);
+    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);   // sprites on: the list's scroll arrows (vanilla left them off; T-566)
     ResetSpriteData();
     FreeAllSpritePalettes();
     ResetTasks();
@@ -433,7 +433,7 @@ static void CB2_MoveRelearner_Init(void)
 
 static void CB2_MoveRelearner_Resume(void)
 {
-    SetGpuReg(REG_OFFSET_DISPCNT, 0);
+    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);   // sprites on: the list's scroll arrows (vanilla left them off; T-566)
     ResetSpriteData();
     FreeAllSpritePalettes();
     ResetTasks();
@@ -738,10 +738,10 @@ static void SpawnListMenuScrollIndicatorSprites(void)
     gSprites[sMoveRelearner->spriteIds[0]].data[0] = 2;
     gSprites[sMoveRelearner->spriteIds[0]].data[2] = -1;
 
-    // Bug: This should be using the second element of spriteIds.
-    sMoveRelearner->spriteIds[0] = CreateSprite(&sSpriteTemplate_MoveRelearnerListMenuScrollIndicators, 200, 108, 0);
-    gSprites[sMoveRelearner->spriteIds[0]].data[0] = 2;
-    gSprites[sMoveRelearner->spriteIds[0]].data[2] = 1;
+    // vanilla stored this in spriteIds[0] too, so the up arrow was lost (fixed with T-566's caret arrows)
+    sMoveRelearner->spriteIds[1] = CreateSprite(&sSpriteTemplate_MoveRelearnerListMenuScrollIndicators, 200, 108, 0);
+    gSprites[sMoveRelearner->spriteIds[1]].data[0] = 2;
+    gSprites[sMoveRelearner->spriteIds[1]].data[2] = 1;
     for (i = 0; i < 2; i++)
         gSprites[sMoveRelearner->spriteIds[i]].invisible = TRUE;
 }
@@ -796,14 +796,14 @@ static void MoveRelearnerMenuHandleInput(void)
         sMoveRelearner->state = 12;
         StringExpandPlaceholdersAndPrintTextOnWindow7Color2(gText_GiveUpTryingToTeachNewMove);
     }
-    if (sMoveRelearner->numLearnableMoves > 6)
+    // vanilla showed gSprites[0] and [1] (not the arrows) by a scroll it never updated, one row out; read the list's own
+    if (gMultiuseListMenuTemplate.totalItems > gMultiuseListMenuTemplate.maxShowed)
     {
-        gSprites[0].invisible = FALSE;
-        gSprites[1].invisible = FALSE;
-        if (sMoveRelearner->scrollPositionMaybe == 0)
-            gSprites[0].invisible = TRUE;
-        else if (sMoveRelearner->scrollPositionMaybe == sMoveRelearner->numLearnableMoves - 6)
-            gSprites[1].invisible = TRUE;
+        u16 scroll, row;
+        ListMenuGetScrollAndRow(sMoveRelearner->listMenuTaskId, &scroll, &row);
+        gSprites[sMoveRelearner->spriteIds[0]].invisible = (scroll == 0);
+        gSprites[sMoveRelearner->spriteIds[1]].invisible =
+            (scroll + gMultiuseListMenuTemplate.maxShowed >= gMultiuseListMenuTemplate.totalItems);
     }
 }
 
