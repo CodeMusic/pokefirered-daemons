@@ -26,7 +26,7 @@ branched, and why it is said *DAY-mons*.
 written out as a university textbook -- seven floors, Language to Error.
 
 **No ROM is distributed.** Releases are BPS patches for a cartridge you own,
-published on the [DAEMONS releases page][releases] (latest: **v11.386.1**,
+published on the [DAEMONS releases page][releases] (latest: **v11.387.1**,
 2026-11-17; the newest thing in it that can be told about: every battle has music
 of its own -- our harp and flute over the cartridge), four to a release: CONTENT for *FireRed* 1.0 and Rev 1, CONTEXT
 for *LeafGreen* 1.0 and Rev 1. The game also plays in a browser on
