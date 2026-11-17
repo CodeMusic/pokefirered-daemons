@@ -3538,7 +3538,8 @@ static void CreatePlayerIconSprite(void)
 
     LoadSpriteSheet(&spriteSheet);
     LoadSpritePalette(&spritePalette);
-    spriteId = CreateSprite(&template, 8 * sPlayerIcon->x + 36, 8 * sPlayerIcon->y + 36, 2);
+    // T-572: subpriority 1, above the GOTO rings (2), so the BUST shows whole at a town; the cursor (0) stays on top
+    spriteId = CreateSprite(&template, 8 * sPlayerIcon->x + 36, 8 * sPlayerIcon->y + 36, 1);
     sPlayerIcon->sprite = &gSprites[spriteId];
     SetPlayerIconInvisibility(TRUE);
 }
@@ -3640,7 +3641,7 @@ static void CreateFlyIconSprite(u8 whichMap, u8 numIcons, u16 x, u16 y, u8 tileT
 
     LoadSpriteSheet(&spriteSheet);
     LoadSpritePalette(&spritePalette);
-    spriteId = CreateSprite(&template, 8 * x + 36, 8 * y + 36, 1);
+    spriteId = CreateSprite(&template, 8 * x + 36, 8 * y + 36, 2); // T-572: under the head (1), over the dungeon icons (3)
     sMapIcons->flyIcons[numIcons].sprite = &gSprites[spriteId];
     gSprites[spriteId].invisible = TRUE;
     sMapIcons->flyIcons[numIcons].region = whichMap;
