@@ -13,7 +13,18 @@ Std_ObtainItem::
 	additem VAR_0x8000, VAR_0x8001
 	copyvar VAR_0x8007, VAR_RESULT
 	call EventScript_ObtainItemMessage
+	call_if_eq VAR_0x8007, TRUE, EventScript_TouchGift   @ T-575
 	copyvar VAR_TEXT_COLOR, VAR_PREV_TEXT_COLOR
+	copyvar VAR_RESULT, VAR_0x8007
+	return
+
+@  T-575, TOUCH: a gift a person hands over, with THE SUBTLE LAYER held and a STRATUM daemon following, now and then
+@  brings a read (daemons_reads.c's Daemons_TryTouchGift leaves it in gStringVar4, in the book's purple).
+EventScript_TouchGift::
+	special Daemons_TryTouchGift
+	goto_if_eq VAR_RESULT, FALSE, EventScript_TouchGiftEnd
+	msgbox gStringVar4
+EventScript_TouchGiftEnd:
 	return
 
 EventScript_ObtainItemMessage::

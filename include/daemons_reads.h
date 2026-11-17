@@ -22,8 +22,9 @@
 // -----------------------------------------------------------------------------------------------------------------------
 
 // T-577 on: reads a scene gives, not an arrival -- each kept in THE LOG, its words left in gStringVar4.
-enum { READ_RIPPLES, READ_KIND_COUNT };
+enum { READ_RIPPLES, READ_TOUCH_GIFT, READ_TOUCH_RAIN, READ_KIND_COUNT };
 void Daemons_GiveRead(u8 kind);
+void Daemons_TryTouchGift(void);           // T-575: special, from Std_ObtainItem -- VAR_RESULT, the words in gStringVar4
 
 bool8 Daemons_TryReadArrives(void);         // field_control_avatar.c's step hook; the line is left in gStringVar4
 void Daemons_WriteReadsLog(u8 *dest);       // notebook.c: THE LOG's page -- the reads and the leans, counted

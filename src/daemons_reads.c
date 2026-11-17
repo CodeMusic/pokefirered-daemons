@@ -11,6 +11,10 @@
 #include "string_util.h"
 #include "strings.h"
 #include "daemons_time.h"
+#include "constants/pokemon.h"   // T-575
+#include "constants/region_map_sections.h"   // T-575
+#include "pokemon.h"   // T-575
+#include "daemons_follower.h"   // T-575
 #include "event_object_movement.h"
 #include "constants/event_objects.h"
 #include "constants/flags.h"
@@ -47,6 +51,8 @@ enum
     PHRASE_WEST,
     PHRASE_CHORUS,      // T-550: a crowd's read -- about no thing, so it is given and never lands
     PHRASE_RIPPLES,     // T-577: the still pond's -- the same, given and never landing
+    PHRASE_TOUCH_GIFT,  // T-575: TOUCH, a gift with a STRATUM daemon following -- the same
+    PHRASE_TOUCH_RAIN,  // T-575: TOUCH, rain on stone in an old place at night, a LATENT daemon following -- the same
     PHRASE_COUNT
 };
 
@@ -64,7 +70,12 @@ static const u8 sPhrase_West[]   = _("something to the west.");
 static const u8 sPhrase_Chorus[] = _("the room is thinking one thought.");   // T-550 (the user, 2026-11-12: A), 181px
 static const u8 sPhrase_Ripples[] = _("two ripples, one pond. Where is the line?");   // T-577, DRAFT: THE LOG's line
 
+static const u8 sPhrase_TouchGift[] = _("TOUCH: this was held a long time before it was given.");   // T-575, DRAFT
+static const u8 sPhrase_TouchRain[] = _("TOUCH: rain on stone. It is dry in here.");                 // T-575, DRAFT
+
 // The box's words for a read given by a scene rather than an arrival (T-577 on), each line within 208px. DRAFT.
+static const u8 sText_ReadTouchGift[] = _("{COLOR PURPLE}{SHADOW LIGHT_GRAY}A read: this was held a long time\nbefore it was given.");   // T-575: 185, 110px
+static const u8 sText_ReadTouchRain[] = _("{COLOR PURPLE}{SHADOW LIGHT_GRAY}A read: rain on stone.\nIt is dry in here.");   // T-575: 121, 98px
 static const u8 sText_ReadRipples[] = _("{COLOR PURPLE}{SHADOW LIGHT_GRAY}A read: two ripples, one pond.\nWhere is the line?");   // 168, 99px
 
 static const u8 *const sPhrases[PHRASE_COUNT] =
@@ -80,11 +91,17 @@ static const u8 *const sPhrases[PHRASE_COUNT] =
     [PHRASE_WEST]    = sPhrase_West,
     [PHRASE_CHORUS]  = sPhrase_Chorus,
     [PHRASE_RIPPLES] = sPhrase_Ripples,
+    [PHRASE_TOUCH_GIFT] = sPhrase_TouchGift,
+    [PHRASE_TOUCH_RAIN] = sPhrase_TouchRain,
 };
 
 // T-577 on: the reads a scene gives, by READ_KIND_* (include/daemons_reads.h) -- each its phrase in THE LOG and its box.
-static const u8 sKindPhrase[READ_KIND_COUNT] = { [READ_RIPPLES] = PHRASE_RIPPLES };
-static const u8 *const sKindText[READ_KIND_COUNT] = { [READ_RIPPLES] = sText_ReadRipples };
+static const u8 sKindPhrase[READ_KIND_COUNT] = {
+    [READ_RIPPLES] = PHRASE_RIPPLES, [READ_TOUCH_GIFT] = PHRASE_TOUCH_GIFT, [READ_TOUCH_RAIN] = PHRASE_TOUCH_RAIN,
+};
+static const u8 *const sKindText[READ_KIND_COUNT] = {
+    [READ_RIPPLES] = sText_ReadRipples, [READ_TOUCH_GIFT] = sText_ReadTouchGift, [READ_TOUCH_RAIN] = sText_ReadTouchRain,
+};
 
 // THE LOG's page (DRAFT). Reflowed by the book reader: \p starts a line.
 static const u8 sLog_Reads[]  = _("Reads: {STR_VAR_1} given, {STR_VAR_2} landed.\p");
@@ -278,6 +295,64 @@ static void Log(u16 where, u16 thing)
     Count(VAR_READS_GIVEN);
 }
 
+// ---- T-575: TOUCH (THE SUBTLE LAYER's clairtangency and clairalience: a thing keeps a tilt from whatever was held in
+// strong feeling; a scent, or a sound, with no source). The user, 2026-11-17, A: in the game. Each is a read like any
+// other, kept in THE LOG as TOUCH, true or not, about no thing (so it never lands). DRAFT, the game lane's numbers.
+#define TOUCH_GIFT_CHANCE   33      // percent of gifts handed over by a person with a STRATUM daemon following
+
+static EWRAM_DATA u16 sTouchRainNight = 0;   // the night rain on stone last came, + 1 (EWRAM: a reload may hear it again)
+
+// The lead daemon walking behind the player, of TYPE.
+static bool8 FollowedBy(u8 type)
+{
+    s8 slot = Follower_LeadSlot();
+    u16 species;
+
+    if (slot < 0 || FlagGet(FLAG_FOLLOWER_OFF))
+        return FALSE;
+    species = GetMonData(&gPlayerParty[slot], MON_DATA_SPECIES);
+    return gSpeciesInfo[species].types[0] == type || gSpeciesInfo[species].types[1] == type;
+}
+
+// (2) Rain on stone: with a LATENT daemon following, once a night, the first step into an old place -- DAEMON TOWER's
+// floors and the burned mansion's empty rooms (the game lane's pick, DRAFT).
+static bool8 TouchRainHere(void)
+{
+    u16 day, minute, night;
+    u8 mapsec = gMapHeader.regionMapSectionId;
+
+    if ((mapsec != MAPSEC_POKEMON_TOWER && mapsec != MAPSEC_POKEMON_MANSION) || DaemonsWatch() != WATCH_NIGHT
+     || !FollowedBy(TYPE_GHOST))
+        return FALSE;
+    DaemonsDayAndMinute(&day, &minute);
+    night = day + (minute >= 12 * 60) + 1;   // the evening and the morning after are one night
+    if (night == sTouchRainNight)
+        return FALSE;
+    sTouchRainNight = night;
+    return TRUE;
+}
+
+// (1) A gift: Std_ObtainItem, once the item is in the bag, asks this. A person handed it (the last one talked to is
+// someone, not a thing), a STRATUM daemon is following, and now and then -- fixed by the day, the place and the item
+// (T-579) -- the read; VAR_RESULT says whether one came, its words in gStringVar4.
+void Daemons_TryTouchGift(void)
+{
+    u8 id;
+
+    gSpecialVar_Result = FALSE;
+    if (!FlagGet(FLAG_GOT_SUBTLE_LAYER) || gSpecialVar_LastTalked == 0 || !FollowedBy(TYPE_GROUND))
+        return;
+    if (TryGetObjectEventIdByLocalIdAndMap(gSpecialVar_LastTalked, gSaveBlock1Ptr->location.mapNum,
+                                           gSaveBlock1Ptr->location.mapGroup, &id)
+     || !IsPerson(OBJ_GFX_ID(&gObjectEvents[id])))
+        return;
+    FixedSeed(gSpecialVar_0x8000);
+    if (!DEBUG_ALWAYS && FixedRandom() % 100 >= TOUCH_GIFT_CHANCE)
+        return;
+    Daemons_GiveRead(READ_TOUCH_GIFT);
+    gSpecialVar_Result = TRUE;
+}
+
 bool8 Daemons_TryReadArrives(void)
 {
     u16 here = ((gSaveBlock1Ptr->location.mapGroup << 8) | gSaveBlock1Ptr->location.mapNum) + 1;
@@ -293,6 +368,11 @@ bool8 Daemons_TryReadArrives(void)
     if (!FlagGet(FLAG_GOT_SUBTLE_LAYER))
         return FALSE;
     FixedSeed(0);                       // T-579
+    if (TouchRainHere())
+    {
+        Daemons_GiveRead(READ_TOUCH_RAIN);   // T-575: rain on stone, once a night
+        return TRUE;
+    }
     crowd = InACrowd();
     if (!DEBUG_ALWAYS)
     {
