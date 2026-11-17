@@ -74,3 +74,8 @@ LavenderTown_Text_Lark::
     .string "Before the birds.\p"
     .string "Something is awake then that isn't,\n"
     .string "the rest of the day.$"
+
+@  T-578, DRAFT, the row's own words (94, 84px).
+LavenderTown_Text_KindredKnows::
+	.string "You had the TEA.\n"
+	.string "I tasted water.$"

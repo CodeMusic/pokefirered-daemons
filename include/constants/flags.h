@@ -2009,6 +2009,12 @@
 #define FLAG_BLANK_TABLET_FRONT_READ         (DAEMONS_FLAGS_START + 0x1D0)   // the night face's, read in 3:30-3:59
 #define FLAG_BLANK_TABLET_BACK_READ          (DAEMONS_FLAGS_START + 0x1D1)   // the dawn face's, read in THE CREATOR'S HOUR
 
+//  T-578: THE SUBTLE LAYER's KINDRED, the two cups -- a badger in CELADON's condominiums pours two, hands the player
+//  one and carries the other to LAVENDER TOWN, where it already knows. The badger is in one place or the other.
+#define FLAG_KINDRED_POURED                  (DAEMONS_FLAGS_START + 0x1E0)   // the cups poured, and yours drunk
+#define FLAG_HIDE_KINDRED_CELADON            (DAEMONS_FLAGS_START + 0x1E1)   // set by its map: no book, or poured
+#define FLAG_HIDE_KINDRED_LAVENDER           (DAEMONS_FLAGS_START + 0x1E2)   // set by its map until poured
+
 #define DAEMONS_FLAGS_COUNT           0x400
 #define DAEMONS_FLAGS_END             (DAEMONS_FLAGS_START + DAEMONS_FLAGS_COUNT - 1)
 #define DAEMONS_FLAGS_SIZE            (DAEMONS_FLAGS_COUNT / 8)

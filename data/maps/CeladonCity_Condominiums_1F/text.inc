@@ -34,3 +34,15 @@ CeladonCity_Condominiums_1F_Text_ManagersSuite::
     .string "VERDIGRIS MANSION\n"
     .string "Manager's Suite$"
 
+
+@  T-578, DRAFT (each line within 208px: 172, 122; 119, 177; 88).
+CeladonCity_Condominiums_1F_Text_KindredPours::
+	.string "Two cups, poured from one pot.\n"
+	.string "Neither cup is marked.$"
+
+CeladonCity_Condominiums_1F_Text_KindredGoes::
+	.string "One is handed to you.\n"
+	.string "The other goes with the badger.$"
+
+CeladonCity_Condominiums_1F_Text_KindredDrink::
+	.string "You drink yours.$"

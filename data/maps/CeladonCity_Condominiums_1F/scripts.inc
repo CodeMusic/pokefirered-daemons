@@ -1,5 +1,31 @@
 CeladonCity_Condominiums_1F_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, CeladonCity_Condominiums_1F_OnTransition
 	.byte 0
+
+@  T-578: the badger is here only with THE SUBTLE LAYER held, and only until the cups are poured.
+CeladonCity_Condominiums_1F_OnTransition::
+	setflag FLAG_HIDE_KINDRED_CELADON
+	goto_if_unset FLAG_GOT_SUBTLE_LAYER, CeladonCity_Condominiums_1F_OnTransition_End
+	goto_if_set FLAG_KINDRED_POURED, CeladonCity_Condominiums_1F_OnTransition_End
+	clearflag FLAG_HIDE_KINDRED_CELADON
+CeladonCity_Condominiums_1F_OnTransition_End:
+	end
+
+@  T-578, DRAFT: KINDRED, the two cups. Two poured from one pot, one handed to you, the other carried out to LAVENDER
+@  TOWN; you drink yours. Nothing travels after, and nobody says so (craft rule 1).
+CeladonCity_Condominiums_1F_EventScript_KindredBadger::
+	lock
+	faceplayer
+	msgbox CeladonCity_Condominiums_1F_Text_KindredPours
+	msgbox CeladonCity_Condominiums_1F_Text_KindredGoes
+	fadescreen FADE_TO_BLACK
+	removeobject LOCALID_CELADON_KINDRED_BADGER
+	setflag FLAG_HIDE_KINDRED_CELADON
+	setflag FLAG_KINDRED_POURED
+	fadescreen FADE_FROM_BLACK
+	msgbox CeladonCity_Condominiums_1F_Text_KindredDrink
+	release
+	end
 
 CeladonCity_Condominiums_1F_EventScript_TeaWoman::
 	lock

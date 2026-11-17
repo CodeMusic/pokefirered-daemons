@@ -6,6 +6,18 @@ LavenderTown_OnTransition::
 	setworldmapflag FLAG_WORLD_MAP_LAVENDER_TOWN
 	setvar VAR_MAP_SCENE_S_S_ANNE_2F_CORRIDOR, 1
 	setflag FLAG_HIDE_SS_ANNE_RIVAL
+	setflag FLAG_HIDE_KINDRED_LAVENDER                 @ T-578: the badger, here once the cups are poured
+	goto_if_unset FLAG_KINDRED_POURED, LavenderTown_OnTransition_End
+	clearflag FLAG_HIDE_KINDRED_LAVENDER
+LavenderTown_OnTransition_End:
+	end
+
+@  T-578, DRAFT: the badger who carried the other cup from CELADON. It already knows.
+LavenderTown_EventScript_KindredBadger::
+	lock
+	faceplayer
+	msgbox LavenderTown_Text_KindredKnows
+	release
 	end
 
 LavenderTown_EventScript_LittleGirl::
