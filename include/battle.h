@@ -466,7 +466,7 @@ struct BattleStruct
     u8 witchPpUsed[PARTY_SIZE / 2];     // T-480: the hour's uses spent, a nibble per player party slot; never saved
     u8 daemonsSeason;                   // T-532: the season this battle began in, + 1 (0: not read yet); the MUSAI
                                         // forms and the background keep it to the end (DaemonsDisplaySeason)
-    u8 padding_1FF[0x1];
+    u8 noAddress;                       // T-576: this turn's miss was a write without an address (daemons_three.c)
 }; // size == 0x200 bytes
 
 #define WITCH_SHIMMERING  (1 << 7)      // T-480: the player's battlers wear the shimmer now (put back when it stops)

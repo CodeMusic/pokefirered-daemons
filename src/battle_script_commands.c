@@ -1148,6 +1148,8 @@ static void Cmd_accuracycheck(void)
             calc = (calc * (100 - param)) / 100;
 
         calc = Three_AdjustAccuracy(gBattlerAttacker, type, calc);   // T-454: a READ, for a CONTEXT routine
+        if (Three_NoAddress(gBattlerAttacker, move))
+            calc = 0;                                                  // T-576: a WRITE at high VOLTAGE, no address
 
         // final calculation
         if ((Random() % 100 + 1) > calc)
@@ -2957,6 +2959,7 @@ static void Cmd_seteffectwithchance(void)
         percentChance = gBattleMoves[gCurrentMove].secondaryEffectChance * 2;
     else
         percentChance = gBattleMoves[gCurrentMove].secondaryEffectChance;
+    percentChance = Three_BurnChance(percentChance);   // T-576: an ENTROPY lead at high VOLTAGE
 
     if (gBattleCommunication[MOVE_EFFECT_BYTE] & MOVE_EFFECT_CERTAIN
         && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))

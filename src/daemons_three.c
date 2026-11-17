@@ -231,6 +231,79 @@ static const u8 sText_LeanHoldBack[] = _("{COLOR 12}{SHADOW 6}A lean: this turn,
 static const u8 sText_LeanTurnAway[] = _("{COLOR 12}{SHADOW 6}A lean: this turn,\nit will turn away.");   // DRAFT
 static const u8 *const sLeans[] = { NULL, sText_LeanStrike, sText_LeanHoldBack, sText_LeanTurnAway };
 
+// ---- T-576: MOVE AND BURN -- no address at high VOLTAGE ---------------------------------------------------------------
+// THE SUBTLE LAYER's MOVE AND BURN: "no address". A write made flooded does not always find what it was aimed at.
+
+// Whether a write by ATTACKER with MOVE would land harder now (Three_AdjustDamage's WRITE, above, with pct over 0).
+static bool8 IsWrite(u8 attacker, u16 move, u8 *v)
+{
+    if (gBattleMoves[move].type != TYPE_PSYCHIC || gBattleMoves[move].power == 0 || !Three_Get(attacker, v))
+        return FALSE;
+    return v[THREE_CLOSURE] >= THREE_CLOSURE_HOLDS && VarGet(VAR_READS_GIVEN) >= THREE_WRITE_READS
+        && v[THREE_ATTUNEMENT] * v[THREE_VOLTAGE] > THREE_WRITE_FROM;
+}
+
+#if DAEMONS_DEBUG
+EWRAM_DATA u8 gThreeDebugNoAddress = 0;   // 1: every write at high VOLTAGE lands without an address (the theatre)
+#endif
+
+bool8 Three_NoAddress(u8 attacker, u16 move)
+{
+    u8 v[THREE_COUNT];
+    bool8 drift;
+
+    if (!IsWrite(attacker, move, v) || v[THREE_VOLTAGE] < THREE_HIGH_VOLTAGE)
+        return FALSE;
+    drift = Random() % 100 < THREE_NO_ADDRESS_CHANCE;
+#if DAEMONS_DEBUG
+    if (gThreeDebugNoAddress)
+        drift = TRUE;
+#endif
+    if (drift)
+        gBattleStruct->noAddress = TRUE;
+    return drift;
+}
+
+// DRAFT, in the lean's purple (each line within 208px: 91, 135).
+static const u8 sText_NoAddress[] = _("{COLOR 12}{SHADOW 6}Something moved.\nNot the thing you meant.");
+
+const u8 *Three_NoAddressText(void)
+{
+    if (gBattleStruct == NULL || !gBattleStruct->noAddress)
+        return NULL;
+    gBattleStruct->noAddress = FALSE;
+    LoadPalette(sLeanPurple, BG_PLTT_ID(0) + LEAN_SLOT, PLTT_SIZEOF(1));
+    return sText_NoAddress;
+}
+
+#if DAEMONS_DEBUG
+EWRAM_DATA u8 gThreeDebugBurnChance = 0;   // the last burn's chance, as rolled (the theatre reads it)
+#endif
+
+static u32 BurnChance(u32 percentChance)
+{
+    u8 lead, v[THREE_COUNT];
+
+    if (gBattleStruct == NULL || !gBattleStruct->threeOn)
+        return percentChance;
+    lead = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
+    if (gBattleMons[lead].hp == 0 || !IS_BATTLER_OF_TYPE(lead, TYPE_FIRE) || !Three_Get(lead, v)
+     || v[THREE_VOLTAGE] < THREE_HIGH_VOLTAGE)
+        return percentChance;
+    return percentChance + THREE_BURN_UP;
+}
+
+u32 Three_BurnChance(u32 percentChance)
+{
+    if ((gBattleCommunication[MOVE_EFFECT_BYTE] & ~MOVE_EFFECT_CERTAIN) != MOVE_EFFECT_BURN)
+        return percentChance;
+    percentChance = BurnChance(percentChance);
+#if DAEMONS_DEBUG
+    gThreeDebugBurnChance = percentChance;
+#endif
+    return percentChance;
+}
+
 #if DAEMONS_DEBUG
 EWRAM_DATA u8 gThreeDebugLean = 0;
 #endif
@@ -384,6 +457,7 @@ void Three_LeanTurnEnds(void)
 
     if (gBattleStruct == NULL)
         return;
+    gBattleStruct->noAddress = FALSE;   // T-576: a miss it was never said for is not carried to the next turn
     lean = gBattleStruct->lean;
     state = gBattleStruct->leanState;
     gBattleStruct->lean = LEAN_NONE;

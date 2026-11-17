@@ -69,6 +69,16 @@
 #define THREE_LEAK_VOLTAGE          3
 #define THREE_LEAK_STEP             5
 
+// T-576 (the user, 2026-11-17, A: MOVE AND BURN in the game -- "no address"; DRAFT, the user tunes). High VOLTAGE is
+// the top of the scale: a daemon flooded, as it is just after one of its party HALTS (grief, above).
+#define THREE_HIGH_VOLTAGE          THREE_MAX
+// A WRITE (a CONTEXT routine with power, while it would land harder) made at high VOLTAGE now and then lands without an
+// address: it misses, and the box says something near moved instead ("Something moved. / Not the thing you meant.").
+#define THREE_NO_ADDRESS_CHANCE     25      // percent of such writes
+// An ENTROPY lead (the player's first battler) at high VOLTAGE: every routine's chance to burn, on both sides of the
+// field -- its own side's too -- rises by this many points.
+#define THREE_BURN_UP               10
+
 // T-459 C, THE LEAN (DRAFT, the user tunes): before some turns, where "What will X do?" stood, a purple line about what
 // the foe will do -- STRIKE (a routine with power), HOLD BACK (one without, an item, or nothing) or TURN AWAY (a switch,
 // or a wild daemon fleeing). It is read from what the foe has really chosen, and is that more often as READ rises:
@@ -92,6 +102,9 @@ s32 Three_AdjustDamage(u8 attacker, u8 moveType, s32 damage);   // Cmd_damagecal
 void Three_OnMoveUsed(u8 attacker, u16 move);                   // Cmd_ppreduce, when the PP is spent
 void Three_OnHit(u8 target, u8 critMultiplier);                 // Cmd_damagecalc
 void Three_OnFaint(u8 fainted, u8 attacker);                    // Cmd_tryfaintmon
+bool8 Three_NoAddress(u8 attacker, u16 move);                   // T-576: Cmd_accuracycheck -- this write misses
+const u8 *Three_NoAddressText(void);                            // T-576: BufferStringBattle, in place of the miss
+u32 Three_BurnChance(u32 percentChance);                        // T-576: Cmd_seteffectwithchance, for a burn
 
 // T-459 C: THE LEAN. The player's controller asks once a turn whether one comes (Three_LeanWanted), waits for the foe
 // to settle (Three_LeanReady, a frame at a time), then prints Three_LeanText() in place of the question.
@@ -112,6 +125,7 @@ u8 Three_DebugPicked(void);
 void Three_DebugCycle(u8 which);
 void Three_DebugAllAuto(void);
 extern u8 gThreeDebugLean;   // T-459 C: 1, a lean every turn (the theatre pokes it)
+extern u8 gThreeDebugNoAddress;   // T-576: 1, every write at high VOLTAGE lands without an address
 #endif
 
 #endif // GUARD_DAEMONS_THREE_H

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "daemons_three.h"   // T-576
 #include "gflib.h"
 #include "battle.h"
 #include "battle_anim.h"
@@ -1832,6 +1833,13 @@ void BufferStringBattle(u16 stringId)
         else
         {
             stringPtr = gBattleStringsTable[stringId - BATTLESTRINGS_TABLE_START];
+            if (stringId == STRINGID_ATTACKMISSED)
+            {
+                const u8 *noAddress = Three_NoAddressText();   // T-576: something else moved
+
+                if (noAddress != NULL)
+                    stringPtr = noAddress;
+            }
             // T-251: and each turn, in the unread cave, it says the same thing again.
             if (stringId == STRINGID_GHOSTGETOUTGETOUT && DaemonsCaveUnperceived())
                 stringPtr = sText_HeWhoSeesOneTurn;
