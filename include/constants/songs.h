@@ -391,6 +391,9 @@
 #define MUS_GROVE_CLAY            380
 #define SE_AAH_PAD                381   // T-519: THE CREATOR'S HOUR's tone, on the SE3 player (src/daemons_hours.c)
 #define SE_DAWN_CHORUS            382   // T-528 (d): the pad and the dawn chorus's rising whistles, in its place (DAEMONS tools/genchorus.py)
+#define SE_CHIME                  383   // T-565: the field's bell: GOTO's ribbon, the unity and spirits scenes (DAEMONS tools/genfanfares.py)
+#define SE_SUNRISE                384   // T-565: the unity scene at dawn (DAEMONS tools/genfanfares.py)
+#define SE_NIGHTFALL              385   // T-565: the unity scene at night (DAEMONS tools/genfanfares.py)
 
 #define MUS_NONE                    0xFFFF
 

@@ -696,7 +696,7 @@ static void Task_SpiritsCrossing(u8 taskId)
         if (task->tCross == CROSS_INTO_GOOD)
             PlayFanfare(MUS_EVOLVED);
         else if (task->tCross == CROSS_OUT_OF_LOW)
-            PlaySE(SE_M_HEAL_BELL);
+            PlaySE(SE_CHIME);   // T-565
         else
             PlaySE(SE_M_HAZE);
         task->tTimer = 0;

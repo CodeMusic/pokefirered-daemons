@@ -47,21 +47,22 @@ static void CreateFanfareTask(void);
 static void Task_DuckBGMForPokemonCry(u8 taskId);
 static void RestoreBGMVolumeAfterPokemonCry(void);
 
+// T-565: the rows of ours wait their own length and the harp's ring (DAEMONS tools/genfanfares.py)
 static const struct Fanfare sFanfares[] = {
     [FANFARE_LEVEL_UP]      = { MUS_LEVEL_UP,         80 },
     [FANFARE_OBTAIN_ITEM]   = { MUS_OBTAIN_ITEM,     160 },
-    [FANFARE_EVOLVED]       = { MUS_EVOLVED,         220 },
-    [FANFARE_OBTAIN_TMHM]   = { MUS_OBTAIN_TMHM,     220 },
-    [FANFARE_HEAL]          = { MUS_HEAL,            160 },
-    [FANFARE_OBTAIN_BADGE]  = { MUS_OBTAIN_BADGE,    340 },
-    [FANFARE_MOVE_DELETED]  = { MUS_MOVE_DELETED,    180 },
+    [FANFARE_EVOLVED]       = { MUS_EVOLVED,         157 },
+    [FANFARE_OBTAIN_TMHM]   = { MUS_OBTAIN_TMHM,     151 },
+    [FANFARE_HEAL]          = { MUS_HEAL,            157 },
+    [FANFARE_OBTAIN_BADGE]  = { MUS_OBTAIN_BADGE,    247 },
+    [FANFARE_MOVE_DELETED]  = { MUS_MOVE_DELETED,    171 },
     [FANFARE_OBTAIN_BERRY]  = { MUS_OBTAIN_BERRY,    120 },
     [FANFARE_SLOTS_JACKPOT] = { MUS_SLOTS_JACKPOT,   250 },
     [FANFARE_SLOTS_WIN]     = { MUS_SLOTS_WIN,       150 },
     [FANFARE_TOO_BAD]       = { MUS_TOO_BAD,         160 },
-    [FANFARE_POKE_FLUTE]    = { MUS_POKE_FLUTE,      450 },
-    [FANFARE_KEY_ITEM]      = { MUS_OBTAIN_KEY_ITEM, 170 },
-    [FANFARE_DEX_EVAL]      = { MUS_DEX_RATING,      196 }
+    [FANFARE_POKE_FLUTE]    = { MUS_POKE_FLUTE,      330 },
+    [FANFARE_KEY_ITEM]      = { MUS_OBTAIN_KEY_ITEM, 143 },
+    [FANFARE_DEX_EVAL]      = { MUS_DEX_RATING,      148 }
 };
 
 void InitMapMusic(void)
