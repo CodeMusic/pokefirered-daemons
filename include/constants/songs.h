@@ -396,6 +396,7 @@
 #define SE_NIGHTFALL              385   // T-565: the unity scene at night (DAEMONS tools/genfanfares.py)
 #define MUS_DOLDRUM               386   // T-565 batch 5: DOLDRUM's own, Poly and Fields over a G that never moves (DAEMONS tools/genoverworldmusic.py)
 #define MUS_LURID                 387   // T-565 batch 5: LURID's own, ScornSolutions Blues (DAEMONS tools/genoverworldmusic.py)
+#define MUS_WALLED_GARDEN         388   // T-565 batch 8: THE WALLED GARDEN's own: a tune inside its walls, light falling in (DAEMONS tools/genstorymusic.py)
 
 #define MUS_NONE                    0xFFFF
 

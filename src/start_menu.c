@@ -432,7 +432,7 @@ enum {
 };
 static EWRAM_DATA u8 sDbgPage = 0;
 #define DBG_FIRST_SONG MUS_HEAL   // 256; everything below it is a sound effect
-#define DBG_LAST_SONG  MUS_LURID // T-565: the last in the table (songs.h), so SONG reaches every appended song and sound -- each on its own player; was SE_NIGHTFALL before batch 5's two town themes, MUS_CALLOW before that
+#define DBG_LAST_SONG  MUS_WALLED_GARDEN // T-565: the last in the table (songs.h), so SONG reaches every appended song and sound -- each on its own player; was MUS_LURID before batch 8, SE_NIGHTFALL before batch 5, MUS_CALLOW before that
 // Nine tiles, because the widest of the 412 species names is 60px and a row at
 // seven tiles has 48. Measured; see CreateStartMenuWindow.
 //  14, not 9: the ENCOUNTER row reads "001 ROVERCUB" now, and the longest species name is ten

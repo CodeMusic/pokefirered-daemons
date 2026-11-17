@@ -1030,6 +1030,7 @@ SECTIONS {
         sound/songs/midi/se_nightfall.o(.rodata);
         sound/songs/midi/mus_doldrum.o(.rodata);
         sound/songs/midi/mus_lurid.o(.rodata);
+        sound/songs/midi/mus_walled_garden.o(.rodata);
     } > ROM =0
 
     lib_rodata :

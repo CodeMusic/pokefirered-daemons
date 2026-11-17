@@ -387,6 +387,7 @@ gSongTable::
 	song se_nightfall, 1, 1
 	song mus_doldrum, 0, 0
 	song mus_lurid, 0, 0
+	song mus_walled_garden, 0, 0
 
 dummy_song_header:
 	.byte 0, 0, 0, 0
