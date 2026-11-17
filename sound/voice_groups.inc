@@ -8300,6 +8300,7 @@ voicegroup195::  @ T-565: the fanfares and the pitched sounds -- the HARP and FL
 	voice_noise_alt 60, 0, 0, 0, 1, 0, 0
 	voice_noise_alt 60, 0, 0, 0, 2, 0, 1
 	voice_noise_alt 60, 0, 0, 2, 7, 3, 4
+	voice_square_1_alt 60, 0, 0, 0, 0, 2, 6, 1
 
 	.align 2
 voicegroup196::  @ T-565 batch 1: the menu and UI sounds -- the HARP and FLUTE over the cartridge's squares and noise (DAEMONS tools/genuisounds.py)
