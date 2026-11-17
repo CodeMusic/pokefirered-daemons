@@ -17,6 +17,7 @@
 #include "daemons_spellbook.h"   // T-483 (5): the folds' spells come off the page
 #include "daemons_glitch.h"  // T-486: and glitches, once
 #include "daemons_spirits.h"  // T-519 item 2: the dawn half's observer line
+#include "daemons_follower.h" // T-580: it turns after the LAST WORD
 #include "daemons_unity.h"    // T-519 item 3: the torn page, and the mended book
 #include "fieldmap.h"         // T-529: the halves' tones, for the mended book's lens
 #include "constants/songs.h"
@@ -143,6 +144,7 @@ struct BookReader
     struct Cards *cards;               // T-509: the CARDS section, while it is open
     struct UnityLens *lens;            // T-529: THE UNITY BOOK's lens, while it is open
     u8 lensEntry, lensS, lensJ;        // T-529: the place kept across a turn of the lens (lensEntry 0xFF: look again)
+    bool8 lastWordRead;                // T-580: THE SUBTLE LAYER's LAST WORD was open in this reading
     struct LayerBook origin;           // T-533: THE ORIGIN OF A DAEMON, cut after the last section to have come back
     u8 title[40];
     u8 text[BR_TEXT_SIZE];
@@ -3266,10 +3268,15 @@ static void Task_BookInput(u8 taskId)
             Free(sBook->blankPage);
         if (sBook->lens != NULL)
             Free(sBook->lens);              // T-529
+        if (sBook->lastWordRead)
+            Follower_TurnAfterBook();       // T-580: back in the field, the follower turns to face the player
         FREE_AND_SET_NULL(sBook);
         SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
         return;
     }
+    // T-580: THE SUBTLE LAYER's last page (its LAST WORD, the book's last entry) has been open in this reading.
+    if (sBook->book == BOOK_SUBTLE && sBook->view == VIEW_SUBTLE_ENTRY && sBook->entry + 1 == Layer()->entryCount)
+        sBook->lastWordRead = TRUE;
     switch (sBook->view)
     {
     case VIEW_PAGE:     Input_Page();     break;

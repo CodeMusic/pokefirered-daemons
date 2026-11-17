@@ -26,4 +26,7 @@ u8 Follower_EmojiPaletteSlot(void);
 // T-459: the subtle layer's ripple and glint's slot while they show, or 0xFF; HALFTONE leaves it in colour too.
 u8 Follower_SensePaletteSlot(void);
 
+// T-580: THE SUBTLE LAYER's LAST WORD was read: back in the field, the follower turns to face the player.
+void Follower_TurnAfterBook(void);
+
 #endif // GUARD_DAEMONS_FOLLOWER_H

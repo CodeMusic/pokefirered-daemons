@@ -87,6 +87,7 @@
 #define SENSE_STILL      45       // ... and it notices only once it has stood still this long
 #define SENSE_AGAIN      1200     // ... and then not again for twenty seconds: now and then, never a beacon
 #define SENSE_LOOK       60       // with nothing unfound in sight, it looks again a second later
+#define TURN_BEAT        50       // T-580: back from the LAST WORD, it looks away this long, then turns to the player
 
 static struct
 {
@@ -125,6 +126,8 @@ static struct
     u16 costume;           // T-483: Halloween, with THE HERMETIC LAYER held -- the species it goes as, or SPECIES_NONE
     u16 shown;             // T-483: the icon species whose picture and colours it wears (its own, or the costume's)
     u8 tone;               // T-519: its SPIRITS' tone, lighter or darker over its colours (Spirits_ToneOf)
+    bool8 turnPending;     // T-580: THE SUBTLE LAYER's LAST WORD was read -- it will turn to face the player
+    u8 turnWait;           // ... frames still looking away (0: the turn has not begun)
 } sFollower;
 
 static void Shimmer(void);   // T-480
@@ -851,6 +854,61 @@ static void Sense(struct Sprite *sprite, struct ObjectEvent *playerObj)
 #endif
 }
 
+//  ---------------------------------------------------------------- the last word (T-580)
+//
+//  The user, 2026-11-17 (C-357's LAST WORD page, A): after THE SUBTLE LAYER's last page in the game's reader, the
+//  follower turns to face the player. Nothing is said. Back in the field, once the fade is over and it is drawn, it
+//  stands a beat looking away from the player, then turns to them. Icons face left or right only, so with the player
+//  straight above or below it, the turn is the flip itself (DRAFT, a choice for the user). Walking on before the turn
+//  lets it go. Nothing is saved.
+
+#if DAEMONS_DEBUG
+EWRAM_DATA u8 gFollowerDebugTurn = 0;   // turns made since the game started (wraps), for the theatre
+#endif
+
+void Follower_TurnAfterBook(void)
+{
+    if (!FlagGet(FLAG_GOT_SUBTLE_LAYER))
+        return;
+    sFollower.turnPending = TRUE;
+    sFollower.turnWait = 0;
+}
+
+static void TurnToPlayer(struct Sprite *sprite)
+{
+    u8 away;
+
+    if (!sFollower.turnPending)
+        return;
+    if (sFollower.turnWait != 0 && sFollower.idle < 2)
+    {
+        sFollower.turnPending = FALSE;          // the player walked on: it follows instead
+        return;
+    }
+    if (sprite->invisible || gPaletteFade.active)
+        return;
+    if (sFollower.turnWait == 0)
+    {
+        // away from the player: east of it, it looks west; straight above or below, it keeps the side it has
+        if (sFollower.sumX > 0)
+            away = DIR_WEST;
+        else if (sFollower.sumX < 0)
+            away = DIR_EAST;
+        else
+            away = sFollower.facing == DIR_EAST ? DIR_EAST : DIR_WEST;
+        sFollower.facing = away;
+        sFollower.turnWait = TURN_BEAT;
+        return;
+    }
+    if (--sFollower.turnWait != 0)
+        return;
+    sFollower.facing = sFollower.facing == DIR_EAST ? DIR_WEST : DIR_EAST;   // to the player
+    sFollower.turnPending = FALSE;
+#if DAEMONS_DEBUG
+    gFollowerDebugTurn++;
+#endif
+}
+
 //  ---------------------------------------------------------------- once a frame
 
 static void Place(struct Sprite *sprite, struct Sprite *player, struct ObjectEvent *playerObj)
@@ -971,6 +1029,7 @@ void Follower_Update(void)
         sFollower.continued = FALSE;
     }
     Place(sprite, player, playerObj);
+    TurnToPlayer(sprite);       // T-580
     Sense(sprite, playerObj);   // T-459
     Shimmer();                  // T-480
 }
