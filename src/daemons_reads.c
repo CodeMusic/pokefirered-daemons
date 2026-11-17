@@ -106,6 +106,33 @@ EWRAM_DATA u8 gReadsDebugAlways = 0;
 #define DEBUG_ALWAYS_TRUE   FALSE
 #endif
 
+// T-579, THE SUBTLE LAYER's HACKED (the user, 2026-11-17, A: a read is fixed by the day and the place): every draw a
+// read makes -- whether one comes, what it is about, where it points -- comes from a generator of its own, seeded from
+// the day (DaemonsDayAndMinute's day number: the date with its year, or play time's hour without a clock) and the map
+// it comes on. So reloading a save and walking in again gives the same read, true or not, in the same words, and
+// nothing says so. The game's own Random() is not drawn on, so nothing else moves with it. (DRAFT, a choice for the
+// user: the same read comes back on each arrival that day, once the rest between reads allows one; THE LOG keeps it
+// once.)
+static EWRAM_DATA u32 sFixed = 0;
+
+static void FixedSeed(u16 salt)
+{
+    u16 day, minute;
+    u8 i;
+
+    DaemonsDayAndMinute(&day, &minute);
+    sFixed = ((u32)day << 16) ^ ((u32)gSaveBlock1Ptr->location.mapGroup << 8) ^ gSaveBlock1Ptr->location.mapNum
+           ^ ((u32)salt * 0x9E3779B9);
+    for (i = 0; i < 4; i++)
+        sFixed = ISO_RANDOMIZE1(sFixed);
+}
+
+static u16 FixedRandom(void)
+{
+    sFixed = ISO_RANDOMIZE1(sFixed);
+    return sFixed >> 16;
+}
+
 static void Count(u16 var)
 {
     u16 n = VarGet(var);
@@ -227,6 +254,10 @@ static void Log(u16 where, u16 thing)
 {
     u8 i;
 
+    // T-579: the same read again (the same day, place and words) is the one already kept, not another
+    if ((VarGet(VAR_READ_LOG_WHERE) & ~READ_LANDED) == where && VarGet(VAR_READ_LOG_THING) == thing)
+        return;
+
     for (i = READ_LOG - 1; i > 0; i--)
     {
         VarSet(VAR_READ_LOG_WHERE + i, VarGet(VAR_READ_LOG_WHERE + i - 1));
@@ -251,6 +282,7 @@ bool8 Daemons_TryReadArrives(void)
     CheckLanded();
     if (!FlagGet(FLAG_GOT_SUBTLE_LAYER))
         return FALSE;
+    FixedSeed(0);                       // T-579
     crowd = InACrowd();
     if (!DEBUG_ALWAYS)
     {
@@ -262,7 +294,7 @@ bool8 Daemons_TryReadArrives(void)
         chance = DaemonsWeekday() == 5 ? READ_CHANCE_FRIDAY : READ_CHANCE;   // T-511: FRIDAY
         if (crowd)
             chance /= 2;                                                    // T-550: half as often in a crowd
-        if (Random() % 100 >= chance)
+        if (FixedRandom() % 100 >= chance)
             return FALSE;
     }
     sReadRest = READ_REST;
@@ -274,14 +306,14 @@ bool8 Daemons_TryReadArrives(void)
         return TRUE;
     }
     n = Reveal_UnfoundCount();
-    if (n != 0 && (DEBUG_ALWAYS_TRUE || Random() % 100 < READ_TRUE))
+    if (n != 0 && (DEBUG_ALWAYS_TRUE || FixedRandom() % 100 < READ_TRUE))
     {
-        thing = Reveal_UnfoundNth(Random() % n, &x, &y);
+        thing = Reveal_UnfoundNth(FixedRandom() % n, &x, &y);
     }
     else
     {
-        x = Random() % gMapHeader.mapLayout->width;
-        y = Random() % gMapHeader.mapLayout->height;
+        x = FixedRandom() % gMapHeader.mapLayout->width;
+        y = FixedRandom() % gMapHeader.mapLayout->height;
     }
     phrase = Describe(x + MAP_OFFSET, y + MAP_OFFSET);
     Log(gMapHeader.regionMapSectionId | (phrase << 8) | ((DaemonsWeekday() + 1) << 12), thing);   // T-511: the day
