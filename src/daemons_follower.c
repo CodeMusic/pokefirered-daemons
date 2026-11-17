@@ -39,6 +39,9 @@
 #include "data/follower_gfx.h"
 #include "daemons_feelings.h"
 #include "reveal.h"
+#include "daemons_reads.h"   // T-577: the pond's read
+#include "constants/maps.h"
+#include "constants/metatile_behaviors.h"
 
 //  T-18 P1: THE FOLLOWER -- it walks and hides (the user decided the plan 2026-10-20; every rule below is the plan's).
 //
@@ -128,6 +131,10 @@ static struct
     u8 tone;               // T-519: its SPIRITS' tone, lighter or darker over its colours (Spirits_ToneOf)
     bool8 turnPending;     // T-580: THE SUBTLE LAYER's LAST WORD was read -- it will turn to face the player
     u8 turnWait;           // ... frames still looking away (0: the turn has not begun)
+    u16 pondStill;         // T-577: frames the two have stood still at a still pond's edge
+    u16 pondMap;           // ... the map they are on, + 1, and whether its rings came this arrival
+    bool8 pondDone;
+    u8 pondRings;          // ... rings still spreading (2, 1, 0)
 } sFollower;
 
 static void Shimmer(void);   // T-480
@@ -461,6 +468,7 @@ static void Spawn(s8 slot, struct Sprite *player, struct ObjectEvent *playerObj)
     sFollower.check = CHECK_FRAMES;
     sFollower.reflSpriteId = MAX_SPRITES;
     sFollower.grassX = sFollower.grassY = -1;
+    sFollower.pondRings = 0;             // T-577: a menu or a battle took its rings down
     sFollower.senseWait = SENSE_FIRST;   // T-459: a moment in a new place (or back from a battle) before it notices
     if (sFollower.restValid
      && sFollower.restGroup == gSaveBlock1Ptr->location.mapGroup && sFollower.restNum == gSaveBlock1Ptr->location.mapNum
@@ -715,6 +723,7 @@ static const union AnimCmd *const sSenseAnims_Glint[] = { sSenseAnim_Glint };
 
 static void SpriteCB_SenseRipple(struct Sprite *sprite);
 static void SpriteCB_SenseGlint(struct Sprite *sprite);
+static void SpriteCB_PondRing(struct Sprite *sprite);   // T-577
 
 static const struct SpriteTemplate sSenseTemplate_Ripple = {
     .tileTag = TAG_NONE,
@@ -759,7 +768,8 @@ static bool8 SenseShowing(void)
     u8 i;
 
     for (i = 0; i < MAX_SPRITES; i++)
-        if (gSprites[i].inUse && (gSprites[i].callback == SpriteCB_SenseRipple || gSprites[i].callback == SpriteCB_SenseGlint))
+        if (gSprites[i].inUse && (gSprites[i].callback == SpriteCB_SenseRipple || gSprites[i].callback == SpriteCB_SenseGlint
+                               || gSprites[i].callback == SpriteCB_PondRing))   // T-577: the pond's rings share it
             return TRUE;
     return FALSE;
 }
@@ -909,6 +919,145 @@ static void TurnToPlayer(struct Sprite *sprite)
 #endif
 }
 
+//  ---------------------------------------------------------------- two ripples, one pond (T-577)
+//
+//  The user, 2026-11-17 (C-357's RIPPLES page, A): at a still pond, stand ten seconds with the follower, and two rings
+//  spread from the two reflections and meet; then one purple line, a read, kept in THE LOG like every read. The still
+//  ponds are the three whose edge two can stand on side by side with POND water under both (MB_POND_WATER, still --
+//  not a river's or the sea's): VIRIDIAN CITY's, CELADON CITY's and ROUTE 22's (DRAFT, the game lane's pick). The two
+//  stand a tile apart along the edge, the water just south of each, where their reflections are; neither moves for
+//  RIPPLES_STILL frames. The rings are the noticing's own ripple (graphics/misc/subtle_sense.png frames 0-3, in the
+//  book's purple) spreading wider as it plays, one on each reflection, until the two touch between them. Once an
+//  arrival; walking away and back is another. Wakes only with THE SUBTLE LAYER held.
+
+#define RIPPLES_STILL    600      // ten seconds
+
+static const u16 sStillPonds[] = { MAP_VIRIDIAN_CITY, MAP_CELADON_CITY, MAP_ROUTE22 };
+
+static const struct OamData sPondRingOam = {
+    .affineMode = ST_OAM_AFFINE_DOUBLE,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(16x16),
+    .size = SPRITE_SIZE(16x16),
+    .priority = 2,
+};
+
+//  It widens (frames 0-2), holds its widest while it spreads, and breaks where it has met the other (frame 3).
+static const union AnimCmd sPondRingAnim[] = {
+    ANIMCMD_FRAME(0, 12), ANIMCMD_FRAME(1, 12), ANIMCMD_FRAME(2, 60), ANIMCMD_FRAME(3, 24),
+    ANIMCMD_END
+};
+static const union AnimCmd *const sPondRingAnims[] = { sPondRingAnim };
+
+//  1x while it widens, then out to 1.5x over a second: frame 2 is 13 pixels across, so two a tile apart touch.
+static const union AffineAnimCmd sPondRingAffine[] = {
+    AFFINEANIMCMD_FRAME(0x100, 0x100, 0, 0),
+    AFFINEANIMCMD_FRAME(0, 0, 0, 24),
+    AFFINEANIMCMD_FRAME(2, 2, 0, 64),
+    AFFINEANIMCMD_FRAME(0, 0, 0, 40),
+    AFFINEANIMCMD_END,
+};
+static const union AffineAnimCmd *const sPondRingAffines[] = { sPondRingAffine };
+
+static const struct SpriteTemplate sPondRingTemplate = {
+    .tileTag = TAG_NONE,
+    .paletteTag = SENSE_TAG,
+    .oam = &sPondRingOam,
+    .anims = sPondRingAnims,
+    .images = sSenseImages,
+    .affineAnims = sPondRingAffines,
+    .callback = SpriteCB_PondRing,
+};
+
+#if DAEMONS_DEBUG
+EWRAM_DATA u8 gFollowerDebugPond = 0;   // ponds that rippled since the game started (wraps), for the theatre
+#endif
+
+static void SpriteCB_PondRing(struct Sprite *sprite)
+{
+    if (!sprite->animEnded)
+        return;
+    FreeOamMatrix(sprite->oam.matrixNum);
+    SenseEnd(sprite);
+    if (sFollower.pondRings != 0)
+        sFollower.pondRings--;
+}
+
+static bool8 PondUnder(s16 x, s16 y)
+{
+    return MapGridGetMetatileBehaviorAt(x, y + 1) == MB_POND_WATER;
+}
+
+static bool8 AtAStillPond(void)
+{
+    u16 map = (gSaveBlock1Ptr->location.mapGroup << 8) | gSaveBlock1Ptr->location.mapNum;
+    u8 i;
+
+    for (i = 0; i < ARRAY_COUNT(sStillPonds); i++)
+        if (sStillPonds[i] == map)
+            return TRUE;
+    return FALSE;
+}
+
+static bool8 PondRing(s16 x, s16 y)
+{
+    u8 id;
+
+    SetSpritePosToOffsetMapCoords(&x, &y, 8, 8);
+    id = CreateSprite(&sPondRingTemplate, x, y + 16, 0x52);   // on the reflection: the water a tile south
+    if (id == MAX_SPRITES)
+        return FALSE;
+    gSprites[id].coordOffsetEnabled = TRUE;
+    return TRUE;
+}
+
+static void Ripples(struct Sprite *sprite, struct ObjectEvent *playerObj)
+{
+    u16 here = ((gSaveBlock1Ptr->location.mapGroup << 8) | gSaveBlock1Ptr->location.mapNum) + 1;
+    s16 px = playerObj->currentCoords.x, py = playerObj->currentCoords.y;
+
+    if (here != sFollower.pondMap)
+    {
+        sFollower.pondMap = here;
+        sFollower.pondDone = FALSE;
+        sFollower.pondStill = 0;
+    }
+    if (sFollower.pondDone)
+        return;
+    if (sFollower.pondStill >= RIPPLES_STILL)
+    {
+        if (sFollower.pondRings != 0 || ArePlayerFieldControlsLocked())
+            return;
+        // both rings have met and gone: the read
+        sFollower.pondDone = TRUE;
+        Daemons_GiveRead(READ_RIPPLES);
+        LockPlayerFieldControls();
+        ScriptContext_SetupScript(Daemons_EventScript_Read);
+#if DAEMONS_DEBUG
+        gFollowerDebugPond++;
+#endif
+        return;
+    }
+    if (!FlagGet(FLAG_GOT_SUBTLE_LAYER) || !AtAStillPond() || sprite->invisible || ArePlayerFieldControlsLocked()
+     || sFollower.idle < 2 || sFollower.sumY != 0 || (sFollower.sumX != TRAIL && sFollower.sumX != -TRAIL)
+     || !PondUnder(px, py) || !PondUnder(px - sFollower.sumX / TRAIL, py))
+    {
+        sFollower.pondStill = 0;
+        return;
+    }
+    if (++sFollower.pondStill < RIPPLES_STILL)
+        return;
+    sFollower.pondRings = 0;
+    if (LoadSensePalette() != 0xFF)
+    {
+        sFollower.pondRings += PondRing(px, py);
+        sFollower.pondRings += PondRing(px - sFollower.sumX / TRAIL, py);
+        if (sFollower.pondRings == 0)
+            FreeSpritePaletteByTag(SENSE_TAG);
+    }
+}
+
 //  ---------------------------------------------------------------- once a frame
 
 static void Place(struct Sprite *sprite, struct Sprite *player, struct ObjectEvent *playerObj)
@@ -1030,6 +1179,7 @@ void Follower_Update(void)
     }
     Place(sprite, player, playerObj);
     TurnToPlayer(sprite);       // T-580
+    Ripples(sprite, playerObj); // T-577
     Sense(sprite, playerObj);   // T-459
     Shimmer();                  // T-480
 }

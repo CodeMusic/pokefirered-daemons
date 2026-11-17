@@ -46,6 +46,7 @@ enum
     PHRASE_EAST,
     PHRASE_WEST,
     PHRASE_CHORUS,      // T-550: a crowd's read -- about no thing, so it is given and never lands
+    PHRASE_RIPPLES,     // T-577: the still pond's -- the same, given and never landing
     PHRASE_COUNT
 };
 
@@ -61,6 +62,10 @@ static const u8 sPhrase_South[]  = _("something to the south.");
 static const u8 sPhrase_East[]   = _("something to the east.");
 static const u8 sPhrase_West[]   = _("something to the west.");
 static const u8 sPhrase_Chorus[] = _("the room is thinking one thought.");   // T-550 (the user, 2026-11-12: A), 181px
+static const u8 sPhrase_Ripples[] = _("two ripples, one pond. Where is the line?");   // T-577, DRAFT: THE LOG's line
+
+// The box's words for a read given by a scene rather than an arrival (T-577 on), each line within 208px. DRAFT.
+static const u8 sText_ReadRipples[] = _("{COLOR PURPLE}{SHADOW LIGHT_GRAY}A read: two ripples, one pond.\nWhere is the line?");   // 168, 99px
 
 static const u8 *const sPhrases[PHRASE_COUNT] =
 {
@@ -74,7 +79,12 @@ static const u8 *const sPhrases[PHRASE_COUNT] =
     [PHRASE_EAST]    = sPhrase_East,
     [PHRASE_WEST]    = sPhrase_West,
     [PHRASE_CHORUS]  = sPhrase_Chorus,
+    [PHRASE_RIPPLES] = sPhrase_Ripples,
 };
+
+// T-577 on: the reads a scene gives, by READ_KIND_* (include/daemons_reads.h) -- each its phrase in THE LOG and its box.
+static const u8 sKindPhrase[READ_KIND_COUNT] = { [READ_RIPPLES] = PHRASE_RIPPLES };
+static const u8 *const sKindText[READ_KIND_COUNT] = { [READ_RIPPLES] = sText_ReadRipples };
 
 // THE LOG's page (DRAFT). Reflowed by the book reader: \p starts a line.
 static const u8 sLog_Reads[]  = _("Reads: {STR_VAR_1} given, {STR_VAR_2} landed.\p");
@@ -319,6 +329,16 @@ bool8 Daemons_TryReadArrives(void)
     Log(gMapHeader.regionMapSectionId | (phrase << 8) | ((DaemonsWeekday() + 1) << 12), thing);   // T-511: the day
     StringCopy(StringCopy(gStringVar4, sText_ReadHead), sPhrases[phrase]);
     return TRUE;
+}
+
+// A read a scene gives (the pond's rings, T-577): kept in THE LOG like every read, about no thing, so it never lands;
+// its words into gStringVar4 for Daemons_EventScript_Read.
+void Daemons_GiveRead(u8 kind)
+{
+    if (kind >= READ_KIND_COUNT)
+        return;
+    Log(gMapHeader.regionMapSectionId | (sKindPhrase[kind] << 8) | ((DaemonsWeekday() + 1) << 12), 0);
+    StringCopy(gStringVar4, sKindText[kind]);
 }
 
 void Daemons_WriteReadsLog(u8 *dest)
