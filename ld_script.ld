@@ -1028,6 +1028,8 @@ SECTIONS {
         sound/songs/midi/se_chime.o(.rodata);
         sound/songs/midi/se_sunrise.o(.rodata);
         sound/songs/midi/se_nightfall.o(.rodata);
+        sound/songs/midi/mus_doldrum.o(.rodata);
+        sound/songs/midi/mus_lurid.o(.rodata);
     } > ROM =0
 
     lib_rodata :
