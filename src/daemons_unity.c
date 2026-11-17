@@ -66,7 +66,7 @@ void Mending_Deepen(void)
 {
     bool8 dawn = gSpecialVar_0x8004 != 0;
 
-    PlaySE(dawn ? SE_M_MORNING_SUN : SE_M_MOONLIGHT);
+    PlaySE(dawn ? SE_SUNRISE : SE_NIGHTFALL);   // T-565: ours in the field; battle keeps the move sounds
     DaemonsHalftoneDeepen(dawn);
     CreateTask(Task_WaitForHalftone, 80);
 }
@@ -89,7 +89,7 @@ static void Mend(void)
 
 void Mending_Mend(void)
 {
-    PlaySE(SE_M_HEAL_BELL);
+    PlaySE(SE_CHIME);   // T-565
     DaemonsHalftoneBurst();                  // first, so the burst starts from the tone the tower stood in
     Mend();
     CreateTask(Task_WaitForHalftone, 80);

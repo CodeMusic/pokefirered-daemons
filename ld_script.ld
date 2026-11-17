@@ -1025,6 +1025,9 @@ SECTIONS {
         sound/songs/midi/mus_grove_clay.o(.rodata);
         sound/songs/midi/se_aah_pad.o(.rodata);
         sound/songs/midi/se_dawn_chorus.o(.rodata);
+        sound/songs/midi/se_chime.o(.rodata);
+        sound/songs/midi/se_sunrise.o(.rodata);
+        sound/songs/midi/se_nightfall.o(.rodata);
     } > ROM =0
 
     lib_rodata :

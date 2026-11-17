@@ -3686,7 +3686,7 @@ static void FlyOutFieldEffect_Ribbon(struct Task *task)
     struct ObjectEvent *objectEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
     task->tFrame++;
     if (task->tFrame == 0)
-        PlaySE(SE_M_HEAL_BELL);
+        PlaySE(SE_CHIME);   // T-565
     if (task->tFrame < GOTO_OUT_MEET)
     {
         GotoFlickerPlayer(GOTO_OUT_MEET - task->tFrame);
@@ -3758,7 +3758,7 @@ static void FlyInFieldEffect_Begin(struct Task *task)
         task->tReform = 0;
         if (GotoLoadGlyphs())
             GotoSpawnGlyphs(FindTaskIdByFunc(Task_FlyIn));
-        PlaySE(SE_M_HEAL_BELL);
+        PlaySE(SE_CHIME);   // T-565
         task->tState++;
     }
 }

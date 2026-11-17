@@ -8290,6 +8290,18 @@ voicegroup194::  @ T-528: the dawn chorus -- the choir (0, voicegroup191's 52) a
 	voice_directsound 60, 0, DirectSoundWaveData_daemons_chorus, 255, 0, 255, 0
 
 	.align 2
+voicegroup195::  @ T-565: the fanfares and the pitched sounds -- the HARP and FLUTE over the cartridge (DAEMONS tools/genfanfares.py)
+	voice_directsound 60, 0, DirectSoundWaveData_daemons_harp, 255, 0, 255, 177
+	voice_directsound 60, 0, DirectSoundWaveData_daemons_flute, 54, 0, 255, 138
+	voice_square_1_alt 60, 0, 0, 0, 1, 3, 11, 2
+	voice_square_2_alt 60, 0, 0, 1, 3, 11, 2
+	voice_square_2_alt 60, 0, 0, 0, 2, 6, 1
+	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_6, 0, 7, 15, 2
+	voice_noise_alt 60, 0, 0, 0, 1, 0, 0
+	voice_noise_alt 60, 0, 0, 0, 2, 0, 1
+	voice_noise_alt 60, 0, 0, 2, 7, 3, 4
+
+	.align 2
 voicegroup193::  @ T-425: PLAY's HARP (0) and FLUTE (1), our own (DAEMONS tools/geninstruments.py)
 	voice_directsound 60, 0, DirectSoundWaveData_daemons_harp, 255, 0, 255, 177
 	voice_directsound 60, 0, DirectSoundWaveData_daemons_flute, 54, 0, 255, 138

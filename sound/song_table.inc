@@ -382,6 +382,9 @@ gSongTable::
 	song mus_grove_clay, 0, 0
 	song se_aah_pad, 3, 3
 	song se_dawn_chorus, 3, 3
+	song se_chime, 1, 1
+	song se_sunrise, 1, 1
+	song se_nightfall, 1, 1
 
 dummy_song_header:
 	.byte 0, 0, 0, 0
