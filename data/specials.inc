@@ -547,4 +547,6 @@ gSpecials::
 	def_special Origin_Open                  @ T-533: THE ORIGIN OF A DAEMON, at its cover (waitstate)
 	def_special Compass_Open                 @ T-586: DAVID's COMPASS, its rose (waitstate)
 	def_special Compass_CurrentMap           @ T-586: the map stood on, as MAP_*, in VAR_RESULT (special, not specialvar)
+	def_special Daemons_TouchStone           @ T-585: the magpie's cold stone, TOUCH's read (special, not specialvar)
+	def_special SingingFir_SingBar           @ T-585: the fir hums its first bar only (waitstate), VAR_0x8004 in key
 gSpecialsEnd::

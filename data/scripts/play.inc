@@ -18,6 +18,7 @@ EventScript_Play_FirOpened::
 	addobject VAR_0x8005
 	msgbox Text_SingingFir_Right
 EventScript_Play_FirDoor::
+	call EventScript_Garden_MoleHears   @ T-585: the mole in ROUTE 24's grove, if it is there
 	msgbox Text_Play_FirParts
 	call_if_unset FLAG_NEXUS_VISITED, EventScript_SingingFir_FirstTime
 	playse SE_WARP_IN

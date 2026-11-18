@@ -302,7 +302,7 @@
 #define VAR_DAILY_PLANTED_BERRIES  0x40E9
 #define VAR_DAILY_PICKED_BERRIES   0x40EA
 #define VAR_DAILY_ROULETTE         0x40EB
-#define VAR_0x40EC                 0x40EC
+#define VAR_GARDEN_VISITS          0x40EC // T-585: arrivals at ROUTE 24's grove with its fir in key (capped at 255): the mole's sheaf and lines
 #define VAR_0x40ED                 0x40ED
 #define VAR_0x40EE                 0x40EE
 #define VAR_0x40EF                 0x40EF

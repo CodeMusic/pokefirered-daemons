@@ -4771,3 +4771,103 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BlankTablet = {
     .images = sPicTable_BlankTablet,
     .affineAnims = gDummySpriteAffineAnimTable,
 };
+
+// T-585 THE GARDEN OF ECHOES: the hare, here once (it hops: jump_*) (DAEMONS tools/gengarden.py), npc_white as the LARK beside the fir
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GardenHare = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = PALSLOT_NPC_4,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gObjectEventBaseOam_16x16,
+    .subspriteTables = gObjectEventSpriteOamTables_16x16,
+    .anims = sAnimTable_Standard,
+    .images = sPicTable_GardenHare,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+// T-585 THE GARDEN OF ECHOES: the magpie beside the cairn (DAEMONS tools/gengarden.py), npc_white as the LARK beside the fir
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GardenMagpie = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = PALSLOT_NPC_4,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_FOOT,
+    .oam = &gObjectEventBaseOam_16x16,
+    .subspriteTables = gObjectEventSpriteOamTables_16x16,
+    .anims = sAnimTable_Standard,
+    .images = sPicTable_GardenMagpie,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+// T-585 THE GARDEN OF ECHOES: the mole, half out of its hole (DAEMONS tools/gengarden.py), npc_white as the LARK beside the fir
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GardenMole = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = PALSLOT_NPC_4,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gObjectEventBaseOam_16x16,
+    .subspriteTables = gObjectEventSpriteOamTables_16x16,
+    .anims = sAnimTable_Standard,
+    .images = sPicTable_GardenMole,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+// T-585 THE GARDEN OF ECHOES: the mole's pages: a few (S), a pile (N), a heap (W), set by facing (DAEMONS tools/gengarden.py), npc_white as the LARK beside the fir
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GardenSheaf = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = PALSLOT_NPC_4,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gObjectEventBaseOam_16x16,
+    .subspriteTables = gObjectEventSpriteOamTables_16x16,
+    .anims = sAnimTable_Standard,
+    .images = sPicTable_GardenSheaf,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};
+
+// T-585 THE GARDEN OF ECHOES: the cairn (S) and the hare's tracks (N) (DAEMONS tools/gengarden.py), npc_white as the LARK beside the fir
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GardenStones = {
+    .tileTag = TAG_NONE,
+    .paletteTag = OBJ_EVENT_PAL_TAG_NPC_WHITE,
+    .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE,
+    .size = 128,
+    .width = 16,
+    .height = 16,
+    .paletteSlot = PALSLOT_NPC_4,
+    .shadowSize = SHADOW_SIZE_S,
+    .inanimate = FALSE,
+    .disableReflectionPaletteLoad = FALSE,
+    .tracks = TRACKS_NONE,
+    .oam = &gObjectEventBaseOam_16x16,
+    .subspriteTables = gObjectEventSpriteOamTables_16x16,
+    .anims = sAnimTable_Standard,
+    .images = sPicTable_GardenStones,
+    .affineAnims = gDummySpriteAffineAnimTable,
+};

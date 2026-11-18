@@ -100,6 +100,7 @@ enum StartMenuOption
     STARTMENU_DBG_WITNESS,   // T-235
     STARTMENU_DBG_NEXUS,     // T-395
     STARTMENU_DBG_BREATH,    // T-417: BREATHVERSE
+    STARTMENU_DBG_GARDEN,    // T-585: THE GARDEN OF ECHOES
     STARTMENU_DBG_ENCOUNTER,
     STARTMENU_DBG_WATCH,     // T-268
     STARTMENU_DBG_DAEMON,
@@ -195,6 +196,7 @@ static bool8 DbgFirPortCallback(void);
 static bool8 DbgWitnessCallback(void);
 static bool8 DbgNexusCallback(void);
 static bool8 DbgBreathCallback(void);
+static bool8 DbgGardenCallback(void);
 static bool8 DbgJumpCallback(void);
 static bool8 DbgEncounterCallback(void);
 static bool8 DbgStepCallback(void);
@@ -277,6 +279,7 @@ static const struct MenuAction sStartMenuActionTable[] = {
     [STARTMENU_DBG_WITNESS] = { gText_DbgMenuWitness, {.u8_void = DbgWitnessCallback} },
     [STARTMENU_DBG_NEXUS]   = { gText_DbgMenuNexus,   {.u8_void = DbgNexusCallback} },
     [STARTMENU_DBG_BREATH]  = { gText_DbgMenuBreath,  {.u8_void = DbgBreathCallback} },
+    [STARTMENU_DBG_GARDEN]  = { gText_DbgMenuGarden,  {.u8_void = DbgGardenCallback} },
     [STARTMENU_DBG_ENCOUNTER] = { gText_DbgMenuEncounter, {.u8_void = DbgEncounterCallback} },
     // DAEMON and LEVEL are adjusted with LEFT/RIGHT, so A on either does
     // nothing but redraw -- which is also what makes A safe to lean on.
@@ -350,6 +353,7 @@ static const u8 *const sStartMenuDescPointers[] = {
     gStartMenuDesc_DbgWitness,
     gStartMenuDesc_DbgNexus,
     gStartMenuDesc_DbgBreath,
+    gStartMenuDesc_DbgGarden,
     gStartMenuDesc_DbgEncounter,
     gStartMenuDesc_DbgWatch,
     gStartMenuDesc_DbgDaemon,
@@ -499,6 +503,7 @@ static void SetUpStartMenu(void)
         AppendToStartMenuItems(STARTMENU_DBG_WITNESS);
         AppendToStartMenuItems(STARTMENU_DBG_NEXUS);
         AppendToStartMenuItems(STARTMENU_DBG_BREATH);   // T-417
+        AppendToStartMenuItems(STARTMENU_DBG_GARDEN);   // T-585: the seventh row
         return;
     }
     if (sDbgPage == DBG_PAGE_SOUND)
@@ -1075,6 +1080,7 @@ static bool8 IsDaemonsDebugCallback(void)
         || sStartMenuCallback == DbgWitnessCallback
         || sStartMenuCallback == DbgNexusCallback
         || sStartMenuCallback == DbgBreathCallback
+        || sStartMenuCallback == DbgGardenCallback
         || sStartMenuCallback == DbgJumpCallback
         || sStartMenuCallback == DbgEncounterCallback
         || sStartMenuCallback == DbgStepCallback
@@ -1592,6 +1598,12 @@ static bool8 DbgNexusCallback(void)
 static bool8 DbgBreathCallback(void)
 {
     return DbgLeaveMenuForScript(DaemonsDebug_EventScript_Breathverse);
+}
+
+//  T-585: ROUTE 24's grove with its fir in its key, THE GARDEN OF ECHOES there -- the hare's one visit again, or not.
+static bool8 DbgGardenCallback(void)
+{
+    return DbgLeaveMenuForScript(DaemonsDebug_EventScript_Garden);
 }
 
 static bool8 DbgEncounterCallback(void)

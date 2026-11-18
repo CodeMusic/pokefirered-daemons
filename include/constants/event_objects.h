@@ -365,7 +365,14 @@
 #define OBJ_EVENT_GFX_OLD_TOAD 258       // T-547: the old toad in BLANCHE who says the player's lean
 #define OBJ_EVENT_GFX_BLANK_TABLET 259   // T-547: THE BLANK TABLET, the stone by BLANCHE's path
 
-#define NUM_OBJ_EVENT_GFX     260
+//  T-585 THE GARDEN OF ECHOES, ROUTE 24's grove fir (DAEMONS tools/gengarden.py): 16x16, npc_white as the LARK there.
+#define OBJ_EVENT_GFX_GARDEN_HARE 260      // the hare, here once (it hops: jump_*)
+#define OBJ_EVENT_GFX_GARDEN_MAGPIE 261    // the magpie beside the cairn
+#define OBJ_EVENT_GFX_GARDEN_MOLE 262      // the mole, half out of its hole
+#define OBJ_EVENT_GFX_GARDEN_SHEAF 263     // the mole's pages: a few (S), a pile (N), a heap (W), set by facing
+#define OBJ_EVENT_GFX_GARDEN_STONES 264    // the cairn (S) and the hare's tracks (N)
+
+#define NUM_OBJ_EVENT_GFX     265
 
 // These are dynamic object gfx ids.
 // They correspond with the values of the VAR_OBJ_GFX_ID_X vars.

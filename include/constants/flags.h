@@ -2019,6 +2019,16 @@
 //  grove's fir lands the player beside that grove's own tree in THE NEXUS (EventScript_SingingFir, tools/gbanexusmap.py).
 #define FLAG_COMPASS_READ                    (DAEMONS_FLAGS_START + 0x1F0)
 
+//  T-585: THE GARDEN OF ECHOES, three animals at ROUTE 24's grove fir once it is in its key (data/scripts/
+//  garden_of_echoes.inc; the grove's objects from DAEMONS tools/gbagrove.py GARDEN). Every hide flag is set or cleared
+//  on each arrival there (EventScript_Garden_OnTransition), so none is ever the story's.
+#define FLAG_GARDEN_HARE_GONE                (DAEMONS_FLAGS_START + 0x2C0)   // the hare has touched the fir and gone
+#define FLAG_HIDE_GARDEN_HARE                (DAEMONS_FLAGS_START + 0x2C1)   // set by its map: not the first keyed visit
+#define FLAG_HIDE_GARDEN_TRACKS              (DAEMONS_FLAGS_START + 0x2C2)   // set by its map until the hare has gone
+#define FLAG_HIDE_GARDEN                     (DAEMONS_FLAGS_START + 0x2C3)   // set by its map until the fir is keyed:
+                                                                             //   the magpie, the cairn, the mole, the sheaf
+#define FLAG_GARDEN_STONE_READ               (DAEMONS_FLAGS_START + 0x2C4)   // the cold stone's read is in THE LOG (once)
+
 #define DAEMONS_FLAGS_COUNT           0x400
 #define DAEMONS_FLAGS_END             (DAEMONS_FLAGS_START + DAEMONS_FLAGS_COUNT - 1)
 #define DAEMONS_FLAGS_SIZE            (DAEMONS_FLAGS_COUNT / 8)

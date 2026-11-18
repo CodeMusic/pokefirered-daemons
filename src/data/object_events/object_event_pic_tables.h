@@ -969,6 +969,63 @@ static const struct SpriteFrameImage sPicTable_BlankTablet[] = {
     overworld_frame(gObjectEventPic_BlankTablet, 2, 4, 0),
 };
 
+// T-585: the garden's five 16x16 sheets, three frames each (S N W), walking on the standing frames as the old toad does
+static const struct SpriteFrameImage sPicTable_GardenHare[] = {
+    overworld_frame(gObjectEventPic_GardenHare, 2, 2, 0),
+    overworld_frame(gObjectEventPic_GardenHare, 2, 2, 1),
+    overworld_frame(gObjectEventPic_GardenHare, 2, 2, 2),
+    overworld_frame(gObjectEventPic_GardenHare, 2, 2, 0),
+    overworld_frame(gObjectEventPic_GardenHare, 2, 2, 0),
+    overworld_frame(gObjectEventPic_GardenHare, 2, 2, 1),
+    overworld_frame(gObjectEventPic_GardenHare, 2, 2, 1),
+    overworld_frame(gObjectEventPic_GardenHare, 2, 2, 2),
+    overworld_frame(gObjectEventPic_GardenHare, 2, 2, 2),
+};
+static const struct SpriteFrameImage sPicTable_GardenMagpie[] = {
+    overworld_frame(gObjectEventPic_GardenMagpie, 2, 2, 0),
+    overworld_frame(gObjectEventPic_GardenMagpie, 2, 2, 1),
+    overworld_frame(gObjectEventPic_GardenMagpie, 2, 2, 2),
+    overworld_frame(gObjectEventPic_GardenMagpie, 2, 2, 0),
+    overworld_frame(gObjectEventPic_GardenMagpie, 2, 2, 0),
+    overworld_frame(gObjectEventPic_GardenMagpie, 2, 2, 1),
+    overworld_frame(gObjectEventPic_GardenMagpie, 2, 2, 1),
+    overworld_frame(gObjectEventPic_GardenMagpie, 2, 2, 2),
+    overworld_frame(gObjectEventPic_GardenMagpie, 2, 2, 2),
+};
+static const struct SpriteFrameImage sPicTable_GardenMole[] = {
+    overworld_frame(gObjectEventPic_GardenMole, 2, 2, 0),
+    overworld_frame(gObjectEventPic_GardenMole, 2, 2, 1),
+    overworld_frame(gObjectEventPic_GardenMole, 2, 2, 2),
+    overworld_frame(gObjectEventPic_GardenMole, 2, 2, 0),
+    overworld_frame(gObjectEventPic_GardenMole, 2, 2, 0),
+    overworld_frame(gObjectEventPic_GardenMole, 2, 2, 1),
+    overworld_frame(gObjectEventPic_GardenMole, 2, 2, 1),
+    overworld_frame(gObjectEventPic_GardenMole, 2, 2, 2),
+    overworld_frame(gObjectEventPic_GardenMole, 2, 2, 2),
+};
+static const struct SpriteFrameImage sPicTable_GardenSheaf[] = {
+    overworld_frame(gObjectEventPic_GardenSheaf, 2, 2, 0),
+    overworld_frame(gObjectEventPic_GardenSheaf, 2, 2, 1),
+    overworld_frame(gObjectEventPic_GardenSheaf, 2, 2, 2),
+    overworld_frame(gObjectEventPic_GardenSheaf, 2, 2, 0),
+    overworld_frame(gObjectEventPic_GardenSheaf, 2, 2, 0),
+    overworld_frame(gObjectEventPic_GardenSheaf, 2, 2, 1),
+    overworld_frame(gObjectEventPic_GardenSheaf, 2, 2, 1),
+    overworld_frame(gObjectEventPic_GardenSheaf, 2, 2, 2),
+    overworld_frame(gObjectEventPic_GardenSheaf, 2, 2, 2),
+};
+static const struct SpriteFrameImage sPicTable_GardenStones[] = {
+    overworld_frame(gObjectEventPic_GardenStones, 2, 2, 0),
+    overworld_frame(gObjectEventPic_GardenStones, 2, 2, 1),
+    overworld_frame(gObjectEventPic_GardenStones, 2, 2, 2),
+    overworld_frame(gObjectEventPic_GardenStones, 2, 2, 0),
+    overworld_frame(gObjectEventPic_GardenStones, 2, 2, 0),
+    overworld_frame(gObjectEventPic_GardenStones, 2, 2, 1),
+    overworld_frame(gObjectEventPic_GardenStones, 2, 2, 1),
+    overworld_frame(gObjectEventPic_GardenStones, 2, 2, 2),
+    overworld_frame(gObjectEventPic_GardenStones, 2, 2, 2),
+};
+
 static const struct SpriteFrameImage sPicTable_LionessBall[] = {
     overworld_frame(gObjectEventPic_LionessBall, 2, 4, 0),
     overworld_frame(gObjectEventPic_LionessBall, 2, 4, 1),

@@ -1842,6 +1842,7 @@ static const struct FirNote sFirTune[] =
 #define tTimer   data[1]
 #define tInKey   data[2]
 #define tTreePal data[3] // the fir's palette, 0-15 the map's and 16-31 the sprites', or -1
+#define tEnd     data[4] // the notes it sings: the whole tune, or T-585's one bar
 
 // The light of the note now sounding, fading as it is held; 0 frames left puts the palettes back.
 static void SingingFir_Light(s16 *data)
@@ -1876,7 +1877,7 @@ static void Task_SingingFir(u8 taskId)
         SingingFir_Light(data);
         return;
     }
-    if (tNote >= (s16)ARRAY_COUNT(sFirTune))
+    if (tNote >= tEnd)
     {
         SingingFir_Light(data);
         DestroyTask(taskId);
@@ -1901,6 +1902,7 @@ void SingingFir_Sing(void)
 
     gTasks[taskId].tInKey = gSpecialVar_0x8004;
     gTasks[taskId].tTimer = 16;
+    gTasks[taskId].tEnd = ARRAY_COUNT(sFirTune);
     gTasks[taskId].tTreePal = -1;
     if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_NEXUS) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_NEXUS))
         gTasks[taskId].tTreePal = NEXUS_TREE_PALETTE;   // play.h
@@ -1909,10 +1911,24 @@ void SingingFir_Sing(void)
         gTasks[taskId].tTreePal = 16 + gSprites[gObjectEvents[objectEventId].spriteId].oam.paletteNum;
 }
 
+// T-585 THE GARDEN OF ECHOES: touched by the hare, the fir hums one bar -- "O Christmas tree", the first four notes --
+// lit as when it sings, VAR_0x8004 in key or not. `special SingingFir_SingBar` then `waitstate`.
+#define FIR_BAR_NOTES 4
+void SingingFir_SingBar(void)
+{
+    u8 taskId;
+
+    SingingFir_Sing();
+    taskId = FindTaskIdByFunc(Task_SingingFir);
+    if (taskId != TASK_NONE)
+        gTasks[taskId].tEnd = FIR_BAR_NOTES;
+}
+
 #undef tNote
 #undef tTimer
 #undef tInKey
 #undef tTreePal
+#undef tEnd
 
 // GOAL B (the user, 2026-09-24: "too bad we couldn't simulate a glitch effect -- there are a lot of places where it
 // would fit"). A few frames of the picture tearing: bands of the map's middle layer slide sideways while the others

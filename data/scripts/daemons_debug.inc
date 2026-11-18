@@ -367,6 +367,36 @@ DaemonsDebug_EventScript_BreathFlute::
 	removeitem ITEM_FLUTE
 	return
 
+@ T-585: ROUTE 24's grove with the fir in its key -- THE GARDEN OF ECHOES. YES to the hare's visit again (its flag and
+@ the visits cleared: a few pages); NO keeps both as they are. In by ROUTE 24's tree, where the player arrives.
+DaemonsDebug_EventScript_Garden::
+	lockall
+	msgbox DaemonsDebug_Text_Garden, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, DaemonsDebug_EventScript_Cancel
+	setflag FLAG_NOTEBOOK_LOOSE_KEY
+	setflag FLAG_FIR_IN_KEY
+	clearflag FLAG_HIDE_FIR_UNKEYED
+	msgbox DaemonsDebug_Text_GardenHare, MSGBOX_YESNO
+	call_if_eq VAR_RESULT, YES, DaemonsDebug_EventScript_GardenAgain
+	closemessage
+	warp MAP_ROUTE24_GROVE, 8, 8
+	waitstate
+	releaseall
+	end
+
+DaemonsDebug_EventScript_GardenAgain::
+	clearflag FLAG_GARDEN_HARE_GONE
+	setvar VAR_GARDEN_VISITS, 0
+	return
+
+DaemonsDebug_Text_Garden::
+	.string "DEBUG: THE GARDEN OF ECHOES?\p"
+	.string "ROUTE 24's grove, the fir in\n"
+	.string "its key.$"
+
+DaemonsDebug_Text_GardenHare::
+	.string "The hare's visit again?$"
+
 DaemonsDebug_Text_Breath::
 	.string "DEBUG: BREATHVERSE?$"
 

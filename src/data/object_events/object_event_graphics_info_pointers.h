@@ -181,6 +181,11 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BenchmarkGuide;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Tulikko;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_OldToad;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_BlankTablet;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GardenHare;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GardenMagpie;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GardenMole;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GardenSheaf;
+const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_GardenStones;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_LionessBall;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Easel;
 const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Lioness;
@@ -494,4 +499,9 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_TULIKKO]                    = &gObjectEventGraphicsInfo_Tulikko,
     [OBJ_EVENT_GFX_OLD_TOAD]                   = &gObjectEventGraphicsInfo_OldToad,
     [OBJ_EVENT_GFX_BLANK_TABLET]               = &gObjectEventGraphicsInfo_BlankTablet,
+    [OBJ_EVENT_GFX_GARDEN_HARE]                = &gObjectEventGraphicsInfo_GardenHare,
+    [OBJ_EVENT_GFX_GARDEN_MAGPIE]              = &gObjectEventGraphicsInfo_GardenMagpie,
+    [OBJ_EVENT_GFX_GARDEN_MOLE]                = &gObjectEventGraphicsInfo_GardenMole,
+    [OBJ_EVENT_GFX_GARDEN_SHEAF]               = &gObjectEventGraphicsInfo_GardenSheaf,
+    [OBJ_EVENT_GFX_GARDEN_STONES]              = &gObjectEventGraphicsInfo_GardenStones,
 };

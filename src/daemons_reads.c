@@ -53,6 +53,7 @@ enum
     PHRASE_RIPPLES,     // T-577: the still pond's -- the same, given and never landing
     PHRASE_TOUCH_GIFT,  // T-575: TOUCH, a gift with a STRATUM daemon following -- the same
     PHRASE_TOUCH_RAIN,  // T-575: TOUCH, rain on stone in an old place at night, a LATENT daemon following -- the same
+    PHRASE_TOUCH_STONE, // T-585: TOUCH, the magpie's cold stone in ROUTE 24's grove -- the same (4 bits: 16 at most)
     PHRASE_COUNT
 };
 
@@ -72,10 +73,12 @@ static const u8 sPhrase_Ripples[] = _("two ripples, one pond. Where is the line?
 
 static const u8 sPhrase_TouchGift[] = _("TOUCH: this was held a long time before it was given.");   // T-575, DRAFT
 static const u8 sPhrase_TouchRain[] = _("TOUCH: rain on stone. It is dry in here.");                 // T-575, DRAFT
+static const u8 sPhrase_TouchStone[] = _("TOUCH: this was held too long.");                         // T-585, DRAFT
 
 // The box's words for a read given by a scene rather than an arrival (T-577 on), each line within 208px. DRAFT.
 static const u8 sText_ReadTouchGift[] = _("{COLOR PURPLE}{SHADOW LIGHT_GRAY}A read: this was held a long time\nbefore it was given.");   // T-575: 185, 110px
 static const u8 sText_ReadTouchRain[] = _("{COLOR PURPLE}{SHADOW LIGHT_GRAY}A read: rain on stone.\nIt is dry in here.");   // T-575: 121, 98px
+static const u8 sText_ReadTouchStone[] = _("{COLOR PURPLE}{SHADOW LIGHT_GRAY}A read: this was held too long.");   // T-585, DRAFT
 static const u8 sText_ReadRipples[] = _("{COLOR PURPLE}{SHADOW LIGHT_GRAY}A read: two ripples, one pond.\nWhere is the line?");   // 168, 99px
 
 static const u8 *const sPhrases[PHRASE_COUNT] =
@@ -93,14 +96,17 @@ static const u8 *const sPhrases[PHRASE_COUNT] =
     [PHRASE_RIPPLES] = sPhrase_Ripples,
     [PHRASE_TOUCH_GIFT] = sPhrase_TouchGift,
     [PHRASE_TOUCH_RAIN] = sPhrase_TouchRain,
+    [PHRASE_TOUCH_STONE] = sPhrase_TouchStone,
 };
 
 // T-577 on: the reads a scene gives, by READ_KIND_* (include/daemons_reads.h) -- each its phrase in THE LOG and its box.
 static const u8 sKindPhrase[READ_KIND_COUNT] = {
     [READ_RIPPLES] = PHRASE_RIPPLES, [READ_TOUCH_GIFT] = PHRASE_TOUCH_GIFT, [READ_TOUCH_RAIN] = PHRASE_TOUCH_RAIN,
+    [READ_TOUCH_STONE] = PHRASE_TOUCH_STONE,
 };
 static const u8 *const sKindText[READ_KIND_COUNT] = {
     [READ_RIPPLES] = sText_ReadRipples, [READ_TOUCH_GIFT] = sText_ReadTouchGift, [READ_TOUCH_RAIN] = sText_ReadTouchRain,
+    [READ_TOUCH_STONE] = sText_ReadTouchStone,
 };
 
 // THE LOG's page (DRAFT). Reflowed by the book reader: \p starts a line.
@@ -350,6 +356,26 @@ void Daemons_TryTouchGift(void)
     if (!DEBUG_ALWAYS && FixedRandom() % 100 >= TOUCH_GIFT_CHANCE)
         return;
     Daemons_GiveRead(READ_TOUCH_GIFT);
+    gSpecialVar_Result = TRUE;
+}
+
+// T-585 THE GARDEN OF ECHOES: A on the magpie's cairn. The stone is cold whatever is held; with THE SUBTLE LAYER, TOUCH
+// reads it too -- every time, its words in gStringVar4 and VAR_RESULT TRUE; filed in THE LOG the first time only, so
+// the same stone does not push every other read out of it. Never landing: it is about no thing.
+void Daemons_TouchStone(void)
+{
+    gSpecialVar_Result = FALSE;
+    if (!FlagGet(FLAG_GOT_SUBTLE_LAYER))
+        return;
+    if (!FlagGet(FLAG_GARDEN_STONE_READ))
+    {
+        FlagSet(FLAG_GARDEN_STONE_READ);
+        Daemons_GiveRead(READ_TOUCH_STONE);
+    }
+    else
+    {
+        StringCopy(gStringVar4, sKindText[READ_TOUCH_STONE]);
+    }
     gSpecialVar_Result = TRUE;
 }
 

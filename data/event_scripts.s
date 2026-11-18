@@ -1441,6 +1441,7 @@ Text_TestMsg::
 	.include "data/scripts/stream.inc"
 	.include "data/scripts/notebook.inc"
 	.include "data/scripts/play.inc"   @ T-417 P2: what a song played opens
+	.include "data/scripts/garden_of_echoes.inc"   @ T-585: the three at ROUTE 24's grove fir
 	.include "data/scripts/holidays.inc"   @ T-416: a holiday's gifts
 	.include "data/scripts/notebook_documents.inc"   @ T-224, tools/gbadocs.py
 	.include "data/scripts/school.inc"
