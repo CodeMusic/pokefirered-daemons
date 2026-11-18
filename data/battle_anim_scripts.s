@@ -490,13 +490,13 @@ Move_POISON_POWDER:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(10, 11, 6)
 	waitforvisualfinish
 	playsewithpan SE_M_POISON_POWDER, SOUND_PAN_TARGET
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 2, 0, 4, RGB(10, 11, 6)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 2, 4, 8, RGB(10, 11, 6)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 2, 8, 12, RGB(10, 11, 6)
 	waitforvisualfinish
 	delay 8
@@ -577,7 +577,7 @@ Move_TACKLE:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
 	waitforvisualfinish
-	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
+	playtypesewithpan TYPE_SE_HIT, SOUND_PAN_TARGET
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 4, 1
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 9, RGB(24, 23, 21)
 	waitforvisualfinish
@@ -645,10 +645,10 @@ Move_SCREECH:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(24, 23, 21)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 0, 5, RGB(13, 13, 13)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 5, 10, RGB(13, 13, 13)
 	waitforvisualfinish
 	delay 10
@@ -914,7 +914,7 @@ Move_MEGA_KICK:
 	end
 @ genanims: CONTENT (T-134, vision.md 9.24) approved.
 Move_COMET_PUNCH:
-	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
+	playtypesewithpan TYPE_SE_HIT, SOUND_PAN_TARGET
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 3, 1
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 8, RGB(24, 23, 21)
 	waitforvisualfinish
@@ -1050,7 +1050,7 @@ Move_TAIL_WHIP:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(24, 23, 21)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 0, 5, RGB(13, 13, 13)
 	waitforvisualfinish
 	delay 10
@@ -1089,18 +1089,18 @@ Move_HIDDEN_POWER:
 	end
 @ genanims: LOGIC (T-134, vision.md 9.24) approved.
 Move_REVERSAL:
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 5, RGB(12, 15, 19)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 5, 10, RGB(12, 15, 19)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 10, 0, RGB(12, 15, 19)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 4, RGB(12, 15, 19)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 4, 8, RGB(12, 15, 19)
 	waitforvisualfinish
 	playsewithpan SE_M_DETECT, SOUND_PAN_TARGET
@@ -1113,7 +1113,7 @@ Move_REVERSAL:
 Move_PURSUIT:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 13, RGB(5, 5, 5)
 	waitforvisualfinish
-	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
+	playtypesewithpan TYPE_SE_HIT, SOUND_PAN_TARGET
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 4, 1
 	waitforvisualfinish
 	delay 4
@@ -1132,10 +1132,10 @@ Move_SPIKE_CANNON:
 @ genanims: RAISE (T-134, vision.md 9.24) approved.
 Move_SWORDS_DANCE:
 	playsewithpan SE_M_SWORDS_DANCE, SOUND_PAN_ATTACKER
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 6, 12, RGB(24, 23, 21)
 	waitforvisualfinish
 	delay 10
@@ -1145,10 +1145,10 @@ Move_SWORDS_DANCE:
 @ genanims: COPY (T-134, vision.md 9.24) approved.
 Move_PSYCH_UP:
 	playsewithpan SE_M_PSYBEAM2, SOUND_PAN_TARGET
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 6, 12, RGB(24, 23, 21)
 	waitforvisualfinish
 	delay 6
@@ -1159,11 +1159,11 @@ Move_PSYCH_UP:
 	delay 4
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 8, 0, RGB(13, 13, 13)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 12, RGB(24, 23, 21)
 	waitforvisualfinish
 	delay 6
@@ -1176,7 +1176,7 @@ Move_DIZZY_PUNCH:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
 	waitforvisualfinish
-	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
+	playtypesewithpan TYPE_SE_HIT, SOUND_PAN_TARGET
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 5, 1
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 11, RGB(24, 23, 21)
 	waitforvisualfinish
@@ -1265,7 +1265,7 @@ Move_SLAM:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
 	waitforvisualfinish
-	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
+	playtypesewithpan TYPE_SE_HIT, SOUND_PAN_TARGET
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 4, 0, 5, 1
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 12, RGB(24, 23, 21)
 	waitforvisualfinish
@@ -1324,13 +1324,13 @@ Move_WATERFALL:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(8, 13, 22)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 4, RGB(8, 13, 22)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 4, 8, RGB(8, 13, 22)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 12, RGB(8, 13, 22)
 	waitforvisualfinish
 	playsewithpan SE_M_CRABHAMMER, SOUND_PAN_TARGET
@@ -1394,7 +1394,7 @@ Move_EXPLOSION:
 @ genanims: RAISE (T-134, vision.md 9.24) approved.
 Move_DEFENSE_CURL:
 	playsewithpan SE_M_TRI_ATTACK, SOUND_PAN_ATTACKER
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
 	delay 10
@@ -1413,7 +1413,7 @@ Move_PROTECT:
 @ genanims: PROTECT (T-134, vision.md 9.24) approved.
 Move_DETECT:
 	playsewithpan SE_M_DETECT, SOUND_PAN_ATTACKER
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 11, RGB(12, 15, 19)
 	waitforvisualfinish
 	delay 16
@@ -1608,7 +1608,7 @@ Move_ATTRACT:
 @ genanims: RAISE (T-134, vision.md 9.24) approved.
 Move_GROWTH:
 	playsewithpan SE_M_TAKE_DOWN, SOUND_PAN_ATTACKER
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
 	delay 10
@@ -1668,7 +1668,7 @@ Move_LOCK_ON:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
 	waitforvisualfinish
-	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
+	playtypesewithpan TYPE_SE_HIT, SOUND_PAN_TARGET
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 0, 9, RGB_WHITE
 	waitforvisualfinish
 	delay 20
@@ -1686,7 +1686,7 @@ Move_MEAN_LOOK:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 10, 0, RGB(24, 23, 21)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 12, RGB(13, 13, 13)
 	waitforvisualfinish
 	delay 8
@@ -1797,7 +1797,7 @@ Move_SMOKESCREEN:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(24, 23, 21)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET | F_PAL_BG, 1, 0, 5, RGB(13, 13, 13)
 	waitforvisualfinish
 	delay 10
@@ -1817,7 +1817,7 @@ Move_CONVERSION:
 	delay 2
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 10, 0, RGB(13, 13, 13)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_DaemonsBlendToUserType, 10, 0, 0, 12
 	waitforvisualfinish
 	delay 12
@@ -1835,7 +1835,7 @@ Move_CONVERSION_2:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 0, 12, RGB(13, 13, 13)
 	waitforvisualfinish
 	delay 30
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 12, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	createvisualtask AnimTask_DaemonsBlendToUserType, 10, 1, 0, 13
@@ -1850,23 +1850,23 @@ Move_ROLLING_KICK:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(12, 15, 19)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 6, RGB(12, 15, 19)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 6, 0, RGB(12, 15, 19)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 6, RGB(12, 15, 19)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 6, 0, RGB(12, 15, 19)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 3, RGB(12, 15, 19)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 3, 6, RGB(12, 15, 19)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 6, 9, RGB(12, 15, 19)
 	waitforvisualfinish
 	playsewithpan SE_M_DOUBLE_TEAM, SOUND_PAN_TARGET
@@ -1930,13 +1930,13 @@ Move_THRASH:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
 	waitforvisualfinish
-	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
+	playtypesewithpan TYPE_SE_HIT, SOUND_PAN_TARGET
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 4, 0, 6, 1
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 13, RGB(24, 23, 21)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 13, 0, RGB(24, 23, 21)
 	waitforvisualfinish
-	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
+	playtypesewithpan TYPE_SE_HIT, SOUND_PAN_TARGET
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 4, 0, 6, 1
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 13, RGB(24, 23, 21)
 	waitforvisualfinish
@@ -1966,11 +1966,11 @@ Move_LOW_KICK:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(12, 15, 19)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 4, RGB(12, 15, 19)
 	waitforvisualfinish
 	delay 2
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 4, 8, RGB(12, 15, 19)
 	waitforvisualfinish
 	delay 2
@@ -2046,7 +2046,7 @@ DaemonsExcavateUp:
 @ genanims: RAISE (T-134, vision.md 9.24) approved.
 Move_MEDITATE:
 	playsewithpan SE_M_HEADBUTT, SOUND_PAN_ATTACKER
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 6, RGB(22, 10, 19)
 	waitforvisualfinish
 	delay 10
@@ -2056,10 +2056,10 @@ Move_MEDITATE:
 @ genanims: RAISE (T-134, vision.md 9.24) approved.
 Move_AGILITY:
 	playsewithpan SE_M_DOUBLE_TEAM, SOUND_PAN_ATTACKER
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 6, RGB(22, 10, 19)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 12, RGB(22, 10, 19)
 	waitforvisualfinish
 	delay 4
@@ -2131,7 +2131,7 @@ Move_DOUBLE_TEAM:
 	end
 @ genanims: RAISE (T-134, vision.md 9.24) approved.
 Move_MINIMIZE:
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 10, RGB(24, 23, 21)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 10, 0, RGB(24, 23, 21)
@@ -2203,10 +2203,10 @@ DaemonsSkullBashRun:
 @ genanims: RAISE (T-134, vision.md 9.24) approved.
 Move_AMNESIA:
 	playsewithpan SE_M_METRONOME, SOUND_PAN_ATTACKER
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 6, RGB(22, 10, 19)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 6, 12, RGB(22, 10, 19)
 	waitforvisualfinish
 	delay 10
@@ -2224,7 +2224,7 @@ Move_KINESIS:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(22, 10, 19)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET | F_PAL_BG, 1, 0, 5, RGB(13, 13, 13)
 	waitforvisualfinish
 	delay 10
@@ -2304,7 +2304,7 @@ Move_FLASH:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(24, 23, 21)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET | F_PAL_BG, 1, 0, 5, RGB(13, 13, 13)
 	waitforvisualfinish
 	delay 10
@@ -2319,10 +2319,10 @@ Move_SPLASH:
 @ genanims: RAISE (T-134, vision.md 9.24) approved.
 Move_ACID_ARMOR:
 	playsewithpan SE_M_ACID_ARMOR, SOUND_PAN_ATTACKER
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 6, RGB(10, 11, 6)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 6, 12, RGB(10, 11, 6)
 	waitforvisualfinish
 	delay 10
@@ -2331,8 +2331,8 @@ Move_ACID_ARMOR:
 	end
 @ genanims: RAISE (T-134, vision.md 9.24) approved.
 Move_SHARPEN:
-	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_ATTACKER
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_HIT, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
 	delay 10
@@ -2400,7 +2400,7 @@ Move_SKETCH:
 	delay 4
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 8, 0, RGB(13, 13, 13)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 10, RGB(24, 23, 21)
 	waitforvisualfinish
 	delay 20
@@ -2447,13 +2447,13 @@ Move_SPITE:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(11, 8, 14)
 	waitforvisualfinish
 	playsewithpan SE_M_PSYBEAM, SOUND_PAN_TARGET
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 0, 4, RGB(13, 13, 13)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 4, 8, RGB(13, 13, 13)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 8, 12, RGB(13, 13, 13)
 	waitforvisualfinish
 	delay 6
@@ -2462,10 +2462,10 @@ Move_SPITE:
 	end
 @ genanims: LOGIC (T-134, vision.md 9.24) approved.
 Move_MACH_PUNCH:
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 4, RGB(12, 15, 19)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 4, 8, RGB(12, 15, 19)
 	waitforvisualfinish
 	playsewithpan SE_M_JUMP_KICK, SOUND_PAN_TARGET
@@ -2505,7 +2505,7 @@ Move_ENDURE:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 13, RGB(13, 13, 13)
 	waitforvisualfinish
 	delay 18
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 13, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
@@ -2532,10 +2532,10 @@ Move_CHARM:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(24, 23, 21)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 0, 5, RGB(13, 13, 13)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 5, 10, RGB(13, 13, 13)
 	waitforvisualfinish
 	delay 10
@@ -2759,15 +2759,15 @@ Move_MOONLIGHT:
 	monbg ANIM_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 0, 12, RGB_BLACK
 	waitforvisualfinish
-	playsewithpan SE_M_MOONLIGHT, 0
+	playtypesewithpan TYPE_SE_HEAL, 0
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 11, RGB(13, 13, 13)
 	waitforvisualfinish
 	delay 12
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 11, 5, RGB(13, 13, 13)
 	waitforvisualfinish
 	delay 12
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 5, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 12, 0, RGB_BLACK
@@ -2867,7 +2867,7 @@ Move_TORMENT:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 10, 0, RGB(5, 5, 5)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 12, RGB(13, 13, 13)
 	waitforvisualfinish
 	delay 8
@@ -2931,7 +2931,7 @@ Move_FOLLOW_ME:
 @ genanims: FIELD (T-134, vision.md 9.24) approved.
 Move_CHARGE:
 	playsewithpan SE_M_CHARGE, SOUND_PAN_ATTACKER
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 6, RGB(10, 23, 23)
 	waitforvisualfinish
 	delay 10
@@ -2949,7 +2949,7 @@ Move_TAUNT:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 10, 0, RGB(5, 5, 5)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 12, RGB(13, 13, 13)
 	waitforvisualfinish
 	delay 8
@@ -2996,19 +2996,19 @@ Move_SUPERPOWER:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(12, 15, 19)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 3, RGB(12, 15, 19)
 	waitforvisualfinish
 	delay 2
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 3, 6, RGB(12, 15, 19)
 	waitforvisualfinish
 	delay 2
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 6, 9, RGB(12, 15, 19)
 	waitforvisualfinish
 	delay 2
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 9, 12, RGB(12, 15, 19)
 	waitforvisualfinish
 	delay 2
@@ -3041,7 +3041,7 @@ Move_RECYCLE:
 	delay 10
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 8, 0, RGB(13, 13, 13)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 9, RGB(24, 23, 21)
 	waitforvisualfinish
 	delay 4
@@ -3058,15 +3058,15 @@ DaemonsFalsifyPlain:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(12, 15, 19)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 4, RGB(12, 15, 19)
 	waitforvisualfinish
 	delay 2
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 4, 8, RGB(12, 15, 19)
 	waitforvisualfinish
 	delay 2
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 12, RGB(12, 15, 19)
 	waitforvisualfinish
 	delay 2
@@ -3079,7 +3079,7 @@ DaemonsFalsifyPlain:
 DaemonsFalsifyScreen:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_DEF_SIDE, 0, 0, 10, RGB(12, 15, 19)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_DEF_SIDE, 0, 0, 12, RGB(13, 13, 13)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_DEF_SIDE, 1, 12, 0, RGB(13, 13, 13)
@@ -3088,15 +3088,15 @@ DaemonsFalsifyScreen:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(12, 15, 19)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 4, RGB(12, 15, 19)
 	waitforvisualfinish
 	delay 2
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 4, 8, RGB(12, 15, 19)
 	waitforvisualfinish
 	delay 2
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 12, RGB(12, 15, 19)
 	waitforvisualfinish
 	delay 2
@@ -3204,7 +3204,7 @@ Move_IMPRISON:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 10, 0, RGB(22, 10, 19)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 12, RGB(13, 13, 13)
 	waitforvisualfinish
 	delay 8
@@ -3244,10 +3244,10 @@ Move_CAMOUFLAGE:
 @ genanims: RAISE (T-134, vision.md 9.24) approved.
 Move_TAIL_GLOW:
 	playsewithpan SE_M_MORNING_SUN, SOUND_PAN_ATTACKER
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 6, RGB(16, 18, 9)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 6, 12, RGB(16, 18, 9)
 	waitforvisualfinish
 	delay 10
@@ -3301,10 +3301,10 @@ Move_FEATHER_DANCE:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(25, 8, 8)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 0, 5, RGB(13, 13, 13)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 5, 10, RGB(13, 13, 13)
 	waitforvisualfinish
 	delay 10
@@ -3409,7 +3409,7 @@ Move_AROMATHERAPY:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATK_SIDE, 1, 10, 0, RGB(11, 19, 12)
 	waitforvisualfinish
 	delay 6
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATK_SIDE, 0, 0, 10, RGB(11, 19, 12)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATK_SIDE, 1, 10, 0, RGB(11, 19, 12)
@@ -3427,10 +3427,10 @@ Move_FAKE_TEARS:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(5, 5, 5)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 0, 5, RGB(13, 13, 13)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 5, 10, RGB(13, 13, 13)
 	waitforvisualfinish
 	delay 10
@@ -3493,7 +3493,7 @@ Move_TICKLE:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(24, 23, 21)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 0, 5, RGB(13, 13, 13)
 	waitforvisualfinish
 	delay 10
@@ -3508,7 +3508,7 @@ Move_TICKLE:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(24, 23, 21)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 0, 5, RGB(13, 13, 13)
 	waitforvisualfinish
 	delay 10
@@ -3578,10 +3578,10 @@ Move_AERIAL_ACE:
 @ genanims: RAISE (T-134, vision.md 9.24) approved.
 Move_IRON_DEFENSE:
 	playsewithpan SE_SHINY, SOUND_PAN_ATTACKER
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 6, RGB(24, 21, 12)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 6, 12, RGB(24, 21, 12)
 	waitforvisualfinish
 	delay 10
@@ -3599,7 +3599,7 @@ Move_BLOCK:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 10, 0, RGB(24, 23, 21)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 12, RGB(13, 13, 13)
 	waitforvisualfinish
 	delay 8
@@ -3608,8 +3608,8 @@ Move_BLOCK:
 	end
 @ genanims: RAISE (T-134, vision.md 9.24) approved.
 Move_HOWL:
-	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_ATTACKER
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_HIT, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
 	delay 10
@@ -3619,13 +3619,13 @@ Move_HOWL:
 @ genanims: RAISE (T-134, vision.md 9.24) approved.
 Move_BULK_UP:
 	playsewithpan SE_M_SWAGGER, SOUND_PAN_ATTACKER
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 6, RGB(12, 15, 19)
 	waitforvisualfinish
 	delay 10
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 6, 0, RGB(12, 15, 19)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 6, RGB(12, 15, 19)
 	waitforvisualfinish
 	delay 10
@@ -3697,13 +3697,13 @@ Move_WATER_SPORT:
 @ genanims: RAISE (T-134, vision.md 9.24) approved.
 Move_CALM_MIND:
 	playsewithpan SE_M_SUPERSONIC, SOUND_PAN_ATTACKER
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 6, RGB(22, 10, 19)
 	waitforvisualfinish
 	delay 10
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 6, 0, RGB(22, 10, 19)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 6, RGB(22, 10, 19)
 	waitforvisualfinish
 	delay 10
@@ -3732,13 +3732,13 @@ Move_LEAF_BLADE:
 @ genanims: RAISE (T-134, vision.md 9.24) approved.
 Move_DRAGON_DANCE:
 	playsewithpan SE_M_TELEPORT, SOUND_PAN_ATTACKER
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 6, RGB(6, 15, 13)
 	waitforvisualfinish
 	delay 10
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 6, 0, RGB(6, 15, 13)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 6, RGB(6, 15, 13)
 	waitforvisualfinish
 	delay 10
@@ -3783,7 +3783,7 @@ Move_SHOCK_WAVE:
 @ genanims: RAISE (T-134, vision.md 9.24) approved.
 Move_HARDEN:
 	playsewithpan SE_M_HARDEN, SOUND_PAN_ATTACKER
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
 	delay 10
@@ -3797,16 +3797,16 @@ Move_BELLY_DRUM:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 10, 0, RGB(13, 13, 13)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 4, RGB(24, 23, 21)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 4, 8, RGB(24, 23, 21)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 8, 12, RGB(24, 23, 21)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 12, 16, RGB(24, 23, 21)
 	waitforvisualfinish
 	delay 10
@@ -3844,7 +3844,7 @@ Move_REST:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 13, RGB(13, 13, 13)
 	waitforvisualfinish
 	delay 8
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 13, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	delay 12
@@ -3945,7 +3945,7 @@ Move_THUNDER:
 	end
 @ genanims: SIGNAL (T-134, vision.md 9.24) approved.
 Move_THUNDER_PUNCH:
-	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
+	playtypesewithpan TYPE_SE_HIT, SOUND_PAN_TARGET
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 5, 1
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 12, RGB(10, 23, 23)
 	waitforvisualfinish
@@ -4044,7 +4044,7 @@ Move_ROAR:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
 	waitforvisualfinish
-	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
+	playtypesewithpan TYPE_SE_HIT, SOUND_PAN_TARGET
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 10, RGB(13, 13, 13)
 	waitforvisualfinish
 	createvisualtask AnimTask_SlideOffScreen, 5, ANIM_TARGET, 2
@@ -4058,7 +4058,7 @@ Move_GROWL:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
 	waitforvisualfinish
-	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_HIT, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 6, 0, RGB(24, 23, 21)
@@ -4067,7 +4067,7 @@ Move_GROWL:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(24, 23, 21)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 0, 5, RGB(13, 13, 13)
 	waitforvisualfinish
 	delay 10
@@ -4156,10 +4156,10 @@ Move_REFLECT:
 @ genanims: RAISE (T-134, vision.md 9.24) approved.
 Move_BARRIER:
 	playsewithpan SE_M_BARRIER, SOUND_PAN_ATTACKER
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 6, RGB(22, 10, 19)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 6, 12, RGB(22, 10, 19)
 	waitforvisualfinish
 	delay 10
@@ -4241,7 +4241,7 @@ Move_SAND_ATTACK:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(19, 15, 9)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET | F_PAL_BG, 1, 0, 5, RGB(13, 13, 13)
 	waitforvisualfinish
 	delay 10
@@ -4374,7 +4374,7 @@ Move_ICE_BEAM:
 @ genanims: RAISE (T-134, vision.md 9.24) approved.
 Move_WITHDRAW:
 	playsewithpan SE_M_HEADBUTT, SOUND_PAN_ATTACKER
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 6, RGB(8, 13, 22)
 	waitforvisualfinish
 	delay 10
@@ -4404,13 +4404,13 @@ Move_SOLAR_BEAM:
 DaemonsBatchDone:
 	end
 DaemonsBatchGather:
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 0, 4, RGB(11, 19, 12)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 4, 8, RGB(11, 19, 12)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 8, 12, RGB(11, 19, 12)
 	waitforvisualfinish
 	delay 8
@@ -4525,7 +4525,7 @@ Move_ABSORB:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 8, 0, RGB(11, 19, 12)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 4, RGB(11, 19, 12)
 	waitforvisualfinish
 	delay 6
@@ -4570,10 +4570,10 @@ Move_MEGA_DRAIN:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 9, 0, RGB(11, 19, 12)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 4, RGB(11, 19, 12)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 4, 8, RGB(11, 19, 12)
 	waitforvisualfinish
 	delay 6
@@ -4591,13 +4591,13 @@ Move_GIGA_DRAIN:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 11, 0, RGB(11, 19, 12)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 4, RGB(11, 19, 12)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 4, 8, RGB(11, 19, 12)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 8, 12, RGB(11, 19, 12)
 	waitforvisualfinish
 	delay 6
@@ -4630,7 +4630,7 @@ Move_LEECH_LIFE:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 8, 0, RGB(16, 18, 9)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 4, RGB(16, 18, 9)
 	waitforvisualfinish
 	delay 6
@@ -4662,16 +4662,16 @@ Move_TOXIC:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(10, 11, 6)
 	waitforvisualfinish
 	playsewithpan SE_M_TOXIC, SOUND_PAN_TARGET
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 2, 0, 4, RGB(10, 11, 6)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 2, 4, 8, RGB(10, 11, 6)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 2, 8, 12, RGB(10, 11, 6)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 2, 12, 16, RGB(10, 11, 6)
 	waitforvisualfinish
 	delay 8
@@ -5128,15 +5128,15 @@ Move_KARATE_CHOP:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(12, 15, 19)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 3, RGB(12, 15, 19)
 	waitforvisualfinish
 	delay 2
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 3, 6, RGB(12, 15, 19)
 	waitforvisualfinish
 	delay 2
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 6, 9, RGB(12, 15, 19)
 	waitforvisualfinish
 	delay 2
@@ -5152,19 +5152,19 @@ Move_CROSS_CHOP:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(12, 15, 19)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 3, RGB(12, 15, 19)
 	waitforvisualfinish
 	delay 2
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 3, 6, RGB(12, 15, 19)
 	waitforvisualfinish
 	delay 2
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 6, 9, RGB(12, 15, 19)
 	waitforvisualfinish
 	delay 2
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 9, 12, RGB(12, 15, 19)
 	waitforvisualfinish
 	delay 2
@@ -5180,15 +5180,15 @@ Move_JUMP_KICK:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(12, 15, 19)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 3, RGB(12, 15, 19)
 	waitforvisualfinish
 	delay 2
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 3, 6, RGB(12, 15, 19)
 	waitforvisualfinish
 	delay 2
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 6, 9, RGB(12, 15, 19)
 	waitforvisualfinish
 	delay 2
@@ -5204,15 +5204,15 @@ Move_HI_JUMP_KICK:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(12, 15, 19)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 4, RGB(12, 15, 19)
 	waitforvisualfinish
 	delay 2
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 4, 8, RGB(12, 15, 19)
 	waitforvisualfinish
 	delay 2
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 12, RGB(12, 15, 19)
 	waitforvisualfinish
 	delay 2
@@ -5224,10 +5224,10 @@ Move_HI_JUMP_KICK:
 	end
 @ genanims: LOGIC (T-134, vision.md 9.24) approved.
 Move_DOUBLE_KICK:
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 4, RGB(12, 15, 19)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 4, 8, RGB(12, 15, 19)
 	waitforvisualfinish
 	playsewithpan SE_M_VITAL_THROW2, SOUND_PAN_TARGET
@@ -5238,10 +5238,10 @@ Move_DOUBLE_KICK:
 	end
 @ genanims: LOGIC (T-134, vision.md 9.24) approved.
 Move_TRIPLE_KICK:
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 4, RGB(12, 15, 19)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 4, 8, RGB(12, 15, 19)
 	waitforvisualfinish
 	playsewithpan SE_M_VITAL_THROW2, SOUND_PAN_TARGET
@@ -5256,13 +5256,13 @@ Move_DYNAMIC_PUNCH:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(12, 15, 19)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 3, RGB(12, 15, 19)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 3, 12, RGB(12, 15, 19)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 12, 6, RGB(12, 15, 19)
 	waitforvisualfinish
 	playsewithpan SE_M_VITAL_THROW2, SOUND_PAN_TARGET
@@ -5276,18 +5276,18 @@ Move_DYNAMIC_PUNCH:
 	end
 @ genanims: LOGIC (T-134, vision.md 9.24) approved.
 Move_COUNTER:
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 5, RGB(12, 15, 19)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 5, 10, RGB(12, 15, 19)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 10, 0, RGB(12, 15, 19)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 4, RGB(12, 15, 19)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 4, 8, RGB(12, 15, 19)
 	waitforvisualfinish
 	playsewithpan SE_M_VITAL_THROW, SOUND_PAN_TARGET
@@ -5302,15 +5302,15 @@ Move_VITAL_THROW:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(12, 15, 19)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 3, RGB(12, 15, 19)
 	waitforvisualfinish
 	delay 2
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 3, 6, RGB(12, 15, 19)
 	waitforvisualfinish
 	delay 2
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 6, 9, RGB(12, 15, 19)
 	waitforvisualfinish
 	delay 2
@@ -5326,11 +5326,11 @@ Move_ROCK_SMASH:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(12, 15, 19)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 4, RGB(12, 15, 19)
 	waitforvisualfinish
 	delay 2
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 4, 8, RGB(12, 15, 19)
 	waitforvisualfinish
 	delay 2
@@ -5346,15 +5346,15 @@ Move_SUBMISSION:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(12, 15, 19)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 4, RGB(12, 15, 19)
 	waitforvisualfinish
 	delay 2
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 4, 8, RGB(12, 15, 19)
 	waitforvisualfinish
 	delay 2
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 12, RGB(12, 15, 19)
 	waitforvisualfinish
 	delay 2
@@ -5390,10 +5390,10 @@ Move_COTTON_SPORE:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(11, 19, 12)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 0, 5, RGB(13, 13, 13)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 5, 10, RGB(13, 13, 13)
 	waitforvisualfinish
 	delay 10
@@ -5464,7 +5464,7 @@ Move_RAZOR_LEAF:
 	end
 @ genanims: COPY (T-134, vision.md 9.24) approved.
 Move_NATURE_POWER:
-	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
+	playtypesewithpan TYPE_SE_HIT, SOUND_PAN_TARGET
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 0, 10, RGB(24, 23, 21)
 	waitforvisualfinish
 	delay 4
@@ -5475,7 +5475,7 @@ Move_NATURE_POWER:
 	delay 4
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 8, 0, RGB(13, 13, 13)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 10, RGB(24, 23, 21)
 	waitforvisualfinish
 	delay 4
@@ -5503,7 +5503,7 @@ Move_ANCIENT_POWER:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 3, 0, RGB(26, 26, 26)
 	waitforvisualfinish
 	playsewithpan SE_M_DRAGON_RAGE, SOUND_PAN_ATTACKER
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 6, RGB(26, 26, 26)
 	waitforvisualfinish
 	delay 10
@@ -5548,7 +5548,7 @@ Move_MIST:
 @ genanims: FIELD (T-134, vision.md 9.24) approved.
 Move_HAZE:
 	playsewithpan SE_M_HAZE, SOUND_PAN_ATTACKER
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_BATTLERS, 1, 0, 12, RGB(13, 13, 13)
 	waitforvisualfinish
 	delay 8
@@ -5593,7 +5593,7 @@ Move_LEER:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(24, 23, 21)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 0, 5, RGB(13, 13, 13)
 	waitforvisualfinish
 	delay 10
@@ -5615,13 +5615,13 @@ Move_DREAM_EATER:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 13, 0, RGB(22, 10, 19)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 4, RGB(22, 10, 19)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 4, 8, RGB(22, 10, 19)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 8, 12, RGB(22, 10, 19)
 	waitforvisualfinish
 	delay 6
@@ -5637,13 +5637,13 @@ Move_POISON_GAS:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(10, 11, 6)
 	waitforvisualfinish
 	playsewithpan SE_M_MIST, SOUND_PAN_TARGET
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 2, 0, 4, RGB(10, 11, 6)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 2, 4, 8, RGB(10, 11, 6)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 2, 8, 12, RGB(10, 11, 6)
 	waitforvisualfinish
 	delay 8
@@ -5690,18 +5690,18 @@ Move_WRAP:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
 	waitforvisualfinish
-	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
+	playtypesewithpan TYPE_SE_HIT, SOUND_PAN_TARGET
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 0, 8, RGB(24, 23, 21)
 	waitforvisualfinish
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 0, 1, 2, 2
 	delay 8
-	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
+	playtypesewithpan TYPE_SE_HIT, SOUND_PAN_TARGET
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 0, 1, 2, 2
 	delay 8
-	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
+	playtypesewithpan TYPE_SE_HIT, SOUND_PAN_TARGET
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 0, 1, 2, 2
 	delay 8
-	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
+	playtypesewithpan TYPE_SE_HIT, SOUND_PAN_TARGET
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 8, 0, RGB(24, 23, 21)
 	waitforvisualfinish
@@ -5812,7 +5812,7 @@ Move_STEEL_WING:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 0, RGB(24, 21, 12)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 11, 11, RGB(24, 21, 12)
 	waitforvisualfinish
 	delay 18
@@ -5887,21 +5887,21 @@ Move_POISON_TAIL:
 	end
 @ genanims: HARDENED (T-134, vision.md 9.24) approved.
 Move_METAL_CLAW:
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 4, 4, RGB(24, 21, 12)
 	waitforvisualfinish
 	delay 3
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 0, RGB(24, 21, 12)
 	waitforvisualfinish
 	delay 3
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 7, 7, RGB(24, 21, 12)
 	waitforvisualfinish
 	delay 3
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 0, RGB(24, 21, 12)
 	waitforvisualfinish
 	delay 3
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 10, 10, RGB(24, 21, 12)
 	waitforvisualfinish
 	delay 3
@@ -5986,7 +5986,7 @@ Move_LICK:
 @ genanims: FIELD (T-134, vision.md 9.24) approved.
 Move_FOCUS_ENERGY:
 	playsewithpan SE_M_DRAGON_RAGE, SOUND_PAN_ATTACKER
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 6, RGB(24, 23, 21)
 	waitforvisualfinish
 	delay 10
@@ -6029,7 +6029,7 @@ Move_STRING_SHOT:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(16, 18, 9)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 0, 5, RGB(13, 13, 13)
 	waitforvisualfinish
 	delay 10
@@ -6047,7 +6047,7 @@ Move_SPIDER_WEB:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 10, 0, RGB(16, 18, 9)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 12, RGB(13, 13, 13)
 	waitforvisualfinish
 	delay 8
@@ -6090,7 +6090,7 @@ Move_DISABLE:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 10, 0, RGB(24, 23, 21)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 12, RGB(13, 13, 13)
 	waitforvisualfinish
 	delay 8
@@ -6109,15 +6109,15 @@ Move_RECOVER:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 13, RGB(13, 13, 13)
 	waitforvisualfinish
 	delay 12
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 13, 9, RGB(13, 13, 13)
 	waitforvisualfinish
 	delay 10
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 9, 5, RGB(13, 13, 13)
 	waitforvisualfinish
 	delay 10
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 5, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	clearmonbg ANIM_ATTACKER
@@ -6142,7 +6142,7 @@ RecoverAbsorbEffect:
 
 @ genanims: COPY (T-134, vision.md 9.24) approved.
 Move_MIMIC:
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_TARGET
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_TARGET
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 10, RGB(24, 23, 21)
 	waitforvisualfinish
 	delay 4
@@ -6153,7 +6153,7 @@ Move_MIMIC:
 	delay 4
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 8, 0, RGB(13, 13, 13)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 10, RGB(24, 23, 21)
 	waitforvisualfinish
 	delay 4
@@ -6202,13 +6202,13 @@ DaemonsCurseLatent:
 	goto DaemonsCurseDone
 DaemonsCurseStats:
 	playsewithpan SE_M_NIGHTMARE, SOUND_PAN_ATTACKER
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 6, RGB(11, 8, 14)
 	waitforvisualfinish
 	delay 10
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 6, 0, RGB(11, 8, 14)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 6, RGB(11, 8, 14)
 	waitforvisualfinish
 	delay 10
@@ -6292,10 +6292,10 @@ Move_SCARY_FACE:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(24, 23, 21)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 0, 5, RGB(13, 13, 13)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 5, 10, RGB(13, 13, 13)
 	waitforvisualfinish
 	delay 10
@@ -6409,15 +6409,15 @@ Move_BATON_PASS:
 @ genanims: FIELD (T-134, vision.md 9.24) approved.
 Move_PERISH_SONG:
 	playsewithpan SE_M_PERISH_SONG, SOUND_PAN_ATTACKER
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_BATTLERS, 1, 0, 4, RGB(13, 13, 13)
 	waitforvisualfinish
 	delay 8
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_BATTLERS, 1, 4, 8, RGB(13, 13, 13)
 	waitforvisualfinish
 	delay 8
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_BATTLERS, 1, 8, 12, RGB(13, 13, 13)
 	waitforvisualfinish
 	delay 8
@@ -6519,7 +6519,7 @@ Move_ENCORE:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 10, 0, RGB(24, 23, 21)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 12, RGB(13, 13, 13)
 	waitforvisualfinish
 	delay 8
@@ -6530,7 +6530,7 @@ Move_ENCORE:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 10, 0, RGB(24, 23, 21)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 12, RGB(13, 13, 13)
 	waitforvisualfinish
 	delay 8
@@ -6561,7 +6561,7 @@ Move_WISH:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 0, 6, RGB(13, 13, 13)
 	waitforvisualfinish
 	delay 30
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 3, 6, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	clearmonbg ANIM_ATTACKER
@@ -6572,7 +6572,7 @@ Move_WISH:
 @ T-139, approved 2026-09-17 under vision.md 9.24.
 Move_STOCKPILE:
 	monbg ANIM_ATTACKER
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_ATTACKER, 0, 1, 2, 1
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 10, RGB(24, 23, 21)
 	waitforvisualfinish
@@ -6624,29 +6624,29 @@ Move_SWALLOW:
 	delay 8
 	jumpifmoveturn 2, DequeueTwo
 	jumpifmoveturn 3, DequeueThree
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 12, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	goto DequeueDone
 DequeueTwo:
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 12, 6, RGB(13, 13, 13)
 	waitforvisualfinish
 	delay 8
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	goto DequeueDone
 DequeueThree:
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 12, 8, RGB(13, 13, 13)
 	waitforvisualfinish
 	delay 8
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 8, 4, RGB(13, 13, 13)
 	waitforvisualfinish
 	delay 8
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 4, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 DequeueDone:
@@ -6702,7 +6702,7 @@ Move_SWEET_SCENT:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(24, 23, 21)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 0, 5, RGB(13, 13, 13)
 	waitforvisualfinish
 	delay 10
@@ -6774,7 +6774,7 @@ Move_ROLE_PLAY:
 	delay 4
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 8, 0, RGB(13, 13, 13)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 12, RGB(22, 10, 19)
 	waitforvisualfinish
 	delay 12
@@ -6790,7 +6790,7 @@ Move_REFRESH:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 13, RGB(13, 13, 13)
 	waitforvisualfinish
 	delay 6
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 13, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	clearmonbg ANIM_ATTACKER
@@ -6827,13 +6827,13 @@ Move_BLAZE_KICK:
 	end
 @ genanims: CONTENT (T-134, vision.md 9.24) approved.
 Move_HYPER_VOICE:
-	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_HIT, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_DEF_SIDE, 0, 0, 8, RGB(24, 23, 21)
 	waitforvisualfinish
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 3, 1
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_DEF_SIDE, 0, 8, 0, RGB(24, 23, 21)
 	waitforvisualfinish
-	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_HIT, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG | F_PAL_DEF_SIDE, 0, 0, 8, RGB(24, 23, 21)
 	waitforvisualfinish
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 3, 1
@@ -6894,10 +6894,10 @@ Move_SHEER_COLD:
 	end
 @ genanims: LOGIC (T-134, vision.md 9.24) approved.
 Move_ARM_THRUST:
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 4, RGB(12, 15, 19)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 4, 8, RGB(12, 15, 19)
 	waitforvisualfinish
 	playsewithpan SE_M_SWAGGER, SOUND_PAN_TARGET
@@ -6929,7 +6929,7 @@ Move_MUDDY_WATER:
 	end
 @ genanims: GROWTH (T-134, vision.md 9.24) approved.
 Move_BULLET_SEED:
-	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
+	playtypesewithpan TYPE_SE_HIT, SOUND_PAN_TARGET
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 2, 0, 2, 1
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 8, RGB(11, 19, 12)
 	waitforvisualfinish
@@ -7003,7 +7003,7 @@ Move_METEOR_MASH:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 0, RGB(24, 21, 12)
 	waitforvisualfinish
 	playsewithpan SE_M_BARRIER, SOUND_PAN_ATTACKER
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 6, RGB(24, 21, 12)
 	waitforvisualfinish
 	delay 10
@@ -7012,21 +7012,21 @@ Move_METEOR_MASH:
 	end
 @ genanims: LOGIC (T-134, vision.md 9.24) approved.
 Move_REVENGE:
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 5, RGB(12, 15, 19)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 5, 10, RGB(12, 15, 19)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 10, 0, RGB(12, 15, 19)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 3, RGB(12, 15, 19)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 3, 6, RGB(12, 15, 19)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 6, 9, RGB(12, 15, 19)
 	waitforvisualfinish
 	playsewithpan SE_M_TAKE_DOWN, SOUND_PAN_TARGET
@@ -7116,10 +7116,10 @@ Move_METAL_SOUND:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(24, 21, 12)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 0, 5, RGB(13, 13, 13)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 1, 5, 10, RGB(13, 13, 13)
 	waitforvisualfinish
 	delay 10
@@ -7132,15 +7132,15 @@ Move_FOCUS_PUNCH:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(12, 15, 19)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 4, RGB(12, 15, 19)
 	waitforvisualfinish
 	delay 2
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 4, 8, RGB(12, 15, 19)
 	waitforvisualfinish
 	delay 2
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 12, RGB(12, 15, 19)
 	waitforvisualfinish
 	delay 2
@@ -7166,13 +7166,13 @@ Move_RETURN:
 @ genanims: RAISE (T-134, vision.md 9.24) approved.
 Move_COSMIC_POWER:
 	playsewithpan SE_M_COSMIC_POWER, SOUND_PAN_ATTACKER
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 6, RGB(22, 10, 19)
 	waitforvisualfinish
 	delay 10
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 6, 0, RGB(22, 10, 19)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 6, RGB(22, 10, 19)
 	waitforvisualfinish
 	delay 10
@@ -7275,7 +7275,7 @@ Move_SILVER_WIND:
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 0, RGB(16, 18, 9)
 	waitforvisualfinish
 	playsewithpan SE_M_GUST, SOUND_PAN_ATTACKER
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 6, RGB(16, 18, 9)
 	waitforvisualfinish
 	delay 10
@@ -7312,13 +7312,13 @@ DaemonsDescendSurface:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(8, 13, 22)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 3, RGB(8, 13, 22)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 3, 7, RGB(8, 13, 22)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 7, 11, RGB(8, 13, 22)
 	waitforvisualfinish
 	playsewithpan SE_M_HEADBUTT, SOUND_PAN_TARGET
@@ -7437,15 +7437,15 @@ Move_SEISMIC_TOSS:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(12, 15, 19)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 4, RGB(12, 15, 19)
 	waitforvisualfinish
 	delay 2
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 4, 8, RGB(12, 15, 19)
 	waitforvisualfinish
 	delay 2
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 12, RGB(12, 15, 19)
 	waitforvisualfinish
 	delay 2
@@ -7675,15 +7675,15 @@ Move_SKY_UPPERCUT:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(12, 15, 19)
 	waitforvisualfinish
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 4, RGB(12, 15, 19)
 	waitforvisualfinish
 	delay 2
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 4, 8, RGB(12, 15, 19)
 	waitforvisualfinish
 	delay 2
-	playsewithpan SE_M_MINIMIZE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_TICK, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 8, 12, RGB(12, 15, 19)
 	waitforvisualfinish
 	delay 2
@@ -7699,7 +7699,7 @@ Move_SECRET_POWER:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 6, 0, RGB(24, 23, 21)
 	waitforvisualfinish
-	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_TARGET
+	playtypesewithpan TYPE_SE_HIT, SOUND_PAN_TARGET
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 5, 1
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0, 0, 11, RGB(24, 23, 21)
 	waitforvisualfinish
@@ -7759,7 +7759,7 @@ Move_WEATHER_BALL:
 @ lit in the book's purple (gensubtle.py C_RULE, RGB(22, 10, 19)) to a moonlit chime -- and then plays a distinct
 @ existing strike of its type; its signature (src/data/daemons_signatures.h) is its own tune over the top. DRAFT.
 Move_WITCHING_HOUR_LIGHT:
-	playsewithpan SE_M_MOONLIGHT, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_HEAL, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 0, 10, RGB(22, 10, 19)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 10, 0, RGB(22, 10, 19)

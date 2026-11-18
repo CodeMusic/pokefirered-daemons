@@ -270,6 +270,13 @@
 	.macro stopsound
 	.byte 0x2f
 	.endm
+
+@ T-583: a sound shared by routines of every type, played as the routine's own type's sound for the role (TYPE_SE_*)
+	.macro playtypesewithpan role:req, pan:req
+	.byte 0x30
+	.byte \role
+	.byte \pan
+	.endm
 	
 @ useful macros
 	.macro jumpreteq value:req, ptr:req

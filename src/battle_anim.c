@@ -14,6 +14,7 @@
 #include "m4a.h"
 #include "task.h"
 #include "constants/battle_anim.h"
+#include "constants/songs.h"      // T-583: sTypeSe
 
 /*
     This file handles the commands for the macros defined in
@@ -40,7 +41,7 @@ EWRAM_DATA static u16 sSoundAnimFramesToWait = 0;
 EWRAM_DATA static u8 sMonAnimTaskIdArray[2] = {0};
 EWRAM_DATA u8 gAnimMoveTurn = 0;
 EWRAM_DATA static u8 sAnimBackgroundFadeState = 0;
-EWRAM_DATA static u16 sAnimMoveIndex = 0; // Set but unused.
+EWRAM_DATA static u16 sAnimMoveIndex = 0; // the routine playing, 0 outside one (T-430, T-583)
 EWRAM_DATA u8 gBattleAnimAttacker = 0;
 EWRAM_DATA u8 gBattleAnimTarget = 0;
 EWRAM_DATA u16 gAnimBattlerSpecies[MAX_BATTLERS_COUNT] = {0};
@@ -110,8 +111,10 @@ static void Cmd_visible(void);
 static void Cmd_teamattack_moveback(void);
 static void Cmd_teamattack_movefwd(void);
 static void Cmd_stopsound(void);
+static void Cmd_playtypesewithpan(void);
 
 #include "data/battle_anim.h"
+#include "data/battle_anim_type_se.h"   // T-583: sTypeSe, written by tools/genanims.py --type-sounds
 
 static void (*const sScriptCmdTable[])(void) =
 {
@@ -163,6 +166,7 @@ static void (*const sScriptCmdTable[])(void) =
     Cmd_teamattack_moveback,  // 0x2D
     Cmd_teamattack_movefwd,   // 0x2E
     Cmd_stopsound,            // 0x2F
+    Cmd_playtypesewithpan,    // 0x30  T-583
 };
 
 void ClearBattleAnimationVars(void)
@@ -1889,4 +1893,21 @@ static void Cmd_stopsound(void)
     m4aMPlayStop(&gMPlayInfo_SE1);
     m4aMPlayStop(&gMPlayInfo_SE2);
     sBattleAnimScriptPtr++;
+}
+
+// T-583: playtypesewithpan ROLE, PAN -- a sound shared by routines of every type, played as the ROUTINE's own type's
+// sound for that role. Outside a routine (a general animation) and for a type with no row, it is CONTENT's: the
+// shared sound itself, as it always was.
+static void Cmd_playtypesewithpan(void)
+{
+    u8 role = sBattleAnimScriptPtr[1];
+    s8 pan = sBattleAnimScriptPtr[2];
+    u8 type = (sAnimMoveIndex != MOVE_NONE && sAnimMoveIndex < MOVES_COUNT) ? gBattleMoves[sAnimMoveIndex].type : TYPE_NORMAL;
+
+    if (role >= TYPE_SE_ROLES)
+        role = TYPE_SE_HIT;
+    if (type >= NUMBER_OF_MON_TYPES)
+        type = TYPE_NORMAL;
+    PlaySE12WithPanning(sTypeSe[role][type], BattleAnimAdjustPanning(pan));
+    sBattleAnimScriptPtr += 3;
 }

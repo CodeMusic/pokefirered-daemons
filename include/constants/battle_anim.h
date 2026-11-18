@@ -483,4 +483,11 @@
 #define BACK_ANIM_FADE_BLUE_WITH_SHAKE         0x19
 
 
+// T-583: the roles a sound shared by routines of every type plays (playtypesewithpan): each routine hears its own
+// type's sound for the role, from src/data/battle_anim_type_se.h (tools/genanims.py --type-sounds).
+#define TYPE_SE_HIT   0    // SE_M_COMET_PUNCH's: a hit
+#define TYPE_SE_TICK  1    // SE_M_MINIMIZE's: a stat step's tick
+#define TYPE_SE_HEAL  2    // SE_M_MOONLIGHT's: the witching hour's light
+#define TYPE_SE_ROLES 3
+
 #endif // GUARD_CONSTANTS_BATTLE_ANIM_H
