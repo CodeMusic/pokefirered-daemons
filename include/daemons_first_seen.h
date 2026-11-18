@@ -15,4 +15,7 @@ void DaemonsFirstSeen_RecordGift(u16 nationalNum);            // T-492: first me
 bool8 DaemonsFirstSeen_IsGift(u16 nationalNum);
 void DaemonsFirstSeen_Move(u16 from, u16 to);                 // T-450: an INDEX number that moved (MISSINGNO, 395 -> 398)
 
+void DaemonsDreamDay_Record(u16 flag, u8 weekday);   // T-591: the weekday (0-6) a dream in the DREAM LOG came on
+u8 DaemonsDreamDay_Get(u16 flag);                    // its weekday + 1, or 0: not recorded (filed before this build)
+
 #endif // GUARD_DAEMONS_FIRST_SEEN_H

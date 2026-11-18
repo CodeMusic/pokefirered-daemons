@@ -82,6 +82,7 @@
 //  first met (SaveBlock1.daemonsFirstSeen, include/global.h). The save does not grow.
 #define QUEST_LOG_SCENE_COUNT 3
 #define QUEST_LOG_SCENE_COUNT_VANILLA 4
+#define DAEMONS_DREAM_DAYS_COUNT 64       // T-591: a byte per dream flag, FLAG_DREAM_LOG_CAIRN to +0x3F: its weekday + 1
 #define DAEMONS_FIRST_SEEN_COUNT 512      // a byte per national INDEX number (NATIONAL_DEX_COUNT is 394): its MAPSEC
 
 #define NUM_TOWER_CHALLENGE_TYPES 4

@@ -1,6 +1,7 @@
 #include "global.h"
 #include "daemons_first_seen.h"
 #include "constants/region_map_sections.h"
+#include "constants/flags.h"   // T-591: the dream flags
 
 //  T-406 (the user, 2026-10-19): the INDEX says where each daemon was first met. The bytes came out of the quest log
 //  -- the recap holds three scenes now, not four -- so the save did not grow (include/global.h, STATIC_ASSERTed in
@@ -20,6 +21,7 @@ static void FirstSeenClaim(void)
     if (FirstSeenIsOurs())
         return;
     memset(gSaveBlock1Ptr->daemonsFirstSeen, 0, sizeof(gSaveBlock1Ptr->daemonsFirstSeen));
+    memset(gSaveBlock1Ptr->daemonsDreamDays, 0, sizeof(gSaveBlock1Ptr->daemonsDreamDays));   // T-591
     memset(gSaveBlock1Ptr->questLogFreed, 0, sizeof(gSaveBlock1Ptr->questLogFreed));
     gSaveBlock1Ptr->daemonsFirstSeenMagic = FIRST_SEEN_MAGIC;
 }
@@ -110,4 +112,26 @@ void DaemonsFirstSeen_Move(u16 from, u16 to)
         return;
     gSaveBlock1Ptr->daemonsFirstSeen[to - 1] = gSaveBlock1Ptr->daemonsFirstSeen[from - 1];
     gSaveBlock1Ptr->daemonsFirstSeen[from - 1] = 0;
+}
+
+//  T-591 (T-531, bible 9.21): the weekday a dream came on, kept beside where each daemon was first met -- the same
+//  bytes the recap freed, under the same magic. FLAG is the dream's own (FLAG_DREAM_LOG_CAIRN to +0x3F: YOUR DREAMS,
+//  HER DREAMS, ITS DREAMS); WEEKDAY 0-6, Sunday first. A dream filed before this build reads 0 and shows no symbol.
+void DaemonsDreamDay_Record(u16 flag, u8 weekday)
+{
+    u16 slot = flag - FLAG_DREAM_LOG_CAIRN;
+
+    if (flag < FLAG_DREAM_LOG_CAIRN || slot >= DAEMONS_DREAM_DAYS_COUNT || weekday > 6)
+        return;
+    FirstSeenClaim();
+    gSaveBlock1Ptr->daemonsDreamDays[slot] = weekday + 1;
+}
+
+u8 DaemonsDreamDay_Get(u16 flag)
+{
+    u16 slot = flag - FLAG_DREAM_LOG_CAIRN;
+
+    if (flag < FLAG_DREAM_LOG_CAIRN || slot >= DAEMONS_DREAM_DAYS_COUNT || !FirstSeenIsOurs())
+        return 0;
+    return gSaveBlock1Ptr->daemonsDreamDays[slot];
 }

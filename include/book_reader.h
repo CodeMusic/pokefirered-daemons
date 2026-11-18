@@ -17,6 +17,7 @@ void Guide_OpenBoardCopy(void);
 #include "constants/book_qr.h"   // BOOK_QR_*: tools/gbaqr.py writes it
 void BookReader_AddQr(u8 which);
 void BookReader_AddSong(u8 song);          // T-417: a SONGBOOK page's notes
+void BookReader_AddDaySymbol(u8 day, u16 slot);   // T-591: a dream's day symbol (DAY the weekday + 1, 0 none)
 void DaemonsArriveAtUnderstandings(void);   // T-252
 u8 DaemonsUnderstandingsMissing(void);      // T-317
 void DaemonsClarity(u8 *w, u8 *h);          // T-317: the map's and the INDEX's mosaic

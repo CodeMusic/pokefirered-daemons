@@ -805,7 +805,10 @@ struct SaveBlock1
     //  national number (0: not recorded). The magic marks the bytes as ours: an older save holds a recap scene here.
     /*0x2638*/ u32 daemonsFirstSeenMagic;
     /*0x263C*/ u8 daemonsFirstSeen[DAEMONS_FIRST_SEEN_COUNT];
-    /*0x283C*/ u8 questLogFreed[sizeof(struct QuestLogScene) * (QUEST_LOG_SCENE_COUNT_VANILLA - QUEST_LOG_SCENE_COUNT) - 4 - DAEMONS_FIRST_SEEN_COUNT];
+    //  T-591: the weekday each dream in the DREAM LOG came on, + 1 (0: not recorded), by its flag from
+    //  FLAG_DREAM_LOG_CAIRN -- carved from the front of what the recap freed, under the same magic.
+    /*0x283C*/ u8 daemonsDreamDays[DAEMONS_DREAM_DAYS_COUNT];
+    /*0x287C*/ u8 questLogFreed[sizeof(struct QuestLogScene) * (QUEST_LOG_SCENE_COUNT_VANILLA - QUEST_LOG_SCENE_COUNT) - 4 - DAEMONS_FIRST_SEEN_COUNT - DAEMONS_DREAM_DAYS_COUNT];
     /*0x2CA0*/ u16 easyChatProfile[EASY_CHAT_BATTLE_WORDS_COUNT];
     /*0x2CAC*/ u16 easyChatBattleStart[EASY_CHAT_BATTLE_WORDS_COUNT];
     /*0x2CB8*/ u16 easyChatBattleWon[EASY_CHAT_BATTLE_WORDS_COUNT];

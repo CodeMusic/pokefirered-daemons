@@ -24,6 +24,8 @@
 //  current stretch's step, so at most one is owed; a stretch that moves on to another step's dream before this one's is
 //  done leaves the earlier one unsaid (its NOTEBOOK page still shows it). DRAFT wording.
 
+#include "daemons_time.h"         // T-591: the weekday a dream is told on
+#include "daemons_first_seen.h"   // T-591: kept where the first meetings are
 #include "data/attendant_dreams.h"
 
 #define DREAM_AFTER_HEALS 3
@@ -86,6 +88,7 @@ void DaemonsDreamTell(void)
     if (!(progress & DREAM_TOLD_FIRST))                                 // T-412: filed, and where it led is owed
     {
         FlagSet(sAttendantDreams[step].told);
+        DaemonsDreamDay_Record(sAttendantDreams[step].told, DaemonsWeekday());   // T-591
         VarSet(VAR_DREAM_LED, step + 1);
     }
     VarSet(VAR_DREAM_PROGRESS, progress | DREAM_TOLD_FIRST);

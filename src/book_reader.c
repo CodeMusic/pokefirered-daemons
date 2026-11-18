@@ -76,6 +76,10 @@ enum { VIEW_PAGE, VIEW_CONTENTS, VIEW_CHAPTER, VIEW_TOPIC, VIEW_COVER, VIEW_GUID
 #define NB_TOP          20
 #define NB_PITCH        13
 #define NB_LINES        10
+#define TAG_DAY_SYMBOL  0x5591  // T-591: its tiles and palette
+#define DS_CLEAR        36      // T-591: a dream's first lines stop short of its day symbol, top right
+#define DS_X            196
+#define DS_Y            20
 #define SB_MIDDLE_C     112     // T-417: the SONGBOOK's staff -- step 0's y; a line every three pixels, E4 to F5
 
 //  The textbook spread
@@ -134,6 +138,9 @@ struct BookReader
     bool8 torn;             // GUIDE: the REVIEW BOARD's copy (T-311)
     u8 qr;                  // T-315: a QR code on the last page (BOOK_QR_*), or none
     u8 song;                // T-417: a SONGBOOK page -- its song (PLAY_SONG_*) plus one, or 0
+    u8 daySymbol;           // T-591: a dream's day symbol -- its frame (day * 7 + centre) plus one, or 0
+    u8 daySprite;           // T-591: its sprite
+    u8 narrowLines;         // T-591: the first lines this many are kept clear of the symbol
     u8 *blank;              // the empty sheet or spread, drawn once: filling it per pixel costs a quarter second
     u8 *blankPage;          // GUIDE: its reading page, which is not the contents' spread, so it is kept apart
     u16 lineStart[BR_MAX_LINES];
@@ -427,6 +434,8 @@ static bool8 IsLayerBook(void);
 static void Input_SubtleEntryTurn(void);
 
 #include "data/qr_codes.h"
+#include "data/day_symbol.h"   // T-591: DAEMONS tools/gbadaysymbol.py
+#include "data/day_trims.h"    // T-591: the day's colour, the CHECKPOINT's trim (T-275)
 
 //  ---------------------------------------------------------------- drawing primitives
 
@@ -557,7 +566,7 @@ static u8 Reflow(const u8 *src, u16 width, u8 font)
         }
         word[n] = EOS;
         w = Width(font, word);
-        if (started && lineW + spaceW + w > width)
+        if (started && lineW + spaceW + w > (count < sBook->narrowLines ? width - DS_CLEAR : width))   // T-591
         {
             *out++ = EOS;
             sBook->lineStart[++count] = out - sBook->lines;
@@ -637,6 +646,8 @@ static void DrawNotebook(void)
 
     Background(DrawSheet);
     Print(BR_FONT, sInk, NB_TEXT_X, 4, sBook->title);
+    if (sBook->daySymbol != 0 && sBook->daySprite != MAX_SPRITES)                 // T-591: on the first page only
+        gSprites[sBook->daySprite].invisible = (sBook->page != 0);
     if (sBook->pageCount > 1)
     {
         p = ConvertIntToDecimalStringN(buf, sBook->page + 1, STR_CONV_MODE_LEFT_ALIGN, 2);
@@ -1564,6 +1575,7 @@ static void AnimateSubtlePicture(void)
 }
 
 static void Draw(void);
+static void DaySymbolShow(const u16 *pal);   // T-591
 static void Turn(void);
 static void Move(void);
 
@@ -3262,6 +3274,12 @@ static void Task_BookInput(u8 taskId)
             ResetSpriteData();   // T-417: the song's notes (the field loads its own on return)
             Play_BookSongFree();
         }
+        if (sBook->daySymbol != 0)
+        {
+            ResetSpriteData();   // T-591: the day symbol, the same way
+            FreeSpriteTilesByTag(TAG_DAY_SYMBOL);
+            FreeSpritePaletteByTag(TAG_DAY_SYMBOL);
+        }
         if (sBook->blank != NULL)
             Free(sBook->blank);
         if (sBook->blankPage != NULL)
@@ -3362,6 +3380,8 @@ static void Task_BookInit(u8 taskId)
         CopyBgTilemapBufferToVram(0);
         if (sBook->song != 0)
             Play_BookSong(sBook->song - 1, NB_TEXT_X, SB_MIDDLE_C);   // T-417: its notes, in their colours
+        if (sBook->daySymbol != 0)
+            DaySymbolShow(pal);                                         // T-591: a dream's day symbol
         break;
     case 4:
         BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
@@ -3523,6 +3543,65 @@ void BookReader_AddSong(u8 song)
     if (sBook == NULL)   // T-421: the book could not be opened
         return;
     sBook->song = song + 1;
+}
+
+//  T-591 (T-531, bible 9.21; the user 2026-11-18, "are they in the game, if not please implement"): a dream in the
+//  DREAM LOG wears the symbol of the weekday it came on -- ring and horizon, the virtue over its shadow, the centre's
+//  petals in ink, and the spine of seven with the dream's centre lit ("B: which centre"): the one it names, else the
+//  day's own. DAY is the weekday + 1 as saved (0: filed before this build, so no symbol); SLOT the dream's flag from
+//  FLAG_DREAM_LOG_CAIRN. The first lines stop short so the symbol sits top right, beside the title, on page one.
+void BookReader_AddDaySymbol(u8 day, u16 slot)
+{
+    u8 centre;
+
+    if (sBook == NULL || day == 0 || day > 7)
+        return;
+    day--;
+    centre = (slot < ARRAY_COUNT(sDreamCentres) && sDreamCentres[slot] < 7) ? sDreamCentres[slot] : day;
+    sBook->daySymbol = day * 7 + centre + 1;
+    sBook->daySprite = MAX_SPRITES;
+    sBook->narrowLines = 3;
+    Reflow(sBook->text, NB_TEXT_W, BR_FONT);
+    sBook->pageCount = (sBook->lineCount + NB_LINES - 1) / NB_LINES;
+    if (sBook->pageCount == 0)
+        sBook->pageCount = 1;
+}
+
+//  The symbol is one 32x32 frame of the sheet; its four colours are set here -- the NOTEBOOK's ink, the day's trim,
+//  and the trim faint against the paper -- so one sheet serves all seven days.
+static void DaySymbolShow(const u16 *pal)
+{
+    static const struct OamData sOam = { .shape = SPRITE_SHAPE(32x32), .size = SPRITE_SIZE(32x32), .priority = 0 };
+    static const struct SpriteTemplate sTemplate = {
+        .tileTag = TAG_DAY_SYMBOL, .paletteTag = TAG_DAY_SYMBOL, .oam = &sOam, .anims = gDummySpriteAnimTable,
+        .images = NULL, .affineAnims = gDummySpriteAffineAnimTable, .callback = SpriteCallbackDummy,
+    };
+    struct SpriteSheet sheet;
+    struct SpritePalette spal;
+    u16 colours[16] = {0};
+    u16 trim, paper;
+    u8 day = (sBook->daySymbol - 1) / 7, spriteId;
+
+    trim = sDayTrims[day];
+    paper = pal[C_PAPER];
+    colours[1] = pal[C_INK];
+    colours[2] = trim;
+    colours[3] = RGB((GET_R(trim) * 9 + GET_R(paper) * 11) / 20,
+                     (GET_G(trim) * 9 + GET_G(paper) * 11) / 20,
+                     (GET_B(trim) * 9 + GET_B(paper) * 11) / 20);
+    sheet.data = (const u8 *)sDaySymbol_Gfx + (sBook->daySymbol - 1) * DAY_SYMBOL_FRAME_SIZE;
+    sheet.size = DAY_SYMBOL_FRAME_SIZE;
+    sheet.tag = TAG_DAY_SYMBOL;
+    spal.data = colours;
+    spal.tag = TAG_DAY_SYMBOL;
+    LoadSpriteSheet(&sheet);
+    if (LoadSpritePalette(&spal) == 0xFF)
+        return;
+    spriteId = CreateSprite(&sTemplate, DS_X + 16, DS_Y + 16, 0);
+    if (spriteId == MAX_SPRITES)
+        return;
+    sBook->daySprite = spriteId;
+    gSprites[spriteId].invisible = (sBook->page != 0);
 }
 
 //  T-311: the REVIEW BOARD's copy, on the shelf in its lobby.

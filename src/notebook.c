@@ -26,6 +26,7 @@
 #include "constants/maps.h"
 #include "constants/region_map_sections.h"
 #include "daemons_time.h"   // T-412: the dawn a dream waits for
+#include "daemons_first_seen.h"   // T-591: the weekday each dream came on
 
 //  T-216: THE RESEARCH NOTEBOOK (docs/school.md 9-10).
 //
@@ -763,6 +764,7 @@ static bool8 TryItsDreamArrives(bool8 loaded)
     if (!DreamDawnCame(VAR_ITS_DREAM_STAMP, loaded))
         return FALSE;
     FlagSet(FLAG_ITS_DREAM_GRASS + image);
+    DaemonsDreamDay_Record(FLAG_ITS_DREAM_GRASS + image, (VarGet(VAR_ITS_DREAM_DAY) + 4) % 7);   // T-591: the night it was had (2026-01-01 a Thursday)
     SetItsDreamKind(image, quality);
     VarSet(VAR_ITS_DREAM_FILED, VarGet(VAR_ITS_DREAM_DAY) + 1);
     VarSet(VAR_ITS_DREAM_STAMP, 0);
@@ -800,6 +802,7 @@ bool8 Daemons_TryDreamArrives(void)
     else if (DreamDawnCame(VAR_DREAM_LOG_STAMP, loaded))
     {
         FlagSet(sDreamMilestones[i].dreamt);
+        DaemonsDreamDay_Record(sDreamMilestones[i].dreamt, DaemonsWeekday());   // T-591
         VarSet(VAR_DREAM_LOG_STAMP, 0);                  // the next one starts waiting from now, on the next step
         if (ItsDreamWaiting() && DreamDawnCame(VAR_ITS_DREAM_STAMP, loaded))
             VarSet(VAR_ITS_DREAM_STAMP, DREAM_DAWN_CAME);    // T-462: its dream came at this dawn too
@@ -1363,6 +1366,9 @@ void Notebook_ReadEntry(void)
     BookReader_OpenNotebookPage(sEntries[gSpecialVar_0x8006].title, text);
     if (sEntries[gSpecialVar_0x8006].kind == NB_KIND_SONG)
         BookReader_AddSong(sEntries[gSpecialVar_0x8006].arg);   // T-417: its notes, on a staff under the words
+    if (sEntries[gSpecialVar_0x8006].section == NB_DREAM_LOG)   // T-591: a dream wears its day's symbol
+        BookReader_AddDaySymbol(DaemonsDreamDay_Get(sEntries[gSpecialVar_0x8006].flag),
+                                sEntries[gSpecialVar_0x8006].flag - FLAG_DREAM_LOG_CAIRN);
     AddPageQr(sEntries[gSpecialVar_0x8006].flag);
     MarkSeen(sEntries[gSpecialVar_0x8006].flag);   // T-403
 }
