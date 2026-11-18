@@ -264,12 +264,16 @@ struct BattleMove
     s8 priority;
     u8 flags;
     // T-490: SPLIT_PHYSICAL / SPECIAL / STATUS. Takes a padding byte: the struct stays 12 bytes.
-    // THE RULE (the user, 2026-10-30), applied as each routine is touched, never in a sweep: CONTACT IS PHYSICAL --
-    // a routine that touches the foe (fangs, tails, bodies, blades) is PHYSICAL; beams, sound, signals, data and
-    // anything thrown or spread without touching are SPECIAL. Judged so far: TAMPER and the CORRUPT row (ETCH,
-    // POLLUTE, GARBAGE, DUMP, MEDIAN, BITROT MOON), CONSENSUS, PRIOR and WEATHER BALL SPECIAL; SPOIL and FALSETAIL
-    // stay PHYSICAL; SLANT is SPECIAL. Every other routine still carries its type's old side (step 1).
-    // tools/gbamovemenu.py counts the routines that left their type's side.
+    // THE RULE (the user, 2026-10-30): CONTACT IS PHYSICAL -- a routine that touches the foe (fangs, tails, bodies,
+    // blades), i.e. carries FLAG_MAKES_CONTACT, is PHYSICAL; beams, sound, signals, data and anything thrown or spread
+    // without touching are SPECIAL. Step 2 judged TAMPER and the CORRUPT row (ETCH, POLLUTE, GARBAGE, DUMP, MEDIAN,
+    // BITROT MOON), CONSENSUS, PRIOR and WEATHER BALL SPECIAL; SPOIL and FALSETAIL PHYSICAL; SLANT SPECIAL.
+    // Step 3 (the user, 2026-11-18, "every recommendation") applied the rule to every damaging routine: 67 moved
+    // (18 to PHYSICAL, 49 to SPECIAL, among them PANIC, CORE DUMP, PAGE FAULT, STALL, CLAIM and THE HOURS), written
+    // by tools/gbasplit.py. Ten stay off the rule by ruling, each with its reason in gbasplit.py's APPROVED: LOCK,
+    // BACKPROP, OCCLUDE, OVERTRAIN, SLUICE, EMERGE and BURNOUT stay SPECIAL; UPHEAVAL, TREMOR and BALLISTIC stay
+    // PHYSICAL. A new routine takes the rule's side unless it is ruled otherwise. CalculateBaseDamage's blast halving
+    // and Thick Fat follow the hit's side. tools/gbamovemenu.py counts the routines that left their type's side.
     u8 split;
 };
 

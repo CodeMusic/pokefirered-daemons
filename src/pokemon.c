@@ -2701,8 +2701,14 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         defense *= 2;
     if (attackerHoldEffect == HOLD_EFFECT_THICK_CLUB && (attacker->species == SPECIES_CUBONE || attacker->species == SPECIES_MAROWAK))
         attack *= 2;
+    // T-490 step 3 (the user, 2026-11-18): Thick Fat halves whichever side the ENTROPY or FROZEN hit strikes from.
     if (defender->ability == ABILITY_THICK_FAT && (type == TYPE_FIRE || type == TYPE_ICE))
-        spAttack /= 2;
+    {
+        if (split == SPLIT_PHYSICAL)
+            attack /= 2;
+        else
+            spAttack /= 2;
+    }
     if (attacker->ability == ABILITY_HUSTLE)
         attack = (150 * attack) / 100;
     if (attacker->ability == ABILITY_PLUS && ABILITY_ON_FIELD2(ABILITY_MINUS))
@@ -2726,9 +2732,15 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     if (type == TYPE_BUG && attacker->ability == ABILITY_SWARM && attacker->hp <= (attacker->maxHP / 3))
         gBattleMovePower = (150 * gBattleMovePower) / 100;
 
-    // Self-destruct / Explosion cut defense in half
+    // Self-destruct / Explosion cut defense in half. T-490 step 3 (the user, 2026-11-18): the defence the blast
+    // strikes -- PANIC and CORE DUMP are SPECIAL now, so it is SP. DEF they halve.
     if (gBattleMoves[gCurrentMove].effect == EFFECT_EXPLOSION)
-        defense /= 2;
+    {
+        if (split == SPLIT_SPECIAL)
+            spDefense /= 2;
+        else
+            defense /= 2;
+    }
 
     if (split == SPLIT_PHYSICAL)
     {
