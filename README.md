@@ -26,9 +26,9 @@ branched, and why it is said *DAY-mons*.
 written out as a university textbook -- seven floors, Language to Error.
 
 **No ROM is distributed.** Releases are BPS patches for a cartridge you own,
-published on the [DAEMONS releases page][releases] (latest: **v11.391.1**,
-2026-11-17; the newest thing in it that can be told about: THE MARGINS have music
-of their own, in the two keys the spectrum leaves without a colour), four to a release: CONTENT for *FireRed* 1.0 and Rev 1, CONTEXT
+published on the [DAEMONS releases page][releases] (latest: **v11.392.1**,
+2026-11-17; the newest thing in it that can be told about: our own songs play on
+our own instruments now, sixteen made for them), four to a release: CONTENT for *FireRed* 1.0 and Rev 1, CONTEXT
 for *LeafGreen* 1.0 and Rev 1. The game also plays in a browser on
 [**daemons-playground**][playground] (a private network only), and in the
 companion's [one app][oneapp] on an iPhone or iPad, which patches the player's
