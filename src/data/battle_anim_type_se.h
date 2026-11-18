@@ -67,4 +67,67 @@ static const u16 sTypeSe[TYPE_SE_ROLES][NUMBER_OF_MON_TYPES] =
         [TYPE_DRAGON]     = SE_M_TWISTER,        // EMERGENT, nearest
         [TYPE_DARK]       = SE_M_FAINT_ATTACK,   // OPAQUE, nearest
     },
+    [TYPE_SE_RISE] =
+    {
+        [TYPE_NORMAL]     = SE_M_SWAGGER,        // CONTENT, own
+        [TYPE_FIGHTING]   = SE_M_SKY_UPPERCUT,   // LOGIC, exact
+        [TYPE_FLYING]     = SE_M_FLY,            // VECTOR, nearest
+        [TYPE_POISON]     = SE_M_TOXIC,          // CORRUPT, nearest
+        [TYPE_GROUND]     = SE_M_SAND_ATTACK,    // STRATUM, nearest
+        [TYPE_ROCK]       = SE_M_ROCK_THROW,     // LEGACY, nearest
+        [TYPE_BUG]        = SE_M_STRING_SHOT,    // SWARM, nearest
+        [TYPE_GHOST]      = SE_M_LICK,           // LATENT, nearest
+        [TYPE_STEEL]      = SE_M_HARDEN,         // HARDENED, nearest
+        [TYPE_MYSTERY]    = SE_M_SWAGGER,        // MYSTERY, no type: CONTENT's
+        [TYPE_FIRE]       = SE_M_FLAME_WHEEL,    // ENTROPY, nearest
+        [TYPE_WATER]      = SE_M_BUBBLE,         // FLOW, nearest
+        [TYPE_GRASS]      = SE_M_ABSORB,         // GROWTH, nearest
+        [TYPE_ELECTRIC]   = SE_M_THUNDERBOLT2,   // SIGNAL, nearest
+        [TYPE_PSYCHIC]    = SE_M_COSMIC_POWER,   // CONTEXT, exact
+        [TYPE_ICE]        = SE_M_HAIL,           // FROZEN, nearest
+        [TYPE_DRAGON]     = SE_M_SWAGGER,        // EMERGENT, none
+        [TYPE_DARK]       = SE_M_FAINT_ATTACK,   // OPAQUE, nearest
+    },
+    [TYPE_SE_RISE2] =
+    {
+        [TYPE_NORMAL]     = SE_M_SWAGGER2,       // CONTENT, own
+        [TYPE_FIGHTING]   = SE_M_SKY_UPPERCUT,   // LOGIC, nearest
+        [TYPE_FLYING]     = SE_M_FLY,            // VECTOR, nearest
+        [TYPE_POISON]     = SE_M_TOXIC,          // CORRUPT, exact
+        [TYPE_GROUND]     = SE_M_SAND_ATTACK,    // STRATUM, nearest
+        [TYPE_ROCK]       = SE_M_ROCK_THROW,     // LEGACY, nearest
+        [TYPE_BUG]        = SE_M_STRING_SHOT,    // SWARM, nearest
+        [TYPE_GHOST]      = SE_M_LICK,           // LATENT, exact
+        [TYPE_STEEL]      = SE_M_HARDEN,         // HARDENED, nearest
+        [TYPE_MYSTERY]    = SE_M_SWAGGER2,       // MYSTERY, no type: CONTENT's
+        [TYPE_FIRE]       = SE_M_FLAME_WHEEL,    // ENTROPY, nearest
+        [TYPE_WATER]      = SE_M_BUBBLE,         // FLOW, nearest
+        [TYPE_GRASS]      = SE_M_ABSORB,         // GROWTH, nearest
+        [TYPE_ELECTRIC]   = SE_M_THUNDERBOLT2,   // SIGNAL, exact
+        [TYPE_PSYCHIC]    = SE_M_DIZZY_PUNCH,    // CONTEXT, exact
+        [TYPE_ICE]        = SE_M_HAIL,           // FROZEN, nearest
+        [TYPE_DRAGON]     = SE_M_SWAGGER2,       // EMERGENT, none
+        [TYPE_DARK]       = SE_M_FAINT_ATTACK,   // OPAQUE, nearest
+    },
+    [TYPE_SE_FALL] =
+    {
+        [TYPE_NORMAL]     = SE_M_STAT_DECREASE,  // CONTENT, own
+        [TYPE_FIGHTING]   = SE_M_DETECT,         // LOGIC, nearest
+        [TYPE_FLYING]     = SE_M_FLY,            // VECTOR, nearest
+        [TYPE_POISON]     = SE_M_ACID_ARMOR,     // CORRUPT, nearest
+        [TYPE_GROUND]     = SE_M_SAND_TOMB,      // STRATUM, nearest
+        [TYPE_ROCK]       = SE_M_ROCK_THROW,     // LEGACY, nearest
+        [TYPE_BUG]        = SE_M_STRING_SHOT,    // SWARM, nearest
+        [TYPE_GHOST]      = SE_M_LICK,           // LATENT, nearest
+        [TYPE_STEEL]      = SE_M_HARDEN,         // HARDENED, nearest
+        [TYPE_MYSTERY]    = SE_M_STAT_DECREASE,  // MYSTERY, no type: CONTENT's
+        [TYPE_FIRE]       = SE_M_FLAME_WHEEL,    // ENTROPY, nearest
+        [TYPE_WATER]      = SE_M_WHIRLPOOL,      // FLOW, nearest
+        [TYPE_GRASS]      = SE_M_POISON_POWDER,  // GROWTH, nearest
+        [TYPE_ELECTRIC]   = SE_M_THUNDERBOLT2,   // SIGNAL, nearest
+        [TYPE_PSYCHIC]    = SE_M_DIZZY_PUNCH,    // CONTEXT, nearest
+        [TYPE_ICE]        = SE_M_ICY_WIND,       // FROZEN, nearest
+        [TYPE_DRAGON]     = SE_M_STAT_DECREASE,  // EMERGENT, none
+        [TYPE_DARK]       = SE_M_FAINT_ATTACK,   // OPAQUE, nearest
+    },
 };

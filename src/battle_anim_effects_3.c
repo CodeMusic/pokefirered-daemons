@@ -2270,7 +2270,7 @@ void AnimTask_DaemonsBlendToUserType(u8 taskId)
 // moves two stages. The mapping is AnimTask_StatsChange's own switch, read the same way from animationData->animArg.
 void AnimTask_DaemonsStatKind(u8 taskId)
 {
-    u16 arg = gBattleSpritesDataPtr->animationData->animArg;
+    u16 arg = STAT_ANIM_ID(gBattleSpritesDataPtr->animationData->animArg);   // T-589: the high byte is the cause
     u8 stats = NUM_BATTLE_STATS - 1;          // seven: the five stats plus accuracy and evasion
     bool8 down, sharply;
 

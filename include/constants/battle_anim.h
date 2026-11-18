@@ -488,6 +488,18 @@
 #define TYPE_SE_HIT   0    // SE_M_COMET_PUNCH's: a hit
 #define TYPE_SE_TICK  1    // SE_M_MINIMIZE's: a stat step's tick
 #define TYPE_SE_HEAL  2    // SE_M_MOONLIGHT's: the witching hour's light
-#define TYPE_SE_ROLES 3
+// T-589: the stat arrow (General_StatsChange) is a general animation, so it is not a routine and has no type of its
+// own: these three are played by the type of the MOVE that changed the stat, which the battle engine sends in the
+// stat-change animation's argument (STAT_ANIM_CAUSE). An ability, an item, anything no move causes: CONTENT's.
+#define TYPE_SE_RISE  3    // SE_M_SWAGGER's: a stat rises
+#define TYPE_SE_RISE2 4    // SE_M_SWAGGER2's: a stat rises sharply
+#define TYPE_SE_FALL  5    // SE_M_STAT_DECREASE's: a stat falls, or falls sharply
+#define TYPE_SE_ROLES 6
+
+// T-589: B_ANIM_STATS_CHANGE's argument is the STAT_ANIM_* id in its low byte and, in its high byte (animArg2), the
+// cause: 0 when no move caused the change, else the causing move's type + 1.
+#define STAT_ANIM_CAUSE_NONE         0
+#define STAT_ANIM_CAUSE(arg)         (((arg) >> 8) & 0xFF)
+#define STAT_ANIM_ID(arg)            ((arg) & 0xFF)
 
 #endif // GUARD_CONSTANTS_BATTLE_ANIM_H

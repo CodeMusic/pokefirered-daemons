@@ -8264,14 +8264,14 @@ General_StatsChange:
 	delay 0
 	jumpargeq 0, 1, DaemonsStatDown
 	jumpargeq 1, 1, DaemonsStatUpSharply
-	playsewithpan SE_M_SWAGGER, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_RISE, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_DaemonsBlendToUserType, 10, 1, 0, 9
 	waitforvisualfinish
 	createvisualtask AnimTask_DaemonsBlendToUserType, 10, 2, 9, 0
 	waitforvisualfinish
 	end
 DaemonsStatUpSharply:
-	playsewithpan SE_M_SWAGGER2, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_RISE2, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_DaemonsBlendToUserType, 10, 0, 0, 14
 	waitforvisualfinish
 	delay 10
@@ -8280,14 +8280,14 @@ DaemonsStatUpSharply:
 	end
 DaemonsStatDown:
 	jumpargeq 1, 1, DaemonsStatDownSharply
-	playsewithpan SE_M_STAT_DECREASE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_FALL, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 1, 0, 8, RGB(13, 13, 13)
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 8, 0, RGB(13, 13, 13)
 	waitforvisualfinish
 	end
 DaemonsStatDownSharply:
-	playsewithpan SE_M_STAT_DECREASE, SOUND_PAN_ATTACKER
+	playtypesewithpan TYPE_SE_FALL, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 0, 0, 13, RGB(13, 13, 13)
 	waitforvisualfinish
 	delay 10

@@ -1898,6 +1898,11 @@ static void Cmd_stopsound(void)
 // T-583: playtypesewithpan ROLE, PAN -- a sound shared by routines of every type, played as the ROUTINE's own type's
 // sound for that role. Outside a routine (a general animation) and for a type with no row, it is CONTENT's: the
 // shared sound itself, as it always was.
+//
+// T-589: the stat arrow's three roles (TYPE_SE_RISE, _RISE2, _FALL) play in General_StatsChange, which is no routine:
+// their type is the CAUSING move's, sent by the battle engine in the high byte of the animation's argument
+// (STAT_ANIM_CAUSE: the type + 1, or 0 when an ability or an item changed the stat -- CONTENT's). The argument is set
+// with each stat change sent, so a cause never outlives its own arrow.
 static void Cmd_playtypesewithpan(void)
 {
     u8 role = sBattleAnimScriptPtr[1];
@@ -1906,6 +1911,11 @@ static void Cmd_playtypesewithpan(void)
 
     if (role >= TYPE_SE_ROLES)
         role = TYPE_SE_HIT;
+    if (role >= TYPE_SE_RISE && sAnimMoveIndex == MOVE_NONE && gBattleSpritesDataPtr != NULL)
+    {
+        u8 cause = STAT_ANIM_CAUSE(gBattleSpritesDataPtr->animationData->animArg);
+        type = cause != STAT_ANIM_CAUSE_NONE ? cause - 1 : TYPE_NORMAL;
+    }
     if (type >= NUMBER_OF_MON_TYPES)
         type = TYPE_NORMAL;
     PlaySE12WithPanning(sTypeSe[role][type], BattleAnimAdjustPanning(pan));

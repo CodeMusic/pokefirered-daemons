@@ -458,7 +458,7 @@ void AnimTask_StatsChange(u8 taskId)
     s16 animStatId = 0;
     bool16 sharply = FALSE;
 
-    switch (gBattleSpritesDataPtr->animationData->animArg)
+    switch (STAT_ANIM_ID(gBattleSpritesDataPtr->animationData->animArg))   // T-589: the high byte is the cause
     {
     CASE(PLUS1,  STAT_ATK):     goesDown = FALSE;  animStatId = 0;  break;
     CASE(PLUS1,  STAT_DEF):     goesDown = FALSE;  animStatId = 1;  break;

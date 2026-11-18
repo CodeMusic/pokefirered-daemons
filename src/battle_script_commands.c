@@ -2287,6 +2287,17 @@ u8 GetBattlerTurnOrderNum(u8 battlerId)
     return;                                     \
 }
 
+// T-589: what the stat arrow is told caused a stat change, called only where a MOVE changes one (its secondary effect,
+// setgraphicalstatchangevalues, playstatchangeanimation): the move's type + 1. An ability or an item sets animArg2
+// to STAT_ANIM_CAUSE_NONE itself (SPEED BOOST and the stat berries in battle_util.c, INTIMIDATE in its script), so
+// it plays CONTENT's sound. It is written afresh before every stat change sent, so nothing carries over a turn.
+static u8 StatArrowCause(void)
+{
+    if (gCurrentMove == MOVE_NONE || gCurrentMove >= MOVES_COUNT)
+        return STAT_ANIM_CAUSE_NONE;
+    return gBattleMoves[gCurrentMove].type + 1;
+}
+
 void SetMoveEffect(bool8 primary, u8 certain)
 {
     bool32 statusChanged = FALSE;
@@ -2709,7 +2720,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 else
                 {
                     gBattleScripting.animArg1 = gBattleCommunication[MOVE_EFFECT_BYTE] & ~(MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN);
-                    gBattleScripting.animArg2 = 0;
+                    gBattleScripting.animArg2 = StatArrowCause();   // T-589: a move's secondary effect: its type
                     BattleScriptPush(gBattlescriptCurrInstr + 1);
                     gBattlescriptCurrInstr = BattleScript_StatUp;
                 }
@@ -2730,7 +2741,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 else
                 {
                     gBattleScripting.animArg1 = gBattleCommunication[MOVE_EFFECT_BYTE] & ~(MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN);
-                    gBattleScripting.animArg2 = 0;
+                    gBattleScripting.animArg2 = StatArrowCause();   // T-589: a move's secondary effect: its type
                     BattleScriptPush(gBattlescriptCurrInstr + 1);
                     gBattlescriptCurrInstr = BattleScript_StatDown;
                 }
@@ -2751,7 +2762,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 else
                 {
                     gBattleScripting.animArg1 = gBattleCommunication[MOVE_EFFECT_BYTE] & ~(MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN);
-                    gBattleScripting.animArg2 = 0;
+                    gBattleScripting.animArg2 = StatArrowCause();   // T-589: a move's secondary effect: its type
                     BattleScriptPush(gBattlescriptCurrInstr + 1);
                     gBattlescriptCurrInstr = BattleScript_StatUp;
                 }
@@ -2772,7 +2783,7 @@ void SetMoveEffect(bool8 primary, u8 certain)
                 else
                 {
                     gBattleScripting.animArg1 = gBattleCommunication[MOVE_EFFECT_BYTE] & ~(MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN);
-                    gBattleScripting.animArg2 = 0;
+                    gBattleScripting.animArg2 = StatArrowCause();   // T-589: a move's secondary effect: its type
                     BattleScriptPush(gBattlescriptCurrInstr + 1);
                     gBattlescriptCurrInstr = BattleScript_StatDown;
                 }
@@ -4141,7 +4152,7 @@ static void Cmd_setgraphicalstatchangevalues(void)
         break;
     }
     gBattleScripting.animArg1 = GET_STAT_BUFF_ID(gBattleScripting.statChanger) + value - 1;
-    gBattleScripting.animArg2 = 0;
+    gBattleScripting.animArg2 = StatArrowCause();   // T-589: INTIMIDATE's script sets it back to none after this
     gBattlescriptCurrInstr++;
 }
 
@@ -4232,7 +4243,7 @@ static void Cmd_playstatchangeanimation(void)
     }
     else if (changeableStatsCount != 0 && !gBattleScripting.statAnimPlayed)
     {
-        BtlController_EmitBattleAnimation(BUFFER_A, B_ANIM_STATS_CHANGE, statAnimId);
+        BtlController_EmitBattleAnimation(BUFFER_A, B_ANIM_STATS_CHANGE, statAnimId | (StatArrowCause() << 8));   // T-589: only moves use it
         MarkBattlerForControllerExec(gActiveBattler);
         if (gBattlescriptCurrInstr[3] & STAT_CHANGE_MULTIPLE_STATS && changeableStatsCount > 1)
             gBattleScripting.statAnimPlayed = TRUE;
