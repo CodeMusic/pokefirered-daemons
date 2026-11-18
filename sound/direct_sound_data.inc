@@ -1914,6 +1914,56 @@ DirectSoundWaveData_daemons_chorus::
 	.incbin "sound/direct_sound_samples/daemons_chorus.bin"
 
 	.align 2
+@ T-565 batch 12: our own instruments under our older songs (DAEMONS tools/genbank.py)
+DirectSoundWaveData_daemons_choir::
+	.incbin "sound/direct_sound_samples/daemons_choir.bin"
+	.align 2
+DirectSoundWaveData_daemons_fingered_bass::
+	.incbin "sound/direct_sound_samples/daemons_fingered_bass.bin"
+	.align 2
+DirectSoundWaveData_daemons_french_horn::
+	.incbin "sound/direct_sound_samples/daemons_french_horn.bin"
+	.align 2
+DirectSoundWaveData_daemons_glockenspiel::
+	.incbin "sound/direct_sound_samples/daemons_glockenspiel.bin"
+	.align 2
+DirectSoundWaveData_daemons_nylon_guitar::
+	.incbin "sound/direct_sound_samples/daemons_nylon_guitar.bin"
+	.align 2
+DirectSoundWaveData_daemons_oboe::
+	.incbin "sound/direct_sound_samples/daemons_oboe.bin"
+	.align 2
+DirectSoundWaveData_daemons_piano::
+	.incbin "sound/direct_sound_samples/daemons_piano.bin"
+	.align 2
+DirectSoundWaveData_daemons_pizzicato::
+	.incbin "sound/direct_sound_samples/daemons_pizzicato.bin"
+	.align 2
+DirectSoundWaveData_daemons_strings::
+	.incbin "sound/direct_sound_samples/daemons_strings.bin"
+	.align 2
+DirectSoundWaveData_daemons_synth_bass::
+	.incbin "sound/direct_sound_samples/daemons_synth_bass.bin"
+	.align 2
+DirectSoundWaveData_daemons_timpani::
+	.incbin "sound/direct_sound_samples/daemons_timpani.bin"
+	.align 2
+DirectSoundWaveData_daemons_trumpet::
+	.incbin "sound/direct_sound_samples/daemons_trumpet.bin"
+	.align 2
+DirectSoundWaveData_daemons_tuba::
+	.incbin "sound/direct_sound_samples/daemons_tuba.bin"
+	.align 2
+DirectSoundWaveData_daemons_tubular_bell::
+	.incbin "sound/direct_sound_samples/daemons_tubular_bell.bin"
+	.align 2
+DirectSoundWaveData_daemons_whistle::
+	.incbin "sound/direct_sound_samples/daemons_whistle.bin"
+	.align 2
+DirectSoundWaveData_daemons_xylophone::
+	.incbin "sound/direct_sound_samples/daemons_xylophone.bin"
+
+	.align 2
 @ T-425: our own HARP and FLUTE (DAEMONS tools/geninstruments.py)
 DirectSoundWaveData_daemons_harp::
 	.incbin "sound/direct_sound_samples/daemons_harp.bin"
