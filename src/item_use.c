@@ -807,6 +807,20 @@ void FieldUseFunc_OriginBook(u8 taskId)
     SetUpItemUseOnFieldCallback(taskId);
 }
 
+//  T-586: DAVID's COMPASS -- the bag closes and its rose opens over the field (src/daemons_compass.c).
+static void ItemUseOnFieldCB_Compass(u8 taskId)
+{
+    LockPlayerFieldControls();
+    ScriptContext_SetupScript(EventScript_Compass);
+    DestroyTask(taskId);
+}
+
+void FieldUseFunc_Compass(u8 taskId)
+{
+    sItemUseOnFieldCB = ItemUseOnFieldCB_Compass;
+    SetUpItemUseOnFieldCallback(taskId);
+}
+
 //  T-417: the HARP (CONTENT) or the FLUTE (CONTEXT). The bag closes and the field comes back, then the instrument comes
 //  out where the player stands (src/play.c) -- on foot or on the water, never on the bicycle.
 static void ItemUseOnFieldCB_Play(u8 taskId)

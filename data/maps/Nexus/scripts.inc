@@ -888,7 +888,108 @@ EventScript_SingingFir_Door::
 	goto_if_eq VAR_RESULT, NO, EventScript_SingingFir_Stay
 	call_if_unset FLAG_NEXUS_VISITED, EventScript_SingingFir_FirstTime
 	playse SE_WARP_IN
+	goto_if_unset FLAG_COMPASS_READ, EventScript_SingingFir_ToTheTree
+	special Compass_CurrentMap
+	goto_if_eq VAR_RESULT, MAP_ROUTE1_GROVE, EventScript_SingingFir_ToDoor0
+	goto_if_eq VAR_RESULT, MAP_VIRIDIAN_FOREST_GROVE, EventScript_SingingFir_ToDoor1
+	goto_if_eq VAR_RESULT, MAP_ROUTE24_GROVE, EventScript_SingingFir_ToDoor2
+	goto_if_eq VAR_RESULT, MAP_ROUTE25_GROVE, EventScript_SingingFir_ToDoor3
+	goto_if_eq VAR_RESULT, MAP_ROUTE11_GROVE, EventScript_SingingFir_ToDoor4
+	goto_if_eq VAR_RESULT, MAP_ROUTE8_GROVE, EventScript_SingingFir_ToDoor5
+	goto_if_eq VAR_RESULT, MAP_ROUTE13_GROVE, EventScript_SingingFir_ToDoor6
+	goto_if_eq VAR_RESULT, MAP_ONE_ISLAND_GROVE, EventScript_SingingFir_ToDoor7
+	goto_if_eq VAR_RESULT, MAP_TWO_ISLAND_GROVE, EventScript_SingingFir_ToDoor8
+	goto_if_eq VAR_RESULT, MAP_THREE_ISLAND_BERRY_FOREST_GROVE, EventScript_SingingFir_ToDoor9
+	goto_if_eq VAR_RESULT, MAP_FOUR_ISLAND_GROVE, EventScript_SingingFir_ToDoor10
+	goto_if_eq VAR_RESULT, MAP_FIVE_ISLAND_MEADOW_GROVE, EventScript_SingingFir_ToDoor11
+	goto_if_eq VAR_RESULT, MAP_SIX_ISLAND_WATER_PATH_GROVE, EventScript_SingingFir_ToDoor12
+	goto_if_eq VAR_RESULT, MAP_SEVEN_ISLAND_GROVE, EventScript_SingingFir_ToDoor13
+EventScript_SingingFir_ToTheTree::
 	warp MAP_NEXUS, 12, 5
+	waitstate
+	release
+	end
+
+EventScript_SingingFir_ToDoor0::
+	warp MAP_NEXUS, 3, 5
+	waitstate
+	release
+	end
+
+EventScript_SingingFir_ToDoor1::
+	warp MAP_NEXUS, 7, 7
+	waitstate
+	release
+	end
+
+EventScript_SingingFir_ToDoor2::
+	warp MAP_NEXUS, 3, 10
+	waitstate
+	release
+	end
+
+EventScript_SingingFir_ToDoor3::
+	warp MAP_NEXUS, 7, 12
+	waitstate
+	release
+	end
+
+EventScript_SingingFir_ToDoor4::
+	warp MAP_NEXUS, 3, 15
+	waitstate
+	release
+	end
+
+EventScript_SingingFir_ToDoor5::
+	warp MAP_NEXUS, 7, 17
+	waitstate
+	release
+	end
+
+EventScript_SingingFir_ToDoor6::
+	warp MAP_NEXUS, 4, 20
+	waitstate
+	release
+	end
+
+EventScript_SingingFir_ToDoor7::
+	warp MAP_NEXUS, 21, 5
+	waitstate
+	release
+	end
+
+EventScript_SingingFir_ToDoor8::
+	warp MAP_NEXUS, 17, 7
+	waitstate
+	release
+	end
+
+EventScript_SingingFir_ToDoor9::
+	warp MAP_NEXUS, 21, 10
+	waitstate
+	release
+	end
+
+EventScript_SingingFir_ToDoor10::
+	warp MAP_NEXUS, 17, 12
+	waitstate
+	release
+	end
+
+EventScript_SingingFir_ToDoor11::
+	warp MAP_NEXUS, 21, 15
+	waitstate
+	release
+	end
+
+EventScript_SingingFir_ToDoor12::
+	warp MAP_NEXUS, 17, 17
+	waitstate
+	release
+	end
+
+EventScript_SingingFir_ToDoor13::
+	warp MAP_NEXUS, 20, 20
 	waitstate
 	release
 	end

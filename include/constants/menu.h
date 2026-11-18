@@ -77,6 +77,7 @@
 #define MULTICHOICE_SCHOOL_BIAS                                     70 // T-219
 #define MULTICHOICE_SCHOOL_ERROR                                    71 // T-219
 #define MULTICHOICE_SCHOOL_LIFT                                     72 // T-219
+#define MULTICHOICE_DAVID_ADVICE                                    73 // T-586: keep reading, or the porthole
 
 #define MULTICHOICE_NONE                                      255
 

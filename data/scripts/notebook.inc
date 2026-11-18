@@ -146,6 +146,14 @@ EventScript_OriginBook::
 	releaseall
 	end
 
+@ T-586: DAVID's COMPASS, its rose over the field until A or B (src/daemons_compass.c).
+EventScript_Compass::
+	lockall
+	special Compass_Open
+	waitstate
+	releaseall
+	end
+
 @ T-519 item 2 (the brief): with the dawn half held, in the witching hour, a voice that is not your own points to
 @ the hatter's house -- once in the hour, on the first step outdoors (src/daemons_eudaimon.c). DRAFT.
 Daemons_EventScript_EudaimonNudge::

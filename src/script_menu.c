@@ -219,6 +219,15 @@ static const struct MenuAction sMultichoiceList_SchoolLift[] = {
     { gOtherText_Exit }
 };
 
+//  T-586: DAVID, seasick over his book on the S.S. ANNE. DRAFT.
+static const u8 sText_David_KeepReading[] = _("KEEP READING");
+static const u8 sText_David_Porthole[] = _("LOOK OUT THE PORTHOLE");
+
+static const struct MenuAction sMultichoiceList_DavidAdvice[] = {
+    { sText_David_KeepReading },
+    { sText_David_Porthole },
+};
+
 static const struct MenuAction sMultichoiceList_TrainerSchoolWhiteboard[] = {
     { gText_Slp },
     { gText_Psn },
@@ -655,6 +664,7 @@ static const struct MultichoiceListStruct sMultichoiceLists[] = {
     [MULTICHOICE_SCHOOL_BIAS] = MULTICHOICE(sMultichoiceList_SchoolBias),
     [MULTICHOICE_SCHOOL_ERROR] = MULTICHOICE(sMultichoiceList_SchoolError),
     [MULTICHOICE_SCHOOL_LIFT] = MULTICHOICE(sMultichoiceList_SchoolLift),
+    [MULTICHOICE_DAVID_ADVICE] = MULTICHOICE(sMultichoiceList_DavidAdvice),   // T-586
     [MULTICHOICE_YES_NO_INFO]                                = MULTICHOICE(sMultichoiceList_YesNoInfo),
     [MULTICHOICE_SINGLE_DOUBLE_MULTI_INFO_EXIT]              = MULTICHOICE(sMultichoiceList_SingleDoubleMultiInfoExit),
     [MULTICHOICE_YES_NO_INFO_2]                              = MULTICHOICE(sMultichoiceList_YesNoInfo2),

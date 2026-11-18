@@ -545,4 +545,6 @@ gSpecials::
 	def_special OldToad_Line                  @ T-547: the old toad's one line, in gStringVar4
 	def_special Daemons_TryTouchGift          @ T-575: TOUCH, a gift's read
 	def_special Origin_Open                  @ T-533: THE ORIGIN OF A DAEMON, at its cover (waitstate)
+	def_special Compass_Open                 @ T-586: DAVID's COMPASS, its rose (waitstate)
+	def_special Compass_CurrentMap           @ T-586: the map stood on, as MAP_*, in VAR_RESULT (special, not specialvar)
 gSpecialsEnd::

@@ -59,6 +59,7 @@ enum
     EV_INTERRUPT, EV_GOTO_POINTS, EV_GUIDE, EV_SUBTLE, EV_HERMETIC, EV_EUDAIMON, EV_SPELLS, EV_MENDED, EV_HORIZON, EV_GLOBAL_INDEX, EV_STREAM, EV_COMPANION, EV_INSTRUMENT,
     EV_GROVES_LIT, EV_LIGHT_NIGHTS, EV_OTHER_EDITION,                       // T-528
     EV_ORIGIN,                                                              // T-533
+    EV_COMPASS, EV_COMPASS_READ,                                            // T-586
     EV_MARKS_ALL, EV_MARK1, EV_MARK8 = EV_MARK1 + 7,
     EV_NOTEBOOK, EV_NOTEBOOK_FULL,
     EV_DRIVERS_ALL, EV_DRIVER1, EV_DRIVER8 = EV_DRIVER1 + 7,
@@ -125,6 +126,8 @@ static const u8 sName_Instrument[]   = _("THE FLUTE");
 #endif
 static const u8 sName_Ticket[]       = _("S.S. ANNE TICKET");
 static const u8 sName_FirKey[]       = _("THE FIR IN ITS KEY");     // T-395
+static const u8 sName_Compass[]      = _("DAVID'S COMPASS");        // T-586
+static const u8 sName_CompassRead[]  = _("THE COMPASS, READ");      // T-586: its rose set, the needle settled
 static const u8 sName_Groves[]       = _("EVERY GROVE FOUND");      // T-395: THE NEXUS's doors
 static const u8 sName_Drivers[]      = _("DRIVERS >");
 static const u8 sName_Tea[]          = _("TEA, FOR BRAZEN'S GUARDS");
@@ -265,6 +268,8 @@ static const struct DbgRow sRows_Events[] = {
     { sName_Songs,       R_PAGE,   PG_SONGS },        // T-417 P2
     { sName_Ticket,      R_TOGGLE, EV_TICKET },
     { sName_FirKey,      R_TOGGLE, EV_FIR_KEY },
+    { sName_Compass,     R_TOGGLE, EV_COMPASS },      // T-586: from DAVID at the porthole
+    { sName_CompassRead, R_TOGGLE, EV_COMPASS_READ }, // T-586: a grove's fir then lands by its own NEXUS tree
     { sName_Groves,      R_TOGGLE, EV_GROVES },
     { sName_Drivers,     R_PAGE,   PG_DRIVERS },
     { sName_Tea,         R_TOGGLE, EV_TEA },
@@ -577,6 +582,8 @@ static bool8 IsHeld(u8 ev)
     case EV_SCHOOL:       return FlagGet(FLAG_GOT_DIPLOMA);
     case EV_TICKET:       return FlagGet(FLAG_GOT_SS_TICKET);
     case EV_FIR_KEY:      return FlagGet(FLAG_FIR_IN_KEY);
+    case EV_COMPASS:      return CheckBagHasItem(ITEM_COMPASS, 1);     // T-586
+    case EV_COMPASS_READ: return FlagGet(FLAG_COMPASS_READ);
     case EV_GROVES:
         for (i = 0; i < ARRAY_COUNT(sGroveFound); i++)
             if (!FlagGet(sGroveFound[i]))
@@ -667,6 +674,8 @@ static void Apply(u8 ev, bool8 on)
         SetItem(ITEM_TEXTBOOK, on); SetItem(ITEM_DIPLOMA, on);
         return;
     case EV_TICKET:       SetFlag(FLAG_GOT_SS_TICKET, on); SetItem(ITEM_SS_TICKET, on); return;
+    case EV_COMPASS:      SetItem(ITEM_COMPASS, on); return;           // T-586
+    case EV_COMPASS_READ: SetFlag(FLAG_COMPASS_READ, on); return;
     case EV_FIR_KEY:
         SetFlag(FLAG_NOTEBOOK_LOOSE_KEY, on); SetFlag(FLAG_FIR_IN_KEY, on); SetFlag(FLAG_HIDE_FIR_UNKEYED, !on);
         return;

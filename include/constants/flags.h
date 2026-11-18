@@ -2015,6 +2015,10 @@
 #define FLAG_HIDE_KINDRED_CELADON            (DAEMONS_FLAGS_START + 0x1E1)   // set by its map: no book, or poured
 #define FLAG_HIDE_KINDRED_LAVENDER           (DAEMONS_FLAGS_START + 0x1E2)   // set by its map until poured
 
+//  T-586: DAVID's COMPASS. Its rose turned to N E S W and the needle settled (src/daemons_compass.c); from then on a
+//  grove's fir lands the player beside that grove's own tree in THE NEXUS (EventScript_SingingFir, tools/gbanexusmap.py).
+#define FLAG_COMPASS_READ                    (DAEMONS_FLAGS_START + 0x1F0)
+
 #define DAEMONS_FLAGS_COUNT           0x400
 #define DAEMONS_FLAGS_END             (DAEMONS_FLAGS_START + DAEMONS_FLAGS_COUNT - 1)
 #define DAEMONS_FLAGS_SIZE            (DAEMONS_FLAGS_COUNT / 8)

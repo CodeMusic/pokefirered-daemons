@@ -260,7 +260,7 @@
 #define ITEM_EUDAIMON_LAYER 249 // T-519 item 2: THE EUDAIMON LAYER, the torn book's dawn half. Was ITEM_0F9, unused
 #define ITEM_UNITY_BOOK 250 // T-519 item 3: THE UNITY BOOK, the two halves mended at DAEMON TOWER. Was ITEM_0FA, unused
 #define ITEM_ORIGIN_BOOK 251 // T-533: THE ORIGIN OF A DAEMON, from the bedroom shelf (name and words DRAFT). Was ITEM_0FB, unused
-#define ITEM_0FC 252
+#define ITEM_COMPASS 252 // T-586: DAVID's compass, its rose lettered in a mirror (DRAFT). Was ITEM_0FC, unused
 #define ITEM_0FD 253
 #define ITEM_RED_SCARF 254
 #define ITEM_BLUE_SCARF 255

@@ -9,6 +9,45 @@ SSAnne_CaptainsOffice_Text_RubbedCaptainsBack::
     .string "Rub-rub…\n"
     .string "Rub-rub…$"
 
+@  DRAFT (T-586, the user 2026-11-17): the book, the choice, and the porthole.
+SSAnne_CaptainsOffice_Text_HelpsABit::
+    .string "DAVID: Thanks. That helps a bit.$"
+
+SSAnne_CaptainsOffice_Text_BackToTheBook::
+    .string "DAVID went back to his book.$"
+
+SSAnne_CaptainsOffice_Text_StillAtIt::
+    .string "DAVID: …Still seasick.\n"
+    .string "Still reading.$"
+
+SSAnne_CaptainsOffice_Text_EveryStep::
+    .string "DAVID: It has every step in it.\n"
+    .string "It never says where to look.$"
+
+SSAnne_CaptainsOffice_Text_KeepReading::
+    .string "DAVID: You're right. One more\n"
+    .string "chapter…\p"
+    .string "…urrp.$"
+
+SSAnne_CaptainsOffice_Text_LooksOut::
+    .string "DAVID put the book down and\n"
+    .string "looked out the porthole.\p"
+    .string "Far off, the sea met the sky\n"
+    .string "in one long line that held still.$"
+
+SSAnne_CaptainsOffice_Text_ThereTheWholeTime::
+    .string "DAVID: It was there the whole\n"
+    .string "time.$"
+
+SSAnne_CaptainsOffice_Text_Compass::
+    .string "DAVID: One more thing.\p"
+    .string "I can see where I'm going now.\n"
+    .string "You'll need this more than I do.$"
+
+SSAnne_CaptainsOffice_Text_ObtainedCompass::
+    .string "{PLAYER} obtained the COMPASS\n"
+    .string "from DAVID!$"
+
 SSAnne_CaptainsOffice_Text_ThankYouHaveHMForCut::
     .string "DAVID: …Better. Thank you.\p"
     .string "I've loved boats since before you\n"
