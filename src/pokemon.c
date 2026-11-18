@@ -5502,22 +5502,22 @@ u16 HoennToNationalOrder(u16 hoennNum)
 }
 
 // BEGIN gbanexus -- T-395, the NEXUS residents (tools/gbanexus.py writes this)
-static const u16 sNexusCries[] = {
-    [SPECIES_REFLECTION - SPECIES_OLD_UNOWN_C] = SPECIES_MIGHTYENA,
-    [SPECIES_LODESTAR - SPECIES_OLD_UNOWN_C] = SPECIES_STANTLER,
-    [SPECIES_PERIHELION - SPECIES_OLD_UNOWN_C] = SPECIES_RAIKOU,
-    [SPECIES_LYUBOV - SPECIES_OLD_UNOWN_C] = SPECIES_ENTEI,
-    [SPECIES_MULTIMAL - SPECIES_OLD_UNOWN_C] = SPECIES_MISDREAVUS,
-    [SPECIES_ILLUMINED - SPECIES_OLD_UNOWN_C] = SPECIES_MILOTIC,
-    [SPECIES_LYNX - SPECIES_OLD_UNOWN_C] = SPECIES_SKITTY,
-    [SPECIES_BASTET - SPECIES_OLD_UNOWN_C] = SPECIES_PERSIAN,
+static const u16 sNexusCries[] = {   // T-584: cry ids, each its own (tools/gencries.py)
+    [SPECIES_REFLECTION - SPECIES_OLD_UNOWN_C] = 388,   // Cry_Reflection
+    [SPECIES_LODESTAR - SPECIES_OLD_UNOWN_C] = 389,   // Cry_Lodestar
+    [SPECIES_PERIHELION - SPECIES_OLD_UNOWN_C] = 390,   // Cry_Perihelion
+    [SPECIES_LYUBOV - SPECIES_OLD_UNOWN_C] = 391,   // Cry_Lyubov
+    [SPECIES_MULTIMAL - SPECIES_OLD_UNOWN_C] = 392,   // Cry_Multimal
+    [SPECIES_ILLUMINED - SPECIES_OLD_UNOWN_C] = 393,   // Cry_Illumined
+    [SPECIES_LYNX - SPECIES_OLD_UNOWN_C] = 394,   // Cry_Lynx
+    [SPECIES_BASTET - SPECIES_OLD_UNOWN_C] = 395,   // Cry_Bastet
 };
 // END gbanexus
 // BEGIN gbacarried -- T-450, the carried line (tools/gbacarried.py writes this)
-static const u16 sCarriedCries[] = {
-    [SPECIES_HANDSHAKE - SPECIES_OLD_UNOWN_K] = SPECIES_PICHU,
-    [SPECIES_TETHERING - SPECIES_OLD_UNOWN_K] = SPECIES_PIKACHU,
-    [SPECIES_COROUTINE - SPECIES_OLD_UNOWN_K] = SPECIES_RAICHU,
+static const u16 sCarriedCries[] = {   // T-584: cry ids, each its own (tools/gencries.py)
+    [SPECIES_HANDSHAKE - SPECIES_OLD_UNOWN_K] = 396,   // Cry_Handshake
+    [SPECIES_TETHERING - SPECIES_OLD_UNOWN_K] = 397,   // Cry_Tethering
+    [SPECIES_COROUTINE - SPECIES_OLD_UNOWN_K] = 398,   // Cry_Coroutine
 };
 // END gbacarried
 u16 SpeciesToCryId(u16 species)
@@ -5526,9 +5526,9 @@ u16 SpeciesToCryId(u16 species)
         return species;
 
     if (species >= SPECIES_OLD_UNOWN_C - 1 && species <= SPECIES_OLD_UNOWN_J - 1)   // T-395
-        return SpeciesToCryId(sNexusCries[species - (SPECIES_OLD_UNOWN_C - 1)] - 1);
+        return sNexusCries[species - (SPECIES_OLD_UNOWN_C - 1)];
     if (species >= SPECIES_OLD_UNOWN_K - 1 && species <= SPECIES_OLD_UNOWN_M - 1)   // T-450
-        return SpeciesToCryId(sCarriedCries[species - (SPECIES_OLD_UNOWN_K - 1)] - 1);
+        return sCarriedCries[species - (SPECIES_OLD_UNOWN_K - 1)];
     if (species <= SPECIES_OLD_UNOWN_Z - 1)
         return SPECIES_UNOWN - 1;
 

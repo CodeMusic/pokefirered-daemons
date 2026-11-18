@@ -1855,6 +1855,50 @@ Cry_Deoxys::
 Cry_Chimecho::
 	.incbin "sound/direct_sound_samples/cries/chimecho.bin"
 
+	.align 2
+Cry_Reflection::
+	.incbin "sound/direct_sound_samples/cries/reflection.bin"
+
+	.align 2
+Cry_Lodestar::
+	.incbin "sound/direct_sound_samples/cries/lodestar.bin"
+
+	.align 2
+Cry_Perihelion::
+	.incbin "sound/direct_sound_samples/cries/perihelion.bin"
+
+	.align 2
+Cry_Lyubov::
+	.incbin "sound/direct_sound_samples/cries/lyubov.bin"
+
+	.align 2
+Cry_Multimal::
+	.incbin "sound/direct_sound_samples/cries/multimal.bin"
+
+	.align 2
+Cry_Illumined::
+	.incbin "sound/direct_sound_samples/cries/illumined.bin"
+
+	.align 2
+Cry_Lynx::
+	.incbin "sound/direct_sound_samples/cries/lynx.bin"
+
+	.align 2
+Cry_Bastet::
+	.incbin "sound/direct_sound_samples/cries/bastet.bin"
+
+	.align 2
+Cry_Handshake::
+	.incbin "sound/direct_sound_samples/cries/handshake.bin"
+
+	.align 2
+Cry_Tethering::
+	.incbin "sound/direct_sound_samples/cries/tethering.bin"
+
+	.align 2
+Cry_Coroutine::
+	.incbin "sound/direct_sound_samples/cries/coroutine.bin"
+
 
 	.align 2
 DirectSoundWaveData_register_noise::

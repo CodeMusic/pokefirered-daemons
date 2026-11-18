@@ -388,6 +388,17 @@ gCryTable::
 	cry Cry_Jirachi
 	cry Cry_Deoxys
 	cry Cry_Chimecho
+	cry Cry_Reflection
+	cry Cry_Lodestar
+	cry Cry_Perihelion
+	cry Cry_Lyubov
+	cry Cry_Multimal
+	cry Cry_Illumined
+	cry Cry_Lynx
+	cry Cry_Bastet
+	cry Cry_Handshake
+	cry Cry_Tethering
+	cry Cry_Coroutine
 
 	.align 2
 gCryTable_Reverse::
@@ -779,3 +790,14 @@ gCryTable_Reverse::
 	cry_reverse Cry_Jirachi
 	cry_reverse Cry_Deoxys
 	cry_reverse Cry_Chimecho
+	cry_reverse Cry_Reflection
+	cry_reverse Cry_Lodestar
+	cry_reverse Cry_Perihelion
+	cry_reverse Cry_Lyubov
+	cry_reverse Cry_Multimal
+	cry_reverse Cry_Illumined
+	cry_reverse Cry_Lynx
+	cry_reverse Cry_Bastet
+	cry_reverse Cry_Handshake
+	cry_reverse Cry_Tethering
+	cry_reverse Cry_Coroutine
