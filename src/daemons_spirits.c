@@ -640,10 +640,10 @@ static void Task_SpiritsCrossing(u8 taskId)
             EndCrossing(taskId);
             return;
         }
-        // its own look: streaks, then its friendship's saturation (as the summary draws it), then each tone
+        // its own look: streaks, then its song's saturation (as the summary draws it, T-597), then each tone
         Streaks_MovesOfMon(mon, moves);
         Streaks_ApplyToLoaded(OBJ_PLTT_ID(task->tSlot), species, moves);
-        Saturation_ApplyToLoaded(OBJ_PLTT_ID(task->tSlot), GetMonData(mon, MON_DATA_FRIENDSHIP));
+        Saturation_MonToLoaded(OBJ_PLTT_ID(task->tSlot), mon, species);
         before = task->tCross == CROSS_OUT_OF_GOOD ? SPIRITS_TONE_LIGHT : task->tCross == CROSS_OUT_OF_LOW ? SPIRITS_TONE_DARK : SPIRITS_TONE_NONE;
         after = Spirits_ToneOf(&mon->box);
         for (i = 0; i < 16; i++)

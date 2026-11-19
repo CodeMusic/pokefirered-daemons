@@ -701,7 +701,7 @@ static u8 CreateMonSprite_FieldMove(u16 species, u32 otId, u32 personality, s16 
 
                 Streaks_MovesOfMon(&gPlayerParty[i], moves);
                 Streaks_ApplyToLoaded(OBJ_PLTT_ID(IndexOfSpritePaletteTag(spritePalette->tag)), species, moves);
-                Saturation_ApplyToLoaded(OBJ_PLTT_ID(IndexOfSpritePaletteTag(spritePalette->tag)), GetMonData(&gPlayerParty[i], MON_DATA_FRIENDSHIP));   // T-424
+                Saturation_MonToLoaded(OBJ_PLTT_ID(IndexOfSpritePaletteTag(spritePalette->tag)), &gPlayerParty[i], species);   // T-424, T-597
                 break;
             }
         }

@@ -2353,8 +2353,8 @@ static void LoadDisplayMonGfx(u16 species, u32 personality)
         HandleLoadSpecialPokePic(&gMonFrontPicTable[species], gStorage->tileBuffer, species, personality);
         LZ77UnCompWram(gStorage->displayMonPalette, gStorage->displayMonPalBuffer);
         Streaks_ApplyToBuffer(gStorage->displayMonPalBuffer, species, gStorage->displayMonMoves);
-        if (!gStorage->displayMonIsEgg)     // T-424: its friendship's saturation (an egg's friendship is its steps)
-            Saturation_ApplyToBuffer(gStorage->displayMonPalBuffer, gStorage->displayMonFriendship);
+        if (!gStorage->displayMonIsEgg)     // T-424, T-597: its song's saturation (an egg keeps its colours)
+            Saturation_SongToBuffer(gStorage->displayMonPalBuffer, species, gStorage->displayMonShare);
         if (!gStorage->displayMonIsEgg)     // T-519: and its SPIRITS' tone over it
             Spirits_ToneBuffer(gStorage->displayMonPalBuffer, gStorage->displayMonTone);
         if (gStorage->displayMonIsAway)     // T-358: on the player's device, so drawn paler

@@ -69,7 +69,8 @@ void Feelings_GridCell(const struct DaemonFeelings *f, u8 *col, u8 *row)
 }
 
 // MAD 0 is a cool slate (88, 120, 168), MAD 100 an ember (232, 88, 40); between, the straight line. Then friendship
-// takes its colour toward grey by the rule the daemon's own picture follows (src/daemon_saturation.c).
+// takes its colour toward grey by T-424's curve (src/daemon_saturation.c). T-597: the daemon's picture is now greyed by
+// its song, not its friendship; this dot is a reading of its feelings, so it keeps friendship.
 #define DOT_COOL_R 11
 #define DOT_COOL_G 15
 #define DOT_COOL_B 21

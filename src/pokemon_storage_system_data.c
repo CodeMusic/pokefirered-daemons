@@ -14,6 +14,7 @@
 #include "constants/moves.h"
 #include "constants/songs.h"
 #include "daemon_streaks.h"
+#include "daemon_song.h"   // T-597
 
 static EWRAM_DATA struct Pokemon sMonBeingCarried = {};
 static EWRAM_DATA s8 sCursorArea = 0;
@@ -1043,7 +1044,7 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
     gStorage->displayMonItemId = ITEM_NONE;
     gStorage->displayMonIsAway = FALSE;
     gStorage->displayMonIsLoan = FALSE;
-    gStorage->displayMonFriendship = 0;
+    gStorage->displayMonShare = 0;
     gStorage->displayMonTone = 0;   // T-519
     gender = MON_MALE;
     sanityIsBagEgg = FALSE;
@@ -1071,7 +1072,7 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
             gStorage->displayMonItemId = GetMonData(mon, MON_DATA_HELD_ITEM);
             gStorage->displayMonIsAway = DaemonIsAway(mon);
             gStorage->displayMonIsLoan = DaemonIsLoan(mon);           // T-473
-            gStorage->displayMonFriendship = GetMonData(mon, MON_DATA_FRIENDSHIP);
+            gStorage->displayMonShare = DaemonSong_MonShare(mon);   // T-597
             gStorage->displayMonTone = Spirits_ToneOf(&mon->box);       // T-519
         }
     }
@@ -1100,7 +1101,7 @@ static void SetDisplayMonData(void *pokemon, u8 mode)
             gStorage->displayMonItemId = GetBoxMonData(boxMon, MON_DATA_HELD_ITEM);
             gStorage->displayMonIsAway = DaemonBoxIsAway(boxMon);
             gStorage->displayMonIsLoan = DaemonBoxIsLoan(boxMon);     // T-473
-            gStorage->displayMonFriendship = GetBoxMonData(boxMon, MON_DATA_FRIENDSHIP);
+            gStorage->displayMonShare = DaemonSong_ShareOf(gStorage->displayMonSpecies, GetBoxMonData(boxMon, MON_DATA_EXP));   // T-597
             gStorage->displayMonTone = Spirits_ToneOf(boxMon);          // T-519
         }
     }

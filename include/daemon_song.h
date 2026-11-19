@@ -36,6 +36,11 @@ bool8 DaemonSong_IsHumming(void);
 // The note sounding: a number new with every note, its pitch heard this frame and its true pitch (semitones from middle
 // C), and how near it is to learned (0..255, or -1: learned). FALSE when nothing is sung.
 bool8 DaemonSong_Heard(u16 *serial, s16 *heard, s16 *truePitch, s16 *near);
+// T-597: COLOUR BY SONG. How much of each of its 16 palette slots' colour a form shows at this share of its own part,
+// in 256ths (SONG_COLOUR_KEEP_LOW .. 256; slot 0 and every slot not tied to a note: 256).
+void DaemonSong_ColourKeeps(u16 species, u8 share, u16 *keeps);
+// `later` is a form after `earlier` in its line (its song continues earlier's parts)
+bool8 DaemonSong_Continues(u16 earlier, u16 later);
 #if DAEMONS_DEBUG
 u32 DaemonSong_ExpAtShare(u16 species, u8 share);   // DEBUG -> FOLLOWER: the experience its part is this far at
 #endif

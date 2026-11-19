@@ -1734,7 +1734,7 @@ static u8 EggHatchCreateMonSprite(u8 a0, u8 switchID, u8 pokeID, u16 *speciesLoc
 
             Streaks_MovesOfMon(mon, moves);
             Streaks_ApplyToLoaded(OBJ_PLTT_ID(IndexOfSpritePaletteTag(GetMonSpritePalStruct(mon)->tag)), species, moves);
-            Saturation_ApplyToLoaded(OBJ_PLTT_ID(IndexOfSpritePaletteTag(GetMonSpritePalStruct(mon)->tag)), GetMonData(mon, MON_DATA_FRIENDSHIP));   // T-424: hatched, at 120
+            Saturation_MonToLoaded(OBJ_PLTT_ID(IndexOfSpritePaletteTag(GetMonSpritePalStruct(mon)->tag)), mon, species);   // T-424, T-597: hatched, at its song's start
         }
         *speciesLoc = species;
     }

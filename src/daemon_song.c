@@ -48,6 +48,7 @@ struct DaemonSongPart
 };
 
 #include "data/daemon_songs.h"
+#include "data/daemon_song_colours.h"   // T-597: which notes bring each palette slot's colour in
 
 #define FLICKER      4      // a static note's pitch moves every this many frames
 #define PART_GAP     36     // frames between one part and the next (gensongs: 0.6 s)
@@ -574,3 +575,75 @@ u32 DaemonSong_ExpAtShare(u16 species, u8 share)
     return lo + (hi - lo) * share / 255 + 1;
 }
 #endif
+
+// ------------------------------------------------------------------------------------------------- T-597 its colours
+// COLOUR BY SONG (the user, 2026-11-18; built 2026-11-19, approach A by the user's choice, DRAFT): a daemon's colours
+// come in with the notes of its own part as it learns them. Each palette slot is tied (DAEMONS tools/gencolourbysong.py
+// --write, src/data/daemon_song_colours.h) to the notes of one pitch class -- the accent nearest that note's colour on
+// SYNESTHESIA's wheel -- or to the KEY, every note of the part (the body ramp, a grey accent, the streaks); a slot the
+// form before already had is carried, whole from the first frame, and never greys again. A note's colour closes on it
+// over the same stretch its static does, and a slot keeps SONG_COLOUR_KEEP_LOW (T-424's floor) with nothing learned.
+
+// How much of one note's colour is in, in 256ths: none until SONG_COLOUR_WINDOW before its point, all of it at it.
+static u16 NoteIn(u8 learn, u8 share)
+{
+    if (share >= learn)
+        return 256;
+    if (learn - share >= SONG_COLOUR_WINDOW)
+        return 0;
+    return 256 - (learn - share) * 256 / SONG_COLOUR_WINDOW;
+}
+
+void DaemonSong_ColourKeeps(u16 species, u8 share, u16 *keeps)
+{
+    const struct DaemonSongPart *p;
+    u16 count[13];   // the pitch classes, and [12] the key: every note
+    u32 sum[13];
+    u32 i;
+
+    for (i = 0; i < 16; i++)
+        keeps[i] = 256;
+    if (species >= ARRAY_COUNT(sSongColourTies) || !DaemonSong_Has(species))
+        return;
+    p = &sSongParts[species];
+    for (i = 0; i < 13; i++)
+    {
+        count[i] = 0;
+        sum[i] = 0;
+    }
+    for (i = 0; i < p->noteCount; i++)
+    {
+        const u8 *n = sSongNotes[p->note + i];
+        u16 in = NoteIn(n[2], share);
+
+        count[n[0] % 12]++;
+        sum[n[0] % 12] += in;
+        count[12]++;
+        sum[12] += in;
+    }
+    for (i = 1; i < 16; i++)
+    {
+        u8 tie = (sSongColourTies[species][i / 2] >> ((i & 1) * 4)) & 0xF;
+        u8 c;
+
+        if (tie == 0)
+            continue;
+        c = tie == SONG_COLOUR_KEY ? 12 : tie - 1;
+        if (count[c] == 0)
+            continue;
+        keeps[i] = SONG_COLOUR_KEEP_LOW + (256 - SONG_COLOUR_KEEP_LOW) * sum[c] / (256 * count[c]);
+    }
+}
+
+bool8 DaemonSong_Continues(u16 earlier, u16 later)
+{
+    u32 i;
+
+    for (i = 0; i < MAX_PARTS && DaemonSong_Has(later); i++)
+    {
+        later = sSongParts[later].parent;
+        if (later == earlier)
+            return TRUE;
+    }
+    return FALSE;
+}

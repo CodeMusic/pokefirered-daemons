@@ -4104,10 +4104,9 @@ static void PokeSum_CreateMonPicSprite(void)
         Streaks_MovesOfMon(&sMonSummaryScreen->currentMon, moves);
         Streaks_ApplyToLoaded(OBJ_PLTT_ID(gSprites[spriteId].oam.paletteNum), species, moves);
     }
-    // T-424: its saturation, its friendship's (an egg's friendship counts its steps: an egg keeps its colours)
+    // T-424, T-597: its saturation, its song's (an egg keeps its colours)
     if (species != SPECIES_EGG)
-        Saturation_ApplyToLoaded(OBJ_PLTT_ID(gSprites[spriteId].oam.paletteNum),
-                                 GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_FRIENDSHIP));
+        Saturation_MonToLoaded(OBJ_PLTT_ID(gSprites[spriteId].oam.paletteNum), &sMonSummaryScreen->currentMon, species);
     // T-519: its SPIRITS' tone over that, lighter or darker, never another hue
     if (species != SPECIES_EGG)
         Spirits_ToneLoaded(OBJ_PLTT_ID(gSprites[spriteId].oam.paletteNum), Spirits_ToneOf(&sMonSummaryScreen->currentMon.box));

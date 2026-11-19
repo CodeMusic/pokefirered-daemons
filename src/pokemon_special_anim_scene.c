@@ -681,7 +681,7 @@ void PSA_CreateMonSpriteAtCloseness(u8 closeness)
             Streaks_MovesOfMon(pokemon, moves);
             Streaks_ApplyToBuffer(monPalBuffer, species, moves);
         }
-        Saturation_ApplyToBuffer(monPalBuffer, GetMonData(pokemon, MON_DATA_FRIENDSHIP));   // T-424
+        Saturation_MonToBuffer(monPalBuffer, pokemon, species);   // T-424, T-597
         LoadMonSpriteGraphics(monPicBuffer, monPalBuffer);
         spriteId = CreateSprite(&sSpriteTemplate_MonSprite, 120, scene->monSpriteY1, 4);
         if (spriteId != MAX_SPRITES)

@@ -372,8 +372,8 @@ void BattleLoadOpponentMonSpriteGfx(struct Pokemon *mon, u8 battlerId)
             Streaks_MovesOfBattler(battlerId, moves);
         Streaks_ApplyToBuffer(buffer, species, moves);
     }
-    // T-424: then its saturation, its friendship's -- the daemon's own, PERSPECTIVE-changed or not
-    Saturation_ApplyToBuffer(buffer, GetMonData(mon, MON_DATA_FRIENDSHIP));
+    // T-424, T-597: then its saturation, its song's -- the daemon's own, PERSPECTIVE-changed or not
+    Saturation_MonToBuffer(buffer, mon, species);
     Spirits_ToneBuffer(buffer, Spirits_ToneOf(&mon->box));   // T-519: and its SPIRITS' tone over it
     LoadPalette(buffer, paletteOffset, PLTT_SIZE_4BPP);
     LoadPalette(buffer, BG_PLTT_ID(8) + BG_PLTT_ID(battlerId), PLTT_SIZE_4BPP);
@@ -391,7 +391,7 @@ void BattleLoadOpponentMonSpriteGfx(struct Pokemon *mon, u8 battlerId)
         else
             Streaks_MovesOfBattler(battlerId, moves);
         Streaks_ApplyToCastform(paletteOffset, gBattleMonForms[battlerId], moves);
-        Saturation_ApplyToLoaded(paletteOffset, GetMonData(mon, MON_DATA_FRIENDSHIP));
+        Saturation_MonToLoaded(paletteOffset, mon, species);
     }
     // transform's pink color
     if (gBattleSpritesDataPtr->battlerData[battlerId].transformSpecies != SPECIES_NONE)
@@ -449,8 +449,8 @@ void BattleLoadPlayerMonSpriteGfx(struct Pokemon *mon, u8 battlerId)
             Streaks_MovesOfBattler(battlerId, moves);
         Streaks_ApplyToBuffer(buffer, species, moves);
     }
-    // T-424: then its saturation, its friendship's -- the daemon's own, PERSPECTIVE-changed or not
-    Saturation_ApplyToBuffer(buffer, GetMonData(mon, MON_DATA_FRIENDSHIP));
+    // T-424, T-597: then its saturation, its song's -- the daemon's own, PERSPECTIVE-changed or not
+    Saturation_MonToBuffer(buffer, mon, species);
     Spirits_ToneBuffer(buffer, Spirits_ToneOf(&mon->box));   // T-519: and its SPIRITS' tone over it
     LoadPalette(buffer, paletteOffset, PLTT_SIZE_4BPP);
     LoadPalette(buffer, BG_PLTT_ID(8) + BG_PLTT_ID(battlerId), PLTT_SIZE_4BPP);
@@ -468,7 +468,7 @@ void BattleLoadPlayerMonSpriteGfx(struct Pokemon *mon, u8 battlerId)
         else
             Streaks_MovesOfBattler(battlerId, moves);
         Streaks_ApplyToCastform(paletteOffset, gBattleMonForms[battlerId], moves);
-        Saturation_ApplyToLoaded(paletteOffset, GetMonData(mon, MON_DATA_FRIENDSHIP));
+        Saturation_MonToLoaded(paletteOffset, mon, species);
     }
     // transform's pink color
     if (gBattleSpritesDataPtr->battlerData[battlerId].transformSpecies != SPECIES_NONE)
@@ -798,7 +798,7 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, u8 transformType)
             Streaks_MovesOfMon(&gEnemyParty[gBattlerPartyIndexes[battlerAtk]], moves);
             Streaks_ApplyToBuffer(buffer, targetSpecies, moves);
         }
-        Saturation_ApplyToBuffer(buffer, Saturation_OfBattler(battlerAtk));   // T-424
+        Saturation_MonToBuffer(buffer, Saturation_MonOfBattler(battlerAtk), targetSpecies);   // T-424, T-597
         LoadPalette(buffer, paletteOffset, PLTT_SIZE_4BPP);
         Free(buffer);
         gSprites[gBattlerSpriteIds[battlerAtk]].y = GetBattlerSpriteDefault_Y(battlerAtk);
@@ -818,7 +818,7 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, u8 transformType)
             Streaks_MovesOfBattler(battlerAtk, moves);
             Streaks_ApplyToCastform(paletteOffset, gBattleSpritesDataPtr->animationData->animArg, moves);
         }
-        Saturation_ApplyToLoaded(paletteOffset, Saturation_OfBattler(battlerAtk));   // T-424
+        Saturation_MonToLoaded(paletteOffset, Saturation_MonOfBattler(battlerAtk), SPECIES_CASTFORM);   // T-424, T-597
         gBattleMonForms[battlerAtk] = gBattleSpritesDataPtr->animationData->animArg;
         if (gBattleSpritesDataPtr->battlerData[battlerAtk].transformSpecies != SPECIES_NONE)
         {
@@ -871,8 +871,8 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, u8 transformType)
             Streaks_MovesOfBattler(battlerDef, moves);
             Streaks_ApplyToBuffer(buffer, targetSpecies, moves);
         }
-        // T-424: PERSPECTIVE takes the target's look, at the taker's own friendship
-        Saturation_ApplyToBuffer(buffer, Saturation_OfBattler(battlerAtk));
+        // T-424, T-597: PERSPECTIVE takes the target's look, at the taker's own colour (its body's, by its song)
+        Saturation_MonToBuffer(buffer, Saturation_MonOfBattler(battlerAtk), targetSpecies);
         LoadPalette(buffer, paletteOffset, PLTT_SIZE_4BPP);
         Free(buffer);
         if (targetSpecies == SPECIES_CASTFORM)
@@ -885,7 +885,7 @@ void HandleSpeciesGfxDataChange(u8 battlerAtk, u8 battlerDef, u8 transformType)
                 Streaks_MovesOfBattler(battlerDef, moves);
                 Streaks_ApplyToCastform(paletteOffset, gBattleMonForms[battlerDef], moves);
             }
-            Saturation_ApplyToLoaded(paletteOffset, Saturation_OfBattler(battlerAtk));
+            Saturation_MonToLoaded(paletteOffset, Saturation_MonOfBattler(battlerAtk), targetSpecies);
         }
         BlendPalette(paletteOffset, 16, 6, RGB_WHITE);
         CpuCopy32(&gPlttBufferFaded[paletteOffset], &gPlttBufferUnfaded[paletteOffset], PLTT_SIZE_4BPP);

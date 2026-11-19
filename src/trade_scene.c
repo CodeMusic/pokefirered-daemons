@@ -772,8 +772,8 @@ static void LoadTradeMonPic(u8 whichParty, u8 state)
 
             Streaks_MovesOfMon(mon, moves);
             Streaks_ApplyToLoaded(OBJ_PLTT_ID(IndexOfSpritePaletteTag(GetMonSpritePalStruct(mon)->tag)), species, moves);
-            if (species != SPECIES_EGG)   // T-424
-                Saturation_ApplyToLoaded(OBJ_PLTT_ID(IndexOfSpritePaletteTag(GetMonSpritePalStruct(mon)->tag)), GetMonData(mon, MON_DATA_FRIENDSHIP));
+            if (species != SPECIES_EGG)   // T-424, T-597
+                Saturation_MonToLoaded(OBJ_PLTT_ID(IndexOfSpritePaletteTag(GetMonSpritePalStruct(mon)->tag)), mon, species);
         }
         sTradeAnim->monSpecies[whichParty] = species;
         sTradeAnim->monPersonalities[whichParty] = personality;

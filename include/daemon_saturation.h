@@ -18,7 +18,25 @@ void Saturation_ApplyToBuffer(u16 *palette, u8 friendship);
 void Saturation_ApplyToLoaded(u16 paletteOffset, u8 friendship);
 void Saturation_ApplyToLoadedRange(u16 paletteOffset, u8 first, u8 count, u8 friendship);
 
-// A battler's friendship: its own party daemon's, on whichever side.
-u8 Saturation_OfBattler(u8 battlerId);
+// T-597: COLOUR BY SONG (built 2026-11-19, DRAFT). The key is no longer friendship: each palette slot keeps as much
+// of its colour as the notes of the daemon's own part that bring it in are learned (src/daemon_song.c,
+// DaemonSong_ColourKeeps; the table is DAEMONS tools/gencolourbysong.py's). Friendship still scales over it only for
+// the Corpus's parties and AL's (Saturation_IsStoryParty). The INDEX keeps SATURATION_INDEX above: every daemon grey.
+#define SATURATION_BODY_SLOT 3   // the body ramp's mid tone: the type's own colour (tools/gbasprite.py)
+
+// THE (species, share) ENTRY: a decompressed palette of SPECIES at SHARE of its own part (0..255).
+void Saturation_SongToBuffer(u16 *palette, u16 species, u8 share);
+// A daemon's own: its song share from its experience, and its friendship over that if it is a story party's. SHOWN is
+// the species whose palette it is (its own; a later form of it in the evolution scene; another under PERSPECTIVE).
+void Saturation_MonToBuffer(u16 *palette, struct Pokemon *mon, u16 shown);
+void Saturation_MonToLoaded(u16 paletteOffset, struct Pokemon *mon, u16 shown);
+void Saturation_MonToLoadedRange(u16 paletteOffset, u8 first, u8 count, struct Pokemon *mon, u16 shown);
+// One keep for a palette whose slots are not its picture's (the follower's remapped colours, its emoji): its body's.
+u16 Saturation_MonKeep(struct Pokemon *mon);
+void Saturation_KeepToBuffer(u16 *palette, u16 keep);
+// A battler's own party daemon, on whichever side.
+struct Pokemon *Saturation_MonOfBattler(u8 battlerId);
+// An enemy daemon of the Corpus or of AL, in the trainer battle being fought: friendship still greys it (T-424, T-559).
+bool8 Saturation_IsStoryParty(struct Pokemon *mon);
 
 #endif // GUARD_DAEMON_SATURATION_H

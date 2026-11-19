@@ -57,7 +57,7 @@
 //  follower walked larger than the player's 16x22). A species with no picture there has an icon that already fits,
 //  and walks as its icon's first frame. Its colours are its
 //  TYPE's (src/data/follower_palettes.h, DAEMONS tools/gbafollowerpal.py: the icon's shared palette remapped to the
-//  nearest colours of its front palette, so invariant 5 holds), greyed by friendship with T-424's own curve, lighter or
+//  nearest colours of its front palette, so invariant 5 holds), greyed until sung as its body is (T-597), lighter or
 //  darker by its SPIRITS (T-519, as the summary draws it), then put
 //  in the field's light and weather as every person is. Icons face left; facing right is the same frame flipped. A
 //  1 px hop in the middle of each tile it walks is its step (387 of 396 icons have two identical frames, so the
@@ -112,6 +112,7 @@ static struct
     u8 facing;
     u8 idle;               // frames since it last moved
     u8 friendship;
+    u16 songKeep;          // T-597: its colour, by its song (Saturation_MonKeep): its body's, over the remapped palette
     bool8 scriptHidden;
     bool8 restValid;
     s8 y2;
@@ -343,7 +344,7 @@ static void BuildPalette(u16 *buf)
             if (sFollowerShinySpecies[i] == species)
                 pal = sFollowerShinyPalettes[i];
     CpuCopy16(pal, buf, PLTT_SIZE_4BPP);
-    Saturation_ApplyToBuffer(buf, sFollower.friendship);   // T-424: greyed by friendship
+    Saturation_KeepToBuffer(buf, sFollower.songKeep);      // T-424, T-597: greyed until sung, as its body is
     Spirits_ToneBuffer(buf, sFollower.tone);               // T-519: then lighter or darker by its spirits, as the
                                                            // summary draws it; the hours' gold and shimmer go over this
 }
@@ -455,6 +456,7 @@ static void Spawn(s8 slot, struct Sprite *player, struct ObjectEvent *playerObj)
 
     ReadLead(slot, &sFollower.species, &sFollower.personality, &sFollower.friendship, &sFollower.shiny);
     sFollower.tone = Spirits_ToneOf(&gPlayerParty[slot].box);   // T-519
+    sFollower.songKeep = Saturation_MonKeep(&gPlayerParty[slot]);   // T-597
     sFollower.costume = CostumeFor(slot);   // T-483: in a costume it wears the other daemon's picture and colours
     sFollower.shown = sFollower.costume != SPECIES_NONE ? GetIconSpecies(sFollower.costume, 0) : sFollower.species;
     FreeSpriteTilesByTag(FOLLOWER_TAG);
@@ -521,9 +523,11 @@ static void CheckLead(s8 slot)
         return;
     }
     sFollower.wish = DaemonSong_Wish(&gPlayerParty[slot]);   // T-596: it learned in a battle, or was given experience
-    if (friendship != sFollower.friendship || Spirits_ToneOf(&gPlayerParty[slot].box) != sFollower.tone)   // T-519
+    if (friendship != sFollower.friendship || Spirits_ToneOf(&gPlayerParty[slot].box) != sFollower.tone   // T-519
+     || Saturation_MonKeep(&gPlayerParty[slot]) != sFollower.songKeep)                                 // T-597
     {
         sFollower.friendship = friendship;
+        sFollower.songKeep = Saturation_MonKeep(&gPlayerParty[slot]);
         sFollower.tone = Spirits_ToneOf(&gPlayerParty[slot].box);
         idx = LoadFollowerPalette();
         if (idx != 0xFF)
@@ -1458,7 +1462,7 @@ static u8 LoadEmojiPalette(void)
     if (idx == 0xFF)
         return 0xFF;
     CpuCopy16(sEmojiPal, buf, PLTT_SIZE_4BPP);
-    Saturation_ApplyToBuffer(buf, sFollower.friendship);   // T-424: greyed by friendship, as the follower is
+    Saturation_KeepToBuffer(buf, sFollower.songKeep);      // T-424, T-597: greyed until sung, as the follower is
     LoadPalette(buf, OBJ_PLTT_ID(idx), PLTT_SIZE_4BPP);
     ApplyGlobalFieldPaletteTint(idx);
     UpdateSpritePaletteWithWeather(idx);
