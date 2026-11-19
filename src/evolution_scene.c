@@ -30,6 +30,7 @@
 #include "daemon_streaks.h"
 #include "daemon_saturation.h"
 #include "daemons_three.h"   // T-548: the lean's purple
+#include "daemon_song.h"     // T-595: it sings its part, then changes
 
 extern struct Evolution gEvolutionTable[][EVOS_PER_MON];
 
@@ -629,6 +630,8 @@ enum {
     EVOSTATE_FADE_IN,
     EVOSTATE_INTRO_MSG,
     EVOSTATE_INTRO_MON_ANIM,
+    EVOSTATE_INTRO_SING,      // T-595: its part, sung perfectly, before anything changes
+    EVOSTATE_WAIT_SING,
     EVOSTATE_INTRO_SOUND,
     EVOSTATE_START_MUSIC,
     EVOSTATE_START_BG_AND_SPARKLE_SPIRAL,
@@ -640,6 +643,8 @@ enum {
     EVOSTATE_EVO_SOUND,
     EVOSTATE_RESTORE_SCREEN,
     EVOSTATE_EVO_MON_ANIM,
+    EVOSTATE_ALLUSION,        // T-595: a form that grows on hums the start of its new part, through static
+    EVOSTATE_WAIT_ALLUSION,
     EVOSTATE_SET_MON_EVOLVED,
     EVOSTATE_TRY_LEARN_MOVE,
     EVOSTATE_END,
@@ -728,6 +733,21 @@ static void Task_EvolutionScene(u8 taskId)
             gTasks[taskId].tState++;
         }
         break;
+    //  T-595 (the user, 2026-11-18): "When any daemon evolves in the game you get to hear its song, after it sings its
+    //  song perfectly it then changes into the new form." Its own part, every note learned, after its cry and before
+    //  the music and the light; the cancel rule is vanilla's and unchanged (B, while the sprites cycle). A form with
+    //  no song goes straight on.
+    case EVOSTATE_INTRO_SING:
+        if (IsCryFinished())
+        {
+            DaemonSong_Start(gTasks[taskId].tPreEvoSpecies, SONG_SHARE_WHOLE, SONG_OWN_PART);
+            gTasks[taskId].tState++;
+        }
+        break;
+    case EVOSTATE_WAIT_SING:
+        if (!DaemonSong_IsPlaying())
+            gTasks[taskId].tState++;
+        break;
     case EVOSTATE_INTRO_SOUND:
         if (IsCryFinished()) // wait for animation, play tu du SE
         {
@@ -809,6 +829,21 @@ static void Task_EvolutionScene(u8 taskId)
             PlayCry_Normal(gTasks[taskId].tPostEvoSpecies, 0);
             gTasks[taskId].tState++;
         }
+        break;
+    //  T-595 (lane audio, 2026-11-19: "if there is a next evolution, an allusion that suggests it is still learning
+    //  something new"): the new form, if it grows on again, begins its own part -- its opening, its learning just
+    //  begun, so the first note is half through the static and the rest still in it.
+    case EVOSTATE_ALLUSION:
+        if (IsCryFinished())
+        {
+            if (DaemonSong_GrowsOn(gTasks[taskId].tPostEvoSpecies))
+                DaemonSong_Start(gTasks[taskId].tPostEvoSpecies, 0, SONG_OWN_PART | SONG_ALLUSION);
+            gTasks[taskId].tState++;
+        }
+        break;
+    case EVOSTATE_WAIT_ALLUSION:
+        if (!DaemonSong_IsPlaying())
+            gTasks[taskId].tState++;
         break;
     case EVOSTATE_SET_MON_EVOLVED:
         if (IsCryFinished())
@@ -1095,6 +1130,8 @@ static void Task_EvolutionScene(u8 taskId)
 enum {
     T_EVOSTATE_INTRO_MSG,
     T_EVOSTATE_INTRO_CRY,
+    T_EVOSTATE_INTRO_SING,    // T-595, as EVOSTATE_INTRO_SING
+    T_EVOSTATE_WAIT_SING,
     T_EVOSTATE_INTRO_SOUND,
     T_EVOSTATE_START_MUSIC,
     T_EVOSTATE_START_BG_AND_SPARKLE_SPIRAL,
@@ -1105,6 +1142,8 @@ enum {
     T_EVOSTATE_SPARKLE_SPRAY,
     T_EVOSTATE_EVO_SOUND,
     T_EVOSTATE_EVO_MON_ANIM,
+    T_EVOSTATE_ALLUSION,      // T-595, as EVOSTATE_ALLUSION
+    T_EVOSTATE_WAIT_ALLUSION,
     T_EVOSTATE_SET_MON_EVOLVED,
     T_EVOSTATE_TRY_LEARN_MOVE,
     T_EVOSTATE_END,
@@ -1165,6 +1204,17 @@ static void Task_TradeEvolutionScene(u8 taskId)
             PlayCry_Normal(gTasks[taskId].tPreEvoSpecies, 0);
             gTasks[taskId].tState++;
         }
+        break;
+    case T_EVOSTATE_INTRO_SING:   // T-595, as EVOSTATE_INTRO_SING
+        if (IsCryFinished())
+        {
+            DaemonSong_Start(gTasks[taskId].tPreEvoSpecies, SONG_SHARE_WHOLE, SONG_OWN_PART);
+            gTasks[taskId].tState++;
+        }
+        break;
+    case T_EVOSTATE_WAIT_SING:
+        if (!DaemonSong_IsPlaying())
+            gTasks[taskId].tState++;
         break;
     case T_EVOSTATE_INTRO_SOUND:
         if (IsCryFinished())
@@ -1245,6 +1295,18 @@ static void Task_TradeEvolutionScene(u8 taskId)
             memcpy(&gPlttBufferUnfaded[BG_PLTT_ID(2)], sEvoStructPtr->savedPalette, sizeof(sEvoStructPtr->savedPalette));
             gTasks[taskId].tState++;
         }
+        break;
+    case T_EVOSTATE_ALLUSION:   // T-595, as EVOSTATE_ALLUSION
+        if (IsCryFinished())
+        {
+            if (DaemonSong_GrowsOn(gTasks[taskId].tPostEvoSpecies))
+                DaemonSong_Start(gTasks[taskId].tPostEvoSpecies, 0, SONG_OWN_PART | SONG_ALLUSION);
+            gTasks[taskId].tState++;
+        }
+        break;
+    case T_EVOSTATE_WAIT_ALLUSION:
+        if (!DaemonSong_IsPlaying())
+            gTasks[taskId].tState++;
         break;
     case T_EVOSTATE_SET_MON_EVOLVED:
         if (IsCryFinished())

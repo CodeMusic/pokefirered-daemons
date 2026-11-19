@@ -1052,6 +1052,7 @@ enum
     CURSOR_OPTION_AWAY_SEND,        // T-358 (vision 9.25): ask for it to go to the player's device
     CURSOR_OPTION_AWAY_CALL_HOME,   // T-358: ask for an AWAY one to come home
     CURSOR_OPTION_AWAY_STAY,        // T-358: take back a request the app has not answered yet
+    CURSOR_OPTION_SING,             // T-595: it sings its song as it knows it
     CURSOR_OPTION_FIELD_MOVES,
 };
 
@@ -1082,6 +1083,7 @@ static struct
     [CURSOR_OPTION_AWAY_SEND]                            = {sText_AwayOptionSend,         CursorCB_Away     },
     [CURSOR_OPTION_AWAY_CALL_HOME]                       = {sText_AwayOptionCallHome,     CursorCB_Away     },
     [CURSOR_OPTION_AWAY_STAY]                            = {sText_AwayOptionStay,         CursorCB_Away     },
+    [CURSOR_OPTION_SING]                                 = {sText_SingOption,             CursorCB_Sing     },
     [CURSOR_OPTION_FIELD_MOVES + FIELD_MOVE_FLASH]       = {gMoveNames[MOVE_FLASH],       CursorCB_FieldMove},
     [CURSOR_OPTION_FIELD_MOVES + FIELD_MOVE_CUT]         = {gMoveNames[MOVE_CUT],         CursorCB_FieldMove},
     [CURSOR_OPTION_FIELD_MOVES + FIELD_MOVE_FLY]         = {gMoveNames[MOVE_FLY],         CursorCB_FieldMove},

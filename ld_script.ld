@@ -279,6 +279,7 @@ SECTIONS {
         src/book_reader.o(.text);
         src/reveal.o(.text);
         src/play.o(.text);
+        src/daemon_song.o(.text);
         src/menu2.o(.text);
         src/oak_speech.o(.text);
         src/tm_case.o(.text);
@@ -586,6 +587,7 @@ SECTIONS {
         src/book_reader.o(.rodata);
         src/reveal.o(.rodata);
         src/play.o(.rodata);
+        src/daemon_song.o(.rodata);
         src/menu2.o(.rodata);
         src/oak_speech.o(.rodata);
         src/tm_case.o(.rodata);

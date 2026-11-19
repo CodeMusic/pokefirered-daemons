@@ -1,4 +1,5 @@
 #include "global.h"
+#include "daemon_song.h"   // T-595: SING
 #include "daemons_witching.h"   // T-480
 #include "daemons_feelings.h"   // T-431
 #include "daemons_spirits.h"    // T-519
@@ -428,6 +429,14 @@ COMMON_DATA void (*gItemUseCB)(u8, TaskFunc) = NULL;
 //  the save, does the moving: it marks the daemon AWAY, or brings it home with what it built there. Every word is
 //  DRAFT and the user's to choose (9.25: "the menu's words are the user's to choose").
 static void CursorCB_Away(u8 taskId);
+//  T-595 (the user, 2026-11-18): SING -- it sings its song as it knows it, the notes not yet learned as static closing
+//  on them (src/daemon_song.c); a daemon whose part is perfect and can grow goes on into its evolution, which sings it
+//  whole and then changes. DRAFT, every word.
+static void CursorCB_Sing(u8 taskId);
+static const u8 sText_SingOption[]  = _("SING");
+static const u8 sText_SingKnown[]   = _("{STR_VAR_1} sings its song as\nfar as it knows it.");
+static const u8 sText_SingWhole[]   = _("{STR_VAR_1} sings its song,\nevery note of it.");
+static const u8 sText_SingPerfect[] = _("{STR_VAR_1} knows every note\nof its song now.{PAUSE_UNTIL_PRESS}");
 static void Task_AwayYesNo(u8 taskId);
 static void Task_HandleAwayYesNoInput(u8 taskId);
 static void Task_AwaySave(u8 taskId);
@@ -3109,6 +3118,10 @@ static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
         else if (FlagGet(FLAG_COMPANION_LINKED))
             AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, CURSOR_OPTION_AWAY_SEND);
     }
+    //  T-595: SING, while SWITCH, ITEM and CANCEL still fit after it (the list holds nine; AWAY is already in it)
+    if (!GetMonData(&mons[slotId], MON_DATA_IS_EGG) && DaemonSong_Has(GetMonData(&mons[slotId], MON_DATA_SPECIES))
+        && sPartyMenuInternal->numActions <= ARRAY_COUNT(sPartyMenuInternal->actions) - 4)
+        AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, CURSOR_OPTION_SING);
     if (GetMonData(&mons[1], MON_DATA_SPECIES) != SPECIES_NONE)
         AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, CURSOR_OPTION_SWITCH);
     if (ItemIsMail(GetMonData(&mons[slotId], MON_DATA_HELD_ITEM)))
@@ -6730,4 +6743,43 @@ static void Task_AwaySave(u8 taskId)
     PlaySE(gSaveAttemptStatus == SAVE_STATUS_OK ? SE_SAVE : SE_BOO);
     DisplayPartyMenuMessage(gStringVar4, FALSE);
     gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+}
+
+// ------------------------------------------------------------------------------------------------ T-595: SING
+
+static void Task_PartySinging(u8 taskId)
+{
+    if (!IsPartyMenuTextPrinterActive() && JOY_NEW(B_BUTTON))
+        DaemonSong_Stop();
+    if (!DaemonSong_IsPlaying() && !IsPartyMenuTextPrinterActive())
+        gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+}
+
+static void Task_PartySingThenEvolve(u8 taskId)
+{
+    if (!IsPartyMenuTextPrinterActive())
+        PartyMenuTryEvolution(taskId);
+}
+
+static void CursorCB_Sing(u8 taskId)
+{
+    struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
+    u8 share = DaemonSong_MonShare(mon);
+
+    PlaySE(SE_SELECT);
+    PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[0]);
+    PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[1]);
+    GetMonNickname(mon, gStringVar1);
+    //  Perfect, and it can grow (GetEvolutionTargetSpecies, as a level gained would ask): the evolution sings it
+    if (share == SONG_SHARE_WHOLE && GetEvolutionTargetSpecies(mon, EVO_MODE_NORMAL, ITEM_NONE) != SPECIES_NONE)
+    {
+        StringExpandPlaceholders(gStringVar4, sText_SingPerfect);
+        DisplayPartyMenuMessage(gStringVar4, TRUE);
+        gTasks[taskId].func = Task_PartySingThenEvolve;
+        return;
+    }
+    StringExpandPlaceholders(gStringVar4, share == SONG_SHARE_WHOLE ? sText_SingWhole : sText_SingKnown);
+    DisplayPartyMenuMessage(gStringVar4, TRUE);
+    DaemonSong_Start(GetMonData(mon, MON_DATA_SPECIES), share, SONG_LINE);
+    gTasks[taskId].func = Task_PartySinging;
 }

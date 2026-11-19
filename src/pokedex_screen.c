@@ -1,4 +1,5 @@
 #include "global.h"
+#include "daemon_song.h"   // T-595
 #include "daemon_saturation.h"
 #include "book_reader.h"
 #include "daemons_seasons.h"   // T-532: a MUSAI's page in its season
@@ -1004,6 +1005,7 @@ bool8 DoClosePokedex(void)
             UpdatePaletteFade();
         return FALSE;
     case 2:
+        DaemonSong_Stop();   // T-595: a song does not follow the player out of the INDEX
         FREE_IF_NOT_NULL(sPokedexScreenData->listItems);
         FREE_IF_NOT_NULL(sPokedexScreenData);
         FreeAllWindowBuffers();
@@ -4204,10 +4206,12 @@ static u8 DexScreen_PageNumberToRenderablePages(u16 page)
     return count + 1;
 }
 
+//  T-595: START is SONG -- a held daemon of the species sings its song as it knows it, a form nobody holds is sung
+//  whole; START again stops it (src/daemon_song.c). A species with no song still cries.
 void DexScreen_InputHandler_StartToCry(void)
 {
     if (JOY_NEW(START_BUTTON))
-        PlayCry_NormalNoDucking(sPokedexScreenData->dexSpecies, 0, CRY_VOLUME_RS, CRY_PRIORITY_NORMAL);
+        DaemonSong_PlayForIndex(sPokedexScreenData->dexSpecies);
 }
 
 //  T-179, L = READ. The same page the game shows when a new daemon registers, WITHOUT registering it:

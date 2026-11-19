@@ -96,10 +96,11 @@ const u8 gText_WT[] = _("WT");
 const u8 gText_PokedexQuotationMark[] = _("”"); // Unused
 const u8 gText_Lbs[] = _("lbs.");
 const u8 gTextJP_PokemonData[] = _("ポケモンデ-タ");
-const u8 gText_Cry[] = _("{START_BUTTON}CRY");
-const u8 gText_CryFamily[] = _("{START_BUTTON}CRY {R_BUTTON}FAMILY");   // T-202, DRAFT wording
-const u8 gText_CryMore[] = _("{START_BUTTON}CRY {L_BUTTON}MORE");                        // T-189, DRAFT wording
-const u8 gText_CryMoreFamily[] = _("{START_BUTTON}CRY {L_BUTTON}MORE {R_BUTTON}FAMILY");
+//  T-595: START sings the daemon's SONG where it played its cry (the cry still plays as the page opens). DRAFT word.
+const u8 gText_Cry[] = _("{START_BUTTON}SONG");
+const u8 gText_CryFamily[] = _("{START_BUTTON}SONG {R_BUTTON}FAMILY");   // T-202, DRAFT wording
+const u8 gText_CryMore[] = _("{START_BUTTON}SONG {L_BUTTON}MORE");                        // T-189, DRAFT wording
+const u8 gText_CryMoreFamily[] = _("{START_BUTTON}SONG {L_BUTTON}MORE {R_BUTTON}FAMILY");
 const u8 gText_More[] = _("{L_BUTTON}MORE");
 const u8 gText_MoreFamily[] = _("{L_BUTTON}MORE {R_BUTTON}FAMILY");
 const u8 gText_WorkingsUnseen[] = _("?????");
