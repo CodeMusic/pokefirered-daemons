@@ -35,6 +35,12 @@ u8 Follower_HumPaletteSlot(void);
 void Follower_AfterBattle(void);
 void Follower_BufferSinger(void);
 void Follower_SingAsked(void);
+// T-598: PLAY A DAEMON'S SONG AND IT COMES -- the summon's specials (EventScript_DaemonSummoned, data/scripts/follower.inc).
+// Arrive: VAR_0x8004's daemon appears near the player in its own colours, turns to them and sings its own part whole,
+// its notes rising (waitstate; B cuts the song short); VAR_RESULT TRUE with its QUOTATION in gStringVar4, if it has one.
+// Leave: it walks away from the player and flickers out (waitstate). A sprite, as the follower is: no object slot.
+void Follower_SummonArrive(void);
+void Follower_SummonLeave(void);
 #if DAEMONS_DEBUG
 void Follower_DebugNearSong(void);
 void Follower_DebugAskToSing(void);

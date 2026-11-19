@@ -1,6 +1,7 @@
 #include "global.h"
 #include "daemons_feelings.h"   // T-433
 #include "daemons_aurora.h"     // T-528 (f): the conjugate light, under which the SONGBOOK has its DUET
+#include "daemon_song.h"        // T-598: a daemon's opening, played, and it comes (DaemonSong_Listen)
 #include "gflib.h"
 #include "event_object_lock.h"
 #include "event_data.h"
@@ -1123,6 +1124,7 @@ static bool8 Listen(u8 taskId)
     struct Play *play = GetPlay(taskId);
     const struct PlaySong *tune;
     const s8 *tail;
+    const u8 *script;
     u8 song, i, shift;
     bool8 same;
 
@@ -1150,6 +1152,8 @@ static bool8 Listen(u8 taskId)
         Teardown(taskId, play->target == TARGET_FIR ? EventScript_Play_FirAlmost : EventScript_Play_Almost);
         return TRUE;
     }
+    script = DaemonSong_Listen(play->key, play->ring, play->ringCount);   // T-598: a daemon's opening, and it comes
+    if (script != NULL) { Teardown(taskId, script); return TRUE; }
     return FALSE;
 }
 

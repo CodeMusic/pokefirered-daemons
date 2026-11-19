@@ -29,6 +29,10 @@
 #include "task.h"
 #include "constants/sound.h"
 #include "constants/species.h"
+#include "daemons_first_seen.h"   // T-598: the SUMMONED bits
+#include "event_data.h"
+#include "event_scripts.h"
+#include "pokedex.h"
 
 extern const struct Evolution gEvolutionTable[][EVOS_PER_MON];
 
@@ -49,6 +53,18 @@ struct DaemonSongPart
 
 #include "data/daemon_songs.h"
 #include "data/daemon_song_colours.h"   // T-597: which notes bring each palette slot's colour in
+
+// T-598: an opening PLAY's freestyle listens for (DAEMONS tools/gensongs.py --write, src/data/daemon_summons.h)
+struct DaemonSummon
+{
+    u16 species;
+    u16 at;          // its first note in sSummonNotes
+    u8 count;
+    u8 wheel;        // the KEY WHEEL it is played on: its tonic, or a minor song's relative major's
+};
+
+#include "data/daemon_summons.h"
+#include "data/text/daemon_quotations.h"   // T-599's QUOTATIONS (a stub of NULLs until it lands)
 
 #define FLICKER      4      // a static note's pitch moves every this many frames
 #define PART_GAP     36     // frames between one part and the next (gensongs: 0.6 s)
@@ -646,4 +662,57 @@ bool8 DaemonSong_Continues(u16 earlier, u16 later)
             return TRUE;
     }
     return FALSE;
+}
+
+// --------------------------------------------------------------------------------- T-598: play its song and it comes
+// The user (2026-11-18): "if you select to play your musical instrument in freestyle mode, if u select the right key and
+// play a daemons song it should be recognized, I imagine it would summon that daemon -- but it shouldnt be a way to
+// catch it ... he should read you a special quotation". PLAY's Listen (play.c) asks after every note, once its own
+// SONGBOOK has not matched: does what was played END with a daemon's OPENING (sSummons: the first notes of its own part,
+// lengthened where two would be confused), octave-blind, on its key's wheel -- a minor song on its relative major's (the
+// user, 2026-11-19)? A note the wheel cannot play is SUMMON_ANY: any button stands for it. Only a daemon the INDEX has
+// SEEN comes, so nothing is spoiled. It comes, sings, says its QUOTATION (none until T-599), and goes -- never caught,
+// never a battle (EventScript_DaemonSummoned, daemons_follower.c's summon). DRAFT.
+const u8 *DaemonSong_Listen(u8 key, const s8 *ring, u8 count)
+{
+    const struct DaemonSummon *s;
+    const s8 *tail;
+    u16 i, national;
+    u8 j, tonic, want;
+
+    for (i = 0; i < ARRAY_COUNT(sSummons); i++)
+    {
+        s = &sSummons[i];
+        if (s->wheel != key || s->count > count)
+            continue;
+        tonic = sSongParts[s->species].tonic;
+        tail = ring + count - s->count;
+        for (j = 0; j < s->count; j++)
+        {
+            want = sSummonNotes[s->at + j];
+            if (want != SUMMON_ANY && (tail[j] + 24) % 12 != (tonic + want) % 12)
+                break;
+        }
+        if (j < s->count)
+            continue;
+        national = SpeciesToNationalPokedexNum(s->species);
+        if (!GetSetPokedexFlag(national, FLAG_GET_SEEN))
+            return NULL;   // the openings are unique: nothing else ends here
+        DaemonsSummoned_Set(national);
+        gSpecialVar_0x8004 = s->species;
+        return EventScript_DaemonSummoned;
+    }
+    return NULL;
+}
+
+const u8 *DaemonSong_Quotation(u16 species)
+{
+    return species < ARRAY_COUNT(sDaemonQuotations) ? sDaemonQuotations[species] : NULL;
+}
+
+const u8 *DaemonSong_IndexQuotation(u16 species)
+{
+    if (!DaemonsSummoned_Get(SpeciesToNationalPokedexNum(species)))
+        return NULL;
+    return DaemonSong_Quotation(species);
 }

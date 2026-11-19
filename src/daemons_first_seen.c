@@ -22,6 +22,7 @@ static void FirstSeenClaim(void)
         return;
     memset(gSaveBlock1Ptr->daemonsFirstSeen, 0, sizeof(gSaveBlock1Ptr->daemonsFirstSeen));
     memset(gSaveBlock1Ptr->daemonsDreamDays, 0, sizeof(gSaveBlock1Ptr->daemonsDreamDays));   // T-591
+    memset(gSaveBlock1Ptr->daemonsSummoned, 0, sizeof(gSaveBlock1Ptr->daemonsSummoned));     // T-598
     memset(gSaveBlock1Ptr->questLogFreed, 0, sizeof(gSaveBlock1Ptr->questLogFreed));
     gSaveBlock1Ptr->daemonsFirstSeenMagic = FIRST_SEEN_MAGIC;
 }
@@ -134,4 +135,21 @@ u8 DaemonsDreamDay_Get(u16 flag)
     if (flag < FLAG_DREAM_LOG_CAIRN || slot >= DAEMONS_DREAM_DAYS_COUNT || !FirstSeenIsOurs())
         return 0;
     return gSaveBlock1Ptr->daemonsDreamDays[slot];
+}
+
+//  T-598: a daemon that came to its song (PLAY's freestyle, DaemonSong_Listen) -- a bit by national number in the same
+//  bytes the recap freed, under the same magic. A save from before this build reads every bit clear.
+void DaemonsSummoned_Set(u16 nationalNum)
+{
+    if (nationalNum == 0 || nationalNum > DAEMONS_SUMMONED_BYTES * 8)
+        return;
+    FirstSeenClaim();
+    gSaveBlock1Ptr->daemonsSummoned[(nationalNum - 1) / 8] |= 1 << ((nationalNum - 1) % 8);
+}
+
+bool8 DaemonsSummoned_Get(u16 nationalNum)
+{
+    if (nationalNum == 0 || nationalNum > DAEMONS_SUMMONED_BYTES * 8 || !FirstSeenIsOurs())
+        return FALSE;
+    return (gSaveBlock1Ptr->daemonsSummoned[(nationalNum - 1) / 8] >> ((nationalNum - 1) % 8)) & 1;
 }

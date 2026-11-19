@@ -41,6 +41,13 @@ bool8 DaemonSong_Heard(u16 *serial, s16 *heard, s16 *truePitch, s16 *near);
 void DaemonSong_ColourKeeps(u16 species, u8 share, u16 *keeps);
 // `later` is a form after `earlier` in its line (its song continues earlier's parts)
 bool8 DaemonSong_Continues(u16 earlier, u16 later);
+// T-598: PLAY A DAEMON'S SONG AND IT COMES. After every note in PLAY (play.c's Listen, once no SONGBOOK song matched):
+// KEY the wheel's key (0 C .. 11 B), RING the last COUNT notes played (semitones from middle C, oldest first). The
+// summon's script when they end with the opening of a daemon the INDEX has seen (VAR_0x8004 its species, its SUMMONED
+// bit set), else NULL.
+const u8 *DaemonSong_Listen(u8 key, const s8 *ring, u8 count);
+const u8 *DaemonSong_Quotation(u16 species);        // T-599's QUOTATION, or NULL (every one, until it lands)
+const u8 *DaemonSong_IndexQuotation(u16 species);   // ...only once it has come to its song: the INDEX's
 #if DAEMONS_DEBUG
 u32 DaemonSong_ExpAtShare(u16 species, u8 share);   // DEBUG -> FOLLOWER: the experience its part is this far at
 #endif

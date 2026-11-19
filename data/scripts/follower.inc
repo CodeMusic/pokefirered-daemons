@@ -180,3 +180,23 @@ EventScript_FollowerWantsToSingEnd:
 
 Follower_Text_WantsToSing::
 	.string "{STR_VAR_1} wants to sing.$"
+
+@ T-598: PLAY A DAEMON'S SONG AND IT COMES (the user, 2026-11-18). Its opening played in PLAY's freestyle, on its key's
+@ wheel (src/daemon_song.c, DaemonSong_Listen; VAR_0x8004 its species): it appears near the player, turns to them and
+@ sings its own part whole, says its QUOTATION (T-599's; none yet, so nothing is said) and goes. Never caught, never a
+@ battle. The field is already held when this runs (PLAY's Teardown); it is let go at the end. No words of its own.
+EventScript_DaemonSummoned::
+	lockall
+	special Follower_SummonArrive
+	waitstate
+	goto_if_eq VAR_RESULT, FALSE, EventScript_DaemonSummonedGoes
+	copyvar VAR_PREV_TEXT_COLOR, VAR_TEXT_COLOR
+	textcolor NPC_TEXT_COLOR_MON
+	msgbox gStringVar4
+	closemessage
+	copyvar VAR_TEXT_COLOR, VAR_PREV_TEXT_COLOR
+EventScript_DaemonSummonedGoes:
+	special Follower_SummonLeave
+	waitstate
+	releaseall
+	end

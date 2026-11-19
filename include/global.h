@@ -808,7 +808,10 @@ struct SaveBlock1
     //  T-591: the weekday each dream in the DREAM LOG came on, + 1 (0: not recorded), by its flag from
     //  FLAG_DREAM_LOG_CAIRN -- carved from the front of what the recap freed, under the same magic.
     /*0x283C*/ u8 daemonsDreamDays[DAEMONS_DREAM_DAYS_COUNT];
-    /*0x287C*/ u8 questLogFreed[sizeof(struct QuestLogScene) * (QUEST_LOG_SCENE_COUNT_VANILLA - QUEST_LOG_SCENE_COUNT) - 4 - DAEMONS_FIRST_SEEN_COUNT - DAEMONS_DREAM_DAYS_COUNT];
+    //  T-598: the daemons that came to their song played in PLAY's freestyle -- a bit by national number, bit
+    //  (n - 1) % 8 of byte (n - 1) / 8; the INDEX shows such a daemon's QUOTATION. Carved next, under the same magic.
+    /*0x287C*/ u8 daemonsSummoned[DAEMONS_SUMMONED_BYTES];
+    /*0x28BC*/ u8 questLogFreed[sizeof(struct QuestLogScene) * (QUEST_LOG_SCENE_COUNT_VANILLA - QUEST_LOG_SCENE_COUNT) - 4 - DAEMONS_FIRST_SEEN_COUNT - DAEMONS_DREAM_DAYS_COUNT - DAEMONS_SUMMONED_BYTES];
     /*0x2CA0*/ u16 easyChatProfile[EASY_CHAT_BATTLE_WORDS_COUNT];
     /*0x2CAC*/ u16 easyChatBattleStart[EASY_CHAT_BATTLE_WORDS_COUNT];
     /*0x2CB8*/ u16 easyChatBattleWon[EASY_CHAT_BATTLE_WORDS_COUNT];

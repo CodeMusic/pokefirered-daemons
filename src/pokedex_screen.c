@@ -2000,6 +2000,9 @@ static void DexScreen_LoadEntryPalette(u16 species);                      // def
 #define OPUS_LEVELS_CARRIED   5
 
 static EWRAM_DATA bool8 sMarginShown = FALSE;
+//  T-598: the page's other side may hold a QUOTATION too -- a daemon that came to its song in PLAY's freestyle says one
+//  (T-599's words), and the INDEX keeps it. SELECT turns the entry to the margin, then the quotation, then back.
+static EWRAM_DATA bool8 sQuoteShown = FALSE;
 //  T-202: R on an entry opens the page its family is on. Only an entry reached from the numbered list
 //  offers it -- one reached from a category page came FROM that page, and B already goes back there.
 static EWRAM_DATA bool8 sFamilyButton = FALSE;
@@ -2390,7 +2393,28 @@ static void DexScreen_DrawMarginOrEntry(u16 species)
     if (sWorkingsPage != 0)
     {
         sMarginShown = FALSE;
+        sQuoteShown = FALSE;
         DexScreen_DrawWorkings(species);
+    }
+    else if (sQuoteShown && DaemonSong_IndexQuotation(species) != NULL)
+    {
+        //  T-598: the quotation, set as the margin is -- centred, the entry's letterSpacing and colours
+        const u8 *text = DaemonSong_IndexQuotation(species);
+        struct TextPrinterTemplate printerTemplate;
+
+        sMarginShown = FALSE;
+        printerTemplate.currentChar = text;
+        printerTemplate.windowId = sPokedexScreenData->windowIds[2];
+        printerTemplate.fontId = FONT_NORMAL;
+        printerTemplate.letterSpacing = 1;
+        printerTemplate.lineSpacing = 0;
+        printerTemplate.unk = 0;
+        printerTemplate.fgColor = 1;
+        printerTemplate.bgColor = 0;
+        printerTemplate.shadowColor = 2;
+        printerTemplate.x = printerTemplate.currentX = (240 - GetStringWidth(FONT_NORMAL, text, 0)) / 2;
+        printerTemplate.y = printerTemplate.currentY = 8;
+        AddTextPrinter(&printerTemplate, 0, NULL);
     }
     else if (sMarginShown && state != OPUS_MARGIN_NONE)
     {
@@ -2421,9 +2445,39 @@ static void DexScreen_DrawMarginOrEntry(u16 species)
     else
     {
         sMarginShown = FALSE;
+        sQuoteShown = FALSE;
         DexScreen_PrintMonFlavorText(sPokedexScreenData->windowIds[2], species, 0, 8);
     }
     CopyWindowToVram(sPokedexScreenData->windowIds[2], COPYWIN_GFX);
+}
+
+//  T-598: the page has another side -- OPUS's margin, or a QUOTATION (DaemonSong_IndexQuotation)
+static bool8 DexScreen_HasOtherSide(u16 species)
+{
+    return OpusMarginState(species) != OPUS_MARGIN_NONE || DaemonSong_IndexQuotation(species) != NULL;
+}
+
+//  T-598: SELECT's next side: the entry, the margin (if any), the quotation (if any), the entry again
+static void DexScreen_TurnOver(u16 species)
+{
+    if (sQuoteShown)
+    {
+        sQuoteShown = FALSE;
+        sMarginShown = FALSE;
+    }
+    else if (sMarginShown)
+    {
+        sMarginShown = FALSE;
+        sQuoteShown = DaemonSong_IndexQuotation(species) != NULL;
+    }
+    else if (OpusMarginState(species) != OPUS_MARGIN_NONE)
+    {
+        sMarginShown = TRUE;
+    }
+    else
+    {
+        sQuoteShown = DaemonSong_IndexQuotation(species) != NULL;
+    }
 }
 
 //  SELECT turns the page to the margin and back; L to the workings, page by page, and back. Every entry page that
@@ -2431,10 +2485,15 @@ static void DexScreen_DrawMarginOrEntry(u16 species)
 //  control row offered the MARGIN (found building T-189).
 static bool8 DexScreen_TurnPage(u16 species)
 {
-    if (JOY_NEW(SELECT_BUTTON) && OpusMarginState(species) != OPUS_MARGIN_NONE)
+    if (JOY_NEW(SELECT_BUTTON) && DexScreen_HasOtherSide(species))
     {
         PlaySE(SE_SELECT);
-        sMarginShown = sWorkingsPage != 0 ? TRUE : !sMarginShown;
+        if (sWorkingsPage != 0)
+        {
+            sMarginShown = FALSE;   // from the workings, the first side after the entry
+            sQuoteShown = FALSE;
+        }
+        DexScreen_TurnOver(species);
         sWorkingsPage = 0;
         DexScreen_DrawMarginOrEntry(species);
         return TRUE;
@@ -3672,6 +3731,7 @@ static u8 DexScreen_DrawMonDexPage(bool8 justRegistered)
 
     // Dex entry
     sMarginShown = FALSE;
+    sQuoteShown = FALSE;
     sWorkingsPage = 0;
     DexScreen_DrawMarginOrEntry(sPokedexScreenData->dexSpecies);
     PutWindowTilemap(sPokedexScreenData->windowIds[2]);
@@ -3679,13 +3739,14 @@ static u8 DexScreen_DrawMonDexPage(bool8 justRegistered)
 
     // Control info
     sMarginShown = FALSE;               // T-197: a page opens face up
+    sQuoteShown = FALSE;
     FillWindowPixelBuffer(1, PIXEL_FILL(15));
     if (justRegistered == FALSE)
     {
         //  T-189: L is offered only where it does something -- a daemon you have bound. With L, R and a margin all
         //  on offer the row is wider than the screen, so it is measured: the fullest pair that fits wins, dropping
         //  {B}CANCEL first (B is back everywhere) and CRY next (the cry has already played).
-        bool8 margin = OpusMarginState(sPokedexScreenData->dexSpecies) != OPUS_MARGIN_NONE;
+        bool8 margin = DexScreen_HasOtherSide(sPokedexScreenData->dexSpecies);   // T-598: or a quotation
         const u8 *left = sFamilyButton ? gText_CryFamily : gText_Cry;
         const u8 *right = margin ? gText_MarginNextDataCancel : gText_NextDataCancel;
 
@@ -3710,7 +3771,7 @@ static u8 DexScreen_DrawMonDexPage(bool8 justRegistered)
         //  Just registered -- and the same page L = READ opens mid-fight (T-179), so the margin has to be
         //  reachable from there as well. The user asked for it from the battle and was right: the Index is
         //  the Index whichever door you came in by.
-        DexScreen_PrintControlInfo(OpusMarginState(sPokedexScreenData->dexSpecies) != OPUS_MARGIN_NONE
+        DexScreen_PrintControlInfo(DexScreen_HasOtherSide(sPokedexScreenData->dexSpecies)
                                    ? gText_MarginNext : gText_Next);
     PutWindowTilemap(1);
     CopyWindowToVram(1, COPYWIN_GFX);
@@ -4346,10 +4407,10 @@ static void Task_DexScreen_RegisterMonToPokedex(u8 taskId)
         }
         break;
     case 11:
-        if (JOY_NEW(SELECT_BUTTON) && OpusMarginState(sPokedexScreenData->dexSpecies) != OPUS_MARGIN_NONE)
+        if (JOY_NEW(SELECT_BUTTON) && DexScreen_HasOtherSide(sPokedexScreenData->dexSpecies))
         {
             PlaySE(SE_SELECT);
-            sMarginShown = !sMarginShown;
+            DexScreen_TurnOver(sPokedexScreenData->dexSpecies);   // T-598: the margin, then a quotation
             DexScreen_DrawMarginOrEntry(sPokedexScreenData->dexSpecies);
         }
         else if (JOY_NEW(A_BUTTON | B_BUTTON))

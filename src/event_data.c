@@ -320,6 +320,9 @@ STATIC_ASSERT(offsetof(struct SaveBlock1, daemonsFirstSeenMagic) == 0x2638, Daem
 STATIC_ASSERT(offsetof(struct SaveBlock1, daemonsFirstSeen) == 0x263C, DaemonsFirstSeenAtItsOffset);
 STATIC_ASSERT(offsetof(struct SaveBlock1, easyChatProfile) == 0x2CA0, DaemonsFirstSeenMovedNothing);
 STATIC_ASSERT(NATIONAL_DEX_COUNT <= DAEMONS_FIRST_SEEN_COUNT, DaemonsFirstSeenHoldsEveryDaemon);
+//  T-598: the SUMMONED bits came out of the recap's freed bytes after the dream days, and nothing after them moved.
+STATIC_ASSERT(offsetof(struct SaveBlock1, daemonsSummoned) == 0x287C, DaemonsSummonedAfterTheDreamDays);
+STATIC_ASSERT(NATIONAL_DEX_COUNT <= DAEMONS_SUMMONED_BYTES * 8, DaemonsSummonedHoldsEveryDaemon);
 
 u8 *GetFlagAddr(u16 idx)
 {

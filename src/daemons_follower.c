@@ -447,7 +447,7 @@ static const u8 *FollowerPic(u16 species)
     return GetMonIconTiles(species, FALSE);
 }
 
-static void FindMouth(const u8 *pic);   // T-596
+static void FindMouth(const u8 *pic, s8 *mouthX, s8 *mouthY);   // T-596 (T-598: and the summoned)
 
 static void Spawn(s8 slot, struct Sprite *player, struct ObjectEvent *playerObj)
 {
@@ -493,7 +493,7 @@ static void Spawn(s8 slot, struct Sprite *player, struct ObjectEvent *playerObj)
     sFollower.grassX = sFollower.grassY = -1;
     sFollower.pondRings = 0;             // T-577: a menu or a battle took its rings down
     sFollower.senseWait = SENSE_FIRST;   // T-459: a moment in a new place (or back from a battle) before it notices
-    FindMouth(sheet.data);               // T-596
+    FindMouth(sheet.data, &sFollower.mouthX, &sFollower.mouthY);   // T-596
     sFollower.wish = DaemonSong_Wish(&gPlayerParty[slot]);
     if (sFollower.humWait < HUM_FIRST)
         sFollower.humWait = HUM_FIRST;   // and before it hums
@@ -1706,7 +1706,7 @@ static EWRAM_DATA u8 sDebugAskDelay = 0; // DEBUG's ask waits this many free fra
 
 //  Its mouth: the top of its picture is its head; the leftmost pixel of the head's band (the lowest such row on a
 //  tie, so a beak's tip and not the brow above it) is where its mouth is, facing left. 32x32 at 4bpp, tiles row-major.
-static void FindMouth(const u8 *pic)
+static void FindMouth(const u8 *pic, s8 *mouthX, s8 *mouthY)
 {
     s16 x, y, top = -1, bestX = 32, bestY = 12;
 
@@ -1731,8 +1731,8 @@ static void FindMouth(const u8 *pic)
     }
     if (top < 0)
         bestX = 8;
-    sFollower.mouthX = bestX - 16;
-    sFollower.mouthY = bestY + 1 - 16;   // just under the snout's edge
+    *mouthX = bestX - 16;
+    *mouthY = bestY + 1 - 16;   // just under the snout's edge
 }
 
 static u8 FreeSpritePaletteSlots(void)
@@ -1859,17 +1859,17 @@ static void SpriteCB_HumNote(struct Sprite *sprite)
     }
 }
 
-//  A note from its mouth, for the note just begun.
-static void HumNoteFrom(struct Sprite *follower, s16 truePitch, s16 near, u16 serial)
+//  A note from its mouth, for the note just begun (the follower's, or T-598's summoned daemon's).
+static void HumNoteFrom(struct Sprite *follower, u8 facing, s8 mouthX, s8 mouthY, s16 truePitch, s16 near, u16 serial)
 {
     u8 spriteId;
-    s16 dir = sFollower.facing == DIR_EAST ? 1 : -1;
+    s16 dir = facing == DIR_EAST ? 1 : -1;
     s16 x, y;
 
     if (LoadHumPalette() == 0xFF)
         return;
-    x = follower->x + (dir > 0 ? -sFollower.mouthX - 1 : sFollower.mouthX) + dir * 3;
-    y = follower->y + follower->y2 + sFollower.mouthY - 3;
+    x = follower->x + (dir > 0 ? -mouthX - 1 : mouthX) + dir * 3;
+    y = follower->y + follower->y2 + mouthY - 3;
     spriteId = CreateSprite(&sHumNoteTemplate, x, y, 1);
     if (spriteId == MAX_SPRITES)
         return;
@@ -1905,7 +1905,7 @@ static void DrawHeard(struct Sprite *follower)
         return;
     sFollower.heardSerial = serial;
     if (!follower->invisible)
-        HumNoteFrom(follower, truePitch, near, serial);
+        HumNoteFrom(follower, sFollower.facing, sFollower.mouthX, sFollower.mouthY, truePitch, near, serial);
 }
 
 static bool8 MayHum(struct Sprite *sprite)
@@ -2084,3 +2084,263 @@ void Follower_DebugAskToSing(void)
     sDebugAskDelay = 180;
 }
 #endif
+
+//  ------------------------------------------------------------------- T-598: a daemon that comes to its song
+//  PLAY's freestyle heard a daemon's opening (DaemonSong_Listen) and EventScript_DaemonSummoned runs. It is drawn as the
+//  follower is -- its own picture, its own colours, whole (it knows its own part), a sprite and not an object -- and is
+//  never anything the player can catch or fight. It appears two tiles off (ahead first, then either side, then behind:
+//  ground the player could stand on, nobody there, not the follower's tile; one tile off if two will not do), flickering
+//  in, turns to the player and sings its own part whole, its notes rising from its mouth as the follower's do. Then the
+//  script says its QUOTATION, if it has one, and it walks on away from the player, flickering out. DRAFT.
+#define SUMMON_TAG    0x541C   // its picture and its palette, only while it is here
+#define SUMMON_FADE   48       // frames it flickers in, and out
+#define SUMMON_LOOK   20       // frames it looks at the player before it sings, and after
+#define SUMMON_HOP    6        // frames it lifts a pixel at each note
+
+static EWRAM_DATA struct
+{
+    u16 species;
+    u16 heardSerial;
+    u8 spriteId;
+    u8 facing;
+    s8 dx, dy;                 // where it stands, in tiles from the player (and the way it leaves)
+    s8 mouthX, mouthY;
+} sSummon = {0};
+
+static const struct SpriteTemplate sSpriteTemplate_Summon = {
+    .tileTag = SUMMON_TAG,
+    .paletteTag = SUMMON_TAG,
+    .oam = &sOam_Follower,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_Follower,
+};
+
+static bool8 SummonMayStand(s16 x, s16 y)
+{
+    s32 i;
+
+    if (MapGridGetCollisionAt(x, y) || MetatileBehavior_IsSurfable(MapGridGetMetatileBehaviorAt(x, y)))
+        return FALSE;
+    if (sFollower.spriteId != MAX_SPRITES && IsOurs() && !gSprites[sFollower.spriteId].invisible
+     && x == sFollower.tileX && y == sFollower.tileY)
+        return FALSE;
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
+        if (gObjectEvents[i].active && !gObjectEvents[i].invisible
+         && gObjectEvents[i].currentCoords.x == x && gObjectEvents[i].currentCoords.y == y)
+            return FALSE;
+    return TRUE;
+}
+
+//  Where it appears: TRUE with sSummon.dx, dy set
+static bool8 SummonFindPlace(struct ObjectEvent *playerObj)
+{
+    static const s8 sDirX[] = {0, 0, 0, -1, 1}, sDirY[] = {0, 1, -1, 0, 0};   // DIR_SOUTH, NORTH, WEST, EAST
+    u8 order[4], dist, i, d;
+    s16 px = playerObj->currentCoords.x, py = playerObj->currentCoords.y;
+
+    d = playerObj->facingDirection;
+    if (d < DIR_SOUTH || d > DIR_EAST)
+        d = DIR_SOUTH;
+    order[0] = d;                                                       // ahead
+    order[1] = (d == DIR_SOUTH || d == DIR_NORTH) ? DIR_WEST : DIR_NORTH;   // either side
+    order[2] = (d == DIR_SOUTH || d == DIR_NORTH) ? DIR_EAST : DIR_SOUTH;
+    order[3] = GetOppositeDirection(d);                                 // behind
+    for (dist = 2; dist >= 1; dist--)
+    {
+        for (i = 0; i < 4; i++)
+        {
+            s8 ux = sDirX[order[i]], uy = sDirY[order[i]];
+
+            if (!SummonMayStand(px + ux * dist, py + uy * dist) || (dist == 2 && !SummonMayStand(px + ux, py + uy)))
+                continue;
+            sSummon.dx = ux * dist;
+            sSummon.dy = uy * dist;
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+static void SummonFree(void)
+{
+    if (sSummon.spriteId != MAX_SPRITES)
+        DestroySprite(&gSprites[sSummon.spriteId]);
+    sSummon.spriteId = MAX_SPRITES;
+    FreeSpriteTilesByTag(SUMMON_TAG);
+    FreeSpritePaletteByTag(SUMMON_TAG);
+}
+
+static void SummonSpawn(void)
+{
+    struct ObjectEvent *playerObj = &gObjectEvents[gPlayerAvatar.objectEventId];
+    struct Sprite *player = &gSprites[gPlayerAvatar.spriteId];
+    struct SpriteSheet sheet;
+    struct Sprite *sprite;
+    u16 shown = GetIconSpecies(sSummon.species, 0);
+    u8 idx;
+
+    sSummon.spriteId = MAX_SPRITES;
+    if (!SummonFindPlace(playerObj))
+        return;   // nowhere to stand: it is heard and not seen
+    FreeSpriteTilesByTag(SUMMON_TAG);
+    sheet.data = FollowerPic(shown);
+    sheet.size = 0x200;
+    sheet.tag = SUMMON_TAG;
+    LoadSpriteSheet(&sheet);
+    idx = IndexOfSpritePaletteTag(SUMMON_TAG);
+    if (idx == 0xFF)
+        idx = AllocSpritePalette(SUMMON_TAG);
+    if (GetSpriteTileStartByTag(SUMMON_TAG) == 0xFFFF || idx == 0xFF)
+    {
+        SummonFree();
+        return;
+    }
+    LoadPalette(sFollowerPalettes[shown < ARRAY_COUNT(sFollowerPalettes) ? shown : SPECIES_NONE], OBJ_PLTT_ID(idx),
+                PLTT_SIZE_4BPP);   // whole: a daemon that knows its own song is in all its colours (T-597)
+    ApplyGlobalFieldPaletteTint(idx);
+    UpdateSpritePaletteWithWeather(idx);
+    sSummon.spriteId = CreateSprite(&sSpriteTemplate_Summon, player->x + sSummon.dx * 16, player->y + sSummon.dy * 16, 0);
+    if (sSummon.spriteId == MAX_SPRITES)
+    {
+        SummonFree();
+        return;
+    }
+    sprite = &gSprites[sSummon.spriteId];
+    sprite->coordOffsetEnabled = TRUE;
+    sprite->animPaused = TRUE;
+    sprite->invisible = TRUE;
+    sprite->oam.paletteNum = idx;
+    SetObjectSubpriorityByElevation(playerObj->previousElevation, sprite, 1);
+    sprite->y += FOLLOWER_Y;
+    sprite->oam.priority = player->oam.priority;
+    sSummon.facing = sSummon.dx < 0 ? DIR_EAST : DIR_WEST;   // to the player: icons face left
+    sprite->oam.matrixNum = sSummon.facing == DIR_EAST ? ST_OAM_HFLIP : 0;
+    FindMouth(sheet.data, &sSummon.mouthX, &sSummon.mouthY);
+}
+
+#define tPhase  data[0]
+#define tTimer  data[1]
+#define tHop    data[2]
+#define tCried  data[3]
+
+static void Task_SummonArrive(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    struct Sprite *sprite = sSummon.spriteId != MAX_SPRITES ? &gSprites[sSummon.spriteId] : NULL;
+    const u8 *quotation;
+    u16 serial;
+    s16 heard, truePitch, near;
+
+    tTimer++;
+    switch (tPhase)
+    {
+    case 0:   // it flickers in, settling a few pixels
+        if (sprite != NULL)
+        {
+            sprite->invisible = (tTimer % 8) >= tTimer * 8 / SUMMON_FADE;
+            sprite->y2 = -(SUMMON_FADE - tTimer) / 8;
+        }
+        if (tTimer >= SUMMON_FADE)
+        {
+            if (sprite != NULL)
+            {
+                sprite->invisible = FALSE;
+                sprite->y2 = 0;
+            }
+            tPhase++;
+            tTimer = 0;
+        }
+        break;
+    case 1:   // it looks at the player, and sings
+        if (tTimer < SUMMON_LOOK)
+            break;
+        sSummon.heardSerial = 0xFFFF;
+        if (!DaemonSong_Start(sSummon.species, SONG_SHARE_WHOLE, SONG_OWN_PART))
+        {
+            PlayCry_Normal(sSummon.species, 0);
+            tCried = TRUE;
+        }
+        tPhase++;
+        tTimer = 0;
+        break;
+    case 2:   // its song, its notes rising from it; B cuts it short
+        if (JOY_NEW(B_BUTTON))
+            DaemonSong_Stop();
+        if (DaemonSong_Heard(&serial, &heard, &truePitch, &near) && serial != sSummon.heardSerial)
+        {
+            sSummon.heardSerial = serial;
+            tHop = SUMMON_HOP;
+            if (sprite != NULL)
+                HumNoteFrom(sprite, sSummon.facing, sSummon.mouthX, sSummon.mouthY, truePitch, near, serial);
+        }
+        if (tHop != 0)
+            tHop--;
+        if (sprite != NULL)
+            sprite->y2 = tHop != 0 ? -1 : 0;
+        if (DaemonSong_IsPlaying() || (tCried && IsCryPlaying()))
+            break;
+        tPhase++;
+        tTimer = 0;
+        break;
+    default:   // a breath, and the script says its QUOTATION, if it has one
+        if (tTimer < SUMMON_LOOK)
+            break;
+        quotation = DaemonSong_Quotation(sSummon.species);
+        gSpecialVar_Result = quotation != NULL;
+        if (quotation != NULL)
+        {
+            StringCopy(gStringVar1, gSpeciesNames[sSummon.species]);
+            StringExpandPlaceholders(gStringVar4, quotation);
+        }
+        DestroyTask(taskId);
+        ScriptContext_Enable();
+        break;
+    }
+}
+
+void Follower_SummonArrive(void)
+{
+    u8 taskId;
+
+    sSummon.species = gSpecialVar_0x8004;
+    SummonSpawn();
+    taskId = CreateTask(Task_SummonArrive, 80);
+    gTasks[taskId].tPhase = 0;
+    gTasks[taskId].tTimer = 0;
+    gTasks[taskId].tHop = 0;
+    gTasks[taskId].tCried = FALSE;
+}
+
+//  It goes on its way: on away from the player, a pixel a frame with a step's hop, flickering out as it goes.
+static void Task_SummonLeave(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    struct Sprite *sprite;
+
+    if (sSummon.spriteId == MAX_SPRITES || ++tTimer > SUMMON_FADE)
+    {
+        SummonFree();
+        DestroyTask(taskId);
+        ScriptContext_Enable();
+        return;
+    }
+    sprite = &gSprites[sSummon.spriteId];
+    sprite->x += (sSummon.dx > 0) - (sSummon.dx < 0);
+    sprite->y += (sSummon.dy > 0) - (sSummon.dy < 0);
+    sprite->y2 = (tTimer % 16) >= 4 && (tTimer % 16) < 12 ? -1 : 0;
+    sprite->invisible = (tTimer % 8) < tTimer * 8 / SUMMON_FADE;
+}
+
+void Follower_SummonLeave(void)
+{
+    u8 taskId = CreateTask(Task_SummonLeave, 80);
+
+    gTasks[taskId].tTimer = 0;
+}
+
+#undef tPhase
+#undef tTimer
+#undef tHop
+#undef tCried
