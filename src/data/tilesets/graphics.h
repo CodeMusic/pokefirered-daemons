@@ -307,6 +307,8 @@ const u16 gTilesetPalettes_PokemonCenter[][16] =
 };
 
 const u32 gTilesetTiles_Cave[] = INCBIN_U32("data/tilesets/secondary/cave/tiles.4bpp.lz");
+// T-438: UMBRAL ASCENT's own tiles, A PENUMBRA (DAEMONS tools/gbacaves.py --umbral; the user, 2026-11-18)
+const u32 gTilesetTiles_CaveUmbral[] = INCBIN_U32("data/tilesets/secondary/cave/umbral/tiles.4bpp.lz");
 
 const u16 gTilesetPalettes_Cave[][16] =
 {

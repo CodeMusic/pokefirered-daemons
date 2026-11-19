@@ -1011,12 +1011,13 @@ const struct Tileset gTileset_NexusPaint =
     .metatileAttributes = gMetatileAttributes_NexusPaint,
     .callback = NULL,
 };
-// T-438 batch E: UMBRAL ASCENT, a palette split over gTileset_Cave (DAEMONS tools/gbacaves.py).
+// T-438 batch E: UMBRAL ASCENT, a palette split over gTileset_Cave (DAEMONS tools/gbacaves.py); since 2026-11-18 a
+// tile split too: its own tiles (A PENUMBRA, gbacaves.py --umbral), gTileset_Cave's metatiles and attributes.
 const struct Tileset gTileset_CaveUmbral =
 {
     .isCompressed = TRUE,
     .isSecondary = TRUE,
-    .tiles = gTilesetTiles_Cave,
+    .tiles = gTilesetTiles_CaveUmbral,
     .palettes = gTilesetPalettes_CaveUmbral,
     .metatiles = gMetatiles_Cave,
     .metatileAttributes = gMetatileAttributes_Cave,
