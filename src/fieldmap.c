@@ -1599,6 +1599,9 @@ void DaemonsGreyHalftoneFrame(void)
         follower = Follower_SensePaletteSlot();   // T-459: and its noticing, in the book's purple
         if (follower < 16)
             skip |= HT_OBJ(follower);
+        follower = Follower_HumPaletteSlot();     // T-596: and the notes it hums, which shine as PLAY's do
+        if (follower < 16)
+            skip |= HT_OBJ(follower);
         follower = ScriptMenu_ShownPokemonPicPaletteSlot();   // T-439: the KINGFISHER's photograph of it, too
         if (follower < 16)
             skip |= HT_OBJ(follower);

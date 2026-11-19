@@ -29,4 +29,15 @@ u8 Follower_SensePaletteSlot(void);
 // T-580: THE SUBTLE LAYER's LAST WORD was read: back in the field, the follower turns to face the player.
 void Follower_TurnAfterBook(void);
 
+// T-596: THE WISH TO SING. The notes' OBJ palette slot while they show, or 0xFF (they shine: HALFTONE leaves it in
+// colour); a battle won (battle_setup.c), after which it may ask; and the ask's specials (data/scripts/follower.inc).
+u8 Follower_HumPaletteSlot(void);
+void Follower_AfterBattle(void);
+void Follower_BufferSinger(void);
+void Follower_SingAsked(void);
+#if DAEMONS_DEBUG
+void Follower_DebugNearSong(void);
+void Follower_DebugAskToSing(void);
+#endif
+
 #endif // GUARD_DAEMONS_FOLLOWER_H

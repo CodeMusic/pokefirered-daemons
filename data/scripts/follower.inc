@@ -159,3 +159,24 @@ Follower_Text_Unmask::
 	.string "{STR_VAR_2} mask.\p"
 	.string "It goes as itself for the\n"
 	.string "rest of the day.$"
+
+@ ---- T-596, DRAFT: THE WISH TO SING. After a battle won, a daemon near its evolution may ask (src/daemons_follower.c,
+@ AskToSing); yes and it sings its song as it knows it, its notes rising from its mouth, as SING does in the party menu.
+@ The question is the ticket's own words (the user, 2026-11-18).
+EventScript_FollowerWantsToSing::
+	lockall
+	copyvar VAR_PREV_TEXT_COLOR, VAR_TEXT_COLOR
+	textcolor NPC_TEXT_COLOR_MON
+	special Follower_BufferSinger
+	msgbox Follower_Text_WantsToSing, MSGBOX_YESNO
+	copyvar VAR_TEXT_COLOR, VAR_PREV_TEXT_COLOR
+	goto_if_eq VAR_RESULT, NO, EventScript_FollowerWantsToSingEnd
+	closemessage
+	special Follower_SingAsked
+	waitstate
+EventScript_FollowerWantsToSingEnd:
+	releaseall
+	end
+
+Follower_Text_WantsToSing::
+	.string "{STR_VAR_1} wants to sing.$"

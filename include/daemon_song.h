@@ -13,6 +13,10 @@
 #define SONG_OWN_PART   1      // only the form's own part (the evolution scene)
 #define SONG_ALLUSION   2      // with SONG_OWN_PART: only its opening, as its learning begins (a next form's hint)
 
+// T-596: THE WISH TO SING. A daemon near its evolution hums one bar of its own part, quietly under the map's music
+// (the follower, src/daemons_follower.c); each note it sings can be read back as it sounds, to draw it.
+#define SONG_WISH_FROM  160    // its own part's share from which it wishes to sing (of 255: five-eighths learned)
+
 bool8 DaemonSong_Has(u16 species);
 bool8 DaemonSong_Start(u16 species, u8 share, u8 mode);   // FALSE: no song for it (play its cry instead)
 bool8 DaemonSong_IsPlaying(void);
@@ -23,5 +27,17 @@ bool8 DaemonSong_GrowsOn(u16 species);                     // a form after it: i
 // The INDEX's SONG: a held daemon of the species sings as it knows it (the party first, then the boxes); a form
 // nobody holds -- a past form, or one only seen -- is sung whole. Pressed again, it stops.
 void DaemonSong_PlayForIndex(u16 species);
+
+// T-596: how much it wishes to sing, 0 (not at all: an egg, a final form, under SONG_WISH_FROM) to 255 (perfect).
+u8 DaemonSong_Wish(struct Pokemon *mon);
+// One bar of its own part as it knows it: the bar it is learning, or now and then one it has already, by `seed`.
+bool8 DaemonSong_Hum(u16 species, u8 share, u16 seed);
+bool8 DaemonSong_IsHumming(void);
+// The note sounding: a number new with every note, its pitch heard this frame and its true pitch (semitones from middle
+// C), and how near it is to learned (0..255, or -1: learned). FALSE when nothing is sung.
+bool8 DaemonSong_Heard(u16 *serial, s16 *heard, s16 *truePitch, s16 *near);
+#if DAEMONS_DEBUG
+u32 DaemonSong_ExpAtShare(u16 species, u8 share);   // DEBUG -> FOLLOWER: the experience its part is this far at
+#endif
 
 #endif // GUARD_DAEMON_SONG_H

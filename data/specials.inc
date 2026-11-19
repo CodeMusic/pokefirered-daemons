@@ -549,4 +549,6 @@ gSpecials::
 	def_special Compass_CurrentMap           @ T-586: the map stood on, as MAP_*, in VAR_RESULT (special, not specialvar)
 	def_special Daemons_TouchStone           @ T-585: the magpie's cold stone, TOUCH's read (special, not specialvar)
 	def_special SingingFir_SingBar           @ T-585: the fir hums its first bar only (waitstate), VAR_0x8004 in key
+	def_special Follower_BufferSinger        @ T-596: the follower's name in STR_VAR_1; it turns to the player
+	def_special Follower_SingAsked           @ T-596: it sings its song as it knows it (waitstate; B stops it)
 gSpecialsEnd::

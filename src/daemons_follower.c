@@ -42,6 +42,12 @@
 #include "daemons_reads.h"   // T-577: the pond's read
 #include "constants/maps.h"
 #include "constants/metatile_behaviors.h"
+#include "daemon_song.h"        // T-596: the wish to sing
+#include "play.h"               // T-596: PLAY's own note colours, and not over PLAY
+#include "random.h"
+#include "task.h"
+#include "field_message_box.h"
+#include "sound.h"
 
 //  T-18 P1: THE FOLLOWER -- it walks and hides (the user decided the plan 2026-10-20; every rule below is the plan's).
 //
@@ -81,6 +87,8 @@
 #define FOLLOWER_TAG     0x5418   // its tiles and its palette (T-18)
 #define EMOJI_TAG        0x5419   // the daemon-emoji's palette, only while it shows (T-431 P3)
 #define SENSE_TAG        0x541A   // the subtle layer's ripple and glint: their palette, only while they show (T-459)
+#define HUM_TAG          0x541B   // T-596: the notes it hums -- PLAY's key colours, only while they show
+#define HUM_FIRST        300      // T-596: after it is made (a map, a battle, a menu), five seconds before it may hum
 #define TRAIL            16       // pixels behind the player: one tile
 #define FOLLOWER_Y       2        // its picture's lowest row is row 28 (gbafollower.py); this puts it on the player's feet
 #define MAX_JUMP         32       // a move bigger than this in one frame is a warp, not a step
@@ -135,9 +143,20 @@ static struct
     u16 pondMap;           // ... the map they are on, + 1, and whether its rings came this arrival
     bool8 pondDone;
     u8 pondRings;          // ... rings still spreading (2, 1, 0)
+    u8 wish;               // T-596: how much the lead wishes to sing (DaemonSong_Wish), read with its friendship
+    bool8 humTicked;       // ... a hum was allowed to go on last frame (if not, it is stopped)
+    bool8 singing;         // ... it sings because it was asked (after a battle): its notes rise too
+    u16 humWait;           // ... frames until it may hum again
+    u16 askWait;           // ... after a battle it may ask, within this many frames
+    u8 askBeat;            // ... frames the player has been free since, standing
+    u16 heardSerial;       // ... the note last drawn
+    s8 mouthX, mouthY;     // ... its mouth in its picture (facing left), from the picture's centre
 } sFollower;
 
 static void Shimmer(void);   // T-480
+static void HumTidy(void);   // T-596
+static void Hum(struct Sprite *sprite);
+static void AskToSing(struct Sprite *sprite);
 
 static void SpriteCB_Follower(struct Sprite *sprite)
 {
@@ -427,6 +446,8 @@ static const u8 *FollowerPic(u16 species)
     return GetMonIconTiles(species, FALSE);
 }
 
+static void FindMouth(const u8 *pic);   // T-596
+
 static void Spawn(s8 slot, struct Sprite *player, struct ObjectEvent *playerObj)
 {
     struct SpriteSheet sheet;
@@ -470,6 +491,10 @@ static void Spawn(s8 slot, struct Sprite *player, struct ObjectEvent *playerObj)
     sFollower.grassX = sFollower.grassY = -1;
     sFollower.pondRings = 0;             // T-577: a menu or a battle took its rings down
     sFollower.senseWait = SENSE_FIRST;   // T-459: a moment in a new place (or back from a battle) before it notices
+    FindMouth(sheet.data);               // T-596
+    sFollower.wish = DaemonSong_Wish(&gPlayerParty[slot]);
+    if (sFollower.humWait < HUM_FIRST)
+        sFollower.humWait = HUM_FIRST;   // and before it hums
     if (sFollower.restValid
      && sFollower.restGroup == gSaveBlock1Ptr->location.mapGroup && sFollower.restNum == gSaveBlock1Ptr->location.mapNum
      && sFollower.restX == playerObj->currentCoords.x && sFollower.restY == playerObj->currentCoords.y)
@@ -495,6 +520,7 @@ static void CheckLead(s8 slot)
         Despawn();   // made again next frame, from the same path
         return;
     }
+    sFollower.wish = DaemonSong_Wish(&gPlayerParty[slot]);   // T-596: it learned in a battle, or was given experience
     if (friendship != sFollower.friendship || Spirits_ToneOf(&gPlayerParty[slot].box) != sFollower.tone)   // T-519
     {
         sFollower.friendship = friendship;
@@ -1106,12 +1132,14 @@ void Follower_Update(void)
 
     if (!playerObj->active || !player->inUse)
         return;
+    HumTidy();   // T-596
     if (FollowerIsAbsent())
     {
         if (IsOurs())
             Despawn();
         sFollower.spriteId = MAX_SPRITES;
         sFollower.restValid = FALSE;
+        sFollower.askWait = 0;   // T-596: no follower, no ask -- not one saved for later
         return;
     }
     if (!IsOurs())
@@ -1182,6 +1210,8 @@ void Follower_Update(void)
     Ripples(sprite, playerObj); // T-577
     Sense(sprite, playerObj);   // T-459
     Shimmer();                  // T-480
+    Hum(sprite);                // T-596
+    AskToSing(sprite);          // T-596
 }
 
 //  T-480: THE WITCHING HOUR's shimmer (src/daemons_witching.c). Every fourth frame of the hour its palette is loaded
@@ -1584,3 +1614,469 @@ void Follower_OnContinue(void)
     sFollower.continued = TRUE;
     sFollower.restValid = FALSE;
 }
+
+//  ---------------------------------------------------------------- the wish to sing (T-596)
+//
+//  The user, 2026-11-18 (by multiple choice: hums as you walk and asks after a battle): "visual correctly colour coded
+//  notes emerge from the daemons mouth ... the player associates the fact the daemon said it wants to sing along with
+//  the visual emergence of the notes creating an intuitive memory pointer". As a daemon nears its evolution it wishes
+//  to sing (DaemonSong_Wish: a form that grows on, five-eighths of its own part learned or more).
+//
+//  THE HUM. Now and then the follower hums one bar of its own part as it knows it (DaemonSong_Hum: the bar it is
+//  learning, now and then one it has), quietly under the map's music (HUM_VOLUME, src/daemon_song.c) -- the nearer its
+//  evolution, the more often: about every forty-five seconds at the wish's start, about every ten when perfect. Never
+//  while a script, a message box or a menu runs (ArePlayerFieldControlsLocked covers the START menu and every script),
+//  nor in a fade, under PLAY, in the quest log's replay, or while it is not drawn; a hum caught by one of them stops.
+//
+//  THE NOTES. Each note it sings is a small note rising from its MOUTH -- found in its own picture as it is made: the
+//  leftmost pixel of the top of it (its snout, facing left), mirrored when it faces right -- drifting the way it faces,
+//  in its pitch's colour: PLAY's own colours (graphics/play/key_colours.gbapal, by reference), a black key's note the
+//  two white keys either side of it (DAEMONS tools/genhumnotes.py, graphics/daemon_song/hum_notes.png). A note not yet
+//  learned is STATIC: the note's shape in snow, in its true colour only on the frames its true pitch is heard -- the
+//  audio's own flicker, read as it sounds (DaemonSong_Heard) -- and, once its sound is over, at the same odds. Its own
+//  OBJ palette, loaded while a note shows or it hums and freed after, never the last slot free (it does not hum
+//  then), and untinted: they shine as PLAY's notes do, in HALFTONE too (fieldmap.c, field_effect.c).
+//
+//  THE ASK. After a battle won (battle_setup.c), the nearer its evolution the likelier (a quarter at the wish's start,
+//  near certain when perfect), once back in the field and standing a moment: "NAME wants to sing." -- yes and it sings
+//  its song as it knows it, the notes rising from it, as SING does in the party menu (B stops it). DRAFT, every word.
+
+#define HUM_SLOWEST      2700    // at the wish's start: about every forty-five seconds
+#define HUM_FASTEST      600     // perfect: about every ten
+#define NOTE_LIFE        56      // frames a note rises before it is gone
+#define NOTE_FLICKER     4       // a static note changes this often (daemon_song.c's FLICKER)
+#define NOTE_STATIC      12      // hum_notes.png: frames 12-14 are static
+#define ASK_STILL        60      // after a battle, a second free and standing in the field before it asks
+#define ASK_WINDOW       900     // ... and if that does not come within fifteen seconds, it lets the wish go
+
+static const u16 sHumNotesGfx[] = INCBIN_U16("graphics/daemon_song/hum_notes.4bpp");
+static const u16 sKeyColoursPal[] = INCBIN_U16("graphics/play/key_colours.gbapal");   // PLAY's, by reference
+
+static const struct SpriteFrameImage sHumNoteImages[] = {
+    overworld_frame(sHumNotesGfx, 1, 1, 0), overworld_frame(sHumNotesGfx, 1, 1, 1), overworld_frame(sHumNotesGfx, 1, 1, 2),
+    overworld_frame(sHumNotesGfx, 1, 1, 3), overworld_frame(sHumNotesGfx, 1, 1, 4), overworld_frame(sHumNotesGfx, 1, 1, 5),
+    overworld_frame(sHumNotesGfx, 1, 1, 6), overworld_frame(sHumNotesGfx, 1, 1, 7), overworld_frame(sHumNotesGfx, 1, 1, 8),
+    overworld_frame(sHumNotesGfx, 1, 1, 9), overworld_frame(sHumNotesGfx, 1, 1, 10), overworld_frame(sHumNotesGfx, 1, 1, 11),
+    overworld_frame(sHumNotesGfx, 1, 1, 12), overworld_frame(sHumNotesGfx, 1, 1, 13), overworld_frame(sHumNotesGfx, 1, 1, 14),
+};
+
+static const struct OamData sHumNoteOam = {
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(8x8),
+    .size = SPRITE_SIZE(8x8),
+    .priority = 1,
+};
+
+#define HUM_FRAME(n) {ANIMCMD_FRAME(n, 1), ANIMCMD_END}
+static const union AnimCmd sHumNoteAnim[15][2] = {
+    HUM_FRAME(0), HUM_FRAME(1), HUM_FRAME(2), HUM_FRAME(3), HUM_FRAME(4), HUM_FRAME(5), HUM_FRAME(6), HUM_FRAME(7),
+    HUM_FRAME(8), HUM_FRAME(9), HUM_FRAME(10), HUM_FRAME(11), HUM_FRAME(12), HUM_FRAME(13), HUM_FRAME(14),
+};
+static const union AnimCmd *const sHumNoteAnims[15] = {
+    sHumNoteAnim[0], sHumNoteAnim[1], sHumNoteAnim[2], sHumNoteAnim[3], sHumNoteAnim[4], sHumNoteAnim[5],
+    sHumNoteAnim[6], sHumNoteAnim[7], sHumNoteAnim[8], sHumNoteAnim[9], sHumNoteAnim[10], sHumNoteAnim[11],
+    sHumNoteAnim[12], sHumNoteAnim[13], sHumNoteAnim[14],
+};
+
+static void SpriteCB_HumNote(struct Sprite *sprite);
+
+static const struct SpriteTemplate sHumNoteTemplate = {
+    .tileTag = TAG_NONE,
+    .paletteTag = HUM_TAG,
+    .oam = &sHumNoteOam,
+    .anims = sHumNoteAnims,
+    .images = sHumNoteImages,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_HumNote,
+};
+
+#if DAEMONS_DEBUG
+EWRAM_DATA u8 gFollowerDebugHum = 0;    // hums since the game started (wraps), for the theatre
+EWRAM_DATA u8 gFollowerDebugNotes = 0;  // notes drawn (wraps)
+EWRAM_DATA u8 gFollowerDebugAsk = 0;    // asks (wraps)
+static EWRAM_DATA u8 sDebugAskDelay = 0; // DEBUG's ask waits this many free frames more: the menu's own B presses
+                                         // would otherwise answer it
+#endif
+
+//  Its mouth: the top of its picture is its head; the leftmost pixel of the head's band (the lowest such row on a
+//  tie, so a beak's tip and not the brow above it) is where its mouth is, facing left. 32x32 at 4bpp, tiles row-major.
+static void FindMouth(const u8 *pic)
+{
+    s16 x, y, top = -1, bestX = 32, bestY = 12;
+
+    for (y = 0; y < 32; y++)
+    {
+        for (x = 0; x < 32; x++)
+        {
+            u8 byte = pic[((y / 8) * 4 + x / 8) * 32 + (y % 8) * 4 + (x % 8) / 2];
+
+            if ((x & 1) ? (byte >> 4) : (byte & 0xF))
+            {
+                if (top < 0)
+                    top = y;
+                if (y <= top + 7 && x <= bestX)
+                {
+                    bestX = x;
+                    bestY = y;
+                }
+                break;   // the row's leftmost pixel is all this needs
+            }
+        }
+    }
+    if (top < 0)
+        bestX = 8;
+    sFollower.mouthX = bestX - 16;
+    sFollower.mouthY = bestY + 1 - 16;   // just under the snout's edge
+}
+
+static u8 FreeSpritePaletteSlots(void)
+{
+    u8 i, n = 0;
+
+    for (i = gReservedSpritePaletteCount; i < 16; i++)
+        if (GetSpritePaletteTagByPaletteNum(i) == TAG_NONE)
+            n++;
+    return n;
+}
+
+//  Its palette, untinted (they shine, as PLAY's notes do) -- and never the last slot free: that is left to whoever
+//  comes next (a field effect, a person), and without it the follower does not hum.
+static u8 LoadHumPalette(void)
+{
+    u8 idx = IndexOfSpritePaletteTag(HUM_TAG);
+
+    if (idx != 0xFF)
+        return idx;
+    if (FreeSpritePaletteSlots() < 2)
+        return 0xFF;
+    idx = AllocSpritePalette(HUM_TAG);
+    if (idx == 0xFF)
+        return 0xFF;
+    LoadPalette(sKeyColoursPal, OBJ_PLTT_ID(idx), PLTT_SIZE_4BPP);
+    return idx;
+}
+
+u8 Follower_HumPaletteSlot(void)
+{
+    return IndexOfSpritePaletteTag(HUM_TAG);
+}
+
+static bool8 HumNotesShowing(void)
+{
+    u8 i;
+
+    for (i = 0; i < MAX_SPRITES; i++)
+        if (gSprites[i].inUse && gSprites[i].callback == SpriteCB_HumNote)
+            return TRUE;
+    return FALSE;
+}
+
+static bool8 FollowerSings(void)
+{
+    if (sFollower.singing && !DaemonSong_IsPlaying())
+        sFollower.singing = FALSE;
+    return sFollower.singing || DaemonSong_IsHumming();
+}
+
+//  Once a frame, before anything else: a hum not let go on last frame stops; the palette goes back with its last note;
+//  and while it shows, its colours are put back over whatever tinted every palette this frame (the weather's fade).
+static void HumTidy(void)
+{
+    u8 idx;
+
+    if (DaemonSong_IsHumming() && !sFollower.humTicked)
+        DaemonSong_Stop();
+    sFollower.humTicked = FALSE;
+    idx = IndexOfSpritePaletteTag(HUM_TAG);
+    if (idx == 0xFF)
+        return;
+    if (!FollowerSings() && !HumNotesShowing())
+    {
+        FreeSpritePaletteByTag(HUM_TAG);
+        return;
+    }
+    if (!gPaletteFade.active)
+        CpuCopy16(sKeyColoursPal, &gPlttBufferFaded[OBJ_PLTT_ID(idx)], PLTT_SIZE_4BPP);
+}
+
+#define tAge     data[0]
+#define tPitch   data[1]   // its true pitch class, 0 C .. 11 B
+#define tNear    data[2]   // how near it is to learned, 0..255, or -1 learned
+#define tSerial  data[3]   // the note it is (DaemonSong_Heard), while it sounds
+#define tDrift   data[4]   // -1 left, 1 right
+#define tRng     data[5]
+#define tSnow    data[6]   // the static frame shown last
+
+static u8 PitchClass(s16 semitone)
+{
+    return ((semitone % 12) + 12) % 12;
+}
+
+static void SpriteCB_HumNote(struct Sprite *sprite)
+{
+    u16 serial;
+    s16 heard, truePitch, near;
+    bool8 trueNow;
+
+    if (++sprite->tAge >= NOTE_LIFE)
+    {
+        DestroySprite(sprite);   // the palette goes back in HumTidy, when it was the last
+        return;
+    }
+    // It rises a pixel every three frames, and drifts the way the daemon faced, a pixel every eight, with a sway.
+    sprite->y2 = -(sprite->tAge / 3);
+    sprite->x2 = sprite->tDrift * (sprite->tAge / 8) + ((sprite->tAge / 12) & 1);
+    sprite->invisible = sprite->tAge > NOTE_LIFE - 12 && (sprite->tAge & 2);   // it blinks out
+
+    if (sprite->tNear < 0)
+        return;   // learned: its colour, as it was made
+    if (DaemonSong_Heard(&serial, &heard, &truePitch, &near) && serial == sprite->tSerial)
+    {
+        trueNow = (heard == truePitch);   // the very flicker the audio has, this frame
+    }
+    else
+    {
+        if (sprite->tAge % NOTE_FLICKER != 0)
+            return;
+        sprite->tRng = (u16)sprite->tRng * 25173 + 13849;
+        trueNow = ((u16)sprite->tRng >> 8) < 64 + 191 * sprite->tNear / 255;   // daemon_song.c's odds
+    }
+    if (trueNow)
+    {
+        StartSpriteAnimIfDifferent(sprite, sprite->tPitch);
+    }
+    else
+    {
+        if (sprite->tAge % NOTE_FLICKER == 0)
+            sprite->tSnow = NOTE_STATIC + (sprite->tSnow + 1 - NOTE_STATIC) % 3;
+        StartSpriteAnimIfDifferent(sprite, sprite->tSnow);
+    }
+}
+
+//  A note from its mouth, for the note just begun.
+static void HumNoteFrom(struct Sprite *follower, s16 truePitch, s16 near, u16 serial)
+{
+    u8 spriteId;
+    s16 dir = sFollower.facing == DIR_EAST ? 1 : -1;
+    s16 x, y;
+
+    if (LoadHumPalette() == 0xFF)
+        return;
+    x = follower->x + (dir > 0 ? -sFollower.mouthX - 1 : sFollower.mouthX) + dir * 3;
+    y = follower->y + follower->y2 + sFollower.mouthY - 3;
+    spriteId = CreateSprite(&sHumNoteTemplate, x, y, 1);
+    if (spriteId == MAX_SPRITES)
+        return;
+    gSprites[spriteId].coordOffsetEnabled = TRUE;   // it stays where it was sung: the map scrolls under it
+    gSprites[spriteId].oam.priority = follower->oam.priority;
+    gSprites[spriteId].tPitch = PitchClass(truePitch);
+    gSprites[spriteId].tNear = near;
+    gSprites[spriteId].tSerial = serial;
+    gSprites[spriteId].tDrift = dir;
+    gSprites[spriteId].tRng = serial * 31 + truePitch;
+    gSprites[spriteId].tSnow = NOTE_STATIC;
+    StartSpriteAnim(&gSprites[spriteId], near < 0 ? gSprites[spriteId].tPitch : NOTE_STATIC);
+#if DAEMONS_DEBUG
+    gFollowerDebugNotes++;
+#endif
+}
+
+#undef tAge
+#undef tPitch
+#undef tNear
+#undef tSerial
+#undef tDrift
+#undef tRng
+#undef tSnow
+
+//  A note begun since last frame: draw it.
+static void DrawHeard(struct Sprite *follower)
+{
+    u16 serial;
+    s16 heard, truePitch, near;
+
+    if (!DaemonSong_Heard(&serial, &heard, &truePitch, &near) || serial == sFollower.heardSerial)
+        return;
+    sFollower.heardSerial = serial;
+    if (!follower->invisible)
+        HumNoteFrom(follower, truePitch, near, serial);
+}
+
+static bool8 MayHum(struct Sprite *sprite)
+{
+    return !sprite->invisible && !sFollower.sceneHidden && !ArePlayerFieldControlsLocked() && !ScriptContext_IsEnabled()
+        && IsFieldMessageBoxHidden() && !gPaletteFade.active && !Play_IsActive() && gQuestLogState != QL_STATE_PLAYBACK;
+}
+
+//  How long until the next: from HUM_SLOWEST at the wish's start to HUM_FASTEST when perfect, give or take a quarter.
+static u16 HumInterval(u8 wish)
+{
+    u16 base = HUM_SLOWEST - (HUM_SLOWEST - HUM_FASTEST) * wish / 255;
+
+    return base - base / 4 + Random() % (base / 2 + 1);
+}
+
+static void Hum(struct Sprite *sprite)
+{
+    s8 slot;
+    struct Pokemon *mon;
+
+    if (sFollower.singing && DaemonSong_IsPlaying())
+    {
+        DrawHeard(sprite);   // asked: it sings through the script that asked it
+        return;
+    }
+    sFollower.singing = FALSE;
+    if (DaemonSong_IsHumming())
+    {
+        if (!MayHum(sprite))
+            return;              // not ticked: HumTidy stops it next frame
+        sFollower.humTicked = TRUE;
+        DrawHeard(sprite);
+        return;
+    }
+    if (sFollower.wish == 0 || !MayHum(sprite) || DaemonSong_IsPlaying())
+        return;                  // the wait runs only while it could hum: never straight out of a menu
+    if (sFollower.humWait != 0)
+    {
+        sFollower.humWait--;
+        return;
+    }
+    slot = Follower_LeadSlot();
+    sFollower.humWait = HumInterval(sFollower.wish);
+    if (slot < 0 || LoadHumPalette() == 0xFF)
+        return;
+    mon = &gPlayerParty[slot];
+    sFollower.heardSerial = 0xFFFF;
+    if (DaemonSong_Hum(GetMonData(mon, MON_DATA_SPECIES), DaemonSong_MonShare(mon), Random()))
+    {
+        sFollower.humTicked = TRUE;
+#if DAEMONS_DEBUG
+        gFollowerDebugHum++;
+#endif
+    }
+}
+
+//  After a battle won (battle_setup.c): it may ask, the nearer its evolution the likelier.
+void Follower_AfterBattle(void)
+{
+    s8 slot = Follower_LeadSlot();
+    u8 wish;
+
+    sFollower.askWait = 0;
+    if (slot < 0)
+        return;
+    wish = DaemonSong_Wish(&gPlayerParty[slot]);
+    if (wish != 0 && (Random() & 0xFF) < 64 + 176 * wish / 255)
+        sFollower.askWait = ASK_WINDOW;
+}
+
+static void AskToSing(struct Sprite *sprite)
+{
+    if (sFollower.askWait == 0)
+        return;
+    sFollower.askWait--;
+    if (sFollower.wish == 0)
+        sFollower.askWait = 0;   // it evolved, or the lead changed: the wish was another's
+    if (sFollower.askWait == 0 || sFollower.idle < 2 || !MayHum(sprite))
+    {
+        sFollower.askBeat = 0;   // a beat free and still, counted again from the start
+        return;
+    }
+#if DAEMONS_DEBUG
+    if (sDebugAskDelay != 0)
+    {
+        sDebugAskDelay--;
+        return;
+    }
+#endif
+    if (++sFollower.askBeat < ASK_STILL)
+        return;
+    sFollower.askWait = 0;
+    sFollower.askBeat = 0;
+    DaemonSong_Stop();
+    LockPlayerFieldControls();
+    ScriptContext_SetupScript(EventScript_FollowerWantsToSing);
+#if DAEMONS_DEBUG
+    gFollowerDebugAsk++;
+#endif
+}
+
+//  The ask's specials (data/scripts/follower.inc). Its name for the question, and it turns to the player.
+void Follower_BufferSinger(void)
+{
+    s8 slot = Follower_LeadSlot();
+
+    gStringVar1[0] = EOS;
+    if (slot < 0)
+        return;
+    GetMonData(&gPlayerParty[slot], MON_DATA_NICKNAME, gStringVar1);
+    StringGet_Nickname(gStringVar1);
+    if (sFollower.sumX > 0)
+        sFollower.facing = DIR_EAST;
+    else if (sFollower.sumX < 0)
+        sFollower.facing = DIR_WEST;
+}
+
+static void Task_FollowerSinging(u8 taskId)
+{
+    if (JOY_NEW(B_BUTTON))
+        DaemonSong_Stop();
+    if (!DaemonSong_IsPlaying())
+    {
+        sFollower.singing = FALSE;
+        DestroyTask(taskId);
+        ScriptContext_Enable();
+    }
+}
+
+//  Yes: its song as it knows it, as SING plays it (party_menu.c), its notes rising from it. waitstate; B stops it.
+void Follower_SingAsked(void)
+{
+    s8 slot = Follower_LeadSlot();
+    struct Pokemon *mon;
+
+    if (slot >= 0)
+    {
+        mon = &gPlayerParty[slot];
+        LoadHumPalette();   // without a slot it still sings; only the notes are not drawn
+        sFollower.heardSerial = 0xFFFF;
+        if (DaemonSong_Start(GetMonData(mon, MON_DATA_SPECIES), DaemonSong_MonShare(mon), SONG_LINE))
+        {
+            sFollower.singing = TRUE;
+            CreateTask(Task_FollowerSinging, 80);
+            return;
+        }
+    }
+    ScriptContext_Enable();
+}
+
+#if DAEMONS_DEBUG
+//  DEBUG -> FOLLOWER: the lead a few notes short of its next form (its own part 240/255 learned), and a hum soon.
+void Follower_DebugNearSong(void)
+{
+    s8 slot = Follower_LeadSlot();
+    struct Pokemon *mon;
+    u32 exp;
+
+    if (slot < 0)
+        return;
+    mon = &gPlayerParty[slot];
+    exp = DaemonSong_ExpAtShare(GetMonData(mon, MON_DATA_SPECIES), 240);
+    if (exp == 0)
+        return;
+    SetMonData(mon, MON_DATA_EXP, &exp);
+    CalculateMonStats(mon);
+    sFollower.wish = DaemonSong_Wish(mon);
+    sFollower.humWait = 60;
+}
+
+//  DEBUG -> FOLLOWER: as if a battle had just been won and the wish come up -- it asks once back in the field.
+void Follower_DebugAskToSing(void)
+{
+    sFollower.askWait = ASK_WINDOW;
+    sDebugAskDelay = 180;
+}
+#endif

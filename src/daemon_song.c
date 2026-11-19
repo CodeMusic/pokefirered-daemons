@@ -14,6 +14,9 @@
 //                 in the key that agree with it (sSongStatic, the least agreeing leaving first as it is learned) and the
 //                 true note more often the nearer it is; and under it the cartridge's noise channel on SE1, a hiss
 //                 that fades as the note closes. A bend never re-plucks, so it is one voice tuning in, as a radio does.
+// T-596, THE HUM: a daemon near its evolution hums one bar of its own part (SONG_HUM, DaemonSong_Hum), every voice of
+// it at HUM_VOLUME and the map's music left as it is, so it sits under the music where a song sits over it; the note
+// sounding and the pitch heard are kept in the task (tHeard), so the follower can draw what it hums as it hums it.
 // It costs no RAM but the task's own data: no static, no heap. The noise is a song of one note defined here (a voice
 // and a track in ROM), so no song table row, no voicegroup and no .mid were added for it.
 #include "global.h"
@@ -52,6 +55,13 @@ struct DaemonSongPart
 #define ALLUSION_MAX 4      // an allusion sings at most this many of a part's opening notes
 #define BGM_DUCKED   85     // the map's music, under a song, as under a cry (sound.c)
 #define HISS_MAX     80     // the noise at its loudest, a note with nothing of it learned (gensongs' STATIC_FLOOR)
+// T-596: a hum's every voice at 3/8 of a song's, the map's music not ducked. A song ducks the music to a third
+// (BGM_DUCKED) and sings over it; the hum is that ratio turned over -- about a third of the music's level, under it, so
+// it is heard as something the daemon does beside the player and never as the game's music stopping for it. DRAFT,
+// for the user's ear.
+#define HUM_VOLUME   96
+#define SHARE_HUM    0x100  // tShare's high byte: the song is a hum
+#define BAR_HALVES   8      // a bar is four beats (gensongs: the bass's root a bar), eight half beats
 
 // The task's data: the whole state of a song.
 #define tPart0    0   // data[0..2]: the parts' species, oldest first
@@ -67,7 +77,8 @@ struct DaemonSongPart
 #define tRng      12
 #define tNear     13  // the note sounding: how near it is to learned, 0..255, or -1 learned
 #define tTrue     14  // its true pitch, semitones from middle C
-#define tSpare    15
+#define tHeard    15  // T-596: the pitch heard this frame, semitones from middle C
+#define NOTHING_HEARD 0x7FFF
 
 // The noise under a static note: the noise channel, 15-bit (white), held, in a song of one long note. Stopped at the
 // note's end; left alone it ends by itself after four seconds.
@@ -99,6 +110,12 @@ static const struct SongHeader sHissSong =
 static const u8 sNaturalSemitone[12] = {0, 0, 2, 2, 4, 5, 5, 7, 7, 9, 9, 11};
 
 static void Task_DaemonSong(u8 taskId);
+
+// T-596: a voice's volume, a hum's turned down to HUM_VOLUME
+static u16 Loud(s16 *data, u16 volume)
+{
+    return (data[tShare] & SHARE_HUM) ? volume * HUM_VOLUME / 256 : volume;
+}
 
 bool8 DaemonSong_Has(u16 species)
 {
@@ -196,12 +213,13 @@ static void Flicker(s16 *data, const struct DaemonSongPart *p)
 
     if (keep != 0 && (NextRng(data) >> 8) >= trueOdds)
         pitch = KeyStep(data[tTrue] + 60, sSongStatic[(NextRng(data) >> 8) % keep], p->tonic, p->minor) - 60;
+    data[tHeard] = pitch;   // T-596: what is heard, for the note drawn
     m4aMPlayPitchControl(&gMPlayInfo_SE2, TRACKS_ALL, (pitch - sNaturalSemitone[pc]) * 256);
 }
 
-static void StartHiss(s16 midi, u8 near)
+static void StartHiss(s16 *data, s16 midi, u8 near)
 {
-    u16 vol = HISS_MAX * (255 - near) * (255 - near) / (255 * 255);
+    u16 vol = Loud(data, HISS_MAX * (255 - near) * (255 - near) / (255 * 255));
 
     m4aMPlayStop(&gMPlayInfo_SE1);
     if (vol == 0)
@@ -221,7 +239,7 @@ static const struct DaemonSongPart *Part(s16 *data)
 
 static u8 PartShare(s16 *data)
 {
-    return data[tPart] == data[tParts] - 1 ? data[tShare] : SONG_SHARE_WHOLE;
+    return data[tPart] == data[tParts] - 1 ? (data[tShare] & 0xFF) : SONG_SHARE_WHOLE;
 }
 
 static u8 PartNotes(s16 *data)
@@ -239,6 +257,7 @@ static void BeginPart(s16 *data)
     data[tBass] = 0;
     data[tBassCum] = 0;
     data[tNear] = -1;
+    data[tHeard] = NOTHING_HEARD;   // T-596
 }
 
 static void StartNote(s16 *data)
@@ -249,11 +268,14 @@ static void StartNote(s16 *data)
     s32 near;
 
     data[tTrue] = n[0] - 60;
+    data[tHeard] = data[tTrue];
     Play_SoundNote(PLAY_HARP, data[tTrue], FALSE);
     if (share >= n[2])
     {
         data[tNear] = -1;
         m4aMPlayStop(&gMPlayInfo_SE1);
+        if (data[tShare] & SHARE_HUM)
+            m4aMPlayVolumeControl(&gMPlayInfo_SE2, TRACKS_ALL, Loud(data, 256));
     }
     else
     {
@@ -264,9 +286,9 @@ static void StartNote(s16 *data)
             near = 255;
         data[tNear] = near;
         data[tRng] = data[tPart0 + data[tPart]] * 31 + data[tNote] * 7 + 1;
-        m4aMPlayVolumeControl(&gMPlayInfo_SE2, TRACKS_ALL, 200 + 56 * near / 255);
+        m4aMPlayVolumeControl(&gMPlayInfo_SE2, TRACKS_ALL, Loud(data, 200 + 56 * near / 255));
         Flicker(data, p);
-        StartHiss(n[0], near);
+        StartHiss(data, n[0], near);
     }
     data[tMelCum] += n[1];
     data[tNote]++;
@@ -291,7 +313,8 @@ static void EndSong(u8 taskId, bool8 cut)
         m4aMPlayStop(&gMPlayInfo_SE2);
         m4aMPlayStop(&gMPlayInfo_SE3);
     }
-    m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
+    if (!(gTasks[taskId].data[tShare] & SHARE_HUM))   // T-596: a hum never ducked it
+        m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 256);
     DestroyTask(taskId);
 }
 
@@ -424,3 +447,130 @@ void DaemonSong_PlayForIndex(u16 species)
     if (!DaemonSong_Start(species, share, SONG_LINE))
         PlayCry_NormalNoDucking(species, 0, CRY_VOLUME_RS, CRY_PRIORITY_NORMAL);
 }
+
+// ------------------------------------------------------------------------------------------- T-596: the wish to sing
+
+u8 DaemonSong_Wish(struct Pokemon *mon)
+{
+    u16 species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
+    u8 share;
+
+    if (species == SPECIES_NONE || species == SPECIES_EGG || !DaemonSong_Has(species) || !DaemonSong_GrowsOn(species))
+        return 0;
+    share = DaemonSong_MonShare(mon);
+    if (share < SONG_WISH_FROM)
+        return 0;
+    return 1 + (share - SONG_WISH_FROM) * 254 / (SONG_SHARE_WHOLE - SONG_WISH_FROM);
+}
+
+// The bar it hums: the one holding the first note it has not learned (the last bar, when it has them all) -- or, one
+// time in three, any bar before that, one it already sings. (A bar of under three notes takes the one before it in.)
+bool8 DaemonSong_Hum(u16 species, u8 share, u16 seed)
+{
+    const struct DaemonSongPart *p;
+    u8 i, first, end, bar, frontier;
+    u16 cum, startHalf;
+    s16 *data;
+    u8 taskId;
+
+    if (!DaemonSong_Has(species))
+        return FALSE;
+    DaemonSong_Stop();
+    p = &sSongParts[species];
+    frontier = 0xFF;
+    for (i = 0, cum = 0; i < p->noteCount; cum += sSongNotes[p->note + i][1], i++)
+    {
+        if (share < sSongNotes[p->note + i][2])
+        {
+            frontier = cum / BAR_HALVES;
+            break;
+        }
+        frontier = cum / BAR_HALVES;   // so far: the bar of the last note (a part learned whole hums its close)
+    }
+    bar = frontier;
+    if (frontier > 0 && seed % 3 == 0)
+        bar = (seed / 3) % frontier;
+    first = end = p->noteCount;
+    startHalf = 0;
+    for (i = 0, cum = 0; i < p->noteCount; cum += sSongNotes[p->note + i][1], i++)
+    {
+        if (first == p->noteCount && cum >= bar * BAR_HALVES)
+        {
+            first = i;
+            startHalf = cum;
+        }
+        if (cum >= (bar + 1) * BAR_HALVES)
+        {
+            end = i;
+            break;
+        }
+    }
+    if (first >= end)
+        return FALSE;
+    // A bar of fewer than three notes (a part's closing note can fill one alone) takes in the bar before it, so the
+    // hum is always a phrase and never one held note.
+    if (end - first < 3 && bar > 0)
+    {
+        for (i = 0, cum = 0; i < first; cum += sSongNotes[p->note + i][1], i++)
+        {
+            if (cum >= (bar - 1) * BAR_HALVES)
+            {
+                first = i;
+                startHalf = cum;
+                break;
+            }
+        }
+    }
+
+    taskId = CreateTask(Task_DaemonSong, 80);
+    data = gTasks[taskId].data;
+    data[tPart0] = species;
+    data[tParts] = 1;
+    data[tPart] = 0;
+    data[tShare] = share | SHARE_HUM;
+    data[tLimit] = end;     // non-zero: no bass under it
+    BeginPart(data);
+    data[tNote] = first;
+    data[tMelCum] = startHalf;
+    data[tFrame] = FrameAt(p, startHalf);
+    return TRUE;
+}
+
+bool8 DaemonSong_IsHumming(void)
+{
+    u8 taskId = FindTaskIdByFunc(Task_DaemonSong);
+
+    return taskId != TASK_NONE && (gTasks[taskId].data[tShare] & SHARE_HUM);
+}
+
+bool8 DaemonSong_Heard(u16 *serial, s16 *heard, s16 *truePitch, s16 *near)
+{
+    u8 taskId = FindTaskIdByFunc(Task_DaemonSong);
+    s16 *data;
+
+    if (taskId == TASK_NONE)
+        return FALSE;
+    data = gTasks[taskId].data;
+    if (data[tHeard] == NOTHING_HEARD)
+        return FALSE;   // between parts, or before the first note
+    *serial = (data[tPart] << 8) | data[tNote];
+    *heard = data[tHeard];
+    *truePitch = data[tTrue];
+    *near = data[tNear];
+    return TRUE;
+}
+
+#if DAEMONS_DEBUG
+u32 DaemonSong_ExpAtShare(u16 species, u8 share)
+{
+    const struct DaemonSongPart *p;
+    u32 lo, hi;
+
+    if (!DaemonSong_Has(species))
+        return 0;
+    p = &sSongParts[species];
+    lo = gExperienceTables[gSpeciesInfo[species].growthRate][p->from];
+    hi = gExperienceTables[gSpeciesInfo[species].growthRate][p->to];
+    return lo + (hi - lo) * share / 255 + 1;
+}
+#endif

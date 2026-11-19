@@ -34,6 +34,7 @@
 #include "constants/songs.h"
 #include "constants/pokemon.h"
 #include "constants/trainers.h"
+#include "daemons_follower.h"   // T-596
 
 enum {
     TRANSITION_TYPE_NORMAL,
@@ -466,6 +467,8 @@ static void CB2_EndWildBattle(void)
     }
     else
     {
+        if (gBattleOutcome == B_OUTCOME_WON || gBattleOutcome == B_OUTCOME_CAUGHT)
+            Follower_AfterBattle();   // T-596: a daemon near its evolution may ask to sing
         SetMainCallback2(CB2_ReturnToField);
         gFieldCallback = FieldCB_SafariZoneRanOutOfBalls;
     }
@@ -981,6 +984,8 @@ static void CB2_EndTrainerBattle(void)
         }
         else
         {
+            if (gBattleOutcome == B_OUTCOME_WON)
+                Follower_AfterBattle();   // T-596: after the trainer's own script, it may ask to sing
             SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
             SetBattledTrainerFlag();
             QuestLogEvents_HandleEndTrainerBattle();

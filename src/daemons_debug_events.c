@@ -68,6 +68,7 @@ enum
     EV_YEAR_ALL, EV_YEAR1, EV_YEAR12 = EV_YEAR1 + HOLIDAY_YEAR_LINE_COUNT - 1, EV_GIFTS_AGAIN,   // T-416
     EV_FOLLOWER, EV_FRIEND_0, EV_FRIEND_70, EV_FRIEND_150, EV_FRIEND_255,   // T-18
     EV_LEAD_SHINY,                                                          // T-18 P3
+    EV_NEAR_SONG, EV_ASK_SING,                                              // T-596
     EV_FEEL_SLOT1, EV_FEEL_SLOT6 = EV_FEEL_SLOT1 + PARTY_SIZE - 1,            // T-431
     EV_FEEL_3H, EV_FEEL_12H, EV_FEEL_DAY, EV_FEEL_GLAD, EV_FEEL_MAD, EV_FEEL_SAD, EV_FEEL_AFRAID,
     EV_FEEL_USE_ITEM,                                                       // T-433
@@ -218,6 +219,8 @@ static const u8 sName_Friend70[]    = _("LEAD FRIENDSHIP 70");
 static const u8 sName_Friend150[]   = _("LEAD FRIENDSHIP 150");
 static const u8 sName_Friend255[]   = _("LEAD FRIENDSHIP 255");
 static const u8 sName_LeadShiny[]   = _("LEAD SHINY");
+static const u8 sName_NearSong[]    = _("LEAD NEAR ITS SONG (HUMS)");   // T-596: its part 240/255, a hum soon
+static const u8 sName_AskSing[]     = _("ASK TO SING (AS IF A WIN)");   // T-596: it asks back in the field
 
 static const u8 sName_Feelings[]    = _("FEELINGS >");               // T-431
 static const u8 sName_Feel3H[]      = _("+3 HOURS (EVERY STAMP)");
@@ -363,6 +366,8 @@ static const struct DbgRow sRows_Follower[] = {
     { sName_Friend150,  R_GIVE,   EV_FRIEND_150 },
     { sName_Friend255,  R_GIVE,   EV_FRIEND_255 },
     { sName_LeadShiny,  R_TOGGLE, EV_LEAD_SHINY },
+    { sName_NearSong,   R_GIVE,   EV_NEAR_SONG },    // T-596
+    { sName_AskSing,    R_GIVE,   EV_ASK_SING },
 };
 
 //  T-431 P1: each party daemon's feelings as they are now (faded), friendship beside them, and the clock pushed on.
@@ -766,6 +771,8 @@ static void Apply(u8 ev, bool8 on)
     case EV_FRIEND_150:   SetLeadFriendship(150); return;
     case EV_FRIEND_255:   SetLeadFriendship(255); return;
     case EV_LEAD_SHINY:   SetLeadShiny(on); return;
+    case EV_NEAR_SONG:    Follower_DebugNearSong(); return;    // T-596
+    case EV_ASK_SING:     Follower_DebugAskToSing(); return;
     case EV_FEEL_3H:      Feelings_DebugAge(FEELINGS_HALF_LIFE); return;          // T-431
     case EV_FEEL_12H:     Feelings_DebugAge(FEELINGS_HALF_LIFE * 4); return;
     case EV_FEEL_DAY:     Feelings_DebugAge(FEELINGS_LOOK_BACK + 1); return;

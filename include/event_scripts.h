@@ -1382,5 +1382,6 @@ extern const u8 Follower_Text_Summer0[];
 extern const u8 Follower_Text_Summer1[];
 extern const u8 Follower_Text_Autumn0[];
 extern const u8 Follower_Text_Autumn1[];
+extern const u8 EventScript_FollowerWantsToSing[];   // T-596
 
 #endif //GUARD_EVENT_SCRIPTS_H
