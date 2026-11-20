@@ -697,7 +697,7 @@ const u8 *DaemonSong_Listen(u8 key, const s8 *ring, u8 count)
             continue;
         national = SpeciesToNationalPokedexNum(s->species);
         if (!GetSetPokedexFlag(national, FLAG_GET_SEEN))
-            return NULL;   // the openings are unique: nothing else ends here
+            continue;   // unseen: look on -- safe even if a later table ever lets one opening end another (Musical Instruments' review)
         DaemonsSummoned_Set(national);
         gSpecialVar_0x8004 = s->species;
         return EventScript_DaemonSummoned;
