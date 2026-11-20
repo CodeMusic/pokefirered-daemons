@@ -45,7 +45,7 @@ the [DAEMONS releases page](https://github.com/CodeMusic/DAEMONS/releases) -- fo
 | **CodeMusic/pokefirered-daemons** | this: the GBA engine, where the game is |
 | [CodeMusic/pokered-daemons](https://github.com/CodeMusic/pokered-daemons) | the Game Boy build, where the vertical slice was made; a reference now |
 | [CodeMusic/daemons-companion](https://github.com/CodeMusic/daemons-companion) ([wiki](https://github.com/CodeMusic/daemons-companion/wiki)) | where a daemon goes when it is SENT out of the game: the app, the hub, the boards |
-| [CodeMusic/daemons-playground](https://github.com/CodeMusic/daemons-playground) ([wiki](https://github.com/CodeMusic/daemons-playground/wiki)) | the game in a browser, for demos and beta tests on your own network |
+| [CodeMusic/daemons-eudaimonia](https://github.com/CodeMusic/daemons-eudaimonia) ([wiki](https://github.com/CodeMusic/daemons-eudaimonia/wiki)) | EUDAIMONIA to come; today the playground, the game in a browser, for demos and beta tests on your own network |
 | [CodeMusic/gpt-play-pokemon-firered-daemons](https://github.com/CodeMusic/gpt-play-pokemon-firered-daemons) | the harness that lets a model play it |
 
 *Pokémon is Nintendo / Creatures / GAME FREAK. This fork is unaffiliated with and unendorsed by them. The disassembly is

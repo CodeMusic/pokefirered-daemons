@@ -30,7 +30,7 @@ published on the [DAEMONS releases page][releases] (latest: **v11.410.1**,
 2026-11-18; the newest thing in it that can be told about: every song a player
 hears is ours now, the GAME CORNER's reels and the UPTIME dance among the last), four to a release: CONTENT for *FireRed* 1.0 and Rev 1, CONTEXT
 for *LeafGreen* 1.0 and Rev 1. The game also plays in a browser on
-[**daemons-playground**][playground] (a private network only), and in the
+the playground in [**daemons-eudaimonia**][eudaimonia] (a private network only), and in the
 companion's [one app][oneapp] on an iPhone or iPad, which patches the player's
 own ROM on the device.
 
@@ -311,6 +311,6 @@ to pret and its contributors.
 [todo]: https://github.com/CodeMusic/DAEMONS/blob/main/docs/TODO.md
 [companion]: https://github.com/CodeMusic/daemons-companion
 [enginewiki]: https://github.com/CodeMusic/pokefirered-daemons/wiki
-[playground]: https://github.com/CodeMusic/daemons-playground
+[eudaimonia]: https://github.com/CodeMusic/daemons-eudaimonia
 [oneapp]: https://github.com/CodeMusic/daemons-companion/wiki/The-one-app
 [gb]: https://github.com/CodeMusic/pokered-daemons
