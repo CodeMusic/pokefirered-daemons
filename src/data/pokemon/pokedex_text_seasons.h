@@ -2,7 +2,7 @@
 //  The MUSAI branch's INDEX entries, one per seasonal form, both editions (vision 9.34).
 
 static const u8 sEeveeIndexText_Winter[] = _(
-    "In winter it keeps all five of its\n"
+    "In winter it keeps all seven of its\n"
     "futures folded close, the way a seed\n"
     "keeps a tree. It is still the whole.");
 static const u8 sEeveeIndexText_Spring[] = _(
