@@ -97,6 +97,38 @@ static const u8 sUmbreonIndexText_Autumn[] = _(
     "Watches the first frost from under its\n"
     "screen. It knows before anyone what\n"
     "the lake will do.");
+static const u8 sSongmusaiIndexText_Winter[] = _(
+    "In winter it hums under the snow, too low\n"
+    "to hear. In spring the brooks turn out to\n"
+    "know the tune.");
+static const u8 sSongmusaiIndexText_Spring[] = _(
+    "Every spring it learns one new song by ear\n"
+    "from whoever sings nearest. It gets the\n"
+    "words wrong. Never the time.");
+static const u8 sSongmusaiIndexText_Summer[] = _(
+    "On long evenings it sings across the\n"
+    "water. Something far off sings back, a\n"
+    "beat late. They keep the same time.");
+static const u8 sSongmusaiIndexText_Autumn[] = _(
+    "In autumn it sings the year's songs over,\n"
+    "slower each time, until it knows which\n"
+    "ones it will keep.");
+static const u8 sLangmusaiIndexText_Winter[] = _(
+    "In winter it says very little. What it says\n"
+    "is new. By spring the whole burrow is\n"
+    "saying it too.");
+static const u8 sLangmusaiIndexText_Spring[] = _(
+    "Each spring it hears a word it never\n"
+    "heard and uses it right the first time.\n"
+    "Asked where from, it has no answer.");
+static const u8 sLangmusaiIndexText_Summer[] = _(
+    "All summer it trades words with one other\n"
+    "that nobody else can follow. Neither made\n"
+    "them up. They were just there.");
+static const u8 sLangmusaiIndexText_Autumn[] = _(
+    "Each autumn the marks on its tail grow a\n"
+    "line. Nobody can read them. It reads them\n"
+    "aloud, and the others nod.");
 
 static const struct MusaiSeasonText sMusaiSeasonTexts[] = {
     {SPECIES_EEVEE, {sEeveeIndexText_Winter, sEeveeIndexText_Spring, sEeveeIndexText_Summer, sEeveeIndexText_Autumn}},
@@ -105,4 +137,6 @@ static const struct MusaiSeasonText sMusaiSeasonTexts[] = {
     {SPECIES_VAPOREON, {sVaporeonIndexText_Winter, sVaporeonIndexText_Spring, sVaporeonIndexText_Summer, sVaporeonIndexText_Autumn}},
     {SPECIES_ESPEON, {sEspeonIndexText_Winter, sEspeonIndexText_Spring, sEspeonIndexText_Summer, sEspeonIndexText_Autumn}},
     {SPECIES_UMBREON, {sUmbreonIndexText_Winter, sUmbreonIndexText_Spring, sUmbreonIndexText_Summer, sUmbreonIndexText_Autumn}},
+    {SPECIES_OLD_UNOWN_N, {sSongmusaiIndexText_Winter, sSongmusaiIndexText_Spring, sSongmusaiIndexText_Summer, sSongmusaiIndexText_Autumn}},
+    {SPECIES_OLD_UNOWN_O, {sLangmusaiIndexText_Winter, sLangmusaiIndexText_Spring, sLangmusaiIndexText_Summer, sLangmusaiIndexText_Autumn}},
 };

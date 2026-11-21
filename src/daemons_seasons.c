@@ -6,13 +6,14 @@
 #include "daemons_seasons.h"
 #include "constants/species.h"
 
-// T-532 (vision 9.34; the user, 2026-11-08): the six MUSAI wear the season, Unown's way -- one species, its PICTURE
+// T-532 (vision 9.34; the user, 2026-11-08): the MUSAI branch wears the season, Unown's way (the six, and since T-607
+// T-605's SONGMUSAI and LANGMUSAI) -- one species, its PICTURE
 // chosen when it is drawn. The forms are picture-only ids past SPECIES_UNOWN_QMARK (tools/genmusaiseasons.py writes
 // them and this table); the species never changes, so the save, the INDEX's counts, trades, evolution and stats are
 // untouched. Look only, and silent: nothing says it changed.
 #include "data/pokemon/musai_seasons.h"
 
-// The 24 INDEX entries, one per form, both editions (DAEMONS tools/port_index.py writes them, DRAFT).
+// The 32 INDEX entries, one per form, both editions (DAEMONS tools/port_index.py writes them, DRAFT).
 struct MusaiSeasonText
 {
     u16 species;

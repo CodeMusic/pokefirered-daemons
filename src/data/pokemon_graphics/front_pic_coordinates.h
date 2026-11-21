@@ -2294,5 +2294,35 @@ const struct MonCoords gMonFrontPicCoords[] =
         .size = MON_COORDS_SIZE(56, 48),
         .y_offset = 10,
     },
+    [SPECIES_OLD_UNOWN_N_WINTER] =
+    {
+        .size = MON_COORDS_SIZE(40, 48),
+        .y_offset = 10,
+    },
+    [SPECIES_OLD_UNOWN_N_SPRING] =
+    {
+        .size = MON_COORDS_SIZE(40, 48),
+        .y_offset = 10,
+    },
+    [SPECIES_OLD_UNOWN_N_AUTUMN] =
+    {
+        .size = MON_COORDS_SIZE(40, 48),
+        .y_offset = 10,
+    },
+    [SPECIES_OLD_UNOWN_O_WINTER] =
+    {
+        .size = MON_COORDS_SIZE(48, 56),
+        .y_offset = 7,
+    },
+    [SPECIES_OLD_UNOWN_O_SPRING] =
+    {
+        .size = MON_COORDS_SIZE(48, 56),
+        .y_offset = 7,
+    },
+    [SPECIES_OLD_UNOWN_O_AUTUMN] =
+    {
+        .size = MON_COORDS_SIZE(48, 56),
+        .y_offset = 8,
+    },
     // END genmusaiseasons
 };

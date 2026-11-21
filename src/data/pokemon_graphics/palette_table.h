@@ -459,5 +459,11 @@ const struct CompressedSpritePalette gMonPaletteTable[] =
     [SPECIES_UMBREON_WINTER] = {gMonPalette_UmbreonWinter, SPECIES_UMBREON},   // the base's tag
     [SPECIES_UMBREON_SPRING] = {gMonPalette_UmbreonSpring, SPECIES_UMBREON},   // the base's tag
     [SPECIES_UMBREON_AUTUMN] = {gMonPalette_UmbreonAutumn, SPECIES_UMBREON},   // the base's tag
+    [SPECIES_OLD_UNOWN_N_WINTER] = {gMonPalette_SongmusaiWinter, SPECIES_OLD_UNOWN_N},   // the base's tag
+    [SPECIES_OLD_UNOWN_N_SPRING] = {gMonPalette_SongmusaiSpring, SPECIES_OLD_UNOWN_N},   // the base's tag
+    [SPECIES_OLD_UNOWN_N_AUTUMN] = {gMonPalette_SongmusaiAutumn, SPECIES_OLD_UNOWN_N},   // the base's tag
+    [SPECIES_OLD_UNOWN_O_WINTER] = {gMonPalette_LangmusaiWinter, SPECIES_OLD_UNOWN_O},   // the base's tag
+    [SPECIES_OLD_UNOWN_O_SPRING] = {gMonPalette_LangmusaiSpring, SPECIES_OLD_UNOWN_O},   // the base's tag
+    [SPECIES_OLD_UNOWN_O_AUTUMN] = {gMonPalette_LangmusaiAutumn, SPECIES_OLD_UNOWN_O},   // the base's tag
     // END genmusaiseasons
 };

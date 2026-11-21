@@ -459,5 +459,11 @@ const struct CompressedSpritePalette gMonShinyPaletteTable[] =
     [SPECIES_UMBREON_WINTER] = {gMonShinyPalette_UmbreonWinter, SPECIES_UMBREON + SPECIES_SHINY_TAG},
     [SPECIES_UMBREON_SPRING] = {gMonShinyPalette_UmbreonSpring, SPECIES_UMBREON + SPECIES_SHINY_TAG},
     [SPECIES_UMBREON_AUTUMN] = {gMonShinyPalette_UmbreonAutumn, SPECIES_UMBREON + SPECIES_SHINY_TAG},
+    [SPECIES_OLD_UNOWN_N_WINTER] = {gMonShinyPalette_SongmusaiWinter, SPECIES_OLD_UNOWN_N + SPECIES_SHINY_TAG},
+    [SPECIES_OLD_UNOWN_N_SPRING] = {gMonShinyPalette_SongmusaiSpring, SPECIES_OLD_UNOWN_N + SPECIES_SHINY_TAG},
+    [SPECIES_OLD_UNOWN_N_AUTUMN] = {gMonShinyPalette_SongmusaiAutumn, SPECIES_OLD_UNOWN_N + SPECIES_SHINY_TAG},
+    [SPECIES_OLD_UNOWN_O_WINTER] = {gMonShinyPalette_LangmusaiWinter, SPECIES_OLD_UNOWN_O + SPECIES_SHINY_TAG},
+    [SPECIES_OLD_UNOWN_O_SPRING] = {gMonShinyPalette_LangmusaiSpring, SPECIES_OLD_UNOWN_O + SPECIES_SHINY_TAG},
+    [SPECIES_OLD_UNOWN_O_AUTUMN] = {gMonShinyPalette_LangmusaiAutumn, SPECIES_OLD_UNOWN_O + SPECIES_SHINY_TAG},
     // END genmusaiseasons
 };

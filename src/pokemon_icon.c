@@ -486,6 +486,12 @@ const u8 *const gMonIconTable[] = {
     [SPECIES_UMBREON_WINTER] = gMonIcon_UmbreonWinter,
     [SPECIES_UMBREON_SPRING] = gMonIcon_UmbreonSpring,
     [SPECIES_UMBREON_AUTUMN] = gMonIcon_UmbreonAutumn,
+    [SPECIES_OLD_UNOWN_N_WINTER] = gMonIcon_SongmusaiWinter,
+    [SPECIES_OLD_UNOWN_N_SPRING] = gMonIcon_SongmusaiSpring,
+    [SPECIES_OLD_UNOWN_N_AUTUMN] = gMonIcon_SongmusaiAutumn,
+    [SPECIES_OLD_UNOWN_O_WINTER] = gMonIcon_LangmusaiWinter,
+    [SPECIES_OLD_UNOWN_O_SPRING] = gMonIcon_LangmusaiSpring,
+    [SPECIES_OLD_UNOWN_O_AUTUMN] = gMonIcon_LangmusaiAutumn,
     // END genmusaiseasons
 };
 
@@ -949,6 +955,12 @@ const u8 gMonIconPaletteIndices[] = {
     [SPECIES_UMBREON_WINTER] = 2,
     [SPECIES_UMBREON_SPRING] = 2,
     [SPECIES_UMBREON_AUTUMN] = 2,
+    [SPECIES_OLD_UNOWN_N_WINTER] = 0,
+    [SPECIES_OLD_UNOWN_N_SPRING] = 0,
+    [SPECIES_OLD_UNOWN_N_AUTUMN] = 0,
+    [SPECIES_OLD_UNOWN_O_WINTER] = 0,
+    [SPECIES_OLD_UNOWN_O_SPRING] = 0,
+    [SPECIES_OLD_UNOWN_O_AUTUMN] = 0,
     // END genmusaiseasons
 };
 

@@ -459,5 +459,11 @@ const struct CompressedSpriteSheet gMonFrontPicTable[] =
     [SPECIES_UMBREON_WINTER] = {gMonFrontPic_UmbreonWinter, 0x800, SPECIES_UMBREON},
     [SPECIES_UMBREON_SPRING] = {gMonFrontPic_UmbreonSpring, 0x800, SPECIES_UMBREON},
     [SPECIES_UMBREON_AUTUMN] = {gMonFrontPic_UmbreonAutumn, 0x800, SPECIES_UMBREON},
+    [SPECIES_OLD_UNOWN_N_WINTER] = {gMonFrontPic_SongmusaiWinter, 0x800, SPECIES_OLD_UNOWN_N},
+    [SPECIES_OLD_UNOWN_N_SPRING] = {gMonFrontPic_SongmusaiSpring, 0x800, SPECIES_OLD_UNOWN_N},
+    [SPECIES_OLD_UNOWN_N_AUTUMN] = {gMonFrontPic_SongmusaiAutumn, 0x800, SPECIES_OLD_UNOWN_N},
+    [SPECIES_OLD_UNOWN_O_WINTER] = {gMonFrontPic_LangmusaiWinter, 0x800, SPECIES_OLD_UNOWN_O},
+    [SPECIES_OLD_UNOWN_O_SPRING] = {gMonFrontPic_LangmusaiSpring, 0x800, SPECIES_OLD_UNOWN_O},
+    [SPECIES_OLD_UNOWN_O_AUTUMN] = {gMonFrontPic_LangmusaiAutumn, 0x800, SPECIES_OLD_UNOWN_O},
     // END genmusaiseasons
 };
