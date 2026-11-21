@@ -257,8 +257,8 @@ const struct MonCoords gMonBackPicCoords[] =
     },
     [SPECIES_DUGTRIO] =
     {
-        .size = MON_COORDS_SIZE(56, 48),
-        .y_offset = 9,
+        .size = MON_COORDS_SIZE(56, 32),
+        .y_offset = 19,
     },
     [SPECIES_MEOWTH] =
     {
@@ -383,7 +383,7 @@ const struct MonCoords gMonBackPicCoords[] =
     [SPECIES_GOLEM] =
     {
         .size = MON_COORDS_SIZE(56, 48),
-        .y_offset = 8,
+        .y_offset = 11,
     },
     [SPECIES_PONYTA] =
     {
@@ -1267,13 +1267,13 @@ const struct MonCoords gMonBackPicCoords[] =
     },
     [SPECIES_OLD_UNOWN_C] =
     {
-        .size = MON_COORDS_SIZE(40, 56),
-        .y_offset = 8,
+        .size = MON_COORDS_SIZE(56, 64),
+        .y_offset = 1,
     },
     [SPECIES_OLD_UNOWN_D] =
     {
         .size = MON_COORDS_SIZE(48, 64),
-        .y_offset = 3,
+        .y_offset = 0,
     },
     [SPECIES_OLD_UNOWN_E] =
     {
@@ -1302,8 +1302,8 @@ const struct MonCoords gMonBackPicCoords[] =
     },
     [SPECIES_OLD_UNOWN_J] =
     {
-        .size = MON_COORDS_SIZE(40, 56),
-        .y_offset = 4,
+        .size = MON_COORDS_SIZE(32, 64),
+        .y_offset = 0,
     },
     [SPECIES_OLD_UNOWN_K] =
     {
@@ -1397,8 +1397,8 @@ const struct MonCoords gMonBackPicCoords[] =
     },
     [SPECIES_SCEPTILE] =
     {
-        .size = MON_COORDS_SIZE(48, 56),
-        .y_offset = 5,
+        .size = MON_COORDS_SIZE(56, 64),
+        .y_offset = 2,
     },
     [SPECIES_TORCHIC] =
     {

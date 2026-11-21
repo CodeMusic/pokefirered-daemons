@@ -1267,13 +1267,13 @@ const struct MonCoords gMonFrontPicCoords[] =
     },
     [SPECIES_OLD_UNOWN_C] =
     {
-        .size = MON_COORDS_SIZE(48, 56),
-        .y_offset = 7,
+        .size = MON_COORDS_SIZE(40, 64),
+        .y_offset = 3,
     },
     [SPECIES_OLD_UNOWN_D] =
     {
-        .size = MON_COORDS_SIZE(48, 64),
-        .y_offset = 3,
+        .size = MON_COORDS_SIZE(56, 64),
+        .y_offset = 2,
     },
     [SPECIES_OLD_UNOWN_E] =
     {
@@ -1302,8 +1302,8 @@ const struct MonCoords gMonFrontPicCoords[] =
     },
     [SPECIES_OLD_UNOWN_J] =
     {
-        .size = MON_COORDS_SIZE(48, 64),
-        .y_offset = 4,
+        .size = MON_COORDS_SIZE(64, 64),
+        .y_offset = 2,
     },
     [SPECIES_OLD_UNOWN_K] =
     {
@@ -1397,8 +1397,8 @@ const struct MonCoords gMonFrontPicCoords[] =
     },
     [SPECIES_SCEPTILE] =
     {
-        .size = MON_COORDS_SIZE(48, 64),
-        .y_offset = 4,
+        .size = MON_COORDS_SIZE(56, 64),
+        .y_offset = 2,
     },
     [SPECIES_TORCHIC] =
     {
