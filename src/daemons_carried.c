@@ -41,12 +41,16 @@
 //
 //  ALSO ONCE: T-450 put the carried line at INDEX 395-397 and moved MISSINGNO from 395 to 398, so a save from before
 //  carries MISSINGNO's seen and caught bits (and its FIRST MET byte) across. A new game sets the flag (new_game.c).
+//  T-605 put SONGMUSAI and LANGMUSAI at 398-399 and moves it once more, 398 to 400, under FLAG_MUSAI_DEX_MOVED.
 
 #define CARRIED_RIBBON_MARK     (1 << 2)
 #define CARRIED_RIBBON_MOVES    (1 << 3)    // T-455: its new species' routines are still to be offered
 
 #define CARRIED_OLD_MISSINGNO   395
 #define CARRIED_NEW_MISSINGNO   398
+//  T-605: SONGMUSAI and LANGMUSAI took INDEX 398-399, so MISSINGNO moves on again, 398 to 400 -- once more, under a flag
+//  of its own, after T-450's (a save from before both is carried 395 -> 398 -> 400 on the same load).
+#define MUSAI_NEW_MISSINGNO     400
 
 enum {
     CARRIED_NONE,
@@ -61,7 +65,7 @@ static EWRAM_DATA u8 sCarriedKind = 0;
 static EWRAM_DATA u8 sCarriedName[POKEMON_NAME_LENGTH + 1] = {0};
 static EWRAM_DATA bool8 sCarriedMovesOwed = FALSE;    // some daemon, party or box, still has bit 3: look at the party
 
-STATIC_ASSERT(NATIONAL_DEX_OLD_UNOWN_B == CARRIED_NEW_MISSINGNO, MissingnoIsWhereTheMoveSaysItIs);
+STATIC_ASSERT(NATIONAL_DEX_OLD_UNOWN_B == MUSAI_NEW_MISSINGNO, MissingnoIsWhereTheMoveSaysItIs);
 //  T-473: LOAN and TRADED_IN took bits of the u16 at 0x1E -- the record the companion reads and writes is still 80 bytes
 STATIC_ASSERT(sizeof(struct BoxPokemon) == 80, BoxPokemonIsStillEightyBytes);
 //  T-474: the partner species has nine bits (2-10 of 0x1E)
@@ -86,16 +90,27 @@ static void DexBitMove(u8 *flags, u16 from, u16 to)
     flags[(from - 1) / 8] &= ~(1 << ((from - 1) % 8));
 }
 
+static void MoveMissingnoFromTo(u16 from, u16 to)
+{
+    DexBitMove(gSaveBlock2Ptr->pokedex.seen, from, to);
+    DexBitMove(gSaveBlock2Ptr->pokedex.owned, from, to);
+    DexBitMove(gSaveBlock1Ptr->seen1, from, to);
+    DexBitMove(gSaveBlock1Ptr->seen2, from, to);
+    DaemonsFirstSeen_Move(from, to);
+}
+
 static void MoveMissingno(void)
 {
-    if (FlagGet(FLAG_CARRIED_DEX_MOVED))
-        return;
-    DexBitMove(gSaveBlock2Ptr->pokedex.seen, CARRIED_OLD_MISSINGNO, CARRIED_NEW_MISSINGNO);
-    DexBitMove(gSaveBlock2Ptr->pokedex.owned, CARRIED_OLD_MISSINGNO, CARRIED_NEW_MISSINGNO);
-    DexBitMove(gSaveBlock1Ptr->seen1, CARRIED_OLD_MISSINGNO, CARRIED_NEW_MISSINGNO);
-    DexBitMove(gSaveBlock1Ptr->seen2, CARRIED_OLD_MISSINGNO, CARRIED_NEW_MISSINGNO);
-    DaemonsFirstSeen_Move(CARRIED_OLD_MISSINGNO, CARRIED_NEW_MISSINGNO);
-    FlagSet(FLAG_CARRIED_DEX_MOVED);
+    if (!FlagGet(FLAG_CARRIED_DEX_MOVED))
+    {
+        MoveMissingnoFromTo(CARRIED_OLD_MISSINGNO, CARRIED_NEW_MISSINGNO);
+        FlagSet(FLAG_CARRIED_DEX_MOVED);
+    }
+    if (!FlagGet(FLAG_MUSAI_DEX_MOVED))     // T-605
+    {
+        MoveMissingnoFromTo(CARRIED_NEW_MISSINGNO, MUSAI_NEW_MISSINGNO);
+        FlagSet(FLAG_MUSAI_DEX_MOVED);
+    }
 }
 
 //  Where the save stands: the load has not read the map header yet, so FIRST MET is asked for by the save's own place.
@@ -270,6 +285,7 @@ void DaemonsCarried_OnLoad(void)
 void DaemonsCarried_NewGame(void)
 {
     FlagSet(FLAG_CARRIED_DEX_MOVED);   // a new game has no MISSINGNO at 395 to carry across
+    FlagSet(FLAG_MUSAI_DEX_MOVED);     // T-605: nor at 398
     sCarriedKind = CARRIED_NONE;
     sCarriedMovesOwed = FALSE;
 }

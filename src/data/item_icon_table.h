@@ -111,8 +111,8 @@ static const u32 *const sItemIconTable[ITEMS_COUNT + 1][2] =
     [ITEM_WATER_STONE]    = {gItemIcon_DAffect, gItemIconPalette_DAffect},   // T-525: DAEMONS tools/gbaitemicons.py
     [ITEM_LEAF_STONE]     = {gItemIcon_DReward, gItemIconPalette_DReward},   // T-525: DAEMONS tools/gbaitemicons.py
     // ????????
-    [ITEM_063]            = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark},
-    [ITEM_064]            = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark},
+    [ITEM_SONG_INPUT]     = {gItemIcon_DWaveform, gItemIconPalette_DWaveform},   // T-525: DAEMONS tools/gbaitemicons.py
+    [ITEM_LANG_INPUT]     = {gItemIcon_DUtterance, gItemIconPalette_DUtterance},   // T-525: DAEMONS tools/gbaitemicons.py
     [ITEM_065]            = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark},
     [ITEM_066]            = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark},
     // Valuables

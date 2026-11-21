@@ -4947,9 +4947,41 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM06_ROCK_SMASH)
                                         | TMHM(TM26_EARTHQUAKE)),
 
-    [SPECIES_OLD_UNOWN_N] = TMHM_LEARNSET(0),
+    [SPECIES_OLD_UNOWN_N] = TMHM_LEARNSET(TMHM(TM06_TOXIC)
+                                        | TMHM(TM11_SUNNY_DAY)
+                                        | TMHM(TM15_HYPER_BEAM)
+                                        | TMHM(TM17_PROTECT)
+                                        | TMHM(TM18_RAIN_DANCE)
+                                        | TMHM(TM23_IRON_TAIL)
+                                        | TMHM(TM24_THUNDERBOLT)
+                                        | TMHM(TM25_THUNDER)
+                                        | TMHM(TM27_RETURN)
+                                        | TMHM(TM28_DIG)
+                                        | TMHM(TM30_SHADOW_BALL)
+                                        | TMHM(TM34_SHOCK_WAVE)
+                                        | TMHM(TM42_FACADE)
+                                        | TMHM(TM44_REST)
+                                        | TMHM(HM05_FLASH)),
 
-    [SPECIES_OLD_UNOWN_O] = TMHM_LEARNSET(0),
+    [SPECIES_OLD_UNOWN_O] = TMHM_LEARNSET(TMHM(TM04_CALM_MIND)
+                                        | TMHM(TM06_TOXIC)
+                                        | TMHM(TM11_SUNNY_DAY)
+                                        | TMHM(TM15_HYPER_BEAM)
+                                        | TMHM(TM16_LIGHT_SCREEN)
+                                        | TMHM(TM17_PROTECT)
+                                        | TMHM(TM18_RAIN_DANCE)
+                                        | TMHM(TM23_IRON_TAIL)
+                                        | TMHM(TM27_RETURN)
+                                        | TMHM(TM28_DIG)
+                                        | TMHM(TM29_PSYCHIC)
+                                        | TMHM(TM30_SHADOW_BALL)
+                                        | TMHM(TM33_REFLECT)
+                                        | TMHM(TM42_FACADE)
+                                        | TMHM(TM44_REST)
+                                        | TMHM(TM48_SKILL_SWAP)
+                                        | TMHM(HM01_CUT)
+                                        | TMHM(HM05_FLASH)
+                                        | TMHM(TM02_DRAGON_CLAW)),
 
     [SPECIES_OLD_UNOWN_P] = TMHM_LEARNSET(0),
 

@@ -408,6 +408,10 @@ enum {
     NATIONAL_DEX_TETHERING,
     NATIONAL_DEX_COROUTINE,
 // END gbacarried
+// BEGIN gbamusaiforms -- T-605, MUSAI's sixth and seventh forms (tools/gbamusaiforms.py writes this)
+    NATIONAL_DEX_SONGMUSAI,
+    NATIONAL_DEX_LANGMUSAI,
+// END gbamusaiforms
     // Old Unown
     NATIONAL_DEX_OLD_UNOWN_B,
     NATIONAL_DEX_OLD_UNOWN_C,
@@ -438,7 +442,7 @@ enum {
 
 #define KANTO_DEX_COUNT     NATIONAL_DEX_MEW
 #define JOHTO_DEX_COUNT     NATIONAL_DEX_CELEBI
-#define NATIONAL_DEX_COUNT  NATIONAL_DEX_COROUTINE
+#define NATIONAL_DEX_COUNT  NATIONAL_DEX_LANGMUSAI
 
 // Hoenn Pokedex order
 enum {

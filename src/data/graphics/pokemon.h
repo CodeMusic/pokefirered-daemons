@@ -2534,6 +2534,20 @@ const u32 gMonShinyPalette_Coroutine[] = INCBIN_U32("graphics/pokemon/old_unown_
 const u8 gMonIcon_Coroutine[] = INCBIN_U8("graphics/pokemon/old_unown_m/icon.4bpp");
 const u8 gMonFootprint_Coroutine[] = INCBIN_U8("graphics/pokemon/old_unown_m/footprint.1bpp");
 // END gbacarried
+// BEGIN gbamusaiforms -- T-605, MUSAI's sixth and seventh forms (tools/gbamusaiforms.py writes this)
+const u32 gMonFrontPic_Songmusai[] = INCBIN_U32("graphics/pokemon/old_unown_n/front.4bpp.lz");
+const u32 gMonBackPic_Songmusai[] = INCBIN_U32("graphics/pokemon/old_unown_n/back.4bpp.lz");
+const u32 gMonPalette_Songmusai[] = INCBIN_U32("graphics/pokemon/old_unown_n/normal.gbapal.lz");
+const u32 gMonShinyPalette_Songmusai[] = INCBIN_U32("graphics/pokemon/old_unown_n/shiny.gbapal.lz");
+const u8 gMonIcon_Songmusai[] = INCBIN_U8("graphics/pokemon/old_unown_n/icon.4bpp");
+const u8 gMonFootprint_Songmusai[] = INCBIN_U8("graphics/pokemon/old_unown_n/footprint.1bpp");
+const u32 gMonFrontPic_Langmusai[] = INCBIN_U32("graphics/pokemon/old_unown_o/front.4bpp.lz");
+const u32 gMonBackPic_Langmusai[] = INCBIN_U32("graphics/pokemon/old_unown_o/back.4bpp.lz");
+const u32 gMonPalette_Langmusai[] = INCBIN_U32("graphics/pokemon/old_unown_o/normal.gbapal.lz");
+const u32 gMonShinyPalette_Langmusai[] = INCBIN_U32("graphics/pokemon/old_unown_o/shiny.gbapal.lz");
+const u8 gMonIcon_Langmusai[] = INCBIN_U8("graphics/pokemon/old_unown_o/icon.4bpp");
+const u8 gMonFootprint_Langmusai[] = INCBIN_U8("graphics/pokemon/old_unown_o/footprint.1bpp");
+// END gbamusaiforms
 const u32 gMonFrontPic_Absol[] = INCBIN_U32("graphics/pokemon/absol/front.4bpp.lz");
 const u32 gMonPalette_Absol[] = INCBIN_U32("graphics/pokemon/absol/normal.gbapal.lz");
 const u32 gMonBackPic_Absol[] = INCBIN_U32("graphics/pokemon/absol/back.4bpp.lz");

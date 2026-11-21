@@ -2585,6 +2585,20 @@ const u8 gCoroutinePokedexText[] = _(
     "picks up exactly where it left off.");
 
 // END gbacarried
+// BEGIN gbamusaiforms -- T-605, MUSAI's sixth and seventh forms (tools/gbamusaiforms.py writes this)
+// T-605, DRAFT
+const u8 gSongmusaiPokedexText[] = _(
+    "It sings back what it hears, a little\n"
+    "truer each time. Taught one song, it\n"
+    "finds that tune in everything.");
+
+// T-605, DRAFT
+const u8 gLangmusaiPokedexText[] = _(
+    "Nobody taught it the rules it speaks\n"
+    "by. It heard enough, and the rules were\n"
+    "there. It cannot list them.");
+
+// END gbamusaiforms
 const u8 gAbsolPokedexText[] = _(
     "It appears before a disaster. It knows\n"
     "what is coming, and every word of the\n"

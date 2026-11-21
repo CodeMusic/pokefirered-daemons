@@ -33,6 +33,8 @@ CeladonCity_DepartmentStore_4F_Items::
 	.2byte ITEM_THUNDER_STONE
 	.2byte ITEM_WATER_STONE
 	.2byte ITEM_LEAF_STONE
+	.2byte ITEM_SONG_INPUT    @ T-605 (DRAFT): WAVEFORM, beside the other inputs
+	.2byte ITEM_LANG_INPUT    @ T-605 (DRAFT): UTTERANCE
 	.2byte ITEM_NONE
 	release
 	end

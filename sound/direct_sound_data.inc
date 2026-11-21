@@ -1899,6 +1899,14 @@ Cry_Tethering::
 Cry_Coroutine::
 	.incbin "sound/direct_sound_samples/cries/coroutine.bin"
 
+	.align 2
+Cry_Songmusai::
+	.incbin "sound/direct_sound_samples/cries/songmusai.bin"
+
+	.align 2
+Cry_Langmusai::
+	.incbin "sound/direct_sound_samples/cries/langmusai.bin"
+
 
 	.align 2
 DirectSoundWaveData_register_noise::

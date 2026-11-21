@@ -287,6 +287,10 @@
 #define SPECIES_TETHERING SPECIES_OLD_UNOWN_L
 #define SPECIES_COROUTINE SPECIES_OLD_UNOWN_M
 // END gbacarried
+// BEGIN gbamusaiforms -- T-605, MUSAI's sixth and seventh forms (tools/gbamusaiforms.py writes this)
+#define SPECIES_SONGMUSAI SPECIES_OLD_UNOWN_N
+#define SPECIES_LANGMUSAI SPECIES_OLD_UNOWN_O
+// END gbamusaiforms
 // BEGIN gbanexus -- T-395, the NEXUS residents (tools/gbanexus.py writes this)
 #define SPECIES_REFLECTION SPECIES_OLD_UNOWN_C
 #define SPECIES_LODESTAR SPECIES_OLD_UNOWN_D

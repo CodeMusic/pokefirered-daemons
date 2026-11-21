@@ -657,6 +657,13 @@ static const u16 sCarriedPosModel[] = {
 };
 
 // END gbacarried
+// BEGIN gbamusaiforms -- T-605, MUSAI's sixth and seventh forms (tools/gbamusaiforms.py writes this)
+static const u16 sMusaiFormPosModel[] = {
+    [SPECIES_SONGMUSAI - SPECIES_OLD_UNOWN_N] = SPECIES_JOLTEON,
+    [SPECIES_LANGMUSAI - SPECIES_OLD_UNOWN_N] = SPECIES_ESPEON,
+};
+
+// END gbamusaiforms
 u8 Menu2_GetMonPosAttribute(u16 species, u32 personality, u8 attributeId)
 {
     if (species == SPECIES_UNOWN)
@@ -681,6 +688,8 @@ u8 Menu2_GetMonPosAttribute(u16 species, u32 personality, u8 attributeId)
         species = sNexusPosModel[species - SPECIES_OLD_UNOWN_C];
     else if (species >= SPECIES_OLD_UNOWN_K && species <= SPECIES_OLD_UNOWN_M)   // T-450
         species = sCarriedPosModel[species - SPECIES_OLD_UNOWN_K];
+    else if (species >= SPECIES_OLD_UNOWN_N && species <= SPECIES_OLD_UNOWN_O)   // T-605
+        species = sMusaiFormPosModel[species - SPECIES_OLD_UNOWN_N];
     if (species != SPECIES_NONE && attributeId < PSA_MON_ATTR_COUNT)
     {
         species--;

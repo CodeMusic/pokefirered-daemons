@@ -399,6 +399,8 @@ gCryTable::
 	cry Cry_Handshake
 	cry Cry_Tethering
 	cry Cry_Coroutine
+	cry Cry_Songmusai
+	cry Cry_Langmusai
 
 	.align 2
 gCryTable_Reverse::
@@ -801,3 +803,5 @@ gCryTable_Reverse::
 	cry_reverse Cry_Handshake
 	cry_reverse Cry_Tethering
 	cry_reverse Cry_Coroutine
+	cry_reverse Cry_Songmusai
+	cry_reverse Cry_Langmusai

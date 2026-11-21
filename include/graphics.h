@@ -2200,6 +2200,20 @@ extern const u32 gMonShinyPalette_Coroutine[];
 extern const u8 gMonIcon_Coroutine[];
 extern const u8 gMonFootprint_Coroutine[];
 // END gbacarried
+// BEGIN gbamusaiforms -- T-605, MUSAI's sixth and seventh forms (tools/gbamusaiforms.py writes this)
+extern const u32 gMonFrontPic_Songmusai[];
+extern const u32 gMonBackPic_Songmusai[];
+extern const u32 gMonPalette_Songmusai[];
+extern const u32 gMonShinyPalette_Songmusai[];
+extern const u8 gMonIcon_Songmusai[];
+extern const u8 gMonFootprint_Songmusai[];
+extern const u32 gMonFrontPic_Langmusai[];
+extern const u32 gMonBackPic_Langmusai[];
+extern const u32 gMonPalette_Langmusai[];
+extern const u32 gMonShinyPalette_Langmusai[];
+extern const u8 gMonIcon_Langmusai[];
+extern const u8 gMonFootprint_Langmusai[];
+// END gbamusaiforms
 extern const u32 gMonFrontPic_Absol[];
 extern const u32 gMonPalette_Absol[];
 extern const u32 gMonBackPic_Absol[];
@@ -5339,5 +5353,11 @@ extern const u32 gItemIconPalette_DDurinBerry[];
 
 extern const u32 gItemIcon_DBelueBerry[];   // T-525
 extern const u32 gItemIconPalette_DBelueBerry[];
+
+extern const u32 gItemIcon_DWaveform[];   // T-525
+extern const u32 gItemIconPalette_DWaveform[];
+
+extern const u32 gItemIcon_DUtterance[];   // T-525
+extern const u32 gItemIconPalette_DUtterance[];
 
 #endif //GUARD_GRAPHICS_H

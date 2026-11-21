@@ -100,8 +100,9 @@
 #define ITEM_THUNDER_STONE 96
 #define ITEM_WATER_STONE 97
 #define ITEM_LEAF_STONE 98
-#define ITEM_063 99
-#define ITEM_064 100
+#define ITEM_SONG_INPUT 99  // T-605: SONGMUSAI's input (name and words DRAFT). Was ITEM_063, unused -- beside the inputs,
+                            //   inside gItemEffectTable's range (it ends at LAST_BERRY_INDEX), which an EVO stone needs
+#define ITEM_LANG_INPUT 100 // T-605: LANGMUSAI's input (name and words DRAFT). Was ITEM_064, unused
 #define ITEM_065 101
 #define ITEM_066 102
 #define ITEM_TINY_MUSHROOM 103

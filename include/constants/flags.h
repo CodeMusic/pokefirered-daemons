@@ -2029,6 +2029,9 @@
                                                                              //   the magpie, the cairn, the mole, the sheaf
 #define FLAG_GARDEN_STONE_READ               (DAEMONS_FLAGS_START + 0x2C4)   // the cold stone's read is in THE LOG (once)
 
+//  T-605: SONGMUSAI and LANGMUSAI took INDEX 398-399, and MISSINGNO's bits move from 398 to 400 once (daemons_carried.c).
+#define FLAG_MUSAI_DEX_MOVED                 (DAEMONS_FLAGS_START + 0x2F0)
+
 #define DAEMONS_FLAGS_COUNT           0x400
 #define DAEMONS_FLAGS_END             (DAEMONS_FLAGS_START + DAEMONS_FLAGS_COUNT - 1)
 #define DAEMONS_FLAGS_SIZE            (DAEMONS_FLAGS_COUNT / 8)

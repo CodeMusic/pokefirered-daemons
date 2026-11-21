@@ -787,8 +787,8 @@ static const u16 sSpeciesToNationalPokedexNum[NUM_SPECIES - 1] =
     NATIONAL_DEX_HANDSHAKE,
     NATIONAL_DEX_TETHERING,
     NATIONAL_DEX_COROUTINE,
-    SPECIES_TO_NATIONAL(OLD_UNOWN_N),
-    SPECIES_TO_NATIONAL(OLD_UNOWN_O),
+    NATIONAL_DEX_SONGMUSAI,
+    NATIONAL_DEX_LANGMUSAI,
     SPECIES_TO_NATIONAL(OLD_UNOWN_P),
     SPECIES_TO_NATIONAL(OLD_UNOWN_Q),
     SPECIES_TO_NATIONAL(OLD_UNOWN_R),
@@ -1338,8 +1338,8 @@ static const u16 sHoennToNationalOrder[NUM_SPECIES - 1] =
     [HOENN_DEX_OLD_UNOWN_K - 1] = NATIONAL_DEX_HANDSHAKE,
     [HOENN_DEX_OLD_UNOWN_L - 1] = NATIONAL_DEX_TETHERING,
     [HOENN_DEX_OLD_UNOWN_M - 1] = NATIONAL_DEX_COROUTINE,
-    HOENN_TO_NATIONAL(OLD_UNOWN_N),
-    HOENN_TO_NATIONAL(OLD_UNOWN_O),
+    [HOENN_DEX_OLD_UNOWN_N - 1] = NATIONAL_DEX_SONGMUSAI,
+    [HOENN_DEX_OLD_UNOWN_O - 1] = NATIONAL_DEX_LANGMUSAI,
     HOENN_TO_NATIONAL(OLD_UNOWN_P),
     HOENN_TO_NATIONAL(OLD_UNOWN_Q),
     HOENN_TO_NATIONAL(OLD_UNOWN_R),
@@ -5532,6 +5532,12 @@ static const u16 sCarriedCries[] = {   // T-584: cry ids, each its own (tools/ge
     [SPECIES_COROUTINE - SPECIES_OLD_UNOWN_K] = 398,   // Cry_Coroutine
 };
 // END gbacarried
+// BEGIN gbamusaiforms -- T-605, MUSAI's sixth and seventh forms (tools/gbamusaiforms.py writes this)
+static const u16 sMusaiFormCries[] = {   // T-605: cry ids, each its own (tools/gencries.py)
+    [SPECIES_SONGMUSAI - SPECIES_OLD_UNOWN_N] = 399,   // Cry_Songmusai
+    [SPECIES_LANGMUSAI - SPECIES_OLD_UNOWN_N] = 400,   // Cry_Langmusai
+};
+// END gbamusaiforms
 u16 SpeciesToCryId(u16 species)
 {
     if (species < SPECIES_OLD_UNOWN_B - 1)
@@ -5541,6 +5547,8 @@ u16 SpeciesToCryId(u16 species)
         return sNexusCries[species - (SPECIES_OLD_UNOWN_C - 1)];
     if (species >= SPECIES_OLD_UNOWN_K - 1 && species <= SPECIES_OLD_UNOWN_M - 1)   // T-450
         return sCarriedCries[species - (SPECIES_OLD_UNOWN_K - 1)];
+    if (species >= SPECIES_OLD_UNOWN_N - 1 && species <= SPECIES_OLD_UNOWN_O - 1)   // T-605
+        return sMusaiFormCries[species - (SPECIES_OLD_UNOWN_N - 1)];
     if (species <= SPECIES_OLD_UNOWN_Z - 1)
         return SPECIES_UNOWN - 1;
 

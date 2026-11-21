@@ -292,7 +292,9 @@
 #define EVO_CARRIED          16 // T-450: grows on the companion (the bond, as param); never met on the cart
 #define EVO_TRADE_PARTNER    17 // T-474: traded FOR the species in param, and only for it (Gen 5's Karrablast and Shelmet)
 
-#define EVOS_PER_MON 5
+//  T-605 (the user, 2026-11-21): MUSAI grows into seven forms, so seven a species. ROM data only -- gEvolutionTable is
+//  const, and nothing in a save is sized by it.
+#define EVOS_PER_MON 7
 
 #define EVO_MODE_NORMAL     0
 #define EVO_MODE_TRADE      1

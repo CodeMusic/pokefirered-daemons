@@ -5167,6 +5167,32 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = -2,
     },
 // END gbacarried
+// BEGIN gbamusaiforms -- T-605, MUSAI's sixth and seventh forms (tools/gbamusaiforms.py writes this)
+    [NATIONAL_DEX_SONGMUSAI] =
+    {
+        .categoryName = _("MELODY"),   // T-605, DRAFT
+        .height = 9,
+        .weight = 245,
+        .description = gSongmusaiPokedexText,
+        .unusedDescription = gSongmusaiPokedexText,
+        .pokemonScale = 283,
+        .pokemonOffset = 8,
+        .trainerScale = 256,
+        .trainerOffset = -2,
+    },
+    [NATIONAL_DEX_LANGMUSAI] =
+    {
+        .categoryName = _("GRAMMAR"),   // T-605, DRAFT
+        .height = 9,
+        .weight = 265,
+        .description = gLangmusaiPokedexText,
+        .unusedDescription = gLangmusaiPokedexText,
+        .pokemonScale = 363,
+        .pokemonOffset = 12,
+        .trainerScale = 256,
+        .trainerOffset = -2,
+    },
+// END gbamusaiforms
     //  8.9 -- the entry the register does not hold. NATIONAL_DEX_OLD_UNOWN_B is
     //  387 and NATIONAL_DEX_COUNT is 386, so every list in the Index is bounded
     //  one short of it and the counter never counts it. This entry exists only

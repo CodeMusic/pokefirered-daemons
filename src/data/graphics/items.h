@@ -1126,3 +1126,7 @@ const u32 gItemIcon_DDurinBerry[] = INCBIN_U32("graphics/items/icons/d_durin_ber
 const u32 gItemIconPalette_DDurinBerry[] = INCBIN_U32("graphics/items/icon_palettes/d_durin_berry.gbapal.lz");
 const u32 gItemIcon_DBelueBerry[] = INCBIN_U32("graphics/items/icons/d_belue_berry.4bpp.lz");   // T-525: DAEMONS tools/gbaitemicons.py
 const u32 gItemIconPalette_DBelueBerry[] = INCBIN_U32("graphics/items/icon_palettes/d_belue_berry.gbapal.lz");
+const u32 gItemIcon_DWaveform[] = INCBIN_U32("graphics/items/icons/d_waveform.4bpp.lz");   // T-525: DAEMONS tools/gbaitemicons.py
+const u32 gItemIconPalette_DWaveform[] = INCBIN_U32("graphics/items/icon_palettes/d_waveform.gbapal.lz");
+const u32 gItemIcon_DUtterance[] = INCBIN_U32("graphics/items/icons/d_utterance.4bpp.lz");   // T-525: DAEMONS tools/gbaitemicons.py
+const u32 gItemIconPalette_DUtterance[] = INCBIN_U32("graphics/items/icon_palettes/d_utterance.gbapal.lz");
