@@ -49,8 +49,9 @@
 #if DAEMONS_DEBUG
 
 enum { PG_EVENTS, PG_MARKS, PG_NOTEBOOK, PG_DRIVERS, PG_ROOTS, PG_SONGS, PG_YEAR, PG_FOLLOWER, PG_FEELINGS, PG_THREE, PG_SPIRITS, PG_COUNT };
-enum { R_PAGE, R_GIVE, R_TOGGLE, R_ASK, R_VIEW, R_PICK };   // R_ASK gives, after a YES; R_VIEW only shows (T-431);
+enum { R_PAGE, R_GIVE, R_TOGGLE, R_ASK, R_VIEW, R_PICK, R_SCREEN };   // R_ASK gives, after a YES; R_VIEW only shows (T-431);
                                                             // R_PICK shows a party slot's THREE and picks it (T-454)
+                                                            // R_SCREEN opens a screen of its own (T-452: ART C)
 
 enum
 {
@@ -112,6 +113,7 @@ static const u8 sName_Everything[]   = _("EVERYTHING (THE OLD KIT)");
 static const u8 sName_Roster[]       = _("THE ROSTER (SIX, LV50)");
 static const u8 sName_EveryDaemon[]  = _("EVERY DAEMON, INDEX + PORT");
 static const u8 sName_Stock[]        = _("THE STOCK (POOL, MONEY)");
+static const u8 sName_ArtC[]         = _("ART C: OLD / NEW >");      // T-452: DRAFT, the arm-C trial (daemons_debug_artc.c)
 static const u8 sName_Opening[]      = _("THE OPENING, OVER");
 static const u8 sName_Origin[]       = _("THE ORIGIN OF A DAEMON");   // T-533: the bedroom shelf's book
 static const u8 sName_Shoes[]        = _("RUNNING SHOES");
@@ -258,6 +260,7 @@ static const struct DbgRow sRows_Events[] = {
     { sName_Everything,  R_ASK,    EV_EVERYTHING },
     { sName_Roster,      R_GIVE,   EV_ROSTER },
     { sName_EveryDaemon, R_GIVE,   EV_EVERY_DAEMON },
+    { sName_ArtC,        R_SCREEN, 0 },               // T-452: the 28 arm C redrew, old then new
     { sName_Stock,       R_GIVE,   EV_STOCK },
     { sName_Opening,     R_GIVE,   EV_OPENING },
     { sName_Origin,      R_TOGGLE, EV_ORIGIN },       // T-533: its sections follow the UNDERSTANDINGS (and the 8th MARK)
@@ -1135,6 +1138,12 @@ void DaemonsDebug_EventsAsk(void)
     gSpecialVar_0x8004 = FALSE;
     if (gSpecialVar_Result == DBG_BACK || gSpecialVar_Result == DBG_CLOSE)
         return;
+    if (sPages[sPage].rows[gSpecialVar_Result].kind == R_SCREEN)   // T-452: 2, and the script opens ART C
+    {
+        gSpecialVar_0x8004 = 2;
+        StringCopy(gStringVar4, sTitles[sPage]);
+        return;
+    }
     if (sPages[sPage].rows[gSpecialVar_Result].kind != R_ASK)
         return;
     gSpecialVar_0x8004 = TRUE;
@@ -1155,6 +1164,8 @@ void DaemonsDebug_EventsNotDone(void)
 #undef tArrows
 #undef tWidth
 #undef tArmed
+
+#include "data/daemons_debug_artc.h"   // T-452: ART C, the arm-C trial's old / new viewer
 
 #else
 

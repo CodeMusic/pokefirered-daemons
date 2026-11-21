@@ -12,5 +12,8 @@ void LoadBattleMenuWindowGfx(void);
 void LoadBattleTextboxAndBackground(void);
 void BattleInitBgsAndWindows(void);
 void DrawMainBattleBackground(void);
+#if DAEMONS_DEBUG
+void DaemonsDebug_LoadBattleTerrain(u16 terrain);   // T-452: ART C
+#endif
 
 #endif // GUARD_BATTLE_BG_H

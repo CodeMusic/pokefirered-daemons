@@ -26,6 +26,7 @@ DaemonsDebug_EventScript_GameEventsLoop::
 	goto_if_eq VAR_RESULT, 0x7F, DaemonsDebug_EventScript_GameEventsEnd
 	special DaemonsDebug_EventsAsk
 	goto_if_eq VAR_0x8004, TRUE, DaemonsDebug_EventScript_GameEventsAsk
+	goto_if_eq VAR_0x8004, 2, DaemonsDebug_EventScript_GameEventsArt
 DaemonsDebug_EventScript_GameEventsDo::
 	special DaemonsDebug_EventsDo
 	goto DaemonsDebug_EventScript_GameEventsLoop
@@ -41,6 +42,15 @@ DaemonsDebug_EventScript_GameEventsAsk::
 
 DaemonsDebug_EventScript_GameEventsNotDone::
 	special DaemonsDebug_EventsNotDone
+	goto DaemonsDebug_EventScript_GameEventsLoop
+
+@  T-452: ART C, the 28 daemons arm C redrew, old then new, on the battle's terrain (src/daemons_debug_artc.c). A native
+@  call rather than a special: the specials table is in the release ROMs as well.
+DaemonsDebug_EventScript_GameEventsArt::
+	closemessage
+	fadescreen FADE_TO_BLACK
+	callnative DaemonsDebug_ArtCOpen
+	waitstate
 	goto DaemonsDebug_EventScript_GameEventsLoop
 
 DaemonsDebug_EventScript_GameEventsEnd::

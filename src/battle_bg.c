@@ -1217,3 +1217,12 @@ bool8 LoadChosenBattleElement(u8 caseId)
     }
     return ret;
 }
+
+#if DAEMONS_DEBUG
+//  T-452: DEBUG -> GAME EVENTS -> ART C (daemons_debug_artc.c) paints the battle's own terrain outside a battle. Last in
+//  the file, so nothing above it moves a line in the release ROMs.
+void DaemonsDebug_LoadBattleTerrain(u16 terrain)
+{
+    LoadBattleTerrainGfx(terrain);
+}
+#endif
