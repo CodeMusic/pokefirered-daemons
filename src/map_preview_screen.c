@@ -60,7 +60,17 @@ static const u8 sMtEmberMapPreviewTilemap[] = INCBIN_U8("graphics/map_preview/mt
 static const u8 sSafariZoneMapPreviewPalette[] = INCBIN_U8("graphics/map_preview/safari_zone/tiles.gbapal");
 static const u8 sSafariZoneMapPreviewTiles[] = INCBIN_U8("graphics/map_preview/safari_zone/tiles.4bpp.lz");
 static const u8 sSafariZoneMapPreviewTilemap[] = INCBIN_U8("graphics/map_preview/safari_zone/tilemap.bin.lz");
-static const u8 sMoneanChamberMapPreviewPalette[] = INCBIN_U8("graphics/map_preview/monean_chamber/tiles.gbapal");
+// T-445: the seven TANOBY chambers share one picture (tiles, tilemap) and each shows it in its own palette: palette 13
+// with the band of pigment along its back wall in the chamber's own colour (T-447 pair 5), palette 14 vanilla's.
+// DAEMONS tools/gbapreviews.py --cards writes each <chamber>.pal. LoadGfx reads three palettes from .palptr, as
+// vanilla does; the third (BG palette 15) is whatever follows in ROM, as it always was, and the card never draws with it.
+static const u8 sMoneanChamberMapPreviewPalette[] = INCBIN_U8("graphics/map_preview/monean_chamber/monean.gbapal");
+static const u8 sLiptooChamberMapPreviewPalette[] = INCBIN_U8("graphics/map_preview/monean_chamber/liptoo.gbapal");
+static const u8 sWeepthChamberMapPreviewPalette[] = INCBIN_U8("graphics/map_preview/monean_chamber/weepth.gbapal");
+static const u8 sDilfordChamberMapPreviewPalette[] = INCBIN_U8("graphics/map_preview/monean_chamber/dilford.gbapal");
+static const u8 sScufibChamberMapPreviewPalette[] = INCBIN_U8("graphics/map_preview/monean_chamber/scufib.gbapal");
+static const u8 sRixyChamberMapPreviewPalette[] = INCBIN_U8("graphics/map_preview/monean_chamber/rixy.gbapal");
+static const u8 sViapoisChamberMapPreviewPalette[] = INCBIN_U8("graphics/map_preview/monean_chamber/viapois.gbapal");
 static const u8 sMoneanChamberMapPreviewTiles[] = INCBIN_U8("graphics/map_preview/monean_chamber/tiles.4bpp.lz");
 static const u8 sMoneanChamberMapPreviewTilemap[] = INCBIN_U8("graphics/map_preview/monean_chamber/tilemap.bin.lz");
 static const u8 sDottedHoleMapPreviewPalette[] = INCBIN_U8("graphics/map_preview/dotted_hole/tiles.gbapal");
@@ -283,7 +293,7 @@ static const struct MapPreviewScreen sMapPreviewScreenData[MPS_COUNT] = {
         .flagId = FLAG_WORLD_MAP_SEVEN_ISLAND_TANOBY_RUINS_MONEAN_CHAMBER,
         .tilesptr = sMoneanChamberMapPreviewTiles,
         .tilemapptr = sMoneanChamberMapPreviewTilemap,
-        .palptr = sMoneanChamberMapPreviewPalette
+        .palptr = sLiptooChamberMapPreviewPalette
     },
     [MPS_WEEPTH_CHAMBER] = {
         .mapsec = MAPSEC_WEEPTH_CHAMBER,
@@ -291,7 +301,7 @@ static const struct MapPreviewScreen sMapPreviewScreenData[MPS_COUNT] = {
         .flagId = FLAG_WORLD_MAP_SEVEN_ISLAND_TANOBY_RUINS_MONEAN_CHAMBER,
         .tilesptr = sMoneanChamberMapPreviewTiles,
         .tilemapptr = sMoneanChamberMapPreviewTilemap,
-        .palptr = sMoneanChamberMapPreviewPalette
+        .palptr = sWeepthChamberMapPreviewPalette
     },
     [MPS_TDILFORD_CHAMBER] = {
         .mapsec = MAPSEC_DILFORD_CHAMBER,
@@ -299,7 +309,7 @@ static const struct MapPreviewScreen sMapPreviewScreenData[MPS_COUNT] = {
         .flagId = FLAG_WORLD_MAP_SEVEN_ISLAND_TANOBY_RUINS_MONEAN_CHAMBER,
         .tilesptr = sMoneanChamberMapPreviewTiles,
         .tilemapptr = sMoneanChamberMapPreviewTilemap,
-        .palptr = sMoneanChamberMapPreviewPalette
+        .palptr = sDilfordChamberMapPreviewPalette
     },
     [MPS_SCUFIB_CHAMBER] = {
         .mapsec = MAPSEC_SCUFIB_CHAMBER,
@@ -307,7 +317,7 @@ static const struct MapPreviewScreen sMapPreviewScreenData[MPS_COUNT] = {
         .flagId = FLAG_WORLD_MAP_SEVEN_ISLAND_TANOBY_RUINS_MONEAN_CHAMBER,
         .tilesptr = sMoneanChamberMapPreviewTiles,
         .tilemapptr = sMoneanChamberMapPreviewTilemap,
-        .palptr = sMoneanChamberMapPreviewPalette
+        .palptr = sScufibChamberMapPreviewPalette
     },
     [MPS_RIXY_CHAMBER] = {
         .mapsec = MAPSEC_RIXY_CHAMBER,
@@ -315,7 +325,7 @@ static const struct MapPreviewScreen sMapPreviewScreenData[MPS_COUNT] = {
         .flagId = FLAG_WORLD_MAP_SEVEN_ISLAND_TANOBY_RUINS_MONEAN_CHAMBER,
         .tilesptr = sMoneanChamberMapPreviewTiles,
         .tilemapptr = sMoneanChamberMapPreviewTilemap,
-        .palptr = sMoneanChamberMapPreviewPalette
+        .palptr = sRixyChamberMapPreviewPalette
     },
     [MPS_VIAPOIS_CHAMBER] = {
         .mapsec = MAPSEC_VIAPOIS_CHAMBER,
@@ -323,7 +333,7 @@ static const struct MapPreviewScreen sMapPreviewScreenData[MPS_COUNT] = {
         .flagId = FLAG_WORLD_MAP_SEVEN_ISLAND_TANOBY_RUINS_MONEAN_CHAMBER,
         .tilesptr = sMoneanChamberMapPreviewTiles,
         .tilemapptr = sMoneanChamberMapPreviewTilemap,
-        .palptr = sMoneanChamberMapPreviewPalette
+        .palptr = sViapoisChamberMapPreviewPalette
     },
     // T-456: shown on arriving by a warp (GOTO, teleport, whiteout); ROUTE 23's walk-up is a map connection, which
     // never runs a preview, so it keeps the name popup
