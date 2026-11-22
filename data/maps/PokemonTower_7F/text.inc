@@ -42,3 +42,7 @@ PokemonTower_7F_Text_MrFujiThankYouFollowMe::
     .string "Follow me to my home, DAEMON\n"
     .string "HOUSE, at the foot of this tower.$"
 
+@ T-606 (DRAFT)
+PokemonTower_7F_Text_ShadowBook::
+    .string "Where someone knelt, the floor\n"
+    .string "is swept. A book lies there.$"

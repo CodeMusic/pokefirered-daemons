@@ -553,4 +553,5 @@ gSpecials::
 	def_special Follower_SingAsked           @ T-596: it sings its song as it knows it (waitstate; B stops it)
 	def_special Follower_SummonArrive        @ T-598: VAR_0x8004 comes to its song and sings (waitstate); VAR_RESULT: a QUOTATION in gStringVar4
 	def_special Follower_SummonLeave         @ T-598: ...and goes (waitstate)
+	def_special Shadow_Open                  @ T-606: THE SPELL LEFT RUNNING, at its cover (waitstate)
 gSpecialsEnd::

@@ -262,7 +262,7 @@
 #define ITEM_UNITY_BOOK 250 // T-519 item 3: THE UNITY BOOK, the two halves mended at DAEMON TOWER. Was ITEM_0FA, unused
 #define ITEM_ORIGIN_BOOK 251 // T-533: THE ORIGIN OF A DAEMON, from the bedroom shelf (name and words DRAFT). Was ITEM_0FB, unused
 #define ITEM_COMPASS 252 // T-586: DAVID's compass, its rose lettered in a mirror (DRAFT). Was ITEM_0FC, unused
-#define ITEM_0FD 253
+#define ITEM_SHADOW_BOOK 253 // T-606: THE SPELL LEFT RUNNING, where INIT knelt on DAEMON TOWER's top floor (name and words DRAFT). Was ITEM_0FD, unused
 #define ITEM_RED_SCARF 254
 #define ITEM_BLUE_SCARF 255
 #define ITEM_PINK_SCARF 256

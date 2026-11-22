@@ -146,6 +146,16 @@ EventScript_OriginBook::
 	releaseall
 	end
 
+@ T-606: THE SPELL LEFT RUNNING, from DAEMON TOWER's top floor, opened at its cover -- at any hour, read whole
+@ (book_reader.c Shadow_Open).
+EventScript_ShadowBook::
+	lockall
+	fadescreen FADE_TO_BLACK
+	special Shadow_Open
+	waitstate
+	releaseall
+	end
+
 @ T-586: DAVID's COMPASS, its rose over the field until A or B (src/daemons_compass.c).
 EventScript_Compass::
 	lockall

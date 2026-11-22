@@ -36,6 +36,7 @@ void FieldUseFunc_EudaimonLayer(u8 taskId);   // T-519 item 2
 void FieldUseFunc_UnityBook(u8 taskId);       // T-519 item 3
 void FieldUseFunc_Compass(u8 taskId);         // T-586
 void FieldUseFunc_OriginBook(u8 taskId);      // T-533
+void FieldUseFunc_ShadowBook(u8 taskId);      // T-606
 void FieldUseFunc_Play(u8 taskId);       // T-417
 void FieldUseFunc_VsSeeker(u8 taskId);
 void BattleUseFunc_PokeBallEtc(u8 taskId);

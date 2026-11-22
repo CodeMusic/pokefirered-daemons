@@ -1,5 +1,27 @@
 PokemonTower_7F_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, PokemonTower_7F_OnTransition
 	.byte 0
+
+@ T-606: THE SPELL LEFT RUNNING lies where INIT knelt, once he has gone home -- found, never given, and never naming
+@ him. Its ball is hidden until then and after it is taken; the SOOTHE BELL under the same tile is vanilla's and stays.
+PokemonTower_7F_OnTransition::
+	setflag FLAG_HIDE_SHADOW_BOOK
+	goto_if_unset FLAG_RESCUED_MR_FUJI, PokemonTower_7F_EventScript_ShadowBookStays
+	goto_if_set FLAG_GOT_SHADOW_BOOK, PokemonTower_7F_EventScript_ShadowBookStays
+	clearflag FLAG_HIDE_SHADOW_BOOK
+PokemonTower_7F_EventScript_ShadowBookStays::
+	end
+
+PokemonTower_7F_EventScript_ShadowBook::
+	lock
+	msgbox PokemonTower_7F_Text_ShadowBook
+	finditem ITEM_SHADOW_BOOK
+	checkitem ITEM_SHADOW_BOOK
+	goto_if_eq VAR_RESULT, FALSE, PokemonTower_7F_EventScript_ShadowBookLeft
+	setflag FLAG_GOT_SHADOW_BOOK
+PokemonTower_7F_EventScript_ShadowBookLeft::
+	release
+	end
 
 PokemonTower_7F_EventScript_MrFuji::
 	lock

@@ -2005,6 +2005,12 @@
 #define FLAG_ORIGIN_PAGE_8                   (DAEMONS_FLAGS_START + 0x1C9)   // X
 #define FLAG_ORIGIN_PAGE_9                   (DAEMONS_FLAGS_START + 0x1CA)   // XI
 
+//  T-606: THE SPELL LEFT RUNNING. Block + 0x160 .. + 0x16F is this book's (0x200 .. 0x2BF are the NOTEBOOK's SEEN
+//  runs, counted up from their first flag, so they show only two names). The book, found on DAEMON TOWER's top floor
+//  where INIT knelt, once he has gone home; and the ball it lies in there, hidden until then (the floor's ON_TRANSITION).
+#define FLAG_GOT_SHADOW_BOOK                 (DAEMONS_FLAGS_START + 0x160)
+#define FLAG_HIDE_SHADOW_BOOK                (DAEMONS_FLAGS_START + 0x161)
+
 //  T-547: THE BLANK TABLET in BLANCHE -- each face's thirteenth line, once read, never shows again (src/daemons_blank_tablet.c).
 #define FLAG_BLANK_TABLET_FRONT_READ         (DAEMONS_FLAGS_START + 0x1D0)   // the night face's, read in 3:30-3:59
 #define FLAG_BLANK_TABLET_BACK_READ          (DAEMONS_FLAGS_START + 0x1D1)   // the dawn face's, read in THE CREATOR'S HOUR

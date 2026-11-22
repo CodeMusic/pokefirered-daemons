@@ -807,6 +807,20 @@ void FieldUseFunc_OriginBook(u8 taskId)
     SetUpItemUseOnFieldCallback(taskId);
 }
 
+//  T-606: THE SPELL LEFT RUNNING, from DAEMON TOWER's top floor -- it opens on its cover at any hour, and reads whole.
+static void ItemUseOnFieldCB_ShadowBook(u8 taskId)
+{
+    LockPlayerFieldControls();
+    ScriptContext_SetupScript(EventScript_ShadowBook);
+    DestroyTask(taskId);
+}
+
+void FieldUseFunc_ShadowBook(u8 taskId)
+{
+    sItemUseOnFieldCB = ItemUseOnFieldCB_ShadowBook;
+    SetUpItemUseOnFieldCallback(taskId);
+}
+
 //  T-586: DAVID's COMPASS -- the bag closes and its rose opens over the field (src/daemons_compass.c).
 static void ItemUseOnFieldCB_Compass(u8 taskId)
 {

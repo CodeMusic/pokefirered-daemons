@@ -271,7 +271,7 @@ static const u32 *const sItemIconTable[ITEMS_COUNT + 1][2] =
     [ITEM_UNITY_BOOK]     = {gItemIcon_UnityBook, gItemIconPalette_UnityBook},   // T-519 item 3: DAEMONS tools/gensubtle.py
     [ITEM_ORIGIN_BOOK]    = {gItemIcon_OriginBook, gItemIconPalette_OriginBook},   // T-533: DAEMONS tools/gensubtle.py
     [ITEM_COMPASS]        = {gItemIcon_Compass, gItemIconPalette_Compass},   // T-586: DAEMONS tools/gencompass.py
-    [ITEM_0FD]            = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark},
+    [ITEM_SHADOW_BOOK]    = {gItemIcon_ShadowBook, gItemIconPalette_ShadowBook},   // T-606: DAEMONS tools/gensubtle.py
     // Contest hold items
     [ITEM_RED_SCARF]      = {gItemIcon_DRedScarf, gItemIconPalette_DRedScarf},   // T-525: DAEMONS tools/gbaitemicons.py
     [ITEM_BLUE_SCARF]     = {gItemIcon_DBlueScarf, gItemIconPalette_DBlueScarf},   // T-525: DAEMONS tools/gbaitemicons.py

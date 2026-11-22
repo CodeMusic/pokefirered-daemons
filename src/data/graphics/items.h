@@ -531,6 +531,8 @@ const u32 gItemIcon_OriginBook[] = INCBIN_U32("graphics/items/icons/origin_book.
 const u32 gItemIconPalette_OriginBook[] = INCBIN_U32("graphics/items/icon_palettes/origin_book.gbapal.lz");
 const u32 gItemIcon_Compass[] = INCBIN_U32("graphics/items/icons/compass.4bpp.lz");   // T-586: DAEMONS tools/gencompass.py
 const u32 gItemIconPalette_Compass[] = INCBIN_U32("graphics/items/icon_palettes/compass.gbapal.lz");
+const u32 gItemIcon_ShadowBook[] = INCBIN_U32("graphics/items/icons/shadow_book.4bpp.lz");   // T-606: DAEMONS tools/gensubtle.py
+const u32 gItemIconPalette_ShadowBook[] = INCBIN_U32("graphics/items/icon_palettes/shadow_book.gbapal.lz");
 
 const u32 gItemIcon_Harp[] = INCBIN_U32("graphics/items/icons/harp.4bpp.lz");   // T-417: DAEMONS tools/genplayicons.py
 const u32 gItemIconPalette_Harp[] = INCBIN_U32("graphics/items/icon_palettes/harp.gbapal.lz");

@@ -55,7 +55,8 @@
 //  Everything lives on the HEAP; EWRAM has under a kilobyte free.
 
 enum { BOOK_NOTEBOOK, BOOK_TEXTBOOK, BOOK_GUIDE, BOOK_SUBTLE, BOOK_HERMETIC, BOOK_EUDAIMON, BOOK_UNITY,   // T-423: THE SUBTLE LAYER; T-483; T-519
-       BOOK_ORIGIN };   // T-533: THE ORIGIN OF A DAEMON
+       BOOK_ORIGIN,     // T-533: THE ORIGIN OF A DAEMON
+       BOOK_SHADOW };   // T-606: THE SPELL LEFT RUNNING
 enum { VIEW_PAGE, VIEW_CONTENTS, VIEW_CHAPTER, VIEW_TOPIC, VIEW_COVER, VIEW_GUIDE_CONTENTS, VIEW_GUIDE_ENTRY,
        VIEW_SUBTLE_CONTENTS, VIEW_SUBTLE_ENTRY, VIEW_THIRTEEN,     // T-483 (7): Halloween's card
        VIEW_CARDS, VIEW_CARDS_SELECT, VIEW_CARDS_SPREAD, VIEW_CARDS_BOARD, VIEW_CARDS_READ };   // T-509
@@ -306,6 +307,7 @@ struct GuideEntry { const u8 *shortTitle; const u8 *title; const u8 *text; };
 #include "data/eudaimon_layer.h" // T-519 item 2: the torn book's dawn half, the same again
 #include "data/unity_layer.h"    // T-519 item 3: and the two mended
 #include "data/origin_book.h"    // T-533: THE ORIGIN OF A DAEMON, the same tool and types
+#include "data/shadow_book.h"    // T-606: THE SPELL LEFT RUNNING, the same again
 #include "data/arcana_cards.h"   // T-509: DAEMONS tools/port_arcana.py
 
 //  T-483: the layer books' tables (struct LayerBook is declared above the reader).
@@ -322,6 +324,11 @@ static const struct LayerBook sLayerBooks[4] =
 //  contiguous (gensubtle writes them so), which is what lets a cut be two counts.
 static const struct LayerBook sOriginWhole =
     { sOriginSections, sOriginEntries, sOriginPictures, sOriginCover, ORIGIN_SECTIONS, ORIGIN_ENTRIES };
+
+//  T-606: THE SPELL LEFT RUNNING, read whole. Its own table and not a fifth of sLayerBooks: the lens and the halves'
+//  tables index those, and nothing in this book may read as a half (the torn page's tint is keyed on the halves).
+static const struct LayerBook sShadowBook =
+    { sShadowSections, sShadowEntries, sShadowPictures, sShadowCover, SHADOW_SECTIONS, SHADOW_ENTRIES };
 
 //  T-529 (the user, 2026-11-07, by multiple choice; vision 4.40, DAEMONS docs/TODO.md T-529): THE UNITY BOOK'S LENS.
 //  Once the book is mended the reader holds only THE UNITY BOOK, and every page in it turns IN PLACE between three
@@ -1240,7 +1247,7 @@ static void DrawGuideEntry(void)
 static bool8 IsLayerBook(void)
 {
     return sBook->book == BOOK_SUBTLE || sBook->book == BOOK_HERMETIC || sBook->book == BOOK_EUDAIMON
-        || sBook->book == BOOK_UNITY || sBook->book == BOOK_ORIGIN;
+        || sBook->book == BOOK_UNITY || sBook->book == BOOK_ORIGIN || sBook->book == BOOK_SHADOW;
 }
 
 static const struct LayerBook *Layer(void)
@@ -1249,6 +1256,8 @@ static const struct LayerBook *Layer(void)
         return &sBook->lens->book;      // T-529: the reading the lens is turned to
     if (sBook->book == BOOK_ORIGIN)
         return &sBook->origin;          // T-533: only the sections that have come back (Origin_Open)
+    if (sBook->book == BOOK_SHADOW)
+        return &sShadowBook;            // T-606
     return &sLayerBooks[sBook->book == BOOK_UNITY ? 3 : sBook->book == BOOK_EUDAIMON ? 2 : sBook->book == BOOK_HERMETIC];
 }
 
@@ -2937,7 +2946,8 @@ static void Input_Cover(void)
     }
     else if (JOY_NEW(A_BUTTON))
     {
-        // THE SUBTLE LAYER and THE ORIGIN OF A DAEMON (T-533) open on their contents, as the Guide does.
+        // THE SUBTLE LAYER, THE ORIGIN OF A DAEMON (T-533) and THE SPELL LEFT RUNNING (T-606) open on their contents,
+        // as the Guide does.
         sBook->view = IsLayerBook() ? VIEW_SUBTLE_CONTENTS : VIEW_GUIDE_CONTENTS;
         Turn();
     }
@@ -3347,6 +3357,7 @@ static void Task_BookInit(u8 taskId)
                    : (sBook->book == BOOK_EUDAIMON) ? sEudaimonPal
                    : (sBook->book == BOOK_UNITY)    ? sUnityPal
                    : (sBook->book == BOOK_ORIGIN)   ? sOriginPal      // T-533
+                   : (sBook->book == BOOK_SHADOW)   ? sShadowPal      // T-606
                    : sTextbookPal;
 
     switch (sBook->initState)
@@ -3526,6 +3537,14 @@ void Origin_Open(void)
     sBook->origin = sOriginWhole;
     sBook->origin.sectionCount = open;
     sBook->origin.entryCount = sOriginWhole.sections[open - 1].first + sOriginWhole.sections[open - 1].count;
+}
+
+//  T-606: THE SPELL LEFT RUNNING, open at its cover -- at any hour, read whole: a cover, its contents, and each entry's
+//  picture on the left with its text on the right, as THE SUBTLE LAYER reads. It has no CARDS, no lens and no spells.
+void Shadow_Open(void)
+{
+    if (OpenBook(BOOK_SHADOW, VIEW_COVER))
+        sBook->picEntry = 0xFF;
 }
 
 //  T-315: a NOTEBOOK page that ends on a QR code -- one more page, after the text. Called just after it is opened.
