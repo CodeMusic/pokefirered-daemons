@@ -32,6 +32,8 @@ enum MapPreviewScreenId
     MPS_RIXY_CHAMBER,
     MPS_VIAPOIS_CHAMBER,
     MPS_INDIGO_PLATEAU,     // T-456: the REVIEW BOARD's card (UMBRA PLATEAU), new -- vanilla has none
+    MPS_SCORN_SOLUTIONS,    // T-445: SCORN SOLUTIONS' card (the lab's own section), new
+    MPS_ERRATA,             // T-445: ERRATA's card (the museum's own section), new
     MPS_COUNT
 };
 

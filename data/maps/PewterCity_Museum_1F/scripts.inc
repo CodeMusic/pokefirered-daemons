@@ -1,5 +1,10 @@
 PewterCity_Museum_1F_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, PewterCity_Museum_1F_OnTransition
 	.byte 0
+
+PewterCity_Museum_1F_OnTransition::
+	setworldmapflag FLAG_WORLD_MAP_ERRATA   @ T-445: its own section and card
+	end
 
 PewterCity_Museum_1F_EventScript_Scientist1::
 	lock

@@ -353,6 +353,9 @@ $(MAPPREVIEWGFXDIR)/digletts_cave/tiles.4bpp: %.4bpp: %.png
 $(MAPPREVIEWGFXDIR)/dotted_hole/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 377 -Wnum_tiles
 
+$(MAPPREVIEWGFXDIR)/errata/tiles.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 322 -Wnum_tiles
+
 $(MAPPREVIEWGFXDIR)/icefall_cave/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 390 -Wnum_tiles
 
@@ -394,6 +397,9 @@ $(MAPPREVIEWGFXDIR)/rocket_warehouse/tiles.4bpp: %.4bpp: %.png
 
 $(MAPPREVIEWGFXDIR)/safari_zone/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 310 -Wnum_tiles
+
+$(MAPPREVIEWGFXDIR)/scorn_solutions/tiles.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -num_tiles 238 -Wnum_tiles
 
 $(MAPPREVIEWGFXDIR)/seafoam_islands/tiles.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -num_tiles 410 -Wnum_tiles

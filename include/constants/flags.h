@@ -2032,6 +2032,11 @@
 //  T-605: SONGMUSAI and LANGMUSAI took INDEX 398-399, and MISSINGNO's bits move from 398 to 400 once (daemons_carried.c).
 #define FLAG_MUSAI_DEX_MOVED                 (DAEMONS_FLAGS_START + 0x2F0)
 
+//  T-445 (2026-11-22): SCORN SOLUTIONS and ERRATA have map sections and name cards of their own; each building's
+//  first entry is set as vanilla's FLAG_WORLD_MAP_* are (setworldmapflag), so the card shows long the first time
+#define FLAG_WORLD_MAP_SCORN_SOLUTIONS       (DAEMONS_FLAGS_START + 0x2F1)
+#define FLAG_WORLD_MAP_ERRATA                (DAEMONS_FLAGS_START + 0x2F2)
+
 #define DAEMONS_FLAGS_COUNT           0x400
 #define DAEMONS_FLAGS_END             (DAEMONS_FLAGS_START + DAEMONS_FLAGS_COUNT - 1)
 #define DAEMONS_FLAGS_SIZE            (DAEMONS_FLAGS_COUNT / 8)

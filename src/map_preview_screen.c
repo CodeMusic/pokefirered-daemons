@@ -95,6 +95,12 @@ static const u8 sIcefallCaveMapPreviewTilemap[] = INCBIN_U8("graphics/map_previe
 static const u8 sIndigoPlateauMapPreviewPalette[] = INCBIN_U8("graphics/map_preview/review_board/tiles.gbapal");
 static const u8 sIndigoPlateauMapPreviewTiles[] = INCBIN_U8("graphics/map_preview/review_board/tiles.4bpp.lz");
 static const u8 sIndigoPlateauMapPreviewTilemap[] = INCBIN_U8("graphics/map_preview/review_board/tilemap.bin.lz");
+static const u8 sScornSolutionsMapPreviewPalette[] = INCBIN_U8("graphics/map_preview/scorn_solutions/tiles.gbapal");
+static const u8 sScornSolutionsMapPreviewTiles[] = INCBIN_U8("graphics/map_preview/scorn_solutions/tiles.4bpp.lz");
+static const u8 sScornSolutionsMapPreviewTilemap[] = INCBIN_U8("graphics/map_preview/scorn_solutions/tilemap.bin.lz");
+static const u8 sErrataMapPreviewPalette[] = INCBIN_U8("graphics/map_preview/errata/tiles.gbapal");
+static const u8 sErrataMapPreviewTiles[] = INCBIN_U8("graphics/map_preview/errata/tiles.4bpp.lz");
+static const u8 sErrataMapPreviewTilemap[] = INCBIN_U8("graphics/map_preview/errata/tilemap.bin.lz");
 static const u8 sAlteringCaveMapPreviewPalette[] = INCBIN_U8("graphics/map_preview/altering_cave/tiles.gbapal");
 static const u8 sAlteringCaveMapPreviewTiles[] = INCBIN_U8("graphics/map_preview/altering_cave/tiles.4bpp.lz");
 static const u8 sAlteringCaveMapPreviewTilemap[] = INCBIN_U8("graphics/map_preview/altering_cave/tilemap.bin.lz");
@@ -344,6 +350,24 @@ static const struct MapPreviewScreen sMapPreviewScreenData[MPS_COUNT] = {
         .tilesptr = sIndigoPlateauMapPreviewTiles,
         .tilemapptr = sIndigoPlateauMapPreviewTilemap,
         .palptr = sIndigoPlateauMapPreviewPalette
+    },
+    // T-445 (2026-11-22): the lab and the museum have sections of their own (MAPSEC_SCORN_SOLUTIONS, MAPSEC_ERRATA), so
+    // walking in at the door is a change of section and shows the card; their rooms share it, so no card between them
+    [MPS_SCORN_SOLUTIONS] = {
+        .mapsec = MAPSEC_SCORN_SOLUTIONS,
+        .type = MPS_TYPE_CAVE,
+        .flagId = FLAG_WORLD_MAP_SCORN_SOLUTIONS,
+        .tilesptr = sScornSolutionsMapPreviewTiles,
+        .tilemapptr = sScornSolutionsMapPreviewTilemap,
+        .palptr = sScornSolutionsMapPreviewPalette
+    },
+    [MPS_ERRATA] = {
+        .mapsec = MAPSEC_ERRATA,
+        .type = MPS_TYPE_CAVE,
+        .flagId = FLAG_WORLD_MAP_ERRATA,
+        .tilesptr = sErrataMapPreviewTiles,
+        .tilemapptr = sErrataMapPreviewTilemap,
+        .palptr = sErrataMapPreviewPalette
     }
 };
 

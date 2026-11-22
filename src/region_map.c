@@ -939,6 +939,8 @@ static const u8 sMapFlyDestinations[][3] = {
     [MAPSEC_VIAPOIS_CHAMBER     - KANTO_MAPSEC_START] = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
     [MAPSEC_EMBER_SPA           - KANTO_MAPSEC_START] = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},
     [MAPSEC_NEXUS               - KANTO_MAPSEC_START] = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},   // T-417: THE NEXUS's own
+    [MAPSEC_SCORN_SOLUTIONS     - KANTO_MAPSEC_START] = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},   // T-445: the lab's own
+    [MAPSEC_ERRATA              - KANTO_MAPSEC_START] = {MAP(MAP_PALLET_TOWN),                           HEAL_LOCATION_NONE},   // T-445: the museum's own
 };
 
 static void RegionMap_DarkenPalette(u16 *pal, u16 size, u16 tint)
@@ -3150,6 +3152,10 @@ static u8 GetDungeonMapsecType(u8 mapsec)
         return FlagGet(FLAG_WORLD_MAP_SILPH_CO_1F) ? MAPSECTYPE_VISITED : MAPSECTYPE_NOT_VISITED;
     case MAPSEC_POKEMON_MANSION:
         return FlagGet(FLAG_WORLD_MAP_POKEMON_MANSION_1F) ? MAPSECTYPE_VISITED : MAPSECTYPE_NOT_VISITED;
+    case MAPSEC_SCORN_SOLUTIONS:     // T-445
+        return FlagGet(FLAG_WORLD_MAP_SCORN_SOLUTIONS) ? MAPSECTYPE_VISITED : MAPSECTYPE_NOT_VISITED;
+    case MAPSEC_ERRATA:              // T-445
+        return FlagGet(FLAG_WORLD_MAP_ERRATA) ? MAPSECTYPE_VISITED : MAPSECTYPE_NOT_VISITED;
     case MAPSEC_KANTO_SAFARI_ZONE:
         return FlagGet(FLAG_WORLD_MAP_SAFARI_ZONE_CENTER) ? MAPSECTYPE_VISITED : MAPSECTYPE_NOT_VISITED;
     case MAPSEC_POKEMON_LEAGUE:
@@ -3313,8 +3319,13 @@ static void GetPlayerPositionOnRegionMap_HandleOverrides(void)
         sMapCursor->y = 6;
         break;
     case MAPSEC_POKEMON_MANSION:
+    case MAPSEC_SCORN_SOLUTIONS:     // T-445: on QUICKSILVER IS., as the MANSION
         sMapCursor->x = 4;
         sMapCursor->y = 14;
+        break;
+    case MAPSEC_ERRATA:              // T-445: in SLATE CITY
+        sMapCursor->x = 4;
+        sMapCursor->y = 4;
         break;
     case MAPSEC_POKEMON_TOWER:
         sMapCursor->x = 18;

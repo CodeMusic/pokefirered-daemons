@@ -3,6 +3,7 @@ CinnabarIsland_PokemonLab_Entrance_MapScripts::
 	.byte 0
 
 CinnabarIsland_PokemonLab_Entrance_OnTransition::
+	setworldmapflag FLAG_WORLD_MAP_SCORN_SOLUTIONS   @ T-445: its own section and card
 	call_if_eq VAR_MAP_SCENE_CINNABAR_ISLAND_POKEMON_LAB_EXPERIMENT_ROOM_REVIVE_STATE, 1, CinnabarIsland_PokemonLab_Entrance_EventScript_ReadyFossil
 	end
 
