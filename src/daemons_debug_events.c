@@ -6,6 +6,7 @@
 #include "event_data.h"
 #include "fame_checker.h"
 #include "item.h"
+#include "item_menu.h"         // T-608: gSpecialVar_ItemId
 #include "list_menu.h"
 #include "menu.h"
 #include "menu_indicators.h"
@@ -1132,7 +1133,8 @@ void DaemonsDebug_EventsDo(void)
     StringExpandPlaceholders(gStringVar4, on ? sText_Given : sText_Taken);
 }
 
-//  After DaemonsDebug_EventsChoose: VAR_0x8004 is TRUE when the row chosen asks first, and gStringVar4 the question.
+//  After DaemonsDebug_EventsChoose: VAR_0x8004 is TRUE when the row chosen asks first, and gStringVar4 the question;
+//  3 (T-608) when it is USE THE ITEM ON SLOT 1 with an item that evolves the daemon there.
 void DaemonsDebug_EventsAsk(void)
 {
     gSpecialVar_0x8004 = FALSE;
@@ -1142,6 +1144,12 @@ void DaemonsDebug_EventsAsk(void)
     {
         gSpecialVar_0x8004 = 2;
         StringCopy(gStringVar4, sTitles[sPage]);
+        return;
+    }
+    if (sPages[sPage].rows[gSpecialVar_Result].arg == EV_FEEL_USE_ITEM
+     && GetEvolutionTargetSpecies(&gPlayerParty[0], EVO_MODE_ITEM_USE, gSpecialVar_ItemId) != SPECIES_NONE)
+    {
+        gSpecialVar_0x8004 = 3;   // T-608: an evolution item -- GAME EVENTS closes, and the scene ends on the field
         return;
     }
     if (sPages[sPage].rows[gSpecialVar_Result].kind != R_ASK)

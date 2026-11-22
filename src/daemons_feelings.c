@@ -8,10 +8,12 @@
 #include "daemon_saturation.h"
 #include "daemons_follower.h"
 #include "daemons_time.h"
+#include "evolution_scene.h"
 #include "berry.h"
 #include "fieldmap.h"
 #include "item.h"
 #include "item_menu.h"
+#include "overworld.h"
 #include "constants/abilities.h"
 #include "constants/battle.h"
 #include "constants/hold_effects.h"
@@ -755,8 +757,13 @@ void Feelings_DebugAge(u16 ticks)
 
 // T-433: USE THE ITEM ON SLOT 1 -- gSpecialVar_ItemId (the theatre pokes it) used on the first party daemon as the
 // party menu would (its first routine for an item that asks for one), so the route reads what the item pushes.
+// T-608: an evolution item starts the evolution scene from here, and the scene ends on gCB2_AfterEvolution -- which
+// the party menu sets (CB2_UseEvolutionStone) and this row never did, so the scene ended on whatever the last battle,
+// trade or party menu had left there (NULL after a boot: a black screen for ever). GAME EVENTS has closed itself first
+// (DaemonsDebug_EventsAsk, its script's GameEventsEvolve), so the scene ends on the field, as the bag's own path does.
 void Feelings_DebugUseItem(void)
 {
+    gCB2_AfterEvolution = CB2_ReturnToField;
     ExecuteTableBasedItemEffect(&gPlayerParty[0], gSpecialVar_ItemId, 0, 0);
 }
 

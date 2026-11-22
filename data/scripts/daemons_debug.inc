@@ -27,6 +27,7 @@ DaemonsDebug_EventScript_GameEventsLoop::
 	special DaemonsDebug_EventsAsk
 	goto_if_eq VAR_0x8004, TRUE, DaemonsDebug_EventScript_GameEventsAsk
 	goto_if_eq VAR_0x8004, 2, DaemonsDebug_EventScript_GameEventsArt
+	goto_if_eq VAR_0x8004, 3, DaemonsDebug_EventScript_GameEventsEvolve
 DaemonsDebug_EventScript_GameEventsDo::
 	special DaemonsDebug_EventsDo
 	goto DaemonsDebug_EventScript_GameEventsLoop
@@ -52,6 +53,15 @@ DaemonsDebug_EventScript_GameEventsArt::
 	callnative DaemonsDebug_ArtCOpen
 	waitstate
 	goto DaemonsDebug_EventScript_GameEventsLoop
+
+@  T-608: USE THE ITEM ON SLOT 1 with an evolution item. The scene leaves the field, and coming back to a list left
+@  open under it hung the game on its first B (the heap's assert, in FreeInternal, as the list was freed), so GAME
+@  EVENTS closes first and the scene ends on the field, as the bag's own path does (src/daemons_feelings.c).
+DaemonsDebug_EventScript_GameEventsEvolve::
+	closemessage
+	releaseall
+	special DaemonsDebug_EventsDo
+	end
 
 DaemonsDebug_EventScript_GameEventsEnd::
 	closemessage
