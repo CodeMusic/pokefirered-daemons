@@ -740,7 +740,7 @@ static void Task_EvolutionScene(u8 taskId)
     case EVOSTATE_INTRO_SING:
         if (IsCryFinished())
         {
-            DaemonSong_Start(gTasks[taskId].tPreEvoSpecies, SONG_SHARE_WHOLE, SONG_OWN_PART);
+            DaemonSong_Start(gTasks[taskId].tPreEvoSpecies, SONG_SHARE_WHOLE, SONG_OWN_PART | DaemonSong_MonMode(mon));   // T-602
             gTasks[taskId].tState++;
         }
         break;
@@ -837,7 +837,7 @@ static void Task_EvolutionScene(u8 taskId)
         if (IsCryFinished())
         {
             if (DaemonSong_GrowsOn(gTasks[taskId].tPostEvoSpecies))
-                DaemonSong_Start(gTasks[taskId].tPostEvoSpecies, 0, SONG_OWN_PART | SONG_ALLUSION);
+                DaemonSong_Start(gTasks[taskId].tPostEvoSpecies, 0, SONG_OWN_PART | SONG_ALLUSION | DaemonSong_MonMode(mon));
             gTasks[taskId].tState++;
         }
         break;
@@ -1208,7 +1208,7 @@ static void Task_TradeEvolutionScene(u8 taskId)
     case T_EVOSTATE_INTRO_SING:   // T-595, as EVOSTATE_INTRO_SING
         if (IsCryFinished())
         {
-            DaemonSong_Start(gTasks[taskId].tPreEvoSpecies, SONG_SHARE_WHOLE, SONG_OWN_PART);
+            DaemonSong_Start(gTasks[taskId].tPreEvoSpecies, SONG_SHARE_WHOLE, SONG_OWN_PART | DaemonSong_MonMode(mon));   // T-602
             gTasks[taskId].tState++;
         }
         break;
@@ -1300,7 +1300,7 @@ static void Task_TradeEvolutionScene(u8 taskId)
         if (IsCryFinished())
         {
             if (DaemonSong_GrowsOn(gTasks[taskId].tPostEvoSpecies))
-                DaemonSong_Start(gTasks[taskId].tPostEvoSpecies, 0, SONG_OWN_PART | SONG_ALLUSION);
+                DaemonSong_Start(gTasks[taskId].tPostEvoSpecies, 0, SONG_OWN_PART | SONG_ALLUSION | DaemonSong_MonMode(mon));
             gTasks[taskId].tState++;
         }
         break;

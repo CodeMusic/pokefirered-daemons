@@ -12,6 +12,7 @@
 #define SONG_LINE       0      // the whole line's song, the earlier parts whole and the last at its share
 #define SONG_OWN_PART   1      // only the form's own part (the evolution scene)
 #define SONG_ALLUSION   2      // with SONG_OWN_PART: only its opening, as its learning begins (a next form's hint)
+#define SONG_SHINY      4      // T-602: as a shiny sings it -- its kind's song, a few notes moved toward its colours
 
 // T-596: THE WISH TO SING. A daemon near its evolution hums one bar of its own part, quietly under the map's music
 // (the follower, src/daemons_follower.c); each note it sings can be read back as it sounds, to draw it.
@@ -23,15 +24,16 @@ bool8 DaemonSong_IsPlaying(void);
 void DaemonSong_Stop(void);
 u8 DaemonSong_ShareOf(u16 species, u32 exp);               // its own part, learned from its experience
 u8 DaemonSong_MonShare(struct Pokemon *mon);
+u8 DaemonSong_MonMode(struct Pokemon *mon);                // T-602: SONG_SHINY for a shiny, else 0 (or it into a mode)
 bool8 DaemonSong_GrowsOn(u16 species);                     // a form after it: it is still learning something new
-// The INDEX's SONG: a held daemon of the species sings as it knows it (the party first, then the boxes); a form
-// nobody holds -- a past form, or one only seen -- is sung whole. Pressed again, it stops.
+// The INDEX's SONG: a held daemon of the species sings as it knows it (the party first, then the boxes), a shiny as a
+// shiny sings (T-602); a form nobody holds -- a past form, or one only seen -- is sung whole. Pressed again, it stops.
 void DaemonSong_PlayForIndex(u16 species);
 
 // T-596: how much it wishes to sing, 0 (not at all: an egg, a final form, under SONG_WISH_FROM) to 255 (perfect).
 u8 DaemonSong_Wish(struct Pokemon *mon);
 // One bar of its own part as it knows it: the bar it is learning, or now and then one it has already, by `seed`.
-bool8 DaemonSong_Hum(u16 species, u8 share, u16 seed);
+bool8 DaemonSong_Hum(u16 species, u8 share, u16 seed, bool8 shiny);   // T-602: shiny, as a shiny hums it
 bool8 DaemonSong_IsHumming(void);
 // The note sounding: a number new with every note, its pitch heard this frame and its true pitch (semitones from middle
 // C), and how near it is to learned (0..255, or -1: learned). FALSE when nothing is sung.

@@ -6780,6 +6780,6 @@ static void CursorCB_Sing(u8 taskId)
     }
     StringExpandPlaceholders(gStringVar4, share == SONG_SHARE_WHOLE ? sText_SingWhole : sText_SingKnown);
     DisplayPartyMenuMessage(gStringVar4, TRUE);
-    DaemonSong_Start(GetMonData(mon, MON_DATA_SPECIES), share, SONG_LINE);
+    DaemonSong_Start(GetMonData(mon, MON_DATA_SPECIES), share, SONG_LINE | DaemonSong_MonMode(mon));   // T-602
     gTasks[taskId].func = Task_PartySinging;
 }

@@ -64,6 +64,7 @@ struct DaemonSummon
 };
 
 #include "data/daemon_summons.h"
+#include "data/daemon_song_shiny.h"   // T-602: the notes a shiny sings that its kind does not
 #include "data/text/daemon_quotations.h"   // T-599's QUOTATIONS (a stub of NULLs until it lands)
 
 #define FLICKER      4      // a static note's pitch moves every this many frames
@@ -78,6 +79,7 @@ struct DaemonSummon
 // for the user's ear.
 #define HUM_VOLUME   96
 #define SHARE_HUM    0x100  // tShare's high byte: the song is a hum
+#define SHARE_SHINY  0x200  // ...and T-602: it is sung as a shiny sings it
 #define BAR_HALVES   8      // a bar is four beats (gensongs: the bass's root a bar), eight half beats
 
 // The task's data: the whole state of a song.
@@ -175,6 +177,20 @@ static u8 BoxMonShare(struct BoxPokemon *box)
 u8 DaemonSong_MonShare(struct Pokemon *mon)
 {
     return BoxMonShare(&mon->box);
+}
+
+// T-602: a shiny sings as a shiny (pokemon.c's own test, which it keeps static)
+static u8 BoxMonMode(struct BoxPokemon *box)
+{
+    u32 otId = GetBoxMonData(box, MON_DATA_OT_ID);
+    u32 personality = GetBoxMonData(box, MON_DATA_PERSONALITY);
+
+    return GET_SHINY_VALUE(otId, personality) < SHINY_ODDS ? SONG_SHINY : 0;
+}
+
+u8 DaemonSong_MonMode(struct Pokemon *mon)
+{
+    return BoxMonMode(&mon->box);
 }
 
 // ------------------------------------------------------------------------------------------------------- the key
@@ -277,14 +293,39 @@ static void BeginPart(s16 *data)
     data[tHeard] = NOTHING_HEARD;   // T-596
 }
 
+// T-602: what a shiny sings at a note of a form's own part -- its kind's note, unless the shiny palette moved it
+static u8 ShinyNote(u16 species, u8 index, u8 note)
+{
+    s32 lo = 0, hi = ARRAY_COUNT(sShinyNotes);
+
+    while (lo < hi)   // the first row of the species (the rows are sorted by species, then note)
+    {
+        s32 mid = (lo + hi) / 2;
+
+        if (sShinyNotes[mid].species < species)
+            lo = mid + 1;
+        else
+            hi = mid;
+    }
+    for (; lo < (s32)ARRAY_COUNT(sShinyNotes) && sShinyNotes[lo].species == species; lo++)
+    {
+        if (sShinyNotes[lo].index == index)
+            return sShinyNotes[lo].note;
+    }
+    return note;
+}
+
 static void StartNote(s16 *data)
 {
     const struct DaemonSongPart *p = Part(data);
     const u8 *n = sSongNotes[p->note + data[tNote]];
     u8 share = PartShare(data);
+    u8 pitch = n[0];
     s32 near;
 
-    data[tTrue] = n[0] - 60;
+    if (data[tShare] & SHARE_SHINY)
+        pitch = ShinyNote(data[tPart0 + data[tPart]], data[tNote], pitch);
+    data[tTrue] = pitch - 60;
     data[tHeard] = data[tTrue];
     Play_SoundNote(PLAY_HARP, data[tTrue], FALSE);
     if (share >= n[2])
@@ -305,7 +346,7 @@ static void StartNote(s16 *data)
         data[tRng] = data[tPart0 + data[tPart]] * 31 + data[tNote] * 7 + 1;
         m4aMPlayVolumeControl(&gMPlayInfo_SE2, TRACKS_ALL, Loud(data, 200 + 56 * near / 255));
         Flicker(data, p);
-        StartHiss(data, n[0], near);
+        StartHiss(data, pitch, near);
     }
     data[tMelCum] += n[1];
     data[tNote]++;
@@ -416,7 +457,7 @@ bool8 DaemonSong_Start(u16 species, u8 share, u8 mode)
         data[tPart0 + i] = line[count - 1 - i];   // oldest first
     data[tParts] = count;
     data[tPart] = 0;
-    data[tShare] = share;
+    data[tShare] = share | ((mode & SONG_SHINY) ? SHARE_SHINY : 0);
     data[tLimit] = 0;
     if (mode & SONG_ALLUSION)
     {
@@ -432,7 +473,7 @@ bool8 DaemonSong_Start(u16 species, u8 share, u8 mode)
 void DaemonSong_PlayForIndex(u16 species)
 {
     u32 i, j;
-    u8 share = SONG_SHARE_WHOLE;
+    u8 share = SONG_SHARE_WHOLE, mode = SONG_LINE;
     bool8 found = FALSE;
 
     if (DaemonSong_IsPlaying())
@@ -445,6 +486,7 @@ void DaemonSong_PlayForIndex(u16 species)
         if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG) == species)
         {
             share = DaemonSong_MonShare(&gPlayerParty[i]);
+            mode |= DaemonSong_MonMode(&gPlayerParty[i]);
             found = TRUE;
         }
     }
@@ -457,11 +499,12 @@ void DaemonSong_PlayForIndex(u16 species)
             if (GetBoxMonData(box, MON_DATA_SPECIES_OR_EGG) == species)
             {
                 share = BoxMonShare(box);
+                mode |= BoxMonMode(box);
                 found = TRUE;
             }
         }
     }
-    if (!DaemonSong_Start(species, share, SONG_LINE))
+    if (!DaemonSong_Start(species, share, mode))
         PlayCry_NormalNoDucking(species, 0, CRY_VOLUME_RS, CRY_PRIORITY_NORMAL);
 }
 
@@ -482,7 +525,7 @@ u8 DaemonSong_Wish(struct Pokemon *mon)
 
 // The bar it hums: the one holding the first note it has not learned (the last bar, when it has them all) -- or, one
 // time in three, any bar before that, one it already sings. (A bar of under three notes takes the one before it in.)
-bool8 DaemonSong_Hum(u16 species, u8 share, u16 seed)
+bool8 DaemonSong_Hum(u16 species, u8 share, u16 seed, bool8 shiny)
 {
     const struct DaemonSongPart *p;
     u8 i, first, end, bar, frontier;
@@ -544,7 +587,7 @@ bool8 DaemonSong_Hum(u16 species, u8 share, u16 seed)
     data[tPart0] = species;
     data[tParts] = 1;
     data[tPart] = 0;
-    data[tShare] = share | SHARE_HUM;
+    data[tShare] = share | SHARE_HUM | (shiny ? SHARE_SHINY : 0);
     data[tLimit] = end;     // non-zero: no bass under it
     BeginPart(data);
     data[tNote] = first;

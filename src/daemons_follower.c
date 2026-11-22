@@ -1954,7 +1954,7 @@ static void Hum(struct Sprite *sprite)
         return;
     mon = &gPlayerParty[slot];
     sFollower.heardSerial = 0xFFFF;
-    if (DaemonSong_Hum(GetMonData(mon, MON_DATA_SPECIES), DaemonSong_MonShare(mon), Random()))
+    if (DaemonSong_Hum(GetMonData(mon, MON_DATA_SPECIES), DaemonSong_MonShare(mon), Random(), DaemonSong_MonMode(mon) != 0))
     {
         sFollower.humTicked = TRUE;
 #if DAEMONS_DEBUG
@@ -2047,7 +2047,7 @@ void Follower_SingAsked(void)
         mon = &gPlayerParty[slot];
         LoadHumPalette();   // without a slot it still sings; only the notes are not drawn
         sFollower.heardSerial = 0xFFFF;
-        if (DaemonSong_Start(GetMonData(mon, MON_DATA_SPECIES), DaemonSong_MonShare(mon), SONG_LINE))
+        if (DaemonSong_Start(GetMonData(mon, MON_DATA_SPECIES), DaemonSong_MonShare(mon), SONG_LINE | DaemonSong_MonMode(mon)))
         {
             sFollower.singing = TRUE;
             CreateTask(Task_FollowerSinging, 80);
