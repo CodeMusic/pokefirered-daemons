@@ -1385,5 +1385,6 @@ extern const u8 Follower_Text_Autumn0[];
 extern const u8 Follower_Text_Autumn1[];
 extern const u8 EventScript_FollowerWantsToSing[];   // T-596
 extern const u8 EventScript_DaemonSummoned[];        // T-598
+extern const u8 EventScript_DaemonSummonAlmost[];    // T-613: a hook in the wrong key
 
 #endif //GUARD_EVENT_SCRIPTS_H

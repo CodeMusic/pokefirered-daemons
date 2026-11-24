@@ -200,3 +200,12 @@ EventScript_DaemonSummonedGoes:
 	waitstate
 	releaseall
 	end
+
+@ T-613: a hook played in the wrong key -- it does not come; its hook is heard back flat, and PLAY's own ALMOST line.
+EventScript_DaemonSummonAlmost::
+	lockall
+	special DaemonSong_SingAlmost
+	waitstate
+	msgbox Text_Play_Almost
+	releaseall
+	end

@@ -25,6 +25,7 @@
 #include "play.h"
 #include "pokemon.h"
 #include "pokemon_storage_system.h"
+#include "script.h"   // T-613: ScriptContext_Enable, ALMOST's waitstate
 #include "sound.h"
 #include "task.h"
 #include "constants/sound.h"
@@ -49,6 +50,14 @@ struct DaemonSongPart
     u8 minor;
     u8 from;         // the level its part begins
     u8 to;           // the level it is perfect at
+};
+
+// T-613: a final form's hidden CHORUS -- its runs in sSongChorusParts, one between each two verses of its song
+struct DaemonSongChorus
+{
+    u16 species;
+    u8 first;        // its first run in sSongChorusParts
+    u8 count;        // its runs: the gaps between its verses
 };
 
 #include "data/daemon_songs.h"
@@ -80,12 +89,18 @@ struct DaemonSummon
 #define HUM_VOLUME   96
 #define SHARE_HUM    0x100  // tShare's high byte: the song is a hum
 #define SHARE_SHINY  0x200  // ...and T-602: it is sung as a shiny sings it
+#define SHARE_CHORUS 0x400  // ...and T-613: its chorus sung between its verses (the last form knows its verse whole)
+#define SHARE_FLAT   0x800  // ...and T-613: sung flat, as a hook played in the wrong key comes back (ALMOST)
 #define BAR_HALVES   8      // a bar is four beats (gensongs: the bass's root a bar), eight half beats
+// T-613: a note's length holds the rest after it too (a verse breathes at its commas and full stops); the harp sounds it
+// at most this many half beats (gensongs' NOTE_RING) and is silent for the rest
+#define NOTE_RING    5
+#define ALMOST_FLAT  96     // T-613: how flat a hook comes back in the wrong key, of 256 to a semitone (about 40 cents)
 
 // The task's data: the whole state of a song.
 #define tPart0    0   // data[0..2]: the parts' species, oldest first
 #define tParts    3
-#define tPart     4   // the part playing
+#define tPart     4   // the run playing: even, a verse (tPart / 2); odd, the chorus before the next verse (T-613)
 #define tShare    5   // the last part's share; the earlier are whole
 #define tLimit    6   // notes of the part to sing, 0 for all (an allusion)
 #define tFrame    7   // frames since the part began
@@ -265,14 +280,42 @@ static void StartHiss(s16 *data, s16 midi, u8 near)
 
 // ------------------------------------------------------------------------------------------------------- a part
 
+// T-613: a final form's first chorus run, or -1 when its line has no chorus
+static s16 ChorusOf(u16 species)
+{
+    u32 i;
+
+    for (i = 0; i < ARRAY_COUNT(sSongChorus); i++)
+    {
+        if (sSongChorus[i].count != 0 && sSongChorus[i].species == species)
+            return sSongChorus[i].first;
+    }
+    return -1;
+}
+
+static bool8 InChorus(s16 *data)
+{
+    return data[tPart] & 1;
+}
+
+// The form whose verse is playing (in a chorus, the verse it leads into)
+static u16 VerseSpecies(s16 *data)
+{
+    return data[tPart0 + (data[tPart] + 1) / 2];
+}
+
 static const struct DaemonSongPart *Part(s16 *data)
 {
-    return &sSongParts[data[tPart0 + data[tPart]]];
+    if (InChorus(data))
+        return &sSongChorusParts[ChorusOf(data[tPart0 + data[tParts] - 1]) + data[tPart] / 2];
+    return &sSongParts[data[tPart0 + data[tPart] / 2]];
 }
 
 static u8 PartShare(s16 *data)
 {
-    return data[tPart] == data[tParts] - 1 ? (data[tShare] & 0xFF) : SONG_SHARE_WHOLE;
+    if (InChorus(data))
+        return SONG_SHARE_WHOLE;
+    return data[tPart] / 2 == data[tParts] - 1 ? (data[tShare] & 0xFF) : SONG_SHARE_WHOLE;
 }
 
 static u8 PartNotes(s16 *data)
@@ -323,11 +366,14 @@ static void StartNote(s16 *data)
     u8 pitch = n[0];
     s32 near;
 
-    if (data[tShare] & SHARE_SHINY)
-        pitch = ShinyNote(data[tPart0 + data[tPart]], data[tNote], pitch);
+    if ((data[tShare] & SHARE_SHINY) && !InChorus(data))
+        pitch = ShinyNote(VerseSpecies(data), data[tNote], pitch);
     data[tTrue] = pitch - 60;
     data[tHeard] = data[tTrue];
     Play_SoundNote(PLAY_HARP, data[tTrue], FALSE);
+    if (data[tShare] & SHARE_FLAT)   // T-613: ALMOST -- the hook comes back out of tune
+        m4aMPlayPitchControl(&gMPlayInfo_SE2, TRACKS_ALL,
+                             (data[tTrue] - sNaturalSemitone[((data[tTrue] % 12) + 12) % 12]) * 256 - ALMOST_FLAT);
     if (share >= n[2])
     {
         data[tNear] = -1;
@@ -343,7 +389,7 @@ static void StartNote(s16 *data)
         if (near > 255)
             near = 255;
         data[tNear] = near;
-        data[tRng] = data[tPart0 + data[tPart]] * 31 + data[tNote] * 7 + 1;
+        data[tRng] = VerseSpecies(data) * 31 + data[tNote] * 7 + 1;
         m4aMPlayVolumeControl(&gMPlayInfo_SE2, TRACKS_ALL, Loud(data, 200 + 56 * near / 255));
         Flicker(data, p);
         StartHiss(data, pitch, near);
@@ -401,16 +447,30 @@ static void Task_DaemonSong(u8 taskId)
             Flicker(data, p);
         }
     }
+    // T-613: a note held past NOTE_RING half beats falls silent -- the rest of its length is the breath after it
+    if (data[tNote] > 0)
+    {
+        u8 len = sSongNotes[p->note + data[tNote] - 1][1];
+
+        if (len > NOTE_RING && data[tFrame] == FrameAt(p, data[tMelCum] - len + NOTE_RING))
+        {
+            m4aMPlayStop(&gMPlayInfo_SE2);
+            m4aMPlayStop(&gMPlayInfo_SE1);
+            data[tNear] = -1;
+        }
+    }
     if (data[tLimit] == 0 && data[tBass] < p->bassCount && data[tFrame] >= FrameAt(p, data[tBassCum]))
         StartBass(data);
 
     if (data[tNote] >= count && data[tFrame] >= FrameAt(p, data[tMelCum]) + PART_GAP)
     {
-        if (++data[tPart] >= data[tParts])
+        if (!InChorus(data) && data[tPart] / 2 >= data[tParts] - 1)
         {
             EndSong(taskId, FALSE);   // the last note rings out by itself
             return;
         }
+        // the next verse, through its chorus when it is sung (T-613): runs 0, 1, 2 ... a verse even, a chorus odd
+        data[tPart] += (data[tShare] & SHARE_CHORUS) ? 1 : 2;
         BeginPart(data);
         return;
     }
@@ -457,7 +517,10 @@ bool8 DaemonSong_Start(u16 species, u8 share, u8 mode)
         data[tPart0 + i] = line[count - 1 - i];   // oldest first
     data[tParts] = count;
     data[tPart] = 0;
-    data[tShare] = share | ((mode & SONG_SHINY) ? SHARE_SHINY : 0);
+    data[tShare] = share | ((mode & SONG_SHINY) ? SHARE_SHINY : 0) | ((mode & SONG_ALMOST) ? SHARE_FLAT : 0);
+    // T-613: the hidden chorus, between the verses, once the last form knows its own verse whole
+    if (count > 1 && share == SONG_SHARE_WHOLE && !(mode & SONG_NO_CHORUS) && ChorusOf(species) >= 0)
+        data[tShare] |= SHARE_CHORUS;
     data[tLimit] = 0;
     if (mode & SONG_ALLUSION)
     {
@@ -465,9 +528,54 @@ bool8 DaemonSong_Start(u16 species, u8 share, u8 mode)
         if (data[tLimit] == 0 || data[tLimit] > ALLUSION_MAX)
             data[tLimit] = ALLUSION_MAX;
     }
+    if (mode & SONG_ALMOST)   // T-613: its hook alone
+        data[tLimit] = sSongParts[species].openCount;
     BeginPart(data);
     m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, BGM_DUCKED);
     return TRUE;
+}
+
+// A held daemon of the species (the party first, then the boxes): its share of its own part and its mode (a shiny).
+// FALSE, with the share and mode untouched, when nobody holds one.
+static bool8 Held(u16 species, u8 *share, u8 *mode)
+{
+    u32 i, j;
+
+    for (i = 0; i < gPlayerPartyCount; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG) == species)
+        {
+            *share = DaemonSong_MonShare(&gPlayerParty[i]);
+            *mode |= DaemonSong_MonMode(&gPlayerParty[i]);
+            return TRUE;
+        }
+    }
+    for (i = 0; i < TOTAL_BOXES_COUNT; i++)
+    {
+        for (j = 0; j < IN_BOX_COUNT; j++)
+        {
+            struct BoxPokemon *box = GetBoxedMonPtr(i, j);
+
+            if (GetBoxMonData(box, MON_DATA_SPECIES_OR_EGG) == species)
+            {
+                *share = BoxMonShare(box);
+                *mode |= BoxMonMode(box);
+                return TRUE;
+            }
+        }
+    }
+    return FALSE;
+}
+
+// T-613 (T-610's sound): a summoned daemon sings its whole song -- every verse before its own, then its own as far as
+// it knows it, its chorus between them once it knows it whole. One the player holds sings as it knows it; one nobody
+// holds sings its own verse as something not yet learned (the user, 2026-11-23: "both, different songs").
+bool8 DaemonSong_StartSummoned(u16 species)
+{
+    u8 share = 0, mode = SONG_LINE;
+
+    Held(species, &share, &mode);
+    return DaemonSong_Start(species, share, mode);
 }
 
 void DaemonSong_PlayForIndex(u16 species)
@@ -504,6 +612,8 @@ void DaemonSong_PlayForIndex(u16 species)
             }
         }
     }
+    if (!found)
+        mode |= SONG_NO_CHORUS;   // T-613: the chorus stays hidden until a daemon the player holds knows its song whole
     if (!DaemonSong_Start(species, share, mode))
         PlayCry_NormalNoDucking(species, 0, CRY_VOLUME_RS, CRY_PRIORITY_NORMAL);
 }
@@ -745,6 +855,31 @@ const u8 *DaemonSong_Listen(u8 key, const s8 *ring, u8 count)
         gSpecialVar_0x8004 = s->species;
         return EventScript_DaemonSummoned;
     }
+    // T-613: ALMOST. The user (2026-11-23): "if you play the first 7 and it matches a daemons but your key select was
+    // wrong some visual effect happens like it wanted to summon something but the key was wrong (should be a similar
+    // effect with the ss anne fir when u play but the key was wrong)". Every hook has a shape of its own (its buttons on
+    // its wheel, tools/genverses.py), so the right buttons on another wheel still name one daemon: it does not come,
+    // and its hook is heard back, flat, as the singing fir hums a song back in the wrong key.
+    for (i = 0; i < ARRAY_COUNT(sSummons); i++)
+    {
+        s = &sSummons[i];
+        if (s->wheel == key || s->count > count)
+            continue;
+        tonic = sSongParts[s->species].tonic;
+        tail = ring + count - s->count;
+        for (j = 0; j < s->count; j++)
+        {
+            want = sSummonNotes[s->at + j];
+            if (want != SUMMON_ANY && (tail[j] + 48 - key) % 12 != (tonic + want + 12 - s->wheel) % 12)
+                break;
+        }
+        if (j < s->count)
+            continue;
+        if (!GetSetPokedexFlag(SpeciesToNationalPokedexNum(s->species), FLAG_GET_SEEN))
+            continue;
+        gSpecialVar_0x8004 = s->species;
+        return EventScript_DaemonSummonAlmost;
+    }
     return NULL;
 }
 
@@ -758,4 +893,21 @@ const u8 *DaemonSong_IndexQuotation(u16 species)
     if (!DaemonsSummoned_Get(SpeciesToNationalPokedexNum(species)))
         return NULL;
     return DaemonSong_Quotation(species);
+}
+
+// T-613: ALMOST's sound -- the hook of VAR_0x8004, flat, while the script waits (waitstate); then its line, the one
+// PLAY says for a SONGBOOK song in the wrong key ("Close. The shape is right, and something in it sits wrong.").
+static void Task_WaitSong(u8 taskId)
+{
+    if (!DaemonSong_IsPlaying())
+    {
+        DestroyTask(taskId);
+        ScriptContext_Enable();
+    }
+}
+
+void DaemonSong_SingAlmost(void)
+{
+    DaemonSong_Start(gSpecialVar_0x8004, SONG_SHARE_WHOLE, SONG_OWN_PART | SONG_ALMOST);
+    CreateTask(Task_WaitSong, 80);   // a frame later at the soonest, so the script is already waiting
 }

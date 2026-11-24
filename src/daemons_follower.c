@@ -2257,7 +2257,7 @@ static void Task_SummonArrive(u8 taskId)
         if (tTimer < SUMMON_LOOK)
             break;
         sSummon.heardSerial = 0xFFFF;
-        if (!DaemonSong_Start(sSummon.species, SONG_SHARE_WHOLE, SONG_OWN_PART))
+        if (!DaemonSong_StartSummoned(sSummon.species))   // T-613: its whole song, as it knows it
         {
             PlayCry_Normal(sSummon.species, 0);
             tCried = TRUE;

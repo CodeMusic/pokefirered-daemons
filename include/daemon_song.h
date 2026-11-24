@@ -13,6 +13,8 @@
 #define SONG_OWN_PART   1      // only the form's own part (the evolution scene)
 #define SONG_ALLUSION   2      // with SONG_OWN_PART: only its opening, as its learning begins (a next form's hint)
 #define SONG_SHINY      4      // T-602: as a shiny sings it -- its kind's song, a few notes moved toward its colours
+#define SONG_ALMOST     8      // T-613: with SONG_OWN_PART: its hook alone, flat (a hook played in the wrong key)
+#define SONG_NO_CHORUS  16     // T-613: never its hidden chorus (a form nobody holds, sung whole in the INDEX)
 
 // T-596: THE WISH TO SING. A daemon near its evolution hums one bar of its own part, quietly under the map's music
 // (the follower, src/daemons_follower.c); each note it sings can be read back as it sounds, to draw it.
@@ -48,6 +50,9 @@ bool8 DaemonSong_Continues(u16 earlier, u16 later);
 // summon's script when they end with the opening of a daemon the INDEX has seen (VAR_0x8004 its species, its SUMMONED
 // bit set), else NULL.
 const u8 *DaemonSong_Listen(u8 key, const s8 *ring, u8 count);
+// T-613: a summoned daemon sings its whole song, as a held one knows it (one nobody holds: its own verse unlearned)
+bool8 DaemonSong_StartSummoned(u16 species);
+void DaemonSong_SingAlmost(void);                  // special: VAR_0x8004's hook, flat (waitstate)
 const u8 *DaemonSong_Quotation(u16 species);        // T-599's QUOTATION, or NULL (every one, until it lands)
 const u8 *DaemonSong_IndexQuotation(u16 species);   // ...only once it has come to its song: the INDEX's
 #if DAEMONS_DEBUG
