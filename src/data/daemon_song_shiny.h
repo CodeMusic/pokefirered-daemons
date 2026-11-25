@@ -293,8 +293,8 @@ static const struct DaemonShinyNote sShinyNotes[] = {
     {148, 7, 68},   // EMERGENCE: A4 -> Ab4
     {148, 8, 73},   // EMERGENCE: B4 -> C#5
     {148, 13, 73},   // EMERGENCE: B4 -> C#5
-    {149, 9, 68},   // SINGULAR: F#4 -> Ab4
-    {149, 12, 64},   // SINGULAR: D4 -> E4
+    {149, 12, 61},   // SINGULAR: D4 -> C#4
+    {149, 13, 64},   // SINGULAR: D4 -> E4
     {150, 7, 67},   // STARR: F4 -> G4
     {150, 11, 60},   // STARR: B3 -> C4
     {151, 9, 72},   // ARTSAI: B4 -> C5
