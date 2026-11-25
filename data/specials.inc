@@ -555,4 +555,5 @@ gSpecials::
 	def_special Follower_SummonLeave         @ T-598: ...and goes (waitstate)
 	def_special DaemonSong_SingAlmost        @ T-613: VAR_0x8004's hook, flat (waitstate): ALMOST
 	def_special Shadow_Open                  @ T-606: THE SPELL LEFT RUNNING, at its cover (waitstate)
+	def_special DaemonsWire_Ask              @ T-621: THE WIRE spike (waitstate): VAR_RESULT TRUE when a host wrote the line into gStringVar4
 gSpecialsEnd::

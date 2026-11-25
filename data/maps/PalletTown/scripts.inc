@@ -388,8 +388,24 @@ PalletTown_Movement_SignLadyMoveOutOfWayLeft::
 	step_end
 
 PalletTown_EventScript_FatMan::
+.if DAEMONS_DEBUG == 1
+	@ T-621: THE WIRE spike -- in a DEBUG build he says a line a model wrote, when a host is listening (docs/wire-spike.md)
+	lock
+	faceplayer
+	special DaemonsWire_Ask
+	waitstate
+	goto_if_eq VAR_RESULT, FALSE, PalletTown_EventScript_FatManWritten
+	msgbox gStringVar4
+	release
+	end
+PalletTown_EventScript_FatManWritten:
+	msgbox PalletTown_Text_CanStoreItemsAndMonsInPC
+	release
+	end
+.else
 	msgbox PalletTown_Text_CanStoreItemsAndMonsInPC, MSGBOX_NPC
 	end
+.endif
 
 PalletTown_EventScript_OaksLabSign::
 	lockall
